@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -10,14 +8,22 @@ import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.in;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +33,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsAtLeast;
+import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.similarTo;
 
 class InventoryMockTest
 {
@@ -250,48 +258,42 @@ class InventoryMockTest
 	@Test
 	void assertTrueForAll_ChecksIfNullOnEmptyInventory_DoesNotAssert()
 	{
-		inventory.assertTrueForAll(Objects::isNull);
+		assertThat(inventory.stream().toList(), empty());
 	}
 
 	@Test
 	void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		assertThrows(AssertionError.class, () -> inventory.assertTrueForAll(Objects::isNull));
+		assertThat(inventory.stream().toList(), not(empty()));
 	}
 
 	@Test
 	void assertTrueForNonNulls_NumberOfExecutionsOnInventoryOneItem_EqualToOne()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		AtomicInteger calls = new AtomicInteger(0);
-		inventory.assertTrueForNonNulls(itemstack ->
-		{
-			calls.incrementAndGet();
-			return true;
-		});
-		assertEquals(1, calls.get());
+		assertThat(inventory.stream().toList(), hasSize(1));
 	}
 
 	@Test
 	void assertTrueForSome_OneItemMeetsCondition_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 0);
+		assertThat(inventory.stream().map(ItemStack::getAmount).toList(), hasItem(greaterThan(0)));
 	}
 
 	@Test
 	void assertTrueForSome_NoItemsMeetCondition_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		assertThrows(AssertionError.class, () -> inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16));
+		assertThat(inventory.stream().map(ItemStack::getAmount).toList(), not(hasItem(greaterThan(16))));
 	}
 
 	@Test
 	void assertContainsAny_ContainsThem_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 16));
-		inventory.assertContainsAny(new ItemStack(Material.DIRT));
+		assertThat(inventory, hasItem(similarTo(new ItemStack(Material.DIRT))));
 	}
 
 	@Test
@@ -299,29 +301,28 @@ class InventoryMockTest
 	{
 		inventory.addItem(new ItemStack(Material.SHORT_GRASS, 16));
 		ItemStack item = new ItemStack(Material.DIRT);
-		assertThrows(AssertionError.class, () -> inventory.assertContainsAny(item));
+		assertThat(inventory, not(hasItem(similarTo(item))));
 	}
 
 	@Test
 	void assertContainsAtLeast_ContainsExactly_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 4));
-		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+		assertThat(inventory, containsAtLeast(Material.DIRT, 4));
 	}
 
 	@Test
 	void assertContainsAtLeast_ContainsMore_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 8));
-		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+		assertThat(inventory, containsAtLeast(Material.DIRT, 4));
 	}
 
 	@Test
 	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.SHORT_GRASS, 3));
-		ItemStack item = new ItemStack(Material.DIRT);
-		assertThrows(AssertionError.class, () -> inventory.assertContainsAtLeast(item, 4));
+		assertThat(inventory, not(containsAtLeast(Material.DIRT, 4)));
 	}
 
 	@Test

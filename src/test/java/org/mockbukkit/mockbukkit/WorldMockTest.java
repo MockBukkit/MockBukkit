@@ -1,5 +1,49 @@
 package org.mockbukkit.mockbukkit;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
+import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
+import org.bukkit.Difficulty;
+import org.bukkit.Effect;
+import org.bukkit.GameRule;
+import org.bukkit.HeightMap;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.SpectralArrow;
+import org.bukkit.entity.Trident;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.weather.ThunderChangeEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.event.world.TimeSkipEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Consumer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
@@ -86,57 +130,14 @@ import org.mockbukkit.mockbukkit.entity.WitherSkullMock;
 import org.mockbukkit.mockbukkit.entity.WolfMock;
 import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
-import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
-import org.bukkit.GameRule;
-import org.bukkit.HeightMap;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.World;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.type.WallSign;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Sheep;
-import org.bukkit.entity.SpawnCategory;
-import org.bukkit.entity.SpectralArrow;
-import org.bukkit.entity.Trident;
-import org.bukkit.entity.Zombie;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.ItemSpawnEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.weather.ThunderChangeEvent;
-import org.bukkit.event.weather.WeatherChangeEvent;
-import org.bukkit.event.world.TimeSkipEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Consumer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -149,6 +150,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 @ExtendWith(MockBukkitExtension.class)
 class WorldMockTest
@@ -554,8 +557,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.setTime(6000L);
 		world.setTime(10000L);
-		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-				event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(TimeSkipEvent.class, event ->
+				event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM));
 	}
 
 	@Test
@@ -805,7 +808,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.dropItem(new Location(world, 0, 5, 0), new ItemStack(Material.STONE));
-		server.getPluginManager().assertEventFired(ItemSpawnEvent.class, (e) -> !e.isCancelled());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ItemSpawnEvent.class, (e) -> !e.isCancelled()));
 	}
 
 	@Test
@@ -888,11 +891,11 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setStorm(true);
-		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, event ->
-				event.getWorld().equals(world) && event.toWeatherState());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WeatherChangeEvent.class, event ->
+				event.getWorld().equals(world) && event.toWeatherState()));
 		world.setStorm(false);
-		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, event ->
-				event.getWorld().equals(world) && !event.toWeatherState());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WeatherChangeEvent.class, event ->
+				event.getWorld().equals(world) && !event.toWeatherState()));
 	}
 
 	@Test
@@ -900,7 +903,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setStorm(false);
-		server.getPluginManager().assertEventNotFired(WeatherChangeEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(WeatherChangeEvent.class)));
 	}
 
 	@Test
@@ -940,11 +943,11 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setThundering(true);
-		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, event ->
-				event.getWorld().equals(world) && event.toThunderState());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ThunderChangeEvent.class, event ->
+						event.getWorld().equals(world) && event.toThunderState()));
 		world.setThundering(false);
-		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, event ->
-				event.getWorld().equals(world) && !event.toThunderState());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ThunderChangeEvent.class, event ->
+				event.getWorld().equals(world) && !event.toThunderState()));
 	}
 
 	@Test
@@ -952,7 +955,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setThundering(false);
-		server.getPluginManager().assertEventNotFired(ThunderChangeEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(ThunderChangeEvent.class)));
 	}
 
 	@Test
@@ -1035,8 +1038,8 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ARMOR_STAND);
-		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
-		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(CreatureSpawnEvent.class, event -> event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(CreatureSpawnEvent.class, (e) -> !e.isCancelled()));
 	}
 
 	@Test
@@ -1044,7 +1047,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK);
-		server.getPluginManager().assertEventFired(ProjectileLaunchEvent.class, (e) -> !e.isCancelled());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ProjectileLaunchEvent.class, event -> !event.isCancelled()));
 	}
 
 	@Test
@@ -1066,8 +1069,8 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
-		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
-		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(CreatureSpawnEvent.class, (e) -> !e.isCancelled()));
 	}
 
 	@Test
@@ -1394,18 +1397,18 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
 		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("false");
-		});
+		}));
 		world.setGameRuleValue("announceAdvancements", "true");
 		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
 		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("true");
-		});
+		}));
 	}
 
 	@Test
@@ -1430,11 +1433,11 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
 		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
 					&& worldGameRuleChangeEvent.getValue().equals("10");
-		});
+		}));
 	}
 
 	@Test
@@ -1522,7 +1525,7 @@ class WorldMockTest
 		}, MockBukkit.createMockPlugin());
 
 		world.setThundering(true);
-		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, ThunderChangeEvent::isCancelled);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ThunderChangeEvent.class, ThunderChangeEvent::isCancelled));
 		assertFalse(world.isThundering());
 	}
 
@@ -1540,7 +1543,7 @@ class WorldMockTest
 		}, MockBukkit.createMockPlugin());
 
 		world.setStorm(true);
-		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, WeatherChangeEvent::isCancelled);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WeatherChangeEvent.class, WeatherChangeEvent::isCancelled));
 		assertFalse(world.hasStorm());
 	}
 
@@ -1903,7 +1906,7 @@ class WorldMockTest
 	void testGetKeepSpawnInMemoryDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-        assertTrue(world.getKeepSpawnInMemory());
+		assertTrue(world.getKeepSpawnInMemory());
 	}
 
 	@Test
@@ -2275,7 +2278,7 @@ class WorldMockTest
 		assertTrue(world.isFixedTime());
 	}
 
-  @Test
+	@Test
 	void testGetEntity()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

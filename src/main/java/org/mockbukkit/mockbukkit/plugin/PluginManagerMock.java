@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.PermissionManagerMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.exception.EventHandlerException;
-import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
@@ -38,6 +33,11 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
+import org.mockbukkit.mockbukkit.PermissionManagerMock;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.EventHandlerException;
+import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -126,11 +126,21 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	}
 
 	/**
+	 * Get all events fired by this plugin manager
+	 * @return All events fired by this plugin manager
+	 */
+	public Stream<Event> getFiredEvents()
+	{
+		return events.stream();
+	}
+
+	/**
 	 * Asserts that at least one event conforms to the given predicate.
 	 *
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventFired(@Nullable String message, @NotNull Predicate<Event> predicate)
 	{
 		Preconditions.checkNotNull(predicate, "Predicate cannot be null");
@@ -151,6 +161,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param predicate The predicate to test against.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Predicate<Event> predicate)
 	{
 		Preconditions.checkNotNull(predicate, "Predicate cannot be null");
@@ -165,6 +176,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
+	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -187,6 +199,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
+	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -198,6 +211,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -209,6 +223,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -221,6 +236,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class of the event to check for.
 	 * @param message    The message to print when failed.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, @Nullable String message)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");

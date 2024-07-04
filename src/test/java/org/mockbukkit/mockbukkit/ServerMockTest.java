@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.CachedServerIconMock;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
@@ -106,6 +104,9 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.eventFrom;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -117,6 +118,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class ServerMockTest
 {
@@ -195,28 +199,28 @@ class ServerMockTest
 	void addPlayer_Calls_AsyncPreLoginEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(AsyncPlayerPreLoginEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(AsyncPlayerPreLoginEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerJoinEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerJoinEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerLoginEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerLoginEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerLoginEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerSpawnLocationEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerSpawnLocationEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerSpawnLocationEvent.class));
 	}
 
 	@Test
@@ -338,7 +342,7 @@ class ServerMockTest
 
 		Command command = server.getPluginCommand("testcommand");
 		CommandResult result = server.executePlayer(command, "a", "b");
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 		assertEquals(server.getPlayer(0), plugin.commandSender);
 		assertEquals(command, plugin.command);
 
@@ -371,7 +375,7 @@ class ServerMockTest
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 	}
 
 	@Test
@@ -739,7 +743,7 @@ class ServerMockTest
 	void reload_ServerLoadEvent_IsCalled()
 	{
 		server.reload();
-		server.getPluginManager().assertEventFired(ServerLoadEvent.class, (e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ServerLoadEvent.class, event -> event.getType() == ServerLoadEvent.LoadType.RELOAD));
 	}
 
 	@Test
@@ -839,7 +843,7 @@ class ServerMockTest
 	{
 		MapView mapView = server.createMap(new WorldMock());
 
-		server.getPluginManager().assertEventFired(MapInitializeEvent.class, (e) -> e.getMap().equals(mapView));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(MapInitializeEvent.class, event -> event.getMap().equals(mapView)));
 	}
 
 	@Test
@@ -862,7 +866,7 @@ class ServerMockTest
 	{
 		server.setWhitelist(true);
 		assertTrue(server.hasWhitelist());
-		server.getPluginManager().assertEventFired(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled));
 	}
 
 	@Test
@@ -896,7 +900,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertFalse(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -910,7 +914,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(PlayerKickEvent.class)));
 	}
 
 	@Test
@@ -924,7 +928,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(PlayerKickEvent.class)));
 	}
 
 	@Test
@@ -938,7 +942,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(PlayerKickEvent.class)));
 	}
 
 	@Test
@@ -952,7 +956,7 @@ class ServerMockTest
 		server.addPlayer(playerMock);
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(PlayerKickEvent.class)));
 	}
 
 	@Test
@@ -964,7 +968,7 @@ class ServerMockTest
 		PlayerMock player = server.addPlayer();
 
 		assertFalse(server.getOnlinePlayers().contains(player));
-		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerConnectionCloseEvent.class));
 	}
 
 	@Test

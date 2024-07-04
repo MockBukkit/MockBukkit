@@ -22,6 +22,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -31,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
 
 class BlockMockTest
 {
@@ -232,16 +235,16 @@ class BlockMockTest
 	void assertType_CorrectType_DoesNotFail()
 	{
 		block.setType(Material.STONE);
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 		block.setType(Material.DIRT);
-		block.assertType(Material.DIRT);
+		assertThat(block, hasMaterial(Material.DIRT));
 	}
 
 	@Test
 	void assertType_IncorrectType_Fails()
 	{
 		block.setType(Material.STONE);
-		assertThrows(AssertionError.class, () -> block.assertType(Material.DIRT));
+		assertThat(block, not(hasMaterial(Material.DIRT)));
 	}
 
 	@Test

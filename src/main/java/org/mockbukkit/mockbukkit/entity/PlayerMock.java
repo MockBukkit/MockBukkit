@@ -26,7 +26,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
-import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Instrument;
@@ -71,7 +70,6 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -82,7 +80,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
-import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -305,10 +302,23 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
+	 * Whether the player has consumed the specified item
+	 * @param consumable The item that the player should have consumed
+	 * @return True if the specified item has been consumed
+	 */
+	public boolean hasConsumed(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		return consumedItems.contains(consumable);
+	}
+
+
+	/**
 	 * Asserts a Player has consumed the given Item
 	 *
 	 * @param consumable The Item to asserts has been consumed
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertItemConsumed(@NotNull ItemStack consumable)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
@@ -539,6 +549,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(String message, InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		InventoryView view = getOpenInventory();
@@ -559,6 +570,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
@@ -569,6 +581,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 *
 	 * @param type The {@link InventoryType} you are expecting
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(InventoryType type)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
@@ -580,6 +593,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param message The message to display upon failure
 	 * @param type    The {@link InventoryType} you are expecting
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(String message, InventoryType type)
 	{
 		assertInventoryView(message, type, inv -> true);

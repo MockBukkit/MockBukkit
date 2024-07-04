@@ -142,6 +142,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	/**
 	 * Asserts that this Enderman is holding a block.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertHasBlock()
 	{
 		Preconditions.checkState(this.carriedBlock != null, "Carried Block must be set before using this method");

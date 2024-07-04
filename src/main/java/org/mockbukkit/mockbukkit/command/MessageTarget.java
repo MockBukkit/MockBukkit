@@ -42,6 +42,7 @@ public interface MessageTarget
 	 *
 	 * @param expected The message that should have been received by the target.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSaid(@NotNull Component expected)
 	{
 		Component comp = nextComponentMessage();
@@ -60,6 +61,7 @@ public interface MessageTarget
 	 *
 	 * @param expected The message that should have been received by the target.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSaid(@NotNull String expected)
 	{
 		assertSaid(LegacyComponentSerializer.legacySection().deserialize(expected));
