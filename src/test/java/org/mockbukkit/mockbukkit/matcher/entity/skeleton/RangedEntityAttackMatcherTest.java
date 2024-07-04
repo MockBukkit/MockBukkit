@@ -21,7 +21,7 @@ class RangedEntityAttackMatcherTest extends AbstractMatcherTest
 
 	@MockBukkitInject
 	private ServerMock serverMock;
-	private final static float CHARGE = 0.5f;
+	private static final float CHARGE = 0.5f;
 	private PlayerMock target;
 	private SkeletonMock skeleton;
 

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 class AnEvent extends Event
 {
 
-	private final static HandlerList handlers = new HandlerList();
+	private static final HandlerList handlers = new HandlerList();
 
 	@Override
 	public @NotNull HandlerList getHandlers()
