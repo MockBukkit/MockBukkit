@@ -30,11 +30,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityGameModeMatcher.hasGameMode;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class HumanEntityMockTest
@@ -65,13 +64,13 @@ class HumanEntityMockTest
 	@Test
 	void assertGameMode_CorrectGameMode_DoesNotAssert()
 	{
-		assertThat(human, hasGameMode(GameMode.SURVIVAL));
+		assertEquals(GameMode.SURVIVAL, human.getGameMode());
 	}
 
 	@Test
 	void assertGameMode_WrongGameMode_Asserts()
 	{
-		assertThat(human, not(hasGameMode(GameMode.CREATIVE)));
+		assertNotEquals(GameMode.CREATIVE, human.getGameMode());
 	}
 
 	@Test
