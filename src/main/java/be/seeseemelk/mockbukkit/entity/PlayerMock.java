@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
@@ -74,6 +75,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
@@ -103,6 +105,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -335,6 +338,25 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 							16,
 							!Bukkit.isPrimaryThread());
 			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
+		}
+		else
+		{
+			// apply status effects
+			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
+			for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
+			{
+				// TODO: how to handle foodEffect with probability?
+				EntityPotionEffectEvent entityPotionEffectEvent = new EntityPotionEffectEvent(this, null, foodEffect.potionEffect(), EntityPotionEffectEvent.Cause.FOOD, EntityPotionEffectEvent.Action.ADDED, false);
+				// TODO: this event does not check existing potion effects to determine the correct oldEffect, newEffect and action
+				// adding a PotionEffectType that is already on the entity should cause a "change" event, not an "add" event
+				Bukkit.getPluginManager().callEvent(entityPotionEffectEvent);
+
+				if(!event.isCancelled()) {
+					addPotionEffect(foodEffect.potionEffect());
+				}
+
+
+			}
 		}
 
 		consumedItems.add(consumable);

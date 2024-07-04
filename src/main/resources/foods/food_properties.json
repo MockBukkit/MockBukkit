@@ -1,0 +1,454 @@
+[
+  {
+    "name": "minecraft:apple",
+    "nutrition": 4,
+    "saturationModifier": 2.4,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:baked_potato",
+    "nutrition": 5,
+    "saturationModifier": 6.0,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:beef",
+    "nutrition": 3,
+    "saturationModifier": 1.8000001,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:beetroot",
+    "nutrition": 1,
+    "saturationModifier": 1.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:beetroot_soup",
+    "nutrition": 6,
+    "saturationModifier": 7.2000003,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:bread",
+    "nutrition": 5,
+    "saturationModifier": 6.0,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:carrot",
+    "nutrition": 3,
+    "saturationModifier": 3.6000001,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:chicken",
+    "nutrition": 2,
+    "saturationModifier": 1.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 0.3,
+        "name": "minecraft:hunger",
+        "amplifier": 0,
+        "duration": 600,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:chorus_fruit",
+    "nutrition": 4,
+    "saturationModifier": 2.4,
+    "canAlwaysEat": true,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cod",
+    "nutrition": 2,
+    "saturationModifier": 0.4,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_beef",
+    "nutrition": 8,
+    "saturationModifier": 12.8,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_chicken",
+    "nutrition": 6,
+    "saturationModifier": 7.2000003,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_cod",
+    "nutrition": 5,
+    "saturationModifier": 6.0,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_mutton",
+    "nutrition": 6,
+    "saturationModifier": 9.6,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_porkchop",
+    "nutrition": 8,
+    "saturationModifier": 12.8,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_rabbit",
+    "nutrition": 5,
+    "saturationModifier": 6.0,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cooked_salmon",
+    "nutrition": 6,
+    "saturationModifier": 9.6,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:cookie",
+    "nutrition": 2,
+    "saturationModifier": 0.4,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:dried_kelp",
+    "nutrition": 1,
+    "saturationModifier": 0.6,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 16,
+    "effects": []
+  },
+  {
+    "name": "minecraft:enchanted_golden_apple",
+    "nutrition": 4,
+    "saturationModifier": 9.6,
+    "canAlwaysEat": true,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 1.0,
+        "name": "minecraft:regeneration",
+        "amplifier": 1,
+        "duration": 400,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      },
+      {
+        "probability": 1.0,
+        "name": "minecraft:resistance",
+        "amplifier": 0,
+        "duration": 6000,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      },
+      {
+        "probability": 1.0,
+        "name": "minecraft:fire_resistance",
+        "amplifier": 0,
+        "duration": 6000,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      },
+      {
+        "probability": 1.0,
+        "name": "minecraft:absorption",
+        "amplifier": 3,
+        "duration": 2400,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:golden_apple",
+    "nutrition": 4,
+    "saturationModifier": 9.6,
+    "canAlwaysEat": true,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 1.0,
+        "name": "minecraft:regeneration",
+        "amplifier": 1,
+        "duration": 100,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      },
+      {
+        "probability": 1.0,
+        "name": "minecraft:absorption",
+        "amplifier": 0,
+        "duration": 2400,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:golden_carrot",
+    "nutrition": 6,
+    "saturationModifier": 14.400001,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:honey_bottle",
+    "nutrition": 6,
+    "saturationModifier": 1.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:melon_slice",
+    "nutrition": 2,
+    "saturationModifier": 1.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:mushroom_stew",
+    "nutrition": 6,
+    "saturationModifier": 7.2000003,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:mutton",
+    "nutrition": 2,
+    "saturationModifier": 1.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:poisonous_potato",
+    "nutrition": 2,
+    "saturationModifier": 1.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 0.6,
+        "name": "minecraft:poison",
+        "amplifier": 0,
+        "duration": 100,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:porkchop",
+    "nutrition": 3,
+    "saturationModifier": 1.8000001,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:potato",
+    "nutrition": 1,
+    "saturationModifier": 0.6,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:pufferfish",
+    "nutrition": 1,
+    "saturationModifier": 0.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 1.0,
+        "name": "minecraft:poison",
+        "amplifier": 1,
+        "duration": 1200,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      },
+      {
+        "probability": 1.0,
+        "name": "minecraft:hunger",
+        "amplifier": 2,
+        "duration": 300,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      },
+      {
+        "probability": 1.0,
+        "name": "minecraft:nausea",
+        "amplifier": 0,
+        "duration": 300,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:pumpkin_pie",
+    "nutrition": 8,
+    "saturationModifier": 4.8,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:rabbit",
+    "nutrition": 3,
+    "saturationModifier": 1.8000001,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:rabbit_stew",
+    "nutrition": 10,
+    "saturationModifier": 12.0,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:rotten_flesh",
+    "nutrition": 4,
+    "saturationModifier": 0.8,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 0.8,
+        "name": "minecraft:hunger",
+        "amplifier": 0,
+        "duration": 600,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:salmon",
+    "nutrition": 2,
+    "saturationModifier": 0.4,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:spider_eye",
+    "nutrition": 2,
+    "saturationModifier": 3.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": [
+      {
+        "probability": 1.0,
+        "name": "minecraft:poison",
+        "amplifier": 0,
+        "duration": 100,
+        "ambient": false,
+        "particles": true,
+        "icon": true
+      }
+    ]
+  },
+  {
+    "name": "minecraft:suspicious_stew",
+    "nutrition": 6,
+    "saturationModifier": 7.2000003,
+    "canAlwaysEat": true,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:sweet_berries",
+    "nutrition": 2,
+    "saturationModifier": 0.4,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:glow_berries",
+    "nutrition": 2,
+    "saturationModifier": 0.4,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:tropical_fish",
+    "nutrition": 1,
+    "saturationModifier": 0.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  },
+  {
+    "name": "minecraft:ominous_bottle",
+    "nutrition": 1,
+    "saturationModifier": 0.2,
+    "canAlwaysEat": false,
+    "eatDurationTicks": 32,
+    "effects": []
+  }
+]
