@@ -1289,4 +1289,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot equipmentSlot)
+	{
+		throw new UnimplementedOperationException();
+	}
+
 }
