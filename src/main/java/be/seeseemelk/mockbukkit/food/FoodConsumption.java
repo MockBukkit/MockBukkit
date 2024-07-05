@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -25,6 +26,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@ApiStatus.Internal
 public record FoodConsumption(Material name, int nutrition, float saturationModifier, boolean canAlwaysEat,
 							  int eatDurationTicks, List<FoodEffect> foodEffects)
 {
@@ -53,6 +55,7 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 		return new FoodConsumption.FoodEffect(MockInternalPotionData.getPotionEffectFromData(jsonObject), jsonObject.get("probability").getAsFloat());
 	}
 
+	@ApiStatus.Internal
 	public static Map<Material, FoodConsumption> getOrCreateAllFoods()
 	{
 		if (ALL_FOODS == null)
@@ -85,12 +88,14 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 		return ALL_FOODS;
 	}
 
+	@ApiStatus.Internal
 	public static FoodConsumption getFor(Material material)
 	{
 		return getOrCreateAllFoods().get(material);
 	}
 
 
+	@ApiStatus.Internal
 	public record FoodEffect(PotionEffect potionEffect, float probability)
 	{
 
