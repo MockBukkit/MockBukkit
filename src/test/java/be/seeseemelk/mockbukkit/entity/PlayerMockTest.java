@@ -70,10 +70,13 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
@@ -1870,6 +1873,33 @@ class PlayerMockTest
 		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
 		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, false);
 		assertNull(player.getPotionEffect(PotionEffectType.HUNGER));
+	}
+
+	@ParameterizedTest
+	@MethodSource("potionItemProvider")
+	void testSimulateConsumePotionItemWithBaseEffectIsApplied(ItemStack potion, PotionEffect inflictedEffect) {
+		player.simulateConsumeItem(potion);
+		assertEquals(inflictedEffect, player.getPotionEffect(inflictedEffect.getType()));
+	}
+
+	private static Stream<Arguments> potionItemProvider() {
+		MockBukkit.getOrCreateMock();
+		return Stream.of(
+				Arguments.of(
+						potionItemStack(PotionType.REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
+						potionItemStack(PotionType.LONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
+						potionItemStack(PotionType.STRONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
+						potionItemStack(PotionType.AWKWARD), null
+				)
+		);
+	}
+
+	private static ItemStack potionItemStack(PotionType potionType) {
+		ItemStack itemStack = new ItemStack(Material.POTION);
+		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+		potionMeta.setBasePotionType(potionType);
+		itemStack.setItemMeta(potionMeta);
+		return itemStack;
 	}
 
 	@Test

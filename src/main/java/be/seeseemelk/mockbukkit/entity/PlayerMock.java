@@ -8,6 +8,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
+import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
@@ -46,10 +47,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
+import org.bukkit.UnsafeValues;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -105,12 +108,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
@@ -350,15 +355,29 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			// apply status effects
 			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
-			for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
+			if (foodConsumption != null)
 			{
-				if (foodEffect.probability() == 1 || alwaysInflictPotionEffect)
+				for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
 				{
-					addPotionEffect(foodEffect.potionEffect());
+					if (foodEffect.probability() == 1 || alwaysInflictPotionEffect)
+					{
+						addPotionEffect(foodEffect.potionEffect());
+					}
+				}
+			}
+			else if (consumable.hasItemMeta() && consumable.getItemMeta() instanceof PotionMeta potionMeta)
+			{
+				PotionType.InternalPotionData internalPotionData = server.getUnsafe().getInternalPotionData(Registry.POTION.getKey(potionMeta.getBasePotionType()));
+				for (PotionEffect baseEffect : internalPotionData.getPotionEffects())
+				{
+					addPotionEffect(baseEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+				for (PotionEffect customEffect : potionMeta.getCustomEffects())
+				{
+					addPotionEffect(customEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
 				}
 			}
 		}
-
 		consumedItems.add(consumable);
 	}
 
