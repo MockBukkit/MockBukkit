@@ -138,7 +138,7 @@ class LivingEntityMockTest
 	void testPotionEffectAddedForFirstTime()
 	{
 		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
-		EntityPotionEffectEvent event = livingEntity.addPotionEffectWithPluginCause(effect);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
 		server.getPluginManager().assertEventFired(EntityPotionEffectEvent.class);
 		assertEntityPotionEffectEvent(event, null, effect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
 	}
@@ -148,8 +148,8 @@ class LivingEntityMockTest
 	{
 		PotionEffect initialEffect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
 		PotionEffect laterEffect = new PotionEffect(PotionEffectType.REGENERATION, 10, 3);
-		livingEntity.addPotionEffectWithPluginCause(initialEffect);
-		EntityPotionEffectEvent event = livingEntity.addPotionEffectWithPluginCause(laterEffect);
+		livingEntity.addPotionEffect(initialEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(laterEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		assertEntityPotionEffectEvent(event, initialEffect, laterEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
 	}
 

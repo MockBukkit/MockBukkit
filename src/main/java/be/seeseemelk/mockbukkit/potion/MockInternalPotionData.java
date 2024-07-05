@@ -11,6 +11,7 @@ import org.bukkit.Registry;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -105,9 +106,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 
 	// TODO probably not the right solution to make this public static, but where should this utility method be located?
 
-	/**
-	 * Internal, do not use!
-	 */
+	@ApiStatus.Internal
 	public static PotionEffect getPotionEffectFromData(JsonElement potionEffectData)
 	{
 		JsonObject potionEffectDataObj = potionEffectData.getAsJsonObject();
@@ -121,9 +120,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		return new PotionEffect(potionEffectType, duration, amplifier, ambient, particles, icon);
 	}
 
-	/**
-	 * Internal, do not use!
-	 */
+	@ApiStatus.Internal
 	public static List<PotionEffect> getPotionEffectsFromData(JsonObject data)
 	{
 		return data.get("effects").getAsJsonArray().asList().stream()

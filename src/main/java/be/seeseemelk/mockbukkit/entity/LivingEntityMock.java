@@ -613,24 +613,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	/**
-	 * Adds a potion effect with the {@link EntityPotionEffectEvent.Cause#PLUGIN} cause. If the event is canceled, no effect will be added.
-	 *
-	 * @param effect The Potion Effect to add.
-	 * @return The event containing details about adding the potion effect.
-	 * @see LivingEntityMock#addPotionEffect(PotionEffect, EntityPotionEffectEvent.Cause)
-	 */
-	public EntityPotionEffectEvent addPotionEffectWithPluginCause(@NotNull PotionEffect effect)
-	{
-		return addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
-	}
-
-	/**
 	 * Adds a potion effect. If the event is canceled, no effect will be added.
 	 *
 	 * @param effect The Potion Effect to add.
 	 * @param cause  The cause.
 	 * @return The event containing details about adding the potion effect.
-	 * @see LivingEntityMock#addPotionEffectWithPluginCause(PotionEffect)
 	 */
 	public EntityPotionEffectEvent addPotionEffect(@NotNull PotionEffect effect, EntityPotionEffectEvent.Cause cause)
 	{
@@ -662,23 +649,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	/**
-	 * Adds multiple potion effects with the {@link EntityPotionEffectEvent.Cause#PLUGIN} cause. If one event is canceled, the effect from that event won't be added.
-	 *
-	 * @param effects The Potion Effects to add.
-	 * @return A list of events containing details about adding the potion effects.
-	 * @see LivingEntityMock#addPotionEffects(Collection, EntityPotionEffectEvent.Cause)
-	 */
-	public List<EntityPotionEffectEvent> addPotionEffectsWithPluginCause(@NotNull Collection<PotionEffect> effects)
-	{
-		return addPotionEffects(effects, EntityPotionEffectEvent.Cause.PLUGIN);
-	}
-
-	/**
 	 * Adds multiple potion effects. If one event is canceled, the effect from that event won't be added.
 	 *
 	 * @param effects The Potion Effects to add.
+	 * @param cause The cause.
 	 * @return A list of events containing details about adding the potion effects.
-	 * @see LivingEntityMock#addPotionEffectsWithPluginCause(Collection)
 	 */
 	public List<EntityPotionEffectEvent> addPotionEffects(@NotNull Collection<PotionEffect> effects, EntityPotionEffectEvent.Cause cause)
 	{
