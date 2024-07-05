@@ -26,6 +26,8 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	private final NamespacedKey namespacedKey;
 	private final boolean upgradeable;
 	private final boolean extendable;
+	private final boolean upgraded;
+	private final boolean extended;
 	private final int maxLevel;
 	private final List<PotionEffect> potionEffects;
 
@@ -45,6 +47,9 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		this.potionEffects = tempPotionEffects;
 		this.upgradeable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "strong_" + namespacedKey.getKey())) != null;
 		this.extendable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "long_" + namespacedKey.getKey())) != null;
+		this.upgraded = namespacedKey.getKey().startsWith("strong_");
+		this.extended = namespacedKey.getKey().startsWith("long_");
+
 		this.maxLevel = this.isUpgradeable() ? 2 : 1;
 	}
 
@@ -96,6 +101,16 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	public boolean isExtendable()
 	{
 		return extendable;
+	}
+
+	public boolean isUpgraded()
+	{
+		return upgraded;
+	}
+
+	public boolean isExtended()
+	{
+		return extended;
 	}
 
 	@Override

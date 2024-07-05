@@ -319,7 +319,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void simulateConsumeItem(@NotNull ItemStack consumable, boolean alwaysInflictPotionEffect)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
-		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
+		// potions are not considered edible, but they can be consumed
+		Preconditions.checkArgument(consumable.getType().isEdible() || consumable.getType() == Material.POTION, "Item is not Consumable");
 
 		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
 		//how it would sound like

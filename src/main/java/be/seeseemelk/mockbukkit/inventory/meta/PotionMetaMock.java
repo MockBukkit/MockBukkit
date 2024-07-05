@@ -1,8 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
+import org.bukkit.UnsafeValues;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -210,22 +212,26 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public void setBasePotionType(@NotNull PotionType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockInternalPotionData internalPotionData = new MockInternalPotionData(type.getKey());
+		this.basePotionData = new PotionData(type, internalPotionData.isExtended(), internalPotionData.isUpgraded());
 	}
 
 	@Override
 	public @NotNull PotionType getBasePotionType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return basePotionData.getType();
 	}
 
 	@Override
 	public boolean hasBasePotionType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		/*
+		The way this mock is written it always has a base potion type.
+		PotionMetaMock.basePotionData is annotated with @NotNull and is therefore required. Despite this,
+		the Paper API allows for null values when setting the base data, but this mock does not accept it (currently it errors).
+		Hence, a base data, and therefore the potion type in the base data, always exists.
+		 */
+		return true;
 	}
 
 	@Override

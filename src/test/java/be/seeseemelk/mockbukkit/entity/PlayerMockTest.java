@@ -100,6 +100,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -1877,19 +1878,30 @@ class PlayerMockTest
 
 	@ParameterizedTest
 	@MethodSource("potionItemProvider")
-	void testSimulateConsumePotionItemWithBaseEffectIsApplied(ItemStack potion, PotionEffect inflictedEffect) {
+	void testSimulateConsumePotionItemWithBaseEffectIsApplied(Supplier<ItemStack> potionSupplier, PotionEffect inflictedEffect) {
+		ItemStack potion = potionSupplier.get();
 		player.simulateConsumeItem(potion);
 		assertEquals(inflictedEffect, player.getPotionEffect(inflictedEffect.getType()));
 	}
 
+	@Test
+	void testSimulateConsumePotionItemWithCustomEffectIsApplies() {
+		ItemStack itemStack = new ItemStack(Material.POTION);
+		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+		PotionEffect customEffect = new PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
+		potionMeta.addCustomEffect(customEffect, true);
+		itemStack.setItemMeta(potionMeta);
+		player.simulateConsumeItem(itemStack);
+		assertEquals(customEffect, player.getPotionEffect(PotionEffectType.JUMP_BOOST));
+	}
+
 	private static Stream<Arguments> potionItemProvider() {
-		MockBukkit.getOrCreateMock();
 		return Stream.of(
 				Arguments.of(
-						potionItemStack(PotionType.REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
-						potionItemStack(PotionType.LONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
-						potionItemStack(PotionType.STRONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
-						potionItemStack(PotionType.AWKWARD), null
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.LONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.STRONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.AWKWARD), null
 				)
 		);
 	}
