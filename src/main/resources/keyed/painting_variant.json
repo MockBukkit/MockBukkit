@@ -89,6 +89,66 @@
     },
     {
       "key": "minecraft:fire"
+    },
+    {
+      "key": "minecraft:baroque"
+    },
+    {
+      "key": "minecraft:humble"
+    },
+    {
+      "key": "minecraft:meditative"
+    },
+    {
+      "key": "minecraft:prairie_ride"
+    },
+    {
+      "key": "minecraft:unpacked"
+    },
+    {
+      "key": "minecraft:backyard"
+    },
+    {
+      "key": "minecraft:bouquet"
+    },
+    {
+      "key": "minecraft:cavebird"
+    },
+    {
+      "key": "minecraft:changing"
+    },
+    {
+      "key": "minecraft:cotan"
+    },
+    {
+      "key": "minecraft:endboss"
+    },
+    {
+      "key": "minecraft:fern"
+    },
+    {
+      "key": "minecraft:finding"
+    },
+    {
+      "key": "minecraft:lowmist"
+    },
+    {
+      "key": "minecraft:orb"
+    },
+    {
+      "key": "minecraft:owlemons"
+    },
+    {
+      "key": "minecraft:passage"
+    },
+    {
+      "key": "minecraft:pond"
+    },
+    {
+      "key": "minecraft:sunflowers"
+    },
+    {
+      "key": "minecraft:tides"
     }
   ]
 }

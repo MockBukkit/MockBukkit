@@ -8,6 +8,13 @@
       "exhaustion": 0.1
     },
     {
+      "key": "minecraft:campfire",
+      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+      "sound": "minecraft:entity.player.hurt_on_fire",
+      "deathMessageType": "DEFAULT",
+      "exhaustion": 0.1
+    },
+    {
       "key": "minecraft:lightning_bolt",
       "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
       "sound": "minecraft:entity.player.hurt",
@@ -314,6 +321,13 @@
       "sound": "minecraft:entity.player.hurt",
       "deathMessageType": "DEFAULT",
       "exhaustion": 0.0
+    },
+    {
+      "key": "minecraft:wind_charge",
+      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+      "sound": "minecraft:entity.player.hurt",
+      "deathMessageType": "DEFAULT",
+      "exhaustion": 0.1
     }
   ]
 }

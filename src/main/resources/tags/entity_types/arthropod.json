@@ -1,10 +1,10 @@
 {
     "replace": false,
     "values": [
-        "minecraft:cave_spider",
-        "minecraft:silverfish",
         "minecraft:spider",
+        "minecraft:cave_spider",
         "minecraft:bee",
-        "minecraft:endermite"
+        "minecraft:endermite",
+        "minecraft:silverfish"
     ]
 }

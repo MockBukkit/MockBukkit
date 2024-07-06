@@ -1,0 +1,14 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:spider",
+        "minecraft:breeze",
+        "minecraft:cave_spider",
+        "minecraft:skeleton",
+        "minecraft:zombie",
+        "minecraft:stray",
+        "minecraft:husk",
+        "minecraft:slime",
+        "minecraft:bogged"
+    ]
+}

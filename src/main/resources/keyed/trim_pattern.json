@@ -95,6 +95,18 @@
       "description": {
         "translate": "trim_pattern.minecraft.host"
       }
+    },
+    {
+      "key": "minecraft:flow",
+      "description": {
+        "translate": "trim_pattern.minecraft.flow"
+      }
+    },
+    {
+      "key": "minecraft:bolt",
+      "description": {
+        "translate": "trim_pattern.minecraft.bolt"
+      }
     }
   ]
 }

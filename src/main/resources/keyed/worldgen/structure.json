@@ -131,6 +131,10 @@
     {
       "key": "minecraft:trail_ruins",
       "type": "minecraft:jigsaw"
+    },
+    {
+      "key": "minecraft:trial_chambers",
+      "type": "minecraft:jigsaw"
     }
   ]
 }

@@ -2,7 +2,7 @@
     "replace": false,
     "values": [
         "minecraft:netherrack",
-        "minecraft:basalt",
-        "minecraft:blackstone"
+        "minecraft:blackstone",
+        "minecraft:basalt"
     ]
 }

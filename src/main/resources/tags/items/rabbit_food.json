@@ -1,8 +1,8 @@
 {
     "replace": false,
     "values": [
-        "minecraft:dandelion",
+        "minecraft:carrot",
         "minecraft:golden_carrot",
-        "minecraft:carrot"
+        "minecraft:dandelion"
     ]
 }

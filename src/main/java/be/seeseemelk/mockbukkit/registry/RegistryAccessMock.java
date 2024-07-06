@@ -39,7 +39,7 @@ public class RegistryAccessMock implements RegistryAccess
 
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.20.6")
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
 	{
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
@@ -102,7 +102,8 @@ public class RegistryAccessMock implements RegistryAccess
 	{
 		return List.of(RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL,
 				RegistryKey.TRIM_PATTERN, RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT,
-				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK, RegistryKey.WOLF_VARIANT);
+				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK,
+				RegistryKey.WOLF_VARIANT, RegistryKey.JUKEBOX_SONG);
 	}
 
 

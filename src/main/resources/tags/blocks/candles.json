@@ -1,22 +1,22 @@
 {
     "replace": false,
     "values": [
+        "minecraft:brown_candle",
+        "minecraft:cyan_candle",
+        "minecraft:white_candle",
+        "minecraft:black_candle",
+        "minecraft:green_candle",
+        "minecraft:magenta_candle",
+        "minecraft:red_candle",
+        "minecraft:purple_candle",
         "minecraft:light_blue_candle",
         "minecraft:yellow_candle",
-        "minecraft:brown_candle",
-        "minecraft:red_candle",
-        "minecraft:candle",
-        "minecraft:white_candle",
-        "minecraft:green_candle",
-        "minecraft:lime_candle",
-        "minecraft:gray_candle",
-        "minecraft:black_candle",
-        "minecraft:blue_candle",
-        "minecraft:magenta_candle",
-        "minecraft:purple_candle",
         "minecraft:orange_candle",
+        "minecraft:candle",
+        "minecraft:light_gray_candle",
         "minecraft:pink_candle",
-        "minecraft:cyan_candle",
-        "minecraft:light_gray_candle"
+        "minecraft:gray_candle",
+        "minecraft:lime_candle",
+        "minecraft:blue_candle"
     ]
 }

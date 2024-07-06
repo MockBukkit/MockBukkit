@@ -1,16 +1,16 @@
 {
     "replace": false,
     "values": [
-        "minecraft:cooked_porkchop",
-        "minecraft:chicken",
         "minecraft:cooked_chicken",
-        "minecraft:cooked_beef",
         "minecraft:mutton",
-        "minecraft:beef",
-        "minecraft:rabbit",
-        "minecraft:cooked_mutton",
         "minecraft:rotten_flesh",
         "minecraft:porkchop",
-        "minecraft:cooked_rabbit"
+        "minecraft:beef",
+        "minecraft:cooked_mutton",
+        "minecraft:cooked_porkchop",
+        "minecraft:cooked_rabbit",
+        "minecraft:cooked_beef",
+        "minecraft:rabbit",
+        "minecraft:chicken"
     ]
 }

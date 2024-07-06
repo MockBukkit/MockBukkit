@@ -1,12 +1,12 @@
 {
     "replace": false,
     "values": [
-        "minecraft:wither_skeleton_skull",
-        "minecraft:creeper_head",
-        "minecraft:piglin_head",
-        "minecraft:skeleton_skull",
         "minecraft:dragon_head",
+        "minecraft:skeleton_skull",
         "minecraft:zombie_head",
-        "minecraft:player_head"
+        "minecraft:creeper_head",
+        "minecraft:player_head",
+        "minecraft:wither_skeleton_skull",
+        "minecraft:piglin_head"
     ]
 }

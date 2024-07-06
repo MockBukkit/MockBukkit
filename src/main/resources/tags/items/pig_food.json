@@ -2,7 +2,7 @@
     "replace": false,
     "values": [
         "minecraft:beetroot",
-        "minecraft:carrot",
-        "minecraft:potato"
+        "minecraft:potato",
+        "minecraft:carrot"
     ]
 }

@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:strength",
+      "amplifier": 1,
+      "duration": 1800,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
     "replace": false,
     "values": [
-        "minecraft:golden_chestplate",
         "minecraft:diamond_chestplate",
         "minecraft:iron_chestplate",
-        "minecraft:netherite_chestplate",
         "minecraft:chainmail_chestplate",
+        "minecraft:netherite_chestplate",
+        "minecraft:golden_chestplate",
         "minecraft:leather_chestplate"
     ]
 }
