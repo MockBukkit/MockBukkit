@@ -37,7 +37,7 @@ class SmithingInventoryMockTest
 	@Test
 	void testSetResult()
 	{
-		ItemStack item = new ItemStack(Material.OAK_BOAT);
+		ItemStack item = new ItemStackMock(Material.OAK_BOAT);
 
 		inventory.setResult(item);
 
@@ -47,7 +47,7 @@ class SmithingInventoryMockTest
 	@Test
 	void testSetResult_SetsItemInSlot()
 	{
-		ItemStack item = new ItemStack(Material.OAK_BOAT);
+		ItemStack item = new ItemStackMock(Material.OAK_BOAT);
 
 		inventory.setResult(item);
 

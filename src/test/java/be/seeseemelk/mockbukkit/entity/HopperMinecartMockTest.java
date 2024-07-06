@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -72,7 +73,7 @@ class HopperMinecartMockTest
 	void testGetInventory()
 	{
 		assertTrue(minecart.getInventory() instanceof HopperInventoryMock);
-		minecart.getInventory().setItem(0, new ItemStack(Material.DIRT));
+		minecart.getInventory().setItem(0, new ItemStackMock(Material.DIRT));
 		assertEquals(Material.DIRT, minecart.getInventory().getItem(0).getType());
 	}
 

@@ -31,7 +31,7 @@ class AbstractHorseInventoryMockTest
 	@Test
 	void setSaddle_SetsSaddle()
 	{
-		inventory.setSaddle(new ItemStack(Material.SADDLE));
+		inventory.setSaddle(new ItemStackMock(Material.SADDLE));
 
 		assertNotNull(inventory.getSaddle());
 		assertEquals(Material.SADDLE, inventory.getSaddle().getType());
@@ -40,7 +40,7 @@ class AbstractHorseInventoryMockTest
 	@Test
 	void setSaddle_SetsItemInSlot()
 	{
-		inventory.setSaddle(new ItemStack(Material.SADDLE));
+		inventory.setSaddle(new ItemStackMock(Material.SADDLE));
 
 		assertNotNull(inventory.getItem(0));
 		assertEquals(Material.SADDLE, inventory.getItem(0).getType());

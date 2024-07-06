@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -48,14 +49,14 @@ class ItemEntityMockTest
 	@Test
 	void testEntityType()
 	{
-		Item item = new ItemEntityMock(server, UUID.randomUUID(), new ItemStack(Material.STONE));
+		Item item = new ItemEntityMock(server, UUID.randomUUID(), new ItemStackMock(Material.STONE));
 		assertEquals(EntityType.ITEM, item.getType());
 	}
 
 	@Test
 	void testPickupDelay()
 	{
-		ItemStack item = new ItemStack(Material.GOLD_INGOT);
+		ItemStack item = new ItemStackMock(Material.GOLD_INGOT);
 		Location location = new Location(world, 300, 100, 300);
 
 		Item entity = world.dropItem(location, item);
@@ -71,7 +72,7 @@ class ItemEntityMockTest
 	void testMaximumPickupDelay()
 	{
 		int maximum = 32767;
-		ItemStack item = new ItemStack(Material.IRON_INGOT);
+		ItemStack item = new ItemStackMock(Material.IRON_INGOT);
 		Location location = new Location(world, 400, 100, 400);
 
 		Item entity = world.dropItem(location, item);
@@ -83,12 +84,12 @@ class ItemEntityMockTest
 	@Test
 	void testSetItemStack()
 	{
-		ItemStack item = new ItemStack(Material.QUARTZ);
+		ItemStack item = new ItemStackMock(Material.QUARTZ);
 		Location location = new Location(world, 500, 100, 500);
 
 		Item entity = world.dropItem(location, item);
 
-		ItemStack newItem = new ItemStack(Material.ENDER_PEARL);
+		ItemStack newItem = new ItemStackMock(Material.ENDER_PEARL);
 		entity.setItemStack(newItem);
 		assertEquals(newItem, entity.getItemStack());
 	}
@@ -96,7 +97,7 @@ class ItemEntityMockTest
 	@Test
 	void testSetItemStackNull()
 	{
-		ItemStack item = new ItemStack(Material.REDSTONE);
+		ItemStack item = new ItemStackMock(Material.REDSTONE);
 		Location location = new Location(world, 600, 100, 600);
 
 		Item entity = world.dropItem(location, item);
@@ -108,7 +109,7 @@ class ItemEntityMockTest
 	@Test
 	void testGetFrictionStateDefault()
 	{
-		ItemStack item = new ItemStack(Material.QUARTZ);
+		ItemStack item = new ItemStackMock(Material.QUARTZ);
 		Location location = new Location(world, 500, 100, 500);
 
 		Item entity = world.dropItem(location, item);
@@ -119,7 +120,7 @@ class ItemEntityMockTest
 	@Test
 	void testSetFrictionState()
 	{
-		ItemStack item = new ItemStack(Material.QUARTZ);
+		ItemStack item = new ItemStackMock(Material.QUARTZ);
 		Location location = new Location(world, 500, 100, 500);
 
 		Item entity = world.dropItem(location, item);
@@ -131,7 +132,7 @@ class ItemEntityMockTest
 	@Test
 	void testSetFrictionStateNull()
 	{
-		ItemStack item = new ItemStack(Material.QUARTZ);
+		ItemStack item = new ItemStackMock(Material.QUARTZ);
 		Location location = new Location(world, 500, 100, 500);
 
 		Item entity = world.dropItem(location, item);

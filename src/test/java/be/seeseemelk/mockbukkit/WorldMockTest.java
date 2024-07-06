@@ -87,6 +87,7 @@ import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
@@ -254,7 +255,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(2, world.getEntities().size());
 		assertEquals(1, world.getLivingEntities().size());
 	}
@@ -325,7 +326,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClass(ZombieMock.class).size());
 		assertEquals(1, world.getEntitiesByClass(ItemEntityMock.class).size());
 	}
@@ -335,7 +336,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClasses(ZombieMock.class).size());
 		assertEquals(1, world.getEntitiesByClasses(ItemEntityMock.class).size());
 		assertEquals(2, world.getEntitiesByClasses(ZombieMock.class, ItemEntityMock.class).size());
@@ -347,7 +348,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
 		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
@@ -749,7 +750,7 @@ class WorldMockTest
 	void testDropItem()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		Location location = new Location(world, 100, 100, 100);
 
 		Item entity = world.dropItem(location, item);
@@ -768,7 +769,7 @@ class WorldMockTest
 	void testDropItemNaturally()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		ItemStack item = new ItemStack(Material.EMERALD);
+		ItemStack item = new ItemStackMock(Material.EMERALD);
 		Location location = new Location(world, 200, 100, 200);
 
 		Item entity = world.dropItemNaturally(location, item);
@@ -787,7 +788,7 @@ class WorldMockTest
 	void testDropItemConsumer()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		ItemStack item = new ItemStack(Material.BEACON);
+		ItemStack item = new ItemStackMock(Material.BEACON);
 		Location location = new Location(world, 200, 50, 500);
 
 		Item entity = world.dropItem(location, item, n ->
@@ -804,7 +805,7 @@ class WorldMockTest
 	void drop_Item_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		world.dropItem(new Location(world, 0, 5, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 5, 0), new ItemStackMock(Material.STONE));
 		server.getPluginManager().assertEventFired(ItemSpawnEvent.class, (e) -> !e.isCancelled());
 	}
 

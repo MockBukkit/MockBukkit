@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Salmon;
@@ -32,7 +33,7 @@ public class SalmonMock extends SchoolableFishMock implements Salmon
 	@Override
 	public @NotNull ItemStack getBaseBucketItem()
 	{
-		return new ItemStack(Material.SALMON_BUCKET);
+		return new ItemStackMock(Material.SALMON_BUCKET);
 	}
 
 	@Override

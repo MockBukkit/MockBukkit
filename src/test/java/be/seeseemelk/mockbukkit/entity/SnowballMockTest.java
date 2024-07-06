@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Snowball;
@@ -46,7 +47,7 @@ class SnowballMockTest
 	@Test
 	void testSetItem()
 	{
-		snowball.setItem(new ItemStack(Material.DIAMOND, 5));
+		snowball.setItem(new ItemStackMock(Material.DIAMOND, 5));
 		assertEquals(Material.DIAMOND, snowball.getItem().getType());
 		assertEquals(1, snowball.getItem().getAmount());
 	}

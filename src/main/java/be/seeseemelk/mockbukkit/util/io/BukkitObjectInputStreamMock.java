@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.util.io;
 
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -46,7 +47,7 @@ public class BukkitObjectInputStreamMock extends ObjectInputStream
 	@SuppressWarnings("unchecked")
 	private ItemStack deserializeItemStack(Map<String, Object> map) throws IOException
 	{
-		ItemStack itemStack = ItemStack.deserialize(map);
+		ItemStack itemStack = ItemStackMock.deserialize(map);
 		if (map.containsKey("meta"))
 		{
 			final Class<? extends ItemMeta> aClass = itemStack.getItemMeta().getClass();

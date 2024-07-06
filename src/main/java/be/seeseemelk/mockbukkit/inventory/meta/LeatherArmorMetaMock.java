@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;

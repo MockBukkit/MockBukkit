@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -44,7 +45,7 @@ class ChickenMockTest
 	@Test
 	void testIsBreedItemItemStack()
 	{
-		assertTrue(chicken.isBreedItem(new ItemStack(Material.WHEAT_SEEDS)));
+		assertTrue(chicken.isBreedItem(new ItemStackMock(Material.WHEAT_SEEDS)));
 	}
 
 	@Test
@@ -56,7 +57,7 @@ class ChickenMockTest
 	@Test
 	void testIsBreedItemItemStackFalse()
 	{
-		assertFalse(chicken.isBreedItem(new ItemStack(Material.STONE)));
+		assertFalse(chicken.isBreedItem(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test
@@ -102,5 +103,5 @@ class ChickenMockTest
 		chicken.setEggLayTime(100);
 		assertEquals(100, chicken.getEggLayTime());
 	}
-	
+
 }

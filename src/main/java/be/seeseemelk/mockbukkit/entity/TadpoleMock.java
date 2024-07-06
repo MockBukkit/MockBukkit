@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -36,7 +37,7 @@ public class TadpoleMock extends FishMock implements Tadpole
 	@Override
 	public @NotNull ItemStack getBaseBucketItem()
 	{
-		return new ItemStack(Material.TADPOLE_BUCKET);
+		return new ItemStackMock(Material.TADPOLE_BUCKET);
 	}
 
 	@Override

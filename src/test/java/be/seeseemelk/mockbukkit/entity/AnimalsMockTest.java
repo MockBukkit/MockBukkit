@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
@@ -40,7 +41,7 @@ class AnimalsMockTest
 	@Test
 	void testIsBreedingItemDefault()
 	{
-		assertTrue(animal.isBreedItem(new ItemStack(Material.WHEAT)));
+		assertTrue(animal.isBreedItem(new ItemStackMock(Material.WHEAT)));
 	}
 
 	@Test
@@ -64,7 +65,7 @@ class AnimalsMockTest
 	@Test
 	void testIsBreedingItemWithWrongItem()
 	{
-		assertFalse(animal.isBreedItem(new ItemStack(Material.DIRT)));
+		assertFalse(animal.isBreedItem(new ItemStackMock(Material.DIRT)));
 	}
 
 	@Test

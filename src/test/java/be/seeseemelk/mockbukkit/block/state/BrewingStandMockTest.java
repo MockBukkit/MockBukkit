@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -94,8 +95,8 @@ class BrewingStandMockTest
 	@Test
 	void testGetSnapShotInventory()
 	{
-		brewingStand.getInventory().setFuel(new ItemStack(Material.BLAZE_POWDER));
-		brewingStand.getInventory().setIngredient(new ItemStack(Material.SPIDER_EYE));
+		brewingStand.getInventory().setFuel(new ItemStackMock(Material.BLAZE_POWDER));
+		brewingStand.getInventory().setIngredient(new ItemStackMock(Material.SPIDER_EYE));
 
 		assertInstanceOf(BrewerInventory.class, brewingStand.getSnapshotInventory());
 		assertNotSame(brewingStand.getInventory(), brewingStand.getSnapshotInventory());

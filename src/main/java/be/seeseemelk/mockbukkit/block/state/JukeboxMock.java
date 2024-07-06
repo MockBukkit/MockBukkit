@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -74,7 +75,7 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	@Override
 	public void setPlaying(@Nullable Material recordType)
 	{
-		setRecord(new ItemStack(recordType == null ? Material.AIR : recordType));
+		setRecord(new ItemStackMock(recordType == null ? Material.AIR : recordType));
 	}
 
 	@Override
@@ -93,7 +94,7 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	@Override
 	public void setRecord(@Nullable ItemStack recordItem)
 	{
-		this.recordItem = recordItem == null ? new ItemStack(Material.AIR) : recordItem;
+		this.recordItem = recordItem == null ? new ItemStackMock(Material.AIR) : recordItem;
 		this.playing = !this.recordItem.getType().isAir();
 	}
 

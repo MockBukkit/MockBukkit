@@ -42,8 +42,8 @@ class BrewerInventoryMockTest
 	@Test
 	void testGetSnapShotWithSetFuelAndIngredient()
 	{
-		ItemStack ingredient = new ItemStack(Material.POTION);
-		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+		ItemStack ingredient = new ItemStackMock(Material.POTION);
+		ItemStack fuel = new ItemStackMock(Material.BLAZE_POWDER);
 
 		inventory.setFuel(fuel);
 		inventory.setIngredient(ingredient);
@@ -81,7 +81,7 @@ class BrewerInventoryMockTest
 	@Test
 	void testSetFuelWithValidFuel()
 	{
-		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+		ItemStack fuel = new ItemStackMock(Material.BLAZE_POWDER);
 		inventory.setFuel(fuel);
 		assertEquals(fuel, inventory.getFuel());
 	}
@@ -89,7 +89,7 @@ class BrewerInventoryMockTest
 	@Test
 	void testSetIngredientWithValidIngredient()
 	{
-		ItemStack ingredient = new ItemStack(Material.SPIDER_EYE);
+		ItemStack ingredient = new ItemStackMock(Material.SPIDER_EYE);
 		inventory.setIngredient(ingredient);
 		assertEquals(ingredient, inventory.getIngredient());
 	}
@@ -97,7 +97,7 @@ class BrewerInventoryMockTest
 	@Test
 	void testSetFuel_SetsSlot()
 	{
-		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+		ItemStack fuel = new ItemStackMock(Material.BLAZE_POWDER);
 
 		inventory.setFuel(fuel);
 
@@ -107,7 +107,7 @@ class BrewerInventoryMockTest
 	@Test
 	void testSetIngredient_SetsSlot()
 	{
-		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+		ItemStack fuel = new ItemStackMock(Material.BLAZE_POWDER);
 
 		inventory.setIngredient(fuel);
 

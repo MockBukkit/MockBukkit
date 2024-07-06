@@ -55,7 +55,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setItemInMainHand_SomeItem_ItemSet()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		item.setAmount(25);
 		inventory.setItemInMainHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
@@ -67,7 +67,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setItemInHand_SomeItem_ItemSet()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		item.setAmount(25);
 		inventory.setItemInHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
@@ -79,7 +79,7 @@ class PlayerInventoryMockTest
 	{
 		inventory.setHeldItemSlot(1);
 		assertEquals(1, inventory.getHeldItemSlot());
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		item.setAmount(25);
 		inventory.setItemInMainHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
@@ -123,7 +123,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setItem_InInventory_ItemInContents()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		inventory.setItem(0, item);
 		assertEquals(item, inventory.getContents()[0]);
 	}
@@ -131,7 +131,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setItem_InArmorInventory_ItemInArmorContents()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		inventory.setItem(36, item);
 		assertEquals(item, inventory.getArmorContents()[0]);
 	}
@@ -139,7 +139,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setItem_InExtraInventory_ItemInExtraContents()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		inventory.setItem(40, item);
 		assertEquals(item, inventory.getExtraContents()[0]);
 	}
@@ -147,10 +147,10 @@ class PlayerInventoryMockTest
 	@Test
 	void getArmorContents_ContentsChanged_ItemsChanged()
 	{
-		ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
-		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
-		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
-		ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
+		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
+		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
+		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
+		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
 		inventory.setItem(PlayerInventoryMock.BOOTS, boots);
 		inventory.setItem(PlayerInventoryMock.LEGGINGS, leggings);
 		inventory.setItem(PlayerInventoryMock.CHESTPLATE, chestplate);
@@ -169,7 +169,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setBoots_ArmorItem_ArmorItemSet()
 	{
-		ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
+		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
 		inventory.setBoots(boots);
 		assertEquals(boots, inventory.getBoots());
 	}
@@ -177,7 +177,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setLeggings_ArmorItem_ArmorItemSet()
 	{
-		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
+		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
 		inventory.setLeggings(leggings);
 		assertEquals(leggings, inventory.getLeggings());
 	}
@@ -185,7 +185,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setChestplate_ArmorItem_ArmorItemSet()
 	{
-		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
 		inventory.setChestplate(chestplate);
 		assertEquals(chestplate, inventory.getChestplate());
 	}
@@ -193,7 +193,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setHelmet_ArmorItem_ArmorItemSet()
 	{
-		ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
+		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
 		inventory.setHelmet(helmet);
 		assertEquals(helmet, inventory.getHelmet());
 	}
@@ -207,10 +207,10 @@ class PlayerInventoryMockTest
 	@Test
 	void setArmorContents_NewArray_ArmorSet()
 	{
-		ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
-		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
-		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
-		ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
+		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
+		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
+		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
+		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
 		ItemStack[] contents = { boots, leggings, chestplate, helmet };
 		inventory.setArmorContents(contents);
 		assertEquals(boots, inventory.getBoots());
@@ -222,7 +222,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setItemInOffHand_NewItem_ItemSet()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		inventory.setItemInOffHand(item);
 		assertEquals(item, inventory.getItemInOffHand());
 		assertEquals(item, inventory.getItem(PlayerInventoryMock.OFF_HAND));
@@ -231,7 +231,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setExtraContents_NewItem_OffHandSet()
 	{
-		ItemStack item = new ItemStack(Material.STONE);
+		ItemStack item = new ItemStackMock(Material.STONE);
 		inventory.setExtraContents(new ItemStack[]{ item });
 		ItemStack[] contents = inventory.getExtraContents();
 		assertEquals(item, contents[0]);
@@ -270,7 +270,7 @@ class PlayerInventoryMockTest
 		if(slot == EquipmentSlot.BODY){
 			return;
 		}
-		ItemStack apiItemStack = new ItemStack(Material.SCULK);
+		ItemStack apiItemStack = new ItemStackMock(Material.SCULK);
 		inventory.setItem(slot, apiItemStack);
 		ItemStack mirrorItemStack = inventory.getItem(slot);
 		assertNotSame(apiItemStack, mirrorItemStack);

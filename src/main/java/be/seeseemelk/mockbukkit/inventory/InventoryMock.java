@@ -441,7 +441,7 @@ public class InventoryMock implements Inventory
 		{
 			throw new IllegalArgumentException("Material cannot be null.");
 		}
-		return amount < 1 || getNumberOfItems(new ItemStack(material)) == amount;
+		return amount < 1 || getNumberOfItems(new ItemStackMock(material)) == amount;
 	}
 
 	@Override

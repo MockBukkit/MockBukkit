@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.damage.DamageSourceBuilderMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
+import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
 import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.util.io.BukkitObjectInputStreamMock;
@@ -71,7 +73,18 @@ import java.util.function.BooleanSupplier;
 public class MockUnsafeValues implements UnsafeValues
 {
 
-	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20");
+	private static final List<String> COMPATIBLE_API_VERSIONS =
+			Arrays.asList(
+					"1.13",
+					"1.14",
+					"1.15",
+					"1.16",
+					"1.17",
+					"1.18",
+					"1.19",
+					"1.20",
+					"1.21"
+			);
 
 	private String minimumApiVersion = "none";
 
@@ -167,6 +180,7 @@ public class MockUnsafeValues implements UnsafeValues
 		{
 			return material;
 		}
+
 		throw new UnimplementedOperationException();
 	}
 
@@ -285,6 +299,8 @@ public class MockUnsafeValues implements UnsafeValues
 	public byte[] serializeItem(ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "null cannot be serialized");
+		Preconditions.checkNotNull(item.getType().asItemType(),
+				"Items without corresponding ItemType are currently not supported");
 		Preconditions.checkArgument(item.getType() != Material.AIR, "air cannot be serialized");
 		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		try
@@ -308,7 +324,7 @@ public class MockUnsafeValues implements UnsafeValues
 		try
 		{
 			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
-			return (ItemStack) ois.readObject();
+			return (ItemStackMock) ois.readObject();
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
@@ -583,8 +599,7 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public ItemStack createEmptyStack()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ItemStackMock.empty();
 	}
 
 	@Override

@@ -28,14 +28,14 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
-	private @NotNull ItemStack itemInMainHand = new ItemStack(Material.AIR);
-	private @NotNull ItemStack itemInOffHand = new ItemStack(Material.AIR);
+	private @NotNull ItemStack itemInMainHand = new ItemStackMock(Material.AIR);
+	private @NotNull ItemStack itemInOffHand = new ItemStackMock(Material.AIR);
 
-	private @NotNull ItemStack helmet = new ItemStack(Material.AIR);
-	private @NotNull ItemStack chestPlate = new ItemStack(Material.AIR);
-	private @NotNull ItemStack leggings = new ItemStack(Material.AIR);
-	private @NotNull ItemStack boots = new ItemStack(Material.AIR);
-	private @NotNull ItemStack bodyItem = new ItemStack(Material.AIR);
+	private @NotNull ItemStack helmet = new ItemStackMock(Material.AIR);
+	private @NotNull ItemStack chestPlate = new ItemStackMock(Material.AIR);
+	private @NotNull ItemStack leggings = new ItemStackMock(Material.AIR);
+	private @NotNull ItemStack boots = new ItemStackMock(Material.AIR);
+	private @NotNull ItemStack bodyItem = new ItemStackMock(Material.AIR);
 
 	/**
 	 * Constructs a new {@link EntityEquipmentMock} for the given holder.
@@ -365,7 +365,7 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	static @NotNull ItemStack nonNullClone(@Nullable ItemStack itemStack)
 	{
-		return itemStack == null ? new ItemStack(Material.AIR) : itemStack.clone();
+		return itemStack == null ? new ItemStackMock(Material.AIR) : itemStack.clone();
 	}
 
 }
