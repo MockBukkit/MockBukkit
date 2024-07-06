@@ -20,6 +20,7 @@ import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
@@ -435,11 +436,11 @@ class ServerMockTest
 	@Test
 	void getRecipesFor_ManyRecipes_OnlyCorrectRecipes()
 	{
-		TestRecipe recipe1 = new TestRecipe(new ItemStack(Material.STONE));
-		TestRecipe recipe2 = new TestRecipe(new ItemStack(Material.APPLE));
+		TestRecipe recipe1 = new TestRecipe(new ItemStackMock(Material.STONE));
+		TestRecipe recipe2 = new TestRecipe(new ItemStackMock(Material.APPLE));
 		server.addRecipe(recipe1);
 		server.addRecipe(recipe2);
-		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.APPLE));
+		List<Recipe> recipes = server.getRecipesFor(new ItemStackMock(Material.APPLE));
 		assertEquals(1, recipes.size());
 		assertSame(recipe2, recipes.get(0));
 	}
@@ -447,11 +448,11 @@ class ServerMockTest
 	@Test
 	void getRecipesFor_IgnoresAmount()
 	{
-		TestRecipe recipe = new TestRecipe(new ItemStack(Material.IRON_NUGGET));
+		TestRecipe recipe = new TestRecipe(new ItemStackMock(Material.IRON_NUGGET));
 		server.addRecipe(recipe);
 
-		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.IRON_NUGGET, 1));
-		List<Recipe> recipes2 = server.getRecipesFor(new ItemStack(Material.IRON_NUGGET, 10));
+		List<Recipe> recipes = server.getRecipesFor(new ItemStackMock(Material.IRON_NUGGET, 1));
+		List<Recipe> recipes2 = server.getRecipesFor(new ItemStackMock(Material.IRON_NUGGET, 10));
 		assertEquals(recipes, recipes2);
 	}
 

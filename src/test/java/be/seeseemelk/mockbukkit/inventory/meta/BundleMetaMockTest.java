@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -36,7 +37,7 @@ class BundleMetaMockTest
 	@Test
 	void cloneConstructor_CopiesValues()
 	{
-		meta.setItems(Arrays.asList(new ItemStack(Material.STONE), new ItemStack(Material.DIRT)));
+		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 
 		BundleMetaMock otherMeta = new BundleMetaMock(meta);
 
@@ -54,7 +55,7 @@ class BundleMetaMockTest
 	@Test
 	void hasItems_hasItem_True()
 	{
-		meta.addItem(new ItemStack(Material.STONE));
+		meta.addItem(new ItemStackMock(Material.STONE));
 		assertTrue(meta.hasItems());
 	}
 
@@ -67,7 +68,7 @@ class BundleMetaMockTest
 	@Test
 	void getItems_ReturnsItems()
 	{
-		meta.addItem(new ItemStack(Material.STONE));
+		meta.addItem(new ItemStackMock(Material.STONE));
 		assertEquals(1, meta.getItems().size());
 		assertEquals(Material.STONE, meta.getItems().get(0).getType());
 	}
@@ -75,7 +76,7 @@ class BundleMetaMockTest
 	@Test
 	void setItems()
 	{
-		meta.setItems(Arrays.asList(new ItemStack(Material.STONE), new ItemStack(Material.DIRT)));
+		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 		assertEquals(2, meta.getItems().size());
 		assertEquals(Material.STONE, meta.getItems().get(0).getType());
 		assertEquals(Material.DIRT, meta.getItems().get(1).getType());
@@ -86,7 +87,7 @@ class BundleMetaMockTest
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
 		{
-			meta.setItems(Arrays.asList(new ItemStack(Material.STONE), null, new ItemStack(Material.DIRT)));
+			meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), null, new ItemStackMock(Material.DIRT)));
 		});
 	}
 
@@ -95,15 +96,20 @@ class BundleMetaMockTest
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
 		{
-			meta.setItems(Arrays.asList(new ItemStack(Material.STONE), new ItemStack(Material.AIR), new ItemStack(Material.DIRT)));
+			meta.setItems(Arrays.asList(
+							new ItemStackMock(Material.STONE),
+							new ItemStackMock(Material.AIR),
+							new ItemStackMock(Material.DIRT)
+					)
+			);
 		});
 	}
 
 	@Test
 	void addItems()
 	{
-		meta.addItem(new ItemStack(Material.STONE));
-		meta.addItem(new ItemStack(Material.DIRT));
+		meta.addItem(new ItemStackMock(Material.STONE));
+		meta.addItem(new ItemStackMock(Material.DIRT));
 		assertEquals(2, meta.getItems().size());
 		assertEquals(Material.STONE, meta.getItems().get(0).getType());
 		assertEquals(Material.DIRT, meta.getItems().get(1).getType());
@@ -118,7 +124,7 @@ class BundleMetaMockTest
 	@Test
 	void addItems_AirItem_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addItem(new ItemStack(Material.AIR)));
+		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addItem(new ItemStackMock(Material.AIR)));
 	}
 
 	@Test
@@ -138,14 +144,14 @@ class BundleMetaMockTest
 	void equals_DifferentInstance_DifferentValues_False()
 	{
 		BundleMetaMock clone = meta.clone();
-		clone.addItem(new ItemStack(Material.STONE));
+		clone.addItem(new ItemStackMock(Material.STONE));
 		assertNotEquals(meta, clone);
 	}
 
 	@Test
 	void clone_CopiesValues()
 	{
-		meta.setItems(Arrays.asList(new ItemStack(Material.STONE), new ItemStack(Material.DIRT)));
+		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 
 		BundleMetaMock otherMeta = meta.clone();
 

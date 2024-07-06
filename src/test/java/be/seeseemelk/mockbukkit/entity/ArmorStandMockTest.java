@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -167,7 +168,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetBoots()
 	{
-		armorStand.setBoots(new ItemStack(Material.IRON_BOOTS));
+		armorStand.setBoots(new ItemStackMock(Material.IRON_BOOTS));
 		assertEquals(Material.IRON_BOOTS, armorStand.getBoots().getType());
 	}
 
@@ -180,7 +181,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetLeggings()
 	{
-		armorStand.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+		armorStand.setLeggings(new ItemStackMock(Material.IRON_LEGGINGS));
 		assertEquals(Material.IRON_LEGGINGS, armorStand.getLeggings().getType());
 	}
 
@@ -193,7 +194,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetChestPlate()
 	{
-		armorStand.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+		armorStand.setChestplate(new ItemStackMock(Material.IRON_CHESTPLATE));
 		assertEquals(Material.IRON_CHESTPLATE, armorStand.getChestplate().getType());
 	}
 
@@ -206,7 +207,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetHelmet()
 	{
-		armorStand.setHelmet(new ItemStack(Material.IRON_HELMET));
+		armorStand.setHelmet(new ItemStackMock(Material.IRON_HELMET));
 		assertEquals(Material.IRON_HELMET, armorStand.getHelmet().getType());
 	}
 
@@ -219,49 +220,49 @@ class ArmorStandMockTest
 	@Test
 	void testSetItemInHand()
 	{
-		armorStand.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		armorStand.setItemInHand(new ItemStackMock(Material.DIAMOND_SWORD));
 		assertEquals(Material.DIAMOND_SWORD, armorStand.getItemInHand().getType());
 	}
 
 	@Test
 	void testGetItemHand()
 	{
-		armorStand.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		armorStand.setItemInHand(new ItemStackMock(Material.DIAMOND_SWORD));
 		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.HAND).getType());
 	}
 
 	@Test
 	void testGetItemOffHand()
 	{
-		armorStand.getEquipment().setItemInOffHand(new ItemStack(Material.DIAMOND_SWORD));
+		armorStand.getEquipment().setItemInOffHand(new ItemStackMock(Material.DIAMOND_SWORD));
 		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.OFF_HAND).getType());
 	}
 
 	@Test
 	void testGetItemBoots()
 	{
-		armorStand.setBoots(new ItemStack(Material.IRON_BOOTS));
+		armorStand.setBoots(new ItemStackMock(Material.IRON_BOOTS));
 		assertEquals(Material.IRON_BOOTS, armorStand.getItem(EquipmentSlot.FEET).getType());
 	}
 
 	@Test
 	void testGetItemLeggings()
 	{
-		armorStand.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+		armorStand.setLeggings(new ItemStackMock(Material.IRON_LEGGINGS));
 		assertEquals(Material.IRON_LEGGINGS, armorStand.getItem(EquipmentSlot.LEGS).getType());
 	}
 
 	@Test
 	void testGetItemChestplate()
 	{
-		armorStand.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+		armorStand.setChestplate(new ItemStackMock(Material.IRON_CHESTPLATE));
 		assertEquals(Material.IRON_CHESTPLATE, armorStand.getItem(EquipmentSlot.CHEST).getType());
 	}
 
 	@Test
 	void testGetItemHelmet()
 	{
-		armorStand.setHelmet(new ItemStack(Material.IRON_HELMET));
+		armorStand.setHelmet(new ItemStackMock(Material.IRON_HELMET));
 		assertEquals(Material.IRON_HELMET, armorStand.getItem(EquipmentSlot.HEAD).getType());
 	}
 
@@ -274,7 +275,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetItemNulLThrows()
 	{
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
 		assertThrows(NullPointerException.class, () -> armorStand.setItem(null, item));
 	}
 
@@ -288,42 +289,42 @@ class ArmorStandMockTest
 	@Test
 	void testSetItemMainHand()
 	{
-		armorStand.setItem(EquipmentSlot.HAND, new ItemStack(Material.DIAMOND_SWORD));
+		armorStand.setItem(EquipmentSlot.HAND, new ItemStackMock(Material.DIAMOND_SWORD));
 		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.HAND).getType());
 	}
 
 	@Test
 	void testSetItemOffHand()
 	{
-		armorStand.setItem(EquipmentSlot.OFF_HAND, new ItemStack(Material.DIAMOND_SWORD));
+		armorStand.setItem(EquipmentSlot.OFF_HAND, new ItemStackMock(Material.DIAMOND_SWORD));
 		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.OFF_HAND).getType());
 	}
 
 	@Test
 	void testSetItemBoots()
 	{
-		armorStand.setItem(EquipmentSlot.FEET, new ItemStack(Material.IRON_BOOTS));
+		armorStand.setItem(EquipmentSlot.FEET, new ItemStackMock(Material.IRON_BOOTS));
 		assertEquals(Material.IRON_BOOTS, armorStand.getItem(EquipmentSlot.FEET).getType());
 	}
 
 	@Test
 	void testSetItemLeggings()
 	{
-		armorStand.setItem(EquipmentSlot.LEGS, new ItemStack(Material.IRON_LEGGINGS));
+		armorStand.setItem(EquipmentSlot.LEGS, new ItemStackMock(Material.IRON_LEGGINGS));
 		assertEquals(Material.IRON_LEGGINGS, armorStand.getItem(EquipmentSlot.LEGS).getType());
 	}
 
 	@Test
 	void testSetItemChestplate()
 	{
-		armorStand.setItem(EquipmentSlot.CHEST, new ItemStack(Material.IRON_CHESTPLATE));
+		armorStand.setItem(EquipmentSlot.CHEST, new ItemStackMock(Material.IRON_CHESTPLATE));
 		assertEquals(Material.IRON_CHESTPLATE, armorStand.getItem(EquipmentSlot.CHEST).getType());
 	}
 
 	@Test
 	void testSetItemHelmet()
 	{
-		armorStand.setItem(EquipmentSlot.HEAD, new ItemStack(Material.IRON_HELMET));
+		armorStand.setItem(EquipmentSlot.HEAD, new ItemStackMock(Material.IRON_HELMET));
 		assertEquals(Material.IRON_HELMET, armorStand.getItem(EquipmentSlot.HEAD).getType());
 	}
 

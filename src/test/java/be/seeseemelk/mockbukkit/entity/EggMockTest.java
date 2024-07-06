@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -41,13 +42,13 @@ class EggMockTest
 	@Test
 	void testGetItemDefault()
 	{
-		assertEquals(new ItemStack(Material.EGG), egg.getItem());
+		assertEquals(new ItemStackMock(Material.EGG), egg.getItem());
 	}
 
 	@Test
 	void testSetItem()
 	{
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		egg.setItem(item);
 		assertEquals(egg.getItem().getType(), Material.DIAMOND);
 	}

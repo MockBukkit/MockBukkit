@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -42,7 +43,7 @@ public class TropicalFishMock extends SchoolableFishMock implements TropicalFish
 	@Override
 	public @NotNull ItemStack getBaseBucketItem()
 	{
-		return new ItemStack(Material.TROPICAL_FISH_BUCKET);
+		return new ItemStackMock(Material.TROPICAL_FISH_BUCKET);
 	}
 
 	@Override

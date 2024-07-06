@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.util.AdventureConverters;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
@@ -179,7 +180,7 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 
 		for (int i = 0; i < 5; ++i)
 		{
-			Item item = world.dropItem(location, new ItemStack(Material.valueOf(this.getVariant().name() + "_MUSHROOM")));
+			Item item = world.dropItem(location, new ItemStackMock(Material.valueOf(this.getVariant().name() + "_MUSHROOM")));
 			if (!new EntityDropItemEvent(this, item).callEvent())
 				item.remove();
 		}

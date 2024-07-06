@@ -100,7 +100,7 @@ class InventoryMockTest
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
-			inventory.addItem(new ItemStack(Material.DIRT, 64));
+			inventory.addItem(new ItemStackMock(Material.DIRT, 64));
 		}
 
 		inventory.clear();
@@ -115,7 +115,7 @@ class InventoryMockTest
 	@Test
 	void testClearSlot()
 	{
-		inventory.setItem(0, new ItemStack(Material.DIAMOND));
+		inventory.setItem(0, new ItemStackMock(Material.DIAMOND));
 		assertEquals(Material.DIAMOND, inventory.getItem(0).getType());
 
 		inventory.clear(0);
@@ -127,7 +127,7 @@ class InventoryMockTest
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
-			inventory.addItem(new ItemStack(Material.DIRT, 64));
+			inventory.addItem(new ItemStackMock(Material.DIRT, 64));
 		}
 
 		assertEquals(-1, inventory.firstEmpty());
@@ -138,7 +138,7 @@ class InventoryMockTest
 	@Test
 	void addItem_EmptyInventoryAddsOneStack_OneStackUsed()
 	{
-		ItemStack stack = new ItemStack(Material.DIRT, 64);
+		ItemStack stack = new ItemStackMock(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(stack);
 		assertNull(remaining);
 		ItemStack stored = inventory.getItem(0);
@@ -150,13 +150,13 @@ class InventoryMockTest
 	@Test
 	void addItem_FullInventoryAddsOneStack_NothingAdded()
 	{
-		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
+		ItemStack filler = new ItemStackMock(Material.COBBLESTONE, 1);
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
 			inventory.setItem(i, filler);
 		}
 
-		ItemStack stack = new ItemStack(Material.DIRT, 64);
+		ItemStack stack = new ItemStackMock(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(stack);
 		assertEquals(64, remaining.getAmount());
 
@@ -170,18 +170,18 @@ class InventoryMockTest
 	@Test
 	void addItem_PartiallyFilled_AddsOneStack_HalfAdded()
 	{
-		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
+		ItemStack filler = new ItemStackMock(Material.COBBLESTONE, 1);
 		for (int i = 2; i < inventory.getSize(); i++)
 		{
 			inventory.setItem(i, filler);
 		}
-		ItemStack preset = new ItemStack(Material.DIRT, 48);
+		ItemStack preset = new ItemStackMock(Material.DIRT, 48);
 		inventory.setItem(0, preset);
 		inventory.setItem(2, preset);
 		preset.setAmount(64);
 		inventory.setItem(1, preset);
 
-		ItemStack store = new ItemStack(Material.DIRT, 64);
+		ItemStack store = new ItemStackMock(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(store);
 		assertNotNull(remaining);
 		assertEquals(32, remaining.getAmount());
@@ -190,17 +190,17 @@ class InventoryMockTest
 	@Test
 	void addItem_MultipleItems_ItemsAddedCorrectly()
 	{
-		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
+		ItemStack filler = new ItemStackMock(Material.COBBLESTONE, 1);
 		for (int i = 1; i < inventory.getSize(); i++)
 		{
 			inventory.setItem(i, filler);
 		}
 
-		ItemStack preset = new ItemStack(Material.DIRT, 48);
+		ItemStack preset = new ItemStackMock(Material.DIRT, 48);
 		inventory.setItem(0, preset);
 
-		ItemStack item1 = new ItemStack(Material.COBBLESTONE, 64);
-		ItemStack item2 = new ItemStack(Material.DIRT, 64);
+		ItemStack item1 = new ItemStackMock(Material.COBBLESTONE, 64);
+		ItemStack item2 = new ItemStackMock(Material.DIRT, 64);
 		HashMap<Integer, ItemStack> map = inventory.addItem(item1, item2);
 		assertEquals(1, map.size());
 		assertTrue(map.containsKey(1));
@@ -210,13 +210,13 @@ class InventoryMockTest
 	@Test
 	void setContents_OneItemAndOneNull_SetAndRestCleared()
 	{
-		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
+		ItemStack filler = new ItemStackMock(Material.COBBLESTONE, 1);
 		for (int i = 1; i < inventory.getSize(); i++)
 		{
 			inventory.setItem(i, filler);
 		}
 
-		ItemStack item = new ItemStack(Material.DIRT, 32);
+		ItemStack item = new ItemStackMock(Material.DIRT, 32);
 
 		inventory.setContents(new ItemStack[]{ item });
 
@@ -237,8 +237,8 @@ class InventoryMockTest
 	@Test
 	void iterator_SeveralItems_IteratorsOverItems()
 	{
-		ItemStack item1 = new ItemStack(Material.COBBLESTONE, 64);
-		ItemStack item2 = new ItemStack(Material.DIRT, 64);
+		ItemStack item1 = new ItemStackMock(Material.COBBLESTONE, 64);
+		ItemStack item2 = new ItemStackMock(Material.DIRT, 64);
 		inventory.addItem(item1, item2);
 
 		ListIterator<ItemStack> iterator = inventory.iterator();
@@ -256,14 +256,14 @@ class InventoryMockTest
 	@Test
 	void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.addItem(new ItemStackMock(Material.DIRT, 1));
 		assertThrows(AssertionError.class, () -> inventory.assertTrueForAll(Objects::isNull));
 	}
 
 	@Test
 	void assertTrueForNonNulls_NumberOfExecutionsOnInventoryOneItem_EqualToOne()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.addItem(new ItemStackMock(Material.DIRT, 1));
 		AtomicInteger calls = new AtomicInteger(0);
 		inventory.assertTrueForNonNulls(itemstack ->
 		{
@@ -276,51 +276,51 @@ class InventoryMockTest
 	@Test
 	void assertTrueForSome_OneItemMeetsCondition_DoesNotAssert()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.addItem(new ItemStackMock(Material.DIRT, 1));
 		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 0);
 	}
 
 	@Test
 	void assertTrueForSome_NoItemsMeetCondition_Asserts()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.addItem(new ItemStackMock(Material.DIRT, 1));
 		assertThrows(AssertionError.class, () -> inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16));
 	}
 
 	@Test
 	void assertContainsAny_ContainsThem_DoesNotAssert()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 16));
-		inventory.assertContainsAny(new ItemStack(Material.DIRT));
+		inventory.addItem(new ItemStackMock(Material.DIRT, 16));
+		inventory.assertContainsAny(new ItemStackMock(Material.DIRT));
 	}
 
 	@Test
 	void assertContainsAny_DoesNotContainThem_Asserts()
 	{
-		inventory.addItem(new ItemStack(Material.SHORT_GRASS, 16));
-		ItemStack item = new ItemStack(Material.DIRT);
+		inventory.addItem(new ItemStackMock(Material.SHORT_GRASS, 16));
+		ItemStack item = new ItemStackMock(Material.DIRT);
 		assertThrows(AssertionError.class, () -> inventory.assertContainsAny(item));
 	}
 
 	@Test
 	void assertContainsAtLeast_ContainsExactly_DoesNotAssert()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 4));
-		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+		inventory.addItem(new ItemStackMock(Material.DIRT, 4));
+		inventory.assertContainsAtLeast(new ItemStackMock(Material.DIRT), 4);
 	}
 
 	@Test
 	void assertContainsAtLeast_ContainsMore_DoesNotAssert()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT, 8));
-		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+		inventory.addItem(new ItemStackMock(Material.DIRT, 8));
+		inventory.assertContainsAtLeast(new ItemStackMock(Material.DIRT), 4);
 	}
 
 	@Test
 	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
-		inventory.addItem(new ItemStack(Material.SHORT_GRASS, 3));
-		ItemStack item = new ItemStack(Material.DIRT);
+		inventory.addItem(new ItemStackMock(Material.SHORT_GRASS, 3));
+		ItemStack item = new ItemStackMock(Material.DIRT);
 		assertThrows(AssertionError.class, () -> inventory.assertContainsAtLeast(item, 4));
 	}
 
@@ -333,64 +333,64 @@ class InventoryMockTest
 	@Test
 	void testContainsItemStack()
 	{
-		inventory.addItem(new ItemStack(Material.STONE));
-		assertTrue(inventory.contains(new ItemStack(Material.STONE)));
+		inventory.addItem(new ItemStackMock(Material.STONE));
+		assertTrue(inventory.contains(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test
 	void testContainsItemStackAmount()
 	{
-		inventory.addItem(new ItemStack(Material.STONE, 2));
-		assertTrue(inventory.contains(new ItemStack(Material.STONE), 2));
+		inventory.addItem(new ItemStackMock(Material.STONE, 2));
+		assertTrue(inventory.contains(new ItemStackMock(Material.STONE), 2));
 	}
 
 	@Test
 	void testContainsItemStackFalse()
 	{
-		inventory.addItem(new ItemStack(Material.SHORT_GRASS));
-		assertFalse(inventory.contains(new ItemStack(Material.STONE)));
+		inventory.addItem(new ItemStackMock(Material.SHORT_GRASS));
+		assertFalse(inventory.contains(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test
 	void testContainsMaterial()
 	{
-		inventory.addItem(new ItemStack(Material.STONE));
+		inventory.addItem(new ItemStackMock(Material.STONE));
 		assertTrue(inventory.contains(Material.STONE));
 	}
 
 	@Test
 	void testContainsMaterialAmount()
 	{
-		inventory.addItem(new ItemStack(Material.STONE, 2));
+		inventory.addItem(new ItemStackMock(Material.STONE, 2));
 		assertTrue(inventory.contains(Material.STONE, 2));
 	}
 
 	@Test
 	void testContainsMaterialFalse()
 	{
-		inventory.addItem(new ItemStack(Material.SHORT_GRASS));
+		inventory.addItem(new ItemStackMock(Material.SHORT_GRASS));
 		assertFalse(inventory.contains(Material.STONE));
 	}
 
 	@Test
 	void testContainsAtLeast()
 	{
-		inventory.addItem(new ItemStack(Material.STONE, 3));
-		assertTrue(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
+		inventory.addItem(new ItemStackMock(Material.STONE, 3));
+		assertTrue(inventory.containsAtLeast(new ItemStackMock(Material.STONE), 3));
 	}
 
 	@Test
 	void testContainsAtLeastExtra()
 	{
-		inventory.addItem(new ItemStack(Material.STONE, 6));
-		assertTrue(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
+		inventory.addItem(new ItemStackMock(Material.STONE, 6));
+		assertTrue(inventory.containsAtLeast(new ItemStackMock(Material.STONE), 3));
 	}
 
 	@Test
 	void testContainsAtLeastFalse()
 	{
-		inventory.addItem(new ItemStack(Material.STONE));
-		assertFalse(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
+		inventory.addItem(new ItemStackMock(Material.STONE));
+		assertFalse(inventory.containsAtLeast(new ItemStackMock(Material.STONE), 3));
 	}
 
 	@Test
@@ -406,7 +406,7 @@ class InventoryMockTest
 	void addItem_setMaxStackSize_EmptyInventoryAddsOneStack_OneStackUsed()
 	{
 		inventory.setMaxStackSize(30);
-		ItemStack stack = new ItemStack(Material.DIRT, 64);
+		ItemStack stack = new ItemStackMock(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(stack);
 		assertNull(remaining);
 		assertEquals(30, inventory.getItem(0).getAmount());
@@ -418,17 +418,17 @@ class InventoryMockTest
 	@Test
 	void addItem_setMaxStackSize_PartiallyFilled_AddsOneStack_HalfAdded()
 	{
-		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
+		ItemStack filler = new ItemStackMock(Material.COBBLESTONE, 1);
 		for (int i = 3; i < inventory.getSize(); i++)
 		{
 			inventory.setItem(i, filler);
 		}
 		inventory.setMaxStackSize(32);
-		inventory.setItem(0, new ItemStack(Material.DIRT, 20));
-		inventory.setItem(1, new ItemStack(Material.DIRT, 32));
-		inventory.setItem(2, new ItemStack(Material.DIRT, 20));
+		inventory.setItem(0, new ItemStackMock(Material.DIRT, 20));
+		inventory.setItem(1, new ItemStackMock(Material.DIRT, 32));
+		inventory.setItem(2, new ItemStackMock(Material.DIRT, 20));
 
-		ItemStack store = new ItemStack(Material.DIRT, 64);
+		ItemStack store = new ItemStackMock(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(store);
 		assertNotNull(remaining);
 		assertEquals(40, remaining.getAmount());
@@ -437,7 +437,7 @@ class InventoryMockTest
 	@Test
 	void testAll_Material()
 	{
-		inventory.setItem(0, new ItemStack(Material.STONE));
+		inventory.setItem(0, new ItemStackMock(Material.STONE));
 		HashMap<Integer, ? extends ItemStack> all = inventory.all(Material.STONE);
 		assertEquals(Material.STONE, all.get(0).getType());
 	}
@@ -445,9 +445,9 @@ class InventoryMockTest
 	@Test
 	void testAll_ItemStack()
 	{
-		inventory.setItem(0, new ItemStack(Material.STONE));
-		inventory.setItem(1, new ItemStack(Material.STONE, 2));
-		HashMap<Integer, ? extends ItemStack> all = inventory.all(new ItemStack(Material.STONE, 2));
+		inventory.setItem(0, new ItemStackMock(Material.STONE));
+		inventory.setItem(1, new ItemStackMock(Material.STONE, 2));
+		HashMap<Integer, ? extends ItemStack> all = inventory.all(new ItemStackMock(Material.STONE, 2));
 		assertEquals(Material.STONE, all.get(1).getType());
 		assertEquals(2, all.get(1).getAmount());
 	}
@@ -455,8 +455,8 @@ class InventoryMockTest
 	@Test
 	void testFirst_Material()
 	{
-		inventory.setItem(0, new ItemStack(Material.DIRT));
-		inventory.setItem(1, new ItemStack(Material.STONE));
+		inventory.setItem(0, new ItemStackMock(Material.DIRT));
+		inventory.setItem(1, new ItemStackMock(Material.STONE));
 		assertEquals(1, inventory.first(Material.STONE));
 	}
 
@@ -464,15 +464,15 @@ class InventoryMockTest
 	void testFirst_ItemStack()
 	{
 		inventory.clear(0);
-		inventory.setItem(1, new ItemStack(Material.DIRT));
-		inventory.setItem(2, new ItemStack(Material.STONE, 2));
-		assertEquals(2, inventory.first(new ItemStack(Material.STONE, 2)));
+		inventory.setItem(1, new ItemStackMock(Material.DIRT));
+		inventory.setItem(2, new ItemStackMock(Material.STONE, 2));
+		assertEquals(2, inventory.first(new ItemStackMock(Material.STONE, 2)));
 	}
 
 	@Test
 	void testRemove_Material()
 	{
-		inventory.setItem(0, new ItemStack(Material.STONE));
+		inventory.setItem(0, new ItemStackMock(Material.STONE));
 		inventory.remove(Material.STONE);
 		assertNull(inventory.getItem(0));
 	}
@@ -480,9 +480,9 @@ class InventoryMockTest
 	@Test
 	void testRemove_ItemStack()
 	{
-		inventory.setItem(0, new ItemStack(Material.STONE));
-		inventory.setItem(1, new ItemStack(Material.STONE, 2));
-		inventory.remove(new ItemStack(Material.STONE, 2));
+		inventory.setItem(0, new ItemStackMock(Material.STONE));
+		inventory.setItem(1, new ItemStackMock(Material.STONE, 2));
+		inventory.remove(new ItemStackMock(Material.STONE, 2));
 		assertEquals(Material.STONE, inventory.getItem(0).getType());
 		assertNull(inventory.getItem(1));
 	}
@@ -611,8 +611,8 @@ class InventoryMockTest
 	void removeItem_ShouldOnlyRemoveSimilarItems()
 	{
 
-		ItemStack diamond = new ItemStack(Material.DIAMOND);
-		ItemStack emerald = new ItemStack(Material.EMERALD);
+		ItemStack diamond = new ItemStackMock(Material.DIAMOND);
+		ItemStack emerald = new ItemStackMock(Material.EMERALD);
 
 		inventory.addItem(emerald);
 
@@ -626,8 +626,8 @@ class InventoryMockTest
 	@Test
 	void removeItem_ShouldOnlyRemoveTheCorrectAmount()
 	{
-		ItemStack diamond = new ItemStack(Material.DIAMOND);
-		ItemStack emerald = new ItemStack(Material.EMERALD);
+		ItemStack diamond = new ItemStackMock(Material.DIAMOND);
+		ItemStack emerald = new ItemStackMock(Material.EMERALD);
 
 		// Add 2x diamonds and 1x emerald
 		inventory.addItem(diamond, diamond);
@@ -643,8 +643,8 @@ class InventoryMockTest
 	@Test
 	void removeItem_WhenInExcessive()
 	{
-		ItemStack diamond = new ItemStack(Material.DIAMOND);
-		ItemStack emerald = new ItemStack(Material.EMERALD);
+		ItemStack diamond = new ItemStackMock(Material.DIAMOND);
+		ItemStack emerald = new ItemStackMock(Material.EMERALD);
 
 		inventory.addItem(diamond);
 		inventory.addItem(emerald);

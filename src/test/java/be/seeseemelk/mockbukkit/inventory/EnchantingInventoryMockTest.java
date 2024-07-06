@@ -31,7 +31,7 @@ class EnchantingInventoryMockTest
 	@Test
 	void setItem()
 	{
-		inventory.setItem(new ItemStack(Material.DIAMOND_SWORD));
+		inventory.setItem(new ItemStackMock(Material.DIAMOND_SWORD));
 
 		assertNotNull(inventory.getItem());
 		assertEquals(Material.DIAMOND_SWORD, inventory.getItem().getType());
@@ -40,7 +40,7 @@ class EnchantingInventoryMockTest
 	@Test
 	void setItem_SetsItemInSlot()
 	{
-		inventory.setItem(new ItemStack(Material.DIAMOND_SWORD));
+		inventory.setItem(new ItemStackMock(Material.DIAMOND_SWORD));
 
 		assertNotNull(inventory.getItem(0));
 		assertEquals(Material.DIAMOND_SWORD, inventory.getItem(0).getType());
@@ -49,7 +49,7 @@ class EnchantingInventoryMockTest
 	@Test
 	void setSecondary()
 	{
-		inventory.setSecondary(new ItemStack(Material.LAPIS_LAZULI));
+		inventory.setSecondary(new ItemStackMock(Material.LAPIS_LAZULI));
 
 		assertNotNull(inventory.getSecondary());
 		assertEquals(Material.LAPIS_LAZULI, inventory.getSecondary().getType());
@@ -58,7 +58,7 @@ class EnchantingInventoryMockTest
 	@Test
 	void setSecondary_SetsItemInSlot()
 	{
-		inventory.setSecondary(new ItemStack(Material.LAPIS_LAZULI));
+		inventory.setSecondary(new ItemStackMock(Material.LAPIS_LAZULI));
 
 		assertNotNull(inventory.getItem(1));
 		assertEquals(Material.LAPIS_LAZULI, inventory.getItem(1).getType());

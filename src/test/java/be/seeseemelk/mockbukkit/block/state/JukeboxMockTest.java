@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -75,7 +76,7 @@ class JukeboxMockTest
 	@Test
 	void constructor_Clone_CopiesValues()
 	{
-		jukebox.setRecord(new ItemStack(Material.MUSIC_DISC_PIGSTEP));
+		jukebox.setRecord(new ItemStackMock(Material.MUSIC_DISC_PIGSTEP));
 
 		JukeboxMock clone = new JukeboxMock(jukebox);
 
@@ -119,7 +120,7 @@ class JukeboxMockTest
 	@Test
 	void setRecord_Sets()
 	{
-		jukebox.setRecord(new ItemStack(Material.MUSIC_DISC_PIGSTEP));
+		jukebox.setRecord(new ItemStackMock(Material.MUSIC_DISC_PIGSTEP));
 
 		assertEquals(Material.MUSIC_DISC_PIGSTEP, jukebox.getRecord().getType());
 	}

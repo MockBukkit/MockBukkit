@@ -321,7 +321,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public @NotNull ItemMetaMock clone()
+	public ItemMetaMock clone()
 	{
 		try
 		{
@@ -829,7 +829,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.checkAttributeMap();
 		for (Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entries())
 		{
-			Preconditions.checkArgument(!entry.getValue().getUniqueId().equals(modifier.getUniqueId()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
+			Preconditions.checkArgument(!entry.getValue().getKey().equals(modifier.getKey()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
 		}
 		return this.attributeModifiers.put(attribute, modifier);
 	}
@@ -858,7 +858,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.checkAttributeMap();
 
 		return this.attributeModifiers.entries().removeIf(entry ->
-				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getUniqueId().equals(modifier.getUniqueId()))
+				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getKey().equals(modifier.getKey()))
 		);
 	}
 

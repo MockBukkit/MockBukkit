@@ -35,7 +35,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testGetFuel()
 	{
-		ItemStack fuel = new ItemStack(Material.COAL);
+		ItemStack fuel = new ItemStackMock(Material.COAL);
 		inventory.setFuel(fuel);
 		assertEquals(fuel, inventory.getFuel());
 	}
@@ -43,7 +43,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testSetFuel_SetsItemInSlot()
 	{
-		ItemStack fuel = new ItemStack(Material.COAL);
+		ItemStack fuel = new ItemStackMock(Material.COAL);
 		inventory.setFuel(fuel);
 		assertEquals(fuel, inventory.getItem(1));
 	}
@@ -51,7 +51,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testGetResult()
 	{
-		ItemStack result = new ItemStack(Material.IRON_INGOT);
+		ItemStack result = new ItemStackMock(Material.IRON_INGOT);
 		inventory.setResult(result);
 		assertEquals(result, inventory.getResult());
 	}
@@ -59,7 +59,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testSetResult_SetsItemInSlot()
 	{
-		ItemStack fuel = new ItemStack(Material.IRON_INGOT);
+		ItemStack fuel = new ItemStackMock(Material.IRON_INGOT);
 		inventory.setResult(fuel);
 		assertEquals(fuel, inventory.getItem(2));
 	}
@@ -67,7 +67,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testGetSmelting()
 	{
-		ItemStack smelting = new ItemStack(Material.IRON_ORE);
+		ItemStack smelting = new ItemStackMock(Material.IRON_ORE);
 		inventory.setSmelting(smelting);
 		assertEquals(smelting, inventory.getSmelting());
 	}
@@ -75,7 +75,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testSetSmelting_SetsItemInSlot()
 	{
-		ItemStack fuel = new ItemStack(Material.IRON_ORE);
+		ItemStack fuel = new ItemStackMock(Material.IRON_ORE);
 		inventory.setSmelting(fuel);
 		assertEquals(fuel, inventory.getItem(0));
 	}
@@ -83,7 +83,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testIsFuel()
 	{
-		ItemStack fuel = new ItemStack(Material.COAL);
+		ItemStack fuel = new ItemStackMock(Material.COAL);
 		assertTrue(inventory.isFuel(fuel));
 	}
 

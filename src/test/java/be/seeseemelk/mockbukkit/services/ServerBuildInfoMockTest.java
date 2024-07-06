@@ -21,7 +21,7 @@ class ServerBuildInfoMockTest
 	private ServerBuildInfo buildInfo;
 	private static final Key MOCKBUKKIT_BRAND_ID = Key.key("mockbukkit", "mockbukkit");
 
-	private static final String VERSION_RE = "\\d+\\.\\d+\\.\\d+";
+	private static final String VERSION_RE = "\\d+\\.\\d+(?:\\.\\d+)?";
 	private static final String BUILD_NUMBER_RE = "((DEV)|(\\d+))";
 	private static final String BUILD_TIME_RE = "\\d+-\\d+-\\d+T\\d+:\\d+:\\d+Z";
 	private static final String BRANCH_RE = ".*";
