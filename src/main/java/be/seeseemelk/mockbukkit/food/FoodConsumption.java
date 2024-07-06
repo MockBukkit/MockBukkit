@@ -42,16 +42,18 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 				jsonObject.get("canAlwaysEat").getAsBoolean(),
 				jsonObject.get("eatDurationTicks").getAsInt(),
 				loadFoodEffectsFrom(jsonObject.get("effects").getAsJsonArray())
-				);
+		);
 	}
 
-	private static List<FoodConsumption.FoodEffect> loadFoodEffectsFrom(JsonArray jsonArray) {
+	private static List<FoodConsumption.FoodEffect> loadFoodEffectsFrom(JsonArray jsonArray)
+	{
 		return jsonArray.asList().stream()
 				.map(jsonElement -> loadFoodEffectFrom(jsonElement.getAsJsonObject()))
 				.toList();
 	}
 
-	private static FoodConsumption.FoodEffect loadFoodEffectFrom(JsonObject jsonObject) {
+	private static FoodConsumption.FoodEffect loadFoodEffectFrom(JsonObject jsonObject)
+	{
 		return new FoodConsumption.FoodEffect(MockInternalPotionData.getPotionEffectFromData(jsonObject), jsonObject.get("probability").getAsFloat());
 	}
 

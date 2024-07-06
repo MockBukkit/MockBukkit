@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 public class FoodConsumptionLoadTest
 {
+
 	@BeforeEach
 	void setUp()
 	{
@@ -32,37 +33,43 @@ public class FoodConsumptionLoadTest
 	}
 
 	@Test
-	void testLoadingDoesNotThrow() {
+	void testLoadingDoesNotThrow()
+	{
 		assertDoesNotThrow(FoodConsumption::getOrCreateAllFoods);
 	}
 
 	@Test
-	void testNonConsumableItemReturnsNull() {
+	void testNonConsumableItemReturnsNull()
+	{
 		assertNull(FoodConsumption.getFor(Material.STONE));
 	}
 
 	@Test
-	void testConsumableItemReturnsNotNull() {
+	void testConsumableItemReturnsNotNull()
+	{
 		assertNotNull(FoodConsumption.getFor(Material.GOLDEN_APPLE));
 	}
 
 	@ParameterizedTest
 	@MethodSource("foodPropertyProvider")
-	void testIsCorrectlyLoaded(Material food, List<PotionEffect> inflictedEffects) {
+	void testIsCorrectlyLoaded(Material food, List<PotionEffect> inflictedEffects)
+	{
 		assertEquals(inflictedEffects, foodEffects2PotionEffects(FoodConsumption.getFor(food).foodEffects()));
 	}
 
-	private static List<PotionEffect> foodEffects2PotionEffects(List<FoodConsumption.FoodEffect> foodEffects) {
+	private static List<PotionEffect> foodEffects2PotionEffects(List<FoodConsumption.FoodEffect> foodEffects)
+	{
 		return foodEffects.stream().map(FoodConsumption.FoodEffect::potionEffect).toList();
 	}
 
-	private static Stream<Arguments> foodPropertyProvider() {
+	private static Stream<Arguments> foodPropertyProvider()
+	{
 		return Stream.of(
 				Arguments.of(Material.ENCHANTED_GOLDEN_APPLE, List.of(
-						new PotionEffect(PotionEffectType.REGENERATION, 400, 1, false, true, true),
-						new PotionEffect(PotionEffectType.RESISTANCE, 6000, 0, false, true, true),
-						new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 6000, 0, false, true, true),
-						new PotionEffect(PotionEffectType.ABSORPTION, 2400, 3, false, true, true)
+								new PotionEffect(PotionEffectType.REGENERATION, 400, 1, false, true, true),
+								new PotionEffect(PotionEffectType.RESISTANCE, 6000, 0, false, true, true),
+								new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 6000, 0, false, true, true),
+								new PotionEffect(PotionEffectType.ABSORPTION, 2400, 3, false, true, true)
 						)
 				),
 				Arguments.of(Material.POISONOUS_POTATO, List.of(
@@ -74,4 +81,5 @@ public class FoodConsumptionLoadTest
 				Arguments.of(Material.SALMON, List.of())
 		);
 	}
+
 }

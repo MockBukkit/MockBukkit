@@ -1910,7 +1910,8 @@ class PlayerMockTest
 	*/
 
 	@Test
-	void testSimulateConsumePotionItemWithCustomEffectIsApplies() {
+	void testSimulateConsumePotionItemWithCustomEffectIsApplies()
+	{
 		ItemStack itemStack = new ItemStack(Material.POTION);
 		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
 		PotionEffect customEffect = new PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
