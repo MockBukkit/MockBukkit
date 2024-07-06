@@ -1,15 +1,15 @@
 {
     "replace": false,
     "values": [
-        "minecraft:orange_terracotta",
-        "minecraft:white_terracotta",
-        "minecraft:red_sand",
-        "minecraft:terracotta",
-        "minecraft:light_gray_terracotta",
-        "minecraft:red_terracotta",
-        "minecraft:grass_block",
         "minecraft:yellow_terracotta",
+        "minecraft:light_gray_terracotta",
+        "minecraft:orange_terracotta",
+        "minecraft:red_sand",
+        "minecraft:red_terracotta",
         "minecraft:coarse_dirt",
-        "minecraft:brown_terracotta"
+        "minecraft:grass_block",
+        "minecraft:terracotta",
+        "minecraft:brown_terracotta",
+        "minecraft:white_terracotta"
     ]
 }

@@ -2,20 +2,20 @@
     "replace": false,
     "values": [
         "minecraft:pink_banner",
-        "minecraft:lime_banner",
-        "minecraft:gray_banner",
-        "minecraft:light_gray_banner",
-        "minecraft:blue_banner",
-        "minecraft:cyan_banner",
-        "minecraft:purple_banner",
-        "minecraft:red_banner",
-        "minecraft:brown_banner",
+        "minecraft:light_blue_banner",
         "minecraft:white_banner",
-        "minecraft:black_banner",
         "minecraft:magenta_banner",
-        "minecraft:yellow_banner",
+        "minecraft:black_banner",
+        "minecraft:red_banner",
+        "minecraft:light_gray_banner",
+        "minecraft:gray_banner",
+        "minecraft:cyan_banner",
         "minecraft:orange_banner",
         "minecraft:green_banner",
-        "minecraft:light_blue_banner"
+        "minecraft:purple_banner",
+        "minecraft:yellow_banner",
+        "minecraft:brown_banner",
+        "minecraft:lime_banner",
+        "minecraft:blue_banner"
     ]
 }

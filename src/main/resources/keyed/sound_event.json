@@ -1987,13 +1987,10 @@
       "key": "minecraft:block.trial_spawner.ambient"
     },
     {
-      "key": "minecraft:block.trial_spawner.ambient_charged"
+      "key": "minecraft:block.trial_spawner.ambient_ominous"
     },
     {
       "key": "minecraft:block.trial_spawner.break"
-    },
-    {
-      "key": "minecraft:block.trial_spawner.charge_activate"
     },
     {
       "key": "minecraft:block.trial_spawner.close_shutter"
@@ -2009,6 +2006,9 @@
     },
     {
       "key": "minecraft:block.trial_spawner.hit"
+    },
+    {
+      "key": "minecraft:block.trial_spawner.ominous_activate"
     },
     {
       "key": "minecraft:block.trial_spawner.open_shutter"
@@ -2105,6 +2105,9 @@
     },
     {
       "key": "minecraft:block.vault.place"
+    },
+    {
+      "key": "minecraft:block.vault.reject_rewarded_player"
     },
     {
       "key": "minecraft:block.vault.step"
@@ -4669,6 +4672,12 @@
       "key": "minecraft:music_disc.chirp"
     },
     {
+      "key": "minecraft:music_disc.creator"
+    },
+    {
+      "key": "minecraft:music_disc.creator_music_box"
+    },
+    {
       "key": "minecraft:music_disc.far"
     },
     {
@@ -4682,6 +4691,9 @@
     },
     {
       "key": "minecraft:music_disc.pigstep"
+    },
+    {
+      "key": "minecraft:music_disc.precipice"
     },
     {
       "key": "minecraft:music_disc.relic"

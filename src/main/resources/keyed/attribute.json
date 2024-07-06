@@ -55,6 +55,21 @@
       "key": "minecraft:generic.jump_strength"
     },
     {
+      "key": "minecraft:generic.burning_time"
+    },
+    {
+      "key": "minecraft:generic.explosion_knockback_resistance"
+    },
+    {
+      "key": "minecraft:generic.movement_efficiency"
+    },
+    {
+      "key": "minecraft:generic.oxygen_bonus"
+    },
+    {
+      "key": "minecraft:generic.water_movement_efficiency"
+    },
+    {
       "key": "minecraft:player.block_interaction_range"
     },
     {
@@ -62,6 +77,18 @@
     },
     {
       "key": "minecraft:player.block_break_speed"
+    },
+    {
+      "key": "minecraft:player.mining_efficiency"
+    },
+    {
+      "key": "minecraft:player.sneaking_speed"
+    },
+    {
+      "key": "minecraft:player.submerged_mining_speed"
+    },
+    {
+      "key": "minecraft:player.sweeping_damage_ratio"
     },
     {
       "key": "minecraft:zombie.spawn_reinforcements"

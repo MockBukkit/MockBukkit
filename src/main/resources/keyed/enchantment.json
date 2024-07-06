@@ -6,7 +6,7 @@
       "cursed": false,
       "maxLevel": 4,
       "startLevel": 1,
-      "name": "PROTECTION_ENVIRONMENTAL",
+      "name": "ARROW_INFINITE",
       "displayNames": [
         {
           "level": 1,
@@ -112,7 +112,7 @@
       "cursed": false,
       "maxLevel": 4,
       "startLevel": 1,
-      "name": "PROTECTION_FIRE",
+      "name": "SOUL_SPEED",
       "displayNames": [
         {
           "level": 1,
@@ -218,7 +218,7 @@
       "cursed": false,
       "maxLevel": 4,
       "startLevel": 1,
-      "name": "PROTECTION_FALL",
+      "name": "FROST_WALKER",
       "displayNames": [
         {
           "level": 1,
@@ -427,7 +427,7 @@
       "cursed": false,
       "maxLevel": 4,
       "startLevel": 1,
-      "name": "PROTECTION_PROJECTILE",
+      "name": "ARROW_FIRE",
       "displayNames": [
         {
           "level": 1,
@@ -533,7 +533,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "OXYGEN",
+      "name": "LOYALTY",
       "displayNames": [
         {
           "level": 1,
@@ -615,7 +615,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "WATER_WORKER",
+      "name": "PROTECTION_ENVIRONMENTAL",
       "displayNames": [
         {
           "level": 1,
@@ -649,7 +649,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "THORNS",
+      "name": "BREACH",
       "displayNames": [
         {
           "level": 1,
@@ -731,7 +731,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "DEPTH_STRIDER",
+      "name": "THORNS",
       "displayNames": [
         {
           "level": 1,
@@ -814,7 +814,7 @@
       "cursed": false,
       "maxLevel": 2,
       "startLevel": 1,
-      "name": "FROST_WALKER",
+      "name": "DAMAGE_UNDEAD",
       "displayNames": [
         {
           "level": 1,
@@ -876,7 +876,7 @@
       "cursed": true,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "BINDING_CURSE",
+      "name": "PROTECTION_FALL",
       "displayNames": [
         {
           "level": 1,
@@ -910,7 +910,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "DAMAGE_ALL",
+      "name": "RIPTIDE",
       "displayNames": [
         {
           "level": 1,
@@ -1025,6 +1025,8 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
+        "minecraft:density",
+        "minecraft:breach",
         "minecraft:impaling",
         "minecraft:bane_of_arthropods",
         "minecraft:smite",
@@ -1037,7 +1039,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "DAMAGE_UNDEAD",
+      "name": "MULTISHOT",
       "displayNames": [
         {
           "level": 1,
@@ -1152,6 +1154,8 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
+        "minecraft:density",
+        "minecraft:breach",
         "minecraft:impaling",
         "minecraft:bane_of_arthropods",
         "minecraft:smite",
@@ -1164,7 +1168,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "DAMAGE_ARTHROPODS",
+      "name": "PROTECTION_FIRE",
       "displayNames": [
         {
           "level": 1,
@@ -1279,6 +1283,8 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
+        "minecraft:density",
+        "minecraft:breach",
         "minecraft:impaling",
         "minecraft:bane_of_arthropods",
         "minecraft:smite",
@@ -1291,7 +1297,7 @@
       "cursed": false,
       "maxLevel": 2,
       "startLevel": 1,
-      "name": "KNOCKBACK",
+      "name": "FIRE_ASPECT",
       "displayNames": [
         {
           "level": 1,
@@ -1352,7 +1358,7 @@
       "cursed": false,
       "maxLevel": 2,
       "startLevel": 1,
-      "name": "FIRE_ASPECT",
+      "name": "BINDING_CURSE",
       "displayNames": [
         {
           "level": 1,
@@ -1486,7 +1492,6 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
-        "minecraft:silk_touch",
         "minecraft:looting"
       ]
     },
@@ -1496,7 +1501,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "SWEEPING_EDGE",
+      "name": "PIERCING",
       "displayNames": [
         {
           "level": 1,
@@ -1578,7 +1583,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "DIG_SPEED",
+      "name": "DEPTH_STRIDER",
       "displayNames": [
         {
           "level": 1,
@@ -1702,7 +1707,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "SILK_TOUCH",
+      "name": "CHANNELING",
       "displayNames": [
         {
           "level": 1,
@@ -1727,9 +1732,7 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
-        "minecraft:luck_of_the_sea",
         "minecraft:silk_touch",
-        "minecraft:looting",
         "minecraft:fortune"
       ]
     },
@@ -1739,7 +1742,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "DURABILITY",
+      "name": "WIND_BURST",
       "displayNames": [
         {
           "level": 1,
@@ -1821,7 +1824,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "LOOT_BONUS_BLOCKS",
+      "name": "DAMAGE_ALL",
       "displayNames": [
         {
           "level": 1,
@@ -1904,7 +1907,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "ARROW_DAMAGE",
+      "name": "ARROW_KNOCKBACK",
       "displayNames": [
         {
           "level": 1,
@@ -2028,7 +2031,7 @@
       "cursed": false,
       "maxLevel": 2,
       "startLevel": 1,
-      "name": "ARROW_KNOCKBACK",
+      "name": "LUCK",
       "displayNames": [
         {
           "level": 1,
@@ -2089,7 +2092,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "ARROW_FIRE",
+      "name": "SWIFT_SNEAK",
       "displayNames": [
         {
           "level": 1,
@@ -2123,7 +2126,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "ARROW_INFINITE",
+      "name": "KNOCKBACK",
       "displayNames": [
         {
           "level": 1,
@@ -2158,7 +2161,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "LUCK",
+      "name": "DIG_SPEED",
       "displayNames": [
         {
           "level": 1,
@@ -2231,8 +2234,7 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
-        "minecraft:luck_of_the_sea",
-        "minecraft:silk_touch"
+        "minecraft:luck_of_the_sea"
       ]
     },
     {
@@ -2241,7 +2243,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "LURE",
+      "name": "SILK_TOUCH",
       "displayNames": [
         {
           "level": 1,
@@ -2323,7 +2325,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "LOYALTY",
+      "name": "SWEEPING_EDGE",
       "displayNames": [
         {
           "level": 1,
@@ -2406,7 +2408,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "IMPALING",
+      "name": "DAMAGE_ARTHROPODS",
       "displayNames": [
         {
           "level": 1,
@@ -2521,6 +2523,8 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
+        "minecraft:density",
+        "minecraft:breach",
         "minecraft:impaling",
         "minecraft:bane_of_arthropods",
         "minecraft:smite",
@@ -2533,7 +2537,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "RIPTIDE",
+      "name": "IMPALING",
       "displayNames": [
         {
           "level": 1,
@@ -2617,7 +2621,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "CHANNELING",
+      "name": "OXYGEN",
       "displayNames": [
         {
           "level": 1,
@@ -2652,7 +2656,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "MULTISHOT",
+      "name": "LOOT_BONUS_BLOCKS",
       "displayNames": [
         {
           "level": 1,
@@ -2687,7 +2691,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "QUICK_CHARGE",
+      "name": "LURE",
       "displayNames": [
         {
           "level": 1,
@@ -2769,7 +2773,7 @@
       "cursed": false,
       "maxLevel": 4,
       "startLevel": 1,
-      "name": "PIERCING",
+      "name": "ARROW_DAMAGE",
       "displayNames": [
         {
           "level": 1,
@@ -2873,7 +2877,7 @@
       "cursed": false,
       "maxLevel": 5,
       "startLevel": 1,
-      "name": "DENSITY",
+      "name": "WATER_WORKER",
       "displayNames": [
         {
           "level": 1,
@@ -2944,51 +2948,56 @@
       "minModifiedCosts": [
         {
           "level": 1,
-          "cost": 1
+          "cost": 5
         },
         {
           "level": 2,
-          "cost": 12
+          "cost": 13
         },
         {
           "level": 3,
-          "cost": 23
+          "cost": 21
         },
         {
           "level": 4,
-          "cost": 34
+          "cost": 29
         },
         {
           "level": 5,
-          "cost": 45
+          "cost": 37
         }
       ],
       "maxModifiedCosts": [
         {
           "level": 1,
-          "cost": 21
+          "cost": 25
         },
         {
           "level": 2,
-          "cost": 32
+          "cost": 33
         },
         {
           "level": 3,
-          "cost": 43
+          "cost": 41
         },
         {
           "level": 4,
-          "cost": 54
+          "cost": 49
         },
         {
           "level": 5,
-          "cost": 65
+          "cost": 57
         }
       ],
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
-        "minecraft:density"
+        "minecraft:density",
+        "minecraft:breach",
+        "minecraft:impaling",
+        "minecraft:bane_of_arthropods",
+        "minecraft:smite",
+        "minecraft:sharpness"
       ]
     },
     {
@@ -2997,7 +3006,7 @@
       "cursed": false,
       "maxLevel": 4,
       "startLevel": 1,
-      "name": "BREACH",
+      "name": "PROTECTION_PROJECTILE",
       "displayNames": [
         {
           "level": 1,
@@ -3091,16 +3100,21 @@
       "tradeable": true,
       "discoverable": true,
       "conflicts": [
-        "minecraft:breach"
+        "minecraft:density",
+        "minecraft:breach",
+        "minecraft:impaling",
+        "minecraft:bane_of_arthropods",
+        "minecraft:smite",
+        "minecraft:sharpness"
       ]
     },
     {
       "key": "minecraft:wind_burst",
-      "treasure": false,
+      "treasure": true,
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "WIND_BURST",
+      "name": "VANISHING_CURSE",
       "displayNames": [
         {
           "level": 1,
@@ -3182,7 +3196,7 @@
       "cursed": false,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "MENDING",
+      "name": "DURABILITY",
       "displayNames": [
         {
           "level": 1,
@@ -3217,7 +3231,7 @@
       "cursed": true,
       "maxLevel": 1,
       "startLevel": 1,
-      "name": "VANISHING_CURSE",
+      "name": "MENDING",
       "displayNames": [
         {
           "level": 1,
@@ -3251,7 +3265,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "SOUL_SPEED",
+      "name": "QUICK_CHARGE",
       "displayNames": [
         {
           "level": 1,
@@ -3333,7 +3347,7 @@
       "cursed": false,
       "maxLevel": 3,
       "startLevel": 1,
-      "name": "SWIFT_SNEAK",
+      "name": "DENSITY",
       "displayNames": [
         {
           "level": 1,

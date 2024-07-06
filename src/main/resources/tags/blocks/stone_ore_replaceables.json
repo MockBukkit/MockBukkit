@@ -1,9 +1,9 @@
 {
     "replace": false,
     "values": [
-        "minecraft:andesite",
+        "minecraft:granite",
         "minecraft:stone",
-        "minecraft:diorite",
-        "minecraft:granite"
+        "minecraft:andesite",
+        "minecraft:diorite"
     ]
 }

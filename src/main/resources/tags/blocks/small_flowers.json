@@ -1,19 +1,19 @@
 {
     "replace": false,
     "values": [
-        "minecraft:poppy",
-        "minecraft:blue_orchid",
-        "minecraft:cornflower",
         "minecraft:lily_of_the_valley",
         "minecraft:azure_bluet",
         "minecraft:oxeye_daisy",
-        "minecraft:wither_rose",
+        "minecraft:orange_tulip",
+        "minecraft:pink_tulip",
         "minecraft:torchflower",
         "minecraft:dandelion",
+        "minecraft:poppy",
         "minecraft:allium",
-        "minecraft:white_tulip",
-        "minecraft:orange_tulip",
         "minecraft:red_tulip",
-        "minecraft:pink_tulip"
+        "minecraft:cornflower",
+        "minecraft:wither_rose",
+        "minecraft:blue_orchid",
+        "minecraft:white_tulip"
     ]
 }

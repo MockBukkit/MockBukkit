@@ -120,6 +120,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			return WolfVariantMock::from;
 		}
+		else if (key == RegistryKey.JUKEBOX_SONG)
+		{
+			return JukeboxSongMock::from;
+		}
 		else
 		{
 			throw new UnimplementedOperationException();
