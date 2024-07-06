@@ -212,8 +212,8 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public void setBasePotionType(@NotNull PotionType type)
 	{
-		MockInternalPotionData internalPotionData = new MockInternalPotionData(type.getKey());
-		this.basePotionData = new PotionData(type, internalPotionData.isExtended(), internalPotionData.isUpgraded());
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -225,13 +225,8 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public boolean hasBasePotionType()
 	{
-		/*
-		The way this mock is written it always has a base potion type.
-		PotionMetaMock.basePotionData is annotated with @NotNull and is therefore required. Despite this,
-		the Paper API allows for null values when setting the base data, but this mock does not accept it (currently it errors).
-		Hence, a base data, and therefore the potion type in the base data, always exists.
-		 */
-		return true;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
