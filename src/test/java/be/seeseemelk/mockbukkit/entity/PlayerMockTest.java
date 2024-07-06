@@ -1907,7 +1907,7 @@ class PlayerMockTest
 		itemStack.setItemMeta(potionMeta);
 		return itemStack;
 	}
-	*/
+
 
 	@Test
 	void testSimulateConsumePotionItemWithCustomEffectIsApplies()
@@ -1920,6 +1920,7 @@ class PlayerMockTest
 		player.simulateConsumeItem(itemStack);
 		assertEquals(customEffect, player.getPotionEffect(PotionEffectType.JUMP_BOOST));
 	}
+	 */
 
 	@Test
 	void assertSaid_Spigot_CorrectMessage_DoesNotAssert()

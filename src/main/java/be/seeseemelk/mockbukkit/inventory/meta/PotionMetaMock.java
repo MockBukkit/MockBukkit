@@ -219,7 +219,8 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public @NotNull PotionType getBasePotionType()
 	{
-		return basePotionData.getType();
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
