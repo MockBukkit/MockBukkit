@@ -63,12 +63,12 @@ class ColorableArmorMetaMockTest
 	@Test
 	void testClone()
 	{
-		ColorableArmorMetaMock meta = new ColorableArmorMetaMock();
-		meta.setColor(color);
+		ColorableArmorMetaMock colorableMeta = new ColorableArmorMetaMock();
+		colorableMeta.setColor(color);
 
-		ColorableArmorMetaMock clone = meta.clone();
+		ColorableArmorMetaMock clone = colorableMeta.clone();
 
-		assertEquals(meta, clone);
-		assertEquals(meta.getColor(), clone.getColor());
+		assertEquals(colorableMeta, clone);
+		assertEquals(colorableMeta.getColor(), clone.getColor());
 	}
 }
