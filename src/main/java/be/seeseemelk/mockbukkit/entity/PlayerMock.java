@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
@@ -45,6 +46,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
 import org.bukkit.ServerLinks;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -75,6 +77,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
@@ -104,11 +107,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
@@ -298,14 +303,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
-	 * Simulates a Player consuming an Edible Item
+	 * Simulates a Player consuming an Edible Item. Some edibles inflict status effects on the consumer with a certain
+	 * probability.
 	 *
-	 * @param consumable The Item to consume
+	 * @param consumable                The Item to consume
+	 * @param alwaysInflictPotionEffect Whether to always inflict a potion effect from food, regardless of probability.
+	 *                                  If this is `false` and the food item has a probability to inflict the effect
+	 *                                  lesser than 0, it will not do so. This does not prevent effects from
+	 *                                  being inflicted that have a probability of 1. The value is ignored if the edible
+	 *                                  does not inflict any potion effects.
+	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
-	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	public void simulateConsumeItem(@NotNull ItemStack consumable, boolean alwaysInflictPotionEffect)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
-		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
+		// potions are not considered edible, but they can be consumed
+		Preconditions.checkArgument(consumable.getType().isEdible() || consumable.getType() == Material.POTION, "Item is not Consumable");
 
 		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
 		//how it would sound like
@@ -337,8 +350,46 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 							!Bukkit.isPrimaryThread());
 			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
 		}
-
+		else
+		{
+			// apply status effects
+			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
+			if (foodConsumption != null)
+			{
+				for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
+				{
+					if (foodEffect.probability() == 1 || alwaysInflictPotionEffect)
+					{
+						addPotionEffect(foodEffect.potionEffect());
+					}
+				}
+			}
+			else if (consumable.hasItemMeta() && consumable.getItemMeta() instanceof PotionMeta potionMeta)
+			{
+				PotionType.InternalPotionData internalPotionData = server.getUnsafe().getInternalPotionData(Registry.POTION.getKey(potionMeta.getBasePotionType()));
+				for (PotionEffect baseEffect : internalPotionData.getPotionEffects())
+				{
+					addPotionEffect(baseEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+				for (PotionEffect customEffect : potionMeta.getCustomEffects())
+				{
+					addPotionEffect(customEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+			}
+		}
 		consumedItems.add(consumable);
+	}
+
+	/**
+	 * Simulates a Player consuming an Edible Item. If the edible inflicts status effects, these will be applied
+	 * regardless of their probability.
+	 *
+	 * @param consumable The Item to consume
+	 * @see PlayerMock#simulateConsumeItem(ItemStack, boolean)
+	 */
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	{
+		simulateConsumeItem(consumable, true);
 	}
 
 	/**
