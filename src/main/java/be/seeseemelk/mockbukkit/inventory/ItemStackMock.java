@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -150,7 +149,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean hasItemMeta()
 	{
-		return this.itemMeta != null && !Bukkit.getItemFactory().equals(itemMeta,null);
+		return this.itemMeta != null && !Bukkit.getItemFactory().equals(itemMeta, null);
 	}
 
 	@Override
@@ -224,7 +223,6 @@ public class ItemStackMock extends ItemStack
 	{
 		int version = (args.containsKey("v")) ? ((Number) args.get("v")).intValue() : -1;
 		short damage = 0;
-		int amount = 1;
 
 		if (args.containsKey("damage"))
 		{
@@ -233,64 +231,65 @@ public class ItemStackMock extends ItemStack
 
 		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
 
-		if (args.containsKey("amount"))
-		{
-			amount = ((Number) args.get("amount")).intValue();
-		}
-
 		ItemStack result = new ItemStackMock(type);
 
 		if (args.containsKey("enchantments"))
-		{ // Backward compatiblity, @deprecated
-			Object raw = args.get("enchantments");
-
-			if (raw instanceof Map)
-			{
-				Map<?, ?> map = (Map<?, ?>) raw;
-
-				for (Map.Entry<?, ?> entry : map.entrySet())
-				{
-					String stringKey = entry.getKey().toString();
-					stringKey = Bukkit.getUnsafe().get(Enchantment.class, stringKey);
-					NamespacedKey key = NamespacedKey.fromString(stringKey.toLowerCase(Locale.ROOT));
-
-					Enchantment enchantment = Bukkit.getUnsafe().get(Registry.ENCHANTMENT, key);
-
-					if ((enchantment != null) && (entry.getValue() instanceof Integer))
-					{
-						result.addUnsafeEnchantment(enchantment, (Integer) entry.getValue());
-					}
-				}
-			}
+		{
+			handleLegacyEnchantmentsForDeserialization(args, result);
 		}
 		else if (args.containsKey("meta"))
-		{ // We cannot and will not have meta when enchantments (pre-ItemMeta) exist
-			Object raw = args.get("meta");
-			if (raw instanceof ItemMeta)
-			{
-				((ItemMeta) raw).setVersion(version);
-				// Paper start - for pre 1.20.5 itemstacks, add HIDE_STORED_ENCHANTS flag if HIDE_ADDITIONAL_TOOLTIP is set
-				if (version < 3837)
-				{ // 1.20.5
-					if (((ItemMeta) raw).hasItemFlag(ItemFlag.HIDE_ADDITIONAL_TOOLTIP))
-					{
-						((ItemMeta) raw).addItemFlags(ItemFlag.HIDE_STORED_ENCHANTS);
-					}
-				}
-				// Paper end
-				result.setItemMeta((ItemMeta) raw);
-			}
+		{
+			handleMetaForDeserialization(args, version, result);
 		}
 
-		if (version < 0)
+		if (version < 0 && args.containsKey("damage"))
 		{
 			// Set damage again incase meta overwrote it
-			if (args.containsKey("damage"))
-			{
-				result.setDurability(damage);
-			}
+			result.setDurability(damage);
 		}
 		return result;
+	}
+
+	private static void handleMetaForDeserialization(@NotNull Map<String, Object> args, int version, ItemStack result)
+	{
+		// We cannot and will not have meta when enchantments (pre-ItemMeta) exist
+		Object raw = args.get("meta");
+		if (raw instanceof ItemMeta)
+		{
+			((ItemMeta) raw).setVersion(version);
+			// Paper start - for pre 1.20.5 itemstacks, add HIDE_STORED_ENCHANTS flag if HIDE_ADDITIONAL_TOOLTIP is set
+			if (version < 3837 && ((ItemMeta) raw).hasItemFlag(ItemFlag.HIDE_ADDITIONAL_TOOLTIP))
+			{ // 1.20.5
+				((ItemMeta) raw).addItemFlags(ItemFlag.HIDE_STORED_ENCHANTS);
+			}
+			// Paper end
+			result.setItemMeta((ItemMeta) raw);
+		}
+	}
+
+	private static void handleLegacyEnchantmentsForDeserialization(@NotNull Map<String, Object> args, ItemStack result)
+	{
+		// Backward compatiblity, @deprecated
+		Object raw = args.get("enchantments");
+
+		if (raw instanceof Map)
+		{
+			Map<?, ?> map = (Map<?, ?>) raw;
+
+			for (Map.Entry<?, ?> entry : map.entrySet())
+			{
+				String stringKey = entry.getKey().toString();
+				stringKey = Bukkit.getUnsafe().get(Enchantment.class, stringKey);
+				NamespacedKey key = NamespacedKey.fromString(stringKey.toLowerCase(Locale.ROOT));
+
+				Enchantment enchantment = Bukkit.getUnsafe().get(Registry.ENCHANTMENT, key);
+
+				if ((enchantment != null) && (entry.getValue() instanceof Integer))
+				{
+					result.addUnsafeEnchantment(enchantment, (Integer) entry.getValue());
+				}
+			}
+		}
 	}
 
 }
