@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.damage.DamageSourceBuilderMock;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
-import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
 import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.util.io.BukkitObjectInputStreamMock;

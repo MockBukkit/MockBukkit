@@ -7,7 +7,6 @@ import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Allay;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
