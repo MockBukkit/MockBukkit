@@ -72,12 +72,12 @@ class ArmorMetaMockTest
 	@Test
 	void testClone()
 	{
-		ArmorMetaMock meta = new ArmorMetaMock();
-		meta.setTrim(trim);
+		ArmorMetaMock armorMeta = new ArmorMetaMock();
+		armorMeta.setTrim(trim);
 
-		ArmorMetaMock clone = meta.clone();
+		ArmorMetaMock clone = armorMeta.clone();
 
-		assertEquals(meta, clone);
-		assertEquals(meta.getTrim(), clone.getTrim());
+		assertEquals(armorMeta, clone);
+		assertEquals(armorMeta.getTrim(), clone.getTrim());
 	}
 }

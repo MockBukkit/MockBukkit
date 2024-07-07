@@ -1,9 +1,7 @@
-package be.seeseemelk.mockbukkit.inventory;
+package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
-import be.seeseemelk.mockbukkit.inventory.meta.ColorableArmorMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.OminousBottleMetaMock;
 import org.bukkit.Server;
 import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,13 +63,13 @@ public class OminousBottleMetaMockTest
 	@Test
 	void testClone()
 	{
-		OminousBottleMetaMock meta = new OminousBottleMetaMock();
-		meta.setAmplifier(amplifier);
+		OminousBottleMetaMock ominousMeta = new OminousBottleMetaMock();
+		ominousMeta.setAmplifier(amplifier);
 
-		OminousBottleMetaMock clone = meta.clone();
+		OminousBottleMetaMock clone = ominousMeta.clone();
 
-		assertEquals(meta, clone);
-		assertEquals(meta.getAmplifier(), clone.getAmplifier());
+		assertEquals(ominousMeta, clone);
+		assertEquals(ominousMeta.getAmplifier(), clone.getAmplifier());
 	}
 
 
