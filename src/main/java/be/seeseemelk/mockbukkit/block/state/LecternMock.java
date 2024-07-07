@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -12,8 +11,6 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.awt.print.Book;
 
 /**
  * Mock implementation of a {@link Lectern}.
