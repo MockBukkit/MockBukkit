@@ -27,6 +27,7 @@ public class ItemStackMock extends ItemStack
 	private short durability;
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
+	private static final String ITEMMETA_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
 
 	//Utility
 	protected ItemStackMock()
@@ -52,7 +53,7 @@ public class ItemStackMock extends ItemStack
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new RuntimeException("Failed to instanciate item meta class " + type.getItemMetaClass(), e);
+				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.getItemMetaClass(), e);
 			}
 		}
 
@@ -72,7 +73,7 @@ public class ItemStackMock extends ItemStack
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new RuntimeException("Failed to instanciate item meta class " + type.asItemType().getItemMetaClass(), e);
+				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.asItemType().getItemMetaClass(), e);
 			}
 		}
 	}
@@ -96,7 +97,7 @@ public class ItemStackMock extends ItemStack
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new RuntimeException("Failed to instanciate item meta class " + type.getItemMetaClass(), e);
+				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.getItemMetaClass(), e);
 			}
 		}
 
@@ -175,14 +176,12 @@ public class ItemStackMock extends ItemStack
 	{
 		Preconditions.checkArgument(ench != null, "Enchantment cannot be null");
 
-		// Paper start - Replace whole method
-		final ItemMeta itemMeta = this.getItemMeta();
-		if (itemMeta != null)
+		final ItemMeta meta = this.getItemMeta();
+		if (meta != null)
 		{
-			itemMeta.addEnchant(ench, level, true);
-			this.setItemMeta(itemMeta);
+			meta.addEnchant(ench, level, true);
+			this.setItemMeta(meta);
 		}
-		// Paper end
 	}
 
 	@Override
@@ -223,10 +222,11 @@ public class ItemStackMock extends ItemStack
 	{
 		int version = (args.containsKey("v")) ? ((Number) args.get("v")).intValue() : -1;
 		short damage = 0;
+		String damageKey = "damage";
 
-		if (args.containsKey("damage"))
+		if (args.containsKey(damageKey))
 		{
-			damage = ((Number) args.get("damage")).shortValue();
+			damage = ((Number) args.get(damageKey)).shortValue();
 		}
 
 		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
@@ -242,7 +242,7 @@ public class ItemStackMock extends ItemStack
 			handleMetaForDeserialization(args, version, result);
 		}
 
-		if (version < 0 && args.containsKey("damage"))
+		if (version < 0 && args.containsKey(damageKey))
 		{
 			// Set damage again incase meta overwrote it
 			result.setDurability(damage);
@@ -272,9 +272,8 @@ public class ItemStackMock extends ItemStack
 		// Backward compatiblity, @deprecated
 		Object raw = args.get("enchantments");
 
-		if (raw instanceof Map)
+		if (raw instanceof Map<?, ?> map)
 		{
-			Map<?, ?> map = (Map<?, ?>) raw;
 
 			for (Map.Entry<?, ?> entry : map.entrySet())
 			{

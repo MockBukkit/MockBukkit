@@ -65,9 +65,10 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		boolean blockType = jsonObject.get("blockType").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
 		Class<? extends ItemMeta> metaClass = null;
-		if (jsonObject.has("metaClass"))
+		String metaClassKey = "metaClass";
+		if (jsonObject.has(metaClassKey))
 		{
-			String metaClassAsString = jsonObject.get("metaClass").getAsString();
+			String metaClassAsString = jsonObject.get(metaClassKey).getAsString();
 
 			try
 			{
@@ -87,14 +88,14 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				{
 					String metaClassName =
 							"be.seeseemelk.mockbukkit.inventory.meta."
-									+ jsonObject.get("metaClass").getAsString()
+									+ jsonObject.get(metaClassKey).getAsString()
 									+ "Mock";
 					metaClass = (Class<? extends ItemMeta>) Class.forName(metaClassName);
 				}
 			}
 			catch (ClassNotFoundException e)
 			{
-				throw new IllegalStateException("Could not find class: " + jsonObject.get("metaClass").getAsString());
+				throw new IllegalStateException("Could not find class: " + jsonObject.get(metaClassKey).getAsString());
 			}
 		}
 		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, hasRecord, fuel, blockType, translationKey, metaClass);
