@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import org.bukkit.JukeboxSong;
 import org.bukkit.Keyed;
 import org.bukkit.block.BlockType;
 import org.bukkit.damage.DamageType;
@@ -93,6 +94,10 @@ public class KeyedDataGenerator implements DataGenerator
 						{
 							addBlockTypeProperties(jsonObject, blockType);
 						}
+						if (keyedObject instanceof JukeboxSong jukeboxSong)
+						{
+							addJukeboxSongProperties(jsonObject, jukeboxSong);
+						}
 						array.add(jsonObject);
 					}
 				}
@@ -145,6 +150,11 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("fuel", new JsonPrimitive(itemType.isFuel()));
 		jsonObject.add("blockType", new JsonPrimitive(itemType.hasBlockType()));
 		jsonObject.add("translationKey", new JsonPrimitive(itemType.getTranslationKey()));
+		jsonObject.add("material",new JsonPrimitive(itemType.asMaterial().name()));
+		if (itemType != ItemType.AIR)
+		{
+			jsonObject.add("metaClass", new JsonPrimitive(itemType.getItemMetaClass().getSimpleName()));
+		}
 	}
 
 	private void addTrimMaterialProperties(JsonObject jsonObject, TrimMaterial trimMaterial)
@@ -224,6 +234,13 @@ public class KeyedDataGenerator implements DataGenerator
 			}
 		}
 		jsonObject.add("conflicts", conflicts);
+	}
+
+	private void addJukeboxSongProperties(JsonObject jsonObject, JukeboxSong jukeboxSong)
+	{
+		JsonObject description = new JsonObject();
+		description.add("translate", new JsonPrimitive(jukeboxSong.getTranslationKey()));
+		jsonObject.add("description", description);
 	}
 
 }
