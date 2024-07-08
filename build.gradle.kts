@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-	paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
-	implementation("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
+	paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
+	implementation("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
 }
 
 tasks {
