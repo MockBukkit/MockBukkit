@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import io.papermc.paper.registry.RegistryKey;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -26,10 +27,6 @@ public class RegistryKeyClassDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		if (!dataFolder.exists() && !dataFolder.mkdirs())
-		{
-			throw new IOException("Could not make directory: " + this.dataFolder);
-		}
 		File destinationFile = new File(dataFolder, "registry_key_class_relation.json");
 		JsonObject rootObject = new JsonObject();
 
@@ -38,15 +35,7 @@ public class RegistryKeyClassDataGenerator implements DataGenerator
 			rootObject.add(entry.getKey().key().asString(), new JsonPrimitive(entry.getValue().getName()));
 		}
 
-		if (!destinationFile.exists() && !destinationFile.createNewFile())
-		{
-			throw new IOException("Could not create file: " + destinationFile);
-		}
-		try (Writer writer = new FileWriter(destinationFile))
-		{
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			gson.toJson(rootObject, writer);
-		}
+		JsonUtil.dump(rootObject, destinationFile);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,27 +31,7 @@ public class MaterialDataGenerator implements DataGenerator
 	public void generateData() throws IOException
 	{
 		JsonObject json = createJsonObject();
-		writeJsonObject(json);
-	}
-
-	private void writeJsonObject(@NotNull JsonObject json) throws IOException
-	{
-		if (!dataFolder.exists() && !dataFolder.mkdirs())
-		{
-			throw new IOException("Could not make directory: " + this.dataFolder);
-		}
-
-		File destinationFile = new File(dataFolder, "material_data.json");
-		if (!destinationFile.exists() && !destinationFile.createNewFile())
-		{
-			throw new IOException("Could not create file: " + destinationFile);
-		}
-
-		try (Writer writer = new FileWriter(destinationFile))
-		{
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			gson.toJson(json, writer);
-		}
+		JsonUtil.dump(json, new File(dataFolder, "material_data.json"));
 	}
 
 	private static @NotNull JsonObject createJsonObject()

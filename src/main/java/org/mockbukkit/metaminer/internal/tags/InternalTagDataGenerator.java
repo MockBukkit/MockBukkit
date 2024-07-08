@@ -18,9 +18,6 @@ public class InternalTagDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		if(!dataFolder.exists() && !dataFolder.mkdirs()){
-			throw new IOException("Could not create directory: " + dataFolder);
-		}
 		for (InternalTagType tagType : InternalTagType.values())
 		{
 			DataGenerator dataGenerator = tagType.getConstructor().apply(dataFolder);

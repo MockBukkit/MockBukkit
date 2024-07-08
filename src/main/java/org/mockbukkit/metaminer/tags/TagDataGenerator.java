@@ -14,6 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.entity.EntityType;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -55,22 +56,7 @@ public class TagDataGenerator implements DataGenerator
 		rootObject.add("values", jsonArray);
 
 		File destinationFile = new File(new File(this.dataFolder,tagTypeName), tag.getKey().getKey() + ".json");
-		File destinationDirectory = destinationFile.getParentFile();
-		if(!destinationDirectory.exists() && !destinationDirectory.mkdirs()){
-			throw new IOException("Could not create directory: " + destinationDirectory);
-		}
-		if (!destinationFile.exists() && !destinationFile.createNewFile())
-		{
-			throw new IOException("Could not create file: " + destinationFile);
-		}
-		try (PrintWriter writer = new PrintWriter(destinationFile))
-		{
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			JsonWriter jsonWriter = new JsonWriter(writer);
-			jsonWriter.setIndent("    ");
-			gson.toJson(rootObject, jsonWriter);
-			writer.print("\n");
-		}
+		JsonUtil.dump(rootObject, destinationFile);
 	}
 
 	private Map<String, Class<? extends Keyed>> getTagTypeNames()

@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -49,23 +50,10 @@ public class InternalBlockTagDataGenerator implements DataGenerator
 		}
 		JsonObject isSolid = new JsonObject();
 		isSolid.add("values", isSolidValues);
-		saveJSON(isSolid, new File(workDirectory, "solid_blocks.json"));
+		JsonUtil.dump(isSolid, new File(workDirectory, "solid_blocks.json"));
 		JsonObject isNonSolid = new JsonObject();
 		isNonSolid.add("values", isNonSolidValues);
-		saveJSON(isNonSolid, new File(workDirectory, "non_solid_blocks.json"));
-	}
-
-	private void saveJSON(JsonElement jsonElement, File file) throws IOException
-	{
-		if (!file.exists() && !file.createNewFile())
-		{
-			throw new IOException("Could not create file: " + file);
-		}
-		try (Writer writer = new FileWriter(file))
-		{
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			gson.toJson(jsonElement, writer);
-		}
+		JsonUtil.dump(isNonSolid, new File(workDirectory, "non_solid_blocks.json"));
 	}
 
 }

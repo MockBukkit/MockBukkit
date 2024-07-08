@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -106,22 +107,9 @@ public class KeyedDataGenerator implements DataGenerator
 				}
 			}
 			File destinationFile = new File(dataFolder, key.key().value() + ".json");
-			File destinationFolder = destinationFile.getParentFile();
-			if (!destinationFolder.exists() && !destinationFolder.mkdirs())
-			{
-				throw new IOException("Could not create directories: " + destinationFolder);
-			}
 			JsonObject rootObject = new JsonObject();
 			rootObject.add("values", array);
-			if (!destinationFile.exists() && !destinationFile.createNewFile())
-			{
-				throw new IOException("Could not create file: " + destinationFile);
-			}
-			try (Writer writer = new FileWriter(destinationFile))
-			{
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				gson.toJson(rootObject, writer);
-			}
+			JsonUtil.dump(rootObject, destinationFile);
 		}
 	}
 
