@@ -376,26 +376,31 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
-	protected double getEyeHeight(EntityState pose) {
+	protected double getEyeHeight(EntityState pose)
+	{
 		return getHeight(pose) * 0.85D;
 	}
 
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
-		if (ignorePose) {
+		if (ignorePose)
+		{
 			return getEyeHeight(EntityState.DEFAULT);
 		}
 
-		if (isSleeping()) {
+		if (isSleeping())
+		{
 			return getEyeHeight(EntityState.SLEEPING);
 		}
 
-		if (isSneaking()) {
+		if (isSneaking())
+		{
 			return getEyeHeight(EntityState.SNEAKING);
 		}
 
-		if (isSwimming()) {
+		if (isSwimming())
+		{
 			return getEyeHeight(EntityState.SWIMMING);
 		}
 
