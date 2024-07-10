@@ -1190,53 +1190,61 @@ class EntityMockTest
 	}
 
 	@Test
-	void getPose_GivenDefaultPose() {
+	void getPose_GivenDefaultPose()
+	{
 		Pose actual = entity.getPose();
 		assertEquals(Pose.STANDING, actual);
 	}
 
 	@ParameterizedTest
 	@EnumSource(Pose.class)
-	void getPose_GivenValidPoses(Pose expectedPose) {
+	void getPose_GivenValidPoses(Pose expectedPose)
+	{
 		entity.setPose(expectedPose);
 		Pose actual = entity.getPose();
 		assertEquals(expectedPose, actual);
 	}
 
 	@Test
-	void hasFixedPose_GivenDefaultPose() {
+	void hasFixedPose_GivenDefaultPose()
+	{
 		boolean actual = entity.hasFixedPose();
 		assertFalse(actual);
 	}
 
 	@Test
-	void hasFixedPose_GivenFixedPose() {
+	void hasFixedPose_GivenFixedPose()
+	{
 		entity.setPose(Pose.STANDING, true);
 		boolean actual = entity.hasFixedPose();
 		assertTrue(actual);
 	}
 
 	@Test
-	void setRotation_GivenInfiniteYaw() {
+	void setRotation_GivenInfiniteYaw()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setRotation(Float.POSITIVE_INFINITY, 0));
 		assertEquals("yaw not finite", e.getMessage());
 	}
 
 	@Test
-	void setRotation_GivenInfinitePitch() {
+	void setRotation_GivenInfinitePitch()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setRotation(0, Float.POSITIVE_INFINITY));
 		assertEquals("pitch not finite", e.getMessage());
 	}
 
 	@Test
-	void setRotation_GivenDefaultRotation() {
+	void setRotation_GivenDefaultRotation()
+	{
 		Location actual = entity.getLocation();
 		assertEquals(0.0F, actual.getYaw());
 		assertEquals(0.0F, actual.getPitch());
 	}
 
 	@Test
-	void setRotation_GivenNewRotation() {
+	void setRotation_GivenNewRotation()
+	{
 		entity.setRotation(45.0F, 270F);
 
 		Location actual = entity.getLocation();

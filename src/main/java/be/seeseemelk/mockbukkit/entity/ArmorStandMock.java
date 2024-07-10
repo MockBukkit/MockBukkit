@@ -66,7 +66,8 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	protected EntitySubType getSubType()
 	{
-		if (isSmall()) {
+		if (isSmall())
+		{
 			return EntitySubType.SMALL;
 		}
 
