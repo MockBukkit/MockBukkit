@@ -173,7 +173,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private int expTotal = 0;
 	private float exp = 0;
 	private int expCooldown = 0;
-	private boolean sneaking = false;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
@@ -756,20 +755,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public double getEyeHeight()
-	{
-		return getEyeHeight(false);
-	}
-
-	@Override
-	public double getEyeHeight(boolean ignorePose)
-	{
-		if (isSneaking() && !ignorePose)
-			return 1.54D;
-		return 1.62D;
-	}
-
-	@Override
 	public int getNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
@@ -1143,18 +1128,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSneaking()
-	{
-		return sneaking;
-	}
-
-	@Override
-	public void setSneaking(boolean sneaking)
-	{
-		this.sneaking = sneaking;
-	}
-
 	/**
 	 * Simulates sneaking.
 	 *
@@ -1167,7 +1140,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
-			this.sneaking = event.isSneaking();
+			setSneaking(event.isSneaking());
 		}
 		return event;
 	}
