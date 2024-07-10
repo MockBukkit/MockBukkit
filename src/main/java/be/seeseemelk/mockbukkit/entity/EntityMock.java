@@ -52,6 +52,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
+import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -96,6 +97,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
+	private boolean sneaking = false;
 	private boolean invisible;
 	private boolean noPhysics;
 	private boolean persistent = true;
@@ -111,6 +113,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean visualFire;
 	private boolean silent;
 	private boolean gravity = true;
+
+	private Pose pose = Pose.STANDING;
+	private boolean isFixedPose = false;
 
 	private final EntityData entityData;
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
@@ -599,6 +604,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public double getHeight()
 	{
 		return entityData.getHeight(this.getSubType(), this.getEntityState());
+	}
+
+	protected double getHeight(@NotNull EntityState state)
+	{
+		Preconditions.checkNotNull(state, "State cannot be null");
+		return entityData.getHeight(this.getSubType(), state);
 	}
 
 	@Override
@@ -1171,8 +1182,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setRotation(float yaw, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		NumberConversions.checkFinite(pitch, "pitch not finite");
+		NumberConversions.checkFinite(yaw, "yaw not finite");
+
+		yaw = Location.normalizeYaw(yaw);
+		pitch = Location.normalizePitch(pitch);
+
+		location.setYaw(yaw);
+		location.setPitch(pitch);
 	}
 
 	@Override
@@ -1204,8 +1221,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Pose getPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.pose;
 	}
 
 	@Override
@@ -1403,15 +1419,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isSneaking()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sneaking;
 	}
 
 	@Override
 	public void setSneaking(boolean sneak)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sneaking = sneak;
 	}
 
 	@Override
@@ -1431,15 +1445,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setPose(@NotNull Pose pose, boolean fixed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		this.pose = pose;
+		this.isFixedPose = fixed;
 	}
 
 	@Override
 	public boolean hasFixedPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.isFixedPose;
 	}
 
 	@Override
