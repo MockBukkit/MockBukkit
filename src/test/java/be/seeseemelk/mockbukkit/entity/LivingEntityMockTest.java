@@ -208,4 +208,34 @@ class LivingEntityMockTest
 		}
 	}
 
+	@Test
+	void isSleeping_GivenDefaultValue()
+	{
+		boolean actual = livingEntity.isSleeping();
+		assertFalse(actual);
+	}
+
+	@Test
+	void isSleeping_GivenSleepingAsTrue()
+	{
+		livingEntity.setSleeping(true);
+		boolean actual = livingEntity.isSleeping();
+		assertTrue(actual);
+	}
+
+	@Test
+	void isClimbing_GivenDefaultValue()
+	{
+		boolean actual = livingEntity.isClimbing();
+		assertFalse(actual);
+	}
+
+	@Test
+	void isClimbing_GivenSleepingAsTrue()
+	{
+		livingEntity.setClimbing(true);
+		boolean actual = livingEntity.isClimbing();
+		assertTrue(actual);
+	}
+
 }
