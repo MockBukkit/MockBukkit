@@ -71,19 +71,14 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -102,7 +97,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -311,7 +305,7 @@ class PlayerMockTest
 	@Test
 	void damage_ExactlyHealth_ZeroAndDeathEvent()
 	{
-		player.simulateDamage(player.getHealth(), (Entity) null);
+		player.simulateDamage(player.getHealth(),(Entity) null);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
@@ -1914,75 +1908,6 @@ class PlayerMockTest
 	{
 		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
 	}
-
-	@Test
-	void testSimulateConsumeItemStatusEffectIsAppliedFromItem()
-	{
-		ItemStack edibleWithStatusEffect = new ItemStack(Material.GOLDEN_APPLE);
-		player.simulateConsumeItem(edibleWithStatusEffect);
-		assertNotNull(player.getPotionEffect(PotionEffectType.REGENERATION));
-	}
-
-	@Test
-	void testSimulateConsumeItemStatusEffectWithProbabilityIsAlwaysApplied()
-	{
-		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
-		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, true);
-		assertNotNull(player.getPotionEffect(PotionEffectType.HUNGER));
-	}
-
-	@Test
-	void testSimulateConsumeItemStatusEffectWithProbabilityIsNotApplied()
-	{
-		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
-		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, false);
-		assertNull(player.getPotionEffect(PotionEffectType.HUNGER));
-	}
-
-	/*
-	Commented out so there are no skipped tests for now.
-
-	@Disabled("PotionMetaMock#{get,set}BasePotionType is not yet implemented, which is used in this test.")
-	@ParameterizedTest
-	@MethodSource("potionItemProvider")
-	void testSimulateConsumePotionItemWithBaseEffectIsApplied(Supplier<ItemStack> potionSupplier, PotionEffect inflictedEffect) {
-		ItemStack potion = potionSupplier.get();
-		player.simulateConsumeItem(potion);
-		assertEquals(inflictedEffect, player.getPotionEffect(inflictedEffect.getType()));
-	}
-
-	private static Stream<Arguments> potionItemProvider() {
-		return Stream.of(
-				Arguments.of(
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.LONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.STRONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.AWKWARD), null
-				)
-		);
-	}
-
-	private static ItemStack potionItemStack(PotionType potionType) {
-		ItemStack itemStack = new ItemStack(Material.POTION);
-		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-		potionMeta.setBasePotionType(potionType);
-		itemStack.setItemMeta(potionMeta);
-		return itemStack;
-	}
-
-
-	@Test
-	void testSimulateConsumePotionItemWithCustomEffectIsApplies()
-	{
-		ItemStack itemStack = new ItemStack(Material.POTION);
-		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-		PotionEffect customEffect = new PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
-		potionMeta.addCustomEffect(customEffect, true);
-		itemStack.setItemMeta(potionMeta);
-		player.simulateConsumeItem(itemStack);
-		assertEquals(customEffect, player.getPotionEffect(PotionEffectType.JUMP_BOOST));
-	}
-	 */
 
 	@Test
 	void assertSaid_Spigot_CorrectMessage_DoesNotAssert()

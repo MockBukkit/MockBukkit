@@ -1,10 +1,8 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
-import org.bukkit.UnsafeValues;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
