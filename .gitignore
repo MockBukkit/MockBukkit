@@ -208,3 +208,6 @@ Temporary Items
 
 # Ignore server folder
 server/
+
+#Kotlin LSP
+kls_database.db

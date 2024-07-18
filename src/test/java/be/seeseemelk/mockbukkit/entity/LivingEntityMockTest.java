@@ -7,6 +7,7 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
@@ -131,6 +132,33 @@ class LivingEntityMockTest
 	{
 		livingEntity.setLeashHolder(null);
 		assertThrows(IllegalStateException.class, () -> livingEntity.getLeashHolder());
+	}
+
+	@Test
+	void testPotionEffectAddedForFirstTime()
+	{
+		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
+		server.getPluginManager().assertEventFired(EntityPotionEffectEvent.class);
+		assertEntityPotionEffectEvent(event, null, effect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
+	}
+
+	@Test
+	void testPotionEffectAddedThatAlreadyExisted()
+	{
+		PotionEffect initialEffect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
+		PotionEffect laterEffect = new PotionEffect(PotionEffectType.REGENERATION, 10, 3);
+		livingEntity.addPotionEffect(initialEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(laterEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEntityPotionEffectEvent(event, initialEffect, laterEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+	}
+
+	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect, PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
+	{
+		assertEquals(event.getOldEffect(), oldEffect);
+		assertEquals(event.getNewEffect(), newEffect);
+		assertEquals(event.getCause(), cause);
+		assertEquals(event.getAction(), action);
 	}
 
 	@Test

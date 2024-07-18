@@ -6,7 +6,7 @@ plugins {
 	id("maven-publish")
 	id("signing")
 	id("net.kyori.blossom") version "2.1.0"
-	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+	id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "com.github.seeseemelk"
@@ -24,12 +24,12 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.10.2")
+	implementation("org.junit.jupiter:junit-jupiter:5.10.3")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.3")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.17")
+	implementation("net.bytebuddy:byte-buddy:1.14.18")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
