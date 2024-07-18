@@ -61,7 +61,7 @@ jobs:
 
           ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
             -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::') \
-            -PossrhUsername=seeseemelk \
+            -PossrhUsername=nkmPKqn2 \
             -PossrhPassword=$OSSRH_PASSWORD \
             -Psigning.secretKeyRingFile=private.gpg \
             -Psigning.keyId=${{ secrets.PRIV_KEY_ID }} \
