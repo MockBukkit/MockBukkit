@@ -1,11 +1,11 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:powder_snow",
-        "minecraft:small_amethyst_bud",
-        "minecraft:sculk_vein",
-        "minecraft:glow_lichen",
-        "minecraft:lily_pad",
-        "minecraft:pink_petals"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:glow_lichen",
+		"minecraft:lily_pad",
+		"minecraft:pink_petals",
+		"minecraft:powder_snow",
+		"minecraft:sculk_vein",
+		"minecraft:small_amethyst_bud"
+	]
 }

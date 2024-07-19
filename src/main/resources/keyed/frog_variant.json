@@ -1,13 +1,13 @@
 {
-  "values": [
-    {
-      "key": "minecraft:temperate"
-    },
-    {
-      "key": "minecraft:warm"
-    },
-    {
-      "key": "minecraft:cold"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:cold"
+		},
+		{
+			"key": "minecraft:temperate"
+		},
+		{
+			"key": "minecraft:warm"
+		}
+	]
 }

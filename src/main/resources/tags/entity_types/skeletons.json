@@ -1,10 +1,10 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:stray",
-        "minecraft:skeleton",
-        "minecraft:skeleton_horse",
-        "minecraft:bogged",
-        "minecraft:wither_skeleton"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:bogged",
+		"minecraft:skeleton",
+		"minecraft:skeleton_horse",
+		"minecraft:stray",
+		"minecraft:wither_skeleton"
+	]
 }

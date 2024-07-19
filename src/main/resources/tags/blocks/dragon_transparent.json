@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:fire",
-        "minecraft:soul_fire",
-        "minecraft:light"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:fire",
+		"minecraft:light",
+		"minecraft:soul_fire"
+	]
 }

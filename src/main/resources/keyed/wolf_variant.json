@@ -1,31 +1,31 @@
 {
-  "values": [
-    {
-      "key": "minecraft:pale"
-    },
-    {
-      "key": "minecraft:spotted"
-    },
-    {
-      "key": "minecraft:snowy"
-    },
-    {
-      "key": "minecraft:black"
-    },
-    {
-      "key": "minecraft:ashen"
-    },
-    {
-      "key": "minecraft:rusty"
-    },
-    {
-      "key": "minecraft:woods"
-    },
-    {
-      "key": "minecraft:chestnut"
-    },
-    {
-      "key": "minecraft:striped"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:ashen"
+		},
+		{
+			"key": "minecraft:black"
+		},
+		{
+			"key": "minecraft:chestnut"
+		},
+		{
+			"key": "minecraft:pale"
+		},
+		{
+			"key": "minecraft:rusty"
+		},
+		{
+			"key": "minecraft:snowy"
+		},
+		{
+			"key": "minecraft:spotted"
+		},
+		{
+			"key": "minecraft:striped"
+		},
+		{
+			"key": "minecraft:woods"
+		}
+	]
 }

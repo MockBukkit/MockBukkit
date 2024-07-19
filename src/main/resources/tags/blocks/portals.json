@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:end_gateway",
-        "minecraft:end_portal",
-        "minecraft:nether_portal"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:end_gateway",
+		"minecraft:end_portal",
+		"minecraft:nether_portal"
+	]
 }

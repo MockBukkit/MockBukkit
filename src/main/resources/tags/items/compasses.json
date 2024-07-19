@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:recovery_compass",
-        "minecraft:compass"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:compass",
+		"minecraft:recovery_compass"
+	]
 }

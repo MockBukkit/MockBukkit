@@ -1,49 +1,49 @@
 {
-  "values": [
-    {
-      "key": "minecraft:none"
-    },
-    {
-      "key": "minecraft:armorer"
-    },
-    {
-      "key": "minecraft:butcher"
-    },
-    {
-      "key": "minecraft:cartographer"
-    },
-    {
-      "key": "minecraft:cleric"
-    },
-    {
-      "key": "minecraft:farmer"
-    },
-    {
-      "key": "minecraft:fisherman"
-    },
-    {
-      "key": "minecraft:fletcher"
-    },
-    {
-      "key": "minecraft:leatherworker"
-    },
-    {
-      "key": "minecraft:librarian"
-    },
-    {
-      "key": "minecraft:mason"
-    },
-    {
-      "key": "minecraft:nitwit"
-    },
-    {
-      "key": "minecraft:shepherd"
-    },
-    {
-      "key": "minecraft:toolsmith"
-    },
-    {
-      "key": "minecraft:weaponsmith"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:armorer"
+		},
+		{
+			"key": "minecraft:butcher"
+		},
+		{
+			"key": "minecraft:cartographer"
+		},
+		{
+			"key": "minecraft:cleric"
+		},
+		{
+			"key": "minecraft:farmer"
+		},
+		{
+			"key": "minecraft:fisherman"
+		},
+		{
+			"key": "minecraft:fletcher"
+		},
+		{
+			"key": "minecraft:leatherworker"
+		},
+		{
+			"key": "minecraft:librarian"
+		},
+		{
+			"key": "minecraft:mason"
+		},
+		{
+			"key": "minecraft:nitwit"
+		},
+		{
+			"key": "minecraft:none"
+		},
+		{
+			"key": "minecraft:shepherd"
+		},
+		{
+			"key": "minecraft:toolsmith"
+		},
+		{
+			"key": "minecraft:weaponsmith"
+		}
+	]
 }

@@ -1,109 +1,109 @@
 {
-  "values": [
-    {
-      "key": "minecraft:player"
-    },
-    {
-      "key": "minecraft:frame"
-    },
-    {
-      "key": "minecraft:red_marker"
-    },
-    {
-      "key": "minecraft:blue_marker"
-    },
-    {
-      "key": "minecraft:target_x"
-    },
-    {
-      "key": "minecraft:target_point"
-    },
-    {
-      "key": "minecraft:player_off_map"
-    },
-    {
-      "key": "minecraft:player_off_limits"
-    },
-    {
-      "key": "minecraft:mansion"
-    },
-    {
-      "key": "minecraft:monument"
-    },
-    {
-      "key": "minecraft:banner_white"
-    },
-    {
-      "key": "minecraft:banner_orange"
-    },
-    {
-      "key": "minecraft:banner_magenta"
-    },
-    {
-      "key": "minecraft:banner_light_blue"
-    },
-    {
-      "key": "minecraft:banner_yellow"
-    },
-    {
-      "key": "minecraft:banner_lime"
-    },
-    {
-      "key": "minecraft:banner_pink"
-    },
-    {
-      "key": "minecraft:banner_gray"
-    },
-    {
-      "key": "minecraft:banner_light_gray"
-    },
-    {
-      "key": "minecraft:banner_cyan"
-    },
-    {
-      "key": "minecraft:banner_purple"
-    },
-    {
-      "key": "minecraft:banner_blue"
-    },
-    {
-      "key": "minecraft:banner_brown"
-    },
-    {
-      "key": "minecraft:banner_green"
-    },
-    {
-      "key": "minecraft:banner_red"
-    },
-    {
-      "key": "minecraft:banner_black"
-    },
-    {
-      "key": "minecraft:red_x"
-    },
-    {
-      "key": "minecraft:village_desert"
-    },
-    {
-      "key": "minecraft:village_plains"
-    },
-    {
-      "key": "minecraft:village_savanna"
-    },
-    {
-      "key": "minecraft:village_snowy"
-    },
-    {
-      "key": "minecraft:village_taiga"
-    },
-    {
-      "key": "minecraft:jungle_temple"
-    },
-    {
-      "key": "minecraft:swamp_hut"
-    },
-    {
-      "key": "minecraft:trial_chambers"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:banner_black"
+		},
+		{
+			"key": "minecraft:banner_blue"
+		},
+		{
+			"key": "minecraft:banner_brown"
+		},
+		{
+			"key": "minecraft:banner_cyan"
+		},
+		{
+			"key": "minecraft:banner_gray"
+		},
+		{
+			"key": "minecraft:banner_green"
+		},
+		{
+			"key": "minecraft:banner_light_blue"
+		},
+		{
+			"key": "minecraft:banner_light_gray"
+		},
+		{
+			"key": "minecraft:banner_lime"
+		},
+		{
+			"key": "minecraft:banner_magenta"
+		},
+		{
+			"key": "minecraft:banner_orange"
+		},
+		{
+			"key": "minecraft:banner_pink"
+		},
+		{
+			"key": "minecraft:banner_purple"
+		},
+		{
+			"key": "minecraft:banner_red"
+		},
+		{
+			"key": "minecraft:banner_white"
+		},
+		{
+			"key": "minecraft:banner_yellow"
+		},
+		{
+			"key": "minecraft:blue_marker"
+		},
+		{
+			"key": "minecraft:frame"
+		},
+		{
+			"key": "minecraft:jungle_temple"
+		},
+		{
+			"key": "minecraft:mansion"
+		},
+		{
+			"key": "minecraft:monument"
+		},
+		{
+			"key": "minecraft:player"
+		},
+		{
+			"key": "minecraft:player_off_limits"
+		},
+		{
+			"key": "minecraft:player_off_map"
+		},
+		{
+			"key": "minecraft:red_marker"
+		},
+		{
+			"key": "minecraft:red_x"
+		},
+		{
+			"key": "minecraft:swamp_hut"
+		},
+		{
+			"key": "minecraft:target_point"
+		},
+		{
+			"key": "minecraft:target_x"
+		},
+		{
+			"key": "minecraft:trial_chambers"
+		},
+		{
+			"key": "minecraft:village_desert"
+		},
+		{
+			"key": "minecraft:village_plains"
+		},
+		{
+			"key": "minecraft:village_savanna"
+		},
+		{
+			"key": "minecraft:village_snowy"
+		},
+		{
+			"key": "minecraft:village_taiga"
+		}
+	]
 }

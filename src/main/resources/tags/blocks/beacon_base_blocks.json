@@ -1,10 +1,10 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:diamond_block",
-        "minecraft:iron_block",
-        "minecraft:netherite_block",
-        "minecraft:emerald_block",
-        "minecraft:gold_block"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:diamond_block",
+		"minecraft:emerald_block",
+		"minecraft:gold_block",
+		"minecraft:iron_block",
+		"minecraft:netherite_block"
+	]
 }

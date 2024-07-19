@@ -1,11 +1,11 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:diamond_sword",
-        "minecraft:netherite_sword",
-        "minecraft:iron_sword",
-        "minecraft:golden_sword",
-        "minecraft:stone_sword",
-        "minecraft:wooden_sword"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:diamond_sword",
+		"minecraft:golden_sword",
+		"minecraft:iron_sword",
+		"minecraft:netherite_sword",
+		"minecraft:stone_sword",
+		"minecraft:wooden_sword"
+	]
 }
