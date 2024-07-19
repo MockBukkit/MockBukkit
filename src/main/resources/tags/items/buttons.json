@@ -1,18 +1,18 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:spruce_button",
-        "minecraft:dark_oak_button",
-        "minecraft:mangrove_button",
-        "minecraft:bamboo_button",
-        "minecraft:stone_button",
-        "minecraft:birch_button",
-        "minecraft:oak_button",
-        "minecraft:cherry_button",
-        "minecraft:crimson_button",
-        "minecraft:acacia_button",
-        "minecraft:warped_button",
-        "minecraft:polished_blackstone_button",
-        "minecraft:jungle_button"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:acacia_button",
+		"minecraft:bamboo_button",
+		"minecraft:birch_button",
+		"minecraft:cherry_button",
+		"minecraft:crimson_button",
+		"minecraft:dark_oak_button",
+		"minecraft:jungle_button",
+		"minecraft:mangrove_button",
+		"minecraft:oak_button",
+		"minecraft:polished_blackstone_button",
+		"minecraft:spruce_button",
+		"minecraft:stone_button",
+		"minecraft:warped_button"
+	]
 }

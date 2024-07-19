@@ -1,154 +1,154 @@
 {
-  "values": [
-    {
-      "key": "minecraft:kebab"
-    },
-    {
-      "key": "minecraft:aztec"
-    },
-    {
-      "key": "minecraft:alban"
-    },
-    {
-      "key": "minecraft:aztec2"
-    },
-    {
-      "key": "minecraft:bomb"
-    },
-    {
-      "key": "minecraft:plant"
-    },
-    {
-      "key": "minecraft:wasteland"
-    },
-    {
-      "key": "minecraft:pool"
-    },
-    {
-      "key": "minecraft:courbet"
-    },
-    {
-      "key": "minecraft:sea"
-    },
-    {
-      "key": "minecraft:sunset"
-    },
-    {
-      "key": "minecraft:creebet"
-    },
-    {
-      "key": "minecraft:wanderer"
-    },
-    {
-      "key": "minecraft:graham"
-    },
-    {
-      "key": "minecraft:match"
-    },
-    {
-      "key": "minecraft:bust"
-    },
-    {
-      "key": "minecraft:stage"
-    },
-    {
-      "key": "minecraft:void"
-    },
-    {
-      "key": "minecraft:skull_and_roses"
-    },
-    {
-      "key": "minecraft:wither"
-    },
-    {
-      "key": "minecraft:fighters"
-    },
-    {
-      "key": "minecraft:pointer"
-    },
-    {
-      "key": "minecraft:pigscene"
-    },
-    {
-      "key": "minecraft:burning_skull"
-    },
-    {
-      "key": "minecraft:skeleton"
-    },
-    {
-      "key": "minecraft:donkey_kong"
-    },
-    {
-      "key": "minecraft:earth"
-    },
-    {
-      "key": "minecraft:wind"
-    },
-    {
-      "key": "minecraft:water"
-    },
-    {
-      "key": "minecraft:fire"
-    },
-    {
-      "key": "minecraft:baroque"
-    },
-    {
-      "key": "minecraft:humble"
-    },
-    {
-      "key": "minecraft:meditative"
-    },
-    {
-      "key": "minecraft:prairie_ride"
-    },
-    {
-      "key": "minecraft:unpacked"
-    },
-    {
-      "key": "minecraft:backyard"
-    },
-    {
-      "key": "minecraft:bouquet"
-    },
-    {
-      "key": "minecraft:cavebird"
-    },
-    {
-      "key": "minecraft:changing"
-    },
-    {
-      "key": "minecraft:cotan"
-    },
-    {
-      "key": "minecraft:endboss"
-    },
-    {
-      "key": "minecraft:fern"
-    },
-    {
-      "key": "minecraft:finding"
-    },
-    {
-      "key": "minecraft:lowmist"
-    },
-    {
-      "key": "minecraft:orb"
-    },
-    {
-      "key": "minecraft:owlemons"
-    },
-    {
-      "key": "minecraft:passage"
-    },
-    {
-      "key": "minecraft:pond"
-    },
-    {
-      "key": "minecraft:sunflowers"
-    },
-    {
-      "key": "minecraft:tides"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:alban"
+		},
+		{
+			"key": "minecraft:aztec"
+		},
+		{
+			"key": "minecraft:aztec2"
+		},
+		{
+			"key": "minecraft:backyard"
+		},
+		{
+			"key": "minecraft:baroque"
+		},
+		{
+			"key": "minecraft:bomb"
+		},
+		{
+			"key": "minecraft:bouquet"
+		},
+		{
+			"key": "minecraft:burning_skull"
+		},
+		{
+			"key": "minecraft:bust"
+		},
+		{
+			"key": "minecraft:cavebird"
+		},
+		{
+			"key": "minecraft:changing"
+		},
+		{
+			"key": "minecraft:cotan"
+		},
+		{
+			"key": "minecraft:courbet"
+		},
+		{
+			"key": "minecraft:creebet"
+		},
+		{
+			"key": "minecraft:donkey_kong"
+		},
+		{
+			"key": "minecraft:earth"
+		},
+		{
+			"key": "minecraft:endboss"
+		},
+		{
+			"key": "minecraft:fern"
+		},
+		{
+			"key": "minecraft:fighters"
+		},
+		{
+			"key": "minecraft:finding"
+		},
+		{
+			"key": "minecraft:fire"
+		},
+		{
+			"key": "minecraft:graham"
+		},
+		{
+			"key": "minecraft:humble"
+		},
+		{
+			"key": "minecraft:kebab"
+		},
+		{
+			"key": "minecraft:lowmist"
+		},
+		{
+			"key": "minecraft:match"
+		},
+		{
+			"key": "minecraft:meditative"
+		},
+		{
+			"key": "minecraft:orb"
+		},
+		{
+			"key": "minecraft:owlemons"
+		},
+		{
+			"key": "minecraft:passage"
+		},
+		{
+			"key": "minecraft:pigscene"
+		},
+		{
+			"key": "minecraft:plant"
+		},
+		{
+			"key": "minecraft:pointer"
+		},
+		{
+			"key": "minecraft:pond"
+		},
+		{
+			"key": "minecraft:pool"
+		},
+		{
+			"key": "minecraft:prairie_ride"
+		},
+		{
+			"key": "minecraft:sea"
+		},
+		{
+			"key": "minecraft:skeleton"
+		},
+		{
+			"key": "minecraft:skull_and_roses"
+		},
+		{
+			"key": "minecraft:stage"
+		},
+		{
+			"key": "minecraft:sunflowers"
+		},
+		{
+			"key": "minecraft:sunset"
+		},
+		{
+			"key": "minecraft:tides"
+		},
+		{
+			"key": "minecraft:unpacked"
+		},
+		{
+			"key": "minecraft:void"
+		},
+		{
+			"key": "minecraft:wanderer"
+		},
+		{
+			"key": "minecraft:wasteland"
+		},
+		{
+			"key": "minecraft:water"
+		},
+		{
+			"key": "minecraft:wind"
+		},
+		{
+			"key": "minecraft:wither"
+		}
+	]
 }

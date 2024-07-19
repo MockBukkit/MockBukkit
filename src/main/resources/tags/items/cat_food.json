@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:salmon",
-        "minecraft:cod"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:cod",
+		"minecraft:salmon"
+	]
 }

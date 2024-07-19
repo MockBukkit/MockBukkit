@@ -1,9 +1,9 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:respawn_anchor",
-        "minecraft:nether_portal",
-        "minecraft:potted_warped_fungus",
-        "minecraft:warped_fungus"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:nether_portal",
+		"minecraft:potted_warped_fungus",
+		"minecraft:respawn_anchor",
+		"minecraft:warped_fungus"
+	]
 }

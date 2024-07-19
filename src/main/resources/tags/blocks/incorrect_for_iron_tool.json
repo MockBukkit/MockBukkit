@@ -1,10 +1,10 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:ancient_debris",
-        "minecraft:netherite_block",
-        "minecraft:respawn_anchor",
-        "minecraft:obsidian",
-        "minecraft:crying_obsidian"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:ancient_debris",
+		"minecraft:crying_obsidian",
+		"minecraft:netherite_block",
+		"minecraft:obsidian",
+		"minecraft:respawn_anchor"
+	]
 }

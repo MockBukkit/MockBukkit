@@ -1,37 +1,37 @@
 {
-  "values": [
-    {
-      "key": "minecraft:tabby"
-    },
-    {
-      "key": "minecraft:black"
-    },
-    {
-      "key": "minecraft:red"
-    },
-    {
-      "key": "minecraft:siamese"
-    },
-    {
-      "key": "minecraft:british_shorthair"
-    },
-    {
-      "key": "minecraft:calico"
-    },
-    {
-      "key": "minecraft:persian"
-    },
-    {
-      "key": "minecraft:ragdoll"
-    },
-    {
-      "key": "minecraft:white"
-    },
-    {
-      "key": "minecraft:jellie"
-    },
-    {
-      "key": "minecraft:all_black"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:all_black"
+		},
+		{
+			"key": "minecraft:black"
+		},
+		{
+			"key": "minecraft:british_shorthair"
+		},
+		{
+			"key": "minecraft:calico"
+		},
+		{
+			"key": "minecraft:jellie"
+		},
+		{
+			"key": "minecraft:persian"
+		},
+		{
+			"key": "minecraft:ragdoll"
+		},
+		{
+			"key": "minecraft:red"
+		},
+		{
+			"key": "minecraft:siamese"
+		},
+		{
+			"key": "minecraft:tabby"
+		},
+		{
+			"key": "minecraft:white"
+		}
+	]
 }

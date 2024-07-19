@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:writable_book",
-        "minecraft:written_book"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:writable_book",
+		"minecraft:written_book"
+	]
 }

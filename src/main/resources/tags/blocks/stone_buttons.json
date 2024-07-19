@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:stone_button",
-        "minecraft:polished_blackstone_button"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:polished_blackstone_button",
+		"minecraft:stone_button"
+	]
 }

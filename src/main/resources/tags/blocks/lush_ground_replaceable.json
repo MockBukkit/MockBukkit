@@ -1,25 +1,25 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:coarse_dirt",
-        "minecraft:muddy_mangrove_roots",
-        "minecraft:sand",
-        "minecraft:granite",
-        "minecraft:rooted_dirt",
-        "minecraft:moss_block",
-        "minecraft:cave_vines",
-        "minecraft:grass_block",
-        "minecraft:podzol",
-        "minecraft:deepslate",
-        "minecraft:mycelium",
-        "minecraft:mud",
-        "minecraft:diorite",
-        "minecraft:tuff",
-        "minecraft:cave_vines_plant",
-        "minecraft:clay",
-        "minecraft:stone",
-        "minecraft:andesite",
-        "minecraft:dirt",
-        "minecraft:gravel"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:andesite",
+		"minecraft:cave_vines",
+		"minecraft:cave_vines_plant",
+		"minecraft:clay",
+		"minecraft:coarse_dirt",
+		"minecraft:deepslate",
+		"minecraft:diorite",
+		"minecraft:dirt",
+		"minecraft:granite",
+		"minecraft:grass_block",
+		"minecraft:gravel",
+		"minecraft:moss_block",
+		"minecraft:mud",
+		"minecraft:muddy_mangrove_roots",
+		"minecraft:mycelium",
+		"minecraft:podzol",
+		"minecraft:rooted_dirt",
+		"minecraft:sand",
+		"minecraft:stone",
+		"minecraft:tuff"
+	]
 }

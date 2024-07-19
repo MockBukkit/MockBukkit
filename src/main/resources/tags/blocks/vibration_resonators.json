@@ -1,6 +1,6 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:amethyst_block"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:amethyst_block"
+	]
 }

@@ -1,97 +1,97 @@
 {
-  "values": [
-    {
-      "key": "minecraft:generic.max_health"
-    },
-    {
-      "key": "minecraft:generic.follow_range"
-    },
-    {
-      "key": "minecraft:generic.knockback_resistance"
-    },
-    {
-      "key": "minecraft:generic.movement_speed"
-    },
-    {
-      "key": "minecraft:generic.flying_speed"
-    },
-    {
-      "key": "minecraft:generic.attack_damage"
-    },
-    {
-      "key": "minecraft:generic.attack_knockback"
-    },
-    {
-      "key": "minecraft:generic.attack_speed"
-    },
-    {
-      "key": "minecraft:generic.armor"
-    },
-    {
-      "key": "minecraft:generic.armor_toughness"
-    },
-    {
-      "key": "minecraft:generic.fall_damage_multiplier"
-    },
-    {
-      "key": "minecraft:generic.luck"
-    },
-    {
-      "key": "minecraft:generic.max_absorption"
-    },
-    {
-      "key": "minecraft:generic.safe_fall_distance"
-    },
-    {
-      "key": "minecraft:generic.scale"
-    },
-    {
-      "key": "minecraft:generic.step_height"
-    },
-    {
-      "key": "minecraft:generic.gravity"
-    },
-    {
-      "key": "minecraft:generic.jump_strength"
-    },
-    {
-      "key": "minecraft:generic.burning_time"
-    },
-    {
-      "key": "minecraft:generic.explosion_knockback_resistance"
-    },
-    {
-      "key": "minecraft:generic.movement_efficiency"
-    },
-    {
-      "key": "minecraft:generic.oxygen_bonus"
-    },
-    {
-      "key": "minecraft:generic.water_movement_efficiency"
-    },
-    {
-      "key": "minecraft:player.block_interaction_range"
-    },
-    {
-      "key": "minecraft:player.entity_interaction_range"
-    },
-    {
-      "key": "minecraft:player.block_break_speed"
-    },
-    {
-      "key": "minecraft:player.mining_efficiency"
-    },
-    {
-      "key": "minecraft:player.sneaking_speed"
-    },
-    {
-      "key": "minecraft:player.submerged_mining_speed"
-    },
-    {
-      "key": "minecraft:player.sweeping_damage_ratio"
-    },
-    {
-      "key": "minecraft:zombie.spawn_reinforcements"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:generic.armor"
+		},
+		{
+			"key": "minecraft:generic.armor_toughness"
+		},
+		{
+			"key": "minecraft:generic.attack_damage"
+		},
+		{
+			"key": "minecraft:generic.attack_knockback"
+		},
+		{
+			"key": "minecraft:generic.attack_speed"
+		},
+		{
+			"key": "minecraft:generic.burning_time"
+		},
+		{
+			"key": "minecraft:generic.explosion_knockback_resistance"
+		},
+		{
+			"key": "minecraft:generic.fall_damage_multiplier"
+		},
+		{
+			"key": "minecraft:generic.flying_speed"
+		},
+		{
+			"key": "minecraft:generic.follow_range"
+		},
+		{
+			"key": "minecraft:generic.gravity"
+		},
+		{
+			"key": "minecraft:generic.jump_strength"
+		},
+		{
+			"key": "minecraft:generic.knockback_resistance"
+		},
+		{
+			"key": "minecraft:generic.luck"
+		},
+		{
+			"key": "minecraft:generic.max_absorption"
+		},
+		{
+			"key": "minecraft:generic.max_health"
+		},
+		{
+			"key": "minecraft:generic.movement_efficiency"
+		},
+		{
+			"key": "minecraft:generic.movement_speed"
+		},
+		{
+			"key": "minecraft:generic.oxygen_bonus"
+		},
+		{
+			"key": "minecraft:generic.safe_fall_distance"
+		},
+		{
+			"key": "minecraft:generic.scale"
+		},
+		{
+			"key": "minecraft:generic.step_height"
+		},
+		{
+			"key": "minecraft:generic.water_movement_efficiency"
+		},
+		{
+			"key": "minecraft:player.block_break_speed"
+		},
+		{
+			"key": "minecraft:player.block_interaction_range"
+		},
+		{
+			"key": "minecraft:player.entity_interaction_range"
+		},
+		{
+			"key": "minecraft:player.mining_efficiency"
+		},
+		{
+			"key": "minecraft:player.sneaking_speed"
+		},
+		{
+			"key": "minecraft:player.submerged_mining_speed"
+		},
+		{
+			"key": "minecraft:player.sweeping_damage_ratio"
+		},
+		{
+			"key": "minecraft:zombie.spawn_reinforcements"
+		}
+	]
 }

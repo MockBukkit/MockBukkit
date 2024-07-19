@@ -1,6 +1,6 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:trident"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:trident"
+	]
 }

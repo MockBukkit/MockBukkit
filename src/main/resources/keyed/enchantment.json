@@ -1,3427 +1,3427 @@
 {
-  "values": [
-    {
-      "key": "minecraft:protection",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "ARROW_INFINITE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.protection"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.protection"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.protection"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.protection"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        },
-        {
-          "level": 2,
-          "cost": 12
-        },
-        {
-          "level": 3,
-          "cost": 23
-        },
-        {
-          "level": 4,
-          "cost": 34
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 12
-        },
-        {
-          "level": 2,
-          "cost": 23
-        },
-        {
-          "level": 3,
-          "cost": 34
-        },
-        {
-          "level": 4,
-          "cost": 45
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:protection",
-        "minecraft:fire_protection",
-        "minecraft:projectile_protection",
-        "minecraft:blast_protection"
-      ]
-    },
-    {
-      "key": "minecraft:fire_protection",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "SOUL_SPEED",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.fire_protection"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.fire_protection"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.fire_protection"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.fire_protection"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 18
-        },
-        {
-          "level": 3,
-          "cost": 26
-        },
-        {
-          "level": 4,
-          "cost": 34
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 18
-        },
-        {
-          "level": 2,
-          "cost": 26
-        },
-        {
-          "level": 3,
-          "cost": 34
-        },
-        {
-          "level": 4,
-          "cost": 42
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:protection",
-        "minecraft:fire_protection",
-        "minecraft:projectile_protection",
-        "minecraft:blast_protection"
-      ]
-    },
-    {
-      "key": "minecraft:feather_falling",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "FROST_WALKER",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.feather_falling"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.feather_falling"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.feather_falling"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.feather_falling"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 11
-        },
-        {
-          "level": 3,
-          "cost": 17
-        },
-        {
-          "level": 4,
-          "cost": 23
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 11
-        },
-        {
-          "level": 2,
-          "cost": 17
-        },
-        {
-          "level": 3,
-          "cost": 23
-        },
-        {
-          "level": 4,
-          "cost": 29
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:feather_falling"
-      ]
-    },
-    {
-      "key": "minecraft:blast_protection",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "PROTECTION_EXPLOSIONS",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.blast_protection"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.blast_protection"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.blast_protection"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.blast_protection"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 13
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 29
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 13
-        },
-        {
-          "level": 2,
-          "cost": 21
-        },
-        {
-          "level": 3,
-          "cost": 29
-        },
-        {
-          "level": 4,
-          "cost": 37
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:protection",
-        "minecraft:fire_protection",
-        "minecraft:projectile_protection",
-        "minecraft:blast_protection"
-      ]
-    },
-    {
-      "key": "minecraft:projectile_protection",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "ARROW_FIRE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.projectile_protection"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.projectile_protection"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.projectile_protection"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.projectile_protection"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 3
-        },
-        {
-          "level": 2,
-          "cost": 9
-        },
-        {
-          "level": 3,
-          "cost": 15
-        },
-        {
-          "level": 4,
-          "cost": 21
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 9
-        },
-        {
-          "level": 2,
-          "cost": 15
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 27
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:protection",
-        "minecraft:fire_protection",
-        "minecraft:projectile_protection",
-        "minecraft:blast_protection"
-      ]
-    },
-    {
-      "key": "minecraft:respiration",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "LOYALTY",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.respiration"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.respiration"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.respiration"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 20
-        },
-        {
-          "level": 3,
-          "cost": 30
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 40
-        },
-        {
-          "level": 2,
-          "cost": 50
-        },
-        {
-          "level": 3,
-          "cost": 60
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:respiration"
-      ]
-    },
-    {
-      "key": "minecraft:aqua_affinity",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "PROTECTION_ENVIRONMENTAL",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.aqua_affinity"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 41
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:aqua_affinity"
-      ]
-    },
-    {
-      "key": "minecraft:thorns",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "BREACH",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.thorns"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.thorns"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.thorns"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 30
-        },
-        {
-          "level": 3,
-          "cost": 50
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 60
-        },
-        {
-          "level": 2,
-          "cost": 80
-        },
-        {
-          "level": 3,
-          "cost": 100
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:thorns"
-      ]
-    },
-    {
-      "key": "minecraft:depth_strider",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "THORNS",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.depth_strider"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.depth_strider"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.depth_strider"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 20
-        },
-        {
-          "level": 3,
-          "cost": 30
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 35
-        },
-        {
-          "level": 3,
-          "cost": 45
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:depth_strider",
-        "minecraft:frost_walker"
-      ]
-    },
-    {
-      "key": "minecraft:frost_walker",
-      "treasure": true,
-      "cursed": false,
-      "maxLevel": 2,
-      "startLevel": 1,
-      "name": "DAMAGE_UNDEAD",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.frost_walker"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.frost_walker"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 20
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 35
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:depth_strider",
-        "minecraft:frost_walker"
-      ]
-    },
-    {
-      "key": "minecraft:binding_curse",
-      "treasure": true,
-      "cursed": true,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "PROTECTION_FALL",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "red",
-            "translate": "enchantment.minecraft.binding_curse"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:binding_curse"
-      ]
-    },
-    {
-      "key": "minecraft:sharpness",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "RIPTIDE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.sharpness"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.sharpness"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.sharpness"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.sharpness"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.sharpness"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        },
-        {
-          "level": 2,
-          "cost": 12
-        },
-        {
-          "level": 3,
-          "cost": 23
-        },
-        {
-          "level": 4,
-          "cost": 34
-        },
-        {
-          "level": 5,
-          "cost": 45
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 21
-        },
-        {
-          "level": 2,
-          "cost": 32
-        },
-        {
-          "level": 3,
-          "cost": 43
-        },
-        {
-          "level": 4,
-          "cost": 54
-        },
-        {
-          "level": 5,
-          "cost": 65
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:density",
-        "minecraft:breach",
-        "minecraft:impaling",
-        "minecraft:bane_of_arthropods",
-        "minecraft:smite",
-        "minecraft:sharpness"
-      ]
-    },
-    {
-      "key": "minecraft:smite",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "MULTISHOT",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.smite"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.smite"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.smite"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.smite"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.smite"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 13
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 29
-        },
-        {
-          "level": 5,
-          "cost": 37
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 33
-        },
-        {
-          "level": 3,
-          "cost": 41
-        },
-        {
-          "level": 4,
-          "cost": 49
-        },
-        {
-          "level": 5,
-          "cost": 57
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:density",
-        "minecraft:breach",
-        "minecraft:impaling",
-        "minecraft:bane_of_arthropods",
-        "minecraft:smite",
-        "minecraft:sharpness"
-      ]
-    },
-    {
-      "key": "minecraft:bane_of_arthropods",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "PROTECTION_FIRE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.bane_of_arthropods"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.bane_of_arthropods"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.bane_of_arthropods"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.bane_of_arthropods"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.bane_of_arthropods"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 13
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 29
-        },
-        {
-          "level": 5,
-          "cost": 37
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 33
-        },
-        {
-          "level": 3,
-          "cost": 41
-        },
-        {
-          "level": 4,
-          "cost": 49
-        },
-        {
-          "level": 5,
-          "cost": 57
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:density",
-        "minecraft:breach",
-        "minecraft:impaling",
-        "minecraft:bane_of_arthropods",
-        "minecraft:smite",
-        "minecraft:sharpness"
-      ]
-    },
-    {
-      "key": "minecraft:knockback",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 2,
-      "startLevel": 1,
-      "name": "FIRE_ASPECT",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.knockback"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.knockback"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 25
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 55
-        },
-        {
-          "level": 2,
-          "cost": 75
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:knockback"
-      ]
-    },
-    {
-      "key": "minecraft:fire_aspect",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 2,
-      "startLevel": 1,
-      "name": "BINDING_CURSE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.fire_aspect"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.fire_aspect"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 30
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 60
-        },
-        {
-          "level": 2,
-          "cost": 80
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:fire_aspect"
-      ]
-    },
-    {
-      "key": "minecraft:looting",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "LOOT_BONUS_MOBS",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.looting"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.looting"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.looting"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 33
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        },
-        {
-          "level": 2,
-          "cost": 74
-        },
-        {
-          "level": 3,
-          "cost": 83
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:looting"
-      ]
-    },
-    {
-      "key": "minecraft:sweeping_edge",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "PIERCING",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.sweeping_edge"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.sweeping_edge"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.sweeping_edge"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 14
-        },
-        {
-          "level": 3,
-          "cost": 23
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 20
-        },
-        {
-          "level": 2,
-          "cost": 29
-        },
-        {
-          "level": 3,
-          "cost": 38
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:sweeping_edge"
-      ]
-    },
-    {
-      "key": "minecraft:efficiency",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "DEPTH_STRIDER",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.efficiency"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.efficiency"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.efficiency"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.efficiency"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.efficiency"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        },
-        {
-          "level": 2,
-          "cost": 11
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 31
-        },
-        {
-          "level": 5,
-          "cost": 41
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 51
-        },
-        {
-          "level": 2,
-          "cost": 61
-        },
-        {
-          "level": 3,
-          "cost": 71
-        },
-        {
-          "level": 4,
-          "cost": 81
-        },
-        {
-          "level": 5,
-          "cost": 91
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:efficiency"
-      ]
-    },
-    {
-      "key": "minecraft:silk_touch",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "CHANNELING",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.silk_touch"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:silk_touch",
-        "minecraft:fortune"
-      ]
-    },
-    {
-      "key": "minecraft:unbreaking",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "WIND_BURST",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.unbreaking"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.unbreaking"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.unbreaking"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 13
-        },
-        {
-          "level": 3,
-          "cost": 21
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 55
-        },
-        {
-          "level": 2,
-          "cost": 63
-        },
-        {
-          "level": 3,
-          "cost": 71
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:unbreaking"
-      ]
-    },
-    {
-      "key": "minecraft:fortune",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "DAMAGE_ALL",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.fortune"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.fortune"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.fortune"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 33
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        },
-        {
-          "level": 2,
-          "cost": 74
-        },
-        {
-          "level": 3,
-          "cost": 83
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:silk_touch",
-        "minecraft:fortune"
-      ]
-    },
-    {
-      "key": "minecraft:power",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "ARROW_KNOCKBACK",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.power"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.power"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.power"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.power"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.power"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        },
-        {
-          "level": 2,
-          "cost": 11
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 31
-        },
-        {
-          "level": 5,
-          "cost": 41
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 16
-        },
-        {
-          "level": 2,
-          "cost": 26
-        },
-        {
-          "level": 3,
-          "cost": 36
-        },
-        {
-          "level": 4,
-          "cost": 46
-        },
-        {
-          "level": 5,
-          "cost": 56
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:power"
-      ]
-    },
-    {
-      "key": "minecraft:punch",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 2,
-      "startLevel": 1,
-      "name": "LUCK",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.punch"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.punch"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 12
-        },
-        {
-          "level": 2,
-          "cost": 32
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 37
-        },
-        {
-          "level": 2,
-          "cost": 57
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:punch"
-      ]
-    },
-    {
-      "key": "minecraft:flame",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "SWIFT_SNEAK",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.flame"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 20
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:flame"
-      ]
-    },
-    {
-      "key": "minecraft:infinity",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "KNOCKBACK",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.infinity"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 20
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:infinity",
-        "minecraft:mending"
-      ]
-    },
-    {
-      "key": "minecraft:luck_of_the_sea",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "DIG_SPEED",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.luck_of_the_sea"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.luck_of_the_sea"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.luck_of_the_sea"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 33
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        },
-        {
-          "level": 2,
-          "cost": 74
-        },
-        {
-          "level": 3,
-          "cost": 83
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:luck_of_the_sea"
-      ]
-    },
-    {
-      "key": "minecraft:lure",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "SILK_TOUCH",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.lure"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.lure"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.lure"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 33
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        },
-        {
-          "level": 2,
-          "cost": 74
-        },
-        {
-          "level": 3,
-          "cost": 83
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:lure"
-      ]
-    },
-    {
-      "key": "minecraft:loyalty",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "SWEEPING_EDGE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.loyalty"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.loyalty"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.loyalty"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 12
-        },
-        {
-          "level": 2,
-          "cost": 19
-        },
-        {
-          "level": 3,
-          "cost": 26
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        },
-        {
-          "level": 2,
-          "cost": 50
-        },
-        {
-          "level": 3,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:loyalty",
-        "minecraft:riptide"
-      ]
-    },
-    {
-      "key": "minecraft:impaling",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "DAMAGE_ARTHROPODS",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.impaling"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.impaling"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.impaling"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.impaling"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.impaling"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        },
-        {
-          "level": 2,
-          "cost": 9
-        },
-        {
-          "level": 3,
-          "cost": 17
-        },
-        {
-          "level": 4,
-          "cost": 25
-        },
-        {
-          "level": 5,
-          "cost": 33
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 21
-        },
-        {
-          "level": 2,
-          "cost": 29
-        },
-        {
-          "level": 3,
-          "cost": 37
-        },
-        {
-          "level": 4,
-          "cost": 45
-        },
-        {
-          "level": 5,
-          "cost": 53
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:density",
-        "minecraft:breach",
-        "minecraft:impaling",
-        "minecraft:bane_of_arthropods",
-        "minecraft:smite",
-        "minecraft:sharpness"
-      ]
-    },
-    {
-      "key": "minecraft:riptide",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "IMPALING",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.riptide"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.riptide"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.riptide"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 17
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 31
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        },
-        {
-          "level": 2,
-          "cost": 50
-        },
-        {
-          "level": 3,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:loyalty",
-        "minecraft:channeling",
-        "minecraft:riptide"
-      ]
-    },
-    {
-      "key": "minecraft:channeling",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "OXYGEN",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.channeling"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:channeling",
-        "minecraft:riptide"
-      ]
-    },
-    {
-      "key": "minecraft:multishot",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "LOOT_BONUS_BLOCKS",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.multishot"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 20
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:multishot",
-        "minecraft:piercing"
-      ]
-    },
-    {
-      "key": "minecraft:quick_charge",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "LURE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.quick_charge"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.quick_charge"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.quick_charge"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 12
-        },
-        {
-          "level": 2,
-          "cost": 32
-        },
-        {
-          "level": 3,
-          "cost": 52
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        },
-        {
-          "level": 2,
-          "cost": 50
-        },
-        {
-          "level": 3,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:quick_charge"
-      ]
-    },
-    {
-      "key": "minecraft:piercing",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "ARROW_DAMAGE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.piercing"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.piercing"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.piercing"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.piercing"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 1
-        },
-        {
-          "level": 2,
-          "cost": 11
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 31
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        },
-        {
-          "level": 2,
-          "cost": 50
-        },
-        {
-          "level": 3,
-          "cost": 50
-        },
-        {
-          "level": 4,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:multishot",
-        "minecraft:piercing"
-      ]
-    },
-    {
-      "key": "minecraft:density",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 5,
-      "startLevel": 1,
-      "name": "WATER_WORKER",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.density"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.density"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.density"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.density"
-          }
-        },
-        {
-          "level": 5,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.5"
-              }
-            ],
-            "translate": "enchantment.minecraft.density"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 5
-        },
-        {
-          "level": 2,
-          "cost": 13
-        },
-        {
-          "level": 3,
-          "cost": 21
-        },
-        {
-          "level": 4,
-          "cost": 29
-        },
-        {
-          "level": 5,
-          "cost": 37
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 33
-        },
-        {
-          "level": 3,
-          "cost": 41
-        },
-        {
-          "level": 4,
-          "cost": 49
-        },
-        {
-          "level": 5,
-          "cost": 57
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:density",
-        "minecraft:breach",
-        "minecraft:impaling",
-        "minecraft:bane_of_arthropods",
-        "minecraft:smite",
-        "minecraft:sharpness"
-      ]
-    },
-    {
-      "key": "minecraft:breach",
-      "treasure": false,
-      "cursed": false,
-      "maxLevel": 4,
-      "startLevel": 1,
-      "name": "PROTECTION_PROJECTILE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.breach"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.breach"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.breach"
-          }
-        },
-        {
-          "level": 4,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.4"
-              }
-            ],
-            "translate": "enchantment.minecraft.breach"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 33
-        },
-        {
-          "level": 4,
-          "cost": 42
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        },
-        {
-          "level": 2,
-          "cost": 74
-        },
-        {
-          "level": 3,
-          "cost": 83
-        },
-        {
-          "level": 4,
-          "cost": 92
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:density",
-        "minecraft:breach",
-        "minecraft:impaling",
-        "minecraft:bane_of_arthropods",
-        "minecraft:smite",
-        "minecraft:sharpness"
-      ]
-    },
-    {
-      "key": "minecraft:wind_burst",
-      "treasure": true,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "VANISHING_CURSE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.wind_burst"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.wind_burst"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.wind_burst"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 15
-        },
-        {
-          "level": 2,
-          "cost": 24
-        },
-        {
-          "level": 3,
-          "cost": 33
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 65
-        },
-        {
-          "level": 2,
-          "cost": 74
-        },
-        {
-          "level": 3,
-          "cost": 83
-        }
-      ],
-      "tradeable": false,
-      "discoverable": false,
-      "conflicts": [
-        "minecraft:wind_burst"
-      ]
-    },
-    {
-      "key": "minecraft:mending",
-      "treasure": true,
-      "cursed": false,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "DURABILITY",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "translate": "enchantment.minecraft.mending"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 75
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:infinity",
-        "minecraft:mending"
-      ]
-    },
-    {
-      "key": "minecraft:vanishing_curse",
-      "treasure": true,
-      "cursed": true,
-      "maxLevel": 1,
-      "startLevel": 1,
-      "name": "MENDING",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "red",
-            "translate": "enchantment.minecraft.vanishing_curse"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 50
-        }
-      ],
-      "tradeable": true,
-      "discoverable": true,
-      "conflicts": [
-        "minecraft:vanishing_curse"
-      ]
-    },
-    {
-      "key": "minecraft:soul_speed",
-      "treasure": true,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "QUICK_CHARGE",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.soul_speed"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.soul_speed"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.soul_speed"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 10
-        },
-        {
-          "level": 2,
-          "cost": 20
-        },
-        {
-          "level": 3,
-          "cost": 30
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 35
-        },
-        {
-          "level": 3,
-          "cost": 45
-        }
-      ],
-      "tradeable": false,
-      "discoverable": false,
-      "conflicts": [
-        "minecraft:soul_speed"
-      ]
-    },
-    {
-      "key": "minecraft:swift_sneak",
-      "treasure": true,
-      "cursed": false,
-      "maxLevel": 3,
-      "startLevel": 1,
-      "name": "DENSITY",
-      "displayNames": [
-        {
-          "level": 1,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.1"
-              }
-            ],
-            "translate": "enchantment.minecraft.swift_sneak"
-          }
-        },
-        {
-          "level": 2,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.2"
-              }
-            ],
-            "translate": "enchantment.minecraft.swift_sneak"
-          }
-        },
-        {
-          "level": 3,
-          "text": {
-            "color": "gray",
-            "extra": [
-              " ",
-              {
-                "translate": "enchantment.level.3"
-              }
-            ],
-            "translate": "enchantment.minecraft.swift_sneak"
-          }
-        }
-      ],
-      "minModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 25
-        },
-        {
-          "level": 2,
-          "cost": 50
-        },
-        {
-          "level": 3,
-          "cost": 75
-        }
-      ],
-      "maxModifiedCosts": [
-        {
-          "level": 1,
-          "cost": 75
-        },
-        {
-          "level": 2,
-          "cost": 100
-        },
-        {
-          "level": 3,
-          "cost": 125
-        }
-      ],
-      "tradeable": false,
-      "discoverable": false,
-      "conflicts": [
-        "minecraft:swift_sneak"
-      ]
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:aqua_affinity",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "WATER_WORKER",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.aqua_affinity"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 41
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:aqua_affinity"
+			]
+		},
+		{
+			"key": "minecraft:bane_of_arthropods",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "DAMAGE_ARTHROPODS",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.bane_of_arthropods"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.bane_of_arthropods"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.bane_of_arthropods"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.bane_of_arthropods"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.bane_of_arthropods"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 13
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 29
+				},
+				{
+					"level": 5,
+					"cost": 37
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 33
+				},
+				{
+					"level": 3,
+					"cost": 41
+				},
+				{
+					"level": 4,
+					"cost": 49
+				},
+				{
+					"level": 5,
+					"cost": 57
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:density",
+				"minecraft:breach",
+				"minecraft:impaling",
+				"minecraft:bane_of_arthropods",
+				"minecraft:smite",
+				"minecraft:sharpness"
+			]
+		},
+		{
+			"key": "minecraft:binding_curse",
+			"treasure": true,
+			"cursed": true,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "BINDING_CURSE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "red",
+						"translate": "enchantment.minecraft.binding_curse"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:binding_curse"
+			]
+		},
+		{
+			"key": "minecraft:blast_protection",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "PROTECTION_EXPLOSIONS",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.blast_protection"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.blast_protection"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.blast_protection"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.blast_protection"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 13
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 29
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 13
+				},
+				{
+					"level": 2,
+					"cost": 21
+				},
+				{
+					"level": 3,
+					"cost": 29
+				},
+				{
+					"level": 4,
+					"cost": 37
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:protection",
+				"minecraft:fire_protection",
+				"minecraft:projectile_protection",
+				"minecraft:blast_protection"
+			]
+		},
+		{
+			"key": "minecraft:breach",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "BREACH",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.breach"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.breach"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.breach"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.breach"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 33
+				},
+				{
+					"level": 4,
+					"cost": 42
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				},
+				{
+					"level": 2,
+					"cost": 74
+				},
+				{
+					"level": 3,
+					"cost": 83
+				},
+				{
+					"level": 4,
+					"cost": 92
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:density",
+				"minecraft:breach",
+				"minecraft:impaling",
+				"minecraft:bane_of_arthropods",
+				"minecraft:smite",
+				"minecraft:sharpness"
+			]
+		},
+		{
+			"key": "minecraft:channeling",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "CHANNELING",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.channeling"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:channeling",
+				"minecraft:riptide"
+			]
+		},
+		{
+			"key": "minecraft:density",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "DENSITY",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.density"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.density"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.density"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.density"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.density"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 13
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 29
+				},
+				{
+					"level": 5,
+					"cost": 37
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 33
+				},
+				{
+					"level": 3,
+					"cost": 41
+				},
+				{
+					"level": 4,
+					"cost": 49
+				},
+				{
+					"level": 5,
+					"cost": 57
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:density",
+				"minecraft:breach",
+				"minecraft:impaling",
+				"minecraft:bane_of_arthropods",
+				"minecraft:smite",
+				"minecraft:sharpness"
+			]
+		},
+		{
+			"key": "minecraft:depth_strider",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "DEPTH_STRIDER",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.depth_strider"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.depth_strider"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.depth_strider"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 20
+				},
+				{
+					"level": 3,
+					"cost": 30
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 35
+				},
+				{
+					"level": 3,
+					"cost": 45
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:depth_strider",
+				"minecraft:frost_walker"
+			]
+		},
+		{
+			"key": "minecraft:efficiency",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "DIG_SPEED",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.efficiency"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.efficiency"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.efficiency"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.efficiency"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.efficiency"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				},
+				{
+					"level": 2,
+					"cost": 11
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 31
+				},
+				{
+					"level": 5,
+					"cost": 41
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 51
+				},
+				{
+					"level": 2,
+					"cost": 61
+				},
+				{
+					"level": 3,
+					"cost": 71
+				},
+				{
+					"level": 4,
+					"cost": 81
+				},
+				{
+					"level": 5,
+					"cost": 91
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:efficiency"
+			]
+		},
+		{
+			"key": "minecraft:feather_falling",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "PROTECTION_FALL",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.feather_falling"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.feather_falling"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.feather_falling"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.feather_falling"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 11
+				},
+				{
+					"level": 3,
+					"cost": 17
+				},
+				{
+					"level": 4,
+					"cost": 23
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 11
+				},
+				{
+					"level": 2,
+					"cost": 17
+				},
+				{
+					"level": 3,
+					"cost": 23
+				},
+				{
+					"level": 4,
+					"cost": 29
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:feather_falling"
+			]
+		},
+		{
+			"key": "minecraft:fire_aspect",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 2,
+			"startLevel": 1,
+			"name": "FIRE_ASPECT",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.fire_aspect"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.fire_aspect"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 30
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 60
+				},
+				{
+					"level": 2,
+					"cost": 80
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:fire_aspect"
+			]
+		},
+		{
+			"key": "minecraft:fire_protection",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "PROTECTION_FIRE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.fire_protection"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.fire_protection"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.fire_protection"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.fire_protection"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 18
+				},
+				{
+					"level": 3,
+					"cost": 26
+				},
+				{
+					"level": 4,
+					"cost": 34
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 18
+				},
+				{
+					"level": 2,
+					"cost": 26
+				},
+				{
+					"level": 3,
+					"cost": 34
+				},
+				{
+					"level": 4,
+					"cost": 42
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:protection",
+				"minecraft:fire_protection",
+				"minecraft:projectile_protection",
+				"minecraft:blast_protection"
+			]
+		},
+		{
+			"key": "minecraft:flame",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "ARROW_FIRE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.flame"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 20
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:flame"
+			]
+		},
+		{
+			"key": "minecraft:fortune",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "LOOT_BONUS_BLOCKS",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.fortune"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.fortune"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.fortune"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 33
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				},
+				{
+					"level": 2,
+					"cost": 74
+				},
+				{
+					"level": 3,
+					"cost": 83
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:silk_touch",
+				"minecraft:fortune"
+			]
+		},
+		{
+			"key": "minecraft:frost_walker",
+			"treasure": true,
+			"cursed": false,
+			"maxLevel": 2,
+			"startLevel": 1,
+			"name": "FROST_WALKER",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.frost_walker"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.frost_walker"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 20
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 35
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:depth_strider",
+				"minecraft:frost_walker"
+			]
+		},
+		{
+			"key": "minecraft:impaling",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "IMPALING",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.impaling"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.impaling"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.impaling"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.impaling"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.impaling"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				},
+				{
+					"level": 2,
+					"cost": 9
+				},
+				{
+					"level": 3,
+					"cost": 17
+				},
+				{
+					"level": 4,
+					"cost": 25
+				},
+				{
+					"level": 5,
+					"cost": 33
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 21
+				},
+				{
+					"level": 2,
+					"cost": 29
+				},
+				{
+					"level": 3,
+					"cost": 37
+				},
+				{
+					"level": 4,
+					"cost": 45
+				},
+				{
+					"level": 5,
+					"cost": 53
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:density",
+				"minecraft:breach",
+				"minecraft:impaling",
+				"minecraft:bane_of_arthropods",
+				"minecraft:smite",
+				"minecraft:sharpness"
+			]
+		},
+		{
+			"key": "minecraft:infinity",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "ARROW_INFINITE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.infinity"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 20
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:infinity",
+				"minecraft:mending"
+			]
+		},
+		{
+			"key": "minecraft:knockback",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 2,
+			"startLevel": 1,
+			"name": "KNOCKBACK",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.knockback"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.knockback"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 25
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 55
+				},
+				{
+					"level": 2,
+					"cost": 75
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:knockback"
+			]
+		},
+		{
+			"key": "minecraft:looting",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "LOOT_BONUS_MOBS",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.looting"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.looting"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.looting"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 33
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				},
+				{
+					"level": 2,
+					"cost": 74
+				},
+				{
+					"level": 3,
+					"cost": 83
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:looting"
+			]
+		},
+		{
+			"key": "minecraft:loyalty",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "LOYALTY",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.loyalty"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.loyalty"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.loyalty"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 12
+				},
+				{
+					"level": 2,
+					"cost": 19
+				},
+				{
+					"level": 3,
+					"cost": 26
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				},
+				{
+					"level": 2,
+					"cost": 50
+				},
+				{
+					"level": 3,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:loyalty",
+				"minecraft:riptide"
+			]
+		},
+		{
+			"key": "minecraft:luck_of_the_sea",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "LUCK",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.luck_of_the_sea"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.luck_of_the_sea"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.luck_of_the_sea"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 33
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				},
+				{
+					"level": 2,
+					"cost": 74
+				},
+				{
+					"level": 3,
+					"cost": 83
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:luck_of_the_sea"
+			]
+		},
+		{
+			"key": "minecraft:lure",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "LURE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.lure"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.lure"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.lure"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 33
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				},
+				{
+					"level": 2,
+					"cost": 74
+				},
+				{
+					"level": 3,
+					"cost": 83
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:lure"
+			]
+		},
+		{
+			"key": "minecraft:mending",
+			"treasure": true,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "MENDING",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.mending"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 75
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:infinity",
+				"minecraft:mending"
+			]
+		},
+		{
+			"key": "minecraft:multishot",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "MULTISHOT",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.multishot"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 20
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:multishot",
+				"minecraft:piercing"
+			]
+		},
+		{
+			"key": "minecraft:piercing",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "PIERCING",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.piercing"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.piercing"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.piercing"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.piercing"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				},
+				{
+					"level": 2,
+					"cost": 11
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 31
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				},
+				{
+					"level": 2,
+					"cost": 50
+				},
+				{
+					"level": 3,
+					"cost": 50
+				},
+				{
+					"level": 4,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:multishot",
+				"minecraft:piercing"
+			]
+		},
+		{
+			"key": "minecraft:power",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "ARROW_DAMAGE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.power"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.power"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.power"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.power"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.power"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				},
+				{
+					"level": 2,
+					"cost": 11
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 31
+				},
+				{
+					"level": 5,
+					"cost": 41
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 16
+				},
+				{
+					"level": 2,
+					"cost": 26
+				},
+				{
+					"level": 3,
+					"cost": 36
+				},
+				{
+					"level": 4,
+					"cost": 46
+				},
+				{
+					"level": 5,
+					"cost": 56
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:power"
+			]
+		},
+		{
+			"key": "minecraft:projectile_protection",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "PROTECTION_PROJECTILE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.projectile_protection"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.projectile_protection"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.projectile_protection"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.projectile_protection"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 3
+				},
+				{
+					"level": 2,
+					"cost": 9
+				},
+				{
+					"level": 3,
+					"cost": 15
+				},
+				{
+					"level": 4,
+					"cost": 21
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 9
+				},
+				{
+					"level": 2,
+					"cost": 15
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 27
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:protection",
+				"minecraft:fire_protection",
+				"minecraft:projectile_protection",
+				"minecraft:blast_protection"
+			]
+		},
+		{
+			"key": "minecraft:protection",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 4,
+			"startLevel": 1,
+			"name": "PROTECTION_ENVIRONMENTAL",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.protection"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.protection"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.protection"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.protection"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				},
+				{
+					"level": 2,
+					"cost": 12
+				},
+				{
+					"level": 3,
+					"cost": 23
+				},
+				{
+					"level": 4,
+					"cost": 34
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 12
+				},
+				{
+					"level": 2,
+					"cost": 23
+				},
+				{
+					"level": 3,
+					"cost": 34
+				},
+				{
+					"level": 4,
+					"cost": 45
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:protection",
+				"minecraft:fire_protection",
+				"minecraft:projectile_protection",
+				"minecraft:blast_protection"
+			]
+		},
+		{
+			"key": "minecraft:punch",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 2,
+			"startLevel": 1,
+			"name": "ARROW_KNOCKBACK",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.punch"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.punch"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 12
+				},
+				{
+					"level": 2,
+					"cost": 32
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 37
+				},
+				{
+					"level": 2,
+					"cost": 57
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:punch"
+			]
+		},
+		{
+			"key": "minecraft:quick_charge",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "QUICK_CHARGE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.quick_charge"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.quick_charge"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.quick_charge"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 12
+				},
+				{
+					"level": 2,
+					"cost": 32
+				},
+				{
+					"level": 3,
+					"cost": 52
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				},
+				{
+					"level": 2,
+					"cost": 50
+				},
+				{
+					"level": 3,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:quick_charge"
+			]
+		},
+		{
+			"key": "minecraft:respiration",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "OXYGEN",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.respiration"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.respiration"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.respiration"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 20
+				},
+				{
+					"level": 3,
+					"cost": 30
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 40
+				},
+				{
+					"level": 2,
+					"cost": 50
+				},
+				{
+					"level": 3,
+					"cost": 60
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:respiration"
+			]
+		},
+		{
+			"key": "minecraft:riptide",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "RIPTIDE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.riptide"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.riptide"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.riptide"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 17
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 31
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				},
+				{
+					"level": 2,
+					"cost": 50
+				},
+				{
+					"level": 3,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:loyalty",
+				"minecraft:channeling",
+				"minecraft:riptide"
+			]
+		},
+		{
+			"key": "minecraft:sharpness",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "DAMAGE_ALL",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.sharpness"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.sharpness"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.sharpness"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.sharpness"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.sharpness"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 1
+				},
+				{
+					"level": 2,
+					"cost": 12
+				},
+				{
+					"level": 3,
+					"cost": 23
+				},
+				{
+					"level": 4,
+					"cost": 34
+				},
+				{
+					"level": 5,
+					"cost": 45
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 21
+				},
+				{
+					"level": 2,
+					"cost": 32
+				},
+				{
+					"level": 3,
+					"cost": 43
+				},
+				{
+					"level": 4,
+					"cost": 54
+				},
+				{
+					"level": 5,
+					"cost": 65
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:density",
+				"minecraft:breach",
+				"minecraft:impaling",
+				"minecraft:bane_of_arthropods",
+				"minecraft:smite",
+				"minecraft:sharpness"
+			]
+		},
+		{
+			"key": "minecraft:silk_touch",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "SILK_TOUCH",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"translate": "enchantment.minecraft.silk_touch"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:silk_touch",
+				"minecraft:fortune"
+			]
+		},
+		{
+			"key": "minecraft:smite",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 5,
+			"startLevel": 1,
+			"name": "DAMAGE_UNDEAD",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.smite"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.smite"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.smite"
+					}
+				},
+				{
+					"level": 4,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.4"
+							}
+						],
+						"translate": "enchantment.minecraft.smite"
+					}
+				},
+				{
+					"level": 5,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.5"
+							}
+						],
+						"translate": "enchantment.minecraft.smite"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 13
+				},
+				{
+					"level": 3,
+					"cost": 21
+				},
+				{
+					"level": 4,
+					"cost": 29
+				},
+				{
+					"level": 5,
+					"cost": 37
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 33
+				},
+				{
+					"level": 3,
+					"cost": 41
+				},
+				{
+					"level": 4,
+					"cost": 49
+				},
+				{
+					"level": 5,
+					"cost": 57
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:density",
+				"minecraft:breach",
+				"minecraft:impaling",
+				"minecraft:bane_of_arthropods",
+				"minecraft:smite",
+				"minecraft:sharpness"
+			]
+		},
+		{
+			"key": "minecraft:soul_speed",
+			"treasure": true,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "SOUL_SPEED",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.soul_speed"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.soul_speed"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.soul_speed"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 20
+				},
+				{
+					"level": 3,
+					"cost": 30
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 35
+				},
+				{
+					"level": 3,
+					"cost": 45
+				}
+			],
+			"tradeable": false,
+			"discoverable": false,
+			"conflicts": [
+				"minecraft:soul_speed"
+			]
+		},
+		{
+			"key": "minecraft:sweeping_edge",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "SWEEPING_EDGE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.sweeping_edge"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.sweeping_edge"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.sweeping_edge"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 14
+				},
+				{
+					"level": 3,
+					"cost": 23
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 20
+				},
+				{
+					"level": 2,
+					"cost": 29
+				},
+				{
+					"level": 3,
+					"cost": 38
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:sweeping_edge"
+			]
+		},
+		{
+			"key": "minecraft:swift_sneak",
+			"treasure": true,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "SWIFT_SNEAK",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.swift_sneak"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.swift_sneak"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.swift_sneak"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				},
+				{
+					"level": 2,
+					"cost": 50
+				},
+				{
+					"level": 3,
+					"cost": 75
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 75
+				},
+				{
+					"level": 2,
+					"cost": 100
+				},
+				{
+					"level": 3,
+					"cost": 125
+				}
+			],
+			"tradeable": false,
+			"discoverable": false,
+			"conflicts": [
+				"minecraft:swift_sneak"
+			]
+		},
+		{
+			"key": "minecraft:thorns",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "THORNS",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.thorns"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.thorns"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.thorns"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 10
+				},
+				{
+					"level": 2,
+					"cost": 30
+				},
+				{
+					"level": 3,
+					"cost": 50
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 60
+				},
+				{
+					"level": 2,
+					"cost": 80
+				},
+				{
+					"level": 3,
+					"cost": 100
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:thorns"
+			]
+		},
+		{
+			"key": "minecraft:unbreaking",
+			"treasure": false,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "DURABILITY",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.unbreaking"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.unbreaking"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.unbreaking"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 5
+				},
+				{
+					"level": 2,
+					"cost": 13
+				},
+				{
+					"level": 3,
+					"cost": 21
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 55
+				},
+				{
+					"level": 2,
+					"cost": 63
+				},
+				{
+					"level": 3,
+					"cost": 71
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:unbreaking"
+			]
+		},
+		{
+			"key": "minecraft:vanishing_curse",
+			"treasure": true,
+			"cursed": true,
+			"maxLevel": 1,
+			"startLevel": 1,
+			"name": "VANISHING_CURSE",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "red",
+						"translate": "enchantment.minecraft.vanishing_curse"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 25
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 50
+				}
+			],
+			"tradeable": true,
+			"discoverable": true,
+			"conflicts": [
+				"minecraft:vanishing_curse"
+			]
+		},
+		{
+			"key": "minecraft:wind_burst",
+			"treasure": true,
+			"cursed": false,
+			"maxLevel": 3,
+			"startLevel": 1,
+			"name": "WIND_BURST",
+			"displayNames": [
+				{
+					"level": 1,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.1"
+							}
+						],
+						"translate": "enchantment.minecraft.wind_burst"
+					}
+				},
+				{
+					"level": 2,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.2"
+							}
+						],
+						"translate": "enchantment.minecraft.wind_burst"
+					}
+				},
+				{
+					"level": 3,
+					"text": {
+						"color": "gray",
+						"extra": [
+							" ",
+							{
+								"translate": "enchantment.level.3"
+							}
+						],
+						"translate": "enchantment.minecraft.wind_burst"
+					}
+				}
+			],
+			"minModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 15
+				},
+				{
+					"level": 2,
+					"cost": 24
+				},
+				{
+					"level": 3,
+					"cost": 33
+				}
+			],
+			"maxModifiedCosts": [
+				{
+					"level": 1,
+					"cost": 65
+				},
+				{
+					"level": 2,
+					"cost": 74
+				},
+				{
+					"level": 3,
+					"cost": 83
+				}
+			],
+			"tradeable": false,
+			"discoverable": false,
+			"conflicts": [
+				"minecraft:wind_burst"
+			]
+		}
+	]
 }

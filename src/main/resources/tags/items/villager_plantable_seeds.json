@@ -1,11 +1,11 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:wheat_seeds",
-        "minecraft:pitcher_pod",
-        "minecraft:potato",
-        "minecraft:beetroot_seeds",
-        "minecraft:carrot",
-        "minecraft:torchflower_seeds"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:beetroot_seeds",
+		"minecraft:carrot",
+		"minecraft:pitcher_pod",
+		"minecraft:potato",
+		"minecraft:torchflower_seeds",
+		"minecraft:wheat_seeds"
+	]
 }

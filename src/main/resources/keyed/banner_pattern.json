@@ -1,133 +1,133 @@
 {
-  "values": [
-    {
-      "key": "minecraft:base"
-    },
-    {
-      "key": "minecraft:square_bottom_left"
-    },
-    {
-      "key": "minecraft:square_bottom_right"
-    },
-    {
-      "key": "minecraft:square_top_left"
-    },
-    {
-      "key": "minecraft:square_top_right"
-    },
-    {
-      "key": "minecraft:stripe_bottom"
-    },
-    {
-      "key": "minecraft:stripe_top"
-    },
-    {
-      "key": "minecraft:stripe_left"
-    },
-    {
-      "key": "minecraft:stripe_right"
-    },
-    {
-      "key": "minecraft:stripe_center"
-    },
-    {
-      "key": "minecraft:stripe_middle"
-    },
-    {
-      "key": "minecraft:stripe_downright"
-    },
-    {
-      "key": "minecraft:stripe_downleft"
-    },
-    {
-      "key": "minecraft:small_stripes"
-    },
-    {
-      "key": "minecraft:cross"
-    },
-    {
-      "key": "minecraft:straight_cross"
-    },
-    {
-      "key": "minecraft:triangle_bottom"
-    },
-    {
-      "key": "minecraft:triangle_top"
-    },
-    {
-      "key": "minecraft:triangles_bottom"
-    },
-    {
-      "key": "minecraft:triangles_top"
-    },
-    {
-      "key": "minecraft:diagonal_left"
-    },
-    {
-      "key": "minecraft:diagonal_up_right"
-    },
-    {
-      "key": "minecraft:diagonal_up_left"
-    },
-    {
-      "key": "minecraft:diagonal_right"
-    },
-    {
-      "key": "minecraft:circle"
-    },
-    {
-      "key": "minecraft:rhombus"
-    },
-    {
-      "key": "minecraft:half_vertical"
-    },
-    {
-      "key": "minecraft:half_horizontal"
-    },
-    {
-      "key": "minecraft:half_vertical_right"
-    },
-    {
-      "key": "minecraft:half_horizontal_bottom"
-    },
-    {
-      "key": "minecraft:border"
-    },
-    {
-      "key": "minecraft:curly_border"
-    },
-    {
-      "key": "minecraft:creeper"
-    },
-    {
-      "key": "minecraft:gradient"
-    },
-    {
-      "key": "minecraft:gradient_up"
-    },
-    {
-      "key": "minecraft:bricks"
-    },
-    {
-      "key": "minecraft:skull"
-    },
-    {
-      "key": "minecraft:flower"
-    },
-    {
-      "key": "minecraft:mojang"
-    },
-    {
-      "key": "minecraft:globe"
-    },
-    {
-      "key": "minecraft:piglin"
-    },
-    {
-      "key": "minecraft:flow"
-    },
-    {
-      "key": "minecraft:guster"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:base"
+		},
+		{
+			"key": "minecraft:border"
+		},
+		{
+			"key": "minecraft:bricks"
+		},
+		{
+			"key": "minecraft:circle"
+		},
+		{
+			"key": "minecraft:creeper"
+		},
+		{
+			"key": "minecraft:cross"
+		},
+		{
+			"key": "minecraft:curly_border"
+		},
+		{
+			"key": "minecraft:diagonal_left"
+		},
+		{
+			"key": "minecraft:diagonal_right"
+		},
+		{
+			"key": "minecraft:diagonal_up_left"
+		},
+		{
+			"key": "minecraft:diagonal_up_right"
+		},
+		{
+			"key": "minecraft:flow"
+		},
+		{
+			"key": "minecraft:flower"
+		},
+		{
+			"key": "minecraft:globe"
+		},
+		{
+			"key": "minecraft:gradient"
+		},
+		{
+			"key": "minecraft:gradient_up"
+		},
+		{
+			"key": "minecraft:guster"
+		},
+		{
+			"key": "minecraft:half_horizontal"
+		},
+		{
+			"key": "minecraft:half_horizontal_bottom"
+		},
+		{
+			"key": "minecraft:half_vertical"
+		},
+		{
+			"key": "minecraft:half_vertical_right"
+		},
+		{
+			"key": "minecraft:mojang"
+		},
+		{
+			"key": "minecraft:piglin"
+		},
+		{
+			"key": "minecraft:rhombus"
+		},
+		{
+			"key": "minecraft:skull"
+		},
+		{
+			"key": "minecraft:small_stripes"
+		},
+		{
+			"key": "minecraft:square_bottom_left"
+		},
+		{
+			"key": "minecraft:square_bottom_right"
+		},
+		{
+			"key": "minecraft:square_top_left"
+		},
+		{
+			"key": "minecraft:square_top_right"
+		},
+		{
+			"key": "minecraft:straight_cross"
+		},
+		{
+			"key": "minecraft:stripe_bottom"
+		},
+		{
+			"key": "minecraft:stripe_center"
+		},
+		{
+			"key": "minecraft:stripe_downleft"
+		},
+		{
+			"key": "minecraft:stripe_downright"
+		},
+		{
+			"key": "minecraft:stripe_left"
+		},
+		{
+			"key": "minecraft:stripe_middle"
+		},
+		{
+			"key": "minecraft:stripe_right"
+		},
+		{
+			"key": "minecraft:stripe_top"
+		},
+		{
+			"key": "minecraft:triangle_bottom"
+		},
+		{
+			"key": "minecraft:triangle_top"
+		},
+		{
+			"key": "minecraft:triangles_bottom"
+		},
+		{
+			"key": "minecraft:triangles_top"
+		}
+	]
 }

@@ -13,6 +13,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.BlockType;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -251,6 +252,13 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	public @NotNull String getTranslationKey()
 	{
 		return translationKey;
+	}
+
+	@Override
+	public @Nullable ItemRarity getItemRarity()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

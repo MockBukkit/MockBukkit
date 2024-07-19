@@ -1,21 +1,21 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:parrot",
-        "minecraft:bee",
-        "minecraft:breeze",
-        "minecraft:magma_cube",
-        "minecraft:cat",
-        "minecraft:shulker",
-        "minecraft:snow_golem",
-        "minecraft:blaze",
-        "minecraft:allay",
-        "minecraft:ghast",
-        "minecraft:wither",
-        "minecraft:ocelot",
-        "minecraft:chicken",
-        "minecraft:bat",
-        "minecraft:phantom",
-        "minecraft:iron_golem"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:allay",
+		"minecraft:bat",
+		"minecraft:bee",
+		"minecraft:blaze",
+		"minecraft:breeze",
+		"minecraft:cat",
+		"minecraft:chicken",
+		"minecraft:ghast",
+		"minecraft:iron_golem",
+		"minecraft:magma_cube",
+		"minecraft:ocelot",
+		"minecraft:parrot",
+		"minecraft:phantom",
+		"minecraft:shulker",
+		"minecraft:snow_golem",
+		"minecraft:wither"
+	]
 }

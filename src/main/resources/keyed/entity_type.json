@@ -1,394 +1,394 @@
 {
-  "values": [
-    {
-      "key": "minecraft:item"
-    },
-    {
-      "key": "minecraft:experience_orb"
-    },
-    {
-      "key": "minecraft:area_effect_cloud"
-    },
-    {
-      "key": "minecraft:elder_guardian"
-    },
-    {
-      "key": "minecraft:wither_skeleton"
-    },
-    {
-      "key": "minecraft:stray"
-    },
-    {
-      "key": "minecraft:egg"
-    },
-    {
-      "key": "minecraft:leash_knot"
-    },
-    {
-      "key": "minecraft:painting"
-    },
-    {
-      "key": "minecraft:arrow"
-    },
-    {
-      "key": "minecraft:snowball"
-    },
-    {
-      "key": "minecraft:fireball"
-    },
-    {
-      "key": "minecraft:small_fireball"
-    },
-    {
-      "key": "minecraft:ender_pearl"
-    },
-    {
-      "key": "minecraft:eye_of_ender"
-    },
-    {
-      "key": "minecraft:potion"
-    },
-    {
-      "key": "minecraft:experience_bottle"
-    },
-    {
-      "key": "minecraft:item_frame"
-    },
-    {
-      "key": "minecraft:wither_skull"
-    },
-    {
-      "key": "minecraft:tnt"
-    },
-    {
-      "key": "minecraft:falling_block"
-    },
-    {
-      "key": "minecraft:firework_rocket"
-    },
-    {
-      "key": "minecraft:husk"
-    },
-    {
-      "key": "minecraft:spectral_arrow"
-    },
-    {
-      "key": "minecraft:shulker_bullet"
-    },
-    {
-      "key": "minecraft:dragon_fireball"
-    },
-    {
-      "key": "minecraft:zombie_villager"
-    },
-    {
-      "key": "minecraft:skeleton_horse"
-    },
-    {
-      "key": "minecraft:zombie_horse"
-    },
-    {
-      "key": "minecraft:armor_stand"
-    },
-    {
-      "key": "minecraft:donkey"
-    },
-    {
-      "key": "minecraft:mule"
-    },
-    {
-      "key": "minecraft:evoker_fangs"
-    },
-    {
-      "key": "minecraft:evoker"
-    },
-    {
-      "key": "minecraft:vex"
-    },
-    {
-      "key": "minecraft:vindicator"
-    },
-    {
-      "key": "minecraft:illusioner"
-    },
-    {
-      "key": "minecraft:command_block_minecart"
-    },
-    {
-      "key": "minecraft:boat"
-    },
-    {
-      "key": "minecraft:minecart"
-    },
-    {
-      "key": "minecraft:chest_minecart"
-    },
-    {
-      "key": "minecraft:furnace_minecart"
-    },
-    {
-      "key": "minecraft:tnt_minecart"
-    },
-    {
-      "key": "minecraft:hopper_minecart"
-    },
-    {
-      "key": "minecraft:spawner_minecart"
-    },
-    {
-      "key": "minecraft:creeper"
-    },
-    {
-      "key": "minecraft:skeleton"
-    },
-    {
-      "key": "minecraft:spider"
-    },
-    {
-      "key": "minecraft:giant"
-    },
-    {
-      "key": "minecraft:zombie"
-    },
-    {
-      "key": "minecraft:slime"
-    },
-    {
-      "key": "minecraft:ghast"
-    },
-    {
-      "key": "minecraft:zombified_piglin"
-    },
-    {
-      "key": "minecraft:enderman"
-    },
-    {
-      "key": "minecraft:cave_spider"
-    },
-    {
-      "key": "minecraft:silverfish"
-    },
-    {
-      "key": "minecraft:blaze"
-    },
-    {
-      "key": "minecraft:magma_cube"
-    },
-    {
-      "key": "minecraft:ender_dragon"
-    },
-    {
-      "key": "minecraft:wither"
-    },
-    {
-      "key": "minecraft:bat"
-    },
-    {
-      "key": "minecraft:witch"
-    },
-    {
-      "key": "minecraft:endermite"
-    },
-    {
-      "key": "minecraft:guardian"
-    },
-    {
-      "key": "minecraft:shulker"
-    },
-    {
-      "key": "minecraft:pig"
-    },
-    {
-      "key": "minecraft:sheep"
-    },
-    {
-      "key": "minecraft:cow"
-    },
-    {
-      "key": "minecraft:chicken"
-    },
-    {
-      "key": "minecraft:squid"
-    },
-    {
-      "key": "minecraft:wolf"
-    },
-    {
-      "key": "minecraft:mooshroom"
-    },
-    {
-      "key": "minecraft:snow_golem"
-    },
-    {
-      "key": "minecraft:ocelot"
-    },
-    {
-      "key": "minecraft:iron_golem"
-    },
-    {
-      "key": "minecraft:horse"
-    },
-    {
-      "key": "minecraft:rabbit"
-    },
-    {
-      "key": "minecraft:polar_bear"
-    },
-    {
-      "key": "minecraft:llama"
-    },
-    {
-      "key": "minecraft:llama_spit"
-    },
-    {
-      "key": "minecraft:parrot"
-    },
-    {
-      "key": "minecraft:villager"
-    },
-    {
-      "key": "minecraft:end_crystal"
-    },
-    {
-      "key": "minecraft:turtle"
-    },
-    {
-      "key": "minecraft:phantom"
-    },
-    {
-      "key": "minecraft:trident"
-    },
-    {
-      "key": "minecraft:cod"
-    },
-    {
-      "key": "minecraft:salmon"
-    },
-    {
-      "key": "minecraft:pufferfish"
-    },
-    {
-      "key": "minecraft:tropical_fish"
-    },
-    {
-      "key": "minecraft:drowned"
-    },
-    {
-      "key": "minecraft:dolphin"
-    },
-    {
-      "key": "minecraft:cat"
-    },
-    {
-      "key": "minecraft:panda"
-    },
-    {
-      "key": "minecraft:pillager"
-    },
-    {
-      "key": "minecraft:ravager"
-    },
-    {
-      "key": "minecraft:trader_llama"
-    },
-    {
-      "key": "minecraft:wandering_trader"
-    },
-    {
-      "key": "minecraft:fox"
-    },
-    {
-      "key": "minecraft:bee"
-    },
-    {
-      "key": "minecraft:hoglin"
-    },
-    {
-      "key": "minecraft:piglin"
-    },
-    {
-      "key": "minecraft:strider"
-    },
-    {
-      "key": "minecraft:zoglin"
-    },
-    {
-      "key": "minecraft:piglin_brute"
-    },
-    {
-      "key": "minecraft:axolotl"
-    },
-    {
-      "key": "minecraft:glow_item_frame"
-    },
-    {
-      "key": "minecraft:glow_squid"
-    },
-    {
-      "key": "minecraft:goat"
-    },
-    {
-      "key": "minecraft:marker"
-    },
-    {
-      "key": "minecraft:allay"
-    },
-    {
-      "key": "minecraft:chest_boat"
-    },
-    {
-      "key": "minecraft:frog"
-    },
-    {
-      "key": "minecraft:tadpole"
-    },
-    {
-      "key": "minecraft:warden"
-    },
-    {
-      "key": "minecraft:camel"
-    },
-    {
-      "key": "minecraft:block_display"
-    },
-    {
-      "key": "minecraft:interaction"
-    },
-    {
-      "key": "minecraft:item_display"
-    },
-    {
-      "key": "minecraft:sniffer"
-    },
-    {
-      "key": "minecraft:text_display"
-    },
-    {
-      "key": "minecraft:breeze"
-    },
-    {
-      "key": "minecraft:wind_charge"
-    },
-    {
-      "key": "minecraft:breeze_wind_charge"
-    },
-    {
-      "key": "minecraft:armadillo"
-    },
-    {
-      "key": "minecraft:bogged"
-    },
-    {
-      "key": "minecraft:ominous_item_spawner"
-    },
-    {
-      "key": "minecraft:fishing_bobber"
-    },
-    {
-      "key": "minecraft:lightning_bolt"
-    },
-    {
-      "key": "minecraft:player"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:allay"
+		},
+		{
+			"key": "minecraft:area_effect_cloud"
+		},
+		{
+			"key": "minecraft:armadillo"
+		},
+		{
+			"key": "minecraft:armor_stand"
+		},
+		{
+			"key": "minecraft:arrow"
+		},
+		{
+			"key": "minecraft:axolotl"
+		},
+		{
+			"key": "minecraft:bat"
+		},
+		{
+			"key": "minecraft:bee"
+		},
+		{
+			"key": "minecraft:blaze"
+		},
+		{
+			"key": "minecraft:block_display"
+		},
+		{
+			"key": "minecraft:boat"
+		},
+		{
+			"key": "minecraft:bogged"
+		},
+		{
+			"key": "minecraft:breeze"
+		},
+		{
+			"key": "minecraft:breeze_wind_charge"
+		},
+		{
+			"key": "minecraft:camel"
+		},
+		{
+			"key": "minecraft:cat"
+		},
+		{
+			"key": "minecraft:cave_spider"
+		},
+		{
+			"key": "minecraft:chest_boat"
+		},
+		{
+			"key": "minecraft:chest_minecart"
+		},
+		{
+			"key": "minecraft:chicken"
+		},
+		{
+			"key": "minecraft:cod"
+		},
+		{
+			"key": "minecraft:command_block_minecart"
+		},
+		{
+			"key": "minecraft:cow"
+		},
+		{
+			"key": "minecraft:creeper"
+		},
+		{
+			"key": "minecraft:dolphin"
+		},
+		{
+			"key": "minecraft:donkey"
+		},
+		{
+			"key": "minecraft:dragon_fireball"
+		},
+		{
+			"key": "minecraft:drowned"
+		},
+		{
+			"key": "minecraft:egg"
+		},
+		{
+			"key": "minecraft:elder_guardian"
+		},
+		{
+			"key": "minecraft:end_crystal"
+		},
+		{
+			"key": "minecraft:ender_dragon"
+		},
+		{
+			"key": "minecraft:ender_pearl"
+		},
+		{
+			"key": "minecraft:enderman"
+		},
+		{
+			"key": "minecraft:endermite"
+		},
+		{
+			"key": "minecraft:evoker"
+		},
+		{
+			"key": "minecraft:evoker_fangs"
+		},
+		{
+			"key": "minecraft:experience_bottle"
+		},
+		{
+			"key": "minecraft:experience_orb"
+		},
+		{
+			"key": "minecraft:eye_of_ender"
+		},
+		{
+			"key": "minecraft:falling_block"
+		},
+		{
+			"key": "minecraft:fireball"
+		},
+		{
+			"key": "minecraft:firework_rocket"
+		},
+		{
+			"key": "minecraft:fishing_bobber"
+		},
+		{
+			"key": "minecraft:fox"
+		},
+		{
+			"key": "minecraft:frog"
+		},
+		{
+			"key": "minecraft:furnace_minecart"
+		},
+		{
+			"key": "minecraft:ghast"
+		},
+		{
+			"key": "minecraft:giant"
+		},
+		{
+			"key": "minecraft:glow_item_frame"
+		},
+		{
+			"key": "minecraft:glow_squid"
+		},
+		{
+			"key": "minecraft:goat"
+		},
+		{
+			"key": "minecraft:guardian"
+		},
+		{
+			"key": "minecraft:hoglin"
+		},
+		{
+			"key": "minecraft:hopper_minecart"
+		},
+		{
+			"key": "minecraft:horse"
+		},
+		{
+			"key": "minecraft:husk"
+		},
+		{
+			"key": "minecraft:illusioner"
+		},
+		{
+			"key": "minecraft:interaction"
+		},
+		{
+			"key": "minecraft:iron_golem"
+		},
+		{
+			"key": "minecraft:item"
+		},
+		{
+			"key": "minecraft:item_display"
+		},
+		{
+			"key": "minecraft:item_frame"
+		},
+		{
+			"key": "minecraft:leash_knot"
+		},
+		{
+			"key": "minecraft:lightning_bolt"
+		},
+		{
+			"key": "minecraft:llama"
+		},
+		{
+			"key": "minecraft:llama_spit"
+		},
+		{
+			"key": "minecraft:magma_cube"
+		},
+		{
+			"key": "minecraft:marker"
+		},
+		{
+			"key": "minecraft:minecart"
+		},
+		{
+			"key": "minecraft:mooshroom"
+		},
+		{
+			"key": "minecraft:mule"
+		},
+		{
+			"key": "minecraft:ocelot"
+		},
+		{
+			"key": "minecraft:ominous_item_spawner"
+		},
+		{
+			"key": "minecraft:painting"
+		},
+		{
+			"key": "minecraft:panda"
+		},
+		{
+			"key": "minecraft:parrot"
+		},
+		{
+			"key": "minecraft:phantom"
+		},
+		{
+			"key": "minecraft:pig"
+		},
+		{
+			"key": "minecraft:piglin"
+		},
+		{
+			"key": "minecraft:piglin_brute"
+		},
+		{
+			"key": "minecraft:pillager"
+		},
+		{
+			"key": "minecraft:player"
+		},
+		{
+			"key": "minecraft:polar_bear"
+		},
+		{
+			"key": "minecraft:potion"
+		},
+		{
+			"key": "minecraft:pufferfish"
+		},
+		{
+			"key": "minecraft:rabbit"
+		},
+		{
+			"key": "minecraft:ravager"
+		},
+		{
+			"key": "minecraft:salmon"
+		},
+		{
+			"key": "minecraft:sheep"
+		},
+		{
+			"key": "minecraft:shulker"
+		},
+		{
+			"key": "minecraft:shulker_bullet"
+		},
+		{
+			"key": "minecraft:silverfish"
+		},
+		{
+			"key": "minecraft:skeleton"
+		},
+		{
+			"key": "minecraft:skeleton_horse"
+		},
+		{
+			"key": "minecraft:slime"
+		},
+		{
+			"key": "minecraft:small_fireball"
+		},
+		{
+			"key": "minecraft:sniffer"
+		},
+		{
+			"key": "minecraft:snow_golem"
+		},
+		{
+			"key": "minecraft:snowball"
+		},
+		{
+			"key": "minecraft:spawner_minecart"
+		},
+		{
+			"key": "minecraft:spectral_arrow"
+		},
+		{
+			"key": "minecraft:spider"
+		},
+		{
+			"key": "minecraft:squid"
+		},
+		{
+			"key": "minecraft:stray"
+		},
+		{
+			"key": "minecraft:strider"
+		},
+		{
+			"key": "minecraft:tadpole"
+		},
+		{
+			"key": "minecraft:text_display"
+		},
+		{
+			"key": "minecraft:tnt"
+		},
+		{
+			"key": "minecraft:tnt_minecart"
+		},
+		{
+			"key": "minecraft:trader_llama"
+		},
+		{
+			"key": "minecraft:trident"
+		},
+		{
+			"key": "minecraft:tropical_fish"
+		},
+		{
+			"key": "minecraft:turtle"
+		},
+		{
+			"key": "minecraft:vex"
+		},
+		{
+			"key": "minecraft:villager"
+		},
+		{
+			"key": "minecraft:vindicator"
+		},
+		{
+			"key": "minecraft:wandering_trader"
+		},
+		{
+			"key": "minecraft:warden"
+		},
+		{
+			"key": "minecraft:wind_charge"
+		},
+		{
+			"key": "minecraft:witch"
+		},
+		{
+			"key": "minecraft:wither"
+		},
+		{
+			"key": "minecraft:wither_skeleton"
+		},
+		{
+			"key": "minecraft:wither_skull"
+		},
+		{
+			"key": "minecraft:wolf"
+		},
+		{
+			"key": "minecraft:zoglin"
+		},
+		{
+			"key": "minecraft:zombie"
+		},
+		{
+			"key": "minecraft:zombie_horse"
+		},
+		{
+			"key": "minecraft:zombie_villager"
+		},
+		{
+			"key": "minecraft:zombified_piglin"
+		}
+	]
 }
