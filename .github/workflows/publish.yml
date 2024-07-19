@@ -39,7 +39,7 @@ jobs:
         run: ./gradlew test
 
       - name: Store Private key
-        uses: DamianReeves/write-file-action@v1.2
+        uses: DamianReeves/write-file-action@v1.3
         if: ${{ github.ref_type == 'tag' }}
         with:
           path: private.key
