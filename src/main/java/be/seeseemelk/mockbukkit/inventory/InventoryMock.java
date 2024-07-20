@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -33,7 +34,7 @@ public class InventoryMock implements Inventory
 
 	private static final int MAX_STACK_SIZE = 64;
 
-	private final ItemStack @NotNull [] items;
+	protected final ItemStack @NotNull [] items;
 	private final @Nullable InventoryHolder holder;
 	private final @NotNull InventoryType type;
 
@@ -59,6 +60,11 @@ public class InventoryMock implements Inventory
 		items = new ItemStack[size];
 	}
 
+	protected ItemStack[] cloneArray(ItemStack[] toClone)
+	{
+		return Arrays.stream(toClone).map(itemStack -> itemStack != null ? itemStack.clone() : null).toArray(ItemStack[]::new);
+	}
+
 	/**
 	 * Constructs a new {@link InventoryMock} for the given holder with a specific {@link InventoryType}.
 	 * The size will be {@link InventoryType#getDefaultSize()}.
@@ -73,7 +79,17 @@ public class InventoryMock implements Inventory
 		this.holder = holder;
 		this.type = type;
 
-		items = new ItemStack[type.getDefaultSize()];
+		items = new ItemStack[inventoryType2StorageContentsSize(type)];
+	}
+
+	private static int inventoryType2StorageContentsSize(InventoryType type)
+	{
+		return switch (type)
+		{
+			// workbench has 1 result slot
+			case WORKBENCH -> type.getDefaultSize() - 1;
+			default -> type.getDefaultSize();
+		};
 	}
 
 	/**
@@ -214,13 +230,13 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack getItem(int index)
 	{
-		return items[index];
+		return items[index] != null ? items[index].clone() : null;
 	}
 
 	@Override
 	public void setItem(int index, @Nullable ItemStack item)
 	{
-		items[index] = item == null ? null : item.clone();
+		items[index] = item != null ? item.clone() : null;
 	}
 
 	/**
@@ -234,14 +250,15 @@ public class InventoryMock implements Inventory
 	{
 		final int itemMaxStackSize = Math.min(item.getMaxStackSize(), this.maxStackSize);
 		item = item.clone();
-		for (int i = 0; i < items.length; i++)
+		for (int i = 0; i < this.getSize(); i++)
 		{
 			ItemStack oItem = items[i];
 			if (oItem == null)
 			{
 				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
-				items[i] = item.clone();
-				items[i].setAmount(toAdd);
+				ItemStack itemToAdd = item.clone();
+				itemToAdd.setAmount(toAdd);
+				this.setItem(i, itemToAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
 			else
@@ -283,21 +300,21 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return items;
+		return cloneArray(items);
 	}
 
 	@Override
 	public void setContents(ItemStack @NotNull [] items)
 	{
-		for (int i = 0; i < getSize(); i++)
+		for (int i = 0; i < this.getSize(); i++)
 		{
 			if (i < items.length && items[i] != null)
 			{
-				this.items[i] = items[i].clone();
+				this.setItem(i, items[i]);
 			}
 			else
 			{
-				this.items[i] = null;
+				this.setItem(i, null);
 			}
 		}
 	}

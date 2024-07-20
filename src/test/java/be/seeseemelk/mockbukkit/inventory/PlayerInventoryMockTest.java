@@ -273,8 +273,10 @@ class PlayerInventoryMockTest
 		ItemStack apiItemStack = new ItemStack(Material.SCULK);
 		inventory.setItem(slot, apiItemStack);
 		ItemStack mirrorItemStack = inventory.getItem(slot);
+		// apiItemStack was cloned when being set, and therefore they are not the same (but they are equal)
 		assertNotSame(apiItemStack, mirrorItemStack);
-		assertSame(mirrorItemStack, inventory.getItem(slot));
+		// mirrorItemStack was cloned when being accessed, and therefore they are not the same (but they are equal)
+		assertEquals(mirrorItemStack, inventory.getItem(slot));
 	}
 
 }
