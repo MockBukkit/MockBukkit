@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.damage.DamageTypeMock;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
 import be.seeseemelk.mockbukkit.entity.variant.CatVariantMock;
 import be.seeseemelk.mockbukkit.entity.variant.VillagerProfessionMock;
+import be.seeseemelk.mockbukkit.entity.variant.VillagerTypeMock;
 import be.seeseemelk.mockbukkit.entity.variant.WolfVariantMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
@@ -133,6 +134,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		else if (key == RegistryKey.VILLAGER_PROFESSION)
 		{
 			return VillagerProfessionMock::from;
+		}
+		else if (key == RegistryKey.VILLAGER_TYPE)
+		{
+			return VillagerTypeMock::from;
 		}
 		else
 		{
