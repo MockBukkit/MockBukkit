@@ -22,7 +22,7 @@ public class JukeboxSongMock implements JukeboxSong
 	public static JukeboxSongMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
-		String translationKey = jsonObject.get("description").getAsJsonObject().get("translate").getAsString();
+		String translationKey = jsonObject.get("translationKey").getAsString();
 		return new JukeboxSongMock(key, translationKey);
 	}
 
