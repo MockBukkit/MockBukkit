@@ -80,6 +80,10 @@ public class MethodDataScanner
 		{
 			return new JsonPrimitive((Float) method.invoke(object));
 		}
+		if (returnType == byte.class)
+		{
+			return new JsonPrimitive((Byte) method.invoke(object));
+		}
 		if (returnType == String.class)
 		{
 			return new JsonPrimitive((String) method.invoke(object));
