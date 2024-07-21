@@ -100,7 +100,7 @@ public class RegistryAccessMock implements RegistryAccess
 		return List.of(RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL,
 				RegistryKey.TRIM_PATTERN, RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT,
 				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK,
-				RegistryKey.WOLF_VARIANT, RegistryKey.JUKEBOX_SONG);
+				RegistryKey.WOLF_VARIANT, RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT);
 	}
 
 
