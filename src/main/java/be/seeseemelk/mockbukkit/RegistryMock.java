@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
 import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import be.seeseemelk.mockbukkit.map.MapCursorTypeMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
@@ -143,6 +144,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		else if (key == RegistryKey.FROG_VARIANT)
 		{
 			return FrogVariantMock::from;
+		}
+		else if (key == RegistryKey.MAP_DECORATION_TYPE)
+		{
+			return MapCursorTypeMock::from;
 		}
 		else
 		{

@@ -101,7 +101,7 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.TRIM_PATTERN, RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT,
 				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK,
 				RegistryKey.WOLF_VARIANT, RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT, RegistryKey.VILLAGER_PROFESSION,
-				RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT);
+				RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT, RegistryKey.MAP_DECORATION_TYPE);
 	}
 
 
