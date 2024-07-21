@@ -1,12 +1,16 @@
 {
 	"values": [
 		{
-			"key": "minecraft:aqua_affinity",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "WATER_WORKER",
+			"key": "minecraft:aqua_affinity",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.aqua_affinity",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -28,19 +32,21 @@
 					"cost": 41
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:aqua_affinity"
 			]
 		},
 		{
-			"key": "minecraft:bane_of_arthropods",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "DAMAGE_ARTHROPODS",
+			"key": "minecraft:bane_of_arthropods",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.bane_of_arthropods",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -152,8 +158,6 @@
 					"cost": 57
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:density",
 				"minecraft:breach",
@@ -164,12 +168,16 @@
 			]
 		},
 		{
-			"key": "minecraft:binding_curse",
-			"treasure": true,
-			"cursed": true,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "BINDING_CURSE",
+			"key": "minecraft:binding_curse",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.binding_curse",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": true,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -191,19 +199,21 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:binding_curse"
 			]
 		},
 		{
-			"key": "minecraft:blast_protection",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "PROTECTION_EXPLOSIONS",
+			"key": "minecraft:blast_protection",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.blast_protection",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -294,8 +304,6 @@
 					"cost": 37
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:protection",
 				"minecraft:fire_protection",
@@ -304,12 +312,16 @@
 			]
 		},
 		{
-			"key": "minecraft:breach",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "BREACH",
+			"key": "minecraft:breach",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.breach",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -400,8 +412,6 @@
 					"cost": 92
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:density",
 				"minecraft:breach",
@@ -412,12 +422,16 @@
 			]
 		},
 		{
-			"key": "minecraft:channeling",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "CHANNELING",
+			"key": "minecraft:channeling",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.channeling",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -439,20 +453,22 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:channeling",
 				"minecraft:riptide"
 			]
 		},
 		{
-			"key": "minecraft:density",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "DENSITY",
+			"key": "minecraft:density",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.density",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -564,8 +580,6 @@
 					"cost": 57
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:density",
 				"minecraft:breach",
@@ -576,12 +590,16 @@
 			]
 		},
 		{
-			"key": "minecraft:depth_strider",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "DEPTH_STRIDER",
+			"key": "minecraft:depth_strider",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.depth_strider",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -651,20 +669,22 @@
 					"cost": 45
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:depth_strider",
 				"minecraft:frost_walker"
 			]
 		},
 		{
-			"key": "minecraft:efficiency",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "DIG_SPEED",
+			"key": "minecraft:efficiency",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.efficiency",
+			"startLevel": 1,
+			"anvilCost": 1,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -776,19 +796,21 @@
 					"cost": 91
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:efficiency"
 			]
 		},
 		{
-			"key": "minecraft:feather_falling",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "PROTECTION_FALL",
+			"key": "minecraft:feather_falling",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.feather_falling",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -879,19 +901,21 @@
 					"cost": 29
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:feather_falling"
 			]
 		},
 		{
-			"key": "minecraft:fire_aspect",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 2,
-			"startLevel": 1,
 			"name": "FIRE_ASPECT",
+			"key": "minecraft:fire_aspect",
+			"maxLevel": 2,
+			"translationKey": "enchantment.minecraft.fire_aspect",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -940,19 +964,21 @@
 					"cost": 80
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:fire_aspect"
 			]
 		},
 		{
-			"key": "minecraft:fire_protection",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "PROTECTION_FIRE",
+			"key": "minecraft:fire_protection",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.fire_protection",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1043,8 +1069,6 @@
 					"cost": 42
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:protection",
 				"minecraft:fire_protection",
@@ -1053,12 +1077,16 @@
 			]
 		},
 		{
-			"key": "minecraft:flame",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "ARROW_FIRE",
+			"key": "minecraft:flame",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.flame",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1080,19 +1108,21 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:flame"
 			]
 		},
 		{
-			"key": "minecraft:fortune",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "LOOT_BONUS_BLOCKS",
+			"key": "minecraft:fortune",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.fortune",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1162,20 +1192,22 @@
 					"cost": 83
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:silk_touch",
 				"minecraft:fortune"
 			]
 		},
 		{
-			"key": "minecraft:frost_walker",
-			"treasure": true,
-			"cursed": false,
-			"maxLevel": 2,
-			"startLevel": 1,
 			"name": "FROST_WALKER",
+			"key": "minecraft:frost_walker",
+			"maxLevel": 2,
+			"translationKey": "enchantment.minecraft.frost_walker",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1224,20 +1256,22 @@
 					"cost": 35
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:depth_strider",
 				"minecraft:frost_walker"
 			]
 		},
 		{
-			"key": "minecraft:impaling",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "IMPALING",
+			"key": "minecraft:impaling",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.impaling",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1349,8 +1383,6 @@
 					"cost": 53
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:density",
 				"minecraft:breach",
@@ -1361,12 +1393,16 @@
 			]
 		},
 		{
-			"key": "minecraft:infinity",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "ARROW_INFINITE",
+			"key": "minecraft:infinity",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.infinity",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1388,20 +1424,22 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:infinity",
 				"minecraft:mending"
 			]
 		},
 		{
-			"key": "minecraft:knockback",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 2,
-			"startLevel": 1,
 			"name": "KNOCKBACK",
+			"key": "minecraft:knockback",
+			"maxLevel": 2,
+			"translationKey": "enchantment.minecraft.knockback",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1450,19 +1488,21 @@
 					"cost": 75
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:knockback"
 			]
 		},
 		{
-			"key": "minecraft:looting",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "LOOT_BONUS_MOBS",
+			"key": "minecraft:looting",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.looting",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1532,19 +1572,21 @@
 					"cost": 83
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:looting"
 			]
 		},
 		{
-			"key": "minecraft:loyalty",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "LOYALTY",
+			"key": "minecraft:loyalty",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.loyalty",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1614,20 +1656,22 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:loyalty",
 				"minecraft:riptide"
 			]
 		},
 		{
-			"key": "minecraft:luck_of_the_sea",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "LUCK",
+			"key": "minecraft:luck_of_the_sea",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.luck_of_the_sea",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1697,19 +1741,21 @@
 					"cost": 83
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:luck_of_the_sea"
 			]
 		},
 		{
-			"key": "minecraft:lure",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "LURE",
+			"key": "minecraft:lure",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.lure",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1779,19 +1825,21 @@
 					"cost": 83
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:lure"
 			]
 		},
 		{
-			"key": "minecraft:mending",
-			"treasure": true,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "MENDING",
+			"key": "minecraft:mending",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.mending",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1813,20 +1861,22 @@
 					"cost": 75
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:infinity",
 				"minecraft:mending"
 			]
 		},
 		{
-			"key": "minecraft:multishot",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "MULTISHOT",
+			"key": "minecraft:multishot",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.multishot",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1848,20 +1898,22 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:multishot",
 				"minecraft:piercing"
 			]
 		},
 		{
-			"key": "minecraft:piercing",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "PIERCING",
+			"key": "minecraft:piercing",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.piercing",
+			"startLevel": 1,
+			"anvilCost": 1,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1952,20 +2004,22 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:multishot",
 				"minecraft:piercing"
 			]
 		},
 		{
-			"key": "minecraft:power",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "ARROW_DAMAGE",
+			"key": "minecraft:power",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.power",
+			"startLevel": 1,
+			"anvilCost": 1,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2077,19 +2131,21 @@
 					"cost": 56
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:power"
 			]
 		},
 		{
-			"key": "minecraft:projectile_protection",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "PROTECTION_PROJECTILE",
+			"key": "minecraft:projectile_protection",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.projectile_protection",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2180,8 +2236,6 @@
 					"cost": 27
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:protection",
 				"minecraft:fire_protection",
@@ -2190,12 +2244,16 @@
 			]
 		},
 		{
-			"key": "minecraft:protection",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 4,
-			"startLevel": 1,
 			"name": "PROTECTION_ENVIRONMENTAL",
+			"key": "minecraft:protection",
+			"maxLevel": 4,
+			"translationKey": "enchantment.minecraft.protection",
+			"startLevel": 1,
+			"anvilCost": 1,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2286,8 +2344,6 @@
 					"cost": 45
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:protection",
 				"minecraft:fire_protection",
@@ -2296,12 +2352,16 @@
 			]
 		},
 		{
-			"key": "minecraft:punch",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 2,
-			"startLevel": 1,
 			"name": "ARROW_KNOCKBACK",
+			"key": "minecraft:punch",
+			"maxLevel": 2,
+			"translationKey": "enchantment.minecraft.punch",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2350,19 +2410,21 @@
 					"cost": 57
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:punch"
 			]
 		},
 		{
-			"key": "minecraft:quick_charge",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "QUICK_CHARGE",
+			"key": "minecraft:quick_charge",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.quick_charge",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2432,19 +2494,21 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:quick_charge"
 			]
 		},
 		{
-			"key": "minecraft:respiration",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "OXYGEN",
+			"key": "minecraft:respiration",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.respiration",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2514,19 +2578,21 @@
 					"cost": 60
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:respiration"
 			]
 		},
 		{
-			"key": "minecraft:riptide",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "RIPTIDE",
+			"key": "minecraft:riptide",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.riptide",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2596,8 +2662,6 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:loyalty",
 				"minecraft:channeling",
@@ -2605,12 +2669,16 @@
 			]
 		},
 		{
-			"key": "minecraft:sharpness",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "DAMAGE_ALL",
+			"key": "minecraft:sharpness",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.sharpness",
+			"startLevel": 1,
+			"anvilCost": 1,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2722,8 +2790,6 @@
 					"cost": 65
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:density",
 				"minecraft:breach",
@@ -2734,12 +2800,16 @@
 			]
 		},
 		{
-			"key": "minecraft:silk_touch",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "SILK_TOUCH",
+			"key": "minecraft:silk_touch",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.silk_touch",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2761,20 +2831,22 @@
 					"cost": 65
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:silk_touch",
 				"minecraft:fortune"
 			]
 		},
 		{
-			"key": "minecraft:smite",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 5,
-			"startLevel": 1,
 			"name": "DAMAGE_UNDEAD",
+			"key": "minecraft:smite",
+			"maxLevel": 5,
+			"translationKey": "enchantment.minecraft.smite",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2886,8 +2958,6 @@
 					"cost": 57
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:density",
 				"minecraft:breach",
@@ -2898,12 +2968,16 @@
 			]
 		},
 		{
-			"key": "minecraft:soul_speed",
-			"treasure": true,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "SOUL_SPEED",
+			"key": "minecraft:soul_speed",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.soul_speed",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": false,
+			"discoverable": false,
+			"cursed": false,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2973,19 +3047,21 @@
 					"cost": 45
 				}
 			],
-			"tradeable": false,
-			"discoverable": false,
 			"conflicts": [
 				"minecraft:soul_speed"
 			]
 		},
 		{
-			"key": "minecraft:sweeping_edge",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "SWEEPING_EDGE",
+			"key": "minecraft:sweeping_edge",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.sweeping_edge",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3055,19 +3131,21 @@
 					"cost": 38
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:sweeping_edge"
 			]
 		},
 		{
-			"key": "minecraft:swift_sneak",
-			"treasure": true,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "SWIFT_SNEAK",
+			"key": "minecraft:swift_sneak",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.swift_sneak",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": false,
+			"discoverable": false,
+			"cursed": false,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3137,19 +3215,21 @@
 					"cost": 125
 				}
 			],
-			"tradeable": false,
-			"discoverable": false,
 			"conflicts": [
 				"minecraft:swift_sneak"
 			]
 		},
 		{
-			"key": "minecraft:thorns",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "THORNS",
+			"key": "minecraft:thorns",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.thorns",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3219,19 +3299,21 @@
 					"cost": 100
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:thorns"
 			]
 		},
 		{
-			"key": "minecraft:unbreaking",
-			"treasure": false,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "DURABILITY",
+			"key": "minecraft:unbreaking",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.unbreaking",
+			"startLevel": 1,
+			"anvilCost": 2,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": false,
+			"treasure": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3301,19 +3383,21 @@
 					"cost": 71
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:unbreaking"
 			]
 		},
 		{
-			"key": "minecraft:vanishing_curse",
-			"treasure": true,
-			"cursed": true,
-			"maxLevel": 1,
-			"startLevel": 1,
 			"name": "VANISHING_CURSE",
+			"key": "minecraft:vanishing_curse",
+			"maxLevel": 1,
+			"translationKey": "enchantment.minecraft.vanishing_curse",
+			"startLevel": 1,
+			"anvilCost": 8,
+			"tradeable": true,
+			"discoverable": true,
+			"cursed": true,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3335,19 +3419,21 @@
 					"cost": 50
 				}
 			],
-			"tradeable": true,
-			"discoverable": true,
 			"conflicts": [
 				"minecraft:vanishing_curse"
 			]
 		},
 		{
-			"key": "minecraft:wind_burst",
-			"treasure": true,
-			"cursed": false,
-			"maxLevel": 3,
-			"startLevel": 1,
 			"name": "WIND_BURST",
+			"key": "minecraft:wind_burst",
+			"maxLevel": 3,
+			"translationKey": "enchantment.minecraft.wind_burst",
+			"startLevel": 1,
+			"anvilCost": 4,
+			"tradeable": false,
+			"discoverable": false,
+			"cursed": false,
+			"treasure": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3417,8 +3503,6 @@
 					"cost": 83
 				}
 			],
-			"tradeable": false,
-			"discoverable": false,
 			"conflicts": [
 				"minecraft:wind_burst"
 			]

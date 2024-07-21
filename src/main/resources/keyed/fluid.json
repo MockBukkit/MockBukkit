@@ -1,19 +1,29 @@
 {
 	"values": [
 		{
-			"key": "minecraft:empty"
+			"key": "minecraft:empty",
+			"name": "EMPTY",
+			"ordinal": 0
 		},
 		{
-			"key": "minecraft:flowing_lava"
+			"key": "minecraft:flowing_lava",
+			"name": "FLOWING_LAVA",
+			"ordinal": 4
 		},
 		{
-			"key": "minecraft:flowing_water"
+			"key": "minecraft:flowing_water",
+			"name": "FLOWING_WATER",
+			"ordinal": 2
 		},
 		{
-			"key": "minecraft:lava"
+			"key": "minecraft:lava",
+			"name": "LAVA",
+			"ordinal": 3
 		},
 		{
-			"key": "minecraft:water"
+			"key": "minecraft:water",
+			"name": "WATER",
+			"ordinal": 1
 		}
 	]
 }

@@ -1,199 +1,394 @@
 {
 	"values": [
 		{
-			"key": "minecraft:badlands"
+			"key": "minecraft:badlands",
+			"translationKey": "biome.minecraft.badlands",
+			"name": "BADLANDS",
+			"ordinal": 28
 		},
 		{
-			"key": "minecraft:bamboo_jungle"
+			"key": "minecraft:bamboo_jungle",
+			"translationKey": "biome.minecraft.bamboo_jungle",
+			"name": "BAMBOO_JUNGLE",
+			"ordinal": 49
 		},
 		{
-			"key": "minecraft:basalt_deltas"
+			"key": "minecraft:basalt_deltas",
+			"translationKey": "biome.minecraft.basalt_deltas",
+			"name": "BASALT_DELTAS",
+			"ordinal": 53
 		},
 		{
-			"key": "minecraft:beach"
+			"key": "minecraft:beach",
+			"translationKey": "biome.minecraft.beach",
+			"name": "BEACH",
+			"ordinal": 15
 		},
 		{
-			"key": "minecraft:birch_forest"
+			"key": "minecraft:birch_forest",
+			"translationKey": "biome.minecraft.birch_forest",
+			"name": "BIRCH_FOREST",
+			"ordinal": 21
 		},
 		{
-			"key": "minecraft:cherry_grove"
+			"key": "minecraft:cherry_grove",
+			"translationKey": "biome.minecraft.cherry_grove",
+			"name": "CHERRY_GROVE",
+			"ordinal": 63
 		},
 		{
-			"key": "minecraft:cold_ocean"
+			"key": "minecraft:cold_ocean",
+			"translationKey": "biome.minecraft.cold_ocean",
+			"name": "COLD_OCEAN",
+			"ordinal": 36
 		},
 		{
-			"key": "minecraft:crimson_forest"
+			"key": "minecraft:crimson_forest",
+			"translationKey": "biome.minecraft.crimson_forest",
+			"name": "CRIMSON_FOREST",
+			"ordinal": 51
 		},
 		{
-			"key": "minecraft:custom"
+			"key": "minecraft:custom",
+			"translationKey": "biome.minecraft.custom",
+			"name": "CUSTOM",
+			"ordinal": 64
 		},
 		{
-			"key": "minecraft:dark_forest"
+			"key": "minecraft:dark_forest",
+			"translationKey": "biome.minecraft.dark_forest",
+			"name": "DARK_FOREST",
+			"ordinal": 22
 		},
 		{
-			"key": "minecraft:deep_cold_ocean"
+			"key": "minecraft:deep_cold_ocean",
+			"translationKey": "biome.minecraft.deep_cold_ocean",
+			"name": "DEEP_COLD_OCEAN",
+			"ordinal": 38
 		},
 		{
-			"key": "minecraft:deep_dark"
+			"key": "minecraft:deep_dark",
+			"translationKey": "biome.minecraft.deep_dark",
+			"name": "DEEP_DARK",
+			"ordinal": 56
 		},
 		{
-			"key": "minecraft:deep_frozen_ocean"
+			"key": "minecraft:deep_frozen_ocean",
+			"translationKey": "biome.minecraft.deep_frozen_ocean",
+			"name": "DEEP_FROZEN_OCEAN",
+			"ordinal": 39
 		},
 		{
-			"key": "minecraft:deep_lukewarm_ocean"
+			"key": "minecraft:deep_lukewarm_ocean",
+			"translationKey": "biome.minecraft.deep_lukewarm_ocean",
+			"name": "DEEP_LUKEWARM_OCEAN",
+			"ordinal": 37
 		},
 		{
-			"key": "minecraft:deep_ocean"
+			"key": "minecraft:deep_ocean",
+			"translationKey": "biome.minecraft.deep_ocean",
+			"name": "DEEP_OCEAN",
+			"ordinal": 18
 		},
 		{
-			"key": "minecraft:desert"
+			"key": "minecraft:desert",
+			"translationKey": "biome.minecraft.desert",
+			"name": "DESERT",
+			"ordinal": 2
 		},
 		{
-			"key": "minecraft:dripstone_caves"
+			"key": "minecraft:dripstone_caves",
+			"translationKey": "biome.minecraft.dripstone_caves",
+			"name": "DRIPSTONE_CAVES",
+			"ordinal": 54
 		},
 		{
-			"key": "minecraft:end_barrens"
+			"key": "minecraft:end_barrens",
+			"translationKey": "biome.minecraft.end_barrens",
+			"name": "END_BARRENS",
+			"ordinal": 33
 		},
 		{
-			"key": "minecraft:end_highlands"
+			"key": "minecraft:end_highlands",
+			"translationKey": "biome.minecraft.end_highlands",
+			"name": "END_HIGHLANDS",
+			"ordinal": 32
 		},
 		{
-			"key": "minecraft:end_midlands"
+			"key": "minecraft:end_midlands",
+			"translationKey": "biome.minecraft.end_midlands",
+			"name": "END_MIDLANDS",
+			"ordinal": 31
 		},
 		{
-			"key": "minecraft:eroded_badlands"
+			"key": "minecraft:eroded_badlands",
+			"translationKey": "biome.minecraft.eroded_badlands",
+			"name": "ERODED_BADLANDS",
+			"ordinal": 48
 		},
 		{
-			"key": "minecraft:flower_forest"
+			"key": "minecraft:flower_forest",
+			"translationKey": "biome.minecraft.flower_forest",
+			"name": "FLOWER_FOREST",
+			"ordinal": 43
 		},
 		{
-			"key": "minecraft:forest"
+			"key": "minecraft:forest",
+			"translationKey": "biome.minecraft.forest",
+			"name": "FOREST",
+			"ordinal": 4
 		},
 		{
-			"key": "minecraft:frozen_ocean"
+			"key": "minecraft:frozen_ocean",
+			"translationKey": "biome.minecraft.frozen_ocean",
+			"name": "FROZEN_OCEAN",
+			"ordinal": 11
 		},
 		{
-			"key": "minecraft:frozen_peaks"
+			"key": "minecraft:frozen_peaks",
+			"translationKey": "biome.minecraft.frozen_peaks",
+			"name": "FROZEN_PEAKS",
+			"ordinal": 60
 		},
 		{
-			"key": "minecraft:frozen_river"
+			"key": "minecraft:frozen_river",
+			"translationKey": "biome.minecraft.frozen_river",
+			"name": "FROZEN_RIVER",
+			"ordinal": 12
 		},
 		{
-			"key": "minecraft:grove"
+			"key": "minecraft:grove",
+			"translationKey": "biome.minecraft.grove",
+			"name": "GROVE",
+			"ordinal": 58
 		},
 		{
-			"key": "minecraft:ice_spikes"
+			"key": "minecraft:ice_spikes",
+			"translationKey": "biome.minecraft.ice_spikes",
+			"name": "ICE_SPIKES",
+			"ordinal": 44
 		},
 		{
-			"key": "minecraft:jagged_peaks"
+			"key": "minecraft:jagged_peaks",
+			"translationKey": "biome.minecraft.jagged_peaks",
+			"name": "JAGGED_PEAKS",
+			"ordinal": 61
 		},
 		{
-			"key": "minecraft:jungle"
+			"key": "minecraft:jungle",
+			"translationKey": "biome.minecraft.jungle",
+			"name": "JUNGLE",
+			"ordinal": 16
 		},
 		{
-			"key": "minecraft:lukewarm_ocean"
+			"key": "minecraft:lukewarm_ocean",
+			"translationKey": "biome.minecraft.lukewarm_ocean",
+			"name": "LUKEWARM_OCEAN",
+			"ordinal": 35
 		},
 		{
-			"key": "minecraft:lush_caves"
+			"key": "minecraft:lush_caves",
+			"translationKey": "biome.minecraft.lush_caves",
+			"name": "LUSH_CAVES",
+			"ordinal": 55
 		},
 		{
-			"key": "minecraft:mangrove_swamp"
+			"key": "minecraft:mangrove_swamp",
+			"translationKey": "biome.minecraft.mangrove_swamp",
+			"name": "MANGROVE_SWAMP",
+			"ordinal": 7
 		},
 		{
-			"key": "minecraft:meadow"
+			"key": "minecraft:meadow",
+			"translationKey": "biome.minecraft.meadow",
+			"name": "MEADOW",
+			"ordinal": 57
 		},
 		{
-			"key": "minecraft:mushroom_fields"
+			"key": "minecraft:mushroom_fields",
+			"translationKey": "biome.minecraft.mushroom_fields",
+			"name": "MUSHROOM_FIELDS",
+			"ordinal": 14
 		},
 		{
-			"key": "minecraft:nether_wastes"
+			"key": "minecraft:nether_wastes",
+			"translationKey": "biome.minecraft.nether_wastes",
+			"name": "NETHER_WASTES",
+			"ordinal": 9
 		},
 		{
-			"key": "minecraft:ocean"
+			"key": "minecraft:ocean",
+			"translationKey": "biome.minecraft.ocean",
+			"name": "OCEAN",
+			"ordinal": 0
 		},
 		{
-			"key": "minecraft:old_growth_birch_forest"
+			"key": "minecraft:old_growth_birch_forest",
+			"translationKey": "biome.minecraft.old_growth_birch_forest",
+			"name": "OLD_GROWTH_BIRCH_FOREST",
+			"ordinal": 45
 		},
 		{
-			"key": "minecraft:old_growth_pine_taiga"
+			"key": "minecraft:old_growth_pine_taiga",
+			"translationKey": "biome.minecraft.old_growth_pine_taiga",
+			"name": "OLD_GROWTH_PINE_TAIGA",
+			"ordinal": 24
 		},
 		{
-			"key": "minecraft:old_growth_spruce_taiga"
+			"key": "minecraft:old_growth_spruce_taiga",
+			"translationKey": "biome.minecraft.old_growth_spruce_taiga",
+			"name": "OLD_GROWTH_SPRUCE_TAIGA",
+			"ordinal": 46
 		},
 		{
-			"key": "minecraft:plains"
+			"key": "minecraft:plains",
+			"translationKey": "biome.minecraft.plains",
+			"name": "PLAINS",
+			"ordinal": 1
 		},
 		{
-			"key": "minecraft:river"
+			"key": "minecraft:river",
+			"translationKey": "biome.minecraft.river",
+			"name": "RIVER",
+			"ordinal": 8
 		},
 		{
-			"key": "minecraft:savanna"
+			"key": "minecraft:savanna",
+			"translationKey": "biome.minecraft.savanna",
+			"name": "SAVANNA",
+			"ordinal": 26
 		},
 		{
-			"key": "minecraft:savanna_plateau"
+			"key": "minecraft:savanna_plateau",
+			"translationKey": "biome.minecraft.savanna_plateau",
+			"name": "SAVANNA_PLATEAU",
+			"ordinal": 27
 		},
 		{
-			"key": "minecraft:small_end_islands"
+			"key": "minecraft:small_end_islands",
+			"translationKey": "biome.minecraft.small_end_islands",
+			"name": "SMALL_END_ISLANDS",
+			"ordinal": 30
 		},
 		{
-			"key": "minecraft:snowy_beach"
+			"key": "minecraft:snowy_beach",
+			"translationKey": "biome.minecraft.snowy_beach",
+			"name": "SNOWY_BEACH",
+			"ordinal": 20
 		},
 		{
-			"key": "minecraft:snowy_plains"
+			"key": "minecraft:snowy_plains",
+			"translationKey": "biome.minecraft.snowy_plains",
+			"name": "SNOWY_PLAINS",
+			"ordinal": 13
 		},
 		{
-			"key": "minecraft:snowy_slopes"
+			"key": "minecraft:snowy_slopes",
+			"translationKey": "biome.minecraft.snowy_slopes",
+			"name": "SNOWY_SLOPES",
+			"ordinal": 59
 		},
 		{
-			"key": "minecraft:snowy_taiga"
+			"key": "minecraft:snowy_taiga",
+			"translationKey": "biome.minecraft.snowy_taiga",
+			"name": "SNOWY_TAIGA",
+			"ordinal": 23
 		},
 		{
-			"key": "minecraft:soul_sand_valley"
+			"key": "minecraft:soul_sand_valley",
+			"translationKey": "biome.minecraft.soul_sand_valley",
+			"name": "SOUL_SAND_VALLEY",
+			"ordinal": 50
 		},
 		{
-			"key": "minecraft:sparse_jungle"
+			"key": "minecraft:sparse_jungle",
+			"translationKey": "biome.minecraft.sparse_jungle",
+			"name": "SPARSE_JUNGLE",
+			"ordinal": 17
 		},
 		{
-			"key": "minecraft:stony_peaks"
+			"key": "minecraft:stony_peaks",
+			"translationKey": "biome.minecraft.stony_peaks",
+			"name": "STONY_PEAKS",
+			"ordinal": 62
 		},
 		{
-			"key": "minecraft:stony_shore"
+			"key": "minecraft:stony_shore",
+			"translationKey": "biome.minecraft.stony_shore",
+			"name": "STONY_SHORE",
+			"ordinal": 19
 		},
 		{
-			"key": "minecraft:sunflower_plains"
+			"key": "minecraft:sunflower_plains",
+			"translationKey": "biome.minecraft.sunflower_plains",
+			"name": "SUNFLOWER_PLAINS",
+			"ordinal": 41
 		},
 		{
-			"key": "minecraft:swamp"
+			"key": "minecraft:swamp",
+			"translationKey": "biome.minecraft.swamp",
+			"name": "SWAMP",
+			"ordinal": 6
 		},
 		{
-			"key": "minecraft:taiga"
+			"key": "minecraft:taiga",
+			"translationKey": "biome.minecraft.taiga",
+			"name": "TAIGA",
+			"ordinal": 5
 		},
 		{
-			"key": "minecraft:the_end"
+			"key": "minecraft:the_end",
+			"translationKey": "biome.minecraft.the_end",
+			"name": "THE_END",
+			"ordinal": 10
 		},
 		{
-			"key": "minecraft:the_void"
+			"key": "minecraft:the_void",
+			"translationKey": "biome.minecraft.the_void",
+			"name": "THE_VOID",
+			"ordinal": 40
 		},
 		{
-			"key": "minecraft:warm_ocean"
+			"key": "minecraft:warm_ocean",
+			"translationKey": "biome.minecraft.warm_ocean",
+			"name": "WARM_OCEAN",
+			"ordinal": 34
 		},
 		{
-			"key": "minecraft:warped_forest"
+			"key": "minecraft:warped_forest",
+			"translationKey": "biome.minecraft.warped_forest",
+			"name": "WARPED_FOREST",
+			"ordinal": 52
 		},
 		{
-			"key": "minecraft:windswept_forest"
+			"key": "minecraft:windswept_forest",
+			"translationKey": "biome.minecraft.windswept_forest",
+			"name": "WINDSWEPT_FOREST",
+			"ordinal": 25
 		},
 		{
-			"key": "minecraft:windswept_gravelly_hills"
+			"key": "minecraft:windswept_gravelly_hills",
+			"translationKey": "biome.minecraft.windswept_gravelly_hills",
+			"name": "WINDSWEPT_GRAVELLY_HILLS",
+			"ordinal": 42
 		},
 		{
-			"key": "minecraft:windswept_hills"
+			"key": "minecraft:windswept_hills",
+			"translationKey": "biome.minecraft.windswept_hills",
+			"name": "WINDSWEPT_HILLS",
+			"ordinal": 3
 		},
 		{
-			"key": "minecraft:windswept_savanna"
+			"key": "minecraft:windswept_savanna",
+			"translationKey": "biome.minecraft.windswept_savanna",
+			"name": "WINDSWEPT_SAVANNA",
+			"ordinal": 47
 		},
 		{
-			"key": "minecraft:wooded_badlands"
+			"key": "minecraft:wooded_badlands",
+			"translationKey": "biome.minecraft.wooded_badlands",
+			"name": "WOODED_BADLANDS",
+			"ordinal": 29
 		}
 	]
 }

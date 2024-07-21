@@ -1,13 +1,19 @@
 {
 	"values": [
 		{
-			"key": "minecraft:cold"
+			"name": "COLD",
+			"key": "minecraft:cold",
+			"ordinal": 2
 		},
 		{
-			"key": "minecraft:temperate"
+			"name": "TEMPERATE",
+			"key": "minecraft:temperate",
+			"ordinal": 0
 		},
 		{
-			"key": "minecraft:warm"
+			"name": "WARM",
+			"key": "minecraft:warm",
+			"ordinal": 1
 		}
 	]
 }

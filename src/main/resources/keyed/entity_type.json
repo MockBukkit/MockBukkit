@@ -1,394 +1,1304 @@
 {
 	"values": [
 		{
-			"key": "minecraft:allay"
-		},
-		{
-			"key": "minecraft:area_effect_cloud"
-		},
-		{
-			"key": "minecraft:armadillo"
-		},
-		{
-			"key": "minecraft:armor_stand"
-		},
-		{
-			"key": "minecraft:arrow"
-		},
-		{
-			"key": "minecraft:axolotl"
-		},
-		{
-			"key": "minecraft:bat"
-		},
-		{
-			"key": "minecraft:bee"
-		},
-		{
-			"key": "minecraft:blaze"
-		},
-		{
-			"key": "minecraft:block_display"
-		},
-		{
-			"key": "minecraft:boat"
-		},
-		{
-			"key": "minecraft:bogged"
-		},
-		{
-			"key": "minecraft:breeze"
-		},
-		{
-			"key": "minecraft:breeze_wind_charge"
-		},
-		{
-			"key": "minecraft:camel"
-		},
-		{
-			"key": "minecraft:cat"
-		},
-		{
-			"key": "minecraft:cave_spider"
-		},
-		{
-			"key": "minecraft:chest_boat"
-		},
-		{
-			"key": "minecraft:chest_minecart"
-		},
-		{
-			"key": "minecraft:chicken"
-		},
-		{
-			"key": "minecraft:cod"
-		},
-		{
-			"key": "minecraft:command_block_minecart"
-		},
-		{
-			"key": "minecraft:cow"
-		},
-		{
-			"key": "minecraft:creeper"
-		},
-		{
-			"key": "minecraft:dolphin"
-		},
-		{
-			"key": "minecraft:donkey"
-		},
-		{
-			"key": "minecraft:dragon_fireball"
-		},
-		{
-			"key": "minecraft:drowned"
-		},
-		{
-			"key": "minecraft:egg"
-		},
-		{
-			"key": "minecraft:elder_guardian"
-		},
-		{
-			"key": "minecraft:end_crystal"
-		},
-		{
-			"key": "minecraft:ender_dragon"
-		},
-		{
-			"key": "minecraft:ender_pearl"
-		},
-		{
-			"key": "minecraft:enderman"
-		},
-		{
-			"key": "minecraft:endermite"
-		},
-		{
-			"key": "minecraft:evoker"
-		},
-		{
-			"key": "minecraft:evoker_fangs"
-		},
-		{
-			"key": "minecraft:experience_bottle"
-		},
-		{
-			"key": "minecraft:experience_orb"
-		},
-		{
-			"key": "minecraft:eye_of_ender"
-		},
-		{
-			"key": "minecraft:falling_block"
-		},
-		{
-			"key": "minecraft:fireball"
-		},
-		{
-			"key": "minecraft:firework_rocket"
-		},
-		{
-			"key": "minecraft:fishing_bobber"
-		},
-		{
-			"key": "minecraft:fox"
-		},
-		{
-			"key": "minecraft:frog"
-		},
-		{
-			"key": "minecraft:furnace_minecart"
-		},
-		{
-			"key": "minecraft:ghast"
-		},
-		{
-			"key": "minecraft:giant"
-		},
-		{
-			"key": "minecraft:glow_item_frame"
-		},
-		{
-			"key": "minecraft:glow_squid"
-		},
-		{
-			"key": "minecraft:goat"
-		},
-		{
-			"key": "minecraft:guardian"
-		},
-		{
-			"key": "minecraft:hoglin"
-		},
-		{
-			"key": "minecraft:hopper_minecart"
-		},
-		{
-			"key": "minecraft:horse"
-		},
-		{
-			"key": "minecraft:husk"
-		},
-		{
-			"key": "minecraft:illusioner"
-		},
-		{
-			"key": "minecraft:interaction"
-		},
-		{
-			"key": "minecraft:iron_golem"
-		},
-		{
-			"key": "minecraft:item"
-		},
-		{
-			"key": "minecraft:item_display"
-		},
-		{
-			"key": "minecraft:item_frame"
-		},
-		{
-			"key": "minecraft:leash_knot"
-		},
-		{
-			"key": "minecraft:lightning_bolt"
-		},
-		{
-			"key": "minecraft:llama"
-		},
-		{
-			"key": "minecraft:llama_spit"
-		},
-		{
-			"key": "minecraft:magma_cube"
-		},
-		{
-			"key": "minecraft:marker"
-		},
-		{
-			"key": "minecraft:minecart"
-		},
-		{
-			"key": "minecraft:mooshroom"
-		},
-		{
-			"key": "minecraft:mule"
-		},
-		{
-			"key": "minecraft:ocelot"
-		},
-		{
-			"key": "minecraft:ominous_item_spawner"
-		},
-		{
-			"key": "minecraft:painting"
-		},
-		{
-			"key": "minecraft:panda"
-		},
-		{
-			"key": "minecraft:parrot"
-		},
-		{
-			"key": "minecraft:phantom"
-		},
-		{
-			"key": "minecraft:pig"
-		},
-		{
-			"key": "minecraft:piglin"
-		},
-		{
-			"key": "minecraft:piglin_brute"
-		},
-		{
-			"key": "minecraft:pillager"
-		},
-		{
-			"key": "minecraft:player"
-		},
-		{
-			"key": "minecraft:polar_bear"
-		},
-		{
-			"key": "minecraft:potion"
-		},
-		{
-			"key": "minecraft:pufferfish"
-		},
-		{
-			"key": "minecraft:rabbit"
-		},
-		{
-			"key": "minecraft:ravager"
-		},
-		{
-			"key": "minecraft:salmon"
-		},
-		{
-			"key": "minecraft:sheep"
-		},
-		{
-			"key": "minecraft:shulker"
-		},
-		{
-			"key": "minecraft:shulker_bullet"
-		},
-		{
-			"key": "minecraft:silverfish"
-		},
-		{
-			"key": "minecraft:skeleton"
-		},
-		{
-			"key": "minecraft:skeleton_horse"
-		},
-		{
-			"key": "minecraft:slime"
-		},
-		{
-			"key": "minecraft:small_fireball"
-		},
-		{
-			"key": "minecraft:sniffer"
-		},
-		{
-			"key": "minecraft:snow_golem"
-		},
-		{
-			"key": "minecraft:snowball"
-		},
-		{
-			"key": "minecraft:spawner_minecart"
-		},
-		{
-			"key": "minecraft:spectral_arrow"
-		},
-		{
-			"key": "minecraft:spider"
-		},
-		{
-			"key": "minecraft:squid"
-		},
-		{
-			"key": "minecraft:stray"
-		},
-		{
-			"key": "minecraft:strider"
-		},
-		{
-			"key": "minecraft:tadpole"
-		},
-		{
-			"key": "minecraft:text_display"
-		},
-		{
-			"key": "minecraft:tnt"
-		},
-		{
-			"key": "minecraft:tnt_minecart"
-		},
-		{
-			"key": "minecraft:trader_llama"
-		},
-		{
-			"key": "minecraft:trident"
-		},
-		{
-			"key": "minecraft:tropical_fish"
-		},
-		{
-			"key": "minecraft:turtle"
-		},
-		{
-			"key": "minecraft:vex"
-		},
-		{
-			"key": "minecraft:villager"
-		},
-		{
-			"key": "minecraft:vindicator"
-		},
-		{
-			"key": "minecraft:wandering_trader"
-		},
-		{
-			"key": "minecraft:warden"
-		},
-		{
-			"key": "minecraft:wind_charge"
-		},
-		{
-			"key": "minecraft:witch"
-		},
-		{
-			"key": "minecraft:wither"
-		},
-		{
-			"key": "minecraft:wither_skeleton"
-		},
-		{
-			"key": "minecraft:wither_skull"
-		},
-		{
-			"key": "minecraft:wolf"
-		},
-		{
-			"key": "minecraft:zoglin"
-		},
-		{
-			"key": "minecraft:zombie"
-		},
-		{
-			"key": "minecraft:zombie_horse"
-		},
-		{
-			"key": "minecraft:zombie_villager"
-		},
-		{
-			"key": "minecraft:zombified_piglin"
+			"name": "ALLAY",
+			"key": "minecraft:allay",
+			"alive": true,
+			"translationKey": "entity.minecraft.allay",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 110
+		},
+		{
+			"name": "AREA_EFFECT_CLOUD",
+			"key": "minecraft:area_effect_cloud",
+			"alive": false,
+			"translationKey": "entity.minecraft.area_effect_cloud",
+			"spawnable": true,
+			"typeId": 3,
+			"defaultAttributes": false,
+			"ordinal": 2
+		},
+		{
+			"name": "ARMADILLO",
+			"key": "minecraft:armadillo",
+			"alive": true,
+			"translationKey": "entity.minecraft.armadillo",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 124
+		},
+		{
+			"name": "ARMOR_STAND",
+			"key": "minecraft:armor_stand",
+			"alive": true,
+			"translationKey": "entity.minecraft.armor_stand",
+			"spawnable": true,
+			"typeId": 30,
+			"defaultAttributes": true,
+			"ordinal": 29
+		},
+		{
+			"name": "ARROW",
+			"key": "minecraft:arrow",
+			"alive": false,
+			"translationKey": "entity.minecraft.arrow",
+			"spawnable": true,
+			"typeId": 10,
+			"defaultAttributes": false,
+			"ordinal": 9
+		},
+		{
+			"name": "AXOLOTL",
+			"key": "minecraft:axolotl",
+			"alive": true,
+			"translationKey": "entity.minecraft.axolotl",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 105
+		},
+		{
+			"name": "BAT",
+			"key": "minecraft:bat",
+			"alive": true,
+			"translationKey": "entity.minecraft.bat",
+			"spawnable": true,
+			"typeId": 65,
+			"defaultAttributes": true,
+			"ordinal": 60
+		},
+		{
+			"name": "BEE",
+			"key": "minecraft:bee",
+			"alive": true,
+			"translationKey": "entity.minecraft.bee",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 99
+		},
+		{
+			"name": "BLAZE",
+			"key": "minecraft:blaze",
+			"alive": true,
+			"translationKey": "entity.minecraft.blaze",
+			"spawnable": true,
+			"typeId": 61,
+			"defaultAttributes": true,
+			"ordinal": 56
+		},
+		{
+			"name": "BLOCK_DISPLAY",
+			"key": "minecraft:block_display",
+			"alive": false,
+			"translationKey": "entity.minecraft.block_display",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 116
+		},
+		{
+			"name": "BOAT",
+			"key": "minecraft:boat",
+			"alive": false,
+			"translationKey": "entity.minecraft.boat",
+			"spawnable": true,
+			"typeId": 41,
+			"defaultAttributes": false,
+			"ordinal": 38
+		},
+		{
+			"name": "BOGGED",
+			"key": "minecraft:bogged",
+			"alive": true,
+			"translationKey": "entity.minecraft.bogged",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 125
+		},
+		{
+			"name": "BREEZE",
+			"key": "minecraft:breeze",
+			"alive": true,
+			"translationKey": "entity.minecraft.breeze",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 121
+		},
+		{
+			"name": "BREEZE_WIND_CHARGE",
+			"key": "minecraft:breeze_wind_charge",
+			"alive": false,
+			"translationKey": "entity.minecraft.breeze_wind_charge",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 123
+		},
+		{
+			"name": "CAMEL",
+			"key": "minecraft:camel",
+			"alive": true,
+			"translationKey": "entity.minecraft.camel",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 115
+		},
+		{
+			"name": "CAT",
+			"key": "minecraft:cat",
+			"alive": true,
+			"translationKey": "entity.minecraft.cat",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 92
+		},
+		{
+			"name": "CAVE_SPIDER",
+			"key": "minecraft:cave_spider",
+			"alive": true,
+			"translationKey": "entity.minecraft.cave_spider",
+			"spawnable": true,
+			"typeId": 59,
+			"defaultAttributes": true,
+			"ordinal": 54
+		},
+		{
+			"name": "CHEST_BOAT",
+			"key": "minecraft:chest_boat",
+			"alive": false,
+			"translationKey": "entity.minecraft.chest_boat",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 111
+		},
+		{
+			"name": "CHEST_MINECART",
+			"key": "minecraft:chest_minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.chest_minecart",
+			"spawnable": true,
+			"typeId": 43,
+			"defaultAttributes": false,
+			"ordinal": 40
+		},
+		{
+			"name": "CHICKEN",
+			"key": "minecraft:chicken",
+			"alive": true,
+			"translationKey": "entity.minecraft.chicken",
+			"spawnable": true,
+			"typeId": 93,
+			"defaultAttributes": true,
+			"ordinal": 68
+		},
+		{
+			"name": "COD",
+			"key": "minecraft:cod",
+			"alive": true,
+			"translationKey": "entity.minecraft.cod",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 86
+		},
+		{
+			"name": "COMMAND_BLOCK_MINECART",
+			"key": "minecraft:command_block_minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.command_block_minecart",
+			"spawnable": true,
+			"typeId": 40,
+			"defaultAttributes": false,
+			"ordinal": 37
+		},
+		{
+			"name": "COW",
+			"key": "minecraft:cow",
+			"alive": true,
+			"translationKey": "entity.minecraft.cow",
+			"spawnable": true,
+			"typeId": 92,
+			"defaultAttributes": true,
+			"ordinal": 67
+		},
+		{
+			"name": "CREEPER",
+			"key": "minecraft:creeper",
+			"alive": true,
+			"translationKey": "entity.minecraft.creeper",
+			"spawnable": true,
+			"typeId": 50,
+			"defaultAttributes": true,
+			"ordinal": 45
+		},
+		{
+			"name": "DOLPHIN",
+			"key": "minecraft:dolphin",
+			"alive": true,
+			"translationKey": "entity.minecraft.dolphin",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 91
+		},
+		{
+			"name": "DONKEY",
+			"key": "minecraft:donkey",
+			"alive": true,
+			"translationKey": "entity.minecraft.donkey",
+			"spawnable": true,
+			"typeId": 31,
+			"defaultAttributes": true,
+			"ordinal": 30
+		},
+		{
+			"name": "DRAGON_FIREBALL",
+			"key": "minecraft:dragon_fireball",
+			"alive": false,
+			"translationKey": "entity.minecraft.dragon_fireball",
+			"spawnable": true,
+			"typeId": 26,
+			"defaultAttributes": false,
+			"ordinal": 25
+		},
+		{
+			"name": "DROWNED",
+			"key": "minecraft:drowned",
+			"alive": true,
+			"translationKey": "entity.minecraft.drowned",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 90
+		},
+		{
+			"name": "EGG",
+			"key": "minecraft:egg",
+			"alive": false,
+			"translationKey": "entity.minecraft.egg",
+			"spawnable": true,
+			"typeId": 7,
+			"defaultAttributes": false,
+			"ordinal": 6
+		},
+		{
+			"name": "ELDER_GUARDIAN",
+			"key": "minecraft:elder_guardian",
+			"alive": true,
+			"translationKey": "entity.minecraft.elder_guardian",
+			"spawnable": true,
+			"typeId": 4,
+			"defaultAttributes": true,
+			"ordinal": 3
+		},
+		{
+			"name": "END_CRYSTAL",
+			"key": "minecraft:end_crystal",
+			"alive": false,
+			"translationKey": "entity.minecraft.end_crystal",
+			"spawnable": true,
+			"typeId": 200,
+			"defaultAttributes": false,
+			"ordinal": 82
+		},
+		{
+			"name": "ENDER_DRAGON",
+			"key": "minecraft:ender_dragon",
+			"alive": true,
+			"translationKey": "entity.minecraft.ender_dragon",
+			"spawnable": true,
+			"typeId": 63,
+			"defaultAttributes": true,
+			"ordinal": 58
+		},
+		{
+			"name": "ENDER_PEARL",
+			"key": "minecraft:ender_pearl",
+			"alive": false,
+			"translationKey": "entity.minecraft.ender_pearl",
+			"spawnable": true,
+			"typeId": 14,
+			"defaultAttributes": false,
+			"ordinal": 13
+		},
+		{
+			"name": "ENDERMAN",
+			"key": "minecraft:enderman",
+			"alive": true,
+			"translationKey": "entity.minecraft.enderman",
+			"spawnable": true,
+			"typeId": 58,
+			"defaultAttributes": true,
+			"ordinal": 53
+		},
+		{
+			"name": "ENDERMITE",
+			"key": "minecraft:endermite",
+			"alive": true,
+			"translationKey": "entity.minecraft.endermite",
+			"spawnable": true,
+			"typeId": 67,
+			"defaultAttributes": true,
+			"ordinal": 62
+		},
+		{
+			"name": "EVOKER",
+			"key": "minecraft:evoker",
+			"alive": true,
+			"translationKey": "entity.minecraft.evoker",
+			"spawnable": true,
+			"typeId": 34,
+			"defaultAttributes": true,
+			"ordinal": 33
+		},
+		{
+			"name": "EVOKER_FANGS",
+			"key": "minecraft:evoker_fangs",
+			"alive": false,
+			"translationKey": "entity.minecraft.evoker_fangs",
+			"spawnable": true,
+			"typeId": 33,
+			"defaultAttributes": false,
+			"ordinal": 32
+		},
+		{
+			"name": "EXPERIENCE_BOTTLE",
+			"key": "minecraft:experience_bottle",
+			"alive": false,
+			"translationKey": "entity.minecraft.experience_bottle",
+			"spawnable": true,
+			"typeId": 17,
+			"defaultAttributes": false,
+			"ordinal": 16
+		},
+		{
+			"name": "EXPERIENCE_ORB",
+			"key": "minecraft:experience_orb",
+			"alive": false,
+			"translationKey": "entity.minecraft.experience_orb",
+			"spawnable": true,
+			"typeId": 2,
+			"defaultAttributes": false,
+			"ordinal": 1
+		},
+		{
+			"name": "EYE_OF_ENDER",
+			"key": "minecraft:eye_of_ender",
+			"alive": false,
+			"translationKey": "entity.minecraft.eye_of_ender",
+			"spawnable": true,
+			"typeId": 15,
+			"defaultAttributes": false,
+			"ordinal": 14
+		},
+		{
+			"name": "FALLING_BLOCK",
+			"key": "minecraft:falling_block",
+			"alive": false,
+			"translationKey": "entity.minecraft.falling_block",
+			"spawnable": true,
+			"typeId": 21,
+			"defaultAttributes": false,
+			"ordinal": 20
+		},
+		{
+			"name": "FIREBALL",
+			"key": "minecraft:fireball",
+			"alive": false,
+			"translationKey": "entity.minecraft.fireball",
+			"spawnable": true,
+			"typeId": 12,
+			"defaultAttributes": false,
+			"ordinal": 11
+		},
+		{
+			"name": "FIREWORK_ROCKET",
+			"key": "minecraft:firework_rocket",
+			"alive": false,
+			"translationKey": "entity.minecraft.firework_rocket",
+			"spawnable": true,
+			"typeId": 22,
+			"defaultAttributes": false,
+			"ordinal": 21
+		},
+		{
+			"name": "FISHING_BOBBER",
+			"key": "minecraft:fishing_bobber",
+			"alive": false,
+			"translationKey": "entity.minecraft.fishing_bobber",
+			"spawnable": false,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 127
+		},
+		{
+			"name": "FOX",
+			"key": "minecraft:fox",
+			"alive": true,
+			"translationKey": "entity.minecraft.fox",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 98
+		},
+		{
+			"name": "FROG",
+			"key": "minecraft:frog",
+			"alive": true,
+			"translationKey": "entity.minecraft.frog",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 112
+		},
+		{
+			"name": "FURNACE_MINECART",
+			"key": "minecraft:furnace_minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.furnace_minecart",
+			"spawnable": true,
+			"typeId": 44,
+			"defaultAttributes": false,
+			"ordinal": 41
+		},
+		{
+			"name": "GHAST",
+			"key": "minecraft:ghast",
+			"alive": true,
+			"translationKey": "entity.minecraft.ghast",
+			"spawnable": true,
+			"typeId": 56,
+			"defaultAttributes": true,
+			"ordinal": 51
+		},
+		{
+			"name": "GIANT",
+			"key": "minecraft:giant",
+			"alive": true,
+			"translationKey": "entity.minecraft.giant",
+			"spawnable": true,
+			"typeId": 53,
+			"defaultAttributes": true,
+			"ordinal": 48
+		},
+		{
+			"name": "GLOW_ITEM_FRAME",
+			"key": "minecraft:glow_item_frame",
+			"alive": false,
+			"translationKey": "entity.minecraft.glow_item_frame",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 106
+		},
+		{
+			"name": "GLOW_SQUID",
+			"key": "minecraft:glow_squid",
+			"alive": true,
+			"translationKey": "entity.minecraft.glow_squid",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 107
+		},
+		{
+			"name": "GOAT",
+			"key": "minecraft:goat",
+			"alive": true,
+			"translationKey": "entity.minecraft.goat",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 108
+		},
+		{
+			"name": "GUARDIAN",
+			"key": "minecraft:guardian",
+			"alive": true,
+			"translationKey": "entity.minecraft.guardian",
+			"spawnable": true,
+			"typeId": 68,
+			"defaultAttributes": true,
+			"ordinal": 63
+		},
+		{
+			"name": "HOGLIN",
+			"key": "minecraft:hoglin",
+			"alive": true,
+			"translationKey": "entity.minecraft.hoglin",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 100
+		},
+		{
+			"name": "HOPPER_MINECART",
+			"key": "minecraft:hopper_minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.hopper_minecart",
+			"spawnable": true,
+			"typeId": 46,
+			"defaultAttributes": false,
+			"ordinal": 43
+		},
+		{
+			"name": "HORSE",
+			"key": "minecraft:horse",
+			"alive": true,
+			"translationKey": "entity.minecraft.horse",
+			"spawnable": true,
+			"typeId": 100,
+			"defaultAttributes": true,
+			"ordinal": 75
+		},
+		{
+			"name": "HUSK",
+			"key": "minecraft:husk",
+			"alive": true,
+			"translationKey": "entity.minecraft.husk",
+			"spawnable": true,
+			"typeId": 23,
+			"defaultAttributes": true,
+			"ordinal": 22
+		},
+		{
+			"name": "ILLUSIONER",
+			"key": "minecraft:illusioner",
+			"alive": true,
+			"translationKey": "entity.minecraft.illusioner",
+			"spawnable": true,
+			"typeId": 37,
+			"defaultAttributes": true,
+			"ordinal": 36
+		},
+		{
+			"name": "INTERACTION",
+			"key": "minecraft:interaction",
+			"alive": false,
+			"translationKey": "entity.minecraft.interaction",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 117
+		},
+		{
+			"name": "IRON_GOLEM",
+			"key": "minecraft:iron_golem",
+			"alive": true,
+			"translationKey": "entity.minecraft.iron_golem",
+			"spawnable": true,
+			"typeId": 99,
+			"defaultAttributes": true,
+			"ordinal": 74
+		},
+		{
+			"name": "ITEM",
+			"key": "minecraft:item",
+			"alive": false,
+			"translationKey": "entity.minecraft.item",
+			"spawnable": true,
+			"typeId": 1,
+			"defaultAttributes": false,
+			"ordinal": 0
+		},
+		{
+			"name": "ITEM_DISPLAY",
+			"key": "minecraft:item_display",
+			"alive": false,
+			"translationKey": "entity.minecraft.item_display",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 118
+		},
+		{
+			"name": "ITEM_FRAME",
+			"key": "minecraft:item_frame",
+			"alive": false,
+			"translationKey": "entity.minecraft.item_frame",
+			"spawnable": true,
+			"typeId": 18,
+			"defaultAttributes": false,
+			"ordinal": 17
+		},
+		{
+			"name": "LEASH_KNOT",
+			"key": "minecraft:leash_knot",
+			"alive": false,
+			"translationKey": "entity.minecraft.leash_knot",
+			"spawnable": true,
+			"typeId": 8,
+			"defaultAttributes": false,
+			"ordinal": 7
+		},
+		{
+			"name": "LIGHTNING_BOLT",
+			"key": "minecraft:lightning_bolt",
+			"alive": false,
+			"translationKey": "entity.minecraft.lightning_bolt",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 128
+		},
+		{
+			"name": "LLAMA",
+			"key": "minecraft:llama",
+			"alive": true,
+			"translationKey": "entity.minecraft.llama",
+			"spawnable": true,
+			"typeId": 103,
+			"defaultAttributes": true,
+			"ordinal": 78
+		},
+		{
+			"name": "LLAMA_SPIT",
+			"key": "minecraft:llama_spit",
+			"alive": false,
+			"translationKey": "entity.minecraft.llama_spit",
+			"spawnable": true,
+			"typeId": 104,
+			"defaultAttributes": false,
+			"ordinal": 79
+		},
+		{
+			"name": "MAGMA_CUBE",
+			"key": "minecraft:magma_cube",
+			"alive": true,
+			"translationKey": "entity.minecraft.magma_cube",
+			"spawnable": true,
+			"typeId": 62,
+			"defaultAttributes": true,
+			"ordinal": 57
+		},
+		{
+			"name": "MARKER",
+			"key": "minecraft:marker",
+			"alive": false,
+			"translationKey": "entity.minecraft.marker",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 109
+		},
+		{
+			"name": "MINECART",
+			"key": "minecraft:minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.minecart",
+			"spawnable": true,
+			"typeId": 42,
+			"defaultAttributes": false,
+			"ordinal": 39
+		},
+		{
+			"name": "MOOSHROOM",
+			"key": "minecraft:mooshroom",
+			"alive": true,
+			"translationKey": "entity.minecraft.mooshroom",
+			"spawnable": true,
+			"typeId": 96,
+			"defaultAttributes": true,
+			"ordinal": 71
+		},
+		{
+			"name": "MULE",
+			"key": "minecraft:mule",
+			"alive": true,
+			"translationKey": "entity.minecraft.mule",
+			"spawnable": true,
+			"typeId": 32,
+			"defaultAttributes": true,
+			"ordinal": 31
+		},
+		{
+			"name": "OCELOT",
+			"key": "minecraft:ocelot",
+			"alive": true,
+			"translationKey": "entity.minecraft.ocelot",
+			"spawnable": true,
+			"typeId": 98,
+			"defaultAttributes": true,
+			"ordinal": 73
+		},
+		{
+			"name": "OMINOUS_ITEM_SPAWNER",
+			"key": "minecraft:ominous_item_spawner",
+			"alive": false,
+			"translationKey": "entity.minecraft.ominous_item_spawner",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 126
+		},
+		{
+			"name": "PAINTING",
+			"key": "minecraft:painting",
+			"alive": false,
+			"translationKey": "entity.minecraft.painting",
+			"spawnable": true,
+			"typeId": 9,
+			"defaultAttributes": false,
+			"ordinal": 8
+		},
+		{
+			"name": "PANDA",
+			"key": "minecraft:panda",
+			"alive": true,
+			"translationKey": "entity.minecraft.panda",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 93
+		},
+		{
+			"name": "PARROT",
+			"key": "minecraft:parrot",
+			"alive": true,
+			"translationKey": "entity.minecraft.parrot",
+			"spawnable": true,
+			"typeId": 105,
+			"defaultAttributes": true,
+			"ordinal": 80
+		},
+		{
+			"name": "PHANTOM",
+			"key": "minecraft:phantom",
+			"alive": true,
+			"translationKey": "entity.minecraft.phantom",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 84
+		},
+		{
+			"name": "PIG",
+			"key": "minecraft:pig",
+			"alive": true,
+			"translationKey": "entity.minecraft.pig",
+			"spawnable": true,
+			"typeId": 90,
+			"defaultAttributes": true,
+			"ordinal": 65
+		},
+		{
+			"name": "PIGLIN",
+			"key": "minecraft:piglin",
+			"alive": true,
+			"translationKey": "entity.minecraft.piglin",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 101
+		},
+		{
+			"name": "PIGLIN_BRUTE",
+			"key": "minecraft:piglin_brute",
+			"alive": true,
+			"translationKey": "entity.minecraft.piglin_brute",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 104
+		},
+		{
+			"name": "PILLAGER",
+			"key": "minecraft:pillager",
+			"alive": true,
+			"translationKey": "entity.minecraft.pillager",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 94
+		},
+		{
+			"name": "PLAYER",
+			"key": "minecraft:player",
+			"alive": true,
+			"translationKey": "entity.minecraft.player",
+			"spawnable": false,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 129
+		},
+		{
+			"name": "POLAR_BEAR",
+			"key": "minecraft:polar_bear",
+			"alive": true,
+			"translationKey": "entity.minecraft.polar_bear",
+			"spawnable": true,
+			"typeId": 102,
+			"defaultAttributes": true,
+			"ordinal": 77
+		},
+		{
+			"name": "POTION",
+			"key": "minecraft:potion",
+			"alive": false,
+			"translationKey": "entity.minecraft.potion",
+			"spawnable": true,
+			"typeId": 16,
+			"defaultAttributes": false,
+			"ordinal": 15
+		},
+		{
+			"name": "PUFFERFISH",
+			"key": "minecraft:pufferfish",
+			"alive": true,
+			"translationKey": "entity.minecraft.pufferfish",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 88
+		},
+		{
+			"name": "RABBIT",
+			"key": "minecraft:rabbit",
+			"alive": true,
+			"translationKey": "entity.minecraft.rabbit",
+			"spawnable": true,
+			"typeId": 101,
+			"defaultAttributes": true,
+			"ordinal": 76
+		},
+		{
+			"name": "RAVAGER",
+			"key": "minecraft:ravager",
+			"alive": true,
+			"translationKey": "entity.minecraft.ravager",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 95
+		},
+		{
+			"name": "SALMON",
+			"key": "minecraft:salmon",
+			"alive": true,
+			"translationKey": "entity.minecraft.salmon",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 87
+		},
+		{
+			"name": "SHEEP",
+			"key": "minecraft:sheep",
+			"alive": true,
+			"translationKey": "entity.minecraft.sheep",
+			"spawnable": true,
+			"typeId": 91,
+			"defaultAttributes": true,
+			"ordinal": 66
+		},
+		{
+			"name": "SHULKER",
+			"key": "minecraft:shulker",
+			"alive": true,
+			"translationKey": "entity.minecraft.shulker",
+			"spawnable": true,
+			"typeId": 69,
+			"defaultAttributes": true,
+			"ordinal": 64
+		},
+		{
+			"name": "SHULKER_BULLET",
+			"key": "minecraft:shulker_bullet",
+			"alive": false,
+			"translationKey": "entity.minecraft.shulker_bullet",
+			"spawnable": true,
+			"typeId": 25,
+			"defaultAttributes": false,
+			"ordinal": 24
+		},
+		{
+			"name": "SILVERFISH",
+			"key": "minecraft:silverfish",
+			"alive": true,
+			"translationKey": "entity.minecraft.silverfish",
+			"spawnable": true,
+			"typeId": 60,
+			"defaultAttributes": true,
+			"ordinal": 55
+		},
+		{
+			"name": "SKELETON",
+			"key": "minecraft:skeleton",
+			"alive": true,
+			"translationKey": "entity.minecraft.skeleton",
+			"spawnable": true,
+			"typeId": 51,
+			"defaultAttributes": true,
+			"ordinal": 46
+		},
+		{
+			"name": "SKELETON_HORSE",
+			"key": "minecraft:skeleton_horse",
+			"alive": true,
+			"translationKey": "entity.minecraft.skeleton_horse",
+			"spawnable": true,
+			"typeId": 28,
+			"defaultAttributes": true,
+			"ordinal": 27
+		},
+		{
+			"name": "SLIME",
+			"key": "minecraft:slime",
+			"alive": true,
+			"translationKey": "entity.minecraft.slime",
+			"spawnable": true,
+			"typeId": 55,
+			"defaultAttributes": true,
+			"ordinal": 50
+		},
+		{
+			"name": "SMALL_FIREBALL",
+			"key": "minecraft:small_fireball",
+			"alive": false,
+			"translationKey": "entity.minecraft.small_fireball",
+			"spawnable": true,
+			"typeId": 13,
+			"defaultAttributes": false,
+			"ordinal": 12
+		},
+		{
+			"name": "SNIFFER",
+			"key": "minecraft:sniffer",
+			"alive": true,
+			"translationKey": "entity.minecraft.sniffer",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 119
+		},
+		{
+			"name": "SNOW_GOLEM",
+			"key": "minecraft:snow_golem",
+			"alive": true,
+			"translationKey": "entity.minecraft.snow_golem",
+			"spawnable": true,
+			"typeId": 97,
+			"defaultAttributes": true,
+			"ordinal": 72
+		},
+		{
+			"name": "SNOWBALL",
+			"key": "minecraft:snowball",
+			"alive": false,
+			"translationKey": "entity.minecraft.snowball",
+			"spawnable": true,
+			"typeId": 11,
+			"defaultAttributes": false,
+			"ordinal": 10
+		},
+		{
+			"name": "SPAWNER_MINECART",
+			"key": "minecraft:spawner_minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.spawner_minecart",
+			"spawnable": true,
+			"typeId": 47,
+			"defaultAttributes": false,
+			"ordinal": 44
+		},
+		{
+			"name": "SPECTRAL_ARROW",
+			"key": "minecraft:spectral_arrow",
+			"alive": false,
+			"translationKey": "entity.minecraft.spectral_arrow",
+			"spawnable": true,
+			"typeId": 24,
+			"defaultAttributes": false,
+			"ordinal": 23
+		},
+		{
+			"name": "SPIDER",
+			"key": "minecraft:spider",
+			"alive": true,
+			"translationKey": "entity.minecraft.spider",
+			"spawnable": true,
+			"typeId": 52,
+			"defaultAttributes": true,
+			"ordinal": 47
+		},
+		{
+			"name": "SQUID",
+			"key": "minecraft:squid",
+			"alive": true,
+			"translationKey": "entity.minecraft.squid",
+			"spawnable": true,
+			"typeId": 94,
+			"defaultAttributes": true,
+			"ordinal": 69
+		},
+		{
+			"name": "STRAY",
+			"key": "minecraft:stray",
+			"alive": true,
+			"translationKey": "entity.minecraft.stray",
+			"spawnable": true,
+			"typeId": 6,
+			"defaultAttributes": true,
+			"ordinal": 5
+		},
+		{
+			"name": "STRIDER",
+			"key": "minecraft:strider",
+			"alive": true,
+			"translationKey": "entity.minecraft.strider",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 102
+		},
+		{
+			"name": "TADPOLE",
+			"key": "minecraft:tadpole",
+			"alive": true,
+			"translationKey": "entity.minecraft.tadpole",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 113
+		},
+		{
+			"name": "TEXT_DISPLAY",
+			"key": "minecraft:text_display",
+			"alive": false,
+			"translationKey": "entity.minecraft.text_display",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 120
+		},
+		{
+			"name": "TNT",
+			"key": "minecraft:tnt",
+			"alive": false,
+			"translationKey": "entity.minecraft.tnt",
+			"spawnable": true,
+			"typeId": 20,
+			"defaultAttributes": false,
+			"ordinal": 19
+		},
+		{
+			"name": "TNT_MINECART",
+			"key": "minecraft:tnt_minecart",
+			"alive": false,
+			"translationKey": "entity.minecraft.tnt_minecart",
+			"spawnable": true,
+			"typeId": 45,
+			"defaultAttributes": false,
+			"ordinal": 42
+		},
+		{
+			"name": "TRADER_LLAMA",
+			"key": "minecraft:trader_llama",
+			"alive": true,
+			"translationKey": "entity.minecraft.trader_llama",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 96
+		},
+		{
+			"name": "TRIDENT",
+			"key": "minecraft:trident",
+			"alive": false,
+			"translationKey": "entity.minecraft.trident",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 85
+		},
+		{
+			"name": "TROPICAL_FISH",
+			"key": "minecraft:tropical_fish",
+			"alive": true,
+			"translationKey": "entity.minecraft.tropical_fish",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 89
+		},
+		{
+			"name": "TURTLE",
+			"key": "minecraft:turtle",
+			"alive": true,
+			"translationKey": "entity.minecraft.turtle",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 83
+		},
+		{
+			"name": "VEX",
+			"key": "minecraft:vex",
+			"alive": true,
+			"translationKey": "entity.minecraft.vex",
+			"spawnable": true,
+			"typeId": 35,
+			"defaultAttributes": true,
+			"ordinal": 34
+		},
+		{
+			"name": "VILLAGER",
+			"key": "minecraft:villager",
+			"alive": true,
+			"translationKey": "entity.minecraft.villager",
+			"spawnable": true,
+			"typeId": 120,
+			"defaultAttributes": true,
+			"ordinal": 81
+		},
+		{
+			"name": "VINDICATOR",
+			"key": "minecraft:vindicator",
+			"alive": true,
+			"translationKey": "entity.minecraft.vindicator",
+			"spawnable": true,
+			"typeId": 36,
+			"defaultAttributes": true,
+			"ordinal": 35
+		},
+		{
+			"name": "WANDERING_TRADER",
+			"key": "minecraft:wandering_trader",
+			"alive": true,
+			"translationKey": "entity.minecraft.wandering_trader",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 97
+		},
+		{
+			"name": "WARDEN",
+			"key": "minecraft:warden",
+			"alive": true,
+			"translationKey": "entity.minecraft.warden",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 114
+		},
+		{
+			"name": "WIND_CHARGE",
+			"key": "minecraft:wind_charge",
+			"alive": false,
+			"translationKey": "entity.minecraft.wind_charge",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": false,
+			"ordinal": 122
+		},
+		{
+			"name": "WITCH",
+			"key": "minecraft:witch",
+			"alive": true,
+			"translationKey": "entity.minecraft.witch",
+			"spawnable": true,
+			"typeId": 66,
+			"defaultAttributes": true,
+			"ordinal": 61
+		},
+		{
+			"name": "WITHER",
+			"key": "minecraft:wither",
+			"alive": true,
+			"translationKey": "entity.minecraft.wither",
+			"spawnable": true,
+			"typeId": 64,
+			"defaultAttributes": true,
+			"ordinal": 59
+		},
+		{
+			"name": "WITHER_SKELETON",
+			"key": "minecraft:wither_skeleton",
+			"alive": true,
+			"translationKey": "entity.minecraft.wither_skeleton",
+			"spawnable": true,
+			"typeId": 5,
+			"defaultAttributes": true,
+			"ordinal": 4
+		},
+		{
+			"name": "WITHER_SKULL",
+			"key": "minecraft:wither_skull",
+			"alive": false,
+			"translationKey": "entity.minecraft.wither_skull",
+			"spawnable": true,
+			"typeId": 19,
+			"defaultAttributes": false,
+			"ordinal": 18
+		},
+		{
+			"name": "WOLF",
+			"key": "minecraft:wolf",
+			"alive": true,
+			"translationKey": "entity.minecraft.wolf",
+			"spawnable": true,
+			"typeId": 95,
+			"defaultAttributes": true,
+			"ordinal": 70
+		},
+		{
+			"name": "ZOGLIN",
+			"key": "minecraft:zoglin",
+			"alive": true,
+			"translationKey": "entity.minecraft.zoglin",
+			"spawnable": true,
+			"typeId": -1,
+			"defaultAttributes": true,
+			"ordinal": 103
+		},
+		{
+			"name": "ZOMBIE",
+			"key": "minecraft:zombie",
+			"alive": true,
+			"translationKey": "entity.minecraft.zombie",
+			"spawnable": true,
+			"typeId": 54,
+			"defaultAttributes": true,
+			"ordinal": 49
+		},
+		{
+			"name": "ZOMBIE_HORSE",
+			"key": "minecraft:zombie_horse",
+			"alive": true,
+			"translationKey": "entity.minecraft.zombie_horse",
+			"spawnable": true,
+			"typeId": 29,
+			"defaultAttributes": true,
+			"ordinal": 28
+		},
+		{
+			"name": "ZOMBIE_VILLAGER",
+			"key": "minecraft:zombie_villager",
+			"alive": true,
+			"translationKey": "entity.minecraft.zombie_villager",
+			"spawnable": true,
+			"typeId": 27,
+			"defaultAttributes": true,
+			"ordinal": 26
+		},
+		{
+			"name": "ZOMBIFIED_PIGLIN",
+			"key": "minecraft:zombified_piglin",
+			"alive": true,
+			"translationKey": "entity.minecraft.zombified_piglin",
+			"spawnable": true,
+			"typeId": 57,
+			"defaultAttributes": true,
+			"ordinal": 52
 		}
 	]
 }
