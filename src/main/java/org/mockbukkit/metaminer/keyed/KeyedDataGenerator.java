@@ -8,6 +8,7 @@ import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
+import org.bukkit.generator.structure.Structure;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemType;
@@ -71,6 +72,9 @@ public class KeyedDataGenerator implements DataGenerator
 		if (keyed instanceof Enchantment enchantment)
 		{
 			addEnchantmentProperties(jsonObject, enchantment);
+		}
+		if (keyed instanceof Structure structure){
+			jsonObject.add("type", new JsonPrimitive(structure.getStructureType().getKey().toString()));
 		}
 	}
 
