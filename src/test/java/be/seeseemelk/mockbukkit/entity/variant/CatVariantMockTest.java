@@ -4,16 +4,18 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Cat;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CatVariantMockTest
 {
 
 	@Test
-	void testSuccessfullyLoaded(){
+	void testSuccessfullyLoaded()
+	{
 		Cat.Type catVariant = Cat.Type.BLACK;
-		assertEquals(catVariant.name(), "BLACK");
-		assertEquals(catVariant.ordinal(), 1);
-		assertEquals(catVariant.getKey(), NamespacedKey.fromString("minecraft:black"));
+		assertEquals("BLACK", catVariant.name());
+		assertEquals(1, catVariant.ordinal());
+		assertEquals(NamespacedKey.fromString("minecraft:black"), catVariant.getKey());
 	}
+
 }
