@@ -188,7 +188,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
+	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
 	private final Queue<String> title = new LinkedTransferQueue<>();
@@ -2128,8 +2128,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		hiddenPlayers.putIfAbsent(player.getUniqueId(), new HashSet<>());
-		Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		hiddenEntities.putIfAbsent(player.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenEntities.get(player.getUniqueId());
 		blockingPlugins.add(plugin);
 	}
 
@@ -2146,13 +2146,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		if (hiddenPlayers.containsKey(player.getUniqueId()))
+		if (hiddenEntities.containsKey(player.getUniqueId()))
 		{
-			Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			Set<Plugin> blockingPlugins = hiddenEntities.get(player.getUniqueId());
 			blockingPlugins.remove(plugin);
 			if (blockingPlugins.isEmpty())
 			{
-				hiddenPlayers.remove(player.getUniqueId());
+				hiddenEntities.remove(player.getUniqueId());
 			}
 		}
 	}
@@ -2161,32 +2161,42 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean canSee(@NotNull Player player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
+		return !hiddenEntities.containsKey(player.getUniqueId()) &&
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 
 	@Override
-	@ApiStatus.Experimental
 	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		hiddenEntities.putIfAbsent(entity.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenEntities.get(entity.getUniqueId());
+		blockingPlugins.add(plugin);
 	}
 
 	@Override
-	@ApiStatus.Experimental
 	public void showEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		if (hiddenEntities.containsKey(entity.getUniqueId()))
+		{
+			Set<Plugin> blockingPlugins = hiddenEntities.get(entity.getUniqueId());
+			blockingPlugins.remove(plugin);
+			if (blockingPlugins.isEmpty())
+			{
+				hiddenEntities.remove(entity.getUniqueId());
+			}
+		}
 	}
 
 	@Override
 	public boolean canSee(@NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return !hiddenEntities.containsKey(entity.getUniqueId());
 	}
 
 	@Override

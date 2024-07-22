@@ -1324,6 +1324,47 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerHide_HideEntityWithPlayerCanSee()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PlayerMock player2 = server.addPlayer();
+		player.hideEntity(plugin1, player2);
+		assertFalse(player.canSee(player2));
+		player.showEntity(plugin1, player2);
+		assertTrue(player.canSee(player2));
+	}
+
+	@Test
+	void testEntityHide_InitialState()
+	{
+		PigMock pig = new PigMock(server, UUID.randomUUID());
+		assertTrue(player.canSee(pig));
+	}
+
+	@Test
+	void testEntityHide_NewImplementation()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PigMock pig = new PigMock(server, UUID.randomUUID());
+		player.hideEntity(plugin1, pig);
+		assertFalse(player.canSee(pig));
+		player.showEntity(plugin1, pig);
+		assertTrue(player.canSee(pig));
+	}
+
+	@Test
+	void testEntityHide_HideCommandIssuedMultipleTimes()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PigMock pig = new PigMock(server, UUID.randomUUID());
+		player.hideEntity(plugin1, pig);
+		player.hideEntity(plugin1, pig);
+		assertFalse(player.canSee(pig));
+		player.showEntity(plugin1, pig);
+		assertTrue(player.canSee(pig));
+	}
+
+	@Test
 	void testPlayerTeleport_WithCause_EventFired()
 	{
 		Location from = player.getLocation();
