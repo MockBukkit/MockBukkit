@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
@@ -67,7 +68,7 @@ class LecternMockTest
 	void testSetPageValid()
 	{
 		// Given
-		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
+		ItemStack book = new ItemStackMock(Material.WRITABLE_BOOK);
 		BookMeta bookMeta = (BookMeta) book.getItemMeta();
 
 		bookMeta.addPage("ABC", "DEF", "GHI", "JKL");
@@ -87,7 +88,7 @@ class LecternMockTest
 	void testSetPageInvalid()
 	{
 		// Given
-		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
+		ItemStack book = new ItemStackMock(Material.WRITABLE_BOOK);
 		BookMeta bookMeta = (BookMeta) book.getItemMeta();
 
 		bookMeta.addPage("ABC", "DEF", "GHI", "JKL");

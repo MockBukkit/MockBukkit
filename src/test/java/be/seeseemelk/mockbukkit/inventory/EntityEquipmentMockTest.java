@@ -51,7 +51,7 @@ class EntityEquipmentMockTest
 
 		assertNotNull(equipment.getItemInMainHand());
 
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setItemInMainHand(item);
 
 		assertEquals(item, equipment.getItemInMainHand());
@@ -64,7 +64,7 @@ class EntityEquipmentMockTest
 	{
 		assertNotNull(equipment.getItemInOffHand());
 
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setItemInOffHand(item);
 
 		assertEquals(item, equipment.getItemInOffHand());
@@ -77,7 +77,7 @@ class EntityEquipmentMockTest
 	{
 		assertNotNull(equipment.getHelmet());
 
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setHelmet(item);
 
 		assertEquals(item, equipment.getHelmet());
@@ -90,7 +90,7 @@ class EntityEquipmentMockTest
 	{
 		assertNotNull(equipment.getChestplate());
 
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setChestplate(item);
 
 		assertEquals(item, equipment.getChestplate());
@@ -103,7 +103,7 @@ class EntityEquipmentMockTest
 	{
 		assertNotNull(equipment.getLeggings());
 
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setLeggings(item);
 
 		assertEquals(item, equipment.getLeggings());
@@ -116,7 +116,7 @@ class EntityEquipmentMockTest
 	{
 		assertNotNull(equipment.getBoots());
 
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setBoots(item);
 
 		assertEquals(item, equipment.getBoots());
@@ -198,10 +198,10 @@ class EntityEquipmentMockTest
 	void testSetArmorContents()
 	{
 		ItemStack[] contents = new ItemStack[4];
-		contents[0] = new ItemStack(Material.DIAMOND);
-		contents[1] = new ItemStack(Material.DIAMOND);
-		contents[2] = new ItemStack(Material.DIAMOND);
-		contents[3] = new ItemStack(Material.DIAMOND);
+		contents[0] = new ItemStackMock(Material.DIAMOND);
+		contents[1] = new ItemStackMock(Material.DIAMOND);
+		contents[2] = new ItemStackMock(Material.DIAMOND);
+		contents[3] = new ItemStackMock(Material.DIAMOND);
 		equipment.setArmorContents(contents);
 		assertArrayEquals(contents, equipment.getArmorContents());
 	}
@@ -216,14 +216,14 @@ class EntityEquipmentMockTest
 	void testClear()
 	{
 		ItemStack[] contents = new ItemStack[4];
-		contents[0] = new ItemStack(Material.DIAMOND);
-		contents[1] = new ItemStack(Material.DIAMOND);
-		contents[2] = new ItemStack(Material.DIAMOND);
-		contents[3] = new ItemStack(Material.DIAMOND);
+		contents[0] = new ItemStackMock(Material.DIAMOND);
+		contents[1] = new ItemStackMock(Material.DIAMOND);
+		contents[2] = new ItemStackMock(Material.DIAMOND);
+		contents[3] = new ItemStackMock(Material.DIAMOND);
 		equipment.setArmorContents(contents);
 		equipment.clear();
 		ItemStack[] excepted = new ItemStack[4];
-		Arrays.fill(excepted, new ItemStack(Material.AIR));
+		Arrays.fill(excepted, new ItemStackMock(Material.AIR));
 		assertArrayEquals(excepted, equipment.getArmorContents());
 	}
 
@@ -232,8 +232,8 @@ class EntityEquipmentMockTest
 	void testGetItem(EquipmentSlot slot)
 	{
 		equipment.setItem(slot, null);
-		assertEquals(new ItemStack(Material.AIR), equipment.getItem(slot));
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		assertEquals(new ItemStackMock(Material.AIR), equipment.getItem(slot));
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setItem(slot, item);
 		assertEquals(item, equipment.getItem(slot));
 	}
@@ -247,7 +247,7 @@ class EntityEquipmentMockTest
 	@Test
 	void testSetItemInHand()
 	{
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		equipment.setItemInHand(item);
 		assertEquals(item, equipment.getItemInHand());
 	}

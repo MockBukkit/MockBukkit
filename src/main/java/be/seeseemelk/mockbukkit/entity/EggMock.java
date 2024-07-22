@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Egg;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class EggMock extends ThrowableProjectileMock implements Egg
 {
 
-	private @NotNull ItemStack item = new ItemStack(Material.EGG);
+	private @NotNull ItemStack item = new ItemStackMock(Material.EGG);
 
 	/**
 	 * Constructs a new {@link EggMock} on the provided {@link ServerMock} with a specified {@link UUID}.

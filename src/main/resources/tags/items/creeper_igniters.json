@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:flint_and_steel",
-        "minecraft:fire_charge"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:fire_charge",
+		"minecraft:flint_and_steel"
+	]
 }

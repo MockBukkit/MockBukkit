@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -66,10 +67,16 @@ class RegistryMockTest
 	}
 
 	@Test
-	void key_NotNull()
+	void namespaced_key_NotNull()
 	{
 		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
-		assertThrows(NullPointerException.class, () -> structureRegistryMock.get(null));
+		assertThrows(NullPointerException.class, () -> structureRegistryMock.get((NamespacedKey) null));
+	}
+	@Test
+	void typed_key_NotNull()
+	{
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
+		assertThrows(NullPointerException.class, () -> structureRegistryMock.get((TypedKey<Structure>) null));
 	}
 
 	@Test

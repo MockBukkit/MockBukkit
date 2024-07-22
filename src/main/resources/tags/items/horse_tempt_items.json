@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:golden_apple",
-        "minecraft:enchanted_golden_apple",
-        "minecraft:golden_carrot"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:enchanted_golden_apple",
+		"minecraft:golden_apple",
+		"minecraft:golden_carrot"
+	]
 }

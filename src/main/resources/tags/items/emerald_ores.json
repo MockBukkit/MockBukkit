@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:deepslate_emerald_ore",
-        "minecraft:emerald_ore"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:deepslate_emerald_ore",
+		"minecraft:emerald_ore"
+	]
 }

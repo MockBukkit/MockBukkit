@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.EntityType;
@@ -31,7 +32,7 @@ public class CodMock extends SchoolableFishMock implements Cod
 	@Override
 	public @NotNull ItemStack getBaseBucketItem()
 	{
-		return new ItemStack(Material.COD_BUCKET);
+		return new ItemStackMock(Material.COD_BUCKET);
 	}
 
 	@Override

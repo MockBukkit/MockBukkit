@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.entity.varint;
+package be.seeseemelk.mockbukkit.entity.variant;
 
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;

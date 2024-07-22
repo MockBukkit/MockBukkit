@@ -3,10 +3,10 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Allay;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -53,18 +53,18 @@ class AllayMockTest
 	{
 		assertDoesNotThrow(() -> allayMock.simulatePlayerInteract(Material.DIAMOND));
 
-		assertDoesNotThrow(() -> allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 2)));
+		assertDoesNotThrow(() -> allayMock.simulateItemPickup(new ItemStackMock(Material.DIAMOND, 2)));
 
-		assertDoesNotThrow(() -> allayMock.assertInventoryContains(new ItemStack(Material.DIAMOND, 2)));
+		assertDoesNotThrow(() -> allayMock.assertInventoryContains(new ItemStackMock(Material.DIAMOND, 2)));
 	}
 
 	@Test
 	void testItemPickUpToMany()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
-		ItemStack item = new ItemStack(Material.DIAMOND, 5);
+		ItemStack item = new ItemStackMock(Material.DIAMOND, 5);
 
-		allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 63));
+		allayMock.simulateItemPickup(new ItemStackMock(Material.DIAMOND, 63));
 		Assertions.assertThrows(IllegalStateException.class,
 				() -> allayMock.simulateItemPickup(item));
 
@@ -74,7 +74,7 @@ class AllayMockTest
 	void testItemPickUpWrongItem()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
-		ItemStack item = new ItemStack(Material.IRON_INGOT, 1);
+		ItemStack item = new ItemStackMock(Material.IRON_INGOT, 1);
 
 		Assertions.assertThrows(IllegalArgumentException.class,
 				() -> allayMock.simulateItemPickup(item));
@@ -83,11 +83,11 @@ class AllayMockTest
 	@Test
 	void testItemRetrieval()
 	{
-		ItemStack addedItem = new ItemStack(Material.DIAMOND, 2);
+		ItemStack addedItem = new ItemStackMock(Material.DIAMOND, 2);
 
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
 
-		allayMock.simulateItemPickup(new ItemStack(addedItem));
+		allayMock.simulateItemPickup(new ItemStackMock(addedItem));
 
 		ItemStack content = allayMock.simulateItemRetrieval();
 
@@ -107,7 +107,7 @@ class AllayMockTest
 	@Test
 	void testAssertInventoryContainsWithWrongItem()
 	{
-		ItemStack item = new ItemStack(Material.IRON_INGOT);
+		ItemStack item = new ItemStackMock(Material.IRON_INGOT);
 		assertThrows(AssertionFailedError.class, () -> allayMock.assertInventoryContains(item));
 	}
 

@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:magma_cube",
-        "minecraft:slime"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:magma_cube",
+		"minecraft:slime"
+	]
 }

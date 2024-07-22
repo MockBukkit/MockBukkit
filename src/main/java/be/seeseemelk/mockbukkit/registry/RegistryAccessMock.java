@@ -10,9 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.Keyed;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +23,6 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -39,12 +36,9 @@ public class RegistryAccessMock implements RegistryAccess
 
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
 	{
-		if (type == ConfiguredStructure.class)
-		{
-			return createConfiguredStructureRegistry();
-		}
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
 		if (registryKey == null)
 		{
@@ -105,7 +99,9 @@ public class RegistryAccessMock implements RegistryAccess
 	{
 		return List.of(RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL,
 				RegistryKey.TRIM_PATTERN, RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT,
-				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK, RegistryKey.WOLF_VARIANT);
+				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK,
+				RegistryKey.WOLF_VARIANT, RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT, RegistryKey.VILLAGER_PROFESSION,
+				RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT, RegistryKey.MAP_DECORATION_TYPE);
 	}
 
 
@@ -164,31 +160,6 @@ public class RegistryAccessMock implements RegistryAccess
 			}
 		}
 		return output;
-	}
-
-	private static <T extends Keyed> Registry<T> createConfiguredStructureRegistry()
-	{
-		return new Registry<>()
-		{
-			@Override
-			public @Nullable T get(@NotNull NamespacedKey key)
-			{
-				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
-			}
-
-			@Override
-			public @NotNull Stream<T> stream()
-			{
-				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
-			}
-
-			@NotNull
-			@Override
-			public Iterator<T> iterator()
-			{
-				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
-			}
-		};
 	}
 
 	private static <T extends Keyed> Registry<T> findSimpleRegistry(Class<T> tClass)

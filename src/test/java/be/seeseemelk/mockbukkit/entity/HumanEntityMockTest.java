@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -17,7 +18,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -227,7 +227,7 @@ class HumanEntityMockTest
 		Inventory inv2 = server.createInventory(null, 36);
 
 		human.openInventory(inv1);
-		human.setItemOnCursor(new ItemStack(Material.PUMPKIN));
+		human.setItemOnCursor(new ItemStackMock(Material.PUMPKIN));
 
 		human.openInventory(inv2);
 
@@ -244,7 +244,7 @@ class HumanEntityMockTest
 		Inventory inv = server.createInventory(null, 36);
 		human.openInventory(inv);
 
-		human.setItemOnCursor(new ItemStack(Material.PUMPKIN));
+		human.setItemOnCursor(new ItemStackMock(Material.PUMPKIN));
 		human.closeInventory();
 
 		assertTrue(human.getItemOnCursor().getType().isAir());
@@ -273,7 +273,7 @@ class HumanEntityMockTest
 	@Test
 	void setBlocking_withShieldMainHand_successful()
 	{
-		human.getInventory().setItemInMainHand(new ItemStack(Material.SHIELD));
+		human.getInventory().setItemInMainHand(new ItemStackMock(Material.SHIELD));
 		human.setBlocking(true);
 		assertTrue(human.isBlocking());
 	}
@@ -281,16 +281,16 @@ class HumanEntityMockTest
 	@Test
 	void isBlocking_shieldRemovedMainHand_notBlocking()
 	{
-		human.getInventory().setItemInMainHand(new ItemStack(Material.SHIELD));
+		human.getInventory().setItemInMainHand(new ItemStackMock(Material.SHIELD));
 		human.setBlocking(true);
-		human.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+		human.getInventory().setItemInMainHand(new ItemStackMock(Material.AIR));
 		assertFalse(human.isBlocking());
 	}
 
 	@Test
 	void setBlocking_withShieldOffHand_successful()
 	{
-		human.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+		human.getInventory().setItemInOffHand(new ItemStackMock(Material.SHIELD));
 		human.setBlocking(true);
 		assertTrue(human.isBlocking());
 	}
@@ -298,9 +298,9 @@ class HumanEntityMockTest
 	@Test
 	void isBlocking_shieldRemovedOffHand_notBlocking()
 	{
-		human.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+		human.getInventory().setItemInOffHand(new ItemStackMock(Material.SHIELD));
 		human.setBlocking(true);
-		human.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
+		human.getInventory().setItemInOffHand(new ItemStackMock(Material.AIR));
 		assertFalse(human.isBlocking());
 	}
 

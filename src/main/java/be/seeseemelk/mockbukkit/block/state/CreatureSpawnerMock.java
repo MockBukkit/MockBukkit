@@ -229,6 +229,13 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	}
 
 	@Override
+	public void setSpawnedEntity(@NotNull SpawnerEntry spawnerEntry)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setSpawnedEntity(@NotNull EntitySnapshot snapshot)
 	{
 		// TODO Auto-generated method stub

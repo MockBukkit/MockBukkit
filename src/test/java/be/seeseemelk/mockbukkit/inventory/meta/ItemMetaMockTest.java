@@ -2,9 +2,9 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import net.kyori.adventure.key.Namespaced;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -18,7 +18,6 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,12 +25,10 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -527,7 +524,7 @@ class ItemMetaMockTest
 	{
 		int value = 500;
 		meta.setDamage(value);
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
 		Damageable itemMeta = (Damageable) item.getItemMeta();
@@ -540,7 +537,7 @@ class ItemMetaMockTest
 	void testNoDamage()
 	{
 		meta.setDamage(0);
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
 		Damageable itemMeta = (Damageable) item.getItemMeta();
@@ -554,7 +551,7 @@ class ItemMetaMockTest
 	{
 		int value = 10;
 		meta.setRepairCost(value);
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
 		Repairable itemMeta = (Repairable) item.getItemMeta();
@@ -567,7 +564,7 @@ class ItemMetaMockTest
 	void testRepairCost()
 	{
 		meta.setRepairCost(0);
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
 		Repairable itemMeta = (Repairable) item.getItemMeta();

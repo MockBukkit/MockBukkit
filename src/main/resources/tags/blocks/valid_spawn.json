@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:podzol",
-        "minecraft:grass_block"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:grass_block",
+		"minecraft:podzol"
+	]
 }

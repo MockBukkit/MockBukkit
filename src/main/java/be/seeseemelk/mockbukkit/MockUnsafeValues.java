@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.damage.DamageSourceBuilderMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.util.io.BukkitObjectInputStreamMock;
@@ -10,6 +11,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
@@ -70,7 +72,18 @@ import java.util.function.BooleanSupplier;
 public class MockUnsafeValues implements UnsafeValues
 {
 
-	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20");
+	private static final List<String> COMPATIBLE_API_VERSIONS =
+			Arrays.asList(
+					"1.13",
+					"1.14",
+					"1.15",
+					"1.16",
+					"1.17",
+					"1.18",
+					"1.19",
+					"1.20",
+					"1.21"
+			);
 
 	private String minimumApiVersion = "none";
 
@@ -166,6 +179,7 @@ public class MockUnsafeValues implements UnsafeValues
 		{
 			return material;
 		}
+
 		throw new UnimplementedOperationException();
 	}
 
@@ -284,6 +298,8 @@ public class MockUnsafeValues implements UnsafeValues
 	public byte[] serializeItem(ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "null cannot be serialized");
+		Preconditions.checkNotNull(item.getType().asItemType(),
+				"Items without corresponding ItemType are currently not supported");
 		Preconditions.checkArgument(item.getType() != Material.AIR, "air cannot be serialized");
 		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		try
@@ -307,7 +323,7 @@ public class MockUnsafeValues implements UnsafeValues
 		try
 		{
 			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
-			return (ItemStack) ois.readObject();
+			return (ItemStackMock) ois.readObject();
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
@@ -570,6 +586,19 @@ public class MockUnsafeValues implements UnsafeValues
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <A extends org.bukkit.Keyed, M> io.papermc.paper.registry.tag.@Nullable Tag<A> getTag(@NotNull TagKey<A> tagKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemStack createEmptyStack()
+	{
+		return ItemStackMock.empty();
 	}
 
 	@Override

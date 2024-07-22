@@ -47,6 +47,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
+import org.bukkit.ServerLinks;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -3151,6 +3152,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendExperienceChange(float progress)
 	{
 		this.sendExperienceChange(progress, this.getLevel());
@@ -3186,6 +3194,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void sendHurtAnimation(float yaw)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendLinks(@NotNull ServerLinks links)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

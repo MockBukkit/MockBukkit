@@ -40,7 +40,7 @@ class BeaconInventoryMockTest
 	@Test
 	void testSetItem()
 	{
-		ItemStack item = new ItemStack(Material.EMERALD);
+		ItemStack item = new ItemStackMock(Material.EMERALD);
 		inventory.setItem(item);
 		assertNotNull(inventory.getItem());
 		assertEquals(item, inventory.getItem());
@@ -49,7 +49,7 @@ class BeaconInventoryMockTest
 	@Test
 	void testSetItem_SetsSlot()
 	{
-		ItemStack item = new ItemStack(Material.EMERALD);
+		ItemStack item = new ItemStackMock(Material.EMERALD);
 
 		inventory.setItem(item);
 
@@ -69,7 +69,7 @@ class BeaconInventoryMockTest
 	{
 		assertNotNull(inventory.getSnapshot());
 
-		inventory.setItem(new ItemStack(Material.EMERALD));
+		inventory.setItem(new ItemStackMock(Material.EMERALD));
 		assertNotEquals(inventory, inventory.getSnapshot());
 		assertEquals(inventory.getItem(), inventory.getSnapshot().getItem());
 	}

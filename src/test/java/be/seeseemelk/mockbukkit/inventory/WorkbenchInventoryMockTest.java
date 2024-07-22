@@ -41,7 +41,7 @@ class WorkbenchInventoryMockTest
 	@Test
 	void testGetResult()
 	{
-		ItemStack item = new ItemStack(Material.OAK_BOAT);
+		ItemStack item = new ItemStackMock(Material.OAK_BOAT);
 		workbench.setResult(item);
 		assertEquals(item, workbench.getResult());
 	}
@@ -55,8 +55,8 @@ class WorkbenchInventoryMockTest
 	@Test
 	void testSetMatrix()
 	{
-		ItemStack[] matrix = new ItemStack[10];
-		matrix[4] = new ItemStack(Material.OAK_BOAT);
+		ItemStack[] matrix = new ItemStackMock[10];
+		matrix[4] = new ItemStackMock(Material.OAK_BOAT);
 
 		workbench.setMatrix(matrix);
 
@@ -67,7 +67,7 @@ class WorkbenchInventoryMockTest
 	void testSetMatrix_underMaxSize()
 	{
 		ItemStack[] matrix = new ItemStack[5];
-		matrix[4] = new ItemStack(Material.OAK_BOAT);
+		matrix[4] = new ItemStackMock(Material.OAK_BOAT);
 		assertDoesNotThrow(() -> workbench.setMatrix(matrix));
 	}
 
@@ -87,7 +87,7 @@ class WorkbenchInventoryMockTest
 	void testSetMatrix_SetsItems()
 	{
 		ItemStack[] matrix = new ItemStack[10];
-		matrix[4] = new ItemStack(Material.OAK_BOAT);
+		matrix[4] = new ItemStackMock(Material.OAK_BOAT);
 
 		workbench.setMatrix(matrix);
 

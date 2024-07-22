@@ -1,319 +1,380 @@
 {
-  "values": [
-    {
-      "key": "minecraft:in_fire",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_on_fire",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:lightning_bolt",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:on_fire",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_on_fire",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:lava",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_on_fire",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:hot_floor",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_on_fire",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:in_wall",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:cramming",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:drown",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_drown",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:starve",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:cactus",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:fall",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "FALL_VARIANTS",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:fly_into_wall",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:out_of_world",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:generic",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:magic",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:wither",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:dragon_breath",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:dry_out",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:sweet_berry_bush",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_sweet_berry_bush",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:freeze",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_freeze",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:stalagmite",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:falling_block",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:falling_anvil",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:falling_stalactite",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:sting",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:mob_attack",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:mob_attack_no_aggro",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:player_attack",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:arrow",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:trident",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:mob_projectile",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:spit",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:fireworks",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:fireball",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_on_fire",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:unattributed_fireball",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt_on_fire",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:wither_skull",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:thrown",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:indirect_magic",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:thorns",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:enchant.thorns.hit",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:explosion",
-      "damageScaling": "ALWAYS",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:player_explosion",
-      "damageScaling": "ALWAYS",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:sonic_boom",
-      "damageScaling": "ALWAYS",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:bad_respawn_point",
-      "damageScaling": "ALWAYS",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "INTENTIONAL_GAME_DESIGN",
-      "exhaustion": 0.1
-    },
-    {
-      "key": "minecraft:outside_border",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    },
-    {
-      "key": "minecraft:generic_kill",
-      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-      "sound": "minecraft:entity.player.hurt",
-      "deathMessageType": "DEFAULT",
-      "exhaustion": 0.0
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:arrow",
+			"exhaustion": 0.1,
+			"translationKey": "arrow",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:bad_respawn_point",
+			"exhaustion": 0.1,
+			"translationKey": "badRespawnPoint",
+			"damageScaling": "ALWAYS",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "INTENTIONAL_GAME_DESIGN"
+		},
+		{
+			"key": "minecraft:cactus",
+			"exhaustion": 0.1,
+			"translationKey": "cactus",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:campfire",
+			"exhaustion": 0.1,
+			"translationKey": "inFire",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:cramming",
+			"exhaustion": 0.0,
+			"translationKey": "cramming",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:dragon_breath",
+			"exhaustion": 0.0,
+			"translationKey": "dragonBreath",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:drown",
+			"exhaustion": 0.0,
+			"translationKey": "drown",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_drown",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:dry_out",
+			"exhaustion": 0.1,
+			"translationKey": "dryout",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:explosion",
+			"exhaustion": 0.1,
+			"translationKey": "explosion",
+			"damageScaling": "ALWAYS",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:fall",
+			"exhaustion": 0.0,
+			"translationKey": "fall",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "FALL_VARIANTS"
+		},
+		{
+			"key": "minecraft:falling_anvil",
+			"exhaustion": 0.1,
+			"translationKey": "anvil",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:falling_block",
+			"exhaustion": 0.1,
+			"translationKey": "fallingBlock",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:falling_stalactite",
+			"exhaustion": 0.1,
+			"translationKey": "fallingStalactite",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:fireball",
+			"exhaustion": 0.1,
+			"translationKey": "fireball",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:fireworks",
+			"exhaustion": 0.1,
+			"translationKey": "fireworks",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:fly_into_wall",
+			"exhaustion": 0.0,
+			"translationKey": "flyIntoWall",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:freeze",
+			"exhaustion": 0.0,
+			"translationKey": "freeze",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_freeze",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:generic",
+			"exhaustion": 0.0,
+			"translationKey": "generic",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:generic_kill",
+			"exhaustion": 0.0,
+			"translationKey": "genericKill",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:hot_floor",
+			"exhaustion": 0.1,
+			"translationKey": "hotFloor",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:in_fire",
+			"exhaustion": 0.1,
+			"translationKey": "inFire",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:in_wall",
+			"exhaustion": 0.0,
+			"translationKey": "inWall",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:indirect_magic",
+			"exhaustion": 0.0,
+			"translationKey": "indirectMagic",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:lava",
+			"exhaustion": 0.1,
+			"translationKey": "lava",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:lightning_bolt",
+			"exhaustion": 0.1,
+			"translationKey": "lightningBolt",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:magic",
+			"exhaustion": 0.0,
+			"translationKey": "magic",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:mob_attack",
+			"exhaustion": 0.1,
+			"translationKey": "mob",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:mob_attack_no_aggro",
+			"exhaustion": 0.1,
+			"translationKey": "mob",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:mob_projectile",
+			"exhaustion": 0.1,
+			"translationKey": "mob",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:on_fire",
+			"exhaustion": 0.0,
+			"translationKey": "onFire",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:out_of_world",
+			"exhaustion": 0.0,
+			"translationKey": "outOfWorld",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:outside_border",
+			"exhaustion": 0.0,
+			"translationKey": "outsideBorder",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:player_attack",
+			"exhaustion": 0.1,
+			"translationKey": "player",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:player_explosion",
+			"exhaustion": 0.1,
+			"translationKey": "explosion.player",
+			"damageScaling": "ALWAYS",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:sonic_boom",
+			"exhaustion": 0.0,
+			"translationKey": "sonic_boom",
+			"damageScaling": "ALWAYS",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:spit",
+			"exhaustion": 0.1,
+			"translationKey": "mob",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:stalagmite",
+			"exhaustion": 0.0,
+			"translationKey": "stalagmite",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:starve",
+			"exhaustion": 0.0,
+			"translationKey": "starve",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:sting",
+			"exhaustion": 0.1,
+			"translationKey": "sting",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:sweet_berry_bush",
+			"exhaustion": 0.1,
+			"translationKey": "sweetBerryBush",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_sweet_berry_bush",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:thorns",
+			"exhaustion": 0.1,
+			"translationKey": "thorns",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:enchant.thorns.hit",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:thrown",
+			"exhaustion": 0.1,
+			"translationKey": "thrown",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:trident",
+			"exhaustion": 0.1,
+			"translationKey": "trident",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:unattributed_fireball",
+			"exhaustion": 0.1,
+			"translationKey": "onFire",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:wind_charge",
+			"exhaustion": 0.1,
+			"translationKey": "mob",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:wither",
+			"exhaustion": 0.0,
+			"translationKey": "wither",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		},
+		{
+			"key": "minecraft:wither_skull",
+			"exhaustion": 0.1,
+			"translationKey": "witherSkull",
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"sound": "minecraft:entity.player.hurt",
+			"deathMessageType": "DEFAULT"
+		}
+	]
 }
