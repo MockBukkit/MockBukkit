@@ -8,7 +8,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
-import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
@@ -47,13 +46,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
-import org.bukkit.ServerLinks;
 import org.bukkit.Registry;
+import org.bukkit.ServerLinks;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
-import org.bukkit.UnsafeValues;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -61,6 +59,7 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.TileState;
@@ -110,7 +109,6 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -421,12 +419,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * a {@link BlockDamageEvent} even if the player is not in survival mode.
 	 *
 	 * @param block The block to damage.
+	 * @param face  The side to damage the block from
 	 * @return The event that has been fired.
 	 */
-	protected @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
+	private @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block, BlockFace face)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		BlockDamageEvent event = new BlockDamageEvent(this, block, block.getFace(), getItemInHand(), false);
+		Preconditions.checkNotNull(face, "Face can not be null");
+		BlockDamageEvent event = new BlockDamageEvent(this, block, face, getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
 	}
@@ -441,7 +441,24 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return the event that was fired, {@code null} if the player was not in
 	 * survival gamemode.
 	 */
+	@Deprecated
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
+	{
+		return simulateBlockDamage(block, BlockFace.DOWN);
+	}
+
+	/**
+	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
+	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
+	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
+	 * {@link BlockBreakEvent}.
+	 *
+	 * @param block The block to damage.
+	 * @param face  The face to damage the block on
+	 * @return the event that was fired, {@code null} if the player was not in
+	 * survival gamemode.
+	 */
+	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block, BlockFace face)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
 		if (super.getGameMode() != GameMode.SURVIVAL)
@@ -449,7 +466,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return null;
 		}
 
-		BlockDamageEvent event = simulateBlockDamagePure(block);
+		BlockDamageEvent event = simulateBlockDamagePure(block, face);
 		if (event.getInstaBreak())
 		{
 			BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
@@ -469,11 +486,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
 	 * or in spectator mode.
 	 */
+	@Deprecated
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
+	{
+		return simulateBlockBreak(block, BlockFace.DOWN);
+	}
+
+	/**
+	 * Simulates the player breaking a block. This method will not break the block if the player is in adventure or
+	 * spectator mode. If the player is in survival mode, the player will first damage the block.
+	 *
+	 * @param block The block to break.
+	 * @param face  The facing to break the block from
+	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
+	 * or in spectator mode.
+	 */
+	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block, BlockFace face)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
 		if ((super.getGameMode() == GameMode.SPECTATOR || super.getGameMode() == GameMode.ADVENTURE)
-				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block, face).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
