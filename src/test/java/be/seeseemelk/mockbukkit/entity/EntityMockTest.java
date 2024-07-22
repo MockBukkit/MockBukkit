@@ -942,6 +942,18 @@ class EntityMockTest
 	}
 
 	@Test
+	void leaveVehicle(){
+		EntityMock vehicle = new RideableMinecartMock(server, UUID.randomUUID());
+		EntityMock passenger = new PigMock(server, UUID.randomUUID());
+
+		vehicle.addPassenger(passenger);
+		assertTrue(passenger.isInsideVehicle());
+
+		vehicle.removePassenger(passenger);
+		assertFalse(passenger.isInsideVehicle());
+	}
+
+	@Test
 	void remove()
 	{
 		EntityMock zombie = (EntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
