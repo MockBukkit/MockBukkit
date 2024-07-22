@@ -1,6 +1,6 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:crossbow"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:crossbow"
+	]
 }

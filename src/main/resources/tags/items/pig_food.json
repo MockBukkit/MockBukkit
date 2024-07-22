@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:beetroot",
-        "minecraft:carrot",
-        "minecraft:potato"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:beetroot",
+		"minecraft:carrot",
+		"minecraft:potato"
+	]
 }

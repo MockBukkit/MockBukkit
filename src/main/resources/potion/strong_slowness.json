@@ -1,12 +1,12 @@
 {
-  "effects": [
-    {
-      "type": "minecraft:slowness",
-      "amplifier": 3,
-      "duration": 400,
-      "ambient": false,
-      "particles": true,
-      "icon": true
-    }
-  ]
+	"effects": [
+		{
+			"type": "minecraft:slowness",
+			"amplifier": 3,
+			"duration": 400,
+			"ambient": false,
+			"particles": true,
+			"icon": true
+		}
+	]
 }

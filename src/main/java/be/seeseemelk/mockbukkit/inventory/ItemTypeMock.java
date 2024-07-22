@@ -1,16 +1,19 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.BlockType;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,7 +22,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
-public class ItemTypeMock implements ItemType
+import java.util.function.Consumer;
+
+public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 {
 
 	private final NamespacedKey namespacedKey;
@@ -30,9 +35,11 @@ public class ItemTypeMock implements ItemType
 	private final boolean hasRecord;
 	private final boolean fuel;
 	private final String translationKey;
+	private final Class<M> metaClass;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
-						 boolean edible, boolean hasRecord, boolean fuel, boolean blockType, String translationKey)
+						 boolean edible, boolean hasRecord, boolean fuel, boolean blockType, String translationKey,
+						 Class<M> metaClass)
 	{
 		this.namespacedKey = namespacedKey;
 		this.maxStackSize = maxStackSize;
@@ -42,6 +49,7 @@ public class ItemTypeMock implements ItemType
 		this.fuel = fuel;
 		this.blockType = blockType;
 		this.translationKey = translationKey;
+		this.metaClass = metaClass;
 	}
 
 	@ApiStatus.Internal
@@ -55,8 +63,41 @@ public class ItemTypeMock implements ItemType
 		boolean fuel = jsonObject.get("fuel").getAsBoolean();
 		boolean blockType = jsonObject.get("blockType").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
+		Class<? extends ItemMeta> metaClass = null;
+		String metaClassKey = "metaClass";
+		if (jsonObject.has(metaClassKey))
+		{
+			String metaClassAsString = jsonObject.get(metaClassKey).getAsString();
 
-		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, hasRecord, fuel, blockType, translationKey);
+			try
+			{
+				if (
+						metaClassAsString.equals("BlockStateMeta")
+								|| metaClassAsString.equals("BlockDataMeta")
+								|| metaClassAsString.equals("EnchantmentStorageMeta")
+								|| metaClassAsString.equals("MusicInstrumentMeta")
+								|| metaClassAsString.equals("OminousBottleMeta")
+								|| metaClassAsString.equals("BundleMeta")
+				)
+				{
+					//Unimplemented Meta class, falling back to ItemMeta
+					metaClass = ItemMetaMock.class;
+				}
+				else
+				{
+					String metaClassName =
+							"be.seeseemelk.mockbukkit.inventory.meta."
+									+ jsonObject.get(metaClassKey).getAsString()
+									+ "Mock";
+					metaClass = (Class<? extends ItemMeta>) Class.forName(metaClassName);
+				}
+			}
+			catch (ClassNotFoundException e)
+			{
+				throw new IllegalStateException("Could not find class: " + jsonObject.get(metaClassKey).getAsString());
+			}
+		}
+		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, hasRecord, fuel, blockType, translationKey, metaClass);
 	}
 
 	@NotNull
@@ -76,13 +117,13 @@ public class ItemTypeMock implements ItemType
 	@Override
 	public @NotNull ItemStack createItemStack()
 	{
-		throw new UnimplementedOperationException();
+		return this.createItemStack(1);
 	}
 
 	@Override
 	public @NotNull ItemStack createItemStack(int amount)
 	{
-		throw new UnimplementedOperationException();
+		return new ItemStackMock(this.asMaterial(), amount);
 	}
 
 	@Override
@@ -98,9 +139,26 @@ public class ItemTypeMock implements ItemType
 	}
 
 	@Override
-	public @NotNull Class<? extends ItemMeta> getItemMetaClass()
+	public @NotNull Class<M> getItemMetaClass()
 	{
-		throw new UnimplementedOperationException();
+		if (this == ItemType.AIR)
+		{
+			throw new UnsupportedOperationException("Air does not have ItemMeta");
+		}
+
+		return this.metaClass;
+	}
+
+	@Override
+	public @NotNull ItemStack createItemStack(@Nullable Consumer<? super M> metaConfigurator)
+	{
+		return null;
+	}
+
+	@Override
+	public @NotNull ItemStack createItemStack(int amount, @Nullable Consumer<? super M> metaConfigurator)
+	{
+		return null;
 	}
 
 	@Override
@@ -181,7 +239,7 @@ public class ItemTypeMock implements ItemType
 	@Override
 	public @Nullable Material asMaterial()
 	{
-		throw new UnimplementedOperationException();
+		return Registry.MATERIAL.get(this.namespacedKey);
 	}
 
 	@Override
@@ -194,6 +252,13 @@ public class ItemTypeMock implements ItemType
 	public @NotNull String getTranslationKey()
 	{
 		return translationKey;
+	}
+
+	@Override
+	public @Nullable ItemRarity getItemRarity()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

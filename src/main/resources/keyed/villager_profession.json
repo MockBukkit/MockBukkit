@@ -1,49 +1,94 @@
 {
-  "values": [
-    {
-      "key": "minecraft:none"
-    },
-    {
-      "key": "minecraft:armorer"
-    },
-    {
-      "key": "minecraft:butcher"
-    },
-    {
-      "key": "minecraft:cartographer"
-    },
-    {
-      "key": "minecraft:cleric"
-    },
-    {
-      "key": "minecraft:farmer"
-    },
-    {
-      "key": "minecraft:fisherman"
-    },
-    {
-      "key": "minecraft:fletcher"
-    },
-    {
-      "key": "minecraft:leatherworker"
-    },
-    {
-      "key": "minecraft:librarian"
-    },
-    {
-      "key": "minecraft:mason"
-    },
-    {
-      "key": "minecraft:nitwit"
-    },
-    {
-      "key": "minecraft:shepherd"
-    },
-    {
-      "key": "minecraft:toolsmith"
-    },
-    {
-      "key": "minecraft:weaponsmith"
-    }
-  ]
+	"values": [
+		{
+			"name": "ARMORER",
+			"key": "minecraft:armorer",
+			"ordinal": 1,
+			"translationKey": "entity.minecraft.villager.armorer"
+		},
+		{
+			"name": "BUTCHER",
+			"key": "minecraft:butcher",
+			"ordinal": 2,
+			"translationKey": "entity.minecraft.villager.butcher"
+		},
+		{
+			"name": "CARTOGRAPHER",
+			"key": "minecraft:cartographer",
+			"ordinal": 3,
+			"translationKey": "entity.minecraft.villager.cartographer"
+		},
+		{
+			"name": "CLERIC",
+			"key": "minecraft:cleric",
+			"ordinal": 4,
+			"translationKey": "entity.minecraft.villager.cleric"
+		},
+		{
+			"name": "FARMER",
+			"key": "minecraft:farmer",
+			"ordinal": 5,
+			"translationKey": "entity.minecraft.villager.farmer"
+		},
+		{
+			"name": "FISHERMAN",
+			"key": "minecraft:fisherman",
+			"ordinal": 6,
+			"translationKey": "entity.minecraft.villager.fisherman"
+		},
+		{
+			"name": "FLETCHER",
+			"key": "minecraft:fletcher",
+			"ordinal": 7,
+			"translationKey": "entity.minecraft.villager.fletcher"
+		},
+		{
+			"name": "LEATHERWORKER",
+			"key": "minecraft:leatherworker",
+			"ordinal": 8,
+			"translationKey": "entity.minecraft.villager.leatherworker"
+		},
+		{
+			"name": "LIBRARIAN",
+			"key": "minecraft:librarian",
+			"ordinal": 9,
+			"translationKey": "entity.minecraft.villager.librarian"
+		},
+		{
+			"name": "MASON",
+			"key": "minecraft:mason",
+			"ordinal": 10,
+			"translationKey": "entity.minecraft.villager.mason"
+		},
+		{
+			"name": "NITWIT",
+			"key": "minecraft:nitwit",
+			"ordinal": 11,
+			"translationKey": "entity.minecraft.villager.nitwit"
+		},
+		{
+			"name": "NONE",
+			"key": "minecraft:none",
+			"ordinal": 0,
+			"translationKey": "entity.minecraft.villager.none"
+		},
+		{
+			"name": "SHEPHERD",
+			"key": "minecraft:shepherd",
+			"ordinal": 12,
+			"translationKey": "entity.minecraft.villager.shepherd"
+		},
+		{
+			"name": "TOOLSMITH",
+			"key": "minecraft:toolsmith",
+			"ordinal": 13,
+			"translationKey": "entity.minecraft.villager.toolsmith"
+		},
+		{
+			"name": "WEAPONSMITH",
+			"key": "minecraft:weaponsmith",
+			"ordinal": 14,
+			"translationKey": "entity.minecraft.villager.weaponsmith"
+		}
+	]
 }

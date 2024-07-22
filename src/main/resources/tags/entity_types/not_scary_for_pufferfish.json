@@ -1,16 +1,16 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:dolphin",
-        "minecraft:tadpole",
-        "minecraft:glow_squid",
-        "minecraft:pufferfish",
-        "minecraft:cod",
-        "minecraft:squid",
-        "minecraft:tropical_fish",
-        "minecraft:salmon",
-        "minecraft:turtle",
-        "minecraft:guardian",
-        "minecraft:elder_guardian"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:cod",
+		"minecraft:dolphin",
+		"minecraft:elder_guardian",
+		"minecraft:glow_squid",
+		"minecraft:guardian",
+		"minecraft:pufferfish",
+		"minecraft:salmon",
+		"minecraft:squid",
+		"minecraft:tadpole",
+		"minecraft:tropical_fish",
+		"minecraft:turtle"
+	]
 }

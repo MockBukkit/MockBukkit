@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -36,7 +37,7 @@ public class PufferFishMock extends FishMock implements PufferFish
 	@Override
 	public @NotNull ItemStack getBaseBucketItem()
 	{
-		return new ItemStack(Material.PUFFERFISH_BUCKET);
+		return new ItemStackMock(Material.PUFFERFISH_BUCKET);
 	}
 
 	@Override

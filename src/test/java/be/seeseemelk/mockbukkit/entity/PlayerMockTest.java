@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.block.state.TileStateMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
@@ -352,7 +353,7 @@ class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
-		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		player.setItemInHand(new ItemStackMock(Material.DIAMOND_SWORD));
 		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
@@ -929,7 +930,7 @@ class PlayerMockTest
 		World world = player.getWorld();
 		world.setGameRule(GameRule.KEEP_INVENTORY, false);
 
-		player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+		player.getInventory().setItem(0, new ItemStackMock(Material.DIAMOND));
 		player.setHealth(0.0);
 
 		// The Player should have lost their inventory
@@ -943,7 +944,7 @@ class PlayerMockTest
 		World world = player.getWorld();
 		world.setGameRule(GameRule.KEEP_INVENTORY, true);
 
-		player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+		player.getInventory().setItem(0, new ItemStackMock(Material.DIAMOND));
 		player.setHealth(0.0);
 
 		// The Player should have kept their inventory
@@ -1422,7 +1423,7 @@ class PlayerMockTest
 	@Test
 	void testTeleport_DontCloseCraftingInventory()
 	{
-		ItemStack itemStack = new ItemStack(Material.DEEPSLATE);
+		ItemStack itemStack = new ItemStackMock(Material.DEEPSLATE);
 		player.getOpenInventory().setCursor(itemStack);
 		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
 		assertEquals(itemStack, player.getOpenInventory().getCursor());
@@ -1520,13 +1521,20 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE)));
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStackMock(Material.DIAMOND_CHESTPLATE));
+		});
 	}
 
 	@Test
 	void testPlayerSendEquipmentChange_Map()
 	{
-		assertDoesNotThrow(() -> player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST,
+					new ItemStackMock(Material.DIAMOND_CHESTPLATE)));
+		});
 	}
 
 	@Test
@@ -1603,7 +1611,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Correct_DataType()
 	{
-		player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStack(Material.STONE));
+		player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStackMock(Material.STONE));
 	}
 
 	@Test
@@ -1818,7 +1826,7 @@ class PlayerMockTest
 	@Test
 	void testSimulateConsumeItem()
 	{
-		ItemStack consumable = new ItemStack(Material.POTATO);
+		ItemStack consumable = new ItemStackMock(Material.POTATO);
 
 		player.simulateConsumeItem(consumable);
 
@@ -1836,14 +1844,14 @@ class PlayerMockTest
 	@Test
 	void testSimulateConsumeItemWithInvalidItem()
 	{
-		ItemStack nonConsumable = new ItemStack(Material.STONE);
+		ItemStack nonConsumable = new ItemStackMock(Material.STONE);
 		assertThrows(IllegalArgumentException.class, () -> player.simulateConsumeItem(nonConsumable));
 	}
 
 	@Test
 	void testAssertItemConsumedWithNotConsumedItem()
 	{
-		ItemStack notConsumed = new ItemStack(Material.APPLE);
+		ItemStack notConsumed = new ItemStackMock(Material.APPLE);
 		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(notConsumed));
 	}
 
@@ -1958,7 +1966,7 @@ class PlayerMockTest
 	void testAssertInventoryViewWithPredicate()
 	{
 		InventoryMock inventory = server.createInventory(player, InventoryType.LOOM);
-		ItemStack item = new ItemStack(Material.POTATO);
+		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
 		player.assertInventoryView(InventoryType.LOOM, view -> view.contains(item));
@@ -1968,7 +1976,7 @@ class PlayerMockTest
 	void testAssertInventoryViewWithPredicateFails()
 	{
 		InventoryMock inventory = server.createInventory(player, InventoryType.LOOM);
-		ItemStack item = new ItemStack(Material.POTATO);
+		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
 		assertThrows(AssertionError.class, () ->

@@ -2,11 +2,11 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.inventory.LlamaInventoryMock;
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
-import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -121,7 +121,7 @@ class LlamaMockTest
 	@Test
 	void testGetInventory()
 	{
-		llama.getInventory().setDecor(new ItemStack(Material.CYAN_CARPET));
+		llama.getInventory().setDecor(new ItemStackMock(Material.CYAN_CARPET));
 		assertInstanceOf(LlamaInventoryMock.class, llama.getInventory());
 		assertEquals(Material.CYAN_CARPET, llama.getInventory().getDecor().getType());
 	}

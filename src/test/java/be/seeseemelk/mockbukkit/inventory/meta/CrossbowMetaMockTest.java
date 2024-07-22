@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -44,7 +45,7 @@ class CrossbowMetaMockTest
 	@Test
 	void constructor_Clone_CopiesValues()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		CrossbowMetaMock meta2 = new CrossbowMetaMock(meta);
 
@@ -62,7 +63,7 @@ class CrossbowMetaMockTest
 	@Test
 	void hasChargedProjectiles_Projectiles_ReturnsTrue()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		assertTrue(meta.hasChargedProjectiles());
 	}
@@ -79,12 +80,12 @@ class CrossbowMetaMockTest
 	@Test
 	void getChargedProjectiles_Projectiles_ClonedList()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		List<ItemStack> projectiles = meta.getChargedProjectiles();
 		assertEquals(1, projectiles.size());
 
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 		assertEquals(2, meta.getChargedProjectiles().size());
 
 		assertEquals(1, projectiles.size());
@@ -93,7 +94,7 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_Null_ClearsList()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		meta.setChargedProjectiles(null);
 
@@ -103,7 +104,7 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_SetsList()
 	{
-		meta.setChargedProjectiles(List.of(new ItemStack(Material.FIREWORK_ROCKET), new ItemStack(Material.FIREWORK_ROCKET)));
+		meta.setChargedProjectiles(List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.FIREWORK_ROCKET)));
 
 		assertEquals(2, meta.getChargedProjectiles().size());
 	}
@@ -111,9 +112,9 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_RemovesOld()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
-		meta.setChargedProjectiles(List.of(new ItemStack(Material.FIREWORK_ROCKET), new ItemStack(Material.FIREWORK_ROCKET)));
+		meta.setChargedProjectiles(List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.FIREWORK_ROCKET)));
 
 		assertEquals(2, meta.getChargedProjectiles().size());
 	}
@@ -121,26 +122,39 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_AcceptsAllArrows()
 	{
-		meta.setChargedProjectiles(List.of(new ItemStack(Material.FIREWORK_ROCKET), new ItemStack(Material.ARROW), new ItemStack(Material.TIPPED_ARROW), new ItemStack(Material.SPECTRAL_ARROW)));
+		meta.setChargedProjectiles(
+				List.of(
+						new ItemStackMock(Material.FIREWORK_ROCKET),
+						new ItemStackMock(Material.ARROW),
+						new ItemStackMock(Material.TIPPED_ARROW),
+						new ItemStackMock(Material.SPECTRAL_ARROW)
+				)
+		);
 	}
 
 	@Test
 	void setChargedProjectiles_NullItem_ThrowsException()
 	{
 		// List#of doesn't accept null values.
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.setChargedProjectiles(Arrays.asList(new ItemStack(Material.FIREWORK_ROCKET), null)));
+		assertThrowsExactly(IllegalArgumentException.class, () ->
+		{
+			meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null));
+		});
 	}
 
 	@Test
 	void setChargedProjectiles_NotArrow_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.setChargedProjectiles(List.of(new ItemStack(Material.STONE))));
+		assertThrowsExactly(IllegalArgumentException.class, () ->
+		{
+			meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE)));
+		});
 	}
 
 	@Test
 	void addChargedProjectile_AddsProjectile()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		assertEquals(1, meta.getChargedProjectiles().size());
 	}
@@ -148,8 +162,8 @@ class CrossbowMetaMockTest
 	@Test
 	void addChargedProjectile_DoesntOverwrite()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		assertEquals(2, meta.getChargedProjectiles().size());
 	}
@@ -157,10 +171,10 @@ class CrossbowMetaMockTest
 	@Test
 	void addChargedProjectile_AcceptsAllArrows()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
-		meta.addChargedProjectile(new ItemStack(Material.ARROW));
-		meta.addChargedProjectile(new ItemStack(Material.SPECTRAL_ARROW));
-		meta.addChargedProjectile(new ItemStack(Material.TIPPED_ARROW));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.ARROW));
+		meta.addChargedProjectile(new ItemStackMock(Material.SPECTRAL_ARROW));
+		meta.addChargedProjectile(new ItemStackMock(Material.TIPPED_ARROW));
 	}
 
 	@Test
@@ -172,7 +186,10 @@ class CrossbowMetaMockTest
 	@Test
 	void addChargedProjectile_NotArrow_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addChargedProjectile(new ItemStack(Material.STONE)));
+		assertThrowsExactly(IllegalArgumentException.class, () ->
+		{
+			meta.addChargedProjectile(new ItemStackMock(Material.STONE));
+		});
 	}
 
 	@Test
@@ -192,14 +209,14 @@ class CrossbowMetaMockTest
 	void equals_DifferentInstance_DifferentValues_False()
 	{
 		CrossbowMetaMock clone = meta.clone();
-		clone.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		clone.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 		assertNotEquals(meta, clone);
 	}
 
 	@Test
 	void clone_CopiesValues()
 	{
-		meta.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
 		CrossbowMetaMock meta2 = meta.clone();
 

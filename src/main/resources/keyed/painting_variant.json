@@ -1,94 +1,404 @@
 {
-  "values": [
-    {
-      "key": "minecraft:kebab"
-    },
-    {
-      "key": "minecraft:aztec"
-    },
-    {
-      "key": "minecraft:alban"
-    },
-    {
-      "key": "minecraft:aztec2"
-    },
-    {
-      "key": "minecraft:bomb"
-    },
-    {
-      "key": "minecraft:plant"
-    },
-    {
-      "key": "minecraft:wasteland"
-    },
-    {
-      "key": "minecraft:pool"
-    },
-    {
-      "key": "minecraft:courbet"
-    },
-    {
-      "key": "minecraft:sea"
-    },
-    {
-      "key": "minecraft:sunset"
-    },
-    {
-      "key": "minecraft:creebet"
-    },
-    {
-      "key": "minecraft:wanderer"
-    },
-    {
-      "key": "minecraft:graham"
-    },
-    {
-      "key": "minecraft:match"
-    },
-    {
-      "key": "minecraft:bust"
-    },
-    {
-      "key": "minecraft:stage"
-    },
-    {
-      "key": "minecraft:void"
-    },
-    {
-      "key": "minecraft:skull_and_roses"
-    },
-    {
-      "key": "minecraft:wither"
-    },
-    {
-      "key": "minecraft:fighters"
-    },
-    {
-      "key": "minecraft:pointer"
-    },
-    {
-      "key": "minecraft:pigscene"
-    },
-    {
-      "key": "minecraft:burning_skull"
-    },
-    {
-      "key": "minecraft:skeleton"
-    },
-    {
-      "key": "minecraft:donkey_kong"
-    },
-    {
-      "key": "minecraft:earth"
-    },
-    {
-      "key": "minecraft:wind"
-    },
-    {
-      "key": "minecraft:water"
-    },
-    {
-      "key": "minecraft:fire"
-    }
-  ]
+	"values": [
+		{
+			"key": "minecraft:alban",
+			"id": 2,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "ALBAN",
+			"ordinal": 2
+		},
+		{
+			"key": "minecraft:aztec",
+			"id": 1,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "AZTEC",
+			"ordinal": 1
+		},
+		{
+			"key": "minecraft:aztec2",
+			"id": 3,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "AZTEC2",
+			"ordinal": 3
+		},
+		{
+			"key": "minecraft:backyard",
+			"id": 35,
+			"blockWidth": 3,
+			"blockHeight": 4,
+			"name": "BACKYARD",
+			"ordinal": 35
+		},
+		{
+			"key": "minecraft:baroque",
+			"id": 30,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "BAROQUE",
+			"ordinal": 30
+		},
+		{
+			"key": "minecraft:bomb",
+			"id": 4,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "BOMB",
+			"ordinal": 4
+		},
+		{
+			"key": "minecraft:bouquet",
+			"id": 36,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "BOUQUET",
+			"ordinal": 36
+		},
+		{
+			"key": "minecraft:burning_skull",
+			"id": 23,
+			"blockWidth": 4,
+			"blockHeight": 4,
+			"name": "BURNING_SKULL",
+			"ordinal": 23
+		},
+		{
+			"key": "minecraft:bust",
+			"id": 15,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "BUST",
+			"ordinal": 15
+		},
+		{
+			"key": "minecraft:cavebird",
+			"id": 37,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "CAVEBIRD",
+			"ordinal": 37
+		},
+		{
+			"key": "minecraft:changing",
+			"id": 38,
+			"blockWidth": 4,
+			"blockHeight": 2,
+			"name": "CHANGING",
+			"ordinal": 38
+		},
+		{
+			"key": "minecraft:cotan",
+			"id": 39,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "COTAN",
+			"ordinal": 39
+		},
+		{
+			"key": "minecraft:courbet",
+			"id": 8,
+			"blockWidth": 2,
+			"blockHeight": 1,
+			"name": "COURBET",
+			"ordinal": 8
+		},
+		{
+			"key": "minecraft:creebet",
+			"id": 11,
+			"blockWidth": 2,
+			"blockHeight": 1,
+			"name": "CREEBET",
+			"ordinal": 11
+		},
+		{
+			"key": "minecraft:donkey_kong",
+			"id": 25,
+			"blockWidth": 4,
+			"blockHeight": 3,
+			"name": "DONKEY_KONG",
+			"ordinal": 25
+		},
+		{
+			"key": "minecraft:earth",
+			"id": 26,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "EARTH",
+			"ordinal": 26
+		},
+		{
+			"key": "minecraft:endboss",
+			"id": 40,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "ENDBOSS",
+			"ordinal": 40
+		},
+		{
+			"key": "minecraft:fern",
+			"id": 41,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "FERN",
+			"ordinal": 41
+		},
+		{
+			"key": "minecraft:fighters",
+			"id": 20,
+			"blockWidth": 4,
+			"blockHeight": 2,
+			"name": "FIGHTERS",
+			"ordinal": 20
+		},
+		{
+			"key": "minecraft:finding",
+			"id": 42,
+			"blockWidth": 4,
+			"blockHeight": 2,
+			"name": "FINDING",
+			"ordinal": 42
+		},
+		{
+			"key": "minecraft:fire",
+			"id": 29,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "FIRE",
+			"ordinal": 29
+		},
+		{
+			"key": "minecraft:graham",
+			"id": 13,
+			"blockWidth": 1,
+			"blockHeight": 2,
+			"name": "GRAHAM",
+			"ordinal": 13
+		},
+		{
+			"key": "minecraft:humble",
+			"id": 31,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "HUMBLE",
+			"ordinal": 31
+		},
+		{
+			"key": "minecraft:kebab",
+			"id": 0,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "KEBAB",
+			"ordinal": 0
+		},
+		{
+			"key": "minecraft:lowmist",
+			"id": 43,
+			"blockWidth": 4,
+			"blockHeight": 2,
+			"name": "LOWMIST",
+			"ordinal": 43
+		},
+		{
+			"key": "minecraft:match",
+			"id": 14,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "MATCH",
+			"ordinal": 14
+		},
+		{
+			"key": "minecraft:meditative",
+			"id": 32,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "MEDITATIVE",
+			"ordinal": 32
+		},
+		{
+			"key": "minecraft:orb",
+			"id": 44,
+			"blockWidth": 4,
+			"blockHeight": 4,
+			"name": "ORB",
+			"ordinal": 44
+		},
+		{
+			"key": "minecraft:owlemons",
+			"id": 45,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "OWLEMONS",
+			"ordinal": 45
+		},
+		{
+			"key": "minecraft:passage",
+			"id": 46,
+			"blockWidth": 4,
+			"blockHeight": 2,
+			"name": "PASSAGE",
+			"ordinal": 46
+		},
+		{
+			"key": "minecraft:pigscene",
+			"id": 22,
+			"blockWidth": 4,
+			"blockHeight": 4,
+			"name": "PIGSCENE",
+			"ordinal": 22
+		},
+		{
+			"key": "minecraft:plant",
+			"id": 5,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "PLANT",
+			"ordinal": 5
+		},
+		{
+			"key": "minecraft:pointer",
+			"id": 21,
+			"blockWidth": 4,
+			"blockHeight": 4,
+			"name": "POINTER",
+			"ordinal": 21
+		},
+		{
+			"key": "minecraft:pond",
+			"id": 47,
+			"blockWidth": 3,
+			"blockHeight": 4,
+			"name": "POND",
+			"ordinal": 47
+		},
+		{
+			"key": "minecraft:pool",
+			"id": 7,
+			"blockWidth": 2,
+			"blockHeight": 1,
+			"name": "POOL",
+			"ordinal": 7
+		},
+		{
+			"key": "minecraft:prairie_ride",
+			"id": 33,
+			"blockWidth": 1,
+			"blockHeight": 2,
+			"name": "PRAIRIE_RIDE",
+			"ordinal": 33
+		},
+		{
+			"key": "minecraft:sea",
+			"id": 9,
+			"blockWidth": 2,
+			"blockHeight": 1,
+			"name": "SEA",
+			"ordinal": 9
+		},
+		{
+			"key": "minecraft:skeleton",
+			"id": 24,
+			"blockWidth": 4,
+			"blockHeight": 3,
+			"name": "SKELETON",
+			"ordinal": 24
+		},
+		{
+			"key": "minecraft:skull_and_roses",
+			"id": 18,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "SKULL_AND_ROSES",
+			"ordinal": 18
+		},
+		{
+			"key": "minecraft:stage",
+			"id": 16,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "STAGE",
+			"ordinal": 16
+		},
+		{
+			"key": "minecraft:sunflowers",
+			"id": 48,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "SUNFLOWERS",
+			"ordinal": 48
+		},
+		{
+			"key": "minecraft:sunset",
+			"id": 10,
+			"blockWidth": 2,
+			"blockHeight": 1,
+			"name": "SUNSET",
+			"ordinal": 10
+		},
+		{
+			"key": "minecraft:tides",
+			"id": 49,
+			"blockWidth": 3,
+			"blockHeight": 3,
+			"name": "TIDES",
+			"ordinal": 49
+		},
+		{
+			"key": "minecraft:unpacked",
+			"id": 34,
+			"blockWidth": 4,
+			"blockHeight": 4,
+			"name": "UNPACKED",
+			"ordinal": 34
+		},
+		{
+			"key": "minecraft:void",
+			"id": 17,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "VOID",
+			"ordinal": 17
+		},
+		{
+			"key": "minecraft:wanderer",
+			"id": 12,
+			"blockWidth": 1,
+			"blockHeight": 2,
+			"name": "WANDERER",
+			"ordinal": 12
+		},
+		{
+			"key": "minecraft:wasteland",
+			"id": 6,
+			"blockWidth": 1,
+			"blockHeight": 1,
+			"name": "WASTELAND",
+			"ordinal": 6
+		},
+		{
+			"key": "minecraft:water",
+			"id": 28,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "WATER",
+			"ordinal": 28
+		},
+		{
+			"key": "minecraft:wind",
+			"id": 27,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "WIND",
+			"ordinal": 27
+		},
+		{
+			"key": "minecraft:wither",
+			"id": 19,
+			"blockWidth": 2,
+			"blockHeight": 2,
+			"name": "WITHER",
+			"ordinal": 19
+		}
+	]
 }

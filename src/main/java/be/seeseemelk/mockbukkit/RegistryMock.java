@@ -3,12 +3,17 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockTypeMock;
 import be.seeseemelk.mockbukkit.damage.DamageTypeMock;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
-import be.seeseemelk.mockbukkit.entity.varint.WolfVariantMock;
+import be.seeseemelk.mockbukkit.entity.variant.CatVariantMock;
+import be.seeseemelk.mockbukkit.entity.variant.FrogVariantMock;
+import be.seeseemelk.mockbukkit.entity.variant.VillagerProfessionMock;
+import be.seeseemelk.mockbukkit.entity.variant.VillagerTypeMock;
+import be.seeseemelk.mockbukkit.entity.variant.WolfVariantMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
 import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import be.seeseemelk.mockbukkit.map.MapCursorTypeMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
@@ -119,6 +124,30 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		else if (key == RegistryKey.WOLF_VARIANT)
 		{
 			return WolfVariantMock::from;
+		}
+		else if (key == RegistryKey.JUKEBOX_SONG)
+		{
+			return JukeboxSongMock::from;
+		}
+		else if (key == RegistryKey.CAT_VARIANT)
+		{
+			return CatVariantMock::from;
+		}
+		else if (key == RegistryKey.VILLAGER_PROFESSION)
+		{
+			return VillagerProfessionMock::from;
+		}
+		else if (key == RegistryKey.VILLAGER_TYPE)
+		{
+			return VillagerTypeMock::from;
+		}
+		else if (key == RegistryKey.FROG_VARIANT)
+		{
+			return FrogVariantMock::from;
+		}
+		else if (key == RegistryKey.MAP_DECORATION_TYPE)
+		{
+			return MapCursorTypeMock::from;
 		}
 		else
 		{

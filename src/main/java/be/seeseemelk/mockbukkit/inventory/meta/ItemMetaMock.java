@@ -28,6 +28,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.inventory.meta.components.FoodComponent;
+import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.bukkit.inventory.meta.components.ToolComponent;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -320,7 +321,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public @NotNull ItemMetaMock clone()
+	public ItemMetaMock clone()
 	{
 		try
 		{
@@ -728,6 +729,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public boolean hasDamageValue()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void resetDamage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasRepairCost()
 	{
 		return repairCost > 0;
@@ -814,7 +829,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.checkAttributeMap();
 		for (Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entries())
 		{
-			Preconditions.checkArgument(!entry.getValue().getUniqueId().equals(modifier.getUniqueId()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
+			Preconditions.checkArgument(!entry.getValue().getKey().equals(modifier.getKey()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
 		}
 		return this.attributeModifiers.put(attribute, modifier);
 	}
@@ -843,7 +858,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.checkAttributeMap();
 
 		return this.attributeModifiers.entries().removeIf(entry ->
-				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getUniqueId().equals(modifier.getUniqueId()))
+				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getKey().equals(modifier.getKey()))
 		);
 	}
 
@@ -1125,6 +1140,27 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	public void setTool(@Nullable ToolComponent toolComponent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasJukeboxPlayable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull JukeboxPlayableComponent getJukeboxPlayable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setJukeboxPlayable(@Nullable JukeboxPlayableComponent jukeboxPlayable)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

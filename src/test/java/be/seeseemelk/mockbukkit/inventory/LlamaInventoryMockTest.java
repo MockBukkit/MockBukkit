@@ -46,7 +46,7 @@ class LlamaInventoryMockTest
 	void setDecor()
 	{
 		assertNull(inventory.getDecor());
-		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
+		ItemStack item = new ItemStackMock(Material.IRON_HORSE_ARMOR);
 
 		inventory.setDecor(item);
 
@@ -56,7 +56,7 @@ class LlamaInventoryMockTest
 	@Test
 	void setDecor_SetsItemInSlot()
 	{
-		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
+		ItemStack item = new ItemStackMock(Material.IRON_HORSE_ARMOR);
 
 		inventory.setDecor(item);
 

@@ -14,6 +14,7 @@ import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -137,12 +138,14 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.5")
 	public @NotNull EnchantmentRarity getRarity()
 	{
 		throw new UnsupportedOperationException("Enchantments don't have a rarity anymore in 1.20.5+.");
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.5")
 	public float getDamageIncrease(int level, @NotNull EntityCategory entityCategory)
 	{
 		// TODO Auto-generated method stub
@@ -150,6 +153,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.21")
 	public float getDamageIncrease(int level, @NotNull EntityType entityType)
 	{
 		// TODO Auto-generated method stub
@@ -157,6 +161,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.21")
 	public @NotNull Set<EquipmentSlot> getActiveSlots()
 	{
 		// TODO Auto-generated method stub
@@ -164,6 +169,15 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	public @NotNull Set<EquipmentSlotGroup> getActiveSlotGroups()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true) //Mark as deprecated as this method assumes that the enchantments description always
+	// be a translatable component which is not guaranteed.
 	public @NotNull String translationKey()
 	{
 		// TODO Auto-generated method stub
@@ -284,6 +298,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull String getTranslationKey()
 	{
 		// TODO Auto-generated method stub

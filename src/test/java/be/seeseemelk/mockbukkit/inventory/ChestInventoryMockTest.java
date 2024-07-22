@@ -30,7 +30,7 @@ class ChestInventoryMockTest
 	{
 		assertNotNull(inventory.getSnapshot());
 
-		ItemStack item = new ItemStack(Material.EMERALD);
+		ItemStack item = new ItemStackMock(Material.EMERALD);
 		inventory.addItem(item);
 		assertNotEquals(inventory, inventory.getSnapshot());
 		assertTrue(Arrays.stream(inventory.getContents()).anyMatch(stack -> stack != null && stack.isSimilar(item)));

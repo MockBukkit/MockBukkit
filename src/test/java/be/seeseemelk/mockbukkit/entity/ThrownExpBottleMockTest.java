@@ -2,9 +2,9 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ class ThrownExpBottleMockTest
 	@Test
 	void testSetItem()
 	{
-		bottle.setItem(new ItemStack(Material.DIAMOND, 32));
+		bottle.setItem(new ItemStackMock(Material.DIAMOND, 32));
 
 		assertEquals(Material.DIAMOND, bottle.getItem().getType());
 		assertEquals(1, bottle.getItem().getAmount());

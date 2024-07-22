@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EnderPearl;
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class EnderPearlMock extends ThrowableProjectileMock implements EnderPearl
 {
 
-	private @NotNull ItemStack item = new ItemStack(Material.ENDER_PEARL);
+	private @NotNull ItemStack item = new ItemStackMock(Material.ENDER_PEARL);
 
 	/**
 	 * Constructs a new {@link EnderPearlMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -29,14 +30,14 @@ public class EnderPearlMock extends ThrowableProjectileMock implements EnderPear
 	@Override
 	public @NotNull ItemStack getItem()
 	{
-		return new ItemStack(this.item);
+		return new ItemStackMock(this.item);
 	}
 
 	@Override
 	public void setItem(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "Item cannot be null");
-		ItemStack localCopy = new ItemStack(item);
+		ItemStack localCopy = new ItemStackMock(item);
 		localCopy.setAmount(1);
 		this.item = localCopy;
 	}

@@ -1,8 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A basic inventory view.
@@ -32,6 +37,75 @@ public class SimpleInventoryViewMock extends InventoryViewMock
 	public SimpleInventoryViewMock()
 	{
 		this(null, null, null, InventoryType.CHEST);
+	}
+
+	@Override
+	public void setItem(int slot, @Nullable ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ItemStack getItem(int slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCursor(@Nullable ItemStack item)
+	{
+		this.getPlayer().setItemOnCursor(item);
+	}
+
+	@Override
+	public @NotNull ItemStack getCursor()
+	{
+		return this.getPlayer().getItemOnCursor();
+	}
+
+	@Override
+	public @Nullable Inventory getInventory(int rawSlot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int convertSlot(int rawSlot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public InventoryType.SlotType getSlotType(int slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void close()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int countSlots()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setProperty(@NotNull InventoryView.Property prop, int value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

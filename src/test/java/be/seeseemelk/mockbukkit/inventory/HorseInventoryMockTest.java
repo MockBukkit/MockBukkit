@@ -46,7 +46,7 @@ class HorseInventoryMockTest
 	void setArmor()
 	{
 		assertNull(inventory.getArmor());
-		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
+		ItemStack item = new ItemStackMock(Material.IRON_HORSE_ARMOR);
 
 		inventory.setArmor(item);
 
@@ -56,7 +56,7 @@ class HorseInventoryMockTest
 	@Test
 	void setArmor_SetsItemInSlot()
 	{
-		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
+		ItemStack item = new ItemStackMock(Material.IRON_HORSE_ARMOR);
 
 		inventory.setArmor(item);
 

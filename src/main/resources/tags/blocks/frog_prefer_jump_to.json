@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:lily_pad",
-        "minecraft:big_dripleaf"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:big_dripleaf",
+		"minecraft:lily_pad"
+	]
 }

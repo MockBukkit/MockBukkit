@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.math.Rotations;
 import org.bukkit.Material;
@@ -336,7 +337,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
-		if (item == null) item = new ItemStack(Material.AIR);
+		if (item == null) item = new ItemStackMock(Material.AIR);
 		switch (slot)
 		{
 		case HAND -> getEquipment().setItemInMainHand(item);

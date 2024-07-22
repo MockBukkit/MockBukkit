@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:powder_snow",
-        "minecraft:snow",
-        "minecraft:snow_block"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:powder_snow",
+		"minecraft:snow",
+		"minecraft:snow_block"
+	]
 }

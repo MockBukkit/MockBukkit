@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:elder_guardian",
-        "minecraft:drowned",
-        "minecraft:guardian"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:drowned",
+		"minecraft:elder_guardian",
+		"minecraft:guardian"
+	]
 }

@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class SizedFireballMock extends FireballMock implements SizedFireball
 {
 
-	private ItemStack displayItem = new ItemStack(Material.FIRE_CHARGE);
+	private ItemStack displayItem = new ItemStackMock(Material.FIRE_CHARGE);
 
 	/**
 	 * Constructs a new {@link SizedFireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
