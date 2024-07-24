@@ -1,12 +1,15 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.world.EnumInteractionResult;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -119,6 +122,15 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	public @NotNull Inventory getSnapshotInventory()
 	{
 		return ((InventoryMock) this.inventory).getSnapshot();
+	}
+
+	@Override
+	public EnumInteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	{
+		if (inventory != null) {
+			playerMock.openInventory(inventory);
+		}
+		return EnumInteractionResult.CONSUME;
 	}
 
 }

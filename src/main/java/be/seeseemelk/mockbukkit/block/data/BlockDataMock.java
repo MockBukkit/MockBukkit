@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.world.EnumInteractionResult;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
@@ -16,6 +18,7 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -455,6 +458,11 @@ public class BlockDataMock implements BlockData
 			return new SwitchMock(material);
 		}
 		return null;
+	}
+
+	public EnumInteractionResult use(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	{
+		throw new UnimplementedOperationException("BlockDataMock::use is not implemented for Material "+getMaterial());
 	}
 
 }
