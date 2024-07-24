@@ -458,7 +458,7 @@ public class BlockStateMock implements BlockState
 
 	public EnumInteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot) {
 		if (blockData instanceof BlockDataMock blockDataMock) {
-			return blockDataMock.use(playerMock, equipmentSlot);
+			return blockDataMock.simulateUse(playerMock, equipmentSlot);
 		}
 		throw new UnimplementedOperationException("BlockDataMock::use is not implemented in " + blockData.getClass().getName()+ " or overridden in " + this.getClass().getName());
 	}

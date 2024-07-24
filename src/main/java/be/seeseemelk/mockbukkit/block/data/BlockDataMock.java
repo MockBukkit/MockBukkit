@@ -460,7 +460,7 @@ public class BlockDataMock implements BlockData
 		return null;
 	}
 
-	public EnumInteractionResult use(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	public EnumInteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
 	{
 		throw new UnimplementedOperationException("BlockDataMock::use is not implemented for Material "+getMaterial());
 	}
