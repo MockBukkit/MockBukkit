@@ -1719,13 +1719,15 @@ class ServerMockTest
 	}
 
 	@Test
-	void testGetTags_blockRegistry() {
+	void testGetTags_blockRegistry() 
+	{
 		Iterable<Tag<Material>> blockTags = server.getTags(Tag.REGISTRY_BLOCKS, Material.class);
 		assertTrue(blockTags.iterator().hasNext());
 	}
 
 	@Test
-	void testGetTags_itemRegistry() {
+	void testGetTags_itemRegistry() 
+	{
 		Iterable<Tag<Material>> itemTags = server.getTags(Tag.REGISTRY_ITEMS, Material.class);
 		assertTrue(itemTags.iterator().hasNext());
 	}
