@@ -3,7 +3,9 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
+import io.papermc.paper.math.Rotations;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -27,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArmorStandMockTest
 {
+	private static final double ACCEPTABLE_ERROR_DELTA = 0.0000000001;
 
 	private ServerMock server;
 	private World world;
@@ -391,6 +394,251 @@ class ArmorStandMockTest
 	void testIsSlotDisabledNullThrows()
 	{
 		assertThrows(NullPointerException.class, () -> armorStand.isSlotDisabled(null));
+	}
+
+	@Test
+	void getHeight_GivenNormalArmorStand()
+	{
+		assertEquals(1.975D, armorStand.getHeight());
+	}
+
+	@Test
+	void getHeight_GivenSmallArmorStand()
+	{
+		armorStand.setSmall(true);
+		assertEquals(0.9875D, armorStand.getHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenNormalArmorStand()
+	{
+		assertEquals(1.67875D, armorStand.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenSmallArmorStand()
+	{
+		armorStand.setSmall(true);
+		assertEquals(0.839375D, armorStand.getEyeHeight());
+	}
+
+	@Test
+	void getSubType_GivenNormalArmorStand()
+	{
+		EntitySubType actual = armorStand.getSubType();
+		assertEquals(EntitySubType.DEFAULT, actual);
+	}
+
+	@Test
+	void getSubType_GivenSmallArmorStand()
+	{
+		armorStand.setSmall(true);
+		EntitySubType actual = armorStand.getSubType();
+		assertEquals(EntitySubType.SMALL, actual);
+	}
+
+	@Test
+	void getBodyRotations_GivenDefaultValue()
+	{
+		Rotations actual = armorStand.getBodyRotations();
+		assertEquals(0.0, actual.x());
+		assertEquals(0.0, actual.y());
+		assertEquals(0.0, actual.z());
+
+		EulerAngle actualPose = armorStand.getBodyPose();
+		assertEquals(0.0, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getBodyRotations_GivenNewRotation()
+	{
+		armorStand.setBodyRotations(Rotations.ofDegrees(45, 0, 30));
+		Rotations actual = armorStand.getBodyRotations();
+		assertEquals(45, actual.x(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0, actual.y(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(30, actual.z(), ACCEPTABLE_ERROR_DELTA);
+
+		EulerAngle actualPose = armorStand.getBodyPose();
+		assertEquals(0.7853981633974483, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.5235987755982988, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getLeftArmRotations_GivenDefaultValue()
+	{
+		Rotations actual = armorStand.getLeftArmRotations();
+		assertEquals(-10.0, actual.x());
+		assertEquals(0.0, actual.y());
+		assertEquals(-10.0, actual.z());
+
+		EulerAngle actualPose = armorStand.getLeftArmPose();
+		assertEquals(-0.17453292519943295, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(-0.17453292519943295, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getLeftArmRotations_GivenNewRotation()
+	{
+		armorStand.setLeftArmRotations(Rotations.ofDegrees(45, 0, 30));
+		Rotations actual = armorStand.getLeftArmRotations();
+		assertEquals(45, actual.x(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0, actual.y(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(30, actual.z(), ACCEPTABLE_ERROR_DELTA);
+
+		EulerAngle actualPose = armorStand.getLeftArmPose();
+		assertEquals(0.7853981633974483, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.5235987755982988, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getRightArmRotations_GivenDefaultValue()
+	{
+		Rotations actual = armorStand.getRightArmRotations();
+		assertEquals(-14.999999999999998, actual.x());
+		assertEquals(0.0, actual.y());
+		assertEquals(10.0, actual.z());
+
+		EulerAngle actualPose = armorStand.getRightArmPose();
+		assertEquals(-0.2617993877991494, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.17453292519943295, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getRightArmRotations_GivenNewRotation()
+	{
+		armorStand.setRightArmRotations(Rotations.ofDegrees(45, 0, 30));
+		Rotations actual = armorStand.getRightArmRotations();
+		assertEquals(45, actual.x(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0, actual.y(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(30, actual.z(), ACCEPTABLE_ERROR_DELTA);
+
+		EulerAngle actualPose = armorStand.getRightArmPose();
+		assertEquals(0.7853981633974483, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.5235987755982988, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getLeftLegRotations_GivenDefaultValue()
+	{
+		Rotations actual = armorStand.getLeftLegRotations();
+		assertEquals(-1, actual.x());
+		assertEquals(0, actual.y());
+		assertEquals(-1, actual.z());
+
+		EulerAngle actualPose = armorStand.getLeftLegPose();
+		assertEquals(-0.017453292519943295, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(-0.017453292519943295, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getLeftLegRotations_GivenNewRotation()
+	{
+		armorStand.setLeftLegRotations(Rotations.ofDegrees(45, 0, 30));
+		Rotations actual = armorStand.getLeftLegRotations();
+		assertEquals(45, actual.x(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0, actual.y(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(30, actual.z(), ACCEPTABLE_ERROR_DELTA);
+
+		EulerAngle actualPose = armorStand.getLeftLegPose();
+		assertEquals(0.7853981633974483, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.5235987755982988, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getRightLegRotations_GivenDefaultValue()
+	{
+		Rotations actual = armorStand.getRightLegRotations();
+		assertEquals(1, actual.x());
+		assertEquals(0, actual.y());
+		assertEquals(1, actual.z());
+
+		EulerAngle actualPose = armorStand.getRightLegPose();
+		assertEquals(0.017453292519943295, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.017453292519943295, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getRightLegRotations_GivenNewRotation()
+	{
+		armorStand.setRightLegRotations(Rotations.ofDegrees(45, 0, 30));
+		Rotations actual = armorStand.getRightLegRotations();
+		assertEquals(45, actual.x(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0, actual.y(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(30, actual.z(), ACCEPTABLE_ERROR_DELTA);
+
+		EulerAngle actualPose = armorStand.getRightLegPose();
+		assertEquals(0.7853981633974483, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.5235987755982988, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getHeadRotations_GivenDefaultValue()
+	{
+		Rotations actual = armorStand.getHeadRotations();
+		assertEquals(0, actual.x());
+		assertEquals(0, actual.y());
+		assertEquals(0, actual.z());
+
+		EulerAngle actualPose = armorStand.getHeadPose();
+		assertEquals(0.0, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void getHeadRotations_GivenNewRotation()
+	{
+		armorStand.setHeadRotations(Rotations.ofDegrees(45, 0, 30));
+		Rotations actual = armorStand.getHeadRotations();
+		assertEquals(45, actual.x(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0, actual.y(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(30, actual.z(), ACCEPTABLE_ERROR_DELTA);
+
+		EulerAngle actualPose = armorStand.getHeadPose();
+		assertEquals(0.7853981633974483, actualPose.getX(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.0, actualPose.getY(), ACCEPTABLE_ERROR_DELTA);
+		assertEquals(0.5235987755982988, actualPose.getZ(), ACCEPTABLE_ERROR_DELTA);
+	}
+
+	@Test
+	void canMove_GivenDefaultValue()
+	{
+		boolean actual = armorStand.canMove();
+		assertTrue(actual);
+	}
+
+	@Test
+	void canMove_GivenChangedValue()
+	{
+		armorStand.setCanMove(false);
+		boolean actual = armorStand.canMove();
+		assertFalse(actual);
+	}
+
+	@Test
+	void canTick_GivenDefaultValue()
+	{
+		boolean actual = armorStand.canTick();
+		assertTrue(actual);
+	}
+
+	@Test
+	void canTick_GivenChangedValue()
+	{
+		armorStand.setCanTick(false);
+		boolean actual = armorStand.canTick();
+		assertFalse(actual);
 	}
 
 }
