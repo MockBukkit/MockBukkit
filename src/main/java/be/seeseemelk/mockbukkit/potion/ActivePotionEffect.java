@@ -1,11 +1,10 @@
 package be.seeseemelk.mockbukkit.potion;
 
 import be.seeseemelk.mockbukkit.entity.LivingEntityMock;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * This class represents an active {@link PotionEffect} which was applied to a {@link LivingEntity}.
@@ -17,7 +16,7 @@ public final class ActivePotionEffect
 {
 
 	private final @NotNull PotionEffect effect;
-	private final long timestamp;
+	private final int tickTimestamp;
 
 	/**
 	 * Constructs a new {@link ActivePotionEffect} with the provided {@link PotionEffect}.
@@ -27,7 +26,7 @@ public final class ActivePotionEffect
 	public ActivePotionEffect(@NotNull PotionEffect effect)
 	{
 		this.effect = effect;
-		this.timestamp = System.currentTimeMillis();
+		this.tickTimestamp = Bukkit.getCurrentTick();
 	}
 
 	/**
@@ -37,8 +36,8 @@ public final class ActivePotionEffect
 	 */
 	public boolean hasExpired()
 	{
-		int ticks = effect.getDuration() * 20;
-		return ticks < 1 || timestamp + TimeUnit.SECONDS.toMillis(ticks) < System.currentTimeMillis();
+		int ticks = effect.getDuration();
+		return !effect.isInfinite() && (ticks < 1 || tickTimestamp + ticks < Bukkit.getCurrentTick());
 	}
 
 	/**
