@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.world.EnumInteractionResult;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
@@ -125,12 +125,13 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	}
 
 	@Override
-	public EnumInteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	public InteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
 	{
-		if (inventory != null) {
+		if (inventory != null)
+		{
 			playerMock.openInventory(inventory);
 		}
-		return EnumInteractionResult.CONSUME;
+		return InteractionResult.CONSUME_ACTION;
 	}
 
 }

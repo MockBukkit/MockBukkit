@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.world.EnumInteractionResult;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
@@ -460,7 +460,7 @@ public class BlockDataMock implements BlockData
 		return null;
 	}
 
-	public EnumInteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	public InteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
 	{
 		throw new UnimplementedOperationException("BlockDataMock::use is not implemented for Material "+getMaterial());
 	}

@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.world.EnumInteractionResult;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -106,6 +106,24 @@ public class ItemStackMock extends ItemStack
 			}
 		}
 
+	}
+
+	/**
+	 * Creates a new ItemStackMock instance if it isn't already mocked
+	 *
+	 * @param itemStack itemStack to be mocked
+	 * @return mocked itemStack
+	 */
+	public static ItemStackMock mock(ItemStack itemStack)
+	{
+		if (itemStack instanceof ItemStackMock itemStackMock)
+		{
+			return itemStackMock;
+		}
+		else
+		{
+			return new ItemStackMock(itemStack);
+		}
 	}
 
 	@Override
@@ -255,7 +273,8 @@ public class ItemStackMock extends ItemStack
 		return result;
 	}
 
-	public EnumInteractionResult simulateUse(PlayerMock playerMock, Location clickedPos, EquipmentSlot hand) {
+	public InteractionResult simulateUse(PlayerMock playerMock, Location clickedPos, EquipmentSlot hand)
+	{
 		throw new UnimplementedOperationException();
 	}
 

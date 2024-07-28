@@ -5,7 +5,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import be.seeseemelk.mockbukkit.world.EnumInteractionResult;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -456,11 +456,13 @@ public class BlockStateMock implements BlockState
 		};
 	}
 
-	public EnumInteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot) {
-		if (blockData instanceof BlockDataMock blockDataMock) {
+	public InteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	{
+		if (blockData instanceof BlockDataMock blockDataMock)
+		{
 			return blockDataMock.simulateUse(playerMock, equipmentSlot);
 		}
-		throw new UnimplementedOperationException("BlockDataMock::use is not implemented in " + blockData.getClass().getName()+ " or overridden in " + this.getClass().getName());
+		throw new UnimplementedOperationException("BlockDataMock::use is not implemented in " + blockData.getClass().getName() + " or overridden in " + this.getClass().getName());
 	}
 
 }

@@ -2469,7 +2469,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayerInteractEvent_air() {
+	void testPlayerInteractEvent_air()
+	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setItemInHand(null);
 
@@ -2482,7 +2483,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayerInteractEvent_openChest() {
+	void testPlayerInteractEvent_openChest()
+	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setItemInHand(null);
 
@@ -2496,7 +2498,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayerInteractEvent_spectatorOpenChest() {
+	void testPlayerInteractEvent_spectatorOpenChest()
+	{
 		player.setGameMode(GameMode.SPECTATOR);
 		player.setItemInHand(null);
 
@@ -2510,7 +2513,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayerInteractEvent_spectatorFailInteract() {
+	void testPlayerInteractEvent_spectatorFailInteract()
+	{
 		player.setGameMode(GameMode.SPECTATOR);
 		player.setItemInHand(null);
 
@@ -2524,7 +2528,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayerInteractEvent_sneakingWithNoItem() {
+	void testPlayerInteractEvent_sneakingWithNoItem()
+	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setSneaking(true);
 		player.setItemInHand(null);
@@ -2539,7 +2544,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayerInteractEvent_sneakingWithItem() {
+	void testPlayerInteractEvent_sneakingWithItem()
+	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setSneaking(true);
 		player.setItemInHand(ItemStackMock.of(Material.CHEST));
@@ -2548,16 +2554,21 @@ class PlayerMockTest
 		block.setType(Material.CHEST);
 
 		// We don't care if the item isn't implemented here since we're just checking if the Chest inventory doesn't open
-		try {
+		try
+		{
 			player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
-		} catch (UnimplementedOperationException ignored) {}
+		}
+		catch (UnimplementedOperationException ignored)
+		{
+		}
 
 		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
 		player.assertInventoryView(InventoryType.CRAFTING);
 	}
 
 	@Test
-	void testPlayerInteractEvent_cancelled() {
+	void testPlayerInteractEvent_cancelled()
+	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
