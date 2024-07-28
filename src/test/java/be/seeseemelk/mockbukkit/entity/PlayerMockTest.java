@@ -832,6 +832,60 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getHeight_WhileStanding()
+	{
+		assertEquals(1.8D, player.getHeight());
+	}
+
+	@Test
+	void getHeight_WhileSneaking()
+	{
+		player.setSneaking(true);
+		assertEquals(1.5D, player.getHeight());
+	}
+
+	@Test
+	void getHeight_WhileSleeping()
+	{
+		player.setSleeping(true);
+		assertEquals(0.2D, player.getHeight());
+	}
+
+	@Test
+	void getHeight_WhileSwimming()
+	{
+		player.setSwimming(true);
+		assertEquals(0.6D, player.getHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileStanding()
+	{
+		assertEquals(1.53D, player.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSneaking()
+	{
+		player.setSneaking(true);
+		assertEquals(1.275D, player.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSleeping()
+	{
+		player.setSleeping(true);
+		assertEquals(0.17D, player.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSwimming()
+	{
+		player.setSwimming(true);
+		assertEquals(0.51D, player.getEyeHeight());
+	}
+
+	@Test
 	void getPlayer_SneakingEyeHeight()
 	{
 		player.setSneaking(true);

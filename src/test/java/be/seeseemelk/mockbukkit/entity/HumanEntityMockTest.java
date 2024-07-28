@@ -21,6 +21,8 @@ import org.bukkit.inventory.InventoryView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -302,6 +304,58 @@ class HumanEntityMockTest
 		human.setBlocking(true);
 		human.getInventory().setItemInOffHand(new ItemStackMock(Material.AIR));
 		assertFalse(human.isBlocking());
+	}
+
+	@Test
+	void getSleepTicks_GivenDefaultValue()
+	{
+		int actual = human.getSleepTicks();
+		assertEquals(0, actual);
+	}
+
+	@Test
+	void getSleepTicks_GivenPossibleValue()
+	{
+		human.setSleepTicks(100);
+		int actual = human.getSleepTicks();
+		assertEquals(100, actual);
+	}
+
+	@Test
+	void isDeeplySleeping_GivenDefaultValue()
+	{
+		boolean actual = human.isDeeplySleeping();
+		assertFalse(actual);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+	void isDeeplySleeping_GivenNonDeepSleepLevelIsSleeping(int sleepTicks)
+	{
+		human.setSleeping(true);
+		human.setSleepTicks(sleepTicks);
+		boolean actual = human.isDeeplySleeping();
+		assertFalse(actual);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {101, 110, 120, 130, 140, 150})
+	void isDeeplySleeping_GivenDeepSleepLevelAndIsSleeping(int sleepTicks)
+	{
+		human.setSleeping(true);
+		human.setSleepTicks(sleepTicks);
+		boolean actual = human.isDeeplySleeping();
+		assertTrue(actual);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 101, 110, 120, 130, 140, 150})
+	void isDeeplySleeping_GivenIsNotSleeping(int sleepTicks)
+	{
+		human.setSleeping(false);
+		human.setSleepTicks(sleepTicks);
+		boolean actual = human.isDeeplySleeping();
+		assertFalse(actual);
 	}
 
 }
