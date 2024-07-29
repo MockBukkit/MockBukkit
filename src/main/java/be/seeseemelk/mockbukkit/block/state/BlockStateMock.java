@@ -4,8 +4,10 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.world.InteractionResult;
+import be.seeseemelk.mockbukkit.world.ItemInteractionResult;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -14,6 +16,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
@@ -456,13 +459,22 @@ public class BlockStateMock implements BlockState
 		};
 	}
 
-	public InteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	public ItemInteractionResult simulateUseItemOn(BlockStateMock blockState, Location location, ItemStackMock itemStack, PlayerMock playerMock, EquipmentSlot equipmentSlot, BlockFace clickedFace)
 	{
 		if (blockData instanceof BlockDataMock blockDataMock)
 		{
-			return blockDataMock.simulateUse(playerMock, equipmentSlot);
+			return blockDataMock.simulateUseItemOn(blockState, location, itemStack, playerMock, equipmentSlot, clickedFace);
 		}
-		throw new UnimplementedOperationException("BlockDataMock::use is not implemented in " + blockData.getClass().getName() + " or overridden in " + this.getClass().getName());
+		throw new UnimplementedOperationException();
+	}
+
+	public InteractionResult simulateUseWithoutItem(BlockStateMock blockState, Location location, PlayerMock playerMock, BlockFace clickedFace)
+	{
+		if (blockData instanceof BlockDataMock blockDataMock)
+		{
+			return blockDataMock.simulateUseWithoutItem(blockState, location, playerMock, clickedFace);
+		}
+		throw new UnimplementedOperationException();
 	}
 
 }

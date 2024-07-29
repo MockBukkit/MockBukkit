@@ -1,6 +1,10 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
@@ -105,6 +109,13 @@ public class TrapDoorMock extends BlockDataMock implements TrapDoor
 	public void setWaterlogged(boolean waterlogged)
 	{
 		set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	public InteractionResult simulateUseWithoutItem(BlockStateMock blockState, Location location, PlayerMock playerMock, BlockFace clickedFace)
+	{
+		setOpen(!isOpen());
+		return InteractionResult.PASS;
 	}
 
 }

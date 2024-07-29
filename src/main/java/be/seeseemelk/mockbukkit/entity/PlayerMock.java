@@ -16,6 +16,7 @@ import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
 import be.seeseemelk.mockbukkit.world.InteractionResult;
+import be.seeseemelk.mockbukkit.world.ItemInteractionResult;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.profile.PlayerProfile;
@@ -660,6 +661,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			boolean isItemInHand = !getItemInHand().isEmpty() || !getInventory().getItemInOffHand().isEmpty();
 			boolean shouldCancelUse = isSneaking() && isItemInHand;
+			InteractionResult interactionResult;
 
 			if (!shouldCancelUse)
 			{
@@ -668,14 +670,23 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 					throw new UnimplementedOperationException();
 				}
 
-				InteractionResult result = blockStateMock.simulateUse(this, hand);
+				ItemInteractionResult itemInteractionResult = blockStateMock.simulateUseItemOn(blockStateMock, location, ItemStackMock.mock(getItemInHand()), this, hand, clickedFace);
 				block.setState(blockStateMock);
 				block.setBlockData(blockStateMock.getBlockData());
 
-				if (result.consumesAction())
+				if (itemInteractionResult.consumesAction())
 				{
 					// TODO implement CriterionTriggers
 					return event;
+				}
+
+				if (itemInteractionResult == ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION && hand == EquipmentSlot.HAND) {
+					interactionResult = blockStateMock.simulateUseWithoutItem(blockStateMock, location, this, clickedFace);
+					block.setState(blockStateMock);
+					block.setBlockData(blockStateMock.getBlockData());
+					if (interactionResult.consumesAction()) {
+						return event;
+					}
 				}
 			}
 
@@ -684,7 +695,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 				ItemStackMock itemStackMock = ItemStackMock.mock(itemInHand);
 				int count = itemStackMock.getAmount();
 
-				InteractionResult result = itemStackMock.simulateUse(this, location, hand);
+				InteractionResult result = itemStackMock.simulateUseItemOn(this, location, hand);
 
 				if (getGameMode() == GameMode.CREATIVE)
 				{

@@ -1,8 +1,11 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.world.InteractionResult;
+import be.seeseemelk.mockbukkit.world.ItemInteractionResult;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
@@ -392,7 +395,7 @@ public class BlockDataMock implements BlockData
 		return switch (material)
 		{
 			case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-			case LEVER -> new SwitchMock(material);
+			case LEVER -> new LeverMock(material);
 			default -> new BlockDataMock(material);
 		};
 	}
@@ -455,14 +458,19 @@ public class BlockDataMock implements BlockData
 		}
 		else if (Tag.BUTTONS.isTagged(material))
 		{
-			return new SwitchMock(material);
+			return new ButtonMock(material);
 		}
 		return null;
 	}
 
-	public InteractionResult simulateUse(PlayerMock playerMock, EquipmentSlot equipmentSlot)
+	public ItemInteractionResult simulateUseItemOn(BlockStateMock blockStateMock, Location location, ItemStackMock itemStack, PlayerMock playerMock, EquipmentSlot equipmentSlot, BlockFace clickedFace)
 	{
-		throw new UnimplementedOperationException("BlockDataMock::use is not implemented for Material "+getMaterial());
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+	}
+
+	public InteractionResult simulateUseWithoutItem(BlockStateMock blockState, Location location, PlayerMock playerMock, BlockFace clickedFace)
+	{
+		return InteractionResult.PASS;
 	}
 
 }

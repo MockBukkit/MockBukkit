@@ -273,7 +273,7 @@ public class ItemStackMock extends ItemStack
 		return result;
 	}
 
-	public InteractionResult simulateUse(PlayerMock playerMock, Location clickedPos, EquipmentSlot hand)
+	public InteractionResult simulateUseItemOn(PlayerMock playerMock, Location clickedPos, EquipmentSlot hand)
 	{
 		throw new UnimplementedOperationException();
 	}

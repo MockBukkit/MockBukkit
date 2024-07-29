@@ -25,16 +25,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SwitchMockTest
+class ButtonMockTest
 {
 
-	SwitchMock switchMock;
+	ButtonMock buttonMock;
 
 	@BeforeEach
 	void setUp()
 	{
 		MockBukkit.getOrCreateMock();
-		switchMock = new SwitchMock(Material.ACACIA_BUTTON);
+		buttonMock = new ButtonMock(Material.ACACIA_BUTTON);
 	}
 
 	@AfterEach
@@ -46,21 +46,21 @@ class SwitchMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(BlockFace.NORTH, switchMock.getFacing());
-		assertFalse(switchMock.isPowered());
+		assertEquals(BlockFace.NORTH, buttonMock.getFacing());
+		assertFalse(buttonMock.isPowered());
 	}
 
 	@ParameterizedTest
 	@MethodSource("getPossibleMaterials")
 	void constructor_Material(Material material)
 	{
-		assertDoesNotThrow(() -> new SwitchMock(material));
+		assertDoesNotThrow(() -> new ButtonMock(material));
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new SwitchMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new ButtonMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -68,10 +68,10 @@ class SwitchMockTest
 	{
 		for (BlockFace face : BlockFace.values())
 		{
-			if (!switchMock.getFaces().contains(face))
+			if (!buttonMock.getFaces().contains(face))
 				continue;
-			assertDoesNotThrow(() -> switchMock.setFacing(face));
-			assertEquals(face, switchMock.getFacing());
+			assertDoesNotThrow(() -> buttonMock.setFacing(face));
+			assertEquals(face, buttonMock.getFacing());
 		}
 	}
 
@@ -80,9 +80,9 @@ class SwitchMockTest
 	{
 		for (BlockFace face : BlockFace.values())
 		{
-			if (switchMock.getFaces().contains(face))
+			if (buttonMock.getFaces().contains(face))
 				continue;
-			assertThrowsExactly(IllegalArgumentException.class, () -> switchMock.setFacing(face));
+			assertThrowsExactly(IllegalArgumentException.class, () -> buttonMock.setFacing(face));
 		}
 	}
 
@@ -90,67 +90,67 @@ class SwitchMockTest
 	void getFaces()
 	{
 		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
-		assertEquals(validFaces, switchMock.getFaces());
+		assertEquals(validFaces, buttonMock.getFaces());
 	}
 
 	@Test
 	void getFacing_Immutable()
 	{
-		Set<BlockFace> faces = switchMock.getFaces();
+		Set<BlockFace> faces = buttonMock.getFaces();
 		assertThrows(UnsupportedOperationException.class, () -> faces.add(BlockFace.NORTH_EAST));
 	}
 
 	@Test
 	void setFacing_notNull()
 	{
-		assertThrows(NullPointerException.class, () -> switchMock.setFacing(null));
+		assertThrows(NullPointerException.class, () -> buttonMock.setFacing(null));
 	}
 
 	@Test
 	void setPowered()
 	{
-		switchMock.setPowered(true);
-		assertTrue(switchMock.isPowered());
-		switchMock.setPowered(false);
-		assertFalse(switchMock.isPowered());
+		buttonMock.setPowered(true);
+		assertTrue(buttonMock.isPowered());
+		buttonMock.setPowered(false);
+		assertFalse(buttonMock.isPowered());
 	}
 
 	@Test
 	void getAsString()
 	{
-		switchMock.setFacing(BlockFace.NORTH);
-		switchMock.setAttachedFace(AttachedFace.WALL);
-		switchMock.setPowered(false);
-		assertEquals("minecraft:acacia_button[face=wall,facing=north,powered=false]", switchMock.getAsString());
+		buttonMock.setFacing(BlockFace.NORTH);
+		buttonMock.setAttachedFace(AttachedFace.WALL);
+		buttonMock.setPowered(false);
+		assertEquals("minecraft:acacia_button[face=wall,facing=north,powered=false]", buttonMock.getAsString());
 	}
 
 	@ParameterizedTest
 	@EnumSource
 	void setAttachedFace(AttachedFace face)
 	{
-		switchMock.setAttachedFace(face);
-		assertEquals(face, switchMock.getAttachedFace());
+		buttonMock.setAttachedFace(face);
+		assertEquals(face, buttonMock.getAttachedFace());
 	}
 
 	@Test
 	void setAttachedFace_notNull()
 	{
-		assertThrows(NullPointerException.class, () -> switchMock.setAttachedFace(null));
+		assertThrows(NullPointerException.class, () -> buttonMock.setAttachedFace(null));
 	}
 
 	@ParameterizedTest
 	@MethodSource("getPossibleMaterials")
 	void blockDataMock_Mock_CorrectType(Material material)
 	{
-		assertInstanceOf(SwitchMock.class, BlockDataMock.mock(material));
+		assertInstanceOf(ButtonMock.class, BlockDataMock.mock(material));
 	}
 
 	@ParameterizedTest
 	@EnumSource
 	void setFace(Face face)
 	{
-		switchMock.setFace(face);
-		assertEquals(face, switchMock.getFace());
+		buttonMock.setFace(face);
+		assertEquals(face, buttonMock.getFace());
 	}
 
 	private static Stream<Material> getPossibleMaterials()
@@ -158,7 +158,6 @@ class SwitchMockTest
 		// Tags requires MockBukkit to have been mocked once before
 		MockBukkit.mock();
 		Set<Material> possibleMaterials = new HashSet<>(Tag.BUTTONS.getValues());
-		possibleMaterials.add(Material.LEVER);
 		return Stream.of(possibleMaterials.toArray(new Material[possibleMaterials.size()]));
 	}
 

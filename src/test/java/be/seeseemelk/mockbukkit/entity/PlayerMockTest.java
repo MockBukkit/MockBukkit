@@ -39,6 +39,8 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.type.Switch;
+import org.bukkit.block.data.type.TrapDoor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -2642,6 +2644,75 @@ class PlayerMockTest
 		assertNotNull(event);
 		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
 		player.assertInventoryView(InventoryType.CRAFTING);
+	}
+
+	@Test
+	void testPlayerInteractEvent_lever()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.LEVER);
+		Switch originalLeverState = (Switch) block.getBlockData();
+
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+
+		player.assertSoundHeard(Sound.BLOCK_LEVER_CLICK);
+
+		Switch newLeverState = (Switch) block.getBlockData();
+		assertNotEquals(originalLeverState.isPowered(), newLeverState.isPowered());
+	}
+
+	@Test
+	void testPlayerInteractEvent_lever_cancelled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerInteract(@NotNull PlayerInteractEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.LEVER);
+		Switch originalLeverState = (Switch) block.getBlockData();
+
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+
+		Switch newLeverState = (Switch) block.getBlockData();
+		assertEquals(originalLeverState.isPowered(), newLeverState.isPowered());
+	}
+
+	@Test
+	void testPlayerInteract_trapDoor()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.OAK_TRAPDOOR);
+		TrapDoor originalTrapDoorState = (TrapDoor) block.getBlockData();
+
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+
+		TrapDoor newTrapDoorState = (TrapDoor) block.getBlockData();
+		assertNotEquals(originalTrapDoorState.isOpen(), newTrapDoorState.isOpen());
 	}
 
 }
