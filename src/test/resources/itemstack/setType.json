@@ -1934,8 +1934,7 @@
 		"key": "minecraft:cod_bucket",
 		"result": {
 			"material": "minecraft:cod_bucket",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
@@ -3723,8 +3722,7 @@
 		"key": "minecraft:glow_item_frame",
 		"result": {
 			"material": "minecraft:glow_item_frame",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
@@ -4510,8 +4508,7 @@
 		"key": "minecraft:item_frame",
 		"result": {
 			"material": "minecraft:item_frame",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
@@ -6414,8 +6411,7 @@
 		"key": "minecraft:painting",
 		"result": {
 			"material": "minecraft:painting",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
@@ -7268,8 +7264,7 @@
 		"key": "minecraft:pufferfish_bucket",
 		"result": {
 			"material": "minecraft:pufferfish_bucket",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
@@ -7892,8 +7887,7 @@
 		"key": "minecraft:salmon_bucket",
 		"result": {
 			"material": "minecraft:salmon_bucket",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
@@ -8944,8 +8938,7 @@
 		"key": "minecraft:tadpole_bucket",
 		"result": {
 			"material": "minecraft:tadpole_bucket",
-			"throws": "java.lang.IllegalArgumentException",
-			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
+			"meta": "org.bukkit.inventory.meta.ItemMeta"
 		}
 	},
 	{
