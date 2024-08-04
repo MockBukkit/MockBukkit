@@ -10,6 +10,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +23,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -42,15 +44,33 @@ class ItemStackMockTest
 			itemStack.setType(material);
 			String itemTypeString = itemStack.getType().key().asString();
 			assertEquals(expected.get("material").getAsString(), itemTypeString);
-			String itemMetaClassString = itemStack.getItemMeta().getClass().getName();
+			String itemMetaClassString = getMetaInterface(itemStack.getItemMeta().getClass()).getName();
+			assertTrue(expected.has("meta"), "Expected an exception to be thrown of type: " + expected.get("throws"));
 			assertEquals(expected.get("meta").getAsString(), itemMetaClassString);
 		}
 		catch (Exception e)
 		{
+			if (!expected.has("throws"))
+			{
+				e.printStackTrace();
+			}
+			assertTrue(expected.has("throws"), "No exception should be thrown");
 			assertEquals(expected.get("throws").getAsString(), e.getClass().getName());
 		}
 	}
 
+	private Class<? extends ItemMeta> getMetaInterface(Class<?> aClass)
+	{
+		Class<?>[] interfaces = aClass.getInterfaces();
+		for (Class<?> anInterface : interfaces)
+		{
+			if (anInterface.isAssignableFrom(ItemMeta.class))
+			{
+				return (Class<? extends ItemMeta>) anInterface;
+			}
+		}
+		throw new IllegalArgumentException("Expected a class extending the item meta interface");
+	}
 
 	static Stream<JsonElement> getSetTypeStream() throws IOException
 	{
