@@ -68,7 +68,7 @@ class ItemStackMockTest
 		Class<?>[] interfaces = aClass.getInterfaces();
 		for (Class<?> anInterface : interfaces)
 		{
-			if (anInterface.isAssignableFrom(ItemMeta.class))
+			if (ItemMeta.class.isAssignableFrom(anInterface))
 			{
 				return (Class<? extends ItemMeta>) anInterface;
 			}
