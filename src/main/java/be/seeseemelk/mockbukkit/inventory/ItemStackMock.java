@@ -206,7 +206,7 @@ public class ItemStackMock extends ItemStack
 
 	private static ItemMeta findItemMeta(Material material)
 	{
-		if (material != Material.AIR && material.asItemType().getItemMetaClass() != ItemMeta.class)
+		if (material != Material.AIR && material.asItemType().getItemMetaClass() != ItemMetaMock.class)
 		{
 			try
 			{
