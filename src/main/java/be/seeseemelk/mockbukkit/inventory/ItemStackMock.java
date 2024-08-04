@@ -72,6 +72,12 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public void setType(@NotNull Material type)
 	{
+		if (!type.isItem())
+		{
+			this.type = ItemType.AIR;
+			this.itemMeta = null;
+			return;
+		}
 		if (type != this.type.asMaterial())
 		{
 			this.type = type.asItemType();
@@ -204,9 +210,13 @@ public class ItemStackMock extends ItemStack
 		return isSimilar(bukkit) && this.amount == bukkit.getAmount();
 	}
 
-	private static ItemMeta findItemMeta(Material material)
+	private static @Nullable ItemMeta findItemMeta(Material material)
 	{
-		if (material != Material.AIR && material.asItemType().getItemMetaClass() != ItemMetaMock.class)
+		if (!material.isItem() || material == Material.AIR)
+		{
+			return null;
+		}
+		if (material.asItemType().getItemMetaClass() != ItemMetaMock.class)
 		{
 			try
 			{
