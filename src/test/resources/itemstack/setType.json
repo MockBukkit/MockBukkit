@@ -87,7 +87,7 @@
 		"key": "minecraft:acacia_sign",
 		"result": {
 			"material": "minecraft:acacia_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -114,15 +114,13 @@
 	{
 		"key": "minecraft:acacia_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:acacia_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -142,15 +140,14 @@
 	{
 		"key": "minecraft:air",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:allay_spawn_egg",
 		"result": {
 			"material": "minecraft:allay_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -255,14 +252,14 @@
 		"key": "minecraft:armadillo_spawn_egg",
 		"result": {
 			"material": "minecraft:armadillo_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:armor_stand",
 		"result": {
 			"material": "minecraft:armor_stand",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "com.destroystokyo.paper.inventory.meta.ArmorStandMeta"
 		}
 	},
 	{
@@ -282,29 +279,27 @@
 	{
 		"key": "minecraft:attached_melon_stem",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:attached_pumpkin_stem",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:axolotl_bucket",
 		"result": {
 			"material": "minecraft:axolotl_bucket",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.AxolotlBucketMeta"
 		}
 	},
 	{
 		"key": "minecraft:axolotl_spawn_egg",
 		"result": {
 			"material": "minecraft:axolotl_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -436,15 +431,14 @@
 	{
 		"key": "minecraft:bamboo_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:bamboo_sign",
 		"result": {
 			"material": "minecraft:bamboo_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -471,22 +465,20 @@
 	{
 		"key": "minecraft:bamboo_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:bamboo_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:barrel",
 		"result": {
 			"material": "minecraft:barrel",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -507,14 +499,14 @@
 		"key": "minecraft:bat_spawn_egg",
 		"result": {
 			"material": "minecraft:bat_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:beacon",
 		"result": {
 			"material": "minecraft:beacon",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -528,14 +520,14 @@
 		"key": "minecraft:bee_nest",
 		"result": {
 			"material": "minecraft:bee_nest",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:bee_spawn_egg",
 		"result": {
 			"material": "minecraft:bee_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -549,7 +541,7 @@
 		"key": "minecraft:beehive",
 		"result": {
 			"material": "minecraft:beehive",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -576,15 +568,14 @@
 	{
 		"key": "minecraft:beetroots",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:bell",
 		"result": {
 			"material": "minecraft:bell",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -597,8 +588,7 @@
 	{
 		"key": "minecraft:big_dripleaf_stem",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -689,7 +679,7 @@
 		"key": "minecraft:birch_sign",
 		"result": {
 			"material": "minecraft:birch_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -716,15 +706,13 @@
 	{
 		"key": "minecraft:birch_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:birch_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -738,7 +726,7 @@
 		"key": "minecraft:black_banner",
 		"result": {
 			"material": "minecraft:black_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -758,8 +746,7 @@
 	{
 		"key": "minecraft:black_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -801,7 +788,7 @@
 		"key": "minecraft:black_shulker_box",
 		"result": {
 			"material": "minecraft:black_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -828,8 +815,7 @@
 	{
 		"key": "minecraft:black_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -878,7 +864,7 @@
 		"key": "minecraft:blast_furnace",
 		"result": {
 			"material": "minecraft:blast_furnace",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -899,14 +885,14 @@
 		"key": "minecraft:blaze_spawn_egg",
 		"result": {
 			"material": "minecraft:blaze_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:blue_banner",
 		"result": {
 			"material": "minecraft:blue_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -926,8 +912,7 @@
 	{
 		"key": "minecraft:blue_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -983,7 +968,7 @@
 		"key": "minecraft:blue_shulker_box",
 		"result": {
 			"material": "minecraft:blue_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1010,8 +995,7 @@
 	{
 		"key": "minecraft:blue_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1025,7 +1009,7 @@
 		"key": "minecraft:bogged_spawn_egg",
 		"result": {
 			"material": "minecraft:bogged_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -1108,8 +1092,7 @@
 	{
 		"key": "minecraft:brain_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1130,7 +1113,7 @@
 		"key": "minecraft:breeze_spawn_egg",
 		"result": {
 			"material": "minecraft:breeze_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -1144,7 +1127,7 @@
 		"key": "minecraft:brewing_stand",
 		"result": {
 			"material": "minecraft:brewing_stand",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1186,7 +1169,7 @@
 		"key": "minecraft:brown_banner",
 		"result": {
 			"material": "minecraft:brown_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -1206,8 +1189,7 @@
 	{
 		"key": "minecraft:brown_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1263,7 +1245,7 @@
 		"key": "minecraft:brown_shulker_box",
 		"result": {
 			"material": "minecraft:brown_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1290,8 +1272,7 @@
 	{
 		"key": "minecraft:brown_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1311,8 +1292,7 @@
 	{
 		"key": "minecraft:bubble_column",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1339,8 +1319,7 @@
 	{
 		"key": "minecraft:bubble_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1361,7 +1340,7 @@
 		"key": "minecraft:bundle",
 		"result": {
 			"material": "minecraft:bundle",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BundleMeta"
 		}
 	},
 	{
@@ -1396,21 +1375,21 @@
 		"key": "minecraft:calibrated_sculk_sensor",
 		"result": {
 			"material": "minecraft:calibrated_sculk_sensor",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:camel_spawn_egg",
 		"result": {
 			"material": "minecraft:camel_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:campfire",
 		"result": {
 			"material": "minecraft:campfire",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1423,8 +1402,7 @@
 	{
 		"key": "minecraft:candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1444,8 +1422,7 @@
 	{
 		"key": "minecraft:carrots",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1466,7 +1443,7 @@
 		"key": "minecraft:cat_spawn_egg",
 		"result": {
 			"material": "minecraft:cat_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -1479,29 +1456,26 @@
 	{
 		"key": "minecraft:cave_air",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:cave_spider_spawn_egg",
 		"result": {
 			"material": "minecraft:cave_spider_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:cave_vines",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:cave_vines_plant",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1515,35 +1489,35 @@
 		"key": "minecraft:chain_command_block",
 		"result": {
 			"material": "minecraft:chain_command_block",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:chainmail_boots",
 		"result": {
 			"material": "minecraft:chainmail_boots",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:chainmail_chestplate",
 		"result": {
 			"material": "minecraft:chainmail_chestplate",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:chainmail_helmet",
 		"result": {
 			"material": "minecraft:chainmail_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:chainmail_leggings",
 		"result": {
 			"material": "minecraft:chainmail_leggings",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -1641,7 +1615,7 @@
 		"key": "minecraft:cherry_sign",
 		"result": {
 			"material": "minecraft:cherry_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1668,15 +1642,13 @@
 	{
 		"key": "minecraft:cherry_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:cherry_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1690,7 +1662,7 @@
 		"key": "minecraft:chest",
 		"result": {
 			"material": "minecraft:chest",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1711,7 +1683,7 @@
 		"key": "minecraft:chicken_spawn_egg",
 		"result": {
 			"material": "minecraft:chicken_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -1725,7 +1697,7 @@
 		"key": "minecraft:chiseled_bookshelf",
 		"result": {
 			"material": "minecraft:chiseled_bookshelf",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1941,8 +1913,7 @@
 	{
 		"key": "minecraft:cocoa",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -1963,21 +1934,22 @@
 		"key": "minecraft:cod_bucket",
 		"result": {
 			"material": "minecraft:cod_bucket",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
 		"key": "minecraft:cod_spawn_egg",
 		"result": {
 			"material": "minecraft:cod_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:command_block",
 		"result": {
 			"material": "minecraft:command_block",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1991,14 +1963,14 @@
 		"key": "minecraft:comparator",
 		"result": {
 			"material": "minecraft:comparator",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:compass",
 		"result": {
 			"material": "minecraft:compass",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.CompassMeta"
 		}
 	},
 	{
@@ -2131,7 +2103,7 @@
 		"key": "minecraft:cow_spawn_egg",
 		"result": {
 			"material": "minecraft:cow_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -2173,7 +2145,7 @@
 		"key": "minecraft:crafter",
 		"result": {
 			"material": "minecraft:crafter",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2194,21 +2166,20 @@
 		"key": "minecraft:creeper_head",
 		"result": {
 			"material": "minecraft:creeper_head",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:creeper_spawn_egg",
 		"result": {
 			"material": "minecraft:creeper_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:creeper_wall_head",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2292,7 +2263,7 @@
 		"key": "minecraft:crimson_sign",
 		"result": {
 			"material": "minecraft:crimson_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2326,22 +2297,20 @@
 	{
 		"key": "minecraft:crimson_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:crimson_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:crossbow",
 		"result": {
 			"material": "minecraft:crossbow",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.CrossbowMeta"
 		}
 	},
 	{
@@ -2404,7 +2373,7 @@
 		"key": "minecraft:cyan_banner",
 		"result": {
 			"material": "minecraft:cyan_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -2424,8 +2393,7 @@
 	{
 		"key": "minecraft:cyan_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2467,7 +2435,7 @@
 		"key": "minecraft:cyan_shulker_box",
 		"result": {
 			"material": "minecraft:cyan_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2494,8 +2462,7 @@
 	{
 		"key": "minecraft:cyan_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2614,7 +2581,7 @@
 		"key": "minecraft:dark_oak_sign",
 		"result": {
 			"material": "minecraft:dark_oak_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2641,15 +2608,13 @@
 	{
 		"key": "minecraft:dark_oak_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:dark_oak_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2684,7 +2649,7 @@
 		"key": "minecraft:daylight_detector",
 		"result": {
 			"material": "minecraft:daylight_detector",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2711,8 +2676,7 @@
 	{
 		"key": "minecraft:dead_brain_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2739,8 +2703,7 @@
 	{
 		"key": "minecraft:dead_bubble_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2774,8 +2737,7 @@
 	{
 		"key": "minecraft:dead_fire_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2802,8 +2764,7 @@
 	{
 		"key": "minecraft:dead_horn_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2830,8 +2791,7 @@
 	{
 		"key": "minecraft:dead_tube_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -2845,7 +2805,7 @@
 		"key": "minecraft:decorated_pot",
 		"result": {
 			"material": "minecraft:decorated_pot",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2999,21 +2959,21 @@
 		"key": "minecraft:diamond_boots",
 		"result": {
 			"material": "minecraft:diamond_boots",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:diamond_chestplate",
 		"result": {
 			"material": "minecraft:diamond_chestplate",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:diamond_helmet",
 		"result": {
 			"material": "minecraft:diamond_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -3034,7 +2994,7 @@
 		"key": "minecraft:diamond_leggings",
 		"result": {
 			"material": "minecraft:diamond_leggings",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -3118,21 +3078,21 @@
 		"key": "minecraft:dispenser",
 		"result": {
 			"material": "minecraft:dispenser",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:dolphin_spawn_egg",
 		"result": {
 			"material": "minecraft:dolphin_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:donkey_spawn_egg",
 		"result": {
 			"material": "minecraft:donkey_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3153,14 +3113,13 @@
 		"key": "minecraft:dragon_head",
 		"result": {
 			"material": "minecraft:dragon_head",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:dragon_wall_head",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -3188,14 +3147,14 @@
 		"key": "minecraft:dropper",
 		"result": {
 			"material": "minecraft:dropper",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:drowned_spawn_egg",
 		"result": {
 			"material": "minecraft:drowned_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3223,7 +3182,7 @@
 		"key": "minecraft:elder_guardian_spawn_egg",
 		"result": {
 			"material": "minecraft:elder_guardian_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3258,7 +3217,7 @@
 		"key": "minecraft:enchanted_book",
 		"result": {
 			"material": "minecraft:enchanted_book",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.EnchantmentStorageMeta"
 		}
 	},
 	{
@@ -3272,7 +3231,7 @@
 		"key": "minecraft:enchanting_table",
 		"result": {
 			"material": "minecraft:enchanting_table",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -3285,15 +3244,13 @@
 	{
 		"key": "minecraft:end_gateway",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:end_portal",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -3349,14 +3306,14 @@
 		"key": "minecraft:ender_chest",
 		"result": {
 			"material": "minecraft:ender_chest",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:ender_dragon_spawn_egg",
 		"result": {
 			"material": "minecraft:ender_dragon_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3377,21 +3334,21 @@
 		"key": "minecraft:enderman_spawn_egg",
 		"result": {
 			"material": "minecraft:enderman_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:endermite_spawn_egg",
 		"result": {
 			"material": "minecraft:endermite_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:evoker_spawn_egg",
 		"result": {
 			"material": "minecraft:evoker_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3510,14 +3467,13 @@
 		"key": "minecraft:filled_map",
 		"result": {
 			"material": "minecraft:filled_map",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.MapMeta"
 		}
 	},
 	{
 		"key": "minecraft:fire",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -3551,22 +3507,21 @@
 	{
 		"key": "minecraft:fire_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:firework_rocket",
 		"result": {
 			"material": "minecraft:firework_rocket",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.FireworkMeta"
 		}
 	},
 	{
 		"key": "minecraft:firework_star",
 		"result": {
 			"material": "minecraft:firework_star",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.FireworkEffectMeta"
 		}
 	},
 	{
@@ -3650,7 +3605,7 @@
 		"key": "minecraft:fox_spawn_egg",
 		"result": {
 			"material": "minecraft:fox_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3664,7 +3619,7 @@
 		"key": "minecraft:frog_spawn_egg",
 		"result": {
 			"material": "minecraft:frog_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3677,15 +3632,14 @@
 	{
 		"key": "minecraft:frosted_ice",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:furnace",
 		"result": {
 			"material": "minecraft:furnace",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -3699,7 +3653,7 @@
 		"key": "minecraft:ghast_spawn_egg",
 		"result": {
 			"material": "minecraft:ghast_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3769,7 +3723,8 @@
 		"key": "minecraft:glow_item_frame",
 		"result": {
 			"material": "minecraft:glow_item_frame",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
@@ -3783,7 +3738,7 @@
 		"key": "minecraft:glow_squid_spawn_egg",
 		"result": {
 			"material": "minecraft:glow_squid_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3804,14 +3759,14 @@
 		"key": "minecraft:goat_horn",
 		"result": {
 			"material": "minecraft:goat_horn",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.MusicInstrumentMeta"
 		}
 	},
 	{
 		"key": "minecraft:goat_spawn_egg",
 		"result": {
 			"material": "minecraft:goat_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -3860,7 +3815,7 @@
 		"key": "minecraft:golden_boots",
 		"result": {
 			"material": "minecraft:golden_boots",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -3874,14 +3829,14 @@
 		"key": "minecraft:golden_chestplate",
 		"result": {
 			"material": "minecraft:golden_chestplate",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:golden_helmet",
 		"result": {
 			"material": "minecraft:golden_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -3902,7 +3857,7 @@
 		"key": "minecraft:golden_leggings",
 		"result": {
 			"material": "minecraft:golden_leggings",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -3972,7 +3927,7 @@
 		"key": "minecraft:gray_banner",
 		"result": {
 			"material": "minecraft:gray_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -3992,8 +3947,7 @@
 	{
 		"key": "minecraft:gray_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4035,7 +3989,7 @@
 		"key": "minecraft:gray_shulker_box",
 		"result": {
 			"material": "minecraft:gray_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4062,8 +4016,7 @@
 	{
 		"key": "minecraft:gray_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4077,7 +4030,7 @@
 		"key": "minecraft:green_banner",
 		"result": {
 			"material": "minecraft:green_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -4097,8 +4050,7 @@
 	{
 		"key": "minecraft:green_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4140,7 +4092,7 @@
 		"key": "minecraft:green_shulker_box",
 		"result": {
 			"material": "minecraft:green_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4167,8 +4119,7 @@
 	{
 		"key": "minecraft:green_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4189,7 +4140,7 @@
 		"key": "minecraft:guardian_spawn_egg",
 		"result": {
 			"material": "minecraft:guardian_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -4266,7 +4217,7 @@
 		"key": "minecraft:hoglin_spawn_egg",
 		"result": {
 			"material": "minecraft:hoglin_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -4301,7 +4252,7 @@
 		"key": "minecraft:hopper",
 		"result": {
 			"material": "minecraft:hopper",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4335,15 +4286,14 @@
 	{
 		"key": "minecraft:horn_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:horse_spawn_egg",
 		"result": {
 			"material": "minecraft:horse_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -4364,7 +4314,7 @@
 		"key": "minecraft:husk_spawn_egg",
 		"result": {
 			"material": "minecraft:husk_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -4455,14 +4405,14 @@
 		"key": "minecraft:iron_boots",
 		"result": {
 			"material": "minecraft:iron_boots",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:iron_chestplate",
 		"result": {
 			"material": "minecraft:iron_chestplate",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -4476,14 +4426,14 @@
 		"key": "minecraft:iron_golem_spawn_egg",
 		"result": {
 			"material": "minecraft:iron_golem_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:iron_helmet",
 		"result": {
 			"material": "minecraft:iron_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -4511,7 +4461,7 @@
 		"key": "minecraft:iron_leggings",
 		"result": {
 			"material": "minecraft:iron_leggings",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -4560,7 +4510,8 @@
 		"key": "minecraft:item_frame",
 		"result": {
 			"material": "minecraft:item_frame",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
@@ -4574,14 +4525,14 @@
 		"key": "minecraft:jigsaw",
 		"result": {
 			"material": "minecraft:jigsaw",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:jukebox",
 		"result": {
 			"material": "minecraft:jukebox",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4672,7 +4623,7 @@
 		"key": "minecraft:jungle_sign",
 		"result": {
 			"material": "minecraft:jungle_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4699,15 +4650,13 @@
 	{
 		"key": "minecraft:jungle_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:jungle_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4727,15 +4676,14 @@
 	{
 		"key": "minecraft:kelp_plant",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:knowledge_book",
 		"result": {
 			"material": "minecraft:knowledge_book",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.KnowledgeBookMeta"
 		}
 	},
 	{
@@ -4790,8 +4738,7 @@
 	{
 		"key": "minecraft:lava",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4804,8 +4751,7 @@
 	{
 		"key": "minecraft:lava_cauldron",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4826,42 +4772,42 @@
 		"key": "minecraft:leather_boots",
 		"result": {
 			"material": "minecraft:leather_boots",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ColorableArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:leather_chestplate",
 		"result": {
 			"material": "minecraft:leather_chestplate",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ColorableArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:leather_helmet",
 		"result": {
 			"material": "minecraft:leather_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ColorableArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:leather_horse_armor",
 		"result": {
 			"material": "minecraft:leather_horse_armor",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.LeatherArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:leather_leggings",
 		"result": {
 			"material": "minecraft:leather_leggings",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ColorableArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:lectern",
 		"result": {
 			"material": "minecraft:lectern",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4882,7 +4828,7 @@
 		"key": "minecraft:light_blue_banner",
 		"result": {
 			"material": "minecraft:light_blue_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -4902,8 +4848,7 @@
 	{
 		"key": "minecraft:light_blue_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4945,7 +4890,7 @@
 		"key": "minecraft:light_blue_shulker_box",
 		"result": {
 			"material": "minecraft:light_blue_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4972,8 +4917,7 @@
 	{
 		"key": "minecraft:light_blue_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -4987,7 +4931,7 @@
 		"key": "minecraft:light_gray_banner",
 		"result": {
 			"material": "minecraft:light_gray_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -5007,8 +4951,7 @@
 	{
 		"key": "minecraft:light_gray_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5050,7 +4993,7 @@
 		"key": "minecraft:light_gray_shulker_box",
 		"result": {
 			"material": "minecraft:light_gray_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -5077,8 +5020,7 @@
 	{
 		"key": "minecraft:light_gray_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5127,7 +5069,7 @@
 		"key": "minecraft:lime_banner",
 		"result": {
 			"material": "minecraft:lime_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -5147,8 +5089,7 @@
 	{
 		"key": "minecraft:lime_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5190,7 +5131,7 @@
 		"key": "minecraft:lime_shulker_box",
 		"result": {
 			"material": "minecraft:lime_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -5217,8 +5158,7 @@
 	{
 		"key": "minecraft:lime_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5232,14 +5172,14 @@
 		"key": "minecraft:lingering_potion",
 		"result": {
 			"material": "minecraft:lingering_potion",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.PotionMeta"
 		}
 	},
 	{
 		"key": "minecraft:llama_spawn_egg",
 		"result": {
 			"material": "minecraft:llama_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -5267,7 +5207,7 @@
 		"key": "minecraft:magenta_banner",
 		"result": {
 			"material": "minecraft:magenta_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -5287,8 +5227,7 @@
 	{
 		"key": "minecraft:magenta_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5330,7 +5269,7 @@
 		"key": "minecraft:magenta_shulker_box",
 		"result": {
 			"material": "minecraft:magenta_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -5357,8 +5296,7 @@
 	{
 		"key": "minecraft:magenta_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5386,7 +5324,7 @@
 		"key": "minecraft:magma_cube_spawn_egg",
 		"result": {
 			"material": "minecraft:magma_cube_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -5484,7 +5422,7 @@
 		"key": "minecraft:mangrove_sign",
 		"result": {
 			"material": "minecraft:mangrove_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -5511,15 +5449,13 @@
 	{
 		"key": "minecraft:mangrove_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:mangrove_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5567,8 +5503,7 @@
 	{
 		"key": "minecraft:melon_stem",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5603,7 +5538,7 @@
 		"key": "minecraft:mooshroom_spawn_egg",
 		"result": {
 			"material": "minecraft:mooshroom_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -5686,8 +5621,7 @@
 	{
 		"key": "minecraft:moving_piston",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -5736,7 +5670,7 @@
 		"key": "minecraft:mule_spawn_egg",
 		"result": {
 			"material": "minecraft:mule_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -5966,8 +5900,7 @@
 	{
 		"key": "minecraft:nether_portal",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6023,21 +5956,21 @@
 		"key": "minecraft:netherite_boots",
 		"result": {
 			"material": "minecraft:netherite_boots",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:netherite_chestplate",
 		"result": {
 			"material": "minecraft:netherite_chestplate",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:netherite_helmet",
 		"result": {
 			"material": "minecraft:netherite_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -6058,7 +5991,7 @@
 		"key": "minecraft:netherite_leggings",
 		"result": {
 			"material": "minecraft:netherite_leggings",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -6198,7 +6131,7 @@
 		"key": "minecraft:oak_sign",
 		"result": {
 			"material": "minecraft:oak_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -6225,15 +6158,13 @@
 	{
 		"key": "minecraft:oak_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:oak_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6261,7 +6192,7 @@
 		"key": "minecraft:ocelot_spawn_egg",
 		"result": {
 			"material": "minecraft:ocelot_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -6275,7 +6206,7 @@
 		"key": "minecraft:ominous_bottle",
 		"result": {
 			"material": "minecraft:ominous_bottle",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.OminousBottleMeta"
 		}
 	},
 	{
@@ -6289,7 +6220,7 @@
 		"key": "minecraft:orange_banner",
 		"result": {
 			"material": "minecraft:orange_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -6309,8 +6240,7 @@
 	{
 		"key": "minecraft:orange_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6352,7 +6282,7 @@
 		"key": "minecraft:orange_shulker_box",
 		"result": {
 			"material": "minecraft:orange_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -6386,8 +6316,7 @@
 	{
 		"key": "minecraft:orange_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6485,14 +6414,15 @@
 		"key": "minecraft:painting",
 		"result": {
 			"material": "minecraft:painting",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
 		"key": "minecraft:panda_spawn_egg",
 		"result": {
 			"material": "minecraft:panda_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -6506,7 +6436,7 @@
 		"key": "minecraft:parrot_spawn_egg",
 		"result": {
 			"material": "minecraft:parrot_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -6541,14 +6471,14 @@
 		"key": "minecraft:phantom_spawn_egg",
 		"result": {
 			"material": "minecraft:phantom_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:pig_spawn_egg",
 		"result": {
 			"material": "minecraft:pig_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -6562,42 +6492,41 @@
 		"key": "minecraft:piglin_brute_spawn_egg",
 		"result": {
 			"material": "minecraft:piglin_brute_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:piglin_head",
 		"result": {
 			"material": "minecraft:piglin_head",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:piglin_spawn_egg",
 		"result": {
 			"material": "minecraft:piglin_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:piglin_wall_head",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:pillager_spawn_egg",
 		"result": {
 			"material": "minecraft:pillager_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:pink_banner",
 		"result": {
 			"material": "minecraft:pink_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -6617,8 +6546,7 @@
 	{
 		"key": "minecraft:pink_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6667,7 +6595,7 @@
 		"key": "minecraft:pink_shulker_box",
 		"result": {
 			"material": "minecraft:pink_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -6701,8 +6629,7 @@
 	{
 		"key": "minecraft:pink_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6722,15 +6649,13 @@
 	{
 		"key": "minecraft:piston_head",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:pitcher_crop",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6751,14 +6676,13 @@
 		"key": "minecraft:player_head",
 		"result": {
 			"material": "minecraft:player_head",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:player_wall_head",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -6793,7 +6717,7 @@
 		"key": "minecraft:polar_bear_spawn_egg",
 		"result": {
 			"material": "minecraft:polar_bear_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -7023,260 +6947,224 @@
 	{
 		"key": "minecraft:potatoes",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potion",
 		"result": {
 			"material": "minecraft:potion",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.PotionMeta"
 		}
 	},
 	{
 		"key": "minecraft:potted_acacia_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_allium",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_azalea_bush",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_azure_bluet",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_bamboo",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_birch_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_blue_orchid",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_brown_mushroom",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_cactus",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_cherry_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_cornflower",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_crimson_fungus",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_crimson_roots",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_dandelion",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_dark_oak_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_dead_bush",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_fern",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_flowering_azalea_bush",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_jungle_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_lily_of_the_valley",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_mangrove_propagule",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_oak_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_orange_tulip",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_oxeye_daisy",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_pink_tulip",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_poppy",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_red_mushroom",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_red_tulip",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_spruce_sapling",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_torchflower",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_warped_fungus",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_warped_roots",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_white_tulip",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:potted_wither_rose",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:powder_snow",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7289,8 +7177,7 @@
 	{
 		"key": "minecraft:powder_snow_cauldron",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7381,14 +7268,15 @@
 		"key": "minecraft:pufferfish_bucket",
 		"result": {
 			"material": "minecraft:pufferfish_bucket",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
 		"key": "minecraft:pufferfish_spawn_egg",
 		"result": {
 			"material": "minecraft:pufferfish_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -7415,15 +7303,14 @@
 	{
 		"key": "minecraft:pumpkin_stem",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:purple_banner",
 		"result": {
 			"material": "minecraft:purple_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -7443,8 +7330,7 @@
 	{
 		"key": "minecraft:purple_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7486,7 +7372,7 @@
 		"key": "minecraft:purple_shulker_box",
 		"result": {
 			"material": "minecraft:purple_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -7513,8 +7399,7 @@
 	{
 		"key": "minecraft:purple_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7619,7 +7504,7 @@
 		"key": "minecraft:rabbit_spawn_egg",
 		"result": {
 			"material": "minecraft:rabbit_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -7647,7 +7532,7 @@
 		"key": "minecraft:ravager_spawn_egg",
 		"result": {
 			"material": "minecraft:ravager_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -7703,7 +7588,7 @@
 		"key": "minecraft:red_banner",
 		"result": {
 			"material": "minecraft:red_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -7723,8 +7608,7 @@
 	{
 		"key": "minecraft:red_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7843,7 +7727,7 @@
 		"key": "minecraft:red_shulker_box",
 		"result": {
 			"material": "minecraft:red_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -7877,8 +7761,7 @@
 	{
 		"key": "minecraft:red_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7926,15 +7809,13 @@
 	{
 		"key": "minecraft:redstone_wall_torch",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:redstone_wire",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -7955,7 +7836,7 @@
 		"key": "minecraft:repeating_command_block",
 		"result": {
 			"material": "minecraft:repeating_command_block",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8011,14 +7892,15 @@
 		"key": "minecraft:salmon_bucket",
 		"result": {
 			"material": "minecraft:salmon_bucket",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
 		"key": "minecraft:salmon_spawn_egg",
 		"result": {
 			"material": "minecraft:salmon_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8081,21 +7963,21 @@
 		"key": "minecraft:sculk_catalyst",
 		"result": {
 			"material": "minecraft:sculk_catalyst",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:sculk_sensor",
 		"result": {
 			"material": "minecraft:sculk_sensor",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:sculk_shrieker",
 		"result": {
 			"material": "minecraft:sculk_shrieker",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8158,7 +8040,7 @@
 		"key": "minecraft:sheep_spawn_egg",
 		"result": {
 			"material": "minecraft:sheep_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8172,7 +8054,7 @@
 		"key": "minecraft:shield",
 		"result": {
 			"material": "minecraft:shield",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8193,7 +8075,7 @@
 		"key": "minecraft:shulker_box",
 		"result": {
 			"material": "minecraft:shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8207,7 +8089,7 @@
 		"key": "minecraft:shulker_spawn_egg",
 		"result": {
 			"material": "minecraft:shulker_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8221,35 +8103,34 @@
 		"key": "minecraft:silverfish_spawn_egg",
 		"result": {
 			"material": "minecraft:silverfish_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:skeleton_horse_spawn_egg",
 		"result": {
 			"material": "minecraft:skeleton_horse_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:skeleton_skull",
 		"result": {
 			"material": "minecraft:skeleton_skull",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:skeleton_spawn_egg",
 		"result": {
 			"material": "minecraft:skeleton_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:skeleton_wall_skull",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -8284,7 +8165,7 @@
 		"key": "minecraft:slime_spawn_egg",
 		"result": {
 			"material": "minecraft:slime_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8312,7 +8193,7 @@
 		"key": "minecraft:smoker",
 		"result": {
 			"material": "minecraft:smoker",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8410,7 +8291,7 @@
 		"key": "minecraft:sniffer_spawn_egg",
 		"result": {
 			"material": "minecraft:sniffer_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8445,7 +8326,7 @@
 		"key": "minecraft:snow_golem_spawn_egg",
 		"result": {
 			"material": "minecraft:snow_golem_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8459,14 +8340,13 @@
 		"key": "minecraft:soul_campfire",
 		"result": {
 			"material": "minecraft:soul_campfire",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:soul_fire",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -8500,15 +8380,14 @@
 	{
 		"key": "minecraft:soul_wall_torch",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:spawner",
 		"result": {
 			"material": "minecraft:spawner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8529,7 +8408,7 @@
 		"key": "minecraft:spider_spawn_egg",
 		"result": {
 			"material": "minecraft:spider_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8543,7 +8422,7 @@
 		"key": "minecraft:splash_potion",
 		"result": {
 			"material": "minecraft:splash_potion",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.PotionMeta"
 		}
 	},
 	{
@@ -8648,7 +8527,7 @@
 		"key": "minecraft:spruce_sign",
 		"result": {
 			"material": "minecraft:spruce_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8675,15 +8554,13 @@
 	{
 		"key": "minecraft:spruce_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:spruce_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -8704,7 +8581,7 @@
 		"key": "minecraft:squid_spawn_egg",
 		"result": {
 			"material": "minecraft:squid_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8830,14 +8707,14 @@
 		"key": "minecraft:stray_spawn_egg",
 		"result": {
 			"material": "minecraft:stray_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:strider_spawn_egg",
 		"result": {
 			"material": "minecraft:strider_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -8998,7 +8875,7 @@
 		"key": "minecraft:structure_block",
 		"result": {
 			"material": "minecraft:structure_block",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -9033,21 +8910,21 @@
 		"key": "minecraft:suspicious_gravel",
 		"result": {
 			"material": "minecraft:suspicious_gravel",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:suspicious_sand",
 		"result": {
 			"material": "minecraft:suspicious_sand",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
 		"key": "minecraft:suspicious_stew",
 		"result": {
 			"material": "minecraft:suspicious_stew",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SuspiciousStewMeta"
 		}
 	},
 	{
@@ -9060,22 +8937,22 @@
 	{
 		"key": "minecraft:sweet_berry_bush",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:tadpole_bucket",
 		"result": {
 			"material": "minecraft:tadpole_bucket",
-			"throws": "java.lang.IllegalArgumentException"
+			"throws": "java.lang.IllegalArgumentException",
+			"throwsMsg": "Expected a class extending the item meta interface, got: org.bukkit.craftbukkit.inventory.CraftMetaEntityTag"
 		}
 	},
 	{
 		"key": "minecraft:tadpole_spawn_egg",
 		"result": {
 			"material": "minecraft:tadpole_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -9088,8 +8965,7 @@
 	{
 		"key": "minecraft:tall_seagrass",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9124,7 +9000,7 @@
 		"key": "minecraft:tipped_arrow",
 		"result": {
 			"material": "minecraft:tipped_arrow",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.PotionMeta"
 		}
 	},
 	{
@@ -9158,8 +9034,7 @@
 	{
 		"key": "minecraft:torchflower_crop",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9180,14 +9055,14 @@
 		"key": "minecraft:trader_llama_spawn_egg",
 		"result": {
 			"material": "minecraft:trader_llama_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:trapped_chest",
 		"result": {
 			"material": "minecraft:trapped_chest",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -9201,7 +9076,7 @@
 		"key": "minecraft:trial_spawner",
 		"result": {
 			"material": "minecraft:trial_spawner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -9214,8 +9089,7 @@
 	{
 		"key": "minecraft:tripwire",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9236,14 +9110,14 @@
 		"key": "minecraft:tropical_fish_bucket",
 		"result": {
 			"material": "minecraft:tropical_fish_bucket",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.TropicalFishBucketMeta"
 		}
 	},
 	{
 		"key": "minecraft:tropical_fish_spawn_egg",
 		"result": {
 			"material": "minecraft:tropical_fish_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -9270,8 +9144,7 @@
 	{
 		"key": "minecraft:tube_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9341,7 +9214,7 @@
 		"key": "minecraft:turtle_helmet",
 		"result": {
 			"material": "minecraft:turtle_helmet",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ArmorMeta"
 		}
 	},
 	{
@@ -9355,7 +9228,7 @@
 		"key": "minecraft:turtle_spawn_egg",
 		"result": {
 			"material": "minecraft:turtle_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -9368,15 +9241,14 @@
 	{
 		"key": "minecraft:twisting_vines_plant",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:vault",
 		"result": {
 			"material": "minecraft:vault",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -9397,21 +9269,21 @@
 		"key": "minecraft:vex_spawn_egg",
 		"result": {
 			"material": "minecraft:vex_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:villager_spawn_egg",
 		"result": {
 			"material": "minecraft:villager_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:vindicator_spawn_egg",
 		"result": {
 			"material": "minecraft:vindicator_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -9424,22 +9296,20 @@
 	{
 		"key": "minecraft:void_air",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:wall_torch",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:wandering_trader_spawn_egg",
 		"result": {
 			"material": "minecraft:wandering_trader_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -9453,7 +9323,7 @@
 		"key": "minecraft:warden_spawn_egg",
 		"result": {
 			"material": "minecraft:warden_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -9544,7 +9414,7 @@
 		"key": "minecraft:warped_sign",
 		"result": {
 			"material": "minecraft:warped_sign",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -9578,15 +9448,13 @@
 	{
 		"key": "minecraft:warped_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:warped_wall_sign",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9599,8 +9467,7 @@
 	{
 		"key": "minecraft:water",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9613,8 +9480,7 @@
 	{
 		"key": "minecraft:water_cauldron",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9949,8 +9815,7 @@
 	{
 		"key": "minecraft:weeping_vines_plant",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -9978,7 +9843,7 @@
 		"key": "minecraft:white_banner",
 		"result": {
 			"material": "minecraft:white_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -9998,8 +9863,7 @@
 	{
 		"key": "minecraft:white_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -10041,7 +9905,7 @@
 		"key": "minecraft:white_shulker_box",
 		"result": {
 			"material": "minecraft:white_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -10075,8 +9939,7 @@
 	{
 		"key": "minecraft:white_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -10104,7 +9967,7 @@
 		"key": "minecraft:witch_spawn_egg",
 		"result": {
 			"material": "minecraft:witch_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -10118,42 +9981,41 @@
 		"key": "minecraft:wither_skeleton_skull",
 		"result": {
 			"material": "minecraft:wither_skeleton_skull",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:wither_skeleton_spawn_egg",
 		"result": {
 			"material": "minecraft:wither_skeleton_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:wither_skeleton_wall_skull",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:wither_spawn_egg",
 		"result": {
 			"material": "minecraft:wither_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:wolf_armor",
 		"result": {
 			"material": "minecraft:wolf_armor",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.ColorableArmorMeta"
 		}
 	},
 	{
 		"key": "minecraft:wolf_spawn_egg",
 		"result": {
 			"material": "minecraft:wolf_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
@@ -10195,21 +10057,21 @@
 		"key": "minecraft:writable_book",
 		"result": {
 			"material": "minecraft:writable_book",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BookMeta"
 		}
 	},
 	{
 		"key": "minecraft:written_book",
 		"result": {
 			"material": "minecraft:written_book",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BookMeta"
 		}
 	},
 	{
 		"key": "minecraft:yellow_banner",
 		"result": {
 			"material": "minecraft:yellow_banner",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BannerMeta"
 		}
 	},
 	{
@@ -10229,8 +10091,7 @@
 	{
 		"key": "minecraft:yellow_candle_cake",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -10272,7 +10133,7 @@
 		"key": "minecraft:yellow_shulker_box",
 		"result": {
 			"material": "minecraft:yellow_shulker_box",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -10299,8 +10160,7 @@
 	{
 		"key": "minecraft:yellow_wall_banner",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -10314,49 +10174,48 @@
 		"key": "minecraft:zoglin_spawn_egg",
 		"result": {
 			"material": "minecraft:zoglin_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:zombie_head",
 		"result": {
 			"material": "minecraft:zombie_head",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SkullMeta"
 		}
 	},
 	{
 		"key": "minecraft:zombie_horse_spawn_egg",
 		"result": {
 			"material": "minecraft:zombie_horse_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:zombie_spawn_egg",
 		"result": {
 			"material": "minecraft:zombie_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:zombie_villager_spawn_egg",
 		"result": {
 			"material": "minecraft:zombie_villager_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	},
 	{
 		"key": "minecraft:zombie_wall_head",
 		"result": {
-			"material": "minecraft:air",
-			"throws": "java.lang.NullPointerException"
+			"material": "minecraft:air"
 		}
 	},
 	{
 		"key": "minecraft:zombified_piglin_spawn_egg",
 		"result": {
 			"material": "minecraft:zombified_piglin_spawn_egg",
-			"throws": "java.lang.IllegalArgumentException"
+			"meta": "org.bukkit.inventory.meta.SpawnEggMeta"
 		}
 	}
 ]

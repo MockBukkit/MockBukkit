@@ -44,9 +44,13 @@ class ItemStackMockTest
 			itemStack.setType(material);
 			String itemTypeString = itemStack.getType().key().asString();
 			assertEquals(expected.get("material").getAsString(), itemTypeString);
-			String itemMetaClassString = getMetaInterface(itemStack.getItemMeta().getClass()).getName();
-			assertTrue(expected.has("meta"), "Expected an exception to be thrown of type: " + expected.get("throws"));
-			assertEquals(expected.get("meta").getAsString(), itemMetaClassString);
+			boolean actualHasMeta = itemStack.getItemMeta() != null;
+			assertEquals(expected.has("meta"), actualHasMeta);
+			if(actualHasMeta)
+			{
+				String itemMetaClassString = getMetaInterface(itemStack.getItemMeta().getClass()).getName();
+				assertEquals(expected.get("meta").getAsString(), itemMetaClassString);
+			}
 		}
 		catch (Exception e)
 		{
