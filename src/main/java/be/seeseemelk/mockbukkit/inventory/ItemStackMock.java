@@ -44,18 +44,7 @@ public class ItemStackMock extends ItemStack
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
 		this.durability = type.getMaxDurability();
-		if (type.asMaterial() != Material.AIR && type.getItemMetaClass() != ItemMeta.class)
-		{
-			try
-			{
-				this.itemMeta = type.getItemMetaClass().getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
-			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.getItemMetaClass(), e);
-			}
-		}
+
 
 	}
 
@@ -64,18 +53,7 @@ public class ItemStackMock extends ItemStack
 		this.type = type.asItemType();
 		this.amount = amount;
 		this.durability = type.getMaxDurability();
-		if (type != Material.AIR && type.asItemType().getItemMetaClass() != ItemMeta.class)
-		{
-			try
-			{
-				this.itemMeta = type.asItemType().getItemMetaClass().getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
-			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.asItemType().getItemMetaClass(), e);
-			}
-		}
+		this.itemMeta = findItemMeta(type);
 	}
 
 	private ItemStackMock(@Nullable Void v)
@@ -88,25 +66,17 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = type;
 		this.durability = type.getMaxDurability();
-		if (type.asMaterial() != Material.AIR && type.getItemMetaClass() != ItemMeta.class)
-		{
-			try
-			{
-				this.itemMeta = type.getItemMetaClass().getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
-			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.getItemMetaClass(), e);
-			}
-		}
-
+		this.itemMeta = findItemMeta(type.asMaterial());
 	}
 
 	@Override
 	public void setType(@NotNull Material type)
 	{
-		this.type = type.asItemType();
+		if (type != this.type.asMaterial())
+		{
+			this.type = type.asItemType();
+			this.itemMeta = findItemMeta(type);
+		}
 	}
 
 	@NotNull
@@ -232,6 +202,23 @@ public class ItemStackMock extends ItemStack
 		if (obj == null) return false;
 		if (!(obj instanceof final ItemStackMock bukkit)) return false;
 		return isSimilar(bukkit) && this.amount == bukkit.getAmount();
+	}
+
+	private static ItemMeta findItemMeta(Material material)
+	{
+		if (material != Material.AIR && material.asItemType().getItemMetaClass() != ItemMeta.class)
+		{
+			try
+			{
+				return material.asItemType().getItemMetaClass().getConstructor().newInstance();
+			}
+			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+				   NoSuchMethodException e)
+			{
+				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + material.asItemType().getItemMetaClass(), e);
+			}
+		}
+		return new ItemMetaMock();
 	}
 
 	@NotNull
