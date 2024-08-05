@@ -35,6 +35,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -912,20 +914,102 @@ class ItemMetaMockTest
 
 	@ParameterizedTest
 	@MethodSource("getItemMetaTypesStream")
-	void hashCode_equalsForAll(JsonElement jsonElement)
+	void hashCode_equalsForAllExceptItemMeta(JsonElement jsonElement)
 	{
 		ItemType itemType = Registry.ITEM.get(NamespacedKey.fromString(jsonElement.getAsString()));
 		ItemMeta itemMeta = itemType.createItemStack().getItemMeta();
+		fillFieldsWithData(itemMeta);
 		ItemMeta cloned = itemMeta.clone();
 		assertEquals(itemMeta, cloned);
 		assertEquals(itemMeta.hashCode(), cloned.hashCode());
 	}
+
+	@Test
+	void hashCode_equalsForItemMeta()
+	{
+		ItemMeta itemMeta = new ItemMetaMock();
+		fillFieldsWithData(itemMeta);
+		ItemMeta cloned = itemMeta.clone();
+		assertEquals(itemMeta, cloned);
+		assertEquals(itemMeta.hashCode(), cloned.hashCode());
+	}
+
 
 	static Stream<JsonElement> getItemMetaTypesStream() throws IOException
 	{
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/itemstack/metaItemTypes.json"))
 		{
 			return JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray().asList().stream();
+		}
+	}
+
+	private void fillFieldsWithData(ItemMeta object)
+	{
+		Class<? extends ItemMeta> itemMetaClass = object.getClass();
+		for (Method method : itemMetaClass.getDeclaredMethods())
+		{
+			if (method.getReturnType() != void.class)
+			{
+				continue;
+			}
+			Class<?>[] parameterTypes = method.getParameterTypes();
+			if (parameterTypes.length != 1)
+			{
+				continue;
+			}
+			Class<?> parameterType = method.getParameterTypes()[0];
+			try
+			{
+				invokeSetter(parameterType, method, object);
+			}
+			catch (InvocationTargetException ignored)
+			{
+			}
+			catch (IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void invokeSetter(Class<?> parameterType, Method method, ItemMeta object) throws InvocationTargetException, IllegalAccessException
+	{
+		if (boolean.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, true);
+		}
+		if (parameterType == String.class)
+		{
+			method.invoke(object, "Hello world!");
+		}
+		if (int.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, 1);
+		}
+		if (short.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, (short) 1);
+		}
+		if (byte.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, (byte) 1);
+		}
+		if (long.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, 1L);
+		}
+		if (double.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, 1D);
+		}
+		if (float.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(object, 1F);
+		}
+		if (Enum.class.isAssignableFrom(parameterType))
+		{
+			Enum[] enums = (Enum[]) parameterType.getEnumConstants();
+			method.invoke(object, enums[enums.length - 1]);
 		}
 	}
 
