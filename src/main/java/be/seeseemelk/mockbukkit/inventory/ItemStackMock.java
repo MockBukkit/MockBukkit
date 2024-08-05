@@ -198,7 +198,7 @@ public class ItemStackMock extends ItemStack
 
 		clone.setAmount(this.amount);
 		clone.setDurability(this.durability);
-		clone.setItemMeta(this.itemMeta);
+		clone.setItemMeta(this.itemMeta.clone());
 		return clone;
 	}
 
