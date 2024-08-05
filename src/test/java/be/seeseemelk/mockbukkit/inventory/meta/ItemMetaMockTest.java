@@ -6,15 +6,20 @@ import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
@@ -22,15 +27,20 @@ import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -898,6 +908,25 @@ class ItemMetaMockTest
 	{
 		meta.setFireResistant(true);
 		assertTrue(meta.isFireResistant());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getItemMetaTypesStream")
+	void hashCode_equalsForAll(JsonElement jsonElement)
+	{
+		ItemType itemType = Registry.ITEM.get(NamespacedKey.fromString(jsonElement.getAsString()));
+		ItemMeta itemMeta = itemType.createItemStack().getItemMeta();
+		ItemMeta cloned = itemMeta.clone();
+		assertEquals(itemMeta, cloned);
+		assertEquals(itemMeta.hashCode(), cloned.hashCode());
+	}
+
+	static Stream<JsonElement> getItemMetaTypesStream() throws IOException
+	{
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/itemstack/metaItemTypes.json"))
+		{
+			return JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray().asList().stream();
+		}
 	}
 
 }
