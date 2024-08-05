@@ -934,7 +934,6 @@ class ItemMetaMockTest
 		assertEquals(itemMeta.hashCode(), cloned.hashCode());
 	}
 
-
 	static Stream<JsonElement> getItemMetaTypesStream() throws IOException
 	{
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/itemstack/metaItemTypes.json"))

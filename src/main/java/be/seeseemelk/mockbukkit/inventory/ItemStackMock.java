@@ -210,6 +210,21 @@ public class ItemStackMock extends ItemStack
 		return isSimilar(bukkit) && this.amount == bukkit.getAmount();
 	}
 
+	@Override
+	public int hashCode()
+	{
+		if (type == ItemType.AIR)
+		{
+			return EMPTY.hashCode();
+		}
+		else
+		{
+			int hash = type.hashCode();
+			hash = hash * 31 + this.getAmount();
+			return hash;
+		}
+	}
+
 	private static @Nullable ItemMeta findItemMeta(Material material)
 	{
 		if (!material.isItem() || material == Material.AIR)

@@ -71,6 +71,14 @@ class ItemStackMockTest
 		}
 	}
 
+	@Test
+	void hashCode_equals()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack cloned = itemStack.clone();
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+	}
+
 	private Class<? extends ItemMeta> getMetaInterface(Class<?> aClass)
 	{
 		Class<?>[] interfaces = aClass.getInterfaces();
