@@ -43,7 +43,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		super(meta);
 
 		this.projectiles = meta.hasChargedProjectiles() ?
-				new ArrayList<>(meta.getChargedProjectiles()) :
+				new ArrayList<>(meta.getChargedProjectiles().stream().map(ItemStack::clone).toList()) :
 				new ArrayList<>();
 	}
 
