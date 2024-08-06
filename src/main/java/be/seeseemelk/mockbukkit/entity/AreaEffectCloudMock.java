@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.potion.PotionUtils;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Particle;
@@ -153,13 +154,13 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public void setBasePotionData(@Nullable PotionData data)
 	{
-		this.potionType = data == null ? null : data.getType();
+		setBasePotionType(PotionUtils.fromBukkit(data));
 	}
 
 	@Override
 	public @Nullable PotionData getBasePotionData()
 	{
-		return this.potionType == null ? null : new PotionData(this.potionType);
+		return PotionUtils.toBukkit(getBasePotionType());
 	}
 
 	@Override

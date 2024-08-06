@@ -1,10 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
+import be.seeseemelk.mockbukkit.potion.PotionUtils;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
-import org.bukkit.UnsafeValues;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -27,7 +26,7 @@ import java.util.Objects;
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
 
-	private @NotNull PotionType type;
+	private @Nullable PotionType type;
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
 	private @Nullable Color color;
 
@@ -88,6 +87,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	public @NotNull PotionMetaMock clone()
 	{
 		PotionMetaMock mock = (PotionMetaMock) super.clone();
+		mock.type = type;
 		mock.effects = new ArrayList<>(effects);
 		mock.color = color == null ? null : Color.fromRGB(color.asRGB());
 		return mock;
@@ -200,13 +200,13 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public void setBasePotionData(@Nullable PotionData data)
 	{
-		this.type = data == null ? null : data.getType();
+		setBasePotionType(PotionUtils.fromBukkit(data));
 	}
 
 	@Override
 	public @Nullable PotionData getBasePotionData()
 	{
-		return type == null ? null : new PotionData(type);
+		return PotionUtils.toBukkit(getBasePotionType());
 	}
 
 	@Override
@@ -224,8 +224,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public boolean hasBasePotionType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.type != null;
 	}
 
 	@Override
