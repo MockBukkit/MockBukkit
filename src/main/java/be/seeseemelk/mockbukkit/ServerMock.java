@@ -2101,7 +2101,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Keyed> Tag<T> getTag(String registryKey, NamespacedKey key, Class<T> clazz)
+	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
 		if (clazz == Material.class)
 		{
@@ -2216,10 +2216,24 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(String registry, Class<T> clazz)
+	@SuppressWarnings("unchecked")
+	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(@NotNull String registry, @NotNull Class<T> clazz)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (clazz == Material.class)
+		{
+			TagRegistry tagRegistry = materialTags.get(registry);
+
+			if (tagRegistry != null)
+			{
+				return tagRegistry.getTags()
+						.values()
+						.stream()
+						.map(tagWrapperMock -> (Tag<T>) tagWrapperMock).toList();
+			}
+		}
+
+		// Per definition this method should throw an exception if the registry doesn't exist
+		throw new IllegalArgumentException();
 	}
 
 	@Override
