@@ -27,7 +27,15 @@ public class PotionUtilsTest
 	}
 
 	@Test
-	void testFromBukkit_upgradeable()
+	void testFromBukkit_normal() {
+		PotionData data = new PotionData(PotionType.STRENGTH, false, false);
+		PotionType type = PotionUtils.fromBukkit(data);
+
+		assertEquals(PotionType.STRENGTH, type);
+	}
+
+	@Test
+	void testFromBukkit_upgraded()
 	{
 		PotionData data = new PotionData(PotionType.STRENGTH, false, true);
 		PotionType type = PotionUtils.fromBukkit(data);
@@ -36,7 +44,7 @@ public class PotionUtilsTest
 	}
 
 	@Test
-	void testFromBukkit_extendable()
+	void testFromBukkit_extended()
 	{
 		PotionData data = new PotionData(PotionType.SLOWNESS, true, false);
 		PotionType type = PotionUtils.fromBukkit(data);
@@ -45,7 +53,18 @@ public class PotionUtilsTest
 	}
 
 	@Test
-	void testToBukkit_upgradeable()
+	void testToBukkit_normal()
+	{
+		PotionType type = PotionType.STRENGTH;
+		PotionData data = PotionUtils.toBukkit(type);
+
+		assertEquals(PotionType.STRENGTH, data.getType());
+		assertFalse(data.isUpgraded());
+		assertFalse(data.isExtended());
+	}
+
+	@Test
+	void testToBukkit_upgraded()
 	{
 		PotionType type = PotionType.STRONG_STRENGTH;
 		PotionData data = PotionUtils.toBukkit(type);
@@ -56,7 +75,7 @@ public class PotionUtilsTest
 	}
 
 	@Test
-	void testToBukkit_extendable()
+	void testToBukkit_extended()
 	{
 		PotionType type = PotionType.LONG_SLOWNESS;
 		PotionData data = PotionUtils.toBukkit(type);
