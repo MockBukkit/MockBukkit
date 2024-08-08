@@ -27,7 +27,8 @@ class PotionUtilsTest
 	}
 
 	@Test
-	void testFromBukkit_normal() {
+	void testFromBukkit_normal()
+	{
 		PotionData data = new PotionData(PotionType.STRENGTH, false, false);
 		PotionType type = PotionUtils.fromBukkit(data);
 
