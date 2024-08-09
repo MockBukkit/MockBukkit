@@ -36,4 +36,17 @@ class CowMockTest
 		assertEquals(EntityType.COW, cow.getType());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultCow()
+	{
+		assertEquals(1.19D, cow.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyCow()
+	{
+		cow.setBaby();
+		assertEquals(0.595D, cow.getEyeHeight());
+	}
+
 }
