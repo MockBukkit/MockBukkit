@@ -123,13 +123,13 @@ class SheepMockTest
 	}
 
 	@Test
-	void getEyeHeight_GivenDefaultRabbit()
+	void getEyeHeight_GivenDefaultSheep()
 	{
 		assertEquals(1.105D, sheep.getEyeHeight());
 	}
 
 	@Test
-	void getEyeHeight_GivenBabyRabbit()
+	void getEyeHeight_GivenBabySheep()
 	{
 		sheep.setBaby();
 		assertEquals(0.5525D, sheep.getEyeHeight());
