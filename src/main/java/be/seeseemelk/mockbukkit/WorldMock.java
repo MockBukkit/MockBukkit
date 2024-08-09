@@ -24,6 +24,7 @@ import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DolphinMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
+import be.seeseemelk.mockbukkit.entity.DrownedMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
@@ -155,6 +156,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
+import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderPearl;
@@ -1133,6 +1135,10 @@ public class WorldMock implements World
 		else if (clazz == Player.class)
 		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+		}
+		else if (clazz == Drowned.class)
+		{
+			return new DrownedMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Zombie.class)
 		{

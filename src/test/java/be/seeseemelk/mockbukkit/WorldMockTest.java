@@ -104,6 +104,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -1292,6 +1293,7 @@ class WorldMockTest
 				Arguments.of(EntityType.HORSE, HorseMock.class),
 				Arguments.of(EntityType.ARMOR_STAND, ArmorStandMock.class),
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
+				Arguments.of(EntityType.DROWNED, Drowned.class),
 				Arguments.of(EntityType.FIREWORK_ROCKET, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
 				Arguments.of(EntityType.FURNACE_MINECART, PoweredMinecartMock.class),
