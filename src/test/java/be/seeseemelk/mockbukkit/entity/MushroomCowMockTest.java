@@ -249,4 +249,17 @@ class MushroomCowMockTest
 		assertFalse(mushroom.readyToBeSheared());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultMushroom()
+	{
+		assertEquals(1.19D, mushroom.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyMushroom()
+	{
+		mushroom.setBaby();
+		assertEquals(0.595D, mushroom.getEyeHeight());
+	}
+
 }
