@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -120,5 +121,19 @@ class SheepMockTest
 		sheep.setBaby();
 		assertFalse(sheep.readyToBeSheared());
 	}
+
+	@Test
+	void getEyeHeight_GivenDefaultRabbit()
+	{
+		assertEquals(1.105D, sheep.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyRabbit()
+	{
+		sheep.setBaby();
+		assertEquals(0.5525D, sheep.getEyeHeight());
+	}
+
 
 }
