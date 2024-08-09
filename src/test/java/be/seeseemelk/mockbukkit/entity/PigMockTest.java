@@ -106,4 +106,18 @@ class PigMockTest
 		assertEquals(Material.CARROT_ON_A_STICK, pig.getSteerMaterial());
 	}
 
+
+	@Test
+	void getEyeHeight_GivenDefaultPig()
+	{
+		assertEquals(0.765D, pig.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyPig()
+	{
+		pig.setBaby();
+		assertEquals(0.3825D, pig.getEyeHeight());
+	}
+
 }
