@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ZombieMockTest
 {
@@ -48,13 +48,13 @@ class ZombieMockTest
 	}
 
 	@Test
-	void getEyeHeight_GivenDefaultDrowned()
+	void getEyeHeight_GivenDefaultZombie()
 	{
 		assertEquals(1.6575D, zombie.getEyeHeight());
 	}
 
 	@Test
-	void getEyeHeight_GivenBabyDrowned()
+	void getEyeHeight_GivenBabyZombie()
 	{
 		zombie.setBaby();
 		assertEquals(0.82875D, zombie.getEyeHeight());
