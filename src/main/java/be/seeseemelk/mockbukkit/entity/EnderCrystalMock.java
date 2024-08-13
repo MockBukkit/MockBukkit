@@ -26,7 +26,7 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected EnderCrystalMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public EnderCrystalMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
