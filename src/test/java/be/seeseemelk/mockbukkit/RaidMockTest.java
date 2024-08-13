@@ -227,7 +227,9 @@ class RaidMockTest
 		Set<UUID> actual = raid.getHeroes();
 		assertEquals(heroes, actual);
 		assertNotSame(heroes, actual);
-		assertThrows(UnsupportedOperationException.class, () -> actual.add(UUID.randomUUID()));
+
+		UUID uuid = UUID.randomUUID();
+		assertThrows(UnsupportedOperationException.class, () -> actual.add(uuid));
 	}
 
 	@Test
@@ -247,7 +249,9 @@ class RaidMockTest
 		List<Raider> actual = raid.getRaiders();
 		assertEquals(raiders, actual);
 		assertNotSame(raiders, actual);
-		assertThrows(UnsupportedOperationException.class, () -> actual.add(createTestRaider()));
+
+		Raider raider = createTestRaider();
+		assertThrows(UnsupportedOperationException.class, () -> actual.add(raider));
 	}
 
 	@Test
