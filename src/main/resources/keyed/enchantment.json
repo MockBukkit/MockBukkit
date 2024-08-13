@@ -36,6 +36,13 @@
 				"minecraft:aqua_affinity"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet"
 			]
 		},
 		{
@@ -169,6 +176,19 @@
 				"minecraft:sharpness"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace",
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe"
 			]
 		},
 		{
@@ -207,6 +227,40 @@
 				"minecraft:binding_curse"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots",
+				"minecraft:elytra",
+				"minecraft:creeper_head",
+				"minecraft:dragon_head",
+				"minecraft:piglin_head",
+				"minecraft:player_head",
+				"minecraft:zombie_head",
+				"minecraft:skeleton_skull",
+				"minecraft:wither_skeleton_skull",
+				"minecraft:carved_pumpkin"
 			]
 		},
 		{
@@ -317,6 +371,31 @@
 				"minecraft:blast_protection"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -429,6 +508,7 @@
 				"minecraft:sharpness"
 			],
 			"enchantables": [
+				"minecraft:mace"
 			]
 		},
 		{
@@ -468,6 +548,7 @@
 				"minecraft:riptide"
 			],
 			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
@@ -601,6 +682,7 @@
 				"minecraft:sharpness"
 			],
 			"enchantables": [
+				"minecraft:mace"
 			]
 		},
 		{
@@ -688,6 +770,12 @@
 				"minecraft:frost_walker"
 			],
 			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -816,6 +904,31 @@
 				"minecraft:efficiency"
 			],
 			"enchantables": [
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe",
+				"minecraft:wooden_pickaxe",
+				"minecraft:stone_pickaxe",
+				"minecraft:iron_pickaxe",
+				"minecraft:golden_pickaxe",
+				"minecraft:diamond_pickaxe",
+				"minecraft:netherite_pickaxe",
+				"minecraft:wooden_shovel",
+				"minecraft:stone_shovel",
+				"minecraft:iron_shovel",
+				"minecraft:golden_shovel",
+				"minecraft:diamond_shovel",
+				"minecraft:netherite_shovel",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_hoe",
+				"minecraft:iron_hoe",
+				"minecraft:golden_hoe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_hoe",
+				"minecraft:shears"
 			]
 		},
 		{
@@ -923,6 +1036,12 @@
 				"minecraft:feather_falling"
 			],
 			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -988,6 +1107,13 @@
 				"minecraft:fire_aspect"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace"
 			]
 		},
 		{
@@ -1098,6 +1224,31 @@
 				"minecraft:blast_protection"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -1136,6 +1287,7 @@
 				"minecraft:flame"
 			],
 			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
@@ -1223,6 +1375,30 @@
 				"minecraft:fortune"
 			],
 			"enchantables": [
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe",
+				"minecraft:wooden_pickaxe",
+				"minecraft:stone_pickaxe",
+				"minecraft:iron_pickaxe",
+				"minecraft:golden_pickaxe",
+				"minecraft:diamond_pickaxe",
+				"minecraft:netherite_pickaxe",
+				"minecraft:wooden_shovel",
+				"minecraft:stone_shovel",
+				"minecraft:iron_shovel",
+				"minecraft:golden_shovel",
+				"minecraft:diamond_shovel",
+				"minecraft:netherite_shovel",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_hoe",
+				"minecraft:iron_hoe",
+				"minecraft:golden_hoe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_hoe"
 			]
 		},
 		{
@@ -1289,6 +1465,12 @@
 				"minecraft:frost_walker"
 			],
 			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -1422,6 +1604,7 @@
 				"minecraft:sharpness"
 			],
 			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
@@ -1461,6 +1644,7 @@
 				"minecraft:mending"
 			],
 			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
@@ -1526,6 +1710,12 @@
 				"minecraft:knockback"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword"
 			]
 		},
 		{
@@ -1612,6 +1802,12 @@
 				"minecraft:looting"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword"
 			]
 		},
 		{
@@ -1699,6 +1895,7 @@
 				"minecraft:riptide"
 			],
 			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
@@ -1785,6 +1982,7 @@
 				"minecraft:luck_of_the_sea"
 			],
 			"enchantables": [
+				"minecraft:fishing_rod"
 			]
 		},
 		{
@@ -1871,6 +2069,7 @@
 				"minecraft:lure"
 			],
 			"enchantables": [
+				"minecraft:fishing_rod"
 			]
 		},
 		{
@@ -1910,6 +2109,73 @@
 				"minecraft:mending"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots",
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace",
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe",
+				"minecraft:wooden_pickaxe",
+				"minecraft:stone_pickaxe",
+				"minecraft:iron_pickaxe",
+				"minecraft:golden_pickaxe",
+				"minecraft:diamond_pickaxe",
+				"minecraft:netherite_pickaxe",
+				"minecraft:wooden_shovel",
+				"minecraft:stone_shovel",
+				"minecraft:iron_shovel",
+				"minecraft:golden_shovel",
+				"minecraft:diamond_shovel",
+				"minecraft:netherite_shovel",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_hoe",
+				"minecraft:iron_hoe",
+				"minecraft:golden_hoe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_hoe",
+				"minecraft:bow",
+				"minecraft:fishing_rod",
+				"minecraft:trident",
+				"minecraft:crossbow",
+				"minecraft:shears",
+				"minecraft:shield",
+				"minecraft:elytra",
+				"minecraft:flint_and_steel",
+				"minecraft:carrot_on_a_stick",
+				"minecraft:warped_fungus_on_a_stick",
+				"minecraft:brush"
 			]
 		},
 		{
@@ -1949,6 +2215,7 @@
 				"minecraft:piercing"
 			],
 			"enchantables": [
+				"minecraft:crossbow"
 			]
 		},
 		{
@@ -2057,6 +2324,7 @@
 				"minecraft:piercing"
 			],
 			"enchantables": [
+				"minecraft:crossbow"
 			]
 		},
 		{
@@ -2185,6 +2453,7 @@
 				"minecraft:power"
 			],
 			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
@@ -2295,6 +2564,31 @@
 				"minecraft:blast_protection"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -2405,6 +2699,31 @@
 				"minecraft:blast_protection"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -2470,6 +2789,7 @@
 				"minecraft:punch"
 			],
 			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
@@ -2556,6 +2876,7 @@
 				"minecraft:quick_charge"
 			],
 			"enchantables": [
+				"minecraft:crossbow"
 			]
 		},
 		{
@@ -2642,6 +2963,13 @@
 				"minecraft:respiration"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet"
 			]
 		},
 		{
@@ -2730,6 +3058,7 @@
 				"minecraft:riptide"
 			],
 			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
@@ -2863,6 +3192,18 @@
 				"minecraft:sharpness"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe"
 			]
 		},
 		{
@@ -2902,6 +3243,30 @@
 				"minecraft:fortune"
 			],
 			"enchantables": [
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe",
+				"minecraft:wooden_pickaxe",
+				"minecraft:stone_pickaxe",
+				"minecraft:iron_pickaxe",
+				"minecraft:golden_pickaxe",
+				"minecraft:diamond_pickaxe",
+				"minecraft:netherite_pickaxe",
+				"minecraft:wooden_shovel",
+				"minecraft:stone_shovel",
+				"minecraft:iron_shovel",
+				"minecraft:golden_shovel",
+				"minecraft:diamond_shovel",
+				"minecraft:netherite_shovel",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_hoe",
+				"minecraft:iron_hoe",
+				"minecraft:golden_hoe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_hoe"
 			]
 		},
 		{
@@ -3035,6 +3400,19 @@
 				"minecraft:sharpness"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace",
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe"
 			]
 		},
 		{
@@ -3121,6 +3499,12 @@
 				"minecraft:soul_speed"
 			],
 			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -3207,6 +3591,12 @@
 				"minecraft:sweeping_edge"
 			],
 			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword"
 			]
 		},
 		{
@@ -3293,6 +3683,12 @@
 				"minecraft:swift_sneak"
 			],
 			"enchantables": [
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings"
 			]
 		},
 		{
@@ -3379,6 +3775,31 @@
 				"minecraft:thorns"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
@@ -3465,6 +3886,73 @@
 				"minecraft:unbreaking"
 			],
 			"enchantables": [
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots",
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace",
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe",
+				"minecraft:wooden_pickaxe",
+				"minecraft:stone_pickaxe",
+				"minecraft:iron_pickaxe",
+				"minecraft:golden_pickaxe",
+				"minecraft:diamond_pickaxe",
+				"minecraft:netherite_pickaxe",
+				"minecraft:wooden_shovel",
+				"minecraft:stone_shovel",
+				"minecraft:iron_shovel",
+				"minecraft:golden_shovel",
+				"minecraft:diamond_shovel",
+				"minecraft:netherite_shovel",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_hoe",
+				"minecraft:iron_hoe",
+				"minecraft:golden_hoe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_hoe",
+				"minecraft:bow",
+				"minecraft:fishing_rod",
+				"minecraft:trident",
+				"minecraft:crossbow",
+				"minecraft:shears",
+				"minecraft:shield",
+				"minecraft:elytra",
+				"minecraft:flint_and_steel",
+				"minecraft:carrot_on_a_stick",
+				"minecraft:warped_fungus_on_a_stick",
+				"minecraft:brush"
 			]
 		},
 		{
@@ -3503,6 +3991,82 @@
 				"minecraft:vanishing_curse"
 			],
 			"enchantables": [
+				"minecraft:compass",
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:netherite_helmet",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:chainmail_chestplate",
+				"minecraft:golden_chestplate",
+				"minecraft:iron_chestplate",
+				"minecraft:diamond_chestplate",
+				"minecraft:netherite_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:netherite_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:golden_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:netherite_boots",
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:iron_sword",
+				"minecraft:golden_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace",
+				"minecraft:wooden_axe",
+				"minecraft:stone_axe",
+				"minecraft:iron_axe",
+				"minecraft:golden_axe",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_axe",
+				"minecraft:wooden_pickaxe",
+				"minecraft:stone_pickaxe",
+				"minecraft:iron_pickaxe",
+				"minecraft:golden_pickaxe",
+				"minecraft:diamond_pickaxe",
+				"minecraft:netherite_pickaxe",
+				"minecraft:wooden_shovel",
+				"minecraft:stone_shovel",
+				"minecraft:iron_shovel",
+				"minecraft:golden_shovel",
+				"minecraft:diamond_shovel",
+				"minecraft:netherite_shovel",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_hoe",
+				"minecraft:iron_hoe",
+				"minecraft:golden_hoe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_hoe",
+				"minecraft:bow",
+				"minecraft:fishing_rod",
+				"minecraft:trident",
+				"minecraft:crossbow",
+				"minecraft:shears",
+				"minecraft:shield",
+				"minecraft:elytra",
+				"minecraft:flint_and_steel",
+				"minecraft:carrot_on_a_stick",
+				"minecraft:warped_fungus_on_a_stick",
+				"minecraft:brush",
+				"minecraft:creeper_head",
+				"minecraft:dragon_head",
+				"minecraft:piglin_head",
+				"minecraft:player_head",
+				"minecraft:zombie_head",
+				"minecraft:skeleton_skull",
+				"minecraft:wither_skeleton_skull",
+				"minecraft:carved_pumpkin"
 			]
 		},
 		{
@@ -3589,6 +4153,7 @@
 				"minecraft:wind_burst"
 			],
 			"enchantables": [
+				"minecraft:mace"
 			]
 		}
 	]
