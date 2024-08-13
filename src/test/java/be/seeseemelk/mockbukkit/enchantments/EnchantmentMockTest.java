@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -50,7 +51,7 @@ class EnchantmentMockTest
 		this.minModifiedCost = new int[]{ 1, 2 };
 		this.maxModifiedCost = new int[]{ 20, 25 };
 		this.enchantment = new EnchantmentMock(key, true, true, maxLevel, minLevel, name, displayNames, minModifiedCost,
-				maxModifiedCost, true, true, Set.of(key));
+				maxModifiedCost, true, true, Set.of(key), Collections.emptySet());
 	}
 
 	@ParameterizedTest

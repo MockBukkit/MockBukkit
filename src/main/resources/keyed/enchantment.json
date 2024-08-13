@@ -34,6 +34,8 @@
 			],
 			"conflicts": [
 				"minecraft:aqua_affinity"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -165,6 +167,8 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -201,6 +205,8 @@
 			],
 			"conflicts": [
 				"minecraft:binding_curse"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -309,6 +315,8 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -419,6 +427,8 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -456,6 +466,8 @@
 			"conflicts": [
 				"minecraft:channeling",
 				"minecraft:riptide"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -587,6 +599,8 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -672,6 +686,8 @@
 			"conflicts": [
 				"minecraft:depth_strider",
 				"minecraft:frost_walker"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -798,6 +814,8 @@
 			],
 			"conflicts": [
 				"minecraft:efficiency"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -903,6 +921,8 @@
 			],
 			"conflicts": [
 				"minecraft:feather_falling"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -966,6 +986,8 @@
 			],
 			"conflicts": [
 				"minecraft:fire_aspect"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1074,6 +1096,8 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1110,6 +1134,8 @@
 			],
 			"conflicts": [
 				"minecraft:flame"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1195,6 +1221,8 @@
 			"conflicts": [
 				"minecraft:silk_touch",
 				"minecraft:fortune"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1259,6 +1287,8 @@
 			"conflicts": [
 				"minecraft:depth_strider",
 				"minecraft:frost_walker"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1390,6 +1420,8 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1427,6 +1459,8 @@
 			"conflicts": [
 				"minecraft:infinity",
 				"minecraft:mending"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1490,6 +1524,8 @@
 			],
 			"conflicts": [
 				"minecraft:knockback"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1574,6 +1610,8 @@
 			],
 			"conflicts": [
 				"minecraft:looting"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1659,6 +1697,8 @@
 			"conflicts": [
 				"minecraft:loyalty",
 				"minecraft:riptide"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1743,6 +1783,8 @@
 			],
 			"conflicts": [
 				"minecraft:luck_of_the_sea"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1827,6 +1869,8 @@
 			],
 			"conflicts": [
 				"minecraft:lure"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1864,6 +1908,8 @@
 			"conflicts": [
 				"minecraft:infinity",
 				"minecraft:mending"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -1901,6 +1947,8 @@
 			"conflicts": [
 				"minecraft:multishot",
 				"minecraft:piercing"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2007,6 +2055,8 @@
 			"conflicts": [
 				"minecraft:multishot",
 				"minecraft:piercing"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2133,6 +2183,8 @@
 			],
 			"conflicts": [
 				"minecraft:power"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2241,6 +2293,8 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2349,6 +2403,8 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2412,6 +2468,8 @@
 			],
 			"conflicts": [
 				"minecraft:punch"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2496,6 +2554,8 @@
 			],
 			"conflicts": [
 				"minecraft:quick_charge"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2580,6 +2640,8 @@
 			],
 			"conflicts": [
 				"minecraft:respiration"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2666,6 +2728,8 @@
 				"minecraft:loyalty",
 				"minecraft:channeling",
 				"minecraft:riptide"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2797,6 +2861,8 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2834,6 +2900,8 @@
 			"conflicts": [
 				"minecraft:silk_touch",
 				"minecraft:fortune"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -2965,6 +3033,8 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3049,6 +3119,8 @@
 			],
 			"conflicts": [
 				"minecraft:soul_speed"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3133,6 +3205,8 @@
 			],
 			"conflicts": [
 				"minecraft:sweeping_edge"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3217,6 +3291,8 @@
 			],
 			"conflicts": [
 				"minecraft:swift_sneak"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3301,6 +3377,8 @@
 			],
 			"conflicts": [
 				"minecraft:thorns"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3385,6 +3463,8 @@
 			],
 			"conflicts": [
 				"minecraft:unbreaking"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3421,6 +3501,8 @@
 			],
 			"conflicts": [
 				"minecraft:vanishing_curse"
+			],
+			"enchantables": [
 			]
 		},
 		{
@@ -3505,6 +3587,8 @@
 			],
 			"conflicts": [
 				"minecraft:wind_burst"
+			],
+			"enchantables": [
 			]
 		}
 	]
