@@ -2,7 +2,9 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+
 import org.bukkit.entity.EntityType;
+import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ArrowMockTest
 {
@@ -41,4 +44,15 @@ class ArrowMockTest
 		assertEquals(6.0, arrow.getDamage());
 	}
 
+	@Test
+	void testBasePotionType()
+	{
+		assertNull(arrow.getBasePotionType());
+
+		arrow.setBasePotionType(PotionType.HEALING);
+		assertEquals(PotionType.HEALING, arrow.getBasePotionType());
+
+		arrow.setBasePotionType(null);
+		assertNull(arrow.getBasePotionType());
+	}
 }
