@@ -5,6 +5,7 @@ import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -149,4 +150,16 @@ class PotionMetaMockTest
 		assertEquals(meta, clone);
 	}
 
+	@Test
+	void testBasePotionType()
+	{
+		PotionMeta meta = new PotionMetaMock();
+		assertNull(meta.getBasePotionType());
+
+		meta.setBasePotionType(PotionType.HEALING);
+		assertEquals(PotionType.HEALING, meta.getBasePotionType());
+
+		meta.setBasePotionType(null);
+		assertNull(meta.getBasePotionType());
+	}
 }
