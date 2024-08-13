@@ -57,4 +57,17 @@ class PolarBearMockTest
 		assertEquals(EntityType.POLAR_BEAR, polarBear.getType());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultPolarBear()
+	{
+		assertEquals(1.19D, polarBear.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyPolarBear()
+	{
+		polarBear.setBaby();
+		assertEquals(0.595D, polarBear.getEyeHeight());
+	}
+
 }

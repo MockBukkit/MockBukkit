@@ -162,4 +162,19 @@ public class EndermanMock extends MonsterMock implements Enderman
 		return EntityType.ENDERMAN;
 	}
 
+	@Override
+	public double getEyeHeight(boolean ignorePose)
+	{
+		if (ignorePose)
+		{
+			return getEyeHeight(EntityState.DEFAULT);
+		}
+
+		if (isScreaming()) {
+			return getEyeHeight(EntityState.ANGRY);
+		}
+
+		return super.getEyeHeight(ignorePose);
+	}
+
 }

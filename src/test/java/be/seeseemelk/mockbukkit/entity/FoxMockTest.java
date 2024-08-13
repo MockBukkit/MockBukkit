@@ -192,4 +192,18 @@ class FoxMockTest
 		assertEquals(EntityType.FOX, fox.getType());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultFox()
+	{
+		assertEquals(0.595D, fox.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyFox()
+	{
+		fox.setBaby();
+		assertEquals(0.2975D, fox.getEyeHeight());
+	}
+
+
 }
