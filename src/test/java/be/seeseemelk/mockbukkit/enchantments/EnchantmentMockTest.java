@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.enchantments;
 
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import com.google.gson.JsonObject;
-import io.papermc.paper.enchantments.EnchantmentRarity;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -33,7 +32,6 @@ class EnchantmentMockTest
 	private Component[] displayNames;
 	private int[] minModifiedCost;
 	private int[] maxModifiedCost;
-	private EnchantmentRarity rarity;
 	private EnchantmentMock enchantment;
 
 	public static Stream<Integer> getAvailableLevels()
