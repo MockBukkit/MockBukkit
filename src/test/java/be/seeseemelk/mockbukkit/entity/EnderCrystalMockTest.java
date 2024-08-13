@@ -40,25 +40,29 @@ class EnderCrystalMockTest
 	}
 
 	@Test
-	void isShowingBottom_GivenDefaultValue() {
+	void isShowingBottom_GivenDefaultValue()
+	{
 		assertFalse(crystal.isShowingBottom());
 	}
 
 	@ParameterizedTest
 	@ValueSource(booleans = {true, false})
-	void isShowingBottom_GivenUpdateInValue(boolean expectedValue) {
+	void isShowingBottom_GivenUpdateInValue(boolean expectedValue)
+	{
 		crystal.setShowingBottom(expectedValue);
 		boolean actual = crystal.isShowingBottom();
 		assertEquals(expectedValue, actual);
 	}
 
 	@Test
-	void getBeamTarget_GivenDefaultValue() {
+	void getBeamTarget_GivenDefaultValue()
+	{
 		assertNull(crystal.getBeamTarget());
 	}
 
 	@Test
-	void getBeamTarget_GivenLocationInTheSameWorld() {
+	void getBeamTarget_GivenLocationInTheSameWorld()
+	{
 
 		World world = new WorldMock();
 		Location entityLocation = new Location(world, 0, 0, 0);
@@ -78,7 +82,8 @@ class EnderCrystalMockTest
 	}
 
 	@Test
-	void setBeamTarget_GivenLocationInDifferentWorld() {
+	void setBeamTarget_GivenLocationInDifferentWorld()
+	{
 
 		World worldA = new WorldMock();
 		Location entityLocation = new Location(worldA, 0, 0, 0);
