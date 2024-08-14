@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Raid}.
+ */
 public class RaidMock implements Raid
 {
 
