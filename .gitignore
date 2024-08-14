@@ -213,6 +213,6 @@ server/
 kls_database.db
 
 # metaminer
-metaminer/bin/
-metaminer/run/
-metaminer/build/
+extra/MetaMiner/bin/
+extra/MetaMiner/run/
+extra/MetaMiner/build/
