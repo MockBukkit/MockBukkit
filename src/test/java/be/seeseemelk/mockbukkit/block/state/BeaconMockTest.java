@@ -213,7 +213,7 @@ class BeaconMockTest
 	{
 		this.beacon.setTier(4);
 		this.beacon.setPrimaryEffect(PotionEffectType.SPEED);
-		this.beacon.setSecondaryEffect(PotionEffectType.JUMP);
+		this.beacon.setSecondaryEffect(PotionEffectType.JUMP_BOOST);
 
 		assertEquals(0, this.beacon.getSecondaryEffect().getAmplifier());
 	}
@@ -233,7 +233,7 @@ class BeaconMockTest
 	{
 		this.beacon.setTier(2);
 		this.beacon.setPrimaryEffect(PotionEffectType.SPEED);
-		this.beacon.setSecondaryEffect(PotionEffectType.JUMP);
+		this.beacon.setSecondaryEffect(PotionEffectType.JUMP_BOOST);
 
 		assertNull(this.beacon.getSecondaryEffect());
 	}
@@ -243,7 +243,7 @@ class BeaconMockTest
 	{
 		this.beacon.setTier(4);
 		this.beacon.setPrimaryEffect(PotionEffectType.SPEED);
-		this.beacon.setSecondaryEffect(PotionEffectType.JUMP);
+		this.beacon.setSecondaryEffect(PotionEffectType.JUMP_BOOST);
 
 		assertNotNull(this.beacon.getSecondaryEffect());
 	}
@@ -252,7 +252,7 @@ class BeaconMockTest
 	void getSecondaryEffect_CorrectTier_NoPrimaryEffect()
 	{
 		this.beacon.setTier(4);
-		this.beacon.setSecondaryEffect(PotionEffectType.JUMP);
+		this.beacon.setSecondaryEffect(PotionEffectType.JUMP_BOOST);
 
 		assertNull(this.beacon.getSecondaryEffect());
 	}

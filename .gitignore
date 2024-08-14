@@ -29,6 +29,7 @@ hs_err_pid*
 
 # User-specific stuff
 .idea/
+!.idea/icon.png
 *.iml
 *.ipr
 
@@ -207,3 +208,6 @@ Temporary Items
 
 # Ignore server folder
 server/
+
+#Kotlin LSP
+kls_database.db

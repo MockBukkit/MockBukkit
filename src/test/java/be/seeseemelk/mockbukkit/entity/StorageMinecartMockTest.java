@@ -3,9 +3,9 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.minecart.StorageMinecart;
-import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ class StorageMinecartMockTest
 	@Test
 	void testGetInventory()
 	{
-		minecart.getInventory().setItem(0, new ItemStack(Material.DIRT));
+		minecart.getInventory().setItem(0, new ItemStackMock(Material.DIRT));
 		assertEquals(Material.DIRT, minecart.getInventory().getItem(0).getType());
 	}
 
@@ -51,7 +51,7 @@ class StorageMinecartMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(minecart.getType(), MINECART_CHEST);
+		assertEquals(minecart.getType(), CHEST_MINECART);
 	}
 
 }

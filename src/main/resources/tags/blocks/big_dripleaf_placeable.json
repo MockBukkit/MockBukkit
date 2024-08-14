@@ -1,8 +1,16 @@
 {
-    "replace": false,
-    "values": [
-        "#minecraft:small_dripleaf_placeable",
-        "#minecraft:dirt",
-        "minecraft:farmland"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:clay",
+		"minecraft:coarse_dirt",
+		"minecraft:dirt",
+		"minecraft:farmland",
+		"minecraft:grass_block",
+		"minecraft:moss_block",
+		"minecraft:mud",
+		"minecraft:muddy_mangrove_roots",
+		"minecraft:mycelium",
+		"minecraft:podzol",
+		"minecraft:rooted_dirt"
+	]
 }

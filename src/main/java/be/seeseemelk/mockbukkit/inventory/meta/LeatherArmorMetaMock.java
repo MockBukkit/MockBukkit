@@ -1,11 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -47,6 +49,13 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	}
 
 	@Override
+	public boolean isDyed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
@@ -83,6 +92,40 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	public void setColor(@Nullable Color color)
 	{
 		this.color = color == null ? Bukkit.getItemFactory().getDefaultLeatherColor() : color;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized LeatherArmorMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the LeatherArmorMetaMock class.
+	 */
+	public static @NotNull LeatherArmorMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		LeatherArmorMetaMock serialMock = new LeatherArmorMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.color = Color.fromARGB((int) args.get("color"));
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an LeatherArmorMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the LeatherArmorMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("color", color.asARGB());
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "LEATHER_ARMOR";
 	}
 
 }

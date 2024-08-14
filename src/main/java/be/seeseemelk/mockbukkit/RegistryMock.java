@@ -1,30 +1,30 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.BlockTypeMock;
+import be.seeseemelk.mockbukkit.block.banner.PatternTypeMock;
 import be.seeseemelk.mockbukkit.damage.DamageTypeMock;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
+import be.seeseemelk.mockbukkit.entity.variant.CatVariantMock;
+import be.seeseemelk.mockbukkit.entity.variant.FrogVariantMock;
+import be.seeseemelk.mockbukkit.entity.variant.VillagerProfessionMock;
+import be.seeseemelk.mockbukkit.entity.variant.VillagerTypeMock;
+import be.seeseemelk.mockbukkit.entity.variant.WolfVariantMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
+import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import be.seeseemelk.mockbukkit.map.MapCursorTypeMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import io.papermc.paper.world.structure.ConfiguredStructure;
-import org.bukkit.GameEvent;
+import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Keyed;
-import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.damage.DamageType;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
-import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,14 +32,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -54,11 +49,11 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private JsonArray keyedData;
 	private Function<JsonObject, T> constructor;
 
-	RegistryMock(Class<T> tClass)
+	public RegistryMock(RegistryKey<T> key)
 	{
 		try
 		{
-			loadKeyedToRegistry(tClass);
+			loadKeyedToRegistry(key);
 		}
 		catch (IOException e)
 		{
@@ -66,11 +61,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 	}
 
-	private void loadKeyedToRegistry(Class<T> tClass) throws IOException
+	private void loadKeyedToRegistry(RegistryKey<T> key) throws IOException
 	{
-		String classNameLowerCase = tClass.getSimpleName().toLowerCase();
-		String fileName = "/keyed/" + classNameLowerCase + ".json";
-		this.constructor = (Function<JsonObject, T>) getConstructor(tClass);
+		String fileName = "/keyed/" + key.key().value() + ".json";
+		this.constructor = (Function<JsonObject, T>) getConstructor(key);
 		try (InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
 		{
 			if (stream == null)
@@ -82,118 +76,88 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 	}
 
-	private Function<JsonObject, ? extends Keyed> getConstructor(Class<T> tClass)
+	private Function<JsonObject, ? extends Keyed> getConstructor(RegistryKey<T> key)
 	{
-		if (tClass == Structure.class)
+		if (key == RegistryKey.STRUCTURE)
 		{
-			return StructureMock::new;
+			return StructureMock::from;
 		}
-		else if (tClass == StructureType.class)
+		else if (key == RegistryKey.STRUCTURE_TYPE)
 		{
-			return StructureTypeMock::new;
+			return StructureTypeMock::from;
 		}
-		else if (tClass == TrimMaterial.class)
+		else if (key == RegistryKey.TRIM_MATERIAL)
 		{
-			return TrimMaterialMock::new;
+			return TrimMaterialMock::from;
 		}
-		else if (tClass == TrimPattern.class)
+		else if (key == RegistryKey.TRIM_PATTERN)
 		{
-			return TrimPatternMock::new;
+			return TrimPatternMock::from;
 		}
-		else if (tClass == MusicInstrument.class)
+		else if (key == RegistryKey.INSTRUMENT)
 		{
-			return MusicInstrumentMock::new;
+			return MusicInstrumentMock::from;
 		}
-		else if (tClass == GameEvent.class)
+		else if (key == RegistryKey.GAME_EVENT)
 		{
-			return GameEventMock::new;
+			return GameEventMock::from;
 		}
-		else if (tClass == Enchantment.class)
+		else if (key == RegistryKey.ENCHANTMENT)
 		{
-			return EnchantmentMock::new;
+			return EnchantmentMock::from;
 		}
-		else if (tClass == PotionEffectType.class)
+		else if (key == RegistryKey.MOB_EFFECT)
 		{
-			return MockPotionEffectType::new;
+			return MockPotionEffectType::from;
 		}
-		else if (tClass == DamageType.class)
+		else if (key == RegistryKey.DAMAGE_TYPE)
 		{
 			return DamageTypeMock::from;
+		}
+		else if (key == RegistryKey.ITEM)
+		{
+			return ItemTypeMock::from;
+		}
+		else if (key == RegistryKey.BLOCK)
+		{
+			return BlockTypeMock::from;
+		}
+		else if (key == RegistryKey.WOLF_VARIANT)
+		{
+			return WolfVariantMock::from;
+		}
+		else if (key == RegistryKey.JUKEBOX_SONG)
+		{
+			return JukeboxSongMock::from;
+		}
+		else if (key == RegistryKey.CAT_VARIANT)
+		{
+			return CatVariantMock::from;
+		}
+		else if (key == RegistryKey.VILLAGER_PROFESSION)
+		{
+			return VillagerProfessionMock::from;
+		}
+		else if (key == RegistryKey.VILLAGER_TYPE)
+		{
+			return VillagerTypeMock::from;
+		}
+		else if (key == RegistryKey.FROG_VARIANT)
+		{
+			return FrogVariantMock::from;
+		}
+		else if (key == RegistryKey.MAP_DECORATION_TYPE)
+		{
+			return MapCursorTypeMock::from;
+		}
+		else if (key == RegistryKey.BANNER_PATTERN)
+		{
+			return PatternTypeMock::from;
 		}
 		else
 		{
 			throw new UnimplementedOperationException();
 		}
-	}
-
-	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
-	{
-		if (tClass == ConfiguredStructure.class)
-		{
-			return new Registry<T>()
-			{
-				@Override
-				public @Nullable T get(@NotNull NamespacedKey key)
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-
-				@Override
-				public @NotNull Stream<T> stream()
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-
-				@NotNull
-				@Override
-				public Iterator<T> iterator()
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-			};
-		}
-		if (getOutlierKeyedClasses().contains(tClass))
-		{
-			return new RegistryMock<>(tClass);
-		}
-
-		return Stream.of(Registry.class.getDeclaredFields())
-				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers()))
-				.filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass))
-				.map(RegistryMock::getValue)
-				.filter(Objects::nonNull)
-				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass.getSimpleName()));
-	}
-
-	private static boolean genericTypeMatches(Field a, Class<?> clazz)
-	{
-		if (a.getGenericType() instanceof ParameterizedType type)
-		{
-			return type.getActualTypeArguments()[0] == clazz;
-		}
-		return false;
-	}
-
-	private static Registry<?> getValue(Field a)
-	{
-		try
-		{
-			return (Registry<?>) a.get(null);
-		}
-		catch (IllegalAccessException e)
-		{
-			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
-		}
-	}
-
-	private static List<Class<? extends Keyed>> getOutlierKeyedClasses()
-	{
-		return List.of(Structure.class, PotionEffectType.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
 	}
 
 	@Override
@@ -227,7 +191,12 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 			{
 				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
 				T tObject = constructor.apply(structureJSONObject);
-				keyedMap.put(tObject.getKey(), tObject);
+				/*
+				 * putIfAbsent fixes the edge case scenario when the constructor initializes class loading of the keyed object,
+				 * which during initialization will trigger this exact method, therefore creating duplicate instances of
+				 * each keyed object.
+				 */
+				keyedMap.putIfAbsent(tObject.getKey(), tObject);
 			}
 		}
 	}

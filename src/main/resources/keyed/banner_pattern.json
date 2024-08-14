@@ -1,0 +1,262 @@
+{
+	"values": [
+		{
+			"identifier": "b",
+			"name": "BASE",
+			"key": "minecraft:base",
+			"ordinal": 0
+		},
+		{
+			"identifier": "bo",
+			"name": "BORDER",
+			"key": "minecraft:border",
+			"ordinal": 30
+		},
+		{
+			"identifier": "bri",
+			"name": "BRICKS",
+			"key": "minecraft:bricks",
+			"ordinal": 35
+		},
+		{
+			"identifier": "mc",
+			"name": "CIRCLE",
+			"key": "minecraft:circle",
+			"ordinal": 24
+		},
+		{
+			"identifier": "cre",
+			"name": "CREEPER",
+			"key": "minecraft:creeper",
+			"ordinal": 32
+		},
+		{
+			"identifier": "cr",
+			"name": "CROSS",
+			"key": "minecraft:cross",
+			"ordinal": 14
+		},
+		{
+			"identifier": "cbo",
+			"name": "CURLY_BORDER",
+			"key": "minecraft:curly_border",
+			"ordinal": 31
+		},
+		{
+			"identifier": "ld",
+			"name": "DIAGONAL_LEFT",
+			"key": "minecraft:diagonal_left",
+			"ordinal": 20
+		},
+		{
+			"identifier": "rud",
+			"name": "DIAGONAL_RIGHT",
+			"key": "minecraft:diagonal_right",
+			"ordinal": 23
+		},
+		{
+			"identifier": "lud",
+			"name": "DIAGONAL_UP_LEFT",
+			"key": "minecraft:diagonal_up_left",
+			"ordinal": 22
+		},
+		{
+			"identifier": "rd",
+			"name": "DIAGONAL_UP_RIGHT",
+			"key": "minecraft:diagonal_up_right",
+			"ordinal": 21
+		},
+		{
+			"identifier": "flw",
+			"name": "FLOW",
+			"key": "minecraft:flow",
+			"ordinal": 41
+		},
+		{
+			"identifier": "flo",
+			"name": "FLOWER",
+			"key": "minecraft:flower",
+			"ordinal": 37
+		},
+		{
+			"identifier": "glb",
+			"name": "GLOBE",
+			"key": "minecraft:globe",
+			"ordinal": 39
+		},
+		{
+			"identifier": "gra",
+			"name": "GRADIENT",
+			"key": "minecraft:gradient",
+			"ordinal": 33
+		},
+		{
+			"identifier": "gru",
+			"name": "GRADIENT_UP",
+			"key": "minecraft:gradient_up",
+			"ordinal": 34
+		},
+		{
+			"identifier": "gus",
+			"name": "GUSTER",
+			"key": "minecraft:guster",
+			"ordinal": 42
+		},
+		{
+			"identifier": "hh",
+			"name": "HALF_HORIZONTAL",
+			"key": "minecraft:half_horizontal",
+			"ordinal": 27
+		},
+		{
+			"identifier": "hhb",
+			"name": "HALF_HORIZONTAL_BOTTOM",
+			"key": "minecraft:half_horizontal_bottom",
+			"ordinal": 29
+		},
+		{
+			"identifier": "vh",
+			"name": "HALF_VERTICAL",
+			"key": "minecraft:half_vertical",
+			"ordinal": 26
+		},
+		{
+			"identifier": "vhr",
+			"name": "HALF_VERTICAL_RIGHT",
+			"key": "minecraft:half_vertical_right",
+			"ordinal": 28
+		},
+		{
+			"identifier": "moj",
+			"name": "MOJANG",
+			"key": "minecraft:mojang",
+			"ordinal": 38
+		},
+		{
+			"identifier": "pig",
+			"name": "PIGLIN",
+			"key": "minecraft:piglin",
+			"ordinal": 40
+		},
+		{
+			"identifier": "mr",
+			"name": "RHOMBUS",
+			"key": "minecraft:rhombus",
+			"ordinal": 25
+		},
+		{
+			"identifier": "sku",
+			"name": "SKULL",
+			"key": "minecraft:skull",
+			"ordinal": 36
+		},
+		{
+			"identifier": "ss",
+			"name": "SMALL_STRIPES",
+			"key": "minecraft:small_stripes",
+			"ordinal": 13
+		},
+		{
+			"identifier": "bl",
+			"name": "SQUARE_BOTTOM_LEFT",
+			"key": "minecraft:square_bottom_left",
+			"ordinal": 1
+		},
+		{
+			"identifier": "br",
+			"name": "SQUARE_BOTTOM_RIGHT",
+			"key": "minecraft:square_bottom_right",
+			"ordinal": 2
+		},
+		{
+			"identifier": "tl",
+			"name": "SQUARE_TOP_LEFT",
+			"key": "minecraft:square_top_left",
+			"ordinal": 3
+		},
+		{
+			"identifier": "tr",
+			"name": "SQUARE_TOP_RIGHT",
+			"key": "minecraft:square_top_right",
+			"ordinal": 4
+		},
+		{
+			"identifier": "sc",
+			"name": "STRAIGHT_CROSS",
+			"key": "minecraft:straight_cross",
+			"ordinal": 15
+		},
+		{
+			"identifier": "bs",
+			"name": "STRIPE_BOTTOM",
+			"key": "minecraft:stripe_bottom",
+			"ordinal": 5
+		},
+		{
+			"identifier": "cs",
+			"name": "STRIPE_CENTER",
+			"key": "minecraft:stripe_center",
+			"ordinal": 9
+		},
+		{
+			"identifier": "dls",
+			"name": "STRIPE_DOWNLEFT",
+			"key": "minecraft:stripe_downleft",
+			"ordinal": 12
+		},
+		{
+			"identifier": "drs",
+			"name": "STRIPE_DOWNRIGHT",
+			"key": "minecraft:stripe_downright",
+			"ordinal": 11
+		},
+		{
+			"identifier": "ls",
+			"name": "STRIPE_LEFT",
+			"key": "minecraft:stripe_left",
+			"ordinal": 7
+		},
+		{
+			"identifier": "ms",
+			"name": "STRIPE_MIDDLE",
+			"key": "minecraft:stripe_middle",
+			"ordinal": 10
+		},
+		{
+			"identifier": "rs",
+			"name": "STRIPE_RIGHT",
+			"key": "minecraft:stripe_right",
+			"ordinal": 8
+		},
+		{
+			"identifier": "ts",
+			"name": "STRIPE_TOP",
+			"key": "minecraft:stripe_top",
+			"ordinal": 6
+		},
+		{
+			"identifier": "bt",
+			"name": "TRIANGLE_BOTTOM",
+			"key": "minecraft:triangle_bottom",
+			"ordinal": 16
+		},
+		{
+			"identifier": "tt",
+			"name": "TRIANGLE_TOP",
+			"key": "minecraft:triangle_top",
+			"ordinal": 17
+		},
+		{
+			"identifier": "bts",
+			"name": "TRIANGLES_BOTTOM",
+			"key": "minecraft:triangles_bottom",
+			"ordinal": 18
+		},
+		{
+			"identifier": "tts",
+			"name": "TRIANGLES_TOP",
+			"key": "minecraft:triangles_top",
+			"ordinal": 19
+		}
+	]
+}

@@ -140,7 +140,7 @@ class BannerMockTest
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
 		assertEquals(1, meta.numberOfPatterns());
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 		assertEquals(2, meta.numberOfPatterns());
 
 		assertEquals(DyeColor.BLUE, meta.getPattern(0).getColor());
@@ -151,7 +151,7 @@ class BannerMockTest
 	void getPattern_ReturnsCorrectPattern()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		assertEquals(DyeColor.BLUE, meta.getPattern(0).getColor());
 		assertEquals(DyeColor.CYAN, meta.getPattern(1).getColor());
@@ -161,7 +161,7 @@ class BannerMockTest
 	void removePattern_RemovesCorrectPattern()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		meta.removePattern(0);
 
@@ -172,7 +172,7 @@ class BannerMockTest
 	void setPattern_SetsCorrectPattern()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		meta.setPattern(0, new Pattern(DyeColor.RED, PatternType.STRIPE_TOP));
 
@@ -184,7 +184,7 @@ class BannerMockTest
 	void numberOfPatterns_CorrectNumber()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		assertEquals(2, meta.numberOfPatterns());
 	}

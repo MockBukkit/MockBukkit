@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:diamond_sword",
+		"minecraft:golden_sword",
+		"minecraft:iron_sword",
+		"minecraft:mace",
+		"minecraft:netherite_sword",
+		"minecraft:stone_sword",
+		"minecraft:wooden_sword"
+	]
+}

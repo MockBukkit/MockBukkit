@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.potion.PotionUtils;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Particle;
@@ -29,8 +29,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	private float radius = 3.0f;
 	private float radiusOnUse = 0.0f;
 	private float radiusPerTick = 0.0f;
-	private Particle particle = Particle.SPELL_MOB;
-	private PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
+	private PotionType potionType;
+	private Particle particle = Particle.ENTITY_EFFECT;
 	private final List<PotionEffect> customEffects = new ArrayList<>();
 	private int color = 0;
 	private ProjectileSource source = null;
@@ -152,44 +152,33 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public void setBasePotionData(@NotNull PotionData data)
+	public void setBasePotionData(@Nullable PotionData data)
 	{
-		Preconditions.checkNotNull(data, "PotionData cannot be null");
-		this.basePotionData = data;
+		setBasePotionType(PotionUtils.fromBukkit(data));
 	}
 
 	@Override
-	public @NotNull PotionData getBasePotionData()
+	public @Nullable PotionData getBasePotionData()
 	{
-		return this.basePotionData;
+		return PotionUtils.toBukkit(getBasePotionType());
 	}
 
 	@Override
-	public void setBasePotionType(@NotNull PotionType type)
+	public void setBasePotionType(@Nullable PotionType type)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.potionType = type;
 	}
 
 	@Override
-	public @NotNull PotionType getBasePotionType()
+	public @Nullable PotionType getBasePotionType()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return potionType;
 	}
 
 	@Override
 	public boolean hasCustomEffects()
 	{
-		PotionEffectType effectType = this.basePotionData.getType().getEffectType();
-		if (effectType != null)
-		{
-			return customEffects.stream().anyMatch(effect -> !effect.getType().equals(effectType));
-		}
-		else
-		{
-			return !this.customEffects.isEmpty();
-		}
+		return !this.customEffects.isEmpty();
 	}
 
 	@Override

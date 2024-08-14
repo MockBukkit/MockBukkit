@@ -171,13 +171,6 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated(since = "1.13")
-	public @NotNull Material updateMaterial(ItemMeta meta, @NotNull Material material)
-	{
-		return material;
-	}
-
-	@Override
 	public @NotNull ItemStack enchantWithLevels(@NotNull ItemStack itemStack, @Range(from = 1L, to = 30L) int levels, boolean allowTreasure, @NotNull Random random)
 	{
 		// TODO Auto-generated method stub
@@ -208,8 +201,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public @NotNull ItemStack ensureServerConversions(@NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return item;
 	}
 
 	@Override

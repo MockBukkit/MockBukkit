@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class SnowballMock extends ThrowableProjectileMock implements Snowball
 {
 
-	private ItemStack item = new ItemStack(Material.SNOWBALL);
+	private ItemStack item = new ItemStackMock(Material.SNOWBALL);
 
 	/**
 	 * Constructs a new {@link SnowballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -37,7 +38,7 @@ public class SnowballMock extends ThrowableProjectileMock implements Snowball
 	{
 		Preconditions.checkArgument(item != null, "Item cannot be null");
 
-		ItemStack localCopy = new ItemStack(item);
+		ItemStack localCopy = new ItemStackMock(item);
 		localCopy.setAmount(1);
 		this.item = localCopy;
 	}

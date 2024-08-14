@@ -83,7 +83,7 @@ public class ExplosiveMinecartMock extends MinecartMock implements ExplosiveMine
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.MINECART_TNT;
+		return EntityType.TNT_MINECART;
 	}
 
 }

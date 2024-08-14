@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.potion.PotionUtils;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,8 +26,8 @@ import java.util.Objects;
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
 
+	private @Nullable PotionType type;
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
-	private @NotNull PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
 	private @Nullable Color color;
 
 	/**
@@ -46,7 +48,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		super(meta);
 
 		this.effects = new ArrayList<>(meta.getCustomEffects());
-		this.basePotionData = meta.getBasePotionData();
+		this.type = meta.getBasePotionType();
 		this.color = meta.getColor();
 	}
 
@@ -56,7 +58,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + effects.hashCode();
-		result = prime * result + basePotionData.hashCode();
+		result = prime * result + type.hashCode();
 		result = prime * result + (color == null ? 0 : color.hashCode());
 		return result;
 	}
@@ -78,13 +80,14 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		}
 
 		return effects.equals(other.effects) && Objects.equals(color, other.color)
-				&& basePotionData.equals(other.basePotionData);
+				&& type == other.type;
 	}
 
 	@Override
 	public @NotNull PotionMetaMock clone()
 	{
 		PotionMetaMock mock = (PotionMetaMock) super.clone();
+		mock.type = type;
 		mock.effects = new ArrayList<>(effects);
 		mock.color = color == null ? null : Color.fromRGB(color.asRGB());
 		return mock;
@@ -195,31 +198,33 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	@Deprecated(since = "1.20")
-	public void setBasePotionData(@NotNull PotionData data)
+	public void setBasePotionData(@Nullable PotionData data)
 	{
-		this.basePotionData = new PotionData(data.getType(), data.isExtended(), data.isUpgraded());
+		setBasePotionType(PotionUtils.fromBukkit(data));
 	}
 
 	@Override
-	@Deprecated(since = "1.20")
-	public @NotNull PotionData getBasePotionData()
+	public @Nullable PotionData getBasePotionData()
 	{
-		return new PotionData(basePotionData.getType(), basePotionData.isExtended(), basePotionData.isUpgraded());
+		return PotionUtils.toBukkit(getBasePotionType());
 	}
 
 	@Override
-	public void setBasePotionType(@NotNull PotionType type)
+	public void setBasePotionType(@Nullable PotionType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.type = type;
 	}
 
 	@Override
-	public @NotNull PotionType getBasePotionType()
+	public @Nullable PotionType getBasePotionType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.type;
+	}
+
+	@Override
+	public boolean hasBasePotionType()
+	{
+		return this.type != null;
 	}
 
 	@Override
@@ -228,6 +233,42 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized PotionMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the PotionMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull PotionMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		PotionMetaMock serialMock = new PotionMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
+				.map(PotionEffect::new).toList();
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an PotionMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the PotionMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("effects", this.effects.stream().map(PotionEffect::serialize).toList());
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "POTION";
 	}
 
 }

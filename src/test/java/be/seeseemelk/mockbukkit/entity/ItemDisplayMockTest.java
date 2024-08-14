@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemDisplay;
@@ -41,7 +42,7 @@ class ItemDisplayMockTest
 	@Test
 	void setItemStack()
 	{
-		ItemStack itemStack = new ItemStack(Material.ACACIA_FENCE);
+		ItemStack itemStack = new ItemStackMock(Material.ACACIA_FENCE);
 		itemDisplay.setItemStack(itemStack);
 		assertEquals(itemStack, itemDisplay.getItemStack());
 	}

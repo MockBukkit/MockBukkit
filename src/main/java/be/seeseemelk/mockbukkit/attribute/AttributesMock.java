@@ -25,7 +25,7 @@ public class AttributesMock
 			Map.entry(Attribute.GENERIC_ARMOR, 0.0),
 			Map.entry(Attribute.GENERIC_ARMOR_TOUGHNESS, 0.0),
 			Map.entry(Attribute.GENERIC_LUCK, 0.0),
-			Map.entry(Attribute.HORSE_JUMP_STRENGTH, 0.7),
+			Map.entry(Attribute.GENERIC_JUMP_STRENGTH, 0.7),
 			Map.entry(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0)
 	);
 

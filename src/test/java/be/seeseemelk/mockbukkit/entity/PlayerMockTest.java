@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.block.state.TileStateMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
@@ -70,14 +71,19 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -96,6 +102,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -304,7 +311,7 @@ class PlayerMockTest
 	@Test
 	void damage_ExactlyHealth_ZeroAndDeathEvent()
 	{
-		player.simulateDamage(player.getHealth(),(Entity) null);
+		player.simulateDamage(player.getHealth(), (Entity) null);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
@@ -346,7 +353,7 @@ class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
-		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		player.setItemInHand(new ItemStackMock(Material.DIAMOND_SWORD));
 		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
@@ -821,6 +828,60 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getHeight_WhileStanding()
+	{
+		assertEquals(1.8D, player.getHeight());
+	}
+
+	@Test
+	void getHeight_WhileSneaking()
+	{
+		player.setSneaking(true);
+		assertEquals(1.5D, player.getHeight());
+	}
+
+	@Test
+	void getHeight_WhileSleeping()
+	{
+		player.setSleeping(true);
+		assertEquals(0.2D, player.getHeight());
+	}
+
+	@Test
+	void getHeight_WhileSwimming()
+	{
+		player.setSwimming(true);
+		assertEquals(0.6D, player.getHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileStanding()
+	{
+		assertEquals(1.53D, player.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSneaking()
+	{
+		player.setSneaking(true);
+		assertEquals(1.275D, player.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSleeping()
+	{
+		player.setSleeping(true);
+		assertEquals(0.17D, player.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSwimming()
+	{
+		player.setSwimming(true);
+		assertEquals(0.51D, player.getEyeHeight());
+	}
+
+	@Test
 	void getPlayer_SneakingEyeHeight()
 	{
 		player.setSneaking(true);
@@ -865,13 +926,13 @@ class PlayerMockTest
 		Location loc = new Location(player.getWorld(), 400, 80, 400);
 		loc.getBlock().setType(Material.LIGHT_BLUE_BED);
 
-		assertNull(player.getBedSpawnLocation());
+		assertNull(player.getRespawnLocation());
 
-		player.setBedSpawnLocation(loc);
-		assertEquals(loc, player.getBedSpawnLocation());
+		player.setRespawnLocation(loc);
+		assertEquals(loc, player.getRespawnLocation());
 
-		player.setBedSpawnLocation(null);
-		assertNull(player.getBedSpawnLocation());
+		player.setRespawnLocation(null);
+		assertNull(player.getRespawnLocation());
 	}
 
 	@Test
@@ -886,6 +947,20 @@ class PlayerMockTest
 		// Force the Bed Spawn Location
 		player.setBedSpawnLocation(loc, true);
 		assertEquals(loc, player.getBedSpawnLocation());
+	}
+
+	@Test
+	void testRespawnLocationForce()
+	{
+		Location loc = new Location(player.getWorld(), 400, 80, 400);
+
+		// Location is not actually a Bed and it should fail
+		player.setRespawnLocation(loc);
+		assertNull(player.getRespawnLocation());
+
+		// Force the Bed Spawn Location
+		player.setRespawnLocation(loc, true);
+		assertEquals(loc, player.getRespawnLocation());
 	}
 
 	@Test
@@ -909,7 +984,7 @@ class PlayerMockTest
 		World world = player.getWorld();
 		world.setGameRule(GameRule.KEEP_INVENTORY, false);
 
-		player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+		player.getInventory().setItem(0, new ItemStackMock(Material.DIAMOND));
 		player.setHealth(0.0);
 
 		// The Player should have lost their inventory
@@ -923,7 +998,7 @@ class PlayerMockTest
 		World world = player.getWorld();
 		world.setGameRule(GameRule.KEEP_INVENTORY, true);
 
-		player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+		player.getInventory().setItem(0, new ItemStackMock(Material.DIAMOND));
 		player.setHealth(0.0);
 
 		// The Player should have kept their inventory
@@ -1303,6 +1378,47 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerHide_HideEntityWithPlayerCanSee()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PlayerMock player2 = server.addPlayer();
+		player.hideEntity(plugin1, player2);
+		assertFalse(player.canSee(player2));
+		player.showEntity(plugin1, player2);
+		assertTrue(player.canSee(player2));
+	}
+
+	@Test
+	void testEntityHide_InitialState()
+	{
+		PigMock pig = new PigMock(server, UUID.randomUUID());
+		assertTrue(player.canSee(pig));
+	}
+
+	@Test
+	void testEntityHide_NewImplementation()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PigMock pig = new PigMock(server, UUID.randomUUID());
+		player.hideEntity(plugin1, pig);
+		assertFalse(player.canSee(pig));
+		player.showEntity(plugin1, pig);
+		assertTrue(player.canSee(pig));
+	}
+
+	@Test
+	void testEntityHide_HideCommandIssuedMultipleTimes()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PigMock pig = new PigMock(server, UUID.randomUUID());
+		player.hideEntity(plugin1, pig);
+		player.hideEntity(plugin1, pig);
+		assertFalse(player.canSee(pig));
+		player.showEntity(plugin1, pig);
+		assertTrue(player.canSee(pig));
+	}
+
+	@Test
 	void testPlayerTeleport_WithCause_EventFired()
 	{
 		Location from = player.getLocation();
@@ -1402,7 +1518,7 @@ class PlayerMockTest
 	@Test
 	void testTeleport_DontCloseCraftingInventory()
 	{
-		ItemStack itemStack = new ItemStack(Material.DEEPSLATE);
+		ItemStack itemStack = new ItemStackMock(Material.DEEPSLATE);
 		player.getOpenInventory().setCursor(itemStack);
 		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
 		assertEquals(itemStack, player.getOpenInventory().getCursor());
@@ -1500,13 +1616,20 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE)));
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStackMock(Material.DIAMOND_CHESTPLATE));
+		});
 	}
 
 	@Test
 	void testPlayerSendEquipmentChange_Map()
 	{
-		assertDoesNotThrow(() -> player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST,
+					new ItemStackMock(Material.DIAMOND_CHESTPLATE)));
+		});
 	}
 
 	@Test
@@ -1583,7 +1706,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Correct_DataType()
 	{
-		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
+		player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStackMock(Material.STONE));
 	}
 
 	@Test
@@ -1593,7 +1716,7 @@ class PlayerMockTest
 		Object wrongObj = new Object();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
+			player.spawnParticle(Particle.ITEM, loc, 1, wrongObj);
 		});
 	}
 
@@ -1798,7 +1921,7 @@ class PlayerMockTest
 	@Test
 	void testSimulateConsumeItem()
 	{
-		ItemStack consumable = new ItemStack(Material.POTATO);
+		ItemStack consumable = new ItemStackMock(Material.POTATO);
 
 		player.simulateConsumeItem(consumable);
 
@@ -1816,14 +1939,14 @@ class PlayerMockTest
 	@Test
 	void testSimulateConsumeItemWithInvalidItem()
 	{
-		ItemStack nonConsumable = new ItemStack(Material.STONE);
+		ItemStack nonConsumable = new ItemStackMock(Material.STONE);
 		assertThrows(IllegalArgumentException.class, () -> player.simulateConsumeItem(nonConsumable));
 	}
 
 	@Test
 	void testAssertItemConsumedWithNotConsumedItem()
 	{
-		ItemStack notConsumed = new ItemStack(Material.APPLE);
+		ItemStack notConsumed = new ItemStackMock(Material.APPLE);
 		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(notConsumed));
 	}
 
@@ -1832,6 +1955,75 @@ class PlayerMockTest
 	{
 		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
 	}
+
+	@Test
+	void testSimulateConsumeItemStatusEffectIsAppliedFromItem()
+	{
+		ItemStack edibleWithStatusEffect = new ItemStack(Material.GOLDEN_APPLE);
+		player.simulateConsumeItem(edibleWithStatusEffect);
+		assertNotNull(player.getPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testSimulateConsumeItemStatusEffectWithProbabilityIsAlwaysApplied()
+	{
+		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
+		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, true);
+		assertNotNull(player.getPotionEffect(PotionEffectType.HUNGER));
+	}
+
+	@Test
+	void testSimulateConsumeItemStatusEffectWithProbabilityIsNotApplied()
+	{
+		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
+		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, false);
+		assertNull(player.getPotionEffect(PotionEffectType.HUNGER));
+	}
+
+	/*
+	Commented out so there are no skipped tests for now.
+
+	@Disabled("PotionMetaMock#{get,set}BasePotionType is not yet implemented, which is used in this test.")
+	@ParameterizedTest
+	@MethodSource("potionItemProvider")
+	void testSimulateConsumePotionItemWithBaseEffectIsApplied(Supplier<ItemStack> potionSupplier, PotionEffect inflictedEffect) {
+		ItemStack potion = potionSupplier.get();
+		player.simulateConsumeItem(potion);
+		assertEquals(inflictedEffect, player.getPotionEffect(inflictedEffect.getType()));
+	}
+
+	private static Stream<Arguments> potionItemProvider() {
+		return Stream.of(
+				Arguments.of(
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.LONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.STRONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
+						(Supplier<ItemStack>) () -> potionItemStack(PotionType.AWKWARD), null
+				)
+		);
+	}
+
+	private static ItemStack potionItemStack(PotionType potionType) {
+		ItemStack itemStack = new ItemStack(Material.POTION);
+		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+		potionMeta.setBasePotionType(potionType);
+		itemStack.setItemMeta(potionMeta);
+		return itemStack;
+	}
+
+
+	@Test
+	void testSimulateConsumePotionItemWithCustomEffectIsApplies()
+	{
+		ItemStack itemStack = new ItemStack(Material.POTION);
+		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+		PotionEffect customEffect = new PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
+		potionMeta.addCustomEffect(customEffect, true);
+		itemStack.setItemMeta(potionMeta);
+		player.simulateConsumeItem(itemStack);
+		assertEquals(customEffect, player.getPotionEffect(PotionEffectType.JUMP_BOOST));
+	}
+	 */
 
 	@Test
 	void assertSaid_Spigot_CorrectMessage_DoesNotAssert()
@@ -1869,7 +2061,7 @@ class PlayerMockTest
 	void testAssertInventoryViewWithPredicate()
 	{
 		InventoryMock inventory = server.createInventory(player, InventoryType.LOOM);
-		ItemStack item = new ItemStack(Material.POTATO);
+		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
 		player.assertInventoryView(InventoryType.LOOM, view -> view.contains(item));
@@ -1879,7 +2071,7 @@ class PlayerMockTest
 	void testAssertInventoryViewWithPredicateFails()
 	{
 		InventoryMock inventory = server.createInventory(player, InventoryType.LOOM);
-		ItemStack item = new ItemStack(Material.POTATO);
+		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
 		assertThrows(AssertionError.class, () ->

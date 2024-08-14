@@ -15,11 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v2
-      - name: Set up JDK 17
+        uses: gradle/wrapper-validation-action@v3
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: 17
+          java-version: 21
           distribution: 'temurin'
 
       - name: Restore caches
@@ -45,7 +45,7 @@ jobs:
           path: 'build/reports/checkstyle/**.xml'
 
       - name: Store Private key
-        uses: DamianReeves/write-file-action@v1.2
+        uses: DamianReeves/write-file-action@v1.3
         if: ${{ github.ref_type == 'tag' }}
         with:
           path: private.key
@@ -67,7 +67,7 @@ jobs:
 
           ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
             -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::') \
-            -PossrhUsername=seeseemelk \
+            -PossrhUsername=Iu0XBMzI \
             -PossrhPassword=$OSSRH_PASSWORD \
             -Psigning.secretKeyRingFile=private.gpg \
             -Psigning.keyId=${{ secrets.PRIV_KEY_ID }} \

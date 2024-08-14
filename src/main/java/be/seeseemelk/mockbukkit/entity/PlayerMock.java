@@ -6,7 +6,9 @@ import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
+import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
@@ -33,6 +35,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.GameEvent;
@@ -41,12 +44,16 @@ import org.bukkit.GameRule;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
+import org.bukkit.ServerLinks;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
+import org.bukkit.UnsafeValues;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -61,6 +68,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -70,6 +79,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
@@ -99,17 +109,21 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.net.InetAddress;
@@ -134,6 +148,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
@@ -161,19 +176,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private int expTotal = 0;
 	private float exp = 0;
 	private int expCooldown = 0;
-	private boolean sneaking = false;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
 	private boolean scaledHealth = false;
 	private double healthScale = 20;
 	private Location compassTarget;
-	private @Nullable Location bedSpawnLocation;
+	private @Nullable Location respawnLocation;
 	private @Nullable InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
+	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
 	private final Queue<String> title = new LinkedTransferQueue<>();
@@ -291,14 +305,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
-	 * Simulates a Player consuming an Edible Item
+	 * Simulates a Player consuming an Edible Item. Some edibles inflict status effects on the consumer with a certain
+	 * probability.
 	 *
-	 * @param consumable The Item to consume
+	 * @param consumable                The Item to consume
+	 * @param alwaysInflictPotionEffect Whether to always inflict a potion effect from food, regardless of probability.
+	 *                                  If this is `false` and the food item has a probability to inflict the effect
+	 *                                  lesser than 0, it will not do so. This does not prevent effects from
+	 *                                  being inflicted that have a probability of 1. The value is ignored if the edible
+	 *                                  does not inflict any potion effects.
+	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
-	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	public void simulateConsumeItem(@NotNull ItemStack consumable, boolean alwaysInflictPotionEffect)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
-		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
+		// potions are not considered edible, but they can be consumed
+		Preconditions.checkArgument(consumable.getType().isEdible() || consumable.getType() == Material.POTION, "Item is not Consumable");
 
 		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
 		//how it would sound like
@@ -330,8 +352,46 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 							!Bukkit.isPrimaryThread());
 			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
 		}
-
+		else
+		{
+			// apply status effects
+			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
+			if (foodConsumption != null)
+			{
+				for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
+				{
+					if (foodEffect.probability() == 1 || alwaysInflictPotionEffect)
+					{
+						addPotionEffect(foodEffect.potionEffect());
+					}
+				}
+			}
+			else if (consumable.hasItemMeta() && consumable.getItemMeta() instanceof PotionMeta potionMeta)
+			{
+				PotionType.InternalPotionData internalPotionData = server.getUnsafe().getInternalPotionData(Registry.POTION.getKey(potionMeta.getBasePotionType()));
+				for (PotionEffect baseEffect : internalPotionData.getPotionEffects())
+				{
+					addPotionEffect(baseEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+				for (PotionEffect customEffect : potionMeta.getCustomEffects())
+				{
+					addPotionEffect(customEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+			}
+		}
 		consumedItems.add(consumable);
+	}
+
+	/**
+	 * Simulates a Player consuming an Edible Item. If the edible inflicts status effects, these will be applied
+	 * regardless of their probability.
+	 *
+	 * @param consumable The Item to consume
+	 * @see PlayerMock#simulateConsumeItem(ItemStack, boolean)
+	 */
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	{
+		simulateConsumeItem(consumable, true);
 	}
 
 	/**
@@ -497,7 +557,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public void respawn()
 	{
-		Location respawnLocation = getBedSpawnLocation();
+		Location respawnLocation = getRespawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
 
 		// TODO: Respawn Anchors are not yet supported.
@@ -695,20 +755,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getEyeHeight()
-	{
-		return getEyeHeight(false);
-	}
-
-	@Override
-	public double getEyeHeight(boolean ignorePose)
-	{
-		if (isSneaking() && !ignorePose)
-			return 1.54D;
-		return 1.62D;
 	}
 
 	@Override
@@ -921,6 +967,44 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @Nullable InetSocketAddress getHAProxyAddress()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isTransferred()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public void transfer(@NotNull String host, int port)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public @NotNull CompletableFuture<byte[]> retrieveCookie(@NotNull NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public void storeCookie(@NotNull NamespacedKey key, @NotNull byte[] value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public int getProtocolVersion()
 	{
 		// TODO Auto-generated method stub
@@ -1047,18 +1131,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSneaking()
-	{
-		return sneaking;
-	}
-
-	@Override
-	public void setSneaking(boolean sneaking)
-	{
-		this.sneaking = sneaking;
-	}
-
 	/**
 	 * Simulates sneaking.
 	 *
@@ -1071,7 +1143,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
-			this.sneaking = event.isSneaking();
+			setSneaking(event.isSneaking());
 		}
 		return event;
 	}
@@ -1949,19 +2021,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
-
-	@Nullable
-	@Override
-	public Location getBedSpawnLocation()
-	{
-		return bedSpawnLocation;
-	}
-
 	@Override
 	public @Nullable Location getRespawnLocation()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.respawnLocation;
+	}
+
+	@Override
+	public @Nullable Location getBedSpawnLocation()
+	{
+		return getRespawnLocation();
 	}
 
 	@Override
@@ -1977,32 +2046,30 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void setRespawnLocation(@Nullable Location loc)
+	{
+		setRespawnLocation(loc, false);
+	}
+
+	@Override
 	public void setBedSpawnLocation(@Nullable Location loc)
 	{
 		setBedSpawnLocation(loc, false);
 	}
 
 	@Override
-	public void setRespawnLocation(@Nullable Location location)
+	public void setBedSpawnLocation(@Nullable Location loc, boolean override)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setRespawnLocation(loc, override);
 	}
 
 	@Override
-	public void setBedSpawnLocation(@Nullable Location loc, boolean force)
+	public void setRespawnLocation(@Nullable Location loc, boolean override)
 	{
-		if (force || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
+		if (override || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
 		{
-			this.bedSpawnLocation = loc;
+			this.respawnLocation = loc;
 		}
-	}
-
-	@Override
-	public void setRespawnLocation(@Nullable Location location, boolean b)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2034,8 +2101,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		hiddenPlayers.putIfAbsent(player.getUniqueId(), new HashSet<>());
-		Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		hiddenEntities.putIfAbsent(player.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenEntities.get(player.getUniqueId());
 		blockingPlugins.add(plugin);
 	}
 
@@ -2052,13 +2119,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		if (hiddenPlayers.containsKey(player.getUniqueId()))
+		if (hiddenEntities.containsKey(player.getUniqueId()))
 		{
-			Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			Set<Plugin> blockingPlugins = hiddenEntities.get(player.getUniqueId());
 			blockingPlugins.remove(plugin);
 			if (blockingPlugins.isEmpty())
 			{
-				hiddenPlayers.remove(player.getUniqueId());
+				hiddenEntities.remove(player.getUniqueId());
 			}
 		}
 	}
@@ -2067,32 +2134,42 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean canSee(@NotNull Player player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
+		return !hiddenEntities.containsKey(player.getUniqueId()) &&
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 
 	@Override
-	@ApiStatus.Experimental
 	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		hiddenEntities.putIfAbsent(entity.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenEntities.get(entity.getUniqueId());
+		blockingPlugins.add(plugin);
 	}
 
 	@Override
-	@ApiStatus.Experimental
 	public void showEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		if (hiddenEntities.containsKey(entity.getUniqueId()))
+		{
+			Set<Plugin> blockingPlugins = hiddenEntities.get(entity.getUniqueId());
+			blockingPlugins.remove(plugin);
+			if (blockingPlugins.isEmpty())
+			{
+				hiddenEntities.remove(entity.getUniqueId());
+			}
+		}
 	}
 
 	@Override
 	public boolean canSee(@NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return !hiddenEntities.containsKey(entity.getUniqueId());
 	}
 
 	@Override
@@ -2293,7 +2370,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.health = 0;
 
 		List<ItemStack> drops = new ArrayList<>(Arrays.asList(getInventory().getContents()));
-		PlayerDeathEvent event = new PlayerDeathEvent(this, drops, 0, getName() + " got killed");
+		PlayerDeathEvent event = new PlayerDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build(), drops, 0, getName() + " got killed");
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Terminate any InventoryView and the cursor item
@@ -2513,7 +2590,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 								  double offsetZ, double extra, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
-
 	}
 
 	@Override
@@ -2525,6 +2601,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			throw new IllegalArgumentException("data should be " + particle.getDataType() + " got " + data.getClass());
 		}
+	}
+
+	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
+	{
+		// We currently have no way of properly spawning particles, therefore the force parameter is unused
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
+	}
+
+	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
+	{
+		// We currently have no way of properly spawning particles, therefore the force parameter is unused
+		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
@@ -2706,7 +2796,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public @Nullable String getResourcePackHash()
 	{
 		// TODO Auto-generated method stub
@@ -2723,7 +2813,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void addResourcePack(@NotNull UUID id, @NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
 	{
-
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2915,6 +3006,48 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void startUsingItem(@NotNull EquipmentSlot hand)
+	{
+
+	}
+
+	@Override
+	public void completeUsingActiveItem()
+	{
+
+	}
+
+	@Override
+	public int getActiveItemRemainingTime()
+	{
+		return 0;
+	}
+
+	@Override
+	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
+	{
+
+	}
+
+	@Override
+	public boolean hasActiveItem()
+	{
+		return false;
+	}
+
+	@Override
+	public int getActiveItemUsedTime()
+	{
+		return 0;
+	}
+
+	@Override
+	public @NotNull EquipmentSlot getActiveItemHand()
+	{
+		return null;
+	}
+
+	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
@@ -2930,6 +3063,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void resetIdleDuration()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull @Unmodifiable Set<Long> getSentChunkKeys()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull @Unmodifiable Set<Chunk> getSentChunks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isChunkSent(long chunkKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2971,6 +3125,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendExperienceChange(float progress)
 	{
 		this.sendExperienceChange(progress, this.getLevel());
@@ -3006,6 +3167,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void sendHurtAnimation(float yaw)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendLinks(@NotNull ServerLinks links)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -3109,6 +3277,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
+	{
+		return null;
+	}
+
+	@Override
 	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot, @NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(entity, "entity must not be null");
@@ -3133,7 +3307,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setOp(boolean isOperator)
 	{
-
 		if (isOperator)
 		{
 			server.getPlayerList().addOperator(this.getUniqueId());
@@ -3142,7 +3315,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			server.getPlayerList().removeOperator(this.getUniqueId());
 		}
-
+		recalculatePermissions();
 	}
 
 	@Override

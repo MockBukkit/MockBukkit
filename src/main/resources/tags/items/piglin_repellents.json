@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:soul_torch",
-        "minecraft:soul_lantern",
-        "minecraft:soul_campfire"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:soul_campfire",
+		"minecraft:soul_lantern",
+		"minecraft:soul_torch"
+	]
 }

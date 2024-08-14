@@ -19,6 +19,7 @@ public class FireballMock extends ProjectileMock implements Fireball
 	private boolean isIncendiary;
 	private @NotNull Vector direction = new Vector();
 	private float blastYield = 1.0f;
+	private @NotNull Vector acceleration = new Vector();
 
 	/**
 	 * Constructs a new {@link FireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -42,6 +43,33 @@ public class FireballMock extends ProjectileMock implements Fireball
 	public @NotNull Vector getDirection()
 	{
 		return this.direction;
+	}
+
+	@Override
+	public void setAcceleration(@NotNull Vector acceleration)
+	{
+		Preconditions.checkArgument(acceleration != null, "Vector acceleration cannot be null");
+		this.acceleration = acceleration;
+	}
+
+	@Override
+	public @NotNull Vector getAcceleration()
+	{
+		return this.acceleration;
+	}
+
+	@Override
+	@Deprecated(since = "1.20.6")
+	public void setPower(@NotNull Vector power)
+	{
+		this.setAcceleration(power);
+	}
+
+	@Override
+	@Deprecated(since = "1.20.6")
+	public @NotNull Vector getPower()
+	{
+		return this.getAcceleration();
 	}
 
 	@Override

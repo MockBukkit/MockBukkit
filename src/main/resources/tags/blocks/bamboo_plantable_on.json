@@ -1,10 +1,21 @@
 {
-    "replace": false,
-    "values": [
-        "#minecraft:sand",
-        "#minecraft:dirt",
-        "minecraft:bamboo",
-        "minecraft:bamboo_sapling",
-        "minecraft:gravel"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:bamboo",
+		"minecraft:bamboo_sapling",
+		"minecraft:coarse_dirt",
+		"minecraft:dirt",
+		"minecraft:grass_block",
+		"minecraft:gravel",
+		"minecraft:moss_block",
+		"minecraft:mud",
+		"minecraft:muddy_mangrove_roots",
+		"minecraft:mycelium",
+		"minecraft:podzol",
+		"minecraft:red_sand",
+		"minecraft:rooted_dirt",
+		"minecraft:sand",
+		"minecraft:suspicious_gravel",
+		"minecraft:suspicious_sand"
+	]
 }

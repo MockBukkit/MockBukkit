@@ -1,0 +1,549 @@
+{
+	"values": [
+		{
+			"key": "minecraft:angry_villager",
+			"name": "ANGRY_VILLAGER",
+			"ordinal": 18
+		},
+		{
+			"key": "minecraft:ash",
+			"name": "ASH",
+			"ordinal": 61
+		},
+		{
+			"key": "minecraft:block",
+			"name": "BLOCK",
+			"ordinal": 32
+		},
+		{
+			"key": "minecraft:block_marker",
+			"name": "BLOCK_MARKER",
+			"ordinal": 108
+		},
+		{
+			"key": "minecraft:bubble",
+			"name": "BUBBLE",
+			"ordinal": 4
+		},
+		{
+			"key": "minecraft:bubble_column_up",
+			"name": "BUBBLE_COLUMN_UP",
+			"ordinal": 45
+		},
+		{
+			"key": "minecraft:bubble_pop",
+			"name": "BUBBLE_POP",
+			"ordinal": 43
+		},
+		{
+			"key": "minecraft:campfire_cosy_smoke",
+			"name": "CAMPFIRE_COSY_SMOKE",
+			"ordinal": 49
+		},
+		{
+			"key": "minecraft:campfire_signal_smoke",
+			"name": "CAMPFIRE_SIGNAL_SMOKE",
+			"ordinal": 50
+		},
+		{
+			"key": "minecraft:cherry_leaves",
+			"name": "CHERRY_LEAVES",
+			"ordinal": 91
+		},
+		{
+			"key": "minecraft:cloud",
+			"name": "CLOUD",
+			"ordinal": 26
+		},
+		{
+			"key": "minecraft:composter",
+			"name": "COMPOSTER",
+			"ordinal": 51
+		},
+		{
+			"key": "minecraft:crimson_spore",
+			"name": "CRIMSON_SPORE",
+			"ordinal": 62
+		},
+		{
+			"key": "minecraft:crit",
+			"name": "CRIT",
+			"ordinal": 8
+		},
+		{
+			"key": "minecraft:current_down",
+			"name": "CURRENT_DOWN",
+			"ordinal": 44
+		},
+		{
+			"key": "minecraft:damage_indicator",
+			"name": "DAMAGE_INDICATOR",
+			"ordinal": 37
+		},
+		{
+			"key": "minecraft:dolphin",
+			"name": "DOLPHIN",
+			"ordinal": 47
+		},
+		{
+			"key": "minecraft:dragon_breath",
+			"name": "DRAGON_BREATH",
+			"ordinal": 35
+		},
+		{
+			"key": "minecraft:dripping_dripstone_lava",
+			"name": "DRIPPING_DRIPSTONE_LAVA",
+			"ordinal": 76
+		},
+		{
+			"key": "minecraft:dripping_dripstone_water",
+			"name": "DRIPPING_DRIPSTONE_WATER",
+			"ordinal": 78
+		},
+		{
+			"key": "minecraft:dripping_honey",
+			"name": "DRIPPING_HONEY",
+			"ordinal": 56
+		},
+		{
+			"key": "minecraft:dripping_lava",
+			"name": "DRIPPING_LAVA",
+			"ordinal": 17
+		},
+		{
+			"key": "minecraft:dripping_obsidian_tear",
+			"name": "DRIPPING_OBSIDIAN_TEAR",
+			"ordinal": 65
+		},
+		{
+			"key": "minecraft:dripping_water",
+			"name": "DRIPPING_WATER",
+			"ordinal": 16
+		},
+		{
+			"key": "minecraft:dust",
+			"name": "DUST",
+			"ordinal": 27
+		},
+		{
+			"key": "minecraft:dust_color_transition",
+			"name": "DUST_COLOR_TRANSITION",
+			"ordinal": 70
+		},
+		{
+			"key": "minecraft:dust_pillar",
+			"name": "DUST_PILLAR",
+			"ordinal": 104
+		},
+		{
+			"key": "minecraft:dust_plume",
+			"name": "DUST_PLUME",
+			"ordinal": 93
+		},
+		{
+			"key": "minecraft:effect",
+			"name": "EFFECT",
+			"ordinal": 12
+		},
+		{
+			"key": "minecraft:egg_crack",
+			"name": "EGG_CRACK",
+			"ordinal": 92
+		},
+		{
+			"key": "minecraft:elder_guardian",
+			"name": "ELDER_GUARDIAN",
+			"ordinal": 34
+		},
+		{
+			"key": "minecraft:electric_spark",
+			"name": "ELECTRIC_SPARK",
+			"ordinal": 84
+		},
+		{
+			"key": "minecraft:enchant",
+			"name": "ENCHANT",
+			"ordinal": 23
+		},
+		{
+			"key": "minecraft:enchanted_hit",
+			"name": "ENCHANTED_HIT",
+			"ordinal": 9
+		},
+		{
+			"key": "minecraft:end_rod",
+			"name": "END_ROD",
+			"ordinal": 36
+		},
+		{
+			"key": "minecraft:entity_effect",
+			"name": "ENTITY_EFFECT",
+			"ordinal": 14
+		},
+		{
+			"key": "minecraft:explosion",
+			"name": "EXPLOSION",
+			"ordinal": 1
+		},
+		{
+			"key": "minecraft:explosion_emitter",
+			"name": "EXPLOSION_EMITTER",
+			"ordinal": 2
+		},
+		{
+			"key": "minecraft:falling_dripstone_lava",
+			"name": "FALLING_DRIPSTONE_LAVA",
+			"ordinal": 77
+		},
+		{
+			"key": "minecraft:falling_dripstone_water",
+			"name": "FALLING_DRIPSTONE_WATER",
+			"ordinal": 79
+		},
+		{
+			"key": "minecraft:falling_dust",
+			"name": "FALLING_DUST",
+			"ordinal": 39
+		},
+		{
+			"key": "minecraft:falling_honey",
+			"name": "FALLING_HONEY",
+			"ordinal": 57
+		},
+		{
+			"key": "minecraft:falling_lava",
+			"name": "FALLING_LAVA",
+			"ordinal": 53
+		},
+		{
+			"key": "minecraft:falling_nectar",
+			"name": "FALLING_NECTAR",
+			"ordinal": 59
+		},
+		{
+			"key": "minecraft:falling_obsidian_tear",
+			"name": "FALLING_OBSIDIAN_TEAR",
+			"ordinal": 66
+		},
+		{
+			"key": "minecraft:falling_spore_blossom",
+			"name": "FALLING_SPORE_BLOSSOM",
+			"ordinal": 72
+		},
+		{
+			"key": "minecraft:falling_water",
+			"name": "FALLING_WATER",
+			"ordinal": 55
+		},
+		{
+			"key": "minecraft:firework",
+			"name": "FIREWORK",
+			"ordinal": 3
+		},
+		{
+			"key": "minecraft:fishing",
+			"name": "FISHING",
+			"ordinal": 6
+		},
+		{
+			"key": "minecraft:flame",
+			"name": "FLAME",
+			"ordinal": 24
+		},
+		{
+			"key": "minecraft:flash",
+			"name": "FLASH",
+			"ordinal": 52
+		},
+		{
+			"key": "minecraft:glow",
+			"name": "GLOW",
+			"ordinal": 81
+		},
+		{
+			"key": "minecraft:glow_squid_ink",
+			"name": "GLOW_SQUID_INK",
+			"ordinal": 80
+		},
+		{
+			"key": "minecraft:gust",
+			"name": "GUST",
+			"ordinal": 95
+		},
+		{
+			"key": "minecraft:gust_emitter_large",
+			"name": "GUST_EMITTER_LARGE",
+			"ordinal": 97
+		},
+		{
+			"key": "minecraft:gust_emitter_small",
+			"name": "GUST_EMITTER_SMALL",
+			"ordinal": 98
+		},
+		{
+			"key": "minecraft:happy_villager",
+			"name": "HAPPY_VILLAGER",
+			"ordinal": 19
+		},
+		{
+			"key": "minecraft:heart",
+			"name": "HEART",
+			"ordinal": 30
+		},
+		{
+			"key": "minecraft:infested",
+			"name": "INFESTED",
+			"ordinal": 102
+		},
+		{
+			"key": "minecraft:instant_effect",
+			"name": "INSTANT_EFFECT",
+			"ordinal": 13
+		},
+		{
+			"key": "minecraft:item",
+			"name": "ITEM",
+			"ordinal": 31
+		},
+		{
+			"key": "minecraft:item_cobweb",
+			"name": "ITEM_COBWEB",
+			"ordinal": 103
+		},
+		{
+			"key": "minecraft:item_slime",
+			"name": "ITEM_SLIME",
+			"ordinal": 29
+		},
+		{
+			"key": "minecraft:item_snowball",
+			"name": "ITEM_SNOWBALL",
+			"ordinal": 28
+		},
+		{
+			"key": "minecraft:landing_honey",
+			"name": "LANDING_HONEY",
+			"ordinal": 58
+		},
+		{
+			"key": "minecraft:landing_lava",
+			"name": "LANDING_LAVA",
+			"ordinal": 54
+		},
+		{
+			"key": "minecraft:landing_obsidian_tear",
+			"name": "LANDING_OBSIDIAN_TEAR",
+			"ordinal": 67
+		},
+		{
+			"key": "minecraft:large_smoke",
+			"name": "LARGE_SMOKE",
+			"ordinal": 11
+		},
+		{
+			"key": "minecraft:lava",
+			"name": "LAVA",
+			"ordinal": 25
+		},
+		{
+			"key": "minecraft:mycelium",
+			"name": "MYCELIUM",
+			"ordinal": 20
+		},
+		{
+			"key": "minecraft:nautilus",
+			"name": "NAUTILUS",
+			"ordinal": 46
+		},
+		{
+			"key": "minecraft:note",
+			"name": "NOTE",
+			"ordinal": 21
+		},
+		{
+			"key": "minecraft:ominous_spawning",
+			"name": "OMINOUS_SPAWNING",
+			"ordinal": 105
+		},
+		{
+			"key": "minecraft:poof",
+			"name": "POOF",
+			"ordinal": 0
+		},
+		{
+			"key": "minecraft:portal",
+			"name": "PORTAL",
+			"ordinal": 22
+		},
+		{
+			"key": "minecraft:raid_omen",
+			"name": "RAID_OMEN",
+			"ordinal": 106
+		},
+		{
+			"key": "minecraft:rain",
+			"name": "RAIN",
+			"ordinal": 33
+		},
+		{
+			"key": "minecraft:reverse_portal",
+			"name": "REVERSE_PORTAL",
+			"ordinal": 68
+		},
+		{
+			"key": "minecraft:scrape",
+			"name": "SCRAPE",
+			"ordinal": 85
+		},
+		{
+			"key": "minecraft:sculk_charge",
+			"name": "SCULK_CHARGE",
+			"ordinal": 88
+		},
+		{
+			"key": "minecraft:sculk_charge_pop",
+			"name": "SCULK_CHARGE_POP",
+			"ordinal": 89
+		},
+		{
+			"key": "minecraft:sculk_soul",
+			"name": "SCULK_SOUL",
+			"ordinal": 87
+		},
+		{
+			"key": "minecraft:shriek",
+			"name": "SHRIEK",
+			"ordinal": 90
+		},
+		{
+			"key": "minecraft:small_flame",
+			"name": "SMALL_FLAME",
+			"ordinal": 74
+		},
+		{
+			"key": "minecraft:small_gust",
+			"name": "SMALL_GUST",
+			"ordinal": 96
+		},
+		{
+			"key": "minecraft:smoke",
+			"name": "SMOKE",
+			"ordinal": 10
+		},
+		{
+			"key": "minecraft:sneeze",
+			"name": "SNEEZE",
+			"ordinal": 48
+		},
+		{
+			"key": "minecraft:snowflake",
+			"name": "SNOWFLAKE",
+			"ordinal": 75
+		},
+		{
+			"key": "minecraft:sonic_boom",
+			"name": "SONIC_BOOM",
+			"ordinal": 86
+		},
+		{
+			"key": "minecraft:soul",
+			"name": "SOUL",
+			"ordinal": 64
+		},
+		{
+			"key": "minecraft:soul_fire_flame",
+			"name": "SOUL_FIRE_FLAME",
+			"ordinal": 60
+		},
+		{
+			"key": "minecraft:spit",
+			"name": "SPIT",
+			"ordinal": 41
+		},
+		{
+			"key": "minecraft:splash",
+			"name": "SPLASH",
+			"ordinal": 5
+		},
+		{
+			"key": "minecraft:spore_blossom_air",
+			"name": "SPORE_BLOSSOM_AIR",
+			"ordinal": 73
+		},
+		{
+			"key": "minecraft:squid_ink",
+			"name": "SQUID_INK",
+			"ordinal": 42
+		},
+		{
+			"key": "minecraft:sweep_attack",
+			"name": "SWEEP_ATTACK",
+			"ordinal": 38
+		},
+		{
+			"key": "minecraft:totem_of_undying",
+			"name": "TOTEM_OF_UNDYING",
+			"ordinal": 40
+		},
+		{
+			"key": "minecraft:trial_omen",
+			"name": "TRIAL_OMEN",
+			"ordinal": 107
+		},
+		{
+			"key": "minecraft:trial_spawner_detection",
+			"name": "TRIAL_SPAWNER_DETECTION",
+			"ordinal": 99
+		},
+		{
+			"key": "minecraft:trial_spawner_detection_ominous",
+			"name": "TRIAL_SPAWNER_DETECTION_OMINOUS",
+			"ordinal": 100
+		},
+		{
+			"key": "minecraft:underwater",
+			"name": "UNDERWATER",
+			"ordinal": 7
+		},
+		{
+			"key": "minecraft:vault_connection",
+			"name": "VAULT_CONNECTION",
+			"ordinal": 101
+		},
+		{
+			"key": "minecraft:vibration",
+			"name": "VIBRATION",
+			"ordinal": 71
+		},
+		{
+			"key": "minecraft:warped_spore",
+			"name": "WARPED_SPORE",
+			"ordinal": 63
+		},
+		{
+			"key": "minecraft:wax_off",
+			"name": "WAX_OFF",
+			"ordinal": 83
+		},
+		{
+			"key": "minecraft:wax_on",
+			"name": "WAX_ON",
+			"ordinal": 82
+		},
+		{
+			"key": "minecraft:white_ash",
+			"name": "WHITE_ASH",
+			"ordinal": 69
+		},
+		{
+			"key": "minecraft:white_smoke",
+			"name": "WHITE_SMOKE",
+			"ordinal": 94
+		},
+		{
+			"key": "minecraft:witch",
+			"name": "WITCH",
+			"ordinal": 15
+		}
+	]
+}

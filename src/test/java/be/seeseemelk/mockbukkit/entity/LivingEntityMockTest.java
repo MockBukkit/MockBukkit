@@ -7,6 +7,7 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
@@ -79,19 +80,6 @@ class LivingEntityMockTest
 	}
 
 	@Test
-	void testIsInvisibleDefault()
-	{
-		assertFalse(livingEntity.isInvisible());
-	}
-
-	@Test
-	void testSetInvisible()
-	{
-		livingEntity.setInvisible(true);
-		assertTrue(livingEntity.isInvisible());
-	}
-
-	@Test
 	void testSwingMainHand()
 	{
 		assertDoesNotThrow(() -> livingEntity.swingMainHand());
@@ -147,9 +135,36 @@ class LivingEntityMockTest
 	}
 
 	@Test
+	void testPotionEffectAddedForFirstTime()
+	{
+		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
+		server.getPluginManager().assertEventFired(EntityPotionEffectEvent.class);
+		assertEntityPotionEffectEvent(event, null, effect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
+	}
+
+	@Test
+	void testPotionEffectAddedThatAlreadyExisted()
+	{
+		PotionEffect initialEffect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
+		PotionEffect laterEffect = new PotionEffect(PotionEffectType.REGENERATION, 10, 3);
+		livingEntity.addPotionEffect(initialEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(laterEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEntityPotionEffectEvent(event, initialEffect, laterEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+	}
+
+	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect, PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
+	{
+		assertEquals(event.getOldEffect(), oldEffect);
+		assertEquals(event.getNewEffect(), newEffect);
+		assertEquals(event.getCause(), cause);
+		assertEquals(event.getAction(), action);
+	}
+
+	@Test
 	void testPotionEffects()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.NAUSEA, 3, 1);
 		assertTrue(livingEntity.addPotionEffect(effect));
 
 		assertTrue(livingEntity.hasPotionEffect(effect.getType()));
@@ -166,7 +181,7 @@ class LivingEntityMockTest
 	@Test
 	void clearPotionEffects()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 5, 1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.NAUSEA, 5, 1);
 		livingEntity.addPotionEffect(effect);
 		assertTrue(livingEntity.clearActivePotionEffects());
 	}
@@ -174,7 +189,7 @@ class LivingEntityMockTest
 	@Test
 	void testInstantEffect()
 	{
-		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
+		PotionEffect instant = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 0, 1);
 		assertTrue(livingEntity.addPotionEffect(instant));
 		assertFalse(livingEntity.hasPotionEffect(instant.getType()));
 	}
@@ -191,6 +206,36 @@ class LivingEntityMockTest
 		{
 			assertTrue(livingEntity.hasPotionEffect(effect.getType()));
 		}
+	}
+
+	@Test
+	void isSleeping_GivenDefaultValue()
+	{
+		boolean actual = livingEntity.isSleeping();
+		assertFalse(actual);
+	}
+
+	@Test
+	void isSleeping_GivenSleepingAsTrue()
+	{
+		livingEntity.setSleeping(true);
+		boolean actual = livingEntity.isSleeping();
+		assertTrue(actual);
+	}
+
+	@Test
+	void isClimbing_GivenDefaultValue()
+	{
+		boolean actual = livingEntity.isClimbing();
+		assertFalse(actual);
+	}
+
+	@Test
+	void isClimbing_GivenSleepingAsTrue()
+	{
+		livingEntity.setClimbing(true);
+		boolean actual = livingEntity.isClimbing();
+		assertTrue(actual);
 	}
 
 }

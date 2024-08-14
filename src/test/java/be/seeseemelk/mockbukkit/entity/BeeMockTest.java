@@ -187,4 +187,17 @@ class BeeMockTest
 		assertTrue(bee.isRolling());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefault()
+	{
+		assertEquals(0.51D, bee.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSneaking()
+	{
+		bee.setBaby();
+		assertEquals(0.255D, bee.getEyeHeight());
+	}
+
 }

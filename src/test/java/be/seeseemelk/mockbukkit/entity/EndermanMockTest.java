@@ -49,7 +49,7 @@ class EndermanMockTest
 	@Test
 	void testMaterialDataSet()
 	{
-		MaterialData materialData = new MaterialData(Material.DIAMOND);
+		MaterialData materialData = new MaterialData(Material.DIAMOND_BLOCK);
 		endermanMock.setCarriedMaterial(materialData);
 
 		assertEquals(materialData, endermanMock.getCarriedMaterial());
@@ -120,6 +120,19 @@ class EndermanMockTest
 		Player player = serverMock.addPlayer();
 		assertTrue(endermanMock.teleportTowards(player));
 		assertNotEquals(loc, endermanMock.getLocation());
+	}
+
+	@Test
+	void getEyeHeight_WithDefaultState()
+	{
+		assertEquals(2.465D, endermanMock.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WithAngryState()
+	{
+		endermanMock.setScreaming(true);
+		assertEquals(2.7624999999999997D, endermanMock.getEyeHeight());
 	}
 
 }

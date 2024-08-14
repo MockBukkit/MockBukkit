@@ -1,20 +1,40 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
+import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.WorldCreator;
+import org.bukkit.block.banner.PatternType;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BannerMeta;
+import org.bukkit.inventory.meta.BundleMeta;
+import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.inventory.meta.CrossbowMeta;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.material.MaterialData;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -29,6 +49,7 @@ class UnsafeValuesTest
 {
 
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
+	private static final Logger log = LoggerFactory.getLogger(UnsafeValuesTest.class);
 
 	private ServerMock server;
 	private MockUnsafeValues mockUnsafeValues;
@@ -36,7 +57,8 @@ class UnsafeValuesTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
+		server = MockBukkit.getOrCreateMock();
+		WorldCreator.name("world").createWorld();
 		mockUnsafeValues = server.getUnsafe();
 	}
 
@@ -72,6 +94,76 @@ class UnsafeValuesTest
 		}
 
 		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
+	}
+
+	private static Stream<Arguments> provideTestItems()
+	{
+		MockBukkit.mock();
+		List<Arguments> args = new ArrayList<>();
+		for (Material material : Material.values())
+		{
+			if (material.isLegacy() || material.isAir())
+			{
+				continue;
+			}
+			if (material.asItemType() == null) //We dont have a way to serialize these properly right now
+			{
+				continue;
+			}
+			ItemStack item = new ItemStackMock(material);
+			args.add(Arguments.of(Named.of(material.name(), item)));
+		}
+
+		return args.stream();
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideTestItems")
+	void serializeItemTest(ItemStack expected)
+	{
+		populateItemMeta(expected);
+		byte[] serialized = mockUnsafeValues.serializeItem(expected);
+		ItemStack actual = mockUnsafeValues.deserializeItem(serialized);
+		assertEquals(expected, actual, "ItemStacks are not equal, metas: \n" + expected.getItemMeta() + "\n" + actual.getItemMeta());
+	}
+
+	private void populateItemMeta(ItemStack item)
+	{
+		item.editMeta(meta ->
+		{
+			meta.setDisplayName("Test");
+			meta.setLore(List.of("Test1", "Test2"));
+			meta.setUnbreakable(true);
+			meta.addEnchant(Enchantment.SHARPNESS, 1, true);
+			final PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
+			persistentDataContainer.set(new NamespacedKey("test", "test"), PersistentDataType.STRING, "test");
+		});
+		item.editMeta(meta ->
+		{
+			if (meta instanceof BundleMeta bundleMeta)
+			{
+				bundleMeta.addItem(item.clone());
+			}
+			if (meta instanceof BannerMeta bannerMeta)
+			{
+				bannerMeta.addPattern(new org.bukkit.block.banner.Pattern(DyeColor.BLACK, PatternType.BASE));
+			}
+			if (meta instanceof CompassMeta compassMeta)
+			{
+				compassMeta.setLodestone(new Location(Bukkit.getWorlds().get(0), 1, 2, 3));
+				compassMeta.setLodestoneTracked(true);
+			}
+			if (meta instanceof CrossbowMeta crossbowMeta)
+			{
+				ItemStack arrow = new ItemStackMock(Material.ARROW);
+				arrow.editMeta(itemMeta -> {});
+				crossbowMeta.addChargedProjectile(arrow);
+			}
+			if (meta instanceof EnchantmentStorageMeta storageMeta)
+			{
+				storageMeta.addStoredEnchant(Enchantment.SHARPNESS, 1, true);
+			}
+		});
 	}
 
 	@Test
@@ -230,16 +322,21 @@ class UnsafeValuesTest
 	static Stream<Arguments> itemStackTranslationKeyProvider()
 	{
 		return Stream.of(
-				Arguments.of("item.minecraft.saddle", new ItemStack(Material.SADDLE)),
-				Arguments.of("block.minecraft.stone", new ItemStack(Material.STONE)),
-				Arguments.of("item.minecraft.wheat", new ItemStack(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStack(Material.NETHER_WART))
+				Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
+				Arguments.of("block.minecraft.stone", new ItemStackMock(Material.STONE)),
+				Arguments.of("item.minecraft.wheat", new ItemStackMock(Material.WHEAT)),
+				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART))
 		);
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackEmptyEffectTranslationKeyProvider")
-	void testItemStackEmptyEffectTranslationKey(String expectedMaterialKey, Material material, String expectedItemStackKey, ItemStack itemStack)
+	void testItemStackEmptyEffectTranslationKey(
+			String expectedMaterialKey,
+			Material material,
+			String expectedItemStackKey,
+			ItemStack itemStack
+	)
 	{
 		assertEquals(expectedMaterialKey, material.getItemTranslationKey());
 		assertEquals(expectedItemStackKey, itemStack.translationKey());
@@ -248,10 +345,30 @@ class UnsafeValuesTest
 	static Stream<Arguments> itemStackEmptyEffectTranslationKeyProvider()
 	{
 		return Stream.of(
-				Arguments.of("item.minecraft.potion", Material.POTION, "item.minecraft.potion.effect.empty", new ItemStack(Material.POTION)),
-				Arguments.of("item.minecraft.splash_potion", Material.SPLASH_POTION, "item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION)),
-				Arguments.of("item.minecraft.tipped_arrow", Material.TIPPED_ARROW, "item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW)),
-				Arguments.of("item.minecraft.lingering_potion", Material.LINGERING_POTION, "item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION))
+				Arguments.of(
+						"item.minecraft.potion",
+						Material.POTION,
+						"item.minecraft.potion.effect.empty",
+						new ItemStackMock(Material.POTION)
+				),
+				Arguments.of(
+						"item.minecraft.splash_potion",
+						Material.SPLASH_POTION,
+						"item.minecraft.splash_potion.effect.empty",
+						new ItemStackMock(Material.SPLASH_POTION)
+				),
+				Arguments.of(
+						"item.minecraft.tipped_arrow",
+						Material.TIPPED_ARROW,
+						"item.minecraft.tipped_arrow.effect.empty",
+						new ItemStackMock(Material.TIPPED_ARROW)
+				),
+				Arguments.of(
+						"item.minecraft.lingering_potion",
+						Material.LINGERING_POTION,
+						"item.minecraft.lingering_potion.effect.empty",
+						new ItemStackMock(Material.LINGERING_POTION)
+				)
 		);
 	}
 

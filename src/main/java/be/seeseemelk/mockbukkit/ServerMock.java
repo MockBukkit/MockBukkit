@@ -52,8 +52,10 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
+import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
@@ -77,6 +79,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Server;
+import org.bukkit.ServerLinks;
 import org.bukkit.ServerTickManager;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
@@ -97,6 +100,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityFactory;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
@@ -186,7 +190,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final MockPlayerList playerList = new MockPlayerList();
-	private final MockCommandMap commandMap = new MockCommandMap(this);
+	private final MockCommandMap commandMap = new MockCommandMap(this, new HashMap<>());
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
@@ -203,7 +207,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
-	private final Map<Class<?>, Registry<?>> registry = new HashMap<>();
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -1743,6 +1746,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public <B extends BanList<E>, E> @NotNull B getBanList(@NotNull BanListType<B> type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull File getWorldContainer()
 	{
 		// TODO Auto-generated method stub
@@ -1840,6 +1849,13 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		Preconditions.checkNotNull(motd, "motd cannot be null");
 		this.motd = LegacyComponentSerializer.legacySection().deserialize(motd);
+	}
+
+	@Override
+	public @NotNull ServerLinks getServerLinks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1953,15 +1969,6 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		Preconditions.checkNotNull(world, "World cannot be null");
 		return new MockChunkData(world);
-	}
-
-	@Override
-
-	@Deprecated(forRemoval = true)
-	public @NotNull ChunkData createVanillaChunkData(@NotNull World world, int x, int z)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2094,7 +2101,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Keyed> Tag<T> getTag(String registryKey, NamespacedKey key, Class<T> clazz)
+	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
 		if (clazz == Material.class)
 		{
@@ -2198,11 +2205,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
-		if (!registry.containsKey(tClass))
-		{
-			registry.put(tClass, RegistryMock.createRegistry(tClass));
-		}
-		return (Registry<T>) registry.get(tClass);
+		return RegistryAccess.registryAccess().getRegistry(tClass);
 	}
 
 	@Override
@@ -2213,10 +2216,24 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(String registry, Class<T> clazz)
+	@SuppressWarnings("unchecked")
+	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(@NotNull String registry, @NotNull Class<T> clazz)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (clazz == Material.class)
+		{
+			TagRegistry tagRegistry = materialTags.get(registry);
+
+			if (tagRegistry != null)
+			{
+				return tagRegistry.getTags()
+						.values()
+						.stream()
+						.map(tagWrapperMock -> (Tag<T>) tagWrapperMock).toList();
+			}
+		}
+
+		// Per definition this method should throw an exception if the registry doesn't exist
+		throw new IllegalArgumentException();
 	}
 
 	@Override
@@ -2565,6 +2582,20 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public boolean isAcceptingTransfers()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull EntityFactory getEntityFactory()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -118,4 +118,18 @@ class HorseMockTest
 				assertThrowsExactly(IllegalStateException.class, horse::getInventory);
 		assertEquals("No inventory has been set", illegalStateException.getMessage());
 	}
+
+	@Test
+	void getEyeHeight_GivenDefaultHorse()
+	{
+		assertEquals(1.36D, horse.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyHorse()
+	{
+		horse.setBaby();
+		assertEquals(0.68D, horse.getEyeHeight());
+	}
+
 }

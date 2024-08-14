@@ -5,6 +5,7 @@ import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -42,7 +43,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		return prime * result + effect.hashCode();
+		return prime * result + (effect != null ? effect.hashCode() : 0);
 	}
 
 	@Override
@@ -88,6 +89,47 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	public @Nullable FireworkEffect getEffect()
 	{
 		return effect;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized FireworkEffectMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the FireworkEffectMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull FireworkEffectMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		FireworkEffectMetaMock serialMock = new FireworkEffectMetaMock();
+		serialMock.deserializeInternal(args);
+		if (args.containsKey("effect"))
+		{
+			serialMock.effect = (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) args.get("effect"));
+		}
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an FireworkEffectMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the FireworkEffectMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		if (effect != null)
+		{
+			serialized.put("effect", effect.serialize());
+		}
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "FIREWORK_EFFECT";
 	}
 
 }

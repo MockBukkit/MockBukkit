@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -145,18 +143,6 @@ class PotionMetaMockTest
 	}
 
 	@Test
-	void testPotionData()
-	{
-		PotionMeta meta = new PotionMetaMock();
-		assertNotNull(meta.getBasePotionData());
-		assertEquals(PotionType.UNCRAFTABLE, meta.getBasePotionData().getType());
-
-		PotionData data = new PotionData(PotionType.INSTANT_HEAL, false, true);
-		meta.setBasePotionData(data);
-		assertEquals(data, meta.getBasePotionData());
-	}
-
-	@Test
 	void testClone()
 	{
 		PotionMeta meta = new PotionMetaMock();
@@ -164,4 +150,16 @@ class PotionMetaMockTest
 		assertEquals(meta, clone);
 	}
 
+	@Test
+	void testBasePotionType()
+	{
+		PotionMeta meta = new PotionMetaMock();
+		assertNull(meta.getBasePotionType());
+
+		meta.setBasePotionType(PotionType.HEALING);
+		assertEquals(PotionType.HEALING, meta.getBasePotionType());
+
+		meta.setBasePotionType(null);
+		assertNull(meta.getBasePotionType());
+	}
 }

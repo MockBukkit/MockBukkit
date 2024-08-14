@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -13,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -174,8 +178,15 @@ public class MockBukkit
 	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin, Object @NotNull ... parameters)
 	{
 		ensureMocking();
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
-		mock.getPluginManager().enablePlugin(instance);
+		PluginManagerMock pluginManager = mock.getPluginManager();
+		JavaPlugin instance = pluginManager.loadPlugin(plugin, parameters);
+		List<Permission> permissionList = instance.getDescription().getPermissions();
+		List<Permission> permissionsToLoad = new ArrayList<>();
+		permissionList.stream().filter(permission -> pluginManager.getPermission(permission.getName()) == null)
+				.forEach(permissionsToLoad::add);
+
+		pluginManager.addPermissions(permissionsToLoad);
+		pluginManager.enablePlugin(instance);
 		return plugin.cast(instance);
 	}
 
@@ -342,8 +353,21 @@ public class MockBukkit
 	 */
 	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName)
 	{
+		return createMockPlugin(pluginName, "1.0.0");
+	}
+
+	/**
+	 * Creates a mock instance of a {@link JavaPlugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
+	 * allow a plugin that might enable and disable other plugins to be tested.
+	 *
+	 * @param pluginName    A name of a new plugin.
+	 * @param pluginVersion The version of the new plugin.
+	 * @return An instance of a mock plugin.
+	 */
+	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName, @NotNull String pluginVersion)
+	{
 		ensureMocking();
-		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0", MockPlugin.class.getName());
+		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, MockPlugin.class.getName());
 		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, new Object[0]);
 		mock.getPluginManager().enablePlugin(instance);
 		return (MockPlugin) instance;

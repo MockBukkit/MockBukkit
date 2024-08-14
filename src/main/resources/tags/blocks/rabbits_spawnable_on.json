@@ -1,9 +1,9 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:grass_block",
-        "minecraft:snow",
-        "minecraft:snow_block",
-        "minecraft:sand"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:grass_block",
+		"minecraft:sand",
+		"minecraft:snow",
+		"minecraft:snow_block"
+	]
 }

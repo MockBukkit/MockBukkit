@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.EnumSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -25,12 +26,16 @@ public class InternalTagParser
 
 	public void insertInternalTagValues(InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
 	{
-		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase() + "/";
+		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase(Locale.ROOT) + "/";
 		for (InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
 		{
-			String filePath = path + internalTag.getName().toLowerCase() + ".json";
+			String filePath = path + internalTag.getName().toLowerCase(Locale.ROOT) + ".json";
 			try (InputStream inputStream = MockBukkit.class.getResourceAsStream(filePath))
 			{
+				if (inputStream == null)
+				{
+					throw new IOException("Could not find resource: " + filePath);
+				}
 				JsonObject object = (JsonObject) JsonParser.parseReader(new InputStreamReader(inputStream));
 				this.parse(object, internalTagRegistry.getTagRegistryEquivalent(), internalTag);
 			}

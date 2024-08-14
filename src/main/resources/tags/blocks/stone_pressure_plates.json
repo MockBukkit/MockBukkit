@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:stone_pressure_plate",
-        "minecraft:polished_blackstone_pressure_plate"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:polished_blackstone_pressure_plate",
+		"minecraft:stone_pressure_plate"
+	]
 }

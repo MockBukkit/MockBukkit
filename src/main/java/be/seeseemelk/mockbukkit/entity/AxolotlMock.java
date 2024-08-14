@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -76,7 +77,7 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	@Override
 	public @NotNull ItemStack getBaseBucketItem()
 	{
-		return new ItemStack(Material.AXOLOTL_BUCKET);
+		return new ItemStackMock(Material.AXOLOTL_BUCKET);
 	}
 
 	@Override
@@ -89,7 +90,7 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	public boolean isBreedItem(@NotNull ItemStack stack)
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
-		return Tag.AXOLOTL_TEMPT_ITEMS.isTagged(stack.getType());
+		return Tag.ITEMS_AXOLOTL_FOOD.isTagged(stack.getType());
 	}
 
 	@Override

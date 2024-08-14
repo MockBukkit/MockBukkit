@@ -102,7 +102,7 @@ class ItemFactoryMockTest
 	@Test
 	void isApplicable_StandardItemMetaOnDirtItemStack_True()
 	{
-		ItemStack stack = new ItemStack(Material.DIRT);
+		ItemStack stack = new ItemStackMock(Material.DIRT);
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
 		assertTrue(factory.isApplicable(meta, stack));
 	}
@@ -147,7 +147,7 @@ class ItemFactoryMockTest
 	@Test
 	void asMetaFor_DirtItemMetaOnDirtItemStack_ReturnsCloneOfMeta()
 	{
-		ItemStack stack = new ItemStack(Material.DIRT);
+		ItemStack stack = new ItemStackMock(Material.DIRT);
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName("My piece of dirt");
 		stack.setItemMeta(meta);

@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -20,7 +21,7 @@ public class CampfireMock extends TileStateMock implements Campfire
 
 	private static final int MAX_SLOTS = 4;
 
-	private ItemStack[] items = new ItemStack[MAX_SLOTS];
+	private ItemStack[] items = new ItemStackMock[MAX_SLOTS];
 	private int[] cookingProgress = new int[MAX_SLOTS];
 	private int[] cookingTime = new int[MAX_SLOTS];
 	private boolean[] cookingDisabled = new boolean[MAX_SLOTS];

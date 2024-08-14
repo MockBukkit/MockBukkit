@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
@@ -40,7 +41,7 @@ class EnderPearlMockTest
 	@Test
 	void testSetItem()
 	{
-		ItemStack item = new ItemStack(Material.APPLE);
+		ItemStack item = new ItemStackMock(Material.APPLE);
 		pearl.setItem(item);
 		assertEquals(Material.APPLE, pearl.getItem().getType());
 		assertEquals(1, pearl.getItem().getAmount());
@@ -51,7 +52,7 @@ class EnderPearlMockTest
 	@Test
 	void testSetItem_AlwaysOne()
 	{
-		ItemStack item = new ItemStack(Material.APPLE, 5);
+		ItemStack item = new ItemStackMock(Material.APPLE, 5);
 		pearl.setItem(item);
 		assertEquals(1, pearl.getItem().getAmount());
 	}
@@ -70,7 +71,7 @@ class EnderPearlMockTest
 	@Test
 	void testGetItem_ReturnsCopy()
 	{
-		ItemStack item = new ItemStack(Material.APPLE);
+		ItemStack item = new ItemStackMock(Material.APPLE);
 		pearl.setItem(item);
 		assertNotSame(item, pearl.getItem());
 		assertEquals(item, pearl.getItem());

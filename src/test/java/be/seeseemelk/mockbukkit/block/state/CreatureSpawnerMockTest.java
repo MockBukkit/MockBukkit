@@ -5,10 +5,10 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -204,9 +204,9 @@ class CreatureSpawnerMockTest
 	@Test
 	void setSpawnedItem_SetsEntityType()
 	{
-		spawner.setSpawnedItem(new ItemStack(Material.STONE));
+		spawner.setSpawnedItem(new ItemStackMock(Material.STONE));
 
-		assertEquals(EntityType.DROPPED_ITEM, spawner.getSpawnedType());
+		assertEquals(EntityType.ITEM, spawner.getSpawnedType());
 	}
 
 	@Test

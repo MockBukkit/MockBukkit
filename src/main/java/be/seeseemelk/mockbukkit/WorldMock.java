@@ -24,6 +24,7 @@ import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DolphinMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
+import be.seeseemelk.mockbukkit.entity.DrownedMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
@@ -92,7 +93,6 @@ import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
-import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.block.fluid.FluidData;
@@ -156,6 +156,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
+import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderPearl;
@@ -255,7 +256,6 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -785,14 +785,6 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated(forRemoval = true, since = "1.15")
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull Chunk getChunkAt(@NotNull Location location)
 	{
 		return getChunkAt(location.getBlockX() >> 4, location.getBlockZ() >> 4);
@@ -900,6 +892,21 @@ public class WorldMock implements World
 	@Override
 	@Deprecated(since = "1.8")
 	public boolean refreshChunk(int x, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<Player> getPlayersSeeingChunk(@NotNull Chunk chunk)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public @NotNull Collection<Player> getPlayersSeeingChunk(int i, int i1)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1128,6 +1135,10 @@ public class WorldMock implements World
 		else if (clazz == Player.class)
 		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+		}
+		else if (clazz == Drowned.class)
+		{
+			return new DrownedMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Zombie.class)
 		{
@@ -2625,53 +2636,10 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean isUltrawarm()
-	{
-		return this.isUltraWarm();
-	}
-
-	@Override
 	public double getCoordinateScale()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean hasSkylight()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean hasBedrockCeiling()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean doesBedWork()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean doesRespawnAnchorWork()
-	{
-		return isRespawnAnchorWorks();
 	}
 
 	@Override
@@ -2751,6 +2719,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<Chunk> getIntersectingChunks(@NotNull BoundingBox box)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
 														   Class<T> clazz)
 	{
@@ -2760,6 +2735,13 @@ public class WorldMock implements World
 
 	@Override
 	public Raid locateNearestRaid(Location location, int radius)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Raid getRaid(int id)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

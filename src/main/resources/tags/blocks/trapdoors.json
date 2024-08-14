@@ -1,7 +1,25 @@
 {
-    "replace": false,
-    "values": [
-        "#minecraft:wooden_trapdoors",
-        "minecraft:iron_trapdoor"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:acacia_trapdoor",
+		"minecraft:bamboo_trapdoor",
+		"minecraft:birch_trapdoor",
+		"minecraft:cherry_trapdoor",
+		"minecraft:copper_trapdoor",
+		"minecraft:crimson_trapdoor",
+		"minecraft:dark_oak_trapdoor",
+		"minecraft:exposed_copper_trapdoor",
+		"minecraft:iron_trapdoor",
+		"minecraft:jungle_trapdoor",
+		"minecraft:mangrove_trapdoor",
+		"minecraft:oak_trapdoor",
+		"minecraft:oxidized_copper_trapdoor",
+		"minecraft:spruce_trapdoor",
+		"minecraft:warped_trapdoor",
+		"minecraft:waxed_copper_trapdoor",
+		"minecraft:waxed_exposed_copper_trapdoor",
+		"minecraft:waxed_oxidized_copper_trapdoor",
+		"minecraft:waxed_weathered_copper_trapdoor",
+		"minecraft:weathered_copper_trapdoor"
+	]
 }

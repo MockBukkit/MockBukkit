@@ -1,0 +1,29 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:andesite",
+		"minecraft:basalt",
+		"minecraft:blackstone",
+		"minecraft:coarse_dirt",
+		"minecraft:crimson_nylium",
+		"minecraft:deepslate",
+		"minecraft:diorite",
+		"minecraft:dirt",
+		"minecraft:granite",
+		"minecraft:grass_block",
+		"minecraft:moss_block",
+		"minecraft:mud",
+		"minecraft:muddy_mangrove_roots",
+		"minecraft:mycelium",
+		"minecraft:nether_wart_block",
+		"minecraft:netherrack",
+		"minecraft:podzol",
+		"minecraft:rooted_dirt",
+		"minecraft:soul_sand",
+		"minecraft:soul_soil",
+		"minecraft:stone",
+		"minecraft:tuff",
+		"minecraft:warped_nylium",
+		"minecraft:warped_wart_block"
+	]
+}

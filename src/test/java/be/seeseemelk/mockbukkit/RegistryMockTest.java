@@ -1,20 +1,20 @@
 package be.seeseemelk.mockbukkit;
 
-import org.bukkit.GameEvent;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
 import org.bukkit.Keyed;
-import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -41,7 +41,7 @@ class RegistryMockTest
 	@Test
 	void get_Structure()
 	{
-		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(Structure.class);
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
 		assertNotNull(structureRegistryMock.get(Structure.MANSION.getKey()));
 	}
 
@@ -54,36 +54,53 @@ class RegistryMockTest
 
 	@ParameterizedTest
 	@MethodSource("getValues")
-	void stream(Class<? extends Keyed> tClass)
+	void stream(RegistryKey<? extends Keyed> key)
 	{
-		assertNotEquals(0, new RegistryMock<>(tClass).stream().count());
+		assertNotEquals(0, RegistryAccess.registryAccess().getRegistry(key).stream().count());
 	}
 
 	@ParameterizedTest
 	@MethodSource("getValues")
-	void iterator(Class<? extends Keyed> tClass)
+	void iterator(RegistryKey<? extends Keyed> key)
 	{
-		assertTrue(new RegistryMock<>(tClass).iterator().hasNext());
+		assertTrue(RegistryAccess.registryAccess().getRegistry(key).iterator().hasNext());
 	}
 
 	@Test
-	void key_NotNull()
+	void namespaced_key_NotNull()
 	{
-		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(Structure.class);
-		assertThrows(NullPointerException.class, () -> structureRegistryMock.get(null));
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
+		assertThrows(NullPointerException.class, () -> structureRegistryMock.get((NamespacedKey) null));
+	}
+	@Test
+	void typed_key_NotNull()
+	{
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
+		assertThrows(NullPointerException.class, () -> structureRegistryMock.get((TypedKey<Structure>) null));
 	}
 
 	@Test
 	void key_Invalid()
 	{
-		assertNull(new RegistryMock<>(Structure.class).get(NamespacedKey.minecraft("invalid")));
+		assertNull(new RegistryMock<>(RegistryKey.STRUCTURE).get(NamespacedKey.minecraft("invalid")));
 	}
 
-	static Stream<Class<? extends Keyed>> getValues()
+	static Stream<RegistryKey<? extends Keyed>> getValues()
 	{
-		return Stream.of(Structure.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class);
+		return Arrays.stream(RegistryKey.class.getFields()).filter(field -> field.getType() == RegistryKey.class)
+				.map(RegistryMockTest::getRegistryKey);
+	}
+
+	static RegistryKey<? extends Keyed> getRegistryKey(Field field)
+	{
+		try
+		{
+			return (RegistryKey<? extends Keyed>) field.get(null);
+		}
+		catch (IllegalAccessException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	static Stream<Structure> getStructures()

@@ -37,7 +37,10 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDismountEvent;
+import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
@@ -49,12 +52,11 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
+import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.spigotmc.event.entity.EntityDismountEvent;
-import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,6 +64,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -94,6 +97,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
+	private boolean sneaking = false;
+	private boolean invisible;
+	private boolean noPhysics;
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
@@ -107,6 +113,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean visualFire;
 	private boolean silent;
 	private boolean gravity = true;
+
+	private Pose pose = Pose.STANDING;
+	private boolean isFixedPose = false;
 
 	private final EntityData entityData;
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
@@ -597,6 +606,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return entityData.getHeight(this.getSubType(), this.getEntityState());
 	}
 
+	protected double getHeight(@NotNull EntityState state)
+	{
+		Preconditions.checkNotNull(state, "State cannot be null");
+		return entityData.getHeight(this.getSubType(), state);
+	}
+
 	@Override
 	public double getWidth()
 	{
@@ -883,6 +898,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setLastDamageCause(@Nullable EntityDamageEvent event)
 	{
 		this.lastDamageEvent = event;
@@ -1016,7 +1032,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity livingEntity)
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleExitEvent(selfVehicle, livingEntity).callEvent() || entity.getVehicle() != this)
+			Entity previousVehicle = entity.getVehicle();
+			if (!new VehicleExitEvent(selfVehicle, livingEntity).callEvent() || entity.getVehicle() != previousVehicle)
 			{
 				return false;
 			}
@@ -1063,6 +1080,37 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public boolean isInvulnerable()
 	{
 		return invulnerable;
+	}
+
+	@Override
+	public void setInvisible(boolean invisible)
+	{
+		this.invisible = invisible;
+	}
+
+	@Override
+	public boolean isInvisible()
+	{
+		return this.invisible;
+	}
+
+	@Override
+	public void setNoPhysics(boolean noPhysics)
+	{
+		this.noPhysics = noPhysics;
+	}
+
+	@Override
+	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasNoPhysics()
+	{
+		return noPhysics;
 	}
 
 	@Override
@@ -1135,8 +1183,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setRotation(float yaw, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		NumberConversions.checkFinite(pitch, "pitch not finite");
+		NumberConversions.checkFinite(yaw, "yaw not finite");
+
+		yaw = Location.normalizeYaw(yaw);
+		pitch = Location.normalizePitch(pitch);
+
+		location.setYaw(yaw);
+		location.setPitch(pitch);
 	}
 
 	@Override
@@ -1168,8 +1222,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Pose getPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.pose;
 	}
 
 	@Override
@@ -1367,15 +1420,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isSneaking()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sneaking;
 	}
 
 	@Override
 	public void setSneaking(boolean sneak)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sneaking = sneak;
 	}
 
 	@Override
@@ -1395,15 +1446,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setPose(@NotNull Pose pose, boolean fixed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		this.pose = pose;
+		this.isFixedPose = fixed;
 	}
 
 	@Override
 	public boolean hasFixedPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.isFixedPose;
 	}
 
 	@Override
@@ -1447,6 +1498,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setSpawnReason(CreatureSpawnEvent.SpawnReason spawnReason)
 	{
 		this.spawnReason = spawnReason;
+	}
+
+	@Override
+	public @Nullable String getAsString()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

@@ -19,10 +19,13 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Pose;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDismountEvent;
+import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -35,8 +38,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.spigotmc.event.entity.EntityDismountEvent;
-import org.spigotmc.event.entity.EntityMountEvent;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.List;
 import java.util.UUID;
@@ -538,6 +541,43 @@ class EntityMockTest
 	}
 
 	@Test
+	void testIsInvisibleDefault()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertFalse(zombie.isInvisible());
+	}
+
+	@Test
+	void testSetInvisible()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setInvisible(true);
+		assertTrue(zombie.isInvisible());
+	}
+
+	@Test
+	void hasNoPhysics_Default_False() {
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertFalse(zombie.hasNoPhysics());
+	}
+
+	@Test
+	void setNoPhysics()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setNoPhysics(true);
+		assertTrue(zombie.hasNoPhysics());
+	}
+
+	@Test
 	void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
@@ -734,8 +774,8 @@ class EntityMockTest
 	void registerAttribute()
 	{
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
-		zombie.registerAttribute(Attribute.HORSE_JUMP_STRENGTH);
-		assertEquals(0.7, zombie.getAttribute(Attribute.HORSE_JUMP_STRENGTH).getValue());
+		zombie.registerAttribute(Attribute.GENERIC_JUMP_STRENGTH);
+		assertEquals(0.7, zombie.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).getValue());
 	}
 
 	@Test
@@ -902,6 +942,18 @@ class EntityMockTest
 		entity.remove();
 		assertNull(passenger.getVehicle());
 		assertEquals(List.of(), vehicle.getPassengers());
+	}
+
+	@Test
+	void leaveVehicle(){
+		EntityMock vehicle = new RideableMinecartMock(server, UUID.randomUUID());
+		EntityMock passenger = new PigMock(server, UUID.randomUUID());
+
+		vehicle.addPassenger(passenger);
+		assertTrue(passenger.isInsideVehicle());
+
+		vehicle.removePassenger(passenger);
+		assertFalse(passenger.isInsideVehicle());
 	}
 
 	@Test
@@ -1132,6 +1184,84 @@ class EntityMockTest
 	{
 		entity.setSpawnReason(CreatureSpawnEvent.SpawnReason.NATURAL);
 		assertEquals(CreatureSpawnEvent.SpawnReason.NATURAL, entity.getEntitySpawnReason());
+	}
+
+	@Test
+	void isSneaking_GivenDefaultValue()
+	{
+		boolean actual = entity.isSneaking();
+		assertFalse(actual);
+	}
+
+	@Test
+	void isSneaking_GivenSetSneakingWithTrue()
+	{
+		entity.setSneaking(true);
+		boolean actual = entity.isSneaking();
+		assertTrue(actual);
+	}
+
+	@Test
+	void getPose_GivenDefaultPose()
+	{
+		Pose actual = entity.getPose();
+		assertEquals(Pose.STANDING, actual);
+	}
+
+	@ParameterizedTest
+	@EnumSource(Pose.class)
+	void getPose_GivenValidPoses(Pose expectedPose)
+	{
+		entity.setPose(expectedPose);
+		Pose actual = entity.getPose();
+		assertEquals(expectedPose, actual);
+	}
+
+	@Test
+	void hasFixedPose_GivenDefaultPose()
+	{
+		boolean actual = entity.hasFixedPose();
+		assertFalse(actual);
+	}
+
+	@Test
+	void hasFixedPose_GivenFixedPose()
+	{
+		entity.setPose(Pose.STANDING, true);
+		boolean actual = entity.hasFixedPose();
+		assertTrue(actual);
+	}
+
+	@Test
+	void setRotation_GivenInfiniteYaw()
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setRotation(Float.POSITIVE_INFINITY, 0));
+		assertEquals("yaw not finite", e.getMessage());
+	}
+
+	@Test
+	void setRotation_GivenInfinitePitch()
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setRotation(0, Float.POSITIVE_INFINITY));
+		assertEquals("pitch not finite", e.getMessage());
+	}
+
+	@Test
+	void setRotation_GivenDefaultRotation()
+	{
+		Location actual = entity.getLocation();
+		assertEquals(0.0F, actual.getYaw());
+		assertEquals(0.0F, actual.getPitch());
+	}
+
+	@Test
+	void setRotation_GivenNewRotation()
+	{
+		entity.setRotation(45.0F, 270F);
+
+		Location actual = entity.getLocation();
+		assertEquals(45.0F, actual.getYaw());
+		assertEquals(90.0F, actual.getPitch());
 	}
 
 }

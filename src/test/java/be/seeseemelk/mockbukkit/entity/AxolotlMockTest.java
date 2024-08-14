@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Axolotl;
@@ -96,7 +97,7 @@ class AxolotlMockTest
 	@Test
 	void testIsBreedItemItemStack()
 	{
-		assertTrue(axolotl.isBreedItem(new ItemStack(Material.TROPICAL_FISH_BUCKET)));
+		assertTrue(axolotl.isBreedItem(new ItemStackMock(Material.TROPICAL_FISH_BUCKET)));
 	}
 
 	@Test
@@ -108,7 +109,7 @@ class AxolotlMockTest
 	@Test
 	void testIsBreedItemItemStackFalse()
 	{
-		assertFalse(axolotl.isBreedItem(new ItemStack(Material.STONE)));
+		assertFalse(axolotl.isBreedItem(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test

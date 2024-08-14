@@ -6,7 +6,7 @@ plugins {
 	id("maven-publish")
 	id("signing")
 	id("net.kyori.blossom") version "2.1.0"
-	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+	id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 	id("checkstyle")
 }
 
@@ -25,12 +25,12 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.10.2")
+	implementation("org.junit.jupiter:junit-jupiter:5.10.3")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.3.2")
+	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.12")
+	implementation("net.bytebuddy:byte-buddy:1.14.18")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -77,7 +77,7 @@ tasks {
 	}
 
 	check {
-		 dependsOn(jacocoTestReport)
+		dependsOn(jacocoTestReport)
 	}
 
 	jacocoTestReport {
@@ -90,7 +90,7 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.11"
+		toolVersion = "0.8.12"
 	}
 }
 
@@ -99,6 +99,15 @@ sourceSets {
 		blossom {
 			javaSources {
 				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+				property("buildTime", System.currentTimeMillis().toString())
+				property("branch", run("git", "rev-parse", "--abbrev-ref", "HEAD"))
+				property("commit", run("git", "rev-parse", "HEAD"))
+				val buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+				if (buildNumber != null) {
+					property("buildNumber", buildNumber)
+				} else {
+					property("buildNumber", "")
+				}
 			}
 		}
 	}
@@ -106,7 +115,7 @@ sourceSets {
 
 java {
 	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
+		languageVersion.set(JavaLanguageVersion.of(property("java.version").toString().toInt()))
 	}
 }
 
@@ -150,7 +159,7 @@ publishing {
 						name.set("Sebastiaan de Schaetzen")
 						email.set("sebastiaan.de.schaetzen@gmail.com")
 					}
-					developer{
+					developer {
 						id.set("thebusybiscuit")
 						name.set("TheBusyBiscuit")
 					}
@@ -177,14 +186,14 @@ fun isFork(): Boolean {
 }
 
 fun isAction(): Boolean {
-	return System.getenv("CI") != null
+	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "MockBukkit/MockBukkit"
 }
 
 fun getFullVersion(): String {
-	return if (!isAction()) {
-		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
-	} else {
+	return if (isAction()) {
 		property("mockbukkit.version") as String
+	} else {
+		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
 	}
 }
 

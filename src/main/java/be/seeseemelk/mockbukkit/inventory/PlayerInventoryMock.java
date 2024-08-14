@@ -349,6 +349,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case HEAD -> notNull(getHelmet());
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
+			case BODY ->
+					throw new IllegalArgumentException("Not implemented. This is a bug in paper which has been copied over to MockBukkit");
 		};
 	}
 
@@ -405,7 +407,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	 */
 	private static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
-		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
+		return itemStack == null ? new ItemStackMock(Material.AIR) : itemStack;
 	}
 
 }

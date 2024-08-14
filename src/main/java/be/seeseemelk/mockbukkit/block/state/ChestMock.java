@@ -74,6 +74,13 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
+	public void setLootTable(@Nullable LootTable lootTable, long l)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setSeed(long seed)
 	{
 		// TODO Auto-generated method stub
@@ -109,6 +116,13 @@ public class ChestMock extends ContainerMock implements Chest
 	public @NotNull Inventory getBlockInventory()
 	{
 		return getInventory();
+	}
+
+	@Override
+	public boolean isBlocked()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
