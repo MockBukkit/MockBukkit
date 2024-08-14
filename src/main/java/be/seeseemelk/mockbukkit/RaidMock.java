@@ -36,7 +36,7 @@ public class RaidMock implements Raid
 	private long activeTicks;
 	private int badOmenLevel;
 	private int spawnedGroups;
-	private int groupCount;
+	private int waves;
 	private RaidStatus status = RaidStatus.ONGOING;
 
 	public RaidMock(int id, Location location) {
@@ -52,6 +52,11 @@ public class RaidMock implements Raid
 		return this.started;
 	}
 
+	/**
+	 * Sets whether this raid has started or not.
+	 *
+	 * @param started Is raid started?
+	 */
 	public void setStarted(boolean started)
 	{
 		this.started = started;
@@ -63,6 +68,11 @@ public class RaidMock implements Raid
 		return this.activeTicks;
 	}
 
+	/**
+	 * Set the amount of time in ticks this raid has existed.
+	 *
+	 * @param activeTicks ticks since start.
+	 */
 	public void setActiveTicks(long activeTicks)
 	{
 		Preconditions.checkArgument(activeTicks >= 0L, "active ticks cannot be negative");
@@ -95,6 +105,11 @@ public class RaidMock implements Raid
 		return this.status;
 	}
 
+	/**
+	 * Set the current status of the raid.
+	 *
+	 * @param status raid status
+	 */
 	public void setStatus(RaidStatus status)
 	{
 		Preconditions.checkArgument(status != null, "status cannot be null");
@@ -107,6 +122,11 @@ public class RaidMock implements Raid
 		return this.spawnedGroups;
 	}
 
+	/**
+	 * Set the number of raider groups which have already spawned.
+	 *
+	 * @param spawnedGroups the number of groups.
+	 */
 	public void setSpawnedGroups(int spawnedGroups)
 	{
 		Preconditions.checkArgument(spawnedGroups >= 0, "spawnedGroups cannot be negative");
@@ -116,29 +136,46 @@ public class RaidMock implements Raid
 	@Override
 	public int getTotalGroups()
 	{
-		return this.groupCount + (getBadOmenLevel() > 1 ? 1 : 0);
+		return this.waves + (getBadOmenLevel() > 1 ? 1 : 0);
 	}
 
 	@Override
 	public int getTotalWaves()
 	{
-		return this.groupCount;
+		return this.waves;
 	}
 
-	public void setGroupCount(int groupCount)
+	/**
+	 * Set the number of waves in this raid (excluding the additional waves).
+	 *
+	 * @param waves number waves.
+	 */
+	public void setWaves(int waves)
 	{
-		Preconditions.checkArgument(groupCount >= 0, "groupCount cannot be negative");
-		this.groupCount = groupCount;
+		Preconditions.checkArgument(waves >= 0, "waves cannot be negative");
+		this.waves = waves;
 	}
 
-	public void setGroupCount(Difficulty difficulty)
+	/**
+	 * Set the number of waves in this raid based on a difficulty level.
+	 *
+	 * <ul>
+	 *     <li>When difficulty is <i>EASY</i> the wave count is 3.</li>
+	 *     <li>When difficulty is <i>NORMAL</i> the wave count is 5. </li>
+	 *     <li>When difficulty is <i>HARD</i> the wave count is 7.</li>
+	 *     <li>Any other difficulty wave count is 0.</li>
+	 * </ul>
+	 *
+	 * @param difficulty the difficulty level
+	 */
+	public void setWaves(Difficulty difficulty)
 	{
 		Preconditions.checkArgument(difficulty != null, "difficulty cannot be null");
 		switch (difficulty) {
-		case EASY -> setGroupCount(3);
-		case NORMAL -> setGroupCount(5);
-		case HARD -> setGroupCount(7);
-		default -> setGroupCount(0);
+		case EASY -> setWaves(3);
+		case NORMAL -> setWaves(5);
+		case HARD -> setWaves(7);
+		default -> setWaves(0);
 		}
 	}
 
@@ -160,6 +197,11 @@ public class RaidMock implements Raid
 		return Collections.unmodifiableSet(this.heroes);
 	}
 
+	/**
+	 * Set the {@link UUID} of all heroes in this raid.
+	 *
+	 * @param heroes a set containing heroes ids
+	 */
 	public void setHeroes(Set<UUID> heroes)
 	{
 		Preconditions.checkArgument(heroes != null, "Heroes cannot be null");
@@ -172,6 +214,11 @@ public class RaidMock implements Raid
 		return Collections.unmodifiableList(this.raiders);
 	}
 
+	/**
+	 * Set all the remaining {@link Raider} in the current wave.
+	 *
+	 * @param raiders a list of current raiders.
+	 */
 	public void setRaiders(List<Raider> raiders)
 	{
 		Preconditions.checkArgument(raiders != null, "Raiders cannot be null");

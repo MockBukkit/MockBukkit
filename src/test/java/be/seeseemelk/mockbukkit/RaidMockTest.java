@@ -160,7 +160,7 @@ class RaidMockTest
 			"2, 1, 2",
 	})
 	void getTotalGroups_Given(int groupCount, int badOmenCount, int expectedCount) {
-		raid.setGroupCount(groupCount);
+		raid.setWaves(groupCount);
 		raid.setBadOmenLevel(badOmenCount);
 
 		assertEquals(expectedCount, raid.getTotalGroups());
@@ -169,7 +169,7 @@ class RaidMockTest
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100})
 	void getTotalWaves_GivenValue(int expectedCount) {
-		raid.setGroupCount(expectedCount);
+		raid.setWaves(expectedCount);
 
 		assertEquals(expectedCount, raid.getTotalWaves());
 	}
@@ -181,22 +181,22 @@ class RaidMockTest
 			"HARD, 7",
 			"PEACEFUL, 0",
 	})
-	void setGroupCount_GivenDifficulty(Difficulty difficulty, int expectedCount) {
-		raid.setGroupCount(difficulty);
+	void setWaves_GivenDifficulty(Difficulty difficulty, int expectedCount) {
+		raid.setWaves(difficulty);
 
 		assertEquals(expectedCount, raid.getTotalWaves());
 	}
 
 	@Test
-	void setGroupCount_GivenNull() {
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setGroupCount(null));
+	void setWaves_GivenNull() {
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(null));
 		assertEquals("difficulty cannot be null", e.getMessage());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
-	void setGroupCount_GivenNegativeValues(int expectedCount) {
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setGroupCount(expectedCount));
+	void setWaves_GivenNegativeValues(int expectedCount) {
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(expectedCount));
 		assertEquals("groupCount cannot be negative", e.getMessage());
 	}
 
