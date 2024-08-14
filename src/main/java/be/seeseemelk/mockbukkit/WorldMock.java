@@ -27,6 +27,7 @@ import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.DrownedMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
@@ -159,6 +160,7 @@ import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Endermite;
@@ -1459,6 +1461,9 @@ public class WorldMock implements World
 		else if (clazz == Marker.class)
 		{
 			return new MarkerMock(server, UUID.randomUUID());
+		} else if (clazz == EnderCrystal.class)
+		{
+			return new EnderCrystalMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

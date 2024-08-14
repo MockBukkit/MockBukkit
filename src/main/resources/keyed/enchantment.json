@@ -1,16 +1,16 @@
 {
 	"values": [
 		{
+			"name": "WATER_WORKER",
+			"key": "minecraft:aqua_affinity",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.aqua_affinity",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "WATER_WORKER",
-			"key": "minecraft:aqua_affinity",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -34,19 +34,28 @@
 			],
 			"conflicts": [
 				"minecraft:aqua_affinity"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:netherite_helmet"
 			]
 		},
 		{
+			"name": "DAMAGE_ARTHROPODS",
+			"key": "minecraft:bane_of_arthropods",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.bane_of_arthropods",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "DAMAGE_ARTHROPODS",
-			"key": "minecraft:bane_of_arthropods",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -165,19 +174,34 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:wooden_axe",
+				"minecraft:stone_sword",
+				"minecraft:stone_axe",
+				"minecraft:golden_sword",
+				"minecraft:golden_axe",
+				"minecraft:iron_sword",
+				"minecraft:iron_axe",
+				"minecraft:diamond_sword",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_sword",
+				"minecraft:netherite_axe",
+				"minecraft:mace"
 			]
 		},
 		{
+			"name": "BINDING_CURSE",
+			"key": "minecraft:binding_curse",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.binding_curse",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": true,
+			"anvilCost": 8,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 8,
-			"name": "BINDING_CURSE",
-			"key": "minecraft:binding_curse",
+			"treasure": true,
+			"cursed": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -201,19 +225,55 @@
 			],
 			"conflicts": [
 				"minecraft:binding_curse"
+			],
+			"enchantables": [
+				"minecraft:carved_pumpkin",
+				"minecraft:elytra",
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:skeleton_skull",
+				"minecraft:wither_skeleton_skull",
+				"minecraft:player_head",
+				"minecraft:zombie_head",
+				"minecraft:creeper_head",
+				"minecraft:dragon_head",
+				"minecraft:piglin_head"
 			]
 		},
 		{
+			"name": "PROTECTION_EXPLOSIONS",
+			"key": "minecraft:blast_protection",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.blast_protection",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "PROTECTION_EXPLOSIONS",
-			"key": "minecraft:blast_protection",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -309,19 +369,46 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "BREACH",
+			"key": "minecraft:breach",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.breach",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "BREACH",
-			"key": "minecraft:breach",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -419,19 +506,22 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
+				"minecraft:mace"
 			]
 		},
 		{
+			"name": "CHANNELING",
+			"key": "minecraft:channeling",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.channeling",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 8,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 8,
-			"name": "CHANNELING",
-			"key": "minecraft:channeling",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -456,19 +546,22 @@
 			"conflicts": [
 				"minecraft:channeling",
 				"minecraft:riptide"
+			],
+			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
+			"name": "DENSITY",
+			"key": "minecraft:density",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.density",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "DENSITY",
-			"key": "minecraft:density",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -587,19 +680,22 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
+				"minecraft:mace"
 			]
 		},
 		{
+			"name": "DEPTH_STRIDER",
+			"key": "minecraft:depth_strider",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.depth_strider",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "DEPTH_STRIDER",
-			"key": "minecraft:depth_strider",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -672,19 +768,27 @@
 			"conflicts": [
 				"minecraft:depth_strider",
 				"minecraft:frost_walker"
+			],
+			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:golden_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "DIG_SPEED",
+			"key": "minecraft:efficiency",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.efficiency",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 1,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 1,
-			"name": "DIG_SPEED",
-			"key": "minecraft:efficiency",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -798,19 +902,46 @@
 			],
 			"conflicts": [
 				"minecraft:efficiency"
+			],
+			"enchantables": [
+				"minecraft:wooden_shovel",
+				"minecraft:wooden_pickaxe",
+				"minecraft:wooden_axe",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_shovel",
+				"minecraft:stone_pickaxe",
+				"minecraft:stone_axe",
+				"minecraft:stone_hoe",
+				"minecraft:golden_shovel",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_axe",
+				"minecraft:golden_hoe",
+				"minecraft:iron_shovel",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_axe",
+				"minecraft:iron_hoe",
+				"minecraft:diamond_shovel",
+				"minecraft:diamond_pickaxe",
+				"minecraft:diamond_axe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_shovel",
+				"minecraft:netherite_pickaxe",
+				"minecraft:netherite_axe",
+				"minecraft:netherite_hoe",
+				"minecraft:shears"
 			]
 		},
 		{
+			"name": "PROTECTION_FALL",
+			"key": "minecraft:feather_falling",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.feather_falling",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "PROTECTION_FALL",
-			"key": "minecraft:feather_falling",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -903,19 +1034,27 @@
 			],
 			"conflicts": [
 				"minecraft:feather_falling"
+			],
+			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:golden_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "FIRE_ASPECT",
+			"key": "minecraft:fire_aspect",
 			"maxLevel": 2,
 			"translationKey": "enchantment.minecraft.fire_aspect",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "FIRE_ASPECT",
-			"key": "minecraft:fire_aspect",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -966,19 +1105,28 @@
 			],
 			"conflicts": [
 				"minecraft:fire_aspect"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:golden_sword",
+				"minecraft:iron_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword",
+				"minecraft:mace"
 			]
 		},
 		{
+			"name": "PROTECTION_FIRE",
+			"key": "minecraft:fire_protection",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.fire_protection",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "PROTECTION_FIRE",
-			"key": "minecraft:fire_protection",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1074,19 +1222,46 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "ARROW_FIRE",
+			"key": "minecraft:flame",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.flame",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "ARROW_FIRE",
-			"key": "minecraft:flame",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1110,19 +1285,22 @@
 			],
 			"conflicts": [
 				"minecraft:flame"
+			],
+			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
+			"name": "LOOT_BONUS_BLOCKS",
+			"key": "minecraft:fortune",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.fortune",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "LOOT_BONUS_BLOCKS",
-			"key": "minecraft:fortune",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1195,19 +1373,45 @@
 			"conflicts": [
 				"minecraft:silk_touch",
 				"minecraft:fortune"
+			],
+			"enchantables": [
+				"minecraft:wooden_shovel",
+				"minecraft:wooden_pickaxe",
+				"minecraft:wooden_axe",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_shovel",
+				"minecraft:stone_pickaxe",
+				"minecraft:stone_axe",
+				"minecraft:stone_hoe",
+				"minecraft:golden_shovel",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_axe",
+				"minecraft:golden_hoe",
+				"minecraft:iron_shovel",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_axe",
+				"minecraft:iron_hoe",
+				"minecraft:diamond_shovel",
+				"minecraft:diamond_pickaxe",
+				"minecraft:diamond_axe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_shovel",
+				"minecraft:netherite_pickaxe",
+				"minecraft:netherite_axe",
+				"minecraft:netherite_hoe"
 			]
 		},
 		{
+			"name": "FROST_WALKER",
+			"key": "minecraft:frost_walker",
 			"maxLevel": 2,
 			"translationKey": "enchantment.minecraft.frost_walker",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "FROST_WALKER",
-			"key": "minecraft:frost_walker",
+			"treasure": true,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1259,19 +1463,27 @@
 			"conflicts": [
 				"minecraft:depth_strider",
 				"minecraft:frost_walker"
+			],
+			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:golden_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "IMPALING",
+			"key": "minecraft:impaling",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.impaling",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "IMPALING",
-			"key": "minecraft:impaling",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1390,19 +1602,22 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
+			"name": "ARROW_INFINITE",
+			"key": "minecraft:infinity",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.infinity",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 8,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 8,
-			"name": "ARROW_INFINITE",
-			"key": "minecraft:infinity",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1427,19 +1642,22 @@
 			"conflicts": [
 				"minecraft:infinity",
 				"minecraft:mending"
+			],
+			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
+			"name": "KNOCKBACK",
+			"key": "minecraft:knockback",
 			"maxLevel": 2,
 			"translationKey": "enchantment.minecraft.knockback",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "KNOCKBACK",
-			"key": "minecraft:knockback",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1490,19 +1708,27 @@
 			],
 			"conflicts": [
 				"minecraft:knockback"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:golden_sword",
+				"minecraft:iron_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword"
 			]
 		},
 		{
+			"name": "LOOT_BONUS_MOBS",
+			"key": "minecraft:looting",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.looting",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "LOOT_BONUS_MOBS",
-			"key": "minecraft:looting",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1574,19 +1800,27 @@
 			],
 			"conflicts": [
 				"minecraft:looting"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:golden_sword",
+				"minecraft:iron_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword"
 			]
 		},
 		{
+			"name": "LOYALTY",
+			"key": "minecraft:loyalty",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.loyalty",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "LOYALTY",
-			"key": "minecraft:loyalty",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1659,19 +1893,22 @@
 			"conflicts": [
 				"minecraft:loyalty",
 				"minecraft:riptide"
+			],
+			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
+			"name": "LUCK",
+			"key": "minecraft:luck_of_the_sea",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.luck_of_the_sea",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "LUCK",
-			"key": "minecraft:luck_of_the_sea",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1743,19 +1980,22 @@
 			],
 			"conflicts": [
 				"minecraft:luck_of_the_sea"
+			],
+			"enchantables": [
+				"minecraft:fishing_rod"
 			]
 		},
 		{
+			"name": "LURE",
+			"key": "minecraft:lure",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.lure",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "LURE",
-			"key": "minecraft:lure",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1827,19 +2067,22 @@
 			],
 			"conflicts": [
 				"minecraft:lure"
+			],
+			"enchantables": [
+				"minecraft:fishing_rod"
 			]
 		},
 		{
+			"name": "MENDING",
+			"key": "minecraft:mending",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.mending",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "MENDING",
-			"key": "minecraft:mending",
+			"treasure": true,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1864,19 +2107,88 @@
 			"conflicts": [
 				"minecraft:infinity",
 				"minecraft:mending"
+			],
+			"enchantables": [
+				"minecraft:carrot_on_a_stick",
+				"minecraft:warped_fungus_on_a_stick",
+				"minecraft:elytra",
+				"minecraft:turtle_helmet",
+				"minecraft:flint_and_steel",
+				"minecraft:bow",
+				"minecraft:wooden_sword",
+				"minecraft:wooden_shovel",
+				"minecraft:wooden_pickaxe",
+				"minecraft:wooden_axe",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_sword",
+				"minecraft:stone_shovel",
+				"minecraft:stone_pickaxe",
+				"minecraft:stone_axe",
+				"minecraft:stone_hoe",
+				"minecraft:golden_sword",
+				"minecraft:golden_shovel",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_axe",
+				"minecraft:golden_hoe",
+				"minecraft:iron_sword",
+				"minecraft:iron_shovel",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_axe",
+				"minecraft:iron_hoe",
+				"minecraft:diamond_sword",
+				"minecraft:diamond_shovel",
+				"minecraft:diamond_pickaxe",
+				"minecraft:diamond_axe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_sword",
+				"minecraft:netherite_shovel",
+				"minecraft:netherite_pickaxe",
+				"minecraft:netherite_axe",
+				"minecraft:netherite_hoe",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:fishing_rod",
+				"minecraft:shears",
+				"minecraft:mace",
+				"minecraft:shield",
+				"minecraft:trident",
+				"minecraft:crossbow",
+				"minecraft:brush"
 			]
 		},
 		{
+			"name": "MULTISHOT",
+			"key": "minecraft:multishot",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.multishot",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "MULTISHOT",
-			"key": "minecraft:multishot",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -1901,19 +2213,22 @@
 			"conflicts": [
 				"minecraft:multishot",
 				"minecraft:piercing"
+			],
+			"enchantables": [
+				"minecraft:crossbow"
 			]
 		},
 		{
+			"name": "PIERCING",
+			"key": "minecraft:piercing",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.piercing",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 1,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 1,
-			"name": "PIERCING",
-			"key": "minecraft:piercing",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2007,19 +2322,22 @@
 			"conflicts": [
 				"minecraft:multishot",
 				"minecraft:piercing"
+			],
+			"enchantables": [
+				"minecraft:crossbow"
 			]
 		},
 		{
+			"name": "ARROW_DAMAGE",
+			"key": "minecraft:power",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.power",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 1,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 1,
-			"name": "ARROW_DAMAGE",
-			"key": "minecraft:power",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2133,19 +2451,22 @@
 			],
 			"conflicts": [
 				"minecraft:power"
+			],
+			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
+			"name": "PROTECTION_PROJECTILE",
+			"key": "minecraft:projectile_protection",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.projectile_protection",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "PROTECTION_PROJECTILE",
-			"key": "minecraft:projectile_protection",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2241,19 +2562,46 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "PROTECTION_ENVIRONMENTAL",
+			"key": "minecraft:protection",
 			"maxLevel": 4,
 			"translationKey": "enchantment.minecraft.protection",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 1,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 1,
-			"name": "PROTECTION_ENVIRONMENTAL",
-			"key": "minecraft:protection",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2349,19 +2697,46 @@
 				"minecraft:fire_protection",
 				"minecraft:projectile_protection",
 				"minecraft:blast_protection"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "ARROW_KNOCKBACK",
+			"key": "minecraft:punch",
 			"maxLevel": 2,
 			"translationKey": "enchantment.minecraft.punch",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "ARROW_KNOCKBACK",
-			"key": "minecraft:punch",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2412,19 +2787,22 @@
 			],
 			"conflicts": [
 				"minecraft:punch"
+			],
+			"enchantables": [
+				"minecraft:bow"
 			]
 		},
 		{
+			"name": "QUICK_CHARGE",
+			"key": "minecraft:quick_charge",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.quick_charge",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "QUICK_CHARGE",
-			"key": "minecraft:quick_charge",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2496,19 +2874,22 @@
 			],
 			"conflicts": [
 				"minecraft:quick_charge"
+			],
+			"enchantables": [
+				"minecraft:crossbow"
 			]
 		},
 		{
+			"name": "OXYGEN",
+			"key": "minecraft:respiration",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.respiration",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "OXYGEN",
-			"key": "minecraft:respiration",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2580,19 +2961,28 @@
 			],
 			"conflicts": [
 				"minecraft:respiration"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:chainmail_helmet",
+				"minecraft:iron_helmet",
+				"minecraft:diamond_helmet",
+				"minecraft:golden_helmet",
+				"minecraft:netherite_helmet"
 			]
 		},
 		{
+			"name": "RIPTIDE",
+			"key": "minecraft:riptide",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.riptide",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "RIPTIDE",
-			"key": "minecraft:riptide",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2666,19 +3056,22 @@
 				"minecraft:loyalty",
 				"minecraft:channeling",
 				"minecraft:riptide"
+			],
+			"enchantables": [
+				"minecraft:trident"
 			]
 		},
 		{
+			"name": "DAMAGE_ALL",
+			"key": "minecraft:sharpness",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.sharpness",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 1,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 1,
-			"name": "DAMAGE_ALL",
-			"key": "minecraft:sharpness",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2797,19 +3190,33 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:wooden_axe",
+				"minecraft:stone_sword",
+				"minecraft:stone_axe",
+				"minecraft:golden_sword",
+				"minecraft:golden_axe",
+				"minecraft:iron_sword",
+				"minecraft:iron_axe",
+				"minecraft:diamond_sword",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_sword",
+				"minecraft:netherite_axe"
 			]
 		},
 		{
+			"name": "SILK_TOUCH",
+			"key": "minecraft:silk_touch",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.silk_touch",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 8,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 8,
-			"name": "SILK_TOUCH",
-			"key": "minecraft:silk_touch",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2834,19 +3241,45 @@
 			"conflicts": [
 				"minecraft:silk_touch",
 				"minecraft:fortune"
+			],
+			"enchantables": [
+				"minecraft:wooden_shovel",
+				"minecraft:wooden_pickaxe",
+				"minecraft:wooden_axe",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_shovel",
+				"minecraft:stone_pickaxe",
+				"minecraft:stone_axe",
+				"minecraft:stone_hoe",
+				"minecraft:golden_shovel",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_axe",
+				"minecraft:golden_hoe",
+				"minecraft:iron_shovel",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_axe",
+				"minecraft:iron_hoe",
+				"minecraft:diamond_shovel",
+				"minecraft:diamond_pickaxe",
+				"minecraft:diamond_axe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_shovel",
+				"minecraft:netherite_pickaxe",
+				"minecraft:netherite_axe",
+				"minecraft:netherite_hoe"
 			]
 		},
 		{
+			"name": "DAMAGE_UNDEAD",
+			"key": "minecraft:smite",
 			"maxLevel": 5,
 			"translationKey": "enchantment.minecraft.smite",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "DAMAGE_UNDEAD",
-			"key": "minecraft:smite",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -2965,19 +3398,34 @@
 				"minecraft:bane_of_arthropods",
 				"minecraft:smite",
 				"minecraft:sharpness"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:wooden_axe",
+				"minecraft:stone_sword",
+				"minecraft:stone_axe",
+				"minecraft:golden_sword",
+				"minecraft:golden_axe",
+				"minecraft:iron_sword",
+				"minecraft:iron_axe",
+				"minecraft:diamond_sword",
+				"minecraft:diamond_axe",
+				"minecraft:netherite_sword",
+				"minecraft:netherite_axe",
+				"minecraft:mace"
 			]
 		},
 		{
+			"name": "SOUL_SPEED",
+			"key": "minecraft:soul_speed",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.soul_speed",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": false,
+			"anvilCost": 8,
 			"tradeable": false,
 			"discoverable": false,
-			"anvilCost": 8,
-			"name": "SOUL_SPEED",
-			"key": "minecraft:soul_speed",
+			"treasure": true,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3049,19 +3497,27 @@
 			],
 			"conflicts": [
 				"minecraft:soul_speed"
+			],
+			"enchantables": [
+				"minecraft:leather_boots",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_boots",
+				"minecraft:diamond_boots",
+				"minecraft:golden_boots",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "SWEEPING_EDGE",
+			"key": "minecraft:sweeping_edge",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.sweeping_edge",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 4,
-			"name": "SWEEPING_EDGE",
-			"key": "minecraft:sweeping_edge",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3133,19 +3589,27 @@
 			],
 			"conflicts": [
 				"minecraft:sweeping_edge"
+			],
+			"enchantables": [
+				"minecraft:wooden_sword",
+				"minecraft:stone_sword",
+				"minecraft:golden_sword",
+				"minecraft:iron_sword",
+				"minecraft:diamond_sword",
+				"minecraft:netherite_sword"
 			]
 		},
 		{
+			"name": "SWIFT_SNEAK",
+			"key": "minecraft:swift_sneak",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.swift_sneak",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": false,
+			"anvilCost": 8,
 			"tradeable": false,
 			"discoverable": false,
-			"anvilCost": 8,
-			"name": "SWIFT_SNEAK",
-			"key": "minecraft:swift_sneak",
+			"treasure": true,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3217,19 +3681,27 @@
 			],
 			"conflicts": [
 				"minecraft:swift_sneak"
+			],
+			"enchantables": [
+				"minecraft:leather_leggings",
+				"minecraft:chainmail_leggings",
+				"minecraft:iron_leggings",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_leggings",
+				"minecraft:netherite_leggings"
 			]
 		},
 		{
+			"name": "THORNS",
+			"key": "minecraft:thorns",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.thorns",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 8,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 8,
-			"name": "THORNS",
-			"key": "minecraft:thorns",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3301,19 +3773,46 @@
 			],
 			"conflicts": [
 				"minecraft:thorns"
+			],
+			"enchantables": [
+				"minecraft:turtle_helmet",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots"
 			]
 		},
 		{
+			"name": "DURABILITY",
+			"key": "minecraft:unbreaking",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.unbreaking",
 			"startLevel": 1,
-			"treasure": false,
-			"cursed": false,
+			"anvilCost": 2,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 2,
-			"name": "DURABILITY",
-			"key": "minecraft:unbreaking",
+			"treasure": false,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3385,19 +3884,88 @@
 			],
 			"conflicts": [
 				"minecraft:unbreaking"
+			],
+			"enchantables": [
+				"minecraft:carrot_on_a_stick",
+				"minecraft:warped_fungus_on_a_stick",
+				"minecraft:elytra",
+				"minecraft:turtle_helmet",
+				"minecraft:flint_and_steel",
+				"minecraft:bow",
+				"minecraft:wooden_sword",
+				"minecraft:wooden_shovel",
+				"minecraft:wooden_pickaxe",
+				"minecraft:wooden_axe",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_sword",
+				"minecraft:stone_shovel",
+				"minecraft:stone_pickaxe",
+				"minecraft:stone_axe",
+				"minecraft:stone_hoe",
+				"minecraft:golden_sword",
+				"minecraft:golden_shovel",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_axe",
+				"minecraft:golden_hoe",
+				"minecraft:iron_sword",
+				"minecraft:iron_shovel",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_axe",
+				"minecraft:iron_hoe",
+				"minecraft:diamond_sword",
+				"minecraft:diamond_shovel",
+				"minecraft:diamond_pickaxe",
+				"minecraft:diamond_axe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_sword",
+				"minecraft:netherite_shovel",
+				"minecraft:netherite_pickaxe",
+				"minecraft:netherite_axe",
+				"minecraft:netherite_hoe",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:fishing_rod",
+				"minecraft:shears",
+				"minecraft:mace",
+				"minecraft:shield",
+				"minecraft:trident",
+				"minecraft:crossbow",
+				"minecraft:brush"
 			]
 		},
 		{
+			"name": "VANISHING_CURSE",
+			"key": "minecraft:vanishing_curse",
 			"maxLevel": 1,
 			"translationKey": "enchantment.minecraft.vanishing_curse",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": true,
+			"anvilCost": 8,
 			"tradeable": true,
 			"discoverable": true,
-			"anvilCost": 8,
-			"name": "VANISHING_CURSE",
-			"key": "minecraft:vanishing_curse",
+			"treasure": true,
+			"cursed": true,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3421,19 +3989,97 @@
 			],
 			"conflicts": [
 				"minecraft:vanishing_curse"
+			],
+			"enchantables": [
+				"minecraft:carved_pumpkin",
+				"minecraft:carrot_on_a_stick",
+				"minecraft:warped_fungus_on_a_stick",
+				"minecraft:elytra",
+				"minecraft:turtle_helmet",
+				"minecraft:flint_and_steel",
+				"minecraft:bow",
+				"minecraft:wooden_sword",
+				"minecraft:wooden_shovel",
+				"minecraft:wooden_pickaxe",
+				"minecraft:wooden_axe",
+				"minecraft:wooden_hoe",
+				"minecraft:stone_sword",
+				"minecraft:stone_shovel",
+				"minecraft:stone_pickaxe",
+				"minecraft:stone_axe",
+				"minecraft:stone_hoe",
+				"minecraft:golden_sword",
+				"minecraft:golden_shovel",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_axe",
+				"minecraft:golden_hoe",
+				"minecraft:iron_sword",
+				"minecraft:iron_shovel",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_axe",
+				"minecraft:iron_hoe",
+				"minecraft:diamond_sword",
+				"minecraft:diamond_shovel",
+				"minecraft:diamond_pickaxe",
+				"minecraft:diamond_axe",
+				"minecraft:diamond_hoe",
+				"minecraft:netherite_sword",
+				"minecraft:netherite_shovel",
+				"minecraft:netherite_pickaxe",
+				"minecraft:netherite_axe",
+				"minecraft:netherite_hoe",
+				"minecraft:leather_helmet",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_leggings",
+				"minecraft:leather_boots",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_leggings",
+				"minecraft:chainmail_boots",
+				"minecraft:iron_helmet",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_leggings",
+				"minecraft:iron_boots",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:golden_helmet",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_leggings",
+				"minecraft:golden_boots",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:compass",
+				"minecraft:fishing_rod",
+				"minecraft:shears",
+				"minecraft:mace",
+				"minecraft:skeleton_skull",
+				"minecraft:wither_skeleton_skull",
+				"minecraft:player_head",
+				"minecraft:zombie_head",
+				"minecraft:creeper_head",
+				"minecraft:dragon_head",
+				"minecraft:piglin_head",
+				"minecraft:shield",
+				"minecraft:trident",
+				"minecraft:crossbow",
+				"minecraft:brush"
 			]
 		},
 		{
+			"name": "WIND_BURST",
+			"key": "minecraft:wind_burst",
 			"maxLevel": 3,
 			"translationKey": "enchantment.minecraft.wind_burst",
 			"startLevel": 1,
-			"treasure": true,
-			"cursed": false,
+			"anvilCost": 4,
 			"tradeable": false,
 			"discoverable": false,
-			"anvilCost": 4,
-			"name": "WIND_BURST",
-			"key": "minecraft:wind_burst",
+			"treasure": true,
+			"cursed": false,
 			"displayNames": [
 				{
 					"level": 1,
@@ -3505,6 +4151,9 @@
 			],
 			"conflicts": [
 				"minecraft:wind_burst"
+			],
+			"enchantables": [
+				"minecraft:mace"
 			]
 		}
 	]
