@@ -120,7 +120,6 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	@Override
 	public @Nullable PluginClassLoaderGroup getGroup()
 	{
-		// TODO Auto-generated method stub
 		return classLoaderGroup;
 	}
 

@@ -136,11 +136,11 @@ public class MockBukkit
 	 *
 	 * @param path Path to the jar.
 	 */
-	public static void loadJar(@NotNull String path)
+	public static Plugin loadJar(@NotNull String path)
 	{
 		try
 		{
-			loadJar(new File(path));
+			return loadJar(new File(path));
 		}
 		catch (InvalidPluginException e)
 		{
@@ -155,8 +155,8 @@ public class MockBukkit
 	 * Loads a plugin from a jar.
 	 *
 	 * @param jarFile Path to the jar.
-	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
 	 * @return An instance of the plugin's main class.
+	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
 	 */
 	public static Plugin loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{

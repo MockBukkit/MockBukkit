@@ -21,6 +21,7 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	private final File pluginFile;
 	private final ServerMock server;
 	private final PluginDescriptionFile description;
+	private final PluginClassLoaderGroup classLoaderGroup = new MockBukkitPluginClassLoaderGroup();
 	private final File dataFolder;
 
 	public MockBukkitURLClassLoader(File file, ClassLoader parent, ServerMock server,
@@ -61,7 +62,7 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	@Override
 	public @Nullable PluginClassLoaderGroup getGroup()
 	{
-		return null;
+		return classLoaderGroup;
 	}
 
 	// This method is override to make sure that the plugin's resources are loaded before the resources of parent classloader
