@@ -5,4 +5,4 @@
 rootProject.name = "MockBukkit-v${extensions.extraProperties.get("paper.api.version")}"
 
 include(":extra:TestPlugin")
-include(":mnetaminer")
+include(":metaminer")
