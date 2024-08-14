@@ -25,7 +25,7 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.10.3")
+	implementation("org.junit.jupiter:junit-jupiter:5.11.0")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
