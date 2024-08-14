@@ -26,6 +26,7 @@ import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
@@ -1332,7 +1333,8 @@ class WorldMockTest
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
 				Arguments.of(EntityType.ARROW, Arrow.class),
-				Arguments.of(EntityType.MARKER, MarkerMock.class)
+				Arguments.of(EntityType.MARKER, MarkerMock.class),
+				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class)
 		);
 	}
 
