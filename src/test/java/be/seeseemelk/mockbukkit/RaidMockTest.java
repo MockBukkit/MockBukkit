@@ -197,7 +197,7 @@ class RaidMockTest
 	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
 	void setWaves_GivenNegativeValues(int expectedCount) {
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(expectedCount));
-		assertEquals("groupCount cannot be negative", e.getMessage());
+		assertEquals("waves cannot be negative", e.getMessage());
 	}
 
 
