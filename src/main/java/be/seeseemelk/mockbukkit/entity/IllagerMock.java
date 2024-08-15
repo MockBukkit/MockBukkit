@@ -15,7 +15,7 @@ public abstract class IllagerMock extends RaiderMock implements Illager
 {
 
 	/**
-	 * Constructs a new {@link RaiderMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link IllagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.

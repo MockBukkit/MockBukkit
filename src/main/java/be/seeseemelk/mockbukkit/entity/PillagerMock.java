@@ -21,7 +21,7 @@ public class PillagerMock extends IllagerMock implements Pillager, MockRangedEnt
 	private final Inventory inventory = new InventoryMock(this, 5, InventoryType.CHEST);
 
 	/**
-	 * Constructs a new {@link RaiderMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PillagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
