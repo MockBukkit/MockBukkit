@@ -83,6 +83,7 @@ import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
+import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
@@ -1341,7 +1342,8 @@ class WorldMockTest
 				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class),
 				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
 				Arguments.of(EntityType.WITCH, WitchMock.class),
-				Arguments.of(EntityType.RAVAGER, RavagerMock.class)
+				Arguments.of(EntityType.RAVAGER, RavagerMock.class),
+				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class)
 		);
 	}
 
