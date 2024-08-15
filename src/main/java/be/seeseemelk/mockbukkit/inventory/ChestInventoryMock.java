@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -24,6 +25,8 @@ public class ChestInventoryMock extends InventoryMock
 	public ChestInventoryMock(InventoryHolder holder, int size)
 	{
 		super(holder, size, InventoryType.CHEST);
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0,
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
 	}
 
 	@Override
