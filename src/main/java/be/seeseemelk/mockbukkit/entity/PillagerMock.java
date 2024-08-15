@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pillager;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -41,6 +42,12 @@ public class PillagerMock extends IllagerMock implements Pillager, MockRangedEnt
 	public @NotNull Inventory getInventory()
 	{
 		return this.inventory;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.PILLAGER;
 	}
 
 }

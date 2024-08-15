@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,6 +48,18 @@ class PillagerMockTest
 		assertNotNull(inventory);
 		assertEquals(5, inventory.getSize());
 		assertSame(inventory, pillager.getInventory());
+	}
+
+	@Test
+	void getType()
+	{
+		assertEquals(EntityType.PILLAGER, pillager.getType());
+	}
+
+	@Test
+	void getEyeHeight_GivenDefaultPosition()
+	{
+		assertEquals(1.6575, pillager.getEyeHeight());
 	}
 
 }
