@@ -30,6 +30,7 @@ import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
+import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
 import be.seeseemelk.mockbukkit.entity.FireballMock;
@@ -44,6 +45,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
@@ -1343,7 +1345,9 @@ class WorldMockTest
 				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
 				Arguments.of(EntityType.WITCH, WitchMock.class),
 				Arguments.of(EntityType.RAVAGER, RavagerMock.class),
-				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class)
+				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
+				Arguments.of(EntityType.EVOKER, EvokerMock.class),
+				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class)
 		);
 	}
 
