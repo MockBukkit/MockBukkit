@@ -26,7 +26,7 @@ public class PillagerMock extends IllagerMock implements Pillager, MockRangedEnt
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected PillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public PillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
