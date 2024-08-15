@@ -72,7 +72,7 @@ public class WitchMock extends RaiderMock implements Witch, MockRangedEntity<Wit
 	public void setDrinkingPotion(@Nullable ItemStack potion)
 	{
 		Preconditions.checkArgument(potion == null || potion.getType().isEmpty() || potion.getType() == Material.POTION, "must be potion, air, or null");
-		this.drinkingPotion = (potion == null ? ItemStack.empty() : potion);
+		this.drinkingPotion = (potion == null ? ItemStack.empty() : potion.clone());
 	}
 
 	@Override

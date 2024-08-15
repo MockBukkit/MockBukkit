@@ -17,7 +17,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -121,7 +121,8 @@ class WitchMockTest
 		ItemStack actual = witch.getDrinkingPotion();
 
 		assertNotNull(actual);
-		assertSame(itemStack, actual);
+		assertNotSame(itemStack, actual);
+		assertEquals(itemStack, actual);
 	}
 
 	@ParameterizedTest
