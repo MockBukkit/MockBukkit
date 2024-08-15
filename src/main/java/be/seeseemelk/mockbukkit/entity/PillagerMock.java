@@ -2,11 +2,14 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pillager;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -30,6 +33,14 @@ public class PillagerMock extends IllagerMock implements Pillager, MockRangedEnt
 	public PillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
+	}
+
+	@Override
+	public void finalizeSpawn()
+	{
+		super.finalizeSpawn();
+
+		inventory.setItem(EquipmentSlot.HAND.ordinal(), ItemStack.of(Material.CROSSBOW));
 	}
 
 	@Override
