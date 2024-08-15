@@ -22,7 +22,7 @@ public class IllusionerMock extends SpellcasterMock implements Illusioner, MockR
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected IllusionerMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public IllusionerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
