@@ -1245,6 +1245,7 @@ class WorldMockTest
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), type);
 		assertInstanceOf(expectedClass, entity);
 		assertTrue(entity.isValid());
+		assertEquals(type, entity.getType());
 	}
 
 	public static Stream<Arguments> getSpawnableEntities()

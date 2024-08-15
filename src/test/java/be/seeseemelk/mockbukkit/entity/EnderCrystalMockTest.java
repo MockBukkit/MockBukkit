@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,6 +96,11 @@ class EnderCrystalMockTest
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> crystal.setBeamTarget(target));
 
 		assertEquals("Cannot set beam target location to different world", e.getMessage());
+	}
+
+	@Test
+	void getType() {
+		assertEquals(EntityType.END_CRYSTAL, crystal.getType());
 	}
 
 }

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Location;
 import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,6 +60,12 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 		} else {
 			this.beamTarget = location.toBlockLocation();
 		}
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.END_CRYSTAL;
 	}
 
 }
