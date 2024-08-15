@@ -29,7 +29,7 @@ public class WitchMock extends RaiderMock implements Witch, MockRangedEntity<Wit
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected WitchMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public WitchMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

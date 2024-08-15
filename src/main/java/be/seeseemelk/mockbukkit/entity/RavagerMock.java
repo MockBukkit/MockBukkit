@@ -25,7 +25,7 @@ public class RavagerMock extends RaiderMock implements Ravager
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected RavagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public RavagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
