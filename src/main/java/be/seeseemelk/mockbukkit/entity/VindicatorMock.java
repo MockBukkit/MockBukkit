@@ -23,7 +23,7 @@ public class VindicatorMock extends IllagerMock implements Vindicator
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected VindicatorMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public VindicatorMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

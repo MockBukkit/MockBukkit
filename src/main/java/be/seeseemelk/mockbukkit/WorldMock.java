@@ -87,6 +87,7 @@ import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TridentMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
+import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
@@ -227,6 +228,7 @@ import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
+import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.Witch;
@@ -1479,6 +1481,9 @@ public class WorldMock implements World
 		} else if (clazz == Ravager.class)
 		{
 			return new RavagerMock(server, UUID.randomUUID());
+		} else if (clazz == Vindicator.class)
+		{
+			return new VindicatorMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
