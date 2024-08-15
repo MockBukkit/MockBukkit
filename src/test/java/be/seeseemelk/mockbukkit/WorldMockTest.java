@@ -58,6 +58,7 @@ import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PigZombieMock;
+import be.seeseemelk.mockbukkit.entity.PillagerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
@@ -1338,6 +1339,7 @@ class WorldMockTest
 				Arguments.of(EntityType.ARROW, Arrow.class),
 				Arguments.of(EntityType.MARKER, MarkerMock.class),
 				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class),
+				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
 				Arguments.of(EntityType.WITCH, WitchMock.class),
 				Arguments.of(EntityType.RAVAGER, RavagerMock.class)
 		);

@@ -61,6 +61,7 @@ import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PigZombieMock;
+import be.seeseemelk.mockbukkit.entity.PillagerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
@@ -201,6 +202,7 @@ import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Pillager;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
@@ -1468,6 +1470,9 @@ public class WorldMock implements World
 		} else if (clazz == EnderCrystal.class)
 		{
 			return new EnderCrystalMock(server, UUID.randomUUID());
+		} else if (clazz == Pillager.class)
+		{
+			return new PillagerMock(server, UUID.randomUUID());
 		} else if (clazz == Witch.class)
 		{
 			return new WitchMock(server, UUID.randomUUID());
