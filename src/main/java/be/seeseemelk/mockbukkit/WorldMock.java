@@ -66,6 +66,7 @@ import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.RabbitMock;
+import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -87,6 +88,7 @@ import be.seeseemelk.mockbukkit.entity.TridentMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
@@ -206,6 +208,7 @@ import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
 import org.bukkit.entity.Rabbit;
+import org.bukkit.entity.Ravager;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Silverfish;
@@ -226,6 +229,7 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.Witch;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
@@ -1469,6 +1473,12 @@ public class WorldMock implements World
 		} else if (clazz == Pillager.class)
 		{
 			return new PillagerMock(server, UUID.randomUUID());
+		} else if (clazz == Witch.class)
+		{
+			return new WitchMock(server, UUID.randomUUID());
+		} else if (clazz == Ravager.class)
+		{
+			return new RavagerMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

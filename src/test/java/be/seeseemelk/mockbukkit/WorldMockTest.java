@@ -64,6 +64,7 @@ import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.RabbitMock;
+import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -83,6 +84,7 @@ import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
@@ -1244,6 +1246,7 @@ class WorldMockTest
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), type);
 		assertInstanceOf(expectedClass, entity);
 		assertTrue(entity.isValid());
+		assertEquals(type, entity.getType());
 	}
 
 	public static Stream<Arguments> getSpawnableEntities()
@@ -1336,7 +1339,9 @@ class WorldMockTest
 				Arguments.of(EntityType.ARROW, Arrow.class),
 				Arguments.of(EntityType.MARKER, MarkerMock.class),
 				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class),
-				Arguments.of(EntityType.PILLAGER, PillagerMock.class)
+				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
+				Arguments.of(EntityType.WITCH, WitchMock.class),
+				Arguments.of(EntityType.RAVAGER, RavagerMock.class)
 		);
 	}
 
