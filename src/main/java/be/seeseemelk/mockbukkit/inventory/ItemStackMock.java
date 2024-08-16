@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class ItemStackMock extends ItemStack
 {
@@ -24,7 +25,7 @@ public class ItemStackMock extends ItemStack
 	private ItemType type = ItemTypeMock.AIR;
 	private int amount = 1;
 	private ItemMeta itemMeta = new ItemMetaMock();
-	private short durability;
+	private short durability = -1;
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
 	private static final String ITEMMETA_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
@@ -52,21 +53,34 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = type.asItemType();
 		this.amount = amount;
-		this.durability = type.getMaxDurability();
+		this.durability = initDurability(this.type);
 		this.itemMeta = findItemMeta(type);
 	}
 
 	private ItemStackMock(@Nullable Void v)
 	{
 		this.type = ItemTypeMock.AIR;
+		this.durability = initDurability(type);
 		this.amount = 0;
 	}
 
 	private ItemStackMock(@NotNull ItemType type)
 	{
 		this.type = type;
-		this.durability = type.getMaxDurability();
+		this.durability = initDurability(type);
 		this.itemMeta = findItemMeta(type.asMaterial());
+	}
+
+	/**
+	 * By some reason paper differentiates between an item with durability set and one without durability set
+	 */
+	private short initDurability(ItemType type)
+	{
+		if (type == null || type.getMaxDurability() == 0)
+		{
+			return -1;
+		}
+		return type.getMaxDurability();
 	}
 
 	@Override
@@ -138,7 +152,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public short getDurability()
 	{
-		return this.durability;
+		return (short) Math.max(this.durability, 0);
 	}
 
 	@Override
@@ -207,7 +221,7 @@ public class ItemStackMock extends ItemStack
 	{
 		if (obj == null) return false;
 		if (!(obj instanceof final ItemStackMock bukkit)) return false;
-		return isSimilar(bukkit) && this.amount == bukkit.getAmount();
+		return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore());
 	}
 
 	@Override
@@ -219,7 +233,7 @@ public class ItemStackMock extends ItemStack
 		}
 		else
 		{
-			int hash = type.hashCode();
+			int hash = Objects.hash(type, durability, lore());
 			hash = hash * 31 + this.getAmount();
 			return hash;
 		}
