@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -39,6 +40,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.lang.reflect.AccessFlag;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -138,47 +143,99 @@ class UnsafeValuesTest
 		ItemStack actual = mockUnsafeValues.deserializeItem(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
+		System.out.println(actual.getItemMeta());
 	}
 
 	private void populateItemMeta(ItemStack item)
 	{
-		item.editMeta(meta ->
+		item.editMeta(this::insertMeta);
+	}
+
+	private void insertMeta(ItemMeta meta)
+	{
+		final PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
+		persistentDataContainer.set(new NamespacedKey("test", "test"), PersistentDataType.STRING, "test");
+		meta.setLore(List.of("Hello", "world!"));
+		meta.addEnchant(Enchantment.SHARPNESS, 1, true);
+		if (meta instanceof BundleMeta bundleMeta)
 		{
-			meta.setDisplayName("Test");
-			meta.setLore(List.of("Test1", "Test2"));
-			meta.setUnbreakable(true);
-			meta.addEnchant(Enchantment.SHARPNESS, 1, true);
-			final PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
-			persistentDataContainer.set(new NamespacedKey("test", "test"), PersistentDataType.STRING, "test");
-		});
-		item.editMeta(meta ->
+			bundleMeta.addItem(new ItemStack(Material.BAMBOO));
+		}
+		if (meta instanceof BannerMeta bannerMeta)
 		{
-			if (meta instanceof BundleMeta bundleMeta)
+			bannerMeta.addPattern(new org.bukkit.block.banner.Pattern(DyeColor.BLACK, PatternType.BASE));
+		}
+		if (meta instanceof CompassMeta compassMeta)
+		{
+			compassMeta.setLodestone(new Location(Bukkit.getWorlds().get(0), 1, 2, 3));
+			compassMeta.setLodestoneTracked(true);
+		}
+		if (meta instanceof CrossbowMeta crossbowMeta)
+		{
+			ItemStack arrow = new ItemStackMock(Material.ARROW);
+			crossbowMeta.addChargedProjectile(arrow);
+		}
+		if (meta instanceof EnchantmentStorageMeta storageMeta)
+		{
+			storageMeta.addStoredEnchant(Enchantment.SHARPNESS, 1, true);
+		}
+		try
+		{
+			insertTrivialData(meta);
+		}
+		catch (InvocationTargetException ignored)
+		{
+		}
+		catch (IllegalAccessException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void insertTrivialData(ItemMeta meta) throws InvocationTargetException, IllegalAccessException
+	{
+		for (Method method : meta.getClass().getMethods())
+		{
+			Parameter[] parameters = method.getParameters();
+			if (parameters.length != 1 || !method.accessFlags().contains(AccessFlag.PUBLIC))
 			{
-				bundleMeta.addItem(item.clone());
+				continue;
 			}
-			if (meta instanceof BannerMeta bannerMeta)
+			Parameter parameter = parameters[0];
+			Class<?> parameterType = parameter.getType();
+			if (boolean.class.isAssignableFrom(parameterType))
 			{
-				bannerMeta.addPattern(new org.bukkit.block.banner.Pattern(DyeColor.BLACK, PatternType.BASE));
+				method.invoke(meta, true);
 			}
-			if (meta instanceof CompassMeta compassMeta)
+			if (int.class.isAssignableFrom(parameterType))
 			{
-				compassMeta.setLodestone(new Location(Bukkit.getWorlds().get(0), 1, 2, 3));
-				compassMeta.setLodestoneTracked(true);
+				method.invoke(meta, 8);
 			}
-			if (meta instanceof CrossbowMeta crossbowMeta)
+			if (short.class.isAssignableFrom(parameterType))
 			{
-				ItemStack arrow = new ItemStackMock(Material.ARROW);
-				arrow.editMeta(itemMeta ->
-				{
-				});
-				crossbowMeta.addChargedProjectile(arrow);
+				method.invoke(meta, (short) 8);
 			}
-			if (meta instanceof EnchantmentStorageMeta storageMeta)
+			if (long.class.isAssignableFrom(parameterType))
 			{
-				storageMeta.addStoredEnchant(Enchantment.SHARPNESS, 1, true);
+				method.invoke(meta, 8L);
 			}
-		});
+			if (double.class.isAssignableFrom(parameterType))
+			{
+				method.invoke(meta, 8D);
+			}
+			if (float.class.isAssignableFrom(parameterType))
+			{
+				method.invoke(meta, (short) 8);
+			}
+			if (String.class.isAssignableFrom(parameterType))
+			{
+				method.invoke(meta, "Hello world!");
+			}
+			if (Enum.class.isAssignableFrom(parameterType))
+			{
+				method.invoke(meta, parameterType.getEnumConstants()[0]);
+			}
+		}
 	}
 
 	@Test
