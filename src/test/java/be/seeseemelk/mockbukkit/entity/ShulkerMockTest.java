@@ -39,7 +39,8 @@ class ShulkerMockTest
 	}
 
 	@Test
-	void getPeek_GivenDefaultValue() {
+	void getPeek_GivenDefaultValue()
+	{
 		assertEquals(0, shulker.getPeek());
 	}
 
@@ -47,7 +48,8 @@ class ShulkerMockTest
 	@ValueSource(floats = {
 			0.0F, 0.25F, 0.50F, 0.666666666667F, 0.85F, 1.0F
 	})
-	void getPeek_GivenValueValue(float expectedValue) {
+	void getPeek_GivenValueValue(float expectedValue)
+	{
 		shulker.setPeek(expectedValue);
 		assertEquals(expectedValue, shulker.getPeek());
 	}
@@ -56,20 +58,23 @@ class ShulkerMockTest
 	@ValueSource(floats = {
 			-10, -0.00000001F, 1.000001F, 10
 	})
-	void setPeek_GivenInvalidValue(float expectedValue) {
+	void setPeek_GivenInvalidValue(float expectedValue)
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> shulker.setPeek(expectedValue));
 		assertEquals("value needs to be in between or equal to 0 and 1", e.getMessage());
 	}
 
 	@Test
-	void getAttachedFace_GivenDefaultValue() {
+	void getAttachedFace_GivenDefaultValue()
+	{
 		assertEquals(BlockFace.DOWN, shulker.getAttachedFace());
 	}
 
 	@ParameterizedTest
 	@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE,
 				names={ "NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN" })
-	void getAttachedFace_GivenAllowedValue(BlockFace blockFace) {
+	void getAttachedFace_GivenAllowedValue(BlockFace blockFace)
+	{
 		shulker.setAttachedFace(blockFace);
 		assertEquals(blockFace, shulker.getAttachedFace());
 	}
@@ -77,27 +82,31 @@ class ShulkerMockTest
 	@ParameterizedTest
 	@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE,
 			names={ "NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN" })
-	void setAttachedFace_GivenDisallowedValue(BlockFace blockFace) {
+	void setAttachedFace_GivenDisallowedValue(BlockFace blockFace)
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> shulker.setAttachedFace(blockFace));
 		String expectedMessage = String.format("%s is not a valid block face to attach a shulker to, a cartesian block face is expected", blockFace);
 		assertEquals(expectedMessage, e.getMessage());
 	}
 
 	@Test
-	void setAttachedFace_GivenNullValue() {
+	void setAttachedFace_GivenNullValue()
+	{
 		NullPointerException e = assertThrows(NullPointerException.class, () -> shulker.setAttachedFace(null));
 		assertEquals("face cannot be null", e.getMessage());
 	}
 
 	@Test
-	void getColor_GivenDefaultValue() {
+	void getColor_GivenDefaultValue()
+	{
 		assertNull(shulker.getColor());
 	}
 
 	@ParameterizedTest
 	@NullSource
 	@EnumSource(DyeColor.class)
-	void getColor_GivenValueValue(DyeColor expectedValue) {
+	void getColor_GivenValueValue(DyeColor expectedValue)
+	{
 		shulker.setColor(expectedValue);
 		assertEquals(expectedValue, shulker.getColor());
 	}
