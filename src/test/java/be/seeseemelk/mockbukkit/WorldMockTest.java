@@ -1351,7 +1351,6 @@ class WorldMockTest
 				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
 				Arguments.of(EntityType.EVOKER, EvokerMock.class),
 				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class),
-				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
 				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
 				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
