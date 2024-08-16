@@ -1,11 +1,14 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.WorldCreator;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
@@ -32,6 +35,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,24 +102,30 @@ class UnsafeValuesTest
 		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
 	}
 
-	private static Stream<Arguments> provideTestItems()
+	private static Stream<Arguments> provideTestItems() throws IOException
 	{
 		MockBukkit.mock();
 		List<Arguments> args = new ArrayList<>();
-		for (Material material : Material.values())
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/itemstack/metaItemTypes.json"))
 		{
-			if (material.isLegacy() || material.isAir())
+			JsonElement jsonArray = JsonParser.parseReader(new InputStreamReader(inputStream));
+			for (JsonElement jsonElement : jsonArray.getAsJsonArray())
 			{
-				continue;
+				Material material = Registry.MATERIAL.get(NamespacedKey.fromString(jsonElement.getAsString()));
+				if (material.isLegacy() || material.isAir())
+				{
+					continue;
+				}
+				if (material.asItemType() == null) //We dont have a way to serialize these properly right now
+				{
+					continue;
+				}
+				ItemStack item = new ItemStackMock(material);
+				args.add(Arguments.of(Named.of(material.name(), item)));
 			}
-			if (material.asItemType() == null) //We dont have a way to serialize these properly right now
-			{
-				continue;
-			}
-			ItemStack item = new ItemStackMock(material);
-			args.add(Arguments.of(Named.of(material.name(), item)));
+			ItemStack item = new ItemStackMock(Material.STONE);
+			args.add(Arguments.of(Named.of(Material.STONE.name(), item)));
 		}
-
 		return args.stream();
 	}
 
@@ -124,7 +136,8 @@ class UnsafeValuesTest
 		populateItemMeta(expected);
 		byte[] serialized = mockUnsafeValues.serializeItem(expected);
 		ItemStack actual = mockUnsafeValues.deserializeItem(serialized);
-		assertEquals(expected, actual, "ItemStacks are not equal, metas: \n" + expected.getItemMeta() + "\n" + actual.getItemMeta());
+		assertEquals(expected, actual);
+		assertEquals(expected.getItemMeta(), actual.getItemMeta());
 	}
 
 	private void populateItemMeta(ItemStack item)
@@ -156,7 +169,9 @@ class UnsafeValuesTest
 			if (meta instanceof CrossbowMeta crossbowMeta)
 			{
 				ItemStack arrow = new ItemStackMock(Material.ARROW);
-				arrow.editMeta(itemMeta -> {});
+				arrow.editMeta(itemMeta ->
+				{
+				});
 				crossbowMeta.addChargedProjectile(arrow);
 			}
 			if (meta instanceof EnchantmentStorageMeta storageMeta)
