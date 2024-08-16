@@ -104,4 +104,17 @@ class ChickenMockTest
 		assertEquals(100, chicken.getEggLayTime());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultChicken()
+	{
+		assertEquals(0.595D, chicken.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyChicken()
+	{
+		chicken.setBaby();
+		assertEquals(0.2975D, chicken.getEyeHeight());
+	}
+
 }

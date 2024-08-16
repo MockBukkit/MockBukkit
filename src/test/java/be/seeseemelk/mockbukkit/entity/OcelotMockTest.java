@@ -64,4 +64,17 @@ class OcelotMockTest
 		assertEquals(EntityType.OCELOT, ocelot.getType());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultOcelot()
+	{
+		assertEquals(0.595D, ocelot.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyOcelot()
+	{
+		ocelot.setBaby();
+		assertEquals(0.2975D, ocelot.getEyeHeight());
+	}
+
 }

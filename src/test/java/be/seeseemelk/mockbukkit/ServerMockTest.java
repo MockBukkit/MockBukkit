@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
@@ -47,6 +48,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
+import org.bukkit.Tag;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -1312,6 +1314,18 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateChestInventory()
+	{
+		assertInstanceOf(ChestInventoryMock.class, server.createInventory(null, InventoryType.CHEST, "", 9));
+	}
+
+	@Test
+	void testCreateChestInventory_GivenInvalidSize()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CHEST, "", 10));
+	}
+
+	@Test
 	void testCreatePlayerInventory()
 	{
 		PlayerMock playerMock = server.addPlayer();
@@ -1715,6 +1729,20 @@ class ServerMockTest
 		PlayerMock playerMock = server.addPlayer("CapitalizedName");
 		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
 		assertEquals(playerMock, offlinePlayer);
+	}
+
+	@Test
+	void testGetTags_blockRegistry()
+	{
+		Iterable<Tag<Material>> blockTags = server.getTags(Tag.REGISTRY_BLOCKS, Material.class);
+		assertTrue(blockTags.iterator().hasNext());
+	}
+
+	@Test
+	void testGetTags_itemRegistry()
+	{
+		Iterable<Tag<Material>> itemTags = server.getTags(Tag.REGISTRY_ITEMS, Material.class);
+		assertTrue(itemTags.iterator().hasNext());
 	}
 
 }

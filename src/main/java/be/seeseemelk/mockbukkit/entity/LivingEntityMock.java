@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.attribute.AttributesMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.EntityEquipmentMock;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
@@ -98,6 +99,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean collidable = true;
 	private boolean ai = true;
 	private boolean swimming;
+	private boolean sleeping;
+	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
@@ -332,13 +335,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public double getEyeHeight()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void startUsingItem(@NotNull EquipmentSlot hand)
 	{
 		// TODO Auto-generated method stub
@@ -380,11 +376,41 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	protected double getEyeHeight(EntityState pose)
+	{
+		return getHeight(pose) * 0.85D;
+	}
+
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (ignorePose)
+		{
+			return getEyeHeight(EntityState.DEFAULT);
+		}
+
+		if (isSleeping())
+		{
+			return getEyeHeight(EntityState.SLEEPING);
+		}
+
+		if (isSneaking())
+		{
+			return getEyeHeight(EntityState.SNEAKING);
+		}
+
+		if (isSwimming())
+		{
+			return getEyeHeight(EntityState.SWIMMING);
+		}
+
+		return getEyeHeight(getEntityState());
+	}
+
+	@Override
+	public double getEyeHeight()
+	{
+		return getEyeHeight(false);
 	}
 
 
@@ -863,18 +889,36 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Set whether this entity is slumbering.
+	 *
+	 * @param sleeping If this entity is slumbering
+	 */
+	public void setSleeping(boolean sleeping)
+	{
+		this.sleeping = sleeping;
+	}
+
 	@Override
 	public boolean isSleeping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleeping;
+	}
+
+	/**
+	 * Set whether this entity is climbing.
+	 *
+	 * @param climbing If this entity is climbing
+	 */
+	public void setClimbing(boolean climbing)
+	{
+		this.climbing = climbing;
 	}
 
 	@Override
 	public boolean isClimbing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.climbing;
 	}
 
 	@Override

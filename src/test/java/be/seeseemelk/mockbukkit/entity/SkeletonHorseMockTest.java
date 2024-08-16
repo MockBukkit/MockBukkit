@@ -77,4 +77,17 @@ class SkeletonHorseMockTest
 		assertTrue(skeletonHorse.isTrap());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultSkeletonHorse()
+	{
+		assertEquals(1.36D, skeletonHorse.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabySkeletonHorse()
+	{
+		skeletonHorse.setBaby();
+		assertEquals(0.68D, skeletonHorse.getEyeHeight());
+	}
+
 }

@@ -85,4 +85,10 @@ class DolphinMockTest
 		assertEquals("Location can't be null.", illegalArgumentException.getMessage());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultDolphin()
+	{
+		assertEquals(0.51D, dolphin.getEyeHeight());
+	}
+
 }

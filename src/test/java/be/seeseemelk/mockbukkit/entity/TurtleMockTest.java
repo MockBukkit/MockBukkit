@@ -55,4 +55,18 @@ class TurtleMockTest
 		assertEquals(location, turtle.getHome());
 	}
 
+
+	@Test
+	void getEyeHeight_GivenDefaultTurtle()
+	{
+		assertEquals(0.34D, turtle.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyTurtle()
+	{
+		turtle.setBaby();
+		assertEquals(0.102D, turtle.getEyeHeight());
+	}
+
 }

@@ -61,4 +61,17 @@ class RabbitMockTest
 		assertEquals(EntityType.RABBIT, rabbit.getType());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultRabbit()
+	{
+		assertEquals(0.425D, rabbit.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyRabbit()
+	{
+		rabbit.setBaby();
+		assertEquals(0.2125D, rabbit.getEyeHeight());
+	}
+
 }

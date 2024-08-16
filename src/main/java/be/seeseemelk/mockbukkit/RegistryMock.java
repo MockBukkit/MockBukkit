@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockTypeMock;
+import be.seeseemelk.mockbukkit.block.banner.PatternTypeMock;
 import be.seeseemelk.mockbukkit.damage.DamageTypeMock;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
 import be.seeseemelk.mockbukkit.entity.variant.CatVariantMock;
@@ -148,6 +149,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		else if (key == RegistryKey.MAP_DECORATION_TYPE)
 		{
 			return MapCursorTypeMock::from;
+		}
+		else if (key == RegistryKey.BANNER_PATTERN)
+		{
+			return PatternTypeMock::from;
 		}
 		else
 		{

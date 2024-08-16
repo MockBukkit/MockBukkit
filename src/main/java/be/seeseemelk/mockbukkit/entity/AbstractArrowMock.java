@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -192,6 +193,13 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	{
 		Preconditions.checkArgument(sound != null, "Sound can not be null");
 		this.hitSound = sound;
+	}
+
+	@Override
+	public void setShooter(@Nullable ProjectileSource projectileSource, boolean b)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
