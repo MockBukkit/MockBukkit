@@ -45,6 +45,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
@@ -70,12 +71,14 @@ import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.ShulkerMock;
 import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SnowballMock;
+import be.seeseemelk.mockbukkit.entity.SnowmanMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpectralArrowMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
@@ -184,6 +187,7 @@ import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
@@ -212,12 +216,14 @@ import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Ravager;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Shulker;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
+import org.bukkit.entity.Snowman;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
@@ -1484,6 +1490,15 @@ public class WorldMock implements World
 		} else if (clazz == Vindicator.class)
 		{
 			return new VindicatorMock(server, UUID.randomUUID());
+		} else if (clazz == IronGolem.class)
+		{
+			return new IronGolemMock(server, UUID.randomUUID());
+		} else if (clazz == Snowman.class)
+		{
+			return new SnowmanMock(server, UUID.randomUUID());
+		} else if (clazz == Shulker.class)
+		{
+			return new ShulkerMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

@@ -44,6 +44,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
@@ -68,12 +69,14 @@ import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.ShulkerMock;
 import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SnowballMock;
+import be.seeseemelk.mockbukkit.entity.SnowmanMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
@@ -1343,7 +1346,10 @@ class WorldMockTest
 				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
 				Arguments.of(EntityType.WITCH, WitchMock.class),
 				Arguments.of(EntityType.RAVAGER, RavagerMock.class),
-				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class)
+				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
+				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
+				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
+				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
 		);
 	}
 

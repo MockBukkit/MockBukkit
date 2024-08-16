@@ -24,7 +24,7 @@ public class IronGolemMock extends GolemMock implements IronGolem
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected IronGolemMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public IronGolemMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

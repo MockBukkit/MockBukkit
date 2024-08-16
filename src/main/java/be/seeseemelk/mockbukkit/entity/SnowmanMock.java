@@ -25,7 +25,7 @@ public class SnowmanMock extends GolemMock implements Snowman, MockRangedEntity<
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected SnowmanMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public SnowmanMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
