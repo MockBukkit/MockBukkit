@@ -21,6 +21,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -84,6 +85,26 @@ class ItemStackMockTest
 	}
 
 	@Test
+	void equals_changedLore()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		itemStack.setLore(List.of("Hello", "world!"));
+		ItemStack cloned = itemStack.clone();
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+		assertEquals(itemStack, cloned);
+	}
+
+	@Test
+	void equals_changedDurability()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		itemStack.setDurability((short) 10);
+		ItemStack cloned = itemStack.clone();
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+		assertEquals(itemStack, cloned);
+	}
+
+	@Test
 	void equals_ChangedMeta()
 	{
 		ItemStack itemStack = new ItemStack(Material.DIAMOND);
@@ -127,6 +148,16 @@ class ItemStackMockTest
 		itemStack.setLore(lore);
 		assertNotSame(lore, itemStack.getLore());
 		assertEquals(lore, itemStack.getLore());
+	}
+
+	@Test
+	void setLore_copiedInternally()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE);
+		List<String> lore = new ArrayList<>(List.of("Hello", "world!"));
+		itemStack.setLore(lore);
+		lore.set(0, "Goodbye");
+		assertNotEquals(lore, itemStack.getLore());
 	}
 
 	private Class<? extends ItemMeta> getMetaInterface(Class<?> aClass)
