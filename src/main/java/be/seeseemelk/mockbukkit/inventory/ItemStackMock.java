@@ -44,7 +44,7 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
-		this.durability = type.getMaxDurability();
+		this.durability = initDurability(this.type);
 
 
 	}
@@ -211,7 +211,7 @@ public class ItemStackMock extends ItemStack
 		ItemStackMock clone = new ItemStackMock(this.type);
 
 		clone.setAmount(this.amount);
-		clone.setDurability(this.durability);
+		clone.durability = this.durability;
 		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
 		return clone;
 	}
@@ -220,8 +220,19 @@ public class ItemStackMock extends ItemStack
 	public boolean equals(Object obj)
 	{
 		if (obj == null) return false;
-		if (!(obj instanceof final ItemStackMock bukkit)) return false;
-		return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore());
+		if (!(obj instanceof ItemStack stack))
+		{
+			return false;
+		}
+		if (stack instanceof ItemStackMock bukkit)
+		{
+			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore());
+		}
+		else
+		{
+			// will delegate back to this method / no stack overflow as obj then will be item stack mock instance
+			return stack.equals(this);
+		}
 	}
 
 	@Override
