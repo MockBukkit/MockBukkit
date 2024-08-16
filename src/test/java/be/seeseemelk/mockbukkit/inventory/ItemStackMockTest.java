@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorMetaMock;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -27,7 +28,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -72,11 +75,58 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void hashCode_equals()
+	void equals()
 	{
 		ItemStack itemStack = new ItemStack(Material.DIAMOND);
 		ItemStack cloned = itemStack.clone();
 		assertEquals(itemStack.hashCode(), cloned.hashCode());
+		assertEquals(itemStack, cloned);
+	}
+
+	@Test
+	void equals_ChangedMeta()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack cloned = itemStack.clone();
+		cloned.setItemMeta(new ArmorMetaMock());
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+		assertEquals(itemStack, cloned);
+	}
+
+	@Test
+	void notEquals_changedDurability()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack cloned = itemStack.clone();
+		cloned.setDurability((short) 10);
+		assertNotEquals(itemStack, cloned);
+	}
+
+	@Test
+	void notEquals_changedLore()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack cloned = itemStack.clone();
+		cloned.setLore(List.of("Hello", "world!"));
+		assertNotEquals(itemStack, cloned);
+	}
+
+	@Test
+	void setLore_delegatesToMeta()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		itemStack.setLore(List.of("Hello", "world!"));
+		assertEquals("Hello", itemStack.getItemMeta().getLore().get(0));
+	}
+
+	@Test
+	void getLore_isCopied()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE);
+		List<String> lore = List.of("Hello", "world!");
+		itemStack.setLore(lore);
+		assertNotSame(lore, itemStack.getLore());
+		assertEquals(lore, itemStack.getLore());
 	}
 
 	private Class<? extends ItemMeta> getMetaInterface(Class<?> aClass)
