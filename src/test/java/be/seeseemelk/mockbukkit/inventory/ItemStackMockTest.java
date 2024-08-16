@@ -115,11 +115,32 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void notEquals_changedDurability()
+	void notEquals_changedDurability_weirdEdgeCase()
 	{
 		ItemStack itemStack = new ItemStack(Material.DIAMOND);
 		ItemStack cloned = itemStack.clone();
 		cloned.setDurability((short) 10);
+		assertNotEquals(itemStack, cloned);
+	}
+
+	@Test
+	void equals_changedDurability_weirdEdgeCase()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack cloned = itemStack.clone();
+		cloned.setDurability((short) 10);
+		itemStack.setDurability((short) 0);
+		assertEquals(itemStack.getDurability(), cloned.getDurability());
+		assertEquals(itemStack, cloned);
+	}
+
+	@Test
+	void notEquals_changedDurability()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE);
+		ItemStack cloned = itemStack.clone();
+		cloned.setDurability((short) 10);
+		assertNotEquals(itemStack.getDurability(), cloned.getDurability());
 		assertNotEquals(itemStack, cloned);
 	}
 
