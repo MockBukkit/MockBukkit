@@ -62,17 +62,23 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 		return serialized;
 	}
 
-	public static @NotNull ArmorMetaMock deserialize(@NotNull Map<String, Object> args)
+	@Override
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
-		ArmorMetaMock armorMetaMock = new ArmorMetaMock();
-		armorMetaMock.deserializeInternal(args);
+		super.deserializeInternal(args);
 		if (args.containsKey("trim"))
 		{
 			Map<String, Object> trimData = (Map<String, Object>) args.get("trim");
 			TrimMaterial trimMaterial = Registry.TRIM_MATERIAL.get(NamespacedKey.fromString(trimData.get("material").toString()));
 			TrimPattern trimPattern = Registry.TRIM_PATTERN.get(NamespacedKey.fromString(trimData.get("pattern").toString()));
-			armorMetaMock.setTrim(new ArmorTrim(trimMaterial, trimPattern));
+			this.setTrim(new ArmorTrim(trimMaterial, trimPattern));
 		}
+	}
+
+	public static @NotNull ArmorMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		ArmorMetaMock armorMetaMock = new ArmorMetaMock();
+		armorMetaMock.deserializeInternal(args);
 		return armorMetaMock;
 	}
 
