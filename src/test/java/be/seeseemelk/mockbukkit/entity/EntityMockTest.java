@@ -40,6 +40,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.UUID;
@@ -1262,6 +1263,29 @@ class EntityMockTest
 		Location actual = entity.getLocation();
 		assertEquals(45.0F, actual.getYaw());
 		assertEquals(90.0F, actual.getPitch());
+	}
+
+	@Test
+	void getTicksLived_GivenDefaultValue()
+	{
+		assertEquals(0, entity.getTicksLived());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	void getTicksLived_GivenValidValue(int validValue)
+	{
+		entity.setTicksLived(validValue);
+		assertEquals(validValue, entity.getTicksLived());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-100, -10, -5, -4, -3, -2, -1, 0})
+	void setTicksLived_GivenValidValue(int invalidValue)
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setTicksLived(invalidValue));
+		String expectedMessage = String.format("Age value (%s) must be greater than 0", invalidValue);
+		assertEquals(expectedMessage, e.getMessage());
 	}
 
 }
