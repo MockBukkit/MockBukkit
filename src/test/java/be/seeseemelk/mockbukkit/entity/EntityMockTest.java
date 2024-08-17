@@ -1373,4 +1373,18 @@ class EntityMockTest
 		assertFalse(entity.removeScoreboardTag("test"));
 	}
 
+	@Test
+	void isOnGround_GivenDefaultValue()
+	{
+		assertFalse(entity.isOnGround());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isOnGround_GivenValidValue(boolean validValue)
+	{
+		entity.setOnGround(validValue);
+		assertEquals(validValue, entity.isOnGround());
+	}
+
 }

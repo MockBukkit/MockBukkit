@@ -104,6 +104,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean noPhysics;
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
+	private boolean onGround;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
@@ -650,8 +651,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isOnGround()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.onGround;
+	}
+
+	/**
+	 * Sets if the entity is supported by a block.
+	 *
+	 * @param onGround True if entity is on ground.
+	 */
+	public void setOnGround(boolean onGround)
+	{
+		this.onGround = onGround;
 	}
 
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
