@@ -1460,4 +1460,18 @@ class EntityMockTest
 		assertEquals(validValue, entity.isInWater());
 	}
 
+	@Test
+	void isInWorld_GivenDefaultValue()
+	{
+		assertFalse(entity.isInWorld());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isInWorld_GivenValidValue(boolean validValue)
+	{
+		entity.setInWorld(validValue);
+		assertEquals(validValue, entity.isInWorld());
+	}
+
 }
