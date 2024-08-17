@@ -105,7 +105,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private boolean onGround;
-	private boolean freezeLocked = false;
+	private boolean freezeLocked;
+	private boolean inWater;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
@@ -1227,8 +1228,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isInWater()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.inWater;
+	}
+
+	/**
+	 * Set if the entity is in water.
+	 *
+	 * @param inWater true if the entity is in water.
+	 */
+	public void setInWater(boolean inWater)
+	{
+		this.inWater = inWater;
 	}
 
 	@Override

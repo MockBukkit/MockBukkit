@@ -1446,4 +1446,18 @@ class EntityMockTest
 		assertEquals(140, entity.getMaxFreezeTicks());
 	}
 
+	@Test
+	void isInWater_GivenDefaultValue()
+	{
+		assertFalse(entity.isInWater());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isInWater_GivenValidValue(boolean validValue)
+	{
+		entity.setInWater(validValue);
+		assertEquals(validValue, entity.isInWater());
+	}
+
 }
