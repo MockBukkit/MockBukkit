@@ -108,6 +108,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private float fallDistance;
 	private int fireTicks = -20;
 	private int ticksLived;
+	private int portalCooldown;
 	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
@@ -1136,16 +1137,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getPortalCooldown()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.portalCooldown;
 	}
 
 	@Override
 	public void setPortalCooldown(int cooldown)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.portalCooldown = cooldown;
 	}
 
 	@Override

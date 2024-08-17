@@ -1307,4 +1307,18 @@ class EntityMockTest
 		assertEquals(Sound.ENTITY_GENERIC_SPLASH, entity.getSwimHighSpeedSplashSound());
 	}
 
+	@Test
+	void getPortalCooldown_GivenDefaultValue()
+	{
+		assertEquals(0, entity.getPortalCooldown());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	void getPortalCooldown_GivenValidValue(int validValue)
+	{
+		entity.setPortalCooldown(validValue);
+		assertEquals(validValue, entity.getPortalCooldown());
+	}
+
 }
