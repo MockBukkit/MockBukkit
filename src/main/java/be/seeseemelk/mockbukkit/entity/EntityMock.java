@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
@@ -83,6 +84,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
+	private final Set<String> tags = Sets.newHashSet();
 	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
 	private final int id;
@@ -1149,22 +1151,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Set<String> getScoreboardTags()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.tags;
 	}
 
 	@Override
 	public boolean addScoreboardTag(@NotNull String tag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.tags.size() < 1024 && this.tags.add(tag);
 	}
 
 	@Override
 	public boolean removeScoreboardTag(@NotNull String tag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.tags.remove(tag);
 	}
 
 	@Override

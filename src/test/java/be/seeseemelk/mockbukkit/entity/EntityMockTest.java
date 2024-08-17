@@ -44,6 +44,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -1319,6 +1320,57 @@ class EntityMockTest
 	{
 		entity.setPortalCooldown(validValue);
 		assertEquals(validValue, entity.getPortalCooldown());
+	}
+
+	@Test
+	void getScoreboardTags_GivenDefaultValue()
+	{
+		Set<String> actual = entity.getScoreboardTags();
+		assertNotNull(actual);
+		assertTrue(actual.isEmpty());
+		assertSame(actual, entity.getScoreboardTags());
+	}
+
+	@Test
+	void addScoreboardTag_GivenSingleValue()
+	{
+		boolean added = entity.addScoreboardTag("test");
+		assertTrue(added);
+
+		Set<String> actual = entity.getScoreboardTags();
+		assertEquals(1, actual.size());
+		assertTrue(actual.contains("test"));
+	}
+
+	@Test
+	void addScoreboardTag_GivenAlreadyExistingValue()
+	{
+		entity.addScoreboardTag("test");
+		assertFalse(entity.addScoreboardTag("test"));
+	}
+
+	@Test
+	void addScoreboardTag_GivenTooManyValues()
+	{
+		for (int i = 0 ; i < 1024 ; i++)
+		{
+			boolean added = entity.addScoreboardTag(String.valueOf(i));
+			assertTrue(added);
+		}
+		assertFalse(entity.addScoreboardTag("test"));
+	}
+
+	@Test
+	void removeScoreboardTag_GivenExistingValue()
+	{
+		assertTrue(entity.addScoreboardTag("test"));
+		assertTrue(entity.removeScoreboardTag("test"));
+	}
+
+	@Test
+	void removeScoreboardTag_GivenNonExistingValue()
+	{
+		assertFalse(entity.removeScoreboardTag("test"));
 	}
 
 }
