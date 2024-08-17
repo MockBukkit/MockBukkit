@@ -11,10 +11,17 @@ class PlainTextComponentProviderImplTest
 {
 
 	@Test
-	void simpleSerialization()
+	void plainText_simpleTranslatableSerialization()
 	{
 		TranslatableComponent translatableComponent = Component.translatable("block.minecraft.azalea");
 		assertEquals("Azalea", PlainTextComponentSerializer.plainText().serialize(translatableComponent));
+	}
+
+	@Test
+	void plainText_argumentTranslatableSerialization()
+	{
+		TranslatableComponent translatableComponent = Component.translatable("argument.entity.selector.unknown", Component.text("@h"));
+		assertEquals("Unknown selector type '@h'", PlainTextComponentSerializer.plainText().serialize(translatableComponent));
 	}
 
 }
