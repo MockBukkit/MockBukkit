@@ -12,6 +12,7 @@ import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -1286,6 +1287,24 @@ class EntityMockTest
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setTicksLived(invalidValue));
 		String expectedMessage = String.format("Age value (%s) must be greater than 0", invalidValue);
 		assertEquals(expectedMessage, e.getMessage());
+	}
+
+	@Test
+	void getSwimSound()
+	{
+		assertEquals(Sound.ENTITY_GENERIC_SWIM, entity.getSwimSound());
+	}
+
+	@Test
+	void getSwimSplashSound()
+	{
+		assertEquals(Sound.ENTITY_GENERIC_SPLASH, entity.getSwimSplashSound());
+	}
+
+	@Test
+	void getSwimHighSpeedSplashSound()
+	{
+		assertEquals(Sound.ENTITY_GENERIC_SPLASH, entity.getSwimHighSpeedSplashSound());
 	}
 
 }

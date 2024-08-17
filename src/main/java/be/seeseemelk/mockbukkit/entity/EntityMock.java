@@ -939,22 +939,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Sound getSwimSound()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Sound.ENTITY_GENERIC_SWIM;
 	}
 
 	@Override
 	public @NotNull Sound getSwimSplashSound()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Sound.ENTITY_GENERIC_SPLASH;
 	}
 
 	@Override
 	public @NotNull Sound getSwimHighSpeedSplashSound()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Sound.ENTITY_GENERIC_SPLASH;
 	}
 
 	@Override
