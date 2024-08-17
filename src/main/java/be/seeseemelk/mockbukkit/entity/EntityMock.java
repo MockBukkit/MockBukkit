@@ -105,11 +105,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private boolean onGround;
+	private boolean freezeLocked = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
+	private int frozenTicks;
 	private int ticksLived;
 	private int portalCooldown;
 	private final int maxFireTicks = 20;
@@ -717,44 +719,38 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setFreezeTicks(int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(ticks >= 0, "Ticks (%s) cannot be less than 0", ticks);
+		this.frozenTicks = ticks;
+	}
+
+	@Override
+	public int getFreezeTicks()
+	{
+		return this.frozenTicks;
 	}
 
 	@Override
 	public boolean isFrozen()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.getFreezeTicks() >= this.getMaxFreezeTicks();
 	}
 
 	@Override
 	public boolean isFreezeTickingLocked()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.freezeLocked;
 	}
 
 	@Override
 	public void lockFreezeTicks(boolean locked)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-
-	@Override
-	public int getFreezeTicks()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.freezeLocked = locked;
 	}
 
 	@Override
 	public int getMaxFreezeTicks()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return 140;
 	}
 
 	@Override

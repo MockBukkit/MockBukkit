@@ -1387,4 +1387,63 @@ class EntityMockTest
 		assertEquals(validValue, entity.isOnGround());
 	}
 
+	@Test
+	void getFreezeTicks_GivenDefaultValue()
+	{
+		assertEquals(0, entity.getPortalCooldown());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	void getFreezeTicks_GivenValidValue(int validValue)
+	{
+		entity.setFreezeTicks(validValue);
+		assertEquals(validValue, entity.getFreezeTicks());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	void setFreezeTicks_GivenInvalidValue(int invalidValue)
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setFreezeTicks(invalidValue));
+		String expectedMessage = String.format("Ticks (%s) cannot be less than 0", invalidValue);
+		assertEquals(expectedMessage, e.getMessage());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150})
+	void isFrozen_GivenFrozenValue(int validValue)
+	{
+		entity.setFreezeTicks(validValue);
+		assertTrue(entity.isFrozen());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 5, 10, 100, 115, 139})
+	void isFrozen_GivenNotFrozenValue(int validValue)
+	{
+		entity.setFreezeTicks(validValue);
+		assertFalse(entity.isFrozen());
+	}
+
+	@Test
+	void isFreezeTickingLocked_GivenDefaultValue()
+	{
+		assertFalse(entity.isFreezeTickingLocked());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isFreezeTickingLocked_GivenValidValue(boolean validValue)
+	{
+		entity.lockFreezeTicks(validValue);
+		assertEquals(validValue, entity.isFreezeTickingLocked());
+	}
+
+	@Test
+	void getMaxFreezeTicks()
+	{
+		assertEquals(140, entity.getMaxFreezeTicks());
+	}
+
 }
