@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public class ShulkerMock extends GolemMock implements Shulker
 {
-	private float peekAmount = 0;
+	private int peekAmount = 0;
 	private BlockFace attachedFace = BlockFace.DOWN;
 	private DyeColor dyeColor;
 
@@ -37,14 +37,14 @@ public class ShulkerMock extends GolemMock implements Shulker
 	@Override
 	public float getPeek()
 	{
-		return this.peekAmount;
+		return (float) this.peekAmount / 100;
 	}
 
 	@Override
 	public void setPeek(float value)
 	{
 		Preconditions.checkArgument(value >= 0 && value <= 1, "value needs to be in between or equal to 0 and 1");
-		this.peekAmount = value;
+		this.peekAmount = (int) (value * 100);
 	}
 
 	@Override

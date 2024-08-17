@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -45,12 +46,17 @@ class ShulkerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = {
-			0.0F, 0.25F, 0.50F, 0.666666666667F, 0.85F, 1.0F
+	@CsvSource({
+			"0.00,  0.00",
+			"0.253, 0.25",
+			"0.50,  0.50",
+			"0.666, 0.66",
+			"0.85,  0.85",
+			"1.00,  1.00",
 	})
-	void getPeek_GivenValueValue(float expectedValue)
+	void getPeek_GivenValueValue(float inputValue, float expectedValue)
 	{
-		shulker.setPeek(expectedValue);
+		shulker.setPeek(inputValue);
 		assertEquals(expectedValue, shulker.getPeek());
 	}
 
@@ -58,9 +64,9 @@ class ShulkerMockTest
 	@ValueSource(floats = {
 			-10, -0.00000001F, 1.000001F, 10
 	})
-	void setPeek_GivenInvalidValue(float expectedValue)
+	void setPeek_GivenInvalidValue(float inputValue)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> shulker.setPeek(expectedValue));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> shulker.setPeek(inputValue));
 		assertEquals("value needs to be in between or equal to 0 and 1", e.getMessage());
 	}
 
