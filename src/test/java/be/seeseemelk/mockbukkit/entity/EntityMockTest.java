@@ -12,6 +12,7 @@ import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -40,8 +41,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -1262,6 +1265,247 @@ class EntityMockTest
 		Location actual = entity.getLocation();
 		assertEquals(45.0F, actual.getYaw());
 		assertEquals(90.0F, actual.getPitch());
+	}
+
+	@Test
+	void getTicksLived_GivenDefaultValue()
+	{
+		assertEquals(0, entity.getTicksLived());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	void getTicksLived_GivenValidValue(int validValue)
+	{
+		entity.setTicksLived(validValue);
+		assertEquals(validValue, entity.getTicksLived());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-100, -10, -5, -4, -3, -2, -1, 0})
+	void setTicksLived_GivenValidValue(int invalidValue)
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setTicksLived(invalidValue));
+		String expectedMessage = String.format("Age value (%s) must be greater than 0", invalidValue);
+		assertEquals(expectedMessage, e.getMessage());
+	}
+
+	@Test
+	void getSwimSound()
+	{
+		assertEquals(Sound.ENTITY_GENERIC_SWIM, entity.getSwimSound());
+	}
+
+	@Test
+	void getSwimSplashSound()
+	{
+		assertEquals(Sound.ENTITY_GENERIC_SPLASH, entity.getSwimSplashSound());
+	}
+
+	@Test
+	void getSwimHighSpeedSplashSound()
+	{
+		assertEquals(Sound.ENTITY_GENERIC_SPLASH, entity.getSwimHighSpeedSplashSound());
+	}
+
+	@Test
+	void getPortalCooldown_GivenDefaultValue()
+	{
+		assertEquals(0, entity.getPortalCooldown());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	void getPortalCooldown_GivenValidValue(int validValue)
+	{
+		entity.setPortalCooldown(validValue);
+		assertEquals(validValue, entity.getPortalCooldown());
+	}
+
+	@Test
+	void getScoreboardTags_GivenDefaultValue()
+	{
+		Set<String> actual = entity.getScoreboardTags();
+		assertNotNull(actual);
+		assertTrue(actual.isEmpty());
+		assertSame(actual, entity.getScoreboardTags());
+	}
+
+	@Test
+	void addScoreboardTag_GivenSingleValue()
+	{
+		boolean added = entity.addScoreboardTag("test");
+		assertTrue(added);
+
+		Set<String> actual = entity.getScoreboardTags();
+		assertEquals(1, actual.size());
+		assertTrue(actual.contains("test"));
+	}
+
+	@Test
+	void addScoreboardTag_GivenAlreadyExistingValue()
+	{
+		entity.addScoreboardTag("test");
+		assertFalse(entity.addScoreboardTag("test"));
+	}
+
+	@Test
+	void addScoreboardTag_GivenTooManyValues()
+	{
+		for (int i = 0 ; i < 1024 ; i++)
+		{
+			boolean added = entity.addScoreboardTag(String.valueOf(i));
+			assertTrue(added);
+		}
+		assertFalse(entity.addScoreboardTag("test"));
+	}
+
+	@Test
+	void removeScoreboardTag_GivenExistingValue()
+	{
+		assertTrue(entity.addScoreboardTag("test"));
+		assertTrue(entity.removeScoreboardTag("test"));
+	}
+
+	@Test
+	void removeScoreboardTag_GivenNonExistingValue()
+	{
+		assertFalse(entity.removeScoreboardTag("test"));
+	}
+
+	@Test
+	void isOnGround_GivenDefaultValue()
+	{
+		assertFalse(entity.isOnGround());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isOnGround_GivenValidValue(boolean validValue)
+	{
+		entity.setOnGround(validValue);
+		assertEquals(validValue, entity.isOnGround());
+	}
+
+	@Test
+	void getFreezeTicks_GivenDefaultValue()
+	{
+		assertEquals(0, entity.getPortalCooldown());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	void getFreezeTicks_GivenValidValue(int validValue)
+	{
+		entity.setFreezeTicks(validValue);
+		assertEquals(validValue, entity.getFreezeTicks());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	void setFreezeTicks_GivenInvalidValue(int invalidValue)
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setFreezeTicks(invalidValue));
+		String expectedMessage = String.format("Ticks (%s) cannot be less than 0", invalidValue);
+		assertEquals(expectedMessage, e.getMessage());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150})
+	void isFrozen_GivenFrozenValue(int validValue)
+	{
+		entity.setFreezeTicks(validValue);
+		assertTrue(entity.isFrozen());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 5, 10, 100, 115, 139})
+	void isFrozen_GivenNotFrozenValue(int validValue)
+	{
+		entity.setFreezeTicks(validValue);
+		assertFalse(entity.isFrozen());
+	}
+
+	@Test
+	void isFreezeTickingLocked_GivenDefaultValue()
+	{
+		assertFalse(entity.isFreezeTickingLocked());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isFreezeTickingLocked_GivenValidValue(boolean validValue)
+	{
+		entity.lockFreezeTicks(validValue);
+		assertEquals(validValue, entity.isFreezeTickingLocked());
+	}
+
+	@Test
+	void getMaxFreezeTicks()
+	{
+		assertEquals(140, entity.getMaxFreezeTicks());
+	}
+
+	@Test
+	void isInWater_GivenDefaultValue()
+	{
+		assertFalse(entity.isInWater());
+	}
+
+	@ParameterizedTest
+	@ValueSource(booleans = {true, false})
+	void isInWater_GivenValidValue(boolean validValue)
+	{
+		entity.setInWater(validValue);
+		assertEquals(validValue, entity.isInWater());
+	}
+
+	@Test
+	void isInWorld_GivenDefaultValue()
+	{
+		assertTrue(entity.isInWorld());
+	}
+
+	@Test
+	void isInWorld_GivenLocationWithoutWorld()
+	{
+		server.getWorlds().stream()
+				.filter(WorldMock.class::isInstance)
+				.map(WorldMock.class::cast)
+				.forEach(server::removeWorld);
+		assertTrue(server.getWorlds().isEmpty());
+
+		// Entity needs to be created after the worlds have been removed,
+		// otherwise the default world will be assumed.
+		EntityMock testEntity = new EntityMock(server, UUID.randomUUID()) {};
+		assertFalse(testEntity.isInWorld());
+	}
+
+	@Test
+	void isInWorld_GivenLocationWithWorld()
+	{
+		assertFalse(server.getWorlds().isEmpty());
+		assertTrue(entity.isInWorld());
+	}
+
+	@Test
+	void tick_GivenDeadEntity_ShouldNotIncrementTicksLived()
+	{
+		entity.remove();
+		assertEquals(0, entity.getTicksLived());
+		entity.tick();
+		assertEquals(0, entity.getTicksLived());
+	}
+
+	@Test
+	void tick_GivenValidEntity_ShouldIncrementTicksLived()
+	{
+		assertEquals(0, entity.getTicksLived());
+		for (int i = 1 ; i <= 10 ; i++)
+		{
+			entity.tick();
+			assertEquals(i, entity.getTicksLived());
+		}
 	}
 
 }
