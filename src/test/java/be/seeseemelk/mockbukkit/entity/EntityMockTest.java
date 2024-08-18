@@ -6,6 +6,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -34,7 +36,6 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -327,6 +328,27 @@ class EntityMockTest
 		UUID uuid = UUID.randomUUID();
 		entity = new SimpleEntityMock(server, uuid);
 		assertEquals(uuid, entity.getUniqueId());
+	}
+
+	@Test
+	void sendMessage_GivenEntitySendingTextMessage_NoMessageShouldBeSent()
+	{
+		entity.sendMessage("hello");
+		entity.sendMessage("my", "world");
+
+		entity.assertNoMoreSaid();
+	}
+
+	@Test
+	void sendMessage_GivenEntitySendingComponentMessage_NoMessageShouldBeSent()
+	{
+		TextComponent comp = Component.text()
+				.content("hi")
+				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+				.build();
+		entity.sendMessage(comp);
+
+		entity.assertNoMoreSaid();
 	}
 
 	@Test
