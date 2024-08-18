@@ -23,6 +23,9 @@ import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -83,6 +86,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -2544,12 +2548,12 @@ class PlayerMockTest
 	@Test
 	void sendMessage_GivenMessages()
 	{
-		player.sendMessage("hello");
-		player.sendMessage("my", "world");
+		player.sendMessage("\u00A7chello");
+		player.sendMessage("my", "\u00A7lworld");
 
-		assertEquals("hello", player.nextMessage());
+		assertEquals("\u00A7chello", player.nextMessage());
 		assertEquals("my", player.nextMessage());
-		assertEquals("world", player.nextMessage());
+		assertEquals("\u00A7lworld", player.nextMessage());
 	}
 
 	@Test
@@ -2580,6 +2584,38 @@ class PlayerMockTest
 	{
 		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage(Identity.nil(), null, MessageType.CHAT));
 		assertEquals("input", e.getMessage());
+	}
+
+	@Nested
+	class PlayerSpigotMock {
+
+		@Test
+		void sendMessage_GivenSimpleMessage(){
+			TextComponent previousButton = new TextComponent("Hello world!");
+			player.spigot().sendMessage(previousButton);
+			player.assertSaid("Hello world!");
+		}
+
+		@Test
+		void sendMessage_GivenColoredMessage(){
+			BaseComponent message = new ComponentBuilder()
+					.append("Hello ")
+					.color(ChatColor.RED)
+					.append("world!")
+					.color(ChatColor.DARK_AQUA)
+					.bold(true)
+					.build();
+			player.spigot().sendMessage(message);
+			player.assertSaid("\u00A7cHello \u00A73\u00A7lworld!");
+		}
+
+		@Test
+		void sendMessage_issue550(){
+			TextComponent message = new TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
+			player.spigot().sendMessage(message);
+			player.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));
+		}
+
 	}
 
 }
