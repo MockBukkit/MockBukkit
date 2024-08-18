@@ -3409,12 +3409,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		@Override
+		@Deprecated
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
 			this.sendMessage(ChatMessageType.CHAT, sender, component);
 		}
 
 		@Override
+		@Deprecated
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
 		{
 			this.sendMessage(ChatMessageType.CHAT, sender, components);
@@ -3428,14 +3430,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		@Override
-		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent... components)
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components)
 		{
-			this.sendMessage(position, sender, components);
+			this.sendMessage(position, null, components);
 		}
 
 		@Override
 		@Deprecated
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			this.sendMessage( position, sender, new BaseComponent[] { component } );
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent... components)
 		{
 			Preconditions.checkNotNull(position, "Position must not be null");
 			Preconditions.checkNotNull(components, "Component must not be null");
