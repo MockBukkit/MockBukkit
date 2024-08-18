@@ -3387,9 +3387,41 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		@Override
 		@Deprecated
-		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
+		public void sendMessage(@NotNull BaseComponent component)
 		{
-			sendMessage(ChatMessageType.CHAT, components);
+			this.sendMessage(ChatMessageType.SYSTEM, component);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull BaseComponent... components)
+		{
+			this.sendMessage(ChatMessageType.SYSTEM, components);
+		}
+
+		@Override
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			this.sendMessage(ChatMessageType.CHAT, sender, component);
+		}
+
+		@Override
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			this.sendMessage(ChatMessageType.CHAT, sender, components);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
+		{
+			this.sendMessage(position, new BaseComponent[]{ component });
+		}
+
+		@Override
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			this.sendMessage(position, sender, components);
 		}
 
 		@Override
@@ -3400,20 +3432,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			Preconditions.checkNotNull(components, "Component must not be null");
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
 			PlayerMock.this.sendMessage(comp);
-		}
-
-		@Override
-		@Deprecated
-		public void sendMessage(@NotNull BaseComponent component)
-		{
-			sendMessage(ChatMessageType.CHAT, component);
-		}
-
-		@Override
-		@Deprecated
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
-		{
-			sendMessage(position, new BaseComponent[]{ component });
 		}
 
 	}
