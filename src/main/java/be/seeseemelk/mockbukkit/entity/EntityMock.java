@@ -16,8 +16,6 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
-import net.kyori.adventure.audience.MessageType;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -62,11 +60,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -79,7 +75,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see Entity.Spigot
  * @see MessageTarget
  */
-public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
+public abstract class EntityMock extends Entity.Spigot implements Entity
 {
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
@@ -107,7 +103,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean onGround;
 	private boolean freezeLocked;
 	private boolean inWater;
-	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
@@ -466,43 +461,23 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		sendMessage(null, message);
 	}
 
 	@Override
 	public void sendMessage(String... messages)
 	{
-		sendMessage(null, messages);
 	}
 
 	@Override
 	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
+		this.sendMessage(message);
 	}
 
 	@Override
 	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
-		for (String message : messages)
-		{
-			sendMessage(message);
-		}
-	}
-
-	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
-	{
-		Preconditions.checkNotNull(source, "Source cannot be null");
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		Preconditions.checkNotNull(type, "MessageType cannot be null");
-		this.messages.add(message);
-	}
-
-	@Override
-	public @Nullable Component nextComponentMessage()
-	{
-		return messages.poll();
+		this.sendMessage(messages);
 	}
 
 	@Override

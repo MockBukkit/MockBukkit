@@ -5,10 +5,10 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
-import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
@@ -47,13 +47,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
-import org.bukkit.ServerLinks;
 import org.bukkit.Registry;
+import org.bukkit.ServerLinks;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
-import org.bukkit.UnsafeValues;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -110,7 +109,6 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -161,7 +159,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  *
  * @see HumanEntityMock
  */
-public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
+public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver, MessageTarget
 {
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
@@ -189,6 +187,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
@@ -1021,15 +1020,49 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendRawMessage(@Nullable String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendRawMessage(null, message);
 	}
 
 	@Override
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(message != null, "message cannot be null");
+
+		// TODO:
+	}
+
+	@Override
+	public void sendMessage(String message) {
+		// if (!this.conversationTracker.isConversingModaly()) {
+			this.sendRawMessage(message);
+		// }
+	}
+
+	@Override
+	public void sendMessage(String... messages) {
+		for (String message : messages) {
+			this.sendMessage(message);
+		}
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String message) {
+		// if (!this.conversationTracker.isConversingModaly()) {
+			this.sendRawMessage(sender, message);
+		// }
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String... messages) {
+		for (String message : messages) {
+			this.sendMessage(sender, message);
+		}
+	}
+
+	@Override
+	public @Nullable Component nextComponentMessage()
+	{
+		return messages.poll();
 	}
 
 	@Override
