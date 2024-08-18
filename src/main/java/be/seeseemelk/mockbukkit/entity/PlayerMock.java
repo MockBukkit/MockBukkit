@@ -5,7 +5,6 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
@@ -163,7 +162,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  *
  * @see HumanEntityMock
  */
-public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver, MessageTarget
+public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
