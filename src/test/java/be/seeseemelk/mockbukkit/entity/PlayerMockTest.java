@@ -18,8 +18,11 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -71,19 +74,15 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -102,7 +101,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -2516,6 +2514,72 @@ class PlayerMockTest
 		player.setPlayerProfile(profile);
 
 		assertEquals(profile, player.getPlayerProfile());
+	}
+
+	@Test
+	void sendRawMessage_GivenMessage()
+	{
+		player.sendRawMessage("hello");
+		player.sendRawMessage("my");
+		player.sendRawMessage("world");
+
+		assertEquals("hello", player.nextMessage());
+		assertEquals("my", player.nextMessage());
+		assertEquals("world", player.nextMessage());
+	}
+
+	@Test
+	void sendRawMessage_GivenSenderAndMessage()
+	{
+		UUID sender = UUID.fromString("5bcef38f-8546-451e-ad59-7ad46dd8d6fd");
+		player.sendRawMessage(sender, "hello");
+		player.sendRawMessage(sender, "my");
+		player.sendRawMessage(sender, "world");
+
+		assertEquals("hello", player.nextMessage());
+		assertEquals("my", player.nextMessage());
+		assertEquals("world", player.nextMessage());
+	}
+
+	@Test
+	void sendMessage_GivenMessages()
+	{
+		player.sendMessage("hello");
+		player.sendMessage("my", "world");
+
+		assertEquals("hello", player.nextMessage());
+		assertEquals("my", player.nextMessage());
+		assertEquals("world", player.nextMessage());
+	}
+
+	@Test
+	void sendMessage_GivenSenderAndMessage()
+	{
+		UUID sender = UUID.fromString("5bcef38f-8546-451e-ad59-7ad46dd8d6fd");
+		player.sendMessage(sender, "hello");
+		player.sendMessage(sender, "my", "world");
+
+		assertEquals("hello", player.nextMessage());
+		assertEquals("my", player.nextMessage());
+		assertEquals("world", player.nextMessage());
+	}
+
+	@Test
+	void sendMessage_StoredAsComponent()
+	{
+		net.kyori.adventure.text.TextComponent comp = Component.text()
+				.content("hi")
+				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+				.build();
+		player.sendMessage(comp);
+		player.assertSaid(comp);
+	}
+
+	@Test
+	void sendMessage_GivenNullComponentMessage()
+	{
+		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage(Identity.nil(), null, MessageType.CHAT));
+		assertEquals("input", e.getMessage());
 	}
 
 }

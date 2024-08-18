@@ -23,8 +23,10 @@ import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
+import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.chat.SignedMessage;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -1057,6 +1059,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		for (String message : messages) {
 			this.sendMessage(sender, message);
 		}
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	{
+		Preconditions.checkNotNull(message, "input");
+		this.messages.add(message);
 	}
 
 	@Override
