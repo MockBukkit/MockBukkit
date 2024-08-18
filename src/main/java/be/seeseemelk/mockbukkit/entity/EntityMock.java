@@ -1515,4 +1515,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	public void tick()
+	{
+		if (isDead())
+		{
+			return;
+		}
+
+		++ticksLived;
+	}
+
 }

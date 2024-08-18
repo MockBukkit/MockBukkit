@@ -1488,4 +1488,24 @@ class EntityMockTest
 		assertTrue(entity.isInWorld());
 	}
 
+	@Test
+	void tick_GivenDeadEntity_ShouldNotIncrementTicksLived()
+	{
+		entity.remove();
+		assertEquals(0, entity.getTicksLived());
+		entity.tick();
+		assertEquals(0, entity.getTicksLived());
+	}
+
+	@Test
+	void tick_GivenValidEntity_ShouldIncrementTicksLived()
+	{
+		assertEquals(0, entity.getTicksLived());
+		for (int i = 1 ; i <= 10 ; i++)
+		{
+			entity.tick();
+			assertEquals(i, entity.getTicksLived());
+		}
+	}
+
 }
