@@ -1019,7 +1019,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendRawMessage(@Nullable String message)
+	public void sendRawMessage(@NotNull String message)
 	{
 		this.sendRawMessage(null, message);
 	}
@@ -1028,8 +1028,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkArgument(message != null, "message cannot be null");
-
-		// TODO:
+		this.messages.add(LegacyComponentSerializer.legacySection().deserialize(message));
 	}
 
 	@Override
