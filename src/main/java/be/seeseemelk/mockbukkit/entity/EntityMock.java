@@ -75,7 +75,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see Entity.Spigot
  * @see MessageTarget
  */
-public abstract class EntityMock extends Entity.Spigot implements Entity
+public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
@@ -478,6 +478,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity
 	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
 		this.sendMessage(messages);
+	}
+
+	@Override
+	public @Nullable Component nextComponentMessage()
+	{
+		return null;
 	}
 
 	@Override

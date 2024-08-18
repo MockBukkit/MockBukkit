@@ -34,6 +34,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -1486,6 +1487,22 @@ class EntityMockTest
 			entity.tick();
 			assertEquals(i, entity.getTicksLived());
 		}
+	}
+
+	@Test
+	void nextComponentMessage_ShouldAlwaysReturnNull()
+	{
+		entity.sendMessage("Hello!");
+
+		assertNull(entity.nextMessage());
+	}
+
+	@Test
+	void nextMessage_ShouldAlwaysReturnNull()
+	{
+		entity.sendMessage("Hello!");
+
+		assertNull(entity.nextMessage());
 	}
 
 }
