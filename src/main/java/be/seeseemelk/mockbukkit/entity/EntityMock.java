@@ -103,7 +103,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity
 	private boolean onGround;
 	private boolean freezeLocked;
 	private boolean inWater;
-	private final PermissibleBase perms;
+	protected final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;

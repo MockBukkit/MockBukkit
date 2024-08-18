@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
@@ -67,6 +68,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
@@ -187,8 +189,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
-	private final Queue<Component> messages = new LinkedTransferQueue<>();
 
+	private final ConversationTracker conversationTracker = new ConversationTracker();
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
@@ -264,6 +267,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return false;
 		}
 		this.online = false;
+
+		this.conversationTracker.abandonAllConversations();
+		this.perms.clearPermissions();
 
 		Component message = MiniMessage.miniMessage()
 				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
@@ -779,36 +785,31 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isConversing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.isConversing();
 	}
 
 	@Override
 	public void acceptConversationInput(@NotNull String input)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.acceptConversationInput(input);
 	}
 
 	@Override
 	public boolean beginConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.beginConversation(conversation);
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation, @NotNull ConversationAbandonedEvent details)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, details);
 	}
 
 	@Override
@@ -1033,9 +1034,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void sendMessage(String message) {
-		// if (!this.conversationTracker.isConversingModaly()) {
+		if (!this.conversationTracker.isConversingModaly()) {
 			this.sendRawMessage(message);
-		// }
+		}
 	}
 
 	@Override
@@ -1047,9 +1048,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void sendMessage(UUID sender, String message) {
-		// if (!this.conversationTracker.isConversingModaly()) {
+		if (!this.conversationTracker.isConversingModaly()) {
 			this.sendRawMessage(sender, message);
-		// }
+		}
 	}
 
 	@Override
