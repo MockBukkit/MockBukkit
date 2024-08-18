@@ -107,7 +107,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean onGround;
 	private boolean freezeLocked;
 	private boolean inWater;
-	private boolean inWorld;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
@@ -1272,17 +1271,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isInWorld()
 	{
-		return this.inWorld;
-	}
-
-	/**
-	 * Set if this entity has been spawned in a world.
-	 *
-	 * @param inWorld Is this entity in a world?
-	 */
-	public void setInWorld(boolean inWorld)
-	{
-		this.inWorld = inWorld;
+		return getLocation().getWorld() != null;
 	}
 
 	@Override

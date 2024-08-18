@@ -1463,15 +1463,29 @@ class EntityMockTest
 	@Test
 	void isInWorld_GivenDefaultValue()
 	{
-		assertFalse(entity.isInWorld());
+		assertTrue(entity.isInWorld());
 	}
 
-	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
-	void isInWorld_GivenValidValue(boolean validValue)
+	@Test
+	void isInWorld_GivenLocationWithoutWorld()
 	{
-		entity.setInWorld(validValue);
-		assertEquals(validValue, entity.isInWorld());
+		server.getWorlds().stream()
+				.filter(WorldMock.class::isInstance)
+				.map(WorldMock.class::cast)
+				.forEach(server::removeWorld);
+		assertTrue(server.getWorlds().isEmpty());
+
+		// Entity needs to be created after the worlds have been removed,
+		// otherwise the default world will be assumed.
+		EntityMock testEntity = new EntityMock(server, UUID.randomUUID()) {};
+		assertFalse(testEntity.isInWorld());
+	}
+
+	@Test
+	void isInWorld_GivenLocationWithWorld()
+	{
+		assertFalse(server.getWorlds().isEmpty());
+		assertTrue(entity.isInWorld());
 	}
 
 }
