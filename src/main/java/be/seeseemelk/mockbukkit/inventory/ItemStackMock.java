@@ -1,12 +1,17 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
@@ -101,6 +106,24 @@ public class ItemStackMock extends ItemStack
 			}
 		}
 
+	}
+
+	/**
+	 * Creates a new ItemStackMock instance if it isn't already mocked
+	 *
+	 * @param itemStack itemStack to be mocked
+	 * @return mocked itemStack
+	 */
+	public static ItemStackMock mock(ItemStack itemStack)
+	{
+		if (itemStack instanceof ItemStackMock itemStackMock)
+		{
+			return itemStackMock;
+		}
+		else
+		{
+			return new ItemStackMock(itemStack);
+		}
 	}
 
 	@Override
@@ -248,6 +271,11 @@ public class ItemStackMock extends ItemStack
 			result.setDurability(damage);
 		}
 		return result;
+	}
+
+	public InteractionResult simulateUseItemOn(PlayerMock playerMock, Location clickedPos, EquipmentSlot hand)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	private static void handleMetaForDeserialization(@NotNull Map<String, Object> args, int version, ItemStack result)

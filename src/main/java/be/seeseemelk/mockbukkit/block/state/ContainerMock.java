@@ -1,10 +1,14 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.inventory.Inventory;
@@ -119,6 +123,16 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	public @NotNull Inventory getSnapshotInventory()
 	{
 		return ((InventoryMock) this.inventory).getSnapshot();
+	}
+
+	@Override
+	public InteractionResult simulateUseWithoutItem(BlockStateMock blockState, Location location, PlayerMock playerMock, BlockFace clickedFace)
+	{
+		if (inventory != null)
+		{
+			playerMock.openInventory(inventory);
+		}
+		return InteractionResult.CONSUME;
 	}
 
 }

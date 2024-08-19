@@ -98,6 +98,25 @@ public class BlockMock implements Block
 		this.blockData = BlockDataMock.mock(material);
 	}
 
+
+	/**
+	 * Creates an instance of BlockMock if it isn't already mocked
+	 *
+	 * @param block block to be mocked
+	 * @return mocked block
+	 */
+	public static BlockMock mock(Block block)
+	{
+		if (block instanceof BlockMock blockMock)
+		{
+			return blockMock;
+		}
+		else
+		{
+			return new BlockMock(block.getLocation());
+		}
+	}
+
 	@Override
 	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{

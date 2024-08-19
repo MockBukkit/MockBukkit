@@ -5,13 +5,18 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.block.state.ContainerMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
-import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
+import be.seeseemelk.mockbukkit.world.InteractionResult;
+import be.seeseemelk.mockbukkit.world.ItemInteractionResult;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.profile.PlayerProfile;
@@ -53,7 +58,6 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
-import org.bukkit.UnsafeValues;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -61,7 +65,9 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.Container;
 import org.bukkit.block.Sign;
 import org.bukkit.block.TileState;
 import org.bukkit.block.data.BlockData;
@@ -76,6 +82,8 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.Event;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -91,6 +99,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
@@ -110,7 +119,6 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -591,6 +599,117 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Bukkit.getPluginManager().callEvent(event);
 		if (event.isCancelled())
 			this.setLocation(event.getFrom());
+		return event;
+	}
+
+
+	/**
+	 * This method use's the players item from inventory to interact with a {@link BlockFace} at a {@link Location}
+	 *
+	 * @param location    {@link Location} to use {@link ItemStack} on
+	 * @param clickedFace {@link BlockFace} to click
+	 * @param hand        Hand to use the item from
+	 * @return {@link PlayerInteractEvent} that was fired
+	 */
+	public @NotNull PlayerInteractEvent simulateUseItemOn(@NotNull Location location, @NotNull BlockFace clickedFace, @Nullable EquipmentSlot hand)
+	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkArgument(hand == EquipmentSlot.HAND || hand == EquipmentSlot.OFF_HAND, "Must be HAND or OFF_HAND");
+
+		ItemStack itemInHand = hand == EquipmentSlot.HAND ? getItemInHand() : getInventory().getItemInOffHand();
+
+		boolean cancelled = false;
+		BlockMock block = BlockMock.mock(location.getBlock());
+
+		if (getGameMode() == GameMode.SPECTATOR)
+		{
+			cancelled = !(block.getState() instanceof Container);
+		}
+
+		// TODO Implement Cooldown
+//		if (hasCooldown(itemInHand.getType())) {
+//			cancelled = true;
+//		}
+
+		ItemStack eventItemStack = itemInHand;
+		if (eventItemStack.getType() == Material.AIR || eventItemStack.getAmount() == 0)
+		{
+			eventItemStack = null;
+		}
+
+		PlayerInteractEvent event = new PlayerInteractEvent(this, Action.RIGHT_CLICK_BLOCK, eventItemStack, block, clickedFace, hand);
+		if (cancelled)
+		{
+			event.setUseInteractedBlock(Event.Result.DENY);
+		}
+		Bukkit.getServer().getPluginManager().callEvent(event);
+
+		boolean interactResult = event.useItemInHand() == Event.Result.DENY;
+
+		if (event.useInteractedBlock() == Event.Result.DENY)
+		{
+			return event;
+		}
+		else if (getGameMode() == GameMode.SPECTATOR)
+		{
+			if (block.getState() instanceof ContainerMock containerMock)
+			{
+				openInventory(containerMock.getInventory());
+			}
+		}
+		else
+		{
+			boolean isItemInHand = !getItemInHand().isEmpty() || !getInventory().getItemInOffHand().isEmpty();
+			boolean shouldCancelUse = isSneaking() && isItemInHand;
+			InteractionResult interactionResult;
+
+			if (!shouldCancelUse)
+			{
+				if (!(block.getState() instanceof BlockStateMock blockStateMock))
+				{
+					throw new UnimplementedOperationException();
+				}
+
+				ItemInteractionResult itemInteractionResult = blockStateMock.simulateUseItemOn(blockStateMock, location, ItemStackMock.mock(getItemInHand()), this, hand, clickedFace);
+				block.setState(blockStateMock);
+				block.setBlockData(blockStateMock.getBlockData());
+
+				if (itemInteractionResult.consumesAction())
+				{
+					// TODO implement CriterionTriggers
+					return event;
+				}
+
+				if (itemInteractionResult == ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION && hand == EquipmentSlot.HAND) {
+					interactionResult = blockStateMock.simulateUseWithoutItem(blockStateMock, location, this, clickedFace);
+					block.setState(blockStateMock);
+					block.setBlockData(blockStateMock.getBlockData());
+					if (interactionResult.consumesAction()) {
+						return event;
+					}
+				}
+			}
+
+			if (!itemInHand.isEmpty() && !interactResult)
+			{
+				ItemStackMock itemStackMock = ItemStackMock.mock(itemInHand);
+				int count = itemStackMock.getAmount();
+
+				InteractionResult result = itemStackMock.simulateUseItemOn(this, location, hand);
+
+				if (getGameMode() == GameMode.CREATIVE)
+				{
+					itemInHand.setAmount(count);
+				}
+
+				if (result.consumesAction())
+				{
+					// TODO advancements
+					return event;
+				}
+			}
+		}
+
 		return event;
 	}
 

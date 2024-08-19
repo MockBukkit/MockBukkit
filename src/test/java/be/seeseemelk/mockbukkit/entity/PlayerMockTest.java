@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
@@ -36,10 +37,14 @@ import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.type.Switch;
+import org.bukkit.block.data.type.TrapDoor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -55,6 +60,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -2516,6 +2522,197 @@ class PlayerMockTest
 		player.setPlayerProfile(profile);
 
 		assertEquals(profile, player.getPlayerProfile());
+	}
+
+	@Test
+	void testPlayerInteractEvent_air()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		Location location = new Location(player.getWorld(), 0, 0, 0);
+		PlayerInteractEvent event = player.simulateUseItemOn(location, BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+		player.assertInventoryView(InventoryType.CRAFTING);
+	}
+
+	@Test
+	void testPlayerInteractEvent_openChest()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.CHEST);
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+		player.assertInventoryView(InventoryType.CHEST);
+	}
+
+	@Test
+	void testPlayerInteractEvent_spectatorOpenChest()
+	{
+		player.setGameMode(GameMode.SPECTATOR);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.CHEST);
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+		player.assertInventoryView(InventoryType.CHEST);
+	}
+
+	@Test
+	void testPlayerInteractEvent_spectatorFailInteract()
+	{
+		player.setGameMode(GameMode.SPECTATOR);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.OAK_DOOR);
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		assertEquals(event.useInteractedBlock(), Event.Result.DENY);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+	}
+
+	@Test
+	void testPlayerInteractEvent_sneakingWithNoItem()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setSneaking(true);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.CHEST);
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+		player.assertInventoryView(InventoryType.CHEST);
+	}
+
+	@Test
+	void testPlayerInteractEvent_sneakingWithItem()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setSneaking(true);
+		player.setItemInHand(ItemStackMock.of(Material.CHEST));
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.CHEST);
+
+		// We don't care if the item isn't implemented here since we're just checking if the Chest inventory doesn't open
+		try
+		{
+			player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+		}
+		catch (UnimplementedOperationException ignored)
+		{
+		}
+
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+		player.assertInventoryView(InventoryType.CRAFTING);
+	}
+
+	@Test
+	void testPlayerInteractEvent_cancelled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerInteract(@NotNull PlayerInteractEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.CHEST);
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+		player.assertInventoryView(InventoryType.CRAFTING);
+	}
+
+	@Test
+	void testPlayerInteractEvent_lever()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.LEVER);
+		Switch originalLeverState = (Switch) block.getBlockData();
+
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+
+		player.assertSoundHeard(Sound.BLOCK_LEVER_CLICK);
+
+		Switch newLeverState = (Switch) block.getBlockData();
+		assertNotEquals(originalLeverState.isPowered(), newLeverState.isPowered());
+	}
+
+	@Test
+	void testPlayerInteractEvent_lever_cancelled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerInteract(@NotNull PlayerInteractEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.LEVER);
+		Switch originalLeverState = (Switch) block.getBlockData();
+
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+
+		Switch newLeverState = (Switch) block.getBlockData();
+		assertEquals(originalLeverState.isPowered(), newLeverState.isPowered());
+	}
+
+	@Test
+	void testPlayerInteract_trapDoor()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setItemInHand(null);
+
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.OAK_TRAPDOOR);
+		TrapDoor originalTrapDoorState = (TrapDoor) block.getBlockData();
+
+		PlayerInteractEvent event = player.simulateUseItemOn(block.getLocation(), BlockFace.SELF, EquipmentSlot.HAND);
+
+		assertNotNull(event);
+		server.getPluginManager().assertEventFired(PlayerInteractEvent.class);
+
+		TrapDoor newTrapDoorState = (TrapDoor) block.getBlockData();
+		assertNotEquals(originalTrapDoorState.isOpen(), newTrapDoorState.isOpen());
 	}
 
 }
