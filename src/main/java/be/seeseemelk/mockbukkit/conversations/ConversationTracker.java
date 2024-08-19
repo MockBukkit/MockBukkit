@@ -4,11 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
+@ApiStatus.Internal
 public class ConversationTracker
 {
 
