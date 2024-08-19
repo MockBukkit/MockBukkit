@@ -93,7 +93,7 @@ class ConversationTrackerTest
 		public @NotNull String getPromptText(@NotNull ConversationContext context)
 		{
 			// Assert that session data passes from one prompt to the next
-			assertEquals(context.getSessionData("data"), 10);
+			assertEquals(10, context.getSessionData("data"));
 			return "SecondPrompt";
 		}
 

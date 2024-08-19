@@ -31,7 +31,7 @@ public class FakeConversable implements Conversable
 	@Override
 	public void acceptConversationInput(String input)
 	{
-
+		// No operation
 	}
 
 	@Override
@@ -119,12 +119,12 @@ public class FakeConversable implements Conversable
 
 	public void removeAttachment(PermissionAttachment attachment)
 	{
-
+		// No operation
 	}
 
 	public void recalculatePermissions()
 	{
-
+		// No operation
 	}
 
 	public Set<PermissionAttachmentInfo> getEffectivePermissions()
@@ -139,7 +139,7 @@ public class FakeConversable implements Conversable
 
 	public void setOp(boolean value)
 	{
-
+		// No operation
 	}
 
 }
