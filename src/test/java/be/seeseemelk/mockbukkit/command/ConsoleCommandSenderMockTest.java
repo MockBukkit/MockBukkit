@@ -5,11 +5,14 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -252,6 +255,38 @@ class ConsoleCommandSenderMockTest
 	void spigot_sendMessage_MultipleComponents_Null_ThrowsException()
 	{
 		assertThrowsExactly(NullPointerException.class, () -> sender.spigot().sendMessage((BaseComponent[]) null));
+	}
+
+	@Nested
+	class CommandSenderSpigotMock {
+
+		@Test
+		void sendMessage_GivenSimpleMessage(){
+			net.md_5.bungee.api.chat.TextComponent previousButton = new net.md_5.bungee.api.chat.TextComponent("Hello world!");
+			sender.spigot().sendMessage(previousButton);
+			sender.assertSaid("Hello world!");
+		}
+
+		@Test
+		void sendMessage_GivenColoredMessage(){
+			BaseComponent message = new ComponentBuilder()
+					.append("Hello ")
+					.color(ChatColor.RED)
+					.append("world!")
+					.color(ChatColor.DARK_AQUA)
+					.bold(true)
+					.build();
+			sender.spigot().sendMessage(message);
+			sender.assertSaid("\u00A7cHello \u00A73\u00A7lworld!");
+		}
+
+		@Test
+		void sendMessage_issue550(){
+			net.md_5.bungee.api.chat.TextComponent message = new net.md_5.bungee.api.chat.TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
+			sender.spigot().sendMessage(message);
+			sender.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));
+		}
+
 	}
 
 }
