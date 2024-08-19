@@ -3452,7 +3452,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
 			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
 			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
-			PlayerMock.this.sendMessage(comp);
+			PlayerMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
 		}
 
 	}
