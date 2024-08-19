@@ -1516,7 +1516,7 @@ class EntityMockTest
 	{
 		entity.sendMessage("Hello!");
 
-		assertNull(entity.nextMessage());
+		assertNull(entity.nextComponentMessage());
 	}
 
 	@Test

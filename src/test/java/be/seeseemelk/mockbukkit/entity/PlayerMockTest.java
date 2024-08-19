@@ -2582,7 +2582,8 @@ class PlayerMockTest
 	@Test
 	void sendMessage_GivenNullComponentMessage()
 	{
-		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage(Identity.nil(), null, MessageType.CHAT));
+		Identity identity = Identity.nil();
+		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage(identity, null, MessageType.CHAT));
 		assertEquals("input", e.getMessage());
 	}
 
