@@ -1,6 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:fireball"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:breeze_wind_charge",
+		"minecraft:fireball",
+		"minecraft:wind_charge"
+	]
 }

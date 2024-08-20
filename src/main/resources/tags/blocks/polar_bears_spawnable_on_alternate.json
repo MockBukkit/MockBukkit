@@ -1,6 +1,6 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:ice"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:ice"
+	]
 }

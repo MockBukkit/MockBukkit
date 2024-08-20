@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
@@ -64,7 +65,7 @@ class CampfireMockTest
 	@Test
 	void constructor_Copy_CopiesValues()
 	{
-		campfire.setItem(0, new ItemStack(Material.PORKCHOP));
+		campfire.setItem(0, new ItemStackMock(Material.PORKCHOP));
 		campfire.setCookTime(0, 10);
 		campfire.setCookTimeTotal(0, 5);
 		campfire.startCooking(0);
@@ -94,7 +95,7 @@ class CampfireMockTest
 	@Test
 	void setItem_SetsItem()
 	{
-		ItemStack item = new ItemStack(Material.PORKCHOP);
+		ItemStack item = new ItemStackMock(Material.PORKCHOP);
 		campfire.setItem(0, item);
 		assertEquals(item, campfire.getItem(0));
 	}

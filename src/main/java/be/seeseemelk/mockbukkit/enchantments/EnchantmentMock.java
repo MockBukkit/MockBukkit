@@ -14,6 +14,7 @@ import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,7 @@ public class EnchantmentMock extends Enchantment
 	private final boolean tradeable;
 	private final boolean discoverable;
 	private final Set<NamespacedKey> conflicts;
+	private final Set<NamespacedKey> enchantables;
 	private boolean treasure;
 	private final Component[] displayNames;
 	private final int[] maxModifiedCosts;
@@ -57,11 +59,12 @@ public class EnchantmentMock extends Enchantment
 	 * @param tradeable       Whether this enchantment can be obtained from trades
 	 * @param discoverable    Whether this enchantment is in a loot table
 	 * @param conflicts       Namespaced-keys of enchantments that are conflicting with this enchantment
+	 * @param enchantables    Namespaced-keys of items which can be enchanted by this enchantment
 	 */
 	public EnchantmentMock(NamespacedKey key, boolean treasure, boolean cursed, int maxLevel,
 						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
 						   int[] maxModifiedCost, boolean tradeable, boolean discoverable,
-						   Set<NamespacedKey> conflicts)
+						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables)
 	{
 		this.key = key;
 		this.treasure = treasure;
@@ -75,11 +78,12 @@ public class EnchantmentMock extends Enchantment
 		this.tradeable = tradeable;
 		this.discoverable = discoverable;
 		this.conflicts = conflicts;
+		this.enchantables = enchantables;
 	}
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[], int[], boolean, boolean, Set)}
+	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[], int[], boolean, boolean, Set, Set)}
 	 * instead.
 	 */
 	@Deprecated(forRemoval = true)
@@ -97,6 +101,7 @@ public class EnchantmentMock extends Enchantment
 		this.tradeable = data.get("tradeable").getAsBoolean();
 		this.discoverable = data.get("discoverable").getAsBoolean();
 		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
+		this.enchantables = getEnchantables(data.get("enchantable").getAsJsonArray());
 	}
 
 	@Override
@@ -137,12 +142,14 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.5")
 	public @NotNull EnchantmentRarity getRarity()
 	{
 		throw new UnsupportedOperationException("Enchantments don't have a rarity anymore in 1.20.5+.");
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.5")
 	public float getDamageIncrease(int level, @NotNull EntityCategory entityCategory)
 	{
 		// TODO Auto-generated method stub
@@ -150,6 +157,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.21")
 	public float getDamageIncrease(int level, @NotNull EntityType entityType)
 	{
 		// TODO Auto-generated method stub
@@ -157,6 +165,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.21")
 	public @NotNull Set<EquipmentSlot> getActiveSlots()
 	{
 		// TODO Auto-generated method stub
@@ -164,6 +173,15 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	public @NotNull Set<EquipmentSlotGroup> getActiveSlotGroups()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true) //Mark as deprecated as this method assumes that the enchantments description always
+	// be a translatable component which is not guaranteed.
 	public @NotNull String translationKey()
 	{
 		// TODO Auto-generated method stub
@@ -274,7 +292,8 @@ public class EnchantmentMock extends Enchantment
 	public boolean canEnchantItem(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "Item cannot be null");
-		return false;
+		NamespacedKey namespacedKey = item.getType().getKey();
+		return enchantables.contains(namespacedKey);
 	}
 
 	@Override
@@ -284,6 +303,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull String getTranslationKey()
 	{
 		// TODO Auto-generated method stub
@@ -296,7 +316,7 @@ public class EnchantmentMock extends Enchantment
 		Preconditions.checkNotNull(data);
 		List<String> expectedArguments = List.of("key", "treasure", "cursed", "maxLevel", "startLevel",
 				"name", "displayNames", "minModifiedCosts", "maxModifiedCosts", "tradeable", "discoverable",
-				"conflicts");
+				"conflicts", "enchantables");
 		expectedArguments.forEach(expectedKey ->
 				Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
 
@@ -312,8 +332,9 @@ public class EnchantmentMock extends Enchantment
 		boolean tradeable = data.get("tradeable").getAsBoolean();
 		boolean discoverable = data.get("discoverable").getAsBoolean();
 		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
+		Set<NamespacedKey> enchantables = getEnchantables(data.get("enchantables").getAsJsonArray());
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
-				maxModifiedCosts, tradeable, discoverable, conflicts);
+				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables);
 	}
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)
@@ -322,6 +343,16 @@ public class EnchantmentMock extends Enchantment
 		for (JsonElement conflict : conflicts)
 		{
 			output.add(NamespacedKey.fromString(conflict.getAsString()));
+		}
+		return output;
+	}
+
+	private static Set<NamespacedKey> getEnchantables(JsonArray enchantables)
+	{
+		Set<NamespacedKey> output = new HashSet<>();
+		for (JsonElement enchantable : enchantables)
+		{
+			output.add(NamespacedKey.fromString(enchantable.getAsString()));
 		}
 		return output;
 	}

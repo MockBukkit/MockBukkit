@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.attribute;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.key.Key;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
@@ -64,6 +65,21 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
+	public @Nullable AttributeModifier getModifier(@NotNull Key key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeModifier(@NotNull Key key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true,since = "1.21")
 	public @Nullable AttributeModifier getModifier(@NotNull UUID uuid)
 	{
 		// TODO Auto-generated method stub
@@ -71,6 +87,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.21")
 	public void removeModifier(@NotNull UUID uuid)
 	{
 		// TODO Auto-generated method stub

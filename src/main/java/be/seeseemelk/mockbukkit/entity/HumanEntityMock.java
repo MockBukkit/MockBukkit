@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
@@ -51,7 +52,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
 	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);
 	private InventoryView inventoryView;
-	private @Nullable ItemStack cursor = null;
+	private @NotNull ItemStack cursor = ItemStack.empty();
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
 	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
 	/**
@@ -60,8 +61,8 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	protected int expLevel = 0;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
-	private boolean sleeping;
 	protected boolean blocking;
+	private int sleepTicks = 0;
 
 	/**
 	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -167,13 +168,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @NotNull ItemStack getItemOnCursor()
 	{
-		return cursor == null ? new ItemStack(Material.AIR, 0) : cursor.clone();
+		return cursor == null ? new ItemStackMock(Material.AIR, 0) : cursor.clone();
 	}
 
 	@Override
 	public void setItemOnCursor(@Nullable ItemStack item)
 	{
-		this.cursor = item == null ? null : item.clone();
+		this.cursor = item == null ? ItemStackMock.empty() : item.clone();
 	}
 
 	@Override
@@ -338,31 +339,18 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean isDeeplySleeping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isSleeping() && getSleepTicks() > 100;
 	}
 
-	@Override
-	public boolean isSleeping()
+	public void setSleepTicks(int sleepTicks)
 	{
-		return this.sleeping;
-	}
-
-	/**
-	 * Set whether this entity is slumbering.
-	 *
-	 * @param sleeping If this entity is slumbering
-	 */
-	public void setSleeping(boolean sleeping)
-	{
-		this.sleeping = sleeping;
+		this.sleepTicks = sleepTicks;
 	}
 
 	@Override
 	public int getSleepTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleepTicks;
 	}
 
 	@Override

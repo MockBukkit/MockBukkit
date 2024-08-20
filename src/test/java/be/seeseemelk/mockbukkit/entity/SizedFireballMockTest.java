@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SizedFireball;
@@ -36,14 +37,14 @@ class SizedFireballMockTest
 	@Test
 	void testGetDisplayItem()
 	{
-		ItemStack item = new ItemStack(Material.FIRE_CHARGE);
+		ItemStack item = new ItemStackMock(Material.FIRE_CHARGE);
 		assertEquals(item, fireball.getDisplayItem());
 	}
 
 	@Test
 	void testSetDisplayItem()
 	{
-		ItemStack item = new ItemStack(Material.FIRE_CHARGE);
+		ItemStack item = new ItemStackMock(Material.FIRE_CHARGE);
 		fireball.setDisplayItem(item);
 		assertEquals(item, fireball.getDisplayItem());
 	}

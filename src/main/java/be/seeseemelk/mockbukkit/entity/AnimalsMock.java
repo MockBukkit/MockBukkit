@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Animals;
@@ -75,7 +76,7 @@ public class AnimalsMock extends AgeableMock implements Animals
 	public boolean isBreedItem(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		return this.isBreedItem(new ItemStack(material));
+		return this.isBreedItem(new ItemStackMock(material));
 	}
 
 	@NotNull

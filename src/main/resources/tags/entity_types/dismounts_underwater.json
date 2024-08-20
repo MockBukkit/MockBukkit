@@ -1,17 +1,17 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:mule",
-        "minecraft:llama",
-        "minecraft:horse",
-        "minecraft:ravager",
-        "minecraft:spider",
-        "minecraft:pig",
-        "minecraft:zombie_horse",
-        "minecraft:strider",
-        "minecraft:trader_llama",
-        "minecraft:camel",
-        "minecraft:chicken",
-        "minecraft:donkey"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:camel",
+		"minecraft:chicken",
+		"minecraft:donkey",
+		"minecraft:horse",
+		"minecraft:llama",
+		"minecraft:mule",
+		"minecraft:pig",
+		"minecraft:ravager",
+		"minecraft:spider",
+		"minecraft:strider",
+		"minecraft:trader_llama",
+		"minecraft:zombie_horse"
+	]
 }

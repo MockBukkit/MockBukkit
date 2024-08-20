@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Location;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,6 +83,12 @@ class DolphinMockTest
 		});
 
 		assertEquals("Location can't be null.", illegalArgumentException.getMessage());
+	}
+
+	@Test
+	void getEyeHeight_GivenDefaultDolphin()
+	{
+		assertEquals(0.51D, dolphin.getEyeHeight());
 	}
 
 }

@@ -36,4 +36,17 @@ class MuleMockTest
 		assertEquals(Horse.Variant.MULE, mule.getVariant());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultMule()
+	{
+		assertEquals(1.36D, mule.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyMule()
+	{
+		mule.setBaby();
+		assertEquals(0.68D, mule.getEyeHeight());
+	}
+
 }

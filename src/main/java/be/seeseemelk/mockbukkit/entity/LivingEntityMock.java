@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.attribute.AttributesMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.EntityEquipmentMock;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
@@ -37,6 +38,7 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -97,6 +99,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean collidable = true;
 	private boolean ai = true;
 	private boolean swimming;
+	private boolean sleeping;
+	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
@@ -331,13 +335,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public double getEyeHeight()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void startUsingItem(@NotNull EquipmentSlot hand)
 	{
 		// TODO Auto-generated method stub
@@ -379,11 +376,41 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	protected double getEyeHeight(EntityState pose)
+	{
+		return getHeight(pose) * 0.85D;
+	}
+
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (ignorePose)
+		{
+			return getEyeHeight(EntityState.DEFAULT);
+		}
+
+		if (isSleeping())
+		{
+			return getEyeHeight(EntityState.SLEEPING);
+		}
+
+		if (isSneaking())
+		{
+			return getEyeHeight(EntityState.SNEAKING);
+		}
+
+		if (isSwimming())
+		{
+			return getEyeHeight(EntityState.SWIMMING);
+		}
+
+		return getEyeHeight(getEntityState());
+	}
+
+	@Override
+	public double getEyeHeight()
+	{
+		return getEyeHeight(false);
 	}
 
 
@@ -598,37 +625,73 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean addPotionEffect(@NotNull PotionEffect effect)
 	{
-		return addPotionEffect(effect, false);
+		return addPotionEffect(effect, true); // force is ignored
 	}
 
 	@Override
 	@Deprecated(since = "1.15")
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
-		AsyncCatcher.catchOp("effect add");
-		Preconditions.checkNotNull(effect, "PotionEffect cannot be null");
 		// Bukkit now allows multiple effects of the same type,
 		// the force/success attributes are now obsolete
-		activeEffects.add(new ActivePotionEffect(effect));
-		return true;
+		addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
+		return true; // legacy behaviour always returned true
+	}
+
+	/**
+	 * Adds a potion effect. If the event is canceled, no effect will be added.
+	 *
+	 * @param effect The Potion Effect to add.
+	 * @param cause  The cause.
+	 * @return The event containing details about adding the potion effect.
+	 */
+	public EntityPotionEffectEvent addPotionEffect(@NotNull PotionEffect effect, EntityPotionEffectEvent.Cause cause)
+	{
+		AsyncCatcher.catchOp("effect add");
+		Preconditions.checkNotNull(effect, "PotionEffect cannot be null");
+
+		/*
+		Applying completely new effect -> old: null, new: new effect, action: add, override: false
+		A single effects runs out (on time) (not possible via this method because @NotNull) -> old: effect that ran out, new: null, action: remove, override: true
+		Applying a new effect but effect type already active -> old: existing effect, new: new effect, action: changed, override: true
+		Clearing all effects (not possible via this method) -> old: effect that was cleared, new: null, action: clear, override: true
+
+		 Notes:
+		 If multiple effects are cleared, then for each one an EntityPotionEffectEvent is called.
+		 */
+
+		PotionEffect oldEffect = getPotionEffect(effect.getType());
+		EntityPotionEffectEvent.Action action = oldEffect == null ? EntityPotionEffectEvent.Action.ADDED : EntityPotionEffectEvent.Action.CHANGED;
+		boolean override = oldEffect != null;
+
+
+		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, cause, action, override);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			activeEffects.add(new ActivePotionEffect(effect));
+		}
+		return event;
+	}
+
+	/**
+	 * Adds multiple potion effects. If one event is canceled, the effect from that event won't be added.
+	 *
+	 * @param effects The Potion Effects to add.
+	 * @param cause The cause.
+	 * @return A list of events containing details about adding the potion effects.
+	 */
+	public List<EntityPotionEffectEvent> addPotionEffects(@NotNull Collection<PotionEffect> effects, EntityPotionEffectEvent.Cause cause)
+	{
+		Preconditions.checkNotNull(effects, "PotionEffect cannot be null");
+		return effects.stream().map(potionEffect -> addPotionEffect(potionEffect, cause)).toList();
 	}
 
 	@Override
 	public boolean addPotionEffects(@NotNull Collection<PotionEffect> effects)
 	{
-		Preconditions.checkNotNull(effects, "PotionEffect cannot be null");
-
-		boolean successful = true;
-
-		for (PotionEffect effect : effects)
-		{
-			if (!addPotionEffect(effect))
-			{
-				successful = false;
-			}
-		}
-
-		return successful;
+		addPotionEffects(effects, EntityPotionEffectEvent.Cause.PLUGIN);
+		return true; // legacy behaviour always returned true
 	}
 
 	@Override
@@ -826,18 +889,36 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Set whether this entity is slumbering.
+	 *
+	 * @param sleeping If this entity is slumbering
+	 */
+	public void setSleeping(boolean sleeping)
+	{
+		this.sleeping = sleeping;
+	}
+
 	@Override
 	public boolean isSleeping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleeping;
+	}
+
+	/**
+	 * Set whether this entity is climbing.
+	 *
+	 * @param climbing If this entity is climbing
+	 */
+	public void setClimbing(boolean climbing)
+	{
+		this.climbing = climbing;
 	}
 
 	@Override
 	public boolean isClimbing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.climbing;
 	}
 
 	@Override
@@ -1285,6 +1366,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public void heal(double amount, @NotNull EntityRegainHealthEvent.RegainReason regainReason)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot equipmentSlot)
 	{
 		throw new UnimplementedOperationException();
 	}

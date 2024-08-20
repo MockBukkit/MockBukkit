@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:water",
-        "minecraft:flowing_water"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:flowing_water",
+		"minecraft:water"
+	]
 }

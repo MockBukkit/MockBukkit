@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.math.Rotations;
 import org.bukkit.Material;
@@ -32,6 +34,8 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private boolean isMarker = false;
 	private boolean hasBasePlate = true;
 	private boolean isVisible = true;
+	private boolean isMovable = true;
+	private boolean isTickable = true;
 
 	private @NotNull EulerAngle headPose = EulerAngle.ZERO;
 	private @NotNull EulerAngle bodyPose = EulerAngle.ZERO;
@@ -57,6 +61,17 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public @NotNull EntityType getType()
 	{
 		return EntityType.ARMOR_STAND;
+	}
+
+	@Override
+	protected EntitySubType getSubType()
+	{
+		if (isSmall())
+		{
+			return EntitySubType.SMALL;
+		}
+
+		return super.getSubType();
 	}
 
 	@Override
@@ -291,29 +306,25 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public boolean canMove()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isMovable;
 	}
 
 	@Override
-	public void setCanMove(boolean move)
+	public void setCanMove(boolean canMove)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isMovable = canMove;
 	}
 
 	@Override
 	public boolean canTick()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isTickable;
 	}
 
 	@Override
 	public void setCanTick(boolean tick)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isTickable = tick;
 	}
 
 	@Override
@@ -336,7 +347,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
-		if (item == null) item = new ItemStack(Material.AIR);
+		if (item == null) item = new ItemStackMock(Material.AIR);
 		switch (slot)
 		{
 		case HAND -> getEquipment().setItemInMainHand(item);
@@ -386,85 +397,97 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public @NotNull Rotations getBodyRotations()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return toPaper(getBodyPose());
 	}
 
 	@Override
 	public void setBodyRotations(@NotNull Rotations rotations)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		setBodyPose(toBukkit(rotations));
 	}
 
 	@Override
 	public @NotNull Rotations getLeftArmRotations()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return toPaper(getLeftArmPose());
 	}
 
 	@Override
 	public void setLeftArmRotations(@NotNull Rotations rotations)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		setLeftArmPose(toBukkit(rotations));
 	}
 
 	@Override
 	public @NotNull Rotations getRightArmRotations()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return toPaper(getRightArmPose());
 	}
 
 	@Override
 	public void setRightArmRotations(@NotNull Rotations rotations)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		setRightArmPose(toBukkit(rotations));
 	}
 
 	@Override
 	public @NotNull Rotations getLeftLegRotations()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return toPaper(getLeftLegPose());
 	}
 
 	@Override
 	public void setLeftLegRotations(@NotNull Rotations rotations)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		setLeftLegPose(toBukkit(rotations));
 	}
 
 	@Override
 	public @NotNull Rotations getRightLegRotations()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return toPaper(getRightLegPose());
 	}
 
 	@Override
 	public void setRightLegRotations(@NotNull Rotations rotations)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		setRightLegPose(toBukkit(rotations));
 	}
 
 	@Override
 	public @NotNull Rotations getHeadRotations()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return toPaper(getHeadPose());
 	}
 
 	@Override
 	public void setHeadRotations(@NotNull Rotations rotations)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		setHeadPose(toBukkit(rotations));
+	}
+
+	private static EulerAngle toBukkit(Rotations rotation)
+	{
+		return new EulerAngle(
+				Math.toRadians(rotation.x()),
+				Math.toRadians(rotation.y()),
+				Math.toRadians(rotation.z())
+		);
+	}
+
+	private static Rotations toPaper(EulerAngle eulerAngle)
+	{
+		return Rotations.ofDegrees(
+			Math.toDegrees(eulerAngle.getX()),
+			Math.toDegrees(eulerAngle.getY()),
+			Math.toDegrees(eulerAngle.getZ())
+		);
 	}
 
 }

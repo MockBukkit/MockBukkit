@@ -1,13 +1,13 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.util.AdventureConverters;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,7 +75,7 @@ public class SheepMock extends AnimalsMock implements Sheep
 
 		for (int j = 0; j < i; ++j)
 		{
-			this.getWorld().dropItem(this.getLocation(), new ItemStack(Material.valueOf(this.color.name() + "_WOOL")));
+			this.getWorld().dropItem(this.getLocation(), new ItemStackMock(Material.valueOf(this.color.name() + "_WOOL")));
 		}
 	}
 

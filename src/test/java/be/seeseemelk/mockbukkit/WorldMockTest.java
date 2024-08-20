@@ -26,9 +26,11 @@ import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
+import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
 import be.seeseemelk.mockbukkit.entity.FireballMock;
@@ -43,6 +45,8 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
+import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
@@ -57,36 +61,42 @@ import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PigZombieMock;
+import be.seeseemelk.mockbukkit.entity.PillagerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.RabbitMock;
+import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.ShulkerMock;
 import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SnowballMock;
+import be.seeseemelk.mockbukkit.entity.SnowmanMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
-import be.seeseemelk.mockbukkit.entity.TNTPrimedMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
+import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
@@ -104,6 +114,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -254,7 +265,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(2, world.getEntities().size());
 		assertEquals(1, world.getLivingEntities().size());
 	}
@@ -325,7 +336,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClass(ZombieMock.class).size());
 		assertEquals(1, world.getEntitiesByClass(ItemEntityMock.class).size());
 	}
@@ -335,7 +346,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClasses(ZombieMock.class).size());
 		assertEquals(1, world.getEntitiesByClasses(ItemEntityMock.class).size());
 		assertEquals(2, world.getEntitiesByClasses(ZombieMock.class, ItemEntityMock.class).size());
@@ -347,7 +358,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
-		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
 		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
@@ -749,7 +760,7 @@ class WorldMockTest
 	void testDropItem()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		ItemStack item = new ItemStack(Material.DIAMOND);
+		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		Location location = new Location(world, 100, 100, 100);
 
 		Item entity = world.dropItem(location, item);
@@ -768,7 +779,7 @@ class WorldMockTest
 	void testDropItemNaturally()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		ItemStack item = new ItemStack(Material.EMERALD);
+		ItemStack item = new ItemStackMock(Material.EMERALD);
 		Location location = new Location(world, 200, 100, 200);
 
 		Item entity = world.dropItemNaturally(location, item);
@@ -787,7 +798,7 @@ class WorldMockTest
 	void testDropItemConsumer()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		ItemStack item = new ItemStack(Material.BEACON);
+		ItemStack item = new ItemStackMock(Material.BEACON);
 		Location location = new Location(world, 200, 50, 500);
 
 		Item entity = world.dropItem(location, item, n ->
@@ -804,7 +815,7 @@ class WorldMockTest
 	void drop_Item_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		world.dropItem(new Location(world, 0, 5, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 5, 0), new ItemStackMock(Material.STONE));
 		server.getPluginManager().assertEventFired(ItemSpawnEvent.class, (e) -> !e.isCancelled());
 	}
 
@@ -1241,6 +1252,7 @@ class WorldMockTest
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), type);
 		assertInstanceOf(expectedClass, entity);
 		assertTrue(entity.isValid());
+		assertEquals(type, entity.getType());
 	}
 
 	public static Stream<Arguments> getSpawnableEntities()
@@ -1292,6 +1304,7 @@ class WorldMockTest
 				Arguments.of(EntityType.HORSE, HorseMock.class),
 				Arguments.of(EntityType.ARMOR_STAND, ArmorStandMock.class),
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
+				Arguments.of(EntityType.DROWNED, Drowned.class),
 				Arguments.of(EntityType.FIREWORK_ROCKET, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
 				Arguments.of(EntityType.FURNACE_MINECART, PoweredMinecartMock.class),
@@ -1330,7 +1343,17 @@ class WorldMockTest
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
 				Arguments.of(EntityType.ARROW, Arrow.class),
-				Arguments.of(EntityType.MARKER, MarkerMock.class)
+				Arguments.of(EntityType.MARKER, MarkerMock.class),
+				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class),
+				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
+				Arguments.of(EntityType.WITCH, WitchMock.class),
+				Arguments.of(EntityType.RAVAGER, RavagerMock.class),
+				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
+				Arguments.of(EntityType.EVOKER, EvokerMock.class),
+				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class),
+				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
+				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
+				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
 		);
 	}
 
@@ -2229,36 +2252,6 @@ class WorldMockTest
 		assertFalse(world.isRespawnAnchorWorks());
 		world.setEnvironment(World.Environment.THE_END);
 		assertFalse(world.isRespawnAnchorWorks());
-	}
-
-	@Test
-	void testDoesRespawnAnchorWork()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setEnvironment(World.Environment.NETHER);
-		assertTrue(world.doesRespawnAnchorWork());
-	}
-
-	@Test
-	void testDoesRespawnAnchorWorkFalse()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		assertFalse(world.doesRespawnAnchorWork());
-		world.setEnvironment(World.Environment.THE_END);
-		assertFalse(world.doesRespawnAnchorWork());
-	}
-
-	@Test
-	void testIsUltrawarm()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setEnvironment(World.Environment.NETHER);
-		assertTrue(world.isUltrawarm());
-
-		world.setEnvironment(World.Environment.NORMAL);
-		assertFalse(world.isUltrawarm());
-		world.setEnvironment(World.Environment.THE_END);
-		assertFalse(world.isUltrawarm());
 	}
 
 	@Test

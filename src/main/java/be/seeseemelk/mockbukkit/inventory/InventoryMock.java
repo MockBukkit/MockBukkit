@@ -49,8 +49,7 @@ public class InventoryMock implements Inventory
 	 */
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
-		Preconditions.checkArgument(2 == size || (9 <= size && size <= 54 && size % 9 == 0),
-				"Size for custom inventory must be two or a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		Preconditions.checkArgument(size > 0, "Inventory size has to be > 0");
 		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
@@ -441,7 +440,7 @@ public class InventoryMock implements Inventory
 		{
 			throw new IllegalArgumentException("Material cannot be null.");
 		}
-		return amount < 1 || getNumberOfItems(new ItemStack(material)) == amount;
+		return amount < 1 || getNumberOfItems(new ItemStackMock(material)) == amount;
 	}
 
 	@Override

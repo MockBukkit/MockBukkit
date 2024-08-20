@@ -5,7 +5,9 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
@@ -20,8 +22,10 @@ import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
+import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.chat.SignedMessage;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -45,6 +49,8 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
+import org.bukkit.ServerLinks;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
@@ -63,6 +69,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
@@ -74,6 +81,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
@@ -103,11 +111,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
@@ -167,7 +177,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private int expTotal = 0;
 	private float exp = 0;
 	private int expCooldown = 0;
-	private boolean sneaking = false;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
@@ -179,9 +188,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
+	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
+	private final ConversationTracker conversationTracker = new ConversationTracker();
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
@@ -258,6 +269,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 		this.online = false;
 
+		this.conversationTracker.abandonAllConversations();
+		this.perms.clearPermissions();
+
 		Component message = MiniMessage.miniMessage()
 				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
 
@@ -297,14 +311,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
-	 * Simulates a Player consuming an Edible Item
+	 * Simulates a Player consuming an Edible Item. Some edibles inflict status effects on the consumer with a certain
+	 * probability.
 	 *
-	 * @param consumable The Item to consume
+	 * @param consumable                The Item to consume
+	 * @param alwaysInflictPotionEffect Whether to always inflict a potion effect from food, regardless of probability.
+	 *                                  If this is `false` and the food item has a probability to inflict the effect
+	 *                                  lesser than 0, it will not do so. This does not prevent effects from
+	 *                                  being inflicted that have a probability of 1. The value is ignored if the edible
+	 *                                  does not inflict any potion effects.
+	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
-	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	public void simulateConsumeItem(@NotNull ItemStack consumable, boolean alwaysInflictPotionEffect)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
-		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
+		// potions are not considered edible, but they can be consumed
+		Preconditions.checkArgument(consumable.getType().isEdible() || consumable.getType() == Material.POTION, "Item is not Consumable");
 
 		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
 		//how it would sound like
@@ -336,8 +358,46 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 							!Bukkit.isPrimaryThread());
 			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
 		}
-
+		else
+		{
+			// apply status effects
+			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
+			if (foodConsumption != null)
+			{
+				for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
+				{
+					if (foodEffect.probability() == 1 || alwaysInflictPotionEffect)
+					{
+						addPotionEffect(foodEffect.potionEffect());
+					}
+				}
+			}
+			else if (consumable.hasItemMeta() && consumable.getItemMeta() instanceof PotionMeta potionMeta)
+			{
+				PotionType.InternalPotionData internalPotionData = server.getUnsafe().getInternalPotionData(Registry.POTION.getKey(potionMeta.getBasePotionType()));
+				for (PotionEffect baseEffect : internalPotionData.getPotionEffects())
+				{
+					addPotionEffect(baseEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+				for (PotionEffect customEffect : potionMeta.getCustomEffects())
+				{
+					addPotionEffect(customEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
+				}
+			}
+		}
 		consumedItems.add(consumable);
+	}
+
+	/**
+	 * Simulates a Player consuming an Edible Item. If the edible inflicts status effects, these will be applied
+	 * regardless of their probability.
+	 *
+	 * @param consumable The Item to consume
+	 * @see PlayerMock#simulateConsumeItem(ItemStack, boolean)
+	 */
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	{
+		simulateConsumeItem(consumable, true);
 	}
 
 	/**
@@ -704,20 +764,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public double getEyeHeight()
-	{
-		return getEyeHeight(false);
-	}
-
-	@Override
-	public double getEyeHeight(boolean ignorePose)
-	{
-		if (isSneaking() && !ignorePose)
-			return 1.54D;
-		return 1.62D;
-	}
-
-	@Override
 	public int getNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
@@ -740,36 +786,31 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isConversing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.isConversing();
 	}
 
 	@Override
 	public void acceptConversationInput(@NotNull String input)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.acceptConversationInput(input);
 	}
 
 	@Override
 	public boolean beginConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.beginConversation(conversation);
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation, @NotNull ConversationAbandonedEvent details)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, details);
 	}
 
 	@Override
@@ -979,17 +1020,58 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendRawMessage(@Nullable String message)
+	public void sendRawMessage(@NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendRawMessage(null, message);
 	}
 
 	@Override
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(message != null, "message cannot be null");
+		this.messages.add(LegacyComponentSerializer.legacySection().deserialize(message));
+	}
+
+	@Override
+	public void sendMessage(String message) {
+		if (!this.conversationTracker.isConversingModaly()) {
+			this.sendRawMessage(message);
+		}
+	}
+
+	@Override
+	public void sendMessage(String... messages) {
+		for (String message : messages) {
+			this.sendMessage(message);
+		}
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String message) {
+		if (!this.conversationTracker.isConversingModaly()) {
+			this.sendRawMessage(sender, message);
+		}
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String... messages) {
+		for (String message : messages) {
+			this.sendMessage(sender, message);
+		}
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	{
+		Preconditions.checkNotNull(message, "input");
+		this.messages.add(message);
+	}
+
+	@Override
+	public @Nullable Component nextComponentMessage()
+	{
+		return messages.poll();
 	}
 
 	@Override
@@ -1091,18 +1173,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSneaking()
-	{
-		return sneaking;
-	}
-
-	@Override
-	public void setSneaking(boolean sneaking)
-	{
-		this.sneaking = sneaking;
-	}
-
 	/**
 	 * Simulates sneaking.
 	 *
@@ -1115,7 +1185,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
-			this.sneaking = event.isSneaking();
+			setSneaking(event.isSneaking());
 		}
 		return event;
 	}
@@ -2073,8 +2143,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		hiddenPlayers.putIfAbsent(player.getUniqueId(), new HashSet<>());
-		Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		hiddenEntities.putIfAbsent(player.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenEntities.get(player.getUniqueId());
 		blockingPlugins.add(plugin);
 	}
 
@@ -2091,13 +2161,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		if (hiddenPlayers.containsKey(player.getUniqueId()))
+		if (hiddenEntities.containsKey(player.getUniqueId()))
 		{
-			Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			Set<Plugin> blockingPlugins = hiddenEntities.get(player.getUniqueId());
 			blockingPlugins.remove(plugin);
 			if (blockingPlugins.isEmpty())
 			{
-				hiddenPlayers.remove(player.getUniqueId());
+				hiddenEntities.remove(player.getUniqueId());
 			}
 		}
 	}
@@ -2106,32 +2176,42 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean canSee(@NotNull Player player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
+		return !hiddenEntities.containsKey(player.getUniqueId()) &&
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 
 	@Override
-	@ApiStatus.Experimental
 	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		hiddenEntities.putIfAbsent(entity.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenEntities.get(entity.getUniqueId());
+		blockingPlugins.add(plugin);
 	}
 
 	@Override
-	@ApiStatus.Experimental
 	public void showEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		if (hiddenEntities.containsKey(entity.getUniqueId()))
+		{
+			Set<Plugin> blockingPlugins = hiddenEntities.get(entity.getUniqueId());
+			blockingPlugins.remove(plugin);
+			if (blockingPlugins.isEmpty())
+			{
+				hiddenEntities.remove(entity.getUniqueId());
+			}
+		}
 	}
 
 	@Override
 	public boolean canSee(@NotNull Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return !hiddenEntities.containsKey(entity.getUniqueId());
 	}
 
 	@Override
@@ -3087,6 +3167,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendExperienceChange(float progress)
 	{
 		this.sendExperienceChange(progress, this.getLevel());
@@ -3122,6 +3209,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void sendHurtAnimation(float yaw)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendLinks(@NotNull ServerLinks links)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -3302,33 +3396,63 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		@Override
 		@Deprecated
-		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
-		{
-			sendMessage(ChatMessageType.CHAT, components);
-		}
-
-		@Override
-		@Deprecated
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
-		{
-			Preconditions.checkNotNull(position, "Position must not be null");
-			Preconditions.checkNotNull(components, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
-			PlayerMock.this.sendMessage(comp);
-		}
-
-		@Override
-		@Deprecated
 		public void sendMessage(@NotNull BaseComponent component)
 		{
-			sendMessage(ChatMessageType.CHAT, component);
+			this.sendMessage(ChatMessageType.SYSTEM, component);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull BaseComponent... components)
+		{
+			this.sendMessage(ChatMessageType.SYSTEM, components);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			this.sendMessage(ChatMessageType.CHAT, sender, component);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			this.sendMessage(ChatMessageType.CHAT, sender, components);
 		}
 
 		@Override
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			sendMessage(position, new BaseComponent[]{ component });
+			this.sendMessage(position, new BaseComponent[]{ component });
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components)
+		{
+			this.sendMessage(position, null, components);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			this.sendMessage( position, sender, new BaseComponent[] { component } );
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			Preconditions.checkNotNull(position, "Position must not be null");
+			Preconditions.checkNotNull(components, "Component must not be null");
+			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
+			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
+			PlayerMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
 		}
 
 	}

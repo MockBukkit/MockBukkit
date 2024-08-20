@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
@@ -23,6 +24,7 @@ import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -55,7 +57,7 @@ class UnsafeValuesTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
+		server = MockBukkit.getOrCreateMock();
 		WorldCreator.name("world").createWorld();
 		mockUnsafeValues = server.getUnsafe();
 	}
@@ -94,19 +96,25 @@ class UnsafeValuesTest
 		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
 	}
 
-	private static ItemStack[] provideTestItems()
+	private static Stream<Arguments> provideTestItems()
 	{
-		List<ItemStack> items = new ArrayList<>();
+		MockBukkit.mock();
+		List<Arguments> args = new ArrayList<>();
 		for (Material material : Material.values())
 		{
 			if (material.isLegacy() || material.isAir())
 			{
 				continue;
 			}
-			ItemStack item = new ItemStack(material);
-			items.add(item);
+			if (material.asItemType() == null) //We dont have a way to serialize these properly right now
+			{
+				continue;
+			}
+			ItemStack item = new ItemStackMock(material);
+			args.add(Arguments.of(Named.of(material.name(), item)));
 		}
-		return items.toArray(ItemStack[]::new);
+
+		return args.stream();
 	}
 
 	@ParameterizedTest
@@ -147,7 +155,7 @@ class UnsafeValuesTest
 			}
 			if (meta instanceof CrossbowMeta crossbowMeta)
 			{
-				ItemStack arrow = new ItemStack(Material.ARROW);
+				ItemStack arrow = new ItemStackMock(Material.ARROW);
 				arrow.editMeta(itemMeta -> {});
 				crossbowMeta.addChargedProjectile(arrow);
 			}
@@ -314,16 +322,21 @@ class UnsafeValuesTest
 	static Stream<Arguments> itemStackTranslationKeyProvider()
 	{
 		return Stream.of(
-				Arguments.of("item.minecraft.saddle", new ItemStack(Material.SADDLE)),
-				Arguments.of("block.minecraft.stone", new ItemStack(Material.STONE)),
-				Arguments.of("item.minecraft.wheat", new ItemStack(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStack(Material.NETHER_WART))
+				Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
+				Arguments.of("block.minecraft.stone", new ItemStackMock(Material.STONE)),
+				Arguments.of("item.minecraft.wheat", new ItemStackMock(Material.WHEAT)),
+				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART))
 		);
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackEmptyEffectTranslationKeyProvider")
-	void testItemStackEmptyEffectTranslationKey(String expectedMaterialKey, Material material, String expectedItemStackKey, ItemStack itemStack)
+	void testItemStackEmptyEffectTranslationKey(
+			String expectedMaterialKey,
+			Material material,
+			String expectedItemStackKey,
+			ItemStack itemStack
+	)
 	{
 		assertEquals(expectedMaterialKey, material.getItemTranslationKey());
 		assertEquals(expectedItemStackKey, itemStack.translationKey());
@@ -332,10 +345,30 @@ class UnsafeValuesTest
 	static Stream<Arguments> itemStackEmptyEffectTranslationKeyProvider()
 	{
 		return Stream.of(
-				Arguments.of("item.minecraft.potion", Material.POTION, "item.minecraft.potion.effect.empty", new ItemStack(Material.POTION)),
-				Arguments.of("item.minecraft.splash_potion", Material.SPLASH_POTION, "item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION)),
-				Arguments.of("item.minecraft.tipped_arrow", Material.TIPPED_ARROW, "item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW)),
-				Arguments.of("item.minecraft.lingering_potion", Material.LINGERING_POTION, "item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION))
+				Arguments.of(
+						"item.minecraft.potion",
+						Material.POTION,
+						"item.minecraft.potion.effect.empty",
+						new ItemStackMock(Material.POTION)
+				),
+				Arguments.of(
+						"item.minecraft.splash_potion",
+						Material.SPLASH_POTION,
+						"item.minecraft.splash_potion.effect.empty",
+						new ItemStackMock(Material.SPLASH_POTION)
+				),
+				Arguments.of(
+						"item.minecraft.tipped_arrow",
+						Material.TIPPED_ARROW,
+						"item.minecraft.tipped_arrow.effect.empty",
+						new ItemStackMock(Material.TIPPED_ARROW)
+				),
+				Arguments.of(
+						"item.minecraft.lingering_potion",
+						Material.LINGERING_POTION,
+						"item.minecraft.lingering_potion.effect.empty",
+						new ItemStackMock(Material.LINGERING_POTION)
+				)
 		);
 	}
 

@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
@@ -20,6 +21,7 @@ import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
@@ -33,7 +35,6 @@ import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
-import io.papermc.paper.world.structure.ConfiguredStructure;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
@@ -47,6 +48,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
+import org.bukkit.Tag;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -436,11 +438,11 @@ class ServerMockTest
 	@Test
 	void getRecipesFor_ManyRecipes_OnlyCorrectRecipes()
 	{
-		TestRecipe recipe1 = new TestRecipe(new ItemStack(Material.STONE));
-		TestRecipe recipe2 = new TestRecipe(new ItemStack(Material.APPLE));
+		TestRecipe recipe1 = new TestRecipe(new ItemStackMock(Material.STONE));
+		TestRecipe recipe2 = new TestRecipe(new ItemStackMock(Material.APPLE));
 		server.addRecipe(recipe1);
 		server.addRecipe(recipe2);
-		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.APPLE));
+		List<Recipe> recipes = server.getRecipesFor(new ItemStackMock(Material.APPLE));
 		assertEquals(1, recipes.size());
 		assertSame(recipe2, recipes.get(0));
 	}
@@ -448,11 +450,11 @@ class ServerMockTest
 	@Test
 	void getRecipesFor_IgnoresAmount()
 	{
-		TestRecipe recipe = new TestRecipe(new ItemStack(Material.IRON_NUGGET));
+		TestRecipe recipe = new TestRecipe(new ItemStackMock(Material.IRON_NUGGET));
 		server.addRecipe(recipe);
 
-		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.IRON_NUGGET, 1));
-		List<Recipe> recipes2 = server.getRecipesFor(new ItemStack(Material.IRON_NUGGET, 10));
+		List<Recipe> recipes = server.getRecipesFor(new ItemStackMock(Material.IRON_NUGGET, 1));
+		List<Recipe> recipes2 = server.getRecipesFor(new ItemStackMock(Material.IRON_NUGGET, 10));
 		assertEquals(recipes, recipes2);
 	}
 
@@ -1312,6 +1314,18 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateChestInventory()
+	{
+		assertInstanceOf(ChestInventoryMock.class, server.createInventory(null, InventoryType.CHEST, "", 9));
+	}
+
+	@Test
+	void testCreateChestInventory_GivenInvalidSize()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CHEST, "", 10));
+	}
+
+	@Test
 	void testCreatePlayerInventory()
 	{
 		PlayerMock playerMock = server.addPlayer();
@@ -1473,17 +1487,6 @@ class ServerMockTest
 		assertNotNull(registry);
 		if (clazz != KeyedBossBar.class)
 			assertTrue(registry.iterator().hasNext());
-	}
-
-	@ValueSource(classes = {
-			ConfiguredStructure.class
-	})
-	@ParameterizedTest
-	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
-	{
-		Registry<? extends Keyed> registry = Bukkit.getRegistry(clazz);
-		assertNotNull(registry);
-		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
 	}
 
 	@Test
@@ -1726,6 +1729,20 @@ class ServerMockTest
 		PlayerMock playerMock = server.addPlayer("CapitalizedName");
 		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
 		assertEquals(playerMock, offlinePlayer);
+	}
+
+	@Test
+	void testGetTags_blockRegistry()
+	{
+		Iterable<Tag<Material>> blockTags = server.getTags(Tag.REGISTRY_BLOCKS, Material.class);
+		assertTrue(blockTags.iterator().hasNext());
+	}
+
+	@Test
+	void testGetTags_itemRegistry()
+	{
+		Iterable<Tag<Material>> itemTags = server.getTags(Tag.REGISTRY_ITEMS, Material.class);
+		assertTrue(itemTags.iterator().hasNext());
 	}
 
 }

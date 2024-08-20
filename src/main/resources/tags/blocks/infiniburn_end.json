@@ -1,8 +1,8 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:netherrack",
-        "minecraft:magma_block",
-        "minecraft:bedrock"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:bedrock",
+		"minecraft:magma_block",
+		"minecraft:netherrack"
+	]
 }

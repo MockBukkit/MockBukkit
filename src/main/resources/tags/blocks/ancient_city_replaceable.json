@@ -1,17 +1,17 @@
 {
-    "replace": false,
-    "values": [
-        "minecraft:deepslate_tile_slab",
-        "minecraft:cracked_deepslate_tiles",
-        "minecraft:cracked_deepslate_bricks",
-        "minecraft:deepslate_brick_slab",
-        "minecraft:deepslate_bricks",
-        "minecraft:deepslate_tiles",
-        "minecraft:deepslate_brick_stairs",
-        "minecraft:deepslate_brick_wall",
-        "minecraft:deepslate_tile_wall",
-        "minecraft:deepslate",
-        "minecraft:cobbled_deepslate",
-        "minecraft:gray_wool"
-    ]
+	"replace": false,
+	"values": [
+		"minecraft:cobbled_deepslate",
+		"minecraft:cracked_deepslate_bricks",
+		"minecraft:cracked_deepslate_tiles",
+		"minecraft:deepslate",
+		"minecraft:deepslate_brick_slab",
+		"minecraft:deepslate_brick_stairs",
+		"minecraft:deepslate_brick_wall",
+		"minecraft:deepslate_bricks",
+		"minecraft:deepslate_tile_slab",
+		"minecraft:deepslate_tile_wall",
+		"minecraft:deepslate_tiles",
+		"minecraft:gray_wool"
+	]
 }

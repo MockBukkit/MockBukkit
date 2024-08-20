@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -35,6 +36,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	private final Spigot spigot = new Spigot();
 	private final PermissibleBase perm = new PermissibleBase(this);
 	private final Queue<Component> messages = new LinkedList<>();
+	private final ConversationTracker conversationTracker = new ConversationTracker();
 
 	@Override
 	public void sendMessage(@NotNull String message)
@@ -164,36 +166,31 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public boolean isConversing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.isConversing();
 	}
 
 	@Override
 	public void acceptConversationInput(@NotNull String input)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.acceptConversationInput(input);
 	}
 
 	@Override
 	public boolean beginConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.beginConversation(conversation);
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation, @NotNull ConversationAbandonedEvent details)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, details);
 	}
 
 	@Override
