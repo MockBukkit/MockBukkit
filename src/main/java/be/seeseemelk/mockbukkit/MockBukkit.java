@@ -351,11 +351,8 @@ public class MockBukkit
 			{
 				throw new IllegalStateException("Invalid plugin superclass");
 			}
-			Field configField = instance
-					.getClass()
-					.getSuperclass()
-					.getSuperclass()
-					.getDeclaredField("newConfig");
+
+			Field configField = JavaPlugin.class.getDeclaredField("newConfig");
 			configField.setAccessible(true);
 			configField.set(instance, fileConfiguration);
 		}
