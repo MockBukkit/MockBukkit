@@ -34,7 +34,7 @@ public class MockBukkit
 
 	private static final Logger log = LoggerFactory.getLogger(MockBukkit.class);
 	private static @Nullable ServerMock mock = null;
-	private static final String BUKKIT_PLUGIN_SUPERCLASS = "org.bukkit.plugin.java.JavaPlugin";
+	private static final String BUKKIT_PLUGIN_SUPERCLASS = JavaPlugin.class.getName();
 
 	private MockBukkit()
 	{
@@ -158,7 +158,6 @@ public class MockBukkit
 	 * @param jarFile Path to the jar.
 	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
 	 */
-	@SuppressWarnings("deprecation")
 	public static void loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{
 		mock.getPluginManager().loadPlugin(jarFile);
