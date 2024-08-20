@@ -331,21 +331,24 @@ class EntityMockTest
 	}
 
 	@Test
-	void sendMessage_Default_nextMessageReturnsMessages()
+	void sendMessage_GivenEntitySendingTextMessage_NoMessageShouldBeSent()
 	{
 		entity.sendMessage("hello");
 		entity.sendMessage("my", "world");
-		assertEquals("hello", entity.nextMessage());
-		assertEquals("my", entity.nextMessage());
-		assertEquals("world", entity.nextMessage());
+
+		entity.assertNoMoreSaid();
 	}
 
 	@Test
-	void sendMessage_StoredAsComponent()
+	void sendMessage_GivenEntitySendingComponentMessage_NoMessageShouldBeSent()
 	{
-		TextComponent comp = Component.text().content("hi").clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
+		TextComponent comp = Component.text()
+				.content("hi")
+				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+				.build();
 		entity.sendMessage(comp);
-		entity.assertSaid(comp);
+
+		entity.assertNoMoreSaid();
 	}
 
 	@Test
@@ -1506,6 +1509,22 @@ class EntityMockTest
 			entity.tick();
 			assertEquals(i, entity.getTicksLived());
 		}
+	}
+
+	@Test
+	void nextComponentMessage_ShouldAlwaysReturnNull()
+	{
+		entity.sendMessage("Hello!");
+
+		assertNull(entity.nextComponentMessage());
+	}
+
+	@Test
+	void nextMessage_ShouldAlwaysReturnNull()
+	{
+		entity.sendMessage("Hello!");
+
+		assertNull(entity.nextMessage());
 	}
 
 }
