@@ -3,11 +3,13 @@ package be.seeseemelk.mockbukkit.conversations;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.MessagePrompt;
 import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.StringPrompt;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,12 +25,12 @@ class ConversationTrackerTest
 {
 
 	private final ConversationTracker tracker = new ConversationTracker();
-	private final FakeConversable conversable = new FakeConversable();
 	private final FirstPrompt firstPrompt = new FirstPrompt();
 
 	private ServerMock serverMock;
 	private Plugin plugin;
 
+	private Player player;
 	private Conversation conversation;
 
 	@BeforeEach
@@ -36,7 +38,8 @@ class ConversationTrackerTest
 	{
 		serverMock = MockBukkit.mock();
 		plugin = MockBukkit.load(TestPlugin.class);
-		conversation = new Conversation(plugin, conversable, firstPrompt);
+		player = new PlayerMock(serverMock, "test");
+		conversation = new Conversation(plugin, player, firstPrompt);
 	}
 
 	@AfterEach
