@@ -33,6 +33,7 @@ import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
+import be.seeseemelk.mockbukkit.entity.FallingBlockMock;
 import be.seeseemelk.mockbukkit.entity.FireballMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
@@ -45,8 +46,8 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
-import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
@@ -117,6 +118,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -1353,7 +1355,8 @@ class WorldMockTest
 				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class),
 				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
 				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
-				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
+				Arguments.of(EntityType.SHULKER, ShulkerMock.class),
+				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class)
 		);
 	}
 
@@ -1703,6 +1706,29 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setEnvironment(World.Environment.NETHER);
 		assertEquals(World.Environment.NETHER, world.getEnvironment());
+	}
+
+	@Test
+	void spawnFallingBlock_GivenLocationAndMaterialAndData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location spawnLoc = new Location(world, 0, 0, 0);
+		FallingBlock entity = world.spawnFallingBlock(spawnLoc, Material.OAK_WOOD, (byte) 0);
+
+		assertNotNull(entity);
+		assertEquals(Material.OAK_WOOD, entity.getBlockData().getMaterial());
+	}
+
+	@Test
+	void spawnFallingBlock_GivenLocationAndBlockData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location spawnLoc = new Location(world, 0, 0, 0);
+		BlockData blockData = new BlockDataMock(Material.OAK_WOOD);
+		FallingBlock entity = world.spawnFallingBlock(spawnLoc, blockData);
+
+		assertNotNull(entity);
+		assertEquals(Material.OAK_WOOD, entity.getBlockData().getMaterial());
 	}
 
 	@Test
