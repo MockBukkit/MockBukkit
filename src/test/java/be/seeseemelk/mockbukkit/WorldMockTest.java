@@ -40,13 +40,14 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
-import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ItemFrameMock;
@@ -1355,6 +1356,7 @@ class WorldMockTest
 				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
 				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
 				Arguments.of(EntityType.ITEM_FRAME, ItemFrameMock.class),
+				Arguments.of(EntityType.GLOW_ITEM_FRAME, GlowItemFrameMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
 		);
 	}

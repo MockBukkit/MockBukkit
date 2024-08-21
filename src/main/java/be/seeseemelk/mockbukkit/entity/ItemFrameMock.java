@@ -28,7 +28,7 @@ public class ItemFrameMock extends HangingMock implements ItemFrame
 	private boolean fixed = false;
 
 	/**
-	 * Constructs a new {@link HangingMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ItemFrame} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
