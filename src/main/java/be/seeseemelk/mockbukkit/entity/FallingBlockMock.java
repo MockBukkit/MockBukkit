@@ -12,6 +12,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link FallingBlock}.
+ *
+ * @see EntityMock
+ */
 public class FallingBlockMock extends EntityMock implements FallingBlock
 {
 
