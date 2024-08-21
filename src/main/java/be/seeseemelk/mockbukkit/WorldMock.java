@@ -50,6 +50,7 @@ import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -1509,6 +1510,9 @@ public class WorldMock implements World
 		} else if (clazz == Shulker.class)
 		{
 			return new ShulkerMock(server, UUID.randomUUID());
+		} else if (clazz == ItemFrame.class)
+		{
+			return new ItemFrameMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

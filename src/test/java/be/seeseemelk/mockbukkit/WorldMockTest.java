@@ -49,6 +49,7 @@ import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
@@ -1353,6 +1354,7 @@ class WorldMockTest
 				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class),
 				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
 				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
+				Arguments.of(EntityType.ITEM_FRAME, ItemFrameMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
 		);
 	}
