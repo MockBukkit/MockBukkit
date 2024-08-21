@@ -7,6 +7,7 @@ import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -200,6 +201,12 @@ class FallingBlockMockTest
 	{
 		fallingBlock.shouldAutoExpire(value);
 		assertEquals(value, fallingBlock.doesAutoExpire());
+	}
+
+	@Test
+	void getType()
+	{
+		assertEquals(EntityType.FALLING_BLOCK, fallingBlock.getType());
 	}
 
 }

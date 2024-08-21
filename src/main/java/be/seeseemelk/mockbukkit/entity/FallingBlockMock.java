@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -147,6 +148,12 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	public void shouldAutoExpire(boolean autoExpire)
 	{
 		this.autoExpire = autoExpire;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.FALLING_BLOCK;
 	}
 
 }
