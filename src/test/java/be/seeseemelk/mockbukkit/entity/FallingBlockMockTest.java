@@ -18,6 +18,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -59,7 +60,9 @@ class FallingBlockMockTest
 	{
 		BlockData blockData = new BlockDataMock(Material.STONE);
 		fallingBlock.setBlockData(blockData);
-		assertEquals(blockData, fallingBlock.getBlockData());
+		BlockData actual = fallingBlock.getBlockData();
+		assertEquals(blockData, actual);
+		assertNotSame(blockData, actual);
 	}
 
 	@Test
@@ -74,7 +77,9 @@ class FallingBlockMockTest
 	{
 		BlockState blockState = new BlockStateMock(Material.STONE);
 		fallingBlock.setBlockState(blockState);
-		assertEquals(blockState, fallingBlock.getBlockState());
+		BlockState actual = fallingBlock.getBlockState();
+		assertEquals(blockState, actual);
+		assertNotSame(blockState, actual);
 	}
 
 	@Test
