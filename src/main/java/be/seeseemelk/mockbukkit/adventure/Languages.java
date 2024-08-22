@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.adventure;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class Languages
 
 	/**
 	 * Modify the language translation instance used
+	 *
 	 * @param instance The new language instance to use
 	 */
 	public static void setInstance(Language instance)
@@ -34,6 +36,7 @@ public class Languages
 
 	/**
 	 * Load language
+	 *
 	 * @param language Language type to load
 	 * @return A language instance
 	 */
@@ -46,13 +49,22 @@ public class Languages
 			{
 				throw new IllegalStateException("Could not find internal resource: " + resourceName);
 			}
-			JsonElement jsonElement = JsonParser.parseReader(new InputStreamReader(inputStream));
-			return new JsonBackedLanguage(jsonElement.getAsJsonObject());
+			return loadLanguage(inputStream);
 		}
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * @param inputStream An input stream containing json data, see {@link JsonBackedLanguage#JsonBackedLanguage(JsonObject)}
+	 * @return Translations for loaded language
+	 */
+	public static Language loadLanguage(InputStream inputStream)
+	{
+		JsonElement jsonElement = JsonParser.parseReader(new InputStreamReader(inputStream));
+		return new JsonBackedLanguage(jsonElement.getAsJsonObject());
 	}
 
 }
