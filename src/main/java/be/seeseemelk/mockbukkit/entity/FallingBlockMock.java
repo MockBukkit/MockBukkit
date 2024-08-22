@@ -20,7 +20,7 @@ import java.util.UUID;
 public class FallingBlockMock extends EntityMock implements FallingBlock
 {
 
-	private final BlockState blockState = new BlockStateMock(Material.SAND);
+	private BlockState blockState = new BlockStateMock(Material.SAND);
 
 	private boolean dropItem = true;
 	private boolean canHurtEntities;
@@ -57,7 +57,7 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	public void setBlockData(@NotNull BlockData blockData)
 	{
 		Preconditions.checkArgument(blockData != null, "blockData");
-		getBlockState().setBlockData(blockData);
+		this.blockState = blockData.createBlockState();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	public void setBlockState(@NotNull BlockState blockState)
 	{
 		Preconditions.checkArgument(blockState != null, "blockState");
-		setBlockData(blockState.getBlockData());
+		this.setBlockData(blockState.getBlockData());
 	}
 
 	@Override
