@@ -70,34 +70,11 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 					consumer.accept(Component.text(translated.substring(lastIndex, matcher.start())));
 				}
 				lastIndex = matcher.end();
-
-				String argIndex = matcher.group(1);
-				if (argIndex != null)
-				{
-					try
-					{
-						final int idx = Integer.parseInt(argIndex) - 1;
-						if (idx < argumentList.size())
-						{
-							consumer.accept(argumentList.get(idx).asComponent());
-						}
-					}
-					catch (final NumberFormatException ex)
-					{
-						// ignore, drop the format placeholder
-					}
-				}
-				else
-				{
-					final int idx = argPosition++;
-					if (idx < argumentList.size())
-					{
-						consumer.accept(argumentList.get(idx).asComponent());
-					}
-				}
+				argPosition = dealWithTranslatableArguments(matcher, consumer, argumentList, argPosition);
 			}
 
-			if (lastIndex < translated.length()) {
+			if (lastIndex < translated.length())
+			{
 				consumer.accept(Component.text(translated.substring(lastIndex)));
 			}
 		}
@@ -105,6 +82,37 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 		{
 			e.printStackTrace();
 		}
+	}
+
+	private static int dealWithTranslatableArguments(Matcher matcher, Consumer<Component> consumer, List<TranslationArgument> argumentList, int argPosition)
+	{
+
+
+		String argIndex = matcher.group(1);
+		if (argIndex != null)
+		{
+			try
+			{
+				final int idx = Integer.parseInt(argIndex) - 1;
+				if (idx < argumentList.size())
+				{
+					consumer.accept(argumentList.get(idx).asComponent());
+				}
+			}
+			catch (final NumberFormatException ex)
+			{
+				// ignore, drop the format placeholder
+			}
+		}
+		else
+		{
+			final int idx = argPosition++;
+			if (idx < argumentList.size())
+			{
+				consumer.accept(argumentList.get(idx).asComponent());
+			}
+		}
+		return argPosition;
 	}
 
 }
