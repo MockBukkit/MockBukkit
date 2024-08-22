@@ -14,17 +14,29 @@ public class Languages
 
 	private static Language instance = loadLanguage(Language.LanguageType.ENGLISH);
 
+	/**
+	 * @return The language translation instance used when processing translatable components
+	 */
 	public static Language getInstance()
 	{
 		return instance;
 	}
 
+	/**
+	 * Modify the language translation instance used
+	 * @param instance The new language instance to use
+	 */
 	public static void setInstance(Language instance)
 	{
 		Preconditions.checkNotNull(instance);
 		Languages.instance = instance;
 	}
 
+	/**
+	 * Load language
+	 * @param language Language type to load
+	 * @return A language instance
+	 */
 	public static Language loadLanguage(Language.LanguageType language)
 	{
 		String resourceName = "/translations/" + language.getResourceName();

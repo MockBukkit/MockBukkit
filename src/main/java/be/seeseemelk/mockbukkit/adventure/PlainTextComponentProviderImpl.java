@@ -86,8 +86,6 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 
 	private static int dealWithTranslatableArguments(Matcher matcher, Consumer<Component> consumer, List<TranslationArgument> argumentList, int argPosition)
 	{
-
-
 		String argIndex = matcher.group(1);
 		if (argIndex != null)
 		{
