@@ -42,6 +42,7 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
@@ -51,6 +52,7 @@ import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -185,6 +187,7 @@ import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.GlowItemFrame;
 import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
@@ -1511,6 +1514,12 @@ public class WorldMock implements World
 		} else if (clazz == Shulker.class)
 		{
 			return new ShulkerMock(server, UUID.randomUUID());
+		} else if (clazz == ItemFrame.class)
+		{
+			return new ItemFrameMock(server, UUID.randomUUID());
+		} else if (clazz == GlowItemFrame.class)
+		{
+			return new GlowItemFrameMock(server, UUID.randomUUID());
 		} else if (clazz == FallingBlock.class)
 		{
 			return new FallingBlockMock(server, UUID.randomUUID());
