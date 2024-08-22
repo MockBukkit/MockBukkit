@@ -30,6 +30,7 @@ import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
+import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
 import be.seeseemelk.mockbukkit.entity.FireballMock;
@@ -39,13 +40,17 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.IllusionerMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
@@ -58,20 +63,24 @@ import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PigZombieMock;
+import be.seeseemelk.mockbukkit.entity.PillagerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.RabbitMock;
+import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.ShulkerMock;
 import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SnowballMock;
+import be.seeseemelk.mockbukkit.entity.SnowmanMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
@@ -81,7 +90,9 @@ import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
+import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
@@ -1243,6 +1254,7 @@ class WorldMockTest
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), type);
 		assertInstanceOf(expectedClass, entity);
 		assertTrue(entity.isValid());
+		assertEquals(type, entity.getType());
 	}
 
 	public static Stream<Arguments> getSpawnableEntities()
@@ -1334,7 +1346,18 @@ class WorldMockTest
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
 				Arguments.of(EntityType.ARROW, Arrow.class),
 				Arguments.of(EntityType.MARKER, MarkerMock.class),
-				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class)
+				Arguments.of(EntityType.END_CRYSTAL, EnderCrystalMock.class),
+				Arguments.of(EntityType.PILLAGER, PillagerMock.class),
+				Arguments.of(EntityType.WITCH, WitchMock.class),
+				Arguments.of(EntityType.RAVAGER, RavagerMock.class),
+				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
+				Arguments.of(EntityType.EVOKER, EvokerMock.class),
+				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class),
+				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
+				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
+				Arguments.of(EntityType.ITEM_FRAME, ItemFrameMock.class),
+				Arguments.of(EntityType.GLOW_ITEM_FRAME, GlowItemFrameMock.class),
+				Arguments.of(EntityType.SHULKER, ShulkerMock.class)
 		);
 	}
 

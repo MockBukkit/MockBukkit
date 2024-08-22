@@ -8,8 +8,8 @@ The most important thing to remember is that each version of MockBukkit is named
 after the version of Bukkit it implements, followed by the version number of
 MockBukkit itself.
 
-For instance: MockBukkit-v1.20 v3.3.0 is the 3.3.0 release of MockBukkit,
-targeting plugins build for Minecraft 1.20.
+For instance: MockBukkit-v1.21 v3.107.0 is the 3.107.0 release of MockBukkit,
+targeting plugins build for Minecraft 1.21.
 The latest stable version can always be found on `Maven Central <https://search.maven.org/search?q=MockBukkit>`_.
 
 Gradle
@@ -34,23 +34,23 @@ This is how you add the dependencies in Groovy DSL
     }
 
     dependencies {
-        testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
-        testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.3.0'
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
+        testImplementation 'com.github.seeseemelk:MockBukkit-v1.21:3.107.0'
     }
 
 Kotlin DSL
 ^^^^^^^^^^
 This is how you add the dependencies in Kotlin DSL
 
-::
+.. code-block:: kotlin
 
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        testImplementation('org.junit.jupiter:junit-jupiter:5.9.3')
-        testImplementation('com.github.seeseemelk:MockBukkit-v1.20:3.3.0')
+        testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
+        testImplementation("com.github.seeseemelk:MockBukkit-v1.21:3.107.0")
     }
 
 Running
@@ -81,13 +81,13 @@ To do so, both JUnit and MockBukkit have to be added to your dependencies
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.3</version>
+            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.20</artifactId>
-            <version>3.3.0</version>
+            <version>3.107.0</version>
             <scope>test</scope>
         </dependency>
         <!-- Add your other dependencies here -->
