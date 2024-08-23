@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
+import be.seeseemelk.mockbukkit.entity.ArmadilloMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ArrowMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
@@ -150,6 +151,7 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.AreaEffectCloud;
+import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Axolotl;
@@ -1484,45 +1486,62 @@ public class WorldMock implements World
 		else if (clazz == Marker.class)
 		{
 			return new MarkerMock(server, UUID.randomUUID());
-		} else if (clazz == EnderCrystal.class)
+		}
+		else if (clazz == EnderCrystal.class)
 		{
 			return new EnderCrystalMock(server, UUID.randomUUID());
-		} else if (clazz == Pillager.class)
+		}
+		else if (clazz == Pillager.class)
 		{
 			return new PillagerMock(server, UUID.randomUUID());
-		} else if (clazz == Witch.class)
+		}
+		else if (clazz == Witch.class)
 		{
 			return new WitchMock(server, UUID.randomUUID());
-		} else if (clazz == Ravager.class)
+		}
+		else if (clazz == Ravager.class)
 		{
 			return new RavagerMock(server, UUID.randomUUID());
-		} else if (clazz == Vindicator.class)
+		}
+		else if (clazz == Vindicator.class)
 		{
 			return new VindicatorMock(server, UUID.randomUUID());
-		} else if (clazz == Evoker.class)
+		}
+		else if (clazz == Evoker.class)
 		{
 			return new EvokerMock(server, UUID.randomUUID());
-		} else if (clazz == Illusioner.class)
+		}
+		else if (clazz == Illusioner.class)
 		{
 			return new IllusionerMock(server, UUID.randomUUID());
-		} else if (clazz == IronGolem.class)
+		}
+		else if (clazz == IronGolem.class)
 		{
 			return new IronGolemMock(server, UUID.randomUUID());
-		} else if (clazz == Snowman.class)
+		}
+		else if (clazz == Snowman.class)
 		{
 			return new SnowmanMock(server, UUID.randomUUID());
-		} else if (clazz == Shulker.class)
+		}
+		else if (clazz == Shulker.class)
 		{
 			return new ShulkerMock(server, UUID.randomUUID());
-		} else if (clazz == ItemFrame.class)
+		}
+		else if (clazz == ItemFrame.class)
 		{
 			return new ItemFrameMock(server, UUID.randomUUID());
-		} else if (clazz == GlowItemFrame.class)
+		}
+		else if (clazz == GlowItemFrame.class)
 		{
 			return new GlowItemFrameMock(server, UUID.randomUUID());
-		} else if (clazz == FallingBlock.class)
+		}
+		else if (clazz == FallingBlock.class)
 		{
 			return new FallingBlockMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Armadillo.class)
+		{
+			return new ArmadilloMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
