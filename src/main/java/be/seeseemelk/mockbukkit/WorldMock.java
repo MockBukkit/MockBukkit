@@ -35,6 +35,7 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
+import be.seeseemelk.mockbukkit.entity.FallingBlockMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
@@ -270,6 +271,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
@@ -1518,6 +1520,9 @@ public class WorldMock implements World
 		} else if (clazz == GlowItemFrame.class)
 		{
 			return new GlowItemFrameMock(server, UUID.randomUUID());
+		} else if (clazz == FallingBlock.class)
+		{
+			return new FallingBlockMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -1920,19 +1925,39 @@ public class WorldMock implements World
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public @NotNull FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
+	public @NotNull FallingBlock spawnFallingBlock(@NotNull Location location, @NotNull MaterialData data) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(data != null, "MaterialData cannot be null");
+		return this.spawnFallingBlock(location, data.getItemType(), data.getData());
 	}
 
 	@Override
 	@Deprecated(since = "1.7.5")
-	public @NotNull FallingBlock spawnFallingBlock(Location location, Material material, byte data)
+	public @NotNull FallingBlock spawnFallingBlock(@NotNull Location location, @NotNull Material material, byte data)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(location != null, "Location cannot be null");
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isBlock(), "Material.%s must be a block", material);
+
+		FallingBlock fallingBlock = spawn(location, FallingBlock.class, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+		BlockDataMock blockData = new BlockDataMock(material);
+		fallingBlock.setBlockData(blockData);
+
+		return fallingBlock;
+	}
+
+	@Override
+	public @NotNull FallingBlock spawnFallingBlock(@NotNull Location location, @NotNull BlockData data) throws IllegalArgumentException
+	{
+		Preconditions.checkArgument(location != null, "Location cannot be null");
+		Preconditions.checkArgument(data != null, "BlockData cannot be null");
+
+		FallingBlock fallingBlock = spawn(location, FallingBlock.class, CreatureSpawnEvent.SpawnReason.CUSTOM);
+		fallingBlock.setBlockData(data);
+
+		return fallingBlock;
 	}
 
 	@Override
@@ -2476,13 +2501,6 @@ public class WorldMock implements World
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
