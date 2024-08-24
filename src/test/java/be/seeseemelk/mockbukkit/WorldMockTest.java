@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
+import be.seeseemelk.mockbukkit.entity.ArmadilloMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
@@ -1360,7 +1361,8 @@ class WorldMockTest
 				Arguments.of(EntityType.ITEM_FRAME, ItemFrameMock.class),
 				Arguments.of(EntityType.GLOW_ITEM_FRAME, GlowItemFrameMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class),
-				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class)
+				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class),
+				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class)
 		);
 	}
 
