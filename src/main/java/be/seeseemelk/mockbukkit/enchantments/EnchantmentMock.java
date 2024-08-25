@@ -88,7 +88,8 @@ public class EnchantmentMock extends Enchantment
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[], int[], boolean, boolean, Set, Set)}
+	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[],
+	 * int[], boolean, boolean, Set, Set, NamespacedKey, int)}
 	 * instead.
 	 */
 	@Deprecated(forRemoval = true)
@@ -171,7 +172,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.21")
+	@Deprecated(forRemoval = true, since = "1.21")
 	public @NotNull Set<EquipmentSlot> getActiveSlots()
 	{
 		// TODO Auto-generated method stub
@@ -340,7 +341,7 @@ public class EnchantmentMock extends Enchantment
 		NamespacedKey translationKey = NamespacedKey.fromString(data.get("translationKey").getAsString());
 		int anvilCost = data.get("anvilCost").getAsInt();
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
-				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables,translationKey,anvilCost);
+				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables, translationKey, anvilCost);
 	}
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)
