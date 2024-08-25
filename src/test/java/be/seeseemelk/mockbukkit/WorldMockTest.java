@@ -29,6 +29,7 @@ import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
+import be.seeseemelk.mockbukkit.entity.EnderSignalMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EvokerMock;
@@ -1362,7 +1363,8 @@ class WorldMockTest
 				Arguments.of(EntityType.GLOW_ITEM_FRAME, GlowItemFrameMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class),
 				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class),
-				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class)
+				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class),
+				Arguments.of(EntityType.EYE_OF_ENDER, EnderSignalMock.class)
 		);
 	}
 
