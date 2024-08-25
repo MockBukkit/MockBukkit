@@ -47,9 +47,8 @@ public class EnderSignalMock extends EntityMock implements EnderSignal
 	@Override
 	public void setTargetLocation(@NotNull Location location, boolean update)
 	{
-
 		Preconditions.checkArgument(location != null, "Location cannot be null");
-		Preconditions.checkArgument(this.getWorld().equals(location.getWorld()), "Cannot target EnderSignal across worlds");;
+		Preconditions.checkArgument(this.getWorld().equals(location.getWorld()), "Cannot target EnderSignal across worlds");
 		this.targetLocation = location;
 
 		if (update)
