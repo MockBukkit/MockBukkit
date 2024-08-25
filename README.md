@@ -271,4 +271,3 @@ https://mockbukkit.readthedocs.io/en/latest/index.html
 
 Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
 [![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)
-
