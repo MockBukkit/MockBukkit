@@ -45,6 +45,8 @@ public class EnchantmentMock extends Enchantment
 	private final int[] minModifiedCosts;
 	private int maxLevel;
 	private int startLevel;
+	private final NamespacedKey translationKey;
+	private final int anvilCost;
 
 	/**
 	 * @param key             The key representing this enchantment
@@ -64,7 +66,8 @@ public class EnchantmentMock extends Enchantment
 	public EnchantmentMock(NamespacedKey key, boolean treasure, boolean cursed, int maxLevel,
 						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
 						   int[] maxModifiedCost, boolean tradeable, boolean discoverable,
-						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables)
+						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, NamespacedKey translationKey,
+						   int anvilCost)
 	{
 		this.key = key;
 		this.treasure = treasure;
@@ -79,6 +82,8 @@ public class EnchantmentMock extends Enchantment
 		this.discoverable = discoverable;
 		this.conflicts = conflicts;
 		this.enchantables = enchantables;
+		this.translationKey = translationKey;
+		this.anvilCost = anvilCost;
 	}
 
 	/**
@@ -102,6 +107,8 @@ public class EnchantmentMock extends Enchantment
 		this.discoverable = data.get("discoverable").getAsBoolean();
 		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
 		this.enchantables = getEnchantables(data.get("enchantable").getAsJsonArray());
+		this.translationKey = NamespacedKey.fromString(data.get("translationKey").getAsString());
+		this.anvilCost = data.get("anvilCost").getAsInt();
 	}
 
 	@Override
@@ -131,8 +138,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public int getAnvilCost()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return anvilCost;
 	}
 
 	@Override
@@ -184,8 +190,7 @@ public class EnchantmentMock extends Enchantment
 	// be a translatable component which is not guaranteed.
 	public @NotNull String translationKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return translationKey.toString();
 	}
 
 	@Override
@@ -306,8 +311,7 @@ public class EnchantmentMock extends Enchantment
 	@Deprecated(forRemoval = true)
 	public @NotNull String getTranslationKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return translationKey.toString();
 	}
 
 	@ApiStatus.Internal
@@ -333,8 +337,10 @@ public class EnchantmentMock extends Enchantment
 		boolean discoverable = data.get("discoverable").getAsBoolean();
 		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
 		Set<NamespacedKey> enchantables = getEnchantables(data.get("enchantables").getAsJsonArray());
+		NamespacedKey translationKey = NamespacedKey.fromString(data.get("translationKey").getAsString());
+		int anvilCost = data.get("anvilCost").getAsInt();
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
-				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables);
+				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables,translationKey,anvilCost);
 	}
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)
