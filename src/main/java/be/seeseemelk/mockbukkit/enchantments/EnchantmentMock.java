@@ -89,7 +89,7 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * @param data Json data
 	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[],
-	 * int[], boolean, boolean, Set, Set, NamespacedKey, int)}
+	 * int[], boolean, boolean, Set, Set, String, int)}
 	 * instead.
 	 */
 	@Deprecated(forRemoval = true)
