@@ -13,7 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -37,7 +36,7 @@ class EnchantmentMockTest
 	private int[] maxModifiedCost;
 	private EnchantmentMock enchantment;
 	private Set<NamespacedKey> enchantables;
-	private NamespacedKey translationKey;
+	private String translationKey;
 	private int anvilCost;
 
 	public static Stream<Integer> getAvailableLevels()
@@ -56,7 +55,7 @@ class EnchantmentMockTest
 		this.minModifiedCost = new int[]{ 1, 2 };
 		this.maxModifiedCost = new int[]{ 20, 25 };
 		this.enchantables = Set.of(NamespacedKey.minecraft("trident"));
-		this.translationKey = new NamespacedKey(NAMESPACE, "translation_key");
+		this.translationKey = "translation_key";
 		this.anvilCost = 3;
 		this.enchantment = new EnchantmentMock(key, true, true, maxLevel, minLevel, name, displayNames, minModifiedCost,
 				maxModifiedCost, true, true, Set.of(key), enchantables, translationKey, anvilCost);
@@ -189,13 +188,13 @@ class EnchantmentMockTest
 	@Test
 	void testTranslationKey()
 	{
-		assertEquals(translationKey.toString(), enchantment.getTranslationKey());
+		assertEquals(translationKey, enchantment.translationKey());
 	}
 
 	@Test
 	void testGetTranslationKey()
 	{
-		assertEquals(translationKey.toString(), enchantment.getTranslationKey());
+		assertEquals(translationKey, enchantment.getTranslationKey());
 	}
 
 	@Test
