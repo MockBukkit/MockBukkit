@@ -28,6 +28,7 @@ class DamageTypeMockTest
 		json.addProperty(DamageTypeMock.DAMAGE_SCALING, expectedDamageType.damageScaling());
 		json.addProperty(DamageTypeMock.KEY, expectedDamageType.key());
 		json.addProperty(DamageTypeMock.SOUND, expectedDamageType.sound());
+		json.addProperty("translationKey", "mockbukkit.placeholder");
 
 		DamageTypeMock actual = DamageTypeMock.from(json);
 
