@@ -8,14 +8,19 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -179,6 +184,33 @@ class BlockDataMockTest
 		assertEquals("minecraft:chest", data.getAsString(true));
 		assertEquals("minecraft:chest[facing=north,type=single,waterlogged=false]", data.getAsString(false));
 		assertEquals("minecraft:chest[facing=north,type=single,waterlogged=false]", data.getAsString());
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"WHITE_BED",
+			"ORANGE_BED",
+			"MAGENTA_BED",
+			"LIGHT_BLUE_BED",
+			"YELLOW_BED",
+			"LIME_BED",
+			"PINK_BED",
+			"GRAY_BED",
+			"LIGHT_GRAY_BED",
+			"CYAN_BED",
+			"PURPLE_BED",
+			"BLUE_BED",
+			"BROWN_BED",
+			"GREEN_BED",
+			"RED_BED",
+			"BLACK_BED"
+	})
+	void createBlockState_GivenBedMaterial(Material bedMaterial)
+	{
+		BedMock bed = (BedMock) BlockDataMock.mock(bedMaterial);
+		BlockState actual = bed.createBlockState();
+		assertNotNull(actual);
+		assertInstanceOf(be.seeseemelk.mockbukkit.block.state.BedMock.class, actual);
 	}
 
 }

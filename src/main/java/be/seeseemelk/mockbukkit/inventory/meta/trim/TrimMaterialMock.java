@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta.trim;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.kyori.adventure.text.Component;
@@ -15,26 +14,26 @@ public class TrimMaterialMock implements TrimMaterial
 
 	private final NamespacedKey key;
 	private final Component description;
+	private final String translationKey;
 
-	/**
-	 * @param key         The namespaced key representing this trim material
-	 * @param description The description of this trim material
-	 */
-	public TrimMaterialMock(NamespacedKey key, Component description)
+
+	@ApiStatus.Internal
+	public TrimMaterialMock(NamespacedKey key, Component description, String translationKey)
 	{
 		this.key = key;
 		this.description = description;
+		this.translationKey = translationKey;
 	}
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #TrimMaterialMock(NamespacedKey, Component)} instead
 	 */
 	@Deprecated(forRemoval = true)
 	public TrimMaterialMock(JsonObject data)
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
 		this.description = GsonComponentSerializer.gson().deserializeFromTree(data.get("description"));
+		this.translationKey = data.get("translationKey").getAsString();
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class TrimMaterialMock implements TrimMaterial
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		throw new UnimplementedOperationException();
+		return this.translationKey;
 	}
 
 	@Override
@@ -62,7 +61,8 @@ public class TrimMaterialMock implements TrimMaterial
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
 		Component description = GsonComponentSerializer.gson().deserializeFromTree(data.get("description"));
-		return new TrimMaterialMock(key, description);
+		String translationKey = data.get("translationKey").getAsString();
+		return new TrimMaterialMock(key, description, translationKey);
 	}
 
 }
