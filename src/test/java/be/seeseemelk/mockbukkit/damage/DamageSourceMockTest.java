@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DamageSourceMockTest
 {
 
-	private final Location damageLocation = new Location(new WorldMock(), 0,0,0);
+	private final Location damageLocation = new Location(new WorldMock(), 0, 0, 0);
 
 	private ServerMock serverMock;
 	private DamageType damageType;
@@ -161,7 +161,7 @@ class DamageSourceMockTest
 	{
 
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
-		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F);
+		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
