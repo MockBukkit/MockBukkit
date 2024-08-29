@@ -1177,8 +1177,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull BoundingBox getBoundingBox()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		double halfWidth = getWidth() / 2.0D;
+		double height = getHeight();
+
+		double minX = getX() - halfWidth;
+		double minY = getY();
+		double minZ = getZ() - halfWidth;
+
+		double maxX = getX() + halfWidth;
+		double maxY = getY() + height;
+		double maxZ = getZ() + halfWidth;
+
+		return new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 
 	@Override
