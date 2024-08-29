@@ -2778,8 +2778,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void updateCommands()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// NO OP, only updates commands client side, MockBukkit is only serverside
 	}
 
 	@Override
