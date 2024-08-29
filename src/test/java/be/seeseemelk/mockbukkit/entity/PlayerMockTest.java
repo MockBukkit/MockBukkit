@@ -2652,4 +2652,10 @@ class PlayerMockTest
 
 	}
 
+	@Test
+	void testRemove()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> player.remove());
+	}
+
 }
