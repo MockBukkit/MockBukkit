@@ -151,4 +151,16 @@ class PotionMetaMockTest
 		assertEquals(meta, clone);
 	}
 
+	@Test
+	void testBasePotionType()
+	{
+		PotionMeta meta = new PotionMetaMock();
+		assertNull(meta.getBasePotionType());
+
+		meta.setBasePotionType(PotionType.HEALING);
+		assertEquals(PotionType.HEALING, meta.getBasePotionType());
+
+		meta.setBasePotionType(null);
+		assertNull(meta.getBasePotionType());
+	}
 }
