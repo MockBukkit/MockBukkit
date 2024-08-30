@@ -3382,6 +3382,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void remove()
+	{
+		throw new UnsupportedOperationException("Players can't be removed with this method, use kick() instead");
+	}
+
+	@Override
 	public Player.@NotNull Spigot spigot()
 	{
 		return playerSpigotMock;
