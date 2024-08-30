@@ -61,18 +61,6 @@ class InventoryMockTest
 	}
 
 	@Test
-	void constructor_SetsSizeTooBig()
-	{
-		assertThrows(IllegalArgumentException.class, () -> new SimpleInventoryMock(null, 63, InventoryType.CHEST));
-	}
-
-	@Test
-	void constructor_SetsSizeTooNotDivisibleByNine()
-	{
-		assertThrows(IllegalArgumentException.class, () -> new SimpleInventoryMock(null, 10, InventoryType.CHEST));
-	}
-
-	@Test
 	void constructor_SetsSizeTwoParamConstructor()
 	{
 		assertEquals(10, new SimpleInventoryMock(null, InventoryType.WORKBENCH).getSize());

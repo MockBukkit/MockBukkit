@@ -122,4 +122,17 @@ class EndermanMockTest
 		assertNotEquals(loc, endermanMock.getLocation());
 	}
 
+	@Test
+	void getEyeHeight_WithDefaultState()
+	{
+		assertEquals(2.465D, endermanMock.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WithAngryState()
+	{
+		endermanMock.setScreaming(true);
+		assertEquals(2.7624999999999997D, endermanMock.getEyeHeight());
+	}
+
 }

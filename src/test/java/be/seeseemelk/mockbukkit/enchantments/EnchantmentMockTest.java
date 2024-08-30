@@ -2,10 +2,11 @@ package be.seeseemelk.mockbukkit.enchantments;
 
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import com.google.gson.JsonObject;
-import io.papermc.paper.enchantments.EnchantmentRarity;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +34,10 @@ class EnchantmentMockTest
 	private Component[] displayNames;
 	private int[] minModifiedCost;
 	private int[] maxModifiedCost;
-	private EnchantmentRarity rarity;
 	private EnchantmentMock enchantment;
+	private Set<NamespacedKey> enchantables;
+	private String translationKey;
+	private int anvilCost;
 
 	public static Stream<Integer> getAvailableLevels()
 	{
@@ -51,8 +54,11 @@ class EnchantmentMockTest
 		this.displayNames = new Component[]{ Component.text("Level 1"), Component.text("Level 2") };
 		this.minModifiedCost = new int[]{ 1, 2 };
 		this.maxModifiedCost = new int[]{ 20, 25 };
+		this.enchantables = Set.of(NamespacedKey.minecraft("trident"));
+		this.translationKey = "translation_key";
+		this.anvilCost = 3;
 		this.enchantment = new EnchantmentMock(key, true, true, maxLevel, minLevel, name, displayNames, minModifiedCost,
-				maxModifiedCost, true, true, Set.of(key));
+				maxModifiedCost, true, true, Set.of(key), enchantables, translationKey, anvilCost);
 	}
 
 	@ParameterizedTest
@@ -163,6 +169,38 @@ class EnchantmentMockTest
 	{
 		JsonObject invalid = new JsonObject();
 		assertThrows(IllegalArgumentException.class, () -> EnchantmentMock.from(invalid));
+	}
+
+	@Test
+	void canEnchantItem()
+	{
+		ItemStack trident = new ItemStack(Material.TRIDENT);
+		assertTrue(enchantment.canEnchantItem(trident));
+	}
+
+	@Test
+	void canNotEnchantItem()
+	{
+		ItemStack shovel = new ItemStack(Material.IRON_SHOVEL);
+		assertFalse(enchantment.canEnchantItem(shovel));
+	}
+
+	@Test
+	void testTranslationKey()
+	{
+		assertEquals(translationKey, enchantment.translationKey());
+	}
+
+	@Test
+	void testGetTranslationKey()
+	{
+		assertEquals(translationKey, enchantment.getTranslationKey());
+	}
+
+	@Test
+	void testGetAnvilCost()
+	{
+		assertEquals(anvilCost, enchantment.getAnvilCost());
 	}
 
 }

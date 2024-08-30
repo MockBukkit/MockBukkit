@@ -36,4 +36,17 @@ class DonkeyMockTest
 		assertEquals(Horse.Variant.DONKEY, donkey.getVariant());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultDonkey()
+	{
+		assertEquals(1.275D, donkey.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyDonkey()
+	{
+		donkey.setBaby();
+		assertEquals(0.6375D, donkey.getEyeHeight());
+	}
+
 }

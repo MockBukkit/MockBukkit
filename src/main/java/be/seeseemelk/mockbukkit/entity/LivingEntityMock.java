@@ -404,7 +404,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			return getEyeHeight(EntityState.SWIMMING);
 		}
 
-		return getEyeHeight(EntityState.DEFAULT);
+		return getEyeHeight(getEntityState());
 	}
 
 	@Override

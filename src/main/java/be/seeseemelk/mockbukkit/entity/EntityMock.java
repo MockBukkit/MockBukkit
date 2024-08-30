@@ -12,11 +12,10 @@ import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
-import net.kyori.adventure.audience.MessageType;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -61,11 +60,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -83,6 +80,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
+	private final Set<String> tags = Sets.newHashSet();
 	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
 	private final int id;
@@ -102,11 +100,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean noPhysics;
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
-	private final Queue<Component> messages = new LinkedTransferQueue<>();
-	private final PermissibleBase perms;
+	private boolean onGround;
+	private boolean freezeLocked;
+	private boolean inWater;
+	protected final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
+	private int frozenTicks;
+	private int ticksLived;
+	private int portalCooldown;
 	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
@@ -458,43 +461,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		sendMessage(null, message);
 	}
 
 	@Override
 	public void sendMessage(String... messages)
 	{
-		sendMessage(null, messages);
 	}
 
 	@Override
 	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
+		this.sendMessage(message);
 	}
 
 	@Override
 	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
-		for (String message : messages)
-		{
-			sendMessage(message);
-		}
-	}
-
-	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
-	{
-		Preconditions.checkNotNull(source, "Source cannot be null");
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		Preconditions.checkNotNull(type, "MessageType cannot be null");
-		this.messages.add(message);
+		this.sendMessage(messages);
 	}
 
 	@Override
 	public @Nullable Component nextComponentMessage()
 	{
-		return messages.poll();
+		return null;
 	}
 
 	@Override
@@ -646,8 +635,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isOnGround()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.onGround;
+	}
+
+	/**
+	 * Sets if the entity is supported by a block.
+	 *
+	 * @param onGround True if entity is on ground.
+	 */
+	public void setOnGround(boolean onGround)
+	{
+		this.onGround = onGround;
 	}
 
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
@@ -703,44 +701,38 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setFreezeTicks(int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(ticks >= 0, "Ticks (%s) cannot be less than 0", ticks);
+		this.frozenTicks = ticks;
+	}
+
+	@Override
+	public int getFreezeTicks()
+	{
+		return this.frozenTicks;
 	}
 
 	@Override
 	public boolean isFrozen()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.getFreezeTicks() >= this.getMaxFreezeTicks();
 	}
 
 	@Override
 	public boolean isFreezeTickingLocked()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.freezeLocked;
 	}
 
 	@Override
 	public void lockFreezeTicks(boolean locked)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-
-	@Override
-	public int getFreezeTicks()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.freezeLocked = locked;
 	}
 
 	@Override
 	public int getMaxFreezeTicks()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return 140;
 	}
 
 	@Override
@@ -913,16 +905,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getTicksLived()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.ticksLived;
 	}
 
 	@Override
 	public void setTicksLived(int value)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkArgument(value > 0, "Age value (%s) must be greater than 0", value);
+		this.ticksLived = value;
 	}
 
 	@Override
@@ -940,22 +930,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Sound getSwimSound()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Sound.ENTITY_GENERIC_SWIM;
 	}
 
 	@Override
 	public @NotNull Sound getSwimSplashSound()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Sound.ENTITY_GENERIC_SPLASH;
 	}
 
 	@Override
 	public @NotNull Sound getSwimHighSpeedSplashSound()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Sound.ENTITY_GENERIC_SPLASH;
 	}
 
 	@Override
@@ -1140,37 +1127,31 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getPortalCooldown()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.portalCooldown;
 	}
 
 	@Override
 	public void setPortalCooldown(int cooldown)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.portalCooldown = cooldown;
 	}
 
 	@Override
 	public @NotNull Set<String> getScoreboardTags()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.tags;
 	}
 
 	@Override
 	public boolean addScoreboardTag(@NotNull String tag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.tags.size() < 1024 && this.tags.add(tag);
 	}
 
 	@Override
 	public boolean removeScoreboardTag(@NotNull String tag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.tags.remove(tag);
 	}
 
 	@Override
@@ -1196,8 +1177,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull BoundingBox getBoundingBox()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		double halfWidth = getWidth() / 2.0D;
+		double height = getHeight();
+
+		double minX = getX() - halfWidth;
+		double minY = getY();
+		double minZ = getZ() - halfWidth;
+
+		double maxX = getX() + halfWidth;
+		double maxY = getY() + height;
+		double maxZ = getZ() + halfWidth;
+
+		return new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 
 	@Override
@@ -1228,8 +1219,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isInWater()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.inWater;
+	}
+
+	/**
+	 * Set if the entity is in water.
+	 *
+	 * @param inWater true if the entity is in water.
+	 */
+	public void setInWater(boolean inWater)
+	{
+		this.inWater = inWater;
 	}
 
 	@Override
@@ -1262,8 +1262,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isInWorld()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getLocation().getWorld() != null;
 	}
 
 	@Override
@@ -1505,6 +1504,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	public void tick()
+	{
+		if (isDead())
+		{
+			return;
+		}
+
+		++ticksLived;
 	}
 
 }

@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
+import be.seeseemelk.mockbukkit.entity.ArmadilloMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ArrowMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
@@ -24,27 +25,35 @@ import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DolphinMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
+import be.seeseemelk.mockbukkit.entity.DrownedMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
+import be.seeseemelk.mockbukkit.entity.FallingBlockMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.IllusionerMock;
+import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ItemFrameMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -59,19 +68,23 @@ import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PigZombieMock;
+import be.seeseemelk.mockbukkit.entity.PillagerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.RabbitMock;
+import be.seeseemelk.mockbukkit.entity.RavagerMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.ShulkerMock;
 import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SnowballMock;
+import be.seeseemelk.mockbukkit.entity.SnowmanMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpectralArrowMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
@@ -83,7 +96,9 @@ import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TridentMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
+import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
@@ -136,6 +151,7 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.AreaEffectCloud;
+import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Axolotl;
@@ -155,13 +171,16 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
+import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Evoker;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
@@ -170,12 +189,15 @@ import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.GlowItemFrame;
 import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.Illusioner;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
@@ -195,19 +217,23 @@ import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Pillager;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
 import org.bukkit.entity.Rabbit;
+import org.bukkit.entity.Ravager;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Shulker;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
+import org.bukkit.entity.Snowman;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
@@ -218,8 +244,10 @@ import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
+import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.Witch;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
@@ -245,6 +273,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
@@ -1134,6 +1163,10 @@ public class WorldMock implements World
 		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
+		else if (clazz == Drowned.class)
+		{
+			return new DrownedMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Zombie.class)
 		{
 			return new ZombieMock(server, UUID.randomUUID());
@@ -1453,6 +1486,62 @@ public class WorldMock implements World
 		else if (clazz == Marker.class)
 		{
 			return new MarkerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == EnderCrystal.class)
+		{
+			return new EnderCrystalMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Pillager.class)
+		{
+			return new PillagerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Witch.class)
+		{
+			return new WitchMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Ravager.class)
+		{
+			return new RavagerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Vindicator.class)
+		{
+			return new VindicatorMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Evoker.class)
+		{
+			return new EvokerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Illusioner.class)
+		{
+			return new IllusionerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == IronGolem.class)
+		{
+			return new IronGolemMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Snowman.class)
+		{
+			return new SnowmanMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Shulker.class)
+		{
+			return new ShulkerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ItemFrame.class)
+		{
+			return new ItemFrameMock(server, UUID.randomUUID());
+		}
+		else if (clazz == GlowItemFrame.class)
+		{
+			return new GlowItemFrameMock(server, UUID.randomUUID());
+		}
+		else if (clazz == FallingBlock.class)
+		{
+			return new FallingBlockMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Armadillo.class)
+		{
+			return new ArmadilloMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -1855,19 +1944,39 @@ public class WorldMock implements World
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public @NotNull FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
+	public @NotNull FallingBlock spawnFallingBlock(@NotNull Location location, @NotNull MaterialData data) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(data != null, "MaterialData cannot be null");
+		return this.spawnFallingBlock(location, data.getItemType(), data.getData());
 	}
 
 	@Override
 	@Deprecated(since = "1.7.5")
-	public @NotNull FallingBlock spawnFallingBlock(Location location, Material material, byte data)
+	public @NotNull FallingBlock spawnFallingBlock(@NotNull Location location, @NotNull Material material, byte data)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(location != null, "Location cannot be null");
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isBlock(), "Material.%s must be a block", material);
+
+		FallingBlock fallingBlock = spawn(location, FallingBlock.class, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+		BlockDataMock blockData = new BlockDataMock(material);
+		fallingBlock.setBlockData(blockData);
+
+		return fallingBlock;
+	}
+
+	@Override
+	public @NotNull FallingBlock spawnFallingBlock(@NotNull Location location, @NotNull BlockData data) throws IllegalArgumentException
+	{
+		Preconditions.checkArgument(location != null, "Location cannot be null");
+		Preconditions.checkArgument(data != null, "BlockData cannot be null");
+
+		FallingBlock fallingBlock = spawn(location, FallingBlock.class, CreatureSpawnEvent.SpawnReason.CUSTOM);
+		fallingBlock.setBlockData(data);
+
+		return fallingBlock;
 	}
 
 	@Override
@@ -2411,13 +2520,6 @@ public class WorldMock implements World
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

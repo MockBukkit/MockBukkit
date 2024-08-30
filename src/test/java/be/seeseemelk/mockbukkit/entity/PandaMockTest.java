@@ -181,4 +181,17 @@ class PandaMockTest
 		assertEquals(100, panda.getEatingTicks());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultPanda()
+	{
+		assertEquals(1.0625D, panda.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyPanda()
+	{
+		panda.setBaby();
+		assertEquals(0.53125D, panda.getEyeHeight());
+	}
+
 }

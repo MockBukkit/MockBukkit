@@ -101,4 +101,17 @@ class GoatMockTest
 		assertEquals("Expected Goat to have rammed Player0 but it did not!", assertionError.getMessage());
 	}
 
+	@Test
+	void getEyeHeight_GivenDefaultGoat()
+	{
+		assertEquals(1.105D, goat.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_GivenBabyGoat()
+	{
+		goat.setBaby();
+		assertEquals(0.5525D, goat.getEyeHeight());
+	}
+
 }
