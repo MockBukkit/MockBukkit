@@ -2778,8 +2778,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void updateCommands()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// NO OP, only updates commands client side, MockBukkit is only serverside
 	}
 
 	@Override
@@ -3380,6 +3379,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return EntityState.SLEEPING;
 		}
 		return super.getEntityState();
+	}
+
+	@Override
+	public void remove()
+	{
+		throw new UnsupportedOperationException("Players can't be removed with this method, use kick() instead");
 	}
 
 	@Override

@@ -4,7 +4,9 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDismountEvent;
@@ -12,6 +14,7 @@ import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.material.MaterialData;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
@@ -186,6 +189,44 @@ class MinecartMockTest
 	{
 		minecart.setDisplayBlockOffset(1);
 		assertEquals(1, minecart.getDisplayBlockOffset());
+	}
+
+	@Test
+	void getType()
+	{
+		assertEquals(EntityType.MINECART, minecart.getType());
+	}
+
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = minecart.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.49, actual.getMinX());
+		assertEquals(0, actual.getMinY());
+		assertEquals(-0.49, actual.getMinZ());
+
+		assertEquals(0.49, actual.getMaxX());
+		assertEquals(0.7, actual.getMaxY());
+		assertEquals(0.49, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		minecart.teleport(new Location(minecart.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = minecart.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9.51, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9.51, actual.getMinZ());
+
+		assertEquals(10.49, actual.getMaxX());
+		assertEquals(5.7, actual.getMaxY());
+		assertEquals(10.49, actual.getMaxZ());
 	}
 
 	private static class MockMinecart extends MinecartMock

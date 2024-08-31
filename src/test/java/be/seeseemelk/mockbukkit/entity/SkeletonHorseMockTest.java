@@ -2,7 +2,9 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.Location;
 import org.bukkit.entity.Horse;
+import org.bukkit.util.BoundingBox;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SkeletonHorseMockTest
@@ -88,6 +91,55 @@ class SkeletonHorseMockTest
 	{
 		skeletonHorse.setBaby();
 		assertEquals(0.76D, skeletonHorse.getEyeHeight());
+	}
+
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = skeletonHorse.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.69825, actual.getMinX());
+		assertEquals(0, actual.getMinY());
+		assertEquals(-0.69825, actual.getMinZ());
+
+		assertEquals(0.69825, actual.getMaxX());
+		assertEquals(1.6, actual.getMaxY());
+		assertEquals(0.69825, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenDefaultLocationAndBaby()
+	{
+		skeletonHorse.setBaby();
+
+		BoundingBox actual = skeletonHorse.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.3491, actual.getMinX());
+		assertEquals(0, actual.getMinY());
+		assertEquals(-0.3491, actual.getMinZ());
+
+		assertEquals(0.3491, actual.getMaxX());
+		assertEquals(0.8, actual.getMaxY());
+		assertEquals(0.3491, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		skeletonHorse.teleport(new Location(skeletonHorse.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = skeletonHorse.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9.30175, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9.30175, actual.getMinZ());
+
+		assertEquals(10.69825, actual.getMaxX());
+		assertEquals(6.6, actual.getMaxY());
+		assertEquals(10.69825, actual.getMaxZ());
 	}
 
 }

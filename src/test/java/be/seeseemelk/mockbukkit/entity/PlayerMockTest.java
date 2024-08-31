@@ -83,6 +83,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -2587,6 +2588,38 @@ class PlayerMockTest
 		assertEquals("input", e.getMessage());
 	}
 
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = player.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.3, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(-0.3, actual.getMinZ());
+
+		assertEquals(0.3, actual.getMaxX());
+		assertEquals(6.8, actual.getMaxY());
+		assertEquals(0.3, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		player.teleport(new Location(player.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = player.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9.7, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9.7, actual.getMinZ());
+
+		assertEquals(10.3, actual.getMaxX());
+		assertEquals(6.8, actual.getMaxY());
+		assertEquals(10.3, actual.getMaxZ());
+	}
+
 	@Nested
 	class PlayerSpigotMock {
 
@@ -2617,6 +2650,12 @@ class PlayerMockTest
 			player.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));
 		}
 
+	}
+
+	@Test
+	void testRemove()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> player.remove());
 	}
 
 }
