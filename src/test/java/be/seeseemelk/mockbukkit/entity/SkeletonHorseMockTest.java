@@ -99,13 +99,13 @@ class SkeletonHorseMockTest
 		BoundingBox actual = skeletonHorse.getBoundingBox();
 		assertNotNull(actual);
 
-		assertEquals(-0.69825, actual.getMinX());
+		assertEquals(-0.6982422, actual.getMinX());
 		assertEquals(0, actual.getMinY());
-		assertEquals(-0.69825, actual.getMinZ());
+		assertEquals(-0.6982422, actual.getMinZ());
 
-		assertEquals(0.69825, actual.getMaxX());
+		assertEquals(0.6982422, actual.getMaxX());
 		assertEquals(1.6, actual.getMaxY());
-		assertEquals(0.69825, actual.getMaxZ());
+		assertEquals(0.6982422, actual.getMaxZ());
 	}
 
 	@Test
@@ -133,13 +133,13 @@ class SkeletonHorseMockTest
 		BoundingBox actual = skeletonHorse.getBoundingBox();
 		assertNotNull(actual);
 
-		assertEquals(9.30175, actual.getMinX());
+		assertEquals(9.3017578, actual.getMinX());
 		assertEquals(5, actual.getMinY());
-		assertEquals(9.30175, actual.getMinZ());
+		assertEquals(9.3017578, actual.getMinZ());
 
-		assertEquals(10.69825, actual.getMaxX());
+		assertEquals(10.6982422, actual.getMaxX());
 		assertEquals(6.6, actual.getMaxY());
-		assertEquals(10.69825, actual.getMaxZ());
+		assertEquals(10.6982422, actual.getMaxZ());
 	}
 
 }
