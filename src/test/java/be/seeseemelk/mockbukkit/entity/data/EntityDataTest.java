@@ -22,7 +22,7 @@ class EntityDataTest
 	@BeforeEach
 	void setUp() throws IOException
 	{
-		fakeData = "{'default':{'width':2,'height':3, 'states':{'sleeping':{'height':0.2}}},'baby':{'width':1, 'height':0.5}}";
+		fakeData = "{'default':{'width':2,'height':3,'eyeHeight':4,'states':{'sleeping':{'height':0.2, 'eyeHeight':0.3}}},'baby':{'width':1, 'height':0.5, 'eyeHeight':0.1}}";
 		entityData = new EntityData(EntityType.BAT, fakeData);
 	}
 
@@ -39,6 +39,7 @@ class EntityDataTest
 		{
 			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.DEFAULT));
 			assertEquals(3, entityData.getHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
+			assertEquals(4, entityData.getEyeHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
 		}
 		catch (UnimplementedOperationException e)
 		{
@@ -53,6 +54,7 @@ class EntityDataTest
 		{
 			assertEquals(1, entityData.getWidth(EntitySubType.BABY, EntityState.DEFAULT));
 			assertEquals(0.5, entityData.getHeight(EntitySubType.BABY, EntityState.DEFAULT));
+			assertEquals(0.1, entityData.getEyeHeight(EntitySubType.BABY, EntityState.DEFAULT));
 		}
 		catch (UnimplementedOperationException e)
 		{
@@ -67,6 +69,7 @@ class EntityDataTest
 		{
 			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.SLEEPING));
 			assertEquals(0.2, entityData.getHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
+			assertEquals(0.3, entityData.getEyeHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
 		}
 		catch (UnimplementedOperationException e)
 		{
