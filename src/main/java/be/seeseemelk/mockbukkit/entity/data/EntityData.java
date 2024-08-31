@@ -64,7 +64,7 @@ public class EntityData
 	 * @param subType Subtype of entity
 	 * @param state   State of entity
 	 *
-	 * @return The height of the entity
+	 * @return The eye height of the entity
 	 */
 	public double getEyeHeight(EntitySubType subType, EntityState state)
 	{
