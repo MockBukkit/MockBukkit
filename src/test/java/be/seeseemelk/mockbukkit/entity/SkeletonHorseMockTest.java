@@ -80,14 +80,14 @@ class SkeletonHorseMockTest
 	@Test
 	void getEyeHeight_GivenDefaultSkeletonHorse()
 	{
-		assertEquals(1.36D, skeletonHorse.getEyeHeight());
+		assertEquals(1.52D, skeletonHorse.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabySkeletonHorse()
 	{
 		skeletonHorse.setBaby();
-		assertEquals(0.68D, skeletonHorse.getEyeHeight());
+		assertEquals(0.76D, skeletonHorse.getEyeHeight());
 	}
 
 }

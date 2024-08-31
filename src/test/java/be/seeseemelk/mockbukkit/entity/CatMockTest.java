@@ -100,14 +100,14 @@ class CatMockTest
 	@Test
 	void getEyeHeight_GivenDefaultCat()
 	{
-		assertEquals(0.595D, cat.getEyeHeight());
+		assertEquals(0.35D, cat.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyCat()
 	{
 		cat.setBaby();
-		assertEquals(0.2975D, cat.getEyeHeight());
+		assertEquals(0.175D, cat.getEyeHeight());
 	}
 
 }

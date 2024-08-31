@@ -50,14 +50,14 @@ class ZombieMockTest
 	@Test
 	void getEyeHeight_GivenDefaultZombie()
 	{
-		assertEquals(1.6575D, zombie.getEyeHeight());
+		assertEquals(1.74D, zombie.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyZombie()
 	{
 		zombie.setBaby();
-		assertEquals(0.82875D, zombie.getEyeHeight());
+		assertEquals(0.87D, zombie.getEyeHeight());
 	}
 
 }

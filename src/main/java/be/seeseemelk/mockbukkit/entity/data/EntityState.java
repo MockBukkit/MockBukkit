@@ -56,7 +56,12 @@ public enum EntityState
 	/**
 	 * Entity is open ({@link org.bukkit.entity.Shulker})
 	 */
-	OPEN("open");
+	OPEN("open"),
+
+	/**
+	 * Entity is sitting ({@link org.bukkit.entity.Camel})
+	 */
+	SITTING("sitting");
 
 	private final String state;
 
