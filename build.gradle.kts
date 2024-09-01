@@ -92,6 +92,14 @@ tasks {
 	jacoco {
 		toolVersion = "0.8.12"
 	}
+
+	sonar {
+		properties {
+			property("sonar.projectKey", "MockBukkit")
+			property("sonar.organization", "MockBukkit")
+			property("sonar.host.url", "https://sonarcloud.io/")
+		}
+	}
 }
 
 sourceSets {
@@ -116,14 +124,6 @@ sourceSets {
 java {
 	toolchain {
 		languageVersion.set(JavaLanguageVersion.of(property("java.version").toString().toInt()))
-	}
-}
-
-sonar {
-	properties {
-		property("sonar.projectKey", "MockBukkit")
-		property("sonar.organization", "MockBukkit")
-		property("sonar.host.url", "https://sonarcloud.io/")
 	}
 }
 
