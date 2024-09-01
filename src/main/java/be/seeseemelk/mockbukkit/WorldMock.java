@@ -30,6 +30,7 @@ import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
+import be.seeseemelk.mockbukkit.entity.EnderSignalMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -176,6 +177,7 @@ import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
@@ -1542,6 +1544,10 @@ public class WorldMock implements World
 		else if (clazz == Armadillo.class)
 		{
 			return new ArmadilloMock(server, UUID.randomUUID());
+		}
+		else if (clazz == EnderSignal.class)
+		{
+			return new EnderSignalMock(server,UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
