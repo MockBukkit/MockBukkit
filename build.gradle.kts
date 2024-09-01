@@ -95,8 +95,8 @@ tasks {
 
 	sonar {
 		properties {
-			property("sonar.projectKey", "MockBukkit")
-			property("sonar.organization", "MockBukkit")
+			property("sonar.projectKey", "MockBukkit_MockBukkit")
+			property("sonar.organization", "mockbukkit")
 			property("sonar.host.url", "https://sonarcloud.io/")
 		}
 	}
