@@ -52,7 +52,7 @@ public class EnchantmentMock extends Enchantment
 	private static final String ENCHANTABLES_KEY = "enchantables";
 
 	private final @NotNull String name;
-	private final NamespacedKey key;
+	private final NamespacedKey namespacedKey;
 	private final boolean tradeable;
 	private final boolean discoverable;
 	private final Set<NamespacedKey> conflicts;
@@ -68,7 +68,7 @@ public class EnchantmentMock extends Enchantment
 	private final int anvilCost;
 
 	/**
-	 * @param key             The key representing this enchantment
+	 * @param namespacedKey             The key representing this enchantment
 	 * @param treasure        Whether this enchantment can be found in a treasure
 	 * @param cursed          Whether this enchantment is a curse
 	 * @param maxLevel        The max level of this enchantment
@@ -82,13 +82,13 @@ public class EnchantmentMock extends Enchantment
 	 * @param conflicts       Namespaced-keys of enchantments that are conflicting with this enchantment
 	 * @param enchantables    Namespaced-keys of items which can be enchanted by this enchantment
 	 */
-	public EnchantmentMock(NamespacedKey key, boolean treasure, boolean cursed, int maxLevel,
+	public EnchantmentMock(NamespacedKey namespacedKey, boolean treasure, boolean cursed, int maxLevel,
 						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
 						   int[] maxModifiedCost, boolean tradeable, boolean discoverable,
 						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, String translationKey,
 						   int anvilCost)
 	{
-		this.key = key;
+		this.namespacedKey = namespacedKey;
 		this.treasure = treasure;
 		this.cursed = cursed;
 		this.maxLevel = maxLevel;
@@ -114,7 +114,7 @@ public class EnchantmentMock extends Enchantment
 	@Deprecated(forRemoval = true, since = "v3.82.0")
 	public EnchantmentMock(JsonObject data)
 	{
-		this.key = NamespacedKey.fromString(data.get(KEY).getAsString());
+		this.namespacedKey = NamespacedKey.fromString(data.get(KEY).getAsString());
 		this.treasure = data.get(TREASURE_KEY).getAsBoolean();
 		this.cursed = data.get(CURSED_KEY).getAsBoolean();
 		this.maxLevel = data.get(MAX_LEVEL_KEY).getAsInt();
@@ -359,7 +359,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{
-		return this.key;
+		return this.namespacedKey;
 	}
 
 	@Override
