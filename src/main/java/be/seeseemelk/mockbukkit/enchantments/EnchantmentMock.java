@@ -34,6 +34,22 @@ public class EnchantmentMock extends Enchantment
 
 	private static final String LEVEL = "level";
 	private static final String COST = "cost";
+	private static final String TREASURE_KEY = "treasure";
+	private static final String CURSED_KEY = "cursed";
+	private static final String MAX_LEVEL_KEY = "maxLevel";
+	private static final String START_LEVEL_KEY = "startLevel";
+	private static final String NAME_KEY = "name";
+	private static final String DISPLAY_NAMES_KEY = "displayNames";
+	private static final String MIN_MODIFIED_COSTS_KEY = "minModifiedCosts";
+	private static final String MAX_MODIFIED_COSTS_KEY = "maxModifiedCosts";
+	private static final String TRADEABLE_KEY = "tradeable";
+	private static final String DISCOVERABLE_KEY = "discoverable";
+	private static final String CONFLICTS_KEY = "conflicts";
+	private static final String ENCHANTABLE_KEY = "enchantable";
+	private static final String TRANSLATION_KEY = "translationKey";
+	private static final String ANVIL_COST_KEY = "anvilCost";
+	private static final String KEY = "key";
+	public static final String ENCHANTABLES_KEY = "enchantables";
 
 	private final @NotNull String name;
 	private final NamespacedKey key;
@@ -95,24 +111,24 @@ public class EnchantmentMock extends Enchantment
 	 * int[], boolean, boolean, Set, Set, String, int)}
 	 * instead.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "v3.82.0")
 	public EnchantmentMock(JsonObject data)
 	{
-		this.key = NamespacedKey.fromString(data.get("key").getAsString());
-		this.treasure = data.get("treasure").getAsBoolean();
-		this.cursed = data.get("cursed").getAsBoolean();
-		this.maxLevel = data.get("maxLevel").getAsInt();
-		this.startLevel = data.get("startLevel").getAsInt();
-		this.name = data.get("name").getAsString();
-		this.displayNames = getDisplayNames(data.get("displayNames").getAsJsonArray(), this.maxLevel);
-		this.minModifiedCosts = getModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), this.maxLevel);
-		this.maxModifiedCosts = getModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), this.maxLevel);
-		this.tradeable = data.get("tradeable").getAsBoolean();
-		this.discoverable = data.get("discoverable").getAsBoolean();
-		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
-		this.enchantables = getEnchantables(data.get("enchantable").getAsJsonArray());
-		this.translationKey = data.get("translationKey").getAsString();
-		this.anvilCost = data.get("anvilCost").getAsInt();
+		this.key = NamespacedKey.fromString(data.get(KEY).getAsString());
+		this.treasure = data.get(TREASURE_KEY).getAsBoolean();
+		this.cursed = data.get(CURSED_KEY).getAsBoolean();
+		this.maxLevel = data.get(MAX_LEVEL_KEY).getAsInt();
+		this.startLevel = data.get(START_LEVEL_KEY).getAsInt();
+		this.name = data.get(NAME_KEY).getAsString();
+		this.displayNames = getDisplayNames(data.get(DISPLAY_NAMES_KEY).getAsJsonArray(), this.maxLevel);
+		this.minModifiedCosts = getModifiedCosts(data.get(MIN_MODIFIED_COSTS_KEY).getAsJsonArray(), this.maxLevel);
+		this.maxModifiedCosts = getModifiedCosts(data.get(MAX_MODIFIED_COSTS_KEY).getAsJsonArray(), this.maxLevel);
+		this.tradeable = data.get(TRADEABLE_KEY).getAsBoolean();
+		this.discoverable = data.get(DISCOVERABLE_KEY).getAsBoolean();
+		this.conflicts = getConflicts(data.get(CONFLICTS_KEY).getAsJsonArray());
+		this.enchantables = getEnchantables(data.get(ENCHANTABLE_KEY).getAsJsonArray());
+		this.translationKey = data.get(TRANSLATION_KEY).getAsString();
+		this.anvilCost = data.get(ANVIL_COST_KEY).getAsInt();
 	}
 
 	@Override
@@ -357,27 +373,28 @@ public class EnchantmentMock extends Enchantment
 	public static EnchantmentMock from(JsonObject data)
 	{
 		Preconditions.checkNotNull(data);
-		List<String> expectedArguments = List.of("key", "treasure", "cursed", "maxLevel", "startLevel",
-				"name", "displayNames", "minModifiedCosts", "maxModifiedCosts", "tradeable", "discoverable",
-				"conflicts", "enchantables");
+		List<String> expectedArguments = List.of(KEY, TREASURE_KEY, CURSED_KEY, MAX_LEVEL_KEY, START_LEVEL_KEY,
+				NAME_KEY, DISPLAY_NAMES_KEY, MIN_MODIFIED_COSTS_KEY, MAX_MODIFIED_COSTS_KEY, TRADEABLE_KEY, DISCOVERABLE_KEY,
+				CONFLICTS_KEY, ENCHANTABLES_KEY);
 		expectedArguments.forEach(expectedKey ->
 				Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
 
-		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
-		boolean treasure = data.get("treasure").getAsBoolean();
-		boolean cursed = data.get("cursed").getAsBoolean();
-		int maxLevel = data.get("maxLevel").getAsInt();
-		int startLevel = data.get("startLevel").getAsInt();
-		String name = data.get("name").getAsString();
-		Component[] displayNames = getDisplayNames(data.get("displayNames").getAsJsonArray(), maxLevel);
-		int[] minModifiedCosts = getModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), maxLevel);
-		int[] maxModifiedCosts = getModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), maxLevel);
-		boolean tradeable = data.get("tradeable").getAsBoolean();
-		boolean discoverable = data.get("discoverable").getAsBoolean();
-		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
-		Set<NamespacedKey> enchantables = getEnchantables(data.get("enchantables").getAsJsonArray());
-		String translationKey = data.get("translationKey").getAsString();
-		int anvilCost = data.get("anvilCost").getAsInt();
+		NamespacedKey key = NamespacedKey.fromString(data.get(KEY).getAsString());
+		boolean treasure = data.get(TREASURE_KEY).getAsBoolean();
+		boolean cursed = data.get(CURSED_KEY).getAsBoolean();
+		int maxLevel = data.get(MAX_LEVEL_KEY).getAsInt();
+		int startLevel = data.get(START_LEVEL_KEY).getAsInt();
+		String name = data.get(NAME_KEY).getAsString();
+		Component[] displayNames = getDisplayNames(data.get(DISPLAY_NAMES_KEY).getAsJsonArray(), maxLevel);
+		int[] minModifiedCosts = getModifiedCosts(data.get(MIN_MODIFIED_COSTS_KEY).getAsJsonArray(), maxLevel);
+		int[] maxModifiedCosts = getModifiedCosts(data.get(MAX_MODIFIED_COSTS_KEY).getAsJsonArray(), maxLevel);
+		boolean tradeable = data.get(TRADEABLE_KEY).getAsBoolean();
+		boolean discoverable = data.get(DISCOVERABLE_KEY).getAsBoolean();
+		Set<NamespacedKey> conflicts = getConflicts(data.get(CONFLICTS_KEY).getAsJsonArray());
+		Set<NamespacedKey> enchantables = getEnchantables(data.get(ENCHANTABLES_KEY).getAsJsonArray());
+		String translationKey = data.get(TRANSLATION_KEY).getAsString();
+		int anvilCost = data.get(ANVIL_COST_KEY).getAsInt();
+
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
 				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables, translationKey, anvilCost);
 	}
