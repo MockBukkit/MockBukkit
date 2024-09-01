@@ -20,6 +20,12 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       - name: Restore caches
         uses: actions/cache@v4
         with:
@@ -36,6 +42,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test --refresh-dependencies
       - name: Run unit tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew test jacocoTestReport sonar
 
       - name: Store Private key
