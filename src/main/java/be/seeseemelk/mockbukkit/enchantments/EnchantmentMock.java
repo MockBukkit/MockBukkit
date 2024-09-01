@@ -49,7 +49,7 @@ public class EnchantmentMock extends Enchantment
 	private static final String TRANSLATION_KEY = "translationKey";
 	private static final String ANVIL_COST_KEY = "anvilCost";
 	private static final String KEY = "key";
-	public static final String ENCHANTABLES_KEY = "enchantables";
+	private static final String ENCHANTABLES_KEY = "enchantables";
 
 	private final @NotNull String name;
 	private final NamespacedKey key;
