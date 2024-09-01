@@ -3,6 +3,7 @@ import java.io.ByteArrayOutputStream
 plugins {
 	id("java-library")
 	id("jacoco")
+	id("org.sonarqube") version "3.5.0.2730"
 	id("maven-publish")
 	id("signing")
 	id("net.kyori.blossom") version "2.1.0"
