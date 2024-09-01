@@ -121,6 +121,8 @@ java {
 
 sonar {
 	properties {
+		property("sonar.projectKey", "MockBukkit")
+		property("sonar.organization", "MockBukkit")
 		property("sonar.host.url", "https://sonarcloud.io/")
 	}
 }
