@@ -68,7 +68,7 @@ public class EnchantmentMock extends Enchantment
 	private final int anvilCost;
 
 	/**
-	 * @param namespacedKey             The key representing this enchantment
+	 * @param namespacedKey   The key representing this enchantment
 	 * @param treasure        Whether this enchantment can be found in a treasure
 	 * @param cursed          Whether this enchantment is a curse
 	 * @param maxLevel        The max level of this enchantment
