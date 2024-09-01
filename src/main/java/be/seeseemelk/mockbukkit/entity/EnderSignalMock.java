@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,9 +16,12 @@ import java.util.UUID;
 public class EnderSignalMock extends EntityMock implements EnderSignal
 {
 
+	private static final String TARGET_NOT_SET_ERROR = "Target location has not been set! Mockbukkit requires that the " +
+			"target location be set before the location is retrieved.";
+
 	private Location targetLocation = null;
 	private boolean surviveAfterDeath = true;
-	private ItemStack item = new ItemStack(Material.ENDER_EYE);
+	private ItemStack item = new ItemStackMock(Material.ENDER_EYE);
 	private int life = 0;
 
 	/**
@@ -34,7 +38,7 @@ public class EnderSignalMock extends EntityMock implements EnderSignal
 	@Override
 	public @NotNull Location getTargetLocation()
 	{
-		Preconditions.checkState(targetLocation != null, "Target location has not been set!");
+		Preconditions.checkState(targetLocation != null, TARGET_NOT_SET_ERROR);
 		return targetLocation;
 	}
 
@@ -48,8 +52,9 @@ public class EnderSignalMock extends EntityMock implements EnderSignal
 	public void setTargetLocation(@NotNull Location location, boolean update)
 	{
 		Preconditions.checkArgument(location != null, "Location cannot be null");
-		Preconditions.checkArgument(this.getWorld().equals(location.getWorld()), "Cannot target EnderSignal across worlds");
-		this.targetLocation = location;
+		Preconditions.checkArgument(this.getWorld().equals(location.getWorld()),
+				"Cannot target EnderSignal across worlds");
+		this.targetLocation = location.toBlockLocation();
 
 		if (update)
 		{
@@ -80,11 +85,11 @@ public class EnderSignalMock extends EntityMock implements EnderSignal
 	{
 		if (item == null)
 		{
-			this.item = new ItemStack(Material.ENDER_EYE);
+			this.item = new ItemStackMock(Material.ENDER_EYE);
 			return;
 		}
 
-		this.item = item;
+		this.item = item.clone();
 	}
 
 	@Override

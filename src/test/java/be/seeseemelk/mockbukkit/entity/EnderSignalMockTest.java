@@ -80,10 +80,12 @@ class EnderSignalMockTest
     }
 
     @Test
-    void  testSetItem()
+    void testSetItem()
     {
-        enderSignal.setItem(new ItemStack(Material.DIAMOND));
+		var item = new ItemStack(Material.DIAMOND);
+        enderSignal.setItem(item);
         assertEquals(Material.DIAMOND, enderSignal.getItem().getType());
+		assertNotSame(item, enderSignal.getItem());
     }
 
     @Test
