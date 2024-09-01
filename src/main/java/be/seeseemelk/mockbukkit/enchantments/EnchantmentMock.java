@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.papermc.paper.enchantments.EnchantmentRarity;
+import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.NamespacedKey;
@@ -16,8 +17,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,7 +48,7 @@ public class EnchantmentMock extends Enchantment
 	private final int[] minModifiedCosts;
 	private int maxLevel;
 	private int startLevel;
-	private final NamespacedKey translationKey;
+	private final String translationKey;
 	private final int anvilCost;
 
 	/**
@@ -66,7 +69,7 @@ public class EnchantmentMock extends Enchantment
 	public EnchantmentMock(NamespacedKey key, boolean treasure, boolean cursed, int maxLevel,
 						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
 						   int[] maxModifiedCost, boolean tradeable, boolean discoverable,
-						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, NamespacedKey translationKey,
+						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, String translationKey,
 						   int anvilCost)
 	{
 		this.key = key;
@@ -89,7 +92,7 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * @param data Json data
 	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[],
-	 * int[], boolean, boolean, Set, Set, NamespacedKey, int)}
+	 * int[], boolean, boolean, Set, Set, String, int)}
 	 * instead.
 	 */
 	@Deprecated(forRemoval = true)
@@ -108,7 +111,7 @@ public class EnchantmentMock extends Enchantment
 		this.discoverable = data.get("discoverable").getAsBoolean();
 		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
 		this.enchantables = getEnchantables(data.get("enchantable").getAsJsonArray());
-		this.translationKey = NamespacedKey.fromString(data.get("translationKey").getAsString());
+		this.translationKey = data.get("translationKey").getAsString();
 		this.anvilCost = data.get("anvilCost").getAsInt();
 	}
 
@@ -187,11 +190,46 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	public @NotNull Component description()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull RegistryKeySet<ItemType> getSupportedItems()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RegistryKeySet<ItemType> getPrimaryItems()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getWeight()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull RegistryKeySet<Enchantment> getExclusiveWith()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated(forRemoval = true) //Mark as deprecated as this method assumes that the enchantments description always
 	// be a translatable component which is not guaranteed.
 	public @NotNull String translationKey()
 	{
-		return translationKey.toString();
+		return translationKey;
 	}
 
 	@Override
@@ -338,7 +376,7 @@ public class EnchantmentMock extends Enchantment
 		boolean discoverable = data.get("discoverable").getAsBoolean();
 		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
 		Set<NamespacedKey> enchantables = getEnchantables(data.get("enchantables").getAsJsonArray());
-		NamespacedKey translationKey = NamespacedKey.fromString(data.get("translationKey").getAsString());
+		String translationKey = data.get("translationKey").getAsString();
 		int anvilCost = data.get("anvilCost").getAsInt();
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
 				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables, translationKey, anvilCost);

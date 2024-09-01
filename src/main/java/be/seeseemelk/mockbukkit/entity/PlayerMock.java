@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.boss.BossBarImplementationMock;
 import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
@@ -24,6 +25,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -2531,6 +2533,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void showBossBar(@NotNull BossBar bar)
 	{
 		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		BossBarImplementation.get(bar, BossBarImplementationMock.class).playerShow(this);
 		this.bossBars.add(bar);
 	}
 
@@ -2538,6 +2541,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void hideBossBar(@NotNull BossBar bar)
 	{
 		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		BossBarImplementation.get(bar, BossBarImplementationMock.class).playerHide(this);
 		this.bossBars.remove(bar);
 	}
 
@@ -2778,8 +2782,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void updateCommands()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// NO OP, only updates commands client side, MockBukkit is only serverside
 	}
 
 	@Override
@@ -3380,6 +3383,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return EntityState.SLEEPING;
 		}
 		return super.getEntityState();
+	}
+
+	@Override
+	public void remove()
+	{
+		throw new UnsupportedOperationException("Players can't be removed with this method, use kick() instead");
 	}
 
 	@Override

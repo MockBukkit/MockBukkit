@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
+import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -101,6 +102,38 @@ class EnderCrystalMockTest
 	@Test
 	void getType() {
 		assertEquals(EntityType.END_CRYSTAL, crystal.getType());
+	}
+
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = crystal.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-1, actual.getMinX());
+		assertEquals(0, actual.getMinY());
+		assertEquals(-1, actual.getMinZ());
+
+		assertEquals(1, actual.getMaxX());
+		assertEquals(2, actual.getMaxY());
+		assertEquals(1, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		crystal.teleport(new Location(crystal.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = crystal.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9, actual.getMinZ());
+
+		assertEquals(11, actual.getMaxX());
+		assertEquals(7, actual.getMaxY());
+		assertEquals(11, actual.getMaxZ());
 	}
 
 }

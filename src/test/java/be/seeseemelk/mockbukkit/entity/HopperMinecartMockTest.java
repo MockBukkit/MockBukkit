@@ -5,9 +5,11 @@ import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.HopperMinecart;
+import org.bukkit.util.BoundingBox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +18,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -89,6 +92,38 @@ class HopperMinecartMockTest
 				() -> minecart.setPickupCooldown(1));
 
 		assertEquals("Hopper minecarts don't have cooldowns", unsupportedOperationException.getMessage());
+	}
+
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = minecart.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.49, actual.getMinX());
+		assertEquals(0, actual.getMinY());
+		assertEquals(-0.49, actual.getMinZ());
+
+		assertEquals(0.49, actual.getMaxX());
+		assertEquals(0.7, actual.getMaxY());
+		assertEquals(0.49, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		minecart.teleport(new Location(minecart.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = minecart.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9.51, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9.51, actual.getMinZ());
+
+		assertEquals(10.49, actual.getMaxX());
+		assertEquals(5.7, actual.getMaxY());
+		assertEquals(10.49, actual.getMaxZ());
 	}
 
 }

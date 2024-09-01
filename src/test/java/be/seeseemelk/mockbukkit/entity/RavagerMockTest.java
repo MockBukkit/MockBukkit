@@ -2,8 +2,10 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
+import org.bukkit.util.BoundingBox;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RavagerMockTest
 {
@@ -94,6 +97,38 @@ class RavagerMockTest
 	void getType()
 	{
 		assertEquals(EntityType.RAVAGER, ravager.getType());
+	}
+
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = ravager.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.975, actual.getMinX());
+		assertEquals(0, actual.getMinY());
+		assertEquals(-0.975, actual.getMinZ());
+
+		assertEquals(0.975, actual.getMaxX());
+		assertEquals(2.2, actual.getMaxY());
+		assertEquals(0.975, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		ravager.teleport(new Location(ravager.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = ravager.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9.025, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9.025, actual.getMinZ());
+
+		assertEquals(10.975, actual.getMaxX());
+		assertEquals(7.2, actual.getMaxY());
+		assertEquals(10.975, actual.getMaxZ());
 	}
 
 }
