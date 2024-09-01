@@ -31,6 +31,10 @@ import java.util.logging.Level;
 public class TeamMock implements Team
 {
 
+	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
+	private static final String ENTRY_CANNOT_BE_NULL = "Entry cannot be null";
+	private static final String OFFLINE_PLAYER_CANNOT_BE_NULL = "OfflinePlayer cannot be null";
+
 	private final String name;
 	private Component displayName;
 	private @NotNull Component prefix = Component.empty();
@@ -302,7 +306,7 @@ public class TeamMock implements Team
 	@Deprecated(since = "1.8.7")
 	public void addPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
-		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
+		Preconditions.checkNotNull(offlinePlayer, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		checkRegistered();
 		this.entries.add(offlinePlayer.getName());
 	}
@@ -310,7 +314,7 @@ public class TeamMock implements Team
 	@Override
 	public void addEntry(@NotNull String entry)
 	{
-		Preconditions.checkNotNull(entry, "Entry cannot be null");
+		Preconditions.checkNotNull(entry, ENTRY_CANNOT_BE_NULL);
 		checkRegistered();
 		this.entries.add(entry);
 	}
@@ -337,7 +341,7 @@ public class TeamMock implements Team
 	@Deprecated(since = "1.8.7")
 	public boolean removePlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
-		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
+		Preconditions.checkNotNull(offlinePlayer, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		checkRegistered();
 		return this.entries.remove(offlinePlayer.getName());
 	}
@@ -345,7 +349,7 @@ public class TeamMock implements Team
 	@Override
 	public boolean removeEntry(@NotNull String entry)
 	{
-		Preconditions.checkNotNull(entry, "Entry cannot be null");
+		Preconditions.checkNotNull(entry, ENTRY_CANNOT_BE_NULL);
 		checkRegistered();
 		return this.entries.remove(entry);
 	}
@@ -380,7 +384,7 @@ public class TeamMock implements Team
 	@Deprecated(since = "1.8.7")
 	public boolean hasPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
-		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
+		Preconditions.checkNotNull(offlinePlayer, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		checkRegistered();
 		return this.entries.contains(offlinePlayer.getName());
 	}
@@ -388,7 +392,7 @@ public class TeamMock implements Team
 	@Override
 	public boolean hasEntry(@NotNull String entry)
 	{
-		Preconditions.checkNotNull(entry, "Entry cannot be null");
+		Preconditions.checkNotNull(entry, ENTRY_CANNOT_BE_NULL);
 		checkRegistered();
 		return this.entries.contains(entry);
 	}
@@ -413,21 +417,21 @@ public class TeamMock implements Team
 	@Override
 	public void addEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		addEntry(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public boolean removeEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		return removeEntry(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public boolean hasEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		checkRegistered();
 		return this.entries.contains(((EntityMock) entity).getScoreboardEntry());
 	}
