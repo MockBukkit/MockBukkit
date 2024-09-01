@@ -119,6 +119,12 @@ java {
 	}
 }
 
+sonar {
+	properties {
+		property("sonar.host.url", "https://sonarcloud.io/")
+	}
+}
+
 signing {
 	isRequired = !isFork() && isAction()
 	sign(publishing.publications)
