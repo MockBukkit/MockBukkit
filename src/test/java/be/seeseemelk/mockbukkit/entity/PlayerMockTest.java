@@ -860,28 +860,28 @@ class PlayerMockTest
 	@Test
 	void getEyeHeight_WhileStanding()
 	{
-		assertEquals(1.53D, player.getEyeHeight());
+		assertEquals(1.62D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSneaking()
 	{
 		player.setSneaking(true);
-		assertEquals(1.275D, player.getEyeHeight());
+		assertEquals(1.35D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSleeping()
 	{
 		player.setSleeping(true);
-		assertEquals(0.17D, player.getEyeHeight());
+		assertEquals(0.2D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSwimming()
 	{
 		player.setSwimming(true);
-		assertEquals(0.51D, player.getEyeHeight());
+		assertEquals(0.54D, player.getEyeHeight());
 	}
 
 	@Test

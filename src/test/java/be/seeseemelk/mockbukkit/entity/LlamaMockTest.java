@@ -224,14 +224,14 @@ class LlamaMockTest
 	@Test
 	void getEyeHeight_GivenDefaultHorse()
 	{
-		assertEquals(1.5895000000000001D, llama.getEyeHeight());
+		assertEquals(1.7765D, llama.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyHorse()
 	{
 		llama.setBaby();
-		assertEquals(0.7947500000000001D, llama.getEyeHeight());
+		assertEquals(0.88825D, llama.getEyeHeight());
 	}
 
 }

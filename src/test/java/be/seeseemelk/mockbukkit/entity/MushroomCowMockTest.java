@@ -252,14 +252,14 @@ class MushroomCowMockTest
 	@Test
 	void getEyeHeight_GivenDefaultMushroom()
 	{
-		assertEquals(1.19D, mushroom.getEyeHeight());
+		assertEquals(1.3D, mushroom.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyMushroom()
 	{
 		mushroom.setBaby();
-		assertEquals(0.595D, mushroom.getEyeHeight());
+		assertEquals(0.65D, mushroom.getEyeHeight());
 	}
 
 }
