@@ -52,6 +52,7 @@ import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
+import be.seeseemelk.mockbukkit.entity.InteractionMock;
 import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
@@ -201,6 +202,7 @@ import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Illusioner;
+import org.bukkit.entity.Interaction;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemDisplay;
@@ -1522,6 +1524,10 @@ public class WorldMock implements World
 		else if (clazz == Illusioner.class)
 		{
 			return new IllusionerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Interaction.class)
+		{
+			return new InteractionMock(server, UUID.randomUUID());
 		}
 		else if (clazz == IronGolem.class)
 		{
