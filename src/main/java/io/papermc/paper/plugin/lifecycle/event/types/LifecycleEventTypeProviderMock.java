@@ -6,7 +6,7 @@ import be.seeseemelk.mockbukkit.plugin.lifecycle.event.types.PrioritizableLifecy
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 
-public class LifeCycleEventTypeProviderMock implements LifecycleEventTypeProvider
+public class LifecycleEventTypeProviderMock implements LifecycleEventTypeProvider
 {
 
 	@Override
