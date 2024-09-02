@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -236,6 +237,33 @@ class LivingEntityMockTest
 		livingEntity.setClimbing(true);
 		boolean actual = livingEntity.isClimbing();
 		assertTrue(actual);
+	}
+
+	@Test
+	void getEntityState_GivenDefault()
+	{
+		assertEquals(EntityState.DEFAULT, livingEntity.getEntityState());
+	}
+
+	@Test
+	void getEntityState_GivenSleeping()
+	{
+		livingEntity.setSleeping(true);
+		assertEquals(EntityState.SLEEPING, livingEntity.getEntityState());
+	}
+
+	@Test
+	void getEntityState_GivenSneaking()
+	{
+		livingEntity.setSneaking(true);
+		assertEquals(EntityState.SNEAKING, livingEntity.getEntityState());
+	}
+
+	@Test
+	void getEntityState_GivenSwimming()
+	{
+		livingEntity.setSwimming(true);
+		assertEquals(EntityState.SWIMMING, livingEntity.getEntityState());
 	}
 
 }

@@ -39,14 +39,14 @@ class CowMockTest
 	@Test
 	void getEyeHeight_GivenDefaultCow()
 	{
-		assertEquals(1.19D, cow.getEyeHeight());
+		assertEquals(1.3D, cow.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyCow()
 	{
 		cow.setBaby();
-		assertEquals(0.595D, cow.getEyeHeight());
+		assertEquals(0.65D, cow.getEyeHeight());
 	}
 
 }
