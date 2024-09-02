@@ -378,7 +378,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	protected double getEyeHeight(EntityState pose)
 	{
-		return getHeight(pose) * 0.85D;
+		return entityData.getEyeHeight(getSubType(), pose);
 	}
 
 	@Override
@@ -387,21 +387,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		if (ignorePose)
 		{
 			return getEyeHeight(EntityState.DEFAULT);
-		}
-
-		if (isSleeping())
-		{
-			return getEyeHeight(EntityState.SLEEPING);
-		}
-
-		if (isSneaking())
-		{
-			return getEyeHeight(EntityState.SNEAKING);
-		}
-
-		if (isSwimming())
-		{
-			return getEyeHeight(EntityState.SWIMMING);
 		}
 
 		return getEyeHeight(getEntityState());
@@ -413,6 +398,26 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return getEyeHeight(false);
 	}
 
+	@Override
+	protected EntityState getEntityState()
+	{
+		if (isSleeping())
+		{
+			return EntityState.SLEEPING;
+		}
+
+		if (isSneaking())
+		{
+			return EntityState.SNEAKING;
+		}
+
+		if (isSwimming())
+		{
+			return EntityState.SWIMMING;
+		}
+
+		return super.getEntityState();
+	}
 
 	@Override
 	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)

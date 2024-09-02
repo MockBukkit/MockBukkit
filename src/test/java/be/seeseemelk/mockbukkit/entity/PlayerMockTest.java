@@ -860,28 +860,28 @@ class PlayerMockTest
 	@Test
 	void getEyeHeight_WhileStanding()
 	{
-		assertEquals(1.53D, player.getEyeHeight());
+		assertEquals(1.62D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSneaking()
 	{
 		player.setSneaking(true);
-		assertEquals(1.275D, player.getEyeHeight());
+		assertEquals(1.35D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSleeping()
 	{
 		player.setSleeping(true);
-		assertEquals(0.17D, player.getEyeHeight());
+		assertEquals(0.2D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSwimming()
 	{
 		player.setSwimming(true);
-		assertEquals(0.51D, player.getEyeHeight());
+		assertEquals(0.54D, player.getEyeHeight());
 	}
 
 	@Test
@@ -2621,17 +2621,20 @@ class PlayerMockTest
 	}
 
 	@Nested
-	class PlayerSpigotMock {
+	class PlayerSpigotMock
+	{
 
 		@Test
-		void sendMessage_GivenSimpleMessage(){
+		void sendMessage_GivenSimpleMessage()
+		{
 			TextComponent previousButton = new TextComponent("Hello world!");
 			player.spigot().sendMessage(previousButton);
 			player.assertSaid("Hello world!");
 		}
 
 		@Test
-		void sendMessage_GivenColoredMessage(){
+		void sendMessage_GivenColoredMessage()
+		{
 			BaseComponent message = new ComponentBuilder()
 					.append("Hello ")
 					.color(ChatColor.RED)
@@ -2644,10 +2647,11 @@ class PlayerMockTest
 		}
 
 		@Test
-		void sendMessage_issue550(){
+		void sendMessage_issue550()
+		{
 			TextComponent message = new TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 			player.spigot().sendMessage(message);
-			player.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));
+			player.assertSaid(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 		}
 
 	}
@@ -2656,6 +2660,18 @@ class PlayerMockTest
 	void testRemove()
 	{
 		assertThrows(UnsupportedOperationException.class, () -> player.remove());
+	}
+
+	@Test
+	void bossBar_updatesViewers()
+	{
+		BossBar bossBar = BossBar.bossBar(Component.text("hello world"), 1, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+		player.showBossBar(bossBar);
+		assertEquals(bossBar, player.activeBossBars().iterator().next());
+		assertEquals(player, bossBar.viewers().iterator().next());
+		player.hideBossBar(bossBar);
+		assertFalse(player.activeBossBars().iterator().hasNext());
+		assertFalse(bossBar.viewers().iterator().hasNext());
 	}
 
 }

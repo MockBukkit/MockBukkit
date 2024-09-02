@@ -144,6 +144,6 @@ class ShulkerMockTest
 	@Test
 	void getEyeHeight_GivenDefaultValue()
 	{
-		assertEquals(0.85D, shulker.getEyeHeight());
+		assertEquals(0.5D, shulker.getEyeHeight());
 	}
 }
