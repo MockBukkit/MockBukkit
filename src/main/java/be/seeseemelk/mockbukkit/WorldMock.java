@@ -34,6 +34,7 @@ import be.seeseemelk.mockbukkit.entity.EnderSignalMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.EvokerFangsMock;
 import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
@@ -183,6 +184,7 @@ import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Evoker;
+import org.bukkit.entity.EvokerFangs;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
@@ -1512,6 +1514,10 @@ public class WorldMock implements World
 		else if (clazz == Evoker.class)
 		{
 			return new EvokerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == EvokerFangs.class)
+		{
+			return new EvokerFangsMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Illusioner.class)
 		{
