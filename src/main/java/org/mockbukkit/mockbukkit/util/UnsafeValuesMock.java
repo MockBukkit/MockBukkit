@@ -588,7 +588,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
 																		   BooleanSupplier booleanSupplier)
 	{
-		return new LifecycleEventManagerMock();
+		return new LifecycleEventManagerMock(javaPlugin, booleanSupplier);
 	}
 
 	@Override
