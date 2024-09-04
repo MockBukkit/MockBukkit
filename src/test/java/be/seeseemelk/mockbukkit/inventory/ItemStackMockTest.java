@@ -181,6 +181,23 @@ class ItemStackMockTest
 		assertNotEquals(lore, itemStack.getLore());
 	}
 
+	@Test
+	void maxStackSize_updatesOnMetadataChange()
+	{
+		ItemStack stack = new ItemStack(Material.STICK, 65);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setMaxStackSize(99);
+		stack.setItemMeta(meta);
+		assertEquals(99, stack.getMaxStackSize());
+	}
+
+	@Test
+	void maxStackSize_defaultValue()
+	{
+		ItemStack stack = new ItemStack(Material.STICK, 64);
+		assertEquals(64, stack.getMaxStackSize());
+	}
+
 	private Class<? extends ItemMeta> getMetaInterface(Class<?> aClass)
 	{
 		Class<?>[] interfaces = aClass.getInterfaces();

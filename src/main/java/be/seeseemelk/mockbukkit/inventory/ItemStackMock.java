@@ -146,7 +146,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int getMaxStackSize()
 	{
-		return this.type.getMaxStackSize();
+		return this.itemMeta.hasMaxStackSize() ? this.itemMeta.getMaxStackSize() : this.type.getMaxStackSize();
 	}
 
 	@Override
