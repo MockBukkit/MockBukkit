@@ -99,14 +99,14 @@ class WolfMockTest
 	@Test
 	void getEyeHeight_GivenDefaultWolf()
 	{
-		assertEquals(0.7224999999999999D, wolf.getEyeHeight());
+		assertEquals(0.68D, wolf.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyWolf()
 	{
 		wolf.setBaby();
-		assertEquals(0.36124999999999996D, wolf.getEyeHeight());
+		assertEquals(0.34D, wolf.getEyeHeight());
 	}
 
 }

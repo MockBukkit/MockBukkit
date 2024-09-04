@@ -6,7 +6,10 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
 import org.bukkit.entity.Boat;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -166,6 +169,27 @@ public class BoatMock extends VehicleMock implements Boat
 	public @NotNull EntityType getType()
 	{
 		return EntityType.BOAT;
+	}
+
+	@Override
+	public boolean isLeashed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NonNull Entity getLeashHolder() throws IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setLeashHolder(@Nullable Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

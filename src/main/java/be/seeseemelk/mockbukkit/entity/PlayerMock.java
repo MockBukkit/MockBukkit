@@ -5,6 +5,8 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.boss.BossBarImplementationMock;
+import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
@@ -21,8 +23,11 @@ import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
+import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -67,6 +72,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
@@ -188,6 +194,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
+	private final ConversationTracker conversationTracker = new ConversationTracker();
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
@@ -263,6 +271,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return false;
 		}
 		this.online = false;
+
+		this.conversationTracker.abandonAllConversations();
+		this.perms.clearPermissions();
 
 		Component message = MiniMessage.miniMessage()
 				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
@@ -812,36 +823,31 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isConversing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.isConversing();
 	}
 
 	@Override
 	public void acceptConversationInput(@NotNull String input)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.acceptConversationInput(input);
 	}
 
 	@Override
 	public boolean beginConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.conversationTracker.beginConversation(conversation);
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
 	}
 
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation, @NotNull ConversationAbandonedEvent details)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.conversationTracker.abandonConversation(conversation, details);
 	}
 
 	@Override
@@ -1051,17 +1057,58 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendRawMessage(@Nullable String message)
+	public void sendRawMessage(@NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendRawMessage(null, message);
 	}
 
 	@Override
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(message != null, "message cannot be null");
+		this.messages.add(LegacyComponentSerializer.legacySection().deserialize(message));
+	}
+
+	@Override
+	public void sendMessage(String message) {
+		if (!this.conversationTracker.isConversingModaly()) {
+			this.sendRawMessage(message);
+		}
+	}
+
+	@Override
+	public void sendMessage(String... messages) {
+		for (String message : messages) {
+			this.sendMessage(message);
+		}
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String message) {
+		if (!this.conversationTracker.isConversingModaly()) {
+			this.sendRawMessage(sender, message);
+		}
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String... messages) {
+		for (String message : messages) {
+			this.sendMessage(sender, message);
+		}
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	{
+		Preconditions.checkNotNull(message, "input");
+		this.messages.add(message);
+	}
+
+	@Override
+	public @Nullable Component nextComponentMessage()
+	{
+		return messages.poll();
 	}
 
 	@Override
@@ -2521,6 +2568,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void showBossBar(@NotNull BossBar bar)
 	{
 		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		BossBarImplementation.get(bar, BossBarImplementationMock.class).playerShow(this);
 		this.bossBars.add(bar);
 	}
 
@@ -2528,6 +2576,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void hideBossBar(@NotNull BossBar bar)
 	{
 		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		BossBarImplementation.get(bar, BossBarImplementationMock.class).playerHide(this);
 		this.bossBars.remove(bar);
 	}
 
@@ -2768,8 +2817,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void updateCommands()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// NO OP, only updates commands client side, MockBukkit is only serverside
 	}
 
 	@Override
@@ -3373,6 +3421,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void remove()
+	{
+		throw new UnsupportedOperationException("Players can't be removed with this method, use kick() instead");
+	}
+
+	@Override
 	public Player.@NotNull Spigot spigot()
 	{
 		return playerSpigotMock;
@@ -3386,33 +3440,63 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		@Override
 		@Deprecated
-		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
-		{
-			sendMessage(ChatMessageType.CHAT, components);
-		}
-
-		@Override
-		@Deprecated
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
-		{
-			Preconditions.checkNotNull(position, "Position must not be null");
-			Preconditions.checkNotNull(components, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
-			PlayerMock.this.sendMessage(comp);
-		}
-
-		@Override
-		@Deprecated
 		public void sendMessage(@NotNull BaseComponent component)
 		{
-			sendMessage(ChatMessageType.CHAT, component);
+			this.sendMessage(ChatMessageType.SYSTEM, component);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull BaseComponent... components)
+		{
+			this.sendMessage(ChatMessageType.SYSTEM, components);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			this.sendMessage(ChatMessageType.CHAT, sender, component);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			this.sendMessage(ChatMessageType.CHAT, sender, components);
 		}
 
 		@Override
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			sendMessage(position, new BaseComponent[]{ component });
+			this.sendMessage(position, new BaseComponent[]{ component });
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components)
+		{
+			this.sendMessage(position, null, components);
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			this.sendMessage( position, sender, new BaseComponent[] { component } );
+		}
+
+		@Override
+		@Deprecated
+		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			Preconditions.checkNotNull(position, "Position must not be null");
+			Preconditions.checkNotNull(components, "Component must not be null");
+			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
+			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
+			PlayerMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
 		}
 
 	}

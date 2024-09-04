@@ -1,10 +1,12 @@
 {
 	"default": {
 		"height": 1.4,
-		"width": 1.3965
+		"width": 1.3964844,
+		"eyeHeight": 1.19
 	},
 	"baby": {
 		"height": 0.7,
-		"width": 0.6982
+		"width": 0.6982,
+		"eyeHeight": 0.595
 	}
 }

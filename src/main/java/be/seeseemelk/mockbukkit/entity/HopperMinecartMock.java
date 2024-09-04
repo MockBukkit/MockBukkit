@@ -80,7 +80,7 @@ public class HopperMinecartMock extends LootableMinecart implements HopperMineca
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.HOPPER_MINECART;
 	}

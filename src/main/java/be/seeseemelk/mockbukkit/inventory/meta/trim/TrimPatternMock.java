@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta.trim;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.kyori.adventure.text.Component;
@@ -15,25 +14,26 @@ public class TrimPatternMock implements TrimPattern
 
 	private final NamespacedKey key;
 	private final Component description;
+	private final String translationKey;
 
-	/**
-	 * @param key The namespaced key representing this pattern
-	 */
-	public TrimPatternMock(NamespacedKey key, Component description)
+	
+	@ApiStatus.Internal
+	public TrimPatternMock(NamespacedKey key, Component description, String translationKey)
 	{
 		this.key = key;
 		this.description = description;
+		this.translationKey = translationKey;
 	}
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #TrimPatternMock(NamespacedKey, Component)} instead
 	 */
 	@Deprecated(forRemoval = true)
 	public TrimPatternMock(JsonObject data)
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
 		this.description = GsonComponentSerializer.gson().deserializeFromTree(data.get("description"));
+		this.translationKey = data.get("translationKey").getAsString();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class TrimPatternMock implements TrimPattern
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		throw new UnimplementedOperationException();
+		return this.translationKey;
 	}
 
 	@Override
@@ -61,7 +61,8 @@ public class TrimPatternMock implements TrimPattern
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
 		Component description = GsonComponentSerializer.gson().deserializeFromTree(data.get("description"));
-		return new TrimPatternMock(key, description);
+		String translationKey = data.get("translationKey").getAsString();
+		return new TrimPatternMock(key, description, translationKey);
 	}
 
 }
