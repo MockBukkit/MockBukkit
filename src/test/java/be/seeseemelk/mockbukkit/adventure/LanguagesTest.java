@@ -17,9 +17,11 @@ class LanguagesTest
 		Constructor<Languages> constructor = Languages.class.getDeclaredConstructor();
 		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
-		Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
-		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
-		assertTrue(exception.getCause().getMessage().contains("Utility class"));
+		InvocationTargetException exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
+
+		Throwable cause = exception.getCause();
+		assertInstanceOf(UnsupportedOperationException.class, cause);
+		assertTrue(cause.getMessage().equalsIgnoreCase("Utility class"));
 	}
 
 }
