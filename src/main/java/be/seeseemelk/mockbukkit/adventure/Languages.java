@@ -69,7 +69,7 @@ public class Languages
 
 	private Languages()
 	{
-		// Hide the public constructor
+		throw new UnsupportedOperationException("Utility class");
 	}
 
 }
