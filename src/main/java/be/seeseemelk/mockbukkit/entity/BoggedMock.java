@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.util.AdventureConverters;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.entity.Bogged;
 import org.bukkit.entity.EntityType;
@@ -34,6 +35,8 @@ public class BoggedMock extends AbstractSkeletonMock implements Bogged
 	@Override
 	public void shear(@NotNull Sound.Source source)
 	{
+		Preconditions.checkNotNull(source, "The source cannot be null");
+
 		if (this.isInWorld())
 		{
 			this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_BOGGED_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);

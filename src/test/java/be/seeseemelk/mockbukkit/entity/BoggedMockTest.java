@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BoggedMockTest
@@ -30,6 +31,13 @@ class BoggedMockTest
 	void tearDown()
 	{
 		MockBukkit.unmock();
+	}
+
+	@Test
+	void shear_GivenIllegalArgument()
+	{
+		NullPointerException e = assertThrows(NullPointerException.class, () -> bogged.shear(null));
+		assertEquals("The source cannot be null", e.getMessage());
 	}
 
 	@Test
