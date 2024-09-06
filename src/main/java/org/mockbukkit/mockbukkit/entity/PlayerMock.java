@@ -87,7 +87,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -128,6 +127,17 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.PlayerListMock;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.map.MapViewMock;
+import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
+import org.mockbukkit.mockbukkit.sound.AudioExperience;
+import org.mockbukkit.mockbukkit.sound.SoundReceiver;
+import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -323,70 +333,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 *                                  does not inflict any potion effects.
 	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
-	public void simulateConsumeItem(@NotNull ItemStack consumable, boolean alwaysInflictPotionEffect)
+	@Deprecated
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
 	{
-		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
-		// potions are not considered edible, but they can be consumed
-		Preconditions.checkArgument(consumable.getType().isEdible() || consumable.getType() == Material.POTION, "Item is not Consumable");
-
-		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
-		//how it would sound like
-
-		//Drinks:Slurp Slurp Slurp
-		//Food: Yum Yum Yum
-
-		GenericGameEvent consumeStartEvent =
-				new GenericGameEvent(
-						GameEvent.ITEM_INTERACT_START,
-						this.getLocation(),
-						this,
-						16,
-						!Bukkit.isPrimaryThread());
-
-		Bukkit.getPluginManager().callEvent(consumeStartEvent);
-
-		PlayerItemConsumeEvent event = new PlayerItemConsumeEvent(this, consumable);
-		Bukkit.getPluginManager().callEvent(event);
-
-		if (event.isCancelled())
-		{
-			GenericGameEvent stopConsumeEvent =
-					new GenericGameEvent(
-							GameEvent.ITEM_INTERACT_FINISH,
-							this.getLocation(),
-							this,
-							16,
-							!Bukkit.isPrimaryThread());
-			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
-		}
-		else
-		{
-			// apply status effects
-			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
-			if (foodConsumption != null)
-			{
-				for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
-				{
-					if (foodEffect.probability() == 1 || alwaysInflictPotionEffect)
-					{
-						addPotionEffect(foodEffect.potionEffect());
-					}
-				}
-			}
-			else if (consumable.hasItemMeta() && consumable.getItemMeta() instanceof PotionMeta potionMeta)
-			{
-				PotionType.InternalPotionData internalPotionData = server.getUnsafe().getInternalPotionData(Registry.POTION.getKey(potionMeta.getBasePotionType()));
-				for (PotionEffect baseEffect : internalPotionData.getPotionEffects())
-				{
-					addPotionEffect(baseEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
-				}
-				for (PotionEffect customEffect : potionMeta.getCustomEffects())
-				{
-					addPotionEffect(customEffect, EntityPotionEffectEvent.Cause.POTION_DRINK);
-				}
-			}
-		}
-		consumedItems.add(consumable);
+		consumedItems.add(new PlayerSimulation(this).simulateConsumeItem(consumable));
 	}
 
 	/**
@@ -422,24 +372,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
-	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
-	 * {@code InstaBreak} is enabled, it will not automatically fire a {@link BlockBreakEvent}. It will also still fire
-	 * a {@link BlockDamageEvent} even if the player is not in survival mode.
-	 *
-	 * @param block The block to damage.
-	 * @param face  The side to damage the block from
-	 * @return The event that has been fired.
-	 */
-	private @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block, BlockFace face)
-	{
-		Preconditions.checkNotNull(block, "Block cannot be null");
-		Preconditions.checkNotNull(face, "Face can not be null");
-		BlockDamageEvent event = new BlockDamageEvent(this, block, face, getItemInHand(), false);
-		Bukkit.getPluginManager().callEvent(event);
-		return event;
-	}
-
-	/**
 	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
 	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
 	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
@@ -452,38 +384,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
-		return simulateBlockDamage(block, BlockFace.DOWN);
-	}
-
-	/**
-	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
-	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
-	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
-	 * {@link BlockBreakEvent}.
-	 *
-	 * @param block The block to damage.
-	 * @param face  The face to damage the block on
-	 * @return the event that was fired, {@code null} if the player was not in
-	 * survival gamemode.
-	 */
-	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block, BlockFace face)
-	{
-		Preconditions.checkNotNull(block, "Block cannot be null");
-		if (super.getGameMode() != GameMode.SURVIVAL)
-		{
-			return null;
-		}
-
-		BlockDamageEvent event = simulateBlockDamagePure(block, face);
-		if (event.getInstaBreak())
-		{
-			BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
-			Bukkit.getPluginManager().callEvent(breakEvent);
-			if (!breakEvent.isCancelled())
-				block.setType(Material.AIR);
-		}
-
-		return event;
+		return new PlayerSimulation(this).simulateBlockDamage(block);
 	}
 
 	/**
@@ -497,30 +398,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
-		return simulateBlockBreak(block, BlockFace.DOWN);
-	}
-
-	/**
-	 * Simulates the player breaking a block. This method will not break the block if the player is in adventure or
-	 * spectator mode. If the player is in survival mode, the player will first damage the block.
-	 *
-	 * @param block The block to break.
-	 * @param face  The facing to break the block from
-	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
-	 * or in spectator mode.
-	 */
-	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block, BlockFace face)
-	{
-		Preconditions.checkNotNull(block, "Block cannot be null");
-		if ((super.getGameMode() == GameMode.SPECTATOR || super.getGameMode() == GameMode.ADVENTURE)
-				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block, face).isCancelled()))
-			return null;
-
-		BlockBreakEvent event = new BlockBreakEvent(block, this);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-			block.setType(Material.AIR);
-		return event;
+		return new PlayerSimulation(this).simulateBlockBreak(block);
 	}
 
 	/**
@@ -532,22 +410,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired. {@code null} if it wasn't or the player was in adventure
 	 * mode.
 	 */
+	@Deprecated
 	public @Nullable BlockPlaceEvent simulateBlockPlace(@NotNull Material material, @NotNull Location location)
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
-		Preconditions.checkNotNull(location, "Location cannot be null");
-		if (super.getGameMode() == GameMode.ADVENTURE || super.getGameMode() == GameMode.SPECTATOR)
-			return null;
-		Block block = location.getBlock();
-		BlockState blockState = block.getState();
-		block.setType(material);
-		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, getItemInHand(), this, true, EquipmentSlot.HAND);
-		Bukkit.getPluginManager().callEvent(event);
-		if (event.isCancelled() || !event.canBuild())
-		{
-			blockState.update(true, false);
-		}
-		return event;
+		return new PlayerSimulation(this).simulateBlockPlace(material, location);
 	}
 
 	/**
@@ -556,9 +422,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot The slot in the player's open inventory
 	 * @return The event that was fired.
 	 */
+	@Deprecated
 	public @NotNull InventoryClickEvent simulateInventoryClick(int slot)
 	{
-		return simulateInventoryClick(getOpenInventory(), slot);
+		return new PlayerSimulation(this).simulateInventoryClick(slot);
 	}
 
 	/**
@@ -568,9 +435,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
+	@Deprecated
 	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, int slot)
 	{
-		return simulateInventoryClick(inventoryView, ClickType.LEFT, slot);
+		return new PlayerSimulation(this).simulateInventoryClick(inventoryView, slot);
 	}
 
 	/**
@@ -581,12 +449,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
+	@Deprecated
 	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, @NotNull ClickType clickType, int slot)
 	{
-		Preconditions.checkNotNull(inventoryView, "InventoryView cannot be null");
-		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView, InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
-		Bukkit.getPluginManager().callEvent(inventoryClickEvent);
-		return inventoryClickEvent;
+		return new PlayerSimulation(this).simulateInventoryClick(inventoryView, clickType, slot);
 	}
 
 	/**
@@ -596,7 +462,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * {@link Player#getBedSpawnLocation()} or {@link World#getSpawnLocation()}. Lastly the health of this
 	 * {@link Player} will be restored and set to the max health.
 	 */
-	public void respawn()
+	public PlayerRespawnEvent respawn()
 	{
 		Location respawnLocation = getRespawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
@@ -613,9 +479,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Reset location and health
-		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+		this.setHealth(this.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		setLocation(event.getRespawnLocation().clone());
 		alive = true;
+		return event;
 	}
 
 	/**
@@ -624,15 +491,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param moveLocation Location to move player to
 	 * @return The event that is fired
 	 */
+	@Deprecated
 	public @NotNull PlayerMoveEvent simulatePlayerMove(@NotNull Location moveLocation)
 	{
-		Preconditions.checkNotNull(moveLocation, "Location cannot be null");
-		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
-		this.setLocation(event.getTo());
-		Bukkit.getPluginManager().callEvent(event);
-		if (event.isCancelled())
-			this.setLocation(event.getFrom());
-		return event;
+		return new PlayerSimulation(this).simulatePlayerMove(moveLocation);
 	}
 
 	@Override
@@ -1243,15 +1105,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param sneak Whether the player is beginning to sneak.
 	 * @return The event.
 	 */
+	@Deprecated
 	public @NotNull PlayerToggleSneakEvent simulateSneak(boolean sneak)
 	{
-		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneak);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			setSneaking(event.isSneaking());
-		}
-		return event;
+		return new PlayerSimulation(this).simulateSneak(sneak);
 	}
 
 	@Override
@@ -1272,15 +1129,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param sprint Whether the player is beginning to sprint.
 	 * @return The event.
 	 */
+	@Deprecated
 	public @NotNull PlayerToggleSprintEvent simulateSprint(boolean sprint)
 	{
-		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprint);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			this.sprinting = event.isSprinting();
-		}
-		return event;
+		return new PlayerSimulation(this).simulateSprint(sprint);
 	}
 
 	@Override
@@ -2323,15 +2175,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param fly Whether the player is starting to fly.
 	 * @return The event.
 	 */
+	@Deprecated
 	public @NotNull PlayerToggleFlightEvent simulateToggleFlight(boolean fly)
 	{
-		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, fly);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			this.flying = event.isFlying();
-		}
-		return event;
+		return new PlayerSimulation(this).simulateToggleFlight(fly);
 	}
 
 	@Override
