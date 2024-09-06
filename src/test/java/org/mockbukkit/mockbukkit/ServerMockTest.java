@@ -1177,9 +1177,9 @@ class ServerMockTest
 	}
 
 	@Test
-	void testIsShouldSendingChatPreviewsDefault()
+	void testIsShouldSendingChatPreviewsThrows()
 	{
-		assertFalse(server.shouldSendChatPreviews());
+		assertThrows(UnsupportedOperationException.class, () -> server.shouldSendChatPreviews());
 	}
 
 	@Test
