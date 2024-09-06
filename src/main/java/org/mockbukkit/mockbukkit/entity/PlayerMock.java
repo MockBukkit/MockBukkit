@@ -868,6 +868,19 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return getLastSeen();
 	}
 
+	/**
+	 * No longer used.
+	 *
+	 * @param time N/A.
+	 * @see PlayerListMock#setLastSeen(UUID, long)
+	 * @deprecated Moved to {@link PlayerListMock}.
+	 */
+	@Deprecated(forRemoval = true)
+	public void setLastPlayed(long time)
+	{
+		throw new UnsupportedOperationException("Deprecated; Does not do anything");
+	}
+
 	@Override
 	public boolean hasPlayedBefore()
 	{
