@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
-import org.bukkit.entity.EntityType;
-import org.jetbrains.annotations.NotNull;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

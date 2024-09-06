@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
-import org.mockbukkit.mockbukkit.util.io.BukkitObjectInputStreamMock;
-import org.mockbukkit.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
@@ -55,8 +50,11 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
+import org.mockbukkit.mockbukkit.util.io.BukkitObjectInputStreamMock;
+import org.mockbukkit.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.TestPlugin;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

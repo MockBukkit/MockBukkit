@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.plugin.MockCustomConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
