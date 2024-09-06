@@ -73,6 +73,7 @@ import org.mockbukkit.mockbukkit.entity.ParrotMock;
 import org.mockbukkit.mockbukkit.entity.PigMock;
 import org.mockbukkit.mockbukkit.entity.PigZombieMock;
 import org.mockbukkit.mockbukkit.entity.PillagerMock;
+import org.mockbukkit.mockbukkit.entity.PigZombieMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.PolarBearMock;
 import org.mockbukkit.mockbukkit.entity.PoweredMinecartMock;
