@@ -10,7 +10,6 @@ import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
-import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;

@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
 import org.jetbrains.annotations.NotNull;

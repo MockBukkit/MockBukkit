@@ -71,7 +71,6 @@ import org.mockbukkit.mockbukkit.entity.OcelotMock;
 import org.mockbukkit.mockbukkit.entity.PandaMock;
 import org.mockbukkit.mockbukkit.entity.ParrotMock;
 import org.mockbukkit.mockbukkit.entity.PigMock;
-import org.mockbukkit.mockbukkit.entity.PigZombieMock;
 import org.mockbukkit.mockbukkit.entity.PillagerMock;
 import org.mockbukkit.mockbukkit.entity.PigZombieMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
