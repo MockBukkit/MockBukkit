@@ -1173,12 +1173,6 @@ class ServerMockTest
 	}
 
 	@Test
-	void testIsShouldSendingChatPreviewsThrows()
-	{
-		assertThrows(UnsupportedOperationException.class, () -> server.shouldSendChatPreviews());
-	}
-
-	@Test
 	void testGetOnlineModeDefault()
 	{
 		assertTrue(server.getOnlineMode());
