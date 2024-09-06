@@ -144,7 +144,6 @@ public class UnsafeValuesMock implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public Material toLegacy(Material material)
 	{
@@ -615,6 +614,5 @@ public class UnsafeValuesMock implements UnsafeValues
 	{
 		return Material.getMaterial(material);
 	}
-
 
 }
