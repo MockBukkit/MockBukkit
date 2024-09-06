@@ -1,12 +1,14 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import com.destroystokyo.paper.loottable.LootableInventory;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
-import com.destroystokyo.paper.loottable.LootableInventory;
 import org.bukkit.loot.LootTable;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
