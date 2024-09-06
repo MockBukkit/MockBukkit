@@ -15,6 +15,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -167,4 +170,5 @@ class BoatMockTest
 				Arguments.of(Boat.Type.MANGROVE, Material.MANGROVE_BOAT)
 		);
 	}
+
 }
