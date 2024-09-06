@@ -1,8 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.destroystokyo.paper.loottable.LootableInventory;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.loot.LootTable;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;

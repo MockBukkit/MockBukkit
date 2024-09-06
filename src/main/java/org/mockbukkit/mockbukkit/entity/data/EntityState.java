@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.NotNull;
 

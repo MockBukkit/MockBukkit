@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import com.destroystokyo.paper.MaterialTags;

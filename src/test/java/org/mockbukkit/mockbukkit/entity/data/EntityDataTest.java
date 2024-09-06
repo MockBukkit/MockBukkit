@@ -2,8 +2,6 @@ package org.mockbukkit.mockbukkit.entity.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
-
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +10,6 @@ import org.opentest4j.AssertionFailedError;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
