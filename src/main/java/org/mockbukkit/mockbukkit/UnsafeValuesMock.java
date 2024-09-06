@@ -48,6 +48,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;

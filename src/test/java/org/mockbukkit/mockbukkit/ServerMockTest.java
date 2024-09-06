@@ -1177,6 +1177,12 @@ class ServerMockTest
 	}
 
 	@Test
+	void testIsShouldSendingChatPreviewsDefault()
+	{
+		assertFalse(server.shouldSendChatPreviews());
+	}
+
+	@Test
 	void testGetOnlineModeDefault()
 	{
 		assertTrue(server.getOnlineMode());
