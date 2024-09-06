@@ -41,7 +41,7 @@ tasks {
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "be.seeseemelk.mockbukkit"
+				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit"
 			)
 		}
 	}
