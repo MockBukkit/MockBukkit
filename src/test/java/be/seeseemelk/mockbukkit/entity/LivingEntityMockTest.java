@@ -8,9 +8,12 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +21,15 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -264,6 +271,83 @@ class LivingEntityMockTest
 	{
 		livingEntity.setSwimming(true);
 		assertEquals(EntityState.SWIMMING, livingEntity.getEntityState());
+	}
+
+	@Test
+	void launchProjectile_GivenProjectileAsArgument()
+	{
+		@NotNull WorldMock world = server.addSimpleWorld("world");
+
+		Location newLocation = livingEntity.getLocation();
+		newLocation.setWorld(world);
+		livingEntity.setLocation(newLocation);
+
+		// Then
+		Snowball snowBall = livingEntity.launchProjectile(Snowball.class);
+
+		// Check entity created
+		assertNotNull(snowBall);
+
+		// Check velocity
+		@NotNull Vector actualVelocity = snowBall.getVelocity();
+		assertNotNull(actualVelocity);
+		assertEquals(0, actualVelocity.getX());
+		assertEquals(0, actualVelocity.getY());
+		assertEquals(0, actualVelocity.getZ());
+	}
+
+	@Test
+	void launchProjectile_GivenProjectileAndVelocityAsArgument()
+	{
+		@NotNull WorldMock world = server.addSimpleWorld("world");
+
+		Location newLocation = livingEntity.getLocation();
+		newLocation.setWorld(world);
+		livingEntity.setLocation(newLocation);
+
+		Vector velocity = new Vector(3, 2, 1);
+
+		// Then
+		Snowball snowBall = livingEntity.launchProjectile(Snowball.class, velocity);
+
+		// Check entity created
+		assertNotNull(snowBall);
+
+		// Check velocity
+		@NotNull Vector actualVelocity = snowBall.getVelocity();
+		assertNotNull(actualVelocity);
+		assertEquals(3, actualVelocity.getX());
+		assertEquals(2, actualVelocity.getY());
+		assertEquals(1, actualVelocity.getZ());
+	}
+
+	@Test
+	void launchProjectile_GivenProjectileAndVelocityAndFunctionAsArgument()
+	{
+		@NotNull WorldMock world = server.addSimpleWorld("world");
+
+		Location newLocation = livingEntity.getLocation();
+		newLocation.setWorld(world);
+		livingEntity.setLocation(newLocation);
+
+		Vector velocity = new Vector(3, 2, 1);
+		AtomicReference<Snowball> snowballCallback = new AtomicReference<>();
+
+		// Then
+		Snowball snowBall = livingEntity.launchProjectile(Snowball.class, velocity, snowballCallback::set);
+
+		// Check entity created
+		assertNotNull(snowBall);
+
+		// Check velocity
+		@NotNull Vector actualVelocity = snowBall.getVelocity();
+		assertNotNull(actualVelocity);
+		assertEquals(3, actualVelocity.getX());
+		assertEquals(2, actualVelocity.getY());
+		assertEquals(1, actualVelocity.getZ());
+
+		// Check function
+		assertSame(snowBall, snowballCallback.get());
 	}
 
 }
