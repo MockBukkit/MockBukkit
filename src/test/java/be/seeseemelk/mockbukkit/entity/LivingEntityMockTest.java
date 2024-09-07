@@ -287,6 +287,10 @@ class LivingEntityMockTest
 
 		// Check entity created
 		assertNotNull(snowBall);
+		Location spawnLocation = snowBall.getLocation();
+		assertEquals(0, spawnLocation.getX());
+		assertEquals(1.199999998509884D, spawnLocation.getY());
+		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
 		@NotNull Vector actualVelocity = snowBall.getVelocity();
@@ -312,6 +316,10 @@ class LivingEntityMockTest
 
 		// Check entity created
 		assertNotNull(snowBall);
+		Location spawnLocation = snowBall.getLocation();
+		assertEquals(0, spawnLocation.getX());
+		assertEquals(1.199999998509884D, spawnLocation.getY());
+		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
 		@NotNull Vector actualVelocity = snowBall.getVelocity();
@@ -338,6 +346,10 @@ class LivingEntityMockTest
 
 		// Check entity created
 		assertNotNull(snowBall);
+		Location spawnLocation = snowBall.getLocation();
+		assertEquals(0, spawnLocation.getX());
+		assertEquals(1.199999998509884D, spawnLocation.getY());
+		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
 		@NotNull Vector actualVelocity = snowBall.getVelocity();
