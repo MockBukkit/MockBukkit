@@ -185,6 +185,12 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
+	public @NotNull Map<Enchantment, Integer> getEnchantments()
+	{
+		return itemMeta.getEnchants();
+	}
+
+	@Override
 	public boolean isSimilar(@org.jetbrains.annotations.Nullable ItemStack stack)
 	{
 		if (stack == null) return false;

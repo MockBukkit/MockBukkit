@@ -412,14 +412,14 @@ class ArmorStandMockTest
 	@Test
 	void getEyeHeight_GivenNormalArmorStand()
 	{
-		assertEquals(1.67875D, armorStand.getEyeHeight());
+		assertEquals(1.7775D, armorStand.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenSmallArmorStand()
 	{
 		armorStand.setSmall(true);
-		assertEquals(0.839375D, armorStand.getEyeHeight());
+		assertEquals(0.88875D, armorStand.getEyeHeight());
 	}
 
 	@Test

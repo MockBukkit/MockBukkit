@@ -120,7 +120,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private Pose pose = Pose.STANDING;
 	private boolean isFixedPose = false;
 
-	private final EntityData entityData;
+	protected final EntityData entityData;
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
 
 	/**
