@@ -1678,8 +1678,9 @@ public class WorldMock implements World
 	@Override
 	public <T extends Entity> @NotNull T createEntity(@NotNull Location location, @NotNull Class<T> aClass)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		EntityMock entity = this.mockEntity(location, aClass, false);
+		Preconditions.checkState(aClass.isInstance(entity), "Entity {} is not an instance of {}.", entity.getClass().getName(), aClass.getName());
+		return aClass.cast(entity);
 	}
 
 	@Override
