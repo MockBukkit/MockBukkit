@@ -465,13 +465,6 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public @Nullable FeatureFlag getFeatureFlag(@NotNull NamespacedKey key)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
 	{
 		return new MockInternalPotionData(key);
