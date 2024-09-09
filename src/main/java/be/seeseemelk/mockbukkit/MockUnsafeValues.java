@@ -9,6 +9,7 @@ import be.seeseemelk.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
+import com.google.gson.JsonObject;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.registry.tag.TagKey;
@@ -329,6 +330,20 @@ public class MockUnsafeValues implements UnsafeValues
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack deserializeItemFromJson(@NotNull JsonObject jsonObject) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
