@@ -48,6 +48,12 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
 
 MockBukkit can easily be included in your project using either Maven or gradle.
 
+> [!TIP]
+> Currently, the newest version available is
+>
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
+
+
 > Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
 
 <details>
@@ -67,10 +73,6 @@ dependencies {
     testImplementation 'com.github.seeseemelk:MockBukkit-v1.21:3.95.1'
 }
 ```
-> [!TIP]
-> Currently, the newest version available is
->
-> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
 use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
@@ -94,7 +96,6 @@ This is because back-porting every single patch on every branch is incredibly ti
 development of MockBukkit.
 
 </details>
-
 
 <details>
 <summary><h3>Adding MockBukkit via Maven</h3></summary>
@@ -122,11 +123,6 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
 
 The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
 Maven lifecycle and not in your final product. 
-
-> [!TIP]
-> Currently, the newest version available is
-> 
-> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
 use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
