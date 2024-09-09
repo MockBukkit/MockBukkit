@@ -67,6 +67,10 @@ dependencies {
     testImplementation 'com.github.seeseemelk:MockBukkit-v1.21:3.95.1'
 }
 ```
+> [!TIP]
+> Currently, the newest version available is
+>
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
 use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
@@ -110,14 +114,19 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.21</artifactId>
-    <version>3.95.1</version>
+    <version>[version]</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
 ```
 
 The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
-Maven lifecycle and not in your final product.
+Maven lifecycle and not in your final product. 
+
+> [!TIP]
+> Currently, the newest version available is
+> 
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
 use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
