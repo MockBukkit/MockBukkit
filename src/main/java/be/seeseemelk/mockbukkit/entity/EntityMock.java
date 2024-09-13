@@ -1399,15 +1399,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean collidesAt(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBoundingBox().contains(location.toVector());
 	}
 
 	@Override
 	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBoundingBox().overlaps(boundingBox);
 	}
 
 	@Override
