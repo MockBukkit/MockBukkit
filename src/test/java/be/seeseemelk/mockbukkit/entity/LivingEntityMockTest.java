@@ -6,9 +6,28 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.DragonFireball;
+import org.bukkit.entity.Egg;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.FishHook;
+import org.bukkit.entity.LargeFireball;
+import org.bukkit.entity.LingeringPotion;
+import org.bukkit.entity.LlamaSpit;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.ShulkerBullet;
+import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
+import org.bukkit.entity.SpectralArrow;
+import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.ThrownPotion;
+import org.bukkit.entity.TippedArrow;
+import org.bukkit.entity.Trident;
+import org.bukkit.entity.WindCharge;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -17,12 +36,13 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -329,8 +349,29 @@ class LivingEntityMockTest
 		assertEquals(1, actualVelocity.getZ());
 	}
 
-	@Test
-	void launchProjectile_GivenProjectileAndVelocityAndFunctionAsArgument()
+	@ParameterizedTest
+	@ValueSource(classes = {
+		Arrow.class,
+		DragonFireball.class,
+		Egg.class,
+		EnderPearl.class,
+		Firework.class,
+		FishHook.class,
+		LargeFireball.class,
+		LingeringPotion.class,
+		LlamaSpit.class,
+		ShulkerBullet.class,
+		SmallFireball.class,
+		Snowball.class,
+		SpectralArrow.class,
+		ThrownExpBottle.class,
+		ThrownPotion.class,
+		TippedArrow.class,
+		Trident.class,
+		WindCharge.class,
+		WitherSkull.class,
+	})
+	<T extends Projectile> void launchProjectile_GivenProjectileAndVelocityAndFunctionAsArgument(Class<T> tClass)
 	{
 		@NotNull WorldMock world = server.addSimpleWorld("world");
 
@@ -339,27 +380,27 @@ class LivingEntityMockTest
 		livingEntity.setLocation(newLocation);
 
 		Vector velocity = new Vector(3, 2, 1);
-		AtomicReference<Snowball> snowballCallback = new AtomicReference<>();
+		AtomicReference<T> snowballCallback = new AtomicReference<>();
 
 		// Then
-		Snowball snowBall = livingEntity.launchProjectile(Snowball.class, velocity, snowballCallback::set);
+		T projectile = livingEntity.launchProjectile(tClass, velocity, snowballCallback::set);
 
 		// Check entity created
-		assertNotNull(snowBall);
-		Location spawnLocation = snowBall.getLocation();
+		assertNotNull(projectile);
+		Location spawnLocation = projectile.getLocation();
 		assertEquals(0, spawnLocation.getX());
 		assertEquals(1.199999998509884D, spawnLocation.getY());
 		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
-		@NotNull Vector actualVelocity = snowBall.getVelocity();
+		@NotNull Vector actualVelocity = projectile.getVelocity();
 		assertNotNull(actualVelocity);
 		assertEquals(3, actualVelocity.getX());
 		assertEquals(2, actualVelocity.getY());
 		assertEquals(1, actualVelocity.getZ());
 
 		// Check function
-		assertSame(snowBall, snowballCallback.get());
+		assertSame(projectile, snowballCallback.get());
 	}
 
 }
