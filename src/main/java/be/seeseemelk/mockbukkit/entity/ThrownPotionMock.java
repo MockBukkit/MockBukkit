@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -75,6 +76,12 @@ public class ThrownPotionMock extends ThrowableProjectileMock implements ThrownP
 		{
 			this.setPotionMeta(meta);
 		}
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.POTION;
 	}
 
 }
