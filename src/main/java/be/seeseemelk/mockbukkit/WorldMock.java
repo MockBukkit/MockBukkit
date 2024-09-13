@@ -1127,42 +1127,6 @@ public class WorldMock implements World
 		{
 			return new FireworkMock(server, UUID.randomUUID());
 		}
-// 		TODO: This code is incomplete and needs to be worked on
-//		else if (clazz == Hanging.class)
-//		{
-//			// LeashHitch has no direction and is always centered
-//			if (LeashHitch.class.isAssignableFrom(clazz))
-//			{
-//				throw new UnimplementedOperationException();
-//			}
-//			BlockFace spawnFace = BlockFace.SELF;
-//			BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
-//					? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
-//					: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
-//			for (BlockFace face : faces)
-//			{
-//				Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
-//				if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
-//					continue;
-//
-//				boolean taken = false;
-//
-//				// TODO: Check if the entity's bounding box collides with any other hanging entities.
-//
-//				if (taken)
-//					continue;
-//
-//				spawnFace = face;
-//				break;
-//			}
-//			if (spawnFace == BlockFace.SELF)
-//			{
-//				spawnFace = BlockFace.SOUTH;
-//			}
-//			spawnFace = spawnFace.getOppositeFace();
-//			// TODO: Spawn entities here.
-//			throw new UnimplementedOperationException();
-//		}
 		else if (clazz == Item.class)
 		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
