@@ -1257,10 +1257,16 @@ class WorldMockTest
 	void testSpawnEntity(EntityType type, Class<? extends Entity> expectedClass)
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), type);
+		Location spawnLocation = new Location(world, 1, 3, 2);
+
+		Entity entity = world.spawnEntity(spawnLocation, type);
+
 		assertInstanceOf(expectedClass, entity);
 		assertTrue(entity.isValid());
 		assertEquals(type, entity.getType());
+
+		Location actualLocation = entity.getLocation();
+		assertEquals(spawnLocation, actualLocation);
 	}
 
 	public static Stream<Arguments> getSpawnableEntities()
