@@ -9,9 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,8 +38,6 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
 	public final @Nullable Object extra;
 	public boolean classLoadSucceed = false;
-	public boolean denyAsyncPreLoginEvent = false;
-	public boolean denyLoginEvent = false;
 
 	public TestPlugin()
 	{
@@ -127,24 +123,6 @@ public class TestPlugin extends JavaPlugin implements Listener
 			catch (InterruptedException | BrokenBarrierException e)
 			{
 			}
-		}
-	}
-
-	@EventHandler
-	public void onAsyncPreLogin(AsyncPlayerPreLoginEvent event)
-	{
-		if (denyAsyncPreLoginEvent)
-		{
-			event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
-		}
-	}
-
-	@EventHandler
-	public void onLogin(PlayerLoginEvent event)
-	{
-		if (denyLoginEvent)
-		{
-			event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
 		}
 	}
 
