@@ -287,7 +287,7 @@ class MockBukkitTest
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			fail("Couldn't read config input stream", e);
 		}
 
 	}
@@ -307,7 +307,7 @@ class MockBukkitTest
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			fail("Couldn't read config input stream", e);
 		}
 
 	}
