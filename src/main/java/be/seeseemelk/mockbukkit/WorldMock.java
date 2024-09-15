@@ -96,6 +96,7 @@ import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownPotionMock;
 import be.seeseemelk.mockbukkit.entity.TridentMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
@@ -145,7 +146,6 @@ import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Waterlogged;
@@ -199,7 +199,6 @@ import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
-import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Illusioner;
 import org.bukkit.entity.Interaction;
@@ -247,6 +246,7 @@ import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
@@ -1109,6 +1109,13 @@ public class WorldMock implements World
 
 	private <T extends Entity> @NotNull EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
+		@NotNull EntityMock entity = mockEntity(clazz);
+		entity.setLocation(location);
+		return entity;
+	}
+
+	private <T extends Entity> @NotNull EntityMock mockEntity(@NotNull Class<T> clazz)
+	{
 		AsyncCatcher.catchOp("entity add");
 		if (clazz == ArmorStand.class)
 		{
@@ -1121,41 +1128,6 @@ public class WorldMock implements World
 		else if (clazz == Firework.class)
 		{
 			return new FireworkMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Hanging.class)
-		{
-			// LeashHitch has no direction and is always centered
-			if (LeashHitch.class.isAssignableFrom(clazz))
-			{
-				throw new UnimplementedOperationException();
-			}
-			BlockFace spawnFace = BlockFace.SELF;
-			BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
-					? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
-					: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
-			for (BlockFace face : faces)
-			{
-				Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
-				if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
-					continue;
-
-				boolean taken = false;
-
-				// TODO: Check if the entity's bounding box collides with any other hanging entities.
-
-				if (taken)
-					continue;
-
-				spawnFace = face;
-				break;
-			}
-			if (spawnFace == BlockFace.SELF)
-			{
-				spawnFace = BlockFace.SOUTH;
-			}
-			spawnFace = spawnFace.getOppositeFace();
-			// TODO: Spawn entities here.
-			throw new UnimplementedOperationException();
 		}
 		else if (clazz == Item.class)
 		{
@@ -1553,6 +1525,10 @@ public class WorldMock implements World
 		{
 			return new FallingBlockMock(server, UUID.randomUUID());
 		}
+		else if (clazz == ThrownPotion.class)
+		{
+			return new ThrownPotionMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Armadillo.class)
 		{
 			return new ArmadilloMock(server, UUID.randomUUID());
@@ -1690,8 +1666,9 @@ public class WorldMock implements World
 	@Override
 	public <T extends Entity> @NotNull T createEntity(@NotNull Location location, @NotNull Class<T> aClass)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		EntityMock entity = this.mockEntity(location, aClass, false);
+		Preconditions.checkState(aClass.isInstance(entity), "Entity {} is not an instance of {}.", entity.getClass().getName(), aClass.getName());
+		return aClass.cast(entity);
 	}
 
 	@Override
