@@ -32,6 +32,7 @@ import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EnderSignalMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EndermiteMock;
+import be.seeseemelk.mockbukkit.entity.EvokerFangsMock;
 import be.seeseemelk.mockbukkit.entity.EvokerMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
@@ -50,6 +51,7 @@ import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
+import be.seeseemelk.mockbukkit.entity.InteractionMock;
 import be.seeseemelk.mockbukkit.entity.IronGolemMock;
 import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
@@ -91,6 +93,7 @@ import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownPotionMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.VindicatorMock;
@@ -1255,10 +1258,16 @@ class WorldMockTest
 	void testSpawnEntity(EntityType type, Class<? extends Entity> expectedClass)
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), type);
+		Location spawnLocation = new Location(world, 1, 3, 2);
+
+		Entity entity = world.spawnEntity(spawnLocation, type);
+
 		assertInstanceOf(expectedClass, entity);
 		assertTrue(entity.isValid());
 		assertEquals(type, entity.getType());
+
+		Location actualLocation = entity.getLocation();
+		assertEquals(spawnLocation, actualLocation);
 	}
 
 	public static Stream<Arguments> getSpawnableEntities()
@@ -1356,13 +1365,16 @@ class WorldMockTest
 				Arguments.of(EntityType.RAVAGER, RavagerMock.class),
 				Arguments.of(EntityType.VINDICATOR, VindicatorMock.class),
 				Arguments.of(EntityType.EVOKER, EvokerMock.class),
+				Arguments.of(EntityType.EVOKER_FANGS, EvokerFangsMock.class),
 				Arguments.of(EntityType.ILLUSIONER, IllusionerMock.class),
+				Arguments.of(EntityType.INTERACTION, InteractionMock.class),
 				Arguments.of(EntityType.IRON_GOLEM, IronGolemMock.class),
 				Arguments.of(EntityType.SNOW_GOLEM, SnowmanMock.class),
 				Arguments.of(EntityType.ITEM_FRAME, ItemFrameMock.class),
 				Arguments.of(EntityType.GLOW_ITEM_FRAME, GlowItemFrameMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class),
 				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class),
+				Arguments.of(EntityType.POTION, ThrownPotionMock.class),
 				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class),
 				Arguments.of(EntityType.EYE_OF_ENDER, EnderSignalMock.class)
 		);

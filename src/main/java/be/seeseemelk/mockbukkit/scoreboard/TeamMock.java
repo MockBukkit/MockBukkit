@@ -9,18 +9,22 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
@@ -449,8 +453,18 @@ public class TeamMock implements Team
 	@Override
 	public @NotNull Iterable<? extends Audience> audiences()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		checkRegistered();
+
+		Set<String> entriesList = getEntries();
+		List<Audience> audiences = new ArrayList<>(entriesList.size());
+		for (String playerName : entriesList) {
+			Player player = Bukkit.getPlayerExact(playerName);
+			if (player != null) {
+				audiences.add(player);
+			}
+		}
+
+		return audiences;
 	}
 
 }

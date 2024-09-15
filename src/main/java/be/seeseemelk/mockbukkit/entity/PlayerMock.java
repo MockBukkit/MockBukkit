@@ -3177,13 +3177,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<? super T> function)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
 	{
 		// TODO Auto-generated method stub
