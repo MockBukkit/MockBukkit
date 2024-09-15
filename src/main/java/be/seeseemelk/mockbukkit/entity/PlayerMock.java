@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.boss.BossBarImplementationMock;
 import be.seeseemelk.mockbukkit.conversations.ConversationTracker;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.food.FoodConsumption;
@@ -24,6 +25,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -62,6 +64,7 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.TileState;
@@ -426,18 +429,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * a {@link BlockDamageEvent} even if the player is not in survival mode.
 	 *
 	 * @param block The block to damage.
+	 * @param face  The side to damage the block from
 	 * @return The event that has been fired.
 	 */
-	protected @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
+	private @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block, BlockFace face)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
+		Preconditions.checkNotNull(face, "Face can not be null");
+		BlockDamageEvent event = new BlockDamageEvent(this, block, face, getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
 	}
 
 	/**
-	 * Simulates the player damaging a block. Note that this method does not anything unless the player is in survival
+	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
 	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
 	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
 	 * {@link BlockBreakEvent}.
@@ -446,7 +451,24 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return the event that was fired, {@code null} if the player was not in
 	 * survival gamemode.
 	 */
+	@Deprecated
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
+	{
+		return simulateBlockDamage(block, BlockFace.DOWN);
+	}
+
+	/**
+	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
+	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
+	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
+	 * {@link BlockBreakEvent}.
+	 *
+	 * @param block The block to damage.
+	 * @param face  The face to damage the block on
+	 * @return the event that was fired, {@code null} if the player was not in
+	 * survival gamemode.
+	 */
+	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block, BlockFace face)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
 		if (super.getGameMode() != GameMode.SURVIVAL)
@@ -454,7 +476,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return null;
 		}
 
-		BlockDamageEvent event = simulateBlockDamagePure(block);
+		BlockDamageEvent event = simulateBlockDamagePure(block, face);
 		if (event.getInstaBreak())
 		{
 			BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
@@ -474,11 +496,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
 	 * or in spectator mode.
 	 */
+	@Deprecated
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
+	{
+		return simulateBlockBreak(block, BlockFace.DOWN);
+	}
+
+	/**
+	 * Simulates the player breaking a block. This method will not break the block if the player is in adventure or
+	 * spectator mode. If the player is in survival mode, the player will first damage the block.
+	 *
+	 * @param block The block to break.
+	 * @param face  The facing to break the block from
+	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
+	 * or in spectator mode.
+	 */
+	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block, BlockFace face)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
 		if ((super.getGameMode() == GameMode.SPECTATOR || super.getGameMode() == GameMode.ADVENTURE)
-				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block, face).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -2531,6 +2568,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void showBossBar(@NotNull BossBar bar)
 	{
 		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		BossBarImplementation.get(bar, BossBarImplementationMock.class).playerShow(this);
 		this.bossBars.add(bar);
 	}
 
@@ -2538,6 +2576,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void hideBossBar(@NotNull BossBar bar)
 	{
 		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		BossBarImplementation.get(bar, BossBarImplementationMock.class).playerHide(this);
 		this.bossBars.remove(bar);
 	}
 
@@ -2778,8 +2817,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void updateCommands()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// NO OP, only updates commands client side, MockBukkit is only serverside
 	}
 
 	@Override
@@ -3139,13 +3177,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<? super T> function)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
 	{
 		// TODO Auto-generated method stub
@@ -3380,6 +3411,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return EntityState.SLEEPING;
 		}
 		return super.getEntityState();
+	}
+
+	@Override
+	public void remove()
+	{
+		throw new UnsupportedOperationException("Players can't be removed with this method, use kick() instead");
 	}
 
 	@Override

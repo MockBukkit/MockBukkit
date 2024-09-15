@@ -125,14 +125,14 @@ class EndermanMockTest
 	@Test
 	void getEyeHeight_WithDefaultState()
 	{
-		assertEquals(2.465D, endermanMock.getEyeHeight());
+		assertEquals(2.55D, endermanMock.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WithAngryState()
 	{
 		endermanMock.setScreaming(true);
-		assertEquals(2.7624999999999997D, endermanMock.getEyeHeight());
+		assertEquals(2.857758621D, endermanMock.getEyeHeight());
 	}
 
 }

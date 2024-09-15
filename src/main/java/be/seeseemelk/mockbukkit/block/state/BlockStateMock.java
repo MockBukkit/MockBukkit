@@ -420,65 +420,96 @@ public class BlockStateMock implements BlockState
 		{
 			return new SkullMock(block);
 		}
-		switch (block.getType())
+
+		return switch (block.getType())
 		{
-		case STRUCTURE_BLOCK:
-			return new StructureMock(block);
-		case SMOKER:
-			return new SmokerMock(block);
-		case END_GATEWAY:
-			return new EndGatewayMock(block);
-		case SCULK_CATALYST:
-			return new SculkCatalystMock(block);
-		case SCULK_SHRIEKER:
-			return new SculkShriekerMock(block);
-		case SCULK_SENSOR:
-			return new SculkSensorMock(block);
-		case BEACON:
-			return new BeaconMock(block);
-		case BEEHIVE:
-			return new BeehiveMock(block);
-		case BREWING_STAND:
-			return new BrewingStandMock(block);
-		case BLAST_FURNACE:
-			return new BlastFurnaceMock(block);
-		case COMPARATOR:
-			return new ComparatorMock(block);
-		case CONDUIT:
-			return new ConduitMock(block);
-		case ENCHANTING_TABLE:
-			return new EnchantingTableMock(block);
-		case JIGSAW:
-			return new JigsawMock(block);
-		case JUKEBOX:
-			return new JukeboxMock(block);
-		case SPAWNER:
-			return new CreatureSpawnerMock(block);
-		case DAYLIGHT_DETECTOR:
-			return new DaylightDetectorMock(block);
-		case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK:
-			return new CommandBlockMock(block);
-		case CAMPFIRE, SOUL_CAMPFIRE:
-			return new CampfireMock(block);
-		case BELL:
-			return new BellMock(block);
-		case LECTERN:
-			return new LecternMock(block);
-		case HOPPER:
-			return new HopperMock(block);
-		case BARREL:
-			return new BarrelMock(block);
-		case DISPENSER:
-			return new DispenserMock(block);
-		case DROPPER:
-			return new DropperMock(block);
-		case CHEST, TRAPPED_CHEST:
-			return new ChestMock(block);
-		case ENDER_CHEST:
-			return new EnderChestMock(block);
-		default:
-			return new BlockStateMock(block);
+			case STRUCTURE_BLOCK -> new StructureMock(block);
+			case SMOKER -> new SmokerMock(block);
+			case END_GATEWAY -> new EndGatewayMock(block);
+			case SCULK_CATALYST -> new SculkCatalystMock(block);
+			case SCULK_SHRIEKER -> new SculkShriekerMock(block);
+			case SCULK_SENSOR -> new SculkSensorMock(block);
+			case BEACON -> new BeaconMock(block);
+			case BEEHIVE -> new BeehiveMock(block);
+			case BREWING_STAND -> new BrewingStandMock(block);
+			case BLAST_FURNACE -> new BlastFurnaceMock(block);
+			case COMPARATOR -> new ComparatorMock(block);
+			case CONDUIT -> new ConduitMock(block);
+			case ENCHANTING_TABLE -> new EnchantingTableMock(block);
+			case JIGSAW -> new JigsawMock(block);
+			case JUKEBOX -> new JukeboxMock(block);
+			case SPAWNER -> new CreatureSpawnerMock(block);
+			case DAYLIGHT_DETECTOR -> new DaylightDetectorMock(block);
+			case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK -> new CommandBlockMock(block);
+			case CAMPFIRE, SOUL_CAMPFIRE -> new CampfireMock(block);
+			case BELL -> new BellMock(block);
+			case LECTERN -> new LecternMock(block);
+			case HOPPER -> new HopperMock(block);
+			case BARREL -> new BarrelMock(block);
+			case DISPENSER -> new DispenserMock(block);
+			case DROPPER -> new DropperMock(block);
+			case CHEST, TRAPPED_CHEST -> new ChestMock(block);
+			case ENDER_CHEST -> new EnderChestMock(block);
+			default -> new BlockStateMock(block);
+		};
+	}
+
+	@NotNull
+	public static BlockStateMock mockState(@NotNull Material material)
+	{
+		// Special cases
+		if (Tag.BANNERS.isTagged(material))
+		{
+			return new BannerMock(material);
 		}
+		else if (MaterialTags.SHULKER_BOXES.isTagged(material))
+		{
+			return new ShulkerBoxMock(material);
+		}
+		else if (MaterialTags.SIGNS.isTagged(material))
+		{
+			return new SignMock(material);
+		}
+		else if (MaterialTags.BEDS.isTagged(material))
+		{
+			return new BedMock(material);
+		}
+		else if (MaterialTags.SKULLS.isTagged(material))
+		{
+			return new SkullMock(material);
+		}
+
+		return switch (material)
+		{
+			case STRUCTURE_BLOCK -> new StructureMock(material);
+			case SMOKER -> new SmokerMock(material);
+			case END_GATEWAY -> new EndGatewayMock(material);
+			case SCULK_CATALYST -> new SculkCatalystMock(material);
+			case SCULK_SHRIEKER -> new SculkShriekerMock(material);
+			case SCULK_SENSOR -> new SculkSensorMock(material);
+			case BEACON -> new BeaconMock(material);
+			case BEEHIVE -> new BeehiveMock(material);
+			case BREWING_STAND -> new BrewingStandMock(material);
+			case BLAST_FURNACE -> new BlastFurnaceMock(material);
+			case COMPARATOR -> new ComparatorMock(material);
+			case CONDUIT -> new ConduitMock(material);
+			case ENCHANTING_TABLE -> new EnchantingTableMock(material);
+			case JIGSAW -> new JigsawMock(material);
+			case JUKEBOX -> new JukeboxMock(material);
+			case SPAWNER -> new CreatureSpawnerMock(material);
+			case DAYLIGHT_DETECTOR -> new DaylightDetectorMock(material);
+			case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK -> new CommandBlockMock(material);
+			case CAMPFIRE, SOUL_CAMPFIRE -> new CampfireMock(material);
+			case BELL -> new BellMock(material);
+			case LECTERN -> new LecternMock(material);
+			case HOPPER -> new HopperMock(material);
+			case BARREL -> new BarrelMock(material);
+			case DISPENSER -> new DispenserMock(material);
+			case DROPPER -> new DropperMock(material);
+			case CHEST, TRAPPED_CHEST -> new ChestMock(material);
+			case ENDER_CHEST -> new EnderChestMock(material);
+			default -> new BlockStateMock(material);
+		};
 	}
 
 }

@@ -1,7 +1,8 @@
 {
 	"default": {
-		"height": 0.25,
-		"width": 0.25,
+		"height": 0.5,
+		"width": 0.5,
+		"eyeHeight": 0.13,
 		"baseDamage" : 8.0
 	}
 }

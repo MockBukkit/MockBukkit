@@ -50,7 +50,7 @@ class IronGolemMockTest
 	@Test
 	void getEyeHeight_GivenDefaultValue()
 	{
-		assertEquals(2.465D, ironGolem.getEyeHeight());
+		assertEquals(2.295D, ironGolem.getEyeHeight());
 	}
 
 	@Test

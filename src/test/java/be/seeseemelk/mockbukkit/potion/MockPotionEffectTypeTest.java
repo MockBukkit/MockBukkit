@@ -138,6 +138,20 @@ class MockPotionEffectTypeTest
 		assertNotNull(PotionEffectType.ABSORPTION.getEffectCategory());
 	}
 
+	@Test
+	void registryValue_defaults()
+	{
+		PotionEffectType potionEffectType = PotionEffectType.ABSORPTION;
+		assertEquals(PotionEffectType.Category.BENEFICIAL, potionEffectType.getEffectCategory());
+		assertEquals("effect.minecraft.absorption", potionEffectType.translationKey());
+		assertEquals("effect.minecraft.absorption", potionEffectType.getTranslationKey());
+		assertFalse(potionEffectType.isInstant());
+		assertEquals("ABSORPTION", potionEffectType.getName());
+		assertEquals(NamespacedKey.fromString("minecraft:absorption"), potionEffectType.getKey());
+		assertEquals(22, potionEffectType.getId());
+		assertEquals(2445989, potionEffectType.getColor().asRGB());
+	}
+
 
 	@ParameterizedTest
 	@MethodSource("getPotionEffectTypes")

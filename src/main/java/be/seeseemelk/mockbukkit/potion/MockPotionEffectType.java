@@ -34,17 +34,20 @@ public class MockPotionEffectType extends PotionEffectType
 	private final @NotNull Map<Attribute, AttributeModifier> attributeModifiers;
 	private final NamespacedKey key;
 	private final Category category;
+	private final String translationKey;
 
 
 	/**
-	 * @param key      The namespaced key representing this effect
-	 * @param id       The magic number representing this effect
-	 * @param name     The name of this effect
-	 * @param instant  Whether the effect is instant or not
-	 * @param color    The color of the effect
-	 * @param category The category of the effect
+	 * @param key            The namespaced key representing this effect
+	 * @param id             The magic number representing this effect
+	 * @param name           The name of this effect
+	 * @param instant        Whether the effect is instant or not
+	 * @param color          The color of the effect
+	 * @param category       The category of the effect
+	 * @param translationKey The translation key for this potion effect type
 	 */
-	public MockPotionEffectType(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant, @NotNull Color color, @NotNull Category category)
+	@ApiStatus.Internal
+	public MockPotionEffectType(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant, @NotNull Color color, @NotNull Category category, String translationKey)
 	{
 		super();
 
@@ -55,6 +58,7 @@ public class MockPotionEffectType extends PotionEffectType
 		this.color = Preconditions.checkNotNull(color);
 		this.attributeModifiers = new EnumMap<>(Attribute.class);
 		this.category = Preconditions.checkNotNull(category);
+		this.translationKey = translationKey;
 	}
 
 	/**
@@ -66,14 +70,14 @@ public class MockPotionEffectType extends PotionEffectType
 	 * @param instant Whether the effect type is instantly applied.
 	 * @param color   The color of the effect type.
 	 */
+	@Deprecated(forRemoval = true)
 	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
-		this(key, id, name, instant, color, Category.NEUTRAL);
+		this(key, id, name, instant, color, Category.NEUTRAL, "effect.mockbukkit.placeholder");
 	}
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #MockPotionEffectType(NamespacedKey, int, String, boolean, Color, Category)} instead.
 	 */
 	@Deprecated(forRemoval = true)
 	public MockPotionEffectType(JsonObject data)
@@ -83,7 +87,8 @@ public class MockPotionEffectType extends PotionEffectType
 				data.get("name").getAsString(),
 				data.get("instant").getAsBoolean(),
 				Color.fromRGB(data.get("rgb").getAsInt()),
-				Category.valueOf(data.get("category").getAsString())
+				Category.valueOf(data.get("category").getAsString()),
+				data.get("translationKey").getAsString()
 		);
 	}
 
@@ -204,8 +209,7 @@ public class MockPotionEffectType extends PotionEffectType
 	@Override
 	public @NotNull String translationKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.translationKey;
 	}
 
 	@ApiStatus.Internal
@@ -217,14 +221,14 @@ public class MockPotionEffectType extends PotionEffectType
 		boolean instant = data.get("instant").getAsBoolean();
 		Color color = Color.fromRGB(data.get("rgb").getAsInt());
 		Category category = Category.valueOf(data.get("category").getAsString());
-		return new MockPotionEffectType(key, id, name, instant, color, category);
+		String translationKey = data.get("translationKey").getAsString();
+		return new MockPotionEffectType(key, id, name, instant, color, category, translationKey);
 	}
 
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.translationKey;
 	}
 
 }

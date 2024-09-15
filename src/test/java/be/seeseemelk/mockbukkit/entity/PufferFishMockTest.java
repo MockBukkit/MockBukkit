@@ -83,21 +83,21 @@ class PufferFishMockTest
 	@Test
 	void getEyeHeight_GivenNormalPufferFish()
 	{
-		assertEquals(0.2975D, pufferFish.getEyeHeight());
+		assertEquals(0.2275D, pufferFish.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenSemiPuffed()
 	{
 		pufferFish.setPuffState(1);
-		assertEquals(0.4165D, pufferFish.getEyeHeight());
+		assertEquals(0.3185D, pufferFish.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenPuffed()
 	{
 		pufferFish.setPuffState(2);
-		assertEquals(0.595D, pufferFish.getEyeHeight());
+		assertEquals(0.455D, pufferFish.getEyeHeight());
 	}
 
 }

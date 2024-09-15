@@ -39,14 +39,14 @@ class DonkeyMockTest
 	@Test
 	void getEyeHeight_GivenDefaultDonkey()
 	{
-		assertEquals(1.275D, donkey.getEyeHeight());
+		assertEquals(1.425D, donkey.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyDonkey()
 	{
 		donkey.setBaby();
-		assertEquals(0.6375D, donkey.getEyeHeight());
+		assertEquals(0.7125D, donkey.getEyeHeight());
 	}
 
 }

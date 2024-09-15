@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.FireworkEffect;
@@ -133,6 +134,13 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	public boolean hasEffects()
 	{
 		return !effects.isEmpty();
+	}
+
+	@Override
+	public boolean hasPower()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

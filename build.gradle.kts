@@ -30,12 +30,12 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.19")
+	implementation("net.bytebuddy:byte-buddy:1.15.1")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
-	implementation("org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3")
-	implementation("org.apache.maven.resolver:maven-resolver-transport-http:1.7.3")
+	implementation("org.apache.maven.resolver:maven-resolver-connector-basic:1.9.18")
+	implementation("org.apache.maven.resolver:maven-resolver-transport-http:1.9.18")
 }
 
 tasks {
