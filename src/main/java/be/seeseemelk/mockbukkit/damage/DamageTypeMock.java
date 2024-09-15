@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.damage;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
@@ -10,49 +9,44 @@ import org.bukkit.damage.DamageEffect;
 import org.bukkit.damage.DamageScaling;
 import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 public class DamageTypeMock implements DamageType
 {
 
-	static final String EXHAUSTION = "exhaustion";
-	static final String DEATH_MESSAGE_TYPE = "deathMessageType";
-	static final String SOUND = "sound";
-	static final String DAMAGE_SCALING = "damageScaling";
+	static final String EXHAUSTION_KEY = "exhaustion";
+	static final String DEATH_MESSAGE_TYPE_KEY = "deathMessageType";
+	static final String SOUND_KEY = "sound";
+	static final String DAMAGE_SCALING_KEY = "damageScaling";
 	static final String KEY = "key";
+	static final String TRANSLATION_KEY = "translationKey";
 
-	/**
-	 * Create a {@link DamageTypeMock} from a {@link JsonObject}.
-	 * <p>
-	 * Example:
-	 * <pre>
-	 * {
-	 *       "key": "minecraft:in_fire",
-	 *       "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
-	 *       "sound": "minecraft:entity.player.hurt_on_fire",
-	 *       "deathMessageType": "DEFAULT",
-	 *       "exhaustion": 0.1
-	 * }
-	 * </pre>
-	 *
-	 * @param data The json data.
-	 * @return The damage type created from the JSON
-	 */
+
+	private final DamageScaling damageScaling;
+	private final DamageEffectMock damageEffect;
+	private final NamespacedKey namespacedKey;
+	private final DeathMessageType deathMessageType;
+	private final float exhaustion;
+	private final String translationKey;
+
+	@ApiStatus.Internal
 	public static DamageTypeMock from(JsonObject data)
 	{
-		Preconditions.checkArgument(data != null, "JsonObject can't be null");
+		Preconditions.checkNotNull(data, "JsonObject can't be null");
 		Preconditions.checkArgument(data.has(KEY), "JsonObject does not have a field named 'key'");
-		Preconditions.checkArgument(data.has(DAMAGE_SCALING), "JsonObject does not have a field named 'damageScaling'");
-		Preconditions.checkArgument(data.has(SOUND), "JsonObject does not have a field named 'sound'");
-		Preconditions.checkArgument(data.has(DEATH_MESSAGE_TYPE), "JsonObject does not have a field named 'deathMessageType'");
-		Preconditions.checkArgument(data.has(EXHAUSTION), "JsonObject does not have a field named 'exhaustion'");
+		Preconditions.checkArgument(data.has(DAMAGE_SCALING_KEY), "JsonObject does not have a field named 'damageScaling'");
+		Preconditions.checkArgument(data.has(SOUND_KEY), "JsonObject does not have a field named 'sound'");
+		Preconditions.checkArgument(data.has(DEATH_MESSAGE_TYPE_KEY), "JsonObject does not have a field named 'deathMessageType'");
+		Preconditions.checkArgument(data.has(EXHAUSTION_KEY), "JsonObject does not have a field named 'exhaustion'");
 
 		// Retrieve values from JSON
 		String keyValue = data.get(KEY).getAsString();
-		String damageScalingValue = data.get(DAMAGE_SCALING).getAsString();
-		String soundValue = data.get(SOUND).getAsString();
-		String deathMessageTypeValue = data.get(DEATH_MESSAGE_TYPE).getAsString();
-		float exhaustion = data.get(EXHAUSTION).getAsFloat();
+		String damageScalingValue = data.get(DAMAGE_SCALING_KEY).getAsString();
+		String soundValue = data.get(SOUND_KEY).getAsString();
+		String deathMessageTypeValue = data.get(DEATH_MESSAGE_TYPE_KEY).getAsString();
+		String translationKey = data.get(TRANSLATION_KEY).getAsString();
+		float exhaustion = data.get(EXHAUSTION_KEY).getAsFloat();
 
 		// Parse values
 		NamespacedKey key = NamespacedKey.fromString(keyValue);
@@ -60,49 +54,45 @@ public class DamageTypeMock implements DamageType
 		Sound sound = Registry.SOUNDS.get(NamespacedKey.fromString(soundValue));
 		DamageEffectMock damageEffect = new DamageEffectMock(sound);
 		DeathMessageType deathMessageType = DeathMessageType.valueOf(deathMessageTypeValue);
-
-		// Create object
-		return new DamageTypeMock(damageScaling, damageEffect, key, deathMessageType, exhaustion);
+		return new DamageTypeMock(damageScaling, damageEffect, key, deathMessageType, exhaustion, translationKey);
 	}
 
-	private final DamageScaling damageScaling;
-	private final DamageEffectMock damageEffect;
-	private final NamespacedKey key;
-	private final DeathMessageType deathMessageType;
-	private final float exhaustion;
-
-	public DamageTypeMock(@NotNull DamageScaling damageScaling, @NotNull DamageEffectMock damageEffect, @NotNull NamespacedKey key, @NotNull DeathMessageType deathMessageType, float exhaustion)
+	@ApiStatus.Internal
+	public DamageTypeMock(@NotNull DamageScaling damageScaling, @NotNull DamageEffectMock damageEffect, @NotNull NamespacedKey namespacedKey, @NotNull DeathMessageType deathMessageType, float exhaustion, @NotNull String translationKey)
 	{
-		Preconditions.checkArgument(damageScaling != null, "DamageScaling cannot be null");
-		Preconditions.checkArgument(damageEffect != null, "DamageEffectMock cannot be null");
-		Preconditions.checkArgument(key != null, "NamespacedKey cannot be null");
-		Preconditions.checkArgument(deathMessageType != null, "DeathMessageType cannot be null");
+		Preconditions.checkNotNull(damageScaling, "DamageScaling cannot be null");
+		Preconditions.checkNotNull(damageEffect, "DamageEffectMock cannot be null");
+		Preconditions.checkNotNull(namespacedKey, "NamespacedKey cannot be null");
+		Preconditions.checkNotNull(deathMessageType, "DeathMessageType cannot be null");
+		Preconditions.checkNotNull(translationKey, "Translation key cannot be null");
 
 		this.damageScaling = damageScaling;
 		this.damageEffect = damageEffect;
-		this.key = key;
+		this.namespacedKey = namespacedKey;
 		this.deathMessageType = deathMessageType;
 		this.exhaustion = exhaustion;
+		this.translationKey = translationKey;
 	}
 
 	/**
-	 * @deprecated Will be replaced with {{@link #from(JsonObject)}}.
+	 * @deprecated This constructor has been deprecated. Use {@link DamageTypeMock#from(JsonObject)} instead.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "v3.76.1")
 	public DamageTypeMock(JsonObject data)
 	{
-		this.damageScaling = DamageScaling.valueOf(data.get("damageScaling").getAsString());
-		Sound sound = Registry.SOUNDS.get(NamespacedKey.fromString(data.get("sound").getAsString()));
+		this.damageScaling = DamageScaling.valueOf(data.get(DAMAGE_SCALING_KEY).getAsString());
+		Sound sound = Registry.SOUNDS.get(NamespacedKey.fromString(data.get(SOUND_KEY).getAsString()));
 		this.damageEffect = new DamageEffectMock(sound);
-		this.key = NamespacedKey.fromString(data.get("key").getAsString());
-		this.deathMessageType = DeathMessageType.valueOf(data.get("deathMessageType").getAsString());
-		this.exhaustion = data.get("exhaustion").getAsFloat();
+		this.namespacedKey = NamespacedKey.fromString(data.get(KEY).getAsString());
+		this.deathMessageType = DeathMessageType.valueOf(data.get(DEATH_MESSAGE_TYPE_KEY).getAsString());
+		this.exhaustion = data.get(EXHAUSTION_KEY).getAsFloat();
+		this.translationKey = data.get(TRANSLATION_KEY).getAsString();
 	}
 
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		throw new UnimplementedOperationException();
+		return translationKey;
 	}
 
 	@Override
@@ -132,7 +122,7 @@ public class DamageTypeMock implements DamageType
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{
-		return key;
+		return namespacedKey;
 	}
 
 }

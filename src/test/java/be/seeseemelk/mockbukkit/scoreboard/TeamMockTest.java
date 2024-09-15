@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.scoreboard;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import com.google.common.collect.Iterables;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.ChatColor;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -269,6 +272,34 @@ class TeamMockTest
 	{
 		team.unregister();
 		assertThrows(IllegalStateException.class, () -> team.unregister());
+	}
+
+	@Test
+	void audiences()
+	{
+		team.addEntry(playerA.getName());
+		team.addEntry(playerB.getName());
+
+		Iterable<? extends Audience> audience = team.audiences();
+
+		assertNotNull(audience);
+		assertEquals(2, Iterables.size(audience));
+
+		assertEquals(playerA, Iterables.get(audience, 0));
+		assertEquals(playerB, Iterables.get(audience, 1));
+	}
+
+	@Test
+	void sendMessage()
+	{
+		team.addEntry(playerA.getName());
+
+		team.sendMessage(Component.text("Hello world!"));
+
+		playerA.assertSaid("Hello world!");
+		playerA.assertNoMoreSaid();
+
+		playerB.assertNoMoreSaid();
 	}
 
 }

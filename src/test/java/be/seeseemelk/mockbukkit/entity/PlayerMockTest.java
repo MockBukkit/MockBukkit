@@ -83,6 +83,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -859,28 +860,28 @@ class PlayerMockTest
 	@Test
 	void getEyeHeight_WhileStanding()
 	{
-		assertEquals(1.53D, player.getEyeHeight());
+		assertEquals(1.62D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSneaking()
 	{
 		player.setSneaking(true);
-		assertEquals(1.275D, player.getEyeHeight());
+		assertEquals(1.35D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSleeping()
 	{
 		player.setSleeping(true);
-		assertEquals(0.17D, player.getEyeHeight());
+		assertEquals(0.2D, player.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSwimming()
 	{
 		player.setSwimming(true);
-		assertEquals(0.51D, player.getEyeHeight());
+		assertEquals(0.54D, player.getEyeHeight());
 	}
 
 	@Test
@@ -2587,18 +2588,53 @@ class PlayerMockTest
 		assertEquals("input", e.getMessage());
 	}
 
+	@Test
+	void getBoundingBox_GivenDefaultLocation()
+	{
+		BoundingBox actual = player.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(-0.3, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(-0.3, actual.getMinZ());
+
+		assertEquals(0.3, actual.getMaxX());
+		assertEquals(6.8, actual.getMaxY());
+		assertEquals(0.3, actual.getMaxZ());
+	}
+
+	@Test
+	void getBoundingBox_GivenCustomLocation()
+	{
+		player.teleport(new Location(player.getWorld(), 10, 5, 10));
+
+		BoundingBox actual = player.getBoundingBox();
+		assertNotNull(actual);
+
+		assertEquals(9.7, actual.getMinX());
+		assertEquals(5, actual.getMinY());
+		assertEquals(9.7, actual.getMinZ());
+
+		assertEquals(10.3, actual.getMaxX());
+		assertEquals(6.8, actual.getMaxY());
+		assertEquals(10.3, actual.getMaxZ());
+	}
+
 	@Nested
-	class PlayerSpigotMock {
+	class PlayerSpigotMock
+	{
 
 		@Test
-		void sendMessage_GivenSimpleMessage(){
+		void sendMessage_GivenSimpleMessage()
+		{
 			TextComponent previousButton = new TextComponent("Hello world!");
 			player.spigot().sendMessage(previousButton);
 			player.assertSaid("Hello world!");
 		}
 
 		@Test
-		void sendMessage_GivenColoredMessage(){
+		void sendMessage_GivenColoredMessage()
+		{
 			BaseComponent message = new ComponentBuilder()
 					.append("Hello ")
 					.color(ChatColor.RED)
@@ -2611,12 +2647,71 @@ class PlayerMockTest
 		}
 
 		@Test
-		void sendMessage_issue550(){
+		void sendMessage_issue550()
+		{
 			TextComponent message = new TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 			player.spigot().sendMessage(message);
-			player.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));
+			player.assertSaid(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 		}
 
+	}
+
+	@Test
+	void testRemove()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> player.remove());
+	}
+
+	@Test
+	void bossBar_updatesViewers()
+	{
+		BossBar bossBar = BossBar.bossBar(Component.text("hello world"), 1, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+		player.showBossBar(bossBar);
+		assertEquals(bossBar, player.activeBossBars().iterator().next());
+		assertEquals(player, bossBar.viewers().iterator().next());
+		player.hideBossBar(bossBar);
+		assertFalse(player.activeBossBars().iterator().hasNext());
+		assertFalse(bossBar.viewers().iterator().hasNext());
+	}
+
+	@Test
+	void collidesAt_GivenLocationThatCollide()
+	{
+		Location location = new Location(null, 0, 6, 0);
+
+		boolean actual = player.collidesAt(location);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void collidesAt_GivenLocationThatDoNotCollide()
+	{
+		Location location = new Location(null, 0, 0, 0);
+
+		boolean actual = player.collidesAt(location);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void wouldCollideUsing_GivenBoundingBoxThatCollide()
+	{
+		BoundingBox boundingBox = new BoundingBox(0, 0, 0, 1, 6, 1);
+
+		boolean actual = player.wouldCollideUsing(boundingBox);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void wouldCollideUsing_GivenBoundingBoxThatDoNotCollide()
+	{
+		BoundingBox boundingBox = new BoundingBox(5,5, 5, 10, 10, 10);
+
+		boolean actual = player.wouldCollideUsing(boundingBox);
+
+		assertFalse(actual);
 	}
 
 }

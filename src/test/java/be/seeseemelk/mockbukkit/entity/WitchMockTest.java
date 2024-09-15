@@ -149,7 +149,7 @@ class WitchMockTest
 	@Test
 	void getEyeHeight_GivenDefaultValue()
 	{
-		assertEquals(1.615D, witch.getEyeHeight());
+		assertEquals(1.62D, witch.getEyeHeight());
 	}
 
 	@Test

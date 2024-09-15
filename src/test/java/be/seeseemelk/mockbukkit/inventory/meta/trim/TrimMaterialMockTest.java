@@ -7,7 +7,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TrimMaterialMockTest
 {
@@ -34,6 +36,12 @@ class TrimMaterialMockTest
 	void getKey()
 	{
 		assertNotNull(TrimMaterial.QUARTZ.getKey());
+	}
+
+	@Test
+	void translationKey()
+	{
+		assertEquals("trim_material.minecraft.amethyst", TrimMaterial.AMETHYST.getTranslationKey());
 	}
 
 	@Test

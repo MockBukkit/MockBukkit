@@ -97,6 +97,6 @@ class SnowmanMockTest
 	@Test
 	void getEyeHeight_GivenDefaultValue()
 	{
-		assertEquals(1.615D, snowman.getEyeHeight());
+		assertEquals(1.7D, snowman.getEyeHeight());
 	}
 }

@@ -79,7 +79,7 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.FURNACE_MINECART;
 	}

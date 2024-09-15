@@ -39,14 +39,14 @@ class MuleMockTest
 	@Test
 	void getEyeHeight_GivenDefaultMule()
 	{
-		assertEquals(1.36D, mule.getEyeHeight());
+		assertEquals(1.52D, mule.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyMule()
 	{
 		mule.setBaby();
-		assertEquals(0.68D, mule.getEyeHeight());
+		assertEquals(0.75D, mule.getEyeHeight());
 	}
 
 }

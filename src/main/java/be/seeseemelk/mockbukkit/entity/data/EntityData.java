@@ -13,6 +13,7 @@ public class EntityData
 
 	public static final String WIDTH = "width";
 	public static final String HEIGHT = "height";
+	public static final String EYE_HEIGHT = "eyeHeight";
 
 	private static final String STATES = "states";
 
@@ -55,6 +56,19 @@ public class EntityData
 	public double getHeight(EntitySubType subType, EntityState state)
 	{
 		return getValueFromKey(HEIGHT, subType, state).getAsDouble();
+	}
+
+	/**
+	 * Shortcut method to get the eye height of a entity
+	 *
+	 * @param subType Subtype of entity
+	 * @param state   State of entity
+	 *
+	 * @return The eye height of the entity
+	 */
+	public double getEyeHeight(EntitySubType subType, EntityState state)
+	{
+		return getValueFromKey(EYE_HEIGHT, subType, state).getAsDouble();
 	}
 
 	/**

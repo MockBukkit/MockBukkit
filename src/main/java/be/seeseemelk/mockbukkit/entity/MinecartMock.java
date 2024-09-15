@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Minecart;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
@@ -138,6 +139,12 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	public int getDisplayBlockOffset()
 	{
 		return this.displayBlockOffset;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.MINECART;
 	}
 
 }

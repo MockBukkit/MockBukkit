@@ -60,6 +60,7 @@ import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -167,7 +168,7 @@ import java.util.stream.Collectors;
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
  */
-public class ServerMock extends Server.Spigot implements Server
+public 	class ServerMock extends Server.Spigot implements Server
 {
 
 	private Component motd = Component.text("A Minecraft Server");
@@ -812,6 +813,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable World getWorld(@NotNull Key key)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

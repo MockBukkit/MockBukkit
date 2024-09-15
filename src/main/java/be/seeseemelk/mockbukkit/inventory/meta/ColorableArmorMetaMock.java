@@ -5,6 +5,8 @@ import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableArmorMeta
 {
 
@@ -43,5 +45,32 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		return clone;
 	}
 
+	@Override
+	public Map<String, Object> serialize()
+	{
+		Map<String, Object> serialized = super.serialize();
+		if (this.isDyed())
+		{
+			serialized.put("color", this.getColor());
+		}
+		return serialized;
+	}
+
+	@Override
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
+	{
+		super.deserializeInternal(args);
+		if (args.containsKey("color"))
+		{
+			this.color = (int) args.get("color");
+		}
+	}
+
+	public static ColorableArmorMetaMock deserialize(Map<String, Object> serialized)
+	{
+		ColorableArmorMetaMock colorableArmorMetaMock = new ColorableArmorMetaMock();
+		colorableArmorMetaMock.deserializeInternal(serialized);
+		return colorableArmorMetaMock;
+	}
 
 }
