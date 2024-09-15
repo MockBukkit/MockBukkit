@@ -32,9 +32,7 @@ import java.util.logging.Level;
 public class MockBukkit
 {
 
-	private static final Logger log = LoggerFactory.getLogger(MockBukkit.class);
 	private static @Nullable ServerMock mock = null;
-	private static final String BUKKIT_PLUGIN_SUPERCLASS = JavaPlugin.class.getName();
 
 	private MockBukkit()
 	{
@@ -341,16 +339,6 @@ public class MockBukkit
 
 		try
 		{
-			if (!instance.
-					getClass()
-					.getSuperclass()
-					.getSuperclass()
-					.getName()
-					.equals(BUKKIT_PLUGIN_SUPERCLASS))
-			{
-				throw new IllegalStateException("Invalid plugin superclass");
-			}
-
 			Field configField = JavaPlugin.class.getDeclaredField("newConfig");
 			configField.setAccessible(true);
 			configField.set(instance, fileConfiguration);
