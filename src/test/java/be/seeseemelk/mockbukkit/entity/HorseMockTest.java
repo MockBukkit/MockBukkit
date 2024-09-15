@@ -122,14 +122,14 @@ class HorseMockTest
 	@Test
 	void getEyeHeight_GivenDefaultHorse()
 	{
-		assertEquals(1.36D, horse.getEyeHeight());
+		assertEquals(1.52D, horse.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyHorse()
 	{
 		horse.setBaby();
-		assertEquals(0.68D, horse.getEyeHeight());
+		assertEquals(0.76D, horse.getEyeHeight());
 	}
 
 }

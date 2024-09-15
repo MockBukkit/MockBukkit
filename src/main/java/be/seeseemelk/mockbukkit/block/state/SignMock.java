@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Mock implementation of a {@link Sign}.
@@ -181,6 +182,20 @@ public class SignMock extends TileStateMock implements Sign
 
 	@Override
 	public @Nullable Player getAllowedEditor()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable UUID getAllowedEditorUniqueId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAllowedEditorUniqueId(@Nullable UUID uuid)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

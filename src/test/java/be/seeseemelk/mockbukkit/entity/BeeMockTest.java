@@ -190,14 +190,14 @@ class BeeMockTest
 	@Test
 	void getEyeHeight_GivenDefault()
 	{
-		assertEquals(0.51D, bee.getEyeHeight());
+		assertEquals(0.3D, bee.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_WhileSneaking()
 	{
 		bee.setBaby();
-		assertEquals(0.255D, bee.getEyeHeight());
+		assertEquals(0.15D, bee.getEyeHeight());
 	}
 
 }

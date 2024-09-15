@@ -1,15 +1,18 @@
 {
 	"default": {
-		"height": 1,
-		"width": 1,
+		"height": 1.0,
+		"width": 1.0,
+		"eyeHeight": 0.5,
 		"states": {
 			"peeking": {
 				"height": 1.2,
-				"width": 1
+				"width": 1,
+				"eyeHeight": 0.6
 			},
 			"open": {
 				"height": 2,
-				"width": 1
+				"width": 1,
+				"eyeHeight": 1
 			}
 		}
 	}

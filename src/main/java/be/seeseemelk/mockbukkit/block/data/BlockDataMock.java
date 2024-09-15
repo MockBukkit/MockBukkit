@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
@@ -286,7 +287,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull BlockState createBlockState()
 	{
-		throw new UnimplementedOperationException();
+		return BlockStateMock.mockState(getMaterial());
 	}
 
 	@Override

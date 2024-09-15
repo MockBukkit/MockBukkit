@@ -47,14 +47,14 @@ class DrownedMockTest
 	@Test
 	void getEyeHeight_GivenDefaultDrowned()
 	{
-		assertEquals(1.6575D, drowned.getEyeHeight());
+		assertEquals(1.74D, drowned.getEyeHeight());
 	}
 
 	@Test
 	void getEyeHeight_GivenBabyDrowned()
 	{
 		drowned.setBaby();
-		assertEquals(0.82875D, drowned.getEyeHeight());
+		assertEquals(0.87D, drowned.getEyeHeight());
 	}
 
 }

@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.inventory.meta.CompassMeta;
@@ -70,6 +71,20 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public void setLodestoneTracked(boolean tracked)
 	{
 		this.tracked = tracked;
+	}
+
+	@Override
+	public boolean isLodestoneCompass()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void clearLodestone()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

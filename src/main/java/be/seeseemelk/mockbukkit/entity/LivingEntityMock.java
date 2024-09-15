@@ -19,6 +19,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
@@ -318,19 +319,38 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.launchProjectile(projectile, null);
 	}
 
 	@Override
 	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity)
 	{
+		return this.launchProjectile(projectile, velocity, null);
+	}
+
+	@Override
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<? super T> function)
+	{
 		Preconditions.checkNotNull(projectile, "Projectile cannot be null");
-		T entity = launchProjectile(projectile);
+
+		World world = getWorld();
+		Preconditions.checkNotNull(world, "World cannot be null when launching a projectile");
+
+		// The throwable spawn location is slightly lower than the eye level (See: ThrowableProjectile constructor)
+		Location spawnLocation = getEyeLocation().subtract(0, 0.10000000149011612D, 0);
+		T entity = world.createEntity(spawnLocation, projectile);
+		Preconditions.checkNotNull(entity, "Projectile (%s) not supported", projectile.getName());
+
 		if (velocity != null)
 		{
 			entity.setVelocity(velocity);
 		}
+
+		if (function != null)
+		{
+			function.accept(entity);
+		}
+
 		return entity;
 	}
 
@@ -378,7 +398,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	protected double getEyeHeight(EntityState pose)
 	{
-		return getHeight(pose) * 0.85D;
+		return entityData.getEyeHeight(getSubType(), pose);
 	}
 
 	@Override
@@ -387,21 +407,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		if (ignorePose)
 		{
 			return getEyeHeight(EntityState.DEFAULT);
-		}
-
-		if (isSleeping())
-		{
-			return getEyeHeight(EntityState.SLEEPING);
-		}
-
-		if (isSneaking())
-		{
-			return getEyeHeight(EntityState.SNEAKING);
-		}
-
-		if (isSwimming())
-		{
-			return getEyeHeight(EntityState.SWIMMING);
 		}
 
 		return getEyeHeight(getEntityState());
@@ -413,6 +418,26 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return getEyeHeight(false);
 	}
 
+	@Override
+	protected EntityState getEntityState()
+	{
+		if (isSleeping())
+		{
+			return EntityState.SLEEPING;
+		}
+
+		if (isSneaking())
+		{
+			return EntityState.SNEAKING;
+		}
+
+		if (isSwimming())
+		{
+			return EntityState.SWIMMING;
+		}
+
+		return super.getEntityState();
+	}
 
 	@Override
 	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
@@ -1248,13 +1273,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public void setHurtDirection(float hurtDirection)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<? super T> function)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

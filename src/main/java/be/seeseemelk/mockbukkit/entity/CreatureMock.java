@@ -15,7 +15,7 @@ public abstract class CreatureMock extends MobMock implements Creature
 {
 
 	/**
-	 * Constructs a new  on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CreatureMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
