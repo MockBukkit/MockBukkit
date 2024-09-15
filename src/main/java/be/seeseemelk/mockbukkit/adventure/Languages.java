@@ -67,4 +67,9 @@ public class Languages
 		return new JsonBackedLanguage(jsonElement.getAsJsonObject());
 	}
 
+	private Languages()
+	{
+		throw new UnsupportedOperationException("Utility class");
+	}
+
 }

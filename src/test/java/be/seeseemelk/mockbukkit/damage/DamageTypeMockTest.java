@@ -23,12 +23,12 @@ class DamageTypeMockTest
 	{
 
 		JsonObject json = new JsonObject();
-		json.addProperty(DamageTypeMock.EXHAUSTION, expectedDamageType.exhaustion());
-		json.addProperty(DamageTypeMock.DEATH_MESSAGE_TYPE, expectedDamageType.deathMessageType());
-		json.addProperty(DamageTypeMock.DAMAGE_SCALING, expectedDamageType.damageScaling());
+		json.addProperty(DamageTypeMock.EXHAUSTION_KEY, expectedDamageType.exhaustion());
+		json.addProperty(DamageTypeMock.DEATH_MESSAGE_TYPE_KEY, expectedDamageType.deathMessageType());
+		json.addProperty(DamageTypeMock.DAMAGE_SCALING_KEY, expectedDamageType.damageScaling());
 		json.addProperty(DamageTypeMock.KEY, expectedDamageType.key());
-		json.addProperty(DamageTypeMock.SOUND, expectedDamageType.sound());
-		json.addProperty("translationKey", "mockbukkit.placeholder");
+		json.addProperty(DamageTypeMock.SOUND_KEY, expectedDamageType.sound());
+		json.addProperty(DamageTypeMock.TRANSLATION_KEY, "mockbukkit.placeholder");
 
 		DamageTypeMock actual = DamageTypeMock.from(json);
 
@@ -36,7 +36,7 @@ class DamageTypeMockTest
 		assertEquals(expectedDamageType.deathMessageType(), actual.getDeathMessageType().toString());
 		assertEquals(expectedDamageType.damageScaling(), actual.getDamageScaling().toString());
 		assertEquals(expectedDamageType.key(), actual.getKey().toString());
-		assertEquals(expectedDamageType.sound(), actual.getDamageEffect().getSound().getKey().toString());
+		assertEquals(expectedDamageType.sound(), actual.getDamageEffect().getSound().key().toString());
 	}
 
 	record ExpectedDamageType(String key, String damageScaling, String sound, String deathMessageType, float exhaustion)

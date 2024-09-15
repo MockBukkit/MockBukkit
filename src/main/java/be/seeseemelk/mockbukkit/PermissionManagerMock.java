@@ -19,6 +19,9 @@ import java.util.WeakHashMap;
 public class PermissionManagerMock implements PermissionManager
 {
 
+	private static final String PERMISSION_CANNOT_BE_NULL = "Permission cannot be null";
+	private static final String PERMISSIBLE_CANNOT_BE_NULL = "Permissible cannot be null";
+
 	private final Map<String, Permission> permissions = new HashMap<>();
 	private final Map<Boolean, Set<Permission>> defaultPermissions = new HashMap<>();
 	private final Map<String, Map<Permissible, Boolean>> permissionSubscriptions = new HashMap<>();
@@ -45,7 +48,7 @@ public class PermissionManagerMock implements PermissionManager
 
 	private void addPermission(@NotNull Permission perm, boolean dirtyPermissibles)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
+		Preconditions.checkNotNull(perm, PERMISSION_CANNOT_BE_NULL);
 		String name = perm.getName().toLowerCase(Locale.ENGLISH);
 		Preconditions.checkArgument(!this.permissions.containsKey(name), "The permission " + name + " is already defined!");
 		this.permissions.put(name, perm);
@@ -59,7 +62,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void removePermission(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
+		Preconditions.checkNotNull(perm, PERMISSION_CANNOT_BE_NULL);
 		this.removePermission(perm.getName());
 	}
 
@@ -91,8 +94,8 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void subscribeToPermission(@NotNull String permission, @NotNull Permissible permissible)
 	{
-		Preconditions.checkNotNull(permission, "Permission cannot be null");
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
+		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(permissible, PERMISSIBLE_CANNOT_BE_NULL);
 		String name = permission.toLowerCase(Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.computeIfAbsent(name, key -> new WeakHashMap<>());
 		map.put(permissible, true);
@@ -101,8 +104,8 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void unsubscribeFromPermission(@NotNull String permission, @NotNull Permissible permissible)
 	{
-		Preconditions.checkNotNull(permission, "Permission cannot be null");
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
+		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(permissible, PERMISSIBLE_CANNOT_BE_NULL);
 		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
@@ -120,7 +123,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
 	{
-		Preconditions.checkNotNull(permission, "Permission cannot be null");
+		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
 		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
@@ -137,7 +140,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void subscribeToDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
+		Preconditions.checkNotNull(permissible, PERMISSIBLE_CANNOT_BE_NULL);
 		Map<Permissible, Boolean> map = this.defaultSubscriptions.computeIfAbsent(op, k -> new WeakHashMap<>());
 		map.put(permissible, true);
 	}
@@ -145,7 +148,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void unsubscribeFromDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
+		Preconditions.checkNotNull(permissible, PERMISSIBLE_CANNOT_BE_NULL);
 		Map<Permissible, Boolean> map = this.defaultSubscriptions.get(op);
 		if (map != null)
 		{

@@ -41,7 +41,6 @@ import java.util.stream.Stream;
 public class RegistryMock<T extends Keyed> implements Registry<T>
 {
 
-
 	/**
 	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
 	 */
@@ -78,86 +77,34 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	private Function<JsonObject, ? extends Keyed> getConstructor(RegistryKey<T> key)
 	{
-		if (key == RegistryKey.STRUCTURE)
-		{
-			return StructureMock::from;
-		}
-		else if (key == RegistryKey.STRUCTURE_TYPE)
-		{
-			return StructureTypeMock::from;
-		}
-		else if (key == RegistryKey.TRIM_MATERIAL)
-		{
-			return TrimMaterialMock::from;
-		}
-		else if (key == RegistryKey.TRIM_PATTERN)
-		{
-			return TrimPatternMock::from;
-		}
-		else if (key == RegistryKey.INSTRUMENT)
-		{
-			return MusicInstrumentMock::from;
-		}
-		else if (key == RegistryKey.GAME_EVENT)
-		{
-			return GameEventMock::from;
-		}
-		else if (key == RegistryKey.ENCHANTMENT)
-		{
-			return EnchantmentMock::from;
-		}
-		else if (key == RegistryKey.MOB_EFFECT)
-		{
-			return MockPotionEffectType::from;
-		}
-		else if (key == RegistryKey.DAMAGE_TYPE)
-		{
-			return DamageTypeMock::from;
-		}
-		else if (key == RegistryKey.ITEM)
-		{
-			return ItemTypeMock::from;
-		}
-		else if (key == RegistryKey.BLOCK)
-		{
-			return BlockTypeMock::from;
-		}
-		else if (key == RegistryKey.WOLF_VARIANT)
-		{
-			return WolfVariantMock::from;
-		}
-		else if (key == RegistryKey.JUKEBOX_SONG)
-		{
-			return JukeboxSongMock::from;
-		}
-		else if (key == RegistryKey.CAT_VARIANT)
-		{
-			return CatVariantMock::from;
-		}
-		else if (key == RegistryKey.VILLAGER_PROFESSION)
-		{
-			return VillagerProfessionMock::from;
-		}
-		else if (key == RegistryKey.VILLAGER_TYPE)
-		{
-			return VillagerTypeMock::from;
-		}
-		else if (key == RegistryKey.FROG_VARIANT)
-		{
-			return FrogVariantMock::from;
-		}
-		else if (key == RegistryKey.MAP_DECORATION_TYPE)
-		{
-			return MapCursorTypeMock::from;
-		}
-		else if (key == RegistryKey.BANNER_PATTERN)
-		{
-			return PatternTypeMock::from;
-		}
-		else
+		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
+		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
+		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
+		factoryMap.put(RegistryKey.TRIM_MATERIAL, TrimMaterialMock::from);
+		factoryMap.put(RegistryKey.TRIM_PATTERN, TrimPatternMock::from);
+		factoryMap.put(RegistryKey.INSTRUMENT, MusicInstrumentMock::from);
+		factoryMap.put(RegistryKey.GAME_EVENT, GameEventMock::from);
+		factoryMap.put(RegistryKey.ENCHANTMENT, EnchantmentMock::from);
+		factoryMap.put(RegistryKey.MOB_EFFECT, MockPotionEffectType::from);
+		factoryMap.put(RegistryKey.DAMAGE_TYPE, DamageTypeMock::from);
+		factoryMap.put(RegistryKey.ITEM, ItemTypeMock::from);
+		factoryMap.put(RegistryKey.BLOCK, BlockTypeMock::from);
+		factoryMap.put(RegistryKey.WOLF_VARIANT, WolfVariantMock::from);
+		factoryMap.put(RegistryKey.JUKEBOX_SONG, JukeboxSongMock::from);
+		factoryMap.put(RegistryKey.CAT_VARIANT, CatVariantMock::from);
+		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, VillagerProfessionMock::from);
+		factoryMap.put(RegistryKey.VILLAGER_TYPE, VillagerTypeMock::from);
+		factoryMap.put(RegistryKey.FROG_VARIANT, FrogVariantMock::from);
+		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
+		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
+
+		Function<JsonObject, ? extends Keyed> factory = factoryMap.get(key);
+		if (factory == null)
 		{
 			throw new UnimplementedOperationException();
 		}
+
+		return factory;
 	}
 
 	@Override
