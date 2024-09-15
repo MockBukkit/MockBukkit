@@ -2674,4 +2674,44 @@ class PlayerMockTest
 		assertFalse(bossBar.viewers().iterator().hasNext());
 	}
 
+	@Test
+	void collidesAt_GivenLocationThatCollide()
+	{
+		Location location = new Location(null, 0, 6, 0);
+
+		boolean actual = player.collidesAt(location);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void collidesAt_GivenLocationThatDoNotCollide()
+	{
+		Location location = new Location(null, 0, 0, 0);
+
+		boolean actual = player.collidesAt(location);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void wouldCollideUsing_GivenBoundingBoxThatCollide()
+	{
+		BoundingBox boundingBox = new BoundingBox(0, 0, 0, 1, 6, 1);
+
+		boolean actual = player.wouldCollideUsing(boundingBox);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void wouldCollideUsing_GivenBoundingBoxThatDoNotCollide()
+	{
+		BoundingBox boundingBox = new BoundingBox(5,5, 5, 10, 10, 10);
+
+		boolean actual = player.wouldCollideUsing(boundingBox);
+
+		assertFalse(actual);
+	}
+
 }
