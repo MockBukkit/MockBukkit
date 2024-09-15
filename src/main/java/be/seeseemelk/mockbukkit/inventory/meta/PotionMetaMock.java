@@ -4,6 +4,8 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.potion.PotionUtils;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -235,6 +237,18 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
+	{
+		super.deserializeInternal(args);
+		this.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
+				.map(PotionEffect::new).toList();
+		if (args.containsKey("base-potion-type"))
+		{
+			this.type = Registry.POTION.get(NamespacedKey.fromString((String) args.get("base-potion-type")));
+		}
+	}
+
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
@@ -246,8 +260,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		PotionMetaMock serialMock = new PotionMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
-				.map(PotionEffect::new).toList();
 		return serialMock;
 	}
 
@@ -262,6 +274,10 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("effects", this.effects.stream().map(PotionEffect::serialize).toList());
+		if (hasBasePotionType())
+		{
+			serialized.put("base-potion-type", this.getBasePotionType().key().toString());
+		}
 		return serialized;
 	}
 
