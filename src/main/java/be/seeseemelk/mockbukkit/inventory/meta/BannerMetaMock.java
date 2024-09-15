@@ -111,6 +111,13 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		return clone;
 	}
 
+	@Override
+	protected void deserializeInternal(Map<String, Object> serialized)
+	{
+		super.deserializeInternal(serialized);
+		this.setPatterns(((List<Map<String, Object>>) serialized.get("patterns")).stream().map(Pattern::new).toList());
+	}
+
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
@@ -122,7 +129,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		BannerMetaMock serialMock = new BannerMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.setPatterns(((List<Map<String, Object>>) args.get("patterns")).stream().map(Pattern::new).toList());
 		return serialMock;
 	}
 
