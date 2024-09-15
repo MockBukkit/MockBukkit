@@ -1,12 +1,13 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
+import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.UUID;
 
@@ -15,22 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class BoggedMockTest
 {
+	@MockBukkitInject
 	private ServerMock server;
 	private BoggedMock bogged;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		bogged = new BoggedMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
