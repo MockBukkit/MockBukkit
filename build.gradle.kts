@@ -55,7 +55,11 @@ tasks {
 		options {
 			(options as? StandardJavadocDocletOptions)?.apply {
 				encoding = "UTF-8"
-
+				tags(
+					"apiNote:a:API Note:",
+					"implSpec:a:Implementation Requirements:",
+					"implNote:a:Implementation Note:"
+				)
 				// Custom options
 				addBooleanOption("html5", true)
 				addStringOption("-release", "17")

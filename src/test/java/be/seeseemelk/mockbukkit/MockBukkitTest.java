@@ -1,12 +1,24 @@
 package be.seeseemelk.mockbukkit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class MockBukkitTest
@@ -217,6 +230,85 @@ class MockBukkitTest
 
 	private static class CustomServerMock extends ServerMock
 	{
+
+	}
+
+	@Test
+	void load_WithConfig_FileConfiguration()
+	{
+		FileConfiguration configuration = new YamlConfiguration();
+		configuration.set("foo", "notbar");
+
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class,configuration);
+		assertNotNull(plugin);
+
+		FileConfiguration config = plugin.getConfig();
+		String value = config.getString("foo");
+		assertEquals("notbar", value);
+	}
+
+	@Test
+	void load_WithConfig_File()
+	{
+		URL resource = this.getClass().getClassLoader().getResource("loadWithConfig/config_test.yml");
+		if (resource == null)
+		{
+			fail();
+		}
+		File file = new File(resource.getFile());
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class,file);
+		assertNotNull(plugin);
+
+		FileConfiguration config = plugin.getConfig();
+		String value = config.getString("foo");
+		assertEquals("notbar", value);
+	}
+
+	@Test
+	void load_WithConfig_InputStream() throws FileNotFoundException
+	{
+		URL resource = this.getClass().getClassLoader().getResource("loadWithConfig/config_test.yml");
+		if (resource == null)
+		{
+			fail();
+		}
+		File file = new File(resource.getFile());
+		try (InputStream inputStream = new FileInputStream(file);)
+		{
+			MockBukkit.mock();
+			TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class,inputStream);
+			assertNotNull(plugin);
+
+			FileConfiguration config = plugin.getConfig();
+			String value = config.getString("foo");
+			assertEquals("notbar", value);
+		}
+		catch (IOException e)
+		{
+			fail("Couldn't read config input stream", e);
+		}
+
+	}
+
+	@Test
+	void load_WithConfig_InputStream_FileNotExists() throws FileNotFoundException
+	{
+
+		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes());)
+		{
+			MockBukkit.mock();
+			RuntimeException runtimeException = assertThrows(RuntimeException.class, () ->
+			{
+				MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
+			});
+			assertEquals("Couldn't read config input stream", runtimeException.getMessage());
+		}
+		catch (IOException e)
+		{
+			fail("Couldn't read config input stream", e);
+		}
 
 	}
 
