@@ -96,6 +96,7 @@ import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownPotionMock;
 import be.seeseemelk.mockbukkit.entity.TridentMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
@@ -245,6 +246,7 @@ import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
@@ -1522,6 +1524,10 @@ public class WorldMock implements World
 		else if (clazz == FallingBlock.class)
 		{
 			return new FallingBlockMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ThrownPotion.class)
+		{
+			return new ThrownPotionMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Armadillo.class)
 		{
