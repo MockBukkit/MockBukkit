@@ -7,9 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read # Read repo contents
-      checks: write # Write result from pipeline execution
+
     steps:
       - uses: actions/checkout@v4
       - name: Validate gradle wrapper
@@ -31,10 +29,6 @@ jobs:
         run: ./gradlew build -x test --refresh-dependencies
       - name: Run unit tests
         run: ./gradlew test
-      - name: Validate checkstyle
-        uses: jwgmeligmeyling/checkstyle-github-action@master
-        with:
-          path: 'build/reports/checkstyle/**.xml'
 
       - name: Store Private key
         uses: DamianReeves/write-file-action@v1.3
