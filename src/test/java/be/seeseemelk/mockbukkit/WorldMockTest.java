@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
 import be.seeseemelk.mockbukkit.entity.BoatMock;
+import be.seeseemelk.mockbukkit.entity.BoggedMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
@@ -50,6 +51,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.HuskMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.InteractionMock;
 import be.seeseemelk.mockbukkit.entity.IronGolemMock;
@@ -1376,7 +1378,9 @@ class WorldMockTest
 				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class),
 				Arguments.of(EntityType.POTION, ThrownPotionMock.class),
 				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class),
-				Arguments.of(EntityType.EYE_OF_ENDER, EnderSignalMock.class)
+				Arguments.of(EntityType.EYE_OF_ENDER, EnderSignalMock.class),
+				Arguments.of(EntityType.HUSK, HuskMock.class),
+				Arguments.of(EntityType.BOGGED, BoggedMock.class)
 		);
 	}
 

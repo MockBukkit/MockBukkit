@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
 import be.seeseemelk.mockbukkit.entity.BoatMock;
+import be.seeseemelk.mockbukkit.entity.BoggedMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
@@ -51,6 +52,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.HuskMock;
 import be.seeseemelk.mockbukkit.entity.IllusionerMock;
 import be.seeseemelk.mockbukkit.entity.InteractionMock;
 import be.seeseemelk.mockbukkit.entity.IronGolemMock;
@@ -163,6 +165,7 @@ import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Boat;
+import org.bukkit.entity.Bogged;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
@@ -200,6 +203,7 @@ import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.Husk;
 import org.bukkit.entity.Illusioner;
 import org.bukkit.entity.Interaction;
 import org.bukkit.entity.IronGolem;
@@ -1535,8 +1539,17 @@ public class WorldMock implements World
 		}
 		else if (clazz == EnderSignal.class)
 		{
-			return new EnderSignalMock(server,UUID.randomUUID());
+			return new EnderSignalMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Husk.class)
+		{
+			return new HuskMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Bogged.class)
+		{
+			return new BoggedMock(server, UUID.randomUUID());
+		}
+
 		throw new UnimplementedOperationException();
 	}
 
