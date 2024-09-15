@@ -18,16 +18,10 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
-      - name: Restore caches
-        uses: actions/cache@v4
+      - name: Setup Gradle 8.10
+        uses: gradle/actions/setup-gradle@v4
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', 'gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*' ,'gradle-wrapper.properties') }}
-            ${{ runner.os }}-gradle-
+          gradle-version: wrapper
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
