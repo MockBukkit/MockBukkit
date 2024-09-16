@@ -14,6 +14,8 @@ import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
 import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.BoggedMock;
+import be.seeseemelk.mockbukkit.entity.BreezeMock;
+import be.seeseemelk.mockbukkit.entity.BreezeWindChargeMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
@@ -104,6 +106,7 @@ import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WindChargeMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
@@ -167,6 +170,8 @@ import org.bukkit.entity.Blaze;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Bogged;
+import org.bukkit.entity.Breeze;
+import org.bukkit.entity.BreezeWindCharge;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
@@ -258,6 +263,7 @@ import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.Witch;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
@@ -1590,6 +1596,18 @@ public class WorldMock implements World
 		else if (clazz == Bogged.class)
 		{
 			return new BoggedMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Breeze.class)
+		{
+			return new BreezeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == BreezeWindCharge.class)
+		{
+			return new BreezeWindChargeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == WindCharge.class)
+		{
+			return new WindChargeMock(server, UUID.randomUUID());
 		}
 
 		throw new UnimplementedOperationException();
