@@ -65,6 +65,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -947,9 +949,7 @@ class ServerMockTest
 	@Test
 	void testAddPlayerWithDisallowedAsyncPreLoginResult()
 	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().registerEvents(plugin, plugin);
-		plugin.denyAsyncPreLoginEvent = true;
+		server.getPluginManager().registerEvents(new EventDenier(), MockBukkit.createMockPlugin());
 		PlayerMock player = server.addPlayer();
 
 		assertFalse(server.getOnlinePlayers().contains(player));
@@ -959,9 +959,7 @@ class ServerMockTest
 	@Test
 	void testAddPlayerWithDisallowedLoginResult()
 	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().registerEvents(plugin, plugin);
-		plugin.denyLoginEvent = true;
+		server.getPluginManager().registerEvents(new EventDenier(), MockBukkit.createMockPlugin());
 		PlayerMock player = server.addPlayer();
 
 		assertFalse(server.getOnlinePlayers().contains(player));
@@ -1780,4 +1778,17 @@ class TestRecipe implements Recipe
 		return result;
 	}
 
+}
+
+class EventDenier implements Listener
+{
+	@EventHandler
+	void onPlayerConnectionClose(AsyncPlayerPreLoginEvent event){
+		event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
+	}
+
+	@EventHandler
+	void onPlayerLogin(PlayerLoginEvent  event){
+		event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
+	}
 }
