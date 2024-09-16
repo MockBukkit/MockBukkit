@@ -35,7 +35,8 @@ class MockBukkitTest
 {
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		MockBukkit.setServerInstanceToNull();
 	}
 
