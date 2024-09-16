@@ -31,7 +31,10 @@ jobs:
         run: chmod +x gradlew
       - name: Run unit tests
         run: ./gradlew test --refresh-dependencies
+
       - name: Validate checkstyle
+        run: ./gradlew checkstyleMain checkstyleTest
+      - name: Comment PR with checkstyle issues
         uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
           path: 'build/reports/checkstyle/**.xml'
