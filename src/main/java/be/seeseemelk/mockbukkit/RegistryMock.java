@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.entity.variant.WolfVariantMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
 import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
+import be.seeseemelk.mockbukkit.inventory.MenuTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
 import be.seeseemelk.mockbukkit.map.MapCursorTypeMock;
@@ -96,6 +97,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.VILLAGER_TYPE, VillagerTypeMock::from);
 		factoryMap.put(RegistryKey.FROG_VARIANT, FrogVariantMock::from);
 		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
+		factoryMap.put(RegistryKey.MENU, MenuTypeMock::from);
 		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
 
 		Function<JsonObject, ? extends Keyed> factory = factoryMap.get(key);
