@@ -29,8 +29,8 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-#      - name: Run unit tests
-#        run: ./gradlew test --refresh-dependencies
+      - name: Run unit tests
+        run: ./gradlew test --refresh-dependencies
 
       - name: Validate checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
