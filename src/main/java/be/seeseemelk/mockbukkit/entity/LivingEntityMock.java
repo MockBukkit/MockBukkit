@@ -90,6 +90,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	protected boolean alive = true;
 	private boolean gliding = false;
 	private boolean jumping = false;
+	private boolean riptiding = false;
 
 	/**
 	 * The attributes this entity has.
@@ -910,8 +911,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isRiptiding()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.riptiding;
+	}
+
+	@Override
+	public void setRiptiding(boolean isRiptiding)
+	{
+		this.riptiding = isRiptiding;
 	}
 
 	/**

@@ -821,6 +821,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void startRiptideAttack(int i, float v, @Nullable ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isConversing()
 	{
 		return this.conversationTracker.isConversing();

@@ -403,4 +403,19 @@ class LivingEntityMockTest
 		assertSame(projectile, snowballCallback.get());
 	}
 
+	@Test
+	void isRiptiding_GivenDefaultValue()
+	{
+		boolean actual = livingEntity.isRiptiding();
+		assertFalse(actual);
+	}
+
+	@Test
+	void isRiptiding_GivenRiptidingAsTrue()
+	{
+		livingEntity.setRiptiding(true);
+		boolean actual = livingEntity.isRiptiding();
+		assertTrue(actual);
+	}
+
 }
