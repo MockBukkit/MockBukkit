@@ -110,6 +110,7 @@ import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.entity.ZoglinMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
@@ -261,6 +262,7 @@ import org.bukkit.entity.Witch;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
+import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
 import org.bukkit.entity.minecart.CommandMinecart;
@@ -1484,6 +1486,10 @@ public class WorldMock implements World
 		else if (clazz == Ravager.class)
 		{
 			return new RavagerMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Zoglin.class)
+		{
+			return new ZoglinMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Vindicator.class)
 		{
