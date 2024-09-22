@@ -35,6 +35,7 @@ public class BreezeWindChargeMock extends AbstractWindChargeMock implements Bree
 		}
 
 		getWorld().createExplosion(this, getLocation(), 3.0F, false);
+		remove();
 	}
 
 	@Override

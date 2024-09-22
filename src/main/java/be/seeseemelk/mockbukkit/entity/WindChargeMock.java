@@ -35,6 +35,7 @@ public class WindChargeMock extends AbstractWindChargeMock implements WindCharge
 		}
 
 		getWorld().createExplosion(this, getLocation(), 1.2F, false);
+		remove();
 	}
 
 	@Override
