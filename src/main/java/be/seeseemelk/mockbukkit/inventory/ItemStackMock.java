@@ -185,6 +185,17 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
+	public int getEnchantmentLevel(Enchantment ench)
+	{
+		Preconditions.checkArgument(ench != null, "Enchantment cannot be null");
+
+		final ItemMeta meta = this.getItemMeta();
+		Preconditions.checkNotNull(meta, "Meta must not be null");
+
+		return meta.getEnchantLevel(ench);
+	}
+
+	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchantments()
 	{
 		return itemMeta.getEnchants();
