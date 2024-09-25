@@ -17,7 +17,6 @@ import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class ItemStackMock extends ItemStack
 {
@@ -307,11 +306,6 @@ public class ItemStackMock extends ItemStack
 				}
 			}
 		}
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(type, amount, itemMeta, durability);
 	}
 
 }
