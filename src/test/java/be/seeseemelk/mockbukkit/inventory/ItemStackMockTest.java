@@ -116,7 +116,7 @@ class ItemStackMockTest
 
 	@Test
 	void equals_changedEnchantments() {
-		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack itemStack = new ItemStack(Material.TRIDENT);
 		itemStack.addEnchantment(Enchantment.CHANNELING, 1);
 		ItemStack cloned = itemStack.clone();
 		assertEquals(itemStack.hashCode(), cloned.hashCode());
@@ -165,9 +165,9 @@ class ItemStackMockTest
 	@Test
 	void notEquals_changedEnchantment()
 	{
-		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack itemStack = new ItemStack(Material.TRIDENT);
 		ItemStack cloned = itemStack.clone();
-		cloned.addEnchantment(Enchantment.BREACH, 1);
+		cloned.addEnchantment(Enchantment.CHANNELING, 1);
 		assertNotEquals(itemStack, cloned);
 	}
 
