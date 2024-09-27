@@ -1,13 +1,14 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import org.junit.jupiter.api.AfterEach;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class StonecutterInventoryTest
 {
 
@@ -16,14 +17,7 @@ class StonecutterInventoryTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		inventory = new StonecutterInventoryMock(null);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

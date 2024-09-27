@@ -1,16 +1,17 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.block.state.BlastFurnaceMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class FurnaceInventoryMockTest
 {
 
@@ -21,15 +22,8 @@ class FurnaceInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		holder = new BlastFurnaceMock(Material.BLAST_FURNACE);
 		inventory = new FurnaceInventoryMock(holder);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
