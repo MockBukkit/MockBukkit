@@ -1,11 +1,10 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.Tag;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,20 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * @author TheBusyBiscuit
  */
+@ExtendWith(MockBukkitExtension.class)
 class DefaultTagsTest
 {
-
-	@BeforeEach
-	void setUp()
-	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testSaplings()
