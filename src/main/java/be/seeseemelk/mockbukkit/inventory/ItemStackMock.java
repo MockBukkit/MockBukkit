@@ -188,7 +188,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchantments()
 	{
-		return itemMeta.getEnchants();
+		return this.hasItemMeta() ? itemMeta.getEnchants() : Map.of();
 	}
 
 	@Override
@@ -226,7 +226,7 @@ public class ItemStackMock extends ItemStack
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore());
+			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore()) && Objects.equals(this.getEnchantments(), bukkit.getEnchantments());
 		}
 		else
 		{
@@ -244,7 +244,7 @@ public class ItemStackMock extends ItemStack
 		}
 		else
 		{
-			int hash = Objects.hash(type, durability, lore());
+			int hash = Objects.hash(type, durability, lore(), getEnchantments());
 			hash = hash * 31 + this.getAmount();
 			return hash;
 		}

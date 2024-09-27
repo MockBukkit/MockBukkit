@@ -115,6 +115,15 @@ class ItemStackMockTest
 	}
 
 	@Test
+	void equals_changedEnchantments() {
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		itemStack.addEnchantment(Enchantment.CHANNELING, 1);
+		ItemStack cloned = itemStack.clone();
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+		assertEquals(itemStack, cloned);
+	}
+
+	@Test
 	void notEquals_changedDurability_weirdEdgeCase()
 	{
 		ItemStack itemStack = new ItemStack(Material.DIAMOND);
@@ -150,6 +159,15 @@ class ItemStackMockTest
 		ItemStack itemStack = new ItemStack(Material.DIAMOND);
 		ItemStack cloned = itemStack.clone();
 		cloned.setLore(List.of("Hello", "world!"));
+		assertNotEquals(itemStack, cloned);
+	}
+
+	@Test
+	void notEquals_changedEnchantment()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack cloned = itemStack.clone();
+		cloned.addEnchantment(Enchantment.BREACH, 1);
 		assertNotEquals(itemStack, cloned);
 	}
 
