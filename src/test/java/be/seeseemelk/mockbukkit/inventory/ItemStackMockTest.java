@@ -36,4 +36,20 @@ class ItemStackMockTest
 		assertEquals(5, actual.get(Enchantment.EFFICIENCY));
 	}
 
+	@Test
+	void getEnchantmentLevel_GivenDefaultValue() {
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+
+		int level = itemStack.getEnchantmentLevel(Enchantment.EFFICIENCY);
+		assertEquals(0, level);
+	}
+
+	@Test
+	void getEnchantmentLevel_GivenCustomEnchantment() {
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		itemStack.addEnchantment(Enchantment.EFFICIENCY, 5);
+
+		int level = itemStack.getEnchantmentLevel(Enchantment.EFFICIENCY);
+		assertEquals(5, level);
+	}
 }
