@@ -1,11 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,22 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class KnowledgeBookMetaMockTest
 {
 
 	private final int MAX_RECIPES = 32767;
-
-	@BeforeEach
-	void setUp()
-	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@NotNull
 	@SuppressWarnings("deprecation")

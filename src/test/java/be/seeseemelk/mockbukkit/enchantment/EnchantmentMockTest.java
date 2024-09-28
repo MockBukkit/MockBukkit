@@ -1,10 +1,9 @@
 package be.seeseemelk.mockbukkit.enchantment;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.enchantments.Enchantment;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,20 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class EnchantmentMockTest
 {
-
-	@BeforeEach
-	void setUp()
-	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testEnchantmentValuesContainsEnchantment()

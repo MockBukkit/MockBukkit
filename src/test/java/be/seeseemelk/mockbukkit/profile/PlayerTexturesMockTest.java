@@ -1,16 +1,17 @@
 package be.seeseemelk.mockbukkit.profile;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.profile.PlayerTextures.SkinModel;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerTexturesMockTest
 {
 	private PlayerProfileMock profile;
@@ -18,14 +19,7 @@ class PlayerTexturesMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		profile = new PlayerProfileMock("Test", UUID.randomUUID());
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

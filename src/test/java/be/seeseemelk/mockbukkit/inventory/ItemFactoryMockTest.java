@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
@@ -25,14 +25,15 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ItemFactoryMockTest
 {
 
@@ -41,14 +42,7 @@ class ItemFactoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		factory = new ItemFactoryMock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	/*

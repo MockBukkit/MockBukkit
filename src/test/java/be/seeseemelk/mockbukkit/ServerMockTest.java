@@ -80,9 +80,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -118,22 +117,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
 {
-
+	@MockBukkitInject
 	private ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void class_NumberOfPlayers_Zero()

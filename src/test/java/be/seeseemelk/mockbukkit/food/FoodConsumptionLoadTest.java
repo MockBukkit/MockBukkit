@@ -1,12 +1,11 @@
 package be.seeseemelk.mockbukkit.food;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,23 +13,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
+@ExtendWith(MockBukkitExtension.class)
 public class FoodConsumptionLoadTest
 {
-
-	@BeforeEach
-	void setUp()
-	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testLoadingDoesNotThrow()

@@ -1,10 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.enchantments.Enchantment;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class EnchantedBookMetaMockTest
 {
 
@@ -23,15 +24,8 @@ class EnchantedBookMetaMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		testEnchantment = Enchantment.PROTECTION;
 		testEnchantment2 = Enchantment.POWER;
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

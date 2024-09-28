@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
@@ -18,9 +19,9 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ItemMetaMockTest
 {
 
@@ -48,14 +50,7 @@ class ItemMetaMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		meta = new ItemMetaMock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

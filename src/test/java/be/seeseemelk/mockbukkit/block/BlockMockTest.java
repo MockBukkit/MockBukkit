@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.block;
 import be.seeseemelk.mockbukkit.ChunkCoordinate;
 import be.seeseemelk.mockbukkit.ChunkMock;
 import be.seeseemelk.mockbukkit.Coordinate;
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
@@ -15,9 +15,9 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.TrapDoor;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -31,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class BlockMockTest
 {
 
@@ -40,16 +41,9 @@ class BlockMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		World world = new WorldMock();
 		location = new Location(world, 120, 60, 120);
 		block = new BlockMock(location);
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

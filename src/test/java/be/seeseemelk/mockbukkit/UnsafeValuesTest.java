@@ -26,10 +26,10 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -56,27 +56,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("deprecation")
+@ExtendWith(MockBukkitExtension.class)
 class UnsafeValuesTest
 {
 
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
 	private static final Logger log = LoggerFactory.getLogger(UnsafeValuesTest.class);
 
+	@MockBukkitInject
 	private ServerMock server;
 	private MockUnsafeValues mockUnsafeValues;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.getOrCreateMock();
 		WorldCreator.name("world").createWorld();
 		mockUnsafeValues = server.getUnsafe();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	private void checkVersion(String version) throws InvalidPluginException

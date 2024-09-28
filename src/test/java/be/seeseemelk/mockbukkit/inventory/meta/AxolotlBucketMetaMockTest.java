@@ -1,10 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.entity.Axolotl;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class AxolotlBucketMetaMockTest
 {
 
@@ -20,14 +21,7 @@ class AxolotlBucketMetaMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		meta = new AxolotlBucketMetaMock();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

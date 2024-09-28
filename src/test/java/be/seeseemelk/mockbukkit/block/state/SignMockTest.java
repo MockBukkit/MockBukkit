@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import net.kyori.adventure.text.Component;
@@ -11,9 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.sign.Side;
 import org.bukkit.block.sign.SignSide;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -34,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class SignMockTest
 {
 
@@ -44,17 +45,10 @@ class SignMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.OAK_SIGN);
 		this.sign = new SignMock(this.block);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

@@ -1,10 +1,10 @@
 package be.seeseemelk.mockbukkit.map;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.map.MinecraftFont;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class MapCanvasMockTest
 {
 
@@ -24,14 +25,7 @@ class MapCanvasMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		canvas = new MapCanvasMock(null);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
