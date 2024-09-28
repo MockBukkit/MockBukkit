@@ -42,6 +42,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
+import org.bukkit.EntityEffect;
 import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -3430,6 +3431,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public Player.@NotNull Spigot spigot()
 	{
 		return playerSpigotMock;
+	}
+
+	@Override
+	public void sendEntityEffect(@NotNull EntityEffect entityEffect, @NotNull Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**

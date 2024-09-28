@@ -1868,14 +1868,21 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power)
+	public boolean createExplosion(@NotNull Location loc, float power)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power, boolean setFire)
+	public boolean createExplosion(@NotNull Location loc, float power, boolean setFire)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean createExplosion(Entity source, @NotNull Location loc, float power, boolean setFire, boolean breakBlocks, boolean excludeSourceFromDamage)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
