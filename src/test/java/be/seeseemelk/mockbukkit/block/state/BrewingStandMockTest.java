@@ -9,6 +9,8 @@ import org.bukkit.inventory.BrewerInventory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,6 +97,20 @@ class BrewingStandMockTest
 		assertNotSame(brewingStand.getInventory(), brewingStand.getSnapshotInventory());
 		assertEquals(brewingStand.getInventory().getFuel(), brewingStand.getSnapshotInventory().getFuel());
 		assertEquals(brewingStand.getInventory().getIngredient(), brewingStand.getSnapshotInventory().getIngredient());
+	}
+
+	@Test
+	void getRecipeBrewTime()
+	{
+		assertEquals(400, brewingStand.getRecipeBrewTime());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 10, 50, 100})
+	void setRecipeBrewTime(int value)
+	{
+		brewingStand.setRecipeBrewTime(value);
+		assertEquals(value, brewingStand.getRecipeBrewTime());
 	}
 
 }

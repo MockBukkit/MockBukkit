@@ -2,12 +2,14 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 /**
  * Mock implementation of a {@link BrewingStand}.
@@ -17,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class BrewingStandMock extends ContainerMock implements BrewingStand
 {
 
+	private int recipeBrewingTime = 400;
 	private int brewingTime;
 	private int fuelLevel;
 
@@ -78,6 +81,19 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	public void setBrewingTime(int brewTime)
 	{
 		this.brewingTime = brewTime;
+	}
+
+	@Override
+	public void setRecipeBrewTime(@Range(from = 1L, to = 2147483647L) int recipeBrewTime)
+	{
+		Preconditions.checkArgument(recipeBrewTime > 0, "recipeBrewTime must be positive");
+		this.recipeBrewingTime = recipeBrewTime;
+	}
+
+	@Override
+	public @Range(from = 1L, to = 2147483647L) int getRecipeBrewTime()
+	{
+		return this.recipeBrewingTime;
 	}
 
 	@Override
