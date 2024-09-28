@@ -22,6 +22,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -30,6 +31,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -172,6 +174,13 @@ public class ItemFactoryMock implements ItemFactory
 
 	@Override
 	public @NotNull ItemStack enchantWithLevels(@NotNull ItemStack itemStack, @Range(from = 1L, to = 30L) int levels, boolean allowTreasure, @NotNull Random random)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantWithLevels(@NotNull ItemStack itemStack, @Range(from = 1L, to = 30L) int levels, @NotNull RegistryKeySet<@NotNull Enchantment> registryKeySet, @NotNull Random random)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
