@@ -1506,10 +1506,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void broadcastHurtAnimation(@NotNull Collection<Player> collection)
+	public void broadcastHurtAnimation(@NotNull Collection<Player> players)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(players, "Player collection cannot be null");
+		Preconditions.checkArgument(!players.contains(this), "Cannot broadcast hurt animation to self without a yaw");
+		for (final Player player : players) {
+			player.sendHurtAnimation(0);
+		}
 	}
 
 	public void tick()
