@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.WindCharge;
+import org.bukkit.event.entity.EntityRemoveEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class WindChargeMock extends AbstractWindChargeMock implements WindCharge
 		}
 
 		getWorld().createExplosion(this, getLocation(), 1.2F, false);
-		remove();
+		remove(EntityRemoveEvent.Cause.EXPLODE);
 	}
 
 	@Override

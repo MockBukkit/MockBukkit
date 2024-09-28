@@ -9,6 +9,7 @@ import be.seeseemelk.mockbukkit.entity.data.EntityData;
 import be.seeseemelk.mockbukkit.entity.data.EntityDataRegistry;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
+import be.seeseemelk.mockbukkit.event.EventFactoryMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
@@ -38,6 +39,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.event.entity.EntityMountEvent;
+import org.bukkit.event.entity.EntityRemoveEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -739,6 +741,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void remove()
 	{
+		remove(EntityRemoveEvent.Cause.PLUGIN);
+	}
+
+	protected void remove(EntityRemoveEvent.Cause cause)
+	{
+
+		EventFactoryMock.callEntityRemoveEvent(this, cause);
+
 		leaveVehicle();
 		if (hasPassengers())
 		{
