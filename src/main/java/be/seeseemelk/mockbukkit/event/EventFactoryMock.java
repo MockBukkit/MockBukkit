@@ -16,12 +16,15 @@ public class EventFactoryMock
 	 * @param entity The entity being removed.
 	 * @param cause	 The cause for removal.
 	 */
-	public static void callEntityRemoveEvent(@NotNull Entity entity, @Nullable EntityRemoveEvent.Cause cause) {
-		if (entity instanceof Player) {
+	public static void callEntityRemoveEvent(@NotNull Entity entity, @Nullable EntityRemoveEvent.Cause cause)
+	{
+		if (entity instanceof Player)
+		{
 			return; // Don't call for player
 		}
 
-		if (cause == null) {
+		if (cause == null)
+		{
 			// Don't call if cause is null
 			// This can happen when an entity changes dimension,
 			// the entity gets removed during world gen or
@@ -30,6 +33,11 @@ public class EventFactoryMock
 		}
 
 		Bukkit.getPluginManager().callEvent(new EntityRemoveEvent(entity, cause));
+	}
+
+	private EventFactoryMock()
+	{
+		// Hide the public constructor
 	}
 
 }
