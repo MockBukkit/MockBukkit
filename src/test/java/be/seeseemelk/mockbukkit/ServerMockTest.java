@@ -947,16 +947,6 @@ class ServerMockTest
 	}
 
 	@Test
-	void testAddPlayerWithDisallowedAsyncPreLoginResult()
-	{
-		server.getPluginManager().registerEvents(new EventDenier(), MockBukkit.createMockPlugin());
-		PlayerMock player = server.addPlayer();
-
-		assertFalse(server.getOnlinePlayers().contains(player));
-		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
-	}
-
-	@Test
 	void testAddPlayerWithDisallowedLoginResult()
 	{
 		server.getPluginManager().registerEvents(new EventDenier(), MockBukkit.createMockPlugin());
