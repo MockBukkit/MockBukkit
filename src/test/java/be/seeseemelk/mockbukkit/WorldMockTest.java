@@ -14,6 +14,8 @@ import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
 import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.BoggedMock;
+import be.seeseemelk.mockbukkit.entity.BreezeMock;
+import be.seeseemelk.mockbukkit.entity.BreezeWindChargeMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
@@ -100,6 +102,7 @@ import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WindChargeMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
@@ -1382,7 +1385,10 @@ class WorldMockTest
 				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class),
 				Arguments.of(EntityType.EYE_OF_ENDER, EnderSignalMock.class),
 				Arguments.of(EntityType.HUSK, HuskMock.class),
-				Arguments.of(EntityType.BOGGED, BoggedMock.class)
+				Arguments.of(EntityType.BOGGED, BoggedMock.class),
+				Arguments.of(EntityType.BREEZE, BreezeMock.class),
+				Arguments.of(EntityType.BREEZE_WIND_CHARGE, BreezeWindChargeMock.class),
+				Arguments.of(EntityType.WIND_CHARGE, WindChargeMock.class)
 		);
 	}
 
