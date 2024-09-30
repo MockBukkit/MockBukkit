@@ -541,6 +541,42 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean isVoidDamageEnabled()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVoidDamageEnabled(boolean b)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getVoidDamageAmount()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVoidDamageAmount(float v)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getVoidDamageMinBuildHeightOffset()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVoidDamageMinBuildHeightOffset(double v)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public int getEntityCount()
 	{
 		// TODO Auto-generated method stub
