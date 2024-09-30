@@ -3,9 +3,11 @@ package be.seeseemelk.mockbukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Optional;
 
 /**
  * A simple plugin that does nothing.
@@ -32,5 +34,102 @@ public class MockPlugin extends JavaPlugin
 	{
 		super(loader, description, dataFolder, file);
 	}
+
+	public static Builder builder()
+	{
+		return new Builder();
+	}
+
+	public static class Builder
+	{
+
+		private Optional<Runnable> onLoad = Optional.empty();
+		private Optional<Runnable> onEnable = Optional.empty();
+		private Optional<Runnable> onDisable = Optional.empty();
+		private String pluginName = "MockPlugin";
+		private String pluginVersion = "1.0.0";
+
+		private Builder()
+		{
+		}
+
+		public Builder withOnLoad(Runnable onLoad)
+		{
+			this.onLoad = Optional.of(onLoad);
+			return this;
+		}
+
+		public Builder withOnEnable(Runnable onEnable)
+		{
+			this.onEnable = Optional.of(onEnable);
+			return this;
+		}
+
+		public Builder withOnDisable(Runnable onDisable)
+		{
+			this.onDisable = Optional.of(onDisable);
+			return this;
+		}
+
+		public Builder withPluginName(String name)
+		{
+			this.pluginName = name;
+			return this;
+		}
+
+		public Builder withPluginVersion(String version)
+		{
+			this.pluginVersion = version;
+			return this;
+		}
+
+		public MockPlugin build()
+		{
+			MockBukkit.ensureMocking();
+
+			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, InternalMockPlugin.class.getName());
+			ServerMock mock = MockBukkit.getMock();
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(InternalMockPlugin.class, description, new Object[]{onEnable, onDisable, onLoad});
+			mock.getPluginManager().enablePlugin(instance);
+			return (MockPlugin) instance;
+		}
+
+	}
+
+	@ApiStatus.Internal
+	public static class InternalMockPlugin extends MockPlugin
+	{
+
+		private final Optional<Runnable> onEnable;
+		private final Optional<Runnable> onDisable;
+		private final Optional<Runnable> onLoad;
+
+		public InternalMockPlugin(Optional<Runnable> onEnable, Optional<Runnable> onDisable, Optional<Runnable> onLoad)
+		{
+			this.onEnable = onEnable;
+			this.onDisable = onDisable;
+			this.onLoad = onLoad;
+		}
+
+		@Override
+		public void onEnable()
+		{
+			onEnable.ifPresent(Runnable::run);
+		}
+
+		@Override
+		public void onDisable()
+		{
+			onDisable.ifPresent(Runnable::run);
+		}
+
+		@Override
+		public void onLoad()
+		{
+			onLoad.ifPresent(Runnable::run);
+		}
+
+	}
+
 
 }
