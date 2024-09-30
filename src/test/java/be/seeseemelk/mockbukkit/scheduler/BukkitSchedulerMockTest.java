@@ -287,12 +287,16 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void longRunningTask_Throws_RunTimeException()
+	void longRunningTask_Throws_RunTimeException() throws InterruptedException
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+
+		final CountDownLatch countDownLatch = new CountDownLatch(1);
 		final AtomicBoolean alive = new AtomicBoolean(true);
+
 		testTask = scheduler.runTaskAsynchronously(null, () ->
 		{
+			countDownLatch.countDown();
 			while (alive.get())
 			{
 				if (testTask.isCancelled())
@@ -311,6 +315,8 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
+		countDownLatch.await(1, TimeUnit.SECONDS);
+
 		assertTrue(alive.get());
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performTicks(10);
