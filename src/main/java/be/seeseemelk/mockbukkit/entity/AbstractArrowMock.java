@@ -216,10 +216,4 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 		return noPhysics;
 	}
 
-	@Override
-	public void broadcastHurtAnimation(@NotNull Collection<Player> collection)
-	{
-		throw new UnimplementedOperationException();
-	}
-
 }

@@ -3432,12 +3432,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 
 	@Override
-	public void broadcastHurtAnimation(@NotNull Collection<Player> collection)
-	{
-		this.sendHurtAnimation(0);
-	}
-
-	@Override
 	public void sendEntityEffect(@NotNull EntityEffect entityEffect, @NotNull Entity entity)
 	{
 		throw new UnimplementedOperationException();
