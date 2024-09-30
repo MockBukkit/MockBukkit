@@ -10,6 +10,7 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 {
 
 	private Integer amplifier;
+	private static final String AMPLIFIER_KEY = "amplifier";
 
 	public OminousBottleMetaMock()
 	{
@@ -49,9 +50,9 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
 		super.deserializeInternal(args);
-		if (args.containsKey("amplifier"))
+		if (args.containsKey(AMPLIFIER_KEY))
 		{
-			this.amplifier = (Integer) args.get("amplifier");
+			this.amplifier = (Integer) args.get(AMPLIFIER_KEY);
 		}
 	}
 
@@ -68,7 +69,7 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		final Map<String, Object> serialized = super.serialize();
 		if (this.hasAmplifier())
 		{
-			serialized.put("amplifier", amplifier);
+			serialized.put(AMPLIFIER_KEY, amplifier);
 		}
 		return serialized;
 	}
