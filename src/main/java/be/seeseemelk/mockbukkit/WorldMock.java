@@ -1882,6 +1882,12 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean createExplosion(@Nullable Entity entity, @NotNull Location location, float v, boolean b, boolean b1, boolean b2)
+	{
+		return false;
+	}
+
+	@Override
 	public boolean createExplosion(@Nullable Entity source, @NotNull Location loc, float power, boolean setFire, boolean breakBlocks)
 	{
 		return false;
