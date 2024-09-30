@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockBukkitExtension.class)
 class ItemStackMockTest
@@ -73,6 +74,29 @@ class ItemStackMockTest
 			assertTrue(expected.has("throws"), "No exception should be thrown");
 			assertEquals(expected.get("throws").getAsString(), e.getClass().getName());
 		}
+	}
+
+	@Test
+	void isSimilar_different() {
+		var a = new ItemStack(Material.SAND);
+		var b = new ItemStack(Material.DIAMOND);
+
+		assertFalse(a.isSimilar(b));
+	}
+
+	@Test
+	void isSimilar_similar() {
+		ItemStack a = new ItemStack(Material.SAND);
+		ItemStack b = new ItemStack(Material.SAND);
+
+		assertTrue(a.isSimilar(b));
+	}
+
+	@Test
+	void isSimilar_null() {
+		ItemStack a = new ItemStack(Material.SAND);
+
+		assertFalse(a.isSimilar(null));
 	}
 
 	@Test
