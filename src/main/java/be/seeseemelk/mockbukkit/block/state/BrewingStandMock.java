@@ -8,6 +8,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 /**
  * Mock implementation of a {@link BrewingStand}.
@@ -78,6 +79,18 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	public void setBrewingTime(int brewTime)
 	{
 		this.brewingTime = brewTime;
+	}
+
+	@Override
+	public void setRecipeBrewTime(@Range(from = 1L, to = 2147483647L) int i)
+	{
+		this.brewingTime = i;
+	}
+
+	@Override
+	public @Range(from = 1L, to = 2147483647L) int getRecipeBrewTime()
+	{
+		return brewingTime;
 	}
 
 	@Override
