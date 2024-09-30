@@ -759,7 +759,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull Set<ItemFlag> getItemFlags()
 	{
-		return Collections.unmodifiableSet(hideFlags);
+		return Set.copyOf(hideFlags);
 	}
 
 	@Override

@@ -102,7 +102,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	public @NotNull BundleMetaMock clone()
 	{
 		BundleMetaMock clone = (BundleMetaMock) super.clone();
-		clone.items = new ArrayList<>(this.items);
+		clone.items = new ArrayList<>(this.items.stream().map(ItemStack::clone).toList());
 		return clone;
 	}
 

@@ -76,8 +76,6 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 								|| metaClassAsString.equals("BlockDataMeta")
 								|| metaClassAsString.equals("EnchantmentStorageMeta")
 								|| metaClassAsString.equals("MusicInstrumentMeta")
-								|| metaClassAsString.equals("OminousBottleMeta")
-								|| metaClassAsString.equals("BundleMeta")
 				)
 				{
 					//Unimplemented Meta class, falling back to ItemMeta

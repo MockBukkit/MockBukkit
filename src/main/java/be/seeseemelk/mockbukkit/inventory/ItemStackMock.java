@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class ItemStackMock extends ItemStack
 {
@@ -24,7 +25,7 @@ public class ItemStackMock extends ItemStack
 	private ItemType type = ItemTypeMock.AIR;
 	private int amount = 1;
 	private ItemMeta itemMeta = new ItemMetaMock();
-	private short durability;
+	private short durability = -1;
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
 	private static final String ITEMMETA_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
@@ -43,19 +44,8 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
-		this.durability = type.getMaxDurability();
-		if (type.asMaterial() != Material.AIR && type.getItemMetaClass() != ItemMeta.class)
-		{
-			try
-			{
-				this.itemMeta = type.getItemMetaClass().getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
-			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.getItemMetaClass(), e);
-			}
-		}
+		this.durability = initDurability(this.type);
+
 
 	}
 
@@ -63,50 +53,50 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = type.asItemType();
 		this.amount = amount;
-		this.durability = type.getMaxDurability();
-		if (type != Material.AIR && type.asItemType().getItemMetaClass() != ItemMeta.class)
-		{
-			try
-			{
-				this.itemMeta = type.asItemType().getItemMetaClass().getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
-			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.asItemType().getItemMetaClass(), e);
-			}
-		}
+		this.durability = initDurability(this.type);
+		this.itemMeta = findItemMeta(type);
 	}
 
 	private ItemStackMock(@Nullable Void v)
 	{
 		this.type = ItemTypeMock.AIR;
+		this.durability = initDurability(type);
 		this.amount = 0;
 	}
 
 	private ItemStackMock(@NotNull ItemType type)
 	{
 		this.type = type;
-		this.durability = type.getMaxDurability();
-		if (type.asMaterial() != Material.AIR && type.getItemMetaClass() != ItemMeta.class)
-		{
-			try
-			{
-				this.itemMeta = type.getItemMetaClass().getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
-			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + type.getItemMetaClass(), e);
-			}
-		}
+		this.durability = initDurability(type);
+		this.itemMeta = findItemMeta(type.asMaterial());
+	}
 
+	/**
+	 * By some reason paper differentiates between an item with durability set and one without durability set
+	 */
+	private short initDurability(ItemType type)
+	{
+		if (type == null || type.getMaxDurability() == 0)
+		{
+			return -1;
+		}
+		return type.getMaxDurability();
 	}
 
 	@Override
 	public void setType(@NotNull Material type)
 	{
-		this.type = type.asItemType();
+		if (!type.isItem())
+		{
+			this.type = ItemType.AIR;
+			this.itemMeta = null;
+			return;
+		}
+		if (type != this.type.asMaterial())
+		{
+			this.type = type.asItemType();
+			this.itemMeta = findItemMeta(type);
+		}
 	}
 
 	@NotNull
@@ -156,13 +146,13 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int getMaxStackSize()
 	{
-		return this.type.getMaxStackSize();
+		return this.itemMeta.hasMaxStackSize() ? this.itemMeta.getMaxStackSize() : this.type.getMaxStackSize();
 	}
 
 	@Override
 	public short getDurability()
 	{
-		return this.durability;
+		return (short) Math.max(this.durability, 0);
 	}
 
 	@Override
@@ -198,7 +188,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchantments()
 	{
-		return itemMeta.getEnchants();
+		return this.hasItemMeta() ? itemMeta.getEnchants() : Map.of();
 	}
 
 	@Override
@@ -221,8 +211,8 @@ public class ItemStackMock extends ItemStack
 		ItemStackMock clone = new ItemStackMock(this.type);
 
 		clone.setAmount(this.amount);
-		clone.setDurability(this.durability);
-		clone.setItemMeta(this.itemMeta);
+		clone.durability = this.durability;
+		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
 		return clone;
 	}
 
@@ -230,8 +220,55 @@ public class ItemStackMock extends ItemStack
 	public boolean equals(Object obj)
 	{
 		if (obj == null) return false;
-		if (!(obj instanceof final ItemStackMock bukkit)) return false;
-		return isSimilar(bukkit) && this.amount == bukkit.getAmount();
+		if (!(obj instanceof ItemStack stack))
+		{
+			return false;
+		}
+		if (stack instanceof ItemStackMock bukkit)
+		{
+			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore()) && Objects.equals(this.getEnchantments(), bukkit.getEnchantments());
+		}
+		else
+		{
+			// will delegate back to this method / no stack overflow as obj then will be item stack mock instance
+			return stack.equals(this);
+		}
+	}
+
+	@Override
+	public int hashCode()
+	{
+		if (type == ItemType.AIR)
+		{
+			return EMPTY.hashCode();
+		}
+		else
+		{
+			int hash = Objects.hash(type, durability, lore(), getEnchantments());
+			hash = hash * 31 + this.getAmount();
+			return hash;
+		}
+	}
+
+	private static @Nullable ItemMeta findItemMeta(Material material)
+	{
+		if (!material.isItem() || material == Material.AIR)
+		{
+			return null;
+		}
+		if (material.asItemType().getItemMetaClass() != ItemMetaMock.class)
+		{
+			try
+			{
+				return material.asItemType().getItemMetaClass().getConstructor().newInstance();
+			}
+			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+				   NoSuchMethodException e)
+			{
+				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + material.asItemType().getItemMetaClass(), e);
+			}
+		}
+		return new ItemMetaMock();
 	}
 
 	@NotNull
