@@ -58,6 +58,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -1502,6 +1503,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastHurtAnimation(@NotNull Collection<Player> players)
+	{
+		Preconditions.checkNotNull(players, "Player collection cannot be null");
+		Preconditions.checkArgument(!players.contains(this), "Cannot broadcast hurt animation to self without a yaw");
+		for (final Player player : players) {
+			player.sendHurtAnimation(0);
+		}
 	}
 
 	public void tick()
