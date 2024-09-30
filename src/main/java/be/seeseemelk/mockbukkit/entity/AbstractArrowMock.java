@@ -6,11 +6,13 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public class AbstractArrowMock extends AbstractProjectileMock implements AbstractArrow
@@ -212,6 +214,12 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	public boolean hasNoPhysics()
 	{
 		return noPhysics;
+	}
+
+	@Override
+	public void broadcastHurtAnimation(@NotNull Collection<Player> collection)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 }
