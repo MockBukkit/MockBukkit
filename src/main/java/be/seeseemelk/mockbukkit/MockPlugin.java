@@ -127,43 +127,41 @@ public class MockPlugin extends JavaPlugin
 			return (MockPlugin) instance;
 		}
 
-		@ApiStatus.Internal
-		public static class InternalMockPlugin extends MockPlugin
-		{
-
-			private final Optional<Runnable> onEnable;
-			private final Optional<Runnable> onDisable;
-			private final Optional<Runnable> onLoad;
-
-			public InternalMockPlugin(Optional<Runnable> onEnable, Optional<Runnable> onDisable, Optional<Runnable> onLoad)
-			{
-				this.onEnable = onEnable;
-				this.onDisable = onDisable;
-				this.onLoad = onLoad;
-			}
-
-			@Override
-			public void onEnable()
-			{
-				onEnable.ifPresent(Runnable::run);
-			}
-
-			@Override
-			public void onDisable()
-			{
-				onDisable.ifPresent(Runnable::run);
-			}
-
-			@Override
-			public void onLoad()
-			{
-				onLoad.ifPresent(Runnable::run);
-			}
-
-		}
-
-
 	}
 
+	@ApiStatus.Internal
+	public static class InternalMockPlugin extends MockPlugin
+	{
+
+		private final Optional<Runnable> onEnable;
+		private final Optional<Runnable> onDisable;
+		private final Optional<Runnable> onLoad;
+
+		public InternalMockPlugin(Optional<Runnable> onEnable, Optional<Runnable> onDisable, Optional<Runnable> onLoad)
+		{
+			this.onEnable = onEnable;
+			this.onDisable = onDisable;
+			this.onLoad = onLoad;
+		}
+
+		@Override
+		public void onEnable()
+		{
+			onEnable.ifPresent(Runnable::run);
+		}
+
+		@Override
+		public void onDisable()
+		{
+			onDisable.ifPresent(Runnable::run);
+		}
+
+		@Override
+		public void onLoad()
+		{
+			onLoad.ifPresent(Runnable::run);
+		}
+
+	}
 
 }
