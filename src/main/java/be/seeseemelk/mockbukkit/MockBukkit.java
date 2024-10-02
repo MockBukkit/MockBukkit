@@ -435,7 +435,7 @@ public class MockBukkit
 	 */
 	public static @NotNull MockPlugin createMockPlugin()
 	{
-		return MockPlugin.builder().build();
+		return createMockPlugin("MockPlugin");
 	}
 
 	/**
@@ -447,7 +447,7 @@ public class MockBukkit
 	 */
 	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName)
 	{
-		return MockPlugin.builder().withPluginName(pluginName).build();
+		return createMockPlugin(pluginName, "1.0.0");
 	}
 
 	/**
@@ -460,7 +460,11 @@ public class MockBukkit
 	 */
 	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName, @NotNull String pluginVersion)
 	{
-		return MockPlugin.builder().withPluginName(pluginName).withPluginVersion(pluginVersion).build();
+		ensureMocking();
+		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, MockPlugin.class.getName());
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, new Object[0]);
+		mock.getPluginManager().enablePlugin(instance);
+		return (MockPlugin) instance;
 	}
 
 	/**
