@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -53,32 +54,34 @@ public class MockPlugin extends JavaPlugin
 		{
 		}
 
-		public Builder withOnLoad(Runnable onLoad)
+		public Builder withOnLoad(@NotNull Runnable onLoad)
 		{
 			this.onLoad = Optional.of(onLoad);
 			return this;
 		}
 
-		public Builder withOnEnable(Runnable onEnable)
+		public Builder withOnEnable(@NotNull Runnable onEnable)
 		{
 			this.onEnable = Optional.of(onEnable);
 			return this;
 		}
 
-		public Builder withOnDisable(Runnable onDisable)
+		public Builder withOnDisable(@NotNull Runnable onDisable)
 		{
 			this.onDisable = Optional.of(onDisable);
 			return this;
 		}
 
-		public Builder withPluginName(String name)
+		public Builder withPluginName(@NotNull String name)
 		{
+			Preconditions.checkNotNull(name);
 			this.pluginName = name;
 			return this;
 		}
 
-		public Builder withPluginVersion(String version)
+		public Builder withPluginVersion(@NotNull String version)
 		{
+			Preconditions.checkNotNull(version);
 			this.pluginVersion = version;
 			return this;
 		}
