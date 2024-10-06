@@ -298,6 +298,18 @@ public 	class ServerMock extends Server.Spigot implements Server
 		try
 		{
 			conditionLatch.await();
+			if (preLoginEvent.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED)
+			{
+				PlayerConnectionCloseEvent playerConnectionCloseEvent =
+						new PlayerConnectionCloseEvent(player.getUniqueId(),
+								player.getName(),
+								player.getAddress().getAddress(),
+								false);
+
+				getPluginManager().callEvent(playerConnectionCloseEvent);
+				playerList.disconnectPlayer(player);
+				return;
+			}
 		}
 		catch (InterruptedException e)
 		{
@@ -308,6 +320,19 @@ public 	class ServerMock extends Server.Spigot implements Server
 
 		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostString(), address.getAddress());
 		Bukkit.getPluginManager().callEvent(playerLoginEvent);
+
+		if (playerLoginEvent.getResult() != PlayerLoginEvent.Result.ALLOWED)
+		{
+			PlayerConnectionCloseEvent playerConnectionCloseEvent =
+					new PlayerConnectionCloseEvent(player.getUniqueId(),
+							player.getName(),
+							player.getAddress().getAddress(),
+							false);
+
+			getPluginManager().callEvent(playerConnectionCloseEvent);
+			playerList.disconnectPlayer(player);
+			return;
+		}
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
