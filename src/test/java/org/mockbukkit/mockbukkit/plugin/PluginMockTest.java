@@ -22,7 +22,7 @@ class PluginMockTest
 	void onEnable_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		PluginMock.Builder builder = PluginMock.builder().withOnEnable(() -> trigger.set(true));
+		PluginMock.Builder builder = PluginMock.builder().withOnEnable((ignored) -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertTrue(trigger.get());
@@ -32,7 +32,7 @@ class PluginMockTest
 	void onLoad_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		PluginMock.Builder builder = PluginMock.builder().withOnLoad(() -> trigger.set(true));
+		PluginMock.Builder builder = PluginMock.builder().withOnLoad((ignored) -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertTrue(trigger.get());
@@ -42,7 +42,7 @@ class PluginMockTest
 	void onDisable_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		PluginMock.Builder builder = PluginMock.builder().withOnDisable(() -> trigger.set(true));
+		PluginMock.Builder builder = PluginMock.builder().withOnDisable((ignored) -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertFalse(trigger.get());

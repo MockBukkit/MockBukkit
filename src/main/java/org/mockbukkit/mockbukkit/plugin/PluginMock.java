@@ -11,6 +11,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * A simple plugin that does nothing.
@@ -51,9 +52,9 @@ public class PluginMock extends JavaPlugin
 	public static class Builder
 	{
 
-		private Optional<Runnable> onLoad = Optional.empty();
-		private Optional<Runnable> onEnable = Optional.empty();
-		private Optional<Runnable> onDisable = Optional.empty();
+		private Optional<Consumer<MockPlugin>> onLoad = Optional.empty();
+		private Optional<Consumer<MockPlugin>> onEnable = Optional.empty();
+		private Optional<Consumer<MockPlugin>> onDisable = Optional.empty();
 		private String pluginName = "MockPlugin";
 		private String pluginVersion = "1.0.0";
 
@@ -65,7 +66,7 @@ public class PluginMock extends JavaPlugin
 		 * @param onLoad What to run on load
 		 * @return This builder
 		 */
-		public Builder withOnLoad(@NotNull Runnable onLoad)
+		public Builder withOnLoad(@NotNull Consumer<MockPlugin> onLoad)
 		{
 			this.onLoad = Optional.of(onLoad);
 			return this;
@@ -75,7 +76,7 @@ public class PluginMock extends JavaPlugin
 		 * @param onEnable What to run on enable
 		 * @return This builder
 		 */
-		public Builder withOnEnable(@NotNull Runnable onEnable)
+		public Builder withOnEnable(@NotNull Consumer<MockPlugin> onEnable)
 		{
 			this.onEnable = Optional.of(onEnable);
 			return this;
@@ -85,7 +86,7 @@ public class PluginMock extends JavaPlugin
 		 * @param onDisable What to run on disable
 		 * @return This builder
 		 */
-		public Builder withOnDisable(@NotNull Runnable onDisable)
+		public Builder withOnDisable(@NotNull Consumer<MockPlugin> onDisable)
 		{
 			this.onDisable = Optional.of(onDisable);
 			return this;
@@ -135,11 +136,11 @@ public class PluginMock extends JavaPlugin
 	public static class InternalPluginMock extends PluginMock
 	{
 
-		private final Optional<Runnable> onEnable;
-		private final Optional<Runnable> onDisable;
-		private final Optional<Runnable> onLoad;
+		private final Optional<Consumer<MockPlugin>> onEnable;
+		private final Optional<Consumer<MockPlugin>> onDisable;
+		private final Optional<Consumer<MockPlugin>> onLoad;
 
-		public InternalPluginMock(Optional<Runnable> onEnable, Optional<Runnable> onDisable, Optional<Runnable> onLoad)
+		public InternalPluginMock(Optional<Consumer<MockPlugin>> onEnable, Optional<Consumer<MockPlugin>> onDisable, Optional<Consumer<MockPlugin>> onLoad)
 		{
 			this.onEnable = onEnable;
 			this.onDisable = onDisable;
@@ -149,19 +150,19 @@ public class PluginMock extends JavaPlugin
 		@Override
 		public void onEnable()
 		{
-			onEnable.ifPresent(Runnable::run);
+			onEnable.ifPresent((consumer) -> consumer.accept(this));
 		}
 
 		@Override
 		public void onDisable()
 		{
-			onDisable.ifPresent(Runnable::run);
+			onDisable.ifPresent((consumer) -> consumer.accept(this));
 		}
 
 		@Override
 		public void onLoad()
 		{
-			onLoad.ifPresent(Runnable::run);
+			onLoad.ifPresent((consumer) -> consumer.accept(this));
 		}
 
 	}
