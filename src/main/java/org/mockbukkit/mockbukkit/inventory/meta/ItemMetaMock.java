@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.Namespaced;
 import com.google.common.base.Preconditions;
@@ -345,7 +346,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		catch (CloneNotSupportedException e)
 		{
-			throw new RuntimeException(e);
+			throw new ItemMetaInitException(e);
 		}
 	}
 

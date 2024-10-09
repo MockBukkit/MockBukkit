@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
@@ -154,7 +155,7 @@ public class ItemFactoryMock implements ItemFactory
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
 			   | NoSuchMethodException e)
 		{
-			throw new RuntimeException(e);
+			throw new ItemMetaInitException(e);
 		}
 	}
 
