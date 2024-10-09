@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +54,7 @@ public class Languages
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			throw new InternalDataLoadException(e);
 		}
 	}
 

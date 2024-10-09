@@ -9,6 +9,8 @@ import org.mockbukkit.mockbukkit.entity.variant.FrogVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.VillagerProfessionMock;
 import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfVariantMock;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureTypeMock;
 import org.mockbukkit.mockbukkit.inventory.ItemTypeMock;
@@ -57,7 +59,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			throw new InternalDataLoadException(e);
 		}
 	}
 

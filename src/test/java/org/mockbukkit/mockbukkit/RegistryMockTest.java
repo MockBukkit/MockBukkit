@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -87,7 +88,7 @@ class RegistryMockTest
 		}
 		catch (IllegalAccessException e)
 		{
-			throw new RuntimeException(e);
+			throw new InternalDataLoadException(e);
 		}
 	}
 

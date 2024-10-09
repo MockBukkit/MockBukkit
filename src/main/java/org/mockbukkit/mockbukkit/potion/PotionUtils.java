@@ -10,6 +10,7 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -40,7 +41,7 @@ public class PotionUtils
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			throw new InternalDataLoadException(e);
 		}
 	}
 
