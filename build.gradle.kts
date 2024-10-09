@@ -63,6 +63,7 @@ tasks {
 				// Custom options
 				addBooleanOption("html5", true)
 				addStringOption("-release", "17")
+				addBooleanOption("Xdoclint:all,-missing", true)
 				links("https://jd.papermc.io/paper/${(project.property("paper.api.full-version") as String).split('-')[0]}/")
 			}
 		}
