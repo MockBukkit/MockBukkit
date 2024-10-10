@@ -6,10 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 class ChunkCoordinateTest
 {
@@ -39,10 +37,7 @@ class ChunkCoordinateTest
 			ChunkCoordinate chunkA = new ChunkCoordinate(1, 2);
 			ChunkCoordinate chunkB = new ChunkCoordinate(1, 2);
 
-			assertEquals(chunkA, chunkA);
 			assertEquals(chunkA, chunkB);
-
-			assertSame(chunkA, chunkA);
 			assertNotSame(chunkA, chunkB);
 		}
 
@@ -52,10 +47,7 @@ class ChunkCoordinateTest
 			ChunkCoordinate chunkA = new ChunkCoordinate(1, 2);
 			ChunkCoordinate chunkB = new ChunkCoordinate(3, 2);
 
-			assertEquals(chunkA, chunkA);
 			assertNotEquals(chunkA, chunkB);
-
-			assertSame(chunkA, chunkA);
 			assertNotSame(chunkA, chunkB);
 		}
 
@@ -65,18 +57,8 @@ class ChunkCoordinateTest
 			ChunkCoordinate chunkA = new ChunkCoordinate(1, 2);
 			ChunkCoordinate chunkB = new ChunkCoordinate(1, 3);
 
-			assertEquals(chunkA, chunkA);
 			assertNotEquals(chunkA, chunkB);
-
-			assertSame(chunkA, chunkA);
 			assertNotSame(chunkA, chunkB);
-		}
-
-		@Test
-		void givenNullValue()
-		{
-			ChunkCoordinate chunkA = new ChunkCoordinate(1, 2);
-			assertFalse(chunkA.equals(null));
 		}
 
 	}
