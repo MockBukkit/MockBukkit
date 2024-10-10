@@ -8,10 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read # Read repo contents
-      checks: write # Write result from pipeline execution
-
     steps:
       - uses: actions/checkout@v4
 
@@ -29,7 +25,15 @@ jobs:
 
       - name: Validate checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
-      - name: Comment PR with checkstyle issues
-        uses: jwgmeligmeyling/checkstyle-github-action@master
-        with:
-          path: 'build/reports/checkstyle/**.xml'
+
+# Not implemented yet, because Action does not have permission to upload report.
+# See PR: https://github.com/MockBukkit/MockBukkit/pull/977
+#
+#      - name: Comment PR with checkstyle issues
+#        uses: jwgmeligmeyling/checkstyle-github-action@master
+#        with:
+#          path: 'build/reports/checkstyle/**.xml'
+#
+#    permissions:
+#      contents: read # Read repo contents
+#      checks: write # Write result from pipeline execution
