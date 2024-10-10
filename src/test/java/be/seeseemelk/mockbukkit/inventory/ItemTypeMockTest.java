@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 @SuppressWarnings("UnstableApiUsage")
-public class ItemTypeMockTest
+class ItemTypeMockTest
 {
 
 	private ItemType itemType;
 
 	@BeforeEach
-	public void setup()
+	void setup()
 	{
 		itemType = ItemType.ITEM_FRAME;
 	}
