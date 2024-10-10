@@ -1,3 +1,8 @@
+codecov:
+  branch: "v1.21"
+
+github_checks: true
+
 comment:
   layout: "header, diff, flags, components"  # show component info in the PR comment
 
