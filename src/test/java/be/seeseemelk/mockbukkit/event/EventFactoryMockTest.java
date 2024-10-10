@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.entity.CowMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -31,21 +33,49 @@ class EventFactoryMockTest
 	private ServerMock server;
 
 	@Test
-	void callEntityRemoveEvent()
+	void callEntityRemoveEvent_GivenSuccess()
 	{
 		Plugin plugin = MockBukkit.load(TestPlugin.class);
-		CowMock cowMock = new CowMock(server, UUID.randomUUID());
+		CowMock cow = new CowMock(server, UUID.randomUUID());
 		EventHolder eventHolder = new EventHolder();
 		Bukkit.getPluginManager().registerEvents(eventHolder, plugin);
 
-		EventFactoryMock.callEntityRemoveEvent(cowMock, EntityRemoveEvent.Cause.DEATH);
+		EventFactoryMock.callEntityRemoveEvent(cow, EntityRemoveEvent.Cause.DEATH);
 
 		Event e = eventHolder.getEvent();
 		assertNotNull(e);
 
 		EntityRemoveEvent entityRemoveEvent = assertInstanceOf(EntityRemoveEvent.class, e);
-		assertSame(cowMock, entityRemoveEvent.getEntity());
+		assertSame(cow, entityRemoveEvent.getEntity());
 		assertEquals(EntityRemoveEvent.Cause.DEATH, entityRemoveEvent.getCause());
+	}
+
+	@Test
+	void callEntityRemoveEvent_GivenWorldChange()
+	{
+		Plugin plugin = MockBukkit.load(TestPlugin.class);
+		CowMock cow = new CowMock(server, UUID.randomUUID());
+		EventHolder eventHolder = new EventHolder();
+		Bukkit.getPluginManager().registerEvents(eventHolder, plugin);
+
+		EventFactoryMock.callEntityRemoveEvent(cow, null);
+
+		Event e = eventHolder.getEvent();
+		assertNull(e);
+	}
+
+	@Test
+	void callEntityRemoveEvent_GivenPlayerEntity()
+	{
+		Plugin plugin = MockBukkit.load(TestPlugin.class);
+		PlayerMock player = server.addPlayer();
+		EventHolder eventHolder = new EventHolder();
+		Bukkit.getPluginManager().registerEvents(eventHolder, plugin);
+
+		EventFactoryMock.callEntityRemoveEvent(player, null);
+
+		Event e = eventHolder.getEvent();
+		assertNull(e);
 	}
 
 	/**
