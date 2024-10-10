@@ -4,10 +4,13 @@ import com.google.common.base.Preconditions;
 import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottleMeta
 {
 
 	private Integer amplifier;
+	private static final String AMPLIFIER_KEY = "amplifier";
 
 	public OminousBottleMetaMock()
 	{
@@ -42,4 +45,33 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		clone.amplifier = this.amplifier;
 		return clone;
 	}
+
+	@Override
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
+	{
+		super.deserializeInternal(args);
+		if (args.containsKey(AMPLIFIER_KEY))
+		{
+			this.amplifier = (Integer) args.get(AMPLIFIER_KEY);
+		}
+	}
+
+	public static @NotNull OminousBottleMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		OminousBottleMetaMock serialMock = new OminousBottleMetaMock();
+		serialMock.deserializeInternal(args);
+		return serialMock;
+	}
+
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		if (this.hasAmplifier())
+		{
+			serialized.put(AMPLIFIER_KEY, amplifier);
+		}
+		return serialized;
+	}
+
 }

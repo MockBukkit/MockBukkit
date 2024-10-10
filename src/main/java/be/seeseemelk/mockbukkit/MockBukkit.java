@@ -8,12 +8,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -135,11 +133,11 @@ public class MockBukkit
 	 *
 	 * @param path Path to the jar.
 	 */
-	public static void loadJar(@NotNull String path)
+	public static Plugin loadJar(@NotNull String path)
 	{
 		try
 		{
-			loadJar(new File(path));
+			return loadJar(new File(path));
 		}
 		catch (InvalidPluginException e)
 		{
@@ -154,11 +152,12 @@ public class MockBukkit
 	 * Loads a plugin from a jar.
 	 *
 	 * @param jarFile Path to the jar.
+	 * @return An instance of the plugin's main class.
 	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
 	 */
-	public static void loadJar(@NotNull File jarFile) throws InvalidPluginException
+	public static Plugin loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{
-		mock.getPluginManager().loadPlugin(jarFile);
+		return mock.getPluginManager().loadPlugin(jarFile);
 	}
 
 	/**
@@ -270,10 +269,10 @@ public class MockBukkit
 	 * Loads and enables the Plugin with a specified Config File. It receives the {@code config.yml} as a InputStream
 	 * to load.
 	 *
-	 * @param <T>        The plugin's main class to load.
-	 * @param plugin     The plugin to load for mocking.
+	 * @param <T>          The plugin's main class to load.
+	 * @param plugin       The plugin to load for mocking.
 	 * @param configStream The {@code InputStream} of the {@code config.yml} file to load.
-	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @param parameters   Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 * @apiNote The File name can't be the same as the one the plugin loads by default
 	 */
@@ -290,7 +289,7 @@ public class MockBukkit
 		}
 		catch (IOException | InvalidConfigurationException e)
 		{
-			throw new RuntimeException("Couldn't read config input stream",e);
+			throw new RuntimeException("Couldn't read config input stream", e);
 		}
 		return loadWithConfig(plugin, config, parameters);
 	}

@@ -1,14 +1,15 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import org.junit.jupiter.api.AfterEach;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class AnvilInventoryMockTest
 {
 
@@ -17,14 +18,7 @@ class AnvilInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		this.inventory = new AnvilInventoryMock(null);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

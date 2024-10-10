@@ -1,15 +1,16 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class SmithingInventoryMockTest
 {
 
@@ -18,14 +19,7 @@ class SmithingInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		inventory = new SmithingInventoryMock(null);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

@@ -8,18 +8,19 @@ import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TrapDoor;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class MockChunkDataTest
 {
-
+	@MockBukkitInject
 	private ServerMock server;
 	private WorldMock world;
 	private ChunkGenerator.ChunkData chunkData;
@@ -27,15 +28,8 @@ class MockChunkDataTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		world = server.addSimpleWorld("dummy");
 		chunkData = server.createChunkData(world);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

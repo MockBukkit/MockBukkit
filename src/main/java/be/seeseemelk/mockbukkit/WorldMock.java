@@ -14,6 +14,8 @@ import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
 import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.BoggedMock;
+import be.seeseemelk.mockbukkit.entity.BreezeMock;
+import be.seeseemelk.mockbukkit.entity.BreezeWindChargeMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
@@ -104,10 +106,12 @@ import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WindChargeMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
+import be.seeseemelk.mockbukkit.entity.ZoglinMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
@@ -166,6 +170,8 @@ import org.bukkit.entity.Blaze;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Bogged;
+import org.bukkit.entity.Breeze;
+import org.bukkit.entity.BreezeWindCharge;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
@@ -257,10 +263,12 @@ import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.Witch;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
+import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
 import org.bukkit.entity.minecart.CommandMinecart;
@@ -536,6 +544,42 @@ public class WorldMock implements World
 
 		blocks.put(c, block);
 		return block;
+	}
+
+	@Override
+	public boolean isVoidDamageEnabled()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVoidDamageEnabled(boolean b)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getVoidDamageAmount()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVoidDamageAmount(float v)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getVoidDamageMinBuildHeightOffset()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVoidDamageMinBuildHeightOffset(double v)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1485,6 +1529,10 @@ public class WorldMock implements World
 		{
 			return new RavagerMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Zoglin.class)
+		{
+			return new ZoglinMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Vindicator.class)
 		{
 			return new VindicatorMock(server, UUID.randomUUID());
@@ -1548,6 +1596,18 @@ public class WorldMock implements World
 		else if (clazz == Bogged.class)
 		{
 			return new BoggedMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Breeze.class)
+		{
+			return new BreezeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == BreezeWindCharge.class)
+		{
+			return new BreezeWindChargeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == WindCharge.class)
+		{
+			return new WindChargeMock(server, UUID.randomUUID());
 		}
 
 		throw new UnimplementedOperationException();
@@ -1862,14 +1922,21 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power)
+	public boolean createExplosion(@NotNull Location loc, float power)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power, boolean setFire)
+	public boolean createExplosion(@NotNull Location loc, float power, boolean setFire)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean createExplosion(Entity source, @NotNull Location loc, float power, boolean setFire, boolean breakBlocks, boolean excludeSourceFromDamage)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

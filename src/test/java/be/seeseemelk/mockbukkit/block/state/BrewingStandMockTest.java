@@ -1,14 +1,16 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.BrewerInventory;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class BrewingStandMockTest
 {
 
@@ -26,17 +29,10 @@ class BrewingStandMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.BREWING_STAND);
 		this.brewingStand = new BrewingStandMock(this.block);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -101,6 +97,20 @@ class BrewingStandMockTest
 		assertNotSame(brewingStand.getInventory(), brewingStand.getSnapshotInventory());
 		assertEquals(brewingStand.getInventory().getFuel(), brewingStand.getSnapshotInventory().getFuel());
 		assertEquals(brewingStand.getInventory().getIngredient(), brewingStand.getSnapshotInventory().getIngredient());
+	}
+
+	@Test
+	void getRecipeBrewTime()
+	{
+		assertEquals(400, brewingStand.getRecipeBrewTime());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 10, 50, 100})
+	void setRecipeBrewTime(int value)
+	{
+		brewingStand.setRecipeBrewTime(value);
+		assertEquals(value, brewingStand.getRecipeBrewTime());
 	}
 
 }

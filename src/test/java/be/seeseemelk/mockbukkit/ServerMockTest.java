@@ -65,6 +65,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -80,9 +82,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -118,22 +119,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
 {
-
+	@MockBukkitInject
 	private ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void class_NumberOfPlayers_Zero()
@@ -957,6 +947,16 @@ class ServerMockTest
 	}
 
 	@Test
+	void testAddPlayerWithDisallowedLoginResult()
+	{
+		server.getPluginManager().registerEvents(new EventDenier(), MockBukkit.createMockPlugin());
+		PlayerMock player = server.addPlayer();
+
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+	}
+
+	@Test
 	void testGetBannedPlayersDefault()
 	{
 		assertEquals(0, server.getBannedPlayers().size());
@@ -1768,4 +1768,17 @@ class TestRecipe implements Recipe
 		return result;
 	}
 
+}
+
+class EventDenier implements Listener
+{
+	@EventHandler
+	void onPlayerConnectionClose(AsyncPlayerPreLoginEvent event){
+		event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
+	}
+
+	@EventHandler
+	void onPlayerLogin(PlayerLoginEvent  event){
+		event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
+	}
 }

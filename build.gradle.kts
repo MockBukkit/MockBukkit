@@ -25,12 +25,12 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.11.0")
+	implementation("org.junit.jupiter:junit-jupiter:5.11.2")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
-	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.15.1")
+	implementation("org.jetbrains:annotations:26.0.0")
+	implementation("net.bytebuddy:byte-buddy:1.15.4")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -62,9 +62,8 @@ tasks {
 					"implNote:a:Implementation Note:"
 				)
 				// Custom options
-				addBooleanOption("html5", true)
-				addStringOption("-release", "17")
-				links("https://jd.papermc.io/paper/${project.property("paper.api.version")}/")
+				addBooleanOption("Xdoclint:all,-missing", true)
+				links("https://jd.papermc.io/paper/${(project.property("paper.api.full-version") as String).split('-')[0]}/")
 			}
 		}
 	}

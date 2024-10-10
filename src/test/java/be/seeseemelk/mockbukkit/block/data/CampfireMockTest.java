@@ -1,12 +1,12 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class CampfireMockTest
 {
 
@@ -24,14 +25,7 @@ class CampfireMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		this.campfire = new CampfireMock(Material.CAMPFIRE);
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

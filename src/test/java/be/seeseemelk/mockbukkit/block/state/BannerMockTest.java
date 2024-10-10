@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.DyeColor;
@@ -8,9 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@ExtendWith(MockBukkitExtension.class)
 class BannerMockTest
 {
 
@@ -31,14 +32,7 @@ class BannerMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		meta = new BannerMock(Material.BLACK_BANNER);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

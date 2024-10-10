@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -19,27 +19,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class PermissionManagerMockTest
 {
 
 	private PermissionManagerMock permissionManager;
 	private static final String PERMISSION_NODE_1 = "mockbukkit.plugin.permission1";
 	private Permission permission1;
+	@MockBukkitInject
 	private ServerMock serverMock;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.serverMock = MockBukkit.mock();
 		this.permissionManager = new PermissionManagerMock();
 		this.permission1 = new Permission(PERMISSION_NODE_1);
 		permissionManager.addPermission(permission1);
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

@@ -1,12 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,9 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class CrossbowMetaMockTest
 {
 
@@ -26,14 +28,7 @@ class CrossbowMetaMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		meta = new CrossbowMetaMock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -221,6 +216,14 @@ class CrossbowMetaMockTest
 		CrossbowMetaMock meta2 = meta.clone();
 
 		assertEquals(1, meta2.getChargedProjectiles().size());
+	}
+
+	@Test
+	void clone_notSameItemStack()
+	{
+		ItemStack itemStack = new ItemStackMock(Material.FIREWORK_ROCKET);
+		meta.addChargedProjectile(itemStack);
+		assertNotSame(itemStack, meta.clone().getChargedProjectiles().get(0));
 	}
 
 }

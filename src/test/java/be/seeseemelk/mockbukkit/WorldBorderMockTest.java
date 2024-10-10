@@ -8,18 +8,19 @@ import org.bukkit.WorldBorder;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class WorldBorderMockTest
 {
-
+	@MockBukkitInject
 	private ServerMock server;
 	private World world;
 	private WorldBorder worldBorderMock;
@@ -27,15 +28,8 @@ class WorldBorderMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		world = new WorldMock();
 		worldBorderMock = world.getWorldBorder();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

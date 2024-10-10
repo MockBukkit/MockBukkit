@@ -427,6 +427,21 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		return new MockBukkitConfiguredPluginClassLoader(server, description, dataFolder, pluginFile);
 	}
 
+	private MockBukkitURLClassLoader createURLClassLoader(File pluginFile, PluginDescriptionFile description) throws IOException
+	{
+		String name = description.getName();
+		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
+		{
+			throw new RuntimeException("Restricted Name");
+		}
+		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
+		{
+			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
+		}
+		File dataFolder = createTemporaryDirectory(name + "-" + description.getVersion());
+		return new MockBukkitURLClassLoader(pluginFile, getClass().getClassLoader(), server, description, dataFolder);
+	}
+
 	/**
 	 * Load a plugin from a class. It will use the system resource {@code plugin.yml} as the resource file.
 	 *
@@ -684,8 +699,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			JarFile jarFile = new JarFile(file);
 			PluginDescriptionFile descriptionFile = new PluginDescriptionFile(jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
-			MockBukkitConfiguredPluginClassLoader classLoader = createClassLoader(descriptionFile);
-			classLoader.setJarFile(jarFile);
+			MockBukkitURLClassLoader classLoader = createURLClassLoader(file, descriptionFile);
 
 			Class<?> pluginClass = classLoader.loadClass(descriptionFile.getMainClass(), true, false, false);
 			JavaPlugin plugin = (JavaPlugin) pluginClass.getConstructor().newInstance();

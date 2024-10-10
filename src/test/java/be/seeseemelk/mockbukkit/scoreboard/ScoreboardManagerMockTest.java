@@ -1,16 +1,17 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class ScoreboardManagerMockTest
 {
 
@@ -19,14 +20,7 @@ class ScoreboardManagerMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		manager = new ScoreboardManagerMock();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

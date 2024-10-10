@@ -3,9 +3,9 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.OfflinePlayer;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,23 +20,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class MockPlayerListTest
 {
-
+	@MockBukkitInject
 	private ServerMock server;
 	private MockPlayerList playerList;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		playerList = server.getPlayerList();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
