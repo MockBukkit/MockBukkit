@@ -61,9 +61,8 @@ tasks {
 					"implNote:a:Implementation Note:"
 				)
 				// Custom options
-				addBooleanOption("html5", true)
-				addStringOption("-release", "17")
-				links("https://jd.papermc.io/paper/${project.property("paper.api.version")}/")
+				addBooleanOption("Xdoclint:all,-missing", true)
+				links("https://jd.papermc.io/paper/${(project.property("paper.api.full-version") as String).split('-')[0]}/")
 			}
 		}
 	}
