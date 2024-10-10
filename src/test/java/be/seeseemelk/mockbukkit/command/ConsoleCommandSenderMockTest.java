@@ -258,17 +258,20 @@ class ConsoleCommandSenderMockTest
 	}
 
 	@Nested
-	class CommandSenderSpigotMock {
+	class CommandSenderSpigotMock
+	{
 
 		@Test
-		void sendMessage_GivenSimpleMessage(){
+		void sendMessage_GivenSimpleMessage()
+		{
 			net.md_5.bungee.api.chat.TextComponent previousButton = new net.md_5.bungee.api.chat.TextComponent("Hello world!");
 			sender.spigot().sendMessage(previousButton);
 			sender.assertSaid("Hello world!");
 		}
 
 		@Test
-		void sendMessage_GivenColoredMessage(){
+		void sendMessage_GivenColoredMessage()
+		{
 			BaseComponent message = new ComponentBuilder()
 					.append("Hello ")
 					.color(ChatColor.RED)
@@ -281,7 +284,8 @@ class ConsoleCommandSenderMockTest
 		}
 
 		@Test
-		void sendMessage_issue550(){
+		void sendMessage_issue550()
+		{
 			net.md_5.bungee.api.chat.TextComponent message = new net.md_5.bungee.api.chat.TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 			sender.spigot().sendMessage(message);
 			sender.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));

@@ -121,7 +121,8 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 		Preconditions.checkArgument(damage >= 0.0, "damage must be >= 0.0, given %s", damage);
 
 		this.damagePerBlock = damage;
-		if (damage > 0.0) {
+		if (damage > 0.0)
+		{
 			this.setHurtEntities(true);
 		}
 	}
@@ -138,7 +139,8 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 		Preconditions.checkArgument(damage >= 0, "damage must be >= 0, given %s", damage);
 
 		this.maximumDamage = damage;
-		if (damage > 0) {
+		if (damage > 0)
+		{
 			this.setHurtEntities(true);
 		}
 	}

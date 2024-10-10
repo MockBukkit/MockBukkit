@@ -179,7 +179,8 @@ class PermissionManagerMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = {"permission.op", "permission.op.inherited"})
-	void testPermissionsLoadedFromPlugin_defaultOp(String node){
+	void testPermissionsLoadedFromPlugin_defaultOp(String node)
+	{
 		JavaPlugin plugin = getTestPlugin();
 		Player player = serverMock.addPlayer();
 		player.setOp(true);
@@ -190,7 +191,8 @@ class PermissionManagerMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = {"permission.notop", "permission.notop.inside"})
-	void testPermissionsLoadedFromPlugin_defaultNotOp(String node){
+	void testPermissionsLoadedFromPlugin_defaultNotOp(String node)
+	{
 		getTestPlugin();
 		Player player = serverMock.addPlayer();
 		player.setOp(true);
@@ -200,7 +202,8 @@ class PermissionManagerMockTest
 	}
 
 	@Test
-	void testPermissionsLoadedFromPlugin_inheritance(){
+	void testPermissionsLoadedFromPlugin_inheritance()
+	{
 		JavaPlugin plugin = getTestPlugin();
 		Player player = serverMock.addPlayer();
 		player.addAttachment(plugin,"permission.false",true);

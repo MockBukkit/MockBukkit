@@ -9,7 +9,8 @@ public abstract class OldEnumMock<T extends OldEnum<T>> implements OldEnum<T>
 	private final String name;
 	private final int ordinal;
 
-	public OldEnumMock(String name, int ordinal){
+	public OldEnumMock(String name, int ordinal)
+	{
 		this.name = name;
 		this.ordinal = ordinal;
 	}
