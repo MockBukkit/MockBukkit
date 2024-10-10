@@ -77,7 +77,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		String translationKey = jsonObject.get("translationKey").getAsString();
 		ItemRarity rarity = ItemRarity.valueOf(jsonObject.get("rarity").getAsString());
 		CreativeCategory creativeCategory = CreativeCategory.valueOf(jsonObject.get("creativeCategory").getAsString());
-		boolean isCompostable = jsonObject.get("isCompostable").getAsBoolean();
+		boolean isCompostable = jsonObject.get("compostable").getAsBoolean();
 		BigDecimal compostChance = new BigDecimal(0);
 		if (isCompostable)
 		{

@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ItemTypeMockTest
 {
 
-	@MockBukkitInject
-	private ServerMock server;
 	private ItemType itemType;
 
 	@BeforeEach
@@ -73,4 +71,27 @@ public class ItemTypeMockTest
 		assertTrue(Math.abs(0.3-item.getCompostChance()) < 0.1);
 	}
 
+	@Test
+	void testHasBlockType()
+	{
+		ItemType blockItem = ItemType.ACACIA_BUTTON;
+		assertTrue(blockItem.hasBlockType());
+		ItemType nonBlockItem = ItemType.ACACIA_BOAT;
+		assertFalse(nonBlockItem.hasBlockType());
+	}
+
+	@Test
+	void testGetMetaClassForAirThrows()
+	{
+		ItemType item = ItemType.AIR;
+
+		assertThrows(UnsupportedOperationException.class, item::getItemMetaClass);
+	}
+
+	@Test
+	void testTranslationKey()
+	{
+		ItemType item = ItemType.ACACIA_BOAT;
+		assertEquals("item.minecraft.acacia_boat", item.translationKey());
+	}
 }
