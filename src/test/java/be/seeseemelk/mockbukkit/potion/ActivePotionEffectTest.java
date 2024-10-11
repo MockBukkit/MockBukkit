@@ -29,7 +29,8 @@ public class ActivePotionEffectTest
 	}
 
 	@Test
-	void infiniteDuration() {
+	void infiniteDuration()
+	{
 		PlayerMock player = server.addPlayer();
 		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, PotionEffect.INFINITE_DURATION, 0));
 		server.getScheduler().performOneTick();
@@ -37,7 +38,8 @@ public class ActivePotionEffectTest
 	}
 
 	@Test
-	void belowFiniteDuration() {
+	void belowFiniteDuration()
+	{
 		int duration = 3;
 
 		PlayerMock player = server.addPlayer();
@@ -48,7 +50,8 @@ public class ActivePotionEffectTest
 	}
 
 	@Test
-	void aboveFiniteDuration() {
+	void aboveFiniteDuration()
+	{
 		int duration = 3;
 
 		PlayerMock player = server.addPlayer();

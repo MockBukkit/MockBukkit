@@ -1520,7 +1520,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		Preconditions.checkNotNull(players, "Player collection cannot be null");
 		Preconditions.checkArgument(!players.contains(this), "Cannot broadcast hurt animation to self without a yaw");
-		for (final Player player : players) {
+		for (final Player player : players)
+		{
 			player.sendHurtAnimation(0);
 		}
 	}

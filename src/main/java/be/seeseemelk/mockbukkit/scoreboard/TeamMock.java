@@ -457,9 +457,11 @@ public class TeamMock implements Team
 
 		Set<String> entriesList = getEntries();
 		List<Audience> audiences = new ArrayList<>(entriesList.size());
-		for (String playerName : entriesList) {
+		for (String playerName : entriesList)
+		{
 			Player player = Bukkit.getPlayerExact(playerName);
-			if (player != null) {
+			if (player != null)
+			{
 				audiences.add(player);
 			}
 		}

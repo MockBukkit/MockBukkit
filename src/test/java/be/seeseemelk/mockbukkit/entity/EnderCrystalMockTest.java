@@ -100,7 +100,8 @@ class EnderCrystalMockTest
 	}
 
 	@Test
-	void getType() {
+	void getType()
+	{
 		assertEquals(EntityType.END_CRYSTAL, crystal.getType());
 	}
 

@@ -35,17 +35,20 @@ class ZombieMockTest
 	}
 
 	@Test
-	void getType() {
+	void getType()
+	{
 		assertEquals(EntityType.ZOMBIE, zombie.getType());
 	}
 
 	@Test
-	void getSubType_GivenDefaultZombie() {
+	void getSubType_GivenDefaultZombie()
+	{
 		assertEquals(EntitySubType.DEFAULT, zombie.getSubType());
 	}
 
 	@Test
-	void getSubType_GivenBabyZombie() {
+	void getSubType_GivenBabyZombie()
+	{
 		zombie.setBaby();
 		assertEquals(EntitySubType.BABY, zombie.getSubType());
 	}

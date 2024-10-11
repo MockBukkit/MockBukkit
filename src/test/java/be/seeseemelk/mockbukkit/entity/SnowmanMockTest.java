@@ -64,7 +64,8 @@ class SnowmanMockTest
 			"false, true,  false",
 			"false, false, false",
 	})
-	void readyToBeSheared(boolean isAlive, boolean isDerp, boolean expectedValue) {
+	void readyToBeSheared(boolean isAlive, boolean isDerp, boolean expectedValue)
+	{
 		snowman.setDerp(isDerp);
 		snowman.setHealth(isAlive ? 1 : 0);
 		assertEquals(expectedValue, snowman.readyToBeSheared());

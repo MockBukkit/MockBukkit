@@ -1773,12 +1773,14 @@ class TestRecipe implements Recipe
 class EventDenier implements Listener
 {
 	@EventHandler
-	void onPlayerConnectionClose(AsyncPlayerPreLoginEvent event){
+	void onPlayerConnectionClose(AsyncPlayerPreLoginEvent event)
+	{
 		event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
 	}
 
 	@EventHandler
-	void onPlayerLogin(PlayerLoginEvent  event){
+	void onPlayerLogin(PlayerLoginEvent  event)
+	{
 		event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
 	}
 }

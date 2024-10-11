@@ -42,7 +42,8 @@ public class RaidMock implements Raid
 	private int waves;
 	private RaidStatus status = RaidStatus.ONGOING;
 
-	public RaidMock(int id, Location location) {
+	public RaidMock(int id, Location location)
+	{
 		Preconditions.checkArgument(location != null, "location cannot be null");
 
 		this.id = id;
@@ -174,7 +175,8 @@ public class RaidMock implements Raid
 	public void setWaves(Difficulty difficulty)
 	{
 		Preconditions.checkArgument(difficulty != null, "difficulty cannot be null");
-		switch (difficulty) {
+		switch (difficulty)
+		{
 		case EASY -> setWaves(3);
 		case NORMAL -> setWaves(5);
 		case HARD -> setWaves(7);
@@ -187,7 +189,8 @@ public class RaidMock implements Raid
 	{
 		double totalHealth = 0.0;
 
-		for (Raider raider : getRaiders()) {
+		for (Raider raider : getRaiders())
+		{
 			totalHealth += raider.getHealth();
 		}
 

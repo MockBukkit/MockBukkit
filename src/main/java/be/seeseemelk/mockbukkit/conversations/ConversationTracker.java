@@ -18,9 +18,11 @@ public class ConversationTracker
 
 	public synchronized boolean beginConversation(Conversation conversation)
 	{
-		if (!this.conversationQueue.contains(conversation)) {
+		if (!this.conversationQueue.contains(conversation))
+		{
 			this.conversationQueue.addLast(conversation);
-			if (this.conversationQueue.getFirst() == conversation) {
+			if (this.conversationQueue.getFirst() == conversation)
+			{
 				conversation.begin();
 				conversation.outputNextPrompt();
 				return true;
@@ -31,14 +33,18 @@ public class ConversationTracker
 
 	public synchronized void abandonConversation(Conversation conversation, ConversationAbandonedEvent details)
 	{
-		if (!this.conversationQueue.isEmpty()) {
-			if (this.conversationQueue.getFirst() == conversation) {
+		if (!this.conversationQueue.isEmpty())
+		{
+			if (this.conversationQueue.getFirst() == conversation)
+			{
 				conversation.abandon(details);
 			}
-			if (this.conversationQueue.contains(conversation)) {
+			if (this.conversationQueue.contains(conversation))
+			{
 				this.conversationQueue.remove(conversation);
 			}
-			if (!this.conversationQueue.isEmpty()) {
+			if (!this.conversationQueue.isEmpty())
+			{
 				this.conversationQueue.getFirst().outputNextPrompt();
 			}
 		}
@@ -49,10 +55,13 @@ public class ConversationTracker
 
 		List<Conversation> oldQueue = this.conversationQueue;
 		this.conversationQueue = new LinkedList<>();
-		for (Conversation conversation : oldQueue) {
-			try {
+		for (Conversation conversation : oldQueue)
+		{
+			try
+			{
 				conversation.abandon(new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
-			} catch (Throwable t) {
+			} catch (Throwable t)
+			{
 				Bukkit.getLogger().log(Level.SEVERE, "Unexpected exception while abandoning a conversation", t);
 			}
 		}
@@ -60,11 +69,14 @@ public class ConversationTracker
 
 	public synchronized void acceptConversationInput(String input)
 	{
-		if (this.isConversing()) {
+		if (this.isConversing())
+		{
 			Conversation conversation = this.conversationQueue.getFirst();
-			try {
+			try
+			{
 				conversation.acceptInput(input);
-			} catch (Throwable t) {
+			} catch (Throwable t)
+			{
 				conversation.getContext().getPlugin().getLogger().log(Level.WARNING,
 						String.format("Plugin %s generated an exception whilst handling conversation input",
 								conversation.getContext().getPlugin().getDescription().getFullName()
