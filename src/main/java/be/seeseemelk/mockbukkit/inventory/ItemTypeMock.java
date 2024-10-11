@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
 import org.bukkit.Material;
@@ -22,8 +23,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
+import java.math.BigDecimal;
 import java.util.function.Consumer;
 
+@SuppressWarnings({ "UnstableApiUsage", "unchecked" })
 public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 {
 
@@ -36,10 +39,15 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	private final boolean fuel;
 	private final String translationKey;
 	private final Class<M> metaClass;
+	private final ItemRarity rarity;
+	private final CreativeCategory creativeCategory;
+	private final boolean isCompostable;
+	private final BigDecimal compostChance;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
 						 boolean edible, boolean hasRecord, boolean fuel, boolean blockType, String translationKey,
-						 Class<M> metaClass)
+						 Class<M> metaClass, ItemRarity rarity, CreativeCategory creativeCategory,boolean isCompostable,
+						 BigDecimal compostChance)
 	{
 		this.namespacedKey = namespacedKey;
 		this.maxStackSize = maxStackSize;
@@ -50,6 +58,10 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		this.blockType = blockType;
 		this.translationKey = translationKey;
 		this.metaClass = metaClass;
+		this.rarity = rarity;
+		this.creativeCategory = creativeCategory;
+		this.isCompostable = isCompostable;
+		this.compostChance = compostChance;
 	}
 
 	@ApiStatus.Internal
@@ -63,6 +75,15 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		boolean fuel = jsonObject.get("fuel").getAsBoolean();
 		boolean blockType = jsonObject.get("blockType").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
+		ItemRarity rarity = ItemRarity.valueOf(jsonObject.get("rarity").getAsString());
+		CreativeCategory creativeCategory = CreativeCategory.valueOf(jsonObject.get("creativeCategory").getAsString());
+		boolean isCompostable = jsonObject.get("compostable").getAsBoolean();
+		BigDecimal compostChance = new BigDecimal(0);
+		if (isCompostable)
+		{
+			compostChance = BigDecimal.valueOf(jsonObject.get("compostChance").getAsFloat());
+		}
+
 		Class<? extends ItemMeta> metaClass = null;
 		String metaClassKey = "metaClass";
 		if (jsonObject.has(metaClassKey))
@@ -95,7 +116,22 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				throw new IllegalStateException("Could not find class: " + jsonObject.get(metaClassKey).getAsString());
 			}
 		}
-		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, hasRecord, fuel, blockType, translationKey, metaClass);
+
+		return new ItemTypeMock<>(
+				key,
+				maxStackSize,
+				maxDurability,
+				edible,
+				hasRecord,
+				fuel,
+				blockType,
+				translationKey,
+				metaClass,
+				rarity,
+				creativeCategory,
+				isCompostable,
+				compostChance
+		);
 	}
 
 	@NotNull
@@ -150,13 +186,13 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public @NotNull ItemStack createItemStack(@Nullable Consumer<? super M> metaConfigurator)
 	{
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull ItemStack createItemStack(int amount, @Nullable Consumer<? super M> metaConfigurator)
 	{
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -192,20 +228,22 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public boolean isCompostable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isCompostable;
 	}
 
 	@Override
 	public float getCompostChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(
+				this.isCompostable(), "The item type " + this.getKey() + " is not compostable"
+		);
+		return this.compostChance.floatValue();
 	}
 
 	@Override
 	public @Nullable ItemType getCraftingRemainingItem()
 	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -225,7 +263,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public @Nullable CreativeCategory getCreativeCategory()
 	{
-		throw new UnimplementedOperationException();
+		return this.creativeCategory;
 	}
 
 	@Override
@@ -255,8 +293,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public @Nullable ItemRarity getItemRarity()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.rarity;
 	}
 
 	@Override
