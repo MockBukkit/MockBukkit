@@ -67,7 +67,8 @@ class PillagerMockTest
 	}
 
 	@Test
-	void finalizeSpawn_ShouldEquipCrossBowInMainHand() {
+	void finalizeSpawn_ShouldEquipCrossBowInMainHand()
+	{
 
 		ItemStack crossbow = pillager.getInventory().getItem(EquipmentSlot.HAND.ordinal());
 		assertNull(crossbow);

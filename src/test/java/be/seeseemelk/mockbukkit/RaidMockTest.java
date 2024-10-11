@@ -40,19 +40,22 @@ class RaidMockTest
 	private ServerMock server;
 
 	@Test
-	void constructor_GivenNullLocation() {
+	void constructor_GivenNullLocation()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new RaidMock(1, null));
 		assertEquals("location cannot be null", e.getMessage());
 	}
 
 	@Test
-	void isStarted_GivenDefaultValue() {
+	void isStarted_GivenDefaultValue()
+	{
 		assertFalse(raid.isStarted());
 	}
 
 	@ParameterizedTest
 	@ValueSource(booleans = {true, false})
-	void isStarted_GivenUserValue(boolean expectedValue) {
+	void isStarted_GivenUserValue(boolean expectedValue)
+	{
 
 		raid.setStarted(expectedValue);
 
@@ -60,39 +63,45 @@ class RaidMockTest
 	}
 
 	@Test
-	void getActiveTicks_GivenDefaultValue() {
+	void getActiveTicks_GivenDefaultValue()
+	{
 		assertEquals(0, raid.getActiveTicks());
 	}
 
 	@ParameterizedTest
 	@ValueSource(longs = {0, 1, 2, 3, 5, 10, 100, 1000})
-	void getActiveTicks_GivenValidUserValue(long expectedValue) {
+	void getActiveTicks_GivenValidUserValue(long expectedValue)
+	{
 		raid.setActiveTicks(expectedValue);
 		assertEquals(expectedValue, raid.getActiveTicks());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
-	void getActiveTicks_GivenIllegalUserValue(long expectedValue) {
+	void getActiveTicks_GivenIllegalUserValue(long expectedValue)
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setActiveTicks(expectedValue));
 		assertEquals("active ticks cannot be negative", e.getMessage());
 	}
 
 	@Test
-	void getBadOmenLevel_GivenDefaultValue() {
+	void getBadOmenLevel_GivenDefaultValue()
+	{
 		assertEquals(0, raid.getBadOmenLevel());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3, 4, 5})
-	void getBadOmenLevel_GivenValidUserValue(int expectedValue) {
+	void getBadOmenLevel_GivenValidUserValue(int expectedValue)
+	{
 		raid.setBadOmenLevel(expectedValue);
 		assertEquals(expectedValue, raid.getBadOmenLevel());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1, 6, 7, 8, 9, 10, 100})
-	void getBadOmenLevel_GivenIllegalUserValue(int expectedValue) {
+	void getBadOmenLevel_GivenIllegalUserValue(int expectedValue)
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setBadOmenLevel(expectedValue));
 		assertEquals("Bad Omen level must be between 0 and 5", e.getMessage());
 	}
@@ -103,7 +112,8 @@ class RaidMockTest
 			"10, 20, 30",
 			"30, 20, 10",
 	})
-	void getLocation(int x, int y, int z) {
+	void getLocation(int x, int y, int z)
+	{
 		World world = new WorldMock();
 		Location location = new Location(world, x, y, z);
 
@@ -114,38 +124,44 @@ class RaidMockTest
 	}
 
 	@Test
-	void getStatus_GivenDefaultValue() {
+	void getStatus_GivenDefaultValue()
+	{
 		assertEquals(Raid.RaidStatus.ONGOING, raid.getStatus());
 	}
 
 	@ParameterizedTest
 	@EnumSource(Raid.RaidStatus.class)
-	void getStatus_GivenValidUserValue(Raid.RaidStatus expectedValue) {
+	void getStatus_GivenValidUserValue(Raid.RaidStatus expectedValue)
+	{
 		raid.setStatus(expectedValue);
 		assertEquals(expectedValue, raid.getStatus());
 	}
 
 	@Test
-	void setStatus_GivenIllegalUserValue() {
+	void setStatus_GivenIllegalUserValue()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setStatus(null));
 		assertEquals("status cannot be null", e.getMessage());
 	}
 
 	@Test
-	void getSpawnedGroups_GivenDefaultValue() {
+	void getSpawnedGroups_GivenDefaultValue()
+	{
 		assertEquals(0, raid.getSpawnedGroups());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3, 4, 5})
-	void getSpawnedGroups_GivenValidUserValue(int expectedValue) {
+	void getSpawnedGroups_GivenValidUserValue(int expectedValue)
+	{
 		raid.setSpawnedGroups(expectedValue);
 		assertEquals(expectedValue, raid.getSpawnedGroups());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
-	void getSpawnedGroups_GivenIllegalUserValue(int expectedValue) {
+	void getSpawnedGroups_GivenIllegalUserValue(int expectedValue)
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setSpawnedGroups(expectedValue));
 		assertEquals("spawnedGroups cannot be negative", e.getMessage());
 	}
@@ -159,7 +175,8 @@ class RaidMockTest
 			"2, 2, 3",
 			"2, 1, 2",
 	})
-	void getTotalGroups_Given(int groupCount, int badOmenCount, int expectedCount) {
+	void getTotalGroups_Given(int groupCount, int badOmenCount, int expectedCount)
+	{
 		raid.setWaves(groupCount);
 		raid.setBadOmenLevel(badOmenCount);
 
@@ -168,7 +185,8 @@ class RaidMockTest
 
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100})
-	void getTotalWaves_GivenValue(int expectedCount) {
+	void getTotalWaves_GivenValue(int expectedCount)
+	{
 		raid.setWaves(expectedCount);
 
 		assertEquals(expectedCount, raid.getTotalWaves());
@@ -181,28 +199,31 @@ class RaidMockTest
 			"HARD, 7",
 			"PEACEFUL, 0",
 	})
-	void setWaves_GivenDifficulty(Difficulty difficulty, int expectedCount) {
+	void setWaves_GivenDifficulty(Difficulty difficulty, int expectedCount)
+	{
 		raid.setWaves(difficulty);
 
 		assertEquals(expectedCount, raid.getTotalWaves());
 	}
 
 	@Test
-	void setWaves_GivenNull() {
+	void setWaves_GivenNull()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(null));
 		assertEquals("difficulty cannot be null", e.getMessage());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
-	void setWaves_GivenNegativeValues(int expectedCount) {
+	void setWaves_GivenNegativeValues(int expectedCount)
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(expectedCount));
 		assertEquals("waves cannot be negative", e.getMessage());
 	}
 
-
 	@Test
-	void getTotalHealth() {
+	void getTotalHealth()
+	{
 
 		Raider raiderA = createTestRaider();
 		Raider raiderB = createTestRaider();
@@ -216,7 +237,8 @@ class RaidMockTest
 	}
 
 	@Test
-	void getHeroes_GivenSetOfUuids() {
+	void getHeroes_GivenSetOfUuids()
+	{
 		Set<UUID> heroes = Set.of(
 				UUID.randomUUID(),
 				UUID.randomUUID(),
@@ -233,13 +255,15 @@ class RaidMockTest
 	}
 
 	@Test
-	void setHeroes_GivenNull() {
+	void setHeroes_GivenNull()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setHeroes(null));
 		assertEquals("Heroes cannot be null", e.getMessage());
 	}
 
 	@Test
-	void getRaiders_GivenSetOfUuids() {
+	void getRaiders_GivenSetOfUuids()
+	{
 		List<Raider> raiders = List.of(
 				createTestRaider(),
 				createTestRaider()
@@ -255,14 +279,16 @@ class RaidMockTest
 	}
 
 	@Test
-	void setRaiders_GivenNull() {
+	void setRaiders_GivenNull()
+	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setRaiders(null));
 		assertEquals("Raiders cannot be null", e.getMessage());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 1000})
-	void getId(int expectedId) {
+	void getId(int expectedId)
+	{
 		World world = new WorldMock();
 		Location location = new Location(world, 0, 0, 0);
 
@@ -272,14 +298,16 @@ class RaidMockTest
 	}
 
 	@Test
-	void getBossBar() {
+	void getBossBar()
+	{
 		BossBar actual = raid.getBossBar();
 		assertNotNull(actual);
 		assertSame(actual, raid.getBossBar());
 	}
 
 	@Test
-	void getPersistentDataContainer() {
+	void getPersistentDataContainer()
+	{
 		PersistentDataContainer actual = raid.getPersistentDataContainer();
 		assertNotNull(actual);
 		assertSame(actual, raid.getPersistentDataContainer());

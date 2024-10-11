@@ -33,14 +33,16 @@ class DrownedMockTest
 	}
 
 	@Test
-	void hasCorrectParentClasses() {
+	void hasCorrectParentClasses()
+	{
 		assertInstanceOf(Drowned.class, drowned);
 		assertInstanceOf(ZombieMock.class, drowned);
 		assertInstanceOf(MockRangedEntity.class, drowned);
 	}
 
 	@Test
-	void getType() {
+	void getType()
+	{
 		assertEquals(EntityType.DROWNED, drowned.getType());
 	}
 

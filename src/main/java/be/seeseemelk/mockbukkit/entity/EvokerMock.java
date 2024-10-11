@@ -76,9 +76,11 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	 * @return The converted spell.
 	 */
 	@NotNull
-	private static Spellcaster.Spell toSpellcasterSpell(@Nullable Evoker.Spell spell) {
+	private static Spellcaster.Spell toSpellcasterSpell(@Nullable Evoker.Spell spell)
+	{
 
-		if (spell == null) {
+		if (spell == null)
+		{
 			return Spellcaster.Spell.NONE;
 		}
 
@@ -93,8 +95,10 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	 * @return The converted spell.
 	 */
 	@NotNull
-	private static Evoker.Spell toEvokerSpell(@Nullable Spellcaster.Spell spell) {
-		if (spell == null) {
+	private static Evoker.Spell toEvokerSpell(@Nullable Spellcaster.Spell spell)
+	{
+		if (spell == null)
+		{
 			return Evoker.Spell.NONE;
 		}
 

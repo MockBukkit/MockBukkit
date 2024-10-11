@@ -45,7 +45,8 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	protected EntitySubType getSubType()
 	{
-		if (isBaby()) {
+		if (isBaby())
+		{
 			return EntitySubType.BABY;
 		}
 

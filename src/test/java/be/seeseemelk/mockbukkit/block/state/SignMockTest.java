@@ -177,12 +177,15 @@ class SignMockTest
 
 	@ParameterizedTest
 	@MethodSource("sidesAndLineNumbers")
-	void setNumberedLineAsStringOnSide(Side side, int line) {
+	void setNumberedLineAsStringOnSide(Side side, int line)
+	{
 		String text = "Hello §aWorld";
 		sign.getSide(side).setLine(line, text);
 		assertEquals(text, sign.getSide(side).getLine(line));
-		for (int i = 0; i < 4; i++) {
-			if (i != line) {
+		for (int i = 0; i < 4; i++)
+		{
+			if (i != line)
+			{
 				assertEquals("", sign.getSide(side).getLine(i));
 			}
 		}
@@ -190,14 +193,17 @@ class SignMockTest
 
 	@ParameterizedTest
 	@MethodSource("sidesAndLineNumbers")
-	void setNumberedLineAsComponentOnSide(Side side, int line) {
+	void setNumberedLineAsComponentOnSide(Side side, int line)
+	{
 		Component component = Component.join(JoinConfiguration.spaces(),
 				Component.text("Hello"), Component.text("World", NamedTextColor.GREEN));
 		sign.getSide(side).line(line, component);
 		assertEquals(component, sign.getSide(side).line(line));
 		assertEquals("Hello \u00A7aWorld", sign.getSide(side).getLine(line));
-		for (int i = 0; i < 4; i++) {
-			if (i != line) {
+		for (int i = 0; i < 4; i++)
+		{
+			if (i != line)
+			{
 				assertEquals(Component.empty(), sign.getSide(side).line(i));
 				assertEquals("", sign.getSide(side).getLine(i));
 			}
@@ -206,7 +212,8 @@ class SignMockTest
 
 	@ParameterizedTest
 	@EnumSource(Side.class)
-	void testSetInvalidLineNumber(Side side) {
+	void testSetInvalidLineNumber(Side side)
+	{
 		SignSide signSide = sign.getSide(side);
 		Component text = Component.text("Hello");
 		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(-1, text));
@@ -215,7 +222,8 @@ class SignMockTest
 
 	@ParameterizedTest
 	@EnumSource(Side.class)
-	void testGetLinesAsComponents(Side side) {
+	void testGetLinesAsComponents(Side side)
+	{
 		assertEquals(List.of(
 				Component.empty(),
 				Component.empty(),
@@ -238,7 +246,8 @@ class SignMockTest
 
 	@ParameterizedTest
 	@EnumSource(Side.class)
-	void testGetLinesAsStrings(Side side) {
+	void testGetLinesAsStrings(Side side)
+	{
 		assertArrayEquals(new String[] {
 				"",
 				"",
@@ -261,12 +270,15 @@ class SignMockTest
 
 	@ParameterizedTest
 	@EnumSource(Side.class)
-	void testSetGlowingOnSide(Side side) {
+	void testSetGlowingOnSide(Side side)
+	{
 		sign.getSide(side).setGlowingText(true);
 		assertTrue(sign.getSide(side).isGlowingText());
 
-		for (Side otherSide : Side.values()) {
-			if (otherSide != side) {
+		for (Side otherSide : Side.values())
+		{
+			if (otherSide != side)
+			{
 				assertFalse(sign.getSide(otherSide).isGlowingText());
 			}
 		}
@@ -274,21 +286,27 @@ class SignMockTest
 
 	@ParameterizedTest
 	@EnumSource(Side.class)
-	void testSetColorOnSide(Side side) {
+	void testSetColorOnSide(Side side)
+	{
 		sign.getSide(side).setColor(DyeColor.BLUE);
 		assertEquals(DyeColor.BLUE, sign.getSide(side).getColor());
 
-		for (Side otherSide : Side.values()) {
-			if (otherSide != side) {
+		for (Side otherSide : Side.values())
+		{
+			if (otherSide != side)
+			{
 				assertEquals(DyeColor.BLACK, sign.getSide(otherSide).getColor());
 			}
 		}
 	}
 
-	static List<Arguments> sidesAndLineNumbers() {
+	static List<Arguments> sidesAndLineNumbers()
+	{
 		List<Arguments> result = new LinkedList<>();
-		for (Side side : Side.values()) {
-			for (int i = 0; i < 4; i++) {
+		for (Side side : Side.values())
+		{
+			for (int i = 0; i < 4; i++)
+			{
 				result.add(Arguments.of(side, i));
 			}
 		}

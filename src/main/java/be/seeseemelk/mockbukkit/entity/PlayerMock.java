@@ -1075,29 +1075,37 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendMessage(String message) {
-		if (!this.conversationTracker.isConversingModaly()) {
+	public void sendMessage(String message)
+	{
+		if (!this.conversationTracker.isConversingModaly())
+		{
 			this.sendRawMessage(message);
 		}
 	}
 
 	@Override
-	public void sendMessage(String... messages) {
-		for (String message : messages) {
+	public void sendMessage(String... messages)
+	{
+		for (String message : messages)
+		{
 			this.sendMessage(message);
 		}
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String message) {
-		if (!this.conversationTracker.isConversingModaly()) {
+	public void sendMessage(UUID sender, String message)
+	{
+		if (!this.conversationTracker.isConversingModaly())
+		{
 			this.sendRawMessage(sender, message);
 		}
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String... messages) {
-		for (String message : messages) {
+	public void sendMessage(UUID sender, String... messages)
+	{
+		for (String message : messages)
+		{
 			this.sendMessage(sender, message);
 		}
 	}
