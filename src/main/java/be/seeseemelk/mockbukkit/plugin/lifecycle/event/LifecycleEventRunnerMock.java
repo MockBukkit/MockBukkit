@@ -1,10 +1,13 @@
 package be.seeseemelk.mockbukkit.plugin.lifecycle.event;
 
+import be.seeseemelk.mockbukkit.plugin.lifecycle.event.registrar.PaperRegistrarMock;
+import be.seeseemelk.mockbukkit.plugin.lifecycle.event.registrar.RegistrarEventMock;
 import be.seeseemelk.mockbukkit.plugin.lifecycle.event.types.AbstractLifecycleEventTypeMock;
 import com.google.common.base.Suppliers;
 import io.papermc.paper.plugin.bootstrap.BootstrapContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
+import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.Plugin;
@@ -61,6 +64,10 @@ public class LifecycleEventRunnerMock
 	{
 		final AbstractLifecycleEventTypeMock<O, ?, ?> lifecycleEventType = (AbstractLifecycleEventTypeMock<O, ?, ?>) eventType;
 		lifecycleEventType.removeMatching(registeredHandler -> registeredHandler.owner().getPluginMeta().getName().equals(possibleOwner.getPluginMeta().getName()));
+	}
+
+	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType, final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause) {
+		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType, new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), ownerClass::isInstance);
 	}
 
 	private LifecycleEventRunnerMock()
