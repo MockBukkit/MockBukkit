@@ -30,21 +30,24 @@ class MockLifecycleEventManagerTest
 	ServerMock serverMock;
 
 	@Test
-	void pluginOnEnable()
+	void
+	pluginOnEnable()
 	{
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		LifecycleEventManager<Plugin> lifecycleEventManager = mockPlugin.getLifecycleManager();
 		AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-		PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.COMMANDS.newHandler((event) ->
-		{
-			final Commands commands = event.registrar();
-			commands.register(Commands.literal("new-command").executes(ctx ->
+		MockPlugin.builder().withOnEnable((mockPlugin) -> {
+			LifecycleEventManager<Plugin> lifecycleEventManager = mockPlugin.getLifecycleManager();
+			PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.COMMANDS.newHandler((event) ->
 			{
-				atomicBoolean.set(true);
-				return Command.SINGLE_SUCCESS;
-			}).build(), "some bukkit help description string", List.of("an-alias"));
-		}).monitor();
-		lifecycleEventManager.registerEventHandler(config);
+				final Commands commands = event.registrar();
+				commands.register(Commands.literal("new-command").executes(ctx ->
+				{
+					atomicBoolean.set(true);
+					return Command.SINGLE_SUCCESS;
+				}).build(), "some bukkit help description string", List.of("an-alias"));
+			}).monitor();
+			lifecycleEventManager.registerEventHandler(config);
+		});
+
 		serverMock.addPlayer().performCommand("new-command");
 		assertTrue(atomicBoolean.get());
 	}
