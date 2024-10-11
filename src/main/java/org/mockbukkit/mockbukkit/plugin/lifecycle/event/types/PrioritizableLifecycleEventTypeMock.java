@@ -1,7 +1,7 @@
-package be.seeseemelk.mockbukkit.plugin.lifecycle.event.types;
+package org.mockbukkit.mockbukkit.plugin.lifecycle.event.types;
 
-import be.seeseemelk.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
-import be.seeseemelk.mockbukkit.plugin.lifecycle.event.handler.configuration.PrioritizedLifecycleEventHandlerConfigurationMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.PrioritizedLifecycleEventHandlerConfigurationMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;

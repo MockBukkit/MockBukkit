@@ -1,6 +1,6 @@
-package be.seeseemelk.mockbukkit.plugin.lifecycle.event.handler.configuration;
+package org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration;
 
-import be.seeseemelk.mockbukkit.plugin.lifecycle.event.types.AbstractLifecycleEventTypeMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.AbstractLifecycleEventTypeMock;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler;

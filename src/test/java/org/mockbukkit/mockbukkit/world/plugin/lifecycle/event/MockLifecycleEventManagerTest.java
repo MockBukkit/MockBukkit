@@ -1,10 +1,10 @@
-package be.seeseemelk.mockbukkit.plugin.lifecycle.event;
+package org.mockbukkit.mockbukkit.plugin.lifecycle.event;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockBukkitExtension;
-import be.seeseemelk.mockbukkit.MockBukkitInject;
-import be.seeseemelk.mockbukkit.MockPlugin;
-import be.seeseemelk.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.ServerMock;
 import com.mojang.brigadier.Command;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;

@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.tags;
+package org.mockbukkit.mockbukkit.tags;
 
 public class PaperTagListenerManagerMock
 {

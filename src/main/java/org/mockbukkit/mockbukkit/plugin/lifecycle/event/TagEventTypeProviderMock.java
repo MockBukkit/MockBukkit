@@ -1,6 +1,6 @@
-package be.seeseemelk.mockbukkit.plugin.lifecycle.event;
+package org.mockbukkit.mockbukkit.plugin.lifecycle.event;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.plugin.bootstrap.BootstrapContext;
 import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;

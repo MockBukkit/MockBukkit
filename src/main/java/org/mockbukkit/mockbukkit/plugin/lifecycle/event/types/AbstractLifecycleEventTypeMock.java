@@ -1,12 +1,12 @@
-package be.seeseemelk.mockbukkit.plugin.lifecycle.event.types;
+package org.mockbukkit.mockbukkit.plugin.lifecycle.event.types;
 
-import be.seeseemelk.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.LifecycleEventHandlerConfiguration;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;
-import be.seeseemelk.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
