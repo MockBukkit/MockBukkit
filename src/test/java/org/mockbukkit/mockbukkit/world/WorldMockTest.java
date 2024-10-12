@@ -1399,7 +1399,9 @@ class WorldMockTest
 				Arguments.of(EntityType.BOGGED, BoggedMock.class),
 				Arguments.of(EntityType.BREEZE, BreezeMock.class),
 				Arguments.of(EntityType.BREEZE_WIND_CHARGE, BreezeWindChargeMock.class),
-				Arguments.of(EntityType.WIND_CHARGE, WindChargeMock.class)
+				Arguments.of(EntityType.WIND_CHARGE, WindChargeMock.class),
+				Arguments.of(EntityType.WITHER, WitherMock.class),
+				Arguments.of(EntityType.ENDER_DRAGON, EnderDragonMock.class)
 		);
 	}
 

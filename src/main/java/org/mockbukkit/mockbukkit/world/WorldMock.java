@@ -191,6 +191,7 @@ import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.Enderman;
@@ -269,6 +270,7 @@ import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
@@ -1616,6 +1618,14 @@ public class WorldMock implements World
 		else if (clazz == WindCharge.class)
 		{
 			return new WindChargeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Wither.class)
+		{
+			return new WitherMock(server, UUID.randomUUID());
+		}
+		else if (clazz == EnderDragon.class)
+		{
+			return new EnderDragonMock(server, UUID.randomUUID());
 		}
 
 		throw new UnimplementedOperationException();
