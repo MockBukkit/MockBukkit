@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class AbstractBossMock extends MonsterMock implements Boss
+abstract class AbstractBossMock extends MonsterMock implements Boss
 {
 
 	/**
