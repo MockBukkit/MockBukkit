@@ -566,7 +566,8 @@ class EntityMockTest
 	}
 
 	@Test
-	void hasNoPhysics_Default_False() {
+	void hasNoPhysics_Default_False()
+	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 
@@ -951,7 +952,8 @@ class EntityMockTest
 	}
 
 	@Test
-	void leaveVehicle(){
+	void leaveVehicle()
+	{
 		EntityMock vehicle = new RideableMinecartMock(server, UUID.randomUUID());
 		EntityMock passenger = new PigMock(server, UUID.randomUUID());
 

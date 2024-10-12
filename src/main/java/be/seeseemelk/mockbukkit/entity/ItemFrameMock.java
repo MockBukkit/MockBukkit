@@ -55,7 +55,8 @@ public class ItemFrameMock extends HangingMock implements ItemFrame
 	{
 		this.itemStack = item == null || item.isEmpty() ? ItemStack.empty() : item.clone();
 
-		if (!itemStack.isEmpty() && playSound && isInWorld()) {
+		if (!itemStack.isEmpty() && playSound && isInWorld())
+		{
 			getWorld().playSound(this, Sound.ENTITY_ITEM_FRAME_ADD_ITEM, 1, 1);
 		}
 	}

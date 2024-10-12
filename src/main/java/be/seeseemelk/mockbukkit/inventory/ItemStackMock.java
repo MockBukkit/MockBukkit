@@ -195,7 +195,7 @@ public class ItemStackMock extends ItemStack
 	public boolean isSimilar(@org.jetbrains.annotations.Nullable ItemStack stack)
 	{
 		if (stack == null) return false;
-		if (!(stack instanceof final ItemStackMock bukkit)) return false;
+		if (!(stack instanceof final ItemStackMock bukkit)) return stack.isSimilar(this);
 		if (this == bukkit) return true;
 		return this.type == bukkit.type;
 	}

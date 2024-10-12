@@ -120,7 +120,8 @@ public class InteractionMock extends EntityMock implements Interaction
 		 * @param player	The last player that interacted.
 		 * @param timestamp The interaction timestamp.
 		 */
-		public PreviousInteractionMock(OfflinePlayer player, long timestamp) {
+		public PreviousInteractionMock(OfflinePlayer player, long timestamp)
+		{
 			Preconditions.checkNotNull(player, "The player cannot be null");
 
 			this.player = player;
@@ -128,12 +129,14 @@ public class InteractionMock extends EntityMock implements Interaction
 		}
 
 		@Override
-		public @NotNull OfflinePlayer getPlayer() {
+		public @NotNull OfflinePlayer getPlayer()
+		{
 			return this.player;
 		}
 
 		@Override
-		public long getTimestamp() {
+		public long getTimestamp()
+		{
 			return this.timestamp;
 		}
 

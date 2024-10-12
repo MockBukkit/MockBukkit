@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockBukkitExtension.class)
 class ItemStackMockTest
@@ -76,6 +77,32 @@ class ItemStackMockTest
 	}
 
 	@Test
+	void isSimilar_different()
+	{
+		var a = new ItemStack(Material.SAND);
+		var b = new ItemStack(Material.DIAMOND);
+
+		assertFalse(a.isSimilar(b));
+	}
+
+	@Test
+	void isSimilar_similar()
+	{
+		ItemStack a = new ItemStack(Material.SAND);
+		ItemStack b = new ItemStack(Material.SAND);
+
+		assertTrue(a.isSimilar(b));
+	}
+
+	@Test
+	void isSimilar_null()
+	{
+		ItemStack a = new ItemStack(Material.SAND);
+
+		assertFalse(a.isSimilar(null));
+	}
+
+	@Test
 	void equals()
 	{
 		ItemStack itemStack = new ItemStack(Material.DIAMOND);
@@ -115,7 +142,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void equals_changedEnchantments() {
+	void equals_changedEnchantments()
+	{
 		ItemStack itemStack = new ItemStack(Material.TRIDENT);
 		itemStack.addEnchantment(Enchantment.CHANNELING, 1);
 		ItemStack cloned = itemStack.clone();
@@ -272,7 +300,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void getEnchantmentLevel_GivenDefaultValue() {
+	void getEnchantmentLevel_GivenDefaultValue()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 
 		int level = itemStack.getEnchantmentLevel(Enchantment.EFFICIENCY);
@@ -280,7 +309,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void getEnchantmentLevel_GivenCustomEnchantment() {
+	void getEnchantmentLevel_GivenCustomEnchantment()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 		itemStack.addEnchantment(Enchantment.EFFICIENCY, 5);
 

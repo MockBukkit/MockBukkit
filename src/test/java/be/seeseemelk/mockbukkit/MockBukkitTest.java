@@ -5,11 +5,14 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -33,6 +36,8 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class MockBukkitTest
 {
+
+	private static String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
 
 	@BeforeEach
 	void setUp()
@@ -228,6 +233,34 @@ class MockBukkitTest
 		assertThrows(IllegalStateException.class, MockBukkit::ensureMocking);
 	}
 
+	@Test
+	void loadJar_file() throws InvalidPluginException
+	{
+		MockBukkit.mock();
+		Plugin javaPlugin = MockBukkit.loadJar(new File(TEST_PLUGIN_FILE_PATH));
+		assertNotNull(javaPlugin.getServer());
+		assertNotNull(javaPlugin.getDataFolder());
+		assertEquals("TestPlugin", javaPlugin.getName());
+		FileConfiguration config = javaPlugin.getConfig();
+		assertEquals("goo", config.getString("foo"));
+		assertEquals("soo", config.getString("boo"));
+		assertEquals("bas", config.getList("baa").getLast());
+	}
+
+	@Test
+	void loadJar_fileName()
+	{
+		MockBukkit.mock();
+		Plugin javaPlugin = MockBukkit.loadJar(TEST_PLUGIN_FILE_PATH);
+		assertNotNull(javaPlugin.getServer());
+		assertNotNull(javaPlugin.getDataFolder());
+		assertEquals("TestPlugin", javaPlugin.getName());
+		FileConfiguration config = javaPlugin.getConfig();
+		assertEquals("goo", config.getString("foo"));
+		assertEquals("soo", config.getString("boo"));
+		assertEquals("bas", config.getList("baa").getLast());
+	}
+
 	private static class CustomServerMock extends ServerMock
 	{
 
@@ -240,7 +273,7 @@ class MockBukkitTest
 		configuration.set("foo", "notbar");
 
 		MockBukkit.mock();
-		TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class,configuration);
+		TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class, configuration);
 		assertNotNull(plugin);
 
 		FileConfiguration config = plugin.getConfig();
@@ -258,7 +291,7 @@ class MockBukkitTest
 		}
 		File file = new File(resource.getFile());
 		MockBukkit.mock();
-		TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class,file);
+		TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class, file);
 		assertNotNull(plugin);
 
 		FileConfiguration config = plugin.getConfig();
@@ -278,7 +311,7 @@ class MockBukkitTest
 		try (InputStream inputStream = new FileInputStream(file);)
 		{
 			MockBukkit.mock();
-			TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class,inputStream);
+			TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
 			assertNotNull(plugin);
 
 			FileConfiguration config = plugin.getConfig();

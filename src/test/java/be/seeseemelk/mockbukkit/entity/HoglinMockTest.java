@@ -34,34 +34,40 @@ class HoglinMockTest
 	}
 
 	@Test
-	void getType() {
+	void getType()
+	{
 		assertEquals(EntityType.HOGLIN, hoglin.getType());
 	}
 
 	@Test
-	void isImmuneToZombification_GivenDefaultValue() {
+	void isImmuneToZombification_GivenDefaultValue()
+	{
 		assertFalse(hoglin.isImmuneToZombification());
 	}
 
 	@Test
-	void isImmuneToZombification_GivenChangeInValue() {
+	void isImmuneToZombification_GivenChangeInValue()
+	{
 		hoglin.setImmuneToZombification(true);
 		assertTrue(hoglin.isImmuneToZombification());
 	}
 
 	@Test
-	void isAbleToBeHunted_GivenDefaultValue() {
+	void isAbleToBeHunted_GivenDefaultValue()
+	{
 		assertFalse(hoglin.isAbleToBeHunted());
 	}
 
 	@Test
-	void isAbleToBeHunted_GivenChangeInValue() {
+	void isAbleToBeHunted_GivenChangeInValue()
+	{
 		hoglin.setIsAbleToBeHunted(true);
 		assertTrue(hoglin.isAbleToBeHunted());
 	}
 
 	@Test
-	void getConversionTime_GivenHoglinInConvertingState() {
+	void getConversionTime_GivenHoglinInConvertingState()
+	{
 		hoglin.setAI(true);
 		hoglin.setConversionTime(10);
 		hoglin.setImmuneToZombification(false);
@@ -72,7 +78,8 @@ class HoglinMockTest
 	}
 
 	@Test
-	void getConversionTime_GivenHoglinWithoutAI() {
+	void getConversionTime_GivenHoglinWithoutAI()
+	{
 		hoglin.setAI(false);
 		hoglin.setConversionTime(10);
 		hoglin.setImmuneToZombification(false);
@@ -82,7 +89,8 @@ class HoglinMockTest
 	}
 
 	@Test
-	void getConversionTime_GivenHoglinImmuneToZombification() {
+	void getConversionTime_GivenHoglinImmuneToZombification()
+	{
 		hoglin.setAI(true);
 		hoglin.setConversionTime(10);
 		hoglin.setImmuneToZombification(true);
@@ -92,7 +100,8 @@ class HoglinMockTest
 	}
 
 	@Test
-	void getConversionTime_GivenHoglinNotConverting() {
+	void getConversionTime_GivenHoglinNotConverting()
+	{
 
 		hoglin.setImmuneToZombification(true);
 
@@ -101,7 +110,8 @@ class HoglinMockTest
 	}
 
 	@Test
-	void setConversionTime_GivenNegativeValues() {
+	void setConversionTime_GivenNegativeValues()
+	{
 		hoglin.setImmuneToZombification(true);
 
 		hoglin.setConversionTime(-10);

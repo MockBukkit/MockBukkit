@@ -71,10 +71,12 @@ public class HoglinMock extends AnimalsMock implements Hoglin
 	@Override
 	public void setConversionTime(int time)
 	{
-		if (time < 0) {
+		if (time < 0)
+		{
 			this.conversionTime = -1;
 			this.setImmuneToZombification(false);
-		} else {
+		} else
+		{
 			this.conversionTime = time;
 		}
 	}
