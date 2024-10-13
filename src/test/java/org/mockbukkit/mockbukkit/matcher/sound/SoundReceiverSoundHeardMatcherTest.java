@@ -15,8 +15,6 @@ import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
-import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
-
 @ExtendWith(MockBukkitExtension.class)
 class SoundReceiverSoundHeardMatcherTest extends AbstractMatcherTest
 {
