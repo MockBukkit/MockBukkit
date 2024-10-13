@@ -7,6 +7,7 @@ import be.seeseemelk.mockbukkit.ban.MockProfileBanList;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -364,6 +365,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public @Nullable Location getLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PersistentDataContainerView getPersistentDataContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
