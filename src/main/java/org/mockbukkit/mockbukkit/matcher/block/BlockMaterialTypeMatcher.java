@@ -6,7 +6,6 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.command.CommandResult;
 
 public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 {

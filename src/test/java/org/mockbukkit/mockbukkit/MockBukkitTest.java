@@ -35,7 +35,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 class MockBukkitTest
 {
 
-	private static String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
+	private static final String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
 
 	@BeforeEach
 	void setUp()
@@ -306,7 +306,7 @@ class MockBukkitTest
 			fail();
 		}
 		File file = new File(resource.getFile());
-		try (InputStream inputStream = new FileInputStream(file);)
+		try (InputStream inputStream = new FileInputStream(file))
 		{
 			MockBukkit.mock();
 			TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
@@ -327,7 +327,7 @@ class MockBukkitTest
 	void load_WithConfig_InputStream_FileNotExists() throws FileNotFoundException
 	{
 
-		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes());)
+		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{
 			MockBukkit.mock();
 			RuntimeException runtimeException = assertThrows(RuntimeException.class, () ->

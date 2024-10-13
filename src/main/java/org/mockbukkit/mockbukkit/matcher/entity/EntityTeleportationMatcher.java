@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.matcher.entity;
 
-import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
