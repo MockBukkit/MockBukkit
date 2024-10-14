@@ -32,6 +32,7 @@ import be.seeseemelk.mockbukkit.entity.DrownedMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
+import be.seeseemelk.mockbukkit.entity.EnderDragonMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EnderSignalMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
@@ -108,6 +109,7 @@ import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WindChargeMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
+import be.seeseemelk.mockbukkit.entity.WitherMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
@@ -187,6 +189,7 @@ import org.bukkit.entity.Drowned;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.Enderman;
@@ -265,6 +268,7 @@ import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
@@ -1608,6 +1612,14 @@ public class WorldMock implements World
 		else if (clazz == WindCharge.class)
 		{
 			return new WindChargeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Wither.class)
+		{
+			return new WitherMock(server, UUID.randomUUID());
+		}
+		else if (clazz == EnderDragon.class)
+		{
+			return new EnderDragonMock(server, UUID.randomUUID());
 		}
 
 		throw new UnimplementedOperationException();

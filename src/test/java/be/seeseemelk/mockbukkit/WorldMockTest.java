@@ -31,6 +31,7 @@ import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderCrystalMock;
+import be.seeseemelk.mockbukkit.entity.EnderDragonMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EnderSignalMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
@@ -104,6 +105,7 @@ import be.seeseemelk.mockbukkit.entity.VindicatorMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WindChargeMock;
 import be.seeseemelk.mockbukkit.entity.WitchMock;
+import be.seeseemelk.mockbukkit.entity.WitherMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
@@ -1388,7 +1390,9 @@ class WorldMockTest
 				Arguments.of(EntityType.BOGGED, BoggedMock.class),
 				Arguments.of(EntityType.BREEZE, BreezeMock.class),
 				Arguments.of(EntityType.BREEZE_WIND_CHARGE, BreezeWindChargeMock.class),
-				Arguments.of(EntityType.WIND_CHARGE, WindChargeMock.class)
+				Arguments.of(EntityType.WIND_CHARGE, WindChargeMock.class),
+				Arguments.of(EntityType.WITHER, WitherMock.class),
+				Arguments.of(EntityType.ENDER_DRAGON, EnderDragonMock.class)
 		);
 	}
 
