@@ -132,7 +132,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void createWorld_WorldCreator()
+	void createWorld_WorldCreator_unloadWorld()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
 				.seed(12345)
@@ -145,6 +145,10 @@ class ServerMockTest
 		assertEquals(12345, world.getSeed());
 		assertEquals(WorldType.FLAT, world.getWorldType());
 		assertEquals(World.Environment.NORMAL, world.getEnvironment());
+
+		assertTrue(server.unloadWorld("test", false));
+		assertEquals(0, server.getWorlds().size());
+		assertNull(server.getWorld("test"));
 	}
 
 	@Test

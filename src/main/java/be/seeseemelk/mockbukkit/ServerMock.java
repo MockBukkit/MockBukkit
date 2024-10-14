@@ -1520,7 +1520,7 @@ public 	class ServerMock extends Server.Spigot implements Server
 		{
 			return false;
 		}
-		if (new WorldUnloadEvent(worldMock).callEvent())
+		if (!new WorldUnloadEvent(worldMock).callEvent())
 		{
 			return false;
 		}
