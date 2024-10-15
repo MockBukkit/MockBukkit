@@ -3,9 +3,12 @@ package org.mockbukkit.mockbukkit.matcher.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 {
@@ -49,6 +52,17 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	{
 		Preconditions.checkNotNull(location);
 		return new EntityLocationMatcher(location, maxDistance);
+	}
+
+	/**
+	 *
+	 * @param location The location required for no match
+	 * @param maxDistance The radius away from the location which withdraws a match
+	 * @return A matcher which matches with any entity outside a radius of specified location
+	 */
+	public static @NotNull Matcher<EntityMock> isNotInLocation(@NotNull Location location, double maxDistance)
+	{
+		return not(isInLocation(location, maxDistance));
 	}
 
 }

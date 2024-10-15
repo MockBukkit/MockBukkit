@@ -2,9 +2,12 @@ package org.mockbukkit.mockbukkit.matcher.command;
 
 import com.google.common.base.Preconditions;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.CommandResult;
+
+import static org.hamcrest.Matchers.not;
 
 public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 {
@@ -45,6 +48,16 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	{
 		Preconditions.checkNotNull(response);
 		return new CommandResultResponseMatcher(response);
+	}
+
+	/**
+	 *
+	 * @param response The response the command result should not have
+	 * @return A matcher which matches with any command result without specified response
+	 */
+	public static @NotNull Matcher<CommandResult> doesNotHaveResponse(@NotNull String response)
+	{
+		return not(hasResponse(response));
 	}
 
 }

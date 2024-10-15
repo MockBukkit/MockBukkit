@@ -3,9 +3,12 @@ package org.mockbukkit.mockbukkit.matcher.block;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.block.BlockMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 {
@@ -43,6 +46,15 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	{
 		Preconditions.checkNotNull(material);
 		return new BlockMaterialTypeMatcher(material);
+	}
+
+	/**
+	 * @param material The material that the block should not have
+	 * @return A matcher which matches blocks without the specified material
+	 */
+	public static @NotNull Matcher<BlockMock> doesNotHaveMaterial(@NotNull Material material)
+	{
+		return not(hasMaterial(material));
 	}
 
 }

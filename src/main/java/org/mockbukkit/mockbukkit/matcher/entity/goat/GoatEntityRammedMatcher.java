@@ -3,9 +3,12 @@ package org.mockbukkit.mockbukkit.matcher.entity.goat;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.GoatMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 {
@@ -44,6 +47,16 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	{
 		Preconditions.checkNotNull(target);
 		return new GoatEntityRammedMatcher(target);
+	}
+
+	/**
+	 *
+	 * @param target The target required to not have been hit for there to be a match
+	 * @return A matcher which matches with any goat that has not targeted the specified target
+	 */
+	public static @NotNull Matcher<GoatMock> hasNotRammed(@NotNull LivingEntity target)
+	{
+		return not(hasRammed(target));
 	}
 
 }

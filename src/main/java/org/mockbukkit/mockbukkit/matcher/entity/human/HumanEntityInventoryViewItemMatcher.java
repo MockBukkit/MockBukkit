@@ -4,9 +4,12 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEntityMock>
 {
@@ -66,6 +69,16 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	{
 		Preconditions.checkNotNull(item);
 		return new HumanEntityInventoryViewItemMatcher(item.getType());
+	}
+
+	/**
+	 *
+	 * @param item The item required for no match
+	 * @return A matcher which matches with any human entity without the specified item in inventory
+	 */
+	public static @NotNull Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(@NotNull ItemStack item)
+	{
+		return not(hasItemInInventoryView(item));
 	}
 
 }
