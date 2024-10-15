@@ -12,7 +12,7 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 
 	private final Material material;
 
-	public BlockMaterialTypeMatcher(Material material)
+	private BlockMaterialTypeMatcher(Material material)
 	{
 		this.material = material;
 	}
