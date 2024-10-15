@@ -13,7 +13,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.currentItem;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.hasCurrentItem;
 
 @ExtendWith(MockBukkitExtension.class)
 class AllayCurrentItemMatcherTest extends AbstractMatcherTest
@@ -33,19 +33,19 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	@Override
 	protected Matcher<?> createMatcher()
 	{
-		return currentItem(Material.STONE);
+		return hasCurrentItem(Material.STONE);
 	}
 
 	@Test
 	void testMatches()
 	{
-		assertMatches(currentItem(Material.STONE), allay);
+		assertMatches(hasCurrentItem(Material.STONE), allay);
 	}
 
 	@Test
 	void testDoesNotMatch()
 	{
-		assertDoesNotMatch(currentItem(Material.AIR),allay);
+		assertDoesNotMatch(hasCurrentItem(Material.AIR),allay);
 	}
 
 	@Test

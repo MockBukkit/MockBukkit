@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.currentItem;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.hasCurrentItem;
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.inventoryContains;
 
 class AllayMockTest
@@ -56,7 +56,7 @@ class AllayMockTest
 	{
 		assertDoesNotThrow(() -> allayMock.simulatePlayerInteract(Material.DIAMOND));
 
-		assertThat(allayMock, currentItem(Material.DIAMOND));
+		assertThat(allayMock, hasCurrentItem(Material.DIAMOND));
 	}
 
 	@Test
@@ -110,7 +110,7 @@ class AllayMockTest
 	void testAssertCurrentItemWithWrongItem()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
-		assertThat(allayMock, not(currentItem(Material.IRON_INGOT)));
+		assertThat(allayMock, not(hasCurrentItem(Material.IRON_INGOT)));
 	}
 
 	@Test
