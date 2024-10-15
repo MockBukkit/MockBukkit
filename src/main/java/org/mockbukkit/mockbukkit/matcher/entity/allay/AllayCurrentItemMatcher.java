@@ -8,6 +8,8 @@ import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
 
+import static org.hamcrest.Matchers.not;
+
 public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 {
 
@@ -45,5 +47,15 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	{
 		Preconditions.checkNotNull(currentItem);
 		return new AllayCurrentItemMatcher(currentItem);
+	}
+
+	/**
+	 *
+	 * @param currentItem The material of the item to be held for there to be no match
+	 * @return A matcher which matches with any allay not holding the specified item
+	 */
+	public static @NotNull Matcher<AllayMock> doesNotHaveCurrentItem(@NotNull Material currentItem)
+	{
+		return not(hasCurrentItem(currentItem));
 	}
 }

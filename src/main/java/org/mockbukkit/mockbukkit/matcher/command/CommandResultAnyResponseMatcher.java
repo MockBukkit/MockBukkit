@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.CommandResult;
+
+import static org.hamcrest.Matchers.not;
 
 public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResult>
 {
@@ -35,6 +38,14 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 	public static @NotNull CommandResultAnyResponseMatcher hasAnyResponse()
 	{
 		return new CommandResultAnyResponseMatcher();
+	}
+
+	/**
+	 * @return A matcher which matches with any command result with no response
+	 */
+	public static @NotNull Matcher<CommandResult> hasNoResponse()
+	{
+		return not(hasAnyResponse());
 	}
 
 }

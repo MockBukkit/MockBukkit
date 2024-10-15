@@ -3,10 +3,13 @@ package org.mockbukkit.mockbukkit.matcher.entity.ranged;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.MobMock;
 import org.mockbukkit.mockbukkit.entity.MockRangedEntity;
+
+import static org.hamcrest.Matchers.not;
 
 public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<? extends MobMock>>
 {
@@ -77,6 +80,30 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	{
 		Preconditions.checkNotNull(target);
 		return new RangedEntityAttackMatcher(target, charge, aggressive);
+	}
+
+	/**
+	 *
+	 * @param target The required target for no match
+	 * @param charge The required charge for no match
+	 * @return A matcher which matches with any ranged entity that has not attacked the specified target with the specified charge
+	 */
+	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target, float charge)
+	{
+		return not(hasAttacked(target, charge));
+	}
+
+	/**
+	 *
+	 * @param target The required target for no match
+	 * @param charge The required charge for no match
+	 * @param aggressive Whether a check for aggressiveness should be done
+	 * @return A matcher which matches with any ranged entity that has not attacked the specified target with the
+	 * specified charge while being aggressive
+	 */
+	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target, float charge, boolean aggressive)
+	{
+		return not(hasAttacked(target, charge, aggressive));
 	}
 
 }

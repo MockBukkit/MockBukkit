@@ -2,9 +2,12 @@ package org.mockbukkit.mockbukkit.matcher.entity;
 
 import org.bukkit.Location;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 {
@@ -84,6 +87,27 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	public static @NotNull EntityTeleportationMatcher hasTeleported(@NotNull Location location, double maximumDistance)
 	{
 		return new EntityTeleportationMatcher(location, maximumDistance);
+	}
+
+	/**
+	 *
+	 * @param location The location required for there to be no match
+	 * @return A matcher which matches if the entity has not teleported to the specified location
+	 */
+	public static @NotNull Matcher<EntityMock> hasNotTeleported(@NotNull Location location)
+	{
+		return not(hasTeleported(location));
+	}
+
+	/**
+	 *
+	 * @param location The location required for there to be no match
+	 * @param maximumDistance The distance around the location considered no valid match
+	 * @return A matcher which matches if the entity has teleported outside a radius of the specified location
+	 */
+	public static @NotNull Matcher<EntityMock> hasNotTeleported(@NotNull Location location, double maximumDistance)
+	{
+		return not(hasTeleported(location, maximumDistance));
 	}
 
 }

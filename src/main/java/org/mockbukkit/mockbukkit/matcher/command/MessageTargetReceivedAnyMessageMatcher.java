@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
+
+import static org.hamcrest.Matchers.not;
 
 public class MessageTargetReceivedAnyMessageMatcher extends TypeSafeMatcher<MessageTarget>
 {
@@ -36,6 +39,15 @@ public class MessageTargetReceivedAnyMessageMatcher extends TypeSafeMatcher<Mess
 	public static @NotNull MessageTargetReceivedAnyMessageMatcher hasReceivedAny()
 	{
 		return new MessageTargetReceivedAnyMessageMatcher();
+	}
+
+	/**
+	 *
+	 * @return A matcher which matches with any target that has not received a message
+	 */
+	public static @NotNull Matcher<MessageTarget> hasNotReceivedAny()
+	{
+		return not(hasNotReceivedAny());
 	}
 
 }
