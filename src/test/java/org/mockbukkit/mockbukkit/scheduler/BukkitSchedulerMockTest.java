@@ -34,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasNoOverdueTasks;
+import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasOverdueTasks;
 
 class BukkitSchedulerMockTest
 {
@@ -381,7 +382,7 @@ class BukkitSchedulerMockTest
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
-		assertThat(scheduler, not(hasNoOverdueTasks()));
+		assertThat(scheduler, hasOverdueTasks());
 	}
 
 	@Test
