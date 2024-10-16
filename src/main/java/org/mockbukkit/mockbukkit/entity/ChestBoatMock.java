@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
 import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Entity;

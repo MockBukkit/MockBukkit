@@ -12,6 +12,7 @@ import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
 import org.mockbukkit.mockbukkit.exception.PluginIOException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.help.HelpMapMock;
 import org.mockbukkit.mockbukkit.inventory.AnvilInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.BarrelInventoryMock;

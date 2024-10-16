@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.entity.SchoolableFish;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
