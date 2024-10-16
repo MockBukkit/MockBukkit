@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.block;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;

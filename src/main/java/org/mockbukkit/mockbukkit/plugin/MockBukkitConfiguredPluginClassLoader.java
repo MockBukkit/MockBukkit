@@ -1,7 +1,9 @@
 package org.mockbukkit.mockbukkit.plugin;
 
+import com.google.common.base.Preconditions;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.PluginClassNotFoundException;
 import com.destroystokyo.paper.utils.PaperPluginLogger;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
@@ -80,8 +82,7 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	{
 		try
 		{
-			if (jarFile == null)
-				throw new IllegalStateException("No jar file selected");
+			Preconditions.checkNotNull(jarFile, "No jar file selected");
 			ZipEntry entry = jarFile.getEntry(name.replace('.', '/') + ".class");
 			InputStream inputStream = jarFile.getInputStream(entry);
 			byte[] array = inputStream.readAllBytes();
@@ -89,7 +90,7 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			throw new PluginClassNotFoundException(e);
 		}
 	}
 

@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.concurrent.TimeUnit;
 

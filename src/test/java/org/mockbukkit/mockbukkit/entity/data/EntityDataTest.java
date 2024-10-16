@@ -11,7 +11,7 @@ import org.opentest4j.AssertionFailedError;
 import java.io.IOException;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 class EntityDataTest
 {

@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;

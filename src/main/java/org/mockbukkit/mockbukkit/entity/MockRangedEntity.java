@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.destroystokyo.paper.entity.RangedEntity;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;

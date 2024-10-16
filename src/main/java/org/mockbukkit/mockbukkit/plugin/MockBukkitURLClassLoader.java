@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.plugin;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.destroystokyo.paper.utils.PaperPluginLogger;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;

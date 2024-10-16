@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.help;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

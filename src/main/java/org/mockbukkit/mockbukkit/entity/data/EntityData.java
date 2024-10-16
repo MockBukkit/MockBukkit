@@ -7,7 +7,7 @@ import com.google.gson.JsonParser;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class EntityData
 {

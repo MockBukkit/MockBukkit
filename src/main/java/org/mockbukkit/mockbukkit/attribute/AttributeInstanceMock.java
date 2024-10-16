@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.attribute;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.key.Key;
 import org.bukkit.attribute.Attribute;
