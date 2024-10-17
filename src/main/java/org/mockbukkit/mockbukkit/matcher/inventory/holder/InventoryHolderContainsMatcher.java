@@ -52,7 +52,7 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	 * @param itemStack The item stack required for there to be no match
 	 * @return A matcher which matches with any inventory without the specified item stack
 	 */
-	public static @NotNull Matcher<InventoryHolder> doesNotHAveItemInInventory(@NotNull ItemStack itemStack)
+	public static @NotNull Matcher<InventoryHolder> doesNotHaveItemInInventory(@NotNull ItemStack itemStack)
 	{
 		return not(hasItemInInventory(itemStack));
 	}
