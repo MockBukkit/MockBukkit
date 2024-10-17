@@ -91,6 +91,15 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 
 	/**
 	 *
+	 * @return A matcher which matches if the entity has not teleported
+	 */
+	public static Matcher<EntityMock> hasNotTeleported()
+	{
+		return not(hasTeleported());
+	}
+
+	/**
+	 *
 	 * @param location The location required for there to be no match
 	 * @return A matcher which matches if the entity has not teleported to the specified location
 	 */
