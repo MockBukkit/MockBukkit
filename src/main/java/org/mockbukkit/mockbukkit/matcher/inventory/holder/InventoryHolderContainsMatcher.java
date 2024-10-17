@@ -39,10 +39,11 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	 * @param itemStack The item stack required for there to be a match
 	 * @return A matcher which matches with any inventory of specified item stack
 	 */
-	public static @NotNull InventoryHolderContainsMatcher inventoryContains(@NotNull ItemStack itemStack)
+	public static @NotNull InventoryHolderContainsMatcher hasItemInInventory(@NotNull ItemStack itemStack)
 	{
 		Preconditions.checkNotNull(itemStack);
 		return new InventoryHolderContainsMatcher(itemStack);
 	}
+
 
 }
