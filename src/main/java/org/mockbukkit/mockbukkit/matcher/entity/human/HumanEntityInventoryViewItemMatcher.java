@@ -81,4 +81,15 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 		return not(hasItemInInventoryView(item));
 	}
 
+	/**
+	 *
+	 * @param material The material of the item required for no match
+	 * @return A matcher which matches with any human entity without the specified item in inventory
+	 */
+	public static @NotNull Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(Material material)
+	{
+		return not(hasItemInInventoryView(material));
+	}
+
+
 }
