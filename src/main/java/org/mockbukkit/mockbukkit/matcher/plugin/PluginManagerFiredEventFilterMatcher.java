@@ -3,11 +3,14 @@ package org.mockbukkit.mockbukkit.matcher.plugin;
 import com.google.common.base.Preconditions;
 import org.bukkit.event.Event;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 
 import java.util.function.Predicate;
+
+import static org.hamcrest.Matchers.not;
 
 public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeSafeMatcher<PluginManagerMock>
 {
@@ -51,6 +54,18 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 		Preconditions.checkNotNull(eventClass);
 		Preconditions.checkNotNull(filter);
 		return new PluginManagerFiredEventFilterMatcher<>(eventClass, filter);
+	}
+
+	/**
+	 *
+	 * @param eventClass The required type of the event for no match
+	 * @param filter A custom filter
+	 * @return A matcher which matches with any plugin manager that has not fired the specified event type without filter
+	 * @param <G> The event type to check for
+	 */
+	public static <G extends Event> @NotNull Matcher<PluginManagerMock> hasNotFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
+	{
+		return not(hasFiredFilteredEvent(eventClass, filter));
 	}
 
 }

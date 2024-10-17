@@ -4,9 +4,12 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 {
@@ -47,9 +50,8 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	}
 
 	/**
-	 *
 	 * @param material The material of the items
-	 * @param amount The amount of the items required for a match
+	 * @param amount   The amount of the items required for a match
 	 * @return A matcher which matches with any inventory with more than the required amount of items
 	 */
 	public static @NotNull InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
@@ -58,15 +60,34 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	}
 
 	/**
-	 *
+	 * @param material The material of the items
+	 * @param amount   The amount of the items required for no match
+	 * @return A matcher which matches with any inventory with more than the required amount of items
+	 */
+	public static @NotNull Matcher<InventoryMock> containsLessThan(Material material, int amount)
+	{
+		return not(containsAtLeast(material, amount));
+	}
+
+	/**
 	 * @param targetItem The target item
-	 * @param amount The amount of the items required for a match
+	 * @param amount     The amount of the items required for a match
 	 * @return A matcher which matches with any inventory with more than the required amount of items
 	 */
 	public static @NotNull InventoryItemAmountMatcher containsAtLeast(@NotNull ItemStack targetItem, int amount)
 	{
 		Preconditions.checkNotNull(targetItem);
 		return new InventoryItemAmountMatcher(targetItem, amount);
+	}
+
+	/**
+	 * @param targetItem The target item
+	 * @param amount     The amount of the items required for no match
+	 * @return A matcher which matches with any inventory with lower than the given amount of items
+	 */
+	public static @NotNull Matcher<InventoryMock> containsLessThan(@NotNull ItemStack targetItem, int amount)
+	{
+		return not(containsAtLeast(targetItem, amount));
 	}
 
 }

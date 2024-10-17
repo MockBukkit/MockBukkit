@@ -4,8 +4,11 @@ import com.google.common.base.Preconditions;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
+
+import static org.hamcrest.Matchers.not;
 
 public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHolder>
 {
@@ -43,6 +46,15 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	{
 		Preconditions.checkNotNull(itemStack);
 		return new InventoryHolderContainsMatcher(itemStack);
+	}
+
+	/**
+	 * @param itemStack The item stack required for there to be no match
+	 * @return A matcher which matches with any inventory without the specified item stack
+	 */
+	public static @NotNull Matcher<InventoryHolder> doesNotHAveItemInInventory(@NotNull ItemStack itemStack)
+	{
+		return not(hasItemInInventory(itemStack));
 	}
 
 
