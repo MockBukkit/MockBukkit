@@ -47,7 +47,7 @@ public class MessageTargetReceivedAnyMessageMatcher extends TypeSafeMatcher<Mess
 	 */
 	public static @NotNull Matcher<MessageTarget> hasNotReceivedAny()
 	{
-		return not(hasNotReceivedAny());
+		return not(hasReceivedAny());
 	}
 
 }
