@@ -3,12 +3,15 @@ package org.mockbukkit.mockbukkit.matcher.inventory.meta;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.hamcrest.Matchers.not;
 
 public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 {
@@ -63,6 +66,16 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 
 	/**
 	 *
+	 * @param legacyLoreItems The lore required for there to be no match
+	 * @return A matcher which matches with any item meta without the specified lore
+	 */
+	public static Matcher<ItemMetaMock> doesNotHaveLore(String... legacyLoreItems)
+	{
+		return not(hasLore(legacyLoreItems));
+	}
+
+	/**
+	 *
 	 * @param loreItems The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
@@ -73,12 +86,32 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 
 	/**
 	 *
+	 * @param loreItems The lore required for there to be no match
+	 * @return A matcher which matches with any item meta without the specified lore
+	 */
+	public static Matcher<ItemMetaMock> doesNotHaveLore(Component... loreItems)
+	{
+		return not(hasLore(loreItems));
+	}
+
+	/**
+	 *
 	 * @param lore The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
 	public static @NotNull ItemMetaLoreMatcher hasLore(List<Component> lore)
 	{
 		return new ItemMetaLoreMatcher(lore);
+	}
+
+	/**
+	 *
+	 * @param lore The lore required for there to be no match
+	 * @return A matcher which matches with any item meta without the specified lore
+	 */
+	public static @NotNull Matcher<ItemMetaMock> doesNotHaveLore(List<Component> lore)
+	{
+		return not(hasLore(lore));
 	}
 
 }

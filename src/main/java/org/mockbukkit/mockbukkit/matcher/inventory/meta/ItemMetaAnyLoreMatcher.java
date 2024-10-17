@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.matcher.inventory.meta;
 
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class ItemMetaAnyLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 {
@@ -33,6 +36,15 @@ public class ItemMetaAnyLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	public static @NotNull ItemMetaAnyLoreMatcher hasAnyLore()
 	{
 		return new ItemMetaAnyLoreMatcher();
+	}
+
+	/**
+	 *
+	 * @return A matcher which matches with any meta without any lore
+	 */
+	public static @NotNull Matcher<ItemMetaMock> hasNoLore()
+	{
+		return not(hasAnyLore());
 	}
 
 }
