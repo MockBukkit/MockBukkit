@@ -1,27 +1,23 @@
 package org.mockbukkit.mockbukkit;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.File;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -34,11 +30,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class MockBukkitTest
 {
 
-	private static String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
+	private static final String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
 
 	@BeforeEach
 	void setUp()
@@ -124,7 +121,7 @@ class MockBukkitTest
 	{
 		ServerMock server = MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().assertEventFired(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin)));
 		assertTrue(plugin.isEnabled(), "Plugin not enabled");
 		assertTrue(plugin.onEnableExecuted, "Plugin's onEnable method not executed");
 	}
@@ -309,7 +306,7 @@ class MockBukkitTest
 			fail();
 		}
 		File file = new File(resource.getFile());
-		try (InputStream inputStream = new FileInputStream(file);)
+		try (InputStream inputStream = new FileInputStream(file))
 		{
 			MockBukkit.mock();
 			TestPlugin plugin = MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
@@ -330,7 +327,7 @@ class MockBukkitTest
 	void load_WithConfig_InputStream_FileNotExists() throws FileNotFoundException
 	{
 
-		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes());)
+		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{
 			MockBukkit.mock();
 			RuntimeException runtimeException = assertThrows(RuntimeException.class, () ->

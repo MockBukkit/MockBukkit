@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockPlugin;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -39,14 +42,13 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -58,6 +60,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isNotInLocation;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasNotTeleported;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class EntityMockTest
 {
@@ -105,7 +113,7 @@ class EntityMockTest
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
 		entity.teleport(location);
-		entity.assertLocation(location, 5.0);
+		assertThat(entity, isInLocation(location, 5.5));
 	}
 
 	@Test
@@ -113,7 +121,7 @@ class EntityMockTest
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
-		assertThrows(AssertionError.class, () -> entity.assertLocation(location, 5.0));
+		assertThat(entity, isNotInLocation(location, 5.0));
 	}
 
 	@Test
@@ -121,7 +129,7 @@ class EntityMockTest
 	{
 		Location location = entity.getLocation();
 		entity.teleport(location);
-		entity.assertTeleported(location, 5.0);
+		assertThat(entity, hasTeleported(location, 5.0));
 		assertEquals(TeleportCause.PLUGIN, entity.getTeleportCause());
 	}
 
@@ -129,28 +137,28 @@ class EntityMockTest
 	void assertTeleported_NotTeleported_Asserts()
 	{
 		Location location = entity.getLocation();
-		assertThrows(AssertionError.class, () -> entity.assertTeleported(location, 5.0));
+		assertThat(entity, hasNotTeleported(location, 5.0));
 	}
 
 	@Test
 	void assertNotTeleported_NotTeleported_DoesNotAssert()
 	{
-		entity.assertNotTeleported();
+		assertThat(entity, hasNotTeleported());
 	}
 
 	@Test
 	void assertNotTeleported_Teleported_Asserts()
 	{
 		entity.teleport(entity.getLocation());
-		assertThrows(AssertionError.class, () -> entity.assertNotTeleported());
+		assertThat(entity, hasTeleported());
 	}
 
 	@Test
 	void assertNotTeleported_AfterAssertTeleported_DoesNotAssert()
 	{
 		entity.teleport(entity.getLocation());
-		entity.assertTeleported(entity.getLocation(), 0);
-		entity.assertNotTeleported();
+		assertThat(entity, hasTeleported(entity.getLocation(), 0));
+		assertThat(entity, hasNotTeleported());
 	}
 
 	@Test
@@ -159,7 +167,7 @@ class EntityMockTest
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
 		entity.teleport(location, TeleportCause.CHORUS_FRUIT);
-		entity.assertTeleported(location, 0);
+		assertThat(entity, hasTeleported(location, 0));
 		assertEquals(TeleportCause.CHORUS_FRUIT, entity.getTeleportCause());
 	}
 
@@ -171,14 +179,14 @@ class EntityMockTest
 		location.add(0, 5, 0);
 		entity2.teleport(location);
 		entity.teleport(entity2);
-		entity.assertTeleported(location, 0);
+		assertThat(entity, hasTeleported(location, 0));
 	}
 
 	@Test
 	void teleport_RaiseEvent()
 	{
 		entity.teleport(entity.getLocation().add(10, 0, 5));
-		server.getPluginManager().assertEventFired(EntityTeleportEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityTeleportEvent.class));
 	}
 
 	@Test
@@ -591,7 +599,7 @@ class EntityMockTest
 		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.simulateDamage(4, player1);
-		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageByEntityEvent.class));
 	}
 
 	@Test
@@ -702,7 +710,7 @@ class EntityMockTest
 		assertFalse(zombie.isSwimming());
 		zombie.setSwimming(true);
 		assertTrue(zombie.isSwimming());
-		server.getPluginManager().assertEventFired(event -> event instanceof EntityToggleSwimEvent);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityToggleSwimEvent.class));
 	}
 
 	@Test
@@ -790,7 +798,7 @@ class EntityMockTest
 	{
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		assertTrue(entity.addPassenger(mock));
-		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock));
 
 		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
 		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
@@ -889,7 +897,7 @@ class EntityMockTest
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		entity.addPassenger(mock);
 		assertTrue(entity.removePassenger(mock));
-		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock));
 
 		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
 		assertEquals(List.of(), entity.getPassengers());
@@ -904,7 +912,7 @@ class EntityMockTest
 		SimpleEntityMock b = new SimpleEntityMock(server);
 		a.addPassenger(b);
 		entity.removePassenger(b);
-		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b));
 		assertNull(b.getVehicle(), "b should not longer have a vehicle");
 		assertTrue(a.isEmpty(), "a should not longer have a passenger");
 	}

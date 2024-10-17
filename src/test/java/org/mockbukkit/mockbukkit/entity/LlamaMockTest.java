@@ -10,16 +10,19 @@ import org.bukkit.entity.Llama;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
+import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasNotAttacked;
 
 class LlamaMockTest
 {
@@ -85,7 +88,7 @@ class LlamaMockTest
 		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 1);
 
-		llama.assertAttacked(player, 1);
+		assertThat(llama, hasAttacked(player, 1));
 	}
 
 	@Test
@@ -115,7 +118,7 @@ class LlamaMockTest
 		PlayerMock player = server.addPlayer();
 		llama.setChargingAttack(true);
 		llama.rangedAttack(player, 1);
-		llama.assertAgressiveAttack(player, 1);
+		assertThat(llama, hasAttacked(player, 1, true));
 	}
 
 	@Test
@@ -130,7 +133,7 @@ class LlamaMockTest
 	void testAssertAttackWithNotAttackedEntity()
 	{
 		PlayerMock player = server.addPlayer();
-		assertThrows(AssertionFailedError.class, () -> llama.assertAttacked(player, 1));
+		assertThat(llama, hasNotAttacked(player, 1));
 	}
 
 	@Test
@@ -138,7 +141,7 @@ class LlamaMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 1);
-		assertThrows(AssertionFailedError.class, () -> llama.assertAgressiveAttack(player, 1));
+		assertThat(llama, hasNotAttacked(player, 1, true));
 	}
 
 	@Test
@@ -146,7 +149,7 @@ class LlamaMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 0.8f);
-		assertThrows(AssertionFailedError.class, () -> llama.assertAttacked(player, 0.2f));
+		assertThat(llama, hasNotAttacked(player, 0.2f));
 	}
 
 	@Test

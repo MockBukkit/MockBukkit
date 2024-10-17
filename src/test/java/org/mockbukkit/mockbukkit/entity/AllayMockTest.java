@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.WorldMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Allay;
@@ -13,12 +9,17 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -28,6 +29,10 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.doesNotHaveCurrentItem;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.hasCurrentItem;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.doesNotHaveItemInInventory;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
 
 class AllayMockTest
 {
@@ -53,7 +58,7 @@ class AllayMockTest
 	{
 		assertDoesNotThrow(() -> allayMock.simulatePlayerInteract(Material.DIAMOND));
 
-		assertDoesNotThrow(() -> allayMock.assertCurrentItem(Material.DIAMOND));
+		assertThat(allayMock, hasCurrentItem(Material.DIAMOND));
 	}
 
 	@Test
@@ -63,7 +68,7 @@ class AllayMockTest
 
 		assertDoesNotThrow(() -> allayMock.simulateItemPickup(new ItemStackMock(Material.DIAMOND, 2)));
 
-		assertDoesNotThrow(() -> allayMock.assertInventoryContains(new ItemStackMock(Material.DIAMOND, 2)));
+		assertThat(allayMock, hasItemInInventory(new ItemStackMock(Material.DIAMOND)));
 	}
 
 	@Test
@@ -107,22 +112,20 @@ class AllayMockTest
 	void testAssertCurrentItemWithWrongItem()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
-
-		Assertions.assertThrows(AssertionFailedError.class,
-				() -> allayMock.assertCurrentItem(Material.IRON_INGOT));
+		assertThat(allayMock, doesNotHaveCurrentItem(Material.IRON_INGOT));
 	}
 
 	@Test
 	void testAssertInventoryContainsWithWrongItem()
 	{
 		ItemStack item = new ItemStackMock(Material.IRON_INGOT);
-		assertThrows(AssertionFailedError.class, () -> allayMock.assertInventoryContains(item));
+		assertThat(allayMock, doesNotHaveItemInInventory(item));
 	}
 
 	@Test
 	void testCanDuplicateDefault()
 	{
-        assertTrue(allayMock.canDuplicate());
+		assertTrue(allayMock.canDuplicate());
 	}
 
 	@Test

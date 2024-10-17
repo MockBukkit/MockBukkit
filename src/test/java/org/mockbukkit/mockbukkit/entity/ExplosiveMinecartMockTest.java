@@ -13,10 +13,12 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
 @ExtendWith(MockBukkitExtension.class)
 class ExplosiveMinecartMockTest
@@ -78,7 +80,7 @@ class ExplosiveMinecartMockTest
 	{
 		minecart.explode();
 		assertTrue(minecart.isDead());
-		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 
 	@Test
@@ -86,7 +88,7 @@ class ExplosiveMinecartMockTest
 	{
 		minecart.explode(2.5f);
 		assertTrue(minecart.isDead());
-		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 
 	@Test

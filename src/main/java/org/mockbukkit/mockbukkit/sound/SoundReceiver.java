@@ -55,6 +55,7 @@ public interface SoundReceiver
 	 *
 	 * @param sound The sound type to check.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull Sound sound)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound);
@@ -65,6 +66,7 @@ public interface SoundReceiver
 	 *
 	 * @param sound The sound to check.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound);
@@ -77,6 +79,7 @@ public interface SoundReceiver
 	 *
 	 * @param sound The sound key to check.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String sound)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound);
@@ -88,6 +91,7 @@ public interface SoundReceiver
 	 * @param sound     The sound that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
@@ -99,6 +103,7 @@ public interface SoundReceiver
 	 * @param sound     The sound that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
@@ -110,6 +115,7 @@ public interface SoundReceiver
 	 * @param sound     The sound name that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
@@ -121,6 +127,7 @@ public interface SoundReceiver
 	 * @param message The message to fail with.
 	 * @param sound   The sound that should've been heard.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
@@ -132,6 +139,7 @@ public interface SoundReceiver
 	 * @param message The message to fail with.
 	 * @param sound   The sound that should've been heard.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
@@ -143,6 +151,7 @@ public interface SoundReceiver
 	 * @param message The message to fail with.
 	 * @param sound   The sound name that should've been heard.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
@@ -155,6 +164,7 @@ public interface SoundReceiver
 	 * @param sound     The sound that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{
@@ -168,6 +178,7 @@ public interface SoundReceiver
 	 * @param sound     The sound that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{
@@ -184,6 +195,7 @@ public interface SoundReceiver
 	 * @param sound     The sound name that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{

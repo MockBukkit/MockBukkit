@@ -80,6 +80,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	 *
 	 * @param expectedGamemode The gamemode the player should be in.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertGameMode(GameMode expectedGamemode)
 	{
 		assertEquals(expectedGamemode, gameMode);
@@ -103,7 +104,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public void closeInventory()

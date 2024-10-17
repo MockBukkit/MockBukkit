@@ -46,6 +46,7 @@ public class CommandResult
 	/**
 	 * Asserts if the returned code of the executed command is not {@code true}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertSucceeded()
 	{
 		assertTrue(success);
@@ -54,6 +55,7 @@ public class CommandResult
 	/**
 	 * Asserts if the returned code of the executed command is not {@code false}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertFailed()
 	{
 		assertFalse(success);
@@ -65,6 +67,7 @@ public class CommandResult
 	 * @param message The message to check for.
 	 * @see MessageTarget#nextMessage()
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertResponse(String message)
 	{
 		String received = sender.nextMessage();
@@ -86,6 +89,7 @@ public class CommandResult
 	 * @see #assertResponse(String)
 	 * @see MessageTarget#nextMessage()
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertResponse(@NotNull String format, Object... objects)
 	{
 		assertResponse(String.format(format, objects));
@@ -96,12 +100,20 @@ public class CommandResult
 	 *
 	 * @see MessageTarget#nextMessage()
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertNoResponse()
 	{
 		if (sender.nextMessage() != null)
 		{
 			fail("More messages");
 		}
+	}
+
+	/**
+	 * @return The sender of this command
+	 */
+	public @NotNull MessageTarget getSender(){
+		return sender;
 	}
 
 }

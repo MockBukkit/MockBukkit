@@ -12,7 +12,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
@@ -24,6 +23,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -32,6 +33,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasNoOverdueTasks;
+import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasOverdueTasks;
 
 class BukkitSchedulerMockTest
 {
@@ -357,7 +360,7 @@ class BukkitSchedulerMockTest
 	void assertNoOverdueTasks()
 	{
 		scheduler.saveOverdueTasks();
-		scheduler.assertNoOverdueTasks();
+		assertThat(scheduler, hasNoOverdueTasks());
 	}
 
 	@Test
@@ -379,7 +382,7 @@ class BukkitSchedulerMockTest
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
-		assertThrowsExactly(AssertionFailedError.class, () -> scheduler.assertNoOverdueTasks());
+		assertThat(scheduler, hasOverdueTasks());
 	}
 
 	@Test

@@ -157,6 +157,7 @@ public class BlockMock implements Block
 	 * @param material The material type that the block should have.
 	 * @throws AssertionError Thrown if the material type of the block does not equal the given material type.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertType(@NotNull Material material)
 	{
 		if (this.material != material)
