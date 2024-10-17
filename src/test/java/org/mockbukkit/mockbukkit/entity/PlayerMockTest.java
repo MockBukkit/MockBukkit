@@ -1452,7 +1452,7 @@ class PlayerMockTest
 		player.teleport(player.getLocation().add(10, 10, 10));
 
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerTeleportEvent.class));
-		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityTeleportEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityTeleportEvent.class));
 	}
 
 	@Test
