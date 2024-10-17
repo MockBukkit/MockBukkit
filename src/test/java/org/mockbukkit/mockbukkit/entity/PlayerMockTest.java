@@ -122,13 +122,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasNotTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
+import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher.doesNotHaveItemInInventoryView;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher.hasItemInInventoryView;
+import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher.doesNotHaveInventoryViewType;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher.hasInventoryViewType;
 import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher.hasConsumed;
+import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher.hasNotConsumed;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
+import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasNotHeard;
 
 class PlayerMockTest
 {
@@ -1118,7 +1124,7 @@ class PlayerMockTest
 		);
 		player.playSound(soundA);
 		assertThat(player, hasHeard(soundA));
-		assertThat(player, not(hasHeard(soundB)));
+		assertThat(player, hasNotHeard(soundB));
 	}
 
 	@Test
@@ -1437,7 +1443,7 @@ class PlayerMockTest
 		player.teleport(to, PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo())));
-		assertThat(server.getPluginManager(), not(hasFiredEventInstance(EntityTeleportEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityTeleportEvent.class));
 	}
 
 	@Test
@@ -1446,7 +1452,7 @@ class PlayerMockTest
 		player.teleport(player.getLocation().add(10, 10, 10));
 
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerTeleportEvent.class));
-		assertThat(server.getPluginManager(), not(hasFiredEventInstance(EntityTeleportEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityTeleportEvent.class)));
 	}
 
 	@Test
@@ -1494,7 +1500,7 @@ class PlayerMockTest
 
 		player.teleport(player.getLocation().add(10, 10, 10));
 
-		assertThat(player, not(hasTeleported()));
+		assertThat(player, hasNotTeleported());
 		player.assertLocation(originalLocation, 0);
 		assertThat(player, isInLocation(originalLocation, 0));
 	}
@@ -1533,7 +1539,7 @@ class PlayerMockTest
 		player.getOpenInventory().setCursor(itemStack);
 		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
 		assertEquals(itemStack, player.getOpenInventory().getCursor());
-		assertThat(server.getPluginManager(), not(hasFiredEventInstance(InventoryCloseEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(InventoryCloseEvent.class));
 	}
 
 	@Test
@@ -1914,7 +1920,7 @@ class PlayerMockTest
 	{
 		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
 		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
-		assertThat(server.getPluginManager(), not(hasFiredEventInstance(PlayerKickEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -1953,7 +1959,7 @@ class PlayerMockTest
 	void testAssertItemConsumedWithNotConsumedItem()
 	{
 		ItemStack notConsumed = new ItemStack(Material.APPLE);
-		assertThat(player, not(hasConsumed(notConsumed)));
+		assertThat(player, hasNotConsumed(notConsumed));
 	}
 
 	@Test
@@ -2036,7 +2042,7 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewFailsWithWrongType()
 	{
-		assertThat(player, not(hasInventoryViewType(InventoryType.ANVIL)));
+		assertThat(player, doesNotHaveInventoryViewType(InventoryType.ANVIL));
 	}
 
 	@Test
@@ -2057,7 +2063,7 @@ class PlayerMockTest
 		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
-		assertThat(player, not(hasItemInInventoryView(Material.APPLE)));
+		assertThat(player, doesNotHaveItemInInventoryView(Material.APPLE));
 	}
 
 	@Test
@@ -2673,7 +2679,7 @@ class PlayerMockTest
 	@Test
 	void wouldCollideUsing_GivenBoundingBoxThatDoNotCollide()
 	{
-		BoundingBox boundingBox = new BoundingBox(5,5, 5, 10, 10, 10);
+		BoundingBox boundingBox = new BoundingBox(5, 5, 5, 10, 10, 10);
 
 		boolean actual = player.wouldCollideUsing(boundingBox);
 

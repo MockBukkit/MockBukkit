@@ -12,6 +12,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasFailed;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -38,7 +39,7 @@ class CommandResultSucceedMatcherTest extends AbstractMatcherTest
 	void notSucceeded()
 	{
 		CommandResult commandResultFail = new CommandResult(false, serverMock.addPlayer());
-		assertThat(commandResultFail, not(hasSucceeded()));
+		assertThat(commandResultFail, hasFailed());
 	}
 
 	@Test

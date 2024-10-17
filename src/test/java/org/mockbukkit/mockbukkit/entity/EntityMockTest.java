@@ -60,6 +60,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isNotInLocation;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasNotTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
@@ -119,7 +121,7 @@ class EntityMockTest
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
-		assertThat(entity, not(isInLocation(location, 5.0)));
+		assertThat(entity, isNotInLocation(location, 5.0));
 	}
 
 	@Test
@@ -135,13 +137,13 @@ class EntityMockTest
 	void assertTeleported_NotTeleported_Asserts()
 	{
 		Location location = entity.getLocation();
-		assertThat(entity, not(hasTeleported(location, 5.0)));
+		assertThat(entity, hasNotTeleported(location, 5.0));
 	}
 
 	@Test
 	void assertNotTeleported_NotTeleported_DoesNotAssert()
 	{
-		assertThat(entity, not(hasTeleported()));
+		assertThat(entity, hasNotTeleported());
 	}
 
 	@Test
@@ -156,7 +158,7 @@ class EntityMockTest
 	{
 		entity.teleport(entity.getLocation());
 		assertThat(entity, hasTeleported(entity.getLocation(), 0));
-		assertThat(entity, not(hasTeleported()));
+		assertThat(entity, hasNotTeleported());
 	}
 
 	@Test

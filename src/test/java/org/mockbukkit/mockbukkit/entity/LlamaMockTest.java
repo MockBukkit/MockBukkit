@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
+import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasNotAttacked;
 
 class LlamaMockTest
 {
@@ -132,7 +133,7 @@ class LlamaMockTest
 	void testAssertAttackWithNotAttackedEntity()
 	{
 		PlayerMock player = server.addPlayer();
-		assertThat(llama, not(hasAttacked(player, 1)));
+		assertThat(llama, hasNotAttacked(player, 1));
 	}
 
 	@Test
@@ -140,7 +141,7 @@ class LlamaMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 1);
-		assertThat(llama, not(hasAttacked(player, 1, true)));
+		assertThat(llama, hasNotAttacked(player, 1, true));
 	}
 
 	@Test
@@ -148,7 +149,7 @@ class LlamaMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 0.8f);
-		assertThat(llama, not(hasAttacked(player, 0.2f)));
+		assertThat(llama, hasNotAttacked(player, 0.2f));
 	}
 
 	@Test

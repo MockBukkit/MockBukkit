@@ -1,11 +1,5 @@
 package org.mockbukkit.mockbukkit.block;
 
-import org.mockbukkit.mockbukkit.ChunkCoordinate;
-import org.mockbukkit.mockbukkit.ChunkMock;
-import org.mockbukkit.mockbukkit.Coordinate;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.WorldMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,9 +14,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.ChunkCoordinate;
+import org.mockbukkit.mockbukkit.ChunkMock;
+import org.mockbukkit.mockbukkit.Coordinate;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -32,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.doesNotHaveMaterial;
 import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -237,7 +237,7 @@ class BlockMockTest
 	void assertType_IncorrectType_Fails()
 	{
 		block.setType(Material.STONE);
-		assertThat(block, not(hasMaterial(Material.DIRT)));
+		assertThat(block, doesNotHaveMaterial(Material.DIRT));
 	}
 
 	@Test

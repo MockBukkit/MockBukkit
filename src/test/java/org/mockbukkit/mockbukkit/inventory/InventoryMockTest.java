@@ -32,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsAtLeast;
+import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsLessThan;
 import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.similarTo;
 
 class InventoryMockTest
@@ -308,7 +309,7 @@ class InventoryMockTest
 	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
 		inventory.addItem(new ItemStackMock(Material.SHORT_GRASS, 3));
-		assertThat(inventory, not(containsAtLeast(Material.DIRT, 4)));
+		assertThat(inventory, containsLessThan(Material.DIRT, 4));
 	}
 
 	@Test

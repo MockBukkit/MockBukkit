@@ -1,21 +1,21 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
+import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasNotAttacked;
 
 class AbstractSkeletonMockTest
 {
@@ -96,7 +96,7 @@ class AbstractSkeletonMockTest
 	void testAssertAttackedThrowsWithNoAttack()
 	{
 		Player player = server.addPlayer();
-		assertThat(skeleton, not(hasAttacked(player, 0.5f)));
+		assertThat(skeleton, hasNotAttacked(player, 0.5f));
 	}
 
 	@Test
@@ -116,7 +116,7 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 
-		assertThat(skeleton, not(hasAttacked(player, 0.6f)));
+		assertThat(skeleton, hasNotAttacked(player, 0.6f));
 	}
 
 	@Test
@@ -133,7 +133,7 @@ class AbstractSkeletonMockTest
 	{
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
-		assertThat(skeleton, not(hasAttacked(player, 0.5f, true)));
+		assertThat(skeleton, hasNotAttacked(player, 0.5f, true));
 	}
 
 

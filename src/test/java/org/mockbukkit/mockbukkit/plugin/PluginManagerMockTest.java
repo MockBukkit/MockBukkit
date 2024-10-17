@@ -30,7 +30,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,6 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class PluginManagerMockTest
@@ -177,7 +177,7 @@ class PluginManagerMockTest
 	@Test
 	void assertEventFired_EventWasNotFired_Asserts()
 	{
-		assertThat(server.getPluginManager(), not(hasFiredEventInstance(BlockBreakEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(BlockBreakEvent.class));
 	}
 
 	@Test
@@ -267,7 +267,7 @@ class PluginManagerMockTest
 		JavaPluginUtils.setEnabled(plugin, false);
 
 		pluginManager.disablePlugin(plugin);
-		assertThat(pluginManager, not(hasFiredEventInstance(PluginDisableEvent.class)));
+		assertThat(pluginManager, hasNotFiredEventInstance(PluginDisableEvent.class));
 	}
 
 	@Test
