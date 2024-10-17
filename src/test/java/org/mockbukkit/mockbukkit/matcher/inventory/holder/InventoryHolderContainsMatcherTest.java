@@ -14,7 +14,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.inventoryContains;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
 
 @ExtendWith(MockBukkitExtension.class)
 class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
@@ -35,13 +35,13 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 	@Test
 	void testMatches()
 	{
-		assertMatches(inventoryContains(stack), allay);
+		assertMatches(hasItemInInventory(stack), allay);
 	}
 
 	@Test
 	void testDoesNotMatch()
 	{
-		assertDoesNotMatch(inventoryContains(new ItemStack(Material.DIAMOND)), allay);
+		assertDoesNotMatch(hasItemInInventory(new ItemStack(Material.DIAMOND)), allay);
 	}
 
 	@Test
@@ -53,7 +53,7 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 	@Override
 	protected Matcher<?> createMatcher()
 	{
-		return inventoryContains(stack);
+		return hasItemInInventory(stack);
 	}
 
 }
