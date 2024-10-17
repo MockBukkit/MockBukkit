@@ -54,7 +54,7 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	 * @param inventoryType The required inventory for no match
 	 * @return A matcher which matches with any human entity without the specified inventory
 	 */
-	public static @NotNull Matcher<HumanEntityMock> hasNoInventoryViewType(@NotNull InventoryType inventoryType)
+	public static @NotNull Matcher<HumanEntityMock> doesNotHaveInventoryViewType(@NotNull InventoryType inventoryType)
 	{
 		return not(hasInventoryViewType(inventoryType));
 	}
