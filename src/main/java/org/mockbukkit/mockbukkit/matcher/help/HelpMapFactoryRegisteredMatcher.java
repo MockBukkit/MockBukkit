@@ -3,9 +3,12 @@ package org.mockbukkit.mockbukkit.matcher.help;
 import com.google.common.base.Preconditions;
 import org.bukkit.help.HelpTopicFactory;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.help.HelpMapMock;
+
+import static org.hamcrest.Matchers.not;
 
 public class HelpMapFactoryRegisteredMatcher extends TypeSafeMatcher<HelpMapMock>
 {
@@ -51,6 +54,16 @@ public class HelpMapFactoryRegisteredMatcher extends TypeSafeMatcher<HelpMapMock
 	{
 		Preconditions.checkNotNull(factory, "Factory cannot be null");
 		return new HelpMapFactoryRegisteredMatcher(factory);
+	}
+
+	/**
+	 *
+	 * @param factory The help topic factory required for there to be no match
+	 * @return A matcher which matches with any help map that has not registered the specified help topic factory
+	 */
+	public static @NotNull Matcher<HelpMapMock> doesNotHaveFactoryRegistered(@NotNull HelpTopicFactory<?> factory)
+	{
+		return not(hasFactoryRegistered(factory));
 	}
 
 }
