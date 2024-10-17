@@ -29,7 +29,9 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.doesNotHaveCurrentItem;
 import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.hasCurrentItem;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.doesNotHAveItemInInventory;
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
 
 class AllayMockTest
@@ -110,14 +112,14 @@ class AllayMockTest
 	void testAssertCurrentItemWithWrongItem()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
-		assertThat(allayMock, not(hasCurrentItem(Material.IRON_INGOT)));
+		assertThat(allayMock, doesNotHaveCurrentItem(Material.IRON_INGOT));
 	}
 
 	@Test
 	void testAssertInventoryContainsWithWrongItem()
 	{
 		ItemStack item = new ItemStackMock(Material.IRON_INGOT);
-		assertThat(allayMock, not(hasItemInInventory(item)));
+		assertThat(allayMock, doesNotHAveItemInInventory(item));
 	}
 
 	@Test

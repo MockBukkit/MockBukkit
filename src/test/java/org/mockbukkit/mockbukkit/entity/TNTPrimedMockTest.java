@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 
 @ExtendWith(MockBukkitExtension.class)
 class TNTPrimedMockTest
@@ -112,7 +113,7 @@ class TNTPrimedMockTest
 	{
 		tntPrimed.tick();
 		assertFalse(tntPrimed.isDead());
-		assertThat(server.getPluginManager(), not(hasFiredEventInstance(ExplosionPrimeEvent.class)));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 
 	@Test

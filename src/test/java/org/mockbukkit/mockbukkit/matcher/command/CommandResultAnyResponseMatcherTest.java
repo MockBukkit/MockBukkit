@@ -14,6 +14,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasAnyResponse;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasNoResponse;
 
 @ExtendWith(MockBukkitExtension.class)
 class CommandResultAnyResponseMatcherTest extends AbstractMatcherTest
@@ -42,7 +43,7 @@ class CommandResultAnyResponseMatcherTest extends AbstractMatcherTest
 	@Test
 	void notAnyResponse()
 	{
-		assertThat(commandResult, not(hasAnyResponse()));
+		assertThat(commandResult, hasNoResponse());
 	}
 
 	@Test

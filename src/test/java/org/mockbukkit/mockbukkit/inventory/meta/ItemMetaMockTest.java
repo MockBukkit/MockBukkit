@@ -55,6 +55,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher.hasAnyLore;
+import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher.hasNoLore;
+import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.doesNotHaveLore;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.hasLore;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -506,7 +508,7 @@ class ItemMetaMockTest
 	@Test
 	void testHasNoLore_HasNoLore_Returns()
 	{
-		assertThat(meta, not(hasAnyLore()));
+		assertThat(meta, hasNoLore());
 	}
 
 	@Test
@@ -527,7 +529,7 @@ class ItemMetaMockTest
 	void testLore_InorrectLore_Asserts()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
-		assertThat(meta, not(hasLore("Something", "else")));
+		assertThat(meta, doesNotHaveLore("Something", "else"));
 	}
 
 	@Test
