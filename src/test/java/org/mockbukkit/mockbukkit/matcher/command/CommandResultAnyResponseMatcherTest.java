@@ -12,7 +12,6 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasAnyResponse;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasNoResponse;
 

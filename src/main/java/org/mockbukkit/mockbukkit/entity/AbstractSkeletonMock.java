@@ -25,6 +25,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	private boolean shouldBurnInDay = true;
 	private boolean isChargingAttack = false;
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
+	private static final String ENTITY_NOT_NULL = "Entity cannot be null";
 
 	/**
 	 * Constructs a new {@link AbstractSkeletonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -65,7 +66,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	@Override
 	public void rangedAttack(@NotNull LivingEntity target, float charge)
 	{
-		Preconditions.checkNotNull(target, "Entity cannot be null");
+		Preconditions.checkNotNull(target, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge < 1F && charge > 0F, "Charge needs to be between 0 and 1");
 
 		this.attackedMobs.put(target, Pair.of(charge, this.isChargingAttack));
@@ -86,7 +87,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge >= 0F && charge <= 1F, "Charge must be between 0 and 1");
 
 		if (!attackedMobs.containsKey(entity) || attackedMobs.get(entity).getLeft() != charge)
@@ -98,7 +99,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	@Override
 	public boolean hasAttackedWithCharge(LivingEntity entity, float charge)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge >= 0F && charge <= 1F, "Charge must be between 0 and 1");
 		return attackedMobs.containsKey(entity) && attackedMobs.get(entity).getLeft() == charge;
 	}
@@ -106,7 +107,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	@Override
 	public boolean hasAttackedWhileAggressive(LivingEntity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_NOT_NULL);
 		return attackedMobs.containsKey(entity) && attackedMobs.get(entity).getRight();
 	}
 

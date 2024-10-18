@@ -32,6 +32,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	private final @NotNull LlamaInventoryMock inventory;
 	private LlamaMock caravanaHead;
 	private LlamaMock caravanaTail;
+	private static final String CHARGE_BETWEEN_LIMITS = "Charge must be between 0 and 1";
+	private static final String ENTITY_NOT_NULL = "Entity cannot be null";
 
 	/**
 	 * Constructs a new {@link LlamaMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -75,7 +77,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	public void rangedAttack(@NotNull LivingEntity target, float charge)
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
-		Preconditions.checkArgument(charge >= 0 && charge <= 1, "Charge must be between 0 and 1");
+		Preconditions.checkArgument(charge >= 0 && charge <= 1, CHARGE_BETWEEN_LIMITS);
 		attackedMobs.put(target, Pair.of(charge, isAgressive));
 	}
 
@@ -94,8 +96,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		Preconditions.checkArgument(charge >= 0 && charge <= 1, "Charge must be between 0 and 1");
+		Preconditions.checkNotNull(entity, ENTITY_NOT_NULL);
+		Preconditions.checkArgument(charge >= 0 && charge <= 1, CHARGE_BETWEEN_LIMITS);
 
 		if (!attackedMobs.containsKey(entity) || attackedMobs.get(entity).getLeft() != charge)
 		{
@@ -122,8 +124,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	@Override
 	public boolean hasAttackedWithCharge(LivingEntity target, float charge)
 	{
-		Preconditions.checkNotNull(target, "Entity cannot be null");
-		Preconditions.checkArgument(charge >= 0 && charge <= 1, "Charge must be between 0 and 1");
+		Preconditions.checkNotNull(target, ENTITY_NOT_NULL);
+		Preconditions.checkArgument(charge >= 0 && charge <= 1, CHARGE_BETWEEN_LIMITS);
 
 		return attackedMobs.containsKey(target) && attackedMobs.get(target).getLeft() == charge;
 	}
@@ -131,7 +133,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	@Override
 	public boolean hasAttackedWhileAggressive(LivingEntity target)
 	{
-		Preconditions.checkNotNull(target, "Entity cannot be null");
+		Preconditions.checkNotNull(target, ENTITY_NOT_NULL);
 
 		return attackedMobs.containsKey(target) && attackedMobs.get(target).getRight();
 	}

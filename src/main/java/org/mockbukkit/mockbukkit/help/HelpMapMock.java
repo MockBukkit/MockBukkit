@@ -27,6 +27,7 @@ public class HelpMapMock implements HelpMap
 	private HelpTopic defaultTopic;
 	private final Map<String, HelpTopic> topics = new TreeMap<>(HelpTopicComparator.topicNameComparatorInstance());
 	private final Map<Class<?>, HelpTopicFactory<?>> factories = new HashMap<>();
+	private static final String FACTORY_NOT_NULL = "Factory cannot be null";
 
 	@Override
 	public HelpTopic getHelpTopic(final @NotNull String topicName)
@@ -72,7 +73,7 @@ public class HelpMapMock implements HelpMap
 	public void registerHelpTopicFactory(@NotNull Class<?> commandClass, @NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(commandClass, "CommandClass cannot be null");
-		Preconditions.checkNotNull(factory, "Factory cannot be null");
+		Preconditions.checkNotNull(factory, FACTORY_NOT_NULL);
 		if (!Command.class.isAssignableFrom(commandClass) && !CommandExecutor.class.isAssignableFrom(commandClass))
 		{
 			throw new IllegalArgumentException("CommandClass must inherit from types Command or CommandExecutor");
@@ -89,7 +90,7 @@ public class HelpMapMock implements HelpMap
 	@Deprecated(forRemoval = true)
 	public void assertRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
-		Preconditions.checkNotNull(factory, "Factory cannot be null");
+		Preconditions.checkNotNull(factory, FACTORY_NOT_NULL);
 		assertTrue(factories.containsValue(factory));
 	}
 
@@ -100,7 +101,7 @@ public class HelpMapMock implements HelpMap
 	 */
 	public boolean hasRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
-		Preconditions.checkNotNull(factory, "Factory cannot be null");
+		Preconditions.checkNotNull(factory, FACTORY_NOT_NULL);
 		return factories.containsValue(factory);
 	}
 
