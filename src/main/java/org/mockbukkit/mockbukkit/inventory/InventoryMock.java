@@ -21,6 +21,7 @@ import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -80,6 +81,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param condition The condition to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertTrueForAll(@NotNull Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
@@ -93,6 +95,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param condition The condition to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertTrueForNonNulls(@NotNull Predicate<ItemStack> condition)
 	{
 		assertTrueForAll(itemstack -> itemstack == null || condition.test(itemstack));
@@ -103,6 +106,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param condition The condition to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertTrueForSome(@NotNull Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
@@ -120,6 +124,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param item The itemstack to compare everything to.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertContainsAny(@NotNull ItemStack item)
 	{
 		assertTrueForSome(item::isSimilar);
@@ -132,6 +137,7 @@ public class InventoryMock implements Inventory
 	 * @param item   The itemstack to search for.
 	 * @param amount The minimum amount of items that one should have.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertContainsAtLeast(@NotNull ItemStack item, int amount)
 	{
 		int n = getNumberOfItems(item);
@@ -317,8 +323,12 @@ public class InventoryMock implements Inventory
 	@Override
 	public @NotNull ListIterator<ItemStack> iterator()
 	{
-		List<ItemStack> list = Arrays.asList(items).stream().filter(Objects::nonNull).collect(Collectors.toList());
+		List<ItemStack> list = stream().collect(Collectors.toList());
 		return list.listIterator();
+	}
+
+	public @NotNull Stream<ItemStack> stream(){
+		return Arrays.stream(items).filter(Objects::nonNull);
 	}
 
 	@Override

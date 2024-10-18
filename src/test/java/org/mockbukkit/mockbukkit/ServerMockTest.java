@@ -1,35 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.command.CommandResult;
-import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
-import org.mockbukkit.mockbukkit.entity.SimpleEntityMock;
-import org.mockbukkit.mockbukkit.inventory.AnvilInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.BarrelInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.BeaconInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.CartographyInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.DropperInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.EnchantingInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.GrindstoneInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
-import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
@@ -89,10 +59,40 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.command.CommandResult;
+import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
+import org.mockbukkit.mockbukkit.entity.SimpleEntityMock;
+import org.mockbukkit.mockbukkit.inventory.AnvilInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.BarrelInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.BeaconInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.CartographyInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.DropperInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.EnchantingInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.GrindstoneInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -107,6 +107,7 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -118,10 +119,15 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 @ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 
@@ -189,28 +195,28 @@ class ServerMockTest
 	void addPlayer_Calls_AsyncPreLoginEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(AsyncPlayerPreLoginEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(AsyncPlayerPreLoginEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerJoinEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerJoinEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerLoginEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerLoginEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerLoginEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerSpawnLocationEvent()
 	{
 		PlayerMock player = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerSpawnLocationEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerSpawnLocationEvent.class));
 	}
 
 	@Test
@@ -332,7 +338,7 @@ class ServerMockTest
 
 		Command command = server.getPluginCommand("testcommand");
 		CommandResult result = server.executePlayer(command, "a", "b");
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 		assertEquals(server.getPlayer(0), plugin.commandSender);
 		assertEquals(command, plugin.command);
 
@@ -365,7 +371,7 @@ class ServerMockTest
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 	}
 
 	@Test
@@ -722,7 +728,7 @@ class ServerMockTest
 	void reload_ServerLoadEvent_IsCalled()
 	{
 		server.reload();
-		server.getPluginManager().assertEventFired(ServerLoadEvent.class, (e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ServerLoadEvent.class, event -> event.getType() == ServerLoadEvent.LoadType.RELOAD));
 	}
 
 	@Test
@@ -822,7 +828,7 @@ class ServerMockTest
 	{
 		MapView mapView = server.createMap(new WorldMock());
 
-		server.getPluginManager().assertEventFired(MapInitializeEvent.class, (e) -> e.getMap().equals(mapView));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(MapInitializeEvent.class, event -> event.getMap().equals(mapView)));
 	}
 
 	@Test
@@ -845,7 +851,7 @@ class ServerMockTest
 	{
 		server.setWhitelist(true);
 		assertTrue(server.hasWhitelist());
-		server.getPluginManager().assertEventFired(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled));
 	}
 
 	@Test
@@ -879,7 +885,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertFalse(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -893,7 +899,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -907,7 +913,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -921,7 +927,7 @@ class ServerMockTest
 		server.reloadWhitelist();
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -935,7 +941,7 @@ class ServerMockTest
 		server.addPlayer(playerMock);
 
 		assertTrue(server.getOnlinePlayers().contains(playerMock));
-		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerKickEvent.class));
 	}
 
 	@Test
@@ -947,7 +953,7 @@ class ServerMockTest
 		PlayerMock player = server.addPlayer();
 
 		assertFalse(server.getOnlinePlayers().contains(player));
-		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerConnectionCloseEvent.class));
 	}
 
 	@Test
@@ -1174,6 +1180,12 @@ class ServerMockTest
 	{
 		server.setHideOnlinePlayers(true);
 		assertTrue(server.getHideOnlinePlayers());
+	}
+
+	@Test
+	void testIsShouldSendingChatPreviewsDefault()
+	{
+		assertFalse(server.shouldSendChatPreviews());
 	}
 
 	@Test
@@ -1569,7 +1581,7 @@ class ServerMockTest
 				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
 				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
 				Arguments.of(SpawnCategory.AMBIENT, 15),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE,5)
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5)
 		);
 	}
 
@@ -1763,6 +1775,7 @@ class TestRecipe implements Recipe
 
 class EventDenier implements Listener
 {
+
 	@EventHandler
 	void onPlayerConnectionClose(AsyncPlayerPreLoginEvent event)
 	{
@@ -1770,8 +1783,9 @@ class EventDenier implements Listener
 	}
 
 	@EventHandler
-	void onPlayerLogin(PlayerLoginEvent  event)
+	void onPlayerLogin(PlayerLoginEvent event)
 	{
 		event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
 	}
+
 }

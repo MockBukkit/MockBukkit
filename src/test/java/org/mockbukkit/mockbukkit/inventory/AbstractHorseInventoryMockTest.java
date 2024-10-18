@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.junit.jupiter.api.BeforeEach;
