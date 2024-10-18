@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.TestPlugin;
-import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,11 +20,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.TestPlugin;
+import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -37,6 +38,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class PluginManagerMockTest
 {
@@ -137,9 +141,7 @@ class PluginManagerMockTest
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		pluginManager.assertEventFired(event ->
-				event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
-		);
+		assertThat(pluginManager, hasFiredFilteredEvent(BlockBreakEvent.class, event -> event.getPlayer().equals(player)));
 	}
 
 	@Test
@@ -169,13 +171,13 @@ class PluginManagerMockTest
 	{
 		BlockBreakEvent event = new BlockBreakEvent(null, null);
 		pluginManager.callEvent(event);
-		pluginManager.assertEventFired(BlockBreakEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockBreakEvent.class));
 	}
 
 	@Test
 	void assertEventFired_EventWasNotFired_Asserts()
 	{
-		assertThrows(AssertionError.class, () -> pluginManager.assertEventFired(BlockBreakEvent.class));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(BlockBreakEvent.class));
 	}
 
 	@Test
@@ -255,7 +257,7 @@ class PluginManagerMockTest
 
 		pluginManager.disablePlugin(plugin);
 
-		pluginManager.assertEventFired(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin));
+		assertThat(pluginManager, hasFiredFilteredEvent(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin)));
 	}
 
 	@Test
@@ -265,8 +267,7 @@ class PluginManagerMockTest
 		JavaPluginUtils.setEnabled(plugin, false);
 
 		pluginManager.disablePlugin(plugin);
-
-		pluginManager.assertEventNotFired(PluginDisableEvent.class);
+		assertThat(pluginManager, hasNotFiredEventInstance(PluginDisableEvent.class));
 	}
 
 	@Test

@@ -8,7 +8,6 @@ import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.boss.BossBarImplementationMock;
 import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.food.FoodConsumption;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
@@ -43,7 +42,6 @@ import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
-import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Instrument;
@@ -120,17 +118,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.PlayerListMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
-import org.mockbukkit.mockbukkit.sound.AudioExperience;
-import org.mockbukkit.mockbukkit.sound.SoundReceiver;
-import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -328,10 +316,23 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
+	 * Whether the player has consumed the specified item
+	 * @param consumable The item that the player should have consumed
+	 * @return True if the specified item has been consumed
+	 */
+	public boolean hasConsumed(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		return consumedItems.contains(consumable);
+	}
+
+
+	/**
 	 * Asserts a Player has consumed the given Item
 	 *
 	 * @param consumable The Item to asserts has been consumed
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertItemConsumed(@NotNull ItemStack consumable)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
@@ -562,6 +563,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(String message, InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		InventoryView view = getOpenInventory();
@@ -582,6 +584,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
@@ -592,6 +595,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 *
 	 * @param type The {@link InventoryType} you are expecting
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(InventoryType type)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
@@ -603,6 +607,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param message The message to display upon failure
 	 * @param type    The {@link InventoryType} you are expecting
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(String message, InventoryType type)
 	{
 		assertInventoryView(message, type, inv -> true);

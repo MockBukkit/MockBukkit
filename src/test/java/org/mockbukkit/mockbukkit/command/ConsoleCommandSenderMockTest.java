@@ -15,12 +15,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 
 class ConsoleCommandSenderMockTest
 {
@@ -226,14 +228,14 @@ class ConsoleCommandSenderMockTest
 	{
 		TextComponent comp = Component.text().content("hi").color(TextColor.color(11141120)).build();
 		sender.sendMessage(comp);
-		sender.assertSaid(comp);
+		assertThat(sender, hasReceived(comp));
 	}
 
 	@Test
 	void spigot_sendMessage_SingleComponent()
 	{
 		sender.spigot().sendMessage(new net.md_5.bungee.api.chat.TextComponent("Howdy"));
-		sender.assertSaid("Howdy");
+		assertThat(sender, hasReceived("Howdy"));
 		sender.assertNoMoreSaid();
 	}
 

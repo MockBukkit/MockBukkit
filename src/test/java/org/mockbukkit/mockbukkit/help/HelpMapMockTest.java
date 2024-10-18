@@ -14,8 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
 class HelpMapMockTest
 {
@@ -103,7 +105,7 @@ class HelpMapMockTest
 		};
 		helpMap.registerHelpTopicFactory(VersionCommand.class, helpTopicFactory);
 
-		helpMap.assertRegistered(helpTopicFactory);
+		assertThat(helpMap, hasFactoryRegistered(helpTopicFactory));
 	}
 
 

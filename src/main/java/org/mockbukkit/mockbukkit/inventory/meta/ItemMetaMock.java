@@ -490,6 +490,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 *
 	 * @param lines The lines the lore should contain
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertLore(@NotNull List<String> lines)
 	{
 		assertComponentLore(lines.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList());
@@ -500,6 +501,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 *
 	 * @param lines The lines the lore should contain
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertComponentLore(@NotNull List<Component> lines)
 	{
 		if (this.lore == null)
@@ -525,6 +527,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 *
 	 * @param lines The lines the lore should contain
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertLore(String... lines)
 	{
 		assertLore(Arrays.asList(lines));
@@ -535,6 +538,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 *
 	 * @throws AssertionError if the item meta contains some lore.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertHasNoLore() throws AssertionError
 	{
 		if (hasLore())

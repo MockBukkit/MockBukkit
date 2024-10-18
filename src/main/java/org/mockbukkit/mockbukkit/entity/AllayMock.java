@@ -102,6 +102,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 *
 	 * @param item The {@link Material} to pick up
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertCurrentItem(@NotNull Material item)
 	{
 		assertCurrentItem(item, "Allay is not holding the correct item");
@@ -113,6 +114,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 * @param item    The {@link Material} to pick up
 	 * @param message The message to display if the assertion fails
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertCurrentItem(@NotNull Material item, @Nullable String message)
 	{
 		if (item != this.currentItem)
@@ -132,6 +134,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 *
 	 * @param item The item to check.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryContains(ItemStack item)
 	{
 		assertInventoryContains(item, "Inventory does not contain the given ItemStack");
@@ -143,6 +146,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 * @param item The item to check.
 	 * @param s    The message to fail with.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryContains(ItemStack item, String s)
 	{
 		if (!inventory.contains(item))
@@ -235,4 +239,11 @@ public class AllayMock extends CreatureMock implements Allay
 		return EntityType.ALLAY;
 	}
 
+	/**
+	 *
+	 * @return The material of the current item held by the allay
+	 */
+	public @Nullable Material getCurrentItem(){
+		return currentItem;
+	}
 }

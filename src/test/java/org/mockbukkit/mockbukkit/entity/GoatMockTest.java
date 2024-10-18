@@ -1,19 +1,22 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher.hasNotRammed;
+import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher.hasRammed;
 
 class GoatMockTest
 {
@@ -84,7 +87,7 @@ class GoatMockTest
 	{
 		LivingEntity entity = server.addPlayer();
 		goat.ram(entity);
-		goat.assertEntityRammed(entity);
+		assertThat(goat, hasRammed(entity));
 	}
 
 	@Test
@@ -97,8 +100,7 @@ class GoatMockTest
 	void testAssertEntityRammedWithNotRammedEntity()
 	{
 		LivingEntity entity = server.addPlayer();
-		AssertionError assertionError = assertThrows(AssertionError.class, () -> goat.assertEntityRammed(entity));
-		assertEquals("Expected Goat to have rammed Player0 but it did not!", assertionError.getMessage());
+		assertThat(goat, hasNotRammed(entity));
 	}
 
 	@Test

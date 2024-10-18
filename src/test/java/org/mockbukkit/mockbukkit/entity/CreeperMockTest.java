@@ -14,11 +14,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
 class CreeperMockTest
 {
@@ -56,7 +58,7 @@ class CreeperMockTest
 	{
 		creeper.setPowered(true);
 		assertTrue(creeper.isPowered());
-		server.getPluginManager().assertEventFired(CreeperPowerEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(CreeperPowerEvent.class));
 	}
 
 	@Test
@@ -124,7 +126,7 @@ class CreeperMockTest
 	void testIgnite()
 	{
 		creeper.ignite();
-		server.getPluginManager().assertEventFired(CreeperIgniteEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(CreeperIgniteEvent.class));
 		assertTrue(creeper.isIgnited());
 	}
 
@@ -187,7 +189,7 @@ class CreeperMockTest
 	void testExplode()
 	{
 		creeper.explode();
-		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 		assertTrue(creeper.isDead());
 	}
 

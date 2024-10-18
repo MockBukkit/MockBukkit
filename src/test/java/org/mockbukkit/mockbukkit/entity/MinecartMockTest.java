@@ -1,10 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.TestPlugin;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -20,15 +16,22 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.TestPlugin;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class MinecartMockTest
 {
@@ -122,8 +125,8 @@ class MinecartMockTest
 	{
 		MobMock mock = new SimpleMobMock(server); // A LivingEntity is needed here
 		assertTrue(minecart.addPassenger(mock));
-		server.getPluginManager().assertEventFired(VehicleEnterEvent.class, event -> event.getVehicle() == minecart && event.getEntered() == mock);
-		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == minecart && event.getEntity() == mock);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(VehicleEnterEvent.class, event -> event.getVehicle() == minecart && event.getEntered() == mock));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityMountEvent.class, event -> event.getMount() == minecart && event.getEntity() == mock));
 	}
 
 	@Test
@@ -141,7 +144,7 @@ class MinecartMockTest
 		}, plugin);
 		assertFalse(minecart.addPassenger(mock));
 		assertTrue(minecart.isEmpty());
-		server.getPluginManager().assertEventNotFired(EntityMountEvent.class);
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityMountEvent.class));
 	}
 
 	@Test
@@ -160,7 +163,7 @@ class MinecartMockTest
 		}, plugin);
 		assertTrue(minecart.removePassenger(mock));
 		assertFalse(minecart.isEmpty());
-		server.getPluginManager().assertEventNotFired(EntityDismountEvent.class);
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityDismountEvent.class));
 	}
 
 	@Test

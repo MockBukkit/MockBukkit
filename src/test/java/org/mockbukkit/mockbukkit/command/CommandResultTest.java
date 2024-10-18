@@ -1,13 +1,20 @@
 package org.mockbukkit.mockbukkit.command;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasAnyResponse;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasNoResponse;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMatcher.doesNotHaveResponse;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMatcher.hasResponse;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasFailed;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
 class CommandResultTest
 {
@@ -44,14 +51,14 @@ class CommandResultTest
 	void assertSucceed_Succeeded_DoesNotAssert()
 	{
 		CommandResult result = new CommandResult(true, target);
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 	}
 
 	@Test
 	void assertSucceed_Failed_Asserts()
 	{
 		CommandResult result = new CommandResult(false, target);
-		assertThrows(AssertionError.class, result::assertSucceeded);
+		assertThat(result, hasFailed());
 	}
 
 	@Test
@@ -74,7 +81,7 @@ class CommandResultTest
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello world");
 		CommandResult result = new CommandResult(true, sender);
-		result.assertResponse("Hello world");
+		assertThat(result, hasResponse("Hello world"));
 	}
 
 	@Test
@@ -83,7 +90,7 @@ class CommandResultTest
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello world");
 		CommandResult result = new CommandResult(true, sender);
-		assertThrows(AssertionError.class, () -> result.assertResponse("world Hello"));
+		assertThat(result, doesNotHaveResponse("world Hello"));
 	}
 
 	@Test
@@ -92,7 +99,7 @@ class CommandResultTest
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello 5 world");
 		CommandResult result = new CommandResult(true, sender);
-		assertThrows(AssertionError.class, () -> result.assertResponse("Hello %d world", 6));
+		assertThat(result, doesNotHaveResponse(String.format("Hello %d world", 6)));
 	}
 
 	@Test
@@ -100,7 +107,7 @@ class CommandResultTest
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		CommandResult result = new CommandResult(true, sender);
-		assertThrows(AssertionError.class, () -> result.assertResponse("Hello world"));
+		assertThat(result, doesNotHaveResponse("Hello world"));
 	}
 
 	@Test
@@ -108,7 +115,7 @@ class CommandResultTest
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		CommandResult result = new CommandResult(true, sender);
-		result.assertNoResponse();
+		assertThat(result, hasNoResponse());
 	}
 
 	@Test
@@ -117,7 +124,7 @@ class CommandResultTest
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("More hello world");
 		CommandResult result = new CommandResult(true, sender);
-		assertThrows(AssertionError.class, result::assertNoResponse);
+		assertThat(result, hasAnyResponse());
 	}
 
 }

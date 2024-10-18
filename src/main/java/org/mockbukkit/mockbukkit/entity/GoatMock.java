@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -86,13 +86,24 @@ public class GoatMock extends AnimalsMock implements Goat
 	 *
 	 * @param entity The entity to assert.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEntityRammed(@NotNull LivingEntity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		if (!this.attackedMobs.contains(entity))
+		if (!hasRammedEntity(entity))
 		{
 			fail("Expected Goat to have rammed " + entity.getName() + " but it did not!");
 		}
+	}
+
+	/**
+	 * Whether this goat has rammed the specified entity
+	 * @param entity The entity that the goat should have rammed
+	 * @return True if the goat has rammed the entity
+	 */
+	public boolean hasRammedEntity(@NotNull LivingEntity entity)
+	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return this.attackedMobs.contains(entity);
 	}
 
 	@Override
