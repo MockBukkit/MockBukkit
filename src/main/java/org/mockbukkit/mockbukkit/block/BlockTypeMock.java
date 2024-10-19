@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.block;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

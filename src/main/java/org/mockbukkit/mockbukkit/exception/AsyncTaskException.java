@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.scheduler;
+package org.mockbukkit.mockbukkit.exception;
 
 import java.io.Serial;
 

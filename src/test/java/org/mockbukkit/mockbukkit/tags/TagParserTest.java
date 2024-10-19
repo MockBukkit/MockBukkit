@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.tags;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.exception.TagMisconfigurationException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

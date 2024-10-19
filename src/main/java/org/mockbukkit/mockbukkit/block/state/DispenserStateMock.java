@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;

@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.plugin;
 
 import com.google.common.base.Preconditions;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.exception.PluginClassNotFoundException;
 import com.destroystokyo.paper.utils.PaperPluginLogger;
 import io.papermc.paper.plugin.configuration.PluginMeta;
