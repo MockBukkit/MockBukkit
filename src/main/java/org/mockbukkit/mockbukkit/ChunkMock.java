@@ -340,8 +340,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public long getChunkKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return x & 0xffffffffL | (z & 0xffffffffL) << 32;
 	}
 
 	@Override
