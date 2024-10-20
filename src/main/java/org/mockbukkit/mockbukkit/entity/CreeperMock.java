@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.destroystokyo.paper.event.entity.CreeperIgniteEvent;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Creeper;

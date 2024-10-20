@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

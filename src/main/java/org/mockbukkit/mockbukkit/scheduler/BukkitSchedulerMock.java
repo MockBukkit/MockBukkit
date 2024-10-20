@@ -1,7 +1,9 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
+import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import com.google.common.base.Preconditions;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -279,7 +281,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					continue;
 				task.cancel();
 				cancelTask(task.getTaskId());
-				throw new RuntimeException("Forced Cancellation of task owned by " + task.getOwner().getName());
+				throw new TaskCancelledException("Forced Cancellation of task owned by " + task.getOwner().getName());
 			}
 			pool.shutdownNow();
 		}
@@ -309,7 +311,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 				catch (ExecutionException e)
 				{
-					throw new RuntimeException(e);
+					throw new AsyncTaskException(e);
 				}
 			}
 		}

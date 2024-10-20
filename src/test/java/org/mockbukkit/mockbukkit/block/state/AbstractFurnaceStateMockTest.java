@@ -1,9 +1,8 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;

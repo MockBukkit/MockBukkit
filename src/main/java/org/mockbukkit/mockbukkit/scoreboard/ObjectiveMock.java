@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.scoreboard.numbers.NumberFormat;

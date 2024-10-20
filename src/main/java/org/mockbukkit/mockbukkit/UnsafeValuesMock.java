@@ -47,9 +47,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
+import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
@@ -310,7 +311,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			throw new ItemSerializationException(e);
 		}
 	}
 
@@ -327,7 +328,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
-			throw new RuntimeException(e);
+			throw new ItemSerializationException(e);
 		}
 	}
 

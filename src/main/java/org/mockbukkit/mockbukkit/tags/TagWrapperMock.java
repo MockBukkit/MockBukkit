@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.TagMisconfigurationException;
 
 import java.io.FileNotFoundException;
 import java.util.Collections;
