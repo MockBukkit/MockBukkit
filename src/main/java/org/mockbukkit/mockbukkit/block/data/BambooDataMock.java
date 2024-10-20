@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Mock implementation of {@link Bamboo}.
  */
-public class BambooMock extends BlockDataMock implements Bamboo
+public class BambooDataMock extends BlockDataMock implements Bamboo
 {
 	private static final int MAXIMUM_AGE_AMOUNT = 1;
 	private static final int MAXIMUM_STAGE_AMOUNT = 1;
@@ -17,9 +17,9 @@ public class BambooMock extends BlockDataMock implements Bamboo
 	private static final String STAGE_KEY = "stage";
 
 	/**
-	 * Constructs a new {@link BambooMock} for the provided {@link Material}.
+	 * Constructs a new {@link BambooDataMock} for the provided {@link Material}.
 	 */
-	public BambooMock()
+	public BambooDataMock()
 	{
 		super(Material.BAMBOO);
 
