@@ -1,6 +1,8 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.world;
 
-import org.mockbukkit.mockbukkit.world.WorldMock;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.data.type.AmethystCluster;

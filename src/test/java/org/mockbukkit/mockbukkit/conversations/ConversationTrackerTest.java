@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.conversations;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.TestPlugin;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationContext;

@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.plugin;
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
