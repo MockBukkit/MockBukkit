@@ -1,7 +1,6 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.exception;
 
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.exception.ReflectionAccessException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

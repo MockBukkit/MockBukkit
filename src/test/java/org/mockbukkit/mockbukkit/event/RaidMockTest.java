@@ -1,5 +1,8 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.event;
 
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.RaiderMock;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -17,7 +20,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.event.RaidMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.List;

@@ -10,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.plugin.MockPlugin;
+import org.mockbukkit.mockbukkit.plugin.SecondTestPlugin;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.File;
