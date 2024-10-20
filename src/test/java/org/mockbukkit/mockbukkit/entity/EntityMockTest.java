@@ -4,7 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.TestPlugin;
 import org.mockbukkit.mockbukkit.WorldMock;
@@ -399,7 +399,7 @@ class EntityMockTest
 	@Test
 	void metadataTest()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		assertFalse(entity.hasMetadata("metadata"));
 		entity.setMetadata("metadata", new FixedMetadataValue(plugin, "value"));
 		assertTrue(entity.hasMetadata("metadata"));

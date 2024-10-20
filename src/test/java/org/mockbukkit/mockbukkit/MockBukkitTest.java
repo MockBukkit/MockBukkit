@@ -162,7 +162,7 @@ class MockBukkitTest
 	void createMockPlugin_CreatesMockPlugin()
 	{
 		MockBukkit.mock();
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		assertEquals("MockPlugin", plugin.getName());
 		assertEquals("1.0.0", plugin.getDescription().getVersion());
 		assertTrue(plugin.isEnabled());
@@ -172,7 +172,7 @@ class MockBukkitTest
 	void createMockPlugin_CustomName()
 	{
 		MockBukkit.mock();
-		MockPlugin plugin = MockBukkit.createMockPlugin("MyPlugin");
+		PluginMock plugin = MockBukkit.createMockPlugin("MyPlugin");
 		assertEquals("MyPlugin", plugin.getName());
 		assertTrue(plugin.isEnabled());
 	}
@@ -181,7 +181,7 @@ class MockBukkitTest
 	void createMockPlugin_CustomName_CustomVersion()
 	{
 		MockBukkit.mock();
-		MockPlugin plugin = MockBukkit.createMockPlugin("MyPlugin", "6.9.0");
+		PluginMock plugin = MockBukkit.createMockPlugin("MyPlugin", "6.9.0");
 		assertEquals("MyPlugin", plugin.getName());
 		assertEquals("6.9.0", plugin.getDescription().getVersion());
 		assertTrue(plugin.isEnabled());

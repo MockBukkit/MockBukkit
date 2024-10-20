@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.metadata;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.PluginMock;
 import org.mockbukkit.mockbukkit.TestPlugin;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
@@ -33,7 +33,7 @@ class MetadataTableTest
 	@Test
 	void setMetadata_MetadataSet()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		assertFalse(mt.hasMetadata("MyMetadata"));
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin, "wee"));
 		assertTrue(mt.hasMetadata("MyMetadata"));
@@ -42,7 +42,7 @@ class MetadataTableTest
 	@Test
 	void getMetadata_MultipleMetaDataSetByMultiplePlugins_TwoMetadataValuesFound()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		PluginMock plugin1 = MockBukkit.createMockPlugin();
 		TestPlugin plugin2 = MockBukkit.load(TestPlugin.class);
 		assertFalse(mt.hasMetadata("MyMetadata"));
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "wee"));
@@ -67,7 +67,7 @@ class MetadataTableTest
 	@Test
 	void removeMetadata_MultipleSet_OneRemoved()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		PluginMock plugin1 = MockBukkit.createMockPlugin();
 		TestPlugin plugin2 = MockBukkit.load(TestPlugin.class);
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "wee"));
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin2, "woo"));
@@ -82,7 +82,7 @@ class MetadataTableTest
 	@Test
 	void getMetadata_NoneSet_EmptyList()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		PluginMock plugin1 = MockBukkit.createMockPlugin();
 		List<MetadataValue> metadata = mt.getMetadata("MyMetadata");
 		assertEquals(0, metadata.size());
 	}
@@ -90,14 +90,14 @@ class MetadataTableTest
 	@Test
 	void removeMetadata_NoneSet_NothingHappens()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		PluginMock plugin1 = MockBukkit.createMockPlugin();
 		assertDoesNotThrow(() -> mt.removeMetadata("MyMetadata", plugin1));
 	}
 
 	@Test
 	void clearMetadata()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		PluginMock plugin1 = MockBukkit.createMockPlugin();
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "wee"));
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "woo"));
 		mt.clearMetadata(plugin1);
@@ -113,7 +113,7 @@ class MetadataTableTest
 	@Test
 	void clearMetadata_NoneSet_NothingHappens()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		PluginMock plugin1 = MockBukkit.createMockPlugin();
 		mt.clearMetadata(plugin1);
 		assertFalse(mt.hasMetadata("MyMetadata"));
 	}

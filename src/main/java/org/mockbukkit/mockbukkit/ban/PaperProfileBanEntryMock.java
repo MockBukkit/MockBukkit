@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 
-public class MockPaperProfileBanEntry implements BanEntry<PlayerProfile>
+public class PaperProfileBanEntryMock implements BanEntry<PlayerProfile>
 {
 
 	private final PlayerProfile target;
@@ -18,7 +18,7 @@ public class MockPaperProfileBanEntry implements BanEntry<PlayerProfile>
 	private Date expiration;
 	private String reason;
 
-	public MockPaperProfileBanEntry(PlayerProfile target, String source, Date expiration, String reason)
+	public PaperProfileBanEntryMock(PlayerProfile target, String source, Date expiration, String reason)
 	{
 		this.target = target;
 		this.created = new Date();

@@ -12,8 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.plugin.MockBukkitConfiguredPluginClassLoader;
-import org.mockbukkit.mockbukkit.plugin.MockCustomConfiguredPluginClassLoader;
+import org.mockbukkit.mockbukkit.plugin.CustomConfiguredPluginClassLoaderMock;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -130,7 +129,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public void createCustomClass() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
 	{
 		ConfiguredPluginClassLoader cpcl = (ConfiguredPluginClassLoader) getClassLoader();
-		MockCustomConfiguredPluginClassLoader ccl = new MockCustomConfiguredPluginClassLoader(cpcl);
+		CustomConfiguredPluginClassLoaderMock ccl = new CustomConfiguredPluginClassLoaderMock(cpcl);
 		cpcl.getGroup().add(ccl);
 		ccl.createCustomClass();
 		Class<?> testClass = Class.forName("TestClass", false, getClassLoader());
