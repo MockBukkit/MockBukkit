@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.ChunkCoordinate;
-import org.mockbukkit.mockbukkit.ChunkMock;
-import org.mockbukkit.mockbukkit.Coordinate;
+import org.mockbukkit.mockbukkit.world.coordinate.ChunkCoordinate;
+import org.mockbukkit.mockbukkit.world.chunk.ChunkMock;
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;

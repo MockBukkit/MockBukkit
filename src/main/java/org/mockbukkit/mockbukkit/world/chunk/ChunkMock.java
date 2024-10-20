@@ -1,5 +1,6 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.world.chunk;
 
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;

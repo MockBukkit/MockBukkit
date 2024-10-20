@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
+import org.mockbukkit.mockbukkit.world.WorldBorderMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;

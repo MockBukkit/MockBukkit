@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.world.chunk;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.ChunkSnapshot;
@@ -7,6 +7,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 
 import java.util.Map;
 

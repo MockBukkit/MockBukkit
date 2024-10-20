@@ -157,6 +157,10 @@ import org.mockbukkit.mockbukkit.entity.ZoglinMock;
 import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
+import org.mockbukkit.mockbukkit.world.chunk.ChunkMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.Arrays;

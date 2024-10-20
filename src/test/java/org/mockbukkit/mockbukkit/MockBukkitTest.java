@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.File;

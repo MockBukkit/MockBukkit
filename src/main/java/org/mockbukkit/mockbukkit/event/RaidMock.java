@@ -1,7 +1,6 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.event;
 
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
-import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -12,6 +11,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Raider;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
 import java.util.Collections;
 import java.util.List;
