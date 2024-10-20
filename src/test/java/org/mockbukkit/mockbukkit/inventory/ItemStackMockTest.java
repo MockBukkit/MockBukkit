@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

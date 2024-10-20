@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.food;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -58,14 +59,7 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 			String path = "/foods/food_properties.json";
 			if (MockBukkit.class.getResource(path) == null)
 			{
-				try
-				{
-					throw new FileNotFoundException(path);
-				}
-				catch (FileNotFoundException e)
-				{
-					throw new RuntimeException(e);
-				}
+				throw new InternalDataLoadException("Failed to find resource " + path);
 			}
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
 			{
@@ -77,7 +71,7 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 			}
 			catch (IOException e)
 			{
-				throw new RuntimeException(e);
+				throw new InternalDataLoadException(e);
 			}
 		}
 		return ALL_FOODS;

@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.exception;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;

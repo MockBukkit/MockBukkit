@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;

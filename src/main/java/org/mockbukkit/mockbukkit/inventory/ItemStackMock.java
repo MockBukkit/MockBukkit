@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
@@ -265,7 +266,7 @@ public class ItemStackMock extends ItemStack
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new RuntimeException(ITEMMETA_INITIALIZATION_ERROR + material.asItemType().getItemMetaClass(), e);
+				throw new ItemMetaInitException(ITEMMETA_INITIALIZATION_ERROR + material.asItemType().getItemMetaClass(), e);
 			}
 		}
 		return new ItemMetaMock();

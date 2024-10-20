@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.tags;
+package org.mockbukkit.mockbukkit.exception;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;

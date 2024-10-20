@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.command;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.command.CommandBlockHolder;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;

@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.map;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.World;
 import org.bukkit.map.MapRenderer;

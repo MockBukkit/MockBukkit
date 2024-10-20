@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.math.Position;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

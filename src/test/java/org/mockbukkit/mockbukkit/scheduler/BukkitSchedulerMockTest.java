@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
@@ -153,7 +154,7 @@ class BukkitSchedulerMockTest
 			}
 			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
-				throw new RuntimeException(e);
+				throw new TaskCancelledException(e);
 			}
 		});
 		barrier.await(3L, TimeUnit.SECONDS);
@@ -179,7 +180,7 @@ class BukkitSchedulerMockTest
 			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
 				testTask.cancel();
-				throw new RuntimeException(e);
+				throw new TaskCancelledException(e);
 			}
 		}, 2L, 1L);
 
@@ -257,7 +258,7 @@ class BukkitSchedulerMockTest
 				}
 				catch (InterruptedException e)
 				{
-					throw new RuntimeException(e);
+					throw new TaskCancelledException(e);
 				}
 			}
 		});
@@ -271,7 +272,7 @@ class BukkitSchedulerMockTest
 				}
 				catch (InterruptedException e)
 				{
-					throw new RuntimeException(e);
+					throw new TaskCancelledException(e);
 				}
 			}
 		}, 2);
@@ -314,7 +315,7 @@ class BukkitSchedulerMockTest
 				{
 					alive.set(false);
 					String message = "Interrupted";
-					throw new RuntimeException(message, e);
+					throw new TaskCancelledException(message, e);
 				}
 			}
 		});

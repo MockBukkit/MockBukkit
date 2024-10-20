@@ -4,7 +4,7 @@ import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.PlayerListMock;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.boss.BossBarImplementationMock;
 import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;

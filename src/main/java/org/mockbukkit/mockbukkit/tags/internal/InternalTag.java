@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.tags.internal;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -64,7 +65,7 @@ public class InternalTag<T>
 			}
 			catch (IOException | InternalTagMisconfigurationException e)
 			{
-				throw new RuntimeException(e);
+				throw new InternalDataLoadException(e);
 			}
 		}
 	}

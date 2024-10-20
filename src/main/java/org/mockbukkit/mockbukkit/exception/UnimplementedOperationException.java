@@ -1,7 +1,8 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.exception;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.MockBukkit;
 import org.opentest4j.TestAbortedException;
 
 import java.io.Serial;

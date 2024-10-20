@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.block.PistonMoveReaction;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
