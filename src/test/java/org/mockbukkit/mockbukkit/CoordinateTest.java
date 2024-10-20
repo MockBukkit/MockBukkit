@@ -2,8 +2,8 @@ package org.mockbukkit.mockbukkit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.ChunkCoordinate;
-import org.mockbukkit.mockbukkit.Coordinate;
+import org.mockbukkit.mockbukkit.world.coordinate.ChunkCoordinate;
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

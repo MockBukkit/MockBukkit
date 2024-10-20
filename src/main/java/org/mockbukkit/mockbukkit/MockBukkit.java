@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.MockPlugin;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;

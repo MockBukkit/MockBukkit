@@ -1,5 +1,12 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.world;
 
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.world.chunk.ChunkMock;
+import org.mockbukkit.mockbukkit.world.chunk.ChunkSnapshotMock;
+import org.mockbukkit.mockbukkit.world.coordinate.ChunkCoordinate;
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.AllayMock;

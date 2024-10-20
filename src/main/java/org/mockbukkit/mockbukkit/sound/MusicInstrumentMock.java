@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.sound;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;

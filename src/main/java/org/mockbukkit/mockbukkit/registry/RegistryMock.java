@@ -1,5 +1,6 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.registry;
 
+import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
@@ -17,6 +18,7 @@ import org.mockbukkit.mockbukkit.inventory.ItemTypeMock;
 import org.mockbukkit.mockbukkit.inventory.MenuTypeMock;
 import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import org.mockbukkit.mockbukkit.event.GameEventMock;
 import org.mockbukkit.mockbukkit.map.MapCursorTypeMock;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
@@ -30,6 +32,8 @@ import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
+import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
+import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

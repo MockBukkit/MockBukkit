@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;

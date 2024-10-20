@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.plugin;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.PermissionManager;

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

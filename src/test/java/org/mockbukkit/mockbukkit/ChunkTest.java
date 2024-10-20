@@ -10,6 +10,9 @@ import org.bukkit.entity.Zombie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.world.chunk.ChunkMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
+import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 
 import java.util.List;
 

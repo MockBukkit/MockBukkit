@@ -17,6 +17,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.event.RaidMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.List;
 import java.util.Set;
