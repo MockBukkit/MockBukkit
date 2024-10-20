@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.util;
 
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;

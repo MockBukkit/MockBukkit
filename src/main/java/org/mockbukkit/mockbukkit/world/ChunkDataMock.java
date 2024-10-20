@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.world.chunk;
+package org.mockbukkit.mockbukkit.world;
 
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import com.google.common.base.Preconditions;
@@ -9,8 +9,6 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.world.coordinate.Coordinate;
 
 import java.util.HashMap;
 import java.util.Map;
