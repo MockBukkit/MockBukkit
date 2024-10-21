@@ -3,7 +3,7 @@ package org.mockbukkit.mockbukkit.scheduler.paper;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +39,8 @@ class FoliaAsyncSchedulerTest
 	void runNow_RunsTask() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(1);
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		scheduler.runNow(mockPlugin, task -> latch.countDown());
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		scheduler.runNow(pluginMock, task -> latch.countDown());
 		assertTrue(latch.await(1, TimeUnit.SECONDS));
 	}
 
@@ -71,8 +71,8 @@ class FoliaAsyncSchedulerTest
 	void runDelayed_RunsTaskLater() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(1);
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		scheduler.runDelayed(mockPlugin, task -> latch.countDown(), 100, TimeUnit.MILLISECONDS);
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		scheduler.runDelayed(pluginMock, task -> latch.countDown(), 100, TimeUnit.MILLISECONDS);
 		assertNotEquals(0, latch.getCount());
 		bukkitScheduler.performTicks(1);
 		assertNotEquals(0, latch.getCount());
@@ -85,8 +85,8 @@ class FoliaAsyncSchedulerTest
 	{
 		CompletableFuture<Boolean> future = new CompletableFuture<>();
 		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		scheduler.runDelayed(mockPlugin, task -> future.complete(!server.isPrimaryThread()), 100, TimeUnit.MILLISECONDS);
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		scheduler.runDelayed(pluginMock, task -> future.complete(!server.isPrimaryThread()), 100, TimeUnit.MILLISECONDS);
 		bukkitScheduler.performTicks(2);
 		assertTrue(future.join());
 	}
@@ -109,7 +109,7 @@ class FoliaAsyncSchedulerTest
 	void cancelTasks() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(3);
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
@@ -135,8 +135,8 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void runAtFixedRate_NullTimeUnit_ThrowsExceptions()
 	{
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, (task) ->
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(pluginMock, (task) ->
 		{
 		}, 1, 1, null));
 	}
@@ -144,8 +144,8 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void runAtFixedRate_NullTask_ThrowsExceptions()
 	{
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, null, 1, 1, TimeUnit.SECONDS));
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(pluginMock, null, 1, 1, TimeUnit.SECONDS));
 	}
 
 	@Test

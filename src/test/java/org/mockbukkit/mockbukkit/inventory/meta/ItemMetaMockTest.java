@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.PluginMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -285,7 +285,7 @@ class ItemMetaMockTest
 	@Test
 	void equals_PersistentDataSame_True()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		ItemMetaMock meta2 = new ItemMetaMock();
 		NamespacedKey key = new NamespacedKey(plugin, "key");
 		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
@@ -297,7 +297,7 @@ class ItemMetaMockTest
 	@Test
 	void equals_PersistentDataDifferent_False()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		ItemMetaMock meta2 = new ItemMetaMock();
 		NamespacedKey key = new NamespacedKey(plugin, "key");
 		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
@@ -309,7 +309,7 @@ class ItemMetaMockTest
 	@Test
 	void equals_PersistentDataOneEmpty_False()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		ItemMetaMock meta2 = new ItemMetaMock();
 		NamespacedKey key = new NamespacedKey(plugin, "key");
 		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);

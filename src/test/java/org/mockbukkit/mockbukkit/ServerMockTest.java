@@ -672,7 +672,7 @@ class ServerMockTest
 	@SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessage()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		out.writeUTF("Forward");

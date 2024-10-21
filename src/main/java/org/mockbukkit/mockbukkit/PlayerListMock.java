@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.ban.MockIpBanList;
-import org.mockbukkit.mockbukkit.ban.MockProfileBanList;
+import org.mockbukkit.mockbukkit.ban.IpBanListMock;
+import org.mockbukkit.mockbukkit.ban.ProfileBanListMock;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import com.google.common.base.Preconditions;
@@ -38,8 +38,8 @@ public class PlayerListMock
 	private final Map<UUID, Long> firstPlayed = Collections.synchronizedMap(new HashMap<>());
 	private final Map<UUID, Boolean> hasPlayedBefore = Collections.synchronizedMap(new HashMap<>());
 
-	private final @NotNull MockIpBanList ipBans = new MockIpBanList();
-	private final @NotNull MockProfileBanList profileBans = new MockProfileBanList();
+	private final @NotNull IpBanListMock ipBans = new IpBanListMock();
+	private final @NotNull ProfileBanListMock profileBans = new ProfileBanListMock();
 
 	private final Set<UUID> operators = Collections.synchronizedSet(new HashSet<>());
 
@@ -67,7 +67,7 @@ public class PlayerListMock
 	 * @return All IP bans.
 	 */
 	@NotNull
-	public MockIpBanList getIPBans()
+	public IpBanListMock getIPBans()
 	{
 		return this.ipBans;
 	}
@@ -76,7 +76,7 @@ public class PlayerListMock
 	 * @return All profile bans.
 	 */
 	@NotNull
-	public MockProfileBanList getProfileBans()
+	public ProfileBanListMock getProfileBans()
 	{
 		return this.profileBans;
 	}

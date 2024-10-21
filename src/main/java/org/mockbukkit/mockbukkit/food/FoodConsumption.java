@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.food;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
-import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
+import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -11,7 +11,6 @@ import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -48,7 +47,7 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 
 	private static FoodConsumption.FoodEffect loadFoodEffectFrom(JsonObject jsonObject)
 	{
-		return new FoodConsumption.FoodEffect(MockInternalPotionData.getPotionEffectFromData(jsonObject), jsonObject.get("probability").getAsFloat());
+		return new FoodConsumption.FoodEffect(InternalPotionDataMock.getPotionEffectFromData(jsonObject), jsonObject.get("probability").getAsFloat());
 	}
 
 	@ApiStatus.Internal

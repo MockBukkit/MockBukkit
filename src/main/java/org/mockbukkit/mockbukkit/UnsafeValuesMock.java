@@ -53,7 +53,7 @@ import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
 import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
-import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
+import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 import org.mockbukkit.mockbukkit.util.io.BukkitObjectInputStreamMock;
 import org.mockbukkit.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 
@@ -482,7 +482,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
 	{
-		return new MockInternalPotionData(key);
+		return new InternalPotionDataMock(key);
 	}
 
 	@Override
