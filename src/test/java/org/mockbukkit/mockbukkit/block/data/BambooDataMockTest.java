@@ -13,11 +13,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
-class BambooMockTest
+class BambooDataMockTest
 {
 	@MockBukkitInject
 	private ServerMock server;
-	private BambooMock bamboo = new BambooMock();
+	private BambooDataMock bamboo = new BambooDataMock();
 
 	@Test
 	void getLeaves()
