@@ -134,6 +134,9 @@ import org.bukkit.structure.StructureManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
+import org.mockbukkit.mockbukkit.util.UnsafeValuesMock;
+import org.mockbukkit.mockbukkit.world.ChunkDataMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
