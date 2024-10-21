@@ -1,12 +1,12 @@
 {
 	"effects": [
 		{
-			"type": "minecraft:instant_health",
+			"ambient": false,
 			"amplifier": 0,
 			"duration": 1,
-			"ambient": false,
+			"icon": true,
 			"particles": true,
-			"icon": true
+			"type": "minecraft:instant_health"
 		}
 	]
 }

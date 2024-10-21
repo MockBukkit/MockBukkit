@@ -6,17 +6,22 @@ import io.papermc.paper.registry.TypedKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.entity.Item;
 import org.bukkit.generator.structure.Structure;
+import org.bukkit.inventory.ItemType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
+import org.mockbukkit.mockbukkit.inventory.ItemTypeMock;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -53,6 +58,14 @@ class RegistryMockTest
 	void iterator(RegistryKey<? extends Keyed> key)
 	{
 		assertTrue(RegistryAccess.registryAccess().getRegistry(key).iterator().hasNext());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getItems")
+	void testGetOrThrow(ItemType item)
+	{
+		assertDoesNotThrow(() -> Registry.ITEM.getOrThrow(item.key()));
+		assertThrows(NoSuchElementException.class, () -> Registry.ITEM.getOrThrow(NamespacedKey.fromString("minecraft:yolo")));
 	}
 
 	@Test
@@ -97,4 +110,5 @@ class RegistryMockTest
 		return Registry.STRUCTURE.stream();
 	}
 
+	static Stream<ItemType> getItems() {return Registry.ITEM.stream();}
 }
