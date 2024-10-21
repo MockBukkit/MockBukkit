@@ -1,130 +1,130 @@
 {
 	"values": [
 		{
-			"translationKey": "trim_pattern.minecraft.bolt",
-			"key": "minecraft:bolt",
 			"description": {
 				"translate": "trim_pattern.minecraft.bolt"
-			}
+			},
+			"key": "minecraft:bolt",
+			"translationKey": "trim_pattern.minecraft.bolt"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.coast",
-			"key": "minecraft:coast",
 			"description": {
 				"translate": "trim_pattern.minecraft.coast"
-			}
+			},
+			"key": "minecraft:coast",
+			"translationKey": "trim_pattern.minecraft.coast"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.dune",
-			"key": "minecraft:dune",
 			"description": {
 				"translate": "trim_pattern.minecraft.dune"
-			}
+			},
+			"key": "minecraft:dune",
+			"translationKey": "trim_pattern.minecraft.dune"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.eye",
-			"key": "minecraft:eye",
 			"description": {
 				"translate": "trim_pattern.minecraft.eye"
-			}
+			},
+			"key": "minecraft:eye",
+			"translationKey": "trim_pattern.minecraft.eye"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.flow",
-			"key": "minecraft:flow",
 			"description": {
 				"translate": "trim_pattern.minecraft.flow"
-			}
+			},
+			"key": "minecraft:flow",
+			"translationKey": "trim_pattern.minecraft.flow"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.host",
-			"key": "minecraft:host",
 			"description": {
 				"translate": "trim_pattern.minecraft.host"
-			}
+			},
+			"key": "minecraft:host",
+			"translationKey": "trim_pattern.minecraft.host"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.raiser",
-			"key": "minecraft:raiser",
 			"description": {
 				"translate": "trim_pattern.minecraft.raiser"
-			}
+			},
+			"key": "minecraft:raiser",
+			"translationKey": "trim_pattern.minecraft.raiser"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.rib",
-			"key": "minecraft:rib",
 			"description": {
 				"translate": "trim_pattern.minecraft.rib"
-			}
+			},
+			"key": "minecraft:rib",
+			"translationKey": "trim_pattern.minecraft.rib"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.sentry",
-			"key": "minecraft:sentry",
 			"description": {
 				"translate": "trim_pattern.minecraft.sentry"
-			}
+			},
+			"key": "minecraft:sentry",
+			"translationKey": "trim_pattern.minecraft.sentry"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.shaper",
-			"key": "minecraft:shaper",
 			"description": {
 				"translate": "trim_pattern.minecraft.shaper"
-			}
+			},
+			"key": "minecraft:shaper",
+			"translationKey": "trim_pattern.minecraft.shaper"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.silence",
-			"key": "minecraft:silence",
 			"description": {
 				"translate": "trim_pattern.minecraft.silence"
-			}
+			},
+			"key": "minecraft:silence",
+			"translationKey": "trim_pattern.minecraft.silence"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.snout",
-			"key": "minecraft:snout",
 			"description": {
 				"translate": "trim_pattern.minecraft.snout"
-			}
+			},
+			"key": "minecraft:snout",
+			"translationKey": "trim_pattern.minecraft.snout"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.spire",
-			"key": "minecraft:spire",
 			"description": {
 				"translate": "trim_pattern.minecraft.spire"
-			}
+			},
+			"key": "minecraft:spire",
+			"translationKey": "trim_pattern.minecraft.spire"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.tide",
-			"key": "minecraft:tide",
 			"description": {
 				"translate": "trim_pattern.minecraft.tide"
-			}
+			},
+			"key": "minecraft:tide",
+			"translationKey": "trim_pattern.minecraft.tide"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.vex",
-			"key": "minecraft:vex",
 			"description": {
 				"translate": "trim_pattern.minecraft.vex"
-			}
+			},
+			"key": "minecraft:vex",
+			"translationKey": "trim_pattern.minecraft.vex"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.ward",
-			"key": "minecraft:ward",
 			"description": {
 				"translate": "trim_pattern.minecraft.ward"
-			}
+			},
+			"key": "minecraft:ward",
+			"translationKey": "trim_pattern.minecraft.ward"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.wayfinder",
-			"key": "minecraft:wayfinder",
 			"description": {
 				"translate": "trim_pattern.minecraft.wayfinder"
-			}
+			},
+			"key": "minecraft:wayfinder",
+			"translationKey": "trim_pattern.minecraft.wayfinder"
 		},
 		{
-			"translationKey": "trim_pattern.minecraft.wild",
-			"key": "minecraft:wild",
 			"description": {
 				"translate": "trim_pattern.minecraft.wild"
-			}
+			},
+			"key": "minecraft:wild",
+			"translationKey": "trim_pattern.minecraft.wild"
 		}
 	]
 }

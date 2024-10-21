@@ -1,80 +1,80 @@
 {
 	"values": [
 		{
-			"translationKey": "jukebox_song.minecraft.11",
-			"key": "minecraft:11"
+			"key": "minecraft:11",
+			"translationKey": "jukebox_song.minecraft.11"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.13",
-			"key": "minecraft:13"
+			"key": "minecraft:13",
+			"translationKey": "jukebox_song.minecraft.13"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.5",
-			"key": "minecraft:5"
+			"key": "minecraft:5",
+			"translationKey": "jukebox_song.minecraft.5"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.blocks",
-			"key": "minecraft:blocks"
+			"key": "minecraft:blocks",
+			"translationKey": "jukebox_song.minecraft.blocks"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.cat",
-			"key": "minecraft:cat"
+			"key": "minecraft:cat",
+			"translationKey": "jukebox_song.minecraft.cat"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.chirp",
-			"key": "minecraft:chirp"
+			"key": "minecraft:chirp",
+			"translationKey": "jukebox_song.minecraft.chirp"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.creator",
-			"key": "minecraft:creator"
+			"key": "minecraft:creator",
+			"translationKey": "jukebox_song.minecraft.creator"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.creator_music_box",
-			"key": "minecraft:creator_music_box"
+			"key": "minecraft:creator_music_box",
+			"translationKey": "jukebox_song.minecraft.creator_music_box"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.far",
-			"key": "minecraft:far"
+			"key": "minecraft:far",
+			"translationKey": "jukebox_song.minecraft.far"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.mall",
-			"key": "minecraft:mall"
+			"key": "minecraft:mall",
+			"translationKey": "jukebox_song.minecraft.mall"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.mellohi",
-			"key": "minecraft:mellohi"
+			"key": "minecraft:mellohi",
+			"translationKey": "jukebox_song.minecraft.mellohi"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.otherside",
-			"key": "minecraft:otherside"
+			"key": "minecraft:otherside",
+			"translationKey": "jukebox_song.minecraft.otherside"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.pigstep",
-			"key": "minecraft:pigstep"
+			"key": "minecraft:pigstep",
+			"translationKey": "jukebox_song.minecraft.pigstep"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.precipice",
-			"key": "minecraft:precipice"
+			"key": "minecraft:precipice",
+			"translationKey": "jukebox_song.minecraft.precipice"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.relic",
-			"key": "minecraft:relic"
+			"key": "minecraft:relic",
+			"translationKey": "jukebox_song.minecraft.relic"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.stal",
-			"key": "minecraft:stal"
+			"key": "minecraft:stal",
+			"translationKey": "jukebox_song.minecraft.stal"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.strad",
-			"key": "minecraft:strad"
+			"key": "minecraft:strad",
+			"translationKey": "jukebox_song.minecraft.strad"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.wait",
-			"key": "minecraft:wait"
+			"key": "minecraft:wait",
+			"translationKey": "jukebox_song.minecraft.wait"
 		},
 		{
-			"translationKey": "jukebox_song.minecraft.ward",
-			"key": "minecraft:ward"
+			"key": "minecraft:ward",
+			"translationKey": "jukebox_song.minecraft.ward"
 		}
 	]
 }
