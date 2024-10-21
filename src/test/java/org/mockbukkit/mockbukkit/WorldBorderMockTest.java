@@ -128,7 +128,7 @@ class WorldBorderMockTest
 	@Test
 	void setSize_Event_AppliesSize()
 	{
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -136,7 +136,7 @@ class WorldBorderMockTest
 			{
 				e.setNewSize(50);
 			}
-		}, mockPlugin);
+		}, pluginMock);
 
 		worldBorderMock.setSize(100);
 

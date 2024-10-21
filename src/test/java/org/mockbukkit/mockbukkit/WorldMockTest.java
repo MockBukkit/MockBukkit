@@ -885,7 +885,7 @@ class WorldMockTest
 	void testSendPluginMessage()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		out.writeUTF("Forward");
@@ -1645,7 +1645,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		out.writeUTF("Forward");
@@ -1693,12 +1693,12 @@ class WorldMockTest
 	void testClearMetadata()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		world.setMetadata("test", new FixedMetadataValue(mockPlugin, "test"));
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		world.setMetadata("test", new FixedMetadataValue(pluginMock, "test"));
 		world.setMetadata("test2", new FixedMetadataValue(MockBukkit.createMockPlugin("test"), "test2"));
 		assertTrue(world.hasMetadata("test"));
 		assertTrue(world.hasMetadata("test2"));
-		world.clearMetadata(mockPlugin);
+		world.clearMetadata(pluginMock);
 		assertFalse(world.hasMetadata("test"));
 		assertTrue(world.hasMetadata("test2"));
 	}
@@ -1937,7 +1937,7 @@ class WorldMockTest
 	void testSetGameRuleValueEventCancelled()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -1945,7 +1945,7 @@ class WorldMockTest
 			{
 				event.setCancelled(true);
 			}
-		}, mockPlugin);
+		}, pluginMock);
 		world.setGameRuleValue("doFireTick", "false");
 		assertEquals("true", world.getGameRuleValue("doFireTick"));
 	}
@@ -1954,7 +1954,7 @@ class WorldMockTest
 	void testSetGameRuleValueEventCancelledIntegerValue()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -1962,7 +1962,7 @@ class WorldMockTest
 			{
 				event.setCancelled(true);
 			}
-		}, mockPlugin);
+		}, pluginMock);
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("3", world.getGameRuleValue("randomTickSpeed"));
 	}

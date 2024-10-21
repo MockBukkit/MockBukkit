@@ -12,12 +12,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
-public class MockCustomConfiguredPluginClassLoader extends ClassLoader implements ConfiguredPluginClassLoader
+public class CustomConfiguredPluginClassLoaderMock extends ClassLoader implements ConfiguredPluginClassLoader
 {
 
 	private final ConfiguredPluginClassLoader parent;
 
-	public MockCustomConfiguredPluginClassLoader(ConfiguredPluginClassLoader parent)
+	public CustomConfiguredPluginClassLoaderMock(ConfiguredPluginClassLoader parent)
 	{
 		super();
 		this.parent = parent;

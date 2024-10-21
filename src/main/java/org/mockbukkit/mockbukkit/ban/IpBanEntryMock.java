@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.net.InetAddress;
 import java.util.Date;
 
-public class MockIpBanEntry implements BanEntry<InetAddress>
+public class IpBanEntryMock implements BanEntry<InetAddress>
 {
 
 	private final String target;
@@ -19,7 +19,7 @@ public class MockIpBanEntry implements BanEntry<InetAddress>
 	private Date created;
 	private Date expires;
 
-	public MockIpBanEntry
+	public IpBanEntryMock
 			(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		this.target = target;

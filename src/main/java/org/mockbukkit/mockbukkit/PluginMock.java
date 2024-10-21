@@ -13,13 +13,13 @@ import java.util.Optional;
 /**
  * A simple plugin that does nothing.
  */
-public class MockPlugin extends JavaPlugin
+public class PluginMock extends JavaPlugin
 {
 
 	/**
 	 * CraftBukkit constructor.
 	 */
-	public MockPlugin()
+	public PluginMock()
 	{
 	}
 
@@ -31,7 +31,7 @@ public class MockPlugin extends JavaPlugin
 	 * @param dataFolder  The plugins data folder.
 	 * @param file        The plugins file.
 	 */
-	protected MockPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected PluginMock(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 	}
@@ -116,28 +116,28 @@ public class MockPlugin extends JavaPlugin
 		 *
 		 * @return A mock plugin instance
 		 */
-		public MockPlugin build()
+		public PluginMock build()
 		{
 			MockBukkit.ensureMocking();
 
-			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, InternalMockPlugin.class.getName());
+			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, InternalPluginMock.class.getName());
 			ServerMock mock = MockBukkit.getMock();
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(InternalMockPlugin.class, description, new Object[]{ onEnable, onDisable, onLoad });
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(InternalPluginMock.class, description, new Object[]{ onEnable, onDisable, onLoad });
 			mock.getPluginManager().enablePlugin(instance);
-			return (MockPlugin) instance;
+			return (PluginMock) instance;
 		}
 
 	}
 
 	@ApiStatus.Internal
-	public static class InternalMockPlugin extends MockPlugin
+	public static class InternalPluginMock extends PluginMock
 	{
 
 		private final Optional<Runnable> onEnable;
 		private final Optional<Runnable> onDisable;
 		private final Optional<Runnable> onLoad;
 
-		public InternalMockPlugin(Optional<Runnable> onEnable, Optional<Runnable> onDisable, Optional<Runnable> onLoad)
+		public InternalPluginMock(Optional<Runnable> onEnable, Optional<Runnable> onDisable, Optional<Runnable> onLoad)
 		{
 			this.onEnable = onEnable;
 			this.onDisable = onDisable;

@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class MockProfileBanList implements ProfileBanList
+public class ProfileBanListMock implements ProfileBanList
 {
 
 	private final Map<String, BanEntry<PlayerProfile>> bans = new HashMap<>();
@@ -68,7 +68,7 @@ public class MockProfileBanList implements ProfileBanList
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 
-		final BanEntry<PlayerProfile> entry = new MockPaperProfileBanEntry(
+		final BanEntry<PlayerProfile> entry = new PaperProfileBanEntryMock(
 				target,
 				(source == null || source.isBlank()) ? null : source,
 				expires,

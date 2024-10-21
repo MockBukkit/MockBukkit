@@ -18,17 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class MockIpBanListTest
+class IpBanListMockTest
 {
 
 	@MockBukkitInject
 	ServerMock server;
-	MockIpBanList banList;
+	IpBanListMock banList;
 
 	@BeforeEach
 	void setUp()
 	{
-		banList = new MockIpBanList();
+		banList = new IpBanListMock();
 	}
 
 	@Test

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class MockIpBanList implements org.bukkit.ban.IpBanList
+public class IpBanListMock implements org.bukkit.ban.IpBanList
 {
 
 	private final Map<String, BanEntry<InetAddress>> bans = new HashMap<>();
@@ -41,7 +41,7 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	public @Nullable BanEntry<InetAddress> addBan(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
-		BanEntry<InetAddress> entry = new MockIpBanEntry(
+		BanEntry<InetAddress> entry = new IpBanEntryMock(
 				target,
 				(reason == null || reason.isBlank()) ? null : reason,
 				expires,

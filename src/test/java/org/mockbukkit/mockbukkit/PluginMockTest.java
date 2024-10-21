@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class MockPluginTest
+class PluginMockTest
 {
 
 	@MockBukkitInject
@@ -19,7 +19,7 @@ class MockPluginTest
 	void onEnable_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		MockPlugin.Builder builder = MockPlugin.builder().withOnEnable(() -> trigger.set(true));
+		PluginMock.Builder builder = PluginMock.builder().withOnEnable(() -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertTrue(trigger.get());
@@ -29,7 +29,7 @@ class MockPluginTest
 	void onLoad_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		MockPlugin.Builder builder = MockPlugin.builder().withOnLoad(() -> trigger.set(true));
+		PluginMock.Builder builder = PluginMock.builder().withOnLoad(() -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertTrue(trigger.get());
@@ -39,7 +39,7 @@ class MockPluginTest
 	void onDisable_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		MockPlugin.Builder builder = MockPlugin.builder().withOnDisable(() -> trigger.set(true));
+		PluginMock.Builder builder = PluginMock.builder().withOnDisable(() -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertFalse(trigger.get());

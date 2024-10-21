@@ -78,7 +78,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.TestPlugin;
 import org.mockbukkit.mockbukkit.WorldMock;
@@ -1327,7 +1327,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerHide_NewImplementation()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
 		assertFalse(player.canSee(player2));
@@ -1339,7 +1339,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerHide_OldAndNewPluginWorksSimultaneously()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
 		assertFalse(player.canSee(player2));
@@ -1353,8 +1353,8 @@ class PlayerMockTest
 	@Test
 	void testPlayerHide_EachOtherTest()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
-		MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin2 = MockBukkit.createMockPlugin("plugin2");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
 		assertFalse(player.canSee(player2));
@@ -1385,7 +1385,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerHide_HideCommandIssuedMultipleTimesNew()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
 		player.hidePlayer(plugin1, player2);
@@ -1397,7 +1397,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerHide_HideEntityWithPlayerCanSee()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hideEntity(plugin1, player2);
 		assertFalse(player.canSee(player2));
@@ -1415,7 +1415,7 @@ class PlayerMockTest
 	@Test
 	void testEntityHide_NewImplementation()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PigMock pig = new PigMock(server, UUID.randomUUID());
 		player.hideEntity(plugin1, pig);
 		assertFalse(player.canSee(pig));
@@ -1426,7 +1426,7 @@ class PlayerMockTest
 	@Test
 	void testEntityHide_HideCommandIssuedMultipleTimes()
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		PluginMock plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PigMock pig = new PigMock(server, UUID.randomUUID());
 		player.hideEntity(plugin1, pig);
 		player.hideEntity(plugin1, pig);
@@ -1704,7 +1704,7 @@ class PlayerMockTest
 	@SuppressWarnings("UnstableApiUsage")
 	void testPlayerSendPluginMessage()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
+		PluginMock plugin = MockBukkit.createMockPlugin();
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		out.writeUTF("Forward");

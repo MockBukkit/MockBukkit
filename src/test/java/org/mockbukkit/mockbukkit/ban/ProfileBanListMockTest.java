@@ -20,17 +20,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class MockProfileBanListTest
+class ProfileBanListMockTest
 {
 
 	@MockBukkitInject
 	ServerMock server;
-	MockProfileBanList banList;
+	ProfileBanListMock banList;
 
 	@BeforeEach
 	void setUp()
 	{
-		banList = new MockProfileBanList();
+		banList = new ProfileBanListMock();
 	}
 
 	@Test
