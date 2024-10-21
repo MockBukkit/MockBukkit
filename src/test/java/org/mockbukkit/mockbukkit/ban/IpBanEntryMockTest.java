@@ -12,15 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class MockIpBanEntryTest
+class IpBanEntryMockTest
 {
 
-	MockIpBanEntry entry;
+	IpBanEntryMock entry;
 
 	@BeforeEach
 	void setUp() throws Exception
 	{
-		entry = new MockIpBanEntry("127.0.0.1", "reason", null, "source");
+		entry = new IpBanEntryMock("127.0.0.1", "reason", null, "source");
 	}
 
 	@Test

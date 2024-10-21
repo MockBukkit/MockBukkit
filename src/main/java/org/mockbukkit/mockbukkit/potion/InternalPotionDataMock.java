@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-public class MockInternalPotionData implements PotionType.InternalPotionData
+public class InternalPotionDataMock implements PotionType.InternalPotionData
 {
 
 	private final NamespacedKey namespacedKey;
@@ -28,7 +28,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	private final int maxLevel;
 	private final List<PotionEffect> potionEffects;
 
-	public MockInternalPotionData(NamespacedKey namespacedKey)
+	public InternalPotionDataMock(NamespacedKey namespacedKey)
 	{
 		List<PotionEffect> tempPotionEffects;
 		this.namespacedKey = namespacedKey;
@@ -123,7 +123,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	public static List<PotionEffect> getPotionEffectsFromData(JsonObject data)
 	{
 		return data.get("effects").getAsJsonArray().asList().stream()
-				.map(MockInternalPotionData::getPotionEffectFromData)
+				.map(InternalPotionDataMock::getPotionEffectFromData)
 				.toList();
 	}
 

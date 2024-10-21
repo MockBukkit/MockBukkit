@@ -3,7 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.ban.MockProfileBanList;
+import org.mockbukkit.mockbukkit.ban.ProfileBanListMock;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
@@ -134,7 +134,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	public boolean isBanned()
 	{
 		MockBukkit.ensureMocking();
-		return ((MockProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).isBanned(getPlayerProfile());
+		return ((ProfileBanListMock) Bukkit.getBanList(BanList.Type.PROFILE)).isBanned(getPlayerProfile());
 	}
 
 	@Override

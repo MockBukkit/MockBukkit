@@ -6,6 +6,9 @@
 				"minecraft:aqua_affinity"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.aqua_affinity"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -43,7 +46,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.aqua_affinity",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 2,
@@ -56,6 +60,9 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.bane_of_arthropods"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -189,7 +196,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.bane_of_arthropods",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 8,
@@ -197,6 +205,9 @@
 				"minecraft:binding_curse"
 			],
 			"cursed": true,
+			"description": {
+				"translate": "enchantment.minecraft.binding_curse"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -261,7 +272,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.binding_curse",
-			"treasure": true
+			"treasure": true,
+			"weight": 1
 		},
 		{
 			"anvilCost": 4,
@@ -272,6 +284,9 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.blast_protection"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -396,7 +411,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.blast_protection",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -409,6 +425,9 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.breach"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -509,7 +528,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.breach",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 8,
@@ -518,6 +538,9 @@
 				"minecraft:riptide"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.channeling"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -549,7 +572,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.channeling",
-			"treasure": false
+			"treasure": false,
+			"weight": 1
 		},
 		{
 			"anvilCost": 2,
@@ -562,6 +586,9 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.density"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -683,7 +710,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.density",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 4,
@@ -692,6 +720,9 @@
 				"minecraft:frost_walker"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.depth_strider"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -776,7 +807,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.depth_strider",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 1,
@@ -784,6 +816,9 @@
 				"minecraft:efficiency"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.efficiency"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -929,7 +964,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.efficiency",
-			"treasure": false
+			"treasure": false,
+			"weight": 10
 		},
 		{
 			"anvilCost": 2,
@@ -937,6 +973,9 @@
 				"minecraft:feather_falling"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.feather_falling"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1042,7 +1081,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.feather_falling",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 4,
@@ -1050,6 +1090,9 @@
 				"minecraft:fire_aspect"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.fire_aspect"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1114,7 +1157,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.fire_aspect",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 2,
@@ -1125,6 +1169,9 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.fire_protection"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1249,7 +1296,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.fire_protection",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 4,
@@ -1257,6 +1305,9 @@
 				"minecraft:flame"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.flame"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1288,7 +1339,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.flame",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -1297,6 +1349,9 @@
 				"minecraft:silk_touch"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.fortune"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1399,7 +1454,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.fortune",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -1408,6 +1464,9 @@
 				"minecraft:frost_walker"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.frost_walker"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1471,7 +1530,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.frost_walker",
-			"treasure": true
+			"treasure": true,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -1484,6 +1544,9 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.impaling"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1605,7 +1668,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.impaling",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 8,
@@ -1614,6 +1678,9 @@
 				"minecraft:mending"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.infinity"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1645,7 +1712,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.infinity",
-			"treasure": false
+			"treasure": false,
+			"weight": 1
 		},
 		{
 			"anvilCost": 2,
@@ -1653,6 +1721,9 @@
 				"minecraft:knockback"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.knockback"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1716,7 +1787,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.knockback",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 4,
@@ -1724,6 +1796,9 @@
 				"minecraft:looting"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.looting"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1808,7 +1883,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.looting",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 2,
@@ -1817,6 +1893,9 @@
 				"minecraft:riptide"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.loyalty"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1896,7 +1975,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.loyalty",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 4,
@@ -1904,6 +1984,9 @@
 				"minecraft:luck_of_the_sea"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.luck_of_the_sea"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1983,7 +2066,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.luck_of_the_sea",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -1991,6 +2075,9 @@
 				"minecraft:lure"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.lure"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2070,7 +2157,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.lure",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -2079,6 +2167,9 @@
 				"minecraft:mending"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.mending"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2176,7 +2267,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.mending",
-			"treasure": true
+			"treasure": true,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -2185,6 +2277,9 @@
 				"minecraft:piercing"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.multishot"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2216,7 +2311,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.multishot",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 1,
@@ -2225,6 +2321,9 @@
 				"minecraft:piercing"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.piercing"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2325,7 +2424,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.piercing",
-			"treasure": false
+			"treasure": false,
+			"weight": 10
 		},
 		{
 			"anvilCost": 1,
@@ -2333,6 +2433,9 @@
 				"minecraft:power"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.power"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2454,7 +2557,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.power",
-			"treasure": false
+			"treasure": false,
+			"weight": 10
 		},
 		{
 			"anvilCost": 2,
@@ -2465,6 +2569,9 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.projectile_protection"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2589,7 +2696,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.projectile_protection",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 1,
@@ -2600,6 +2708,9 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.protection"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2724,7 +2835,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.protection",
-			"treasure": false
+			"treasure": false,
+			"weight": 10
 		},
 		{
 			"anvilCost": 4,
@@ -2732,6 +2844,9 @@
 				"minecraft:punch"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.punch"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2790,7 +2905,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.punch",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 2,
@@ -2798,6 +2914,9 @@
 				"minecraft:quick_charge"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.quick_charge"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2877,7 +2996,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.quick_charge",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 4,
@@ -2885,6 +3005,9 @@
 				"minecraft:respiration"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.respiration"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2970,7 +3093,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.respiration",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 4,
@@ -2980,6 +3104,9 @@
 				"minecraft:riptide"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.riptide"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3059,7 +3186,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.riptide",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 1,
@@ -3072,6 +3200,9 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.sharpness"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3204,7 +3335,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.sharpness",
-			"treasure": false
+			"treasure": false,
+			"weight": 10
 		},
 		{
 			"anvilCost": 8,
@@ -3213,6 +3345,9 @@
 				"minecraft:silk_touch"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.silk_touch"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3267,7 +3402,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.silk_touch",
-			"treasure": false
+			"treasure": false,
+			"weight": 1
 		},
 		{
 			"anvilCost": 2,
@@ -3280,6 +3416,9 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.smite"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3413,7 +3552,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.smite",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 8,
@@ -3421,6 +3561,9 @@
 				"minecraft:soul_speed"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.soul_speed"
+			},
 			"discoverable": false,
 			"displayNames": [
 				{
@@ -3505,7 +3648,8 @@
 			"startLevel": 1,
 			"tradeable": false,
 			"translationKey": "enchantment.minecraft.soul_speed",
-			"treasure": true
+			"treasure": true,
+			"weight": 1
 		},
 		{
 			"anvilCost": 4,
@@ -3513,6 +3657,9 @@
 				"minecraft:sweeping_edge"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.sweeping_edge"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3597,7 +3744,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.sweeping_edge",
-			"treasure": false
+			"treasure": false,
+			"weight": 2
 		},
 		{
 			"anvilCost": 8,
@@ -3605,6 +3753,9 @@
 				"minecraft:swift_sneak"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.swift_sneak"
+			},
 			"discoverable": false,
 			"displayNames": [
 				{
@@ -3689,7 +3840,8 @@
 			"startLevel": 1,
 			"tradeable": false,
 			"translationKey": "enchantment.minecraft.swift_sneak",
-			"treasure": true
+			"treasure": true,
+			"weight": 1
 		},
 		{
 			"anvilCost": 8,
@@ -3697,6 +3849,9 @@
 				"minecraft:thorns"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.thorns"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3800,7 +3955,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.thorns",
-			"treasure": false
+			"treasure": false,
+			"weight": 1
 		},
 		{
 			"anvilCost": 2,
@@ -3808,6 +3964,9 @@
 				"minecraft:unbreaking"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.unbreaking"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3953,7 +4112,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.unbreaking",
-			"treasure": false
+			"treasure": false,
+			"weight": 5
 		},
 		{
 			"anvilCost": 8,
@@ -3961,6 +4121,9 @@
 				"minecraft:vanishing_curse"
 			],
 			"cursed": true,
+			"description": {
+				"translate": "enchantment.minecraft.vanishing_curse"
+			},
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -4067,7 +4230,8 @@
 			"startLevel": 1,
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.vanishing_curse",
-			"treasure": true
+			"treasure": true,
+			"weight": 1
 		},
 		{
 			"anvilCost": 4,
@@ -4075,6 +4239,9 @@
 				"minecraft:wind_burst"
 			],
 			"cursed": false,
+			"description": {
+				"translate": "enchantment.minecraft.wind_burst"
+			},
 			"discoverable": false,
 			"displayNames": [
 				{
@@ -4154,7 +4321,8 @@
 			"startLevel": 1,
 			"tradeable": false,
 			"translationKey": "enchantment.minecraft.wind_burst",
-			"treasure": true
+			"treasure": true,
+			"weight": 2
 		}
 	]
 }

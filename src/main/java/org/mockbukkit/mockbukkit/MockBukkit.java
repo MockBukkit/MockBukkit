@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.MockPlugin;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -439,7 +437,7 @@ public class MockBukkit
 	 *
 	 * @return An instance of a mock plugin.
 	 */
-	public static @NotNull MockPlugin createMockPlugin()
+	public static @NotNull PluginMock createMockPlugin()
 	{
 		return createMockPlugin("MockPlugin");
 	}
@@ -451,7 +449,7 @@ public class MockBukkit
 	 * @param pluginName A name of a new plugin.
 	 * @return An instance of a mock plugin.
 	 */
-	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName)
+	public static @NotNull PluginMock createMockPlugin(@NotNull String pluginName)
 	{
 		return createMockPlugin(pluginName, "1.0.0");
 	}
@@ -464,13 +462,13 @@ public class MockBukkit
 	 * @param pluginVersion The version of the new plugin.
 	 * @return An instance of a mock plugin.
 	 */
-	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName, @NotNull String pluginVersion)
+	public static @NotNull PluginMock createMockPlugin(@NotNull String pluginName, @NotNull String pluginVersion)
 	{
 		ensureMocking();
-		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, MockPlugin.class.getName());
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, new Object[0]);
+		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, PluginMock.class.getName());
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(PluginMock.class, description, new Object[0]);
 		mock.getPluginManager().enablePlugin(instance);
-		return (MockPlugin) instance;
+		return (PluginMock) instance;
 	}
 
 	/**
