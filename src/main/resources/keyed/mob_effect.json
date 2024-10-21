@@ -1,394 +1,394 @@
 {
 	"values": [
 		{
-			"translationKey": "effect.minecraft.absorption",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "ABSORPTION",
-			"key": "minecraft:absorption",
 			"id": 22,
+			"instant": false,
+			"key": "minecraft:absorption",
+			"name": "ABSORPTION",
 			"rgb": 2445989,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.absorption"
 		},
 		{
-			"translationKey": "effect.minecraft.bad_omen",
-			"instant": false,
+			"category": "NEUTRAL",
 			"durationModifier": 1.0,
-			"name": "BAD_OMEN",
-			"key": "minecraft:bad_omen",
 			"id": 31,
+			"instant": false,
+			"key": "minecraft:bad_omen",
+			"name": "BAD_OMEN",
 			"rgb": 745784,
-			"category": "NEUTRAL"
+			"translationKey": "effect.minecraft.bad_omen"
 		},
 		{
-			"translationKey": "effect.minecraft.blindness",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "BLINDNESS",
-			"key": "minecraft:blindness",
 			"id": 15,
+			"instant": false,
+			"key": "minecraft:blindness",
+			"name": "BLINDNESS",
 			"rgb": 2039587,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.blindness"
 		},
 		{
-			"translationKey": "effect.minecraft.conduit_power",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "CONDUIT_POWER",
-			"key": "minecraft:conduit_power",
 			"id": 29,
+			"instant": false,
+			"key": "minecraft:conduit_power",
+			"name": "CONDUIT_POWER",
 			"rgb": 1950417,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.conduit_power"
 		},
 		{
-			"translationKey": "effect.minecraft.darkness",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "DARKNESS",
-			"key": "minecraft:darkness",
 			"id": 33,
+			"instant": false,
+			"key": "minecraft:darkness",
+			"name": "DARKNESS",
 			"rgb": 2696993,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.darkness"
 		},
 		{
-			"translationKey": "effect.minecraft.dolphins_grace",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "DOLPHINS_GRACE",
-			"key": "minecraft:dolphins_grace",
 			"id": 30,
+			"instant": false,
+			"key": "minecraft:dolphins_grace",
+			"name": "DOLPHINS_GRACE",
 			"rgb": 8954814,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.dolphins_grace"
 		},
 		{
-			"translationKey": "effect.minecraft.fire_resistance",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "FIRE_RESISTANCE",
-			"key": "minecraft:fire_resistance",
 			"id": 12,
+			"instant": false,
+			"key": "minecraft:fire_resistance",
+			"name": "FIRE_RESISTANCE",
 			"rgb": 16750848,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.fire_resistance"
 		},
 		{
-			"translationKey": "effect.minecraft.glowing",
-			"instant": false,
+			"category": "NEUTRAL",
 			"durationModifier": 1.0,
-			"name": "GLOWING",
-			"key": "minecraft:glowing",
 			"id": 24,
+			"instant": false,
+			"key": "minecraft:glowing",
+			"name": "GLOWING",
 			"rgb": 9740385,
-			"category": "NEUTRAL"
+			"translationKey": "effect.minecraft.glowing"
 		},
 		{
-			"translationKey": "effect.minecraft.haste",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "FAST_DIGGING",
-			"key": "minecraft:haste",
 			"id": 3,
+			"instant": false,
+			"key": "minecraft:haste",
+			"name": "FAST_DIGGING",
 			"rgb": 14270531,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.haste"
 		},
 		{
-			"translationKey": "effect.minecraft.health_boost",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "HEALTH_BOOST",
-			"key": "minecraft:health_boost",
 			"id": 21,
+			"instant": false,
+			"key": "minecraft:health_boost",
+			"name": "HEALTH_BOOST",
 			"rgb": 16284963,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.health_boost"
 		},
 		{
-			"translationKey": "effect.minecraft.hero_of_the_village",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "HERO_OF_THE_VILLAGE",
-			"key": "minecraft:hero_of_the_village",
 			"id": 32,
+			"instant": false,
+			"key": "minecraft:hero_of_the_village",
+			"name": "HERO_OF_THE_VILLAGE",
 			"rgb": 4521796,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.hero_of_the_village"
 		},
 		{
-			"translationKey": "effect.minecraft.hunger",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "HUNGER",
-			"key": "minecraft:hunger",
 			"id": 17,
+			"instant": false,
+			"key": "minecraft:hunger",
+			"name": "HUNGER",
 			"rgb": 5797459,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.hunger"
 		},
 		{
-			"translationKey": "effect.minecraft.infested",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "minecraft:infested",
-			"key": "minecraft:infested",
 			"id": 39,
+			"instant": false,
+			"key": "minecraft:infested",
+			"name": "minecraft:infested",
 			"rgb": 9214860,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.infested"
 		},
 		{
-			"translationKey": "effect.minecraft.instant_damage",
-			"instant": true,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "HARM",
-			"key": "minecraft:instant_damage",
 			"id": 7,
+			"instant": true,
+			"key": "minecraft:instant_damage",
+			"name": "HARM",
 			"rgb": 11101546,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.instant_damage"
 		},
 		{
-			"translationKey": "effect.minecraft.instant_health",
-			"instant": true,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "HEAL",
-			"key": "minecraft:instant_health",
 			"id": 6,
-			"rgb": 16262179,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.invisibility",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "INVISIBILITY",
-			"key": "minecraft:invisibility",
-			"id": 14,
-			"rgb": 16185078,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.jump_boost",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "JUMP",
-			"key": "minecraft:jump_boost",
-			"id": 8,
-			"rgb": 16646020,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.levitation",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "LEVITATION",
-			"key": "minecraft:levitation",
-			"id": 25,
-			"rgb": 13565951,
-			"category": "HARMFUL"
-		},
-		{
-			"translationKey": "effect.minecraft.luck",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "LUCK",
-			"key": "minecraft:luck",
-			"id": 26,
-			"rgb": 5882118,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.mining_fatigue",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "SLOW_DIGGING",
-			"key": "minecraft:mining_fatigue",
-			"id": 4,
-			"rgb": 4866583,
-			"category": "HARMFUL"
-		},
-		{
-			"translationKey": "effect.minecraft.nausea",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "CONFUSION",
-			"key": "minecraft:nausea",
-			"id": 9,
-			"rgb": 5578058,
-			"category": "HARMFUL"
-		},
-		{
-			"translationKey": "effect.minecraft.night_vision",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "NIGHT_VISION",
-			"key": "minecraft:night_vision",
-			"id": 16,
-			"rgb": 12779366,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.oozing",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "minecraft:oozing",
-			"key": "minecraft:oozing",
-			"id": 38,
-			"rgb": 10092451,
-			"category": "HARMFUL"
-		},
-		{
-			"translationKey": "effect.minecraft.poison",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "POISON",
-			"key": "minecraft:poison",
-			"id": 19,
-			"rgb": 8889187,
-			"category": "HARMFUL"
-		},
-		{
-			"translationKey": "effect.minecraft.raid_omen",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "minecraft:raid_omen",
-			"key": "minecraft:raid_omen",
-			"id": 35,
-			"rgb": 14565464,
-			"category": "NEUTRAL"
-		},
-		{
-			"translationKey": "effect.minecraft.regeneration",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "REGENERATION",
-			"key": "minecraft:regeneration",
-			"id": 10,
-			"rgb": 13458603,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.resistance",
-			"instant": false,
-			"durationModifier": 1.0,
-			"name": "DAMAGE_RESISTANCE",
-			"key": "minecraft:resistance",
-			"id": 11,
-			"rgb": 9520880,
-			"category": "BENEFICIAL"
-		},
-		{
-			"translationKey": "effect.minecraft.saturation",
 			"instant": true,
-			"durationModifier": 1.0,
-			"name": "SATURATION",
-			"key": "minecraft:saturation",
-			"id": 23,
+			"key": "minecraft:instant_health",
+			"name": "HEAL",
 			"rgb": 16262179,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.instant_health"
 		},
 		{
-			"translationKey": "effect.minecraft.slow_falling",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "SLOW_FALLING",
-			"key": "minecraft:slow_falling",
+			"id": 14,
+			"instant": false,
+			"key": "minecraft:invisibility",
+			"name": "INVISIBILITY",
+			"rgb": 16185078,
+			"translationKey": "effect.minecraft.invisibility"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
+			"id": 8,
+			"instant": false,
+			"key": "minecraft:jump_boost",
+			"name": "JUMP",
+			"rgb": 16646020,
+			"translationKey": "effect.minecraft.jump_boost"
+		},
+		{
+			"category": "HARMFUL",
+			"durationModifier": 1.0,
+			"id": 25,
+			"instant": false,
+			"key": "minecraft:levitation",
+			"name": "LEVITATION",
+			"rgb": 13565951,
+			"translationKey": "effect.minecraft.levitation"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
+			"id": 26,
+			"instant": false,
+			"key": "minecraft:luck",
+			"name": "LUCK",
+			"rgb": 5882118,
+			"translationKey": "effect.minecraft.luck"
+		},
+		{
+			"category": "HARMFUL",
+			"durationModifier": 1.0,
+			"id": 4,
+			"instant": false,
+			"key": "minecraft:mining_fatigue",
+			"name": "SLOW_DIGGING",
+			"rgb": 4866583,
+			"translationKey": "effect.minecraft.mining_fatigue"
+		},
+		{
+			"category": "HARMFUL",
+			"durationModifier": 1.0,
+			"id": 9,
+			"instant": false,
+			"key": "minecraft:nausea",
+			"name": "CONFUSION",
+			"rgb": 5578058,
+			"translationKey": "effect.minecraft.nausea"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
+			"id": 16,
+			"instant": false,
+			"key": "minecraft:night_vision",
+			"name": "NIGHT_VISION",
+			"rgb": 12779366,
+			"translationKey": "effect.minecraft.night_vision"
+		},
+		{
+			"category": "HARMFUL",
+			"durationModifier": 1.0,
+			"id": 38,
+			"instant": false,
+			"key": "minecraft:oozing",
+			"name": "minecraft:oozing",
+			"rgb": 10092451,
+			"translationKey": "effect.minecraft.oozing"
+		},
+		{
+			"category": "HARMFUL",
+			"durationModifier": 1.0,
+			"id": 19,
+			"instant": false,
+			"key": "minecraft:poison",
+			"name": "POISON",
+			"rgb": 8889187,
+			"translationKey": "effect.minecraft.poison"
+		},
+		{
+			"category": "NEUTRAL",
+			"durationModifier": 1.0,
+			"id": 35,
+			"instant": false,
+			"key": "minecraft:raid_omen",
+			"name": "minecraft:raid_omen",
+			"rgb": 14565464,
+			"translationKey": "effect.minecraft.raid_omen"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
+			"id": 10,
+			"instant": false,
+			"key": "minecraft:regeneration",
+			"name": "REGENERATION",
+			"rgb": 13458603,
+			"translationKey": "effect.minecraft.regeneration"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
+			"id": 11,
+			"instant": false,
+			"key": "minecraft:resistance",
+			"name": "DAMAGE_RESISTANCE",
+			"rgb": 9520880,
+			"translationKey": "effect.minecraft.resistance"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
+			"id": 23,
+			"instant": true,
+			"key": "minecraft:saturation",
+			"name": "SATURATION",
+			"rgb": 16262179,
+			"translationKey": "effect.minecraft.saturation"
+		},
+		{
+			"category": "BENEFICIAL",
+			"durationModifier": 1.0,
 			"id": 28,
+			"instant": false,
+			"key": "minecraft:slow_falling",
+			"name": "SLOW_FALLING",
 			"rgb": 15978425,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.slow_falling"
 		},
 		{
-			"translationKey": "effect.minecraft.slowness",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "SLOW",
-			"key": "minecraft:slowness",
 			"id": 2,
+			"instant": false,
+			"key": "minecraft:slowness",
+			"name": "SLOW",
 			"rgb": 9154528,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.slowness"
 		},
 		{
-			"translationKey": "effect.minecraft.speed",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "SPEED",
-			"key": "minecraft:speed",
 			"id": 1,
+			"instant": false,
+			"key": "minecraft:speed",
+			"name": "SPEED",
 			"rgb": 3402751,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.speed"
 		},
 		{
-			"translationKey": "effect.minecraft.strength",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "INCREASE_DAMAGE",
-			"key": "minecraft:strength",
 			"id": 5,
+			"instant": false,
+			"key": "minecraft:strength",
+			"name": "INCREASE_DAMAGE",
 			"rgb": 16762624,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.strength"
 		},
 		{
-			"translationKey": "effect.minecraft.trial_omen",
-			"instant": false,
+			"category": "NEUTRAL",
 			"durationModifier": 1.0,
-			"name": "minecraft:trial_omen",
-			"key": "minecraft:trial_omen",
 			"id": 34,
+			"instant": false,
+			"key": "minecraft:trial_omen",
+			"name": "minecraft:trial_omen",
 			"rgb": 1484454,
-			"category": "NEUTRAL"
+			"translationKey": "effect.minecraft.trial_omen"
 		},
 		{
-			"translationKey": "effect.minecraft.unluck",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "UNLUCK",
-			"key": "minecraft:unluck",
 			"id": 27,
+			"instant": false,
+			"key": "minecraft:unluck",
+			"name": "UNLUCK",
 			"rgb": 12624973,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.unluck"
 		},
 		{
-			"translationKey": "effect.minecraft.water_breathing",
-			"instant": false,
+			"category": "BENEFICIAL",
 			"durationModifier": 1.0,
-			"name": "WATER_BREATHING",
-			"key": "minecraft:water_breathing",
 			"id": 13,
+			"instant": false,
+			"key": "minecraft:water_breathing",
+			"name": "WATER_BREATHING",
 			"rgb": 10017472,
-			"category": "BENEFICIAL"
+			"translationKey": "effect.minecraft.water_breathing"
 		},
 		{
-			"translationKey": "effect.minecraft.weakness",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "WEAKNESS",
-			"key": "minecraft:weakness",
 			"id": 18,
+			"instant": false,
+			"key": "minecraft:weakness",
+			"name": "WEAKNESS",
 			"rgb": 4738376,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.weakness"
 		},
 		{
-			"translationKey": "effect.minecraft.weaving",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "minecraft:weaving",
-			"key": "minecraft:weaving",
 			"id": 37,
+			"instant": false,
+			"key": "minecraft:weaving",
+			"name": "minecraft:weaving",
 			"rgb": 7891290,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.weaving"
 		},
 		{
-			"translationKey": "effect.minecraft.wind_charged",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "minecraft:wind_charged",
-			"key": "minecraft:wind_charged",
 			"id": 36,
+			"instant": false,
+			"key": "minecraft:wind_charged",
+			"name": "minecraft:wind_charged",
 			"rgb": 12438015,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.wind_charged"
 		},
 		{
-			"translationKey": "effect.minecraft.wither",
-			"instant": false,
+			"category": "HARMFUL",
 			"durationModifier": 1.0,
-			"name": "WITHER",
-			"key": "minecraft:wither",
 			"id": 20,
+			"instant": false,
+			"key": "minecraft:wither",
+			"name": "WITHER",
 			"rgb": 7561558,
-			"category": "HARMFUL"
+			"translationKey": "effect.minecraft.wither"
 		}
 	]
 }

@@ -120,11 +120,15 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	}
 
 	@Override
-	public @NotNull T getOrThrow(@NotNull NamespacedKey key) throws IllegalArgumentException
+	public @NotNull T getOrThrow(@NotNull NamespacedKey namespacedKey)
 	{
-		T t = get(key);
-		Preconditions.checkArgument(t != null, "No registry entry found for key %s.", key);
-		return t;
+		Preconditions.checkNotNull(namespacedKey);
+		loadIfEmpty();
+		T value = this.keyedMap.get(namespacedKey);
+		if (value == null) {
+			throw new java.util.NoSuchElementException("No value for " + namespacedKey + " in " + this);
+		}
+		return value;
 	}
 
 	@Override
