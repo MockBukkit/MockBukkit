@@ -1,304 +1,304 @@
 {
 	"values": [
 		{
+			"key": "minecraft:block_activate",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:block_activate"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:block_attach",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:block_attach"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:block_change",
 			"range": 16,
-			"vibrationLevel": 11,
-			"key": "minecraft:block_change"
+			"vibrationLevel": 11
 		},
 		{
+			"key": "minecraft:block_close",
 			"range": 16,
-			"vibrationLevel": 9,
-			"key": "minecraft:block_close"
+			"vibrationLevel": 9
 		},
 		{
+			"key": "minecraft:block_deactivate",
 			"range": 16,
-			"vibrationLevel": 9,
-			"key": "minecraft:block_deactivate"
+			"vibrationLevel": 9
 		},
 		{
+			"key": "minecraft:block_destroy",
 			"range": 16,
-			"vibrationLevel": 12,
-			"key": "minecraft:block_destroy"
+			"vibrationLevel": 12
 		},
 		{
+			"key": "minecraft:block_detach",
 			"range": 16,
-			"vibrationLevel": 9,
-			"key": "minecraft:block_detach"
+			"vibrationLevel": 9
 		},
 		{
+			"key": "minecraft:block_open",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:block_open"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:block_place",
 			"range": 16,
-			"vibrationLevel": 13,
-			"key": "minecraft:block_place"
+			"vibrationLevel": 13
 		},
 		{
+			"key": "minecraft:container_close",
 			"range": 16,
-			"vibrationLevel": 9,
-			"key": "minecraft:container_close"
+			"vibrationLevel": 9
 		},
 		{
+			"key": "minecraft:container_open",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:container_open"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:drink",
 			"range": 16,
-			"vibrationLevel": 8,
-			"key": "minecraft:drink"
+			"vibrationLevel": 8
 		},
 		{
+			"key": "minecraft:eat",
 			"range": 16,
-			"vibrationLevel": 8,
-			"key": "minecraft:eat"
+			"vibrationLevel": 8
 		},
 		{
+			"key": "minecraft:elytra_glide",
 			"range": 16,
-			"vibrationLevel": 4,
-			"key": "minecraft:elytra_glide"
+			"vibrationLevel": 4
 		},
 		{
+			"key": "minecraft:entity_action",
 			"range": 16,
-			"vibrationLevel": 4,
-			"key": "minecraft:entity_action"
+			"vibrationLevel": 4
 		},
 		{
+			"key": "minecraft:entity_damage",
 			"range": 16,
-			"vibrationLevel": 7,
-			"key": "minecraft:entity_damage"
+			"vibrationLevel": 7
 		},
 		{
+			"key": "minecraft:entity_die",
 			"range": 16,
-			"vibrationLevel": 15,
-			"key": "minecraft:entity_die"
+			"vibrationLevel": 15
 		},
 		{
+			"key": "minecraft:entity_dismount",
 			"range": 16,
-			"vibrationLevel": 5,
-			"key": "minecraft:entity_dismount"
+			"vibrationLevel": 5
 		},
 		{
+			"key": "minecraft:entity_interact",
 			"range": 16,
-			"vibrationLevel": 6,
-			"key": "minecraft:entity_interact"
+			"vibrationLevel": 6
 		},
 		{
+			"key": "minecraft:entity_mount",
 			"range": 16,
-			"vibrationLevel": 6,
-			"key": "minecraft:entity_mount"
+			"vibrationLevel": 6
 		},
 		{
+			"key": "minecraft:entity_place",
 			"range": 16,
-			"vibrationLevel": 14,
-			"key": "minecraft:entity_place"
+			"vibrationLevel": 14
 		},
 		{
+			"key": "minecraft:equip",
 			"range": 16,
-			"vibrationLevel": 5,
-			"key": "minecraft:equip"
+			"vibrationLevel": 5
 		},
 		{
+			"key": "minecraft:explode",
 			"range": 16,
-			"vibrationLevel": 15,
-			"key": "minecraft:explode"
+			"vibrationLevel": 15
 		},
 		{
+			"key": "minecraft:flap",
 			"range": 16,
-			"vibrationLevel": 1,
-			"key": "minecraft:flap"
+			"vibrationLevel": 1
 		},
 		{
+			"key": "minecraft:fluid_pickup",
 			"range": 16,
-			"vibrationLevel": 12,
-			"key": "minecraft:fluid_pickup"
+			"vibrationLevel": 12
 		},
 		{
+			"key": "minecraft:fluid_place",
 			"range": 16,
-			"vibrationLevel": 13,
-			"key": "minecraft:fluid_place"
+			"vibrationLevel": 13
 		},
 		{
+			"key": "minecraft:hit_ground",
 			"range": 16,
-			"vibrationLevel": 2,
-			"key": "minecraft:hit_ground"
+			"vibrationLevel": 2
 		},
 		{
+			"key": "minecraft:instrument_play",
 			"range": 16,
-			"vibrationLevel": 3,
-			"key": "minecraft:instrument_play"
+			"vibrationLevel": 3
 		},
 		{
+			"key": "minecraft:item_interact_finish",
 			"range": 16,
-			"vibrationLevel": 3,
-			"key": "minecraft:item_interact_finish"
+			"vibrationLevel": 3
 		},
 		{
+			"key": "minecraft:item_interact_start",
 			"range": 16,
-			"vibrationLevel": 0,
-			"key": "minecraft:item_interact_start"
+			"vibrationLevel": 0
 		},
 		{
+			"key": "minecraft:jukebox_play",
 			"range": 10,
-			"vibrationLevel": 0,
-			"key": "minecraft:jukebox_play"
+			"vibrationLevel": 0
 		},
 		{
+			"key": "minecraft:jukebox_stop_play",
 			"range": 10,
-			"vibrationLevel": 0,
-			"key": "minecraft:jukebox_stop_play"
+			"vibrationLevel": 0
 		},
 		{
+			"key": "minecraft:lightning_strike",
 			"range": 16,
-			"vibrationLevel": 14,
-			"key": "minecraft:lightning_strike"
+			"vibrationLevel": 14
 		},
 		{
+			"key": "minecraft:note_block_play",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:note_block_play"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:prime_fuse",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:prime_fuse"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:projectile_land",
 			"range": 16,
-			"vibrationLevel": 2,
-			"key": "minecraft:projectile_land"
+			"vibrationLevel": 2
 		},
 		{
+			"key": "minecraft:projectile_shoot",
 			"range": 16,
-			"vibrationLevel": 3,
-			"key": "minecraft:projectile_shoot"
+			"vibrationLevel": 3
 		},
 		{
+			"key": "minecraft:resonate_1",
 			"range": 16,
-			"vibrationLevel": 1,
-			"key": "minecraft:resonate_1"
+			"vibrationLevel": 1
 		},
 		{
+			"key": "minecraft:resonate_10",
 			"range": 16,
-			"vibrationLevel": 10,
-			"key": "minecraft:resonate_10"
+			"vibrationLevel": 10
 		},
 		{
+			"key": "minecraft:resonate_11",
 			"range": 16,
-			"vibrationLevel": 11,
-			"key": "minecraft:resonate_11"
+			"vibrationLevel": 11
 		},
 		{
+			"key": "minecraft:resonate_12",
 			"range": 16,
-			"vibrationLevel": 12,
-			"key": "minecraft:resonate_12"
+			"vibrationLevel": 12
 		},
 		{
+			"key": "minecraft:resonate_13",
 			"range": 16,
-			"vibrationLevel": 13,
-			"key": "minecraft:resonate_13"
+			"vibrationLevel": 13
 		},
 		{
+			"key": "minecraft:resonate_14",
 			"range": 16,
-			"vibrationLevel": 14,
-			"key": "minecraft:resonate_14"
+			"vibrationLevel": 14
 		},
 		{
+			"key": "minecraft:resonate_15",
 			"range": 16,
-			"vibrationLevel": 15,
-			"key": "minecraft:resonate_15"
+			"vibrationLevel": 15
 		},
 		{
+			"key": "minecraft:resonate_2",
 			"range": 16,
-			"vibrationLevel": 2,
-			"key": "minecraft:resonate_2"
+			"vibrationLevel": 2
 		},
 		{
+			"key": "minecraft:resonate_3",
 			"range": 16,
-			"vibrationLevel": 3,
-			"key": "minecraft:resonate_3"
+			"vibrationLevel": 3
 		},
 		{
+			"key": "minecraft:resonate_4",
 			"range": 16,
-			"vibrationLevel": 4,
-			"key": "minecraft:resonate_4"
+			"vibrationLevel": 4
 		},
 		{
+			"key": "minecraft:resonate_5",
 			"range": 16,
-			"vibrationLevel": 5,
-			"key": "minecraft:resonate_5"
+			"vibrationLevel": 5
 		},
 		{
+			"key": "minecraft:resonate_6",
 			"range": 16,
-			"vibrationLevel": 6,
-			"key": "minecraft:resonate_6"
+			"vibrationLevel": 6
 		},
 		{
+			"key": "minecraft:resonate_7",
 			"range": 16,
-			"vibrationLevel": 7,
-			"key": "minecraft:resonate_7"
+			"vibrationLevel": 7
 		},
 		{
+			"key": "minecraft:resonate_8",
 			"range": 16,
-			"vibrationLevel": 8,
-			"key": "minecraft:resonate_8"
+			"vibrationLevel": 8
 		},
 		{
+			"key": "minecraft:resonate_9",
 			"range": 16,
-			"vibrationLevel": 9,
-			"key": "minecraft:resonate_9"
+			"vibrationLevel": 9
 		},
 		{
+			"key": "minecraft:sculk_sensor_tendrils_clicking",
 			"range": 16,
-			"vibrationLevel": 0,
-			"key": "minecraft:sculk_sensor_tendrils_clicking"
+			"vibrationLevel": 0
 		},
 		{
+			"key": "minecraft:shear",
 			"range": 16,
-			"vibrationLevel": 6,
-			"key": "minecraft:shear"
+			"vibrationLevel": 6
 		},
 		{
+			"key": "minecraft:shriek",
 			"range": 32,
-			"vibrationLevel": 0,
-			"key": "minecraft:shriek"
+			"vibrationLevel": 0
 		},
 		{
+			"key": "minecraft:splash",
 			"range": 16,
-			"vibrationLevel": 2,
-			"key": "minecraft:splash"
+			"vibrationLevel": 2
 		},
 		{
+			"key": "minecraft:step",
 			"range": 16,
-			"vibrationLevel": 1,
-			"key": "minecraft:step"
+			"vibrationLevel": 1
 		},
 		{
+			"key": "minecraft:swim",
 			"range": 16,
-			"vibrationLevel": 1,
-			"key": "minecraft:swim"
+			"vibrationLevel": 1
 		},
 		{
+			"key": "minecraft:teleport",
 			"range": 16,
-			"vibrationLevel": 14,
-			"key": "minecraft:teleport"
+			"vibrationLevel": 14
 		},
 		{
+			"key": "minecraft:unequip",
 			"range": 16,
-			"vibrationLevel": 4,
-			"key": "minecraft:unequip"
+			"vibrationLevel": 4
 		}
 	]
 }
