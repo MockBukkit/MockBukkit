@@ -120,6 +120,18 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	}
 
 	@Override
+	public @NotNull T getOrThrow(@NotNull NamespacedKey namespacedKey)
+	{
+		Preconditions.checkNotNull(namespacedKey);
+		loadIfEmpty();
+		T value = this.keyedMap.get(namespacedKey);
+		if (value == null) {
+			throw new java.util.NoSuchElementException("No value for " + namespacedKey + " in " + this);
+		}
+		return value;
+	}
+
+	@Override
 	public @NotNull Stream<T> stream()
 	{
 		loadIfEmpty();
