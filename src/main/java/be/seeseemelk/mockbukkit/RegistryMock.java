@@ -118,6 +118,14 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	}
 
 	@Override
+	public @NotNull T getOrThrow(@NotNull NamespacedKey key) throws IllegalArgumentException
+	{
+		T t = get(key);
+		Preconditions.checkArgument(t != null, "No registry entry found for key %s.", key);
+		return t;
+	}
+
+	@Override
 	public @NotNull Stream<T> stream()
 	{
 		loadIfEmpty();
