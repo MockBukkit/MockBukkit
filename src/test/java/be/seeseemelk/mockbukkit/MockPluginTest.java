@@ -19,7 +19,7 @@ class MockPluginTest
 	void onEnable_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		MockPlugin.Builder builder = MockPlugin.builder().withOnEnable(() -> trigger.set(true));
+		MockPlugin.Builder builder = MockPlugin.builder().withOnEnable((ignored) -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertTrue(trigger.get());
@@ -29,7 +29,7 @@ class MockPluginTest
 	void onLoad_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		MockPlugin.Builder builder = MockPlugin.builder().withOnLoad(() -> trigger.set(true));
+		MockPlugin.Builder builder = MockPlugin.builder().withOnLoad((ignored) -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertTrue(trigger.get());
@@ -39,7 +39,7 @@ class MockPluginTest
 	void onDisable_triggers()
 	{
 		AtomicBoolean trigger = new AtomicBoolean(false);
-		MockPlugin.Builder builder = MockPlugin.builder().withOnDisable(() -> trigger.set(true));
+		MockPlugin.Builder builder = MockPlugin.builder().withOnDisable((ignored) -> trigger.set(true));
 		assertFalse(trigger.get());
 		builder.build();
 		assertFalse(trigger.get());
