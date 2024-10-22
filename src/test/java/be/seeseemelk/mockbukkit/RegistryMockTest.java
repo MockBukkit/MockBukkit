@@ -33,6 +33,13 @@ class RegistryMockTest
 		assertNotNull(structureRegistryMock.get(Structure.MANSION.getKey()));
 	}
 
+	@Test
+	void getOrThrow_StructureThrows()
+	{
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
+		assertThrows(IllegalArgumentException.class, () -> structureRegistryMock.getOrThrow(NamespacedKey.minecraft("invalid")));
+	}
+
 	@ParameterizedTest
 	@MethodSource("getStructures")
 	void getStructureType_NonNull(Structure structure)
