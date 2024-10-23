@@ -15,6 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 import org.mockbukkit.mockbukkit.inventory.ItemTypeMock;
+import org.mockbukkit.mockbukkit.registry.RegistryMock;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

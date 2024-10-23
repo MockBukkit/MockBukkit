@@ -88,7 +88,7 @@ import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
-import org.mockbukkit.mockbukkit.plugin.MockPlugin;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
