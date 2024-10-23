@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.map;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapCanvas;

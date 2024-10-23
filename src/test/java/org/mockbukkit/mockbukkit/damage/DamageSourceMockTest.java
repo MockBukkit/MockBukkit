@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.damage;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;

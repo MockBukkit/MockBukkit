@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.scheduler;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.TestPlugin;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
