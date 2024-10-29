@@ -71,6 +71,7 @@ public interface MessageTarget
 	/**
 	 * Asserts that more messages were received by the message target.
 	 */
+	@Deprecated(forRemoval = true)
 	default void assertNoMoreSaid()
 	{
 		if (nextComponentMessage() != null)
