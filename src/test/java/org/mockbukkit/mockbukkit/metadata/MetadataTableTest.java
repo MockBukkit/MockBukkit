@@ -2,8 +2,8 @@ package org.mockbukkit.mockbukkit.metadata;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.PluginMock;
-import org.mockbukkit.mockbukkit.TestPlugin;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.junit.jupiter.api.BeforeEach;

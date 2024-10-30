@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.generator;
 
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.junit.jupiter.api.Test;

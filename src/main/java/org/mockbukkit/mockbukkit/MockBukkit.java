@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.exception.UnmockException;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.File;
 import java.io.FileInputStream;

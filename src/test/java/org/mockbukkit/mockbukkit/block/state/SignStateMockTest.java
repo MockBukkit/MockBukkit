@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;

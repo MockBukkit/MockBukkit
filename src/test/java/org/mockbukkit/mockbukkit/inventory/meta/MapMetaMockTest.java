@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.bukkit.Color;
 import org.junit.jupiter.api.BeforeEach;

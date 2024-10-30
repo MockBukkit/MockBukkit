@@ -2,7 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;

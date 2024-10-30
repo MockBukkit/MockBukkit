@@ -1,7 +1,10 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.plugin;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

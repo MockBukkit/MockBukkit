@@ -63,10 +63,10 @@ public class CustomConfiguredPluginClassLoaderMock extends ClassLoader implement
 	{
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
 		cw.visit(52, Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "TestClass", null, "java/lang/Object", null);
-		MethodVisitor mv = cw.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC, "testMethod", "(Lorg/mockbukkit/mockbukkit/TestPlugin;)V", null, null);
+		MethodVisitor mv = cw.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC, "testMethod", "(Lorg/mockbukkit/mockbukkit/plugin/TestPlugin;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitInsn(Opcodes.ICONST_1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, "org/mockbukkit/mockbukkit/TestPlugin", "classLoadSucceed", "Z");
+		mv.visitFieldInsn(Opcodes.PUTFIELD, "org/mockbukkit/mockbukkit/plugin/TestPlugin", "classLoadSucceed", "Z");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(2, 2);
 		mv.visitEnd();

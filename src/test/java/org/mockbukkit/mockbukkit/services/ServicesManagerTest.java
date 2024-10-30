@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.services;
 
-import org.mockbukkit.mockbukkit.EmptyPlugin;
+import org.mockbukkit.mockbukkit.plugin.EmptyPlugin;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.plugin.RegisteredServiceProvider;
