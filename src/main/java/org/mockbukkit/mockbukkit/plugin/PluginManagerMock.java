@@ -448,11 +448,11 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		String name = description.getName();
 		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
 		{
-			throw new RuntimeException("Restricted Name");
+			throw new PluginLoadException("Restricted Name");
 		}
 		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
 		{
-			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
+			throw new PluginLoadException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
 		}
 		File dataFolder = createTemporaryDirectory(name + "-" + description.getVersion());
 		return new MockBukkitURLClassLoader(pluginFile, getClass().getClassLoader(), server, description, dataFolder);

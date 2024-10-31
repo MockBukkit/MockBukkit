@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.exception.UnmockException;
+import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.File;
@@ -292,7 +292,7 @@ public class MockBukkit
 		}
 		catch (IOException | InvalidConfigurationException e)
 		{
-			throw new RuntimeException("Couldn't read config input stream", e);
+			throw new PluginLoadException("Couldn't read config input stream", e);
 		}
 		return loadWithConfig(plugin, config, parameters);
 	}
@@ -347,8 +347,7 @@ public class MockBukkit
 		}
 		catch (NoSuchFieldException | IllegalAccessException e)
 		{
-			//TODO Replace with PluginLoadException once #1025 is merged
-			throw new RuntimeException("Can't load config", e);
+			throw new PluginLoadException("Can't load config", e);
 		}
 
 		return processFinalLoad(plugin, instance, pluginManager);

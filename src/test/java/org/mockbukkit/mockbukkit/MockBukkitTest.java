@@ -9,6 +9,8 @@ import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.exception.PluginIOException;
+import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.SecondTestPlugin;
@@ -142,7 +144,7 @@ class MockBukkitTest
 	void load_TestPluginWithExtraIncorrectParameter_ExceptionThrown()
 	{
 		MockBukkit.mock();
-		assertThrows(RuntimeException.class, () -> MockBukkit.load(TestPlugin.class, "Hello"));
+		assertThrows(PluginLoadException.class, () -> MockBukkit.load(TestPlugin.class, "Hello"));
 	}
 
 	@Test
@@ -334,7 +336,7 @@ class MockBukkitTest
 		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{
 			MockBukkit.mock();
-			RuntimeException runtimeException = assertThrows(RuntimeException.class, () ->
+			PluginLoadException runtimeException = assertThrows(PluginLoadException.class, () ->
 			{
 				MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
 			});
