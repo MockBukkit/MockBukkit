@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnmodifiableView;
+import org.jetbrains.annotations.Unmodifiable;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
@@ -47,9 +47,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			60L, TimeUnit.SECONDS,
 			new SynchronousQueue<>());
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
-	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
+	private final List<Future<?>> queuedAsyncEvents = Collections.synchronizedList(new ArrayList<>());
 	private final TaskList scheduledTasks = new TaskList();
-	private final List<BukkitWorker> activeWorkers = new ArrayList<>();
+	private final List<BukkitWorker> activeWorkers = Collections.synchronizedList(new ArrayList<>());
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 
 	// This variable must be accessed while synchronizing on BukkitSchedulerMock.this to avoid data races and race conditions
@@ -57,7 +57,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	private final AtomicInteger id = new AtomicInteger();
 	private long executorTimeout = 60000;
-	private final List<BukkitWorker> overdueTasks = new ArrayList<>();
+	private volatile List<BukkitWorker> overdueTasks = List.of(); // Always read-only. The reference is updated by saveOverdueTasks()
 
 	private @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
 	{
@@ -292,7 +292,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public void waitAsyncEventsFinished()
 	{
-		for (Future<?> futureEvent : List.copyOf(queuedAsyncEvents))
+		List<Future<?>> queuedAsyncEventsCopy;
+		synchronized (queuedAsyncEvents)
+		{
+			queuedAsyncEventsCopy = List.copyOf(queuedAsyncEvents);
+		}
+
+		for (Future<?> futureEvent : queuedAsyncEventsCopy)
 		{
 			if (futureEvent.isDone())
 			{
@@ -472,7 +478,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitWorker> getActiveWorkers()
 	{
-		return this.activeWorkers;
+		synchronized (this.activeWorkers)
+		{
+			// Copying here is more efficient than using a CopyOnWriteArrayList,
+			// since this method is not called as much as wrapTask(...)
+			return List.copyOf(this.activeWorkers);
+		}
 	}
 
 	@Override
@@ -603,16 +614,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public void saveOverdueTasks()
 	{
-		this.overdueTasks.clear();
-		this.overdueTasks.addAll(getActiveWorkers());
+		this.overdueTasks = getActiveWorkers();
 	}
 
 	/**
 	 * @return A list of overdue tasks saved by {@link #saveOverdueTasks()}.
 	 */
-	public @NotNull @UnmodifiableView List<BukkitWorker> getOverdueTasks()
+	public @NotNull @Unmodifiable List<BukkitWorker> getOverdueTasks()
 	{
-		return Collections.unmodifiableList(this.overdueTasks);
+		return this.overdueTasks;
 	}
 
 	/**
@@ -621,6 +631,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Deprecated(forRemoval = true)
 	public void assertNoOverdueTasks()
 	{
+		List<BukkitWorker> overdueTasks = this.overdueTasks; // Single read from volatile variable
 		if (!overdueTasks.isEmpty())
 			throw new AssertionFailedError("There are overdue tasks: " + overdueTasks);
 	}
