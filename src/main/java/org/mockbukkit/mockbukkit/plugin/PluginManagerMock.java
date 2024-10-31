@@ -78,7 +78,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private File parentTemporaryDirectory;
-	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
 
 	/**
 	 * Constructs a new {@link PluginManagerMock} for the provided {@link ServerMock}.
@@ -776,23 +775,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
 		}
-		addListener(listener, plugin);
 		for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(listener, plugin).entrySet())
 		{
 			getEventListeners(getRegistrationClass(entry.getKey())).registerAll(entry.getValue());
-		}
-
-	}
-
-	private void addListener(@NotNull Listener listener, @NotNull Plugin plugin)
-	{
-		Preconditions.checkNotNull(listener, "Listener cannot be null");
-		Preconditions.checkNotNull(plugin, "Listener cannot be null");
-		List<Listener> l = listeners.getOrDefault(plugin.getName(), new ArrayList<>());
-		if (!l.contains(listener))
-		{
-			l.add(listener);
-			listeners.put(plugin.getName(), l);
 		}
 	}
 
@@ -804,18 +789,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	public void unregisterPluginEvents(@NotNull Plugin plugin)
 	{
 		Preconditions.checkNotNull(plugin, "Listener cannot be null");
-		List<Listener> listListener = listeners.get(plugin.getName());
-		if (listListener != null)
-		{
-			for (Listener l : listListener)
-			{
-				for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(l, plugin).entrySet())
-				{
-					getEventListeners(getRegistrationClass(entry.getKey())).unregister(plugin);
-				}
-			}
-		}
-
+		HandlerList.unregisterAll(plugin);
 	}
 
 	@Override
@@ -838,7 +812,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
 		}
-		addListener(listener, plugin);
 		getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
 	}
 
