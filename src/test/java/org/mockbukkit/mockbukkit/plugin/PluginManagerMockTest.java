@@ -23,6 +23,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
+import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -349,7 +350,7 @@ class PluginManagerMockTest
 	}
 
 	@Test
-	void eventThrowsException_RuntimeException_RethrowsSame()
+	void eventThrowsException_IllegalStateException_RethrowsSame()
 	{
 		pluginManager.registerEvents(new Listener()
 		{
@@ -386,7 +387,7 @@ class PluginManagerMockTest
 		PluginDescriptionFile sillyName = new PluginDescriptionFile("Name", "1.0.0", TestPlugin.class.getName());
 		nameField.set(sillyName, name);
 
-		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
+		assertThrows(PluginLoadException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
 	@Test

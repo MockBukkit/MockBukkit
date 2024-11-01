@@ -1,7 +1,12 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Bukkit;
@@ -37,6 +42,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasNoOverdueTasks;
 import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasOverdueTasks;
 
+@ExtendWith(MockBukkitExtension.class)
 class BukkitSchedulerMockTest
 {
 
@@ -46,6 +52,8 @@ class BukkitSchedulerMockTest
 	private static final long SLEEP_TIME = 50L;
 
 	private BukkitSchedulerMock scheduler;
+	@MockBukkitInject
+	private ServerMock server;
 
 	@BeforeEach
 	void setUp()
@@ -221,7 +229,6 @@ class BukkitSchedulerMockTest
 	@Test
 	void cancellingAllTaskByPlugin()
 	{
-		ServerMock server = MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class);
 		Plugin plugin = server.getPluginManager().getPlugin("MockBukkitTestPlugin");
 		BukkitSchedulerMock scheduler1 = server.getScheduler();
@@ -240,7 +247,6 @@ class BukkitSchedulerMockTest
 		assertEquals(1, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.cancelTask(task.getTaskId());
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
-		MockBukkit.unmock();
 	}
 
 
@@ -248,7 +254,8 @@ class BukkitSchedulerMockTest
 	void longScheduledRunningTask_Throws_RunTimeException()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		scheduler.runTaskAsynchronously(null, () ->
+		PluginMock pluginMock = MockBukkit.createMockPlugin();
+		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
 			while (true)
 			{
@@ -262,7 +269,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
-		scheduler.runTaskLaterAsynchronously(null, () ->
+		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
 			while (true)
 			{
@@ -284,7 +291,7 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		assertThrows(RuntimeException.class, () ->
+		assertThrows(TaskCancelledException.class, () ->
 		{
 			scheduler.shutdown();
 		});
@@ -325,7 +332,7 @@ class BukkitSchedulerMockTest
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
-		assertThrows(RuntimeException.class, () -> scheduler.shutdown());
+		assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
 	}
 
 	@Test
@@ -389,7 +396,6 @@ class BukkitSchedulerMockTest
 	@Test
 	void waitAsyncEventsFinished()
 	{
-		MockBukkit.mock();
 		AtomicBoolean done = new AtomicBoolean(false);
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
@@ -407,13 +413,11 @@ class BukkitSchedulerMockTest
 		scheduler.waitAsyncEventsFinished();
 
 		assertTrue(done.get());
-		MockBukkit.unmock();
 	}
 
 	@Test
 	void shutdown_waitsForAsyncEvents()
 	{
-		MockBukkit.mock();
 		AtomicBoolean done = new AtomicBoolean(false);
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
@@ -431,7 +435,6 @@ class BukkitSchedulerMockTest
 		scheduler.shutdown();
 
 		assertTrue(done.get());
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -488,7 +491,6 @@ class BukkitSchedulerMockTest
 	@Test
 	void getMainThreadExecutor_RunsOnMainThread()
 	{
-		MockBukkit.mock();
 		AtomicBoolean b = new AtomicBoolean();
 
 		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
@@ -498,7 +500,6 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 
 		assertTrue(b.get());
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -510,12 +511,9 @@ class BukkitSchedulerMockTest
 	@Test
 	void getMainThreadExecutor_NullCommand_ThrowsException()
 	{
-		MockBukkit.mock();
 		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
 
 		assertThrowsExactly(NullPointerException.class, () -> executor.execute(null));
-
-		MockBukkit.unmock();
 	}
 
 	@Test
