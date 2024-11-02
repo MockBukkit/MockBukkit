@@ -145,14 +145,52 @@ public abstract class InventoryViewMock implements InventoryView
 	@Override
 	public void setItem(int slot, @Nullable ItemStack item)
 	{
-		// TODO Auto-generated method stub
+		int topSize = getTopInventory().getSize();
+		if (slot < 0)
+		{
+			// TODO : ???
+			throw new UnimplementedOperationException();
+		}
+
+		if (slot < topSize)
+		{
+			getTopInventory().setItem(slot, item);
+			return;
+		}
+
+		slot -= topSize;
+		if (slot < getBottomInventory().getSize())
+		{
+			getBottomInventory().setItem(slot, item);
+			return;
+		}
+
+		// TODO: ???
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable ItemStack getItem(int slot)
 	{
-		// TODO Auto-generated method stub
+		int topSize = getTopInventory().getSize();
+		if (slot < 0)
+		{
+			// TODO : ???
+			throw new UnimplementedOperationException();
+		}
+
+		if (slot < topSize)
+		{
+			return getTopInventory().getItem(slot);
+		}
+
+		slot -= topSize;
+		if (slot < getBottomInventory().getSize())
+		{
+			return getBottomInventory().getItem(slot);
+		}
+
+		// TODO: ???
 		throw new UnimplementedOperationException();
 	}
 
