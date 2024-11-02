@@ -2,12 +2,12 @@ package be.seeseemelk.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.jetbrains.annotations.ApiStatus.Experimental;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.junit.jupiter.api.extension.TestInstancePostProcessor;
+import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -80,17 +80,17 @@ import java.util.Optional;
  * </code></pre>
  */
 @Experimental
-public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallback, ParameterResolver
+public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver
 {
 
 	@Override
-	public void beforeEach(ExtensionContext context) throws Exception
+	public void postProcessTestInstance(Object testInstance, ExtensionContext context) throws Exception
 	{
 		final ServerMock serverMock = MockBukkit.getOrCreateMock();
-		injectServerMockIntoFields(context, serverMock);
+		injectServerMockIntoFields(testInstance, context, serverMock);
 	}
 
-	private void injectServerMockIntoFields(ExtensionContext context, ServerMock serverMock) throws IllegalAccessException
+	private void injectServerMockIntoFields(Object testInstance, ExtensionContext context, ServerMock serverMock) throws IllegalAccessException
 	{
 		final Optional<Class<?>> classOptional = context.getTestClass();
 		if (classOptional.isEmpty())
@@ -102,11 +102,6 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
 				.toList();
 
-		final Optional<Object> optionalTestInstance = context.getTestInstance();
-		if (optionalTestInstance.isEmpty())
-			return;
-
-		final Object testInstance = optionalTestInstance.get();
 		for (final Field field : serverMockFields)
 		{
 			final String name = field.getName();
@@ -115,7 +110,7 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 	}
 
 	@Override
-	public void afterEach(ExtensionContext context) throws Exception
+	public void preDestroyTestInstance(ExtensionContext context)
 	{
 		MockBukkit.unmock();
 	}
