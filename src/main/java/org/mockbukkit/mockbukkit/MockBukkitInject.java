@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit;
 
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -17,7 +16,6 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@ApiStatus.Experimental
 public @interface MockBukkitInject
 {
 
