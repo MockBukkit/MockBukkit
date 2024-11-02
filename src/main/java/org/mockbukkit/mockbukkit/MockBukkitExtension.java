@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.jetbrains.annotations.ApiStatus.Experimental;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -81,7 +80,6 @@ import java.util.Optional;
  * }
  * </code></pre>
  */
-@Experimental
 public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallback, ParameterResolver
 {
 
