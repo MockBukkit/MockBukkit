@@ -40,20 +40,6 @@ public class SimpleInventoryViewMock extends InventoryViewMock
 	}
 
 	@Override
-	public void setItem(int slot, @Nullable ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable ItemStack getItem(int slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setCursor(@Nullable ItemStack item)
 	{
 		this.getPlayer().setItemOnCursor(item);

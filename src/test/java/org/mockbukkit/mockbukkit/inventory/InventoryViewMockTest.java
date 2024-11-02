@@ -3,8 +3,10 @@ package org.mockbukkit.mockbukkit.inventory;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -104,4 +106,52 @@ class InventoryViewMockTest
 		view.setTitle("Test");
 		assertEquals("Test", view.getTitle());
     }
+
+	@Test
+	void getItemFromTopInventory()
+	{
+		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
+		Player player = server.addPlayer();
+		InventoryMock chest = new SimpleInventoryMock();
+		chest.setItem(0, sword);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+
+		assertEquals(sword, view.getItem(0));
+	}
+
+	@Test
+	void getItemFromBottomInventory()
+	{
+		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
+		Player player = server.addPlayer();
+		player.getInventory().setItem(0, sword);
+		InventoryMock chest = new SimpleInventoryMock();
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+
+		assertEquals(sword, view.getItem(9));
+	}
+
+	@Test
+	void setItemInTopInventory()
+	{
+		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
+		Player player = server.addPlayer();
+		InventoryMock chest = new SimpleInventoryMock();
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		view.setItem(0, sword);
+
+		assertEquals(sword, chest.getItem(0));
+	}
+
+	@Test
+	void setItemInBottomInventory()
+	{
+		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
+		Player player = server.addPlayer();
+		InventoryMock chest = new SimpleInventoryMock();
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		view.setItem(9, sword);
+
+		assertEquals(sword, player.getInventory().getItem(0));
+	}
 }
