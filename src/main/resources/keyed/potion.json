@@ -1,418 +1,418 @@
 {
 	"values": [
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:awkward",
+			"maxLevel": 1,
 			"name": "AWKWARD",
-			"ordinal": 3
+			"ordinal": 3,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": true,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:fire_resistance",
+			"maxLevel": 1,
 			"name": "FIRE_RESISTANCE",
-			"ordinal": 11
+			"ordinal": 11,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": true,
 			"extendable": false,
-			"maxLevel": 2,
 			"instant": true,
 			"key": "minecraft:harming",
+			"maxLevel": 2,
 			"name": "HARMING",
-			"ordinal": 23
+			"ordinal": 23,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": true,
 			"extendable": false,
-			"maxLevel": 2,
 			"instant": true,
 			"key": "minecraft:healing",
+			"maxLevel": 2,
 			"name": "HEALING",
-			"ordinal": 21
+			"ordinal": 21,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:infested",
+			"maxLevel": 1,
 			"name": "INFESTED",
-			"ordinal": 45
+			"ordinal": 45,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": true,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:invisibility",
+			"maxLevel": 1,
 			"name": "INVISIBILITY",
-			"ordinal": 6
+			"ordinal": 6,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:leaping",
+			"maxLevel": 2,
 			"name": "LEAPING",
-			"ordinal": 8
+			"ordinal": 8,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_fire_resistance",
+			"maxLevel": 1,
 			"name": "LONG_FIRE_RESISTANCE",
-			"ordinal": 12
+			"ordinal": 12,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_invisibility",
+			"maxLevel": 1,
 			"name": "LONG_INVISIBILITY",
-			"ordinal": 7
+			"ordinal": 7,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_leaping",
+			"maxLevel": 1,
 			"name": "LONG_LEAPING",
-			"ordinal": 9
+			"ordinal": 9,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_night_vision",
+			"maxLevel": 1,
 			"name": "LONG_NIGHT_VISION",
-			"ordinal": 5
+			"ordinal": 5,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_poison",
+			"maxLevel": 1,
 			"name": "LONG_POISON",
-			"ordinal": 26
+			"ordinal": 26,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_regeneration",
+			"maxLevel": 1,
 			"name": "LONG_REGENERATION",
-			"ordinal": 29
+			"ordinal": 29,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_slow_falling",
+			"maxLevel": 1,
 			"name": "LONG_SLOW_FALLING",
-			"ordinal": 41
+			"ordinal": 41,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_slowness",
+			"maxLevel": 1,
 			"name": "LONG_SLOWNESS",
-			"ordinal": 17
+			"ordinal": 17,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_strength",
+			"maxLevel": 1,
 			"name": "LONG_STRENGTH",
-			"ordinal": 32
+			"ordinal": 32,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_swiftness",
+			"maxLevel": 1,
 			"name": "LONG_SWIFTNESS",
-			"ordinal": 14
+			"ordinal": 14,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_turtle_master",
+			"maxLevel": 1,
 			"name": "LONG_TURTLE_MASTER",
-			"ordinal": 38
+			"ordinal": 38,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_water_breathing",
+			"maxLevel": 1,
 			"name": "LONG_WATER_BREATHING",
-			"ordinal": 20
+			"ordinal": 20,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:long_weakness",
+			"maxLevel": 1,
 			"name": "LONG_WEAKNESS",
-			"ordinal": 35
+			"ordinal": 35,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:luck",
+			"maxLevel": 1,
 			"name": "LUCK",
-			"ordinal": 36
+			"ordinal": 36,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:mundane",
+			"maxLevel": 1,
 			"name": "MUNDANE",
-			"ordinal": 1
+			"ordinal": 1,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": true,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:night_vision",
+			"maxLevel": 1,
 			"name": "NIGHT_VISION",
-			"ordinal": 4
+			"ordinal": 4,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:oozing",
+			"maxLevel": 1,
 			"name": "OOZING",
-			"ordinal": 44
+			"ordinal": 44,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:poison",
+			"maxLevel": 2,
 			"name": "POISON",
-			"ordinal": 25
+			"ordinal": 25,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:regeneration",
+			"maxLevel": 2,
 			"name": "REGENERATION",
-			"ordinal": 28
+			"ordinal": 28,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": false,
 			"extendable": true,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:slow_falling",
+			"maxLevel": 1,
 			"name": "SLOW_FALLING",
-			"ordinal": 40
+			"ordinal": 40,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:slowness",
+			"maxLevel": 2,
 			"name": "SLOWNESS",
-			"ordinal": 16
+			"ordinal": 16,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:strength",
+			"maxLevel": 2,
 			"name": "STRENGTH",
-			"ordinal": 31
+			"ordinal": 31,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": true,
 			"key": "minecraft:strong_harming",
+			"maxLevel": 1,
 			"name": "STRONG_HARMING",
-			"ordinal": 24
+			"ordinal": 24,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": true,
 			"key": "minecraft:strong_healing",
+			"maxLevel": 1,
 			"name": "STRONG_HEALING",
-			"ordinal": 22
+			"ordinal": 22,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_leaping",
+			"maxLevel": 1,
 			"name": "STRONG_LEAPING",
-			"ordinal": 10
+			"ordinal": 10,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_poison",
+			"maxLevel": 1,
 			"name": "STRONG_POISON",
-			"ordinal": 27
+			"ordinal": 27,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_regeneration",
+			"maxLevel": 1,
 			"name": "STRONG_REGENERATION",
-			"ordinal": 30
+			"ordinal": 30,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_slowness",
+			"maxLevel": 1,
 			"name": "STRONG_SLOWNESS",
-			"ordinal": 18
+			"ordinal": 18,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_strength",
+			"maxLevel": 1,
 			"name": "STRONG_STRENGTH",
-			"ordinal": 33
+			"ordinal": 33,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_swiftness",
+			"maxLevel": 1,
 			"name": "STRONG_SWIFTNESS",
-			"ordinal": 15
+			"ordinal": 15,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:strong_turtle_master",
+			"maxLevel": 1,
 			"name": "STRONG_TURTLE_MASTER",
-			"ordinal": 39
+			"ordinal": 39,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:swiftness",
+			"maxLevel": 2,
 			"name": "SWIFTNESS",
-			"ordinal": 13
+			"ordinal": 13,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:thick",
+			"maxLevel": 1,
 			"name": "THICK",
-			"ordinal": 2
+			"ordinal": 2,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": true,
 			"extendable": true,
-			"maxLevel": 2,
 			"instant": false,
 			"key": "minecraft:turtle_master",
+			"maxLevel": 2,
 			"name": "TURTLE_MASTER",
-			"ordinal": 37
+			"ordinal": 37,
+			"upgradeable": true
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:water",
+			"maxLevel": 1,
 			"name": "WATER",
-			"ordinal": 0
+			"ordinal": 0,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": true,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:water_breathing",
+			"maxLevel": 1,
 			"name": "WATER_BREATHING",
-			"ordinal": 19
+			"ordinal": 19,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": true,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:weakness",
+			"maxLevel": 1,
 			"name": "WEAKNESS",
-			"ordinal": 34
+			"ordinal": 34,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:weaving",
+			"maxLevel": 1,
 			"name": "WEAVING",
-			"ordinal": 43
+			"ordinal": 43,
+			"upgradeable": false
 		},
 		{
-			"upgradeable": false,
 			"extendable": false,
-			"maxLevel": 1,
 			"instant": false,
 			"key": "minecraft:wind_charged",
+			"maxLevel": 1,
 			"name": "WIND_CHARGED",
-			"ordinal": 42
+			"ordinal": 42,
+			"upgradeable": false
 		}
 	]
 }

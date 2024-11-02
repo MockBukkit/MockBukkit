@@ -24,12 +24,13 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.11.3")
+	implementation("org.junit.jupiter:junit-jupiter:5.11.2")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
 	implementation("org.jetbrains:annotations:26.0.0")
 	implementation("net.bytebuddy:byte-buddy:1.15.4")
+	implementation("org.hamcrest:hamcrest:2.2")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -41,7 +42,7 @@ tasks {
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "be.seeseemelk.mockbukkit"
+				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit"
 			)
 		}
 	}

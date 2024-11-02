@@ -1,5 +1,5 @@
 name: MockBukkitTestPlugin
-main: be.seeseemelk.mockbukkit.TestPlugin
+main: org.mockbukkit.mockbukkit.plugin.TestPlugin
 version: 0.1.0
 permissions:
   permission.op:

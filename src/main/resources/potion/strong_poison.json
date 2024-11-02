@@ -1,12 +1,12 @@
 {
 	"effects": [
 		{
-			"type": "minecraft:poison",
+			"ambient": false,
 			"amplifier": 1,
 			"duration": 432,
-			"ambient": false,
+			"icon": true,
 			"particles": true,
-			"icon": true
+			"type": "minecraft:poison"
 		}
 	]
 }
