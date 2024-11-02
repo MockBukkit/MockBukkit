@@ -9,7 +9,7 @@ plugins {
 	id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
-group = "com.github.seeseemelk"
+group = "org.mockbukkit.mockbukkit"
 version = this.getFullVersion()
 
 repositories {

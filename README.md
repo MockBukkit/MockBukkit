@@ -7,7 +7,7 @@
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.21" />
     </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven" />
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/MockBukkit-v1.21?color=1bcc94&logo=apache-maven" />
     </a>
     <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.21">
         <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/MockBukkit-v1.21/javadoc.svg" />
@@ -70,7 +70,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.21:[version]'
+    testImplementation 'org.mockbukkit.mockbukkit:MockBukkit-v1.21:[version]'
 }
 ```
 
@@ -113,7 +113,7 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
 
 <dependencies>
   <dependency>
-    <groupId>com.github.seeseemelk</groupId>
+    <groupId>org.mockbukkit.mockbukkit</groupId>
     <artifactId>MockBukkit-v1.21</artifactId>
     <version>[version]</version>
     <scope>test</scope>
