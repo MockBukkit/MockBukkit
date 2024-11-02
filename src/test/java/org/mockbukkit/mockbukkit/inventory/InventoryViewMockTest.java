@@ -114,7 +114,7 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		InventoryMock chest = new SimpleInventoryMock();
 		chest.setItem(0, sword);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		view = new PlayerInventoryViewMock(player, chest);
 
 		assertEquals(sword, view.getItem(0));
 	}
@@ -126,7 +126,7 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		player.getInventory().setItem(0, sword);
 		InventoryMock chest = new SimpleInventoryMock();
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		view = new PlayerInventoryViewMock(player, chest);
 
 		assertEquals(sword, view.getItem(9));
 	}
@@ -137,7 +137,7 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new SimpleInventoryMock();
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		view = new PlayerInventoryViewMock(player, chest);
 		view.setItem(0, sword);
 
 		assertEquals(sword, chest.getItem(0));
@@ -149,7 +149,7 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new SimpleInventoryMock();
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		view = new PlayerInventoryViewMock(player, chest);
 		view.setItem(9, sword);
 
 		assertEquals(sword, player.getInventory().getItem(0));
