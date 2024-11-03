@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.scheduler;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -59,7 +60,8 @@ public class RepeatingTask extends ScheduledTask
 	/**
 	 * Updates the scheduled tick for the next run.
 	 */
-	public void updateScheduledTick()
+	@ApiStatus.Internal
+	protected void updateScheduledTick()
 	{
 		setScheduledTick(getScheduledTick() + period);
 	}

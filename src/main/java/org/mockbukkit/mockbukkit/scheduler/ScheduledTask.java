@@ -83,7 +83,6 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 		this.running = false;
 	}
 
-
 	/**
 	 * @return Whether the task is running.
 	 */
@@ -99,11 +98,10 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * @param running Whether the task is running.
 	 */
 	@ApiStatus.Internal
-	public void setRunning(boolean running)
+	protected void setRunning(boolean running)
 	{
 		this.running = running;
 	}
-
 
 	/**
 	 * Get the tick at which the task is scheduled to run at.
@@ -120,6 +118,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 *
 	 * @param scheduledTick The tick at which the task is scheduled to run at.
 	 */
+	@ApiStatus.Internal
 	protected void setScheduledTick(long scheduledTick)
 	{
 		this.scheduledTick = scheduledTick;
