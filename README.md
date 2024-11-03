@@ -9,8 +9,8 @@
     <a href="https://search.maven.org/search?q=MockBukkit">
         <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.21">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/mockbukkit-v1.21/javadoc.svg" />
+    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/MockBukkit-v1.21">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
@@ -51,7 +51,7 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 > [!TIP]
 > Currently, the newest version available is
 >
-> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
 
 
 > Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
