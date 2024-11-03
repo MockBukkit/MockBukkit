@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.Location;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
@@ -10,6 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -644,4 +648,36 @@ class InventoryMockTest
 		assertEquals(1, inventory.getNumberOfItems(emerald));
 	}
 
+	@Test
+	void getLocation_WithEntityHolder()
+	{
+		// Setup
+		Player player = server.addPlayer();
+		Location expectedLocation = new Location(player.getWorld(), 10, 20, 30);
+		player.teleport(expectedLocation);
+
+		// Test
+		Location location = inventory.getLocation();
+
+		// Verify
+		assertNotNull(location);
+		assertEquals(expectedLocation, location);
+	}
+
+	@Test
+	void getLocation()
+	{
+		assertThrows(UnimplementedOperationException.class, inventory::getLocation);
+	}
+
+	@Test
+	void getLocation_WithNonEntityHolder()
+	{
+		Player player = server.addPlayer();
+		final Location expectedLocation = new Location(player.getWorld(), 10, 20, 30);
+		player.teleport(expectedLocation);
+		InventoryMock inventory = new InventoryMock(player, InventoryType.PLAYER);
+
+		assertEquals(expectedLocation, inventory.getLocation());
+	}
 }

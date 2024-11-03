@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -630,6 +631,11 @@ public class InventoryMock implements Inventory
 	@Override
 	public Location getLocation()
 	{
+		if (getHolder() instanceof EntityMock entity)
+		{
+			return entity.getLocation();
+		}
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

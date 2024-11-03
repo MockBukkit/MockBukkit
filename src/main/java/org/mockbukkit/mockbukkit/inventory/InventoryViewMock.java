@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.Location;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.HumanEntity;
@@ -148,9 +149,17 @@ public abstract class InventoryViewMock implements InventoryView
 		int topSize = getTopInventory().getSize();
 		if (slot < 0)
 		{
-			// This should throw the item on the ground, but for that we need a location. Which is unimplemented for
-			//   now in 'topInventory'...
-			throw new IndexOutOfBoundsException("Index " + slot + " out of bounds for length " + (topSize + getBottomInventory().getSize()));
+			if (item != null)
+			{
+				Location location = bottomInventory.getLocation(); // should be the player
+				if (location != null)
+				{
+					location.getWorld().dropItemNaturally(location, item);
+					return;
+				}
+			}
+
+			throw new IndexOutOfBoundsException(slot);
 		}
 
 		if (slot < topSize)
@@ -166,7 +175,7 @@ public abstract class InventoryViewMock implements InventoryView
 			return;
 		}
 
-		throw new IndexOutOfBoundsException("Index " + slot + " out of bounds for length " + (topSize + getBottomInventory().getSize()));
+		throw new IndexOutOfBoundsException(slot);
 	}
 
 	@Override
@@ -189,7 +198,7 @@ public abstract class InventoryViewMock implements InventoryView
 			return getBottomInventory().getItem(slot);
 		}
 
-		throw new IndexOutOfBoundsException("Index " + slot + " out of bounds for length " + (topSize + getBottomInventory().getSize()));
+		throw new IndexOutOfBoundsException(slot);
 	}
 
 	@Override

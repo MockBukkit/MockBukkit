@@ -1,23 +1,22 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Item;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -99,20 +98,20 @@ class InventoryViewMockTest
 		assertEquals(InventoryType.CREATIVE, view.getType());
 	}
 
-    @Test
-    void getOriginalTitle()
+	@Test
+	void getOriginalTitle()
 	{
 		view.setTitle("Test");
 		view.setTitle("Foobar");
 		assertEquals("Inventory", view.getOriginalTitle());
-    }
+	}
 
-    @Test
-    void setTitle()
+	@Test
+	void setTitle()
 	{
 		view.setTitle("Test");
 		assertEquals("Test", view.getTitle());
-    }
+	}
 
 	@Test
 	void getItemFromTopInventory()
@@ -205,12 +204,12 @@ class InventoryViewMockTest
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		view = new PlayerInventoryViewMock(player, chest);
 
-		// see comment in setItem for more information
-		assertThrows(
-				IndexOutOfBoundsException.class,
-				() -> view.setItem(-1, sword));
+		view.setItem(-1, sword);
 
-		assertEquals(List.of(player), player.getWorld().getEntities());
+		List<Entity> entities = player.getWorld().getEntities().stream().filter(p -> !(p instanceof Player)).toList();
+		assertEquals(1, entities.size());
+		assertInstanceOf(ItemEntityMock.class, entities.getFirst());
+		assertEquals(sword, ((ItemEntityMock) entities.getFirst()).getItemStack());
 	}
 
 	@Test
@@ -223,4 +222,5 @@ class InventoryViewMockTest
 
 		assertThrows(IndexOutOfBoundsException.class, () -> view.setItem(100, sword));
 	}
+
 }
