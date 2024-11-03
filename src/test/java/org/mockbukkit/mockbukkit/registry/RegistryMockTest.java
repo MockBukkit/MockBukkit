@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.registry;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
@@ -6,28 +6,21 @@ import io.papermc.paper.registry.TypedKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.entity.Item;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
-import org.mockbukkit.mockbukkit.inventory.ItemTypeMock;
-import org.mockbukkit.mockbukkit.registry.RegistryMock;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockBukkitExtension.class)
 class RegistryMockTest
@@ -38,6 +31,13 @@ class RegistryMockTest
 	{
 		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
 		assertNotNull(structureRegistryMock.get(Structure.MANSION.getKey()));
+	}
+
+	@Test
+	void getOrThrow_StructureThrows()
+	{
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
+		assertThrows(NoSuchElementException.class, () -> structureRegistryMock.getOrThrow(NamespacedKey.minecraft("invalid")));
 	}
 
 	@ParameterizedTest
