@@ -139,7 +139,7 @@ nexusPublishing {
 publishing {
 	publications {
 		create<MavenPublication>("maven") {
-			artifactId = "MockBukkit-v${property("paper.api.version")}"
+			artifactId = "mockbukkit-v${property("paper.api.version")}"
 			from(components.getByName("java"))
 			pom {
 				name.set("MockBukkit-v${property("paper.api.version")}")
