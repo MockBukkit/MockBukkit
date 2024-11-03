@@ -9,7 +9,7 @@
     <a href="https://search.maven.org/search?q=MockBukkit">
         <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/MockBukkit-v1.21">
+    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
         <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
