@@ -71,23 +71,27 @@ class MockBukkitExtensionTest
 	}
 
 	@Nested
-	class WithNestedClassWithoutAnnotation {
+	class WithNestedClassWithoutAnnotation
+	{
 
 		@MockBukkitInject
 		private ServerMock nestedClassAnnotation;
 
 		@Test
-		void isFieldInjectedCorrectly() {
+		void isFieldInjectedCorrectly()
+		{
 			assertNotNull(nestedClassAnnotation);
 		}
 
 		@Test
-		void isParentFieldInjectedCorrectly() {
+		void isParentFieldInjectedCorrectly()
+		{
 			assertNotNull(fieldServerMock);
 		}
 
 		@Test
-		void isConstructorInjectedCorrectly() {
+		void isConstructorInjectedCorrectly()
+		{
 			assertNotNull(constructorParameterServerMock);
 		}
 
@@ -95,23 +99,27 @@ class MockBukkitExtensionTest
 
 	@Nested
 	@ExtendWith(MockBukkitExtension.class)
-	class WithNestedClassWithAnnotation {
+	class WithNestedClassWithAnnotation
+	{
 
 		@MockBukkitInject
 		private ServerMock nestedClassAnnotation;
 
 		@Test
-		void isFieldInjectedCorrectly() {
+		void isFieldInjectedCorrectly()
+		{
 			assertNotNull(nestedClassAnnotation);
 		}
 
 		@Test
-		void isParentFieldInjectedCorrectly() {
+		void isParentFieldInjectedCorrectly()
+		{
 			assertNotNull(fieldServerMock);
 		}
 
 		@Test
-		void isConstructorInjectedCorrectly() {
+		void isConstructorInjectedCorrectly()
+		{
 			assertNotNull(constructorParameterServerMock);
 		}
 
