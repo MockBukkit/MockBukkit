@@ -9,7 +9,7 @@ plugins {
 	id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
-group = "com.github.seeseemelk"
+group = "org.mockbukkit.mockbukkit"
 version = this.getFullVersion()
 
 repositories {
@@ -139,7 +139,7 @@ nexusPublishing {
 publishing {
 	publications {
 		create<MavenPublication>("maven") {
-			artifactId = "MockBukkit-v${property("paper.api.version")}"
+			artifactId = "mockbukkit-v${property("paper.api.version")}"
 			from(components.getByName("java"))
 			pom {
 				name.set("MockBukkit-v${property("paper.api.version")}")
