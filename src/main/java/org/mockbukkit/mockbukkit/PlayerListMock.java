@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
+import com.google.common.collect.Iterators;
 import org.mockbukkit.mockbukkit.ban.IpBanListMock;
 import org.mockbukkit.mockbukkit.ban.ProfileBanListMock;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
@@ -15,12 +16,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 /**
@@ -29,19 +30,20 @@ import java.util.stream.Collectors;
 public class PlayerListMock
 {
 
+	// Remember to properly synchronize accesses to this field when this setting will be enforced
 	private int maxPlayers = Integer.MAX_VALUE;
 
-	private final Set<PlayerMock> onlinePlayers = Collections.synchronizedSet(new LinkedHashSet<>());
-	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
-	private final Map<UUID, Long> lastLogins = Collections.synchronizedMap(new HashMap<>());
-	private final Map<UUID, Long> lastSeen = Collections.synchronizedMap(new HashMap<>());
-	private final Map<UUID, Long> firstPlayed = Collections.synchronizedMap(new HashMap<>());
-	private final Map<UUID, Boolean> hasPlayedBefore = Collections.synchronizedMap(new HashMap<>());
+	// These fields must be accessed while synchronizing on PlayerListMock.this
+	private final Set<PlayerMock> onlinePlayers = new CopyOnWriteArraySet<>(); // Iterator safety in getOnlinePlayers() (from Spigot implementation)
+	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>(); // CopyOnWriteArraySet is not needed here, since getOfflinePlayers() already returns a copy
+	private final Map<UUID, Long> lastLogins = new HashMap<>();
+	private final Map<UUID, Long> lastSeen = new HashMap<>();
+	private final Map<UUID, Long> firstPlayed = new HashMap<>();
+	private final Map<UUID, Boolean> hasPlayedBefore = new HashMap<>();
+	private final Set<UUID> operators = new HashSet<>();
 
 	private final @NotNull IpBanListMock ipBans = new IpBanListMock();
 	private final @NotNull ProfileBanListMock profileBans = new ProfileBanListMock();
-
-	private final Set<UUID> operators = Collections.synchronizedSet(new HashSet<>());
 
 	/**
 	 * Sets the maximum number of online players.
@@ -87,10 +89,11 @@ public class PlayerListMock
 	 * @param player The player to add.
 	 */
 	@ApiStatus.Internal
-	public void addPlayer(@NotNull PlayerMock player)
+	public synchronized void addPlayer(@NotNull PlayerMock player)
 	{
-		this.firstPlayed.putIfAbsent(player.getUniqueId(), System.currentTimeMillis());
-		this.lastLogins.put(player.getUniqueId(), System.currentTimeMillis());
+		long currentTime = System.currentTimeMillis();
+		this.firstPlayed.putIfAbsent(player.getUniqueId(), currentTime);
+		this.lastLogins.put(player.getUniqueId(), currentTime);
 		this.onlinePlayers.add(player);
 		this.offlinePlayers.add(player);
 		this.hasPlayedBefore.put(player.getUniqueId(), this.hasPlayedBefore.containsKey(player.getUniqueId()));
@@ -102,7 +105,7 @@ public class PlayerListMock
 	 * @param player The player to disconnect.
 	 */
 	@ApiStatus.Internal
-	public void disconnectPlayer(@NotNull PlayerMock player)
+	public synchronized void disconnectPlayer(@NotNull PlayerMock player)
 	{
 		this.lastSeen.put(player.getUniqueId(), System.currentTimeMillis());
 		this.onlinePlayers.remove(player);
@@ -116,7 +119,7 @@ public class PlayerListMock
 	 * @return Whether the player has played before.
 	 * @see Player#hasPlayedBefore()
 	 */
-	public boolean hasPlayedBefore(@NotNull UUID uuid)
+	public synchronized boolean hasPlayedBefore(@NotNull UUID uuid)
 	{
 		Preconditions.checkNotNull(uuid, "UUID cannot be null");
 		return this.hasPlayedBefore.getOrDefault(uuid, false);
@@ -128,7 +131,7 @@ public class PlayerListMock
 	 * @param player The player.
 	 */
 	@ApiStatus.Internal
-	public void addOfflinePlayer(@NotNull OfflinePlayer player)
+	public synchronized void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
 		this.offlinePlayers.add(player);
 	}
@@ -140,7 +143,7 @@ public class PlayerListMock
 	 * @return The time of first log-in, or 0.
 	 * @see OfflinePlayer#getFirstPlayed()
 	 */
-	public long getFirstPlayed(UUID uuid)
+	public synchronized long getFirstPlayed(UUID uuid)
 	{
 		return this.firstPlayed.getOrDefault(uuid, 0L);
 	}
@@ -151,7 +154,7 @@ public class PlayerListMock
 	 * @param uuid        UUID of the player to set first played time for.
 	 * @param firstPlayed The first played time. Must be non-negative.
 	 */
-	public void setFirstPlayed(UUID uuid, long firstPlayed)
+	public synchronized void setFirstPlayed(UUID uuid, long firstPlayed)
 	{
 		Preconditions.checkArgument(firstPlayed > 0, "First played time must be non-negative");
 		this.firstPlayed.put(uuid, firstPlayed);
@@ -165,7 +168,7 @@ public class PlayerListMock
 	 * @return The last time the player was seen online.
 	 * @see OfflinePlayer#getLastSeen()
 	 */
-	public long getLastSeen(UUID uuid)
+	public synchronized long getLastSeen(UUID uuid)
 	{
 		OfflinePlayer player = getOfflinePlayer(uuid);
 		if (player != null && player.isOnline())
@@ -182,7 +185,7 @@ public class PlayerListMock
 	 * @param uuid     UUID of the player to set last seen time for.
 	 * @param lastSeen The last seen time. Must be non-negative.
 	 */
-	public void setLastSeen(UUID uuid, long lastSeen)
+	public synchronized void setLastSeen(UUID uuid, long lastSeen)
 	{
 		Preconditions.checkArgument(lastSeen > 0, "Last seen time must be non-negative");
 		this.lastSeen.put(uuid, lastSeen);
@@ -196,7 +199,7 @@ public class PlayerListMock
 	 * @return The last time the player was seen online.
 	 * @see OfflinePlayer#getLastLogin()
 	 */
-	public long getLastLogin(UUID uuid)
+	public synchronized long getLastLogin(UUID uuid)
 	{
 		return this.lastLogins.getOrDefault(uuid, 0L);
 	}
@@ -207,7 +210,7 @@ public class PlayerListMock
 	 * @param uuid      UUID of the player to set last login time for.
 	 * @param lastLogin The last login time. Must be non-negative.
 	 */
-	public void setLastLogin(UUID uuid, long lastLogin)
+	public synchronized void setLastLogin(UUID uuid, long lastLogin)
 	{
 		Preconditions.checkArgument(lastLogin > 0, "Last login time must be non-negative");
 		this.lastLogins.put(uuid, lastLogin);
@@ -218,7 +221,7 @@ public class PlayerListMock
 	 * @return All server operators.
 	 */
 	@NotNull
-	public Set<OfflinePlayer> getOperators()
+	public synchronized Set<OfflinePlayer> getOperators()
 	{
 		return this.operators.stream().map(this::getOfflinePlayer).collect(Collectors.toSet());
 	}
@@ -229,6 +232,8 @@ public class PlayerListMock
 	@NotNull
 	public Collection<PlayerMock> getOnlinePlayers()
 	{
+		// No need to synchronize here, since onlinePlayers is already thread-safe
+		// Also, we're not accessing the data structure here, but just returning it
 		return Collections.unmodifiableSet(this.onlinePlayers);
 	}
 
@@ -236,7 +241,7 @@ public class PlayerListMock
 	 * @return All offline and online players.
 	 */
 	@NotNull
-	public OfflinePlayer @NotNull [] getOfflinePlayers()
+	public synchronized OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return this.offlinePlayers.toArray(new OfflinePlayer[0]);
 	}
@@ -244,7 +249,7 @@ public class PlayerListMock
 	/**
 	 * @return Whether anyone is online.
 	 */
-	public boolean isSomeoneOnline()
+	public synchronized boolean isSomeoneOnline()
 	{
 		return !this.onlinePlayers.isEmpty();
 	}
@@ -256,7 +261,7 @@ public class PlayerListMock
 	 * @return All online players whose names start with the provided name.
 	 */
 	@NotNull
-	public List<Player> matchPlayer(@NotNull String name)
+	public synchronized List<Player> matchPlayer(@NotNull String name)
 	{
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
@@ -272,7 +277,7 @@ public class PlayerListMock
 	 * @return The player with the exact name provided, or null.
 	 */
 	@Nullable
-	public Player getPlayerExact(@NotNull String name)
+	public synchronized Player getPlayerExact(@NotNull String name)
 	{
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
@@ -287,7 +292,7 @@ public class PlayerListMock
 	 * @return The closest matching player.
 	 */
 	@Nullable
-	public Player getPlayer(@NotNull String name)
+	public synchronized Player getPlayer(@NotNull String name)
 	{
 		Player player = getPlayerExact(name);
 
@@ -321,7 +326,7 @@ public class PlayerListMock
 	 * @return The player with the provided UUID, or null.
 	 */
 	@Nullable
-	public Player getPlayer(@NotNull UUID id)
+	public synchronized Player getPlayer(@NotNull UUID id)
 	{
 		for (Player player : this.onlinePlayers)
 		{
@@ -341,9 +346,9 @@ public class PlayerListMock
 	 * @return The player at the provided index.
 	 */
 	@NotNull
-	public PlayerMock getPlayer(int index)
+	public synchronized PlayerMock getPlayer(int index)
 	{
-		return List.copyOf(this.onlinePlayers).get(index);
+		return Iterators.get(this.onlinePlayers.iterator(), index);
 	}
 
 	/**
@@ -354,7 +359,7 @@ public class PlayerListMock
 	 * @see #getPlayer(String)
 	 */
 	@NotNull
-	public OfflinePlayer getOfflinePlayer(@NotNull String name)
+	public synchronized OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
 		OfflinePlayer offlinePlayer = getOfflinePlayerIfCached(name);
 		if (offlinePlayer != null)
@@ -372,7 +377,7 @@ public class PlayerListMock
 	 * @see #getPlayer(UUID)
 	 */
 	@Nullable
-	public OfflinePlayer getOfflinePlayer(@NotNull UUID id)
+	public synchronized OfflinePlayer getOfflinePlayer(@NotNull UUID id)
 	{
 		Player player = getPlayer(id);
 
@@ -395,7 +400,7 @@ public class PlayerListMock
 	/**
 	 * Clears all online players.
 	 */
-	public void clearOnlinePlayers()
+	public synchronized void clearOnlinePlayers()
 	{
 		this.onlinePlayers.clear();
 	}
@@ -403,7 +408,7 @@ public class PlayerListMock
 	/**
 	 * Clears all offline players.
 	 */
-	public void clearOfflinePlayers()
+	public synchronized void clearOfflinePlayers()
 	{
 		this.offlinePlayers.clear();
 	}
@@ -413,7 +418,7 @@ public class PlayerListMock
 	 *
 	 * @param operator The {@link UUID} of the Operator to add.
 	 */
-	public void addOperator(UUID operator)
+	public synchronized void addOperator(UUID operator)
 	{
 		this.operators.add(operator);
 	}
@@ -423,12 +428,12 @@ public class PlayerListMock
 	 *
 	 * @param operator The {@link UUID} of the Operator to remove.
 	 */
-	public void removeOperator(UUID operator)
+	public synchronized void removeOperator(UUID operator)
 	{
 		this.operators.remove(operator);
 	}
 
-	public @Nullable OfflinePlayer getOfflinePlayerIfCached(String name)
+	public synchronized @Nullable OfflinePlayer getOfflinePlayerIfCached(String name)
 	{
 		Player player = getPlayer(name);
 

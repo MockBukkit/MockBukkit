@@ -22,19 +22,20 @@ import java.util.Set;
 public class ProfileBanListMock implements ProfileBanList
 {
 
+	// Accesses to this field must be done while synchronizing on ProfileBanListMock.this
 	private final Map<String, BanEntry<PlayerProfile>> bans = new HashMap<>();
 	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
 	@Override
 	@Deprecated(since = "1.20")
-	public @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull String target)
+	public synchronized @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull String target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(target, null);
 	}
 
 	@Override
-	public @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull PlayerProfile target)
+	public synchronized @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull PlayerProfile target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(target.getName(), null);
@@ -75,7 +76,10 @@ public class ProfileBanListMock implements ProfileBanList
 				(reason == null || reason.isBlank()) ? null : reason
 		);
 
-		this.bans.put(target.getName(), entry);
+		synchronized (this)
+		{
+			this.bans.put(target.getName(), entry);
+		}
 		return entry;
 	}
 
@@ -136,7 +140,7 @@ public class ProfileBanListMock implements ProfileBanList
 
 	@Override
 	@Deprecated(since = "1.20")
-	public @NotNull Set<BanEntry> getBanEntries()
+	public synchronized @NotNull Set<BanEntry> getBanEntries()
 	{
 		ImmutableSet.Builder<BanEntry> builder = ImmutableSet.builder();
 		for (BanEntry<PlayerProfile> ban : bans.values())
@@ -147,7 +151,7 @@ public class ProfileBanListMock implements ProfileBanList
 	}
 
 	@Override
-	public @NotNull Set<BanEntry<PlayerProfile>> getEntries()
+	public synchronized @NotNull Set<BanEntry<PlayerProfile>> getEntries()
 	{
 		ImmutableSet.Builder<BanEntry<PlayerProfile>> builder = ImmutableSet.builder();
 		for (BanEntry<PlayerProfile> ban : bans.values())
@@ -158,26 +162,26 @@ public class ProfileBanListMock implements ProfileBanList
 	}
 
 	@Override
-	public boolean isBanned(@NotNull PlayerProfile target)
+	public synchronized boolean isBanned(@NotNull PlayerProfile target)
 	{
 		return this.bans.values().stream().anyMatch(banEntry -> banEntry.getBanTarget().equals(target));
 	}
 
 	@Override
-	public boolean isBanned(@NotNull String target)
+	public synchronized boolean isBanned(@NotNull String target)
 	{
 		return this.bans.values().stream().anyMatch(banEntry -> Objects.equals(banEntry.getBanTarget().getName(), target));
 	}
 
 	@Override
-	public void pardon(@NotNull PlayerProfile target)
+	public synchronized void pardon(@NotNull PlayerProfile target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.bans.remove(target.getName());
 	}
 
 	@Override
-	public void pardon(@NotNull String target)
+	public synchronized void pardon(@NotNull String target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.bans.remove(target);

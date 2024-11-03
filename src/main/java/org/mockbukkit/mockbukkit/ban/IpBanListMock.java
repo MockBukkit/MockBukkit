@@ -18,27 +18,27 @@ import java.util.Set;
 public class IpBanListMock implements org.bukkit.ban.IpBanList
 {
 
+	// Accesses to this field must be done while synchronizing on IpBanListMock.this
 	private final Map<String, BanEntry<InetAddress>> bans = new HashMap<>();
 	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
 	@Override
 	@Deprecated(since = "1.20")
-	public @Nullable BanEntry<InetAddress> getBanEntry(@NotNull String target)
+	public synchronized @Nullable BanEntry<InetAddress> getBanEntry(@NotNull String target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(target, null);
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> getBanEntry(@NotNull InetAddress target)
+	public synchronized @Nullable BanEntry<InetAddress> getBanEntry(@NotNull InetAddress target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(InetAddresses.toAddrString(target), null);
 	}
 
 	@Override
-
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public synchronized @Nullable BanEntry<InetAddress> addBan(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		BanEntry<InetAddress> entry = new IpBanEntryMock(
@@ -53,20 +53,20 @@ public class IpBanListMock implements org.bukkit.ban.IpBanList
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public synchronized @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		return addBan(InetAddresses.toAddrString(target), reason, expires, source);
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	public synchronized @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Instant expires, @Nullable String source)
 	{
 		Date date = expires != null ? Date.from(expires) : null;
 		return this.addBan(target, reason, date, source);
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	public synchronized @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Duration duration, @Nullable String source)
 	{
 		Instant instant = duration != null ? Instant.now().plus(duration) : null;
 		return this.addBan(target, reason, instant, source);
@@ -75,7 +75,7 @@ public class IpBanListMock implements org.bukkit.ban.IpBanList
 	@Override
 	@Deprecated(since = "1.20")
 	@SuppressWarnings("rawtypes")
-	public @NotNull Set<BanEntry> getBanEntries()
+	public synchronized @NotNull Set<BanEntry> getBanEntries()
 	{
 		ImmutableSet.Builder<BanEntry> builder = ImmutableSet.builder();
 		for (String target : bans.keySet())
@@ -90,7 +90,7 @@ public class IpBanListMock implements org.bukkit.ban.IpBanList
 	}
 
 	@Override
-	public @NotNull Set<BanEntry<InetAddress>> getEntries()
+	public synchronized @NotNull Set<BanEntry<InetAddress>> getEntries()
 	{
 		ImmutableSet.Builder<BanEntry<InetAddress>> builder = ImmutableSet.builder();
 		for (String target : bans.keySet())
@@ -105,26 +105,26 @@ public class IpBanListMock implements org.bukkit.ban.IpBanList
 	}
 
 	@Override
-	public boolean isBanned(@NotNull InetAddress target)
+	public synchronized boolean isBanned(@NotNull InetAddress target)
 	{
 		return this.bans.values().stream().anyMatch(banEntry -> banEntry.getBanTarget().equals(target));
 	}
 
 	@Override
-	public boolean isBanned(@NotNull String target)
+	public synchronized boolean isBanned(@NotNull String target)
 	{
 		return this.bans.values().stream().anyMatch(banEntry -> InetAddresses.toAddrString(banEntry.getBanTarget()).equals(target));
 	}
 
 	@Override
-	public void pardon(@NotNull InetAddress target)
+	public synchronized void pardon(@NotNull InetAddress target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.pardon(InetAddresses.toAddrString(target));
 	}
 
 	@Override
-	public void pardon(@NotNull String target)
+	public synchronized void pardon(@NotNull String target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.bans.remove(target);
