@@ -148,8 +148,14 @@ public abstract class InventoryViewMock implements InventoryView
 		int topSize = getTopInventory().getSize();
 		if (slot < 0)
 		{
-			// TODO : ???
-			throw new UnimplementedOperationException();
+			if (item != null)
+			{
+				// This should throw the item on the ground, but for that we need a location. Which is unimplemented for
+				//   now in 'topInventory'...
+				throw new UnimplementedOperationException();
+			}
+
+			return;
 		}
 
 		if (slot < topSize)
@@ -165,8 +171,7 @@ public abstract class InventoryViewMock implements InventoryView
 			return;
 		}
 
-		// TODO: ???
-		throw new UnimplementedOperationException();
+		throw new IndexOutOfBoundsException("Index " + slot + " out of bounds for length " + (topSize + getBottomInventory().getSize()));
 	}
 
 	@Override
@@ -175,8 +180,7 @@ public abstract class InventoryViewMock implements InventoryView
 		int topSize = getTopInventory().getSize();
 		if (slot < 0)
 		{
-			// TODO : ???
-			throw new UnimplementedOperationException();
+			return null;
 		}
 
 		if (slot < topSize)
@@ -190,8 +194,7 @@ public abstract class InventoryViewMock implements InventoryView
 			return getBottomInventory().getItem(slot);
 		}
 
-		// TODO: ???
-		throw new UnimplementedOperationException();
+		throw new IndexOutOfBoundsException("Index " + slot + " out of bounds for length " + (topSize + getBottomInventory().getSize()));
 	}
 
 	@Override

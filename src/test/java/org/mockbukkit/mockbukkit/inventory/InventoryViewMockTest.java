@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -10,10 +12,15 @@ import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InventoryViewMockTest
 {
@@ -120,6 +127,26 @@ class InventoryViewMockTest
 	}
 
 	@Test
+	void getItemWrongIndex_1()
+	{
+		Player player = server.addPlayer();
+		InventoryMock chest = new ChestInventoryMock(null, 9);
+		view = new PlayerInventoryViewMock(player, chest);
+
+		assertNull(view.getItem(-1));
+	}
+
+	@Test
+	void getItemWrongIndex100()
+	{
+		Player player = server.addPlayer();
+		InventoryMock chest = new ChestInventoryMock(null, 9);
+		view = new PlayerInventoryViewMock(player, chest);
+
+		assertThrows(IndexOutOfBoundsException.class, () -> view.getItem(100));
+	}
+
+	@Test
 	void getItemFromBottomInventory()
 	{
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
@@ -153,5 +180,43 @@ class InventoryViewMockTest
 		view.setItem(9, sword);
 
 		assertEquals(sword, player.getInventory().getItem(0));
+	}
+
+	@Test
+	void setItemNegativeSlot_WithNullItem()
+	{
+		Player player = server.addPlayer();
+		InventoryMock chest = new ChestInventoryMock(null, 9);
+		view = new PlayerInventoryViewMock(player, chest);
+
+		view.setItem(-1, null);
+
+		// Verify no items were dropped (since item was null) [ there can be only 1: the player ]
+		assertEquals(List.of(player), player.getWorld().getEntities());
+	}
+
+	@Test
+	void setItemNegativeSlot_WithValidItem()
+	{
+		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
+		Player player = server.addPlayer();
+		InventoryMock chest = new ChestInventoryMock(null, 9);
+		view = new PlayerInventoryViewMock(player, chest);
+
+		// see comment in setItem for more information
+		assertThrows(
+				UnimplementedOperationException.class,
+				() -> view.setItem(-1, sword));
+	}
+
+	@Test
+	void setItemWrongIndex100()
+	{
+		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
+		Player player = server.addPlayer();
+		InventoryMock chest = new ChestInventoryMock(null, 9);
+		view = new PlayerInventoryViewMock(player, chest);
+
+		assertThrows(IndexOutOfBoundsException.class, () -> view.setItem(100, sword));
 	}
 }
