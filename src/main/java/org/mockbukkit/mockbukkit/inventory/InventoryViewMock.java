@@ -148,14 +148,9 @@ public abstract class InventoryViewMock implements InventoryView
 		int topSize = getTopInventory().getSize();
 		if (slot < 0)
 		{
-			if (item != null)
-			{
-				// This should throw the item on the ground, but for that we need a location. Which is unimplemented for
-				//   now in 'topInventory'...
-				throw new UnimplementedOperationException();
-			}
-
-			return;
+			// This should throw the item on the ground, but for that we need a location. Which is unimplemented for
+			//   now in 'topInventory'...
+			throw new IndexOutOfBoundsException("Index " + slot + " out of bounds for length " + (topSize + getBottomInventory().getSize()));
 		}
 
 		if (slot < topSize)

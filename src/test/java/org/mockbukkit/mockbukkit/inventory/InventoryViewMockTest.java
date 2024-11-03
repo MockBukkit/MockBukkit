@@ -189,7 +189,9 @@ class InventoryViewMockTest
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		view = new PlayerInventoryViewMock(player, chest);
 
-		view.setItem(-1, null);
+		assertThrows(
+				IndexOutOfBoundsException.class,
+				() -> view.setItem(-1, null));
 
 		// Verify no items were dropped (since item was null) [ there can be only 1: the player ]
 		assertEquals(List.of(player), player.getWorld().getEntities());
@@ -205,8 +207,10 @@ class InventoryViewMockTest
 
 		// see comment in setItem for more information
 		assertThrows(
-				UnimplementedOperationException.class,
+				IndexOutOfBoundsException.class,
 				() -> view.setItem(-1, sword));
+
+		assertEquals(List.of(player), player.getWorld().getEntities());
 	}
 
 	@Test
