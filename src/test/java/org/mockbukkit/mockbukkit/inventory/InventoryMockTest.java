@@ -676,7 +676,7 @@ class InventoryMockTest
 		Player player = server.addPlayer();
 		final Location expectedLocation = new Location(player.getWorld(), 10, 20, 30);
 		player.teleport(expectedLocation);
-		InventoryMock inventory = new InventoryMock(player, InventoryType.PLAYER);
+		inventory = new InventoryMock(player, InventoryType.PLAYER);
 
 		assertEquals(expectedLocation, inventory.getLocation());
 	}
