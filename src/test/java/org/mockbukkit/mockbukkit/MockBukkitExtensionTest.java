@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -69,6 +68,61 @@ class MockBukkitExtensionTest
 	void test_GetOrCreateMock_ReturnsMock()
 	{
 		assertNotNull(MockBukkit.getOrCreateMock());
+	}
+
+	@Nested
+	class WithNestedClassWithoutAnnotation
+	{
+
+		@MockBukkitInject
+		private ServerMock nestedClassAnnotation;
+
+		@Test
+		void isFieldInjectedCorrectly()
+		{
+			assertNotNull(nestedClassAnnotation);
+		}
+
+		@Test
+		void isParentFieldInjectedCorrectly()
+		{
+			assertNotNull(fieldServerMock);
+		}
+
+		@Test
+		void isConstructorInjectedCorrectly()
+		{
+			assertNotNull(constructorParameterServerMock);
+		}
+
+	}
+
+	@Nested
+	@ExtendWith(MockBukkitExtension.class)
+	class WithNestedClassWithAnnotation
+	{
+
+		@MockBukkitInject
+		private ServerMock nestedClassAnnotation;
+
+		@Test
+		void isFieldInjectedCorrectly()
+		{
+			assertNotNull(nestedClassAnnotation);
+		}
+
+		@Test
+		void isParentFieldInjectedCorrectly()
+		{
+			assertNotNull(fieldServerMock);
+		}
+
+		@Test
+		void isConstructorInjectedCorrectly()
+		{
+			assertNotNull(constructorParameterServerMock);
+		}
+
 	}
 
 }
