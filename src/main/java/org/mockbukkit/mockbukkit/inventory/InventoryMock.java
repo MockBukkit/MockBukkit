@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -13,6 +13,9 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -636,8 +639,18 @@ public class InventoryMock implements Inventory
 			return entity.getLocation();
 		}
 
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		var worlds = Bukkit.getWorlds();
+		World world;
+		if (worlds.isEmpty())
+		{
+			world = MockBukkit.getMock().addSimpleWorld("world");
+		}
+		else
+		{
+			world = worlds.getFirst();
+		}
+
+		return world.getSpawnLocation();
 	}
 
 	@Override

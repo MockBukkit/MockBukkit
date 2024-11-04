@@ -146,32 +146,29 @@ public abstract class InventoryViewMock implements InventoryView
 	@Override
 	public void setItem(int slot, @Nullable ItemStack item)
 	{
-		int topSize = getTopInventory().getSize();
+		ItemStack stack = item == null ? null : item.clone();
+
 		if (slot < 0)
 		{
-			if (item != null)
+			if (stack != null)
 			{
-				Location location = bottomInventory.getLocation(); // should be the player
-				if (location != null)
-				{
-					location.getWorld().dropItemNaturally(location, item);
-					return;
-				}
+				getPlayer().getWorld().dropItemNaturally(getPlayer().getLocation(), stack);
 			}
 
-			throw new IndexOutOfBoundsException(slot);
+			return;
 		}
 
+		int topSize = getTopInventory().getSize();
 		if (slot < topSize)
 		{
-			getTopInventory().setItem(slot, item);
+			getTopInventory().setItem(slot, stack);
 			return;
 		}
 
 		slot -= topSize;
 		if (slot < getBottomInventory().getSize())
 		{
-			getBottomInventory().setItem(slot, item);
+			getBottomInventory().setItem(slot, stack);
 			return;
 		}
 

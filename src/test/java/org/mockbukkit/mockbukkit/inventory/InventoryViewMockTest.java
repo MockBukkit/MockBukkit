@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -167,6 +168,10 @@ class InventoryViewMockTest
 		view.setItem(0, sword);
 
 		assertEquals(sword, chest.getItem(0));
+
+		// Ensure it is copied
+		sword.setAmount(2);
+		assertNotEquals(sword, chest.getItem(0));
 	}
 
 	@Test
@@ -179,6 +184,10 @@ class InventoryViewMockTest
 		view.setItem(9, sword);
 
 		assertEquals(sword, player.getInventory().getItem(0));
+
+		// Ensure it is copied
+		sword.setAmount(2);
+		assertNotEquals(sword, player.getInventory().getItem(0));
 	}
 
 	@Test
@@ -187,10 +196,6 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		view = new PlayerInventoryViewMock(player, chest);
-
-		assertThrows(
-				IndexOutOfBoundsException.class,
-				() -> view.setItem(-1, null));
 
 		// Verify no items were dropped (since item was null) [ there can be only 1: the player ]
 		assertEquals(List.of(player), player.getWorld().getEntities());
@@ -209,7 +214,11 @@ class InventoryViewMockTest
 		List<Entity> entities = player.getWorld().getEntities().stream().filter(p -> !(p instanceof Player)).toList();
 		assertEquals(1, entities.size());
 		assertInstanceOf(ItemEntityMock.class, entities.getFirst());
+
 		assertEquals(sword, ((ItemEntityMock) entities.getFirst()).getItemStack());
+
+		sword.setAmount(2);
+		assertNotEquals(sword, ((ItemEntityMock) entities.getFirst()).getItemStack());
 	}
 
 	@Test

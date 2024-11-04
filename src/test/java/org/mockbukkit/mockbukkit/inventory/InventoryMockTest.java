@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
@@ -651,23 +653,36 @@ class InventoryMockTest
 	@Test
 	void getLocation_WithEntityHolder()
 	{
-		// Setup
 		Player player = server.addPlayer();
 		Location expectedLocation = new Location(player.getWorld(), 10, 20, 30);
 		player.teleport(expectedLocation);
 
-		// Test
+		inventory = new InventoryMock(player, InventoryType.CHEST);
 		Location location = inventory.getLocation();
 
-		// Verify
 		assertNotNull(location);
 		assertEquals(expectedLocation, location);
 	}
 
 	@Test
-	void getLocation()
+	void getLocation_WithoutEntityHolder_WithNoWorldCreatedYet()
 	{
-		assertThrows(UnimplementedOperationException.class, inventory::getLocation);
+		Location location = inventory.getLocation();
+
+		assertNotNull(location);
+		assertEquals(Bukkit.getWorlds().getFirst().getSpawnLocation(), location);
+	}
+
+	@Test
+	void getLocation_WithoutEntityHolder_WithWorldCreated()
+	{
+		World world = server.addSimpleWorld("world");
+		world.setSpawnLocation(1, 2, 3);
+
+		Location location = inventory.getLocation();
+
+		assertNotNull(location);
+		assertEquals(new Location(world, 1, 2, 3), location);
 	}
 
 	@Test
