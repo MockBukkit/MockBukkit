@@ -38,6 +38,7 @@ jobs:
         if: ${{ github.ref_type == 'tag' }}
         env:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          OSSRH_USER: ${{ secret.USSRH_USERNAME}}
           SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
         run: |
           mkdir -p $HOME/.gnupg
@@ -49,7 +50,7 @@ jobs:
 
           ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
             -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::') \
-            -PossrhUsername=Iu0XBMzI \
+            -PossrhUsername=$OSSRH_USER \
             -PossrhPassword=$OSSRH_PASSWORD \
             -Psigning.secretKeyRingFile=private.gpg \
             -Psigning.keyId=${{ secrets.PRIV_KEY_ID }} \
