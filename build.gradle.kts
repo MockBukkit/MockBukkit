@@ -6,7 +6,6 @@ plugins {
 	id("jacoco")
 	id("com.vanniktech.maven.publish") version "0.29.0"
 	id("net.kyori.blossom") version "2.1.0"
-	id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "org.mockbukkit.mockbukkit"
@@ -49,7 +48,6 @@ tasks {
 
 	java {
 		withSourcesJar()
-		withJavadocJar()
 	}
 
 	javadoc {
@@ -169,8 +167,11 @@ mavenPublishing {
 			url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
 		}
 	}
-	signAllPublications()
 	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+	// No key available to sign with for maven local
+	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
+		signAllPublications()
+	}
 }
 
 fun isFork(): Boolean {
