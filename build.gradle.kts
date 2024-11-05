@@ -153,6 +153,14 @@ mavenPublishing {
 				id.set("thelooter")
 				name.set("Eve Kolb")
 			}
+			developer{
+				id.set("thorinwasher")
+				name.set("Hjalmar Gunnarsson")
+				email.set("officialhjalmar.gunnarsson@outlook.com")
+			}
+			developer{
+				id.set("4everTheOne")
+			}
 		}
 		scm {
 			connection.set("scm:git:git://github.com/MockBukkit/MockBukkit.git")
