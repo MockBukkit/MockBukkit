@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -49,7 +50,9 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -462,6 +465,28 @@ class ItemMetaMockTest
 		Map<Enchantment, Integer> actual = meta.getEnchants();
 		assertEquals(1, actual.size());
 		assertEquals(3, actual.get(Enchantment.UNBREAKING));
+	}
+
+	@Test
+	void getEnchants_IsSorted(){
+		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
+		Map<Enchantment, Integer> actual = meta.getEnchants();
+
+		assertInstanceOf(SortedMap.class, actual);
+	}
+
+	@Test
+	void getEnchants_IsCopy(){
+		Map<Enchantment, Integer> actual1 = meta.getEnchants();
+		Map<Enchantment, Integer> actual2 = meta.getEnchants();
+
+		assertNotSame(actual1, actual2);
+		assertEquals(actual1, actual2);
+
+		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
+		Map<Enchantment, Integer> actual3 = meta.getEnchants();
+
+		assertNotEquals(actual1, actual3);
 	}
 
 	@Test
