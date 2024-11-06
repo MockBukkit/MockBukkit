@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSortedMap;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
@@ -40,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -701,7 +703,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchants()
 	{
-		return Collections.unmodifiableMap(enchants);
+		return enchants != null ? ImmutableSortedMap.copyOf(enchants,
+				Comparator.comparing(o -> o.getKey().toString())
+				) : ImmutableMap.of();
 	}
 
 	@Override
