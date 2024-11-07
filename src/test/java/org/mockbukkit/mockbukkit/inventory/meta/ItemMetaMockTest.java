@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.destroystokyo.paper.MaterialTags;
+import org.bukkit.Tag;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
@@ -1040,6 +1042,44 @@ class ItemMetaMockTest
 		{
 			Enum[] enums = (Enum[]) parameterType.getEnumConstants();
 			method.invoke(object, enums[enums.length - 1]);
+		}
+	}
+
+	// Copied from org.mockbukkit.mockbukkit.inventory.meta#testGetItemMetaCorrectClass
+	@Test
+	void testGetItemMetaCorrectClass()
+	{
+		assertTrue(new ItemStack(Material.DIRT).getItemMeta() instanceof ItemMetaMock);
+		assertTrue(new ItemStack(Material.PLAYER_HEAD).getItemMeta() instanceof SkullMetaMock);
+
+		assertTrue(new ItemStack(Material.WRITABLE_BOOK).getItemMeta() instanceof BookMetaMock);
+		assertTrue(new ItemStack(Material.WRITTEN_BOOK).getItemMeta() instanceof BookMetaMock);
+		assertTrue(new ItemStack(Material.ENCHANTED_BOOK).getItemMeta() instanceof EnchantmentStorageMetaMock);
+		assertTrue(new ItemStack(Material.KNOWLEDGE_BOOK).getItemMeta() instanceof KnowledgeBookMetaMock);
+
+		assertTrue(new ItemStack(Material.FIREWORK_STAR).getItemMeta() instanceof FireworkEffectMetaMock);
+		assertTrue(new ItemStack(Material.FIREWORK_ROCKET).getItemMeta() instanceof FireworkMetaMock);
+
+		assertTrue(new ItemStack(Material.SUSPICIOUS_STEW).getItemMeta() instanceof SuspiciousStewMetaMock);
+		assertTrue(new ItemStack(Material.POTION).getItemMeta() instanceof PotionMetaMock);
+		assertTrue(new ItemStack(Material.LEATHER_CHESTPLATE).getItemMeta() instanceof LeatherArmorMetaMock);
+
+		assertTrue(new ItemStack(Material.AXOLOTL_BUCKET).getItemMeta() instanceof AxolotlBucketMetaMock);
+		assertTrue(new ItemStack(Material.BUNDLE).getItemMeta() instanceof BundleMetaMock);
+		assertTrue(new ItemStack(Material.FILLED_MAP).getItemMeta() instanceof MapMetaMock);
+		assertTrue(new ItemStack(Material.COMPASS).getItemMeta() instanceof CompassMetaMock);
+		assertTrue(new ItemStack(Material.CROSSBOW).getItemMeta() instanceof CrossbowMetaMock);
+		assertTrue(new ItemStack(Material.ARMOR_STAND).getItemMeta() instanceof ArmorStandMetaMock);
+		assertTrue(new ItemStack(Material.TROPICAL_FISH_BUCKET).getItemMeta() instanceof TropicalFishBucketMetaMock);
+
+		for (Material egg : MaterialTags.SPAWN_EGGS.getValues())
+		{
+			assertTrue(new ItemStack(egg).getItemMeta() instanceof SpawnEggMetaMock);
+		}
+
+		for (Material m : Tag.ITEMS_BANNERS.getValues())
+		{
+			assertTrue(new ItemStack(m).getItemMeta() instanceof BannerMetaMock);
 		}
 	}
 
