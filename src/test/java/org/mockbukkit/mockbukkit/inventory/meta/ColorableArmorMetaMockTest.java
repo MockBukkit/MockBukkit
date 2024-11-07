@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -57,6 +58,41 @@ class ColorableArmorMetaMockTest
 		assertEquals(DEFAULT_LEATHER_COLOR, meta.getColor());
 		assertFalse(meta.isDyed());
 
+	}
+
+	@Test
+	void equal_validEmpty(){
+		ColorableArmorMeta other = new ColorableArmorMetaMock();
+
+		assertEquals(meta, other);
+	}
+
+	@Test
+	void equal_validNonEmpty(){
+		meta.setColor(color);
+
+		ColorableArmorMeta other = new ColorableArmorMetaMock();
+		other.setColor(color);
+
+		assertEquals(meta, other);
+	}
+
+	@Test
+	void equal_invalidEmpty(){
+		ColorableArmorMeta other = new ColorableArmorMetaMock();
+		other.setColor(color);
+
+		assertNotEquals(meta, other);
+	}
+
+	@Test
+	void equal_invalidNonEmpty(){
+		meta.setColor(DEFAULT_LEATHER_COLOR);
+
+		ColorableArmorMeta other = new ColorableArmorMetaMock();
+		other.setColor(color);
+
+		assertNotEquals(meta, other);
 	}
 
 	@Test

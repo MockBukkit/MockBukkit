@@ -1062,7 +1062,7 @@ class ItemMetaMockTest
 
 		assertTrue(new ItemStack(Material.SUSPICIOUS_STEW).getItemMeta() instanceof SuspiciousStewMetaMock);
 		assertTrue(new ItemStack(Material.POTION).getItemMeta() instanceof PotionMetaMock);
-		assertTrue(new ItemStack(Material.LEATHER_CHESTPLATE).getItemMeta() instanceof LeatherArmorMetaMock);
+		assertTrue(new ItemStack(Material.LEATHER_CHESTPLATE).getItemMeta() instanceof ColorableArmorMetaMock);
 
 		assertTrue(new ItemStack(Material.AXOLOTL_BUCKET).getItemMeta() instanceof AxolotlBucketMetaMock);
 		assertTrue(new ItemStack(Material.BUNDLE).getItemMeta() instanceof BundleMetaMock);

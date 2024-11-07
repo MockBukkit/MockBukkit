@@ -19,6 +19,12 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		super();
 	}
 
+	public ColorableArmorMetaMock(ColorableArmorMeta meta)
+	{
+		super(meta);
+		this.color = meta.getColor().asRGB();
+	}
+
 	@Override
 	public @NotNull Color getColor()
 	{
@@ -35,6 +41,33 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	public boolean isDyed()
 	{
 		return this.color != null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		return prime * result + getColor().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (!super.equals(obj))
+		{
+			return false;
+		}
+		if (!(obj instanceof ColorableArmorMeta other))
+		{
+			return false;
+		}
+
+		return this.isDyed() ? this.getColor().equals(other.getColor()) : !other.isDyed();
 	}
 
 	@Override

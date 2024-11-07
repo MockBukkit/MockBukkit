@@ -22,6 +22,11 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 		super();
 	}
 
+	public ArmorMetaMock(ArmorMeta meta){
+		super(meta);
+		this.trim = meta.getTrim();
+	}
+
 	@Override
 	public boolean hasTrim()
 	{

@@ -6,6 +6,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.ColorableArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CompassMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CrossbowMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.EnchantmentStorageMetaMock;
@@ -13,7 +14,6 @@ import org.mockbukkit.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
-import org.mockbukkit.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.MapMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SkullMetaMock;
@@ -65,7 +65,7 @@ class ItemFactoryMockTest
 
 		assertTrue(factory.getItemMeta(Material.SUSPICIOUS_STEW) instanceof SuspiciousStewMetaMock);
 		assertTrue(factory.getItemMeta(Material.POTION) instanceof PotionMetaMock);
-		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof LeatherArmorMetaMock);
+		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof ColorableArmorMetaMock);
 
 		assertTrue(factory.getItemMeta(Material.AXOLOTL_BUCKET) instanceof AxolotlBucketMetaMock);
 		assertTrue(factory.getItemMeta(Material.BUNDLE) instanceof BundleMetaMock);
