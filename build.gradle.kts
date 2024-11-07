@@ -150,6 +150,7 @@ mavenPublishing {
 			developer {
 				id.set("thelooter")
 				name.set("Eve Kolb")
+				email.set("me@thelooter.de")
 			}
 			developer{
 				id.set("thorinwasher")
