@@ -3,9 +3,6 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://mockbukkit.readthedocs.io/en/v1.21/?badge=v1.21">
-        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.21" />
-    </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
         <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
     </a>
@@ -270,7 +267,7 @@ If you want to see some projects that are using MockBukkit right now, feel free 
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
 already:
-https://mockbukkit.readthedocs.io/en/latest/index.html
+https://docs.mockbukkit.org
 
 ## :gift_heart: Sponsors
 
