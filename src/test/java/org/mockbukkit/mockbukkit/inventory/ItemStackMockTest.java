@@ -317,4 +317,40 @@ class ItemStackMockTest
 		int level = itemStack.getEnchantmentLevel(Enchantment.EFFICIENCY);
 		assertEquals(5, level);
 	}
+
+	@Test
+	void setItemMeta_IsCopy(){
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+
+		ItemMeta meta1 = itemStack.getItemMeta();
+		meta1.setCustomModelData(0);
+
+		itemStack.setItemMeta(meta1);
+
+		ItemMeta meta2 = itemStack.getItemMeta();
+		assertNotSame(meta1, meta2);
+		assertEquals(meta1, meta2);
+
+		meta1.setCustomModelData(42);
+		ItemMeta meta3 = itemStack.getItemMeta();
+		assertNotEquals(meta1, meta3);
+	}
+
+	@Test
+	void getItemMeta_IsCopy(){
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+
+		ItemMeta meta1 = itemStack.getItemMeta();
+		ItemMeta meta2 = itemStack.getItemMeta();
+
+		assertNotSame(meta1, meta2);
+		assertEquals(meta1, meta2);
+
+		meta1.setCustomModelData(42);
+		assertNotEquals(meta1, meta2);
+
+		ItemMeta meta3 = itemStack.getItemMeta();
+		assertNotEquals(meta1, meta3);
+	}
+
 }

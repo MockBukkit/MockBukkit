@@ -128,14 +128,14 @@ public class ItemStackMock extends ItemStack
 	public boolean setItemMeta(@org.jetbrains.annotations.Nullable ItemMeta itemMeta)
 	{
 		if (this.type == ItemTypeMock.AIR) return false;
-		this.itemMeta = itemMeta;
+		this.itemMeta = itemMeta.clone();
 		return true;
 	}
 
 	@Override
 	public ItemMeta getItemMeta()
 	{
-		return this.itemMeta;
+		return this.itemMeta != null ? this.itemMeta.clone() : null;
 	}
 
 	@Override
