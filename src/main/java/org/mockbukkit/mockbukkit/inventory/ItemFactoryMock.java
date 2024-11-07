@@ -9,7 +9,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.BookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CompassMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CrossbowMetaMock;
-import org.mockbukkit.mockbukkit.inventory.meta.EnchantedBookMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.EnchantmentStorageMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
@@ -71,7 +71,7 @@ public class ItemFactoryMock implements ItemFactory
 		{
 			case ARMOR_STAND -> ArmorStandMetaMock.class;
 			case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
-			case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
+			case ENCHANTED_BOOK -> EnchantmentStorageMetaMock.class;
 			case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
 			case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS -> LeatherArmorMetaMock.class;
 			case FILLED_MAP -> MapMetaMock.class;

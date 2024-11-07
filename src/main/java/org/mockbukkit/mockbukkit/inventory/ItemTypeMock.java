@@ -95,7 +95,6 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				if (
 						metaClassAsString.equals("BlockStateMeta")
 								|| metaClassAsString.equals("BlockDataMeta")
-								|| metaClassAsString.equals("EnchantmentStorageMeta")
 								|| metaClassAsString.equals("MusicInstrumentMeta")
 				)
 				{

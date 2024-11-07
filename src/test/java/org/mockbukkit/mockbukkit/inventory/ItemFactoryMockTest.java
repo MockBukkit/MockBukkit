@@ -8,7 +8,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.BookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CompassMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CrossbowMetaMock;
-import org.mockbukkit.mockbukkit.inventory.meta.EnchantedBookMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.EnchantmentStorageMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
@@ -57,7 +57,7 @@ class ItemFactoryMockTest
 
 		assertTrue(factory.getItemMeta(Material.WRITABLE_BOOK) instanceof BookMetaMock);
 		assertTrue(factory.getItemMeta(Material.WRITTEN_BOOK) instanceof BookMetaMock);
-		assertTrue(factory.getItemMeta(Material.ENCHANTED_BOOK) instanceof EnchantedBookMetaMock);
+		assertTrue(factory.getItemMeta(Material.ENCHANTED_BOOK) instanceof EnchantmentStorageMetaMock);
 		assertTrue(factory.getItemMeta(Material.KNOWLEDGE_BOOK) instanceof KnowledgeBookMetaMock);
 
 		assertTrue(factory.getItemMeta(Material.FIREWORK_STAR) instanceof FireworkEffectMetaMock);

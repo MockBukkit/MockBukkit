@@ -15,25 +15,25 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
-public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentStorageMeta
+public class EnchantmentStorageMetaMock extends ItemMetaMock implements EnchantmentStorageMeta
 {
 
 	private @NotNull Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
 
 	/**
-	 * Constructs a new {@link EnchantedBookMetaMock}.
+	 * Constructs a new {@link EnchantmentStorageMetaMock}.
 	 */
-	public EnchantedBookMetaMock()
+	public EnchantmentStorageMetaMock()
 	{
 		super();
 	}
 
 	/**
-	 * Constructs a new {@link EnchantedBookMetaMock}, cloning the data from another.
+	 * Constructs a new {@link EnchantmentStorageMetaMock}, cloning the data from another.
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public EnchantedBookMetaMock(@NotNull EnchantmentStorageMeta meta)
+	public EnchantmentStorageMetaMock(@NotNull EnchantmentStorageMeta meta)
 	{
 		super(meta);
 
@@ -59,7 +59,7 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 		{
 			return false;
 		}
-		if (!(obj instanceof EnchantedBookMetaMock other))
+		if (!(obj instanceof EnchantmentStorageMetaMock other))
 		{
 			return false;
 		}
@@ -67,9 +67,9 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	}
 
 	@Override
-	public @NotNull EnchantedBookMetaMock clone()
+	public @NotNull EnchantmentStorageMetaMock clone()
 	{
-		EnchantedBookMetaMock mock = (EnchantedBookMetaMock) super.clone();
+		EnchantmentStorageMetaMock mock = (EnchantmentStorageMetaMock) super.clone();
 		mock.storedEnchantments = new HashMap<>(storedEnchantments);
 		return mock;
 	}
@@ -140,12 +140,12 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized EnchantedBookMetaMock object in a Map&lt;String, Object&gt; format.
-	 * @return A new instance of the EnchantedBookMetaMock class.
+	 * @param args A serialized EnchantmentStorageMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the EnchantmentStorageMetaMock class.
 	 */
-	public static @NotNull EnchantedBookMetaMock deserialize(@NotNull Map<String, Object> args)
+	public static @NotNull EnchantmentStorageMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
-		EnchantedBookMetaMock serialMock = new EnchantedBookMetaMock();
+		EnchantmentStorageMetaMock serialMock = new EnchantmentStorageMetaMock();
 		serialMock.deserializeInternal(args);
 		if (args.containsKey("stored-enchantments"))
 		{
@@ -157,10 +157,10 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	}
 
 	/**
-	 * Serializes the properties of an EnchantedBookMetaMock to a HashMap.
+	 * Serializes the properties of an EnchantmentStorageMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the EnchantedBookMetaMock.
+	 * @return A HashMap of String, Object pairs representing the EnchantmentStorageMetaMock.
 	 */
 	@Override
 	public @NotNull Map<String, Object> serialize()
