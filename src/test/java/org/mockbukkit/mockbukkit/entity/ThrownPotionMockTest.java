@@ -104,7 +104,10 @@ class ThrownPotionMockTest
 
 		@NotNull PotionMeta actual = potion.getPotionMeta();
 		assertNotNull(actual);
-		assertEquals(actual, potion.getPotionMeta());
+
+		PotionMeta other = potion.getPotionMeta();
+		assertNotSame(actual, other);
+		assertEquals(actual, other);
 	}
 
 	@Test
