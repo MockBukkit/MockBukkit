@@ -34,4 +34,3 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.OSSRH_TOKEN }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.KEY_PASS }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.PRIV_KEY }}
-          REWRITE_VERSION: ${{ github.event.release.tag_name }}
