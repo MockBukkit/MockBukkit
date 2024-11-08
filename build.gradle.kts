@@ -1,12 +1,11 @@
 import java.io.ByteArrayOutputStream
+import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
 	id("java-library")
 	id("jacoco")
-	id("maven-publish")
-	id("signing")
+	id("com.vanniktech.maven.publish") version "0.29.0"
 	id("net.kyori.blossom") version "2.1.0"
-	id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "org.mockbukkit.mockbukkit"
@@ -49,7 +48,6 @@ tasks {
 
 	java {
 		withSourcesJar()
-		withJavadocJar()
 	}
 
 	javadoc {
@@ -122,61 +120,59 @@ java {
 	}
 }
 
-signing {
-	isRequired = !isFork() && isAction()
-	sign(publishing.publications)
-}
+mavenPublishing {
+	coordinates(project.group.toString(), "mockbukkit-v${property("paper.api.version")}", project.version.toString())
 
-nexusPublishing {
-	this.repositories {
-		sonatype {
-			username.set(findProperty("ossrhUsername") as String?)
-			password.set(findProperty("ossrhPassword") as String?)
-		}
-	}
-}
-
-publishing {
-	publications {
-		create<MavenPublication>("maven") {
-			artifactId = "mockbukkit-v${property("paper.api.version")}"
-			from(components.getByName("java"))
-			pom {
-				name.set("MockBukkit-v${property("paper.api.version")}")
-				description.set("MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
-				url.set("https://github.com/MockBukkit/MockBukkit")
-				scm {
-					connection.set("scm:git:git://github.com/MockBukkit/MockBukkit.git")
-					developerConnection.set("scm:git:ssh://github.com:MockBukkit/MockBukkit.git")
-					url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
-				}
-				licenses {
-					license {
-						name.set("MIT License")
-						url.set("https://github.com/MockBukkit/MockBukkit/blob/v${property("paper.api.version")}/LICENSE")
-					}
-				}
-				developers {
-					developer {
-						id.set("seeseemelk")
-						name.set("Sebastiaan de Schaetzen")
-						email.set("sebastiaan.de.schaetzen@gmail.com")
-					}
-					developer {
-						id.set("thebusybiscuit")
-						name.set("TheBusyBiscuit")
-					}
-					developer {
-						id.set("insprill")
-						name.set("Pierce Thompson")
-					}
-					developer {
-						id.set("thelooter")
-						name.set("Eve Kolb")
-					}
-				}
+	pom {
+		description.set("MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
+		name.set("MockBukkit-v${property("paper.api.version")}")
+		url.set("https://github.com/MockBukkit/MockBukkit")
+		licenses {
+			license {
+				name.set("MIT License")
+				url.set("https://github.com/MockBukkit/MockBukkit/blob/v${property("paper.api.version")}/LICENSE")
 			}
 		}
+		developers {
+			developer {
+				id.set("seeseemelk")
+				name.set("Sebastiaan de Schaetzen")
+				email.set("sebastiaan.de.schaetzen@gmail.com")
+			}
+			developer {
+				id.set("thebusybiscuit")
+				name.set("TheBusyBiscuit")
+			}
+			developer {
+				id.set("insprill")
+				name.set("Pierce Thompson")
+				email.set("pierce@insprill.net")
+			}
+			developer {
+				id.set("thelooter")
+				name.set("Eve Kolb")
+				email.set("me@thelooter.de")
+			}
+			developer{
+				id.set("thorinwasher")
+				name.set("Hjalmar Gunnarsson")
+				email.set("officialhjalmar.gunnarsson@outlook.com")
+			}
+			developer{
+				id.set("4everTheOne")
+				name.set("Afonso Oliveira")
+			}
+		}
+		scm {
+			connection.set("scm:git:git://github.com/MockBukkit/MockBukkit.git")
+			developerConnection.set("scm:git:ssh://github.com:MockBukkit/MockBukkit.git")
+			url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
+		}
+	}
+	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+	// No key available to sign with for maven local
+	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
+		signAllPublications()
 	}
 }
 

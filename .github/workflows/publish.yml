@@ -26,31 +26,11 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test
 
-      - name: Store Private key
-        uses: DamianReeves/write-file-action@v1.3
-        if: ${{ github.ref_type == 'tag' }}
-        with:
-          path: private.key
-          contents: ${{ secrets.PRIV_KEY }}
-          write-mode: overwrite
-
       - name: Publish
         if: ${{ github.ref_type == 'tag' }}
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::')
         env:
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
-        run: |
-          mkdir -p $HOME/.gnupg
-          echo use-agent >> $HOME/.gnupg/gpg.conf
-          echo pinentry-mode loopback >> $HOME/.gnupg/gpg.conf
-          echo allow-loopback-pinentry >> $HOME/.gnupg/gpg-agent.conf
-          gpg --batch --import private.key
-          gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
-
-          ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
-            -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::') \
-            -PossrhUsername=Iu0XBMzI \
-            -PossrhPassword=$OSSRH_PASSWORD \
-            -Psigning.secretKeyRingFile=private.gpg \
-            -Psigning.keyId=${{ secrets.PRIV_KEY_ID }} \
-            -Psigning.password=$SIGN_KEY
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.OSSRH_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.OSSRH_TOKEN }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.KEY_PASS }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.PRIV_KEY }}
