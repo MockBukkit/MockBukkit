@@ -81,7 +81,7 @@ public class ItemStackMock extends ItemStack
 		{
 			return -1;
 		}
-		return type.getMaxDurability();
+		return 0;
 	}
 
 	@Override
