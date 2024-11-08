@@ -59,6 +59,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher.hasAnyLore;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher.hasNoLore;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.doesNotHaveLore;
@@ -562,6 +563,9 @@ class ItemMetaMockTest
 	@Test
 	void testDamageCorrectlySet()
 	{
+		assertFalse(meta.hasDamageValue());
+		assertFalse(meta.hasDamage());
+
 		int value = 500;
 		meta.setDamage(value);
 		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
@@ -571,12 +575,16 @@ class ItemMetaMockTest
 		int damage = itemMeta.getDamage();
 		assertEquals(value, damage);
 		assertTrue(itemMeta.hasDamage());
+		assertTrue(itemMeta.hasDamageValue());
 	}
 
 	@Test
 	void testNoDamage()
 	{
 		meta.setDamage(0);
+		assertFalse(meta.hasDamage());
+		assertTrue(meta.hasDamageValue());
+
 		ItemStack item = new ItemStackMock(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
@@ -584,6 +592,30 @@ class ItemMetaMockTest
 		int damage = itemMeta.getDamage();
 		assertEquals(0, damage);
 		assertFalse(itemMeta.hasDamage());
+		assertFalse(itemMeta.hasDamageValue());
+	}
+
+	@Test
+	void testNegativeDamageFail(){
+		try {
+			meta.setDamage(-1);
+			fail("Negative damage could be set");
+		} catch (IllegalStateException e){
+			// Good scenario
+		}
+	}
+
+	@Test
+	void testResetDamage(){
+		meta.setDamage(1);
+
+		assertTrue(meta.hasDamageValue());
+		assertTrue(meta.hasDamage());
+
+		meta.resetDamage();
+
+		assertFalse(meta.hasDamageValue());
+		assertFalse(meta.hasDamage());
 	}
 
 	@Test

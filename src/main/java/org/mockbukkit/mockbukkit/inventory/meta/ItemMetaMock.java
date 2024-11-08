@@ -65,7 +65,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable String displayName = null;
 	private @Nullable String localizedName = null;
 	private @Nullable List<String> lore = null;
-	private int damage = 0;
+	private @Nullable Integer damage = null;
 	private int repairCost = 0;
 	private @Nullable Map<Enchantment, Integer> enchants = new HashMap<>();
 	private Multimap<Attribute, AttributeModifier> attributeModifiers;
@@ -114,7 +114,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (meta instanceof Damageable d)
 		{
-			this.damage = d.getDamage();
+			this.damage = d.hasDamageValue() ? d.getDamage() : null;
 			this.maxDamage = d.hasMaxDamage() ? d.getMaxDamage() : null;
 		}
 		if (meta instanceof Repairable r)
@@ -268,7 +268,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		result = prime * result + (!persistentDataContainer.isEmpty() ? persistentDataContainer.hashCode() : 0);
 		result = prime * result + (hideFlags.isEmpty() ? 0 : hideFlags.hashCode());
 		result = prime * result + Boolean.hashCode(unbreakable);
-		result = prime * result + (hasDamage() ? this.damage : 0);
+		result = prime * result + (this.damage == null ? 0 : this.damage);
 		return result;
 	}
 
@@ -600,7 +600,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("repair-cost", this.repairCost);
 		map.put("ItemFlags", this.hideFlags);
 		map.put("Unbreakable", this.unbreakable);
-		map.put("Damage", this.damage);
+		if(this.damage != null){
+			map.put("Damage", this.damage);
+		}
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
@@ -655,7 +657,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		customModelData = (Integer) args.get("custom-model-data");
 		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
 		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		damage = (int) args.get("Damage");
+		damage = (Integer) args.get("Damage");
 		repairCost = (int) args.get("repair-cost");
 		destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
 		placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
@@ -792,33 +794,32 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasDamage()
 	{
-		return damage > 0;
+		return damage != null && damage > 0;
 	}
 
 	@Override
 	public int getDamage()
 	{
-		return damage;
+		return damage == null ? 0 : damage;
 	}
 
 	@Override
 	public void setDamage(int damage)
 	{
+		Preconditions.checkState(damage >= 0, "damage cannot be negative");
 		this.damage = damage;
 	}
 
 	@Override
 	public boolean hasDamageValue()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return damage != null;
 	}
 
 	@Override
 	public void resetDamage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.damage = null;
 	}
 
 	@Override
