@@ -159,7 +159,7 @@ mavenPublishing {
 			}
 			developer{
 				id.set("4everTheOne")
-				name.set("Afonso")
+				name.set("Afonso Oliveira")
 			}
 		}
 		scm {
