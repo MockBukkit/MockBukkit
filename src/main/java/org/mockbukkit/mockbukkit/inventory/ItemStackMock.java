@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.inventory.meta.Damageable;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import com.google.common.base.Preconditions;
@@ -129,6 +130,14 @@ public class ItemStackMock extends ItemStack
 	{
 		if (this.type == ItemTypeMock.AIR) return false;
 		this.itemMeta = itemMeta.clone();
+		if(this.itemMeta instanceof Damageable damageable){
+			if(!damageable.hasDamageValue()){
+				durability = initDurability(this.type);
+			}else{
+				short value = (short) Math.min(Short.MAX_VALUE, damageable.getDamage());
+				setDurability(value);
+			}
+		}
 		return true;
 	}
 
@@ -162,6 +171,13 @@ public class ItemStackMock extends ItemStack
 	public void setDurability(short durability)
 	{
 		this.durability = (short) Math.min(Math.max(durability, 0), this.type.getMaxDurability());
+		if(this.itemMeta != null && (this.itemMeta instanceof Damageable damageable)){
+			if(this.durability == 0){
+				damageable.resetDamage();
+			}else{
+				damageable.setDamage(this.durability);
+			}
+		}
 	}
 
 	@Override
@@ -214,8 +230,8 @@ public class ItemStackMock extends ItemStack
 		ItemStackMock clone = new ItemStackMock(this.type);
 
 		clone.setAmount(this.amount);
+		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta);
 		clone.durability = this.durability;
-		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
 		return clone;
 	}
 

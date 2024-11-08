@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.inventory.meta.Damageable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -354,6 +355,101 @@ class ItemStackMockTest
 	}
 
 	@Test
+	void getItemMeta_DamageEmpty(){
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		ItemMeta meta = itemStack.getItemMeta();
+
+		assertTrue(meta instanceof Damageable);
+
+		Damageable damageable = (Damageable) meta;
+		assertEquals(itemStack.getDurability(), damageable.getDamage());
+		assertFalse(damageable.hasDamage());
+		assertFalse(damageable.hasDamageValue());
+	}
+
+	@Test
+	void setDurability_ZeroMetaDamageEqual(){
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		itemStack.setDurability((short) 0);
+		ItemMeta meta = itemStack.getItemMeta();
+
+		assertTrue(meta instanceof Damageable);
+		Damageable damageable = (Damageable) meta;
+
+		assertEquals(itemStack.getDurability(), damageable.getDamage());
+		assertFalse(damageable.hasDamage());
+		assertFalse(damageable.hasDamageValue());
+	}
+
+	@Test
+	void setDurability_NonZeroMetaDamageEqual(){
+		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		itemStack.setDurability((short) 1);
+		ItemMeta meta = itemStack.getItemMeta();
+
+		assertTrue(meta instanceof Damageable);
+		Damageable damageable = (Damageable) meta;
+
+		assertEquals(itemStack.getDurability(), damageable.getDamage());
+		assertTrue(damageable.hasDamage());
+		assertTrue(damageable.hasDamageValue());
+	}
+
+	@Test
+	void setDamage_ZeroItemDurabilityEqual(){
+		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemMeta meta = itemStack.getItemMeta();
+
+		assertTrue(meta instanceof Damageable);
+		Damageable damageable = (Damageable) meta;
+		damageable.setDamage(0);
+
+		assertFalse(damageable.hasDamage());
+		assertTrue(damageable.hasDamageValue());
+
+		itemStack.setItemMeta(meta);
+		assertEquals(0, itemStack.getDurability());
+		assertEquals(base, itemStack);
+
+		// Check new meta has no damage value
+		meta = itemStack.getItemMeta();
+		assertTrue(meta instanceof Damageable);
+		damageable = (Damageable) meta;
+
+		assertEquals(0, damageable.getDamage());
+		assertFalse(damageable.hasDamage());
+		assertFalse(damageable.hasDamageValue());
+	}
+
+	@Test
+	void setDamage_NonZeroItemDurabilityEqual(){
+		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemMeta meta = itemStack.getItemMeta();
+
+		assertTrue(meta instanceof Damageable);
+		Damageable damageable = (Damageable) meta;
+		damageable.setDamage(1);
+
+		assertTrue(damageable.hasDamage());
+		assertTrue(damageable.hasDamageValue());
+
+		itemStack.setItemMeta(meta);
+		assertEquals(1, itemStack.getDurability());
+		assertNotEquals(base, itemStack);
+
+		// Check new meta has damage value
+		meta = itemStack.getItemMeta();
+		assertTrue(meta instanceof Damageable);
+		damageable = (Damageable) meta;
+
+		assertEquals(1, itemStack.getDurability());
+		assertTrue(damageable.hasDamage());
+		assertTrue(damageable.hasDamageValue());
+	}
+
+	@Test
 	void getDurability_OnAir(){
 		ItemStackMock itemStack = new ItemStackMock(Material.AIR);
 		ItemStack cloned = itemStack.clone();
@@ -364,7 +460,6 @@ class ItemStackMockTest
 		itemStack.setDurability((short) 1);
 		assertEquals(-1, itemStack.getDurability());
 		assertEquals(itemStack.hashCode(), cloned.hashCode());
-
 	}
 
 }
