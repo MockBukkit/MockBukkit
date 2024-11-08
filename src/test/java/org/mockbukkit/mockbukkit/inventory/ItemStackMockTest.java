@@ -353,4 +353,18 @@ class ItemStackMockTest
 		assertNotEquals(meta1, meta3);
 	}
 
+	@Test
+	void getDurability_OnAir(){
+		ItemStackMock itemStack = new ItemStackMock(Material.AIR);
+		ItemStack cloned = itemStack.clone();
+
+		assertEquals(-1, itemStack.getDurability());
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+
+		itemStack.setDurability((short) 1);
+		assertEquals(-1, itemStack.getDurability());
+		assertEquals(itemStack.hashCode(), cloned.hashCode());
+
+	}
+
 }

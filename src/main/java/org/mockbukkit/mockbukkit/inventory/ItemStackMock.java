@@ -153,6 +153,8 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public short getDurability()
 	{
+		if(this.type == ItemType.AIR) return -1;
+
 		return (short) Math.max(this.durability, 0);
 	}
 
