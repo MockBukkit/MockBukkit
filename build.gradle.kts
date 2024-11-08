@@ -146,6 +146,7 @@ mavenPublishing {
 			developer {
 				id.set("insprill")
 				name.set("Pierce Thompson")
+				email.set("pierce@insprill.net")
 			}
 			developer {
 				id.set("thelooter")
