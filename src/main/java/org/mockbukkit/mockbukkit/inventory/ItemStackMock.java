@@ -239,7 +239,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int hashCode()
 	{
-		if (type == ItemType.AIR)
+		if (type == ItemType.AIR && this != EMPTY)
 		{
 			return EMPTY.hashCode();
 		}
