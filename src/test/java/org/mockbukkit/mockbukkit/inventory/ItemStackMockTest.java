@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.meta.Damageable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -271,7 +272,7 @@ class ItemStackMockTest
 		Matcher matcher = CLASS_NAME_RE.matcher(metaClassString);
 		if (matcher.find())
 		{
-			return List.of("BlockStateMeta", "BlockDataMeta", "EnchantmentStorageMeta", "MusicInstrumentMeta").contains(matcher.group());
+			return List.of("BlockStateMeta", "BlockDataMeta", "MusicInstrumentMeta").contains(matcher.group());
 		}
 		else
 		{
@@ -460,6 +461,82 @@ class ItemStackMockTest
 		itemStack.setDurability((short) 1);
 		assertEquals(-1, itemStack.getDurability());
 		assertEquals(itemStack.hashCode(), cloned.hashCode());
+	}
+
+	@Test
+	void setType_ChangeDurability(){
+		ItemStack base = new ItemStack(Material.DIAMOND);
+		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		itm.setDurability((short) 1);
+		itm.setType(Material.DIAMOND);
+
+		assertEquals(0, itm.getDurability());
+		assertNotEquals(base, itm);
+	}
+
+	@Test
+	void setType_AirChangeDurability(){
+		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		itm.setDurability((short) 1);
+		itm.setType(Material.AIR);
+		itm.setType(Material.DIAMOND_PICKAXE);
+
+		assertEquals(0, itm.getDurability());
+		assertEquals(base, itm);
+	}
+
+	@Test
+	void setType_DurabilityUnsetFromSetting(){
+		ItemStack base = new ItemStack(Material.DIAMOND);
+		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		itm.setDurability((short) 0);
+		itm.setType(Material.DIAMOND);
+
+		assertEquals(0, itm.getDurability());
+		assertEquals(base, itm);
+	}
+
+	@Test
+	void setType_DurabilitySetFromSetting(){
+		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemStack itm = new ItemStack(Material.DIAMOND);
+
+		itm.setType(Material.DIAMOND_PICKAXE);
+
+		assertEquals(0, itm.getDurability());
+		assertEquals(base, itm);
+	}
+
+	@Test
+	void setType_switchMeta(){
+		ItemStack itm = new ItemStack(Material.DIAMOND_CHESTPLATE);
+
+		ItemMeta meta = itm.getItemMeta();
+		meta.setDisplayName("a");
+		itm.setItemMeta(meta);
+
+		itm.setType(Material.ENCHANTED_BOOK);
+		ItemMeta meta2 = itm.getItemMeta();
+
+		assertNotEquals(meta2, meta);
+		meta2 = Bukkit.getItemFactory().asMetaFor(meta2, Material.DIAMOND_CHESTPLATE);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void setItemMeta_setNull(){
+		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
+		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		itm.setDurability((short) 1);
+		itm.setItemMeta(null);
+
+		assertEquals(0, itm.getDurability());
+		assertEquals(base, itm);
 	}
 
 }

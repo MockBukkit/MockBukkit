@@ -92,12 +92,29 @@ public class ItemStackMock extends ItemStack
 		{
 			this.type = ItemType.AIR;
 			this.itemMeta = null;
+			this.durability = initDurability(this.type);
 			return;
 		}
 		if (type != this.type.asMaterial())
 		{
 			this.type = type.asItemType();
-			this.itemMeta = findItemMeta(type);
+			if(this.itemMeta == null)
+			{
+				this.itemMeta = findItemMeta(type);
+			}
+			else
+			{
+				this.itemMeta = Bukkit.getItemFactory().asMetaFor(this.itemMeta, type);
+			}
+			if(this.durability == 0)
+			{
+				this.durability = initDurability(this.type);
+				((Damageable)this.itemMeta).resetDamage();
+			}
+			else
+			{
+				setDurability(this.durability);
+			}
 		}
 	}
 
@@ -128,12 +145,28 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean setItemMeta(@org.jetbrains.annotations.Nullable ItemMeta itemMeta)
 	{
-		if (this.type == ItemTypeMock.AIR) return false;
-		this.itemMeta = itemMeta.clone();
+		if(itemMeta == null)
+		{
+			this.itemMeta = findItemMeta(getType());
+			this.durability = initDurability(this.type);
+			return true;
+		}
+		if (!Bukkit.getItemFactory().isApplicable(itemMeta, this))
+		{
+			return false;
+		}
+
+		itemMeta = Bukkit.getItemFactory().asMetaFor(itemMeta, this);
+		if(itemMeta == null) return true;
+		this.itemMeta = itemMeta;
+
 		if(this.itemMeta instanceof Damageable damageable){
-			if(!damageable.hasDamageValue()){
+			if(!damageable.hasDamageValue())
+			{
 				durability = initDurability(this.type);
-			}else{
+			}
+			else
+			{
 				short value = (short) Math.min(Short.MAX_VALUE, damageable.getDamage());
 				setDurability(value);
 			}
