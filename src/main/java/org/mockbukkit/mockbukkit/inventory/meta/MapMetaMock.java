@@ -1,11 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Color;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -40,24 +41,27 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public MapMetaMock(@NotNull MapMeta meta)
+	public MapMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		if (meta.hasMapId())
+		if(meta instanceof MapMeta mapMeta)
 		{
-			this.mapId = meta.getMapId();
-		}
-		this.mapView = meta.getMapView();
-		this.color = meta.getColor();
-		if (meta instanceof MapMetaMock metaMock)
-		{
-			this.scaling = metaMock.scaling;
-		}
-		else
-		{
-			if (meta.isScaling()) this.scaling = SCALING_TRUE;
-			else this.scaling = SCALING_FALSE;
+			if (mapMeta.hasMapId())
+			{
+				this.mapId = mapMeta.getMapId();
+			}
+			this.mapView = mapMeta.getMapView();
+			this.color = mapMeta.getColor();
+			if (mapMeta instanceof MapMetaMock metaMock)
+			{
+				this.scaling = metaMock.scaling;
+			}
+			else
+			{
+				if (mapMeta.isScaling()) this.scaling = SCALING_TRUE;
+				else this.scaling = SCALING_FALSE;
+			}
 		}
 	}
 

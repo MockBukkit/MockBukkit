@@ -1,7 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.DyeColor;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.ShieldMeta;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -10,6 +12,29 @@ public class ShieldMetaMock extends BannerMetaMock implements ShieldMeta
 {
 
 	private DyeColor color;
+
+	/**
+	 * Constructs a new {@link ShieldMetaMock}.
+	 */
+	public ShieldMetaMock()
+	{
+		super();
+	}
+
+	/**
+	 * Constructs a new {@link ShieldMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
+	public ShieldMetaMock(@NotNull ItemMeta meta)
+	{
+		super();
+
+		if(meta instanceof ShieldMeta shieldMeta)
+		{
+			this.color = shieldMeta.getBaseColor();
+		}
+	}
 
 	@Override
 	public @Nullable DyeColor getBaseColor()

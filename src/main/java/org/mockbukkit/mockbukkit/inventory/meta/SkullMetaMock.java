@@ -1,15 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Map;
@@ -41,11 +42,14 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public SkullMetaMock(@NotNull SkullMeta meta)
+	public SkullMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.playerProfile = meta.getPlayerProfile();
+		if(meta instanceof SkullMeta skullMeta)
+		{
+			this.playerProfile = skullMeta.getPlayerProfile();
+		}
 	}
 
 	@Override

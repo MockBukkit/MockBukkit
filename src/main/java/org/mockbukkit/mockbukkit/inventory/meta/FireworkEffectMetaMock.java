@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,11 +32,14 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public FireworkEffectMetaMock(@NotNull FireworkEffectMeta meta)
+	public FireworkEffectMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.effect = meta.getEffect();
+		if(meta instanceof FireworkEffectMeta fireworkEffectMeta)
+		{
+			this.effect = fireworkEffectMeta.getEffect();
+		}
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,9 +13,26 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	private Integer amplifier;
 	private static final String AMPLIFIER_KEY = "amplifier";
 
+	/**
+	 * Constructs a new {@link OminousBottleMetaMock}.
+	 */
 	public OminousBottleMetaMock()
 	{
 		super();
+	}
+
+	/**
+	 * Constructs a new {@link OminousBottleMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
+	public OminousBottleMetaMock(ItemMeta meta)
+	{
+		super(meta);
+
+		if(meta instanceof OminousBottleMeta bottleMeta){
+			this.amplifier = bottleMeta.hasAmplifier() ? bottleMeta.getAmplifier() : null;
+		}
 	}
 
 	@Override

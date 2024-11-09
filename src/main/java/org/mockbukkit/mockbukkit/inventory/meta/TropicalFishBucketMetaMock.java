@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.TropicalFish;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,18 +34,20 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public TropicalFishBucketMetaMock(@NotNull TropicalFishBucketMeta meta)
+	public TropicalFishBucketMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		if (meta instanceof TropicalFishBucketMetaMock mock)
+		if(meta instanceof TropicalFishBucketMeta bucketMeta)
 		{
-			mock.checkVars();
+			if (meta instanceof TropicalFishBucketMetaMock mock)
+			{
+				mock.checkVars();
+			}
+			this.patternColor = bucketMeta.getPatternColor();
+			this.bodyColor = bucketMeta.getBodyColor();
+			this.pattern = bucketMeta.getPattern();
 		}
-
-		this.patternColor = meta.getPatternColor();
-		this.bodyColor = meta.getBodyColor();
-		this.pattern = meta.getPattern();
 	}
 
 	/**

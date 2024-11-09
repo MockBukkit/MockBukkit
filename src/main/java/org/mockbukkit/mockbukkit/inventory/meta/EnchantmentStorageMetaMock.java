@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -33,11 +34,14 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public EnchantmentStorageMetaMock(@NotNull EnchantmentStorageMeta meta)
+	public EnchantmentStorageMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.storedEnchantments = new HashMap<>(meta.getStoredEnchants());
+		if(meta instanceof EnchantmentStorageMeta enchantMeta)
+		{
+			this.storedEnchantments = new HashMap<>(enchantMeta.getStoredEnchants());
+		}
 	}
 
 	@Override

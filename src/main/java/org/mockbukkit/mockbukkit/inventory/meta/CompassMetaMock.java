@@ -1,11 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -34,12 +35,15 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public CompassMetaMock(@NotNull CompassMeta meta)
+	public CompassMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.lodestone = meta.getLodestone();
-		this.tracked = meta.isLodestoneTracked();
+		if(meta instanceof CompassMeta compass)
+		{
+			this.lodestone = compass.getLodestone();
+			this.tracked = compass.isLodestoneTracked();
+		}
 	}
 
 	@Override

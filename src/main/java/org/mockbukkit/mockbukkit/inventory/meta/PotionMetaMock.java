@@ -1,11 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.potion.PotionUtils;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -13,6 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.potion.PotionUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,13 +46,16 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public PotionMetaMock(@NotNull PotionMeta meta)
+	public PotionMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.effects = new ArrayList<>(meta.getCustomEffects());
-		this.type = meta.getBasePotionType();
-		this.color = meta.getColor();
+		if(meta instanceof PotionMeta potionMeta)
+		{
+			this.effects = new ArrayList<>(potionMeta.getCustomEffects());
+			this.type = potionMeta.getBasePotionType();
+			this.color = potionMeta.getColor();
+		}
 	}
 
 	@Override

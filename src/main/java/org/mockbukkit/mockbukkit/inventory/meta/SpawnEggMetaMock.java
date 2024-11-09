@@ -1,11 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Map;
 
@@ -30,9 +31,13 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public SpawnEggMetaMock(@NotNull SpawnEggMeta meta)
+	public SpawnEggMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
+		if(meta instanceof SpawnEggMeta spawnMeta)
+		{
+			// TODO cloning logic from spawnMeta
+		}
 	}
 
 	@Override

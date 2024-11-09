@@ -1,12 +1,13 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
 
 	/**
-	 * Constructs a new {@link ArmorStandMetaMock}.
+	 * Constructs a new {@link SuspiciousStewMetaMock}.
 	 */
 	public SuspiciousStewMetaMock()
 	{
@@ -32,15 +33,18 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	/**
-	 * Constructs a new {@link ArmorStandMetaMock}, cloning the data from another.
+	 * Constructs a new {@link SuspiciousStewMetaMock}, cloning the data from another.
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public SuspiciousStewMetaMock(@NotNull SuspiciousStewMeta meta)
+	public SuspiciousStewMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.effects = new ArrayList<>(meta.getCustomEffects());
+		if(meta instanceof SuspiciousStewMeta stewMeta)
+		{
+			this.effects = new ArrayList<>(stewMeta.getCustomEffects());
+		}
 	}
 
 	@Override

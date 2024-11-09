@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -29,11 +30,14 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public AxolotlBucketMetaMock(@NotNull AxolotlBucketMeta meta)
+	public AxolotlBucketMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.variant = meta.getVariant();
+		if(meta instanceof AxolotlBucketMeta bucketMeta)
+		{
+			variant = bucketMeta.getVariant();
+		}
 	}
 
 	@Override

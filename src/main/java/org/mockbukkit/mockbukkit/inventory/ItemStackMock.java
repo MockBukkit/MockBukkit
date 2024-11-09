@@ -88,7 +88,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public void setType(@NotNull Material type)
 	{
-		if (!type.isItem())
+		if (!type.isItem() || type.isAir())
 		{
 			this.type = ItemType.AIR;
 			this.itemMeta = null;

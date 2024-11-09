@@ -2,6 +2,8 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,15 +16,27 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 
 	static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
 
+	/**
+	 * Constructs a new {@link ColorableArmorMetaMock}.
+	 */
 	public ColorableArmorMetaMock()
 	{
 		super();
 	}
 
-	public ColorableArmorMetaMock(ColorableArmorMeta meta)
+	/**
+	 * Constructs a new {@link ColorableArmorMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
+	public ColorableArmorMetaMock(ItemMeta meta)
 	{
 		super(meta);
-		this.color = meta.getColor().asRGB();
+
+		if(meta instanceof LeatherArmorMeta leatherArmorMeta)
+		{
+			this.color = leatherArmorMeta.getColor().asRGB();
+		}
 	}
 
 	@Override

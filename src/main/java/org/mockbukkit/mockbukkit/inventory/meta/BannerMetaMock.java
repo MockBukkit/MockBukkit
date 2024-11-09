@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,11 +34,18 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public BannerMetaMock(@NotNull BannerMeta meta)
+	public BannerMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.patterns = new ArrayList<>(meta.getPatterns());
+		if(meta instanceof BannerMeta bannerMeta)
+		{
+			this.patterns = bannerMeta.getPatterns();
+		}
+		else
+		{
+			this.patterns = new ArrayList<>();
+		}
 	}
 
 	@Override

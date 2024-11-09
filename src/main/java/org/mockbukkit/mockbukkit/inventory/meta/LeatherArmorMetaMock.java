@@ -1,11 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -34,10 +35,13 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public LeatherArmorMetaMock(@NotNull LeatherArmorMeta meta)
+	public LeatherArmorMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-		this.color = meta.getColor();
+
+		if(meta instanceof LeatherArmorMeta leatherArmorMeta){
+			this.color = leatherArmorMeta.getColor();
+		}
 	}
 
 	@Override

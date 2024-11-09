@@ -1,11 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +36,14 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public FireworkMetaMock(@NotNull FireworkMeta meta)
+	public FireworkMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.effects.addAll(meta.getEffects());
+		if(meta instanceof FireworkMeta fireworkMeta)
+		{
+			this.effects.addAll(fireworkMeta.getEffects());
+		}
 	}
 
 	@Override

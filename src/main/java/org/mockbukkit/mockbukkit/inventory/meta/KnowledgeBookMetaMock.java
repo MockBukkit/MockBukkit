@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,11 +36,14 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public KnowledgeBookMetaMock(@NotNull KnowledgeBookMeta meta)
+	public KnowledgeBookMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		recipes.addAll(meta.getRecipes());
+		if(meta instanceof KnowledgeBookMeta bookMeta)
+		{
+			recipes.addAll(bookMeta.getRecipes());
+		}
 	}
 
 	@Override

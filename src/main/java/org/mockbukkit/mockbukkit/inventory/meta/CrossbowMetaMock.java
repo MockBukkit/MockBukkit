@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,13 +39,20 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public CrossbowMetaMock(@NotNull CrossbowMeta meta)
+	public CrossbowMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.projectiles = meta.hasChargedProjectiles() ?
-				new ArrayList<>(meta.getChargedProjectiles().stream().map(ItemStack::clone).toList()) :
-				new ArrayList<>();
+		if(meta instanceof CrossbowMeta crossbowMeta)
+		{
+			this.projectiles = crossbowMeta.hasChargedProjectiles() ?
+					new ArrayList<>(crossbowMeta.getChargedProjectiles().stream().map(ItemStack::clone).toList()) :
+					new ArrayList<>();
+		}
+		else
+		{
+			this.projectiles = new ArrayList<>();
+		}
 	}
 
 	@Override

@@ -1,16 +1,17 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.meta.BookMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.common.returnsreceiver.qual.This;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +44,17 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public BookMetaMock(@NotNull BookMeta meta)
+	public BookMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.title = meta.getTitle();
-		this.author = meta.getAuthor();
-		this.pages = new ArrayList<>(meta.getPages());
-		this.generation = meta.getGeneration();
+		if(meta instanceof BookMeta bookMeta)
+		{
+			this.title = bookMeta.getTitle();
+			this.author = bookMeta.getAuthor();
+			this.pages = new ArrayList<>(bookMeta.getPages());
+			this.generation = bookMeta.getGeneration();
+		}
 	}
 
 	@Override

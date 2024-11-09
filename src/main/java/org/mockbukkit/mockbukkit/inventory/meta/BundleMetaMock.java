@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,11 +37,18 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public BundleMetaMock(@NotNull BundleMeta meta)
+	public BundleMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.items = new ArrayList<>(meta.getItems());
+		if(meta instanceof BundleMeta bundleMeta)
+		{
+			this.items = new ArrayList<>(bundleMeta.getItems());
+		}
+		else
+		{
+			this.items = new ArrayList<>();
+		}
 	}
 
 	@Override

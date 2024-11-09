@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -32,15 +33,18 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public ArmorStandMetaMock(@NotNull ArmorStandMeta meta)
+	public ArmorStandMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.invisible = meta.isInvisible();
-		this.marker = meta.isMarker();
-		this.noBasePlate = meta.hasNoBasePlate();
-		this.showArms = meta.shouldShowArms();
-		this.small = meta.isSmall();
+		if(meta instanceof ArmorStandMeta armorStandMeta)
+		{
+			this.invisible = armorStandMeta.isInvisible();
+			this.marker = armorStandMeta.isMarker();
+			this.noBasePlate = armorStandMeta.hasNoBasePlate();
+			this.showArms = armorStandMeta.shouldShowArms();
+			this.small = armorStandMeta.isSmall();
+		}
 	}
 
 	@Override
