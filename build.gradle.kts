@@ -4,7 +4,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.29.0"
+	id("com.vanniktech.maven.publish") version "0.30.0"
 	id("net.kyori.blossom") version "2.1.0"
 }
 
