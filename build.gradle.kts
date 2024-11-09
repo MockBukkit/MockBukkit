@@ -29,7 +29,7 @@ dependencies {
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
 	implementation("org.jetbrains:annotations:26.0.0")
 	implementation("net.bytebuddy:byte-buddy:1.15.4")
-	implementation("org.hamcrest:hamcrest:2.2")
+	implementation("org.hamcrest:hamcrest:3.0")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
