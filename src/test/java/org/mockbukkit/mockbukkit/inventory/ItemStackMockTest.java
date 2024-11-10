@@ -62,6 +62,10 @@ class ItemStackMockTest
 			{
 				String itemMetaClassString = getMetaInterface(itemStack.getItemMeta().getClass()).getName();
 				assertEquals(expected.get("meta").getAsString(), itemMetaClassString);
+
+				ItemMeta factoryMeta = Bukkit.getItemFactory().getItemMeta(material);
+				String factoryMetaClassString = getMetaInterface(factoryMeta.getClass()).getName();
+				assertEquals(expected.get("meta").getAsString(), factoryMetaClassString);
 			}
 		}
 		catch (UnimplementedOperationException ignored)

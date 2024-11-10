@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
+import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
@@ -15,8 +16,11 @@ import org.mockbukkit.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.MapMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.OminousBottleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.ShieldMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SkullMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SpawnEggMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
@@ -67,17 +71,30 @@ public class ItemFactoryMock implements ItemFactory
 		{
 			return SpawnEggMetaMock.class;
 		}
+		else if (MaterialTags.SKULLS.isTagged(material))
+		{
+			return SkullMetaMock.class;
+		}
+		else if (MaterialTags.ARMOR.isTagged(material))
+		{
+			return switch (material)
+			{
+				case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS -> ColorableArmorMetaMock.class;
+				default -> ArmorMetaMock.class;
+			};
+		}
 		return switch (material)
 		{
 			case ARMOR_STAND -> ArmorStandMetaMock.class;
 			case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 			case ENCHANTED_BOOK -> EnchantmentStorageMetaMock.class;
 			case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
-			case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS -> ColorableArmorMetaMock.class;
+			case WOLF_ARMOR -> ColorableArmorMetaMock.class;
+			case LEATHER_HORSE_ARMOR -> LeatherArmorMetaMock.class;
 			case FILLED_MAP -> MapMetaMock.class;
 			case FIREWORK_STAR -> FireworkEffectMetaMock.class;
 			case FIREWORK_ROCKET -> FireworkMetaMock.class;
-			case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
+			case POTION, LINGERING_POTION, SPLASH_POTION, TIPPED_ARROW -> PotionMetaMock.class;
 			case PLAYER_HEAD -> SkullMetaMock.class;
 			case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
 			case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
@@ -85,6 +102,8 @@ public class ItemFactoryMock implements ItemFactory
 			case COMPASS -> CompassMetaMock.class;
 			case CROSSBOW -> CrossbowMetaMock.class;
 			case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
+			case OMINOUS_BOTTLE -> OminousBottleMetaMock.class;
+			case SHIELD -> ShieldMetaMock.class;
 			default -> ItemMetaMock.class;
 		};
 	}

@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.inventory.meta.SkullMeta;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
@@ -14,8 +16,11 @@ import org.mockbukkit.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.MapMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.OminousBottleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.ShieldMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SkullMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SpawnEggMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
@@ -65,7 +70,16 @@ class ItemFactoryMockTest
 
 		assertTrue(factory.getItemMeta(Material.SUSPICIOUS_STEW) instanceof SuspiciousStewMetaMock);
 		assertTrue(factory.getItemMeta(Material.POTION) instanceof PotionMetaMock);
+		assertTrue(factory.getItemMeta(Material.TIPPED_ARROW) instanceof PotionMetaMock);
+
+		assertTrue(factory.getItemMeta(Material.LEATHER_HELMET) instanceof ColorableArmorMetaMock);
 		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof ColorableArmorMetaMock);
+		assertTrue(factory.getItemMeta(Material.LEATHER_LEGGINGS) instanceof ColorableArmorMetaMock);
+		assertTrue(factory.getItemMeta(Material.LEATHER_BOOTS) instanceof ColorableArmorMetaMock);
+		assertTrue(factory.getItemMeta(Material.WOLF_ARMOR) instanceof ColorableArmorMetaMock);
+		assertTrue(factory.getItemMeta(Material.LEATHER_HORSE_ARMOR) instanceof LeatherArmorMetaMock);
+
+		assertTrue(factory.getItemMeta(Material.SHIELD) instanceof ShieldMetaMock);
 
 		assertTrue(factory.getItemMeta(Material.AXOLOTL_BUCKET) instanceof AxolotlBucketMetaMock);
 		assertTrue(factory.getItemMeta(Material.BUNDLE) instanceof BundleMetaMock);
@@ -74,6 +88,7 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.CROSSBOW) instanceof CrossbowMetaMock);
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
+		assertTrue(factory.getItemMeta(Material.OMINOUS_BOTTLE) instanceof OminousBottleMetaMock);
 
 		for (Material egg : MaterialTags.SPAWN_EGGS.getValues())
 		{
@@ -84,6 +99,17 @@ class ItemFactoryMockTest
 		{
 			assertTrue(factory.getItemMeta(m) instanceof BannerMetaMock);
 		}
+
+		for (Material m : Tag.ITEMS_TRIMMABLE_ARMOR.getValues())
+		{
+			assertTrue(factory.getItemMeta(m) instanceof ArmorMetaMock);
+		}
+
+		for (Material m : Tag.ITEMS_SKULLS.getValues())
+		{
+			assertTrue(factory.getItemMeta(m) instanceof SkullMetaMock);
+		}
+
 	}
 
 	@Test
