@@ -1,8 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -17,7 +15,8 @@ import java.util.UUID;
 public class WitherMock extends AbstractBossMock implements Wither
 {
 
-	private int invulnerable_ticks = 0;
+	private final LivingEntity[] headsTarget = new LivingEntity[] {null, null, null}; // DATA_TARGETS for each head
+	private int invulnerable_ticks = 0; // DATA_ID_INV
 	private boolean canPortal = false;
 
 	/**
@@ -49,13 +48,15 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public void setTarget(@NotNull Wither.Head head, @Nullable LivingEntity livingEntity)
 	{
-		throw new UnimplementedOperationException();
+		int index = head.ordinal();
+		headsTarget[index] = livingEntity;
 	}
 
 	@Override
 	public @Nullable LivingEntity getTarget(@NotNull Wither.Head head)
 	{
-		throw new UnimplementedOperationException();
+		int index = head.ordinal();
+		return headsTarget[index];
 	}
 
 	@Override
