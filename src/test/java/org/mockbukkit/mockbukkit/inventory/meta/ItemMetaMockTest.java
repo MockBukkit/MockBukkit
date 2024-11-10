@@ -506,6 +506,17 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void removeEnchants()
+	{
+		meta.addEnchant(Enchantment.SHARPNESS, 5, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
+		assertEquals(2, meta.getEnchants().size());
+
+		meta.removeEnchantments();
+		assertTrue(meta.getEnchants().isEmpty());
+	}
+
+	@Test
 	void addEnchant_IgnoreLevel()
 	{
 		assertTrue(meta.addEnchant(Enchantment.UNBREAKING, 100, true));
