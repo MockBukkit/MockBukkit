@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
+import org.bukkit.Difficulty;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +20,7 @@ public class EntityData
 
 
 	private static final String STATES = "states";
+	private static final String HEALTH = "health";
 
 	private final EntityType type;
 	private final @NotNull String data;
@@ -72,6 +74,24 @@ public class EntityData
 	public double getEyeHeight(EntitySubType subType, EntityState state)
 	{
 		return getValueFromKey(EYE_HEIGHT, subType, state).getAsDouble();
+	}
+
+	public double getHealth(EntitySubType subType, EntityState state, Difficulty difficulty)
+	{
+		JsonObject stateData = getStateMapping(subType, state);
+
+		JsonElement healthElement = stateData.get(HEALTH);
+		if (healthElement == null || !healthElement.isJsonObject()) {
+			throw new UnimplementedOperationException("Difficulty health data for entitytype " + type + " is not implemented.");
+		}
+
+		JsonObject healthData = healthElement.getAsJsonObject();
+		JsonElement difficultyHealth = healthData.get(difficulty.name());
+		if (difficultyHealth == null) {
+			throw new UnimplementedOperationException("Health data for difficulty " + difficulty + " for entitytype " + type + " is not implemented.");
+		}
+
+		return difficultyHealth.getAsDouble();
 	}
 
 	/**
