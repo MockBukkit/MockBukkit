@@ -102,7 +102,9 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public void enterInvulnerabilityPhase()
 	{
-		throw new UnimplementedOperationException();
+		this.setInvulnerableTicks(220);
+		this.bossBarMock.setProgress(0.0F);
+		this.setHealth(this.getMaxHealth() / 3.0F);
 	}
 
 	@Override
