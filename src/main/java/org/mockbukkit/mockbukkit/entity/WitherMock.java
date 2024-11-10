@@ -21,7 +21,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 	 */
 	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-		super(server, uuid);
+		super(server, uuid, "Wither");
 	}
 
 	@Override

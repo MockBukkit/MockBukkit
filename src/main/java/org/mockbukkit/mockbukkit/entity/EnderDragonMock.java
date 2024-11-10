@@ -24,7 +24,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 	 */
 	public EnderDragonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-		super(server, uuid);
+		super(server, uuid, "Ender Dragon");
 	}
 
 	@NotNull
