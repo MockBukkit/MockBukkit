@@ -1,8 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Difficulty;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
