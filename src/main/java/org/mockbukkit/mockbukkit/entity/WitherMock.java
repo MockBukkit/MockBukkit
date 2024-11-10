@@ -78,13 +78,13 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public int getInvulnerableTicks()
 	{
-		throw new UnimplementedOperationException();
+		return invulnerable_ticks;
 	}
 
 	@Override
 	public void setInvulnerableTicks(int i)
 	{
-		throw new UnimplementedOperationException();
+		invulnerable_ticks = i;
 	}
 
 	@Override
