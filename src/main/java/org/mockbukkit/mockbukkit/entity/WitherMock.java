@@ -18,6 +18,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 {
 
 	private int invulnerable_ticks = 0;
+	private boolean canPortal = false;
 
 	/**
 	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -90,13 +91,13 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public boolean canTravelThroughPortals()
 	{
-		throw new UnimplementedOperationException();
+		return canPortal;
 	}
 
 	@Override
 	public void setCanTravelThroughPortals(boolean b)
 	{
-		throw new UnimplementedOperationException();
+		canPortal = b;
 	}
 
 	@Override
