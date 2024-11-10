@@ -20,7 +20,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 	private boolean canPortal = false;
 
 	/**
-	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WitherMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
@@ -30,7 +30,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 	}
 
 	/**
-	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WitherMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 * Within a {@link WorldMock} in order to determine its health with the game difficulty
 	 *
 	 * @param server The server to create the entity on.
