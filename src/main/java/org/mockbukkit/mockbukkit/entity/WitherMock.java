@@ -13,6 +13,7 @@ import java.util.UUID;
 public class WitherMock extends AbstractBossMock implements Wither
 {
 
+	private int invulnerable_ticks = 0;
 	/**
 	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -22,6 +23,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid, "Wither");
+		setMaxHealth(entityData.getHealth(this.getSubType(), this.getEntityState(), this.getWorld().getDifficulty()));
 	}
 
 	@Override
@@ -39,19 +41,19 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public int getInvulnerabilityTicks()
 	{
-		throw new UnimplementedOperationException();
+		return invulnerable_ticks;
 	}
 
 	@Override
 	public void setInvulnerabilityTicks(int i)
 	{
-		throw new UnimplementedOperationException();
+		invulnerable_ticks = i;
 	}
 
 	@Override
 	public boolean isCharged()
 	{
-		throw new UnimplementedOperationException();
+		return this.getHealth() <= this.getMaxHealth() / 2.0F;
 	}
 
 	@Override
