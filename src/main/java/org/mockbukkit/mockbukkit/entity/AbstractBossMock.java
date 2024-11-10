@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Boss;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 

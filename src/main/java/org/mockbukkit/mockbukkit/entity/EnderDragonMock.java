@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Location;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.ComplexEntityPart;
@@ -9,6 +8,7 @@ import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Set;
 import java.util.UUID;
