@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.bukkit.Difficulty;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -7,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
 
@@ -18,7 +22,6 @@ class WitherMockTest
 	@MockBukkitInject
 	private ServerMock server;
 	private WitherMock wither;
-
 	@BeforeEach
 	void setUp()
 	{
@@ -47,6 +50,33 @@ class WitherMockTest
 	void getEyeHeight()
 	{
 		assertEquals(2.9750001D, wither.getEyeHeight());
+	}
+
+	@Test
+	void getMaxHeathEasy()
+	{
+		WorldMock worldMock = new WorldMock();
+		worldMock.setDifficulty(Difficulty.EASY);
+		WitherMock tempWither = new WitherMock(server, UUID.randomUUID(), worldMock);
+		assertEquals(300.0D, tempWither.getMaxHealth());
+	}
+
+	@Test
+	void getMaxHeathNormal()
+	{
+		WorldMock worldMock = new WorldMock();
+		worldMock.setDifficulty(Difficulty.NORMAL);
+		WitherMock tempWither = new WitherMock(server, UUID.randomUUID(), worldMock);
+		assertEquals(450.0D, tempWither.getMaxHealth());
+	}
+
+	@Test
+	void getMaxHeathHard()
+	{
+		WorldMock worldMock = new WorldMock();
+		worldMock.setDifficulty(Difficulty.HARD);
+		WitherMock tempWither = new WitherMock(server, UUID.randomUUID(), worldMock);
+		assertEquals(600.0D, tempWither.getMaxHealth());
 	}
 
 }
