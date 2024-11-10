@@ -6,10 +6,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of an {@link LeatherArmorMeta}.
@@ -19,7 +17,7 @@ import java.util.Objects;
 public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMeta
 {
 
-	private Color color;
+	private @Nullable Color color;
 
 	/**
 	 * Constructs a new {@link LeatherArmorMetaMock}.
@@ -27,7 +25,6 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	public LeatherArmorMetaMock()
 	{
 		super();
-		this.color = Bukkit.getItemFactory().getDefaultLeatherColor();
 	}
 
 	/**
@@ -40,7 +37,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		super(meta);
 
 		if(meta instanceof LeatherArmorMeta leatherArmorMeta){
-			this.color = leatherArmorMeta.getColor();
+			this.color = leatherArmorMeta.isDyed() ? leatherArmorMeta.getColor() : null;
 		}
 	}
 
@@ -55,8 +52,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	@Override
 	public boolean isDyed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return color != null;
 	}
 
 	@Override
@@ -64,7 +60,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		return prime * result + color.hashCode();
+		return prime * result + getColor().hashCode();
 	}
 
 	@Override
@@ -83,19 +79,19 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 			return false;
 		}
 
-		return Objects.equals(color, other.getColor());
+		return this.isDyed() ? this.getColor().equals(other.getColor()) : !other.isDyed();
 	}
 
 	@Override
 	public @NotNull Color getColor()
 	{
-		return color;
+		return color == null ? Bukkit.getItemFactory().getDefaultLeatherColor() : color;
 	}
 
 	@Override
 	public void setColor(@Nullable Color color)
 	{
-		this.color = color == null ? Bukkit.getItemFactory().getDefaultLeatherColor() : color;
+		this.color = color;
 	}
 
 	/**
@@ -108,7 +104,9 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	{
 		LeatherArmorMetaMock serialMock = new LeatherArmorMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.color = Color.fromARGB((int) args.get("color"));
+		if(args.containsKey("color")){
+			serialMock.color = Color.fromARGB((int) args.get("color"));
+		}
 		return serialMock;
 	}
 
@@ -122,7 +120,9 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("color", color.asARGB());
+		if(isDyed()){
+			serialized.put("color", color.asARGB());
+		}
 		return serialized;
 	}
 

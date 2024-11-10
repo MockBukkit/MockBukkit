@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class LeatherArmorMetaMockTest
@@ -17,6 +19,7 @@ class LeatherArmorMetaMockTest
 	{
 		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 
+		assertFalse(meta.isDyed());
 		assertEquals(Bukkit.getItemFactory().getDefaultLeatherColor(), meta.getColor());
 	}
 
@@ -27,6 +30,7 @@ class LeatherArmorMetaMockTest
 		Color color = Color.MAROON;
 		meta.setColor(color);
 
+		assertTrue(meta.isDyed());
 		assertEquals(color, meta.getColor());
 	}
 
@@ -41,7 +45,21 @@ class LeatherArmorMetaMockTest
 
 		// Now clearing the color
 		meta.setColor(null);
+		assertFalse(meta.isDyed());
 		assertEquals(Bukkit.getItemFactory().getDefaultLeatherColor(), meta.getColor());
+	}
+
+	@Test
+	void isDyed(){
+		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
+
+		assertFalse(meta.isDyed());
+
+		meta.setColor(meta.getColor());
+		assertTrue(meta.isDyed());
+
+		meta.setColor(null);
+		assertFalse(meta.isDyed());
 	}
 
 	@Test
@@ -53,6 +71,7 @@ class LeatherArmorMetaMockTest
 		LeatherArmorMetaMock clone = meta.clone();
 
 		assertEquals(meta, clone);
+		assertTrue(clone.isDyed());
 		assertEquals(meta.getColor(), clone.getColor());
 	}
 
