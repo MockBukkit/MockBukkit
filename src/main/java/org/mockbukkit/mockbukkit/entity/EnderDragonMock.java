@@ -1,17 +1,17 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import io.papermc.paper.math.Position;
-import org.bukkit.boss.BossBar;
-import org.bukkit.entity.EnderCrystal;
-import org.jetbrains.annotations.Unmodifiable;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Location;
+import org.bukkit.boss.BossBar;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.ComplexEntityPart;
+import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;

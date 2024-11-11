@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Wither;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class WitherMock extends AbstractBossMock implements Wither
 {
 
-	private final LivingEntity[] headsTarget = new LivingEntity[] {null, null, null}; // DATA_TARGETS for each head
+	private final LivingEntity[] headsTarget = new LivingEntity[]{ null, null, null }; // DATA_TARGETS for each head
 	private int invulnerableTicks = 0; // DATA_ID_INV
 	private boolean canPortal = false;
 
@@ -25,7 +25,8 @@ public class WitherMock extends AbstractBossMock implements Wither
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid) {
+	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	{
 		this(server, uuid, new WorldMock());
 	}
 
@@ -33,8 +34,8 @@ public class WitherMock extends AbstractBossMock implements Wither
 	 * Constructs a new {@link WitherMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 * Within a {@link WorldMock} in order to determine its health with the game difficulty
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server    The server to create the entity on.
+	 * @param uuid      The UUID of the entity.
 	 * @param worldMock World where the wither is
 	 */
 	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull WorldMock worldMock)

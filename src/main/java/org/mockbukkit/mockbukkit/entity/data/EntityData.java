@@ -1,14 +1,12 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
-import org.bukkit.Difficulty;
-import org.bukkit.entity.EntityType;
-import org.jetbrains.annotations.NotNull;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
+import org.bukkit.Difficulty;
+import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class EntityData
@@ -68,7 +66,6 @@ public class EntityData
 	 *
 	 * @param subType Subtype of entity
 	 * @param state   State of entity
-	 *
 	 * @return The eye height of the entity
 	 */
 	public double getEyeHeight(EntitySubType subType, EntityState state)
@@ -81,13 +78,15 @@ public class EntityData
 		JsonObject stateData = getStateMapping(subType, state);
 
 		JsonElement healthElement = stateData.get(HEALTH);
-		if (healthElement == null || !healthElement.isJsonObject()) {
+		if (healthElement == null || !healthElement.isJsonObject())
+		{
 			throw new UnimplementedOperationException("Difficulty health data for entitytype " + type + " is not implemented.");
 		}
 
 		JsonObject healthData = healthElement.getAsJsonObject();
 		JsonElement difficultyHealth = healthData.get(difficulty.name());
-		if (difficultyHealth == null) {
+		if (difficultyHealth == null)
+		{
 			throw new UnimplementedOperationException("Health data for difficulty " + difficulty + " for entitytype " + type + " is not implemented.");
 		}
 
