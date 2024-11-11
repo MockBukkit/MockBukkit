@@ -12,17 +12,28 @@ import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class DragonBattleMock implements DragonBattle
 {
 
+	public static final int GATEWAY_COUNT = 20;
+	public int gateways = 20; // looks like this is used as some kind of for cycle to store/spawn portals
+
 	private final EnderDragonMock enderDragonMock;
+	private Location portalLocation = null; // this is the exit portal, default not spawned
+	private boolean previouslyKilled;
+	private List<EnderCrystal> respawnCrystals;
+	private DragonBattle.RespawnPhase respawnPhase;
 
 	public DragonBattleMock(EnderDragonMock enderDragonMock)
 	{
 		this.enderDragonMock = enderDragonMock;
+		previouslyKilled = false; // normally obtained through save data, assume false
+		respawnPhase = RespawnPhase.START; // assume it is spawning just now
+		respawnCrystals = List.of(); // assume naturally spawned so no respawn crystals
 	}
 
 	@Override
@@ -40,11 +51,11 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public @Nullable Location getEndPortalLocation()
 	{
-		return null;
+		return portalLocation;
 	}
 
 	@Override
-	public boolean generateEndPortal(boolean generatesEndPortal)
+	public boolean generateEndPortal(boolean withPortals)
 	{
 		return false;
 	}
@@ -52,24 +63,44 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public boolean hasBeenPreviouslyKilled()
 	{
-		return false;
+		return previouslyKilled;
 	}
 
 	@Override
 	public void setPreviouslyKilled(boolean previouslyKilled)
 	{
-		throw new UnimplementedOperationException();
+		this.previouslyKilled = previouslyKilled;
 	}
 
 	@Override
 	public void initiateRespawn()
 	{
-		throw new UnimplementedOperationException();
+		respawnPhase = RespawnPhase.START;
 	}
 
 	@Override
 	public boolean initiateRespawn(@Nullable Collection<EnderCrystal> enderCrystalCollection)
 	{
+		if (this.hasBeenPreviouslyKilled() && this.getRespawnPhase() == RespawnPhase.NONE)
+		{
+
+			if (portalLocation == null)
+			{
+				portalLocation = new Location(enderDragonMock.getWorld(), 0, 0, 0);
+			}
+
+			if (enderCrystalCollection != null)
+			{
+				respawnCrystals = enderCrystalCollection.stream().filter(Objects::nonNull).toList();
+			}
+			else
+			{
+				respawnCrystals = List.of();
+			}
+
+			respawnPhase = RespawnPhase.START;
+			return true;
+		}
 		return false;
 	}
 
@@ -77,49 +108,56 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public DragonBattle.RespawnPhase getRespawnPhase()
 	{
-		throw new UnimplementedOperationException();
+		return respawnPhase;
 	}
 
 	@Override
 	public boolean setRespawnPhase(@NotNull DragonBattle.RespawnPhase respawnPhase)
 	{
-		return false;
+		this.respawnPhase = respawnPhase;
+		return true;
 	}
 
 	@Override
 	public void resetCrystals()
 	{
-		throw new UnimplementedOperationException();
+		respawnCrystals = List.of();
 	}
 
 	@Override
 	public int getGatewayCount()
 	{
-		return 0;
+		return GATEWAY_COUNT - this.gateways;
 	}
 
 	@Override
 	public boolean spawnNewGateway()
 	{
-		return false;
+		if (this.gateways <= 0)
+		{
+			return false;
+		}
+
+		gateways--;
+		return true;
 	}
 
 	@Override
 	public void spawnNewGateway(@NotNull Position position)
 	{
-		throw new UnimplementedOperationException();
+		//this seems to just add a new portal
 	}
 
 	@Override
 	public @NotNull @Unmodifiable List<EnderCrystal> getRespawnCrystals()
 	{
-		return List.of();
+		return Collections.unmodifiableList(respawnCrystals);
 	}
 
 	@Override
 	public @NotNull @Unmodifiable List<EnderCrystal> getHealingCrystals()
 	{
-		return List.of();
+		throw new UnimplementedOperationException();
 	}
 
 }
