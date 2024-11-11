@@ -16,7 +16,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 {
 
 	private final LivingEntity[] headsTarget = new LivingEntity[] {null, null, null}; // DATA_TARGETS for each head
-	private int invulnerable_ticks = 0; // DATA_ID_INV
+	private int invulnerableTicks = 0; // DATA_ID_INV
 	private boolean canPortal = false;
 
 	/**
@@ -62,13 +62,13 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public int getInvulnerabilityTicks()
 	{
-		return invulnerable_ticks;
+		return invulnerableTicks;
 	}
 
 	@Override
 	public void setInvulnerabilityTicks(int i)
 	{
-		invulnerable_ticks = i;
+		invulnerableTicks = i;
 	}
 
 	@Override
@@ -80,13 +80,13 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public int getInvulnerableTicks()
 	{
-		return invulnerable_ticks;
+		return invulnerableTicks;
 	}
 
 	@Override
 	public void setInvulnerableTicks(int i)
 	{
-		invulnerable_ticks = i;
+		invulnerableTicks = i;
 	}
 
 	@Override

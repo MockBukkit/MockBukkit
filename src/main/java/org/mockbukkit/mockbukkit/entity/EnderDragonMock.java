@@ -22,7 +22,7 @@ import java.util.UUID;
 public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 {
 
-	private Location podium;
+	private Location podium = new Location(getWorld(), 0, 0, 0);
 	private Phase phase = Phase.HOVER;
 	private final DragonBattle battle;
 
