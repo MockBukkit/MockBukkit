@@ -56,7 +56,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 			}
 
 			@Override
-			public boolean generateEndPortal(boolean b)
+			public boolean generateEndPortal(boolean generatesEndPortal)
 			{
 				return false;
 			}
@@ -68,7 +68,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 			}
 
 			@Override
-			public void setPreviouslyKilled(boolean b)
+			public void setPreviouslyKilled(boolean previouslyKilled)
 			{
 				throw new UnimplementedOperationException();
 			}
@@ -80,7 +80,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 			}
 
 			@Override
-			public boolean initiateRespawn(@Nullable Collection<EnderCrystal> collection)
+			public boolean initiateRespawn(@Nullable Collection<EnderCrystal> enderCrystalCollection)
 			{
 				return false;
 			}

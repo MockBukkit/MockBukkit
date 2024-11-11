@@ -66,9 +66,9 @@ public class WitherMock extends AbstractBossMock implements Wither
 	}
 
 	@Override
-	public void setInvulnerabilityTicks(int i)
+	public void setInvulnerabilityTicks(int invulnerabilityTicks)
 	{
-		invulnerableTicks = i;
+		invulnerableTicks = invulnerabilityTicks;
 	}
 
 	@Override
@@ -84,9 +84,9 @@ public class WitherMock extends AbstractBossMock implements Wither
 	}
 
 	@Override
-	public void setInvulnerableTicks(int i)
+	public void setInvulnerableTicks(int invulnerableTicks)
 	{
-		invulnerableTicks = i;
+		this.invulnerableTicks = invulnerableTicks;
 	}
 
 	@Override
@@ -96,9 +96,9 @@ public class WitherMock extends AbstractBossMock implements Wither
 	}
 
 	@Override
-	public void setCanTravelThroughPortals(boolean b)
+	public void setCanTravelThroughPortals(boolean canTravelThroughPortals)
 	{
-		canPortal = b;
+		canPortal = canTravelThroughPortals;
 	}
 
 	@Override
