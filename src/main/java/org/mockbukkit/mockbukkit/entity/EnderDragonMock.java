@@ -23,6 +23,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 {
 
 	private Location podium;
+	private Phase phase = Phase.HOVER;
 	private final DragonBattle battle;
 
 	/**
@@ -141,13 +142,13 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 	@Override
 	public Phase getPhase()
 	{
-		throw new UnimplementedOperationException();
+		return phase;
 	}
 
 	@Override
 	public void setPhase(@NotNull EnderDragon.Phase phase)
 	{
-		throw new UnimplementedOperationException();
+		this.phase = phase;
 	}
 
 	@Override
