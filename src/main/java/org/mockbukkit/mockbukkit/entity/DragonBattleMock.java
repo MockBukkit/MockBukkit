@@ -57,7 +57,7 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public boolean generateEndPortal(boolean withPortals)
 	{
-		return false;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
