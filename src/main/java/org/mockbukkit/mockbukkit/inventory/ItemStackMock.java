@@ -161,14 +161,18 @@ public class ItemStackMock extends ItemStack
 		this.itemMeta = itemMeta;
 
 		if(this.itemMeta instanceof Damageable damageable){
+			short defaultDurability = initDurability(this.type);
 			if(!damageable.hasDamageValue())
 			{
-				durability = initDurability(this.type);
+				durability = defaultDurability;
 			}
 			else
 			{
 				short value = (short) Math.min(Short.MAX_VALUE, damageable.getDamage());
 				setDurability(value);
+				if(durability == defaultDurability){
+					damageable.resetDamage();
+				}
 			}
 		}
 		return true;
@@ -203,13 +207,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public void setDurability(short durability)
 	{
+		short oldDurability = this.durability;
 		this.durability = (short) Math.min(Math.max(durability, 0), this.type.getMaxDurability());
-		if(this.itemMeta != null && (this.itemMeta instanceof Damageable damageable)){
-			if(this.durability == 0){
-				damageable.resetDamage();
-			}else{
-				damageable.setDamage(this.durability);
-			}
+		if(this.itemMeta != null && (this.itemMeta instanceof Damageable damageable) && this.durability != oldDurability){
+			damageable.setDamage(this.durability);
 		}
 	}
 
@@ -362,7 +363,7 @@ public class ItemStackMock extends ItemStack
 		Object raw = args.get("meta");
 		if (raw instanceof ItemMeta)
 		{
-			((ItemMeta) raw).setVersion(version);
+			//((ItemMeta) raw).setVersion(version); //TODO uncomment when setVersion is implemented
 			// Paper start - for pre 1.20.5 itemstacks, add HIDE_STORED_ENCHANTS flag if HIDE_ADDITIONAL_TOOLTIP is set
 			if (version < 3837 && ((ItemMeta) raw).hasItemFlag(ItemFlag.HIDE_ADDITIONAL_TOOLTIP))
 			{ // 1.20.5

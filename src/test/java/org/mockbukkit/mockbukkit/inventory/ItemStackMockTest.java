@@ -543,4 +543,17 @@ class ItemStackMockTest
 		assertEquals(base, itm);
 	}
 
+	@Test
+	void getItemMeta_Empty(){
+		ItemStack itemStack = new ItemStack(Material.STICK);
+		itemStack.setDurability((short) 0);
+
+		ItemMeta meta = itemStack.getItemMeta();
+		assertTrue(meta instanceof Damageable);
+		Damageable damageable = (Damageable) meta;
+
+		assertFalse(damageable.hasDamage());
+		assertTrue(damageable.hasDamageValue());
+	}
+
 }

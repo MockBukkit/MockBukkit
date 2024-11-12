@@ -993,6 +993,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setVersion(int version)
 	{
 		// TODO Auto-generated method stub
+		// When implemented change ItemStackMock.handleMetaForDeserialization
 		throw new UnimplementedOperationException();
 	}
 
