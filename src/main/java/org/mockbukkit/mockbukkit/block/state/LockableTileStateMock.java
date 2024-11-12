@@ -12,17 +12,17 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 public abstract class LockableTileStateMock extends TileStateMock implements LockableTileState
 {
 
-	public LockableTileStateMock(@NotNull Material material)
+	protected LockableTileStateMock(@NotNull Material material)
 	{
 		super(material);
 	}
 
-	public LockableTileStateMock(@NotNull Block block)
+	protected LockableTileStateMock(@NotNull Block block)
 	{
 		super(block);
 	}
 
-	public LockableTileStateMock(@NotNull TileStateMock state)
+	protected LockableTileStateMock(@NotNull TileStateMock state)
 	{
 		super(state);
 	}

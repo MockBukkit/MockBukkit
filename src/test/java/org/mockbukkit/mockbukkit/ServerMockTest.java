@@ -1959,7 +1959,7 @@ class ServerMockTest
 		assertDoesNotThrow(() -> server.setPauseWhenEmptyTime(100));
 		assertThat("getPauseWhenEmptyTime should return the set value of 100 ticks (5 seconds)",
 				getPauseWhenEmptyTime(),
-				is(100));;
+				is(100));
 
 	}
 
