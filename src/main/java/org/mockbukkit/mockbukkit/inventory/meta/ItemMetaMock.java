@@ -895,6 +895,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public Collection<AttributeModifier> getAttributeModifiers(@NotNull Attribute attribute)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
+		this.checkAttributeMap();
 		return this.attributeModifiers.containsKey(attribute)
 				? ImmutableList.copyOf(this.attributeModifiers.get(attribute))
 				: null;
