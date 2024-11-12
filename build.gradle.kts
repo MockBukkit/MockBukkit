@@ -2,6 +2,7 @@ import java.io.ByteArrayOutputStream
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
+	id("checkstyle")
 	id("java-library")
 	id("jacoco")
 	id("com.vanniktech.maven.publish") version "0.30.0"
