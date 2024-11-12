@@ -196,45 +196,73 @@ class UnsafeValuesTest
 	{
 		for (Method method : meta.getClass().getMethods())
 		{
-			Parameter[] parameters = method.getParameters();
-			if (parameters.length != 1 || !method.accessFlags().contains(AccessFlag.PUBLIC))
-			{
+			String methodName = method.getName();
+			if("wait".contentEquals(methodName)) continue;
+			if(methodName.startsWith("get")) continue;
+			if(methodName.startsWith("remove")) continue;
+
+			// This method cause error with trivial value. So we set convenient value
+			if(methodName.contentEquals("setAmplifier")){
+				method.invoke(meta, 4);
 				continue;
 			}
-			Parameter parameter = parameters[0];
-			Class<?> parameterType = parameter.getType();
-			if (boolean.class.isAssignableFrom(parameterType))
+
+			try
 			{
-				method.invoke(meta, true);
+				insertTrivialData(meta, method);
 			}
-			if (int.class.isAssignableFrom(parameterType))
+			catch (InvocationTargetException exception)
 			{
-				method.invoke(meta, 8);
+				Throwable cause = exception.getTargetException();
+				if(cause instanceof UnimplementedOperationException) continue;
+				if(cause instanceof UnsupportedOperationException) continue;
+
+				throw new RuntimeException("Exception thrown while trying to set trivial value for method " + method.getName(), cause);
+
 			}
-			if (short.class.isAssignableFrom(parameterType))
-			{
-				method.invoke(meta, (short) 8);
-			}
-			if (long.class.isAssignableFrom(parameterType))
-			{
-				method.invoke(meta, 8L);
-			}
-			if (double.class.isAssignableFrom(parameterType))
-			{
-				method.invoke(meta, 8D);
-			}
-			if (float.class.isAssignableFrom(parameterType))
-			{
-				method.invoke(meta, (short) 8);
-			}
-			if (String.class.isAssignableFrom(parameterType))
-			{
-				method.invoke(meta, "Hello world!");
-			}
-			if (Enum.class.isAssignableFrom(parameterType))
-			{
-				method.invoke(meta, parameterType.getEnumConstants()[0]);
-			}
+		}
+	}
+
+	void insertTrivialData(ItemMeta meta, Method method) throws InvocationTargetException, IllegalAccessException
+	{
+		Parameter[] parameters = method.getParameters();
+		if (parameters.length != 1 || !method.accessFlags().contains(AccessFlag.PUBLIC))
+		{
+			return;
+		}
+		Parameter parameter = parameters[0];
+		Class<?> parameterType = parameter.getType();
+		if (boolean.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, true);
+		}
+		if (int.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, 8);
+		}
+		if (short.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, (short) 8);
+		}
+		if (long.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, 8L);
+		}
+		if (double.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, 8D);
+		}
+		if (float.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, (short) 8);
+		}
+		if (String.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, "Hello world!");
+		}
+		if (Enum.class.isAssignableFrom(parameterType))
+		{
+			method.invoke(meta, parameterType.getEnumConstants()[0]);
 		}
 	}
 
