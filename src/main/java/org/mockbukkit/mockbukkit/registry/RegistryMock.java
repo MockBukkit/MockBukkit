@@ -129,7 +129,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		Preconditions.checkNotNull(namespacedKey);
 		loadIfEmpty();
 		T value = this.keyedMap.get(namespacedKey);
-		if (value == null) {
+		if (value == null)
+		{
 			throw new java.util.NoSuchElementException("No value for " + namespacedKey + " in " + this);
 		}
 		return value;

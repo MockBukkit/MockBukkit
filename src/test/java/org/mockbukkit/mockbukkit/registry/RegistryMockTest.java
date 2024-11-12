@@ -111,5 +111,8 @@ class RegistryMockTest
 		return Registry.STRUCTURE.stream();
 	}
 
-	static Stream<ItemType> getItems() {return Registry.ITEM.stream();}
+	static Stream<ItemType> getItems()
+	{
+		return Registry.ITEM.stream();
+	}
 }

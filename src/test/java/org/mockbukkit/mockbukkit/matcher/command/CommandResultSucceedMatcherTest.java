@@ -42,12 +42,14 @@ class CommandResultSucceedMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void description(){
+	void description()
+	{
 		assertDescription("to have a success code", hasSucceeded());
 	}
 
 	@Test
-	void nullSafe(){
+	void nullSafe()
+	{
 		assertNullSafe(hasSucceeded());
 	}
 

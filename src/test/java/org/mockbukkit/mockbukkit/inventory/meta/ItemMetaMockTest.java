@@ -473,7 +473,8 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void getEnchants_IsSorted(){
+	void getEnchants_IsSorted()
+	{
 		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
 		Map<Enchantment, Integer> actual = meta.getEnchants();
 
@@ -481,7 +482,8 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void getEnchants_IsCopy(){
+	void getEnchants_IsCopy()
+	{
 		Map<Enchantment, Integer> actual1 = meta.getEnchants();
 		Map<Enchantment, Integer> actual2 = meta.getEnchants();
 

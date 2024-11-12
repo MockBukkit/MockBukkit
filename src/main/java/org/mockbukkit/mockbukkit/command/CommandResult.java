@@ -112,7 +112,8 @@ public class CommandResult
 	/**
 	 * @return The sender of this command
 	 */
-	public @NotNull MessageTarget getSender(){
+	public @NotNull MessageTarget getSender()
+	{
 		return sender;
 	}
 

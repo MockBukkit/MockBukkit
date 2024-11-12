@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(MockBukkitExtension.class)
-class EndGatewayStateMockTest{
+class EndGatewayStateMockTest
+{
 
 	private WorldMock world;
 	private BlockMock block;

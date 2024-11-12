@@ -331,7 +331,8 @@ public class InventoryMock implements Inventory
 		return list.listIterator();
 	}
 
-	public @NotNull Stream<ItemStack> stream(){
+	public @NotNull Stream<ItemStack> stream()
+	{
 		return Arrays.stream(items).filter(Objects::nonNull);
 	}
 

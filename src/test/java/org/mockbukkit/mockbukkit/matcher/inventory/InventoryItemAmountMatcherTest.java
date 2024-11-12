@@ -62,7 +62,8 @@ class InventoryItemAmountMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void nullSafe(){
+	void nullSafe()
+	{
 		testIsNullSafe();
 	}
 

@@ -30,7 +30,8 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 	}
 
 	@Override
-	public void describeMismatchSafely(ItemStack itemStack, Description description){
+	public void describeMismatchSafely(ItemStack itemStack, Description description)
+	{
 		description.appendText("was of type ").appendValue(itemStack.getType());
 	}
 

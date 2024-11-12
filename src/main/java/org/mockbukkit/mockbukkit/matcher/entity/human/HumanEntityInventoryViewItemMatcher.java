@@ -24,7 +24,8 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	@Override
 	protected boolean matchesSafely(HumanEntityMock humanEntityMock)
 	{
-		if(humanEntityMock.getOpenInventory().getTopInventory() == null){
+		if(humanEntityMock.getOpenInventory().getTopInventory() == null)
+		{
 			return false;
 		}
 		return humanEntityMock.getOpenInventory().getTopInventory().contains(material);
