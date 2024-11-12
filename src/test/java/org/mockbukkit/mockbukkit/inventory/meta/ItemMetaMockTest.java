@@ -1212,7 +1212,6 @@ class ItemMetaMockTest
 	@Test
 	void testHasEnchantable()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
 		assertFalse(meta.hasEnchantable());
 
 		meta.setEnchantable(10);
@@ -1222,7 +1221,6 @@ class ItemMetaMockTest
 	@Test
 	void testGetEnchantable()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
 		meta.setEnchantable(10);
 		assertEquals(10, meta.getEnchantable());
 
@@ -1235,8 +1233,6 @@ class ItemMetaMockTest
 	@Test
 	void testSetEnchantable()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
-
 		meta.setEnchantable(10);
 		assertEquals(10, meta.getEnchantable());
 
@@ -1254,7 +1250,6 @@ class ItemMetaMockTest
 	@Test
 	void testHasCustomModelData()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
 		assertFalse(meta.hasCustomModelData());
 
 		meta.setCustomModelData(100);
@@ -1264,7 +1259,6 @@ class ItemMetaMockTest
 	@Test
 	void testGetCustomModelData()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
 		meta.setCustomModelData(100);
 		assertEquals(100, meta.getCustomModelData());
 	}
@@ -1272,8 +1266,6 @@ class ItemMetaMockTest
 	@Test
 	void testSetCustomModelData()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
-
 		meta.setCustomModelData(100);
 		assertEquals(100, meta.getCustomModelData());
 
