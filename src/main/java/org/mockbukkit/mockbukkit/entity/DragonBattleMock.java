@@ -91,7 +91,10 @@ public class DragonBattleMock implements DragonBattle
 
 			if (enderCrystalCollection != null)
 			{
-				respawnCrystals = enderCrystalCollection.stream().filter(Objects::nonNull).toList();
+				respawnCrystals = enderCrystalCollection.stream()
+						.filter(Objects::nonNull)
+						.filter(it -> it.getWorld().equals(enderDragonMock.getWorld()))
+						.toList();
 			}
 			else
 			{
@@ -145,7 +148,7 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public void spawnNewGateway(@NotNull Position position)
 	{
-		//this seems to just add a new portal
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
