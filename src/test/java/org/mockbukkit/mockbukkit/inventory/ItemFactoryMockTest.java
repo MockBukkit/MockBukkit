@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.bukkit.inventory.meta.SkullMeta;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
@@ -33,6 +35,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -90,26 +94,54 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
 		assertTrue(factory.getItemMeta(Material.OMINOUS_BOTTLE) instanceof OminousBottleMetaMock);
 
-		for (Material egg : MaterialTags.SPAWN_EGGS.getValues())
-		{
-			assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMetaMock);
-		}
+	}
 
-		for (Material m : Tag.ITEMS_BANNERS.getValues())
-		{
-			assertTrue(factory.getItemMeta(m) instanceof BannerMetaMock);
-		}
+	@ParameterizedTest
+	@MethodSource("spawnEgg_Materials")
+	void testGetItemMetaCorrectClass_SpawnEgg(Material egg)
+	{
+		assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMetaMock);
+	}
 
-		for (Material m : Tag.ITEMS_TRIMMABLE_ARMOR.getValues())
-		{
-			assertTrue(factory.getItemMeta(m) instanceof ArmorMetaMock);
-		}
+	@ParameterizedTest
+	@MethodSource("banners_Materials")
+	void testGetItemMetaCorrectClass_Banners(Material egg)
+	{
+		assertTrue(factory.getItemMeta(egg) instanceof BannerMetaMock);
+	}
 
-		for (Material m : Tag.ITEMS_SKULLS.getValues())
-		{
-			assertTrue(factory.getItemMeta(m) instanceof SkullMetaMock);
-		}
+	@ParameterizedTest
+	@MethodSource("trimmable_Materials")
+	void testGetItemMetaCorrectClass_Trimmable(Material egg)
+	{
+		assertTrue(factory.getItemMeta(egg) instanceof ArmorMetaMock);
+	}
 
+	@ParameterizedTest
+	@MethodSource("skulls_Materials")
+	void testGetItemMetaCorrectClass_Skulls(Material egg)
+	{
+		assertTrue(factory.getItemMeta(egg) instanceof SkullMetaMock);
+	}
+
+	public static Stream<Arguments> spawnEgg_Materials()
+	{
+		return MaterialTags.SPAWN_EGGS.getValues().stream().map(Arguments::of);
+	}
+
+	public static Stream<Arguments> banners_Materials()
+	{
+		return Tag.ITEMS_BANNERS.getValues().stream().map(Arguments::of);
+	}
+
+	public static Stream<Arguments> trimmable_Materials()
+	{
+		return Tag.ITEMS_TRIMMABLE_ARMOR.getValues().stream().map(Arguments::of);
+	}
+
+	public static Stream<Arguments> skulls_Materials()
+	{
+		return Tag.ITEMS_SKULLS.getValues().stream().map(Arguments::of);
 	}
 
 	@Test
