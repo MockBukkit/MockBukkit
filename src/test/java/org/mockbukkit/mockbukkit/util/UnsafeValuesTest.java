@@ -109,7 +109,6 @@ class UnsafeValuesTest
 
 	private static Stream<Arguments> provideTestItems() throws IOException
 	{
-		MockBukkit.mock();
 		List<Arguments> args = new ArrayList<>();
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/itemstack/metaItemTypes.json"))
 		{

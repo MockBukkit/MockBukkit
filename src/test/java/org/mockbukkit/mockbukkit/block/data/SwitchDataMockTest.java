@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class SwitchDataMockTest
 {
 
@@ -33,14 +36,7 @@ class SwitchDataMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.getOrCreateMock();
 		switchDataMock = new SwitchDataMock(Material.ACACIA_BUTTON);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -155,8 +151,6 @@ class SwitchDataMockTest
 
 	private static Stream<Material> getPossibleMaterials()
 	{
-		// Tags requires MockBukkit to have been mocked once before
-		MockBukkit.mock();
 		Set<Material> possibleMaterials = new HashSet<>(Tag.BUTTONS.getValues());
 		possibleMaterials.add(Material.LEVER);
 		return Stream.of(possibleMaterials.toArray(new Material[possibleMaterials.size()]));
