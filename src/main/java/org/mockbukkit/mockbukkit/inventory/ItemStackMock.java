@@ -14,8 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
@@ -143,7 +143,7 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	public boolean setItemMeta(@org.jetbrains.annotations.Nullable ItemMeta itemMeta)
+	public boolean setItemMeta(@Nullable ItemMeta itemMeta)
 	{
 		if(itemMeta == null)
 		{
@@ -209,7 +209,7 @@ public class ItemStackMock extends ItemStack
 	{
 		short oldDurability = this.durability;
 		this.durability = (short) Math.min(Math.max(durability, 0), this.type.getMaxDurability());
-		if(this.itemMeta != null && (this.itemMeta instanceof Damageable damageable) && this.durability != oldDurability){
+		if((this.itemMeta instanceof Damageable damageable) && this.durability != oldDurability){
 			damageable.setDamage(this.durability);
 		}
 	}
@@ -264,7 +264,7 @@ public class ItemStackMock extends ItemStack
 		ItemStackMock clone = new ItemStackMock(this.type);
 
 		clone.setAmount(this.amount);
-		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta);
+		clone.setItemMeta(this.itemMeta);
 		clone.durability = this.durability;
 		return clone;
 	}

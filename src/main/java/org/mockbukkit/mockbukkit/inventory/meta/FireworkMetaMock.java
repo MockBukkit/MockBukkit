@@ -43,6 +43,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		if(meta instanceof FireworkMeta fireworkMeta)
 		{
 			this.effects.addAll(fireworkMeta.getEffects());
+			this.power = fireworkMeta.getPower();
 		}
 	}
 
