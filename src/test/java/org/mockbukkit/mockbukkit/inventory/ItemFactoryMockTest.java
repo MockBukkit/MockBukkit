@@ -128,25 +128,21 @@ class ItemFactoryMockTest
 
 	public static Stream<Arguments> spawnEgg_Materials()
 	{
-		MockBukkit.getOrCreateMock(); // Ensure server is created for use of MaterialTags
 		return MaterialTags.SPAWN_EGGS.getValues().stream().map(Arguments::of);
 	}
 
 	public static Stream<Arguments> banners_Materials()
 	{
-		MockBukkit.getOrCreateMock(); // Ensure server is created for use of Tag
 		return Tag.ITEMS_BANNERS.getValues().stream().map(Arguments::of);
 	}
 
 	public static Stream<Arguments> trimmable_Materials()
 	{
-		MockBukkit.getOrCreateMock(); // Ensure server is created for use of Tag
 		return Tag.ITEMS_TRIMMABLE_ARMOR.getValues().stream().map(Arguments::of);
 	}
 
 	public static Stream<Arguments> skulls_Materials()
 	{
-		MockBukkit.getOrCreateMock(); // Ensure server is created for use of Tag
 		return Tag.ITEMS_SKULLS.getValues().stream().map(Arguments::of);
 	}
 
