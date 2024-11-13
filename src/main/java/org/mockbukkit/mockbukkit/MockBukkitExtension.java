@@ -113,6 +113,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public void preDestroyTestInstance(ExtensionContext context)
 	{
 		MockBukkit.unmock();
+		MockBukkit.mock(); // Ensure a mock is always available between test runs. Note that after all un-mocks everything after the whole test has run
 	}
 
 	@Override
