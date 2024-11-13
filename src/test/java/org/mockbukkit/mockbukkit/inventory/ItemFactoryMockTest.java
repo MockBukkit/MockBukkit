@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
@@ -40,6 +41,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -61,38 +63,38 @@ class ItemFactoryMockTest
 	@Test
 	void testGetItemMetaCorrectClass()
 	{
-		assertTrue(factory.getItemMeta(Material.DIRT) instanceof ItemMetaMock);
-		assertTrue(factory.getItemMeta(Material.PLAYER_HEAD) instanceof SkullMetaMock);
+		assertInstanceOf(ItemMetaMock.class, factory.getItemMeta(Material.DIRT));
+		assertInstanceOf(SkullMetaMock.class, factory.getItemMeta(Material.PLAYER_HEAD));
 
-		assertTrue(factory.getItemMeta(Material.WRITABLE_BOOK) instanceof BookMetaMock);
-		assertTrue(factory.getItemMeta(Material.WRITTEN_BOOK) instanceof BookMetaMock);
-		assertTrue(factory.getItemMeta(Material.ENCHANTED_BOOK) instanceof EnchantmentStorageMetaMock);
-		assertTrue(factory.getItemMeta(Material.KNOWLEDGE_BOOK) instanceof KnowledgeBookMetaMock);
+		assertInstanceOf(BookMetaMock.class, factory.getItemMeta(Material.WRITABLE_BOOK));
+		assertInstanceOf(BookMetaMock.class, factory.getItemMeta(Material.WRITTEN_BOOK));
+		assertInstanceOf(EnchantmentStorageMetaMock.class, factory.getItemMeta(Material.ENCHANTED_BOOK));
+		assertInstanceOf(KnowledgeBookMetaMock.class, factory.getItemMeta(Material.KNOWLEDGE_BOOK));
 
-		assertTrue(factory.getItemMeta(Material.FIREWORK_STAR) instanceof FireworkEffectMetaMock);
-		assertTrue(factory.getItemMeta(Material.FIREWORK_ROCKET) instanceof FireworkMetaMock);
+		assertInstanceOf(FireworkEffectMetaMock.class, factory.getItemMeta(Material.FIREWORK_STAR));
+		assertInstanceOf(FireworkMetaMock.class, factory.getItemMeta(Material.FIREWORK_ROCKET));
 
-		assertTrue(factory.getItemMeta(Material.SUSPICIOUS_STEW) instanceof SuspiciousStewMetaMock);
-		assertTrue(factory.getItemMeta(Material.POTION) instanceof PotionMetaMock);
-		assertTrue(factory.getItemMeta(Material.TIPPED_ARROW) instanceof PotionMetaMock);
+		assertInstanceOf(SuspiciousStewMetaMock.class, factory.getItemMeta(Material.SUSPICIOUS_STEW));
+		assertInstanceOf(PotionMetaMock.class, factory.getItemMeta(Material.POTION));
+		assertInstanceOf(PotionMetaMock.class, factory.getItemMeta(Material.TIPPED_ARROW));
 
-		assertTrue(factory.getItemMeta(Material.LEATHER_HELMET) instanceof ColorableArmorMetaMock);
-		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof ColorableArmorMetaMock);
-		assertTrue(factory.getItemMeta(Material.LEATHER_LEGGINGS) instanceof ColorableArmorMetaMock);
-		assertTrue(factory.getItemMeta(Material.LEATHER_BOOTS) instanceof ColorableArmorMetaMock);
-		assertTrue(factory.getItemMeta(Material.WOLF_ARMOR) instanceof ColorableArmorMetaMock);
-		assertTrue(factory.getItemMeta(Material.LEATHER_HORSE_ARMOR) instanceof LeatherArmorMetaMock);
+		assertInstanceOf(ColorableArmorMetaMock.class, factory.getItemMeta(Material.LEATHER_HELMET));
+		assertInstanceOf(ColorableArmorMetaMock.class, factory.getItemMeta(Material.LEATHER_CHESTPLATE));
+		assertInstanceOf(ColorableArmorMetaMock.class, factory.getItemMeta(Material.LEATHER_LEGGINGS));
+		assertInstanceOf(ColorableArmorMetaMock.class, factory.getItemMeta(Material.LEATHER_BOOTS));
+		assertInstanceOf(ColorableArmorMetaMock.class, factory.getItemMeta(Material.WOLF_ARMOR));
+		assertInstanceOf(LeatherArmorMetaMock.class, factory.getItemMeta(Material.LEATHER_HORSE_ARMOR));
 
-		assertTrue(factory.getItemMeta(Material.SHIELD) instanceof ShieldMetaMock);
+		assertInstanceOf(ShieldMetaMock.class, factory.getItemMeta(Material.SHIELD));
 
-		assertTrue(factory.getItemMeta(Material.AXOLOTL_BUCKET) instanceof AxolotlBucketMetaMock);
-		assertTrue(factory.getItemMeta(Material.BUNDLE) instanceof BundleMetaMock);
-		assertTrue(factory.getItemMeta(Material.FILLED_MAP) instanceof MapMetaMock);
-		assertTrue(factory.getItemMeta(Material.COMPASS) instanceof CompassMetaMock);
-		assertTrue(factory.getItemMeta(Material.CROSSBOW) instanceof CrossbowMetaMock);
-		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
-		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
-		assertTrue(factory.getItemMeta(Material.OMINOUS_BOTTLE) instanceof OminousBottleMetaMock);
+		assertInstanceOf(AxolotlBucketMetaMock.class, factory.getItemMeta(Material.AXOLOTL_BUCKET));
+		assertInstanceOf(BundleMetaMock.class, factory.getItemMeta(Material.BUNDLE));
+		assertInstanceOf(MapMetaMock.class, factory.getItemMeta(Material.FILLED_MAP));
+		assertInstanceOf(CompassMetaMock.class, factory.getItemMeta(Material.COMPASS));
+		assertInstanceOf(CrossbowMetaMock.class, factory.getItemMeta(Material.CROSSBOW));
+		assertInstanceOf(ArmorStandMetaMock.class, factory.getItemMeta(Material.ARMOR_STAND));
+		assertInstanceOf(TropicalFishBucketMetaMock.class, factory.getItemMeta(Material.TROPICAL_FISH_BUCKET));
+		assertInstanceOf(OminousBottleMetaMock.class, factory.getItemMeta(Material.OMINOUS_BOTTLE));
 
 	}
 
@@ -100,47 +102,51 @@ class ItemFactoryMockTest
 	@MethodSource("spawnEgg_Materials")
 	void testGetItemMetaCorrectClass_SpawnEgg(Material egg)
 	{
-		assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMetaMock);
+		assertInstanceOf(SpawnEggMetaMock.class, factory.getItemMeta(egg));
 	}
 
 	@ParameterizedTest
 	@MethodSource("banners_Materials")
-	void testGetItemMetaCorrectClass_Banners(Material egg)
+	void testGetItemMetaCorrectClass_Banners(Material banner)
 	{
-		assertTrue(factory.getItemMeta(egg) instanceof BannerMetaMock);
+		assertInstanceOf(BannerMetaMock.class, factory.getItemMeta(banner));
 	}
 
 	@ParameterizedTest
 	@MethodSource("trimmable_Materials")
-	void testGetItemMetaCorrectClass_Trimmable(Material egg)
+	void testGetItemMetaCorrectClass_Trimmable(Material armor)
 	{
-		assertTrue(factory.getItemMeta(egg) instanceof ArmorMetaMock);
+		assertInstanceOf(ArmorMetaMock.class, factory.getItemMeta(armor));
 	}
 
 	@ParameterizedTest
 	@MethodSource("skulls_Materials")
-	void testGetItemMetaCorrectClass_Skulls(Material egg)
+	void testGetItemMetaCorrectClass_Skulls(Material skull)
 	{
-		assertTrue(factory.getItemMeta(egg) instanceof SkullMetaMock);
+		assertInstanceOf(SkullMetaMock.class, factory.getItemMeta(skull));
 	}
 
 	public static Stream<Arguments> spawnEgg_Materials()
 	{
+		MockBukkit.getOrCreateMock(); // Ensure server is created for use of MaterialTags
 		return MaterialTags.SPAWN_EGGS.getValues().stream().map(Arguments::of);
 	}
 
 	public static Stream<Arguments> banners_Materials()
 	{
+		MockBukkit.getOrCreateMock(); // Ensure server is created for use of Tag
 		return Tag.ITEMS_BANNERS.getValues().stream().map(Arguments::of);
 	}
 
 	public static Stream<Arguments> trimmable_Materials()
 	{
+		MockBukkit.getOrCreateMock(); // Ensure server is created for use of Tag
 		return Tag.ITEMS_TRIMMABLE_ARMOR.getValues().stream().map(Arguments::of);
 	}
 
 	public static Stream<Arguments> skulls_Materials()
 	{
+		MockBukkit.getOrCreateMock(); // Ensure server is created for use of Tag
 		return Tag.ITEMS_SKULLS.getValues().stream().map(Arguments::of);
 	}
 

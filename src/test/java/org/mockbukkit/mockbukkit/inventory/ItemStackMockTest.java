@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -364,7 +365,7 @@ class ItemStackMockTest
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 		ItemMeta meta = itemStack.getItemMeta();
 
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 
 		Damageable damageable = (Damageable) meta;
 		assertEquals(itemStack.getDurability(), damageable.getDamage());
@@ -378,7 +379,7 @@ class ItemStackMockTest
 		itemStack.setDurability((short) 0);
 		ItemMeta meta = itemStack.getItemMeta();
 
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		Damageable damageable = (Damageable) meta;
 
 		assertEquals(itemStack.getDurability(), damageable.getDamage());
@@ -392,7 +393,7 @@ class ItemStackMockTest
 		itemStack.setDurability((short) 1);
 		ItemMeta meta = itemStack.getItemMeta();
 
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		Damageable damageable = (Damageable) meta;
 
 		assertEquals(itemStack.getDurability(), damageable.getDamage());
@@ -406,7 +407,7 @@ class ItemStackMockTest
 		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemMeta meta = itemStack.getItemMeta();
 
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		Damageable damageable = (Damageable) meta;
 		damageable.setDamage(0);
 
@@ -419,7 +420,7 @@ class ItemStackMockTest
 
 		// Check new meta has no damage value
 		meta = itemStack.getItemMeta();
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		damageable = (Damageable) meta;
 
 		assertEquals(0, damageable.getDamage());
@@ -433,7 +434,7 @@ class ItemStackMockTest
 		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemMeta meta = itemStack.getItemMeta();
 
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		Damageable damageable = (Damageable) meta;
 		damageable.setDamage(1);
 
@@ -446,7 +447,7 @@ class ItemStackMockTest
 
 		// Check new meta has damage value
 		meta = itemStack.getItemMeta();
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		damageable = (Damageable) meta;
 
 		assertEquals(1, itemStack.getDurability());
@@ -549,7 +550,7 @@ class ItemStackMockTest
 		itemStack.setDurability((short) 0);
 
 		ItemMeta meta = itemStack.getItemMeta();
-		assertTrue(meta instanceof Damageable);
+		assertInstanceOf(Damageable.class, meta);
 		Damageable damageable = (Damageable) meta;
 
 		assertFalse(damageable.hasDamage());
