@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
@@ -78,7 +80,7 @@ import java.util.Optional;
  * }
  * </code></pre>
  */
-public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver
+public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, AfterAllCallback
 {
 
 	@Override
@@ -127,6 +129,18 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		if (!supportsParameter(parameterContext, extensionContext))
 			return null;
 		return MockBukkit.getOrCreateMock();
+	}
+
+	@Override
+	public void beforeAll(ExtensionContext context) throws Exception
+	{
+		MockBukkit.getOrCreateMock();
+	}
+
+	@Override
+	public void afterAll(ExtensionContext context) throws Exception
+	{
+		MockBukkit.unmock();
 	}
 
 }
