@@ -145,7 +145,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean setItemMeta(@Nullable ItemMeta itemMeta)
 	{
-		if(itemMeta == null)
+		if(itemMeta == null || ItemType.AIR.equals(this.type))
 		{
 			this.itemMeta = findItemMeta(getType());
 			this.durability = initDurability(this.type);
