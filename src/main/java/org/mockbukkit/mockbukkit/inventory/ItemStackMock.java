@@ -29,7 +29,7 @@ public class ItemStackMock extends ItemStack
 
 	private ItemType type = ItemTypeMock.AIR;
 	private int amount = 1;
-	private ItemMeta itemMeta = new ItemMetaMock();
+	private ItemMeta itemMeta;
 	private short durability = -1;
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
@@ -67,6 +67,7 @@ public class ItemStackMock extends ItemStack
 		this.type = ItemTypeMock.AIR;
 		this.durability = initDurability(type);
 		this.amount = 0;
+		this.itemMeta = null;
 	}
 
 	private ItemStackMock(@NotNull ItemType type)
@@ -312,9 +313,9 @@ public class ItemStackMock extends ItemStack
 		throw new UnimplementedOperationException();
 	}
 
-	public static ItemStackMock empty()
+	public static ItemStack empty()
 	{
-		return EMPTY;
+		return EMPTY.clone();
 	}
 
 	@Override
