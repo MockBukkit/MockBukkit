@@ -282,7 +282,7 @@ public class ItemStackMock extends ItemStack
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.getLore(), bukkit.getLore()) && Objects.equals(this.getEnchantments(), bukkit.getEnchantments());
+			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.itemMeta, bukkit.getItemMeta());
 		}
 		else
 		{
