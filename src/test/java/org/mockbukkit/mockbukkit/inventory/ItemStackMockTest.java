@@ -1,29 +1,31 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.meta.Damageable;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.papermc.paper.persistence.PersistentDataContainerView;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -31,12 +33,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockBukkitExtension.class)
 class ItemStackMockTest
@@ -570,6 +572,91 @@ class ItemStackMockTest
 
 		assertFalse(damageable.hasDamage());
 		assertTrue(damageable.hasDamageValue());
+	}
+
+	@Test
+	void getPersistentDataContainer()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		PersistentDataContainerView persistentDataContainerView = item.getPersistentDataContainer();
+
+		assertNotNull(persistentDataContainerView);
+	}
+
+	@Test
+	void withType()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		item.setDurability((short) 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setLore(Collections.singletonList("test"));
+
+		item.setItemMeta(meta);
+		ItemStack other = item.withType(Material.NETHERITE_PICKAXE);
+
+		assertEquals(item.getItemMeta(), other.getItemMeta());
+		assertEquals(Material.NETHERITE_PICKAXE, other.getType());
+		assertEquals(item.getDurability(), other.getDurability());
+	}
+
+	@Test
+	void withType_Air()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		item.setDurability((short) 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setLore(Collections.singletonList("test"));
+
+		item.setItemMeta(meta);
+		ItemStack other = item.withType(Material.AIR);
+
+		assertEquals(null, other.getItemMeta());
+		assertEquals(Material.AIR, other.getType());
+	}
+
+	@Test
+	void containsEnchantment()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+
+		assertFalse(item.containsEnchantment(Enchantment.EFFICIENCY));
+		item.addUnsafeEnchantment(Enchantment.EFFICIENCY, 5);
+		assertTrue(item.containsEnchantment(Enchantment.EFFICIENCY));
+
+		assertEquals(5, item.removeEnchantment(Enchantment.EFFICIENCY));
+	}
+
+	@Test
+	void containsEnchantment_Air()
+	{
+		ItemStackMock item = new ItemStackMock(Material.AIR);
+
+		assertFalse(item.containsEnchantment(Enchantment.EFFICIENCY));
+		item.addUnsafeEnchantment(Enchantment.EFFICIENCY, 5);
+		assertFalse(item.containsEnchantment(Enchantment.EFFICIENCY));
+
+		assertEquals(0, item.removeEnchantment(Enchantment.EFFICIENCY));
+	}
+
+	@Test
+	void removeEnchantment_Empty()
+	{
+		ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		assertEquals(0, item.removeEnchantment(Enchantment.EFFICIENCY));
+	}
+
+	@Test
+	void removeEnchantments()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+
+		item.addUnsafeEnchantment(Enchantment.EFFICIENCY, 5);
+		item.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
+
+		assertEquals(2, item.getEnchantments().size());
+		item.removeEnchantments();
+		assertTrue(item.getEnchantments().isEmpty());
 	}
 
 }
