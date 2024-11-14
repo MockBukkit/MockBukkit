@@ -611,17 +611,21 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void testNegativeDamageFail(){
-		try {
+	void testNegativeDamageFail()
+	{
+		try
+		{
 			meta.setDamage(-1);
 			fail("Negative damage could be set");
-		} catch (IllegalStateException e){
+		} catch (IllegalStateException e)
+		{
 			// Good scenario
 		}
 	}
 
 	@Test
-	void testResetDamage(){
+	void testResetDamage()
+	{
 		meta.setDamage(1);
 
 		assertTrue(meta.hasDamageValue());

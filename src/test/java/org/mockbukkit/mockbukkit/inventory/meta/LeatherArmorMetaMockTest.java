@@ -50,7 +50,8 @@ class LeatherArmorMetaMockTest
 	}
 
 	@Test
-	void isDyed(){
+	void isDyed()
+	{
 		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 
 		assertFalse(meta.isDyed());

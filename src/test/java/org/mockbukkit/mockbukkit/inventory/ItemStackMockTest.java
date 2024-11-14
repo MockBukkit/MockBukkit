@@ -326,7 +326,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setItemMeta_IsCopy(){
+	void setItemMeta_IsCopy()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 
 		ItemMeta meta1 = itemStack.getItemMeta();
@@ -344,7 +345,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void getItemMeta_IsCopy(){
+	void getItemMeta_IsCopy()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 
 		ItemMeta meta1 = itemStack.getItemMeta();
@@ -361,7 +363,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void getItemMeta_DamageEmpty(){
+	void getItemMeta_DamageEmpty()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 		ItemMeta meta = itemStack.getItemMeta();
 
@@ -374,7 +377,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setDurability_ZeroMetaDamageEqual(){
+	void setDurability_ZeroMetaDamageEqual()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 		itemStack.setDurability((short) 0);
 		ItemMeta meta = itemStack.getItemMeta();
@@ -388,7 +392,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setDurability_NonZeroMetaDamageEqual(){
+	void setDurability_NonZeroMetaDamageEqual()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
 		itemStack.setDurability((short) 1);
 		ItemMeta meta = itemStack.getItemMeta();
@@ -402,7 +407,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setDamage_ZeroItemDurabilityEqual(){
+	void setDamage_ZeroItemDurabilityEqual()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemMeta meta = itemStack.getItemMeta();
@@ -429,7 +435,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setDamage_NonZeroItemDurabilityEqual(){
+	void setDamage_NonZeroItemDurabilityEqual()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemMeta meta = itemStack.getItemMeta();
@@ -456,7 +463,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void getDurability_OnAir(){
+	void getDurability_OnAir()
+	{
 		ItemStackMock itemStack = new ItemStackMock(Material.AIR);
 		ItemStack cloned = itemStack.clone();
 
@@ -469,7 +477,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setType_ChangeDurability(){
+	void setType_ChangeDurability()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND);
 		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
 
@@ -481,7 +490,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setType_AirChangeDurability(){
+	void setType_AirChangeDurability()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
 
@@ -494,7 +504,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setType_DurabilityUnsetFromSetting(){
+	void setType_DurabilityUnsetFromSetting()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND);
 		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
 
@@ -506,7 +517,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setType_DurabilitySetFromSetting(){
+	void setType_DurabilitySetFromSetting()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemStack itm = new ItemStack(Material.DIAMOND);
 
@@ -517,7 +529,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setType_switchMeta(){
+	void setType_switchMeta()
+	{
 		ItemStack itm = new ItemStack(Material.DIAMOND_CHESTPLATE);
 
 		ItemMeta meta = itm.getItemMeta();
@@ -533,7 +546,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void setItemMeta_setNull(){
+	void setItemMeta_setNull()
+	{
 		ItemStack base = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
 
@@ -545,7 +559,8 @@ class ItemStackMockTest
 	}
 
 	@Test
-	void getItemMeta_Empty(){
+	void getItemMeta_Empty()
+	{
 		ItemStack itemStack = new ItemStack(Material.STICK);
 		itemStack.setDurability((short) 0);
 

@@ -23,7 +23,8 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 		super();
 	}
 
-	public ArmorMetaMock(ItemMeta meta){
+	public ArmorMetaMock(ItemMeta meta)
+	{
 		super(meta);
 
 		if(meta instanceof ArmorMetaMock armorMeta)

@@ -160,7 +160,8 @@ public class ItemStackMock extends ItemStack
 		if(itemMeta == null) return true;
 		this.itemMeta = itemMeta;
 
-		if(this.itemMeta instanceof Damageable damageable){
+		if(this.itemMeta instanceof Damageable damageable)
+		{
 			short defaultDurability = initDurability(this.type);
 			if(!damageable.hasDamageValue())
 			{
@@ -170,7 +171,8 @@ public class ItemStackMock extends ItemStack
 			{
 				short value = (short) Math.min(Short.MAX_VALUE, damageable.getDamage());
 				setDurability(value);
-				if(durability == defaultDurability){
+				if(durability == defaultDurability)
+				{
 					damageable.resetDamage();
 				}
 			}
@@ -209,7 +211,8 @@ public class ItemStackMock extends ItemStack
 	{
 		short oldDurability = this.durability;
 		this.durability = (short) Math.min(Math.max(durability, 0), this.type.getMaxDurability());
-		if((this.itemMeta instanceof Damageable damageable) && this.durability != oldDurability){
+		if((this.itemMeta instanceof Damageable damageable) && this.durability != oldDurability)
+		{
 			damageable.setDamage(this.durability);
 		}
 	}

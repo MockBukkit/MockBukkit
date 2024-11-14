@@ -600,7 +600,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("repair-cost", this.repairCost);
 		map.put("ItemFlags", this.hideFlags);
 		map.put("Unbreakable", this.unbreakable);
-		if(this.damage != null){
+		if(this.damage != null)
+		{
 			map.put("Damage", this.damage);
 		}
 

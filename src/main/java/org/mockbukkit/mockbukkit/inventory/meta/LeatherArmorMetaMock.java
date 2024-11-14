@@ -36,7 +36,8 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	{
 		super(meta);
 
-		if(meta instanceof LeatherArmorMeta leatherArmorMeta){
+		if(meta instanceof LeatherArmorMeta leatherArmorMeta)
+		{
 			this.color = leatherArmorMeta.isDyed() ? leatherArmorMeta.getColor() : null;
 		}
 	}
@@ -104,7 +105,8 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	{
 		LeatherArmorMetaMock serialMock = new LeatherArmorMetaMock();
 		serialMock.deserializeInternal(args);
-		if(args.containsKey("color")){
+		if(args.containsKey("color"))
+		{
 			serialMock.color = Color.fromARGB((int) args.get("color"));
 		}
 		return serialMock;
@@ -120,7 +122,8 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		if(isDyed()){
+		if(isDyed())
+		{
 			serialized.put("color", color.asARGB());
 		}
 		return serialized;

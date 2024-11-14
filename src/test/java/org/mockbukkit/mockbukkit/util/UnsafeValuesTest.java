@@ -201,7 +201,8 @@ class UnsafeValuesTest
 			if(methodName.startsWith("remove")) continue;
 
 			// This method cause error with trivial value. So we set convenient value
-			if(methodName.contentEquals("setAmplifier")){
+			if(methodName.contentEquals("setAmplifier"))
+			{
 				method.invoke(meta, 4);
 				continue;
 			}

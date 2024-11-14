@@ -30,7 +30,8 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	{
 		super(meta);
 
-		if(meta instanceof OminousBottleMeta bottleMeta){
+		if(meta instanceof OminousBottleMeta bottleMeta)
+		{
 			this.amplifier = bottleMeta.hasAmplifier() ? bottleMeta.getAmplifier() : null;
 		}
 	}

@@ -61,14 +61,16 @@ class ColorableArmorMetaMockTest
 	}
 
 	@Test
-	void equal_validEmpty(){
+	void equal_validEmpty()
+	{
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
 
 		assertEquals(meta, other);
 	}
 
 	@Test
-	void equal_validNonEmpty(){
+	void equal_validNonEmpty()
+	{
 		meta.setColor(color);
 
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
@@ -78,7 +80,8 @@ class ColorableArmorMetaMockTest
 	}
 
 	@Test
-	void equal_invalidEmpty(){
+	void equal_invalidEmpty()
+	{
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
 		other.setColor(color);
 
@@ -86,7 +89,8 @@ class ColorableArmorMetaMockTest
 	}
 
 	@Test
-	void equal_invalidNonEmpty(){
+	void equal_invalidNonEmpty()
+	{
 		meta.setColor(DEFAULT_LEATHER_COLOR);
 
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
