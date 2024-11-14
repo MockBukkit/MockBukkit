@@ -50,8 +50,7 @@ public class ItemStackMock extends ItemStack
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
 		this.durability = initDurability(this.type);
-
-
+		setItemMeta(stack.getItemMeta());
 	}
 
 	public ItemStackMock(@NotNull Material type, int amount)
