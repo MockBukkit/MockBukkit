@@ -13,16 +13,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
+import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class ItemStackMock extends ItemStack
 {
@@ -259,16 +262,29 @@ public class ItemStackMock extends ItemStack
 		return this.type == bukkit.type;
 	}
 
+	private final PersistentDataContainerView pdcView = new PersistentDataContainerViewMock()
+	{
+		@Override
+		public <P, C> @Nullable C get(@NotNull NamespacedKey key, @NotNull PersistentDataType<P, C> type)
+		{
+			if (itemMeta == null) return null;
+
+			return itemMeta.getPersistentDataContainer().get(key, type);
+		}
+
+		@Override
+		public @NotNull Set<NamespacedKey> getKeys()
+		{
+			if (itemMeta == null) return Set.of();
+
+			return itemMeta.getPersistentDataContainer().getKeys();
+		}
+	};
+
 	@Override
 	public @NotNull PersistentDataContainerView getPersistentDataContainer()
 	{
-		if (this.itemMeta == null)
-		{
-			//TODO
-			throw new UnimplementedOperationException();
-		}
-
-		return itemMeta.getPersistentDataContainer();
+		return pdcView;
 	}
 
 	@Override

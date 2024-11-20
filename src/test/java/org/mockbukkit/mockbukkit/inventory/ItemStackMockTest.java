@@ -12,6 +12,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,6 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -578,9 +580,35 @@ class ItemStackMockTest
 	void getPersistentDataContainer()
 	{
 		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
-		PersistentDataContainerView persistentDataContainerView = item.getPersistentDataContainer();
+		PersistentDataContainerView view1 = item.getPersistentDataContainer();
+		PersistentDataContainerView view2 = item.getPersistentDataContainer();
 
-		assertNotNull(persistentDataContainerView);
+		assertSame(view1, view2);
+		assertNotNull(view1);
+		assertTrue(view1.isEmpty());
+
+		NamespacedKey key = NamespacedKey.fromString("key");
+		ItemMeta meta = item.getItemMeta();
+
+		meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "value");
+		assertTrue(view1.isEmpty());
+
+		item.setItemMeta(meta);
+		assertFalse(view1.isEmpty());
+		assertEquals("value", view1.get(key, PersistentDataType.STRING));
+	}
+
+	@Test
+	void getPersistentDataContainer_Air()
+	{
+		ItemStack item = new ItemStack(Material.AIR);
+		PersistentDataContainerView view1 = item.getPersistentDataContainer();
+		PersistentDataContainerView view2 = item.getPersistentDataContainer();
+
+		assertSame(view1, view2);
+		assertNotNull(view1);
+
+		assertTrue(view1.isEmpty());
 	}
 
 	@Test
