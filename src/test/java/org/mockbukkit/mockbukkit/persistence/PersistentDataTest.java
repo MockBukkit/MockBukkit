@@ -1,10 +1,8 @@
 package org.mockbukkit.mockbukkit.persistence;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -12,8 +10,11 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.persistence.PersistentDataAdapterContextMock;
-import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -55,6 +56,9 @@ class PersistentDataTest
 	@Test
 	void testImplementationMocks()
 	{
+		ItemStack item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		assertTrue(item.getPersistentDataContainer() instanceof PersistentDataContainerViewMock);
+
 		ItemMeta meta = new ItemMetaMock();
 		assertTrue(meta.getPersistentDataContainer() instanceof PersistentDataContainerMock);
 
