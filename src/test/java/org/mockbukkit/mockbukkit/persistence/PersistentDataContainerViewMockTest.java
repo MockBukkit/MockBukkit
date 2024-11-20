@@ -14,7 +14,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockBukkitExtension.class)
-public class PersistentDataContainerViewMockTest {
+class PersistentDataContainerViewMockTest {
 
     PersistentDataContainerMock parentContainer;
     PersistentDataContainerViewMock view;
