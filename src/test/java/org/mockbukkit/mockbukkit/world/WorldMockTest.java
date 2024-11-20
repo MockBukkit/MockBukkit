@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.world;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
+import io.papermc.paper.world.MoonPhase;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
@@ -46,6 +47,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -2388,6 +2390,35 @@ class WorldMockTest
 
 		zombie.remove();
 		assertEquals(0, world.getEntityCount());
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"FULL_MOON, 0",
+		"FULL_MOON, 23999",
+		"WANING_GIBBOUS, 24000",
+		"WANING_GIBBOUS, 47999",
+		"LAST_QUARTER, 48000",
+		"LAST_QUARTER, 71999",
+		"WANING_CRESCENT, 72000",
+		"WANING_CRESCENT, 95999",
+		"NEW_MOON, 96000",
+		"NEW_MOON, 119999",
+		"WAXING_CRESCENT, 120000",
+		"WAXING_CRESCENT, 143999",
+		"FIRST_QUARTER, 144000",
+		"FIRST_QUARTER, 167999",
+		"WAXING_GIBBOUS, 168000",
+		"WAXING_GIBBOUS, 191999",
+		"FULL_MOON, 192000",
+	})
+	void getMoonPhase(MoonPhase expected, long time)
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+
+		world.setFullTime(time);
+
+		assertEquals(expected, world.getMoonPhase());
 	}
 
 }

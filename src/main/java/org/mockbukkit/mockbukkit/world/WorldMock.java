@@ -634,8 +634,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull MoonPhase getMoonPhase()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MoonPhase.getPhase(getFullTime() / 24000L);
 	}
 
 	@Override
