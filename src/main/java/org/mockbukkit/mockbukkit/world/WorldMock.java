@@ -589,8 +589,13 @@ public class WorldMock implements World
 	@Override
 	public int getEntityCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		int ret = 0;
+		for (Entity entity : getEntities()) {
+			if (isChunkLoaded(entity.getChunk())) {
+				++ret;
+			}
+		}
+		return ret;
 	}
 
 	@Override

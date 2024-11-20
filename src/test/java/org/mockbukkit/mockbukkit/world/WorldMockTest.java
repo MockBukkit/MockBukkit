@@ -41,6 +41,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -2368,6 +2369,25 @@ class WorldMockTest
 
 		world.setEnvironment(World.Environment.THE_END);
 		assertEquals(256, world.getLogicalHeight());
+	}
+
+	@Test
+	void getEntityCount()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(0, world.getEntityCount());
+
+		Entity zombie = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
+		assertEquals(1, world.getEntityCount());
+
+		Entity wolf = world.spawnEntity(new Location(world, 5, 5, 5), EntityType.WOLF);
+		assertEquals(2, world.getEntityCount());
+
+		wolf.remove();
+		assertEquals(1, world.getEntityCount());
+
+		zombie.remove();
+		assertEquals(0, world.getEntityCount());
 	}
 
 }
