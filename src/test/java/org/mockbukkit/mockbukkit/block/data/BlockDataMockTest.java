@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.block.state.BedStateMock;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -16,6 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.block.state.BedStateMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith({ MockBukkitExtension.class})
+@ExtendWith({ MockBukkitExtension.class })
 class BlockDataMockTest
 {
 
@@ -60,26 +60,15 @@ class BlockDataMockTest
 	}
 
 	@Test
-	void testGetWithNonExistentKey()
-	{
-		// Stone has no possible states
-		BlockDataMock blockData = new BlockDataMock(Material.STONE);
-
-		assertThrowsExactly(IllegalStateException.class, () -> blockData.get("non-existent-key"));
-	}
-
-	@Test
 	void testGetWithNonExistentKey2()
 	{
 		// Stone has no possible states
 		BlockDataMock blockData = new BlockDataMock(Material.ACACIA_BUTTON);
 
-		assertThrowsExactly(IllegalStateException.class, () -> blockData.get("non-existent-key"));
-
 		// Check the defaults:
 		assertEquals(false, blockData.get(BlockDataKey.POWERED));
-		assertEquals("wall", blockData.get("face"));
-		assertEquals("north", blockData.get("facing"));
+		assertEquals("wall", blockData.get(BlockDataKey.FACE));
+		assertEquals("north", blockData.get(BlockDataKey.FACING));
 	}
 
 	@Test
@@ -89,7 +78,7 @@ class BlockDataMockTest
 		BlockDataMock blockData2 = new BlockDataMock(Material.ACACIA_BUTTON);
 		assertEquals(blockData2.hashCode(), blockData.hashCode());
 
-		blockData.set("powered", true);
+		blockData.set(BlockDataKey.POWERED, true);
 		assertNotEquals(blockData2.hashCode(), blockData.hashCode());
 	}
 
@@ -98,7 +87,7 @@ class BlockDataMockTest
 	{
 		BlockDataMock blockData = new BlockDataMock(Material.ACACIA_BUTTON);
 		BlockDataMock blockData2 = new BlockDataMock(Material.ACACIA_BUTTON);
-		blockData2.set("powered", true);
+		blockData2.set(BlockDataKey.POWERED, true);
 
 		assertTrue(blockData2.matches(blockData));
 		assertFalse(blockData.matches(blockData2));
@@ -140,8 +129,8 @@ class BlockDataMockTest
 		WallSign wallSign = (WallSign) BlockDataMock.mock(Material.ACACIA_WALL_SIGN);
 		wallSign.setFacing(BlockFace.NORTH);
 		WallSign clone = (WallSign) wallSign.clone();
-		assertNotSame(wallSign,clone);
-		assertEquals(wallSign,clone);
+		assertNotSame(wallSign, clone);
+		assertEquals(wallSign, clone);
 		assertEquals(wallSign.getFacing(), clone.getFacing());
 	}
 
@@ -175,7 +164,7 @@ class BlockDataMockTest
 		String b = tmp.getAsString(true);
 
 		BlockDataMock data = new BlockDataMock(Material.CHEST);
-		data.set("waterlogged", "true");
+		data.set(BlockDataKey.WATERLOGGED, "true");
 
 		assertEquals("minecraft:chest[waterlogged=true]", data.getAsString(true));
 		assertEquals("minecraft:chest[facing=north,type=single,waterlogged=true]", data.getAsString(false));
