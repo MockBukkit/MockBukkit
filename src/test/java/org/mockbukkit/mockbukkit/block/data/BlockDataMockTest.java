@@ -77,7 +77,7 @@ class BlockDataMockTest
 		assertThrowsExactly(IllegalStateException.class, () -> blockData.get("non-existent-key"));
 
 		// Check the defaults:
-		assertEquals(false, blockData.get("powered"));
+		assertEquals(false, blockData.get(BlockDataKey.POWERED));
 		assertEquals("wall", blockData.get("face"));
 		assertEquals("north", blockData.get("facing"));
 	}

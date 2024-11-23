@@ -9,69 +9,138 @@ import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Waterlogged;
+import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Stores all {@link BlockData} keys.
  */
-final class BlockDataKey
+@ApiStatus.Internal
+public enum BlockDataKey
 {
 
 	/**
 	 * Stores the {@link BlockFace} a {@link Directional} block is facing towards.
 	 */
-	static final String FACING = "facing";
+	FACING("facing", string -> BlockFace.valueOf(string.toUpperCase(Locale.ROOT)), Directional.class::isInstance),
+
 	/**
 	 * Stores whether a {@link Campfire} is a signal fire (hay block underneath).
 	 */
-	static final String SIGNAL_FIRE = "signal_fire";
+	SIGNAL_FIRE("signal_fire", Boolean::parseBoolean, Campfire.class::isInstance),
+
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 */
-	static final String HALF = "half";
+	HALF("half", string -> Bisected.Half.valueOf(string.toUpperCase(Locale.ROOT)), Bisected.class::isInstance),
+
 	/**
 	 * Stores whether a {@link Lightable} is list.
 	 */
-	static final String LIT = "lit";
+	LIT("lit", Boolean::parseBoolean, Lightable.class::isInstance),
+
 	/**
 	 * Stores whether a {@link Bed} is occupied.
 	 */
-	static final String OCCUPIED = "occupied";
+	OCCUPIED("occupied", Boolean::parseBoolean, Bed.class::isInstance),
+
 	/**
 	 * Stores whether a {@link Openable} is open.
 	 */
-	static final String OPEN = "open";
+	OPEN("open", Boolean::parseBoolean, Openable.class::isInstance),
+
 	/**
 	 * Stores what {@link Bed.Part} of a {@link Bed} this block is.
 	 */
-	static final String PART = "part";
+	PART("part", string -> Bed.Part.valueOf(string.toUpperCase(Locale.ROOT)), Bed.class::isInstance),
+
 	/**
 	 * Stores whether a {@link Powerable} is powered.
 	 */
-	static final String POWERED = "powered";
+	POWERED("powered", Boolean::parseBoolean, Powerable.class::isInstance),
+
 	/**
 	 * Stores what {@link Stairs.Shape} a {@link Stairs} block is.
 	 */
-	static final String SHAPE = "shape";
+	SHAPE("shape", string -> Stairs.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Stairs.class::isInstance),
+
 	/**
 	 * Store what {@link Slab.Type} a {@link Slab} is.
 	 */
-	static final String TYPE = "type";
+	TYPE("type", string -> Slab.Type.valueOf(string.toUpperCase(Locale.ROOT)), Slab.class::isInstance),
+
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
 	 */
-	static final String WATERLOGGED = "waterlogged";
+	WATERLOGGED("waterlogged", Boolean::parseBoolean, Waterlogged.class::isInstance),
+
 	/**
 	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is facing
 	 */
-	static final String FACE = "face";
+	FACE("face", string -> FaceAttachable.AttachedFace.valueOf(string.toUpperCase(Locale.ROOT)), FaceAttachable.class::isInstance),
 
-	private BlockDataKey()
+
+	AGE_KEY("age", Integer::parseInt, Bamboo.class::isInstance),
+	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
+	STAGE_KEY("stage", Integer::parseInt, Bamboo.class::isInstance);
+
+	private static Map<String, BlockDataKey> keyToBlockDataKeyRelation = compileKeyRelation();
+
+
+	private String key;
+	private Function<String, Object> valueConstructor;
+	private Predicate<BlockData> applicableTo;
+
+	BlockDataKey(String key, Function<String, Object> valueConstructor, Predicate<BlockData> applicableTo)
 	{
-		throw new UnsupportedOperationException("Utility class");
+		this.key = key;
+		this.valueConstructor = valueConstructor;
+		this.applicableTo = applicableTo;
 	}
 
+	public String key()
+	{
+		return key;
+	}
+
+	public static boolean isRegistered(String key)
+	{
+		return keyToBlockDataKeyRelation.containsKey(key);
+	}
+
+	private static Map<String, BlockDataKey> compileKeyRelation()
+	{
+		Map<String, BlockDataKey> output = new HashMap<>();
+		for (BlockDataKey blockDataKey : BlockDataKey.values())
+		{
+			output.put(blockDataKey.key(), blockDataKey);
+		}
+		return output;
+	}
+
+	public static @Nullable BlockDataKey fromKey(String key)
+	{
+		return keyToBlockDataKeyRelation.get(key);
+	}
+
+	public Object constructValue(String valueString)
+	{
+		return valueConstructor.apply(valueString);
+	}
+
+	public boolean appliesTo(BlockDataMock blockData)
+	{
+		return applicableTo.test(blockData);
+	}
 }
