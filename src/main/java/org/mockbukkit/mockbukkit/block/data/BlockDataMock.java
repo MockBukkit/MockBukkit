@@ -62,6 +62,48 @@ public class BlockDataMock implements BlockData
 		this.data = new LinkedHashMap<>();
 	}
 
+	@ApiStatus.Internal
+	public static BlockDataMock newData(BlockType blockType, String data)
+	{
+		String modifiedData;
+		if (blockType == null)
+		{
+			modifiedData = data == null ? blockType.getKey().toString() : blockType.getKey() + data;
+		}
+		else
+		{
+			modifiedData = data;
+		}
+		return createNewData(modifiedData);
+	}
+
+	private static BlockDataMock createNewData(String dataString)
+	{
+		Matcher blockDataMatcher = BLOCK_DATA_PATTERN.matcher(dataString);
+		Preconditions.checkArgument(blockDataMatcher.find(), "String is not in a block data format");
+		NamespacedKey blockKey = NamespacedKey.fromString(blockDataMatcher.group(1));
+		Preconditions.checkArgument(blockKey != null, "Could not find any block data: " + blockDataMatcher.group(1));
+		String blockDataString = blockDataMatcher.group(3);
+		Material material = Registry.MATERIAL.get(blockKey);
+		Map<String, Object> data = new HashMap<>();
+		String[] blockDataArguments = blockDataString.split(",");
+		BlockDataMock blockData = new BlockDataMock(material);
+		for (String blockDataArgument : blockDataArguments)
+		{
+			String[] split = blockDataArgument.split("=");
+			String key = split[0].strip();
+			String valueString = split[1].strip();
+			Preconditions.checkArgument(BlockDataKey.isRegistered(key), "Unknown block data key: " + key);
+			BlockDataKey blockDataKey = BlockDataKey.fromKey(key);
+			Preconditions.checkArgument(blockDataKey.appliesTo(blockData), "Can not apply block data key to '" + blockKey + "': " + key);
+			Object value = blockDataKey.constructValue(valueString);
+			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
+			data.put(key, value);
+		}
+		blockData.data = data;
+		return blockData;
+	}
+
 	// region Type Checking
 
 	/**
