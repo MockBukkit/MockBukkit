@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,6 +10,8 @@ import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class BlockTypeMock implements BlockType
 {
@@ -102,13 +103,13 @@ public class BlockTypeMock implements BlockType
 	@Override
 	public @NotNull BlockData createBlockData()
 	{
-		throw new UnimplementedOperationException();
+		return BlockDataMock.mock(this.asMaterial());
 	}
 
 	@Override
 	public @NotNull BlockData createBlockData(@Nullable String data)
 	{
-		throw new UnimplementedOperationException();
+		return BlockDataMock.newData(this, data);
 	}
 
 	@Override
