@@ -36,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -235,9 +236,25 @@ class BlockDataMockTest
 		assertDoesNotThrow(() -> BlockDataMock.newData(null, serialized));
 	}
 
+	@ParameterizedTest
+	@MethodSource("getInvalidSerializations")
+	void deserialize_invalidInput(String serialized)
+	{
+		assertThrows(IllegalArgumentException.class, () -> BlockDataMock.newData(null, serialized));
+	}
+
 	static Stream<Arguments> getValidSerializations() throws IOException
 	{
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/blockData/validSerializations.json"))
+		{
+			JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray();
+			return jsonArray.asList().stream().map(JsonElement::getAsString).map(Arguments::of);
+		}
+	}
+
+	static Stream<Arguments> getInvalidSerializations() throws IOException
+	{
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/blockData/invalidSerializations.json"))
 		{
 			JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray();
 			return jsonArray.asList().stream().map(JsonElement::getAsString).map(Arguments::of);

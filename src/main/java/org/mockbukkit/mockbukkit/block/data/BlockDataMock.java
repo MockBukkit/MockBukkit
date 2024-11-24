@@ -85,6 +85,7 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkArgument(blockKey != null, "Could not find any block data: " + blockDataMatcher.group(1));
 		String blockDataString = blockDataMatcher.group(3);
 		Material material = Registry.MATERIAL.get(blockKey);
+		Preconditions.checkArgument(material != null, "Invalid material: " + blockKey);
 		Map<String, Object> data = new HashMap<>();
 		BlockDataMock blockData = BlockDataMock.mock(material);
 		if(blockDataString == null){
