@@ -66,7 +66,7 @@ public class BlockDataMock implements BlockData
 	public static BlockDataMock newData(BlockType blockType, String data)
 	{
 		String modifiedData;
-		if (blockType == null)
+		if (blockType != null)
 		{
 			modifiedData = data == null ? blockType.getKey().toString() : blockType.getKey() + data;
 		}
@@ -86,8 +86,11 @@ public class BlockDataMock implements BlockData
 		String blockDataString = blockDataMatcher.group(3);
 		Material material = Registry.MATERIAL.get(blockKey);
 		Map<String, Object> data = new HashMap<>();
+		BlockDataMock blockData = BlockDataMock.mock(material);
+		if(blockDataString == null){
+			return blockData;
+		}
 		String[] blockDataArguments = blockDataString.split(",");
-		BlockDataMock blockData = new BlockDataMock(material);
 		for (String blockDataArgument : blockDataArguments)
 		{
 			String[] split = blockDataArgument.split("=");
@@ -100,7 +103,7 @@ public class BlockDataMock implements BlockData
 			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
 			data.put(key, value);
 		}
-		blockData.data = data;
+		blockData.data.putAll(data);
 		return blockData;
 	}
 
