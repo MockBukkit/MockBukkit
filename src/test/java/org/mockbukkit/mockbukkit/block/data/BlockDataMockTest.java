@@ -10,7 +10,6 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.WallSign;
@@ -242,6 +241,13 @@ class BlockDataMockTest
 		String serialized = bed.getAsString();
 		BlockDataMock blockDataMock = BlockDataMock.newData(Registry.BLOCK.get(NamespacedKey.minecraft("black_bed")), serialized);
 		assertEquals(blockDataMock, bed);
+	}
+
+	@Test
+	void serializeDeserialize_duplicateMaterialArgument_noFields()
+	{
+		BlockDataMock blockDataMock = BlockDataMock.newData(Registry.BLOCK.get(NamespacedKey.minecraft("black_bed")), "minecraft:stone");
+		assertInstanceOf(BedDataMock.class, blockDataMock);
 	}
 
 	@ParameterizedTest
