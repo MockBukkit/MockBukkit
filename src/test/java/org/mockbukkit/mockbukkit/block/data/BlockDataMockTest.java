@@ -1,22 +1,35 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.WallSign;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.state.BedStateMock;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -201,6 +214,34 @@ class BlockDataMockTest
 		BlockState actual = bed.createBlockState();
 		assertNotNull(actual);
 		assertInstanceOf(BedStateMock.class, actual);
+	}
+
+	@Test
+	void serializeDeserializeBed()
+	{
+		BedDataMock bed = (BedDataMock) BlockDataMock.mock(Material.BLACK_BED);
+		bed.setFacing(BlockFace.EAST);
+		bed.setOccupied(true);
+		bed.setPart(Bed.Part.HEAD);
+		String serialized = bed.getAsString();
+		BlockDataMock blockDataMock = BlockDataMock.newData(null, serialized);
+		assertEquals(blockDataMock, bed);
+	}
+
+	@ParameterizedTest
+	@MethodSource("getValidSerializations")
+	void deserialize_validInput(String serialized)
+	{
+		assertDoesNotThrow(() -> BlockDataMock.newData(null, serialized));
+	}
+
+	static Stream<Arguments> getValidSerializations() throws IOException
+	{
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/blockData/validSerializations.json"))
+		{
+			JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray();
+			return jsonArray.asList().stream().map(JsonElement::getAsString).map(Arguments::of);
+		}
 	}
 
 }
