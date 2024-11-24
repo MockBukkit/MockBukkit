@@ -92,7 +92,7 @@ public class BlockDataMock implements BlockData
 		Matcher blockDataMatcher = BLOCK_DATA_PATTERN.matcher(dataString);
 		Preconditions.checkArgument(blockDataMatcher.find(), "String is not in a block data format: " + dataString);
 		NamespacedKey blockKey = NamespacedKey.fromString(blockDataMatcher.group(1));
-		Preconditions.checkArgument(blockKey != null, "Could not find any block data: " + blockDataMatcher.group(1));
+		Preconditions.checkArgument(blockKey != null, "Invalid namespace key: " + blockDataMatcher.group(1));
 		String blockDataString = blockDataMatcher.group(3);
 		Material material = Registry.MATERIAL.get(blockKey);
 		Preconditions.checkArgument(material != null, "Invalid material: " + blockKey);
