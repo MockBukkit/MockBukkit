@@ -4,10 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.WallSign;
@@ -226,6 +229,18 @@ class BlockDataMockTest
 		bed.setPart(Bed.Part.HEAD);
 		String serialized = bed.getAsString();
 		BlockDataMock blockDataMock = BlockDataMock.newData(null, serialized);
+		assertEquals(blockDataMock, bed);
+	}
+
+	@Test
+	void serializeDeserialize_duplicateMaterialArgument()
+	{
+		BedDataMock bed = (BedDataMock) BlockDataMock.mock(Material.BLACK_BED);
+		bed.setFacing(BlockFace.EAST);
+		bed.setOccupied(true);
+		bed.setPart(Bed.Part.HEAD);
+		String serialized = bed.getAsString();
+		BlockDataMock blockDataMock = BlockDataMock.newData(Registry.BLOCK.get(NamespacedKey.minecraft("black_bed")), serialized);
 		assertEquals(blockDataMock, bed);
 	}
 
