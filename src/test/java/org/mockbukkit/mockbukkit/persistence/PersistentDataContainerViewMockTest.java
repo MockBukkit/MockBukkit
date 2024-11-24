@@ -11,106 +11,123 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class PersistentDataContainerViewMockTest {
+class PersistentDataContainerViewMockTest
+{
 
-    PersistentDataContainerMock parentContainer;
-    PersistentDataContainerViewMock view;
+	PersistentDataContainerMock parentContainer;
+	PersistentDataContainerViewMock view;
 
-    @BeforeEach
-    void setUp() {
-        parentContainer = new PersistentDataContainerMock();
+	@BeforeEach
+	void setUp()
+	{
+		parentContainer = new PersistentDataContainerMock();
 
-        view = new PersistentDataContainerViewMock() {
-            @Override
-            public <P, C> @Nullable C get(@NotNull NamespacedKey key, @NotNull PersistentDataType<P, C> type) {
-                return parentContainer.get(key, type);
-            }
+		view = new PersistentDataContainerViewMock()
+		{
+			@Override
+			public <P, C> @Nullable C get(@NotNull NamespacedKey key, @NotNull PersistentDataType<P, C> type)
+			{
+				return parentContainer.get(key, type);
+			}
 
-            @Override
-            public @NotNull Set<NamespacedKey> getKeys() {
-                return parentContainer.getKeys();
-            }
-        };
+			@Override
+			public @NotNull Set<NamespacedKey> getKeys()
+			{
+				return parentContainer.getKeys();
+			}
+		};
 
-    }
+	}
 
-    @NotNull
-    @SuppressWarnings("deprecation")
-    private NamespacedKey getRandomKey() {
-        return NamespacedKey.randomKey();
-    }
+	@NotNull
+	@SuppressWarnings("deprecation")
+	private NamespacedKey getRandomKey()
+	{
+		return NamespacedKey.randomKey();
+	}
 
-    @Test
-    void testHas() {
-        NamespacedKey key = getRandomKey();
-        parentContainer.set(key, PersistentDataType.STRING, "value");
+	@Test
+	void testHas()
+	{
+		NamespacedKey key = getRandomKey();
+		parentContainer.set(key, PersistentDataType.STRING, "value");
 
-        assertTrue(view.has(key));
-        assertTrue(view.has(key, PersistentDataType.STRING));
+		assertTrue(view.has(key));
+		assertTrue(view.has(key, PersistentDataType.STRING));
 
-        assertFalse(view.has(key, PersistentDataType.INTEGER));
-    }
+		assertFalse(view.has(key, PersistentDataType.INTEGER));
+	}
 
-    @Test
-    void testHas_Invalid() {
-        NamespacedKey key = getRandomKey();
+	@Test
+	void testHas_Invalid()
+	{
+		NamespacedKey key = getRandomKey();
 
-        assertFalse(view.has(key));
-        assertFalse(view.has(key, PersistentDataType.STRING));
-    }
+		assertFalse(view.has(key));
+		assertFalse(view.has(key, PersistentDataType.STRING));
+	}
 
-    @Test
-    void testGet() {
-        NamespacedKey key = getRandomKey();
+	@Test
+	void testGet()
+	{
+		NamespacedKey key = getRandomKey();
 
-        assertNull(view.get(key, PersistentDataType.STRING));
+		assertNull(view.get(key, PersistentDataType.STRING));
 
-        parentContainer.set(key, PersistentDataType.STRING, "value");
-        assertEquals("value", view.get(key, PersistentDataType.STRING));
+		parentContainer.set(key, PersistentDataType.STRING, "value");
+		assertEquals("value", view.get(key, PersistentDataType.STRING));
 
-        parentContainer.remove(key);
-        assertNull(view.get(key, PersistentDataType.STRING));
-    }
+		parentContainer.remove(key);
+		assertNull(view.get(key, PersistentDataType.STRING));
+	}
 
-    @Test
-    void testGetOrDefault() {
-        NamespacedKey key = getRandomKey();
+	@Test
+	void testGetOrDefault()
+	{
+		NamespacedKey key = getRandomKey();
 
-        String value = view.getOrDefault(key, PersistentDataType.STRING, "default");
-        assertEquals("default", value);
+		String value = view.getOrDefault(key, PersistentDataType.STRING, "default");
+		assertEquals("default", value);
 
-        parentContainer.set(key, PersistentDataType.STRING, "value");
-        assertEquals("value", view.get(key, PersistentDataType.STRING));
+		parentContainer.set(key, PersistentDataType.STRING, "value");
+		assertEquals("value", view.get(key, PersistentDataType.STRING));
 
-        parentContainer.remove(key);
-        value = view.getOrDefault(key, PersistentDataType.STRING, "default");
-        assertEquals("default", value);
-    }
+		parentContainer.remove(key);
+		value = view.getOrDefault(key, PersistentDataType.STRING, "default");
+		assertEquals("default", value);
+	}
 
-    @Test
-    void testKeySet() {
-        NamespacedKey key = getRandomKey();
-        parentContainer.set(key, PersistentDataType.STRING, "value");
+	@Test
+	void testKeySet()
+	{
+		NamespacedKey key = getRandomKey();
+		parentContainer.set(key, PersistentDataType.STRING, "value");
 
-        assertEquals(parentContainer.getKeys(), view.getKeys());
-    }
+		assertEquals(parentContainer.getKeys(), view.getKeys());
+	}
 
-    @Test
-    void testIsEmpty() {
-        NamespacedKey key = getRandomKey();
+	@Test
+	void testIsEmpty()
+	{
+		NamespacedKey key = getRandomKey();
 
-        assertTrue(view.isEmpty());
+		assertTrue(view.isEmpty());
 
-        parentContainer.set(key, PersistentDataType.STRING, "value");
-        assertFalse(view.isEmpty());
-    }
+		parentContainer.set(key, PersistentDataType.STRING, "value");
+		assertFalse(view.isEmpty());
+	}
 
-    @Test
-    void testGetAdapterContext() {
-        assertInstanceOf(PersistentDataAdapterContextMock.class, view.getAdapterContext());
-    }
+	@Test
+	void testGetAdapterContext()
+	{
+		assertInstanceOf(PersistentDataAdapterContextMock.class, view.getAdapterContext());
+	}
 
 }
