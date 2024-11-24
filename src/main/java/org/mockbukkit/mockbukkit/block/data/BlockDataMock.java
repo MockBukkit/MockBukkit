@@ -68,7 +68,17 @@ public class BlockDataMock implements BlockData
 		String modifiedData;
 		if (blockType != null)
 		{
-			modifiedData = data == null ? blockType.getKey().toString() : blockType.getKey() + data;
+			if (data == null)
+			{
+				modifiedData = blockType.getKey().toString();
+			}
+			else
+			{
+				Matcher dataMatcher = BLOCK_DATA_PATTERN.matcher(data);
+				Preconditions.checkArgument(dataMatcher.find(), "String is not in a block data format: " + data);
+				String onlyFields = dataMatcher.group(2);
+				modifiedData = onlyFields == null ? blockType.getKey().toString() : blockType.getKey() + onlyFields;
+			}
 		}
 		else
 		{
@@ -80,7 +90,7 @@ public class BlockDataMock implements BlockData
 	private static BlockDataMock createNewData(String dataString)
 	{
 		Matcher blockDataMatcher = BLOCK_DATA_PATTERN.matcher(dataString);
-		Preconditions.checkArgument(blockDataMatcher.find(), "String is not in a block data format");
+		Preconditions.checkArgument(blockDataMatcher.find(), "String is not in a block data format: " + dataString);
 		NamespacedKey blockKey = NamespacedKey.fromString(blockDataMatcher.group(1));
 		Preconditions.checkArgument(blockKey != null, "Could not find any block data: " + blockDataMatcher.group(1));
 		String blockDataString = blockDataMatcher.group(3);
@@ -88,7 +98,8 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkArgument(material != null, "Invalid material: " + blockKey);
 		Map<String, Object> data = new HashMap<>();
 		BlockDataMock blockData = BlockDataMock.mock(material);
-		if(blockDataString == null){
+		if (blockDataString == null)
+		{
 			return blockData;
 		}
 		String[] blockDataArguments = blockDataString.split(",");
