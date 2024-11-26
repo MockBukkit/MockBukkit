@@ -18,6 +18,7 @@ import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
+import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.FrogVariantMock;
@@ -114,6 +115,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.BIOME, BiomeMock::from);
 		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
 		factoryMap.put(RegistryKey.FLUID, SoundMock::from);
+		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
 
 		Function<JsonObject, ? extends Keyed> factory = factoryMap.get(key);
 		if (factory == null)
