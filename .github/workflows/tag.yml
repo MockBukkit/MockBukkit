@@ -61,10 +61,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
 
+
+      - name: Debug Output
+        run: |
+          echo "Full output of get-pr-details:"
+          echo "${{ toJSON(steps.get-pr-details.outputs) }}"
+          echo "PR Title: ${{ fromJSON(steps.get-pr-details.outputs.data).title }}"
+
       - name: Push tag
         uses: actions-ecosystem/action-push-tag@v1
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         with:
           tag: ${{ steps.bump-semver.outputs.new_version }}
-          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ env.pr_number }} - ${{ steps.get-pr-details.outputs.title }}\n\n${{ steps.get-pr-details.outputs.body }}\n\nCommit ID: ${{ env.commit_id }}'
+          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ env.pr_number }} - Commit ID: ${{ env.commit_id }}'
 
