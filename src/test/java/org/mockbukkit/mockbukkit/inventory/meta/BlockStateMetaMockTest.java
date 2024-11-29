@@ -6,6 +6,7 @@ import org.bukkit.Tag;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
@@ -15,9 +16,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.bukkit.Server;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
+import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.opentest4j.TestSkippedException;
 
 import java.util.Map;
 import java.util.stream.Stream;
@@ -31,8 +34,9 @@ public class BlockStateMetaMockTest
 	@MockBukkitInject
 	private Server server;
 
+
 	@ParameterizedTest
-	@MethodSource("container_Materials")
+	@MethodSource("container_Materials_noFurnaces")
 	void testContainer(Material type)
 	{
 		BlockStateMeta meta = new BlockStateMetaMock(type);
@@ -44,16 +48,7 @@ public class BlockStateMetaMockTest
 		Container container = (Container) state;
 		Inventory inventory = container.getInventory();
 		assertNotNull(inventory);
-		assertSame(inventory, container.getInventory());
-		if (MaterialTags.SHULKER_BOXES.isTagged(type))
-		{
-			assertEquals(InventoryType.SHULKER_BOX, inventory.getType());
-		}
-		else
-		{
-			assertEquals(InventoryType.CHEST, inventory.getType());
-		}
-		ItemStack item = new ItemStackMock(Material.EMERALD);
+		ItemStack item = new ItemStackMock(Material.OAK_LOG);
 		inventory.addItem(item);
 		meta.setBlockState(state);
 
@@ -75,18 +70,20 @@ public class BlockStateMetaMockTest
 	}
 
 	@ParameterizedTest
-	@MethodSource("container_Materials")
-	void testSerialization(Material type)
+	@MethodSource("container_Materials_noFurnaces")
+	void testSerialization_Containers(Material type)
 	{
 		BlockStateMeta meta = new BlockStateMetaMock(type);
 		BlockState state = meta.getBlockState();
 		Container container = (Container) state;
 		Inventory inventory = container.getInventory();
-		ItemStack item = new ItemStackMock(Material.EMERALD);
-		inventory.addItem(item);
+		ItemStack item = new ItemStackMock(Material.OAK_LOG);
+		inventory.setItem(0, item);
 		meta.setBlockState(state);
 
 		Map<String, Object> data = meta.serialize();
+		System.out.println(data);
+
 		BlockStateMeta meta2 = BlockStateMetaMock.deserialize(data);
 		assertTrue(meta2.hasBlockState());
 		BlockState state2 = meta.getBlockState();
@@ -100,8 +97,8 @@ public class BlockStateMetaMockTest
 	}
 
 	@ParameterizedTest
-	@MethodSource("container_Materials")
-	void testCopyConstructor(Material type)
+	@MethodSource("container_Materials_noFurnaces")
+	void testCopyConstructor_Containers(Material type)
 	{
 		BlockStateMeta meta = new BlockStateMetaMock(type);
 		BlockState state = meta.getBlockState();
@@ -125,7 +122,7 @@ public class BlockStateMetaMockTest
 
 	@ParameterizedTest
 	@MethodSource("container_Materials")
-	void testCloneEqualsAndHashcode(Material type)
+	void testCloneEqualsAndHashcode_Containers(Material type)
 	{
 		BlockStateMeta meta = new BlockStateMetaMock(type);
 		BlockState state = meta.getBlockState();
@@ -141,18 +138,45 @@ public class BlockStateMetaMockTest
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
+	@ParameterizedTest
+	@MethodSource("container_Materials")
+	void testMetaInitializedAsPartOfItemStackCreation_Containers(Material type) {
+		ItemStack item = ItemStack.of(type);
+		assertInstanceOf(BlockStateMetaMock.class, item.getItemMeta());
+		assertInstanceOf(ContainerStateMock.class, ((BlockStateMetaMock) item.getItemMeta()).getBlockState());
+	}
+
+	@ParameterizedTest
+	@MethodSource("container_Materials")
+	void testMetaInitializedAsPartOfItemStackCreation_NonContainers(Material type) {
+		ItemStack item = ItemStack.of(type);
+		assertInstanceOf(BlockStateMetaMock.class, item.getItemMeta());
+		assertInstanceOf(ContainerStateMock.class, ((BlockStateMetaMock) item.getItemMeta()).getBlockState());
+	}
+
 	public static Stream<Arguments> container_Materials()
 	{
-		return Stream.concat(
-				Stream.of(Material.CHEST, Material.TRAPPED_CHEST),
-				Tag.SHULKER_BOXES.getValues().stream()
-		).map(Arguments::of);
+		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
+				.filter(e -> e.getValue() != null && Container.class.isAssignableFrom(e.getValue()))
+				.map(Map.Entry::getKey)
+				.map(Arguments::of);
 	}
 
-	@Test
-	void testNonContainer_throws()
+	// non-placed furnaces yield a snapshot inventory on getInventory
+	// and there's no way to set it back after edits.
+	public static Stream<Arguments> container_Materials_noFurnaces()
 	{
-		assertThrows(UnsupportedOperationException.class, () -> new BlockStateMetaMock(Material.STONE));
+		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
+				.filter(e -> e.getValue() != null && Container.class.isAssignableFrom(e.getValue()))
+				.filter(e -> !AbstractFurnaceStateMock.class.isAssignableFrom(e.getValue()))
+				.map(Map.Entry::getKey)
+				.map(Arguments::of);
 	}
 
+
+	public static Stream<Arguments> all_MaterialsAndExpectedMetaTypes()
+	{
+		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
+				.map(e -> Arguments.of(e.getKey(), e.getValue()));
+	}
 }

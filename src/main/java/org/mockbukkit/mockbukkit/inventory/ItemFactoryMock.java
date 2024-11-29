@@ -84,7 +84,7 @@ public class ItemFactoryMock implements ItemFactory
 				default -> ArmorMetaMock.class;
 			};
 		}
-		else if (MaterialTags.SHULKER_BOXES.isTagged(material))
+		else if (BlockStateMetaMock.isAppropriateType(material))
 		{
 			return BlockStateMetaMock.class;
 		}
@@ -109,8 +109,6 @@ public class ItemFactoryMock implements ItemFactory
 			case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
 			case OMINOUS_BOTTLE -> OminousBottleMetaMock.class;
 			case SHIELD -> ShieldMetaMock.class;
-			case CHEST -> BlockStateMetaMock.class;
-			case TRAPPED_CHEST -> BlockStateMetaMock.class;
 			default -> ItemMetaMock.class;
 		};
 	}
