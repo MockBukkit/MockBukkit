@@ -521,6 +521,10 @@ public class BlockDataMock implements BlockData
 		{
 			return new SwitchDataMock(material);
 		}
+		else if (Tag.FENCES.isTagged(material))
+		{
+			return new FenceDataMock(material);
+		}
 		return null;
 	}
 
