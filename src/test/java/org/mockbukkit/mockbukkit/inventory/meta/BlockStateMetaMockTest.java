@@ -173,4 +173,5 @@ public class BlockStateMetaMockTest
 		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
 				.map(e -> Arguments.of(e.getKey(), e.getValue()));
 	}
+
 }
