@@ -85,4 +85,19 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 		return Objects.hash(super.hashCode(), container);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof TileStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return Objects.equals(container, that.container);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), container);
+	}
+
 }
