@@ -274,10 +274,12 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 			}
 			serialized.put("container", containerData);
 		}
+		// TODO: serialize other TileStates
 		return serialized;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
 		clearBlockState();
@@ -294,10 +296,6 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 			{
 				blockState = getBlockState();
 			}
-			else
-			{
-
-			}
 			if (blockState instanceof ContainerStateMock container)
 			{
 				Inventory inventory = container.getInventory();
@@ -311,6 +309,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 					}
 				}
 			}
+			// TODO: deserialize other TileStates
 		}
 	}
 

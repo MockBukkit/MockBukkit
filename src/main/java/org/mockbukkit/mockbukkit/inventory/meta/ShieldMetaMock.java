@@ -192,6 +192,7 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
+	@NotNull
 	public Map<String, Object> serialize()
 	{
 		Map<String, Object> serialized = super.serialize();
@@ -208,7 +209,8 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		return serialized;
 	}
 
-	public static ShieldMetaMock deserialize(Map<String, Object> serialized)
+	@NotNull
+	public static ShieldMetaMock deserialize(@NotNull Map<String, Object> serialized)
 	{
 		ShieldMetaMock shieldMetaMock = new ShieldMetaMock();
 		shieldMetaMock.deserializeInternal(serialized);

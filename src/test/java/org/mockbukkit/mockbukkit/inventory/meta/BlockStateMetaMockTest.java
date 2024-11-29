@@ -1,12 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
@@ -20,7 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
 import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.opentest4j.TestSkippedException;
 
 import java.util.Map;
 import java.util.stream.Stream;
