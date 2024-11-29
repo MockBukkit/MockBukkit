@@ -341,7 +341,7 @@ public class ItemStackMock extends ItemStack
 		ItemStackMock clone = new ItemStackMock(this.type);
 
 		clone.setAmount(this.amount);
-		clone.setItemMeta(this.itemMeta);
+		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
 		clone.durability = this.durability;
 		return clone;
 	}
@@ -386,16 +386,24 @@ public class ItemStackMock extends ItemStack
 		{
 			return null;
 		}
-		if (material.asItemType().getItemMetaClass() != ItemMetaMock.class)
+		final Class<? extends ItemMeta> itemMetaClass = material.asItemType().getItemMetaClass();
+		if (ItemMetaMock.class.isAssignableFrom(itemMetaClass))
 		{
 			try
 			{
-				return material.asItemType().getItemMetaClass().getConstructor().newInstance();
+				for (var ctor : itemMetaClass.getDeclaredConstructors())
+				{
+					if (ctor.getParameterCount() == 1 && ctor.getParameters()[0].getType() == Material.class)
+					{
+						return (ItemMeta) ctor.newInstance(material);
+					}
+				}
+				return itemMetaClass.getConstructor().newInstance();
 			}
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new ItemMetaInitException(ITEMMETA_INITIALIZATION_ERROR + material.asItemType().getItemMetaClass(), e);
+				throw new ItemMetaInitException(ITEMMETA_INITIALIZATION_ERROR + itemMetaClass, e);
 			}
 		}
 		return new ItemMetaMock();
