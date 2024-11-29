@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.inventory.meta.BlockStateMeta;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,6 +10,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.BlockStateMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ColorableArmorMetaMock;
@@ -96,6 +98,11 @@ class ItemFactoryMockTest
 		assertInstanceOf(TropicalFishBucketMetaMock.class, factory.getItemMeta(Material.TROPICAL_FISH_BUCKET));
 		assertInstanceOf(OminousBottleMetaMock.class, factory.getItemMeta(Material.OMINOUS_BOTTLE));
 
+		assertInstanceOf(BlockStateMetaMock.class, factory.getItemMeta(Material.CHEST));
+		assertInstanceOf(BlockStateMetaMock.class, factory.getItemMeta(Material.TRAPPED_CHEST));
+		assertInstanceOf(BlockStateMetaMock.class, factory.getItemMeta(Material.SHULKER_BOX));
+		assertInstanceOf(BlockStateMetaMock.class, factory.getItemMeta(Material.RED_SHULKER_BOX));
+
 	}
 
 	@ParameterizedTest
@@ -152,6 +159,31 @@ class ItemFactoryMockTest
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
 		assertTrue(factory.isApplicable(meta, Material.DIRT));
 	}
+
+	@ParameterizedTest
+	@MethodSource("chests_Materials")
+	void testGetItemMetaCorrectClass_Chests(Material chest)
+	{
+		assertInstanceOf(BlockStateMetaMock.class, factory.getItemMeta(chest));
+	}
+
+	public static Stream<Arguments> chests_Materials()
+	{
+		return Stream.of(Material.CHEST, Material.TRAPPED_CHEST).map(Arguments::of);
+	}
+
+	@ParameterizedTest
+	@MethodSource("shulker_box_Materials")
+	void testGetItemMetaCorrectClass_ShulkerBoxes(Material chest)
+	{
+		assertInstanceOf(BlockStateMetaMock.class, factory.getItemMeta(chest));
+	}
+
+	public static Stream<Arguments> shulker_box_Materials()
+	{
+		return Tag.SHULKER_BOXES.getValues().stream().map(Arguments::of);
+	}
+
 
 	@Test
 	void isApplicable_StandardItemMetaOnDirtItemStack_True()

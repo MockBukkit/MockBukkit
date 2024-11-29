@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.mockbukkit.mockbukkit.exception.BlockStateInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
@@ -21,6 +22,8 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -334,8 +337,27 @@ public class BlockStateMock implements BlockState
 	@Override
 	public @NotNull BlockState copy()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Class<? extends BlockState> target = this.getClass();
+		try
+		{
+			for (Constructor<?> constructor : target.getDeclaredConstructors())
+			{
+				// This will make sure we find the most suitable constructor for this
+				if (constructor.getParameterCount() == 1
+						&& constructor.getParameterTypes()[0].isAssignableFrom(target))
+				{
+					return (BlockState) constructor.newInstance(this);
+				}
+			}
+
+			throw new NoSuchMethodException(
+					"Cannot find an BlockState constructor for the class \"" + target.getName() + "\"");
+		}
+		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
+			   | NoSuchMethodException e)
+		{
+			throw new BlockStateInitException(e);
+		}
 	}
 
 	@Override

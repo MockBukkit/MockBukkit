@@ -6,6 +6,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.BlockStateMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ColorableArmorMetaMock;
@@ -83,6 +84,10 @@ public class ItemFactoryMock implements ItemFactory
 				default -> ArmorMetaMock.class;
 			};
 		}
+		else if (MaterialTags.SHULKER_BOXES.isTagged(material))
+		{
+			return BlockStateMetaMock.class;
+		}
 		return switch (material)
 		{
 			case ARMOR_STAND -> ArmorStandMetaMock.class;
@@ -104,6 +109,8 @@ public class ItemFactoryMock implements ItemFactory
 			case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
 			case OMINOUS_BOTTLE -> OminousBottleMetaMock.class;
 			case SHIELD -> ShieldMetaMock.class;
+			case CHEST -> BlockStateMetaMock.class;
+			case TRAPPED_CHEST -> BlockStateMetaMock.class;
 			default -> ItemMetaMock.class;
 		};
 	}
@@ -118,11 +125,16 @@ public class ItemFactoryMock implements ItemFactory
 		try
 		{
 			clazz = getItemMetaClass(material);
+			for (var ctor : clazz.getDeclaredConstructors()) {
+				if (ctor.getParameterCount() == 1 && ctor.getParameters()[0].getType() == Material.class) {
+					return (ItemMeta) ctor.newInstance(material);
+				}
+			}
 			return clazz.getDeclaredConstructor().newInstance();
 		}
 		catch (ReflectiveOperationException e)
 		{
-			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
+			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'", e);
 		}
 	}
 
