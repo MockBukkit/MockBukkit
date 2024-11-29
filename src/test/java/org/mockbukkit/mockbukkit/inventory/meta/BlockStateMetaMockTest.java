@@ -154,4 +154,5 @@ public class BlockStateMetaMockTest
 	{
 		assertThrows(UnsupportedOperationException.class, () -> new BlockStateMetaMock(Material.STONE));
 	}
+
 }

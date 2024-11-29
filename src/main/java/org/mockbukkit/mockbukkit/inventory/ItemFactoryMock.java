@@ -125,8 +125,10 @@ public class ItemFactoryMock implements ItemFactory
 		try
 		{
 			clazz = getItemMetaClass(material);
-			for (var ctor : clazz.getDeclaredConstructors()) {
-				if (ctor.getParameterCount() == 1 && ctor.getParameters()[0].getType() == Material.class) {
+			for (var ctor : clazz.getDeclaredConstructors())
+			{
+				if (ctor.getParameterCount() == 1 && ctor.getParameters()[0].getType() == Material.class)
+				{
 					return (ItemMeta) ctor.newInstance(material);
 				}
 			}

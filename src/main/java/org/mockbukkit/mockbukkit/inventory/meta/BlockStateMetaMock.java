@@ -31,15 +31,19 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	private BlockState blockState;
 	protected Material material;
 
-	private BlockStateMetaMock() {}
+	private BlockStateMetaMock()
+	{
+	}
 
 	/**
 	 * Constructs a new {@link BlockStateMetaMock}, for the given material.
+	 *
 	 * @param material indicates which type of {@link BlockState} to hold.
 	 */
 	public BlockStateMetaMock(Material material)
 	{
-		if (getContainerStateClass(material) == null) {
+		if (getContainerStateClass(material) == null)
+		{
 			throw new UnsupportedOperationException("Don't know how to create a BlockState for '" + material.name() + "'");
 		}
 		this.material = material;
@@ -117,7 +121,8 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	public void setBlockState(@NotNull BlockState blockState)
 	{
 		this.blockState = blockState;
-		if (this.material == null) {
+		if (this.material == null)
+		{
 			this.material = blockState.getType();
 		}
 	}
@@ -163,7 +168,8 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 			for (int i = 0; i < contents.length; i++)
 			{
 				ItemStack item = contents[i];
-				if (item != null && item.getType() != Material.AIR) {
+				if (item != null && item.getType() != Material.AIR)
+				{
 					containerData.add(Map.of("slot", i, "item", item.serialize()));
 				}
 			}
@@ -206,4 +212,5 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		mock.deserializeInternal(args);
 		return mock;
 	}
+
 }
