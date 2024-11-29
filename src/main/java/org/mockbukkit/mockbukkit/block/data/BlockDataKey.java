@@ -6,6 +6,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.Lightable;
+import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Waterlogged;
@@ -93,9 +94,16 @@ public enum BlockDataKey
 
 	AGE_KEY("age", Integer::parseInt, Bamboo.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
-	STAGE_KEY("stage", Integer::parseInt, Bamboo.class::isInstance);
+	STAGE_KEY("stage", Integer::parseInt, Bamboo.class::isInstance),
 
-	private static Map<String, BlockDataKey> keyToBlockDataKeyRelation = compileKeyRelation();
+	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	NORTH("north", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	SOUTH("south", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	UP("up", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance);
+
+	private static final Map<String, BlockDataKey> KEY_TO_BLOCK_DATA_KEY_RELATION = compileKeyRelation();
 
 
 	private String key;
@@ -116,7 +124,7 @@ public enum BlockDataKey
 
 	public static boolean isRegistered(String key)
 	{
-		return keyToBlockDataKeyRelation.containsKey(key);
+		return KEY_TO_BLOCK_DATA_KEY_RELATION.containsKey(key);
 	}
 
 	private static Map<String, BlockDataKey> compileKeyRelation()
@@ -131,7 +139,7 @@ public enum BlockDataKey
 
 	public static @Nullable BlockDataKey fromKey(String key)
 	{
-		return keyToBlockDataKeyRelation.get(key);
+		return KEY_TO_BLOCK_DATA_KEY_RELATION.get(key);
 	}
 
 	public Object constructValue(String valueString)
