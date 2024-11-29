@@ -37,7 +37,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	public BeehiveStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.BEEHIVE);
+		checkType(material, Material.BEEHIVE, Material.BEE_NEST);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	protected BeehiveStateMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Material.BEEHIVE);
+		checkType(block, Material.BEEHIVE, Material.BEE_NEST);
 	}
 
 	/**
