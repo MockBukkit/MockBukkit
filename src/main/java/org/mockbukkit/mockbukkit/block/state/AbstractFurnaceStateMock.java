@@ -171,7 +171,12 @@ public abstract class AbstractFurnaceStateMock extends org.mockbukkit.mockbukkit
 	@Override
 	public FurnaceInventory getSnapshotInventory()
 	{
-		return (FurnaceInventory) super.getSnapshotInventory();
+		FurnaceInventory rawInventory = (FurnaceInventory) super.getInventory();
+		FurnaceInventoryMock mock = new FurnaceInventoryMock(rawInventory.getHolder());
+		mock.setResult(rawInventory.getResult());
+		mock.setFuel(rawInventory.getFuel());
+		mock.setSmelting(rawInventory.getSmelting());
+		return mock;
 	}
 
 }
