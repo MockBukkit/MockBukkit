@@ -77,7 +77,6 @@ public class BlockStateMetaMockTest
 		meta.setBlockState(state);
 
 		Map<String, Object> data = meta.serialize();
-		System.out.println(data);
 
 		BlockStateMeta meta2 = BlockStateMetaMock.deserialize(data);
 		assertTrue(meta2.hasBlockState());

@@ -225,11 +225,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	@Override
 	protected String getTypeName()
 	{
-		if (material == null)
-		{
-			return "BLOCK_STATE";
-		}
-		return "BLOCK_STATE_" + material.name();
+		return "TILE_ENTITY";
 	}
 
 	@Override
@@ -260,6 +256,11 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	{
 		Map<String, Object> serialized = super.serialize();
 
+		if (material != null)
+		{
+			serialized.put("blockMaterial", material.name());
+		}
+
 		if (blockState instanceof Container container)
 		{
 			ItemStack[] contents = container.getInventory().getContents();
@@ -285,10 +286,9 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		clearBlockState();
 		super.deserializeInternal(args);
 
-		String mt = (String) args.get("meta-type");
-		if (!Strings.isNullOrEmpty(mt) && mt.length() > 11)
+		if (args.containsKey("blockMaterial"))
 		{
-			material = Registry.MATERIAL.get(NamespacedKey.fromString(mt.substring(12).toLowerCase(Locale.ENGLISH)));
+			material = Registry.MATERIAL.get(NamespacedKey.fromString(((String) args.get("blockMaterial")).toLowerCase(Locale.ENGLISH)));
 		}
 		if (args.containsKey("container"))
 		{
