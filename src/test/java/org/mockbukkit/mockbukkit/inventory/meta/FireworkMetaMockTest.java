@@ -159,4 +159,5 @@ class FireworkMetaMockTest
 		assertEquals(8, meta2.getPower());
 		assertEquals(2, meta2.getEffectsSize());
 	}
+
 }

@@ -41,7 +41,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	{
 		super(meta);
 
-		if(meta instanceof FireworkMeta fireworkMeta)
+		if (meta instanceof FireworkMeta fireworkMeta)
 		{
 			if (fireworkMeta.hasEffects())
 			{
