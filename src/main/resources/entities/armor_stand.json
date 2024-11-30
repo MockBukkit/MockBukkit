@@ -1,12 +1,12 @@
 {
 	"default": {
-		"width": 0.5,
+		"eyeHeight": 1.7775,
 		"height": 1.975,
-		"eyeHeight": 1.7775
+		"width": 0.5
 	},
 	"small": {
-		"width": 0.25,
+		"eyeHeight": 0.88875,
 		"height": 0.9875,
-		"eyeHeight": 0.88875
+		"width": 0.25
 	}
 }
