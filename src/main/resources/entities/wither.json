@@ -1,13 +1,13 @@
 {
 	"default": {
-		"height": 3.5,
-		"width": 0.9,
 		"eyeHeight": 2.9750001,
 		"health": {
-			"PEACEFUL" : -1.0,
-			"EASY" : 300.0,
-			"NORMAL" : 450.0,
-			"HARD" : 600.0
-		}
+			"EASY": 300.0,
+			"HARD": 600.0,
+			"NORMAL": 450.0,
+			"PEACEFUL": -1.0
+		},
+		"height": 3.5,
+		"width": 0.9
 	}
 }
