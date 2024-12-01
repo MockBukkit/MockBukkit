@@ -46,7 +46,7 @@ public class InventoryMock implements Inventory
 	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
-	private @NotNull Component title;
+	private @Nullable Component customTitle;
 
 	/**
 	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
@@ -62,7 +62,6 @@ public class InventoryMock implements Inventory
 
 		this.holder = holder;
 		this.type = type;
-		this.title = type.defaultTitle();
 
 		items = new ItemStack[size];
 	}
@@ -80,7 +79,6 @@ public class InventoryMock implements Inventory
 
 		this.holder = holder;
 		this.type = type;
-		this.title = type.defaultTitle();
 
 		items = new ItemStack[type.getDefaultSize()];
 	}
@@ -686,15 +684,43 @@ public class InventoryMock implements Inventory
 		return inventory;
 	}
 
+	/**
+	 * Get the name for this inventory.
+	 * Uses the value in {@link #getCustomTitle()} if set, otherwise
+	 * uses the default name for the inventory type.
+	 *
+	 * @return The inventory name.
+	 *
+	 * @see InventoryMock#getCustomTitle()
+	 * @see InventoryType#defaultTitle()
+	 */
 	public @NotNull Component getTitle()
 	{
-		return title;
+		Component custom = getCustomTitle();
+		if (custom != null) {
+			return custom;
+		}
+		return getType().defaultTitle();
 	}
 
-	public void setTitle(@NotNull Component title)
+	/**
+	 * Get the custom title to be used in this inventory when set.
+	 *
+	 * @return The title to be used, or {@code null}.
+	 */
+	public @Nullable Component getCustomTitle()
 	{
-		Preconditions.checkArgument(title != null, "Title cannot be null");
-		this.title = title;
+		return customTitle;
+	}
+
+	/**
+	 * Set the custom title to be used in this inventory.
+	 *
+	 * @param customTitle The title to be used, or {@code null}.
+	 */
+	public void setCustomTitle(@Nullable Component customTitle)
+	{
+		this.customTitle = customTitle;
 	}
 
 }

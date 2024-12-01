@@ -782,7 +782,7 @@ public class ServerMock extends Server.Spigot implements Server
 		};
 
 		if (title != null) {
-			inventory.setTitle(title);
+			inventory.setCustomTitle(title);
 		}
 
 		return inventory;
