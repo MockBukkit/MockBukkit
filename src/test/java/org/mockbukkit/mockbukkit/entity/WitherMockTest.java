@@ -53,7 +53,7 @@ class WitherMockTest
 	}
 
 	@Test
-	void getMaxHeathEasy()
+	void getMaxHealthEasy()
 	{
 		WorldMock worldMock = new WorldMock();
 		worldMock.setDifficulty(Difficulty.EASY);
@@ -62,21 +62,21 @@ class WitherMockTest
 	}
 
 	@Test
-	void getMaxHeathNormal()
+	void getMaxHealthNormal()
 	{
 		WorldMock worldMock = new WorldMock();
 		worldMock.setDifficulty(Difficulty.NORMAL);
 		WitherMock tempWither = new WitherMock(server, UUID.randomUUID(), worldMock);
-		assertEquals(450.0D, tempWither.getMaxHealth());
+		assertEquals(300.0D, tempWither.getMaxHealth());
 	}
 
 	@Test
-	void getMaxHeathHard()
+	void getMaxHealthHard()
 	{
 		WorldMock worldMock = new WorldMock();
 		worldMock.setDifficulty(Difficulty.HARD);
 		WitherMock tempWither = new WitherMock(server, UUID.randomUUID(), worldMock);
-		assertEquals(600.0D, tempWither.getMaxHealth());
+		assertEquals(300.0D, tempWither.getMaxHealth());
 	}
 
 	@Test

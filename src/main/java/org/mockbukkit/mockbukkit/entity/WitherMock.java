@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Wither;
@@ -42,8 +43,8 @@ public class WitherMock extends AbstractBossMock implements Wither
 	{
 		super(server, uuid, "Wither");
 		this.setLocation(new Location(worldMock, 0, 0, 0));
-		setMaxHealth(entityData.getHealth(this.getSubType(), this.getEntityState(), this.getWorld().getDifficulty()));
-		setHealth(getMaxHealth());
+
+		this.attributes.get(Attribute.GENERIC_MAX_HEALTH).setBaseValue(300F);
 	}
 
 	@Override
