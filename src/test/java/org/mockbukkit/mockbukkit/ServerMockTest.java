@@ -52,6 +52,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -95,7 +96,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -1440,6 +1441,155 @@ class ServerMockTest
 	void testCreateBrewerInventory()
 	{
 		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING, "", 9));
+	}
+
+	@Nested
+	class CreateInventory
+	{
+
+		@Nested
+		class InventoryHolderAndInventoryType {
+
+			@Test
+			void shouldSucceed()
+			{
+				InventoryMock inventory = server.createInventory(null, InventoryType.CHEST);
+				assertNotNull(inventory);
+				assertEquals(27, inventory.getSize());
+			}
+
+			@Test
+			void givenNullInventoryType()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, null));
+				assertEquals("InventoryType cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenNonCreatableInventory()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING));
+				assertEquals("InventoryType.CRAFTING cannot be used to create a inventory", e.getMessage());
+			}
+
+		}
+
+		@Nested
+		class InventoryHolderAndInventoryTypeAndComponentTitle {
+
+			@Test
+			void shouldSucceed()
+			{
+				InventoryMock inventory = server.createInventory(null, InventoryType.CHEST, Component.text("My inventory"));
+				assertNotNull(inventory);
+				assertEquals(27, inventory.getSize());
+			}
+
+			@Test
+			void givenNonCreatableInventory()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING, Component.text("My inventory")));
+				assertEquals("Cannot open an inventory of type  [CRAFTING]", e.getMessage());
+			}
+
+		}
+
+		@Nested
+		class InventoryHolderAndInventoryTypeAndStringTitle {
+
+			@Test
+			void shouldSucceed()
+			{
+				InventoryMock inventory = server.createInventory(null, InventoryType.CHEST, "My inventory");
+				assertNotNull(inventory);
+				assertEquals(27, inventory.getSize());
+			}
+
+			@Test
+			void givenNullInventoryType()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, null, "My inventory"));
+				assertEquals("InventoryType cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenNullTitle()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CHEST, (String) null));
+				assertEquals("title cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenNonCreatableInventory()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING, "My inventory"));
+				assertEquals("InventoryType.CRAFTING cannot be used to create a inventory", e.getMessage());
+			}
+
+		}
+
+		@Nested
+		class InventoryHolderAndSize {
+
+			@ParameterizedTest
+			@ValueSource(ints = {9, 18, 27, 36, 45, 54})
+			void shouldSucceed(int size)
+			{
+				InventoryMock inventory = server.createInventory(null, size);
+				assertNotNull(inventory);
+				assertEquals(size, inventory.getSize());
+			}
+
+			@Test
+			void givenInvalidSize()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15));
+				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+			}
+
+		}
+
+		@Nested
+		class InventoryHolderAndSizeAndComponentTitle {
+
+			@ParameterizedTest
+			@ValueSource(ints = {9, 18, 27, 36, 45, 54})
+			void shouldSucceed(int size)
+			{
+				InventoryMock inventory = server.createInventory(null, size, Component.text("My inventory"));
+				assertNotNull(inventory);
+				assertEquals(size, inventory.getSize());
+			}
+
+			@Test
+			void givenInvalidSize()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, Component.text("My inventory")));
+				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+			}
+
+		}
+
+		@Nested
+		class InventoryHolderAndSizeAndStringTitle {
+
+			@ParameterizedTest
+			@ValueSource(ints = {9, 18, 27, 36, 45, 54})
+			void shouldSucceed(int size)
+			{
+				InventoryMock inventory = server.createInventory(null, size, "My inventory");
+				assertNotNull(inventory);
+				assertEquals(size, inventory.getSize());
+			}
+
+			@Test
+			void givenInvalidSize()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, "My inventory"));
+				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+			}
+
+		}
 	}
 
 	@Test

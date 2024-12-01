@@ -766,40 +766,47 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type)
 	{
+		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
 		return createInventory(owner, type, "Inventory");
 	}
 
 	@Override
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(type.isCreatable(), "Cannot open an inventory of type ", type);
+		return createInventory(owner, type, LegacyComponentSerializer.legacySection().serialize(title));
 	}
 
 	@Override
 	@Deprecated
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull String title)
 	{
+		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
+		Preconditions.checkArgument(title != null, "title cannot be null");
 		return createInventory(owner, type, title, -1);
 	}
 
 	@Override
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size)
 	{
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
 		return createInventory(owner, size, "Inventory");
 	}
 
 	@Override
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		return createInventory(owner, size, LegacyComponentSerializer.legacySection().serialize(title));
 	}
 
 	@Override
 	@Deprecated
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size, String title)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size, @NotNull String title)
 	{
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
 		return createInventory(owner, InventoryType.CHEST, title, size);
 	}
 
