@@ -21,7 +21,7 @@ public class HopperInventoryMock extends InventoryMock
 	 */
 	public HopperInventoryMock(InventoryHolder holder)
 	{
-		super(holder, 9, InventoryType.HOPPER);
+		super(holder, 5, InventoryType.HOPPER);
 	}
 
 	@Override
