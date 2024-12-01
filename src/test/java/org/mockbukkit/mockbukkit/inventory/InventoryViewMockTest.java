@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -99,19 +100,28 @@ class InventoryViewMockTest
 		assertEquals(InventoryType.CREATIVE, view.getType());
 	}
 
-	@Test
-	void getOriginalTitle()
-	{
-		view.setTitle("Test");
-		view.setTitle("Foobar");
-		assertEquals("Inventory", view.getOriginalTitle());
-	}
+	@Nested
+	class SetTitle {
 
-	@Test
-	void setTitle()
-	{
-		view.setTitle("Test");
-		assertEquals("Test", view.getTitle());
+		@Test
+		void givenSuccess()
+		{
+			assertEquals("Chest", view.getTitle());
+			assertEquals("Chest", view.getOriginalTitle());
+
+			view.setTitle("Test");
+
+			assertEquals("Test", view.getTitle());
+			assertEquals("Chest", view.getOriginalTitle());
+		}
+
+		@Test
+		void givenNullTitle()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> view.setTitle(null));
+			assertEquals("Title cannot be null", e.getMessage());
+		}
+
 	}
 
 	@Test
