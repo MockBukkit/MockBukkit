@@ -706,9 +706,9 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	@NotNull
 	@Deprecated
-	public InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title, int size)
+	public InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull String title, int size)
 	{
-		return createInventory(owner, type, Component.text(title), size);
+		return createInventoryInternal(owner, type, Component.text(title), size);
 	}
 
 	/**
@@ -724,14 +724,14 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	@NotNull
 	@ApiStatus.Internal
-	private InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, Component title, int size)
+	private InventoryMock createInventoryInternal(@Nullable InventoryHolder owner, @NotNull InventoryType type, @Nullable Component title, int size)
 	{
 		Preconditions.checkArgument(type.isCreatable(), "Inventory Type '" + type + "' is not creatable!");
 
 		InventoryMock inventory = switch (type)
 		{
 		case CHEST:
-			yield new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
+			yield new ChestInventoryMock(owner, size > 0 ? size : type.getDefaultSize());
 		case DISPENSER:
 			yield new DispenserInventoryMock(owner);
 		case DROPPER:
@@ -790,7 +790,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type)
 	{
 		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
 		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
@@ -801,7 +801,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
 	{
 		Preconditions.checkArgument(type.isCreatable(), "Cannot open an inventory of type ", type);
-		return createInventory(owner, type, LegacyComponentSerializer.legacySection().serialize(title));
+		return createInventoryInternal(owner, type, title, type.getDefaultSize());
 	}
 
 	@Override
@@ -811,29 +811,28 @@ public class ServerMock extends Server.Spigot implements Server
 		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
 		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
 		Preconditions.checkArgument(title != null, "title cannot be null");
-		return createInventory(owner, type, title, -1);
+		return createInventory(owner, type, Component.text(title));
 	}
 
 	@Override
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size)
 	{
 		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
-		return createInventory(owner, size, InventoryType.CHEST.defaultTitle());
+		return createInventoryInternal(owner, InventoryType.CHEST, null, size);
 	}
 
 	@Override
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
 	{
 		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
-		return createInventory(owner, size, LegacyComponentSerializer.legacySection().serialize(title));
+		return createInventoryInternal(owner, InventoryType.CHEST, title, size);
 	}
 
 	@Override
 	@Deprecated
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size, @NotNull String title)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull String title)
 	{
-		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
-		return createInventory(owner, InventoryType.CHEST, title, size);
+		return createInventory(owner, size, Component.text(title));
 	}
 
 	@Override
