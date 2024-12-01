@@ -55,8 +55,11 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -1450,12 +1453,16 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndInventoryType {
 
-			@Test
-			void shouldSucceed()
+			@ParameterizedTest
+			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
+			void shouldSucceed(InventoryType inventoryType)
 			{
-				InventoryMock inventory = server.createInventory(null, InventoryType.CHEST);
+				Player player = server.addPlayer();
+				InventoryMock inventory = server.createInventory(player, inventoryType);
+
 				assertNotNull(inventory);
-				assertEquals(27, inventory.getSize());
+				assertEquals(inventoryType.getDefaultSize(), inventory.getSize());
+				assertEquals(inventoryType.defaultTitle(), inventory.getTitle());
 			}
 
 			@Test
@@ -1477,12 +1484,16 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndInventoryTypeAndComponentTitle {
 
-			@Test
-			void shouldSucceed()
+			@ParameterizedTest
+			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
+			void shouldSucceed(InventoryType inventoryType)
 			{
-				InventoryMock inventory = server.createInventory(null, InventoryType.CHEST, Component.text("My inventory"));
+				Player player = server.addPlayer();
+				InventoryMock inventory = server.createInventory(player, inventoryType, Component.text("My inventory"));
+
 				assertNotNull(inventory);
-				assertEquals(27, inventory.getSize());
+				assertEquals(inventoryType.getDefaultSize(), inventory.getSize());
+				assertEquals(Component.text("My inventory"), inventory.getTitle());
 			}
 
 			@Test
@@ -1497,12 +1508,16 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndInventoryTypeAndStringTitle {
 
-			@Test
-			void shouldSucceed()
+			@ParameterizedTest
+			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
+			void shouldSucceed(InventoryType inventoryType)
 			{
-				InventoryMock inventory = server.createInventory(null, InventoryType.CHEST, "My inventory");
+				Player player = server.addPlayer();
+				InventoryMock inventory = server.createInventory(player, inventoryType, "My inventory");
+
 				assertNotNull(inventory);
-				assertEquals(27, inventory.getSize());
+				assertEquals(inventoryType.getDefaultSize(), inventory.getSize());
+				assertEquals(Component.text("My inventory"), inventory.getTitle());
 			}
 
 			@Test
@@ -1538,6 +1553,7 @@ class ServerMockTest
 				InventoryMock inventory = server.createInventory(null, size);
 				assertNotNull(inventory);
 				assertEquals(size, inventory.getSize());
+				assertEquals(Component.text("Chest"), inventory.getTitle());
 			}
 
 			@Test
@@ -1559,6 +1575,7 @@ class ServerMockTest
 				InventoryMock inventory = server.createInventory(null, size, Component.text("My inventory"));
 				assertNotNull(inventory);
 				assertEquals(size, inventory.getSize());
+				assertEquals(Component.text("My inventory"), inventory.getTitle());
 			}
 
 			@Test
@@ -1580,6 +1597,7 @@ class ServerMockTest
 				InventoryMock inventory = server.createInventory(null, size, "My inventory");
 				assertNotNull(inventory);
 				assertEquals(size, inventory.getSize());
+				assertEquals(Component.text("My inventory"), inventory.getTitle());
 			}
 
 			@Test
@@ -1587,6 +1605,19 @@ class ServerMockTest
 			{
 				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, "My inventory"));
 				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+			}
+
+		}
+
+		static class OnlyCreatableInventoryTypeArgumentProvider implements ArgumentsProvider
+		{
+
+			@Override
+			public Stream<? extends Arguments> provideArguments(ExtensionContext context)
+			{
+				return Stream.of(InventoryType.values())
+						.filter(InventoryType::isCreatable)
+						.map(Arguments::of);
 			}
 
 		}

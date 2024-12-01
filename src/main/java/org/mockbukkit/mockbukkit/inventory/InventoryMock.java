@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -45,6 +46,8 @@ public class InventoryMock implements Inventory
 	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
+	private @NotNull Component title;
+
 	/**
 	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
 	 *
@@ -59,6 +62,7 @@ public class InventoryMock implements Inventory
 
 		this.holder = holder;
 		this.type = type;
+		this.title = type.defaultTitle();
 
 		items = new ItemStack[size];
 	}
@@ -76,6 +80,7 @@ public class InventoryMock implements Inventory
 
 		this.holder = holder;
 		this.type = type;
+		this.title = type.defaultTitle();
 
 		items = new ItemStack[type.getDefaultSize()];
 	}
@@ -679,6 +684,17 @@ public class InventoryMock implements Inventory
 		Inventory inventory = new InventoryMock(holder, getSize(), type);
 		inventory.setContents(getContents());
 		return inventory;
+	}
+
+	public @NotNull Component getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(@NotNull Component title)
+	{
+		Preconditions.checkArgument(title != null, "Title cannot be null");
+		this.title = title;
 	}
 
 }
