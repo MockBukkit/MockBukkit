@@ -698,7 +698,8 @@ class InventoryMockTest
 	}
 
 	@Nested
-	class SetCustomTitle {
+	class SetCustomTitle
+	{
 
 		@ParameterizedTest
 		@EnumSource(InventoryType.class)

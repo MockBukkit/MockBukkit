@@ -101,7 +101,8 @@ class InventoryViewMockTest
 	}
 
 	@Nested
-	class SetTitle {
+	class SetTitle
+	{
 
 		@Test
 		void givenSuccess()

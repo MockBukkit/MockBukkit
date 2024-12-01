@@ -781,7 +781,8 @@ public class ServerMock extends Server.Spigot implements Server
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		};
 
-		if (title != null) {
+		if (title != null)
+		{
 			inventory.setCustomTitle(title);
 		}
 

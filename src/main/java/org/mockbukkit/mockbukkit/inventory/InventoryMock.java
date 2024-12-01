@@ -697,7 +697,8 @@ public class InventoryMock implements Inventory
 	public @NotNull Component getTitle()
 	{
 		Component custom = getCustomTitle();
-		if (custom != null) {
+		if (custom != null)
+		{
 			return custom;
 		}
 		return getType().defaultTitle();

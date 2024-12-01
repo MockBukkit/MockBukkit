@@ -1451,7 +1451,8 @@ class ServerMockTest
 	{
 
 		@Nested
-		class InventoryHolderAndInventoryType {
+		class InventoryHolderAndInventoryType
+		{
 
 			@ParameterizedTest
 			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
@@ -1482,7 +1483,8 @@ class ServerMockTest
 		}
 
 		@Nested
-		class InventoryHolderAndInventoryTypeAndComponentTitle {
+		class InventoryHolderAndInventoryTypeAndComponentTitle
+		{
 
 			@ParameterizedTest
 			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
@@ -1506,7 +1508,8 @@ class ServerMockTest
 		}
 
 		@Nested
-		class InventoryHolderAndInventoryTypeAndStringTitle {
+		class InventoryHolderAndInventoryTypeAndStringTitle
+		{
 
 			@ParameterizedTest
 			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
@@ -1544,7 +1547,8 @@ class ServerMockTest
 		}
 
 		@Nested
-		class InventoryHolderAndSize {
+		class InventoryHolderAndSize
+		{
 
 			@ParameterizedTest
 			@ValueSource(ints = {9, 18, 27, 36, 45, 54})
@@ -1566,7 +1570,8 @@ class ServerMockTest
 		}
 
 		@Nested
-		class InventoryHolderAndSizeAndComponentTitle {
+		class InventoryHolderAndSizeAndComponentTitle
+		{
 
 			@ParameterizedTest
 			@ValueSource(ints = {9, 18, 27, 36, 45, 54})
@@ -1588,7 +1593,8 @@ class ServerMockTest
 		}
 
 		@Nested
-		class InventoryHolderAndSizeAndStringTitle {
+		class InventoryHolderAndSizeAndStringTitle
+		{
 
 			@ParameterizedTest
 			@ValueSource(ints = {9, 18, 27, 36, 45, 54})

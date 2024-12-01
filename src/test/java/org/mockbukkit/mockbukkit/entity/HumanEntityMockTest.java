@@ -198,10 +198,12 @@ class HumanEntityMockTest
 	}
 
 	@Nested
-	class OpenInventory {
+	class OpenInventory
+	{
 
 		@Nested
-		class GivenInventory {
+		class GivenInventory
+		{
 
 			@Test
 			void openInventoryEvent_Fired()
