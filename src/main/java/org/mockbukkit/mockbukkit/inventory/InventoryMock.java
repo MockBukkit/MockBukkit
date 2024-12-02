@@ -96,7 +96,7 @@ public class InventoryMock implements Inventory
 	}
 
 	/**
-	 * Copy constructor. Holder is copied by reference, inventory contests are cloned.
+	 * Copy constructor. Holder is copied by reference, inventory contents are cloned.
 	 * @param other Inventory to copy.
 	 */
 	public InventoryMock(@NotNull Inventory other)
