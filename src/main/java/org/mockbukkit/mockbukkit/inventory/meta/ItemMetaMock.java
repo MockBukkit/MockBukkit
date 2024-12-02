@@ -269,6 +269,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				persistentDataContainer,
 				unbreakable,
 				customModelData,
+				damage,
 				maxDamage,
 				hideTooltip,
 				fireResistant,

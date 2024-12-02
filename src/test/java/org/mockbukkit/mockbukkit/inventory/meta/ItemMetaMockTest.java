@@ -155,6 +155,7 @@ class ItemMetaMockTest
 		meta2.setDisplayName("Different name");
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -164,6 +165,7 @@ class ItemMetaMockTest
 		meta.setDisplayName("Some name");
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -173,6 +175,7 @@ class ItemMetaMockTest
 		meta.setLore(Collections.singletonList("lore"));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -183,6 +186,7 @@ class ItemMetaMockTest
 		meta2.setLore(Arrays.asList("lore", "more lore"));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -200,6 +204,7 @@ class ItemMetaMockTest
 		meta2.setDamage(10);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -210,6 +215,7 @@ class ItemMetaMockTest
 		meta2.setDamage(20);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -219,6 +225,7 @@ class ItemMetaMockTest
 		meta.setDamage(10);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -229,6 +236,7 @@ class ItemMetaMockTest
 		meta2.setMaxDamage(10);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -239,6 +247,7 @@ class ItemMetaMockTest
 		meta2.setMaxDamage(20);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -248,6 +257,7 @@ class ItemMetaMockTest
 		meta.setMaxDamage(10);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -258,6 +268,7 @@ class ItemMetaMockTest
 		meta2.setRepairCost(10);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -268,6 +279,7 @@ class ItemMetaMockTest
 		meta2.setRepairCost(20);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -277,6 +289,7 @@ class ItemMetaMockTest
 		meta.setRepairCost(10);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -287,6 +300,7 @@ class ItemMetaMockTest
 		meta2.setMaxStackSize(10);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -297,6 +311,7 @@ class ItemMetaMockTest
 		meta2.setMaxStackSize(20);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -306,6 +321,7 @@ class ItemMetaMockTest
 		meta.setMaxStackSize(10);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -316,6 +332,7 @@ class ItemMetaMockTest
 		meta2.setHideTooltip(true);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -326,6 +343,7 @@ class ItemMetaMockTest
 		meta2.setHideTooltip(false);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -336,6 +354,7 @@ class ItemMetaMockTest
 		meta2.setFireResistant(true);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -346,6 +365,7 @@ class ItemMetaMockTest
 		meta2.setFireResistant(false);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 
@@ -362,6 +382,7 @@ class ItemMetaMockTest
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -377,6 +398,7 @@ class ItemMetaMockTest
 				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -389,6 +411,7 @@ class ItemMetaMockTest
 				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 
@@ -400,6 +423,7 @@ class ItemMetaMockTest
 		meta2.addEnchant(Enchantment.UNBREAKING, 5, true);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -411,6 +435,7 @@ class ItemMetaMockTest
 		meta2.addEnchant(Enchantment.SHARPNESS, 1, true);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -421,6 +446,7 @@ class ItemMetaMockTest
 		meta2.addEnchant(Enchantment.UNBREAKING, 10, true);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -430,6 +456,7 @@ class ItemMetaMockTest
 		meta.addEnchant(Enchantment.UNBREAKING, 5, true);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -440,6 +467,7 @@ class ItemMetaMockTest
 		meta2.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -450,6 +478,7 @@ class ItemMetaMockTest
 		meta2.addItemFlags(ItemFlag.HIDE_DESTROYS);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -459,6 +488,7 @@ class ItemMetaMockTest
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -471,6 +501,7 @@ class ItemMetaMockTest
 		meta2.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -483,6 +514,7 @@ class ItemMetaMockTest
 		meta2.getPersistentDataContainer().set(key, PersistentDataType.LONG, 10L);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -494,6 +526,7 @@ class ItemMetaMockTest
 		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -508,6 +541,7 @@ class ItemMetaMockTest
 		meta2.setUnbreakable(false);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -518,6 +552,7 @@ class ItemMetaMockTest
 		meta2.setUnbreakable(false);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -528,6 +563,7 @@ class ItemMetaMockTest
 		meta2.setCustomModelData(10);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -538,6 +574,7 @@ class ItemMetaMockTest
 		meta2.setCustomModelData(20);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
@@ -547,6 +584,7 @@ class ItemMetaMockTest
 		meta.setCustomModelData(10);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
 	@Test
