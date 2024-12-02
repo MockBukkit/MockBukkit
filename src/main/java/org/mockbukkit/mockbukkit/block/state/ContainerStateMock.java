@@ -55,7 +55,7 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = new InventoryMock(state.getInventory());
+		this.inventory = createInventoryCopy(state.getInventory());
 		this.customName = state.customName();
 		this.lock = state.getLock();
 	}
@@ -63,7 +63,17 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	/**
 	 * @return A new inventory, of the correct type for the state.
 	 */
-	protected abstract InventoryMock createInventory();
+	protected abstract @NotNull InventoryMock createInventory();
+
+	/**
+	 * @param inventory Inventory contents to copy.
+	 * @return A new inventory, of the correct type for the state with contents deep-copied from the given inventory.
+	 */
+	protected @NotNull InventoryMock createInventoryCopy(@NotNull Inventory inventory) {
+		InventoryMock other = createInventory();
+		other.setContents(inventory.getContents());
+		return other;
+	}
 
 	@Override
 	public abstract @NotNull ContainerStateMock getSnapshot();
