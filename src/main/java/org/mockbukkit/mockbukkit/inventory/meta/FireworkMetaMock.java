@@ -161,10 +161,8 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	@Override
 	public void setPower(int power)
 	{
-		if (power < 0 || power > 255)
-		{
-			throw new IllegalArgumentException("Power must be between 0 and 255");
-		}
+		Preconditions.checkArgument(power >= 0, "power cannot be less than zero: %s", power);
+		Preconditions.checkArgument(power <= 255, "power cannot be more than 255: %s", power);
 
 		this.power = power;
 	}
