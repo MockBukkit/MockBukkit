@@ -192,4 +192,11 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof HopperStateMock)) return false;
+		return super.equals(o);
+	}
 }

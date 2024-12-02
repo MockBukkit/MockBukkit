@@ -59,4 +59,11 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 		return new FurnaceStateMock(this);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof FurnaceStateMock)) return false;
+		return super.equals(o);
+	}
 }

@@ -11,6 +11,8 @@ import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
  * Mock implementation of a {@link Container}.
  *
@@ -119,6 +121,21 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	public @NotNull Inventory getSnapshotInventory()
 	{
 		return ((InventoryMock) this.inventory).getSnapshot();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof ContainerStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return Objects.equals(inventory, that.inventory) && Objects.equals(customName, that.customName) && Objects.equals(lock, that.lock);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), inventory, customName, lock);
 	}
 
 }

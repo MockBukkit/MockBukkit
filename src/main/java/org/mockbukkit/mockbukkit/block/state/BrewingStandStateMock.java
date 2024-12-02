@@ -10,6 +10,8 @@ import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.Objects;
+
 /**
  * Mock implementation of a {@link BrewingStand}.
  *
@@ -123,6 +125,21 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	public @NotNull BrewerInventory getSnapshotInventory()
 	{
 		return (BrewerInventory) super.getSnapshotInventory();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof BrewingStandStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return recipeBrewingTime == that.recipeBrewingTime && brewingTime == that.brewingTime && fuelLevel == that.fuelLevel;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), recipeBrewingTime, brewingTime, fuelLevel);
 	}
 
 }

@@ -59,4 +59,11 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 		return new BlastFurnaceStateMock(this);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof BlastFurnaceStateMock)) return false;
+		return super.equals(o);
+	}
 }

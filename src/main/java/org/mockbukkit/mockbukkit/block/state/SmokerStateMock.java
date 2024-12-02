@@ -59,4 +59,12 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 		return new SmokerStateMock(this);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof Smoker)) return false;
+		return super.equals(o);
+	}
+
 }
