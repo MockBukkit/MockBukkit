@@ -55,7 +55,7 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = state.getInventory();
+		this.inventory = new InventoryMock(state.getInventory());
 		this.customName = state.customName();
 		this.lock = state.getLock();
 	}
