@@ -5,6 +5,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.CalibratedSculkSensor;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link CalibratedSculkSensor}.
+ *
+ * @see SculkSensorStateMock
+ */
 public class CalibratedSculkSensorStateMock extends SculkSensorStateMock implements CalibratedSculkSensor
 {
 
