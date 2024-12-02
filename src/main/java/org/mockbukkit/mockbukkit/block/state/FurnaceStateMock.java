@@ -8,7 +8,7 @@ import org.bukkit.block.Furnace;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Mock implementation of a {@link BlastFurnace}.
+ * Mock implementation of a {@link Furnace}.
  *
  * @see AbstractFurnaceStateMock
  */
