@@ -198,4 +198,15 @@ public abstract class AbstractFurnaceStateMock extends ContainerStateMock implem
 		return Objects.hash(super.hashCode(), burnTime, cookTime, cookTimeTotal, cookSpeedMultiplier);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "AbstractFurnaceStateMock{" +
+				"burnTime=" + burnTime +
+				", cookTime=" + cookTime +
+				", cookTimeTotal=" + cookTimeTotal +
+				", cookSpeedMultiplier=" + cookSpeedMultiplier +
+				"} " + super.toString();
+	}
+
 }

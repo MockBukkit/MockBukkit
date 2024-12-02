@@ -199,4 +199,11 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 		if (!(o instanceof HopperStateMock)) return false;
 		return super.equals(o);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "HopperStateMock{} " + super.toString();
+	}
+
 }

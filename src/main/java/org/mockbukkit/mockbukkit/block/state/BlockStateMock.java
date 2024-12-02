@@ -403,6 +403,17 @@ public class BlockStateMock implements BlockState
 
 	}
 
+	@Override
+	public String toString()
+	{
+		return "BlockStateMock{" +
+				"block=" + block +
+				", blockData=" + blockData +
+				", material=" + material +
+				", metadataTable=" + metadataTable +
+				'}';
+	}
+
 	/**
 	 * Attempts to construct a BlockStateMock by the provided block.
 	 * Will return a basic {@link BlockStateMock} if no implementation is found.

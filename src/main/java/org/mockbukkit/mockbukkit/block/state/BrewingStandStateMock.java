@@ -142,4 +142,14 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 		return Objects.hash(super.hashCode(), recipeBrewingTime, brewingTime, fuelLevel);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "BrewingStandStateMock{" +
+				"brewingTime=" + brewingTime +
+				", recipeBrewingTime=" + recipeBrewingTime +
+				", fuelLevel=" + fuelLevel +
+				"} " + super.toString();
+	}
+
 }

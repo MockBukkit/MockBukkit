@@ -138,4 +138,14 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 		return Objects.hash(super.hashCode(), inventory, customName, lock);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "ContainerStateMock{" +
+				"customName=" + customName +
+				", lock='" + lock + '\'' +
+				", inventory=" + inventory +
+				'}';
+	}
+
 }

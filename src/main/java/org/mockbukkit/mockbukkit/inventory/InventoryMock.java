@@ -798,4 +798,15 @@ public class InventoryMock implements Inventory
 		return Objects.hash(Arrays.hashCode(items), holder, type, maxStackSize, viewers);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "InventoryMock{" +
+				"holder=" + (holder != null ? Objects.toIdentityString(holder) : null) +
+				", type=" + type +
+				", maxStackSize=" + maxStackSize +
+				", viewers=" + viewers.size() +
+				", items=" + Arrays.toString(items) +
+				'}';
+	}
 }

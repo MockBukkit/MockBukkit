@@ -228,4 +228,12 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 		return Objects.hash(super.hashCode(), isOpen);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "ChestStateMock{" +
+				"isOpen=" + isOpen +
+				"} " + super.toString();
+	}
+
 }

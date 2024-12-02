@@ -205,4 +205,11 @@ public class DispenserStateMock extends ContainerStateMock implements Dispenser
 		if (!(o instanceof DispenserStateMock)) return false;
 		return super.equals(o);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "DispenserStateMock{} " + super.toString();
+	}
+
 }

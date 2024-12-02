@@ -67,4 +67,10 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 		return super.equals(o);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "SmokerStateMock{} " + super.toString();
+	}
+
 }

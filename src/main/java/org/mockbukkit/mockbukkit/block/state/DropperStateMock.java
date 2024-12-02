@@ -191,4 +191,11 @@ public class DropperStateMock extends ContainerStateMock implements Dropper
 		if (!(o instanceof DropperStateMock)) return false;
 		return super.equals(o);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "DropperStateMock{} " + super.toString();
+	}
+
 }

@@ -214,4 +214,12 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 		return Objects.hash(super.hashCode(), isOpen);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "BarrelStateMock{" +
+				"isOpen=" + isOpen +
+				"} " + super.toString();
+	}
+
 }
