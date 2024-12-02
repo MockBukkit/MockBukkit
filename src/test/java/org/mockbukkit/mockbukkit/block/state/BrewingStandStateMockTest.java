@@ -19,12 +19,18 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 @ExtendWith(MockBukkitExtension.class)
-class BrewingStandStateMockTest
+class BrewingStandStateMockTest extends ContainerStateMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
 	private BrewingStandStateMock brewingStand;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return brewingStand;
+	}
 
 	@BeforeEach
 	void setUp()

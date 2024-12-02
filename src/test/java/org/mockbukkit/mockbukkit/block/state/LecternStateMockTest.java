@@ -18,12 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 @ExtendWith(MockBukkitExtension.class)
-class LecternStateMockTest
+class LecternStateMockTest extends ContainerStateMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
 	private LecternStateMock lectern;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return lectern;
+	}
 
 	@BeforeEach
 	void setUp()
