@@ -133,8 +133,15 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	@Override
 	public void copyTo(@NotNull PersistentDataContainer other, boolean replace)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		PersistentDataContainerMock target = (PersistentDataContainerMock) other;
+		if (replace)
+		{
+			target.map.putAll(map);
+		}
+		else
+		{
+			map.forEach(target.map::putIfAbsent);
+		}
 	}
 
 	@Override
