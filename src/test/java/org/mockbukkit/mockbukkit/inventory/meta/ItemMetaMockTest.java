@@ -222,6 +222,177 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void equals_MaxDamageSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setMaxDamage(10);
+		meta2.setMaxDamage(10);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_MaxDamageDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setMaxDamage(10);
+		meta2.setMaxDamage(20);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_MaxDamageOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setMaxDamage(10);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_RepairableSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setRepairCost(10);
+		meta2.setRepairCost(10);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_RepairableDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setRepairCost(10);
+		meta2.setRepairCost(20);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_RepairableOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setRepairCost(10);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_MaxStackSizeSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setMaxStackSize(10);
+		meta2.setMaxStackSize(10);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_MaxStackSizeDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setMaxStackSize(10);
+		meta2.setMaxStackSize(20);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_MaxStackSizeOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setMaxStackSize(10);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_IsHideTooltipSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setHideTooltip(true);
+		meta2.setHideTooltip(true);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_IsHideTooltipDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setHideTooltip(true);
+		meta2.setHideTooltip(false);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_IsFireResistantSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setFireResistant(true);
+		meta2.setFireResistant(true);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_IsFireResistantDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setFireResistant(true);
+		meta2.setFireResistant(false);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+
+	@Test
+	void equals_AttributeModifiersSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		final NamespacedKey key = NamespacedKey.randomKey();
+		meta.addAttributeModifier(
+				Attribute.GENERIC_MAX_HEALTH,
+				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
+		meta2.addAttributeModifier(
+				Attribute.GENERIC_MAX_HEALTH,
+				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_AttributeModifiersDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		final NamespacedKey key = NamespacedKey.randomKey();
+		meta.addAttributeModifier(
+				Attribute.GENERIC_MAX_HEALTH,
+				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
+		meta2.addAttributeModifier(
+				Attribute.GENERIC_MAX_HEALTH,
+				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	void equals_AttributeModifiersOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		final NamespacedKey key = NamespacedKey.randomKey();
+		meta2.addAttributeModifier(
+				Attribute.GENERIC_MAX_HEALTH,
+				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+
+	@Test
 	void equals_EnchantsSame_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
