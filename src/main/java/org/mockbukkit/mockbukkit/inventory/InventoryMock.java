@@ -780,6 +780,7 @@ public class InventoryMock implements Inventory
 				&& Objects.equals(customTitle, that.customTitle);
 	}
 
+	/** Note: does not compare holder or viewers (matches spigot/paper). */
 	@Override
 	public boolean equals(Object o)
 	{
@@ -787,24 +788,22 @@ public class InventoryMock implements Inventory
 		if (!(o instanceof InventoryMock that)) return false;
 		return maxStackSize == that.maxStackSize
 				&& Objects.deepEquals(items, that.items)
-				&& Objects.equals(holder, that.holder)
-				&& type == that.type
-				&& Objects.equals(viewers, that.viewers);
+				&& type == that.type;
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(Arrays.hashCode(items), holder, type, maxStackSize, viewers);
+		return Objects.hash(Arrays.hashCode(items), type, maxStackSize);
 	}
 
 	@Override
 	public String toString()
 	{
 		return "InventoryMock{" +
-				"holder=" + (holder != null ? Objects.toIdentityString(holder) : null) +
-				", type=" + type +
+				"type=" + type +
 				", maxStackSize=" + maxStackSize +
+				", holder=" + (holder != null ? Objects.toIdentityString(holder) : null) +
 				", viewers=" + viewers.size() +
 				", items=" + Arrays.toString(items) +
 				'}';
