@@ -44,6 +44,6 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	}
 
 	@Override
-	public abstract @NotNull BlockState getSnapshot();
+	public abstract @NotNull TileStateMock getSnapshot();
 
 }

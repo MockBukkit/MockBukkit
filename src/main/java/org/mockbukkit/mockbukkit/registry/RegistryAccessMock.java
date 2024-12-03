@@ -123,7 +123,11 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.ATTRIBUTE,
 				RegistryKey.BIOME,
 				RegistryKey.SOUND_EVENT,
-				RegistryKey.FLUID
+				RegistryKey.FLUID,
+				RegistryKey.ENTITY_TYPE,
+				RegistryKey.PARTICLE_TYPE,
+				RegistryKey.POTION,
+				RegistryKey.DATA_COMPONENT_TYPE
 		);
 	}
 

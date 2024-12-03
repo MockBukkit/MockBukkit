@@ -90,7 +90,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private Component itemName = null;
 
 	private @Nullable Integer enchantableValue;
-	private Component itemName;
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.

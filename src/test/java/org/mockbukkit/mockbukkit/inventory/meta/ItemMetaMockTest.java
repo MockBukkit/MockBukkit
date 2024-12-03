@@ -380,10 +380,10 @@ class ItemMetaMockTest
 		ItemMetaMock meta2 = new ItemMetaMock();
 		final NamespacedKey key = NamespacedKey.randomKey();
 		meta.addAttributeModifier(
-				Attribute.GENERIC_MAX_HEALTH,
+				Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
 		meta2.addAttributeModifier(
-				Attribute.GENERIC_MAX_HEALTH,
+				Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
@@ -396,10 +396,10 @@ class ItemMetaMockTest
 		ItemMetaMock meta2 = new ItemMetaMock();
 		final NamespacedKey key = NamespacedKey.randomKey();
 		meta.addAttributeModifier(
-				Attribute.GENERIC_MAX_HEALTH,
+				Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
 		meta2.addAttributeModifier(
-				Attribute.GENERIC_MAX_HEALTH,
+				Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
@@ -412,7 +412,7 @@ class ItemMetaMockTest
 		ItemMetaMock meta2 = new ItemMetaMock();
 		final NamespacedKey key = NamespacedKey.randomKey();
 		meta2.addAttributeModifier(
-				Attribute.GENERIC_MAX_HEALTH,
+				Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
