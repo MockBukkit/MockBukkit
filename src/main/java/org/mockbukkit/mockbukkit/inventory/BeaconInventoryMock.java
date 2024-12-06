@@ -27,6 +27,11 @@ public class BeaconInventoryMock extends InventoryMock implements BeaconInventor
 		super(holder, InventoryType.BEACON);
 	}
 
+	protected BeaconInventoryMock(@NotNull BeaconInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	public void setItem(@Nullable ItemStack item)
 	{
@@ -42,9 +47,7 @@ public class BeaconInventoryMock extends InventoryMock implements BeaconInventor
 	@Override
 	public @NotNull BeaconInventoryMock getSnapshot()
 	{
-		BeaconInventoryMock inventory = new BeaconInventoryMock(getHolder());
-		inventory.setItem(getItem());
-		return inventory;
+		return new BeaconInventoryMock(this);
 	}
 
 }

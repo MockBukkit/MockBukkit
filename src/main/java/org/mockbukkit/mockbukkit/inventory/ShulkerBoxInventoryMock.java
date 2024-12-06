@@ -24,13 +24,16 @@ public class ShulkerBoxInventoryMock extends InventoryMock
 		super(holder, 27, InventoryType.SHULKER_BOX);
 	}
 
+	protected ShulkerBoxInventoryMock(@NotNull ShulkerBoxInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new ShulkerBoxInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new ShulkerBoxInventoryMock(this);
 	}
 
 }

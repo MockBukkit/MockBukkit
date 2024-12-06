@@ -106,6 +106,7 @@ import org.mockbukkit.mockbukkit.inventory.BeaconInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.CartographyInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.CrafterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.DropperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.EnchantingInventoryMock;
@@ -777,6 +778,8 @@ public class ServerMock extends Server.Spigot implements Server
 			yield new EnchantingInventoryMock(owner);
 		case BREWING:
 			yield new BrewerInventoryMock(owner);
+		case CRAFTER:
+			yield new CrafterInventoryMock(owner);
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		};

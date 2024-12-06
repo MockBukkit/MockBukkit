@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -49,14 +51,14 @@ class InventoryMockTest
 	private InventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		inventory = new InventoryMock(null, 9, InventoryType.CHEST);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -729,6 +731,78 @@ class InventoryMockTest
 			customInventory.setCustomTitle(null);
 			assertEquals(type.defaultTitle(), customInventory.getTitle());
 			assertNull(customInventory.getCustomTitle());
+		}
+
+	}
+
+	@Nested
+	class Equals {
+
+		@MockBukkitInject
+		private ServerMock serverMock;
+
+		@Test
+		void givenItemChanges() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			assertEquals(inventoryA, inventoryB);
+
+			inventoryA.addItem(ItemStack.of(Material.DIAMOND));
+			inventoryB.addItem(ItemStack.of(Material.DIAMOND));
+			assertEquals(inventoryA, inventoryB);
+
+			inventoryA.addItem(ItemStack.of(Material.EMERALD));
+			assertNotEquals(inventoryA, inventoryB);
+		}
+
+		@Test
+		void givenDifferentTypes() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.DROPPER);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			assertNotEquals(inventoryA, inventoryB);
+		}
+
+		@Test
+		void givenDifferentMaxSizes() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			assertEquals(inventoryA, inventoryB);
+
+			inventoryA.setMaxStackSize(1);
+			inventoryB.setMaxStackSize(2);
+			assertNotEquals(inventoryA, inventoryB);
+
+			inventoryA.setMaxStackSize(5);
+			inventoryB.setMaxStackSize(5);
+			assertEquals(inventoryA, inventoryB);
+		}
+
+		@Test
+		void givenDifferentHolders() {
+
+			Player player = server.addPlayer();
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryC = new InventoryMock(player, InventoryType.CHEST);
+
+			assertEquals(inventoryA, inventoryB);
+			assertNotEquals(inventoryB, inventoryC);
+		}
+
+		@Test
+		void givenDifferentTitles() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+
+			assertEquals(inventoryA, inventoryB);
+
+			inventoryA.setCustomTitle(Component.text("This is a custom title"));
+			assertNotEquals(inventoryA, inventoryB);
 		}
 
 	}

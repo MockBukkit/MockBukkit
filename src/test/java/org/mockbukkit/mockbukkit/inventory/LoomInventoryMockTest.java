@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.inventory.InventoryHolder;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ class LoomInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		inventory = new LoomInventoryMock(null);
+		inventory = new LoomInventoryMock((InventoryHolder) null);
 	}
 
 	@Test

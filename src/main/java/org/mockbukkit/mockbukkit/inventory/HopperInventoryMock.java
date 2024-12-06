@@ -24,13 +24,16 @@ public class HopperInventoryMock extends InventoryMock
 		super(holder, 5, InventoryType.HOPPER);
 	}
 
+	protected HopperInventoryMock(@NotNull HopperInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new HopperInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new HopperInventoryMock(this);
 	}
 
 }

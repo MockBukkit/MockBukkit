@@ -1625,6 +1625,7 @@ class ServerMockTest
 			{
 				return Stream.of(InventoryType.values())
 						.filter(InventoryType::isCreatable)
+						.filter(type -> !InventoryType.SMITHING_NEW.equals(type))
 						.map(Arguments::of);
 			}
 

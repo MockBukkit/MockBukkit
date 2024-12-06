@@ -30,6 +30,11 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 		super(holder, InventoryType.BREWING);
 	}
 
+	protected BrewerInventoryMock(@NotNull BrewerInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	public @Nullable ItemStack getIngredient()
 	{
@@ -67,10 +72,7 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	@Override
 	public @NotNull BrewerInventoryMock getSnapshot()
 	{
-		BrewerInventoryMock inventory = new BrewerInventoryMock(getHolder());
-		inventory.setItem(INGREDIENT_SLOT, getItem(INGREDIENT_SLOT));
-		inventory.setItem(FUEL_SLOT, getItem(FUEL_SLOT));
-		return inventory;
+		return new BrewerInventoryMock(this);
 	}
 
 	private void checkHasFuel()

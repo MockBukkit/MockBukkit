@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class HopperInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.inventory = new HopperInventoryMock(null);
+		this.inventory = new HopperInventoryMock((InventoryHolder) null);
 	}
 
 	@Test

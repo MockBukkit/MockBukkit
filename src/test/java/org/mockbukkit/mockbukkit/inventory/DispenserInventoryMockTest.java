@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import org.bukkit.inventory.InventoryHolder;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +23,7 @@ class DispenserInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.inventory = new DispenserInventoryMock(null);
+		this.inventory = new DispenserInventoryMock((InventoryHolder) null);
 	}
 
 	@Test

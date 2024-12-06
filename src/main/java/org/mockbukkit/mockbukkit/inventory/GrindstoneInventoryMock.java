@@ -23,12 +23,15 @@ public class GrindstoneInventoryMock extends InventoryMock implements Grindstone
 		super(holder, InventoryType.GRINDSTONE);
 	}
 
+	protected GrindstoneInventoryMock(@NotNull GrindstoneInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	public @NotNull InventoryMock getSnapshot()
 	{
-		GrindstoneInventoryMock inventory = new GrindstoneInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new GrindstoneInventoryMock(this);
 	}
 
 }

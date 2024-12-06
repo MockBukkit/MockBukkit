@@ -44,8 +44,8 @@ public class InventoryMock implements Inventory
 	private final @Nullable InventoryHolder holder;
 	private final @NotNull InventoryType type;
 
-	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
+	private int maxStackSize = MAX_STACK_SIZE;
 
 	private @Nullable Component customTitle;
 
@@ -82,6 +82,17 @@ public class InventoryMock implements Inventory
 		this.type = type;
 
 		items = new ItemStack[type.getDefaultSize()];
+	}
+
+	protected InventoryMock(InventoryMock inventory)
+	{
+		this.holder = inventory.getHolder();
+		this.type = inventory.getType();
+		this.items = new ItemStack[inventory.getSize()];
+
+		setMaxStackSize(inventory.getMaxStackSize());
+		setContents(inventory.getContents());
+		setCustomTitle(inventory.getCustomTitle());
 	}
 
 	/**
@@ -680,9 +691,7 @@ public class InventoryMock implements Inventory
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new InventoryMock(holder, getSize(), type);
-		inventory.setContents(getContents());
-		return inventory;
+		return new InventoryMock(this);
 	}
 
 	/**
@@ -726,6 +735,19 @@ public class InventoryMock implements Inventory
 	public void setCustomTitle(@Nullable Component customTitle)
 	{
 		this.customTitle = customTitle;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (!(o instanceof InventoryMock that)) return false;
+		return maxStackSize == that.maxStackSize && Objects.deepEquals(items, that.items) && Objects.equals(holder, that.holder) && type == that.type && Objects.equals(viewers, that.viewers) && Objects.equals(customTitle, that.customTitle);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(Arrays.hashCode(items), holder, type, viewers, maxStackSize, customTitle);
 	}
 
 }

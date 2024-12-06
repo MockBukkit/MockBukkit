@@ -24,12 +24,15 @@ public class CartographyInventoryMock extends InventoryMock implements Cartograp
 		super(holder, InventoryType.CARTOGRAPHY);
 	}
 
+	protected CartographyInventoryMock(@NotNull CartographyInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	public @NotNull InventoryMock getSnapshot()
 	{
-		CartographyInventoryMock inventory = new CartographyInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new CartographyInventoryMock(this);
 	}
 
 }
