@@ -1,33 +1,40 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.bukkit.block.PistonMoveReaction;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.SoundGroup;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.BlockSupport;
+import org.bukkit.block.BlockType;
+import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.VoxelShape;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Mock implementation of {@link BlockData}.
@@ -40,6 +47,7 @@ public class BlockDataMock implements BlockData
 
 	private final @NotNull Material type;
 	private @NotNull Map<String, Object> data;
+	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("(^[a-z_:]+)(?:(\\[(.+)\\]$)|($))");
 
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
@@ -52,6 +60,63 @@ public class BlockDataMock implements BlockData
 
 		this.type = material;
 		this.data = new LinkedHashMap<>();
+	}
+
+	@ApiStatus.Internal
+	public static BlockDataMock newData(BlockType blockType, String data)
+	{
+		String modifiedData;
+		if (blockType != null)
+		{
+			if (data == null)
+			{
+				modifiedData = blockType.getKey().toString();
+			}
+			else
+			{
+				Matcher dataMatcher = BLOCK_DATA_PATTERN.matcher(data);
+				Preconditions.checkArgument(dataMatcher.find(), "String is not in a block data format: " + data);
+				String onlyFields = dataMatcher.group(2);
+				modifiedData = onlyFields == null ? blockType.getKey().toString() : blockType.getKey() + onlyFields;
+			}
+		}
+		else
+		{
+			modifiedData = data;
+		}
+		return createNewData(modifiedData);
+	}
+
+	private static BlockDataMock createNewData(String dataString)
+	{
+		Matcher blockDataMatcher = BLOCK_DATA_PATTERN.matcher(dataString);
+		Preconditions.checkArgument(blockDataMatcher.find(), "String is not in a block data format: " + dataString);
+		NamespacedKey blockKey = NamespacedKey.fromString(blockDataMatcher.group(1));
+		Preconditions.checkArgument(blockKey != null, "Invalid namespace key: " + blockDataMatcher.group(1));
+		String blockDataString = blockDataMatcher.group(3);
+		Material material = Registry.MATERIAL.get(blockKey);
+		Preconditions.checkArgument(material != null, "Invalid material: " + blockKey);
+		Map<String, Object> data = new HashMap<>();
+		BlockDataMock blockData = BlockDataMock.mock(material);
+		if (blockDataString == null)
+		{
+			return blockData;
+		}
+		String[] blockDataArguments = blockDataString.split(",");
+		for (String blockDataArgument : blockDataArguments)
+		{
+			String[] split = blockDataArgument.split("=");
+			String key = split[0].strip();
+			String valueString = split[1].strip();
+			Preconditions.checkArgument(BlockDataKey.isRegistered(key), "Unknown block data key: " + key);
+			BlockDataKey blockDataKey = BlockDataKey.fromKey(key);
+			Preconditions.checkArgument(blockDataKey.appliesTo(blockData), "Can not apply block data key to '" + blockKey + "': " + key);
+			Object value = blockDataKey.constructValue(valueString);
+			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
+			data.put(key, value);
+		}
+		blockData.data.putAll(data);
+		return blockData;
 	}
 
 	// region Type Checking
@@ -108,14 +173,14 @@ public class BlockDataMock implements BlockData
 	 * @param <T>   The type of the data.
 	 * @see BlockDataKey
 	 */
-	protected <T> void set(@NotNull String key, @NotNull T value)
+	protected <T> void set(@NotNull BlockDataKey key, @NotNull T value)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		Preconditions.checkNotNull(value, "Value cannot be null");
 
-		checkProperty(key);
+		checkProperty(key.key());
 
-		this.data.put(key, value);
+		this.data.put(key.key(), value);
 	}
 
 	/**
@@ -128,14 +193,14 @@ public class BlockDataMock implements BlockData
 	 * @see BlockDataKey
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> @NotNull T get(@NotNull String key)
+	protected <T> @NotNull T get(@NotNull BlockDataKey key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
-		checkProperty(key);
-		T value = (T) this.data.get(key);
+		checkProperty(key.key());
+		T value = (T) this.data.get(key.key());
 		if (value == null)
 		{
-			value = (T) BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key);
+			value = (T) BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
@@ -388,11 +453,12 @@ public class BlockDataMock implements BlockData
 
 		// Special cases
 		return switch (material)
-				{
-					case AMETHYST_CLUSTER -> new AmethystClusterDataMock(material);
-					case LEVER -> new SwitchDataMock(material);
-					default -> new BlockDataMock(material);
-				};
+		{
+			case AMETHYST_CLUSTER -> new AmethystClusterDataMock(material);
+			case LEVER -> new SwitchDataMock(material);
+			case BAMBOO -> new BambooDataMock();
+			default -> new BlockDataMock(material);
+		};
 	}
 
 	private static @NotNull BlockDataMock mock(@NotNull Material material, @NotNull Map<String, Object> previousData)
@@ -454,6 +520,10 @@ public class BlockDataMock implements BlockData
 		else if (Tag.BUTTONS.isTagged(material))
 		{
 			return new SwitchDataMock(material);
+		}
+		else if (Tag.FENCES.isTagged(material))
+		{
+			return new FenceDataMock(material);
 		}
 		return null;
 	}

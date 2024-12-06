@@ -119,7 +119,10 @@ class FireworkMetaMockTest
 	void testPower()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
+		assertFalse(meta.hasPower());
+		assertEquals(0, meta.getPower());
 		meta.setPower(8);
+		assertTrue(meta.hasPower());
 		assertEquals(8, meta.getPower());
 	}
 
@@ -127,14 +130,34 @@ class FireworkMetaMockTest
 	void testPowerTooLow()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
-		assertThrows(IllegalArgumentException.class, () -> meta.setPower(-200));
+		assertThrows(IllegalArgumentException.class, () -> meta.setPower(-1));
 	}
 
 	@Test
 	void testPowerTooHigh()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
-		assertThrows(IllegalArgumentException.class, () -> meta.setPower(1024));
+		assertThrows(IllegalArgumentException.class, () -> meta.setPower(256));
+	}
+
+	@Test
+	void testSerialization()
+	{
+		FireworkMeta meta = new FireworkMetaMock();
+
+		FireworkMeta meta2 = FireworkMetaMock.deserialize(meta.serialize());
+		assertEquals(meta, meta2);
+		assertFalse(meta2.hasPower());
+		assertFalse(meta2.hasEffects());
+
+		meta.addEffect(FireworkEffect.builder().withColor(Color.BLUE).with(Type.BALL_LARGE).build());
+		meta.addEffect(FireworkEffect.builder().withColor(Color.RED).with(Type.STAR).build());
+		meta.setPower(8);
+
+		meta2 = FireworkMetaMock.deserialize(meta.serialize());
+		assertEquals(meta, meta2);
+		assertEquals(8, meta2.getPower());
+		assertEquals(2, meta2.getEffectsSize());
 	}
 
 }

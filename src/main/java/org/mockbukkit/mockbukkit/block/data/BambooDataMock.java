@@ -4,6 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.block.data.type.Bamboo;
 import org.jetbrains.annotations.NotNull;
 
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.AGE_KEY;
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.LEAVES_KEY;
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.STAGE_KEY;
+
 /**
  * Mock implementation of {@link Bamboo}.
  */
@@ -11,10 +15,6 @@ public class BambooDataMock extends BlockDataMock implements Bamboo
 {
 	private static final int MAXIMUM_AGE_AMOUNT = 1;
 	private static final int MAXIMUM_STAGE_AMOUNT = 1;
-
-	private static final String AGE_KEY = "age";
-	private static final String LEAVES_KEY = "leaves";
-	private static final String STAGE_KEY = "stage";
 
 	/**
 	 * Constructs a new {@link BambooDataMock} for the provided {@link Material}.

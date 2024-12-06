@@ -1,19 +1,19 @@
 {
 	"default": {
-		"width": 0.35,
-		"height": 0.35,
 		"eyeHeight": 0.2275,
+		"height": 0.35,
 		"states": {
-			"semi_puffed": {
-				"width": 0.49,
-				"height": 0.49,
-				"eyeHeight": 0.3185
-			},
 			"puffed": {
-				"width": 0.7,
+				"eyeHeight": 0.455,
 				"height": 0.7,
-				"eyeHeight": 0.455
+				"width": 0.7
+			},
+			"semi_puffed": {
+				"eyeHeight": 0.3185,
+				"height": 0.49,
+				"width": 0.49
 			}
-		}
+		},
+		"width": 0.35
 	}
 }

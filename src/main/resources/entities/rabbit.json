@@ -1,12 +1,12 @@
 {
-	"default": {
-		"height": 0.5,
-		"width": 0.4,
-		"eyeHeight": 0.425
-	},
-	"baby":{
+	"baby": {
+		"eyeHeight": 0.2125,
 		"height": 0.25,
-		"width": 0.2,
-		"eyeHeight": 0.2125
+		"width": 0.2
+	},
+	"default": {
+		"eyeHeight": 0.425,
+		"height": 0.5,
+		"width": 0.4
 	}
 }

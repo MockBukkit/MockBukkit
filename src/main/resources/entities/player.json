@@ -1,29 +1,29 @@
 {
 	"default": {
-		"height": 1.8,
-		"width": 0.6,
 		"eyeHeight": 1.62,
+		"height": 1.8,
 		"states": {
-			"sneaking": {
-				"height": 1.5,
-				"width": 0.6,
-				"eyeHeight": 1.35
-			},
 			"gliding": {
+				"eyeHeight": 0.54,
 				"height": 0.6,
-				"width": 0.6,
-				"eyeHeight": 0.54
-			},
-			"swimming": {
-				"height": 0.6,
-				"width": 0.6,
-				"eyeHeight": 0.54
+				"width": 0.6
 			},
 			"sleeping": {
+				"eyeHeight": 0.2,
 				"height": 0.2,
-				"width": 0.2,
-				"eyeHeight": 0.2
+				"width": 0.2
+			},
+			"sneaking": {
+				"eyeHeight": 1.35,
+				"height": 1.5,
+				"width": 0.6
+			},
+			"swimming": {
+				"eyeHeight": 0.54,
+				"height": 0.6,
+				"width": 0.6
 			}
-		}
+		},
+		"width": 0.6
 	}
 }

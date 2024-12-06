@@ -1,0 +1,6 @@
+[
+	"minecraft:stone",
+	"stone",
+	"minecraft:black_bed[facing=east]",
+	"minecraft:bamboo[ age = 1, leaves = small, stage = 1 ]"
+]

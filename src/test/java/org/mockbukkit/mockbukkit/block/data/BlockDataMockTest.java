@@ -1,32 +1,48 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.block.state.BedStateMock;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.WallSign;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.block.state.BedStateMock;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith({ MockBukkitExtension.class})
+@ExtendWith({ MockBukkitExtension.class })
 class BlockDataMockTest
 {
 
@@ -60,26 +76,15 @@ class BlockDataMockTest
 	}
 
 	@Test
-	void testGetWithNonExistentKey()
-	{
-		// Stone has no possible states
-		BlockDataMock blockData = new BlockDataMock(Material.STONE);
-
-		assertThrowsExactly(IllegalStateException.class, () -> blockData.get("non-existent-key"));
-	}
-
-	@Test
 	void testGetWithNonExistentKey2()
 	{
 		// Stone has no possible states
 		BlockDataMock blockData = new BlockDataMock(Material.ACACIA_BUTTON);
 
-		assertThrowsExactly(IllegalStateException.class, () -> blockData.get("non-existent-key"));
-
 		// Check the defaults:
-		assertEquals(false, blockData.get("powered"));
-		assertEquals("wall", blockData.get("face"));
-		assertEquals("north", blockData.get("facing"));
+		assertEquals(false, blockData.get(BlockDataKey.POWERED));
+		assertEquals("wall", blockData.get(BlockDataKey.FACE));
+		assertEquals("north", blockData.get(BlockDataKey.FACING));
 	}
 
 	@Test
@@ -89,7 +94,7 @@ class BlockDataMockTest
 		BlockDataMock blockData2 = new BlockDataMock(Material.ACACIA_BUTTON);
 		assertEquals(blockData2.hashCode(), blockData.hashCode());
 
-		blockData.set("powered", true);
+		blockData.set(BlockDataKey.POWERED, true);
 		assertNotEquals(blockData2.hashCode(), blockData.hashCode());
 	}
 
@@ -98,7 +103,7 @@ class BlockDataMockTest
 	{
 		BlockDataMock blockData = new BlockDataMock(Material.ACACIA_BUTTON);
 		BlockDataMock blockData2 = new BlockDataMock(Material.ACACIA_BUTTON);
-		blockData2.set("powered", true);
+		blockData2.set(BlockDataKey.POWERED, true);
 
 		assertTrue(blockData2.matches(blockData));
 		assertFalse(blockData.matches(blockData2));
@@ -140,8 +145,8 @@ class BlockDataMockTest
 		WallSign wallSign = (WallSign) BlockDataMock.mock(Material.ACACIA_WALL_SIGN);
 		wallSign.setFacing(BlockFace.NORTH);
 		WallSign clone = (WallSign) wallSign.clone();
-		assertNotSame(wallSign,clone);
-		assertEquals(wallSign,clone);
+		assertNotSame(wallSign, clone);
+		assertEquals(wallSign, clone);
 		assertEquals(wallSign.getFacing(), clone.getFacing());
 	}
 
@@ -175,7 +180,7 @@ class BlockDataMockTest
 		String b = tmp.getAsString(true);
 
 		BlockDataMock data = new BlockDataMock(Material.CHEST);
-		data.set("waterlogged", "true");
+		data.set(BlockDataKey.WATERLOGGED, "true");
 
 		assertEquals("minecraft:chest[waterlogged=true]", data.getAsString(true));
 		assertEquals("minecraft:chest[facing=north,type=single,waterlogged=true]", data.getAsString(false));
@@ -212,6 +217,69 @@ class BlockDataMockTest
 		BlockState actual = bed.createBlockState();
 		assertNotNull(actual);
 		assertInstanceOf(BedStateMock.class, actual);
+	}
+
+	@Test
+	void serializeDeserializeBed()
+	{
+		BedDataMock bed = (BedDataMock) BlockDataMock.mock(Material.BLACK_BED);
+		bed.setFacing(BlockFace.EAST);
+		bed.setOccupied(true);
+		bed.setPart(Bed.Part.HEAD);
+		String serialized = bed.getAsString();
+		BlockDataMock blockDataMock = BlockDataMock.newData(null, serialized);
+		assertEquals(blockDataMock, bed);
+	}
+
+	@Test
+	void serializeDeserialize_duplicateMaterialArgument()
+	{
+		BedDataMock bed = (BedDataMock) BlockDataMock.mock(Material.BLACK_BED);
+		bed.setFacing(BlockFace.EAST);
+		bed.setOccupied(true);
+		bed.setPart(Bed.Part.HEAD);
+		String serialized = bed.getAsString();
+		BlockDataMock blockDataMock = BlockDataMock.newData(Registry.BLOCK.get(NamespacedKey.minecraft("black_bed")), serialized);
+		assertEquals(blockDataMock, bed);
+	}
+
+	@Test
+	void serializeDeserialize_duplicateMaterialArgument_noFields()
+	{
+		BlockDataMock blockDataMock = BlockDataMock.newData(Registry.BLOCK.get(NamespacedKey.minecraft("black_bed")), "minecraft:stone");
+		assertInstanceOf(BedDataMock.class, blockDataMock);
+	}
+
+	@ParameterizedTest
+	@MethodSource("getValidSerializations")
+	void deserialize_validInput(String serialized)
+	{
+		assertDoesNotThrow(() -> BlockDataMock.newData(null, serialized));
+	}
+
+	@ParameterizedTest
+	@MethodSource("getInvalidSerializations")
+	void deserialize_invalidInput(String serialized)
+	{
+		assertThrows(IllegalArgumentException.class, () -> BlockDataMock.newData(null, serialized));
+	}
+
+	static Stream<Arguments> getValidSerializations() throws IOException
+	{
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/blockData/validSerializations.json"))
+		{
+			JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray();
+			return jsonArray.asList().stream().map(JsonElement::getAsString).map(Arguments::of);
+		}
+	}
+
+	static Stream<Arguments> getInvalidSerializations() throws IOException
+	{
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/blockData/invalidSerializations.json"))
+		{
+			JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray();
+			return jsonArray.asList().stream().map(JsonElement::getAsString).map(Arguments::of);
+		}
 	}
 
 }

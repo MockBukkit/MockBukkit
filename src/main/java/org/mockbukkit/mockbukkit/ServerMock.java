@@ -1,53 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.boss.BossBarMock;
-import org.mockbukkit.mockbukkit.boss.KeyedBossBarMock;
-import org.mockbukkit.mockbukkit.command.CommandMapMock;
-import org.mockbukkit.mockbukkit.command.CommandResult;
-import org.mockbukkit.mockbukkit.command.ConsoleCommandSenderMock;
-import org.mockbukkit.mockbukkit.command.MessageTarget;
-import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
-import org.mockbukkit.mockbukkit.exception.PluginIOException;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.help.HelpMapMock;
-import org.mockbukkit.mockbukkit.inventory.AnvilInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.BarrelInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.BeaconInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.CartographyInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.DropperInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.EnchantingInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.GrindstoneInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ItemFactoryMock;
-import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
-import org.mockbukkit.mockbukkit.map.MapViewMock;
-import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
-import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
-import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
-import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
-import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
-import org.mockbukkit.mockbukkit.scoreboard.ScoreboardManagerMock;
-import org.mockbukkit.mockbukkit.services.ServicesManagerMock;
-import org.mockbukkit.mockbukkit.tags.TagRegistry;
-import org.mockbukkit.mockbukkit.tags.TagWrapperMock;
-import org.mockbukkit.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
@@ -133,6 +85,54 @@ import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.boss.BossBarMock;
+import org.mockbukkit.mockbukkit.boss.KeyedBossBarMock;
+import org.mockbukkit.mockbukkit.command.CommandMapMock;
+import org.mockbukkit.mockbukkit.command.CommandResult;
+import org.mockbukkit.mockbukkit.command.ConsoleCommandSenderMock;
+import org.mockbukkit.mockbukkit.command.MessageTarget;
+import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
+import org.mockbukkit.mockbukkit.exception.PluginIOException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.help.HelpMapMock;
+import org.mockbukkit.mockbukkit.inventory.AnvilInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.BarrelInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.BeaconInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.CartographyInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.DropperInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.EnchantingInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.GrindstoneInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemFactoryMock;
+import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
+import org.mockbukkit.mockbukkit.map.MapViewMock;
+import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
+import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
+import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
+import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
+import org.mockbukkit.mockbukkit.scoreboard.ScoreboardManagerMock;
+import org.mockbukkit.mockbukkit.services.ServicesManagerMock;
+import org.mockbukkit.mockbukkit.tags.TagRegistry;
+import org.mockbukkit.mockbukkit.tags.TagWrapperMock;
+import org.mockbukkit.mockbukkit.tags.TagsMock;
 import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
 import org.mockbukkit.mockbukkit.util.UnsafeValuesMock;
 import org.mockbukkit.mockbukkit.world.ChunkDataMock;
@@ -196,7 +196,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final PlayerListMock playerList = new PlayerListMock();
-	private final CommandMapMock commandMap = new CommandMapMock(this,new HashMap<>());
+	private final CommandMapMock commandMap = new CommandMapMock(this, new HashMap<>());
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
@@ -2095,15 +2095,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull BlockData createBlockData(String data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.createBlockData((Material) null, data);
 	}
 
 	@Override
 	public @NotNull BlockData createBlockData(Material material, String data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(material != null || data != null, "Must provide one of material or data");
+		return BlockDataMock.newData((material != null) ? material.asBlockType() : null, data);
 	}
 
 	/**

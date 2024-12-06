@@ -1,26 +1,26 @@
 {
-	"default": {
-		"height": 2.375,
-		"width": 1.7,
-		"eyeHeight": 2.275,
-		"states": {
-			"sitting": {
-				"height": 0.945,
-				"width": 1.7,
-				"eyeHeight": 0.845
-			}
-		}
-	},
-	"baby":{
-		"height": 1.1875,
-		"width": 0.85,
+	"baby": {
 		"eyeHeight": 1.1375,
+		"height": 1.1875,
 		"states": {
 			"sitting": {
+				"eyeHeight": 0.4225,
 				"height": 0.4725,
-				"width": 0.85,
-				"eyeHeight": 0.4225
+				"width": 0.85
 			}
-		}
+		},
+		"width": 0.85
+	},
+	"default": {
+		"eyeHeight": 2.275,
+		"height": 2.375,
+		"states": {
+			"sitting": {
+				"eyeHeight": 0.845,
+				"height": 0.945,
+				"width": 1.7
+			}
+		},
+		"width": 1.7
 	}
 }

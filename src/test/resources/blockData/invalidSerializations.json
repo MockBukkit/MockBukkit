@@ -1,0 +1,7 @@
+[
+	"minecraft:hello_world",
+	"hello_world:stone",
+	"minecraft:bed facing=east]",
+	"minecraft:bed[facing=east",
+	"minecraft:bed facing=east"
+]
