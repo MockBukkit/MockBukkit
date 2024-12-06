@@ -1,12 +1,6 @@
 {
 	"default": {
 		"eyeHeight": 2.9750001,
-		"health": {
-			"EASY": 300.0,
-			"HARD": 600.0,
-			"NORMAL": 450.0,
-			"PEACEFUL": -1.0
-		},
 		"height": 3.5,
 		"width": 0.9
 	}

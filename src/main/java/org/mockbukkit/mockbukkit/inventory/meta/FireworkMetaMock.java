@@ -11,6 +11,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Mock implementation of an {@link FireworkMeta}.
@@ -21,7 +22,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 {
 
 	private @NotNull List<FireworkEffect> effects = new ArrayList<>();
-	private int power = 0;
+	private Integer power;
 
 	/**
 	 * Constructs a new {@link FireworkMetaMock}.
@@ -40,19 +41,23 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	{
 		super(meta);
 
-		if(meta instanceof FireworkMeta fireworkMeta)
+		if (meta instanceof FireworkMeta fireworkMeta)
 		{
-			this.effects.addAll(fireworkMeta.getEffects());
-			this.power = fireworkMeta.getPower();
+			if (fireworkMeta.hasEffects())
+			{
+				this.effects.addAll(fireworkMeta.getEffects());
+			}
+			if (fireworkMeta.hasPower())
+			{
+				this.power = fireworkMeta.getPower();
+			}
 		}
 	}
 
 	@Override
 	public int hashCode()
 	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + effects.hashCode();
+		return Objects.hash(super.hashCode(), effects, power);
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 			return false;
 		}
 
-		return effects.equals(other.effects);
+		return Objects.equals(effects, other.effects) && Objects.equals(power, other.power);
 	}
 
 	@Override
@@ -144,23 +149,20 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	@Override
 	public boolean hasPower()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return power != null;
 	}
 
 	@Override
 	public int getPower()
 	{
-		return power;
+		return power != null ? power : 0;
 	}
 
 	@Override
 	public void setPower(int power)
 	{
-		if (power < 0 || power > 128)
-		{
-			throw new IllegalArgumentException("Power must be between 0 and 128");
-		}
+		Preconditions.checkArgument(power >= 0, "power cannot be less than zero: %s", power);
+		Preconditions.checkArgument(power <= 255, "power cannot be more than 255: %s", power);
 
 		this.power = power;
 	}
@@ -179,6 +181,10 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		serialMock.addEffects(((List<?>) args.get("effects")).stream()
 				.map(e -> (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) e))
 				.toList());
+		if (args.containsKey("power"))
+		{
+			serialMock.power = (int) args.get("power");
+		}
 		return serialMock;
 	}
 
@@ -192,6 +198,10 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
+		if (hasPower())
+		{
+			serialized.put("power", power);
+		}
 		serialized.put("effects", effects.stream().map(FireworkEffect::serialize).toList());
 		return serialized;
 	}

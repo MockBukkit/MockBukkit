@@ -258,18 +258,22 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public int hashCode()
 	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
-		result = prime * result + ((lore == null) ? 0 : lore.hashCode());
-		result = prime * result + ((customModelData == null) ? 0 : customModelData.hashCode());
-		result = prime * result + (enchants.isEmpty() ? 0 : enchants.hashCode());
-		result = prime * result + (hasRepairCost() ? this.repairCost : 0);
-		result = prime * result + (!persistentDataContainer.isEmpty() ? persistentDataContainer.hashCode() : 0);
-		result = prime * result + (hideFlags.isEmpty() ? 0 : hideFlags.hashCode());
-		result = prime * result + Boolean.hashCode(unbreakable);
-		result = prime * result + (this.damage == null ? 0 : this.damage);
-		return result;
+		return Objects.hash(
+				displayName,
+				lore,
+				customModelData,
+				repairCost,
+				enchants,
+				attributeModifiers,
+				hideFlags,
+				persistentDataContainer,
+				unbreakable,
+				customModelData,
+				damage,
+				maxDamage,
+				hideTooltip,
+				fireResistant,
+				maxStackSize);
 	}
 
 	@Override
@@ -294,33 +298,51 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			{
 				return false;
 			}
+			if (hasMaxDamage() != damageable.hasMaxDamage() || hasMaxDamage() && getMaxDamage() != damageable.getMaxDamage())
+			{
+				return false;
+			}
 		}
-		else if (hasDamage())
+		else if (hasDamage() || hasMaxDamage())
 		{
 			return false;
 		}
-		// Comparing using equals is fine - AbstractMap#equals only cares about content, not Map implementation.
-		if (!enchants.equals(meta.getEnchants()))
+		if (obj instanceof Repairable repairable)
+		{
+			if (hasRepairCost() != repairable.hasRepairCost() || hasRepairCost() && getRepairCost() != repairable.getRepairCost())
+			{
+				return false;
+			}
+		}
+		else if (hasRepairCost())
 		{
 			return false;
 		}
-		// Same as above - AbstractSet#equals only compares content.
-		if (!hideFlags.equals(meta.getItemFlags()))
+		if (!Objects.equals(hasMaxStackSize(), meta.hasMaxStackSize()))
 		{
 			return false;
 		}
-		// MockPDC does care about PDC impl, but this is in line with CB's equality comparison.
-		if (!persistentDataContainer.equals(meta.getPersistentDataContainer()))
+		if (hasMaxStackSize() && !Objects.equals(getMaxStackSize(), meta.getMaxStackSize()))
 		{
 			return false;
 		}
-		if (unbreakable != meta.isUnbreakable())
+		if (!Objects.equals(hasCustomModelData(), meta.hasCustomModelData()))
+		{
+			return false;
+		}
+		if (hasCustomModelData() && !Objects.equals(getCustomModelData(), meta.getCustomModelData()))
 		{
 			return false;
 		}
 
-		return hasCustomModelData() == meta.hasCustomModelData()
-				&& (!hasCustomModelData() || getCustomModelData() == meta.getCustomModelData());
+		return isUnbreakable() == meta.isUnbreakable()
+				&& isHideTooltip() == meta.isHideTooltip()
+				&& isFireResistant() == meta.isFireResistant()
+				&& Objects.equals(getEnchants(), meta.getEnchants())
+				&& Objects.equals(hasAttributeModifiers(), meta.hasAttributeModifiers())
+				&& Objects.equals(getAttributeModifiers(), meta.getAttributeModifiers())
+				&& Objects.equals(getItemFlags(), meta.getItemFlags())
+				&& Objects.equals(getPersistentDataContainer(), meta.getPersistentDataContainer());
 	}
 
 	@Override
@@ -981,6 +1003,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public int getCustomModelData()
 	{
+		Preconditions.checkState(hasCustomModelData(), "We don't have CustomModelData! Check hasCustomModelData first!");
 		return this.customModelData;
 	}
 
