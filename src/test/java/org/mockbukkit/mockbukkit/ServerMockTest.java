@@ -1501,7 +1501,8 @@ class ServerMockTest
 			@Test
 			void givenNonCreatableInventory()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING, Component.text("My inventory")));
+				Component title = Component.text("My inventory");
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING, title));
 				assertEquals("Cannot open an inventory of type  [CRAFTING]", e.getMessage());
 			}
 
@@ -1586,7 +1587,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidSize()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, Component.text("My inventory")));
+				Component title = Component.text("My inventory");
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, title));
 				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
 			}
 
