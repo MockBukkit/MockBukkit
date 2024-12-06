@@ -1,21 +1,22 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -694,5 +695,41 @@ class InventoryMockTest
 		inventory = new InventoryMock(player, InventoryType.PLAYER);
 
 		assertEquals(expectedLocation, inventory.getLocation());
+	}
+
+	@Nested
+	class SetCustomTitle
+	{
+
+		@ParameterizedTest
+		@EnumSource(InventoryType.class)
+		void givenNullTitle(InventoryType type)
+		{
+			InventoryMock customInventory = new InventoryMock(null, type);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+
+			customInventory.setCustomTitle(null);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+		}
+
+		@ParameterizedTest
+		@EnumSource(InventoryType.class)
+		void givenCustomTitle(InventoryType type)
+		{
+			InventoryMock customInventory = new InventoryMock(null, type);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+
+			customInventory.setCustomTitle(Component.text("This is a custom title"));
+			assertEquals(Component.text("This is a custom title"), customInventory.getTitle());
+			assertEquals(Component.text("This is a custom title"), customInventory.getCustomTitle());
+
+			customInventory.setCustomTitle(null);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+		}
+
 	}
 }

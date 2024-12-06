@@ -83,6 +83,7 @@ import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
@@ -705,102 +706,133 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	@NotNull
 	@Deprecated
-	public InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title, int size)
+	public InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull String title, int size)
+	{
+		return createInventoryInternal(owner, type, Component.text(title), size);
+	}
+
+	/**
+	 * Creates an inventory with the provided parameters.
+	 *
+	 * @param owner The holder of the inventory.
+	 * @param type  The type of the inventory.
+	 * @param title The title of the inventory view.
+	 * @param size  The size of the inventory.
+	 * @return The created inventory.
+	 * @throws IllegalArgumentException If the InventoryType is not creatable.
+	 * @see InventoryType#isCreatable()
+	 */
+	@NotNull
+	@ApiStatus.Internal
+	private InventoryMock createInventoryInternal(@Nullable InventoryHolder owner, @NotNull InventoryType type, @Nullable Component title, int size)
 	{
 		Preconditions.checkArgument(type.isCreatable(), "Inventory Type '" + type + "' is not creatable!");
 
-		switch (type)
+		InventoryMock inventory = switch (type)
 		{
 		case CHEST:
-			return new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
+			yield new ChestInventoryMock(owner, size > 0 ? size : type.getDefaultSize());
 		case DISPENSER:
-			return new DispenserInventoryMock(owner);
+			yield new DispenserInventoryMock(owner);
 		case DROPPER:
-			return new DropperInventoryMock(owner);
+			yield new DropperInventoryMock(owner);
 		case PLAYER:
 			if (owner instanceof HumanEntity he)
 			{
-				return new PlayerInventoryMock(he);
+				yield new PlayerInventoryMock(he);
 			}
 			else
 			{
 				throw new IllegalArgumentException("Cannot create a Player Inventory for: " + owner);
 			}
 		case ENDER_CHEST:
-			return new EnderChestInventoryMock(owner);
+			yield new EnderChestInventoryMock(owner);
 		case HOPPER:
-			return new HopperInventoryMock(owner);
+			yield new HopperInventoryMock(owner);
 		case SHULKER_BOX:
-			return new ShulkerBoxInventoryMock(owner);
+			yield new ShulkerBoxInventoryMock(owner);
 		case BARREL:
-			return new BarrelInventoryMock(owner);
+			yield new BarrelInventoryMock(owner);
 		case LECTERN:
-			return new LecternInventoryMock(owner);
+			yield new LecternInventoryMock(owner);
 		case GRINDSTONE:
-			return new GrindstoneInventoryMock(owner);
+			yield new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
-			return new StonecutterInventoryMock(owner);
+			yield new StonecutterInventoryMock(owner);
 		case CARTOGRAPHY:
-			return new CartographyInventoryMock(owner);
+			yield new CartographyInventoryMock(owner);
 		case SMOKER, FURNACE, BLAST_FURNACE:
-			return new FurnaceInventoryMock(owner);
+			yield new FurnaceInventoryMock(owner);
 		case LOOM:
-			return new LoomInventoryMock(owner);
+			yield new LoomInventoryMock(owner);
 		case ANVIL:
-			return new AnvilInventoryMock(owner);
+			yield new AnvilInventoryMock(owner);
 		case SMITHING:
-			return new SmithingInventoryMock(owner);
+			yield new SmithingInventoryMock(owner);
 		case BEACON:
-			return new BeaconInventoryMock(owner);
+			yield new BeaconInventoryMock(owner);
 		case WORKBENCH:
-			return new WorkbenchInventoryMock(owner);
+			yield new WorkbenchInventoryMock(owner);
 		case ENCHANTING:
-			return new EnchantingInventoryMock(owner);
+			yield new EnchantingInventoryMock(owner);
 		case BREWING:
-			return new BrewerInventoryMock(owner);
+			yield new BrewerInventoryMock(owner);
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
+		};
+
+		if (title != null)
+		{
+			inventory.setCustomTitle(title);
 		}
+
+		return inventory;
 	}
 
 	@Override
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type)
 	{
-		return createInventory(owner, type, "Inventory");
+		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
+		return createInventory(owner, type, type.defaultTitle());
 	}
 
 	@Override
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(type.isCreatable(), "Cannot open an inventory of type ", type);
+		return createInventoryInternal(owner, type, title, type.getDefaultSize());
 	}
 
 	@Override
 	@Deprecated
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull String title)
 	{
-		return createInventory(owner, type, title, -1);
+		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
+		Preconditions.checkArgument(title != null, "title cannot be null");
+		return createInventory(owner, type, Component.text(title));
 	}
 
 	@Override
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size)
 	{
-		return createInventory(owner, size, "Inventory");
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
+		return createInventoryInternal(owner, InventoryType.CHEST, null, size);
 	}
 
 	@Override
 	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		return createInventoryInternal(owner, InventoryType.CHEST, title, size);
 	}
 
 	@Override
 	@Deprecated
-	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size, String title)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull String title)
 	{
-		return createInventory(owner, InventoryType.CHEST, title, size);
+		return createInventory(owner, size, Component.text(title));
 	}
 
 	@Override

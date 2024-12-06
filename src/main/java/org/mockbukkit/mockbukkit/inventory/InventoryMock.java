@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -44,6 +46,8 @@ public class InventoryMock implements Inventory
 
 	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
+
+	private @Nullable Component customTitle;
 
 	/**
 	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
@@ -679,6 +683,49 @@ public class InventoryMock implements Inventory
 		Inventory inventory = new InventoryMock(holder, getSize(), type);
 		inventory.setContents(getContents());
 		return inventory;
+	}
+
+	/**
+	 * Get the name for this inventory.
+	 * Uses the value in {@link #getCustomTitle()} if set, otherwise
+	 * uses the default name for the inventory type.
+	 *
+	 * @return The inventory name.
+	 *
+	 * @see InventoryMock#getCustomTitle()
+	 * @see InventoryType#defaultTitle()
+	 */
+	@ApiStatus.Internal
+	public @NotNull Component getTitle()
+	{
+		Component custom = getCustomTitle();
+		if (custom != null)
+		{
+			return custom;
+		}
+		return getType().defaultTitle();
+	}
+
+	/**
+	 * Get the custom title to be used in this inventory when set.
+	 *
+	 * @return The title to be used, or {@code null}.
+	 */
+	@ApiStatus.Internal
+	public @Nullable Component getCustomTitle()
+	{
+		return customTitle;
+	}
+
+	/**
+	 * Set the custom title to be used in this inventory.
+	 *
+	 * @param customTitle The title to be used, or {@code null}.
+	 */
+	@ApiStatus.Internal
+	public void setCustomTitle(@Nullable Component customTitle)
+	{
+		this.customTitle = customTitle;
 	}
 
 }
