@@ -12,6 +12,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -694,6 +695,7 @@ public class InventoryMock implements Inventory
 	 * @see InventoryMock#getCustomTitle()
 	 * @see InventoryType#defaultTitle()
 	 */
+	@ApiStatus.Internal
 	public @NotNull Component getTitle()
 	{
 		Component custom = getCustomTitle();
@@ -709,6 +711,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @return The title to be used, or {@code null}.
 	 */
+	@ApiStatus.Internal
 	public @Nullable Component getCustomTitle()
 	{
 		return customTitle;
@@ -719,6 +722,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param customTitle The title to be used, or {@code null}.
 	 */
+	@ApiStatus.Internal
 	public void setCustomTitle(@Nullable Component customTitle)
 	{
 		this.customTitle = customTitle;
