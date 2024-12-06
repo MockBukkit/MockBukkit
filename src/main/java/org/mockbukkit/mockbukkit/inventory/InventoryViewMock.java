@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -23,7 +24,6 @@ public abstract class InventoryViewMock implements InventoryView
 	private InventoryType type;
 	private String name;
 	private String originalTitle;
-	private ItemStack cursor = null;
 
 	/**
 	 * Constructs a new {@link InventoryViewMock} with the provided parameters.
@@ -123,9 +123,8 @@ public abstract class InventoryViewMock implements InventoryView
 	public void setTitle(@NotNull String title)
 	{
 		Preconditions.checkArgument(title != null, "Title cannot be null");
-		// TODO: Paper also implement this 2 validations in set title. This needs to be worked on
-		// Preconditions.checkArgument(this.getPlayer() instanceof Player, "NPCs are not currently supported for this function");
-		// Preconditions.checkArgument(this.getTopInventory().getType().isCreatable(), "Only creatable inventories can have their title changed");
+		Preconditions.checkArgument(this.getPlayer() instanceof Player, "NPCs are not currently supported for this function");
+		Preconditions.checkArgument(this.getTopInventory().getType().isCreatable(), "Only creatable inventories can have their title changed");
 		this.name = title;
 	}
 

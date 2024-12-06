@@ -30,14 +30,14 @@ class InventoryViewMockTest
 	private InventoryViewMock view;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		view = new SimpleInventoryViewMock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -107,6 +107,10 @@ class InventoryViewMockTest
 		@Test
 		void givenSuccess()
 		{
+			PlayerMock player = server.addPlayer();
+			view.setPlayer(player);
+			view.setTopInventory(new InventoryMock(player, InventoryType.CHEST));
+
 			assertEquals("Chest", view.getTitle());
 			assertEquals("Chest", view.getOriginalTitle());
 
@@ -121,6 +125,28 @@ class InventoryViewMockTest
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> view.setTitle(null));
 			assertEquals("Title cannot be null", e.getMessage());
+		}
+
+		@Test
+		void givenViewWithoutPlayerTitle()
+		{
+			PlayerMock player = server.addPlayer();
+			view.setPlayer(null);
+			view.setTopInventory(new InventoryMock(player, InventoryType.CHEST));
+
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> view.setTitle("This is a test"));
+			assertEquals("NPCs are not currently supported for this function", e.getMessage());
+		}
+
+		@Test
+		void givenViewWithNonCreatableInventory()
+		{
+			PlayerMock player = server.addPlayer();
+			view.setPlayer(player);
+			view.setTopInventory(new InventoryMock(player, InventoryType.CRAFTING));
+
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> view.setTitle("This is a test"));
+			assertEquals("Only creatable inventories can have their title changed", e.getMessage());
 		}
 
 	}
