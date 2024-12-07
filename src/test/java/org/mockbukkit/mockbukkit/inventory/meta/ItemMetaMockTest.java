@@ -1,25 +1,22 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
-import org.bukkit.Bukkit;
-import org.bukkit.Tag;
-import org.junit.jupiter.params.provider.Arguments;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
@@ -29,10 +26,18 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -1342,6 +1347,156 @@ class ItemMetaMockTest
 		assertInstanceOf(ArmorStandMetaMock.class, new ItemStackMock(Material.ARMOR_STAND).getItemMeta());
 		assertInstanceOf(TropicalFishBucketMetaMock.class, new ItemStackMock(Material.TROPICAL_FISH_BUCKET).getItemMeta());
 		assertInstanceOf(OminousBottleMetaMock.class, new ItemStackMock(Material.OMINOUS_BOTTLE).getItemMeta());
+
+	}
+
+	@Test
+	void setVersion_ShouldNotThrow()
+	{
+		assertDoesNotThrow(() -> meta.setVersion(1));
+	}
+
+	@Nested
+	class HasItemName
+	{
+
+		@Test
+		void givenMetaWithoutName()
+		{
+			assertFalse(meta.hasItemName());
+		}
+
+		@Test
+		void givenMetaWithName()
+		{
+			meta.itemName(Component.text("This is the item name"));
+
+			assertTrue(meta.hasItemName());
+		}
+
+	}
+
+	@Nested
+	class ItemName
+	{
+
+		@Test
+		void givenMetaWithoutName()
+		{
+			Component actual = meta.itemName();
+			assertNotNull(actual);
+			assertEquals(Component.empty(), actual);
+		}
+
+		@Test
+		void givenMetaWithName()
+		{
+			meta.itemName(Component.text("Name").color(NamedTextColor.RED));
+
+			Component actual = meta.itemName();
+			assertNotNull(actual);
+			assertEquals(Component.text("Name").color(NamedTextColor.RED), actual);
+		}
+
+	}
+
+	@Nested
+	class GetItemName
+	{
+
+		@Test
+		void givenMetaWithoutName()
+		{
+			String actual = meta.getItemName();
+			assertNotNull(actual);
+			assertEquals("", actual);
+		}
+
+		@Test
+		void givenMetaWithNullName()
+		{
+			meta.setItemName(null);
+
+			String actual = meta.getItemName();
+			assertNotNull(actual);
+			assertEquals("", actual);
+		}
+
+		@Test
+		void givenMetaWithName()
+		{
+			meta.setItemName("§cThis §b§lis §ea §1name");
+
+			String actual = meta.getItemName();
+			assertNotNull(actual);
+			assertEquals("§cThis §b§lis §ea §1name", actual);
+		}
+
+	}
+
+	@Nested
+	class GetEnchantmentGlintOverride
+	{
+		@Test
+		void givenDefault()
+		{
+			assertFalse(meta.hasEnchantmentGlintOverride());
+			IllegalStateException e = assertThrows(IllegalStateException.class, () -> meta.getEnchantmentGlintOverride());
+			assertEquals("We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!", e.getMessage());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			meta.setEnchantmentGlintOverride(null);
+
+			assertFalse(meta.hasEnchantmentGlintOverride());
+			IllegalStateException e = assertThrows(IllegalStateException.class, () -> meta.getEnchantmentGlintOverride());
+			assertEquals("We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean value)
+		{
+			meta.setEnchantmentGlintOverride(value);
+
+			assertTrue(meta.hasEnchantmentGlintOverride());
+			assertEquals(value, meta.getEnchantmentGlintOverride());
+		}
+
+	}
+
+	@Nested
+	class GetRarity
+	{
+		@Test
+		void givenDefault()
+		{
+			assertFalse(meta.hasRarity());
+			IllegalStateException e = assertThrows(IllegalStateException.class, () -> meta.getRarity());
+			assertEquals("We don't have rarity! Check hasRarity first!", e.getMessage());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			meta.setEnchantmentGlintOverride(null);
+
+			assertFalse(meta.hasRarity());
+			IllegalStateException e = assertThrows(IllegalStateException.class, () -> meta.getRarity());
+			assertEquals("We don't have rarity! Check hasRarity first!", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@EnumSource(ItemRarity.class)
+		void givenPossibleValues(ItemRarity value)
+		{
+			meta.setRarity(value);
+
+			assertTrue(meta.hasRarity());
+			assertEquals(value, meta.getRarity());
+		}
 
 	}
 

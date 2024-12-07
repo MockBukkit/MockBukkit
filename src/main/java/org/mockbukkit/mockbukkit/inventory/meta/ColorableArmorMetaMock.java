@@ -93,7 +93,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	}
 
 	@Override
-	public Map<String, Object> serialize()
+	public @NotNull Map<String, Object> serialize()
 	{
 		Map<String, Object> serialized = super.serialize();
 		if (this.isDyed())

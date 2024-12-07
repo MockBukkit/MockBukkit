@@ -59,7 +59,7 @@ public class ShieldMetaMock extends BannerMetaMock implements ShieldMeta
 	}
 
 	@Override
-	public Map<String, Object> serialize()
+	public @NotNull Map<String, Object> serialize()
 	{
 		Map<String, Object> serialized = super.serialize();
 		if (getBaseColor() != null)
