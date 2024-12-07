@@ -10,8 +10,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -65,7 +65,7 @@ class BeaconInventoryMockTest
 		assertNotNull(inventory.getSnapshot());
 
 		inventory.setItem(new ItemStackMock(Material.EMERALD));
-		assertNotEquals(inventory, inventory.getSnapshot());
+		assertNotSame(inventory, inventory.getSnapshot());
 		assertEquals(inventory.getItem(), inventory.getSnapshot().getItem());
 	}
 

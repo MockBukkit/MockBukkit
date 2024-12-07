@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class GrindstoneInventoryMockTest
 {
@@ -33,7 +33,7 @@ class GrindstoneInventoryMockTest
 		InventoryMock snapshot = inventory.getSnapshot();
 
 		assertInstanceOf(GrindstoneInventoryMock.class, snapshot);
-		assertNotEquals(inventory, snapshot);
+		assertNotSame(inventory, snapshot);
 	}
 
 }

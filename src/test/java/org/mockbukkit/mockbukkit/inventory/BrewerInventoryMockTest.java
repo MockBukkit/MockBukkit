@@ -1,16 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.bukkit.inventory.InventoryHolder;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -31,7 +31,7 @@ class BrewerInventoryMockTest
 		InventoryMock snapshot = inventory.getSnapshot();
 
 		assertInstanceOf(BrewerInventoryMock.class, snapshot);
-		assertNotEquals(inventory, snapshot);
+		assertNotSame(inventory, snapshot);
 	}
 
 	@Test
