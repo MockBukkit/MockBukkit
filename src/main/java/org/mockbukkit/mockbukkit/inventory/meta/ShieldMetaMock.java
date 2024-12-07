@@ -192,8 +192,7 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
-	@NotNull
-	public Map<String, Object> serialize()
+	public @NotNull Map<String, Object> serialize()
 	{
 		Map<String, Object> serialized = super.serialize();
 		if (banner != null)
@@ -209,8 +208,7 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		return serialized;
 	}
 
-	@NotNull
-	public static ShieldMetaMock deserialize(@NotNull Map<String, Object> serialized)
+	public static @NotNull ShieldMetaMock deserialize(@NotNull Map<String, Object> serialized)
 	{
 		ShieldMetaMock shieldMetaMock = new ShieldMetaMock();
 		shieldMetaMock.deserializeInternal(serialized);
