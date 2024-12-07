@@ -1,14 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSortedMap;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
-import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.Namespaced;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
@@ -38,6 +35,9 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +60,7 @@ import static java.util.Objects.nonNull;
  */
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
+	private static final int ABSOLUTE_MAX_STACK_SIZE = 99;
 
 	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
 	private @Nullable String displayName = null;
@@ -79,7 +80,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private boolean hideTooltip;
 	private boolean fireResistant;
 	private Integer maxStackSize = null;
-	private static final int ABSOLUTE_MAX_STACK_SIZE = 99;
+	private Boolean enchantmentGlintOverride = null;
+	private ItemRarity rarity;
+	private Component itemName = null;
 
 
 	/**
@@ -375,6 +378,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.14")
 	public Set<Material> getCanDestroy()
 	{
 		// TODO Auto-generated method stub
@@ -382,13 +386,15 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setCanDestroy(Set<Material> set)
+	@Deprecated(forRemoval = true, since = "1.14")
+	public void setCanDestroy(Set<Material> canDestroy)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.14")
 	public Set<Material> getCanPlaceOn()
 	{
 		// TODO Auto-generated method stub
@@ -396,13 +402,15 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setCanPlaceOn(Set<Material> set)
+	@Deprecated(forRemoval = true, since = "1.14")
+	public void setCanPlaceOn(Set<Material> canPlaceOn)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @NotNull Set<com.destroystokyo.paper.Namespaced> getDestroyableKeys()
 	{
 		// TODO Auto-generated method stub
@@ -410,13 +418,15 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setDestroyableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
+	@Deprecated(forRemoval = true, since = "1.20.6")
+	public void setDestroyableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> canDestroy)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @NotNull Set<com.destroystokyo.paper.Namespaced> getPlaceableKeys()
 	{
 		// TODO Auto-generated method stub
@@ -424,6 +434,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setPlaceableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
 	{
 		// TODO Auto-generated method stub
@@ -431,6 +442,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public boolean hasPlaceableKeys()
 	{
 		// TODO Auto-generated method stub
@@ -438,6 +450,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public boolean hasDestroyableKeys()
 	{
 		// TODO Auto-generated method stub
@@ -1016,9 +1029,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setVersion(int version)
 	{
-		// TODO Auto-generated method stub
-		// When implemented change ItemStackMock.handleMetaForDeserialization
-		throw new UnimplementedOperationException();
+		// No use yet
 	}
 
 	@Deprecated(since = "1.20")
@@ -1076,38 +1087,39 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasItemName()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.itemName != null;
 	}
 
 	@Override
 	public @NotNull Component itemName()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.itemName == null ? Component.empty() : this.itemName;
 	}
 
 	@Override
 	public void itemName(@Nullable Component name)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.itemName = name;
 	}
 
 	@Override
 	@Deprecated
 	public @NotNull String getItemName()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(itemName());
 	}
 
 	@Override
 	@Deprecated
 	public void setItemName(@Nullable String name)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (name == null)
+		{
+			this.itemName = null;
+		} else
+		{
+			this.itemName = LegacyComponentSerializer.legacySection().deserialize(name);
+		}
 	}
 
 	@Override
@@ -1125,22 +1137,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasEnchantmentGlintOverride()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.enchantmentGlintOverride != null;
 	}
 
 	@Override
 	public @NotNull Boolean getEnchantmentGlintOverride()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkState(this.hasEnchantmentGlintOverride(), "We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!");
+		return this.enchantmentGlintOverride;
 	}
 
 	@Override
 	public void setEnchantmentGlintOverride(@Nullable Boolean override)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.enchantmentGlintOverride = override;
 	}
 
 	@Override
@@ -1179,24 +1189,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasRarity()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.rarity != null;
 	}
 
 	@Override
 	public @NotNull ItemRarity getRarity()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkState(this.hasRarity(), "We don't have rarity! Check hasRarity first!");
+		return this.rarity;
 	}
 
 	@Override
 	public void setRarity(@Nullable ItemRarity rarity)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.rarity = rarity;
 	}
 
 	@Override
@@ -1204,7 +1210,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1212,13 +1217,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
-	}
-
-	@ApiStatus.Internal
-	protected String getTypeName()
-	{
-		return "UNSPECIFIC";
 	}
 
 	@Override
@@ -1226,7 +1224,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
 
+	@ApiStatus.Internal
+	protected String getTypeName()
+	{
+		return "UNSPECIFIC";
 	}
 
 	@Override
