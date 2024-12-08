@@ -9,6 +9,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -736,7 +737,7 @@ class InventoryMockTest
 	}
 
 	@Nested
-	class Equals {
+	class IsIdentical {
 
 		@MockBukkitInject
 		private ServerMock serverMock;
@@ -746,14 +747,16 @@ class InventoryMockTest
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
-			assertEquals(inventoryA, inventoryB);
+			assertIsIdentical(inventoryA, inventoryB);
 
 			inventoryA.addItem(ItemStack.of(Material.DIAMOND));
-			inventoryB.addItem(ItemStack.of(Material.DIAMOND));
-			assertEquals(inventoryA, inventoryB);
+			assertIsNotIdentical(inventoryA, inventoryB);
 
-			inventoryA.addItem(ItemStack.of(Material.EMERALD));
-			assertNotEquals(inventoryA, inventoryB);
+			inventoryB.addItem(ItemStack.of(Material.DIAMOND));
+			assertIsIdentical(inventoryA, inventoryB);
+
+			inventoryA.addItem(ItemStack.of(Material.DIAMOND));
+			assertIsNotIdentical(inventoryA, inventoryB);
 		}
 
 		@Test
@@ -761,7 +764,7 @@ class InventoryMockTest
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.DROPPER);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
-			assertNotEquals(inventoryA, inventoryB);
+			assertIsNotIdentical(inventoryA, inventoryB);
 		}
 
 		@Test
@@ -769,15 +772,15 @@ class InventoryMockTest
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
-			assertEquals(inventoryA, inventoryB);
+			assertIsIdentical(inventoryA, inventoryB);
 
 			inventoryA.setMaxStackSize(1);
 			inventoryB.setMaxStackSize(2);
-			assertNotEquals(inventoryA, inventoryB);
+			assertIsNotIdentical(inventoryA, inventoryB);
 
 			inventoryA.setMaxStackSize(5);
 			inventoryB.setMaxStackSize(5);
-			assertEquals(inventoryA, inventoryB);
+			assertIsIdentical(inventoryA, inventoryB);
 		}
 
 		@Test
@@ -789,8 +792,8 @@ class InventoryMockTest
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryC = new InventoryMock(player, InventoryType.CHEST);
 
-			assertEquals(inventoryA, inventoryB);
-			assertNotEquals(inventoryB, inventoryC);
+			assertIsIdentical(inventoryA, inventoryB);
+			assertIsNotIdentical(inventoryB, inventoryC);
 		}
 
 		@Test
@@ -799,11 +802,30 @@ class InventoryMockTest
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
 
-			assertEquals(inventoryA, inventoryB);
+			assertIsIdentical(inventoryA, inventoryB);
 
 			inventoryA.setCustomTitle(Component.text("This is a custom title"));
-			assertNotEquals(inventoryA, inventoryB);
+			assertIsNotIdentical(inventoryA, inventoryB);
+		}
+
+		public static void assertIsIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB) {
+			if (inventoryA == null) {
+				assertNull(inventoryB);
+			} else
+			{
+				assertTrue(inventoryA.isIdentical(inventoryB));
+			}
+		}
+
+		public static void assertIsNotIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB) {
+			if (inventoryA == null) {
+				assertNotNull(inventoryB);
+			} else
+			{
+				assertFalse(inventoryA.isIdentical(inventoryB));
+			}
 		}
 
 	}
+
 }

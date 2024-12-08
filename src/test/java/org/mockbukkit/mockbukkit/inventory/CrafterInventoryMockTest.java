@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class CrafterInventoryMockTest
@@ -28,7 +29,7 @@ class CrafterInventoryMockTest
 
 	@Test
 	void getSnapshot() {
-		assertEquals(inventory, inventory.getSnapshot());
+		assertTrue(inventory.isIdentical(inventory.getSnapshot()));
 	}
 
 }

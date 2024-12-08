@@ -737,17 +737,35 @@ public class InventoryMock implements Inventory
 		this.customTitle = customTitle;
 	}
 
-	@Override
-	public boolean equals(Object o)
+	/**
+	 * Check if two inventories are identical.
+	 * <p>
+	 * A inventory is considered as identical if the following properties match:
+	 * <ul>
+	 *     <li>Has the same inventory type.</li>
+	 *     <li>Has the same inventory holder.</li>
+	 *     <li>Has the same items and quantities.</li>
+	 *     <li>Has the same maximum stack size is the same.</li>
+	 *     <li>Has the same custom title</li>
+	 * </ul>
+	 *
+	 * @param inventory The other inventory to compare.
+	 *
+	 * @return {@code true} when identical, otherwise {@code false}
+	 */
+	@ApiStatus.Internal
+	public boolean isIdentical(@Nullable Inventory inventory)
 	{
-		if (!(o instanceof InventoryMock that)) return false;
-		return maxStackSize == that.maxStackSize && Objects.deepEquals(items, that.items) && Objects.equals(holder, that.holder) && type == that.type && Objects.equals(viewers, that.viewers) && Objects.equals(customTitle, that.customTitle);
-	}
+		if (!(inventory instanceof InventoryMock that))
+		{
+			return false;
+		}
 
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(Arrays.hashCode(items), holder, type, viewers, maxStackSize, customTitle);
+		return maxStackSize == that.maxStackSize
+				&& Objects.deepEquals(items, that.items)
+				&& Objects.equals(holder, that.holder)
+				&& type == that.type
+				&& Objects.equals(customTitle, that.customTitle);
 	}
 
 }
