@@ -740,12 +740,12 @@ public class InventoryMock implements Inventory
 	/**
 	 * Check if two inventories are identical.
 	 * <p>
-	 * A inventory is considered as identical if the following properties match:
+	 * An inventory is considered as identical if the following properties match:
 	 * <ul>
 	 *     <li>Has the same inventory type.</li>
 	 *     <li>Has the same inventory holder.</li>
 	 *     <li>Has the same items and quantities.</li>
-	 *     <li>Has the same maximum stack size is the same.</li>
+	 *     <li>Has the same maximum stack size.</li>
 	 *     <li>Has the same custom title</li>
 	 * </ul>
 	 *
