@@ -53,4 +53,10 @@ public class DaylightDetectorStateMock extends TileStateMock implements Daylight
 		return new DaylightDetectorStateMock(this);
 	}
 
+	@Override
+	public @NotNull DaylightDetectorStateMock copy()
+	{
+		return new DaylightDetectorStateMock(this);
+	}
+
 }

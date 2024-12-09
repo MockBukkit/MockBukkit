@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.SculkShrieker;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +54,13 @@ public class SculkShriekerStateMock extends TileStateMock implements SculkShriek
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull SculkShriekerStateMock getSnapshot()
+	{
+		return new SculkShriekerStateMock(this);
+	}
+
+	@Override
+	public @NotNull SculkShriekerStateMock copy()
 	{
 		return new SculkShriekerStateMock(this);
 	}

@@ -60,6 +60,12 @@ public class ConduitStateMock extends TileStateMock implements Conduit
 	}
 
 	@Override
+	public @NotNull ConduitStateMock copy()
+	{
+		return new ConduitStateMock(this);
+	}
+
+	@Override
 	public boolean isActive()
 	{
 		// TODO Auto-generated method stub

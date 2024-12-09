@@ -12,7 +12,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
@@ -68,7 +67,13 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull SkullStateMock getSnapshot()
+	{
+		return new SkullStateMock(this);
+	}
+
+	@Override
+	public @NotNull SkullStateMock copy()
 	{
 		return new SkullStateMock(this);
 	}

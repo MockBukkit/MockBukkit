@@ -5,7 +5,6 @@ import org.apache.commons.lang3.Validate;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Campfire;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +64,13 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull CampfireStateMock getSnapshot()
+	{
+		return new CampfireStateMock(this);
+	}
+
+	@Override
+	public @NotNull CampfireStateMock copy()
 	{
 		return new CampfireStateMock(this);
 	}

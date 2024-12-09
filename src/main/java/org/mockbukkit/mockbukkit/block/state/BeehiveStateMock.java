@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Beehive;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.entity.Bee;
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +67,13 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BeehiveStateMock getSnapshot()
+	{
+		return new BeehiveStateMock(this);
+	}
+
+	@Override
+	public @NotNull BeehiveStateMock copy()
 	{
 		return new BeehiveStateMock(this);
 	}

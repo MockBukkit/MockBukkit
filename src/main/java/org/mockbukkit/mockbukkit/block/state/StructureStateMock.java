@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Structure;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
@@ -84,7 +83,13 @@ public class StructureStateMock extends TileStateMock implements Structure
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull StructureStateMock getSnapshot()
+	{
+		return new StructureStateMock(this);
+	}
+
+	@Override
+	public @NotNull StructureStateMock copy()
 	{
 		return new StructureStateMock(this);
 	}

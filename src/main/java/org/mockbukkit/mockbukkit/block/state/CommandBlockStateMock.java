@@ -63,6 +63,12 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	}
 
 	@Override
+	public @NotNull CommandBlockStateMock copy()
+	{
+		return new CommandBlockStateMock(this);
+	}
+
+	@Override
 	public @NotNull String getCommand()
 	{
 		return this.command;

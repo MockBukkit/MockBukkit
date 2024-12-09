@@ -74,6 +74,12 @@ public class BannerStateMock extends TileStateMock implements Banner
 	}
 
 	@Override
+	public @NotNull BannerStateMock copy()
+	{
+		return new BannerStateMock(this);
+	}
+
+	@Override
 	public @NotNull DyeColor getBaseColor()
 	{
 		return this.baseColor;
@@ -198,4 +204,5 @@ public class BannerStateMock extends TileStateMock implements Banner
 			default -> throw new IllegalArgumentException("Unknown banner material " + material.name());
 		};
 	}
+
 }

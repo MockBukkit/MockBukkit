@@ -5,7 +5,6 @@ import org.mockbukkit.mockbukkit.inventory.DispenserInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Dispenser;
 import org.bukkit.loot.LootTable;
 import org.bukkit.projectiles.BlockProjectileSource;
@@ -98,7 +97,13 @@ public class DispenserStateMock extends ContainerStateMock implements Dispenser
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull DispenserStateMock getSnapshot()
+	{
+		return new DispenserStateMock(this);
+	}
+
+	@Override
+	public @NotNull DispenserStateMock copy()
 	{
 		return new DispenserStateMock(this);
 	}

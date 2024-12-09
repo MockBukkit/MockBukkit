@@ -23,9 +23,21 @@ public class CalibratedSculkSensorStateMock extends SculkSensorStateMock impleme
 		super(material);
 	}
 
-	protected CalibratedSculkSensorStateMock(@NotNull SculkSensorStateMock state)
+	protected CalibratedSculkSensorStateMock(@NotNull CalibratedSculkSensorStateMock state)
 	{
 		super(state);
+	}
+
+	@Override
+	public @NotNull CalibratedSculkSensorStateMock getSnapshot()
+	{
+		return new CalibratedSculkSensorStateMock(this);
+	}
+
+	@Override
+	public @NotNull CalibratedSculkSensorStateMock copy()
+	{
+		return new CalibratedSculkSensorStateMock(this);
 	}
 
 }

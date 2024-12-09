@@ -1,9 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import org.bukkit.Material;
-import org.bukkit.block.BlastFurnace;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Furnace;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +48,13 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull FurnaceStateMock getSnapshot()
+	{
+		return new FurnaceStateMock(this);
+	}
+
+	@Override
+	public @NotNull FurnaceStateMock copy()
 	{
 		return new FurnaceStateMock(this);
 	}

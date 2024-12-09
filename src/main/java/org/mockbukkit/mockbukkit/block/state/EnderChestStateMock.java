@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.EnderChest;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +52,13 @@ public class EnderChestStateMock extends TileStateMock implements EnderChest
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull EnderChestStateMock getSnapshot()
+	{
+		return new EnderChestStateMock(this);
+	}
+
+	@Override
+	public @NotNull EnderChestStateMock copy()
 	{
 		return new EnderChestStateMock(this);
 	}

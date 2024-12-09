@@ -5,7 +5,6 @@ import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.loot.LootTable;
@@ -132,7 +131,13 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull ChestStateMock getSnapshot()
+	{
+		return new ChestStateMock(this);
+	}
+
+	@Override
+	public @NotNull ChestStateMock copy()
 	{
 		return new ChestStateMock(this);
 	}

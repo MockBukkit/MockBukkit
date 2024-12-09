@@ -8,7 +8,6 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
@@ -152,7 +151,13 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull ShulkerBoxStateMock getSnapshot()
+	{
+		return new ShulkerBoxStateMock(this);
+	}
+
+	@Override
+	public @NotNull ShulkerBoxStateMock copy()
 	{
 		return new ShulkerBoxStateMock(this);
 	}

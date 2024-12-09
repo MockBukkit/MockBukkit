@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.BlockStateInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
@@ -22,8 +21,6 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -334,30 +331,20 @@ public class BlockStateMock implements BlockState
 		return this.blockData.clone();
 	}
 
+	/**
+	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class must override this method!
+	 *
+	 * @return A copy of this {@link BlockStateMock}.
+	 */
 	@Override
-	public @NotNull BlockState copy()
+	public @NotNull BlockStateMock copy()
 	{
-		Class<? extends BlockState> target = this.getClass();
-		try
+		if (this.getClass() != BlockStateMock.class)
 		{
-			for (Constructor<?> constructor : target.getDeclaredConstructors())
-			{
-				// This will make sure we find the most suitable constructor for this
-				if (constructor.getParameterCount() == 1
-						&& constructor.getParameterTypes()[0].isAssignableFrom(target))
-				{
-					return (BlockState) constructor.newInstance(this);
-				}
-			}
-
-			throw new NoSuchMethodException(
-					"Cannot find an BlockState constructor for the class \"" + target.getName() + "\"");
+			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+					" does not provide a .copy() implementation! This is a bug.");
 		}
-		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
-			   | NoSuchMethodException e)
-		{
-			throw new BlockStateInitException(e);
-		}
+		return new BlockStateMock(this);
 	}
 
 	@Override
@@ -375,13 +362,18 @@ public class BlockStateMock implements BlockState
 	}
 
 	/**
-	 * This returns a copy of this {@link BlockStateMock}. Inheritents of this class should override this method!
+	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class must override this method!
 	 *
 	 * @return A snapshot of this {@link BlockStateMock}.
 	 */
 	@NotNull
-	public BlockState getSnapshot()
+	public BlockStateMock getSnapshot()
 	{
+		if (this.getClass() != BlockStateMock.class)
+		{
+			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+					" does not provide a .getSnapshot() implementation! This is a bug.");
+		}
 		return new BlockStateMock(this);
 	}
 

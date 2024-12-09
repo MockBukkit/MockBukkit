@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Jigsaw;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +48,13 @@ public class JigsawStateMock extends TileStateMock implements Jigsaw
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull JigsawStateMock getSnapshot()
+	{
+		return new JigsawStateMock(this);
+	}
+
+	@Override
+	public @NotNull JigsawStateMock copy()
 	{
 		return new JigsawStateMock(this);
 	}

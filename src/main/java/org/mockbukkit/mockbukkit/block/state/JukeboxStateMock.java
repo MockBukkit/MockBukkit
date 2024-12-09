@@ -4,7 +4,6 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.JukeboxInventory;
@@ -61,10 +60,17 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull JukeboxStateMock getSnapshot()
 	{
 		return new JukeboxStateMock(this);
 	}
+
+	@Override
+	public @NotNull JukeboxStateMock copy()
+	{
+		return new JukeboxStateMock(this);
+	}
+
 
 	@Override
 	public @NotNull Material getPlaying()

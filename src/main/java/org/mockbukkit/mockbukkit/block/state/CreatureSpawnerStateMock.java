@@ -84,6 +84,12 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 	}
 
 	@Override
+	public @NotNull CreatureSpawnerStateMock copy()
+	{
+		return new CreatureSpawnerStateMock(this);
+	}
+
+	@Override
 	public @NotNull EntityType getSpawnedType()
 	{
 		return this.spawnedType;

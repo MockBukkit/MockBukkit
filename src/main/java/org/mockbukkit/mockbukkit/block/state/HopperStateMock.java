@@ -5,7 +5,6 @@ import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Hopper;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
@@ -98,7 +97,13 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull HopperStateMock getSnapshot()
+	{
+		return new HopperStateMock(this);
+	}
+
+	@Override
+	public @NotNull HopperStateMock copy()
 	{
 		return new HopperStateMock(this);
 	}

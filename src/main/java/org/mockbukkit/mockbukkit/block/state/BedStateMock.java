@@ -5,7 +5,6 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Bed;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,7 +83,13 @@ public class BedStateMock extends TileStateMock implements Bed
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BedStateMock getSnapshot()
+	{
+		return new BedStateMock(this);
+	}
+
+	@Override
+	public @NotNull BedStateMock copy()
 	{
 		return new BedStateMock(this);
 	}

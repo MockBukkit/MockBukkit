@@ -4,7 +4,6 @@ import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Lectern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
@@ -64,7 +63,13 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull LecternStateMock getSnapshot()
+	{
+		return new LecternStateMock(this);
+	}
+
+	@Override
+	public @NotNull LecternStateMock copy()
 	{
 		return new LecternStateMock(this);
 	}

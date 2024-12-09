@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.bukkit.Material;
 import org.bukkit.block.BlastFurnace;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -49,7 +48,13 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BlastFurnaceStateMock getSnapshot()
+	{
+		return new BlastFurnaceStateMock(this);
+	}
+
+	@Override
+	public @NotNull BlastFurnaceStateMock copy()
 	{
 		return new BlastFurnaceStateMock(this);
 	}
