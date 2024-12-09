@@ -147,9 +147,15 @@ class AbstractFurnaceStateMockTest
 		}
 
 		@Override
-		public @NotNull BlockState getSnapshot()
+		public @NotNull TestFurnaceState getSnapshot()
 		{
-			throw new UnimplementedOperationException();
+			return new TestFurnaceState(this);
+		}
+
+		@Override
+		public @NotNull TestFurnaceState copy()
+		{
+			return new TestFurnaceState(this);
 		}
 
 	}

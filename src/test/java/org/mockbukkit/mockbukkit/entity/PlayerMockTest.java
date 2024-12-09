@@ -27,7 +27,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -78,13 +77,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
@@ -108,7 +107,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -1603,14 +1601,7 @@ class PlayerMockTest
 	{
 		assertDoesNotThrow(() ->
 		{
-			player.sendBlockUpdate(player.getLocation(), new TileStateMock(Material.CHEST)
-			{
-				@Override
-				public @NotNull BlockState getSnapshot()
-				{
-					return new BlockStateMock(Material.CHEST);
-				}
-			});
+			player.sendBlockUpdate(player.getLocation(), new ChestStateMock(Material.CHEST));
 		});
 	}
 
@@ -1619,14 +1610,7 @@ class PlayerMockTest
 	{
 		Location location = player.getLocation();
 		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(location, null));
-		TileStateMock tileStateMock = new TileStateMock(Material.CHEST)
-		{
-			@Override
-			public @NotNull BlockState getSnapshot()
-			{
-				return new BlockStateMock(Material.CHEST);
-			}
-		};
+		TileStateMock tileStateMock = new ChestStateMock(Material.CHEST);
 		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, tileStateMock));
 	}
 
