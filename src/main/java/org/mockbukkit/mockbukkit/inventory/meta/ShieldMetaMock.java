@@ -237,6 +237,7 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	@Override
 	public void setBlockState(@NotNull BlockState blockState)
 	{
+		Objects.requireNonNull(blockState);
 		Preconditions.checkArgument(blockState instanceof Banner, "Invalid blockState");
 		this.banner = (Banner) blockState;
 	}
@@ -246,7 +247,7 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		return new BannerStateMock(dyeColorToMaterial(color));
 	}
 
-	static Material dyeColorToMaterial(DyeColor color)
+	private static Material dyeColorToMaterial(DyeColor color)
 	{
 		if (color == null)
 		{
