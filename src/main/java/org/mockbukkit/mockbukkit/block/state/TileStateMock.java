@@ -68,7 +68,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	@Override
-	public abstract @NotNull BlockState getSnapshot();
+	public abstract @NotNull TileStateMock getSnapshot();
 
 	@Override
 	public boolean equals(Object o)

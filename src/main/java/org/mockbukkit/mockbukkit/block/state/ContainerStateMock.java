@@ -64,7 +64,7 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	protected abstract InventoryMock createInventory();
 
 	@Override
-	public abstract @NotNull BlockState getSnapshot();
+	public abstract @NotNull ContainerStateMock getSnapshot();
 
 	@Override
 	public boolean isLocked()
