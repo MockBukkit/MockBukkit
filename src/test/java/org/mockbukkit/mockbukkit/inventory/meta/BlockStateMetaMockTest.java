@@ -134,7 +134,8 @@ public class BlockStateMetaMockTest
 
 	@ParameterizedTest
 	@MethodSource("container_Materials")
-	void testMetaInitializedAsPartOfItemStackCreation_Containers(Material type) {
+	void testMetaInitializedAsPartOfItemStackCreation_Containers(Material type)
+	{
 		ItemStack item = ItemStack.of(type);
 		assertInstanceOf(BlockStateMetaMock.class, item.getItemMeta());
 		assertInstanceOf(ContainerStateMock.class, ((BlockStateMetaMock) item.getItemMeta()).getBlockState());
@@ -142,7 +143,8 @@ public class BlockStateMetaMockTest
 
 	@ParameterizedTest
 	@MethodSource("container_Materials")
-	void testMetaInitializedAsPartOfItemStackCreation_NonContainers(Material type) {
+	void testMetaInitializedAsPartOfItemStackCreation_NonContainers(Material type)
+	{
 		ItemStack item = ItemStack.of(type);
 		assertInstanceOf(BlockStateMetaMock.class, item.getItemMeta());
 		assertInstanceOf(ContainerStateMock.class, ((BlockStateMetaMock) item.getItemMeta()).getBlockState());
@@ -165,13 +167,6 @@ public class BlockStateMetaMockTest
 				.filter(e -> !AbstractFurnaceStateMock.class.isAssignableFrom(e.getValue()))
 				.map(Map.Entry::getKey)
 				.map(Arguments::of);
-	}
-
-
-	public static Stream<Arguments> all_MaterialsAndExpectedMetaTypes()
-	{
-		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
-				.map(e -> Arguments.of(e.getKey(), e.getValue()));
 	}
 
 }
