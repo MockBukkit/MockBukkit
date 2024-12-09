@@ -175,7 +175,7 @@ class ShieldMetaMockTest
 	void testSetBlockState_throwsIfNull()
 	{
 		ShieldMetaMock shieldMeta = (ShieldMetaMock) meta;
-		assertThrows(IllegalArgumentException.class, () -> shieldMeta.setBlockState(null));
+		assertThrows(NullPointerException.class, () -> shieldMeta.setBlockState(null));
 	}
 
 	@Test
