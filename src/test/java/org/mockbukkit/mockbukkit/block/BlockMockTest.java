@@ -9,6 +9,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.TrapDoor;
+import org.bukkit.entity.Entity;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +22,9 @@ import org.mockbukkit.mockbukkit.world.Coordinate;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -378,6 +383,23 @@ class BlockMockTest
 	{
 		Block block = new BlockMock(Material.AIR);
 		assertFalse(block.isSolid());
+	}
+
+	@Test
+	void getDrops_InitialEmpty()
+	{
+		Block block = new BlockMock(Material.AIR);
+		assertTrue(block.getDrops().isEmpty());
+	}
+
+	@Test
+	void getDrops_SetDropsMatch()
+	{
+		Block block = new BlockMock(Material.STONE);
+		((BlockMock)block).setDrops(Arrays.asList(new ItemStack(Material.COBBLESTONE)));
+		assertEquals(1, block.getDrops().size());
+		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
+		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), (Entity)null).size());
 	}
 
 }
