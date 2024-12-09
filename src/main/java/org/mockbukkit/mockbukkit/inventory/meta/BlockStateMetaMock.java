@@ -290,26 +290,28 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		{
 			material = Registry.MATERIAL.get(NamespacedKey.fromString(((String) args.get("blockMaterial")).toLowerCase(Locale.ENGLISH)));
 		}
-		if (args.containsKey("container"))
+		if (!args.containsKey("container"))
 		{
-			if (material != null)
+			return;
+		}
+		if (material != null)
+		{
+			blockState = getBlockState();
+		}
+		if (!(blockState instanceof ContainerStateMock container))
+		{
+			// TODO: deserialize other TileStates (Other function call probably)
+			return;
+		}
+		Inventory inventory = container.getInventory();
+		List<Map<String, Object>> containerData = (List<Map<String, Object>>) args.get("container");
+		for (Map<String, Object> slotData : containerData)
+		{
+			int slot = (int) slotData.getOrDefault("slot", -1);
+			if (slot >= 0)
 			{
-				blockState = getBlockState();
+				inventory.setItem(slot, ItemStack.deserialize((Map<String, Object>) slotData.get("item")));
 			}
-			if (blockState instanceof ContainerStateMock container)
-			{
-				Inventory inventory = container.getInventory();
-				List<Map<String, Object>> containerData = (List<Map<String, Object>>) args.get("container");
-				for (Map<String, Object> slotData : containerData)
-				{
-					int slot = (int) slotData.getOrDefault("slot", -1);
-					if (slot >= 0)
-					{
-						inventory.setItem(slot, ItemStack.deserialize((Map<String, Object>) slotData.get("item")));
-					}
-				}
-			}
-			// TODO: deserialize other TileStates
 		}
 	}
 
