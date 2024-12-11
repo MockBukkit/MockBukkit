@@ -320,6 +320,25 @@ public class SignStateMock extends TileStateMock implements Sign
 			this.color = color;
 		}
 
+		@Override
+		public String toString()
+		{
+			return "SignSideMock{" +
+					"color=" + color +
+					", lines=" + Arrays.toString(lines) +
+					", glowing=" + glowing +
+					'}';
+		}
+
+	}
+
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", back=" + back +
+				", front=" + front;
 	}
 
 }

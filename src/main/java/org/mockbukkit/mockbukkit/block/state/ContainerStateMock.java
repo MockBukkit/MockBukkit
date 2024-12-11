@@ -149,13 +149,11 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	}
 
 	@Override
-	public String toString()
+	protected String toStringInternal()
 	{
-		return "ContainerStateMock{" +
-				"customName=" + customName +
+		return super.toStringInternal() +
+				", customName=" + customName +
 				", lock='" + lock + '\'' +
-				", inventory=" + inventory +
-				'}';
+				", inventory=" + inventory;
 	}
-
 }

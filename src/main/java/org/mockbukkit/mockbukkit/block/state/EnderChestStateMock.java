@@ -88,4 +88,9 @@ public class EnderChestStateMock extends TileStateMock implements EnderChest
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", isOpen=" + isOpen;
+	}
 }

@@ -229,4 +229,10 @@ public class SkullStateMock extends TileStateMock implements Skull
 		throw new UnsupportedOperationException("Must change block type");
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", profile=" + profile;
+	}
+
 }

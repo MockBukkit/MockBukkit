@@ -174,4 +174,14 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 		this.bees.clear();
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", bees=" + bees +
+				", flowerLocation=" + flowerLocation +
+				", maxBees=" + maxBees +
+				", sedated=" + sedated;
+	}
+
 }

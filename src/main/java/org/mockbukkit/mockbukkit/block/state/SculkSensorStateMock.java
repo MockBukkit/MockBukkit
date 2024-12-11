@@ -91,4 +91,12 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 		this.listenerRange = range;
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", lastVibrationFrequency=" + lastVibrationFrequency +
+				", listenerRange=" + listenerRange;
+	}
+
 }

@@ -281,4 +281,23 @@ public class StructureStateMock extends TileStateMock implements Structure
 		return num >= min && num <= max;
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", author='" + author + '\'' +
+				", structureName='" + structureName + '\'' +
+				", relativePosition=" + relativePosition +
+				", structureSize=" + structureSize +
+				", mirror=" + mirror +
+				", rotation=" + rotation +
+				", usageMode=" + usageMode +
+				", ignoreEntities=" + ignoreEntities +
+				", showAir=" + showAir +
+				", showBoundingBox=" + showBoundingBox +
+				", integrity=" + integrity +
+				", seed=" + seed +
+				", metadata='" + metadata + '\'';
+	}
+
 }

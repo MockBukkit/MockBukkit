@@ -206,10 +206,4 @@ public class DispenserStateMock extends ContainerStateMock implements Dispenser
 		return super.equals(o);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "DispenserStateMock{} " + super.toString();
-	}
-
 }

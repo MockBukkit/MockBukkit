@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 /**
  * Mock implementation of a {@link Campfire}.
  *
@@ -172,6 +174,16 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 	{
 		int maxSlots = MAX_SLOTS - 1;
 		Validate.isTrue(index >= 0 && index <= maxSlots, "Slot index must be between 0 and " + maxSlots + " (inclusive)");
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", cookingDisabled=" + Arrays.toString(cookingDisabled) +
+				", items=" + Arrays.toString(items) +
+				", cookingProgress=" + Arrays.toString(cookingProgress) +
+				", cookingTime=" + Arrays.toString(cookingTime);
 	}
 
 }

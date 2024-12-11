@@ -125,12 +125,11 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 		return Objects.hash(super.hashCode(), currentPage);
 	}
 
+
 	@Override
-	public String toString()
+	protected String toStringInternal()
 	{
-		return "LecternStateMock{" +
-				"currentPage=" + currentPage +
-				"} " + super.toString();
+		return super.toStringInternal() + ", currentPage=" + currentPage;
 	}
 
 }

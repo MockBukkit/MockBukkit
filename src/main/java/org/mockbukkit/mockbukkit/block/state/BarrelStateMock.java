@@ -215,11 +215,9 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 	}
 
 	@Override
-	public String toString()
+	protected String toStringInternal()
 	{
-		return "BarrelStateMock{" +
-				"isOpen=" + isOpen +
-				"} " + super.toString();
+		return super.toStringInternal() + ", isOpen=" + isOpen;
 	}
 
 }

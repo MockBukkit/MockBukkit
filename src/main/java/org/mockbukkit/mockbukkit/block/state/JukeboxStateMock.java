@@ -152,4 +152,12 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", playing=" + playing +
+				", recordItem=" + recordItem;
+	}
+
 }

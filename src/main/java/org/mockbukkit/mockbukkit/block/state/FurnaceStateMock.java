@@ -67,10 +67,4 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 		return super.equals(o);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "FurnaceStateMock{} " + super.toString();
-	}
-
 }

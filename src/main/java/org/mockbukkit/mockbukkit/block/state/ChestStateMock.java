@@ -229,11 +229,9 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	}
 
 	@Override
-	public String toString()
+	protected String toStringInternal()
 	{
-		return "ChestStateMock{" +
-				"isOpen=" + isOpen +
-				"} " + super.toString();
+		return super.toStringInternal() + ", isOpen=" + isOpen;
 	}
 
 }

@@ -205,4 +205,13 @@ public class BannerStateMock extends TileStateMock implements Banner
 		};
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", baseColor=" + baseColor +
+				", patterns=" + patterns +
+				", customName=" + customName;
+	}
+
 }

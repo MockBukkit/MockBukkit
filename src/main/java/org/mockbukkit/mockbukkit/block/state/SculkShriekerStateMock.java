@@ -84,4 +84,10 @@ public class SculkShriekerStateMock extends TileStateMock implements SculkShriek
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", warningLevel=" + warningLevel;
+	}
+
 }

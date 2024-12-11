@@ -81,6 +81,18 @@ public class BeaconStateMock extends TileStateMock implements Beacon
 	}
 
 	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", customName=" + customName +
+				", lock='" + lock + '\'' +
+				", tier=" + tier +
+				", primaryEffect=" + primaryEffect +
+				", secondaryEffect=" + secondaryEffect +
+				", effectRange=" + effectRange;
+	}
+
+	@Override
 	public @NotNull BeaconStateMock copy()
 	{
 		return new BeaconStateMock(this);

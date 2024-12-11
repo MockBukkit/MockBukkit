@@ -289,4 +289,18 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 		// override any methods that ever return that so setting the type is enough.
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", delay=" + delay +
+				", spawnedType=" + spawnedType +
+				", minSpawnDelay=" + minSpawnDelay +
+				", maxSpawnDelay=" + maxSpawnDelay +
+				", spawnCount=" + spawnCount +
+				", maxNearbyEntities=" + maxNearbyEntities +
+				", requiredPlayerRange=" + requiredPlayerRange +
+				", spawnRange=" + spawnRange;
+	}
+
 }

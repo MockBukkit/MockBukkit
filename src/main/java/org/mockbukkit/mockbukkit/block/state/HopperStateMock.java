@@ -200,10 +200,4 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 		return super.equals(o);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "HopperStateMock{} " + super.toString();
-	}
-
 }

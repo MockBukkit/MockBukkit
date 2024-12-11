@@ -143,13 +143,12 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	}
 
 	@Override
-	public String toString()
+	protected String toStringInternal()
 	{
-		return "BrewingStandStateMock{" +
-				"brewingTime=" + brewingTime +
+		return super.toStringInternal() +
+				", brewingTime=" + brewingTime +
 				", recipeBrewingTime=" + recipeBrewingTime +
-				", fuelLevel=" + fuelLevel +
-				"} " + super.toString();
+				", fuelLevel=" + fuelLevel;
 	}
 
 }

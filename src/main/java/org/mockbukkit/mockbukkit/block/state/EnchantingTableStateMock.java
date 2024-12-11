@@ -89,4 +89,11 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 		this.customName = name == null ? Component.text("") : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", customName=" + customName;
+	}
+
 }

@@ -104,4 +104,12 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 		this.name = name == null ? Component.text("") : name;
 	}
 
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", command='" + command + '\'' +
+				", name=" + name;
+	}
+
 }
