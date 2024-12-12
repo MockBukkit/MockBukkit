@@ -373,6 +373,7 @@ public class WorldMock implements World
 	private boolean pvp;
 	private boolean hardcore;
 	private boolean getKeepSpawnInMemory = true;
+	private boolean generateStructures = true;
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
@@ -472,6 +473,7 @@ public class WorldMock implements World
 		this.worldType = creator.type();
 		this.seed = creator.seed();
 		this.environment = creator.environment();
+		this.generateStructures = creator.generateStructures();
 	}
 
 	/**
@@ -2267,8 +2269,7 @@ public class WorldMock implements World
 	@Override
 	public boolean canGenerateStructures()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.generateStructures;
 	}
 
 	@Override
