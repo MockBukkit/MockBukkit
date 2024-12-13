@@ -789,8 +789,8 @@ class EntityMockTest
 	void registerAttribute()
 	{
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
-		zombie.registerAttribute(Attribute.GENERIC_JUMP_STRENGTH);
-		assertEquals(0.7, zombie.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).getValue());
+		zombie.registerAttribute(Attribute.JUMP_STRENGTH);
+		assertEquals(0.7, zombie.getAttribute(Attribute.JUMP_STRENGTH).getValue());
 	}
 
 	@Test

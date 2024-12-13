@@ -12,6 +12,9 @@ import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.art.ArtMock;
+import org.mockbukkit.mockbukkit.attribute.AttributeMock;
+import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
@@ -34,6 +37,7 @@ import org.mockbukkit.mockbukkit.map.MapCursorTypeMock;
 import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
+import org.mockbukkit.mockbukkit.sound.SoundMock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -105,6 +109,11 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
 		factoryMap.put(RegistryKey.MENU, MenuTypeMock::from);
 		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
+		factoryMap.put(RegistryKey.PAINTING_VARIANT, ArtMock::from);
+		factoryMap.put(RegistryKey.ATTRIBUTE, AttributeMock::from);
+		factoryMap.put(RegistryKey.BIOME, BiomeMock::from);
+		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
+		factoryMap.put(RegistryKey.FLUID, SoundMock::from);
 
 		Function<JsonObject, ? extends Keyed> factory = factoryMap.get(key);
 		if (factory == null)

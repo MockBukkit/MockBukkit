@@ -65,6 +65,14 @@
 			"translationKey": "dryout"
 		},
 		{
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"deathMessageType": "FALL_VARIANTS",
+			"exhaustion": 0.0,
+			"key": "minecraft:ender_pearl",
+			"sound": "minecraft:entity.player.hurt",
+			"translationKey": "fall"
+		},
+		{
 			"damageScaling": "ALWAYS",
 			"deathMessageType": "DEFAULT",
 			"exhaustion": 0.1,
@@ -199,6 +207,14 @@
 			"key": "minecraft:lightning_bolt",
 			"sound": "minecraft:entity.player.hurt",
 			"translationKey": "lightningBolt"
+		},
+		{
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"deathMessageType": "DEFAULT",
+			"exhaustion": 0.1,
+			"key": "minecraft:mace_smash",
+			"sound": "minecraft:entity.player.hurt",
+			"translationKey": "mace_smash"
 		},
 		{
 			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",

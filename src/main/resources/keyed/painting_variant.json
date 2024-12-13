@@ -3,7 +3,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 2,
+			"id": 0,
 			"key": "minecraft:alban",
 			"name": "ALBAN",
 			"ordinal": 2
@@ -19,7 +19,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 3,
+			"id": 2,
 			"key": "minecraft:aztec2",
 			"name": "AZTEC2",
 			"ordinal": 3
@@ -27,7 +27,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 3,
-			"id": 35,
+			"id": 3,
 			"key": "minecraft:backyard",
 			"name": "BACKYARD",
 			"ordinal": 35
@@ -35,7 +35,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 30,
+			"id": 4,
 			"key": "minecraft:baroque",
 			"name": "BAROQUE",
 			"ordinal": 30
@@ -43,7 +43,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 4,
+			"id": 5,
 			"key": "minecraft:bomb",
 			"name": "BOMB",
 			"ordinal": 4
@@ -51,7 +51,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 36,
+			"id": 6,
 			"key": "minecraft:bouquet",
 			"name": "BOUQUET",
 			"ordinal": 36
@@ -59,7 +59,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 23,
+			"id": 7,
 			"key": "minecraft:burning_skull",
 			"name": "BURNING_SKULL",
 			"ordinal": 23
@@ -67,7 +67,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 15,
+			"id": 8,
 			"key": "minecraft:bust",
 			"name": "BUST",
 			"ordinal": 15
@@ -75,7 +75,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 37,
+			"id": 9,
 			"key": "minecraft:cavebird",
 			"name": "CAVEBIRD",
 			"ordinal": 37
@@ -83,7 +83,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 38,
+			"id": 10,
 			"key": "minecraft:changing",
 			"name": "CHANGING",
 			"ordinal": 38
@@ -91,7 +91,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 39,
+			"id": 11,
 			"key": "minecraft:cotan",
 			"name": "COTAN",
 			"ordinal": 39
@@ -99,7 +99,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 8,
+			"id": 12,
 			"key": "minecraft:courbet",
 			"name": "COURBET",
 			"ordinal": 8
@@ -107,7 +107,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 11,
+			"id": 13,
 			"key": "minecraft:creebet",
 			"name": "CREEBET",
 			"ordinal": 11
@@ -115,7 +115,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 4,
-			"id": 25,
+			"id": 14,
 			"key": "minecraft:donkey_kong",
 			"name": "DONKEY_KONG",
 			"ordinal": 25
@@ -123,7 +123,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 26,
+			"id": 15,
 			"key": "minecraft:earth",
 			"name": "EARTH",
 			"ordinal": 26
@@ -131,7 +131,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 40,
+			"id": 16,
 			"key": "minecraft:endboss",
 			"name": "ENDBOSS",
 			"ordinal": 40
@@ -139,7 +139,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 41,
+			"id": 17,
 			"key": "minecraft:fern",
 			"name": "FERN",
 			"ordinal": 41
@@ -147,7 +147,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 20,
+			"id": 18,
 			"key": "minecraft:fighters",
 			"name": "FIGHTERS",
 			"ordinal": 20
@@ -155,7 +155,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 42,
+			"id": 19,
 			"key": "minecraft:finding",
 			"name": "FINDING",
 			"ordinal": 42
@@ -163,7 +163,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 29,
+			"id": 20,
 			"key": "minecraft:fire",
 			"name": "FIRE",
 			"ordinal": 29
@@ -171,7 +171,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 1,
-			"id": 13,
+			"id": 21,
 			"key": "minecraft:graham",
 			"name": "GRAHAM",
 			"ordinal": 13
@@ -179,7 +179,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 31,
+			"id": 22,
 			"key": "minecraft:humble",
 			"name": "HUMBLE",
 			"ordinal": 31
@@ -187,7 +187,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 0,
+			"id": 23,
 			"key": "minecraft:kebab",
 			"name": "KEBAB",
 			"ordinal": 0
@@ -195,7 +195,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 43,
+			"id": 24,
 			"key": "minecraft:lowmist",
 			"name": "LOWMIST",
 			"ordinal": 43
@@ -203,7 +203,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 14,
+			"id": 25,
 			"key": "minecraft:match",
 			"name": "MATCH",
 			"ordinal": 14
@@ -211,7 +211,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 32,
+			"id": 26,
 			"key": "minecraft:meditative",
 			"name": "MEDITATIVE",
 			"ordinal": 32
@@ -219,7 +219,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 44,
+			"id": 27,
 			"key": "minecraft:orb",
 			"name": "ORB",
 			"ordinal": 44
@@ -227,7 +227,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 45,
+			"id": 28,
 			"key": "minecraft:owlemons",
 			"name": "OWLEMONS",
 			"ordinal": 45
@@ -235,7 +235,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 46,
+			"id": 29,
 			"key": "minecraft:passage",
 			"name": "PASSAGE",
 			"ordinal": 46
@@ -243,7 +243,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 22,
+			"id": 30,
 			"key": "minecraft:pigscene",
 			"name": "PIGSCENE",
 			"ordinal": 22
@@ -251,7 +251,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 5,
+			"id": 31,
 			"key": "minecraft:plant",
 			"name": "PLANT",
 			"ordinal": 5
@@ -259,7 +259,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 21,
+			"id": 32,
 			"key": "minecraft:pointer",
 			"name": "POINTER",
 			"ordinal": 21
@@ -267,7 +267,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 3,
-			"id": 47,
+			"id": 33,
 			"key": "minecraft:pond",
 			"name": "POND",
 			"ordinal": 47
@@ -275,7 +275,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 7,
+			"id": 34,
 			"key": "minecraft:pool",
 			"name": "POOL",
 			"ordinal": 7
@@ -283,7 +283,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 1,
-			"id": 33,
+			"id": 35,
 			"key": "minecraft:prairie_ride",
 			"name": "PRAIRIE_RIDE",
 			"ordinal": 33
@@ -291,7 +291,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 9,
+			"id": 36,
 			"key": "minecraft:sea",
 			"name": "SEA",
 			"ordinal": 9
@@ -299,7 +299,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 4,
-			"id": 24,
+			"id": 37,
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
 			"ordinal": 24
@@ -307,7 +307,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 18,
+			"id": 38,
 			"key": "minecraft:skull_and_roses",
 			"name": "SKULL_AND_ROSES",
 			"ordinal": 18
@@ -315,7 +315,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 16,
+			"id": 39,
 			"key": "minecraft:stage",
 			"name": "STAGE",
 			"ordinal": 16
@@ -323,7 +323,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 48,
+			"id": 40,
 			"key": "minecraft:sunflowers",
 			"name": "SUNFLOWERS",
 			"ordinal": 48
@@ -331,7 +331,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 10,
+			"id": 41,
 			"key": "minecraft:sunset",
 			"name": "SUNSET",
 			"ordinal": 10
@@ -339,7 +339,7 @@
 		{
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 49,
+			"id": 42,
 			"key": "minecraft:tides",
 			"name": "TIDES",
 			"ordinal": 49
@@ -347,7 +347,7 @@
 		{
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 34,
+			"id": 43,
 			"key": "minecraft:unpacked",
 			"name": "UNPACKED",
 			"ordinal": 34
@@ -355,7 +355,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 17,
+			"id": 44,
 			"key": "minecraft:void",
 			"name": "VOID",
 			"ordinal": 17
@@ -363,7 +363,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 1,
-			"id": 12,
+			"id": 45,
 			"key": "minecraft:wanderer",
 			"name": "WANDERER",
 			"ordinal": 12
@@ -371,7 +371,7 @@
 		{
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 6,
+			"id": 46,
 			"key": "minecraft:wasteland",
 			"name": "WASTELAND",
 			"ordinal": 6
@@ -379,7 +379,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 28,
+			"id": 47,
 			"key": "minecraft:water",
 			"name": "WATER",
 			"ordinal": 28
@@ -387,7 +387,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 27,
+			"id": 48,
 			"key": "minecraft:wind",
 			"name": "WIND",
 			"ordinal": 27
@@ -395,7 +395,7 @@
 		{
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 19,
+			"id": 49,
 			"key": "minecraft:wither",
 			"name": "WITHER",
 			"ordinal": 19

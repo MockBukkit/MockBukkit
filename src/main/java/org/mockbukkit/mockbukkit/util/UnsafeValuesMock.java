@@ -28,6 +28,7 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
 import org.bukkit.damage.DamageEffect;
@@ -47,6 +48,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
@@ -88,6 +90,7 @@ public class UnsafeValuesMock implements UnsafeValues
 			);
 
 	private String minimumApiVersion = "none";
+	private Biome customBiome;
 
 	@Override
 	public @NotNull ComponentFlattener componentFlattener()
@@ -137,12 +140,6 @@ public class UnsafeValuesMock implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public void reportTimings()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public Material toLegacy(Material material)
@@ -274,12 +271,6 @@ public class UnsafeValuesMock implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public String getTimingsServerName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public VersionFetcher getVersionFetcher()
@@ -509,6 +500,18 @@ public class UnsafeValuesMock implements UnsafeValues
 	public <B extends org.bukkit.Keyed> B get(Registry<B> registry, NamespacedKey namespacedKey)
 	{
 		return registry.get(namespacedKey);
+	}
+
+	@Override
+	@ApiStatus.Internal
+	public Biome getCustomBiome()
+	{
+		if (customBiome == null)
+		{
+			customBiome = new BiomeMock(NamespacedKey.fromString("mockbukkit:custom"));
+		}
+
+		return customBiome;
 	}
 
 	@Override

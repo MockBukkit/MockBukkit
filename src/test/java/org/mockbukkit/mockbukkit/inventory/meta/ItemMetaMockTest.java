@@ -978,13 +978,13 @@ class ItemMetaMockTest
 
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
-		modifiers.put(Attribute.GENERIC_ARMOR, modifier);
+		modifiers.put(Attribute.ARMOR, modifier);
 
 		meta.setAttributeModifiers(modifiers);
 
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, meta.getAttributeModifiers().get(Attribute.ARMOR).size());
+		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -992,17 +992,17 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 		Multimap<Attribute, AttributeModifier> oldModifiers = LinkedHashMultimap.create();
-		oldModifiers.put(Attribute.GENERIC_ARMOR, new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER));
+		oldModifiers.put(Attribute.ARMOR, new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER));
 		meta.setAttributeModifiers(oldModifiers);
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
-		modifiers.put(Attribute.GENERIC_ARMOR_TOUGHNESS, modifier);
+		modifiers.put(Attribute.ARMOR_TOUGHNESS, modifier);
 
 		meta.setAttributeModifiers(modifiers);
 
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
+		assertEquals(1, meta.getAttributeModifiers().get(Attribute.ARMOR_TOUGHNESS).size());
+		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -1012,14 +1012,14 @@ class ItemMetaMockTest
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
 		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
-		modifiers.put(Attribute.GENERIC_ARMOR, modifier1);
-		modifiers.put(Attribute.GENERIC_ARMOR, modifier2);
+		modifiers.put(Attribute.ARMOR, modifier1);
+		modifiers.put(Attribute.ARMOR, modifier2);
 
 		meta.setAttributeModifiers(modifiers);
 
 		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).size());
-		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).size());
-		assertEquals(modifier1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.ARMOR).size());
+		assertEquals(modifier1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -1036,11 +1036,11 @@ class ItemMetaMockTest
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
 
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier);
 
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, meta.getAttributeModifiers().get(Attribute.ARMOR).size());
+		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -1049,9 +1049,9 @@ class ItemMetaMockTest
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
 
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier);
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier));
+		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addAttributeModifier(Attribute.ARMOR, modifier));
 	}
 
 	@Test
@@ -1068,7 +1068,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.addAttributeModifier(Attribute.GENERIC_ARMOR, null));
+		assertThrowsExactly(NullPointerException.class, () -> meta.addAttributeModifier(Attribute.ARMOR, null));
 	}
 
 	@Test
@@ -1076,11 +1076,11 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier);
 
 		assertTrue(meta.hasAttributeModifiers());
 
-		meta.removeAttributeModifier(Attribute.GENERIC_ARMOR);
+		meta.removeAttributeModifier(Attribute.ARMOR);
 
 		assertFalse(meta.hasAttributeModifiers());
 	}
@@ -1099,13 +1099,13 @@ class ItemMetaMockTest
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
 		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier1);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier2);
 
 		assertEquals(2, meta.getAttributeModifiers().size());
 		meta.removeAttributeModifier(EquipmentSlot.HEAD);
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -1116,8 +1116,8 @@ class ItemMetaMockTest
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier1 = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
 		AttributeModifier modifier2 = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier1);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier2);
 
 		meta.removeAttributeModifier(EquipmentSlot.HEAD);
 
@@ -1130,13 +1130,13 @@ class ItemMetaMockTest
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
 		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier1);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier2);
 
-		meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
+		meta.removeAttributeModifier(Attribute.ARMOR, modifier1);
 
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -1144,7 +1144,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
-		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+		meta.addAttributeModifier(Attribute.ARMOR, modifier);
 
 		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(null, modifier));
 	}
@@ -1154,7 +1154,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, null));
+		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(Attribute.ARMOR, null));
 	}
 
 	@Test

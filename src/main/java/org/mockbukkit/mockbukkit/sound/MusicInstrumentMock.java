@@ -6,6 +6,7 @@ import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class MusicInstrumentMock extends MusicInstrument
 {
@@ -34,6 +35,13 @@ public class MusicInstrumentMock extends MusicInstrument
 	public @NotNull NamespacedKey getKey()
 	{
 		return key;
+	}
+
+	@Override
+	public @NotNull String translationKey()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@ApiStatus.Internal

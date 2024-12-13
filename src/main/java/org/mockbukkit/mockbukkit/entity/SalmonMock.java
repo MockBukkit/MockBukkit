@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -40,6 +41,20 @@ public class SalmonMock extends SchoolableFishMock implements Salmon
 	public @NotNull EntityType getType()
 	{
 		return EntityType.SALMON;
+	}
+
+	@Override
+	public @NotNull Variant getVariant()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVariant(@NotNull Variant variant)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

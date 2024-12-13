@@ -41,7 +41,7 @@ class BoatMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.BOAT, boat.getType());
+		assertEquals(EntityType.OAK_BOAT, boat.getType());
 	}
 
 	@Test

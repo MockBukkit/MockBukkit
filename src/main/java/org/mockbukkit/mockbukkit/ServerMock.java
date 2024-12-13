@@ -215,6 +215,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
+	private int pauseWhenEmptyTime =60 ;
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2035,6 +2036,18 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getPauseWhenEmptyTime()
+	{
+		return this.pauseWhenEmptyTime;
+	}
+
+	@Override
+	public void setPauseWhenEmptyTime(int i)
+	{
+		this.pauseWhenEmptyTime = i;
 	}
 
 	@Override

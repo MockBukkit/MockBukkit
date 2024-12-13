@@ -44,7 +44,7 @@ public class SlimeMock extends MobMock implements Slime
 		}
 		if (this.getHealth() > 0)
 		{
-			this.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(size * size);
+			this.getAttribute(Attribute.MAX_HEALTH).setBaseValue(size * size);
 			this.setHealth(this.getMaxHealth());
 		}
 		this.size = size;

@@ -23,7 +23,7 @@ import java.util.Collection;
  *
  * @see TileStateMock
  */
-public class BeaconStateMock extends TileStateMock implements Beacon
+public class BeaconStateMock extends LockableTileStateMock implements Beacon
 {
 
 	private @Nullable String lock;

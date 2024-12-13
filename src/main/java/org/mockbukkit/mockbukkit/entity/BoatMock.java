@@ -168,7 +168,7 @@ public class BoatMock extends VehicleMock implements Boat
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.BOAT;
+		return EntityType.OAK_BOAT;
 	}
 
 	@Override
