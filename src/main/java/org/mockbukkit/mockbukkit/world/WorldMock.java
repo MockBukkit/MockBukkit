@@ -1759,6 +1759,20 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public void getChunkAtAsync(int i, int i1, boolean b, boolean b1, @NotNull Consumer<? super Chunk> consumer)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void getChunksAtAsync(int i, int i1, int i2, int i3, boolean b, @NotNull Runnable runnable)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public <T extends Entity> @NotNull T createEntity(@NotNull Location location, @NotNull Class<T> aClass)
 	{
 		EntityMock entity = this.mockEntity(location, aClass, false);

@@ -281,7 +281,7 @@
 			"key": "minecraft:air",
 			"material": "AIR",
 			"maxDurability": 0,
-			"maxStackSize": 0,
+			"maxStackSize": 64,
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.air"

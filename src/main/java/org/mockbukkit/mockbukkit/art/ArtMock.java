@@ -2,9 +2,12 @@ package org.mockbukkit.mockbukkit.art;
 
 import com.google.gson.JsonObject;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Art;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
 public class ArtMock extends OldKeyedEnumMock<Art> implements Art
@@ -52,6 +55,27 @@ public class ArtMock extends OldKeyedEnumMock<Art> implements Art
 	public int getId()
 	{
 		return this.id;
+	}
+
+	@Override
+	public @Nullable Component title()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component author()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Key assetId()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -2657,6 +2657,34 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean isPaused()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int i, int i1, int i2, int i3)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isGlobalTickThread()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void allowPausing(@NotNull Plugin plugin, boolean b)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull File getPluginsFolder()
 	{
 		try

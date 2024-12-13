@@ -1,16 +1,21 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
+import org.bukkit.Tag;
+import org.junit.jupiter.params.provider.Arguments;
+import net.kyori.adventure.text.Component;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -30,14 +35,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -1272,6 +1272,49 @@ class ItemMetaMockTest
 		meta.setCustomModelData(null);
 		assertFalse(meta.hasCustomModelData());
 	}
+
+	@Test
+	void testItemName()
+	{
+		Component name = Component.text("Test Name");
+		meta.itemName(name);
+		assertEquals(name, meta.itemName());
+	}
+
+	@Test
+	void testSetItemName()
+	{
+		Component name = Component.text("Test Name");
+		meta.itemName(name);
+		assertEquals(name, meta.itemName());
+
+		meta.itemName(null);
+		assertFalse(meta.hasItemName());
+	}
+
+	@Test
+	void testGetItemName()
+	{
+		Component name = Component.text("Test Name");
+		meta.itemName(name);
+		assertEquals("Test Name", meta.getItemName());
+	}
+
+	@Test
+	void testSetItemNameString()
+	{
+		meta.setItemName("Test Name");
+		assertEquals("Test Name", meta.getItemName());
+	}
+
+	@Test
+	void testHasItemNameNotSet()
+	{
+		assertFalse(meta.hasItemName());
+		meta.itemName(Component.text("Test Name"));
+		assertTrue(meta.hasItemName());
+	}
+
 
 	@ParameterizedTest
 	@MethodSource("getItemMetaTypesStream")

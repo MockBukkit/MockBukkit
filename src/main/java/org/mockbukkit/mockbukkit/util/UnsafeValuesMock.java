@@ -600,13 +600,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public <A extends org.bukkit.Keyed, M> io.papermc.paper.registry.tag.@Nullable Tag<A> getTag(@NotNull TagKey<A> tagKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public ItemStack createEmptyStack()
 	{
 		return ItemStackMock.empty();
