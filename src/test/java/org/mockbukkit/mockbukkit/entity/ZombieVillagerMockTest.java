@@ -55,4 +55,10 @@ public class ZombieVillagerMockTest
 	{
 		assertNull(zombie.getConversionPlayer());
 	}
+
+	@Test
+	public void getVillagerProfession()
+	{
+		assertEquals(Villager.Profession.NONE, zombie.getVillagerProfession());
+	}
 }

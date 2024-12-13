@@ -14,6 +14,7 @@ import java.util.UUID;
 public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 {
 	private Villager.Type type = Villager.Type.PLAINS;
+	private Villager.Profession profession = Villager.Profession.NONE;
 	private OfflinePlayer conversionStarter = null;
 
 	//VillagerType.PLAINS, VillagerProfession.NONE, 1
@@ -63,6 +64,18 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	public @NotNull EntityType getType()
 	{
 		return EntityType.ZOMBIE_VILLAGER;
+	}
+
+	@Override
+	public void setVillagerProfession(Villager.@NotNull Profession profession)
+	{
+		this.profession = profession;
+	}
+
+	@Override
+	public Villager.Profession getVillagerProfession()
+	{
+		return profession;
 	}
 
 }
