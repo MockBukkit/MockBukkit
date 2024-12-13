@@ -17,7 +17,6 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	private Villager.Profession profession = Villager.Profession.NONE;
 	private OfflinePlayer conversionStarter = null;
 
-	//VillagerType.PLAINS, VillagerProfession.NONE, 1
 	/**
 	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
