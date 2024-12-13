@@ -12,36 +12,40 @@ public class MusicInstrumentMock extends MusicInstrument
 {
 
 	private final NamespacedKey key;
+	private final String translationKey;
 
 	/**
 	 * @param key The namespaced key representing this music instrument
 	 */
-	MusicInstrumentMock(NamespacedKey key)
+	MusicInstrumentMock(NamespacedKey key, String translationKey)
 	{
 		this.key = key;
+		this.translationKey = translationKey;
 	}
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #MusicInstrumentMock(NamespacedKey)} instead
+	 * @deprecated Use {@link MusicInstrumentMock(NamespacedKey)} instead
 	 */
 	@Deprecated(forRemoval = true)
 	MusicInstrumentMock(JsonObject data)
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
+		this.translationKey = data.get("translationKey").getAsString();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.20.5")
 	public @NotNull NamespacedKey getKey()
 	{
-		return key;
+		return this.key;
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull String translationKey()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.translationKey;
 	}
 
 	@ApiStatus.Internal
@@ -50,7 +54,9 @@ public class MusicInstrumentMock extends MusicInstrument
 		Preconditions.checkNotNull(data);
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
-		return new MusicInstrumentMock(key);
+		Preconditions.checkArgument(data.has("translationKey"), "Missing json translationKey");
+		String translationKey = data.get("translationKey").getAsString();
+		return new MusicInstrumentMock(key, translationKey);
 	}
 
 }
