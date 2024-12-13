@@ -1209,6 +1209,77 @@ class ItemMetaMockTest
 		meta.setFireResistant(true);
 		assertTrue(meta.isFireResistant());
 	}
+	@Test
+	void testHasEnchantable()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		assertFalse(meta.hasEnchantable());
+
+		meta.setEnchantable(10);
+		assertTrue(meta.hasEnchantable());
+	}
+
+	@Test
+	void testGetEnchantable()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		meta.setEnchantable(10);
+		assertEquals(10, meta.getEnchantable());
+
+		meta.setEnchantable(null);
+		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, meta::getEnchantable);
+		assertEquals("We don't have Enchantable! Check hasEnchantable first!",
+				illegalStateException.getMessage());
+	}
+
+	@Test
+	void testSetEnchantable()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		meta.setEnchantable(10);
+		assertEquals(10, meta.getEnchantable());
+
+		meta.setEnchantable(null);
+		assertFalse(meta.hasEnchantable());
+
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
+		{
+			meta.setEnchantable(-1);
+		});
+
+		assertEquals("Enchantability must be positive", illegalArgumentException.getMessage());
+	}
+
+	@Test
+	void testHasCustomModelData()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		assertFalse(meta.hasCustomModelData());
+
+		meta.setCustomModelData(100);
+		assertTrue(meta.hasCustomModelData());
+	}
+
+	@Test
+	void testGetCustomModelData()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		meta.setCustomModelData(100);
+		assertEquals(100, meta.getCustomModelData());
+	}
+
+	@Test
+	void testSetCustomModelData()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		meta.setCustomModelData(100);
+		assertEquals(100, meta.getCustomModelData());
+
+		meta.setCustomModelData(null);
+		assertFalse(meta.hasCustomModelData());
+	}
 
 	@ParameterizedTest
 	@MethodSource("getItemMetaTypesStream")

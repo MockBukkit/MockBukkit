@@ -84,6 +84,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private ItemRarity rarity;
 	private Component itemName = null;
 
+	private @Nullable Integer enchantableValue;
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -1029,22 +1030,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasEnchantable()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.enchantableValue != null;
 	}
 
 	@Override
 	public int getEnchantable()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkState(this.hasEnchantable(), "We don't have Enchantable! Check hasEnchantable first!");
+		return this.enchantableValue;
 	}
 
 	@Override
-	public void setEnchantable(@Nullable Integer integer)
+	public void setEnchantable(@Nullable Integer data)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(data == null || data > 0, "Enchantability must be positive"); // Paper
+		this.enchantableValue = data;
 	}
 
 	@Override
