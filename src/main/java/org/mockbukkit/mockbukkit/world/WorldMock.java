@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.world;
 
+import org.bukkit.entity.ZombieVillager;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -119,6 +120,7 @@ import org.mockbukkit.mockbukkit.entity.WolfMock;
 import org.mockbukkit.mockbukkit.entity.ZoglinMock;
 import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
+import org.mockbukkit.mockbukkit.entity.ZombieVillagerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
@@ -1210,6 +1212,10 @@ public class WorldMock implements World
 		else if (clazz == Zombie.class)
 		{
 			return new ZombieMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ZombieVillager.class)
+		{
+			return new ZombieVillagerMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Enderman.class)
 		{

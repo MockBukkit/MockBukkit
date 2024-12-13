@@ -165,6 +165,7 @@ import org.mockbukkit.mockbukkit.entity.WolfMock;
 import org.mockbukkit.mockbukkit.entity.ZoglinMock;
 import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
+import org.mockbukkit.mockbukkit.entity.ZombieVillagerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.opentest4j.AssertionFailedError;
@@ -1339,6 +1340,7 @@ class WorldMockTest
 				Arguments.of(EntityType.ARMOR_STAND, ArmorStandMock.class),
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
 				Arguments.of(EntityType.DROWNED, Drowned.class),
+				Arguments.of(EntityType.ZOMBIE_VILLAGER, ZombieVillagerMock.class),
 				Arguments.of(EntityType.FIREWORK_ROCKET, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
 				Arguments.of(EntityType.FURNACE_MINECART, PoweredMinecartMock.class),
