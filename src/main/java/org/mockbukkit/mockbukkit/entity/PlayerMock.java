@@ -666,23 +666,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean hasCooldown(@NotNull ItemStack itemStack)
 	{
-		return false;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public int getCooldown(@NotNull ItemStack itemStack)
 	{
-		return 0;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setCooldown(@NotNull ItemStack itemStack, int i)
+	public void setCooldown(@NotNull ItemStack itemStack, int ticks)
 	{
-
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void startRiptideAttack(int i, float v, @Nullable ItemStack itemStack)
+	public void startRiptideAttack(int duration, float attackStrength, @Nullable ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

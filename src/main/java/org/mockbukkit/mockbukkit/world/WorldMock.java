@@ -1759,14 +1759,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void getChunkAtAsync(int i, int i1, boolean b, boolean b1, @NotNull Consumer<? super Chunk> consumer)
+	public void getChunkAtAsync(int x, int z, boolean gen, boolean urgent, @NotNull Consumer<? super Chunk> cb)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void getChunksAtAsync(int i, int i1, int i2, int i3, boolean b, @NotNull Runnable runnable)
+	public void getChunksAtAsync(int minX, int minZ, int maxX, int maxZ, boolean urgent, @NotNull Runnable cb)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

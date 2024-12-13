@@ -34,7 +34,7 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	public abstract @NotNull String getLock();
 
 	@Override
-	public abstract void setLock(@Nullable String s);
+	public abstract void setLock(@Nullable String key);
 
 	@Override
 	public void setLockItem(@Nullable ItemStack itemStack)

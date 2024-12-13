@@ -88,7 +88,7 @@ public class ExplosiveMinecartMock extends MinecartMock implements ExplosiveMine
 	}
 
 	@Override
-	public void setYield(float v)
+	public void setYield(float yield)
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -102,7 +102,7 @@ public class ExplosiveMinecartMock extends MinecartMock implements ExplosiveMine
 	}
 
 	@Override
-	public void setIsIncendiary(boolean b)
+	public void setIsIncendiary(boolean isIncendiary)
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
