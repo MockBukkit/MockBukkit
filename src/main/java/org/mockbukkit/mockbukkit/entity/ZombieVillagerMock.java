@@ -66,7 +66,7 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	}
 
 	@Override
-	public void setVillagerProfession(Villager.@NotNull Profession profession)
+	public void setVillagerProfession(@NotNull Villager.Profession profession)
 	{
 		this.profession = profession;
 	}
