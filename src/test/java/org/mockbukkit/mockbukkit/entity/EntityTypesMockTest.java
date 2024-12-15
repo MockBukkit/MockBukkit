@@ -107,6 +107,7 @@ class EntityTypesMockTest
 
 			assertNotNull(actual);
 			assertTrue(entityType.getEntityClass().isAssignableFrom(actual.getClass()));
+			assertEquals(entityType, actual.getType());
 		}
 
 		@Test
