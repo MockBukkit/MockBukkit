@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class SquidMock extends CreatureMock implements Squid
+public class SquidMock extends AgeableMock implements Squid
 {
 
 	/**

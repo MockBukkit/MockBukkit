@@ -44,7 +44,7 @@ public class WitherMock extends AbstractBossMock implements Wither
 		super(server, uuid, "Wither");
 		this.setLocation(new Location(worldMock, 0, 0, 0));
 
-		this.attributes.get(Attribute.GENERIC_MAX_HEALTH).setBaseValue(300F);
+		this.attributes.get(Attribute.MAX_HEALTH).setBaseValue(300F);
 	}
 
 	@Override

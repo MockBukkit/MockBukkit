@@ -18,7 +18,7 @@ import java.util.Objects;
  *
  * @see TileStateMock
  */
-public abstract class ContainerStateMock extends TileStateMock implements Container
+public abstract class ContainerStateMock extends LockableTileStateMock implements Container
 {
 
 	private final Inventory inventory;

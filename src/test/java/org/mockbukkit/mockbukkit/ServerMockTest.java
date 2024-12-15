@@ -114,7 +114,9 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
+import static org.bukkit.Bukkit.getPauseWhenEmptyTime;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -1941,6 +1943,24 @@ class ServerMockTest
 	{
 		Iterable<Tag<Material>> itemTags = server.getTags(Tag.REGISTRY_ITEMS, Material.class);
 		assertTrue(itemTags.iterator().hasNext());
+	}
+
+	@Test
+	void getPauseWhenEmptyTime_default()
+	{
+		assertThat("World pause time when no players are online should be 60 ticks (3 seconds)",
+				server.getPauseWhenEmptyTime(),
+				is(60));
+	}
+
+	@Test
+	void setPauseWhenEmptyTime_normal()
+	{
+		assertDoesNotThrow(() -> server.setPauseWhenEmptyTime(100));
+		assertThat("getPauseWhenEmptyTime should return the set value of 100 ticks (5 seconds)",
+				getPauseWhenEmptyTime(),
+				is(100));
+
 	}
 
 }

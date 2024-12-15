@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import com.google.common.base.Preconditions;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.math.BigDecimal;
+import java.util.Set;
 import java.util.function.Consumer;
 
 @SuppressWarnings({ "UnstableApiUsage", "unchecked" })
@@ -289,6 +291,27 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	public @Nullable ItemRarity getItemRarity()
 	{
 		return this.rarity;
+	}
+
+	@Override
+	public <T> @Nullable T getDefaultData(DataComponentType.@NotNull Valued<T> valued)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasDefaultData(@NotNull DataComponentType dataComponentType)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Unmodifiable @NotNull Set<DataComponentType> getDefaultDataTypes()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
