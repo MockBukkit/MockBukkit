@@ -51,6 +51,13 @@ class ZombieVillagerMockTest
 	}
 
 	@Test
+	void setVillagerType()
+	{
+		zombie.setVillagerType(Villager.Type.JUNGLE);
+		assertEquals(Villager.Type.JUNGLE, zombie.getVillagerType());
+	}
+
+	@Test
 	void getConversionPlayer()
 	{
 		assertNull(zombie.getConversionPlayer());
@@ -60,5 +67,12 @@ class ZombieVillagerMockTest
 	void getVillagerProfession()
 	{
 		assertEquals(Villager.Profession.NONE, zombie.getVillagerProfession());
+	}
+
+	@Test
+	void setVillagerProfessions()
+	{
+		zombie.setVillagerProfession(Villager.Profession.BUTCHER);
+		assertEquals(Villager.Profession.BUTCHER, zombie.getVillagerProfession());
 	}
 }
