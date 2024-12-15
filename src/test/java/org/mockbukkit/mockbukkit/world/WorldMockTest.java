@@ -155,6 +155,7 @@ import org.mockbukkit.mockbukkit.entity.ThrownExpBottleMock;
 import org.mockbukkit.mockbukkit.entity.ThrownPotionMock;
 import org.mockbukkit.mockbukkit.entity.TropicalFishMock;
 import org.mockbukkit.mockbukkit.entity.TurtleMock;
+import org.mockbukkit.mockbukkit.entity.VillagerMock;
 import org.mockbukkit.mockbukkit.entity.VindicatorMock;
 import org.mockbukkit.mockbukkit.entity.WardenMock;
 import org.mockbukkit.mockbukkit.entity.WindChargeMock;
@@ -1301,6 +1302,7 @@ class WorldMockTest
 				Arguments.of(EntityType.ELDER_GUARDIAN, ElderGuardianMock.class),
 				Arguments.of(EntityType.GUARDIAN, GuardianMock.class),
 				Arguments.of(EntityType.POLAR_BEAR, PolarBearMock.class),
+				Arguments.of(EntityType.VILLAGER, VillagerMock.class),
 				Arguments.of(EntityType.PIG, PigMock.class),
 				Arguments.of(EntityType.EGG, EggMock.class),
 				Arguments.of(EntityType.WOLF, WolfMock.class),

@@ -99,6 +99,7 @@ import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
+import org.bukkit.entity.Villager;
 import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WindCharge;
@@ -251,6 +252,7 @@ public final class EntityTypesMock
 			.register(Trident.class, TridentMock.class, TridentMock::new)
 			.register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new)
 			.register(Turtle.class, TurtleMock.class, TurtleMock::new)
+			.register(Villager.class, VillagerMock.class, VillagerMock::new)
 			.register(Vindicator.class, VindicatorMock.class, VindicatorMock::new)
 			.register(Warden.class, WardenMock.class, WardenMock::new)
 			.register(WindCharge.class, WindChargeMock.class, WindChargeMock::new)
