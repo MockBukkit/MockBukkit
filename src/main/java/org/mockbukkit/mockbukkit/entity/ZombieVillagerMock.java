@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
@@ -38,6 +39,7 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	@Override
 	public void setVillagerType(@NotNull Villager.Type type)
 	{
+		Preconditions.checkNotNull(type);
 		this.type = type;
 	}
 
@@ -50,6 +52,7 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	@Override
 	public void setConversionPlayer(@Nullable OfflinePlayer offlinePlayer)
 	{
+		Preconditions.checkNotNull(offlinePlayer);
 		this.conversionStarter = offlinePlayer;
 	}
 
@@ -68,6 +71,7 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	@Override
 	public void setVillagerProfession(@NotNull Villager.Profession profession)
 	{
+		Preconditions.checkNotNull(profession);
 		this.profession = profession;
 	}
 
