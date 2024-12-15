@@ -5,8 +5,10 @@ import com.destroystokyo.paper.entity.villager.Reputation;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.ZombieVillager;
+import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -148,7 +150,14 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 			return false;
 		}
 
-		// TODO: When villager is sleeping, we should eject passengers
+		setSleeping(true);
+
+		leaveVehicle();
+
+		setPose(Pose.SLEEPING);
+		setLocation(location);
+
+		setMemory(MemoryKey.LAST_SLEPT, getWorld().getGameTime());
 		return true;
 	}
 
@@ -156,9 +165,14 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	public void wakeup()
 	{
 		Preconditions.checkState(this.isSleeping(), "Cannot wakeup if not sleeping");
+		Preconditions.checkState(getWorld() != null, "Villager needs to be in a world");
 
-		// TODO:
-		throw new UnimplementedOperationException();
+		setSleeping(false);
+
+		setPose(Pose.STANDING);
+		// TODO: Set the wakeup location
+
+		setMemory(MemoryKey.LAST_WOKEN, getWorld().getGameTime());
 	}
 
 	@Override

@@ -5,8 +5,10 @@ import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -233,56 +235,107 @@ class VillagerMockTest
 
 	}
 
-	@Test
-	void sleep_GivenNullValue()
+	@Nested
+	class Sleep
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.sleep(null));
-		assertEquals("Location cannot be null", e.getMessage());
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.sleep(null));
+			assertEquals("Location cannot be null", e.getMessage());
+		}
+
+		@Test
+		void givenLocationWithNullWorld()
+		{
+			Location location = new Location(null, 0, 0, 0);
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.sleep(location));
+			assertEquals("Location needs to be in a world", e.getMessage());
+		}
+
+		@Test
+		void givenLocationInDifferentWorld()
+		{
+			World otherWorld = server.addSimpleWorld("test-sleep");
+			Location location = new Location(otherWorld, 0, 0, 0);
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.sleep(location));
+			assertEquals("Cannot sleep across worlds", e.getMessage());
+		}
+
+		@Test
+		void givenLocationWithoutBedBlock()
+		{
+			WorldMock world = server.addSimpleWorld("test-sleep");
+			Location entityLocation = new Location(world, 0, 5, 0);
+			villager.setLocation(entityLocation);
+
+			Location blocklocation = new Location(world, 1, 5, 0);
+			world.getBlockAt(blocklocation).setType(Material.DIAMOND_BLOCK);
+
+			boolean actual = assertDoesNotThrow(() -> villager.sleep(blocklocation));
+			assertFalse(actual);
+
+			assertFalse(villager.isSleeping());
+		}
+
+		@Test
+		void givenLocationWithBedBlock()
+		{
+			WorldMock world = server.addSimpleWorld("test-sleep");
+
+			Location entityLocation = new Location(world, 0, 5, 0);
+			villager.setLocation(entityLocation);
+
+			Location blocklocation = new Location(world, 1, 5, 0);
+			world.getBlockAt(blocklocation).setType(Material.BLACK_BED);
+
+			boolean actual = assertDoesNotThrow(() -> villager.sleep(blocklocation));
+			assertTrue(actual);
+
+			assertTrue(villager.isSleeping());
+			assertEquals(Pose.SLEEPING, villager.getPose());
+			assertEquals(blocklocation, villager.getLocation());
+			// assertEquals(0, villager.getMemory(MemoryKey.LAST_SLEPT));
+		}
 	}
 
-	@Test
-	void sleep_GivenLocationWithNullWorld()
+	@Nested
+	class Wakeup
 	{
-		Location location = new Location(null, 0, 0, 0);
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.sleep(location));
-		assertEquals("Location needs to be in a world", e.getMessage());
-	}
+		@Test
+		void givenNonSleepingVillager()
+		{
+			IllegalStateException e = assertThrows(IllegalStateException.class, () -> villager.wakeup());
+			assertEquals("Cannot wakeup if not sleeping", e.getMessage());
+		}
 
-	@Test
-	void sleep_GivenLocationInDifferentWorld()
-	{
-		World otherWorld = server.addSimpleWorld("test-sleep");
-		Location location = new Location(otherWorld, 0, 0, 0);
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.sleep(location));
-		assertEquals("Cannot sleep across worlds", e.getMessage());
-	}
+		@Test
+		void givenVillagerWithoutWorld()
+		{
+			VillagerMock villagerWithoutWorld = new VillagerMock(server, UUID.randomUUID());
+			villagerWithoutWorld.setSleeping(true);
 
-	@Test
-	void sleep_GivenLocationWithoutBedBlock()
-	{
-		WorldMock world = server.addSimpleWorld("test-sleep");
-		Location entityLocation = new Location(world, 0, 5, 0);
-		villager.setLocation(entityLocation);
+			IllegalStateException e = assertThrows(IllegalStateException.class, () -> villagerWithoutWorld.wakeup());
+			assertEquals("Villager needs to be in a world", e.getMessage());
+		}
 
-		Location blocklocation = new Location(world, 1, 5, 0);
-		world.getBlockAt(blocklocation).setType(Material.DIAMOND_BLOCK);
+		@Test
+		void givenSleepingVillager()
+		{
+			WorldMock world = server.addSimpleWorld("test-sleep");
 
-		boolean actual = assertDoesNotThrow(() -> villager.sleep(blocklocation));
-		assertFalse(actual);
-	}
+			Location entityLocation = new Location(world, 0, 5, 0);
+			villager.setLocation(entityLocation);
 
-	@Test
-	void sleep_GivenLocationWithBedBlock()
-	{
-		WorldMock world = server.addSimpleWorld("test-sleep");
-		Location entityLocation = new Location(world, 0, 5, 0);
-		villager.setLocation(entityLocation);
+			Location blocklocation = new Location(world, 1, 5, 0);
+			world.getBlockAt(blocklocation).setType(Material.BLACK_BED);
 
-		Location blocklocation = new Location(world, 1, 5, 0);
-		world.getBlockAt(blocklocation).setType(Material.BLACK_BED);
+			assertTrue(villager.sleep(blocklocation));
+			assertDoesNotThrow(() -> villager.wakeup());
 
-		boolean actual = assertDoesNotThrow(() -> villager.sleep(blocklocation));
-		assertTrue(actual);
+			assertFalse(villager.isSleeping());
+			assertEquals(Pose.STANDING, villager.getPose());
+		}
 	}
 
 	@Test
