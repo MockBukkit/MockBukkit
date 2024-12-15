@@ -338,7 +338,7 @@ class PlayerMockTest
 	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
-		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
+		assertEquals(20.0, player.getAttribute(Attribute.MAX_HEALTH).getDefaultValue(), 0);
 	}
 
 	@Test

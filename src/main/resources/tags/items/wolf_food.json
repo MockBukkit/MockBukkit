@@ -3,14 +3,21 @@
 	"values": [
 		"minecraft:beef",
 		"minecraft:chicken",
+		"minecraft:cod",
 		"minecraft:cooked_beef",
 		"minecraft:cooked_chicken",
+		"minecraft:cooked_cod",
 		"minecraft:cooked_mutton",
 		"minecraft:cooked_porkchop",
 		"minecraft:cooked_rabbit",
+		"minecraft:cooked_salmon",
 		"minecraft:mutton",
 		"minecraft:porkchop",
+		"minecraft:pufferfish",
 		"minecraft:rabbit",
-		"minecraft:rotten_flesh"
+		"minecraft:rabbit_stew",
+		"minecraft:rotten_flesh",
+		"minecraft:salmon",
+		"minecraft:tropical_fish"
 	]
 }

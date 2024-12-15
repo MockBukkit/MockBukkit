@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import net.kyori.adventure.util.TriState;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import com.google.common.base.Preconditions;
@@ -11,6 +12,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -145,6 +147,20 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	public @NotNull EntityType getType()
 	{
 		return EntityType.MINECART;
+	}
+
+	@Override
+	public TriState getFrictionState()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFrictionState(TriState triState)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

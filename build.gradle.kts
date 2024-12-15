@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.mockbukkit.mockbukkit"
-version = this.getFullVersion()
+version = getFullVersion()
 
 repositories {
 	mavenCentral()

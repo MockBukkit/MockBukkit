@@ -18,18 +18,23 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.bukkit.inventory.meta.components.ToolComponent;
+import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.ApiStatus;
@@ -84,6 +89,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private ItemRarity rarity;
 	private Component itemName = null;
 
+	private @Nullable Integer enchantableValue;
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -378,7 +384,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	@Deprecated(forRemoval = true, since = "1.14")
+	@Deprecated(forRemoval = true, since = "1.13")
 	public Set<Material> getCanDestroy()
 	{
 		// TODO Auto-generated method stub
@@ -386,15 +392,15 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	@Deprecated(forRemoval = true, since = "1.14")
-	public void setCanDestroy(Set<Material> canDestroy)
+	@Deprecated(forRemoval = true, since = "1.13")
+	public void setCanDestroy(Set<Material> set)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true, since = "1.14")
+	@Deprecated(forRemoval = true, since = "1.13")
 	public Set<Material> getCanPlaceOn()
 	{
 		// TODO Auto-generated method stub
@@ -402,8 +408,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	@Deprecated(forRemoval = true, since = "1.14")
-	public void setCanPlaceOn(Set<Material> canPlaceOn)
+	@Deprecated(forRemoval = true, since = "1.13")
+	public void setCanPlaceOn(Set<Material> set)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -419,7 +425,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
-	public void setDestroyableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> canDestroy)
+	public void setDestroyableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1027,6 +1033,26 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public boolean hasEnchantable()
+	{
+		return this.enchantableValue != null;
+	}
+
+	@Override
+	public int getEnchantable()
+	{
+		Preconditions.checkState(this.hasEnchantable(), "We don't have Enchantable! Check hasEnchantable first!");
+		return this.enchantableValue;
+	}
+
+	@Override
+	public void setEnchantable(@Nullable Integer data)
+	{
+		Preconditions.checkArgument(data == null || data > 0, "Enchantability must be positive"); // Paper
+		this.enchantableValue = data;
+	}
+
+	@Override
 	public void setVersion(int version)
 	{
 		// No use yet
@@ -1132,6 +1158,146 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setHideTooltip(boolean hideTooltip)
 	{
 		this.hideTooltip = hideTooltip;
+	}
+
+	@Override
+	public boolean hasTooltipStyle()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable NamespacedKey getTooltipStyle()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTooltipStyle(@Nullable NamespacedKey namespacedKey)
+	{
+        //TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasItemModel()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable NamespacedKey getItemModel()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isGlider()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasDamageResistant()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Tag<DamageType> getDamageResistant()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasUseRemainder()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ItemStack getUseRemainder()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasUseCooldown()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull UseCooldownComponent getUseCooldown()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasEquippable()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull EquippableComponent getEquippable()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEquippable(@Nullable EquippableComponent equippableComponent)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setUseCooldown(@Nullable UseCooldownComponent useCooldownComponent)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setUseRemainder(@Nullable ItemStack itemStack)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setDamageResistant(@Nullable Tag<DamageType> tag)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setGlider(boolean b)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setItemModel(@Nullable NamespacedKey namespacedKey)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -156,7 +156,7 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.CHEST_BOAT;
+		return EntityType.OAK_CHEST_BOAT;
 	}
 
 }
