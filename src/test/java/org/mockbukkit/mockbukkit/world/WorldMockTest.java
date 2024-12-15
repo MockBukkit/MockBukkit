@@ -42,13 +42,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
-import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
@@ -2423,6 +2424,32 @@ class WorldMockTest
 		world.setFullTime(time);
 
 		assertEquals(expected, world.getMoonPhase());
+	}
+
+	@Nested
+	class SetGameTime
+	{
+		@ParameterizedTest
+		@ValueSource(longs = {0, 1, 10, 25, 50, 75, 100})
+		void givenValidValues(long expected)
+		{
+			WorldMock world = new WorldMock(Material.DIRT, 3);
+
+			world.setGameTime(expected);
+
+			assertEquals(expected, world.getGameTime());
+		}
+
+		@ParameterizedTest
+		@ValueSource(longs = {-1, -10, -25, -50, -75, -100})
+		void givenInValidValues(long invalidValue)
+		{
+			WorldMock world = new WorldMock(Material.DIRT, 3);
+
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> world.setGameTime(invalidValue));
+			assertEquals("Time must be greater or equal than 0", e.getMessage());
+		}
+
 	}
 
 }
