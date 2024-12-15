@@ -14,7 +14,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class ZombieVillagerMockTest
+class ZombieVillagerMockTest
 {
 
 	private ZombieVillagerMock zombie;
@@ -45,19 +45,19 @@ public class ZombieVillagerMockTest
 	}
 
 	@Test
-	public void getVillagerType()
+	void getVillagerType()
 	{
 		assertEquals(Villager.Type.PLAINS, zombie.getVillagerType());
 	}
 
 	@Test
-	public void getConversionPlayer()
+	void getConversionPlayer()
 	{
 		assertNull(zombie.getConversionPlayer());
 	}
 
 	@Test
-	public void getVillagerProfession()
+	void getVillagerProfession()
 	{
 		assertEquals(Villager.Profession.NONE, zombie.getVillagerProfession());
 	}
