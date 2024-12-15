@@ -215,6 +215,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
+	private int pauseWhenEmptyTime = 60 ;
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2038,6 +2039,18 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public int getPauseWhenEmptyTime()
+	{
+		return this.pauseWhenEmptyTime;
+	}
+
+	@Override
+	public void setPauseWhenEmptyTime(int seconds)
+	{
+		this.pauseWhenEmptyTime = seconds;
+	}
+
+	@Override
 	public @NotNull ChunkData createChunkData(@NotNull World world)
 	{
 		Preconditions.checkNotNull(world, "World cannot be null");
@@ -2640,6 +2653,34 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Entity entity)
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isPaused()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int i, int i1, int i2, int i3)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isGlobalTickThread()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void allowPausing(@NotNull Plugin plugin, boolean b)
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

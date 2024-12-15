@@ -21,13 +21,19 @@ class MusicInstrumentMockTest
 	void setUp()
 	{
 		this.key = new NamespacedKey("mock_bukkit", "custom_music_instrument");
-		this.musicInstrument = new MusicInstrumentMock(key);
+		this.musicInstrument = new MusicInstrumentMock(key, "instrument.custom.custom_music_instrument");
 	}
 
 	@Test
 	void getKey()
 	{
 		assertEquals(key, musicInstrument.getKey());
+	}
+
+	@Test
+	void translationKey()
+	{
+		assertEquals("instrument.custom.custom_music_instrument", musicInstrument.translationKey());
 	}
 
 	@Test

@@ -7,6 +7,7 @@ import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -84,6 +85,34 @@ public class ExplosiveMinecartMock extends MinecartMock implements ExplosiveMine
 	public @NotNull EntityType getType()
 	{
 		return EntityType.TNT_MINECART;
+	}
+
+	@Override
+	public void setYield(float yield)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getYield()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setIsIncendiary(boolean isIncendiary)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isIncendiary()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

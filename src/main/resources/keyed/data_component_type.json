@@ -1,0 +1,272 @@
+{
+	"values": [
+		{
+			"key": "minecraft:attribute_modifiers",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:banner_patterns",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:base_color",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:bees",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:block_entity_data",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:block_state",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:bucket_entity_data",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:bundle_contents",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:can_break",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:can_place_on",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:charged_projectiles",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:consumable",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:container",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:container_loot",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:creative_slot_lock",
+			"persistent": false
+		},
+		{
+			"key": "minecraft:custom_data",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:custom_model_data",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:custom_name",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:damage",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:damage_resistant",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:death_protection",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:debug_stick_state",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:dyed_color",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:enchantable",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:enchantment_glint_override",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:enchantments",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:entity_data",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:equippable",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:firework_explosion",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:fireworks",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:food",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:glider",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:hide_additional_tooltip",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:hide_tooltip",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:instrument",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:intangible_projectile",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:item_model",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:item_name",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:jukebox_playable",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:lock",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:lodestone_tracker",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:lore",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:map_color",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:map_decorations",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:map_id",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:map_post_processing",
+			"persistent": false
+		},
+		{
+			"key": "minecraft:max_damage",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:max_stack_size",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:note_block_sound",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:ominous_bottle_amplifier",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:pot_decorations",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:potion_contents",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:profile",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:rarity",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:recipes",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:repair_cost",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:repairable",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:stored_enchantments",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:suspicious_stew_effects",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:tool",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:tooltip_style",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:trim",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:unbreakable",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:use_cooldown",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:use_remainder",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:writable_book_content",
+			"persistent": true
+		},
+		{
+			"key": "minecraft:written_book_content",
+			"persistent": true
+		}
+	]
+}

@@ -55,7 +55,7 @@ import org.mockbukkit.mockbukkit.simulate.entity.LivingEntitySimulation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -121,11 +121,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		super(server, uuid);
 
-		attributes = new EnumMap<>(Attribute.class);
-		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
-		double movementSpeed = AttributesMock.getDefaultValue(Attribute.GENERIC_MOVEMENT_SPEED);
-		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, movementSpeed));
+		attributes = new HashMap<>();
+		double maxHealth = AttributesMock.getDefaultValue(Attribute.MAX_HEALTH);
+		attributes.put(Attribute.MAX_HEALTH, new AttributeInstanceMock(Attribute.MAX_HEALTH, maxHealth));
+		double movementSpeed = AttributesMock.getDefaultValue(Attribute.MOVEMENT_SPEED);
+		attributes.put(Attribute.MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.MOVEMENT_SPEED, movementSpeed));
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}
@@ -189,13 +189,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public double getMaxHealth()
 	{
-		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+		return getAttribute(Attribute.MAX_HEALTH).getValue();
 	}
 
 	@Override
 	public void setMaxHealth(double health)
 	{
-		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);
 		if (this.health > health)
 		{
 			this.health = health;
@@ -205,7 +205,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void resetMaxHealth()
 	{
-		setMaxHealth(AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH));
+		setMaxHealth(AttributesMock.getDefaultValue(Attribute.MAX_HEALTH));
 	}
 
 	@Override

@@ -16,9 +16,14 @@
 			"ordinal": 32
 		},
 		{
+			"key": "minecraft:block_crumble",
+			"name": "BLOCK_CRUMBLE",
+			"ordinal": 105
+		},
+		{
 			"key": "minecraft:block_marker",
 			"name": "BLOCK_MARKER",
-			"ordinal": 108
+			"ordinal": 110
 		},
 		{
 			"key": "minecraft:bubble",
@@ -363,7 +368,7 @@
 		{
 			"key": "minecraft:ominous_spawning",
 			"name": "OMINOUS_SPAWNING",
-			"ordinal": 105
+			"ordinal": 107
 		},
 		{
 			"key": "minecraft:poof",
@@ -378,7 +383,7 @@
 		{
 			"key": "minecraft:raid_omen",
 			"name": "RAID_OMEN",
-			"ordinal": 106
+			"ordinal": 108
 		},
 		{
 			"key": "minecraft:rain",
@@ -486,9 +491,14 @@
 			"ordinal": 40
 		},
 		{
+			"key": "minecraft:trail",
+			"name": "TRAIL",
+			"ordinal": 106
+		},
+		{
 			"key": "minecraft:trial_omen",
 			"name": "TRIAL_OMEN",
-			"ordinal": 107
+			"ordinal": 109
 		},
 		{
 			"key": "minecraft:trial_spawner_detection",

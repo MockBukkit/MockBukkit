@@ -12,9 +12,13 @@ import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.art.ArtMock;
+import org.mockbukkit.mockbukkit.attribute.AttributeMock;
+import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
+import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.FrogVariantMock;
@@ -34,6 +38,7 @@ import org.mockbukkit.mockbukkit.map.MapCursorTypeMock;
 import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
+import org.mockbukkit.mockbukkit.sound.SoundMock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -70,7 +75,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private void loadKeyedToRegistry(RegistryKey<T> key) throws IOException
 	{
 		String fileName = "/keyed/" + key.key().value() + ".json";
-		this.constructor = (Function<JsonObject, T>) getConstructor(key);
+		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);
 		try (InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
 		{
 			if (stream == null)
@@ -82,7 +87,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 	}
 
-	private Function<JsonObject, ? extends Keyed> getConstructor(RegistryKey<T> key)
+	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
 		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
@@ -105,14 +110,64 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
 		factoryMap.put(RegistryKey.MENU, MenuTypeMock::from);
 		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
+		factoryMap.put(RegistryKey.PAINTING_VARIANT, ArtMock::from);
+		factoryMap.put(RegistryKey.ATTRIBUTE, AttributeMock::from);
+		factoryMap.put(RegistryKey.BIOME, BiomeMock::from);
+		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
+		factoryMap.put(RegistryKey.FLUID, SoundMock::from);
+		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
+		// Remove the EntityTypeMock mapping as it's an enum
+		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
-		Function<JsonObject, ? extends Keyed> factory = factoryMap.get(key);
-		if (factory == null)
+		// Add special handling for enum-based registry types
+		if (isEnumBasedRegistry(key)) {
+			return jsonObject -> createEnumWrapper(jsonObject, key);
+		}
+
+		Function<JsonObject, ? extends Keyed> constructorFunction = factoryMap.get(key);
+		if (constructorFunction == null)
 		{
 			throw new UnimplementedOperationException();
 		}
 
-		return factory;
+		return constructorFunction;
+	}
+
+	private boolean isEnumBasedRegistry(RegistryKey<?> key) {
+		return key == RegistryKey.ENTITY_TYPE
+			|| key == RegistryKey.PARTICLE_TYPE
+			|| key == RegistryKey.POTION;
+	}
+
+	private T createEnumWrapper(JsonObject jsonObject, RegistryKey<T> key) {
+		// Extract the key from the JSON object
+		String id = jsonObject.get("key").getAsString();
+		NamespacedKey namespacedKey = NamespacedKey.fromString(id);
+
+		// Get the enum class from the registry key's type parameter
+		Class<?> enumClass = getEnumClassForRegistryKey(key);
+		if (enumClass == null || !enumClass.isEnum()) {
+			throw new IllegalStateException("Registry key " + key + " is marked as enum but has no enum class");
+		}
+
+		// Find the enum constant by name
+		String enumName = namespacedKey.getKey().toUpperCase();
+		try {
+			// Convert the enum name to the corresponding enum constant
+			Enum<?> enumValue = Enum.valueOf((Class<? extends Enum>) enumClass, enumName);
+			return (T) enumValue;
+		} catch (IllegalArgumentException | ClassCastException e) {
+			throw new IllegalStateException("Could not find enum constant " + enumName + " in " + enumClass, e);
+		}
+	}
+
+	private Class<?> getEnumClassForRegistryKey(RegistryKey<?> key) {
+		Map<RegistryKey<?>, Class<?>> enumMap = new HashMap<>();
+		enumMap.put(RegistryKey.ENTITY_TYPE, org.bukkit.entity.EntityType.class);
+		enumMap.put(RegistryKey.PARTICLE_TYPE, org.bukkit.Particle.class);
+		enumMap.put(RegistryKey.POTION, org.bukkit.potion.PotionType.class);
+
+		return enumMap.get(key);
 	}
 
 	@Override
@@ -160,9 +215,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
 				T tObject = constructor.apply(structureJSONObject);
 				/*
-				 * putIfAbsent fixes the edge case scenario when the constructor initializes class loading of the keyed object,
-				 * which during initialization will trigger this exact method, therefore creating duplicate instances of
-				 * each keyed object.
+				 * putIfAbsent fixes the edge case scenario where the constructor initializes class loading of the keyed object.
+				 * During this initialization, the loadIfEmpty method might be triggered again, leading to potential duplicate
+				 * instances of each keyed object. By using putIfAbsent, we ensure that only one instance of each keyed object
+				 * is added to the map, preventing duplicates.
 				 */
 				keyedMap.putIfAbsent(tObject.getKey(), tObject);
 			}

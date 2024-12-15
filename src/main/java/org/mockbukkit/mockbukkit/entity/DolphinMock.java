@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class DolphinMock extends CreatureMock implements Dolphin
+public class DolphinMock extends AgeableMock implements Dolphin
 {
 
 	private int moistness = 2400;
