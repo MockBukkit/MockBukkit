@@ -123,6 +123,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -132,138 +133,154 @@ import java.util.function.BiFunction;
 public final class EntityTypesMock
 {
 
-	private static final Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> BUKKIT_TO_MOCK_DATA = new HashMap<>();
+	private static final EntityTypesMock INSTANCE = withDefaults().build();
 
-	static {
-		register(Allay.class, AllayMock.class, AllayMock::new);
-		register(AreaEffectCloud.class, AreaEffectCloudMock.class, AreaEffectCloudMock::new);
-		register(Armadillo.class, ArmadilloMock.class, ArmadilloMock::new);
-		register(ArmorStand.class, ArmorStandMock.class, ArmorStandMock::new);
-		register(Arrow.class, ArrowMock.class, ArrowMock::new);
-		register(Axolotl.class, AxolotlMock.class, AxolotlMock::new);
-		register(Bat.class, BatMock.class, BatMock::new);
-		register(Bee.class, BeeMock.class, BeeMock::new);
-		register(Blaze.class, BlazeMock.class, BlazeMock::new);
-		register(BlockDisplay.class, BlockDisplayMock.class, BlockDisplayMock::new);
-		register(Boat.class, BoatMock.class, BoatMock::new);
-		register(Bogged.class, BoggedMock.class, BoggedMock::new);
-		register(Breeze.class, BreezeMock.class, BreezeMock::new);
-		register(BreezeWindCharge.class, BreezeWindChargeMock.class, BreezeWindChargeMock::new);
-		register(Camel.class, CamelMock.class, CamelMock::new);
-		register(Cat.class, CatMock.class, CatMock::new);
-		register(CaveSpider.class, CaveSpiderMock.class, CaveSpiderMock::new);
-		register(ChestBoat.class, ChestBoatMock.class, ChestBoatMock::new);
-		register(Chicken.class, ChickenMock.class, ChickenMock::new);
-		register(Cod.class, CodMock.class, CodMock::new);
-		register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new);
-		register(Cow.class, CowMock.class, CowMock::new);
-		register(Creeper.class, CreeperMock.class, CreeperMock::new);
-		register(Dolphin.class, DolphinMock.class, DolphinMock::new);
-		register(Donkey.class, DonkeyMock.class, DonkeyMock::new);
-		register(DragonFireball.class, DragonFireballMock.class, DragonFireballMock::new);
-		register(Drowned.class, DrownedMock.class, DrownedMock::new);
-		register(Egg.class, EggMock.class, EggMock::new);
-		register(ElderGuardian.class, ElderGuardianMock.class, ElderGuardianMock::new);
-		register(EnderCrystal.class, EnderCrystalMock.class, EnderCrystalMock::new);
-		register(EnderDragon.class, EnderDragonMock.class, EnderDragonMock::new);
-		register(Enderman.class, EndermanMock.class, EndermanMock::new);
-		register(Endermite.class, EndermiteMock.class, EndermiteMock::new);
-		register(EnderPearl.class, EnderPearlMock.class, EnderPearlMock::new);
-		register(EnderSignal.class, EnderSignalMock.class, EnderSignalMock::new);
-		register(Evoker.class, EvokerMock.class, EvokerMock::new);
-		register(EvokerFangs.class, EvokerFangsMock.class, EvokerFangsMock::new);
-		register(ExperienceOrb.class, ExperienceOrbMock.class, ExperienceOrbMock::new);
-		register(ExplosiveMinecart.class, ExplosiveMinecartMock.class, ExplosiveMinecartMock::new);
-		register(FallingBlock.class, FallingBlockMock.class, FallingBlockMock::new);
-		register(Firework.class, FireworkMock.class, FireworkMock::new);
-		register(FishHook.class, FishHookMock.class, FishHookMock::new);
-		register(Fox.class, FoxMock.class, FoxMock::new);
-		register(Frog.class, FrogMock.class, FrogMock::new);
-		register(Ghast.class, GhastMock.class, GhastMock::new);
-		register(Giant.class, GiantMock.class, GiantMock::new);
-		register(GlowItemFrame.class, GlowItemFrameMock.class, GlowItemFrameMock::new);
-		register(GlowSquid.class, GlowSquidMock.class, GlowSquidMock::new);
-		register(Goat.class, GoatMock.class, GoatMock::new);
-		register(Guardian.class, GuardianMock.class, GuardianMock::new);
-		register(Hoglin.class, HoglinMock.class, HoglinMock::new);
-		register(HopperMinecart.class, HopperMinecartMock.class, HopperMinecartMock::new);
-		register(Horse.class, HorseMock.class, HorseMock::new);
-		register(Husk.class, HuskMock.class, HuskMock::new);
-		register(Illusioner.class, IllusionerMock.class, IllusionerMock::new);
-		register(Interaction.class, InteractionMock.class, InteractionMock::new);
-		register(IronGolem.class, IronGolemMock.class, IronGolemMock::new);
-		register(ItemDisplay.class, ItemDisplayMock.class, ItemDisplayMock::new);
-		register(ItemFrame.class, ItemFrameMock.class, ItemFrameMock::new);
-		register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new);
-		register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new);
-		register(Llama.class, LlamaMock.class, LlamaMock::new);
-		register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new);
-		register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new);
-		register(Marker.class, MarkerMock.class, MarkerMock::new);
-		register(Mule.class, MuleMock.class, MuleMock::new);
-		register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new);
-		register(Ocelot.class, OcelotMock.class, OcelotMock::new);
-		register(Panda.class, PandaMock.class, PandaMock::new);
-		register(Parrot.class, ParrotMock.class, ParrotMock::new);
-		register(Pig.class, PigMock.class, PigMock::new);
-		register(PigZombie.class, PigZombieMock.class, PigZombieMock::new);
-		register(Pillager.class, PillagerMock.class, PillagerMock::new);
-		register(PolarBear.class, PolarBearMock.class, PolarBearMock::new);
-		register(PoweredMinecart.class, PoweredMinecartMock.class, PoweredMinecartMock::new);
-		register(PufferFish.class, PufferFishMock.class, PufferFishMock::new);
-		register(Rabbit.class, RabbitMock.class, RabbitMock::new);
-		register(Ravager.class, RavagerMock.class, RavagerMock::new);
-		register(RideableMinecart.class, RideableMinecartMock.class, RideableMinecartMock::new);
-		register(Salmon.class, SalmonMock.class, SalmonMock::new);
-		register(Sheep.class, SheepMock.class, SheepMock::new);
-		register(Shulker.class, ShulkerMock.class, ShulkerMock::new);
-		register(Silverfish.class, SilverfishMock.class, SilverfishMock::new);
-		register(Skeleton.class, SkeletonMock.class, SkeletonMock::new);
-		register(SkeletonHorse.class, SkeletonHorseMock.class, SkeletonHorseMock::new);
-		register(Slime.class, SlimeMock.class, SlimeMock::new);
-		register(SmallFireball.class, SmallFireballMock.class, SmallFireballMock::new);
-		register(Snowball.class, SnowballMock.class, SnowballMock::new);
-		register(Snowman.class, SnowmanMock.class, SnowmanMock::new);
-		register(SpawnerMinecart.class, SpawnerMinecartMock.class, SpawnerMinecartMock::new);
-		register(SpectralArrow.class, SpectralArrowMock.class, SpectralArrowMock::new);
-		register(Spider.class, SpiderMock.class, SpiderMock::new);
-		register(Squid.class, SquidMock.class, SquidMock::new);
-		register(StorageMinecart.class, StorageMinecartMock.class, StorageMinecartMock::new);
-		register(Stray.class, StrayMock.class, StrayMock::new);
-		register(Tadpole.class, TadpoleMock.class, TadpoleMock::new);
-		register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new);
-		register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new);
-		register(TNTPrimed.class, TNTPrimedMock.class, TNTPrimedMock::new);
-		register(Trident.class, TridentMock.class, TridentMock::new);
-		register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new);
-		register(Turtle.class, TurtleMock.class, TurtleMock::new);
-		register(Vindicator.class, VindicatorMock.class, VindicatorMock::new);
-		register(Warden.class, WardenMock.class, WardenMock::new);
-		register(WindCharge.class, WindChargeMock.class, WindChargeMock::new);
-		register(Witch.class, WitchMock.class, WitchMock::new);
-		register(Wither.class, WitherMock.class, WitherMock::new);
-		register(WitherSkeleton.class, WitherSkeletonMock.class, WitherSkeletonMock::new);
-		register(WitherSkull.class, WitherSkullMock.class, WitherSkullMock::new);
-		register(Wolf.class, WolfMock.class, WolfMock::new);
-		register(Zoglin.class, ZoglinMock.class, ZoglinMock::new);
-		register(Zombie.class, ZombieMock.class, ZombieMock::new);
-		register(ZombieHorse.class, ZombieHorseMock.class, ZombieHorseMock::new);
+	private static EntityTypesMock getInstance()
+	{
+		return INSTANCE;
 	}
 
-	@ApiStatus.Internal
-	static <E extends Entity, M extends EntityMock> void register(@NotNull Class<E> bukkitClazz,
-																  @NotNull Class<M> mockClazz,
-																  @NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
+	public static Builder builder()
 	{
-		Preconditions.checkArgument(bukkitClazz != null, "Cannot register a null bukkit class");
-		Preconditions.checkArgument(mockClazz != null, "Cannot register a null mock class");
-		Preconditions.checkArgument(bukkitClazz.isAssignableFrom(mockClazz), "The class %s is not a subclass of %s", mockClazz, bukkitClazz);
-		Preconditions.checkArgument(mockFactory != null, "Cannot register a null mock factory");
-		Preconditions.checkArgument(!BUKKIT_TO_MOCK_DATA.containsKey(bukkitClazz), "Cannot register type %s because it's already registered.", bukkitClazz);
-		BUKKIT_TO_MOCK_DATA.put(bukkitClazz, new EntityData<>(bukkitClazz, mockClazz, mockFactory));
+		return new Builder();
+	}
+
+	public static Builder withDefaults()
+	{
+		return builder()
+			.register(Allay.class, AllayMock.class, AllayMock::new)
+			.register(AreaEffectCloud.class, AreaEffectCloudMock.class, AreaEffectCloudMock::new)
+			.register(Armadillo.class, ArmadilloMock.class, ArmadilloMock::new)
+			.register(ArmorStand.class, ArmorStandMock.class, ArmorStandMock::new)
+			.register(Arrow.class, ArrowMock.class, ArrowMock::new)
+			.register(Axolotl.class, AxolotlMock.class, AxolotlMock::new)
+			.register(Bat.class, BatMock.class, BatMock::new)
+			.register(Bee.class, BeeMock.class, BeeMock::new)
+			.register(Blaze.class, BlazeMock.class, BlazeMock::new)
+			.register(BlockDisplay.class, BlockDisplayMock.class, BlockDisplayMock::new)
+			.register(Boat.class, BoatMock.class, BoatMock::new)
+			.register(Bogged.class, BoggedMock.class, BoggedMock::new)
+			.register(Breeze.class, BreezeMock.class, BreezeMock::new)
+			.register(BreezeWindCharge.class, BreezeWindChargeMock.class, BreezeWindChargeMock::new)
+			.register(Camel.class, CamelMock.class, CamelMock::new)
+			.register(Cat.class, CatMock.class, CatMock::new)
+			.register(CaveSpider.class, CaveSpiderMock.class, CaveSpiderMock::new)
+			.register(ChestBoat.class, ChestBoatMock.class, ChestBoatMock::new)
+			.register(Chicken.class, ChickenMock.class, ChickenMock::new)
+			.register(Cod.class, CodMock.class, CodMock::new)
+			.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
+			.register(Cow.class, CowMock.class, CowMock::new)
+			.register(Creeper.class, CreeperMock.class, CreeperMock::new)
+			.register(Dolphin.class, DolphinMock.class, DolphinMock::new)
+			.register(Donkey.class, DonkeyMock.class, DonkeyMock::new)
+			.register(DragonFireball.class, DragonFireballMock.class, DragonFireballMock::new)
+			.register(Drowned.class, DrownedMock.class, DrownedMock::new)
+			.register(Egg.class, EggMock.class, EggMock::new)
+			.register(ElderGuardian.class, ElderGuardianMock.class, ElderGuardianMock::new)
+			.register(EnderCrystal.class, EnderCrystalMock.class, EnderCrystalMock::new)
+			.register(EnderDragon.class, EnderDragonMock.class, EnderDragonMock::new)
+			.register(Enderman.class, EndermanMock.class, EndermanMock::new)
+			.register(Endermite.class, EndermiteMock.class, EndermiteMock::new)
+			.register(EnderPearl.class, EnderPearlMock.class, EnderPearlMock::new)
+			.register(EnderSignal.class, EnderSignalMock.class, EnderSignalMock::new)
+			.register(Evoker.class, EvokerMock.class, EvokerMock::new)
+			.register(EvokerFangs.class, EvokerFangsMock.class, EvokerFangsMock::new)
+			.register(ExperienceOrb.class, ExperienceOrbMock.class, ExperienceOrbMock::new)
+			.register(ExplosiveMinecart.class, ExplosiveMinecartMock.class, ExplosiveMinecartMock::new)
+			.register(FallingBlock.class, FallingBlockMock.class, FallingBlockMock::new)
+			.register(Firework.class, FireworkMock.class, FireworkMock::new)
+			.register(FishHook.class, FishHookMock.class, FishHookMock::new)
+			.register(Fox.class, FoxMock.class, FoxMock::new)
+			.register(Frog.class, FrogMock.class, FrogMock::new)
+			.register(Ghast.class, GhastMock.class, GhastMock::new)
+			.register(Giant.class, GiantMock.class, GiantMock::new)
+			.register(GlowItemFrame.class, GlowItemFrameMock.class, GlowItemFrameMock::new)
+			.register(GlowSquid.class, GlowSquidMock.class, GlowSquidMock::new)
+			.register(Goat.class, GoatMock.class, GoatMock::new)
+			.register(Guardian.class, GuardianMock.class, GuardianMock::new)
+			.register(Hoglin.class, HoglinMock.class, HoglinMock::new)
+			.register(HopperMinecart.class, HopperMinecartMock.class, HopperMinecartMock::new)
+			.register(Horse.class, HorseMock.class, HorseMock::new)
+			.register(Husk.class, HuskMock.class, HuskMock::new)
+			.register(Illusioner.class, IllusionerMock.class, IllusionerMock::new)
+			.register(Interaction.class, InteractionMock.class, InteractionMock::new)
+			.register(IronGolem.class, IronGolemMock.class, IronGolemMock::new)
+			.register(ItemDisplay.class, ItemDisplayMock.class, ItemDisplayMock::new)
+			.register(ItemFrame.class, ItemFrameMock.class, ItemFrameMock::new)
+			.register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new)
+			.register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new)
+			.register(Llama.class, LlamaMock.class, LlamaMock::new)
+			.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
+			.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
+			.register(Marker.class, MarkerMock.class, MarkerMock::new)
+			.register(Mule.class, MuleMock.class, MuleMock::new)
+			.register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new)
+			.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
+			.register(Panda.class, PandaMock.class, PandaMock::new)
+			.register(Parrot.class, ParrotMock.class, ParrotMock::new)
+			.register(Pig.class, PigMock.class, PigMock::new)
+			.register(PigZombie.class, PigZombieMock.class, PigZombieMock::new)
+			.register(Pillager.class, PillagerMock.class, PillagerMock::new)
+			.register(PolarBear.class, PolarBearMock.class, PolarBearMock::new)
+			.register(PoweredMinecart.class, PoweredMinecartMock.class, PoweredMinecartMock::new)
+			.register(PufferFish.class, PufferFishMock.class, PufferFishMock::new)
+			.register(Rabbit.class, RabbitMock.class, RabbitMock::new)
+			.register(Ravager.class, RavagerMock.class, RavagerMock::new)
+			.register(RideableMinecart.class, RideableMinecartMock.class, RideableMinecartMock::new)
+			.register(Salmon.class, SalmonMock.class, SalmonMock::new)
+			.register(Sheep.class, SheepMock.class, SheepMock::new)
+			.register(Shulker.class, ShulkerMock.class, ShulkerMock::new)
+			.register(Silverfish.class, SilverfishMock.class, SilverfishMock::new)
+			.register(Skeleton.class, SkeletonMock.class, SkeletonMock::new)
+			.register(SkeletonHorse.class, SkeletonHorseMock.class, SkeletonHorseMock::new)
+			.register(Slime.class, SlimeMock.class, SlimeMock::new)
+			.register(SmallFireball.class, SmallFireballMock.class, SmallFireballMock::new)
+			.register(Snowball.class, SnowballMock.class, SnowballMock::new)
+			.register(Snowman.class, SnowmanMock.class, SnowmanMock::new)
+			.register(SpawnerMinecart.class, SpawnerMinecartMock.class, SpawnerMinecartMock::new)
+			.register(SpectralArrow.class, SpectralArrowMock.class, SpectralArrowMock::new)
+			.register(Spider.class, SpiderMock.class, SpiderMock::new)
+			.register(Squid.class, SquidMock.class, SquidMock::new)
+			.register(StorageMinecart.class, StorageMinecartMock.class, StorageMinecartMock::new)
+			.register(Stray.class, StrayMock.class, StrayMock::new)
+			.register(Tadpole.class, TadpoleMock.class, TadpoleMock::new)
+			.register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new)
+			.register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new)
+			.register(TNTPrimed.class, TNTPrimedMock.class, TNTPrimedMock::new)
+			.register(Trident.class, TridentMock.class, TridentMock::new)
+			.register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new)
+			.register(Turtle.class, TurtleMock.class, TurtleMock::new)
+			.register(Vindicator.class, VindicatorMock.class, VindicatorMock::new)
+			.register(Warden.class, WardenMock.class, WardenMock::new)
+			.register(WindCharge.class, WindChargeMock.class, WindChargeMock::new)
+			.register(Witch.class, WitchMock.class, WitchMock::new)
+			.register(Wither.class, WitherMock.class, WitherMock::new)
+			.register(WitherSkeleton.class, WitherSkeletonMock.class, WitherSkeletonMock::new)
+			.register(WitherSkull.class, WitherSkullMock.class, WitherSkullMock::new)
+			.register(Wolf.class, WolfMock.class, WolfMock::new)
+			.register(Zoglin.class, ZoglinMock.class, ZoglinMock::new)
+			.register(Zombie.class, ZombieMock.class, ZombieMock::new)
+			.register(ZombieHorse.class, ZombieHorseMock.class, ZombieHorseMock::new);
 	}
 
 	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server, @NotNull UUID entityUUID)
+	{
+		return getInstance().create(bukkitClazz, server, entityUUID);
+	}
+
+	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server)
+	{
+		return EntityTypesMock.createEntity(bukkitClazz, server, UUID.randomUUID());
+	}
+
+	private final Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> bukkitToMockData;
+
+	private EntityTypesMock(@NotNull Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> bukkitToMockData)
+	{
+		this.bukkitToMockData = Preconditions.checkNotNull(bukkitToMockData);
+	}
+
+	public <T extends Entity> @NotNull EntityMock create(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server, @NotNull UUID entityUUID)
 	{
 		Preconditions.checkArgument(bukkitClazz != null, "bukkitClazz cannot be null");
 		Preconditions.checkArgument(server != null, "server cannot be null");
@@ -277,7 +294,7 @@ public final class EntityTypesMock
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
 
-		EntityData<? extends Entity, ? extends EntityMock> data = BUKKIT_TO_MOCK_DATA.get(bukkitClazz);
+		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
 		if (data == null) {
 			throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
 		}
@@ -291,14 +308,35 @@ public final class EntityTypesMock
 		return mockedEntity;
 	}
 
-	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> clazz, @NotNull ServerMock server)
-	{
-		return createEntity(clazz, server, UUID.randomUUID());
-	}
-
 	private record EntityData<E extends Entity, M extends EntityMock>(@NotNull Class<E> entityClass,
 												@NotNull Class<M> mockClass,
 												@NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
 	{}
+
+	public static class Builder
+	{
+
+		private final Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> mapping = new HashMap<>();
+
+		@ApiStatus.Internal
+		public <E extends Entity, M extends EntityMock> Builder register(@NotNull Class<E> bukkitClazz,
+																		 @NotNull Class<M> mockClazz,
+																		 @NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
+		{
+			Preconditions.checkArgument(bukkitClazz != null, "Cannot register a null bukkit class");
+			Preconditions.checkArgument(mockClazz != null, "Cannot register a null mock class");
+			Preconditions.checkArgument(bukkitClazz.isAssignableFrom(mockClazz), "The class %s is not a subclass of %s", mockClazz, bukkitClazz);
+			Preconditions.checkArgument(mockFactory != null, "Cannot register a null mock factory");
+			Preconditions.checkArgument(!mapping.containsKey(bukkitClazz), "Cannot register type %s because it's already registered.", bukkitClazz);
+			mapping.put(bukkitClazz, new EntityData<>(bukkitClazz, mockClazz, mockFactory));
+			return this;
+		}
+
+		public EntityTypesMock build()
+		{
+			return new EntityTypesMock(Collections.unmodifiableMap(this.mapping));
+		}
+
+	}
 
 }
