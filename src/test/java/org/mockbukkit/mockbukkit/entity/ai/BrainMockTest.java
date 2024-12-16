@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity.ai;
 
+import org.bukkit.Location;
 import org.bukkit.entity.memory.MemoryKey;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,6 +20,58 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BrainMockTest
 {
 	private final BrainMock brain = new BrainMock();
+
+	@Nested
+	class AssertIsSupportedValue
+	{
+
+		@Test
+		void giveNullValue()
+		{
+			assertDoesNotThrow(() -> brain.assertIsSupportedValue(null));
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenBooleanValues(boolean value)
+		{
+			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 200, 3000, 40000})
+		void givenIntegerValues(int value)
+		{
+			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
+		}
+
+		@ParameterizedTest
+		@ValueSource(longs = {0, 10, 200, 3000, 40000})
+		void givenLongValues(long value)
+		{
+			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
+		}
+
+		@Test
+		void givenUuidValues()
+		{
+			assertDoesNotThrow(() -> brain.assertIsSupportedValue(UUID.randomUUID()));
+		}
+
+		@Test
+		void givenLocationValues()
+		{
+			assertDoesNotThrow(() -> brain.assertIsSupportedValue(new Location(null, 0, 0, 0)));
+		}
+
+		@Test
+		void giveUnsupportedValue()
+		{
+			UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> brain.assertIsSupportedValue("This is a string"));
+			assertEquals("Do not know how to map This is a string", e.getMessage());
+		}
+
+	}
 
 	@Nested
 	class SetMemory

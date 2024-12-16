@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity.ai;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import org.bukkit.Location;
 import org.bukkit.entity.memory.MemoryKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 @ApiStatus.Internal
 public class BrainMock
@@ -16,7 +19,31 @@ public class BrainMock
 
 	private static final String MEMORY_KEY_CANNOT_BE_NULL = "Memory key cannot be null";
 
-	private final Map<MemoryKey, Object> memories = Maps.newHashMap();
+	private static final Set<Class<?>> SUPPORTED_MEMORY_TYPES = Set.of(
+		Location.class, Boolean.class, Integer.class, Long.class, UUID.class
+	);
+
+	static void assertIsSupportedValue(Object value)
+	{
+
+		if (value == null)
+		{
+			// Null is supported
+			return;
+		}
+
+		for (Class<?> type : SUPPORTED_MEMORY_TYPES)
+		{
+			if (type.isInstance(value))
+			{
+				return;
+			}
+		}
+
+		throw new UnsupportedOperationException("Do not know how to map " + value);
+	}
+
+	private final Map<MemoryKey<?>, Object> memories = Maps.newHashMap();
 
 	public BrainMock()
 	{
@@ -54,6 +81,7 @@ public class BrainMock
 			return;
 		}
 
+		assertIsSupportedValue(value);
 		this.memories.put(memoryKey, value);
 	}
 
