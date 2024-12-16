@@ -1,13 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
-import org.mockbukkit.mockbukkit.attribute.AttributesMock;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.inventory.EntityEquipmentMock;
-import org.mockbukkit.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
@@ -51,6 +43,15 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
+import org.mockbukkit.mockbukkit.attribute.AttributesMock;
+import org.mockbukkit.mockbukkit.entity.ai.BrainMock;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.EntityEquipmentMock;
+import org.mockbukkit.mockbukkit.potion.ActivePotionEffect;
 import org.mockbukkit.mockbukkit.simulate.entity.LivingEntitySimulation;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ import java.util.function.Consumer;
  */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
-
+	private final BrainMock brain = new BrainMock();
 	/**
 	 * How much health the entity has.
 	 */
@@ -988,15 +989,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public <T> T getMemory(@NotNull MemoryKey<T> memoryKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return brain.getMemory(memoryKey).orElse(null);
 	}
 
 	@Override
 	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T memoryValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		brain.setMemory(memoryKey, memoryValue);
 	}
 
 	@Override

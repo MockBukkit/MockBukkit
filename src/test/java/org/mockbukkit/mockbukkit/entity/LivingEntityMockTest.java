@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.bukkit.entity.memory.MemoryKey;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -416,6 +417,21 @@ class LivingEntityMockTest
 		livingEntity.setRiptiding(true);
 		boolean actual = livingEntity.isRiptiding();
 		assertTrue(actual);
+	}
+
+	@Test
+	void setMemory()
+	{
+		assertNull(livingEntity.getMemory(MemoryKey.HUNTED_RECENTLY));
+
+		livingEntity.setMemory(MemoryKey.HUNTED_RECENTLY, false);
+		assertFalse(livingEntity.getMemory(MemoryKey.HUNTED_RECENTLY));
+
+		livingEntity.setMemory(MemoryKey.HUNTED_RECENTLY, true);
+		assertTrue(livingEntity.getMemory(MemoryKey.HUNTED_RECENTLY));
+
+		livingEntity.setMemory(MemoryKey.HUNTED_RECENTLY, null);
+		assertNull(livingEntity.getMemory(MemoryKey.HUNTED_RECENTLY));
 	}
 
 }
