@@ -156,6 +156,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.ZombieVillager;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.entity.minecart.HopperMinecart;
@@ -308,6 +309,7 @@ import org.mockbukkit.mockbukkit.entity.WolfMock;
 import org.mockbukkit.mockbukkit.entity.ZoglinMock;
 import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
+import org.mockbukkit.mockbukkit.entity.ZombieVillagerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
@@ -1212,6 +1214,10 @@ public class WorldMock implements World
 		else if (clazz == Zombie.class)
 		{
 			return new ZombieMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ZombieVillager.class)
+		{
+			return new ZombieVillagerMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Enderman.class)
 		{
