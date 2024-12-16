@@ -28,12 +28,14 @@ public class BrainMock
 		this.memories.putAll(other.memories);
 	}
 
-	public <T> void eraseMemory(@NotNull MemoryKey<T> memoryKey) {
+	public <T> void eraseMemory(@NotNull MemoryKey<T> memoryKey)
+	{
 		Preconditions.checkArgument(memoryKey != null, MEMORY_KEY_CANNOT_BE_NULL);
 		this.memories.remove(memoryKey.getKey().asString());
 	}
 
-	public <T> Optional<T> getMemory(@NotNull MemoryKey<T> memoryKey) {
+	public <T> Optional<T> getMemory(@NotNull MemoryKey<T> memoryKey)
+	{
 		Preconditions.checkArgument(memoryKey != null, MEMORY_KEY_CANNOT_BE_NULL);
 
 		String key = memoryKey.getKey().asString();
@@ -44,17 +46,20 @@ public class BrainMock
 				.map(typeClass::cast);
 	}
 
-	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T value) {
+	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T value)
+	{
 		Preconditions.checkArgument(memoryKey != null, MEMORY_KEY_CANNOT_BE_NULL);
 		this.memories.put(memoryKey.getKey().asString(), value);
 	}
 
-	public boolean hasMemoryValue(@NotNull MemoryKey<?> memoryKey) {
+	public boolean hasMemoryValue(@NotNull MemoryKey<?> memoryKey)
+	{
 		Preconditions.checkArgument(memoryKey != null, MEMORY_KEY_CANNOT_BE_NULL);
 		return this.memories.containsKey(memoryKey.getKey().asString());
 	}
 
-	public void clearMemories() {
+	public void clearMemories()
+	{
 		this.memories.clear();
 	}
 
