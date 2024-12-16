@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.memory.MemoryKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -282,6 +283,7 @@ class VillagerMockTest
 		void givenLocationWithBedBlock()
 		{
 			WorldMock world = server.addSimpleWorld("test-sleep");
+			world.setGameTime(1000L);
 
 			Location entityLocation = new Location(world, 0, 5, 0);
 			villager.setLocation(entityLocation);
@@ -295,7 +297,7 @@ class VillagerMockTest
 			assertTrue(villager.isSleeping());
 			assertEquals(Pose.SLEEPING, villager.getPose());
 			assertEquals(blocklocation, villager.getLocation());
-			// assertEquals(0, villager.getMemory(MemoryKey.LAST_SLEPT));
+			assertEquals(1000L, villager.getMemory(MemoryKey.LAST_SLEPT));
 		}
 	}
 
