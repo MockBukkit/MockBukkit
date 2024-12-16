@@ -16,6 +16,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link AbstractVillager}.
+ *
+ * @see AgeableMock
+ */
 public abstract class AbstractVillagerMock extends AgeableMock implements Merchant, AbstractVillager, InventoryHolder
 {
 	private final MerchantInventoryMock inventory = new MerchantInventoryMock(this, this);

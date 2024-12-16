@@ -20,6 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link Villager}.
+ *
+ * @see AbstractVillagerMock
+ */
 public class VillagerMock extends AbstractVillagerMock implements Villager
 {
 	private static final int MIN_VILLAGER_LEVEL = 1;
