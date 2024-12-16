@@ -110,6 +110,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.ZombieVillager;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.entity.minecart.HopperMinecart;
@@ -260,7 +261,8 @@ public final class EntityTypesMock
 			.register(Wolf.class, WolfMock.class, WolfMock::new)
 			.register(Zoglin.class, ZoglinMock.class, ZoglinMock::new)
 			.register(Zombie.class, ZombieMock.class, ZombieMock::new)
-			.register(ZombieHorse.class, ZombieHorseMock.class, ZombieHorseMock::new);
+			.register(ZombieHorse.class, ZombieHorseMock.class, ZombieHorseMock::new)
+			.register(ZombieVillager.class, ZombieVillagerMock.class, ZombieVillagerMock::new);
 	}
 
 	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server, @NotNull UUID entityUUID)
