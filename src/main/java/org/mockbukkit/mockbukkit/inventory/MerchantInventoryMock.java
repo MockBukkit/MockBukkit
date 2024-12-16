@@ -9,6 +9,13 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
+/**
+ * Mock implementation of an {@link MerchantInventory}.
+ *
+ * @see InventoryMock
+ */
 public class MerchantInventoryMock extends InventoryMock implements MerchantInventory
 {
 
@@ -52,6 +59,27 @@ public class MerchantInventoryMock extends InventoryMock implements MerchantInve
 	public @NotNull Merchant getMerchant()
 	{
 		return this.merchant;
+	}
+
+	@Override
+	public final boolean equals(Object object)
+	{
+		if (!(object instanceof MerchantInventoryMock that))
+		{
+			return false;
+		}
+		if (!super.equals(object))
+		{
+			return false;
+		}
+
+		return selectedRecipeIndex == that.selectedRecipeIndex && Objects.equals(merchant, that.merchant);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), merchant, selectedRecipeIndex);
 	}
 
 }
