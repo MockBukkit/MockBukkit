@@ -58,6 +58,16 @@ class BrainMockTest
 			assertEquals(3000L, afterChange.get());
 		}
 
+		@Test
+		void givenNullMemoryValue()
+		{
+			brain.setMemory(MemoryKey.LAST_SLEPT, 2000L);
+			assertTrue(brain.hasMemoryValue(MemoryKey.LAST_SLEPT));
+
+			brain.setMemory(MemoryKey.LAST_SLEPT, null);
+			assertFalse(brain.hasMemoryValue(MemoryKey.LAST_SLEPT));
+		}
+
 	}
 
 	@Nested

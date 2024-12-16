@@ -49,6 +49,12 @@ public class BrainMock
 	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T value)
 	{
 		Preconditions.checkArgument(memoryKey != null, MEMORY_KEY_CANNOT_BE_NULL);
+		if (value == null)
+		{
+			this.eraseMemory(memoryKey);
+			return;
+		}
+
 		this.memories.put(memoryKey.getKey().asString(), value);
 	}
 
