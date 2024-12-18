@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import com.destroystokyo.paper.entity.villager.Reputation;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Registry;
@@ -21,12 +22,17 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -317,7 +323,7 @@ class VillagerMockTest
 			VillagerMock villagerWithoutWorld = new VillagerMock(server, UUID.randomUUID());
 			villagerWithoutWorld.setSleeping(true);
 
-			IllegalStateException e = assertThrows(IllegalStateException.class, () -> villagerWithoutWorld.wakeup());
+			IllegalStateException e = assertThrows(IllegalStateException.class, villagerWithoutWorld::wakeup);
 			assertEquals("Villager needs to be in a world", e.getMessage());
 		}
 
@@ -337,6 +343,65 @@ class VillagerMockTest
 
 			assertFalse(villager.isSleeping());
 			assertEquals(Pose.STANDING, villager.getPose());
+		}
+	}
+
+	@Nested
+	class SetReputations
+	{
+		@Test
+		void givenNullValue()
+		{
+			NullPointerException e = assertThrows(NullPointerException.class, () -> villager.setReputations(null));
+			assertEquals("Reputation cannot be null", e.getMessage());
+		}
+
+		@Test
+		void givenCustomReputations()
+		{
+			Map<UUID, Reputation> reputations = new HashMap<>();
+			reputations.put(UUID.randomUUID(), new Reputation());
+			reputations.put(UUID.randomUUID(), new Reputation());
+
+			villager.setReputations(reputations);
+
+			Map<UUID, Reputation> actual = villager.getReputations();
+			assertEquals(reputations, actual);
+			assertNotSame(reputations, actual);
+		}
+
+		@Test
+		void givenCustomReputation()
+		{
+			UUID uuid = UUID.randomUUID();
+			Reputation reputation = new Reputation();
+
+			Map<UUID, Reputation> reputations = new HashMap<>();
+			reputations.put(UUID.randomUUID(), new Reputation());
+			reputations.put(uuid, reputation);
+
+			villager.setReputations(reputations);
+
+			Reputation actual = villager.getReputation(uuid);
+			assertEquals(reputation, actual);
+			assertSame(reputation, actual);
+		}
+	}
+
+	@Nested
+	class ClearReputations
+	{
+		@Test
+		void givenVillagerWithReputations()
+		{
+			Map<UUID, Reputation> reputations = new HashMap<>();
+			reputations.put(UUID.randomUUID(), new Reputation());
+			reputations.put(UUID.randomUUID(), new Reputation());
+			villager.setReputations(reputations);
+
+			villager.clearReputations();
+
+			assertEquals(Collections.emptyMap(), villager.getReputations());
 		}
 	}
 
