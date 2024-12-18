@@ -6,9 +6,12 @@ import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MerchantRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,10 +23,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.MerchantInventoryMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -31,7 +36,9 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -403,6 +410,65 @@ class VillagerMockTest
 
 			assertEquals(Collections.emptyMap(), villager.getReputations());
 		}
+	}
+
+	@Nested
+	class SetTrader
+	{
+
+		@Test
+		void givenChangeInValue()
+		{
+			HumanEntity humanEntity = server.addPlayer();
+
+			villager.setTrader(humanEntity);
+			assertSame(humanEntity, villager.getTrader());
+			assertTrue(villager.isTrading());
+
+			assertDoesNotThrow(() -> villager.setTrader(null));
+			assertNull(villager.getTrader());
+			assertFalse(villager.isTrading());
+		}
+
+	}
+
+	@Nested
+	class GetInventory
+	{
+
+		@Test
+		void givenChangeInValue()
+		{
+			MerchantInventoryMock actual = villager.getInventory();
+			assertNotNull(actual);
+			assertSame(actual, villager.getInventory());
+		}
+
+	}
+
+	@Nested
+	class SetRecipe
+	{
+
+		@Test
+		void givenChangeInValue()
+		{
+			assertEquals(Collections.emptyList(), villager.getRecipes());
+
+			MerchantRecipe recipeOne = new MerchantRecipe(ItemStack.of(Material.DIAMOND), 1);
+			villager.setRecipes(List.of(recipeOne));
+			assertEquals(1, villager.getRecipes().size());
+			assertEquals(Material.DIAMOND, villager.getRecipe(0).getResult().getType());
+
+			MerchantRecipe recipeTwo = new MerchantRecipe(ItemStack.of(Material.STONE), 1);
+			villager.setRecipe(0, recipeTwo);
+			assertEquals(1, villager.getRecipes().size());
+			assertEquals(Material.STONE, villager.getRecipe(0).getResult().getType());
+
+			villager.resetOffers();
+			assertEquals(Collections.emptyList(), villager.getRecipes());
+		}
+
 	}
 
 	@Test

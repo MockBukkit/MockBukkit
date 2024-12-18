@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.AbstractVillager;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
@@ -42,7 +41,7 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	}
 
 	@Override
-	public @NotNull Inventory getInventory()
+	public @NotNull MerchantInventoryMock getInventory()
 	{
 		return this.inventory;
 	}
