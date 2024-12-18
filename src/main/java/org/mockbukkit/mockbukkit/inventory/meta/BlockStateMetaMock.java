@@ -71,6 +71,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 
 	static
 	{
+		// To update this list check Paper class "CraftItemMetas"
 		Map<Material, Class<? extends TileStateMock>> map = new HashMap<>();
 		MaterialTags.SHULKER_BOXES.getValues().forEach(m -> map.put(m, ShulkerBoxStateMock.class));
 		MaterialTags.SIGNS.getValues().forEach(m -> map.put(m, SignStateMock.class));
@@ -86,6 +87,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		map.put(Material.CHEST, ChestStateMock.class);
 		map.put(Material.CHISELED_BOOKSHELF, null);
 		map.put(Material.COMMAND_BLOCK, CommandBlockStateMock.class);
+		map.put(Material.CREAKING_HEART, null);
 		map.put(Material.CHAIN_COMMAND_BLOCK, CommandBlockStateMock.class);
 		map.put(Material.REPEATING_COMMAND_BLOCK, CommandBlockStateMock.class);
 		map.put(Material.COMPARATOR, ComparatorStateMock.class);
