@@ -1,18 +1,18 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.bukkit.Server;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
 import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
@@ -20,7 +20,12 @@ import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 public class BlockStateMetaMockTest
@@ -148,6 +153,22 @@ public class BlockStateMetaMockTest
 		ItemStack item = ItemStack.of(type);
 		assertInstanceOf(BlockStateMetaMock.class, item.getItemMeta());
 		assertInstanceOf(ContainerStateMock.class, ((BlockStateMetaMock) item.getItemMeta()).getBlockState());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getPossibleItemTypes")
+	void givenPossibleBlockMaterials(Material expected)
+	{
+		ItemStack item = expected.asItemType().createItemStack();
+		assertNotNull(item);
+		assertEquals(expected, item.getType());
+	}
+
+	public static Stream<Arguments> getPossibleItemTypes()
+	{
+		return Stream.of(Material.values())
+				.filter(m -> m.asItemType() != null)
+				.map(Arguments::of);
 	}
 
 	public static Stream<Arguments> container_Materials()
