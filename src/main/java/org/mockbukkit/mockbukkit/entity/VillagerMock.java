@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.entity.villager.Reputation;
+import com.destroystokyo.paper.entity.villager.ReputationType;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -198,7 +200,17 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	public @NotNull Reputation getReputation(@NotNull UUID uniqueId)
 	{
 		Reputation value = this.gossips.get(uniqueId);
-		return (value == null ? new Reputation() : value);
+		if (value == null)
+		{
+			return new Reputation(new EnumMap<>(ReputationType.class));
+		}
+
+		Map<ReputationType, Integer> map = new EnumMap<>(ReputationType.class);
+		for (ReputationType reputationType : ReputationType.values())
+		{
+			map.put(reputationType, value.getReputation(reputationType));
+		}
+		return new Reputation(map);
 	}
 
 	@Override
@@ -212,7 +224,20 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	{
 		Preconditions.checkNotNull(uniqueId, "UniqueId cannot be null");
 		Preconditions.checkNotNull(reputation, "Reputation cannot be null");
-		this.gossips.put(uniqueId, reputation);
+
+		Map<ReputationType, Integer> map = new EnumMap<>(ReputationType.class);
+		for (ReputationType reputationType : ReputationType.values())
+		{
+			int value = reputation.getReputation(reputationType);
+			if (value == 0)
+			{
+				map.remove(reputationType);
+			} else
+			{
+				map.put(reputationType, value);
+			}
+		}
+		this.gossips.put(uniqueId, new Reputation(map));
 	}
 
 	@Override

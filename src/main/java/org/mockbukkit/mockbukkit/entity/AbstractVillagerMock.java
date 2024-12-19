@@ -11,7 +11,6 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.MerchantInventoryMock;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,12 +49,13 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	public void resetOffers()
 	{
 		this.recipes.clear();
+		updateTrades();
 	}
 
 	@Override
 	public @NotNull List<MerchantRecipe> getRecipes()
 	{
-		return Collections.unmodifiableList(this.recipes);
+		return List.copyOf(this.recipes);
 	}
 
 	@Override

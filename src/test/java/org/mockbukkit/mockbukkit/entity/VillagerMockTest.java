@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.destroystokyo.paper.entity.villager.Reputation;
+import com.destroystokyo.paper.entity.villager.ReputationType;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Registry;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @ExtendWith(MockBukkitExtension.class)
 class VillagerMockTest
@@ -373,7 +376,11 @@ class VillagerMockTest
 			villager.setReputations(reputations);
 
 			Map<UUID, Reputation> actual = villager.getReputations();
-			assertEquals(reputations, actual);
+			assertEquals(reputations.size(), actual.size());
+			for (Map.Entry<UUID, Reputation> entry : reputations.entrySet())
+			{
+				assertIdentical(entry.getValue(), actual.get(entry.getKey()));
+			}
 			assertNotSame(reputations, actual);
 		}
 
@@ -390,8 +397,8 @@ class VillagerMockTest
 			villager.setReputations(reputations);
 
 			Reputation actual = villager.getReputation(uuid);
-			assertEquals(reputation, actual);
-			assertSame(reputation, actual);
+			assertIdentical(reputation, actual);
+			assertNotSame(reputation, actual);
 		}
 	}
 
@@ -475,6 +482,35 @@ class VillagerMockTest
 	void getType()
 	{
 		assertEquals(EntityType.VILLAGER, villager.getType());
+	}
+
+	public static void assertIdentical(@Nullable Reputation expected, @Nullable Reputation actual, @Nullable String message)
+	{
+		if (expected == null && actual == null)
+		{
+			// Safe
+			return;
+		}
+
+		if (expected == null || actual == null)
+		{
+			// One of expected or actual is null and the other is not.
+			fail(message);
+			return;
+		}
+
+		for (ReputationType reputationType : ReputationType.values())
+		{
+			int expectedValue = expected.getReputation(reputationType);
+			int actualValue = actual.getReputation(reputationType);
+
+			assertEquals(expectedValue, actualValue, message);
+		}
+	}
+
+	public static void assertIdentical(@Nullable Reputation expected, @Nullable Reputation actual)
+	{
+		assertIdentical(expected, actual, null);
 	}
 
 }
