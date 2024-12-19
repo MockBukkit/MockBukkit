@@ -11,6 +11,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.entity.ZombieVillager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.MerchantRecipe;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of an {@link Villager}.
@@ -205,18 +207,14 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 			return new Reputation(new EnumMap<>(ReputationType.class));
 		}
 
-		Map<ReputationType, Integer> map = new EnumMap<>(ReputationType.class);
-		for (ReputationType reputationType : ReputationType.values())
-		{
-			map.put(reputationType, value.getReputation(reputationType));
-		}
-		return new Reputation(map);
+		return clone(value);
 	}
 
 	@Override
 	public @NotNull Map<UUID, Reputation> getReputations()
 	{
-		return Map.copyOf(this.gossips);
+		return this.gossips.entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, e -> clone(e.getValue())));
 	}
 
 	@Override
@@ -271,6 +269,22 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	{
 		// TODO: Villager trades at net.minecraft.world.entity.npc.Villager#updateTrades(int)
 		return false;
+	}
+
+	@Contract(pure = true, value = "null -> null; !null -> !null")
+	private static Reputation clone(@Nullable Reputation reputation)
+	{
+		if (reputation == null)
+		{
+			return null;
+		}
+
+		Map<ReputationType, Integer> map = new EnumMap<>(ReputationType.class);
+		for (ReputationType reputationType : ReputationType.values())
+		{
+			map.put(reputationType, reputation.getReputation(reputationType));
+		}
+		return new Reputation(map);
 	}
 
 }
