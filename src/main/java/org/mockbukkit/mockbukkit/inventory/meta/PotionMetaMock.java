@@ -223,6 +223,24 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	public boolean hasCustomPotionName()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable String getCustomPotionName()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCustomPotionName(@Nullable String s)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setBasePotionData(@Nullable PotionData data)
 	{
 		setBasePotionType(PotionUtils.fromBukkit(data));

@@ -4,6 +4,7 @@ import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
+import io.papermc.paper.entity.EntitySerializationFlag;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.registry.tag.TagKey;
@@ -350,6 +351,12 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
+	public byte @NotNull [] serializeEntity(@NotNull Entity entity, @NotNull EntitySerializationFlag... entitySerializationFlags)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Entity deserializeEntity(byte[] data, World world)
 	{
 		return UnsafeValues.super.deserializeEntity(data, world);
@@ -359,6 +366,12 @@ public class UnsafeValuesMock implements UnsafeValues
 	public Entity deserializeEntity(byte[] data, World world, boolean preserveUUID)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Entity deserializeEntity(byte @NotNull [] bytes, @NotNull World world, boolean b, boolean b1)
+	{
 		throw new UnimplementedOperationException();
 	}
 

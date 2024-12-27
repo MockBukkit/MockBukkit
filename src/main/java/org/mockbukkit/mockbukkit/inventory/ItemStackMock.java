@@ -36,7 +36,7 @@ public class ItemStackMock extends ItemStack
 	private short durability = -1;
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
-	private static final String ITEMMETA_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
+	private static final String ITEM_META_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
 
 	//Utility
 	protected ItemStackMock()
@@ -403,7 +403,7 @@ public class ItemStackMock extends ItemStack
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new ItemMetaInitException(ITEMMETA_INITIALIZATION_ERROR + itemMetaClass, e);
+				throw new ItemMetaInitException(ITEM_META_INITIALIZATION_ERROR + itemMetaClass, e);
 			}
 		}
 		return new ItemMetaMock();

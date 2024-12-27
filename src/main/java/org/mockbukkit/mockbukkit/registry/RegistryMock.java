@@ -6,6 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.tag.Tag;
+import io.papermc.paper.registry.tag.TagKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -44,8 +46,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -184,6 +188,30 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		Preconditions.checkNotNull(key);
 		loadIfEmpty();
 		return keyedMap.get(key);
+	}
+
+	@Override
+	public @org.jspecify.annotations.Nullable NamespacedKey getKey(T t)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasTag(TagKey<T> tagKey)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Tag<T> getTag(TagKey<T> tagKey)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Collection<Tag<T>> getTags()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
