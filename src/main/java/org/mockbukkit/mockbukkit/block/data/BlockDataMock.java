@@ -159,9 +159,9 @@ public class BlockDataMock implements BlockData
 	 *
 	 * @param property The state to test.
 	 */
-	protected void checkProperty(String property)
+	protected void checkProperty(BlockDataKey property)
 	{
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial());
+		Preconditions.checkState(property.appliesTo(this), property + " is not a valid property for " + getMaterial());
 	}
 	// endregion
 
@@ -178,7 +178,7 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		Preconditions.checkNotNull(value, "Value cannot be null");
 
-		checkProperty(key.key());
+		checkProperty(key);
 
 		this.data.put(key.key(), value);
 	}
@@ -196,7 +196,7 @@ public class BlockDataMock implements BlockData
 	protected <T> @NotNull T get(@NotNull BlockDataKey key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
-		checkProperty(key.key());
+		checkProperty(key);
 		T value = (T) this.data.get(key.key());
 		if (value == null)
 		{
