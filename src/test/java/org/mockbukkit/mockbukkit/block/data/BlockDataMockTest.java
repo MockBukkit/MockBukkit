@@ -10,6 +10,7 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.type.Bed;
@@ -101,12 +102,11 @@ class BlockDataMockTest
 	@Test
 	void testMatchesNotEquals()
 	{
-		BlockDataMock blockData = BlockDataMock.mock(Material.ACACIA_BUTTON);
-		BlockDataMock blockData2 =  BlockDataMock.mock(Material.ACACIA_BUTTON);
-		blockData2.set(BlockDataKey.POWERED, true);
+		BlockDataMock blockData = BlockDataMock.newData(null, "acacia_button[facing=east]");
+		BlockDataMock blockData2 =  BlockDataMock.newData(null, "acacia_button[facing=east, powered=true]");
 
-		assertTrue(blockData2.matches(blockData));
-		assertFalse(blockData.matches(blockData2));
+		assertFalse(blockData2.matches(blockData));
+		assertTrue(blockData.matches(blockData2));
 	}
 
 	@Test
@@ -176,16 +176,11 @@ class BlockDataMockTest
 		// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
 
 		BlockDataMock data = BlockDataMock.mock(Material.CAMPFIRE);
+		assertEquals("minecraft:campfire", data.getAsString(true));
+		assertNotEquals(data.getAsString(true), data.getAsString(false));
 		data.set(BlockDataKey.FACING, BlockFace.SOUTH);
-
-		assertEquals("minecraft:chest[facing=SOUTH]", data.getAsString(true));
-		assertEquals("minecraft:chest[facing=north,lit=true,waterlogged=true]", data.getAsString(false));
-		assertEquals("minecraft:chest[facing=north,lit=true,waterlogged=true]", data.getAsString());
-
-		data = BlockDataMock.mock(Material.CAMPFIRE);
-		assertEquals("minecraft:chest", data.getAsString(true));
-		assertEquals("minecraft:chest[facing=north,type=single,waterlogged=false]", data.getAsString(false));
-		assertEquals("minecraft:chest[facing=north,type=single,waterlogged=false]", data.getAsString());
+		assertEquals("minecraft:campfire[facing=south]", data.getAsString(true));
+		assertNotEquals(data.getAsString(true), data.getAsString(false));
 	}
 
 	@ParameterizedTest

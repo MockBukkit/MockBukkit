@@ -32,7 +32,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -229,13 +231,20 @@ public class BlockDataMock implements BlockData
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
-			if (!isFirst) stateString.append(',');
-
 			Object value = data.get(key);
+			if (value instanceof Enum<?> enumValue)
+			{
+				value = enumValue.name().toLowerCase(Locale.ROOT);
+			}
 			Object defaultValue = BlockDataMockRegistry.getInstance().getDefault(type, key);
-
-			if (hideUnspecified && value == defaultValue) continue;
-
+			if (hideUnspecified && Objects.equals(value, defaultValue))
+			{
+				continue;
+			}
+			if (!isFirst)
+			{
+				stateString.append(',');
+			}
 			stateString.append(key).append("=").append((value == null ? defaultValue : value).toString().toLowerCase());
 
 			isFirst = false;

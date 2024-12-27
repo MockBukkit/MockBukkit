@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -9,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.MockBukkit;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -88,24 +88,14 @@ public class BlockDataMockRegistry
 		return blockData.get(material);
 	}
 
-	public boolean isValidMaterialForBlock(@NotNull Material material)
-	{
-		return material.isBlock();
-	}
-
-	public boolean isValidStateForBlockWithMaterial(@NotNull Material material, @NotNull String state)
-	{
-		Map<String, Object> tmp = blockData.get(material);
-		if (tmp == null) return false;
-
-		return tmp.get(state) != null;
-	}
-
 	public @Nullable Object getDefault(@NotNull Material material, @NotNull String state)
 	{
-		Map<String, Object> bd = getBlockData(material);
-		if (bd == null) return null;
-		return bd.get(state);
+		Map<String, Object> blockData = getBlockData(material);
+		if (blockData == null)
+		{
+			return null;
+		}
+		return blockData.get(state);
 	}
 
 }
