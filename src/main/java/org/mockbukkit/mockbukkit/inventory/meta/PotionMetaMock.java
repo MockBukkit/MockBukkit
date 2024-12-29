@@ -32,6 +32,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	private @Nullable PotionType type;
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
 	private @Nullable Color color;
+	private @Nullable String customName;
 
 	/**
 	 * Constructs a new {@link PotionMetaMock}.
@@ -204,24 +205,42 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public boolean hasCustomName()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.hasCustomPotionName();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @Nullable String getCustomName()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getCustomPotionName();
 	}
 
 	@Override
-	public void setCustomName(@Nullable String s)
+	@Deprecated(forRemoval = true)
+	public void setCustomName(@Nullable String customName)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setCustomPotionName(customName);
+	}
+
+	@Override
+	public boolean hasCustomPotionName()
+	{
+		return this.customName != null;
+	}
+
+	@Override
+	public @Nullable String getCustomPotionName()
+	{
+		return this.customName;
+	}
+
+	@Override
+	public void setCustomPotionName(@Nullable String customName)
+	{
+		this.customName = customName;
 	}
 
 	@Override
