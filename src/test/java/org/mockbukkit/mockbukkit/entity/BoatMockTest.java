@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.boat.OakBoatMock;
 
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -33,9 +34,9 @@ class BoatMockTest
 	Boat boat;
 
 	@BeforeEach
-	void setuo()
+	void setup()
 	{
-		this.boat = new BoatMock(serverMock, UUID.randomUUID());
+		this.boat = new OakBoatMock(serverMock, UUID.randomUUID());
 	}
 
 	@Test

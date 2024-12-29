@@ -66,14 +66,12 @@ import org.mockbukkit.mockbukkit.entity.BatMock;
 import org.mockbukkit.mockbukkit.entity.BeeMock;
 import org.mockbukkit.mockbukkit.entity.BlazeMock;
 import org.mockbukkit.mockbukkit.entity.BlockDisplayMock;
-import org.mockbukkit.mockbukkit.entity.BoatMock;
 import org.mockbukkit.mockbukkit.entity.BoggedMock;
 import org.mockbukkit.mockbukkit.entity.BreezeMock;
 import org.mockbukkit.mockbukkit.entity.BreezeWindChargeMock;
 import org.mockbukkit.mockbukkit.entity.CamelMock;
 import org.mockbukkit.mockbukkit.entity.CatMock;
 import org.mockbukkit.mockbukkit.entity.CaveSpiderMock;
-import org.mockbukkit.mockbukkit.entity.ChestBoatMock;
 import org.mockbukkit.mockbukkit.entity.ChickenMock;
 import org.mockbukkit.mockbukkit.entity.CodMock;
 import org.mockbukkit.mockbukkit.entity.CommandMinecartMock;
@@ -168,6 +166,26 @@ import org.mockbukkit.mockbukkit.entity.ZoglinMock;
 import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
 import org.mockbukkit.mockbukkit.entity.ZombieVillagerMock;
+import org.mockbukkit.mockbukkit.entity.boat.AcaciaBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.AcaciaChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.BambooChestRaftMock;
+import org.mockbukkit.mockbukkit.entity.boat.BambooRaftMock;
+import org.mockbukkit.mockbukkit.entity.boat.BirchBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.BirchChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.CherryBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.CherryChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.DarkOakBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.DarkOakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.JungleBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.JungleChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.MangroveBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.MangroveChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.OakBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.OakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.PaleOakBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.PaleOakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.SpruceBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.SpruceChestBoatMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.opentest4j.AssertionFailedError;
@@ -1355,8 +1373,28 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.CHEST_MINECART, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
-				Arguments.of(EntityType.OAK_BOAT, BoatMock.class),
-				Arguments.of(EntityType.OAK_CHEST_BOAT, ChestBoatMock.class),
+				// Boats
+				Arguments.of(EntityType.ACACIA_BOAT, AcaciaBoatMock.class),
+				Arguments.of(EntityType.ACACIA_CHEST_BOAT, AcaciaChestBoatMock.class),
+				Arguments.of(EntityType.BAMBOO_RAFT, BambooRaftMock.class),
+				Arguments.of(EntityType.BAMBOO_CHEST_RAFT, BambooChestRaftMock.class),
+				Arguments.of(EntityType.BIRCH_BOAT, BirchBoatMock.class),
+				Arguments.of(EntityType.BIRCH_CHEST_BOAT, BirchChestBoatMock.class),
+				Arguments.of(EntityType.CHERRY_BOAT, CherryBoatMock.class),
+				Arguments.of(EntityType.CHERRY_CHEST_BOAT, CherryChestBoatMock.class),
+				Arguments.of(EntityType.DARK_OAK_BOAT, DarkOakBoatMock.class),
+				Arguments.of(EntityType.DARK_OAK_CHEST_BOAT, DarkOakChestBoatMock.class),
+				Arguments.of(EntityType.JUNGLE_BOAT, JungleBoatMock.class),
+				Arguments.of(EntityType.JUNGLE_CHEST_BOAT, JungleChestBoatMock.class),
+				Arguments.of(EntityType.MANGROVE_BOAT, MangroveBoatMock.class),
+				Arguments.of(EntityType.MANGROVE_CHEST_BOAT, MangroveChestBoatMock.class),
+				Arguments.of(EntityType.OAK_BOAT, OakBoatMock.class),
+				Arguments.of(EntityType.OAK_CHEST_BOAT, OakChestBoatMock.class),
+				Arguments.of(EntityType.PALE_OAK_BOAT, PaleOakBoatMock.class),
+				Arguments.of(EntityType.PALE_OAK_CHEST_BOAT, PaleOakChestBoatMock.class),
+				Arguments.of(EntityType.SPRUCE_BOAT, SpruceBoatMock.class),
+				Arguments.of(EntityType.SPRUCE_CHEST_BOAT, SpruceChestBoatMock.class),
+				//
 				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class),
 				Arguments.of(EntityType.FISHING_BOBBER, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
