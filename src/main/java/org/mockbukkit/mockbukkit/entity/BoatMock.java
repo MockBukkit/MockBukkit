@@ -21,10 +21,8 @@ import java.util.UUID;
  */
 public class BoatMock extends VehicleMock implements Boat
 {
-
-	private @NotNull Type boatType = Type.OAK;
 	private double maxSpeed = 0.4D;
-	private double ocupiedDeceleration = 0.2D;
+	private double occupiedDeceleration = 0.2D;
 	private double unoccupiedDeceleration = -1;
 	private boolean workOnLand = false;
 
@@ -40,63 +38,100 @@ public class BoatMock extends VehicleMock implements Boat
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public @NotNull TreeSpecies getWoodType()
 	{
-		return switch (boatType)
-		{
-			case SPRUCE -> TreeSpecies.REDWOOD;
-			case BIRCH -> TreeSpecies.BIRCH;
-			case JUNGLE -> TreeSpecies.JUNGLE;
-			case ACACIA -> TreeSpecies.ACACIA;
-			case DARK_OAK -> TreeSpecies.DARK_OAK;
-			default -> TreeSpecies.GENERIC;
-		};
+		EntityType boatType = getType();
+		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT) {
+			return TreeSpecies.REDWOOD;
+		}
+
+		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT) {
+			return TreeSpecies.BIRCH;
+		}
+
+		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT) {
+			return TreeSpecies.JUNGLE;
+		}
+
+		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT) {
+			return TreeSpecies.ACACIA;
+		}
+
+		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT) {
+			return TreeSpecies.DARK_OAK;
+		}
+
+		return TreeSpecies.GENERIC;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public void setWoodType(@NotNull TreeSpecies species)
 	{
-		Preconditions.checkNotNull(species, "Species can not be null");
-		Type type;
-
-		type = switch (species)
-		{
-			case GENERIC -> Type.OAK;
-			case BIRCH -> Type.BIRCH;
-			case ACACIA -> Type.ACACIA;
-			case JUNGLE -> Type.JUNGLE;
-			case DARK_OAK -> Type.DARK_OAK;
-			case REDWOOD -> Type.SPRUCE;
-		};
-
-		this.boatType = type;
-
+		throw new UnsupportedOperationException("Not supported - you must spawn a new entity to change boat type.");
 	}
 
 	@Override
+	@Deprecated(since = "1.21.2")
 	public @NotNull Type getBoatType()
 	{
-		return this.boatType;
+		EntityType boatType = getType();
+		if (boatType == EntityType.OAK_BOAT || boatType == EntityType.OAK_CHEST_BOAT) {
+			return Type.OAK;
+		}
+
+		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT) {
+			return Type.BIRCH;
+		}
+
+		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT) {
+			return Type.ACACIA;
+		}
+
+		if (boatType == EntityType.CHERRY_BOAT || boatType == EntityType.CHERRY_CHEST_BOAT) {
+			return Type.CHERRY;
+		}
+
+		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT) {
+			return Type.JUNGLE;
+		}
+
+		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT) {
+			return Type.SPRUCE;
+		}
+
+		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT) {
+			return Type.DARK_OAK;
+		}
+
+		if (boatType == EntityType.MANGROVE_BOAT || boatType == EntityType.MANGROVE_CHEST_BOAT) {
+			return Type.MANGROVE;
+		}
+
+		if (boatType == EntityType.BAMBOO_RAFT || boatType == EntityType.BAMBOO_CHEST_RAFT) {
+			return Type.BAMBOO;
+		}
+
+		throw new EnumConstantNotPresentException(Type.class, boatType.toString());
 	}
 
 	@Override
+	@Deprecated(since = "1.21.2")
 	public void setBoatType(@NotNull Type type)
 	{
-		Preconditions.checkNotNull(type, "Type cannot be null");
-		this.boatType = type;
+		throw new UnsupportedOperationException("Not supported - you must spawn a new entity to change boat type.");
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public double getMaxSpeed()
 	{
 		return this.maxSpeed;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public void setMaxSpeed(double speed)
 	{
 		Preconditions.checkArgument(speed >= 0.0D, "Speed cannot be negative");
@@ -104,43 +139,43 @@ public class BoatMock extends VehicleMock implements Boat
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public double getOccupiedDeceleration()
 	{
-		return this.ocupiedDeceleration;
+		return this.occupiedDeceleration;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public void setOccupiedDeceleration(double rate)
 	{
 		Preconditions.checkArgument(rate >= 0.0D, "Rate cannot be negative");
-		this.ocupiedDeceleration = rate;
+		this.occupiedDeceleration = rate;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public double getUnoccupiedDeceleration()
 	{
 		return this.unoccupiedDeceleration;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public void setUnoccupiedDeceleration(double rate)
 	{
 		this.unoccupiedDeceleration = rate;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public boolean getWorkOnLand()
 	{
 		return workOnLand;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public void setWorkOnLand(boolean workOnLand)
 	{
 		this.workOnLand = workOnLand;
@@ -156,7 +191,7 @@ public class BoatMock extends VehicleMock implements Boat
 	@Override
 	public @NotNull Material getBoatMaterial()
 	{
-		return switch (boatType)
+		return switch (getBoatType())
 		{
 			case OAK -> Material.OAK_BOAT;
 			case SPRUCE -> Material.SPRUCE_BOAT;
