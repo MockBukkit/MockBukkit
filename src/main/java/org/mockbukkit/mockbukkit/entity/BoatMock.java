@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
@@ -11,9 +9,16 @@ import org.bukkit.entity.EntityType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Boat}.
+ *
+ * @see VehicleMock
+ */
 public class BoatMock extends VehicleMock implements Boat
 {
 

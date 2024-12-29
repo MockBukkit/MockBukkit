@@ -112,6 +112,26 @@ import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
 import org.bukkit.entity.ZombieVillager;
+import org.bukkit.entity.boat.AcaciaBoat;
+import org.bukkit.entity.boat.AcaciaChestBoat;
+import org.bukkit.entity.boat.BambooChestRaft;
+import org.bukkit.entity.boat.BambooRaft;
+import org.bukkit.entity.boat.BirchBoat;
+import org.bukkit.entity.boat.BirchChestBoat;
+import org.bukkit.entity.boat.CherryBoat;
+import org.bukkit.entity.boat.CherryChestBoat;
+import org.bukkit.entity.boat.DarkOakBoat;
+import org.bukkit.entity.boat.DarkOakChestBoat;
+import org.bukkit.entity.boat.JungleBoat;
+import org.bukkit.entity.boat.JungleChestBoat;
+import org.bukkit.entity.boat.MangroveBoat;
+import org.bukkit.entity.boat.MangroveChestBoat;
+import org.bukkit.entity.boat.OakBoat;
+import org.bukkit.entity.boat.OakChestBoat;
+import org.bukkit.entity.boat.PaleOakBoat;
+import org.bukkit.entity.boat.PaleOakChestBoat;
+import org.bukkit.entity.boat.SpruceBoat;
+import org.bukkit.entity.boat.SpruceChestBoat;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.entity.minecart.HopperMinecart;
@@ -123,6 +143,26 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.boat.AcaciaBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.AcaciaChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.BambooChestRaftMock;
+import org.mockbukkit.mockbukkit.entity.boat.BambooRaftMock;
+import org.mockbukkit.mockbukkit.entity.boat.BirchBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.BirchChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.CherryBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.CherryChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.DarkOakBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.DarkOakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.JungleBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.JungleChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.MangroveBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.MangroveChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.OakBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.OakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.PaleOakBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.PaleOakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.SpruceBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.SpruceChestBoatMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collections;
@@ -150,29 +190,39 @@ public final class EntityTypesMock
 	public static Builder withDefaults()
 	{
 		return builder()
+			.register(AcaciaBoat.class, AcaciaBoatMock.class, AcaciaBoatMock::new)
+			.register(AcaciaChestBoat.class, AcaciaChestBoatMock.class, AcaciaChestBoatMock::new)
 			.register(Allay.class, AllayMock.class, AllayMock::new)
 			.register(AreaEffectCloud.class, AreaEffectCloudMock.class, AreaEffectCloudMock::new)
 			.register(Armadillo.class, ArmadilloMock.class, ArmadilloMock::new)
 			.register(ArmorStand.class, ArmorStandMock.class, ArmorStandMock::new)
 			.register(Arrow.class, ArrowMock.class, ArrowMock::new)
 			.register(Axolotl.class, AxolotlMock.class, AxolotlMock::new)
+			.register(BambooChestRaft.class, BambooChestRaftMock.class, BambooChestRaftMock::new)
+			.register(BambooRaft.class, BambooRaftMock.class, BambooRaftMock::new)
 			.register(Bat.class, BatMock.class, BatMock::new)
 			.register(Bee.class, BeeMock.class, BeeMock::new)
+			.register(BirchBoat.class, BirchBoatMock.class, BirchBoatMock::new)
+			.register(BirchChestBoat.class, BirchChestBoatMock.class, BirchChestBoatMock::new)
 			.register(Blaze.class, BlazeMock.class, BlazeMock::new)
 			.register(BlockDisplay.class, BlockDisplayMock.class, BlockDisplayMock::new)
-			.register(Boat.class, BoatMock.class, BoatMock::new)
+			.register(Boat.class, OakBoatMock.class, OakBoatMock::new)
 			.register(Bogged.class, BoggedMock.class, BoggedMock::new)
 			.register(Breeze.class, BreezeMock.class, BreezeMock::new)
 			.register(BreezeWindCharge.class, BreezeWindChargeMock.class, BreezeWindChargeMock::new)
 			.register(Camel.class, CamelMock.class, CamelMock::new)
 			.register(Cat.class, CatMock.class, CatMock::new)
 			.register(CaveSpider.class, CaveSpiderMock.class, CaveSpiderMock::new)
-			.register(ChestBoat.class, ChestBoatMock.class, ChestBoatMock::new)
+			.register(CherryBoat.class, CherryBoatMock.class, CherryBoatMock::new)
+			.register(CherryChestBoat.class, CherryChestBoatMock.class, CherryChestBoatMock::new)
+			.register(ChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 			.register(Chicken.class, ChickenMock.class, ChickenMock::new)
 			.register(Cod.class, CodMock.class, CodMock::new)
 			.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
 			.register(Cow.class, CowMock.class, CowMock::new)
 			.register(Creeper.class, CreeperMock.class, CreeperMock::new)
+			.register(DarkOakBoat.class, DarkOakBoatMock.class, DarkOakBoatMock::new)
+			.register(DarkOakChestBoat.class, DarkOakChestBoatMock.class, DarkOakChestBoatMock::new)
 			.register(Dolphin.class, DolphinMock.class, DolphinMock::new)
 			.register(Donkey.class, DonkeyMock.class, DonkeyMock::new)
 			.register(DragonFireball.class, DragonFireballMock.class, DragonFireballMock::new)
@@ -209,15 +259,23 @@ public final class EntityTypesMock
 			.register(IronGolem.class, IronGolemMock.class, IronGolemMock::new)
 			.register(ItemDisplay.class, ItemDisplayMock.class, ItemDisplayMock::new)
 			.register(ItemFrame.class, ItemFrameMock.class, ItemFrameMock::new)
+			.register(JungleBoat.class, JungleBoatMock.class, JungleBoatMock::new)
+			.register(JungleChestBoat.class, JungleChestBoatMock.class, JungleChestBoatMock::new)
 			.register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new)
 			.register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new)
 			.register(Llama.class, LlamaMock.class, LlamaMock::new)
 			.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 			.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
+			.register(MangroveBoat.class, MangroveBoatMock.class, MangroveBoatMock::new)
+			.register(MangroveChestBoat.class, MangroveChestBoatMock.class, MangroveChestBoatMock::new)
 			.register(Marker.class, MarkerMock.class, MarkerMock::new)
 			.register(Mule.class, MuleMock.class, MuleMock::new)
 			.register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new)
+			.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
+			.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 			.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
+			.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
+			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 			.register(Panda.class, PandaMock.class, PandaMock::new)
 			.register(Parrot.class, ParrotMock.class, ParrotMock::new)
 			.register(Pig.class, PigMock.class, PigMock::new)
@@ -242,6 +300,8 @@ public final class EntityTypesMock
 			.register(SpawnerMinecart.class, SpawnerMinecartMock.class, SpawnerMinecartMock::new)
 			.register(SpectralArrow.class, SpectralArrowMock.class, SpectralArrowMock::new)
 			.register(Spider.class, SpiderMock.class, SpiderMock::new)
+			.register(SpruceBoat.class, SpruceBoatMock.class, SpruceBoatMock::new)
+			.register(SpruceChestBoat.class, SpruceChestBoatMock.class, SpruceChestBoatMock::new)
 			.register(Squid.class, SquidMock.class, SquidMock::new)
 			.register(StorageMinecart.class, StorageMinecartMock.class, StorageMinecartMock::new)
 			.register(Stray.class, StrayMock.class, StrayMock::new)
