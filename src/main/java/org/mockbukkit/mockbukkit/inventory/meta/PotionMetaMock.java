@@ -205,27 +205,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
-	public boolean hasCustomName()
-	{
-		return this.hasCustomPotionName();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public @Nullable String getCustomName()
-	{
-		return this.getCustomPotionName();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public void setCustomName(@Nullable String customName)
-	{
-		this.setCustomPotionName(customName);
-	}
-
-	@Override
 	public boolean hasCustomPotionName()
 	{
 		return this.customName != null;
