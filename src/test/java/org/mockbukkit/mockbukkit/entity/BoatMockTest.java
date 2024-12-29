@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
 import org.bukkit.entity.Boat;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,12 +18,14 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.boat.OakBoatMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -53,10 +57,10 @@ class BoatMockTest
 
 	@ParameterizedTest
 	@EnumSource(TreeSpecies.class)
-	void testSetWoodType(TreeSpecies species)
+	void setWoodType_isNoLongerSupported(TreeSpecies species)
 	{
-		boat.setWoodType(species);
-		assertEquals(species, boat.getWoodType());
+		UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> boat.setWoodType(species));
+		assertEquals("Not supported - you must spawn a new entity to change boat type.", e.getMessage());
 	}
 
 	@Test
@@ -65,11 +69,12 @@ class BoatMockTest
 		assertEquals(Boat.Type.OAK, boat.getBoatType());
 	}
 
-	@Test
-	void testSetBoatType()
+	@ParameterizedTest
+	@EnumSource(Boat.Type.class)
+	void setBoatType_isNoLongerSupported(Boat.Type type)
 	{
-		boat.setBoatType(Boat.Type.BIRCH);
-		assertEquals(Boat.Type.BIRCH, boat.getBoatType());
+		UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> boat.setBoatType(type));
+		assertEquals("Not supported - you must spawn a new entity to change boat type.", e.getMessage());
 	}
 
 	@Test
@@ -148,24 +153,38 @@ class BoatMockTest
 
 	@ParameterizedTest
 	@MethodSource
-	void testGetBoatMaterial(Boat.Type type, Material material)
+	void testGetBoatMaterial(EntityType entityType, Material material)
 	{
-		boat.setBoatType(type);
-		assertEquals(material, boat.getBoatMaterial());
+		WorldMock world = serverMock.addSimpleWorld("test");
+		Entity actualEntity = world.spawnEntity(new Location(world, 0, 0, 0), entityType);
+
+		BoatMock actualBoat = assertInstanceOf(BoatMock.class, actualEntity);
+		assertEquals(material, actualBoat.getBoatMaterial());
 	}
 
 	public static @NotNull Stream<Arguments> testGetBoatMaterial()
 	{
 		return Stream.of(
-				Arguments.of(Boat.Type.OAK, Material.OAK_BOAT),
-				Arguments.of(Boat.Type.BIRCH, Material.BIRCH_BOAT),
-				Arguments.of(Boat.Type.ACACIA, Material.ACACIA_BOAT),
-				Arguments.of(Boat.Type.SPRUCE, Material.SPRUCE_BOAT),
-				Arguments.of(Boat.Type.JUNGLE, Material.JUNGLE_BOAT),
-				Arguments.of(Boat.Type.BAMBOO, Material.BAMBOO_RAFT),
-				Arguments.of(Boat.Type.CHERRY, Material.CHERRY_BOAT),
-				Arguments.of(Boat.Type.DARK_OAK, Material.DARK_OAK_BOAT),
-				Arguments.of(Boat.Type.MANGROVE, Material.MANGROVE_BOAT)
+				// Normal boat
+				Arguments.of(EntityType.OAK_BOAT, Material.OAK_BOAT),
+				Arguments.of(EntityType.BIRCH_BOAT, Material.BIRCH_BOAT),
+				Arguments.of(EntityType.ACACIA_BOAT, Material.ACACIA_BOAT),
+				Arguments.of(EntityType.SPRUCE_BOAT, Material.SPRUCE_BOAT),
+				Arguments.of(EntityType.JUNGLE_BOAT, Material.JUNGLE_BOAT),
+				Arguments.of(EntityType.BAMBOO_RAFT, Material.BAMBOO_RAFT),
+				Arguments.of(EntityType.CHERRY_BOAT, Material.CHERRY_BOAT),
+				Arguments.of(EntityType.DARK_OAK_BOAT, Material.DARK_OAK_BOAT),
+				Arguments.of(EntityType.MANGROVE_BOAT, Material.MANGROVE_BOAT),
+				// Chest boat
+				Arguments.of(EntityType.OAK_CHEST_BOAT, Material.OAK_CHEST_BOAT),
+				Arguments.of(EntityType.BIRCH_CHEST_BOAT, Material.BIRCH_CHEST_BOAT),
+				Arguments.of(EntityType.ACACIA_CHEST_BOAT, Material.ACACIA_CHEST_BOAT),
+				Arguments.of(EntityType.SPRUCE_CHEST_BOAT, Material.SPRUCE_CHEST_BOAT),
+				Arguments.of(EntityType.JUNGLE_CHEST_BOAT, Material.JUNGLE_CHEST_BOAT),
+				Arguments.of(EntityType.BAMBOO_CHEST_RAFT, Material.BAMBOO_CHEST_RAFT),
+				Arguments.of(EntityType.CHERRY_CHEST_BOAT, Material.CHERRY_CHEST_BOAT),
+				Arguments.of(EntityType.DARK_OAK_CHEST_BOAT, Material.DARK_OAK_CHEST_BOAT),
+				Arguments.of(EntityType.MANGROVE_CHEST_BOAT, Material.MANGROVE_CHEST_BOAT)
 		);
 	}
 

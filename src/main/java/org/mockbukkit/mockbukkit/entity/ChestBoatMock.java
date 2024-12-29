@@ -1,8 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
+import org.bukkit.Material;
 import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -10,6 +8,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
 
 import java.util.UUID;
 
@@ -145,6 +146,23 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Material getBoatMaterial()
+	{
+		return switch (getBoatType())
+		{
+			case OAK -> Material.OAK_CHEST_BOAT;
+			case SPRUCE -> Material.SPRUCE_CHEST_BOAT;
+			case BIRCH -> Material.BIRCH_CHEST_BOAT;
+			case JUNGLE -> Material.JUNGLE_CHEST_BOAT;
+			case ACACIA -> Material.ACACIA_CHEST_BOAT;
+			case CHERRY -> Material.CHERRY_CHEST_BOAT;
+			case DARK_OAK -> Material.DARK_OAK_CHEST_BOAT;
+			case MANGROVE -> Material.MANGROVE_CHEST_BOAT;
+			case BAMBOO -> Material.BAMBOO_CHEST_RAFT;
+		};
 	}
 
 	@Override
