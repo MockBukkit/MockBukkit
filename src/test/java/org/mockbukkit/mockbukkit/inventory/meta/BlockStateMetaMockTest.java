@@ -167,6 +167,7 @@ public class BlockStateMetaMockTest
 	public static Stream<Arguments> getPossibleItemTypes()
 	{
 		return Stream.of(Material.values())
+				.filter(material -> !material.isLegacy())
 				.filter(m -> m.asItemType() != null)
 				.map(Arguments::of);
 	}
