@@ -16,7 +16,7 @@ import java.util.UUID;
 public class BambooChestRaftMock extends ChestBoatMock implements BambooChestRaft
 {
 
-    public BambooChestRaftMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public BambooChestRaftMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

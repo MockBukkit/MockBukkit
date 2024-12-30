@@ -26,4 +26,5 @@ public class AcaciaChestBoatMock extends ChestBoatMock implements AcaciaChestBoa
 	{
 		return EntityType.ACACIA_CHEST_BOAT;
 	}
+
 }

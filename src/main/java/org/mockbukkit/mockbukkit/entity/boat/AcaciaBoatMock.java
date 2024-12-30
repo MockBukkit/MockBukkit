@@ -16,7 +16,7 @@ import java.util.UUID;
 public class AcaciaBoatMock extends BoatMock implements AcaciaBoat
 {
 
-    public AcaciaBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public AcaciaBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

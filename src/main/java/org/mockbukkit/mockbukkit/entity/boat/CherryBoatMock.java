@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CherryBoatMock extends BoatMock implements CherryBoat
 {
 
-    public CherryBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public CherryBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

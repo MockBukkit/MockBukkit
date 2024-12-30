@@ -13,9 +13,10 @@ import java.util.UUID;
  *
  * @see ChestBoatMock
  */
-public class OakChestBoatMock extends ChestBoatMock implements OakChestBoat {
+public class OakChestBoatMock extends ChestBoatMock implements OakChestBoat
+{
 
-    public OakChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public OakChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

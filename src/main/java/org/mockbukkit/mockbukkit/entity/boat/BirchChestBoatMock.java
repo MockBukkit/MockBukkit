@@ -16,7 +16,7 @@ import java.util.UUID;
 public class BirchChestBoatMock extends ChestBoatMock implements BirchChestBoat
 {
 
-    public BirchChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public BirchChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

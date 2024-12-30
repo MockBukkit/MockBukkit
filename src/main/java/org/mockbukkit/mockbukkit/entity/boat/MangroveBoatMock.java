@@ -13,9 +13,10 @@ import java.util.UUID;
  *
  * @see BoatMock
  */
-public class MangroveBoatMock extends BoatMock implements MangroveBoat {
+public class MangroveBoatMock extends BoatMock implements MangroveBoat
+{
 
-    public MangroveBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public MangroveBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
