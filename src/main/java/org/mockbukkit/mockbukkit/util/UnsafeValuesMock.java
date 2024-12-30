@@ -495,12 +495,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public @Nullable DamageEffect getDamageEffect(@NotNull String key)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
 	{
 		return new DamageSourceBuilderMock(damageType);
