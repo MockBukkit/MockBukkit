@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.bukkit.Server;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -98,7 +99,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get())
 				.stream()
-				.filter(field -> field.getType() == ServerMock.class)
+				.filter(field -> Server.class.isAssignableFrom(field.getType()))
 				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
 				.toList();
 
