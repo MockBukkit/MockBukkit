@@ -18,8 +18,8 @@ public class BirchBoatMock extends BoatMock implements BirchBoat
 
     public BirchBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-        super(server, uuid);
-    }
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()

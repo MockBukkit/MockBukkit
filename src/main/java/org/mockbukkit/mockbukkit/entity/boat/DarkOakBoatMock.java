@@ -18,8 +18,8 @@ public class DarkOakBoatMock extends BoatMock implements DarkOakBoat
 
     public DarkOakBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-        super(server, uuid);
-    }
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()

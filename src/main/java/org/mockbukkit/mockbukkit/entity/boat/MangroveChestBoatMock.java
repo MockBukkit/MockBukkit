@@ -17,8 +17,8 @@ public class MangroveChestBoatMock extends ChestBoatMock implements MangroveChes
 
     public MangroveChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-        super(server, uuid);
-    }
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()

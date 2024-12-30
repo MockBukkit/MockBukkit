@@ -17,8 +17,8 @@ public class JungleChestBoatMock extends ChestBoatMock implements JungleChestBoa
 
     public JungleChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-        super(server, uuid);
-    }
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()

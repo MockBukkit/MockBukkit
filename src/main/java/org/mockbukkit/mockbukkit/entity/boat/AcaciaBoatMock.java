@@ -18,8 +18,8 @@ public class AcaciaBoatMock extends BoatMock implements AcaciaBoat
 
     public AcaciaBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-        super(server, uuid);
-    }
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()

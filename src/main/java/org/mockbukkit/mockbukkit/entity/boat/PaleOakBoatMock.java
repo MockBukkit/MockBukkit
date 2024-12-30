@@ -15,9 +15,10 @@ import java.util.UUID;
  */
 public class PaleOakBoatMock extends BoatMock implements PaleOakBoat {
 
-    public PaleOakBoatMock(@NotNull ServerMock server, @NotNull UUID uuid) {
-        super(server, uuid);
-    }
+    public PaleOakBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	{
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()

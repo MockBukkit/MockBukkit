@@ -17,8 +17,8 @@ public class MangroveBoatMock extends BoatMock implements MangroveBoat {
 
     public MangroveBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-        super(server, uuid);
-    }
+		super(server, uuid);
+	}
 
 	@Override
 	public @NotNull EntityType getType()
