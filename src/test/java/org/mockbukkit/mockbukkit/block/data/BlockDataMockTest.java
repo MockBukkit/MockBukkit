@@ -10,8 +10,6 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.BlockType;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.WallSign;
@@ -103,10 +101,10 @@ class BlockDataMockTest
 	void testMatchesNotEquals()
 	{
 		BlockDataMock blockData = BlockDataMock.newData(null, "acacia_button[facing=east]");
-		BlockDataMock blockData2 =  BlockDataMock.newData(null, "acacia_button[facing=east, powered=true]");
+		BlockDataMock blockData2 = BlockDataMock.newData(null, "acacia_button[facing=east, powered=true]");
 
-		assertFalse(blockData2.matches(blockData));
-		assertTrue(blockData.matches(blockData2));
+		assertTrue(blockData2.matches(blockData));
+		assertFalse(blockData.matches(blockData2));
 	}
 
 	@Test
@@ -253,6 +251,15 @@ class BlockDataMockTest
 	void deserialize_invalidInput(String serialized)
 	{
 		assertThrows(IllegalArgumentException.class, () -> BlockDataMock.newData(null, serialized));
+	}
+
+	@Test
+	void deserialize_missingFields()
+	{
+		BlockDataMock blockDataMock = BlockDataMock.newData(null, "minecraft:black_bed");
+		BedDataMock bedDataMock = (BedDataMock) blockDataMock;
+		System.out.println(bedDataMock.getFacing());
+		assertNotNull(bedDataMock.getFacing());
 	}
 
 	static Stream<Arguments> getValidSerializations() throws IOException

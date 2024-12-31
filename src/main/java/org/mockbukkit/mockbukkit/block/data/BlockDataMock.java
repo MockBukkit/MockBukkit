@@ -102,6 +102,7 @@ public class BlockDataMock implements BlockData
 		BlockDataMock blockData = BlockDataMock.mock(material);
 		if (blockDataString == null)
 		{
+			blockData.data.clear();
 			return blockData;
 		}
 		String[] blockDataArguments = blockDataString.split(",");
@@ -117,7 +118,7 @@ public class BlockDataMock implements BlockData
 			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
 			data.put(key, value);
 		}
-		blockData.data.putAll(data);
+		blockData.data = data;
 		return blockData;
 	}
 
@@ -202,7 +203,15 @@ public class BlockDataMock implements BlockData
 		T value = (T) this.data.get(key.key());
 		if (value == null)
 		{
-			value = (T) BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
+			Object temp = BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
+			if (temp instanceof String string)
+			{
+				value = (T) key.constructValue(string);
+			}
+			else
+			{
+				value = (T) temp;
+			}
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
