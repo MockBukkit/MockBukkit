@@ -49,6 +49,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerLocaleChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -97,6 +98,7 @@ import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
@@ -2670,4 +2672,13 @@ class PlayerMockTest
 		assertFalse(actual);
 	}
 
+	@Test
+	void locale_simulateClientLocaleChange()
+	{
+		player.setLocale(Locale.CHINESE);
+
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerLocaleChangeEvent.class, event -> event.locale().equals(Locale.CHINESE)));
+		assertEquals(Locale.CHINESE, player.locale());
+		assertEquals("zh", player.getLocale());
+	}
 }

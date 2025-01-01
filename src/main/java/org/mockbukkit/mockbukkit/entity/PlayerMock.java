@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Input;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.event.player.PlayerLocaleChangeEvent;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.PlayerListMock;
@@ -3403,6 +3404,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setLocale(@NotNull Locale locale)
 	{
 		Preconditions.checkNotNull(locale, "locale cannot be null");
+		if (locale.equals(this.locale))
+		{
+			return;
+		}
+		PlayerLocaleChangeEvent event = new PlayerLocaleChangeEvent(this, locale.toLanguageTag());
+		Bukkit.getPluginManager().callEvent(event);
 		this.locale = locale;
 	}
 
