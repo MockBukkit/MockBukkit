@@ -121,6 +121,7 @@ import org.mockbukkit.mockbukkit.entity.MarkerMock;
 import org.mockbukkit.mockbukkit.entity.MuleMock;
 import org.mockbukkit.mockbukkit.entity.MushroomCowMock;
 import org.mockbukkit.mockbukkit.entity.OcelotMock;
+import org.mockbukkit.mockbukkit.entity.PaintingMock;
 import org.mockbukkit.mockbukkit.entity.PandaMock;
 import org.mockbukkit.mockbukkit.entity.ParrotMock;
 import org.mockbukkit.mockbukkit.entity.PigMock;
@@ -1322,6 +1323,7 @@ class WorldMockTest
 				Arguments.of(EntityType.POLAR_BEAR, PolarBearMock.class),
 				Arguments.of(EntityType.VILLAGER, VillagerMock.class),
 				Arguments.of(EntityType.PIG, PigMock.class),
+				Arguments.of(EntityType.PAINTING, PaintingMock.class),
 				Arguments.of(EntityType.EGG, EggMock.class),
 				Arguments.of(EntityType.WOLF, WolfMock.class),
 				Arguments.of(EntityType.CREEPER, CreeperMock.class),

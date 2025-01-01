@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Art;
+import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -85,6 +86,13 @@ class PaintingMockTest
 			assertEquals(3, painting.getHeight());
 		}
 
+	}
+
+	@Test
+	void getType()
+	{
+		PaintingMock painting = new PaintingMock(server, UUID.randomUUID());
+		assertEquals(EntityType.PAINTING, painting.getType());
 	}
 
 }
