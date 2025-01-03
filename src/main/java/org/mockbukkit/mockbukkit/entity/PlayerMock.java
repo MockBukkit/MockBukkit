@@ -190,6 +190,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
+	private final Queue<Component> actionBar = new LinkedTransferQueue<>();
 
 	private final Set<BossBar> bossBars = new HashSet<>();
 
@@ -1570,6 +1571,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendActionBar(@NotNull Component component)
+	{
+		actionBar.add(component);
+	}
+
+	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
@@ -1591,6 +1598,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
 		// Pretend we sent the action bar.
+	}
+
+	/**
+	 * @return The next action bar sent to the player.
+	 */
+	public Component nextActionBar()
+	{
+		return actionBar.poll();
 	}
 
 	@Override

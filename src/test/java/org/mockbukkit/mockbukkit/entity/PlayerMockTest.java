@@ -2681,4 +2681,36 @@ class PlayerMockTest
 		assertEquals(Locale.CHINESE, player.locale());
 		assertEquals("zh", player.getLocale());
 	}
+
+	@Test
+	void sendActionBar()
+	{
+		net.kyori.adventure.text.TextComponent textComponent = Component.text("Hello world!");
+
+		player.sendActionBar(textComponent);
+
+		assertEquals(player.nextActionBar(), textComponent);
+	}
+
+	@Test
+	void sendActionBar_GivenNullComponentMessage()
+	{
+		assertThrows(NullPointerException.class, () -> player.sendActionBar((Component) null));
+	}
+
+	@Test
+	void sendMultipleActionBars()
+	{
+		net.kyori.adventure.text.TextComponent textComponent = Component.text("Hello world 1");
+		net.kyori.adventure.text.TextComponent textComponent2 = Component.text("Hello world 2");
+		net.kyori.adventure.text.TextComponent textComponent3 = Component.text("Hello world 3");
+
+		player.sendActionBar(textComponent);
+		player.sendActionBar(textComponent2);
+		player.sendActionBar(textComponent3);
+
+		assertEquals(player.nextActionBar(), textComponent);
+		assertEquals(player.nextActionBar(), textComponent2);
+		assertEquals(player.nextActionBar(), textComponent3);
+	}
 }
