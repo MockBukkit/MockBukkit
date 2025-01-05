@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class PaintingMockTest
@@ -24,6 +25,14 @@ class PaintingMockTest
 	@Nested
 	class GetArt
 	{
+		@Test
+		void givenNullArtShouldThrowException()
+		{
+			PaintingMock painting = new PaintingMock(server, UUID.randomUUID());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> painting.setArt(null));
+
+			assertEquals("Art cannot be null", e.getMessage());
+		}
 
 		@Test
 		void givenChangeInArtInConstructor()

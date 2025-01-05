@@ -59,7 +59,7 @@ public class PaintingMock extends HangingMock implements Painting
 	@Override
 	public boolean setArt(@NotNull Art art, boolean force)
 	{
-		Preconditions.checkArgument(art != null);
+		Preconditions.checkArgument(art != null, "Art cannot be null");
 
 		if (!force)
 		{
