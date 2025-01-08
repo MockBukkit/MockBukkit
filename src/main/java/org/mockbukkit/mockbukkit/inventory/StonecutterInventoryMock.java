@@ -24,12 +24,15 @@ public class StonecutterInventoryMock extends InventoryMock implements Stonecutt
 		super(holder, InventoryType.STONECUTTER);
 	}
 
+	protected StonecutterInventoryMock(@NotNull StonecutterInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	public @NotNull InventoryMock getSnapshot()
 	{
-		StonecutterInventoryMock inventory = new StonecutterInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new StonecutterInventoryMock(this);
 	}
 
 }

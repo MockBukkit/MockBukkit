@@ -6,6 +6,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BannerMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.BlockStateMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ColorableArmorMetaMock;
@@ -83,6 +84,10 @@ public class ItemFactoryMock implements ItemFactory
 				default -> ArmorMetaMock.class;
 			};
 		}
+		else if (BlockStateMetaMock.isAppropriateType(material))
+		{
+			return BlockStateMetaMock.class;
+		}
 		return switch (material)
 		{
 			case ARMOR_STAND -> ArmorStandMetaMock.class;
@@ -118,11 +123,18 @@ public class ItemFactoryMock implements ItemFactory
 		try
 		{
 			clazz = getItemMetaClass(material);
+			for (var ctor : clazz.getDeclaredConstructors())
+			{
+				if (ctor.getParameterCount() == 1 && ctor.getParameters()[0].getType() == Material.class)
+				{
+					return (ItemMeta) ctor.newInstance(material);
+				}
+			}
 			return clazz.getDeclaredConstructor().newInstance();
 		}
 		catch (ReflectiveOperationException e)
 		{
-			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
+			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'", e);
 		}
 	}
 

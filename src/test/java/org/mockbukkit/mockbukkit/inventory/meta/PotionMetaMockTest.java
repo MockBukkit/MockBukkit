@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
@@ -8,6 +7,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -150,4 +150,17 @@ class PotionMetaMockTest
 		meta.setBasePotionType(null);
 		assertNull(meta.getBasePotionType());
 	}
+
+	@Test
+	void setCustomPotionName()
+	{
+		PotionMeta meta = new PotionMetaMock();
+		assertNull(meta.getCustomPotionName());
+		assertFalse(meta.hasCustomPotionName());
+
+		meta.setCustomPotionName("Custom potion name");
+		assertEquals("Custom potion name", meta.getCustomPotionName());
+		assertTrue(meta.hasCustomPotionName());
+	}
+
 }

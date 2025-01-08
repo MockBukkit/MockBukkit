@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link Banner}.
@@ -23,7 +24,7 @@ import java.util.List;
 public class BannerStateMock extends TileStateMock implements Banner
 {
 
-	private DyeColor baseColor;
+	private @NotNull DyeColor baseColor;
 	private @NotNull List<Pattern> patterns = new ArrayList<>();
 	private @Nullable Component customName;
 
@@ -37,6 +38,7 @@ public class BannerStateMock extends TileStateMock implements Banner
 	{
 		super(material);
 		checkType(material, Tag.BANNERS);
+		baseColor = materialToDyeColor(material);
 	}
 
 	/**
@@ -49,6 +51,7 @@ public class BannerStateMock extends TileStateMock implements Banner
 	{
 		super(block);
 		checkType(block, Tag.BANNERS);
+		baseColor = materialToDyeColor(block.getType());
 	}
 
 	/**
@@ -66,6 +69,12 @@ public class BannerStateMock extends TileStateMock implements Banner
 
 	@Override
 	public @NotNull BannerStateMock getSnapshot()
+	{
+		return new BannerStateMock(this);
+	}
+
+	@Override
+	public @NotNull BannerStateMock copy()
 	{
 		return new BannerStateMock(this);
 	}
@@ -150,6 +159,59 @@ public class BannerStateMock extends TileStateMock implements Banner
 	public void setCustomName(@Nullable String name)
 	{
 		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof BannerStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return baseColor == that.baseColor && Objects.equals(patterns, that.patterns) && Objects.equals(customName, that.customName);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), baseColor, patterns, customName);
+	}
+
+	static DyeColor materialToDyeColor(Material material)
+	{
+		if (material == null)
+		{
+			return DyeColor.WHITE;
+		}
+
+		return switch (material)
+		{
+			case WHITE_BANNER -> DyeColor.WHITE;
+			case ORANGE_BANNER -> DyeColor.ORANGE;
+			case MAGENTA_BANNER -> DyeColor.MAGENTA;
+			case LIGHT_BLUE_BANNER -> DyeColor.LIGHT_BLUE;
+			case YELLOW_BANNER -> DyeColor.YELLOW;
+			case LIME_BANNER -> DyeColor.LIME;
+			case PINK_BANNER -> DyeColor.PINK;
+			case GRAY_BANNER -> DyeColor.GRAY;
+			case LIGHT_GRAY_BANNER -> DyeColor.LIGHT_GRAY;
+			case CYAN_BANNER -> DyeColor.CYAN;
+			case PURPLE_BANNER -> DyeColor.PURPLE;
+			case BLUE_BANNER -> DyeColor.BLUE;
+			case BROWN_BANNER -> DyeColor.BROWN;
+			case GREEN_BANNER -> DyeColor.GREEN;
+			case RED_BANNER -> DyeColor.RED;
+			case BLACK_BANNER -> DyeColor.BLACK;
+			default -> throw new IllegalArgumentException("Unknown banner material " + material.name());
+		};
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", baseColor=" + baseColor +
+				", patterns=" + patterns +
+				", customName=" + customName;
 	}
 
 }

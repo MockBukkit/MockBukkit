@@ -4,10 +4,11 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.TileState;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link TileState}.
@@ -66,6 +67,27 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	@Override
-	public abstract @NotNull BlockState getSnapshot();
+	public abstract @NotNull TileStateMock getSnapshot();
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof TileStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return Objects.equals(container, that.container);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), container);
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", container=" + container;
+	}
 
 }

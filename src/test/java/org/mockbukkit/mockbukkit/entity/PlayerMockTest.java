@@ -27,7 +27,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -50,6 +49,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerLocaleChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -78,13 +78,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
@@ -98,6 +98,7 @@ import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
@@ -108,7 +109,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -340,7 +340,7 @@ class PlayerMockTest
 	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
-		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
+		assertEquals(20.0, player.getAttribute(Attribute.MAX_HEALTH).getDefaultValue(), 0);
 	}
 
 	@Test
@@ -1603,14 +1603,7 @@ class PlayerMockTest
 	{
 		assertDoesNotThrow(() ->
 		{
-			player.sendBlockUpdate(player.getLocation(), new TileStateMock(Material.CHEST)
-			{
-				@Override
-				public @NotNull BlockState getSnapshot()
-				{
-					return new BlockStateMock(Material.CHEST);
-				}
-			});
+			player.sendBlockUpdate(player.getLocation(), new ChestStateMock(Material.CHEST));
 		});
 	}
 
@@ -1619,14 +1612,7 @@ class PlayerMockTest
 	{
 		Location location = player.getLocation();
 		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(location, null));
-		TileStateMock tileStateMock = new TileStateMock(Material.CHEST)
-		{
-			@Override
-			public @NotNull BlockState getSnapshot()
-			{
-				return new BlockStateMock(Material.CHEST);
-			}
-		};
+		TileStateMock tileStateMock = new ChestStateMock(Material.CHEST);
 		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, tileStateMock));
 	}
 
@@ -2686,4 +2672,45 @@ class PlayerMockTest
 		assertFalse(actual);
 	}
 
+	@Test
+	void locale_simulateClientLocaleChange()
+	{
+		player.setLocale(Locale.CHINESE);
+
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerLocaleChangeEvent.class, event -> event.locale().equals(Locale.CHINESE)));
+		assertEquals(Locale.CHINESE, player.locale());
+		assertEquals("zh", player.getLocale());
+	}
+
+	@Test
+	void sendActionBar()
+	{
+		net.kyori.adventure.text.TextComponent textComponent = Component.text("Hello world!");
+
+		player.sendActionBar(textComponent);
+
+		assertEquals(player.nextActionBar(), textComponent);
+	}
+
+	@Test
+	void sendActionBar_GivenNullComponentMessage()
+	{
+		assertThrows(NullPointerException.class, () -> player.sendActionBar((Component) null));
+	}
+
+	@Test
+	void sendMultipleActionBars()
+	{
+		net.kyori.adventure.text.TextComponent textComponent = Component.text("Hello world 1");
+		net.kyori.adventure.text.TextComponent textComponent2 = Component.text("Hello world 2");
+		net.kyori.adventure.text.TextComponent textComponent3 = Component.text("Hello world 3");
+
+		player.sendActionBar(textComponent);
+		player.sendActionBar(textComponent2);
+		player.sendActionBar(textComponent3);
+
+		assertEquals(player.nextActionBar(), textComponent);
+		assertEquals(player.nextActionBar(), textComponent2);
+		assertEquals(player.nextActionBar(), textComponent3);
+	}
 }

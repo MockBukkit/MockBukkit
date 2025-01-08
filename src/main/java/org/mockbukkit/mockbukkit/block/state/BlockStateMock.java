@@ -331,11 +331,20 @@ public class BlockStateMock implements BlockState
 		return this.blockData.clone();
 	}
 
+	/**
+	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class must override this method!
+	 *
+	 * @return A copy of this {@link BlockStateMock}.
+	 */
 	@Override
-	public @NotNull BlockState copy()
+	public @NotNull BlockStateMock copy()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.getClass() != BlockStateMock.class)
+		{
+			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+					" does not provide a .copy() implementation! This is a bug.");
+		}
+		return new BlockStateMock(this);
 	}
 
 	@Override
@@ -353,13 +362,18 @@ public class BlockStateMock implements BlockState
 	}
 
 	/**
-	 * This returns a copy of this {@link BlockStateMock}. Inheritents of this class should override this method!
+	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class must override this method!
 	 *
 	 * @return A snapshot of this {@link BlockStateMock}.
 	 */
 	@NotNull
-	public BlockState getSnapshot()
+	public BlockStateMock getSnapshot()
 	{
+		if (this.getClass() != BlockStateMock.class)
+		{
+			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+					" does not provide a .getSnapshot() implementation! This is a bug.");
+		}
 		return new BlockStateMock(this);
 	}
 
@@ -387,6 +401,36 @@ public class BlockStateMock implements BlockState
 		}
 		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 
+	}
+
+	// Implement toStringInternal() instead of overriding toString()
+	@Override
+	public String toString()
+	{
+		return this.getClass().getSimpleName() + '{' + toStringInternal() + '}';
+	}
+
+	/**
+	 * Provides the contents of {@link #toString()} .
+	 * <p>Implementors must call super as in the following example.</p>
+	 *
+	 * <pre>{@code
+	 *	@Override
+	 *	protected String toStringInternal()
+	 *	{
+	 *		return super.toStringInternal() +
+	 *				", member1=" + member1 +
+	 *				", member2=" + member2;
+	 *	}
+	 * }</pre>
+	 * @return Comma separated list of properties and values.
+	 */
+	protected String toStringInternal()
+	{
+		return "block=" + block +
+				", blockData=" + blockData +
+				", material=" + material +
+				", metadataTable=" + metadataTable;
 	}
 
 	/**

@@ -281,7 +281,7 @@ class ItemStackMockTest
 		Matcher matcher = CLASS_NAME_RE.matcher(metaClassString);
 		if (matcher.find())
 		{
-			return List.of("BlockStateMeta", "BlockDataMeta", "MusicInstrumentMeta").contains(matcher.group());
+			return List.of("BlockDataMeta", "MusicInstrumentMeta").contains(matcher.group());
 		}
 		else
 		{

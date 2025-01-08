@@ -1,21 +1,24 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -48,14 +52,14 @@ class InventoryMockTest
 	private InventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		inventory = new InventoryMock(null, 9, InventoryType.CHEST);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -695,4 +699,133 @@ class InventoryMockTest
 
 		assertEquals(expectedLocation, inventory.getLocation());
 	}
+
+	@Nested
+	class SetCustomTitle
+	{
+
+		@ParameterizedTest
+		@EnumSource(InventoryType.class)
+		void givenNullTitle(InventoryType type)
+		{
+			InventoryMock customInventory = new InventoryMock(null, type);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+
+			customInventory.setCustomTitle(null);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+		}
+
+		@ParameterizedTest
+		@EnumSource(InventoryType.class)
+		void givenCustomTitle(InventoryType type)
+		{
+			InventoryMock customInventory = new InventoryMock(null, type);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+
+			customInventory.setCustomTitle(Component.text("This is a custom title"));
+			assertEquals(Component.text("This is a custom title"), customInventory.getTitle());
+			assertEquals(Component.text("This is a custom title"), customInventory.getCustomTitle());
+
+			customInventory.setCustomTitle(null);
+			assertEquals(type.defaultTitle(), customInventory.getTitle());
+			assertNull(customInventory.getCustomTitle());
+		}
+
+	}
+
+	@Nested
+	class IsIdentical {
+
+		@MockBukkitInject
+		private ServerMock serverMock;
+
+		@Test
+		void givenItemChanges() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			assertIsIdentical(inventoryA, inventoryB);
+
+			inventoryA.addItem(ItemStack.of(Material.DIAMOND));
+			assertIsNotIdentical(inventoryA, inventoryB);
+
+			inventoryB.addItem(ItemStack.of(Material.DIAMOND));
+			assertIsIdentical(inventoryA, inventoryB);
+
+			inventoryA.addItem(ItemStack.of(Material.DIAMOND));
+			assertIsNotIdentical(inventoryA, inventoryB);
+		}
+
+		@Test
+		void givenDifferentTypes() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.DROPPER);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			assertIsNotIdentical(inventoryA, inventoryB);
+		}
+
+		@Test
+		void givenDifferentMaxSizes() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			assertIsIdentical(inventoryA, inventoryB);
+
+			inventoryA.setMaxStackSize(1);
+			inventoryB.setMaxStackSize(2);
+			assertIsNotIdentical(inventoryA, inventoryB);
+
+			inventoryA.setMaxStackSize(5);
+			inventoryB.setMaxStackSize(5);
+			assertIsIdentical(inventoryA, inventoryB);
+		}
+
+		@Test
+		void givenDifferentHolders() {
+
+			Player player = server.addPlayer();
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryC = new InventoryMock(player, InventoryType.CHEST);
+
+			assertIsIdentical(inventoryA, inventoryB);
+			assertIsNotIdentical(inventoryB, inventoryC);
+		}
+
+		@Test
+		void givenDifferentTitles() {
+
+			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
+			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
+
+			assertIsIdentical(inventoryA, inventoryB);
+
+			inventoryA.setCustomTitle(Component.text("This is a custom title"));
+			assertIsNotIdentical(inventoryA, inventoryB);
+		}
+
+		public static void assertIsIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB) {
+			if (inventoryA == null) {
+				assertNull(inventoryB);
+			} else
+			{
+				assertTrue(inventoryA.isIdentical(inventoryB));
+			}
+		}
+
+		public static void assertIsNotIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB) {
+			if (inventoryA == null) {
+				assertNotNull(inventoryB);
+			} else
+			{
+				assertFalse(inventoryA.isIdentical(inventoryB));
+			}
+		}
+
+	}
+
 }

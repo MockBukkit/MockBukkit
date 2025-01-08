@@ -1,128 +1,5 @@
 package org.mockbukkit.mockbukkit.world;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.entity.AllayMock;
-import org.mockbukkit.mockbukkit.entity.AreaEffectCloudMock;
-import org.mockbukkit.mockbukkit.entity.ArmadilloMock;
-import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
-import org.mockbukkit.mockbukkit.entity.ArrowMock;
-import org.mockbukkit.mockbukkit.entity.AxolotlMock;
-import org.mockbukkit.mockbukkit.entity.BatMock;
-import org.mockbukkit.mockbukkit.entity.BeeMock;
-import org.mockbukkit.mockbukkit.entity.BlazeMock;
-import org.mockbukkit.mockbukkit.entity.BlockDisplayMock;
-import org.mockbukkit.mockbukkit.entity.BoatMock;
-import org.mockbukkit.mockbukkit.entity.BoggedMock;
-import org.mockbukkit.mockbukkit.entity.BreezeMock;
-import org.mockbukkit.mockbukkit.entity.BreezeWindChargeMock;
-import org.mockbukkit.mockbukkit.entity.CamelMock;
-import org.mockbukkit.mockbukkit.entity.CatMock;
-import org.mockbukkit.mockbukkit.entity.CaveSpiderMock;
-import org.mockbukkit.mockbukkit.entity.ChestBoatMock;
-import org.mockbukkit.mockbukkit.entity.ChickenMock;
-import org.mockbukkit.mockbukkit.entity.CodMock;
-import org.mockbukkit.mockbukkit.entity.CommandMinecartMock;
-import org.mockbukkit.mockbukkit.entity.CowMock;
-import org.mockbukkit.mockbukkit.entity.CreeperMock;
-import org.mockbukkit.mockbukkit.entity.DolphinMock;
-import org.mockbukkit.mockbukkit.entity.DonkeyMock;
-import org.mockbukkit.mockbukkit.entity.DragonFireballMock;
-import org.mockbukkit.mockbukkit.entity.DrownedMock;
-import org.mockbukkit.mockbukkit.entity.EggMock;
-import org.mockbukkit.mockbukkit.entity.ElderGuardianMock;
-import org.mockbukkit.mockbukkit.entity.EnderCrystalMock;
-import org.mockbukkit.mockbukkit.entity.EnderDragonMock;
-import org.mockbukkit.mockbukkit.entity.EnderPearlMock;
-import org.mockbukkit.mockbukkit.entity.EnderSignalMock;
-import org.mockbukkit.mockbukkit.entity.EndermanMock;
-import org.mockbukkit.mockbukkit.entity.EndermiteMock;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.entity.EvokerFangsMock;
-import org.mockbukkit.mockbukkit.entity.EvokerMock;
-import org.mockbukkit.mockbukkit.entity.ExperienceOrbMock;
-import org.mockbukkit.mockbukkit.entity.ExplosiveMinecartMock;
-import org.mockbukkit.mockbukkit.entity.FallingBlockMock;
-import org.mockbukkit.mockbukkit.entity.FireworkMock;
-import org.mockbukkit.mockbukkit.entity.FishHookMock;
-import org.mockbukkit.mockbukkit.entity.FoxMock;
-import org.mockbukkit.mockbukkit.entity.FrogMock;
-import org.mockbukkit.mockbukkit.entity.GhastMock;
-import org.mockbukkit.mockbukkit.entity.GiantMock;
-import org.mockbukkit.mockbukkit.entity.GlowItemFrameMock;
-import org.mockbukkit.mockbukkit.entity.GlowSquidMock;
-import org.mockbukkit.mockbukkit.entity.GoatMock;
-import org.mockbukkit.mockbukkit.entity.GuardianMock;
-import org.mockbukkit.mockbukkit.entity.HopperMinecartMock;
-import org.mockbukkit.mockbukkit.entity.HorseMock;
-import org.mockbukkit.mockbukkit.entity.HuskMock;
-import org.mockbukkit.mockbukkit.entity.IllusionerMock;
-import org.mockbukkit.mockbukkit.entity.InteractionMock;
-import org.mockbukkit.mockbukkit.entity.IronGolemMock;
-import org.mockbukkit.mockbukkit.entity.ItemDisplayMock;
-import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
-import org.mockbukkit.mockbukkit.entity.ItemFrameMock;
-import org.mockbukkit.mockbukkit.entity.LargeFireballMock;
-import org.mockbukkit.mockbukkit.entity.LeashHitchMock;
-import org.mockbukkit.mockbukkit.entity.LlamaMock;
-import org.mockbukkit.mockbukkit.entity.LlamaSpitMock;
-import org.mockbukkit.mockbukkit.entity.MagmaCubeMock;
-import org.mockbukkit.mockbukkit.entity.MarkerMock;
-import org.mockbukkit.mockbukkit.entity.MobMock;
-import org.mockbukkit.mockbukkit.entity.MuleMock;
-import org.mockbukkit.mockbukkit.entity.MushroomCowMock;
-import org.mockbukkit.mockbukkit.entity.OcelotMock;
-import org.mockbukkit.mockbukkit.entity.PandaMock;
-import org.mockbukkit.mockbukkit.entity.ParrotMock;
-import org.mockbukkit.mockbukkit.entity.PigMock;
-import org.mockbukkit.mockbukkit.entity.PigZombieMock;
-import org.mockbukkit.mockbukkit.entity.PillagerMock;
-import org.mockbukkit.mockbukkit.entity.PolarBearMock;
-import org.mockbukkit.mockbukkit.entity.PoweredMinecartMock;
-import org.mockbukkit.mockbukkit.entity.PufferFishMock;
-import org.mockbukkit.mockbukkit.entity.RabbitMock;
-import org.mockbukkit.mockbukkit.entity.RavagerMock;
-import org.mockbukkit.mockbukkit.entity.RideableMinecartMock;
-import org.mockbukkit.mockbukkit.entity.SalmonMock;
-import org.mockbukkit.mockbukkit.entity.SheepMock;
-import org.mockbukkit.mockbukkit.entity.ShulkerMock;
-import org.mockbukkit.mockbukkit.entity.SilverfishMock;
-import org.mockbukkit.mockbukkit.entity.SkeletonHorseMock;
-import org.mockbukkit.mockbukkit.entity.SkeletonMock;
-import org.mockbukkit.mockbukkit.entity.SlimeMock;
-import org.mockbukkit.mockbukkit.entity.SmallFireballMock;
-import org.mockbukkit.mockbukkit.entity.SnowballMock;
-import org.mockbukkit.mockbukkit.entity.SnowmanMock;
-import org.mockbukkit.mockbukkit.entity.SpawnerMinecartMock;
-import org.mockbukkit.mockbukkit.entity.SpectralArrowMock;
-import org.mockbukkit.mockbukkit.entity.SpiderMock;
-import org.mockbukkit.mockbukkit.entity.SquidMock;
-import org.mockbukkit.mockbukkit.entity.StorageMinecartMock;
-import org.mockbukkit.mockbukkit.entity.StrayMock;
-import org.mockbukkit.mockbukkit.entity.TadpoleMock;
-import org.mockbukkit.mockbukkit.entity.ThrownExpBottleMock;
-import org.mockbukkit.mockbukkit.entity.ThrownPotionMock;
-import org.mockbukkit.mockbukkit.entity.TridentMock;
-import org.mockbukkit.mockbukkit.entity.TropicalFishMock;
-import org.mockbukkit.mockbukkit.entity.TurtleMock;
-import org.mockbukkit.mockbukkit.entity.VindicatorMock;
-import org.mockbukkit.mockbukkit.entity.WardenMock;
-import org.mockbukkit.mockbukkit.entity.WindChargeMock;
-import org.mockbukkit.mockbukkit.entity.WitchMock;
-import org.mockbukkit.mockbukkit.entity.WitherMock;
-import org.mockbukkit.mockbukkit.entity.WitherSkeletonMock;
-import org.mockbukkit.mockbukkit.entity.WitherSkullMock;
-import org.mockbukkit.mockbukkit.entity.WolfMock;
-import org.mockbukkit.mockbukkit.entity.ZoglinMock;
-import org.mockbukkit.mockbukkit.entity.ZombieHorseMock;
-import org.mockbukkit.mockbukkit.entity.ZombieMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
-import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.block.fluid.FluidData;
@@ -163,129 +40,22 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Allay;
 import org.bukkit.entity.Animals;
-import org.bukkit.entity.AreaEffectCloud;
-import org.bukkit.entity.Armadillo;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Axolotl;
-import org.bukkit.entity.Bat;
-import org.bukkit.entity.Bee;
-import org.bukkit.entity.Blaze;
-import org.bukkit.entity.BlockDisplay;
-import org.bukkit.entity.Boat;
-import org.bukkit.entity.Bogged;
-import org.bukkit.entity.Breeze;
-import org.bukkit.entity.BreezeWindCharge;
-import org.bukkit.entity.Camel;
-import org.bukkit.entity.Cat;
-import org.bukkit.entity.CaveSpider;
-import org.bukkit.entity.ChestBoat;
-import org.bukkit.entity.Chicken;
-import org.bukkit.entity.Cod;
-import org.bukkit.entity.Cow;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Dolphin;
-import org.bukkit.entity.Donkey;
-import org.bukkit.entity.DragonFireball;
-import org.bukkit.entity.Drowned;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.ElderGuardian;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.EnderDragon;
-import org.bukkit.entity.EnderPearl;
-import org.bukkit.entity.EnderSignal;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Evoker;
-import org.bukkit.entity.EvokerFangs;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.FishHook;
-import org.bukkit.entity.Fox;
-import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
-import org.bukkit.entity.Giant;
-import org.bukkit.entity.GlowItemFrame;
-import org.bukkit.entity.GlowSquid;
-import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
-import org.bukkit.entity.Guardian;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Husk;
-import org.bukkit.entity.Illusioner;
-import org.bukkit.entity.Interaction;
-import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Item;
-import org.bukkit.entity.ItemDisplay;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.entity.LargeFireball;
-import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Llama;
-import org.bukkit.entity.LlamaSpit;
-import org.bukkit.entity.MagmaCube;
-import org.bukkit.entity.Marker;
 import org.bukkit.entity.Monster;
-import org.bukkit.entity.Mule;
-import org.bukkit.entity.MushroomCow;
-import org.bukkit.entity.Ocelot;
-import org.bukkit.entity.Panda;
-import org.bukkit.entity.Parrot;
-import org.bukkit.entity.Pig;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Pillager;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.PufferFish;
-import org.bukkit.entity.Rabbit;
-import org.bukkit.entity.Ravager;
-import org.bukkit.entity.Salmon;
-import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Shulker;
-import org.bukkit.entity.Silverfish;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
-import org.bukkit.entity.SmallFireball;
-import org.bukkit.entity.Snowball;
-import org.bukkit.entity.Snowman;
 import org.bukkit.entity.SpawnCategory;
-import org.bukkit.entity.SpectralArrow;
-import org.bukkit.entity.Spider;
-import org.bukkit.entity.Squid;
-import org.bukkit.entity.Stray;
-import org.bukkit.entity.Tadpole;
-import org.bukkit.entity.ThrownExpBottle;
-import org.bukkit.entity.ThrownPotion;
-import org.bukkit.entity.Trident;
-import org.bukkit.entity.TropicalFish;
-import org.bukkit.entity.Turtle;
-import org.bukkit.entity.Vindicator;
-import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
-import org.bukkit.entity.WindCharge;
-import org.bukkit.entity.Witch;
-import org.bukkit.entity.Wither;
-import org.bukkit.entity.WitherSkeleton;
-import org.bukkit.entity.WitherSkull;
-import org.bukkit.entity.Wolf;
-import org.bukkit.entity.Zoglin;
-import org.bukkit.entity.Zombie;
-import org.bukkit.entity.ZombieHorse;
-import org.bukkit.entity.minecart.CommandMinecart;
-import org.bukkit.entity.minecart.ExplosiveMinecart;
-import org.bukkit.entity.minecart.HopperMinecart;
-import org.bukkit.entity.minecart.PoweredMinecart;
-import org.bukkit.entity.minecart.RideableMinecart;
-import org.bukkit.entity.minecart.SpawnerMinecart;
-import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -309,8 +79,22 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.EntityTypesMock;
+import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
+import org.mockbukkit.mockbukkit.entity.MobMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
+import org.mockbukkit.mockbukkit.metadata.MetadataTable;
+import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -356,6 +140,7 @@ public class WorldMock implements World
 
 	private String name = "World";
 	private Location spawnLocation;
+	private long gameTime = 0;
 	private long fullTime = 0;
 	private int weatherDuration;
 	private boolean thundering;
@@ -373,6 +158,7 @@ public class WorldMock implements World
 	private boolean pvp;
 	private boolean hardcore;
 	private boolean getKeepSpawnInMemory = true;
+	private boolean generateStructures = true;
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
@@ -472,6 +258,7 @@ public class WorldMock implements World
 		this.worldType = creator.type();
 		this.seed = creator.seed();
 		this.environment = creator.environment();
+		this.generateStructures = creator.generateStructures();
 	}
 
 	/**
@@ -1179,460 +966,8 @@ public class WorldMock implements World
 	private <T extends Entity> @NotNull EntityMock mockEntity(@NotNull Class<T> clazz)
 	{
 		AsyncCatcher.catchOp("entity add");
-		if (clazz == ArmorStand.class)
-		{
-			return new ArmorStandMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ExperienceOrb.class)
-		{
-			return new ExperienceOrbMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Firework.class)
-		{
-			return new FireworkMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Item.class)
-		{
-			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		}
-		else if (clazz == FishHook.class)
-		{
-			return new FishHookMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Player.class)
-		{
-			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
-		}
-		else if (clazz == Drowned.class)
-		{
-			return new DrownedMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Zombie.class)
-		{
-			return new ZombieMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Enderman.class)
-		{
-			return new EndermanMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Horse.class)
-		{
-			return new HorseMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Sheep.class)
-		{
-			return new SheepMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Allay.class)
-		{
-			return new AllayMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Warden.class)
-		{
-			return new WardenMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Donkey.class)
-		{
-			return new DonkeyMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Llama.class)
-		{
-			return new LlamaMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Mule.class)
-		{
-			return new MuleMock(server, UUID.randomUUID());
-		}
-		else if (clazz == SkeletonHorse.class)
-		{
-			return new SkeletonHorseMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ZombieHorse.class)
-		{
-			return new ZombieHorseMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Cow.class)
-		{
-			return new CowMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Chicken.class)
-		{
-			return new ChickenMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Skeleton.class)
-		{
-			return new SkeletonMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Stray.class)
-		{
-			return new StrayMock(server, UUID.randomUUID());
-		}
-		else if (clazz == WitherSkeleton.class)
-		{
-			return new WitherSkeletonMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Spider.class)
-		{
-			return new SpiderMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Blaze.class)
-		{
-			return new BlazeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == CaveSpider.class)
-		{
-			return new CaveSpiderMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Giant.class)
-		{
-			return new GiantMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Axolotl.class)
-		{
-			return new AxolotlMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Bat.class)
-		{
-			return new BatMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Cat.class)
-		{
-			return new CatMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Frog.class)
-		{
-			return new FrogMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Fox.class)
-		{
-			return new FoxMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Ghast.class)
-		{
-			return new GhastMock(server, UUID.randomUUID());
-		}
-		else if (clazz == MushroomCow.class)
-		{
-			return new MushroomCowMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Tadpole.class)
-		{
-			return new TadpoleMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Cod.class)
-		{
-			return new CodMock(server, UUID.randomUUID());
-		}
-		else if (clazz == TropicalFish.class)
-		{
-			return new TropicalFishMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Salmon.class)
-		{
-			return new SalmonMock(server, UUID.randomUUID());
-		}
-		else if (clazz == PufferFish.class)
-		{
-			return new PufferFishMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Bee.class)
-		{
-			return new BeeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Creeper.class)
-		{
-			return new CreeperMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Wolf.class)
-		{
-			return new WolfMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Goat.class)
-		{
-			return new GoatMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Egg.class)
-		{
-			return new EggMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Pig.class)
-		{
-			return new PigMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ElderGuardian.class)
-		{
-			return new ElderGuardianMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Guardian.class)
-		{
-			return new GuardianMock(server, UUID.randomUUID());
-		}
-		else if (clazz == PolarBear.class)
-		{
-			return new PolarBearMock(server, UUID.randomUUID());
-		}
-		else if (clazz == SmallFireball.class)
-		{
-			return new SmallFireballMock(server, UUID.randomUUID());
-		}
-		else if (clazz == LargeFireball.class)
-		{
-			return new LargeFireballMock(server, UUID.randomUUID());
-		}
-		else if (clazz == DragonFireball.class)
-		{
-			return new DragonFireballMock(server, UUID.randomUUID());
-		}
-		else if (clazz == WitherSkull.class)
-		{
-			return new WitherSkullMock(server, UUID.randomUUID());
-		}
-		else if (clazz == PoweredMinecart.class)
-		{
-			return new PoweredMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Camel.class)
-		{
-			return new CamelMock(server, UUID.randomUUID());
-		}
-		else if (clazz == CommandMinecart.class)
-		{
-			return new CommandMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ExplosiveMinecart.class)
-		{
-			return new ExplosiveMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == HopperMinecart.class)
-		{
-			return new HopperMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == SpawnerMinecart.class)
-		{
-			return new SpawnerMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == RideableMinecart.class)
-		{
-			return new RideableMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == StorageMinecart.class)
-		{
-			return new StorageMinecartMock(server, UUID.randomUUID());
-		}
-		else if (clazz == AreaEffectCloud.class)
-		{
-			return new AreaEffectCloudMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Boat.class)
-		{
-			return new BoatMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ChestBoat.class)
-		{
-			return new ChestBoatMock(server, UUID.randomUUID());
-		}
-		else if (clazz == EnderPearl.class)
-		{
-			return new EnderPearlMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Panda.class)
-		{
-			return new PandaMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Rabbit.class)
-		{
-			return new RabbitMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Slime.class)
-		{
-			return new SlimeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Ocelot.class)
-		{
-			return new OcelotMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Parrot.class)
-		{
-			return new ParrotMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Squid.class)
-		{
-			return new SquidMock(server, UUID.randomUUID());
-		}
-		else if (clazz == GlowSquid.class)
-		{
-			return new GlowSquidMock(server, UUID.randomUUID());
-		}
-		else if (clazz == LlamaSpit.class)
-		{
-			return new LlamaSpitMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Dolphin.class)
-		{
-			return new DolphinMock(server, UUID.randomUUID());
-		}
-		else if (clazz == MagmaCube.class)
-		{
-			return new MagmaCubeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Endermite.class)
-		{
-			return new EndermiteMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Silverfish.class)
-		{
-			return new SilverfishMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Turtle.class)
-		{
-			return new TurtleMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ThrownExpBottle.class)
-		{
-			return new ThrownExpBottleMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Snowball.class)
-		{
-			return new SnowballMock(server, UUID.randomUUID());
-		}
-		else if (clazz == LeashHitch.class)
-		{
-			return new LeashHitchMock(server, UUID.randomUUID());
-		}
-		else if (clazz == PigZombie.class)
-		{
-			return new PigZombieMock(server, UUID.randomUUID());
-		}
-		else if (clazz == BlockDisplay.class)
-		{
-			return new BlockDisplayMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ItemDisplay.class)
-		{
-			return new ItemDisplayMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Arrow.class)
-		{
-			return new ArrowMock(server, UUID.randomUUID());
-		}
-		else if (clazz == SpectralArrow.class)
-		{
-			return new SpectralArrowMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Trident.class)
-		{
-			return new TridentMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Marker.class)
-		{
-			return new MarkerMock(server, UUID.randomUUID());
-		}
-		else if (clazz == EnderCrystal.class)
-		{
-			return new EnderCrystalMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Pillager.class)
-		{
-			return new PillagerMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Witch.class)
-		{
-			return new WitchMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Ravager.class)
-		{
-			return new RavagerMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Zoglin.class)
-		{
-			return new ZoglinMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Vindicator.class)
-		{
-			return new VindicatorMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Evoker.class)
-		{
-			return new EvokerMock(server, UUID.randomUUID());
-		}
-		else if (clazz == EvokerFangs.class)
-		{
-			return new EvokerFangsMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Illusioner.class)
-		{
-			return new IllusionerMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Interaction.class)
-		{
-			return new InteractionMock(server, UUID.randomUUID());
-		}
-		else if (clazz == IronGolem.class)
-		{
-			return new IronGolemMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Snowman.class)
-		{
-			return new SnowmanMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Shulker.class)
-		{
-			return new ShulkerMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ItemFrame.class)
-		{
-			return new ItemFrameMock(server, UUID.randomUUID());
-		}
-		else if (clazz == GlowItemFrame.class)
-		{
-			return new GlowItemFrameMock(server, UUID.randomUUID());
-		}
-		else if (clazz == FallingBlock.class)
-		{
-			return new FallingBlockMock(server, UUID.randomUUID());
-		}
-		else if (clazz == ThrownPotion.class)
-		{
-			return new ThrownPotionMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Armadillo.class)
-		{
-			return new ArmadilloMock(server, UUID.randomUUID());
-		}
-		else if (clazz == EnderSignal.class)
-		{
-			return new EnderSignalMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Husk.class)
-		{
-			return new HuskMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Bogged.class)
-		{
-			return new BoggedMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Breeze.class)
-		{
-			return new BreezeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == BreezeWindCharge.class)
-		{
-			return new BreezeWindChargeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == WindCharge.class)
-		{
-			return new WindChargeMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Wither.class)
-		{
-			return new WitherMock(server, UUID.randomUUID());
-		}
-		else if (clazz == EnderDragon.class)
-		{
-			return new EnderDragonMock(server, UUID.randomUUID());
-		}
 
-		throw new UnimplementedOperationException();
+		return EntityTypesMock.createEntity(clazz, server);
 	}
 
 	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
@@ -1756,6 +1091,20 @@ public class WorldMock implements World
 					.toList());
 		}
 		return entities;
+	}
+
+	@Override
+	public void getChunkAtAsync(int x, int z, boolean gen, boolean urgent, @NotNull Consumer<? super Chunk> cb)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void getChunksAtAsync(int minX, int minZ, int maxX, int maxZ, boolean urgent, @NotNull Runnable cb)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2269,8 +1618,7 @@ public class WorldMock implements World
 	@Override
 	public boolean canGenerateStructures()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.generateStructures;
 	}
 
 	@Override
@@ -2439,7 +1787,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.values().stream().map(Object::toString).toList().toArray(new String[0]);
+		return gameRules.keySet().stream().map(GameRule::getName).toList().toArray(new String[0]);
 	}
 
 	@Override
@@ -3437,8 +2785,19 @@ public class WorldMock implements World
 	@Override
 	public long getGameTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.gameTime;
+	}
+
+	/**
+	 * Sets the full in-game time on this world since the world generation.
+	 *
+	 * @param time The current absolute time since the world generation.
+	 */
+	@ApiStatus.Internal
+	public void setGameTime(long time)
+	{
+		Preconditions.checkArgument(time >= 0, "Time must be greater or equal than 0");
+		this.gameTime = time;
 	}
 
 	@Override

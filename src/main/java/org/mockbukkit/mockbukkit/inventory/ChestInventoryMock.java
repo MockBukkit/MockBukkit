@@ -29,13 +29,16 @@ public class ChestInventoryMock extends InventoryMock
 				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
 	}
 
+	protected ChestInventoryMock(ChestInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new ChestInventoryMock(getHolder(), getSize());
-		inventory.setContents(getContents());
-		return inventory;
+		return new ChestInventoryMock(this);
 	}
 
 }

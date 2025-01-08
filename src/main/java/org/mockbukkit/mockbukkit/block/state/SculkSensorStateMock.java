@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.SculkSensor;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +54,13 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull SculkSensorStateMock getSnapshot()
+	{
+		return new SculkSensorStateMock(this);
+	}
+
+	@Override
+	public @NotNull SculkSensorStateMock copy()
 	{
 		return new SculkSensorStateMock(this);
 	}
@@ -84,6 +89,14 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	{
 		Preconditions.checkArgument(range > 0, "Vibration listener range must be greater than 0");
 		this.listenerRange = range;
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", lastVibrationFrequency=" + lastVibrationFrequency +
+				", listenerRange=" + listenerRange;
 	}
 
 }

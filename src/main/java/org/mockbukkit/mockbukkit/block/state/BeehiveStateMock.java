@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Beehive;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.entity.Bee;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +36,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	public BeehiveStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.BEEHIVE);
+		checkType(material, Material.BEEHIVE, Material.BEE_NEST);
 	}
 
 	/**
@@ -49,7 +48,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	protected BeehiveStateMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Material.BEEHIVE);
+		checkType(block, Material.BEEHIVE, Material.BEE_NEST);
 	}
 
 	/**
@@ -68,7 +67,13 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BeehiveStateMock getSnapshot()
+	{
+		return new BeehiveStateMock(this);
+	}
+
+	@Override
+	public @NotNull BeehiveStateMock copy()
 	{
 		return new BeehiveStateMock(this);
 	}
@@ -167,6 +172,16 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	public void clearEntities()
 	{
 		this.bees.clear();
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", bees=" + bees +
+				", flowerLocation=" + flowerLocation +
+				", maxBees=" + maxBees +
+				", sedated=" + sedated;
 	}
 
 }

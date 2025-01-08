@@ -14,12 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-class ChestStateMockTest
+class ChestStateMockTest extends ContainerStateMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
 	private ChestStateMock chest;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return chest;
+	}
 
 	@BeforeEach
 	void setUp()

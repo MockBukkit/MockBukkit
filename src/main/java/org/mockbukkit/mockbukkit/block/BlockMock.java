@@ -31,6 +31,7 @@ import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,6 +53,7 @@ public class BlockMock implements Block
 
 	private byte lightFromSky = 15;
 	private byte lightFromBlocks = 0;
+	private List<ItemStack> drops;
 
 	/**
 	 * Creates a basic block made of air.
@@ -96,6 +98,7 @@ public class BlockMock implements Block
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
 		this.blockData = BlockDataMock.mock(material);
+		this.drops = new ArrayList<>();
 	}
 
 	@Override
@@ -335,9 +338,7 @@ public class BlockMock implements Block
 	@Override
 	public @NotNull BlockState getState(boolean useSnapshot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return state.getSnapshot();
 	}
 
 	@Override
@@ -580,15 +581,13 @@ public class BlockMock implements Block
 	@Override
 	public @NotNull Collection<ItemStack> getDrops()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ArrayList<>(drops);
 	}
 
 	@Override
 	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ArrayList<>(drops);
 	}
 
 	@Override
@@ -601,14 +600,14 @@ public class BlockMock implements Block
 	public void setBlockData(@NotNull BlockData data)
 	{
 		this.material = data.getMaterial();
-		this.blockData = data;
+		this.blockData = data.clone();
 	}
 
 	@Override
 	public void setBlockData(@NotNull BlockData data, boolean applyPhysics)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.material = data.getMaterial();
+		this.blockData = data.clone();
 	}
 
 	@Override
@@ -643,8 +642,7 @@ public class BlockMock implements Block
 	@Override
 	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ArrayList<>(drops);
 	}
 
 	/**
@@ -693,6 +691,11 @@ public class BlockMock implements Block
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	public void setDrops(Collection<ItemStack> items)
+	{
+		drops = new ArrayList<>(items);
 	}
 
 }

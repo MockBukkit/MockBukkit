@@ -11,12 +11,14 @@ import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
  * Mock implementation of a {@link Container}.
  *
  * @see TileStateMock
  */
-public abstract class ContainerStateMock extends TileStateMock implements Container
+public abstract class ContainerStateMock extends LockableTileStateMock implements Container
 {
 
 	private final Inventory inventory;
@@ -53,7 +55,7 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = state.getInventory();
+		this.inventory = createInventoryCopy(state.getInventory());
 		this.customName = state.customName();
 		this.lock = state.getLock();
 	}
@@ -61,10 +63,20 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 	/**
 	 * @return A new inventory, of the correct type for the state.
 	 */
-	protected abstract InventoryMock createInventory();
+	protected abstract @NotNull InventoryMock createInventory();
+
+	/**
+	 * @param inventory Inventory contents to copy.
+	 * @return A new inventory, of the correct type for the state with contents deep-copied from the given inventory.
+	 */
+	protected @NotNull InventoryMock createInventoryCopy(@NotNull Inventory inventory) {
+		InventoryMock other = createInventory();
+		other.setContents(inventory.getContents());
+		return other;
+	}
 
 	@Override
-	public abstract @NotNull BlockState getSnapshot();
+	public abstract @NotNull ContainerStateMock getSnapshot();
 
 	@Override
 	public boolean isLocked()
@@ -121,4 +133,27 @@ public abstract class ContainerStateMock extends TileStateMock implements Contai
 		return ((InventoryMock) this.inventory).getSnapshot();
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof ContainerStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return Objects.equals(inventory, that.inventory) && Objects.equals(customName, that.customName) && Objects.equals(lock, that.lock);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), inventory, customName, lock);
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", customName=" + customName +
+				", lock='" + lock + '\'' +
+				", inventory=" + inventory;
+	}
 }

@@ -16,6 +16,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -56,7 +57,7 @@ public class PotionEffectTypeMock extends PotionEffectType
 		this.name = Preconditions.checkNotNull(name);
 		this.instant = instant;
 		this.color = Preconditions.checkNotNull(color);
-		this.attributeModifiers = new EnumMap<>(Attribute.class);
+		this.attributeModifiers = new HashMap<>();
 		this.category = Preconditions.checkNotNull(category);
 		this.translationKey = translationKey;
 	}

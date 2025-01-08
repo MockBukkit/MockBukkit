@@ -1,12 +1,13 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.bukkit.inventory.InventoryHolder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class GrindstoneInventoryMockTest
 {
@@ -14,14 +15,14 @@ class GrindstoneInventoryMockTest
 	private GrindstoneInventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		MockBukkit.mock();
-		inventory = new GrindstoneInventoryMock(null);
+		inventory = new GrindstoneInventoryMock((InventoryHolder) null);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -32,7 +33,7 @@ class GrindstoneInventoryMockTest
 		InventoryMock snapshot = inventory.getSnapshot();
 
 		assertInstanceOf(GrindstoneInventoryMock.class, snapshot);
-		assertNotEquals(inventory, snapshot);
+		assertNotSame(inventory, snapshot);
 	}
 
 }

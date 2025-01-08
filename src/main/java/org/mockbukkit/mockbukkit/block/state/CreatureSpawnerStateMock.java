@@ -84,6 +84,12 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 	}
 
 	@Override
+	public @NotNull CreatureSpawnerStateMock copy()
+	{
+		return new CreatureSpawnerStateMock(this);
+	}
+
+	@Override
 	public @NotNull EntityType getSpawnedType()
 	{
 		return this.spawnedType;
@@ -281,6 +287,20 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 		setSpawnedType(EntityType.ITEM);
 		// CraftBukkit then sets the spawned entity to an Item with this ItemStack, but we don't need to
 		// override any methods that ever return that so setting the type is enough.
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", delay=" + delay +
+				", spawnedType=" + spawnedType +
+				", minSpawnDelay=" + minSpawnDelay +
+				", maxSpawnDelay=" + maxSpawnDelay +
+				", spawnCount=" + spawnCount +
+				", maxNearbyEntities=" + maxNearbyEntities +
+				", requiredPlayerRange=" + requiredPlayerRange +
+				", spawnRange=" + spawnRange;
 	}
 
 }

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -42,8 +44,10 @@ public class InventoryMock implements Inventory
 	private final @Nullable InventoryHolder holder;
 	private final @NotNull InventoryType type;
 
-	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
+	private int maxStackSize = MAX_STACK_SIZE;
+
+	private @Nullable Component customTitle;
 
 	/**
 	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
@@ -78,6 +82,29 @@ public class InventoryMock implements Inventory
 		this.type = type;
 
 		items = new ItemStack[type.getDefaultSize()];
+	}
+
+	protected InventoryMock(InventoryMock inventory)
+	{
+		this.holder = inventory.getHolder();
+		this.type = inventory.getType();
+		this.items = new ItemStack[inventory.getSize()];
+
+		setMaxStackSize(inventory.getMaxStackSize());
+		setContents(inventory.getContents());
+		setCustomTitle(inventory.getCustomTitle());
+	}
+
+	/**
+	 * Copy constructor. Holder is copied by reference, inventory contents are cloned.
+	 * @param other Inventory to copy.
+	 */
+	public InventoryMock(@NotNull Inventory other)
+	{
+		this.holder = other.getHolder();
+		this.type = other.getType();
+		this.items = new ItemStack[other.getSize()];
+		this.setContents(other.getContents());
 	}
 
 	/**
@@ -676,9 +703,109 @@ public class InventoryMock implements Inventory
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new InventoryMock(holder, getSize(), type);
-		inventory.setContents(getContents());
-		return inventory;
+		return new InventoryMock(this);
 	}
 
+	/**
+	 * Get the name for this inventory.
+	 * Uses the value in {@link #getCustomTitle()} if set, otherwise
+	 * uses the default name for the inventory type.
+	 *
+	 * @return The inventory name.
+	 *
+	 * @see InventoryMock#getCustomTitle()
+	 * @see InventoryType#defaultTitle()
+	 */
+	@ApiStatus.Internal
+	public @NotNull Component getTitle()
+	{
+		Component custom = getCustomTitle();
+		if (custom != null)
+		{
+			return custom;
+		}
+		return getType().defaultTitle();
+	}
+
+	/**
+	 * Get the custom title to be used in this inventory when set.
+	 *
+	 * @return The title to be used, or {@code null}.
+	 */
+	@ApiStatus.Internal
+	public @Nullable Component getCustomTitle()
+	{
+		return customTitle;
+	}
+
+	/**
+	 * Set the custom title to be used in this inventory.
+	 *
+	 * @param customTitle The title to be used, or {@code null}.
+	 */
+	@ApiStatus.Internal
+	public void setCustomTitle(@Nullable Component customTitle)
+	{
+		this.customTitle = customTitle;
+	}
+
+	/**
+	 * Check if two inventories are identical.
+	 * <p>
+	 * An inventory is considered as identical if the following properties match:
+	 * <ul>
+	 *     <li>Has the same inventory type.</li>
+	 *     <li>Has the same inventory holder.</li>
+	 *     <li>Has the same items and quantities.</li>
+	 *     <li>Has the same maximum stack size.</li>
+	 *     <li>Has the same custom title</li>
+	 * </ul>
+	 *
+	 * @param inventory The other inventory to compare.
+	 *
+	 * @return {@code true} when identical, otherwise {@code false}
+	 */
+	@ApiStatus.Internal
+	public boolean isIdentical(@Nullable Inventory inventory)
+	{
+		if (!(inventory instanceof InventoryMock that))
+		{
+			return false;
+		}
+
+		return maxStackSize == that.maxStackSize
+				&& Objects.deepEquals(items, that.items)
+				&& Objects.equals(holder, that.holder)
+				&& type == that.type
+				&& Objects.equals(customTitle, that.customTitle);
+	}
+
+	/** Note: does not compare holder or viewers (matches spigot/paper). */
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof InventoryMock that)) return false;
+		return maxStackSize == that.maxStackSize
+				&& Objects.deepEquals(items, that.items)
+				&& type == that.type;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(Arrays.hashCode(items), type, maxStackSize);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "InventoryMock{" +
+				"type=" + type +
+				", maxStackSize=" + maxStackSize +
+				", holder=" + (holder != null ? Objects.toIdentityString(holder) : null) +
+				", viewers=" + viewers.size() +
+				", items=" + Arrays.toString(items) +
+				'}';
+	}
 }

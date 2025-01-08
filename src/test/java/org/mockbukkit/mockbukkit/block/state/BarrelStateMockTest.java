@@ -14,12 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-class BarrelStateMockTest
+class BarrelStateMockTest extends ContainerStateMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
 	private BarrelStateMock barrel;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return barrel;
+	}
 
 	@BeforeEach
 	void setUp()

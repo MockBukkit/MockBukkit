@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -22,7 +23,7 @@ class HopperInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.inventory = new HopperInventoryMock(null);
+		this.inventory = new HopperInventoryMock((InventoryHolder) null);
 	}
 
 	@Test
@@ -32,7 +33,7 @@ class HopperInventoryMockTest
 
 		ItemStack item = new ItemStackMock(Material.EMERALD);
 		inventory.addItem(item);
-		assertNotEquals(inventory, inventory.getSnapshot());
+		assertNotSame(inventory, inventory.getSnapshot());
 		assertTrue(Arrays.stream(inventory.getContents()).anyMatch(stack -> stack != null && stack.isSimilar(item)));
 	}
 

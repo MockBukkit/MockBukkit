@@ -4,7 +4,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.EnchantingTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +54,13 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull EnchantingTableStateMock getSnapshot()
+	{
+		return new EnchantingTableStateMock(this);
+	}
+
+	@Override
+	public @NotNull EnchantingTableStateMock copy()
 	{
 		return new EnchantingTableStateMock(this);
 	}
@@ -82,6 +87,13 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 	public void setCustomName(@Nullable String name)
 	{
 		this.customName = name == null ? Component.text("") : LegacyComponentSerializer.legacySection().deserialize(name);
+	}
+
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", customName=" + customName;
 	}
 
 }

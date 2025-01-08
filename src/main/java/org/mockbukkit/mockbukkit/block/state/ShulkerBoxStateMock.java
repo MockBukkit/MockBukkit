@@ -8,12 +8,12 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -152,7 +152,13 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull ShulkerBoxStateMock getSnapshot()
+	{
+		return new ShulkerBoxStateMock(this);
+	}
+
+	@Override
+	public @NotNull ShulkerBoxStateMock copy()
 	{
 		return new ShulkerBoxStateMock(this);
 	}
@@ -239,6 +245,30 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof ShulkerBoxStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return isOpen == that.isOpen && color == that.color;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), color, isOpen);
+	}
+
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", color=" + color +
+				", isOpen=" + isOpen;
 	}
 
 }

@@ -49,12 +49,6 @@
 			"translationKey": "biome.minecraft.crimson_forest"
 		},
 		{
-			"key": "minecraft:custom",
-			"name": "CUSTOM",
-			"ordinal": 64,
-			"translationKey": "biome.minecraft.custom"
-		},
-		{
 			"key": "minecraft:dark_forest",
 			"name": "DARK_FOREST",
 			"ordinal": 22,

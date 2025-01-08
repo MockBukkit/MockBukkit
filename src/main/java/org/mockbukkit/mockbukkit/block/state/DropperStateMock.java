@@ -5,7 +5,6 @@ import org.mockbukkit.mockbukkit.inventory.DropperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Dropper;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
@@ -97,7 +96,13 @@ public class DropperStateMock extends ContainerStateMock implements Dropper
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull DropperStateMock getSnapshot()
+	{
+		return new DropperStateMock(this);
+	}
+
+	@Override
+	public @NotNull DropperStateMock copy()
 	{
 		return new DropperStateMock(this);
 	}
@@ -177,6 +182,14 @@ public class DropperStateMock extends ContainerStateMock implements Dropper
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof DropperStateMock)) return false;
+		return super.equals(o);
 	}
 
 }

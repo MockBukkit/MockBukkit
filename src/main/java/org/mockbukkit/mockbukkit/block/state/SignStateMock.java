@@ -8,7 +8,6 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.sign.Side;
 import org.bukkit.block.sign.SignSide;
@@ -209,7 +208,13 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull SignStateMock getSnapshot()
+	{
+		return new SignStateMock(this);
+	}
+
+	@Override
+	public @NotNull SignStateMock copy()
 	{
 		return new SignStateMock(this);
 	}
@@ -315,6 +320,25 @@ public class SignStateMock extends TileStateMock implements Sign
 			this.color = color;
 		}
 
+		@Override
+		public String toString()
+		{
+			return "SignSideMock{" +
+					"color=" + color +
+					", lines=" + Arrays.toString(lines) +
+					", glowing=" + glowing +
+					'}';
+		}
+
+	}
+
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", back=" + back +
+				", front=" + front;
 	}
 
 }

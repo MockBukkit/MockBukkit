@@ -8,7 +8,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.block.Beacon;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -24,7 +23,7 @@ import java.util.Collection;
  *
  * @see TileStateMock
  */
-public class BeaconStateMock extends TileStateMock implements Beacon
+public class BeaconStateMock extends LockableTileStateMock implements Beacon
 {
 
 	private @Nullable String lock;
@@ -76,7 +75,25 @@ public class BeaconStateMock extends TileStateMock implements Beacon
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BeaconStateMock getSnapshot()
+	{
+		return new BeaconStateMock(this);
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", customName=" + customName +
+				", lock='" + lock + '\'' +
+				", tier=" + tier +
+				", primaryEffect=" + primaryEffect +
+				", secondaryEffect=" + secondaryEffect +
+				", effectRange=" + effectRange;
+	}
+
+	@Override
+	public @NotNull BeaconStateMock copy()
 	{
 		return new BeaconStateMock(this);
 	}

@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.registry;
 
+import com.google.gson.JsonElement;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.exception.ReflectionAccessException;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
@@ -97,12 +98,37 @@ public class RegistryAccessMock implements RegistryAccess
 
 	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
 	{
-		return List.of(RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL,
-				RegistryKey.TRIM_PATTERN, RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT,
-				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK,
-				RegistryKey.WOLF_VARIANT, RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT, RegistryKey.VILLAGER_PROFESSION,
-				RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT, RegistryKey.MAP_DECORATION_TYPE, RegistryKey.BANNER_PATTERN,
-				RegistryKey.MENU);
+		return List.of(
+				RegistryKey.STRUCTURE,
+				RegistryKey.STRUCTURE_TYPE,
+				RegistryKey.TRIM_MATERIAL,
+				RegistryKey.TRIM_PATTERN,
+				RegistryKey.INSTRUMENT,
+				RegistryKey.GAME_EVENT,
+				RegistryKey.ENCHANTMENT,
+				RegistryKey.MOB_EFFECT,
+				RegistryKey.DAMAGE_TYPE,
+				RegistryKey.ITEM,
+				RegistryKey.BLOCK,
+				RegistryKey.WOLF_VARIANT,
+				RegistryKey.JUKEBOX_SONG,
+				RegistryKey.CAT_VARIANT,
+				RegistryKey.VILLAGER_PROFESSION,
+				RegistryKey.VILLAGER_TYPE,
+				RegistryKey.FROG_VARIANT,
+				RegistryKey.MAP_DECORATION_TYPE,
+				RegistryKey.BANNER_PATTERN,
+				RegistryKey.MENU,
+				RegistryKey.PAINTING_VARIANT,
+				RegistryKey.ATTRIBUTE,
+				RegistryKey.BIOME,
+				RegistryKey.SOUND_EVENT,
+				RegistryKey.FLUID,
+				RegistryKey.ENTITY_TYPE,
+				RegistryKey.PARTICLE_TYPE,
+				RegistryKey.POTION,
+				RegistryKey.DATA_COMPONENT_TYPE
+		);
 	}
 
 
@@ -118,7 +144,6 @@ public class RegistryAccessMock implements RegistryAccess
 		}
 	}
 
-
 	private static BiMap<RegistryKey<?>, String> createClassToKeyConversions()
 	{
 		String fileName = "/registries/registry_key_class_relation.json";
@@ -132,8 +157,16 @@ public class RegistryAccessMock implements RegistryAccess
 			JsonObject object = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonObject();
 			for (RegistryKey<?> registryKey : getAllKeys())
 			{
-				String className = object.get(registryKey.key().asString()).getAsString();
-				output.put(registryKey, className);
+				JsonElement element = object.get(registryKey.key().asString());
+				if (element != null)
+				{
+					String className = element.getAsString();
+					output.put(registryKey, className);
+				}
+				else
+				{
+					throw new InternalDataLoadException("Null JSON element while retrieving `" + registryKey.key().asString() + "` - MockBukkit / MC version mismatch?");
+				}
 			}
 		}
 		catch (IOException e)

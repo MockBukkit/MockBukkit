@@ -63,6 +63,12 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	}
 
 	@Override
+	public @NotNull CommandBlockStateMock copy()
+	{
+		return new CommandBlockStateMock(this);
+	}
+
+	@Override
 	public @NotNull String getCommand()
 	{
 		return this.command;
@@ -96,6 +102,14 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	public void name(@Nullable Component name)
 	{
 		this.name = name == null ? Component.text("") : name;
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", command='" + command + '\'' +
+				", name=" + name;
 	}
 
 }

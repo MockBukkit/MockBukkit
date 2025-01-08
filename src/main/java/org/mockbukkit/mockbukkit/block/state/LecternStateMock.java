@@ -4,13 +4,14 @@ import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Lectern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link Lectern}.
@@ -64,7 +65,13 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull LecternStateMock getSnapshot()
+	{
+		return new LecternStateMock(this);
+	}
+
+	@Override
+	public @NotNull LecternStateMock copy()
 	{
 		return new LecternStateMock(this);
 	}
@@ -101,6 +108,28 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 		{
 			return 1;
 		}
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof LecternStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return currentPage == that.currentPage;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), currentPage);
+	}
+
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", currentPage=" + currentPage;
 	}
 
 }

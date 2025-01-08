@@ -45,7 +45,7 @@
 		"key": "minecraft:acacia_hanging_sign",
 		"result": {
 			"material": "minecraft:acacia_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -383,7 +383,7 @@
 		"key": "minecraft:bamboo_hanging_sign",
 		"result": {
 			"material": "minecraft:bamboo_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -637,7 +637,7 @@
 		"key": "minecraft:birch_hanging_sign",
 		"result": {
 			"material": "minecraft:birch_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -1573,7 +1573,7 @@
 		"key": "minecraft:cherry_hanging_sign",
 		"result": {
 			"material": "minecraft:cherry_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2220,7 +2220,7 @@
 		"key": "minecraft:crimson_hanging_sign",
 		"result": {
 			"material": "minecraft:crimson_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -2538,7 +2538,7 @@
 		"key": "minecraft:dark_oak_hanging_sign",
 		"result": {
 			"material": "minecraft:dark_oak_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -4578,7 +4578,7 @@
 		"key": "minecraft:jungle_hanging_sign",
 		"result": {
 			"material": "minecraft:jungle_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -5370,7 +5370,7 @@
 		"key": "minecraft:mangrove_hanging_sign",
 		"result": {
 			"material": "minecraft:mangrove_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -6086,7 +6086,7 @@
 		"key": "minecraft:oak_hanging_sign",
 		"result": {
 			"material": "minecraft:oak_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -8048,7 +8048,7 @@
 		"key": "minecraft:shield",
 		"result": {
 			"material": "minecraft:shield",
-			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
+			"meta": "org.bukkit.inventory.meta.ShieldMeta"
 		}
 	},
 	{
@@ -8479,7 +8479,7 @@
 		"key": "minecraft:spruce_hanging_sign",
 		"result": {
 			"material": "minecraft:spruce_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{
@@ -9365,7 +9365,7 @@
 		"key": "minecraft:warped_hanging_sign",
 		"result": {
 			"material": "minecraft:warped_hanging_sign",
-			"meta": "org.bukkit.inventory.meta.ItemMeta"
+			"meta": "org.bukkit.inventory.meta.BlockStateMeta"
 		}
 	},
 	{

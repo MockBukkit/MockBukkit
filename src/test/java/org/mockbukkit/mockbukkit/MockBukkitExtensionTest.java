@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
+import org.bukkit.Server;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -121,6 +122,22 @@ class MockBukkitExtensionTest
 		void isConstructorInjectedCorrectly()
 		{
 			assertNotNull(constructorParameterServerMock);
+		}
+
+	}
+
+	@Nested
+	@ExtendWith(MockBukkitExtension.class)
+	class WithBukkitServer
+	{
+
+		@MockBukkitInject
+		private Server bukkitServer;
+
+		@Test
+		void fieldIsInjectedCorrectly()
+		{
+			assertNotNull(bukkitServer);
 		}
 
 	}

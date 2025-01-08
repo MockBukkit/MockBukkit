@@ -6,11 +6,11 @@ import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -118,7 +118,13 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BarrelStateMock getSnapshot()
+	{
+		return new BarrelStateMock(this);
+	}
+
+	@Override
+	public @NotNull BarrelStateMock copy()
 	{
 		return new BarrelStateMock(this);
 	}
@@ -191,6 +197,27 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof BarrelStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return isOpen == that.isOpen;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), isOpen);
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", isOpen=" + isOpen;
 	}
 
 }

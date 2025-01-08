@@ -1,12 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryViewMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
+import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,9 +14,17 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryViewMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -195,49 +197,73 @@ class HumanEntityMockTest
 		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 
-	@Test
-	void openInventory_OpenInventoryEvent_Fired()
+	@Nested
+	class OpenInventory
 	{
-		Inventory inv = server.createInventory(null, 36);
-		human.openInventory(inv);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv));
-	}
 
-	@Test
-	void openInventory_OpenInventoryEvent_Cancelled()
-	{
-		Inventory inv = server.createInventory(null, 36);
-		server.getPluginManager().registerEvents(new Listener()
+		@Nested
+		class GivenInventory
 		{
-			@EventHandler
-			public void onEvent(InventoryOpenEvent e)
+
+			@Test
+			void openInventoryEvent_Fired()
 			{
-				e.setCancelled(true);
+				InventoryMock inv = server.createInventory(null, 36);
+				human.openInventory(inv);
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+						e -> e.getPlayer() == human && e.getInventory() == inv));
 			}
-		}, MockBukkit.createMockPlugin());
 
-		human.openInventory(inv);
+			@Test
+			void openInventoryEvent_Cancelled()
+			{
+				InventoryMock inv = server.createInventory(null, 36);
+				server.getPluginManager().registerEvents(new Listener()
+				{
+					@EventHandler
+					public void onEvent(InventoryOpenEvent e)
+					{
+						e.setCancelled(true);
+					}
+				}, MockBukkit.createMockPlugin());
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv && e.isCancelled()));
-		assertEquals(InventoryType.CRAFTING, human.getOpenInventory().getType());
-	}
+				human.openInventory(inv);
 
-	@Test
-	void openInventory_AlreadyOpened_ClosesPrevious()
-	{
-		Inventory inv1 = server.createInventory(null, 36);
-		Inventory inv2 = server.createInventory(null, 36);
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+						e -> e.getPlayer() == human && e.getInventory() == inv && e.isCancelled()));
+				assertEquals(InventoryType.CRAFTING, human.getOpenInventory().getType());
+			}
 
-		human.openInventory(inv1);
-		human.setItemOnCursor(new ItemStackMock(Material.PUMPKIN));
+			@Test
+			void alreadyOpened_ClosesPrevious()
+			{
+				Inventory inv1 = server.createInventory(null, 36);
+				Inventory inv2 = server.createInventory(null, 36);
 
-		human.openInventory(inv2);
+				human.openInventory(inv1);
+				human.setItemOnCursor(new ItemStackMock(Material.PUMPKIN));
 
-		assertTrue(human.getItemOnCursor().getType().isAir());
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv1));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv2));
+				human.openInventory(inv2);
+
+				assertTrue(human.getItemOnCursor().getType().isAir());
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv1));
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv2));
+			}
+
+			@Test
+			void givenCustomInventory()
+			{
+				InventoryMock inventory = server.createInventory(human, InventoryType.PLAYER, Component.text("Custom name"));
+
+				InventoryView view = human.openInventory(inventory);
+
+				assertNotNull(view);
+				assertEquals(human, view.getPlayer());
+				assertEquals(inventory, view.getTopInventory());
+				assertEquals(Component.text("Custom name"), view.title());
+			}
+
+		}
 	}
 
 	@Test

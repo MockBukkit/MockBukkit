@@ -4,6 +4,7 @@
 	"minecraft:block": "org.bukkit.block.BlockType",
 	"minecraft:cat_variant": "org.bukkit.entity.Cat$Type",
 	"minecraft:damage_type": "org.bukkit.damage.DamageType",
+	"minecraft:data_component_type": "io.papermc.paper.datacomponent.DataComponentType",
 	"minecraft:enchantment": "org.bukkit.enchantments.Enchantment",
 	"minecraft:entity_type": "org.bukkit.entity.EntityType",
 	"minecraft:fluid": "org.bukkit.Fluid",

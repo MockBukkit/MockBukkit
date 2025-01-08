@@ -24,13 +24,16 @@ public class BarrelInventoryMock extends InventoryMock
 		super(holder, 27, InventoryType.BARREL);
 	}
 
+	protected BarrelInventoryMock(@NotNull BarrelInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new BarrelInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new BarrelInventoryMock(this);
 	}
 
 }

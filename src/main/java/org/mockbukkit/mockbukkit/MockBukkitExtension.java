@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.bukkit.Server;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
@@ -82,6 +84,7 @@ import java.util.Optional;
  */
 public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, AfterAllCallback
 {
+	private final Set<Class<?>> serverSupportedTypes = Set.of(Server.class, ServerMock.class);
 
 	@Override
 	public void postProcessTestInstance(Object testInstance, ExtensionContext context) throws Exception
@@ -94,11 +97,13 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	{
 		final Optional<Class<?>> classOptional = context.getTestClass();
 		if (classOptional.isEmpty())
+		{
 			return;
+		}
 
 		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get())
 				.stream()
-				.filter(field -> field.getType() == ServerMock.class)
+				.filter(field -> serverSupportedTypes.contains(field.getType()))
 				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
 				.toList();
 

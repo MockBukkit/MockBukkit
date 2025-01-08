@@ -53,4 +53,10 @@ public class ComparatorStateMock extends TileStateMock implements Comparator
 		return new ComparatorStateMock(this);
 	}
 
+	@Override
+	public @NotNull ComparatorStateMock copy()
+	{
+		return new ComparatorStateMock(this);
+	}
+
 }

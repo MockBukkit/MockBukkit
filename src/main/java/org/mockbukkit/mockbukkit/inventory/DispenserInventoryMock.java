@@ -24,13 +24,16 @@ public class DispenserInventoryMock extends InventoryMock
 		super(holder, 9, InventoryType.DISPENSER);
 	}
 
+	protected DispenserInventoryMock(@NotNull DispenserInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new DispenserInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new DispenserInventoryMock(this);
 	}
 
 }

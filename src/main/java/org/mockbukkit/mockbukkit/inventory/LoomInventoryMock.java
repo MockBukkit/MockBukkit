@@ -24,12 +24,15 @@ public class LoomInventoryMock extends InventoryMock implements LoomInventory
 		super(holder, InventoryType.LOOM);
 	}
 
+	protected LoomInventoryMock(@NotNull LoomInventoryMock inventory)
+	{
+		super(inventory);
+	}
+
 	@Override
 	public @NotNull InventoryMock getSnapshot()
 	{
-		LoomInventoryMock inventory = new LoomInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
+		return new LoomInventoryMock(this);
 	}
 
 }

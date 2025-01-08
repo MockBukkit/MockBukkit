@@ -11,12 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class HopperStateMockTest
+class HopperStateMockTest extends ContainerStateMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
 	private HopperStateMock hopper;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return hopper;
+	}
 
 	@BeforeEach
 	void setUp()

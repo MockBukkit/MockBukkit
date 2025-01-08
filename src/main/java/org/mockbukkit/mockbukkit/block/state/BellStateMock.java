@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Bell;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,7 +52,13 @@ public class BellStateMock extends TileStateMock implements Bell
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull BellStateMock getSnapshot()
+	{
+		return new BellStateMock(this);
+	}
+
+	@Override
+	public @NotNull BellStateMock copy()
 	{
 		return new BellStateMock(this);
 	}

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link Metadatable}.
@@ -86,6 +87,14 @@ public class MetadataTable implements Metadatable
 				iterator.remove();
 			}
 		}
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof MetadataTable that)) return false;
+		return Objects.equals(metadata, that.metadata);
 	}
 
 }

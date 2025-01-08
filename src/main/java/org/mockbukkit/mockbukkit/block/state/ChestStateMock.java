@@ -5,13 +5,13 @@ import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -132,7 +132,13 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull ChestStateMock getSnapshot()
+	{
+		return new ChestStateMock(this);
+	}
+
+	@Override
+	public @NotNull ChestStateMock copy()
 	{
 		return new ChestStateMock(this);
 	}
@@ -205,6 +211,27 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof ChestStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return isOpen == that.isOpen;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), isOpen);
+	}
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() + ", isOpen=" + isOpen;
 	}
 
 }

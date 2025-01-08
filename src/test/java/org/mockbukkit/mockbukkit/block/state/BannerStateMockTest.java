@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -38,7 +39,7 @@ class BannerStateMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertNull(meta.getBaseColor());
+		assertNotNull(meta.getBaseColor());
 		assertTrue(meta.getPatterns().isEmpty());
 	}
 

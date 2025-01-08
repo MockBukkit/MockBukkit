@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Smoker;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,9 +48,23 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull SmokerStateMock getSnapshot()
 	{
 		return new SmokerStateMock(this);
+	}
+
+	@Override
+	public @NotNull SmokerStateMock copy()
+	{
+		return new SmokerStateMock(this);
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof Smoker)) return false;
+		return super.equals(o);
 	}
 
 }

@@ -281,7 +281,7 @@
 			"key": "minecraft:air",
 			"material": "AIR",
 			"maxDurability": 0,
-			"maxStackSize": 0,
+			"maxStackSize": 64,
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.air"
@@ -448,7 +448,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.angler_pottery_sherd"
 		},
@@ -494,7 +494,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.archer_pottery_sherd"
 		},
@@ -554,7 +554,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.arms_up_pottery_sherd"
 		},
@@ -1453,6 +1453,21 @@
 			"translationKey": "block.minecraft.black_bed"
 		},
 		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:black_bundle",
+			"material": "BLACK_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.black_bundle"
+		},
+		{
 			"blockType": true,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -1688,7 +1703,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.blade_pottery_sherd"
 		},
@@ -1781,6 +1796,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.blue_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:blue_bundle",
+			"material": "BLUE_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.blue_bundle"
 		},
 		{
 			"blockType": true,
@@ -2004,7 +2034,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.bolt_armor_trim_smithing_template"
 		},
@@ -2082,6 +2112,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.bookshelf"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:bordure_indented_banner_pattern",
+			"material": "BORDURE_INDENTED_BANNER_PATTERN",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.bordure_indented_banner_pattern"
 		},
 		{
 			"blockType": false,
@@ -2215,7 +2260,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.brewer_pottery_sherd"
 		},
@@ -2338,6 +2383,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.brown_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:brown_bundle",
+			"material": "BROWN_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.brown_bundle"
 		},
 		{
 			"blockType": true,
@@ -2652,7 +2712,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.burn_pottery_sherd"
 		},
@@ -2911,7 +2971,7 @@
 			"maxDurability": 195,
 			"maxStackSize": 1,
 			"metaClass": "ArmorMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.chainmail_boots"
 		},
@@ -2926,7 +2986,7 @@
 			"maxDurability": 240,
 			"maxStackSize": 1,
 			"metaClass": "ArmorMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.chainmail_chestplate"
 		},
@@ -2941,7 +3001,7 @@
 			"maxDurability": 165,
 			"maxStackSize": 1,
 			"metaClass": "ArmorMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.chainmail_helmet"
 		},
@@ -2956,7 +3016,7 @@
 			"maxDurability": 225,
 			"maxStackSize": 1,
 			"metaClass": "ArmorMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.chainmail_leggings"
 		},
@@ -3633,7 +3693,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.coast_armor_trim_smithing_template"
 		},
@@ -3919,7 +3979,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "block.minecraft.conduit"
 		},
@@ -4284,6 +4344,36 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.crafting_table"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:creaking_heart",
+			"material": "CREAKING_HEART",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.creaking_heart"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:creaking_spawn_egg",
+			"material": "CREAKING_SPAWN_EGG",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "SpawnEggMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.creaking_spawn_egg"
 		},
 		{
 			"blockType": false,
@@ -4738,6 +4828,21 @@
 			"translationKey": "block.minecraft.cyan_bed"
 		},
 		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:cyan_bundle",
+			"material": "CYAN_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.cyan_bundle"
+		},
+		{
 			"blockType": true,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -4944,7 +5049,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.danger_pottery_sherd"
 		},
@@ -6101,7 +6206,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.disc_fragment_5"
 		},
@@ -6191,7 +6296,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "SkullMeta",
-			"rarity": "UNCOMMON",
+			"rarity": "EPIC",
 			"record": false,
 			"translationKey": "block.minecraft.dragon_head"
 		},
@@ -6283,7 +6388,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.dune_armor_trim_smithing_template"
 		},
@@ -6298,7 +6403,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.echo_shard"
 		},
@@ -6343,7 +6448,7 @@
 			"maxDurability": 432,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "UNCOMMON",
+			"rarity": "EPIC",
 			"record": false,
 			"translationKey": "item.minecraft.elytra"
 		},
@@ -6418,7 +6523,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "EPIC",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.enchanted_golden_apple"
 		},
@@ -6448,7 +6553,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "item.minecraft.end_crystal"
 		},
@@ -6688,7 +6793,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.explorer_pottery_sherd"
 		},
@@ -6838,7 +6943,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.eye_armor_trim_smithing_template"
 		},
@@ -6902,6 +7007,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.fern"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:field_masoned_banner_pattern",
+			"material": "FIELD_MASONED_BANNER_PATTERN",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.field_masoned_banner_pattern"
 		},
 		{
 			"blockType": false,
@@ -7079,7 +7199,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.flow_armor_trim_smithing_template"
 		},
@@ -7109,7 +7229,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.flow_pottery_sherd"
 		},
@@ -7201,7 +7321,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.friend_pottery_sherd"
 		},
@@ -7503,7 +7623,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "MusicInstrumentMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.goat_horn"
 		},
@@ -7593,7 +7713,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "item.minecraft.golden_apple"
 		},
@@ -7883,6 +8003,21 @@
 			"translationKey": "block.minecraft.gray_bed"
 		},
 		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:gray_bundle",
+			"material": "GRAY_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.gray_bundle"
+		},
+		{
 			"blockType": true,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -8076,6 +8211,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.green_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:green_bundle",
+			"material": "GREEN_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.green_bundle"
 		},
 		{
 			"blockType": true,
@@ -8313,7 +8463,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.guster_pottery_sherd"
 		},
@@ -8375,7 +8525,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.heart_pottery_sherd"
 		},
@@ -8390,7 +8540,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.heartbreak_pottery_sherd"
 		},
@@ -8600,7 +8750,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.host_armor_trim_smithing_template"
 		},
@@ -8615,7 +8765,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.howl_pottery_sherd"
 		},
@@ -9689,6 +9839,21 @@
 			"translationKey": "block.minecraft.light_blue_bed"
 		},
 		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:light_blue_bundle",
+			"material": "LIGHT_BLUE_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.light_blue_bundle"
+		},
+		{
 			"blockType": true,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -9882,6 +10047,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.light_gray_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:light_gray_bundle",
+			"material": "LIGHT_GRAY_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.light_gray_bundle"
 		},
 		{
 			"blockType": true,
@@ -10157,6 +10337,21 @@
 			"translationKey": "block.minecraft.lime_bed"
 		},
 		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:lime_bundle",
+			"material": "LIME_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.lime_bundle"
+		},
+		{
 			"blockType": true,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -10425,6 +10620,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.magenta_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:magenta_bundle",
+			"material": "MAGENTA_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.magenta_bundle"
 		},
 		{
 			"blockType": true,
@@ -11028,7 +11238,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.miner_pottery_sherd"
 		},
@@ -11043,7 +11253,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "EPIC",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.mojang_banner_pattern"
 		},
@@ -11225,7 +11435,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.mourner_pottery_sherd"
 		},
@@ -11376,7 +11586,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_11"
 		},
@@ -11391,7 +11601,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_13"
 		},
@@ -11406,7 +11616,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_5"
 		},
@@ -11421,7 +11631,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_blocks"
 		},
@@ -11436,7 +11646,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_cat"
 		},
@@ -11451,7 +11661,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_chirp"
 		},
@@ -11481,7 +11691,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_creator_music_box"
 		},
@@ -11496,7 +11706,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_far"
 		},
@@ -11511,7 +11721,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_mall"
 		},
@@ -11526,7 +11736,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_mellohi"
 		},
@@ -11571,7 +11781,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_precipice"
 		},
@@ -11586,7 +11796,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_relic"
 		},
@@ -11601,7 +11811,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_stal"
 		},
@@ -11616,7 +11826,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_strad"
 		},
@@ -11631,7 +11841,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_wait"
 		},
@@ -11646,7 +11856,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "RARE",
+			"rarity": "UNCOMMON",
 			"record": true,
 			"translationKey": "item.minecraft.music_disc_ward"
 		},
@@ -11706,7 +11916,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.nautilus_shell"
 		},
@@ -11857,7 +12067,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "UNCOMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.nether_star"
 		},
@@ -12084,7 +12294,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.netherite_upgrade_smithing_template"
 		},
@@ -12439,14 +12649,14 @@
 			"blockType": false,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
-			"edible": true,
+			"edible": false,
 			"fuel": false,
 			"key": "minecraft:ominous_bottle",
 			"material": "OMINOUS_BOTTLE",
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "OminousBottleMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.ominous_bottle"
 		},
@@ -12494,6 +12704,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.orange_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:orange_bundle",
+			"material": "ORANGE_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.orange_bundle"
 		},
 		{
 			"blockType": true,
@@ -12873,6 +13098,311 @@
 			"translationKey": "item.minecraft.painting"
 		},
 		{
+			"blockType": true,
+			"compostChance": "0.3F",
+			"compostable": true,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_hanging_moss",
+			"material": "PALE_HANGING_MOSS",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_hanging_moss"
+		},
+		{
+			"blockType": true,
+			"compostChance": "0.65F",
+			"compostable": true,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_moss_block",
+			"material": "PALE_MOSS_BLOCK",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_moss_block"
+		},
+		{
+			"blockType": true,
+			"compostChance": "0.3F",
+			"compostable": true,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_moss_carpet",
+			"material": "PALE_MOSS_CARPET",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_moss_carpet"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_boat",
+			"material": "PALE_OAK_BOAT",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.pale_oak_boat"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_button",
+			"material": "PALE_OAK_BUTTON",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_button"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_chest_boat",
+			"material": "PALE_OAK_CHEST_BOAT",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.pale_oak_chest_boat"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_door",
+			"material": "PALE_OAK_DOOR",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_door"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_fence",
+			"material": "PALE_OAK_FENCE",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_fence"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_fence_gate",
+			"material": "PALE_OAK_FENCE_GATE",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_fence_gate"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_hanging_sign",
+			"material": "PALE_OAK_HANGING_SIGN",
+			"maxDurability": 0,
+			"maxStackSize": 16,
+			"metaClass": "BlockStateMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_hanging_sign"
+		},
+		{
+			"blockType": true,
+			"compostChance": "0.3F",
+			"compostable": true,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_leaves",
+			"material": "PALE_OAK_LEAVES",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_leaves"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_log",
+			"material": "PALE_OAK_LOG",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_log"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_planks",
+			"material": "PALE_OAK_PLANKS",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_planks"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_pressure_plate",
+			"material": "PALE_OAK_PRESSURE_PLATE",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_pressure_plate"
+		},
+		{
+			"blockType": true,
+			"compostChance": "0.3F",
+			"compostable": true,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_sapling",
+			"material": "PALE_OAK_SAPLING",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_sapling"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_sign",
+			"material": "PALE_OAK_SIGN",
+			"maxDurability": 0,
+			"maxStackSize": 16,
+			"metaClass": "BlockStateMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_sign"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_slab",
+			"material": "PALE_OAK_SLAB",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_slab"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_stairs",
+			"material": "PALE_OAK_STAIRS",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_stairs"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_trapdoor",
+			"material": "PALE_OAK_TRAPDOOR",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_trapdoor"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pale_oak_wood",
+			"material": "PALE_OAK_WOOD",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.pale_oak_wood"
+		},
+		{
 			"blockType": false,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -13112,6 +13642,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.pink_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:pink_bundle",
+			"material": "PINK_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.pink_bundle"
 		},
 		{
 			"blockType": true,
@@ -13383,7 +13928,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.plenty_pottery_sherd"
 		},
@@ -14120,7 +14665,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.prize_pottery_sherd"
 		},
@@ -14246,6 +14791,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.purple_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:purple_bundle",
+			"material": "PURPLE_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.purple_bundle"
 		},
 		{
 			"blockType": true,
@@ -14663,7 +15223,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.raiser_armor_trim_smithing_template"
 		},
@@ -14783,7 +15343,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.recovery_compass"
 		},
@@ -14816,6 +15376,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.red_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:red_bundle",
+			"material": "RED_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.red_bundle"
 		},
 		{
 			"blockType": true,
@@ -15311,7 +15886,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.rib_armor_trim_smithing_template"
 		},
@@ -15522,7 +16097,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.scrape_pottery_sherd"
 		},
@@ -15659,7 +16234,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.sentry_armor_trim_smithing_template"
 		},
@@ -15674,7 +16249,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.shaper_armor_trim_smithing_template"
 		},
@@ -15689,7 +16264,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.sheaf_pottery_sherd"
 		},
@@ -15734,7 +16309,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.shelter_pottery_sherd"
 		},
@@ -15841,7 +16416,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "EPIC",
 			"record": false,
 			"translationKey": "item.minecraft.silence_armor_trim_smithing_template"
 		},
@@ -15916,7 +16491,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "UNCOMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.skull_banner_pattern"
 		},
@@ -15931,7 +16506,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.skull_pottery_sherd"
 		},
@@ -16232,7 +16807,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "block.minecraft.sniffer_egg"
 		},
@@ -16262,7 +16837,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.snort_pottery_sherd"
 		},
@@ -16277,7 +16852,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.snout_armor_trim_smithing_template"
 		},
@@ -16487,7 +17062,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.spire_armor_trim_smithing_template"
 		},
@@ -17384,6 +17959,36 @@
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
 			"edible": false,
+			"fuel": false,
+			"key": "minecraft:stripped_pale_oak_log",
+			"material": "STRIPPED_PALE_OAK_LOG",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.stripped_pale_oak_log"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:stripped_pale_oak_wood",
+			"material": "STRIPPED_PALE_OAK_WOOD",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "block.minecraft.stripped_pale_oak_wood"
+		},
+		{
+			"blockType": true,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
 			"fuel": true,
 			"key": "minecraft:stripped_spruce_log",
 			"material": "STRIPPED_SPRUCE_LOG",
@@ -17664,7 +18269,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.tide_armor_trim_smithing_template"
 		},
@@ -17861,7 +18466,7 @@
 			"maxDurability": 250,
 			"maxStackSize": 1,
 			"metaClass": "ItemMeta",
-			"rarity": "EPIC",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.trident"
 		},
@@ -18207,7 +18812,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.vex_armor_trim_smithing_template"
 		},
@@ -18298,7 +18903,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "item.minecraft.ward_armor_trim_smithing_template"
 		},
@@ -19156,7 +19761,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.wayfinder_armor_trim_smithing_template"
 		},
@@ -19389,6 +19994,21 @@
 			"translationKey": "block.minecraft.white_bed"
 		},
 		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:white_bundle",
+			"material": "WHITE_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.white_bundle"
+		},
+		{
 			"blockType": true,
 			"compostable": false,
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -19580,7 +20200,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "ItemMeta",
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"record": false,
 			"translationKey": "item.minecraft.wild_armor_trim_smithing_template"
 		},
@@ -19641,7 +20261,7 @@
 			"maxDurability": 0,
 			"maxStackSize": 64,
 			"metaClass": "SkullMeta",
-			"rarity": "UNCOMMON",
+			"rarity": "RARE",
 			"record": false,
 			"translationKey": "block.minecraft.wither_skeleton_skull"
 		},
@@ -19839,6 +20459,21 @@
 			"rarity": "COMMON",
 			"record": false,
 			"translationKey": "block.minecraft.yellow_bed"
+		},
+		{
+			"blockType": false,
+			"compostable": false,
+			"creativeCategory": "BUILDING_BLOCKS",
+			"edible": false,
+			"fuel": false,
+			"key": "minecraft:yellow_bundle",
+			"material": "YELLOW_BUNDLE",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "BundleMeta",
+			"rarity": "COMMON",
+			"record": false,
+			"translationKey": "item.minecraft.yellow_bundle"
 		},
 		{
 			"blockType": true,

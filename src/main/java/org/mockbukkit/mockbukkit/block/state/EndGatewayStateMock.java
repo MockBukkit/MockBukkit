@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.EndGateway;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,7 +60,13 @@ public class EndGatewayStateMock extends TileStateMock implements EndGateway
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull EndGatewayStateMock getSnapshot()
+	{
+		return new EndGatewayStateMock(this);
+	}
+
+	@Override
+	public @NotNull EndGatewayStateMock copy()
 	{
 		return new EndGatewayStateMock(this);
 	}
@@ -101,6 +106,16 @@ public class EndGatewayStateMock extends TileStateMock implements EndGateway
 	public void setAge(long age)
 	{
 		this.age = age;
+	}
+
+
+	@Override
+	protected String toStringInternal()
+	{
+		return super.toStringInternal() +
+				", age=" + age +
+				", exactTeleport=" + exactTeleport +
+				", exitLocation=" + exitLocation;
 	}
 
 }

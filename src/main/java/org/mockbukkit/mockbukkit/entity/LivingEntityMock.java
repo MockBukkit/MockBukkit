@@ -1,13 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
-import org.mockbukkit.mockbukkit.attribute.AttributesMock;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.inventory.EntityEquipmentMock;
-import org.mockbukkit.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
@@ -51,11 +43,20 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
+import org.mockbukkit.mockbukkit.attribute.AttributesMock;
+import org.mockbukkit.mockbukkit.entity.ai.BrainMock;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.EntityEquipmentMock;
+import org.mockbukkit.mockbukkit.potion.ActivePotionEffect;
 import org.mockbukkit.mockbukkit.simulate.entity.LivingEntitySimulation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -71,7 +72,7 @@ import java.util.function.Consumer;
  */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
-
+	private final BrainMock brain = new BrainMock();
 	/**
 	 * How much health the entity has.
 	 */
@@ -121,11 +122,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		super(server, uuid);
 
-		attributes = new EnumMap<>(Attribute.class);
-		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
-		double movementSpeed = AttributesMock.getDefaultValue(Attribute.GENERIC_MOVEMENT_SPEED);
-		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, movementSpeed));
+		attributes = new HashMap<>();
+		double maxHealth = AttributesMock.getDefaultValue(Attribute.MAX_HEALTH);
+		attributes.put(Attribute.MAX_HEALTH, new AttributeInstanceMock(Attribute.MAX_HEALTH, maxHealth));
+		double movementSpeed = AttributesMock.getDefaultValue(Attribute.MOVEMENT_SPEED);
+		attributes.put(Attribute.MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.MOVEMENT_SPEED, movementSpeed));
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}
@@ -189,13 +190,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public double getMaxHealth()
 	{
-		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+		return getAttribute(Attribute.MAX_HEALTH).getValue();
 	}
 
 	@Override
 	public void setMaxHealth(double health)
 	{
-		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);
 		if (this.health > health)
 		{
 			this.health = health;
@@ -205,7 +206,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void resetMaxHealth()
 	{
-		setMaxHealth(AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH));
+		setMaxHealth(AttributesMock.getDefaultValue(Attribute.MAX_HEALTH));
 	}
 
 	@Override
@@ -988,15 +989,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public <T> T getMemory(@NotNull MemoryKey<T> memoryKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return brain.getMemory(memoryKey).orElse(null);
 	}
 
 	@Override
 	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T memoryValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		brain.setMemory(memoryKey, memoryValue);
 	}
 
 	@Override

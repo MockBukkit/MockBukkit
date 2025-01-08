@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.bukkit.Input;
+import org.bukkit.entity.EnderPearl;
+import org.bukkit.event.player.PlayerLocaleChangeEvent;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.PlayerListMock;
@@ -187,6 +190,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
+	private final Queue<Component> actionBar = new LinkedTransferQueue<>();
 
 	private final Set<BossBar> bossBars = new HashSet<>();
 
@@ -239,7 +243,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		closeInventory();
 
 		// NMS Player#createAttributes
-		attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.10000000149011612D);
+		attributes.get(Attribute.MOVEMENT_SPEED).setBaseValue(0.10000000149011612D);
 
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
@@ -456,7 +460,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Reset location and health
-		this.setHealth(this.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+		this.setHealth(this.getAttribute(Attribute.MAX_HEALTH).getValue());
 		setLocation(event.getRespawnLocation().clone());
 		alive = true;
 		return event;
@@ -662,7 +666,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void startRiptideAttack(int i, float v, @Nullable ItemStack itemStack)
+	public boolean hasCooldown(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getCooldown(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCooldown(@NotNull ItemStack itemStack, int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void startRiptideAttack(int duration, float attackStrength, @Nullable ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -820,6 +845,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setPlayerListName(@Nullable String name)
 	{
 		this.playerListName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
+	}
+
+	@Override
+	public int getPlayerListOrder()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setPlayerListOrder(int i)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1532,6 +1571,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendActionBar(@NotNull Component component)
+	{
+		actionBar.add(component);
+	}
+
+	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
@@ -1553,6 +1598,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
 		// Pretend we sent the action bar.
+	}
+
+	/**
+	 * @return The next action bar sent to the player.
+	 */
+	public Component nextActionBar()
+	{
+		return actionBar.poll();
 	}
 
 	@Override
@@ -2000,6 +2053,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @NotNull Collection<EnderPearl> getEnderPearls()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Input getCurrentInput()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean getAllowFlight()
 	{
 		return allowFlight;
@@ -2166,7 +2233,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public float getWalkSpeed()
 	{
-		return (float) (this.attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).getValue() * 2);
+		return (float) (this.attributes.get(Attribute.MOVEMENT_SPEED).getValue() * 2);
 	}
 
 	@Override
@@ -2175,7 +2242,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkArgument(value > -1, value + " is too low");
 		Preconditions.checkArgument(value < 1, value + " is too high");
 
-		this.attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(value / 2);
+		this.attributes.get(Attribute.MOVEMENT_SPEED).setBaseValue(value / 2);
 	}
 
 	@Override
@@ -3352,6 +3419,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setLocale(@NotNull Locale locale)
 	{
 		Preconditions.checkNotNull(locale, "locale cannot be null");
+		if (locale.equals(this.locale))
+		{
+			return;
+		}
+		PlayerLocaleChangeEvent event = new PlayerLocaleChangeEvent(this, locale.toLanguageTag());
+		Bukkit.getPluginManager().callEvent(event);
 		this.locale = locale;
 	}
 

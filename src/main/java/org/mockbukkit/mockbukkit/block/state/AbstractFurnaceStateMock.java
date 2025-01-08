@@ -13,13 +13,14 @@ import org.bukkit.inventory.FurnaceInventory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link Furnace}.
  *
  * @see ContainerStateMock
  */
-public abstract class AbstractFurnaceStateMock extends org.mockbukkit.mockbukkit.block.state.ContainerStateMock implements Furnace
+public abstract class AbstractFurnaceStateMock extends ContainerStateMock implements Furnace
 {
 
 	private short burnTime;
@@ -171,7 +172,38 @@ public abstract class AbstractFurnaceStateMock extends org.mockbukkit.mockbukkit
 	@Override
 	public FurnaceInventory getSnapshotInventory()
 	{
-		return (FurnaceInventory) super.getSnapshotInventory();
+		FurnaceInventory rawInventory = (FurnaceInventory) super.getInventory();
+		FurnaceInventoryMock mock = new FurnaceInventoryMock(rawInventory.getHolder());
+		mock.setResult(rawInventory.getResult());
+		mock.setFuel(rawInventory.getFuel());
+		mock.setSmelting(rawInventory.getSmelting());
+		return mock;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof AbstractFurnaceStateMock that)) return false;
+		if (!super.equals(o)) return false;
+		return burnTime == that.burnTime
+				&& cookTime == that.cookTime
+				&& cookTimeTotal == that.cookTimeTotal
+				&& Double.compare(cookSpeedMultiplier, that.cookSpeedMultiplier) == 0;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), burnTime, cookTime, cookTimeTotal, cookSpeedMultiplier);
+	}
+
+	@Override
+	protected String toStringInternal() {
+		return super.toStringInternal() +
+				", burnTime=" + burnTime +
+				", cookTime=" + cookTime +
+				", cookTimeTotal=" + cookTimeTotal +
+				", cookSpeedMultiplier=" + cookSpeedMultiplier;
+	}
 }

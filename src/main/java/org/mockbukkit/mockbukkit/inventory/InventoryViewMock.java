@@ -1,15 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.bukkit.Location;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of an {@link InventoryView}.
@@ -23,23 +24,21 @@ public abstract class InventoryViewMock implements InventoryView
 	private InventoryType type;
 	private String name;
 	private String originalTitle;
-	private boolean titleChanged = false;
-	private ItemStack cursor = null;
 
 	/**
 	 * Constructs a new {@link InventoryViewMock} with the provided parameters.
 	 *
 	 * @param player The player this view is for.
-	 * @param name   The name of the view (title).
 	 * @param top    The top inventory.
 	 * @param bottom The bottom inventory.
 	 * @param type   The type of the inventory.
 	 */
-	protected InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type)
+	protected InventoryViewMock(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
 	{
 		this.player = player;
 		this.type = type;
-		this.name = name;
+		this.name = LegacyComponentSerializer.legacySection().serialize((top instanceof InventoryMock inventoryMock ? inventoryMock.getTitle() : type.defaultTitle()));
+		this.originalTitle = name;
 		topInventory = top;
 		bottomInventory = bottom;
 	}
@@ -123,11 +122,9 @@ public abstract class InventoryViewMock implements InventoryView
 	@Override
 	public void setTitle(@NotNull String title)
 	{
-		if (!this.titleChanged)
-		{
-			this.originalTitle = this.name;
-			this.titleChanged = true;
-		}
+		Preconditions.checkArgument(title != null, "Title cannot be null");
+		Preconditions.checkArgument(this.getPlayer() instanceof Player, "NPCs are not currently supported for this function");
+		Preconditions.checkArgument(this.getTopInventory().getType().isCreatable(), "Only creatable inventories can have their title changed");
 		this.name = title;
 	}
 

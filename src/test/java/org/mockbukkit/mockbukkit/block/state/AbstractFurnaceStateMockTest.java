@@ -14,12 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class AbstractFurnaceStateMockTest
+class AbstractFurnaceStateMockTest extends ContainerStateMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
 	private TestFurnaceState furnace;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return furnace;
+	}
 
 	@BeforeEach
 	void setUp()
@@ -147,9 +153,15 @@ class AbstractFurnaceStateMockTest
 		}
 
 		@Override
-		public @NotNull BlockState getSnapshot()
+		public @NotNull TestFurnaceState getSnapshot()
 		{
-			throw new UnimplementedOperationException();
+			return new TestFurnaceState(this);
+		}
+
+		@Override
+		public @NotNull TestFurnaceState copy()
+		{
+			return new TestFurnaceState(this);
 		}
 
 	}
