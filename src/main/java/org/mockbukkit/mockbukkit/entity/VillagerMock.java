@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
  */
 public class VillagerMock extends AbstractVillagerMock implements Villager
 {
+
 	private static final int MIN_VILLAGER_LEVEL = 1;
 	private static final int MAX_VILLAGER_LEVEL = 5;
 
@@ -115,12 +116,14 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 				"Final level reached after the donation (%d) must be between [%d, %d]".formatted(supposedFinalLevel, MIN_VILLAGER_LEVEL, MAX_VILLAGER_LEVEL));
 
 		List<MerchantRecipe> trades = getRecipes();
-		if (trades.isEmpty()) {
+		if (trades.isEmpty())
+		{
 			setVillagerLevel(supposedFinalLevel);
 			return false;
 		}
 
-		while (amount > 0) {
+		while (amount > 0)
+		{
 			setVillagerLevel(getVillagerLevel() + 1);
 			updateTrades();
 			amount--;
@@ -230,7 +233,8 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 			if (value == 0)
 			{
 				map.remove(reputationType);
-			} else
+			}
+			else
 			{
 				map.put(reputationType, value);
 			}
@@ -242,7 +246,8 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	public void setReputations(@NotNull Map<UUID, Reputation> reputations)
 	{
 		Preconditions.checkNotNull(reputations, "Reputation cannot be null");
-		for (Map.Entry<UUID, Reputation> entry : reputations.entrySet()) {
+		for (Map.Entry<UUID, Reputation> entry : reputations.entrySet())
+		{
 			setReputation(entry.getKey(), entry.getValue());
 		}
 	}

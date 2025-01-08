@@ -353,13 +353,15 @@ public final class EntityTypesMock
 		if (bukkitClazz == Item.class)
 		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		} else if (bukkitClazz == Player.class)
+		}
+		else if (bukkitClazz == Player.class)
 		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
 
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
-		if (data == null) {
+		if (data == null)
+		{
 			throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
 		}
 
