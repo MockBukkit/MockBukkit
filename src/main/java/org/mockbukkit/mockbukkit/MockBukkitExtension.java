@@ -8,13 +8,17 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
+import org.junit.platform.commons.util.ExceptionUtils;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
@@ -82,8 +86,9 @@ import java.util.Set;
  * }
  * </code></pre>
  */
-public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, AfterAllCallback
+public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, AfterAllCallback, TestExecutionExceptionHandler
 {
+	private final Logger logger = Logger.getLogger("MockBukkitExtension");
 	private final Set<Class<?>> serverSupportedTypes = Set.of(Server.class, ServerMock.class);
 
 	@Override
@@ -147,6 +152,30 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public void afterAll(ExtensionContext context) throws Exception
 	{
 		MockBukkit.unmock();
+	}
+
+	@Override
+	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable
+	{
+		if (throwable instanceof UnimplementedOperationException) {
+			logger.info("----------------------------------------------------------------");
+			logger.info("\uD83E\uDD14 Hmmm... Something's Missing! \uD83E\uDD14");
+			logger.info("----------------------------------------------------------------");
+			logger.info("");
+			logger.info("\uD83D\uDEA7 This feature is not implemented yet. \uD83D\uDEA7");
+			logger.info("");
+			logger.info("To help us out, please open an issue on our GitHub repository with this information:");
+			logger.info("https://github.com/MockBukkit/MockBukkit/issues");
+			logger.info("or consider contributing by submitting a pull request. \uD83D\uDCBB✨");
+			logger.info("");
+			logger.info("Your support and contributions keep the MockBukkit magic alive.");
+			logger.info("Thank you for your collaboration! \uD83D\uDE4F");
+			logger.info("");
+			logger.info("----------------------------------------------------------------");
+			logger.info(() -> ExceptionUtils.readStackTrace(throwable));
+		}
+
+		throw throwable;
 	}
 
 }
