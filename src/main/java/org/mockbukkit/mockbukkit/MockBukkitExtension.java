@@ -158,11 +158,9 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable
 	{
 		if (throwable instanceof UnimplementedOperationException) {
-			logger.info("----------------------------------------------------------------");
-			logger.info("\uD83E\uDD14 Hmmm... Something's Missing! \uD83E\uDD14");
-			logger.info("----------------------------------------------------------------");
-			logger.info("");
-			logger.info("\uD83D\uDEA7 This feature is not implemented yet. \uD83D\uDEA7");
+			logger.info("------------------------------------------------------------------------------------");
+			logger.info("\t\t\t\t\uD83D\uDEA7 This feature is not implemented yet. \uD83D\uDEA7");
+			logger.info("------------------------------------------------------------------------------------");
 			logger.info("");
 			logger.info("To help us out, please open an issue on our GitHub repository with this information:");
 			logger.info("https://github.com/MockBukkit/MockBukkit/issues");
@@ -171,7 +169,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			logger.info("Your support and contributions keep the MockBukkit magic alive.");
 			logger.info("Thank you for your collaboration! \uD83D\uDE4F");
 			logger.info("");
-			logger.info("----------------------------------------------------------------");
+			logger.info("------------------------------------------------------------------------------------");
 			logger.info(() -> ExceptionUtils.readStackTrace(throwable));
 		}
 
