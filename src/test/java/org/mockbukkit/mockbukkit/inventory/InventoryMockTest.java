@@ -35,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -737,13 +736,15 @@ class InventoryMockTest
 	}
 
 	@Nested
-	class IsIdentical {
+	class IsIdentical
+	{
 
 		@MockBukkitInject
 		private ServerMock serverMock;
 
 		@Test
-		void givenItemChanges() {
+		void givenItemChanges()
+		{
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
@@ -760,7 +761,8 @@ class InventoryMockTest
 		}
 
 		@Test
-		void givenDifferentTypes() {
+		void givenDifferentTypes()
+		{
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.DROPPER);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
@@ -768,7 +770,8 @@ class InventoryMockTest
 		}
 
 		@Test
-		void givenDifferentMaxSizes() {
+		void givenDifferentMaxSizes()
+		{
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
@@ -784,7 +787,8 @@ class InventoryMockTest
 		}
 
 		@Test
-		void givenDifferentHolders() {
+		void givenDifferentHolders()
+		{
 
 			Player player = server.addPlayer();
 
@@ -797,7 +801,8 @@ class InventoryMockTest
 		}
 
 		@Test
-		void givenDifferentTitles() {
+		void givenDifferentTitles()
+		{
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
@@ -808,8 +813,10 @@ class InventoryMockTest
 			assertIsNotIdentical(inventoryA, inventoryB);
 		}
 
-		public static void assertIsIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB) {
-			if (inventoryA == null) {
+		public static void assertIsIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB)
+		{
+			if (inventoryA == null)
+			{
 				assertNull(inventoryB);
 			} else
 			{
@@ -817,8 +824,10 @@ class InventoryMockTest
 			}
 		}
 
-		public static void assertIsNotIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB) {
-			if (inventoryA == null) {
+		public static void assertIsNotIdentical(@Nullable InventoryMock inventoryA, @Nullable InventoryMock inventoryB)
+		{
+			if (inventoryA == null)
+			{
 				assertNotNull(inventoryB);
 			} else
 			{

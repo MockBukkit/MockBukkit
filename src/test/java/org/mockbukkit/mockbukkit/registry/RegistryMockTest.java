@@ -89,34 +89,39 @@ class RegistryMockTest
 	}
 
 	@Test
-	void entityType_Registry_LoadsCorrectly() {
+	void entityType_Registry_LoadsCorrectly()
+	{
 		Registry<?> registry = new RegistryMock<>(RegistryKey.ENTITY_TYPE);
 		assertNotNull(registry.get(NamespacedKey.minecraft("zombie")));
 		assertEquals(org.bukkit.entity.EntityType.ZOMBIE, registry.get(NamespacedKey.minecraft("zombie")));
 	}
 
 	@Test
-	void particle_Registry_LoadsCorrectly() {
+	void particle_Registry_LoadsCorrectly()
+	{
 		Registry<?> registry = new RegistryMock<>(RegistryKey.PARTICLE_TYPE);
 		assertNotNull(registry.get(NamespacedKey.minecraft("flame")));
 		assertEquals(org.bukkit.Particle.FLAME, registry.get(NamespacedKey.minecraft("flame")));
 	}
 
 	@Test
-	void potion_Registry_LoadsCorrectly() {
+	void potion_Registry_LoadsCorrectly()
+	{
 		Registry<?> registry = new RegistryMock<>(RegistryKey.POTION);
 		assertNotNull(registry.get(NamespacedKey.minecraft("strength")));
 		assertEquals(org.bukkit.potion.PotionType.STRENGTH, registry.get(NamespacedKey.minecraft("strength")));
 	}
 
 	@Test
-	void enum_Registry_HandlesInvalidKey() {
+	void enum_Registry_HandlesInvalidKey()
+	{
 		Registry<?> registry = new RegistryMock<>(RegistryKey.ENTITY_TYPE);
 		assertNull(registry.get(NamespacedKey.minecraft("not_an_entity")));
 	}
 
 	@Test
-	void enum_Registry_StreamContainsAllValues() {
+	void enum_Registry_StreamContainsAllValues()
+	{
 		Registry<?> registry = new RegistryMock<>(RegistryKey.ENTITY_TYPE);
 		long registryCount = registry.stream().count();
 		long enumCount = Arrays.stream(org.bukkit.entity.EntityType.values())

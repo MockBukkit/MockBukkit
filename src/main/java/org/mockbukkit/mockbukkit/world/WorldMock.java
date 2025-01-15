@@ -381,8 +381,10 @@ public class WorldMock implements World
 	public int getEntityCount()
 	{
 		int ret = 0;
-		for (Entity entity : getEntities()) {
-			if (isChunkLoaded(entity.getChunk())) {
+		for (Entity entity : getEntities())
+		{
+			if (isChunkLoaded(entity.getChunk()))
+			{
 				++ret;
 			}
 		}
