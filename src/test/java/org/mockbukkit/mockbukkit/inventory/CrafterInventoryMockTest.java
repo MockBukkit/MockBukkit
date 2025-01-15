@@ -23,12 +23,14 @@ class CrafterInventoryMockTest
 	}
 
 	@Test
-	void getType() {
+	void getType()
+	{
 		assertEquals(InventoryType.CRAFTER, inventory.getType());
 	}
 
 	@Test
-	void getSnapshot() {
+	void getSnapshot()
+	{
 		assertTrue(inventory.isIdentical(inventory.getSnapshot()));
 	}
 

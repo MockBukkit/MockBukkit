@@ -1458,7 +1458,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		String[] gameRules = world.getGameRules();
 		assertNotEquals(0, Arrays.stream(gameRules).count());
-		for (String gameRule : gameRules) {
+		for (String gameRule : gameRules)
+		{
 			assertNotNull(GameRule.getByName(gameRule));
 		}
 	}
