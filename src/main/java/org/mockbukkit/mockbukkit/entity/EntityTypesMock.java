@@ -68,6 +68,7 @@ import org.bukkit.entity.Marker;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
+import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
@@ -274,6 +275,7 @@ public final class EntityTypesMock
 			.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 			.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 			.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
+			.register(Painting.class, PaintingMock.class, PaintingMock::new)
 			.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 			.register(Panda.class, PandaMock.class, PandaMock::new)
@@ -353,13 +355,15 @@ public final class EntityTypesMock
 		if (bukkitClazz == Item.class)
 		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		} else if (bukkitClazz == Player.class)
+		}
+		else if (bukkitClazz == Player.class)
 		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
 
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
-		if (data == null) {
+		if (data == null)
+		{
 			throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
 		}
 

@@ -120,7 +120,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
 		// Add special handling for enum-based registry types
-		if (isEnumBasedRegistry(key)) {
+		if (isEnumBasedRegistry(key))
+		{
 			return jsonObject -> createEnumWrapper(jsonObject, key);
 		}
 
@@ -133,35 +134,42 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		return constructorFunction;
 	}
 
-	private boolean isEnumBasedRegistry(RegistryKey<?> key) {
+	private boolean isEnumBasedRegistry(RegistryKey<?> key)
+	{
 		return key == RegistryKey.ENTITY_TYPE
 			|| key == RegistryKey.PARTICLE_TYPE
 			|| key == RegistryKey.POTION;
 	}
 
-	private T createEnumWrapper(JsonObject jsonObject, RegistryKey<T> key) {
+	private T createEnumWrapper(JsonObject jsonObject, RegistryKey<T> key)
+	{
 		// Extract the key from the JSON object
 		String id = jsonObject.get("key").getAsString();
 		NamespacedKey namespacedKey = NamespacedKey.fromString(id);
 
 		// Get the enum class from the registry key's type parameter
 		Class<?> enumClass = getEnumClassForRegistryKey(key);
-		if (enumClass == null || !enumClass.isEnum()) {
+		if (enumClass == null || !enumClass.isEnum())
+		{
 			throw new IllegalStateException("Registry key " + key + " is marked as enum but has no enum class");
 		}
 
 		// Find the enum constant by name
 		String enumName = namespacedKey.getKey().toUpperCase();
-		try {
+		try
+		{
 			// Convert the enum name to the corresponding enum constant
 			Enum<?> enumValue = Enum.valueOf((Class<? extends Enum>) enumClass, enumName);
 			return (T) enumValue;
-		} catch (IllegalArgumentException | ClassCastException e) {
+		}
+		catch (IllegalArgumentException | ClassCastException e)
+		{
 			throw new IllegalStateException("Could not find enum constant " + enumName + " in " + enumClass, e);
 		}
 	}
 
-	private Class<?> getEnumClassForRegistryKey(RegistryKey<?> key) {
+	private Class<?> getEnumClassForRegistryKey(RegistryKey<?> key)
+	{
 		Map<RegistryKey<?>, Class<?>> enumMap = new HashMap<>();
 		enumMap.put(RegistryKey.ENTITY_TYPE, org.bukkit.entity.EntityType.class);
 		enumMap.put(RegistryKey.PARTICLE_TYPE, org.bukkit.Particle.class);

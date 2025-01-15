@@ -21,6 +21,7 @@ import java.util.UUID;
  */
 public class BoatMock extends VehicleMock implements Boat
 {
+
 	private double maxSpeed = 0.4D;
 	private double occupiedDeceleration = 0.2D;
 	private double unoccupiedDeceleration = -1;
@@ -42,23 +43,28 @@ public class BoatMock extends VehicleMock implements Boat
 	public @NotNull TreeSpecies getWoodType()
 	{
 		EntityType boatType = getType();
-		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT) {
+		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT)
+		{
 			return TreeSpecies.REDWOOD;
 		}
 
-		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT) {
+		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT)
+		{
 			return TreeSpecies.BIRCH;
 		}
 
-		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT) {
+		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT)
+		{
 			return TreeSpecies.JUNGLE;
 		}
 
-		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT) {
+		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT)
+		{
 			return TreeSpecies.ACACIA;
 		}
 
-		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT) {
+		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT)
+		{
 			return TreeSpecies.DARK_OAK;
 		}
 
@@ -77,39 +83,48 @@ public class BoatMock extends VehicleMock implements Boat
 	public @NotNull Type getBoatType()
 	{
 		EntityType boatType = getType();
-		if (boatType == EntityType.OAK_BOAT || boatType == EntityType.OAK_CHEST_BOAT) {
+		if (boatType == EntityType.OAK_BOAT || boatType == EntityType.OAK_CHEST_BOAT)
+		{
 			return Type.OAK;
 		}
 
-		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT) {
+		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT)
+		{
 			return Type.BIRCH;
 		}
 
-		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT) {
+		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT)
+		{
 			return Type.ACACIA;
 		}
 
-		if (boatType == EntityType.CHERRY_BOAT || boatType == EntityType.CHERRY_CHEST_BOAT) {
+		if (boatType == EntityType.CHERRY_BOAT || boatType == EntityType.CHERRY_CHEST_BOAT)
+		{
 			return Type.CHERRY;
 		}
 
-		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT) {
+		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT)
+		{
 			return Type.JUNGLE;
 		}
 
-		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT) {
+		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT)
+		{
 			return Type.SPRUCE;
 		}
 
-		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT) {
+		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT)
+		{
 			return Type.DARK_OAK;
 		}
 
-		if (boatType == EntityType.MANGROVE_BOAT || boatType == EntityType.MANGROVE_CHEST_BOAT) {
+		if (boatType == EntityType.MANGROVE_BOAT || boatType == EntityType.MANGROVE_CHEST_BOAT)
+		{
 			return Type.MANGROVE;
 		}
 
-		if (boatType == EntityType.BAMBOO_RAFT || boatType == EntityType.BAMBOO_CHEST_RAFT) {
+		if (boatType == EntityType.BAMBOO_RAFT || boatType == EntityType.BAMBOO_CHEST_RAFT)
+		{
 			return Type.BAMBOO;
 		}
 

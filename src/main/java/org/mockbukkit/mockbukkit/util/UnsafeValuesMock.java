@@ -64,6 +64,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -296,6 +297,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		try
 		{
+			bao.write(ByteBuffer.allocate(4).putInt(item.getAmount()).array());
 			final ObjectOutputStream oos = new BukkitObjectOutputStreamMock(bao);
 			oos.writeObject(item);
 			return bao.toByteArray();
@@ -314,8 +316,11 @@ public class UnsafeValuesMock implements UnsafeValues
 		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
 		try
 		{
+			int amount = ByteBuffer.wrap(bai.readNBytes(4)).getInt();
 			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
-			return (ItemStackMock) ois.readObject();
+			ItemStackMock stack = (ItemStackMock) ois.readObject();
+			stack.setAmount(amount);
+			return stack;
 		}
 		catch (IOException | ClassNotFoundException e)
 		{

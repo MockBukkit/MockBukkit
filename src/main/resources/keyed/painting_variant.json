@@ -1,6 +1,7 @@
 {
 	"values": [
 		{
+			"assetId": "minecraft:alban",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.alban.author"
@@ -17,6 +18,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:aztec",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.aztec.author"
@@ -33,6 +35,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:aztec2",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.aztec2.author"
@@ -49,6 +52,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:backyard",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.backyard.author"
@@ -65,6 +69,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:baroque",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.baroque.author"
@@ -81,6 +86,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:bomb",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.bomb.author"
@@ -97,6 +103,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:bouquet",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.bouquet.author"
@@ -113,6 +120,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:burning_skull",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.burning_skull.author"
@@ -129,6 +137,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:bust",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.bust.author"
@@ -145,6 +154,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:cavebird",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.cavebird.author"
@@ -161,6 +171,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:changing",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.changing.author"
@@ -177,6 +188,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:cotan",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.cotan.author"
@@ -193,6 +205,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:courbet",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.courbet.author"
@@ -209,6 +222,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:creebet",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.creebet.author"
@@ -225,6 +239,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:donkey_kong",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.donkey_kong.author"
@@ -241,6 +256,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:earth",
 			"blockHeight": 2,
 			"blockWidth": 2,
 			"id": 15,
@@ -253,6 +269,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:endboss",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.endboss.author"
@@ -269,6 +286,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:fern",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.fern.author"
@@ -285,6 +303,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:fighters",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.fighters.author"
@@ -301,6 +320,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:finding",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.finding.author"
@@ -317,6 +337,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:fire",
 			"blockHeight": 2,
 			"blockWidth": 2,
 			"id": 20,
@@ -329,6 +350,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:graham",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.graham.author"
@@ -345,6 +367,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:humble",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.humble.author"
@@ -361,6 +384,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:kebab",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.kebab.author"
@@ -377,6 +401,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:lowmist",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.lowmist.author"
@@ -393,6 +418,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:match",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.match.author"
@@ -409,6 +435,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:meditative",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.meditative.author"
@@ -425,6 +452,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:orb",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.orb.author"
@@ -441,6 +469,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:owlemons",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.owlemons.author"
@@ -457,6 +486,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:passage",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.passage.author"
@@ -473,6 +503,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:pigscene",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.pigscene.author"
@@ -489,6 +520,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:plant",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.plant.author"
@@ -505,6 +537,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:pointer",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.pointer.author"
@@ -521,6 +554,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:pond",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.pond.author"
@@ -537,6 +571,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:pool",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.pool.author"
@@ -553,6 +588,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:prairie_ride",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.prairie_ride.author"
@@ -569,6 +605,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:sea",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.sea.author"
@@ -585,6 +622,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:skeleton",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.skeleton.author"
@@ -601,6 +639,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:skull_and_roses",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.skull_and_roses.author"
@@ -617,6 +656,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:stage",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.stage.author"
@@ -633,6 +673,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:sunflowers",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.sunflowers.author"
@@ -649,6 +690,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:sunset",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.sunset.author"
@@ -665,6 +707,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:tides",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.tides.author"
@@ -681,6 +724,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:unpacked",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.unpacked.author"
@@ -697,6 +741,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:void",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.void.author"
@@ -713,6 +758,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:wanderer",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.wanderer.author"
@@ -729,6 +775,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:wasteland",
 			"author": {
 				"color": "gray",
 				"translate": "painting.minecraft.wasteland.author"
@@ -745,6 +792,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:water",
 			"blockHeight": 2,
 			"blockWidth": 2,
 			"id": 47,
@@ -757,6 +805,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:wind",
 			"blockHeight": 2,
 			"blockWidth": 2,
 			"id": 48,
@@ -769,6 +818,7 @@
 			}
 		},
 		{
+			"assetId": "minecraft:wither",
 			"blockHeight": 2,
 			"blockWidth": 2,
 			"id": 49,
