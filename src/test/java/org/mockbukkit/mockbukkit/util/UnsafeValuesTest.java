@@ -124,7 +124,7 @@ class UnsafeValuesTest
 				{
 					continue;
 				}
-				ItemStack item = new ItemStackMock(material);
+				ItemStack item = new ItemStackMock(material, 10);
 				args.add(Arguments.of(Named.of(material.name(), item)));
 			}
 			ItemStack item = new ItemStackMock(Material.STONE);

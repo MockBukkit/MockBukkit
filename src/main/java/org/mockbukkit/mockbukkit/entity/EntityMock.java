@@ -1,17 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.command.MessageTarget;
-import org.mockbukkit.mockbukkit.entity.data.EntityData;
-import org.mockbukkit.mockbukkit.entity.data.EntityDataRegistry;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-import org.mockbukkit.mockbukkit.event.EventFactoryMock;
-import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
@@ -58,6 +46,18 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.command.MessageTarget;
+import org.mockbukkit.mockbukkit.entity.data.EntityData;
+import org.mockbukkit.mockbukkit.entity.data.EntityDataRegistry;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
+import org.mockbukkit.mockbukkit.event.EventFactoryMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.metadata.MetadataTable;
+import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -598,7 +598,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public double getHeight()
 	{
-		return entityData.getHeight(this.getSubType(), this.getEntityState());
+		return getHeight(this.getEntityState());
 	}
 
 	protected double getHeight(@NotNull EntityState state)
