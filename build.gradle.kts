@@ -100,6 +100,7 @@ sourceSets {
 	main {
 		blossom {
 			javaSources {
+				property("mockBukkitVersion", getFullVersion())
 				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
 				property("buildTime", System.currentTimeMillis().toString())
 				property("branch", run("git", "rev-parse", "--abbrev-ref", "HEAD"))
