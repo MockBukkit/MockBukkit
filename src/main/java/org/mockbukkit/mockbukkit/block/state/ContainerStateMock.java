@@ -69,7 +69,8 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	 * @param inventory Inventory contents to copy.
 	 * @return A new inventory, of the correct type for the state with contents deep-copied from the given inventory.
 	 */
-	protected @NotNull InventoryMock createInventoryCopy(@NotNull Inventory inventory) {
+	protected @NotNull InventoryMock createInventoryCopy(@NotNull Inventory inventory)
+	{
 		InventoryMock other = createInventory();
 		other.setContents(inventory.getContents());
 		return other;

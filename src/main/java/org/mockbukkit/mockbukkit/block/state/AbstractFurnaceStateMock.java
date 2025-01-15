@@ -199,11 +199,13 @@ public abstract class AbstractFurnaceStateMock extends ContainerStateMock implem
 	}
 
 	@Override
-	protected String toStringInternal() {
+	protected String toStringInternal()
+	{
 		return super.toStringInternal() +
 				", burnTime=" + burnTime +
 				", cookTime=" + cookTime +
 				", cookTimeTotal=" + cookTimeTotal +
 				", cookSpeedMultiplier=" + cookSpeedMultiplier;
 	}
+
 }
