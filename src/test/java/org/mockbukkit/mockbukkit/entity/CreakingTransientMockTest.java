@@ -18,12 +18,12 @@ class CreakingTransientMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private CreakingMock creaking;
+	private CreakingTransientMock creaking;
 
 	@BeforeEach
 	void setup()
 	{
-		creaking = new CreakingMock(server, UUID.randomUUID());
+		creaking = new CreakingTransientMock(server, UUID.randomUUID());
 	}
 
 	@Test
