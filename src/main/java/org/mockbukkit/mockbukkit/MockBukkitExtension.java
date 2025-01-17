@@ -88,6 +88,9 @@ import java.util.logging.Logger;
  */
 public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, AfterAllCallback, TestExecutionExceptionHandler
 {
+
+	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
+
 	private final Logger logger = Logger.getLogger("MockBukkitExtension");
 	private final Set<Class<?>> serverSupportedTypes = Set.of(Server.class, ServerMock.class);
 
@@ -157,20 +160,27 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	@Override
 	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable
 	{
-		if (throwable instanceof UnimplementedOperationException) {
-			logger.info("------------------------------------------------------------------------------------");
+		if (throwable instanceof UnimplementedOperationException)
+		{
+			logger.info(HORIZONTAL_DIVIDER);
 			logger.info("\t\t\t\t\uD83D\uDEA7 This feature is not implemented yet. \uD83D\uDEA7");
-			logger.info("------------------------------------------------------------------------------------");
+			logger.info(HORIZONTAL_DIVIDER);
 			logger.info("");
-			logger.info("To help us out, please open an issue on our GitHub repository with this information:");
+			logger.info("To help us out, please open an issue on our GitHub repository with this information at");
 			logger.info("https://github.com/MockBukkit/MockBukkit/issues");
-			logger.info("or consider contributing by submitting a pull request. \uD83D\uDCBB✨");
+			logger.info("or consider contributing by submitting a pull request. \uD83D\uDCAA");
 			logger.info("");
 			logger.info("Your support and contributions keep the MockBukkit magic alive.");
 			logger.info("Thank you for your collaboration! \uD83D\uDE4F");
 			logger.info("");
-			logger.info("------------------------------------------------------------------------------------");
-			logger.info(() -> ExceptionUtils.readStackTrace(throwable));
+			logger.info(HORIZONTAL_DIVIDER);
+			logger.info("\t\t\t\t\t\t\uD83D\uDCCB Technical details \uD83D\uDCCB");
+			logger.info(HORIZONTAL_DIVIDER);
+			logger.info(() -> String.format("Paper Version: %s", BuildParameters.PAPER_API_FULL_VERSION));
+			logger.info(() -> String.format("MockBukkit Version: %s", BuildParameters.MOCK_BUKKIT_VERSION));
+			logger.info(() -> String.format("MockBukkit Commit: %s", BuildParameters.COMMIT));
+			logger.info(() -> String.format("MockBukkit Branch: %s", BuildParameters.BRANCH));
+			logger.info(() -> String.format("Stacktrace:%n%s", ExceptionUtils.readStackTrace(throwable)));
 		}
 
 		throw throwable;
