@@ -93,6 +93,7 @@ import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
+import org.bukkit.entity.Strider;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.ThrownExpBottle;
@@ -307,6 +308,7 @@ public final class EntityTypesMock
 			.register(Squid.class, SquidMock.class, SquidMock::new)
 			.register(StorageMinecart.class, StorageMinecartMock.class, StorageMinecartMock::new)
 			.register(Stray.class, StrayMock.class, StrayMock::new)
+			.register(Strider.class, StriderMock.class, StriderMock::new)
 			.register(Tadpole.class, TadpoleMock.class, TadpoleMock::new)
 			.register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new)
 			.register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new)
