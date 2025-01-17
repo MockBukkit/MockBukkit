@@ -188,7 +188,7 @@ This is useful when the plugin you are testing may be looking at other loaded pl
 The following piece of code creates a placeholder plugin that extends JavaPlugin.
 
 ```java
-MockPlugin plugin = MockBukkit.createMockPlugin();
+PluginMock plugin = MockBukkit.createMockPlugin();
 ```
 
 ### Mock Players
