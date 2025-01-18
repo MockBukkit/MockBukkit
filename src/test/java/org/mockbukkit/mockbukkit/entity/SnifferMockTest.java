@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sniffer;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -141,6 +142,12 @@ class SnifferMockTest
 			assertEquals(state, sniffer.getState());
 		}
 
+	}
+
+	@Test
+	void getType()
+	{
+		assertEquals(EntityType.SNIFFER, sniffer.getType());
 	}
 
 }

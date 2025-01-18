@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sniffer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -123,6 +124,12 @@ public class SnifferMock extends AnimalsMock implements Sniffer
 	public boolean canDig()
 	{
 		throw new UnimplementedOperationException("Method canDig was not implemented.");
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.SNIFFER;
 	}
 
 }
