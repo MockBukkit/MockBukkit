@@ -13,6 +13,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class SnifferMock extends AnimalsMock implements Sniffer
 	@Override
 	public @NotNull Collection<Location> getExploredLocations()
 	{
-		return new ArrayList<>(exploredLocations);
+		return Collections.unmodifiableList(exploredLocations);
 	}
 
 	@Override
@@ -117,13 +118,13 @@ public class SnifferMock extends AnimalsMock implements Sniffer
 	@Override
 	public @Nullable Location findPossibleDigLocation()
 	{
-		throw new UnimplementedOperationException("Method findPossibleDigLocation was not implemented.");
+		throw new UnimplementedOperationException("Method findPossibleDigLocation is not implemented.");
 	}
 
 	@Override
 	public boolean canDig()
 	{
-		throw new UnimplementedOperationException("Method canDig was not implemented.");
+		throw new UnimplementedOperationException("Method canDig is not implemented.");
 	}
 
 	@Override
