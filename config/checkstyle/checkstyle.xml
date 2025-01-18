@@ -11,5 +11,9 @@
 			<property name="option" value="nl"/>
 		</module>
 
+		<!-- Imports -->
+		<module name="UnusedImports"/>
+		<module name="RedundantImport"/>
+
 	</module>
 </module>
