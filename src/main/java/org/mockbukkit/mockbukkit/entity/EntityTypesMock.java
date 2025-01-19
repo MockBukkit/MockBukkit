@@ -87,6 +87,7 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
+import org.bukkit.entity.Sniffer;
 import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.SpectralArrow;
@@ -297,6 +298,7 @@ public final class EntityTypesMock
 			.register(SkeletonHorse.class, SkeletonHorseMock.class, SkeletonHorseMock::new)
 			.register(Slime.class, SlimeMock.class, SlimeMock::new)
 			.register(SmallFireball.class, SmallFireballMock.class, SmallFireballMock::new)
+			.register(Sniffer.class, SnifferMock.class, SnifferMock::new)
 			.register(Snowball.class, SnowballMock.class, SnowballMock::new)
 			.register(Snowman.class, SnowmanMock.class, SnowmanMock::new)
 			.register(SpawnerMinecart.class, SpawnerMinecartMock.class, SpawnerMinecartMock::new)

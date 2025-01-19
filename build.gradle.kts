@@ -29,7 +29,7 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
 	implementation("org.jetbrains:annotations:26.0.1")
-	implementation("net.bytebuddy:byte-buddy:1.16.0")
+	implementation("net.bytebuddy:byte-buddy:1.16.1")
 	implementation("org.hamcrest:hamcrest:3.0")
 
 	// LibraryLoader dependencies
