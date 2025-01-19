@@ -142,6 +142,7 @@ import org.mockbukkit.mockbukkit.entity.SkeletonHorseMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonMock;
 import org.mockbukkit.mockbukkit.entity.SlimeMock;
 import org.mockbukkit.mockbukkit.entity.SmallFireballMock;
+import org.mockbukkit.mockbukkit.entity.SnifferMock;
 import org.mockbukkit.mockbukkit.entity.SnowballMock;
 import org.mockbukkit.mockbukkit.entity.SnowmanMock;
 import org.mockbukkit.mockbukkit.entity.SpawnerMinecartMock;
@@ -1448,7 +1449,8 @@ class WorldMockTest
 				Arguments.of(EntityType.BREEZE_WIND_CHARGE, BreezeWindChargeMock.class),
 				Arguments.of(EntityType.WIND_CHARGE, WindChargeMock.class),
 				Arguments.of(EntityType.WITHER, WitherMock.class),
-				Arguments.of(EntityType.ENDER_DRAGON, EnderDragonMock.class)
+				Arguments.of(EntityType.ENDER_DRAGON, EnderDragonMock.class),
+				Arguments.of(EntityType.SNIFFER, SnifferMock.class)
 		);
 	}
 
