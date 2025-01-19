@@ -12,4 +12,4 @@ To apply resources to mockbukkit, simply run this command:
 ```bash
 ./gradlew updateResources
 ```
-Note that you need to agree to the eula before doing this in the `./metaminer/eula.txt` file
+Note that you need to agree to the eula before doing this in the `./metaminer/run/eula.txt` file
