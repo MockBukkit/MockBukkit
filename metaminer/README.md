@@ -10,11 +10,11 @@ A paper plugin that generate necessary files for MockBukkit.
 
 To build this project you will need to have Java 21 or later installed and execute:
 ```bash
-./gradlew build
+./gradlew :metaminer:build
 ```
 
 To run the plugin in a server, execute the following command:
 ```bash
-./gradlew runServer
+./gradlew metaminer:runServer
 ```
 
