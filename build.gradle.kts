@@ -96,11 +96,11 @@ tasks {
 	}
 
 	register("updateResources") {
-		dependsOn(":extra:MetaMiner:runServer")
+		dependsOn(":metaminer:runServer")
 		doLast {
 			copy {
 				from("./metaminer/run/plugins/MetaMiner")
-				into("./src/main/resources")
+				into(".")
 			}
 		}
 	}

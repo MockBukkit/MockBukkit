@@ -8,13 +8,8 @@ A paper plugin that generate necessary files for MockBukkit.
 
 ## :mag: Getting started
 
-To build this project you will need to have Java 21 or later installed and execute:
+To apply resources to mockbukkit, simply run this command:
 ```bash
-./gradlew :metaminer:build
+./gradlew updateResources
 ```
-
-To run the plugin in a server, execute the following command:
-```bash
-./gradlew metaminer:runServer
-```
-
+Note that you need to agree to the eula before doing this in the `./metaminer/eula.txt` file
