@@ -7,7 +7,8 @@ import com.google.gson.JsonObject;
 import io.papermc.paper.entity.EntitySerializationFlag;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
-import io.papermc.paper.registry.tag.TagKey;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
@@ -32,7 +33,6 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
-import org.bukkit.damage.DamageEffect;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
@@ -49,11 +49,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.block.BiomeMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
 import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
@@ -509,9 +509,9 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public <B extends org.bukkit.Keyed> B get(Registry<B> registry, NamespacedKey namespacedKey)
+	public <B extends org.bukkit.Keyed> B get(RegistryKey<B> registryKey, NamespacedKey namespacedKey)
 	{
-		return registry.get(namespacedKey);
+		return RegistryAccess.registryAccess().getRegistry(registryKey).get(namespacedKey);
 	}
 
 	@Override

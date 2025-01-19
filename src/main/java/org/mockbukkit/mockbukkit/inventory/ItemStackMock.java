@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.persistence.PersistentDataContainerView;
+import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -473,7 +474,7 @@ public class ItemStackMock extends ItemStack
 				stringKey = Bukkit.getUnsafe().get(Enchantment.class, stringKey);
 				NamespacedKey key = NamespacedKey.fromString(stringKey.toLowerCase(Locale.ROOT));
 
-				Enchantment enchantment = Bukkit.getUnsafe().get(Registry.ENCHANTMENT, key);
+				Enchantment enchantment = Bukkit.getUnsafe().get(RegistryKey.ENCHANTMENT, key);
 
 				if ((enchantment != null) && (entry.getValue() instanceof Integer))
 				{

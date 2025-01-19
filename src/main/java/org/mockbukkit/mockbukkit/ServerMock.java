@@ -1852,6 +1852,13 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.serverConfiguration.getMaxChainedNeighbourUpdates();
 	}
 
+	@Override
+	public @NotNull Merchant createMerchant()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Sets the maximum number of chained neighbour updates before skipping additional ones.
 	 * Negative values remove the limit.
