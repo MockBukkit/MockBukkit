@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
+import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
@@ -1527,6 +1528,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			player.sendHurtAnimation(0);
 		}
+	}
+
+	@Override
+	public void lookAt(double v, double v1, double v2, @NotNull LookAnchor lookAnchor)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	public void tick()

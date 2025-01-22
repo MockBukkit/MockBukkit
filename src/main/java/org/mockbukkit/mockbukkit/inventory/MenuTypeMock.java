@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.kyori.adventure.key.Key;
@@ -9,10 +8,13 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.MenuType;
+import org.bukkit.inventory.view.builder.InventoryViewBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-public class MenuTypeMock implements MenuType.Typed
+public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilder<V>> implements MenuType.Typed<V, B>
 {
+
 	private final NamespacedKey key;
 
 	private MenuTypeMock(@NotNull NamespacedKey key)
@@ -22,27 +24,34 @@ public class MenuTypeMock implements MenuType.Typed
 	}
 
 	@Override
-	public @NotNull InventoryView create(@NotNull HumanEntity humanEntity, @NotNull String s)
+	public @NotNull V create(@NotNull HumanEntity humanEntity, @NotNull String s)
 	{
 		return create(humanEntity, Component.text(s));
 	}
 
 	@Override
-	public @NotNull InventoryView create(@NotNull HumanEntity humanEntity, @NotNull Component component)
+	public @NotNull V create(@NotNull HumanEntity humanEntity, @NotNull Component component)
 	{
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Typed<InventoryView> typed()
+	public @NotNull B builder()
 	{
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull <V extends InventoryView> Typed<V> typed(@NotNull Class<V> aClass) throws IllegalArgumentException
+	public @NotNull Typed<InventoryView, InventoryViewBuilder<InventoryView>> typed()
+	{
+		// TODO: Auto generated stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull <V extends InventoryView, B extends InventoryViewBuilder<V>> Typed<V, B> typed(@NotNull Class<V> viewClass) throws IllegalArgumentException
 	{
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();

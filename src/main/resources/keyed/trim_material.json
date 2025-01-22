@@ -79,6 +79,14 @@
 			},
 			"key": "minecraft:redstone",
 			"translationKey": "trim_material.minecraft.redstone"
+		},
+		{
+			"description": {
+				"color": "#FC7812",
+				"translate": "trim_material.minecraft.resin"
+			},
+			"key": "minecraft:resin",
+			"translationKey": "trim_material.minecraft.resin"
 		}
 	]
 }

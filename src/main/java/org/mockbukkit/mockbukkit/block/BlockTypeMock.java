@@ -10,8 +10,12 @@ import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.util.Collection;
+import java.util.List;
 
 public class BlockTypeMock implements BlockType
 {
@@ -104,6 +108,13 @@ public class BlockTypeMock implements BlockType
 	public @NotNull BlockData createBlockData()
 	{
 		return BlockDataMock.mock(this.asMaterial());
+	}
+
+	@Override
+	public @Unmodifiable @NotNull Collection<? extends BlockData> createBlockDataStates()
+	{
+		// TODO: Auto generated stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -303,16 +303,6 @@
 		{
 			"alive": true,
 			"defaultAttributes": true,
-			"key": "minecraft:creaking_transient",
-			"name": "CREAKING_TRANSIENT",
-			"ordinal": 146,
-			"spawnable": true,
-			"translationKey": "entity.minecraft.creaking_transient",
-			"typeId": -1
-		},
-		{
-			"alive": true,
-			"defaultAttributes": true,
 			"key": "minecraft:creeper",
 			"name": "CREEPER",
 			"ordinal": 44,
@@ -535,7 +525,7 @@
 			"defaultAttributes": false,
 			"key": "minecraft:fishing_bobber",
 			"name": "FISHING_BOBBER",
-			"ordinal": 147,
+			"ordinal": 146,
 			"spawnable": false,
 			"translationKey": "entity.minecraft.fishing_bobber",
 			"typeId": -1
@@ -765,7 +755,7 @@
 			"defaultAttributes": false,
 			"key": "minecraft:lightning_bolt",
 			"name": "LIGHTNING_BOLT",
-			"ordinal": 148,
+			"ordinal": 147,
 			"spawnable": true,
 			"translationKey": "entity.minecraft.lightning_bolt",
 			"typeId": -1
@@ -1005,7 +995,7 @@
 			"defaultAttributes": true,
 			"key": "minecraft:player",
 			"name": "PLAYER",
-			"ordinal": 149,
+			"ordinal": 148,
 			"spawnable": false,
 			"translationKey": "entity.minecraft.player",
 			"typeId": -1

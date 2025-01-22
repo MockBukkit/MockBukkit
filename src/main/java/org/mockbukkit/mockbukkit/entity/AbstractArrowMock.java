@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import io.papermc.paper.entity.LookAnchor;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;

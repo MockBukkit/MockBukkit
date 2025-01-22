@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.persistence.PersistentDataContainerView;
+import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -36,7 +37,7 @@ public class ItemStackMock extends ItemStack
 	private short durability = -1;
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
-	private static final String ITEMMETA_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
+	private static final String ITEM_META_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
 
 	//Utility
 	protected ItemStackMock()
@@ -403,7 +404,7 @@ public class ItemStackMock extends ItemStack
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
 			{
-				throw new ItemMetaInitException(ITEMMETA_INITIALIZATION_ERROR + itemMetaClass, e);
+				throw new ItemMetaInitException(ITEM_META_INITIALIZATION_ERROR + itemMetaClass, e);
 			}
 		}
 		return new ItemMetaMock();
@@ -473,7 +474,7 @@ public class ItemStackMock extends ItemStack
 				stringKey = Bukkit.getUnsafe().get(Enchantment.class, stringKey);
 				NamespacedKey key = NamespacedKey.fromString(stringKey.toLowerCase(Locale.ROOT));
 
-				Enchantment enchantment = Bukkit.getUnsafe().get(Registry.ENCHANTMENT, key);
+				Enchantment enchantment = Bukkit.getUnsafe().get(RegistryKey.ENCHANTMENT, key);
 
 				if ((enchantment != null) && (entry.getValue() instanceof Integer))
 				{

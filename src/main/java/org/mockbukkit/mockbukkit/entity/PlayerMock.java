@@ -1,20 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.bukkit.Input;
-import org.bukkit.entity.EnderPearl;
-import org.bukkit.event.player.PlayerLocaleChangeEvent;
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.PlayerListMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.boss.BossBarImplementationMock;
-import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.map.MapViewMock;
-import org.mockbukkit.mockbukkit.sound.AudioExperience;
-import org.mockbukkit.mockbukkit.sound.SoundReceiver;
-import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.profile.PlayerProfile;
@@ -47,6 +32,7 @@ import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
+import org.bukkit.Input;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -75,9 +61,11 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -95,6 +83,7 @@ import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerLocaleChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
@@ -121,7 +110,19 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.PlayerListMock;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.boss.BossBarImplementationMock;
+import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
+import org.mockbukkit.mockbukkit.sound.AudioExperience;
+import org.mockbukkit.mockbukkit.sound.SoundReceiver;
+import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -148,6 +149,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -310,7 +312,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * Simulates a Player consuming an Edible Item. Some edibles inflict status effects on the consumer with a certain
 	 * probability.
 	 *
-	 * @param consumable                The Item to consume
+	 * @param consumable The Item to consume
 	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
 	@Deprecated
@@ -321,6 +323,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	/**
 	 * Whether the player has consumed the specified item
+	 *
 	 * @param consumable The item that the player should have consumed
 	 * @return True if the specified item has been consumed
 	 */
@@ -2758,6 +2761,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @Nullable Item dropItem(int slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(@NotNull EquipmentSlot slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(@NotNull ItemStack itemStack, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setResourcePack(@NotNull String url, @NotNull String hash)
 	{
 		// TODO Auto-generated method stub
@@ -3394,7 +3418,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender, @NotNull BaseComponent component)
 		{
-			this.sendMessage( position, sender, new BaseComponent[] { component } );
+			this.sendMessage(position, sender, new BaseComponent[]{ component });
 		}
 
 		@Override

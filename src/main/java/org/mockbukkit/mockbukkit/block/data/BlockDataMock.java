@@ -32,7 +32,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,6 +102,7 @@ public class BlockDataMock implements BlockData
 		BlockDataMock blockData = BlockDataMock.mock(material);
 		if (blockDataString == null)
 		{
+			blockData.data.clear();
 			return blockData;
 		}
 		String[] blockDataArguments = blockDataString.split(",");
@@ -115,7 +118,7 @@ public class BlockDataMock implements BlockData
 			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
 			data.put(key, value);
 		}
-		blockData.data.putAll(data);
+		blockData.data = data;
 		return blockData;
 	}
 
@@ -159,9 +162,9 @@ public class BlockDataMock implements BlockData
 	 *
 	 * @param property The state to test.
 	 */
-	protected void checkProperty(String property)
+	protected void checkProperty(BlockDataKey property)
 	{
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial());
+		Preconditions.checkState(property.appliesTo(this), property + " is not a valid property for " + getMaterial());
 	}
 	// endregion
 
@@ -178,7 +181,7 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		Preconditions.checkNotNull(value, "Value cannot be null");
 
-		checkProperty(key.key());
+		checkProperty(key);
 
 		this.data.put(key.key(), value);
 	}
@@ -196,11 +199,19 @@ public class BlockDataMock implements BlockData
 	protected <T> @NotNull T get(@NotNull BlockDataKey key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
-		checkProperty(key.key());
+		checkProperty(key);
 		T value = (T) this.data.get(key.key());
 		if (value == null)
 		{
-			value = (T) BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
+			Object temp = BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
+			if (temp instanceof String string)
+			{
+				value = (T) key.constructValue(string);
+			}
+			else
+			{
+				value = (T) temp;
+			}
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
@@ -229,13 +240,20 @@ public class BlockDataMock implements BlockData
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
-			if (!isFirst) stateString.append(',');
-
 			Object value = data.get(key);
+			if (value instanceof Enum<?> enumValue)
+			{
+				value = enumValue.name().toLowerCase(Locale.ROOT);
+			}
 			Object defaultValue = BlockDataMockRegistry.getInstance().getDefault(type, key);
-
-			if (hideUnspecified && value == defaultValue) continue;
-
+			if (hideUnspecified && Objects.equals(value, defaultValue))
+			{
+				continue;
+			}
+			if (!isFirst)
+			{
+				stateString.append(',');
+			}
 			stateString.append(key).append("=").append((value == null ? defaultValue : value).toString().toLowerCase());
 
 			isFirst = false;

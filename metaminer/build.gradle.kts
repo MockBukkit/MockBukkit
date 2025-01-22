@@ -1,7 +1,7 @@
 plugins {
 	id("java")
-	id("io.papermc.paperweight.userdev") version "1.7.1"
-	id("xyz.jpenilla.run-paper") version "2.3.0"
+	id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+	id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "org.mockbukkit"
@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-	paperweight.paperDevBundle("${property("paper.api.version")}")
-	implementation("io.papermc.paper:paper-api:${property("paper.api.version")}")
+	paperweight.paperDevBundle("${rootProject.property("paper.api.full-version")}")
+	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
 }
 
 tasks {

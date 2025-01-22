@@ -30,6 +30,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
@@ -161,6 +162,24 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		while (!enchant.conflictsWith(ench));
 
 		return true;
+	}
+
+	@Override
+	public boolean hasCustomName()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component component)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1027,9 +1046,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public @NotNull CustomModelDataComponent getCustomModelDataComponent()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setCustomModelData(@Nullable Integer data)
 	{
 		this.customModelData = data;
+	}
+
+	@Override
+	public void setCustomModelDataComponent(@Nullable CustomModelDataComponent customModelDataComponent)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

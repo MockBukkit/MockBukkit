@@ -626,4 +626,12 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public @Nullable Location getPotentialRespawnLocation()
+	{
+
+		// TODO: Auto generated stub
+		throw new UnimplementedOperationException();
+	}
+
 }

@@ -41,6 +41,18 @@ public class ExplosiveMinecartMock extends MinecartMock implements ExplosiveMine
 	}
 
 	@Override
+	public float getExplosionSpeedFactor()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setExplosionSpeedFactor(float v)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void ignite()
 	{
 		this.fuseTicks = 80;
