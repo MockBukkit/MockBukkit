@@ -77,7 +77,6 @@ import org.mockbukkit.mockbukkit.entity.CodMock;
 import org.mockbukkit.mockbukkit.entity.CommandMinecartMock;
 import org.mockbukkit.mockbukkit.entity.CowMock;
 import org.mockbukkit.mockbukkit.entity.CreakingMock;
-import org.mockbukkit.mockbukkit.entity.CreakingTransientMock;
 import org.mockbukkit.mockbukkit.entity.CreeperMock;
 import org.mockbukkit.mockbukkit.entity.DolphinMock;
 import org.mockbukkit.mockbukkit.entity.DonkeyMock;
@@ -1450,7 +1449,6 @@ class WorldMockTest
 				Arguments.of(EntityType.HUSK, HuskMock.class),
 				Arguments.of(EntityType.STRIDER, StriderMock.class),
 				Arguments.of(EntityType.CREAKING, CreakingMock.class),
-				Arguments.of(EntityType.CREAKING_TRANSIENT, CreakingTransientMock.class),
 				Arguments.of(EntityType.TRADER_LLAMA, TraderLlamaMock.class),
 				Arguments.of(EntityType.BOGGED, BoggedMock.class),
 				Arguments.of(EntityType.BREEZE, BreezeMock.class),

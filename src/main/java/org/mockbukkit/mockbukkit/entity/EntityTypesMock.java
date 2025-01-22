@@ -23,7 +23,6 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creaking;
-import org.bukkit.entity.CreakingTransient;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
@@ -227,7 +226,6 @@ public final class EntityTypesMock
 			.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
 			.register(Cow.class, CowMock.class, CowMock::new)
 			.register(Creaking.class, CreakingMock.class, CreakingMock::new)
-			.register(CreakingTransient.class, CreakingTransientMock.class, CreakingTransientMock::new)
 			.register(Creeper.class, CreeperMock.class, CreeperMock::new)
 			.register(DarkOakBoat.class, DarkOakBoatMock.class, DarkOakBoatMock::new)
 			.register(DarkOakChestBoat.class, DarkOakChestBoatMock.class, DarkOakChestBoatMock::new)

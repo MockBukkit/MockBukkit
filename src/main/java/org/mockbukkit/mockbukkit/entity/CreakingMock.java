@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.bukkit.MinecraftExperimental;
 import org.bukkit.entity.Creaking;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.ApiStatus;
@@ -15,7 +14,6 @@ import java.util.UUID;
  * @see MonsterMock
  */
 @ApiStatus.Experimental
-@MinecraftExperimental(MinecraftExperimental.Requires.WINTER_DROP)
 public class CreakingMock extends MonsterMock implements Creaking
 {
 
