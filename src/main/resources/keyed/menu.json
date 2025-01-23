@@ -1,79 +1,104 @@
 {
 	"values": [
 		{
-			"key": "minecraft:anvil"
+			"key": "minecraft:anvil",
+			"typed": "minecraft:anvil"
 		},
 		{
-			"key": "minecraft:beacon"
+			"key": "minecraft:beacon",
+			"typed": "minecraft:beacon"
 		},
 		{
-			"key": "minecraft:blast_furnace"
+			"key": "minecraft:blast_furnace",
+			"typed": "minecraft:blast_furnace"
 		},
 		{
-			"key": "minecraft:brewing_stand"
+			"key": "minecraft:brewing_stand",
+			"typed": "minecraft:brewing_stand"
 		},
 		{
-			"key": "minecraft:cartography_table"
+			"key": "minecraft:cartography_table",
+			"typed": "minecraft:cartography_table"
 		},
 		{
-			"key": "minecraft:crafter_3x3"
+			"key": "minecraft:crafter_3x3",
+			"typed": "minecraft:crafter_3x3"
 		},
 		{
-			"key": "minecraft:crafting"
+			"key": "minecraft:crafting",
+			"typed": "minecraft:crafting"
 		},
 		{
-			"key": "minecraft:enchantment"
+			"key": "minecraft:enchantment",
+			"typed": "minecraft:enchantment"
 		},
 		{
-			"key": "minecraft:furnace"
+			"key": "minecraft:furnace",
+			"typed": "minecraft:furnace"
 		},
 		{
-			"key": "minecraft:generic_3x3"
+			"key": "minecraft:generic_3x3",
+			"typed": "minecraft:generic_3x3"
 		},
 		{
-			"key": "minecraft:generic_9x1"
+			"key": "minecraft:generic_9x1",
+			"typed": "minecraft:generic_9x1"
 		},
 		{
-			"key": "minecraft:generic_9x2"
+			"key": "minecraft:generic_9x2",
+			"typed": "minecraft:generic_9x2"
 		},
 		{
-			"key": "minecraft:generic_9x3"
+			"key": "minecraft:generic_9x3",
+			"typed": "minecraft:generic_9x3"
 		},
 		{
-			"key": "minecraft:generic_9x4"
+			"key": "minecraft:generic_9x4",
+			"typed": "minecraft:generic_9x4"
 		},
 		{
-			"key": "minecraft:generic_9x5"
+			"key": "minecraft:generic_9x5",
+			"typed": "minecraft:generic_9x5"
 		},
 		{
-			"key": "minecraft:generic_9x6"
+			"key": "minecraft:generic_9x6",
+			"typed": "minecraft:generic_9x6"
 		},
 		{
-			"key": "minecraft:grindstone"
+			"key": "minecraft:grindstone",
+			"typed": "minecraft:grindstone"
 		},
 		{
-			"key": "minecraft:hopper"
+			"key": "minecraft:hopper",
+			"typed": "minecraft:hopper"
 		},
 		{
-			"key": "minecraft:lectern"
+			"key": "minecraft:lectern",
+			"typed": "minecraft:lectern"
 		},
 		{
-			"key": "minecraft:loom"
+			"key": "minecraft:loom",
+			"typed": "minecraft:loom"
 		},
 		{
-			"key": "minecraft:merchant"
+			"key": "minecraft:merchant",
+			"typed": "minecraft:merchant"
 		},
 		{
-			"key": "minecraft:shulker_box"
+			"key": "minecraft:shulker_box",
+			"typed": "minecraft:shulker_box"
 		},
 		{
-			"key": "minecraft:smithing"
+			"key": "minecraft:smithing",
+			"typed": "minecraft:smithing"
 		},
 		{
-			"key": "minecraft:smoker"
+			"key": "minecraft:smoker",
+			"typed": "minecraft:smoker"
 		},
 		{
-			"key": "minecraft:stonecutter"
+			"key": "minecraft:stonecutter",
+			"typed": "minecraft:stonecutter"
 		}
 	]
 }

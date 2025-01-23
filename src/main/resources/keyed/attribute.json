@@ -3,31 +3,31 @@
 		{
 			"key": "minecraft:armor",
 			"name": "ARMOR",
-			"ordinal": 8,
+			"ordinal": 20,
 			"translationKey": "attribute.name.armor"
 		},
 		{
 			"key": "minecraft:armor_toughness",
 			"name": "ARMOR_TOUGHNESS",
-			"ordinal": 9,
+			"ordinal": 12,
 			"translationKey": "attribute.name.armor_toughness"
 		},
 		{
 			"key": "minecraft:attack_damage",
 			"name": "ATTACK_DAMAGE",
-			"ordinal": 5,
+			"ordinal": 27,
 			"translationKey": "attribute.name.attack_damage"
 		},
 		{
 			"key": "minecraft:attack_knockback",
 			"name": "ATTACK_KNOCKBACK",
-			"ordinal": 6,
+			"ordinal": 17,
 			"translationKey": "attribute.name.attack_knockback"
 		},
 		{
 			"key": "minecraft:attack_speed",
 			"name": "ATTACK_SPEED",
-			"ordinal": 7,
+			"ordinal": 3,
 			"translationKey": "attribute.name.attack_speed"
 		},
 		{
@@ -39,37 +39,37 @@
 		{
 			"key": "minecraft:block_interaction_range",
 			"name": "BLOCK_INTERACTION_RANGE",
-			"ordinal": 24,
+			"ordinal": 23,
 			"translationKey": "attribute.name.block_interaction_range"
 		},
 		{
 			"key": "minecraft:burning_time",
 			"name": "BURNING_TIME",
-			"ordinal": 18,
+			"ordinal": 14,
 			"translationKey": "attribute.name.burning_time"
 		},
 		{
 			"key": "minecraft:entity_interaction_range",
 			"name": "ENTITY_INTERACTION_RANGE",
-			"ordinal": 25,
+			"ordinal": 5,
 			"translationKey": "attribute.name.entity_interaction_range"
 		},
 		{
 			"key": "minecraft:explosion_knockback_resistance",
 			"name": "EXPLOSION_KNOCKBACK_RESISTANCE",
-			"ordinal": 19,
+			"ordinal": 29,
 			"translationKey": "attribute.name.explosion_knockback_resistance"
 		},
 		{
 			"key": "minecraft:fall_damage_multiplier",
 			"name": "FALL_DAMAGE_MULTIPLIER",
-			"ordinal": 10,
+			"ordinal": 0,
 			"translationKey": "attribute.name.fall_damage_multiplier"
 		},
 		{
 			"key": "minecraft:flying_speed",
 			"name": "FLYING_SPEED",
-			"ordinal": 4,
+			"ordinal": 9,
 			"translationKey": "attribute.name.flying_speed"
 		},
 		{
@@ -81,19 +81,19 @@
 		{
 			"key": "minecraft:gravity",
 			"name": "GRAVITY",
-			"ordinal": 16,
+			"ordinal": 13,
 			"translationKey": "attribute.name.gravity"
 		},
 		{
 			"key": "minecraft:jump_strength",
 			"name": "JUMP_STRENGTH",
-			"ordinal": 17,
+			"ordinal": 24,
 			"translationKey": "attribute.name.jump_strength"
 		},
 		{
 			"key": "minecraft:knockback_resistance",
 			"name": "KNOCKBACK_RESISTANCE",
-			"ordinal": 2,
+			"ordinal": 19,
 			"translationKey": "attribute.name.knockback_resistance"
 		},
 		{
@@ -105,91 +105,91 @@
 		{
 			"key": "minecraft:max_absorption",
 			"name": "MAX_ABSORPTION",
-			"ordinal": 12,
+			"ordinal": 15,
 			"translationKey": "attribute.name.max_absorption"
 		},
 		{
 			"key": "minecraft:max_health",
 			"name": "MAX_HEALTH",
-			"ordinal": 0,
+			"ordinal": 6,
 			"translationKey": "attribute.name.max_health"
 		},
 		{
 			"key": "minecraft:mining_efficiency",
 			"name": "MINING_EFFICIENCY",
-			"ordinal": 27,
+			"ordinal": 21,
 			"translationKey": "attribute.name.mining_efficiency"
 		},
 		{
 			"key": "minecraft:movement_efficiency",
 			"name": "MOVEMENT_EFFICIENCY",
-			"ordinal": 20,
+			"ordinal": 16,
 			"translationKey": "attribute.name.movement_efficiency"
 		},
 		{
 			"key": "minecraft:movement_speed",
 			"name": "MOVEMENT_SPEED",
-			"ordinal": 3,
+			"ordinal": 4,
 			"translationKey": "attribute.name.movement_speed"
 		},
 		{
 			"key": "minecraft:oxygen_bonus",
 			"name": "OXYGEN_BONUS",
-			"ordinal": 21,
+			"ordinal": 10,
 			"translationKey": "attribute.name.oxygen_bonus"
 		},
 		{
 			"key": "minecraft:safe_fall_distance",
 			"name": "SAFE_FALL_DISTANCE",
-			"ordinal": 13,
+			"ordinal": 22,
 			"translationKey": "attribute.name.safe_fall_distance"
 		},
 		{
 			"key": "minecraft:scale",
 			"name": "SCALE",
-			"ordinal": 14,
+			"ordinal": 31,
 			"translationKey": "attribute.name.scale"
 		},
 		{
 			"key": "minecraft:sneaking_speed",
 			"name": "SNEAKING_SPEED",
-			"ordinal": 28,
+			"ordinal": 18,
 			"translationKey": "attribute.name.sneaking_speed"
 		},
 		{
 			"key": "minecraft:spawn_reinforcements",
 			"name": "SPAWN_REINFORCEMENTS",
-			"ordinal": 31,
+			"ordinal": 2,
 			"translationKey": "attribute.name.spawn_reinforcements"
 		},
 		{
 			"key": "minecraft:step_height",
 			"name": "STEP_HEIGHT",
-			"ordinal": 15,
+			"ordinal": 30,
 			"translationKey": "attribute.name.step_height"
 		},
 		{
 			"key": "minecraft:submerged_mining_speed",
 			"name": "SUBMERGED_MINING_SPEED",
-			"ordinal": 29,
+			"ordinal": 8,
 			"translationKey": "attribute.name.submerged_mining_speed"
 		},
 		{
 			"key": "minecraft:sweeping_damage_ratio",
 			"name": "SWEEPING_DAMAGE_RATIO",
-			"ordinal": 30,
+			"ordinal": 7,
 			"translationKey": "attribute.name.sweeping_damage_ratio"
 		},
 		{
 			"key": "minecraft:tempt_range",
 			"name": "TEMPT_RANGE",
-			"ordinal": 23,
+			"ordinal": 28,
 			"translationKey": "attribute.name.tempt_range"
 		},
 		{
 			"key": "minecraft:water_movement_efficiency",
 			"name": "WATER_MOVEMENT_EFFICIENCY",
-			"ordinal": 22,
+			"ordinal": 25,
 			"translationKey": "attribute.name.water_movement_efficiency"
 		}
 	]

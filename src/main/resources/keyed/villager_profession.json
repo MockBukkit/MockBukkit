@@ -45,7 +45,7 @@
 		{
 			"key": "minecraft:leatherworker",
 			"name": "LEATHERWORKER",
-			"ordinal": 8,
+			"ordinal": 0,
 			"translationKey": "entity.minecraft.villager.leatherworker"
 		},
 		{

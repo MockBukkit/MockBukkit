@@ -8,12 +8,12 @@
 		{
 			"key": "minecraft:temperate",
 			"name": "TEMPERATE",
-			"ordinal": 0
+			"ordinal": 1
 		},
 		{
 			"key": "minecraft:warm",
 			"name": "WARM",
-			"ordinal": 1
+			"ordinal": 0
 		}
 	]
 }

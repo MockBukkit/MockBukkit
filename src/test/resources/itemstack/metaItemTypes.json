@@ -1,7 +1,6 @@
 [
 	"minecraft:armor_stand",
 	"minecraft:axolotl_bucket",
-	"minecraft:bundle",
 	"minecraft:compass",
 	"minecraft:crossbow",
 	"minecraft:dragon_head",
@@ -16,6 +15,7 @@
 	"minecraft:leather_chestplate",
 	"minecraft:leather_horse_armor",
 	"minecraft:magenta_banner",
+	"minecraft:magenta_bundle",
 	"minecraft:ominous_bottle",
 	"minecraft:ravager_spawn_egg",
 	"minecraft:shield",

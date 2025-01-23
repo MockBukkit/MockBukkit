@@ -2,138 +2,172 @@
 	"values": [
 		{
 			"key": "minecraft:ancient_city",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:bastion_remnant",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:buried_treasure",
+			"structureType": "minecraft:buried_treasure",
 			"type": "minecraft:buried_treasure"
 		},
 		{
 			"key": "minecraft:desert_pyramid",
+			"structureType": "minecraft:desert_pyramid",
 			"type": "minecraft:desert_pyramid"
 		},
 		{
 			"key": "minecraft:end_city",
+			"structureType": "minecraft:end_city",
 			"type": "minecraft:end_city"
 		},
 		{
 			"key": "minecraft:fortress",
+			"structureType": "minecraft:fortress",
 			"type": "minecraft:fortress"
 		},
 		{
 			"key": "minecraft:igloo",
+			"structureType": "minecraft:igloo",
 			"type": "minecraft:igloo"
 		},
 		{
 			"key": "minecraft:jungle_pyramid",
+			"structureType": "minecraft:jungle_temple",
 			"type": "minecraft:jungle_temple"
 		},
 		{
 			"key": "minecraft:mansion",
+			"structureType": "minecraft:woodland_mansion",
 			"type": "minecraft:woodland_mansion"
 		},
 		{
 			"key": "minecraft:mineshaft",
+			"structureType": "minecraft:mineshaft",
 			"type": "minecraft:mineshaft"
 		},
 		{
 			"key": "minecraft:mineshaft_mesa",
+			"structureType": "minecraft:mineshaft",
 			"type": "minecraft:mineshaft"
 		},
 		{
 			"key": "minecraft:monument",
+			"structureType": "minecraft:ocean_monument",
 			"type": "minecraft:ocean_monument"
 		},
 		{
 			"key": "minecraft:nether_fossil",
+			"structureType": "minecraft:nether_fossil",
 			"type": "minecraft:nether_fossil"
 		},
 		{
 			"key": "minecraft:ocean_ruin_cold",
+			"structureType": "minecraft:ocean_ruin",
 			"type": "minecraft:ocean_ruin"
 		},
 		{
 			"key": "minecraft:ocean_ruin_warm",
+			"structureType": "minecraft:ocean_ruin",
 			"type": "minecraft:ocean_ruin"
 		},
 		{
 			"key": "minecraft:pillager_outpost",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:ruined_portal",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:ruined_portal_desert",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:ruined_portal_jungle",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:ruined_portal_mountain",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:ruined_portal_nether",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:ruined_portal_ocean",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:ruined_portal_swamp",
+			"structureType": "minecraft:ruined_portal",
 			"type": "minecraft:ruined_portal"
 		},
 		{
 			"key": "minecraft:shipwreck",
+			"structureType": "minecraft:shipwreck",
 			"type": "minecraft:shipwreck"
 		},
 		{
 			"key": "minecraft:shipwreck_beached",
+			"structureType": "minecraft:shipwreck",
 			"type": "minecraft:shipwreck"
 		},
 		{
 			"key": "minecraft:stronghold",
+			"structureType": "minecraft:stronghold",
 			"type": "minecraft:stronghold"
 		},
 		{
 			"key": "minecraft:swamp_hut",
+			"structureType": "minecraft:swamp_hut",
 			"type": "minecraft:swamp_hut"
 		},
 		{
 			"key": "minecraft:trail_ruins",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:trial_chambers",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:village_desert",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:village_plains",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:village_savanna",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:village_snowy",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		},
 		{
 			"key": "minecraft:village_taiga",
+			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"
 		}
 	]

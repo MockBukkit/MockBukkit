@@ -674,6 +674,7 @@
 	"minecraft:chiseled_polished_blackstone": {},
 	"minecraft:chiseled_quartz_block": {},
 	"minecraft:chiseled_red_sandstone": {},
+	"minecraft:chiseled_resin_bricks": {},
 	"minecraft:chiseled_sandstone": {},
 	"minecraft:chiseled_stone_bricks": {},
 	"minecraft:chiseled_tuff": {},
@@ -690,6 +691,7 @@
 		"west": false
 	},
 	"minecraft:clay": {},
+	"minecraft:closed_eyeblossom": {},
 	"minecraft:coal_block": {},
 	"minecraft:coal_ore": {},
 	"minecraft:coarse_dirt": {},
@@ -787,8 +789,9 @@
 	},
 	"minecraft:crafting_table": {},
 	"minecraft:creaking_heart": {
+		"active": false,
 		"axis": "y",
-		"creaking": "disabled"
+		"natural": false
 	},
 	"minecraft:creeper_head": {
 		"powered": false,
@@ -2072,6 +2075,7 @@
 	"minecraft:ochre_froglight": {
 		"axis": "y"
 	},
+	"minecraft:open_eyeblossom": {},
 	"minecraft:orange_banner": {
 		"rotation": "0"
 	},
@@ -2463,6 +2467,7 @@
 	"minecraft:potted_brown_mushroom": {},
 	"minecraft:potted_cactus": {},
 	"minecraft:potted_cherry_sapling": {},
+	"minecraft:potted_closed_eyeblossom": {},
 	"minecraft:potted_cornflower": {},
 	"minecraft:potted_crimson_fungus": {},
 	"minecraft:potted_crimson_roots": {},
@@ -2475,6 +2480,7 @@
 	"minecraft:potted_lily_of_the_valley": {},
 	"minecraft:potted_mangrove_propagule": {},
 	"minecraft:potted_oak_sapling": {},
+	"minecraft:potted_open_eyeblossom": {},
 	"minecraft:potted_orange_tulip": {},
 	"minecraft:potted_oxeye_daisy": {},
 	"minecraft:potted_pale_oak_sapling": {},
@@ -2723,6 +2729,35 @@
 	"minecraft:repeating_command_block": {
 		"conditional": false,
 		"facing": "north"
+	},
+	"minecraft:resin_block": {},
+	"minecraft:resin_brick_slab": {
+		"type": "bottom",
+		"waterlogged": false
+	},
+	"minecraft:resin_brick_stairs": {
+		"facing": "north",
+		"half": "bottom",
+		"shape": "straight",
+		"waterlogged": false
+	},
+	"minecraft:resin_brick_wall": {
+		"east": "none",
+		"north": "none",
+		"south": "none",
+		"up": true,
+		"waterlogged": false,
+		"west": "none"
+	},
+	"minecraft:resin_bricks": {},
+	"minecraft:resin_clump": {
+		"down": false,
+		"east": false,
+		"north": false,
+		"south": false,
+		"up": false,
+		"waterlogged": false,
+		"west": false
 	},
 	"minecraft:respawn_anchor": {
 		"charges": "0"

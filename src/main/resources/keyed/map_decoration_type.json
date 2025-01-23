@@ -3,37 +3,37 @@
 		{
 			"key": "minecraft:banner_black",
 			"name": "BANNER_BLACK",
-			"ordinal": 25,
+			"ordinal": 22,
 			"value": 25
 		},
 		{
 			"key": "minecraft:banner_blue",
 			"name": "BANNER_BLUE",
-			"ordinal": 21,
+			"ordinal": 15,
 			"value": 21
 		},
 		{
 			"key": "minecraft:banner_brown",
 			"name": "BANNER_BROWN",
-			"ordinal": 22,
+			"ordinal": 26,
 			"value": 22
 		},
 		{
 			"key": "minecraft:banner_cyan",
 			"name": "BANNER_CYAN",
-			"ordinal": 19,
+			"ordinal": 29,
 			"value": 19
 		},
 		{
 			"key": "minecraft:banner_gray",
 			"name": "BANNER_GRAY",
-			"ordinal": 17,
+			"ordinal": 6,
 			"value": 17
 		},
 		{
 			"key": "minecraft:banner_green",
 			"name": "BANNER_GREEN",
-			"ordinal": 23,
+			"ordinal": 17,
 			"value": 23
 		},
 		{
@@ -45,127 +45,127 @@
 		{
 			"key": "minecraft:banner_light_gray",
 			"name": "BANNER_LIGHT_GRAY",
-			"ordinal": 18,
+			"ordinal": 3,
 			"value": 18
 		},
 		{
 			"key": "minecraft:banner_lime",
 			"name": "BANNER_LIME",
-			"ordinal": 15,
+			"ordinal": 11,
 			"value": 15
 		},
 		{
 			"key": "minecraft:banner_magenta",
 			"name": "BANNER_MAGENTA",
-			"ordinal": 12,
+			"ordinal": 27,
 			"value": 12
 		},
 		{
 			"key": "minecraft:banner_orange",
 			"name": "BANNER_ORANGE",
-			"ordinal": 11,
+			"ordinal": 16,
 			"value": 11
 		},
 		{
 			"key": "minecraft:banner_pink",
 			"name": "BANNER_PINK",
-			"ordinal": 16,
+			"ordinal": 0,
 			"value": 16
 		},
 		{
 			"key": "minecraft:banner_purple",
 			"name": "BANNER_PURPLE",
-			"ordinal": 20,
+			"ordinal": 30,
 			"value": 20
 		},
 		{
 			"key": "minecraft:banner_red",
 			"name": "BANNER_RED",
-			"ordinal": 24,
+			"ordinal": 10,
 			"value": 24
 		},
 		{
 			"key": "minecraft:banner_white",
 			"name": "BANNER_WHITE",
-			"ordinal": 10,
+			"ordinal": 1,
 			"value": 10
 		},
 		{
 			"key": "minecraft:banner_yellow",
 			"name": "BANNER_YELLOW",
-			"ordinal": 14,
+			"ordinal": 8,
 			"value": 14
 		},
 		{
 			"key": "minecraft:blue_marker",
 			"name": "BLUE_MARKER",
-			"ordinal": 3,
+			"ordinal": 7,
 			"value": 3
 		},
 		{
 			"key": "minecraft:frame",
 			"name": "FRAME",
-			"ordinal": 1,
+			"ordinal": 31,
 			"value": 1
 		},
 		{
 			"key": "minecraft:jungle_temple",
 			"name": "JUNGLE_TEMPLE",
-			"ordinal": 32,
+			"ordinal": 12,
 			"value": 32
 		},
 		{
 			"key": "minecraft:mansion",
 			"name": "MANSION",
-			"ordinal": 8,
+			"ordinal": 23,
 			"value": 8
 		},
 		{
 			"key": "minecraft:monument",
 			"name": "MONUMENT",
-			"ordinal": 9,
+			"ordinal": 28,
 			"value": 9
 		},
 		{
 			"key": "minecraft:player",
 			"name": "PLAYER",
-			"ordinal": 0,
+			"ordinal": 33,
 			"value": 0
 		},
 		{
 			"key": "minecraft:player_off_limits",
 			"name": "PLAYER_OFF_LIMITS",
-			"ordinal": 7,
+			"ordinal": 2,
 			"value": 7
 		},
 		{
 			"key": "minecraft:player_off_map",
 			"name": "PLAYER_OFF_MAP",
-			"ordinal": 6,
+			"ordinal": 9,
 			"value": 6
 		},
 		{
 			"key": "minecraft:red_marker",
 			"name": "RED_MARKER",
-			"ordinal": 2,
+			"ordinal": 34,
 			"value": 2
 		},
 		{
 			"key": "minecraft:red_x",
 			"name": "RED_X",
-			"ordinal": 26,
+			"ordinal": 14,
 			"value": 26
 		},
 		{
 			"key": "minecraft:swamp_hut",
 			"name": "SWAMP_HUT",
-			"ordinal": 33,
+			"ordinal": 24,
 			"value": 33
 		},
 		{
 			"key": "minecraft:target_point",
 			"name": "TARGET_POINT",
-			"ordinal": 5,
+			"ordinal": 21,
 			"value": 5
 		},
 		{
@@ -177,37 +177,37 @@
 		{
 			"key": "minecraft:trial_chambers",
 			"name": "TRIAL_CHAMBERS",
-			"ordinal": 34,
+			"ordinal": 5,
 			"value": 34
 		},
 		{
 			"key": "minecraft:village_desert",
 			"name": "VILLAGE_DESERT",
-			"ordinal": 27,
+			"ordinal": 25,
 			"value": 27
 		},
 		{
 			"key": "minecraft:village_plains",
 			"name": "VILLAGE_PLAINS",
-			"ordinal": 28,
+			"ordinal": 32,
 			"value": 28
 		},
 		{
 			"key": "minecraft:village_savanna",
 			"name": "VILLAGE_SAVANNA",
-			"ordinal": 29,
+			"ordinal": 18,
 			"value": 29
 		},
 		{
 			"key": "minecraft:village_snowy",
 			"name": "VILLAGE_SNOWY",
-			"ordinal": 30,
+			"ordinal": 19,
 			"value": 30
 		},
 		{
 			"key": "minecraft:village_taiga",
 			"name": "VILLAGE_TAIGA",
-			"ordinal": 31,
+			"ordinal": 20,
 			"value": 31
 		}
 	]

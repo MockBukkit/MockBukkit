@@ -3,37 +3,37 @@
 		{
 			"key": "minecraft:desert",
 			"name": "DESERT",
-			"ordinal": 0
+			"ordinal": 4
 		},
 		{
 			"key": "minecraft:jungle",
 			"name": "JUNGLE",
-			"ordinal": 1
+			"ordinal": 2
 		},
 		{
 			"key": "minecraft:plains",
 			"name": "PLAINS",
-			"ordinal": 2
+			"ordinal": 1
 		},
 		{
 			"key": "minecraft:savanna",
 			"name": "SAVANNA",
-			"ordinal": 3
+			"ordinal": 5
 		},
 		{
 			"key": "minecraft:snow",
 			"name": "SNOW",
-			"ordinal": 4
+			"ordinal": 0
 		},
 		{
 			"key": "minecraft:swamp",
 			"name": "SWAMP",
-			"ordinal": 5
+			"ordinal": 6
 		},
 		{
 			"key": "minecraft:taiga",
 			"name": "TAIGA",
-			"ordinal": 6
+			"ordinal": 3
 		}
 	]
 }

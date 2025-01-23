@@ -3,17 +3,17 @@
 		{
 			"key": "minecraft:empty",
 			"name": "EMPTY",
-			"ordinal": 0
+			"ordinal": 4
 		},
 		{
 			"key": "minecraft:flowing_lava",
 			"name": "FLOWING_LAVA",
-			"ordinal": 4
+			"ordinal": 0
 		},
 		{
 			"key": "minecraft:flowing_water",
 			"name": "FLOWING_WATER",
-			"ordinal": 2
+			"ordinal": 1
 		},
 		{
 			"key": "minecraft:lava",
@@ -23,7 +23,7 @@
 		{
 			"key": "minecraft:water",
 			"name": "WATER",
-			"ordinal": 1
+			"ordinal": 2
 		}
 	]
 }

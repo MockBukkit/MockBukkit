@@ -10,6 +10,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:fire_resistance",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:fire_resistance",
@@ -19,6 +20,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:instant_damage",
 			"extendable": false,
 			"instant": true,
 			"key": "minecraft:harming",
@@ -28,6 +30,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:instant_health",
 			"extendable": false,
 			"instant": true,
 			"key": "minecraft:healing",
@@ -37,6 +40,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:infested",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:infested",
@@ -46,6 +50,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:invisibility",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:invisibility",
@@ -55,6 +60,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:jump_boost",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:leaping",
@@ -64,6 +70,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:fire_resistance",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_fire_resistance",
@@ -73,6 +80,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:invisibility",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_invisibility",
@@ -82,6 +90,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:jump_boost",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_leaping",
@@ -91,6 +100,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:night_vision",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_night_vision",
@@ -100,6 +110,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:poison",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_poison",
@@ -109,6 +120,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:regeneration",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_regeneration",
@@ -118,6 +130,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slow_falling",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_slow_falling",
@@ -127,6 +140,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slowness",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_slowness",
@@ -136,6 +150,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:strength",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_strength",
@@ -145,6 +160,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:speed",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_swiftness",
@@ -154,6 +170,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slowness",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_turtle_master",
@@ -163,6 +180,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:water_breathing",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_water_breathing",
@@ -172,6 +190,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:weakness",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:long_weakness",
@@ -181,6 +200,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:luck",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:luck",
@@ -199,6 +219,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:night_vision",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:night_vision",
@@ -208,6 +229,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:oozing",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:oozing",
@@ -217,6 +239,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:poison",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:poison",
@@ -226,6 +249,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:regeneration",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:regeneration",
@@ -235,6 +259,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:slow_falling",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:slow_falling",
@@ -244,6 +269,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slowness",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:slowness",
@@ -253,6 +279,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:strength",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:strength",
@@ -262,6 +289,7 @@
 			"upgradeable": true
 		},
 		{
+			"effectType": "minecraft:instant_damage",
 			"extendable": false,
 			"instant": true,
 			"key": "minecraft:strong_harming",
@@ -271,6 +299,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:instant_health",
 			"extendable": false,
 			"instant": true,
 			"key": "minecraft:strong_healing",
@@ -280,6 +309,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:jump_boost",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_leaping",
@@ -289,6 +319,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:poison",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_poison",
@@ -298,6 +329,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:regeneration",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_regeneration",
@@ -307,6 +339,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slowness",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_slowness",
@@ -316,6 +349,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:strength",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_strength",
@@ -325,6 +359,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:speed",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_swiftness",
@@ -334,6 +369,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slowness",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:strong_turtle_master",
@@ -343,6 +379,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:speed",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:swiftness",
@@ -361,6 +398,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:slowness",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:turtle_master",
@@ -379,6 +417,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:water_breathing",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:water_breathing",
@@ -388,6 +427,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:weakness",
 			"extendable": true,
 			"instant": false,
 			"key": "minecraft:weakness",
@@ -397,6 +437,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:weaving",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:weaving",
@@ -406,6 +447,7 @@
 			"upgradeable": false
 		},
 		{
+			"effectType": "minecraft:wind_charged",
 			"extendable": false,
 			"instant": false,
 			"key": "minecraft:wind_charged",
