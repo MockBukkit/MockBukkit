@@ -16,8 +16,9 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class BlockTypeMock implements BlockType
+public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 {
 
 	private final NamespacedKey key;
@@ -81,7 +82,7 @@ public class BlockTypeMock implements BlockType
 
 	@NotNull
 	@Override
-	public <B extends BlockData> Typed<B> typed(@NotNull Class<B> blockDataType)
+	public <Other extends BlockData> Typed<Other> typed(@NotNull Class<Other> blockDataType)
 	{
 		throw new UnimplementedOperationException();
 	}
@@ -99,28 +100,36 @@ public class BlockTypeMock implements BlockType
 	}
 
 	@Override
-	public @NotNull Class<? extends BlockData> getBlockDataClass()
+	public @NotNull Class<B> getBlockDataClass()
 	{
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData()
+	public @NotNull B createBlockData(@Nullable Consumer<? super B> consumer)
 	{
-		return BlockDataMock.mock(this.asMaterial());
+		B blockData = createBlockData();
+		consumer.accept(blockData);
+		return blockData;
 	}
 
 	@Override
-	public @Unmodifiable @NotNull Collection<? extends BlockData> createBlockDataStates()
+	public @NotNull B createBlockData()
+	{
+		return (B) BlockDataMock.mock(this.asMaterial());
+	}
+
+	@Override
+	public @Unmodifiable @NotNull Collection<B> createBlockDataStates()
 	{
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData(@Nullable String data)
+	public @NotNull B createBlockData(@Nullable String data)
 	{
-		return BlockDataMock.newData(this, data);
+		return (B) BlockDataMock.newData(this, data);
 	}
 
 	@Override
