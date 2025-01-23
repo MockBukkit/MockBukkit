@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -63,14 +64,27 @@ class ItemStackMockTest
 			assertEquals(expected.get("material").getAsString(), itemTypeString);
 			boolean actualHasMeta = itemStack.getItemMeta() != null;
 			assertEquals(expected.has("meta"), actualHasMeta);
-			if (actualHasMeta && !isUnimplementedMeta(expected.get("meta").getAsString()))
+			if (actualHasMeta)
 			{
-				String itemMetaClassString = getMetaInterface(itemStack.getItemMeta().getClass()).getName();
-				assertEquals(expected.get("meta").getAsString(), itemMetaClassString);
+				List<? extends Class<?>> itemMetas = expected.get("meta").getAsJsonArray().asList().stream()
+						.map(JsonElement::getAsString)
+						.map(className ->
+						{
+							try
+							{
+								return Class.forName(className);
+							}
+							catch (ClassNotFoundException e)
+							{
+								throw new RuntimeException(e);
+							}
+						})
+						.toList();
+				ItemMeta itemMeta = itemStack.getItemMeta();
+				assertTrue(itemMetas.stream().allMatch(clazz -> clazz.isAssignableFrom(itemMeta.getClass())));
 
 				ItemMeta factoryMeta = Bukkit.getItemFactory().getItemMeta(material);
-				String factoryMetaClassString = getMetaInterface(factoryMeta.getClass()).getName();
-				assertEquals(expected.get("meta").getAsString(), factoryMetaClassString);
+				assertTrue(itemMetas.stream().allMatch(clazz -> clazz.isAssignableFrom(factoryMeta.getClass())));
 			}
 		}
 		catch (UnimplementedOperationException ignored)
@@ -273,19 +287,6 @@ class ItemStackMockTest
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/itemstack/setType.json"))
 		{
 			return JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonArray().asList().stream();
-		}
-	}
-
-	static boolean isUnimplementedMeta(String metaClassString)
-	{
-		Matcher matcher = CLASS_NAME_RE.matcher(metaClassString);
-		if (matcher.find())
-		{
-			return List.of("BlockDataMeta", "MusicInstrumentMeta").contains(matcher.group());
-		}
-		else
-		{
-			throw new IllegalArgumentException("Not a valid java class: " + metaClassString);
 		}
 	}
 
