@@ -1,6 +1,6 @@
-package org.mockbukkit.mockbukkit.block;
+package org.mockbukkit.mockbukkit.datacomponent;
 
-import org.bukkit.block.BlockType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -8,13 +8,13 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockBukkitExtension.class)
-class BlockTypeMockTest
+class DataComponentTypeMockTest
 {
 
 	@Test
-	void getTyped()
+	void valuedNonNull()
 	{
-		assertNotNull(BlockType.ACACIA_BUTTON);
+		 assertNotNull(DataComponentTypes.BLOCK_DATA);
 	}
 
 }
