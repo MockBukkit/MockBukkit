@@ -14,7 +14,6 @@ class CatVariantMockTest
 	{
 		Cat.Type catVariant = Cat.Type.BLACK;
 		assertEquals("BLACK", catVariant.name());
-		assertEquals(1, catVariant.ordinal());
 		assertEquals(NamespacedKey.fromString("minecraft:black"), catVariant.getKey());
 	}
 

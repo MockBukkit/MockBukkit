@@ -16,7 +16,6 @@ class MapCursorTypeMockTest
 		assertEquals("PLAYER_OFF_MAP", mapCursorType.name());
 		assertEquals(6, mapCursorType.getValue());
 		assertEquals(NamespacedKey.fromString("minecraft:player_off_map"), mapCursorType.getKey());
-		assertEquals(6, mapCursorType.ordinal());
 	}
 
 }

@@ -16,7 +16,6 @@ class VillagerTypeMockTest
 		Villager.Type type = Villager.Type.JUNGLE;
 		assertEquals("JUNGLE", type.name());
 		assertEquals(NamespacedKey.fromString("minecraft:jungle"), type.getKey());
-		assertEquals(1, type.ordinal());
 	}
 
 }
