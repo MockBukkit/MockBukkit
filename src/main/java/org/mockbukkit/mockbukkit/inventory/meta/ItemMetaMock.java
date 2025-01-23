@@ -66,6 +66,7 @@ import static java.util.Objects.nonNull;
  */
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
+
 	private static final int ABSOLUTE_MAX_STACK_SIZE = 99;
 
 	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
@@ -167,37 +168,19 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasCustomName()
 	{
-		throw new UnimplementedOperationException();
+		return displayName != null;
 	}
 
 	@Override
 	public @Nullable Component customName()
 	{
-		throw new UnimplementedOperationException();
+		return displayName == null ? null : GsonComponentSerializer.gson().deserialize(displayName);
 	}
 
 	@Override
 	public void customName(@Nullable Component component)
 	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasDisplayName()
-	{
-		return this.displayName != null;
-	}
-
-	@Override
-	public @Nullable Component displayName()
-	{
-		return this.displayName == null ? null : GsonComponentSerializer.gson().deserialize(this.displayName);
-	}
-
-	@Override
-	public void displayName(@Nullable Component displayName)
-	{
-		this.displayName = displayName == null ? null : GsonComponentSerializer.gson().serialize(displayName);
+		this.displayName = component == null ? null : GsonComponentSerializer.gson().serialize(component);
 	}
 
 	@Override
@@ -660,7 +643,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("repair-cost", this.repairCost);
 		map.put("ItemFlags", this.hideFlags);
 		map.put("Unbreakable", this.unbreakable);
-		if(this.damage != null)
+		if (this.damage != null)
 		{
 			map.put("Damage", this.damage);
 		}
@@ -768,7 +751,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		return enchants != null ? ImmutableSortedMap.copyOf(enchants,
 				Comparator.comparing(o -> o.getKey().toString())
-				) : ImmutableMap.of();
+		) : ImmutableMap.of();
 	}
 
 	@Override
@@ -1173,7 +1156,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (name == null)
 		{
 			this.itemName = null;
-		} else
+		}
+		else
 		{
 			this.itemName = LegacyComponentSerializer.legacySection().deserialize(name);
 		}
@@ -1208,7 +1192,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setTooltipStyle(@Nullable NamespacedKey namespacedKey)
 	{
-        //TODO: Auto-generated method stub
+		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

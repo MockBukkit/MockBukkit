@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.persistence.PersistentDataContainerView;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
@@ -692,6 +694,22 @@ class ItemStackMockTest
 		assertEquals(2, item.getEnchantments().size());
 		item.removeEnchantments();
 		assertTrue(item.getEnchantments().isEmpty());
+	}
+
+	@Test
+	void getDisplayName()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		Component displayName1 = item.displayName();
+		assertNotNull(displayName1);
+		assertEquals("[Diamond Pickaxe]", PlainTextComponentSerializer.plainText().serialize(displayName1));
+		ItemMeta meta = item.getItemMeta();
+		meta.customName(Component.text("Hello world!"));
+		item.setItemMeta(meta);
+		Component displayName2 = item.displayName();
+		assertNotNull(displayName2);
+		assertNotEquals(displayName1, displayName2);
+		assertEquals("[Hello world!]", PlainTextComponentSerializer.plainText().serialize(displayName2));
 	}
 
 }

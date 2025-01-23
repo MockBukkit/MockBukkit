@@ -3,13 +3,18 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import io.papermc.paper.registry.RegistryKey;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.event.HoverEventSource;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
@@ -482,6 +487,28 @@ public class ItemStackMock extends ItemStack
 				}
 			}
 		}
+	}
+
+	@Override
+	public @NotNull Component displayName()
+	{
+		Component component;
+		if (itemMeta != null && itemMeta.customName() != null)
+		{
+			component = Component.empty().append(itemMeta.customName()).style(Style.style(TextDecoration.ITALIC));
+		}
+		else
+		{
+			component = Component.translatable(type.translationKey());
+		}
+		component = Component.translatable("chat.square_brackets", component);
+		if (!this.isEmpty() && this.itemMeta != null)
+		{
+			ItemRarity rarity = this.itemMeta.hasRarity() ? this.itemMeta.getRarity() : ItemRarity.COMMON;
+			component = component.style(Style.style(rarity.color()))
+					.hoverEvent(HoverEventSource.unbox(HoverEvent.showItem(type, this.amount)));
+		}
+		return component;
 	}
 
 }
