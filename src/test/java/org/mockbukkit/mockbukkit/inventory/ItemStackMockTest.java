@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -710,6 +711,13 @@ class ItemStackMockTest
 		assertNotNull(displayName2);
 		assertNotEquals(displayName1, displayName2);
 		assertEquals("[Hello world!]", PlainTextComponentSerializer.plainText().serialize(displayName2));
+	}
+
+	@Test
+	void getDisplayName_noStackOverflow()
+	{
+		ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE);
+		assertDoesNotThrow(() -> item.displayName());
 	}
 
 }

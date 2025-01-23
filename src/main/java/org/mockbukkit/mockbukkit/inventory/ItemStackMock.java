@@ -489,26 +489,4 @@ public class ItemStackMock extends ItemStack
 		}
 	}
 
-	@Override
-	public @NotNull Component displayName()
-	{
-		Component component;
-		if (itemMeta != null && itemMeta.customName() != null)
-		{
-			component = Component.empty().append(itemMeta.customName()).style(Style.style(TextDecoration.ITALIC));
-		}
-		else
-		{
-			component = Component.translatable(type.translationKey());
-		}
-		component = Component.translatable("chat.square_brackets", component);
-		if (!this.isEmpty() && this.itemMeta != null)
-		{
-			ItemRarity rarity = this.itemMeta.hasRarity() ? this.itemMeta.getRarity() : ItemRarity.COMMON;
-			component = component.style(Style.style(rarity.color()))
-					.hoverEvent(HoverEventSource.unbox(HoverEvent.showItem(type, this.amount)));
-		}
-		return component;
-	}
-
 }
