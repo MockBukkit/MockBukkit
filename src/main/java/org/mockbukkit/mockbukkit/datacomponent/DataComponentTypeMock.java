@@ -21,7 +21,8 @@ public class DataComponentTypeMock implements DataComponentType
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		boolean persistent = jsonObject.get("persistent").getAsBoolean();
-		if(jsonObject.get("valued").getAsBoolean()){
+		if (jsonObject.get("valued").getAsBoolean())
+		{
 			return new ValuedMock<>(key, persistent);
 		}
 		return new NonValuedMNock(key, persistent);
@@ -39,7 +40,8 @@ public class DataComponentTypeMock implements DataComponentType
 		return this.key;
 	}
 
-	public static class NonValuedMNock extends DataComponentTypeMock implements DataComponentType.NonValued {
+	public static class NonValuedMNock extends DataComponentTypeMock implements DataComponentType.NonValued
+	{
 
 		public NonValuedMNock(NamespacedKey key, boolean persistent)
 		{
@@ -48,7 +50,8 @@ public class DataComponentTypeMock implements DataComponentType
 
 	}
 
-	public static class ValuedMock<T> extends DataComponentTypeMock implements DataComponentType.Valued<T> {
+	public static class ValuedMock<T> extends DataComponentTypeMock implements DataComponentType.Valued<T>
+	{
 
 		public ValuedMock(NamespacedKey key, boolean persistent)
 		{
@@ -56,4 +59,5 @@ public class DataComponentTypeMock implements DataComponentType
 		}
 
 	}
+
 }
