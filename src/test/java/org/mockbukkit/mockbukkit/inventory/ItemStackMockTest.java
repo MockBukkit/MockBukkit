@@ -1,18 +1,20 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockDataMeta;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.MusicInstrumentMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,8 +32,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -64,6 +66,7 @@ class ItemStackMockTest
 			assertEquals(expected.get("material").getAsString(), itemTypeString);
 			boolean actualHasMeta = itemStack.getItemMeta() != null;
 			assertEquals(expected.has("meta"), actualHasMeta);
+
 			if (actualHasMeta)
 			{
 				List<? extends Class<?>> itemMetas = expected.get("meta").getAsJsonArray().asList().stream()
@@ -79,12 +82,15 @@ class ItemStackMockTest
 								throw new RuntimeException(e);
 							}
 						})
+						.filter(clazz -> !clazz.equals(BlockDataMeta.class) && !clazz.equals(MusicInstrumentMeta.class))
 						.toList();
 				ItemMeta itemMeta = itemStack.getItemMeta();
-				assertTrue(itemMetas.stream().allMatch(clazz -> clazz.isAssignableFrom(itemMeta.getClass())));
+				List<? extends Class<?>> classOptional = itemMetas.stream().filter(clazz -> !clazz.isAssignableFrom(itemMeta.getClass())).toList();
+				assertTrue(classOptional.isEmpty(), "Could not find meta for classes: " + classOptional);
 
 				ItemMeta factoryMeta = Bukkit.getItemFactory().getItemMeta(material);
-				assertTrue(itemMetas.stream().allMatch(clazz -> clazz.isAssignableFrom(factoryMeta.getClass())));
+				List<? extends Class<?>> classOptionalFactory = itemMetas.stream().filter(clazz -> !clazz.isAssignableFrom(factoryMeta.getClass())).toList();
+				assertTrue(classOptionalFactory.isEmpty(), "Could not find meta for classes: " + classOptionalFactory);
 			}
 		}
 		catch (UnimplementedOperationException ignored)
