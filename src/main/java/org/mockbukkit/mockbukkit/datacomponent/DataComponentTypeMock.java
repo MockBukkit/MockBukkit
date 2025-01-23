@@ -25,7 +25,7 @@ public class DataComponentTypeMock implements DataComponentType
 		{
 			return new ValuedMock<>(key, persistent);
 		}
-		return new NonValuedMNock(key, persistent);
+		return new NonValuedMock(key, persistent);
 	}
 
 	@Override
@@ -40,10 +40,10 @@ public class DataComponentTypeMock implements DataComponentType
 		return this.key;
 	}
 
-	public static class NonValuedMNock extends DataComponentTypeMock implements DataComponentType.NonValued
+	public static class NonValuedMock extends DataComponentTypeMock implements DataComponentType.NonValued
 	{
 
-		public NonValuedMNock(NamespacedKey key, boolean persistent)
+		public NonValuedMock(NamespacedKey key, boolean persistent)
 		{
 			super(key, persistent);
 		}
