@@ -76,6 +76,7 @@ import org.mockbukkit.mockbukkit.entity.ChickenMock;
 import org.mockbukkit.mockbukkit.entity.CodMock;
 import org.mockbukkit.mockbukkit.entity.CommandMinecartMock;
 import org.mockbukkit.mockbukkit.entity.CowMock;
+import org.mockbukkit.mockbukkit.entity.CreakingMock;
 import org.mockbukkit.mockbukkit.entity.CreeperMock;
 import org.mockbukkit.mockbukkit.entity.DolphinMock;
 import org.mockbukkit.mockbukkit.entity.DonkeyMock;
@@ -150,9 +151,11 @@ import org.mockbukkit.mockbukkit.entity.SpiderMock;
 import org.mockbukkit.mockbukkit.entity.SquidMock;
 import org.mockbukkit.mockbukkit.entity.StorageMinecartMock;
 import org.mockbukkit.mockbukkit.entity.StrayMock;
+import org.mockbukkit.mockbukkit.entity.StriderMock;
 import org.mockbukkit.mockbukkit.entity.TadpoleMock;
 import org.mockbukkit.mockbukkit.entity.ThrownExpBottleMock;
 import org.mockbukkit.mockbukkit.entity.ThrownPotionMock;
+import org.mockbukkit.mockbukkit.entity.TraderLlamaMock;
 import org.mockbukkit.mockbukkit.entity.TropicalFishMock;
 import org.mockbukkit.mockbukkit.entity.TurtleMock;
 import org.mockbukkit.mockbukkit.entity.VillagerMock;
@@ -1444,6 +1447,9 @@ class WorldMockTest
 				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class),
 				Arguments.of(EntityType.EYE_OF_ENDER, EnderSignalMock.class),
 				Arguments.of(EntityType.HUSK, HuskMock.class),
+				Arguments.of(EntityType.STRIDER, StriderMock.class),
+				Arguments.of(EntityType.CREAKING, CreakingMock.class),
+				Arguments.of(EntityType.TRADER_LLAMA, TraderLlamaMock.class),
 				Arguments.of(EntityType.BOGGED, BoggedMock.class),
 				Arguments.of(EntityType.BREEZE, BreezeMock.class),
 				Arguments.of(EntityType.BREEZE_WIND_CHARGE, BreezeWindChargeMock.class),

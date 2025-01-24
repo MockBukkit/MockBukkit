@@ -22,6 +22,7 @@ import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
+import org.bukkit.entity.Creaking;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
@@ -94,10 +95,12 @@ import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
+import org.bukkit.entity.Strider;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
+import org.bukkit.entity.TraderLlama;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
@@ -222,6 +225,7 @@ public final class EntityTypesMock
 			.register(Cod.class, CodMock.class, CodMock::new)
 			.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
 			.register(Cow.class, CowMock.class, CowMock::new)
+			.register(Creaking.class, CreakingMock.class, CreakingMock::new)
 			.register(Creeper.class, CreeperMock.class, CreeperMock::new)
 			.register(DarkOakBoat.class, DarkOakBoatMock.class, DarkOakBoatMock::new)
 			.register(DarkOakChestBoat.class, DarkOakChestBoatMock.class, DarkOakChestBoatMock::new)
@@ -309,7 +313,9 @@ public final class EntityTypesMock
 			.register(Squid.class, SquidMock.class, SquidMock::new)
 			.register(StorageMinecart.class, StorageMinecartMock.class, StorageMinecartMock::new)
 			.register(Stray.class, StrayMock.class, StrayMock::new)
+			.register(Strider.class, StriderMock.class, StriderMock::new)
 			.register(Tadpole.class, TadpoleMock.class, TadpoleMock::new)
+			.register(TraderLlama.class, TraderLlamaMock.class, TraderLlamaMock::new)
 			.register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new)
 			.register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new)
 			.register(TNTPrimed.class, TNTPrimedMock.class, TNTPrimedMock::new)
