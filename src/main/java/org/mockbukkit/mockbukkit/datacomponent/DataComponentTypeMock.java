@@ -21,8 +21,11 @@ public class DataComponentTypeMock implements DataComponentType
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		boolean persistent = jsonObject.get("persistent").getAsBoolean();
-
-		return new DataComponentTypeMock(key, persistent);
+		if (jsonObject.get("valued").getAsBoolean())
+		{
+			return new ValuedMock<>(key, persistent);
+		}
+		return new NonValuedMock(key, persistent);
 	}
 
 	@Override
@@ -35,6 +38,26 @@ public class DataComponentTypeMock implements DataComponentType
 	public @NotNull NamespacedKey getKey()
 	{
 		return this.key;
+	}
+
+	public static class NonValuedMock extends DataComponentTypeMock implements DataComponentType.NonValued
+	{
+
+		public NonValuedMock(NamespacedKey key, boolean persistent)
+		{
+			super(key, persistent);
+		}
+
+	}
+
+	public static class ValuedMock<T> extends DataComponentTypeMock implements DataComponentType.Valued<T>
+	{
+
+		public ValuedMock(NamespacedKey key, boolean persistent)
+		{
+			super(key, persistent);
+		}
+
 	}
 
 }

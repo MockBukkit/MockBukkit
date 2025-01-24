@@ -21,7 +21,7 @@ public class TranslationDataGenerator implements DataGenerator
 
 	public TranslationDataGenerator(File dataFolder)
 	{
-		this.dataFolder = new File(dataFolder, "translations");
+		this.dataFolder = new File(dataFolder, "src/main/resources/translations");
 	}
 
 	@Override

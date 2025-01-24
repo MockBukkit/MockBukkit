@@ -3,15 +3,16 @@ package org.mockbukkit.metaminer.keyed;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.Registry;
-import org.bukkit.generator.structure.Structure;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.potion.PotionEffectType;
@@ -75,8 +76,13 @@ public class KeyedDataGenerator implements DataGenerator
 		{
 			addEnchantmentProperties(jsonObject, enchantment);
 		}
-		if (keyed instanceof Structure structure){
+		if (keyed instanceof Structure structure)
+		{
 			jsonObject.add("type", new JsonPrimitive(structure.getStructureType().getKey().toString()));
+		}
+		if (keyed instanceof DataComponentType dataComponentType)
+		{
+			jsonObject.add("valued", new JsonPrimitive(dataComponentType instanceof DataComponentType.Valued<?>));
 		}
 	}
 
@@ -92,10 +98,10 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("material", new JsonPrimitive(itemType.asMaterial().name()));
 		jsonObject.add("rarity", new JsonPrimitive(itemType.getItemRarity().toString()));
 		jsonObject.add("creativeCategory", new JsonPrimitive(itemType.getCreativeCategory().toString()));
-		jsonObject.add("compostable",new JsonPrimitive(itemType.isCompostable()));
+		jsonObject.add("compostable", new JsonPrimitive(itemType.isCompostable()));
 		if (itemType.isCompostable())
 		{
-			jsonObject.add("compostChance",new JsonPrimitive("%sF".formatted(itemType.getCompostChance())));
+			jsonObject.add("compostChance", new JsonPrimitive("%sF".formatted(itemType.getCompostChance())));
 		}
 		if (itemType != ItemType.AIR)
 		{
@@ -118,7 +124,8 @@ public class KeyedDataGenerator implements DataGenerator
 
 	/**
 	 * Add the given enchantment's properties to the given jsonObject
-	 * @param jsonObject the jsonObject to add the enchantment's properties to
+	 *
+	 * @param jsonObject  the jsonObject to add the enchantment's properties to
 	 * @param enchantment the enchantment to add the properties of
 	 */
 	private void addEnchantmentProperties(JsonObject jsonObject, Enchantment enchantment)
@@ -160,9 +167,11 @@ public class KeyedDataGenerator implements DataGenerator
 		JsonArray enchantables = new JsonArray();
 		for (Material material : Material.values())
 		{
-			if (material.isItem()) {
+			if (material.isItem())
+			{
 				ItemStack itemStack = new ItemStack(material);
-				if (enchantment.canEnchantItem(itemStack)) {
+				if (enchantment.canEnchantItem(itemStack))
+				{
 					enchantables.add(material.getKey().toString());
 				}
 			}
