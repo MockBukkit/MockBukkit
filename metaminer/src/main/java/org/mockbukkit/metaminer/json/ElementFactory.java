@@ -107,6 +107,11 @@ public class ElementFactory
 		return null;
 	}
 
+	/**
+	 * Helper method to log the class and avoid the duplication.
+	 *
+	 * @param returnType Log a unknown type.
+	 */
 	private static void logUnknownType(Class<?> returnType)
 	{
 		String name = returnType.getName();
@@ -116,7 +121,7 @@ public class ElementFactory
 		}
 
 		LOGGED_NAMES.add(name);
-		LOGGER.warn("Type: " + name);
+		LOGGER.info("Serializer for class '{}' is not implemented, skipping...", name);
 	}
 
 	private ElementFactory()
