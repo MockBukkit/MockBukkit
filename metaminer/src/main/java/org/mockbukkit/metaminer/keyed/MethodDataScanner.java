@@ -1,12 +1,12 @@
 package org.mockbukkit.metaminer.keyed;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import net.kyori.adventure.key.Keyed;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import org.apache.commons.lang.ClassUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.metaminer.json.ElementFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,11 +20,11 @@ public class MethodDataScanner
 
 	private static final Pattern WORDS_TO_REPLACE = Pattern.compile("((^get)|(^has)|(^is))([A-Z])");
 	private static final Set<String> METHOD_NAME_BLACKLIST = Set.of("hashCode", "toString", "getKeyOrNull", "implHashCode",
-			"implToString", "wait", "getDeclaringClass", "notify", "notifyAll", "getClass");
+			"implToString", "wait", "getDeclaringClass", "notify", "notifyAll", "getClass", "values");
 
-	public static JsonObject findMethodData(Keyed keyed)
+	public static JsonObject findMethodData(Object object)
 	{
-		Class<? extends Keyed> kClass = keyed.getClass();
+		Class<?> kClass = object.getClass();
 		JsonObject output = new JsonObject();
 		for (Method method : kClass.getMethods())
 		{
@@ -40,7 +40,7 @@ public class MethodDataScanner
 			Class<?> returnType = method.getReturnType();
 			try
 			{
-				JsonElement returnValue = getReturnValue(returnType, method, keyed);
+				JsonElement returnValue = getReturnValue(returnType, method, object);
 				if (returnValue != null)
 				{
 					output.add(simplifiedMethodName, returnValue);
@@ -54,57 +54,21 @@ public class MethodDataScanner
 		return output;
 	}
 
-	private static @Nullable JsonElement getReturnValue(Class<?> returnType, Method method, Keyed object) throws InvocationTargetException, IllegalAccessException
+	static @Nullable JsonElement getReturnValue(@NotNull Class<?> returnType, @NotNull Method method, @Nullable Object object) throws InvocationTargetException, IllegalAccessException
 	{
-		if (returnType == Void.TYPE)
+		Preconditions.checkArgument(returnType != null, "The return type can't be null!");
+		Preconditions.checkArgument(method != null, "The method can't be null!");
+
+		// Convert the primitive type into the respective wrapper
+		returnType = ClassUtils.primitiveToWrapper(returnType);
+
+		if (Void.TYPE == returnType)
 		{
 			return null;
 		}
-		if (returnType == boolean.class)
-		{
-			return new JsonPrimitive((Boolean) method.invoke(object));
-		}
-		if (returnType == int.class)
-		{
-			return new JsonPrimitive((Integer) method.invoke(object));
-		}
-		if (returnType == short.class)
-		{
-			return new JsonPrimitive((Short) method.invoke(object));
-		}
-		if (returnType == long.class)
-		{
-			return new JsonPrimitive((Long) method.invoke(object));
-		}
-		if (returnType == double.class)
-		{
-			return new JsonPrimitive((Double) method.invoke(object));
-		}
-		if (returnType == float.class)
-		{
-			return new JsonPrimitive((Float) method.invoke(object));
-		}
-		if (returnType == byte.class)
-		{
-			return new JsonPrimitive((Byte) method.invoke(object));
-		}
-		if (returnType == String.class)
-		{
-			return new JsonPrimitive((String) method.invoke(object));
-		}
-		if (Keyed.class.isAssignableFrom(returnType))
-		{
-			return new JsonPrimitive(((Keyed) method.invoke(object)).key().asString());
-		}
-		if (Component.class.isAssignableFrom(returnType))
-		{
-			return GsonComponentSerializer.gson().serializeToTree((Component) method.invoke(object));
-		}
-		if (returnType.isEnum())
-		{
-			return new JsonPrimitive(((Enum<?>) method.invoke(object)).name());
-		}
-		return null;
+
+		Object functionReturn = method.invoke(object);
+		return ElementFactory.toJson(functionReturn);
 	}
 
 	private static String simplifyMethodName(String name)

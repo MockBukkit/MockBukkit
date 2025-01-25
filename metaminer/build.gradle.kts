@@ -15,6 +15,9 @@ repositories {
 dependencies {
 	paperweight.paperDevBundle("${rootProject.property("paper.api.full-version")}")
 	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
+
+	// Dependencies for Unit Tests
+	testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
 }
 
 tasks {
@@ -25,5 +28,10 @@ tasks {
 
 	processResources {
 		filesMatching("**/plugin.yml") { expand(project.properties) }
+	}
+
+	test {
+		dependsOn(project(":extra:TestPlugin").tasks.jar)
+		useJUnitPlatform()
 	}
 }
