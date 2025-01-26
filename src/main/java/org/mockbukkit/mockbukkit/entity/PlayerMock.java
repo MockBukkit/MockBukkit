@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.LookAnchor;
+import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
@@ -3450,6 +3451,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		PlayerLocaleChangeEvent event = new PlayerLocaleChangeEvent(this, locale.toLanguageTag());
 		Bukkit.getPluginManager().callEvent(event);
 		this.locale = locale;
+	}
+
+	@NotNull
+	@Override
+	public PlayerGiveResult give(@NotNull Collection<@NotNull ItemStack> items, boolean dropIfFull)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }
