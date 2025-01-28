@@ -1,7 +1,43 @@
 package org.mockbukkit.mockbukkit;
 
+import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
+
+import static org.bukkit.Bukkit.getPauseWhenEmptyTime;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
+
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
+import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
@@ -11,6 +47,7 @@ import org.bukkit.Art;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
+import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
@@ -97,41 +134,6 @@ import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
-
-import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Stream;
-
-import static org.bukkit.Bukkit.getPauseWhenEmptyTime;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 @ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
@@ -1961,6 +1963,232 @@ class ServerMockTest
 				getPauseWhenEmptyTime(),
 				is(100));
 
+	}
+
+	@Nested
+	class GetTag
+	{
+		@Nested
+		class Block
+		{
+			@Test
+			void givenValidBlockTag()
+			{
+				Tag<Material> stoneBrickTag = server.getTag(Tag.REGISTRY_BLOCKS, Tag.STONE_BRICKS.getKey(), Material.class);
+
+				assertNotNull(stoneBrickTag);
+				assertTrue(stoneBrickTag.isTagged(Material.CHISELED_STONE_BRICKS));
+				assertTrue(stoneBrickTag.isTagged(Material.CRACKED_STONE_BRICKS));
+				assertTrue(stoneBrickTag.isTagged(Material.MOSSY_STONE_BRICKS));
+				assertTrue(stoneBrickTag.isTagged(Material.STONE_BRICKS));
+
+				assertFalse(stoneBrickTag.isTagged(Material.STONE));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_BLOCKS,
+						Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Block namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class Item
+		{
+			@Test
+			void givenValidItem()
+			{
+				Tag<Material> arrowTag = server.getTag(Tag.REGISTRY_ITEMS, Tag.ITEMS_ARROWS.getKey(), Material.class);
+
+				assertNotNull(arrowTag);
+				assertTrue(arrowTag.isTagged(Material.ARROW));
+				assertTrue(arrowTag.isTagged(Material.SPECTRAL_ARROW));
+				assertTrue(arrowTag.isTagged(Material.TIPPED_ARROW));
+
+				assertFalse(arrowTag.isTagged(Material.STICK));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_ITEMS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Item namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class Fluids
+		{
+			@Test
+			void givenValidItem()
+			{
+				Tag<Fluid> fluidTag = server.getTag(Tag.REGISTRY_FLUIDS, Tag.FLUIDS_LAVA.getKey(), Fluid.class);
+
+				assertNotNull(fluidTag);
+				assertTrue(fluidTag.isTagged(Fluid.LAVA));
+				assertTrue(fluidTag.isTagged(Fluid.FLOWING_LAVA));
+
+				assertFalse(fluidTag.isTagged(Fluid.WATER));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_FLUIDS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Fluid namespace (org.bukkit.entity.EntityType) must have fluid type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class EntityTypes
+		{
+			@Test
+			void givenValidItem()
+			{
+				Tag<EntityType> entityTypeTag = server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.ENTITY_TYPES_ARROWS.getKey(), EntityType.class);
+
+				assertNotNull(entityTypeTag);
+				assertTrue(entityTypeTag.isTagged(EntityType.ARROW));
+				assertTrue(entityTypeTag.isTagged(EntityType.SPECTRAL_ARROW));
+
+				assertFalse(entityTypeTag.isTagged(EntityType.ZOMBIE));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.STONE_BRICKS.getKey(), Material.class));
+				assertEquals("Entity type namespace (org.bukkit.Material) must have entity type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class GameEvents
+		{
+			@Test
+			void givenValidItem()
+			{
+				Tag<GameEvent> gameEventTag = server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.GAME_EVENT_ALLAY_CAN_LISTEN.getKey(), GameEvent.class);
+
+				assertNotNull(gameEventTag);
+				assertTrue(gameEventTag.isTagged(GameEvent.NOTE_BLOCK_PLAY));
+
+				assertFalse(gameEventTag.isTagged(GameEvent.EAT));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Game Event namespace must have GameEvent type", e.getMessage());
+			}
+		}
+	}
+
+	@Nested
+	class GetTags
+	{
+		@Nested
+		class Block
+		{
+			@Test
+			void givenValidBlockTag()
+			{
+				Iterable<Tag<Material>> blocks = server.getTags(Tag.REGISTRY_BLOCKS, Material.class);
+
+				assertNotNull(blocks);
+				assertEquals(182, Iterables.size(blocks));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTags(Tag.REGISTRY_BLOCKS, EntityType.class));
+				assertEquals("Block namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class Item
+		{
+			@Test
+			void givenValidItem()
+			{
+				Iterable<Tag<Material>> itemsTag = server.getTags(Tag.REGISTRY_ITEMS, Material.class);
+
+				assertNotNull(itemsTag);
+				assertEquals(154, Iterables.size(itemsTag));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTags(Tag.REGISTRY_ITEMS, EntityType.class));
+				assertEquals("Item namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class Fluids
+		{
+			@Test
+			void givenValidItem()
+			{
+				Iterable<Tag<Fluid>> fluidTag = server.getTags(Tag.REGISTRY_FLUIDS, Fluid.class);
+
+				assertNotNull(fluidTag);
+				assertEquals(2, Iterables.size(fluidTag));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTags(Tag.REGISTRY_FLUIDS, EntityType.class));
+				assertEquals("Fluid namespace (org.bukkit.entity.EntityType) must have fluid type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class EntityTypes
+		{
+			@Test
+			void givenValidItem()
+			{
+				@NotNull Iterable<Tag<EntityType>> entityTypeTag = server.getTags(Tag.REGISTRY_ENTITY_TYPES, EntityType.class);
+
+				assertNotNull(entityTypeTag);
+				assertEquals(35, Iterables.size(entityTypeTag));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.STONE_BRICKS.getKey(), Material.class));
+				assertEquals("Entity type namespace (org.bukkit.Material) must have entity type", e.getMessage());
+			}
+		}
+
+		@Nested
+		class GameEvents
+		{
+			@Test
+			void givenValidItem()
+			{
+				Iterable<Tag<GameEvent>> gameEventTag = server.getTags(Tag.REGISTRY_GAME_EVENTS, GameEvent.class);
+
+				assertNotNull(gameEventTag);
+				assertEquals(5, Iterables.size(gameEventTag));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Game Event namespace must have GameEvent type", e.getMessage());
+			}
+		}
 	}
 
 }

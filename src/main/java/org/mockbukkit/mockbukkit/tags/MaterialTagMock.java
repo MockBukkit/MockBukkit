@@ -1,25 +1,42 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import com.google.common.collect.ImmutableSet;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+
+import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A rather simple mock implementation for {@link Material} {@link Tag Tags}.
  *
  * @author TheBusyBiscuit
  */
-public class MaterialTagMock implements Tag<Material>
+public class MaterialTagMock extends BaseTagMock<Material>
 {
+	public static MaterialTagMock from(@NotNull NamespacedKey key, @NotNull JsonArray values)
+	{
+		List<Material> materials = new ArrayList<>();
+		for (JsonElement element : values)
+		{
+			Preconditions.checkState(element.isJsonPrimitive(), "The value is not a primitive value");
+			JsonPrimitive primitiveElement = element.getAsJsonPrimitive();
+			Preconditions.checkState(primitiveElement.isString(), "The value is not a string value");
 
-	private final NamespacedKey key;
-	private final @NotNull Set<Material> items;
+			NamespacedKey minecraftKey = NamespacedKey.fromString(primitiveElement.getAsString());
+			Preconditions.checkArgument(minecraftKey != null, "The value is not a valid namespaced key");
+			materials.add(Material.valueOf(minecraftKey.value().toUpperCase(Locale.ROOT)));
+		}
+
+		return new MaterialTagMock(key, materials);
+	}
 
 	/**
 	 * Constructs a new {@link MaterialTagMock} with the provided {@link NamespacedKey} and items.
@@ -27,28 +44,20 @@ public class MaterialTagMock implements Tag<Material>
 	 * @param key   The key for the tag.
 	 * @param items The items included in the tag.
 	 */
-	public MaterialTagMock(NamespacedKey key, Material... items)
+	public MaterialTagMock(@NotNull NamespacedKey key, @NotNull Collection<Material> items)
 	{
-		this.key = key;
-		this.items = new HashSet<>(Arrays.asList(items));
+		super(key, items);
 	}
 
-	@Override
-	public @NotNull NamespacedKey getKey()
+	/**
+	 * Constructs a new {@link MaterialTagMock} with the provided {@link NamespacedKey} and items.
+	 *
+	 * @param key   The key for the tag.
+	 * @param items The items included in the tag.
+	 */
+	public MaterialTagMock(@NotNull NamespacedKey key, @NotNull Material... items)
 	{
-		return key;
-	}
-
-	@Override
-	public boolean isTagged(@NotNull Material item)
-	{
-		return items.contains(item);
-	}
-
-	@Override
-	public @NotNull Set<Material> getValues()
-	{
-		return ImmutableSet.copyOf(items);
+		super(key, items);
 	}
 
 }
