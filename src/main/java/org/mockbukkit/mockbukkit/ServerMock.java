@@ -2205,46 +2205,46 @@ public class ServerMock extends Server.Spigot implements Server
 			case Tag.REGISTRY_BLOCKS ->
 			{
 				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
-				Optional<Tag<Keyed>> optionalTag = getTag(registryKey, key);
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 				if (optionalTag.isPresent())
 				{
-					return (Tag<T>) optionalTag.get();
+					return optionalTag.get();
 				}
 			}
 			case Tag.REGISTRY_ITEMS ->
 			{
 				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
-				Optional<Tag<Keyed>> optionalTag = getTag(registryKey, key);
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 				if (optionalTag.isPresent())
 				{
-					return (Tag<T>) optionalTag.get();
+					return optionalTag.get();
 				}
 			}
 			case Tag.REGISTRY_FLUIDS ->
 			{
 				Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
-				Optional<Tag<Keyed>> optionalTag = getTag(registryKey, key);
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 				if (optionalTag.isPresent())
 				{
-					return (Tag<T>) optionalTag.get();
+					return optionalTag.get();
 				}
 			}
 			case Tag.REGISTRY_ENTITY_TYPES ->
 			{
 				Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
-				Optional<Tag<Keyed>> optionalTag = getTag(registryKey, key);
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 				if (optionalTag.isPresent())
 				{
-					return (Tag<T>) optionalTag.get();
+					return optionalTag.get();
 				}
 			}
 			case Tag.REGISTRY_GAME_EVENTS ->
 			{
 				Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
-				Optional<Tag<Keyed>> optionalTag = getTag(registryKey, key);
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 				if (optionalTag.isPresent())
 				{
-					return (Tag<T>) optionalTag.get();
+					return optionalTag.get();
 				}
 			}
 			default -> throw new IllegalArgumentException("Unknown registry key: " + registryKey);
