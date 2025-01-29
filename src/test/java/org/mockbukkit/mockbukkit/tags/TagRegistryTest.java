@@ -5,8 +5,12 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.bukkit.Fluid;
+import org.bukkit.GameEvent;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -29,6 +33,18 @@ class TagRegistryTest
 			assertEquals(182, actual.size());
 		}
 
+		@Test
+		void getRegistryIsCorrect()
+		{
+			assertEquals("blocks", TagRegistry.BLOCKS.getRegistry());
+		}
+
+		@Test
+		void getTypeIsCorrect()
+		{
+			assertEquals(Material.class, TagRegistry.BLOCKS.getTagType());
+		}
+
 	}
 
 	@Nested
@@ -41,6 +57,18 @@ class TagRegistryTest
 			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.ENTITY_TYPES.getTags();
 			assertNotNull(actual);
 			assertEquals(35, actual.size());
+		}
+
+		@Test
+		void getRegistryIsCorrect()
+		{
+			assertEquals("entity_types", TagRegistry.ENTITY_TYPES.getRegistry());
+		}
+
+		@Test
+		void getTypeIsCorrect()
+		{
+			assertEquals(EntityType.class, TagRegistry.ENTITY_TYPES.getTagType());
 		}
 
 	}
@@ -57,6 +85,18 @@ class TagRegistryTest
 			assertEquals(154, actual.size());
 		}
 
+		@Test
+		void getRegistryIsCorrect()
+		{
+			assertEquals("items", TagRegistry.ITEMS.getRegistry());
+		}
+
+		@Test
+		void getTypeIsCorrect()
+		{
+			assertEquals(Material.class, TagRegistry.ITEMS.getTagType());
+		}
+
 	}
 
 	@Nested
@@ -71,6 +111,18 @@ class TagRegistryTest
 			assertEquals(2, actual.size());
 		}
 
+		@Test
+		void getRegistryIsCorrect()
+		{
+			assertEquals("fluids", TagRegistry.FLUIDS.getRegistry());
+		}
+
+		@Test
+		void getTypeIsCorrect()
+		{
+			assertEquals(Fluid.class, TagRegistry.FLUIDS.getTagType());
+		}
+
 	}
 
 	@Nested
@@ -83,6 +135,18 @@ class TagRegistryTest
 			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.GAME_EVENTS.getTags();
 			assertNotNull(actual);
 			assertEquals(5, actual.size());
+		}
+
+		@Test
+		void getRegistryIsCorrect()
+		{
+			assertEquals("game_events", TagRegistry.GAME_EVENTS.getRegistry());
+		}
+
+		@Test
+		void getTypeIsCorrect()
+		{
+			assertEquals(GameEvent.class, TagRegistry.GAME_EVENTS.getTagType());
 		}
 
 	}

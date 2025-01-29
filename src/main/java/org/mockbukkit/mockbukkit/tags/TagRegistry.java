@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.tags;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.base.Preconditions;
 import org.bukkit.Fluid;
 import org.bukkit.GameEvent;
 import org.bukkit.Material;
@@ -23,27 +22,27 @@ public enum TagRegistry
 	/**
 	 * The blocks registry
 	 */
-	BLOCKS("blocks", Material.class),
+	BLOCKS(Tag.REGISTRY_BLOCKS, Material.class),
 
 	/**
 	 * The items registry
 	 */
-	ITEMS("items", Material.class),
+	ITEMS(Tag.REGISTRY_ITEMS, Material.class),
 
 	/**
 	 * The fluids;
 	 */
-	FLUIDS("fluids", Fluid.class),
+	FLUIDS(Tag.REGISTRY_FLUIDS, Fluid.class),
 
 	/**
 	 * The game events;
 	 */
-	GAME_EVENTS("game_events", GameEvent.class),
+	GAME_EVENTS(Tag.REGISTRY_GAME_EVENTS, GameEvent.class),
 
 	/**
 	 * The entity types;
 	 */
-	ENTITY_TYPES("entity_types", EntityType.class);
+	ENTITY_TYPES(Tag.REGISTRY_ENTITY_TYPES, EntityType.class);
 
 	private final Map<NamespacedKey, Tag<?>> tags = new HashMap<>();
 	private final String registryName;
@@ -51,8 +50,6 @@ public enum TagRegistry
 
 	TagRegistry(@NotNull String registryName, @NotNull Class<?> tagType)
 	{
-		Preconditions.checkArgument(registryName != null, "The registry name cannot be null");
-		Preconditions.checkArgument(tagType != null, "The tag type cannot be null");
 		this.registryName = registryName;
 		this.tagType = tagType;
 	}
