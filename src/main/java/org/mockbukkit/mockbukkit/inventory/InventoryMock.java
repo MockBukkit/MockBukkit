@@ -250,7 +250,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack getItem(int index)
 	{
-		return items[index];
+		return items[index].clone();
 	}
 
 	@Override
@@ -319,7 +319,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return items;
+		return items.clone();
 	}
 
 	@Override
