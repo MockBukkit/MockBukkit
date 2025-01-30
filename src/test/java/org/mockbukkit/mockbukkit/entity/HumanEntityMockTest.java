@@ -124,6 +124,15 @@ class HumanEntityMockTest
 	}
 
 	@Test
+	void testExhaustion() {
+		// Default level
+		assertEquals(0.0F, human.getExhaustion(), 0.1F);
+
+		human.setExhaustion(8);
+		assertEquals(8.0F, human.getExhaustion(), 0.1F);
+	}
+
+	@Test
 	void testSaturation()
 	{
 		// Default level

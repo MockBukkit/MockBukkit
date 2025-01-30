@@ -59,6 +59,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	 * How much EXP this {@link HumanEntity} has.
 	 */
 	protected int expLevel = 0;
+	private float exhaustion = 0.0F;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
 	protected boolean blocking;
@@ -548,15 +549,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public float getExhaustion()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.exhaustion;
 	}
 
 	@Override
 	public void setExhaustion(float value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.exhaustion = value;
 	}
 
 	@Override
