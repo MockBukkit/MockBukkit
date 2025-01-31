@@ -100,6 +100,20 @@ class InventoryMockTest
 	}
 
 	@Test
+	void getItem_IsCloned()
+	{
+		inventory.setItem(0, new ItemStackMock(Material.DIAMOND, 1));
+		ItemStack item = inventory.getItem(0);
+		ItemStack clone = inventory.getItem(0);
+		assertNotSame(item, clone);
+		assertEquals(item, clone);
+
+		item.setAmount(2);
+		assertEquals(2, item.getAmount());
+		assertEquals(1, clone.getAmount());
+	}
+
+	@Test
 	void testClearInventory()
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
@@ -325,6 +339,21 @@ class InventoryMockTest
 	void testContentsAndStorageContentsEqual()
 	{
 		assertArrayEquals(inventory.getContents(), inventory.getStorageContents());
+	}
+
+	@Test
+	void getContents_IsCloned()
+	{
+		inventory.addItem(new ItemStackMock(Material.STONE, 2));
+		ItemStack[] contents = inventory.getContents();
+		ItemStack[] clone = inventory.getContents();
+		assertNotSame(contents, clone);
+		assertNotSame(contents[0], clone[0]);
+		assertArrayEquals(contents, clone);
+
+		contents[0].setAmount(1);
+		assertEquals(1, contents[0].getAmount());
+		assertEquals(2, clone[0].getAmount());
 	}
 
 	@Test

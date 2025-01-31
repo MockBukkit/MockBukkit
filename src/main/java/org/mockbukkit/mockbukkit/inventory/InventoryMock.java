@@ -319,7 +319,8 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return items.clone();
+		return Arrays.stream(items).map(item -> item == null ? null : item.clone())
+				.toArray(ItemStack[]::new);
 	}
 
 	@Override
