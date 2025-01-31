@@ -1,13 +1,5 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Server;
-import org.bukkit.Tag;
-import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.TagMisconfigurationException;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,15 +12,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+
+import org.bukkit.NamespacedKey;
+import org.bukkit.Server;
+import org.bukkit.Tag;
+import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Used for loading the internal registry of tags.
  */
 public final class TagsMock
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(TagsMock.class);
 
 	private TagsMock()
 	{
@@ -43,22 +44,17 @@ public final class TagsMock
 	 */
 	public static void loadDefaultTags(@NotNull ServerMock server, boolean skipIfExists)
 	{
-		try
-		{
-			loadRegistry(server, TagRegistry.BLOCKS, skipIfExists);
-		}
-		catch (URISyntaxException | IOException e)
-		{
-			server.getLogger().log(Level.SEVERE, "Failed to load Tag Registry \"blocks\"", e);
-		}
 
-		try
+		for (TagRegistry registry : TagRegistry.values())
 		{
-			loadRegistry(server, TagRegistry.ITEMS, skipIfExists);
-		}
-		catch (URISyntaxException | IOException e)
-		{
-			server.getLogger().log(Level.SEVERE, "Failed to load Tag Registry \"items\"", e);
+			try
+			{
+				loadRegistry(server, registry, skipIfExists);
+			}
+			catch (URISyntaxException | IOException e)
+			{
+				LOGGER.error("Failed to load Tag Registry \"{}\"", registry.getRegistry(), e);
+			}
 		}
 	}
 
@@ -104,24 +100,12 @@ public final class TagsMock
 				// Splitting will strip away the .json
 				String name = filePattern.split(path.getFileName().toString())[0];
 				NamespacedKey key = NamespacedKey.minecraft(name);
-				TagWrapperMock tag = new TagWrapperMock(registry, key);
+				Tag<?> tag = TagFactory.createTag(registry, key);
 				registry.getTags().put(key, tag);
 			});
 		}
 
 		server.addTagRegistry(registry);
-
-		for (TagWrapperMock tag : registry.getTags().values())
-		{
-			try
-			{
-				tag.reload();
-			}
-			catch (TagMisconfigurationException e)
-			{
-				server.getLogger().log(Level.SEVERE, e, () -> "Failed to load Tag - " + tag.getKey());
-			}
-		}
 	}
 
 	@NotNull
