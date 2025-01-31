@@ -124,7 +124,8 @@ class HumanEntityMockTest
 	}
 
 	@Test
-	void testExhaustion() {
+	void testExhaustion()
+	{
 		// Default level
 		assertEquals(0.0F, human.getExhaustion(), 0.1F);
 
