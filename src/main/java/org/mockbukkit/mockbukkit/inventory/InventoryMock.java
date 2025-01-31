@@ -250,7 +250,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack getItem(int index)
 	{
-		return items[index];
+		return items[index] == null ? null : items[index].clone();
 	}
 
 	@Override
@@ -319,7 +319,8 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return items;
+		return Arrays.stream(items).map(item -> item == null ? null : item.clone())
+				.toArray(ItemStack[]::new);
 	}
 
 	@Override

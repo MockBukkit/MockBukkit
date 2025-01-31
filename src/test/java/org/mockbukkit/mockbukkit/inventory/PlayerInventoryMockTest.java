@@ -275,7 +275,7 @@ class PlayerInventoryMockTest
 		inventory.setItem(slot, apiItemStack);
 		ItemStack mirrorItemStack = inventory.getItem(slot);
 		assertNotSame(apiItemStack, mirrorItemStack);
-		assertSame(mirrorItemStack, inventory.getItem(slot));
+		assertEquals(mirrorItemStack, inventory.getItem(slot));
 	}
 
 }
