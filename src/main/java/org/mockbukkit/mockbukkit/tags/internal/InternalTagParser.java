@@ -1,7 +1,14 @@
 package org.mockbukkit.mockbukkit.tags.internal;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.tags.TagRegistry;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.regex.Pattern;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,14 +16,8 @@ import com.google.gson.JsonParser;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.EnumSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.regex.Pattern;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.tags.TagRegistry;
 
 public class InternalTagParser
 {
@@ -59,7 +60,7 @@ public class InternalTagParser
 				String aString = element.getAsString();
 				if (MINECRAFT_TAG.matcher(aString).matches())
 				{
-					output.addAll(parseTag(aString.replace("^#", ""), tagRegistry));
+					output.addAll((Collection<Material>) parseTag(aString.replace("^#", ""), tagRegistry));
 				}
 				else if (MINECRAFT_MATERIAL.matcher(aString).matches())
 				{
@@ -85,10 +86,10 @@ public class InternalTagParser
 		return material;
 	}
 
-	private Set<Material> parseTag(String tagString, TagRegistry tagRegistry) throws InternalTagMisconfigurationException
+	private Set<?> parseTag(String tagString, TagRegistry tagRegistry) throws InternalTagMisconfigurationException
 	{
 		NamespacedKey namespacedKey = NamespacedKey.minecraft(tagString.split(":")[1]);
-		Tag<Material> tag = tagRegistry.getTags().get(namespacedKey);
+		Tag<?> tag = tagRegistry.getTags().get(namespacedKey);
 		if (tag == null)
 		{
 			throw new InternalTagMisconfigurationException("Invalid tag " + namespacedKey);

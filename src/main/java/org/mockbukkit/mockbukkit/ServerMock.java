@@ -1,5 +1,37 @@
 package org.mockbukkit.mockbukkit;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
@@ -132,45 +164,14 @@ import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
 import org.mockbukkit.mockbukkit.scoreboard.ScoreboardManagerMock;
 import org.mockbukkit.mockbukkit.services.ServicesManagerMock;
+import org.mockbukkit.mockbukkit.tags.MaterialTagMock;
 import org.mockbukkit.mockbukkit.tags.TagRegistry;
-import org.mockbukkit.mockbukkit.tags.TagWrapperMock;
 import org.mockbukkit.mockbukkit.tags.TagsMock;
 import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
 import org.mockbukkit.mockbukkit.util.UnsafeValuesMock;
 import org.mockbukkit.mockbukkit.world.ChunkDataMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
@@ -2176,7 +2177,7 @@ public class ServerMock extends Server.Spigot implements Server
 		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 
 		TagRegistry registry = materialTags.get(registryKey);
-		TagWrapperMock tag = new TagWrapperMock(registry, key);
+		MaterialTagMock tag = new MaterialTagMock(key, materials);
 		registry.getTags().put(key, tag);
 		return tag;
 	}
@@ -2195,23 +2196,80 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
-		if (clazz == Material.class)
+		Preconditions.checkArgument(registryKey != null, "registryKey cannot be null");
+		Preconditions.checkArgument(key != null, "NamespacedKey key cannot be null");
+		Preconditions.checkArgument(clazz != null, "Class clazz cannot be null");
+
+		switch (registryKey)
 		{
-			TagRegistry registry = materialTags.get(registryKey);
-
-			if (registry != null)
+			case Tag.REGISTRY_BLOCKS ->
 			{
-				Tag<Material> tag = registry.getTags().get(key);
-
-				if (tag != null)
+				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+				if (optionalTag.isPresent())
 				{
-					return (Tag<T>) tag;
+					return optionalTag.get();
 				}
 			}
+			case Tag.REGISTRY_ITEMS ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+				if (optionalTag.isPresent())
+				{
+					return optionalTag.get();
+				}
+			}
+			case Tag.REGISTRY_FLUIDS ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+				if (optionalTag.isPresent())
+				{
+					return optionalTag.get();
+				}
+			}
+			case Tag.REGISTRY_ENTITY_TYPES ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+				if (optionalTag.isPresent())
+				{
+					return optionalTag.get();
+				}
+			}
+			case Tag.REGISTRY_GAME_EVENTS ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
+				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+				if (optionalTag.isPresent())
+				{
+					return optionalTag.get();
+				}
+			}
+			default -> throw new IllegalArgumentException("Unknown registry key: " + registryKey);
 		}
 
 		// Per definition this method should return null if the given tag does not exist.
 		return null;
+	}
+
+	@NotNull
+	private <T extends Keyed> Optional<Tag<T>> getTag(@NotNull String registryKey, @NotNull NamespacedKey key)
+	{
+		TagRegistry registry = materialTags.get(registryKey);
+		if (registry == null)
+		{
+			return Optional.empty();
+		}
+
+		Tag<?> tag = registry.getTags().get(key);
+		if (tag == null)
+		{
+			return Optional.empty();
+		}
+
+		return Optional.of((Tag<T>) tag);
 	}
 
 	@Override
@@ -2308,24 +2366,54 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(@NotNull String registry, @NotNull Class<T> clazz)
 	{
-		if (clazz == Material.class)
-		{
-			TagRegistry tagRegistry = materialTags.get(registry);
+		Preconditions.checkArgument(registry != null, "registry cannot be null");
+		Preconditions.checkArgument(clazz != null, "Class clazz cannot be null");
 
-			if (tagRegistry != null)
+		switch (registry)
+		{
+			case Tag.REGISTRY_BLOCKS ->
 			{
-				return tagRegistry.getTags()
-						.values()
-						.stream()
-						.map(tagWrapperMock -> (Tag<T>) tagWrapperMock).toList();
+				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
+				return getTags(registry);
 			}
+			case Tag.REGISTRY_ITEMS ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
+				return getTags(registry);
+			}
+			case Tag.REGISTRY_FLUIDS ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
+				return getTags(registry);
+			}
+			case Tag.REGISTRY_ENTITY_TYPES ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
+				return getTags(registry);
+			}
+			case Tag.REGISTRY_GAME_EVENTS ->
+			{
+				Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
+				return getTags(registry);
+			}
+			default -> throw new IllegalArgumentException("Unknown registry key: " + registry);
+		}
+	}
+
+	@NotNull
+	private <T extends Keyed> Collection<Tag<T>> getTags(@NotNull String registryKey)
+	{
+		TagRegistry registry = materialTags.get(registryKey);
+		if (registry == null)
+		{
+			return Collections.emptyList();
 		}
 
-		// Per definition this method should throw an exception if the registry doesn't exist
-		throw new IllegalArgumentException();
+		return registry.getTags().values()
+				.stream()
+				.map(tag -> (Tag<T>) tag).toList();
 	}
 
 	@Override
