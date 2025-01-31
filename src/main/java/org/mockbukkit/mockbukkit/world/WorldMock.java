@@ -1,5 +1,22 @@
 package org.mockbukkit.mockbukkit.world;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.block.fluid.FluidData;
@@ -97,23 +114,6 @@ import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
 /**
  * Mock implementation of a {@link World}.
  */
@@ -160,6 +160,10 @@ public class WorldMock implements World
 	private boolean hardcore;
 	private boolean getKeepSpawnInMemory = true;
 	private boolean generateStructures = true;
+	private boolean autoSaveEnabled = true;
+	private boolean voidDamageEnabled = true;
+	private float voidDamageAmount = 4;
+	private double voidDamageMinBuildHeightOffset = -64.0;
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
@@ -345,37 +349,37 @@ public class WorldMock implements World
 	@Override
 	public boolean isVoidDamageEnabled()
 	{
-		throw new UnimplementedOperationException();
+		return this.voidDamageEnabled;
 	}
 
 	@Override
-	public void setVoidDamageEnabled(boolean b)
+	public void setVoidDamageEnabled(boolean enabled)
 	{
-		throw new UnimplementedOperationException();
+		this.voidDamageEnabled = enabled;
 	}
 
 	@Override
 	public float getVoidDamageAmount()
 	{
-		throw new UnimplementedOperationException();
+		return this.voidDamageAmount;
 	}
 
 	@Override
-	public void setVoidDamageAmount(float v)
+	public void setVoidDamageAmount(float voidDamageAmount)
 	{
-		throw new UnimplementedOperationException();
+		this.voidDamageAmount = voidDamageAmount;
 	}
 
 	@Override
 	public double getVoidDamageMinBuildHeightOffset()
 	{
-		throw new UnimplementedOperationException();
+		return this.voidDamageMinBuildHeightOffset;
 	}
 
 	@Override
-	public void setVoidDamageMinBuildHeightOffset(double v)
+	public void setVoidDamageMinBuildHeightOffset(double minBuildHeightOffset)
 	{
-		throw new UnimplementedOperationException();
+		this.voidDamageMinBuildHeightOffset = minBuildHeightOffset;
 	}
 
 	@Override
@@ -1579,15 +1583,13 @@ public class WorldMock implements World
 	@Override
 	public boolean isAutoSave()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.autoSaveEnabled;
 	}
 
 	@Override
-	public void setAutoSave(boolean value)
+	public void setAutoSave(boolean enabled)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.autoSaveEnabled = enabled;
 	}
 
 	@Override

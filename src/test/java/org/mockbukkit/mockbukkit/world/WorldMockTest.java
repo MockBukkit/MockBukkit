@@ -1,5 +1,25 @@
 package org.mockbukkit.mockbukkit.world;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
+
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
@@ -194,26 +214,6 @@ import org.mockbukkit.mockbukkit.entity.boat.SpruceChestBoatMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.opentest4j.AssertionFailedError;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 @ExtendWith(MockBukkitExtension.class)
 class WorldMockTest
@@ -2504,6 +2504,66 @@ class WorldMockTest
 
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> world.setGameTime(invalidValue));
 			assertEquals("Time must be greater or equal than 0", e.getMessage());
+		}
+
+	}
+
+	@Nested
+	class VoidDamage
+	{
+		private final WorldMock world = new WorldMock(Material.DIRT, 3);
+
+		@Test
+		void isVoidDamageEnabledByDefault()
+		{
+			assertTrue(world.isVoidDamageEnabled());
+			assertEquals(4, world.getVoidDamageAmount());
+			assertEquals(-64, world.getVoidDamageMinBuildHeightOffset());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void enableAndDisableVoidDamage(boolean isEnabled)
+		{
+			world.setVoidDamageEnabled(isEnabled);
+			assertEquals(isEnabled, world.isVoidDamageEnabled());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {5, 10, 15, 20})
+		void changeVoidDamage(float damage)
+		{
+			world.setVoidDamageAmount(damage);
+			assertEquals(damage, world.getVoidDamageAmount());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {-5, -10, -15, -20})
+		void changeVoidStartDamageHeight(double damage)
+		{
+			world.setVoidDamageMinBuildHeightOffset(damage);
+			assertEquals(damage, world.getVoidDamageMinBuildHeightOffset());
+		}
+
+	}
+
+	@Nested
+	class IsAutoSaveEnabled
+	{
+		private final WorldMock world = new WorldMock(Material.DIRT, 3);
+
+		@Test
+		void givenDefault()
+		{
+			assertTrue(world.isAutoSave());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void enableAndDisableVoidDamage(boolean isEnabled)
+		{
+			world.setAutoSave(isEnabled);
+			assertEquals(isEnabled, world.isAutoSave());
 		}
 
 	}
