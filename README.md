@@ -232,7 +232,7 @@ block will ever be created in-memory.
 Sometimes your code may use a method that is not yet implemented in MockBukkit.
 When this happens MockBukkit will, instead of returning placeholder values, throw
 an `UnimplementedOperationException`.
-These exception extends `AssumationException` and will cause the test to be skipped.
+These exception extends `AssumptionException` and will cause the test to be skipped.
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
