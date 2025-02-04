@@ -420,6 +420,7 @@ public class ItemStackMock extends ItemStack
 	{
 		int version = (args.containsKey("v")) ? ((Number) args.get("v")).intValue() : -1;
 		short damage = 0;
+		int amount = 1;
 		String damageKey = "damage";
 
 		if (args.containsKey(damageKey))
@@ -429,7 +430,11 @@ public class ItemStackMock extends ItemStack
 
 		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
 
-		ItemStack result = new ItemStackMock(type);
+		if (args.containsKey("amount")) {
+			amount = ((Number) args.get("amount")).intValue();
+		}
+
+		ItemStack result = new ItemStackMock(type, amount);
 
 		if (args.containsKey("enchantments"))
 		{

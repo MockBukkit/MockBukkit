@@ -720,4 +720,12 @@ class ItemStackMockTest
 		assertDoesNotThrow(() -> item.displayName());
 	}
 
+	@Test
+	void testSerializationAndDeserialization()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE, 5);
+		Map<String, Object> serialized = item.serialize();
+		ItemStackMock deserialized = (ItemStackMock) ItemStackMock.deserialize(serialized);
+		assertEquals(item, deserialized);
+	}
 }
