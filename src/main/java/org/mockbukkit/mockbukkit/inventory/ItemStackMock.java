@@ -430,7 +430,8 @@ public class ItemStackMock extends ItemStack
 
 		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
 
-		if (args.containsKey("amount")) {
+		if (args.containsKey("amount"))
+		{
 			amount = ((Number) args.get("amount")).intValue();
 		}
 
