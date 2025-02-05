@@ -1,5 +1,11 @@
 package org.mockbukkit.metaminer.json;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
 import com.google.gson.JsonElement;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
@@ -8,16 +14,14 @@ import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.metaminer.json.recipe.RecipeChoiceElementFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 public class ElementFactory
 {
@@ -60,6 +64,18 @@ public class ElementFactory
 		if (Color.class.isAssignableFrom(returnType))
 		{
 			return ColorElementFactory.toJson((Color) object);
+		}
+		if (ItemStack.class.isAssignableFrom(returnType))
+		{
+			return ItemStackElementFactory.toJson((ItemStack) object);
+		}
+		if (ItemMeta.class.isAssignableFrom(returnType))
+		{
+			return ItemMetaElementFactory.toJson((ItemMeta) object);
+		}
+		if (RecipeChoice.class.isAssignableFrom(returnType))
+		{
+			return RecipeChoiceElementFactory.toJson((RecipeChoice) object);
 		}
 		if (PotionEffect.class.isAssignableFrom(returnType))
 		{
