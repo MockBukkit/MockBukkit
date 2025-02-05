@@ -1,5 +1,11 @@
 package org.mockbukkit.mockbukkit;
 
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.logging.Logger;
+
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.bukkit.Server;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -13,12 +19,6 @@ import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 import org.junit.platform.commons.util.ExceptionUtils;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.logging.Logger;
 
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
@@ -167,7 +167,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			logger.info(HORIZONTAL_DIVIDER);
 			logger.info("");
 			logger.info("To help us out, please open an issue on our GitHub repository with this information at");
-			logger.info("https://github.com/MockBukkit/MockBukkit/issues");
+			logger.info("https://github.com/MockBukkit/MockBukkit/issues/new?template=feature_request.yml");
 			logger.info("or consider contributing by submitting a pull request. \uD83D\uDCAA");
 			logger.info("");
 			logger.info("Your support and contributions keep the MockBukkit magic alive.");
