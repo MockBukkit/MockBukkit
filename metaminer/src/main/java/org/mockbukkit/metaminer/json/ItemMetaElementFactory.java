@@ -24,7 +24,7 @@ public class ItemMetaElementFactory
 		JsonObject json = new JsonObject();
 
 		json.add("customName", ComponentElementFactory.toJson(itemMeta.customName()));
-		json.add("lore", CollectionElementFactory.toJson(itemMeta.lore()));
+		json.add("lore", CollectionElementFactory.toJson(itemMeta.lore(), ComponentElementFactory::toJson));
 		json.add("tooltipStyle", KeyedElementFactory.toJson(itemMeta.getTooltipStyle()));
 		json.add("itemModel", KeyedElementFactory.toJson(itemMeta.getItemModel()));
 
