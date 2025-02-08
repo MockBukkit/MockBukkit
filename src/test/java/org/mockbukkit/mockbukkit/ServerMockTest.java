@@ -38,7 +38,6 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
@@ -52,6 +51,7 @@ import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -90,6 +90,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -450,11 +451,43 @@ class ServerMockTest
 		assertFalse(server.recipeIterator().hasNext());
 	}
 
-	@Test
-	void recipeIterator_HasDefaultCraftingRecipes()
+	@Nested
+	class GetRecipe
 	{
-		Iterator<Recipe> actual = server.recipeIterator();
-		assertEquals(976, Iterators.size(actual));
+
+		@ParameterizedTest
+		@ValueSource(strings = {
+			"minecraft:bamboo_block",
+			"minecraft:bamboo_door",
+			"minecraft:decorated_pot",
+			"minecraft:gray_bundle"
+		})
+		void givenValidValues(String expectedKey)
+		{
+			NamespacedKey key = NamespacedKey.fromString(expectedKey);
+			assertNotNull(key);
+
+			@Nullable Recipe actual = server.getRecipe(key);
+
+			assertNotNull(actual);
+			Keyed actualKeyed = assertInstanceOf(Keyed.class, actual);
+			assertEquals(expectedKey, actualKeyed.getKey().asString());
+		}
+
+		@ParameterizedTest
+		@ValueSource(strings = {
+			"minecraft:non_existing_recipe",
+			"other_namespace:bamboo_door"
+		})
+		void givenInvalidValues(String expectedKey)
+		{
+			NamespacedKey key = NamespacedKey.fromString(expectedKey);
+			assertNotNull(key);
+
+			@Nullable Recipe actual = server.getRecipe(key);
+			assertNull(actual);
+		}
+
 	}
 
 	@Test
