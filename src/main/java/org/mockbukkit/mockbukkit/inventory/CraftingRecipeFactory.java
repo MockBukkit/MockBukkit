@@ -24,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CraftingRecipeFactory
 {
-
 	public static final String SHAPED_TYPE = "shaped";
 	public static final String SHAPELESS_TYPE = "shapeless";
 	public static final String TRANSMUTE_TYPE = "transmute";
@@ -41,13 +40,16 @@ public class CraftingRecipeFactory
 	private static final String FIELD_SHAPE = "shape";
 	private static final String FIELD_TYPE = "type";
 
+	private static final String JSON_RECIPE_IS_NULL = "jsonRecipe is null";
+	private static final String JSON_RECIPE_HAS_NO_TYPE = "jsonRecipe has no type";
+
 	@NotNull
 	public static ShapedRecipe createShapedRecipe(@NotNull JsonObject jsonRecipe)
 	{
-		Preconditions.checkNotNull(jsonRecipe, "jsonRecipe is null");
+		Preconditions.checkNotNull(jsonRecipe, JSON_RECIPE_IS_NULL);
 
 		// Validate type
-		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), "jsonRecipe has no type");
+		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
 		Preconditions.checkArgument(SHAPED_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shaped recipe (%s)", type);
 
@@ -82,10 +84,10 @@ public class CraftingRecipeFactory
 	@NotNull
 	public static ShapelessRecipe createShapelessRecipe(@NotNull JsonObject jsonRecipe)
 	{
-		Preconditions.checkNotNull(jsonRecipe, "jsonRecipe is null");
+		Preconditions.checkNotNull(jsonRecipe, JSON_RECIPE_IS_NULL);
 
 		// Validate type
-		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), "jsonRecipe has no type");
+		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
 		Preconditions.checkArgument(SHAPELESS_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shapeless recipe (%s)", type);
 
@@ -104,10 +106,10 @@ public class CraftingRecipeFactory
 	@NotNull
 	public static TransmuteRecipe createTransmuteRecipe(@NotNull JsonObject jsonRecipe)
 	{
-		Preconditions.checkNotNull(jsonRecipe, "jsonRecipe is null");
+		Preconditions.checkNotNull(jsonRecipe, JSON_RECIPE_IS_NULL);
 
 		// Validate type
-		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), "jsonRecipe has no type");
+		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
 		Preconditions.checkArgument(TRANSMUTE_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shapeless recipe (%s)", type);
 
@@ -132,7 +134,7 @@ public class CraftingRecipeFactory
 	public static ComplexRecipe createComplexRecipe(@NotNull JsonObject jsonRecipe)
 	{
 		// Validate type
-		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), "jsonRecipe has no type");
+		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
 		Preconditions.checkArgument(COMPLEX_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a complex recipe (%s)", type);
 
