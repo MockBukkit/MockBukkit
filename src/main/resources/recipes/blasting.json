@@ -1,0 +1,432 @@
+[
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.1,
+		"group": "coal",
+		"input": {
+			"choices": [
+				"minecraft:coal_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:coal_from_blasting_coal_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:coal"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.1,
+		"group": "coal",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_coal_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:coal_from_blasting_deepslate_coal_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:coal"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "copper_ingot",
+		"input": {
+			"choices": [
+				"minecraft:copper_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_ingot_from_blasting_copper_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "copper_ingot",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_copper_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_ingot_from_blasting_deepslate_copper_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "copper_ingot",
+		"input": {
+			"choices": [
+				"minecraft:raw_copper"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_ingot_from_blasting_raw_copper",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "diamond",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_diamond_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:diamond_from_blasting_deepslate_diamond_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:diamond"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "diamond",
+		"input": {
+			"choices": [
+				"minecraft:diamond_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:diamond_from_blasting_diamond_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:diamond"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "emerald",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_emerald_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:emerald_from_blasting_deepslate_emerald_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:emerald"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "emerald",
+		"input": {
+			"choices": [
+				"minecraft:emerald_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:emerald_from_blasting_emerald_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:emerald"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_gold_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_blasting_deepslate_gold_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:gold_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_blasting_gold_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:nether_gold_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_blasting_nether_gold_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:raw_gold"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_blasting_raw_gold",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:golden_axe",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_hoe",
+				"minecraft:golden_horse_armor",
+				"minecraft:golden_leggings",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_shovel",
+				"minecraft:golden_sword"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_nugget_from_blasting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_nugget"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "iron_ingot",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_iron_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_ingot_from_blasting_deepslate_iron_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "iron_ingot",
+		"input": {
+			"choices": [
+				"minecraft:iron_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_ingot_from_blasting_iron_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "iron_ingot",
+		"input": {
+			"choices": [
+				"minecraft:raw_iron"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_ingot_from_blasting_raw_iron",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:iron_axe",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_hoe",
+				"minecraft:iron_horse_armor",
+				"minecraft:iron_leggings",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_shovel",
+				"minecraft:iron_sword"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_nugget_from_blasting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_nugget"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.2,
+		"group": "lapis_lazuli",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_lapis_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lapis_lazuli_from_blasting_deepslate_lapis_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lapis_lazuli"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.2,
+		"group": "lapis_lazuli",
+		"input": {
+			"choices": [
+				"minecraft:lapis_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lapis_lazuli_from_blasting_lapis_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lapis_lazuli"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 2.0,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:ancient_debris"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:netherite_scrap_from_blasting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_scrap"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
+		"experience": 0.2,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:nether_quartz_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:quartz_from_blasting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:quartz"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "redstone",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_redstone_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:redstone_from_blasting_deepslate_redstone_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:redstone"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 100,
+		"experience": 0.7,
+		"group": "redstone",
+		"input": {
+			"choices": [
+				"minecraft:redstone_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:redstone_from_blasting_redstone_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:redstone"
+		}
+	}
+]

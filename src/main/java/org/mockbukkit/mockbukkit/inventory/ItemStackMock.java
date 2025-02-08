@@ -1,25 +1,28 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonObject;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import io.papermc.paper.registry.RegistryKey;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.event.HoverEventSource;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
@@ -27,14 +30,24 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
 public class ItemStackMock extends ItemStack
 {
+	private static final String FIELD_AMOUNT = "amount";
+	private static final String FIELD_MATERIAL = "type";
+
+	@NonNull
+	@ApiStatus.Internal
+	public static ItemStackMock fromJson(@NonNull JsonObject json)
+	{
+		Preconditions.checkNotNull(json, "json cannot be null");
+
+		int amountValue = json.get(FIELD_AMOUNT).getAsInt();
+		NamespacedKey materialKey = NamespacedKey.fromString(json.get(FIELD_MATERIAL).getAsString());
+		Preconditions.checkArgument(materialKey != null, "Material field does not exist");
+		Material materialValue = Material.valueOf(materialKey.getKey().toUpperCase(Locale.ROOT));
+
+		return new ItemStackMock(materialValue, amountValue);
+	}
 
 	private ItemType type = ItemTypeMock.AIR;
 	private int amount = 1;

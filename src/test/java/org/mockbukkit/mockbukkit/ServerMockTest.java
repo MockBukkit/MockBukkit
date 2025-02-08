@@ -38,6 +38,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
@@ -428,6 +429,7 @@ class ServerMockTest
 	@Test
 	void addRecipe_AddsRecipe_ReturnsTrue()
 	{
+		server.clearRecipes();
 		TestRecipe recipe1 = new TestRecipe();
 		TestRecipe recipe2 = new TestRecipe();
 		server.addRecipe(recipe1);
@@ -446,6 +448,13 @@ class ServerMockTest
 		assumeTrue(server.recipeIterator().hasNext());
 		server.clearRecipes();
 		assertFalse(server.recipeIterator().hasNext());
+	}
+
+	@Test
+	void recipeIterator_HasDefaultCraftingRecipes()
+	{
+		Iterator<Recipe> actual = server.recipeIterator();
+		assertEquals(976, Iterators.size(actual));
 	}
 
 	@Test

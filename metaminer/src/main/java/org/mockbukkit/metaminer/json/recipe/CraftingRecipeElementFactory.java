@@ -2,8 +2,8 @@ package org.mockbukkit.metaminer.json.recipe;
 
 import java.util.stream.Stream;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.bukkit.inventory.ComplexRecipe;
 import org.bukkit.inventory.CraftingRecipe;
@@ -11,6 +11,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.TransmuteRecipe;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.metaminer.json.CollectionElementFactory;
 import org.mockbukkit.metaminer.json.EnumElementFactory;
@@ -42,7 +43,7 @@ public class CraftingRecipeElementFactory
 		json.add("category", EnumElementFactory.toJson(craftingRecipe.getCategory()));
 		json.add("result", ItemStackElementFactory.toJson(craftingRecipe.getResult()));
 		json.addProperty("group", craftingRecipe.getGroup());
-		json.add("input", getCraftingShape(craftingRecipe));
+		populateWithCraftingShape(json, craftingRecipe);
 
 		return json;
 	}
@@ -70,47 +71,41 @@ public class CraftingRecipeElementFactory
 		throw new IllegalArgumentException("Recipe is not a CraftingRecipe");
 	}
 
-	private static JsonElement getCraftingShape(@Nullable CraftingRecipe craftingRecipe)
+	private static void populateWithCraftingShape(@NonNull JsonObject json, @Nullable CraftingRecipe craftingRecipe)
 	{
-		return switch (craftingRecipe)
+		Preconditions.checkNotNull(json, "The json cannot be null");
+		switch (craftingRecipe)
 		{
-			case null -> null;
+			case null ->
+			{
+				// Nothing to do here
+			}
 			case ShapelessRecipe shapelessRecipe ->
 			{
-				JsonObject json = new JsonObject();
 				json.addProperty("type", "shapeless");
 				json.add("choices", CollectionElementFactory.toJson(shapelessRecipe.getChoiceList()));
-				yield json;
 			}
 			case ShapedRecipe shapedRecipe ->
 			{
-				JsonObject json = new JsonObject();
 				json.addProperty("type", "shaped");
 				json.add("choiceMap", MapElementFactory.toJson(shapedRecipe.getChoiceMap()));
 
 				JsonArray shapes = new JsonArray();
 				Stream.of(shapedRecipe.getShape()).forEachOrdered(shapes::add);
 				json.add("shape", shapes);
-
-				yield json;
 			}
 			case TransmuteRecipe transmuteRecipe ->
 			{
-				JsonObject json = new JsonObject();
 				json.addProperty("type", "transmute");
 				json.add("input", RecipeChoiceElementFactory.toJson(transmuteRecipe.getInput()));
 				json.add("material", RecipeChoiceElementFactory.toJson(transmuteRecipe.getMaterial()));
-				yield json;
 			}
 			case ComplexRecipe complexRecipe ->
 			{
-				JsonObject json = new JsonObject();
 				json.addProperty("type", "complex");
-				// TODO:
-				yield json;
 			}
 			default -> throw new UnsupportedOperationException(String.format("Unknown recipe type: %s", craftingRecipe.getClass().getName()));
-		};
+		}
 	}
 
 	private CraftingRecipeElementFactory()

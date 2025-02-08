@@ -1,0 +1,1267 @@
+[
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:potato"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:baked_potato",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:baked_potato"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:black_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:black_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:blue_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:blue_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.3,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:clay_ball"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brick",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brick"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:brown_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brown_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.15,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:acacia_log",
+				"minecraft:acacia_wood",
+				"minecraft:birch_log",
+				"minecraft:birch_wood",
+				"minecraft:cherry_log",
+				"minecraft:cherry_wood",
+				"minecraft:dark_oak_log",
+				"minecraft:dark_oak_wood",
+				"minecraft:jungle_log",
+				"minecraft:jungle_wood",
+				"minecraft:mangrove_log",
+				"minecraft:mangrove_wood",
+				"minecraft:oak_log",
+				"minecraft:oak_wood",
+				"minecraft:pale_oak_log",
+				"minecraft:pale_oak_wood",
+				"minecraft:spruce_log",
+				"minecraft:spruce_wood",
+				"minecraft:stripped_acacia_log",
+				"minecraft:stripped_acacia_wood",
+				"minecraft:stripped_birch_log",
+				"minecraft:stripped_birch_wood",
+				"minecraft:stripped_cherry_log",
+				"minecraft:stripped_cherry_wood",
+				"minecraft:stripped_dark_oak_log",
+				"minecraft:stripped_dark_oak_wood",
+				"minecraft:stripped_jungle_log",
+				"minecraft:stripped_jungle_wood",
+				"minecraft:stripped_mangrove_log",
+				"minecraft:stripped_mangrove_wood",
+				"minecraft:stripped_oak_log",
+				"minecraft:stripped_oak_wood",
+				"minecraft:stripped_pale_oak_log",
+				"minecraft:stripped_pale_oak_wood",
+				"minecraft:stripped_spruce_log",
+				"minecraft:stripped_spruce_wood"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:charcoal",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:charcoal"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "coal",
+		"input": {
+			"choices": [
+				"minecraft:coal_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:coal_from_smelting_coal_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:coal"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "coal",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_coal_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:coal_from_smelting_deepslate_coal_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:coal"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:beef"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_beef",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_beef"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:chicken"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_chicken",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_chicken"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cod"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_cod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_cod"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:mutton"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_mutton",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_mutton"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:porkchop"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_porkchop",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_porkchop"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:rabbit"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_rabbit",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_rabbit"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:salmon"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_salmon",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_salmon"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "copper_ingot",
+		"input": {
+			"choices": [
+				"minecraft:copper_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_ingot_from_smelting_copper_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "copper_ingot",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_copper_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_ingot_from_smelting_deepslate_copper_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "copper_ingot",
+		"input": {
+			"choices": [
+				"minecraft:raw_copper"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_ingot_from_smelting_raw_copper",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cracked_deepslate_bricks",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cracked_deepslate_bricks"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_tiles"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cracked_deepslate_tiles",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cracked_deepslate_tiles"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:nether_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cracked_nether_bricks",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cracked_nether_bricks"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_blackstone_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cracked_polished_blackstone_bricks",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cracked_polished_blackstone_bricks"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:stone_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cracked_stone_bricks",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cracked_stone_bricks"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cyan_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cyan_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cobbled_deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "diamond",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_diamond_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:diamond_from_smelting_deepslate_diamond_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:diamond"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "diamond",
+		"input": {
+			"choices": [
+				"minecraft:diamond_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:diamond_from_smelting_diamond_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:diamond"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:kelp"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:dried_kelp_from_smelting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:dried_kelp"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "emerald",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_emerald_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:emerald_from_smelting_deepslate_emerald_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:emerald"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "emerald",
+		"input": {
+			"choices": [
+				"minecraft:emerald_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:emerald_from_smelting_emerald_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:emerald"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:red_sand",
+				"minecraft:sand"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:glass",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:glass"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_gold_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_smelting_deepslate_gold_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:gold_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_smelting_gold_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:nether_gold_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_smelting_nether_gold_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "gold_ingot",
+		"input": {
+			"choices": [
+				"minecraft:raw_gold"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_ingot_from_smelting_raw_gold",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:golden_axe",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_hoe",
+				"minecraft:golden_horse_armor",
+				"minecraft:golden_leggings",
+				"minecraft:golden_pickaxe",
+				"minecraft:golden_shovel",
+				"minecraft:golden_sword"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gold_nugget_from_smelting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gold_nugget"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:gray_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gray_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 1.0,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cactus"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:green_dye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_dye"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:green_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:green_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "iron_ingot",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_iron_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_ingot_from_smelting_deepslate_iron_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "iron_ingot",
+		"input": {
+			"choices": [
+				"minecraft:iron_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_ingot_from_smelting_iron_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "iron_ingot",
+		"input": {
+			"choices": [
+				"minecraft:raw_iron"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_ingot_from_smelting_raw_iron",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_ingot"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:iron_axe",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_hoe",
+				"minecraft:iron_horse_armor",
+				"minecraft:iron_leggings",
+				"minecraft:iron_pickaxe",
+				"minecraft:iron_shovel",
+				"minecraft:iron_sword"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:iron_nugget_from_smelting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_nugget"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.2,
+		"group": "lapis_lazuli",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_lapis_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lapis_lazuli_from_smelting_deepslate_lapis_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lapis_lazuli"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.2,
+		"group": "lapis_lazuli",
+		"input": {
+			"choices": [
+				"minecraft:lapis_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lapis_lazuli_from_smelting_lapis_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lapis_lazuli"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:light_blue_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:light_blue_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:light_gray_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:light_gray_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sea_pickle"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lime_dye_from_smelting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_dye"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:lime_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lime_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:magenta_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:magenta_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:netherrack"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:nether_brick",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:nether_brick"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 2.0,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:ancient_debris"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:netherite_scrap",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_scrap"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:orange_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:orange_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:pink_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:pink_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:chorus_fruit"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:popped_chorus_fruit",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:popped_chorus_fruit"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:purple_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:purple_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_glazed_terracotta"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.2,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:nether_quartz_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:quartz",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:quartz"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:red_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:red_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "redstone",
+		"input": {
+			"choices": [
+				"minecraft:deepslate_redstone_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:redstone_from_smelting_deepslate_redstone_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:redstone"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.7,
+		"group": "redstone",
+		"input": {
+			"choices": [
+				"minecraft:redstone_ore"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:redstone_from_smelting_redstone_ore",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:redstone"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:resin_clump"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:resin_brick",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:resin_brick"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:basalt"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:smooth_basalt",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:smooth_basalt"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:quartz_block"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:smooth_quartz",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:smooth_quartz"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:red_sandstone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:smooth_red_sandstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:smooth_red_sandstone"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sandstone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:smooth_sandstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:smooth_sandstone"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:smooth_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:smooth_stone"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.15,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:wet_sponge"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sponge",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sponge"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cobblestone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:stone"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:clay"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:white_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:white_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_glazed_terracotta"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:yellow_terracotta"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:yellow_glazed_terracotta",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_glazed_terracotta"
+		}
+	}
+]

@@ -90,10 +90,13 @@ public class RecipeDataGenerator implements DataGenerator
 
 		// Process each groups
 		LOGGER.info("Recipe summary:");
+		int totalRecipes = 0;
 		for (Map.Entry<String, List<Recipe>> entry : recipes.entrySet())
 		{
 			String recipeType = entry.getKey();
 			List<Recipe> recipeList = entry.getValue();
+
+			totalRecipes += recipeList.size();
 
 			LOGGER.info(" - {}: {}", recipeType, recipeList.size());
 
@@ -104,6 +107,8 @@ public class RecipeDataGenerator implements DataGenerator
 			recipeList.stream().map(factory).forEach(recipeListJson::add);
 			JsonUtil.dump(recipeListJson, new File(dataFolder, String.format("%s.json", recipeType)));
 		}
+
+		LOGGER.info(" - TOTAL: {}", totalRecipes);
 	}
 
 	@Nullable

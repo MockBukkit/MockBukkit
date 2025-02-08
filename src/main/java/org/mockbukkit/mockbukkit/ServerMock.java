@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -151,6 +150,7 @@ import org.mockbukkit.mockbukkit.inventory.ItemFactoryMock;
 import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.RecipeManager;
 import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
@@ -188,7 +188,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
-	private final List<Recipe> recipes = new LinkedList<>();
+	private @Nullable List<Recipe> recipes;
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
 	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
@@ -1065,7 +1065,7 @@ public class ServerMock extends Server.Spigot implements Server
 		if (recipe == null)
 			return false;
 		// Pretend we sent the packet if resendRecipes is true
-		return recipes.add(recipe);
+		return getRecipes().add(recipe);
 	}
 
 	@Override
@@ -1073,7 +1073,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "item cannot be null");
-		return recipes.stream().filter(recipe ->
+		return getRecipes().stream().filter(recipe ->
 		{
 			ItemStack result = recipe.getResult();
 			return result.getType() == item.getType() && (result.getDurability() == -1 || result.getDurability() == item.getDurability());
@@ -1086,7 +1086,7 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		Preconditions.checkNotNull(key, "key cannot be null");
 
-		for (Recipe recipe : recipes)
+		for (Recipe recipe : getRecipes())
 		{
 			// Seriously why can't the Recipe interface itself just extend Keyed...
 			if (recipe instanceof Keyed keyed && keyed.getKey().equals(key))
@@ -1165,13 +1165,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Iterator<Recipe> recipeIterator()
 	{
-		return recipes.iterator();
+		return getRecipes().iterator();
 	}
 
 	@Override
 	public void clearRecipes()
 	{
-		recipes.clear();
+		getRecipes().clear();
 	}
 
 	@Override
@@ -2823,4 +2823,19 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.serverConfiguration;
 	}
 
+	/**
+	 * Helper function to lazy load the recipes.
+	 *
+	 * @return The server recipes.
+	 */
+	@NotNull
+	private List<Recipe> getRecipes()
+	{
+		if (this.recipes == null)
+		{
+			this.recipes = new ArrayList<>(RecipeManager.loadDefaultRecipesAsLists());
+		}
+
+		return this.recipes;
+	}
 }
