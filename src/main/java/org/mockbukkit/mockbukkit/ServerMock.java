@@ -151,6 +151,7 @@ import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.RecipeManager;
+import org.mockbukkit.mockbukkit.inventory.RecipeType;
 import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
@@ -188,7 +189,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
-	private @Nullable List<Recipe> recipes;
+	private final RecipeManager recipeManager = new RecipeManager();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
 	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
@@ -1065,19 +1066,14 @@ public class ServerMock extends Server.Spigot implements Server
 		if (recipe == null)
 			return false;
 		// Pretend we sent the packet if resendRecipes is true
-		return getRecipes().add(recipe);
+		return this.recipeManager.addRecipe(RecipeType.CRAFTING, recipe);
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public @NotNull List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "item cannot be null");
-		return getRecipes().stream().filter(recipe ->
-		{
-			ItemStack result = recipe.getResult();
-			return result.getType() == item.getType() && (result.getDurability() == -1 || result.getDurability() == item.getDurability());
-		}).toList();
+		return this.recipeManager.getRecipesFor(RecipeType.CRAFTING, item);
 	}
 
 	@Nullable
@@ -1085,17 +1081,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public Recipe getRecipe(@NotNull NamespacedKey key)
 	{
 		Preconditions.checkNotNull(key, "key cannot be null");
-
-		for (Recipe recipe : getRecipes())
-		{
-			// Seriously why can't the Recipe interface itself just extend Keyed...
-			if (recipe instanceof Keyed keyed && keyed.getKey().equals(key))
-			{
-				return recipe;
-			}
-		}
-
-		return null;
+		return this.recipeManager.getRecipeByKey(RecipeType.CRAFTING, key);
 	}
 
 	@Nullable
@@ -1165,13 +1151,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Iterator<Recipe> recipeIterator()
 	{
-		return getRecipes().iterator();
+		return this.recipeManager.getRecipes(RecipeType.CRAFTING).iterator();
 	}
 
 	@Override
 	public void clearRecipes()
 	{
-		getRecipes().clear();
+		this.recipeManager.clearRecipes(RecipeType.CRAFTING);
 	}
 
 	@Override
@@ -2823,19 +2809,4 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.serverConfiguration;
 	}
 
-	/**
-	 * Helper function to lazy load the recipes.
-	 *
-	 * @return The server recipes.
-	 */
-	@NotNull
-	private List<Recipe> getRecipes()
-	{
-		if (this.recipes == null)
-		{
-			this.recipes = new ArrayList<>(RecipeManager.loadDefaultRecipesAsLists());
-		}
-
-		return this.recipes;
-	}
 }
