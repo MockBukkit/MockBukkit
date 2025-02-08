@@ -5,6 +5,7 @@ import org.bukkit.inventory.RecipeChoice;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.metaminer.json.CollectionElementFactory;
+import org.mockbukkit.metaminer.json.ItemStackElementFactory;
 
 public class RecipeChoiceElementFactory
 {
@@ -26,19 +27,19 @@ public class RecipeChoiceElementFactory
 
 		if (recipeChoice instanceof RecipeChoice.MaterialChoice materialChoice)
 		{
-			return getMaterialChoise(materialChoice);
+			return getMaterialChoice(materialChoice);
 		}
 
 		if (recipeChoice instanceof RecipeChoice.ExactChoice exactChoice)
 		{
-			return getExactChoise(exactChoice);
+			return getExactChoice(exactChoice);
 		}
 
 		throw new UnsupportedOperationException("Unsupported recipe choice: " + recipeChoice.getClass().getName());
 	}
 
 	@NotNull
-	private static JsonObject getMaterialChoise(RecipeChoice.MaterialChoice materialChoice)
+	private static JsonObject getMaterialChoice(RecipeChoice.MaterialChoice materialChoice)
 	{
 		JsonObject json = new JsonObject();
 		json.addProperty("type", "material");
@@ -47,11 +48,11 @@ public class RecipeChoiceElementFactory
 	}
 
 	@NotNull
-	private static JsonObject getExactChoise(RecipeChoice.ExactChoice exactChoice)
+	private static JsonObject getExactChoice(RecipeChoice.ExactChoice exactChoice)
 	{
 		JsonObject json = new JsonObject();
 		json.addProperty("type", "exact");
-		// TODO:
+		json.add("choices", CollectionElementFactory.toJson(exactChoice.getChoices(), ItemStackElementFactory::toJson));
 		return json;
 	}
 
