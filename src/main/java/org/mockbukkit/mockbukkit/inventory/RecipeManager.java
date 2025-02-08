@@ -28,6 +28,8 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 public class RecipeManager
 {
 
+	private static final String RECIPE_TYPE_CANNOT_BE_NULL = "Recipe type cannot be null";
+
 	/**
 	 * This field is used as cache. The values are lazy loaded with method {@link #getRecipes()}.
 	 * This field should not be accessed directly, it's preferred to use the method {@link #getRecipes()} instead.
@@ -60,7 +62,7 @@ public class RecipeManager
 	@NotNull
 	public List<Recipe> getRecipes(@NotNull RecipeType recipeType)
 	{
-		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
+		Preconditions.checkArgument(recipeType != null, RECIPE_TYPE_CANNOT_BE_NULL);
 		return getRecipes().getOrDefault(recipeType, Collections.emptyList());
 	}
 
@@ -75,7 +77,7 @@ public class RecipeManager
 	@Nullable
 	public Recipe getRecipeByKey(@NotNull RecipeType recipeType, @NotNull NamespacedKey recipeKey)
 	{
-		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
+		Preconditions.checkArgument(recipeType != null, RECIPE_TYPE_CANNOT_BE_NULL);
 		Preconditions.checkArgument(recipeKey != null, "Recipe key cannot be null");
 
 		List<Recipe> recipesToSearch = getRecipes().get(recipeType);
@@ -101,7 +103,7 @@ public class RecipeManager
 	@NotNull
 	public List<Recipe> getRecipesFor(@NotNull RecipeType recipeType, @NotNull ItemStack itemStack)
 	{
-		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
+		Preconditions.checkArgument(recipeType != null, RECIPE_TYPE_CANNOT_BE_NULL);
 		return getRecipes(recipeType).stream()
 				.filter(recipe -> itemStack.isSimilar(recipe.getResult()))
 				.toList();
