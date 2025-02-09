@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
@@ -19,8 +20,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ComplexRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -34,7 +39,33 @@ public class RecipeManager
 	 * This field is used as cache. The values are lazy loaded with method {@link #getRecipes()}.
 	 * This field should not be accessed directly, it's preferred to use the method {@link #getRecipes()} instead.
 	 */
-	private Map<RecipeType, List<Recipe>> recipes = null;
+	private @Nullable Map<RecipeType, List<Recipe>> recipes = null;
+
+	/**
+	 * Resets the list of recipes to the default.
+	 */
+	public void reset()
+	{
+		this.recipes = new EnumMap<>(RecipeManager.loadDefaultRecipes());
+	}
+
+	/**
+	 * Resets the list of recipes to the default for a given recipe type.
+	 *
+	 * @param recipeType The recipe type to reset.
+	 */
+	public void reset(@NotNull RecipeType recipeType)
+	{
+		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
+
+		if (this.recipes == null)
+		{
+			reset();
+		} else
+		{
+			this.recipes.put(recipeType, RecipeManager.loadDefaultRecipes(recipeType));
+		}
+	}
 
 	/**
 	 * Get the list of recipes available.
@@ -46,7 +77,7 @@ public class RecipeManager
 	{
 		if (this.recipes == null)
 		{
-			this.recipes = new EnumMap<>(RecipeManager.loadDefaultRecipes());
+			this.reset();
 		}
 
 		return this.recipes;
@@ -107,6 +138,44 @@ public class RecipeManager
 		return getRecipes(recipeType).stream()
 				.filter(recipe -> itemStack.isSimilar(recipe.getResult()))
 				.toList();
+	}
+
+	@Nullable
+	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix)
+	{
+		Preconditions.checkArgument(craftingMatrix != null, "craftingMatrix must not be null");
+		Preconditions.checkArgument(craftingMatrix.length == 9, "craftingMatrix must be an array of length 9");
+
+		List<Recipe> possibleRecipes = getRecipes(RecipeType.CRAFTING);
+		for (Recipe recipe : possibleRecipes)
+		{
+			if (recipe instanceof ShapelessRecipe shapelessRecipe)
+			{
+				if (matches(shapelessRecipe, craftingMatrix))
+				{
+					return recipe;
+				}
+			}
+			else if (recipe instanceof ShapedRecipe shapedRecipe)
+			{
+				if (matches(shapedRecipe, craftingMatrix))
+				{
+					return recipe;
+				}
+			}
+			else if (recipe instanceof ComplexRecipe complexRecipe)
+			{
+				if (matches(complexRecipe, craftingMatrix))
+				{
+					return recipe;
+				}
+			} else
+			{
+				throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -223,6 +292,53 @@ public class RecipeManager
 		}
 
 		return recipesList;
+	}
+
+	private static boolean matches(@NotNull ShapelessRecipe shapelessRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
+	{
+		Preconditions.checkArgument(shapelessRecipe != null, "The recipe cannot be null");
+		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
+
+		long itemCount = Stream.of(craftingMatrix).filter(item -> !item.isEmpty()).count();
+
+		@NotNull List<RecipeChoice> choices = shapelessRecipe.getChoiceList();
+		if (choices.size() != itemCount)
+		{
+			// If number of items in the recipe does not match the amount of items required, we skip
+			return false;
+		}
+
+		for (RecipeChoice choice : choices)
+		{
+			boolean anyMatches = Stream.of(craftingMatrix).anyMatch(choice);
+			if (!anyMatches)
+			{
+				// If at least one item does not have matching items we exit
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private static boolean matches(@NotNull ShapedRecipe shapedRecipe, @NotNull ItemStack @NotNull [] items)
+	{
+		Preconditions.checkArgument(shapedRecipe != null, "The recipe cannot be null");
+		Preconditions.checkArgument(items != null, "The items cannot be null");
+
+		// TODO: Logic for shaped recipes
+
+		return false;
+	}
+
+	private static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
+	{
+		Preconditions.checkArgument(complexRecipe != null, "The recipe cannot be null");
+		Preconditions.checkArgument(items != null, "The items cannot be null");
+
+		// TODO: Logic for complex recipes
+
+		return false;
 	}
 
 }

@@ -1084,25 +1084,39 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.recipeManager.getRecipeByKey(RecipeType.CRAFTING, key);
 	}
 
-	@Nullable
 	@Override
-	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	public @Nullable Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(craftingMatrix != null, "craftingMatrix must not be null");
+		Preconditions.checkArgument(craftingMatrix.length == 9, "craftingMatrix must be an array of length 9");
+		Preconditions.checkArgument(world != null, "world must not be null");
+		return this.recipeManager.getCraftingRecipe(craftingMatrix);
 	}
 
-	@NotNull
 	@Override
-	public ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		@Nullable Recipe recipe = getCraftingRecipe(craftingMatrix, world);
+		if (recipe == null)
+		{
+			return ItemStack.empty();
+		}
+
+		return recipe.getResult();
+	}
+
+	@Override
+	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		Preconditions.checkArgument(player != null, "player cannot be null");
+		return craftItem(craftingMatrix, world);
 	}
 
 	@Override
 	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
 	{
+		Preconditions.checkArgument(world != null, "world must not be null");
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1110,13 +1124,9 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+		Preconditions.checkArgument(world != null, "world cannot be null");
+		Preconditions.checkArgument(player != null, "player cannot be null");
 
-	@Override
-	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
-	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1647,8 +1657,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public void resetRecipes()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.recipeManager.reset(RecipeType.CRAFTING);
 	}
 
 	@Override

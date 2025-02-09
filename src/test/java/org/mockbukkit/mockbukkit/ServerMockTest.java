@@ -38,6 +38,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
@@ -84,6 +85,7 @@ import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.loot.LootTables;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
@@ -451,6 +453,22 @@ class ServerMockTest
 		assertFalse(server.recipeIterator().hasNext());
 	}
 
+	@Test
+	void resetRecipes()
+	{
+		int initialSize = Iterators.size(server.recipeIterator());
+		ShapelessRecipe shapelessRecipe = new ShapelessRecipe(
+				NamespacedKey.fromString("mockbukkit:test_recipe"), ItemStack.of(Material.DIAMOND));
+		server.addRecipe(shapelessRecipe);
+		int newSize = Iterators.size(server.recipeIterator());
+		assertEquals(initialSize + 1, newSize);
+
+		server.resetRecipes();
+
+		int actualSize = Iterators.size(server.recipeIterator());
+		assertEquals(initialSize, actualSize);
+	}
+
 	@Nested
 	class GetRecipe
 	{
@@ -486,6 +504,123 @@ class ServerMockTest
 
 			@Nullable Recipe actual = server.getRecipe(key);
 			assertNull(actual);
+		}
+
+	}
+
+	@Nested
+	class GetCraftingRecipe
+	{
+		private final World world = new WorldMock();
+
+		@Test
+		void givenNullCraftMatrix()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getCraftingRecipe(null, world));
+			assertEquals("craftingMatrix must not be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {
+			0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15
+		})
+		void givenCraftMatrixWithout9Slots(int itemsAmount)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getCraftingRecipe(new ItemStack[itemsAmount], world));
+			assertEquals("craftingMatrix must be an array of length 9", e.getMessage());
+		}
+
+		@Test
+		void givenNullWorld()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getCraftingRecipe(new ItemStack[9], null));
+			assertEquals("world must not be null", e.getMessage());
+		}
+
+		@Test
+		void givenNonExistingRecipe()
+		{
+			ItemStack[] craftingItems = new ItemStack[] {
+					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.DIAMOND),
+			};
+			@Nullable Recipe recipe = server.getCraftingRecipe(craftingItems, world);
+
+			assertNull(recipe);
+		}
+
+		@Test
+		void givenShapelessRecipe()
+		{
+			ItemStack[] craftingItems = new ItemStack[] {
+				ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+				ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+				ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+			};
+			@Nullable Recipe recipe = server.getCraftingRecipe(craftingItems, world);
+
+			assertNotNull(recipe);
+			assertEquals(Material.OAK_BUTTON, recipe.getResult().getType());
+		}
+
+	}
+
+	@Nested
+	class CraftItem
+	{
+		private final World world = new WorldMock();
+
+		@Test
+		void givenNullCraftMatrix()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.craftItem(null, world));
+			assertEquals("craftingMatrix must not be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {
+				0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15
+		})
+		void givenCraftMatrixWithout9Slots(int itemsAmount)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.craftItem(new ItemStack[itemsAmount], world));
+			assertEquals("craftingMatrix must be an array of length 9", e.getMessage());
+		}
+
+		@Test
+		void givenNullWorld()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.craftItem(new ItemStack[9], null));
+			assertEquals("world must not be null", e.getMessage());
+		}
+
+		@Test
+		void givenNonExistingRecipe()
+		{
+			ItemStack[] craftingItems = new ItemStack[] {
+					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.DIAMOND),
+			};
+			ItemStack output = server.craftItem(craftingItems, world);
+
+			assertNotNull(output);
+			assertTrue(output.isEmpty());
+		}
+
+		@Test
+		void givenShapelessRecipe()
+		{
+			ItemStack[] craftingItems = new ItemStack[] {
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+			};
+			ItemStack output = server.craftItem(craftingItems, world);
+
+			assertNotNull(output);
+			assertEquals(Material.OAK_BUTTON, output.getType());
 		}
 
 	}

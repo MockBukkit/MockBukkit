@@ -1,7 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -59,8 +60,10 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public @Nullable Recipe getRecipe()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Location location = this.getLocation();
+		Preconditions.checkState(location != null, "The location can't be null!");
+		Preconditions.checkState(location.getWorld() != null, "The world can't be null!");
+		return Bukkit.getCraftingRecipe(this.getContents(), location.getWorld());
 	}
 
 }
