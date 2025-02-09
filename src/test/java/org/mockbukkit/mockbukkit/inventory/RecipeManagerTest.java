@@ -1,25 +1,81 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ComplexRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 @ExtendWith(MockBukkitExtension.class)
 class RecipeManagerTest
 {
 	private final RecipeManager manager = new RecipeManager();
+
+	@Nested
+	class Reset
+	{
+		@Test
+		void givenNullRecipeType()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> manager.reset(null));
+			assertEquals("Recipe type cannot be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@EnumSource(RecipeType.class)
+		void givenResetToRecipeType(RecipeType type)
+		{
+			int initialSize = manager.getRecipes(type).size();
+			manager.clearRecipes(type);
+			assertTrue(manager.getRecipes(type).isEmpty());
+
+			manager.reset(type);
+
+			assertEquals(initialSize, manager.getRecipes(type).size());
+		}
+
+		@Test
+		void givenGenericReset()
+		{
+			Map<RecipeType, Integer> initialSizes = new EnumMap<>(RecipeType.class);
+
+			for (RecipeType type : RecipeType.values())
+			{
+				initialSizes.put(type, manager.getRecipes(type).size());
+				manager.clearRecipes(type);
+				assertTrue(manager.getRecipes(type).isEmpty());
+			}
+
+			manager.reset();
+
+			for (RecipeType type : RecipeType.values())
+			{
+				assertEquals(initialSizes.get(type), manager.getRecipes(type).size());
+			}
+		}
+
+	}
 
 	@Nested
 	class Clear
@@ -48,6 +104,22 @@ class RecipeManagerTest
 	@Nested
 	class GetCraftingRecipe
 	{
+		@Test
+		void givenNullCraftMatrix()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> manager.getCraftingRecipe(null));
+			assertEquals("craftingMatrix must not be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {
+			0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15
+		})
+		void givenCraftMatrixWithout9Slots(int itemsAmount)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> manager.getCraftingRecipe(new ItemStack[itemsAmount]));
+			assertEquals("craftingMatrix must be an array of length 9", e.getMessage());
+		}
 
 		@Nested
 		class ShapelessRecipe
@@ -262,6 +334,126 @@ class RecipeManagerTest
 
 				assertNotNull(recipe);
 				assertEquals(Material.STICK, recipe.getResult().getType());
+			}
+
+		}
+
+	}
+
+	@Nested
+	class Matches
+	{
+
+		@Nested
+		class Shapeless
+		{
+			private final ShapelessRecipe recipe = (ShapelessRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("oak_button"));
+
+			@Test
+			void givenNullRecipe()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> RecipeManager.matches((ShapelessRecipe) null, new ItemStack[0]));
+				assertEquals("The recipe cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenNullCraftMatrix()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> RecipeManager.matches(recipe, null));
+				assertEquals("The craftingMatrix cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenValidCraftMatrix()
+			{
+				ItemStack[] matrix = new ItemStack[] {
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
+				};
+				boolean result = RecipeManager.matches(recipe, matrix);
+				assertTrue(result);
+			}
+
+			@Test
+			void givenInvalidCraftMatrix()
+			{
+				ItemStack[] matrix = new ItemStack[] {
+						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
+				};
+				boolean result = RecipeManager.matches(recipe, matrix);
+				assertFalse(result);
+			}
+
+		}
+
+		@Nested
+		class Shaped
+		{
+
+			private final ShapedRecipe recipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stick"));
+
+			@Test
+			void givenNullRecipe()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> RecipeManager.matches((ShapedRecipe) null, new ItemStack[0]));
+				assertEquals("The recipe cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenNullCraftMatrix()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> RecipeManager.matches(recipe, null));
+				assertEquals("The craftingMatrix cannot be null", e.getMessage());
+			}
+
+			@Test
+			@Disabled("This was not implemented yet")
+			void givenValidCraftMatrix()
+			{
+				ItemStack[] matrix = new ItemStack[] {
+						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
+				};
+				boolean result = RecipeManager.matches(recipe, matrix);
+				assertTrue(result);
+			}
+
+			@Test
+			void givenInvalidCraftMatrix()
+			{
+				ItemStack[] matrix = new ItemStack[] {
+						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
+				};
+				boolean result = RecipeManager.matches(recipe, matrix);
+				assertFalse(result);
+			}
+
+		}
+
+		@Nested
+		class Complex
+		{
+
+			private final ComplexRecipe recipe = (ComplexRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("shield_decoration"));
+
+			@Test
+			void givenNullRecipe()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> RecipeManager.matches((ComplexRecipe) null, new ItemStack[0]));
+				assertEquals("The recipe cannot be null", e.getMessage());
+			}
+
+			@Test
+			void givenNullCraftMatrix()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> RecipeManager.matches(recipe, null));
+				assertEquals("The craftingMatrix cannot be null", e.getMessage());
 			}
 
 		}

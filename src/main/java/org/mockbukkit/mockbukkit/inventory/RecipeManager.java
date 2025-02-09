@@ -288,7 +288,7 @@ public class RecipeManager
 		return recipesList;
 	}
 
-	private static boolean matches(@NotNull ShapelessRecipe shapelessRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
+	static boolean matches(@NotNull ShapelessRecipe shapelessRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
 	{
 		Preconditions.checkArgument(shapelessRecipe != null, "The recipe cannot be null");
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
@@ -315,20 +315,20 @@ public class RecipeManager
 		return true;
 	}
 
-	private static boolean matches(@NotNull ShapedRecipe shapedRecipe, @NotNull ItemStack @NotNull [] items)
+	static boolean matches(@NotNull ShapedRecipe shapedRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
 	{
 		Preconditions.checkArgument(shapedRecipe != null, "The recipe cannot be null");
-		Preconditions.checkArgument(items != null, "The items cannot be null");
+		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
 
 		// TODO: Logic for shaped recipes
 
 		return false;
 	}
 
-	private static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
+	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
 	{
 		Preconditions.checkArgument(complexRecipe != null, "The recipe cannot be null");
-		Preconditions.checkArgument(items != null, "The items cannot be null");
+		Preconditions.checkArgument(items != null, "The craftingMatrix cannot be null");
 
 		// TODO: Logic for complex recipes
 
