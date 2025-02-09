@@ -1,18 +1,20 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 @ExtendWith(MockBukkitExtension.class)
 class WorkbenchInventoryMockTest
@@ -46,46 +48,62 @@ class WorkbenchInventoryMockTest
 		assertNotNull(workbench.getMatrix());
 	}
 
-	@Test
-	void testSetMatrix()
+	@Nested
+	class SetMatrix
 	{
-		ItemStack[] matrix = new ItemStackMock[10];
-		matrix[4] = new ItemStackMock(Material.OAK_BOAT);
+		@Test
+		void testSetMatrix()
+		{
+			ItemStack[] matrix = new ItemStackMock[10];
+			matrix[4] = new ItemStackMock(Material.OAK_BOAT);
 
-		workbench.setMatrix(matrix);
+			workbench.setMatrix(matrix);
 
-		assertArrayEquals(matrix, workbench.getMatrix());
+			assertArrayEquals(matrix, workbench.getMatrix());
+		}
+
+		@Test
+		void givenMatrixUnderMaxSize()
+		{
+			ItemStack[] matrix = new ItemStack[5];
+			matrix[4] = new ItemStackMock(Material.OAK_BOAT);
+			assertDoesNotThrow(() -> workbench.setMatrix(matrix));
+		}
+
+		@Test
+		void givenMatrixOverMaxSize()
+		{
+			assertThrows(IllegalArgumentException.class, () -> workbench.setMatrix(new ItemStack[12]));
+		}
+
+		@Test
+		void givenNull()
+		{
+			assertThrows(NullPointerException.class, () -> workbench.setMatrix(null));
+		}
+
+		@Test
+		void testSetMatrix_SetsItems()
+		{
+			ItemStack[] matrix = new ItemStack[10];
+			matrix[4] = new ItemStackMock(Material.OAK_BOAT);
+
+			workbench.setMatrix(matrix);
+
+			assertArrayEquals(matrix, workbench.getContents());
+		}
 	}
 
 	@Test
-	void testSetMatrix_underMaxSize()
-	{
-		ItemStack[] matrix = new ItemStack[5];
-		matrix[4] = new ItemStackMock(Material.OAK_BOAT);
-		assertDoesNotThrow(() -> workbench.setMatrix(matrix));
-	}
-
-	@Test
-	void testSetMatrix_overMaxSize()
-	{
-		assertThrows(IllegalArgumentException.class, () -> workbench.setMatrix(new ItemStack[12]));
-	}
-
-	@Test
-	void testSetMatrix_null()
-	{
-		assertThrows(NullPointerException.class, () -> workbench.setMatrix(null));
-	}
-
-	@Test
-	void testSetMatrix_SetsItems()
+	void getRecipe()
 	{
 		ItemStack[] matrix = new ItemStack[10];
-		matrix[4] = new ItemStackMock(Material.OAK_BOAT);
-
+		matrix[5] = new ItemStackMock(Material.OAK_PLANKS);
 		workbench.setMatrix(matrix);
 
-		assertArrayEquals(matrix, workbench.getContents());
+		Recipe actual = workbench.getRecipe();
+		assertNotNull(actual);
+		assertEquals(ItemStack.of(Material.OAK_BUTTON), actual.getResult());
 	}
 
 }

@@ -57,14 +57,8 @@ public class RecipeManager
 	public void reset(@NotNull RecipeType recipeType)
 	{
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
-
-		if (this.recipes == null)
-		{
-			reset();
-		} else
-		{
-			this.recipes.put(recipeType, RecipeManager.loadDefaultRecipes(recipeType));
-		}
+		Preconditions.checkState(this.recipes != null, "Recipes has not been initialized yet.");
+		this.recipes.put(recipeType, RecipeManager.loadDefaultRecipes(recipeType));
 	}
 
 	/**

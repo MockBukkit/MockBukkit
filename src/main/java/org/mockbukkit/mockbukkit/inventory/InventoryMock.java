@@ -1,5 +1,18 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import net.kyori.adventure.text.Component;
@@ -18,19 +31,6 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Mock implementation of an {@link Inventory}.
@@ -319,7 +319,8 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return Arrays.stream(items).map(item -> item == null ? null : item.clone())
+		return Arrays.stream(items)
+				.map(item -> (item == null || item.isEmpty()) ? null : item.clone())
 				.toArray(ItemStack[]::new);
 	}
 
