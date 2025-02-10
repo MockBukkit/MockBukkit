@@ -1108,15 +1108,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
 	{
-		Preconditions.checkArgument(player != null, "player cannot be null");
-		return craftItem(craftingMatrix, world);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
 	{
-		Preconditions.checkArgument(world != null, "world must not be null");
-
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1124,9 +1122,6 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
 	{
-		Preconditions.checkArgument(world != null, "world cannot be null");
-		Preconditions.checkArgument(player != null, "player cannot be null");
-
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
