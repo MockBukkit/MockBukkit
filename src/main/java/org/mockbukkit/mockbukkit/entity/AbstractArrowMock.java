@@ -1,8 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import io.papermc.paper.entity.LookAnchor;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import java.util.List;
+import java.util.UUID;
+
 import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -11,8 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
+import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class AbstractArrowMock extends AbstractProjectileMock implements AbstractArrow
 {
@@ -96,12 +97,21 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	@Override
 	public boolean isInBlock()
 	{
+		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable Block getAttachedBlock()
 	{
+		// TODO: Auto generated stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull @Unmodifiable List<Block> getAttachedBlocks()
+	{
+		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
 
