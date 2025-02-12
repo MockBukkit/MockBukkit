@@ -1,10 +1,7 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import com.google.common.base.Preconditions;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.exception.PluginClassNotFoundException;
 import com.destroystokyo.paper.utils.PaperPluginLogger;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup;
@@ -16,14 +13,19 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.PluginClassNotFoundException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
-public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implements ConfiguredPluginClassLoader
+public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implements ConfiguredPluginClassLoader
 {
 
 	private final ServerMock server;
@@ -40,6 +42,7 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 			File pluginFile
 	)
 	{
+		super(new URL[0]);
 		this.server = server;
 		this.description = description;
 		this.dataFolder = dataFolder;

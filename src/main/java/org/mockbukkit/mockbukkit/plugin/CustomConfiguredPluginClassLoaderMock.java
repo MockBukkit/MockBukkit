@@ -11,15 +11,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 
-public class CustomConfiguredPluginClassLoaderMock extends ClassLoader implements ConfiguredPluginClassLoader
+public class CustomConfiguredPluginClassLoaderMock extends URLClassLoader implements ConfiguredPluginClassLoader
 {
 
 	private final ConfiguredPluginClassLoader parent;
 
 	public CustomConfiguredPluginClassLoaderMock(ConfiguredPluginClassLoader parent)
 	{
-		super();
+		super(new URL[0]);
 		this.parent = parent;
 	}
 
