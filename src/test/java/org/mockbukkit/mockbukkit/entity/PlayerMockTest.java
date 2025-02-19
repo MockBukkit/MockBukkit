@@ -338,6 +338,16 @@ class PlayerMockTest
 	}
 
 	@Test
+	void damage_Player_Kills_OtherPlayer()
+	{
+		var killer = server.addPlayer();
+		player.simulateDamage(player.getHealth(), killer);
+		assertEquals(0, player.getHealth(), 0);
+		assertTrue(player.isDead());
+		assertEquals(killer, player.getKiller());
+	}
+
+	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
 		assertEquals(20.0, player.getAttribute(Attribute.MAX_HEALTH).getDefaultValue(), 0);

@@ -2360,28 +2360,49 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return;
 		}
 
+		DamageSource dmg;
+		String msg;
+		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player killer)
+		{
+			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
+			setKiller(killer);
+			msg = getName() + " was slain by " + killer.getName();
+		}
+		else
+		{
+			dmg = DamageSource.builder(DamageType.GENERIC).build();
+			msg = getName() + " got killed";
+		}
+
 		this.health = 0;
 
 		List<ItemStack> drops = new ArrayList<>(Arrays.asList(getInventory().getContents()));
-		PlayerDeathEvent event = new PlayerDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build(), drops, 0, getName() + " got killed");
-		Bukkit.getPluginManager().callEvent(event);
-
-		// Terminate any InventoryView and the cursor item
-		closeInventory();
-
-		// Clear the Inventory if keep-inventory is not enabled
-		if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))
+		PlayerDeathEvent event = new PlayerDeathEvent(this, dmg, drops, 0, msg);
+		if (!event.callEvent())
 		{
-			getInventory().clear();
-			// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+			setKiller(null);
+			this.health = event.getReviveHealth();
+			this.alive = true;
 		}
+		else
+		{
+			// Terminate any InventoryView and the cursor item
+			closeInventory();
 
-		setLevel(0);
-		setExp(0);
-		setFoodLevel(0);
+			// Clear the Inventory if keep-inventory is not enabled
+			if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))
+			{
+				getInventory().clear();
+				// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+			}
 
-		setBlocking(false);
-		alive = false;
+			setLevel(0);
+			setExp(0);
+			setFoodLevel(0);
+
+			setBlocking(false);
+			alive = false;
+		}
 	}
 
 	@Override

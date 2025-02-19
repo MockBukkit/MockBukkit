@@ -38,11 +38,12 @@ public class LivingEntitySimulation
 		{
 			event = new EntityDamageEvent(livingEntityMock, EntityDamageEvent.DamageCause.CUSTOM, source, amount);
 		}
+
 		if (event.callEvent())
 		{
 			livingEntityMock.setLastDamageCause(event);
 			amount = event.getDamage();
-			livingEntityMock.damage(amount);
+			livingEntityMock.damage(amount, source.getDirectEntity());
 		}
 		return event;
 	}

@@ -166,12 +166,30 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			return;
 		}
 
+		DamageSource dmg;
+		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player killer)
+		{
+			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
+			setKiller(killer);
+		}
+		else
+		{
+			dmg = DamageSource.builder(DamageType.GENERIC).build();
+		}
+
 		this.health = 0;
 
-		EntityDeathEvent event = new EntityDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build(), new ArrayList<>());
-		Bukkit.getPluginManager().callEvent(event);
-
-		this.alive = false;
+		EntityDeathEvent event = new EntityDeathEvent(this, dmg, new ArrayList<>());
+		if (!event.callEvent())
+		{
+			setKiller(null);
+			this.health = event.getReviveHealth();
+			this.alive = true;
+		}
+		else
+		{
+			this.alive = false;
+		}
 	}
 
 	@Override
