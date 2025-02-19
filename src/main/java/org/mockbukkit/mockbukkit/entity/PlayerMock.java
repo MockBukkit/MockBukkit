@@ -2362,11 +2362,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		DamageSource dmg;
 		String msg;
-		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player killer)
+		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player player)
 		{
 			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
-			setKiller(killer);
-			msg = getName() + " was slain by " + killer.getName();
+			setKiller(player);
+			msg = getName() + " was slain by " + player.getName();
 		}
 		else
 		{

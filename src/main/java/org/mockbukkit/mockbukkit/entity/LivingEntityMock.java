@@ -168,10 +168,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		DamageSource dmg;
-		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player killer)
+		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player player)
 		{
 			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
-			setKiller(killer);
+			setKiller(player);
 		}
 		else
 		{
