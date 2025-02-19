@@ -341,12 +341,21 @@ class PlayerMockTest
 	@Test
 	void damage_Player_Kills_OtherPlayer()
 	{
+		player.setItemInHand(new ItemStackMock(Material.STONE_SWORD));
+		player.setLevel(11);
+		player.setExp(0.5f);
+		player.setFoodLevel(13);
+
 		var killer = server.addPlayer();
+
 		player.simulateDamage(player.getHealth(), killer);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		assertEquals(killer, player.getKiller());
 		assertTrue(player.getInventory().isEmpty());
+		assertEquals(0, player.getLevel());
+		assertEquals(0, player.getExp(), 1e-6);
+		assertEquals(0, player.getFoodLevel());
 	}
 
 	@Test
@@ -364,6 +373,9 @@ class PlayerMockTest
 
 		assertTrue(player.getInventory().isEmpty());
 		player.setItemInHand(new ItemStackMock(Material.STONE_SWORD));
+		player.setLevel(11);
+		player.setExp(0.5f);
+		player.setFoodLevel(13);
 		assertFalse(player.getInventory().isEmpty());
 
 		var killer = server.addPlayer();
@@ -372,6 +384,9 @@ class PlayerMockTest
 		assertFalse(player.isDead());
 		assertNull(player.getKiller());
 		assertFalse(player.getInventory().isEmpty());
+		assertEquals(11, player.getLevel());
+		assertEquals(0.5f, player.getExp(), 1e-6);
+		assertEquals(13, player.getFoodLevel());
 	}
 	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
