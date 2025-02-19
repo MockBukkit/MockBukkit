@@ -36,6 +36,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
@@ -345,8 +346,33 @@ class PlayerMockTest
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		assertEquals(killer, player.getKiller());
+		assertTrue(player.getInventory().isEmpty());
 	}
 
+	@Test
+	void damage_CancelDeathEvent()
+	{
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			void onPlayerDeathEvent(PlayerDeathEvent event)
+			{
+				event.setReviveHealth(10);
+				event.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		assertTrue(player.getInventory().isEmpty());
+		player.setItemInHand(new ItemStackMock(Material.STONE_SWORD));
+		assertFalse(player.getInventory().isEmpty());
+
+		var killer = server.addPlayer();
+		player.simulateDamage(player.getHealth(), killer);
+		assertEquals(10, player.getHealth(), 0);
+		assertFalse(player.isDead());
+		assertNull(player.getKiller());
+		assertFalse(player.getInventory().isEmpty());
+	}
 	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{

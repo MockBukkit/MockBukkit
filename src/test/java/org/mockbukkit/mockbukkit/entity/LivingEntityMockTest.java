@@ -25,6 +25,9 @@ import org.bukkit.entity.Trident;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
@@ -448,6 +451,36 @@ class LivingEntityMockTest
 		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageEvent.class));
 		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDeathEvent.class));
 		assertEquals(player, livingEntity.getKiller());
+	}
+
+	@Test
+	void damage_JustKilled()
+	{
+		livingEntity.simulateDamage(livingEntity.getHealth(), (Entity) null);
+		assertEquals(0, livingEntity.getHealth(), 0);
+		assertTrue(livingEntity.isDead());
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDeathEvent.class));
+	}
+
+	@Test
+	void damage_CancelDeathEvent()
+	{
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			void onEntityDeathEvent(EntityDeathEvent event)
+			{
+				event.setReviveHealth(10);
+				event.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		var player = server.addPlayer();
+		livingEntity.simulateDamage(livingEntity.getHealth(), player);
+		assertEquals(10, livingEntity.getHealth(), 0);
+		assertFalse(livingEntity.isDead());
+		assertNull(livingEntity.getKiller());
 	}
 
 }
