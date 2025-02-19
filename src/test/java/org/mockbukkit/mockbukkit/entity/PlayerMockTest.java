@@ -78,13 +78,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.plugin.TestPlugin;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
@@ -93,6 +90,9 @@ import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetSocketAddress;
 import java.util.Collections;
@@ -2723,4 +2723,5 @@ class PlayerMockTest
 		assertEquals(player.nextActionBar(), textComponent2);
 		assertEquals(player.nextActionBar(), textComponent3);
 	}
+
 }

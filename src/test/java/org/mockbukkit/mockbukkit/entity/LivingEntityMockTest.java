@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.bukkit.entity.memory.MemoryKey;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -29,6 +24,9 @@ import org.bukkit.entity.TippedArrow;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -39,12 +37,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -53,6 +56,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
 class LivingEntityMockTest
 {
@@ -352,25 +356,25 @@ class LivingEntityMockTest
 
 	@ParameterizedTest
 	@ValueSource(classes = {
-		Arrow.class,
-		DragonFireball.class,
-		Egg.class,
-		EnderPearl.class,
-		Firework.class,
-		FishHook.class,
-		LargeFireball.class,
-		LingeringPotion.class,
-		LlamaSpit.class,
-		ShulkerBullet.class,
-		SmallFireball.class,
-		Snowball.class,
-		SpectralArrow.class,
-		ThrownExpBottle.class,
-		ThrownPotion.class,
-		TippedArrow.class,
-		Trident.class,
-		WindCharge.class,
-		WitherSkull.class,
+			Arrow.class,
+			DragonFireball.class,
+			Egg.class,
+			EnderPearl.class,
+			Firework.class,
+			FishHook.class,
+			LargeFireball.class,
+			LingeringPotion.class,
+			LlamaSpit.class,
+			ShulkerBullet.class,
+			SmallFireball.class,
+			Snowball.class,
+			SpectralArrow.class,
+			ThrownExpBottle.class,
+			ThrownPotion.class,
+			TippedArrow.class,
+			Trident.class,
+			WindCharge.class,
+			WitherSkull.class,
 	})
 	<T extends Projectile> void launchProjectile_GivenProjectileAndVelocityAndFunctionAsArgument(Class<T> tClass)
 	{
@@ -432,6 +436,18 @@ class LivingEntityMockTest
 
 		livingEntity.setMemory(MemoryKey.HUNTED_RECENTLY, null);
 		assertNull(livingEntity.getMemory(MemoryKey.HUNTED_RECENTLY));
+	}
+
+	@Test
+	void damage_ExactlyHealth_ZeroAndDeathEvent()
+	{
+		var player = server.addPlayer();
+		livingEntity.simulateDamage(livingEntity.getHealth(), player);
+		assertEquals(0, livingEntity.getHealth(), 0);
+		assertTrue(livingEntity.isDead());
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDeathEvent.class));
+		assertEquals(player, livingEntity.getKiller());
 	}
 
 }

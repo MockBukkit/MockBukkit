@@ -72,6 +72,7 @@ import java.util.function.Consumer;
  */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
+
 	private final BrainMock brain = new BrainMock();
 	/**
 	 * How much health the entity has.
@@ -268,7 +269,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
-		return new LivingEntitySimulation(this).simulateDamage(amount,source);
+		return new LivingEntitySimulation(this).simulateDamage(amount, source);
 	}
 
 	/**
@@ -686,7 +687,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 * Adds multiple potion effects. If one event is canceled, the effect from that event won't be added.
 	 *
 	 * @param effects The Potion Effects to add.
-	 * @param cause The cause.
+	 * @param cause   The cause.
 	 * @return A list of events containing details about adding the potion effects.
 	 */
 	public List<EntityPotionEffectEvent> addPotionEffects(@NotNull Collection<PotionEffect> effects, EntityPotionEffectEvent.Cause cause)
