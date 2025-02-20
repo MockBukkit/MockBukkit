@@ -1,2 +1,4 @@
 jdk:
   - openjdk21
+install:
+  - ./gradlew clean -Pgroup=com.github.MockBukkit -Pversion=$VERSION -xtest assemble publishToMavenLocal
