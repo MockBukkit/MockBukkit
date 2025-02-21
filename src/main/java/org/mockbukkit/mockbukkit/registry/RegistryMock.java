@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.tag.Tag;
 import io.papermc.paper.registry.tag.TagKey;
@@ -13,7 +12,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.art.ArtMock;
 import org.mockbukkit.mockbukkit.attribute.AttributeMock;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
@@ -42,15 +40,12 @@ import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -77,19 +72,11 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 	}
 
-	private void loadKeyedToRegistry(RegistryKey<T> key) throws IOException
+	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key) throws IOException
 	{
 		String fileName = "/keyed/" + key.key().value() + ".json";
 		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);
-		try (InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
-		{
-			if (stream == null)
-			{
-				throw new FileNotFoundException(fileName);
-			}
-			JsonElement element = JsonParser.parseReader(new InputStreamReader(stream));
-			keyedData = element.getAsJsonObject().get("values").getAsJsonArray();
-		}
+		keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
 	}
 
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)

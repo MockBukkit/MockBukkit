@@ -5,15 +5,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -46,7 +45,7 @@ public class BlockDataMockRegistry
 		{
 			loadBlockData();
 		}
-		catch (IOException ex)
+		catch (InternalDataLoadException ex)
 		{
 			ex.printStackTrace();
 		}
@@ -61,26 +60,15 @@ public class BlockDataMockRegistry
 		return instance;
 	}
 
+	private void loadBlockData() throws InternalDataLoadException {
+		JsonObject jsonObject = ResourceLoader.loadResource("/materials/material_data.json").getAsJsonObject();
 
-	private void loadBlockData() throws IOException
-	{
-		InputStream stream = MockBukkit.class.getResourceAsStream("/materials/material_data.json");
-		if (stream == null)
-		{
-			throw new IOException("Failed to load materials data, file not found");
-		}
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapter(Material.class, new MaterialDeserializer());
+		Gson gson = gsonBuilder.create();
 
-		try (InputStreamReader reader = new InputStreamReader(stream))
-		{
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(Material.class, new MaterialDeserializer());
-			Gson gson = gsonBuilder.create();
-
-			Type type = new TypeToken<Map<Material, Map<String, Object>>>()
-			{
-			}.getType();
-			blockData = gson.fromJson(reader, type);
-		}
+		Type type = new TypeToken<Map<Material, Map<String, Object>>>() {}.getType();
+		blockData = gson.fromJson(jsonObject, type);
 	}
 
 	public @Nullable Map<String, Object> getBlockData(@NotNull Material material)

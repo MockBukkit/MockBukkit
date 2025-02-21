@@ -1,15 +1,8 @@
 package org.mockbukkit.mockbukkit.adventure;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
 public class Languages
 {
@@ -44,27 +37,7 @@ public class Languages
 	public static Language loadLanguage(Language.LanguageType language)
 	{
 		String resourceName = "/translations/" + language.getResourceName();
-		try (InputStream inputStream = MockBukkit.class.getResourceAsStream(resourceName))
-		{
-			if (inputStream == null)
-			{
-				throw new IllegalStateException("Could not find internal resource: " + resourceName);
-			}
-			return loadLanguage(inputStream);
-		}
-		catch (IOException e)
-		{
-			throw new InternalDataLoadException(e);
-		}
-	}
-
-	/**
-	 * @param inputStream An input stream containing json data, see {@link JsonBackedLanguage#JsonBackedLanguage(JsonObject)}
-	 * @return Translations for loaded language
-	 */
-	public static Language loadLanguage(InputStream inputStream)
-	{
-		JsonElement jsonElement = JsonParser.parseReader(new InputStreamReader(inputStream));
+		JsonElement jsonElement = ResourceLoader.loadResource(resourceName);
 		return new JsonBackedLanguage(jsonElement.getAsJsonObject());
 	}
 

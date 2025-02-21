@@ -1,22 +1,18 @@
 package org.mockbukkit.mockbukkit.potion;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Utility class copied from CraftPotionUtil.
@@ -45,28 +41,21 @@ public class PotionUtils
 		}
 	}
 
-	private static @NotNull BiMap<PotionType, PotionType> loadData(String filename, String prefix) throws IOException
+	private static @NotNull @Unmodifiable BiMap<PotionType, PotionType> loadData(String filename, String prefix) throws IOException
 	{
 		String path = "/potion/type_mapping/" + filename + ".json";
-		if (MockBukkit.class.getResource(path) == null)
-		{
-			throw new FileNotFoundException(path);
-		}
+		JsonArray values = ResourceLoader.loadResource(path).getAsJsonObject().getAsJsonArray("values");
 
 		var builder = ImmutableBiMap.<PotionType, PotionType>builder();
 
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
+		for (var element : values)
 		{
-			JsonArray values = JsonParser.parseReader(reader).getAsJsonObject().getAsJsonArray("values");
-
-			for (var element : values)
-			{
-				String key = element.getAsString();
-				PotionType original = PotionType.valueOf(key);
-				PotionType mapped = PotionType.valueOf(prefix + key);
-				builder.put(original, mapped);
-			}
+			String key = element.getAsString();
+			PotionType original = PotionType.valueOf(key);
+			PotionType mapped = PotionType.valueOf(prefix + key);
+			builder.put(original, mapped);
 		}
+
 		return builder.build();
 	}
 

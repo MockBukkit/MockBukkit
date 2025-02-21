@@ -1,23 +1,19 @@
 package org.mockbukkit.mockbukkit.potion;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 public class InternalPotionDataMock implements PotionType.InternalPotionData
 {
@@ -47,20 +43,10 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 		this.maxLevel = this.isUpgradeable() ? 2 : 1;
 	}
 
-	private JsonObject loadData(NamespacedKey namespacedKey) throws IOException
+	private JsonObject loadData(@NotNull NamespacedKey namespacedKey) throws IOException
 	{
 		String path = "/potion/" + namespacedKey.getKey() + ".json";
-		if (MockBukkit.class.getResource(path) == null)
-		{
-			throw new FileNotFoundException(path);
-		}
-
-		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
-		{
-			JsonElement jsonElement = JsonParser.parseReader(reader);
-			return jsonElement.getAsJsonObject();
-		}
+		return ResourceLoader.loadResource(path).getAsJsonObject();
 	}
 
 	@Override

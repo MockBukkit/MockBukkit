@@ -1,23 +1,21 @@
 package org.mockbukkit.mockbukkit.tags.internal;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
+import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.tags.TagRegistry;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.tags.TagRegistry;
 
 public class InternalTagParser
 {
@@ -25,21 +23,14 @@ public class InternalTagParser
 	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z0-9_]+");
 	private static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
 
-	public void insertInternalTagValues(InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
+	public void insertInternalTagValues(@NotNull InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
 	{
 		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase(Locale.ROOT) + "/";
 		for (InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
 		{
 			String filePath = path + internalTag.getName().toLowerCase(Locale.ROOT) + ".json";
-			try (InputStream inputStream = MockBukkit.class.getResourceAsStream(filePath))
-			{
-				if (inputStream == null)
-				{
-					throw new IOException("Could not find resource: " + filePath);
-				}
-				JsonObject object = (JsonObject) JsonParser.parseReader(new InputStreamReader(inputStream));
-				this.parse(object, internalTagRegistry.getTagRegistryEquivalent(), internalTag);
-			}
+			JsonObject object = ResourceLoader.loadResource(filePath).getAsJsonObject();
+			this.parse(object, internalTagRegistry.getTagRegistryEquivalent(), internalTag);
 		}
 	}
 

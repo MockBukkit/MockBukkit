@@ -1,19 +1,13 @@
 package org.mockbukkit.mockbukkit.food;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
-import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.ApiStatus;
+import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -55,23 +49,10 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 	{
 		if (ALL_FOODS == null)
 		{
-			String path = "/foods/food_properties.json";
-			if (MockBukkit.class.getResource(path) == null)
-			{
-				throw new InternalDataLoadException("Failed to find resource " + path);
-			}
-			try (BufferedReader reader = new BufferedReader(new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
-			{
-
-				JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-				ALL_FOODS = jsonArray.asList().stream()
-						.map(jsonElement -> loadFoodConsumptionFrom(jsonElement.getAsJsonObject()))
-						.collect(Collectors.toMap(FoodConsumption::name, Function.identity()));
-			}
-			catch (IOException e)
-			{
-				throw new InternalDataLoadException(e);
-			}
+			JsonArray jsonArray = ResourceLoader.loadResource("/foods/food_properties.json").getAsJsonArray();
+			ALL_FOODS = jsonArray.asList().stream()
+					.map(jsonElement -> loadFoodConsumptionFrom(jsonElement.getAsJsonObject()))
+					.collect(Collectors.toMap(FoodConsumption::name, Function.identity()));
 		}
 		return ALL_FOODS;
 	}

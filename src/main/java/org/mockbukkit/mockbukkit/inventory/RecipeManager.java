@@ -1,23 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ComplexRecipe;
@@ -28,7 +14,15 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class RecipeManager
 {
@@ -79,7 +73,6 @@ public class RecipeManager
 	 * Get the list of recipes available for that recipe type.
 	 *
 	 * @param recipeType The recipe type.
-	 *
 	 * @return The list of recipes available.
 	 */
 	@NotNull
@@ -92,9 +85,8 @@ public class RecipeManager
 	/**
 	 * Helper function to lazy load the recipes.
 	 *
-	 * @param recipeType 	The recipe type to get the recipes.
-	 * @param recipeKey 	The recipe key to get the recipes.
-	 *
+	 * @param recipeType The recipe type to get the recipes.
+	 * @param recipeKey  The recipe key to get the recipes.
 	 * @return The server recipes.
 	 */
 	@Nullable
@@ -120,7 +112,6 @@ public class RecipeManager
 	 *
 	 * @param recipeType The recipe type.
 	 * @param itemStack  The desired item.
-	 *
 	 * @return The list of recipes available to create.
 	 */
 	@NotNull
@@ -161,7 +152,8 @@ public class RecipeManager
 				{
 					return recipe;
 				}
-			} else
+			}
+			else
 			{
 				throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
 			}
@@ -173,9 +165,8 @@ public class RecipeManager
 	/**
 	 * Add a recipe to the list of recipes.
 	 *
-	 * @param recipeType 	The recipe type.
-	 * @param recipe		The recipe to be added.
-	 *
+	 * @param recipeType The recipe type.
+	 * @param recipe     The recipe to be added.
 	 * @return {@code true} if added, otherwise {@code false}.
 	 */
 	public boolean addRecipe(@NotNull RecipeType recipeType, @NotNull Recipe recipe)
@@ -188,9 +179,8 @@ public class RecipeManager
 	/**
 	 * Remove a recipe to the list of recipes.
 	 *
-	 * @param recipeType 	The recipe type.
-	 * @param recipe		The recipe to be removed.
-	 *
+	 * @param recipeType The recipe type.
+	 * @param recipe     The recipe to be removed.
 	 * @return {@code true} if removed, otherwise {@code false}.
 	 */
 	public boolean removeRecipe(@NotNull RecipeType recipeType, @NotNull Recipe recipe)
@@ -242,45 +232,36 @@ public class RecipeManager
 				.toList();
 	}
 
-	private static List<Recipe> loadCraftingRecipes()
+	private static @NotNull List<Recipe> loadCraftingRecipes()
 	{
 		List<Recipe> recipesList = new ArrayList<>();
-		URL resource = MockBukkit.class.getClassLoader().getResource("recipes/crafting.json");
-		try
+		JsonArray recipes = ResourceLoader.loadResource("recipes/crafting.json").getAsJsonArray();
+		for (JsonElement recipeElement : recipes)
 		{
-			File file = new File(resource.toURI());
-			JsonArray recipes = JsonParser.parseReader(new FileReader(file)).getAsJsonArray();
+			Preconditions.checkArgument(recipeElement.isJsonObject(), "The recipe is not a JSON object");
+			JsonObject recipe = recipeElement.getAsJsonObject();
+			String recipeTypeString = recipe.get("type").getAsString();
 
-			for (JsonElement recipeElement : recipes)
+			if (CraftingRecipeFactory.SHAPED_TYPE.equalsIgnoreCase(recipeTypeString))
 			{
-				Preconditions.checkArgument(recipeElement.isJsonObject(), "The recipe is not a JSON object");
-				JsonObject recipe = recipeElement.getAsJsonObject();
-				String recipeTypeString = recipe.get("type").getAsString();
-				if (CraftingRecipeFactory.SHAPED_TYPE.equalsIgnoreCase(recipeTypeString))
-				{
-					recipesList.add(CraftingRecipeFactory.createShapedRecipe(recipe));
-				}
-				else if (CraftingRecipeFactory.SHAPELESS_TYPE.equalsIgnoreCase(recipeTypeString))
-				{
-					recipesList.add(CraftingRecipeFactory.createShapelessRecipe(recipe));
-				}
-				else if (CraftingRecipeFactory.TRANSMUTE_TYPE.equalsIgnoreCase(recipeTypeString))
-				{
-					recipesList.add(CraftingRecipeFactory.createTransmuteRecipe(recipe));
-				}
-				else if (CraftingRecipeFactory.COMPLEX_TYPE.equalsIgnoreCase(recipeTypeString))
-				{
-					recipesList.add(CraftingRecipeFactory.createComplexRecipe(recipe));
-				}
-				else
-				{
-					throw new IllegalArgumentException("Unknown recipe type: " + recipeTypeString);
-				}
+				recipesList.add(CraftingRecipeFactory.createShapedRecipe(recipe));
 			}
-		}
-		catch (URISyntaxException | FileNotFoundException e)
-		{
-			throw new IllegalArgumentException("Error while loading crafting recipes", e);
+			else if (CraftingRecipeFactory.SHAPELESS_TYPE.equalsIgnoreCase(recipeTypeString))
+			{
+				recipesList.add(CraftingRecipeFactory.createShapelessRecipe(recipe));
+			}
+			else if (CraftingRecipeFactory.TRANSMUTE_TYPE.equalsIgnoreCase(recipeTypeString))
+			{
+				recipesList.add(CraftingRecipeFactory.createTransmuteRecipe(recipe));
+			}
+			else if (CraftingRecipeFactory.COMPLEX_TYPE.equalsIgnoreCase(recipeTypeString))
+			{
+				recipesList.add(CraftingRecipeFactory.createComplexRecipe(recipe));
+			}
+			else
+			{
+				throw new IllegalArgumentException("Unknown recipe type: " + recipeTypeString);
+			}
 		}
 
 		return recipesList;

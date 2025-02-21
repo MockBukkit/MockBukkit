@@ -1,24 +1,20 @@
 package org.mockbukkit.mockbukkit.registry;
 
-import com.google.gson.JsonElement;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.exception.ReflectionAccessException;
-import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
+import org.mockbukkit.mockbukkit.exception.ReflectionAccessException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -144,34 +140,24 @@ public class RegistryAccessMock implements RegistryAccess
 		}
 	}
 
-	private static BiMap<RegistryKey<?>, String> createClassToKeyConversions()
+	private static @NotNull BiMap<RegistryKey<?>, String> createClassToKeyConversions()
 	{
 		String fileName = "/registries/registry_key_class_relation.json";
+		JsonObject object = ResourceLoader.loadResource(fileName).getAsJsonObject();
+
 		BiMap<RegistryKey<?>, String> output = HashBiMap.create();
-		try (InputStream inputStream = MockBukkit.class.getResourceAsStream(fileName))
+		for (RegistryKey<?> registryKey : getAllKeys())
 		{
-			if (inputStream == null)
+			JsonElement element = object.get(registryKey.key().asString());
+			if (element != null)
 			{
-				throw new IOException("File not found: " + fileName);
+				String className = element.getAsString();
+				output.put(registryKey, className);
 			}
-			JsonObject object = JsonParser.parseReader(new InputStreamReader(inputStream)).getAsJsonObject();
-			for (RegistryKey<?> registryKey : getAllKeys())
+			else
 			{
-				JsonElement element = object.get(registryKey.key().asString());
-				if (element != null)
-				{
-					String className = element.getAsString();
-					output.put(registryKey, className);
-				}
-				else
-				{
-					throw new InternalDataLoadException("Null JSON element while retrieving `" + registryKey.key().asString() + "` - MockBukkit / MC version mismatch?");
-				}
+				throw new InternalDataLoadException("Null JSON element while retrieving `" + registryKey.key().asString() + "` - MockBukkit / MC version mismatch?");
 			}
-		}
-		catch (IOException e)
-		{
-			throw new InternalDataLoadException(e);
 		}
 		return output;
 	}
