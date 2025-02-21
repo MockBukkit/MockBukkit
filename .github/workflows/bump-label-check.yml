@@ -1,21 +1,28 @@
 name: Check PR has release/* label
 
 on:
-  pull_request:
-    branches: [ v1.* ]
+  workflow_run:
+    workflows: ["Tag"]
     types:
-      - opened
-      - reopened
-      - labeled
-      - unlabeled
-      - synchronize
+      - completed
+    branches: [ v1.* ]
 
 jobs:
   has-release-label:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Get PR number from tag message
+        id: get-pr
+        run: |
+          # Get the tag message and extract PR number
+          PR_NUMBER=$(git tag -l --format='%(contents)' | grep -oP 'PR #\K\d+' | head -1)
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
       - uses: docker://agilepathway/pull-request-label-checker:latest
         id: release-label
         with:
           one_of: release/major,release/minor,release/patch,release/none
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_request_number: ${{ steps.get-pr.outputs.pr_number }}
