@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.util;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
@@ -34,10 +35,9 @@ public class ResourceLoader
 		{
 			return JsonParser.parseReader(reader);
 		}
-		catch (IOException e)
+		catch (JsonSyntaxException | IOException e)
 		{
 			throw new InternalDataLoadException(e);
 		}
 	}
-
 }
