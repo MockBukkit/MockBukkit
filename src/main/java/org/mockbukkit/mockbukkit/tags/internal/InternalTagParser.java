@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.tags.TagRegistry;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Locale;
@@ -23,7 +22,7 @@ public class InternalTagParser
 	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z0-9_]+");
 	private static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
 
-	public void insertInternalTagValues(@NotNull InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
+	public void insertInternalTagValues(@NotNull InternalTagRegistry internalTagRegistry) throws InternalTagMisconfigurationException
 	{
 		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase(Locale.ROOT) + "/";
 		for (InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
