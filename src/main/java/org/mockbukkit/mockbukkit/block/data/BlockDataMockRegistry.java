@@ -60,7 +60,8 @@ public class BlockDataMockRegistry
 		return instance;
 	}
 
-	private void loadBlockData() throws InternalDataLoadException {
+	private void loadBlockData() throws InternalDataLoadException
+	{
 		JsonObject jsonObject = ResourceLoader.loadResource("/materials/material_data.json").getAsJsonObject();
 
 		GsonBuilder gsonBuilder = new GsonBuilder();

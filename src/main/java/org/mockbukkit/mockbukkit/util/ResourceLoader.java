@@ -15,14 +15,16 @@ import java.nio.charset.StandardCharsets;
 
 public class ResourceLoader
 {
-	private ResourceLoader() {
+	private ResourceLoader()
+	{
 
 	}
 
 	public static JsonElement loadResource(@NotNull String path)
 	{
 		InputStream inputStream = MockBukkit.class.getResourceAsStream(path);
-		if (inputStream == null) {
+		if (inputStream == null)
+		{
 			inputStream = MockBukkit.class.getClassLoader().getResourceAsStream(path);
 		}
 
