@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.state;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -78,6 +79,7 @@ public abstract class ContainerStateMockTest
 		{
 			ContainerStateMock original = instance();
 			assertEquals("", original.getLock());
+			assertFalse(original.isLocked());
 		}
 
 		@Test
@@ -86,6 +88,7 @@ public abstract class ContainerStateMockTest
 			ContainerStateMock original = instance();
 			original.setLock(null);
 			assertEquals("", original.getLock());
+			assertFalse(original.isLocked());
 		}
 
 		@Test
@@ -94,6 +97,7 @@ public abstract class ContainerStateMockTest
 			ContainerStateMock original = instance();
 			original.setLock("jeb");
 			assertEquals("jeb", original.getLock());
+			assertTrue(original.isLocked());
 		}
 	}
 
