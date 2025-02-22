@@ -1,14 +1,17 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockBukkitExtension.class)
 public abstract class ContainerStateMockTest
@@ -65,6 +68,33 @@ public abstract class ContainerStateMockTest
 		checkFirstItemIsFourEmeralds(original);
 		assertEquals("jeb", original.getLock());
 		assertEquals("stash", original.getCustomName());
+	}
+
+	@Nested
+	class GetLock
+	{
+		@Test
+		void getDefaultShouldBeEmpty()
+		{
+			ContainerStateMock original = instance();
+			assertEquals("", original.getLock());
+		}
+
+		@Test
+		void givenNullLockShouldReturnEmpty()
+		{
+			ContainerStateMock original = instance();
+			original.setLock(null);
+			assertEquals("", original.getLock());
+		}
+
+		@Test
+		void givenCustomLockShouldReturnLock()
+		{
+			ContainerStateMock original = instance();
+			original.setLock("jeb");
+			assertEquals("jeb", original.getLock());
+		}
 	}
 
 }

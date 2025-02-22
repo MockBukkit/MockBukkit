@@ -1,17 +1,16 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import java.util.Objects;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 /**
  * Mock implementation of a {@link Container}.
@@ -23,7 +22,6 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 
 	private final Inventory inventory;
 	private @Nullable Component customName;
-	private @NotNull String lock = "";
 
 	/**
 	 * Constructs a new {@link ContainerStateMock} for the provided {@link Material}.
@@ -55,9 +53,8 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = createInventoryCopy(state.getInventory());
+		this.inventory = state.getInventory();
 		this.customName = state.customName();
-		this.lock = state.getLock();
 	}
 
 	/**
@@ -65,37 +62,8 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	 */
 	protected abstract @NotNull InventoryMock createInventory();
 
-	/**
-	 * @param inventory Inventory contents to copy.
-	 * @return A new inventory, of the correct type for the state with contents deep-copied from the given inventory.
-	 */
-	protected @NotNull InventoryMock createInventoryCopy(@NotNull Inventory inventory)
-	{
-		InventoryMock other = createInventory();
-		other.setContents(inventory.getContents());
-		return other;
-	}
-
 	@Override
 	public abstract @NotNull ContainerStateMock getSnapshot();
-
-	@Override
-	public boolean isLocked()
-	{
-		return !this.lock.isEmpty();
-	}
-
-	@Override
-	public @NotNull String getLock()
-	{
-		return this.lock;
-	}
-
-	@Override
-	public void setLock(@Nullable String key)
-	{
-		this.lock = key == null ? "" : key;
-	}
 
 	@Override
 	public @Nullable Component customName()
@@ -140,13 +108,13 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 		if (this == o) return true;
 		if (!(o instanceof ContainerStateMock that)) return false;
 		if (!super.equals(o)) return false;
-		return Objects.equals(inventory, that.inventory) && Objects.equals(customName, that.customName) && Objects.equals(lock, that.lock);
+		return Objects.equals(inventory, that.inventory) && Objects.equals(customName, that.customName);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), inventory, customName, lock);
+		return Objects.hash(super.hashCode(), inventory, customName);
 	}
 
 	@Override
@@ -154,7 +122,6 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	{
 		return super.toStringInternal() +
 				", customName=" + customName +
-				", lock='" + lock + '\'' +
 				", inventory=" + inventory;
 	}
 }

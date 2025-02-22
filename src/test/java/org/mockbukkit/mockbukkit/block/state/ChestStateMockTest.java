@@ -1,17 +1,21 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.bukkit.Material;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 
 class ChestStateMockTest extends ContainerStateMockTest
@@ -92,5 +96,30 @@ class ChestStateMockTest extends ContainerStateMockTest
 		assertTrue(chest.isOpen());
 		chest.close();
 		assertFalse(chest.isOpen());
+	}
+
+	@Test
+	@DisplayName("Validate that the block shares the same state.")
+	void issue1293()
+	{
+		int x = 0;
+		int y = 100;
+		int z = 0;
+		Location location = new Location(world, x, y, z);
+
+		// Assert initial block state
+		Block chestBlock = world.getBlockAt(location);
+		chestBlock.setType(Material.CHEST);
+		ChestStateMock chestState = (ChestStateMock) chestBlock.getState();
+		assertFalse(chestState.getBlockInventory().contains(ItemStack.of(Material.DIAMOND)));
+
+		// Apply changes to the same block using the same process
+		Block block2 = world.getBlockAt(location);
+		ChestStateMock state2 = (ChestStateMock) block2.getState();
+		state2.getBlockInventory().clear();
+		state2.getBlockInventory().addItem(ItemStack.of(Material.DIAMOND));
+
+		// Assert that the old state was also updated
+		assertTrue(chestState.getBlockInventory().contains(ItemStack.of(Material.DIAMOND)));
 	}
 }

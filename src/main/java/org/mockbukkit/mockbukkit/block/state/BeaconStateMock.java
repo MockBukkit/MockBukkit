@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import java.util.Collection;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -16,8 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-
 /**
  * Mock implementation of a {@link Beacon}.
  *
@@ -25,8 +25,6 @@ import java.util.Collection;
  */
 public class BeaconStateMock extends LockableTileStateMock implements Beacon
 {
-
-	private @Nullable String lock;
 	private @Nullable Component customName;
 	private int tier;
 	private @Nullable PotionEffectType primaryEffect;
@@ -66,7 +64,6 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	{
 		super(state);
 
-		this.lock = state.lock;
 		this.customName = state.customName;
 		this.tier = state.tier;
 		this.primaryEffect = state.primaryEffect;
@@ -85,7 +82,6 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	{
 		return super.toStringInternal() +
 				", customName=" + customName +
-				", lock='" + lock + '\'' +
 				", tier=" + tier +
 				", primaryEffect=" + primaryEffect +
 				", secondaryEffect=" + secondaryEffect +
@@ -205,24 +201,6 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	public void setCustomName(@Nullable String name)
 	{
 		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
-	}
-
-	@Override
-	public boolean isLocked()
-	{
-		return this.lock != null && !this.lock.isEmpty();
-	}
-
-	@Override
-	public @NotNull String getLock()
-	{
-		return this.lock;
-	}
-
-	@Override
-	public void setLock(@Nullable String key)
-	{
-		this.lock = key;
 	}
 
 	/**

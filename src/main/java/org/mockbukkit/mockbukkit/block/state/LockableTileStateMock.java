@@ -1,9 +1,10 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import java.util.Objects;
+
 import io.papermc.paper.block.LockableTileState;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,6 +12,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public abstract class LockableTileStateMock extends TileStateMock implements LockableTileState
 {
+	private String lock = "";
 
 	protected LockableTileStateMock(@NotNull Material material)
 	{
@@ -22,19 +24,29 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 		super(block);
 	}
 
-	protected LockableTileStateMock(@NotNull TileStateMock state)
+	protected LockableTileStateMock(@NotNull LockableTileStateMock state)
 	{
 		super(state);
+		this.lock = state.lock;
 	}
 
 	@Override
-	public abstract boolean isLocked();
+	public boolean isLocked()
+	{
+		return this.lock != null && !this.lock.isEmpty();
+	}
 
 	@Override
-	public abstract @NotNull String getLock();
+	public @NotNull String getLock()
+	{
+		return this.lock;
+	}
 
 	@Override
-	public abstract void setLock(@Nullable String key);
+	public void setLock(@Nullable String key)
+	{
+		this.lock = key == null ? "" : key;
+	}
 
 	@Override
 	public void setLockItem(@Nullable ItemStack itemStack)
@@ -44,6 +56,19 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	}
 
 	@Override
-	public abstract @NotNull TileStateMock getSnapshot();
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof LockableTileStateMock that)) return false;
+		if (!super.equals(o)) return false;
+
+		return Objects.equals(lock, that.lock);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), lock);
+	}
 
 }
