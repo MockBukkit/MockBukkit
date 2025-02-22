@@ -1,18 +1,23 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -96,6 +101,47 @@ class ChestStateMockTest extends ContainerStateMockTest
 		assertTrue(chest.isOpen());
 		chest.close();
 		assertFalse(chest.isOpen());
+	}
+
+	@Nested
+	class GetBlockInventory
+	{
+		@Test
+		void givenStateWithItems_WhenGettingInventory_ThenSameInventoryIsReturned()
+		{
+			Inventory originalInventory = chest.getBlockInventory();
+			assertFalse(originalInventory.contains(ItemStack.of(Material.DIAMOND)));
+
+			chest.getBlockInventory().addItem(ItemStack.of(Material.DIAMOND));
+			assertTrue(originalInventory.contains(ItemStack.of(Material.DIAMOND)));
+			assertSame(originalInventory, chest.getBlockInventory());
+		}
+	}
+
+	@Nested
+	class GetSnapshotInventory
+	{
+		@Test
+		void givenStateWithItems_WhenGettingInventory_ThenDifferentInventoryIsReturned()
+		{
+			Inventory blockInventory = chest.getBlockInventory();
+			Inventory snapshotInventory = chest.getSnapshotInventory();
+			assertEquals(blockInventory, snapshotInventory);
+			assertNotSame(blockInventory, snapshotInventory);
+		}
+
+		@Test
+		void givenStateWithItems_WhenInventoryIsChanged_TheSnapshotInventoryIsNotChanged()
+		{
+			Inventory blockInventory = chest.getBlockInventory();
+			Inventory snapshotInventory = chest.getSnapshotInventory();
+
+			blockInventory.addItem(ItemStack.of(Material.DIAMOND));
+
+			assertTrue(blockInventory.contains(ItemStack.of(Material.DIAMOND)));
+			assertFalse(snapshotInventory.contains(ItemStack.of(Material.DIAMOND)));
+			assertNotEquals(blockInventory, snapshotInventory);
+		}
 	}
 
 	@Test

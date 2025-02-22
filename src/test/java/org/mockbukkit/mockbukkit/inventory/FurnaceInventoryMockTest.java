@@ -1,15 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.block.state.BlastFurnaceStateMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.block.state.BlastFurnaceStateMock;
 
 @ExtendWith(MockBukkitExtension.class)
 class FurnaceInventoryMockTest
@@ -85,6 +86,18 @@ class FurnaceInventoryMockTest
 	void testGetHolder()
 	{
 		assertEquals(holder, inventory.getHolder());
+	}
+
+	@Test
+	void testGetSnapshot()
+	{
+		inventory.setFuel(ItemStack.of(Material.COAL));
+		inventory.setSmelting(ItemStack.of(Material.OAK_LOG));
+		inventory.setResult(ItemStack.of(Material.CHARCOAL));
+
+		FurnaceInventoryMock actual = inventory.getSnapshot();
+		assertEquals(inventory, actual);
+		assertNotSame(inventory, actual);
 	}
 
 }

@@ -1,8 +1,8 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import java.util.Map;
+import java.util.Objects;
 
-import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,9 +11,8 @@ import org.bukkit.block.Furnace;
 import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.FurnaceInventory;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
-import java.util.Objects;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
 
 /**
  * Mock implementation of a {@link Furnace}.
@@ -172,12 +171,7 @@ public abstract class AbstractFurnaceStateMock extends ContainerStateMock implem
 	@Override
 	public FurnaceInventory getSnapshotInventory()
 	{
-		FurnaceInventory rawInventory = (FurnaceInventory) super.getInventory();
-		FurnaceInventoryMock mock = new FurnaceInventoryMock(rawInventory.getHolder());
-		mock.setResult(rawInventory.getResult());
-		mock.setFuel(rawInventory.getFuel());
-		mock.setSmelting(rawInventory.getSmelting());
-		return mock;
+		return (FurnaceInventory) super.getSnapshotInventory();
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -11,9 +13,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.HashSet;
-import java.util.Set;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link FurnaceInventory}.
@@ -35,6 +35,11 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	public FurnaceInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.FURNACE);
+	}
+
+	protected FurnaceInventoryMock(InventoryMock inventory)
+	{
+		super(inventory);
 	}
 
 	@Override
@@ -92,6 +97,11 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 		return (Furnace) super.getHolder();
 	}
 
+	@Override
+	public @NotNull FurnaceInventoryMock getSnapshot()
+	{
+		return new FurnaceInventoryMock(this);
+	}
 
 	private static class FurnaceFuelProvider
 	{
