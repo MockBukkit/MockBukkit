@@ -12,7 +12,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public abstract class LockableTileStateMock extends TileStateMock implements LockableTileState
 {
-	private String lock = "";
+	private @NotNull String lock = "";
 
 	protected LockableTileStateMock(@NotNull Material material)
 	{
@@ -33,7 +33,7 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	@Override
 	public boolean isLocked()
 	{
-		return this.lock != null && !this.lock.isEmpty();
+		return !this.lock.isEmpty();
 	}
 
 	@Override
