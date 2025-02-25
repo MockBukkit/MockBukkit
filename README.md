@@ -3,6 +3,12 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
+    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
+    </a>
+    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg" />
+    </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
     </a>
@@ -45,8 +51,8 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 > [!TIP]
 > Currently, the newest version available is
 >
-> [![maven-version](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
-> [![javadoc](https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg)](https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v1.21)
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
+
 
 > Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
 
@@ -154,60 +160,25 @@ development of MockBukkit.
 
 ### Using MockBukkit
 
-A plugin can be loaded in this initializer block.
+A plugin can be loaded in this initialiser block.
 
 ```java
-@ExtendWith(MockBukkitExtension.class)
-class MyPluginTest
+private ServerMock server;
+private MyPlugin plugin;
+
+@BeforeEach
+public void setUp()
 {
-    @MockBukkitInject
-    private ServerMock server;
-    private MyPlugin plugin;
+    server = MockBukkit.mock();
+    plugin = MockBukkit.load(MyPlugin.class);
+}
 
-    @BeforeEach
-    void setUp()
-    {
-        plugin = MockBukkit.load(MyPlugin.class);
-    }
-    
-    @Test
-    void test1()
-    {
-        // Your test goes here   
-    }
-    
+@AfterEach
+public void tearDown()
+{
+    MockBukkit.unmock();
 }
 ```
-
-<details>
-<summary>Without junit annotation</summary>
-
-```java
-class MyPluginTest {
-
-    private ServerMock server;
-    private MyPlugin plugin;
-
-    @BeforeEach
-    public void setUp() {
-        server = MockBukkit.mock();
-        plugin = MockBukkit.load(MyPlugin.class);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        MockBukkit.unmock();
-    }
-
-    @Test
-    void test1()
-    {
-        // Your test goes here   
-    }
-    
-}
-```
-</details>
 
 ## :sparkles: Features
 
