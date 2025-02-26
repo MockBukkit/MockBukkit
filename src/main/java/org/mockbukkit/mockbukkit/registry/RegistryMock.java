@@ -1,5 +1,13 @@
 package org.mockbukkit.mockbukkit.registry;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -41,14 +49,6 @@ import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
-
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 public class RegistryMock<T extends Keyed> implements Registry<T>
 {
@@ -228,6 +228,13 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		loadIfEmpty();
 		return keyedMap.values().iterator();
+	}
+
+	@Override
+	public int size()
+	{
+		loadIfEmpty();
+		return keyedData.size();
 	}
 
 	private void loadIfEmpty()
