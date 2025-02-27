@@ -56,7 +56,7 @@ public class CreakingMock extends MonsterMock implements Creaking
 	}
 
 	/**
-	 * Gets the home location for this creaking (where its {@link org.bukkit.block.CreakingHeart} could be found).
+	 * Sets the home location for this creaking (where its {@link org.bukkit.block.CreakingHeart} could be found).
 	 *
 	 * @param homeLocation the location of the home if available, or null otherwise
 	 */
