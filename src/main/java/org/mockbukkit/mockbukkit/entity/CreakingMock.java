@@ -62,7 +62,7 @@ public class CreakingMock extends MonsterMock implements Creaking
 	 */
 	public void setHomeLocation(@Nullable Location homeLocation)
 	{
-		this.homeLocation = homeLocation;
+		this.homeLocation = homeLocation == null ? null : homeLocation.clone();
 	}
 
 	@Override
