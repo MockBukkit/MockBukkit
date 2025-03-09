@@ -81,8 +81,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
 	private @Nullable Integer customModelData = null;
-	private Set<Namespaced> destroyableKeys = Sets.newHashSet();
-	private Set<Namespaced> placeableKeys = Sets.newHashSet();
 	private Integer maxDamage;
 	private boolean hideTooltip;
 	private boolean fireResistant;
@@ -375,8 +373,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			meta.damage = damage;
 			meta.repairCost = repairCost;
 			meta.hideFlags = EnumSet.copyOf(hideFlags);
-			meta.destroyableKeys = destroyableKeys != null ? new HashSet<>(destroyableKeys) : null;
-			meta.placeableKeys = placeableKeys != null ? new HashSet<>(placeableKeys) : null;
 			return meta;
 		}
 		catch (CloneNotSupportedException e)
@@ -703,8 +699,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
 		damage = (Integer) args.get("Damage");
 		repairCost = (int) args.get("repair-cost");
-		destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
-		placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
 	}
 
 	@Override
