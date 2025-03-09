@@ -75,7 +75,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable List<String> lore = null;
 	private @Nullable Integer damage = null;
 	private int repairCost = 0;
-	private @Nullable Map<Enchantment, Integer> enchants = new HashMap<>();
+	private @NotNull Map<Enchantment, Integer> enchants = new HashMap<>();
 	private Multimap<Attribute, AttributeModifier> attributeModifiers;
 	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
 	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
@@ -621,15 +621,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("custom-model-data", this.customModelData);
 		}
 
-		if (this.enchants != null)
-		{
-			map.put("enchants", this.enchants.entrySet().stream()
+		map.put("enchants", this.enchants.entrySet().stream()
 					.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
-		}
-		else
-		{
-			map.put("enchants", new HashMap<String, Integer>());
-		}
 
 		if (hasAttributeModifiers())
 		{
@@ -743,7 +736,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchants()
 	{
-		return enchants != null ? ImmutableSortedMap.copyOf(enchants,
+		return !enchants.isEmpty() ? ImmutableSortedMap.copyOf(enchants,
 				Comparator.comparing(o -> o.getKey().toString())
 		) : ImmutableMap.of();
 	}
@@ -783,13 +776,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
-		boolean b = this.hasEnchants() && enchants.remove(ench) != null;
-		if (enchants != null && enchants.isEmpty())
-		{
-			enchants = null;
-		}
-
-		return b;
+		return checkConflictingEnchants(this.enchants, ench);
 	}
 
 	@Override
@@ -1467,4 +1454,3 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 }
-

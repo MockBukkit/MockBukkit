@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.Tag;
 import org.junit.jupiter.params.provider.Arguments;
 import net.kyori.adventure.text.Component;
@@ -63,6 +64,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -701,13 +703,24 @@ class ItemMetaMockTest
 		Map<Enchantment, Integer> actual1 = meta.getEnchants();
 		Map<Enchantment, Integer> actual2 = meta.getEnchants();
 
-		assertNotSame(actual1, actual2);
-		assertEquals(actual1, actual2);
+		assertSame(ImmutableMap.of(), actual1);
+		assertSame(ImmutableMap.of(), actual2);
 
 		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
 		Map<Enchantment, Integer> actual3 = meta.getEnchants();
+		Map<Enchantment, Integer> actual4 = meta.getEnchants();
 
-		assertNotEquals(actual1, actual3);
+		assertNotSame(actual3, actual4);
+		assertEquals(actual3, actual4);
+	}
+
+	@Test
+	void hasConflictingEnchant() {
+		assertTrue(meta.addEnchant(Enchantment.INFINITY, 1, false));
+		assertTrue(meta.hasConflictingEnchant(Enchantment.MENDING));
+		assertFalse(meta.hasConflictingEnchant(Enchantment.POWER));
+		assertTrue(meta.hasEnchants());
+		assertTrue(meta.hasEnchant(Enchantment.INFINITY));
 	}
 
 	@Test
