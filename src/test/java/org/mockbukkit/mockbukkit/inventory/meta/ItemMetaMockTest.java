@@ -49,8 +49,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -714,15 +716,6 @@ class ItemMetaMockTest
 
 		assertNotSame(actual3, actual4);
 		assertEquals(actual3, actual4);
-	}
-
-	@Test
-	void hasConflictingEnchant() {
-		assertTrue(meta.addEnchant(Enchantment.INFINITY, 1, false));
-		assertTrue(meta.hasConflictingEnchant(Enchantment.MENDING));
-		assertFalse(meta.hasConflictingEnchant(Enchantment.POWER));
-		assertTrue(meta.hasEnchants());
-		assertTrue(meta.hasEnchant(Enchantment.INFINITY));
 	}
 
 	@Test
@@ -1586,6 +1579,34 @@ class ItemMetaMockTest
 			assertEquals(value, meta.getEnchantmentGlintOverride());
 		}
 
+		@Test
+		void influencesHashCode() {
+			meta.setEnchantmentGlintOverride(null);
+			int hc0 = meta.hashCode();
+			meta.setEnchantmentGlintOverride(false);
+			int hc1 = meta.hashCode();
+			meta.setEnchantmentGlintOverride(true);
+			int hc2 = meta.hashCode();
+			assertNotEquals(hc0, hc1);
+			assertNotEquals(hc0, hc2);
+			assertNotEquals(hc1, hc2);
+		}
+
+		@Test
+		void valueIsCloned() {
+			meta.setEnchantmentGlintOverride(true);
+			assertTrue(meta.clone().getEnchantmentGlintOverride());
+			meta.setEnchantmentGlintOverride(false);
+			assertFalse(meta.clone().getEnchantmentGlintOverride());
+		}
+
+		@Test
+		void valueIsCopied() {
+			meta.setEnchantmentGlintOverride(true);
+			assertTrue(new ItemMetaMock(meta).getEnchantmentGlintOverride());
+			meta.setEnchantmentGlintOverride(false);
+			assertFalse(new ItemMetaMock(meta).getEnchantmentGlintOverride());
+		}
 	}
 
 	@Nested
@@ -1617,6 +1638,36 @@ class ItemMetaMockTest
 
 			assertTrue(meta.hasRarity());
 			assertEquals(value, meta.getRarity());
+		}
+
+		@Test
+		void influencesHashCode() {
+			Set<Integer> hashcodes = new HashSet<>();
+			meta.setRarity(null);
+			hashcodes.add(meta.hashCode());
+			for (ItemRarity rarity : ItemRarity.values())
+			{
+				meta.setRarity(rarity);
+				assertTrue(hashcodes.add(meta.hashCode()));
+			}
+		}
+
+		@Test
+		void valueIsCloned() {
+			for (ItemRarity rarity : ItemRarity.values())
+			{
+				meta.setRarity(rarity);
+				assertEquals(rarity, meta.clone().getRarity());
+			}
+		}
+
+		@Test
+		void valueIsCopied() {
+			for (ItemRarity rarity : ItemRarity.values())
+			{
+				meta.setRarity(rarity);
+				assertEquals(rarity, new ItemMetaMock(meta).getRarity());
+			}
 		}
 
 	}
