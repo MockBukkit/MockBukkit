@@ -641,17 +641,19 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void hasLocalizedName_NoLocalizedName_False()
+	void setLocalizedName_DelegatesToDisplayName()
 	{
-		assertFalse(meta.hasLocalizedName());
+		meta.setDisplayName("Pointy Object");
+		assertEquals("Pointy Object", meta.getLocalizedName());
 	}
 
 	@Test
-	void setLocalizedName_NewName_NameSetExactly()
+	void setLocalizedName_DoesNothing()
 	{
+		meta.setDisplayName("Pointy Object");
 		meta.setLocalizedName("Some name");
-		assertTrue(meta.hasLocalizedName());
-		assertEquals("Some name", meta.getLocalizedName());
+		assertFalse(meta.hasLocalizedName());
+		assertEquals("Pointy Object", meta.getLocalizedName());
 	}
 
 	@Test

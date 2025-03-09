@@ -71,7 +71,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
 	private @Nullable String displayName = null;
-	private @Nullable String localizedName = null;
 	private @Nullable List<String> lore = null;
 	private @Nullable Integer damage = null;
 	private int repairCost = 0;
@@ -606,11 +605,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("display-name", this.displayName);
 		}
 
-		if (this.localizedName != null)
-		{
-			map.put("loc-name", this.localizedName);
-		}
-
 		if (this.lore != null)
 		{
 			map.put("lore", this.lore);
@@ -622,7 +616,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 
 		map.put("enchants", this.enchants.entrySet().stream()
-					.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
+				.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
 
 		if (hasAttributeModifiers())
 		{
@@ -671,7 +665,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		displayName = (String) args.get("display-name");
 		lore = (List<String>) args.get("lore");
-		localizedName = (String) args.get("loc-name");
 
 		enchants = new HashMap<>();
 		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
@@ -698,21 +691,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public boolean hasLocalizedName()
 	{
-		return localizedName != null;
+		return false;
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @NotNull String getLocalizedName()
 	{
-		return localizedName;
+		return getDisplayName();
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setLocalizedName(@Nullable String name)
 	{
-		localizedName = name;
+		// no-op
 	}
 
 	@Override
