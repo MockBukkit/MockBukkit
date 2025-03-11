@@ -36,7 +36,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
@@ -78,6 +77,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
@@ -2763,6 +2763,27 @@ class PlayerMockTest
 		assertEquals(player.nextActionBar(), textComponent);
 		assertEquals(player.nextActionBar(), textComponent2);
 		assertEquals(player.nextActionBar(), textComponent3);
+	}
+
+	@Nested
+	class DeathScreenScore
+	{
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, player.getDeathScreenScore());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {
+			0, 1, 2, 3, 4, 5, 10, 200, 3000
+		})
+		void givenPossibleValues(int value)
+		{
+			player.setDeathScreenScore(value);
+			assertEquals(value, player.getDeathScreenScore());
+		}
+
 	}
 
 }
