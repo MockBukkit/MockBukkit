@@ -1580,7 +1580,8 @@ class ItemMetaMockTest
 		}
 
 		@Test
-		void influencesHashCode() {
+		void influencesHashCode()
+		{
 			meta.setEnchantmentGlintOverride(null);
 			int hc0 = meta.hashCode();
 			meta.setEnchantmentGlintOverride(false);
@@ -1593,7 +1594,8 @@ class ItemMetaMockTest
 		}
 
 		@Test
-		void valueIsCloned() {
+		void valueIsCloned()
+		{
 			meta.setEnchantmentGlintOverride(true);
 			assertTrue(meta.clone().getEnchantmentGlintOverride());
 			meta.setEnchantmentGlintOverride(false);
@@ -1601,7 +1603,8 @@ class ItemMetaMockTest
 		}
 
 		@Test
-		void valueIsCopied() {
+		void valueIsCopied()
+		{
 			meta.setEnchantmentGlintOverride(true);
 			assertTrue(new ItemMetaMock(meta).getEnchantmentGlintOverride());
 			meta.setEnchantmentGlintOverride(false);
@@ -1641,7 +1644,8 @@ class ItemMetaMockTest
 		}
 
 		@Test
-		void influencesHashCode() {
+		void influencesHashCode()
+		{
 			Set<Integer> hashcodes = new HashSet<>();
 			meta.setRarity(null);
 			hashcodes.add(meta.hashCode());
@@ -1653,7 +1657,8 @@ class ItemMetaMockTest
 		}
 
 		@Test
-		void valueIsCloned() {
+		void valueIsCloned()
+		{
 			for (ItemRarity rarity : ItemRarity.values())
 			{
 				meta.setRarity(rarity);
@@ -1662,7 +1667,8 @@ class ItemMetaMockTest
 		}
 
 		@Test
-		void valueIsCopied() {
+		void valueIsCopied()
+		{
 			for (ItemRarity rarity : ItemRarity.values())
 			{
 				meta.setRarity(rarity);
