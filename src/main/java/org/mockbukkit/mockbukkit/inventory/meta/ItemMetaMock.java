@@ -634,27 +634,52 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("lore", this.lore);
 		}
-
+		if (this.damage != null)
+		{
+			map.put("Damage", this.damage);
+		}
+		if (this.maxDamage != null)
+		{
+			map.put("MaxDamage", this.maxDamage);
+		}
+		map.put("repair-cost", this.repairCost);
+		map.put("enchants", this.enchants.entrySet().stream()
+				.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
+		if (hasAttributeModifiers())
+		{
+			map.put("attribute-modifiers", this.attributeModifiers);
+		}
+		map.put("ItemFlags", this.hideFlags);
+		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
+		map.put("Unbreakable", this.unbreakable);
 		if (this.customModelData != null)
 		{
 			map.put("custom-model-data", this.customModelData);
 		}
 
-		map.put("enchants", this.enchants.entrySet().stream()
-				.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
-
-		if (hasAttributeModifiers())
+		map.put("HideTooltip", this.hideTooltip);
+		map.put("FireResistant", this.fireResistant);
+		if (this.maxStackSize != null)
 		{
-			map.put("attribute-modifiers", this.attributeModifiers);
+			map.put("MaxStackSize", this.maxStackSize);
+		}
+		if (this.enchantmentGlintOverride != null)
+		{
+			map.put("EnchantmentGlintOverride", this.enchantmentGlintOverride);
+		}
+		if (this.rarity != null)
+		{
+			map.put("Rarity", this.rarity);
+		}
+		if (this.hasItemName())
+		{
+			map.put("ItemName", this.getItemName());
+		}
+		if (this.enchantableValue != null)
+		{
+			map.put("EnchantableValue", this.enchantableValue);
 		}
 
-		map.put("repair-cost", this.repairCost);
-		map.put("ItemFlags", this.hideFlags);
-		map.put("Unbreakable", this.unbreakable);
-		if (this.damage != null)
-		{
-			map.put("Damage", this.damage);
-		}
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
@@ -663,7 +688,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		*/
 
-		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
 		map.put("meta-type", getTypeName());
 
 		// Return map
@@ -690,7 +714,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		displayName = (String) args.get("display-name");
 		lore = (List<String>) args.get("lore");
-
+		damage = (Integer) args.get("Damage");
+		maxDamage = (Integer) args.get("MaxDamage");
+		repairCost = (int) args.get("repair-cost");
 		enchants = new HashMap<>();
 		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
 		{
@@ -700,16 +726,23 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				enchants.put(enchantment, entry.getValue());
 			}
 		}
-
-		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
-		unbreakable = (boolean) args.get("Unbreakable");
 		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
-		// customTagContainer is also unimplemented in mock.
-		customModelData = (Integer) args.get("custom-model-data");
+		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
 		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
 		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		damage = (Integer) args.get("Damage");
-		repairCost = (int) args.get("repair-cost");
+		unbreakable = (boolean) args.get("Unbreakable");
+		// customTagContainer is also unimplemented in mock.
+		customModelData = (Integer) args.get("custom-model-data");
+		hideTooltip = (boolean) args.get("HideTooltip");
+		fireResistant = (boolean) args.get("FireResistant");
+		maxStackSize = (Integer) args.get("MaxStackSize");
+		enchantmentGlintOverride = (Boolean) args.get("EnchantmentGlintOverride");
+		rarity = (ItemRarity) args.get("Rarity");
+		if (args.containsKey("ItemName")) {
+			setItemName((String) args.get("ItemName"));
+		}
+		enchantableValue = (Integer) args.get("EnchantableValue");
+
 	}
 
 	@Override
