@@ -130,7 +130,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 
 		var tmpHideFlags = meta.getItemFlags();
-		if (!tmpHideFlags.isEmpty()) {
+		if (!tmpHideFlags.isEmpty())
+		{
 			hideFlags = EnumSet.copyOf(tmpHideFlags);
 		}
 		if (meta instanceof ItemMetaMock m)
@@ -145,16 +146,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			maxStackSize = meta.getMaxStackSize();
 		}
-		if (meta.hasEnchantmentGlintOverride()) {
+		if (meta.hasEnchantmentGlintOverride())
+		{
 			enchantmentGlintOverride = meta.getEnchantmentGlintOverride();
 		}
-		if (meta.hasRarity()) {
+		if (meta.hasRarity())
+		{
 			rarity = meta.getRarity();
 		}
-		if (meta.hasItemName()) {
+		if (meta.hasItemName())
+		{
 			itemName = meta.itemName();
 		}
-		if (meta.hasEnchantable()) {
+		if (meta.hasEnchantable())
+		{
 			enchantableValue = meta.getEnchantable();
 		}
 	}
@@ -310,7 +315,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) {
+		if (this == obj)
+		{
 			return true;
 		}
 		if (!(obj instanceof ItemMeta meta))
@@ -738,7 +744,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		maxStackSize = (Integer) args.get("MaxStackSize");
 		enchantmentGlintOverride = (Boolean) args.get("EnchantmentGlintOverride");
 		rarity = (ItemRarity) args.get("Rarity");
-		if (args.containsKey("ItemName")) {
+		if (args.containsKey("ItemName"))
+		{
 			setItemName((String) args.get("ItemName"));
 		}
 		enchantableValue = (Integer) args.get("EnchantableValue");
