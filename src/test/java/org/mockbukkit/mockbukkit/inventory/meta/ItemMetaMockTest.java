@@ -1656,24 +1656,20 @@ class ItemMetaMockTest
 			}
 		}
 
-		@Test
-		void valueIsCloned()
+		@ParameterizedTest
+		@EnumSource(ItemRarity.class)
+		void valueIsCloned(ItemRarity rarity)
 		{
-			for (ItemRarity rarity : ItemRarity.values())
-			{
-				meta.setRarity(rarity);
-				assertEquals(rarity, meta.clone().getRarity());
-			}
+			meta.setRarity(rarity);
+			assertEquals(rarity, meta.clone().getRarity());
 		}
 
-		@Test
-		void valueIsCopied()
+		@ParameterizedTest
+		@EnumSource(ItemRarity.class)
+		void valueIsCopied(ItemRarity rarity)
 		{
-			for (ItemRarity rarity : ItemRarity.values())
-			{
-				meta.setRarity(rarity);
-				assertEquals(rarity, new ItemMetaMock(meta).getRarity());
-			}
+			meta.setRarity(rarity);
+			assertEquals(rarity, new ItemMetaMock(meta).getRarity());
 		}
 
 	}
