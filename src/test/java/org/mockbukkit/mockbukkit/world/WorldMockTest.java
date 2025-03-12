@@ -157,6 +157,7 @@ import org.mockbukkit.mockbukkit.entity.RavagerMock;
 import org.mockbukkit.mockbukkit.entity.RideableMinecartMock;
 import org.mockbukkit.mockbukkit.entity.SalmonMock;
 import org.mockbukkit.mockbukkit.entity.SheepMock;
+import org.mockbukkit.mockbukkit.entity.ShulkerBulletMock;
 import org.mockbukkit.mockbukkit.entity.ShulkerMock;
 import org.mockbukkit.mockbukkit.entity.SilverfishMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonHorseMock;
@@ -1442,6 +1443,7 @@ class WorldMockTest
 				Arguments.of(EntityType.ITEM_FRAME, ItemFrameMock.class),
 				Arguments.of(EntityType.GLOW_ITEM_FRAME, GlowItemFrameMock.class),
 				Arguments.of(EntityType.SHULKER, ShulkerMock.class),
+				Arguments.of(EntityType.SHULKER_BULLET, ShulkerBulletMock.class),
 				Arguments.of(EntityType.FALLING_BLOCK, FallingBlockMock.class),
 				Arguments.of(EntityType.POTION, ThrownPotionMock.class),
 				Arguments.of(EntityType.ARMADILLO, ArmadilloMock.class),
