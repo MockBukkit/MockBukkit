@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.Tag;
 import org.junit.jupiter.params.provider.Arguments;
 import net.kyori.adventure.text.Component;
@@ -48,8 +49,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -63,6 +66,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -639,17 +643,19 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void hasLocalizedName_NoLocalizedName_False()
+	void setLocalizedName_DelegatesToDisplayName()
 	{
-		assertFalse(meta.hasLocalizedName());
+		meta.setDisplayName("Pointy Object");
+		assertEquals("Pointy Object", meta.getLocalizedName());
 	}
 
 	@Test
-	void setLocalizedName_NewName_NameSetExactly()
+	void setLocalizedName_DoesNothing()
 	{
+		meta.setDisplayName("Pointy Object");
 		meta.setLocalizedName("Some name");
-		assertTrue(meta.hasLocalizedName());
-		assertEquals("Some name", meta.getLocalizedName());
+		assertFalse(meta.hasLocalizedName());
+		assertEquals("Pointy Object", meta.getLocalizedName());
 	}
 
 	@Test
@@ -701,13 +707,15 @@ class ItemMetaMockTest
 		Map<Enchantment, Integer> actual1 = meta.getEnchants();
 		Map<Enchantment, Integer> actual2 = meta.getEnchants();
 
-		assertNotSame(actual1, actual2);
-		assertEquals(actual1, actual2);
+		assertSame(ImmutableMap.of(), actual1);
+		assertSame(ImmutableMap.of(), actual2);
 
 		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
 		Map<Enchantment, Integer> actual3 = meta.getEnchants();
+		Map<Enchantment, Integer> actual4 = meta.getEnchants();
 
-		assertNotEquals(actual1, actual3);
+		assertNotSame(actual3, actual4);
+		assertEquals(actual3, actual4);
 	}
 
 	@Test
@@ -1571,6 +1579,37 @@ class ItemMetaMockTest
 			assertEquals(value, meta.getEnchantmentGlintOverride());
 		}
 
+		@Test
+		void influencesHashCode()
+		{
+			meta.setEnchantmentGlintOverride(null);
+			int hc0 = meta.hashCode();
+			meta.setEnchantmentGlintOverride(false);
+			int hc1 = meta.hashCode();
+			meta.setEnchantmentGlintOverride(true);
+			int hc2 = meta.hashCode();
+			assertNotEquals(hc0, hc1);
+			assertNotEquals(hc0, hc2);
+			assertNotEquals(hc1, hc2);
+		}
+
+		@Test
+		void valueIsCloned()
+		{
+			meta.setEnchantmentGlintOverride(true);
+			assertTrue(meta.clone().getEnchantmentGlintOverride());
+			meta.setEnchantmentGlintOverride(false);
+			assertFalse(meta.clone().getEnchantmentGlintOverride());
+		}
+
+		@Test
+		void valueIsCopied()
+		{
+			meta.setEnchantmentGlintOverride(true);
+			assertTrue(new ItemMetaMock(meta).getEnchantmentGlintOverride());
+			meta.setEnchantmentGlintOverride(false);
+			assertFalse(new ItemMetaMock(meta).getEnchantmentGlintOverride());
+		}
 	}
 
 	@Nested
@@ -1602,6 +1641,35 @@ class ItemMetaMockTest
 
 			assertTrue(meta.hasRarity());
 			assertEquals(value, meta.getRarity());
+		}
+
+		@Test
+		void influencesHashCode()
+		{
+			Set<Integer> hashcodes = new HashSet<>();
+			meta.setRarity(null);
+			hashcodes.add(meta.hashCode());
+			for (ItemRarity rarity : ItemRarity.values())
+			{
+				meta.setRarity(rarity);
+				assertTrue(hashcodes.add(meta.hashCode()));
+			}
+		}
+
+		@ParameterizedTest
+		@EnumSource(ItemRarity.class)
+		void valueIsCloned(ItemRarity rarity)
+		{
+			meta.setRarity(rarity);
+			assertEquals(rarity, meta.clone().getRarity());
+		}
+
+		@ParameterizedTest
+		@EnumSource(ItemRarity.class)
+		void valueIsCopied(ItemRarity rarity)
+		{
+			meta.setRarity(rarity);
+			assertEquals(rarity, new ItemMetaMock(meta).getRarity());
 		}
 
 	}
