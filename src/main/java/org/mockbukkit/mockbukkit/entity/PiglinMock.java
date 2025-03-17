@@ -123,19 +123,19 @@ public class PiglinMock extends PiglinAbstractMock implements Piglin
 	@Override
 	public boolean isDancing()
 	{
-		throw new UnimplementedOperationException("SetDancing was not implemented yet.");
+		throw new UnimplementedOperationException("IsDancing was not implemented yet.");
 	}
 
 	@Override
 	public void rangedAttack(LivingEntity target, float charge)
 	{
-		throw new UnimplementedOperationException("SetDancing was not implemented yet.");
+		throw new UnimplementedOperationException("RangedAttack was not implemented yet.");
 	}
 
 	@Override
 	public void setChargingAttack(boolean raiseHands)
 	{
-		throw new UnimplementedOperationException("SetDancing was not implemented yet.");
+		throw new UnimplementedOperationException("SetChargingAttack was not implemented yet.");
 	}
 
 	@Override
