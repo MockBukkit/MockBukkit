@@ -1,5 +1,5 @@
-import java.io.ByteArrayOutputStream
 import com.vanniktech.maven.publish.SonatypeHost
+import java.io.ByteArrayOutputStream
 
 plugins {
 	id("checkstyle")
@@ -49,6 +49,10 @@ tasks {
 
 	java {
 		withSourcesJar()
+	}
+
+	compileJava {
+		options.compilerArgs.addAll(listOf("-Xlint:-deprecation", "-Xlint:-removal"))
 	}
 
 	javadoc {
@@ -165,12 +169,12 @@ mavenPublishing {
 				name.set("Eve Kolb")
 				email.set("me@thelooter.de")
 			}
-			developer{
+			developer {
 				id.set("thorinwasher")
 				name.set("Hjalmar Gunnarsson")
 				email.set("officialhjalmar.gunnarsson@outlook.com")
 			}
-			developer{
+			developer {
 				id.set("4everTheOne")
 				name.set("Afonso Oliveira")
 			}
