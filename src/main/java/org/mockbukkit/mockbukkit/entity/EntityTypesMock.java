@@ -74,6 +74,8 @@ import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Piglin;
+import org.bukkit.entity.PiglinBrute;
 import org.bukkit.entity.Pillager;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
@@ -287,6 +289,8 @@ public final class EntityTypesMock
 			.register(Panda.class, PandaMock.class, PandaMock::new)
 			.register(Parrot.class, ParrotMock.class, ParrotMock::new)
 			.register(Pig.class, PigMock.class, PigMock::new)
+			.register(Piglin.class, PiglinMock.class, PiglinMock::new)
+			.register(PiglinBrute.class, PiglinBruteMock.class, PiglinBruteMock::new)
 			.register(PigZombie.class, PigZombieMock.class, PigZombieMock::new)
 			.register(Pillager.class, PillagerMock.class, PillagerMock::new)
 			.register(PolarBear.class, PolarBearMock.class, PolarBearMock::new)
