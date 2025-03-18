@@ -71,26 +71,22 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
 	private @Nullable String displayName = null;
-	private @Nullable String localizedName = null;
 	private @Nullable List<String> lore = null;
 	private @Nullable Integer damage = null;
+	private @Nullable Integer maxDamage;
 	private int repairCost = 0;
-	private @Nullable Map<Enchantment, Integer> enchants = new HashMap<>();
-	private Multimap<Attribute, AttributeModifier> attributeModifiers;
-	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
-	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
+	private @NotNull Map<Enchantment, Integer> enchants = new HashMap<>();
+	private @NotNull Multimap<Attribute, AttributeModifier> attributeModifiers = LinkedHashMultimap.create();
+	private @NotNull Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
+	private @NotNull PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
 	private @Nullable Integer customModelData = null;
-	private Set<Namespaced> destroyableKeys = Sets.newHashSet();
-	private Set<Namespaced> placeableKeys = Sets.newHashSet();
-	private Integer maxDamage;
 	private boolean hideTooltip;
 	private boolean fireResistant;
-	private Integer maxStackSize = null;
-	private Boolean enchantmentGlintOverride = null;
-	private ItemRarity rarity;
-	private Component itemName = null;
-
+	private @Nullable Integer maxStackSize = null;
+	private @Nullable Boolean enchantmentGlintOverride = null;
+	private @Nullable ItemRarity rarity;
+	private @Nullable Component itemName = null;
 	private @Nullable Integer enchantableValue;
 
 	/**
@@ -101,20 +97,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	/**
-	 * Constructs a new {@link ItemMetaMock}, cloning the data from another.
+	 * Constructs a new {@link ItemMetaMock}, copying the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta The meta to copy.
 	 */
 	public ItemMetaMock(@NotNull ItemMeta meta)
 	{
-		unbreakable = meta.isUnbreakable();
-		enchants = new HashMap<>(meta.getEnchants());
-		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
-		hideFlags.addAll(meta.getItemFlags());
-		if (meta.hasMaxStackSize())
-		{
-			maxStackSize = meta.getMaxStackSize();
-		}
 		if (meta.hasDisplayName())
 		{
 			displayName = GsonComponentSerializer.gson().serialize(meta.displayName());
@@ -132,13 +120,47 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			this.repairCost = r.getRepairCost();
 		}
-		if (meta instanceof ItemMetaMock m)
+		if (meta.hasEnchants())
 		{
-			this.persistentDataContainer = m.persistentDataContainer;
+			enchants = new HashMap<>(meta.getEnchants());
 		}
 		if (meta.hasAttributeModifiers())
 		{
 			this.attributeModifiers = LinkedHashMultimap.create(meta.getAttributeModifiers());
+		}
+
+		var tmpHideFlags = meta.getItemFlags();
+		if (!tmpHideFlags.isEmpty())
+		{
+			hideFlags = EnumSet.copyOf(tmpHideFlags);
+		}
+		if (meta instanceof ItemMetaMock m)
+		{
+			this.persistentDataContainer = m.persistentDataContainer;
+		}
+		unbreakable = meta.isUnbreakable();
+		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
+		hideTooltip = meta.isHideTooltip();
+		fireResistant = meta.isFireResistant();
+		if (meta.hasMaxStackSize())
+		{
+			maxStackSize = meta.getMaxStackSize();
+		}
+		if (meta.hasEnchantmentGlintOverride())
+		{
+			enchantmentGlintOverride = meta.getEnchantmentGlintOverride();
+		}
+		if (meta.hasRarity())
+		{
+			rarity = meta.getRarity();
+		}
+		if (meta.hasItemName())
+		{
+			itemName = meta.itemName();
+		}
+		if (meta.hasEnchantable())
+		{
+			enchantableValue = meta.getEnchantable();
 		}
 	}
 
@@ -272,7 +294,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		return Objects.hash(
 				displayName,
 				lore,
-				customModelData,
+				damage,
 				repairCost,
 				enchants,
 				attributeModifiers,
@@ -280,29 +302,28 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				persistentDataContainer,
 				unbreakable,
 				customModelData,
-				damage,
 				maxDamage,
 				hideTooltip,
 				fireResistant,
-				maxStackSize);
+				maxStackSize,
+				enchantmentGlintOverride,
+				rarity,
+				itemName,
+				enchantableValue);
 	}
 
 	@Override
 	public boolean equals(Object obj)
 	{
+		if (this == obj)
+		{
+			return true;
+		}
 		if (!(obj instanceof ItemMeta meta))
 		{
 			return false;
 		}
 
-		if (!isDisplayNameEqual(meta))
-		{
-			return false;
-		}
-		if (!isLoreEquals(meta))
-		{
-			return false;
-		}
 		if (obj instanceof Damageable damageable)
 		{
 			if (hasDamage() != damageable.hasDamage() || hasDamage() && getDamage() != damageable.getDamage())
@@ -329,29 +350,25 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			return false;
 		}
-		if (!Objects.equals(hasMaxStackSize(), meta.hasMaxStackSize()))
-		{
-			return false;
-		}
-		if (hasMaxStackSize() && !Objects.equals(getMaxStackSize(), meta.getMaxStackSize()))
-		{
-			return false;
-		}
-		if (!Objects.equals(hasCustomModelData(), meta.hasCustomModelData()))
-		{
-			return false;
-		}
-		if (hasCustomModelData() && !Objects.equals(getCustomModelData(), meta.getCustomModelData()))
-		{
-			return false;
-		}
 
-		return isUnbreakable() == meta.isUnbreakable()
+		return isDisplayNameEqual(meta)
+				&& isLoreEquals(meta)
+				&& isUnbreakable() == meta.isUnbreakable()
 				&& isHideTooltip() == meta.isHideTooltip()
 				&& isFireResistant() == meta.isFireResistant()
 				&& Objects.equals(getEnchants(), meta.getEnchants())
+				&& Objects.equals(hasMaxStackSize(), meta.hasMaxStackSize())
+				&& (!hasMaxStackSize() || Objects.equals(getMaxStackSize(), meta.getMaxStackSize()))
+				&& Objects.equals(hasCustomModelData(), meta.hasCustomModelData())
+				&& (!hasCustomModelData() || Objects.equals(getCustomModelData(), meta.getCustomModelData()))
+				&& Objects.equals(hasEnchantmentGlintOverride(), meta.hasEnchantmentGlintOverride())
+				&& (!hasEnchantmentGlintOverride() || Objects.equals(getEnchantmentGlintOverride(), meta.getEnchantmentGlintOverride()))
+				&& Objects.equals(hasRarity(), meta.hasRarity())
+				&& (!hasRarity() || Objects.equals(getRarity(), meta.getRarity()))
+				&& Objects.equals(hasEnchantable(), meta.hasEnchantable())
+				&& (!hasEnchantable() || Objects.equals(getEnchantable(), meta.getEnchantable()))
 				&& Objects.equals(hasAttributeModifiers(), meta.hasAttributeModifiers())
-				&& Objects.equals(getAttributeModifiers(), meta.getAttributeModifiers())
+				&& (!hasAttributeModifiers() || Objects.equals(getAttributeModifiers(), meta.getAttributeModifiers()))
 				&& Objects.equals(getItemFlags(), meta.getItemFlags())
 				&& Objects.equals(getPersistentDataContainer(), meta.getPersistentDataContainer());
 	}
@@ -368,15 +385,24 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				meta.lore = new ArrayList<>(lore);
 			}
 
+			meta.damage = damage;
+			meta.maxDamage = maxDamage;
+			meta.repairCost = repairCost;
+			meta.enchants = new HashMap<>(enchants);
+			meta.attributeModifiers = attributeModifiers != null ? LinkedHashMultimap.create(attributeModifiers) : null;
+			meta.hideFlags = EnumSet.copyOf(hideFlags);
+			meta.persistentDataContainer = new PersistentDataContainerMock(persistentDataContainer);
 			meta.unbreakable = unbreakable;
 			meta.customModelData = customModelData;
-			meta.enchants = new HashMap<>(enchants);
-			meta.persistentDataContainer = new PersistentDataContainerMock(persistentDataContainer);
-			meta.damage = damage;
-			meta.repairCost = repairCost;
-			meta.hideFlags = EnumSet.copyOf(hideFlags);
-			meta.destroyableKeys = destroyableKeys != null ? new HashSet<>(destroyableKeys) : null;
-			meta.placeableKeys = placeableKeys != null ? new HashSet<>(placeableKeys) : null;
+
+			meta.hideTooltip = hideTooltip;
+			meta.fireResistant = fireResistant;
+			meta.maxStackSize = maxStackSize;
+			meta.enchantmentGlintOverride = enchantmentGlintOverride;
+			meta.rarity = rarity;
+			meta.itemName = itemName;
+			meta.enchantableValue = enchantableValue;
+
 			return meta;
 		}
 		catch (CloneNotSupportedException e)
@@ -610,43 +636,56 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("display-name", this.displayName);
 		}
 
-		if (this.localizedName != null)
-		{
-			map.put("loc-name", this.localizedName);
-		}
-
 		if (this.lore != null)
 		{
 			map.put("lore", this.lore);
 		}
-
+		if (this.damage != null)
+		{
+			map.put("Damage", this.damage);
+		}
+		if (this.maxDamage != null)
+		{
+			map.put("MaxDamage", this.maxDamage);
+		}
+		map.put("repair-cost", this.repairCost);
+		map.put("enchants", this.enchants.entrySet().stream()
+				.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
+		if (hasAttributeModifiers())
+		{
+			map.put("attribute-modifiers", this.attributeModifiers);
+		}
+		map.put("ItemFlags", this.hideFlags);
+		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
+		map.put("Unbreakable", this.unbreakable);
 		if (this.customModelData != null)
 		{
 			map.put("custom-model-data", this.customModelData);
 		}
 
-		if (this.enchants != null)
+		map.put("HideTooltip", this.hideTooltip);
+		map.put("FireResistant", this.fireResistant);
+		if (this.maxStackSize != null)
 		{
-			map.put("enchants", this.enchants.entrySet().stream()
-					.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
+			map.put("MaxStackSize", this.maxStackSize);
 		}
-		else
+		if (this.enchantmentGlintOverride != null)
 		{
-			map.put("enchants", new HashMap<String, Integer>());
+			map.put("EnchantmentGlintOverride", this.enchantmentGlintOverride);
+		}
+		if (this.rarity != null)
+		{
+			map.put("Rarity", this.rarity);
+		}
+		if (this.hasItemName())
+		{
+			map.put("ItemName", this.getItemName());
+		}
+		if (this.enchantableValue != null)
+		{
+			map.put("EnchantableValue", this.enchantableValue);
 		}
 
-		if (hasAttributeModifiers())
-		{
-			map.put("attribute-modifiers", this.attributeModifiers);
-		}
-
-		map.put("repair-cost", this.repairCost);
-		map.put("ItemFlags", this.hideFlags);
-		map.put("Unbreakable", this.unbreakable);
-		if (this.damage != null)
-		{
-			map.put("Damage", this.damage);
-		}
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
@@ -655,7 +694,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		*/
 
-		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
 		map.put("meta-type", getTypeName());
 
 		// Return map
@@ -682,8 +720,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		displayName = (String) args.get("display-name");
 		lore = (List<String>) args.get("lore");
-		localizedName = (String) args.get("loc-name");
-
+		damage = (Integer) args.get("Damage");
+		maxDamage = (Integer) args.get("MaxDamage");
+		repairCost = (int) args.get("repair-cost");
 		enchants = new HashMap<>();
 		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
 		{
@@ -693,39 +732,45 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				enchants.put(enchantment, entry.getValue());
 			}
 		}
-
-		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
-		unbreakable = (boolean) args.get("Unbreakable");
 		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
-		// customTagContainer is also unimplemented in mock.
-		customModelData = (Integer) args.get("custom-model-data");
+		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
 		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
 		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		damage = (Integer) args.get("Damage");
-		repairCost = (int) args.get("repair-cost");
-		destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
-		placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
+		unbreakable = (boolean) args.get("Unbreakable");
+		// customTagContainer is also unimplemented in mock.
+		customModelData = (Integer) args.get("custom-model-data");
+		hideTooltip = (boolean) args.get("HideTooltip");
+		fireResistant = (boolean) args.get("FireResistant");
+		maxStackSize = (Integer) args.get("MaxStackSize");
+		enchantmentGlintOverride = (Boolean) args.get("EnchantmentGlintOverride");
+		rarity = (ItemRarity) args.get("Rarity");
+		if (args.containsKey("ItemName"))
+		{
+			setItemName((String) args.get("ItemName"));
+		}
+		enchantableValue = (Integer) args.get("EnchantableValue");
+
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public boolean hasLocalizedName()
 	{
-		return localizedName != null;
+		return false;
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @NotNull String getLocalizedName()
 	{
-		return localizedName;
+		return getDisplayName();
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setLocalizedName(@Nullable String name)
 	{
-		localizedName = name;
+		// no-op
 	}
 
 	@Override
@@ -749,7 +794,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchants()
 	{
-		return enchants != null ? ImmutableSortedMap.copyOf(enchants,
+		return !enchants.isEmpty() ? ImmutableSortedMap.copyOf(enchants,
 				Comparator.comparing(o -> o.getKey().toString())
 		) : ImmutableMap.of();
 	}
@@ -789,13 +834,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
-		boolean b = this.hasEnchants() && enchants.remove(ench) != null;
-		if (enchants != null && enchants.isEmpty())
-		{
-			enchants = null;
-		}
-
-		return b;
+		return checkConflictingEnchants(this.enchants, ench);
 	}
 
 	@Override
@@ -883,18 +922,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.repairCost = cost;
 	}
 
-	private void checkAttributeMap()
-	{
-		if (this.attributeModifiers == null)
-		{
-			this.attributeModifiers = LinkedHashMultimap.create();
-		}
-	}
-
 	@Override
 	public boolean hasAttributeModifiers()
 	{
-		return attributeModifiers != null && !attributeModifiers.isEmpty();
+		return !attributeModifiers.isEmpty();
 	}
 
 	@Override
@@ -914,7 +945,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			return;
 		}
 
-		this.checkAttributeMap();
 		this.attributeModifiers.clear();
 
 		attributeModifiers.entries().stream()
@@ -925,7 +955,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(@NotNull EquipmentSlot slot)
 	{
-		this.checkAttributeMap();
 		SetMultimap<Attribute, AttributeModifier> result = LinkedHashMultimap.create();
 
 		this.attributeModifiers.entries().stream()
@@ -939,7 +968,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public Collection<AttributeModifier> getAttributeModifiers(@NotNull Attribute attribute)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
-		this.checkAttributeMap();
 		return this.attributeModifiers.containsKey(attribute)
 				? ImmutableList.copyOf(this.attributeModifiers.get(attribute))
 				: null;
@@ -950,7 +978,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		Preconditions.checkNotNull(modifier, "AttributeModifier cannot be null");
-		this.checkAttributeMap();
 		for (Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entries())
 		{
 			Preconditions.checkArgument(!entry.getValue().getKey().equals(modifier.getKey()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
@@ -962,14 +989,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public boolean removeAttributeModifier(@NotNull Attribute attribute)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
-		this.checkAttributeMap();
 		return !this.attributeModifiers.removeAll(attribute).isEmpty();
 	}
 
 	@Override
 	public boolean removeAttributeModifier(@NotNull EquipmentSlot slot)
 	{
-		this.checkAttributeMap();
 		// Match against null because as of 1.13, AttributeModifiers without a set slot are active in any slot.
 		return this.attributeModifiers.entries().removeIf(entry -> entry.getValue().getSlot() == null || entry.getValue().getSlot() == slot);
 	}
@@ -979,7 +1004,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		Preconditions.checkNotNull(modifier, "AttributeModifier cannot be null");
-		this.checkAttributeMap();
 
 		return this.attributeModifiers.entries().removeIf(entry ->
 				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getKey().equals(modifier.getKey()))

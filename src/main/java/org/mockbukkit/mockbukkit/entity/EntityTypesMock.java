@@ -83,6 +83,7 @@ import org.bukkit.entity.Ravager;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Shulker;
+import org.bukkit.entity.ShulkerBullet;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
@@ -297,6 +298,7 @@ public final class EntityTypesMock
 			.register(Salmon.class, SalmonMock.class, SalmonMock::new)
 			.register(Sheep.class, SheepMock.class, SheepMock::new)
 			.register(Shulker.class, ShulkerMock.class, ShulkerMock::new)
+			.register(ShulkerBullet.class, ShulkerBulletMock.class, ShulkerBulletMock::new)
 			.register(Silverfish.class, SilverfishMock.class, SilverfishMock::new)
 			.register(Skeleton.class, SkeletonMock.class, SkeletonMock::new)
 			.register(SkeletonHorse.class, SkeletonHorseMock.class, SkeletonHorseMock::new)
