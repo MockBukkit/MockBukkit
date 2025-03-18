@@ -175,6 +175,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private int expTotal = 0;
 	private float exp = 0;
 	private int expCooldown = 0;
+	private int deathScreenScore = 0;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
@@ -3485,15 +3486,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public int getDeathScreenScore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.deathScreenScore;
 	}
 
 	@Override
-	public void setDeathScreenScore(int score)
+	public void setDeathScreenScore(int deathScreenScore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.deathScreenScore = deathScreenScore;
 	}
-  
+
 }
