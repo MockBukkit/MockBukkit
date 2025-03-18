@@ -77,9 +77,9 @@ public abstract class PiglinAbstractMock extends MonsterMock implements PiglinAb
 	}
 
 	@Override
-	public void setBaby(boolean flag)
+	public void setBaby(boolean baby)
 	{
-		this.isBaby = flag;
+		this.isBaby = baby;
 	}
 
 	@Override
