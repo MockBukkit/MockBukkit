@@ -475,6 +475,7 @@ public class BlockDataMock implements BlockData
 			case AMETHYST_CLUSTER -> new AmethystClusterDataMock(material);
 			case LEVER -> new SwitchDataMock(material);
 			case BAMBOO -> new BambooDataMock();
+			case DECORATED_POT -> new DecoratedPotDataMock();
 			default -> new BlockDataMock(material);
 		};
 	}
