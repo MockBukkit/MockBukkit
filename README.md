@@ -154,25 +154,60 @@ development of MockBukkit.
 
 ### Using MockBukkit
 
-A plugin can be loaded in this initialiser block.
+A plugin can be loaded in this initializer block.
 
 ```java
-private ServerMock server;
-private MyPlugin plugin;
-
-@BeforeEach
-public void setUp()
+@ExtendsWith(MockBukkitExtension.class)
+class MyPluginTest
 {
-    server = MockBukkit.mock();
-    plugin = MockBukkit.load(MyPlugin.class);
-}
+    @MockBukkitInject
+    private ServerMock server;
+    private MyPlugin plugin;
 
-@AfterEach
-public void tearDown()
-{
-    MockBukkit.unmock();
+    @BeforeEach
+    void setUp()
+    {
+        plugin = MockBukkit.load(MyPlugin.class);
+    }
+    
+    @Test
+    void test1()
+    {
+        // Your test goes here   
+    }
+    
 }
 ```
+
+<details>
+<summary>Using manual operation</summary>
+
+```java
+class MyPluginTest {
+
+    private ServerMock server;
+    private MyPlugin plugin;
+
+    @BeforeEach
+    public void setUp() {
+        server = MockBukkit.mock();
+        plugin = MockBukkit.load(MyPlugin.class);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        MockBukkit.unmock();
+    }
+
+    @Test
+    void test1()
+    {
+        // Your test goes here   
+    }
+    
+}
+```
+</details>
 
 ## :sparkles: Features
 
