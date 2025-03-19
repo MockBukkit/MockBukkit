@@ -157,7 +157,7 @@ development of MockBukkit.
 A plugin can be loaded in this initializer block.
 
 ```java
-@ExtendsWith(MockBukkitExtension.class)
+@ExtendWith(MockBukkitExtension.class)
 class MyPluginTest
 {
     @MockBukkitInject
@@ -180,7 +180,7 @@ class MyPluginTest
 ```
 
 <details>
-<summary>Using manual operation</summary>
+<summary>Without junit annotation</summary>
 
 ```java
 class MyPluginTest {
