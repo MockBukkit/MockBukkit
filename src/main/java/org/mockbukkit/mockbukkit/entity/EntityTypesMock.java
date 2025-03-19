@@ -69,6 +69,7 @@ import org.bukkit.entity.Marker;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
+import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
@@ -283,6 +284,7 @@ public final class EntityTypesMock
 			.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 			.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 			.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
+			.register(OminousItemSpawner.class, OminousItemSpawnerMock.class, OminousItemSpawnerMock::new)
 			.register(Painting.class, PaintingMock.class, PaintingMock::new)
 			.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
