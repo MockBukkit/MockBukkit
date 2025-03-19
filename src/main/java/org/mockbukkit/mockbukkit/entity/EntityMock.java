@@ -128,7 +128,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
 
 	/**
-	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link EntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.

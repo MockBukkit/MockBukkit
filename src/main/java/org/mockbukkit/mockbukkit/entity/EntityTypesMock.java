@@ -62,6 +62,7 @@ import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
@@ -272,6 +273,7 @@ public final class EntityTypesMock
 			.register(JungleChestBoat.class, JungleChestBoatMock.class, JungleChestBoatMock::new)
 			.register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new)
 			.register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new)
+			.register(LightningStrike.class, LightningStrikeMock.class, LightningStrikeMock::new)
 			.register(Llama.class, LlamaMock.class, LlamaMock::new)
 			.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 			.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
