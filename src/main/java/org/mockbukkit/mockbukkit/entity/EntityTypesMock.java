@@ -108,6 +108,7 @@ import org.bukkit.entity.TraderLlama;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
+import org.bukkit.entity.Vex;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
@@ -330,6 +331,7 @@ public final class EntityTypesMock
 			.register(Trident.class, TridentMock.class, TridentMock::new)
 			.register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new)
 			.register(Turtle.class, TurtleMock.class, TurtleMock::new)
+			.register(Vex.class, VexMock.class, VexMock::new)
 			.register(Villager.class, VillagerMock.class, VillagerMock::new)
 			.register(Vindicator.class, VindicatorMock.class, VindicatorMock::new)
 			.register(Warden.class, WardenMock.class, WardenMock::new)
