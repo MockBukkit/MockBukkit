@@ -73,6 +73,7 @@ import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
+import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Piglin;
@@ -290,6 +291,7 @@ public final class EntityTypesMock
 			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 			.register(Panda.class, PandaMock.class, PandaMock::new)
 			.register(Parrot.class, ParrotMock.class, ParrotMock::new)
+			.register(Phantom.class, PhantomMock.class, PhantomMock::new)
 			.register(Pig.class, PigMock.class, PigMock::new)
 			.register(Piglin.class, PiglinMock.class, PiglinMock::new)
 			.register(PiglinBrute.class, PiglinBruteMock.class, PiglinBruteMock::new)
