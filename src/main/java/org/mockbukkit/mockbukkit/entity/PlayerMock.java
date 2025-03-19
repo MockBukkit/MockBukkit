@@ -1973,6 +1973,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setLevel(int level)
 	{
+		if (level < 0)
+			throw new IllegalArgumentException("Experience level must not be negative");
 		this.expLevel = level;
 	}
 
@@ -1985,7 +1987,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setTotalExperience(int exp)
 	{
-		this.expTotal = Math.max(0, exp);
+		if (exp < 0)
+			throw new IllegalArgumentException("Total experience points must not be negative");
+		this.expTotal = exp;
 	}
 
 	@Override
