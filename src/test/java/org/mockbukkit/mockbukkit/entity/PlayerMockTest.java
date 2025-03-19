@@ -388,6 +388,7 @@ class PlayerMockTest
 		assertEquals(0.5f, player.getExp(), 1e-6);
 		assertEquals(13, player.getFoodLevel());
 	}
+
 	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
@@ -758,6 +759,12 @@ class PlayerMockTest
 	}
 
 	@Test
+	void setLevel_LessThanZero_ExceptionThrown()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setLevel(-1));
+	}
+
+	@Test
 	void setExp_SomeValue_LevelSetExactly()
 	{
 		player.setExp(0.5F);
@@ -784,10 +791,9 @@ class PlayerMockTest
 	}
 
 	@Test
-	void setTotalExperience_NegativeValue_ClampedAtZero()
+	void setTotalExperience_LessThanZero_ExceptionThrown()
 	{
-		player.setTotalExperience(-200);
-		assertEquals(0, player.getTotalExperience(), 0);
+		assertThrows(IllegalArgumentException.class, () -> player.setTotalExperience(-200));
 	}
 
 	@Test
@@ -2768,6 +2774,7 @@ class PlayerMockTest
 	@Nested
 	class DeathScreenScore
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -2776,7 +2783,7 @@ class PlayerMockTest
 
 		@ParameterizedTest
 		@ValueSource(ints = {
-			0, 1, 2, 3, 4, 5, 10, 200, 3000
+				0, 1, 2, 3, 4, 5, 10, 200, 3000
 		})
 		void givenPossibleValues(int value)
 		{
