@@ -70,6 +70,7 @@ import org.bukkit.entity.Marker;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
+import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
@@ -109,6 +110,7 @@ import org.bukkit.entity.TraderLlama;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
+import org.bukkit.entity.Vex;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Warden;
@@ -286,6 +288,7 @@ public final class EntityTypesMock
 			.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 			.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 			.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
+			.register(OminousItemSpawner.class, OminousItemSpawnerMock.class, OminousItemSpawnerMock::new)
 			.register(Painting.class, PaintingMock.class, PaintingMock::new)
 			.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
@@ -332,6 +335,7 @@ public final class EntityTypesMock
 			.register(Trident.class, TridentMock.class, TridentMock::new)
 			.register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new)
 			.register(Turtle.class, TurtleMock.class, TurtleMock::new)
+			.register(Vex.class, VexMock.class, VexMock::new)
 			.register(Villager.class, VillagerMock.class, VillagerMock::new)
 			.register(Vindicator.class, VindicatorMock.class, VindicatorMock::new)
 			.register(Warden.class, WardenMock.class, WardenMock::new)
