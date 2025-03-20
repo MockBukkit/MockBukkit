@@ -17,7 +17,7 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class ItemEntityMock extends EntityMock implements Item
+public class ItemMock extends EntityMock implements Item
 {
 
 	private ItemStack item;
@@ -27,13 +27,13 @@ public class ItemEntityMock extends EntityMock implements Item
 	private TriState frictionState = TriState.NOT_SET;
 
 	/**
-	 * Constructs a new {@link ItemEntityMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link ItemStack}.
+	 * Constructs a new {@link ItemMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link ItemStack}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 * @param item   The item this entity represents.
 	 */
-	public ItemEntityMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull ItemStack item)
+	public ItemMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull ItemStack item)
 	{
 		super(server, uuid);
 		Preconditions.checkNotNull(item, "Item cannot be null");
