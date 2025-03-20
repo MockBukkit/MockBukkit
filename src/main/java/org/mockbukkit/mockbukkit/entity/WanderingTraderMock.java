@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.WanderingTrader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,6 +92,12 @@ public class WanderingTraderMock extends AbstractVillagerMock implements Wanderi
 	protected void updateTrades()
 	{
 		// TODO: Villager trades at net.minecraft.world.entity.npc.WanderingTrader#updateTrades()
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.WANDERING_TRADER;
 	}
 
 }

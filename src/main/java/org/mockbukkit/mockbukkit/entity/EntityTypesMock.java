@@ -113,6 +113,7 @@ import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Vex;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Vindicator;
+import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.Witch;
@@ -338,6 +339,7 @@ public final class EntityTypesMock
 			.register(Vex.class, VexMock.class, VexMock::new)
 			.register(Villager.class, VillagerMock.class, VillagerMock::new)
 			.register(Vindicator.class, VindicatorMock.class, VindicatorMock::new)
+			.register(WanderingTrader.class, WanderingTraderMock.class, WanderingTraderMock::new)
 			.register(Warden.class, WardenMock.class, WardenMock::new)
 			.register(WindCharge.class, WindChargeMock.class, WindChargeMock::new)
 			.register(Witch.class, WitchMock.class, WitchMock::new)
