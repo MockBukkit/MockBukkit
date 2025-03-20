@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.spawner.SpawnRule;
 import org.bukkit.block.spawner.SpawnerEntry;
@@ -11,13 +10,29 @@ import org.bukkit.entity.minecart.SpawnerMinecart;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link SpawnerMinecart}.
+ *
+ * @see MinecartMock
+ */
 public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 {
+	private int spawnCount = 4;
+	private int spawnDelay = 20;
+	private int spawnRange = 4;
+	private int minSpawnDelay = 200;
+	private int maxSpawnDelay = 800;
+	private int requiredPlayerRange = 16;
+	private int maxNearbyEntities = 6;
+
+	private @Nullable EntityType spawnerType;
 
 	/**
 	 * Constructs a new {@link SpawnerMinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -45,50 +60,89 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	@Override
 	public @Nullable EntityType getSpawnedType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spawnerType;
 	}
 
 	@Override
 	public void setSpawnedType(@Nullable EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(entityType != EntityType.UNKNOWN, "Can't spawn EntityType %s from mob spawners!", entityType);
+		this.spawnerType = entityType;
 	}
 
 	@Override
 	public int getDelay()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spawnDelay;
+	}
+
+	@Override
+	public void setDelay(int delay)
+	{
+		this.spawnDelay = delay;
+	}
+
+	@Override
+	public int getMinSpawnDelay()
+	{
+		return this.minSpawnDelay;
+	}
+
+	@Override
+	public void setMinSpawnDelay(int spawnDelay)
+	{
+		Preconditions.checkArgument(spawnDelay <= this.getMaxSpawnDelay(), "Minimum Spawn Delay must be less than or equal to Maximum Spawn Delay");
+		this.minSpawnDelay = spawnDelay;
+	}
+
+	@Override
+	public int getMaxSpawnDelay()
+	{
+		return this.maxSpawnDelay;
+	}
+
+	@Override
+	public void setMaxSpawnDelay(int spawnDelay)
+	{
+		Preconditions.checkArgument(spawnDelay > 0, "Maximum Spawn Delay must be greater than 0.");
+		Preconditions.checkArgument(spawnDelay >= this.getMinSpawnDelay(), "Maximum Spawn Delay must be greater than or equal to Minimum Spawn Delay");
+		this.maxSpawnDelay = spawnDelay;
+	}
+
+	@Override
+	public int getSpawnCount()
+	{
+		return this.spawnCount;
+	}
+
+	@Override
+	public void setSpawnCount(int count)
+	{
+		this.spawnCount = count;
 	}
 
 	@Override
 	public int getRequiredPlayerRange()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.requiredPlayerRange;
 	}
 
 	@Override
-	public void setRequiredPlayerRange(int i)
+	public void setRequiredPlayerRange(int requiredPlayerRange)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.requiredPlayerRange = requiredPlayerRange;
 	}
 
 	@Override
 	public int getSpawnRange()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spawnRange;
 	}
 
 	@Override
-	public void setSpawnRange(int i)
+	public void setSpawnRange(int spawnRange)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnRange = spawnRange;
 	}
 
 	@Override
@@ -141,66 +195,15 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	}
 
 	@Override
-	public void setDelay(int i)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getMinSpawnDelay()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setMinSpawnDelay(int i)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getMaxSpawnDelay()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setMaxSpawnDelay(int i)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getSpawnCount()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSpawnCount(int i)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getMaxNearbyEntities()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.maxNearbyEntities;
 	}
 
 	@Override
-	public void setMaxNearbyEntities(int i)
+	public void setMaxNearbyEntities(int maxNearbyEntities)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.maxNearbyEntities = maxNearbyEntities;
 	}
 
 	@Override
