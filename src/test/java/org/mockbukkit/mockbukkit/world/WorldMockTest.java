@@ -132,8 +132,9 @@ import org.mockbukkit.mockbukkit.entity.IllusionerMock;
 import org.mockbukkit.mockbukkit.entity.InteractionMock;
 import org.mockbukkit.mockbukkit.entity.IronGolemMock;
 import org.mockbukkit.mockbukkit.entity.ItemDisplayMock;
-import org.mockbukkit.mockbukkit.entity.ItemMock;
+import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.ItemFrameMock;
+import org.mockbukkit.mockbukkit.entity.ItemMock;
 import org.mockbukkit.mockbukkit.entity.LeashHitchMock;
 import org.mockbukkit.mockbukkit.entity.LlamaMock;
 import org.mockbukkit.mockbukkit.entity.LlamaSpitMock;
@@ -394,6 +395,7 @@ class WorldMockTest
 		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClass(ZombieMock.class).size());
 		assertEquals(1, world.getEntitiesByClass(ItemMock.class).size());
+		assertEquals(1, world.getEntitiesByClass(ItemEntityMock.class).size());
 	}
 
 	@Test
@@ -404,7 +406,8 @@ class WorldMockTest
 		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClasses(ZombieMock.class).size());
 		assertEquals(1, world.getEntitiesByClasses(ItemMock.class).size());
-		assertEquals(2, world.getEntitiesByClasses(ZombieMock.class, ItemMock.class).size());
+		assertEquals(1, world.getEntitiesByClasses(ItemEntityMock.class).size());
+		assertEquals(2, world.getEntitiesByClasses(ZombieMock.class, ItemEntityMock.class).size());
 	}
 
 	@Test
@@ -416,7 +419,8 @@ class WorldMockTest
 		world.dropItem(new Location(world, 0, 0, 0), new ItemStackMock(Material.STONE));
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemMock.class }).size());
-		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemMock.class }).size());
+		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
+		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
 	}
 
 	@Test
