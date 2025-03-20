@@ -107,7 +107,7 @@ import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.EntityTypesMock;
-import org.mockbukkit.mockbukkit.entity.ItemMock;
+import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.MobMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
@@ -812,7 +812,8 @@ public class WorldMock implements World
 		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
 		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
-		ItemMock entity = new ItemMock(server, UUID.randomUUID(), item);
+		// To avoid breaking changes, this should be kept until we decide to remove the ItemEntityMock class
+		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(location);
 
 		if (function != null)
