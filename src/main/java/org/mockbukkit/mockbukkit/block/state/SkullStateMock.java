@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import net.kyori.adventure.text.Component;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.MaterialTags;
@@ -227,6 +228,18 @@ public class SkullStateMock extends TileStateMock implements Skull
 	public void setSkullType(SkullType skullType)
 	{
 		throw new UnsupportedOperationException("Must change block type");
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component component)
+	{
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
