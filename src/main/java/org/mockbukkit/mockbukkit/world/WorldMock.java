@@ -812,6 +812,7 @@ public class WorldMock implements World
 		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
 		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
+		// To avoid breaking changes, this should be kept until we decide to remove the ItemEntityMock class
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(location);
 

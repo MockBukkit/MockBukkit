@@ -19,7 +19,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ItemEntityMockTest
+class ItemMockTest
 {
 
 	private ServerMock server;
@@ -49,7 +49,7 @@ class ItemEntityMockTest
 	@Test
 	void testEntityType()
 	{
-		Item item = new ItemEntityMock(server, UUID.randomUUID(), new ItemStackMock(Material.STONE));
+		Item item = new ItemMock(server, UUID.randomUUID(), new ItemStackMock(Material.STONE));
 		assertEquals(EntityType.ITEM, item.getType());
 	}
 

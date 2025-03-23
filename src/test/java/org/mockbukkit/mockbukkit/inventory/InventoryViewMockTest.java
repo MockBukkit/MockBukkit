@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
+import org.mockbukkit.mockbukkit.entity.ItemMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.List;
@@ -250,11 +251,14 @@ class InventoryViewMockTest
 
 		List<Entity> entities = player.getWorld().getEntities().stream().filter(p -> !(p instanceof Player)).toList();
 		assertEquals(1, entities.size());
+		assertInstanceOf(ItemMock.class, entities.getFirst());
 		assertInstanceOf(ItemEntityMock.class, entities.getFirst());
 
+		assertEquals(sword, ((ItemMock) entities.getFirst()).getItemStack());
 		assertEquals(sword, ((ItemEntityMock) entities.getFirst()).getItemStack());
 
 		sword.setAmount(2);
+		assertNotEquals(sword, ((ItemMock) entities.getFirst()).getItemStack());
 		assertNotEquals(sword, ((ItemEntityMock) entities.getFirst()).getItemStack());
 	}
 
