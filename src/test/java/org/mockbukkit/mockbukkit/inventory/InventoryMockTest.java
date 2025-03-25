@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -864,6 +865,21 @@ class InventoryMockTest
 			{
 				assertFalse(inventoryA.isIdentical(inventoryB));
 			}
+		}
+
+	}
+
+	@Nested
+	class Issues
+	{
+
+		@Test
+		@DisplayName("ItemStacks should not be cloned, they should be mirrored.")
+		void issue1322()
+		{
+			inventory.setItem(0, ItemStack.of(Material.DIAMOND, 3));
+			inventory.getItem(0).setAmount(15);
+			assertEquals(15, inventory.getItem(0).getAmount());
 		}
 
 	}
