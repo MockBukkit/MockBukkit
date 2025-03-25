@@ -100,7 +100,7 @@ class InventoryMockTest
 	}
 
 	@Test
-	void getItem_IsCloned()
+	void getItem_IsMirrored()
 	{
 		inventory.setItem(0, new ItemStackMock(Material.DIAMOND, 1));
 		ItemStack item = inventory.getItem(0);
@@ -109,8 +109,9 @@ class InventoryMockTest
 		assertEquals(item, clone);
 
 		item.setAmount(2);
+
 		assertEquals(2, item.getAmount());
-		assertEquals(1, clone.getAmount());
+		assertEquals(2, clone.getAmount());
 	}
 
 	@Test
@@ -352,8 +353,9 @@ class InventoryMockTest
 		assertArrayEquals(contents, clone);
 
 		contents[0].setAmount(1);
+
 		assertEquals(1, contents[0].getAmount());
-		assertEquals(2, clone[0].getAmount());
+		assertEquals(1, clone[0].getAmount());
 	}
 
 	@Test
