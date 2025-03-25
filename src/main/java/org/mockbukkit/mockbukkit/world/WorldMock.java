@@ -1376,6 +1376,12 @@ public class WorldMock implements World
 	@Override
 	public void save()
 	{
+		save(false);
+	}
+
+	@Override
+	public void save(boolean flush)
+	{
 		AsyncCatcher.catchOp("world save");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

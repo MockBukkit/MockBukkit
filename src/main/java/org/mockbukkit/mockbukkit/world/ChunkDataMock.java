@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.world;
 
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import com.google.common.base.Preconditions;
+import org.bukkit.HeightMap;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -9,6 +9,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -154,6 +156,16 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public byte getData(int x, int y, int z)
 	{
 		return this.getTypeAndData(x, y, z).getData();
+	}
+
+	@Override
+	public int getHeight(@NotNull HeightMap heightMap, @Range(from = 0L, to = 15L) int x, @Range(from = 0L, to = 15L) int z)
+	{
+		Preconditions.checkArgument(heightMap != null, "HeightMap cannot be null");
+		Preconditions.checkArgument(x >= 0 && x <= 15 && z >= 0 && z <= 15, "Cannot get height outside of a chunks bounds, must be between 0 and 15, got x: %s, z: %s", x, z);
+
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	/**
