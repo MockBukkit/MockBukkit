@@ -344,7 +344,7 @@ class InventoryMockTest
 	}
 
 	@Test
-	void getContents_IsCloned()
+	void getContents_IsMirrored()
 	{
 		inventory.addItem(new ItemStackMock(Material.STONE, 2));
 		ItemStack[] contents = inventory.getContents();
