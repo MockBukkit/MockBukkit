@@ -169,6 +169,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private @NotNull GameMode previousGamemode = super.getGameMode();
 	private @Nullable WeatherType playerWeather = null;
+	private @NotNull TriState flyingFallDamage = TriState.NOT_SET;
 
 	private boolean online;
 	private @Nullable Component displayName = null;
@@ -186,6 +187,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean scaledHealth = false;
 	private boolean allowServerListings = true;
 	private boolean sleepingIgnored = false;
+	private boolean seenWinScreen = false;
 	private boolean relativeTime = true;
 	private long timeOffset = 0;
 	private double healthScale = 20;
@@ -1297,29 +1299,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull TriState hasFlyingFallDamage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.flyingFallDamage;
 	}
 
 	@Override
 	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(flyingFallDamage != null, "flyingFallDamage cannot be null");
+		this.flyingFallDamage = flyingFallDamage;
 	}
 
 	@Override
 	public void setHasSeenWinScreen(boolean hasSeenWinScreen)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.seenWinScreen = hasSeenWinScreen;
 	}
 
 	@Override
 	public boolean hasSeenWinScreen()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.seenWinScreen;
 	}
 
 	@Override

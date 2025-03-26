@@ -8,6 +8,7 @@ import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -3222,6 +3223,48 @@ class PlayerMockTest
 			player.resetPlayerWeather();
 
 			assertNull(player.getPlayerWeather());
+		}
+
+	}
+
+	@Nested
+	class SetFlyingFallDamage
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(TriState.NOT_SET, player.hasFlyingFallDamage());
+		}
+
+		@ParameterizedTest
+		@EnumSource(TriState.class)
+		void givenPossibleValues(TriState state)
+		{
+			player.setFlyingFallDamage(state);
+
+			assertEquals(state, player.hasFlyingFallDamage());
+		}
+
+	}
+
+	@Nested
+	class SetHasSeenWinScreen
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertFalse(player.hasSeenWinScreen());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean value)
+		{
+			player.setHasSeenWinScreen(value);
+
+			assertEquals(value, player.hasSeenWinScreen());
 		}
 
 	}
