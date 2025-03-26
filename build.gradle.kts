@@ -55,6 +55,10 @@ tasks {
 		options.compilerArgs.addAll(listOf("-Xlint:-deprecation", "-Xlint:-removal"))
 	}
 
+	compileTestJava {
+		options.compilerArgs.addAll(listOf("-Xlint:-deprecation", "-Xlint:-removal"))
+	}
+
 	javadoc {
 		options {
 			(options as? StandardJavadocDocletOptions)?.apply {
