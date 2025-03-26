@@ -25,6 +25,7 @@ import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
@@ -3191,6 +3192,36 @@ class PlayerMockTest
 
 			assertEquals(0, player.getPlayerTime());
 			assertTrue(player.isPlayerTimeRelative());
+		}
+
+	}
+
+	@Nested
+	class SetPlayerWeather
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(player.getPlayerWeather());
+		}
+
+		@ParameterizedTest
+		@EnumSource(WeatherType.class)
+		void givenPossibleValues(WeatherType weatherType)
+		{
+			player.setPlayerWeather(weatherType);
+
+			assertEquals(weatherType, player.getPlayerWeather());
+		}
+
+		@Test
+		void givenWeatherReset()
+		{
+			player.setPlayerWeather(WeatherType.CLEAR);
+			player.resetPlayerWeather();
+
+			assertNull(player.getPlayerWeather());
 		}
 
 	}

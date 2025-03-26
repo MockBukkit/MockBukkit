@@ -168,6 +168,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
 
 	private @NotNull GameMode previousGamemode = super.getGameMode();
+	private @Nullable WeatherType playerWeather = null;
 
 	private boolean online;
 	private @Nullable Component displayName = null;
@@ -1855,24 +1856,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public WeatherType getPlayerWeather()
+	public @Nullable WeatherType getPlayerWeather()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerWeather;
 	}
 
 	@Override
 	public void setPlayerWeather(@NotNull WeatherType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(type != null, "weather type cannot be null");
+		this.playerWeather = type;
 	}
 
 	@Override
 	public void resetPlayerWeather()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerWeather = null;
 	}
 
 	@Override
