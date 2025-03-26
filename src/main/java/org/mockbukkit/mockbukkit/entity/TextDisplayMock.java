@@ -147,14 +147,7 @@ public class TextDisplayMock extends DisplayMock implements TextDisplay
 	{
 		Preconditions.checkArgument(alignment != null, "Alignment cannot be null");
 
-		switch (alignment)
-		{
-		case LEFT, CENTER, RIGHT:
-			this.textAlignment = alignment;
-			break;
-		default:
-			throw new IllegalArgumentException("Unknown alignment " + alignment);
-		}
+		this.textAlignment = alignment;
 	}
 
 	@Override
