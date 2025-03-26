@@ -1,15 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.PlayerInventoryViewMock;
-import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -32,6 +22,16 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.PlayerInventoryViewMock;
+import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -319,20 +319,53 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean hasCooldown(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
+
+		return this.hasCooldown(ItemStack.of(material));
 	}
 
 	@Override
 	public int getCooldown(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
+
+		return this.getCooldown(ItemStack.of(material));
 	}
 
 	@Override
 	public void setCooldown(@NotNull Material material, int ticks)
 	{
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
+
+		this.setCooldown(ItemStack.of(material), ticks);
+	}
+
+	@Override
+	public boolean hasCooldown(@NotNull ItemStack itemStack)
+	{
+		Preconditions.checkArgument(itemStack != null, "Material cannot be null");
+
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getCooldown(@NotNull ItemStack itemStack)
+	{
+		Preconditions.checkArgument(itemStack != null, "Material cannot be null");
+
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCooldown(@NotNull ItemStack itemStack, int ticks)
+	{
+		Preconditions.checkArgument(itemStack != null, "Material cannot be null");
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
