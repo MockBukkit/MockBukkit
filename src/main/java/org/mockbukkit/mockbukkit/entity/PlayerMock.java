@@ -3032,13 +3032,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void attack(@NotNull Entity target)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void startUsingItem(@NotNull EquipmentSlot hand)
 	{
 
