@@ -5,7 +5,7 @@ plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.30.0"
+	id("com.vanniktech.maven.publish") version "0.31.0"
 	id("net.kyori.blossom") version "2.1.0"
 }
 
@@ -29,7 +29,7 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
 	implementation("org.jetbrains:annotations:26.0.2")
-	implementation("net.bytebuddy:byte-buddy:1.17.2")
+	implementation("net.bytebuddy:byte-buddy:1.17.4")
 	implementation("org.hamcrest:hamcrest:3.0")
 
 	// LibraryLoader dependencies

@@ -62,6 +62,7 @@ import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
@@ -69,11 +70,15 @@ import org.bukkit.entity.Marker;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
+import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
+import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Piglin;
+import org.bukkit.entity.PiglinBrute;
 import org.bukkit.entity.Pillager;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
@@ -99,14 +104,17 @@ import org.bukkit.entity.Stray;
 import org.bukkit.entity.Strider;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Tadpole;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.TraderLlama;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
+import org.bukkit.entity.Vex;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Vindicator;
+import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.Witch;
@@ -270,6 +278,7 @@ public final class EntityTypesMock
 			.register(JungleChestBoat.class, JungleChestBoatMock.class, JungleChestBoatMock::new)
 			.register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new)
 			.register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new)
+			.register(LightningStrike.class, LightningStrikeMock.class, LightningStrikeMock::new)
 			.register(Llama.class, LlamaMock.class, LlamaMock::new)
 			.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 			.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
@@ -281,12 +290,16 @@ public final class EntityTypesMock
 			.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 			.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 			.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
+			.register(OminousItemSpawner.class, OminousItemSpawnerMock.class, OminousItemSpawnerMock::new)
 			.register(Painting.class, PaintingMock.class, PaintingMock::new)
 			.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 			.register(Panda.class, PandaMock.class, PandaMock::new)
 			.register(Parrot.class, ParrotMock.class, ParrotMock::new)
+			.register(Phantom.class, PhantomMock.class, PhantomMock::new)
 			.register(Pig.class, PigMock.class, PigMock::new)
+			.register(Piglin.class, PiglinMock.class, PiglinMock::new)
+			.register(PiglinBrute.class, PiglinBruteMock.class, PiglinBruteMock::new)
 			.register(PigZombie.class, PigZombieMock.class, PigZombieMock::new)
 			.register(Pillager.class, PillagerMock.class, PillagerMock::new)
 			.register(PolarBear.class, PolarBearMock.class, PolarBearMock::new)
@@ -317,6 +330,7 @@ public final class EntityTypesMock
 			.register(Stray.class, StrayMock.class, StrayMock::new)
 			.register(Strider.class, StriderMock.class, StriderMock::new)
 			.register(Tadpole.class, TadpoleMock.class, TadpoleMock::new)
+			.register(TextDisplay.class, TextDisplayMock.class, TextDisplayMock::new)
 			.register(TraderLlama.class, TraderLlamaMock.class, TraderLlamaMock::new)
 			.register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new)
 			.register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new)
@@ -324,8 +338,10 @@ public final class EntityTypesMock
 			.register(Trident.class, TridentMock.class, TridentMock::new)
 			.register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new)
 			.register(Turtle.class, TurtleMock.class, TurtleMock::new)
+			.register(Vex.class, VexMock.class, VexMock::new)
 			.register(Villager.class, VillagerMock.class, VillagerMock::new)
 			.register(Vindicator.class, VindicatorMock.class, VindicatorMock::new)
+			.register(WanderingTrader.class, WanderingTraderMock.class, WanderingTraderMock::new)
 			.register(Warden.class, WardenMock.class, WardenMock::new)
 			.register(WindCharge.class, WindChargeMock.class, WindChargeMock::new)
 			.register(Witch.class, WitchMock.class, WitchMock::new)

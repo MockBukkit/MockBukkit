@@ -303,10 +303,15 @@ public abstract class InventoryViewMock implements InventoryView
 	}
 
 	@Override
+	public void open()
+	{
+		getPlayer().openInventory(this);
+	}
+
+	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getPlayer().closeInventory();
 	}
 
 	@Override
