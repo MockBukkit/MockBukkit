@@ -416,6 +416,16 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
+	public void startRiptideAttack(int duration, float damage, @Nullable ItemStack itemStack)
+	{
+		Preconditions.checkArgument(duration > 0, "Duration must be greater than 0");
+		Preconditions.checkArgument(damage >= 0, "Damage must not be negative");
+
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Location getBedLocation()
 	{
 		// TODO Auto-generated method stub

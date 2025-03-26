@@ -176,6 +176,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private float exp = 0;
 	private int expCooldown = 0;
 	private int deathScreenScore = 0;
+	private int playerListOrder = 0;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
@@ -667,13 +668,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void startRiptideAttack(int duration, float attackStrength, @Nullable ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isConversing()
 	{
 		return this.conversationTracker.isConversing();
@@ -830,15 +824,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public int getPlayerListOrder()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListOrder;
 	}
 
 	@Override
-	public void setPlayerListOrder(int i)
+	public void setPlayerListOrder(int order)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(order >= 0, "order cannot be negative");
+
+		this.playerListOrder = order;
 	}
 
 	@Override

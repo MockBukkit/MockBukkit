@@ -2814,4 +2814,33 @@ class PlayerMockTest
 
 	}
 
+	@Nested
+	class SetPlayerListOrder
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, player.getPlayerListOrder());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 1, 2, 3, 4 , 5, 6, 7, 8, 9})
+		void givenPossibleValues(int value)
+		{
+			player.setPlayerListOrder(value);
+
+			assertEquals(value, player.getPlayerListOrder());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {-5, -4, -3, -2, -1})
+		void givenNegativeValues(int value)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setPlayerListOrder(value));
+			assertEquals("order cannot be negative", e.getMessage());
+		}
+
+	}
+
 }
