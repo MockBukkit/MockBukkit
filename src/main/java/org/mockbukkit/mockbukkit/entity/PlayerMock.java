@@ -51,6 +51,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.ban.IpBanList;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
@@ -1073,22 +1074,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(this.getAddress() != null, "The Address of this Player is null");
+		BanEntry<InetAddress> banEntry = ((IpBanList) this.server.getBanList(BanList.Type.IP))
+				.addBan(this.getAddress().getAddress(), reason, expires, source);
+		if (kickPlayer)
+		{
+			this.kickPlayer(reason);
+		}
+		return banEntry;
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Instant expires, @Nullable String source, boolean kickPlayer)
+	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Instant instant, @Nullable String source, boolean kickPlayer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.banIp(reason, instant != null ? Date.from(instant) : null, source, kickPlayer);
 	}
 
 	@Override
 	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Duration duration, @Nullable String source, boolean kickPlayer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.banIp(reason, duration != null ? Instant.now().plus(duration) : null, source, kickPlayer);
 	}
 
 	/**
