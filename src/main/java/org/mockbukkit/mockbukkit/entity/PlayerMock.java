@@ -546,24 +546,46 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	{
+		return this.ban(reason, expires, source, true);
+	}
+
+	@Override
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.ban(reason, expires != null ? Date.from(expires) : null, source);
 	}
 
 	@Override
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.ban(reason, duration != null ? Instant.now().plus(duration) : null, source);
 	}
 
 	@Override
-	public @Nullable BanEntry<org.bukkit.profile.PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		E banEntry = (E) getServer().getBanList(BanList.Type.PROFILE)
+				.addBan(this.getPlayerProfile(), reason, expires, source);
+		if (kickPlayer)
+		{
+			this.kickPlayer(reason);
+		}
+
+		return banEntry;
+	}
+
+	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Instant instant, @Nullable String source, boolean kickPlayer)
+	{
+		return this.ban(reason, instant != null ? Date.from(instant) : null, source, kickPlayer);
+	}
+
+	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source, boolean kickPlayer)
+	{
+		return this.ban(reason, duration != null ? Instant.now().plus(duration) : null, source, kickPlayer);
 	}
 
 	/**
@@ -1026,13 +1048,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	@SuppressWarnings("deprecation")
 	public void chat(@NotNull String msg)
 	{
@@ -1056,25 +1071,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source, boolean kickPlayer)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source, boolean kickPlayer)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@Override

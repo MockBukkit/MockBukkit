@@ -12,6 +12,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
@@ -96,7 +97,13 @@ import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetSocketAddress;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -2861,6 +2868,134 @@ class PlayerMockTest
 			player.setHaProxyAddress(address);
 
 			assertEquals(address, player.getHAProxyAddress());
+		}
+
+	}
+
+	@Nested
+	class Ban
+	{
+		private static final String REASON = "Test reason";
+		private static final String SOURCE = "TEST-SOURCE";
+
+		private static final Clock FIXED_CLOCK = Clock.fixed(Instant.parse("2025-03-26T21:20:09Z"), ZoneOffset.UTC);
+
+		@Test
+		void givenExpiredDateAsDate_AndWithPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Date expiredDate = Date.from(Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS));
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE);
+
+			assertNotNull(ban);
+			assertEquals(expiredDate, ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDate_AndWithoutPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Date expiredDate = Date.from(Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS));
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(expiredDate, ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertTrue(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsInstant_AndWithPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Instant expiredDate = Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE);
+
+			assertNotNull(ban);
+			assertEquals(Date.from(expiredDate), ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsInstant_AndWithoutPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Instant expiredDate = Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(Date.from(expiredDate), ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertTrue(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDuration_AndWithPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Duration expiredDate = Duration.ofDays(7);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE);
+
+			assertNotNull(ban);
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDuration_AndWithoutPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Duration expiredDate = Duration.ofDays(7);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertTrue(player.isOnline());
 		}
 
 	}
