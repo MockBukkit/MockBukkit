@@ -300,7 +300,7 @@ public final class ItemStackMirror extends ItemStack
 		return itemStack.getEnchantments();
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	@Override
 	public @Nullable String getI18NDisplayName()
 	{
@@ -320,7 +320,7 @@ public final class ItemStackMirror extends ItemStack
 		return itemStack.getItemMeta();
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	@Override
 	public @Nullable List<String> getLore()
 	{
@@ -555,14 +555,14 @@ public final class ItemStackMirror extends ItemStack
 		return itemStack.setItemMeta(itemMeta);
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	@Override
 	public void setLore(@Nullable List<String> lore)
 	{
 		itemStack.setLore(lore);
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	@Override
 	public void setType(@NotNull Material type)
 	{
