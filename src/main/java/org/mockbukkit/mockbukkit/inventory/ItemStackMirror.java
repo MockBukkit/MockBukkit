@@ -40,6 +40,7 @@ import java.util.function.UnaryOperator;
  *
  * @see ItemStack
  */
+@ApiStatus.Internal
 public final class ItemStackMirror extends ItemStack
 {
 
