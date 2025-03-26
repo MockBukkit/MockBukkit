@@ -104,6 +104,7 @@ import org.bukkit.entity.Stray;
 import org.bukkit.entity.Strider;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Tadpole;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.TraderLlama;
@@ -329,6 +330,7 @@ public final class EntityTypesMock
 			.register(Stray.class, StrayMock.class, StrayMock::new)
 			.register(Strider.class, StriderMock.class, StriderMock::new)
 			.register(Tadpole.class, TadpoleMock.class, TadpoleMock::new)
+			.register(TextDisplay.class, TextDisplayMock.class, TextDisplayMock::new)
 			.register(TraderLlama.class, TraderLlamaMock.class, TraderLlamaMock::new)
 			.register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new)
 			.register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new)
