@@ -186,6 +186,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private Location compassTarget;
 	private @Nullable Location respawnLocation;
 	private @Nullable InetSocketAddress address;
+	private @Nullable InetSocketAddress haProxyAddress;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
@@ -865,11 +866,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return (isOnline()) ? address : null;
 	}
 
+	/**
+	 * Sets the socket address of this player's proxy
+	 *
+	 * @param haProxyAddress the player's proxy address, null if the server doesn't have Proxy Protocol enabled,
+	 *                       or the player didn't connect to an HAProxy instance.
+	 */
+	public void setHaProxyAddress(@Nullable InetSocketAddress haProxyAddress)
+	{
+		this.haProxyAddress = haProxyAddress;
+	}
+
 	@Override
 	public @Nullable InetSocketAddress getHAProxyAddress()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (isOnline()) ? haProxyAddress : null;
 	}
 
 	@Override

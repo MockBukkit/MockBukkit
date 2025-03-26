@@ -2843,4 +2843,26 @@ class PlayerMockTest
 
 	}
 
+	@Nested
+	class SetHaProxyAddress
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(player.getHAProxyAddress());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			InetSocketAddress address = InetSocketAddress.createUnresolved("localhost", 8888);
+
+			player.setHaProxyAddress(address);
+
+			assertEquals(address, player.getHAProxyAddress());
+		}
+
+	}
+
 }
