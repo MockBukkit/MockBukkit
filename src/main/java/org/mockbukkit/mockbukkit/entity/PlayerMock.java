@@ -2773,34 +2773,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void openSign(@NotNull Sign sign, @NotNull Side side)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Item dropItem(int slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Item dropItem(@NotNull EquipmentSlot slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Item dropItem(@NotNull ItemStack itemStack, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setResourcePack(@NotNull String url, @NotNull String hash)
 	{
 		// TODO Auto-generated method stub
@@ -2962,13 +2934,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
 	{
 		// TODO Auto-generated method stub
@@ -3032,55 +2997,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void startUsingItem(@NotNull EquipmentSlot hand)
-	{
-
-	}
-
-	@Override
-	public void completeUsingActiveItem()
-	{
-
-	}
-
-	@Override
-	public int getActiveItemRemainingTime()
-	{
-		return 0;
-	}
-
-	@Override
-	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
-	{
-
-	}
-
-	@Override
-	public boolean hasActiveItem()
-	{
-		return false;
-	}
-
-	@Override
-	public int getActiveItemUsedTime()
-	{
-		return 0;
-	}
-
-	@Override
-	public @NotNull EquipmentSlot getActiveItemHand()
-	{
-		return null;
-	}
-
-	@Override
-	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull Duration getIdleDuration()
 	{
 		// TODO Auto-generated method stub
@@ -3110,41 +3026,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public boolean isChunkSent(long chunkKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Set<Player> getTrackedBy()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack damageItemStack(@NotNull ItemStack stack, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void damageItemStack(@NotNull EquipmentSlot slot, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -3293,12 +3174,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
 		}
 		return true;
-	}
-
-	@Override
-	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
-	{
-		return null;
 	}
 
 	@Override

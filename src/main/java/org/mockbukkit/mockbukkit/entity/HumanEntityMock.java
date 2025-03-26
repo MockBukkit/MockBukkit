@@ -6,14 +6,17 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -37,6 +40,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -576,7 +580,14 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public void openSign(@NotNull Sign sign)
+	{
+		this.openSign(sign, org.bukkit.block.sign.Side.FRONT);
+	}
+
+	@Override
+	public void openSign(@NotNull Sign sign, @NotNull Side side)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -584,6 +595,27 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 
 	@Override
 	public boolean dropItem(boolean dropAll)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(int slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(@NotNull EquipmentSlot slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(@NotNull ItemStack itemStack, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
