@@ -180,6 +180,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean allowFlight = false;
 	private boolean flying = false;
 	private boolean scaledHealth = false;
+	private boolean allowServerListings = true;
 	private double healthScale = 20;
 	private Location compassTarget;
 	private @Nullable Location respawnLocation;
@@ -646,8 +647,17 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isAllowingServerListings()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.allowServerListings;
+	}
+
+	/**
+	 * Sets whether the player has the "Allow Server Listings" setting enabled.
+	 *
+	 * @param allowServerListings whether the player allows server listings
+	 */
+	public void setAllowServerListings(boolean allowServerListings)
+	{
+		this.allowServerListings = allowServerListings;
 	}
 
 	@Override

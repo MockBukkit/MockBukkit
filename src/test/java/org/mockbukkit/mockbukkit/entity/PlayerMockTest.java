@@ -2793,4 +2793,25 @@ class PlayerMockTest
 
 	}
 
+	@Nested
+	class SetAllowServerListings
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertTrue(player.isAllowingServerListings());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenDefaultValue(boolean value)
+		{
+			player.setAllowServerListings(value);
+
+			assertEquals(value, player.isAllowingServerListings());
+		}
+
+	}
+
 }
