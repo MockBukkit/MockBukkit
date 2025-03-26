@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -100,7 +101,7 @@ class InventoryMockTest
 	}
 
 	@Test
-	void getItem_IsCloned()
+	void getItem_IsMirrored()
 	{
 		inventory.setItem(0, new ItemStackMock(Material.DIAMOND, 1));
 		ItemStack item = inventory.getItem(0);
@@ -109,8 +110,9 @@ class InventoryMockTest
 		assertEquals(item, clone);
 
 		item.setAmount(2);
+
 		assertEquals(2, item.getAmount());
-		assertEquals(1, clone.getAmount());
+		assertEquals(2, clone.getAmount());
 	}
 
 	@Test
@@ -342,7 +344,7 @@ class InventoryMockTest
 	}
 
 	@Test
-	void getContents_IsCloned()
+	void getContents_IsMirrored()
 	{
 		inventory.addItem(new ItemStackMock(Material.STONE, 2));
 		ItemStack[] contents = inventory.getContents();
@@ -352,8 +354,9 @@ class InventoryMockTest
 		assertArrayEquals(contents, clone);
 
 		contents[0].setAmount(1);
+
 		assertEquals(1, contents[0].getAmount());
-		assertEquals(2, clone[0].getAmount());
+		assertEquals(1, clone[0].getAmount());
 	}
 
 	@Test
@@ -862,6 +865,21 @@ class InventoryMockTest
 			{
 				assertFalse(inventoryA.isIdentical(inventoryB));
 			}
+		}
+
+	}
+
+	@Nested
+	class Issues
+	{
+
+		@Test
+		@DisplayName("ItemStacks should not be cloned, they should be mirrored.")
+		void issue1322()
+		{
+			inventory.setItem(0, ItemStack.of(Material.DIAMOND, 3));
+			inventory.getItem(0).setAmount(15);
+			assertEquals(15, inventory.getItem(0).getAmount());
 		}
 
 	}

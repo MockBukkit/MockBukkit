@@ -53,7 +53,7 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = state.getInventory();
+		this.inventory = state.getSnapshotInventory();
 		this.customName = state.customName();
 	}
 

@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.block;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
-import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
 import com.destroystokyo.paper.block.BlockSoundGroup;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -30,6 +25,11 @@ import org.bukkit.util.Vector;
 import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.metadata.MetadataTable;
+import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -311,9 +311,7 @@ public class BlockMock implements Block
 	@Override
 	public @NotNull BlockState getState()
 	{
-		// This will always return a snapshot of the BlockState, not the actual state.
-		// This is optional with Paper but for Spigot it simply works like that.
-		return state.getSnapshot();
+		return this.state;
 	}
 
 	@Override

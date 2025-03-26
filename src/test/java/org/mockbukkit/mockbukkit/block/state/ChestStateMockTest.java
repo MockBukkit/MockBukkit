@@ -1,15 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,6 +11,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class ChestStateMockTest extends ContainerStateMockTest
@@ -167,5 +167,25 @@ class ChestStateMockTest extends ContainerStateMockTest
 
 		// Assert that the old state was also updated
 		assertTrue(chestState.getBlockInventory().contains(ItemStack.of(Material.DIAMOND)));
+	}
+
+	@Nested
+	class Copy
+	{
+		@Test
+		void shouldCloneInventory()
+		{
+			chest.getBlockInventory().setItem(0, ItemStack.of(Material.DIAMOND));
+
+			ChestStateMock newState = chest.copy();
+
+			assertEquals(chest, newState);
+			assertNotSame(chest, newState);
+
+			chest.getBlockInventory().setItem(0, ItemStack.of(Material.EMERALD));
+			assertNotEquals(chest, newState);
+			assertNotSame(chest, newState);
+		}
+
 	}
 }
