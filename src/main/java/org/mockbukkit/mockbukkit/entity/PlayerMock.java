@@ -169,6 +169,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private @NotNull GameMode previousGamemode = super.getGameMode();
 	private @Nullable WeatherType playerWeather = null;
+	private @Nullable Entity spectatorTarget = null;
 	private @NotNull TriState flyingFallDamage = TriState.NOT_SET;
 
 	private boolean online;
@@ -2444,17 +2445,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public Entity getSpectatorTarget()
+	public @Nullable Entity getSpectatorTarget()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spectatorTarget;
 	}
 
 	@Override
 	public void setSpectatorTarget(Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(this.getGameMode() == GameMode.SPECTATOR, "Player must be in spectator mode");
+		this.spectatorTarget = entity;
 	}
 
 	@Override

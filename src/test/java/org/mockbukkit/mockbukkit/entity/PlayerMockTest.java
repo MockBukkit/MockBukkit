@@ -3269,4 +3269,37 @@ class PlayerMockTest
 
 	}
 
+	@Nested
+	class SetSpectatorTarget
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(player.getSpectatorTarget());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			Entity entity = new CowMock(server, UUID.randomUUID());
+			player.setGameMode(GameMode.SPECTATOR);
+
+			player.setSpectatorTarget(entity);
+
+			assertEquals(entity, player.getSpectatorTarget());
+		}
+
+		@Test
+		void givenPlayerInIllegalGameMode()
+		{
+			Entity entity = new CowMock(server, UUID.randomUUID());
+			player.setGameMode(GameMode.SURVIVAL);
+
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setSpectatorTarget(entity));
+			assertEquals("Player must be in spectator mode", e.getMessage());
+		}
+
+	}
+
 }
