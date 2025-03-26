@@ -183,6 +183,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean flying = false;
 	private boolean scaledHealth = false;
 	private boolean allowServerListings = true;
+	private boolean sleepingIgnored = false;
 	private double healthScale = 20;
 	private Location compassTarget;
 	private @Nullable Location respawnLocation;
@@ -1149,15 +1150,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isSleepingIgnored()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleepingIgnored;
 	}
 
 	@Override
 	public void setSleepingIgnored(boolean isSleeping)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sleepingIgnored = isSleeping;
 	}
 
 	@Override

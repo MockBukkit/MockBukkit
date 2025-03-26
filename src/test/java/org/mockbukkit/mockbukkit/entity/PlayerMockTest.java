@@ -2813,7 +2813,7 @@ class PlayerMockTest
 
 		@ParameterizedTest
 		@ValueSource(booleans = {true, false})
-		void givenDefaultValue(boolean value)
+		void givenPossibleValues(boolean value)
 		{
 			player.setAllowServerListings(value);
 
@@ -3119,6 +3119,27 @@ class PlayerMockTest
 			assertEquals(address.getAddress(), ban.getBanTarget());
 
 			assertTrue(player.isOnline());
+		}
+
+	}
+
+	@Nested
+	class SetSleepingIgnored
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertFalse(player.isSleepingIgnored());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean value)
+		{
+			player.setSleepingIgnored(value);
+
+			assertEquals(value, player.isSleepingIgnored());
 		}
 
 	}
