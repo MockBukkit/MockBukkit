@@ -26,6 +26,7 @@ class ItemStackMirrorTest
 			ItemStack mirror = ItemStackMirror.create(originalItem);
 
 			assertEquals(originalItem, mirror);
+			assertEquals(mirror, originalItem);
 			assertNotSame(originalItem, mirror);
 		}
 
@@ -39,6 +40,7 @@ class ItemStackMirrorTest
 
 			assertEquals(5, originalItem.getAmount());
 			assertEquals(originalItem, mirror);
+			assertEquals(mirror, originalItem);
 			assertNotSame(originalItem, mirror);
 		}
 
@@ -52,6 +54,7 @@ class ItemStackMirrorTest
 
 			assertEquals(5, mirror.getAmount());
 			assertEquals(originalItem, mirror);
+			assertEquals(mirror, originalItem);
 			assertNotSame(originalItem, mirror);
 		}
 
