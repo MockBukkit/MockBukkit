@@ -3144,4 +3144,55 @@ class PlayerMockTest
 
 	}
 
+	@Nested
+	class SetPlayerTime
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, player.getPlayerTime());
+			assertTrue(player.isPlayerTimeRelative());
+		}
+
+		@ParameterizedTest
+		@ValueSource(longs = {-5000, -2500, 0, 2500, 5000})
+		void givenPossibleValuesWithRelativeTime(long offsetTime)
+		{
+			WorldMock world = server.addSimpleWorld("world");
+			player.setLocation(new Location(world, 0, 0, 0));
+			player.setPlayerTime(offsetTime, true);
+
+			world.setFullTime(1000);
+
+			assertEquals(offsetTime, player.getPlayerTime());
+			assertEquals(1000 + offsetTime, player.getPlayerTimeOffset());
+		}
+
+		@ParameterizedTest
+		@ValueSource(longs = {-5000, -2500, 0, 2500, 5000})
+		void givenPossibleValuesWithoutRelativeTime(long offsetTime)
+		{
+			WorldMock world = server.addSimpleWorld("world");
+			player.setLocation(new Location(world, 0, 0, 0));
+			player.setPlayerTime(offsetTime, false);
+
+			world.setFullTime(1000);
+
+			assertEquals(offsetTime, player.getPlayerTime());
+			assertEquals(offsetTime, player.getPlayerTimeOffset());
+		}
+
+		@Test
+		void givenTimeReset()
+		{
+			player.setPlayerTime(1000, false);
+			player.resetPlayerTime();
+
+			assertEquals(0, player.getPlayerTime());
+			assertTrue(player.isPlayerTimeRelative());
+		}
+
+	}
+
 }

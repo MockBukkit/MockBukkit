@@ -125,6 +125,7 @@ import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
 import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -184,6 +185,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean scaledHealth = false;
 	private boolean allowServerListings = true;
 	private boolean sleepingIgnored = false;
+	private boolean relativeTime = true;
+	private long timeOffset = 0;
 	private double healthScale = 20;
 	private Location compassTarget;
 	private @Nullable Location respawnLocation;
@@ -1809,36 +1812,46 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setPlayerTime(long time, boolean relative)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.timeOffset = time;
+		this.relativeTime = relative;
 	}
 
 	@Override
 	public long getPlayerTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.timeOffset;
 	}
 
 	@Override
 	public long getPlayerTimeOffset()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(isInWorld(), "Player is not in world.");
+
+		WorldMock world = getWorld();
+		long dayTime = world.getFullTime();
+
+		if (isPlayerTimeRelative())
+		{
+			// Adds timeOffset to the current server time.
+			return dayTime + this.timeOffset;
+		}
+		else
+		{
+			// Adds timeOffset to the beginning of this day.
+			return dayTime - (dayTime % 24000) + this.timeOffset;
+		}
 	}
 
 	@Override
 	public boolean isPlayerTimeRelative()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.relativeTime;
 	}
 
 	@Override
 	public void resetPlayerTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setPlayerTime(0, true);
 	}
 
 	@Override
