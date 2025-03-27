@@ -57,7 +57,7 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = state.getInventory();
+		this.inventory = state.inventory;
 		this.customName = state.customName();
 		this.snapshot = ((InventoryMock) state.getSnapshotInventory()).getSnapshot();
 	}
@@ -137,21 +137,13 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 		{
 			return false;
 		}
-		if (isPlaced() && !Objects.equals(inventory, that.inventory))
-		{
-			return false;
-		}
-		return Objects.equals(customName, that.customName) && Arrays.equals(snapshot.getContents(), that.snapshot.getContents());
+		return Objects.equals(inventory, that.inventory) && Objects.equals(customName, that.customName) && Arrays.equals(snapshot.getContents(), that.snapshot.getContents());
 	}
 
 	@Override
 	public int hashCode()
 	{
-		if (isPlaced())
-		{
-			Objects.hash(super.hashCode(), inventory, customName, Arrays.hashCode(snapshot.getContents()));
-		}
-		return Objects.hash(super.hashCode(), customName, Arrays.hashCode(snapshot.getContents()));
+		return Objects.hash(super.hashCode(), inventory, customName, Arrays.hashCode(snapshot.getContents()));
 	}
 
 	@Override
