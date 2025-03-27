@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
-import com.google.common.base.Strings;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -193,8 +192,9 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	public @NotNull BlockState getBlockState()
 	{
 		if (blockState != null)
+		{
 			return blockState.copy();
-
+		}
 		Class<? extends TileStateMock> clazz = null;
 		try
 		{

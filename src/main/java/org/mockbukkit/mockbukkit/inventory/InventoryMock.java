@@ -1,18 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import net.kyori.adventure.text.Component;
@@ -31,6 +18,20 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Mock implementation of an {@link Inventory}.
@@ -97,6 +98,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Copy constructor. Holder is copied by reference, inventory contents are cloned.
+	 *
 	 * @param other Inventory to copy.
 	 */
 	public InventoryMock(@NotNull Inventory other)
@@ -705,7 +707,14 @@ public class InventoryMock implements Inventory
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		return new InventoryMock(this);
+		try
+		{
+			return this.getClass().getConstructor(this.getClass()).newInstance(this);
+		}
+		catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)
+		{
+			throw new IllegalStateException(e);
+		}
 	}
 
 	/**
@@ -714,7 +723,6 @@ public class InventoryMock implements Inventory
 	 * uses the default name for the inventory type.
 	 *
 	 * @return The inventory name.
-	 *
 	 * @see InventoryMock#getCustomTitle()
 	 * @see InventoryType#defaultTitle()
 	 */
@@ -764,7 +772,6 @@ public class InventoryMock implements Inventory
 	 * </ul>
 	 *
 	 * @param inventory The other inventory to compare.
-	 *
 	 * @return {@code true} when identical, otherwise {@code false}
 	 */
 	@ApiStatus.Internal
@@ -793,4 +800,5 @@ public class InventoryMock implements Inventory
 				", items=" + Arrays.toString(items) +
 				'}';
 	}
+
 }
