@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,8 +39,10 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
-
+	private final Set<NamespacedKey> discoveredRecipes = new HashSet<>();
 	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
 	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);
 	private InventoryView inventoryView;
@@ -486,21 +489,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
-	public boolean isHandRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Nullable
-	@Override
-	public ItemStack getItemInUse()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getExpToLevel()
 	{
 		// Formula from https://minecraft.wiki/w/Experience#Leveling_up
@@ -542,8 +530,16 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int discoverRecipes(@NotNull Collection<NamespacedKey> recipes)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(recipes != null, "Recipes cannot be null");
+		AtomicInteger count = new AtomicInteger();
+		recipes.forEach(recipe ->
+		{
+			if (this.discoveredRecipes.add(recipe))
+			{
+				count.incrementAndGet();
+			}
+		});
+		return count.get();
 	}
 
 	@Override
@@ -556,22 +552,32 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int undiscoverRecipes(@NotNull Collection<NamespacedKey> recipes)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(recipes != null, "Recipes cannot be null");
+
+		AtomicInteger count = new AtomicInteger();
+		recipes.forEach(recipe ->
+		{
+			if (this.discoveredRecipes.remove(recipe))
+			{
+				count.incrementAndGet();
+			}
+		});
+		return count.get();
 	}
 
 	@Override
 	public boolean hasDiscoveredRecipe(@NotNull NamespacedKey recipe)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(recipe != null, "recipe cannot be null");
+		return this.discoveredRecipes.contains(recipe);
 	}
 
 	@Override
 	public @NotNull Set<NamespacedKey> getDiscoveredRecipes()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ImmutableSet.Builder<NamespacedKey> builder = ImmutableSet.builder();
+		builder.addAll(this.discoveredRecipes);
+		return builder.build();
 	}
 
 	@Override
