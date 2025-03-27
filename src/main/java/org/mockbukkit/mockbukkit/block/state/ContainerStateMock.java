@@ -147,7 +147,10 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), inventory, customName, Arrays.hashCode(snapshot.getContents()));
+		if(isPlaced()) {
+			Objects.hash(super.hashCode(), inventory, customName, Arrays.hashCode(snapshot.getContents()));
+		}
+		return Objects.hash(super.hashCode(), customName, Arrays.hashCode(snapshot.getContents()));
 	}
 
 	@Override
