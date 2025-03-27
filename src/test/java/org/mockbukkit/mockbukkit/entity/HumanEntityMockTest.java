@@ -12,11 +12,13 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.MainHand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -452,6 +454,27 @@ class HumanEntityMockTest
 			human.setStarvationRate(value);
 
 			assertEquals(value, human.getStarvationRate());
+		}
+
+	}
+
+	@Nested
+	class SetMainHand
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(MainHand.RIGHT, human.getMainHand());
+		}
+
+		@ParameterizedTest
+		@EnumSource(MainHand.class)
+		void givenPossibleValues(MainHand value)
+		{
+			human.setMainHand(value);
+
+			assertEquals(value, human.getMainHand());
 		}
 
 	}

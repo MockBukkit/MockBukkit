@@ -59,6 +59,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private @NotNull ItemStack cursor = ItemStack.empty();
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
 	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
+	private @NotNull MainHand mainHand = MainHand.RIGHT;
 	/**
 	 * How much EXP this {@link HumanEntity} has.
 	 */
@@ -109,8 +110,18 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @NotNull MainHand getMainHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.mainHand;
+	}
+
+	/**
+	 * Sets the player's selected main hand
+	 *
+	 * @param mainHand the players main hand
+	 */
+	public void setMainHand(@NotNull MainHand mainHand)
+	{
+		Preconditions.checkArgument(mainHand != null, "main hand cannot be null");
+		this.mainHand = mainHand;
 	}
 
 	@Override
