@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,6 +29,7 @@ import org.mockbukkit.mockbukkit.inventory.InventoryViewMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
 
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -35,6 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
@@ -475,6 +478,49 @@ class HumanEntityMockTest
 			human.setMainHand(value);
 
 			assertEquals(value, human.getMainHand());
+		}
+
+	}
+
+	@Nested
+	class SetEnchantmentSeed
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, human.getEnchantmentSeed());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setEnchantmentSeed(value);
+
+			assertEquals(value, human.getEnchantmentSeed());
+		}
+
+	}
+
+	@Nested
+	class SetFishHook
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(human.getFishHook());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			FishHook fishHook = new FishHookMock(server, UUID.randomUUID());
+
+			human.setFishHook(fishHook);
+
+			assertEquals(fishHook, human.getFishHook());
 		}
 
 	}

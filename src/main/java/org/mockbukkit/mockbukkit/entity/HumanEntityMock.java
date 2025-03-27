@@ -58,8 +58,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private InventoryView inventoryView;
 	private @NotNull ItemStack cursor = ItemStack.empty();
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
-	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
 	private @NotNull MainHand mainHand = MainHand.RIGHT;
+	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
+	private @Nullable FishHook fishHook;
 	/**
 	 * How much EXP this {@link HumanEntity} has.
 	 */
@@ -72,6 +73,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private int saturatedRegenRate = 10;
 	private int unsaturatedRegenRate = 80;
 	private int starvationRate = 80;
+	private int enchantmentSeed = 0;
 
 	/**
 	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -241,15 +243,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getEnchantmentSeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.enchantmentSeed;
 	}
 
 	@Override
 	public void setEnchantmentSeed(int seed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.enchantmentSeed = seed;
 	}
 
 	@Override
@@ -415,8 +415,17 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @Nullable FishHook getFishHook()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.fishHook;
+	}
+
+	/**
+	 * Sets the player's fishing hook when fishing.
+	 *
+	 * @param fishHook the player's fishing hook if they are fishing
+	 */
+	public void setFishHook(@Nullable FishHook fishHook)
+	{
+		this.fishHook = fishHook;
 	}
 
 	@Override
