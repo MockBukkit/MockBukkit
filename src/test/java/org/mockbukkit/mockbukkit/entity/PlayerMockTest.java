@@ -8,10 +8,12 @@ import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
@@ -24,6 +26,7 @@ import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
@@ -95,8 +98,15 @@ import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -2789,6 +2799,505 @@ class PlayerMockTest
 		{
 			player.setDeathScreenScore(value);
 			assertEquals(value, player.getDeathScreenScore());
+		}
+
+	}
+
+	@Nested
+	class SetAllowServerListings
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertTrue(player.isAllowingServerListings());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean value)
+		{
+			player.setAllowServerListings(value);
+
+			assertEquals(value, player.isAllowingServerListings());
+		}
+
+	}
+
+	@Nested
+	class SetPlayerListOrder
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, player.getPlayerListOrder());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 1, 2, 3, 4 , 5, 6, 7, 8, 9})
+		void givenPossibleValues(int value)
+		{
+			player.setPlayerListOrder(value);
+
+			assertEquals(value, player.getPlayerListOrder());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {-5, -4, -3, -2, -1})
+		void givenNegativeValues(int value)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setPlayerListOrder(value));
+			assertEquals("order cannot be negative", e.getMessage());
+		}
+
+	}
+
+	@Nested
+	class SetHaProxyAddress
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(player.getHAProxyAddress());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			InetSocketAddress address = InetSocketAddress.createUnresolved("localhost", 8888);
+
+			player.setHaProxyAddress(address);
+
+			assertEquals(address, player.getHAProxyAddress());
+		}
+
+	}
+
+	@Nested
+	class Ban
+	{
+		private static final String REASON = "Test reason";
+		private static final String SOURCE = "TEST-SOURCE";
+
+		private static final Clock FIXED_CLOCK = Clock.fixed(Instant.parse("2025-03-26T21:20:09Z"), ZoneOffset.UTC);
+
+		@Test
+		void givenExpiredDateAsDate_AndWithPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Date expiredDate = Date.from(Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS));
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE);
+
+			assertNotNull(ban);
+			assertEquals(expiredDate, ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDate_AndWithoutPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Date expiredDate = Date.from(Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS));
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(expiredDate, ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertTrue(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsInstant_AndWithPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Instant expiredDate = Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE);
+
+			assertNotNull(ban);
+			assertEquals(Date.from(expiredDate), ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsInstant_AndWithoutPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Instant expiredDate = Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(Date.from(expiredDate), ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertTrue(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDuration_AndWithPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Duration expiredDate = Duration.ofDays(7);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE);
+
+			assertNotNull(ban);
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDuration_AndWithoutPlayerKick()
+		{
+			assertFalse(player.isBanned());
+			assertTrue(player.isOnline());
+
+			Duration expiredDate = Duration.ofDays(7);
+
+			BanEntry<? super PlayerProfile> ban = player.ban(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(player.getPlayerProfile(), ban.getBanTarget());
+
+			assertTrue(player.isBanned());
+			assertTrue(player.isOnline());
+		}
+
+	}
+
+	@Nested
+	class BanIp
+	{
+		private static final String REASON = "Test reason";
+		private static final String SOURCE = "TEST-SOURCE";
+
+		private static final Clock FIXED_CLOCK = Clock.fixed(Instant.parse("2025-03-26T21:20:09Z"), ZoneOffset.UTC);
+
+		@Test
+		void givenExpiredDateAsDate_AndWithPlayerKick()
+		{
+			assertTrue(player.isOnline());
+
+			InetSocketAddress address = player.getAddress();
+			Date expiredDate = Date.from(Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS));
+
+			BanEntry<InetAddress> ban = player.banIp(REASON, expiredDate, SOURCE, true);
+
+			assertNotNull(ban);
+			assertEquals(expiredDate, ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(address.getAddress(), ban.getBanTarget());
+
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDate_AndWithoutPlayerKick()
+		{
+			assertTrue(player.isOnline());
+
+			InetSocketAddress address = player.getAddress();
+			Date expiredDate = Date.from(Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS));
+
+			BanEntry<InetAddress> ban = player.banIp(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(expiredDate, ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(address.getAddress(), ban.getBanTarget());
+
+			assertTrue(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsInstant_AndWithPlayerKick()
+		{
+			assertTrue(player.isOnline());
+
+			InetSocketAddress address = player.getAddress();
+			Instant expiredDate = Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS);
+
+			BanEntry<InetAddress> ban = player.banIp(REASON, expiredDate, SOURCE, true);
+
+			assertNotNull(ban);
+			assertEquals(Date.from(expiredDate), ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(address.getAddress(), ban.getBanTarget());
+
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsInstant_AndWithoutPlayerKick()
+		{
+			assertTrue(player.isOnline());
+
+			InetSocketAddress address = player.getAddress();
+			Duration expiredDate = Duration.ofDays(7);
+
+			BanEntry<InetAddress> ban = player.banIp(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(address.getAddress(), ban.getBanTarget());
+
+			assertTrue(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDuration_AndWithPlayerKick()
+		{
+			assertTrue(player.isOnline());
+
+			InetSocketAddress address = player.getAddress();
+			Duration expiredDate = Duration.ofDays(7);
+
+			BanEntry<InetAddress> ban = player.banIp(REASON, expiredDate, SOURCE, true);
+
+			assertNotNull(ban);
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(address.getAddress(), ban.getBanTarget());
+
+			assertFalse(player.isOnline());
+		}
+
+		@Test
+		void givenExpiredDateAsDuration_AndWithoutPlayerKick()
+		{
+			assertTrue(player.isOnline());
+
+			InetSocketAddress address = player.getAddress();
+			Instant expiredDate = Instant.now(FIXED_CLOCK).plus(7, ChronoUnit.DAYS);
+
+			BanEntry<InetAddress> ban = player.banIp(REASON, expiredDate, SOURCE, false);
+
+			assertNotNull(ban);
+			assertEquals(Date.from(expiredDate), ban.getExpiration());
+			assertEquals(REASON, ban.getReason());
+			assertEquals(SOURCE, ban.getSource());
+			assertEquals(address.getAddress(), ban.getBanTarget());
+
+			assertTrue(player.isOnline());
+		}
+
+	}
+
+	@Nested
+	class SetSleepingIgnored
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertFalse(player.isSleepingIgnored());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean value)
+		{
+			player.setSleepingIgnored(value);
+
+			assertEquals(value, player.isSleepingIgnored());
+		}
+
+	}
+
+	@Nested
+	class SetPlayerTime
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, player.getPlayerTime());
+			assertTrue(player.isPlayerTimeRelative());
+		}
+
+		@ParameterizedTest
+		@ValueSource(longs = {-5000, -2500, 0, 2500, 5000})
+		void givenPossibleValuesWithRelativeTime(long offsetTime)
+		{
+			WorldMock world = server.addSimpleWorld("world");
+			player.setLocation(new Location(world, 0, 0, 0));
+			player.setPlayerTime(offsetTime, true);
+
+			world.setFullTime(1000);
+
+			assertEquals(offsetTime, player.getPlayerTime());
+			assertEquals(1000 + offsetTime, player.getPlayerTimeOffset());
+		}
+
+		@ParameterizedTest
+		@ValueSource(longs = {-5000, -2500, 0, 2500, 5000})
+		void givenPossibleValuesWithoutRelativeTime(long offsetTime)
+		{
+			WorldMock world = server.addSimpleWorld("world");
+			player.setLocation(new Location(world, 0, 0, 0));
+			player.setPlayerTime(offsetTime, false);
+
+			world.setFullTime(1000);
+
+			assertEquals(offsetTime, player.getPlayerTime());
+			assertEquals(offsetTime, player.getPlayerTimeOffset());
+		}
+
+		@Test
+		void givenTimeReset()
+		{
+			player.setPlayerTime(1000, false);
+			player.resetPlayerTime();
+
+			assertEquals(0, player.getPlayerTime());
+			assertTrue(player.isPlayerTimeRelative());
+		}
+
+	}
+
+	@Nested
+	class SetPlayerWeather
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(player.getPlayerWeather());
+		}
+
+		@ParameterizedTest
+		@EnumSource(WeatherType.class)
+		void givenPossibleValues(WeatherType weatherType)
+		{
+			player.setPlayerWeather(weatherType);
+
+			assertEquals(weatherType, player.getPlayerWeather());
+		}
+
+		@Test
+		void givenWeatherReset()
+		{
+			player.setPlayerWeather(WeatherType.CLEAR);
+			player.resetPlayerWeather();
+
+			assertNull(player.getPlayerWeather());
+		}
+
+	}
+
+	@Nested
+	class SetFlyingFallDamage
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(TriState.NOT_SET, player.hasFlyingFallDamage());
+		}
+
+		@ParameterizedTest
+		@EnumSource(TriState.class)
+		void givenPossibleValues(TriState state)
+		{
+			player.setFlyingFallDamage(state);
+
+			assertEquals(state, player.hasFlyingFallDamage());
+		}
+
+	}
+
+	@Nested
+	class SetHasSeenWinScreen
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertFalse(player.hasSeenWinScreen());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean value)
+		{
+			player.setHasSeenWinScreen(value);
+
+			assertEquals(value, player.hasSeenWinScreen());
+		}
+
+	}
+
+	@Nested
+	class SetSpectatorTarget
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(player.getSpectatorTarget());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			Entity entity = new CowMock(server, UUID.randomUUID());
+			player.setGameMode(GameMode.SPECTATOR);
+
+			player.setSpectatorTarget(entity);
+
+			assertEquals(entity, player.getSpectatorTarget());
+		}
+
+		@Test
+		void givenPlayerInIllegalGameMode()
+		{
+			Entity entity = new CowMock(server, UUID.randomUUID());
+			player.setGameMode(GameMode.SURVIVAL);
+
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setSpectatorTarget(entity));
+			assertEquals("Player must be in spectator mode", e.getMessage());
 		}
 
 	}

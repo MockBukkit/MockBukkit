@@ -1,29 +1,22 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.PlayerInventoryViewMock;
-import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -32,11 +25,22 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.PlayerInventoryViewMock;
+import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -319,20 +323,53 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean hasCooldown(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
+
+		return this.hasCooldown(ItemStack.of(material));
 	}
 
 	@Override
 	public int getCooldown(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
+
+		return this.getCooldown(ItemStack.of(material));
 	}
 
 	@Override
 	public void setCooldown(@NotNull Material material, int ticks)
 	{
+		Preconditions.checkArgument(material != null, "Material cannot be null");
+		Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
+
+		this.setCooldown(ItemStack.of(material), ticks);
+	}
+
+	@Override
+	public boolean hasCooldown(@NotNull ItemStack itemStack)
+	{
+		Preconditions.checkArgument(itemStack != null, "Material cannot be null");
+
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getCooldown(@NotNull ItemStack itemStack)
+	{
+		Preconditions.checkArgument(itemStack != null, "ItemStack cannot be null");
+
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCooldown(@NotNull ItemStack itemStack, int ticks)
+	{
+		Preconditions.checkArgument(itemStack != null, "ItemStack cannot be null");
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -378,6 +415,16 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public void wakeup(boolean setSpawnLocation)
 	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void startRiptideAttack(int duration, float damage, @Nullable ItemStack itemStack)
+	{
+		Preconditions.checkArgument(duration > 0, "Duration must be greater than 0");
+		Preconditions.checkArgument(damage >= 0, "Damage must not be negative");
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -533,7 +580,14 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public void openSign(@NotNull Sign sign)
+	{
+		this.openSign(sign, org.bukkit.block.sign.Side.FRONT);
+	}
+
+	@Override
+	public void openSign(@NotNull Sign sign, @NotNull Side side)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -541,6 +595,27 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 
 	@Override
 	public boolean dropItem(boolean dropAll)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(int slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(@NotNull EquipmentSlot slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Item dropItem(@NotNull ItemStack itemStack, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

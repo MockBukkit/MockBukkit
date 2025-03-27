@@ -51,6 +51,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.ban.IpBanList;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
@@ -124,6 +125,7 @@ import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
 import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -166,6 +168,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
 
 	private @NotNull GameMode previousGamemode = super.getGameMode();
+	private @Nullable WeatherType playerWeather = null;
+	private @Nullable Entity spectatorTarget = null;
+	private @NotNull TriState flyingFallDamage = TriState.NOT_SET;
 
 	private boolean online;
 	private @Nullable Component displayName = null;
@@ -176,14 +181,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private float exp = 0;
 	private int expCooldown = 0;
 	private int deathScreenScore = 0;
+	private int playerListOrder = 0;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
 	private boolean scaledHealth = false;
+	private boolean allowServerListings = true;
+	private boolean sleepingIgnored = false;
+	private boolean seenWinScreen = false;
+	private boolean relativeTime = true;
+	private long timeOffset = 0;
 	private double healthScale = 20;
 	private Location compassTarget;
 	private @Nullable Location respawnLocation;
 	private @Nullable InetSocketAddress address;
+	private @Nullable InetSocketAddress haProxyAddress;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
@@ -543,24 +555,46 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	{
+		return this.ban(reason, expires, source, true);
+	}
+
+	@Override
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.ban(reason, expires != null ? Date.from(expires) : null, source);
 	}
 
 	@Override
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.ban(reason, duration != null ? Instant.now().plus(duration) : null, source);
 	}
 
 	@Override
-	public @Nullable BanEntry<org.bukkit.profile.PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		E banEntry = (E) getServer().getBanList(BanList.Type.PROFILE)
+				.addBan(this.getPlayerProfile(), reason, expires, source);
+		if (kickPlayer)
+		{
+			this.kickPlayer(reason);
+		}
+
+		return banEntry;
+	}
+
+	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Instant instant, @Nullable String source, boolean kickPlayer)
+	{
+		return this.ban(reason, instant != null ? Date.from(instant) : null, source, kickPlayer);
+	}
+
+	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source, boolean kickPlayer)
+	{
+		return this.ban(reason, duration != null ? Instant.now().plus(duration) : null, source, kickPlayer);
 	}
 
 	/**
@@ -646,56 +680,23 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isAllowingServerListings()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.allowServerListings;
 	}
 
-	@Override
-	public int getNoDamageTicks()
+	/**
+	 * Sets whether the player has the "Allow Server Listings" setting enabled.
+	 *
+	 * @param allowServerListings whether the player allows server listings
+	 */
+	public void setAllowServerListings(boolean allowServerListings)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setNoDamageTicks(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.allowServerListings = allowServerListings;
 	}
 
 	@Override
 	public EntityEquipment getEquipment()
 	{
 		return (EntityEquipment) getInventory();
-	}
-
-	@Override
-	public boolean hasCooldown(@NotNull ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getCooldown(@NotNull ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setCooldown(@NotNull ItemStack itemStack, int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void startRiptideAttack(int duration, float attackStrength, @Nullable ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -855,15 +856,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public int getPlayerListOrder()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListOrder;
 	}
 
 	@Override
-	public void setPlayerListOrder(int i)
+	public void setPlayerListOrder(int order)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(order >= 0, "order cannot be negative");
+
+		this.playerListOrder = order;
 	}
 
 	@Override
@@ -896,11 +897,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return (isOnline()) ? address : null;
 	}
 
+	/**
+	 * Sets the socket address of this player's proxy
+	 *
+	 * @param haProxyAddress the player's proxy address, null if the server doesn't have Proxy Protocol enabled,
+	 *                       or the player didn't connect to an HAProxy instance.
+	 */
+	public void setHaProxyAddress(@Nullable InetSocketAddress haProxyAddress)
+	{
+		this.haProxyAddress = haProxyAddress;
+	}
+
 	@Override
 	public @Nullable InetSocketAddress getHAProxyAddress()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (isOnline()) ? haProxyAddress : null;
 	}
 
 	@Override
@@ -1046,13 +1057,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	@SuppressWarnings("deprecation")
 	public void chat(@NotNull String msg)
 	{
@@ -1076,39 +1080,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source, boolean kickPlayer)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(this.getAddress() != null, "The Address of this Player is null");
+		BanEntry<InetAddress> banEntry = ((IpBanList) this.server.getBanList(BanList.Type.IP))
+				.addBan(this.getAddress().getAddress(), reason, expires, source);
+		if (kickPlayer)
+		{
+			this.kickPlayer(reason);
+		}
+		return banEntry;
 	}
 
 	@Override
-	public <E extends BanEntry<? super PlayerProfile>> @Nullable E ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source, boolean kickPlayer)
+	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Instant instant, @Nullable String source, boolean kickPlayer)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
-	}
-
-	@Override
-	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Instant expires, @Nullable String source, boolean kickPlayer)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.banIp(reason, instant != null ? Date.from(instant) : null, source, kickPlayer);
 	}
 
 	@Override
 	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Duration duration, @Nullable String source, boolean kickPlayer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.banIp(reason, duration != null ? Instant.now().plus(duration) : null, source, kickPlayer);
 	}
 
 	/**
@@ -1164,15 +1157,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isSleepingIgnored()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleepingIgnored;
 	}
 
 	@Override
 	public void setSleepingIgnored(boolean isSleeping)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sleepingIgnored = isSleeping;
 	}
 
 	@Override
@@ -1309,29 +1300,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull TriState hasFlyingFallDamage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.flyingFallDamage;
 	}
 
 	@Override
 	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(flyingFallDamage != null, "flyingFallDamage cannot be null");
+		this.flyingFallDamage = flyingFallDamage;
 	}
 
 	@Override
 	public void setHasSeenWinScreen(boolean hasSeenWinScreen)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.seenWinScreen = hasSeenWinScreen;
 	}
 
 	@Override
 	public boolean hasSeenWinScreen()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.seenWinScreen;
 	}
 
 	@Override
@@ -1825,57 +1813,65 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setPlayerTime(long time, boolean relative)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.timeOffset = time;
+		this.relativeTime = relative;
 	}
 
 	@Override
 	public long getPlayerTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.timeOffset;
 	}
 
 	@Override
 	public long getPlayerTimeOffset()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(isInWorld(), "Player is not in world.");
+
+		WorldMock world = getWorld();
+		long dayTime = world.getFullTime();
+
+		if (isPlayerTimeRelative())
+		{
+			// Adds timeOffset to the current server time.
+			return dayTime + this.timeOffset;
+		}
+		else
+		{
+			// Adds timeOffset to the beginning of this day.
+			return dayTime - (dayTime % 24000) + this.timeOffset;
+		}
 	}
 
 	@Override
 	public boolean isPlayerTimeRelative()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.relativeTime;
 	}
 
 	@Override
 	public void resetPlayerTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setPlayerTime(0, true);
 	}
 
 	@Override
-	public WeatherType getPlayerWeather()
+	public @Nullable WeatherType getPlayerWeather()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerWeather;
 	}
 
 	@Override
 	public void setPlayerWeather(@NotNull WeatherType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(type != null, "weather type cannot be null");
+		this.playerWeather = type;
 	}
 
 	@Override
 	public void resetPlayerWeather()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerWeather = null;
 	}
 
 	@Override
@@ -2449,17 +2445,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public Entity getSpectatorTarget()
+	public @Nullable Entity getSpectatorTarget()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spectatorTarget;
 	}
 
 	@Override
 	public void setSpectatorTarget(Entity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(this.getGameMode() == GameMode.SPECTATOR, "Player must be in spectator mode");
+		this.spectatorTarget = entity;
 	}
 
 	@Override
@@ -2778,34 +2773,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void openSign(@NotNull Sign sign, @NotNull Side side)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Item dropItem(int slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Item dropItem(@NotNull EquipmentSlot slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Item dropItem(@NotNull ItemStack itemStack, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setResourcePack(@NotNull String url, @NotNull String hash)
 	{
 		// TODO Auto-generated method stub
@@ -2967,13 +2934,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
 	{
 		// TODO Auto-generated method stub
@@ -3037,62 +2997,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void attack(@NotNull Entity target)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void startUsingItem(@NotNull EquipmentSlot hand)
-	{
-
-	}
-
-	@Override
-	public void completeUsingActiveItem()
-	{
-
-	}
-
-	@Override
-	public int getActiveItemRemainingTime()
-	{
-		return 0;
-	}
-
-	@Override
-	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
-	{
-
-	}
-
-	@Override
-	public boolean hasActiveItem()
-	{
-		return false;
-	}
-
-	@Override
-	public int getActiveItemUsedTime()
-	{
-		return 0;
-	}
-
-	@Override
-	public @NotNull EquipmentSlot getActiveItemHand()
-	{
-		return null;
-	}
-
-	@Override
-	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull Duration getIdleDuration()
 	{
 		// TODO Auto-generated method stub
@@ -3122,41 +3026,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public boolean isChunkSent(long chunkKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Set<Player> getTrackedBy()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack damageItemStack(@NotNull ItemStack stack, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void damageItemStack(@NotNull EquipmentSlot slot, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -3305,12 +3174,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
 		}
 		return true;
-	}
-
-	@Override
-	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
-	{
-		return null;
 	}
 
 	@Override

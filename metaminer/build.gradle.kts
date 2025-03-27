@@ -17,7 +17,8 @@ dependencies {
 	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.12.1")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
