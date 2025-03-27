@@ -393,4 +393,67 @@ class HumanEntityMockTest
 		assertFalse(actual);
 	}
 
+	@Nested
+	class SetSaturatedRegenRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(10, human.getSaturatedRegenRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setSaturatedRegenRate(value);
+
+			assertEquals(value, human.getSaturatedRegenRate());
+		}
+
+	}
+
+	@Nested
+	class SetUnsaturatedRegenRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(80, human.getUnsaturatedRegenRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setUnsaturatedRegenRate(value);
+
+			assertEquals(value, human.getUnsaturatedRegenRate());
+		}
+
+	}
+
+	@Nested
+	class SetStarvationRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(80, human.getStarvationRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setStarvationRate(value);
+
+			assertEquals(value, human.getStarvationRate());
+		}
+
+	}
+
 }

@@ -68,6 +68,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private int foodLevel = 20;
 	protected boolean blocking;
 	private int sleepTicks = 0;
+	private int saturatedRegenRate = 10;
+	private int unsaturatedRegenRate = 80;
+	private int starvationRate = 80;
 
 	/**
 	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -661,49 +664,42 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getSaturatedRegenRate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.saturatedRegenRate;
 	}
 
 	@Override
 	public void setSaturatedRegenRate(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.saturatedRegenRate = ticks;
 	}
 
 	@Override
 	public int getUnsaturatedRegenRate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unsaturatedRegenRate;
 	}
 
 	@Override
 	public void setUnsaturatedRegenRate(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.unsaturatedRegenRate = ticks;
 	}
 
 	@Override
 	public int getStarvationRate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.starvationRate;
 	}
 
 	@Override
 	public void setStarvationRate(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.starvationRate = ticks;
 	}
 
 	@Override
 	public @Nullable Location getPotentialRespawnLocation()
 	{
-
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
