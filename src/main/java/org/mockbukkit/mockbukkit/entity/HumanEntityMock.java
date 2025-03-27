@@ -359,7 +359,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getCooldown(@NotNull ItemStack itemStack)
 	{
-		Preconditions.checkArgument(itemStack != null, "Material cannot be null");
+		Preconditions.checkArgument(itemStack != null, "ItemStack cannot be null");
 
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
