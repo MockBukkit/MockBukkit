@@ -782,23 +782,6 @@ public class InventoryMock implements Inventory
 				&& Objects.equals(customTitle, that.customTitle);
 	}
 
-	/** Note: does not compare holder or viewers (matches spigot/paper). */
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o) return true;
-		if (!(o instanceof InventoryMock that)) return false;
-		return maxStackSize == that.maxStackSize
-				&& Objects.deepEquals(items, that.items)
-				&& type == that.type;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(Arrays.hashCode(items), type, maxStackSize);
-	}
-
 	@Override
 	public String toString()
 	{
