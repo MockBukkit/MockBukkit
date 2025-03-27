@@ -705,6 +705,7 @@ public class InventoryMock implements Inventory
 	 * @return An inventory snapshot.
 	 */
 	@NotNull
+	@ApiStatus.Internal
 	public Inventory getSnapshot()
 	{
 		try
