@@ -116,7 +116,8 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	{
 		if (super.update(force, applyPhysics))
 		{
-			this.inventory = ((InventoryMock) snapshot).getSnapshot();
+			this.inventory.clear();
+			this.inventory.setContents(snapshot.getContents());
 			return true;
 		}
 		return false;
