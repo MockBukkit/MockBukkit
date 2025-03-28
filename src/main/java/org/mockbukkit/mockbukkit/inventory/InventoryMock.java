@@ -708,13 +708,13 @@ public class InventoryMock implements Inventory
 	@ApiStatus.Internal
 	public Inventory getSnapshot()
 	{
-		try
+		if (InventoryMock.class.equals(getClass()))
 		{
-			return this.getClass().getConstructor(this.getClass()).newInstance(this);
+			return new InventoryMock(this);
 		}
-		catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)
+		else
 		{
-			throw new IllegalStateException(e);
+			throw new UnimplementedOperationException(String.format("%s does not implement method getSnapshot", this.getClass().getSimpleName()));
 		}
 	}
 
