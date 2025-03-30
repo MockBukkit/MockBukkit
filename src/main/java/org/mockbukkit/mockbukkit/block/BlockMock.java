@@ -23,10 +23,12 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.bukkit.util.VoxelShape;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
@@ -649,10 +651,10 @@ public class BlockMock implements Block
 	 *
 	 * @param state The {@link BlockState} that should be set.
 	 */
+	@ApiStatus.Internal
 	public void setState(@NotNull BlockStateMock state)
 	{
 		Preconditions.checkNotNull(state, "The BlockState cannot be null");
-
 		this.state = state;
 	}
 

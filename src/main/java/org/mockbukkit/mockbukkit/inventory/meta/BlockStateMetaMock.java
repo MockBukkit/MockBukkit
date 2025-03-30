@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
-import com.google.common.base.Strings;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -193,8 +192,9 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	public @NotNull BlockState getBlockState()
 	{
 		if (blockState != null)
+		{
 			return blockState.copy();
-
+		}
 		Class<? extends TileStateMock> clazz = null;
 		try
 		{
@@ -265,7 +265,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 
 		if (blockState instanceof Container container)
 		{
-			ItemStack[] contents = container.getInventory().getContents();
+			ItemStack[] contents = container.getSnapshotInventory().getContents();
 			List<Map<String, Object>> containerData = new ArrayList<>(contents.length);
 			for (int i = 0; i < contents.length; i++)
 			{
@@ -305,7 +305,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 			// TODO: deserialize other TileStates (Other function call probably)
 			return;
 		}
-		Inventory inventory = container.getInventory();
+		Inventory inventory = container.getSnapshotInventory();
 		List<Map<String, Object>> containerData = (List<Map<String, Object>>) args.get("container");
 		for (Map<String, Object> slotData : containerData)
 		{

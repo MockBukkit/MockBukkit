@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.inventory.Inventory;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
@@ -15,6 +16,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
@@ -91,18 +93,6 @@ class BrewingStandStateMockTest extends ContainerStateMockTest
 	void blockStateMock_Mock_CorrectType()
 	{
 		assertInstanceOf(BrewingStandStateMock.class, BlockStateMock.mockState(block));
-	}
-
-	@Test
-	void testGetSnapShotInventory()
-	{
-		brewingStand.getInventory().setFuel(new ItemStackMock(Material.BLAZE_POWDER));
-		brewingStand.getInventory().setIngredient(new ItemStackMock(Material.SPIDER_EYE));
-
-		assertInstanceOf(BrewerInventory.class, brewingStand.getSnapshotInventory());
-		assertNotSame(brewingStand.getInventory(), brewingStand.getSnapshotInventory());
-		assertEquals(brewingStand.getInventory().getFuel(), brewingStand.getSnapshotInventory().getFuel());
-		assertEquals(brewingStand.getInventory().getIngredient(), brewingStand.getSnapshotInventory().getIngredient());
 	}
 
 	@Test

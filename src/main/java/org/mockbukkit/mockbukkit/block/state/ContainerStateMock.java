@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import java.util.Objects;
-
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
@@ -12,6 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * Mock implementation of a {@link Container}.
  *
@@ -20,7 +21,8 @@ import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 public abstract class ContainerStateMock extends LockableTileStateMock implements Container
 {
 
-	private final Inventory inventory;
+	private Inventory inventory;
+	private final Inventory snapshot;
 	private @Nullable Component customName;
 
 	/**
@@ -32,6 +34,7 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	{
 		super(material);
 		this.inventory = createInventory();
+		this.snapshot = createInventory();
 	}
 
 	/**
@@ -43,6 +46,7 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	{
 		super(block);
 		this.inventory = createInventory();
+		this.snapshot = createInventory();
 	}
 
 	/**
@@ -53,8 +57,9 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
 		super(state);
-		this.inventory = state.getSnapshotInventory();
+		this.inventory = state.inventory;
 		this.customName = state.customName();
+		this.snapshot = ((InventoryMock) state.getSnapshotInventory()).getSnapshot();
 	}
 
 	/**
@@ -93,28 +98,61 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	@Override
 	public @NotNull Inventory getInventory()
 	{
+		if (!this.isPlaced())
+		{
+			return snapshot;
+		}
 		return this.inventory;
 	}
 
 	@Override
 	public @NotNull Inventory getSnapshotInventory()
 	{
-		return ((InventoryMock) this.inventory).getSnapshot();
+		return snapshot;
+	}
+
+	@Override
+	public boolean update(boolean force, boolean applyPhysics)
+	{
+		if (super.update(force, applyPhysics))
+		{
+			this.inventory.clear();
+			this.inventory.setContents(snapshot.getContents());
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof ContainerStateMock that)) return false;
-		if (!super.equals(o)) return false;
-		return Objects.equals(inventory, that.inventory) && Objects.equals(customName, that.customName);
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ContainerStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		if (isPlaced() && !Objects.equals(inventory, that.inventory))
+		{
+			return false;
+		}
+		return Objects.equals(customName, that.customName) && Arrays.equals(snapshot.getContents(), that.snapshot.getContents());
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), inventory, customName);
+		if (isPlaced())
+		{
+			return Objects.hash(super.hashCode(), inventory, customName, Arrays.hashCode(snapshot.getContents()));
+		}
+		return Objects.hash(super.hashCode(), customName, Arrays.hashCode(snapshot.getContents()));
 	}
 
 	@Override
@@ -124,4 +162,5 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 				", customName=" + customName +
 				", inventory=" + inventory;
 	}
+
 }

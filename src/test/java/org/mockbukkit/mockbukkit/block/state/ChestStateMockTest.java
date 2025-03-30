@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -106,6 +107,7 @@ class ChestStateMockTest extends ContainerStateMockTest
 	@Nested
 	class GetBlockInventory
 	{
+
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenSameInventoryIsReturned()
 		{
@@ -116,18 +118,20 @@ class ChestStateMockTest extends ContainerStateMockTest
 			assertTrue(originalInventory.contains(ItemStack.of(Material.DIAMOND)));
 			assertSame(originalInventory, chest.getBlockInventory());
 		}
+
 	}
 
 	@Nested
 	class GetSnapshotInventory
 	{
+
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenDifferentInventoryIsReturned()
 		{
 			Inventory blockInventory = chest.getBlockInventory();
 			Inventory snapshotInventory = chest.getSnapshotInventory();
-			assertEquals(blockInventory, snapshotInventory);
-			assertNotSame(blockInventory, snapshotInventory);
+			assertNotEquals(blockInventory, snapshotInventory);
+			assertArrayEquals(blockInventory.getContents(), snapshotInventory.getContents());
 		}
 
 		@Test
@@ -142,6 +146,7 @@ class ChestStateMockTest extends ContainerStateMockTest
 			assertFalse(snapshotInventory.contains(ItemStack.of(Material.DIAMOND)));
 			assertNotEquals(blockInventory, snapshotInventory);
 		}
+
 	}
 
 	@Test
@@ -172,6 +177,7 @@ class ChestStateMockTest extends ContainerStateMockTest
 	@Nested
 	class Copy
 	{
+
 		@Test
 		void shouldCloneInventory()
 		{
@@ -183,9 +189,10 @@ class ChestStateMockTest extends ContainerStateMockTest
 			assertNotSame(chest, newState);
 
 			chest.getBlockInventory().setItem(0, ItemStack.of(Material.EMERALD));
-			assertNotEquals(chest, newState);
-			assertNotSame(chest, newState);
+			assertEquals(chest, newState);
+			assertNotEquals(chest.getSnapshotInventory(), newState.getSnapshotInventory());
 		}
 
 	}
+
 }

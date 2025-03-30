@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -96,8 +97,7 @@ class FurnaceInventoryMockTest
 		inventory.setResult(ItemStack.of(Material.CHARCOAL));
 
 		FurnaceInventoryMock actual = inventory.getSnapshot();
-		assertEquals(inventory, actual);
-		assertNotSame(inventory, actual);
+		assertNotEquals(inventory, actual);
 	}
 
 }
