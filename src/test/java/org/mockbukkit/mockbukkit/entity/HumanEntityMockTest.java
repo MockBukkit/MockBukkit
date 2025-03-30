@@ -571,6 +571,13 @@ class HumanEntityMockTest
 		}
 
 		@Test
+		void givenAttemptingToDiscoverRecipeThatDoesNotExist()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("this_recipe_does_not_exist");
+			assertEquals(0, human.discoverRecipes(Set.of(recipe)));
+		}
+
+		@Test
 		void givenRecipeUndiscovery()
 		{
 			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");

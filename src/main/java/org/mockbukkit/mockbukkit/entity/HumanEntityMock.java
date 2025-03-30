@@ -534,6 +534,12 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		AtomicInteger count = new AtomicInteger();
 		recipes.forEach(recipe ->
 		{
+			if (server.getRecipe(recipe) == null)
+			{
+				// The requested recipe does not exist.
+				return;
+			}
+
 			if (this.discoveredRecipes.add(recipe))
 			{
 				count.incrementAndGet();
