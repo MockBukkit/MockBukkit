@@ -320,7 +320,7 @@ class BlockTypeMockTest
 		@Test
 		void givenAmethystCluster()
 		{
-			BlockData data = BlockType.AMETHYST_CLUSTER.createBlockData();
+			AmethystCluster data = BlockType.AMETHYST_CLUSTER.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(AmethystCluster.class, data);
 		}
@@ -328,7 +328,7 @@ class BlockTypeMockTest
 		@Test
 		void givenBamboo()
 		{
-			BlockData data = BlockType.BAMBOO.createBlockData();
+			Bamboo data = BlockType.BAMBOO.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Bamboo.class, data);
 		}
@@ -336,7 +336,7 @@ class BlockTypeMockTest
 		@Test
 		void givenDecoratedPot()
 		{
-			BlockData data = BlockType.DECORATED_POT.createBlockData();
+			DecoratedPot data = BlockType.DECORATED_POT.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(DecoratedPot.class, data);
 		}
@@ -344,7 +344,7 @@ class BlockTypeMockTest
 		@Test
 		void givenLever()
 		{
-			BlockData data = BlockType.LEVER.createBlockData();
+			Switch data = BlockType.LEVER.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Switch.class, data);
 		}
@@ -352,7 +352,7 @@ class BlockTypeMockTest
 		@Test
 		void givenOakLog()
 		{
-			BlockData data = BlockType.OAK_LOG.createBlockData();
+			Orientable data = BlockType.OAK_LOG.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Orientable.class, data);
 		}
@@ -360,7 +360,7 @@ class BlockTypeMockTest
 		@Test
 		void givenLava()
 		{
-			BlockData data = BlockType.LAVA.createBlockData();
+			Levelled data = BlockType.LAVA.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Levelled.class, data);
 		}
@@ -368,7 +368,7 @@ class BlockTypeMockTest
 		@Test
 		void givenRedStoneOre()
 		{
-			BlockData data = BlockType.REDSTONE_ORE.createBlockData();
+			Lightable data = BlockType.REDSTONE_ORE.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Lightable.class, data);
 		}
@@ -376,11 +376,9 @@ class BlockTypeMockTest
 		@Test
 		void givenCandle()
 		{
-			BlockData data = BlockType.WHITE_CANDLE.createBlockData();
+			Candle data = BlockType.WHITE_CANDLE.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Candle.class, data);
-			assertInstanceOf(Lightable.class, data);
-			assertInstanceOf(Waterlogged.class, data);
 		}
 
 	}
