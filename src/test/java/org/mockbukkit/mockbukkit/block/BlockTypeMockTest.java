@@ -7,8 +7,10 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
+import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.inventory.ItemType;
@@ -369,6 +371,16 @@ class BlockTypeMockTest
 			BlockData data = BlockType.REDSTONE_ORE.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Lightable.class, data);
+		}
+
+		@Test
+		void givenCandle()
+		{
+			BlockData data = BlockType.WHITE_CANDLE.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Candle.class, data);
+			assertInstanceOf(Lightable.class, data);
+			assertInstanceOf(Waterlogged.class, data);
 		}
 
 	}

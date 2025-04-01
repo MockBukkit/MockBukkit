@@ -16,6 +16,7 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
+import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
@@ -110,7 +111,9 @@ public enum BlockDataKey
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 
-	LEVEL("level", Integer::parseInt, Levelled.class::isInstance);
+	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
+
+	CANDLES("candles", Integer::parseInt, Candle.class::isInstance);
 
 	private static final Map<String, BlockDataKey> KEY_TO_BLOCK_DATA_KEY_RELATION = compileKeyRelation();
 

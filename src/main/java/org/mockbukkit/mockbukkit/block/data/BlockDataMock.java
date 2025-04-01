@@ -54,10 +54,17 @@ import java.util.regex.Pattern;
  */
 public class BlockDataMock implements BlockData
 {
-	private static final Map<Material, Function<Material, BlockDataMock>> FACTORIES_BY_MATERIAL = Map.of(
 
+	/**
+	 * This factory tries to create the block data from a material {@link Tag}.
+	 */
+	private static final Map<Tag<Material>, Function<Material, BlockDataMock>> FACTORIES_BY_TAGS = Map.of(
+			Tag.CANDLES, CandleDataMock::new
 	);
 
+	/**
+	 * This factory tries to created the block data from the {@link BlockData} class.
+	 */
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = Map.of(
 			AmethystCluster.class, AmethystClusterDataMock::new,
 			Bamboo.class, m -> new BambooDataMock(),
@@ -511,17 +518,15 @@ public class BlockDataMock implements BlockData
 			return mock;
 		}
 
-		// Special cases
-		for (var entry : FACTORIES_BY_MATERIAL.entrySet())
+		for (var entry : FACTORIES_BY_TAGS.entrySet())
 		{
-			Material mat = entry.getKey();
-			if (mat.equals(material))
+			Tag<Material> tag = entry.getKey();
+			if (tag.isTagged(material))
 			{
 				return entry.getValue().apply(material);
 			}
 		}
 
-		// Normal cases
 		for (var entry : FACTORIES_BY_BLOCK_DATA.entrySet())
 		{
 			Class<?> bukkitType = entry.getKey();
