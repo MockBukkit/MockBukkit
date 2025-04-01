@@ -17,6 +17,7 @@ import org.bukkit.block.BlockSupport;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
@@ -502,7 +503,8 @@ public class BlockDataMock implements BlockData
 			Switch.class, SwitchDataMock::new,
 			Bamboo.class, m -> new BambooDataMock(),
 			DecoratedPot.class, m -> new DecoratedPotDataMock(),
-			Orientable.class, OrientableMock::new
+			Orientable.class, OrientableMock::new,
+			Levelled.class, LevelledDataMock::new
 		);
 
 		for (var entry : factories.entrySet())

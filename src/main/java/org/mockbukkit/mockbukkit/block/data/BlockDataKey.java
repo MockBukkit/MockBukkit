@@ -6,6 +6,7 @@ import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.Openable;
@@ -107,7 +108,9 @@ public enum BlockDataKey
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
-	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance);
+	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
+
+	LEVEL("level", Integer::parseInt, Levelled.class::isInstance);
 
 	private static final Map<String, BlockDataKey> KEY_TO_BLOCK_DATA_KEY_RELATION = compileKeyRelation();
 
