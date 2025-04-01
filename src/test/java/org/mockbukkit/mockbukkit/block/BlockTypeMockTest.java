@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.DecoratedPot;
@@ -349,6 +350,7 @@ class BlockTypeMockTest
 		{
 			BlockData data = BlockType.OAK_LOG.createBlockData();
 			assertNotNull(data);
+			assertInstanceOf(Orientable.class, data);
 		}
 
 	}

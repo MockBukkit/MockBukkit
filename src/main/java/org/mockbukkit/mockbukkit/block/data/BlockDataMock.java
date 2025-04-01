@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,6 +17,11 @@ import org.bukkit.block.BlockSupport;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.type.AmethystCluster;
+import org.bukkit.block.data.type.Bamboo;
+import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
@@ -35,6 +41,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -215,6 +223,25 @@ public class BlockDataMock implements BlockData
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
+	}
+
+	/**
+	 * Convert the list of input values into a Immuttable set.
+	 *
+	 * @param inputValues
+	 *
+	 * @return An immutable set.
+	 *
+	 * @param <B> The expected class type.
+	 */
+	@SuppressWarnings("unchecked")
+	protected <B> Set<B> getValues(B... inputValues) {
+		ImmutableSet.Builder<B> values = ImmutableSet.builder();
+		for (B value : inputValues)
+		{
+			values.add(value);
+		}
+		return values.build();
 	}
 
 	@Override
@@ -470,14 +497,24 @@ public class BlockDataMock implements BlockData
 		}
 
 		// Special cases
-		return switch (material)
+		Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> factories = Map.of(
+			AmethystCluster.class, AmethystClusterDataMock::new,
+			Switch.class, SwitchDataMock::new,
+			Bamboo.class, m -> new BambooDataMock(),
+			DecoratedPot.class, m -> new DecoratedPotDataMock(),
+			Orientable.class, OrientableMock::new
+		);
+
+		for (var entry : factories.entrySet())
 		{
-			case AMETHYST_CLUSTER -> new AmethystClusterDataMock(material);
-			case LEVER -> new SwitchDataMock(material);
-			case BAMBOO -> new BambooDataMock();
-			case DECORATED_POT -> new DecoratedPotDataMock();
-			default -> new BlockDataMock(material);
-		};
+			Class<?> bukkitType = entry.getKey();
+			if (bukkitType.equals(material.data))
+			{
+				return entry.getValue().apply(material);
+			}
+		}
+
+		return new BlockDataMock(material);
 	}
 
 	private static @NotNull BlockDataMock mock(@NotNull Material material, @NotNull Map<String, Object> previousData)
