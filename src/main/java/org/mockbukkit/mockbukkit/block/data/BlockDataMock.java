@@ -18,6 +18,7 @@ import org.bukkit.block.BlockType;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
+import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
@@ -53,6 +54,19 @@ import java.util.regex.Pattern;
  */
 public class BlockDataMock implements BlockData
 {
+	private static final Map<Material, Function<Material, BlockDataMock>> FACTORIES_BY_MATERIAL = Map.of(
+
+	);
+
+	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = Map.of(
+			AmethystCluster.class, AmethystClusterDataMock::new,
+			Bamboo.class, m -> new BambooDataMock(),
+			DecoratedPot.class, m -> new DecoratedPotDataMock(),
+			Levelled.class, LevelledDataMock::new,
+			Lightable.class, LightableDataMock::new,
+			Orientable.class, OrientableMock::new,
+			Switch.class, SwitchDataMock::new
+	);
 
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
@@ -498,16 +512,17 @@ public class BlockDataMock implements BlockData
 		}
 
 		// Special cases
-		Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> factories = Map.of(
-			AmethystCluster.class, AmethystClusterDataMock::new,
-			Switch.class, SwitchDataMock::new,
-			Bamboo.class, m -> new BambooDataMock(),
-			DecoratedPot.class, m -> new DecoratedPotDataMock(),
-			Orientable.class, OrientableMock::new,
-			Levelled.class, LevelledDataMock::new
-		);
+		for (var entry : FACTORIES_BY_MATERIAL.entrySet())
+		{
+			Material mat = entry.getKey();
+			if (mat.equals(material))
+			{
+				return entry.getValue().apply(material);
+			}
+		}
 
-		for (var entry : factories.entrySet())
+		// Normal cases
+		for (var entry : FACTORIES_BY_BLOCK_DATA.entrySet())
 		{
 			Class<?> bukkitType = entry.getKey();
 			if (bukkitType.equals(material.data))

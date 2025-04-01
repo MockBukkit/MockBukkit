@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
+import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
@@ -360,6 +361,14 @@ class BlockTypeMockTest
 			BlockData data = BlockType.LAVA.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Levelled.class, data);
+		}
+
+		@Test
+		void givenRedStoneOre()
+		{
+			BlockData data = BlockType.REDSTONE_ORE.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Lightable.class, data);
 		}
 
 	}
