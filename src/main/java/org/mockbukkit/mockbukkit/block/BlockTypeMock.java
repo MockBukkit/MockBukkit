@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit.block;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.World;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
@@ -15,7 +17,6 @@ import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
@@ -33,11 +34,13 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	private final float slipperiness;
 	private final boolean air;
 	private final boolean interactable;
+	private final boolean collision;
 	private final String translationKey;
 
-	public BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
+	@ApiStatus.Internal
+	private BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
 						 boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						 boolean air, boolean interactable, String translationKey)
+						 boolean air, boolean interactable, boolean collision, String translationKey)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -51,6 +54,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		this.slipperiness = slipperiness;
 		this.air = air;
 		this.interactable = interactable;
+		this.collision = collision;
 		this.translationKey = translationKey;
 	}
 
@@ -69,20 +73,22 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		float slipperiness = jsonObject.get("slipperiness").getAsFloat();
 		boolean air = jsonObject.get("air").getAsBoolean();
 		boolean interactable = jsonObject.get("interactable").getAsBoolean();
+		boolean collision = jsonObject.get("collision").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
-		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, translationKey);
+
+		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, collision, translationKey);
 	}
 
 	@NotNull
 	@Override
 	public Typed<BlockData> typed()
 	{
-		throw new UnimplementedOperationException();
+		return this.typed(BlockData.class);
 	}
 
 	@NotNull
 	@Override
-	public <Other extends BlockData> Typed<Other> typed(@NotNull Class<Other> blockDataType)
+	public <O extends BlockData> Typed<O> typed(@NotNull Class<O> blockDataType)
 	{
 		throw new UnimplementedOperationException();
 	}
@@ -90,13 +96,20 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public boolean hasItemType()
 	{
-		return itemType;
+		return this.itemType;
 	}
 
 	@Override
 	public @NotNull ItemType getItemType()
 	{
-		throw new UnimplementedOperationException();
+		if (this == AIR)
+		{
+			return ItemType.AIR;
+		}
+
+		ItemType item = Registry.ITEM.get(this.key);
+		Preconditions.checkArgument(item != null && item != ItemType.AIR, "The block type %s has no corresponding item type", this.getKey());
+		return item;
 	}
 
 	@Override
@@ -109,7 +122,10 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	public @NotNull B createBlockData(@Nullable Consumer<? super B> consumer)
 	{
 		B blockData = createBlockData();
-		consumer.accept(blockData);
+		if (consumer != null)
+		{
+			consumer.accept(blockData);
+		}
 		return blockData;
 	}
 
@@ -135,70 +151,71 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public boolean isSolid()
 	{
-		return solid;
+		return this.solid;
 	}
 
 	@Override
 	public boolean isFlammable()
 	{
-		return flammable;
+		return this.flammable;
 	}
 
 	@Override
 	public boolean isBurnable()
 	{
-		return burnable;
+		return this.burnable;
 	}
 
 	@Override
 	public boolean isOccluding()
 	{
-		return occluding;
+		return this.occluding;
 	}
 
 	@Override
 	public boolean hasGravity()
 	{
-		return gravity;
+		return this.gravity;
 	}
 
 	@Override
 	public boolean isInteractable()
 	{
-		return interactable;
+		return this.interactable;
 	}
 
 	@Override
 	public boolean hasCollision()
 	{
-		throw new UnimplementedOperationException();
+		return this.collision;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		return hardness;
+		return this.hardness;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		return blastResistance;
+		return this.blastResistance;
 	}
 
 	@Override
 	public float getSlipperiness()
 	{
-		return slipperiness;
+		return this.slipperiness;
 	}
 
 	@Override
 	public boolean isAir()
 	{
-		return air;
+		return this.air;
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.21.1")
 	public boolean isEnabledByFeature(@NotNull World world)
 	{
 		throw new UnimplementedOperationException();
@@ -207,7 +224,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public @Nullable Material asMaterial()
 	{
-		throw new UnimplementedOperationException();
+		return Registry.MATERIAL.get(this.key);
 	}
 
 	@Override
@@ -216,17 +233,17 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		return this.key;
 	}
 
-
+	@Deprecated(forRemoval = true)
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		return translationKey;
+		return translationKey();
 	}
 
 	@Override
 	public @NotNull String translationKey()
 	{
-		return translationKey;
+		return this.translationKey;
 	}
 
 }
