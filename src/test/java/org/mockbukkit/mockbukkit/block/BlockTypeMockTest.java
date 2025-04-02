@@ -10,9 +10,15 @@ import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
+import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Fence;
+import org.bukkit.block.data.type.Slab;
+import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Switch;
+import org.bukkit.block.data.type.TrapDoor;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.inventory.ItemType;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -350,6 +356,14 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		void givenButton()
+		{
+			Switch data = BlockType.STONE_BUTTON.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Switch.class, data);
+		}
+
+		@Test
 		void givenOakLog()
 		{
 			Orientable data = BlockType.OAK_LOG.createBlockData();
@@ -387,6 +401,54 @@ class BlockTypeMockTest
 			Rail data = BlockType.RAIL.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Rail.class, data);
+		}
+
+		@Test
+		void givenFence()
+		{
+			Fence data = BlockType.OAK_FENCE.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Fence.class, data);
+		}
+
+		@Test
+		void givenSlab()
+		{
+			Slab data = BlockType.STONE_SLAB.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Slab.class, data);
+		}
+
+		@Test
+		void givenStairs()
+		{
+			Stairs data = BlockType.OAK_STAIRS.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Stairs.class, data);
+		}
+
+		@Test
+		void givenTrapDoor()
+		{
+			TrapDoor data = BlockType.IRON_TRAPDOOR.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(TrapDoor.class, data);
+		}
+
+		@Test
+		void givenWallSign()
+		{
+			WallSign data = BlockType.SPRUCE_WALL_SIGN.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(WallSign.class, data);
+		}
+
+		@Test
+		void givenBed()
+		{
+			Bed data = BlockType.ORANGE_BED.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Bed.class, data);
 		}
 
 	}

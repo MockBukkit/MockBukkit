@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -57,8 +56,16 @@ public class BlockDataMock implements BlockData
 	 * This factory tries to create the block data from a material {@link Tag}.
 	 */
 	private static final Map<Tag<Material>, Function<Material, BlockDataMock>> FACTORIES_BY_TAGS = Map.of(
+			Tag.BEDS, BedDataMock::new,
+			Tag.BUTTONS, SwitchDataMock::new,
+			Tag.CAMPFIRES, CampfireDataMock::new,
 			Tag.CANDLES, CandleDataMock::new,
-			Tag.RAILS, RailDataMock::new
+			Tag.FENCES, FenceDataMock::new,
+			Tag.RAILS, RailDataMock::new,
+			Tag.SLABS, SlabDataMock::new,
+			Tag.STAIRS, StairsDataMock::new,
+			Tag.TRAPDOORS, TrapDoorDataMock::new,
+			Tag.WALL_SIGNS, WallSignDataMock::new
 	);
 
 	/**
@@ -486,18 +493,6 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 
-		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
-		if (mock != null)
-		{
-			return mock;
-		}
-
-		mock = attemptMockByTag(material);
-		if (mock != null)
-		{
-			return mock;
-		}
-
 		for (var entry : FACTORIES_BY_TAGS.entrySet())
 		{
 			Tag<Material> tag = entry.getKey();
@@ -526,64 +521,6 @@ public class BlockDataMock implements BlockData
 		BlockDataMock blockDataMock = BlockDataMock.mock(material);
 		blockDataMock.data.putAll(previousData);
 		return blockDataMock;
-	}
-
-	/**
-	 * Attempts to construct a BlockDataMock object by matching against Paper MaterialTags. Returns null if the given
-	 * material does not match any supported MaterialSetTag.
-	 *
-	 * @param material Material which we will attempt to mock
-	 * @return BlockDataMock if matched, null otherwise
-	 */
-	private static BlockDataMock attemptMockByPaperMaterialTags(@NotNull Material material)
-	{
-		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-		if (MaterialTags.BEDS.isTagged(material))
-		{
-			return new BedDataMock(material);
-		}
-		return null;
-	}
-
-	/**
-	 * Attempts to construct a BlockDataMock object by matching against Bukkit Tags. Returns null if the given material
-	 * does not match any supported Tag.
-	 *
-	 * @param material Material which we will attempt to mock
-	 * @return BlockDataMock if matched, null otherwise
-	 */
-	private static BlockDataMock attemptMockByTag(@NotNull Material material)
-	{
-		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-		if (Tag.SLABS.isTagged(material))
-		{
-			return new SlabDataMock(material);
-		}
-		else if (Tag.STAIRS.isTagged(material))
-		{
-			return new StairsDataMock(material);
-		}
-		else if (Tag.TRAPDOORS.isTagged(material))
-		{
-			return new TrapDoorDataMock(material);
-		}
-		else if (Tag.CAMPFIRES.isTagged(material))
-		{
-			return new CampfireDataMock(material);
-		}
-		else if (Tag.WALL_SIGNS.isTagged(material))
-		{
-			return new WallSignDataMock(material);
-		}
-		else if (Tag.BUTTONS.isTagged(material))
-		{
-			return new SwitchDataMock(material);
-		}
-		else if (Tag.FENCES.isTagged(material))
-		{
-			return new FenceDataMock(material);
-		}
-		return null;
 	}
 
 }
