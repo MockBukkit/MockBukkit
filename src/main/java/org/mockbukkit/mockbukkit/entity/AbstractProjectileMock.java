@@ -1,13 +1,13 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -19,6 +19,11 @@ import java.util.UUID;
  */
 public abstract class AbstractProjectileMock extends EntityMock implements Projectile
 {
+
+	private @Nullable ProjectileSource source;
+	private @Nullable UUID owner;
+	private boolean hasBeenShot = false;
+	private boolean hasLeftShooter = false;
 
 	/**
 	 * Constructs a new {@link AbstractProjectileMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -49,43 +54,53 @@ public abstract class AbstractProjectileMock extends EntityMock implements Proje
 	@Override
 	public @Nullable UUID getOwnerUniqueId()
 	{
-		throw new UnimplementedOperationException();
+		return this.owner;
+	}
+
+	@Override
+	@Nullable
+	public ProjectileSource getShooter()
+	{
+		return source;
 	}
 
 	@Override
 	public void setShooter(@Nullable ProjectileSource source)
 	{
-		throw new UnimplementedOperationException();
+		if (source instanceof Entity e)
+		{
+			this.owner = e.getUniqueId();
+		}
+		else
+		{
+			this.owner = null;
+		}
+
+		this.source = source;
 	}
 
 	@Override
 	public boolean hasLeftShooter()
 	{
-		throw new UnimplementedOperationException();
+		return this.hasLeftShooter;
 	}
 
 	@Override
 	public void setHasLeftShooter(boolean leftShooter)
 	{
-		throw new UnimplementedOperationException();
+		this.hasLeftShooter = leftShooter;
 	}
 
 	@Override
 	public boolean hasBeenShot()
 	{
-		throw new UnimplementedOperationException();
+		return this.hasBeenShot;
 	}
 
 	@Override
 	public void setHasBeenShot(boolean beenShot)
 	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable ProjectileSource getShooter()
-	{
-		throw new UnimplementedOperationException();
+		this.hasBeenShot = beenShot;
 	}
 
 	@Override

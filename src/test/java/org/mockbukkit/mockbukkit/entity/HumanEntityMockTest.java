@@ -1,8 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import com.google.common.collect.ImmutableSet;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,11 +15,13 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.MainHand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -26,13 +31,18 @@ import org.mockbukkit.mockbukkit.inventory.InventoryViewMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
@@ -391,6 +401,212 @@ class HumanEntityMockTest
 		human.setSleepTicks(sleepTicks);
 		boolean actual = human.isDeeplySleeping();
 		assertFalse(actual);
+	}
+
+	@Nested
+	class SetSaturatedRegenRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(10, human.getSaturatedRegenRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setSaturatedRegenRate(value);
+
+			assertEquals(value, human.getSaturatedRegenRate());
+		}
+
+	}
+
+	@Nested
+	class SetUnsaturatedRegenRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(80, human.getUnsaturatedRegenRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setUnsaturatedRegenRate(value);
+
+			assertEquals(value, human.getUnsaturatedRegenRate());
+		}
+
+	}
+
+	@Nested
+	class SetStarvationRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(80, human.getStarvationRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setStarvationRate(value);
+
+			assertEquals(value, human.getStarvationRate());
+		}
+
+	}
+
+	@Nested
+	class SetMainHand
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(MainHand.RIGHT, human.getMainHand());
+		}
+
+		@ParameterizedTest
+		@EnumSource(MainHand.class)
+		void givenPossibleValues(MainHand value)
+		{
+			human.setMainHand(value);
+
+			assertEquals(value, human.getMainHand());
+		}
+
+	}
+
+	@Nested
+	class SetEnchantmentSeed
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, human.getEnchantmentSeed());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		void givenPossibleValues(int value)
+		{
+			human.setEnchantmentSeed(value);
+
+			assertEquals(value, human.getEnchantmentSeed());
+		}
+
+	}
+
+	@Nested
+	class SetFishHook
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(human.getFishHook());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			FishHook fishHook = new FishHookMock(server, UUID.randomUUID());
+
+			human.setFishHook(fishHook);
+
+			assertEquals(fishHook, human.getFishHook());
+		}
+
+	}
+
+	@Nested
+	class GetDiscoveredRecipes
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(Collections.emptySet(), human.getDiscoveredRecipes());
+		}
+
+		@Test
+		void givenNewRecipeDiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			assertTrue(human.discoverRecipe(recipe));
+
+			Set<NamespacedKey> actual = human.getDiscoveredRecipes();
+			assertTrue(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Set.of(recipe), actual);
+			assertInstanceOf(ImmutableSet.class, actual);
+
+			// No duplicates allowed
+			assertFalse(human.discoverRecipe(recipe));
+		}
+
+		@Test
+		void givenNewRecipesDiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			assertEquals(1, human.discoverRecipes(Set.of(recipe)));
+
+			Set<NamespacedKey> actual = human.getDiscoveredRecipes();
+			assertTrue(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Set.of(recipe), actual);
+			assertInstanceOf(ImmutableSet.class, actual);
+
+			// No duplicates allowed
+			assertEquals(0, human.discoverRecipes(Set.of(recipe)));
+		}
+
+		@Test
+		void givenAttemptingToDiscoverRecipeThatDoesNotExist()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("this_recipe_does_not_exist");
+			assertEquals(0, human.discoverRecipes(Set.of(recipe)));
+		}
+
+		@Test
+		void givenRecipeUndiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			human.discoverRecipe(recipe);
+
+			assertTrue(human.undiscoverRecipe(recipe));
+
+			assertFalse(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Collections.emptySet(), human.getDiscoveredRecipes());
+
+			// Validate that there nothing to remove
+			assertFalse(human.undiscoverRecipe(recipe));
+		}
+
+		@Test
+		void givenRecipesUndiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			human.discoverRecipe(recipe);
+
+			assertEquals(1, human.undiscoverRecipes(Set.of(recipe)));
+
+			assertFalse(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Collections.emptySet(), human.getDiscoveredRecipes());
+
+			// Validate that there nothing to remove
+			assertEquals(0, human.undiscoverRecipes(Set.of(recipe)));
+		}
+
 	}
 
 }

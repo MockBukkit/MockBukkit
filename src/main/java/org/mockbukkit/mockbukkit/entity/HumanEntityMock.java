@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,8 +39,10 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,13 +55,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
-
+	private final Set<NamespacedKey> discoveredRecipes = new HashSet<>();
 	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
 	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);
 	private InventoryView inventoryView;
 	private @NotNull ItemStack cursor = ItemStack.empty();
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
+	private @NotNull MainHand mainHand = MainHand.RIGHT;
 	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
+	private @Nullable FishHook fishHook;
 	/**
 	 * How much EXP this {@link HumanEntity} has.
 	 */
@@ -68,6 +73,10 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private int foodLevel = 20;
 	protected boolean blocking;
 	private int sleepTicks = 0;
+	private int saturatedRegenRate = 10;
+	private int unsaturatedRegenRate = 80;
+	private int starvationRate = 80;
+	private int enchantmentSeed = 0;
 
 	/**
 	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -106,8 +115,18 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @NotNull MainHand getMainHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.mainHand;
+	}
+
+	/**
+	 * Sets the player's selected main hand
+	 *
+	 * @param mainHand the players main hand
+	 */
+	public void setMainHand(@NotNull MainHand mainHand)
+	{
+		Preconditions.checkArgument(mainHand != null, "main hand cannot be null");
+		this.mainHand = mainHand;
 	}
 
 	@Override
@@ -227,15 +246,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getEnchantmentSeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.enchantmentSeed;
 	}
 
 	@Override
 	public void setEnchantmentSeed(int seed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.enchantmentSeed = seed;
 	}
 
 	@Override
@@ -401,8 +418,17 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @Nullable FishHook getFishHook()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.fishHook;
+	}
+
+	/**
+	 * Sets the player's fishing hook when fishing.
+	 *
+	 * @param fishHook the player's fishing hook if they are fishing
+	 */
+	public void setFishHook(@Nullable FishHook fishHook)
+	{
+		this.fishHook = fishHook;
 	}
 
 	@Override
@@ -463,21 +489,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
-	public boolean isHandRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Nullable
-	@Override
-	public ItemStack getItemInUse()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getExpToLevel()
 	{
 		// Formula from https://minecraft.wiki/w/Experience#Leveling_up
@@ -519,8 +530,22 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int discoverRecipes(@NotNull Collection<NamespacedKey> recipes)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(recipes != null, "Recipes cannot be null");
+		AtomicInteger count = new AtomicInteger();
+		recipes.forEach(recipe ->
+		{
+			if (server.getRecipe(recipe) == null)
+			{
+				// The requested recipe does not exist.
+				return;
+			}
+
+			if (this.discoveredRecipes.add(recipe))
+			{
+				count.incrementAndGet();
+			}
+		});
+		return count.get();
 	}
 
 	@Override
@@ -533,22 +558,32 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int undiscoverRecipes(@NotNull Collection<NamespacedKey> recipes)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(recipes != null, "Recipes cannot be null");
+
+		AtomicInteger count = new AtomicInteger();
+		recipes.forEach(recipe ->
+		{
+			if (this.discoveredRecipes.remove(recipe))
+			{
+				count.incrementAndGet();
+			}
+		});
+		return count.get();
 	}
 
 	@Override
 	public boolean hasDiscoveredRecipe(@NotNull NamespacedKey recipe)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(recipe != null, "recipe cannot be null");
+		return this.discoveredRecipes.contains(recipe);
 	}
 
 	@Override
 	public @NotNull Set<NamespacedKey> getDiscoveredRecipes()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ImmutableSet.Builder<NamespacedKey> builder = ImmutableSet.builder();
+		builder.addAll(this.discoveredRecipes);
+		return builder.build();
 	}
 
 	@Override
@@ -661,49 +696,42 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getSaturatedRegenRate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.saturatedRegenRate;
 	}
 
 	@Override
 	public void setSaturatedRegenRate(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.saturatedRegenRate = ticks;
 	}
 
 	@Override
 	public int getUnsaturatedRegenRate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unsaturatedRegenRate;
 	}
 
 	@Override
 	public void setUnsaturatedRegenRate(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.unsaturatedRegenRate = ticks;
 	}
 
 	@Override
 	public int getStarvationRate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.starvationRate;
 	}
 
 	@Override
 	public void setStarvationRate(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.starvationRate = ticks;
 	}
 
 	@Override
 	public @Nullable Location getPotentialRespawnLocation()
 	{
-
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
 	}
