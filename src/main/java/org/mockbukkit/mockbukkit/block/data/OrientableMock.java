@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Axis;
 import org.bukkit.Material;
 import org.bukkit.block.data.Orientable;
@@ -31,6 +32,7 @@ public class OrientableMock extends BlockDataMock implements Orientable
 	@Override
 	public void setAxis(@NotNull Axis axis)
 	{
+		Preconditions.checkArgument(this.getAxes().contains(axis), "Invalid Axis. Possible values are: %s", this.getAxes());
 		this.set(BlockDataKey.AXIS, axis);
 	}
 
