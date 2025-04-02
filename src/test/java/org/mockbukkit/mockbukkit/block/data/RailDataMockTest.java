@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockBukkitExtension.class)
 class RailDataMockTest
@@ -57,4 +59,23 @@ class RailDataMockTest
 
 	}
 
+	@Nested
+	class SetWaterlogged
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertFalse(rail.isWaterlogged());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValues(boolean isWaterLogged)
+		{
+			rail.setWaterlogged(isWaterLogged);
+			assertEquals(isWaterLogged, rail.isWaterlogged());
+		}
+
+	}
 }
