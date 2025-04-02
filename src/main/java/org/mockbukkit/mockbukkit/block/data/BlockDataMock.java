@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,31 +56,31 @@ public class BlockDataMock implements BlockData
 	/**
 	 * This factory tries to create the block data from a material {@link Tag}.
 	 */
-	private static final Map<Tag<Material>, Function<Material, BlockDataMock>> FACTORIES_BY_TAGS = Map.of(
-			Tag.BEDS, BedDataMock::new,
-			Tag.BUTTONS, SwitchDataMock::new,
-			Tag.CAMPFIRES, CampfireDataMock::new,
-			Tag.CANDLES, CandleDataMock::new,
-			Tag.FENCES, FenceDataMock::new,
-			Tag.RAILS, RailDataMock::new,
-			Tag.SLABS, SlabDataMock::new,
-			Tag.STAIRS, StairsDataMock::new,
-			Tag.TRAPDOORS, TrapDoorDataMock::new,
-			Tag.WALL_SIGNS, WallSignDataMock::new
-	);
+	private static final Map<Tag<Material>, Function<Material, BlockDataMock>> FACTORIES_BY_TAGS = ImmutableMap.<Tag<Material>, Function<Material, BlockDataMock>>builder()
+			.put(Tag.BEDS, BedDataMock::new)
+			.put(Tag.BUTTONS, SwitchDataMock::new)
+			.put(Tag.CAMPFIRES, CampfireDataMock::new)
+			.put(Tag.CANDLES, CandleDataMock::new)
+			.put(Tag.FENCES, FenceDataMock::new)
+			.put(Tag.RAILS, RailDataMock::new)
+			.put(Tag.SLABS, SlabDataMock::new)
+			.put(Tag.STAIRS, StairsDataMock::new)
+			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
+			.put(Tag.WALL_SIGNS, WallSignDataMock::new)
+			.build();
 
 	/**
 	 * This factory tries to created the block data from the {@link BlockData} class.
 	 */
-	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = Map.of(
-			AmethystCluster.class, AmethystClusterDataMock::new,
-			Bamboo.class, m -> new BambooDataMock(),
-			DecoratedPot.class, m -> new DecoratedPotDataMock(),
-			Levelled.class, LevelledDataMock::new,
-			Lightable.class, LightableDataMock::new,
-			Orientable.class, OrientableMock::new,
-			Switch.class, SwitchDataMock::new
-	);
+	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
+			.put(AmethystCluster.class, AmethystClusterDataMock::new)
+			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
+			.put(Levelled.class, LevelledDataMock::new)
+			.put(Lightable.class, LightableDataMock::new)
+			.put(Orientable.class, OrientableMock::new)
+			.put(Switch.class, SwitchDataMock::new)
+			.build();
 
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
