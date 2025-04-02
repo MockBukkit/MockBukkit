@@ -249,9 +249,9 @@ public class BlockDataMock implements BlockData
 	}
 
 	/**
-	 * Convert the list of input values into a Immuttable set.
+	 * Convert the list of input values into Immutable set.
 	 *
-	 * @param inputValues
+	 * @param inputValues the values to be converted.
 	 *
 	 * @return An immutable set.
 	 *
