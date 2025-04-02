@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
@@ -100,7 +101,7 @@ public enum BlockDataKey
 	FACE("face", string -> FaceAttachable.AttachedFace.valueOf(string.toUpperCase(Locale.ROOT)), FaceAttachable.class::isInstance),
 
 
-	AGE_KEY("age", Integer::parseInt, Bamboo.class::isInstance),
+	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
 

@@ -1,0 +1,39 @@
+package org.mockbukkit.mockbukkit.block.data;
+
+import org.bukkit.Material;
+import org.bukkit.block.data.Ageable;
+import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+public class AgeableDataMock extends BlockDataMock implements Ageable
+{
+
+	/**
+	 * Constructs a new {@link AgeableDataMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this data is for.
+	 */
+	public AgeableDataMock(@NotNull Material material)
+	{
+		super(material);
+	}
+
+	@Override
+	public int getAge()
+	{
+		return this.get(BlockDataKey.AGE_KEY);
+	}
+
+	@Override
+	public void setAge(int age)
+	{
+		this.set(BlockDataKey.AGE_KEY, age);
+	}
+
+	@Override
+	public int getMaximumAge()
+	{
+		throw new UnimplementedOperationException("Get maximum age is not implemented!");
+	}
+
+}
