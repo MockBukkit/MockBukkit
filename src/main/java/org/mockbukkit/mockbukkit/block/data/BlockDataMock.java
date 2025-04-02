@@ -24,6 +24,7 @@ import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
+import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.structure.Mirror;
@@ -81,6 +82,7 @@ public class BlockDataMock implements BlockData
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(Barrel.class, BarrelDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
