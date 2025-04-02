@@ -4,7 +4,9 @@ import org.bukkit.Material;
 import org.bukkit.block.data.Rail;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RailDataMock extends BlockDataMock implements Rail
 {
@@ -34,7 +36,7 @@ public class RailDataMock extends BlockDataMock implements Rail
 	@Override
 	public @NotNull Set<Shape> getShapes()
 	{
-		return this.getValues(Shape.values());
+        return Arrays.stream(Shape.values()).collect(Collectors.toSet());
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -43,7 +42,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -246,26 +244,6 @@ public class BlockDataMock implements BlockData
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
-	}
-
-	/**
-	 * Convert the list of input values into Immutable set.
-	 *
-	 * @param inputValues the values to be converted.
-	 *
-	 * @return An immutable set.
-	 *
-	 * @param <B> The expected class type.
-	 */
-	@SuppressWarnings("unchecked")
-	protected <B> Set<B> getValues(B... inputValues)
-	{
-		ImmutableSet.Builder<B> values = ImmutableSet.builder();
-		for (B value : inputValues)
-		{
-			values.add(value);
-		}
-		return values.build();
 	}
 
 	@Override

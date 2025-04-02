@@ -5,7 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.block.data.Orientable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrientableMock extends BlockDataMock implements Orientable
 {
@@ -35,7 +37,7 @@ public class OrientableMock extends BlockDataMock implements Orientable
 	@Override
 	public @NotNull Set<Axis> getAxes()
 	{
-		return this.getValues(Axis.values());
+        return Arrays.stream(Axis.values()).collect(Collectors.toSet());
 	}
 
 }
