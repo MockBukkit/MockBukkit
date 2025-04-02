@@ -13,6 +13,7 @@ import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
@@ -116,7 +117,9 @@ public enum BlockDataKey
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 
-	CANDLES("candles", Integer::parseInt, Candle.class::isInstance);
+	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
+
+	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
 
 	private static final Map<String, BlockDataKey> KEY_TO_BLOCK_DATA_KEY_RELATION = compileKeyRelation();
 

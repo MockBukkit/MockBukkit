@@ -8,6 +8,7 @@ import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Rail;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
@@ -458,6 +459,14 @@ class BlockTypeMockTest
 			Campfire data = BlockType.CAMPFIRE.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Campfire.class, data);
+		}
+
+		@Test
+		void givenSnowable()
+		{
+			Snowable data = BlockType.GRASS_BLOCK.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Snowable.class, data);
 		}
 
 	}

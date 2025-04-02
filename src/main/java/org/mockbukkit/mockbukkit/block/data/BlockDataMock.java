@@ -19,6 +19,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.DecoratedPot;
@@ -79,6 +80,7 @@ public class BlockDataMock implements BlockData
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
+			.put(Snowable.class, SnowableDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.build();
 
