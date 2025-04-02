@@ -258,7 +258,8 @@ public class BlockDataMock implements BlockData
 	 * @param <B> The expected class type.
 	 */
 	@SuppressWarnings("unchecked")
-	protected <B> Set<B> getValues(B... inputValues) {
+	protected <B> Set<B> getValues(B... inputValues)
+	{
 		ImmutableSet.Builder<B> values = ImmutableSet.builder();
 		for (B value : inputValues)
 		{
