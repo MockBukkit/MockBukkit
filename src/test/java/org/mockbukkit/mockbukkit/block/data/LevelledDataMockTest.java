@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class LevelledDataMockTest
@@ -24,7 +25,7 @@ class LevelledDataMockTest
 	}
 
 	@Nested
-	class SetAxis
+	class SetLevel
 	{
 
 		@Test
@@ -39,6 +40,14 @@ class LevelledDataMockTest
 		{
 			levelled.setLevel(level);
 			assertEquals(level, levelled.getLevel());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {-2, -1, 16, 17})
+		void givenInvalidValues(int level)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> levelled.setLevel(level));
+			assertEquals("Level should be between 0 and 15", e.getMessage());
 		}
 
 	}
