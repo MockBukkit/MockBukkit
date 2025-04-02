@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.data;
 import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Ageable;
+import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
@@ -120,6 +121,7 @@ public enum BlockDataKey
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
+	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
 
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
 

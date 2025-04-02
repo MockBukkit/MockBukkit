@@ -16,6 +16,7 @@ import org.bukkit.block.BlockSupport;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.Ageable;
+import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
@@ -78,6 +79,7 @@ public class BlockDataMock implements BlockData
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
 			.put(Ageable.class, AgeableDataMock::new)
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
+			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Levelled.class, LevelledDataMock::new)
