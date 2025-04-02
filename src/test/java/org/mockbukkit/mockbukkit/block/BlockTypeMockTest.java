@@ -16,6 +16,7 @@ import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Fence;
+import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Switch;
@@ -467,6 +468,14 @@ class BlockTypeMockTest
 			Snowable data = BlockType.GRASS_BLOCK.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Snowable.class, data);
+		}
+
+		@Test
+		void givenSapling()
+		{
+			Sapling data = BlockType.ACACIA_SAPLING.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Sapling.class, data);
 		}
 
 	}

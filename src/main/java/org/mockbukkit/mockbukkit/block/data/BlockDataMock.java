@@ -64,6 +64,7 @@ public class BlockDataMock implements BlockData
 			.put(Tag.CANDLES, CandleDataMock::new)
 			.put(Tag.FENCES, FenceDataMock::new)
 			.put(Tag.RAILS, RailDataMock::new)
+			.put(Tag.SAPLINGS, SaplingDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)

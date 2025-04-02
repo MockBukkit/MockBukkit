@@ -20,6 +20,7 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.jetbrains.annotations.ApiStatus;
@@ -101,7 +102,7 @@ public enum BlockDataKey
 
 	AGE_KEY("age", Integer::parseInt, Bamboo.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
-	STAGE_KEY("stage", Integer::parseInt, Bamboo.class::isInstance),
+	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
 
 	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
