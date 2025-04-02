@@ -11,6 +11,7 @@ import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Fence;
@@ -449,6 +450,14 @@ class BlockTypeMockTest
 			Bed data = BlockType.ORANGE_BED.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Bed.class, data);
+		}
+
+		@Test
+		void givenCampfire()
+		{
+			Campfire data = BlockType.CAMPFIRE.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Campfire.class, data);
 		}
 
 	}
