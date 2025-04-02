@@ -12,6 +12,7 @@ import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
+import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
@@ -110,6 +111,8 @@ public enum BlockDataKey
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
+
+	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 

@@ -7,7 +7,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
-import org.bukkit.block.data.Waterlogged;
+import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Candle;
@@ -379,6 +379,14 @@ class BlockTypeMockTest
 			Candle data = BlockType.WHITE_CANDLE.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Candle.class, data);
+		}
+
+		@Test
+		void givenRail()
+		{
+			Rail data = BlockType.RAIL.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Rail.class, data);
 		}
 
 	}

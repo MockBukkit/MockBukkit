@@ -59,7 +59,8 @@ public class BlockDataMock implements BlockData
 	 * This factory tries to create the block data from a material {@link Tag}.
 	 */
 	private static final Map<Tag<Material>, Function<Material, BlockDataMock>> FACTORIES_BY_TAGS = Map.of(
-			Tag.CANDLES, CandleDataMock::new
+			Tag.CANDLES, CandleDataMock::new,
+			Tag.RAILS, RailDataMock::new
 	);
 
 	/**

@@ -1,0 +1,52 @@
+package org.mockbukkit.mockbukkit.block.data;
+
+import org.bukkit.Material;
+import org.bukkit.block.data.Rail;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
+
+public class RailDataMock extends BlockDataMock implements Rail
+{
+
+	/**
+	 * Constructs a new {@link RailDataMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this data is for.
+	 */
+	protected RailDataMock(@NotNull Material material)
+	{
+		super(material);
+	}
+
+	@Override
+	public @NotNull Shape getShape()
+	{
+		return this.get(BlockDataKey.RAIL_SHAPE);
+	}
+
+	@Override
+	public void setShape(@NotNull Shape shape)
+	{
+		this.set(BlockDataKey.RAIL_SHAPE, shape);
+	}
+
+	@Override
+	public @NotNull Set<Shape> getShapes()
+	{
+		return this.getValues(Shape.values());
+	}
+
+	@Override
+	public boolean isWaterlogged()
+	{
+		return this.get(BlockDataKey.WATERLOGGED);
+	}
+
+	@Override
+	public void setWaterlogged(boolean waterlogged)
+	{
+		this.set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+}
