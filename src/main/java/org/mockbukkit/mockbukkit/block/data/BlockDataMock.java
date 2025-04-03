@@ -17,6 +17,7 @@ import org.bukkit.block.BlockType;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.AnaloguePowerable;
+import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
@@ -83,6 +84,7 @@ public class BlockDataMock implements BlockData
 			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
 			.put(Barrel.class, BarrelDataMock::new)
+			.put(Bisected.class, BisectedDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
