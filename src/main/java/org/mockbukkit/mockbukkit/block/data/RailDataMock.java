@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.data.Rail;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ public class RailDataMock extends BlockDataMock implements Rail
 	@Override
 	public void setShape(@NotNull Shape shape)
 	{
+		Preconditions.checkArgument(this.getShapes().contains(shape), "Invalid shape. Allowed values are: %s", this.getShapes());
 		this.set(BlockDataKey.RAIL_SHAPE, shape);
 	}
 
