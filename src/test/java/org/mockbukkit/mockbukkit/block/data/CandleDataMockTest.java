@@ -11,6 +11,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class CandleDataMockTest
@@ -40,6 +41,14 @@ class CandleDataMockTest
 		{
 			candle.setCandles(candles);
 			assertEquals(candles, candle.getCandles());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {-1, 0, 5, 6})
+		void givenInvalidValues(int candles)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> candle.setCandles(candles));
+			assertEquals("Candles must be between 1 and 4", e.getMessage());
 		}
 
 	}
