@@ -1043,7 +1043,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRotatable()
 		{
 			Rotatable data = BlockType.LIGHT_BLUE_BANNER.createBlockData();
