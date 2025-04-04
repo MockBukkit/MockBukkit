@@ -21,6 +21,7 @@ import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
+import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
@@ -92,6 +93,7 @@ public enum BlockDataKey
 	 * Store what {@link Slab.Type} a {@link Slab} is.
 	 */
 	TYPE("type", string -> Slab.Type.valueOf(string.toUpperCase(Locale.ROOT)), Slab.class::isInstance),
+	TYPE_CHEST("type", string -> Chest.Type.valueOf(string.toUpperCase(Locale.ROOT)), Chest.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
