@@ -24,6 +24,7 @@ import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.RedstoneWire;
+import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
@@ -115,6 +116,9 @@ public enum BlockDataKey
 	REDSTONE_WEST("west", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
 	REDSTONE_NORTH("north", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
 	REDSTONE_SOUTH("south", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+
+	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
+	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
 
 	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
