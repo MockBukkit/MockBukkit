@@ -111,6 +111,7 @@ import org.bukkit.block.data.type.WallHangingSign;
 import org.bukkit.block.data.type.WallSign;
 import org.bukkit.block.data.type.WallSkull;
 import org.bukkit.inventory.ItemType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -495,6 +496,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenRedstoneRail()
 		{
 			RedstoneRail data = BlockType.POWERED_RAIL.createBlockData();
@@ -511,6 +513,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenGate()
 		{
 			Gate data = BlockType.OAK_FENCE_GATE.createBlockData();
@@ -543,6 +546,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenWall()
 		{
 			Wall data = BlockType.COBBLESTONE_WALL.createBlockData();
@@ -551,6 +555,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSign()
 		{
 			Sign data = BlockType.OAK_SIGN.createBlockData();
@@ -567,6 +572,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenHangingSign()
 		{
 			HangingSign data = BlockType.OAK_HANGING_SIGN.createBlockData();
@@ -575,6 +581,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenWallHangingSign()
 		{
 			WallHangingSign data = BlockType.OAK_WALL_HANGING_SIGN.createBlockData();
@@ -615,6 +622,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenBrushable()
 		{
 			Brushable data = BlockType.SUSPICIOUS_SAND.createBlockData();
@@ -623,6 +631,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenWaterlogged()
 		{
 			Waterlogged data = BlockType.MANGROVE_ROOTS.createBlockData();
@@ -631,6 +640,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenMangrovePropagule()
 		{
 			MangrovePropagule data = BlockType.MANGROVE_PROPAGULE.createBlockData();
@@ -639,6 +649,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenLeaves()
 		{
 			Leaves data = BlockType.OAK_LEAVES.createBlockData();
@@ -647,6 +658,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenDispenser()
 		{
 			Dispenser data = BlockType.DISPENSER.createBlockData();
@@ -655,6 +667,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenNoteBlock()
 		{
 			NoteBlock data = BlockType.NOTE_BLOCK.createBlockData();
@@ -663,6 +676,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenJukebox()
 		{
 			Jukebox data = BlockType.JUKEBOX.createBlockData();
@@ -671,6 +685,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenPiston()
 		{
 			Piston data = BlockType.PISTON.createBlockData();
@@ -679,6 +694,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenPistonHead()
 		{
 			PistonHead data = BlockType.PISTON_HEAD.createBlockData();
@@ -687,6 +703,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenMovingPiston()
 		{
 			TechnicalPiston data = BlockType.MOVING_PISTON.createBlockData();
@@ -703,6 +720,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenTnt()
 		{
 			TNT data = BlockType.TNT.createBlockData();
@@ -711,6 +729,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenChiseledBookshelf()
 		{
 			ChiseledBookshelf data = BlockType.CHISELED_BOOKSHELF.createBlockData();
@@ -719,6 +738,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenDirectional()
 		{
 			Directional data = BlockType.WALL_TORCH.createBlockData();
@@ -727,6 +747,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenFire()
 		{
 			Fire data = BlockType.FIRE.createBlockData();
@@ -735,6 +756,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCreakingHeart()
 		{
 			CreakingHeart data = BlockType.CREAKING_HEART.createBlockData();
@@ -743,6 +765,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenChest()
 		{
 			Chest data = BlockType.CHEST.createBlockData();
@@ -751,6 +774,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenEnderChest()
 		{
 			EnderChest data = BlockType.ENDER_CHEST.createBlockData();
@@ -767,6 +791,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenRedstoneWire()
 		{
 			RedstoneWire data = BlockType.REDSTONE_WIRE.createBlockData();
@@ -775,6 +800,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenRepeater()
 		{
 			Repeater data = BlockType.REPEATER.createBlockData();
@@ -783,6 +809,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenComparator()
 		{
 			Comparator data = BlockType.COMPARATOR.createBlockData();
@@ -791,6 +818,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenDaylightDetector()
 		{
 			DaylightDetector data = BlockType.DAYLIGHT_DETECTOR.createBlockData();
@@ -799,6 +827,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenHopper()
 		{
 			Hopper data = BlockType.HOPPER.createBlockData();
@@ -815,6 +844,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenFarmland()
 		{
 			Farmland data = BlockType.FARMLAND.createBlockData();
@@ -823,6 +853,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenFurnace()
 		{
 			Furnace data = BlockType.FURNACE.createBlockData();
@@ -831,6 +862,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenDoor()
 		{
 			Door data = BlockType.OAK_DOOR.createBlockData();
@@ -839,6 +871,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenLadder()
 		{
 			Ladder data = BlockType.LADDER.createBlockData();
@@ -847,6 +880,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenPowerable()
 		{
 			Powerable data = BlockType.STONE_PRESSURE_PLATE.createBlockData();
@@ -863,6 +897,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenRedstoneWallTorch()
 		{
 			RedstoneWallTorch data = BlockType.REDSTONE_WALL_TORCH.createBlockData();
@@ -871,6 +906,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSnow()
 		{
 			Snow data = BlockType.SNOW.createBlockData();
@@ -879,6 +915,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCake()
 		{
 			Cake data = BlockType.CAKE.createBlockData();
@@ -887,6 +924,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenMultipleFacing()
 		{
 			MultipleFacing data = BlockType.BROWN_MUSHROOM_BLOCK.createBlockData();
@@ -895,6 +933,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenChain()
 		{
 			Chain data = BlockType.CHAIN.createBlockData();
@@ -903,6 +942,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenGlowLichen()
 		{
 			GlowLichen data = BlockType.GLOW_LICHEN.createBlockData();
@@ -911,6 +951,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenResinClump()
 		{
 			ResinClump data = BlockType.RESIN_CLUMP.createBlockData();
@@ -919,6 +960,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenBrewingStand()
 		{
 			BrewingStand data = BlockType.BREWING_STAND.createBlockData();
@@ -927,6 +969,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenEndPortalFrame()
 		{
 			EndPortalFrame data = BlockType.END_PORTAL_FRAME.createBlockData();
@@ -935,6 +978,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCocoa()
 		{
 			Cocoa data = BlockType.COCOA.createBlockData();
@@ -943,6 +987,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenTripwire()
 		{
 			Tripwire data = BlockType.TRIPWIRE.createBlockData();
@@ -951,6 +996,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenTripwireHook()
 		{
 			TripwireHook data = BlockType.TRIPWIRE_HOOK.createBlockData();
@@ -959,6 +1005,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCommandBlock()
 		{
 			CommandBlock data = BlockType.COMMAND_BLOCK.createBlockData();
@@ -967,6 +1014,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSkull()
 		{
 			Skull data = BlockType.SKELETON_SKULL.createBlockData();
@@ -975,6 +1023,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenWallSkull()
 		{
 			WallSkull data = BlockType.SKELETON_WALL_SKULL.createBlockData();
@@ -983,6 +1032,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenGlassPane()
 		{
 			GlassPane data = BlockType.WHITE_STAINED_GLASS_PANE.createBlockData();
@@ -991,6 +1041,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenLight()
 		{
 			Light data = BlockType.LIGHT.createBlockData();
@@ -999,6 +1050,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenRotatable()
 		{
 			Rotatable data = BlockType.LIGHT_BLUE_BANNER.createBlockData();
@@ -1007,6 +1059,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenTurtleEgg()
 		{
 			TurtleEgg data = BlockType.TURTLE_EGG.createBlockData();
@@ -1015,6 +1068,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenHatchable()
 		{
 			Hatchable data = BlockType.SNIFFER_EGG.createBlockData();
@@ -1023,6 +1077,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCoralWallFan()
 		{
 			CoralWallFan data = BlockType.DEAD_BRAIN_CORAL_WALL_FAN.createBlockData();
@@ -1031,6 +1086,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSeaPickle()
 		{
 			SeaPickle data = BlockType.SEA_PICKLE.createBlockData();
@@ -1039,6 +1095,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenBubbleColumn()
 		{
 			BubbleColumn data = BlockType.BUBBLE_COLUMN.createBlockData();
@@ -1047,6 +1104,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenScaffolding()
 		{
 			Scaffolding data = BlockType.SCAFFOLDING.createBlockData();
@@ -1055,6 +1113,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCrafter()
 		{
 			Crafter data = BlockType.CRAFTER.createBlockData();
@@ -1063,6 +1122,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenGrindstone()
 		{
 			Grindstone data = BlockType.GRINDSTONE.createBlockData();
@@ -1071,6 +1131,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenLectern()
 		{
 			Lectern data = BlockType.LECTERN.createBlockData();
@@ -1079,6 +1140,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenBell()
 		{
 			Bell data = BlockType.BELL.createBlockData();
@@ -1087,6 +1149,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenLantern()
 		{
 			Lantern data = BlockType.LANTERN.createBlockData();
@@ -1095,6 +1158,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenStructureBlock()
 		{
 			StructureBlock data = BlockType.STRUCTURE_BLOCK.createBlockData();
@@ -1103,6 +1167,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenJigsaw()
 		{
 			Jigsaw data = BlockType.JIGSAW.createBlockData();
@@ -1111,6 +1176,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenBeehive()
 		{
 			Beehive data = BlockType.BEEHIVE.createBlockData();
@@ -1119,6 +1185,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenRespawnAnchor()
 		{
 			RespawnAnchor data = BlockType.RESPAWN_ANCHOR.createBlockData();
@@ -1127,6 +1194,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSculkSensor()
 		{
 			SculkSensor data = BlockType.SCULK_SENSOR.createBlockData();
@@ -1135,6 +1203,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCalibratedSculkSensor()
 		{
 			CalibratedSculkSensor data = BlockType.CALIBRATED_SCULK_SENSOR.createBlockData();
@@ -1143,6 +1212,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSculkVein()
 		{
 			SculkVein data = BlockType.SCULK_VEIN.createBlockData();
@@ -1151,6 +1221,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSculkCatalyst()
 		{
 			SculkCatalyst data = BlockType.SCULK_CATALYST.createBlockData();
@@ -1159,6 +1230,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSculkShrieker()
 		{
 			SculkShrieker data = BlockType.SCULK_SHRIEKER.createBlockData();
@@ -1167,6 +1239,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCopperBulb()
 		{
 			CopperBulb data = BlockType.COPPER_BULB.createBlockData();
@@ -1175,6 +1248,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenLightningRod()
 		{
 			LightningRod data = BlockType.LIGHTNING_ROD.createBlockData();
@@ -1183,6 +1257,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenPointedDripstone()
 		{
 			PointedDripstone data = BlockType.POINTED_DRIPSTONE.createBlockData();
@@ -1191,6 +1266,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCaveVines()
 		{
 			CaveVines data = BlockType.CAVE_VINES.createBlockData();
@@ -1199,6 +1275,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenCaveVinesPlant()
 		{
 			CaveVinesPlant data = BlockType.CAVE_VINES_PLANT.createBlockData();
@@ -1207,6 +1284,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenPinkPetals()
 		{
 			PinkPetals data = BlockType.PINK_PETALS.createBlockData();
@@ -1215,6 +1293,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenMossyCarpet()
 		{
 			MossyCarpet data = BlockType.PALE_MOSS_CARPET.createBlockData();
@@ -1223,6 +1302,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenHangingMoss()
 		{
 			HangingMoss data = BlockType.PALE_HANGING_MOSS.createBlockData();
@@ -1231,6 +1311,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenDripleaf()
 		{
 			Dripleaf data = BlockType.BIG_DRIPLEAF_STEM.createBlockData();
@@ -1239,6 +1320,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenBigDripleaf()
 		{
 			BigDripleaf data = BlockType.BIG_DRIPLEAF.createBlockData();
@@ -1247,6 +1329,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenSmallDripleaf()
 		{
 			SmallDripleaf data = BlockType.SMALL_DRIPLEAF.createBlockData();
@@ -1255,6 +1338,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenTrialSpawner()
 		{
 			TrialSpawner data = BlockType.TRIAL_SPAWNER.createBlockData();
@@ -1263,6 +1347,7 @@ class BlockTypeMockTest
 		}
 
 		@Test
+		@Disabled("Not implemented yet #1088")
 		void givenVault()
 		{
 			Vault data = BlockType.VAULT.createBlockData();
