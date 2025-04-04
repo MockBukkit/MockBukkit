@@ -891,7 +891,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRedstoneWallTorch()
 		{
 			RedstoneWallTorch data = BlockType.REDSTONE_WALL_TORCH.createBlockData();
