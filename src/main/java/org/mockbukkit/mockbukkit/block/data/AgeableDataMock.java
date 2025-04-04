@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.data.Ageable;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +28,7 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	@Override
 	public void setAge(int age)
 	{
+		Preconditions.checkArgument(age >= 0, "Age cannot be negative.");
 		this.set(BlockDataKey.AGE_KEY, age);
 	}
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class AgeableDataMockTest
@@ -39,6 +40,14 @@ class AgeableDataMockTest
 		{
 			ageable.setAge(age);
 			assertEquals(age, ageable.getAge());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = {-5, -4, -3, -2, -1})
+		void givenNegative(int age)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> ageable.setAge(age));
+			assertEquals("Age cannot be negative.", e.getMessage());
 		}
 
 	}
