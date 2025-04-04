@@ -29,6 +29,7 @@ import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -122,6 +123,8 @@ public enum BlockDataKey
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
 
 	ROTATION("rotation", Integer::parseInt, Rotatable.class::isInstance),
+
+	UNSTABLE("unstable", Boolean::parseBoolean, TNT.class::isInstance),
 
 	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
