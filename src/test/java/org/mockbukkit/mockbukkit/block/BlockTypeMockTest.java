@@ -630,7 +630,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWaterlogged()
 		{
 			Waterlogged data = BlockType.MANGROVE_ROOTS.createBlockData();
