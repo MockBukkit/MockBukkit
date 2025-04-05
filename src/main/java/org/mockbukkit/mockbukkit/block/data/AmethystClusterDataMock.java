@@ -48,7 +48,7 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

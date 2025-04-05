@@ -77,7 +77,7 @@ public class BedDataMock extends BlockDataMock implements Bed
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 }

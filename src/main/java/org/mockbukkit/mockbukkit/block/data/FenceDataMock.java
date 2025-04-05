@@ -51,7 +51,7 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	@Override
 	public @NotNull Set<BlockFace> getAllowedFaces()
 	{
-		return Set.of(BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

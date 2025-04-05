@@ -68,7 +68,7 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

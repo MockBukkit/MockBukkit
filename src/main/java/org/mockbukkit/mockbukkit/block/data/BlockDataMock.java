@@ -40,6 +40,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -47,9 +48,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of {@link BlockData}.
@@ -252,17 +255,53 @@ public class BlockDataMock implements BlockData
 		if (value == null)
 		{
 			Object temp = BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
-			if (temp instanceof String string)
-			{
-				value = (T) key.constructValue(string);
-			}
-			else
-			{
-				value = (T) temp;
-			}
+			value = castObject(key, temp);
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T castObject(@NotNull BlockDataKey key, Object temp)
+	{
+		T value;
+		if (temp instanceof String string)
+		{
+			value = (T) key.constructValue(string);
+		}
+		else
+		{
+			value = (T) temp;
+		}
+		return value;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected <T> Set<T> getAsSet(@NotNull BlockDataKey key)
+	{
+		Object value = this.get(key);
+		Preconditions.checkArgument(value instanceof Collection<?>, "Cannot get property " + key + " as it is not a collection.");
+		return ((Collection<T>) value).stream().map(v -> (T) castObject(key, v)).collect(Collectors.toUnmodifiableSet());
+	}
+
+	@SuppressWarnings("unchecked")
+	protected <T> List<T> getAsList(@NotNull BlockDataKey key)
+	{
+		Object value = this.get(key);
+		Preconditions.checkArgument(value instanceof Collection<?>, "Cannot get property " + key + " as it is not a collection.");
+		return ((Collection<T>) value).stream().map(v -> (T) castObject(key, v)).toList();
+	}
+
+	protected Set<String> getPrintableStates()
+	{
+		try
+		{
+			return this.getAsSet(BlockDataKey.PRINTABLE_STATES);
+		} catch (IllegalArgumentException e)
+		{
+			// If we receive the illegal argument it means we don't have printable states.
+			return Collections.emptySet();
+		}
 	}
 
 	@Override
@@ -285,9 +324,17 @@ public class BlockDataMock implements BlockData
 		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
 		Collections.sort(keysToShow);
 
+		Set<String> printableStates = this.getPrintableStates();
+
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
+			if (!printableStates.contains(key))
+			{
+				// Do not include states that do not appear in bukkit
+				continue;
+			}
+
 			Object value = data.get(key);
 			if (value instanceof Enum<?> enumValue)
 			{

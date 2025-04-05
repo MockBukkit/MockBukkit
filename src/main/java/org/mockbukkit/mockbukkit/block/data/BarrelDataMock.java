@@ -7,8 +7,6 @@ import org.bukkit.block.data.type.Barrel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BarrelDataMock extends BlockDataMock implements Barrel
 {
@@ -39,9 +37,7 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Stream.of(BlockFace.values())
-				.filter(BlockFace::isCartesian)
-				.collect(Collectors.toSet());
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

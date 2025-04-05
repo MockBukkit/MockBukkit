@@ -79,7 +79,7 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@SuppressWarnings("deprecation")

@@ -51,7 +51,7 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

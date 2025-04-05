@@ -49,7 +49,7 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

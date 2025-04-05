@@ -53,7 +53,7 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
+		return this.getAsSet(BlockDataKey.FACES);
 	}
 
 	@Override

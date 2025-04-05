@@ -34,13 +34,13 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	@Override
 	public int getMaximumLevel()
 	{
-		return 15;
+		return this.get(BlockDataKey.MAX_LEVEL);
 	}
 
 	@Override
 	public int getMinimumLevel()
 	{
-		return 0;
+		return this.get(BlockDataKey.MIN_LEVEL);
 	}
 
 }

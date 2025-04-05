@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.data.Ageable;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class AgeableDataMock extends BlockDataMock implements Ageable
 {
@@ -35,7 +34,7 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	@Override
 	public int getMaximumAge()
 	{
-		throw new UnimplementedOperationException("Get maximum age is not implemented!");
+		return this.get(BlockDataKey.MAX_AGE_KEY);
 	}
 
 }

@@ -52,4 +52,52 @@ class AgeableDataMockTest
 
 	}
 
+	@Nested
+	class GetMaximumAge
+	{
+
+		@Test
+		void givenAge1Material()
+		{
+			AgeableDataMock ageableData = new AgeableDataMock(Material.BAMBOO);
+			assertEquals(1, ageableData.getMaximumAge());
+		}
+
+		@Test
+		void givenAge2Material()
+		{
+			AgeableDataMock ageableData = new AgeableDataMock(Material.COCOA);
+			assertEquals(2, ageableData.getMaximumAge());
+		}
+
+		@Test
+		void givenAge3Material()
+		{
+			AgeableDataMock ageableData = new AgeableDataMock(Material.NETHER_WART);
+			assertEquals(3, ageableData.getMaximumAge());
+		}
+
+		@Test
+		void givenAge4Material()
+		{
+			AgeableDataMock ageableData = new AgeableDataMock(Material.PITCHER_CROP);
+			assertEquals(4, ageableData.getMaximumAge());
+		}
+
+		@Test
+		void givenAge5Material()
+		{
+			AgeableDataMock ageableData = new AgeableDataMock(Material.CHORUS_FLOWER);
+			assertEquals(5, ageableData.getMaximumAge());
+		}
+
+		@Test
+		void givenAge15Material()
+		{
+			AgeableDataMock ageableData = new AgeableDataMock(Material.CACTUS);
+			assertEquals(15, ageableData.getMaximumAge());
+		}
+
+	}
+
 }

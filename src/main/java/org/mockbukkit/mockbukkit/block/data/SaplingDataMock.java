@@ -5,8 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.data.type.Sapling;
 import org.jetbrains.annotations.NotNull;
 
-import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.STAGE_KEY;
-
 public class SaplingDataMock extends BlockDataMock implements Sapling
 {
 
@@ -23,20 +21,20 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	@Override
 	public int getStage()
 	{
-		return this.get(STAGE_KEY);
+		return this.get(BlockDataKey.STAGE_KEY);
 	}
 
 	@Override
 	public void setStage(int stage)
 	{
 		Preconditions.checkArgument(stage >= 0 && stage <= this.getMaximumStage(), "The stage must be between 0 and %s", this.getMaximumStage());
-		this.set(STAGE_KEY, stage);
+		this.set(BlockDataKey.STAGE_KEY, stage);
 	}
 
 	@Override
 	public int getMaximumStage()
 	{
-		return 1;
+		return this.get(BlockDataKey.MAX_STAGE_KEY);
 	}
 
 }
