@@ -51,7 +51,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -574,7 +573,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @param lines The lines the lore should contain
 	 */
 	@Deprecated(forRemoval = true)
-	public void assertComponentLore(@NotNull List<Component> lines)
+	public void assertComponentLore(@NotNull List<? extends Component> lines)
 	{
 		if (this.lore == null)
 		{
