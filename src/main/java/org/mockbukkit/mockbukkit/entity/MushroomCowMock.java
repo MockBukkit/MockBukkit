@@ -31,7 +31,7 @@ import java.util.UUID;
  *
  * @see CowMock
  */
-public class MushroomCowMock extends CowMock implements MushroomCow
+public class MushroomCowMock extends AbstractCowMock implements MushroomCow
 {
 
 	private @NotNull MushroomCow.Variant variant = MushroomCow.Variant.RED;
