@@ -1,12 +1,13 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -45,6 +46,18 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
 		return stack.getType() == Material.WHEAT_SEEDS;
+	}
+
+	@Override
+	public @NotNull Variant getVariant()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVariant(@NotNull Variant variant)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
