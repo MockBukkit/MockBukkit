@@ -6,7 +6,10 @@
 			"key": "minecraft:awkward",
 			"maxLevel": 1,
 			"name": "AWKWARD",
-			"ordinal": 3,
+			"ordinal": 0,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -16,7 +19,20 @@
 			"key": "minecraft:fire_resistance",
 			"maxLevel": 1,
 			"name": "FIRE_RESISTANCE",
-			"ordinal": 11,
+			"ordinal": 1,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:fire_resistance"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -26,7 +42,20 @@
 			"key": "minecraft:harming",
 			"maxLevel": 2,
 			"name": "HARMING",
-			"ordinal": 23,
+			"ordinal": 2,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:instant_damage"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -36,7 +65,20 @@
 			"key": "minecraft:healing",
 			"maxLevel": 2,
 			"name": "HEALING",
-			"ordinal": 21,
+			"ordinal": 3,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:instant_health"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -46,7 +88,20 @@
 			"key": "minecraft:infested",
 			"maxLevel": 1,
 			"name": "INFESTED",
-			"ordinal": 45,
+			"ordinal": 4,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:infested"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -56,7 +111,20 @@
 			"key": "minecraft:invisibility",
 			"maxLevel": 1,
 			"name": "INVISIBILITY",
-			"ordinal": 6,
+			"ordinal": 5,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:invisibility"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -66,7 +134,20 @@
 			"key": "minecraft:leaping",
 			"maxLevel": 2,
 			"name": "LEAPING",
-			"ordinal": 8,
+			"ordinal": 6,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:jump_boost"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -76,7 +157,20 @@
 			"key": "minecraft:long_fire_resistance",
 			"maxLevel": 1,
 			"name": "LONG_FIRE_RESISTANCE",
-			"ordinal": 12,
+			"ordinal": 7,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:fire_resistance"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -86,7 +180,20 @@
 			"key": "minecraft:long_invisibility",
 			"maxLevel": 1,
 			"name": "LONG_INVISIBILITY",
-			"ordinal": 7,
+			"ordinal": 8,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:invisibility"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -97,6 +204,19 @@
 			"maxLevel": 1,
 			"name": "LONG_LEAPING",
 			"ordinal": 9,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:jump_boost"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -106,7 +226,20 @@
 			"key": "minecraft:long_night_vision",
 			"maxLevel": 1,
 			"name": "LONG_NIGHT_VISION",
-			"ordinal": 5,
+			"ordinal": 10,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:night_vision"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -116,7 +249,20 @@
 			"key": "minecraft:long_poison",
 			"maxLevel": 1,
 			"name": "LONG_POISON",
-			"ordinal": 26,
+			"ordinal": 11,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:poison"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -126,7 +272,20 @@
 			"key": "minecraft:long_regeneration",
 			"maxLevel": 1,
 			"name": "LONG_REGENERATION",
-			"ordinal": 29,
+			"ordinal": 12,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:regeneration"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -136,7 +295,20 @@
 			"key": "minecraft:long_slow_falling",
 			"maxLevel": 1,
 			"name": "LONG_SLOW_FALLING",
-			"ordinal": 41,
+			"ordinal": 13,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 4800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slow_falling"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -146,7 +318,20 @@
 			"key": "minecraft:long_slowness",
 			"maxLevel": 1,
 			"name": "LONG_SLOWNESS",
-			"ordinal": 17,
+			"ordinal": 14,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 4800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slowness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -156,7 +341,20 @@
 			"key": "minecraft:long_strength",
 			"maxLevel": 1,
 			"name": "LONG_STRENGTH",
-			"ordinal": 32,
+			"ordinal": 15,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:strength"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -166,7 +364,20 @@
 			"key": "minecraft:long_swiftness",
 			"maxLevel": 1,
 			"name": "LONG_SWIFTNESS",
-			"ordinal": 14,
+			"ordinal": 16,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:speed"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -176,7 +387,28 @@
 			"key": "minecraft:long_turtle_master",
 			"maxLevel": 1,
 			"name": "LONG_TURTLE_MASTER",
-			"ordinal": 38,
+			"ordinal": 17,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 2,
+					"duration": 800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:resistance"
+				},
+				{
+					"ambient": false,
+					"amplifier": 3,
+					"duration": 800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slowness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -186,7 +418,20 @@
 			"key": "minecraft:long_water_breathing",
 			"maxLevel": 1,
 			"name": "LONG_WATER_BREATHING",
-			"ordinal": 20,
+			"ordinal": 18,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 9600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:water_breathing"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -196,7 +441,20 @@
 			"key": "minecraft:long_weakness",
 			"maxLevel": 1,
 			"name": "LONG_WEAKNESS",
-			"ordinal": 35,
+			"ordinal": 19,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 4800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:weakness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -206,7 +464,20 @@
 			"key": "minecraft:luck",
 			"maxLevel": 1,
 			"name": "LUCK",
-			"ordinal": 36,
+			"ordinal": 20,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 6000,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:luck"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -215,7 +486,10 @@
 			"key": "minecraft:mundane",
 			"maxLevel": 1,
 			"name": "MUNDANE",
-			"ordinal": 1,
+			"ordinal": 21,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -225,7 +499,20 @@
 			"key": "minecraft:night_vision",
 			"maxLevel": 1,
 			"name": "NIGHT_VISION",
-			"ordinal": 4,
+			"ordinal": 22,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:night_vision"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -235,7 +522,20 @@
 			"key": "minecraft:oozing",
 			"maxLevel": 1,
 			"name": "OOZING",
-			"ordinal": 44,
+			"ordinal": 23,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:oozing"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -245,7 +545,20 @@
 			"key": "minecraft:poison",
 			"maxLevel": 2,
 			"name": "POISON",
-			"ordinal": 25,
+			"ordinal": 24,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 900,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:poison"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -255,7 +568,20 @@
 			"key": "minecraft:regeneration",
 			"maxLevel": 2,
 			"name": "REGENERATION",
-			"ordinal": 28,
+			"ordinal": 25,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 900,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:regeneration"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -265,7 +591,20 @@
 			"key": "minecraft:slow_falling",
 			"maxLevel": 1,
 			"name": "SLOW_FALLING",
-			"ordinal": 40,
+			"ordinal": 26,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slow_falling"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -275,7 +614,20 @@
 			"key": "minecraft:slowness",
 			"maxLevel": 2,
 			"name": "SLOWNESS",
-			"ordinal": 16,
+			"ordinal": 27,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slowness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -285,7 +637,20 @@
 			"key": "minecraft:strength",
 			"maxLevel": 2,
 			"name": "STRENGTH",
-			"ordinal": 31,
+			"ordinal": 28,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:strength"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -295,7 +660,20 @@
 			"key": "minecraft:strong_harming",
 			"maxLevel": 1,
 			"name": "STRONG_HARMING",
-			"ordinal": 24,
+			"ordinal": 29,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 1,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:instant_damage"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -305,7 +683,20 @@
 			"key": "minecraft:strong_healing",
 			"maxLevel": 1,
 			"name": "STRONG_HEALING",
-			"ordinal": 22,
+			"ordinal": 30,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 1,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:instant_health"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -315,7 +706,20 @@
 			"key": "minecraft:strong_leaping",
 			"maxLevel": 1,
 			"name": "STRONG_LEAPING",
-			"ordinal": 10,
+			"ordinal": 31,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:jump_boost"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -325,7 +729,20 @@
 			"key": "minecraft:strong_poison",
 			"maxLevel": 1,
 			"name": "STRONG_POISON",
-			"ordinal": 27,
+			"ordinal": 32,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 432,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:poison"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -335,7 +752,20 @@
 			"key": "minecraft:strong_regeneration",
 			"maxLevel": 1,
 			"name": "STRONG_REGENERATION",
-			"ordinal": 30,
+			"ordinal": 33,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 450,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:regeneration"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -345,7 +775,20 @@
 			"key": "minecraft:strong_slowness",
 			"maxLevel": 1,
 			"name": "STRONG_SLOWNESS",
-			"ordinal": 18,
+			"ordinal": 34,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 3,
+					"duration": 400,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slowness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -355,7 +798,20 @@
 			"key": "minecraft:strong_strength",
 			"maxLevel": 1,
 			"name": "STRONG_STRENGTH",
-			"ordinal": 33,
+			"ordinal": 35,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:strength"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -365,7 +821,20 @@
 			"key": "minecraft:strong_swiftness",
 			"maxLevel": 1,
 			"name": "STRONG_SWIFTNESS",
-			"ordinal": 15,
+			"ordinal": 36,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 1,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:speed"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -375,7 +844,28 @@
 			"key": "minecraft:strong_turtle_master",
 			"maxLevel": 1,
 			"name": "STRONG_TURTLE_MASTER",
-			"ordinal": 39,
+			"ordinal": 37,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 3,
+					"duration": 400,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:resistance"
+				},
+				{
+					"ambient": false,
+					"amplifier": 5,
+					"duration": 400,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slowness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -385,7 +875,20 @@
 			"key": "minecraft:swiftness",
 			"maxLevel": 2,
 			"name": "SWIFTNESS",
-			"ordinal": 13,
+			"ordinal": 38,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:speed"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -394,7 +897,10 @@
 			"key": "minecraft:thick",
 			"maxLevel": 1,
 			"name": "THICK",
-			"ordinal": 2,
+			"ordinal": 39,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -404,7 +910,28 @@
 			"key": "minecraft:turtle_master",
 			"maxLevel": 2,
 			"name": "TURTLE_MASTER",
-			"ordinal": 37,
+			"ordinal": 40,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 2,
+					"duration": 400,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:resistance"
+				},
+				{
+					"ambient": false,
+					"amplifier": 3,
+					"duration": 400,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:slowness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": true
 		},
 		{
@@ -413,7 +940,10 @@
 			"key": "minecraft:water",
 			"maxLevel": 1,
 			"name": "WATER",
-			"ordinal": 0,
+			"ordinal": 41,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -423,7 +953,20 @@
 			"key": "minecraft:water_breathing",
 			"maxLevel": 1,
 			"name": "WATER_BREATHING",
-			"ordinal": 19,
+			"ordinal": 42,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:water_breathing"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -433,7 +976,20 @@
 			"key": "minecraft:weakness",
 			"maxLevel": 1,
 			"name": "WEAKNESS",
-			"ordinal": 34,
+			"ordinal": 43,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 1800,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:weakness"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -443,7 +999,20 @@
 			"key": "minecraft:weaving",
 			"maxLevel": 1,
 			"name": "WEAVING",
-			"ordinal": 43,
+			"ordinal": 44,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:weaving"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		},
 		{
@@ -453,7 +1022,20 @@
 			"key": "minecraft:wind_charged",
 			"maxLevel": 1,
 			"name": "WIND_CHARGED",
-			"ordinal": 42,
+			"ordinal": 45,
+			"potionEffects": [
+				{
+					"ambient": false,
+					"amplifier": 0,
+					"duration": 3600,
+					"icon": true,
+					"particles": true,
+					"type": "minecraft:wind_charged"
+				}
+			],
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"upgradeable": false
 		}
 	]

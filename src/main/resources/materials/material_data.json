@@ -523,9 +523,11 @@
 		"waterlogged": true
 	},
 	"minecraft:budding_amethyst": {},
+	"minecraft:bush": {},
 	"minecraft:cactus": {
 		"age": "0"
 	},
+	"minecraft:cactus_flower": {},
 	"minecraft:cake": {
 		"bites": "0"
 	},
@@ -789,8 +791,8 @@
 	},
 	"minecraft:crafting_table": {},
 	"minecraft:creaking_heart": {
-		"active": false,
 		"axis": "y",
+		"creaking_heart_state": "uprooted",
 		"natural": false
 	},
 	"minecraft:creeper_head": {
@@ -1281,6 +1283,7 @@
 		"facing": "north",
 		"waterlogged": true
 	},
+	"minecraft:firefly_bush": {},
 	"minecraft:fletching_table": {},
 	"minecraft:flower_pot": {},
 	"minecraft:flowering_azalea": {},
@@ -1594,6 +1597,10 @@
 		"level": "0"
 	},
 	"minecraft:lava_cauldron": {},
+	"minecraft:leaf_litter": {
+		"facing": "north",
+		"segment_amount": "1"
+	},
 	"minecraft:lectern": {
 		"facing": "north",
 		"has_book": false,
@@ -2820,6 +2827,7 @@
 		"waterlogged": true
 	},
 	"minecraft:seagrass": {},
+	"minecraft:short_dry_grass": {},
 	"minecraft:short_grass": {},
 	"minecraft:shroomlight": {},
 	"minecraft:shulker_box": {
@@ -3124,6 +3132,7 @@
 	"minecraft:sweet_berry_bush": {
 		"age": "0"
 	},
+	"minecraft:tall_dry_grass": {},
 	"minecraft:tall_grass": {
 		"half": "lower"
 	},
@@ -3134,6 +3143,10 @@
 		"power": "0"
 	},
 	"minecraft:terracotta": {},
+	"minecraft:test_block": {
+		"mode": "start"
+	},
+	"minecraft:test_instance_block": {},
 	"minecraft:tinted_glass": {},
 	"minecraft:tnt": {
 		"unstable": false
@@ -3538,6 +3551,10 @@
 		"facing": "north"
 	},
 	"minecraft:white_wool": {},
+	"minecraft:wildflowers": {
+		"facing": "north",
+		"flower_amount": "1"
+	},
 	"minecraft:wither_rose": {},
 	"minecraft:wither_skeleton_skull": {
 		"powered": false,

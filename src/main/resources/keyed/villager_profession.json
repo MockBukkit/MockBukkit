@@ -3,43 +3,43 @@
 		{
 			"key": "minecraft:armorer",
 			"name": "ARMORER",
-			"ordinal": 1,
+			"ordinal": 0,
 			"translationKey": "entity.minecraft.villager.armorer"
 		},
 		{
 			"key": "minecraft:butcher",
 			"name": "BUTCHER",
-			"ordinal": 2,
+			"ordinal": 1,
 			"translationKey": "entity.minecraft.villager.butcher"
 		},
 		{
 			"key": "minecraft:cartographer",
 			"name": "CARTOGRAPHER",
-			"ordinal": 3,
+			"ordinal": 2,
 			"translationKey": "entity.minecraft.villager.cartographer"
 		},
 		{
 			"key": "minecraft:cleric",
 			"name": "CLERIC",
-			"ordinal": 4,
+			"ordinal": 3,
 			"translationKey": "entity.minecraft.villager.cleric"
 		},
 		{
 			"key": "minecraft:farmer",
 			"name": "FARMER",
-			"ordinal": 5,
+			"ordinal": 4,
 			"translationKey": "entity.minecraft.villager.farmer"
 		},
 		{
 			"key": "minecraft:fisherman",
 			"name": "FISHERMAN",
-			"ordinal": 6,
+			"ordinal": 5,
 			"translationKey": "entity.minecraft.villager.fisherman"
 		},
 		{
 			"key": "minecraft:fletcher",
 			"name": "FLETCHER",
-			"ordinal": 7,
+			"ordinal": 6,
 			"translationKey": "entity.minecraft.villager.fletcher"
 		},
 		{
@@ -51,25 +51,25 @@
 		{
 			"key": "minecraft:librarian",
 			"name": "LIBRARIAN",
-			"ordinal": 9,
+			"ordinal": 8,
 			"translationKey": "entity.minecraft.villager.librarian"
 		},
 		{
 			"key": "minecraft:mason",
 			"name": "MASON",
-			"ordinal": 10,
+			"ordinal": 9,
 			"translationKey": "entity.minecraft.villager.mason"
 		},
 		{
 			"key": "minecraft:nitwit",
 			"name": "NITWIT",
-			"ordinal": 11,
+			"ordinal": 10,
 			"translationKey": "entity.minecraft.villager.nitwit"
 		},
 		{
 			"key": "minecraft:none",
 			"name": "NONE",
-			"ordinal": 0,
+			"ordinal": 11,
 			"translationKey": "entity.minecraft.villager.none"
 		},
 		{

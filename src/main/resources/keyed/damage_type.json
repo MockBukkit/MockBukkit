@@ -341,7 +341,7 @@
 			"deathMessageType": "DEFAULT",
 			"exhaustion": 0.1,
 			"key": "minecraft:thorns",
-			"sound": "minecraft:enchant.thorns.hit",
+			"sound": "minecraft:entity.player.hurt",
 			"translationKey": "thorns"
 		},
 		{
