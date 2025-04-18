@@ -21,7 +21,6 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
-import org.bukkit.Registry;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
@@ -50,7 +49,6 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
 import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -68,6 +66,7 @@ import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 
@@ -377,6 +376,7 @@ public class UnsafeValuesMock implements UnsafeValues
 
 	@Override
 	@Nullable
+	@Deprecated(since = "1.21", forRemoval = true)
 	public String getBlockTranslationKey(@NotNull Material material)
 	{
 		if (!material.isBlock())
@@ -393,6 +393,7 @@ public class UnsafeValuesMock implements UnsafeValues
 
 	@Override
 	@Nullable
+	@Deprecated(since = "1.21", forRemoval = true)
 	public String getItemTranslationKey(@NotNull Material material)
 	{
 		if (!material.isItem())
@@ -515,18 +516,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	@ApiStatus.Internal
-	public Biome getCustomBiome()
-	{
-		if (customBiome == null)
-		{
-			customBiome = new BiomeMock(NamespacedKey.fromString("mockbukkit:custom"));
-		}
-
-		return customBiome;
-	}
-
-	@Override
 	public int nextEntityId()
 	{
 		// TODO Auto-generated method stub
@@ -615,6 +604,18 @@ public class UnsafeValuesMock implements UnsafeValues
 	public ItemStack createEmptyStack()
 	{
 		return ItemStackMock.empty();
+	}
+
+	@Override
+	public @NotNull Map<String, Object> serializeStack(ItemStack itemStack)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

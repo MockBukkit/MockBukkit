@@ -1,9 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class CowMock extends AnimalsMock implements Cow
+public class CowMock extends AbstractCowMock implements Cow
 {
 
 	/**
@@ -30,6 +31,18 @@ public class CowMock extends AnimalsMock implements Cow
 	public @NotNull EntityType getType()
 	{
 		return EntityType.COW;
+	}
+
+	@Override
+	public @NotNull Variant getVariant()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVariant(@NotNull Variant variant)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 }

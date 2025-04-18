@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -10,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -81,7 +81,7 @@ public class ThrownPotionMock extends ThrowableProjectileMock implements ThrownP
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.POTION;
+		return EntityType.SPLASH_POTION;
 	}
 
 }

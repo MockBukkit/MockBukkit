@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
-
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -12,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Arrays;
 
@@ -350,7 +349,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case HEAD -> notNull(getHelmet());
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
-			case BODY ->
+			case BODY, SADDLE ->
 					throw new IllegalArgumentException("Not implemented. This is a bug in paper which has been copied over to MockBukkit");
 		};
 	}

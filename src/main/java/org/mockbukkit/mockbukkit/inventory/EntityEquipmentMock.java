@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -11,6 +10,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -90,6 +91,7 @@ public class EntityEquipmentMock implements EntityEquipment
 			case LEGS -> getLeggings();
 			case OFF_HAND -> getItemInOffHand();
 			case BODY -> getItemInBody();
+			case SADDLE -> throw new UnimplementedOperationException();
 		};
 	}
 
