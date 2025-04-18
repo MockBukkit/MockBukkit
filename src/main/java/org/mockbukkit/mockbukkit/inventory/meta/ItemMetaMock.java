@@ -1064,6 +1064,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public boolean hasCustomModelDataComponent()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setCustomModelDataComponent(@Nullable CustomModelDataComponent customModelDataComponent)
 	{
 		throw new UnimplementedOperationException();
