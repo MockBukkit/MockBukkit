@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.math.Rotations;
 import org.bukkit.Material;
@@ -14,6 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -339,7 +339,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 			case LEGS -> getLeggings();
 			case CHEST -> getChestplate();
 			case HEAD -> getHelmet();
-			case BODY -> throw new UnimplementedOperationException();
+			case BODY, SADDLE -> throw new UnimplementedOperationException();
 		};
 	}
 
