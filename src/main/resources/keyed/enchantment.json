@@ -1,6 +1,12 @@
 {
 	"values": [
 		{
+			"activeSlotGroups": [
+				"head"
+			],
+			"activeSlots": [
+				"HEAD"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:aqua_affinity"
@@ -44,12 +50,19 @@
 			],
 			"name": "WATER_WORKER",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/head_armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.aqua_affinity",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:bane_of_arthropods",
@@ -146,6 +159,7 @@
 				"minecraft:wooden_axe",
 				"minecraft:wooden_sword"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/damage",
 			"key": "minecraft:bane_of_arthropods",
 			"maxLevel": 5,
 			"maxModifiedCosts": [
@@ -193,13 +207,25 @@
 				}
 			],
 			"name": "DAMAGE_ARTHROPODS",
+			"primaryItems": "minecraft:enchantable/sword",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/weapon",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.bane_of_arthropods",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"armor"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HEAD",
+				"LEGS"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:binding_curse"
@@ -270,12 +296,23 @@
 			],
 			"name": "BINDING_CURSE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/equippable",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.binding_curse",
 			"treasure": true,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"armor"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HEAD",
+				"LEGS"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:blast_protection",
@@ -369,6 +406,7 @@
 				"minecraft:netherite_leggings",
 				"minecraft:turtle_helmet"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/armor",
 			"key": "minecraft:blast_protection",
 			"maxLevel": 4,
 			"maxModifiedCosts": [
@@ -409,12 +447,19 @@
 			],
 			"name": "PROTECTION_EXPLOSIONS",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.blast_protection",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:bane_of_arthropods",
@@ -486,6 +531,7 @@
 			"enchantables": [
 				"minecraft:mace"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/damage",
 			"key": "minecraft:breach",
 			"maxLevel": 4,
 			"maxModifiedCosts": [
@@ -526,12 +572,19 @@
 			],
 			"name": "BREACH",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/mace",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.breach",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:channeling",
@@ -570,12 +623,19 @@
 			],
 			"name": "CHANNELING",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/trident",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.channeling",
 			"treasure": false,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:bane_of_arthropods",
@@ -660,6 +720,7 @@
 			"enchantables": [
 				"minecraft:mace"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/damage",
 			"key": "minecraft:density",
 			"maxLevel": 5,
 			"maxModifiedCosts": [
@@ -708,12 +769,19 @@
 			],
 			"name": "DENSITY",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/mace",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.density",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"feet"
+			],
+			"activeSlots": [
+				"FEET"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:depth_strider",
@@ -773,6 +841,7 @@
 				"minecraft:leather_boots",
 				"minecraft:netherite_boots"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/boots",
 			"key": "minecraft:depth_strider",
 			"maxLevel": 3,
 			"maxModifiedCosts": [
@@ -805,12 +874,19 @@
 			],
 			"name": "DEPTH_STRIDER",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/foot_armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.depth_strider",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 1,
 			"conflicts": [
 				"minecraft:efficiency"
@@ -962,12 +1038,23 @@
 			],
 			"name": "DIG_SPEED",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/mining",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.efficiency",
 			"treasure": false,
 			"weight": 10
 		},
 		{
+			"activeSlotGroups": [
+				"armor"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HEAD",
+				"LEGS"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:feather_falling"
@@ -1079,12 +1166,19 @@
 			],
 			"name": "PROTECTION_FALL",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/foot_armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.feather_falling",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:fire_aspect"
@@ -1154,13 +1248,25 @@
 				}
 			],
 			"name": "FIRE_ASPECT",
+			"primaryItems": "minecraft:enchantable/sword",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/fire_aspect",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.fire_aspect",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"armor"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HEAD",
+				"LEGS"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:blast_protection",
@@ -1254,6 +1360,7 @@
 				"minecraft:netherite_leggings",
 				"minecraft:turtle_helmet"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/armor",
 			"key": "minecraft:fire_protection",
 			"maxLevel": 4,
 			"maxModifiedCosts": [
@@ -1294,12 +1401,19 @@
 			],
 			"name": "PROTECTION_FIRE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.fire_protection",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:flame"
@@ -1337,12 +1451,19 @@
 			],
 			"name": "ARROW_FIRE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/bow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.flame",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:fortune",
@@ -1420,6 +1541,7 @@
 				"minecraft:wooden_pickaxe",
 				"minecraft:wooden_shovel"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/mining",
 			"key": "minecraft:fortune",
 			"maxLevel": 3,
 			"maxModifiedCosts": [
@@ -1452,12 +1574,19 @@
 			],
 			"name": "LOOT_BONUS_BLOCKS",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/mining_loot",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.fortune",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"feet"
+			],
+			"activeSlots": [
+				"FEET"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:depth_strider",
@@ -1504,6 +1633,7 @@
 				"minecraft:leather_boots",
 				"minecraft:netherite_boots"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/boots",
 			"key": "minecraft:frost_walker",
 			"maxLevel": 2,
 			"maxModifiedCosts": [
@@ -1528,12 +1658,19 @@
 			],
 			"name": "FROST_WALKER",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/foot_armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.frost_walker",
 			"treasure": true,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:bane_of_arthropods",
@@ -1618,6 +1755,7 @@
 			"enchantables": [
 				"minecraft:trident"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/damage",
 			"key": "minecraft:impaling",
 			"maxLevel": 5,
 			"maxModifiedCosts": [
@@ -1666,12 +1804,19 @@
 			],
 			"name": "IMPALING",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/trident",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.impaling",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:infinity",
@@ -1694,6 +1839,7 @@
 			"enchantables": [
 				"minecraft:bow"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/bow",
 			"key": "minecraft:infinity",
 			"maxLevel": 1,
 			"maxModifiedCosts": [
@@ -1710,12 +1856,19 @@
 			],
 			"name": "ARROW_INFINITE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/bow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.infinity",
 			"treasure": false,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:knockback"
@@ -1785,12 +1938,19 @@
 			],
 			"name": "KNOCKBACK",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/sword",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.knockback",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:looting"
@@ -1881,12 +2041,19 @@
 			],
 			"name": "LOOT_BONUS_MOBS",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/sword",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.looting",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:loyalty",
@@ -1973,12 +2140,19 @@
 			],
 			"name": "LOYALTY",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/trident",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.loyalty",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:luck_of_the_sea"
@@ -2064,12 +2238,19 @@
 			],
 			"name": "LUCK",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/fishing",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.luck_of_the_sea",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:lure"
@@ -2155,12 +2336,26 @@
 			],
 			"name": "LURE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/fishing",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.lure",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"any"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HAND",
+				"HEAD",
+				"LEGS",
+				"OFF_HAND",
+				"SADDLE"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:infinity",
@@ -2265,12 +2460,19 @@
 			],
 			"name": "MENDING",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/durability",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.mending",
 			"treasure": true,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:multishot",
@@ -2293,6 +2495,7 @@
 			"enchantables": [
 				"minecraft:crossbow"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/crossbow",
 			"key": "minecraft:multishot",
 			"maxLevel": 1,
 			"maxModifiedCosts": [
@@ -2309,12 +2512,19 @@
 			],
 			"name": "MULTISHOT",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/crossbow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.multishot",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 1,
 			"conflicts": [
 				"minecraft:multishot",
@@ -2382,6 +2592,7 @@
 			"enchantables": [
 				"minecraft:crossbow"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/crossbow",
 			"key": "minecraft:piercing",
 			"maxLevel": 4,
 			"maxModifiedCosts": [
@@ -2422,12 +2633,19 @@
 			],
 			"name": "PIERCING",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/crossbow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.piercing",
 			"treasure": false,
 			"weight": 10
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 1,
 			"conflicts": [
 				"minecraft:power"
@@ -2555,12 +2773,23 @@
 			],
 			"name": "ARROW_DAMAGE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/bow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.power",
 			"treasure": false,
 			"weight": 10
 		},
 		{
+			"activeSlotGroups": [
+				"armor"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HEAD",
+				"LEGS"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:blast_protection",
@@ -2654,6 +2883,7 @@
 				"minecraft:netherite_leggings",
 				"minecraft:turtle_helmet"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/armor",
 			"key": "minecraft:projectile_protection",
 			"maxLevel": 4,
 			"maxModifiedCosts": [
@@ -2694,12 +2924,23 @@
 			],
 			"name": "PROTECTION_PROJECTILE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.projectile_protection",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"armor"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HEAD",
+				"LEGS"
+			],
 			"anvilCost": 1,
 			"conflicts": [
 				"minecraft:blast_protection",
@@ -2793,6 +3034,7 @@
 				"minecraft:netherite_leggings",
 				"minecraft:turtle_helmet"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/armor",
 			"key": "minecraft:protection",
 			"maxLevel": 4,
 			"maxModifiedCosts": [
@@ -2833,12 +3075,19 @@
 			],
 			"name": "PROTECTION_ENVIRONMENTAL",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.protection",
 			"treasure": false,
 			"weight": 10
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:punch"
@@ -2903,12 +3152,21 @@
 			],
 			"name": "ARROW_KNOCKBACK",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/bow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.punch",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand",
+				"offhand"
+			],
+			"activeSlots": [
+				"HAND",
+				"OFF_HAND"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:quick_charge"
@@ -2994,12 +3252,19 @@
 			],
 			"name": "QUICK_CHARGE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/crossbow",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.quick_charge",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"head"
+			],
+			"activeSlots": [
+				"HEAD"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:respiration"
@@ -3091,12 +3356,20 @@
 			],
 			"name": "OXYGEN",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/head_armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.respiration",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"hand"
+			],
+			"activeSlots": [
+				"HAND",
+				"OFF_HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:channeling",
@@ -3152,6 +3425,7 @@
 			"enchantables": [
 				"minecraft:trident"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/riptide",
 			"key": "minecraft:riptide",
 			"maxLevel": 3,
 			"maxModifiedCosts": [
@@ -3184,12 +3458,19 @@
 			],
 			"name": "RIPTIDE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/trident",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.riptide",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 1,
 			"conflicts": [
 				"minecraft:bane_of_arthropods",
@@ -3285,6 +3566,7 @@
 				"minecraft:wooden_axe",
 				"minecraft:wooden_sword"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/damage",
 			"key": "minecraft:sharpness",
 			"maxLevel": 5,
 			"maxModifiedCosts": [
@@ -3332,13 +3614,21 @@
 				}
 			],
 			"name": "DAMAGE_ALL",
+			"primaryItems": "minecraft:enchantable/sword",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/sharp_weapon",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.sharpness",
 			"treasure": false,
 			"weight": 10
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:fortune",
@@ -3384,6 +3674,7 @@
 				"minecraft:wooden_pickaxe",
 				"minecraft:wooden_shovel"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/mining",
 			"key": "minecraft:silk_touch",
 			"maxLevel": 1,
 			"maxModifiedCosts": [
@@ -3400,12 +3691,19 @@
 			],
 			"name": "SILK_TOUCH",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/mining_loot",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.silk_touch",
 			"treasure": false,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:bane_of_arthropods",
@@ -3502,6 +3800,7 @@
 				"minecraft:wooden_axe",
 				"minecraft:wooden_sword"
 			],
+			"exclusiveWith": "minecraft:exclusive_set/damage",
 			"key": "minecraft:smite",
 			"maxLevel": 5,
 			"maxModifiedCosts": [
@@ -3549,13 +3848,21 @@
 				}
 			],
 			"name": "DAMAGE_UNDEAD",
+			"primaryItems": "minecraft:enchantable/sword",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/weapon",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.smite",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"feet"
+			],
+			"activeSlots": [
+				"FEET"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:soul_speed"
@@ -3646,12 +3953,19 @@
 			],
 			"name": "SOUL_SPEED",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/foot_armor",
 			"tradeable": false,
 			"translationKey": "enchantment.minecraft.soul_speed",
 			"treasure": true,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:sweeping_edge"
@@ -3742,12 +4056,19 @@
 			],
 			"name": "SWEEPING_EDGE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/sword",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.sweeping_edge",
 			"treasure": false,
 			"weight": 2
 		},
 		{
+			"activeSlotGroups": [
+				"legs"
+			],
+			"activeSlots": [
+				"LEGS"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:swift_sneak"
@@ -3838,12 +4159,26 @@
 			],
 			"name": "SWIFT_SNEAK",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/leg_armor",
 			"tradeable": false,
 			"translationKey": "enchantment.minecraft.swift_sneak",
 			"treasure": true,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"any"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HAND",
+				"HEAD",
+				"LEGS",
+				"OFF_HAND",
+				"SADDLE"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:thorns"
@@ -3952,13 +4287,28 @@
 				}
 			],
 			"name": "THORNS",
+			"primaryItems": "minecraft:enchantable/chest_armor",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/armor",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.thorns",
 			"treasure": false,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"any"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HAND",
+				"HEAD",
+				"LEGS",
+				"OFF_HAND",
+				"SADDLE"
+			],
 			"anvilCost": 2,
 			"conflicts": [
 				"minecraft:unbreaking"
@@ -4110,12 +4460,26 @@
 			],
 			"name": "DURABILITY",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/durability",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.unbreaking",
 			"treasure": false,
 			"weight": 5
 		},
 		{
+			"activeSlotGroups": [
+				"any"
+			],
+			"activeSlots": [
+				"BODY",
+				"CHEST",
+				"FEET",
+				"HAND",
+				"HEAD",
+				"LEGS",
+				"OFF_HAND",
+				"SADDLE"
+			],
 			"anvilCost": 8,
 			"conflicts": [
 				"minecraft:vanishing_curse"
@@ -4228,12 +4592,19 @@
 			],
 			"name": "VANISHING_CURSE",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/vanishing",
 			"tradeable": true,
 			"translationKey": "enchantment.minecraft.vanishing_curse",
 			"treasure": true,
 			"weight": 1
 		},
 		{
+			"activeSlotGroups": [
+				"mainhand"
+			],
+			"activeSlots": [
+				"HAND"
+			],
 			"anvilCost": 4,
 			"conflicts": [
 				"minecraft:wind_burst"
@@ -4319,6 +4690,7 @@
 			],
 			"name": "WIND_BURST",
 			"startLevel": 1,
+			"supportedItems": "minecraft:enchantable/mace",
 			"tradeable": false,
 			"translationKey": "enchantment.minecraft.wind_burst",
 			"treasure": true,

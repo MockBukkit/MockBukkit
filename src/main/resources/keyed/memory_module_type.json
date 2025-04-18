@@ -10,16 +10,46 @@
 			"key": "minecraft:angry_at"
 		},
 		{
+			"key": "minecraft:ate_recently"
+		},
+		{
+			"key": "minecraft:attack_cooling_down"
+		},
+		{
+			"key": "minecraft:cant_reach_walk_target_since"
+		},
+		{
+			"key": "minecraft:dancing"
+		},
+		{
+			"key": "minecraft:danger_detected_recently"
+		},
+		{
+			"key": "minecraft:disable_walk_to_admire_item"
+		},
+		{
+			"key": "minecraft:gaze_cooldown_ticks"
+		},
+		{
 			"key": "minecraft:golem_detected_recently"
 		},
 		{
 			"key": "minecraft:has_hunting_cooldown"
 		},
 		{
+			"key": "minecraft:heard_bell_time"
+		},
+		{
+			"key": "minecraft:hiding_place"
+		},
+		{
 			"key": "minecraft:home"
 		},
 		{
 			"key": "minecraft:hunted_recently"
+		},
+		{
+			"key": "minecraft:is_panicking"
 		},
 		{
 			"key": "minecraft:is_tempted"
@@ -52,7 +82,13 @@
 			"key": "minecraft:long_jump_cooling_down"
 		},
 		{
+			"key": "minecraft:long_jump_mid_jump"
+		},
+		{
 			"key": "minecraft:meeting_point"
+		},
+		{
+			"key": "minecraft:pacified"
 		},
 		{
 			"key": "minecraft:play_dead_ticks"
@@ -64,13 +100,28 @@
 			"key": "minecraft:ram_cooldown_ticks"
 		},
 		{
+			"key": "minecraft:sniffer_digging"
+		},
+		{
 			"key": "minecraft:sniffer_explored_positions"
+		},
+		{
+			"key": "minecraft:sniffer_happy"
 		},
 		{
 			"key": "minecraft:temptation_cooldown_ticks"
 		},
 		{
+			"key": "minecraft:time_trying_to_reach_admire_item"
+		},
+		{
 			"key": "minecraft:universal_anger"
+		},
+		{
+			"key": "minecraft:visible_adult_hoglin_count"
+		},
+		{
+			"key": "minecraft:visible_adult_piglin_count"
 		}
 	]
 }

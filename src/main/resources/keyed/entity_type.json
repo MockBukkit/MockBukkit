@@ -5,7 +5,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:acacia_boat",
 			"name": "ACACIA_BOAT",
-			"ordinal": 125,
+			"ordinal": 0,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.acacia_boat",
 			"typeId": -1
@@ -15,7 +18,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:acacia_chest_boat",
 			"name": "ACACIA_CHEST_BOAT",
-			"ordinal": 126,
+			"ordinal": 1,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.acacia_chest_boat",
 			"typeId": -1
@@ -25,7 +31,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:allay",
 			"name": "ALLAY",
-			"ordinal": 109,
+			"ordinal": 2,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.allay",
 			"typeId": -1
@@ -35,7 +44,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:area_effect_cloud",
 			"name": "AREA_EFFECT_CLOUD",
-			"ordinal": 2,
+			"ordinal": 3,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.area_effect_cloud",
 			"typeId": 3
@@ -45,7 +57,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:armadillo",
 			"name": "ARMADILLO",
-			"ordinal": 122,
+			"ordinal": 4,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.armadillo",
 			"typeId": -1
@@ -55,7 +70,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:armor_stand",
 			"name": "ARMOR_STAND",
-			"ordinal": 29,
+			"ordinal": 5,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.armor_stand",
 			"typeId": 30
@@ -65,7 +83,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:arrow",
 			"name": "ARROW",
-			"ordinal": 9,
+			"ordinal": 6,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.arrow",
 			"typeId": 10
@@ -75,7 +96,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:axolotl",
 			"name": "AXOLOTL",
-			"ordinal": 104,
+			"ordinal": 7,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.axolotl",
 			"typeId": -1
@@ -85,7 +109,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:bamboo_chest_raft",
 			"name": "BAMBOO_CHEST_RAFT",
-			"ordinal": 128,
+			"ordinal": 8,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.bamboo_chest_raft",
 			"typeId": -1
@@ -95,7 +122,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:bamboo_raft",
 			"name": "BAMBOO_RAFT",
-			"ordinal": 127,
+			"ordinal": 9,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.bamboo_raft",
 			"typeId": -1
@@ -105,7 +135,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:bat",
 			"name": "BAT",
-			"ordinal": 59,
+			"ordinal": 10,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.bat",
 			"typeId": 65
@@ -115,7 +148,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:bee",
 			"name": "BEE",
-			"ordinal": 98,
+			"ordinal": 11,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.bee",
 			"typeId": -1
@@ -125,7 +161,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:birch_boat",
 			"name": "BIRCH_BOAT",
-			"ordinal": 129,
+			"ordinal": 12,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.birch_boat",
 			"typeId": -1
@@ -135,7 +174,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:birch_chest_boat",
 			"name": "BIRCH_CHEST_BOAT",
-			"ordinal": 130,
+			"ordinal": 13,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.birch_chest_boat",
 			"typeId": -1
@@ -145,7 +187,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:blaze",
 			"name": "BLAZE",
-			"ordinal": 55,
+			"ordinal": 14,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.blaze",
 			"typeId": 61
@@ -155,7 +200,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:block_display",
 			"name": "BLOCK_DISPLAY",
-			"ordinal": 114,
+			"ordinal": 15,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.block_display",
 			"typeId": -1
@@ -165,7 +213,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:bogged",
 			"name": "BOGGED",
-			"ordinal": 123,
+			"ordinal": 16,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.bogged",
 			"typeId": -1
@@ -175,7 +226,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:breeze",
 			"name": "BREEZE",
-			"ordinal": 119,
+			"ordinal": 17,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.breeze",
 			"typeId": -1
@@ -185,7 +239,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:breeze_wind_charge",
 			"name": "BREEZE_WIND_CHARGE",
-			"ordinal": 121,
+			"ordinal": 18,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.breeze_wind_charge",
 			"typeId": -1
@@ -195,7 +252,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:camel",
 			"name": "CAMEL",
-			"ordinal": 113,
+			"ordinal": 19,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.camel",
 			"typeId": -1
@@ -205,7 +265,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:cat",
 			"name": "CAT",
-			"ordinal": 91,
+			"ordinal": 20,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.cat",
 			"typeId": -1
@@ -215,7 +278,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:cave_spider",
 			"name": "CAVE_SPIDER",
-			"ordinal": 53,
+			"ordinal": 21,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.cave_spider",
 			"typeId": 59
@@ -225,7 +291,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:cherry_boat",
 			"name": "CHERRY_BOAT",
-			"ordinal": 131,
+			"ordinal": 22,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.cherry_boat",
 			"typeId": -1
@@ -235,7 +304,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:cherry_chest_boat",
 			"name": "CHERRY_CHEST_BOAT",
-			"ordinal": 132,
+			"ordinal": 23,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.cherry_chest_boat",
 			"typeId": -1
@@ -245,7 +317,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:chest_minecart",
 			"name": "CHEST_MINECART",
-			"ordinal": 39,
+			"ordinal": 24,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.chest_minecart",
 			"typeId": 43
@@ -255,7 +330,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:chicken",
 			"name": "CHICKEN",
-			"ordinal": 67,
+			"ordinal": 25,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.chicken",
 			"typeId": 93
@@ -265,7 +343,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:cod",
 			"name": "COD",
-			"ordinal": 85,
+			"ordinal": 26,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.cod",
 			"typeId": -1
@@ -275,7 +356,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:command_block_minecart",
 			"name": "COMMAND_BLOCK_MINECART",
-			"ordinal": 37,
+			"ordinal": 27,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.command_block_minecart",
 			"typeId": 40
@@ -285,7 +369,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:cow",
 			"name": "COW",
-			"ordinal": 66,
+			"ordinal": 28,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.cow",
 			"typeId": 92
@@ -295,7 +382,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:creaking",
 			"name": "CREAKING",
-			"ordinal": 145,
+			"ordinal": 29,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.creaking",
 			"typeId": -1
@@ -305,7 +395,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:creeper",
 			"name": "CREEPER",
-			"ordinal": 44,
+			"ordinal": 30,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.creeper",
 			"typeId": 50
@@ -315,7 +408,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:dark_oak_boat",
 			"name": "DARK_OAK_BOAT",
-			"ordinal": 133,
+			"ordinal": 31,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.dark_oak_boat",
 			"typeId": -1
@@ -325,7 +421,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:dark_oak_chest_boat",
 			"name": "DARK_OAK_CHEST_BOAT",
-			"ordinal": 134,
+			"ordinal": 32,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.dark_oak_chest_boat",
 			"typeId": -1
@@ -335,7 +434,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:dolphin",
 			"name": "DOLPHIN",
-			"ordinal": 90,
+			"ordinal": 33,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.dolphin",
 			"typeId": -1
@@ -345,7 +447,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:donkey",
 			"name": "DONKEY",
-			"ordinal": 30,
+			"ordinal": 34,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.donkey",
 			"typeId": 31
@@ -355,7 +460,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:dragon_fireball",
 			"name": "DRAGON_FIREBALL",
-			"ordinal": 25,
+			"ordinal": 35,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.dragon_fireball",
 			"typeId": 26
@@ -365,7 +473,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:drowned",
 			"name": "DROWNED",
-			"ordinal": 89,
+			"ordinal": 36,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.drowned",
 			"typeId": -1
@@ -375,7 +486,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:egg",
 			"name": "EGG",
-			"ordinal": 6,
+			"ordinal": 37,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.egg",
 			"typeId": 7
@@ -385,7 +499,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:elder_guardian",
 			"name": "ELDER_GUARDIAN",
-			"ordinal": 3,
+			"ordinal": 38,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.elder_guardian",
 			"typeId": 4
@@ -395,7 +512,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:end_crystal",
 			"name": "END_CRYSTAL",
-			"ordinal": 81,
+			"ordinal": 39,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.end_crystal",
 			"typeId": 200
@@ -405,7 +525,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:ender_dragon",
 			"name": "ENDER_DRAGON",
-			"ordinal": 57,
+			"ordinal": 40,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.ender_dragon",
 			"typeId": 63
@@ -415,7 +538,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:ender_pearl",
 			"name": "ENDER_PEARL",
-			"ordinal": 13,
+			"ordinal": 41,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.ender_pearl",
 			"typeId": 14
@@ -425,7 +551,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:enderman",
 			"name": "ENDERMAN",
-			"ordinal": 52,
+			"ordinal": 42,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.enderman",
 			"typeId": 58
@@ -435,7 +564,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:endermite",
 			"name": "ENDERMITE",
-			"ordinal": 61,
+			"ordinal": 43,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.endermite",
 			"typeId": 67
@@ -445,7 +577,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:evoker",
 			"name": "EVOKER",
-			"ordinal": 33,
+			"ordinal": 44,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.evoker",
 			"typeId": 34
@@ -455,7 +590,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:evoker_fangs",
 			"name": "EVOKER_FANGS",
-			"ordinal": 32,
+			"ordinal": 45,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.evoker_fangs",
 			"typeId": 33
@@ -465,7 +603,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:experience_bottle",
 			"name": "EXPERIENCE_BOTTLE",
-			"ordinal": 16,
+			"ordinal": 46,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.experience_bottle",
 			"typeId": 17
@@ -475,7 +616,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:experience_orb",
 			"name": "EXPERIENCE_ORB",
-			"ordinal": 1,
+			"ordinal": 47,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.experience_orb",
 			"typeId": 2
@@ -485,7 +629,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:eye_of_ender",
 			"name": "EYE_OF_ENDER",
-			"ordinal": 14,
+			"ordinal": 48,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.eye_of_ender",
 			"typeId": 15
@@ -495,7 +642,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:falling_block",
 			"name": "FALLING_BLOCK",
-			"ordinal": 20,
+			"ordinal": 49,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.falling_block",
 			"typeId": 21
@@ -505,7 +655,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:fireball",
 			"name": "FIREBALL",
-			"ordinal": 11,
+			"ordinal": 50,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.fireball",
 			"typeId": 12
@@ -515,7 +668,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:firework_rocket",
 			"name": "FIREWORK_ROCKET",
-			"ordinal": 21,
+			"ordinal": 51,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.firework_rocket",
 			"typeId": 22
@@ -525,7 +681,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:fishing_bobber",
 			"name": "FISHING_BOBBER",
-			"ordinal": 146,
+			"ordinal": 52,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": false,
 			"translationKey": "entity.minecraft.fishing_bobber",
 			"typeId": -1
@@ -535,7 +694,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:fox",
 			"name": "FOX",
-			"ordinal": 97,
+			"ordinal": 53,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.fox",
 			"typeId": -1
@@ -545,7 +707,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:frog",
 			"name": "FROG",
-			"ordinal": 110,
+			"ordinal": 54,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.frog",
 			"typeId": -1
@@ -555,7 +720,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:furnace_minecart",
 			"name": "FURNACE_MINECART",
-			"ordinal": 40,
+			"ordinal": 55,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.furnace_minecart",
 			"typeId": 44
@@ -565,7 +733,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:ghast",
 			"name": "GHAST",
-			"ordinal": 50,
+			"ordinal": 56,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.ghast",
 			"typeId": 56
@@ -575,7 +746,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:giant",
 			"name": "GIANT",
-			"ordinal": 47,
+			"ordinal": 57,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.giant",
 			"typeId": 53
@@ -585,7 +759,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:glow_item_frame",
 			"name": "GLOW_ITEM_FRAME",
-			"ordinal": 105,
+			"ordinal": 58,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.glow_item_frame",
 			"typeId": -1
@@ -595,7 +772,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:glow_squid",
 			"name": "GLOW_SQUID",
-			"ordinal": 106,
+			"ordinal": 59,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.glow_squid",
 			"typeId": -1
@@ -605,7 +785,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:goat",
 			"name": "GOAT",
-			"ordinal": 107,
+			"ordinal": 60,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.goat",
 			"typeId": -1
@@ -615,7 +798,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:guardian",
 			"name": "GUARDIAN",
-			"ordinal": 62,
+			"ordinal": 61,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.guardian",
 			"typeId": 68
@@ -625,7 +811,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:hoglin",
 			"name": "HOGLIN",
-			"ordinal": 99,
+			"ordinal": 62,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.hoglin",
 			"typeId": -1
@@ -635,7 +824,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:hopper_minecart",
 			"name": "HOPPER_MINECART",
-			"ordinal": 42,
+			"ordinal": 63,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.hopper_minecart",
 			"typeId": 46
@@ -645,7 +837,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:horse",
 			"name": "HORSE",
-			"ordinal": 74,
+			"ordinal": 64,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.horse",
 			"typeId": 100
@@ -655,7 +850,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:husk",
 			"name": "HUSK",
-			"ordinal": 22,
+			"ordinal": 65,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.husk",
 			"typeId": 23
@@ -665,7 +863,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:illusioner",
 			"name": "ILLUSIONER",
-			"ordinal": 36,
+			"ordinal": 66,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.illusioner",
 			"typeId": 37
@@ -675,7 +876,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:interaction",
 			"name": "INTERACTION",
-			"ordinal": 115,
+			"ordinal": 67,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.interaction",
 			"typeId": -1
@@ -685,7 +889,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:iron_golem",
 			"name": "IRON_GOLEM",
-			"ordinal": 73,
+			"ordinal": 68,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.iron_golem",
 			"typeId": 99
@@ -695,7 +902,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:item",
 			"name": "ITEM",
-			"ordinal": 0,
+			"ordinal": 69,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.item",
 			"typeId": 1
@@ -705,7 +915,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:item_display",
 			"name": "ITEM_DISPLAY",
-			"ordinal": 116,
+			"ordinal": 70,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.item_display",
 			"typeId": -1
@@ -715,7 +928,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:item_frame",
 			"name": "ITEM_FRAME",
-			"ordinal": 17,
+			"ordinal": 71,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.item_frame",
 			"typeId": 18
@@ -725,7 +941,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:jungle_boat",
 			"name": "JUNGLE_BOAT",
-			"ordinal": 135,
+			"ordinal": 72,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.jungle_boat",
 			"typeId": -1
@@ -735,7 +954,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:jungle_chest_boat",
 			"name": "JUNGLE_CHEST_BOAT",
-			"ordinal": 136,
+			"ordinal": 73,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.jungle_chest_boat",
 			"typeId": -1
@@ -745,7 +967,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:leash_knot",
 			"name": "LEASH_KNOT",
-			"ordinal": 7,
+			"ordinal": 74,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.leash_knot",
 			"typeId": 8
@@ -755,9 +980,25 @@
 			"defaultAttributes": false,
 			"key": "minecraft:lightning_bolt",
 			"name": "LIGHTNING_BOLT",
-			"ordinal": 147,
+			"ordinal": 75,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.lightning_bolt",
+			"typeId": -1
+		},
+		{
+			"alive": false,
+			"defaultAttributes": false,
+			"key": "minecraft:lingering_potion",
+			"name": "LINGERING_POTION",
+			"ordinal": 76,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.lingering_potion",
 			"typeId": -1
 		},
 		{
@@ -766,6 +1007,9 @@
 			"key": "minecraft:llama",
 			"name": "LLAMA",
 			"ordinal": 77,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.llama",
 			"typeId": 103
@@ -776,6 +1020,9 @@
 			"key": "minecraft:llama_spit",
 			"name": "LLAMA_SPIT",
 			"ordinal": 78,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.llama_spit",
 			"typeId": 104
@@ -785,7 +1032,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:magma_cube",
 			"name": "MAGMA_CUBE",
-			"ordinal": 56,
+			"ordinal": 79,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.magma_cube",
 			"typeId": 62
@@ -795,7 +1045,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:mangrove_boat",
 			"name": "MANGROVE_BOAT",
-			"ordinal": 137,
+			"ordinal": 80,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.mangrove_boat",
 			"typeId": -1
@@ -805,7 +1058,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:mangrove_chest_boat",
 			"name": "MANGROVE_CHEST_BOAT",
-			"ordinal": 138,
+			"ordinal": 81,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.mangrove_chest_boat",
 			"typeId": -1
@@ -815,7 +1071,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:marker",
 			"name": "MARKER",
-			"ordinal": 108,
+			"ordinal": 82,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.marker",
 			"typeId": -1
@@ -825,7 +1084,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:minecart",
 			"name": "MINECART",
-			"ordinal": 38,
+			"ordinal": 83,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.minecart",
 			"typeId": 42
@@ -835,7 +1097,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:mooshroom",
 			"name": "MOOSHROOM",
-			"ordinal": 70,
+			"ordinal": 84,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.mooshroom",
 			"typeId": 96
@@ -845,7 +1110,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:mule",
 			"name": "MULE",
-			"ordinal": 31,
+			"ordinal": 85,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.mule",
 			"typeId": 32
@@ -855,7 +1123,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:oak_boat",
 			"name": "OAK_BOAT",
-			"ordinal": 139,
+			"ordinal": 86,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.oak_boat",
 			"typeId": -1
@@ -865,7 +1136,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:oak_chest_boat",
 			"name": "OAK_CHEST_BOAT",
-			"ordinal": 140,
+			"ordinal": 87,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.oak_chest_boat",
 			"typeId": -1
@@ -875,7 +1149,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:ocelot",
 			"name": "OCELOT",
-			"ordinal": 72,
+			"ordinal": 88,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.ocelot",
 			"typeId": 98
@@ -885,7 +1162,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:ominous_item_spawner",
 			"name": "OMINOUS_ITEM_SPAWNER",
-			"ordinal": 124,
+			"ordinal": 89,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.ominous_item_spawner",
 			"typeId": -1
@@ -895,7 +1175,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:painting",
 			"name": "PAINTING",
-			"ordinal": 8,
+			"ordinal": 90,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.painting",
 			"typeId": 9
@@ -905,7 +1188,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:pale_oak_boat",
 			"name": "PALE_OAK_BOAT",
-			"ordinal": 141,
+			"ordinal": 91,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.pale_oak_boat",
 			"typeId": -1
@@ -915,7 +1201,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:pale_oak_chest_boat",
 			"name": "PALE_OAK_CHEST_BOAT",
-			"ordinal": 142,
+			"ordinal": 92,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.pale_oak_chest_boat",
 			"typeId": -1
@@ -925,7 +1214,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:panda",
 			"name": "PANDA",
-			"ordinal": 92,
+			"ordinal": 93,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.panda",
 			"typeId": -1
@@ -935,7 +1227,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:parrot",
 			"name": "PARROT",
-			"ordinal": 79,
+			"ordinal": 94,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.parrot",
 			"typeId": 105
@@ -945,7 +1240,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:phantom",
 			"name": "PHANTOM",
-			"ordinal": 83,
+			"ordinal": 95,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.phantom",
 			"typeId": -1
@@ -955,7 +1253,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:pig",
 			"name": "PIG",
-			"ordinal": 64,
+			"ordinal": 96,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.pig",
 			"typeId": 90
@@ -965,7 +1266,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:piglin",
 			"name": "PIGLIN",
-			"ordinal": 100,
+			"ordinal": 97,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.piglin",
 			"typeId": -1
@@ -975,7 +1279,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:piglin_brute",
 			"name": "PIGLIN_BRUTE",
-			"ordinal": 103,
+			"ordinal": 98,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.piglin_brute",
 			"typeId": -1
@@ -985,7 +1292,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:pillager",
 			"name": "PILLAGER",
-			"ordinal": 93,
+			"ordinal": 99,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.pillager",
 			"typeId": -1
@@ -995,7 +1305,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:player",
 			"name": "PLAYER",
-			"ordinal": 148,
+			"ordinal": 100,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": false,
 			"translationKey": "entity.minecraft.player",
 			"typeId": -1
@@ -1005,27 +1318,23 @@
 			"defaultAttributes": true,
 			"key": "minecraft:polar_bear",
 			"name": "POLAR_BEAR",
-			"ordinal": 76,
+			"ordinal": 101,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.polar_bear",
 			"typeId": 102
-		},
-		{
-			"alive": false,
-			"defaultAttributes": false,
-			"key": "minecraft:potion",
-			"name": "POTION",
-			"ordinal": 15,
-			"spawnable": true,
-			"translationKey": "entity.minecraft.potion",
-			"typeId": 16
 		},
 		{
 			"alive": true,
 			"defaultAttributes": true,
 			"key": "minecraft:pufferfish",
 			"name": "PUFFERFISH",
-			"ordinal": 87,
+			"ordinal": 102,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.pufferfish",
 			"typeId": -1
@@ -1035,7 +1344,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:rabbit",
 			"name": "RABBIT",
-			"ordinal": 75,
+			"ordinal": 103,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.rabbit",
 			"typeId": 101
@@ -1045,7 +1357,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:ravager",
 			"name": "RAVAGER",
-			"ordinal": 94,
+			"ordinal": 104,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.ravager",
 			"typeId": -1
@@ -1055,7 +1370,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:salmon",
 			"name": "SALMON",
-			"ordinal": 86,
+			"ordinal": 105,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.salmon",
 			"typeId": -1
@@ -1065,7 +1383,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:sheep",
 			"name": "SHEEP",
-			"ordinal": 65,
+			"ordinal": 106,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.sheep",
 			"typeId": 91
@@ -1075,7 +1396,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:shulker",
 			"name": "SHULKER",
-			"ordinal": 63,
+			"ordinal": 107,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.shulker",
 			"typeId": 69
@@ -1085,7 +1409,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:shulker_bullet",
 			"name": "SHULKER_BULLET",
-			"ordinal": 24,
+			"ordinal": 108,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.shulker_bullet",
 			"typeId": 25
@@ -1095,7 +1422,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:silverfish",
 			"name": "SILVERFISH",
-			"ordinal": 54,
+			"ordinal": 109,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.silverfish",
 			"typeId": 60
@@ -1105,7 +1435,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
-			"ordinal": 45,
+			"ordinal": 110,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.skeleton",
 			"typeId": 51
@@ -1115,7 +1448,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:skeleton_horse",
 			"name": "SKELETON_HORSE",
-			"ordinal": 27,
+			"ordinal": 111,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.skeleton_horse",
 			"typeId": 28
@@ -1125,7 +1461,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:slime",
 			"name": "SLIME",
-			"ordinal": 49,
+			"ordinal": 112,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.slime",
 			"typeId": 55
@@ -1135,7 +1474,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:small_fireball",
 			"name": "SMALL_FIREBALL",
-			"ordinal": 12,
+			"ordinal": 113,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.small_fireball",
 			"typeId": 13
@@ -1145,7 +1487,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:sniffer",
 			"name": "SNIFFER",
-			"ordinal": 117,
+			"ordinal": 114,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.sniffer",
 			"typeId": -1
@@ -1155,7 +1500,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:snow_golem",
 			"name": "SNOW_GOLEM",
-			"ordinal": 71,
+			"ordinal": 115,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.snow_golem",
 			"typeId": 97
@@ -1165,7 +1513,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:snowball",
 			"name": "SNOWBALL",
-			"ordinal": 10,
+			"ordinal": 116,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.snowball",
 			"typeId": 11
@@ -1175,7 +1526,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:spawner_minecart",
 			"name": "SPAWNER_MINECART",
-			"ordinal": 43,
+			"ordinal": 117,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.spawner_minecart",
 			"typeId": 47
@@ -1185,7 +1539,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:spectral_arrow",
 			"name": "SPECTRAL_ARROW",
-			"ordinal": 23,
+			"ordinal": 118,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.spectral_arrow",
 			"typeId": 24
@@ -1195,7 +1552,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:spider",
 			"name": "SPIDER",
-			"ordinal": 46,
+			"ordinal": 119,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.spider",
 			"typeId": 52
@@ -1203,9 +1563,25 @@
 		{
 			"alive": false,
 			"defaultAttributes": false,
+			"key": "minecraft:splash_potion",
+			"name": "SPLASH_POTION",
+			"ordinal": 120,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.splash_potion",
+			"typeId": 16
+		},
+		{
+			"alive": false,
+			"defaultAttributes": false,
 			"key": "minecraft:spruce_boat",
 			"name": "SPRUCE_BOAT",
-			"ordinal": 143,
+			"ordinal": 121,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.spruce_boat",
 			"typeId": -1
@@ -1215,7 +1591,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:spruce_chest_boat",
 			"name": "SPRUCE_CHEST_BOAT",
-			"ordinal": 144,
+			"ordinal": 122,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.spruce_chest_boat",
 			"typeId": -1
@@ -1225,7 +1604,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:squid",
 			"name": "SQUID",
-			"ordinal": 68,
+			"ordinal": 123,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.squid",
 			"typeId": 94
@@ -1235,7 +1617,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:stray",
 			"name": "STRAY",
-			"ordinal": 5,
+			"ordinal": 124,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.stray",
 			"typeId": 6
@@ -1245,7 +1630,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:strider",
 			"name": "STRIDER",
-			"ordinal": 101,
+			"ordinal": 125,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.strider",
 			"typeId": -1
@@ -1255,7 +1643,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:tadpole",
 			"name": "TADPOLE",
-			"ordinal": 111,
+			"ordinal": 126,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.tadpole",
 			"typeId": -1
@@ -1265,7 +1656,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:text_display",
 			"name": "TEXT_DISPLAY",
-			"ordinal": 118,
+			"ordinal": 127,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.text_display",
 			"typeId": -1
@@ -1275,7 +1669,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:tnt",
 			"name": "TNT",
-			"ordinal": 19,
+			"ordinal": 128,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.tnt",
 			"typeId": 20
@@ -1285,7 +1682,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:tnt_minecart",
 			"name": "TNT_MINECART",
-			"ordinal": 41,
+			"ordinal": 129,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.tnt_minecart",
 			"typeId": 45
@@ -1295,7 +1695,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:trader_llama",
 			"name": "TRADER_LLAMA",
-			"ordinal": 95,
+			"ordinal": 130,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.trader_llama",
 			"typeId": -1
@@ -1305,7 +1708,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:trident",
 			"name": "TRIDENT",
-			"ordinal": 84,
+			"ordinal": 131,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.trident",
 			"typeId": -1
@@ -1315,7 +1721,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:tropical_fish",
 			"name": "TROPICAL_FISH",
-			"ordinal": 88,
+			"ordinal": 132,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.tropical_fish",
 			"typeId": -1
@@ -1325,7 +1734,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:turtle",
 			"name": "TURTLE",
-			"ordinal": 82,
+			"ordinal": 133,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.turtle",
 			"typeId": -1
@@ -1335,7 +1747,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:vex",
 			"name": "VEX",
-			"ordinal": 34,
+			"ordinal": 134,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.vex",
 			"typeId": 35
@@ -1345,7 +1760,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:villager",
 			"name": "VILLAGER",
-			"ordinal": 80,
+			"ordinal": 135,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.villager",
 			"typeId": 120
@@ -1355,7 +1773,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:vindicator",
 			"name": "VINDICATOR",
-			"ordinal": 35,
+			"ordinal": 136,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.vindicator",
 			"typeId": 36
@@ -1365,7 +1786,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:wandering_trader",
 			"name": "WANDERING_TRADER",
-			"ordinal": 96,
+			"ordinal": 137,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.wandering_trader",
 			"typeId": -1
@@ -1375,7 +1799,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:warden",
 			"name": "WARDEN",
-			"ordinal": 112,
+			"ordinal": 138,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.warden",
 			"typeId": -1
@@ -1385,7 +1812,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:wind_charge",
 			"name": "WIND_CHARGE",
-			"ordinal": 120,
+			"ordinal": 139,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.wind_charge",
 			"typeId": -1
@@ -1395,7 +1825,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:witch",
 			"name": "WITCH",
-			"ordinal": 60,
+			"ordinal": 140,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.witch",
 			"typeId": 66
@@ -1405,7 +1838,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:wither",
 			"name": "WITHER",
-			"ordinal": 58,
+			"ordinal": 141,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.wither",
 			"typeId": 64
@@ -1415,7 +1851,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:wither_skeleton",
 			"name": "WITHER_SKELETON",
-			"ordinal": 4,
+			"ordinal": 142,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.wither_skeleton",
 			"typeId": 5
@@ -1425,7 +1864,10 @@
 			"defaultAttributes": false,
 			"key": "minecraft:wither_skull",
 			"name": "WITHER_SKULL",
-			"ordinal": 18,
+			"ordinal": 143,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.wither_skull",
 			"typeId": 19
@@ -1435,7 +1877,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:wolf",
 			"name": "WOLF",
-			"ordinal": 69,
+			"ordinal": 144,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.wolf",
 			"typeId": 95
@@ -1445,7 +1890,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:zoglin",
 			"name": "ZOGLIN",
-			"ordinal": 102,
+			"ordinal": 145,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.zoglin",
 			"typeId": -1
@@ -1455,7 +1903,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:zombie",
 			"name": "ZOMBIE",
-			"ordinal": 48,
+			"ordinal": 146,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.zombie",
 			"typeId": 54
@@ -1465,7 +1916,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:zombie_horse",
 			"name": "ZOMBIE_HORSE",
-			"ordinal": 28,
+			"ordinal": 147,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.zombie_horse",
 			"typeId": 29
@@ -1475,7 +1929,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:zombie_villager",
 			"name": "ZOMBIE_VILLAGER",
-			"ordinal": 26,
+			"ordinal": 148,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.zombie_villager",
 			"typeId": 27
@@ -1485,7 +1942,10 @@
 			"defaultAttributes": true,
 			"key": "minecraft:zombified_piglin",
 			"name": "ZOMBIFIED_PIGLIN",
-			"ordinal": 51,
+			"ordinal": 149,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.zombified_piglin",
 			"typeId": 57

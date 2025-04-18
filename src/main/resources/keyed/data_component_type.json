@@ -6,6 +6,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:axolotl/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:banner_patterns",
 			"persistent": true,
 			"valued": true
@@ -31,6 +36,16 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:blocks_attacks",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:break_sound",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:bucket_entity_data",
 			"persistent": true,
 			"valued": false
@@ -51,7 +66,22 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:cat/collar",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:cat/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:charged_projectiles",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:chicken/variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -67,6 +97,11 @@
 		},
 		{
 			"key": "minecraft:container_loot",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:cow/variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -156,19 +191,24 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:fox/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:frog/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:glider",
 			"persistent": true,
 			"valued": false
 		},
 		{
-			"key": "minecraft:hide_additional_tooltip",
+			"key": "minecraft:horse/variant",
 			"persistent": true,
-			"valued": false
-		},
-		{
-			"key": "minecraft:hide_tooltip",
-			"persistent": true,
-			"valued": false
+			"valued": true
 		},
 		{
 			"key": "minecraft:instrument",
@@ -192,6 +232,11 @@
 		},
 		{
 			"key": "minecraft:jukebox_playable",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:llama/variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -241,12 +286,32 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:mooshroom/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:note_block_sound",
 			"persistent": true,
 			"valued": true
 		},
 		{
 			"key": "minecraft:ominous_bottle_amplifier",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:painting/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:parrot/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:pig/variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -261,7 +326,27 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:potion_duration_scale",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:profile",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:provides_banner_patterns",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:provides_trim_material",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:rabbit/variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -286,6 +371,21 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:salmon/size",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:sheep/color",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:shulker/color",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:stored_enchantments",
 			"persistent": true,
 			"valued": true
@@ -301,6 +401,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:tooltip_display",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:tooltip_style",
 			"persistent": true,
 			"valued": true
@@ -311,9 +416,24 @@
 			"valued": true
 		},
 		{
-			"key": "minecraft:unbreakable",
+			"key": "minecraft:tropical_fish/base_color",
 			"persistent": true,
 			"valued": true
+		},
+		{
+			"key": "minecraft:tropical_fish/pattern",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:tropical_fish/pattern_color",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:unbreakable",
+			"persistent": true,
+			"valued": false
 		},
 		{
 			"key": "minecraft:use_cooldown",
@@ -322,6 +442,31 @@
 		},
 		{
 			"key": "minecraft:use_remainder",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:villager/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:weapon",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:wolf/collar",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:wolf/sound_variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:wolf/variant",
 			"persistent": true,
 			"valued": true
 		},

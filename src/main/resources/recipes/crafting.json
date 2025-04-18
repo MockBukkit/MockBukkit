@@ -5861,6 +5861,8 @@
 			},
 			"e": {
 				"choices": [
+					"minecraft:blue_egg",
+					"minecraft:brown_egg",
 					"minecraft:egg"
 				],
 				"type": "material"
@@ -17529,7 +17531,7 @@
 				"type": "material"
 			}
 		],
-		"group": "",
+		"group": "gray_dye",
 		"key": "minecraft:gray_dye",
 		"result": {
 			"amount": 2,
@@ -23247,7 +23249,7 @@
 			},
 			"e": {
 				"choices": [
-					"minecraft:netherite_ingot"
+					"minecraft:iron_ingot"
 				],
 				"type": "material"
 			},
@@ -29167,6 +29169,24 @@
 		"choices": [
 			{
 				"choices": [
+					"minecraft:cactus_flower"
+				],
+				"type": "material"
+			}
+		],
+		"group": "pink_dye",
+		"key": "minecraft:pink_dye_from_cactus_flower",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_dye"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
 					"minecraft:peony"
 				],
 				"type": "material"
@@ -31234,6 +31254,8 @@
 			},
 			{
 				"choices": [
+					"minecraft:blue_egg",
+					"minecraft:brown_egg",
 					"minecraft:egg"
 				],
 				"type": "material"
@@ -43975,6 +43997,24 @@
 		"key": "minecraft:yellow_dye_from_sunflower",
 		"result": {
 			"amount": 2,
+			"type": "minecraft:yellow_dye"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:wildflowers"
+				],
+				"type": "material"
+			}
+		],
+		"group": "yellow_dye",
+		"key": "minecraft:yellow_dye_from_wildflowers",
+		"result": {
+			"amount": 1,
 			"type": "minecraft:yellow_dye"
 		},
 		"type": "shapeless"

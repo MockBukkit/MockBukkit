@@ -1,20 +1,22 @@
 package org.mockbukkit.metaminer.internal.tags.blocks;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.util.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
 public class InternalBlockTagDataGenerator implements DataGenerator
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(InternalBlockTagDataGenerator.class);
 
 	private final File workDirectory;
 
@@ -26,7 +28,8 @@ public class InternalBlockTagDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		if(!this.workDirectory.exists() && !this.workDirectory.mkdirs()){
+		if(!this.workDirectory.exists() && !this.workDirectory.mkdirs())
+		{
 			throw new IOException("Could not create directory: " + this.workDirectory);
 		}
 		JsonArray isSolidValues = new JsonArray();
@@ -38,7 +41,17 @@ public class InternalBlockTagDataGenerator implements DataGenerator
 			{
 				continue;
 			}
-			block.setType(material);
+
+			try
+			{
+				block.setType(material);
+			}
+			catch(IllegalArgumentException e)
+			{
+				LOGGER.error("Error while processing Material {}.", material, e);
+				continue;
+			}
+
 			if (block.isSolid())
 			{
 				isSolidValues.add(material.getKey().toString());
