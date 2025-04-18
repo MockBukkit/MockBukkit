@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wolf;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -105,6 +105,18 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	public void setVariant(@NotNull Wolf.Variant variant)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull SoundVariant getSoundVariant()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSoundVariant(@NotNull SoundVariant soundVariant)
+	{
 		throw new UnimplementedOperationException();
 	}
 
