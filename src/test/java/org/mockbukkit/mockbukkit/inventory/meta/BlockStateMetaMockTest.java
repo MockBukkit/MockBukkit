@@ -7,6 +7,8 @@ import org.bukkit.block.Container;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,6 +17,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
 import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
+import org.mockbukkit.mockbukkit.block.state.TestBlockStateMock;
+import org.mockbukkit.mockbukkit.block.state.TestInstanceBlockStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Map;
@@ -162,6 +166,20 @@ public class BlockStateMetaMockTest
 		ItemStack item = expected.asItemType().createItemStack();
 		assertNotNull(item);
 		assertEquals(expected, item.getType());
+	}
+
+	@Test
+	void givenTestBlock_ShouldBeTestBlockStateMock()
+	{
+		@NotNull BlockState state = Material.TEST_BLOCK.createBlockData().createBlockState();
+		assertInstanceOf(TestBlockStateMock.class, state);
+	}
+
+	@Test
+	void givenTestBlock_ShouldBeTestInstanceBlockStateMock()
+	{
+		@NotNull BlockState state = Material.TEST_INSTANCE_BLOCK.createBlockData().createBlockState();
+		assertInstanceOf(TestInstanceBlockStateMock.class, state);
 	}
 
 	public static Stream<Arguments> getPossibleItemTypes()

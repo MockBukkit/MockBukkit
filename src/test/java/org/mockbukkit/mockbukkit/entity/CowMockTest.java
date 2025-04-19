@@ -18,6 +18,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CowMockTest
 {
@@ -65,6 +66,13 @@ class CowMockTest
 		void givenDefault()
 		{
 			assertEquals(Cow.Variant.TEMPERATE, cow.getVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> cow.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
 		}
 
 		@ParameterizedTest

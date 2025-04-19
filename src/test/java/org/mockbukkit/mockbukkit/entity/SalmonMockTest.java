@@ -15,6 +15,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SalmonMockTest
 {
@@ -54,6 +55,13 @@ class SalmonMockTest
 		void givenDefault()
 		{
 			assertEquals(Salmon.Variant.SMALL, salmon.getVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> salmon.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
 		}
 
 		@ParameterizedTest

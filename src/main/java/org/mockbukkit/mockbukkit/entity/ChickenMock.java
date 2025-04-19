@@ -57,7 +57,7 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	@Override
 	public void setVariant(@NotNull Variant variant)
 	{
-		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.variant = variant;
 	}
 

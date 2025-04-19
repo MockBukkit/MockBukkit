@@ -135,6 +135,13 @@ class ChickenMockTest
 			assertEquals(Chicken.Variant.TEMPERATE, chicken.getVariant());
 		}
 
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> chicken.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
 		@ParameterizedTest
 		@MethodSource("getChickenVariants")
 		void givenPossibleValues(Chicken.Variant variant)
