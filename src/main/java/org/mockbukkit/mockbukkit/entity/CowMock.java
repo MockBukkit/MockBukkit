@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public class CowMock extends AbstractCowMock implements Cow
 {
+	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	/**
 	 * Constructs a new {@link CowMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -36,13 +37,14 @@ public class CowMock extends AbstractCowMock implements Cow
 	@Override
 	public @NotNull Variant getVariant()
 	{
-		throw new UnimplementedOperationException();
+		return this.variant;
 	}
 
 	@Override
 	public void setVariant(@NotNull Variant variant)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		this.variant = variant;
 	}
 
 }
