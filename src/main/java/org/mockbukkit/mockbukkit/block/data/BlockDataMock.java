@@ -23,6 +23,7 @@ import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Switch;
+import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
@@ -80,6 +81,7 @@ public class BlockDataMock implements BlockData
 			.put(Lightable.class, LightableDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
 			.put(Switch.class, SwitchDataMock::new)
+			.put(TestBlock.class, TestBlockDataMock::new)
 			.build();
 
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";

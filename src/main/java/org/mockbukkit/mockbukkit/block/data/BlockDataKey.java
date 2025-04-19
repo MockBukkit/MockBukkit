@@ -21,6 +21,7 @@ import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.TestBlock;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -115,6 +116,7 @@ public enum BlockDataKey
 	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
+	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance);
 
