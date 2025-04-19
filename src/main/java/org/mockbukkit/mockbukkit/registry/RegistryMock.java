@@ -20,6 +20,7 @@ import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
+import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.ChickenVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.CowVariantMock;
@@ -116,6 +117,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
 		factoryMap.put(RegistryKey.FLUID, FluidMock::from);
 		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
+		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
