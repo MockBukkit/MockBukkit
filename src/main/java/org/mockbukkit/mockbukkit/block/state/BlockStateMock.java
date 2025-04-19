@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -20,6 +16,10 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -552,6 +552,8 @@ public class BlockStateMock implements BlockState
 			case DROPPER -> new DropperStateMock(material);
 			case CHEST, TRAPPED_CHEST -> new ChestStateMock(material);
 			case ENDER_CHEST -> new EnderChestStateMock(material);
+			case TEST_BLOCK -> new TestBlockStateMock(material);
+			case TEST_INSTANCE_BLOCK -> new TestInstanceBlockStateMock(material);
 			default -> new BlockStateMock(material);
 		};
 	}

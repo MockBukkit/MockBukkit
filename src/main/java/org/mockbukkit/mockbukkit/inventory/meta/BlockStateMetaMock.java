@@ -42,6 +42,8 @@ import org.mockbukkit.mockbukkit.block.state.ShulkerBoxStateMock;
 import org.mockbukkit.mockbukkit.block.state.SignStateMock;
 import org.mockbukkit.mockbukkit.block.state.SmokerStateMock;
 import org.mockbukkit.mockbukkit.block.state.StructureStateMock;
+import org.mockbukkit.mockbukkit.block.state.TestBlockStateMock;
+import org.mockbukkit.mockbukkit.block.state.TestInstanceBlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;
 
 import java.util.ArrayList;
@@ -111,6 +113,8 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		map.put(Material.STRUCTURE_BLOCK, StructureStateMock.class);
 		map.put(Material.SUSPICIOUS_GRAVEL, null);
 		map.put(Material.SUSPICIOUS_SAND, null);
+		map.put(Material.TEST_BLOCK, TestBlockStateMock.class);
+		map.put(Material.TEST_INSTANCE_BLOCK, TestInstanceBlockStateMock.class);
 		map.put(Material.TRAPPED_CHEST, ChestStateMock.class);
 		map.put(Material.TRIAL_SPAWNER, null);
 		map.put(Material.VAULT, null);
