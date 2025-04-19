@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public class WolfMock extends TameableAnimalMock implements Wolf
 {
-
+	private @NotNull Variant variant = Variant.PALE;
 	private boolean isAngry = false;
 	private @NotNull DyeColor collarColor = DyeColor.RED;
 	private boolean isWet = false;
@@ -93,19 +93,17 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 		this.interested = interested;
 	}
 
-	@NotNull
 	@Override
-	public Variant getVariant()
+	public @NotNull Variant getVariant()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.variant;
 	}
 
 	@Override
-	public void setVariant(@NotNull Wolf.Variant variant)
+	public void setVariant(@NotNull Variant variant)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		this.variant = variant;
 	}
 
 	@Override
