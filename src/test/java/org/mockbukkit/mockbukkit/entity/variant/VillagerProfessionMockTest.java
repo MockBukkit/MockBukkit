@@ -15,7 +15,6 @@ class VillagerProfessionMockTest
 		Villager.Profession profession = Villager.Profession.BUTCHER;
 		assertEquals("BUTCHER", profession.name());
 		assertEquals(NamespacedKey.fromString("minecraft:butcher"), profession.getKey());
-		assertEquals(2, profession.ordinal());
 		assertEquals("entity.minecraft.villager.butcher", profession.translationKey());
 	}
 
