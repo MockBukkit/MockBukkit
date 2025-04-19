@@ -1,16 +1,18 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -120,28 +122,50 @@ class PlayerInventoryMockTest
 		assertEquals(1, inventory.getExtraContents().length);
 	}
 
-	@Test
-	void setItem_InInventory_ItemInContents()
+	@Nested
+	class SetItem
 	{
-		ItemStack item = new ItemStackMock(Material.STONE);
-		inventory.setItem(0, item);
-		assertEquals(item, inventory.getContents()[0]);
-	}
 
-	@Test
-	void setItem_InArmorInventory_ItemInArmorContents()
-	{
-		ItemStack item = new ItemStackMock(Material.STONE);
-		inventory.setItem(36, item);
-		assertEquals(item, inventory.getArmorContents()[0]);
-	}
+		@Test
+		void setItem_InInventory_ItemInContents()
+		{
+			ItemStack item = new ItemStackMock(Material.STONE);
+			inventory.setItem(0, item);
+			assertEquals(item, inventory.getContents()[0]);
+		}
 
-	@Test
-	void setItem_InExtraInventory_ItemInExtraContents()
-	{
-		ItemStack item = new ItemStackMock(Material.STONE);
-		inventory.setItem(40, item);
-		assertEquals(item, inventory.getExtraContents()[0]);
+		@Test
+		void setItem_InArmorInventory_ItemInArmorContents()
+		{
+			ItemStack item = new ItemStackMock(Material.STONE);
+			inventory.setItem(36, item);
+			assertEquals(item, inventory.getArmorContents()[0]);
+		}
+
+		@Test
+		void setItem_InExtraInventory_ItemInExtraContents()
+		{
+			ItemStack item = new ItemStackMock(Material.STONE);
+			inventory.setItem(40, item);
+			assertEquals(item, inventory.getExtraContents()[0]);
+		}
+
+		@Test
+		void givenBodyEquipmentSlot_ShouldThrowIllegalArgumentException()
+		{
+			ItemStack item = new ItemStackMock(Material.STONE);
+			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.BODY, item));
+			assertEquals("BODY is not valid for players!", e.getMessage());
+		}
+
+		@Test
+		void givenSaddleEquipmentSlot_ShouldThrowIllegalArgumentException()
+		{
+			ItemStack item = new ItemStackMock(Material.STONE);
+			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.SADDLE, item));
+			assertEquals("Could not set slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
+		}
+
 	}
 
 	@Test
@@ -262,20 +286,40 @@ class PlayerInventoryMockTest
 		assertThrows(IllegalArgumentException.class, () -> inventory.setExtraContents(new ItemStack[2]));
 	}
 
-	@ParameterizedTest
-	@EnumSource(EquipmentSlot.class)
-	void getItem_Mirror(EquipmentSlot slot)
+	@Nested
+	class GetItem
 	{
-		// This will throw an exception otherwise as per paper behavior
-		if(slot == EquipmentSlot.BODY)
+
+		@ParameterizedTest
+		@EnumSource(value = EquipmentSlot.class, mode = EnumSource.Mode.EXCLUDE, names = { "BODY", "SADDLE" })
+		void getItem_Mirror(EquipmentSlot slot)
 		{
-			return;
+			// This will throw an exception otherwise as per paper behavior
+			if(slot == EquipmentSlot.BODY)
+			{
+				return;
+			}
+			ItemStack apiItemStack = new ItemStackMock(Material.SCULK);
+			inventory.setItem(slot, apiItemStack);
+			ItemStack mirrorItemStack = inventory.getItem(slot);
+			assertNotSame(apiItemStack, mirrorItemStack);
+			assertEquals(mirrorItemStack, inventory.getItem(slot));
 		}
-		ItemStack apiItemStack = new ItemStackMock(Material.SCULK);
-		inventory.setItem(slot, apiItemStack);
-		ItemStack mirrorItemStack = inventory.getItem(slot);
-		assertNotSame(apiItemStack, mirrorItemStack);
-		assertEquals(mirrorItemStack, inventory.getItem(slot));
+
+		@Test
+		void getItemWithBody_ShouldThrowIllegalArgumentException()
+		{
+			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.BODY));
+			Assertions.assertEquals("BODY is not valid for players!", e.getMessage());
+		}
+
+		@Test
+		void getItemWithSaddle_ShouldThrowIllegalArgumentException()
+		{
+			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.SADDLE));
+			Assertions.assertEquals("Could not get slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
+		}
+
 	}
 
 }

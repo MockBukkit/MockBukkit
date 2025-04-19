@@ -349,8 +349,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case HEAD -> notNull(getHelmet());
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
-			case BODY, SADDLE ->
-					throw new IllegalArgumentException("Not implemented. This is a bug in paper which has been copied over to MockBukkit");
+			case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
+			default ->  throw new IllegalArgumentException("Could not get slot " + slot + " - not a valid slot for PlayerInventory");
 		};
 	}
 
@@ -371,6 +371,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		case HEAD -> setHelmet(item);
 		case LEGS -> setLeggings(item);
 		case OFF_HAND -> setItemInOffHand(item);
+		case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
+		default -> throw new IllegalArgumentException("Could not set slot " + slot + " - not a valid slot for PlayerInventory");
 		}
 		// Sounds are not implemented here
 	}
