@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -18,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class PigMock extends AnimalsMock implements Pig
 {
+	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean hasSaddle = false;
 	private int boostTicks = 0;
@@ -92,13 +92,14 @@ public class PigMock extends AnimalsMock implements Pig
 	@Override
 	public @NotNull Variant getVariant()
 	{
-		throw new UnimplementedOperationException();
+		return this.variant;
 	}
 
 	@Override
 	public void setVariant(@NotNull Variant variant)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		this.variant = variant;
 	}
 
 }

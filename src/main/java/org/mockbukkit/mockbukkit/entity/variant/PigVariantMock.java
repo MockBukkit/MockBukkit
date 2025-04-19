@@ -3,10 +3,10 @@ package org.mockbukkit.mockbukkit.entity.variant;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Cow;
+import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
 
-public class PigVariantMock implements Cow.Variant
+public class PigVariantMock implements Pig.Variant
 {
 	public static PigVariantMock from(JsonObject jsonObject)
 	{

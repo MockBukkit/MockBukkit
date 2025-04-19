@@ -1,13 +1,21 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,6 +55,34 @@ class CowMockTest
 	{
 		cow.setBaby();
 		assertEquals(0.65D, cow.getEyeHeight());
+	}
+
+	@Nested
+	class GetVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Cow.Variant.TEMPERATE, cow.getVariant());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getCowVariants")
+		void givenPossibleValues(Cow.Variant variant)
+		{
+			cow.setVariant(variant);
+			assertEquals(variant, cow.getVariant());
+		}
+
+		public static Stream<Arguments> getCowVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.COW_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
 	}
 
 }

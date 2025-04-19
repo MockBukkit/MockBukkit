@@ -7,7 +7,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ChickenMock extends AnimalsMock implements Chicken
 {
+	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean isChickenJockey = false;
 	private int eggTime;
@@ -51,13 +51,14 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	@Override
 	public @NotNull Variant getVariant()
 	{
-		throw new UnimplementedOperationException();
+		return this.variant;
 	}
 
 	@Override
 	public void setVariant(@NotNull Variant variant)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		this.variant = variant;
 	}
 
 	@Override
