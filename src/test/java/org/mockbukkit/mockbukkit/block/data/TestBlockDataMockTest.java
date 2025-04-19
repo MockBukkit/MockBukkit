@@ -29,14 +29,14 @@ class TestBlockDataMockTest
 	{
 
 		@Test
-		void givenDefaultAxis()
+		void givenDefaultMode()
 		{
 			assertEquals(TestBlock.Mode.START, testBlock.getMode());
 		}
 
 		@ParameterizedTest
 		@EnumSource(TestBlock.Mode.class)
-		void givenAxisChange(TestBlock.Mode mode)
+		void givenModeChange(TestBlock.Mode mode)
 		{
 			testBlock.setMode(mode);
 			assertEquals(mode, testBlock.getMode());
