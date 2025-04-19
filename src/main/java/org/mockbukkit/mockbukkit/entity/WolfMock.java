@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wolf;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -18,6 +17,7 @@ import java.util.UUID;
 public class WolfMock extends TameableAnimalMock implements Wolf
 {
 	private @NotNull Variant variant = Variant.PALE;
+	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private boolean isAngry = false;
 	private @NotNull DyeColor collarColor = DyeColor.RED;
 	private boolean isWet = false;
@@ -109,13 +109,15 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	@Override
 	public @NotNull SoundVariant getSoundVariant()
 	{
-		throw new UnimplementedOperationException();
+		return this.soundVariant;
 	}
 
 	@Override
 	public void setSoundVariant(@NotNull SoundVariant soundVariant)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(soundVariant != null, "soundVariant cannot be null");
+
+		this.soundVariant = soundVariant;
 	}
 
 	@Override

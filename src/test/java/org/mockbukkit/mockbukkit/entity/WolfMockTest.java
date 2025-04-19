@@ -145,4 +145,32 @@ class WolfMockTest
 
 	}
 
+	@Nested
+	class GetSoundVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Wolf.SoundVariant.CLASSIC, wolf.getSoundVariant());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getWolfSoundVariants")
+		void givenPossibleValues(Wolf.SoundVariant variant)
+		{
+			wolf.setSoundVariant(variant);
+			assertEquals(variant, wolf.getSoundVariant());
+		}
+
+		public static Stream<Arguments> getWolfSoundVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.WOLF_SOUND_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
+	}
+
 }
