@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WolfMockTest
@@ -125,6 +126,13 @@ class WolfMockTest
 		void givenDefault()
 		{
 			assertEquals(Wolf.Variant.PALE, wolf.getVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> wolf.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
 		}
 
 		@ParameterizedTest

@@ -138,6 +138,13 @@ class PigMockTest
 			assertEquals(Pig.Variant.TEMPERATE, pig.getVariant());
 		}
 
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> pig.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
 		@ParameterizedTest
 		@MethodSource("getPigVariants")
 		void givenPossibleValues(Pig.Variant variant)
