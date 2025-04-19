@@ -1,13 +1,5 @@
 package org.mockbukkit.mockbukkit.registry;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Stream;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,10 +20,15 @@ import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
+import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
+import org.mockbukkit.mockbukkit.entity.variant.ChickenVariantMock;
+import org.mockbukkit.mockbukkit.entity.variant.CowVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.FrogVariantMock;
+import org.mockbukkit.mockbukkit.entity.variant.PigVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.VillagerProfessionMock;
 import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
+import org.mockbukkit.mockbukkit.entity.variant.WolfSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfVariantMock;
 import org.mockbukkit.mockbukkit.event.GameEventMock;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
@@ -49,6 +46,14 @@ import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class RegistryMock<T extends Keyed> implements Registry<T>
 {
@@ -99,6 +104,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, VillagerProfessionMock::from);
 		factoryMap.put(RegistryKey.VILLAGER_TYPE, VillagerTypeMock::from);
 		factoryMap.put(RegistryKey.FROG_VARIANT, FrogVariantMock::from);
+		factoryMap.put(RegistryKey.CHICKEN_VARIANT, ChickenVariantMock::from);
+		factoryMap.put(RegistryKey.COW_VARIANT, CowVariantMock::from);
+		factoryMap.put(RegistryKey.PIG_VARIANT, PigVariantMock::from);
+		factoryMap.put(RegistryKey.WOLF_SOUND_VARIANT, WolfSoundVariantMock::from);
 		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
 		factoryMap.put(RegistryKey.MENU, MenuTypeMock::from);
 		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
@@ -108,6 +117,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
 		factoryMap.put(RegistryKey.FLUID, FluidMock::from);
 		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
+		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
