@@ -2,7 +2,6 @@
 	"values": [
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:acacia_boat",
 			"name": "ACACIA_BOAT",
 			"ordinal": 0,
@@ -15,7 +14,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:acacia_chest_boat",
 			"name": "ACACIA_CHEST_BOAT",
 			"ordinal": 1,
@@ -28,7 +26,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:flying_speed": {
+					"baseValue": 0.10000000149011612,
+					"defaultValue": 0.4
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.10000000149011612,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:allay",
 			"name": "ALLAY",
 			"ordinal": 2,
@@ -41,7 +124,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:area_effect_cloud",
 			"name": "AREA_EFFECT_CLOUD",
 			"ordinal": 3,
@@ -54,7 +136,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 12.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.14,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:armadillo",
 			"name": "ARMADILLO",
 			"ordinal": 4,
@@ -67,7 +230,80 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:armor_stand",
 			"name": "ARMOR_STAND",
 			"ordinal": 5,
@@ -80,7 +316,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:arrow",
 			"name": "ARROW",
 			"ordinal": 6,
@@ -93,7 +328,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 14.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 1.0,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:axolotl",
 			"name": "AXOLOTL",
 			"ordinal": 7,
@@ -106,7 +426,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:bamboo_chest_raft",
 			"name": "BAMBOO_CHEST_RAFT",
 			"ordinal": 8,
@@ -119,7 +438,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:bamboo_raft",
 			"name": "BAMBOO_RAFT",
 			"ordinal": 9,
@@ -132,7 +450,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 6.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:bat",
 			"name": "BAT",
 			"ordinal": 10,
@@ -145,7 +540,96 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:flying_speed": {
+					"baseValue": 0.6000000238418579,
+					"defaultValue": 0.4
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:bee",
 			"name": "BEE",
 			"ordinal": 11,
@@ -158,7 +642,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:birch_boat",
 			"name": "BIRCH_BOAT",
 			"ordinal": 12,
@@ -171,7 +654,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:birch_chest_boat",
 			"name": "BIRCH_CHEST_BOAT",
 			"ordinal": 13,
@@ -184,7 +666,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 6.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 48.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:blaze",
 			"name": "BLAZE",
 			"ordinal": 14,
@@ -197,7 +760,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:block_display",
 			"name": "BLOCK_DISPLAY",
 			"ordinal": 15,
@@ -210,7 +772,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 16.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:bogged",
 			"name": "BOGGED",
 			"ordinal": 16,
@@ -223,7 +866,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 24.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 30.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.6299999952316284,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:breeze",
 			"name": "BREEZE",
 			"ordinal": 17,
@@ -236,7 +960,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:breeze_wind_charge",
 			"name": "BREEZE_WIND_CHARGE",
 			"ordinal": 18,
@@ -249,7 +972,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 32.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.09000000357627869,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.5,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:camel",
 			"name": "CAMEL",
 			"ordinal": 19,
@@ -262,7 +1066,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:cat",
 			"name": "CAT",
 			"ordinal": 20,
@@ -275,7 +1164,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 12.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:cave_spider",
 			"name": "CAVE_SPIDER",
 			"ordinal": 21,
@@ -288,7 +1258,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:cherry_boat",
 			"name": "CHERRY_BOAT",
 			"ordinal": 22,
@@ -301,7 +1270,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:cherry_chest_boat",
 			"name": "CHERRY_CHEST_BOAT",
 			"ordinal": 23,
@@ -314,7 +1282,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:chest_minecart",
 			"name": "CHEST_MINECART",
 			"ordinal": 24,
@@ -327,7 +1294,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 4.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:chicken",
 			"name": "CHICKEN",
 			"ordinal": 25,
@@ -340,7 +1388,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 3.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:cod",
 			"name": "COD",
 			"ordinal": 26,
@@ -353,7 +1478,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:command_block_minecart",
 			"name": "COMMAND_BLOCK_MINECART",
 			"ordinal": 27,
@@ -366,7 +1490,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:cow",
 			"name": "COW",
 			"ordinal": 28,
@@ -379,7 +1584,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 32.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 1.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.4000000059604645,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0625,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:creaking",
 			"name": "CREAKING",
 			"ordinal": 29,
@@ -392,7 +1678,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:creeper",
 			"name": "CREEPER",
 			"ordinal": 30,
@@ -405,7 +1772,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:dark_oak_boat",
 			"name": "DARK_OAK_BOAT",
 			"ordinal": 31,
@@ -418,7 +1784,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:dark_oak_chest_boat",
 			"name": "DARK_OAK_CHEST_BOAT",
 			"ordinal": 32,
@@ -431,7 +1796,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 1.2000000476837158,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:dolphin",
 			"name": "DOLPHIN",
 			"ordinal": 33,
@@ -444,7 +1890,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.5,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 53.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.17499999701976776,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:donkey",
 			"name": "DONKEY",
 			"ordinal": 34,
@@ -457,7 +1984,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:dragon_fireball",
 			"name": "DRAGON_FIREBALL",
 			"ordinal": 35,
@@ -470,7 +1996,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 2.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 35.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:spawn_reinforcements": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:drowned",
 			"name": "DROWNED",
 			"ordinal": 36,
@@ -483,7 +2094,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:egg",
 			"name": "EGG",
 			"ordinal": 37,
@@ -496,7 +2106,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 8.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 80.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:elder_guardian",
 			"name": "ELDER_GUARDIAN",
 			"ordinal": 38,
@@ -509,7 +2200,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:end_crystal",
 			"name": "END_CRYSTAL",
 			"ordinal": 39,
@@ -522,7 +2212,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 200.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:ender_dragon",
 			"name": "ENDER_DRAGON",
 			"ordinal": 40,
@@ -535,7 +2302,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:ender_pearl",
 			"name": "ENDER_PEARL",
 			"ordinal": 41,
@@ -548,7 +2314,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 7.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 64.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 40.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:enderman",
 			"name": "ENDERMAN",
 			"ordinal": 42,
@@ -561,7 +2408,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 8.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:endermite",
 			"name": "ENDERMITE",
 			"ordinal": 43,
@@ -574,7 +2502,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 12.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 24.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.5,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:evoker",
 			"name": "EVOKER",
 			"ordinal": 44,
@@ -587,7 +2596,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:evoker_fangs",
 			"name": "EVOKER_FANGS",
 			"ordinal": 45,
@@ -600,7 +2608,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:experience_bottle",
 			"name": "EXPERIENCE_BOTTLE",
 			"ordinal": 46,
@@ -613,7 +2620,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:experience_orb",
 			"name": "EXPERIENCE_ORB",
 			"ordinal": 47,
@@ -626,7 +2632,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:eye_of_ender",
 			"name": "EYE_OF_ENDER",
 			"ordinal": 48,
@@ -639,7 +2644,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:falling_block",
 			"name": "FALLING_BLOCK",
 			"ordinal": 49,
@@ -652,7 +2656,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:fireball",
 			"name": "FIREBALL",
 			"ordinal": 50,
@@ -665,7 +2668,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:firework_rocket",
 			"name": "FIREWORK_ROCKET",
 			"ordinal": 51,
@@ -678,7 +2680,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:fishing_bobber",
 			"name": "FISHING_BOBBER",
 			"ordinal": 52,
@@ -691,7 +2692,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 32.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 5.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:fox",
 			"name": "FOX",
 			"ordinal": 53,
@@ -704,7 +2790,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 10.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 1.0,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:frog",
 			"name": "FROG",
 			"ordinal": 54,
@@ -717,7 +2888,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:furnace_minecart",
 			"name": "FURNACE_MINECART",
 			"ordinal": 55,
@@ -730,7 +2900,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 100.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:ghast",
 			"name": "GHAST",
 			"ordinal": 56,
@@ -743,7 +2990,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 50.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 100.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.5,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:giant",
 			"name": "GIANT",
 			"ordinal": 57,
@@ -756,7 +3084,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:glow_item_frame",
 			"name": "GLOW_ITEM_FRAME",
 			"ordinal": 58,
@@ -769,7 +3096,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:glow_squid",
 			"name": "GLOW_SQUID",
 			"ordinal": 59,
@@ -782,7 +3186,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:goat",
 			"name": "GOAT",
 			"ordinal": 60,
@@ -795,7 +3284,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 6.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 30.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.5,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:guardian",
 			"name": "GUARDIAN",
 			"ordinal": 61,
@@ -808,7 +3378,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 6.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 1.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.6000000238418579,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 40.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:hoglin",
 			"name": "HOGLIN",
 			"ordinal": 62,
@@ -821,7 +3472,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:hopper_minecart",
 			"name": "HOPPER_MINECART",
 			"ordinal": 63,
@@ -834,7 +3484,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.7,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 53.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.22499999403953552,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:horse",
 			"name": "HORSE",
 			"ordinal": 64,
@@ -847,7 +3578,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 2.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 35.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:spawn_reinforcements": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:husk",
 			"name": "HUSK",
 			"ordinal": 65,
@@ -860,7 +3676,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 18.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 32.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.5,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:illusioner",
 			"name": "ILLUSIONER",
 			"ordinal": 66,
@@ -873,7 +3770,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:interaction",
 			"name": "INTERACTION",
 			"ordinal": 67,
@@ -886,7 +3782,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 15.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 1.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 100.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:iron_golem",
 			"name": "IRON_GOLEM",
 			"ordinal": 68,
@@ -899,7 +3876,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:item",
 			"name": "ITEM",
 			"ordinal": 69,
@@ -912,7 +3888,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:item_display",
 			"name": "ITEM_DISPLAY",
 			"ordinal": 70,
@@ -925,7 +3900,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:item_frame",
 			"name": "ITEM_FRAME",
 			"ordinal": 71,
@@ -938,7 +3912,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:jungle_boat",
 			"name": "JUNGLE_BOAT",
 			"ordinal": 72,
@@ -951,7 +3924,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:jungle_chest_boat",
 			"name": "JUNGLE_CHEST_BOAT",
 			"ordinal": 73,
@@ -964,7 +3936,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:leash_knot",
 			"name": "LEASH_KNOT",
 			"ordinal": 74,
@@ -977,7 +3948,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:lightning_bolt",
 			"name": "LIGHTNING_BOLT",
 			"ordinal": 75,
@@ -990,7 +3960,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:lingering_potion",
 			"name": "LINGERING_POTION",
 			"ordinal": 76,
@@ -1003,7 +3972,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.5,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 53.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.17499999701976776,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:llama",
 			"name": "LLAMA",
 			"ordinal": 77,
@@ -1016,7 +4066,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:llama_spit",
 			"name": "LLAMA_SPIT",
 			"ordinal": 78,
@@ -1029,7 +4078,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:magma_cube",
 			"name": "MAGMA_CUBE",
 			"ordinal": 79,
@@ -1042,7 +4172,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:mangrove_boat",
 			"name": "MANGROVE_BOAT",
 			"ordinal": 80,
@@ -1055,7 +4184,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:mangrove_chest_boat",
 			"name": "MANGROVE_CHEST_BOAT",
 			"ordinal": 81,
@@ -1068,7 +4196,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:marker",
 			"name": "MARKER",
 			"ordinal": 82,
@@ -1081,7 +4208,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:minecart",
 			"name": "MINECART",
 			"ordinal": 83,
@@ -1094,7 +4220,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:mooshroom",
 			"name": "MOOSHROOM",
 			"ordinal": 84,
@@ -1107,7 +4314,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.5,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 53.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.17499999701976776,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:mule",
 			"name": "MULE",
 			"ordinal": 85,
@@ -1120,7 +4408,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:oak_boat",
 			"name": "OAK_BOAT",
 			"ordinal": 86,
@@ -1133,7 +4420,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:oak_chest_boat",
 			"name": "OAK_CHEST_BOAT",
 			"ordinal": 87,
@@ -1146,7 +4432,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:ocelot",
 			"name": "OCELOT",
 			"ordinal": 88,
@@ -1159,7 +4530,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:ominous_item_spawner",
 			"name": "OMINOUS_ITEM_SPAWNER",
 			"ordinal": 89,
@@ -1172,7 +4542,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:painting",
 			"name": "PAINTING",
 			"ordinal": 90,
@@ -1185,7 +4554,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:pale_oak_boat",
 			"name": "PALE_OAK_BOAT",
 			"ordinal": 91,
@@ -1198,7 +4566,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:pale_oak_chest_boat",
 			"name": "PALE_OAK_CHEST_BOAT",
 			"ordinal": 92,
@@ -1211,7 +4578,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 6.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.15000000596046448,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:panda",
 			"name": "PANDA",
 			"ordinal": 93,
@@ -1224,7 +4676,96 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:flying_speed": {
+					"baseValue": 0.4000000059604645,
+					"defaultValue": 0.4
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 6.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:parrot",
 			"name": "PARROT",
 			"ordinal": 94,
@@ -1237,7 +4778,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:phantom",
 			"name": "PHANTOM",
 			"ordinal": 95,
@@ -1250,7 +4872,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:pig",
 			"name": "PIG",
 			"ordinal": 96,
@@ -1263,7 +4966,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 5.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 16.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.3499999940395355,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:piglin",
 			"name": "PIGLIN",
 			"ordinal": 97,
@@ -1276,7 +5060,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 7.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 12.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 50.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.3499999940395355,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:piglin_brute",
 			"name": "PIGLIN_BRUTE",
 			"ordinal": 98,
@@ -1289,7 +5154,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 5.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 32.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 24.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.3499999940395355,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:pillager",
 			"name": "PILLAGER",
 			"ordinal": 99,
@@ -1302,7 +5248,120 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 1.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_speed": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:block_break_speed": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:block_interaction_range": {
+					"baseValue": 4.5,
+					"defaultValue": 4.5
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:entity_interaction_range": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:luck": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:mining_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.10000000149011612,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:sneaking_speed": {
+					"baseValue": 0.3,
+					"defaultValue": 0.3
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:submerged_mining_speed": {
+					"baseValue": 0.2,
+					"defaultValue": 0.2
+				},
+				"minecraft:sweeping_damage_ratio": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:player",
 			"name": "PLAYER",
 			"ordinal": 100,
@@ -1315,7 +5374,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 6.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 20.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 30.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:polar_bear",
 			"name": "POLAR_BEAR",
 			"ordinal": 101,
@@ -1328,7 +5472,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 3.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:pufferfish",
 			"name": "PUFFERFISH",
 			"ordinal": 102,
@@ -1341,7 +5562,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 3.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:rabbit",
 			"name": "RABBIT",
 			"ordinal": 103,
@@ -1354,7 +5660,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 12.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 1.5,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 32.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.75,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 100.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.3,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:ravager",
 			"name": "RAVAGER",
 			"ordinal": 104,
@@ -1367,7 +5754,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 3.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:salmon",
 			"name": "SALMON",
 			"ordinal": 105,
@@ -1380,7 +5844,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 8.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:sheep",
 			"name": "SHEEP",
 			"ordinal": 106,
@@ -1393,7 +5938,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 30.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:shulker",
 			"name": "SHULKER",
 			"ordinal": 107,
@@ -1406,7 +6028,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:shulker_bullet",
 			"name": "SHULKER_BULLET",
 			"ordinal": 108,
@@ -1419,7 +6040,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 1.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 8.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:silverfish",
 			"name": "SILVERFISH",
 			"ordinal": 109,
@@ -1432,7 +6134,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
 			"ordinal": 110,
@@ -1445,7 +6228,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.7,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 15.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:skeleton_horse",
 			"name": "SKELETON_HORSE",
 			"ordinal": 111,
@@ -1458,7 +6322,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:slime",
 			"name": "SLIME",
 			"ordinal": 112,
@@ -1471,7 +6416,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:small_fireball",
 			"name": "SMALL_FIREBALL",
 			"ordinal": 113,
@@ -1484,7 +6428,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 14.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.10000000149011612,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:sniffer",
 			"name": "SNIFFER",
 			"ordinal": 114,
@@ -1497,7 +6522,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 4.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:snow_golem",
 			"name": "SNOW_GOLEM",
 			"ordinal": 115,
@@ -1510,7 +6612,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:snowball",
 			"name": "SNOWBALL",
 			"ordinal": 116,
@@ -1523,7 +6624,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:spawner_minecart",
 			"name": "SPAWNER_MINECART",
 			"ordinal": 117,
@@ -1536,7 +6636,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:spectral_arrow",
 			"name": "SPECTRAL_ARROW",
 			"ordinal": 118,
@@ -1549,7 +6648,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 16.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:spider",
 			"name": "SPIDER",
 			"ordinal": 119,
@@ -1562,7 +6742,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:splash_potion",
 			"name": "SPLASH_POTION",
 			"ordinal": 120,
@@ -1575,7 +6754,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:spruce_boat",
 			"name": "SPRUCE_BOAT",
 			"ordinal": 121,
@@ -1588,7 +6766,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:spruce_chest_boat",
 			"name": "SPRUCE_CHEST_BOAT",
 			"ordinal": 122,
@@ -1601,7 +6778,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 10.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:squid",
 			"name": "SQUID",
 			"ordinal": 123,
@@ -1614,7 +6868,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:stray",
 			"name": "STRAY",
 			"ordinal": 124,
@@ -1627,7 +6962,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.17499999701976776,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:strider",
 			"name": "STRIDER",
 			"ordinal": 125,
@@ -1640,7 +7056,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 6.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 1.0,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:tadpole",
 			"name": "TADPOLE",
 			"ordinal": 126,
@@ -1653,7 +7150,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:text_display",
 			"name": "TEXT_DISPLAY",
 			"ordinal": 127,
@@ -1666,7 +7162,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:tnt",
 			"name": "TNT",
 			"ordinal": 128,
@@ -1679,7 +7174,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:tnt_minecart",
 			"name": "TNT_MINECART",
 			"ordinal": 129,
@@ -1692,7 +7186,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.5,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 53.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.17499999701976776,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:trader_llama",
 			"name": "TRADER_LLAMA",
 			"ordinal": 130,
@@ -1705,7 +7280,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:trident",
 			"name": "TRIDENT",
 			"ordinal": 131,
@@ -1718,7 +7292,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 3.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:tropical_fish",
 			"name": "TROPICAL_FISH",
 			"ordinal": 132,
@@ -1731,7 +7382,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 30.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:turtle",
 			"name": "TURTLE",
 			"ordinal": 133,
@@ -1744,7 +7476,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 4.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 14.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:vex",
 			"name": "VEX",
 			"ordinal": 134,
@@ -1757,7 +7570,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.5,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:villager",
 			"name": "VILLAGER",
 			"ordinal": 135,
@@ -1770,7 +7660,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 5.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 12.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 24.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.3499999940395355,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:vindicator",
 			"name": "VINDICATOR",
 			"ordinal": 136,
@@ -1783,7 +7754,84 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:wandering_trader",
 			"name": "WANDERING_TRADER",
 			"ordinal": 137,
@@ -1796,7 +7844,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 30.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 1.5,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 24.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 1.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 500.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:warden",
 			"name": "WARDEN",
 			"ordinal": 138,
@@ -1809,7 +7938,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:wind_charge",
 			"name": "WIND_CHARGE",
 			"ordinal": 139,
@@ -1822,7 +7950,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 26.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:witch",
 			"name": "WITCH",
 			"ordinal": 140,
@@ -1835,7 +8044,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 4.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:flying_speed": {
+					"baseValue": 0.6000000238418579,
+					"defaultValue": 0.4
+				},
+				"minecraft:follow_range": {
+					"baseValue": 40.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 300.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.6000000238418579,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:wither",
 			"name": "WITHER",
 			"ordinal": 141,
@@ -1848,7 +8142,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:wither_skeleton",
 			"name": "WITHER_SKELETON",
 			"ordinal": 142,
@@ -1861,7 +8236,6 @@
 		},
 		{
 			"alive": false,
-			"defaultAttributes": false,
 			"key": "minecraft:wither_skull",
 			"name": "WITHER_SKULL",
 			"ordinal": 143,
@@ -1874,7 +8248,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 4.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 8.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:wolf",
 			"name": "WOLF",
 			"ordinal": 144,
@@ -1887,7 +8346,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 6.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 1.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.6000000238418579,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 40.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:zoglin",
 			"name": "ZOGLIN",
 			"ordinal": 145,
@@ -1900,7 +8440,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 2.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 35.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:spawn_reinforcements": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:zombie",
 			"name": "ZOMBIE",
 			"ordinal": 146,
@@ -1913,7 +8538,88 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.7,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 15.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.20000000298023224,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.0,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:zombie_horse",
 			"name": "ZOMBIE_HORSE",
 			"ordinal": 147,
@@ -1926,7 +8632,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 2.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 35.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:spawn_reinforcements": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:zombie_villager",
 			"name": "ZOMBIE_VILLAGER",
 			"ordinal": 148,
@@ -1939,7 +8730,92 @@
 		},
 		{
 			"alive": true,
-			"defaultAttributes": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 2.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 5.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 35.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.23000000417232513,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:spawn_reinforcements": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
 			"key": "minecraft:zombified_piglin",
 			"name": "ZOMBIFIED_PIGLIN",
 			"ordinal": 149,

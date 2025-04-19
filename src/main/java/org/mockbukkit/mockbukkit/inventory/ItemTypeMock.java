@@ -1,11 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import io.papermc.paper.datacomponent.DataComponentType;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -23,6 +21,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -33,7 +33,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 {
 
 	private final NamespacedKey namespacedKey;
-	private final boolean blockType;
+	private final @Nullable NamespacedKey blockType;
 	private final int maxStackSize;
 	private final short maxDurability;
 	private final boolean edible;
@@ -47,8 +47,8 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	private final BigDecimal compostChance;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
-						 boolean edible, boolean hasRecord, boolean fuel, boolean blockType, String translationKey,
-						 Class<M> metaClass, ItemRarity rarity, CreativeCategory creativeCategory,boolean isCompostable,
+						 boolean edible, boolean hasRecord, boolean fuel, @Nullable NamespacedKey blockType, String translationKey,
+						 Class<M> metaClass, ItemRarity rarity, CreativeCategory creativeCategory, boolean isCompostable,
 						 BigDecimal compostChance)
 	{
 		this.namespacedKey = namespacedKey;
@@ -75,9 +75,9 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		boolean edible = jsonObject.get("edible").getAsBoolean();
 		boolean hasRecord = jsonObject.get("record").getAsBoolean();
 		boolean fuel = jsonObject.get("fuel").getAsBoolean();
-		boolean blockType = jsonObject.get("blockType").getAsBoolean();
+		NamespacedKey blockType = jsonObject.has("blockType") ? NamespacedKey.fromString(jsonObject.get("blockType").getAsString()) : null;
 		String translationKey = jsonObject.get("translationKey").getAsString();
-		ItemRarity rarity = ItemRarity.valueOf(jsonObject.get("rarity").getAsString());
+		ItemRarity rarity = ItemRarity.valueOf(jsonObject.get("itemRarity").getAsString());
 		CreativeCategory creativeCategory = CreativeCategory.valueOf(jsonObject.get("creativeCategory").getAsString());
 		boolean isCompostable = jsonObject.get("compostable").getAsBoolean();
 		BigDecimal compostChance = new BigDecimal(0);
@@ -160,13 +160,20 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public boolean hasBlockType()
 	{
-		return this.blockType;
+		return this.blockType != null;
 	}
 
 	@Override
 	public @NotNull BlockType getBlockType()
 	{
-		throw new UnimplementedOperationException();
+		if (this == AIR)
+		{
+			return BlockType.AIR;
+		}
+		Preconditions.checkArgument(this.blockType != null, "The item type %s has no corresponding block type", this.getKey());
+		BlockType block = Registry.BLOCK.get(this.blockType);
+		Preconditions.checkState(block != null && block != ItemType.AIR, "The item type %s has no corresponding item type", this.getKey());
+		return block;
 	}
 
 	@Override
