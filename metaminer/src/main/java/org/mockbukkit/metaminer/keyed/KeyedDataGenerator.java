@@ -88,17 +88,6 @@ public class KeyedDataGenerator implements DataGenerator
 
 	private void addItemTypeProperties(JsonObject jsonObject, ItemType itemType)
 	{
-		jsonObject.add("maxStackSize", new JsonPrimitive(itemType.getMaxStackSize()));
-		jsonObject.add("maxDurability", new JsonPrimitive(itemType.getMaxDurability()));
-		jsonObject.add("edible", new JsonPrimitive(itemType.isEdible()));
-		jsonObject.add("record", new JsonPrimitive(itemType.isRecord()));
-		jsonObject.add("fuel", new JsonPrimitive(itemType.isFuel()));
-		jsonObject.add("blockType", new JsonPrimitive(itemType.hasBlockType()));
-		jsonObject.add("translationKey", new JsonPrimitive(itemType.getTranslationKey()));
-		jsonObject.add("material", new JsonPrimitive(itemType.asMaterial().name()));
-		jsonObject.add("rarity", new JsonPrimitive(itemType.getItemRarity().toString()));
-		jsonObject.add("creativeCategory", new JsonPrimitive(itemType.getCreativeCategory().toString()));
-		jsonObject.add("compostable", new JsonPrimitive(itemType.isCompostable()));
 		if (itemType.isCompostable())
 		{
 			jsonObject.add("compostChance", new JsonPrimitive("%sF".formatted(itemType.getCompostChance())));
