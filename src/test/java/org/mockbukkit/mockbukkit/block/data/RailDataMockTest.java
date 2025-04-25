@@ -78,4 +78,10 @@ class RailDataMockTest
 		}
 
 	}
+
+	@Test
+	void deserialize()
+	{
+		BlockDataMock.newData(null, "minecraft:rail[shape=south_east, waterlogged=true]");
+	}
 }

@@ -151,8 +151,8 @@ public class BlockDataMock implements BlockData
 			String key = split[0].strip();
 			String valueString = split[1].strip();
 			Preconditions.checkArgument(BlockDataKey.isRegistered(key), "Unknown block data key: " + key);
-			BlockDataKey blockDataKey = BlockDataKey.fromKey(key);
-			Preconditions.checkArgument(blockDataKey.appliesTo(blockData), "Can not apply block data key to '" + blockKey + "': " + key);
+			BlockDataKey blockDataKey = BlockDataKey.fromKey(key, blockData);
+			Preconditions.checkArgument(blockDataKey != null, "Can not apply block data key to '" + blockKey + "': " + key);
 			Object value = blockDataKey.constructValue(valueString);
 			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
 			data.put(key, value);
