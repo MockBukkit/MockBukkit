@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.data;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockType;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Stairs;
 import org.junit.jupiter.api.BeforeEach;
@@ -141,7 +140,11 @@ class StairsDataMockTest
 	@Test
 	void deserialize()
 	{
-		BlockDataMock.newData(null, "minecraft:oak_stairs[facing=east, half=top, shape=inner_left, waterlogged=true]");
+		StairsDataMock stairsDataMock = (StairsDataMock) BlockDataMock.newData(null, "minecraft:oak_stairs[facing=east, half=top, shape=inner_left, waterlogged=true]");
+		assertEquals(BlockFace.EAST, stairsDataMock.getFacing());
+		assertEquals(Bisected.Half.TOP, stairsDataMock.getHalf());
+		assertEquals(Stairs.Shape.INNER_LEFT, stairsDataMock.getShape());
+		assertTrue(stairsDataMock.isWaterlogged());
 	}
 
 }
