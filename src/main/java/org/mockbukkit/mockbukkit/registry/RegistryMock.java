@@ -139,8 +139,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private boolean isEnumBasedRegistry(RegistryKey<?> key)
 	{
 		return key == RegistryKey.ENTITY_TYPE
-			|| key == RegistryKey.PARTICLE_TYPE
-			|| key == RegistryKey.POTION;
+				|| key == RegistryKey.PARTICLE_TYPE
+				|| key == RegistryKey.POTION;
 	}
 
 	private T createEnumWrapper(JsonObject jsonObject, RegistryKey<T> key)
@@ -230,6 +230,12 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		loadIfEmpty();
 		return keyedMap.values().stream();
+	}
+
+	@Override
+	public @NotNull Stream<NamespacedKey> keyStream()
+	{
+		return keyedMap.keySet().stream();
 	}
 
 	@NotNull

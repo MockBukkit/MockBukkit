@@ -326,6 +326,12 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
+	public boolean isSuffocating()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockData getBlockData()
 	{
 		return this.blockData.clone();
@@ -415,14 +421,15 @@ public class BlockStateMock implements BlockState
 	 * <p>Implementors must call super as in the following example.</p>
 	 *
 	 * <pre>{@code
-	 *	@Override
-	 *	protected String toStringInternal()
-	 *	{
-	 *		return super.toStringInternal() +
-	 *				", member1=" + member1 +
-	 *				", member2=" + member2;
-	 *	}
+	 *    @Override
+	 *    protected String toStringInternal()
+	 *    {
+	 * 		return super.toStringInternal() +
+	 * 				", member1=" + member1 +
+	 * 				", member2=" + member2;
+	 *    }
 	 * }</pre>
+	 *
 	 * @return Comma separated list of properties and values.
 	 */
 	protected String toStringInternal()
