@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.function.Function;
 
-public class BlockDataMockFactory
+public final class BlockDataMockFactory
 {
 	/**
 	 * This factory tries to create the block data from a material {@link Tag}.
@@ -80,6 +80,11 @@ public class BlockDataMockFactory
 		}
 
 		return new BlockDataMock(material);
+	}
+
+	private BlockDataMockFactory()
+	{
+		// Hide the public constructor
 	}
 
 }
