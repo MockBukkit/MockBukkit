@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,14 +15,6 @@ import org.bukkit.block.BlockSupport;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Levelled;
-import org.bukkit.block.data.Lightable;
-import org.bukkit.block.data.Orientable;
-import org.bukkit.block.data.type.AmethystCluster;
-import org.bukkit.block.data.type.Bamboo;
-import org.bukkit.block.data.type.DecoratedPot;
-import org.bukkit.block.data.type.Switch;
-import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
@@ -43,7 +34,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,36 +43,6 @@ import java.util.regex.Pattern;
  */
 public class BlockDataMock implements BlockData
 {
-
-	/**
-	 * This factory tries to create the block data from a material {@link Tag}.
-	 */
-	private static final Map<Tag<Material>, Function<Material, BlockDataMock>> FACTORIES_BY_TAGS = ImmutableMap.<Tag<Material>, Function<Material, BlockDataMock>>builder()
-			.put(Tag.BEDS, BedDataMock::new)
-			.put(Tag.BUTTONS, SwitchDataMock::new)
-			.put(Tag.CAMPFIRES, CampfireDataMock::new)
-			.put(Tag.CANDLES, CandleDataMock::new)
-			.put(Tag.FENCES, FenceDataMock::new)
-			.put(Tag.RAILS, RailDataMock::new)
-			.put(Tag.SLABS, SlabDataMock::new)
-			.put(Tag.STAIRS, StairsDataMock::new)
-			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
-			.put(Tag.WALL_SIGNS, WallSignDataMock::new)
-			.build();
-
-	/**
-	 * This factory tries to created the block data from the {@link BlockData} class.
-	 */
-	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
-			.put(AmethystCluster.class, AmethystClusterDataMock::new)
-			.put(Bamboo.class, m -> new BambooDataMock())
-			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
-			.put(Levelled.class, LevelledDataMock::new)
-			.put(Lightable.class, LightableDataMock::new)
-			.put(Orientable.class, OrientableMock::new)
-			.put(Switch.class, SwitchDataMock::new)
-			.put(TestBlock.class, TestBlockDataMock::new)
-			.build();
 
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
@@ -183,6 +143,18 @@ public class BlockDataMock implements BlockData
 	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
 		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	/**
+	 * Ensures the provided material has data assigned from.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected materials.
+	 */
+	protected void checkType(@NotNull Material material, @NotNull Class<? extends BlockData> expected)
+	{
+		Preconditions.checkNotNull(material.data, "Material %s does not have data assigned.", material);
+		Preconditions.checkArgument(material.data.isAssignableFrom(expected), "Cannot create a %s from %s", getClass().getSimpleName(), material);
 	}
 
 	/**
@@ -491,30 +463,13 @@ public class BlockDataMock implements BlockData
 	 *
 	 * @param material The material to create the BlockData from.
 	 * @return The BlockData.
+	 *
+	 * @deprecated Use {@link BlockDataMockFactory#mock(Material)} instead.
 	 */
+	@Deprecated(forRemoval = true)
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-
-		for (var entry : FACTORIES_BY_TAGS.entrySet())
-		{
-			Tag<Material> tag = entry.getKey();
-			if (tag.isTagged(material))
-			{
-				return entry.getValue().apply(material);
-			}
-		}
-
-		for (var entry : FACTORIES_BY_BLOCK_DATA.entrySet())
-		{
-			Class<?> bukkitType = entry.getKey();
-			if (bukkitType.equals(material.data))
-			{
-				return entry.getValue().apply(material);
-			}
-		}
-
-		return new BlockDataMock(material);
+		return BlockDataMockFactory.mock(material);
 	}
 
 	private static @NotNull BlockDataMock mock(@NotNull Material material, @NotNull Map<String, Object> previousData)
