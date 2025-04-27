@@ -1,17 +1,18 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -301,6 +302,12 @@ public class FishHookMock extends ProjectileMock implements FishHook
 
 	@Override
 	public void resetFishingState()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int retrieve(@NotNull EquipmentSlot slot)
 	{
 		throw new UnimplementedOperationException();
 	}

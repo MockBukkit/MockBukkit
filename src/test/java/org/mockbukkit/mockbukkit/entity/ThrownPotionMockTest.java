@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
 import com.google.common.collect.Iterators;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +15,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -39,7 +39,7 @@ class ThrownPotionMockTest
 	void setUp()
 	{
 		ServerMock server = MockBukkit.mock();
-		potion = new ThrownPotionMock(server, UUID.randomUUID());
+		potion = new SplashPotionMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach

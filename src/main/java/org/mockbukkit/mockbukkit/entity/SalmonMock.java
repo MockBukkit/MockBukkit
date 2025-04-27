@@ -1,14 +1,14 @@
 package org.mockbukkit.mockbukkit.entity;
 
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Salmon;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.UUID;
 
@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class SalmonMock extends SchoolableFishMock implements Salmon
 {
+	private @NotNull Variant variant = Variant.SMALL;
 
 	/**
 	 * Constructs a new {@link SalmonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -46,15 +47,14 @@ public class SalmonMock extends SchoolableFishMock implements Salmon
 	@Override
 	public @NotNull Variant getVariant()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.variant;
 	}
 
 	@Override
 	public void setVariant(@NotNull Variant variant)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.variant = variant;
 	}
 
 }

@@ -1603,6 +1603,18 @@
 		}
 	},
 	{
+		"key": "minecraft:blue_egg",
+		"result": {
+			"material": "minecraft:blue_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:blue_glazed_terracotta",
 		"result": {
 			"material": "minecraft:blue_glazed_terracotta",
@@ -2095,6 +2107,18 @@
 		}
 	},
 	{
+		"key": "minecraft:brown_egg",
+		"result": {
+			"material": "minecraft:brown_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:brown_glazed_terracotta",
 		"result": {
 			"material": "minecraft:brown_glazed_terracotta",
@@ -2307,9 +2331,33 @@
 		}
 	},
 	{
+		"key": "minecraft:bush",
+		"result": {
+			"material": "minecraft:bush",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:cactus",
 		"result": {
 			"material": "minecraft:cactus",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cactus_flower",
+		"result": {
+			"material": "minecraft:cactus_flower",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -6027,6 +6075,18 @@
 		}
 	},
 	{
+		"key": "minecraft:firefly_bush",
+		"result": {
+			"material": "minecraft:firefly_bush",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:firework_rocket",
 		"result": {
 			"material": "minecraft:firework_rocket",
@@ -8170,6 +8230,18 @@
 		"key": "minecraft:lead",
 		"result": {
 			"material": "minecraft:lead",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:leaf_litter",
+		"result": {
+			"material": "minecraft:leaf_litter",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -14072,6 +14144,18 @@
 		}
 	},
 	{
+		"key": "minecraft:short_dry_grass",
+		"result": {
+			"material": "minecraft:short_dry_grass",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:short_grass",
 		"result": {
 			"material": "minecraft:short_grass",
@@ -15632,6 +15716,18 @@
 		}
 	},
 	{
+		"key": "minecraft:tall_dry_grass",
+		"result": {
+			"material": "minecraft:tall_dry_grass",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:tall_grass",
 		"result": {
 			"material": "minecraft:tall_grass",
@@ -15667,6 +15763,32 @@
 			"material": "minecraft:terracotta",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:test_block",
+		"result": {
+			"material": "minecraft:test_block",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:test_instance_block",
+		"result": {
+			"material": "minecraft:test_instance_block",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17310,6 +17432,18 @@
 		"key": "minecraft:wild_armor_trim_smithing_template",
 		"result": {
 			"material": "minecraft:wild_armor_trim_smithing_template",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:wildflowers",
+		"result": {
+			"material": "minecraft:wildflowers",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",

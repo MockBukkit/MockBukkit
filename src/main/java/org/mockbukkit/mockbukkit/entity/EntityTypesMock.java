@@ -41,6 +41,7 @@ import org.bukkit.entity.Evoker;
 import org.bukkit.entity.EvokerFangs;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Fox;
@@ -63,10 +64,12 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
+import org.bukkit.entity.LingeringPotion;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Marker;
+import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
@@ -99,6 +102,7 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.SplashPotion;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Strider;
@@ -255,6 +259,7 @@ public final class EntityTypesMock
 			.register(ExperienceOrb.class, ExperienceOrbMock.class, ExperienceOrbMock::new)
 			.register(ExplosiveMinecart.class, ExplosiveMinecartMock.class, ExplosiveMinecartMock::new)
 			.register(FallingBlock.class, FallingBlockMock.class, FallingBlockMock::new)
+			.register(Fireball.class, LargeFireballMock.class, LargeFireballMock::new)
 			.register(Firework.class, FireworkMock.class, FireworkMock::new)
 			.register(FishHook.class, FishHookMock.class, FishHookMock::new)
 			.register(Fox.class, FoxMock.class, FoxMock::new)
@@ -279,12 +284,14 @@ public final class EntityTypesMock
 			.register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new)
 			.register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new)
 			.register(LightningStrike.class, LightningStrikeMock.class, LightningStrikeMock::new)
+			.register(LingeringPotion.class, LingeringPotionMock.class, LingeringPotionMock::new)
 			.register(Llama.class, LlamaMock.class, LlamaMock::new)
 			.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 			.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
 			.register(MangroveBoat.class, MangroveBoatMock.class, MangroveBoatMock::new)
 			.register(MangroveChestBoat.class, MangroveChestBoatMock.class, MangroveChestBoatMock::new)
 			.register(Marker.class, MarkerMock.class, MarkerMock::new)
+			.register(Minecart.class, RideableMinecartMock.class, RideableMinecartMock::new)
 			.register(Mule.class, MuleMock.class, MuleMock::new)
 			.register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new)
 			.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
@@ -323,6 +330,7 @@ public final class EntityTypesMock
 			.register(SpawnerMinecart.class, SpawnerMinecartMock.class, SpawnerMinecartMock::new)
 			.register(SpectralArrow.class, SpectralArrowMock.class, SpectralArrowMock::new)
 			.register(Spider.class, SpiderMock.class, SpiderMock::new)
+			.register(SplashPotion.class, SplashPotionMock.class, SplashPotionMock::new)
 			.register(SpruceBoat.class, SpruceBoatMock.class, SpruceBoatMock::new)
 			.register(SpruceChestBoat.class, SpruceChestBoatMock.class, SpruceChestBoatMock::new)
 			.register(Squid.class, SquidMock.class, SquidMock::new)
@@ -333,7 +341,7 @@ public final class EntityTypesMock
 			.register(TextDisplay.class, TextDisplayMock.class, TextDisplayMock::new)
 			.register(TraderLlama.class, TraderLlamaMock.class, TraderLlamaMock::new)
 			.register(ThrownExpBottle.class, ThrownExpBottleMock.class, ThrownExpBottleMock::new)
-			.register(ThrownPotion.class, ThrownPotionMock.class, ThrownPotionMock::new)
+			.register(ThrownPotion.class, SplashPotionMock.class, SplashPotionMock::new)
 			.register(TNTPrimed.class, TNTPrimedMock.class, TNTPrimedMock::new)
 			.register(Trident.class, TridentMock.class, TridentMock::new)
 			.register(TropicalFish.class, TropicalFishMock.class, TropicalFishMock::new)

@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class PigMock extends AnimalsMock implements Pig
 {
+	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean hasSaddle = false;
 	private int boostTicks = 0;
@@ -86,6 +87,19 @@ public class PigMock extends AnimalsMock implements Pig
 	public EntityType getType()
 	{
 		return EntityType.PIG;
+	}
+
+	@Override
+	public @NotNull Variant getVariant()
+	{
+		return this.variant;
+	}
+
+	@Override
+	public void setVariant(@NotNull Variant variant)
+	{
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.variant = variant;
 	}
 
 }

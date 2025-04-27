@@ -2,102 +2,177 @@
 	"values": [
 		{
 			"key": "minecraft:anvil",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:anvil"
 		},
 		{
 			"key": "minecraft:beacon",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:beacon"
 		},
 		{
 			"key": "minecraft:blast_furnace",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:blast_furnace"
 		},
 		{
 			"key": "minecraft:brewing_stand",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:brewing_stand"
 		},
 		{
 			"key": "minecraft:cartography_table",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:cartography_table"
 		},
 		{
 			"key": "minecraft:crafter_3x3",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:crafter_3x3"
 		},
 		{
 			"key": "minecraft:crafting",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:crafting"
 		},
 		{
 			"key": "minecraft:enchantment",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:enchantment"
 		},
 		{
 			"key": "minecraft:furnace",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:furnace"
 		},
 		{
 			"key": "minecraft:generic_3x3",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_3x3"
 		},
 		{
 			"key": "minecraft:generic_9x1",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_9x1"
 		},
 		{
 			"key": "minecraft:generic_9x2",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_9x2"
 		},
 		{
 			"key": "minecraft:generic_9x3",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_9x3"
 		},
 		{
 			"key": "minecraft:generic_9x4",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_9x4"
 		},
 		{
 			"key": "minecraft:generic_9x5",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_9x5"
 		},
 		{
 			"key": "minecraft:generic_9x6",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:generic_9x6"
 		},
 		{
 			"key": "minecraft:grindstone",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:grindstone"
 		},
 		{
 			"key": "minecraft:hopper",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:hopper"
 		},
 		{
 			"key": "minecraft:lectern",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:lectern"
 		},
 		{
 			"key": "minecraft:loom",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:loom"
 		},
 		{
 			"key": "minecraft:merchant",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:merchant"
 		},
 		{
 			"key": "minecraft:shulker_box",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:shulker_box"
 		},
 		{
 			"key": "minecraft:smithing",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:smithing"
 		},
 		{
 			"key": "minecraft:smoker",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:smoker"
 		},
 		{
 			"key": "minecraft:stonecutter",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
 			"typed": "minecraft:stonecutter"
 		}
 	]

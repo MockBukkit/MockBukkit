@@ -1,17 +1,26 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Wolf;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WolfMockTest
@@ -107,6 +116,69 @@ class WolfMockTest
 	{
 		wolf.setBaby();
 		assertEquals(0.34D, wolf.getEyeHeight());
+	}
+
+	@Nested
+	class GetVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Wolf.Variant.PALE, wolf.getVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> wolf.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getWolfVariants")
+		void givenPossibleValues(Wolf.Variant variant)
+		{
+			wolf.setVariant(variant);
+			assertEquals(variant, wolf.getVariant());
+		}
+
+		public static Stream<Arguments> getWolfVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.WOLF_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
+	}
+
+	@Nested
+	class GetSoundVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Wolf.SoundVariant.CLASSIC, wolf.getSoundVariant());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getWolfSoundVariants")
+		void givenPossibleValues(Wolf.SoundVariant variant)
+		{
+			wolf.setSoundVariant(variant);
+			assertEquals(variant, wolf.getSoundVariant());
+		}
+
+		public static Stream<Arguments> getWolfSoundVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.WOLF_SOUND_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
 	}
 
 }

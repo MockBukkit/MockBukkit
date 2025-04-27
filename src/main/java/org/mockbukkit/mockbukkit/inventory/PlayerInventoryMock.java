@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
-
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -12,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Arrays;
 
@@ -350,8 +349,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case HEAD -> notNull(getHelmet());
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
-			case BODY ->
-					throw new IllegalArgumentException("Not implemented. This is a bug in paper which has been copied over to MockBukkit");
+			case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
+			default ->  throw new IllegalArgumentException("Could not get slot " + slot + " - not a valid slot for PlayerInventory");
 		};
 	}
 
@@ -372,6 +371,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		case HEAD -> setHelmet(item);
 		case LEGS -> setLeggings(item);
 		case OFF_HAND -> setItemInOffHand(item);
+		case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
+		default -> throw new IllegalArgumentException("Could not set slot " + slot + " - not a valid slot for PlayerInventory");
 		}
 		// Sounds are not implemented here
 	}

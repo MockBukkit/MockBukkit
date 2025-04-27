@@ -1,13 +1,21 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Material;
+import org.bukkit.entity.Pig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -118,6 +126,41 @@ class PigMockTest
 	{
 		pig.setBaby();
 		assertEquals(0.3825D, pig.getEyeHeight());
+	}
+
+	@Nested
+	class GetVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Pig.Variant.TEMPERATE, pig.getVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> pig.setVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getPigVariants")
+		void givenPossibleValues(Pig.Variant variant)
+		{
+			pig.setVariant(variant);
+			assertEquals(variant, pig.getVariant());
+		}
+
+		public static Stream<Arguments> getPigVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.PIG_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
 	}
 
 }

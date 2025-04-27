@@ -11,7 +11,7 @@
 			"id": 0,
 			"key": "minecraft:alban",
 			"name": "ALBAN",
-			"ordinal": 2,
+			"ordinal": 0,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.alban.title"
@@ -45,7 +45,7 @@
 			"id": 2,
 			"key": "minecraft:aztec2",
 			"name": "AZTEC2",
-			"ordinal": 3,
+			"ordinal": 2,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.aztec2.title"
@@ -62,7 +62,7 @@
 			"id": 3,
 			"key": "minecraft:backyard",
 			"name": "BACKYARD",
-			"ordinal": 35,
+			"ordinal": 3,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.backyard.title"
@@ -79,7 +79,7 @@
 			"id": 4,
 			"key": "minecraft:baroque",
 			"name": "BAROQUE",
-			"ordinal": 30,
+			"ordinal": 4,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.baroque.title"
@@ -96,7 +96,7 @@
 			"id": 5,
 			"key": "minecraft:bomb",
 			"name": "BOMB",
-			"ordinal": 4,
+			"ordinal": 5,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.bomb.title"
@@ -113,7 +113,7 @@
 			"id": 6,
 			"key": "minecraft:bouquet",
 			"name": "BOUQUET",
-			"ordinal": 36,
+			"ordinal": 6,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.bouquet.title"
@@ -130,7 +130,7 @@
 			"id": 7,
 			"key": "minecraft:burning_skull",
 			"name": "BURNING_SKULL",
-			"ordinal": 23,
+			"ordinal": 7,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.burning_skull.title"
@@ -147,7 +147,7 @@
 			"id": 8,
 			"key": "minecraft:bust",
 			"name": "BUST",
-			"ordinal": 15,
+			"ordinal": 8,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.bust.title"
@@ -164,7 +164,7 @@
 			"id": 9,
 			"key": "minecraft:cavebird",
 			"name": "CAVEBIRD",
-			"ordinal": 37,
+			"ordinal": 9,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.cavebird.title"
@@ -181,7 +181,7 @@
 			"id": 10,
 			"key": "minecraft:changing",
 			"name": "CHANGING",
-			"ordinal": 38,
+			"ordinal": 10,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.changing.title"
@@ -198,7 +198,7 @@
 			"id": 11,
 			"key": "minecraft:cotan",
 			"name": "COTAN",
-			"ordinal": 39,
+			"ordinal": 11,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.cotan.title"
@@ -215,7 +215,7 @@
 			"id": 12,
 			"key": "minecraft:courbet",
 			"name": "COURBET",
-			"ordinal": 8,
+			"ordinal": 12,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.courbet.title"
@@ -232,7 +232,7 @@
 			"id": 13,
 			"key": "minecraft:creebet",
 			"name": "CREEBET",
-			"ordinal": 11,
+			"ordinal": 13,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.creebet.title"
@@ -249,7 +249,7 @@
 			"id": 14,
 			"key": "minecraft:donkey_kong",
 			"name": "DONKEY_KONG",
-			"ordinal": 25,
+			"ordinal": 14,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.donkey_kong.title"
@@ -262,7 +262,7 @@
 			"id": 15,
 			"key": "minecraft:earth",
 			"name": "EARTH",
-			"ordinal": 26,
+			"ordinal": 15,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.earth.title"
@@ -279,7 +279,7 @@
 			"id": 16,
 			"key": "minecraft:endboss",
 			"name": "ENDBOSS",
-			"ordinal": 40,
+			"ordinal": 16,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.endboss.title"
@@ -296,7 +296,7 @@
 			"id": 17,
 			"key": "minecraft:fern",
 			"name": "FERN",
-			"ordinal": 41,
+			"ordinal": 17,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.fern.title"
@@ -313,7 +313,7 @@
 			"id": 18,
 			"key": "minecraft:fighters",
 			"name": "FIGHTERS",
-			"ordinal": 20,
+			"ordinal": 18,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.fighters.title"
@@ -330,7 +330,7 @@
 			"id": 19,
 			"key": "minecraft:finding",
 			"name": "FINDING",
-			"ordinal": 42,
+			"ordinal": 19,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.finding.title"
@@ -343,7 +343,7 @@
 			"id": 20,
 			"key": "minecraft:fire",
 			"name": "FIRE",
-			"ordinal": 29,
+			"ordinal": 20,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.fire.title"
@@ -360,7 +360,7 @@
 			"id": 21,
 			"key": "minecraft:graham",
 			"name": "GRAHAM",
-			"ordinal": 13,
+			"ordinal": 21,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.graham.title"
@@ -377,7 +377,7 @@
 			"id": 22,
 			"key": "minecraft:humble",
 			"name": "HUMBLE",
-			"ordinal": 31,
+			"ordinal": 22,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.humble.title"
@@ -394,7 +394,7 @@
 			"id": 23,
 			"key": "minecraft:kebab",
 			"name": "KEBAB",
-			"ordinal": 0,
+			"ordinal": 23,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.kebab.title"
@@ -411,7 +411,7 @@
 			"id": 24,
 			"key": "minecraft:lowmist",
 			"name": "LOWMIST",
-			"ordinal": 43,
+			"ordinal": 24,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.lowmist.title"
@@ -428,7 +428,7 @@
 			"id": 25,
 			"key": "minecraft:match",
 			"name": "MATCH",
-			"ordinal": 14,
+			"ordinal": 25,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.match.title"
@@ -445,7 +445,7 @@
 			"id": 26,
 			"key": "minecraft:meditative",
 			"name": "MEDITATIVE",
-			"ordinal": 32,
+			"ordinal": 26,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.meditative.title"
@@ -462,7 +462,7 @@
 			"id": 27,
 			"key": "minecraft:orb",
 			"name": "ORB",
-			"ordinal": 44,
+			"ordinal": 27,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.orb.title"
@@ -479,7 +479,7 @@
 			"id": 28,
 			"key": "minecraft:owlemons",
 			"name": "OWLEMONS",
-			"ordinal": 45,
+			"ordinal": 28,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.owlemons.title"
@@ -496,7 +496,7 @@
 			"id": 29,
 			"key": "minecraft:passage",
 			"name": "PASSAGE",
-			"ordinal": 46,
+			"ordinal": 29,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.passage.title"
@@ -513,7 +513,7 @@
 			"id": 30,
 			"key": "minecraft:pigscene",
 			"name": "PIGSCENE",
-			"ordinal": 22,
+			"ordinal": 30,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pigscene.title"
@@ -530,7 +530,7 @@
 			"id": 31,
 			"key": "minecraft:plant",
 			"name": "PLANT",
-			"ordinal": 5,
+			"ordinal": 31,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.plant.title"
@@ -547,7 +547,7 @@
 			"id": 32,
 			"key": "minecraft:pointer",
 			"name": "POINTER",
-			"ordinal": 21,
+			"ordinal": 32,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pointer.title"
@@ -564,7 +564,7 @@
 			"id": 33,
 			"key": "minecraft:pond",
 			"name": "POND",
-			"ordinal": 47,
+			"ordinal": 33,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pond.title"
@@ -581,7 +581,7 @@
 			"id": 34,
 			"key": "minecraft:pool",
 			"name": "POOL",
-			"ordinal": 7,
+			"ordinal": 34,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pool.title"
@@ -598,7 +598,7 @@
 			"id": 35,
 			"key": "minecraft:prairie_ride",
 			"name": "PRAIRIE_RIDE",
-			"ordinal": 33,
+			"ordinal": 35,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.prairie_ride.title"
@@ -615,7 +615,7 @@
 			"id": 36,
 			"key": "minecraft:sea",
 			"name": "SEA",
-			"ordinal": 9,
+			"ordinal": 36,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.sea.title"
@@ -632,7 +632,7 @@
 			"id": 37,
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
-			"ordinal": 24,
+			"ordinal": 37,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.skeleton.title"
@@ -649,7 +649,7 @@
 			"id": 38,
 			"key": "minecraft:skull_and_roses",
 			"name": "SKULL_AND_ROSES",
-			"ordinal": 18,
+			"ordinal": 38,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.skull_and_roses.title"
@@ -666,7 +666,7 @@
 			"id": 39,
 			"key": "minecraft:stage",
 			"name": "STAGE",
-			"ordinal": 16,
+			"ordinal": 39,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.stage.title"
@@ -683,7 +683,7 @@
 			"id": 40,
 			"key": "minecraft:sunflowers",
 			"name": "SUNFLOWERS",
-			"ordinal": 48,
+			"ordinal": 40,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.sunflowers.title"
@@ -700,7 +700,7 @@
 			"id": 41,
 			"key": "minecraft:sunset",
 			"name": "SUNSET",
-			"ordinal": 10,
+			"ordinal": 41,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.sunset.title"
@@ -717,7 +717,7 @@
 			"id": 42,
 			"key": "minecraft:tides",
 			"name": "TIDES",
-			"ordinal": 49,
+			"ordinal": 42,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.tides.title"
@@ -734,7 +734,7 @@
 			"id": 43,
 			"key": "minecraft:unpacked",
 			"name": "UNPACKED",
-			"ordinal": 34,
+			"ordinal": 43,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.unpacked.title"
@@ -751,7 +751,7 @@
 			"id": 44,
 			"key": "minecraft:void",
 			"name": "VOID",
-			"ordinal": 17,
+			"ordinal": 44,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.void.title"
@@ -768,7 +768,7 @@
 			"id": 45,
 			"key": "minecraft:wanderer",
 			"name": "WANDERER",
-			"ordinal": 12,
+			"ordinal": 45,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wanderer.title"
@@ -785,7 +785,7 @@
 			"id": 46,
 			"key": "minecraft:wasteland",
 			"name": "WASTELAND",
-			"ordinal": 6,
+			"ordinal": 46,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wasteland.title"
@@ -798,7 +798,7 @@
 			"id": 47,
 			"key": "minecraft:water",
 			"name": "WATER",
-			"ordinal": 28,
+			"ordinal": 47,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.water.title"
@@ -811,7 +811,7 @@
 			"id": 48,
 			"key": "minecraft:wind",
 			"name": "WIND",
-			"ordinal": 27,
+			"ordinal": 48,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wind.title"
@@ -824,7 +824,7 @@
 			"id": 49,
 			"key": "minecraft:wither",
 			"name": "WITHER",
-			"ordinal": 19,
+			"ordinal": 49,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wither.title"

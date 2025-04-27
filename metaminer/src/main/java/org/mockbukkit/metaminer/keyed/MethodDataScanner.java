@@ -3,7 +3,7 @@ package org.mockbukkit.metaminer.keyed;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.apache.commons.lang.ClassUtils;
+import org.apache.commons.lang3.ClassUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.metaminer.json.ElementFactory;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class MethodDataScanner
 {
 
-	private static final Pattern WORDS_TO_REPLACE = Pattern.compile("((^get)|(^has)|(^is))([A-Z])");
+	private static final Pattern WORDS_TO_REPLACE = Pattern.compile("((^get)|(^has)|(^is)|(as))([A-Z])");
 	private static final Set<String> METHOD_NAME_BLACKLIST = Set.of("hashCode", "toString", "getKeyOrNull", "implHashCode",
 			"implToString", "wait", "getDeclaringClass", "notify", "notifyAll", "getClass", "values");
 
@@ -59,6 +59,19 @@ public class MethodDataScanner
 		Preconditions.checkArgument(returnType != null, "The return type can't be null!");
 		Preconditions.checkArgument(method != null, "The method can't be null!");
 
+		if (method.getName().startsWith("has"))
+		{
+			try
+			{
+				object.getClass().getMethod(method.getName().replace("has", "get"));
+				return null;
+			}
+			catch (NoSuchMethodException e)
+			{
+				// continue
+			}
+		}
+
 		// Convert the primitive type into the respective wrapper
 		returnType = ClassUtils.primitiveToWrapper(returnType);
 
@@ -76,7 +89,7 @@ public class MethodDataScanner
 		Matcher matcher = WORDS_TO_REPLACE.matcher(name);
 		if (matcher.find())
 		{
-			return matcher.group(5).toLowerCase(Locale.ROOT) + matcher.replaceAll("");
+			return matcher.group(6).toLowerCase(Locale.ROOT) + matcher.replaceAll("");
 		}
 		return name;
 	}

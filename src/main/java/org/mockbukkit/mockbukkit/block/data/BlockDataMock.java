@@ -28,6 +28,7 @@ import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Switch;
+import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
@@ -94,6 +95,7 @@ public class BlockDataMock implements BlockData
 			.put(Orientable.class, OrientableMock::new)
 			.put(Snowable.class, SnowableDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
+			.put(TestBlock.class, TestBlockDataMock::new)
 			.build();
 
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
@@ -163,8 +165,8 @@ public class BlockDataMock implements BlockData
 			String key = split[0].strip();
 			String valueString = split[1].strip();
 			Preconditions.checkArgument(BlockDataKey.isRegistered(key), "Unknown block data key: " + key);
-			BlockDataKey blockDataKey = BlockDataKey.fromKey(key);
-			Preconditions.checkArgument(blockDataKey.appliesTo(blockData), "Can not apply block data key to '" + blockKey + "': " + key);
+			BlockDataKey blockDataKey = BlockDataKey.fromKey(key, blockData);
+			Preconditions.checkArgument(blockDataKey != null, "Can not apply block data key to '" + blockKey + "': " + key);
 			Object value = blockDataKey.constructValue(valueString);
 			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
 			data.put(key, value);

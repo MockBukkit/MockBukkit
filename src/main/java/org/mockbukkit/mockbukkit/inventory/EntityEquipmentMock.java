@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -11,6 +10,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	private @NotNull ItemStack leggings = new ItemStackMock(Material.AIR);
 	private @NotNull ItemStack boots = new ItemStackMock(Material.AIR);
 	private @NotNull ItemStack bodyItem = new ItemStackMock(Material.AIR);
+	private @NotNull ItemStack saddleItem = new ItemStackMock(Material.AIR);
 
 	/**
 	 * Constructs a new {@link EntityEquipmentMock} for the given holder.
@@ -68,6 +70,8 @@ public class EntityEquipmentMock implements EntityEquipment
 		case HAND -> setItemInMainHand(item, silent);
 		case OFF_HAND -> setItemInOffHand(item, silent);
 		case BODY -> setItemInBody(item, silent);
+		case SADDLE -> setSaddleItem(item, silent);
+		default -> throw new UnimplementedOperationException("EquipmentSlot " + slot + " is not implemented for EntityEquipmentMock");
 		}
 	}
 
@@ -75,6 +79,17 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		this.bodyItem = nonNullClone(item);
 		// Sounds are not implemented here
+	}
+
+	private void setSaddleItem(ItemStack saddleItem, boolean silent)
+	{
+		this.saddleItem = nonNullClone(saddleItem);
+		// Sounds are not implemented here
+	}
+
+	private @NotNull ItemStack getSaddleItem()
+	{
+		return this.saddleItem.clone();
 	}
 
 	@Override
@@ -90,6 +105,7 @@ public class EntityEquipmentMock implements EntityEquipment
 			case LEGS -> getLeggings();
 			case OFF_HAND -> getItemInOffHand();
 			case BODY -> getItemInBody();
+			case SADDLE -> getSaddleItem();
 		};
 	}
 

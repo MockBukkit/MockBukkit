@@ -25,14 +25,16 @@ import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.TestBlock;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Locale;
-import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Stores all {@link BlockData} keys.
@@ -131,6 +133,7 @@ public enum BlockDataKey
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	MAX_LEVEL("maxLevel", Integer::parseInt, Levelled.class::isInstance),
 	MIN_LEVEL("minLevel", Integer::parseInt, Levelled.class::isInstance),
+	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
@@ -138,7 +141,7 @@ public enum BlockDataKey
 
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
 
-	private static final Map<String, BlockDataKey> KEY_TO_BLOCK_DATA_KEY_RELATION = compileKeyRelation();
+	private static final Set<String> KEYS = compileKeys();
 
 
 	private String key;
@@ -159,22 +162,26 @@ public enum BlockDataKey
 
 	public static boolean isRegistered(String key)
 	{
-		return KEY_TO_BLOCK_DATA_KEY_RELATION.containsKey(key);
+		return KEYS.contains(key);
 	}
 
-	private static Map<String, BlockDataKey> compileKeyRelation()
+	private static Set<String> compileKeys()
 	{
-		Map<String, BlockDataKey> output = new HashMap<>();
+		return Arrays.stream(BlockDataKey.values())
+				.map(BlockDataKey::key)
+				.collect(Collectors.toSet());
+	}
+
+	public static @Nullable BlockDataKey fromKey(String key, BlockDataMock blockDataMock)
+	{
 		for (BlockDataKey blockDataKey : BlockDataKey.values())
 		{
-			output.put(blockDataKey.key(), blockDataKey);
+			if (blockDataKey.key().equals(key) && blockDataKey.appliesTo(blockDataMock))
+			{
+				return blockDataKey;
+			}
 		}
-		return output;
-	}
-
-	public static @Nullable BlockDataKey fromKey(String key)
-	{
-		return KEY_TO_BLOCK_DATA_KEY_RELATION.get(key);
+		return null;
 	}
 
 	public Object constructValue(String valueString)

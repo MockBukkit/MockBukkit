@@ -16,6 +16,7 @@ import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.identity.Identity;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -697,6 +698,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public EntityEquipment getEquipment()
 	{
 		return (EntityEquipment) getInventory();
+	}
+
+	@Override
+	public int getCooldown(Key key)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCooldown(Key key, int ticks)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

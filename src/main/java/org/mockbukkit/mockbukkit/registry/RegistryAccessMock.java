@@ -112,6 +112,10 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.VILLAGER_PROFESSION,
 				RegistryKey.VILLAGER_TYPE,
 				RegistryKey.FROG_VARIANT,
+				RegistryKey.CHICKEN_VARIANT,
+				RegistryKey.COW_VARIANT,
+				RegistryKey.PIG_VARIANT,
+				RegistryKey.WOLF_SOUND_VARIANT,
 				RegistryKey.MAP_DECORATION_TYPE,
 				RegistryKey.BANNER_PATTERN,
 				RegistryKey.MENU,
@@ -123,7 +127,8 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.ENTITY_TYPE,
 				RegistryKey.PARTICLE_TYPE,
 				RegistryKey.POTION,
-				RegistryKey.DATA_COMPONENT_TYPE
+				RegistryKey.DATA_COMPONENT_TYPE,
+				RegistryKey.MEMORY_MODULE_TYPE
 		);
 	}
 

@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -10,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -17,9 +17,11 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link ThrownPotion}.
  *
+ * @see SplashPotionMock
+ * @see LingeringPotionMock
  * @see ThrowableProjectileMock
  */
-public class ThrownPotionMock extends ThrowableProjectileMock implements ThrownPotion
+public abstract class ThrownPotionMock extends ThrowableProjectileMock implements ThrownPotion
 {
 	private @NotNull ItemStack potionItem = new ItemStack(Material.SPLASH_POTION);
 
@@ -29,7 +31,7 @@ public class ThrownPotionMock extends ThrowableProjectileMock implements ThrownP
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	public ThrownPotionMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected ThrownPotionMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
@@ -79,9 +81,6 @@ public class ThrownPotionMock extends ThrowableProjectileMock implements ThrownP
 	}
 
 	@Override
-	public @NotNull EntityType getType()
-	{
-		return EntityType.POTION;
-	}
+	public abstract @NotNull EntityType getType();
 
 }

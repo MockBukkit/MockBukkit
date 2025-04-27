@@ -829,6 +829,33 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:acacia_leaves",
+				"minecraft:azalea_leaves",
+				"minecraft:birch_leaves",
+				"minecraft:cherry_leaves",
+				"minecraft:dark_oak_leaves",
+				"minecraft:flowering_azalea_leaves",
+				"minecraft:jungle_leaves",
+				"minecraft:mangrove_leaves",
+				"minecraft:oak_leaves",
+				"minecraft:pale_oak_leaves",
+				"minecraft:spruce_leaves"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:leaf_litter",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:leaf_litter"
+		}
+	},
+	{
+		"category": "BLOCKS",
+		"cookingTime": 200,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:light_blue_terracotta"
 			],
 			"type": "material"

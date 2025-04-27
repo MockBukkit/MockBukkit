@@ -1,12 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wolf;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -17,7 +16,8 @@ import java.util.UUID;
  */
 public class WolfMock extends TameableAnimalMock implements Wolf
 {
-
+	private @NotNull Variant variant = Variant.PALE;
+	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private boolean isAngry = false;
 	private @NotNull DyeColor collarColor = DyeColor.RED;
 	private boolean isWet = false;
@@ -93,19 +93,31 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 		this.interested = interested;
 	}
 
-	@NotNull
 	@Override
-	public Variant getVariant()
+	public @NotNull Variant getVariant()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.variant;
 	}
 
 	@Override
-	public void setVariant(@NotNull Wolf.Variant variant)
+	public void setVariant(@NotNull Variant variant)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.variant = variant;
+	}
+
+	@Override
+	public @NotNull SoundVariant getSoundVariant()
+	{
+		return this.soundVariant;
+	}
+
+	@Override
+	public void setSoundVariant(@NotNull SoundVariant soundVariant)
+	{
+		Preconditions.checkArgument(soundVariant != null, "soundVariant cannot be null");
+
+		this.soundVariant = soundVariant;
 	}
 
 	@Override

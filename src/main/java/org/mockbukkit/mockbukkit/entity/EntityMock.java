@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
@@ -166,6 +167,30 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			return uuid.equals(((EntityMock) obj).getUniqueId());
 		}
 		return false;
+	}
+
+	@Override
+	public boolean hasData(@NotNull DataComponentType type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> @Nullable T getDataOrDefault(DataComponentType.@NotNull Valued<? extends T> type, @Nullable T fallback)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> @Nullable T getData(DataComponentType.@NotNull Valued<T> type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isTrackedBy(@NotNull Player player)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	/**

@@ -23,7 +23,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 {
 
 	private final NamespacedKey key;
-	private final boolean itemType;
+	private final NamespacedKey itemType;
 	private final boolean solid;
 	private final boolean flammable;
 	private final boolean burnable;
@@ -38,9 +38,9 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	private final String translationKey;
 
 	@ApiStatus.Internal
-	private BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
-						 boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						 boolean air, boolean interactable, boolean collision, String translationKey)
+	private BlockTypeMock(NamespacedKey key, @Nullable NamespacedKey itemType, boolean solid, boolean flammable, boolean burnable,
+						  boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
+						  boolean air, boolean interactable, boolean collision, String translationKey)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -62,7 +62,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	public static BlockTypeMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
-		boolean itemType = jsonObject.get("itemType").getAsBoolean();
+		NamespacedKey itemType = jsonObject.has("itemType") ? NamespacedKey.fromString(jsonObject.get("itemType").getAsString()) : null;
 		boolean solid = jsonObject.get("solid").getAsBoolean();
 		boolean flammable = jsonObject.get("flammable").getAsBoolean();
 		boolean burnable = jsonObject.get("burnable").getAsBoolean();
@@ -96,7 +96,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public boolean hasItemType()
 	{
-		return this.itemType;
+		return this.itemType != null;
 	}
 
 	@Override
@@ -106,9 +106,9 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		{
 			return ItemType.AIR;
 		}
-
-		ItemType item = Registry.ITEM.get(this.key);
-		Preconditions.checkArgument(item != null && item != ItemType.AIR, "The block type %s has no corresponding item type", this.getKey());
+		Preconditions.checkArgument(this.itemType != null, "The block type %s has no corresponding item type", this.getKey());
+		ItemType item = Registry.ITEM.get(this.itemType);
+		Preconditions.checkState(item != null && item != ItemType.AIR, "The block type %s has no corresponding item type", this.getKey());
 		return item;
 	}
 

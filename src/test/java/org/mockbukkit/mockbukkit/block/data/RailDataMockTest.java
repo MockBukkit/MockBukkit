@@ -15,10 +15,12 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class RailDataMockTest
 {
+
 	private RailDataMock rail;
 
 	@BeforeEach
@@ -70,7 +72,7 @@ class RailDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			rail.setWaterlogged(isWaterLogged);
@@ -78,4 +80,13 @@ class RailDataMockTest
 		}
 
 	}
+
+	@Test
+	void deserialize()
+	{
+		RailDataMock blockDataMock = (RailDataMock) BlockDataMock.newData(null, "minecraft:rail[shape=south_east, waterlogged=true]");
+		assertEquals(Rail.Shape.SOUTH_EAST, blockDataMock.getShape());
+		assertTrue(blockDataMock.isWaterlogged());
+	}
+
 }

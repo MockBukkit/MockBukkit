@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
-import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
@@ -484,6 +483,12 @@ public class BlockMock implements Block
 	public @NotNull float getDestroySpeed(@NotNull ItemStack itemStack, boolean considerEnchants)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isSuffocating()
+	{
 		throw new UnimplementedOperationException();
 	}
 
