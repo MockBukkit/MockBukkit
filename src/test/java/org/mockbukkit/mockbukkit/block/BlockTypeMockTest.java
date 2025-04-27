@@ -54,6 +54,7 @@ import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Fence;
 import org.bukkit.block.data.type.Fire;
+import org.bukkit.block.data.type.FlowerBed;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.GlassPane;
@@ -73,7 +74,6 @@ import org.bukkit.block.data.type.LightningRod;
 import org.bukkit.block.data.type.MangrovePropagule;
 import org.bukkit.block.data.type.MossyCarpet;
 import org.bukkit.block.data.type.NoteBlock;
-import org.bukkit.block.data.type.PinkPetals;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.PointedDripstone;
@@ -1285,11 +1285,11 @@ class BlockTypeMockTest
 
 		@Test
 		@Disabled("Not implemented yet #1088")
-		void givenPinkPetals()
+		void givenFlowerBed()
 		{
-			PinkPetals data = BlockType.PINK_PETALS.createBlockData();
+			FlowerBed data = BlockType.PINK_PETALS.createBlockData();
 			assertNotNull(data);
-			assertInstanceOf(PinkPetals.class, data);
+			assertInstanceOf(FlowerBed.class, data);
 		}
 
 		@Test
