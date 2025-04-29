@@ -22,16 +22,20 @@ repositories {
 dependencies {
 	// Paper API
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	api("org.jetbrains:annotations:26.0.2")
+	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
 	implementation("org.junit.jupiter:junit-jupiter:5.12.2")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
-	implementation("org.jetbrains:annotations:26.0.2")
+	implementation("net.kyori:adventure-platform-bungeecord:4.3.4") {
+		exclude("net.kyori", "adventure-platform-api")
+		exclude("net.kyori", "adventure-api")
+	}
+
 	implementation("net.bytebuddy:byte-buddy:1.17.5")
-	implementation("org.hamcrest:hamcrest:3.0")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
