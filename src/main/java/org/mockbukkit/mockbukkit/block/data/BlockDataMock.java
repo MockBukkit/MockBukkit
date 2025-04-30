@@ -235,6 +235,7 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkNotNull(value, "Value cannot be null");
 
 		checkProperty(key);
+		Preconditions.checkArgument(BlockDataMockRegistry.getInstance().isAllowedValue(type, key, value), "Invalid " + key.key() + ": " + value);
 
 		this.data.put(key.key(), value);
 	}
@@ -299,7 +300,8 @@ public class BlockDataMock implements BlockData
 		try
 		{
 			return this.getAsSet(BlockDataKey.PRINTABLE_STATES);
-		} catch (IllegalArgumentException e)
+		}
+		catch (IllegalArgumentException e)
 		{
 			// If we receive the illegal argument it means we don't have printable states.
 			return Collections.emptySet();
@@ -323,7 +325,7 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder(getMaterial().getKey() + "[");
 
-		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
+		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getDefaultData(type).keySet());
 		Collections.sort(keysToShow);
 
 		Set<String> printableStates = this.getPrintableStates();
