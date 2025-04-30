@@ -42,19 +42,11 @@ import java.util.stream.Collectors;
 @ApiStatus.Internal
 public enum BlockDataKey
 {
-	/**
-	 * Get the list of printable states for this entity, that should be included in get as string.
-	 */
-	PRINTABLE_STATES("printableStates", String::valueOf, BlockData.class::isInstance),
 
 	/**
 	 * Stores the {@link BlockFace} a {@link Directional} block is facing towards.
 	 */
 	FACING("facing", string -> BlockFace.valueOf(string.toUpperCase(Locale.ROOT)), Directional.class::isInstance),
-	/**
-	 * Stores the list of possible {@link BlockFace} that a {@link Directional} block has.
-	 */
-	FACES("faces", string -> BlockFace.valueOf(string.toUpperCase(Locale.ROOT)), o -> o instanceof Directional || o instanceof MultipleFacing),
 
 	/**
 	 * Stores whether a {@link Campfire} is a signal fire (hay block underneath).
@@ -113,10 +105,8 @@ public enum BlockDataKey
 
 
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
-	MAX_AGE_KEY("maxAge", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
-	MAX_STAGE_KEY("maxStage", Integer::parseInt, Sapling.class::isInstance),
 
 	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
@@ -131,13 +121,10 @@ public enum BlockDataKey
 	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
-	MAX_LEVEL("maxLevel", Integer::parseInt, Levelled.class::isInstance),
-	MIN_LEVEL("minLevel", Integer::parseInt, Levelled.class::isInstance),
 	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
-	MAX_POWER("maxPower", Integer::parseInt, AnaloguePowerable.class::isInstance),
 
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
 

@@ -48,7 +48,7 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return this.getAsSet(BlockDataKey.FACES);
+		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
 	@Override

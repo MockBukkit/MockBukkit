@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -18,7 +19,6 @@ import org.mockbukkit.mockbukkit.util.ResourceLoader;
 import javax.annotation.Nullable;
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.Set;
 
 @ApiStatus.Internal
 public class BlockDataMockRegistry
@@ -55,10 +55,14 @@ public class BlockDataMockRegistry
 			Map<String, Object> defaultStates = gson.fromJson(jsonObject.get("defaultStates"), new TypeToken<Map<String, Object>>()
 			{
 			}.getType());
-			Map<String, Set<Object>> allowedStates = gson.fromJson(jsonObject.get("allowedStates"), new TypeToken<Map<String, Set<Object>>>()
+			ImmutableMap.Builder<BlockDataLimitation.Type<?,?>, BlockDataLimitation<?,?>> allowedStates = ImmutableMap.builder();
+			for (Map.Entry<String, JsonElement> entry : jsonObject.get("allowedStates").getAsJsonObject().entrySet())
 			{
-			}.getType());
-			return new MaterialData(defaultStates, allowedStates);
+				// No error handling, should just fail if the input is wrong
+				BlockDataLimitation.Type<?,?> limitation = BlockDataLimitation.Type.fromKey(entry.getKey());
+				allowedStates.put(limitation, limitation.newLimitation(entry.getValue()));
+			}
+			return new MaterialData(defaultStates, allowedStates.build());
 		}
 
 	}
@@ -122,41 +126,17 @@ public class BlockDataMockRegistry
 		return blockData.get(state);
 	}
 
-	private @Nullable Map<String, Set<Object>> getAllowedValues(Material material)
+	public @NotNull Map<BlockDataLimitation.Type<?,?>, BlockDataLimitation<?,?>> getLimitations(Material material)
 	{
 		MaterialData materialData = blockData.get(material);
 		if (materialData == null)
 		{
-			return null;
-		}
-		return materialData.allowedValues();
-	}
-
-	public boolean isAllowedValue(Material material, BlockDataKey blockDataKey, Object value)
-	{
-		Map<String, Set<Object>> allowedValues = getAllowedValues(material);
-		if (allowedValues == null)
-		{
 			throw new UnimplementedOperationException();
 		}
-		Set<Object> allowed = allowedValues.get(blockDataKey.name());
-		if (allowed == null)
-		{
-			throw new IllegalStateException("Expected a valid block data key!");
-		}
-		return allowed.stream()
-				.map(object ->
-				{
-					if (object instanceof String string)
-					{
-						return blockDataKey.constructValue(string);
-					}
-					return object;
-				})
-				.anyMatch(value::equals);
+		return materialData.limitations();
 	}
 
-	private record MaterialData(Map<String, Object> defaultValues, Map<String, Set<Object>> allowedValues)
+	private record MaterialData(Map<String, Object> defaultValues, Map<BlockDataLimitation.Type<?,?>, BlockDataLimitation<?,?>> limitations)
 	{
 
 	}

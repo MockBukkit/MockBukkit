@@ -34,7 +34,7 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	@Override
 	public int getMaximumAge()
 	{
-		return this.get(BlockDataKey.MAX_AGE_KEY);
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_AGE);
 	}
 
 }
