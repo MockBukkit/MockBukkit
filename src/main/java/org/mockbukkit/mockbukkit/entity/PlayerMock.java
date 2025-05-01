@@ -176,6 +176,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private @Nullable Component playerListFooter = null;
 	private int expTotal = 0;
 	private float exp = 0;
+	private float flySpeed = 0.1F;
 	private int expCooldown = 0;
 	private int deathScreenScore = 0;
 	private int playerListOrder = 0;
@@ -2236,15 +2237,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public float getFlySpeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.flySpeed;
 	}
 
 	@Override
 	public void setFlySpeed(float value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(value <= 1f && value >= -1f, "Speed value (%s) need to be between -1f and 1f", value);
+
+		this.flySpeed = value;
 	}
 
 	@Override
