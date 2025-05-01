@@ -1,10 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import io.papermc.paper.world.damagesource.CombatTracker;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 
 import org.bukkit.entity.Ageable;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 

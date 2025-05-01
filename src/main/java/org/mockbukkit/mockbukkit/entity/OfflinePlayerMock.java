@@ -211,6 +211,12 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	public @org.jspecify.annotations.Nullable Location getRespawnLocation(boolean loadLocationAndValidate)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable Location getBedSpawnLocation()
 	{
 		return getRespawnLocation();

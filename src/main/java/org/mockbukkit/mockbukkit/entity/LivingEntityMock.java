@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.world.damagesource.CombatTracker;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
@@ -1377,6 +1378,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot equipmentSlot)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull CombatTracker getCombatTracker()
 	{
 		throw new UnimplementedOperationException();
 	}
