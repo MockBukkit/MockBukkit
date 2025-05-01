@@ -702,12 +702,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @NotNull CombatTracker getCombatTracker()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getCooldown(Key key)
 	{
 		throw new UnimplementedOperationException();
