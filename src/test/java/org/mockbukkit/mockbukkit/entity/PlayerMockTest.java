@@ -3331,4 +3331,26 @@ class PlayerMockTest
 		}
 	}
 
+	@Nested
+	class SetAffectsSpawning
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertTrue(player.getAffectsSpawning());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValue(boolean value)
+		{
+
+			player.setAffectsSpawning(value);
+
+			assertEquals(value, player.getAffectsSpawning());
+		}
+
+	}
+
 }

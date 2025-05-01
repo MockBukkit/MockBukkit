@@ -188,6 +188,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sleepingIgnored = false;
 	private boolean seenWinScreen = false;
 	private boolean relativeTime = true;
+	private boolean affectsSpawning = true;
 	private long timeOffset = 0;
 	private double healthScale = 20;
 	private Location compassTarget;
@@ -2662,15 +2663,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean getAffectsSpawning()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.affectsSpawning;
 	}
 
 	@Override
 	public void setAffectsSpawning(boolean affects)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.affectsSpawning = affects;
 	}
 
 	@Override
