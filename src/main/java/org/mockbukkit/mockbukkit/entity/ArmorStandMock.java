@@ -75,70 +75,70 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public @NotNull ItemStack getBoots()
 	{
 		return getEquipment().getBoots();
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public void setBoots(@Nullable ItemStack item)
 	{
 		getEquipment().setBoots(item);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public @NotNull ItemStack getLeggings()
 	{
 		return getEquipment().getLeggings();
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public void setLeggings(@Nullable ItemStack item)
 	{
 		getEquipment().setLeggings(item);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public @NotNull ItemStack getChestplate()
 	{
 		return getEquipment().getChestplate();
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public void setChestplate(@Nullable ItemStack item)
 	{
 		getEquipment().setChestplate(item);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public @NotNull ItemStack getHelmet()
 	{
 		return getEquipment().getHelmet();
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public void setHelmet(@Nullable ItemStack item)
 	{
 		getEquipment().setHelmet(item);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public @NotNull ItemStack getItemInHand()
 	{
 		return getEquipment().getItemInMainHand();
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15.2")
 	public void setItemInHand(@Nullable ItemStack item)
 	{
 		getEquipment().setItemInMainHand(item);
