@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
-import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import com.google.common.base.Preconditions;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -14,6 +10,10 @@ import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
+import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
@@ -175,30 +175,32 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 		for (ScheduledTask task : oldTasks)
 		{
-			if (task.getScheduledTick() == currentTick && !task.isCancelled())
+			if (task.getScheduledTick() != currentTick || task.isCancelled())
 			{
-				if (task.isSync())
-				{
-					wrapTask(task).run();
-				}
-				else
-				{
-					pool.submit(wrapTask(task));
-					task.submitted();
-				}
+				continue;
+			}
 
-				if (task instanceof RepeatingTask repeatingTask)
+			if (task.isSync())
+			{
+				wrapTask(task).run();
+			}
+			else
+			{
+				pool.submit(wrapTask(task));
+				task.submitted();
+			}
+
+			if (task instanceof RepeatingTask repeatingTask)
+			{
+				if (!task.isCancelled())
 				{
-					if (!task.isCancelled())
-					{
-						repeatingTask.updateScheduledTick();
-						scheduledTasks.addTask(task);
-					}
+					repeatingTask.updateScheduledTick();
+					scheduledTasks.addTask(task);
 				}
-				else
-				{
-					task.cancel();
-				}
+			}
+			else
+			{
+				task.cancel();
 			}
 		}
 	}
