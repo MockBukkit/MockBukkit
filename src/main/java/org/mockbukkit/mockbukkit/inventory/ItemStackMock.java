@@ -1,11 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import io.papermc.paper.persistence.PersistentDataContainerView;
@@ -29,6 +23,12 @@ import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class ItemStackMock extends ItemStack
 {
@@ -443,9 +443,9 @@ public class ItemStackMock extends ItemStack
 
 		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
 
-		if (args.containsKey("amount"))
+		if (args.containsKey(FIELD_AMOUNT))
 		{
-			amount = ((Number) args.get("amount")).intValue();
+			amount = ((Number) args.get(FIELD_AMOUNT)).intValue();
 		}
 
 		ItemStack result = new ItemStackMock(type, amount);
