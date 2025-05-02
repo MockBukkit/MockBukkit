@@ -21,7 +21,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Run checkstyle in source code
-        run: ./gradlew checkstyleMain
+        run: ./gradlew checkstyleMain --refresh-dependencies
 
       - name: Run checkstyle in test code
-        run: ./gradlew checkstyleTest
+        run: ./gradlew checkstyleTest --refresh-dependencies
