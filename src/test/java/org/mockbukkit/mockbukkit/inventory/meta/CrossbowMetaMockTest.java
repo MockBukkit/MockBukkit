@@ -165,7 +165,8 @@ class CrossbowMetaMockTest
 	@Test
 	void addChargedProjectile_AcceptsAllArrows()
 	{
-		assertDoesNotThrow(() -> {
+		assertDoesNotThrow(() ->
+		{
 			meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 			meta.addChargedProjectile(new ItemStackMock(Material.ARROW));
 			meta.addChargedProjectile(new ItemStackMock(Material.SPECTRAL_ARROW));
