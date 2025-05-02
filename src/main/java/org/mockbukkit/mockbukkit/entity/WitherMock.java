@@ -62,15 +62,17 @@ public class WitherMock extends AbstractBossMock implements Wither
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public int getInvulnerabilityTicks()
 	{
-		return invulnerableTicks;
+		return this.getInvulnerableTicks();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public void setInvulnerabilityTicks(int invulnerabilityTicks)
 	{
-		invulnerableTicks = invulnerabilityTicks;
+		this.setInvulnerableTicks(invulnerabilityTicks);
 	}
 
 	@Override

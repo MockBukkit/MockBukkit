@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -10,6 +8,8 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -131,6 +131,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	/**
 	 * Simulate one server tick.
 	 */
+	@Override
 	public void tick()
 	{
 		tick(1);
