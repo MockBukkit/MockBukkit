@@ -1776,7 +1776,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Correct_DataType()
 	{
-		player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStackMock(Material.STONE));
+		assertDoesNotThrow(() -> player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStackMock(Material.STONE)));
 	}
 
 	@Test
