@@ -66,6 +66,10 @@ public class BedDataMock extends BlockDataMock implements Bed
 	@Override
 	public void setFacing(@NotNull BlockFace facing)
 	{
+		if (!getFaces().contains(facing))
+		{
+			throw new IllegalArgumentException("Invalid face: " + facing);
+		}
 		super.set(FACING, facing);
 	}
 
