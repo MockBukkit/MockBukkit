@@ -1,16 +1,17 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -117,14 +118,12 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_AcceptsAllArrows()
 	{
-		meta.setChargedProjectiles(
-				List.of(
-						new ItemStackMock(Material.FIREWORK_ROCKET),
-						new ItemStackMock(Material.ARROW),
-						new ItemStackMock(Material.TIPPED_ARROW),
-						new ItemStackMock(Material.SPECTRAL_ARROW)
-				)
-		);
+		assertDoesNotThrow(() -> meta.setChargedProjectiles(List.of(
+				new ItemStackMock(Material.FIREWORK_ROCKET),
+				new ItemStackMock(Material.ARROW),
+				new ItemStackMock(Material.TIPPED_ARROW),
+				new ItemStackMock(Material.SPECTRAL_ARROW)
+		)));
 	}
 
 	@Test
@@ -166,10 +165,13 @@ class CrossbowMetaMockTest
 	@Test
 	void addChargedProjectile_AcceptsAllArrows()
 	{
-		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
-		meta.addChargedProjectile(new ItemStackMock(Material.ARROW));
-		meta.addChargedProjectile(new ItemStackMock(Material.SPECTRAL_ARROW));
-		meta.addChargedProjectile(new ItemStackMock(Material.TIPPED_ARROW));
+		assertDoesNotThrow(() ->
+		{
+			meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
+			meta.addChargedProjectile(new ItemStackMock(Material.ARROW));
+			meta.addChargedProjectile(new ItemStackMock(Material.SPECTRAL_ARROW));
+			meta.addChargedProjectile(new ItemStackMock(Material.TIPPED_ARROW));
+		});
 	}
 
 	@Test

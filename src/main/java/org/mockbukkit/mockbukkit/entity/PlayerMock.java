@@ -11,7 +11,6 @@ import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
-import io.papermc.paper.world.damagesource.CombatTracker;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
@@ -56,10 +55,8 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.ban.IpBanList;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.Sign;
 import org.bukkit.block.TileState;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
@@ -69,7 +66,6 @@ import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -154,7 +150,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -331,7 +326,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param consumable The Item to consume
 	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public void simulateConsumeItem(@NotNull ItemStack consumable)
 	{
 		consumedItems.add(new PlayerSimulation(this).simulateConsumeItem(consumable));
@@ -353,9 +348,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	/**
 	 * Asserts a Player has consumed the given Item
 	 *
-	 * @param consumable The Item to asserts has been consumed
+	 * @param consumable The Item to assert has been consumed
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "4.0")
 	public void assertItemConsumed(@NotNull ItemStack consumable)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
@@ -381,7 +376,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return the event that was fired, {@code null} if the player was not in
 	 * survival gamemode.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
 		return new PlayerSimulation(this).simulateBlockDamage(block);
@@ -395,7 +390,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
 	 * or in spectator mode.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
 		return new PlayerSimulation(this).simulateBlockBreak(block);
@@ -410,7 +405,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired. {@code null} if it wasn't or the player was in adventure
 	 * mode.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @Nullable BlockPlaceEvent simulateBlockPlace(@NotNull Material material, @NotNull Location location)
 	{
 		return new PlayerSimulation(this).simulateBlockPlace(material, location);
@@ -422,7 +417,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot The slot in the player's open inventory
 	 * @return The event that was fired.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull InventoryClickEvent simulateInventoryClick(int slot)
 	{
 		return new PlayerSimulation(this).simulateInventoryClick(slot);
@@ -435,7 +430,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, int slot)
 	{
 		return new PlayerSimulation(this).simulateInventoryClick(inventoryView, slot);
@@ -449,7 +444,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, @NotNull ClickType clickType, int slot)
 	{
 		return new PlayerSimulation(this).simulateInventoryClick(inventoryView, clickType, slot);
@@ -491,7 +486,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param moveLocation Location to move player to
 	 * @return The event that is fired
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull PlayerMoveEvent simulatePlayerMove(@NotNull Location moveLocation)
 	{
 		return new PlayerSimulation(this).simulatePlayerMove(moveLocation);
@@ -608,7 +603,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "4.0")
 	public void assertInventoryView(String message, InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		InventoryView view = getOpenInventory();
@@ -629,7 +624,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "4.0")
 	public void assertInventoryView(InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
@@ -640,7 +635,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 *
 	 * @param type The {@link InventoryType} you are expecting
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "4.0")
 	public void assertInventoryView(InventoryType type)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
@@ -652,7 +647,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param message The message to display upon failure
 	 * @param type    The {@link InventoryType} you are expecting
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "4.0")
 	public void assertInventoryView(String message, InventoryType type)
 	{
 		assertInventoryView(message, type, inv -> true);
@@ -1124,7 +1119,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param sneak Whether the player is beginning to sneak.
 	 * @return The event.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull PlayerToggleSneakEvent simulateSneak(boolean sneak)
 	{
 		return new PlayerSimulation(this).simulateSneak(sneak);
@@ -1148,7 +1143,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param sprint Whether the player is beginning to sprint.
 	 * @return The event.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull PlayerToggleSprintEvent simulateSprint(boolean sprint)
 	{
 		return new PlayerSimulation(this).simulateSprint(sprint);
@@ -1181,7 +1176,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public void playNote(@NotNull Location loc, byte instrument, byte note)
 	{
 		playNote(loc, Instrument.getByType(instrument), note);
@@ -1421,7 +1416,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public void playEffect(@NotNull Location loc, @NotNull Effect effect, int data)
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
@@ -1467,7 +1462,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
@@ -2105,7 +2100,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12.2")
 	public void hidePlayer(@NotNull Player player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
@@ -2123,7 +2118,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12.2")
 	public void showPlayer(@NotNull Player player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
@@ -2232,7 +2227,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param fly Whether the player is starting to fly.
 	 * @return The event.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "4.0")
 	public @NotNull PlayerToggleFlightEvent simulateToggleFlight(boolean fly)
 	{
 		return new PlayerSimulation(this).simulateToggleFlight(fly);
@@ -2268,7 +2263,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.2")
 	public void setTexturePack(@NotNull String url)
 	{
 		// TODO Auto-generated method stub
@@ -2276,7 +2271,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.2")
 	public void setResourcePack(@NotNull String url)
 	{
 		// TODO Auto-generated method stub
@@ -2478,7 +2473,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public void sendTitle(String title, String subtitle)
 	{
 		this.title.add(title);
@@ -2706,22 +2701,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
-	public int getNoTickViewDistance()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated
-	public void setNoTickViewDistance(int viewDistance)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getSendViewDistance()
 	{
 		// TODO Auto-generated method stub
@@ -2815,14 +2794,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public PlayerResourcePackStatusEvent.@Nullable Status getResourcePackStatus()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public @Nullable String getResourcePackHash()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

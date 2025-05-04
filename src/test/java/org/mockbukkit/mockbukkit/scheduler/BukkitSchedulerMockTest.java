@@ -1,13 +1,5 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
-import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -17,7 +9,15 @@ import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -523,7 +523,7 @@ class BukkitSchedulerMockTest
 		{
 		}, 1L, 1L);
 		scheduler.setShutdownTimeout(1000L);
-		scheduler.shutdown();
+		assertDoesNotThrow(() -> scheduler.shutdown());
 	}
 
 	@Test
@@ -534,7 +534,7 @@ class BukkitSchedulerMockTest
 		}, 1L);
 		scheduler.performTicks(2);
 		scheduler.setShutdownTimeout(1000L);
-		scheduler.shutdown();
+		assertDoesNotThrow(() -> scheduler.shutdown());
 	}
 
 	@Test
