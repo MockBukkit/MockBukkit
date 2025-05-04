@@ -43,32 +43,15 @@ public class BoatMock extends VehicleMock implements Boat
 	public @NotNull TreeSpecies getWoodType()
 	{
 		EntityType boatType = getType();
-		if (boatType == EntityType.SPRUCE_BOAT || boatType == EntityType.SPRUCE_CHEST_BOAT)
+		return switch (boatType)
 		{
-			return TreeSpecies.REDWOOD;
-		}
-
-		if (boatType == EntityType.BIRCH_BOAT || boatType == EntityType.BIRCH_CHEST_BOAT)
-		{
-			return TreeSpecies.BIRCH;
-		}
-
-		if (boatType == EntityType.JUNGLE_BOAT || boatType == EntityType.JUNGLE_CHEST_BOAT)
-		{
-			return TreeSpecies.JUNGLE;
-		}
-
-		if (boatType == EntityType.ACACIA_BOAT || boatType == EntityType.ACACIA_CHEST_BOAT)
-		{
-			return TreeSpecies.ACACIA;
-		}
-
-		if (boatType == EntityType.DARK_OAK_BOAT || boatType == EntityType.DARK_OAK_CHEST_BOAT)
-		{
-			return TreeSpecies.DARK_OAK;
-		}
-
-		return TreeSpecies.GENERIC;
+			case ACACIA_BOAT, ACACIA_CHEST_BOAT -> TreeSpecies.ACACIA;
+			case BIRCH_BOAT, BIRCH_CHEST_BOAT -> TreeSpecies.BIRCH;
+			case DARK_OAK_BOAT, DARK_OAK_CHEST_BOAT -> TreeSpecies.DARK_OAK;
+			case JUNGLE_BOAT, JUNGLE_CHEST_BOAT -> TreeSpecies.JUNGLE;
+			case SPRUCE_BOAT, SPRUCE_CHEST_BOAT -> TreeSpecies.REDWOOD;
+			default -> TreeSpecies.GENERIC;
+		};
 	}
 
 	@Override
@@ -85,16 +68,16 @@ public class BoatMock extends VehicleMock implements Boat
 		EntityType boatType = getType();
 		return switch (boatType)
 		{
-		case ACACIA_BOAT, ACACIA_CHEST_BOAT -> Type.ACACIA;
-		case BAMBOO_RAFT, BAMBOO_CHEST_RAFT -> Type.BAMBOO;
-		case BIRCH_BOAT, BIRCH_CHEST_BOAT -> Type.BIRCH;
-		case CHERRY_BOAT, CHERRY_CHEST_BOAT -> Type.CHERRY;
-		case DARK_OAK_BOAT, DARK_OAK_CHEST_BOAT -> Type.DARK_OAK;
-		case JUNGLE_BOAT, JUNGLE_CHEST_BOAT -> Type.JUNGLE;
-		case MANGROVE_BOAT, MANGROVE_CHEST_BOAT -> Type.MANGROVE;
-		case OAK_BOAT, OAK_CHEST_BOAT -> Type.OAK;
-		case SPRUCE_BOAT, SPRUCE_CHEST_BOAT -> Type.SPRUCE;
-		default -> throw new EnumConstantNotPresentException(Type.class, boatType.toString());
+			case ACACIA_BOAT, ACACIA_CHEST_BOAT -> Type.ACACIA;
+			case BAMBOO_RAFT, BAMBOO_CHEST_RAFT -> Type.BAMBOO;
+			case BIRCH_BOAT, BIRCH_CHEST_BOAT -> Type.BIRCH;
+			case CHERRY_BOAT, CHERRY_CHEST_BOAT -> Type.CHERRY;
+			case DARK_OAK_BOAT, DARK_OAK_CHEST_BOAT -> Type.DARK_OAK;
+			case JUNGLE_BOAT, JUNGLE_CHEST_BOAT -> Type.JUNGLE;
+			case MANGROVE_BOAT, MANGROVE_CHEST_BOAT ->Type.MANGROVE;
+			case OAK_BOAT, OAK_CHEST_BOAT -> Type.OAK;
+			case SPRUCE_BOAT, SPRUCE_CHEST_BOAT -> Type.SPRUCE;
+			default -> throw new EnumConstantNotPresentException(Type.class, boatType.toString());
 		};
 	}
 
