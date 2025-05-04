@@ -4,6 +4,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -25,6 +26,24 @@ public class ArmadilloMock extends AnimalsMock implements Armadillo
 	public @NotNull EntityType getType()
 	{
 		return EntityType.ARMADILLO;
+	}
+
+	@Override
+	public State getState()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void rollUp()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void rollOut()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 }

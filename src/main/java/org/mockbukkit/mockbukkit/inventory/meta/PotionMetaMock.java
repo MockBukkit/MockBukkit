@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.potion.PotionUtils;
 
@@ -141,6 +142,12 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	public @NotNull @Unmodifiable List<PotionEffect> getAllEffects()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasCustomEffect(@NotNull PotionEffectType type)
 	{
 		return indexOf(type) != -1;
@@ -202,6 +209,12 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	public void setColor(@Nullable Color color)
 	{
 		this.color = color == null ? null : Color.fromRGB(color.asRGB());
+	}
+
+	@Override
+	public @NotNull Color computeEffectiveColor()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

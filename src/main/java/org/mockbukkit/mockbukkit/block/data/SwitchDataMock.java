@@ -7,7 +7,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Switch;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.FACE;
@@ -29,9 +28,7 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	public SwitchDataMock(@NotNull Material type)
 	{
 		super(type);
-		Set<Material> possibleTypes = new HashSet<>(Tag.BUTTONS.getValues());
-		possibleTypes.add(Material.LEVER);
-		checkType(type, possibleTypes.toArray(new Material[0]));
+		checkType(type, Switch.class);
 		super.set(FACE, AttachedFace.WALL);
 		super.set(FACING, BlockFace.NORTH);
 		super.set(POWERED, false);

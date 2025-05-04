@@ -53,7 +53,7 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return this.getLimitationValue(BlockDataLimitation.Type.FACES).getValue();
+		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
 	@Override

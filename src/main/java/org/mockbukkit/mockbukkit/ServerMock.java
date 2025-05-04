@@ -1,36 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
@@ -173,6 +142,37 @@ import org.mockbukkit.mockbukkit.util.UnsafeValuesMock;
 import org.mockbukkit.mockbukkit.world.ChunkDataMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
@@ -1719,6 +1719,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean getOnlineMode()
 	{
 		return this.serverConfiguration.isOnlineMode();
+	}
+
+	@NotNull
+	@Override
+	public io.papermc.paper.configuration.ServerConfiguration getServerConfig()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	/**

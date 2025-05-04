@@ -11,6 +11,7 @@ import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
+import io.papermc.paper.world.damagesource.CombatTracker;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
@@ -2020,6 +2021,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @Nullable Location getRespawnLocation()
 	{
 		return this.respawnLocation;
+	}
+
+	@Override
+	public @org.jspecify.annotations.Nullable Location getRespawnLocation(boolean loadLocationAndValidate)
+	{
+		return null;
 	}
 
 	@Override
