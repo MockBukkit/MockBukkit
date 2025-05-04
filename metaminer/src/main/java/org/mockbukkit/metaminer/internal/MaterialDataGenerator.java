@@ -19,11 +19,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MaterialDataGenerator implements DataGenerator
 {
 
 	private final File dataFolder;
+	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("\\[(.*)]");
 
 	public MaterialDataGenerator(File parentDataFolder)
 	{
@@ -49,40 +52,37 @@ public class MaterialDataGenerator implements DataGenerator
 			try
 			{
 				BlockData data = material.createBlockData();
-				String s = data.getAsString(false);
-
-				if (!s.contains("["))
+				String dataString = data.getAsString(false);
+				Matcher matcher = BLOCK_DATA_PATTERN.matcher(dataString);
+				if (!matcher.find())
 				{ // It has no states
-					json.add(s.trim(), new JsonObject());
+					json.add(material.key().toString(), new JsonObject());
 					continue;
 				}
+				String[] states = matcher.group(1).split(",");
 
-				String[] split = s.split("\\[");
-				String material_name = split[0];
-				String[] states = split[1].substring(0, split[1].length() - 1).split(",");
-
-				JsonArray printableStates = new JsonArray();
 				JsonObject obj = new JsonObject();
+				JsonObject defaultStates = new JsonObject();
 
 				for (String state : states)
 				{
 					String[] state_split = state.split("=");
 					String key = state_split[0].trim();
 					String value = state_split[1].trim();
-
-					printableStates.add(key);
-
-                    switch (value.toLowerCase()) {
-                        case "false" -> obj.add(key, new JsonPrimitive(false));
-                        case "true" -> obj.add(key, new JsonPrimitive(true));
-                        default -> obj.add(key, new JsonPrimitive(value));
-                    }
+					switch (value.toLowerCase())
+					{
+					case "false" -> defaultStates.add(key, new JsonPrimitive(false));
+					case "true" -> defaultStates.add(key, new JsonPrimitive(true));
+					default -> defaultStates.add(key, new JsonPrimitive(value));
+					}
 				}
 
-				obj.add("printableStates", printableStates);
-				extractCustomBlockDataProperties(data, obj);
+				JsonObject allowedStates = new JsonObject();
+				extractCustomBlockDataProperties(data, allowedStates);
+				obj.add("allowedStates", allowedStates);
+				obj.add("defaultStates", defaultStates);
 
-				json.add(material_name.trim(), obj);
+				json.add(material.key().toString(), obj);
 			}
 			catch (Exception ignored)
 			{
@@ -96,7 +96,7 @@ public class MaterialDataGenerator implements DataGenerator
 	{
 		if (data instanceof Ageable ageable)
 		{
-			obj.addProperty("maxAge", String.valueOf(ageable.getMaximumAge() ));
+			obj.addProperty("maxAge", String.valueOf(ageable.getMaximumAge()));
 		}
 
 		if (data instanceof AnaloguePowerable analoguePowerable)

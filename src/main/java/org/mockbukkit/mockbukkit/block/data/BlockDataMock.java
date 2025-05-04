@@ -101,6 +101,7 @@ public class BlockDataMock implements BlockData
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
 	private final @NotNull Material type;
+	private final Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> limitations;
 	private @NotNull Map<String, Object> data;
 	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("(^[a-z_:]+)(?:(\\[(.+)\\]$)|($))");
 
@@ -112,9 +113,9 @@ public class BlockDataMock implements BlockData
 	public BlockDataMock(@NotNull Material material)
 	{
 		checkMaterial(material);
-
 		this.type = material;
 		this.data = new LinkedHashMap<>();
+		this.limitations = BlockDataMockRegistry.getInstance().getLimitations(material);
 	}
 
 	@ApiStatus.Internal
@@ -286,24 +287,17 @@ public class BlockDataMock implements BlockData
 		return ((Collection<T>) value).stream().map(v -> (T) castObject(key, v)).collect(Collectors.toUnmodifiableSet());
 	}
 
+	protected <T> T getLimitationValue(BlockDataLimitation.Type<T, ?> type)
+	{
+		return (T) limitations.get(type).getValue();
+	}
+
 	@SuppressWarnings("unchecked")
 	protected <T> List<T> getAsList(@NotNull BlockDataKey key)
 	{
 		Object value = this.get(key);
 		Preconditions.checkArgument(value instanceof Collection<?>, "Cannot get property " + key + " as it is not a collection.");
 		return ((Collection<T>) value).stream().map(v -> (T) castObject(key, v)).toList();
-	}
-
-	protected Set<String> getPrintableStates()
-	{
-		try
-		{
-			return this.getAsSet(BlockDataKey.PRINTABLE_STATES);
-		} catch (IllegalArgumentException e)
-		{
-			// If we receive the illegal argument it means we don't have printable states.
-			return Collections.emptySet();
-		}
 	}
 
 	@Override
@@ -323,19 +317,12 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder(getMaterial().getKey() + "[");
 
-		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
+		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getDefaultData(type).keySet());
 		Collections.sort(keysToShow);
-
-		Set<String> printableStates = this.getPrintableStates();
 
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
-			if (!printableStates.contains(key))
-			{
-				// Do not include states that do not appear in bukkit
-				continue;
-			}
 
 			Object value = data.get(key);
 			if (value instanceof Enum<?> enumValue)

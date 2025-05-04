@@ -79,7 +79,7 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return this.getAsSet(BlockDataKey.FACES);
+		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
 	@Override

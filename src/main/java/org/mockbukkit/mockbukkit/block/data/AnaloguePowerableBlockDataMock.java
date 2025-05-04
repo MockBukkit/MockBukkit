@@ -34,7 +34,7 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	@Override
 	public int getMaximumPower()
 	{
-		return this.get(BlockDataKey.MAX_POWER);
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_POWER);
 	}
 
 }

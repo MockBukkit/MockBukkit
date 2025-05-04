@@ -34,7 +34,7 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	@Override
 	public int getMaximumStage()
 	{
-		return this.get(BlockDataKey.MAX_STAGE_KEY);
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_STAGE);
 	}
 
 }
