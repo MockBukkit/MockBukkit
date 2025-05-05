@@ -28,6 +28,7 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
