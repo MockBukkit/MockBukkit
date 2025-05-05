@@ -368,9 +368,9 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	public <T> T getData(@NotNull DataComponentType.Valued<T> dataComponentType)
+	public void setData(@NotNull DataComponentType.NonValued nonValued)
 	{
-		return (T) this.valuedDataComponents.get(dataComponentType);
+		this.nonValuedDataComponents.add(nonValued);
 	}
 
 	public static ItemStack empty()
