@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -45,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -726,6 +729,41 @@ class ItemStackMockTest
 		Map<String, Object> serialized = item.serialize();
 		ItemStackMock deserialized = (ItemStackMock) ItemStackMock.deserialize(serialized);
 		assertEquals(item, deserialized);
+	}
+
+	@Test
+	void setData_nullThrows1()
+	{
+		ItemStack itemStack = new ItemStack(Material.CLOCK);
+		assertThrows(NullPointerException.class, () -> itemStack.setData((DataComponentType.NonValued) null));
+	}
+
+	@Test
+	void setData_nullThrows2()
+	{
+		ItemStack itemStack = new ItemStack(Material.CLOCK);
+		assertThrows(NullPointerException.class, () -> itemStack.setData(DataComponentTypes.DAMAGE, (Integer) null));
+	}
+
+	@Test
+	void setData_nullThrows3()
+	{
+		ItemStack itemStack = new ItemStack(Material.CLOCK);
+		assertThrows(NullPointerException.class, () -> itemStack.setData(null, new Object()));
+	}
+
+	@Test
+	void setData_doesNotThrow1()
+	{
+		ItemStack itemStack = new ItemStack(Material.CLOCK);
+		assertDoesNotThrow(() -> itemStack.setData(DataComponentTypes.DAMAGE, 1));
+	}
+
+	@Test
+	void setData_doesNotThrow2()
+	{
+		ItemStack itemStack = new ItemStack(Material.CLOCK);
+		assertDoesNotThrow(() -> itemStack.setData(DataComponentTypes.GLIDER));
 	}
 
 }
