@@ -71,7 +71,7 @@ public class BlockDataLimitation<T, U>
 						.map(JsonElement::getAsString)
 						.map(string -> string.toUpperCase(Locale.ROOT))
 						.map(BlockFace::valueOf)
-						.collect(Collectors.toSet())
+						.collect(Collectors.toUnmodifiableSet())
 		));
 
 		private final String key;
