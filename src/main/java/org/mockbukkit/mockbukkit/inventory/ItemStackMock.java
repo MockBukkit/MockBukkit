@@ -2,6 +2,8 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import io.papermc.paper.datacomponent.DataComponentBuilder;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
@@ -25,6 +27,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -35,6 +38,8 @@ public class ItemStackMock extends ItemStack
 
 	private static final String FIELD_AMOUNT = "amount";
 	private static final String FIELD_MATERIAL = "type";
+	private Map<DataComponentType.Valued<?>, Object> valuedDataComponents = new HashMap<>();
+	private Set<DataComponentType.NonValued> nonValuedDataComponents = new HashSet<>();
 
 	@NonNull
 	@ApiStatus.Internal
@@ -348,6 +353,24 @@ public class ItemStackMock extends ItemStack
 	{
 		//TODO
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> void setData(@NotNull DataComponentType.Valued<T> dataComponentType, @NotNull DataComponentBuilder<T> builder)
+	{
+		this.valuedDataComponents.put(dataComponentType, builder.build());
+	}
+
+	@Override
+	public <T> void setData(@NotNull DataComponentType.Valued<T> dataComponentType, @NotNull T data)
+	{
+		this.valuedDataComponents.put(dataComponentType, data);
+	}
+
+	@Override
+	public <T> T getData(@NotNull DataComponentType.Valued<T> dataComponentType)
+	{
+		return (T) this.valuedDataComponents.get(dataComponentType);
 	}
 
 	public static ItemStack empty()
