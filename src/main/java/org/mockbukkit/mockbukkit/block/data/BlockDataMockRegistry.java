@@ -52,15 +52,26 @@ public class BlockDataMockRegistry
 				throw new IllegalArgumentException("Expected json object");
 			}
 			Gson gson = new Gson();
-			Map<String, Object> defaultStates = gson.fromJson(jsonObject.get("defaultStates"), new TypeToken<Map<String, Object>>()
+			Map<String, Object> defaultStates;
+			if (jsonObject.has("defaultStates"))
 			{
-			}.getType());
-			ImmutableMap.Builder<BlockDataLimitation.Type<?,?>, BlockDataLimitation<?,?>> allowedStates = ImmutableMap.builder();
-			for (Map.Entry<String, JsonElement> entry : jsonObject.get("allowedStates").getAsJsonObject().entrySet())
+				defaultStates = gson.fromJson(jsonObject.get("defaultStates"), new TypeToken<Map<String, Object>>()
+				{
+				}.getType());
+			}
+			else
 			{
-				// No error handling, should just fail if the input is wrong
-				BlockDataLimitation.Type<?,?> limitation = BlockDataLimitation.Type.fromKey(entry.getKey());
-				allowedStates.put(limitation, limitation.newLimitation(entry.getValue()));
+				defaultStates = Map.of();
+			}
+			ImmutableMap.Builder<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> allowedStates = ImmutableMap.builder();
+			if (jsonObject.has("allowedStates"))
+			{
+				for (Map.Entry<String, JsonElement> entry : jsonObject.get("allowedStates").getAsJsonObject().entrySet())
+				{
+					// No error handling, should just fail if the input is wrong
+					BlockDataLimitation.Type<?, ?> limitation = BlockDataLimitation.Type.fromKey(entry.getKey());
+					allowedStates.put(limitation, limitation.newLimitation(entry.getValue()));
+				}
 			}
 			return new MaterialData(defaultStates, allowedStates.build());
 		}
@@ -126,7 +137,7 @@ public class BlockDataMockRegistry
 		return blockData.get(state);
 	}
 
-	public @NotNull Map<BlockDataLimitation.Type<?,?>, BlockDataLimitation<?,?>> getLimitations(Material material)
+	public @NotNull Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> getLimitations(Material material)
 	{
 		MaterialData materialData = blockData.get(material);
 		if (materialData == null)
@@ -136,7 +147,8 @@ public class BlockDataMockRegistry
 		return materialData.limitations();
 	}
 
-	private record MaterialData(Map<String, Object> defaultValues, Map<BlockDataLimitation.Type<?,?>, BlockDataLimitation<?,?>> limitations)
+	private record MaterialData(Map<String, Object> defaultValues,
+								Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> limitations)
 	{
 
 	}
