@@ -358,19 +358,24 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public <T> void setData(@NotNull DataComponentType.Valued<T> dataComponentType, @NotNull DataComponentBuilder<T> builder)
 	{
+		Preconditions.checkNotNull(dataComponentType);
+		Preconditions.checkNotNull(builder);
 		this.valuedDataComponents.put(dataComponentType, builder.build());
 	}
 
 	@Override
 	public <T> void setData(@NotNull DataComponentType.Valued<T> dataComponentType, @NotNull T data)
 	{
+		Preconditions.checkNotNull(dataComponentType);
+		Preconditions.checkNotNull(data);
 		this.valuedDataComponents.put(dataComponentType, data);
 	}
 
 	@Override
-	public void setData(@NotNull DataComponentType.NonValued nonValued)
+	public void setData(@NotNull DataComponentType.NonValued dataComponentType)
 	{
-		this.nonValuedDataComponents.add(nonValued);
+		Preconditions.checkNotNull(dataComponentType);
+		this.nonValuedDataComponents.add(dataComponentType);
 	}
 
 	public static ItemStack empty()
