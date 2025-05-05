@@ -3302,4 +3302,55 @@ class PlayerMockTest
 
 	}
 
+	@Nested
+	class SetFlySpeed
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0.1F, player.getFlySpeed());
+		}
+
+		@ParameterizedTest
+		@ValueSource(floats = {-1.0F, -0.5F, 0.0F, 0.5F, 1.0F})
+		void givenPossibleValue(float value)
+		{
+
+			player.setFlySpeed(value);
+
+			assertEquals(value, player.getFlySpeed());
+		}
+
+		@ParameterizedTest
+		@ValueSource(floats = {-1.001F, 1.001F})
+		void givenNonPossibleValue(float value)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setFlySpeed(value));
+			assertEquals(String.format("Speed value (%s) need to be between -1f and 1f", value), e.getMessage());
+		}
+	}
+
+	@Nested
+	class SetAffectsSpawning
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertTrue(player.getAffectsSpawning());
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenPossibleValue(boolean value)
+		{
+
+			player.setAffectsSpawning(value);
+
+			assertEquals(value, player.getAffectsSpawning());
+		}
+
+	}
+
 }
