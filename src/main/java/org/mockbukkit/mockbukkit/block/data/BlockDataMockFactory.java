@@ -4,13 +4,19 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import org.bukkit.Material;
 import org.bukkit.Tag;
+import org.bukkit.block.data.Ageable;
+import org.bukkit.block.data.AnaloguePowerable;
+import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
+import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TestBlock;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +26,7 @@ import java.util.function.Function;
 
 public final class BlockDataMockFactory
 {
+
 	/**
 	 * This factory tries to create the block data from a material {@link Tag}.
 	 */
@@ -48,6 +55,12 @@ public final class BlockDataMockFactory
 			.put(Orientable.class, OrientableMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
+			.put(Barrel.class, BarrelDataMock::new)
+			.put(Sapling.class, SaplingDataMock::new)
+			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)
+			.put(Snowable.class, SnowableDataMock::new)
+			.put(Ageable.class, AgeableDataMock::new)
+			.put(Bisected.class, BisectedDataMock::new)
 			.build();
 
 	/**
