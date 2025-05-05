@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import org.bukkit.block.BlockFace;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
@@ -80,7 +81,8 @@ public class BlockDataLimitation<T, U>
 		private static Map<String, Type<?, ?>> compileKeys()
 		{
 			return Arrays.stream(Type.class.getDeclaredFields())
-					.filter(field -> field.getDeclaringClass().isAssignableFrom(Type.class))
+					.filter(field -> field.getType().isAssignableFrom(Type.class))
+					.filter(field -> Modifier.isStatic(field.getModifiers()))
 					.map(field ->
 					{
 						try
