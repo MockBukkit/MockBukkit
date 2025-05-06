@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.LodestoneTracker;
 import org.bukkit.Location;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,9 +21,6 @@ import java.util.Objects;
 public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 {
 
-	private @Nullable Location lodestone;
-	private boolean tracked;
-
 	/**
 	 * Constructs a new {@link CompassMetaMock}.
 	 */
@@ -38,43 +37,68 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public CompassMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof CompassMeta compass)
-		{
-			this.lodestone = compass.getLodestone();
-			this.tracked = compass.isLodestoneTracked();
-		}
 	}
 
 	@Override
 	public boolean hasLodestone()
 	{
-		return this.lodestone != null;
+		LodestoneTracker lodestoneTracker = get(DataComponentTypes.LODESTONE_TRACKER);
+		if (lodestoneTracker == null)
+		{
+			return false;
+		}
+		return lodestoneTracker.location() != null;
 	}
 
 	@Override
 	public @Nullable Location getLodestone()
 	{
-		return this.lodestone;
+		LodestoneTracker lodestoneTracker = get(DataComponentTypes.LODESTONE_TRACKER);
+		if (lodestoneTracker == null)
+		{
+			return null;
+		}
+		return lodestoneTracker.location();
 	}
 
 	@Override
 	public void setLodestone(@Nullable Location lodestone)
 	{
 		Preconditions.checkArgument(lodestone == null || lodestone.getWorld() != null, "world is null");
-		this.lodestone = lodestone;
+		LodestoneTracker lodestoneTracker = get(DataComponentTypes.LODESTONE_TRACKER);
+		if (lodestoneTracker == null)
+		{
+			set(DataComponentTypes.LODESTONE_TRACKER, LodestoneTracker.lodestoneTracker().location(lodestone).build());
+		}
+		else
+		{
+			set(DataComponentTypes.LODESTONE_TRACKER, LodestoneTracker.lodestoneTracker(lodestone, lodestoneTracker.tracked()));
+		}
 	}
 
 	@Override
 	public boolean isLodestoneTracked()
 	{
-		return this.tracked;
+		LodestoneTracker lodestoneTracker = get(DataComponentTypes.LODESTONE_TRACKER);
+		if (lodestoneTracker == null)
+		{
+			return false;
+		}
+		return lodestoneTracker.tracked();
 	}
 
 	@Override
 	public void setLodestoneTracked(boolean tracked)
 	{
-		this.tracked = tracked;
+		LodestoneTracker lodestoneTracker = get(DataComponentTypes.LODESTONE_TRACKER);
+		if (lodestoneTracker == null)
+		{
+			set(DataComponentTypes.LODESTONE_TRACKER, LodestoneTracker.lodestoneTracker().tracked(tracked).build());
+		}
+		else
+		{
+			set(DataComponentTypes.LODESTONE_TRACKER, LodestoneTracker.lodestoneTracker(lodestoneTracker.location(), tracked));
+		}
 	}
 
 	@Override
@@ -92,32 +116,9 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	}
 
 	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int hash = super.hashCode();
-		hash = prime * hash + (this.lodestone != null ? this.lodestone.hashCode() : 0);
-		hash = prime * hash + (this.tracked ? 1 : 0);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof CompassMeta meta))
-		{
-			return false;
-		}
-		return super.equals(obj) && Objects.equals(this.lodestone, meta.getLodestone()) && this.tracked == meta.isLodestoneTracked();
-	}
-
-	@Override
 	public @NotNull CompassMetaMock clone()
 	{
-		CompassMetaMock clone = (CompassMetaMock) super.clone();
-		clone.lodestone = this.lodestone == null ? null : this.lodestone.clone();
-		clone.tracked = this.tracked;
-		return clone;
+		return (CompassMetaMock) super.clone();
 	}
 
 	/**
@@ -130,27 +131,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	{
 		CompassMetaMock serialMock = new CompassMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.lodestone = (Location) args.get("lodestone");
-		serialMock.tracked = (boolean) args.get("tracked");
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an CompassMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the CompassMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		if (this.lodestone != null)
-		{
-			serialized.put("lodestone", this.lodestone);
-		}
-		serialized.put("tracked", this.tracked);
-		return serialized;
 	}
 
 	@Override
