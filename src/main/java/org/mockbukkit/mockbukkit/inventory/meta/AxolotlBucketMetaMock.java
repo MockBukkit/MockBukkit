@@ -1,8 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -15,14 +19,18 @@ import java.util.Map;
 public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucketMeta
 {
 
-	private Axolotl.Variant variant;
-
 	/**
 	 * Constructs a new {@link AxolotlBucketMetaMock}.
 	 */
 	public AxolotlBucketMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public AxolotlBucketMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -33,62 +41,32 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	public AxolotlBucketMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof AxolotlBucketMeta bucketMeta)
-		{
-			variant = bucketMeta.getVariant();
-		}
 	}
 
 	@Override
 	public @NotNull Axolotl.Variant getVariant()
 	{
-		return this.variant;
+		Preconditions.checkArgument(hasVariant(), "Variant is absent, check hasVariant first!");
+		return get(DataComponentTypes.AXOLOTL_VARIANT);
 	}
 
 	@Override
 	public void setVariant(@NotNull Axolotl.Variant variant)
 	{
-		if (variant == null)
-		{
-			variant = Axolotl.Variant.LUCY;
-		}
-		this.variant = variant;
+		Preconditions.checkNotNull(variant);
+		set(DataComponentTypes.AXOLOTL_VARIANT, variant);
 	}
 
 	@Override
 	public boolean hasVariant()
 	{
-		return this.variant != null;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (this.variant != null ? this.variant.hashCode() : 0);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof AxolotlBucketMeta meta))
-		{
-			return false;
-		}
-		return super.equals(obj) && this.variant == meta.getVariant();
+		return has(DataComponentTypes.AXOLOTL_VARIANT);
 	}
 
 	@Override
 	public @NotNull AxolotlBucketMetaMock clone()
 	{
-		AxolotlBucketMetaMock clone = (AxolotlBucketMetaMock) super.clone();
-
-		clone.variant = this.variant;
-
-		return clone;
+		return (AxolotlBucketMetaMock) super.clone();
 	}
 
 	/**
@@ -101,22 +79,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	{
 		AxolotlBucketMetaMock serialMock = new AxolotlBucketMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.variant = (Axolotl.Variant) args.get("variant");
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an AxolotlBucketMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the AxolotlBucketMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		serialized.put("variant", this.variant);
-		return serialized;
 	}
 
 	@Override
