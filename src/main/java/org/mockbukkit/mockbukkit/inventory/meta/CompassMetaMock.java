@@ -1,17 +1,18 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.LodestoneTracker;
 import org.bukkit.Location;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of a {@link CompassMeta}.
@@ -27,6 +28,12 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public CompassMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public CompassMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
