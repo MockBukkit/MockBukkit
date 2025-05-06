@@ -1,10 +1,13 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.BundleContents;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,16 +23,18 @@ import java.util.Map;
 public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 {
 
-	private List<ItemStack> items;
-
 	/**
 	 * Constructs a new {@link BundleMetaMock}.
 	 */
 	public BundleMetaMock()
 	{
 		super();
+	}
 
-		this.items = new ArrayList<>();
+	@ApiStatus.Internal
+	public BundleMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -40,78 +45,61 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	public BundleMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof BundleMeta bundleMeta)
-		{
-			this.items = new ArrayList<>(bundleMeta.getItems());
-		}
-		else
-		{
-			this.items = new ArrayList<>();
-		}
 	}
 
 	@Override
 	public boolean hasItems()
 	{
-		return !this.items.isEmpty();
+		BundleContents bundleContents = get(DataComponentTypes.BUNDLE_CONTENTS);
+		if (bundleContents == null)
+		{
+			return false;
+		}
+		return !bundleContents.contents().isEmpty();
 	}
 
 	@Override
 	public @NotNull List<ItemStack> getItems()
 	{
-		return ImmutableList.copyOf(items);
+		BundleContents bundleContents = get(DataComponentTypes.BUNDLE_CONTENTS);
+		if (bundleContents == null)
+		{
+			return List.of();
+		}
+		return bundleContents.contents();
 	}
 
 	@Override
 	public void setItems(@Nullable List<ItemStack> items)
 	{
-		this.items.clear();
-
 		if (items == null)
 		{
-			return;
+			unset(DataComponentTypes.BUNDLE_CONTENTS);
 		}
-
-		for (ItemStack i : items)
-		{
-			this.addItem(i);
-		}
+		set(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(items));
 	}
 
 	@Override
 	public void addItem(@NotNull ItemStack item)
 	{
 		Preconditions.checkArgument(item != null && !item.getType().isAir(), "item is null or air");
-
-		this.items.add(item);
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (items.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof BundleMeta meta))
+		BundleContents bundleContents = get(DataComponentTypes.BUNDLE_CONTENTS);
+		if (bundleContents == null)
 		{
-			return false;
+			set(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(List.of(item)));
 		}
-		return super.equals(obj) && this.getItems().equals(meta.getItems());
+		else
+		{
+			List<ItemStack> contents = new ArrayList<>(bundleContents.contents());
+			contents.add(item);
+			set(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+		}
 	}
 
 	@Override
 	public @NotNull BundleMetaMock clone()
 	{
-		BundleMetaMock clone = (BundleMetaMock) super.clone();
-		clone.items = new ArrayList<>(this.items.stream().map(ItemStack::clone).toList());
-		return clone;
+		return (BundleMetaMock) super.clone();
 	}
 
 	/**
@@ -125,22 +113,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	{
 		BundleMetaMock serialMock = new BundleMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.items = args.get("items") == null ? new ArrayList<>() : (List<ItemStack>) args.get("items");
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an BundleMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the BundleMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		serialized.put("items", this.items);
-		return serialized;
 	}
 
 	@Override
