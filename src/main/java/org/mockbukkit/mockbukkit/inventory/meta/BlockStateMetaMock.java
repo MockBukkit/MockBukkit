@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.block.state.BarrelStateMock;
 import org.mockbukkit.mockbukkit.block.state.BeaconStateMock;
@@ -129,6 +131,12 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 
 	private BlockStateMetaMock()
 	{
+	}
+
+	@ApiStatus.Internal
+	public BlockStateMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
