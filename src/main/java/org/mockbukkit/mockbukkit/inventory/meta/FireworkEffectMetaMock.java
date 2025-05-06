@@ -1,13 +1,15 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of an {@link FireworkEffectMeta}.
@@ -17,14 +19,18 @@ import java.util.Objects;
 public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffectMeta
 {
 
-	private @Nullable FireworkEffect effect;
-
 	/**
 	 * Constructs a new {@link FireworkEffectMetaMock}.
 	 */
 	public FireworkEffectMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public FireworkEffectMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -35,64 +41,38 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	public FireworkEffectMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof FireworkEffectMeta fireworkEffectMeta)
-		{
-			this.effect = fireworkEffectMeta.getEffect();
-		}
 	}
 
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + (effect != null ? effect.hashCode() : 0);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (!super.equals(obj))
-		{
-			return false;
-		}
-		if (!(obj instanceof FireworkEffectMetaMock other))
-		{
-			return false;
-		}
-
-		return Objects.equals(effect, other.effect);
-	}
 
 	@Override
 	public @NotNull FireworkEffectMetaMock clone()
 	{
-		FireworkEffectMetaMock mock = (FireworkEffectMetaMock) super.clone();
-		mock.effect = this.effect;
-		return mock;
+		return (FireworkEffectMetaMock) super.clone();
 	}
 
 	@Override
 	public void setEffect(@Nullable FireworkEffect effect)
 	{
-		this.effect = effect;
+		if (effect == null)
+		{
+			unset(DataComponentTypes.FIREWORK_EXPLOSION);
+		}
+		else
+		{
+			set(DataComponentTypes.FIREWORK_EXPLOSION, effect);
+		}
 	}
 
 	@Override
 	public boolean hasEffect()
 	{
-		return effect != null;
+		return has(DataComponentTypes.FIREWORK_EXPLOSION);
 	}
 
 	@Override
 	public @Nullable FireworkEffect getEffect()
 	{
-		return effect;
+		return get(DataComponentTypes.FIREWORK_EXPLOSION);
 	}
 
 	/**
@@ -106,28 +86,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	{
 		FireworkEffectMetaMock serialMock = new FireworkEffectMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("effect"))
-		{
-			serialMock.effect = (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) args.get("effect"));
-		}
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an FireworkEffectMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the FireworkEffectMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		if (effect != null)
-		{
-			serialized.put("effect", effect.serialize());
-		}
-		return serialized;
 	}
 
 	@Override
