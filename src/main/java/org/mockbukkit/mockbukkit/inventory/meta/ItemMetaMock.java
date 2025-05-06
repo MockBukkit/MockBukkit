@@ -21,6 +21,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -178,6 +179,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		data.remove(dataComponentType);
 	}
 
+	protected boolean has(DataComponentType dataComponentType)
+	{
+		return data.containsKey(dataComponentType);
+	}
 
 	@Override
 	public boolean hasCustomName()
@@ -257,7 +262,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public ItemMetaMock clone()
+	public @NotNull ItemMetaMock clone()
 	{
 		try
 		{
@@ -500,6 +505,28 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		output.put("PublicBukkitValues", this.persistentDataContainer.serialize());
 		return output;
+	}
+
+	public static @NotNull ItemMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		ItemMetaMock serialMock = new ItemMetaMock();
+		serialMock.deserializeInternal(args);
+		return serialMock;
+	}
+
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
+	{
+		for (Map.Entry<String, Object> entry : args.entrySet())
+		{
+			if (entry.getKey().equals("PublicBukkitValues"))
+			{
+				this.persistentDataContainer = (PersistentDataContainerMock) entry.getValue();
+				continue;
+			}
+			NamespacedKey key = NamespacedKey.minecraft(entry.getKey());
+			// TODO proper nbt values
+			data.put(Registry.DATA_COMPONENT_TYPE.get(key), entry.getValue());
+		}
 	}
 
 	@Override
