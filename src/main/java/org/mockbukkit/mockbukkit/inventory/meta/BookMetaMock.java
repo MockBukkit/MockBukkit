@@ -2,12 +2,14 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import io.papermc.paper.datacomponent.DataComponentType;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.common.returnsreceiver.qual.This;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -37,6 +39,12 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	public BookMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public BookMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
