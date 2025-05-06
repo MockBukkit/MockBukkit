@@ -159,6 +159,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		return (T) data.get(dataComponentType);
 	}
 
+	protected <T> @NotNull T getOrDefault(DataComponentType.Valued<T> dataComponentType, @NotNull T defaultT)
+	{
+		T value = get(dataComponentType);
+		return value == null ? defaultT : value;
+	}
+
 	protected boolean get(DataComponentType.NonValued dataComponentType)
 	{
 		return data.containsKey(dataComponentType);
