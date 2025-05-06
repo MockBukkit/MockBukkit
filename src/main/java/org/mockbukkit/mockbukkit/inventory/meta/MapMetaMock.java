@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.MapId;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
@@ -23,7 +26,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	private static final byte SCALING_TRUE = (byte) 1;
 	private static final byte SCALING_FALSE = (byte) 2;
 
-	private Integer mapId;
 	private @Nullable MapView mapView;
 	private @Nullable Color color;
 	private byte scaling = SCALING_EMPTY;
@@ -47,10 +49,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 
 		if (meta instanceof MapMeta mapMeta)
 		{
-			if (mapMeta.hasMapId())
-			{
-				this.mapId = mapMeta.getMapId();
-			}
 			this.mapView = mapMeta.getMapView();
 			this.color = mapMeta.getColor();
 			if (mapMeta instanceof MapMetaMock metaMock)
@@ -68,29 +66,26 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	@Override
 	public boolean hasMapId()
 	{
-		return this.mapId != null;
+		return has(DataComponentTypes.MAP_ID);
 	}
 
 	@Override
 	public int getMapId()
 	{
-		if (this.mapId == null)
-		{
-			throw new IllegalStateException("Map ID is not set. Are you checking #hasMapId() first?");
-		}
-		return this.mapId;
+		Preconditions.checkState(hasMapId(), "Map ID is not set. Are you checking #hasMapId() first?");
+		return get(DataComponentTypes.MAP_ID).id();
 	}
 
 	@Override
 	public void setMapId(int id)
 	{
-		this.mapId = id;
+		set(DataComponentTypes.MAP_ID, MapId.mapId(id));
 	}
 
 	@Override
 	public boolean hasMapView()
 	{
-		return this.mapView != null;
+		return mapView != null;
 	}
 
 	@Override
@@ -100,7 +95,7 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	}
 
 	@Override
-	public void setMapView(MapView map)
+	public void setMapView(@Nullable MapView map)
 	{
 		this.mapView = map;
 	}
@@ -162,7 +157,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((mapId == null) ? 0 : mapId.hashCode());
 		result = prime * result + ((mapView == null) ? 0 : mapView.hashCode());
 		result = prime * result + (scaling);
 		return result;
@@ -176,9 +170,9 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 			return false;
 		}
 		if (!super.equals(obj) ||
-				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
-				!Objects.equals(this.mapView, meta.getMapView()) ||
-				!Objects.equals(this.color, meta.getColor())) return false;
+				((this.hasMapId() || meta.hasMapId()) ||
+						!Objects.equals(this.mapView, meta.getMapView()) ||
+						!Objects.equals(this.color, meta.getColor()))) return false;
 		if (meta instanceof MapMetaMock mapMeta) return this.scaling == mapMeta.scaling;
 		return meta.isScaling() ? this.scaling == 1 : this.scaling == 2;
 	}
@@ -188,7 +182,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		MapMetaMock clone = (MapMetaMock) super.clone();
 		clone.color = this.color;
-		clone.mapId = this.mapId;
 		clone.mapView = this.mapView;
 		clone.scaling = this.scaling;
 		return clone;
@@ -204,7 +197,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		MapMetaMock serialMock = new MapMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.mapId = (Integer) args.get("map-id");
 		serialMock.mapView = (MapView) args.get("map-view");
 		if (args.containsKey("color"))
 		{
@@ -224,10 +216,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		if (this.mapId != null)
-		{
-			serialized.put("map-id", this.mapId);
-		}
 		if (this.mapView != null)
 		{
 			serialized.put("map-view", this.mapView);
