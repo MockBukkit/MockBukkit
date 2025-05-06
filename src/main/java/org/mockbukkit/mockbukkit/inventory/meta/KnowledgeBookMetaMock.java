@@ -1,12 +1,17 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import net.kyori.adventure.key.Key;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +26,18 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 
 	private static final int MAX_RECIPES = 32767;
 
-	private final List<NamespacedKey> recipes = new ArrayList<>();
-
 	/**
 	 * Constructs a new {@link KnowledgeBookMetaMock}.
 	 */
 	public KnowledgeBookMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public KnowledgeBookMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -39,82 +48,44 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	public KnowledgeBookMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof KnowledgeBookMeta bookMeta)
-		{
-			recipes.addAll(bookMeta.getRecipes());
-		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + recipes.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (!super.equals(obj))
-		{
-			return false;
-		}
-		if (!(obj instanceof KnowledgeBookMetaMock other))
-		{
-			return false;
-		}
-
-		return recipes.equals(other.recipes);
 	}
 
 	@Override
 	public @NotNull KnowledgeBookMetaMock clone()
 	{
-		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
-		mock.recipes.addAll(recipes);
-		return mock;
+		return (KnowledgeBookMetaMock) super.clone();
 	}
 
 	@Override
 	public void addRecipe(@NotNull NamespacedKey @NotNull ... recipes)
 	{
-		for (NamespacedKey recipe : recipes)
-		{
-			if (this.recipes.size() >= MAX_RECIPES)
-			{
-				return;
-			}
-
-			if (recipe != null)
-			{
-				this.recipes.add(recipe);
-			}
-		}
+		List<Key> existingRecipes = new ArrayList<>(getOrDefault(DataComponentTypes.RECIPES, List.of()));
+		List<Key> recipeList = Arrays.asList(recipes);
+		int remainingEmptySlots = MAX_RECIPES - existingRecipes.size();
+		existingRecipes.addAll(recipeList.subList(0, Math.min(remainingEmptySlots, recipeList.size())));
+		set(DataComponentTypes.RECIPES, List.copyOf(existingRecipes));
 	}
 
 	@Override
 	public @NotNull List<NamespacedKey> getRecipes()
 	{
-		return Collections.unmodifiableList(recipes);
+		return getOrDefault(DataComponentTypes.RECIPES, List.of())
+				.stream()
+				.map(NamespacedKey.class::cast)
+				.toList();
 	}
 
 	@Override
 	public boolean hasRecipes()
 	{
-		return !recipes.isEmpty();
+		return !getOrDefault(DataComponentTypes.RECIPES, List.of()).isEmpty();
 	}
 
 	@Override
 	public void setRecipes(@NotNull List<NamespacedKey> recipes)
 	{
-		this.recipes.clear();
-		this.addRecipe(recipes.toArray(new NamespacedKey[0]));
+		Preconditions.checkNotNull(recipes);
+		set(DataComponentTypes.RECIPES, List.copyOf(recipes));
 	}
 
 	/**
@@ -128,26 +99,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	{
 		KnowledgeBookMetaMock serialMock = new KnowledgeBookMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("recipes"))
-		{
-			serialMock.addRecipe(((List<String>) args.get("recipes")).stream().map(NamespacedKey::fromString).toArray(NamespacedKey[]::new));
-		}
-
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an KnowledgeBookMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the KnowledgeBookMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		serialized.put("recipes", recipes.stream().map(NamespacedKey::toString).toList());
-		return serialized;
 	}
 
 	@Override
