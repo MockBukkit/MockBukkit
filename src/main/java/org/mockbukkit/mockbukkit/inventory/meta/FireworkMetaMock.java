@@ -1,16 +1,18 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.Fireworks;
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of an {@link FireworkMeta}.
@@ -20,15 +22,18 @@ import java.util.Objects;
 public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 {
 
-	private @NotNull List<FireworkEffect> effects = new ArrayList<>();
-	private Integer power;
-
 	/**
 	 * Constructs a new {@link FireworkMetaMock}.
 	 */
 	public FireworkMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public FireworkMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -39,58 +44,29 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	public FireworkMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof FireworkMeta fireworkMeta)
-		{
-			if (fireworkMeta.hasEffects())
-			{
-				this.effects.addAll(fireworkMeta.getEffects());
-			}
-			if (fireworkMeta.hasPower())
-			{
-				this.power = fireworkMeta.getPower();
-			}
-		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(super.hashCode(), effects, power);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (!super.equals(obj))
-		{
-			return false;
-		}
-		if (!(obj instanceof FireworkMetaMock other))
-		{
-			return false;
-		}
-
-		return Objects.equals(effects, other.effects) && Objects.equals(power, other.power);
 	}
 
 	@Override
 	public @NotNull FireworkMetaMock clone()
 	{
-		FireworkMetaMock mock = (FireworkMetaMock) super.clone();
-		mock.effects = new ArrayList<>(this.effects);
-		return mock;
+		return (FireworkMetaMock) super.clone();
 	}
 
 	@Override
 	public void addEffect(@NotNull FireworkEffect effect)
 	{
 		Preconditions.checkNotNull(effect, "effect must never be null");
-		effects.add(effect);
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			set(DataComponentTypes.FIREWORKS, Fireworks.fireworks().addEffect(effect).build());
+		}
+		else
+		{
+			List<FireworkEffect> effects = new ArrayList<>(fireworks.effects());
+			effects.add(effect);
+			set(DataComponentTypes.FIREWORKS, Fireworks.fireworks().addEffects(effects).build());
+		}
 	}
 
 	@Override
@@ -118,43 +94,70 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	@Override
 	public @NotNull List<FireworkEffect> getEffects()
 	{
-		return ImmutableList.copyOf(effects);
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			return List.of();
+		}
+		return fireworks.effects();
 	}
 
 	@Override
 	public int getEffectsSize()
 	{
-		return effects.size();
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			return 0;
+		}
+		return fireworks.effects().size();
 	}
 
 	@Override
 	public void removeEffect(int index)
 	{
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			return;
+		}
+		List<FireworkEffect> effects = new ArrayList<>(fireworks.effects());
 		effects.remove(index);
+		set(DataComponentTypes.FIREWORKS, Fireworks.fireworks(effects, fireworks.flightDuration()));
 	}
 
 	@Override
 	public void clearEffects()
 	{
-		effects.clear();
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			return;
+		}
+		set(DataComponentTypes.FIREWORKS, Fireworks.fireworks(List.of(), fireworks.flightDuration()));
 	}
 
 	@Override
 	public boolean hasEffects()
 	{
-		return !effects.isEmpty();
+		return !getEffects().isEmpty();
 	}
 
 	@Override
 	public boolean hasPower()
 	{
-		return power != null;
+		return has(DataComponentTypes.FIREWORKS);
 	}
 
 	@Override
 	public int getPower()
 	{
-		return power != null ? power : 0;
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			return 0;
+		}
+		return fireworks.flightDuration();
 	}
 
 	@Override
@@ -163,7 +166,15 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		Preconditions.checkArgument(power >= 0, "power cannot be less than zero: %s", power);
 		Preconditions.checkArgument(power <= 255, "power cannot be more than 255: %s", power);
 
-		this.power = power;
+		Fireworks fireworks = get(DataComponentTypes.FIREWORKS);
+		if (fireworks == null)
+		{
+			set(DataComponentTypes.FIREWORKS, Fireworks.fireworks().flightDuration(power).build());
+		}
+		else
+		{
+			set(DataComponentTypes.FIREWORKS, Fireworks.fireworks(fireworks.effects(), power));
+		}
 	}
 
 	/**
@@ -177,32 +188,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	{
 		FireworkMetaMock serialMock = new FireworkMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.addEffects(((List<?>) args.get("effects")).stream()
-				.map(e -> (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) e))
-				.toList());
-		if (args.containsKey("power"))
-		{
-			serialMock.power = (int) args.get("power");
-		}
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an FireworkMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the FireworkMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		if (hasPower())
-		{
-			serialized.put("power", power);
-		}
-		serialized.put("effects", effects.stream().map(FireworkEffect::serialize).toList());
-		return serialized;
 	}
 
 	@Override
