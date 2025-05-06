@@ -4,7 +4,9 @@ import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -36,6 +38,12 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	public ArmorStandMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public ArmorStandMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
