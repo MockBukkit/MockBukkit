@@ -1,8 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.OminousBottleAmplifier;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.OminousBottleMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -10,7 +14,6 @@ import java.util.Map;
 public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottleMeta
 {
 
-	private Integer amplifier;
 	private static final String AMPLIFIER_KEY = "amplifier";
 
 	/**
@@ -21,6 +24,12 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		super();
 	}
 
+	@ApiStatus.Internal
+	public OminousBottleMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
+	}
+
 	/**
 	 * Constructs a new {@link OminousBottleMetaMock}, cloning the data from another.
 	 *
@@ -29,17 +38,12 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	public OminousBottleMetaMock(ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof OminousBottleMeta bottleMeta)
-		{
-			this.amplifier = bottleMeta.hasAmplifier() ? bottleMeta.getAmplifier() : null;
-		}
 	}
 
 	@Override
 	public boolean hasAmplifier()
 	{
-		return this.amplifier != null;
+		return has(DataComponentTypes.OMINOUS_BOTTLE_AMPLIFIER);
 	}
 
 	@Override
@@ -47,32 +51,20 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	{
 		Preconditions.checkState(this.hasAmplifier(),
 				"'ominous_bottle_amplifier' data component is absent. Check hasAmplifier first!");
-		return this.amplifier;
+		return get(DataComponentTypes.OMINOUS_BOTTLE_AMPLIFIER).amplifier();
 	}
 
 	@Override
 	public void setAmplifier(int amplifier)
 	{
 		Preconditions.checkArgument(0 <= amplifier && amplifier <= 4, "Amplifier must be in range [0, 4]");
-		this.amplifier = amplifier;
+		set(DataComponentTypes.OMINOUS_BOTTLE_AMPLIFIER, OminousBottleAmplifier.amplifier(amplifier));
 	}
 
 	@Override
 	public @NotNull OminousBottleMetaMock clone()
 	{
-		OminousBottleMetaMock clone = (OminousBottleMetaMock) super.clone();
-		clone.amplifier = this.amplifier;
-		return clone;
-	}
-
-	@Override
-	protected void deserializeInternal(@NotNull Map<String, Object> args)
-	{
-		super.deserializeInternal(args);
-		if (args.containsKey(AMPLIFIER_KEY))
-		{
-			this.amplifier = (Integer) args.get(AMPLIFIER_KEY);
-		}
+		return (OminousBottleMetaMock) super.clone();
 	}
 
 	public static @NotNull OminousBottleMetaMock deserialize(@NotNull Map<String, Object> args)
@@ -80,17 +72,6 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		OminousBottleMetaMock serialMock = new OminousBottleMetaMock();
 		serialMock.deserializeInternal(args);
 		return serialMock;
-	}
-
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		if (this.hasAmplifier())
-		{
-			serialized.put(AMPLIFIER_KEY, amplifier);
-		}
-		return serialized;
 	}
 
 }
