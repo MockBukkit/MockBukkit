@@ -1,5 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.BannerPatternLayers;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,16 +21,17 @@ import java.util.Map;
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
-	private List<Pattern> patterns;
-
 	/**
 	 * Constructs a new {@link BannerMetaMock}.
 	 */
 	public BannerMetaMock()
 	{
 		super();
+	}
 
-		this.patterns = new ArrayList<>();
+	public BannerMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -37,93 +42,69 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	public BannerMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof BannerMeta bannerMeta)
-		{
-			this.patterns = new ArrayList<>(bannerMeta.getPatterns());
-		}
-		else
-		{
-			this.patterns = new ArrayList<>();
-		}
 	}
 
 	@Override
 	public @NotNull List<Pattern> getPatterns()
 	{
-		return new ArrayList<>(this.patterns);
+		if (has(DataComponentTypes.BANNER_PATTERNS))
+		{
+			return get(DataComponentTypes.BANNER_PATTERNS).patterns();
+		}
+		return List.of();
 	}
 
 	@Override
 	public void setPatterns(@NotNull List<Pattern> patterns)
 	{
-		this.patterns = new ArrayList<>(patterns);
+		Preconditions.checkNotNull(patterns);
+		set(DataComponentTypes.BANNER_PATTERNS, BannerPatternLayers.bannerPatternLayers().addAll(patterns).build());
 	}
 
 	@Override
 	public void addPattern(@NotNull Pattern pattern)
 	{
-		this.patterns.add(pattern);
+		Preconditions.checkNotNull(pattern);
+		List<Pattern> previous = getPatterns();
+		BannerPatternLayers.Builder builder = BannerPatternLayers.bannerPatternLayers();
+		builder.addAll(previous);
+		builder.add(pattern);
+		set(DataComponentTypes.BANNER_PATTERNS, builder.build());
 	}
 
 	@Override
 	public @NotNull Pattern getPattern(int i)
 	{
-		return this.patterns.get(i);
+		return getPatterns().get(i);
 	}
 
 	@Override
 	public @NotNull Pattern removePattern(int i)
 	{
-		return this.patterns.remove(i);
+		List<Pattern> previous = new ArrayList<>(getPatterns());
+		Pattern removed = previous.remove(i);
+		set(DataComponentTypes.BANNER_PATTERNS, BannerPatternLayers.bannerPatternLayers(previous));
+		return removed;
 	}
 
 	@Override
 	public void setPattern(int i, @NotNull Pattern pattern)
 	{
-		this.patterns.set(i, pattern);
+		List<Pattern> previous = new ArrayList<>(getPatterns());
+		previous.set(i, pattern);
+		set(DataComponentTypes.BANNER_PATTERNS, BannerPatternLayers.bannerPatternLayers(previous));
 	}
 
 	@Override
 	public int numberOfPatterns()
 	{
-		return this.patterns.size();
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (this.patterns.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof BannerMeta meta))
-		{
-			return false;
-		}
-		return super.equals(obj) && this.patterns.equals(meta.getPatterns());
+		return getPatterns().size();
 	}
 
 	@Override
 	public @NotNull BannerMetaMock clone()
 	{
-		BannerMetaMock clone = (BannerMetaMock) super.clone();
-
-		clone.patterns = new ArrayList<>(this.patterns);
-
-		return clone;
-	}
-
-	@Override
-	protected void deserializeInternal(Map<String, Object> serialized)
-	{
-		super.deserializeInternal(serialized);
-		this.setPatterns(((List<Map<String, Object>>) serialized.get("patterns")).stream().map(Pattern::new).toList());
+		return (BannerMetaMock) super.clone();
 	}
 
 	/**
@@ -137,20 +118,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		BannerMetaMock serialMock = new BannerMetaMock();
 		serialMock.deserializeInternal(args);
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an BannerMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the BannerMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		serialized.put("patterns", this.patterns.stream().map(Pattern::serialize).toList());
-		return serialized;
 	}
 
 	@Override
