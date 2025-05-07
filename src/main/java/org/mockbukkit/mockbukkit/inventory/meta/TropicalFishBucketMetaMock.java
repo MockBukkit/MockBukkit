@@ -1,10 +1,13 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.apache.commons.lang3.Validate;
+import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -17,16 +20,18 @@ import java.util.Map;
 public class TropicalFishBucketMetaMock extends ItemMetaMock implements TropicalFishBucketMeta
 {
 
-	private DyeColor patternColor;
-	private DyeColor bodyColor;
-	private TropicalFish.Pattern pattern;
-
 	/**
 	 * Constructs a new {@link TropicalFishBucketMetaMock}.
 	 */
 	public TropicalFishBucketMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public TropicalFishBucketMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**
@@ -37,115 +42,83 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	public TropicalFishBucketMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof TropicalFishBucketMeta bucketMeta)
+		if (meta instanceof TropicalFishBucketMeta)
 		{
-			if (meta instanceof TropicalFishBucketMetaMock mock)
-			{
-				mock.checkVars();
-			}
-			this.patternColor = bucketMeta.getPatternColor();
-			this.bodyColor = bucketMeta.getBodyColor();
-			this.pattern = bucketMeta.getPattern();
+			init();
 		}
 	}
 
 	/**
 	 * Defaults any null variables.
 	 */
-	protected void checkVars()
+	protected void init()
 	{
-		if (this.patternColor == null)
+		if (!has(DataComponentTypes.TROPICAL_FISH_PATTERN_COLOR))
 		{
-			this.patternColor = DyeColor.WHITE;
+			set(DataComponentTypes.TROPICAL_FISH_PATTERN_COLOR, DyeColor.WHITE);
 		}
-		if (this.bodyColor == null)
+		if (!has(DataComponentTypes.TROPICAL_FISH_BASE_COLOR))
 		{
-			this.bodyColor = DyeColor.WHITE;
+			set(DataComponentTypes.TROPICAL_FISH_BASE_COLOR, DyeColor.WHITE);
 		}
-		if (this.pattern == null)
+		if (!has(DataComponentTypes.TROPICAL_FISH_PATTERN))
 		{
-			this.pattern = TropicalFish.Pattern.KOB;
+			set(DataComponentTypes.TROPICAL_FISH_PATTERN, TropicalFish.Pattern.KOB);
 		}
 	}
 
 	@Override
 	public @NotNull DyeColor getPatternColor()
 	{
-		Validate.notNull(patternColor, "Pattern color is not set");
-		return patternColor;
+		init();
+		return get(DataComponentTypes.TROPICAL_FISH_PATTERN_COLOR);
 	}
 
 	@Override
 	public void setPatternColor(@NotNull DyeColor color)
 	{
-		checkVars();
-		this.patternColor = color;
+		Preconditions.checkNotNull(color);
+		set(DataComponentTypes.TROPICAL_FISH_PATTERN_COLOR, color);
 	}
 
 	@Override
 	public @NotNull DyeColor getBodyColor()
 	{
-		Validate.notNull(bodyColor, "Body color is not set");
-		return bodyColor;
+		init();
+		return get(DataComponentTypes.TROPICAL_FISH_BASE_COLOR);
 	}
 
 	@Override
 	public void setBodyColor(@NotNull DyeColor color)
 	{
-		checkVars();
-		this.bodyColor = color;
+		Preconditions.checkNotNull(color);
+		set(DataComponentTypes.TROPICAL_FISH_BASE_COLOR, color);
 	}
 
 	@Override
 	public @NotNull TropicalFish.Pattern getPattern()
 	{
-		Validate.notNull(pattern, "Pattern is not set");
-		return pattern;
+		init();
+		return get(DataComponentTypes.TROPICAL_FISH_PATTERN);
 	}
 
 	@Override
 	public void setPattern(TropicalFish.@NotNull Pattern pattern)
 	{
-		checkVars();
-		this.pattern = pattern;
+		Preconditions.checkNotNull(pattern);
+		set(DataComponentTypes.TROPICAL_FISH_PATTERN, pattern);
 	}
 
 	@Override
 	public boolean hasVariant()
 	{
-		return patternColor != null && bodyColor != null && pattern != null;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((bodyColor == null) ? 0 : bodyColor.hashCode());
-		result = prime * result + ((pattern == null) ? 0 : pattern.hashCode());
-		result = prime * result + ((patternColor == null) ? 0 : patternColor.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof TropicalFishBucketMetaMock meta))
-		{
-			return false;
-		}
-		return super.equals(obj) && patternColor == meta.patternColor && bodyColor == meta.bodyColor && pattern == meta.pattern;
+		return has(DataComponentTypes.TROPICAL_FISH_PATTERN) && has(DataComponentTypes.TROPICAL_FISH_PATTERN_COLOR) && has(DataComponentTypes.TROPICAL_FISH_BASE_COLOR);
 	}
 
 	@Override
 	public @NotNull TropicalFishBucketMetaMock clone()
 	{
-		TropicalFishBucketMetaMock clone = (TropicalFishBucketMetaMock) super.clone();
-		clone.patternColor = this.patternColor;
-		clone.bodyColor = this.bodyColor;
-		clone.pattern = this.pattern;
-		return clone;
+		return (TropicalFishBucketMetaMock) super.clone();
 	}
 
 	/**
@@ -158,27 +131,7 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	{
 		TropicalFishBucketMetaMock serialMock = new TropicalFishBucketMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.bodyColor = (DyeColor) args.get("body-color");
-		serialMock.patternColor = (DyeColor) args.get("pattern-color");
-		serialMock.pattern = (TropicalFish.Pattern) args.get("pattern");
 		return serialMock;
-	}
-
-	/**
-	 * Serializes the properties of an TropicalFishBucketMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
-	 *
-	 * @return A HashMap of String, Object pairs representing the TropicalFishBucketMetaMock.
-	 */
-	@Override
-	public @NotNull Map<String, Object> serialize()
-	{
-		final Map<String, Object> serialized = super.serialize();
-		checkVars();
-		serialized.put("body-color", bodyColor);
-		serialized.put("pattern-color", patternColor);
-		serialized.put("pattern", pattern);
-		return serialized;
 	}
 
 	@Override
