@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Banner;
@@ -9,6 +10,7 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.ShieldMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.state.BannerStateMock;
@@ -31,6 +33,12 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		super();
 	}
 
+	@ApiStatus.Internal
+	public ShieldMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
+	}
+
 	/**
 	 * Constructs a new {@link ShieldMetaMock}, cloning the data from another.
 	 *
@@ -39,7 +47,6 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	public ShieldMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof BlockStateMeta bsMeta && bsMeta.hasBlockState())
 		{
 			if (bsMeta.getBlockState() instanceof Banner banner)

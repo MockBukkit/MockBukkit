@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -26,6 +28,12 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 		super();
 	}
 
+	@ApiStatus.Internal
+	public SpawnEggMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
+	}
+
 	/**
 	 * Constructs a new {@link SpawnEggMetaMock}, cloning the data from another.
 	 *
@@ -34,10 +42,6 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	public SpawnEggMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-		if (meta instanceof SpawnEggMeta spawnMeta)
-		{
-			// TODO cloning logic from spawnMeta
-		}
 	}
 
 	@Override
@@ -78,12 +82,6 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
 	}
 
 	@Override
