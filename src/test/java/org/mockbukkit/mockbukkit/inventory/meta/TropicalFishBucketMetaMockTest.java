@@ -68,7 +68,7 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void checkVars_CorrectDefaults()
 	{
-		meta.checkVars();
+		meta.init();
 		assertEquals(DyeColor.WHITE, meta.getPatternColor());
 		assertEquals(DyeColor.WHITE, meta.getBodyColor());
 		assertEquals(TropicalFish.Pattern.KOB, meta.getPattern());
@@ -119,14 +119,14 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void equals_SameInstance_True()
 	{
-		meta.checkVars();
+		meta.init();
 		assertEquals(meta, meta);
 	}
 
 	@Test
 	void equals_DifferentObjects_SameValues_True()
 	{
-		meta.checkVars();
+		meta.init();
 		assertEquals(meta, meta.clone());
 	}
 
