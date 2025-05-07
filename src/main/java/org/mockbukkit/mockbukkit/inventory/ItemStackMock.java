@@ -26,9 +26,9 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -39,8 +39,7 @@ public class ItemStackMock extends ItemStack
 
 	private static final String FIELD_AMOUNT = "amount";
 	private static final String FIELD_MATERIAL = "type";
-	private Map<DataComponentType.Valued<?>, Object> valuedDataComponents = new HashMap<>();
-	private Set<DataComponentType.NonValued> nonValuedDataComponents = new HashSet<>();
+	private Map<DataComponentType, Object> data = new HashMap<>();
 
 	@NonNull
 	@ApiStatus.Internal
@@ -87,7 +86,7 @@ public class ItemStackMock extends ItemStack
 		this.type = type.asItemType();
 		this.amount = amount;
 		this.durability = initDurability(this.type);
-		this.itemMeta = findItemMeta(type);
+		setItemMeta(findItemMeta(type, data));
 	}
 
 	private ItemStackMock(@Nullable Void v)
@@ -102,7 +101,7 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = type;
 		this.durability = initDurability(type);
-		this.itemMeta = findItemMeta(type.asMaterial());
+		setItemMeta(findItemMeta(type.asMaterial(), data));
 	}
 
 	/**
@@ -132,7 +131,7 @@ public class ItemStackMock extends ItemStack
 			this.type = type.asItemType();
 			if (this.itemMeta == null)
 			{
-				this.itemMeta = findItemMeta(type);
+				this.itemMeta = findItemMeta(type, data);
 			}
 			else
 			{
@@ -179,8 +178,13 @@ public class ItemStackMock extends ItemStack
 	{
 		if (itemMeta == null || ItemType.AIR.equals(this.type))
 		{
-			this.itemMeta = findItemMeta(getType());
+			ItemMetaMock itemMetaMock = findItemMeta(getType(), data);
+			this.itemMeta = itemMetaMock;
 			this.durability = initDurability(this.type);
+			if (itemMetaMock != null)
+			{
+				data = itemMetaMock.getData();
+			}
 			return true;
 		}
 		if (!Bukkit.getItemFactory().isApplicable(itemMeta, this))
@@ -191,6 +195,7 @@ public class ItemStackMock extends ItemStack
 		itemMeta = Bukkit.getItemFactory().asMetaFor(itemMeta, this);
 		if (itemMeta == null) return true;
 		this.itemMeta = itemMeta;
+		this.data = ((ItemMetaMock) itemMeta).getData();
 
 		if (this.itemMeta instanceof Damageable damageable)
 		{
@@ -356,12 +361,17 @@ public class ItemStackMock extends ItemStack
 		throw new UnimplementedOperationException();
 	}
 
+	public <T> @Nullable T getData(DataComponentType.Valued<T> type)
+	{
+		return (T) data.get(type);
+	}
+
 	@Override
 	public <T> void setData(@NotNull DataComponentType.Valued<T> dataComponentType, @NotNull DataComponentBuilder<T> builder)
 	{
 		Preconditions.checkNotNull(dataComponentType);
 		Preconditions.checkNotNull(builder);
-		this.valuedDataComponents.put(dataComponentType, builder.build());
+		this.data.put(dataComponentType, builder.build());
 	}
 
 	@Override
@@ -369,14 +379,44 @@ public class ItemStackMock extends ItemStack
 	{
 		Preconditions.checkNotNull(dataComponentType);
 		Preconditions.checkNotNull(data);
-		this.valuedDataComponents.put(dataComponentType, data);
+		this.data.put(dataComponentType, data);
 	}
 
 	@Override
 	public void setData(@NotNull DataComponentType.NonValued dataComponentType)
 	{
 		Preconditions.checkNotNull(dataComponentType);
-		this.nonValuedDataComponents.add(dataComponentType);
+		this.data.put(dataComponentType, true);
+	}
+
+	@Override
+	public void unsetData(DataComponentType dataComponentType)
+	{
+		this.data.remove(dataComponentType);
+	}
+
+	@Override
+	public Set<DataComponentType> getDataTypes()
+	{
+		return data.keySet();
+	}
+
+	@Override
+	public boolean hasData(DataComponentType type)
+	{
+		return data.get(type) != null;
+	}
+
+	@Override
+	public void resetData(io.papermc.paper.datacomponent.DataComponentType type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isDataOverridden(final io.papermc.paper.datacomponent.DataComponentType type)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	public static ItemStack empty()
@@ -406,7 +446,7 @@ public class ItemStackMock extends ItemStack
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.itemMeta, bukkit.getItemMeta());
+			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.itemMeta, bukkit.getItemMeta()) && Objects.equals(data, bukkit.data);
 		}
 		else
 		{
@@ -424,13 +464,13 @@ public class ItemStackMock extends ItemStack
 		}
 		else
 		{
-			int hash = Objects.hash(type, durability, lore(), getEnchantments());
+			int hash = Objects.hash(type, durability, lore(), getEnchantments(), data);
 			hash = hash * 31 + this.getAmount();
 			return hash;
 		}
 	}
 
-	private static @Nullable ItemMeta findItemMeta(Material material)
+	private static @Nullable ItemMetaMock findItemMeta(Material material, Map<DataComponentType, Object> data)
 	{
 		if (!material.isItem() || material == Material.AIR)
 		{
@@ -441,14 +481,14 @@ public class ItemStackMock extends ItemStack
 		{
 			try
 			{
-				for (var ctor : itemMetaClass.getDeclaredConstructors())
+				for (Constructor<?> constructor : itemMetaClass.getDeclaredConstructors())
 				{
-					if (ctor.getParameterCount() == 1 && ctor.getParameters()[0].getType() == Material.class)
+					if (constructor.getParameterCount() == 1 && constructor.getParameters()[0].getType() == Material.class)
 					{
-						return (ItemMeta) ctor.newInstance(material);
+						return (ItemMetaMock) constructor.newInstance(material);
 					}
 				}
-				return itemMetaClass.getConstructor().newInstance();
+				return (ItemMetaMock) itemMetaClass.getConstructor(Map.class).newInstance(data);
 			}
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
 				   NoSuchMethodException e)
