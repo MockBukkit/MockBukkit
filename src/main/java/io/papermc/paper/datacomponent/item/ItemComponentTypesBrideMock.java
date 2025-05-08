@@ -1,0 +1,277 @@
+package io.papermc.paper.datacomponent.item;
+
+import com.destroystokyo.paper.profile.PlayerProfile;
+import io.papermc.paper.registry.set.RegistryKeySet;
+import io.papermc.paper.registry.tag.TagKey;
+import io.papermc.paper.text.Filtered;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.util.TriState;
+import org.bukkit.JukeboxSong;
+import org.bukkit.block.BlockType;
+import org.bukkit.damage.DamageType;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
+import org.bukkit.inventory.meta.trim.ArmorTrim;
+import org.bukkit.map.MapCursor;
+import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+@ApiStatus.Internal
+public class ItemComponentTypesBrideMock implements ItemComponentTypesBridge
+{
+
+	@Override
+	public ChargedProjectiles.Builder chargedProjectiles()
+	{
+		return new ChargedProjectilesMock.BuilderMock();
+	}
+
+	@Override
+	public PotDecorations.Builder potDecorations()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemLore.Builder lore()
+	{
+		return new ItemLoreMock.BuilderMock();
+	}
+
+	@Override
+	public ItemEnchantments.Builder enchantments()
+	{
+		return new ItemEnchantmentsMock.BuilderMock();
+	}
+
+	@Override
+	public ItemAttributeModifiers.Builder modifiers()
+	{
+		return new ItemAttributeModifiersMock.BuilderMock();
+	}
+
+	@Override
+	public FoodProperties.Builder food()
+	{
+		return new FoodPropertiesMock.BuilderMock();
+	}
+
+	@Override
+	public DyedItemColor.Builder dyedItemColor()
+	{
+		return new DyedItemColorMock.BuilderMock();
+	}
+
+	@Override
+	public PotionContents.Builder potionContents()
+	{
+		return new PotionContentsMock.BuilderMock();
+	}
+
+	@Override
+	public BundleContents.Builder bundleContents()
+	{
+		return null;
+	}
+
+	@Override
+	public SuspiciousStewEffects.Builder suspiciousStewEffects()
+	{
+		return null;
+	}
+
+	@Override
+	public MapItemColor.Builder mapItemColor()
+	{
+		return null;
+	}
+
+	@Override
+	public MapDecorations.Builder mapDecorations()
+	{
+		return null;
+	}
+
+	@Override
+	public MapDecorations.DecorationEntry decorationEntry(MapCursor.Type type, double x, double z, float rotation)
+	{
+		return null;
+	}
+
+	@Override
+	public SeededContainerLoot.Builder seededContainerLoot(Key lootTableKey)
+	{
+		return null;
+	}
+
+	@Override
+	public WrittenBookContent.Builder writtenBookContent(Filtered<String> title, String author)
+	{
+		return null;
+	}
+
+	@Override
+	public WritableBookContent.Builder writeableBookContent()
+	{
+		return null;
+	}
+
+	@Override
+	public ItemArmorTrim.Builder itemArmorTrim(ArmorTrim armorTrim)
+	{
+		return null;
+	}
+
+	@Override
+	public LodestoneTracker.Builder lodestoneTracker()
+	{
+		return null;
+	}
+
+	@Override
+	public Fireworks.Builder fireworks()
+	{
+		return new FireworksMock.BuilderMock();
+	}
+
+	@Override
+	public ResolvableProfile.Builder resolvableProfile()
+	{
+		return null;
+	}
+
+	@Override
+	public ResolvableProfile resolvableProfile(PlayerProfile profile)
+	{
+		return null;
+	}
+
+	@Override
+	public BannerPatternLayers.Builder bannerPatternLayers()
+	{
+		return null;
+	}
+
+	@Override
+	public BlockItemDataProperties.Builder blockItemStateProperties()
+	{
+		return null;
+	}
+
+	@Override
+	public ItemContainerContents.Builder itemContainerContents()
+	{
+		return null;
+	}
+
+	@Override
+	public JukeboxPlayable.Builder jukeboxPlayable(JukeboxSong song)
+	{
+		return null;
+	}
+
+	@Override
+	public Tool.Builder tool()
+	{
+		return null;
+	}
+
+	@Override
+	public Tool.Rule rule(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops)
+	{
+		return null;
+	}
+
+	@Override
+	public ItemAdventurePredicate.Builder itemAdventurePredicate()
+	{
+		return null;
+	}
+
+	@Override
+	public CustomModelData.Builder customModelData()
+	{
+		return new CustomModelDataMock.BuilderMock();
+	}
+
+	@Override
+	public MapId mapId(int id)
+	{
+		return null;
+	}
+
+	@Override
+	public UseRemainder useRemainder(ItemStack itemStack)
+	{
+		return null;
+	}
+
+	@Override
+	public Consumable.Builder consumable()
+	{
+		return null;
+	}
+
+	@Override
+	public UseCooldown.Builder useCooldown(float seconds)
+	{
+		return null;
+	}
+
+	@Override
+	public DamageResistant damageResistant(TagKey<DamageType> types)
+	{
+		return null;
+	}
+
+	@Override
+	public Enchantable enchantable(int level)
+	{
+		return null;
+	}
+
+	@Override
+	public Repairable repairable(RegistryKeySet<ItemType> types)
+	{
+		return null;
+	}
+
+	@Override
+	public Equippable.Builder equippable(EquipmentSlot slot)
+	{
+		return null;
+	}
+
+	@Override
+	public DeathProtection.Builder deathProtection()
+	{
+		return null;
+	}
+
+	@Override
+	public OminousBottleAmplifier ominousBottleAmplifier(int amplifier)
+	{
+		return null;
+	}
+
+	@Override
+	public BlocksAttacks.Builder blocksAttacks()
+	{
+		return null;
+	}
+
+	@Override
+	public TooltipDisplay.Builder tooltipDisplay()
+	{
+		return null;
+	}
+
+	@Override
+	public Weapon.Builder weapon()
+	{
+		return null;
+	}
+
+}

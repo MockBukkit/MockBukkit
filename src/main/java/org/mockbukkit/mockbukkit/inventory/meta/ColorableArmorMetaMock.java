@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +24,12 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	public ColorableArmorMetaMock()
 	{
 		super();
+	}
+
+	@ApiStatus.Internal
+	public ColorableArmorMetaMock(Map<DataComponentType, Object> data)
+	{
+		super(data);
 	}
 
 	/**

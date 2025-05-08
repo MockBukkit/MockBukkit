@@ -581,7 +581,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull Map<Enchantment, Integer> getEnchants()
 	{
-		return !hasEnchants() ?
+		return hasEnchants() ?
 				ImmutableMap.copyOf(get(DataComponentTypes.ENCHANTMENTS).enchantments())
 				: ImmutableMap.of();
 	}
@@ -778,7 +778,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public int getDamage()
 	{
-		return data.containsKey(DataComponentTypes.DAMAGE) ? 0 : get(DataComponentTypes.DAMAGE);
+		return !data.containsKey(DataComponentTypes.DAMAGE) ? 0 : get(DataComponentTypes.DAMAGE);
 	}
 
 	@Override
