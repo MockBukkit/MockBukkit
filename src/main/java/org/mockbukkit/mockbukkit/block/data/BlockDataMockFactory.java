@@ -11,13 +11,24 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.Rail;
+import org.bukkit.block.data.Rotatable;
 import org.bukkit.block.data.Snowable;
+import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
+import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.EnderChest;
+import org.bukkit.block.data.type.Light;
+import org.bukkit.block.data.type.RedstoneRail;
+import org.bukkit.block.data.type.RedstoneWallTorch;
+import org.bukkit.block.data.type.RedstoneWire;
+import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Switch;
+import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +47,6 @@ public final class BlockDataMockFactory
 			.put(Tag.CAMPFIRES, CampfireDataMock::new)
 			.put(Tag.CANDLES, CandleDataMock::new)
 			.put(Tag.FENCES, FenceDataMock::new)
-			.put(Tag.RAILS, RailDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
@@ -49,16 +59,27 @@ public final class BlockDataMockFactory
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(Chest.class, ChestDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
+			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
+			.put(Light.class, LightDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
+			.put(TNT.class, TNTDataMock::new)
 			.put(Barrel.class, BarrelDataMock::new)
 			.put(Sapling.class, SaplingDataMock::new)
 			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)
+			.put(Rail.class, RailDataMock::new)
+			.put(RedstoneRail.class, RedstoneRailDataMock::new)
+			.put(RedstoneWallTorch.class, RedstoneWallTorchDataMock::new)
+			.put(RedstoneWire.class, RedstoneWireDataMock::new)
+			.put(Repeater.class, RepeaterDataMock::new)
+			.put(Rotatable.class, RotatableDataMock::new)
 			.put(Snowable.class, SnowableDataMock::new)
+			.put(Waterlogged.class, WaterloggedDataMock::new)
 			.put(Ageable.class, AgeableDataMock::new)
 			.put(Bisected.class, BisectedDataMock::new)
 			.build();
