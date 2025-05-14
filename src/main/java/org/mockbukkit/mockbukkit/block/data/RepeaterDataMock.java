@@ -74,7 +74,7 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
+		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
 	@Override

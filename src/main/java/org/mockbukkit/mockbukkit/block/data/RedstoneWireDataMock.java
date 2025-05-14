@@ -69,7 +69,7 @@ public class RedstoneWireDataMock extends BlockDataMock implements RedstoneWire
 	@Override
 	public int getMaximumPower()
 	{
-		return 15;
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_POWER);
 	}
 
 }

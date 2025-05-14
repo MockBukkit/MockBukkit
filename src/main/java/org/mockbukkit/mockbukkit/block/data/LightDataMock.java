@@ -36,13 +36,13 @@ public class LightDataMock extends BlockDataMock implements Light
 	@Override
 	public int getMaximumLevel()
 	{
-		return 15;
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_LEVEL);
 	}
 
 	@Override
 	public int getMinimumLevel()
 	{
-		return 0;
+		return this.getLimitationValue(BlockDataLimitation.Type.MIN_LEVEL);
 	}
 
 	@Override

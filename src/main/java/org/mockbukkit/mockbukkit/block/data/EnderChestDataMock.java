@@ -37,7 +37,7 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH,  BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
+		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
 	@Override

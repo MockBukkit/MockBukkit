@@ -31,7 +31,7 @@ public class RailDataMock extends BlockDataMock implements Rail
 	@Override
 	public void setShape(@NotNull Shape shape)
 	{
-		Preconditions.checkArgument(this.getShapes().contains(shape), "Invalid shape. Allowed values are: %s", this.getShapes());
+		Preconditions.checkArgument(this.getShapes().contains(shape), "Invalid shape. Allowed values are: %s", this.getShapes().stream().sorted().toList());
 		this.set(BlockDataKey.RAIL_SHAPE, shape);
 	}
 

@@ -78,7 +78,7 @@ class RedstoneRailDataMockTest
 		void givenInvalidValues(Rail.Shape shape)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> rail.setShape(shape));
-			assertEquals("Invalid shape. Allowed values are: [EAST_WEST, ASCENDING_SOUTH, ASCENDING_WEST, ASCENDING_NORTH, NORTH_SOUTH, ASCENDING_EAST]", e.getMessage());
+			assertEquals("Invalid shape. Allowed values are: [NORTH_SOUTH, EAST_WEST, ASCENDING_EAST, ASCENDING_WEST, ASCENDING_NORTH, ASCENDING_SOUTH]", e.getMessage());
 		}
 
 	}
