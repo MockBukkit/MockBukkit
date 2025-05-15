@@ -10,6 +10,7 @@ import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
@@ -118,12 +119,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
-	private boolean visualFire;
 	private boolean silent;
 	private boolean gravity = true;
 
 	private Pose pose = Pose.STANDING;
 	private boolean isFixedPose = false;
+	private TriState triState = TriState.NOT_SET;
 
 	protected final EntityData entityData;
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
@@ -721,13 +722,26 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setVisualFire(boolean fire)
 	{
-		this.visualFire = fire;
+		this.setVisualFire(fire ? TriState.TRUE : TriState.NOT_SET);
+	}
+
+	@Override
+	public void setVisualFire(@NotNull TriState triState)
+	{
+		Preconditions.checkArgument(triState != null, "TriState cannot be null");
+		this.triState = triState;
 	}
 
 	@Override
 	public boolean isVisualFire()
 	{
-		return this.visualFire;
+		return this.getVisualFire().toBooleanOrElse(false);
+	}
+
+	@Override
+	public @NotNull TriState getVisualFire()
+	{
+		return this.triState;
 	}
 
 	@Override

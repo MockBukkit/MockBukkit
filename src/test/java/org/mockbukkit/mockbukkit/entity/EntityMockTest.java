@@ -1,16 +1,9 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.plugin.TestPlugin;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -41,14 +34,22 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -60,10 +61,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isNotInLocation;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasNotTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
-import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
@@ -1099,11 +1100,32 @@ class EntityMockTest
 		assertFalse(entity.isVisualFire());
 	}
 
-	@Test
-	void testSetVisualFire()
+	@Nested
+	class SetVisualFire
 	{
-		entity.setVisualFire(true);
-		assertTrue(entity.isVisualFire());
+
+		@Test
+		void testSetVisualFire()
+		{
+			entity.setVisualFire(true);
+			assertTrue(entity.isVisualFire());
+		}
+
+		@ParameterizedTest
+		@EnumSource(TriState.class)
+		void givenPossibleValues_whenSetVisualFire_thenIsVisualFireReturnsCorrectValue(@NotNull TriState triState)
+		{
+			entity.setVisualFire(triState);
+			assertEquals(triState, entity.getVisualFire());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setVisualFire(null));
+			assertEquals("TriState cannot be null", e.getMessage());
+		}
+
 	}
 
 	@Test
