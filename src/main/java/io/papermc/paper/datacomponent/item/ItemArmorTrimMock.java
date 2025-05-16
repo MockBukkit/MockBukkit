@@ -1,0 +1,29 @@
+package io.papermc.paper.datacomponent.item;
+
+import org.bukkit.inventory.meta.trim.ArmorTrim;
+
+public record ItemArmorTrimMock(ArmorTrim armorTrim) implements ItemArmorTrim
+{
+
+	static class BuilderMock implements Builder
+	{
+
+
+		private ArmorTrim armorTrim;
+
+		@Override
+		public Builder armorTrim(ArmorTrim armorTrim)
+		{
+			this.armorTrim = armorTrim;
+			return this;
+		}
+
+		@Override
+		public ItemArmorTrim build()
+		{
+			return new ItemArmorTrimMock(armorTrim);
+		}
+
+	}
+
+}
