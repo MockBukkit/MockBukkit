@@ -73,7 +73,7 @@ public class ItemComponentTypesBrideMock implements ItemComponentTypesBridge
 	@Override
 	public BundleContents.Builder bundleContents()
 	{
-		return null;
+		return new BundleContentsMock.BuilderMock();
 	}
 
 	@Override
@@ -121,13 +121,13 @@ public class ItemComponentTypesBrideMock implements ItemComponentTypesBridge
 	@Override
 	public ItemArmorTrim.Builder itemArmorTrim(ArmorTrim armorTrim)
 	{
-		return null;
+		return new ItemArmorTrimMock.BuilderMock();
 	}
 
 	@Override
-	public LodestoneTracker.Builder lodestoneTracker()
+	public LodestoneTrackerMock.Builder lodestoneTracker()
 	{
-		return null;
+		return new LodestoneTrackerMock.BuilderMock();
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public class ItemComponentTypesBrideMock implements ItemComponentTypesBridge
 	@Override
 	public BannerPatternLayers.Builder bannerPatternLayers()
 	{
-		return null;
+		return new BannerPatternLayersMock.BuilderMock();
 	}
 
 	@Override
