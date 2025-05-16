@@ -38,7 +38,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		super(meta);
 
-		if(meta instanceof BannerMeta bannerMeta)
+		if (meta instanceof BannerMeta bannerMeta)
 		{
 			this.patterns = new ArrayList<>(bannerMeta.getPatterns());
 		}

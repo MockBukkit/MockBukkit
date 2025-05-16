@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.bukkit.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.map.MapViewMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

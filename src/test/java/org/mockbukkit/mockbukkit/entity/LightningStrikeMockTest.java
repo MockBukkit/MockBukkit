@@ -42,7 +42,7 @@ class LightningStrikeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean expectedValue)
 		{
 			lightning.setEffect(expectedValue);
@@ -62,7 +62,7 @@ class LightningStrikeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3})
+		@ValueSource(ints = { 1, 2, 3 })
 		void givenPossibleValues(int expectedValue)
 		{
 			lightning.setFlashes(expectedValue);
@@ -70,10 +70,10 @@ class LightningStrikeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-5, -4, -3, -2, -1, 0})
+		@ValueSource(ints = { -5, -4, -3, -2, -1, 0 })
 		void givenImpossibleValues(int expectedValue)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->lightning.setFlashes(expectedValue));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> lightning.setFlashes(expectedValue));
 			assertEquals("flashes must be >= 1", e.getMessage());
 		}
 
@@ -90,7 +90,7 @@ class LightningStrikeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues(int expectedValue)
 		{
 			lightning.setLifeTicks(expectedValue);
@@ -132,7 +132,7 @@ class LightningStrikeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3})
+		@ValueSource(ints = { 1, 2, 3 })
 		void givenPossibleValues(int expectedValue)
 		{
 			lightning.setFlashCount(expectedValue);
@@ -140,10 +140,10 @@ class LightningStrikeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-5, -4, -3, -2, -1, 0})
+		@ValueSource(ints = { -5, -4, -3, -2, -1, 0 })
 		void givenImpossibleValues(int expectedValue)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->lightning.setFlashCount(expectedValue));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> lightning.setFlashCount(expectedValue));
 			assertEquals("flashes must be >= 1", e.getMessage());
 		}
 

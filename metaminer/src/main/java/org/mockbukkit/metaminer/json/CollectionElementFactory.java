@@ -1,21 +1,21 @@
 package org.mockbukkit.metaminer.json;
 
-import java.util.Collection;
-import java.util.function.Function;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.function.Function;
+
 public class CollectionElementFactory
 {
+
 	/**
 	 * Converts a collection into a JsonElement.
 	 *
 	 * @param collection The collection to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -28,8 +28,7 @@ public class CollectionElementFactory
 	 * Converts a collection into a JsonElement.
 	 *
 	 * @param collection The collection to be converted.
-	 * @param toJson The function to apply.
-	 *
+	 * @param toJson     The function to apply.
 	 * @return The element
 	 */
 	@Nullable

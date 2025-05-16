@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.destroystokyo.paper.entity.Pathfinder;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -11,6 +9,8 @@ import org.bukkit.entity.Mob;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;

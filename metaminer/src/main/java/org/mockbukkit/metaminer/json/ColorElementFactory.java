@@ -6,11 +6,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class ColorElementFactory
 {
+
 	/**
 	 * Converts a color into a JsonElement.
 	 *
 	 * @param color The color to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -33,4 +33,5 @@ public class ColorElementFactory
 	{
 		// Hide the public constructor
 	}
+
 }

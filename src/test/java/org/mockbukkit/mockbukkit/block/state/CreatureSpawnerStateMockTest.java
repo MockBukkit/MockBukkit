@@ -1,18 +1,18 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class CreatureSpawnerStateMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private WorldMock world;

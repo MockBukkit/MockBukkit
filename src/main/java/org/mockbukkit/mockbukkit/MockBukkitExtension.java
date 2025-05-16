@@ -1,11 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.logging.Logger;
-
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.bukkit.Server;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -19,6 +13,12 @@ import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 import org.junit.platform.commons.util.ExceptionUtils;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also

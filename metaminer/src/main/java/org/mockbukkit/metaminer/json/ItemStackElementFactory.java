@@ -6,11 +6,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemStackElementFactory
 {
+
 	/**
 	 * Converts a item stack into a JsonElement.
 	 *
 	 * @param itemStack The item stack to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -22,9 +22,8 @@ public class ItemStackElementFactory
 	/**
 	 * Converts a item stack into a JsonElement.
 	 *
-	 * @param itemStack The item stack to be converted.
+	 * @param itemStack   The item stack to be converted.
 	 * @param includeMeta If should include meta.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -53,4 +52,5 @@ public class ItemStackElementFactory
 	{
 		// Hide the public constructor
 	}
+
 }

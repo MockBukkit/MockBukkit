@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -14,6 +13,7 @@ import org.bukkit.block.sign.SignSide;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Arrays;
 import java.util.List;

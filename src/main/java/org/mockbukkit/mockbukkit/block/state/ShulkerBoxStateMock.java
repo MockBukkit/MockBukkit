@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -12,6 +9,9 @@ import org.bukkit.block.ShulkerBox;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 
 import java.util.Objects;
 import java.util.UUID;

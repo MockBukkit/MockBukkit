@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class SaplingDataMockTest
 {
+
 	private SaplingDataMock sapling;
 
 	@BeforeEach
@@ -40,7 +41,7 @@ class SaplingDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1})
+		@ValueSource(ints = { 0, 1 })
 		void givenChangeWithValidValues(int age)
 		{
 			sapling.setStage(age);
@@ -48,7 +49,7 @@ class SaplingDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-2, -1, 2, 3})
+		@ValueSource(ints = { -2, -1, 2, 3 })
 		void givenChangeWithInvalidValues(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> sapling.setStage(age));

@@ -39,7 +39,6 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 	}
 
 	/**
-	 *
 	 * @param targetEvent The required event class to have been fired
 	 * @return A matcher which matches with any plugin manager that has fired the specified event
 	 */
@@ -50,7 +49,6 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 	}
 
 	/**
-	 *
 	 * @param targetEvent The required event class to not have been fired
 	 * @return A matcher which matches with any plugin manager that has not fired the specified event
 	 */

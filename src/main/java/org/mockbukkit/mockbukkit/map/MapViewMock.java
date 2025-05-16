@@ -1,14 +1,14 @@
 package org.mockbukkit.mockbukkit.map;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.World;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

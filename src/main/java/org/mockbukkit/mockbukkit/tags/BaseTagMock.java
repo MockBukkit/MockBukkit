@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -11,6 +7,10 @@ import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class BaseTagMock<T extends Keyed> implements Tag<T>
 {

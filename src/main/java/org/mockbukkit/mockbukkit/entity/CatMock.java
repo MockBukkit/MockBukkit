@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 

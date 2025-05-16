@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class VexMock extends MonsterMock implements Vex
 {
+
 	private boolean isCharging = false;
 	private boolean hasLimitedLife = false;
 	private int limitedLifeTicks = -1;

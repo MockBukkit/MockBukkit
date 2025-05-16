@@ -1309,7 +1309,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	@ValueSource(ints = { 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60 })
 	void getTicksLived_GivenValidValue(int validValue)
 	{
 		entity.setTicksLived(validValue);
@@ -1317,7 +1317,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-100, -10, -5, -4, -3, -2, -1, 0})
+	@ValueSource(ints = { -100, -10, -5, -4, -3, -2, -1, 0 })
 	void setTicksLived_GivenValidValue(int invalidValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setTicksLived(invalidValue));
@@ -1350,7 +1350,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60 })
 	void getPortalCooldown_GivenValidValue(int validValue)
 	{
 		entity.setPortalCooldown(validValue);
@@ -1387,7 +1387,7 @@ class EntityMockTest
 	@Test
 	void addScoreboardTag_GivenTooManyValues()
 	{
-		for (int i = 0 ; i < 1024 ; i++)
+		for (int i = 0; i < 1024; i++)
 		{
 			boolean added = entity.addScoreboardTag(String.valueOf(i));
 			assertTrue(added);
@@ -1415,7 +1415,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isOnGround_GivenValidValue(boolean validValue)
 	{
 		entity.setOnGround(validValue);
@@ -1429,7 +1429,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60 })
 	void getFreezeTicks_GivenValidValue(int validValue)
 	{
 		entity.setFreezeTicks(validValue);
@@ -1437,7 +1437,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
 	void setFreezeTicks_GivenInvalidValue(int invalidValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setFreezeTicks(invalidValue));
@@ -1446,7 +1446,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150})
+	@ValueSource(ints = { 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150 })
 	void isFrozen_GivenFrozenValue(int validValue)
 	{
 		entity.setFreezeTicks(validValue);
@@ -1454,7 +1454,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 5, 10, 100, 115, 139})
+	@ValueSource(ints = { 0, 5, 10, 100, 115, 139 })
 	void isFrozen_GivenNotFrozenValue(int validValue)
 	{
 		entity.setFreezeTicks(validValue);
@@ -1468,7 +1468,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isFreezeTickingLocked_GivenValidValue(boolean validValue)
 	{
 		entity.lockFreezeTicks(validValue);
@@ -1488,7 +1488,7 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isInWater_GivenValidValue(boolean validValue)
 	{
 		entity.setInWater(validValue);
@@ -1512,7 +1512,9 @@ class EntityMockTest
 
 		// Entity needs to be created after the worlds have been removed,
 		// otherwise the default world will be assumed.
-		EntityMock testEntity = new EntityMock(server, UUID.randomUUID()) {};
+		EntityMock testEntity = new EntityMock(server, UUID.randomUUID())
+		{
+		};
 		assertFalse(testEntity.isInWorld());
 	}
 
@@ -1536,7 +1538,7 @@ class EntityMockTest
 	void tick_GivenValidEntity_ShouldIncrementTicksLived()
 	{
 		assertEquals(0, entity.getTicksLived());
-		for (int i = 1 ; i <= 10 ; i++)
+		for (int i = 1; i <= 10; i++)
 		{
 			entity.tick();
 			assertEquals(i, entity.getTicksLived());

@@ -25,6 +25,7 @@ class PaintingMockTest
 	@Nested
 	class GetArt
 	{
+
 		@Test
 		void givenNullArtShouldThrowException()
 		{

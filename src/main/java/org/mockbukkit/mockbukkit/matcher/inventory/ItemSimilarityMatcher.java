@@ -37,6 +37,7 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 
 	/**
 	 * Matches when two item stacks are similar to each other using the {@link ItemStack#isSimilar(ItemStack)} method
+	 *
 	 * @param itemStack The required item stack to be similar to for a match
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 */
@@ -48,6 +49,7 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 
 	/**
 	 * Matches when two item stacks are similar to each other using the {@link ItemStack#isSimilar(ItemStack)} method
+	 *
 	 * @param itemMaterial The required material of the item stack to be similar to for a match
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 */

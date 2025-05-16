@@ -57,7 +57,6 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	/**
-	 *
 	 * @param target The required target
 	 * @param charge The required charge
 	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the specified charge
@@ -69,9 +68,8 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	/**
-	 *
-	 * @param target The required target
-	 * @param charge The required charge
+	 * @param target     The required target
+	 * @param charge     The required charge
 	 * @param aggressive Whether a check for aggressiveness should be done
 	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the
 	 * specified charge while being aggressive
@@ -83,7 +81,6 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	/**
-	 *
 	 * @param target The required target for no match
 	 * @param charge The required charge for no match
 	 * @return A matcher which matches with any ranged entity that has not attacked the specified target with the specified charge
@@ -94,9 +91,8 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	/**
-	 *
-	 * @param target The required target for no match
-	 * @param charge The required charge for no match
+	 * @param target     The required target for no match
+	 * @param charge     The required charge for no match
 	 * @param aggressive Whether a check for aggressiveness should be done
 	 * @return A matcher which matches with any ranged entity that has not attacked the specified target with the
 	 * specified charge while being aggressive

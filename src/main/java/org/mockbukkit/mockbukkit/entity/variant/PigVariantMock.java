@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PigVariantMock implements Pig.Variant
 {
+
 	public static PigVariantMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());

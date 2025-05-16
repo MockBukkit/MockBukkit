@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -13,8 +9,13 @@ import org.bukkit.Registry;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class EntityTypeTagMock extends BaseTagMock<EntityType>
 {
+
 	public static EntityTypeTagMock from(@NotNull NamespacedKey key, @NotNull JsonArray values)
 	{
 		List<EntityType> entityTypes = new ArrayList<>();

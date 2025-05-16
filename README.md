@@ -54,14 +54,14 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 > [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21)
 
 
-> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
+> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly
+> tagged
 
 <details>
 <summary><h3>Adding MockBukkit via Gradle</h3></summary>
 
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
-
 
 ```gradle
 repositories {
@@ -122,7 +122,7 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
 ```
 
 The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
-Maven lifecycle and not in your final product. 
+Maven lifecycle and not in your final product.
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
 use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
@@ -274,5 +274,6 @@ https://docs.mockbukkit.org
 
 ## :gift_heart: Sponsors
 
-Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
+Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of
+their [Open Source program](https://www.jetbrains.com/opensource/).  
 [![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)

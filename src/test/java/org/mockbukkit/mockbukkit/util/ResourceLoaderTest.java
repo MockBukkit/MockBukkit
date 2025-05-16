@@ -69,4 +69,5 @@ class ResourceLoaderTest
 				() -> ResourceLoader.class.getDeclaredConstructor().newInstance()
 		);
 	}
+
 }

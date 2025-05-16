@@ -1,12 +1,5 @@
 package org.mockbukkit.mockbukkit.event;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.plugin.TestPlugin;
-import org.mockbukkit.mockbukkit.entity.CowMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -15,6 +8,13 @@ import org.bukkit.event.entity.EntityRemoveEvent;
 import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.CowMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -83,6 +83,7 @@ class EventFactoryMockTest
 	 */
 	private static class EventHolder implements Listener
 	{
+
 		private @Nullable Event event;
 
 		@Nullable
@@ -96,6 +97,7 @@ class EventFactoryMockTest
 		{
 			this.event = event;
 		}
+
 	}
 
 }

@@ -1,8 +1,8 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
 
 /**
  * Mock implementation of a {@link ScoreboardManager}.

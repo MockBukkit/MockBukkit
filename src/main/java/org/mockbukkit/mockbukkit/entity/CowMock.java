@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public class CowMock extends AbstractCowMock implements Cow
 {
+
 	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	/**

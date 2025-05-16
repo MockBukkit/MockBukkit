@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.ban;
 
-import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
@@ -9,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ban.ProfileBanList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.time.Duration;
 import java.time.Instant;

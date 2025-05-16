@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.DyeColor;
 import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
@@ -14,6 +12,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ShulkerMockTest
 {
+
 	private ServerMock server;
 	private ShulkerMock shulker;
 
@@ -78,7 +79,7 @@ class ShulkerMockTest
 
 	@ParameterizedTest
 	@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE,
-				names={ "NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN" })
+			names = { "NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN" })
 	void getAttachedFace_GivenAllowedValue(BlockFace blockFace)
 	{
 		shulker.setAttachedFace(blockFace);
@@ -87,7 +88,7 @@ class ShulkerMockTest
 
 	@ParameterizedTest
 	@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE,
-			names={ "NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN" })
+			names = { "NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN" })
 	void setAttachedFace_GivenDisallowedValue(BlockFace blockFace)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> shulker.setAttachedFace(blockFace));
@@ -146,4 +147,5 @@ class ShulkerMockTest
 	{
 		assertEquals(0.5D, shulker.getEyeHeight());
 	}
+
 }

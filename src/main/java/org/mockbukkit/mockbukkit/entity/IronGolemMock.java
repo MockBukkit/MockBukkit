@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -16,6 +16,7 @@ import java.util.UUID;
  */
 public class IronGolemMock extends GolemMock implements IronGolem
 {
+
 	private boolean playerCreated;
 
 	/**

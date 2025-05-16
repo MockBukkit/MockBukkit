@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.command;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
@@ -14,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -290,7 +290,7 @@ class ConsoleCommandSenderMockTest
 		{
 			net.md_5.bungee.api.chat.TextComponent message = new net.md_5.bungee.api.chat.TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 			sender.spigot().sendMessage(message);
-			sender.assertSaid(ChatColor.translateAlternateColorCodes('&',"&c<<"));
+			sender.assertSaid(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 		}
 
 	}

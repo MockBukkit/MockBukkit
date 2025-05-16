@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.tags.internal;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.tags.TagsMock;
 import org.bukkit.Material;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.tags.TagsMock;
 
 import java.util.Locale;
 

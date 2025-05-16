@@ -2,11 +2,11 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Boss;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
 
 import java.util.UUID;
@@ -15,6 +15,7 @@ abstract class AbstractBossMock extends MonsterMock implements Boss
 {
 
 	protected BossBarMock bossBarMock;
+
 	/**
 	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -32,4 +33,5 @@ abstract class AbstractBossMock extends MonsterMock implements Boss
 	{
 		return bossBarMock;
 	}
+
 }

@@ -24,6 +24,7 @@ import java.util.UUID;
  */
 public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 {
+
 	private int spawnCount = 4;
 	private int spawnDelay = 20;
 	private int spawnRange = 4;
@@ -155,14 +156,14 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	@Override
 	public void setSpawnedEntity(@Nullable EntitySnapshot entitySnapshot)
 	{
-        // TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setSpawnedEntity(@NotNull SpawnerEntry spawnerEntry)
 	{
-        // TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

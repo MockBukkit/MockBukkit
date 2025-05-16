@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -13,6 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
 
@@ -48,7 +48,7 @@ class EnderCrystalMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isShowingBottom_GivenUpdateInValue(boolean expectedValue)
 	{
 		crystal.setShowingBottom(expectedValue);

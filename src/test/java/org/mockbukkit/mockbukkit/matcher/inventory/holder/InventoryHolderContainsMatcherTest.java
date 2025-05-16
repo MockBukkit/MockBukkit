@@ -19,6 +19,7 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolder
 @ExtendWith(MockBukkitExtension.class)
 class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private AllayMock allay;

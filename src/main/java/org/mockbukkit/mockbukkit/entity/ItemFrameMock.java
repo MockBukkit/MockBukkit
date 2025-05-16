@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Rotation;
 import org.bukkit.Sound;
@@ -9,6 +8,7 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class ItemFrameMock extends HangingMock implements ItemFrame
 {
+
 	private ItemStack itemStack = ItemStack.empty();
 	private Rotation rotation = Rotation.NONE;
 

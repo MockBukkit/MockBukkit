@@ -1,11 +1,8 @@
 package org.mockbukkit.metaminer.tags;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.stream.JsonWriter;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
 import org.bukkit.GameEvent;
@@ -17,10 +14,7 @@ import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,7 +49,7 @@ public class TagDataGenerator implements DataGenerator
 		rootObject.add("replace", new JsonPrimitive(false));
 		rootObject.add("values", jsonArray);
 
-		File destinationFile = new File(new File(this.dataFolder,tagTypeName), tag.getKey().getKey() + ".json");
+		File destinationFile = new File(new File(this.dataFolder, tagTypeName), tag.getKey().getKey() + ".json");
 		JsonUtil.dump(rootObject, destinationFile);
 	}
 

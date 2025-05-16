@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.attribute;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.key.Key;
 import org.bukkit.attribute.Attribute;
@@ -8,6 +7,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,7 +79,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.21")
+	@Deprecated(forRemoval = true, since = "1.21")
 	public @Nullable AttributeModifier getModifier(@NotNull UUID uuid)
 	{
 		// TODO Auto-generated method stub
@@ -87,7 +87,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.21")
+	@Deprecated(forRemoval = true, since = "1.21")
 	public void removeModifier(@NotNull UUID uuid)
 	{
 		// TODO Auto-generated method stub

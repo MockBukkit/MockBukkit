@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,6 +9,11 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * A rather simple mock implementation for {@link Material} {@link Tag Tags}.
  *
@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MaterialTagMock extends BaseTagMock<Material>
 {
+
 	public static MaterialTagMock from(@NotNull NamespacedKey key, @NotNull JsonArray values)
 	{
 		List<Material> materials = new ArrayList<>();

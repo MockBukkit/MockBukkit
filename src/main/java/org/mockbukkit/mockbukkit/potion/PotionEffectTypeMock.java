@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.potion;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
@@ -14,8 +13,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionEffectTypeCategory;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import java.util.UUID;
-
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Location;
@@ -13,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 
+import java.util.UUID;
+
 /**
  * Mock implementation of a {@link Creaking}.
  *
@@ -21,6 +21,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 @ApiStatus.Experimental
 public class CreakingMock extends MonsterMock implements Creaking
 {
+
 	private @Nullable Player activatedBy = null;
 	private @Nullable Location homeLocation = null;
 
@@ -48,10 +49,10 @@ public class CreakingMock extends MonsterMock implements Creaking
 		this.activatedBy = player;
 
 		playSound(Sound.sound(
-			org.bukkit.Sound.ENTITY_CREAKING_ACTIVATE,
-			Sound.Source.HOSTILE,
-			1.0f,
-			1.0f
+				org.bukkit.Sound.ENTITY_CREAKING_ACTIVATE,
+				Sound.Source.HOSTILE,
+				1.0f,
+				1.0f
 		));
 	}
 

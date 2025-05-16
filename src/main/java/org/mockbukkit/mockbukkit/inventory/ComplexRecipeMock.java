@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ComplexRecipeMock implements ComplexRecipe
 {
+
 	private final NamespacedKey key;
 	private final ItemStack result;
 

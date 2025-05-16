@@ -16,6 +16,7 @@ import java.util.UUID;
  */
 public class WolfMock extends TameableAnimalMock implements Wolf
 {
+
 	private @NotNull Variant variant = Variant.PALE;
 	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private boolean isAngry = false;

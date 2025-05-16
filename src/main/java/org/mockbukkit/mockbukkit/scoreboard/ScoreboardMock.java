@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
@@ -14,6 +13,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
 
 import java.util.EnumMap;
 import java.util.HashMap;

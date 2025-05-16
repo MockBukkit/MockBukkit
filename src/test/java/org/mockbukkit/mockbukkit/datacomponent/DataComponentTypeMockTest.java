@@ -14,7 +14,7 @@ class DataComponentTypeMockTest
 	@Test
 	void valuedNonNull()
 	{
-		 assertNotNull(DataComponentTypes.BLOCK_DATA);
+		assertNotNull(DataComponentTypes.BLOCK_DATA);
 	}
 
 }

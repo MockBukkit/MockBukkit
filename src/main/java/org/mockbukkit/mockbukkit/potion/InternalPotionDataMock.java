@@ -15,6 +15,7 @@ import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
 import java.io.IOException;
 import java.util.List;
+
 public class InternalPotionDataMock implements PotionType.InternalPotionData
 {
 

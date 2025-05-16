@@ -2,21 +2,16 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.collect.ImmutableMap;
-import org.bukkit.Tag;
-import org.junit.jupiter.params.provider.Arguments;
-import net.kyori.adventure.text.Component;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -36,9 +31,14 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -839,7 +839,8 @@ class ItemMetaMockTest
 		{
 			meta.setDamage(-1);
 			fail("Negative damage could be set");
-		} catch (IllegalStateException e)
+		}
+		catch (IllegalStateException e)
 		{
 			// Good scenario
 		}
@@ -1217,6 +1218,7 @@ class ItemMetaMockTest
 		meta.setFireResistant(true);
 		assertTrue(meta.isFireResistant());
 	}
+
 	@Test
 	void testHasEnchantable()
 	{
@@ -1551,6 +1553,7 @@ class ItemMetaMockTest
 	@Nested
 	class GetEnchantmentGlintOverride
 	{
+
 		@Test
 		void givenDefault()
 		{
@@ -1570,7 +1573,7 @@ class ItemMetaMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean value)
 		{
 			meta.setEnchantmentGlintOverride(value);
@@ -1610,11 +1613,13 @@ class ItemMetaMockTest
 			meta.setEnchantmentGlintOverride(false);
 			assertFalse(new ItemMetaMock(meta).getEnchantmentGlintOverride());
 		}
+
 	}
 
 	@Nested
 	class GetRarity
 	{
+
 		@Test
 		void givenDefault()
 		{

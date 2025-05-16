@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 

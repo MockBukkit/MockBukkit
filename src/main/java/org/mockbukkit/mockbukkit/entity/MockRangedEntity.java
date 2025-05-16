@@ -27,6 +27,7 @@ public interface MockRangedEntity<T extends MobMock> extends RangedEntity
 
 	/**
 	 * Whether this ranged entity has attacked another entity with specified charge
+	 *
 	 * @param target The entity to have been attacked
 	 * @param charge The charge during the attack
 	 * @return True if the ranged entity has attacked another entity with specified charge
@@ -38,6 +39,7 @@ public interface MockRangedEntity<T extends MobMock> extends RangedEntity
 
 	/**
 	 * Whether this ranged entity has attacked another entity while aggressive
+	 *
 	 * @param target The entity to have been attacked
 	 * @return True if the ranged entity has attacked another entity while aggressive
 	 */

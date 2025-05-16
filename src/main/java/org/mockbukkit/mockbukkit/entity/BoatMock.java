@@ -74,7 +74,7 @@ public class BoatMock extends VehicleMock implements Boat
 			case CHERRY_BOAT, CHERRY_CHEST_BOAT -> Type.CHERRY;
 			case DARK_OAK_BOAT, DARK_OAK_CHEST_BOAT -> Type.DARK_OAK;
 			case JUNGLE_BOAT, JUNGLE_CHEST_BOAT -> Type.JUNGLE;
-			case MANGROVE_BOAT, MANGROVE_CHEST_BOAT ->Type.MANGROVE;
+			case MANGROVE_BOAT, MANGROVE_CHEST_BOAT -> Type.MANGROVE;
 			case OAK_BOAT, OAK_CHEST_BOAT -> Type.OAK;
 			case SPRUCE_BOAT, SPRUCE_CHEST_BOAT -> Type.SPRUCE;
 			default -> throw new EnumConstantNotPresentException(Type.class, boatType.toString());

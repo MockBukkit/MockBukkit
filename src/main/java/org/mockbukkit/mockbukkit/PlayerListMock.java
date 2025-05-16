@@ -1,16 +1,16 @@
 package org.mockbukkit.mockbukkit;
 
-import com.google.common.collect.Iterators;
-import org.mockbukkit.mockbukkit.ban.IpBanListMock;
-import org.mockbukkit.mockbukkit.ban.ProfileBanListMock;
-import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterators;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ban.IpBanListMock;
+import org.mockbukkit.mockbukkit.ban.ProfileBanListMock;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.Collection;
 import java.util.Collections;

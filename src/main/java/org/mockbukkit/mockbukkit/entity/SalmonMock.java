@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class SalmonMock extends SchoolableFishMock implements Salmon
 {
+
 	private @NotNull Variant variant = Variant.SMALL;
 
 	/**

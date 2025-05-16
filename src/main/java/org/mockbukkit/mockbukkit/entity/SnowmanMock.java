@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import io.papermc.paper.entity.Shearable;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Snowman;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -17,6 +17,7 @@ import java.util.UUID;
  */
 public class SnowmanMock extends GolemMock implements Snowman, MockRangedEntity<SnowmanMock>, Shearable
 {
+
 	private boolean derpMode;
 
 	/**

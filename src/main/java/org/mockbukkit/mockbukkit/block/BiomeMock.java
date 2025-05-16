@@ -19,7 +19,6 @@ public class BiomeMock extends OldKeyedEnumMock<Biome> implements Biome
 	}
 
 
-
 	public static BiomeMock from(JsonObject jsonObject)
 	{
 		String name = jsonObject.get("name").getAsString();

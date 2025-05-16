@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class KeyedElementFactoryTest
 {
+
 	@Test
 	void givenNull()
 	{
@@ -24,4 +25,5 @@ class KeyedElementFactoryTest
 		assertNotNull(actual);
 		assertEquals("minecraft:test", actual.getAsString());
 	}
+
 }

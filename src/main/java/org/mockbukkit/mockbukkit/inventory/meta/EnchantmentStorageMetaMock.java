@@ -38,7 +38,7 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	{
 		super(meta);
 
-		if(meta instanceof EnchantmentStorageMeta enchantMeta)
+		if (meta instanceof EnchantmentStorageMeta enchantMeta)
 		{
 			this.storedEnchantments = new HashMap<>(enchantMeta.getStoredEnchants());
 		}

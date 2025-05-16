@@ -45,7 +45,7 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		super(meta);
 
-		if(meta instanceof MapMeta mapMeta)
+		if (meta instanceof MapMeta mapMeta)
 		{
 			if (mapMeta.hasMapId())
 			{

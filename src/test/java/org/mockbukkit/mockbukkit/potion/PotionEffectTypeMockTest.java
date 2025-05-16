@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.potion;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import com.google.common.collect.ImmutableMap;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Arrays;
 import java.util.stream.Stream;

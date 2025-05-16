@@ -2814,7 +2814,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean value)
 		{
 			player.setAllowServerListings(value);
@@ -2835,7 +2835,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4 , 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues(int value)
 		{
 			player.setPlayerListOrder(value);
@@ -2844,7 +2844,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-5, -4, -3, -2, -1})
+		@ValueSource(ints = { -5, -4, -3, -2, -1 })
 		void givenNegativeValues(int value)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setPlayerListOrder(value));
@@ -2878,6 +2878,7 @@ class PlayerMockTest
 	@Nested
 	class Ban
 	{
+
 		private static final String REASON = "Test reason";
 		private static final String SOURCE = "TEST-SOURCE";
 
@@ -3006,6 +3007,7 @@ class PlayerMockTest
 	@Nested
 	class BanIp
 	{
+
 		private static final String REASON = "Test reason";
 		private static final String SOURCE = "TEST-SOURCE";
 
@@ -3136,7 +3138,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean value)
 		{
 			player.setSleepingIgnored(value);
@@ -3158,7 +3160,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = {-5000, -2500, 0, 2500, 5000})
+		@ValueSource(longs = { -5000, -2500, 0, 2500, 5000 })
 		void givenPossibleValuesWithRelativeTime(long offsetTime)
 		{
 			WorldMock world = server.addSimpleWorld("world");
@@ -3172,7 +3174,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = {-5000, -2500, 0, 2500, 5000})
+		@ValueSource(longs = { -5000, -2500, 0, 2500, 5000 })
 		void givenPossibleValuesWithoutRelativeTime(long offsetTime)
 		{
 			WorldMock world = server.addSimpleWorld("world");
@@ -3259,7 +3261,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean value)
 		{
 			player.setHasSeenWinScreen(value);
@@ -3313,7 +3315,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = {-1.0F, -0.5F, 0.0F, 0.5F, 1.0F})
+		@ValueSource(floats = { -1.0F, -0.5F, 0.0F, 0.5F, 1.0F })
 		void givenPossibleValue(float value)
 		{
 
@@ -3323,12 +3325,13 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = {-1.001F, 1.001F})
+		@ValueSource(floats = { -1.001F, 1.001F })
 		void givenNonPossibleValue(float value)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setFlySpeed(value));
 			assertEquals(String.format("Speed value (%s) need to be between -1f and 1f", value), e.getMessage());
 		}
+
 	}
 
 	@Nested
@@ -3342,7 +3345,7 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValue(boolean value)
 		{
 

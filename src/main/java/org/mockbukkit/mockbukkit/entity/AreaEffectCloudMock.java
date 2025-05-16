@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.potion.PotionUtils;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Particle;
@@ -14,6 +12,8 @@ import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.potion.PotionUtils;
 
 import java.util.ArrayList;
 import java.util.List;

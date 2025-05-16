@@ -38,7 +38,7 @@ public class RailDataMock extends BlockDataMock implements Rail
 	@Override
 	public @NotNull Set<Shape> getShapes()
 	{
-        return Arrays.stream(Shape.values()).collect(Collectors.toSet());
+		return Arrays.stream(Shape.values()).collect(Collectors.toSet());
 	}
 
 	@Override

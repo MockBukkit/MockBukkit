@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WolfSoundVariantMock implements Wolf.SoundVariant
 {
+
 	public static WolfSoundVariantMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());

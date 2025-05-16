@@ -17,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class PigMock extends AnimalsMock implements Pig
 {
+
 	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean hasSaddle = false;

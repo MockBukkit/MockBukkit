@@ -7,7 +7,6 @@ import org.bukkit.Keyed;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class KeyedClassTracker

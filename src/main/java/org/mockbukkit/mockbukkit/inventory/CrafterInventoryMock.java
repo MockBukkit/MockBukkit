@@ -20,7 +20,6 @@ public class CrafterInventoryMock extends InventoryMock implements CrafterInvent
 	 * Constructs a new {@link CrafterInventoryMock} for the given holder.
 	 *
 	 * @param holder The holder of the inventory.
-	 *
 	 * @see InventoryMock#InventoryMock(InventoryHolder, InventoryType)
 	 */
 	public CrafterInventoryMock(@Nullable InventoryHolder holder)

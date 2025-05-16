@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.block.data.BlockData;
@@ -15,6 +10,10 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.SplittableRandom;
 import java.util.UUID;

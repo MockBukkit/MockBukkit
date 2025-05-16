@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.services;
 
-import org.mockbukkit.mockbukkit.BuildParameters;
 import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.key.Key;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.BuildParameters;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

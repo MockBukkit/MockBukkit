@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class LightningStrikeMock extends EntityMock implements LightningStrike
 {
+
 	private boolean isEffect = false;
 	private int numberOfFlashes = 3;
 	private int ticksLived = 0;

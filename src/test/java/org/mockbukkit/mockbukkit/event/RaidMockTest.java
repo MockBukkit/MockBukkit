@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.event;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.RaiderMock;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
 import org.bukkit.Raid;
@@ -19,6 +15,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.RaiderMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -38,7 +38,7 @@ class RaidMockTest
 {
 
 	private final World raidWorld = new WorldMock();
-	private final Location raidLocation = new Location(raidWorld, 0, 0 ,0);
+	private final Location raidLocation = new Location(raidWorld, 0, 0, 0);
 	private final RaidMock raid = new RaidMock(1, raidLocation);
 
 	@MockBukkitInject
@@ -58,7 +58,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isStarted_GivenUserValue(boolean expectedValue)
 	{
 
@@ -74,7 +74,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(longs = {0, 1, 2, 3, 5, 10, 100, 1000})
+	@ValueSource(longs = { 0, 1, 2, 3, 5, 10, 100, 1000 })
 	void getActiveTicks_GivenValidUserValue(long expectedValue)
 	{
 		raid.setActiveTicks(expectedValue);
@@ -82,7 +82,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
+	@ValueSource(ints = { -1000, -100, -10, -5, -3, -2, -1 })
 	void getActiveTicks_GivenIllegalUserValue(long expectedValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setActiveTicks(expectedValue));
@@ -96,7 +96,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
 	void getBadOmenLevel_GivenValidUserValue(int expectedValue)
 	{
 		raid.setBadOmenLevel(expectedValue);
@@ -104,7 +104,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1, 6, 7, 8, 9, 10, 100})
+	@ValueSource(ints = { -1000, -100, -10, -5, -3, -2, -1, 6, 7, 8, 9, 10, 100 })
 	void getBadOmenLevel_GivenIllegalUserValue(int expectedValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setBadOmenLevel(expectedValue));
@@ -156,7 +156,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
 	void getSpawnedGroups_GivenValidUserValue(int expectedValue)
 	{
 		raid.setSpawnedGroups(expectedValue);
@@ -164,7 +164,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
+	@ValueSource(ints = { -1000, -100, -10, -5, -3, -2, -1 })
 	void getSpawnedGroups_GivenIllegalUserValue(int expectedValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setSpawnedGroups(expectedValue));
@@ -189,7 +189,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100 })
 	void getTotalWaves_GivenValue(int expectedCount)
 	{
 		raid.setWaves(expectedCount);
@@ -219,7 +219,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-1000, -100, -10, -5, -3, -2, -1})
+	@ValueSource(ints = { -1000, -100, -10, -5, -3, -2, -1 })
 	void setWaves_GivenNegativeValues(int expectedCount)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(expectedCount));
@@ -291,7 +291,7 @@ class RaidMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 1000})
+	@ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 1000 })
 	void getId(int expectedId)
 	{
 		World world = new WorldMock();

@@ -14,7 +14,6 @@ public class StoneCuttingRecipeElementFactory
 	 * Converts a stonecutting recipe into a JsonElement.
 	 *
 	 * @param stonecuttingRecipe The stonecutting recipe to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -38,7 +37,6 @@ public class StoneCuttingRecipeElementFactory
 	 * Converts a recipe into a JsonElement.
 	 *
 	 * @param recipe The recipe to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

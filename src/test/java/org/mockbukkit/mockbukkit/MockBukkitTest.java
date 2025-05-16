@@ -9,23 +9,20 @@ import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.exception.PluginIOException;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.SecondTestPlugin;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import java.io.File;
-
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

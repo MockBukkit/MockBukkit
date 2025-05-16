@@ -1,14 +1,14 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ZonglinMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private ZoglinMock zoglin;
@@ -36,7 +37,7 @@ class ZonglinMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void setBaby_GivenChangedValue(boolean expected)
 	{
 		zoglin.setBaby(expected);
@@ -50,7 +51,7 @@ class ZonglinMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
 	void getAge_GivenBabyValues(int value)
 	{
 		zoglin.setAge(value);
@@ -58,7 +59,7 @@ class ZonglinMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
 	void getAge_GivenAdultValues(int value)
 	{
 		zoglin.setAge(value);
@@ -72,7 +73,7 @@ class ZonglinMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void setAgeLock_ShouldNotUpdateTheAgeLock(boolean value)
 	{
 		zoglin.setAgeLock(value);
@@ -102,7 +103,7 @@ class ZonglinMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void setBreed_ShouldNotUpdateTheBreedValue(boolean value)
 	{
 		zoglin.setBreed(value);

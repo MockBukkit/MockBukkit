@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
@@ -14,6 +13,7 @@ import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.io.File;
 import java.util.Map;

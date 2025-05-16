@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import java.util.Map;
-import java.util.Objects;
-
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,6 +10,9 @@ import org.bukkit.inventory.FurnaceInventory;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.FurnaceInventoryMock;
+
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link Furnace}.

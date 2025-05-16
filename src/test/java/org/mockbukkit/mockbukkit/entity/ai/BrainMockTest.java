@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BrainMockTest
 {
+
 	private final BrainMock brain = new BrainMock();
 
 	@Nested
@@ -32,21 +33,21 @@ class BrainMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenBooleanValues(boolean value)
 		{
 			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 10, 200, 3000, 40000})
+		@ValueSource(ints = { 0, 10, 200, 3000, 40000 })
 		void givenIntegerValues(int value)
 		{
 			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = {0, 10, 200, 3000, 40000})
+		@ValueSource(longs = { 0, 10, 200, 3000, 40000 })
 		void givenLongValues(long value)
 		{
 			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
@@ -76,6 +77,7 @@ class BrainMockTest
 	@Nested
 	class SetMemory
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -127,6 +129,7 @@ class BrainMockTest
 	@Nested
 	class GetMemory
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -139,6 +142,7 @@ class BrainMockTest
 	@Nested
 	class HasMemoryValue
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -147,7 +151,7 @@ class BrainMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenExistingMemoryKey(boolean initialValue)
 		{
 			brain.setMemory(MemoryKey.GOLEM_DETECTED_RECENTLY, initialValue);
@@ -167,6 +171,7 @@ class BrainMockTest
 	@Nested
 	class EraseMemory
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -203,6 +208,7 @@ class BrainMockTest
 	@Nested
 	class ClearMemories
 	{
+
 		@Test
 		void givenExistingMemoryKey()
 		{
@@ -234,6 +240,7 @@ class BrainMockTest
 	@Nested
 	class Clone
 	{
+
 		@Test
 		void givenExistingMemoryKey()
 		{

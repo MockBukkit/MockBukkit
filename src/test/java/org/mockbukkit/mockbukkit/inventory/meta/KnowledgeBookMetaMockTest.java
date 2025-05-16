@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Arrays;
 import java.util.List;

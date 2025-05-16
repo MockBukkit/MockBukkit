@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TestBlockStateMock extends TileStateMock implements TestBlock
 {
+
 	public TestBlockStateMock(@NotNull Material material)
 	{
 		super(material);

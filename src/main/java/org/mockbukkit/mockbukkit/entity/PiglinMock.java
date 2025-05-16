@@ -23,6 +23,7 @@ import java.util.UUID;
  */
 public class PiglinMock extends PiglinAbstractMock implements Piglin
 {
+
 	private final Set<Material> allowedInterestItems = new HashSet<>();
 	private final Set<Material> allowedBarteringItems = new HashSet<>();
 

@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.entity.variant;
 
-import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Villager;
+import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
 public class VillagerProfessionMock extends OldKeyedEnumMock<Villager.Profession> implements Villager.Profession
 {

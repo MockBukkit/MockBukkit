@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.math.Position;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.SculkCatalyst;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link SculkCatalyst}.

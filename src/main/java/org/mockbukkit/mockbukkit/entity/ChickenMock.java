@@ -18,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ChickenMock extends AnimalsMock implements Chicken
 {
+
 	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean isChickenJockey = false;

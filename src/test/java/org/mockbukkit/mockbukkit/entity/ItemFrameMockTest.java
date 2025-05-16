@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.bukkit.Material;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
@@ -13,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
 
@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemFrameMockTest
 {
+
 	private ServerMock server;
 	private ItemFrameMock itemFrame;
 
@@ -103,7 +104,7 @@ class ItemFrameMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = {0.0F, 0.25F, 0.5F, 0.75F, 1.0F})
+	@ValueSource(floats = { 0.0F, 0.25F, 0.5F, 0.75F, 1.0F })
 	void getItemDropChance_GivenValidValues(float value)
 	{
 		itemFrame.setItemDropChance(value);
@@ -111,7 +112,7 @@ class ItemFrameMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = {-1, -0.01F, 1.01F, 2F})
+	@ValueSource(floats = { -1, -0.01F, 1.01F, 2F })
 	void setItemDropChance_GivenIllegalValues(float value)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> itemFrame.setItemDropChance(value));
@@ -172,4 +173,5 @@ class ItemFrameMockTest
 	{
 		assertEquals(EntityType.ITEM_FRAME, itemFrame.getType());
 	}
+
 }

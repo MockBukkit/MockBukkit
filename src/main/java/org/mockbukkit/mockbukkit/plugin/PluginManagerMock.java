@@ -30,9 +30,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.io.File;
@@ -120,6 +120,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 
 	/**
 	 * Get all events fired by this plugin manager
+	 *
 	 * @return All events fired by this plugin manager
 	 */
 	public Stream<Event> getFiredEvents()

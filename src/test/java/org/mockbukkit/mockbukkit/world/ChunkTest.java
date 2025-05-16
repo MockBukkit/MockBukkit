@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ChunkTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private WorldMock world;
@@ -253,7 +254,7 @@ class ChunkTest
 		assertFalse(chunk.contains(Biome.BADLANDS));
 	}
 
-  @Test
+	@Test
 	void setSlimeChunk()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);

@@ -17,6 +17,7 @@ import java.util.UUID;
  */
 public class PhantomMock extends FlyingMock implements Phantom
 {
+
 	private int size = 0;
 	private boolean shouldBurnInDay = true;
 

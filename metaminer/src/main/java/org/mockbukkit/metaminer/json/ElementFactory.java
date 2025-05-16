@@ -1,11 +1,5 @@
 package org.mockbukkit.metaminer.json;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
 import com.google.gson.JsonElement;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
@@ -23,8 +17,15 @@ import org.mockbukkit.metaminer.json.recipe.RecipeChoiceElementFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
 public class ElementFactory
 {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ElementFactory.class);
 	private static final Set<String> LOGGED_NAMES = new HashSet<>();
 

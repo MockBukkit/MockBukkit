@@ -48,7 +48,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		super(meta);
 
-		if(meta instanceof BookMeta bookMeta)
+		if (meta instanceof BookMeta bookMeta)
 		{
 			this.title = bookMeta.getTitle();
 			this.author = bookMeta.getAuthor();

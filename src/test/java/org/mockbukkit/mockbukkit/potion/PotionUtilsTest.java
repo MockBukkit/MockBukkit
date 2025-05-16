@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.potion;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

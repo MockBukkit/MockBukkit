@@ -1,13 +1,13 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -110,4 +110,5 @@ class ColorableArmorMetaMockTest
 		assertEquals(colorableMeta, clone);
 		assertEquals(colorableMeta.getColor(), clone.getColor());
 	}
+
 }

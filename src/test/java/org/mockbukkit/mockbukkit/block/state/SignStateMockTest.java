@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -18,6 +15,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -106,7 +106,7 @@ class SignStateMockTest
 	void testLineNull()
 	{
 		sign.setLine(0, null);
-		assertEquals("",sign.getLine(0));
+		assertEquals("", sign.getLine(0));
 	}
 
 	@Test
@@ -248,7 +248,7 @@ class SignStateMockTest
 	@EnumSource(Side.class)
 	void testGetLinesAsStrings(Side side)
 	{
-		assertArrayEquals(new String[] {
+		assertArrayEquals(new String[]{
 				"",
 				"",
 				"",
@@ -260,7 +260,7 @@ class SignStateMockTest
 		sign.getSide(side).line(2, Component.text("Line 3"));
 		sign.getSide(side).line(3, Component.text("Line 4"));
 
-		assertArrayEquals(new String[] {
+		assertArrayEquals(new String[]{
 				"Line 1",
 				"Line 2",
 				"Line 3",
@@ -312,4 +312,5 @@ class SignStateMockTest
 		}
 		return result;
 	}
+
 }

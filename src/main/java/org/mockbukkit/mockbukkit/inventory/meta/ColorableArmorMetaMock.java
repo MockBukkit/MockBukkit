@@ -33,7 +33,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	{
 		super(meta);
 
-		if(meta instanceof LeatherArmorMeta leatherArmorMeta)
+		if (meta instanceof LeatherArmorMeta leatherArmorMeta)
 		{
 			this.color = leatherArmorMeta.getColor().asRGB();
 		}

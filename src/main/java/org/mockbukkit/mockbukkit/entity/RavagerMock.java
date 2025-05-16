@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ravager;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public class RavagerMock extends RaiderMock implements Ravager
 {
+
 	private int attackTicks;
 	private int stunnedTicks;
 	private int roarTicks;

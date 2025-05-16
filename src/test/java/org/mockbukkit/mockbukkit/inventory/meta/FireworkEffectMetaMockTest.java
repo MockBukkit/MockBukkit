@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.ban;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.net.InetAddresses;
 import org.bukkit.BanEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.net.InetAddress;
 import java.util.Date;

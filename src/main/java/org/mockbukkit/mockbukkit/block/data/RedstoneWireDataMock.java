@@ -39,11 +39,11 @@ public class RedstoneWireDataMock extends BlockDataMock implements RedstoneWire
 	{
 		switch (face)
 		{
-			case NORTH -> this.set(BlockDataKey.REDSTONE_NORTH, connection);
-			case EAST -> this.set(BlockDataKey.REDSTONE_EAST, connection);
-			case SOUTH -> this.set(BlockDataKey.REDSTONE_SOUTH, connection);
-			case WEST -> this.set(BlockDataKey.REDSTONE_WEST, connection);
-			default -> throw new IllegalArgumentException("Cannot have face " + face);
+		case NORTH -> this.set(BlockDataKey.REDSTONE_NORTH, connection);
+		case EAST -> this.set(BlockDataKey.REDSTONE_EAST, connection);
+		case SOUTH -> this.set(BlockDataKey.REDSTONE_SOUTH, connection);
+		case WEST -> this.set(BlockDataKey.REDSTONE_WEST, connection);
+		default -> throw new IllegalArgumentException("Cannot have face " + face);
 		}
 	}
 

@@ -14,7 +14,6 @@ public class SmithingRecipeElementFactory
 	 * Converts a smithing recipe into a JsonElement.
 	 *
 	 * @param smithingRecipe The smithing recipe to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -39,7 +38,6 @@ public class SmithingRecipeElementFactory
 	 * Converts a recipe into a JsonElement.
 	 *
 	 * @param recipe The recipe to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

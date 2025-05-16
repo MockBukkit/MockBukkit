@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.SculkShrieker;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link SculkShrieker}.

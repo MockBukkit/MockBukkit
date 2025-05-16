@@ -37,7 +37,7 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	{
 		super(meta);
 
-		if(meta instanceof ArmorStandMeta armorStandMeta)
+		if (meta instanceof ArmorStandMeta armorStandMeta)
 		{
 			this.invisible = armorStandMeta.isInvisible();
 			this.marker = armorStandMeta.isMarker();

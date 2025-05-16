@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -14,6 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.util.List;
+import java.util.UUID;
 
 public class AbstractArrowMock extends AbstractProjectileMock implements AbstractArrow
 {

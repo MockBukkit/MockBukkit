@@ -51,7 +51,6 @@ public final class ItemStackMirror extends ItemStack
 	 * This emulates the behaviour from <code>CraftItemStack#asCraftMirror(net.minecraft.world.item.ItemStack original)</code>.
 	 *
 	 * @param item The original item.
-	 *
 	 * @return The mirror item.
 	 */
 	@NotNull

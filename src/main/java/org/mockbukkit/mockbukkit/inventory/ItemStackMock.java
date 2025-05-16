@@ -32,6 +32,7 @@ import java.util.Set;
 
 public class ItemStackMock extends ItemStack
 {
+
 	private static final String FIELD_AMOUNT = "amount";
 	private static final String FIELD_MATERIAL = "type";
 

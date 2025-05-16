@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -240,11 +240,11 @@ public class AllayMock extends CreatureMock implements Allay
 	}
 
 	/**
-	 *
 	 * @return The material of the current item held by the allay
 	 */
 	public @Nullable Material getCurrentItem()
 	{
 		return currentItem;
 	}
+
 }

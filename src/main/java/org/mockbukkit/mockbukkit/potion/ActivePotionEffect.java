@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.potion;
 
-import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 
 /**
  * This class represents an active {@link PotionEffect} which was applied to a {@link LivingEntity}.

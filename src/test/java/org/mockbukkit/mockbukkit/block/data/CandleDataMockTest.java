@@ -36,7 +36,7 @@ class CandleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3, 4})
+		@ValueSource(ints = { 1, 2, 3, 4 })
 		void givenPossibleValues(int candles)
 		{
 			candle.setCandles(candles);
@@ -44,7 +44,7 @@ class CandleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-1, 0, 5, 6})
+		@ValueSource(ints = { -1, 0, 5, 6 })
 		void givenInvalidValues(int candles)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> candle.setCandles(candles));
@@ -88,7 +88,7 @@ class CandleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isLit)
 		{
 			candle.setLit(isLit);
@@ -108,7 +108,7 @@ class CandleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			candle.setWaterlogged(isWaterLogged);

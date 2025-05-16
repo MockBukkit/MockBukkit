@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.enchantments.Enchantment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.HashMap;
 import java.util.Map;

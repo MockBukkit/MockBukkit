@@ -1,13 +1,11 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.PlayerListMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.OfflinePlayer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PlayerListMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private PlayerListMock playerList;

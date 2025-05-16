@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.map;
 
-import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
 import org.bukkit.map.MapCursor;
+import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
 public class MapCursorTypeMock extends OldKeyedEnumMock<MapCursor.Type> implements MapCursor.Type
 {

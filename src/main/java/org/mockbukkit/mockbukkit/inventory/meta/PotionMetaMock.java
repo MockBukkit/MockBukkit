@@ -52,7 +52,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		super(meta);
 
-		if(meta instanceof PotionMeta potionMeta)
+		if (meta instanceof PotionMeta potionMeta)
 		{
 			this.effects = new ArrayList<>(potionMeta.getCustomEffects());
 			this.type = potionMeta.getBasePotionType();

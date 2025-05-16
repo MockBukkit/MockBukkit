@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Vindicator;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public class VindicatorMock extends IllagerMock implements Vindicator
 {
+
 	private boolean johnny = false;
 
 	/**

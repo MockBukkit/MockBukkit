@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
@@ -15,6 +11,9 @@ import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -213,6 +212,7 @@ class AreaEffectCloudMockTest
 		assertTrue(areaEffectCloud.getCustomEffects().isEmpty());
 		assertFalse(areaEffectCloud.hasCustomEffects());
 	}
+
 	@Test
 	void testHasCustomEffectWithBasePotionDataWithEffect()
 	{
@@ -346,4 +346,5 @@ class AreaEffectCloudMockTest
 		areaEffectCloud.setBasePotionType(null);
 		assertNull(areaEffectCloud.getBasePotionType());
 	}
+
 }

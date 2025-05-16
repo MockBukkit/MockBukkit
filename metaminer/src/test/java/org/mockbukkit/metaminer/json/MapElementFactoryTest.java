@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MapElementFactoryTest
 {
+
 	@ParameterizedTest
 	@NullAndEmptySource
 	void givenNullOrEmptyValue(Map<?, ?> values)
@@ -27,8 +28,8 @@ class MapElementFactoryTest
 	void givenValidKey()
 	{
 		Map<?, ?> input = Map.of(
-			"material",  Material.AIR,
-			"amount", 10
+				"material", Material.AIR,
+				"amount", 10
 		);
 
 		JsonObject actual = MapElementFactory.toJson(input);
@@ -37,4 +38,5 @@ class MapElementFactoryTest
 		assertEquals("minecraft:air", actual.get("material").getAsString());
 		assertEquals(10, actual.get("amount").getAsInt());
 	}
+
 }

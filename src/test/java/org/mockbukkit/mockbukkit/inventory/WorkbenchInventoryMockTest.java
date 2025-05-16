@@ -1,12 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -15,6 +8,13 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class WorkbenchInventoryMockTest
@@ -51,6 +51,7 @@ class WorkbenchInventoryMockTest
 	@Nested
 	class SetMatrix
 	{
+
 		@Test
 		void testSetMatrix()
 		{
@@ -92,6 +93,7 @@ class WorkbenchInventoryMockTest
 
 			assertArrayEquals(matrix, workbench.getContents());
 		}
+
 	}
 
 	@Test

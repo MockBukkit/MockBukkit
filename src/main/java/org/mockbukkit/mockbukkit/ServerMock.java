@@ -217,7 +217,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
-	private int pauseWhenEmptyTime = 60 ;
+	private int pauseWhenEmptyTime = 60;
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -734,57 +734,57 @@ public class ServerMock extends Server.Spigot implements Server
 
 		InventoryMock inventory = switch (type)
 		{
-		case CHEST:
-			yield new ChestInventoryMock(owner, size > 0 ? size : type.getDefaultSize());
-		case DISPENSER:
-			yield new DispenserInventoryMock(owner);
-		case DROPPER:
-			yield new DropperInventoryMock(owner);
-		case PLAYER:
-			if (owner instanceof HumanEntity he)
-			{
-				yield new PlayerInventoryMock(he);
-			}
-			else
-			{
-				throw new IllegalArgumentException("Cannot create a Player Inventory for: " + owner);
-			}
-		case ENDER_CHEST:
-			yield new EnderChestInventoryMock(owner);
-		case HOPPER:
-			yield new HopperInventoryMock(owner);
-		case SHULKER_BOX:
-			yield new ShulkerBoxInventoryMock(owner);
-		case BARREL:
-			yield new BarrelInventoryMock(owner);
-		case LECTERN:
-			yield new LecternInventoryMock(owner);
-		case GRINDSTONE:
-			yield new GrindstoneInventoryMock(owner);
-		case STONECUTTER:
-			yield new StonecutterInventoryMock(owner);
-		case CARTOGRAPHY:
-			yield new CartographyInventoryMock(owner);
-		case SMOKER, FURNACE, BLAST_FURNACE:
-			yield new FurnaceInventoryMock(owner);
-		case LOOM:
-			yield new LoomInventoryMock(owner);
-		case ANVIL:
-			yield new AnvilInventoryMock(owner);
-		case SMITHING:
-			yield new SmithingInventoryMock(owner);
-		case BEACON:
-			yield new BeaconInventoryMock(owner);
-		case WORKBENCH:
-			yield new WorkbenchInventoryMock(owner);
-		case ENCHANTING:
-			yield new EnchantingInventoryMock(owner);
-		case BREWING:
-			yield new BrewerInventoryMock(owner);
-		case CRAFTER:
-			yield new CrafterInventoryMock(owner);
-		default:
-			throw new UnimplementedOperationException("Inventory type not yet supported");
+			case CHEST:
+				yield new ChestInventoryMock(owner, size > 0 ? size : type.getDefaultSize());
+			case DISPENSER:
+				yield new DispenserInventoryMock(owner);
+			case DROPPER:
+				yield new DropperInventoryMock(owner);
+			case PLAYER:
+				if (owner instanceof HumanEntity he)
+				{
+					yield new PlayerInventoryMock(he);
+				}
+				else
+				{
+					throw new IllegalArgumentException("Cannot create a Player Inventory for: " + owner);
+				}
+			case ENDER_CHEST:
+				yield new EnderChestInventoryMock(owner);
+			case HOPPER:
+				yield new HopperInventoryMock(owner);
+			case SHULKER_BOX:
+				yield new ShulkerBoxInventoryMock(owner);
+			case BARREL:
+				yield new BarrelInventoryMock(owner);
+			case LECTERN:
+				yield new LecternInventoryMock(owner);
+			case GRINDSTONE:
+				yield new GrindstoneInventoryMock(owner);
+			case STONECUTTER:
+				yield new StonecutterInventoryMock(owner);
+			case CARTOGRAPHY:
+				yield new CartographyInventoryMock(owner);
+			case SMOKER, FURNACE, BLAST_FURNACE:
+				yield new FurnaceInventoryMock(owner);
+			case LOOM:
+				yield new LoomInventoryMock(owner);
+			case ANVIL:
+				yield new AnvilInventoryMock(owner);
+			case SMITHING:
+				yield new SmithingInventoryMock(owner);
+			case BEACON:
+				yield new BeaconInventoryMock(owner);
+			case WORKBENCH:
+				yield new WorkbenchInventoryMock(owner);
+			case ENCHANTING:
+				yield new EnchantingInventoryMock(owner);
+			case BREWING:
+				yield new BrewerInventoryMock(owner);
+			case CRAFTER:
+				yield new CrafterInventoryMock(owner);
+			default:
+				throw new UnimplementedOperationException("Inventory type not yet supported");
 		};
 
 		if (title != null)
@@ -2199,52 +2199,52 @@ public class ServerMock extends Server.Spigot implements Server
 
 		switch (registryKey)
 		{
-			case Tag.REGISTRY_BLOCKS ->
+		case Tag.REGISTRY_BLOCKS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
 			{
-				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
-				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
-				if (optionalTag.isPresent())
-				{
-					return optionalTag.get();
-				}
+				return optionalTag.get();
 			}
-			case Tag.REGISTRY_ITEMS ->
+		}
+		case Tag.REGISTRY_ITEMS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
 			{
-				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
-				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
-				if (optionalTag.isPresent())
-				{
-					return optionalTag.get();
-				}
+				return optionalTag.get();
 			}
-			case Tag.REGISTRY_FLUIDS ->
+		}
+		case Tag.REGISTRY_FLUIDS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
 			{
-				Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
-				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
-				if (optionalTag.isPresent())
-				{
-					return optionalTag.get();
-				}
+				return optionalTag.get();
 			}
-			case Tag.REGISTRY_ENTITY_TYPES ->
+		}
+		case Tag.REGISTRY_ENTITY_TYPES ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
 			{
-				Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
-				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
-				if (optionalTag.isPresent())
-				{
-					return optionalTag.get();
-				}
+				return optionalTag.get();
 			}
-			case Tag.REGISTRY_GAME_EVENTS ->
+		}
+		case Tag.REGISTRY_GAME_EVENTS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
 			{
-				Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
-				Optional<Tag<T>> optionalTag = getTag(registryKey, key);
-				if (optionalTag.isPresent())
-				{
-					return optionalTag.get();
-				}
+				return optionalTag.get();
 			}
-			default -> throw new IllegalArgumentException("Unknown registry key: " + registryKey);
+		}
+		default -> throw new IllegalArgumentException("Unknown registry key: " + registryKey);
 		}
 
 		// Per definition this method should return null if the given tag does not exist.
@@ -2370,32 +2370,32 @@ public class ServerMock extends Server.Spigot implements Server
 
 		switch (registry)
 		{
-			case Tag.REGISTRY_BLOCKS ->
-			{
-				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
-				return getTags(registry);
-			}
-			case Tag.REGISTRY_ITEMS ->
-			{
-				Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
-				return getTags(registry);
-			}
-			case Tag.REGISTRY_FLUIDS ->
-			{
-				Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
-				return getTags(registry);
-			}
-			case Tag.REGISTRY_ENTITY_TYPES ->
-			{
-				Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
-				return getTags(registry);
-			}
-			case Tag.REGISTRY_GAME_EVENTS ->
-			{
-				Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
-				return getTags(registry);
-			}
-			default -> throw new IllegalArgumentException("Unknown registry key: " + registry);
+		case Tag.REGISTRY_BLOCKS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Block namespace (%s) must have material type", clazz.getName());
+			return getTags(registry);
+		}
+		case Tag.REGISTRY_ITEMS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.Material.class, "Item namespace (%s) must have material type", clazz.getName());
+			return getTags(registry);
+		}
+		case Tag.REGISTRY_FLUIDS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.Fluid.class, "Fluid namespace (%s) must have fluid type", clazz.getName());
+			return getTags(registry);
+		}
+		case Tag.REGISTRY_ENTITY_TYPES ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.entity.EntityType.class, "Entity type namespace (%s) must have entity type", clazz.getName());
+			return getTags(registry);
+		}
+		case Tag.REGISTRY_GAME_EVENTS ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
+			return getTags(registry);
+		}
+		default -> throw new IllegalArgumentException("Unknown registry key: " + registry);
 		}
 	}
 

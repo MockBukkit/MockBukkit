@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import java.util.Objects;
-
 import io.papermc.paper.block.LockableTileState;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,8 +8,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.util.Objects;
+
 public abstract class LockableTileStateMock extends TileStateMock implements LockableTileState
 {
+
 	private @NotNull String lock = "";
 
 	protected LockableTileStateMock(@NotNull Material material)

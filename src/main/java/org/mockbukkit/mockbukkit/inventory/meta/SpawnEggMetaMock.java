@@ -34,7 +34,7 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	public SpawnEggMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-		if(meta instanceof SpawnEggMeta spawnMeta)
+		if (meta instanceof SpawnEggMeta spawnMeta)
 		{
 			// TODO cloning logic from spawnMeta
 		}

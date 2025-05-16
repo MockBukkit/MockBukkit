@@ -39,7 +39,7 @@ public class OrientableMock extends BlockDataMock implements Orientable
 	@Override
 	public @NotNull Set<Axis> getAxes()
 	{
-        return Arrays.stream(Axis.values()).collect(Collectors.toSet());
+		return Arrays.stream(Axis.values()).collect(Collectors.toSet());
 	}
 
 }

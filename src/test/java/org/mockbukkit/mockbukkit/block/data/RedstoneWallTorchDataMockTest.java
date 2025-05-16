@@ -40,7 +40,7 @@ class RedstoneWallTorchDataMockTest
 		@ParameterizedTest
 		@EnumSource(value = BlockFace.class,
 				mode = EnumSource.Mode.INCLUDE,
-				names = {"NORTH", "SOUTH", "EAST", "WEST" })
+				names = { "NORTH", "SOUTH", "EAST", "WEST" })
 		void givenValidValues(BlockFace face)
 		{
 			torch.setFacing(face);
@@ -70,7 +70,7 @@ class RedstoneWallTorchDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isLit)
 		{
 			torch.setLit(isLit);

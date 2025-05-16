@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
-import org.mockbukkit.mockbukkit.entity.ZombieMock;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.EntityEquipment;
@@ -14,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
+import org.mockbukkit.mockbukkit.entity.ZombieMock;
 
 import java.util.Arrays;
 import java.util.UUID;

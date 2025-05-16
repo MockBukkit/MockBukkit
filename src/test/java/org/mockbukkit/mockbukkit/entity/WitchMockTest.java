@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
@@ -11,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ class WitchMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isDrinkingPotion_GivenPossibleValues(boolean isDrinkingPotion)
 	{
 		witch.setDrinkingPotion(isDrinkingPotion);
@@ -62,7 +62,7 @@ class WitchMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 31, 32})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 31, 32 })
 	void getPotionUseTimeLeft_GivenPossibleValues(int useTimeLeft)
 	{
 		witch.setPotionUseTimeLeft(useTimeLeft);

@@ -1,18 +1,5 @@
 package org.mockbukkit.mockbukkit.registry;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.TypedKey;
@@ -27,6 +14,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class RegistryMockTest
@@ -88,6 +88,7 @@ class RegistryMockTest
 		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
 		assertThrows(NullPointerException.class, () -> structureRegistryMock.get((NamespacedKey) null));
 	}
+
 	@Test
 	void typed_key_NotNull()
 	{
@@ -170,4 +171,5 @@ class RegistryMockTest
 	{
 		return Registry.ITEM.stream();
 	}
+
 }

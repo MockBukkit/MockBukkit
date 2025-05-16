@@ -20,7 +20,7 @@ public class BrainMock
 	private static final String MEMORY_KEY_CANNOT_BE_NULL = "Memory key cannot be null";
 
 	private static final Set<Class<?>> SUPPORTED_MEMORY_TYPES = Set.of(
-		Location.class, Boolean.class, Integer.class, Long.class, UUID.class
+			Location.class, Boolean.class, Integer.class, Long.class, UUID.class
 	);
 
 	static void assertIsSupportedValue(Object value)

@@ -270,7 +270,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
-		return new LivingEntitySimulation(this).simulateDamage(amount,source);
+		return new LivingEntitySimulation(this).simulateDamage(amount, source);
 	}
 
 	/**

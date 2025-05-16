@@ -38,7 +38,7 @@ class RedstoneRailDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isPowered)
 		{
 			rail.setPowered(isPowered);
@@ -94,7 +94,7 @@ class RedstoneRailDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			rail.setWaterlogged(isWaterLogged);

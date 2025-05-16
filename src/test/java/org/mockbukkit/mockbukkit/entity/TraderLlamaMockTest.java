@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class TraderLlamaMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private TraderLlamaMock llama;

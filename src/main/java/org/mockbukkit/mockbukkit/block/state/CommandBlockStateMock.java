@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.command.CommandBlockHolderMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
@@ -8,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.command.CommandBlockHolderMock;
 
 /**
  * Mock implementation of a {@link CommandBlock}.

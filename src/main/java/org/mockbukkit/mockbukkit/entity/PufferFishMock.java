@@ -1,15 +1,14 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PufferFish;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.UUID;
 

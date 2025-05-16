@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
@@ -9,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class IronGolemMockTest
 {
+
 	private ServerMock server;
 	private IronGolemMock ironGolem;
 
@@ -40,7 +41,7 @@ class IronGolemMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isPlayerCreated_GivenChangesInValue(boolean isPlayerCreated)
 	{
 		ironGolem.setPlayerCreated(isPlayerCreated);

@@ -497,7 +497,6 @@ public class BlockDataMock implements BlockData
 	 *
 	 * @param material The material to create the BlockData from.
 	 * @return The BlockData.
-	 *
 	 * @deprecated Use {@link BlockDataMockFactory#mock(Material)} instead.
 	 */
 	@Deprecated(forRemoval = true)

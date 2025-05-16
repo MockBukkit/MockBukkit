@@ -10,7 +10,11 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -18,11 +22,16 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class TextDisplayMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private TextDisplayMock textDisplay;
@@ -39,10 +48,10 @@ class TextDisplayMockTest
 
 		@ParameterizedTest
 		@ValueSource(strings = {
-			"Hello!",
-			"&4Hello!",
-			"This is\nan example\nwith newline",
-			"&aH&be&cl&dl&eo&f!",
+				"Hello!",
+				"&4Hello!",
+				"This is\nan example\nwith newline",
+				"&aH&be&cl&dl&eo&f!",
 		})
 		void givenValidStringValues(String expected)
 		{
@@ -111,7 +120,7 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3, 4, 5, 10, 25, 50, 75, 100, 200})
+		@ValueSource(ints = { 1, 2, 3, 4, 5, 10, 25, 50, 75, 100, 200 })
 		void givenPossibleLineWidthValues(int expected)
 		{
 			textDisplay.setLineWidth(expected);
@@ -144,24 +153,24 @@ class TextDisplayMockTest
 		private static Stream<Color> getColors()
 		{
 			return Stream.of(
-				Color.AQUA,
-				Color.BLACK,
-				Color.BLUE,
-				Color.FUCHSIA,
-				Color.GRAY,
-				Color.GREEN,
-				Color.LIME,
-				Color.MAROON,
-				Color.NAVY,
-				Color.OLIVE,
-				Color.ORANGE,
-				Color.PURPLE,
-				Color.PURPLE,
-				Color.RED,
-				Color.SILVER,
-				Color.TEAL,
-				Color.WHITE,
-				Color.YELLOW
+					Color.AQUA,
+					Color.BLACK,
+					Color.BLUE,
+					Color.FUCHSIA,
+					Color.GRAY,
+					Color.GREEN,
+					Color.LIME,
+					Color.MAROON,
+					Color.NAVY,
+					Color.OLIVE,
+					Color.ORANGE,
+					Color.PURPLE,
+					Color.PURPLE,
+					Color.RED,
+					Color.SILVER,
+					Color.TEAL,
+					Color.WHITE,
+					Color.YELLOW
 			);
 		}
 
@@ -178,7 +187,7 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(bytes = {-1, 0, 1, 2, 3, 4, 5, 10, 25, 50, 75, 100})
+		@ValueSource(bytes = { -1, 0, 1, 2, 3, 4, 5, 10, 25, 50, 75, 100 })
 		void givenPossibleLineWidthValues(byte expected)
 		{
 			textDisplay.setTextOpacity(expected);
@@ -199,7 +208,7 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean expected)
 		{
 			textDisplay.setShadowed(expected);
@@ -220,7 +229,7 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean expected)
 		{
 			textDisplay.setSeeThrough(expected);
@@ -241,7 +250,7 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean expected)
 		{
 			textDisplay.setDefaultBackground(expected);
@@ -278,4 +287,5 @@ class TextDisplayMockTest
 		}
 
 	}
+
 }

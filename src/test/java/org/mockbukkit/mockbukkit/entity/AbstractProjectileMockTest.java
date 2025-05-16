@@ -82,7 +82,7 @@ class AbstractProjectileMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans =  {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean value)
 		{
 			abstractProjectile.setHasLeftShooter(value);
@@ -103,7 +103,7 @@ class AbstractProjectileMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans =  {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean value)
 		{
 			abstractProjectile.setHasBeenShot(value);

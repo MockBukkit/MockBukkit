@@ -48,7 +48,7 @@ class PiglinMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean expectedValue)
 		{
 			piglin.setIsAbleToHunt(expectedValue);
@@ -163,7 +163,7 @@ class PiglinMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean expectedValue)
 		{
 			piglin.setChargingCrossbow(expectedValue);

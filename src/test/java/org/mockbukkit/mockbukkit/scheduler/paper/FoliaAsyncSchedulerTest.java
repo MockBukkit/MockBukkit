@@ -1,14 +1,14 @@
 package org.mockbukkit.mockbukkit.scheduler.paper;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;

@@ -1,15 +1,15 @@
 package org.mockbukkit.mockbukkit.ban;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.profile.PlayerProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Date;
 import java.util.UUID;
@@ -130,7 +130,7 @@ class ProfileBanListMockTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				(Date)null,
+				(Date) null,
 				null);
 
 		assertTrue(banList.isBanned(profileMock));

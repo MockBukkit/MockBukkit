@@ -30,7 +30,6 @@ public class ItemMetaAnyLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @return A matcher which matches with any meta with any lore
 	 */
 	public static @NotNull ItemMetaAnyLoreMatcher hasAnyLore()
@@ -39,7 +38,6 @@ public class ItemMetaAnyLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @return A matcher which matches with any meta without any lore
 	 */
 	public static @NotNull Matcher<ItemMetaMock> hasNoLore()

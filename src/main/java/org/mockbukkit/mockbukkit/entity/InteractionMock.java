@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Interaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -17,6 +17,7 @@ import java.util.UUID;
  */
 public class InteractionMock extends EntityMock implements Interaction
 {
+
 	private boolean responsive;
 	private float height;
 	private float width;
@@ -111,13 +112,14 @@ public class InteractionMock extends EntityMock implements Interaction
 
 	public static class PreviousInteractionMock implements PreviousInteraction
 	{
+
 		private final OfflinePlayer player;
 		private final long timestamp;
 
 		/**
 		 * Create a previous interaction mock.
 		 *
-		 * @param player	The last player that interacted.
+		 * @param player    The last player that interacted.
 		 * @param timestamp The interaction timestamp.
 		 */
 		public PreviousInteractionMock(OfflinePlayer player, long timestamp)

@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.profile;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.profile.PlayerTextures.SkinModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,6 +14,7 @@ import java.util.UUID;
 @ExtendWith(MockBukkitExtension.class)
 class PlayerTexturesMockTest
 {
+
 	private PlayerProfileMock profile;
 
 	@BeforeEach
@@ -130,7 +131,7 @@ class PlayerTexturesMockTest
 		PlayerTexturesMock otherPlayerTexturesMock = new PlayerTexturesMock(profile);
 		otherPlayerTexturesMock.setSkin(new URL("https://github.com/skin"));
 
-        Assertions.assertEquals(playerTexturesMock.hashCode(), otherPlayerTexturesMock.hashCode());
+		Assertions.assertEquals(playerTexturesMock.hashCode(), otherPlayerTexturesMock.hashCode());
 	}
 
 	@Test
@@ -151,4 +152,5 @@ class PlayerTexturesMockTest
 		Assertions.assertEquals(playerTexturesMock, otherPlayerTexturesMock);
 
 	}
+
 }

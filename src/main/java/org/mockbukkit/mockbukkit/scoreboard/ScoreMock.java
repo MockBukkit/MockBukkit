@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
@@ -8,6 +7,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link Score}.

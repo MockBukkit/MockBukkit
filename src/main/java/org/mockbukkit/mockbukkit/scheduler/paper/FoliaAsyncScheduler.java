@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.scheduler.paper;
 
-import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;

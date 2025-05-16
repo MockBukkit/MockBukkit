@@ -75,4 +75,5 @@ class ZombieVillagerMockTest
 		zombie.setVillagerProfession(Villager.Profession.BUTCHER);
 		assertEquals(Villager.Profession.BUTCHER, zombie.getVillagerProfession());
 	}
+
 }

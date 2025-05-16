@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.entity.variant;
 
-import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Frog;
+import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
 public class FrogVariantMock extends OldKeyedEnumMock<Frog.Variant> implements Frog.Variant
 {

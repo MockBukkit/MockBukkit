@@ -16,6 +16,7 @@ import java.util.UUID;
  */
 public class OminousItemSpawnerMock extends EntityMock implements OminousItemSpawner
 {
+
 	private long spawnItemAfterTicks = 60;
 
 	private @NotNull ItemStack item = ItemStack.empty();

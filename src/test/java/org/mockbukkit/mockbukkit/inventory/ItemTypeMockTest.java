@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -66,7 +66,7 @@ class ItemTypeMockTest
 	void testGetCompostChance()
 	{
 		ItemType item = ItemType.ACACIA_LEAVES;
-		assertTrue(Math.abs(0.3-item.getCompostChance()) < 0.1);
+		assertTrue(Math.abs(0.3 - item.getCompostChance()) < 0.1);
 	}
 
 	@Test
@@ -92,4 +92,5 @@ class ItemTypeMockTest
 		ItemType item = ItemType.ACACIA_BOAT;
 		assertEquals("item.minecraft.acacia_boat", item.translationKey());
 	}
+
 }

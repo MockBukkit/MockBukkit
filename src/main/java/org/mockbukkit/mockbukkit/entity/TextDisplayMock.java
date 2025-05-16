@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class TextDisplayMock extends DisplayMock implements TextDisplay
 {
+
 	private @NotNull Component text = Component.empty();
 	private @NotNull TextAlignment textAlignment = TextAlignment.CENTER;
 	private @Nullable Color backgroundColor = null;

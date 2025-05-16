@@ -6,7 +6,6 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.List;

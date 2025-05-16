@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.destroystokyo.paper.utils.PaperPluginLogger;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
@@ -10,6 +8,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -18,6 +18,7 @@ import java.net.URLClassLoader;
 
 public class MockBukkitURLClassLoader extends URLClassLoader implements ConfiguredPluginClassLoader
 {
+
 	private final File pluginFile;
 	private final ServerMock server;
 	private final PluginDescriptionFile description;
@@ -28,7 +29,7 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 									PluginDescriptionFile description,
 									File dataFolder) throws MalformedURLException
 	{
-		super(new URL[] {file.toURI().toURL()}, parent);
+		super(new URL[]{ file.toURI().toURL() }, parent);
 		this.pluginFile = file;
 		this.server = server;
 		this.description = description;
@@ -71,7 +72,8 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	public URL getResource(String name)
 	{
 		URL url = findResource(name);
-		if(url == null) return super.getResource(name);
+		if (url == null) return super.getResource(name);
 		return url;
 	}
+
 }

@@ -5,7 +5,6 @@ import org.mockbukkit.metaminer.internal.tags.blocks.InternalBlockTagDataGenerat
 
 import java.io.File;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public enum InternalTagType
 {

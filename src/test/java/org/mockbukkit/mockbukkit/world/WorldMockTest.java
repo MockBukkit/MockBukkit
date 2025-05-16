@@ -2461,23 +2461,23 @@ class WorldMockTest
 
 	@ParameterizedTest
 	@CsvSource({
-		"FULL_MOON, 0",
-		"FULL_MOON, 23999",
-		"WANING_GIBBOUS, 24000",
-		"WANING_GIBBOUS, 47999",
-		"LAST_QUARTER, 48000",
-		"LAST_QUARTER, 71999",
-		"WANING_CRESCENT, 72000",
-		"WANING_CRESCENT, 95999",
-		"NEW_MOON, 96000",
-		"NEW_MOON, 119999",
-		"WAXING_CRESCENT, 120000",
-		"WAXING_CRESCENT, 143999",
-		"FIRST_QUARTER, 144000",
-		"FIRST_QUARTER, 167999",
-		"WAXING_GIBBOUS, 168000",
-		"WAXING_GIBBOUS, 191999",
-		"FULL_MOON, 192000",
+			"FULL_MOON, 0",
+			"FULL_MOON, 23999",
+			"WANING_GIBBOUS, 24000",
+			"WANING_GIBBOUS, 47999",
+			"LAST_QUARTER, 48000",
+			"LAST_QUARTER, 71999",
+			"WANING_CRESCENT, 72000",
+			"WANING_CRESCENT, 95999",
+			"NEW_MOON, 96000",
+			"NEW_MOON, 119999",
+			"WAXING_CRESCENT, 120000",
+			"WAXING_CRESCENT, 143999",
+			"FIRST_QUARTER, 144000",
+			"FIRST_QUARTER, 167999",
+			"WAXING_GIBBOUS, 168000",
+			"WAXING_GIBBOUS, 191999",
+			"FULL_MOON, 192000",
 	})
 	void getMoonPhase(MoonPhase expected, long time)
 	{
@@ -2491,8 +2491,9 @@ class WorldMockTest
 	@Nested
 	class SetGameTime
 	{
+
 		@ParameterizedTest
-		@ValueSource(longs = {0, 1, 10, 25, 50, 75, 100})
+		@ValueSource(longs = { 0, 1, 10, 25, 50, 75, 100 })
 		void givenValidValues(long expected)
 		{
 			WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -2503,7 +2504,7 @@ class WorldMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = {-1, -10, -25, -50, -75, -100})
+		@ValueSource(longs = { -1, -10, -25, -50, -75, -100 })
 		void givenInValidValues(long invalidValue)
 		{
 			WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -2517,6 +2518,7 @@ class WorldMockTest
 	@Nested
 	class VoidDamage
 	{
+
 		private final WorldMock world = new WorldMock(Material.DIRT, 3);
 
 		@Test
@@ -2528,7 +2530,7 @@ class WorldMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void enableAndDisableVoidDamage(boolean isEnabled)
 		{
 			world.setVoidDamageEnabled(isEnabled);
@@ -2536,7 +2538,7 @@ class WorldMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {5, 10, 15, 20})
+		@ValueSource(ints = { 5, 10, 15, 20 })
 		void changeVoidDamage(float damage)
 		{
 			world.setVoidDamageAmount(damage);
@@ -2544,7 +2546,7 @@ class WorldMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-5, -10, -15, -20})
+		@ValueSource(ints = { -5, -10, -15, -20 })
 		void changeVoidStartDamageHeight(double damage)
 		{
 			world.setVoidDamageMinBuildHeightOffset(damage);
@@ -2556,6 +2558,7 @@ class WorldMockTest
 	@Nested
 	class IsAutoSaveEnabled
 	{
+
 		private final WorldMock world = new WorldMock(Material.DIRT, 3);
 
 		@Test
@@ -2565,7 +2568,7 @@ class WorldMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void enableAndDisableVoidDamage(boolean isEnabled)
 		{
 			world.setAutoSave(isEnabled);

@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.block.banner;
 
-import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.banner.PatternType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
 public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements PatternType
 {
@@ -12,9 +12,9 @@ public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements Pa
 	private final NamespacedKey key;
 	private final String identifier;
 
-	public PatternTypeMock(NamespacedKey key,String name, int ordinal,String identifier)
+	public PatternTypeMock(NamespacedKey key, String name, int ordinal, String identifier)
 	{
-		super(name, ordinal,key);
+		super(name, ordinal, key);
 		this.identifier = identifier;
 		this.key = key;
 	}
@@ -27,7 +27,7 @@ public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements Pa
 		String identifier = jsonObject.get("identifier").getAsString();
 
 
-		return new PatternTypeMock(key,name,ordinal,identifier);
+		return new PatternTypeMock(key, name, ordinal, identifier);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements Pa
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.21")
+	@Deprecated(forRemoval = true, since = "1.21")
 	public @NotNull String getIdentifier()
 	{
 		return this.identifier;

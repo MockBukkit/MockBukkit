@@ -1,18 +1,17 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -56,7 +55,7 @@ class TNTPrimedMockTest
 	@Test
 	void testGetSourceDefault()
 	{
-        assertNull(tntPrimed.getSource());
+		assertNull(tntPrimed.getSource());
 	}
 
 	@Test
@@ -124,4 +123,5 @@ class TNTPrimedMockTest
 		assertTrue(tntPrimed.isDead());
 		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
+
 }

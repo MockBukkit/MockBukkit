@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.SmithingInventory;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of an {@link SmithingInventory}.

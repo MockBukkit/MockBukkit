@@ -850,7 +850,8 @@ class InventoryMockTest
 			if (inventoryA == null)
 			{
 				assertNull(inventoryB);
-			} else
+			}
+			else
 			{
 				assertTrue(inventoryA.isIdentical(inventoryB));
 			}
@@ -861,7 +862,8 @@ class InventoryMockTest
 			if (inventoryA == null)
 			{
 				assertNotNull(inventoryB);
-			} else
+			}
+			else
 			{
 				assertFalse(inventoryA.isIdentical(inventoryB));
 			}

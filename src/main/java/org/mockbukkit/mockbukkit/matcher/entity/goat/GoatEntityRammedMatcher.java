@@ -39,7 +39,6 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	}
 
 	/**
-	 *
 	 * @param target The target required to have been hit for there to be a match
 	 * @return A matcher which matches with any goat that has targeted the specified target
 	 */
@@ -50,7 +49,6 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	}
 
 	/**
-	 *
 	 * @param target The target required to not have been hit for there to be a match
 	 * @return A matcher which matches with any goat that has not targeted the specified target
 	 */

@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.Sound;
@@ -9,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Shulker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class ShulkerMock extends GolemMock implements Shulker
 {
+
 	private int peekAmount = 0;
 	private BlockFace attachedFace = BlockFace.DOWN;
 	private DyeColor dyeColor;

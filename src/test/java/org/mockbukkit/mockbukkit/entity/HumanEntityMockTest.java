@@ -284,6 +284,7 @@ class HumanEntityMockTest
 			}
 
 		}
+
 	}
 
 	@Test
@@ -374,7 +375,7 @@ class HumanEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+	@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
 	void isDeeplySleeping_GivenNonDeepSleepLevelIsSleeping(int sleepTicks)
 	{
 		human.setSleeping(true);
@@ -384,7 +385,7 @@ class HumanEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {101, 110, 120, 130, 140, 150})
+	@ValueSource(ints = { 101, 110, 120, 130, 140, 150 })
 	void isDeeplySleeping_GivenDeepSleepLevelAndIsSleeping(int sleepTicks)
 	{
 		human.setSleeping(true);
@@ -394,7 +395,7 @@ class HumanEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 101, 110, 120, 130, 140, 150})
+	@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 101, 110, 120, 130, 140, 150 })
 	void isDeeplySleeping_GivenIsNotSleeping(int sleepTicks)
 	{
 		human.setSleeping(false);
@@ -414,7 +415,7 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
 		void givenPossibleValues(int value)
 		{
 			human.setSaturatedRegenRate(value);
@@ -435,7 +436,7 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
 		void givenPossibleValues(int value)
 		{
 			human.setUnsaturatedRegenRate(value);
@@ -456,7 +457,7 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
 		void givenPossibleValues(int value)
 		{
 			human.setStarvationRate(value);
@@ -498,7 +499,7 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
 		void givenPossibleValues(int value)
 		{
 			human.setEnchantmentSeed(value);

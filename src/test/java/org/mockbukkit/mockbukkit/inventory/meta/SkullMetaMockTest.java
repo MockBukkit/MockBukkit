@@ -1,13 +1,13 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.profile.PlayerProfile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.UUID;
 

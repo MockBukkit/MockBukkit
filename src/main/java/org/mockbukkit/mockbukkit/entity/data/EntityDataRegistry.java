@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
+import org.bukkit.entity.EntityType;
+import org.mockbukkit.mockbukkit.MockBukkit;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,10 +13,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import org.bukkit.entity.EntityType;
-
-import org.mockbukkit.mockbukkit.MockBukkit;
 
 public class EntityDataRegistry
 {

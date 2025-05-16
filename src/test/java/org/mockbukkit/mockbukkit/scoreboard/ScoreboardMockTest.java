@@ -1,9 +1,5 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
-import org.mockbukkit.mockbukkit.entity.SimpleEntityMock;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -12,8 +8,10 @@ import org.bukkit.scoreboard.Team;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.scoreboard.ObjectiveMock;
-import org.mockbukkit.mockbukkit.scoreboard.ScoreboardMock;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.SimpleEntityMock;
 
 import java.util.Set;
 

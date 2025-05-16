@@ -21,6 +21,7 @@ import java.util.UUID;
  */
 public abstract class AbstractVillagerMock extends AgeableMock implements Merchant, AbstractVillager, InventoryHolder
 {
+
 	private final MerchantInventoryMock inventory = new MerchantInventoryMock(this, this);
 	private final List<MerchantRecipe> recipes = new ArrayList<>();
 

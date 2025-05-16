@@ -12,7 +12,6 @@ public class SmeltingRecipeElementFactory
 	 * Converts a recipe into a JsonElement.
 	 *
 	 * @param recipe The recipe to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

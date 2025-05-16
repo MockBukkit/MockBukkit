@@ -1,15 +1,13 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.FaceAttachable.AttachedFace;
 import org.bukkit.block.data.type.Switch.Face;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;

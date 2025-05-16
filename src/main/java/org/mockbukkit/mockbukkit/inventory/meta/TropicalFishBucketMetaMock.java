@@ -38,7 +38,7 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	{
 		super(meta);
 
-		if(meta instanceof TropicalFishBucketMeta bucketMeta)
+		if (meta instanceof TropicalFishBucketMeta bucketMeta)
 		{
 			if (meta instanceof TropicalFishBucketMetaMock mock)
 			{

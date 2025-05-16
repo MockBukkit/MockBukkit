@@ -18,6 +18,7 @@ import java.util.UUID;
  */
 public class PaintingMock extends HangingMock implements Painting
 {
+
 	private @NotNull Art art;
 
 	/**
@@ -36,7 +37,7 @@ public class PaintingMock extends HangingMock implements Painting
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
-	 * @param art	 The art to be used in the painting.
+	 * @param art    The art to be used in the painting.
 	 */
 	public PaintingMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull Art art)
 	{

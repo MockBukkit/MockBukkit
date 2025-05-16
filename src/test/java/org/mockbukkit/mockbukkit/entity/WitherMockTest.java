@@ -1,14 +1,14 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Difficulty;
-import org.bukkit.entity.Wither;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Wither;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
@@ -19,9 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 class WitherMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private WitherMock wither;
+
 	@BeforeEach
 	void setUp()
 	{

@@ -27,7 +27,7 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 	{
 		super(meta);
 
-		if(meta instanceof ArmorMetaMock armorMeta)
+		if (meta instanceof ArmorMetaMock armorMeta)
 		{
 			this.trim = armorMeta.getTrim();
 		}

@@ -14,7 +14,7 @@ public class EventFactoryMock
 	 * Call a {@link EntityRemoveEvent}.
 	 *
 	 * @param entity The entity being removed.
-	 * @param cause	 The cause for removal.
+	 * @param cause  The cause for removal.
 	 */
 	public static void callEntityRemoveEvent(@NotNull Entity entity, @Nullable EntityRemoveEvent.Cause cause)
 	{

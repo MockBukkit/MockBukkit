@@ -1,11 +1,5 @@
 package org.mockbukkit.mockbukkit.damage;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.entity.SkeletonMock;
-import org.mockbukkit.mockbukkit.entity.ZombieMock;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -17,6 +11,12 @@ import org.bukkit.entity.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.entity.SkeletonMock;
+import org.mockbukkit.mockbukkit.entity.ZombieMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
 

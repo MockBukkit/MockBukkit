@@ -1,15 +1,15 @@
 package org.mockbukkit.mockbukkit.enchantment;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.enchantments.Enchantment;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class EnchantmentMockTest
@@ -94,4 +94,5 @@ class EnchantmentMockTest
 	{
 		assertThrows(IllegalArgumentException.class, () -> Enchantment.FIRE_PROTECTION.conflictsWith(null));
 	}
+
 }

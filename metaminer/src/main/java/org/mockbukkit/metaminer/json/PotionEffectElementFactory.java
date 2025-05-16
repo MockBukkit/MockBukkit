@@ -6,11 +6,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class PotionEffectElementFactory
 {
+
 	/**
 	 * Converts a potionEffect into a JsonElement.
 	 *
 	 * @param potionEffect The potionEffect to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -36,4 +36,5 @@ public class PotionEffectElementFactory
 	{
 		// Hide the public constructor
 	}
+
 }

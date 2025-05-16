@@ -35,7 +35,7 @@ class AgeableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7 })
 		void setAge(int age)
 		{
 			ageable.setAge(age);
@@ -43,7 +43,7 @@ class AgeableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-5, -4, -3, -2, -1})
+		@ValueSource(ints = { -5, -4, -3, -2, -1 })
 		void givenNegative(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> ageable.setAge(age));

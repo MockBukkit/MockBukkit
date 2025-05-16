@@ -96,6 +96,7 @@ public class HelpMapMock implements HelpMap
 
 	/**
 	 * Whether the specified factory has been registered to this instance
+	 *
 	 * @param factory The factory that should have been registered
 	 * @return True if the specified factory has been registered to this instance
 	 */

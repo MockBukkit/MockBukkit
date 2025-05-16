@@ -11,7 +11,6 @@ public class EnumElementFactory
 	 * Converts a enum element into a JsonElement.
 	 *
 	 * @param enumElement The enumElement to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

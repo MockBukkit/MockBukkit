@@ -44,8 +44,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				boolean.class,
-				Boolean.class,
+					boolean.class,
+					Boolean.class,
 			})
 			void givenBoolean(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{
@@ -57,8 +57,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				int.class,
-				Integer.class,
+					int.class,
+					Integer.class,
 			})
 			void givenInt(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{
@@ -70,8 +70,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				short.class,
-				Short.class,
+					short.class,
+					Short.class,
 			})
 			void givenShort(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{
@@ -83,8 +83,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				long.class,
-				Long.class,
+					long.class,
+					Long.class,
 			})
 			void givenLong(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{
@@ -96,8 +96,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				double.class,
-				Double.class,
+					double.class,
+					Double.class,
 			})
 			void givenDouble(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{
@@ -109,8 +109,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				float.class,
-				Float.class,
+					float.class,
+					Float.class,
 			})
 			void givenFloat(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{
@@ -122,8 +122,8 @@ class MethodDataScannerTest
 
 			@ParameterizedTest
 			@ValueSource(classes = {
-				byte.class,
-				Byte.class,
+					byte.class,
+					Byte.class,
 			})
 			void givenByte(Class<?> clazz) throws InvocationTargetException, IllegalAccessException
 			{

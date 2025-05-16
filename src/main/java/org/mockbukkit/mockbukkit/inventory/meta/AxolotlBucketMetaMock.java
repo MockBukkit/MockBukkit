@@ -34,7 +34,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	{
 		super(meta);
 
-		if(meta instanceof AxolotlBucketMeta bucketMeta)
+		if (meta instanceof AxolotlBucketMeta bucketMeta)
 		{
 			variant = bucketMeta.getVariant();
 		}

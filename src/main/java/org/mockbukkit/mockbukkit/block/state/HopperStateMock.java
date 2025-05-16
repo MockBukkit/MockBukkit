@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Hopper;
@@ -10,6 +7,9 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 import java.util.UUID;
 

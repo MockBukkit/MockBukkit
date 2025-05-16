@@ -14,7 +14,6 @@ public class CookingRecipeElementFactory
 	 * Converts a cooking recipe into a JsonElement.
 	 *
 	 * @param cookingRecipe The cooking recipe to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

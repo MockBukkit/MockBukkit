@@ -37,13 +37,13 @@ public abstract class AbstractMatcherTest
 	{
 		Description description = new StringDescription();
 		description.appendDescriptionOf(matcher);
-		Assertions.assertEquals(expected, description.toString().trim(),"Expected description");
+		Assertions.assertEquals(expected, description.toString().trim(), "Expected description");
 	}
 
 	public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, Object arg)
 	{
-		Assertions.assertFalse(matcher.matches(arg),"Precondition: Matcher should not match item.");
-		Assertions.assertEquals(expected, mismatchDescription(matcher, arg),"Expected mismatch description");
+		Assertions.assertFalse(matcher.matches(arg), "Precondition: Matcher should not match item.");
+		Assertions.assertEquals(expected, mismatchDescription(matcher, arg), "Expected mismatch description");
 	}
 
 	public static void assertNullSafe(Matcher<?> matcher)

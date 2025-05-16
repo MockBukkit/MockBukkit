@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.profile;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import org.bukkit.profile.PlayerTextures;
 import org.junit.jupiter.api.AfterEach;
@@ -10,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.net.MalformedURLException;
 import java.net.URL;

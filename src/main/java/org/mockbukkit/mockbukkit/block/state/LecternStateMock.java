@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Lectern;
@@ -10,6 +8,8 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 
 import java.util.Objects;
 

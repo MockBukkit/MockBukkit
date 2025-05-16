@@ -46,7 +46,7 @@ class VexMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenValueChange(boolean expectedValue)
 		{
 			vex.setCharging(expectedValue);
@@ -114,6 +114,7 @@ class VexMockTest
 	@Nested
 	class SetSummoner
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -137,6 +138,7 @@ class VexMockTest
 	@Nested
 	class SetLimitedLifetime
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -144,7 +146,7 @@ class VexMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenChangeInValue(boolean expectedValue)
 		{
 			vex.setLimitedLifetime(expectedValue);
@@ -156,6 +158,7 @@ class VexMockTest
 	@Nested
 	class SetLimitedLifetimeTicks
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -163,7 +166,7 @@ class VexMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenChangeInValue(int expectedValue)
 		{
 			vex.setLimitedLifetimeTicks(expectedValue);

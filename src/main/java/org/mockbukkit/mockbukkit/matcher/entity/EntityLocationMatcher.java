@@ -43,8 +43,7 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	/**
-	 *
-	 * @param location The location required for a match
+	 * @param location    The location required for a match
 	 * @param maxDistance The radius away from the location which gives a match
 	 * @return A matcher which matches with any entity within a radius of specified location
 	 */
@@ -55,8 +54,7 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	/**
-	 *
-	 * @param location The location required for no match
+	 * @param location    The location required for no match
 	 * @param maxDistance The radius away from the location which withdraws a match
 	 * @return A matcher which matches with any entity outside a radius of specified location
 	 */

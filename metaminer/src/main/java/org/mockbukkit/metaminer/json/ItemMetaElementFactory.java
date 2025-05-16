@@ -6,11 +6,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemMetaElementFactory
 {
+
 	/**
 	 * Converts a item meta into a JsonElement.
 	 *
 	 * @param itemMeta The item meta to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -57,4 +57,5 @@ public class ItemMetaElementFactory
 	{
 		// Hide the public constructor
 	}
+
 }

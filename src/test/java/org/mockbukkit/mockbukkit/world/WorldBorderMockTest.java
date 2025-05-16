@@ -27,6 +27,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 @ExtendWith(MockBukkitExtension.class)
 class WorldBorderMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private World world;

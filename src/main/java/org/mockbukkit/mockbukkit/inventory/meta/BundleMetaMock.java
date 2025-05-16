@@ -41,7 +41,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	{
 		super(meta);
 
-		if(meta instanceof BundleMeta bundleMeta)
+		if (meta instanceof BundleMeta bundleMeta)
 		{
 			this.items = new ArrayList<>(bundleMeta.getItems());
 		}

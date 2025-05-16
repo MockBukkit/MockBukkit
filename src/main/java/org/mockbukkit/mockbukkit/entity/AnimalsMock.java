@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Animals;
@@ -9,6 +7,8 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.UUID;
 

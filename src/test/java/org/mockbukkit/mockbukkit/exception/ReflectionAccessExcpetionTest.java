@@ -14,4 +14,5 @@ class ReflectionAccessExcpetionTest
 		assertEquals("Hello, world!", exception.getMessage());
 		assertEquals("org.mockbukkit.mockbukkit.exception.ReflectionAccessException", exception.getClass().getName());
 	}
+
 }

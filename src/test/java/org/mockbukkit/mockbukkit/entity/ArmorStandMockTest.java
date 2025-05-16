@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import io.papermc.paper.math.Rotations;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,6 +12,11 @@ import org.bukkit.util.EulerAngle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Set;
 import java.util.UUID;
@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArmorStandMockTest
 {
+
 	private static final double ACCEPTABLE_ERROR_DELTA = 0.0000000001;
 
 	private ServerMock server;

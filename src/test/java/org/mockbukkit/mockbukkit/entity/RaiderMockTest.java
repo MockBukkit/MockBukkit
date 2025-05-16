@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.event.RaidMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Raid;
@@ -17,6 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.event.RaidMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
 
@@ -79,7 +79,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
 	void getWave_GivenValidUserValue(int expectedValue)
 	{
 		raider.setWave(expectedValue);
@@ -87,7 +87,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	@ValueSource(ints = { -100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
 	void setWave_GivenIllegalUserValue(int expectedValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raider.setWave(expectedValue));
@@ -118,7 +118,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isPatrolLeader_GivenUserValue(boolean expectedValue)
 	{
 
@@ -134,7 +134,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isCanJoinRaid_GivenUserValue(boolean expectedValue)
 	{
 
@@ -150,7 +150,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
 	void getTicksOutsideRaid_GivenValidUserValue(int expectedValue)
 	{
 		raider.setTicksOutsideRaid(expectedValue);
@@ -158,7 +158,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	@ValueSource(ints = { -100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
 	void setTicksOutsideRaid_GivenIllegalUserValue(int expectedValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raider.setTicksOutsideRaid(expectedValue));
@@ -173,7 +173,7 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void isCelebrating_GivenUserValue(boolean expectedValue)
 	{
 

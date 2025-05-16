@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.world;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.data.type.AmethystCluster;
@@ -14,6 +11,9 @@ import org.bukkit.material.MaterialData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class ChunkDataMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private WorldMock world;

@@ -39,7 +39,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	{
 		super(meta);
 
-		if(meta instanceof CompassMeta compass)
+		if (meta instanceof CompassMeta compass)
 		{
 			this.lodestone = compass.getLodestone();
 			this.tracked = compass.isLodestoneTracked();

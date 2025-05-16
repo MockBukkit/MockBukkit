@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.boss;
 
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.bossbar.BossBarViewer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.Collections;
 import java.util.HashSet;

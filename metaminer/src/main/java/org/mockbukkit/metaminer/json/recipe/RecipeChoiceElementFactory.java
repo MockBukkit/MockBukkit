@@ -14,7 +14,6 @@ public class RecipeChoiceElementFactory
 	 * Converts a recipe choice into a JsonElement.
 	 *
 	 * @param recipeChoice The recipe choice to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

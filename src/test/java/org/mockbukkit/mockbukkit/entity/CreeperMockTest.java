@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.destroystokyo.paper.event.entity.CreeperIgniteEvent;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -11,6 +9,8 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 

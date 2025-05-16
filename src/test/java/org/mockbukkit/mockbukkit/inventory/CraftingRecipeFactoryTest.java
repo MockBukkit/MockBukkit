@@ -1,11 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.bukkit.Material;
@@ -18,6 +12,12 @@ import org.bukkit.inventory.recipe.CraftingBookCategory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class CraftingRecipeFactoryTest
@@ -90,7 +90,7 @@ class CraftingRecipeFactoryTest
 		assertEquals(Material.ACACIA_FENCE, recipe.getResult().getType());
 		assertEquals("wooden_fence", recipe.getGroup());
 		assertEquals(CraftingBookCategory.MISC, recipe.getCategory());
-		assertArrayEquals(new String[] {"abc", "def"}, recipe.getShape());
+		assertArrayEquals(new String[]{ "abc", "def" }, recipe.getShape());
 		assertEquals(6, recipe.getChoiceMap().size());
 	}
 

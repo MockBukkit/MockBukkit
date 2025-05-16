@@ -1,5 +1,14 @@
 package org.mockbukkit.mockbukkit.tags;
 
+import org.bukkit.NamespacedKey;
+import org.bukkit.Server;
+import org.bukkit.Tag;
+import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,20 +24,12 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import org.bukkit.NamespacedKey;
-import org.bukkit.Server;
-import org.bukkit.Tag;
-import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Used for loading the internal registry of tags.
  */
 public final class TagsMock
 {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(TagsMock.class);
 
 	private TagsMock()

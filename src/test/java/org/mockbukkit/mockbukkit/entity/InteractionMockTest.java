@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Interaction;
@@ -10,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 class InteractionMockTest
 {
+
 	private ServerMock server;
 	private InteractionMock interaction;
 
@@ -43,7 +44,7 @@ class InteractionMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 	void getInteractionWidth_GivenValidValue(int validValue)
 	{
 		interaction.setInteractionWidth(validValue);
@@ -57,7 +58,7 @@ class InteractionMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 	void getInteractionHeight_GivenValidValue(int validValue)
 	{
 		interaction.setInteractionHeight(validValue);
@@ -71,7 +72,7 @@ class InteractionMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void getInteractionHeight_GivenValidValue(boolean validValue)
 	{
 		interaction.setResponsive(validValue);
@@ -121,4 +122,5 @@ class InteractionMockTest
 	{
 		assertEquals(EntityType.INTERACTION, interaction.getType());
 	}
+
 }

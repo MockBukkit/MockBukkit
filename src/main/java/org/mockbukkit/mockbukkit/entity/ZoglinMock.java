@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Zoglin;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -14,6 +14,7 @@ import java.util.UUID;
  */
 public class ZoglinMock extends MonsterMock implements Zoglin
 {
+
 	private boolean isAdult = true;
 
 	/**
@@ -39,7 +40,8 @@ public class ZoglinMock extends MonsterMock implements Zoglin
 		if (isBaby)
 		{
 			this.setBaby();
-		} else
+		}
+		else
 		{
 			this.setAdult();
 		}
@@ -57,7 +59,8 @@ public class ZoglinMock extends MonsterMock implements Zoglin
 		if (age < 0)
 		{
 			this.setBaby();
-		} else
+		}
+		else
 		{
 			this.setAdult();
 		}

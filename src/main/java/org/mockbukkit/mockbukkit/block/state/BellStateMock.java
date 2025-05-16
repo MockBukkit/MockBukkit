@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Bell;
 import org.bukkit.block.Block;
@@ -8,6 +7,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link Bell}.

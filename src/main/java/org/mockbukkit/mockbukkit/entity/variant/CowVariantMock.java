@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CowVariantMock implements Cow.Variant
 {
+
 	public static CowVariantMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());

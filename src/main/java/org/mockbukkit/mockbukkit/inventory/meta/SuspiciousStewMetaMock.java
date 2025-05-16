@@ -41,7 +41,7 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	{
 		super(meta);
 
-		if(meta instanceof SuspiciousStewMeta stewMeta)
+		if (meta instanceof SuspiciousStewMeta stewMeta)
 		{
 			this.effects = new ArrayList<>(stewMeta.getCustomEffects());
 		}

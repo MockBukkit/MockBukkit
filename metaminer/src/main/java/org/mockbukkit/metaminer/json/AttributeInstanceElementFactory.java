@@ -11,7 +11,6 @@ public class AttributeInstanceElementFactory
 	 * Converts a attributeInstance into a JsonElement.
 	 *
 	 * @param attributeInstance The attributeInstance to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

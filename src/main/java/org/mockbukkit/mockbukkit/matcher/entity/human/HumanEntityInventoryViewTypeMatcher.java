@@ -39,7 +39,6 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 *
 	 * @param inventoryType The required inventory
 	 * @return A matcher which matches with any human entity with the specified inventory
 	 */
@@ -50,7 +49,6 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 *
 	 * @param inventoryType The required inventory for no match
 	 * @return A matcher which matches with any human entity without the specified inventory
 	 */

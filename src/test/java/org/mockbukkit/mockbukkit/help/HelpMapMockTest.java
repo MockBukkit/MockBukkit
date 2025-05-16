@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.help;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
@@ -11,6 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Collections;
 

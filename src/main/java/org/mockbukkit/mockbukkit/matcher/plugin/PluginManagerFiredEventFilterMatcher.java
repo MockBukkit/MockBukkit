@@ -43,11 +43,10 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	}
 
 	/**
-	 *
 	 * @param eventClass The required type of the event for a match
-	 * @param filter A custom filter
+	 * @param filter     A custom filter
+	 * @param <G>        The event type to check for
 	 * @return A matcher which matches with any plugin manager that has fired the specified event type with filter
-	 * @param <G> The event type to check for
 	 */
 	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
 	{
@@ -57,11 +56,10 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	}
 
 	/**
-	 *
 	 * @param eventClass The required type of the event for no match
-	 * @param filter A custom filter
+	 * @param filter     A custom filter
+	 * @param <G>        The event type to check for
 	 * @return A matcher which matches with any plugin manager that has not fired the specified event type without filter
-	 * @param <G> The event type to check for
 	 */
 	public static <G extends Event> @NotNull Matcher<PluginManagerMock> hasNotFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
 	{

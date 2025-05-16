@@ -97,6 +97,7 @@ public class GoatMock extends AnimalsMock implements Goat
 
 	/**
 	 * Whether this goat has rammed the specified entity
+	 *
 	 * @param entity The entity that the goat should have rammed
 	 * @return True if the goat has rammed the entity
 	 */

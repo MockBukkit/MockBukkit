@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Location;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -56,10 +56,12 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 		if (location == null)
 		{
 			this.beamTarget = null;
-		} else if (location.getWorld() != this.getWorld())
+		}
+		else if (location.getWorld() != this.getWorld())
 		{
 			throw new IllegalArgumentException("Cannot set beam target location to different world");
-		} else
+		}
+		else
 		{
 			this.beamTarget = location.toBlockLocation();
 		}

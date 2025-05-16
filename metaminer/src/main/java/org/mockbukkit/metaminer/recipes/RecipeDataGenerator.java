@@ -1,14 +1,5 @@
 package org.mockbukkit.metaminer.recipes;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -34,8 +25,18 @@ import org.mockbukkit.metaminer.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
 public class RecipeDataGenerator implements DataGenerator
 {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecipeDataGenerator.class);
 
 	public static final String CRAFTING = "crafting";

@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -14,6 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Mock implementation of a {@link FurnaceInventory}.

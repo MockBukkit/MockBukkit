@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 class PersistentDataHolderMockTest
 {
+
 	private PersistentDataHolderMock holder;
 
 	@BeforeEach
@@ -20,4 +21,5 @@ class PersistentDataHolderMockTest
 	{
 		assertInstanceOf(PersistentDataContainerMock.class, holder.getPersistentDataContainer());
 	}
+
 }

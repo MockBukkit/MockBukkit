@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.command;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -21,6 +19,8 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
 
 import java.util.LinkedList;
 import java.util.Queue;

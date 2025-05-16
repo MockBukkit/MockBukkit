@@ -35,7 +35,7 @@ class SnowableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isLit)
 		{
 			snowable.setSnowy(isLit);

@@ -14,7 +14,6 @@ public class AttributableElementFactory
 	 * Converts a attributable into a JsonElement.
 	 *
 	 * @param attributable The attributable to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

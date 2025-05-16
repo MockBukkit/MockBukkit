@@ -11,7 +11,6 @@ import java.util.UUID;
  * Mock implementation of an {@link Item}.
  *
  * @see ItemMock
- *
  * @deprecated {@link ItemEntityMock} is deprecated in favor of {@link ItemMock} to match the other entities pattern.
  */
 @Deprecated(forRemoval = true)

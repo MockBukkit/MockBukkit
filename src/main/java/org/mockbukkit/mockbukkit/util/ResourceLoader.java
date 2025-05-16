@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ResourceLoader
 {
+
 	private ResourceLoader()
 	{
 
@@ -40,4 +41,5 @@ public class ResourceLoader
 			throw new InternalDataLoadException(e);
 		}
 	}
+
 }

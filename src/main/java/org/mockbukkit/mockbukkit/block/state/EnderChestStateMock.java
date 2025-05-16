@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.EnderChest;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of an {@link EnderChest}.
@@ -93,4 +93,5 @@ public class EnderChestStateMock extends TileStateMock implements EnderChest
 	{
 		return super.toStringInternal() + ", isOpen=" + isOpen;
 	}
+
 }

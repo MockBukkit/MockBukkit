@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.block.state.LecternStateMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.LecternInventory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.state.LecternStateMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;

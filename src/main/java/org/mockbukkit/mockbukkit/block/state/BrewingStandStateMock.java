@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,6 +7,8 @@ import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 import java.util.Objects;
 

@@ -20,6 +20,7 @@ import java.util.UUID;
  */
 public class StriderMock extends AnimalsMock implements Strider
 {
+
 	private static final NamespacedKey SUFFOCATING_MODIFIER_ID = NamespacedKey.minecraft("suffocating");
 	private static final AttributeModifier SUFFOCATING_MODIFIER = new AttributeModifier(SUFFOCATING_MODIFIER_ID, -0.3400000035762787D, AttributeModifier.Operation.ADD_NUMBER);
 
@@ -57,7 +58,8 @@ public class StriderMock extends AnimalsMock implements Strider
 			if (cold)
 			{
 				speedAttribute.addModifier(SUFFOCATING_MODIFIER);
-			} else
+			}
+			else
 			{
 				speedAttribute.removeModifier(SUFFOCATING_MODIFIER);
 			}

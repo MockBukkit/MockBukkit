@@ -295,7 +295,7 @@ class PlayerInventoryMockTest
 		void getItem_Mirror(EquipmentSlot slot)
 		{
 			// This will throw an exception otherwise as per paper behavior
-			if(slot == EquipmentSlot.BODY)
+			if (slot == EquipmentSlot.BODY)
 			{
 				return;
 			}

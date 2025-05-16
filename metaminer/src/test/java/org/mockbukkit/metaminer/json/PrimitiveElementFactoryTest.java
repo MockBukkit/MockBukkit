@@ -14,7 +14,7 @@ class PrimitiveElementFactoryTest
 {
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void givenBoolean(boolean expectedValue)
 	{
 		JsonElement actual = PrimitiveElementFactory.toJson(expectedValue);

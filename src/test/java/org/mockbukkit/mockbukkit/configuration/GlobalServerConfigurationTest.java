@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.configuration;
 
 import net.kyori.adventure.text.Component;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

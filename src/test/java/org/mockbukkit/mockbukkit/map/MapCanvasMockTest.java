@@ -1,13 +1,12 @@
 package org.mockbukkit.mockbukkit.map;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.map.MinecraftFont;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ObjectInputStream;
 import java.util.concurrent.ThreadLocalRandom;

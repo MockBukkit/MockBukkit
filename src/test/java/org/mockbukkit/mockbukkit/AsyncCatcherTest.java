@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class AsyncCatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 
@@ -57,4 +58,5 @@ class AsyncCatcherTest
 		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
 		assertTrue(exception.getCause().getMessage().contains("Utility class"));
 	}
+
 }

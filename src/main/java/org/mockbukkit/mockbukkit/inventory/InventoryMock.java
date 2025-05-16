@@ -19,7 +19,6 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

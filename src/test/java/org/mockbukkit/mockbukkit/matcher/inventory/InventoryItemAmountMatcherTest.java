@@ -53,10 +53,11 @@ class InventoryItemAmountMatcherTest extends AbstractMatcherTest
 	{
 		assertDoesNotMatch(containsAtLeast(item, 1), inventory);
 	}
+
 	@Test
 	void containsAtLeast_matchesSpecifiedAmount()
 	{
-		inventory.addItem(new ItemStack(Material.DIRT,2));
+		inventory.addItem(new ItemStack(Material.DIRT, 2));
 		inventory.addItem(new ItemStack(Material.DIRT, 3));
 		assertMatches(containsAtLeast(item, 5), inventory);
 	}

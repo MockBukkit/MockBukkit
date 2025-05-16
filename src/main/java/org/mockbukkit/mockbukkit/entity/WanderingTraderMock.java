@@ -16,6 +16,7 @@ import java.util.UUID;
  */
 public class WanderingTraderMock extends AbstractVillagerMock implements WanderingTrader
 {
+
 	private int despawnDelay = 0;
 	private boolean canDrinkPotion = true;
 	private boolean canDrinkMilk = true;

@@ -16,14 +16,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.world.ChunkCoordinate;
 import org.mockbukkit.mockbukkit.world.ChunkMock;
 import org.mockbukkit.mockbukkit.world.Coordinate;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.world.WorldMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -396,10 +395,10 @@ class BlockMockTest
 	void getDrops_SetDropsMatch()
 	{
 		Block block = new BlockMock(Material.STONE);
-		((BlockMock)block).setDrops(Arrays.asList(new ItemStack(Material.COBBLESTONE)));
+		((BlockMock) block).setDrops(Arrays.asList(new ItemStack(Material.COBBLESTONE)));
 		assertEquals(1, block.getDrops().size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
-		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), (Entity)null).size());
+		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), (Entity) null).size());
 	}
 
 }

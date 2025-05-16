@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -11,6 +8,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 
 import java.util.UUID;
 

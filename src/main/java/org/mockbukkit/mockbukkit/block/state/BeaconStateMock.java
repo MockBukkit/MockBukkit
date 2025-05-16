@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import java.util.Collection;
-
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -18,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
+
 /**
  * Mock implementation of a {@link Beacon}.
  *
@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 public class BeaconStateMock extends LockableTileStateMock implements Beacon
 {
+
 	private @Nullable Component customName;
 	private int tier;
 	private @Nullable PotionEffectType primaryEffect;

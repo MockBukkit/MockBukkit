@@ -1,16 +1,14 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.Score;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.scoreboard.ObjectiveMock;
-import org.mockbukkit.mockbukkit.scoreboard.ScoreboardMock;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

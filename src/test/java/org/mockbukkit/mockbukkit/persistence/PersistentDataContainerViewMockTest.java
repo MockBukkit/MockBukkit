@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.persistence;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
@@ -164,4 +163,5 @@ class PersistentDataContainerViewMockTest
 		assertEquals("value", pd2.get(key1, PersistentDataType.STRING));
 		assertEquals(42L, pd2.get(key2, PersistentDataType.LONG));
 	}
+
 }

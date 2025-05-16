@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class TNTDataMockTest
 {
+
 	private TNTDataMock tnt;
 
 	@BeforeEach
@@ -34,7 +35,7 @@ class TNTDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean isUnstable)
 		{
 			tnt.setUnstable(isUnstable);
@@ -42,4 +43,5 @@ class TNTDataMockTest
 		}
 
 	}
+
 }

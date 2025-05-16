@@ -1,10 +1,5 @@
 package org.mockbukkit.metaminer;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-
 import org.apache.commons.io.FileUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mockbukkit.metaminer.internal.MaterialDataGenerator;
@@ -16,6 +11,11 @@ import org.mockbukkit.metaminer.recipes.RecipeDataGenerator;
 import org.mockbukkit.metaminer.tags.TagDataGenerator;
 import org.mockbukkit.metaminer.tests.ItemStackTestDataGenerator;
 import org.mockbukkit.metaminer.translation.TranslationDataGenerator;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
 
 public class MetaMiner extends JavaPlugin
 {

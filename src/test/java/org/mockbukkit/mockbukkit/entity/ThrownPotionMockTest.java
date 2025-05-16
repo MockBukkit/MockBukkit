@@ -76,7 +76,7 @@ class ThrownPotionMockTest
 	@Test
 	void setItem_GivenNullValue()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->  potion.setItem(null));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> potion.setItem(null));
 		assertEquals("ItemStack cannot be null", e.getMessage());
 	}
 
@@ -131,7 +131,7 @@ class ThrownPotionMockTest
 	@Test
 	void setPotionMeta_GivenNullValue()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->  potion.setPotionMeta(null));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> potion.setPotionMeta(null));
 		assertEquals("PotionMeta cannot be null", e.getMessage());
 	}
 
@@ -156,8 +156,8 @@ class ThrownPotionMockTest
 	public static Stream<Arguments> getThrowablePotionMaterials()
 	{
 		return Stream.of(
-			Arguments.of(Material.SPLASH_POTION),
-			Arguments.of(Material.LINGERING_POTION)
+				Arguments.of(Material.SPLASH_POTION),
+				Arguments.of(Material.LINGERING_POTION)
 		);
 	}
 

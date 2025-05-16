@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public abstract class PiglinAbstractMock extends MonsterMock implements PiglinAbstract
 {
+
 	private boolean isImmuneToZombification = false;
 	private boolean isBaby = false;
 	private int conversionTime = -1;
@@ -56,7 +57,8 @@ public abstract class PiglinAbstractMock extends MonsterMock implements PiglinAb
 		{
 			this.conversionTime = -1;
 			this.setImmuneToZombification(false);
-		} else
+		}
+		else
 		{
 			this.conversionTime = time;
 		}

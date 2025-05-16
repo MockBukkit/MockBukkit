@@ -25,6 +25,7 @@ import java.util.UUID;
  */
 public class SnifferMock extends AnimalsMock implements Sniffer
 {
+
 	private final List<Location> exploredLocations = new ArrayList<>();
 
 	private State state = State.IDLING;

@@ -7,11 +7,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class EquipmentSlotGroupElementFactory
 {
+
 	/**
 	 * Converts a equipmentSlotGroup element into a JsonElement.
 	 *
 	 * @param equipmentSlotGroup The equipmentSlotGroup to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -29,4 +29,5 @@ public class EquipmentSlotGroupElementFactory
 	{
 		// Hide the public constructor
 	}
+
 }

@@ -55,6 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
+
 	private final Set<NamespacedKey> discoveredRecipes = new HashSet<>();
 	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
 	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);

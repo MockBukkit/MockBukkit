@@ -9,7 +9,9 @@ A paper plugin that generate necessary files for MockBukkit.
 ## :mag: Getting started
 
 To apply resources to mockbukkit, simply run this command:
+
 ```bash
 ./gradlew updateResources
 ```
+
 Note that you need to agree to the eula before doing this in the `./metaminer/run/eula.txt` file

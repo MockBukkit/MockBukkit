@@ -18,6 +18,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 @ApiStatus.Experimental
 public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 {
+
 	private @Nullable BiomeMock customBiome = null;
 
 	@Override

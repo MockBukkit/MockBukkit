@@ -11,7 +11,6 @@ public class KeyedElementFactory
 	 * Converts a Keyed into a JsonElement.
 	 *
 	 * @param keyed The keyed to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

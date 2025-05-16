@@ -53,6 +53,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class GetBoundingBox
 	{
+
 		@Test
 		void givenDefaultLocation()
 		{
@@ -84,6 +85,7 @@ class SpawnerMinecartMockTest
 			assertEquals(5.7, actual.getMaxY());
 			assertEquals(10.49, actual.getMaxZ());
 		}
+
 	}
 
 	@Nested
@@ -99,8 +101,8 @@ class SpawnerMinecartMockTest
 		@ParameterizedTest
 		@NullSource
 		@EnumSource(value = EntityType.class,
-					mode = EnumSource.Mode.EXCLUDE,
-					names = "UNKNOWN")
+				mode = EnumSource.Mode.EXCLUDE,
+				names = "UNKNOWN")
 		void givenPossibleValues_ShouldReturnCorrectValue(EntityType entityType)
 		{
 			minecart.setSpawnedType(entityType);
@@ -127,7 +129,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int delay)
 		{
 			minecart.setDelay(delay);
@@ -147,7 +149,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 799, 800})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 799, 800 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int delay)
 		{
 			minecart.setMinSpawnDelay(delay);
@@ -155,7 +157,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {801, 802, 803, 804, 805})
+		@ValueSource(ints = { 801, 802, 803, 804, 805 })
 		void givenValueBiggerThenMaximum_ShouldThrowIllegalArgumentException(int value)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> minecart.setMinSpawnDelay(value));
@@ -175,7 +177,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {200, 201, 202, 203, 204, 205, 300, 400, 500, 600, 700, 800})
+		@ValueSource(ints = { 200, 201, 202, 203, 204, 205, 300, 400, 500, 600, 700, 800 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int delay)
 		{
 			minecart.setMaxSpawnDelay(delay);
@@ -183,7 +185,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-3, -2, -1})
+		@ValueSource(ints = { -3, -2, -1 })
 		void givenNegativeValue_ShouldThrowIllegalArgumentException(int value)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> minecart.setMaxSpawnDelay(value));
@@ -191,7 +193,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {197, 198, 199})
+		@ValueSource(ints = { 197, 198, 199 })
 		void givenValueBiggerThenMaximum_ShouldThrowIllegalArgumentException(int value)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> minecart.setMaxSpawnDelay(value));
@@ -211,7 +213,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int spawnCount)
 		{
 			minecart.setSpawnCount(spawnCount);
@@ -231,7 +233,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int spawnCount)
 		{
 			minecart.setRequiredPlayerRange(spawnCount);
@@ -251,7 +253,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int spawnCount)
 		{
 			minecart.setSpawnRange(spawnCount);
@@ -271,7 +273,7 @@ class SpawnerMinecartMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 		void givenPossibleValues_ShouldReturnCorrectValue(int spawnCount)
 		{
 			minecart.setMaxNearbyEntities(spawnCount);
@@ -279,4 +281,5 @@ class SpawnerMinecartMockTest
 		}
 
 	}
+
 }

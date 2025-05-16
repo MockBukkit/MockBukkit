@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
@@ -8,6 +7,7 @@ import org.bukkit.block.data.Bisected;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Arrays;
 import java.util.Set;

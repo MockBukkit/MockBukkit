@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class SplashPotionMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private SplashPotionMock splashPotion;

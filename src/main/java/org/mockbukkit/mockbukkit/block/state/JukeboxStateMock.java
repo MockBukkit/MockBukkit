@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
@@ -9,6 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.JukeboxInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 /**
  * Mock implementation of a {@link Jukebox}.

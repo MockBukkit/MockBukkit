@@ -45,7 +45,7 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	@Test
 	void testDoesNotMatch()
 	{
-		assertDoesNotMatch(hasCurrentItem(Material.AIR),allay);
+		assertDoesNotMatch(hasCurrentItem(Material.AIR), allay);
 	}
 
 	@Test

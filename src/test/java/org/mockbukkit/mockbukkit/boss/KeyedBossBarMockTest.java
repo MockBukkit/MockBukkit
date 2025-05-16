@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.boss;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.collect.Iterators;
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
@@ -10,6 +7,9 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class KeyedBossBarMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 

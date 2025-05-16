@@ -16,6 +16,7 @@ import java.io.IOException;
 
 public class InternalBlockTagDataGenerator implements DataGenerator
 {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(InternalBlockTagDataGenerator.class);
 
 	private final File workDirectory;
@@ -28,7 +29,7 @@ public class InternalBlockTagDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		if(!this.workDirectory.exists() && !this.workDirectory.mkdirs())
+		if (!this.workDirectory.exists() && !this.workDirectory.mkdirs())
 		{
 			throw new IOException("Could not create directory: " + this.workDirectory);
 		}
@@ -46,7 +47,7 @@ public class InternalBlockTagDataGenerator implements DataGenerator
 			{
 				block.setType(material);
 			}
-			catch(IllegalArgumentException e)
+			catch (IllegalArgumentException e)
 			{
 				LOGGER.error("Error while processing Material {}.", material, e);
 				continue;

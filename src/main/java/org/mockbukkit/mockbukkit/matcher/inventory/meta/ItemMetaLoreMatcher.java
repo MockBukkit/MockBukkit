@@ -54,7 +54,6 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @param legacyLoreItems The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
@@ -65,7 +64,6 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @param legacyLoreItems The lore required for there to be no match
 	 * @return A matcher which matches with any item meta without the specified lore
 	 */
@@ -75,7 +73,6 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @param loreItems The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
@@ -85,7 +82,6 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @param loreItems The lore required for there to be no match
 	 * @return A matcher which matches with any item meta without the specified lore
 	 */
@@ -95,7 +91,6 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @param lore The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
@@ -105,7 +100,6 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 *
 	 * @param lore The lore required for there to be no match
 	 * @return A matcher which matches with any item meta without the specified lore
 	 */

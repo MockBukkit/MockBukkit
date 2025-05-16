@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.util.io;
 
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.io.IOException;
 import java.io.InputStream;

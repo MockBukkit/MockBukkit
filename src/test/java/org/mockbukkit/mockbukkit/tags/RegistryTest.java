@@ -1,15 +1,15 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockBukkitExtension.class)
 class RegistryTest

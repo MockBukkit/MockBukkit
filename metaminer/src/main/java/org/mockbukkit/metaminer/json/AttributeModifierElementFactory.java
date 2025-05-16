@@ -11,7 +11,6 @@ public class AttributeModifierElementFactory
 	 * Converts a attributeModifier into a JsonElement.
 	 *
 	 * @param attributeModifier The attributeModifier to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

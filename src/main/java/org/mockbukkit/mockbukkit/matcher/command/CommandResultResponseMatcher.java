@@ -40,7 +40,6 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	/**
-	 *
 	 * @param response The response the command result should have
 	 * @return A matcher which matches with any command result with specified response
 	 */
@@ -51,7 +50,6 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	/**
-	 *
 	 * @param response The response the command result should not have
 	 * @return A matcher which matches with any command result without specified response
 	 */

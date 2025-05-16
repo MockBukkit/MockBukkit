@@ -1,20 +1,21 @@
 package org.mockbukkit.mockbukkit.block.data;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.block.data.type.Bamboo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class BambooDataMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private BambooDataMock bamboo = new BambooDataMock();
@@ -40,7 +41,7 @@ class BambooDataMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1})
+	@ValueSource(ints = { 0, 1 })
 	void setAge(int age)
 	{
 		bamboo.setAge(age);
@@ -60,7 +61,7 @@ class BambooDataMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1})
+	@ValueSource(ints = { 0, 1 })
 	void setStage(int age)
 	{
 		bamboo.setStage(age);

@@ -46,7 +46,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		super(meta);
 
-		if(meta instanceof SkullMeta skullMeta)
+		if (meta instanceof SkullMeta skullMeta)
 		{
 			this.playerProfile = skullMeta.getPlayerProfile();
 		}

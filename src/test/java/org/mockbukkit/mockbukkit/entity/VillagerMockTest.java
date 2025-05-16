@@ -63,6 +63,7 @@ class VillagerMockTest
 	@Nested
 	class SetProfession
 	{
+
 		@Test
 		void givenDefault()
 		{
@@ -94,6 +95,7 @@ class VillagerMockTest
 		{
 			return Registry.VILLAGER_PROFESSION.stream().map(Arguments::of);
 		}
+
 	}
 
 	@Nested
@@ -138,8 +140,9 @@ class VillagerMockTest
 	@Nested
 	class SetVillagerLevel
 	{
+
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3, 4, 5})
+		@ValueSource(ints = { 1, 2, 3, 4, 5 })
 		void givenPossibleValues(int level)
 		{
 			assertDoesNotThrow(() -> villager.setVillagerLevel(level));
@@ -147,7 +150,7 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-2, -1, 0, 6, 7})
+		@ValueSource(ints = { -2, -1, 0, 6, 7 })
 		void givenInvalidValues(int level)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.setVillagerLevel(level));
@@ -243,7 +246,7 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
 		void givenPossibleValues(int restocksToday)
 		{
 			villager.setRestocksToday(restocksToday);
@@ -255,6 +258,7 @@ class VillagerMockTest
 	@Nested
 	class Sleep
 	{
+
 		@Test
 		void givenNullValue()
 		{
@@ -315,11 +319,13 @@ class VillagerMockTest
 			assertEquals(blocklocation, villager.getLocation());
 			assertEquals(1000L, villager.getMemory(MemoryKey.LAST_SLEPT));
 		}
+
 	}
 
 	@Nested
 	class Wakeup
 	{
+
 		@Test
 		void givenNonSleepingVillager()
 		{
@@ -354,11 +360,13 @@ class VillagerMockTest
 			assertFalse(villager.isSleeping());
 			assertEquals(Pose.STANDING, villager.getPose());
 		}
+
 	}
 
 	@Nested
 	class SetReputations
 	{
+
 		@Test
 		void givenNullValue()
 		{
@@ -400,11 +408,13 @@ class VillagerMockTest
 			assertIdentical(reputation, actual);
 			assertNotSame(reputation, actual);
 		}
+
 	}
 
 	@Nested
 	class ClearReputations
 	{
+
 		@Test
 		void givenVillagerWithReputations()
 		{
@@ -417,6 +427,7 @@ class VillagerMockTest
 
 			assertEquals(Collections.emptyMap(), villager.getReputations());
 		}
+
 	}
 
 	@Nested

@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.junit.jupiter.api.AfterEach;
@@ -9,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EvokerFangsMockTest
 {
+
 	private ServerMock server;
 	private LivingEntity owner;
 	private EvokerFangsMock evokerFangs;
@@ -61,7 +62,7 @@ class EvokerFangsMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 	void getAttackDelay_GivenValidValue(int validValue)
 	{
 		evokerFangs.setAttackDelay(validValue);
@@ -69,7 +70,7 @@ class EvokerFangsMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
+	@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
 	void getAttackDelay_GivenIllegalValue(int validValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> evokerFangs.setAttackDelay(validValue));
@@ -81,4 +82,5 @@ class EvokerFangsMockTest
 	{
 		assertEquals(EntityType.EVOKER_FANGS, evokerFangs.getType());
 	}
+
 }

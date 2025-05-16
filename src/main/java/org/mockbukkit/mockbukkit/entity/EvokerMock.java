@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Evoker;
@@ -8,6 +7,7 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Spellcaster;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -18,6 +18,7 @@ import java.util.UUID;
  */
 public class EvokerMock extends SpellcasterMock implements Evoker
 {
+
 	private Sheep wololoTarget;
 
 	/**
@@ -72,7 +73,6 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	 * Convert a {@link Evoker.Spell} into a {@link Spellcaster.Spell}.
 	 *
 	 * @param spell The spell to be converted.
-	 *
 	 * @return The converted spell.
 	 */
 	@NotNull
@@ -91,7 +91,6 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	 * Convert a {@link Spellcaster.Spell} into a {@link Evoker.Spell}.
 	 *
 	 * @param spell The spell to be converted.
-	 *
 	 * @return The converted spell.
 	 */
 	@NotNull

@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import net.kyori.adventure.text.Component;
@@ -15,6 +13,8 @@ import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.HashMap;
 import java.util.Map;

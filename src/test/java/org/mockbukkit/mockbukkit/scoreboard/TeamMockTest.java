@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import com.google.common.collect.Iterables;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
@@ -15,7 +12,9 @@ import org.bukkit.scoreboard.Team;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.scoreboard.TeamMock;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.Set;
 import java.util.stream.Collectors;

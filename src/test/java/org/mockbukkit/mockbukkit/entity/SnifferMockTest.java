@@ -28,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class SnifferMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private SnifferMock sniffer;

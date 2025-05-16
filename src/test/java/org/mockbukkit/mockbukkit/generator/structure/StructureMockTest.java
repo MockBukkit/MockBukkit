@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.generator.structure;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import org.bukkit.NamespacedKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

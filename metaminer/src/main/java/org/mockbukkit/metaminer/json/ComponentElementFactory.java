@@ -12,7 +12,6 @@ public class ComponentElementFactory
 	 * Converts a component into a JsonElement.
 	 *
 	 * @param component The component to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable

@@ -1,10 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory;
 
-import org.bukkit.inventory.meta.BlockStateMeta;
+import com.destroystokyo.paper.MaterialTags;
+import org.bukkit.Material;
+import org.bukkit.Tag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorStandMetaMock;
@@ -30,14 +36,6 @@ import org.mockbukkit.mockbukkit.inventory.meta.SkullMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SpawnEggMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
-import com.destroystokyo.paper.MaterialTags;
-import org.bukkit.Material;
-import org.bukkit.Tag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.stream.Stream;
 

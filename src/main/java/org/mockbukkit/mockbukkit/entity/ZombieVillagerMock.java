@@ -14,6 +14,7 @@ import java.util.UUID;
 
 public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 {
+
 	private Villager.Type type = Villager.Type.PLAINS;
 	private Villager.Profession profession = Villager.Profession.NONE;
 	private OfflinePlayer conversionStarter = null;

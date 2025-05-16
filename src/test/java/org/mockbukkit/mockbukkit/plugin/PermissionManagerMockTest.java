@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.BatMock;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -14,6 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.BatMock;
 
 import java.util.List;
 import java.util.UUID;
@@ -159,8 +159,8 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"permission.op", "permission.op.inherited", "permission.false", "permission.false.inherited",
-				"permission.false.inside"})
+	@ValueSource(strings = { "permission.op", "permission.op.inherited", "permission.false", "permission.false.inherited",
+			"permission.false.inside" })
 	void testPermissionsLoadedFromPlugin_defaultFalse(String node)
 	{
 		JavaPlugin plugin = getTestPlugin();
@@ -171,7 +171,7 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"permission.true", "permission.true.inherited"})
+	@ValueSource(strings = { "permission.true", "permission.true.inherited" })
 	void testPermissionsLoadedFromPlugin_defaultTrue(String node)
 	{
 		JavaPlugin plugin = getTestPlugin();
@@ -182,7 +182,7 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"permission.op", "permission.op.inherited"})
+	@ValueSource(strings = { "permission.op", "permission.op.inherited" })
 	void testPermissionsLoadedFromPlugin_defaultOp(String node)
 	{
 		JavaPlugin plugin = getTestPlugin();
@@ -194,7 +194,7 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"permission.notop", "permission.notop.inside"})
+	@ValueSource(strings = { "permission.notop", "permission.notop.inside" })
 	void testPermissionsLoadedFromPlugin_defaultNotOp(String node)
 	{
 		getTestPlugin();
@@ -210,7 +210,7 @@ class PermissionManagerMockTest
 	{
 		JavaPlugin plugin = getTestPlugin();
 		Player player = serverMock.addPlayer();
-		player.addAttachment(plugin,"permission.false",true);
+		player.addAttachment(plugin, "permission.false", true);
 		assertTrue(player.hasPermission("permission.false.inherited"));
 	}
 
@@ -218,7 +218,6 @@ class PermissionManagerMockTest
 	{
 		return MockBukkit.load(TestPlugin.class);
 	}
-
 
 
 }

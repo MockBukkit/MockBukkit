@@ -24,7 +24,7 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	@Override
 	protected boolean matchesSafely(HumanEntityMock humanEntityMock)
 	{
-		if(humanEntityMock.getOpenInventory().getTopInventory() == null)
+		if (humanEntityMock.getOpenInventory().getTopInventory() == null)
 		{
 			return false;
 		}
@@ -40,7 +40,7 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	@Override
 	protected void describeMismatchSafely(HumanEntityMock humanEntityMock, Description mismatchDescription)
 	{
-		if(humanEntityMock.getOpenInventory().getTopInventory() != null)
+		if (humanEntityMock.getOpenInventory().getTopInventory() != null)
 		{
 			mismatchDescription.appendText("had items ");
 			mismatchDescription.appendValueList("[", ",", "]", humanEntityMock.getOpenInventory().getTopInventory().getContents());
@@ -52,7 +52,6 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 *
 	 * @param material The material of the item required for a match
 	 * @return A matcher which matches with any human entity with the specified item in inventory
 	 */
@@ -62,7 +61,6 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 *
 	 * @param item The item required for a match
 	 * @return A matcher which matches with any human entity with the specified item in inventory
 	 */
@@ -73,7 +71,6 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 *
 	 * @param item The item required for no match
 	 * @return A matcher which matches with any human entity without the specified item in inventory
 	 */
@@ -83,7 +80,6 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 *
 	 * @param material The material of the item required for no match
 	 * @return A matcher which matches with any human entity without the specified item in inventory
 	 */

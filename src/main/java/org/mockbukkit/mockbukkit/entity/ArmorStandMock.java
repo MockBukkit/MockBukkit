@@ -484,9 +484,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private static Rotations toPaper(EulerAngle eulerAngle)
 	{
 		return Rotations.ofDegrees(
-			Math.toDegrees(eulerAngle.getX()),
-			Math.toDegrees(eulerAngle.getY()),
-			Math.toDegrees(eulerAngle.getZ())
+				Math.toDegrees(eulerAngle.getX()),
+				Math.toDegrees(eulerAngle.getY()),
+				Math.toDegrees(eulerAngle.getZ())
 		);
 	}
 

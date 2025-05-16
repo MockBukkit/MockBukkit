@@ -1,11 +1,5 @@
 package org.mockbukkit.mockbukkit.util;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
@@ -38,6 +32,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -196,12 +196,12 @@ class UnsafeValuesTest
 		for (Method method : meta.getClass().getMethods())
 		{
 			String methodName = method.getName();
-			if("wait".contentEquals(methodName)) continue;
-			if(methodName.startsWith("get")) continue;
-			if(methodName.startsWith("remove")) continue;
+			if ("wait".contentEquals(methodName)) continue;
+			if (methodName.startsWith("get")) continue;
+			if (methodName.startsWith("remove")) continue;
 
 			// This method cause error with trivial value. So we set convenient value
-			if(methodName.contentEquals("setAmplifier"))
+			if (methodName.contentEquals("setAmplifier"))
 			{
 				method.invoke(meta, 4);
 				continue;
@@ -214,8 +214,8 @@ class UnsafeValuesTest
 			catch (InvocationTargetException exception)
 			{
 				Throwable cause = exception.getTargetException();
-				if(cause instanceof UnimplementedOperationException) continue;
-				if(cause instanceof UnsupportedOperationException) continue;
+				if (cause instanceof UnimplementedOperationException) continue;
+				if (cause instanceof UnsupportedOperationException) continue;
 
 				throw new RuntimeException("Exception thrown while trying to set trivial value for method " + method.getName(), cause);
 

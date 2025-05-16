@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ChickenVariantMock implements Chicken.Variant
 {
+
 	public static ChickenVariantMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());

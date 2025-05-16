@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class ShulkerBulletMock extends AbstractProjectileMock implements ShulkerBullet
 {
+
 	private final Vector targetDelta = new Vector();
 
 	private int flightSteps;
@@ -75,7 +76,8 @@ public class ShulkerBulletMock extends AbstractProjectileMock implements Shulker
 		if (movementDirection != null && movementDirection.isCartesian())
 		{
 			this.movementDirection = movementDirection;
-		} else
+		}
+		else
 		{
 			this.movementDirection = null;
 		}

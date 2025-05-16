@@ -1,13 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 public abstract class ContainerStateMockTest
@@ -73,6 +72,7 @@ public abstract class ContainerStateMockTest
 	@Nested
 	class GetLock
 	{
+
 		@Test
 		void getDefaultShouldBeEmpty()
 		{
@@ -98,11 +98,13 @@ public abstract class ContainerStateMockTest
 			assertEquals("jeb", original.getLock());
 			assertTrue(original.isLocked());
 		}
+
 	}
 
 	@Nested
 	class GetInventory
 	{
+
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenSameInventoryIsReturned()
 		{
@@ -115,11 +117,13 @@ public abstract class ContainerStateMockTest
 			assertTrue(originalInventory.contains(ItemStack.of(Material.DIAMOND)));
 			assertSame(originalInventory, container.getInventory());
 		}
+
 	}
 
 	@Nested
 	class GetSnapshotInventory
 	{
+
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenDifferentInventoryIsReturned()
 		{
@@ -144,6 +148,7 @@ public abstract class ContainerStateMockTest
 			assertFalse(snapshotInventory.contains(ItemStack.of(Material.DIAMOND)));
 			assertNotEquals(inventory, snapshotInventory);
 		}
+
 	}
 
 }

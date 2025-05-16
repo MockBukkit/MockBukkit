@@ -40,7 +40,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	{
 		super(meta);
 
-		if(meta instanceof KnowledgeBookMeta bookMeta)
+		if (meta instanceof KnowledgeBookMeta bookMeta)
 		{
 			recipes.addAll(bookMeta.getRecipes());
 		}

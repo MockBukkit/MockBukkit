@@ -1,21 +1,21 @@
 package org.mockbukkit.metaminer.json;
 
-import java.util.Map;
-import java.util.function.Function;
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+import java.util.function.Function;
+
 public class MapElementFactory
 {
+
 	/**
 	 * Converts a map into a JsonElement.
 	 *
 	 * @param map The map to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -28,7 +28,6 @@ public class MapElementFactory
 	 * Converts a map into a JsonElement.
 	 *
 	 * @param map The map to be converted.
-	 *
 	 * @return The element
 	 */
 	@Nullable
@@ -63,4 +62,5 @@ public class MapElementFactory
 	{
 		// Hide the public constructor
 	}
+
 }

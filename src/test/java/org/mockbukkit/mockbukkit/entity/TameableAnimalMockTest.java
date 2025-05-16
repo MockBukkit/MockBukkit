@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.AnimalTamer;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class TameableAnimalMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private TameableAnimalMock tameable;
@@ -70,7 +71,7 @@ class TameableAnimalMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void setSitting_GivenEntityWithSittableInterface(boolean value)
 	{
 		WolfMock wolf = new WolfMock(server, UUID.randomUUID());
@@ -82,7 +83,7 @@ class TameableAnimalMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void setSitting_GivenEntityWithoutSittableInterface(boolean value)
 	{
 		IllegalStateException e = assertThrows(IllegalStateException.class, () -> tameable.setSitting(value));

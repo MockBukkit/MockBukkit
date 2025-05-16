@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.profile;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
@@ -9,6 +8,7 @@ import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Collection;

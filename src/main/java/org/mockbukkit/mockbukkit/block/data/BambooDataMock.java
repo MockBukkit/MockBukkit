@@ -13,6 +13,7 @@ import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.STAGE_KEY;
  */
 public class BambooDataMock extends BlockDataMock implements Bamboo
 {
+
 	private static final int MAXIMUM_AGE_AMOUNT = 1;
 	private static final int MAXIMUM_STAGE_AMOUNT = 1;
 

@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.damage;
 
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import com.google.gson.JsonObject;
 import org.bukkit.damage.DamageType;
 import org.junit.jupiter.api.Test;
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.stream.Stream;
 

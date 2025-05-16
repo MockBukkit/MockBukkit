@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit.tags;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Fluid;
 import org.bukkit.GameEvent;
 import org.bukkit.Material;
@@ -10,6 +7,9 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An enum for all the different {@link Material} {@link Tag} registries.

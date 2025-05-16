@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ColorElementFactoryTest
 {
+
 	@Test
 	void givenNull()
 	{
@@ -27,4 +28,5 @@ class ColorElementFactoryTest
 		assertEquals(255, actual.get("green").getAsInt());
 		assertEquals(255, actual.get("blue").getAsInt());
 	}
+
 }

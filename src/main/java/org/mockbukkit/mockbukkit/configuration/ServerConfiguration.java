@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.configuration;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.kyori.adventure.text.Component;
@@ -8,6 +7,7 @@ import org.bukkit.Server;
 import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
  * Represents all configuration options that can be retrieved from a {@link Server}.
