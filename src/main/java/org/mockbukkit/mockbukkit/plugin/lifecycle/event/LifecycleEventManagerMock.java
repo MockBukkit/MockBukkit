@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.plugin.lifecycle.event;
 
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.LifecycleEventHandlerConfiguration;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
 
 import java.util.function.BooleanSupplier;
 

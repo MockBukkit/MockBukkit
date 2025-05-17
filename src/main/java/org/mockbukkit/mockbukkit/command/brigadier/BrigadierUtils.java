@@ -7,7 +7,6 @@ import com.mojang.brigadier.tree.RootCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.mockbukkit.mockbukkit.command.CommandSourceStackMock;
 import org.mockbukkit.mockbukkit.command.PluginVanillaCommandWrapperMock;
 import org.mockbukkit.mockbukkit.command.VanillaCommandWrapperMock;

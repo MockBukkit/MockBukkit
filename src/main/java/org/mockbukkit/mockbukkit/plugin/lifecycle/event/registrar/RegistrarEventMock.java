@@ -1,13 +1,13 @@
 package org.mockbukkit.mockbukkit.plugin.lifecycle.event.registrar;
 
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.PaperLifecycleEventMock;
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.OwnerAwareLifecycleEventMock;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import io.papermc.paper.plugin.lifecycle.event.registrar.RegistrarEvent;
 import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.framework.qual.DefaultQualifier;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.PaperLifecycleEventMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.OwnerAwareLifecycleEventMock;
 
 @DefaultQualifier(NonNull.class)
 public class RegistrarEventMock<R extends PaperRegistrarMock<? super O>, O extends LifecycleEventOwner> implements PaperLifecycleEventMock, OwnerAwareLifecycleEventMock<O>, RegistrarEvent<R>

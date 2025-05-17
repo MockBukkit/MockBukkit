@@ -1,7 +1,11 @@
 package org.mockbukkit.mockbukkit.map;
 
 import org.bukkit.ChatColor;
-import org.bukkit.map.*;
+import org.bukkit.map.MapCanvas;
+import org.bukkit.map.MapCursorCollection;
+import org.bukkit.map.MapFont;
+import org.bukkit.map.MapPalette;
+import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

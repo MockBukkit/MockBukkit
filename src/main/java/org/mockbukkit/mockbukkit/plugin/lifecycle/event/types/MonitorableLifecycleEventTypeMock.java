@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.plugin.lifecycle.event.types;
 
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.MonitorLifecycleEventHandlerConfigurationMock;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.MonitorLifecycleEventHandlerConfiguration;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.MonitorLifecycleEventHandlerConfigurationMock;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,11 @@
 package io.papermc.paper.plugin.lifecycle.event.types;
 
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.TagEventTypeProviderMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.MonitorableLifecycleEventTypeMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.PrioritizableLifecycleEventTypeMock;
-import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
-import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 
 public class LifecycleEventTypeProviderMock implements LifecycleEventTypeProvider
 {

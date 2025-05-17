@@ -27,9 +27,11 @@ import java.util.logging.Level;
 
 public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 {
+
 	private final Command command;
 
-	private BukkitCommandNode(String literal, Command command, BukkitBrigCommand bukkitBrigCommand) {
+	private BukkitCommandNode(String literal, Command command, BukkitBrigCommand bukkitBrigCommand)
+	{
 		super(
 				literal, bukkitBrigCommand, source -> command.testPermissionSilent(source.getSender()),
 				null, null, false
@@ -37,7 +39,8 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		this.command = command;
 	}
 
-	public static BukkitCommandNode of(String name, Command command) {
+	public static BukkitCommandNode of(String name, Command command)
+	{
 		BukkitBrigCommand bukkitBrigCommand = new BukkitBrigCommand(command, name);
 		BukkitCommandNode commandNode = new BukkitCommandNode(name, command, bukkitBrigCommand);
 		commandNode.addChild(
@@ -49,16 +52,19 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		return commandNode;
 	}
 
-	public Command getBukkitCommand() {
+	public Command getBukkitCommand()
+	{
 		return this.command;
 	}
 
-	public static class BukkitBrigCommand implements com.mojang.brigadier.Command<CommandSourceStack> {
+	public static class BukkitBrigCommand implements com.mojang.brigadier.Command<CommandSourceStack>
+	{
 
 		private final org.bukkit.command.Command command;
 		private final String literal;
 
-		BukkitBrigCommand(org.bukkit.command.Command command, String literal) {
+		BukkitBrigCommand(org.bukkit.command.Command command, String literal)
+		{
 			this.command = command;
 			this.literal = literal;
 		}
@@ -77,6 +83,7 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 			// return true as command was handled
 			return 1;
 		}
+
 	}
 
 	static class BukkitBrigSuggestionProvider implements SuggestionProvider<CommandSourceStack>
@@ -85,47 +92,60 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		private final org.bukkit.command.Command command;
 		private final String literal;
 
-		BukkitBrigSuggestionProvider(org.bukkit.command.Command command, String literal) {
+		BukkitBrigSuggestionProvider(org.bukkit.command.Command command, String literal)
+		{
 			this.command = command;
 			this.literal = literal;
 		}
 
 		@Override
-		public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) throws CommandSyntaxException {
+		public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) throws CommandSyntaxException
+		{
 			// Paper start
 			org.bukkit.command.CommandSender sender = context.getSource().getSender();
 			String[] args = builder.getRemaining().split(" ", -1); // We need the command included -- Set limit to -1, allow for trailing spaces
 
 			List<String> results = null;
 			Location pos = context.getSource().getLocation();
-			try {
+			try
+			{
 				results = this.command.tabComplete(sender, this.literal, args, pos.clone());
-			} catch (CommandException ex) {
+			}
+			catch (CommandException ex)
+			{
 				sender.sendMessage(Component.text("An internal error occurred while attempting to tab-complete this command", NamedTextColor.RED));
 				Bukkit.getServer().getLogger().log(Level.SEVERE, "Exception when " + sender.getName() + " attempted to tab complete " + builder.getRemaining(), ex);
 			}
 
-			if (sender instanceof final Player player) {
+			if (sender instanceof final Player player)
+			{
 				TabCompleteEvent tabEvent = new org.bukkit.event.server.TabCompleteEvent(player, builder.getInput(), results != null ? results : new ArrayList<>(), true, pos); // Paper - AsyncTabCompleteEvent
-				if (!tabEvent.callEvent()) {
+				if (!tabEvent.callEvent())
+				{
 					results = null;
-				} else {
+				}
+				else
+				{
 					results = tabEvent.getCompletions();
 				}
 			}
 			// Paper end
-			if (results == null) {
+			if (results == null)
+			{
 				return builder.buildFuture();
 			}
 
 			// Defaults to sub nodes, but we have just one giant args node, so offset accordingly
 			builder = builder.createOffset(builder.getInput().lastIndexOf(' ') + 1);
 
-			for (String s : results) {
+			for (String s : results)
+			{
 				builder.suggest(s);
 			}
 
 			return builder.buildFuture();
 		}
+
 	}
+
 }

@@ -1,11 +1,11 @@
 package io.papermc.paper.plugin.lifecycle.event.types;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 

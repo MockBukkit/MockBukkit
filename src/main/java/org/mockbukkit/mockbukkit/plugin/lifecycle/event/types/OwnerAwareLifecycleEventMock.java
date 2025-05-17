@@ -12,5 +12,7 @@ public interface OwnerAwareLifecycleEventMock<O extends LifecycleEventOwner> ext
 
 	void setOwner(@Nullable O owner);
 
-	@Nullable O castOwner(LifecycleEventOwner owner);
+	@Nullable
+	O castOwner(LifecycleEventOwner owner);
+
 }

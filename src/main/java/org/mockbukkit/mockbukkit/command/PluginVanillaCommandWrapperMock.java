@@ -11,27 +11,33 @@ import java.util.List;
 
 public class PluginVanillaCommandWrapperMock extends VanillaCommandWrapperMock implements PluginIdentifiableCommand
 {
+
 	private final Plugin plugin;
 	private final List<String> aliases;
 
-	public PluginVanillaCommandWrapperMock(String name, String description, String usageMessage, List<String> aliases, CommandNode<CommandSourceStack> vanillaCommand, Plugin plugin) {
+	public PluginVanillaCommandWrapperMock(String name, String description, String usageMessage, List<String> aliases, CommandNode<CommandSourceStack> vanillaCommand, Plugin plugin)
+	{
 		super(name, description, usageMessage, aliases, vanillaCommand, null);
 		this.plugin = plugin;
 		this.aliases = aliases;
 	}
 
 	@Override
-	public @NotNull List<String> getAliases() {
+	public @NotNull List<String> getAliases()
+	{
 		return this.aliases;
 	}
 
 	@Override
-	public @NotNull Command setAliases(@NotNull List<String> aliases) {
+	public @NotNull Command setAliases(@NotNull List<String> aliases)
+	{
 		return this;
 	}
 
 	@Override
-	public @NotNull Plugin getPlugin() {
+	public @NotNull Plugin getPlugin()
+	{
 		return this.plugin;
 	}
+
 }

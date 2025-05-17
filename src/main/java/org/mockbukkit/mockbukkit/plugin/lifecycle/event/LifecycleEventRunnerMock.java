@@ -78,16 +78,24 @@ public class LifecycleEventRunnerMock
 	public <O extends LifecycleEventOwner, E extends PaperLifecycleEventMock> void callEvent(LifecycleEventType<O, ? super E, ?> eventType, E event, Predicate<? super O> ownerPredicate)
 	{
 		AbstractLifecycleEventTypeMock<O, ? super E, ?> lifecycleEventType = (AbstractLifecycleEventTypeMock<O, ? super E, ?>) eventType;
-		lifecycleEventType.forEachHandler(event, registeredHandler -> {
-			try {
-				if (event instanceof final OwnerAwareLifecycleEventMock<?> ownerAwareEvent) {
+		lifecycleEventType.forEachHandler(event, registeredHandler ->
+		{
+			try
+			{
+				if (event instanceof final OwnerAwareLifecycleEventMock<?> ownerAwareEvent)
+				{
 					ownerAwareGenericHelper(ownerAwareEvent, registeredHandler.owner());
 				}
 				registeredHandler.lifecycleEventHandler().run(event);
-			} catch (final Throwable ex) {
+			}
+			catch (final Throwable ex)
+			{
 				throw new RuntimeException("Could not run '%s' lifecycle event handler from %s".formatted(lifecycleEventType.name(), registeredHandler.owner().getPluginMeta().getDisplayName()), ex);
-			} finally {
-				if (event instanceof final OwnerAwareLifecycleEventMock<?> ownerAwareEvent) {
+			}
+			finally
+			{
+				if (event instanceof final OwnerAwareLifecycleEventMock<?> ownerAwareEvent)
+				{
 					ownerAwareEvent.setOwner(null);
 				}
 			}
@@ -95,11 +103,15 @@ public class LifecycleEventRunnerMock
 		event.invalidate();
 	}
 
-	private static <O extends LifecycleEventOwner> void ownerAwareGenericHelper(final OwnerAwareLifecycleEventMock<@NotNull O> event, final LifecycleEventOwner possibleOwner) {
+	private static <O extends LifecycleEventOwner> void ownerAwareGenericHelper(final OwnerAwareLifecycleEventMock<@NotNull O> event, final LifecycleEventOwner possibleOwner)
+	{
 		final @Nullable O owner = event.castOwner(possibleOwner);
-		if (owner != null) {
+		if (owner != null)
+		{
 			event.setOwner(owner);
-		} else {
+		}
+		else
+		{
 			throw new IllegalStateException("Found invalid owner " + possibleOwner + " for event " + event);
 		}
 	}

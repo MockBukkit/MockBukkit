@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin.lifecycle.event;
 
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import io.papermc.paper.plugin.bootstrap.BootstrapContext;
 import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;
@@ -9,6 +8,7 @@ import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.tag.PostFlattenTagRegistrar;
 import io.papermc.paper.tag.PreFlattenTagRegistrar;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class TagEventTypeProviderMock implements TagEventTypeProvider
 {

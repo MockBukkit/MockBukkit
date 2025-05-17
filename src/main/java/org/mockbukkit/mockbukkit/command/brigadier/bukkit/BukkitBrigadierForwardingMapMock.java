@@ -25,6 +25,7 @@ import java.util.stream.Stream;
 
 public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 {
+
 	public static BukkitBrigadierForwardingMapMock INSTANCE = new BukkitBrigadierForwardingMapMock();
 
 	private final EntrySet entrySet = new EntrySet();

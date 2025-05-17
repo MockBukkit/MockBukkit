@@ -1,13 +1,13 @@
 package org.mockbukkit.mockbukkit.plugin.lifecycle.event.types;
 
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.PrioritizedLifecycleEventHandlerConfigurationMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEvent;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.PrioritizedLifecycleEventHandlerConfiguration;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfigurationMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.PrioritizedLifecycleEventHandlerConfigurationMock;
 
 import java.util.ArrayList;
 import java.util.Comparator;
