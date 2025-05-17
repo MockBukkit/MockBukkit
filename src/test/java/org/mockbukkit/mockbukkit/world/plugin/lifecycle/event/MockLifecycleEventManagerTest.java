@@ -34,7 +34,7 @@ class MockLifecycleEventManagerTest
 				{
 					atomicBoolean.set(true);
 					return Command.SINGLE_SUCCESS;
-				}).build(), "some bukkit help description string", List.of("an-alias"));
+				}).build(), "some bukkit help description string", List.of("an_alias"));
 			});
 		}).build();
 
