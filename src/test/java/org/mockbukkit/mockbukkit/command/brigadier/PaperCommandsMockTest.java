@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.command.brigadier;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
@@ -15,6 +16,7 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +31,7 @@ class PaperCommandsMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = { "new_command", "an_alias", "pluginmock:new_command", "pluginmock:an_alias" })
-	public void commandWithArgumentsTest(String alias)
+	void commandWithArgumentsTest(String alias)
 	{
 		PluginMock.builder().withOnEnable((pluginMock) ->
 		{
@@ -44,7 +46,7 @@ class PaperCommandsMockTest
 	}
 
 	@Test
-	public void commandWithArgumentsTest_doesNotExist()
+	void commandWithArgumentsTest_doesNotExist()
 	{
 		PluginMock.builder().withOnEnable((pluginMock) ->
 		{
@@ -57,7 +59,16 @@ class PaperCommandsMockTest
 		assertEquals(0, arguments.size());
 	}
 
-	public LiteralArgumentBuilder<CommandSourceStack> argumentBuilderGreedy()
+	@Test
+	void basicCommand()
+	{
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register("basic", createBasicCommand()))
+		).build();
+	}
+
+	LiteralArgumentBuilder<CommandSourceStack> argumentBuilderGreedy()
 	{
 		return Commands.literal("new_command")
 				.then(Commands.argument("my_argument", StringArgumentType.greedyString()).executes(context ->
@@ -66,6 +77,18 @@ class PaperCommandsMockTest
 							return Command.SINGLE_SUCCESS;
 						})
 				);
+	}
+
+	BasicCommand createBasicCommand()
+	{
+		return new BasicCommand()
+		{
+			@Override
+			public void execute(CommandSourceStack commandSourceStack, String[] args)
+			{
+				arguments = Arrays.asList(args);
+			}
+		};
 	}
 
 }
