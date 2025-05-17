@@ -2,7 +2,7 @@ package io.papermc.paper.plugin.lifecycle.event.types;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 class LifeCycleEventTypeProviderMockTest
 {
 
-	private MockPlugin lifeCycleEventOwner;
+	private PluginMock lifeCycleEventOwner;
 
 	@BeforeEach
 	void setUp()
@@ -24,13 +24,13 @@ class LifeCycleEventTypeProviderMockTest
 	@Test
 	void monitor()
 	{
-		assertDoesNotThrow(() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().monitor("test", MockPlugin.class));
+		assertDoesNotThrow(() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().monitor("test", PluginMock.class));
 	}
 
 	@Test
 	void prioritized()
 	{
-		assertDoesNotThrow(() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().prioritized("test", MockPlugin.class));
+		assertDoesNotThrow(() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().prioritized("test", PluginMock.class));
 	}
 
 }

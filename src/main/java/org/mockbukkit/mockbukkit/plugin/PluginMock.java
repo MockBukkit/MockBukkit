@@ -52,10 +52,10 @@ public class PluginMock extends JavaPlugin
 	public static class Builder
 	{
 
-		private Optional<Consumer<MockPlugin>> onLoad = Optional.empty();
-		private Optional<Consumer<MockPlugin>> onEnable = Optional.empty();
-		private Optional<Consumer<MockPlugin>> onDisable = Optional.empty();
-		private String pluginName = "MockPlugin";
+		private Optional<Consumer<PluginMock>> onLoad = Optional.empty();
+		private Optional<Consumer<PluginMock>> onEnable = Optional.empty();
+		private Optional<Consumer<PluginMock>> onDisable = Optional.empty();
+		private String pluginName = "PluginMock";
 		private String pluginVersion = "1.0.0";
 
 		private Builder()
@@ -66,7 +66,7 @@ public class PluginMock extends JavaPlugin
 		 * @param onLoad What to run on load
 		 * @return This builder
 		 */
-		public Builder withOnLoad(@NotNull Consumer<MockPlugin> onLoad)
+		public Builder withOnLoad(@NotNull Consumer<PluginMock> onLoad)
 		{
 			this.onLoad = Optional.of(onLoad);
 			return this;
@@ -76,7 +76,7 @@ public class PluginMock extends JavaPlugin
 		 * @param onEnable What to run on enable
 		 * @return This builder
 		 */
-		public Builder withOnEnable(@NotNull Consumer<MockPlugin> onEnable)
+		public Builder withOnEnable(@NotNull Consumer<PluginMock> onEnable)
 		{
 			this.onEnable = Optional.of(onEnable);
 			return this;
@@ -86,7 +86,7 @@ public class PluginMock extends JavaPlugin
 		 * @param onDisable What to run on disable
 		 * @return This builder
 		 */
-		public Builder withOnDisable(@NotNull Consumer<MockPlugin> onDisable)
+		public Builder withOnDisable(@NotNull Consumer<PluginMock> onDisable)
 		{
 			this.onDisable = Optional.of(onDisable);
 			return this;
@@ -115,7 +115,7 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * Build and initiate a new MockPlugin instance
+		 * Build and initiate a new PluginMock instance
 		 *
 		 * @return A mock plugin instance
 		 */
@@ -136,11 +136,11 @@ public class PluginMock extends JavaPlugin
 	public static class InternalPluginMock extends PluginMock
 	{
 
-		private final Optional<Consumer<MockPlugin>> onEnable;
-		private final Optional<Consumer<MockPlugin>> onDisable;
-		private final Optional<Consumer<MockPlugin>> onLoad;
+		private final Optional<Consumer<PluginMock>> onEnable;
+		private final Optional<Consumer<PluginMock>> onDisable;
+		private final Optional<Consumer<PluginMock>> onLoad;
 
-		public InternalPluginMock(Optional<Consumer<MockPlugin>> onEnable, Optional<Consumer<MockPlugin>> onDisable, Optional<Consumer<MockPlugin>> onLoad)
+		public InternalPluginMock(Optional<Consumer<PluginMock>> onEnable, Optional<Consumer<PluginMock>> onDisable, Optional<Consumer<PluginMock>> onLoad)
 		{
 			this.onEnable = onEnable;
 			this.onDisable = onDisable;

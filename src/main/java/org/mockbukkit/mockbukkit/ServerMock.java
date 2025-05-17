@@ -8,6 +8,8 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
+import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
@@ -93,6 +95,7 @@ import org.mockbukkit.mockbukkit.command.CommandMapMock;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 import org.mockbukkit.mockbukkit.command.ConsoleCommandSenderMock;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
+import org.mockbukkit.mockbukkit.command.brigadier.PaperCommandsMock;
 import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -128,6 +131,7 @@ import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
@@ -200,7 +204,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final PlayerListMock playerList = new PlayerListMock();
-	private final CommandMapMock commandMap = new CommandMapMock(this, new HashMap<>());
+	private final CommandMapMock commandMap;
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
@@ -218,6 +222,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
 	private int pauseWhenEmptyTime = 60;
+	private boolean commandsInitialized = false;
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -229,6 +234,8 @@ public class ServerMock extends Server.Spigot implements Server
 
 		TagsMock.loadDefaultTags(this, true);
 		InternalTag.loadInternalTags();
+		PaperCommandsMock.INSTANCE.newDispatcher();
+		this.commandMap = new CommandMapMock(this);
 
 		try
 		{
@@ -1169,6 +1176,11 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean dispatchCommand(@NotNull CommandSender sender, @NotNull String commandLine)
 	{
 		AsyncCatcher.catchOp("command dispatch");
+		if (!commandsInitialized)
+		{
+			LifecycleEventRunnerMock.INSTANCE.callReloadableRegistrarEvent(LifecycleEvents.COMMANDS, PaperCommandsMock.INSTANCE, Plugin.class, ReloadableRegistrarEvent.Cause.INITIAL);
+			this.commandsInitialized = true;
+		}
 		String[] commands = commandLine.split(" ");
 		String commandLabel = commands[0];
 		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
