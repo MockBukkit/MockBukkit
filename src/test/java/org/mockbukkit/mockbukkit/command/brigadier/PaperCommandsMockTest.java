@@ -38,7 +38,7 @@ class PaperCommandsMockTest
 				event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias"));
 			});
 		}).build();
-		serverMock.dispatchCommand(serverMock.getConsoleSender(), "new_command Hello world!");
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), alias + " Hello world!");
 		assertEquals(1, arguments.size());
 		assertEquals("Hello world!", arguments.getFirst());
 	}

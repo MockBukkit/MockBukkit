@@ -13,6 +13,7 @@ public class WrappedLiteralCommandNode extends LiteralCommandNode<CommandSourceS
 	public WrappedLiteralCommandNode(LiteralCommandNode<CommandSourceStack> commandNode, String newLiteral)
 	{
 		super(newLiteral, commandNode.getCommand(), commandNode.getRequirement(), commandNode.getRedirect(), commandNode.getRedirectModifier(), commandNode.isFork());
+		commandNode.getChildren().forEach(this::addChild);
 	}
 
 

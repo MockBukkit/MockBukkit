@@ -41,10 +41,10 @@ public class VanillaCommandWrapperMock extends BukkitCommand
 		if (!this.testPermission(sender)) return true;
 
 		CommandSourceStack source = CommandSourceStackMock.from(sender);
-		ParseResults<CommandSourceStack> parseResults = PaperCommandsMock.INSTANCE.getDispatcherInternal().parse(commandLabel, source);
+		ParseResults<CommandSourceStack> parseResults = PaperCommandsMock.INSTANCE.getDispatcherInternal().parse(commandLabel + " " + String.join(" ", args), source);
 		try
 		{
-			vanillaCommand.getCommand().run(parseResults.getContext().build(String.join(" ", args)));
+			PaperCommandsMock.INSTANCE.getDispatcherInternal().execute(parseResults);
 		}
 		catch (Exception e)
 		{
