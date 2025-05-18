@@ -33,6 +33,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.io.File;
@@ -749,7 +750,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	public void disablePlugins()
 	{
 		for (Plugin plugin : getPlugins())
+		{
 			disablePlugin(plugin);
+		}
 	}
 
 	@Override
@@ -878,6 +881,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		server.getServicesManager().unregisterAll(plugin);
 		server.getMessenger().unregisterIncomingPluginChannel(plugin);
 		server.getMessenger().unregisterOutgoingPluginChannel(plugin);
+
+		LifecycleEventRunnerMock.INSTANCE.unregisterAllEventHandlersFor(plugin);
 		// todo: implement chunk tickets
 //		for (World world : server.getWorlds())
 //		{
