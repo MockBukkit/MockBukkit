@@ -3,8 +3,10 @@ package org.mockbukkit.mockbukkit.command;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.mojang.brigadier.ParseResults;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.CommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.MessageComponentSerializer;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
@@ -46,9 +48,9 @@ public class VanillaCommandWrapperMock extends BukkitCommand
 		{
 			PaperCommandsMock.INSTANCE.getDispatcherInternal().execute(parseResults);
 		}
-		catch (Exception e)
+		catch (CommandSyntaxException e)
 		{
-			e.printStackTrace();
+			sender.sendMessage(MessageComponentSerializer.message().deserialize(e.getRawMessage()));
 		}
 		return true;
 	}
