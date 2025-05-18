@@ -18,7 +18,7 @@ import java.util.Map;
 public class BrigadierUtils
 {
 
-	private static final CommandSourceStack DUMMY = new CommandSourceStackMock(new Location(null, 0, 0, 0), null, null);
+	private static final CommandSourceStack DUMMY = new CommandSourceStackMock(new Location(null, 0, 0, 0), new DummyCommandSender(), null);
 
 	public static WrappedLiteralCommandNode copyLiteral(final String newLiteral, final LiteralCommandNode<CommandSourceStack> source)
 	{
