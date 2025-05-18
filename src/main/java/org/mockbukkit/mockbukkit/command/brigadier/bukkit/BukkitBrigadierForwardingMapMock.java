@@ -219,7 +219,7 @@ public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 					}
 					else
 					{
-						throw new IllegalStateException("Vanilla commands not implemented");
+						return BrigadierUtils.wrapNode(next);
 					}
 				}
 			};
@@ -366,7 +366,7 @@ public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 		}
 		else
 		{
-			throw new IllegalStateException("Vanilla commands not implemented");
+			return this.mutableEntry(node.getName(), BrigadierUtils.wrapNode((CommandNode<CommandSourceStack>) node));
 		}
 	}
 

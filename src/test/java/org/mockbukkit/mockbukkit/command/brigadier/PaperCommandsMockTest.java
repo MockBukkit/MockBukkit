@@ -66,6 +66,8 @@ class PaperCommandsMockTest
 				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
 						event.registrar().register("basic", createBasicCommand()))
 		).build();
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "basic Not exist!");
+		assertEquals(List.of("Not", "exist!"), arguments);
 	}
 
 	LiteralArgumentBuilder<CommandSourceStack> argumentBuilderGreedy()

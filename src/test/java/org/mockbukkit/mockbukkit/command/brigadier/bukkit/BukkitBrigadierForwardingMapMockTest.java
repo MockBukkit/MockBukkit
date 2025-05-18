@@ -3,7 +3,7 @@ package org.mockbukkit.mockbukkit.command.brigadier.bukkit;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.command.Command;
-import org.bukkit.command.defaults.VersionCommand;
+import org.bukkit.command.defaults.HelpCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +37,7 @@ class BukkitBrigadierForwardingMapMockTest
 	void size_insert()
 	{
 		int initial = map.size();
-		map.put("other_command", new VersionCommand("other_command"));
+		map.put("other_command", new HelpCommand());
 		assertEquals(initial + 1, map.size());
 	}
 
@@ -52,7 +52,7 @@ class BukkitBrigadierForwardingMapMockTest
 	@Test
 	void putGetAndRemove()
 	{
-		Command command = new VersionCommand("other_command");
+		Command command = new HelpCommand();
 		map.put("other_command", command);
 		assertEquals(command, map.get("other_command"));
 		assertTrue(map.containsKey("other_command"));
@@ -83,7 +83,7 @@ class BukkitBrigadierForwardingMapMockTest
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), "version");
 		// plugin prefix and alias mutates on this, therefore 4
 		assertEquals(initial + 4, map.size());
-		assertFalse(map.isEmpty()); // Inverted behavior as taken from paper
+		assertFalse(map.isEmpty());
 		assertTrue(map.containsKey("other_command"));
 		assertTrue(map.keySet().contains("other_command"));
 		assertTrue(map.values().iterator().hasNext());

@@ -65,6 +65,11 @@ public abstract class PrioritizableLifecycleEventTypeMock<O extends LifecycleEve
 		}
 	}
 
+	public void clear()
+	{
+		this.handlers.clear();
+	}
+
 	@Override
 	public void removeMatching(final Predicate<RegisteredHandler<O, E>> predicate)
 	{

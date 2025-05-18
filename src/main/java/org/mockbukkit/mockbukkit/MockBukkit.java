@@ -16,6 +16,7 @@ import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.exception.UnmockException;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -414,7 +415,6 @@ public class MockBukkit
 			// We aren't mocking anyway
 			return;
 		}
-
 		if (mock.getPluginManager() != null)
 		{
 			mock.getPluginManager().disablePlugins();
@@ -427,6 +427,7 @@ public class MockBukkit
 		finally
 		{
 			mock.getPluginManager().unload();
+			LifecycleEventRunnerMock.INSTANCE.reset();
 			setServerInstanceToNull();
 		}
 	}

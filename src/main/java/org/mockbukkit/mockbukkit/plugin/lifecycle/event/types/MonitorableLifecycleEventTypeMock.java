@@ -50,6 +50,12 @@ public class MonitorableLifecycleEventTypeMock<O extends LifecycleEventOwner, E 
 	}
 
 	@Override
+	public void clear()
+	{
+		this.handlers.clear();
+	}
+
+	@Override
 	public void forEachHandler(final E event, final Consumer<RegisteredHandler<O, E>> consumer, final Predicate<RegisteredHandler<O, E>> predicate)
 	{
 		for (final RegisteredHandler<O, E> handler : this.handlers)

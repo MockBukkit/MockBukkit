@@ -116,6 +116,12 @@ public class LifecycleEventRunnerMock
 		}
 	}
 
+	public void reset()
+	{
+		((AbstractLifecycleEventTypeMock) LifecycleEvents.COMMANDS).clear();
+		((AbstractLifecycleEventTypeMock) LifecycleEvents.DATAPACK_DISCOVERY).clear();
+	}
+
 	private LifecycleEventRunnerMock()
 	{
 	}

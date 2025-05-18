@@ -50,6 +50,8 @@ public abstract class AbstractLifecycleEventTypeMock<O extends LifecycleEventOwn
 		this.register(owner, config);
 	}
 
+	public abstract void clear();
+
 	public record RegisteredHandler<O extends LifecycleEventOwner, E extends LifecycleEvent>(O owner,
 																							 AbstractLifecycleEventHandlerConfigurationMock<O, E> config)
 	{
