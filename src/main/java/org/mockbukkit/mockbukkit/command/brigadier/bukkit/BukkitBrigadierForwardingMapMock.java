@@ -26,11 +26,11 @@ import java.util.stream.Stream;
 public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 {
 
-	public static BukkitBrigadierForwardingMapMock INSTANCE = new BukkitBrigadierForwardingMapMock();
+	public static final BukkitBrigadierForwardingMapMock INSTANCE = new BukkitBrigadierForwardingMapMock();
 
-	private transient final EntrySet entrySet1 = new EntrySet();
-	private transient final KeySet keySet1 = new KeySet();
-	private transient final Values values1 = new Values();
+	private final transient EntrySet entrySet1 = new EntrySet();
+	private final transient KeySet keySet1 = new KeySet();
+	private final transient Values values1 = new Values();
 
 	public CommandDispatcher<CommandSourceStack> getDispatcher()
 	{
