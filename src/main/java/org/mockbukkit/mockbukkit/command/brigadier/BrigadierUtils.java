@@ -20,6 +20,11 @@ public class BrigadierUtils
 
 	private static final CommandSourceStack DUMMY = new CommandSourceStackMock(new Location(null, 0, 0, 0), new DummyCommandSender(), null);
 
+	private BrigadierUtils()
+	{
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static WrappedLiteralCommandNode copyLiteral(final String newLiteral, final LiteralCommandNode<CommandSourceStack> source)
 	{
 

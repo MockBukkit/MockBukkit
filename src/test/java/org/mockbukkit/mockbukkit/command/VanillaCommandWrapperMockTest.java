@@ -42,10 +42,10 @@ class VanillaCommandWrapperMockTest
 		Player player = serverMock.addPlayer();
 		List<String> completions = command.tabComplete(player, "a_command", new String[]{ "2" }, null);
 		assertEquals(1, completions.size());
-		assertEquals(completions.getFirst(), "2next");
+		assertEquals("2next", completions.getFirst());
 		List<String> completions2 = command.tabComplete(player, "a_command", new String[]{ "1" }, null);
 		assertEquals(1, completions2.size());
-		assertEquals(completions2.getFirst(), "1next");
+		assertEquals("1next", completions2.getFirst());
 		List<String> completions3 = command.tabComplete(player, "a_command", new String[]{ "" }, null);
 		assertEquals(2, completions3.size());
 	}
@@ -67,7 +67,7 @@ class VanillaCommandWrapperMockTest
 	void tabComplete_nullArgs()
 	{
 		Player player = serverMock.addPlayer();
-		assertThrows(IllegalArgumentException.class, () -> command.tabComplete(player, "a_command",null, null));
+		assertThrows(IllegalArgumentException.class, () -> command.tabComplete(player, "a_command", null, null));
 	}
 
 }

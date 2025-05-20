@@ -40,7 +40,7 @@ public abstract class PrioritizableLifecycleEventTypeMock<O extends LifecycleEve
 
 	private final List<RegisteredHandler<O, E>> handlers = new ArrayList<>();
 
-	public PrioritizableLifecycleEventTypeMock(final String name, final Class<? extends O> ownerType)
+	protected PrioritizableLifecycleEventTypeMock(final String name, final Class<? extends O> ownerType)
 	{
 		super(name, ownerType);
 	}
