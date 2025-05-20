@@ -73,6 +73,16 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
+		 * @param onLoad What to run on load
+		 * @return This builder
+		 */
+		public Builder withOnLoad(@NotNull Runnable onLoad)
+		{
+			this.onLoad = Optional.of(ignored -> onLoad.run());
+			return this;
+		}
+
+		/**
 		 * @param onEnable What to run on enable
 		 * @return This builder
 		 */
@@ -83,12 +93,32 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
+		 * @param onEnable What to run on load
+		 * @return This builder
+		 */
+		public Builder withOnEnable(@NotNull Runnable onEnable)
+		{
+			this.onEnable = Optional.of(ignored -> onEnable.run());
+			return this;
+		}
+
+		/**
 		 * @param onDisable What to run on disable
 		 * @return This builder
 		 */
 		public Builder withOnDisable(@NotNull Consumer<PluginMock> onDisable)
 		{
 			this.onDisable = Optional.of(onDisable);
+			return this;
+		}
+
+		/**
+		 * @param onDisable What to run on load
+		 * @return This builder
+		 */
+		public Builder withOnDisable(@NotNull Runnable onDisable)
+		{
+			this.onDisable = Optional.of(ignored -> onDisable.run());
 			return this;
 		}
 
