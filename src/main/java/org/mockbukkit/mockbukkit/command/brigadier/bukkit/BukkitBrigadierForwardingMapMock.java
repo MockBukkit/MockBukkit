@@ -28,9 +28,9 @@ public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 
 	public static BukkitBrigadierForwardingMapMock INSTANCE = new BukkitBrigadierForwardingMapMock();
 
-	private final EntrySet entrySet = new EntrySet();
-	private final KeySet keySet = new KeySet();
-	private final Values values = new Values();
+	private transient final EntrySet entrySet1 = new EntrySet();
+	private transient final KeySet keySet1 = new KeySet();
+	private transient final Values values1 = new Values();
 
 	public CommandDispatcher<CommandSourceStack> getDispatcher()
 	{
@@ -158,21 +158,21 @@ public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 	@Override
 	public Set<String> keySet()
 	{
-		return this.keySet;
+		return this.keySet1;
 	}
 
 	@NotNull
 	@Override
 	public Collection<Command> values()
 	{
-		return this.values;
+		return this.values1;
 	}
 
 	@NotNull
 	@Override
 	public Set<Entry<String, Command>> entrySet()
 	{
-		return this.entrySet;
+		return this.entrySet1;
 	}
 
 	final class Values extends AbstractCollection<Command>
@@ -258,7 +258,7 @@ public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
 		@Override
 		public Iterator<String> iterator()
 		{
-			return Iterators.transform(BukkitBrigadierForwardingMapMock.this.values.iterator(), Command::getName); // Wrap around the values iterator for consistancy
+			return Iterators.transform(BukkitBrigadierForwardingMapMock.this.values1.iterator(), Command::getName); // Wrap around the values iterator for consistancy
 		}
 
 		@Override
