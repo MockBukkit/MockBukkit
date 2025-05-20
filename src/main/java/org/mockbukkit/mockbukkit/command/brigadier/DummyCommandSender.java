@@ -20,25 +20,25 @@ public class DummyCommandSender implements CommandSender
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-
+		//NO-OP, doesn't matter
 	}
 
 	@Override
 	public void sendMessage(@NotNull String... messages)
 	{
-
+		//NO-OP, doesn't matter
 	}
 
 	@Override
 	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-
+		//NO-OP, doesn't matter
 	}
 
 	@Override
 	public void sendMessage(@Nullable UUID sender, @NotNull String... messages)
 	{
-
+		//NO-OP, doesn't matter
 	}
 
 	@Override
