@@ -36,6 +36,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
@@ -1571,6 +1572,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public void lookAt(double v, double v1, double v2, @NotNull LookAnchor lookAnchor)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack getPickItemStack()
 	{
 		throw new UnimplementedOperationException();
 	}
