@@ -5,9 +5,10 @@ on:
     branches: [ v1.* ]
 
 jobs:
-  build:
+  tag:
     runs-on: ubuntu-latest
-
+    outputs:
+      version: ${{steps.bump-semver.outputs.new_version}}
     steps:
       - uses: actions/checkout@v4
 
@@ -47,9 +48,10 @@ jobs:
         with:
           tag: ${{ steps.bump-semver.outputs.new_version }}
           message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ steps.pr.outputs.number }} - Commit ID: ${{ github.sha }}'
-
-      - name: Call publish workflow
-        uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
-        if: ${{ steps.bump-semver.outputs.new_version != null }}
-        with:
-          version: '${{ steps.bump-semver.outputs.new_version }}'
+  call-publish-workflow:
+    name: Call publish workflow
+    uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
+    needs: tag
+    if: ${{ needs.tag.outputs.version != null }}
+    with:
+      version: '${{ needs.tag.outputs.version }}'
