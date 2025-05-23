@@ -35,7 +35,7 @@ jobs:
         run: ./gradlew test
 
       - name: Publish
-        if: ${{ github.ref_type == 'tag' || github.event_name == 'workflow_call'}}
+        if: ${{ github.event_name == 'workflow_call'}}
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache -Pmockbukkit.version=${{ inputs.version }}')
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.OSSRH_USERNAME }}
