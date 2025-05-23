@@ -1,9 +1,17 @@
 name: Publish
 
 on:
-  push:
-    tags: [ v* ]
-
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: "The version to publish (no v prefix)"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,8 +35,8 @@ jobs:
         run: ./gradlew test
 
       - name: Publish
-        if: ${{ github.ref_type == 'tag' }}
-        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::')
+        if: ${{ github.ref_type == 'tag' || github.event_name == 'workflow_call'}}
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache -Pmockbukkit.version=${{ inputs.version }}')
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.OSSRH_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.OSSRH_TOKEN }}

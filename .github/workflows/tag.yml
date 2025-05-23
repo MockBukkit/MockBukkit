@@ -10,8 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.BUILD_TOKEN }}
 
       - name: Get merged pull request
         uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1
@@ -50,3 +48,8 @@ jobs:
           tag: ${{ steps.bump-semver.outputs.new_version }}
           message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ steps.pr.outputs.number }} - Commit ID: ${{ github.sha }}'
 
+      - name: Call publish workflow
+        uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        with:
+          version: '${{ steps.bump-semver.outputs.new_version }}'
