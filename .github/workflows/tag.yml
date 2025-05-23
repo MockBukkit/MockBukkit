@@ -49,7 +49,7 @@ jobs:
           message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ steps.pr.outputs.number }} - Commit ID: ${{ github.sha }}'
 
       - name: Call publish workflow
-        uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml
+        uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         with:
           version: '${{ steps.bump-semver.outputs.new_version }}'
