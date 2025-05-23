@@ -45,7 +45,7 @@ class BukkitBrigadierForwardingMapMockTest
 	void size_remove()
 	{
 		int initial = map.size();
-		map.remove("version");
+		map.remove("reload");
 		assertEquals(initial - 1, map.size());
 	}
 
@@ -80,7 +80,7 @@ class BukkitBrigadierForwardingMapMockTest
 				)
 		).build();
 		// Current implementation initializes before the first command is dispatched
-		serverMock.dispatchCommand(serverMock.getConsoleSender(), "version");
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "ignored");
 		// plugin prefix and alias mutates on this, therefore 4
 		assertEquals(initial + 4, map.size());
 		assertFalse(map.isEmpty());
