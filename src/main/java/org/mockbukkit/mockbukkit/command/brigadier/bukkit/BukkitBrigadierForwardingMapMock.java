@@ -11,6 +11,7 @@ import org.mockbukkit.mockbukkit.command.brigadier.BrigadierUtils;
 import org.mockbukkit.mockbukkit.command.brigadier.PaperCommandsMock;
 
 import java.util.AbstractCollection;
+import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +24,7 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class BukkitBrigadierForwardingMapMock extends HashMap<String, Command>
+public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Command>
 {
 
 	public static final BukkitBrigadierForwardingMapMock INSTANCE = new BukkitBrigadierForwardingMapMock();
