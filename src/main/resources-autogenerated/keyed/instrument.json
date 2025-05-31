@@ -1,35 +1,83 @@
 {
 	"values": [
 		{
+			"description": {
+				"translate": "instrument.minecraft.admire_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:admire_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.4",
 			"translationKey": "instrument.minecraft.admire_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.call_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:call_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.5",
 			"translationKey": "instrument.minecraft.call_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.dream_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:dream_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.7",
 			"translationKey": "instrument.minecraft.dream_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.feel_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:feel_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.3",
 			"translationKey": "instrument.minecraft.feel_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.ponder_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:ponder_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.0",
 			"translationKey": "instrument.minecraft.ponder_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.seek_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:seek_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.2",
 			"translationKey": "instrument.minecraft.seek_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.sing_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:sing_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.1",
 			"translationKey": "instrument.minecraft.sing_goat_horn"
 		},
 		{
+			"description": {
+				"translate": "instrument.minecraft.yearn_goat_horn"
+			},
+			"duration": 7.0,
 			"key": "minecraft:yearn_goat_horn",
+			"range": 256.0,
+			"sound": "minecraft:item.goat_horn.sound.6",
 			"translationKey": "instrument.minecraft.yearn_goat_horn"
 		}
 	]
