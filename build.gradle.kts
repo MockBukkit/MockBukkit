@@ -26,7 +26,7 @@ dependencies {
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.12.2")
+	implementation("org.junit.jupiter:junit-jupiter:5.13.0")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	// General utilities for the project
