@@ -871,7 +871,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDoor()
 		{
 			Door data = BlockType.OAK_DOOR.createBlockData();

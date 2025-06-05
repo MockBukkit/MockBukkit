@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.data.type.Crafter;
 import org.jetbrains.annotations.NotNull;
@@ -50,6 +51,7 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 	@Override
 	public void setOrientation(@NotNull org.bukkit.block.Orientation orientation)
 	{
+		Preconditions.checkArgument(orientation != null, "orientation cannot be null!");
 		this.set(BlockDataKey.ORIENTATION, orientation);
 	}
 

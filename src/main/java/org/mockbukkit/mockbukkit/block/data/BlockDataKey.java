@@ -26,6 +26,7 @@ import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
@@ -139,6 +140,7 @@ public enum BlockDataKey
 	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
 	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
 	ORIENTATION("orientation", string -> Orientation.valueOf(string.toUpperCase(Locale.ROOT)), Crafter.class::isInstance),
+	HINGE("hinge", string -> Door.Hinge.valueOf(string.toUpperCase(Locale.ROOT)), Door.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 

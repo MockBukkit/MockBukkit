@@ -47,6 +47,7 @@ public final class BlockDataMockFactory
 			.put(Tag.BUTTONS, SwitchDataMock::new)
 			.put(Tag.CAMPFIRES, CampfireDataMock::new)
 			.put(Tag.CANDLES, CandleDataMock::new)
+			.put(Tag.DOORS, DoorDataMock::new)
 			.put(Tag.FENCES, FenceDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
