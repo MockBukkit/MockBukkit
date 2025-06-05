@@ -50,6 +50,7 @@ public final class BlockDataMockFactory
 			.put(Tag.CANDLES, CandleDataMock::new)
 			.put(Tag.DOORS, DoorDataMock::new)
 			.put(Tag.FENCES, FenceDataMock::new)
+			.put(Tag.FENCE_GATES, FenceGateDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
