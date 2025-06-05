@@ -19,12 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FenceGateDataMockTest
 {
 
-	private FenceGateDataMock hopper;
+	private FenceGateDataMock gate;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.hopper = new FenceGateDataMock(Material.OAK_FENCE_GATE);
+		this.gate = new FenceGateDataMock(Material.OAK_FENCE_GATE);
 	}
 
 
@@ -35,15 +35,15 @@ class FenceGateDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertFalse(hopper.isInWall());
+			assertFalse(gate.isInWall());
 		}
 
 		@ParameterizedTest
 		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean inWall)
 		{
-			hopper.setInWall(inWall);
-			assertEquals(inWall, hopper.isInWall());
+			gate.setInWall(inWall);
+			assertEquals(inWall, gate.isInWall());
 		}
 
 	}
@@ -55,7 +55,7 @@ class FenceGateDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertEquals(BlockFace.NORTH, hopper.getFacing());
+			assertEquals(BlockFace.NORTH, gate.getFacing());
 		}
 
 		@ParameterizedTest
@@ -64,8 +64,8 @@ class FenceGateDataMockTest
 				names = { "NORTH", "SOUTH", "EAST", "WEST" })
 		void givenValidValues(BlockFace face)
 		{
-			hopper.setFacing(face);
-			assertEquals(face, hopper.getFacing());
+			gate.setFacing(face);
+			assertEquals(face, gate.getFacing());
 		}
 
 		@ParameterizedTest
@@ -74,7 +74,7 @@ class FenceGateDataMockTest
 				names = { "NORTH", "SOUTH", "EAST", "WEST" })
 		void givenInvalidValues(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> hopper.setFacing(face));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> gate.setFacing(face));
 			assertEquals("Invalid face, only cartesian horizontal face are allowed for this property!", e.getMessage());
 		}
 
@@ -87,15 +87,15 @@ class FenceGateDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertFalse(hopper.isOpen());
+			assertFalse(gate.isOpen());
 		}
 
 		@ParameterizedTest
 		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean inWall)
 		{
-			hopper.setOpen(inWall);
-			assertEquals(inWall, hopper.isOpen());
+			gate.setOpen(inWall);
+			assertEquals(inWall, gate.isOpen());
 		}
 
 	}
@@ -107,15 +107,15 @@ class FenceGateDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertFalse(hopper.isPowered());
+			assertFalse(gate.isPowered());
 		}
 
 		@ParameterizedTest
 		@ValueSource(booleans = { true, false })
 		void givenPossibleValues(boolean inWall)
 		{
-			hopper.setPowered(inWall);
-			assertEquals(inWall, hopper.isPowered());
+			gate.setPowered(inWall);
+			assertEquals(inWall, gate.isPowered());
 		}
 
 	}
