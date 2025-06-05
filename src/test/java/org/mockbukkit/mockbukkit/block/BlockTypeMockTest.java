@@ -1133,7 +1133,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenLectern()
 		{
 			Lectern data = BlockType.LECTERN.createBlockData();

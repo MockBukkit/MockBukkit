@@ -429,6 +429,13 @@ class BlockDataMockFactoryTest
 				assertInstanceOf(HopperDataMock.class, actual);
 			}
 
+			@Test
+			void givenLectern()
+			{
+				BlockDataMock actual = BlockDataMockFactory.mock(Material.LECTERN);
+				assertInstanceOf(LecternDataMock.class, actual);
+			}
+
 			@ParameterizedTest
 			@ValueSource(strings = {
 					"COMPOSTER",

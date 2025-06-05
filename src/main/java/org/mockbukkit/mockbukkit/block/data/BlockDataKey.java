@@ -29,6 +29,7 @@ import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
@@ -145,6 +146,7 @@ public enum BlockDataKey
 	ORIENTATION("orientation", string -> Orientation.valueOf(string.toUpperCase(Locale.ROOT)), Crafter.class::isInstance),
 	HINGE("hinge", string -> Door.Hinge.valueOf(string.toUpperCase(Locale.ROOT)), Door.class::isInstance),
 	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
+	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 
