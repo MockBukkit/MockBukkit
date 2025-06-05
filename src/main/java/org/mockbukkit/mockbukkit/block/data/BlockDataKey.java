@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Orientation;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
@@ -23,6 +24,7 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
@@ -133,6 +135,10 @@ public enum BlockDataKey
 	UP("up", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
+
+	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
+	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
+	ORIENTATION("orientation", string -> Orientation.valueOf(string.toUpperCase(Locale.ROOT)), Crafter.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 
