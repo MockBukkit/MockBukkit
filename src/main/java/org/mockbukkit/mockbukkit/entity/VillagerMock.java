@@ -259,6 +259,18 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	}
 
 	@Override
+	public void updateDemand()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void restock()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	protected void updateTrades()
 	{
 		updateTrades(2);
