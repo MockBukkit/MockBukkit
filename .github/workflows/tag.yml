@@ -54,5 +54,5 @@ jobs:
     needs: tag
     if: ${{ needs.tag.outputs.version != null }}
     with:
-      version: '${{ needs.tag.outputs.version }}'
+      version: $(echo ${{ needs.tag.outputs.version }} | sed -e 's:v::')
     secrets: inherit
