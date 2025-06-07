@@ -34,6 +34,7 @@ import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -79,6 +80,7 @@ public final class BlockDataMockFactory
 			.put(TestBlock.class, TestBlockDataMock::new)
 			.put(TNT.class, TNTDataMock::new)
 			.put(TrialSpawner.class, TrialSpawnerDataMock::new)
+			.put(Vault.class, VaultDataMock::new)
 			.put(Barrel.class, BarrelDataMock::new)
 			.put(Sapling.class, SaplingDataMock::new)
 			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)

@@ -38,6 +38,7 @@ import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -150,7 +151,9 @@ public enum BlockDataKey
 	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
 
 	TRIAL_SPAWNER_STATE("trial_spawner_state", string ->  TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
-	OMINOUS("ominous", Boolean::parseBoolean, TrialSpawner.class::isInstance),
+	OMINOUS("ominous", Boolean::parseBoolean, c -> c instanceof TrialSpawner || c instanceof Vault),
+
+	VAULT_STATE("vault_state", string ->  Vault.State.valueOf(string.toUpperCase(Locale.ROOT)), Vault.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 

@@ -58,10 +58,10 @@ class TrialSpawnerDataMockTest
 
 		@ParameterizedTest
 		@ValueSource(booleans = { true, false })
-		void givenPossibleValues(boolean isWaterLogged)
+		void givenPossibleValues(boolean ominous)
 		{
-			spawner.setOminous(isWaterLogged);
-			assertEquals(isWaterLogged, spawner.isOminous());
+			spawner.setOminous(ominous);
+			assertEquals(ominous, spawner.isOminous());
 		}
 
 	}
