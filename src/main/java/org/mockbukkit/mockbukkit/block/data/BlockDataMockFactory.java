@@ -22,6 +22,7 @@ import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.EnderChest;
+import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
@@ -70,6 +71,7 @@ public final class BlockDataMockFactory
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(EnderChest.class, EnderChestDataMock::new)
+			.put(Furnace.class, FurnaceDataMock::new)
 			.put(Hopper.class, HopperDataMock::new)
 			.put(Lectern.class, LecternDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
