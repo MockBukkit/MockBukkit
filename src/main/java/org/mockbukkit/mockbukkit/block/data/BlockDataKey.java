@@ -37,6 +37,7 @@ import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
+import org.bukkit.block.data.type.TrialSpawner;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -147,6 +148,9 @@ public enum BlockDataKey
 	HINGE("hinge", string -> Door.Hinge.valueOf(string.toUpperCase(Locale.ROOT)), Door.class::isInstance),
 	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
 	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
+
+	TRIAL_SPAWNER_STATE("trial_spawner_state", string ->  TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
+	OMINOUS("ominous", Boolean::parseBoolean, TrialSpawner.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 

@@ -1339,7 +1339,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenTrialSpawner()
 		{
 			TrialSpawner data = BlockType.TRIAL_SPAWNER.createBlockData();
