@@ -35,7 +35,7 @@ dependencies {
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.17.5")
+	implementation("net.bytebuddy:byte-buddy:1.17.6")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
