@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
@@ -480,6 +481,12 @@ class LivingEntityMockTest
 		assertEquals(10, livingEntity.getHealth(), 0);
 		assertFalse(livingEntity.isDead());
 		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void getAttribute_WhenAttributeIsNotPresent()
+	{
+		assertNull(this.livingEntity.getAttribute(Attribute.ARMOR));
 	}
 
 }

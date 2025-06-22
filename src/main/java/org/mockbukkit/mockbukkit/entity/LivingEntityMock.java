@@ -288,10 +288,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public AttributeInstance getAttribute(@NotNull Attribute attribute)
 	{
-		if (attributes.containsKey(attribute))
-			return attributes.get(attribute);
-		else
-			return null;
+		return attributes.getOrDefault(attribute, null);
 	}
 
 	@Override
