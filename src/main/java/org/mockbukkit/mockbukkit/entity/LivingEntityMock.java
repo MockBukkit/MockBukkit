@@ -291,7 +291,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		if (attributes.containsKey(attribute))
 			return attributes.get(attribute);
 		else
-			throw new UnimplementedOperationException();
+			return null;
 	}
 
 	@Override
