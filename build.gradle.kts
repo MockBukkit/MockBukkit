@@ -5,7 +5,7 @@ plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.32.0"
+	id("com.vanniktech.maven.publish") version "0.33.0"
 	id("net.kyori.blossom") version "2.1.0"
 }
 
