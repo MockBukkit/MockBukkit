@@ -185,22 +185,22 @@ public class BannerStateMock extends TileStateMock implements Banner
 
 		return switch (material)
 		{
-			case WHITE_BANNER -> DyeColor.WHITE;
-			case ORANGE_BANNER -> DyeColor.ORANGE;
-			case MAGENTA_BANNER -> DyeColor.MAGENTA;
-			case LIGHT_BLUE_BANNER -> DyeColor.LIGHT_BLUE;
-			case YELLOW_BANNER -> DyeColor.YELLOW;
-			case LIME_BANNER -> DyeColor.LIME;
-			case PINK_BANNER -> DyeColor.PINK;
-			case GRAY_BANNER -> DyeColor.GRAY;
-			case LIGHT_GRAY_BANNER -> DyeColor.LIGHT_GRAY;
-			case CYAN_BANNER -> DyeColor.CYAN;
-			case PURPLE_BANNER -> DyeColor.PURPLE;
-			case BLUE_BANNER -> DyeColor.BLUE;
-			case BROWN_BANNER -> DyeColor.BROWN;
-			case GREEN_BANNER -> DyeColor.GREEN;
-			case RED_BANNER -> DyeColor.RED;
-			case BLACK_BANNER -> DyeColor.BLACK;
+			case WHITE_BANNER, WHITE_WALL_BANNER -> DyeColor.WHITE;
+			case ORANGE_BANNER, ORANGE_WALL_BANNER -> DyeColor.ORANGE;
+			case MAGENTA_BANNER, MAGENTA_WALL_BANNER -> DyeColor.MAGENTA;
+			case LIGHT_BLUE_BANNER, LIGHT_BLUE_WALL_BANNER -> DyeColor.LIGHT_BLUE;
+			case YELLOW_BANNER, YELLOW_WALL_BANNER -> DyeColor.YELLOW;
+			case LIME_BANNER, LIME_WALL_BANNER -> DyeColor.LIME;
+			case PINK_BANNER, PINK_WALL_BANNER -> DyeColor.PINK;
+			case GRAY_BANNER, GRAY_WALL_BANNER -> DyeColor.GRAY;
+			case LIGHT_GRAY_BANNER, LIGHT_GRAY_WALL_BANNER -> DyeColor.LIGHT_GRAY;
+			case CYAN_BANNER, CYAN_WALL_BANNER -> DyeColor.CYAN;
+			case PURPLE_BANNER, PURPLE_WALL_BANNER -> DyeColor.PURPLE;
+			case BLUE_BANNER, BLUE_WALL_BANNER -> DyeColor.BLUE;
+			case BROWN_BANNER, BROWN_WALL_BANNER -> DyeColor.BROWN;
+			case GREEN_BANNER, GREEN_WALL_BANNER -> DyeColor.GREEN;
+			case RED_BANNER, RED_WALL_BANNER -> DyeColor.RED;
+			case BLACK_BANNER, BLACK_WALL_BANNER -> DyeColor.BLACK;
 			default -> throw new IllegalArgumentException("Unknown banner material " + material.name());
 		};
 	}

@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.block.state;
 
-import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import org.bukkit.Material;
@@ -17,9 +16,10 @@ public class BlockStateMockFactory
 	 * This factory tries to create the block state from a material {@link Tag}.
 	 */
 	private static final Map<Tag<Material>, Function<Material, BlockStateMock>> FACTORIES_BY_TAGS = ImmutableMap.<Tag<Material>, Function<Material, BlockStateMock>>builder()
-			.put(MaterialTags.BEDS, BedStateMock::new)
-			.put(MaterialTags.SIGNS, SignStateMock::new)
-			.put(MaterialTags.SHULKER_BOXES, ShulkerBoxStateMock::new)
+			.put(Tag.BANNERS, BannerStateMock::new)
+			.put(Tag.BEDS, BedStateMock::new)
+			.put(Tag.SIGNS, SignStateMock::new)
+			.put(Tag.SHULKER_BOXES, ShulkerBoxStateMock::new)
 			.build();
 
 	/**
