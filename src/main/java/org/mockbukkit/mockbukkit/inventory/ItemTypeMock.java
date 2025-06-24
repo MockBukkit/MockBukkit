@@ -45,11 +45,12 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	private final CreativeCategory creativeCategory;
 	private final boolean isCompostable;
 	private final BigDecimal compostChance;
+	private final int burnDuration;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
 						 boolean edible, boolean hasRecord, boolean fuel, @Nullable NamespacedKey blockType, String translationKey,
 						 Class<M> metaClass, ItemRarity rarity, CreativeCategory creativeCategory, boolean isCompostable,
-						 BigDecimal compostChance)
+						 BigDecimal compostChance, int burnDuration)
 	{
 		this.namespacedKey = namespacedKey;
 		this.maxStackSize = maxStackSize;
@@ -64,6 +65,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		this.creativeCategory = creativeCategory;
 		this.isCompostable = isCompostable;
 		this.compostChance = compostChance;
+		this.burnDuration = burnDuration;
 	}
 
 	@ApiStatus.Internal
@@ -80,6 +82,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		ItemRarity rarity = ItemRarity.valueOf(jsonObject.get("itemRarity").getAsString());
 		CreativeCategory creativeCategory = CreativeCategory.valueOf(jsonObject.get("creativeCategory").getAsString());
 		boolean isCompostable = jsonObject.get("compostable").getAsBoolean();
+		int burnDuration = jsonObject.get("burnDuration").getAsInt();
 		BigDecimal compostChance = new BigDecimal(0);
 		if (isCompostable)
 		{
@@ -127,7 +130,8 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				rarity,
 				creativeCategory,
 				isCompostable,
-				compostChance
+				compostChance,
+				burnDuration
 		);
 	}
 
@@ -227,6 +231,12 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	public boolean isFuel()
 	{
 		return this.fuel;
+	}
+
+	@Override
+	public int getBurnDuration()
+	{
+		return burnDuration;
 	}
 
 	@Override

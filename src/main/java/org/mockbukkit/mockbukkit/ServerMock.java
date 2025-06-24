@@ -990,6 +990,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean forcesDefaultGameMode()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated
 	public int broadcastMessage(@NotNull String message)
 	{
