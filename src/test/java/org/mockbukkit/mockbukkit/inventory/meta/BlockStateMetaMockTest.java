@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
@@ -169,10 +170,14 @@ public class BlockStateMetaMockTest
 		assertEquals(expected, item.getType());
 	}
 
-	@Test
-	void givenHangingSign_ShouldBeHangingSignMock()
+	@ParameterizedTest
+	@ValueSource(strings = {
+		"ACACIA_HANGING_SIGN",
+		"ACACIA_WALL_HANGING_SIGN"
+	})
+	void givenHangingSign_ShouldBeHangingSignMock(Material material)
 	{
-		@NotNull BlockState state = Material.ACACIA_HANGING_SIGN.createBlockData().createBlockState();
+		@NotNull BlockState state = material.createBlockData().createBlockState();
 		assertInstanceOf(HangingSignStateMock.class, state);
 	}
 
