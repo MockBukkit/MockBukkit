@@ -39,7 +39,7 @@ public class SignStateMock extends TileStateMock implements Sign
 	public SignStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Tag.SIGNS);
+		checkType(material, Tag.ALL_SIGNS);
 		this.front = new SignSideMock();
 		this.back = new SignSideMock();
 	}

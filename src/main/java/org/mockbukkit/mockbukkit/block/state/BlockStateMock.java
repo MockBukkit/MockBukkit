@@ -517,6 +517,10 @@ public class BlockStateMock implements BlockState
 		{
 			return new ShulkerBoxStateMock(material);
 		}
+		else if (Tag.ALL_HANGING_SIGNS.isTagged(material))
+		{
+			return new HangingSignStateMock(material);
+		}
 		else if (MaterialTags.SIGNS.isTagged(material))
 		{
 			return new SignStateMock(material);

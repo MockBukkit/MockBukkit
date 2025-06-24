@@ -17,6 +17,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
 import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
+import org.mockbukkit.mockbukkit.block.state.HangingSignStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestBlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestInstanceBlockStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
@@ -166,6 +167,13 @@ public class BlockStateMetaMockTest
 		ItemStack item = expected.asItemType().createItemStack();
 		assertNotNull(item);
 		assertEquals(expected, item.getType());
+	}
+
+	@Test
+	void givenHangingSign_ShouldBeHangingSignMock()
+	{
+		@NotNull BlockState state = Material.ACACIA_HANGING_SIGN.createBlockData().createBlockState();
+		assertInstanceOf(HangingSignStateMock.class, state);
 	}
 
 	@Test
