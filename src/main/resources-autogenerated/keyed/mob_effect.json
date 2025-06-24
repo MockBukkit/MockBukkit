@@ -336,6 +336,15 @@
 				"red": 246
 			},
 			"durationModifier": 1.0,
+			"effectAttributes": {
+				"WAYPOINT_TRANSMIT_RANGE": {
+					"amount": -1.0,
+					"key": "minecraft:effect.waypoint_transmit_range_hide",
+					"name": "effect.waypoint_transmit_range_hide",
+					"operation": "MULTIPLY_SCALAR_1",
+					"slotGroup": "any"
+				}
+			},
 			"effectCategory": "BENEFICIAL",
 			"id": 14,
 			"instant": false,

@@ -2754,6 +2754,21 @@
 			"powered": false
 		}
 	},
+	"minecraft:dried_ghast": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"hydration": "0",
+			"waterlogged": false
+		}
+	},
 	"minecraft:dried_kelp_block": {},
 	"minecraft:dripstone_block": {},
 	"minecraft:dropper": {

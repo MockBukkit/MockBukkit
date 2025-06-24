@@ -69,6 +69,10 @@
 			"translationKey": "jukebox_song.minecraft.strad"
 		},
 		{
+			"key": "minecraft:tears",
+			"translationKey": "jukebox_song.minecraft.tears"
+		},
+		{
 			"key": "minecraft:wait",
 			"translationKey": "jukebox_song.minecraft.wait"
 		},

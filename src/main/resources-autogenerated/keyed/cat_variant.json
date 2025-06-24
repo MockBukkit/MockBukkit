@@ -3,57 +3,57 @@
 		{
 			"key": "minecraft:all_black",
 			"name": "ALL_BLACK",
-			"ordinal": 10
+			"ordinal": 0
 		},
 		{
 			"key": "minecraft:black",
 			"name": "BLACK",
-			"ordinal": 4
+			"ordinal": 1
 		},
 		{
 			"key": "minecraft:british_shorthair",
 			"name": "BRITISH_SHORTHAIR",
-			"ordinal": 9
+			"ordinal": 2
 		},
 		{
 			"key": "minecraft:calico",
 			"name": "CALICO",
-			"ordinal": 7
+			"ordinal": 3
 		},
 		{
 			"key": "minecraft:jellie",
 			"name": "JELLIE",
-			"ordinal": 1
+			"ordinal": 4
 		},
 		{
 			"key": "minecraft:persian",
 			"name": "PERSIAN",
-			"ordinal": 0
+			"ordinal": 5
 		},
 		{
 			"key": "minecraft:ragdoll",
 			"name": "RAGDOLL",
-			"ordinal": 8
+			"ordinal": 6
 		},
 		{
 			"key": "minecraft:red",
 			"name": "RED",
-			"ordinal": 2
+			"ordinal": 7
 		},
 		{
 			"key": "minecraft:siamese",
 			"name": "SIAMESE",
-			"ordinal": 3
+			"ordinal": 8
 		},
 		{
 			"key": "minecraft:tabby",
 			"name": "TABBY",
-			"ordinal": 6
+			"ordinal": 9
 		},
 		{
 			"key": "minecraft:white",
 			"name": "WHITE",
-			"ordinal": 5
+			"ordinal": 10
 		}
 	]
 }

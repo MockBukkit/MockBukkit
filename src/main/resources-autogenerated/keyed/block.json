@@ -7341,6 +7341,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:dried_ghast",
+			"key": "minecraft:dried_ghast",
+			"material": "minecraft:dried_ghast",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.dried_ghast",
+			"typed": "minecraft:dried_ghast"
+		},
+		{
+			"air": false,
 			"blastResistance": 2.5,
 			"burnable": true,
 			"collision": true,

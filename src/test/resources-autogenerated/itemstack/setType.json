@@ -1224,6 +1224,7 @@
 			"material": "minecraft:black_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -1313,6 +1314,18 @@
 		"key": "minecraft:black_glazed_terracotta",
 		"result": {
 			"material": "minecraft:black_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:black_harness",
+		"result": {
+			"material": "minecraft:black_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -1517,6 +1530,7 @@
 			"material": "minecraft:blue_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -1618,6 +1632,18 @@
 		"key": "minecraft:blue_glazed_terracotta",
 		"result": {
 			"material": "minecraft:blue_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:blue_harness",
+		"result": {
+			"material": "minecraft:blue_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -2021,6 +2047,7 @@
 			"material": "minecraft:brown_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -2122,6 +2149,18 @@
 		"key": "minecraft:brown_glazed_terracotta",
 		"result": {
 			"material": "minecraft:brown_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:brown_harness",
+		"result": {
+			"material": "minecraft:brown_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -3447,6 +3486,7 @@
 			"material": "minecraft:conduit",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -4147,6 +4187,7 @@
 			"material": "minecraft:cyan_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -4236,6 +4277,18 @@
 		"key": "minecraft:cyan_glazed_terracotta",
 		"result": {
 			"material": "minecraft:cyan_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cyan_harness",
+		"result": {
+			"material": "minecraft:cyan_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -5401,6 +5454,18 @@
 		"key": "minecraft:dragon_wall_head",
 		"result": {
 			"material": "minecraft:air"
+		}
+	},
+	{
+		"key": "minecraft:dried_ghast",
+		"result": {
+			"material": "minecraft:dried_ghast",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
 		}
 	},
 	{
@@ -6820,6 +6885,7 @@
 			"material": "minecraft:gray_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -6918,6 +6984,18 @@
 		}
 	},
 	{
+		"key": "minecraft:gray_harness",
+		"result": {
+			"material": "minecraft:gray_harness",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:gray_shulker_box",
 		"result": {
 			"material": "minecraft:gray_shulker_box",
@@ -7003,6 +7081,7 @@
 			"material": "minecraft:green_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -7092,6 +7171,18 @@
 		"key": "minecraft:green_glazed_terracotta",
 		"result": {
 			"material": "minecraft:green_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:green_harness",
+		"result": {
+			"material": "minecraft:green_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -7237,6 +7328,19 @@
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:happy_ghast_spawn_egg",
+		"result": {
+			"material": "minecraft:happy_ghast_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
 			]
 		}
 	},
@@ -8387,6 +8491,7 @@
 			"material": "minecraft:light_blue_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -8485,6 +8590,18 @@
 		}
 	},
 	{
+		"key": "minecraft:light_blue_harness",
+		"result": {
+			"material": "minecraft:light_blue_harness",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:light_blue_shulker_box",
 		"result": {
 			"material": "minecraft:light_blue_shulker_box",
@@ -8570,6 +8687,7 @@
 			"material": "minecraft:light_gray_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -8659,6 +8777,18 @@
 		"key": "minecraft:light_gray_glazed_terracotta",
 		"result": {
 			"material": "minecraft:light_gray_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:light_gray_harness",
+		"result": {
+			"material": "minecraft:light_gray_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -8813,6 +8943,7 @@
 			"material": "minecraft:lime_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -8902,6 +9033,18 @@
 		"key": "minecraft:lime_glazed_terracotta",
 		"result": {
 			"material": "minecraft:lime_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:lime_harness",
+		"result": {
+			"material": "minecraft:lime_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -9058,6 +9201,7 @@
 			"material": "minecraft:magenta_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9147,6 +9291,18 @@
 		"key": "minecraft:magenta_glazed_terracotta",
 		"result": {
 			"material": "minecraft:magenta_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:magenta_harness",
+		"result": {
+			"material": "minecraft:magenta_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -10068,6 +10224,18 @@
 		}
 	},
 	{
+		"key": "minecraft:music_disc_tears",
+		"result": {
+			"material": "minecraft:music_disc_tears",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:music_disc_wait",
 		"result": {
 			"material": "minecraft:music_disc_wait",
@@ -10796,6 +10964,7 @@
 			"material": "minecraft:orange_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -10885,6 +11054,18 @@
 		"key": "minecraft:orange_glazed_terracotta",
 		"result": {
 			"material": "minecraft:orange_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:orange_harness",
+		"result": {
+			"material": "minecraft:orange_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -11583,6 +11764,7 @@
 			"material": "minecraft:pink_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -11672,6 +11854,18 @@
 		"key": "minecraft:pink_glazed_terracotta",
 		"result": {
 			"material": "minecraft:pink_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:pink_harness",
+		"result": {
+			"material": "minecraft:pink_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -12778,6 +12972,7 @@
 			"material": "minecraft:purple_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -12867,6 +13062,18 @@
 		"key": "minecraft:purple_glazed_terracotta",
 		"result": {
 			"material": "minecraft:purple_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:purple_harness",
+		"result": {
+			"material": "minecraft:purple_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -13263,6 +13470,7 @@
 			"material": "minecraft:red_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -13352,6 +13560,18 @@
 		"key": "minecraft:red_glazed_terracotta",
 		"result": {
 			"material": "minecraft:red_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:red_harness",
+		"result": {
+			"material": "minecraft:red_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -17252,6 +17472,7 @@
 			"material": "minecraft:white_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17341,6 +17562,18 @@
 		"key": "minecraft:white_glazed_terracotta",
 		"result": {
 			"material": "minecraft:white_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:white_harness",
+		"result": {
+			"material": "minecraft:white_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -17667,6 +17900,7 @@
 			"material": "minecraft:yellow_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17756,6 +17990,18 @@
 		"key": "minecraft:yellow_glazed_terracotta",
 		"result": {
 			"material": "minecraft:yellow_glazed_terracotta",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:yellow_harness",
+		"result": {
+			"material": "minecraft:yellow_harness",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",

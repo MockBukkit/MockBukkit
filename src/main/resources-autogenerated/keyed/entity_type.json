@@ -47,6 +47,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -110,6 +114,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:allay",
@@ -152,6 +160,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -216,6 +228,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:armadillo",
@@ -246,6 +262,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -302,6 +322,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:armor_stand",
@@ -348,6 +372,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -412,6 +440,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:axolotl",
@@ -466,6 +498,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -526,6 +562,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:bat",
@@ -560,6 +600,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -628,6 +672,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:bee",
@@ -686,6 +734,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -746,6 +798,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:blaze",
@@ -792,6 +848,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -852,6 +912,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:bogged",
@@ -886,6 +950,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -946,6 +1014,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:breeze",
@@ -988,6 +1060,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1052,6 +1128,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:camel",
@@ -1086,6 +1166,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1150,6 +1234,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:cat",
@@ -1184,6 +1272,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1242,6 +1334,10 @@
 					"defaultValue": 0.6
 				},
 				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				}
@@ -1311,6 +1407,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1374,6 +1474,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:chicken",
@@ -1404,6 +1508,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1464,6 +1572,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:cod",
@@ -1506,6 +1618,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1570,6 +1686,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:cow",
@@ -1604,6 +1724,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1664,6 +1788,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:creaking",
@@ -1698,6 +1826,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1756,6 +1888,10 @@
 					"defaultValue": 0.6
 				},
 				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				}
@@ -1817,6 +1953,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1876,6 +2016,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:dolphin",
@@ -1906,6 +2050,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -1970,6 +2118,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:donkey",
@@ -2016,6 +2168,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2080,6 +2236,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:drowned",
@@ -2126,6 +2286,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2186,6 +2350,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:elder_guardian",
@@ -2228,6 +2396,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 16.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2288,6 +2460,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:ender_dragon",
@@ -2334,6 +2510,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2394,6 +2574,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:enderman",
@@ -2428,6 +2612,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2488,6 +2676,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:endermite",
@@ -2522,6 +2714,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2580,6 +2776,10 @@
 					"defaultValue": 0.6
 				},
 				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				}
@@ -2713,6 +2913,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2776,6 +2980,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:fox",
@@ -2810,6 +3018,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -2874,6 +3086,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:frog",
@@ -2917,6 +3133,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 8.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2924,6 +3144,10 @@
 				"minecraft:fall_damage_multiplier": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:flying_speed": {
+					"baseValue": 0.06,
+					"defaultValue": 0.4
 				},
 				"minecraft:follow_range": {
 					"baseValue": 100.0,
@@ -2976,6 +3200,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:ghast",
@@ -3010,6 +3238,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 16.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3070,6 +3302,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:giant",
@@ -3112,6 +3348,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3172,6 +3412,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:glow_squid",
@@ -3206,6 +3450,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3270,6 +3518,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:goat",
@@ -3304,6 +3556,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3364,6 +3620,10 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:guardian",
@@ -3387,6 +3647,112 @@
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 8.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:flying_speed": {
+					"baseValue": 0.05,
+					"defaultValue": 0.4
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.05,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 16.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
+			"key": "minecraft:happy_ghast",
+			"name": "HAPPY_GHAST",
+			"ordinal": 62,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.happy_ghast",
+			"typeId": -1
+		},
+		{
+			"alive": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
 				"minecraft:attack_damage": {
 					"baseValue": 6.0,
 					"defaultValue": 2.0
@@ -3398,6 +3764,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3458,11 +3828,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:hoglin",
 			"name": "HOGLIN",
-			"ordinal": 62,
+			"ordinal": 63,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3474,7 +3848,7 @@
 			"alive": false,
 			"key": "minecraft:hopper_minecart",
 			"name": "HOPPER_MINECART",
-			"ordinal": 63,
+			"ordinal": 64,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3500,6 +3874,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3564,11 +3942,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:horse",
 			"name": "HORSE",
-			"ordinal": 64,
+			"ordinal": 65,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3598,6 +3980,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3662,11 +4048,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:husk",
 			"name": "HUSK",
-			"ordinal": 65,
+			"ordinal": 66,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3696,6 +4086,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3756,11 +4150,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:illusioner",
 			"name": "ILLUSIONER",
-			"ordinal": 66,
+			"ordinal": 67,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3772,7 +4170,7 @@
 			"alive": false,
 			"key": "minecraft:interaction",
 			"name": "INTERACTION",
-			"ordinal": 67,
+			"ordinal": 68,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3802,6 +4200,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -3862,11 +4264,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:iron_golem",
 			"name": "IRON_GOLEM",
-			"ordinal": 68,
+			"ordinal": 69,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3878,7 +4284,7 @@
 			"alive": false,
 			"key": "minecraft:item",
 			"name": "ITEM",
-			"ordinal": 69,
+			"ordinal": 70,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3890,7 +4296,7 @@
 			"alive": false,
 			"key": "minecraft:item_display",
 			"name": "ITEM_DISPLAY",
-			"ordinal": 70,
+			"ordinal": 71,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3902,7 +4308,7 @@
 			"alive": false,
 			"key": "minecraft:item_frame",
 			"name": "ITEM_FRAME",
-			"ordinal": 71,
+			"ordinal": 72,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3914,7 +4320,7 @@
 			"alive": false,
 			"key": "minecraft:jungle_boat",
 			"name": "JUNGLE_BOAT",
-			"ordinal": 72,
+			"ordinal": 73,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3926,7 +4332,7 @@
 			"alive": false,
 			"key": "minecraft:jungle_chest_boat",
 			"name": "JUNGLE_CHEST_BOAT",
-			"ordinal": 73,
+			"ordinal": 74,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3938,7 +4344,7 @@
 			"alive": false,
 			"key": "minecraft:leash_knot",
 			"name": "LEASH_KNOT",
-			"ordinal": 74,
+			"ordinal": 75,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3950,7 +4356,7 @@
 			"alive": false,
 			"key": "minecraft:lightning_bolt",
 			"name": "LIGHTNING_BOLT",
-			"ordinal": 75,
+			"ordinal": 76,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3962,7 +4368,7 @@
 			"alive": false,
 			"key": "minecraft:lingering_potion",
 			"name": "LINGERING_POTION",
-			"ordinal": 76,
+			"ordinal": 77,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3988,6 +4394,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4052,11 +4462,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:llama",
 			"name": "LLAMA",
-			"ordinal": 77,
+			"ordinal": 78,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4068,7 +4482,7 @@
 			"alive": false,
 			"key": "minecraft:llama_spit",
 			"name": "LLAMA_SPIT",
-			"ordinal": 78,
+			"ordinal": 79,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4098,6 +4512,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4158,11 +4576,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:magma_cube",
 			"name": "MAGMA_CUBE",
-			"ordinal": 79,
+			"ordinal": 80,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4174,7 +4596,7 @@
 			"alive": false,
 			"key": "minecraft:mangrove_boat",
 			"name": "MANGROVE_BOAT",
-			"ordinal": 80,
+			"ordinal": 81,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4186,7 +4608,7 @@
 			"alive": false,
 			"key": "minecraft:mangrove_chest_boat",
 			"name": "MANGROVE_CHEST_BOAT",
-			"ordinal": 81,
+			"ordinal": 82,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4198,7 +4620,7 @@
 			"alive": false,
 			"key": "minecraft:marker",
 			"name": "MARKER",
-			"ordinal": 82,
+			"ordinal": 83,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4210,7 +4632,7 @@
 			"alive": false,
 			"key": "minecraft:minecart",
 			"name": "MINECART",
-			"ordinal": 83,
+			"ordinal": 84,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4236,6 +4658,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4300,11 +4726,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:mooshroom",
 			"name": "MOOSHROOM",
-			"ordinal": 84,
+			"ordinal": 85,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4330,6 +4760,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4394,11 +4828,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:mule",
 			"name": "MULE",
-			"ordinal": 85,
+			"ordinal": 86,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4410,7 +4848,7 @@
 			"alive": false,
 			"key": "minecraft:oak_boat",
 			"name": "OAK_BOAT",
-			"ordinal": 86,
+			"ordinal": 87,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4422,7 +4860,7 @@
 			"alive": false,
 			"key": "minecraft:oak_chest_boat",
 			"name": "OAK_CHEST_BOAT",
-			"ordinal": 87,
+			"ordinal": 88,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4452,6 +4890,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4516,11 +4958,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:ocelot",
 			"name": "OCELOT",
-			"ordinal": 88,
+			"ordinal": 89,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4532,7 +4978,7 @@
 			"alive": false,
 			"key": "minecraft:ominous_item_spawner",
 			"name": "OMINOUS_ITEM_SPAWNER",
-			"ordinal": 89,
+			"ordinal": 90,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4544,7 +4990,7 @@
 			"alive": false,
 			"key": "minecraft:painting",
 			"name": "PAINTING",
-			"ordinal": 90,
+			"ordinal": 91,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4556,7 +5002,7 @@
 			"alive": false,
 			"key": "minecraft:pale_oak_boat",
 			"name": "PALE_OAK_BOAT",
-			"ordinal": 91,
+			"ordinal": 92,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4568,7 +5014,7 @@
 			"alive": false,
 			"key": "minecraft:pale_oak_chest_boat",
 			"name": "PALE_OAK_CHEST_BOAT",
-			"ordinal": 92,
+			"ordinal": 93,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4598,6 +5044,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4662,11 +5112,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:panda",
 			"name": "PANDA",
-			"ordinal": 93,
+			"ordinal": 94,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4696,6 +5150,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4764,11 +5222,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:parrot",
 			"name": "PARROT",
-			"ordinal": 94,
+			"ordinal": 95,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4798,6 +5260,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4858,11 +5324,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:phantom",
 			"name": "PHANTOM",
-			"ordinal": 95,
+			"ordinal": 96,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4888,6 +5358,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -4952,11 +5426,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:pig",
 			"name": "PIG",
-			"ordinal": 96,
+			"ordinal": 97,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4986,6 +5464,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5046,11 +5528,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:piglin",
 			"name": "PIGLIN",
-			"ordinal": 97,
+			"ordinal": 98,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5080,6 +5566,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5140,11 +5630,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:piglin_brute",
 			"name": "PIGLIN_BRUTE",
-			"ordinal": 98,
+			"ordinal": 99,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5174,6 +5668,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5234,11 +5732,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:pillager",
 			"name": "PILLAGER",
-			"ordinal": 99,
+			"ordinal": 100,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5280,6 +5782,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:entity_interaction_range": {
 					"baseValue": 3.0,
@@ -5360,11 +5866,19 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_receive_range": {
+					"baseValue": 6.0E7,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 6.0E7,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:player",
 			"name": "PLAYER",
-			"ordinal": 100,
+			"ordinal": 101,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5394,6 +5908,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5458,11 +5976,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:polar_bear",
 			"name": "POLAR_BEAR",
-			"ordinal": 101,
+			"ordinal": 102,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5488,6 +6010,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5548,11 +6074,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:pufferfish",
 			"name": "PUFFERFISH",
-			"ordinal": 102,
+			"ordinal": 103,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5582,6 +6112,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5646,11 +6180,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:rabbit",
 			"name": "RABBIT",
-			"ordinal": 103,
+			"ordinal": 104,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5680,6 +6218,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5740,11 +6282,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:ravager",
 			"name": "RAVAGER",
-			"ordinal": 104,
+			"ordinal": 105,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5770,6 +6316,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5830,11 +6380,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:salmon",
 			"name": "SALMON",
-			"ordinal": 105,
+			"ordinal": 106,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5860,6 +6414,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -5924,11 +6482,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:sheep",
 			"name": "SHEEP",
-			"ordinal": 106,
+			"ordinal": 107,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5954,6 +6516,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6014,11 +6580,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:shulker",
 			"name": "SHULKER",
-			"ordinal": 107,
+			"ordinal": 108,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6030,7 +6600,7 @@
 			"alive": false,
 			"key": "minecraft:shulker_bullet",
 			"name": "SHULKER_BULLET",
-			"ordinal": 108,
+			"ordinal": 109,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6060,6 +6630,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6120,11 +6694,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:silverfish",
 			"name": "SILVERFISH",
-			"ordinal": 109,
+			"ordinal": 110,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6154,6 +6732,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6214,11 +6796,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
-			"ordinal": 110,
+			"ordinal": 111,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6244,6 +6830,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6308,11 +6898,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:skeleton_horse",
 			"name": "SKELETON_HORSE",
-			"ordinal": 111,
+			"ordinal": 112,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6342,6 +6936,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6402,11 +7000,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:slime",
 			"name": "SLIME",
-			"ordinal": 112,
+			"ordinal": 113,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6418,7 +7020,7 @@
 			"alive": false,
 			"key": "minecraft:small_fireball",
 			"name": "SMALL_FIREBALL",
-			"ordinal": 113,
+			"ordinal": 114,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6444,6 +7046,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6508,11 +7114,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:sniffer",
 			"name": "SNIFFER",
-			"ordinal": 114,
+			"ordinal": 115,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6538,6 +7148,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6598,11 +7212,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:snow_golem",
 			"name": "SNOW_GOLEM",
-			"ordinal": 115,
+			"ordinal": 116,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6614,7 +7232,7 @@
 			"alive": false,
 			"key": "minecraft:snowball",
 			"name": "SNOWBALL",
-			"ordinal": 116,
+			"ordinal": 117,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6626,7 +7244,7 @@
 			"alive": false,
 			"key": "minecraft:spawner_minecart",
 			"name": "SPAWNER_MINECART",
-			"ordinal": 117,
+			"ordinal": 118,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6638,7 +7256,7 @@
 			"alive": false,
 			"key": "minecraft:spectral_arrow",
 			"name": "SPECTRAL_ARROW",
-			"ordinal": 118,
+			"ordinal": 119,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6668,6 +7286,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6728,11 +7350,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:spider",
 			"name": "SPIDER",
-			"ordinal": 119,
+			"ordinal": 120,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6744,7 +7370,7 @@
 			"alive": false,
 			"key": "minecraft:splash_potion",
 			"name": "SPLASH_POTION",
-			"ordinal": 120,
+			"ordinal": 121,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6756,7 +7382,7 @@
 			"alive": false,
 			"key": "minecraft:spruce_boat",
 			"name": "SPRUCE_BOAT",
-			"ordinal": 121,
+			"ordinal": 122,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6768,7 +7394,7 @@
 			"alive": false,
 			"key": "minecraft:spruce_chest_boat",
 			"name": "SPRUCE_CHEST_BOAT",
-			"ordinal": 122,
+			"ordinal": 123,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6794,6 +7420,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6854,11 +7484,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:squid",
 			"name": "SQUID",
-			"ordinal": 123,
+			"ordinal": 124,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6888,6 +7522,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -6948,11 +7586,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:stray",
 			"name": "STRAY",
-			"ordinal": 124,
+			"ordinal": 125,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6978,6 +7620,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7042,11 +7688,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:strider",
 			"name": "STRIDER",
-			"ordinal": 125,
+			"ordinal": 126,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7072,6 +7722,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7136,11 +7790,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:tadpole",
 			"name": "TADPOLE",
-			"ordinal": 126,
+			"ordinal": 127,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7152,7 +7810,7 @@
 			"alive": false,
 			"key": "minecraft:text_display",
 			"name": "TEXT_DISPLAY",
-			"ordinal": 127,
+			"ordinal": 128,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7164,7 +7822,7 @@
 			"alive": false,
 			"key": "minecraft:tnt",
 			"name": "TNT",
-			"ordinal": 128,
+			"ordinal": 129,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7176,7 +7834,7 @@
 			"alive": false,
 			"key": "minecraft:tnt_minecart",
 			"name": "TNT_MINECART",
-			"ordinal": 129,
+			"ordinal": 130,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7202,6 +7860,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7266,11 +7928,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:trader_llama",
 			"name": "TRADER_LLAMA",
-			"ordinal": 130,
+			"ordinal": 131,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7282,7 +7948,7 @@
 			"alive": false,
 			"key": "minecraft:trident",
 			"name": "TRIDENT",
-			"ordinal": 131,
+			"ordinal": 132,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7308,6 +7974,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7368,11 +8038,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:tropical_fish",
 			"name": "TROPICAL_FISH",
-			"ordinal": 132,
+			"ordinal": 133,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7398,6 +8072,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7462,11 +8140,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:turtle",
 			"name": "TURTLE",
-			"ordinal": 133,
+			"ordinal": 134,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7496,6 +8178,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7556,11 +8242,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:vex",
 			"name": "VEX",
-			"ordinal": 134,
+			"ordinal": 135,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7586,6 +8276,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7646,11 +8340,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:villager",
 			"name": "VILLAGER",
-			"ordinal": 135,
+			"ordinal": 136,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7680,6 +8378,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7740,11 +8442,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:vindicator",
 			"name": "VINDICATOR",
-			"ordinal": 136,
+			"ordinal": 137,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7770,6 +8476,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7830,11 +8540,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:wandering_trader",
 			"name": "WANDERING_TRADER",
-			"ordinal": 137,
+			"ordinal": 138,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7864,6 +8578,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -7924,11 +8642,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:warden",
 			"name": "WARDEN",
-			"ordinal": 138,
+			"ordinal": 139,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7940,7 +8662,7 @@
 			"alive": false,
 			"key": "minecraft:wind_charge",
 			"name": "WIND_CHARGE",
-			"ordinal": 139,
+			"ordinal": 140,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7970,6 +8692,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8030,11 +8756,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:witch",
 			"name": "WITCH",
-			"ordinal": 140,
+			"ordinal": 141,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8064,6 +8794,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8128,11 +8862,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:wither",
 			"name": "WITHER",
-			"ordinal": 141,
+			"ordinal": 142,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8162,6 +8900,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8222,11 +8964,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:wither_skeleton",
 			"name": "WITHER_SKELETON",
-			"ordinal": 142,
+			"ordinal": 143,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8238,7 +8984,7 @@
 			"alive": false,
 			"key": "minecraft:wither_skull",
 			"name": "WITHER_SKULL",
-			"ordinal": 143,
+			"ordinal": 144,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8268,6 +9014,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8332,11 +9082,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:wolf",
 			"name": "WOLF",
-			"ordinal": 144,
+			"ordinal": 145,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8366,6 +9120,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8426,11 +9184,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:zoglin",
 			"name": "ZOGLIN",
-			"ordinal": 145,
+			"ordinal": 146,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8460,6 +9222,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8524,11 +9290,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:zombie",
 			"name": "ZOMBIE",
-			"ordinal": 146,
+			"ordinal": 147,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8554,6 +9324,10 @@
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
 				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
@@ -8618,11 +9392,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:zombie_horse",
 			"name": "ZOMBIE_HORSE",
-			"ordinal": 147,
+			"ordinal": 148,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8653,6 +9431,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8716,11 +9498,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:zombie_villager",
 			"name": "ZOMBIE_VILLAGER",
-			"ordinal": 148,
+			"ordinal": 149,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8751,6 +9537,10 @@
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
 				"minecraft:explosion_knockback_resistance": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8814,11 +9604,15 @@
 				"minecraft:water_movement_efficiency": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				}
 			},
 			"key": "minecraft:zombified_piglin",
 			"name": "ZOMBIFIED_PIGLIN",
-			"ordinal": 149,
+			"ordinal": 150,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
