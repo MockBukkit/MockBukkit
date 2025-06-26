@@ -344,19 +344,26 @@ public class BlockStateMock implements BlockState
 	@Override
 	public @NotNull BlockStateMock copy()
 	{
-		if (this.getClass() != BlockStateMock.class)
+		return getSnapshot().changeLocation(null);
+	}
+
+	protected <B extends BlockStateMock> B changeLocation(@Nullable Location location)
+	{
+		if (location == null)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
-					" does not provide a .copy() implementation! This is a bug.");
+			this.block = null;
 		}
-		return new BlockStateMock(this);
+		else
+		{
+			this.block = location.getBlock();
+		}
+		return (B) this;
 	}
 
 	@Override
 	public @NotNull BlockState copy(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override
@@ -445,7 +452,6 @@ public class BlockStateMock implements BlockState
 	 *
 	 * @param block The block to create the BlockState from.
 	 * @return The BlockState.
-	 *
 	 * @deprecated Use {@link BlockStateMockFactory#mock(Block)} instead.
 	 */
 	@NotNull

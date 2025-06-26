@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Structure;
@@ -10,6 +11,7 @@ import org.bukkit.block.structure.UsageMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockVector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Structure}.
@@ -91,7 +93,13 @@ public class StructureStateMock extends TileStateMock implements Structure
 	@Override
 	public @NotNull StructureStateMock copy()
 	{
-		return new StructureStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull StructureStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

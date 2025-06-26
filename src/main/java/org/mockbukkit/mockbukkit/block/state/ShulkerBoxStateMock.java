@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -160,7 +161,13 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	@Override
 	public @NotNull ShulkerBoxStateMock copy()
 	{
-		return new ShulkerBoxStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull ShulkerBoxStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@NotNull

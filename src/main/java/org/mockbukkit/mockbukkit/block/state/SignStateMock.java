@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.DyeColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -216,7 +217,13 @@ public class SignStateMock extends TileStateMock implements Sign
 	@Override
 	public @NotNull SignStateMock copy()
 	{
-		return new SignStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull SignStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	private static class SignSideMock implements SignSide

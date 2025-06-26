@@ -1,11 +1,13 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.mockbukkit.mockbukkit.inventory.BrewerInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
@@ -75,7 +77,13 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	@Override
 	public @NotNull BrewingStandStateMock copy()
 	{
-		return new BrewingStandStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull BrewingStandStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

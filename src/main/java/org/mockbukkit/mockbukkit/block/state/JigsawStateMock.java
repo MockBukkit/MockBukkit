@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jigsaw;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Jigsaw}.
@@ -56,7 +58,13 @@ public class JigsawStateMock extends TileStateMock implements Jigsaw
 	@Override
 	public @NotNull JigsawStateMock copy()
 	{
-		return new JigsawStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull JigsawStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
@@ -68,9 +69,14 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	@Override
 	public @NotNull JukeboxStateMock copy()
 	{
-		return new JukeboxStateMock(this);
+		return getSnapshot().changeLocation(null);
 	}
 
+	@Override
+	public @NotNull BeehiveStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
+	}
 
 	@Override
 	public @NotNull Material getPlaying()

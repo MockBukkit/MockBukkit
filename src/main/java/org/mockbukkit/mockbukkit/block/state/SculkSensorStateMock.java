@@ -1,10 +1,12 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.SculkSensor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link SculkSensor}.
@@ -62,7 +64,13 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	@Override
 	public @NotNull SculkSensorStateMock copy()
 	{
-		return new SculkSensorStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull SculkSensorStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

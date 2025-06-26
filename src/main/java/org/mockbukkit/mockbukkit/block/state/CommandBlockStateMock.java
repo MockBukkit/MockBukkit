@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
@@ -65,7 +66,13 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	@Override
 	public @NotNull CommandBlockStateMock copy()
 	{
-		return new CommandBlockStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull CommandBlockStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

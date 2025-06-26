@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.HangingSign;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link HangingSign}.
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HangingSignStateMock extends SignStateMock implements HangingSign
 {
+
 	public HangingSignStateMock(@NotNull Material material)
 	{
 		super(material);
@@ -30,7 +33,13 @@ public class HangingSignStateMock extends SignStateMock implements HangingSign
 	@Override
 	public @NotNull SignStateMock copy()
 	{
-		return new HangingSignStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull SignStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 }

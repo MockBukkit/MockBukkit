@@ -68,7 +68,13 @@ public class EndGatewayStateMock extends TileStateMock implements EndGateway
 	@Override
 	public @NotNull EndGatewayStateMock copy()
 	{
-		return new EndGatewayStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull EndGatewayStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

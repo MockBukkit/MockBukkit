@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Bell;
 import org.bukkit.block.Block;
@@ -60,7 +61,13 @@ public class BellStateMock extends TileStateMock implements Bell
 	@Override
 	public @NotNull BellStateMock copy()
 	{
-		return new BellStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull BellStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

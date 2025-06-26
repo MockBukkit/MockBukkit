@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Furnace}.
@@ -56,7 +58,13 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 	@Override
 	public @NotNull FurnaceStateMock copy()
 	{
-		return new FurnaceStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull FurnaceStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

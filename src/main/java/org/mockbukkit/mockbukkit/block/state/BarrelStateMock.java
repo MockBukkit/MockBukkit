@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
@@ -126,7 +127,13 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 	@Override
 	public @NotNull BarrelStateMock copy()
 	{
-		return new BarrelStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull BarrelStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

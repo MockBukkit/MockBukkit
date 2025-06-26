@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.TestInstanceBlock;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link TestInstanceBlock}.
@@ -32,6 +34,18 @@ public class TestInstanceBlockStateMock extends TileStateMock implements TestIns
 	public @NotNull TestInstanceBlockStateMock getSnapshot()
 	{
 		return new TestInstanceBlockStateMock(this);
+	}
+
+	@Override
+	public @NotNull TestInstanceBlockStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
+	}
+
+	@Override
+	public @NotNull TestInstanceBlockStateMock copy()
+	{
+		return getSnapshot().changeLocation(null);
 	}
 
 }

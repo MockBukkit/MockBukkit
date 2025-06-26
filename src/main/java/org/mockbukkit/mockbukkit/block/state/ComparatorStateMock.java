@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Comparator;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Comparator}.
@@ -56,7 +58,13 @@ public class ComparatorStateMock extends TileStateMock implements Comparator
 	@Override
 	public @NotNull ComparatorStateMock copy()
 	{
-		return new ComparatorStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull ComparatorStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 }

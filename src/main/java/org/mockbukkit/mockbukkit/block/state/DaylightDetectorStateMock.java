@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.DaylightDetector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link DaylightDetector}.
@@ -56,7 +58,13 @@ public class DaylightDetectorStateMock extends TileStateMock implements Daylight
 	@Override
 	public @NotNull DaylightDetectorStateMock copy()
 	{
-		return new DaylightDetectorStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull DaylightDetectorStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 }

@@ -1,10 +1,12 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import io.papermc.paper.math.Position;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.SculkCatalyst;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
@@ -58,7 +60,13 @@ public class SculkCatalystStateMock extends TileStateMock implements SculkCataly
 	@Override
 	public @NotNull SculkCatalystStateMock copy()
 	{
-		return new SculkCatalystStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull SculkCatalystStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override
