@@ -183,7 +183,7 @@ CHERRY_WALL_SIGN, org.bukkit.block.Sign
 CHERRY_WOOD, org.bukkit.block.BlockState
 CHEST, org.bukkit.block.Chest
 CHIPPED_ANVIL, org.bukkit.block.BlockState
-CHISELED_BOOKSHELF, org.bukkit.block.ChiseledBookshelf
+CHISELED_BOOKSHELF, org.bukkit.block.BlockState
 CHISELED_COPPER, org.bukkit.block.BlockState
 CHISELED_DEEPSLATE, org.bukkit.block.BlockState
 CHISELED_NETHER_BRICKS, org.bukkit.block.BlockState
@@ -228,9 +228,9 @@ CRACKED_DEEPSLATE_TILES, org.bukkit.block.BlockState
 CRACKED_NETHER_BRICKS, org.bukkit.block.BlockState
 CRACKED_POLISHED_BLACKSTONE_BRICKS, org.bukkit.block.BlockState
 CRACKED_STONE_BRICKS, org.bukkit.block.BlockState
-CRAFTER, org.bukkit.block.Crafter
+CRAFTER, org.bukkit.block.BlockState
 CRAFTING_TABLE, org.bukkit.block.BlockState
-CREAKING_HEART, org.bukkit.block.CreakingHeart
+CREAKING_HEART, org.bukkit.block.BlockState
 CREEPER_HEAD, org.bukkit.block.Skull
 CREEPER_WALL_HEAD, org.bukkit.block.Skull
 CRIMSON_BUTTON, org.bukkit.block.BlockState
@@ -317,7 +317,7 @@ DEAD_TUBE_CORAL, org.bukkit.block.BlockState
 DEAD_TUBE_CORAL_BLOCK, org.bukkit.block.BlockState
 DEAD_TUBE_CORAL_FAN, org.bukkit.block.BlockState
 DEAD_TUBE_CORAL_WALL_FAN, org.bukkit.block.BlockState
-DECORATED_POT, org.bukkit.block.DecoratedPot
+DECORATED_POT, org.bukkit.block.BlockState
 DEEPSLATE, org.bukkit.block.BlockState
 DEEPSLATE_BRICK_SLAB, org.bukkit.block.BlockState
 DEEPSLATE_BRICK_STAIRS, org.bukkit.block.BlockState
@@ -955,8 +955,8 @@ STRUCTURE_BLOCK, org.bukkit.block.Structure
 STRUCTURE_VOID, org.bukkit.block.BlockState
 SUGAR_CANE, org.bukkit.block.BlockState
 SUNFLOWER, org.bukkit.block.BlockState
-SUSPICIOUS_GRAVEL, org.bukkit.block.BrushableBlock
-SUSPICIOUS_SAND, org.bukkit.block.BrushableBlock
+SUSPICIOUS_GRAVEL, org.bukkit.block.BlockState
+SUSPICIOUS_SAND, org.bukkit.block.BlockState
 SWEET_BERRY_BUSH, org.bukkit.block.BlockState
 TALL_DRY_GRASS, org.bukkit.block.BlockState
 TALL_GRASS, org.bukkit.block.BlockState
@@ -971,7 +971,7 @@ TORCH, org.bukkit.block.BlockState
 TORCHFLOWER, org.bukkit.block.BlockState
 TORCHFLOWER_CROP, org.bukkit.block.BlockState
 TRAPPED_CHEST, org.bukkit.block.Chest
-TRIAL_SPAWNER, org.bukkit.block.TrialSpawner
+TRIAL_SPAWNER, org.bukkit.block.BlockState
 TRIPWIRE, org.bukkit.block.BlockState
 TRIPWIRE_HOOK, org.bukkit.block.BlockState
 TUBE_CORAL, org.bukkit.block.BlockState
@@ -989,7 +989,7 @@ TUFF_WALL, org.bukkit.block.BlockState
 TURTLE_EGG, org.bukkit.block.BlockState
 TWISTING_VINES, org.bukkit.block.BlockState
 TWISTING_VINES_PLANT, org.bukkit.block.BlockState
-VAULT, org.bukkit.block.Vault
+VAULT, org.bukkit.block.BlockState
 VERDANT_FROGLIGHT, org.bukkit.block.BlockState
 VINE, org.bukkit.block.BlockState
 VOID_AIR, org.bukkit.block.BlockState
