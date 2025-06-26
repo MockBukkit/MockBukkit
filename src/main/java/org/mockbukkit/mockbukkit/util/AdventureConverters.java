@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.util;
 
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.SoundCategory;
+import org.jetbrains.annotations.ApiStatus;
 
 public class AdventureConverters
 {
@@ -11,6 +12,7 @@ public class AdventureConverters
 		throw new IllegalStateException("Utility class");
 	}
 
+	@ApiStatus.Internal
 	public static SoundCategory soundSourceToCategory(Sound.Source source)
 	{
 		return switch (source)
@@ -25,6 +27,7 @@ public class AdventureConverters
 			case PLAYER -> SoundCategory.PLAYERS;
 			case AMBIENT -> SoundCategory.AMBIENT;
 			case VOICE -> SoundCategory.VOICE;
+			case UI -> SoundCategory.UI;
 		};
 	}
 
