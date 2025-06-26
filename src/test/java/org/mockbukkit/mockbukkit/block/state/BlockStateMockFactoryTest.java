@@ -21,7 +21,15 @@ class BlockStateMockFactoryTest
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/blocks/block_states.csv")
-	void validatePossibleStates(Material material, Class<? extends BlockState> blockStateClass)
+	void validatePossibleStates_GivenMaterial(Material material, Class<? extends BlockState> blockStateClass)
+	{
+		@NotNull BlockState block = BlockStateMockFactory.mock(material);
+		assertInstanceOf(blockStateClass, block);
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/blocks/block_states.csv")
+	void validatePossibleStates_GivenBlock(Material material, Class<? extends BlockState> blockStateClass)
 	{
 
 		World world = server.addSimpleWorld("test");

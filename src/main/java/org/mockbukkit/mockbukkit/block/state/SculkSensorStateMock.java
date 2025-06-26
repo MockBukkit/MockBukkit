@@ -26,7 +26,7 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	public SculkSensorStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.SCULK_SENSOR);
+		checkType(material, Material.SCULK_SENSOR, Material.CALIBRATED_SCULK_SENSOR);
 	}
 
 	/**
