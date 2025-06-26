@@ -18,6 +18,7 @@ public class BlockStateMockFactory
 	 * This factory tries to create the block state from a material {@link Tag}.
 	 */
 	private static final Map<Tag<Material>, Factory> FACTORIES_BY_TAGS = ImmutableMap.<Tag<Material>, Factory>builder()
+			.put(Tag.ALL_HANGING_SIGNS, with(HangingSignStateMock::new, HangingSignStateMock::new))
 			.put(Tag.BANNERS, with(BannerStateMock::new, BannerStateMock::new))
 			.put(Tag.BEDS, with(BedStateMock::new, BedStateMock::new))
 			.put(Tag.SIGNS, with(SignStateMock::new, SignStateMock::new))

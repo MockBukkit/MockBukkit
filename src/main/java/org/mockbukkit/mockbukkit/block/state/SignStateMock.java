@@ -53,7 +53,7 @@ public class SignStateMock extends TileStateMock implements Sign
 	protected SignStateMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Tag.SIGNS);
+		checkType(block, Tag.ALL_SIGNS);
 		this.front = new SignSideMock();
 		this.back = new SignSideMock();
 	}
