@@ -73,7 +73,7 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
-	public @NotNull BeehiveStateMock copy(@Nullable Location location)
+	public @NotNull JukeboxStateMock copy(@Nullable Location location)
 	{
 		return getSnapshot().changeLocation(location);
 	}

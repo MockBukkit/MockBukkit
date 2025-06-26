@@ -411,6 +411,10 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
+		if (this.isPlaced() != other.isPlaced())
+		{
+			return false;
+		}
 		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 
 	}
