@@ -16,7 +16,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 class DecoratedPotStateMockTest
@@ -58,6 +60,24 @@ class DecoratedPotStateMockTest
 	}
 
 	@Test
+	void setSherd_Null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> pot.setSherd(null, Material.SHEAF_POTTERY_SHERD));
+	}
+
+	@Test
+	void setSherd_NullMaterial()
+	{
+		assertThrows(IllegalArgumentException.class, () -> pot.setSherd(DecoratedPot.Side.LEFT, Material.POTATO));
+	}
+
+	@Test
+	void getSherd_Null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> pot.getSherd(null));
+	}
+
+	@Test
 	void getSherds()
 	{
 		pot.setSherd(DecoratedPot.Side.LEFT, Material.SHEAF_POTTERY_SHERD);
@@ -66,6 +86,8 @@ class DecoratedPotStateMockTest
 		assertEquals(Material.BRICK, sherds.get(DecoratedPot.Side.RIGHT));
 		assertEquals(Material.BRICK, sherds.get(DecoratedPot.Side.FRONT));
 		assertEquals(Material.BRICK, sherds.get(DecoratedPot.Side.BACK));
+		pot.setSherd(DecoratedPot.Side.LEFT, null);
+		assertEquals(Material.BRICK, pot.getSherd(DecoratedPot.Side.LEFT));
 	}
 
 	@Test
@@ -89,6 +111,24 @@ class DecoratedPotStateMockTest
 		DecoratedPotStateMock clone = (DecoratedPotStateMock) pot.getSnapshot();
 		assertEquals(pot, clone);
 		assertNotSame(pot.hashCode(), clone.hashCode());
+	}
+
+	@Test
+	void notEqualNull()
+	{
+		assertNotEquals(null, pot);
+	}
+
+	@Test
+	void notEqualObject()
+	{
+		assertNotEquals(new Object(), pot);
+	}
+
+	@Test
+	void equalsSelf()
+	{
+		assertEquals(pot, pot);
 	}
 
 }
