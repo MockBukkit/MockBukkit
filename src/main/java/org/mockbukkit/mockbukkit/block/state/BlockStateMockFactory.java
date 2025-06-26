@@ -64,6 +64,8 @@ public class BlockStateMockFactory
 			.put(Material.SOUL_CAMPFIRE, with(CampfireStateMock::new, CampfireStateMock::new))
 			.put(Material.SPAWNER, with(CreatureSpawnerStateMock::new, CreatureSpawnerStateMock::new))
 			.put(Material.STRUCTURE_BLOCK, with(StructureStateMock::new, StructureStateMock::new))
+			.put(Material.SUSPICIOUS_GRAVEL, with(BrushableBlockStateMock::new, BrushableBlockStateMock::new))
+			.put(Material.SUSPICIOUS_SAND, with(BrushableBlockStateMock::new, BrushableBlockStateMock::new))
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
 			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))

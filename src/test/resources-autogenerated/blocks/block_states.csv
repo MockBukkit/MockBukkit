@@ -955,8 +955,8 @@ STRUCTURE_BLOCK, org.bukkit.block.Structure
 STRUCTURE_VOID, org.bukkit.block.BlockState
 SUGAR_CANE, org.bukkit.block.BlockState
 SUNFLOWER, org.bukkit.block.BlockState
-SUSPICIOUS_GRAVEL, org.bukkit.block.BlockState
-SUSPICIOUS_SAND, org.bukkit.block.BlockState
+SUSPICIOUS_GRAVEL, org.bukkit.block.BrushableBlock
+SUSPICIOUS_SAND, org.bukkit.block.BrushableBlock
 SWEET_BERRY_BUSH, org.bukkit.block.BlockState
 TALL_DRY_GRASS, org.bukkit.block.BlockState
 TALL_GRASS, org.bukkit.block.BlockState
