@@ -636,7 +636,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBrushable()
 		{
 			Brushable data = BlockType.SUSPICIOUS_SAND.createBlockData();

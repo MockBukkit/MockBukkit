@@ -7165,13 +7165,17 @@
 		}
 	},
 	"minecraft:suspicious_gravel": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDusted": "3"
+		},
 		"defaultStates": {
 			"dusted": "0"
 		}
 	},
 	"minecraft:suspicious_sand": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDusted": "3"
+		},
 		"defaultStates": {
 			"dusted": "0"
 		}
