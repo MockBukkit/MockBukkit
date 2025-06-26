@@ -317,7 +317,7 @@ DEAD_TUBE_CORAL, org.bukkit.block.BlockState
 DEAD_TUBE_CORAL_BLOCK, org.bukkit.block.BlockState
 DEAD_TUBE_CORAL_FAN, org.bukkit.block.BlockState
 DEAD_TUBE_CORAL_WALL_FAN, org.bukkit.block.BlockState
-DECORATED_POT, org.bukkit.block.BlockState
+DECORATED_POT, org.bukkit.block.DecoratedPot
 DEEPSLATE, org.bukkit.block.BlockState
 DEEPSLATE_BRICK_SLAB, org.bukkit.block.BlockState
 DEEPSLATE_BRICK_STAIRS, org.bukkit.block.BlockState

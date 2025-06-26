@@ -13,9 +13,11 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.DecoratedPotInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class DecoratedPotStateMock extends ContainerStateMock implements DecoratedPot
 {
@@ -25,11 +27,13 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	DecoratedPotStateMock(@NotNull Material material)
 	{
 		super(material);
+		checkType(material, Material.DECORATED_POT);
 	}
 
 	protected DecoratedPotStateMock(@NotNull Block block)
 	{
 		super(block);
+		checkType(block.getType(), Material.DECORATED_POT);
 	}
 
 	protected DecoratedPotStateMock(@NotNull DecoratedPotStateMock state)
@@ -87,7 +91,12 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	@Override
 	public @NotNull Map<Side, Material> getSherds()
 	{
-		return new HashMap<>(sherds);
+		Map<Side, Material> output = new EnumMap<>(Side.class);
+		for (Side side : Side.values())
+		{
+			output.put(side, sherds.getOrDefault(side, Material.BRICK));
+		}
+		return output;
 	}
 
 	@Override
@@ -136,5 +145,30 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	{
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public boolean equals(Object object)
+	{
+		if (this == object)
+		{
+			return true;
+		}
+		if (!(object instanceof DecoratedPotStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(object))
+		{
+			return false;
+		}
+		return sherds.equals(that.sherds);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), sherds);
+	}
+
 
 }

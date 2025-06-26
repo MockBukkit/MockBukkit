@@ -14,7 +14,7 @@ public class DecoratedPotInventoryMock extends InventoryMock implements Decorate
 
 	public DecoratedPotInventoryMock(@Nullable InventoryHolder holder)
 	{
-		super(holder, 0, InventoryType.DECORATED_POT);
+		super(holder, 1, InventoryType.DECORATED_POT);
 	}
 
 	protected DecoratedPotInventoryMock(@NotNull DecoratedPotInventoryMock inventory)

@@ -66,6 +66,7 @@ public class BlockStateMockFactory
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
 			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))
+			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
 			.build();
 
 	/**
@@ -137,5 +138,8 @@ public class BlockStateMockFactory
 
 	record Factory(@NotNull Function<Material, BlockStateMock> materialFactory,
 				   @NotNull Function<Block, BlockStateMock> blockFactory)
-	{}
+	{
+
+	}
+
 }
