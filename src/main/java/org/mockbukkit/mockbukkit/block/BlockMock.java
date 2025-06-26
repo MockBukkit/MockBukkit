@@ -27,7 +27,9 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMockFactory;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
@@ -97,13 +99,13 @@ public class BlockMock implements Block
 		Preconditions.checkArgument(material.isBlock(), "Material has to be a block");
 		this.material = material;
 		this.location = location;
-		this.state = BlockStateMock.mockState(this);
-		this.blockData = BlockDataMock.mock(material);
+		this.state = BlockStateMockFactory.mock(this);
+		this.blockData = BlockDataMockFactory.mock(material);
 		this.drops = new ArrayList<>();
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)
+	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
@@ -115,13 +117,13 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public boolean hasMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
@@ -283,7 +285,7 @@ public class BlockMock implements Block
 	{
 		Preconditions.checkNotNull(type, "Type cannot be null");
 		material = type;
-		state = BlockStateMock.mockState(this);
+		state = BlockStateMockFactory.mock(this);
 		blockData = BlockDataMock.mock(type);
 	}
 

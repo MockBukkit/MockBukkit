@@ -22,7 +22,7 @@ import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMockFactory;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
@@ -415,7 +415,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull BlockState createBlockState()
 	{
-		return BlockStateMock.mockState(getMaterial());
+		return BlockStateMockFactory.mock(getMaterial());
 	}
 
 	@Override
