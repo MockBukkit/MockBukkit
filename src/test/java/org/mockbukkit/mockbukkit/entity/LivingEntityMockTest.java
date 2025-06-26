@@ -21,7 +21,6 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
-import org.bukkit.entity.TippedArrow;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.WitherSkull;
@@ -374,7 +373,6 @@ class LivingEntityMockTest
 			SpectralArrow.class,
 			ThrownExpBottle.class,
 			ThrownPotion.class,
-			TippedArrow.class,
 			Trident.class,
 			WindCharge.class,
 			WitherSkull.class,

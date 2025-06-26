@@ -52,6 +52,7 @@ import org.bukkit.entity.GlowItemFrame;
 import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Guardian;
+import org.bukkit.entity.HappyGhast;
 import org.bukkit.entity.Hoglin;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Husk;
@@ -270,6 +271,7 @@ public final class EntityTypesMock
 				.register(GlowSquid.class, GlowSquidMock.class, GlowSquidMock::new)
 				.register(Goat.class, GoatMock.class, GoatMock::new)
 				.register(Guardian.class, GuardianMock.class, GuardianMock::new)
+				.register(HappyGhast.class, HappyGhastMock.class, HappyGhastMock::new)
 				.register(Hoglin.class, HoglinMock.class, HoglinMock::new)
 				.register(HopperMinecart.class, HopperMinecartMock.class, HopperMinecartMock::new)
 				.register(Horse.class, HorseMock.class, HorseMock::new)
