@@ -105,6 +105,7 @@ import org.mockbukkit.mockbukkit.entity.GlowItemFrameMock;
 import org.mockbukkit.mockbukkit.entity.GlowSquidMock;
 import org.mockbukkit.mockbukkit.entity.GoatMock;
 import org.mockbukkit.mockbukkit.entity.GuardianMock;
+import org.mockbukkit.mockbukkit.entity.HappyGhastMock;
 import org.mockbukkit.mockbukkit.entity.HopperMinecartMock;
 import org.mockbukkit.mockbukkit.entity.HorseMock;
 import org.mockbukkit.mockbukkit.entity.HuskMock;
@@ -1345,6 +1346,7 @@ class WorldMockTest
 				Arguments.of(EntityType.TADPOLE, TadpoleMock.class),
 				Arguments.of(EntityType.MOOSHROOM, MushroomCowMock.class),
 				Arguments.of(EntityType.GHAST, GhastMock.class),
+				Arguments.of(EntityType.HAPPY_GHAST, HappyGhastMock.class),
 				Arguments.of(EntityType.FOX, FoxMock.class),
 				Arguments.of(EntityType.FROG, FrogMock.class),
 				Arguments.of(EntityType.CAT, CatMock.class),
