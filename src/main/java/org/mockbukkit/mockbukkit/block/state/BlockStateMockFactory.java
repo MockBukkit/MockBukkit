@@ -45,6 +45,7 @@ public class BlockStateMockFactory
 			.put(Material.COMPARATOR, with(ComparatorStateMock::new, ComparatorStateMock::new))
 			.put(Material.CONDUIT, with(ConduitStateMock::new, ConduitStateMock::new))
 			.put(Material.DAYLIGHT_DETECTOR, with(DaylightDetectorStateMock::new, DaylightDetectorStateMock::new))
+			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
 			.put(Material.DISPENSER, with(DispenserStateMock::new, DispenserStateMock::new))
 			.put(Material.DROPPER, with(DropperStateMock::new, DropperStateMock::new))
 			.put(Material.ENCHANTING_TABLE, with(EnchantingTableStateMock::new, EnchantingTableStateMock::new))
@@ -66,7 +67,6 @@ public class BlockStateMockFactory
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
 			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))
-			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
 			.build();
 
 	/**
