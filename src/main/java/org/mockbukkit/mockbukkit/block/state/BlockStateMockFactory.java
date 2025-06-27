@@ -45,6 +45,7 @@ public class BlockStateMockFactory
 			.put(Material.COMPARATOR, with(ComparatorStateMock::new, ComparatorStateMock::new))
 			.put(Material.CONDUIT, with(ConduitStateMock::new, ConduitStateMock::new))
 			.put(Material.DAYLIGHT_DETECTOR, with(DaylightDetectorStateMock::new, DaylightDetectorStateMock::new))
+			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
 			.put(Material.DISPENSER, with(DispenserStateMock::new, DispenserStateMock::new))
 			.put(Material.DROPPER, with(DropperStateMock::new, DropperStateMock::new))
 			.put(Material.ENCHANTING_TABLE, with(EnchantingTableStateMock::new, EnchantingTableStateMock::new))
@@ -137,5 +138,8 @@ public class BlockStateMockFactory
 
 	record Factory(@NotNull Function<Material, BlockStateMock> materialFactory,
 				   @NotNull Function<Block, BlockStateMock> blockFactory)
-	{}
+	{
+
+	}
+
 }
