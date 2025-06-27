@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -113,7 +114,13 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	@Override
 	public @NotNull DecoratedPotStateMock copy()
 	{
-		return new DecoratedPotStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull DecoratedPotStateMock copy(@Nullable Location location)
+	{
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override
