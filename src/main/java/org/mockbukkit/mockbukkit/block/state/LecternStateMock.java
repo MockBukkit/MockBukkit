@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -78,8 +79,9 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	}
 
 	@Override
-	public @NotNull LecternStateMock copy(@Nullable Location location)
+	public @NotNull LecternStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

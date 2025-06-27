@@ -68,8 +68,9 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	}
 
 	@Override
-	public @NotNull SculkSensorStateMock copy(@Nullable Location location)
+	public @NotNull SculkSensorStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

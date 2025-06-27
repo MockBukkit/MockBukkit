@@ -97,8 +97,9 @@ public class StructureStateMock extends TileStateMock implements Structure
 	}
 
 	@Override
-	public @NotNull StructureStateMock copy(@Nullable Location location)
+	public @NotNull StructureStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

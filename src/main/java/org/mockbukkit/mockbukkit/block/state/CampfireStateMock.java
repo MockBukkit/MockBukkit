@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -79,8 +80,9 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 	}
 
 	@Override
-	public @NotNull CampfireStateMock copy(@Nullable Location location)
+	public @NotNull CampfireStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

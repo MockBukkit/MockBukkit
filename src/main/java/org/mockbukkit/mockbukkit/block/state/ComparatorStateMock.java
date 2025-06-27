@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -62,8 +63,9 @@ public class ComparatorStateMock extends TileStateMock implements Comparator
 	}
 
 	@Override
-	public @NotNull ComparatorStateMock copy(@Nullable Location location)
+	public @NotNull ComparatorStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

@@ -118,8 +118,9 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	}
 
 	@Override
-	public @NotNull DecoratedPotStateMock copy(@Nullable Location location)
+	public @NotNull DecoratedPotStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

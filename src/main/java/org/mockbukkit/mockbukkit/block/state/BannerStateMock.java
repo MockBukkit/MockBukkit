@@ -81,8 +81,9 @@ public class BannerStateMock extends TileStateMock implements Banner
 	}
 
 	@Override
-	public @NotNull BannerStateMock copy(@Nullable Location location)
+	public @NotNull BannerStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

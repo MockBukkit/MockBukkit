@@ -81,8 +81,9 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	@Override
-	public @NotNull SkullStateMock copy(@Nullable Location location)
+	public @NotNull SkullStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

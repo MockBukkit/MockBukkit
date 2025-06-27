@@ -81,8 +81,9 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	}
 
 	@Override
-	public @NotNull BrewingStandStateMock copy(@Nullable Location location)
+	public @NotNull BrewingStandStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

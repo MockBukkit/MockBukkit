@@ -79,8 +79,9 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	}
 
 	@Override
-	public @NotNull BeehiveStateMock copy(@Nullable Location location)
+	public @NotNull BeehiveStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

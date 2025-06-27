@@ -221,8 +221,9 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public @NotNull SignStateMock copy(@Nullable Location location)
+	public @NotNull SignStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

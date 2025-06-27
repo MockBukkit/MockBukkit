@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -62,8 +63,9 @@ public class JigsawStateMock extends TileStateMock implements Jigsaw
 	}
 
 	@Override
-	public @NotNull JigsawStateMock copy(@Nullable Location location)
+	public @NotNull JigsawStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

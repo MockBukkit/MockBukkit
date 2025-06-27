@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
@@ -131,8 +132,9 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 	}
 
 	@Override
-	public @NotNull BarrelStateMock copy(@Nullable Location location)
+	public @NotNull BarrelStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

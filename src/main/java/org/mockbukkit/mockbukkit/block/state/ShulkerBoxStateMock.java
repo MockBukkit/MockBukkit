@@ -165,8 +165,9 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	}
 
 	@Override
-	public @NotNull ShulkerBoxStateMock copy(@Nullable Location location)
+	public @NotNull ShulkerBoxStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

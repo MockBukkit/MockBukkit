@@ -91,8 +91,9 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 	}
 
 	@Override
-	public @NotNull CreatureSpawnerStateMock copy(@Nullable Location location)
+	public @NotNull CreatureSpawnerStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

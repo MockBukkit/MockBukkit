@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -67,8 +68,9 @@ public class ConduitStateMock extends TileStateMock implements Conduit
 	}
 
 	@Override
-	public @NotNull ConduitStateMock copy(@Nullable Location location)
+	public @NotNull ConduitStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

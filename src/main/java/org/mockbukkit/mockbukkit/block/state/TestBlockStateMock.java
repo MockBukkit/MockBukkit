@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.TestBlock;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link TestBlock}.
@@ -37,8 +37,9 @@ public class TestBlockStateMock extends TileStateMock implements TestBlock
 	}
 
 	@Override
-	public @NotNull TestBlockStateMock copy(@Nullable Location location)
+	public @NotNull TestBlockStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

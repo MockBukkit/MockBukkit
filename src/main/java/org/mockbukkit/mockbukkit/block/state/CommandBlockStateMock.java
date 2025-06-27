@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
@@ -70,8 +71,9 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	}
 
 	@Override
-	public @NotNull CommandBlockStateMock copy(@Nullable Location location)
+	public @NotNull CommandBlockStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

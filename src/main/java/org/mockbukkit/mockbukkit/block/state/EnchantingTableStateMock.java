@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
@@ -67,8 +68,9 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 	}
 
 	@Override
-	public @NotNull EnchantingTableStateMock copy(@Nullable Location location)
+	public @NotNull EnchantingTableStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

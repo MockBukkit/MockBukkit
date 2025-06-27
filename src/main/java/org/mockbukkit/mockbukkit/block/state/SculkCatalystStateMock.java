@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import io.papermc.paper.math.Position;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -64,8 +65,9 @@ public class SculkCatalystStateMock extends TileStateMock implements SculkCataly
 	}
 
 	@Override
-	public @NotNull SculkCatalystStateMock copy(@Nullable Location location)
+	public @NotNull SculkCatalystStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

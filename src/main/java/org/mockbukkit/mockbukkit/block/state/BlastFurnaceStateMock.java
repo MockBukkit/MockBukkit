@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlastFurnace;
@@ -62,8 +63,9 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 	}
 
 	@Override
-	public @NotNull BlastFurnaceStateMock copy(@Nullable Location location)
+	public @NotNull BlastFurnaceStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 

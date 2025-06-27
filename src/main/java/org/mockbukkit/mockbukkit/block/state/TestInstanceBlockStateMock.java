@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,8 +38,9 @@ public class TestInstanceBlockStateMock extends TileStateMock implements TestIns
 	}
 
 	@Override
-	public @NotNull TestInstanceBlockStateMock copy(@Nullable Location location)
+	public @NotNull TestInstanceBlockStateMock copy(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
 	}
 
