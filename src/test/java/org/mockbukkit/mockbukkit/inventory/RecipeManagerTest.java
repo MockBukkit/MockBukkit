@@ -488,6 +488,62 @@ class RecipeManagerTest
 					assertTrue(result);
 				}
 
+				@Test
+				void givenBow()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("bow"));
+
+					ItemStack[] matrix = createCrafting(
+							null,	Material.STICK, Material.STRING,
+							Material.STICK, null, 			Material.STRING,
+							null, 			Material.STICK, Material.STRING
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBowFlipped()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("bow"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.STRING,	Material.STICK, null,
+							Material.STRING, 		null, 			Material.STICK,
+							Material.STRING, 		Material.STICK, null
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenStairs()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stone_stairs"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.STONE,	null, 			null,
+							Material.STONE, 		Material.STONE, null,
+							Material.STONE, 		Material.STONE, Material.STONE
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenStairsFlipped()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stone_stairs"));
+
+					ItemStack[] matrix = createCrafting(
+							null,		null, 				Material.STONE,
+							null,				Material.STONE, 	Material.STONE,
+							Material.STONE, 	Material.STONE, 	Material.STONE
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
 				private static ItemStack[] createCrafting(Material... slots)
 				{
 					Preconditions.checkArgument(slots.length == 9, "The crafting table should have 9 items");

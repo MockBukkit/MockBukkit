@@ -407,6 +407,7 @@ public class RecipeManager
 		{
 			if (shapeWidth == 3)
 			{
+				// Normal
 				results.add(Map.of(
 					0, pos0.get(),
 					1, pos1.get(),
@@ -418,10 +419,23 @@ public class RecipeManager
 					7, pos7.get(),
 					8, pos8.get())
 				);
+				// Flip Horizontally
+				results.add(Map.of(
+					0, pos2.get(),
+					1, pos1.get(),
+					2, pos0.get(),
+					3, pos5.get(),
+					4, pos4.get(),
+					5, pos3.get(),
+					6, pos8.get(),
+					7, pos7.get(),
+					8, pos6.get())
+				);
 				return results;
 			}
 			else if (shapeWidth == 2)
 			{
+				// Normal
 				results.add(Map.of(
 						0, pos0.get(),
 						1, pos1.get(),
@@ -438,10 +452,28 @@ public class RecipeManager
 						7, pos6.get(),
 						8, pos7.get())
 				);
+				// Flip Horizontally
+				results.add(Map.of(
+						0, pos3.get(),
+						1, pos1.get(),
+						3, pos0.get(),
+						4, pos7.get(),
+						6, pos6.get(),
+						7, pos4.get())
+				);
+				results.add(Map.of(
+						1, pos3.get(),
+						2, pos1.get(),
+						4, pos1.get(),
+						5, pos7.get(),
+						7, pos6.get(),
+						8, pos4.get())
+				);
 				return results;
 			}
 			else if (shapeWidth == 1)
 			{
+				// Normal
 				results.add(Map.of(
 					0, pos0.get(),
 					3, pos3.get(),
@@ -457,6 +489,22 @@ public class RecipeManager
 					5, pos3.get(),
 					8, pos6.get())
 				);
+				// Flip Horizontally
+				results.add(Map.of(
+						0, pos6.get(),
+						3, pos3.get(),
+						6, pos0.get())
+				);
+				results.add(Map.of(
+						1, pos6.get(),
+						4, pos3.get(),
+						7, pos0.get())
+				);
+				results.add(Map.of(
+						2, pos6.get(),
+						5, pos3.get(),
+						8, pos0.get())
+				);
 				return results;
 			}
 		}
@@ -466,6 +514,7 @@ public class RecipeManager
 		{
 			if (shapeWidth == 3)
 			{
+				// Normal
 				results.add(Map.of(
 					0, pos0.get(),
 					1, pos1.get(),
@@ -482,10 +531,28 @@ public class RecipeManager
 						7, pos4.get(),
 						8, pos5.get())
 				);
+				// Flip Horizontally
+				results.add(Map.of(
+						0, pos2.get(),
+						1, pos1.get(),
+						2, pos0.get(),
+						3, pos5.get(),
+						4, pos4.get(),
+						5, pos3.get())
+				);
+				results.add(Map.of(
+						3, pos2.get(),
+						4, pos1.get(),
+						5, pos0.get(),
+						6, pos5.get(),
+						7, pos4.get(),
+						8, pos3.get())
+				);
 				return results;
 			}
 			else if (shapeWidth == 2)
 			{
+				// Normal
 				results.add(Map.of(
 					0, pos0.get(),
 					1, pos1.get(),
@@ -509,6 +576,31 @@ public class RecipeManager
 					5, pos1.get(),
 					7, pos3.get(),
 					8, pos4.get())
+				);
+				// Flip Horizontally
+				results.add(Map.of(
+						0, pos1.get(),
+						1, pos0.get(),
+						3, pos4.get(),
+						4, pos3.get())
+				);
+				results.add(Map.of(
+						1, pos1.get(),
+						2, pos0.get(),
+						4, pos4.get(),
+						5, pos3.get())
+				);
+				results.add(Map.of(
+						3, pos1.get(),
+						4, pos0.get(),
+						6, pos4.get(),
+						7, pos3.get())
+				);
+				results.add(Map.of(
+						4, pos1.get(),
+						5, pos0.get(),
+						7, pos4.get(),
+						8, pos3.get())
 				);
 				return results;
 			}
@@ -547,6 +639,7 @@ public class RecipeManager
 		{
 			if (shapeWidth == 3)
 			{
+				// Normal
 				results.add(Map.of(
 					0, pos0.get(),
 					1, pos1.get(),
@@ -562,10 +655,27 @@ public class RecipeManager
 						7, pos1.get(),
 						8, pos2.get())
 				);
+				// Flip Horizontally
+				results.add(Map.of(
+						0, pos2.get(),
+						1, pos1.get(),
+						2, pos0.get())
+				);
+				results.add(Map.of(
+						3, pos2.get(),
+						4, pos1.get(),
+						5, pos0.get())
+				);
+				results.add(Map.of(
+						6, pos2.get(),
+						7, pos1.get(),
+						8, pos0.get())
+				);
 				return results;
 			}
 			else if (shapeWidth == 2)
 			{
+				// Normal
 				results.add(Map.of(
 					0, pos0.get(),
 					1, pos1.get())
@@ -589,6 +699,31 @@ public class RecipeManager
 				results.add(Map.of(
 					7, pos0.get(),
 					8, pos1.get())
+				);
+				// Flip Horizontally
+				results.add(Map.of(
+						0, pos1.get(),
+						1, pos0.get())
+				);
+				results.add(Map.of(
+						1, pos1.get(),
+						2, pos0.get())
+				);
+				results.add(Map.of(
+						3, pos1.get(),
+						4, pos0.get())
+				);
+				results.add(Map.of(
+						4, pos1.get(),
+						5, pos0.get())
+				);
+				results.add(Map.of(
+						6, pos1.get(),
+						7, pos0.get())
+				);
+				results.add(Map.of(
+						7, pos1.get(),
+						8, pos0.get())
 				);
 				return results;
 			}
