@@ -437,37 +437,37 @@ public class RecipeManager
 			{
 				// Normal
 				results.add(Map.of(
-						0, pos0.get(),
-						1, pos1.get(),
-						3, pos3.get(),
-						4, pos4.get(),
-						6, pos6.get(),
-						7, pos7.get())
+					0, pos0.get(),
+					1, pos1.get(),
+					3, pos3.get(),
+					4, pos4.get(),
+					6, pos6.get(),
+					7, pos7.get())
 				);
 				results.add(Map.of(
-						1, pos0.get(),
-						2, pos1.get(),
-						4, pos3.get(),
-						5, pos4.get(),
-						7, pos6.get(),
-						8, pos7.get())
+					1, pos0.get(),
+					2, pos1.get(),
+					4, pos3.get(),
+					5, pos4.get(),
+					7, pos6.get(),
+					8, pos7.get())
 				);
 				// Flip Horizontally
 				results.add(Map.of(
-						0, pos3.get(),
-						1, pos1.get(),
-						3, pos0.get(),
-						4, pos7.get(),
-						6, pos6.get(),
-						7, pos4.get())
+					0, pos3.get(),
+					1, pos1.get(),
+					3, pos0.get(),
+					4, pos7.get(),
+					6, pos6.get(),
+					7, pos4.get())
 				);
 				results.add(Map.of(
-						1, pos3.get(),
-						2, pos1.get(),
-						4, pos1.get(),
-						5, pos7.get(),
-						7, pos6.get(),
-						8, pos4.get())
+					1, pos3.get(),
+					2, pos1.get(),
+					4, pos1.get(),
+					5, pos7.get(),
+					7, pos6.get(),
+					8, pos4.get())
 				);
 				return results;
 			}
@@ -491,19 +491,19 @@ public class RecipeManager
 				);
 				// Flip Horizontally
 				results.add(Map.of(
-						0, pos6.get(),
-						3, pos3.get(),
-						6, pos0.get())
+					0, pos6.get(),
+					3, pos3.get(),
+					6, pos0.get())
 				);
 				results.add(Map.of(
-						1, pos6.get(),
-						4, pos3.get(),
-						7, pos0.get())
+					1, pos6.get(),
+					4, pos3.get(),
+					7, pos0.get())
 				);
 				results.add(Map.of(
-						2, pos6.get(),
-						5, pos3.get(),
-						8, pos0.get())
+					2, pos6.get(),
+					5, pos3.get(),
+					8, pos0.get())
 				);
 				return results;
 			}
@@ -524,29 +524,29 @@ public class RecipeManager
 					5, pos5.get())
 				);
 				results.add(Map.of(
-						3, pos0.get(),
-						4, pos1.get(),
-						5, pos2.get(),
-						6, pos3.get(),
-						7, pos4.get(),
-						8, pos5.get())
+					3, pos0.get(),
+					4, pos1.get(),
+					5, pos2.get(),
+					6, pos3.get(),
+					7, pos4.get(),
+					8, pos5.get())
 				);
 				// Flip Horizontally
 				results.add(Map.of(
-						0, pos2.get(),
-						1, pos1.get(),
-						2, pos0.get(),
-						3, pos5.get(),
-						4, pos4.get(),
-						5, pos3.get())
+					0, pos2.get(),
+					1, pos1.get(),
+					2, pos0.get(),
+					3, pos5.get(),
+					4, pos4.get(),
+					5, pos3.get())
 				);
 				results.add(Map.of(
-						3, pos2.get(),
-						4, pos1.get(),
-						5, pos0.get(),
-						6, pos5.get(),
-						7, pos4.get(),
-						8, pos3.get())
+					3, pos2.get(),
+					4, pos1.get(),
+					5, pos0.get(),
+					6, pos5.get(),
+					7, pos4.get(),
+					8, pos3.get())
 				);
 				return results;
 			}
@@ -579,28 +579,28 @@ public class RecipeManager
 				);
 				// Flip Horizontally
 				results.add(Map.of(
-						0, pos1.get(),
-						1, pos0.get(),
-						3, pos4.get(),
-						4, pos3.get())
+					0, pos1.get(),
+					1, pos0.get(),
+					3, pos4.get(),
+					4, pos3.get())
 				);
 				results.add(Map.of(
-						1, pos1.get(),
-						2, pos0.get(),
-						4, pos4.get(),
-						5, pos3.get())
+					1, pos1.get(),
+					2, pos0.get(),
+					4, pos4.get(),
+					5, pos3.get())
 				);
 				results.add(Map.of(
-						3, pos1.get(),
-						4, pos0.get(),
-						6, pos4.get(),
-						7, pos3.get())
+					3, pos1.get(),
+					4, pos0.get(),
+					6, pos4.get(),
+					7, pos3.get())
 				);
 				results.add(Map.of(
-						4, pos1.get(),
-						5, pos0.get(),
-						7, pos4.get(),
-						8, pos3.get())
+					4, pos1.get(),
+					5, pos0.get(),
+					7, pos4.get(),
+					8, pos3.get())
 				);
 				return results;
 			}
@@ -646,30 +646,30 @@ public class RecipeManager
 					2, pos2.get())
 				);
 				results.add(Map.of(
-						3, pos0.get(),
-						4, pos1.get(),
-						5, pos2.get())
+					3, pos0.get(),
+					4, pos1.get(),
+					5, pos2.get())
 				);
 				results.add(Map.of(
-						6, pos0.get(),
-						7, pos1.get(),
-						8, pos2.get())
+					6, pos0.get(),
+					7, pos1.get(),
+					8, pos2.get())
 				);
 				// Flip Horizontally
 				results.add(Map.of(
-						0, pos2.get(),
-						1, pos1.get(),
-						2, pos0.get())
+					0, pos2.get(),
+					1, pos1.get(),
+					2, pos0.get())
 				);
 				results.add(Map.of(
-						3, pos2.get(),
-						4, pos1.get(),
-						5, pos0.get())
+					3, pos2.get(),
+					4, pos1.get(),
+					5, pos0.get())
 				);
 				results.add(Map.of(
-						6, pos2.get(),
-						7, pos1.get(),
-						8, pos0.get())
+					6, pos2.get(),
+					7, pos1.get(),
+					8, pos0.get())
 				);
 				return results;
 			}
@@ -702,28 +702,28 @@ public class RecipeManager
 				);
 				// Flip Horizontally
 				results.add(Map.of(
-						0, pos1.get(),
-						1, pos0.get())
+					0, pos1.get(),
+					1, pos0.get())
 				);
 				results.add(Map.of(
-						1, pos1.get(),
-						2, pos0.get())
+					1, pos1.get(),
+					2, pos0.get())
 				);
 				results.add(Map.of(
-						3, pos1.get(),
-						4, pos0.get())
+					3, pos1.get(),
+					4, pos0.get())
 				);
 				results.add(Map.of(
-						4, pos1.get(),
-						5, pos0.get())
+					4, pos1.get(),
+					5, pos0.get())
 				);
 				results.add(Map.of(
-						6, pos1.get(),
-						7, pos0.get())
+					6, pos1.get(),
+					7, pos0.get())
 				);
 				results.add(Map.of(
-						7, pos1.get(),
-						8, pos0.get())
+					7, pos1.get(),
+					8, pos0.get())
 				);
 				return results;
 			}
@@ -736,25 +736,25 @@ public class RecipeManager
 					1, pos0.get())
 				);
 				results.add(Map.of(
-						2, pos0.get())
+					2, pos0.get())
 				);
 				results.add(Map.of(
-						3, pos0.get())
+					3, pos0.get())
 				);
 				results.add(Map.of(
-						4, pos0.get())
+					4, pos0.get())
 				);
 				results.add(Map.of(
-						5, pos0.get())
+					5, pos0.get())
 				);
 				results.add(Map.of(
-						6, pos0.get())
+					6, pos0.get())
 				);
 				results.add(Map.of(
-						7, pos0.get())
+					7, pos0.get())
 				);
 				results.add(Map.of(
-						8, pos0.get())
+					8, pos0.get())
 				);
 				return results;
 			}
