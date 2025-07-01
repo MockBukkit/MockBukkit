@@ -10128,6 +10128,18 @@
 		}
 	},
 	{
+		"key": "minecraft:music_disc_lava_chicken",
+		"result": {
+			"material": "minecraft:music_disc_lava_chicken",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:music_disc_mall",
 		"result": {
 			"material": "minecraft:music_disc_mall",

@@ -37,6 +37,10 @@
 			"translationKey": "jukebox_song.minecraft.far"
 		},
 		{
+			"key": "minecraft:lava_chicken",
+			"translationKey": "jukebox_song.minecraft.lava_chicken"
+		},
+		{
 			"key": "minecraft:mall",
 			"translationKey": "jukebox_song.minecraft.mall"
 		},
