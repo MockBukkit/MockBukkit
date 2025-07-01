@@ -347,6 +347,22 @@ public class RecipeManager
 		return false;
 	}
 
+	/**
+	 * Retrieves the character from the specified position in a shaped recipe grid.
+	 * <p>
+	 * The recipe shape is represented as an array of strings, where each string corresponds to a row
+	 * in the crafting grid. This method interprets the position as an index in a 3x3 grid (0 to 8),
+	 * and returns the character at that position if it exists in the shape. If the shape does not
+	 * extend to that column in the specified row, {@code null} is returned.
+	 * <p>
+	 * For example, position 4 corresponds to the center of the 3x3 grid.
+	 *
+	 * @param shape    the recipe shape as an array of strings; must not be {@code null}
+	 * @param position the index in the 3x3 grid (0–8) to retrieve the character from
+	 * @return the character at the specified position in the shape, or {@code null} if the position
+	 *         is outside the bounds of the shape
+	 * @throws IllegalArgumentException if the shape is {@code null} or the position is not in [0, 8]
+	 */
 	public static Character getChoiceAt(String[] shape, int position)
 	{
 		Preconditions.checkArgument(shape != null, "Must provide a shape");
@@ -381,6 +397,26 @@ public class RecipeManager
 		return lastLen;
 	}
 
+	/**
+	 * Generates all possible placements of a shaped crafting recipe within a 3x3 crafting grid.
+	 * <p>
+	 * This method takes a recipe shape represented as an array of strings, where each string is a row
+	 * and each character represents a crafting ingredient. It returns a list of maps, where each map
+	 * represents a valid placement of the recipe in the 3x3 grid. The keys in the map are slot indices
+	 * (from 0 to 8, left to right, top to bottom), and the values are the characters from the shape.
+	 * <p>
+	 * The method accounts for:
+	 * <ul>
+	 *   <li>All valid top-left positions where the shape can fit in the 3x3 grid</li>
+	 *   <li>Horizontal flipping of the shape</li>
+	 * </ul>
+	 *
+	 * @param shape an array of strings representing the recipe shape; must be 1 to 3 rows tall,
+	 *              and each row must be 1 to 3 characters wide and of equal length
+	 * @return a list of maps, each representing a valid placement of the recipe in the 3x3 grid
+	 * @throws IllegalArgumentException if the shape is null, has invalid dimensions,
+	 *                                  or rows are not of equal length
+	 */
 	public static List<Map<Integer, Character>> getShapedRecipePossiblePositions(String[] shape)
 	{
 		Preconditions.checkArgument(shape != null, "Must provide a shape");
@@ -760,7 +796,7 @@ public class RecipeManager
 			}
 		}
 
-		throw new UnsupportedOperationException("Crafting recipes must be rectangular");
+		throw new IllegalArgumentException("Crafting recipes must be rectangular");
 	}
 
 	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
