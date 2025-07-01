@@ -80,6 +80,10 @@ public final class TagsMock
 
 		Pattern filePattern = Pattern.compile("\\.");
 		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
+		if (resource == null)
+		{
+			throw new IllegalArgumentException(String.format("No resources found for registry: %s", registry.getRegistry()));
+		}
 
 		loadFileSystem(resource.toURI());
 		Path directory = Paths.get(resource.toURI());

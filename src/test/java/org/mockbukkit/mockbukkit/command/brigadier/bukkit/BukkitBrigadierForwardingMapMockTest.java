@@ -45,7 +45,7 @@ class BukkitBrigadierForwardingMapMockTest
 	void size_remove()
 	{
 		int initial = map.size();
-		map.remove("reload");
+		map.remove("bukkit:reload");
 		assertEquals(initial - 1, map.size());
 	}
 

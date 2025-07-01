@@ -40,9 +40,9 @@ class PlayerInventoryMockTest
 	}
 
 	@Test
-	void getSize_Default_41()
+	void getSize_Default_43()
 	{
-		assertEquals(41, inventory.getSize());
+		assertEquals(43, inventory.getSize());
 	}
 
 	@Test
