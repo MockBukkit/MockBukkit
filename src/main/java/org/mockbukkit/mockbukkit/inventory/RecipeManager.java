@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class RecipeManager
@@ -299,9 +300,332 @@ public class RecipeManager
 		Preconditions.checkArgument(shapedRecipe != null, "The recipe cannot be null");
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
 
-		// TODO: Logic for shaped recipes
+		String[] shape = shapedRecipe.getShape();
+		Map<Character, RecipeChoice> ingredients = shapedRecipe.getChoiceMap();
+
+		validateShape(shape);
+
+		List<Map<Integer, Character>> possibleCombinations = getShapedRecipePossiblePositions(shape);
+		for (Map<Integer, Character> possibleCombination : possibleCombinations)
+		{
+			boolean found = true;
+			for (int index = 0 ; index < 9 ; index++)
+			{
+				ItemStack item = craftingMatrix[index];
+				Character character = possibleCombination.get(index);
+				if (character == null)
+				{
+					if (item.isEmpty())
+					{
+						continue;
+					}
+
+					found = false;
+					break;
+				}
+
+				RecipeChoice recipeChoice = ingredients.get(character);
+				if (recipeChoice == null)
+				{
+					// If the item does not exist, we can proceed
+					continue;
+				}
+
+				if (!recipeChoice.test(item))
+				{
+					found = false;
+					break;
+				}
+			}
+			if (found)
+			{
+				// We found the recipe!
+				return true;
+			}
+		}
 
 		return false;
+	}
+
+	public static Character getChoiceAt(String[] shape, int position)
+	{
+		Preconditions.checkArgument(shape != null, "Must provide a shape");
+		Preconditions.checkArgument(position >= 0 && position <= 8, "Position must be between 0 and 8");
+
+		validateShape(shape);
+
+		int rowIndex = position / 3;
+		int col = position % 3;
+
+		String row = shape[rowIndex];
+		if (row.length() <= col)
+		{
+			return null;
+		}
+
+		return row.charAt(col);
+	}
+
+	private static int validateShape(@NotNull String[] shape)
+	{
+		int lastLen = -1;
+		for (String row : shape)
+		{
+			Preconditions.checkArgument(row != null, "Shape cannot have null rows");
+			Preconditions.checkArgument(row.length() > 0 && row.length() < 4, "Crafting rows should be 1, 2, or 3 characters, not ", row.length());
+
+			Preconditions.checkArgument(lastLen == -1 || lastLen == row.length(), "Crafting recipes must be rectangular");
+			lastLen = row.length();
+		}
+
+		return lastLen;
+	}
+
+	public static List<Map<Integer, Character>> getShapedRecipePossiblePositions(String[] shape)
+	{
+		Preconditions.checkArgument(shape != null, "Must provide a shape");
+		Preconditions.checkArgument(shape.length > 0 && shape.length < 4, "Crafting recipes should be 1, 2 or 3 rows, not ", shape.length);
+
+		int shapeHeight = shape.length;
+		int shapeWidth = validateShape(shape);
+
+		List<Map<Integer, Character>> results = new ArrayList<>();
+
+		// Map values
+		Supplier<Character> pos0 = () -> getChoiceAt(shape, 0);
+		Supplier<Character> pos1 = () -> getChoiceAt(shape, 1);
+		Supplier<Character> pos2 = () -> getChoiceAt(shape, 2);
+		Supplier<Character> pos3 = () -> getChoiceAt(shape, 3);
+		Supplier<Character> pos4 = () -> getChoiceAt(shape, 4);
+		Supplier<Character> pos5 = () -> getChoiceAt(shape, 5);
+		Supplier<Character> pos6 = () -> getChoiceAt(shape, 6);
+		Supplier<Character> pos7 = () -> getChoiceAt(shape, 7);
+		Supplier<Character> pos8 = () -> getChoiceAt(shape, 8);
+
+		// Shaped with height 3
+		if (shapeHeight == 3)
+		{
+			if (shapeWidth == 3)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					1, pos1.get(),
+					2, pos2.get(),
+					3, pos3.get(),
+					4, pos4.get(),
+					5, pos5.get(),
+					6, pos6.get(),
+					7, pos7.get(),
+					8, pos8.get())
+				);
+				return results;
+			}
+			else if (shapeWidth == 2)
+			{
+				results.add(Map.of(
+						0, pos0.get(),
+						1, pos1.get(),
+						3, pos3.get(),
+						4, pos4.get(),
+						6, pos6.get(),
+						7, pos7.get())
+				);
+				results.add(Map.of(
+						1, pos0.get(),
+						2, pos1.get(),
+						4, pos3.get(),
+						5, pos4.get(),
+						7, pos6.get(),
+						8, pos7.get())
+				);
+				return results;
+			}
+			else if (shapeWidth == 1)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					3, pos3.get(),
+					6, pos6.get())
+				);
+				results.add(Map.of(
+					1, pos0.get(),
+					4, pos3.get(),
+					7, pos6.get())
+				);
+				results.add(Map.of(
+					2, pos0.get(),
+					5, pos3.get(),
+					8, pos6.get())
+				);
+				return results;
+			}
+		}
+
+		// Shaped with height 2
+		if (shapeHeight == 2)
+		{
+			if (shapeWidth == 3)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					1, pos1.get(),
+					2, pos2.get(),
+					3, pos3.get(),
+					4, pos4.get(),
+					5, pos5.get())
+				);
+				results.add(Map.of(
+						3, pos0.get(),
+						4, pos1.get(),
+						5, pos2.get(),
+						6, pos3.get(),
+						7, pos4.get(),
+						8, pos5.get())
+				);
+				return results;
+			}
+			else if (shapeWidth == 2)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					1, pos1.get(),
+					3, pos3.get(),
+					4, pos4.get())
+				);
+				results.add(Map.of(
+					1, pos0.get(),
+					2, pos1.get(),
+					4, pos3.get(),
+					5, pos4.get())
+				);
+				results.add(Map.of(
+					3, pos0.get(),
+					4, pos1.get(),
+					6, pos3.get(),
+					7, pos4.get())
+				);
+				results.add(Map.of(
+					4, pos0.get(),
+					5, pos1.get(),
+					7, pos3.get(),
+					8, pos4.get())
+				);
+				return results;
+			}
+			else if (shapeWidth == 1)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					3, pos3.get())
+				);
+				results.add(Map.of(
+					1, pos0.get(),
+					4, pos3.get())
+				);
+				results.add(Map.of(
+					2, pos0.get(),
+					5, pos3.get())
+				);
+				results.add(Map.of(
+					3, pos0.get(),
+					6, pos3.get())
+				);
+				results.add(Map.of(
+					4, pos0.get(),
+					7, pos3.get())
+				);
+				results.add(Map.of(
+					5, pos0.get(),
+					8, pos3.get())
+				);
+				return results;
+			}
+		}
+
+		// Shaped with 1 height
+		if (shapeHeight == 1)
+		{
+			if (shapeWidth == 3)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					1, pos1.get(),
+					2, pos2.get())
+				);
+				results.add(Map.of(
+						3, pos0.get(),
+						4, pos1.get(),
+						5, pos2.get())
+				);
+				results.add(Map.of(
+						6, pos0.get(),
+						7, pos1.get(),
+						8, pos2.get())
+				);
+				return results;
+			}
+			else if (shapeWidth == 2)
+			{
+				results.add(Map.of(
+					0, pos0.get(),
+					1, pos1.get())
+				);
+				results.add(Map.of(
+					1, pos0.get(),
+					2, pos1.get())
+				);
+				results.add(Map.of(
+					3, pos0.get(),
+					4, pos1.get())
+				);
+				results.add(Map.of(
+					4, pos0.get(),
+					5, pos1.get())
+				);
+				results.add(Map.of(
+					6, pos0.get(),
+					7, pos1.get())
+				);
+				results.add(Map.of(
+					7, pos0.get(),
+					8, pos1.get())
+				);
+				return results;
+			}
+			else if (shapeWidth == 1)
+			{
+				results.add(Map.of(
+					0, pos0.get())
+				);
+				results.add(Map.of(
+					1, pos0.get())
+				);
+				results.add(Map.of(
+						2, pos0.get())
+				);
+				results.add(Map.of(
+						3, pos0.get())
+				);
+				results.add(Map.of(
+						4, pos0.get())
+				);
+				results.add(Map.of(
+						5, pos0.get())
+				);
+				results.add(Map.of(
+						6, pos0.get())
+				);
+				results.add(Map.of(
+						7, pos0.get())
+				);
+				results.add(Map.of(
+						8, pos0.get())
+				);
+				return results;
+			}
+		}
+
+		throw new UnsupportedOperationException("Crafting recipes must be rectangular");
 	}
 
 	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)

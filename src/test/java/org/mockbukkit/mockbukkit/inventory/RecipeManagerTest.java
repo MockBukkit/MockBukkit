@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,6 +21,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -416,29 +418,115 @@ class RecipeManagerTest
 				assertEquals("The craftingMatrix cannot be null", e.getMessage());
 			}
 
-			@Test
-			@Disabled("This was not implemented yet")
-			void givenValidCraftMatrix()
+			@Nested
+			class GivenValidSamples
 			{
-				ItemStack[] matrix = new ItemStack[]{
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
-				};
-				boolean result = RecipeManager.matches(recipe, matrix);
-				assertTrue(result);
+
+				@Test
+				void givenSticks()
+				{
+					ItemStack[] matrix = new ItemStack[]{
+							ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
+					};
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenSticksWithDifferentMaterials()
+				{
+					ItemStack[] matrix = createCrafting(
+							Material.BIRCH_PLANKS, 	null, 	null,
+							Material.OAK_PLANKS, 			null, 	null,
+							null, 							null, 	null
+					);
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBoat()
+				{
+					ShapedRecipe boatRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("oak_boat"));
+
+					ItemStack[] matrix = createCrafting(
+							null, 			null, 					null,
+							Material.OAK_PLANKS, 	null, 					Material.OAK_PLANKS,
+							Material.OAK_PLANKS, 	Material.OAK_PLANKS, 	Material.OAK_PLANKS
+					);
+					boolean result = RecipeManager.matches(boatRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenDoor()
+				{
+					ShapedRecipe doorRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("acacia_door"));
+
+					ItemStack[] matrix = createCrafting(
+							null,	Material.ACACIA_PLANKS, Material.ACACIA_PLANKS,
+							null, 			Material.ACACIA_PLANKS, Material.ACACIA_PLANKS,
+							null, 			Material.ACACIA_PLANKS, Material.ACACIA_PLANKS
+					);
+					boolean result = RecipeManager.matches(doorRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenFence()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("acacia_fence"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.ACACIA_PLANKS,	Material.STICK, Material.ACACIA_PLANKS,
+							Material.ACACIA_PLANKS, 		Material.STICK, Material.ACACIA_PLANKS,
+							null, 							null, 			null
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				private static ItemStack[] createCrafting(Material... slots)
+				{
+					Preconditions.checkArgument(slots.length == 9, "The crafting table should have 9 items");
+
+					return Stream.of(slots)
+							.map(m -> (m == null ? ItemStack.empty() : ItemStack.of(m)))
+							.toArray(ItemStack[]::new);
+				}
+
 			}
 
-			@Test
-			void givenInvalidCraftMatrix()
+			@Nested
+			class GivenInvalidSamples
 			{
-				ItemStack[] matrix = new ItemStack[]{
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
-				};
-				boolean result = RecipeManager.matches(recipe, matrix);
-				assertFalse(result);
+
+				@Test
+				void givenInvalidStick()
+				{
+					ItemStack[] matrix = new ItemStack[]{
+							ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
+					};
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertFalse(result);
+				}
+
+				@Test
+				void givenValidRecipeButWithExtraMaterial()
+				{
+					ItemStack[] matrix = new ItemStack[]{
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
+					};
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertFalse(result);
+				}
+
 			}
 
 		}
@@ -467,4 +555,34 @@ class RecipeManagerTest
 
 	}
 
+	@Nested
+	class GetChoiceAt
+	{
+
+		@ParameterizedTest
+		@CsvSource({
+			"0,a",
+			"1,b",
+			"2,c",
+			"3,d",
+			"4,e",
+			"5,f",
+			"6,g",
+			"7,h",
+			"8,i",
+		})
+		void givenSimpleExample(int index, Character expectedValue)
+		{
+			String[] shape = new String[]{
+					"abc",
+					"def",
+					"ghi",
+			};
+
+			Character actual = RecipeManager.getChoiceAt(shape, index);
+
+			assertEquals(expectedValue, actual);
+		}
+
+	}
 }
