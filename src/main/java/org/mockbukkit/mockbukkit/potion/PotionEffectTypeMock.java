@@ -231,4 +231,10 @@ public class PotionEffectTypeMock extends PotionEffectType
 		return this.translationKey;
 	}
 
+	@Override
+	public String toString()
+	{
+		return name;
+	}
+
 }
