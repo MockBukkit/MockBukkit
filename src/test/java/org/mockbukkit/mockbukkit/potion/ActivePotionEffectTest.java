@@ -64,7 +64,8 @@ public class ActivePotionEffectTest
 	}
 
 	@Test
-	void testEffectDecreasesOnTick() {
+	void testEffectDecreasesOnTick()
+	{
 		PlayerMock player = server.addPlayer();
 		var speedFor3S = new PotionEffect(PotionEffectType.SPEED, 3, 0);
 		player.addPotionEffect(speedFor3S);

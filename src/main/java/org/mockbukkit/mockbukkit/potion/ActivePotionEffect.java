@@ -50,8 +50,10 @@ public final class ActivePotionEffect
 		return effect;
 	}
 
-	public int getDuration() {
-		if (effect.isInfinite()) {
+	public int getDuration()
+	{
+		if (effect.isInfinite())
+		{
 			return -1;
 		}
 
