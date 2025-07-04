@@ -59,12 +59,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of a {@link LivingEntity}.
@@ -704,52 +704,33 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean hasPotionEffect(@NotNull PotionEffectType type)
 	{
-		return getPotionEffect(type) != null;
+		return activeEffects.stream().anyMatch(effect -> effect.getPotionEffect().getType().equals(type));
+	}
+
+	private @NotNull PotionEffect mapToPotionEffect(@NotNull ActivePotionEffect activeEffect)
+	{
+		var effect = activeEffect.getPotionEffect();
+		return new PotionEffect(effect.getType(), activeEffect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.hasParticles(), effect.hasIcon());
 	}
 
 	@Override
 	public PotionEffect getPotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		for (PotionEffect effect : getActivePotionEffects())
-		{
-			if (effect.getType().equals(type))
-			{
-				return effect;
-			}
-		}
-
-		return null;
+		return activeEffects.stream().filter(effect -> effect.getPotionEffect().getType().equals(type)).findFirst().map(this::mapToPotionEffect).orElse(null);
 	}
 
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		activeEffects.removeIf(effect -> effect.hasExpired() || effect.getPotionEffect().getType().equals(type));
+		activeEffects.removeIf(effect -> effect.getPotionEffect().getType().equals(type));
 	}
 
 	@Override
 	public @NotNull Collection<PotionEffect> getActivePotionEffects()
 	{
-		Set<PotionEffect> effects = new HashSet<>();
-		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
-
-		while (iterator.hasNext())
-		{
-			ActivePotionEffect effect = iterator.next();
-
-			if (effect.hasExpired())
-			{
-				iterator.remove();
-			}
-			else
-			{
-				effects.add(effect.getPotionEffect());
-			}
-		}
-
-		return effects;
+		return activeEffects.stream().map(this::mapToPotionEffect).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -1383,6 +1364,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @NotNull CombatTracker getCombatTracker()
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	public void performTick()
+	{
+		activeEffects.removeIf(ActivePotionEffect::hasExpired);
 	}
 
 }

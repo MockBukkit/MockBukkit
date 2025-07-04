@@ -226,7 +226,8 @@ class LivingEntityMockTest
 	{
 		PotionEffect instant = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 0, 1);
 		assertTrue(livingEntity.addPotionEffect(instant));
-		assertFalse(livingEntity.hasPotionEffect(instant.getType()));
+		assertEquals(1, livingEntity.getActivePotionEffects().size()); // Yes, strange but true!
+		assertTrue(livingEntity.hasPotionEffect(instant.getType())); // Yep, strange... But that's how it truly is!
 	}
 
 	@Test

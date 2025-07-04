@@ -1,6 +1,9 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -171,6 +175,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public synchronized void performOneTick()
 	{
 		currentTick++;
+
+		for (World world : Bukkit.getWorlds()) {
+			for (Entity entity : world.getEntities()) {
+				if (entity instanceof LivingEntityMock living) {
+					living.performTick();
+				}
+			}
+		}
+
 		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
 		for (ScheduledTask task : oldTasks)
