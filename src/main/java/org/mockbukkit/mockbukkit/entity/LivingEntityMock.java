@@ -4,6 +4,8 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.world.damagesource.CombatTracker;
+import lombok.Getter;
+import lombok.Setter;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
@@ -84,13 +86,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * NoDamage ticks
 	 */
+	@Getter @Setter
 	private int noDamageTicks = 0;
-	private int maxNoDamageTicks = 20;
+	@Getter @Setter
+	private int maximumNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
-	private boolean gliding = false;
+	@Getter @Setter private boolean gliding = false;
 	private boolean jumping = false;
 	private boolean riptiding = false;
 
@@ -103,11 +107,20 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean collidable = true;
 	private boolean ai = true;
 	private boolean swimming;
+	/**
+	 * Set whether this entity is slumbering.
+	 */
+	@Getter @Setter
 	private boolean sleeping;
+	/**
+	 * Set whether this entity is climbing.
+	 */
+	@Getter @Setter
 	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
+	@Getter @Setter
 	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
@@ -564,18 +577,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public int getMaximumNoDamageTicks()
-	{
-		return this.maxNoDamageTicks;
-	}
-
-	@Override
-	public void setMaximumNoDamageTicks(int ticks)
-	{
-		this.maxNoDamageTicks = ticks;
-	}
-
-	@Override
 	public double getLastDamage()
 	{
 		// TODO Auto-generated method stub
@@ -587,18 +588,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getNoDamageTicks()
-	{
-		return this.noDamageTicks;
-	}
-
-	@Override
-	public void setNoDamageTicks(int ticks)
-	{
-		this.noDamageTicks = ticks;
 	}
 
 	@Override
@@ -615,18 +604,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
-	}
-
-	@Override
-	public @Nullable Player getKiller()
-	{
-		return this.killer;
-	}
-
-	@Override
-	public void setKiller(@Nullable Player killer)
-	{
-		this.killer = killer;
 	}
 
 	@Override
@@ -803,11 +780,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		if (!(this.leashHolder instanceof Mob))
-		{
-			return false;
-		}
-		return this.leashHolder != null;
+		return this.leashHolder instanceof Mob;
 	}
 
 	@Override
@@ -835,18 +808,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 		this.leashHolder = holder;
 		return true;
-	}
-
-	@Override
-	public boolean isGliding()
-	{
-		return this.gliding;
-	}
-
-	@Override
-	public void setGliding(boolean gliding)
-	{
-		this.gliding = gliding;
 	}
 
 	@Override
@@ -882,38 +843,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		this.riptiding = isRiptiding;
 	}
 
-	/**
-	 * Set whether this entity is slumbering.
-	 *
-	 * @param sleeping If this entity is slumbering
-	 */
-	public void setSleeping(boolean sleeping)
-	{
-		this.sleeping = sleeping;
-	}
-
-	@Override
-	public boolean isSleeping()
-	{
-		return this.sleeping;
-	}
-
-	/**
-	 * Set whether this entity is climbing.
-	 *
-	 * @param climbing If this entity is climbing
-	 */
-	public void setClimbing(boolean climbing)
-	{
-		this.climbing = climbing;
-	}
-
-	@Override
-	public boolean isClimbing()
-	{
-		return this.climbing;
-	}
-
 	@Override
 	public void setAI(boolean ai)
 	{
@@ -934,15 +863,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
 
-		if (this instanceof Player)
-		{
-			((Player) this).attack(target);
-		}
-		else
-		{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

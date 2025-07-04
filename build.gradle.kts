@@ -37,6 +37,11 @@ dependencies {
 
 	implementation("net.bytebuddy:byte-buddy:1.17.6")
 
+	compileOnly("org.projectlombok:lombok:1.18.34")
+	annotationProcessor("org.projectlombok:lombok:1.18.34")
+	testCompileOnly("org.projectlombok:lombok:1.18.34")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
+
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
 	implementation("org.apache.maven.resolver:maven-resolver-connector-basic:1.9.18")
