@@ -169,13 +169,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return currentTick;
 	}
 
-	/**
-	 * Perform one tick on the server.
-	 */
-	public synchronized void performOneTick()
-	{
-		currentTick++;
-
+	private void processEntities() {
 		for (World world : Bukkit.getWorlds()) {
 			for (Entity entity : world.getEntities()) {
 				if (entity instanceof LivingEntityMock living) {
@@ -183,6 +177,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 			}
 		}
+	}
+
+	private void processTasks() {
 
 		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
@@ -216,6 +213,17 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				task.cancel();
 			}
 		}
+	}
+
+	/**
+	 * Perform one tick on the server.
+	 */
+	public synchronized void performOneTick()
+	{
+		currentTick++;
+
+		processEntities();
+		processTasks();
 	}
 
 	/**

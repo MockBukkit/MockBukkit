@@ -66,15 +66,15 @@ public class ActivePotionEffectTest
 	@Test
 	void testEffectDecreasesOnTick() {
 		PlayerMock player = server.addPlayer();
-		var SPEED_FOR_3S = new PotionEffect(PotionEffectType.SPEED, 3, 0);
-		player.addPotionEffect(SPEED_FOR_3S);
+		var speedFor3S = new PotionEffect(PotionEffectType.SPEED, 3, 0);
+		player.addPotionEffect(speedFor3S);
 		assertEquals(3, player.getActivePotionEffects().iterator().next().getDuration());
 
 		// 1 tick.
 		server.getScheduler().performTicks(1);
 
 		// verify it's OK
-		assertEquals(3, SPEED_FOR_3S.getDuration()); // The original shouldn't be modified
+		assertEquals(3, speedFor3S.getDuration()); // The original shouldn't be modified
 
 		var effect = player.getPotionEffect(PotionEffectType.SPEED);  // This has 2s left
 		assertEquals(2, effect.getDuration());
