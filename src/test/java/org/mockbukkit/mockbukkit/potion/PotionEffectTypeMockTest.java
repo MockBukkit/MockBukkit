@@ -154,4 +154,10 @@ class PotionEffectTypeMockTest
 		return Arrays.stream(PotionEffectType.values());
 	}
 
+	@Test
+	void testPotionEffectStringifiedRepresentation()
+	{
+		assertEquals("INCREASE_DAMAGE", PotionEffectType.STRENGTH.toString());
+	}
+
 }
