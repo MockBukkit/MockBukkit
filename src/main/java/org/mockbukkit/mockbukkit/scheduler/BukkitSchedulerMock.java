@@ -169,17 +169,22 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return currentTick;
 	}
 
-	private void processEntities() {
-		for (World world : Bukkit.getWorlds()) {
-			for (Entity entity : world.getEntities()) {
-				if (entity instanceof LivingEntityMock living) {
+	private void processEntities()
+	{
+		for (World world : Bukkit.getWorlds())
+		{
+			for (Entity entity : world.getEntities())
+			{
+				if (entity instanceof LivingEntityMock living)
+				{
 					living.performTick();
 				}
 			}
 		}
 	}
 
-	private void processTasks() {
+	private void processTasks()
+	{
 
 		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
