@@ -164,11 +164,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock)
-		{
-			return uuid.equals(((EntityMock) obj).getUniqueId());
-		}
-		return false;
+		return obj instanceof EntityMock entity && uuid.equals(entity.getUniqueId());
 	}
 
 	@Override

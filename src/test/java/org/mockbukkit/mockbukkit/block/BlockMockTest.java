@@ -358,15 +358,15 @@ class BlockMockTest
 	@Test
 	void testGetFace_Valid()
 	{
-		block = block.getRelative(BlockFace.NORTH);
-		assertEquals(BlockFace.NORTH, block.getFace(block));
+		Block b = block.getRelative(BlockFace.NORTH);
+		assertEquals(BlockFace.NORTH, block.getFace(b));
 	}
 
 	@Test
 	void testGetFace_Invalid()
 	{
-		block = block.getRelative(BlockFace.NORTH, 2);
-		assertNull(block.getFace(block));
+		Block b = block.getRelative(BlockFace.NORTH, 2);
+		assertNull(block.getFace(b));
 	}
 
 	@Test

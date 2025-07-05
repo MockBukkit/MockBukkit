@@ -31,7 +31,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class MockBukkitTest
@@ -65,7 +64,7 @@ class MockBukkitTest
 	void setServerInstanceToNull()
 	{
 		MockBukkit.mock();
-		assumeFalse(Bukkit.getServer() == null);
+		assertFalse(Bukkit.getServer() == null);
 		MockBukkit.setServerInstanceToNull();
 		assertNull(Bukkit.getServer());
 	}
@@ -194,7 +193,7 @@ class MockBukkitTest
 	{
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		assumeFalse(plugin.onDisableExecuted);
+		assertFalse(plugin.onDisableExecuted);
 		MockBukkit.unmock();
 		assertFalse(plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);

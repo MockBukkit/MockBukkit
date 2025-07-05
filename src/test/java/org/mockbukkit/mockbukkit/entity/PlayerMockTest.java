@@ -131,7 +131,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasNotTeleported;
@@ -620,7 +619,7 @@ class PlayerMockTest
 
 		BlockDamageEvent event = player.simulateBlockDamage(block);
 		assertNotNull(event);
-		assumeFalse(event.isCancelled());
+		assertFalse(event.isCancelled());
 
 		assertFalse(wasBroken.get(), "BlockBreakEvent was fired");
 		assertThat(block, hasMaterial(Material.STONE));
@@ -651,7 +650,7 @@ class PlayerMockTest
 		block.setType(Material.STONE);
 		BlockDamageEvent event = player.simulateBlockDamage(block);
 		assertNotNull(event);
-		assumeFalse(event.isCancelled());
+		assertFalse(event.isCancelled());
 
 		assertEquals(1, brokenCount.get(), "BlockBreakEvent was not fired only once");
 		assertThat(block, hasMaterial(Material.AIR));
@@ -682,7 +681,7 @@ class PlayerMockTest
 		block.setType(Material.STONE);
 		BlockBreakEvent event = player.simulateBlockBreak(block);
 		assertNotNull(event);
-		assumeFalse(event.isCancelled());
+		assertFalse(event.isCancelled());
 		assertEquals(1, brokenCount.get(), "BlockBreakEvent was not fired only once");
 		assertThat(block, hasMaterial(Material.AIR));
 	}

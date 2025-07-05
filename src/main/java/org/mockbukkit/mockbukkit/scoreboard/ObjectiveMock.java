@@ -123,7 +123,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public ScoreboardMock getScoreboard()
+	public @Nullable ScoreboardMock getScoreboard()
 	{
 		return scoreboard;
 	}

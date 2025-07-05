@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.scoreboard;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.scoreboard.Criteria;
+import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +12,12 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObjectiveMockTest
 {
@@ -46,6 +49,7 @@ class ObjectiveMockTest
 		assertEquals("dummy", objective.getCriteria());
 		assertEquals(Criteria.DUMMY, objective.getTrackedCriteria());
 		assertNull(objective.getDisplaySlot());
+		assertTrue(objective.isModifiable());
 	}
 
 	@Test
@@ -60,9 +64,10 @@ class ObjectiveMockTest
 	void unregister_ObjectiveWasRegistered_ObjectiveIsRemoved()
 	{
 		String name = objective.getName();
-		assumeFalse(scoreboard.getObjective(name) == null, "Objective was not registered");
+		assertNotNull(scoreboard.getObjective(name), "Objective was not registered");
 		objective.unregister();
 		assertNull(scoreboard.getObjective(name), "Objective was not registered");
+		assertFalse(objective.isRegistered());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -80,7 +85,7 @@ class ObjectiveMockTest
 		PlayerMock player = server.addPlayer();
 		Score score1 = objective.getScore(player);
 		Score score2 = objective.getScore(player);
-		assumeFalse(score1 == null);
+		assertNotNull(score1);
 		assertSame(score1, score2);
 	}
 
@@ -115,4 +120,42 @@ class ObjectiveMockTest
 		assertEquals(Component.text("Insert interesting text here"), objective.displayName());
 	}
 
+	@Test
+	void testCustomDisplayName()
+	{
+		objective = scoreboard.registerNewObjective("Objective2", "dummy", (Component) null, RenderType.HEARTS);
+		assertEquals("", objective.getDisplayName());
+		objective.displayName(Component.text("display"));
+		assertEquals("display", objective.getDisplayName());
+		objective.displayName(null);
+		assertEquals("", objective.getDisplayName());
+	}
+
+	@Test
+	void testLongDisplayName()
+	{
+		assertThrows(IllegalArgumentException.class, () -> objective.setDisplayName("A".repeat(200)));
+	}
+
+	@Test
+	void testLongScore()
+	{
+		assertThrows(IllegalArgumentException.class, () -> objective.getScore("A".repeat(200)));
+	}
+
+	@Test
+	void testChangeRenderType()
+	{
+		assertEquals(RenderType.INTEGER, objective.getRenderType());
+		objective.setRenderType(RenderType.HEARTS);
+		assertEquals(RenderType.HEARTS, objective.getRenderType());
+	}
+
+	@Test
+	void testCantUnregisterTwice()
+	{
+		objective.unregister();
+		assertFalse(objective.isRegistered());
+		assertThrows(IllegalStateException.class, () -> objective.unregister());
+	}
 }
