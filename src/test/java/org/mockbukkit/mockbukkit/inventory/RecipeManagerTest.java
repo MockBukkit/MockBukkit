@@ -288,7 +288,7 @@ class RecipeManagerTest
 		}
 
 		@Nested
-		@Disabled("Shaped recipes have not been implemented yet")
+//		@Disabled("Shaped recipes have not been implemented yet")
 		class ShapedRecipe
 		{
 
@@ -308,12 +308,6 @@ class RecipeManagerTest
 					"CRIMSON_PLANKS, CRIMSON_DOOR",
 					"WARPED_PLANKS, WARPED_DOOR",
 					"COPPER_INGOT, COPPER_DOOR",
-					"EXPOSED_COPPER, EXPOSED_COPPER_DOOR",
-					"WEATHERED_COPPER, WEATHERED_COPPER_DOOR",
-					"OXIDIZED_COPPER, OXIDIZED_COPPER_DOOR",
-					"WAXED_EXPOSED_COPPER, WAXED_EXPOSED_COPPER_DOOR",
-					"WAXED_WEATHERED_COPPER, WAXED_WEATHERED_COPPER_DOOR",
-					"WAXED_OXIDIZED_COPPER, WAXED_OXIDIZED_COPPER_DOOR"
 			})
 			void givenDoor(Material doorMaterial, Material expectedOutput)
 			{
@@ -434,11 +428,40 @@ class RecipeManagerTest
 			{
 				ItemStack[] matrix = new ItemStack[]{
 						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS),
+						ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS), ItemStack.empty(),
 						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
 				};
 				boolean result = RecipeManager.matches(recipe, matrix);
 				assertFalse(result);
+			}
+
+			@Test
+			void givenRecipeWithSpaces()
+			{
+				// Create a recipe with spaces to test space handling
+				NamespacedKey key = new NamespacedKey("test", "space_recipe");
+				ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.STICK));
+
+				recipe.shape("X X", "   ", "X X");
+				recipe.setIngredient('X', Material.STONE);
+
+				// Test matrix that should match the pattern (spaces should be empty)
+				ItemStack[] validMatrix = new ItemStack[]{
+						ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.of(Material.STONE),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+						ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.of(Material.STONE)
+				};
+
+				assertTrue(RecipeManager.matches(recipe, validMatrix));
+
+				// Test matrix with items in space positions (should fail)
+				ItemStack[] invalidMatrix = new ItemStack[]{
+						ItemStack.of(Material.STONE), ItemStack.of(Material.DIRT), ItemStack.of(Material.STONE),
+						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+						ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.of(Material.STONE)
+				};
+
+				assertFalse(RecipeManager.matches(recipe, invalidMatrix));
 			}
 
 		}

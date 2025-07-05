@@ -299,9 +299,76 @@ public class RecipeManager
 		Preconditions.checkArgument(shapedRecipe != null, "The recipe cannot be null");
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
 
-		// TODO: Logic for shaped recipes
+		String[] shape = shapedRecipe.getShape();
+		Map<Character, RecipeChoice> ingredientMap = shapedRecipe.getChoiceMap();
+
+		int recipeHeight = shape.length;
+		int recipeWidth = shape[0].length();
+
+		// Try all possible positions in the 3x3 crafting grid
+		for (int startRow = 0; startRow <= 3 - recipeHeight; startRow++)
+		{
+			for (int startCol = 0; startCol <= 3 - recipeWidth; startCol++)
+			{
+				if (matchesAtPosition(shape, ingredientMap, craftingMatrix, startRow, startCol))
+				{
+					return true;
+				}
+			}
+		}
 
 		return false;
+	}
+
+	private static boolean matchesAtPosition(String[] shape, Map<Character, RecipeChoice> ingredientMap,
+											 ItemStack[] craftingMatrix, int startRow, int startCol)
+	{
+		// Check if all non-recipe positions are empty
+		for (int row = 0; row < 3; row++)
+		{
+			for (int col = 0; col < 3; col++)
+			{
+				int index = row * 3 + col;
+				boolean isInRecipe = (row >= startRow && row < startRow + shape.length) &&
+						(col >= startCol && col < startCol + shape[0].length());
+
+				if (!isInRecipe)
+				{
+					// Position outside recipe bounds should be empty
+					if (!craftingMatrix[index].isEmpty())
+					{
+						return false;
+					}
+				}
+				else
+				{
+					// Position inside recipe bounds
+					int recipeRow = row - startRow;
+					int recipeCol = col - startCol;
+					char recipeChar = shape[recipeRow].charAt(recipeCol);
+
+					if (recipeChar == ' ')
+					{
+						// Recipe expects empty slot
+						if (!craftingMatrix[index].isEmpty())
+						{
+							return false;
+						}
+					}
+					else
+					{
+						// Recipe expects specific ingredient
+						RecipeChoice choice = ingredientMap.get(recipeChar);
+						if (choice == null || !choice.test(craftingMatrix[index]))
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
