@@ -175,7 +175,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		{
 			for (Entity entity : world.getEntities())
 			{
-				assert entity instanceof EntityMock : "Entity should be an EntityMock instance";
 				((EntityMock)entity).tick();
 			}
 		}
