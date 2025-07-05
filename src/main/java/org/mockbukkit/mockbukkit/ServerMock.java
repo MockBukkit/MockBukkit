@@ -2205,7 +2205,6 @@ public class ServerMock extends Server.Spigot implements Server
 		materialTags.put(registry.getRegistry(), registry);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
@@ -2365,8 +2364,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
+    public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
 		return RegistryAccess.registryAccess().getRegistry(tClass);
 	}

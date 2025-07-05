@@ -1464,7 +1464,6 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@SuppressWarnings("UnstableApiUsage")
 	public @NotNull ChunkSnapshotMock getEmptyChunkSnapshot(int chunkX, int chunkZ, boolean includeBiome, boolean includeBiomeTempRain)
 	{
 		// Cubic size of the chunk (w * w * h).

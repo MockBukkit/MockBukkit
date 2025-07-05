@@ -1727,7 +1727,6 @@ class PlayerMockTest
 				player.playEffect(loc, Effect.STEP_SOUND, 1.0f));
 	}
 
-	@SuppressWarnings("UnstableApiUsage")
 	void testPlayerSendPluginMessage()
 	{
 		PluginMock plugin = MockBukkit.createMockPlugin();

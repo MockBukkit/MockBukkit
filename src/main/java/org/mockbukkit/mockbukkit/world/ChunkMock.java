@@ -139,7 +139,7 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	@SuppressWarnings("UnstableApiUsage") // ImmutableMap#builderWithExpectedSize
+	// ImmutableMap#builderWithExpectedSize
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
 		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(getCubicSize());

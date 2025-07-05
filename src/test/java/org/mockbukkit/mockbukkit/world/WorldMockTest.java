@@ -917,7 +917,6 @@ class WorldMockTest
 	}
 
 	@Test
-	@SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessage()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -1704,7 +1703,6 @@ class WorldMockTest
 	}
 
 	@Test
-	@SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessageWithPlayers()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

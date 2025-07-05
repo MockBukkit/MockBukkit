@@ -98,7 +98,6 @@ public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Comman
 		return BrigadierUtils.wrapNode((CommandNode<CommandSourceStack>) node);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Nullable
 	@Override
 	public Command put(String key, Command value)
