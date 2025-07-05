@@ -501,6 +501,17 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void equals_RemoveFlags()
+	{
+		assertEquals(0, meta.getItemFlags().size());
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertEquals(1, meta.getItemFlags().size());
+		meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertEquals(0, meta.getItemFlags().size());
+		meta.removeItemFlags(ItemFlag.HIDE_DYE);
+	}
+
+	@Test
 	void equals_PersistentDataSame_True()
 	{
 		PluginMock plugin = MockBukkit.createMockPlugin();
