@@ -358,42 +358,42 @@ class BlockMockTest
 	@Test
 	void testGetFace_Valid()
 	{
-		Block b = block.getRelative(BlockFace.NORTH);
-		assertEquals(BlockFace.NORTH, block.getFace(b));
+		block = block.getRelative(BlockFace.NORTH);
+		assertEquals(BlockFace.NORTH, block.getFace(block));
 	}
 
 	@Test
 	void testGetFace_Invalid()
 	{
-		Block b = block.getRelative(BlockFace.NORTH, 2);
-		assertNull(block.getFace(b));
+		block = block.getRelative(BlockFace.NORTH, 2);
+		assertNull(block.getFace(block));
 	}
 
 	@Test
 	void isSolid_Solid()
 	{
-		Block block = new BlockMock(Material.ANCIENT_DEBRIS);
+		block = new BlockMock(Material.ANCIENT_DEBRIS);
 		assertTrue(block.isSolid());
 	}
 
 	@Test
 	void isSolid_NonSolid()
 	{
-		Block block = new BlockMock(Material.AIR);
+		block = new BlockMock(Material.AIR);
 		assertFalse(block.isSolid());
 	}
 
 	@Test
 	void getDrops_InitialEmpty()
 	{
-		Block block = new BlockMock(Material.AIR);
+		block = new BlockMock(Material.AIR);
 		assertTrue(block.getDrops().isEmpty());
 	}
 
 	@Test
 	void getDrops_SetDropsMatch()
 	{
-		BlockMock block = new BlockMock(Material.STONE);
+		block = new BlockMock(Material.STONE);
 		block.setDrops(List.of(new ItemStack(Material.COBBLESTONE)));
 		assertEquals(1, block.getDrops().size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
