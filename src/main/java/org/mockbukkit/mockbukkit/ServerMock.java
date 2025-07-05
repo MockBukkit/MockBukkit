@@ -2166,7 +2166,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull BlockData createBlockData(String data)
 	{
-		return this.createBlockData((Material) null, data);
+		return this.createBlockData(null, data);
 	}
 
 	@Override
