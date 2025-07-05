@@ -123,6 +123,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -201,7 +202,7 @@ class PlayerMockTest
 	@Test
 	void testEnderChest()
 	{
-		assertTrue(player.getEnderChest() instanceof EnderChestInventoryMock);
+		assertInstanceOf(EnderChestInventoryMock.class, player.getEnderChest());
 	}
 
 	@Test
@@ -2449,7 +2450,7 @@ class PlayerMockTest
 
 		BossBar bossBar = List.copyOf(player.getBossBars()).get(0);
 		Component name = bossBar.name();
-		assertTrue(name instanceof net.kyori.adventure.text.TextComponent);
+		assertInstanceOf(net.kyori.adventure.text.TextComponent.class, name);
 		assertEquals("Test", ((net.kyori.adventure.text.TextComponent) name).content());
 		assertEquals(1, bossBar.progress());
 		assertEquals(BossBar.Color.BLUE, bossBar.color());
@@ -2502,7 +2503,7 @@ class PlayerMockTest
 
 		BossBar bossBar = List.copyOf(player.getBossBars()).get(0);
 		Component name = bossBar.name();
-		assertTrue(name instanceof net.kyori.adventure.text.TextComponent);
+		assertInstanceOf(net.kyori.adventure.text.TextComponent.class, name);
 		assertEquals("Test", ((net.kyori.adventure.text.TextComponent) name).content());
 		assertEquals(1, bossBar.progress());
 		assertEquals(BossBar.Color.BLUE, bossBar.color());
@@ -2511,7 +2512,7 @@ class PlayerMockTest
 
 		bar.name(Component.text("Test2"));
 		name = bossBar.name();
-		assertTrue(name instanceof net.kyori.adventure.text.TextComponent);
+		assertInstanceOf(net.kyori.adventure.text.TextComponent.class, name);
 		assertEquals("Test2", ((net.kyori.adventure.text.TextComponent) name).content());
 
 		bar.progress(0.5f);

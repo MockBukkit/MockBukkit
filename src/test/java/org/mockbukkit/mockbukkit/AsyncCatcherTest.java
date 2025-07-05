@@ -9,6 +9,7 @@ import java.lang.reflect.Modifier;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -55,7 +56,7 @@ class AsyncCatcherTest
 		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
-		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
+		assertInstanceOf(UnsupportedOperationException.class, exception.getCause());
 		assertTrue(exception.getCause().getMessage().contains("Utility class"));
 	}
 

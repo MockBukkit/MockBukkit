@@ -826,7 +826,7 @@ class ServerMockTest
 		assertEquals(offlinePlayer.getUniqueId(), onlinePlayer.getUniqueId());
 
 		// Assert that the PlayerMock takes priority over the OfflinePlayerMock
-		assertTrue(server.getOfflinePlayer(offlinePlayer.getUniqueId()) instanceof PlayerMock);
+		assertInstanceOf(PlayerMock.class, server.getOfflinePlayer(offlinePlayer.getUniqueId()));
 	}
 
 	@Test

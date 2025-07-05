@@ -13,6 +13,7 @@ import java.lang.reflect.Modifier;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +27,7 @@ class AdventureConvertsTest
 		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
-		assertTrue(exception.getCause() instanceof IllegalStateException);
+		assertInstanceOf(IllegalStateException.class, exception.getCause());
 		assertTrue(exception.getCause().getMessage().contains("Utility class"));
 	}
 
