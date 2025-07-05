@@ -952,16 +952,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void attack(@NotNull Entity target)
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
-
-		if (this instanceof Player)
-		{
-			((Player) this).attack(target);
-		}
-		else
-		{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
