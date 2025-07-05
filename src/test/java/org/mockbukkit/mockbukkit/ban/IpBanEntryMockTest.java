@@ -18,8 +18,7 @@ class IpBanEntryMockTest
 	IpBanEntryMock entry;
 
 	@BeforeEach
-	void setUp() throws Exception
-	{
+	void setUp() {
 		entry = new IpBanEntryMock("127.0.0.1", "reason", null, "source");
 	}
 

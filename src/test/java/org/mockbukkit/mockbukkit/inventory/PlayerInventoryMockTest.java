@@ -27,14 +27,14 @@ class PlayerInventoryMockTest
 	private PlayerInventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		inventory = new PlayerInventoryMock(null);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

@@ -33,8 +33,7 @@ class SpawnerMinecartMockTest
 	private SpawnerMinecart minecart;
 
 	@BeforeEach
-	public void setUp() throws Exception
-	{
+	public void setUp() {
 		minecart = new SpawnerMinecartMock(server, UUID.randomUUID());
 	}
 

@@ -17,7 +17,6 @@ import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -301,8 +300,7 @@ class MockBukkitTest
 	}
 
 	@Test
-	void load_WithConfig_InputStream() throws FileNotFoundException
-	{
+	void load_WithConfig_InputStream() {
 		URL resource = this.getClass().getClassLoader().getResource("loadWithConfig/config_test.yml");
 		if (resource == null)
 		{
@@ -327,8 +325,7 @@ class MockBukkitTest
 	}
 
 	@Test
-	void load_WithConfig_InputStream_FileNotExists() throws FileNotFoundException
-	{
+	void load_WithConfig_InputStream_FileNotExists() {
 
 		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{

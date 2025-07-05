@@ -33,14 +33,14 @@ class ScoreboardMockTest
 	private ScoreboardMock scoreboard;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		this.server = MockBukkit.mock();
 		this.scoreboard = new ScoreboardMock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

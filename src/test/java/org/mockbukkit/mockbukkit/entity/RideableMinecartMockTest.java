@@ -23,8 +23,7 @@ class RideableMinecartMockTest
 	private RideableMinecart minecart;
 
 	@BeforeEach
-	public void setUp() throws Exception
-	{
+	public void setUp() {
 		minecart = new RideableMinecartMock(server, UUID.randomUUID());
 	}
 

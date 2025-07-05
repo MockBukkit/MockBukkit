@@ -33,8 +33,7 @@ class HopperMinecartMockTest
 	private HopperMinecart minecart;
 
 	@BeforeEach
-	void setUp() throws Exception
-	{
+	void setUp() {
 		minecart = new HopperMinecartMock(server, UUID.randomUUID());
 	}
 

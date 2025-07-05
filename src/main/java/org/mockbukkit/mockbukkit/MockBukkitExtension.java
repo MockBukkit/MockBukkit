@@ -146,14 +146,12 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	}
 
 	@Override
-	public void beforeAll(ExtensionContext context) throws Exception
-	{
+	public void beforeAll(ExtensionContext context) {
 		MockBukkit.getOrCreateMock();
 	}
 
 	@Override
-	public void afterAll(ExtensionContext context) throws Exception
-	{
+	public void afterAll(ExtensionContext context) {
 		MockBukkit.unmock();
 	}
 

@@ -20,8 +20,7 @@ class MonsterMockTest
 	ZombieMock monster;
 
 	@BeforeEach
-	void setUp() throws Exception
-	{
+	void setUp() {
 		monster = new ZombieMock(server, UUID.randomUUID());
 	}
 

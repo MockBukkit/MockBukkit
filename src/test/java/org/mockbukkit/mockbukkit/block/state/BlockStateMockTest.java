@@ -36,13 +36,13 @@ class BlockStateMockTest
 {
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
