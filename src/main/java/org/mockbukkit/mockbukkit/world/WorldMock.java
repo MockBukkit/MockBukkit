@@ -1000,8 +1000,8 @@ public class WorldMock implements World
 			success = new CreatureSpawnEvent(living, reason).callEvent();
 		}
 		case Item item -> success = new ItemSpawnEvent(item).callEvent();
-		case Player player -> success = false; // Shouldn't ever be called here but just for parody.
-		case Projectile projectile -> success = new ProjectileLaunchEvent(entity).callEvent();
+		case Player ignored -> success = false; // Shouldn't ever be called here but just for parody.
+		case Projectile ignored -> success = new ProjectileLaunchEvent(entity).callEvent();
 		case null, default -> success = new EntitySpawnEvent(entity).callEvent();
 		}
 
