@@ -398,7 +398,7 @@ class BlockMockTest
 		((BlockMock) block).setDrops(Arrays.asList(new ItemStack(Material.COBBLESTONE)));
 		assertEquals(1, block.getDrops().size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
-		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), (Entity) null).size());
+		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), null).size());
 	}
 
 }
