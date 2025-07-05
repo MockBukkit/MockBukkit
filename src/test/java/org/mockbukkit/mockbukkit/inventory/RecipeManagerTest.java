@@ -288,7 +288,6 @@ class RecipeManagerTest
 		}
 
 		@Nested
-//		@Disabled("Shaped recipes have not been implemented yet")
 		class ShapedRecipe
 		{
 
