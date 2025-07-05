@@ -56,7 +56,8 @@ public abstract class PersistentDataContainerViewMock implements PersistentDataC
 	}
 
 	@Override
-	public byte[] serializeToBytes() {
+	public byte[] serializeToBytes()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

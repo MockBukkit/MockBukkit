@@ -29,7 +29,8 @@ public class MockBukkitPluginLoader implements PluginLoader
 	}
 
 	@Override
-	public @NotNull PluginDescriptionFile getPluginDescription(@NotNull File file) {
+	public @NotNull PluginDescriptionFile getPluginDescription(@NotNull File file)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

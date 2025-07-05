@@ -81,7 +81,8 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	}
 
 	@Override
-	protected Class<?> findClass(String name) {
+	protected Class<?> findClass(String name)
+	{
 		try
 		{
 			Preconditions.checkNotNull(jarFile, "No jar file selected");

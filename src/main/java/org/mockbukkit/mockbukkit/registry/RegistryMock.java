@@ -68,7 +68,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
         loadKeyedToRegistry(key);
     }
 
-	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key) {
+	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
+	{
 		String fileName = "/keyed/" + key.key().value() + ".json";
 		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);
 		keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
