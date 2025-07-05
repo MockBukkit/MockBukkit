@@ -521,7 +521,7 @@ class WorldMockTest
 		assertEquals(100, zombie.getLocation().getBlockX());
 		assertEquals(20, zombie.getLocation().getBlockY());
 		assertEquals(50, zombie.getLocation().getBlockZ());
-		assertTrue(world.getEntities().size() > 0);
+		assertTrue(!world.getEntities().isEmpty());
 	}
 
 	@Test

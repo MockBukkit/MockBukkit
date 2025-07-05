@@ -670,7 +670,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			List<ScheduledTask> out = new ArrayList<>();
 			synchronized (tasks)
 			{
-				if (tasks.size() != 0)
+				if (!tasks.isEmpty())
 				{
 					out.addAll(tasks.values());
 				}
@@ -684,7 +684,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			int scheduled = 0;
 			synchronized (tasks)
 			{
-				if (tasks.size() == 0)
+				if (tasks.isEmpty())
 				{
 					return 0;
 				}
