@@ -1250,9 +1250,7 @@ class ItemMetaMockTest
 		assertFalse(meta.hasEnchantable());
 
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
-			meta.setEnchantable(-1);
-		});
+                meta.setEnchantable(-1));
 
 		assertEquals("Enchantability must be positive", illegalArgumentException.getMessage());
 	}

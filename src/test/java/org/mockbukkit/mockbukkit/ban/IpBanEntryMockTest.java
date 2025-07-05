@@ -53,9 +53,7 @@ class IpBanEntryMockTest
 	void testSetCreated_Null()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			entry.setCreated(null);
-		});
+				entry.setCreated(null));
 
 		assertEquals("Created date cannot be null", nullPointerException.getMessage());
 	}

@@ -716,7 +716,7 @@ class ItemStackMockTest
 	void getDisplayName_noStackOverflow()
 	{
 		ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE);
-		assertDoesNotThrow(() -> item.displayName());
+		assertDoesNotThrow(item::displayName);
 	}
 
 	@Test

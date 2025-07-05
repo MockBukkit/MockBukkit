@@ -1116,10 +1116,8 @@ class PlayerMockTest
 		player.playSound(player.getLocation(), sound, SoundCategory.AMBIENT, volume, pitch);
 
 		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-					&& audio.getVolume() == volume && audio.getPitch() == pitch;
-		});
+				player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
+						&& audio.getVolume() == volume && audio.getPitch() == pitch);
 	}
 
 	@Test
@@ -1614,9 +1612,7 @@ class PlayerMockTest
 	void testPlayerSendSignChange_Valid()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
-		});
+				player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true));
 	}
 
 	@Test
@@ -1624,9 +1620,7 @@ class PlayerMockTest
 	{
 		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			player.sendSignChange(loc, new String[2]);
-		});
+				player.sendSignChange(loc, new String[2]));
 	}
 
 	@Test
@@ -1642,18 +1636,14 @@ class PlayerMockTest
 	{
 		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			player.playEffect(loc, Effect.STEP_SOUND, null);
-		});
+				player.playEffect(loc, Effect.STEP_SOUND, null));
 	}
 
 	@Test
 	void testPlayerSendExperienceChange()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendExperienceChange(0.5f);
-		});
+				player.sendExperienceChange(0.5f));
 	}
 
 	@Test
@@ -1661,18 +1651,14 @@ class PlayerMockTest
 	{
 		Location loc = player.getLocation();
 		assertDoesNotThrow(() ->
-		{
-			player.sendBlockDamage(loc, 0.5f);
-		});
+				player.sendBlockDamage(loc, 0.5f));
 	}
 
 	@Test
 	void testPlayerSendBlockChange()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendBlockUpdate(player.getLocation(), new ChestStateMock(Material.CHEST));
-		});
+				player.sendBlockUpdate(player.getLocation(), new ChestStateMock(Material.CHEST)));
 	}
 
 	@Test
@@ -1688,19 +1674,15 @@ class PlayerMockTest
 	void testPlayerSendEquipmentChange()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStackMock(Material.DIAMOND_CHESTPLATE));
-		});
+				player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStackMock(Material.DIAMOND_CHESTPLATE)));
 	}
 
 	@Test
 	void testPlayerSendEquipmentChange_Map()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST,
-					new ItemStackMock(Material.DIAMOND_CHESTPLATE)));
-		});
+				player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST,
+						new ItemStackMock(Material.DIAMOND_CHESTPLATE))));
 	}
 
 	@Test
@@ -1713,36 +1695,28 @@ class PlayerMockTest
 	void testPlayerSendActionBar()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendActionBar("Action!");
-		});
+				player.sendActionBar("Action!"));
 	}
 
 	@Test
 	void testPlayerSendHealthUpdate()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendHealthUpdate();
-		});
+				player.sendHealthUpdate());
 	}
 
 	@Test
 	void testPlayerSendHealthUpdate_Params()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendHealthUpdate(20, 10, 0.0f);
-		});
+				player.sendHealthUpdate(20, 10, 0.0f));
 	}
 
 	@Test
 	void testPlayerSendMultiBlockChange()
 	{
 		assertDoesNotThrow(() ->
-		{
-			player.sendMultiBlockChange(new HashMap<>(0));
-		});
+				player.sendMultiBlockChange(new HashMap<>(0)));
 	}
 
 	@Test
@@ -1750,9 +1724,7 @@ class PlayerMockTest
 	{
 		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			player.playEffect(loc, Effect.STEP_SOUND, 1.0f);
-		});
+				player.playEffect(loc, Effect.STEP_SOUND, 1.0f));
 	}
 
 	@SuppressWarnings("UnstableApiUsage")
@@ -1786,9 +1758,7 @@ class PlayerMockTest
 		Location loc = player.getLocation();
 		Object wrongObj = new Object();
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			player.spawnParticle(Particle.ITEM, loc, 1, wrongObj);
-		});
+				player.spawnParticle(Particle.ITEM, loc, 1, wrongObj));
 	}
 
 	@Test
@@ -2183,10 +2153,8 @@ class PlayerMockTest
 		player.playSound(player.getLocation(), sound, volume, pitch);
 
 		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
-					&& audio.getPitch() == pitch;
-		});
+				player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
+						&& audio.getPitch() == pitch);
 	}
 
 	@Test
@@ -2210,10 +2178,8 @@ class PlayerMockTest
 		player.playSound(player, sound, SoundCategory.AMBIENT, volume, pitch);
 
 		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-					&& audio.getVolume() == volume && audio.getPitch() == pitch;
-		});
+				player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
+						&& audio.getVolume() == volume && audio.getPitch() == pitch);
 
 	}
 
@@ -2226,10 +2192,8 @@ class PlayerMockTest
 		player.playSound(player, sound, volume, pitch);
 
 		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
-					&& audio.getPitch() == pitch;
-		});
+				player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
+						&& audio.getPitch() == pitch);
 
 	}
 
@@ -2367,10 +2331,8 @@ class PlayerMockTest
 		int note = 10;
 		player.playNote(player.getEyeLocation(), instrument, new Note(note));
 		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
+				player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+						&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01);
 	}
 
 	@Test

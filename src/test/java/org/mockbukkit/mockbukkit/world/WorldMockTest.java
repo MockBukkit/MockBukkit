@@ -803,9 +803,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			world.setBiome(0, 0, 0, Biome.CUSTOM);
-		});
+				world.setBiome(0, 0, 0, Biome.CUSTOM));
 	}
 
 	@Test
@@ -906,9 +904,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			world.playEffect(loc, Effect.STEP_SOUND, null);
-		});
+				world.playEffect(loc, Effect.STEP_SOUND, null));
 	}
 
 	@Test
@@ -917,9 +913,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			world.playEffect(loc, Effect.STEP_SOUND, 1.0f);
-		});
+				world.playEffect(loc, Effect.STEP_SOUND, 1.0f));
 	}
 
 	@Test
@@ -1532,17 +1526,13 @@ class WorldMockTest
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
-		{
-			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
-					&& worldGameRuleChangeEvent.getValue().equals("false");
-		}));
+				worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
+						&& worldGameRuleChangeEvent.getValue().equals("false")));
 		world.setGameRuleValue("announceAdvancements", "true");
 		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
-		{
-			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
-					&& worldGameRuleChangeEvent.getValue().equals("true");
-		}));
+				worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
+						&& worldGameRuleChangeEvent.getValue().equals("true")));
 	}
 
 	@Test
@@ -1568,10 +1558,8 @@ class WorldMockTest
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
-		{
-			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
-					&& worldGameRuleChangeEvent.getValue().equals("10");
-		}));
+				worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
+						&& worldGameRuleChangeEvent.getValue().equals("10")));
 	}
 
 	@Test
@@ -1785,9 +1773,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Consumer<Zombie> consumer = entity ->
-		{
-			entity.setCustomName("test");
-		};
+				entity.setCustomName("test");
 		Entity entity = world.spawn(new Location(world, 0, 0, 0), Zombie.class, consumer);
 		assertEquals("test", entity.getCustomName());
 	}
@@ -1797,9 +1783,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Consumer<Zombie> consumer = entity ->
-		{
-			entity.setCustomName("test");
-		};
+				entity.setCustomName("test");
 		Entity entity = world.spawn(new Location(world, 0, 0, 0), Zombie.class, true, consumer);
 		assertEquals("test", entity.getCustomName());
 	}
@@ -1862,9 +1846,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			world.playEffect(null, Effect.STEP_SOUND, 1);
-		});
+				world.playEffect(null, Effect.STEP_SOUND, 1));
 
 		assertEquals("Location cannot be null", nullPointerException.getMessage());
 	}
@@ -1876,9 +1858,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 0, 0);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			world.playEffect(location, null, 1);
-		});
+				world.playEffect(location, null, 1));
 
 		assertEquals("Effect cannot be null", nullPointerException.getMessage());
 	}
@@ -1889,10 +1869,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(null, 0, 0, 0);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-
-			world.playEffect(location, Effect.STEP_SOUND, 1);
-		});
+				world.playEffect(location, Effect.STEP_SOUND, 1));
 
 		assertEquals("World cannot be null", nullPointerException.getMessage());
 	}
@@ -1922,9 +1899,7 @@ class WorldMockTest
 				Sound.BLOCK_ANVIL_BREAK, 1, 1));
 
 		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1;
-		});
+				audio.getVolume() == 1 && audio.getPitch() == 1);
 
 	}
 
@@ -1938,9 +1913,7 @@ class WorldMockTest
 				"block.anvil.break", 1, 1));
 
 		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1;
-		});
+				audio.getVolume() == 1 && audio.getPitch() == 1);
 	}
 
 	@Test
@@ -1952,9 +1925,7 @@ class WorldMockTest
 		assertDoesNotThrow(() -> world.playSound(playerMock, Sound.BLOCK_ANVIL_BREAK, 1, 1));
 
 		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1;
-		});
+				audio.getVolume() == 1 && audio.getPitch() == 1);
 	}
 
 	@Test
@@ -1965,9 +1936,7 @@ class WorldMockTest
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound((Entity) null, Sound.BLOCK_ANVIL_BREAK, 1, 1));
 		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1;
-		}));
+				audio.getVolume() == 1 && audio.getPitch() == 1));
 	}
 
 	@Test
@@ -1979,9 +1948,7 @@ class WorldMockTest
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world2.playSound(playerMock, Sound.BLOCK_ANVIL_BREAK, 1, 1));
 		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1 && audio.getLocation().getWorld() == world2;
-		}));
+				audio.getVolume() == 1 && audio.getPitch() == 1 && audio.getLocation().getWorld() == world2));
 	}
 
 	@Test
@@ -1992,9 +1959,7 @@ class WorldMockTest
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound(playerMock, (Sound) null, 1, 1));
 		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1;
-		}));
+				audio.getVolume() == 1 && audio.getPitch() == 1));
 	}
 
 	@Test
@@ -2005,9 +1970,7 @@ class WorldMockTest
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound(playerMock, Sound.ITEM_GOAT_HORN_SOUND_0, null, 1, 1));
 		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
-			return audio.getVolume() == 1 && audio.getPitch() == 1;
-		}));
+				audio.getVolume() == 1 && audio.getPitch() == 1));
 	}
 
 	@Test

@@ -100,7 +100,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> count.incrementAndGet();
+		Runnable callback = count::incrementAndGet;
 		BukkitTask task = scheduler.runTaskTimer(null, callback, 10L, 2L);
 		assertNotNull(task);
 		scheduler.performTicks(9L);
@@ -140,7 +140,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer_ZeroDelay_DoesntExecuteTaskImmediately()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> count.incrementAndGet();
+		Runnable callback = count::incrementAndGet;
 		scheduler.runTaskTimer(null, callback, 0, 2L);
 		assertEquals(0, count.get());
 		scheduler.performTicks(1L);
@@ -294,9 +294,7 @@ class BukkitSchedulerMockTest
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
 		assertThrows(TaskCancelledException.class, () ->
-		{
-			scheduler.shutdown();
-		});
+				scheduler.shutdown());
 	}
 
 	@Test

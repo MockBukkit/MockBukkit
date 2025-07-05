@@ -331,9 +331,7 @@ class MockBukkitTest
 		{
 			MockBukkit.mock();
 			PluginLoadException runtimeException = assertThrows(PluginLoadException.class, () ->
-			{
-				MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
-			});
+					MockBukkit.loadWithConfig(TestPlugin.class, inputStream));
 			assertEquals("Couldn't read config input stream", runtimeException.getMessage());
 		}
 		catch (IOException e)
