@@ -726,7 +726,7 @@ class PlayerMockTest
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
 		}
-		catch (InterruptedException | BrokenBarrierException e)
+		catch (InterruptedException | BrokenBarrierException ignored)
 		{
 		}
 		catch (TimeoutException e)

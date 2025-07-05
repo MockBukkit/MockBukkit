@@ -356,7 +356,7 @@ class BukkitSchedulerMockTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -385,7 +385,7 @@ class BukkitSchedulerMockTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
 			}
 		});

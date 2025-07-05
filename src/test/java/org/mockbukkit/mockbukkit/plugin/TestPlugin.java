@@ -119,7 +119,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 			{
 				barrier.await();
 			}
-			catch (InterruptedException | BrokenBarrierException e)
+			catch (InterruptedException | BrokenBarrierException ignored)
 			{
 			}
 		}
