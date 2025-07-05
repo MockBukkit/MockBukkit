@@ -14,7 +14,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
@@ -122,7 +121,6 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	 *
 	 * @param tier The tier to set.
 	 */
-	@Test
 	public void setTier(int tier)
 	{
 		this.tier = Math.max(1, Math.min(4, tier));
