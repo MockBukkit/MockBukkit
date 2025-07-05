@@ -601,7 +601,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Deprecated(forRemoval = true)
 	public void assertLore(String... lines)
 	{
-		assertLore(List.of(lines));
+		assertLore(Arrays.asList(lines));
 	}
 
 	/**
