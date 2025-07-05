@@ -56,8 +56,8 @@ class BukkitBrigadierForwardingMapMockTest
 		map.put("other_command", command);
 		assertEquals(command, map.get("other_command"));
 		assertTrue(map.containsKey("other_command"));
-		assertTrue(map.values().contains(command));
-		assertTrue(map.keySet().contains("other_command"));
+		assertTrue(map.containsValue(command));
+		assertTrue(map.containsKey("other_command"));
 		assertTrue(map.values().iterator().hasNext());
 		assertTrue(map.keySet().iterator().hasNext());
 		assertTrue(map.values().stream().anyMatch(command::equals));
@@ -85,7 +85,7 @@ class BukkitBrigadierForwardingMapMockTest
 		assertEquals(initial + 4, map.size());
 		assertFalse(map.isEmpty());
 		assertTrue(map.containsKey("other_command"));
-		assertTrue(map.keySet().contains("other_command"));
+		assertTrue(map.containsKey("other_command"));
 		assertTrue(map.values().iterator().hasNext());
 		assertTrue(map.keySet().iterator().hasNext());
 		assertTrue(map.keySet().stream().anyMatch("other_command"::equals));
