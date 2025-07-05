@@ -2930,11 +2930,7 @@ public class WorldMock implements World
 
 	public void tick()
 	{
-		fullTime ++;
-
-		for (Entity entity : getEntities())
-		{
-			((EntityMock)entity).tick();
-		}
+		fullTime++;
 	}
+
 }
