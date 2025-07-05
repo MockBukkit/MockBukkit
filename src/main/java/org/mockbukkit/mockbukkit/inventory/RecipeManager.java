@@ -323,52 +323,48 @@ public class RecipeManager
 	private static boolean matchesAtPosition(String[] shape, Map<Character, RecipeChoice> ingredientMap,
 											 ItemStack[] craftingMatrix, int startRow, int startCol)
 	{
-		// Check if all non-recipe positions are empty
-		for (int row = 0; row < 3; row++)
-		{
-			for (int col = 0; col < 3; col++)
-			{
-				int index = row * 3 + col;
-				boolean isInRecipe = (row >= startRow && row < startRow + shape.length) &&
-						(col >= startCol && col < startCol + shape[0].length());
-
-				if (!isInRecipe)
-				{
-					// Position outside recipe bounds should be empty
-					if (!craftingMatrix[index].isEmpty())
-					{
-						return false;
-					}
-				}
-				else
-				{
-					// Position inside recipe bounds
-					int recipeRow = row - startRow;
-					int recipeCol = col - startCol;
-					char recipeChar = shape[recipeRow].charAt(recipeCol);
-
-					if (recipeChar == ' ')
-					{
-						// Recipe expects empty slot
-						if (!craftingMatrix[index].isEmpty())
-						{
-							return false;
-						}
-					}
-					else
-					{
-						// Recipe expects specific ingredient
-						RecipeChoice choice = ingredientMap.get(recipeChar);
-						if (choice == null || !choice.test(craftingMatrix[index]))
-						{
-							return false;
-						}
-					}
+		for (int row = 0; row < 3; row++) {
+			for (int col = 0; col < 3; col++) {
+				if (!matchesSlotAtPosition(shape, ingredientMap, craftingMatrix, startRow, startCol, row, col)) {
+					return false;
 				}
 			}
 		}
-
 		return true;
+	}
+
+	private static boolean matchesSlotAtPosition(String[] shape, Map<Character, RecipeChoice> ingredientMap,
+												 ItemStack[] craftingMatrix, int startRow, int startCol, int row, int col)
+	{
+		int index = row * 3 + col;
+		boolean isInRecipe = isPositionInRecipe(shape, startRow, startCol, row, col);
+
+		if (!isInRecipe) {
+			return craftingMatrix[index].isEmpty();
+		}
+
+		return matchesRecipePosition(shape, ingredientMap, craftingMatrix, startRow, startCol, row, col, index);
+	}
+
+	private static boolean isPositionInRecipe(String[] shape, int startRow, int startCol, int row, int col)
+	{
+		return (row >= startRow && row < startRow + shape.length) &&
+				(col >= startCol && col < startCol + shape[0].length());
+	}
+
+	private static boolean matchesRecipePosition(String @NotNull [] shape, Map<Character, RecipeChoice> ingredientMap,
+												 ItemStack[] craftingMatrix, int startRow, int startCol, int row, int col, int index)
+	{
+		int recipeRow = row - startRow;
+		int recipeCol = col - startCol;
+		char recipeChar = shape[recipeRow].charAt(recipeCol);
+
+		if (recipeChar == ' ') {
+			return craftingMatrix[index].isEmpty();
+		}
+
+		RecipeChoice choice = ingredientMap.get(recipeChar);
+		return choice != null && choice.test(craftingMatrix[index]);
 	}
 
 	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)

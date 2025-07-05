@@ -437,12 +437,12 @@ class RecipeManagerTest
 			@Test
 			void givenRecipeWithSpaces()
 			{
-				// Create a recipe with spaces to test space handling
+				// Create a new recipe with spaces to test space handling
 				NamespacedKey key = new NamespacedKey("test", "space_recipe");
-				ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.STICK));
+				ShapedRecipe newRecipe = new ShapedRecipe(key, new ItemStack(Material.STICK));
 
-				recipe.shape("X X", "   ", "X X");
-				recipe.setIngredient('X', Material.STONE);
+				newRecipe.shape("X X", "   ", "X X");
+				newRecipe.setIngredient('X', Material.STONE);
 
 				// Test matrix that should match the pattern (spaces should be empty)
 				ItemStack[] validMatrix = new ItemStack[]{
@@ -451,7 +451,7 @@ class RecipeManagerTest
 						ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.of(Material.STONE)
 				};
 
-				assertTrue(RecipeManager.matches(recipe, validMatrix));
+				assertTrue(RecipeManager.matches(newRecipe, validMatrix));
 
 				// Test matrix with items in space positions (should fail)
 				ItemStack[] invalidMatrix = new ItemStack[]{
@@ -460,7 +460,7 @@ class RecipeManagerTest
 						ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.of(Material.STONE)
 				};
 
-				assertFalse(RecipeManager.matches(recipe, invalidMatrix));
+				assertFalse(RecipeManager.matches(newRecipe, invalidMatrix));
 			}
 
 		}
