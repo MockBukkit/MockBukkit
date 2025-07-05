@@ -355,6 +355,7 @@ public class ItemStackMock extends ItemStack
 		return EMPTY.clone();
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	public @NotNull ItemStack clone()
 	{

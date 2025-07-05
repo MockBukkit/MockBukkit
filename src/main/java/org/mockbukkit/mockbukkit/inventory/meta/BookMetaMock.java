@@ -301,6 +301,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		return this.pages.size();
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	public @NotNull BookMetaMock clone()
 	{
