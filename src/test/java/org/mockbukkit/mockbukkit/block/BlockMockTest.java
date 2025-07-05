@@ -393,8 +393,8 @@ class BlockMockTest
 	@Test
 	void getDrops_SetDropsMatch()
 	{
-		Block block = new BlockMock(Material.STONE);
-		((BlockMock) block).setDrops(List.of(new ItemStack(Material.COBBLESTONE)));
+		BlockMock block = new BlockMock(Material.STONE);
+		block.setDrops(List.of(new ItemStack(Material.COBBLESTONE)));
 		assertEquals(1, block.getDrops().size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), null).size());
