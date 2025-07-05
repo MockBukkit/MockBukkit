@@ -71,10 +71,10 @@ public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Comman
 
 		for (CommandNode<CommandSourceStack> child : this.getDispatcher().getRoot().getChildren())
 		{
-			// If child is a bukkit command node, we can convert it!
-			if (child instanceof BukkitCommandNode bukkitCommandNode)
+			// If this child is a bukkit command node, we can convert it!
+			if (child instanceof BukkitCommandNode bukkitCommandNode && bukkitCommandNode.getBukkitCommand().equals(value))
 			{
-				return bukkitCommandNode.getBukkitCommand().equals(value);
+				return true;
 			}
 		}
 
