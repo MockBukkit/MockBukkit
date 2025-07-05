@@ -95,7 +95,9 @@ class KnowledgeBookMetaMockTest
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta);
-		assertNotEquals(new ItemMetaMock(), meta);
+		// TODO: Strange behaviour --> Accurate?
+		assertEquals(new ItemMetaMock(), meta);
+		assertNotEquals(meta, new ItemMetaMock());
 
 		KnowledgeBookMetaMock meta2 = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta2);

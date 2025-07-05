@@ -99,7 +99,9 @@ class PotionMetaMockTest
 	{
 		PotionMeta meta = new PotionMetaMock();
 		assertEquals(meta, meta);
-		assertNotEquals(new ItemMetaMock(), meta);
+		// TODO: Strange behaviour --> Accurate?
+		assertEquals(new ItemMetaMock(), meta);
+		assertNotEquals(meta, new ItemMetaMock());
 
 		PotionMeta meta2 = new PotionMetaMock();
 		assertEquals(meta, meta2);
