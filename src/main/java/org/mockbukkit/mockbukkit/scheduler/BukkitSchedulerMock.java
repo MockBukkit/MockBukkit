@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -175,9 +175,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		{
 			for (Entity entity : world.getEntities())
 			{
-				if (entity instanceof LivingEntityMock living)
+				if (entity instanceof EntityMock entityMock)
 				{
-					living.performTick();
+					entityMock.tick();
 				}
 			}
 		}

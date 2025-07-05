@@ -66,7 +66,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /**
  * Mock implementation of a {@link LivingEntity}.
@@ -123,7 +122,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Getter @Setter
 	private @Nullable Player killer;
 
-	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
+	private final Map<PotionEffectType, ActivePotionEffect> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 
@@ -644,7 +643,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		 If multiple effects are cleared, then for each one an EntityPotionEffectEvent is called.
 		 */
 
-		PotionEffect oldEffect = getPotionEffect(effect.getType());
+		PotionEffectType type = effect.getType();
+		PotionEffect oldEffect = getPotionEffect(type);
 		EntityPotionEffectEvent.Action action = oldEffect == null ? EntityPotionEffectEvent.Action.ADDED : EntityPotionEffectEvent.Action.CHANGED;
 		boolean override = oldEffect != null;
 
@@ -653,7 +653,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
-			activeEffects.add(new ActivePotionEffect(effect));
+			activeEffects.put(type, new ActivePotionEffect(effect));
 		}
 		return event;
 	}
@@ -681,33 +681,38 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean hasPotionEffect(@NotNull PotionEffectType type)
 	{
-		return activeEffects.stream().anyMatch(effect -> effect.getPotionEffect().getType().equals(type));
+		return activeEffects.containsKey(type);
 	}
 
-	private @NotNull PotionEffect mapToPotionEffect(@NotNull ActivePotionEffect activeEffect)
+	private @Nullable PotionEffect mapToPotionEffect(@Nullable ActivePotionEffect activeEffect)
 	{
+		if (activeEffect == null)
+		{
+			return null;
+		}
+
 		var effect = activeEffect.getPotionEffect();
 		return new PotionEffect(effect.getType(), activeEffect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.hasParticles(), effect.hasIcon());
 	}
 
 	@Override
-	public PotionEffect getPotionEffect(@NotNull PotionEffectType type)
+	public @Nullable PotionEffect getPotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		return activeEffects.stream().filter(effect -> effect.getPotionEffect().getType().equals(type)).findFirst().map(this::mapToPotionEffect).orElse(null);
+		return mapToPotionEffect(activeEffects.get(type));
 	}
 
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		activeEffects.removeIf(effect -> effect.getPotionEffect().getType().equals(type));
+		activeEffects.remove(type);
 	}
 
 	@Override
 	public @NotNull Collection<PotionEffect> getActivePotionEffects()
 	{
-		return activeEffects.stream().map(this::mapToPotionEffect).collect(Collectors.toSet());
+		return activeEffects.values().stream().map(this::mapToPotionEffect).toList();
 	}
 
 	@Override
@@ -1288,9 +1293,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
-	public void performTick()
+	@Override
+	public void tick()
 	{
-		activeEffects.removeIf(ActivePotionEffect::hasExpired);
+		super.tick();
+		activeEffects.entrySet().removeIf(entry -> entry.getValue().hasExpired());
 	}
 
 }
