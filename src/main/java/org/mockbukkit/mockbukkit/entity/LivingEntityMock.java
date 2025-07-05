@@ -97,7 +97,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * The attributes this entity has.
 	 */
-	protected Map<Attribute, AttributeInstanceMock> attributes;
+	protected final Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
 	private boolean collidable = true;
