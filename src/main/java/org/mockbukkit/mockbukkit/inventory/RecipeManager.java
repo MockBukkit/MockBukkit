@@ -204,13 +204,9 @@ public class RecipeManager
 	{
 		return switch (recipeType)
 		{
-			case RecipeType.BLASTING -> Collections.emptyList();
-			case RecipeType.CAMPFIRE_COOKING -> Collections.emptyList();
+			case RecipeType.BLASTING, RecipeType.STONECUTTING, RecipeType.SMOKING, RecipeType.SMITHING,
+				 RecipeType.SMELTING, RecipeType.CAMPFIRE_COOKING -> Collections.emptyList();
 			case RecipeType.CRAFTING -> loadCraftingRecipes();
-			case RecipeType.SMELTING -> Collections.emptyList();
-			case RecipeType.SMITHING -> Collections.emptyList();
-			case RecipeType.SMOKING -> Collections.emptyList();
-			case RecipeType.STONECUTTING -> Collections.emptyList();
 		};
 	}
 
