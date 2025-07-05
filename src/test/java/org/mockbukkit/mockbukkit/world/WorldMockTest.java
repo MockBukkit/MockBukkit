@@ -592,6 +592,30 @@ class WorldMockTest
 	}
 
 	@Test
+	void aConnectedWorldsTimeIncreasesWhenServerTicks()
+	{
+		WorldMock world = server.addSimpleWorld("bumba");
+
+		server.getScheduler().performOneTick();
+		assertEquals(1L, world.getFullTime(), "World time should have increased");
+		assertEquals(1L, world.getTime(), "Day time should have increased");
+
+		server.getScheduler().performTicks(25000);
+		assertEquals(25001L, world.getFullTime(), "World time should have increased");
+		assertEquals(1001L, world.getTime(), "Day time should have rotated");
+	}
+
+	@Test
+	void aNonConnectedWorldsTimeDoesNotIncreaseWhenServerTicks()
+	{
+		WorldMock world = new WorldMock();
+
+		server.getScheduler().performOneTick();
+		assertEquals(0L, world.getFullTime(), "World time should have increased");
+		assertEquals(0L, world.getTime(), "Day time should have increased");
+	}
+
+	@Test
 	void setTime_DayTimeValue()
 	{
 		WorldMock world = new WorldMock();

@@ -2928,4 +2928,13 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	public void tick()
+	{
+		fullTime ++;
+
+		for (Entity entity : getEntities())
+		{
+			((EntityMock)entity).tick();
+		}
+	}
 }

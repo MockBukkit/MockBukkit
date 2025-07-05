@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.scheduler;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -14,10 +13,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
@@ -169,14 +170,24 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return currentTick;
 	}
 
-	private void processEntities()
+	private void processWorlds()
 	{
 		for (World world : Bukkit.getWorlds())
 		{
-			for (Entity entity : world.getEntities())
+			((WorldMock) world).tick();
+		}
+	}
+
+	private void processEntities()
+	{
+		for (EntityMock entity : ((ServerMock) Bukkit.getServer()).getEntities())
+		{
+			if (!entity.isValid())
 			{
-				((EntityMock)entity).tick();
+				continue;
 			}
+
+			entity.tick();
 		}
 	}
 
@@ -224,6 +235,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		currentTick++;
 
+		processWorlds();
 		processEntities();
 		processTasks();
 	}
