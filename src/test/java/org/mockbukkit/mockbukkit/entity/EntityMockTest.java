@@ -377,7 +377,7 @@ class EntityMockTest
 	@Test
 	void equals_DifferentObject_Different()
 	{
-		assertNotEquals(entity, new Object());
+		assertNotEquals(new Object(), entity);
 	}
 
 	@Test

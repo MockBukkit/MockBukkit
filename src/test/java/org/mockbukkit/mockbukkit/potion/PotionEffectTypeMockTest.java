@@ -118,7 +118,7 @@ class PotionEffectTypeMockTest
 	void testEquals_DifferentType()
 	{
 		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		assertNotEquals(effect, new Object());
+		assertNotEquals(new Object(), effect);
 	}
 
 	@Test

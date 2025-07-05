@@ -238,7 +238,7 @@ class BookMetaMockTest
 	void test_equals_DifferentObject()
 	{
 		//noinspection AssertBetweenInconvertibleTypes
-		assertNotEquals(Material.DIAMOND, meta);
+		assertNotEquals(meta, Material.DIAMOND);
 
 		BookMetaMock meta2 = meta.clone();
 		meta2.setUnbreakable(!meta.isUnbreakable()); // This is not from BookMeta, but from ItemMeta

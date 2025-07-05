@@ -95,7 +95,7 @@ class SuspiciousStewMetaMockTest
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertEquals(meta, meta);
-		assertNotEquals(meta, new ItemMetaMock());
+		assertNotEquals(new ItemMetaMock(), meta);
 
 		SuspiciousStewMetaMock meta2 = new SuspiciousStewMetaMock();
 		assertEquals(meta, meta2);

@@ -53,7 +53,7 @@ class HopperMinecartMockTest
 	@Test
 	void testGetMinecartMaterial()
 	{
-		assertEquals(minecart.getMinecartMaterial(), Material.HOPPER_MINECART);
+		assertEquals(Material.HOPPER_MINECART, minecart.getMinecartMaterial());
 	}
 
 	@Test

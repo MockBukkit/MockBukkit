@@ -144,7 +144,7 @@ class PlayerTexturesMockTest
 		Assertions.assertEquals(playerTexturesMock, playerTexturesMock);
 
 		// Assert that other objects are not equal
-		Assertions.assertNotEquals(playerTexturesMock, new Object());
+		Assertions.assertNotEquals(new Object(), playerTexturesMock);
 
 		// Assert they are equal
 		PlayerTexturesMock otherPlayerTexturesMock = new PlayerTexturesMock(profile);

@@ -40,13 +40,13 @@ class SpawnerMinecartMockTest
 	@Test
 	void testGetMinecartMaterial()
 	{
-		assertEquals(minecart.getMinecartMaterial(), Material.MINECART);
+		assertEquals(Material.MINECART, minecart.getMinecartMaterial());
 	}
 
 	@Test
 	void testGetType()
 	{
-		assertEquals(minecart.getType(), EntityType.SPAWNER_MINECART);
+		assertEquals(EntityType.SPAWNER_MINECART, minecart.getType());
 	}
 
 	@Nested

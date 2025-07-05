@@ -57,14 +57,14 @@ class SheepMockTest
 	@Test
 	void testGetColor()
 	{
-		assertSame(sheep.getColor(), DyeColor.WHITE);
+		assertSame(DyeColor.WHITE, sheep.getColor());
 	}
 
 	@Test
 	void testSetColor()
 	{
 		sheep.setColor(DyeColor.BLUE);
-		assertSame(sheep.getColor(), DyeColor.BLUE);
+		assertSame(DyeColor.BLUE, sheep.getColor());
 	}
 
 	@Test

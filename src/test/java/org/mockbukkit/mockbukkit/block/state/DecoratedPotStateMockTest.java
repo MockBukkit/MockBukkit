@@ -116,13 +116,13 @@ class DecoratedPotStateMockTest
 	@Test
 	void notEqualNull()
 	{
-		assertNotEquals(pot, null);
+		assertNotEquals(null, pot);
 	}
 
 	@Test
 	void notEqualObject()
 	{
-		assertNotEquals(pot, new Object());
+		assertNotEquals(new Object(), pot);
 	}
 
 	@Test

@@ -134,7 +134,7 @@ class EnchantmentStorageMetaMockTest
 	{
 		EnchantmentStorageMetaMock meta = new EnchantmentStorageMetaMock();
 		assertEquals(meta, meta);
-		assertNotEquals(meta, new ItemMetaMock());
+		assertNotEquals(new ItemMetaMock(), meta);
 
 		EnchantmentStorageMetaMock meta2 = new EnchantmentStorageMetaMock();
 		assertEquals(meta, meta2);
