@@ -172,9 +172,9 @@ public enum BlockDataKey
 	private static final Set<String> KEYS = compileKeys();
 
 
-	private String key;
-	private Function<String, Object> valueConstructor;
-	private Predicate<BlockData> applicableTo;
+	private final String key;
+	private final Function<String, Object> valueConstructor;
+	private final Predicate<BlockData> applicableTo;
 
 	BlockDataKey(String key, Function<String, Object> valueConstructor, Predicate<BlockData> applicableTo)
 	{
