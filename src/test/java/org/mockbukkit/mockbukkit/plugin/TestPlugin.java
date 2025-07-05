@@ -36,7 +36,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean asyncEventExecuted = false;
 	public final @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
 	public final @Nullable Object extra;
-	public final boolean classLoadSucceed = false;
+	public boolean classLoadSucceed = false;
 
 	public TestPlugin()
 	{

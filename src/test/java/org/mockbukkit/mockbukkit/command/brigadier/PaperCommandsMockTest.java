@@ -83,14 +83,7 @@ class PaperCommandsMockTest
 
 	BasicCommand createBasicCommand()
 	{
-		return new BasicCommand()
-		{
-			@Override
-			public void execute(CommandSourceStack commandSourceStack, String[] args)
-			{
-				arguments = Arrays.asList(args);
-			}
-		};
+		return (commandSourceStack, args) -> arguments = Arrays.asList(args);
 	}
 
 }
