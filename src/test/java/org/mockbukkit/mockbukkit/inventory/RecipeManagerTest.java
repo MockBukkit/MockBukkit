@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -8,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +20,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -410,7 +411,6 @@ class RecipeManagerTest
 			}
 
 			@Test
-			@Disabled("This was not implemented yet")
 			void givenValidCraftMatrix()
 			{
 				ItemStack[] matrix = new ItemStack[]{
@@ -461,6 +461,173 @@ class RecipeManagerTest
 				};
 
 				assertFalse(RecipeManager.matches(newRecipe, invalidMatrix));
+			}
+
+			@Nested
+			class GivenValidSamples
+			{
+
+				@Test
+				void givenSticks()
+				{
+					ItemStack[] matrix = new ItemStack[]{
+							ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
+					};
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenSticksWithDifferentMaterials()
+				{
+					ItemStack[] matrix = createCrafting(
+							Material.BIRCH_PLANKS, 	null, 	null,
+							Material.OAK_PLANKS, 			null, 	null,
+							null, 							null, 	null
+					);
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBoat()
+				{
+					ShapedRecipe boatRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("oak_boat"));
+
+					ItemStack[] matrix = createCrafting(
+							null, 			null, 					null,
+							Material.OAK_PLANKS, 	null, 					Material.OAK_PLANKS,
+							Material.OAK_PLANKS, 	Material.OAK_PLANKS, 	Material.OAK_PLANKS
+					);
+					boolean result = RecipeManager.matches(boatRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenDoor()
+				{
+					ShapedRecipe doorRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("acacia_door"));
+
+					ItemStack[] matrix = createCrafting(
+							null,	Material.ACACIA_PLANKS, Material.ACACIA_PLANKS,
+							null, 			Material.ACACIA_PLANKS, Material.ACACIA_PLANKS,
+							null, 			Material.ACACIA_PLANKS, Material.ACACIA_PLANKS
+					);
+					boolean result = RecipeManager.matches(doorRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenFence()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("acacia_fence"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.ACACIA_PLANKS,	Material.STICK, Material.ACACIA_PLANKS,
+							Material.ACACIA_PLANKS, 		Material.STICK, Material.ACACIA_PLANKS,
+							null, 							null, 			null
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBow()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("bow"));
+
+					ItemStack[] matrix = createCrafting(
+							null,	Material.STICK, Material.STRING,
+							Material.STICK, null, 			Material.STRING,
+							null, 			Material.STICK, Material.STRING
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBowFlipped()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("bow"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.STRING,	Material.STICK, null,
+							Material.STRING, 		null, 			Material.STICK,
+							Material.STRING, 		Material.STICK, null
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenStairs()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stone_stairs"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.STONE,	null, 			null,
+							Material.STONE, 		Material.STONE, null,
+							Material.STONE, 		Material.STONE, Material.STONE
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenStairsFlipped()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stone_stairs"));
+
+					ItemStack[] matrix = createCrafting(
+							null,		null, 				Material.STONE,
+							null,				Material.STONE, 	Material.STONE,
+							Material.STONE, 	Material.STONE, 	Material.STONE
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				private static ItemStack[] createCrafting(Material... slots)
+				{
+					Preconditions.checkArgument(slots.length == 9, "The crafting table should have 9 items");
+
+					return Stream.of(slots)
+							.map(m -> (m == null ? ItemStack.empty() : ItemStack.of(m)))
+							.toArray(ItemStack[]::new);
+				}
+
+			}
+
+			@Nested
+			class GivenInvalidSamples
+			{
+
+				@Test
+				void givenInvalidStick()
+				{
+					ItemStack[] matrix = new ItemStack[]{
+							ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
+					};
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertFalse(result);
+				}
+
+				@Test
+				void givenValidRecipeButWithExtraMaterial()
+				{
+					ItemStack[] matrix = new ItemStack[]{
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
+							ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
+					};
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertFalse(result);
+				}
+
 			}
 
 		}
