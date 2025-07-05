@@ -981,7 +981,9 @@ public class WorldMock implements World
 
 		boolean success; // Here for future implementation (see below)
 
-		if (entity instanceof LivingEntity living && !(entity instanceof Player))
+		switch (entity)
+		{
+		case LivingEntity living when !(entity instanceof Player) ->
 		{
 			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
 			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
@@ -997,21 +999,10 @@ public class WorldMock implements World
 
 			success = new CreatureSpawnEvent(living, reason).callEvent();
 		}
-		else if (entity instanceof Item item)
-		{
-			success = new ItemSpawnEvent(item).callEvent();
-		}
-		else if (entity instanceof Player)
-		{
-			success = false; // Shouldn't ever be called here but just for parody.
-		}
-		else if (entity instanceof Projectile)
-		{
-			success = new ProjectileLaunchEvent(entity).callEvent();
-		}
-		else
-		{
-			success = new EntitySpawnEvent(entity).callEvent();
+		case Item item -> success = new ItemSpawnEvent(item).callEvent();
+		case Player player -> success = false; // Shouldn't ever be called here but just for parody.
+		case Projectile projectile -> success = new ProjectileLaunchEvent(entity).callEvent();
+		case null, default -> success = new EntitySpawnEvent(entity).callEvent();
 		}
 
 		if (!success || !entity.isValid())
