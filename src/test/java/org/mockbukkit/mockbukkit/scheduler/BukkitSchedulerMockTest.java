@@ -257,6 +257,7 @@ class BukkitSchedulerMockTest
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
+			//noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
@@ -271,6 +272,7 @@ class BukkitSchedulerMockTest
 		});
 		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
+			//noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
