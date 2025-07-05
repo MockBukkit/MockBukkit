@@ -394,7 +394,7 @@ public class RecipeManager
 			return itemInSlot.isEmpty();
 		}
 
-		// A choice can be null when there's no item in that position. An example of this is minecraft:acacia_boat
+		// A choice can be null when there's no item in that position. An example of this is minecraft:acacia_boat at position "b"
 		@Nullable RecipeChoice choice = ingredientMap.get(recipeChar);
 		if (choice == null)
 		{
