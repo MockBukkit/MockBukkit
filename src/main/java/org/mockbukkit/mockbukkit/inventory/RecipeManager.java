@@ -300,7 +300,7 @@ public class RecipeManager
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
 
 		String[] shape = shapedRecipe.getShape();
-		String[] flippedShape = mirrorRecipeHorizontally(shapedRecipe.getShape());
+		String[] mirroredShape = mirrorRecipeHorizontally(shapedRecipe.getShape());
 
 		Map<Character, RecipeChoice> ingredientMap = shapedRecipe.getChoiceMap();
 
@@ -319,7 +319,7 @@ public class RecipeManager
 				}
 
 				// Validate the recipe mirrored
-				if (matchesAtPosition(flippedShape, ingredientMap, craftingMatrix, startRow, startCol))
+				if (matchesAtPosition(mirroredShape, ingredientMap, craftingMatrix, startRow, startCol))
 				{
 					return true;
 				}
