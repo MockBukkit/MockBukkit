@@ -8,6 +8,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -30,7 +31,7 @@ class BundleMetaMockTest
 	@Test
 	void cloneConstructor_CopiesValues()
 	{
-		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
+		meta.setItems(List.of(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 
 		BundleMetaMock otherMeta = new BundleMetaMock(meta);
 
@@ -69,7 +70,7 @@ class BundleMetaMockTest
 	@Test
 	void setItems()
 	{
-		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
+		meta.setItems(List.of(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 		assertEquals(2, meta.getItems().size());
 		assertEquals(Material.STONE, meta.getItems().get(0).getType());
 		assertEquals(Material.DIRT, meta.getItems().get(1).getType());
@@ -89,7 +90,7 @@ class BundleMetaMockTest
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
 		{
-			meta.setItems(Arrays.asList(
+			meta.setItems(List.of(
 							new ItemStackMock(Material.STONE),
 							new ItemStackMock(Material.AIR),
 							new ItemStackMock(Material.DIRT)
@@ -144,7 +145,7 @@ class BundleMetaMockTest
 	@Test
 	void clone_CopiesValues()
 	{
-		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
+		meta.setItems(List.of(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 
 		BundleMetaMock otherMeta = meta.clone();
 

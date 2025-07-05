@@ -47,7 +47,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -192,7 +191,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setLore(Collections.singletonList("lore"));
-		meta2.setLore(Arrays.asList("lore", "more lore"));
+		meta2.setLore(List.of("lore", "more lore"));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
@@ -614,14 +613,14 @@ class ItemMetaMockTest
 	@Test
 	void hasLore_HasLore_True()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertTrue(meta.hasLore());
 	}
 
 	@Test
 	void getLore_LoreSet_ExactLines()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		List<String> lore = meta.getLore();
 		assertEquals(2, lore.size());
 		assertEquals("Hello", lore.get(0));
@@ -631,7 +630,7 @@ class ItemMetaMockTest
 	@Test
 	void getLore_LoreChangedAfterSet_LoreNotChanged()
 	{
-		List<String> originalLore = Arrays.asList("Hello", "world");
+		List<String> originalLore = List.of("Hello", "world");
 		meta.setLore(originalLore);
 		originalLore.set(0, "Changed");
 		List<String> lore = meta.getLore();
@@ -779,21 +778,21 @@ class ItemMetaMockTest
 	@Test
 	void testHasNoLore_HasNoLore_Asserts()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, hasAnyLore());
 	}
 
 	@Test
 	void testLore_CorrectLore_Returns()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, hasLore("Hello", "world"));
 	}
 
 	@Test
 	void testLore_InorrectLore_Asserts()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, doesNotHaveLore("Something", "else"));
 	}
 

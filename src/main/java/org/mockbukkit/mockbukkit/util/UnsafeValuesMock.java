@@ -64,7 +64,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +77,7 @@ public class UnsafeValuesMock implements UnsafeValues
 {
 
 	private static final List<String> COMPATIBLE_API_VERSIONS =
-			Arrays.asList(
+			List.of(
 					"1.13",
 					"1.14",
 					"1.15",

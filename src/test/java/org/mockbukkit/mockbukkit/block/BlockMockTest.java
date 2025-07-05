@@ -9,7 +9,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.TrapDoor;
-import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ import org.mockbukkit.mockbukkit.world.ChunkMock;
 import org.mockbukkit.mockbukkit.world.Coordinate;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
-import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -395,7 +394,7 @@ class BlockMockTest
 	void getDrops_SetDropsMatch()
 	{
 		Block block = new BlockMock(Material.STONE);
-		((BlockMock) block).setDrops(Arrays.asList(new ItemStack(Material.COBBLESTONE)));
+		((BlockMock) block).setDrops(List.of(new ItemStack(Material.COBBLESTONE)));
 		assertEquals(1, block.getDrops().size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), null).size());

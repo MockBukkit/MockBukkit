@@ -44,8 +44,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -232,7 +232,7 @@ class LivingEntityMockTest
 	@Test
 	void testMultiplePotionEffects()
 	{
-		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
+		Collection<PotionEffect> effects = List.of(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
 				new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(livingEntity.addPotionEffects(effects));

@@ -60,7 +60,7 @@ class KnowledgeBookMetaMockTest
 	void testSetRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
-		List<NamespacedKey> recipes = Arrays.asList(getRandomKey(), getRandomKey());
+		List<NamespacedKey> recipes = List.of(getRandomKey(), getRandomKey());
 
 		assertFalse(meta.hasRecipes());
 		meta.setRecipes(recipes);
@@ -71,7 +71,7 @@ class KnowledgeBookMetaMockTest
 	void testGetRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
-		List<NamespacedKey> recipes = Arrays.asList(getRandomKey(), getRandomKey());
+		List<NamespacedKey> recipes = List.of(getRandomKey(), getRandomKey());
 		meta.setRecipes(recipes);
 
 		assertEquals(recipes, meta.getRecipes());

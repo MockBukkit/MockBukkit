@@ -111,7 +111,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
@@ -1028,8 +1027,8 @@ class ServerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		Player player = server.addPlayer();
-		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
-		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
+		assertEquals(List.of("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
+		assertEquals(List.of("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
 	}
 
 	@Test
