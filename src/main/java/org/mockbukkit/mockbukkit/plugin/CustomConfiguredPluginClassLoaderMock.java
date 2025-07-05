@@ -57,7 +57,7 @@ public class CustomConfiguredPluginClassLoaderMock extends URLClassLoader implem
 	@Override
 	public void close()
 	{
-
+		// comment for sonar explaining this is just empty
 	}
 
 	public void createCustomClass()
