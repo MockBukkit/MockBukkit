@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class CommandMinecartMock extends MinecartMock implements CommandMinecart
@@ -37,14 +38,7 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	@Override
 	public void setCommand(@Nullable String command)
 	{
-		if (command == null)
-		{
-			this.command = "";
-		}
-		else
-		{
-			this.command = command;
-		}
+		this.command = Objects.requireNonNullElse(command, "");
 		this.successCount = 0;
 	}
 

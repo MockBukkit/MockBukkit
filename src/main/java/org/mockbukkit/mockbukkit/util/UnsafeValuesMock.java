@@ -66,6 +66,7 @@ import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 
@@ -422,11 +423,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		{
 			Material material = itemStack.getType();
 			String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
-			if (edgeCaseHandledTranslationKey != null)
-			{
-				return edgeCaseHandledTranslationKey;
-			}
-			return formatTranslatable("item", material, true);
+			return Objects.requireNonNullElseGet(edgeCaseHandledTranslationKey, () -> formatTranslatable("item", material, true));
 		}
 		else if (itemStack.getType().isBlock())
 		{
