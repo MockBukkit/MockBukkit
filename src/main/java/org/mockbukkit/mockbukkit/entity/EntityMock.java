@@ -368,7 +368,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-    public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		return teleport(location, cause, new TeleportFlag[0]);
 	}

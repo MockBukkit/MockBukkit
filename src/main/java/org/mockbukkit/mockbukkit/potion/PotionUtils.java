@@ -27,11 +27,12 @@ public class PotionUtils
 
 	static
 	{
-        upgradeable = loadData("upgradeable", "STRONG_");
-        extendable = loadData("extendable", "LONG_");
-    }
+		upgradeable = loadData("upgradeable", "STRONG_");
+		extendable = loadData("extendable", "LONG_");
+	}
 
-	private static @NotNull @Unmodifiable BiMap<PotionType, PotionType> loadData(String filename, String prefix) {
+	private static @NotNull @Unmodifiable BiMap<PotionType, PotionType> loadData(String filename, String prefix)
+	{
 		String path = "/potion/type_mapping/" + filename + ".json";
 		JsonArray values = ResourceLoader.loadResource(path).getAsJsonObject().getAsJsonArray("values");
 

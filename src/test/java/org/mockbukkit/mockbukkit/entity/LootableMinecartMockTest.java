@@ -25,7 +25,8 @@ class LootableMinecartMockTest
 	private LootableMinecart minecart;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		minecart = new StorageMinecartMock(server, UUID.randomUUID());
 	}
 

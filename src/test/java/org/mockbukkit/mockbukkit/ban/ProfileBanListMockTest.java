@@ -163,7 +163,7 @@ class ProfileBanListMockTest
 	void testPardonProfileNull()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-                banList.pardon((PlayerProfileMock) null));
+				banList.pardon((PlayerProfileMock) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 

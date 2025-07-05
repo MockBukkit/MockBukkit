@@ -860,7 +860,7 @@ class ServerMockTest
 	}
 
 	@Test
-    void testSendPluginMessage()
+	void testSendPluginMessage()
 	{
 		PluginMock plugin = MockBukkit.createMockPlugin();
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");

@@ -1025,7 +1025,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-    public @NotNull CustomItemTagContainer getCustomTagContainer()
+	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{
 		// This was replaced by PersistentDataContainer!
 		throw new UnimplementedOperationException();

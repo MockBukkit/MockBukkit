@@ -128,7 +128,8 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	}
 
 	@Override
-	public void close() {
+	public void close()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

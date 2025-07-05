@@ -1828,7 +1828,7 @@ public class ServerMock extends Server.Spigot implements Server
 				.getEntries()
 				.stream()
 				.map(banEntry ->
-                        ((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId())
+						((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId())
 				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
 	}
@@ -2364,7 +2364,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-    public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
+	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
 		return RegistryAccess.registryAccess().getRegistry(tClass);
 	}

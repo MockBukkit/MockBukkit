@@ -116,7 +116,7 @@ class BoatMockTest
 	void testSetOccupiedDecelerationToLow()
 	{
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-                boat.setOccupiedDeceleration(-1D));
+				boat.setOccupiedDeceleration(-1D));
 
 		assertEquals("Rate cannot be negative", illegalArgumentException.getMessage());
 	}

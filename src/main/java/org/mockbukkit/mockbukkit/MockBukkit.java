@@ -138,17 +138,18 @@ public class MockBukkit
 	 */
 	public static Plugin loadJar(@NotNull String path)
 	{
-        return loadJar(new File(path));
+		return loadJar(new File(path));
 
-    }
+	}
 
 	/**
 	 * Loads a plugin from a jar.
 	 *
 	 * @param jarFile Path to the jar.
 	 * @return An instance of the plugin's main class.
-     */
-	public static Plugin loadJar(@NotNull File jarFile) {
+	 */
+	public static Plugin loadJar(@NotNull File jarFile)
+	{
 		return mock.getPluginManager().loadPlugin(jarFile);
 	}
 

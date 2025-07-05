@@ -18,7 +18,8 @@ class EntityDataTest
 	private EntityData entityData;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		fakeData = "{'default':{'width':2,'height':3,'eyeHeight':4,'states':{'sleeping':{'height':0.2, 'eyeHeight':0.3}}},'baby':{'width':1, 'height':0.5, 'eyeHeight':0.1}}";
 		entityData = new EntityData(EntityType.BAT, fakeData);
 	}

@@ -47,7 +47,8 @@ class ShulkerBoxStateMockTest extends ContainerStateMockTest
 	}
 
 	@AfterEach
-	void tearDown() {
+	void tearDown()
+	{
 		MockBukkit.unmock();
 	}
 

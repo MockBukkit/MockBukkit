@@ -90,7 +90,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param server The server this is for.
 	 */
 	@ApiStatus.Internal
-    public PluginManagerMock(@NotNull ServerMock server)
+	public PluginManagerMock(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
 		this.server = server;

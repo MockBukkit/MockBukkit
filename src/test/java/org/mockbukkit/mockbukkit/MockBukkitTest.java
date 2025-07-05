@@ -300,7 +300,8 @@ class MockBukkitTest
 	}
 
 	@Test
-	void load_WithConfig_InputStream() {
+	void load_WithConfig_InputStream()
+	{
 		URL resource = this.getClass().getClassLoader().getResource("loadWithConfig/config_test.yml");
 		if (resource == null)
 		{
@@ -325,7 +326,8 @@ class MockBukkitTest
 	}
 
 	@Test
-	void load_WithConfig_InputStream_FileNotExists() {
+	void load_WithConfig_InputStream_FileNotExists()
+	{
 
 		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{

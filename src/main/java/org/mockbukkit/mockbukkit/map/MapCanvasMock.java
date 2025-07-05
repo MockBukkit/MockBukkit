@@ -103,7 +103,7 @@ public class MapCanvasMock implements MapCanvas
 	}
 
 	@Override
-    // Magic values
+	// Magic values
 	public void drawImage(int x, int y, @NotNull Image image)
 	{
 		byte[] bytes = MapPalette.imageToBytes(image);

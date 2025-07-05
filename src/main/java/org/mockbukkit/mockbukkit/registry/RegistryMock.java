@@ -65,8 +65,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	public RegistryMock(RegistryKey<T> key)
 	{
-        loadKeyedToRegistry(key);
-    }
+		loadKeyedToRegistry(key);
+	}
 
 	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
 	{

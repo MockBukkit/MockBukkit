@@ -20,7 +20,8 @@ class MonsterMockTest
 	ZombieMock monster;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		monster = new ZombieMock(server, UUID.randomUUID());
 	}
 

@@ -24,14 +24,16 @@ class ObjectiveMockTest
 	private ObjectiveMock objective;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		server = MockBukkit.mock();
 		scoreboard = new ScoreboardMock();
 		objective = scoreboard.registerNewObjective("Objective", "dummy");
 	}
 
 	@AfterEach
-	void tearDown() {
+	void tearDown()
+	{
 		MockBukkit.unmock();
 	}
 

@@ -28,15 +28,16 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 	{
 		List<PotionEffect> tempPotionEffects;
 		this.namespacedKey = namespacedKey;
-        JsonObject data = loadData(namespacedKey);
-        tempPotionEffects = getPotionEffectsFromData(data);
-        this.potionEffects = tempPotionEffects;
+		JsonObject data = loadData(namespacedKey);
+		tempPotionEffects = getPotionEffectsFromData(data);
+		this.potionEffects = tempPotionEffects;
 		this.upgradeable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "strong_" + namespacedKey.getKey())) != null;
 		this.extendable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "long_" + namespacedKey.getKey())) != null;
 		this.maxLevel = this.isUpgradeable() ? 2 : 1;
 	}
 
-	private JsonObject loadData(@NotNull NamespacedKey namespacedKey) {
+	private JsonObject loadData(@NotNull NamespacedKey namespacedKey)
+	{
 		String path = "/potion/" + namespacedKey.getKey() + ".json";
 		return ResourceLoader.loadResource(path).getAsJsonObject();
 	}

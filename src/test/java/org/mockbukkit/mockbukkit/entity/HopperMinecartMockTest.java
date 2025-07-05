@@ -33,7 +33,8 @@ class HopperMinecartMockTest
 	private HopperMinecart minecart;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		minecart = new HopperMinecartMock(server, UUID.randomUUID());
 	}
 

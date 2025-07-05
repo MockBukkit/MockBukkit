@@ -135,7 +135,8 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions) {
+	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

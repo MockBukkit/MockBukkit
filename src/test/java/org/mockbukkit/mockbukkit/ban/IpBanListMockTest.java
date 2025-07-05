@@ -89,7 +89,7 @@ class IpBanListMockTest
 	void testGetBanEntryStringNullThrows()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-                banList.getBanEntry((String) null));
+				banList.getBanEntry((String) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
@@ -98,7 +98,7 @@ class IpBanListMockTest
 	void testGetBanEntryInetAddressNullThrows()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-                banList.getBanEntry((InetAddress) null));
+				banList.getBanEntry((InetAddress) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
@@ -137,7 +137,7 @@ class IpBanListMockTest
 	void testPardonStringNull()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-                banList.pardon((String) null));
+				banList.pardon((String) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 
@@ -147,7 +147,7 @@ class IpBanListMockTest
 	void testPardonInetAddressNull()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-                banList.pardon((InetAddress) null));
+				banList.pardon((InetAddress) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}

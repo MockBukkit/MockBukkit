@@ -21,14 +21,14 @@ public class MusicInstrumentMock extends MusicInstrument
 	private final Sound sound;
 
 	/**
-	 * @param key         	The namespaced key representing this music instrument
-	 * @param duration		The music duration.
-	 * @param range			The music range.
-	 * @param description	The music description.
-	 * @param sound			The sound id.
+	 * @param key         The namespaced key representing this music instrument
+	 * @param duration    The music duration.
+	 * @param range       The music range.
+	 * @param description The music description.
+	 * @param sound       The sound id.
 	 */
 	MusicInstrumentMock(@NotNull NamespacedKey key, @NotNull String translationKey, float duration, float range,
-								@NotNull Component description, @NotNull Sound sound)
+						@NotNull Component description, @NotNull Sound sound)
 	{
 		this.key = Preconditions.checkNotNull(key, "key cannot be null");
 		this.translationKey = Preconditions.checkNotNull(translationKey, "translationKey cannot be null");

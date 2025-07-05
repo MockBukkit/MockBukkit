@@ -31,7 +31,8 @@ class LlamaInventoryMockTest
 	}
 
 	@AfterEach
-	void tearDown() {
+	void tearDown()
+	{
 		MockBukkit.unmock();
 	}
 
