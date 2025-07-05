@@ -1,0 +1,6 @@
+foo: goo
+boo: soo
+baa:
+  - foo
+  - goo
+  - bas

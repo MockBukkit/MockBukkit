@@ -1,3 +1,3 @@
 name: SecondTestPlugin
-main: be.seeseemelk.mockbukkit.SecondTestPlugin
+main: org.mockbukkit.mockbukkit.plugin.SecondTestPlugin
 version: 0.1.0

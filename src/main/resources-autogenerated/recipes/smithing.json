@@ -1,0 +1,1154 @@
+[
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:bolt_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:coast_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:dune_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:eye_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:flow_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:host_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_axe"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_axe_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_axe"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_boots"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_boots_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_boots"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_chestplate"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_chestplate_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_chestplate"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_helmet_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_helmet"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_hoe"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_hoe_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_hoe"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_leggings"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_leggings_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_leggings"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_pickaxe"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_pickaxe_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_pickaxe"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_shovel"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_shovel_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_shovel"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_sword"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_sword_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_sword"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:raiser_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:rib_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:sentry_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:shaper_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:silence_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:snout_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:spire_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:tide_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:vex_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:ward_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:wayfinder_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:amethyst_shard",
+				"minecraft:copper_ingot",
+				"minecraft:diamond",
+				"minecraft:emerald",
+				"minecraft:gold_ingot",
+				"minecraft:iron_ingot",
+				"minecraft:lapis_lazuli",
+				"minecraft:netherite_ingot",
+				"minecraft:quartz",
+				"minecraft:redstone",
+				"minecraft:resin_brick"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:chainmail_boots",
+				"minecraft:chainmail_chestplate",
+				"minecraft:chainmail_helmet",
+				"minecraft:chainmail_leggings",
+				"minecraft:diamond_boots",
+				"minecraft:diamond_chestplate",
+				"minecraft:diamond_helmet",
+				"minecraft:diamond_leggings",
+				"minecraft:golden_boots",
+				"minecraft:golden_chestplate",
+				"minecraft:golden_helmet",
+				"minecraft:golden_leggings",
+				"minecraft:iron_boots",
+				"minecraft:iron_chestplate",
+				"minecraft:iron_helmet",
+				"minecraft:iron_leggings",
+				"minecraft:leather_boots",
+				"minecraft:leather_chestplate",
+				"minecraft:leather_helmet",
+				"minecraft:leather_leggings",
+				"minecraft:netherite_boots",
+				"minecraft:netherite_chestplate",
+				"minecraft:netherite_helmet",
+				"minecraft:netherite_leggings",
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:wild_armor_trim_smithing_template_smithing_trim",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		}
+	}
+]

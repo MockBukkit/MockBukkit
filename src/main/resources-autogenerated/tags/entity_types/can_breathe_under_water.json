@@ -1,0 +1,32 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:armor_stand",
+		"minecraft:axolotl",
+		"minecraft:bogged",
+		"minecraft:cod",
+		"minecraft:drowned",
+		"minecraft:elder_guardian",
+		"minecraft:frog",
+		"minecraft:glow_squid",
+		"minecraft:guardian",
+		"minecraft:husk",
+		"minecraft:phantom",
+		"minecraft:pufferfish",
+		"minecraft:salmon",
+		"minecraft:skeleton",
+		"minecraft:skeleton_horse",
+		"minecraft:squid",
+		"minecraft:stray",
+		"minecraft:tadpole",
+		"minecraft:tropical_fish",
+		"minecraft:turtle",
+		"minecraft:wither",
+		"minecraft:wither_skeleton",
+		"minecraft:zoglin",
+		"minecraft:zombie",
+		"minecraft:zombie_horse",
+		"minecraft:zombie_villager",
+		"minecraft:zombified_piglin"
+	]
+}

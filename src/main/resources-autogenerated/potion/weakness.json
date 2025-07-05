@@ -1,0 +1,12 @@
+{
+	"effects": [
+		{
+			"ambient": false,
+			"amplifier": 0,
+			"duration": 1800,
+			"icon": true,
+			"particles": true,
+			"type": "minecraft:weakness"
+		}
+	]
+}

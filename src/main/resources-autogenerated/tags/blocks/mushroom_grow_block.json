@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:crimson_nylium",
+		"minecraft:mycelium",
+		"minecraft:podzol",
+		"minecraft:warped_nylium"
+	]
+}

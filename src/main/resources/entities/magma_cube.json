@@ -1,14 +1,17 @@
 {
-	"big":{
-		"height":2.04,
-		"width":2.04
+	"big": {
+		"eyeHeight": 1.3,
+		"height": 2.08,
+		"width": 2.08
 	},
-	"medium":{
-		"height":1.02,
-		"width":1.02
+	"medium": {
+		"eyeHeight": 0.65,
+		"height": 1.04,
+		"width": 1.04
 	},
-	"small":{
-		"height":0.51,
-		"width":0.51
+	"small": {
+		"eyeHeight": 0.325,
+		"height": 0.52,
+		"width": 0.52
 	}
 }

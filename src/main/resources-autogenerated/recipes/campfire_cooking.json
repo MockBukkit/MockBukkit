@@ -1,0 +1,155 @@
+[
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:potato"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:baked_potato_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:baked_potato"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:beef"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_beef_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_beef"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:chicken"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_chicken_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_chicken"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cod"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_cod_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_cod"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:mutton"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_mutton_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_mutton"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:porkchop"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_porkchop_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_porkchop"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:rabbit"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_rabbit_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_rabbit"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.35,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:salmon"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cooked_salmon_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cooked_salmon"
+		}
+	},
+	{
+		"category": "FOOD",
+		"cookingTime": 600,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:kelp"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:dried_kelp_from_campfire_cooking",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:dried_kelp"
+		}
+	}
+]

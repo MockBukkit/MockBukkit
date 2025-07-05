@@ -1,0 +1,6 @@
+name: MetaMiner
+main: org.mockbukkit.metaminer.MetaMiner
+version: ${version?:unknown}
+description: A plugin that generate files for MockBukkit
+author: Thorinwasher
+api-version: 1.20

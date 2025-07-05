@@ -1,6 +1,7 @@
 {
-	"default":{
-		"height":1.7,
-		"width":0.6
+	"default": {
+		"eyeHeight": 1.445,
+		"height": 1.7,
+		"width": 0.6
 	}
 }

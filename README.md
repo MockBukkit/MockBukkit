@@ -3,14 +3,11 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://mockbukkit.readthedocs.io/en/v1.20/?badge=v1.20">
-        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.20" />
+    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://search.maven.org/search?q=MockBukkit">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.20?color=1bcc94&logo=apache-maven" />
-    </a>
-    <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.20">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/MockBukkit-v1.20/javadoc.svg" />
+    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
@@ -20,6 +17,9 @@
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=MockBukkit_MockBukkit">
         <img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=bugs">
+    </a>
+    <a href="https://codecov.io/gh/MockBukkit/MockBukkit" >
+        <img alt="Coverage" src="https://codecov.io/gh/MockBukkit/MockBukkit/graph/badge.svg?token=uk4UiHzmkx"/>
     </a>
     <!-- Logo -->
     <hr />
@@ -48,14 +48,20 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
 
 MockBukkit can easily be included in your project using either Maven or gradle.
 
-> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
+> [!TIP]
+> Currently, the newest version available is
+>
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21)
+
+
+> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly
+> tagged
 
 <details>
 <summary><h3>Adding MockBukkit via Gradle</h3></summary>
 
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
-
 
 ```gradle
 repositories {
@@ -64,7 +70,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.9.0'
+    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:[version]'
 }
 ```
 
@@ -78,7 +84,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.MockBukkit:MockBukkit:v1.20-SNAPSHOT'
+    testImplementation 'com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT'
 }
 ```
 
@@ -90,7 +96,6 @@ This is because back-porting every single patch on every branch is incredibly ti
 development of MockBukkit.
 
 </details>
-
 
 <details>
 <summary><h3>Adding MockBukkit via Maven</h3></summary>
@@ -108,9 +113,9 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
 
 <dependencies>
   <dependency>
-    <groupId>com.github.seeseemelk</groupId>
-    <artifactId>MockBukkit-v1.20</artifactId>
-    <version>3.9.0</version>
+    <groupId>org.mockbukkit.mockbukkit</groupId>
+    <artifactId>mockbukkit-v1.21</artifactId>
+    <version>[version]</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -138,7 +143,7 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
   <dependency>
     <groupId>com.github.MockBukkit</groupId>
     <artifactId>MockBukkit</artifactId>
-    <version>v1.20-SNAPSHOT</version>
+    <version>v1.21-SNAPSHOT</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -186,7 +191,7 @@ This is useful when the plugin you are testing may be looking at other loaded pl
 The following piece of code creates a placeholder plugin that extends JavaPlugin.
 
 ```java
-MockPlugin plugin = MockBukkit.createMockPlugin()
+PluginMock plugin = MockBukkit.createMockPlugin();
 ```
 
 ### Mock Players
@@ -230,7 +235,7 @@ block will ever be created in-memory.
 Sometimes your code may use a method that is not yet implemented in MockBukkit.
 When this happens MockBukkit will, instead of returning placeholder values, throw
 an `UnimplementedOperationException`.
-These exception extends `AssumationException` and will cause the test to be skipped.
+These exception extends `AssumptionException` and will cause the test to be skipped.
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
@@ -261,15 +266,14 @@ If you want to see some projects that are using MockBukkit right now, feel free 
   (75+ Unit Tests)
 - [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
   (50+ Unit Tests)
-- [JacksonChen666/treecapitator](https://gitlab.com/JacksonChen666/treecapitator/-/tree/master/src/test/java/com/jacksonchen666/treecapitator)
-  (30+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
 already:
-https://mockbukkit.readthedocs.io/en/latest/index.html
+https://docs.mockbukkit.org
 
 ## :gift_heart: Sponsors
 
-Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
+Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of
+their [Open Source program](https://www.jetbrains.com/opensource/).  
 [![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)

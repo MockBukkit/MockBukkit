@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:chainmail_boots",
+		"minecraft:diamond_boots",
+		"minecraft:golden_boots",
+		"minecraft:iron_boots",
+		"minecraft:leather_boots",
+		"minecraft:netherite_boots"
+	]
+}

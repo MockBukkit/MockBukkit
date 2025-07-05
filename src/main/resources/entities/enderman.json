@@ -1,12 +1,14 @@
 {
 	"default": {
+		"eyeHeight": 2.55,
 		"height": 2.9,
-		"width": 0.6,
 		"states": {
 			"angry": {
+				"eyeHeight": 2.857758621,
 				"height": 3.25,
 				"width": 0.6
 			}
-		}
+		},
+		"width": 0.6
 	}
 }

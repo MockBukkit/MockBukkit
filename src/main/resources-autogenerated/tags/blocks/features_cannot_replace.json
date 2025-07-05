@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:bedrock",
+		"minecraft:chest",
+		"minecraft:end_portal_frame",
+		"minecraft:reinforced_deepslate",
+		"minecraft:spawner",
+		"minecraft:trial_spawner",
+		"minecraft:vault"
+	]
+}

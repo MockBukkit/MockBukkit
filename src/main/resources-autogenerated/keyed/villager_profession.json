@@ -1,0 +1,94 @@
+{
+	"values": [
+		{
+			"key": "minecraft:armorer",
+			"name": "ARMORER",
+			"ordinal": 0,
+			"translationKey": "entity.minecraft.villager.armorer"
+		},
+		{
+			"key": "minecraft:butcher",
+			"name": "BUTCHER",
+			"ordinal": 1,
+			"translationKey": "entity.minecraft.villager.butcher"
+		},
+		{
+			"key": "minecraft:cartographer",
+			"name": "CARTOGRAPHER",
+			"ordinal": 2,
+			"translationKey": "entity.minecraft.villager.cartographer"
+		},
+		{
+			"key": "minecraft:cleric",
+			"name": "CLERIC",
+			"ordinal": 3,
+			"translationKey": "entity.minecraft.villager.cleric"
+		},
+		{
+			"key": "minecraft:farmer",
+			"name": "FARMER",
+			"ordinal": 4,
+			"translationKey": "entity.minecraft.villager.farmer"
+		},
+		{
+			"key": "minecraft:fisherman",
+			"name": "FISHERMAN",
+			"ordinal": 5,
+			"translationKey": "entity.minecraft.villager.fisherman"
+		},
+		{
+			"key": "minecraft:fletcher",
+			"name": "FLETCHER",
+			"ordinal": 6,
+			"translationKey": "entity.minecraft.villager.fletcher"
+		},
+		{
+			"key": "minecraft:leatherworker",
+			"name": "LEATHERWORKER",
+			"ordinal": 7,
+			"translationKey": "entity.minecraft.villager.leatherworker"
+		},
+		{
+			"key": "minecraft:librarian",
+			"name": "LIBRARIAN",
+			"ordinal": 8,
+			"translationKey": "entity.minecraft.villager.librarian"
+		},
+		{
+			"key": "minecraft:mason",
+			"name": "MASON",
+			"ordinal": 9,
+			"translationKey": "entity.minecraft.villager.mason"
+		},
+		{
+			"key": "minecraft:nitwit",
+			"name": "NITWIT",
+			"ordinal": 10,
+			"translationKey": "entity.minecraft.villager.nitwit"
+		},
+		{
+			"key": "minecraft:none",
+			"name": "NONE",
+			"ordinal": 11,
+			"translationKey": "entity.minecraft.villager.none"
+		},
+		{
+			"key": "minecraft:shepherd",
+			"name": "SHEPHERD",
+			"ordinal": 12,
+			"translationKey": "entity.minecraft.villager.shepherd"
+		},
+		{
+			"key": "minecraft:toolsmith",
+			"name": "TOOLSMITH",
+			"ordinal": 13,
+			"translationKey": "entity.minecraft.villager.toolsmith"
+		},
+		{
+			"key": "minecraft:weaponsmith",
+			"name": "WEAPONSMITH",
+			"ordinal": 14,
+			"translationKey": "entity.minecraft.villager.weaponsmith"
+		}
+	]
+}
