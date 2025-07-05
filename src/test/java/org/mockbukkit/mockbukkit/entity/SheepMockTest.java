@@ -92,7 +92,7 @@ class SheepMockTest
 	void shear_DropsAtLeastOneItem()
 	{
 		sheep.shear();
-		assertTrue(!sheep.getWorld().getEntitiesByClass(Item.class).isEmpty());
+		assertFalse(sheep.getWorld().getEntitiesByClass(Item.class).isEmpty());
 	}
 
 	@Test
