@@ -852,6 +852,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateBlockDataFromString()
+	{
+		BlockData blockData = server.createBlockData("minecraft:stone");
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
 	void testWarningState()
 	{
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
