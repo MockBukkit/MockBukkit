@@ -392,11 +392,6 @@ class PluginManagerMockTest
 		assertThrows(PluginLoadException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
-	public static class MyPlugin extends JavaPlugin
-	{
-
-	}
-
 	@Test
 	void loadPluginViaPureLoadPlugin()
 	{
@@ -407,9 +402,9 @@ class PluginManagerMockTest
 		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
 
 		// FileNotFound flow
-		loadedPlugin = pluginManager.loadPlugin(MyPlugin.class); // Internal plugin, can't find plugin.yml file
+		loadedPlugin = pluginManager.loadPlugin(JavaPlugin.class); // Internal plugin, can't find plugin.yml file
 		assertInstanceOf(JavaPlugin.class, loadedPlugin);
-		assertEquals("MyPlugin", loadedPlugin.getName());
+		assertEquals("JavaPlugin", loadedPlugin.getName());
 		assertEquals("0.0.0", loadedPlugin.getDescription().getVersion());
 	}
 
