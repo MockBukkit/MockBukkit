@@ -588,6 +588,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0L, world.getFullTime(), "World time should be zero");
+		assertEquals(0L, world.getGameTime(), "Game time should be zero");
 		assertEquals(0L, world.getTime(), "Day time should be zero");
 	}
 
@@ -598,10 +599,12 @@ class WorldMockTest
 
 		server.getScheduler().performOneTick();
 		assertEquals(1L, world.getFullTime(), "World time should have increased");
+		assertEquals(1L, world.getGameTime(), "Game time should have increased");
 		assertEquals(1L, world.getTime(), "Day time should have increased");
 
 		server.getScheduler().performTicks(25000);
 		assertEquals(25001L, world.getFullTime(), "World time should have increased");
+		assertEquals(25001L, world.getGameTime(), "Game time should have increased");
 		assertEquals(1001L, world.getTime(), "Day time should have rotated");
 	}
 

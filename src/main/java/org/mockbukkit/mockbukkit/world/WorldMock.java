@@ -2931,6 +2931,7 @@ public class WorldMock implements World
 	public void tick()
 	{
 		fullTime++;
+		gameTime++;
 	}
 
 }
