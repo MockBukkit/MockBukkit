@@ -410,7 +410,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	/**
 	 * Load a plugin from a class. The description will be guessed as best as possible.
 	 *
-	 * @param class1      The plugin to load.
+	 * @param class1 The plugin to load.
 	 * @return The loaded plugin.
 	 */
 	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1)

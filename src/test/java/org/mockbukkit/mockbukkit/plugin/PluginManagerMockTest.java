@@ -392,7 +392,9 @@ class PluginManagerMockTest
 		assertThrows(PluginLoadException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
-	public static class MyPlugin extends JavaPlugin {
+	public static class MyPlugin extends JavaPlugin
+	{
+
 	}
 
 	@Test
