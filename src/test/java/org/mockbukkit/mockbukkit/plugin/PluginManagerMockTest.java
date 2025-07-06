@@ -393,16 +393,20 @@ class PluginManagerMockTest
 	}
 
 	@Test
-	void loadPluginViaPureLoadPlugin()
+	void loadPluginViaPureLoadPlugin_NormalFlow()
 	{
-		// Normal flow
 		JavaPlugin loadedPlugin = pluginManager.loadPlugin(TestPlugin.class);
 		assertInstanceOf(JavaPlugin.class, loadedPlugin);
 		assertEquals("MockBukkitTestPlugin", loadedPlugin.getName());
 		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
+	}
 
-		// FileNotFound flow
-		loadedPlugin = pluginManager.loadPlugin(JavaPlugin.class); // Internal plugin, can't find plugin.yml file
+	@Test
+	void loadPluginViaPureLoadPlugin_InvalidPluginYml()
+	{
+		// This works because JavaPlugin is a plugin where the `plugin.yml` file cannot be found.
+		//   So, it'll throw a `FileNotFound`
+		JavaPlugin loadedPlugin = pluginManager.loadPlugin(JavaPlugin.class);
 		assertInstanceOf(JavaPlugin.class, loadedPlugin);
 		assertEquals("JavaPlugin", loadedPlugin.getName());
 		assertEquals("0.0.0", loadedPlugin.getDescription().getVersion());
