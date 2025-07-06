@@ -300,6 +300,8 @@ public class RecipeManager
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
 
 		String[] shape = shapedRecipe.getShape();
+		String[] mirroredShape = mirrorRecipeHorizontally(shapedRecipe.getShape());
+
 		Map<Character, RecipeChoice> ingredientMap = shapedRecipe.getChoiceMap();
 
 		int recipeHeight = shape.length;
@@ -310,7 +312,14 @@ public class RecipeManager
 		{
 			for (int startCol = 0; startCol <= 3 - recipeWidth; startCol++)
 			{
+				// Validate the recipe
 				if (matchesAtPosition(shape, ingredientMap, craftingMatrix, startRow, startCol))
+				{
+					return true;
+				}
+
+				// Validate the recipe mirrored
+				if (matchesAtPosition(mirroredShape, ingredientMap, craftingMatrix, startRow, startCol))
 				{
 					return true;
 				}
@@ -318,6 +327,33 @@ public class RecipeManager
 		}
 
 		return false;
+	}
+
+	/**
+	 * Mirror the recipe in the horizontal axis.
+	 * <p>
+	 * Example: ["abc","def"] will become ["cba", "fed"].
+	 *
+	 * @param shape The recipe to be mirrored.
+	 *
+	 * @return The mirrored recipe.
+	 */
+	private static @NotNull String[] mirrorRecipeHorizontally(@NotNull String[] shape)
+	{
+		String[] flippedShape = shape.clone();
+		if (flippedShape.length > 0)
+		{
+			flippedShape[0] = new StringBuilder(flippedShape[0]).reverse().toString();
+		}
+		if (flippedShape.length > 1)
+		{
+			flippedShape[1] = new StringBuilder(flippedShape[1]).reverse().toString();
+		}
+		if (flippedShape.length > 2)
+		{
+			flippedShape[2] = new StringBuilder(flippedShape[2]).reverse().toString();
+		}
+		return flippedShape;
 	}
 
 	private static boolean matchesAtPosition(String[] shape, Map<Character, RecipeChoice> ingredientMap,
@@ -343,9 +379,10 @@ public class RecipeManager
 		boolean isInRecipe = (row >= startRow && row < startRow + shape.length) &&
 				(col >= startCol && col < startCol + shape[0].length());
 
+		ItemStack itemInSlot = craftingMatrix[index];
 		if (!isInRecipe)
 		{
-			return craftingMatrix[index].isEmpty();
+			return itemInSlot.isEmpty();
 		}
 
 		int recipeRow = row - startRow;
@@ -354,11 +391,19 @@ public class RecipeManager
 
 		if (recipeChar == ' ')
 		{
-			return craftingMatrix[index].isEmpty();
+			return itemInSlot.isEmpty();
 		}
 
-		RecipeChoice choice = ingredientMap.get(recipeChar);
-		return choice != null && choice.test(craftingMatrix[index]);
+		// A choice can be null when there's no item in that position. An example of this is minecraft:acacia_boat at position "b"
+		@Nullable RecipeChoice choice = ingredientMap.get(recipeChar);
+		if (choice == null)
+		{
+			return itemInSlot.isEmpty();
+		}
+		else
+		{
+			return choice.test(itemInSlot);
+		}
 	}
 
 	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
