@@ -125,9 +125,10 @@ class RecipeManagerTest
 		@Test
 		void testPreconditions()
 		{
+			ItemStack itemStack = ItemStack.of(Material.AIR);
 			assertThrows(
 					IllegalArgumentException.class,
-					() -> manager.getRecipesFor(null, ItemStack.of(Material.AIR))
+					() -> manager.getRecipesFor(null, itemStack)
 			);
 
 			assertThrows(
