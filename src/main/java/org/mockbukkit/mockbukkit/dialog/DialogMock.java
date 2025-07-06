@@ -28,7 +28,7 @@ public class DialogMock implements Dialog
 
 	private final NamespacedKey key;
 
-	public DialogMock(@NotNull NamespacedKey key)
+	private DialogMock(@NotNull NamespacedKey key)
 	{
 		this.key = Objects.requireNonNull(key, "The key cannot be null");
 	}
