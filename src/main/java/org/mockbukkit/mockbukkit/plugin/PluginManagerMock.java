@@ -415,8 +415,15 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 */
 	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1)
 	{
-		PluginDescriptionFile description = new PluginDescriptionFile(class1.getName(), "0.0.0", class1.getName());
-		return loadPlugin(class1, description, new Object[0]);
+		try
+		{
+			return loadPlugin(class1, new Object[0]);
+		}
+		catch (PluginLoadException ignored)
+		{
+			PluginDescriptionFile description = new PluginDescriptionFile(class1.getName(), "0.0.0", class1.getName());
+			return loadPlugin(class1, description, new Object[0]);
+		}
 	}
 
 	/**
