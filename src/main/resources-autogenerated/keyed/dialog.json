@@ -1,0 +1,13 @@
+{
+	"values": [
+		{
+			"key": "minecraft:custom_options"
+		},
+		{
+			"key": "minecraft:quick_actions"
+		},
+		{
+			"key": "minecraft:server_links"
+		}
+	]
+}
