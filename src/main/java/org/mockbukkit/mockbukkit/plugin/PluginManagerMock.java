@@ -421,7 +421,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		}
 		catch (PluginLoadException ignored)
 		{
-			PluginDescriptionFile description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getSimpleName());
+			PluginDescriptionFile description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
 			return loadPlugin(class1, description, new Object[0]);
 		}
 	}
