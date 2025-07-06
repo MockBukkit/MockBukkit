@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -118,13 +119,15 @@ public class RecipeManager
 	public List<Recipe> getRecipesFor(@NotNull RecipeType recipeType, @NotNull ItemStack itemStack)
 	{
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
+		Preconditions.checkArgument(itemStack != null, "Item stack cannot be null");
+
 		return getRecipes(recipeType).stream()
 				.filter(recipe -> itemStack.isSimilar(recipe.getResult()))
 				.toList();
 	}
 
 	@Nullable
-	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix)
+	public Recipe getCraftingRecipe(@NotNull ItemStack @NotNull [] craftingMatrix)
 	{
 		Preconditions.checkArgument(craftingMatrix != null, "craftingMatrix must not be null");
 		Preconditions.checkArgument(craftingMatrix.length == 9, "craftingMatrix must be an array of length 9");
@@ -301,6 +304,10 @@ public class RecipeManager
 
 		String[] shape = shapedRecipe.getShape();
 		String[] mirroredShape = mirrorRecipeHorizontally(shapedRecipe.getShape());
+		if (Arrays.equals(shape, mirroredShape))
+		{
+			mirroredShape = null;
+		}
 
 		Map<Character, RecipeChoice> ingredientMap = shapedRecipe.getChoiceMap();
 
@@ -319,7 +326,7 @@ public class RecipeManager
 				}
 
 				// Validate the recipe mirrored
-				if (matchesAtPosition(mirroredShape, ingredientMap, craftingMatrix, startRow, startCol))
+				if (mirroredShape != null && matchesAtPosition(mirroredShape, ingredientMap, craftingMatrix, startRow, startCol))
 				{
 					return true;
 				}
@@ -335,16 +342,12 @@ public class RecipeManager
 	 * Example: ["abc","def"] will become ["cba", "fed"].
 	 *
 	 * @param shape The recipe to be mirrored.
-	 *
 	 * @return The mirrored recipe.
 	 */
-	private static @NotNull String[] mirrorRecipeHorizontally(@NotNull String[] shape)
+	private static @NotNull String @NotNull [] mirrorRecipeHorizontally(@NotNull String @NotNull [] shape)
 	{
 		String[] flippedShape = shape.clone();
-		if (flippedShape.length > 0)
-		{
-			flippedShape[0] = new StringBuilder(flippedShape[0]).reverse().toString();
-		}
+		flippedShape[0] = new StringBuilder(flippedShape[0]).reverse().toString(); // Should always be at least 1 row
 		if (flippedShape.length > 1)
 		{
 			flippedShape[1] = new StringBuilder(flippedShape[1]).reverse().toString();
