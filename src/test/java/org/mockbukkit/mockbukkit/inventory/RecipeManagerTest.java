@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RecipeManagerTest
 {
 
-	private final static Material __ = null; // `_` is a keyword
+	private static final Material __ = null; // `_` is a keyword
 	private final RecipeManager manager = new RecipeManager();
 
 	private static ItemStack[] createCrafting(Material... slots)
