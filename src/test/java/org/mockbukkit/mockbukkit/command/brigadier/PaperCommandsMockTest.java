@@ -7,6 +7,7 @@ import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -86,9 +87,9 @@ class PaperCommandsMockTest
 		return new BasicCommand()
 		{
 			@Override
-			public void execute(CommandSourceStack commandSourceStack, String[] args)
+			public void execute(@NotNull CommandSourceStack commandSourceStack, String @NotNull [] args)
 			{
-				arguments = Arrays.asList(args);
+				arguments = Arrays.asList((Object[]) args);
 			}
 		};
 	}
