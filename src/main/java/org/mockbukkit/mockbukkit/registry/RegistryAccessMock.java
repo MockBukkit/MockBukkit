@@ -95,6 +95,7 @@ public class RegistryAccessMock implements RegistryAccess
 	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
 	{
 		return List.of(
+				RegistryKey.DIALOG,
 				RegistryKey.STRUCTURE,
 				RegistryKey.STRUCTURE_TYPE,
 				RegistryKey.TRIM_MATERIAL,
