@@ -19,6 +19,7 @@ import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
+import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
 import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
@@ -87,6 +88,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
+		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
 		factoryMap.put(RegistryKey.TRIM_MATERIAL, TrimMaterialMock::from);

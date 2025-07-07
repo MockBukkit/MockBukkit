@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -8,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +20,13 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,7 +34,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RecipeManagerTest
 {
 
+	private static final Material __ = null; // `_` is a keyword
 	private final RecipeManager manager = new RecipeManager();
+
+	private static ItemStack[] createCrafting(Material... slots)
+	{
+		Preconditions.checkArgument(slots.length == 9, "The crafting table should have 9 items");
+
+		return Stream.of(slots)
+				.map(m -> (m == null ? ItemStack.empty() : ItemStack.of(m)))
+				.toArray(ItemStack[]::new);
+	}
 
 	@Nested
 	class Reset
@@ -106,6 +119,53 @@ class RecipeManagerTest
 	}
 
 	@Nested
+	class GetRecipesFor
+	{
+
+		@Test
+		void testPreconditions()
+		{
+			ItemStack itemStack = ItemStack.of(Material.AIR);
+			assertThrows(
+					IllegalArgumentException.class,
+					() -> manager.getRecipesFor(null, itemStack)
+			);
+
+			assertThrows(
+					IllegalArgumentException.class,
+					() -> manager.getRecipesFor(RecipeType.CRAFTING, null)
+			);
+		}
+
+		@Test
+		void testShaped()
+		{
+			var recipes = manager.getRecipesFor(RecipeType.CRAFTING, ItemStack.of(Material.ACACIA_BOAT));
+
+			assertEquals(1, recipes.size());
+			assertInstanceOf(ShapedRecipe.class, recipes.getFirst());
+		}
+
+		@Test
+		void testComplex()
+		{
+			var recipes = manager.getRecipesFor(RecipeType.CRAFTING, ItemStack.of(Material.AIR));
+
+			assertTrue(recipes.size() > 10);  // It's 11 for now, but likely to change in the future
+			assertTrue(recipes.stream().anyMatch(r -> r instanceof ComplexRecipe));
+		}
+
+		@Test
+		void testShapeless()
+		{
+			var recipes = manager.getRecipesFor(RecipeType.CRAFTING, ItemStack.of(Material.LIGHT_GRAY_DYE));
+			assertTrue(recipes.size() > 2);
+			assertTrue(recipes.stream().anyMatch(r -> r instanceof ShapelessRecipe));
+		}
+
+	}
+
+	@Nested
 	class GetCraftingRecipe
 	{
 
@@ -144,12 +204,11 @@ class RecipeManagerTest
 			})
 			void givenLogs(Material log, Material planks)
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.of(log), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, log, __,
+						__, __, __,
+						__, __, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(planks, recipe.getResult().getType());
@@ -172,12 +231,11 @@ class RecipeManagerTest
 			})
 			void givenButton(Material planks, Material button)
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.of(planks), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, __, __,
+						__, planks, __,
+						__, __, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(button, recipe.getResult().getType());
@@ -186,12 +244,11 @@ class RecipeManagerTest
 			@Test
 			void givenSugar()
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.SUGAR_CANE)
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, __, __,
+						__, __, __,
+						__, __, Material.SUGAR_CANE
+				));
 
 				assertNotNull(recipe);
 				assertEquals(Material.SUGAR, recipe.getResult().getType());
@@ -200,12 +257,11 @@ class RecipeManagerTest
 			@Test
 			void givenSuspiciousStew()
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.of(Material.RED_MUSHROOM), ItemStack.empty(), ItemStack.of(Material.BOWL),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.of(Material.ALLIUM), ItemStack.empty(), ItemStack.of(Material.BROWN_MUSHROOM)
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						Material.RED_MUSHROOM, __, Material.BOWL,
+						__, __, __,
+						Material.ALLIUM, __, Material.BROWN_MUSHROOM
+				));
 
 				assertNotNull(recipe);
 				assertEquals(Material.SUSPICIOUS_STEW, recipe.getResult().getType());
@@ -214,12 +270,11 @@ class RecipeManagerTest
 			@Test
 			void givenTntMinecart()
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.of(Material.TNT), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.of(Material.MINECART), ItemStack.empty(), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, __, __,
+						Material.TNT, __, __,
+						Material.MINECART, __, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(Material.TNT_MINECART, recipe.getResult().getType());
@@ -228,12 +283,11 @@ class RecipeManagerTest
 			@Test
 			void givenTrappedChest()
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.of(Material.TRIPWIRE_HOOK), ItemStack.of(Material.CHEST),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, Material.TRIPWIRE_HOOK, Material.CHEST,
+						__, __, __,
+						__, __, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(Material.TRAPPED_CHEST, recipe.getResult().getType());
@@ -242,12 +296,11 @@ class RecipeManagerTest
 			@Test
 			void givenWaxedCopper()
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.of(Material.COPPER_BLOCK), ItemStack.empty(),
-								ItemStack.of(Material.HONEYCOMB), ItemStack.empty(), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, __, __,
+						__, Material.COPPER_BLOCK, __,
+						Material.HONEYCOMB, __, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(Material.WAXED_COPPER_BLOCK, recipe.getResult().getType());
@@ -274,12 +327,11 @@ class RecipeManagerTest
 			})
 			void givenCandle(Material color, Material expectedOutput)
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.empty(), ItemStack.of(color),
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.of(Material.CANDLE), ItemStack.empty(), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, __, color,
+						__, __, __,
+						Material.CANDLE, __, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(expectedOutput, recipe.getResult().getType());
@@ -288,7 +340,6 @@ class RecipeManagerTest
 		}
 
 		@Nested
-		@Disabled("Shaped recipes have not been implemented yet")
 		class ShapedRecipe
 		{
 
@@ -308,21 +359,14 @@ class RecipeManagerTest
 					"CRIMSON_PLANKS, CRIMSON_DOOR",
 					"WARPED_PLANKS, WARPED_DOOR",
 					"COPPER_INGOT, COPPER_DOOR",
-					"EXPOSED_COPPER, EXPOSED_COPPER_DOOR",
-					"WEATHERED_COPPER, WEATHERED_COPPER_DOOR",
-					"OXIDIZED_COPPER, OXIDIZED_COPPER_DOOR",
-					"WAXED_EXPOSED_COPPER, WAXED_EXPOSED_COPPER_DOOR",
-					"WAXED_WEATHERED_COPPER, WAXED_WEATHERED_COPPER_DOOR",
-					"WAXED_OXIDIZED_COPPER, WAXED_OXIDIZED_COPPER_DOOR"
 			})
 			void givenDoor(Material doorMaterial, Material expectedOutput)
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.of(doorMaterial), ItemStack.of(doorMaterial), ItemStack.empty(),
-								ItemStack.of(doorMaterial), ItemStack.of(doorMaterial), ItemStack.empty(),
-								ItemStack.of(doorMaterial), ItemStack.of(doorMaterial), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						doorMaterial, doorMaterial, __,
+						doorMaterial, doorMaterial, __,
+						doorMaterial, doorMaterial, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(expectedOutput, recipe.getResult().getType());
@@ -331,17 +375,28 @@ class RecipeManagerTest
 			@Test
 			void givenSticks()
 			{
-				Recipe recipe = manager.getCraftingRecipe(new ItemStack[]
-						{
-								ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS), ItemStack.empty(),
-								ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS), ItemStack.empty()
-						});
+				Recipe recipe = manager.getCraftingRecipe(createCrafting(
+						__, __, __,
+						__, Material.OAK_PLANKS, __,
+						__, Material.OAK_PLANKS, __
+				));
 
 				assertNotNull(recipe);
 				assertEquals(Material.STICK, recipe.getResult().getType());
 			}
 
+		}
+
+		@Test
+		void invalidRecipe()
+		{
+			Recipe recipe = manager.getCraftingRecipe(createCrafting(
+					__, __, __,
+					__, __, __,
+					__, __, __
+			));
+
+			assertNull(recipe);
 		}
 
 	}
@@ -373,11 +428,11 @@ class RecipeManagerTest
 			@Test
 			void givenValidCraftMatrix()
 			{
-				ItemStack[] matrix = new ItemStack[]{
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
-				};
+				ItemStack[] matrix = createCrafting(
+						__, __, __,
+						__, __, __,
+						__, __, Material.OAK_PLANKS
+				);
 				boolean result = RecipeManager.matches(recipe, matrix);
 				assertTrue(result);
 			}
@@ -385,11 +440,11 @@ class RecipeManagerTest
 			@Test
 			void givenInvalidCraftMatrix()
 			{
-				ItemStack[] matrix = new ItemStack[]{
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
-				};
+				ItemStack[] matrix = createCrafting(
+						__, __, __,
+						__, __, __,
+						__, __, Material.BIRCH_PLANKS
+				);
 				boolean result = RecipeManager.matches(recipe, matrix);
 				assertFalse(result);
 			}
@@ -417,14 +472,13 @@ class RecipeManagerTest
 			}
 
 			@Test
-			@Disabled("This was not implemented yet")
 			void givenValidCraftMatrix()
 			{
-				ItemStack[] matrix = new ItemStack[]{
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS)
-				};
+				ItemStack[] matrix = createCrafting(
+						__, __, __,
+						__, __, Material.OAK_PLANKS,
+						__, __, Material.OAK_PLANKS
+				);
 				boolean result = RecipeManager.matches(recipe, matrix);
 				assertTrue(result);
 			}
@@ -432,13 +486,200 @@ class RecipeManagerTest
 			@Test
 			void givenInvalidCraftMatrix()
 			{
-				ItemStack[] matrix = new ItemStack[]{
-						ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS),
-						ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.BIRCH_PLANKS)
-				};
+				ItemStack[] matrix = createCrafting(
+						__, __, __,
+						__, Material.BIRCH_PLANKS, __,
+						__, __, Material.BIRCH_PLANKS
+				);
 				boolean result = RecipeManager.matches(recipe, matrix);
 				assertFalse(result);
+			}
+
+			@Test
+			void givenRecipeWithSpaces()
+			{
+				// Create a new recipe with spaces to test space handling
+				NamespacedKey key = new NamespacedKey("test", "space_recipe");
+				ShapedRecipe newRecipe = new ShapedRecipe(key, new ItemStack(Material.STICK));
+
+				newRecipe.shape("X X", "   ", "X X");
+				newRecipe.setIngredient('X', Material.STONE);
+
+				// Test matrix that should match the pattern (spaces should be empty)
+				ItemStack[] validMatrix = createCrafting(
+						Material.STONE, __, Material.STONE,
+						__, __, __,
+						Material.STONE, __, Material.STONE
+				);
+
+				assertTrue(RecipeManager.matches(newRecipe, validMatrix));
+
+				// Test matrix with items in space positions (should fail)
+				ItemStack[] invalidMatrix = createCrafting(
+						Material.STONE, Material.DIRT, Material.STONE,
+						__, __, __,
+						Material.STONE, __, Material.STONE
+				);
+
+				assertFalse(RecipeManager.matches(newRecipe, invalidMatrix));
+			}
+
+			@Nested
+			class GivenValidSamples
+			{
+
+				@Test
+				void givenSticks()
+				{
+					ItemStack[] matrix = createCrafting(
+							__, __, __,
+							__, __, Material.OAK_PLANKS,
+							__, __, Material.OAK_PLANKS
+					);
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenSticksWithDifferentMaterials()
+				{
+					ItemStack[] matrix = createCrafting(
+							Material.BIRCH_PLANKS, __, __,
+							Material.OAK_PLANKS, __, __,
+							__, __, __
+					);
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBoat()
+				{
+					ShapedRecipe boatRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("oak_boat"));
+
+					ItemStack[] matrix = createCrafting(
+							__, __, __,
+							Material.OAK_PLANKS, __, Material.OAK_PLANKS,
+							Material.OAK_PLANKS, Material.OAK_PLANKS, Material.OAK_PLANKS
+					);
+					boolean result = RecipeManager.matches(boatRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenDoor()
+				{
+					ShapedRecipe doorRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("acacia_door"));
+
+					ItemStack[] matrix = createCrafting(
+							__, Material.ACACIA_PLANKS, Material.ACACIA_PLANKS,
+							__, Material.ACACIA_PLANKS, Material.ACACIA_PLANKS,
+							__, Material.ACACIA_PLANKS, Material.ACACIA_PLANKS
+					);
+					boolean result = RecipeManager.matches(doorRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenFence()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("acacia_fence"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.ACACIA_PLANKS, Material.STICK, Material.ACACIA_PLANKS,
+							Material.ACACIA_PLANKS, Material.STICK, Material.ACACIA_PLANKS,
+							__, __, __
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBow()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("bow"));
+
+					ItemStack[] matrix = createCrafting(
+							__, Material.STICK, Material.STRING,
+							Material.STICK, __, Material.STRING,
+							__, Material.STICK, Material.STRING
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenBowFlipped()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("bow"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.STRING, Material.STICK, __,
+							Material.STRING, __, Material.STICK,
+							Material.STRING, Material.STICK, __
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenStairs()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stone_stairs"));
+
+					ItemStack[] matrix = createCrafting(
+							Material.STONE, __, __,
+							Material.STONE, Material.STONE, __,
+							Material.STONE, Material.STONE, Material.STONE
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+				@Test
+				void givenStairsFlipped()
+				{
+					ShapedRecipe fenceRecipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stone_stairs"));
+
+					ItemStack[] matrix = createCrafting(
+							__, __, Material.STONE,
+							__, Material.STONE, Material.STONE,
+							Material.STONE, Material.STONE, Material.STONE
+					);
+					boolean result = RecipeManager.matches(fenceRecipe, matrix);
+					assertTrue(result);
+				}
+
+			}
+
+			@Nested
+			class GivenInvalidSamples
+			{
+
+				@Test
+				void givenInvalidStick()
+				{
+					ItemStack[] matrix = createCrafting(
+							__, __, __,
+							__, __, Material.STONE,
+							__, __, Material.BIRCH_PLANKS
+					);
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertFalse(result);
+				}
+
+				@Test
+				void givenValidRecipeButWithExtraMaterial()
+				{
+					ItemStack[] matrix = createCrafting(
+							__, __, Material.STONE,
+							__, __, Material.OAK_PLANKS,
+							__, __, Material.OAK_PLANKS
+					);
+					boolean result = RecipeManager.matches(recipe, matrix);
+					assertFalse(result);
+				}
+
 			}
 
 		}
