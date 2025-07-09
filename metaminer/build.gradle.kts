@@ -1,6 +1,6 @@
 plugins {
 	id("java")
-	id("io.papermc.paperweight.userdev") version "2.0.0-beta.17"
+	id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
 	id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
@@ -17,7 +17,7 @@ dependencies {
 	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	testImplementation("org.junit.jupiter:junit-jupiter:5.13.1")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.13.3")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
