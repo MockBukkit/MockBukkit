@@ -89,6 +89,7 @@ import org.mockbukkit.mockbukkit.entity.EnderPearlMock;
 import org.mockbukkit.mockbukkit.entity.EnderSignalMock;
 import org.mockbukkit.mockbukkit.entity.EndermanMock;
 import org.mockbukkit.mockbukkit.entity.EndermiteMock;
+import org.mockbukkit.mockbukkit.entity.EntityTypesMock;
 import org.mockbukkit.mockbukkit.entity.EvokerFangsMock;
 import org.mockbukkit.mockbukkit.entity.EvokerMock;
 import org.mockbukkit.mockbukkit.entity.ExperienceOrbMock;
@@ -198,6 +199,7 @@ import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.opentest4j.AssertionFailedError;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -2540,4 +2542,10 @@ class WorldMockTest
 
 	}
 
+	@Nested
+	class Amalgamation
+	{
+		private final WorldMock world = new WorldMock(Material.DIRT, 3);
+
+	}
 }
