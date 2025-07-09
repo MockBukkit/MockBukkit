@@ -42,6 +42,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
@@ -487,4 +488,9 @@ class LivingEntityMockTest
 		assertNull(this.livingEntity.getAttribute(Attribute.ARMOR));
 	}
 
+	@Test
+	void attackIsntImplementedYet() {
+		assertThrows(NullPointerException.class, () -> this.livingEntity.attack(null));
+		assertThrows(UnimplementedOperationException.class, () -> this.livingEntity.attack(this.livingEntity));
+	}
 }
