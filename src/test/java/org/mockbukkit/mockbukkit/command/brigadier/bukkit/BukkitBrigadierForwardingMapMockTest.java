@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -86,6 +87,20 @@ class BukkitBrigadierForwardingMapMockTest
 	void removeWithNonString()
 	{
 		assertNull(map.remove(1));
+	}
+
+	@Test
+	void getWithNonString()
+	{
+		assertNull(map.get(1));
+	}
+
+	@Test
+	void testClear()
+	{
+		assertNotEquals(0, map.size());
+		map.clear();
+		assertEquals(0, map.size());
 	}
 
 	@Test
