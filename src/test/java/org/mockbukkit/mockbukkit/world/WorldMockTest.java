@@ -516,6 +516,7 @@ class WorldMockTest
 	void spawnZombieTest()
 	{
 		WorldMock world = new WorldMock();
+		assertTrue(world.getEntities().isEmpty());
 		Location location = new Location(world, 100, 20, 50);
 		Entity zombie = world.spawnEntity(location, EntityType.ZOMBIE);
 		assertEquals(100, zombie.getLocation().getBlockX());

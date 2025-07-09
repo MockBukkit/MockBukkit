@@ -980,7 +980,7 @@ public class WorldMock implements World
 
 	private void callSpawnEvent(@NotNull EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
 	{
-		Preconditions.checkArgument(entity instanceof Player, "Cannot spawn a player. Use `server.addPlayer` instead.");
+		Preconditions.checkArgument(!(entity instanceof Player), "Cannot spawn a player. Use `server.addPlayer` instead.");
 
 		boolean success; // Here for a future implementation (see below)
 
