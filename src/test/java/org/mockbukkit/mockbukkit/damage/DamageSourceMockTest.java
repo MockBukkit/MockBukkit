@@ -244,6 +244,7 @@ class DamageSourceMockTest
 	void equals_and_hashCode_WhenIdentical()
 	{
 		DamageSourceMock copy = new DamageSourceMock(damageType, causingEntity, directEntity, damageLocation);
+		assertNotSame(damageSourceMock, copy);
 		assertEquals(damageSourceMock, copy);
 		assertEquals(damageSourceMock.hashCode(), copy.hashCode());
 		assertEquals(copy, damageSourceMock);
@@ -287,11 +288,6 @@ class DamageSourceMockTest
 		assertNotEquals(damageSourceMock.hashCode(), copy.hashCode());
 		assertNotEquals(copy, damageSourceMock);
 		assertNotEquals(copy.hashCode(), damageSourceMock.hashCode());
-	}
-
-	@Test
-	void testEquals() {
-
 	}
 
 	@Test

@@ -1559,4 +1559,12 @@ class EntityMockTest
 		assertNull(entity.nextMessage());
 	}
 
+	@Test
+	void testEquals()
+	{
+		assertNotEquals(entity, new Object());
+		assertEquals(entity, entity);
+		assertNotEquals(entity, new SimpleEntityMock(server));
+	}
+
 }
