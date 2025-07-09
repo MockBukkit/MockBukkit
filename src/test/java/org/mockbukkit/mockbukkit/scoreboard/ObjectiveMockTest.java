@@ -160,4 +160,5 @@ class ObjectiveMockTest
 		assertFalse(objective.isRegistered());
 		assertThrows(IllegalStateException.class, () -> objective.unregister());
 	}
+
 }
