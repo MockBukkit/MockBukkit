@@ -96,10 +96,12 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.util.SpawnedParticle;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -167,6 +169,7 @@ public class WorldMock implements World
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
+	private final List<SpawnedParticle> spawnedParticles = new ArrayList<>();
 
 	/**
 	 * Creates a new mock world.
@@ -1887,103 +1890,105 @@ public class WorldMock implements World
 		return this.worldBorder;
 	}
 
+	// Add helper methods:
+	public List<SpawnedParticle> getSpawnedParticles()
+	{
+		return Collections.unmodifiableList(spawnedParticles);
+	}
+
+	public void clearSpawnedParticles()
+	{
+		spawnedParticles.clear();
+	}
+
+// Implementation of all spawnParticle methods:
+
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count);
 	}
 
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, null, null, x, y, z, count, 0, 0, 0, 1, null, true);
 	}
 
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, null, null, x, y, z, count, 0, 0, 0, 1, data, true);
 	}
 
 	@Override
-	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-							  double offsetZ)
+	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
 	}
 
 	@Override
-	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ)
+	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, 1, null, true);
 	}
 
 	@Override
-	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, T data)
+	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
-	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, T data)
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, 1, data, true);
 	}
 
 	@Override
-	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-							  double offsetZ, double extra)
+	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
 	}
 
 	@Override
-	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ, double extra)
+	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, extra, null, true);
 	}
 
 	@Override
-	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, double extra, T data)
+	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra, data);
 	}
 
 	@Override
-	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, double extra, T data)
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, true);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		spawnedParticles.add(new SpawnedParticle(
+				particle,
+				receivers != null ? new ArrayList<>(receivers) : null,
+				source,
+				x, y, z,
+				count,
+				offsetX, offsetY, offsetZ,
+				extra,
+				data,
+				force
+		));
 	}
 
 	@Override
