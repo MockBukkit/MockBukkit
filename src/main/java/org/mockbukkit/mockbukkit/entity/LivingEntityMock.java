@@ -85,15 +85,19 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * NoDamage ticks
 	 */
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int noDamageTicks = 0;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int maximumNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
-	@Getter @Setter private boolean gliding = false;
+	@Getter
+	@Setter
+	private boolean gliding = false;
 	private boolean jumping = false;
 	private boolean riptiding = false;
 
@@ -109,17 +113,20 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * Set whether this entity is slumbering.
 	 */
-	@Getter @Setter
+	@Getter
+	@Setter
 	private boolean sleeping;
 	/**
 	 * Set whether this entity is climbing.
 	 */
-	@Getter @Setter
+	@Getter
+	@Setter
 	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private @Nullable Player killer;
 
 	private final Map<PotionEffectType, ActivePotionEffect> activeEffects = new HashMap<>();

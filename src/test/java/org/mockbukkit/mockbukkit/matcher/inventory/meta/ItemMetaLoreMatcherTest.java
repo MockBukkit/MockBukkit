@@ -98,39 +98,49 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 	}
 
 	@Nested
-	class DescriptionTests {
+	class DescriptionTests
+	{
+
 		// Test implementation of Description to capture what gets written
-		private static class TestDescription implements Description {
+		private static class TestDescription implements Description
+		{
+
 			private final StringBuilder text = new StringBuilder();
 
 			@Override
-			public Description appendText(String text) {
+			public Description appendText(String text)
+			{
 				this.text.append(text);
 				return this;
 			}
 
 			@Override
-			public Description appendDescriptionOf(org.hamcrest.SelfDescribing value) {
+			public Description appendDescriptionOf(org.hamcrest.SelfDescribing value)
+			{
 				return this;
 			}
 
 			@Override
-			public Description appendValue(Object value) {
+			public Description appendValue(Object value)
+			{
 				text.append(value);
 				return this;
 			}
 
 			@SafeVarargs
 			@Override
-			public final <T> Description appendValueList(String start, String separator, String end, T... values) {
+			public final <T> Description appendValueList(String start, String separator, String end, T... values)
+			{
 				return appendValueList(start, separator, end, Arrays.stream(values).toList());
 			}
 
 			@Override
-			public <T> Description appendValueList(String start, String separator, String end, Iterable<T> values) {
+			public <T> Description appendValueList(String start, String separator, String end, Iterable<T> values)
+			{
 				text.append(start);
 				boolean first = true;
-				for (T value : values) {
+				for (T value : values)
+				{
 					if (!first) text.append(separator);
 					text.append(value);
 					first = false;
@@ -140,17 +150,21 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 			}
 
 			@Override
-			public Description appendList(String start, String separator, String end, Iterable<? extends org.hamcrest.SelfDescribing> values) {
+			public Description appendList(String start, String separator, String end, Iterable<? extends org.hamcrest.SelfDescribing> values)
+			{
 				return this;
 			}
 
-			String getText() {
+			String getText()
+			{
 				return text.toString();
 			}
+
 		}
 
 		@Test
-		void describeTo_shouldAppendExpectedLoreDescription() {
+		void describeTo_shouldAppendExpectedLoreDescription()
+		{
 			List<Component> targetLore = List.of(Component.text("First line"), Component.text("Second line"));
 			ItemMetaLoreMatcher matcher = new ItemMetaLoreMatcher(targetLore);
 			TestDescription description = new TestDescription();
@@ -164,7 +178,8 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 		}
 
 		@Test
-		void describeMismatchSafely_shouldAppendActualLoreDescription() {
+		void describeMismatchSafely_shouldAppendActualLoreDescription()
+		{
 			List<Component> targetLore = List.of(Component.text("Expected"));
 			ItemMetaLoreMatcher matcher = new ItemMetaLoreMatcher(targetLore);
 			TestDescription description = new TestDescription();
@@ -180,36 +195,43 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 		}
 
 		@Test
-		void hasLore_Component_matches() {
+		void hasLore_Component_matches()
+		{
 			itemMeta.setLore(List.of("Hello", "world!"));
 			assertTrue(hasLore(Component.text("Hello"), Component.text("world!")).matches(itemMeta));
 		}
 
 		@Test
-		void hasLore_Component_wrongLore() {
+		void hasLore_Component_wrongLore()
+		{
 			itemMeta.setLore(List.of("Hello", "different!"));
 			assertFalse(hasLore(Component.text("Hello"), Component.text("world!")).matches(itemMeta));
 		}
 
 		@Test
-		void hasLore_List_matches() {
+		void hasLore_List_matches()
+		{
 			List<Component> lore = List.of(Component.text("Hello"), Component.text("world!"));
 			itemMeta.setLore(List.of("Hello", "world!"));
 			assertTrue(hasLore(lore).matches(itemMeta));
 		}
 
 		@Test
-		void hasLore_List_wrongLore() {
+		void hasLore_List_wrongLore()
+		{
 			List<Component> lore = List.of(Component.text("Hello"), Component.text("world!"));
 			itemMeta.setLore(List.of("Hello", "different!"));
 			assertFalse(hasLore(lore).matches(itemMeta));
 		}
 
 		@Test
-		void doesNotHaveLore_List_matches() {
+		void doesNotHaveLore_List_matches()
+		{
 			List<Component> lore = List.of(Component.text("Hello"), Component.text("world!"));
 			itemMeta.setLore(List.of("Different", "content"));
 			assertTrue(doesNotHaveLore(lore).matches(itemMeta));
 		}
+
 	}
+
 }

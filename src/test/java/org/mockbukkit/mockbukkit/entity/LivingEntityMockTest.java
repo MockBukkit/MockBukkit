@@ -540,10 +540,12 @@ class LivingEntityMockTest
 	}
 
 	@Test
-	void attackIsntImplementedYet() {
+	void attackIsntImplementedYet()
+	{
 		assertThrows(NullPointerException.class, () -> this.livingEntity.attack(null));
 		assertThrows(UnimplementedOperationException.class, () -> this.livingEntity.attack(this.livingEntity));
 	}
+
 	@Test
 	void testAttack_AsPlayer()
 	{
@@ -602,4 +604,5 @@ class LivingEntityMockTest
 		livingArmorStand.setAI(false);
 		assertFalse(livingArmorStand.hasAI());
 	}
+
 }

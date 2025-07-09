@@ -59,4 +59,5 @@ public final class ActivePotionEffect
 
 		return Math.max(0, effect.getDuration() - Bukkit.getCurrentTick() + startTick);
 	}
+
 }
