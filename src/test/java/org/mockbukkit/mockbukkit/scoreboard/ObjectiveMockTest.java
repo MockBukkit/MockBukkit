@@ -134,13 +134,15 @@ class ObjectiveMockTest
 	@Test
 	void testLongDisplayName()
 	{
-		assertThrows(IllegalArgumentException.class, () -> objective.setDisplayName("A".repeat(200)));
+		String longName = "A".repeat(200);
+		assertThrows(IllegalArgumentException.class, () -> objective.setDisplayName(longName));
 	}
 
 	@Test
 	void testLongScore()
 	{
-		assertThrows(IllegalArgumentException.class, () -> objective.getScore("A".repeat(200)));
+		String longName = "A".repeat(200);
+		assertThrows(IllegalArgumentException.class, () -> objective.getScore(longName));
 	}
 
 	@Test
