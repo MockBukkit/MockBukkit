@@ -6,6 +6,7 @@ import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
+import org.bukkit.Color;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.GameRule;
@@ -305,7 +306,7 @@ class WorldMockTest
 		List<Entity> entities = world.getEntities();
 		assertNotNull(entities);
 		assertEquals(1, entities.size());
-		assertSame(player, entities.get(0));
+		assertSame(player, entities.getFirst());
 	}
 
 	@Test
@@ -1090,7 +1091,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock();
 		Entity zombie = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
 		assertEquals(1, world.getEntities().size());
-		assertEquals(zombie, world.getEntities().get(0));
+		assertEquals(zombie, world.getEntities().getFirst());
 	}
 
 	@Test
@@ -1748,7 +1749,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setMetadata("test", new FixedMetadataValue(MockBukkit.createMockPlugin(), "test"));
 		assertEquals(1, world.getMetadata("test").size());
-		assertEquals("test", world.getMetadata("test").get(0).value());
+		assertEquals("test", world.getMetadata("test").getFirst().value());
 	}
 
 	@Test
@@ -2602,7 +2603,7 @@ class WorldMockTest
 			world.spawnParticle(Particle.FLAME, location, 5);
 
 			assertEquals(1, world.getSpawnedParticles().size());
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(Particle.FLAME, particle.particle());
 			assertEquals(10, particle.x());
@@ -2620,7 +2621,7 @@ class WorldMockTest
 		{
 			world.spawnParticle(Particle.SMOKE, 15, 25, 35, 3);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(Particle.SMOKE, particle.particle());
 			assertEquals(15, particle.x());
@@ -2635,7 +2636,7 @@ class WorldMockTest
 			String testData = "test_data";
 			world.spawnParticle(Particle.BLOCK, location, 2, testData);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(testData, particle.data());
 			assertEquals(2, particle.count());
@@ -2646,7 +2647,7 @@ class WorldMockTest
 		{
 			world.spawnParticle(Particle.ENCHANT, location, 4, 1.5, 2.5, 3.5);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(1.5, particle.offsetX());
 			assertEquals(2.5, particle.offsetY());
@@ -2656,14 +2657,15 @@ class WorldMockTest
 		@Test
 		void spawnParticle_withOffsetsAndData_storesAll()
 		{
-			Integer testData = 42;
-			world.spawnParticle(Particle.PORTAL, 5, 10, 15, 7, 0.5, 1.0, 1.5, testData);
+			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
+			world.spawnParticle(Particle.DUST, 5, 10, 15, 7, 0.5, 1.0, 1.5, testData);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(0.5, particle.offsetX());
 			assertEquals(1.0, particle.offsetY());
 			assertEquals(1.5, particle.offsetZ());
+			assertInstanceOf(Particle.DustOptions.class, testData);
 			assertEquals(testData, particle.data());
 		}
 
@@ -2672,9 +2674,34 @@ class WorldMockTest
 		{
 			world.spawnParticle(Particle.DUST, location, 6, 0.1, 0.2, 0.3, 2.5);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(2.5, particle.extra());
+		}
+
+		@Test
+		void spawnParticle_withExtra_storesExtraObject()
+		{
+			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
+			world.spawnParticle(Particle.DUST, location, 6, 0.1, 0.2, 0.3, testData);
+
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
+
+			assertInstanceOf(Particle.DustOptions.class, testData);
+			assertEquals(testData, particle.data());
+		}
+
+		@Test
+		void spawnParticle_withExtra_storesExtraAndData()
+		{
+			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
+			world.spawnParticle(Particle.DUST, location, 6, 0.1, 0.2, 0.3, 1.0, testData);
+
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
+
+			assertEquals(1.0, particle.extra());
+			assertInstanceOf(Particle.DustOptions.class, testData);
+			assertEquals(testData, particle.data());
 		}
 
 		@Test
@@ -2683,7 +2710,7 @@ class WorldMockTest
 			Boolean testData = true;
 			world.spawnParticle(Particle.DUST, 1, 2, 3, 8, 0.0, 0.0, 0.0, 1.2, testData);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(1.2, particle.extra());
 			assertEquals(testData, particle.data());
@@ -2700,7 +2727,7 @@ class WorldMockTest
 
 			world.spawnParticle(Particle.EXPLOSION, receivers, source, 100, 200, 300, 10, 0.5, 1.0, 1.5, 3.0, data, false);
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
 			assertEquals(Particle.EXPLOSION, particle.particle());
 			assertEquals(List.of(player1, player2), particle.receivers());
@@ -2725,7 +2752,7 @@ class WorldMockTest
 			world.spawnParticle(Particle.SPLASH, location, 3);
 
 			assertEquals(3, world.getSpawnedParticles().size());
-			assertEquals(Particle.FLAME, world.getSpawnedParticles().get(0).particle());
+			assertEquals(Particle.FLAME, world.getSpawnedParticles().getFirst().particle());
 			assertEquals(Particle.SMOKE, world.getSpawnedParticles().get(1).particle());
 			assertEquals(Particle.SPLASH, world.getSpawnedParticles().get(2).particle());
 		}
@@ -2763,7 +2790,7 @@ class WorldMockTest
 
 			originalReceivers.clear(); // Modify original list
 
-			SpawnedParticle particle = world.getSpawnedParticles().get(0);
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 			assertEquals(List.of(player), particle.receivers());
 		}
 
