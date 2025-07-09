@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public record SpawnedParticle(
+		long spawnedAtTick,
 		@NotNull Particle particle,
 		@Nullable List<Player> receivers,
 		@Nullable Player source,

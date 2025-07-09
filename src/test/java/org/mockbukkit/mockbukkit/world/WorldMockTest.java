@@ -2794,6 +2794,20 @@ class WorldMockTest
 			assertEquals(List.of(player), particle.receivers());
 		}
 
+		@Test
+		void spawnParticle_testingTimings()
+		{
+			world.spawnParticle(Particle.FLAME, location, 1);
+
+			assertEquals(1, world.getSpawnedParticles().size());
+			assertEquals(0, world.getSpawnedParticles().getFirst().spawnedAtTick());
+
+			server.getScheduler().performOneTick();
+
+			world.spawnParticle(Particle.FLAME, location, 1);
+			assertEquals(2, world.getSpawnedParticles().size());
+			assertEquals(1, world.getSpawnedParticles().get(1).spawnedAtTick());
+		}
 	}
 
 }
