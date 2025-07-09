@@ -124,6 +124,13 @@ class ScoreboardMockTest
 	}
 
 	@Test
+	void registerNewObjective_TooLongName_ThrowsException()
+	{
+		String longName = "A".repeat(Short.MAX_VALUE+1);
+		assertThrows(IllegalArgumentException.class, () -> scoreboard.registerNewObjective(longName, "dummy"));
+	}
+
+	@Test
 	void registerNewTeam_CheckForDuplicates()
 	{
 		assertDoesNotThrow(() -> scoreboard.registerNewTeam("blue"));
@@ -201,5 +208,4 @@ class ScoreboardMockTest
 		assertSame(team, this.scoreboard.getEntryTeam(entity.getScoreboardEntry()));
 		assertSame(team, this.scoreboard.getEntityTeam(entity));
 	}
-
 }
