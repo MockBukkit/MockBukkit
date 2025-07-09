@@ -348,6 +348,7 @@ DISPENSER, org.bukkit.block.Dispenser
 DRAGON_EGG, org.bukkit.block.BlockState
 DRAGON_HEAD, org.bukkit.block.Skull
 DRAGON_WALL_HEAD, org.bukkit.block.Skull
+DRIED_GHAST, org.bukkit.block.BlockState
 DRIED_KELP_BLOCK, org.bukkit.block.BlockState
 DRIPSTONE_BLOCK, org.bukkit.block.BlockState
 DROPPER, org.bukkit.block.Dropper
