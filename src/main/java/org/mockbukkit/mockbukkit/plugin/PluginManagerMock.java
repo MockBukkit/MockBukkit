@@ -408,6 +408,25 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	}
 
 	/**
+	 * Load a plugin from a class. The description will be guessed as best as possible.
+	 *
+	 * @param class1 The plugin to load.
+	 * @return The loaded plugin.
+	 */
+	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1)
+	{
+		try
+		{
+			return loadPlugin(class1, new Object[0]);
+		}
+		catch (PluginLoadException ignored)
+		{
+			PluginDescriptionFile description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
+			return loadPlugin(class1, description, new Object[0]);
+		}
+	}
+
+	/**
 	 * Load a plugin from a class. It will use the system resource {@code plugin.yml} as the resource file.
 	 *
 	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.

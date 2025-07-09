@@ -13,6 +13,7 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterEach;
@@ -33,6 +34,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -388,6 +390,26 @@ class PluginManagerMockTest
 		nameField.set(sillyName, name);
 
 		assertThrows(PluginLoadException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
+	}
+
+	@Test
+	void loadPluginViaPureLoadPlugin_NormalFlow()
+	{
+		JavaPlugin loadedPlugin = pluginManager.loadPlugin(TestPlugin.class);
+		assertInstanceOf(JavaPlugin.class, loadedPlugin);
+		assertEquals("MockBukkitTestPlugin", loadedPlugin.getName());
+		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
+	}
+
+	@Test
+	void loadPluginViaPureLoadPlugin_InvalidPluginYml()
+	{
+		// This works because JavaPlugin is a plugin where the `plugin.yml` file cannot be found.
+		//   So, it'll throw a `FileNotFound`
+		JavaPlugin loadedPlugin = pluginManager.loadPlugin(JavaPlugin.class);
+		assertInstanceOf(JavaPlugin.class, loadedPlugin);
+		assertEquals("JavaPlugin", loadedPlugin.getName());
+		assertEquals("0.0.0", loadedPlugin.getDescription().getVersion());
 	}
 
 	@Test
