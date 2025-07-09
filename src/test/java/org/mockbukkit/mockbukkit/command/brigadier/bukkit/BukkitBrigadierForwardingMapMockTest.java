@@ -16,6 +16,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -66,6 +68,42 @@ class BukkitBrigadierForwardingMapMockTest
 		assertEquals(command, map.remove("other_command"));
 		assertFalse(map.containsKey("other_command"));
 		assertFalse(map.containsValue(command));
+	}
+
+	@Test
+	void containsValueWithNonCommand()
+	{
+		assertFalse(map.containsValue("Hello world"));
+	}
+
+	@Test
+	void containsKeyWithNonString()
+	{
+		assertFalse(map.containsKey("Hello world"));
+	}
+
+	@Test
+	void removeWithNonString()
+	{
+		assertNull(map.remove(1));
+	}
+
+	@Test
+	void testIsEmpty()
+	{
+		assertFalse(map.isEmpty());
+		map.remove("bukkit:reload");
+		map.remove("bukkit:rl");
+		map.remove("bukkit:timings");
+		map.remove("timings");
+		assertTrue(map.isEmpty());
+	}
+
+	@Test
+	void testDoubleRemoveShouldntError()
+	{
+		assertNotNull(map.remove("bukkit:reload"));
+		assertNull(map.remove("bukkit:reload"));
 	}
 
 	@Test
