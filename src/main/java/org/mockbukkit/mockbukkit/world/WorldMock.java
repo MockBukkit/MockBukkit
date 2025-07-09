@@ -2922,4 +2922,10 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	public void tick()
+	{
+		fullTime++;
+		gameTime++;
+	}
+
 }

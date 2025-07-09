@@ -1579,12 +1579,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	public void tick()
 	{
-		if (isDead())
+		if (!isDead())
 		{
-			return;
+			++ticksLived;
 		}
-
-		++ticksLived;
 	}
 
 }
