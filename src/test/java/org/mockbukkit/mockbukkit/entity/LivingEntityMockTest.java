@@ -13,6 +13,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LingeringPotion;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.ShulkerBullet;
@@ -42,6 +43,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Arrays;
@@ -163,6 +165,54 @@ class LivingEntityMockTest
 	}
 
 	@Test
+	void testSetLeashHolder_WithDeadHolder()
+	{
+		WorldMock world = new WorldMock();
+		Entity holder = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		// Kill the holder
+		((LivingEntity) holder).setHealth(0);
+
+		assertFalse(livingEntity.setLeashHolder(holder));
+		assertFalse(livingEntity.isLeashed());
+	}
+
+	@Test
+	void testSetLeashHolder_NonMobAsHolder()
+	{
+		WorldMock world = new WorldMock();
+		// ArmorStand is not a Mob
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+
+		assertTrue(livingEntity.setLeashHolder(armorStand));
+		// Even though setLeashHolder returns true, isLeashed() returns false for non-Mob holders
+		assertFalse(livingEntity.isLeashed());
+	}
+
+	@Test
+	void testSetLeashHolder_NonMobCannotBeLeashed()
+	{
+		WorldMock world = new WorldMock();
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		Entity holder = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		// Non-Mob entities cannot be leashed
+		assertFalse(((LivingEntity) armorStand).setLeashHolder(holder));
+		assertFalse(((LivingEntity) armorStand).isLeashed());
+	}
+
+	@Test
+	void testSetLeashHolder_WitherCannotBeLeashed()
+	{
+		WorldMock world = new WorldMock();
+		Entity wither = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.WITHER);
+		Entity holder = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		assertFalse(((LivingEntity) wither).setLeashHolder(holder));
+		assertFalse(((LivingEntity) wither).isLeashed());
+	}
+
+	@Test
 	void testGetLeashHolderWhenNotLeashed()
 	{
 		livingEntity.setLeashHolder(null);
@@ -218,7 +268,8 @@ class LivingEntityMockTest
 	{
 		PotionEffect effect = new PotionEffect(PotionEffectType.NAUSEA, 5, 1);
 		livingEntity.addPotionEffect(effect);
-		assertTrue(livingEntity.clearActivePotionEffects());
+		assertTrue(livingEntity.clearActivePotionEffects()); // true = there were some effects cleared
+		assertFalse(livingEntity.clearActivePotionEffects()); // false = it was empty
 	}
 
 	@Test
@@ -226,7 +277,8 @@ class LivingEntityMockTest
 	{
 		PotionEffect instant = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 0, 1);
 		assertTrue(livingEntity.addPotionEffect(instant));
-		assertFalse(livingEntity.hasPotionEffect(instant.getType()));
+		assertEquals(1, livingEntity.getActivePotionEffects().size()); // Yes, strange but true!
+		assertTrue(livingEntity.hasPotionEffect(instant.getType())); // Yep, strange... But that's how it truly is!
 	}
 
 	@Test
@@ -487,4 +539,62 @@ class LivingEntityMockTest
 		assertNull(this.livingEntity.getAttribute(Attribute.ARMOR));
 	}
 
+	@Test
+	void testAttack_AsPlayer()
+	{
+		PlayerMock player = server.addPlayer();
+		WorldMock world = new WorldMock();
+		Entity target = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		assertThrows(UnimplementedOperationException.class, () -> player.attack(target));
+	}
+
+	@Test
+	void testAttack_NullTarget()
+	{
+		PlayerMock player = server.addPlayer();
+
+		assertThrows(NullPointerException.class, () -> player.attack(null));
+	}
+
+	@Test
+	void testHasAI_DefaultForMob()
+	{
+		// CowMock extends AnimalsMock which extends MobMock which implements Mob
+		assertTrue(livingEntity.hasAI());
+	}
+
+	@Test
+	void testSetAI_ForMob()
+	{
+		livingEntity.setAI(false);
+		assertFalse(livingEntity.hasAI());
+
+		livingEntity.setAI(true);
+		assertTrue(livingEntity.hasAI());
+	}
+
+	@Test
+	void testHasAI_ForNonMob()
+	{
+		WorldMock world = new WorldMock();
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+
+		assertFalse(((LivingEntity) armorStand).hasAI());
+	}
+
+	@Test
+	void testSetAI_ForNonMob()
+	{
+		WorldMock world = new WorldMock();
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		LivingEntity livingArmorStand = (LivingEntity) armorStand;
+
+		// setAI should have no effect on non-Mob entities
+		livingArmorStand.setAI(true);
+		assertFalse(livingArmorStand.hasAI());
+
+		livingArmorStand.setAI(false);
+		assertFalse(livingArmorStand.hasAI());
+	}
 }

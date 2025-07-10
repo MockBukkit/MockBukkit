@@ -4,6 +4,8 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.world.damagesource.CombatTracker;
+import lombok.Getter;
+import lombok.Setter;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
@@ -59,7 +61,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -84,13 +85,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * NoDamage ticks
 	 */
+	@Getter @Setter
 	private int noDamageTicks = 0;
-	private int maxNoDamageTicks = 20;
+	@Getter @Setter
+	private int maximumNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
-	private boolean gliding = false;
+	@Getter @Setter private boolean gliding = false;
 	private boolean jumping = false;
 	private boolean riptiding = false;
 
@@ -103,14 +106,23 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean collidable = true;
 	private boolean ai = true;
 	private boolean swimming;
+	/**
+	 * Set whether this entity is slumbering.
+	 */
+	@Getter @Setter
 	private boolean sleeping;
+	/**
+	 * Set whether this entity is climbing.
+	 */
+	@Getter @Setter
 	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
+	@Getter @Setter
 	private @Nullable Player killer;
 
-	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
+	private final Map<PotionEffectType, ActivePotionEffect> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 
@@ -564,18 +576,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public int getMaximumNoDamageTicks()
-	{
-		return this.maxNoDamageTicks;
-	}
-
-	@Override
-	public void setMaximumNoDamageTicks(int ticks)
-	{
-		this.maxNoDamageTicks = ticks;
-	}
-
-	@Override
 	public double getLastDamage()
 	{
 		// TODO Auto-generated method stub
@@ -587,18 +587,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getNoDamageTicks()
-	{
-		return this.noDamageTicks;
-	}
-
-	@Override
-	public void setNoDamageTicks(int ticks)
-	{
-		this.noDamageTicks = ticks;
 	}
 
 	@Override
@@ -615,18 +603,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
-	}
-
-	@Override
-	public @Nullable Player getKiller()
-	{
-		return this.killer;
-	}
-
-	@Override
-	public void setKiller(@Nullable Player killer)
-	{
-		this.killer = killer;
 	}
 
 	@Override
@@ -667,7 +643,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		 If multiple effects are cleared, then for each one an EntityPotionEffectEvent is called.
 		 */
 
-		PotionEffect oldEffect = getPotionEffect(effect.getType());
+		PotionEffectType type = effect.getType();
+		PotionEffect oldEffect = getPotionEffect(type);
 		EntityPotionEffectEvent.Action action = oldEffect == null ? EntityPotionEffectEvent.Action.ADDED : EntityPotionEffectEvent.Action.CHANGED;
 		boolean override = oldEffect != null;
 
@@ -676,7 +653,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
-			activeEffects.add(new ActivePotionEffect(effect));
+			activeEffects.put(type, new ActivePotionEffect(effect));
 		}
 		return event;
 	}
@@ -704,52 +681,38 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean hasPotionEffect(@NotNull PotionEffectType type)
 	{
-		return getPotionEffect(type) != null;
+		return activeEffects.containsKey(type);
+	}
+
+	private @Nullable PotionEffect mapToPotionEffect(@Nullable ActivePotionEffect activeEffect)
+	{
+		if (activeEffect == null)
+		{
+			return null;
+		}
+
+		var effect = activeEffect.getPotionEffect();
+		return new PotionEffect(effect.getType(), activeEffect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.hasParticles(), effect.hasIcon());
 	}
 
 	@Override
-	public PotionEffect getPotionEffect(@NotNull PotionEffectType type)
+	public @Nullable PotionEffect getPotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		for (PotionEffect effect : getActivePotionEffects())
-		{
-			if (effect.getType().equals(type))
-			{
-				return effect;
-			}
-		}
-
-		return null;
+		return mapToPotionEffect(activeEffects.get(type));
 	}
 
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		activeEffects.removeIf(effect -> effect.hasExpired() || effect.getPotionEffect().getType().equals(type));
+		activeEffects.remove(type);
 	}
 
 	@Override
 	public @NotNull Collection<PotionEffect> getActivePotionEffects()
 	{
-		Set<PotionEffect> effects = new HashSet<>();
-		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
-
-		while (iterator.hasNext())
-		{
-			ActivePotionEffect effect = iterator.next();
-
-			if (effect.hasExpired())
-			{
-				iterator.remove();
-			}
-			else
-			{
-				effects.add(effect.getPotionEffect());
-			}
-		}
-
-		return effects;
+		return activeEffects.values().stream().map(this::mapToPotionEffect).toList();
 	}
 
 	@Override
@@ -822,11 +785,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		if (!(this.leashHolder instanceof Mob))
-		{
-			return false;
-		}
-		return this.leashHolder != null;
+		return this.leashHolder instanceof Mob;
 	}
 
 	@Override
@@ -854,18 +813,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 		this.leashHolder = holder;
 		return true;
-	}
-
-	@Override
-	public boolean isGliding()
-	{
-		return this.gliding;
-	}
-
-	@Override
-	public void setGliding(boolean gliding)
-	{
-		this.gliding = gliding;
 	}
 
 	@Override
@@ -901,38 +848,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		this.riptiding = isRiptiding;
 	}
 
-	/**
-	 * Set whether this entity is slumbering.
-	 *
-	 * @param sleeping If this entity is slumbering
-	 */
-	public void setSleeping(boolean sleeping)
-	{
-		this.sleeping = sleeping;
-	}
-
-	@Override
-	public boolean isSleeping()
-	{
-		return this.sleeping;
-	}
-
-	/**
-	 * Set whether this entity is climbing.
-	 *
-	 * @param climbing If this entity is climbing
-	 */
-	public void setClimbing(boolean climbing)
-	{
-		this.climbing = climbing;
-	}
-
-	@Override
-	public boolean isClimbing()
-	{
-		return this.climbing;
-	}
-
 	@Override
 	public void setAI(boolean ai)
 	{
@@ -953,15 +868,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
 
-		if (this instanceof Player)
-		{
-			((Player) this).attack(target);
-		}
-		else
-		{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1383,6 +1291,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @NotNull CombatTracker getCombatTracker()
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void tick()
+	{
+		super.tick();
+		activeEffects.entrySet().removeIf(entry -> entry.getValue().hasExpired());
 	}
 
 }
