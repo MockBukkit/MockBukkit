@@ -60,9 +60,7 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	@Override
 	public @NotNull OminousBottleMetaMock clone()
 	{
-		OminousBottleMetaMock clone = (OminousBottleMetaMock) super.clone();
-		clone.amplifier = this.amplifier;
-		return clone;
+		return new OminousBottleMetaMock(this);
 	}
 
 	@Override

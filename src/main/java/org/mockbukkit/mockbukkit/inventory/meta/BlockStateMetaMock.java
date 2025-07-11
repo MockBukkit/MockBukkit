@@ -220,9 +220,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	@Override
 	public @NotNull BlockStateMetaMock clone()
 	{
-		BlockStateMetaMock clone = (BlockStateMetaMock) super.clone();
-		clone.blockState = this.blockState != null ? this.blockState.copy() : null;
-		return clone;
+		return new BlockStateMetaMock(this);
 	}
 
 	@Override

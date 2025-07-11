@@ -72,9 +72,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	@Override
 	public @NotNull FireworkEffectMetaMock clone()
 	{
-		FireworkEffectMetaMock mock = (FireworkEffectMetaMock) super.clone();
-		mock.effect = this.effect;
-		return mock;
+		return new FireworkEffectMetaMock(this);
 	}
 
 	@Override

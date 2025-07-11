@@ -54,9 +54,7 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 	@Override
 	public @NotNull ArmorMetaMock clone()
 	{
-		ArmorMetaMock armorMetaMock = (ArmorMetaMock) super.clone();
-		armorMetaMock.setTrim(this.trim);
-		return armorMetaMock;
+		return new ArmorMetaMock(this);
 	}
 
 	@Override

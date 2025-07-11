@@ -81,9 +81,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	@Override
 	public @NotNull FireworkMetaMock clone()
 	{
-		FireworkMetaMock mock = (FireworkMetaMock) super.clone();
-		mock.effects = new ArrayList<>(this.effects);
-		return mock;
+		return new FireworkMetaMock(this);
 	}
 
 	@Override

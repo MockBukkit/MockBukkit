@@ -76,9 +76,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	@Override
 	public @NotNull KnowledgeBookMetaMock clone()
 	{
-		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
-		mock.recipes.addAll(recipes);
-		return mock;
+		return new KnowledgeBookMetaMock(this);
 	}
 
 	@Override

@@ -84,11 +84,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	@Override
 	public @NotNull AxolotlBucketMetaMock clone()
 	{
-		AxolotlBucketMetaMock clone = (AxolotlBucketMetaMock) super.clone();
-
-		clone.variant = this.variant;
-
-		return clone;
+		return new AxolotlBucketMetaMock(this);
 	}
 
 	/**

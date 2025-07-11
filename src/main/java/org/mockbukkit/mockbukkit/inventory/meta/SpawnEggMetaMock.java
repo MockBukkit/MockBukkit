@@ -95,7 +95,7 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	@Override
 	public @NotNull SpawnEggMetaMock clone()
 	{
-		return (SpawnEggMetaMock) super.clone();
+		return new SpawnEggMetaMock(this);
 	}
 
 	/**

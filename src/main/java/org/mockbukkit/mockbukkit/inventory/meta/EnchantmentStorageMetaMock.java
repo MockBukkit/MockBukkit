@@ -73,9 +73,7 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	@Override
 	public @NotNull EnchantmentStorageMetaMock clone()
 	{
-		EnchantmentStorageMetaMock mock = (EnchantmentStorageMetaMock) super.clone();
-		mock.storedEnchantments = new HashMap<>(storedEnchantments);
-		return mock;
+		return new EnchantmentStorageMetaMock(this);
 	}
 
 	@Override

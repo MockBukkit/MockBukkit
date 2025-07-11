@@ -242,6 +242,12 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		this.banner = (Banner) blockState;
 	}
 
+	@Override
+	public ShieldMetaMock clone()
+	{
+		return new ShieldMetaMock(this);
+	}
+
 	private static Banner getBlockState(DyeColor color)
 	{
 		return new BannerStateMock(dyeColorToMaterial(color));

@@ -87,9 +87,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	@Override
 	public @NotNull ColorableArmorMetaMock clone()
 	{
-		ColorableArmorMetaMock clone = (ColorableArmorMetaMock) super.clone();
-		clone.color = this.color;
-		return clone;
+		return new ColorableArmorMetaMock(this);
 	}
 
 	@Override
