@@ -1890,12 +1890,27 @@ public class WorldMock implements World
 		return this.worldBorder;
 	}
 
-	// Add helper methods:
+	/**
+	 * Returns an unmodifiable list of all currently spawned particles.
+	 * Particles are automatically tracked and added to this collection whenever
+	 * {@code spawnParticle} methods are called. This method provides a safe way
+	 * to access the spawned particles collection for testing and verification
+	 * without allowing external modifications.
+	 *
+	 * @return An unmodifiable List containing all currently spawned particles
+	 */
+
 	public List<SpawnedParticle> getSpawnedParticles()
 	{
 		return Collections.unmodifiableList(spawnedParticles);
 	}
 
+	/**
+	 * Removes all spawned particles from the tracking collection.
+	 * This method clears the internal list of spawned particles, effectively
+	 * removing all particle references being tracked. Useful for resetting
+	 * the mock state between tests or clearing accumulated particle data.
+	 */
 	public void clearSpawnedParticles()
 	{
 		spawnedParticles.clear();
