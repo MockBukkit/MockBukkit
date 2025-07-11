@@ -81,6 +81,7 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull RotatableDataMock clone()
 	{
 		return new RotatableDataMock(this);

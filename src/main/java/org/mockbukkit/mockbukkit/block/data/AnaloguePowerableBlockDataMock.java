@@ -48,6 +48,7 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull AnaloguePowerableBlockDataMock clone()
 	{
 		return new AnaloguePowerableBlockDataMock(this);

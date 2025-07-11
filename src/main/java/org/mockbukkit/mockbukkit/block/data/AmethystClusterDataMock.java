@@ -74,6 +74,7 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull AmethystClusterDataMock clone()
 	{
 		return new AmethystClusterDataMock(this);

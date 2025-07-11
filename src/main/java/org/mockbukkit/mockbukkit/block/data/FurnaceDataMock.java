@@ -66,6 +66,7 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull FurnaceDataMock clone()
 	{
 		return new FurnaceDataMock(this);

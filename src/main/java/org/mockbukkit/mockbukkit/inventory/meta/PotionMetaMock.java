@@ -92,6 +92,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull PotionMetaMock clone()
 	{
 		return new PotionMetaMock(this);

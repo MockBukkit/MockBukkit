@@ -40,6 +40,7 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull LightableDataMock clone()
 	{
 		return new LightableDataMock(this);

@@ -58,6 +58,7 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull OminousBottleMetaMock clone()
 	{
 		return new OminousBottleMetaMock(this);

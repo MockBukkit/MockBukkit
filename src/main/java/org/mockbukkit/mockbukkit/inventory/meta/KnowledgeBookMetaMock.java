@@ -74,6 +74,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull KnowledgeBookMetaMock clone()
 	{
 		return new KnowledgeBookMetaMock(this);

@@ -76,6 +76,7 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull DecoratedPotDataMock clone()
 	{
 		return new DecoratedPotDataMock(this);

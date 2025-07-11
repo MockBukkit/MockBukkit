@@ -68,6 +68,7 @@ public class LightDataMock extends BlockDataMock implements Light
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull LightDataMock clone()
 	{
 		return new LightDataMock(this);

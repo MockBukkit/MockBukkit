@@ -41,6 +41,7 @@ public class WaterloggedDataMock extends BlockDataMock implements Waterlogged
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull WaterloggedDataMock clone()
 	{
 		return new WaterloggedDataMock(this);

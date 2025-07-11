@@ -40,6 +40,7 @@ public class TNTDataMock extends BlockDataMock implements TNT
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull TNTDataMock clone()
 	{
 		return new TNTDataMock(this);

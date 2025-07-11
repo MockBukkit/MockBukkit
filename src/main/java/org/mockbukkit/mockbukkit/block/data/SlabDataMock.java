@@ -65,6 +65,7 @@ public class SlabDataMock extends BlockDataMock implements Slab
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull SlabDataMock clone()
 	{
 		return new SlabDataMock(this);

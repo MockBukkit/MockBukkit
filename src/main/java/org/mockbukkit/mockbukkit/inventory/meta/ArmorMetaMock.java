@@ -52,6 +52,7 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull ArmorMetaMock clone()
 	{
 		return new ArmorMetaMock(this);

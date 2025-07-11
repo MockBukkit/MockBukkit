@@ -112,6 +112,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull CompassMetaMock clone()
 	{
 		return new CompassMetaMock(this);

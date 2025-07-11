@@ -54,6 +54,7 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull LevelledDataMock clone()
 	{
 		return new LevelledDataMock(this);

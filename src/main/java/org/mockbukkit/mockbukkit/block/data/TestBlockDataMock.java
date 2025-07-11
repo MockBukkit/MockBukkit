@@ -42,6 +42,7 @@ public class TestBlockDataMock extends BlockDataMock implements TestBlock
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull TestBlockDataMock clone()
 	{
 		return new TestBlockDataMock(this);

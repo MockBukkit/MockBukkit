@@ -53,6 +53,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull SkullMetaMock clone()
 	{
 		return new SkullMetaMock(this);

@@ -101,6 +101,7 @@ public class DoorDataMock extends BlockDataMock implements Door
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull DoorDataMock clone()
 	{
 		return new DoorDataMock(this);

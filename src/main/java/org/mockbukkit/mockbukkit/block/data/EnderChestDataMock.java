@@ -63,6 +63,7 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull EnderChestDataMock clone()
 	{
 		return new EnderChestDataMock(this);

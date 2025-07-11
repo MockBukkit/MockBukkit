@@ -90,6 +90,7 @@ public class BedDataMock extends BlockDataMock implements Bed
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull BedDataMock clone()
 	{
 		return new BedDataMock(this);

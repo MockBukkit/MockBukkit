@@ -243,6 +243,7 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public ShieldMetaMock clone()
 	{
 		return new ShieldMetaMock(this);

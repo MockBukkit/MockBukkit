@@ -105,6 +105,7 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull StairsDataMock clone()
 	{
 		return new StairsDataMock(this);

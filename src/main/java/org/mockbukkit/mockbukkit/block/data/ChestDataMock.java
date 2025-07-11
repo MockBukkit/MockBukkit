@@ -75,6 +75,7 @@ public class ChestDataMock extends BlockDataMock implements Chest
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull ChestDataMock clone()
 	{
 		return new ChestDataMock(this);

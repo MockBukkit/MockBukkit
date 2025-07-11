@@ -48,6 +48,7 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull SaplingDataMock clone()
 	{
 		return new SaplingDataMock(this);

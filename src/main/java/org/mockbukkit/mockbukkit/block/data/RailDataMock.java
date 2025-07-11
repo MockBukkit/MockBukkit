@@ -64,6 +64,7 @@ public class RailDataMock extends BlockDataMock implements Rail
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull RailDataMock clone()
 	{
 		return new RailDataMock(this);

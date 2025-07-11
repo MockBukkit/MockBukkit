@@ -93,6 +93,7 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull SpawnEggMetaMock clone()
 	{
 		return new SpawnEggMetaMock(this);

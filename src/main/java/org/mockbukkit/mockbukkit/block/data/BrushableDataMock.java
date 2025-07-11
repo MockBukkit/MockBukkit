@@ -53,6 +53,7 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull BrushableDataMock clone()
 	{
 		return new BrushableDataMock(this);

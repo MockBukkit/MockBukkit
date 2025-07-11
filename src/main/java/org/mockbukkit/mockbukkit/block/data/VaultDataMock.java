@@ -77,6 +77,7 @@ public class VaultDataMock extends BlockDataMock implements Vault
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull VaultDataMock clone()
 	{
 		return new VaultDataMock(this);

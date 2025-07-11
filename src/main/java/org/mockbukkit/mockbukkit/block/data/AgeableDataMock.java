@@ -48,6 +48,7 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull AgeableDataMock clone()
 	{
 		return new AgeableDataMock(this);

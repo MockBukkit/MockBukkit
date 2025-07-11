@@ -107,6 +107,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull BundleMetaMock clone()
 	{
 		return new BundleMetaMock(this);

@@ -75,6 +75,7 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull WallSignDataMock clone()
 	{
 		return new WallSignDataMock(this);

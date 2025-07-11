@@ -489,6 +489,7 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull BlockDataMock clone()
 	{
 		return new BlockDataMock(this);

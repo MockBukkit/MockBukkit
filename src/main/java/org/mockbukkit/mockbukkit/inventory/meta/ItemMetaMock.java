@@ -372,6 +372,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public ItemMetaMock clone()
 	{
 		return new ItemMetaMock(this);

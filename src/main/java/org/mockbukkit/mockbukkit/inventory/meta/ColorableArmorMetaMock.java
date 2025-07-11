@@ -85,6 +85,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull ColorableArmorMetaMock clone()
 	{
 		return new ColorableArmorMetaMock(this);

@@ -79,6 +79,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull FireworkMetaMock clone()
 	{
 		return new FireworkMetaMock(this);

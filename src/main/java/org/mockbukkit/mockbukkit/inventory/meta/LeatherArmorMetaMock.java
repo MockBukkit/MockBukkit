@@ -43,6 +43,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull LeatherArmorMetaMock clone()
 	{
 		return new LeatherArmorMetaMock(this);

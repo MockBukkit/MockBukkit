@@ -77,6 +77,7 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull FenceDataMock clone()
 	{
 		return new FenceDataMock(this);

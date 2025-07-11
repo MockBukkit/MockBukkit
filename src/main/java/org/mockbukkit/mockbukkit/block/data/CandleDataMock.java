@@ -78,6 +78,7 @@ public class CandleDataMock extends BlockDataMock implements Candle
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull CandleDataMock clone()
 	{
 		return new CandleDataMock(this);

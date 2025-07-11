@@ -77,6 +77,7 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull LecternDataMock clone()
 	{
 		return new LecternDataMock(this);

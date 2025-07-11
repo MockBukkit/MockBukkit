@@ -302,6 +302,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull BookMetaMock clone()
 	{
 		return new BookMetaMock(this);

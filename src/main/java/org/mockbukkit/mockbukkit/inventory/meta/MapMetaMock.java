@@ -184,6 +184,7 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	}
 
 	@Override
+	@SuppressWarnings("java:S2975")
 	public @NotNull MapMetaMock clone()
 	{
 		return new MapMetaMock(this);
