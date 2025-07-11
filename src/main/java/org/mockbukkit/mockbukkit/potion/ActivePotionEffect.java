@@ -16,7 +16,7 @@ public final class ActivePotionEffect
 {
 
 	private final @NotNull PotionEffect effect;
-	private final int tickTimestamp;
+	private final int startTick;
 
 	/**
 	 * Constructs a new {@link ActivePotionEffect} with the provided {@link PotionEffect}.
@@ -26,7 +26,7 @@ public final class ActivePotionEffect
 	public ActivePotionEffect(@NotNull PotionEffect effect)
 	{
 		this.effect = effect;
-		this.tickTimestamp = Bukkit.getCurrentTick();
+		this.startTick = Bukkit.getCurrentTick();
 	}
 
 	/**
@@ -36,8 +36,7 @@ public final class ActivePotionEffect
 	 */
 	public boolean hasExpired()
 	{
-		int ticks = effect.getDuration();
-		return !effect.isInfinite() && (ticks < 1 || tickTimestamp + ticks < Bukkit.getCurrentTick());
+		return getDuration() == 0;
 	}
 
 	/**
@@ -51,4 +50,13 @@ public final class ActivePotionEffect
 		return effect;
 	}
 
+	public int getDuration()
+	{
+		if (effect.isInfinite())
+		{
+			return -1;
+		}
+
+		return Math.max(0, effect.getDuration() - Bukkit.getCurrentTick() + startTick);
+	}
 }
