@@ -23,6 +23,16 @@ public class OrientableMock extends BlockDataMock implements Orientable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link OrientableMock} based on an existing {@link OrientableMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected OrientableMock(@NotNull OrientableMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Axis getAxis()
 	{
@@ -40,6 +50,12 @@ public class OrientableMock extends BlockDataMock implements Orientable
 	public @NotNull Set<Axis> getAxes()
 	{
 		return Arrays.stream(Axis.values()).collect(Collectors.toSet());
+	}
+
+	@Override
+	public @NotNull OrientableMock clone()
+	{
+		return new OrientableMock(this);
 	}
 
 }

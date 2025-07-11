@@ -19,6 +19,16 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 		setHalf(Half.BOTTOM);
 	}
 
+	/**
+	 * Create a new {@link BisectedDataMock} based on an existing {@link BisectedDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected BisectedDataMock(BisectedDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Half getHalf()
 	{
@@ -29,6 +39,12 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	public void setHalf(@NotNull Half half)
 	{
 		this.set(BlockDataKey.HALF, half);
+	}
+
+	@Override
+	public @NotNull BisectedDataMock clone()
+	{
+		return new BisectedDataMock(this);
 	}
 
 }

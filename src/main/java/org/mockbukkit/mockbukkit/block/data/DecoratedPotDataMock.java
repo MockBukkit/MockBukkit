@@ -11,7 +11,6 @@ import java.util.Set;
 public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 {
 
-
 	/**
 	 * Constructs a new {@link DecoratedPotDataMock} for the provided {@link Material}.
 	 */
@@ -21,6 +20,16 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 		set(BlockDataKey.CRACKED, false);
 		set(BlockDataKey.FACING, BlockFace.NORTH);
 		set(BlockDataKey.WATERLOGGED, false);
+	}
+
+	/**
+	 * Create a new {@link DecoratedPotDataMock} based on an existing {@link DecoratedPotDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected DecoratedPotDataMock(@NotNull DecoratedPotDataMock other)
+	{
+		super(other);
 	}
 
 	@Override
@@ -64,6 +73,12 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 	public void setWaterlogged(boolean waterlogged)
 	{
 		set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	public @NotNull DecoratedPotDataMock clone()
+	{
+		return new DecoratedPotDataMock(this);
 	}
 
 }

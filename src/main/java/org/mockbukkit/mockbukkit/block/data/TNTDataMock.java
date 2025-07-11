@@ -17,6 +17,16 @@ public class TNTDataMock extends BlockDataMock implements TNT
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link TNTDataMock} based on an existing {@link TNTDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected TNTDataMock(@NotNull TNTDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isUnstable()
 	{
@@ -27,6 +37,12 @@ public class TNTDataMock extends BlockDataMock implements TNT
 	public void setUnstable(boolean unstable)
 	{
 		this.set(BlockDataKey.UNSTABLE, unstable);
+	}
+
+	@Override
+	public @NotNull TNTDataMock clone()
+	{
+		return new TNTDataMock(this);
 	}
 
 }

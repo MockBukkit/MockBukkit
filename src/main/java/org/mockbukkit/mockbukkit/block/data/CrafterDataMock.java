@@ -18,6 +18,16 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link CrafterDataMock} based on an existing {@link CrafterDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected CrafterDataMock(@NotNull CrafterDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isCrafting()
 	{
@@ -53,6 +63,12 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 	{
 		Preconditions.checkArgument(orientation != null, "orientation cannot be null!");
 		this.set(BlockDataKey.ORIENTATION, orientation);
+	}
+
+	@Override
+	public @NotNull BlockDataMock clone()
+	{
+		return new CrafterDataMock(this);
 	}
 
 }

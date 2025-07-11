@@ -22,6 +22,16 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 		setHasBook(false);
 	}
 
+	/**
+	 * Create a new {@link LecternDataMock} based on an existing {@link LecternDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected LecternDataMock(@NotNull LecternDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean hasBook()
 	{
@@ -64,6 +74,12 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	public void setPowered(boolean powered)
 	{
 		this.set(BlockDataKey.POWERED, powered);
+	}
+
+	@Override
+	public @NotNull LecternDataMock clone()
+	{
+		return new LecternDataMock(this);
 	}
 
 }

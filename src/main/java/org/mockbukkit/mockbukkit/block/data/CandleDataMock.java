@@ -18,6 +18,15 @@ public class CandleDataMock extends BlockDataMock implements Candle
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link CandleDataMock} based on an existing {@link CandleDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected CandleDataMock(@NotNull CandleDataMock other)
+	{
+		super(other);
+	}
 
 	@Override
 	public int getCandles()
@@ -66,6 +75,12 @@ public class CandleDataMock extends BlockDataMock implements Candle
 	public void setWaterlogged(boolean waterlogged)
 	{
 		this.set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	public @NotNull CandleDataMock clone()
+	{
+		return new CandleDataMock(this);
 	}
 
 }

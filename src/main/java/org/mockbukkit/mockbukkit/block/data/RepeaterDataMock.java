@@ -21,6 +21,16 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RepeaterDataMock} based on an existing {@link RepeaterDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RepeaterDataMock(@NotNull RepeaterDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getDelay()
 	{
@@ -87,6 +97,12 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	public void setPowered(boolean powered)
 	{
 		this.set(BlockDataKey.POWERED, powered);
+	}
+
+	@Override
+	public @NotNull RepeaterDataMock clone()
+	{
+		return new RepeaterDataMock(this);
 	}
 
 }

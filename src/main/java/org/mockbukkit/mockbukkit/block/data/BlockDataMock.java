@@ -48,11 +48,11 @@ public class BlockDataMock implements BlockData
 {
 
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
+	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("(^[a-z_:]+)(?:(\\[(.+)\\]$)|($))");
 
 	private final @NotNull Material type;
 	private final Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> limitations;
 	private @NotNull Map<String, Object> data;
-	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("(^[a-z_:]+)(?:(\\[(.+)\\]$)|($))");
 
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
@@ -65,6 +65,18 @@ public class BlockDataMock implements BlockData
 		this.type = material;
 		this.data = new LinkedHashMap<>();
 		this.limitations = BlockDataMockRegistry.getInstance().getLimitations(material);
+	}
+
+	/**
+	 * Create a new {@link BlockDataMock} based on an existing {@link BlockDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected BlockDataMock(@NotNull BlockDataMock other)
+	{
+		this.type = other.type;
+		this.data = new LinkedHashMap<>(other.data);
+		this.limitations = other.limitations;
 	}
 
 	@ApiStatus.Internal
@@ -479,16 +491,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull BlockDataMock clone()
 	{
-		try
-		{
-			BlockDataMock clonedObject = (BlockDataMock) super.clone();
-			clonedObject.data = new LinkedHashMap<>(clonedObject.data);
-			return clonedObject;
-		}
-		catch (CloneNotSupportedException e)
-		{
-			return BlockDataMock.mock(type, this.data);
-		}
+		return new BlockDataMock(this);
 	}
 
 	/**

@@ -22,6 +22,16 @@ public class RailDataMock extends BlockDataMock implements Rail
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RailDataMock} based on an existing {@link RailDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RailDataMock(@NotNull RailDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Shape getShape()
 	{
@@ -51,6 +61,12 @@ public class RailDataMock extends BlockDataMock implements Rail
 	public void setWaterlogged(boolean waterlogged)
 	{
 		this.set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	public @NotNull RailDataMock clone()
+	{
+		return new RailDataMock(this);
 	}
 
 }

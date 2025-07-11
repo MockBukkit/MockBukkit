@@ -21,6 +21,16 @@ public class ChestDataMock extends BlockDataMock implements Chest
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link ChestDataMock} based on an existing {@link ChestDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected ChestDataMock(@NotNull ChestDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Type getType()
 	{
@@ -62,6 +72,12 @@ public class ChestDataMock extends BlockDataMock implements Chest
 	public void setWaterlogged(boolean waterlogged)
 	{
 		this.set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	public @NotNull ChestDataMock clone()
+	{
+		return new ChestDataMock(this);
 	}
 
 }

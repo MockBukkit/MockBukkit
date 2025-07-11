@@ -21,6 +21,16 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link HopperDataMock} based on an existing {@link HopperDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected HopperDataMock(@NotNull HopperDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isEnabled()
 	{
@@ -51,6 +61,12 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 	public @NotNull Set<BlockFace> getFaces()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
+	}
+
+	@Override
+	public @NotNull HopperDataMock clone()
+	{
+		return new HopperDataMock(this);
 	}
 
 }

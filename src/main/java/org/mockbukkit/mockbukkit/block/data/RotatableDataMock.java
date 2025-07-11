@@ -18,6 +18,16 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RotatableDataMock} based on an existing {@link RotatableDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RotatableDataMock(@NotNull RotatableDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getRotation()
 	{
@@ -68,6 +78,12 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 			default -> throw new IllegalArgumentException("Illegal rotation " + rotation);
 		};
 		this.set(BlockDataKey.ROTATION, val);
+	}
+
+	@Override
+	public @NotNull RotatableDataMock clone()
+	{
+		return new RotatableDataMock(this);
 	}
 
 }
