@@ -105,7 +105,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -2393,6 +2393,12 @@ class ServerMockTest
 
 		}
 
+	}
+
+	@Test
+	void getStructureManager()
+	{
+		assertNotNull(server.getStructureManager());
 	}
 
 }
