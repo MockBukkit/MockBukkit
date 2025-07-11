@@ -55,6 +55,17 @@ public class StructureMock implements Structure
 		return this.size;
 	}
 
+	/**
+	 * Set the structure size.
+	 *
+	 * @param size The structure size
+	 */
+	public void setSize(@NotNull BlockVector size)
+	{
+		Preconditions.checkNotNull(size, "size must not be null");
+		this.size.copy(size);
+	}
+
 	@Override
 	public @NotNull List<Palette> getPalettes()
 	{
@@ -67,6 +78,32 @@ public class StructureMock implements Structure
 		return this.palettes.size();
 	}
 
+	/**
+	 * Add a palette to the structure.
+	 *
+	 * @param palette The palette to be added.
+	 *
+	 * @return {@code true} (as specified by {@link Collection#add(Object)})
+	 */
+	public boolean addPalette(@NotNull Palette palette)
+	{
+		Preconditions.checkNotNull(palette, "The palette cannot be null");
+		return this.palettes.add(palette);
+	}
+
+	/**
+	 * Remove a palette from the structure.
+	 *
+	 * @param palette The palette to be removed.
+	 *
+	 * @return {@code true} (as specified by {@link Collection#remove(Object)})
+	 */
+	public boolean removePalette(@NotNull Palette palette)
+	{
+		Preconditions.checkNotNull(palette, "The palette cannot be null");
+		return this.palettes.remove(palette);
+	}
+
 	@Override
 	public @NotNull List<Entity> getEntities()
 	{
@@ -77,6 +114,32 @@ public class StructureMock implements Structure
 	public int getEntityCount()
 	{
 		return this.entityList.size();
+	}
+
+	/**
+	 * Add an entity to the structure.
+	 *
+	 * @param entity The entity to be added.
+	 *
+	 * @return {@code true} (as specified by {@link Collection#add(Object)})
+	 */
+	public boolean addEntity(@NotNull Entity entity)
+	{
+		Preconditions.checkNotNull(entity, "The entity cannot be null");
+		return this.entityList.add(entity);
+	}
+
+	/**
+	 * Remove an entity from the structure.
+	 *
+	 * @param entity The entity to be removed.
+	 *
+	 * @return {@code true} (as specified by {@link Collection#remove(Object)})
+	 */
+	public boolean removeEntity(@NotNull Entity entity)
+	{
+		Preconditions.checkNotNull(entity, "The entity cannot be null");
+		return this.entityList.remove(entity);
 	}
 
 	@Override

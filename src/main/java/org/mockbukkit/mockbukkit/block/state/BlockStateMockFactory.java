@@ -81,6 +81,7 @@ public class BlockStateMockFactory
 	public static @NotNull BlockStateMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkArgument(material.isBlock(), "Material must be a block");
 
 		for (var entry : FACTORIES_BY_TAGS.entrySet())
 		{
