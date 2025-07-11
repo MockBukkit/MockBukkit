@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucketMeta
 {
 
@@ -84,11 +87,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	@Override
 	public @NotNull AxolotlBucketMetaMock clone()
 	{
-		AxolotlBucketMetaMock clone = (AxolotlBucketMetaMock) super.clone();
-
-		clone.variant = this.variant;
-
-		return clone;
+		return new AxolotlBucketMetaMock(this);
 	}
 
 	/**

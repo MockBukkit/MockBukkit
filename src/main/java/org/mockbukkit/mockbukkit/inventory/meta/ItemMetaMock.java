@@ -21,6 +21,7 @@ import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
@@ -41,8 +42,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ import static java.util.Objects.nonNull;
 /**
  * Mock implementation of an {@link ItemMeta}, {@link Damageable}, and {@link Repairable}.
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
@@ -375,39 +377,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public ItemMetaMock clone()
 	{
-		try
-		{
-			ItemMetaMock meta = (ItemMetaMock) super.clone();
-			meta.displayName = displayName;
-			if (lore != null)
-			{
-				meta.lore = new ArrayList<>(lore);
-			}
-
-			meta.damage = damage;
-			meta.maxDamage = maxDamage;
-			meta.repairCost = repairCost;
-			meta.enchants = new HashMap<>(enchants);
-			meta.attributeModifiers = attributeModifiers != null ? LinkedHashMultimap.create(attributeModifiers) : null;
-			meta.hideFlags = EnumSet.copyOf(hideFlags);
-			meta.persistentDataContainer = new PersistentDataContainerMock(persistentDataContainer);
-			meta.unbreakable = unbreakable;
-			meta.customModelData = customModelData;
-
-			meta.hideTooltip = hideTooltip;
-			meta.fireResistant = fireResistant;
-			meta.maxStackSize = maxStackSize;
-			meta.enchantmentGlintOverride = enchantmentGlintOverride;
-			meta.rarity = rarity;
-			meta.itemName = itemName;
-			meta.enchantableValue = enchantableValue;
-
-			return meta;
-		}
-		catch (CloneNotSupportedException e)
-		{
-			throw new ItemMetaInitException(e);
-		}
+		return new ItemMetaMock(this);
 	}
 
 	@Override

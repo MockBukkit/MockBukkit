@@ -2,12 +2,14 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +21,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 

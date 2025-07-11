@@ -1,12 +1,15 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
+@DelegateDeserialization(SerializableMeta.class)
 public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottleMeta
 {
 

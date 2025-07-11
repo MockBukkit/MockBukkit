@@ -27,6 +27,8 @@ import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
@@ -44,7 +46,10 @@ import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.spawner.SpawnRule;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -83,8 +88,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -119,16 +128,17 @@ import org.mockbukkit.mockbukkit.inventory.GrindstoneInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ItemFactoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.RecipeManager;
 import org.mockbukkit.mockbukkit.inventory.RecipeType;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
@@ -1062,7 +1072,19 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public static void registerSerializables()
 	{
-		ConfigurationSerialization.registerClass(ItemMetaMock.class);
+		ConfigurationSerialization.registerClass(Vector.class);
+		ConfigurationSerialization.registerClass(BlockVector.class);
+		ConfigurationSerialization.registerClass(ItemStack.class);
+		ConfigurationSerialization.registerClass(ItemStackMock.class);
+		ConfigurationSerialization.registerClass(Color.class);
+		ConfigurationSerialization.registerClass(PotionEffect.class);
+		ConfigurationSerialization.registerClass(FireworkEffect.class);
+		ConfigurationSerialization.registerClass(Pattern.class);
+		ConfigurationSerialization.registerClass(BoundingBox.class);
+		ConfigurationSerialization.registerClass(Location.class);
+		ConfigurationSerialization.registerClass(AttributeModifier.class);
+		ConfigurationSerialization.registerClass(SpawnRule.class);
+		ConfigurationSerialization.registerClass(SerializableMeta.class);
 	}
 
 	@Override

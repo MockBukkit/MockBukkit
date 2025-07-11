@@ -1,12 +1,14 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +18,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class MapMetaMock extends ItemMetaMock implements MapMeta
 {
 

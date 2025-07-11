@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +18,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta
 {
 

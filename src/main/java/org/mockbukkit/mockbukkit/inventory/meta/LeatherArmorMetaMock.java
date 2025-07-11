@@ -2,10 +2,12 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMeta
 {
 

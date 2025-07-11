@@ -1,10 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.FireworkEffect;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 import java.util.Objects;
@@ -14,6 +16,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffectMeta
 {
 

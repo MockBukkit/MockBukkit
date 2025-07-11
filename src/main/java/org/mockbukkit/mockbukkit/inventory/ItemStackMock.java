@@ -7,6 +7,7 @@ import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemFlag;
@@ -30,6 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+@DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
 {
 
@@ -358,12 +360,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @NotNull ItemStack clone()
 	{
-		ItemStackMock clone = new ItemStackMock(this.type);
-
-		clone.setAmount(this.amount);
-		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
-		clone.durability = this.durability;
-		return clone;
+		return new ItemStackMock(this);
 	}
 
 	@Override
@@ -432,6 +429,11 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
+		if (true)
+		{
+			return Bukkit.getUnsafe().deserializeStack(args);
+		}
+
 		int version = (args.containsKey("v")) ? ((Number) args.get("v")).intValue() : -1;
 		short damage = 0;
 		int amount = 1;
@@ -443,6 +445,10 @@ public class ItemStackMock extends ItemStack
 		}
 
 		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
+		if (type == null)
+		{
+			return ItemStackMock.empty();
+		}
 
 		if (args.containsKey(FIELD_AMOUNT))
 		{

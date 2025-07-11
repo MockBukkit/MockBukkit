@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 

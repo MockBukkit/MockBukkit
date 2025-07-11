@@ -2,10 +2,12 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.apache.commons.lang3.Validate;
 import org.bukkit.DyeColor;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class TropicalFishBucketMetaMock extends ItemMetaMock implements TropicalFishBucketMeta
 {
 

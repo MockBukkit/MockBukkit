@@ -2,11 +2,12 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.CompassMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 {
 
@@ -35,15 +37,12 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public CompassMetaMock(@NotNull ItemMeta meta)
+	public CompassMetaMock(@NotNull CompassMeta meta)
 	{
 		super(meta);
 
-		if (meta instanceof CompassMeta compass)
-		{
-			this.lodestone = compass.getLodestone();
-			this.tracked = compass.isLodestoneTracked();
-		}
+		this.lodestone = (meta.getLodestone() != null ? meta.getLodestone().clone() : null);
+		this.tracked = meta.isLodestoneTracked();
 	}
 
 	@Override
@@ -114,10 +113,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	@Override
 	public @NotNull CompassMetaMock clone()
 	{
-		CompassMetaMock clone = (CompassMetaMock) super.clone();
-		clone.lodestone = this.lodestone == null ? null : this.lodestone.clone();
-		clone.tracked = this.tracked;
-		return clone;
+		return new CompassMetaMock(this);
 	}
 
 	/**

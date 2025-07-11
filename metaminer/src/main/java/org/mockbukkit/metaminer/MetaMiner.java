@@ -1,6 +1,10 @@
 package org.mockbukkit.metaminer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.commons.io.FileUtils;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mockbukkit.metaminer.internal.MaterialDataGenerator;
 import org.mockbukkit.metaminer.internal.potion.PotionDataGenerator;
@@ -25,6 +29,26 @@ public class MetaMiner extends JavaPlugin
 	public void onEnable()
 	{
 		this.getLogger().log(Level.INFO, "Generating data for MockBukkit");
+
+		getLogger().log(Level.INFO, "---");
+		getLogger().log(Level.INFO, "---");
+
+		for (Material material : Material.values()) {
+			if (!material.isItem()) {
+				continue;
+			}
+
+			ItemStack itemStack = new ItemStack(material);
+			Gson gson = new GsonBuilder().create();
+			System.out.println(String.format("%s,%s", material.name(), gson.toJson(itemStack.serialize())));
+		}
+
+		getLogger().log(Level.INFO, "---");
+		getLogger().log(Level.INFO, "---");
+
+		if (true) {
+			return;
+		}
 		try
 		{
 			FileUtils.deleteDirectory(this.getDataFolder());

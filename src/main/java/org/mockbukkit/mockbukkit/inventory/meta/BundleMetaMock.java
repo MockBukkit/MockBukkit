@@ -2,11 +2,12 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 {
 
@@ -37,18 +39,11 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public BundleMetaMock(@NotNull ItemMeta meta)
+	public BundleMetaMock(@NotNull BundleMeta meta)
 	{
 		super(meta);
 
-		if (meta instanceof BundleMeta bundleMeta)
-		{
-			this.items = new ArrayList<>(bundleMeta.getItems());
-		}
-		else
-		{
-			this.items = new ArrayList<>();
-		}
+		this.items = new ArrayList<>(this.items.stream().map(ItemStack::clone).toList());
 	}
 
 	@Override
@@ -109,9 +104,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	@Override
 	public @NotNull BundleMetaMock clone()
 	{
-		BundleMetaMock clone = (BundleMetaMock) super.clone();
-		clone.items = new ArrayList<>(this.items.stream().map(ItemStack::clone).toList());
-		return clone;
+		return new BundleMetaMock(this);
 	}
 
 	/**

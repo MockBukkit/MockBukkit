@@ -1,14 +1,15 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
+@DelegateDeserialization(SerializableMeta.class)
 public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableArmorMeta
 {
 
@@ -29,14 +30,11 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public ColorableArmorMetaMock(ItemMeta meta)
+	public ColorableArmorMetaMock(ColorableArmorMetaMock meta)
 	{
 		super(meta);
 
-		if (meta instanceof LeatherArmorMeta leatherArmorMeta)
-		{
-			this.color = leatherArmorMeta.getColor().asRGB();
-		}
+		this.color = meta.getColor().asRGB();
 	}
 
 	@Override
