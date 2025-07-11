@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -118,6 +119,17 @@ class FenceGateDataMockTest
 			assertEquals(inWall, gate.isPowered());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		gate.setPowered(true);
+
+		@NotNull FenceGateDataMock cloned = gate.clone();
+
+		assertEquals(gate, cloned);
+		assertEquals(gate.isPowered(), cloned.isPowered());
 	}
 
 }

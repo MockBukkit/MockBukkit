@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,17 @@ class AnaloguePowerableBlockDataMockTest
 			assertEquals(15, analogue.getMaximumPower());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		analogue.setPower(3);
+
+		@NotNull AnaloguePowerableBlockDataMock cloned = analogue.clone();
+
+		assertEquals(analogue, cloned);
+		assertEquals(analogue.getPower(), cloned.getPower());
 	}
 
 }

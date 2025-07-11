@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.data;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.RedstoneWire;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -128,6 +129,17 @@ class RedstoneWireDataMockTest
 			assertEquals(15, wire.getMaximumPower());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		wire.setPower(3);
+
+		@NotNull RedstoneWireDataMock cloned = wire.clone();
+
+		assertEquals(wire, cloned);
+		assertEquals(wire.getPower(), cloned.getPower());
 	}
 
 }

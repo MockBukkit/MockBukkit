@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.data.Rail;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -87,6 +88,17 @@ class RailDataMockTest
 		RailDataMock blockDataMock = (RailDataMock) BlockDataMock.newData(null, "minecraft:rail[shape=south_east, waterlogged=true]");
 		assertEquals(Rail.Shape.SOUTH_EAST, blockDataMock.getShape());
 		assertTrue(blockDataMock.isWaterlogged());
+	}
+
+	@Test
+	void validateClone()
+	{
+		rail.setWaterlogged(true);
+
+		@NotNull RailDataMock cloned = rail.clone();
+
+		assertEquals(rail, cloned);
+		assertEquals(rail.isWaterlogged(), cloned.isWaterlogged());
 	}
 
 }

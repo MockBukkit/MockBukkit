@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,17 @@ class LightableDataMockTest
 			assertEquals(isLit, lightable.isLit());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		lightable.setLit(true);
+
+		@NotNull LightableDataMock cloned = lightable.clone();
+
+		assertEquals(lightable, cloned);
+		assertEquals(lightable.isLit(), cloned.isLit());
 	}
 
 }

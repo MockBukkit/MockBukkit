@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.data;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.data.type.Slab;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,6 +81,17 @@ class SlabDataMockTest
 		{
 			assertInstanceOf(SlabDataMock.class, BlockDataMock.mock(material));
 		}
+	}
+
+	@Test
+	void validateClone()
+	{
+		slab.setWaterlogged(true);
+
+		@NotNull SlabDataMock cloned = slab.clone();
+
+		assertEquals(slab, cloned);
+		assertEquals(slab.isWaterlogged(), cloned.isWaterlogged());
 	}
 
 }

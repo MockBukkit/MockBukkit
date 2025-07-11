@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -71,6 +72,17 @@ class LightDataMockTest
 			assertEquals(isWaterLogged, light.isWaterlogged());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		light.setWaterlogged(true);
+
+		@NotNull LightDataMock cloned = light.clone();
+
+		assertEquals(light, cloned);
+		assertEquals(light.isWaterlogged(), cloned.isWaterlogged());
 	}
 
 }

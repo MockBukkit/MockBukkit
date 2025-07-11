@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -77,6 +78,17 @@ class RedstoneWallTorchDataMockTest
 			assertEquals(isLit, torch.isLit());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		torch.setLit(true);
+
+		@NotNull RedstoneWallTorchDataMock cloned = torch.clone();
+
+		assertEquals(torch, cloned);
+		assertEquals(torch.isLit(), cloned.isLit());
 	}
 
 }

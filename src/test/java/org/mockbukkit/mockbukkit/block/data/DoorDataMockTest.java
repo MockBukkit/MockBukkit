@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Door;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -136,6 +137,17 @@ class DoorDataMockTest
 			assertEquals(isPowered, door.isPowered());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		door.setPowered(true);
+
+		@NotNull DoorDataMock cloned = door.clone();
+
+		assertEquals(door, cloned);
+		assertEquals(door.isPowered(), cloned.isPowered());
 	}
 
 }

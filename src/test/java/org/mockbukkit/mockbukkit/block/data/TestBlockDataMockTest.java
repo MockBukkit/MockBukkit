@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.data.type.TestBlock;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,17 @@ class TestBlockDataMockTest
 			assertEquals(mode, testBlock.getMode());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		testBlock.setMode(TestBlock.Mode.LOG);
+
+		@NotNull TestBlockDataMock cloned = testBlock.clone();
+
+		assertEquals(testBlock, cloned);
+		assertEquals(testBlock.getMode(), cloned.getMode());
 	}
 
 }

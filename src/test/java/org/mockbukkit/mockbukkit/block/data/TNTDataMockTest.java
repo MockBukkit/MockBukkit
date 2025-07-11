@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,17 @@ class TNTDataMockTest
 		}
 
 	}
+
+	@Test
+	void validateClone()
+	{
+		tnt.setUnstable(true);
+
+		@NotNull TNTDataMock cloned = tnt.clone();
+
+		assertEquals(tnt, cloned);
+		assertEquals(tnt.isUnstable(), cloned.isUnstable());
+	}
+
 
 }

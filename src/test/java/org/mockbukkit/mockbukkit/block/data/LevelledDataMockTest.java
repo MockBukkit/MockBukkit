@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,17 @@ class LevelledDataMockTest
 			assertEquals(0, levelled.getMinimumLevel());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		levelled.setLevel(3);
+
+		@NotNull LevelledDataMock cloned = levelled.clone();
+
+		assertEquals(levelled, cloned);
+		assertEquals(levelled.getLevel(), cloned.getLevel());
 	}
 
 }

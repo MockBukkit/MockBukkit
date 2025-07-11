@@ -67,7 +67,7 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 
 	@Override
 	@SuppressWarnings({"java:S2975", "java:S1182"})
-	public @NotNull BlockDataMock clone()
+	public @NotNull CrafterDataMock clone()
 	{
 		return new CrafterDataMock(this);
 	}

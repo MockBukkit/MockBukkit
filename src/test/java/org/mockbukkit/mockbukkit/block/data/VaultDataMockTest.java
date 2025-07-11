@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.data;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Vault;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -97,5 +98,16 @@ class VaultDataMockTest
 			assertEquals("Invalid face, only cartesian horizontal face are allowed for this property!", e.getMessage());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		vault.setOminous(true);
+
+		@NotNull VaultDataMock cloned = vault.clone();
+
+		assertEquals(vault, cloned);
+		assertEquals(vault.isOminous(), cloned.isOminous());
 	}
 }

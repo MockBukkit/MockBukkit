@@ -5,6 +5,7 @@ import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Stairs;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -145,6 +146,17 @@ class StairsDataMockTest
 		assertEquals(Bisected.Half.TOP, stairsDataMock.getHalf());
 		assertEquals(Stairs.Shape.INNER_LEFT, stairsDataMock.getShape());
 		assertTrue(stairsDataMock.isWaterlogged());
+	}
+
+	@Test
+	void validateClone()
+	{
+		stairs.setWaterlogged(true);
+
+		@NotNull StairsDataMock cloned = stairs.clone();
+
+		assertEquals(stairs, cloned);
+		assertEquals(stairs.isWaterlogged(), cloned.isWaterlogged());
 	}
 
 }

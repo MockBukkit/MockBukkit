@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,17 @@ class SnowableDataMockTest
 			assertEquals(isLit, snowable.isSnowy());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		snowable.setSnowy(true);
+
+		@NotNull SnowableDataMock cloned = snowable.clone();
+
+		assertEquals(snowable, cloned);
+		assertEquals(snowable.isSnowy(), cloned.isSnowy());
 	}
 
 }

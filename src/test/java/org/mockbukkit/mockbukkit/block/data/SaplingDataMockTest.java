@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,17 @@ class SaplingDataMockTest
 			assertEquals("The stage must be between 0 and 1", e.getMessage());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		sapling.setStage(1);
+
+		@NotNull SaplingDataMock cloned = sapling.clone();
+
+		assertEquals(sapling, cloned);
+		assertEquals(sapling.getStage(), cloned.getStage());
 	}
 
 }

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -125,6 +126,17 @@ class RepeaterDataMockTest
 			assertEquals(isLocked, repeater.isPowered());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		repeater.setDelay(3);
+
+		@NotNull RepeaterDataMock cloned = repeater.clone();
+
+		assertEquals(repeater, cloned);
+		assertEquals(repeater.getDelay(), cloned.getDelay());
 	}
 
 }

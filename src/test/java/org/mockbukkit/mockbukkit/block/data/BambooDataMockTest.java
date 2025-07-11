@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.block.data.type.Bamboo;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -72,6 +73,17 @@ class BambooDataMockTest
 	void getMaximumStage()
 	{
 		assertEquals(1, bamboo.getMaximumStage());
+	}
+
+	@Test
+	void validateClone()
+	{
+		bamboo.setAge(10);
+
+		@NotNull BambooDataMock cloned = bamboo.clone();
+
+		assertEquals(bamboo, cloned);
+		assertEquals(bamboo.getAge(), cloned.getAge());
 	}
 
 }
