@@ -100,7 +100,7 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	}
 
 	@Override
-	@SuppressWarnings("java:S2975")
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull RepeaterDataMock clone()
 	{
 		return new RepeaterDataMock(this);

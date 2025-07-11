@@ -361,7 +361,7 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	@SuppressWarnings("java:S2975")
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull ItemStack clone()
 	{
 		return new ItemStackMock(this);

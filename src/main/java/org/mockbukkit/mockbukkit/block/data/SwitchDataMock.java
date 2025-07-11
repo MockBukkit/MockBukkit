@@ -104,7 +104,7 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	}
 
 	@Override
-	@SuppressWarnings("java:S2975")
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull SwitchDataMock clone()
 	{
 		return new SwitchDataMock(this);
