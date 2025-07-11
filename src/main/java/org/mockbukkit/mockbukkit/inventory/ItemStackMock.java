@@ -74,10 +74,10 @@ public class ItemStackMock extends ItemStack
 		this.amount = stack.getAmount();
 		this.durability = stack.getDurability();
 
-		ItemMeta itemMeta = stack.getItemMeta();
-		if (itemMeta != null)
+		ItemMeta otherMeta = stack.getItemMeta();
+		if (otherMeta != null)
 		{
-			setItemMeta(itemMeta.clone());
+			setItemMeta(otherMeta.clone());
 		}
 	}
 
