@@ -73,7 +73,12 @@ public class ItemStackMock extends ItemStack
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
 		this.durability = initDurability(this.type);
-		setItemMeta(stack.getItemMeta());
+
+		ItemMeta itemMeta = stack.getItemMeta();
+		if (itemMeta != null)
+		{
+			setItemMeta(itemMeta.clone());
+		}
 	}
 
 	public ItemStackMock(@NotNull Material type, int amount)
@@ -358,12 +363,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @NotNull ItemStack clone()
 	{
-		ItemStackMock clone = new ItemStackMock(this.type);
-
-		clone.setAmount(this.amount);
-		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
-		clone.durability = this.durability;
-		return clone;
+		return new ItemStackMock(this);
 	}
 
 	@Override
