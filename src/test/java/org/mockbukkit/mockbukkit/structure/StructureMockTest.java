@@ -13,6 +13,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.CowMock;
+import org.mockbukkit.mockbukkit.entity.ZombieMock;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +31,25 @@ class StructureMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void givenConstructorCopy()
+	{
+		ZombieMock zombieMock = new ZombieMock(server, UUID.randomUUID());
+		structure.addEntity(zombieMock);
+
+		Palette palette = PaletteMock.of(Material.GOLD_BLOCK);
+		structure.addPalette(palette);
+
+		BlockVector size = new BlockVector(5, 10, 3);
+		structure.setSize(size);
+
+		StructureMock copy = new StructureMock(structure);
+
+		assertEquals(1, copy.getEntityCount());
+		assertEquals(1, copy.getPaletteCount());
+		assertEquals(size, copy.getSize());
+	}
 
 	@Nested
 	class SetSize
