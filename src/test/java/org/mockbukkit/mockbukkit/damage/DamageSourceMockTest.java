@@ -293,7 +293,7 @@ class DamageSourceMockTest
 	@Test
 	void equals_and_hashCode_WhenNotHavingSameType()
 	{
-		assertNotEquals(new Object(), damageSourceMock);
+		assertNotEquals(damageSourceMock, new Object());
 	}
 
 }
