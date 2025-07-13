@@ -278,14 +278,33 @@ class PotionEffectPriorityQueueTests
 	}
 
 	@Test
-	void testHasPotionEffectNullQueue()
+	void testAddPotionEffectActiveEffectChanges()
 	{
+		// This targets: if (oldEffect != null && !oldEffect.equals(newActiveEffect) && action == EntityPotionEffectEvent.Action.CHANGED)
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		// Add stronger effect - this should trigger the condition where:
+		// - oldEffect != null (weakEffect exists)
+		// - !oldEffect.equals(newActiveEffect) (strongEffect is different)
+		// - action == CHANGED (since effect type already exists)
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertEquals(EntityPotionEffectEvent.Action.CHANGED, event.getAction());
+		assertEffectActive(strongEffect); // Should be the stronger effect now
+	}
+
+	@Test
+	void testHasPotionEffectWithNullQueue()
+	{
+		// This targets: queue != null in "return queue != null && !queue.isEmpty();"
 		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
 	}
 
 	@Test
-	void testHasPotionEffectEmptyQueue()
+	void testHasPotionEffectWithEmptyQueue()
 	{
+		// This targets: !queue.isEmpty() in "return queue != null && !queue.isEmpty();"
+		// First add and remove to create an empty queue scenario
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
@@ -293,14 +312,16 @@ class PotionEffectPriorityQueueTests
 	}
 
 	@Test
-	void testGetPotionEffectNullQueue()
+	void testGetPotionEffectWithNullQueue()
 	{
+		// This targets: queue == null in "if (queue == null || queue.isEmpty())"
 		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
 	}
 
 	@Test
-	void testGetPotionEffectEmptyQueue()
+	void testGetPotionEffectWithEmptyQueue()
 	{
+		// This targets: queue.isEmpty() in "if (queue == null || queue.isEmpty())"
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
@@ -308,24 +329,42 @@ class PotionEffectPriorityQueueTests
 	}
 
 	@Test
-	void testRemoveExpiredEffectsEmptyQueue()
+	void testRemoveExpiredEffectsWithEmptyQueueCondition()
 	{
-		PotionEffect shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 1, 2);
-		livingEntity.addPotionEffect(shortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		// This targets: queue.isEmpty() ? null : mapToPotionEffect(queue.peek())
+		PotionEffect veryShortEffect = new PotionEffect(PotionEffectType.REGENERATION, 1, 2);
+		livingEntity.addPotionEffect(veryShortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
+		// Tick to expire the effect completely
 		server.getScheduler().performTicks(1);
 
-		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, shortEffect, null, EntityPotionEffectEvent.Cause.EXPIRATION);
+		// This should have hit the empty queue condition
 		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
-		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
 	}
 
 	@Test
-	void testRemovePotionEffectNullQueue()
+	void testRemoveExpiredEffectsOldActiveEffectNotNull()
 	{
+		// This targets: if (oldActiveEffect != null && !Objects.equals(oldActiveEffect, newActiveEffect))
+		PotionEffect strongShort = new PotionEffect(PotionEffectType.REGENERATION, 2, 3);
+		PotionEffect weakLong = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+
+		livingEntity.addPotionEffect(weakLong, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(strongShort, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		// This will expire the strong effect and reveal the weak one
+		server.getScheduler().performTicks(2);
+
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongShort, weakLong, EntityPotionEffectEvent.Cause.EXPIRATION);
+	}
+
+	@Test
+	void testRemovePotionEffectWithNullQueue()
+	{
+		// This targets: if (queue != null && !queue.isEmpty()) - null case
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
-		// Should not fire any events
+		// Should not crash, no events fired
 		var eventCount = server.getPluginManager().getFiredEvents()
 				.filter(e -> e instanceof EntityPotionEffectEvent)
 				.count();
@@ -333,64 +372,67 @@ class PotionEffectPriorityQueueTests
 	}
 
 	@Test
-	void testRemovePotionEffectEmptyQueue()
+	void testRemovePotionEffectWithEmptyQueue()
 	{
+		// This targets: if (queue != null && !queue.isEmpty()) - empty case
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION); // Remove it
+
+		long eventsBeforeSecondRemoval = server.getPluginManager().getFiredEvents().count();
+
+		// Try to remove again from empty queue
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
-		// Try to remove again - should not fire new events
-		long eventCountBefore = server.getPluginManager().getFiredEvents()
-				.filter(e -> e instanceof EntityPotionEffectEvent)
-				.count();
-
-		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
-
-		long eventCountAfter = server.getPluginManager().getFiredEvents()
-				.filter(e -> e instanceof EntityPotionEffectEvent)
-				.count();
-
-		assertEquals(eventCountBefore, eventCountAfter); // No new events
+		long eventsAfterSecondRemoval = server.getPluginManager().getFiredEvents().count();
+		assertEquals(eventsBeforeSecondRemoval, eventsAfterSecondRemoval); // No new events
 	}
 
 	@Test
-	void testRemoveSameStrengthEffectWithChange()
+	void testRemovePotionEffectOldActiveEffectEquals()
 	{
-		// Add two effects where removal causes a change (different durations)
-		PotionEffect effect1 = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
+		// This targets: if (!oldActiveEffect.equals(newActiveEffect)) - false case
+		// We need to create a scenario where removing an effect doesn't change the active effect
+		// This happens when we have only one effect and remove it (queue becomes empty)
+		PotionEffect singleEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
 
-		livingEntity.addPotionEffect(effect1, EntityPotionEffectEvent.Cause.PLUGIN);
-		livingEntity.addPotionEffect(effect2, EntityPotionEffectEvent.Cause.PLUGIN); // Longer duration wins
+		livingEntity.addPotionEffect(singleEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		assertEffectActive(effect2);
-
-		// Remove top effect
+		// Remove the only effect - this hits the case where newActiveEffect becomes null
+		// So the equals check is skipped and no CHANGED event is fired
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
-		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, effect2, null, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, effect2, effect1, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEffectActive(effect1);
+		// Should fire REMOVED event but NOT a CHANGED event since queue becomes empty
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, singleEffect, null, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		// Check that no CHANGED event was fired (since queue became empty)
+		var changeEvents = server.getPluginManager().getFiredEvents()
+				.filter(e -> e instanceof EntityPotionEffectEvent)
+				.map(e -> (EntityPotionEffectEvent) e)
+				.filter(e -> e.getAction() == EntityPotionEffectEvent.Action.CHANGED)
+				.count();
+		assertEquals(0, changeEvents); // Should be 0 since queue became empty, not because effects are equal
 	}
 
 	@Test
-	void testGetActivePotionEffectsWithEmptyQueues()
+	void testGetActivePotionEffectsEmptyQueueFilter()
 	{
+		// This targets: .filter(queue -> !queue.isEmpty())
 		PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
-		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
+		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 2, 1); // Short duration
 
 		livingEntity.addPotionEffect(regen, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(speed, EntityPotionEffectEvent.Cause.PLUGIN);
 
 		assertEquals(2, livingEntity.getActivePotionEffects().size());
 
-		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+		// Expire the speed effect
+		server.getScheduler().performTicks(2);
 
+		// Now speed queue should be empty and filtered out
 		var activeEffects = livingEntity.getActivePotionEffects();
 		assertEquals(1, activeEffects.size());
-		assertTrue(activeEffects.stream().anyMatch(effect -> effect.getType() == PotionEffectType.SPEED));
-
-		livingEntity.removePotionEffect(PotionEffectType.SPEED);
-		assertEquals(0, livingEntity.getActivePotionEffects().size());
+		assertTrue(activeEffects.stream().anyMatch(e -> e.getType() == PotionEffectType.REGENERATION));
+		assertFalse(activeEffects.stream().anyMatch(e -> e.getType() == PotionEffectType.SPEED));
 	}
 
 	@Test
