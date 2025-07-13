@@ -76,7 +76,7 @@ class MockBukkitExtensionTest
 	{
 
 		@MockBukkitInject
-		private ServerMock nestedClassAnnotation;
+		protected ServerMock nestedClassAnnotation;
 
 		@Test
 		void isFieldInjectedCorrectly()
@@ -104,7 +104,7 @@ class MockBukkitExtensionTest
 	{
 
 		@MockBukkitInject
-		private ServerMock nestedClassAnnotation;
+		protected ServerMock nestedClassAnnotation;
 
 		@Test
 		void isFieldInjectedCorrectly()
@@ -142,4 +142,8 @@ class MockBukkitExtensionTest
 
 	}
 
+	@Nested
+	class SubclassWithoutAnnotation extends WithNestedClassWithAnnotation
+	{
+	}
 }

@@ -118,7 +118,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		for (final Field field : serverMockFields)
 		{
 			final String name = field.getName();
-			FieldUtils.writeDeclaredField(testInstance, name, serverMock, true);
+			FieldUtils.writeField(testInstance, name, serverMock, true);
 		}
 	}
 
