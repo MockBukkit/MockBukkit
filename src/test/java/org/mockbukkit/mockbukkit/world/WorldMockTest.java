@@ -2797,6 +2797,7 @@ class WorldMockTest
 			assertEquals(2, world.getSpawnedParticles().size());
 			assertEquals(1, world.getSpawnedParticles().get(1).spawnedAtTick());
 		}
+
 	}
 
 }
