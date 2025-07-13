@@ -63,6 +63,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -129,7 +131,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Setter
 	private @Nullable Player killer;
 
-	private final Map<PotionEffectType, ActivePotionEffect> activeEffects = new HashMap<>();
+	private final Map<PotionEffectType, PriorityQueue<ActivePotionEffect>> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 
@@ -635,32 +637,29 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 * @param cause  The cause.
 	 * @return The event containing details about adding the potion effect.
 	 */
-	public EntityPotionEffectEvent addPotionEffect(@NotNull PotionEffect effect, EntityPotionEffectEvent.Cause cause)
-	{
+	public EntityPotionEffectEvent addPotionEffect(@NotNull PotionEffect effect, EntityPotionEffectEvent.Cause cause) {
 		AsyncCatcher.catchOp("effect add");
 		Preconditions.checkNotNull(effect, "PotionEffect cannot be null");
-
-		/*
-		Applying completely new effect -> old: null, new: new effect, action: add, override: false
-		A single effects runs out (on time) (not possible via this method because @NotNull) -> old: effect that ran out, new: null, action: remove, override: true
-		Applying a new effect but effect type already active -> old: existing effect, new: new effect, action: changed, override: true
-		Clearing all effects (not possible via this method) -> old: effect that was cleared, new: null, action: clear, override: true
-
-		 Notes:
-		 If multiple effects are cleared, then for each one an EntityPotionEffectEvent is called.
-		 */
 
 		PotionEffectType type = effect.getType();
 		PotionEffect oldEffect = getPotionEffect(type);
 		EntityPotionEffectEvent.Action action = oldEffect == null ? EntityPotionEffectEvent.Action.ADDED : EntityPotionEffectEvent.Action.CHANGED;
 		boolean override = oldEffect != null;
 
-
 		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, cause, action, override);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			activeEffects.put(type, new ActivePotionEffect(effect));
+
+		if (!event.isCancelled()) {
+			activeEffects.computeIfAbsent(type, k -> new PriorityQueue<>()).add(new ActivePotionEffect(effect));
+
+			// Check if the active effect changed due to priority
+			PotionEffect newActiveEffect = getPotionEffect(type);
+			if (oldEffect != null && !oldEffect.equals(newActiveEffect)) {
+				// The active effect changed, fire another event
+				var changeEvent = new EntityPotionEffectEvent(this, oldEffect, newActiveEffect, cause,
+						EntityPotionEffectEvent.Action.CHANGED, true);
+				Bukkit.getPluginManager().callEvent(changeEvent);
+			}
 		}
 		return event;
 	}
@@ -686,9 +685,9 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean hasPotionEffect(@NotNull PotionEffectType type)
-	{
-		return activeEffects.containsKey(type);
+	public boolean hasPotionEffect(@NotNull PotionEffectType type) {
+		var queue = activeEffects.get(type);
+		return queue != null && !queue.isEmpty();
 	}
 
 	private @Nullable PotionEffect mapToPotionEffect(@Nullable ActivePotionEffect activeEffect)
@@ -703,29 +702,99 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public @Nullable PotionEffect getPotionEffect(@NotNull PotionEffectType type)
-	{
+	public @Nullable PotionEffect getPotionEffect(@NotNull PotionEffectType type) {
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		return mapToPotionEffect(activeEffects.get(type));
+		var queue = activeEffects.get(type);
+		if (queue == null || queue.isEmpty()) {
+			return null;
+		}
+		return mapToPotionEffect(queue.peek());
+	}
+
+	private void removeExpiredEffects() {
+		var it = activeEffects.entrySet().iterator();
+		while (it.hasNext()) {
+			var entry = it.next();
+			var queue = entry.getValue();
+			var effectType = entry.getKey();
+
+			PotionEffect oldActiveEffect = queue.isEmpty() ? null : mapToPotionEffect(queue.peek());
+
+			// Remove expired effects and fire events
+			while (!queue.isEmpty() && queue.peek().hasExpired()) {
+				var expiredEffect = queue.poll();
+				var event = new EntityPotionEffectEvent(this, expiredEffect.getPotionEffect(), null,
+						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
+				Bukkit.getPluginManager().callEvent(event);
+			}
+
+			// Check if the active effect changed after removing expired effects
+			PotionEffect newActiveEffect = queue.isEmpty() ? null : mapToPotionEffect(queue.peek());
+			if (oldActiveEffect != null && !Objects.equals(oldActiveEffect, newActiveEffect)) {
+				if (newActiveEffect != null) {
+					// A different effect became active
+					var changeEvent = new EntityPotionEffectEvent(this, oldActiveEffect, newActiveEffect,
+							EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.CHANGED, true);
+					Bukkit.getPluginManager().callEvent(changeEvent);
+				}
+			}
+
+			// Remove empty queues
+			if (queue.isEmpty()) {
+				it.remove();
+			}
+		}
 	}
 
 	@Override
-	public void removePotionEffect(@NotNull PotionEffectType type)
-	{
+	public void removePotionEffect(@NotNull PotionEffectType type) {
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		activeEffects.remove(type);
+		var queue = activeEffects.get(type);
+		if (queue != null && !queue.isEmpty()) {
+			PotionEffect oldActiveEffect = mapToPotionEffect(queue.peek());
+			var removedEffect = queue.poll();
+
+			var event = new EntityPotionEffectEvent(this, removedEffect.getPotionEffect(), null,
+					EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.REMOVED, true);
+			Bukkit.getPluginManager().callEvent(event);
+
+			// Check if a different effect became active
+			if (!queue.isEmpty()) {
+				PotionEffect newActiveEffect = mapToPotionEffect(queue.peek());
+				if (!oldActiveEffect.equals(newActiveEffect)) {
+					var changeEvent = new EntityPotionEffectEvent(this, oldActiveEffect, newActiveEffect,
+							EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+					Bukkit.getPluginManager().callEvent(changeEvent);
+				}
+			}
+
+			if (queue.isEmpty()) {
+				activeEffects.remove(type);
+			}
+		}
 	}
 
 	@Override
-	public @NotNull Collection<PotionEffect> getActivePotionEffects()
-	{
-		return activeEffects.values().stream().map(this::mapToPotionEffect).toList();
+	public @NotNull Collection<PotionEffect> getActivePotionEffects() {
+		return activeEffects.values().stream()
+				.filter(queue -> !queue.isEmpty())
+				.map(queue -> mapToPotionEffect(queue.peek()))
+				.toList();
 	}
 
 	@Override
-	public boolean clearActivePotionEffects()
-	{
+	public boolean clearActivePotionEffects() {
 		final boolean res = !activeEffects.isEmpty();
+
+		// Fire removal events for all active effects
+		activeEffects.forEach((type, queue) -> {
+			queue.forEach(activeEffect -> {
+				var event = new EntityPotionEffectEvent(this, activeEffect.getPotionEffect(), null,
+						EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CLEARED, true);
+				Bukkit.getPluginManager().callEvent(event);
+			});
+		});
+
 		activeEffects.clear();
 		return res;
 	}
@@ -1303,7 +1372,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void tick()
 	{
 		super.tick();
-		activeEffects.entrySet().removeIf(entry -> entry.getValue().hasExpired());
+		removeExpiredEffects();
 	}
 
 }
