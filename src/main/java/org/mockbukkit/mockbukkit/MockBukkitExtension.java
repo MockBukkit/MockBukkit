@@ -30,23 +30,43 @@ import java.util.logging.Logger;
 
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
- * inject this instance of {@link ServerMock} to any field or parameter of that type in the extended test class that is
- * annotated with {@link MockBukkitInject}.
+ * inject instances of {@link ServerMock}, {@link PlayerMock}, {@link WorldMock}, and {@link Plugin} to any field or
+ * parameter of those types in the extended test class that is annotated with {@link MockBukkitInject}.
+ *
+ * <p>The extension supports injection of the following types:</p>
+ * <ul>
+ *   <li>{@link Server} or {@link ServerMock} - The main server mock instance</li>
+ *   <li>{@link Player} or {@link PlayerMock} - Auto-generated players with unique names (Player0, Player1, etc.)</li>
+ *   <li>{@link World} or {@link WorldMock} - Auto-generated worlds with unique names (World0, World1, etc.)</li>
+ *   <li>{@link Plugin} or {@link PluginMock} - Auto-generated plugins with unique names (Plugin0, Plugin1, etc.)</li>
+ * </ul>
  *
  * <p>Example field usage:</p>
  *
  * <pre class="code"><code class="java">
- * <b>&#064;ExtendWith(MockBukkitExtension.class)</b>
+ * <b>@ExtendWith(MockBukkitExtension.class)</b>
  * class FieldExampleTest
  * {
  *
- * 	<b>&#064;MockBukkitInject</b>
+ * 	<b>@MockBukkitInject</b>
  * 	private ServerMock serverMock;
  *
- * 	&#064;Test
- * 	void aUnitTest()
+ * 	<b>@MockBukkitInject</b>
+ * 	private PlayerMock player;
+ *
+ * 	<b>@MockBukkitInject</b>
+ * 	private World world;
+ *
+ * 	<b>@MockBukkitInject</b>
+ * 	private Plugin plugin;
+ *
+ *    @Test
+ *    void aUnitTest()
  *    {
  * 		assert serverMock != null;
+ * 		assert player != null;
+ * 		assert world != null;
+ * 		assert plugin != null;
  * 		// ...
  *    }
  *
@@ -56,19 +76,19 @@ import java.util.logging.Logger;
  * Example constructor parameter usage:
  *
  * <pre class="code"><code class="java">
- * <b>&#064;ExtendWith(MockBukkitExtension.class)</b>
+ * <b>@ExtendWith(MockBukkitExtension.class)</b>
  * class ConstructorExampleTest
  * {
  *
  * 	private ServerMock serverMock;
  *
- * 	public ConstructorExampleTest(<b>&#064;MockBukkitSever</b> ServerMock serverMock)
+ * 	public ConstructorExampleTest(<b>@MockBukkitInject</b> ServerMock serverMock)
  *    {
  * 		this.serverMock = serverMock;
  *    }
  *
- * 	&#064;Test
- * 	void aUnitTest()
+ *    @Test
+ *    void aUnitTest()
  *    {
  * 		assert serverMock != null;
  * 		// ...
@@ -80,14 +100,41 @@ import java.util.logging.Logger;
  * Example method parameter usage:
  *
  * <pre class="code"><code class="java">
- * <b>&#064;ExtendWith(MockBukkitExtension.class)</b>
+ * <b>@ExtendWith(MockBukkitExtension.class)</b>
  * class MethodExampleTest
  * {
  *
- * 	&#064;Test
- * 	void aUnitTest(<b>&#064;MockBukkitInject</b> ServerMock serverMock)
+ *    @Test
+ *    void aUnitTest(<b>@MockBukkitInject</b> ServerMock serverMock,
+ * 	               <b>@MockBukkitInject</b> Player player,
+ * 	               <b>@MockBukkitInject</b> World world)
  *    {
  * 		assert serverMock != null;
+ * 		assert player != null;
+ * 		assert world != null;
+ * 		// ...
+ *    }
+ *
+ * }
+ * </code></pre>
+ *
+ * <p>Example inheritance usage (fields in mixin classes are also supported):</p>
+ *
+ * <pre class="code"><code class="java">
+ * class BaseMixin
+ * {
+ * 	<b>@MockBukkitInject</b>
+ * 	protected ServerMock serverMock;
+ * }
+ *
+ * <b>@ExtendWith(MockBukkitExtension.class)</b>
+ * class InheritanceExampleTest extends BaseMixin
+ * {
+ *
+ *    @Test
+ *    void aUnitTest()
+ *    {
+ * 		assert serverMock != null; // Injected from parent class
  * 		// ...
  *    }
  *

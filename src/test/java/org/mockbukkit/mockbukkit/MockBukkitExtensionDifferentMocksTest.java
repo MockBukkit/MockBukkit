@@ -1,17 +1,28 @@
 package org.mockbukkit.mockbukkit;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -163,13 +174,78 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestInvalidThingie
 	{
+
 		@MockBukkitInject
 		private Integer someInteger;
 
 		@Test
-		void testInteger() {
+		void testInteger()
+		{
 			assertNull(someInteger);
 		}
+
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "dummy" })
+	void shouldInjectMocksViaMethodParameters(
+			String value,
+			@MockBukkitInject ServerMock server,
+			@MockBukkitInject Player player,
+			@MockBukkitInject World world,
+			@MockBukkitInject Plugin plugin
+	)
+	{
+		assertEquals("dummy", value);
+
+		assertNotNull(server);
+		assertInstanceOf(ServerMock.class, server);
+		assertNotNull(player);
+		assertInstanceOf(PlayerMock.class, player);
+		assertNotNull(world);
+		assertInstanceOf(WorldMock.class, world);
+		assertNotNull(plugin);
+		assertInstanceOf(Plugin.class, plugin);
+	}
+
+	private void testMethodWithInteger(@MockBukkitInject Integer param)
+	{
+	}
+
+	@RequiredArgsConstructor
+	private static class TestParameterContext implements ParameterContext
+	{
+
+		@Getter
+		private final Parameter parameter;
+
+		@Override
+		public int getIndex()
+		{
+			return 0;
+		}
+
+		@Override
+		public Optional<Object> getTarget()
+		{
+			return Optional.empty();
+		}
+
+	}
+
+	@Test
+	@SneakyThrows
+	void checkForInvalidSupportedAnnotation()
+	{
+		// I can't do this via a normal way, because it will crash before I reach the correct point inside the code.
+		var extension = new MockBukkitExtension();
+		Method testMethod = getClass().getDeclaredMethod("testMethodWithInteger", Integer.class);
+		Parameter parameter = testMethod.getParameters()[0];
+
+		ParameterContext parameterContext = new TestParameterContext(parameter);
+
+		assertFalse(extension.supportsParameter(parameterContext, null));
+		assertNull(extension.resolveParameter(parameterContext, null));
 	}
 
 }
