@@ -11,6 +11,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(MockBukkitExtension.class)
 class MonsterMockTest
 {
@@ -28,7 +30,7 @@ class MonsterMockTest
 	@Test
 	void testGetSpawnCategory()
 	{
-		Assertions.assertEquals(SpawnCategory.MONSTER, monster.getSpawnCategory());
+		assertEquals(SpawnCategory.MONSTER, monster.getSpawnCategory());
 	}
 
 }

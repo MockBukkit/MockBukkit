@@ -10,6 +10,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(MockBukkitExtension.class)
 class VehicleMockTest
 {
@@ -27,7 +29,7 @@ class VehicleMockTest
 	@Test
 	void testToString()
 	{
-		Assertions.assertEquals("VehicleMock{passenger=null}", vehicle.toString());
+		assertEquals("VehicleMock{passenger=null}", vehicle.toString());
 	}
 
 }

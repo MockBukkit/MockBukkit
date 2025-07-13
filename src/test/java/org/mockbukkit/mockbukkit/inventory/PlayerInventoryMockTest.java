@@ -154,7 +154,7 @@ class PlayerInventoryMockTest
 		void givenBodyEquipmentSlot_ShouldThrowIllegalArgumentException()
 		{
 			ItemStack item = new ItemStackMock(Material.STONE);
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.BODY, item));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.BODY, item));
 			assertEquals("BODY is not valid for players!", e.getMessage());
 		}
 
@@ -162,7 +162,7 @@ class PlayerInventoryMockTest
 		void givenSaddleEquipmentSlot_ShouldThrowIllegalArgumentException()
 		{
 			ItemStack item = new ItemStackMock(Material.STONE);
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.SADDLE, item));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.SADDLE, item));
 			assertEquals("Could not set slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
 		}
 
@@ -309,15 +309,15 @@ class PlayerInventoryMockTest
 		@Test
 		void getItemWithBody_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.BODY));
-			Assertions.assertEquals("BODY is not valid for players!", e.getMessage());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.BODY));
+			assertEquals("BODY is not valid for players!", e.getMessage());
 		}
 
 		@Test
 		void getItemWithSaddle_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.SADDLE));
-			Assertions.assertEquals("Could not get slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.SADDLE));
+			assertEquals("Could not get slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
 		}
 
 	}

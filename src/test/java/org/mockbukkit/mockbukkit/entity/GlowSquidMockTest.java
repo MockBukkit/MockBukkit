@@ -13,6 +13,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
 public class GlowSquidMockTest
@@ -43,7 +44,7 @@ public class GlowSquidMockTest
 	@Test
 	void testSetDarkTicksRemaining_Negative_ThrowsException()
 	{
-		Assertions.assertThrows(IllegalArgumentException.class, () -> glowSquid.setDarkTicksRemaining(-1));
+		assertThrows(IllegalArgumentException.class, () -> glowSquid.setDarkTicksRemaining(-1));
 	}
 
 	@Test

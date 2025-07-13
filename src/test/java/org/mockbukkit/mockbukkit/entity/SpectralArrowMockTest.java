@@ -33,7 +33,7 @@ class SpectralArrowMockTest
 	@Test
 	void getDamage_default()
 	{
-		Assertions.assertEquals(6.0, spectralArrow.getDamage());
+		assertEquals(6.0, spectralArrow.getDamage());
 	}
 
 	@Test

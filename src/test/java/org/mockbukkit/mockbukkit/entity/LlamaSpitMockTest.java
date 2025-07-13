@@ -12,6 +12,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(MockBukkitExtension.class)
 public class LlamaSpitMockTest
 {
@@ -29,7 +31,7 @@ public class LlamaSpitMockTest
 	@Test
 	void testGetType()
 	{
-		Assertions.assertEquals(EntityType.LLAMA_SPIT, llamaSpit.getType());
+		assertEquals(EntityType.LLAMA_SPIT, llamaSpit.getType());
 	}
 
 }

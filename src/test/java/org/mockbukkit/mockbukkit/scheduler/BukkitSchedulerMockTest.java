@@ -550,13 +550,13 @@ class BukkitSchedulerMockTest
 		{
 		}, 1L, 1L);
 		scheduler.performOneTick();
-		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+		assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
 	}
 
 	@Test
 	void taskNotRunning()
 	{
-		Assertions.assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+		assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
 	}
 
 	@Test

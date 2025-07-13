@@ -11,6 +11,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class FishMockTest
@@ -34,14 +36,14 @@ class FishMockTest
 	@Test
 	void testIsFromBucketDefault()
 	{
-		Assertions.assertFalse(fish.isFromBucket());
+		assertFalse(fish.isFromBucket());
 	}
 
 	@Test
 	void testSetFromBucket()
 	{
 		fish.setFromBucket(true);
-		Assertions.assertTrue(fish.isFromBucket());
+		assertTrue(fish.isFromBucket());
 	}
 
 	@Test
