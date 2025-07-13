@@ -25,7 +25,6 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -147,10 +146,6 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
 
 	private final Logger logger = Logger.getLogger("MockBukkitExtension");
-	private final Set<Class<?>> serverSupportedTypes = Set.of(Server.class, ServerMock.class);
-	private final Set<Class<?>> playerSupportedTypes = Set.of(Player.class, PlayerMock.class);
-	private final Set<Class<?>> worldSupportedTypes = Set.of(World.class, WorldMock.class);
-	private final Set<Class<?>> pluginSupportedTypes = Set.of(Plugin.class, PluginMock.class);
 
 	private int playerCounter = 0;
 	private int worldCounter = 0;
@@ -187,21 +182,21 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 	private @Nullable Object createMockForType(Class<?> type)
 	{
-		if (serverSupportedTypes.contains(type))
+		if (type.isAssignableFrom(ServerMock.class))
 		{
 			return MockBukkit.getOrCreateMock();
 		}
-		else if (playerSupportedTypes.contains(type))
+		else if (type.isAssignableFrom(PlayerMock.class))
 		{
 			final String playerName = "Player" + playerCounter++;
 			return MockBukkit.getOrCreateMock().addPlayer(playerName);
 		}
-		else if (worldSupportedTypes.contains(type))
+		else if (type.isAssignableFrom(WorldMock.class))
 		{
 			final String worldName = "World" + worldCounter++;
 			return MockBukkit.getOrCreateMock().addSimpleWorld(worldName);
 		}
-		else if (pluginSupportedTypes.contains(type))
+		else if (type.isAssignableFrom(PluginMock.class))
 		{
 			final String pluginName = "Plugin" + pluginCounter++;
 			return MockBukkit.createMockPlugin(pluginName);
@@ -231,10 +226,10 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		final boolean paramHasCorrectAnnotation = parameterContext.isAnnotated(MockBukkitInject.class);
 
 		return paramHasCorrectAnnotation && (
-				serverSupportedTypes.contains(paramType) ||
-						playerSupportedTypes.contains(paramType) ||
-						worldSupportedTypes.contains(paramType) ||
-						pluginSupportedTypes.contains(paramType)
+				paramType.isAssignableFrom(ServerMock.class) ||
+						paramType.isAssignableFrom(PlayerMock.class) ||
+						paramType.isAssignableFrom(PluginMock.class) ||
+						paramType.isAssignableFrom(WorldMock.class)
 		);
 	}
 
