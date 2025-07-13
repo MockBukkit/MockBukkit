@@ -172,7 +172,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 		for (final Field field : allFields)
 		{
-			final Object mockObject = createMockForField(field);
+			final Object mockObject = createMockForType(field.getType());
 			if (mockObject != null)
 			{
 				FieldUtils.writeField(field, testInstance, mockObject, true);
@@ -180,7 +180,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		}
 	}
 
-	private @Nullable Object createMockForType(Class<?> type)
+	private @Nullable Object createMockForType(@NotNull Class<?> type)
 	{
 		if (type.isAssignableFrom(ServerMock.class))
 		{
@@ -205,11 +205,6 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		{
 			return null;
 		}
-	}
-
-	private Object createMockForField(@NotNull Field field)
-	{
-		return createMockForType(field.getType());
 	}
 
 	@Override
