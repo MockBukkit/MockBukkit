@@ -208,8 +208,10 @@ class MockBukkitExtensionDifferentMocksTest
 		assertInstanceOf(Plugin.class, plugin);
 	}
 
+	@SuppressWarnings({ "java:S1144", "java:S1172" })
 	private void testMethodWithInteger(@MockBukkitInject Integer param)
 	{
+		// I just need the methods signature. It doesn't have to do anything.
 	}
 
 	@RequiredArgsConstructor
