@@ -151,7 +151,7 @@ class SwitchDataMockTest
 	{
 		Set<Material> possibleMaterials = new HashSet<>(Tag.BUTTONS.getValues());
 		possibleMaterials.add(Material.LEVER);
-		return Stream.of(possibleMaterials.toArray(new Material[0]));
+		return Stream.of(possibleMaterials.toArray(Material[]::new));
 	}
 
 }
