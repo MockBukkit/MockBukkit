@@ -113,6 +113,42 @@ class MockBukkitExtensionDifferentMocksTest
 	}
 
 	@Nested
+	class TestAllTypesWithNamesClass
+	{
+
+		@MockBukkitInject(name="Bumba")
+		PlayerMock playerMock;
+
+		@MockBukkitInject(name="Studio100")
+		WorldMock worldMock;
+
+		@MockBukkitInject(name="CodeMonkey")
+		Plugin pluginMock;
+
+		@Test
+		void playerMockIsNotNull()
+		{
+			assertNotNull(playerMock);
+			assertEquals( "Bumba", playerMock.getName() );
+		}
+
+		@Test
+		void worldMockIsNotNull()
+		{
+			assertNotNull(worldMock);
+			assertEquals( "Studio100", worldMock.getName() );
+		}
+
+		@Test
+		void pluginMockIsNotNull()
+		{
+			assertNotNull(pluginMock);
+			assertEquals( "CodeMonkey v1.0.0", pluginMock.getDescription().getFullName() );
+		}
+
+	}
+
+	@Nested
 	class TestMultiplesClass
 	{
 

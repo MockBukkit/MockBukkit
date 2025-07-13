@@ -35,10 +35,18 @@ import java.util.logging.Logger;
  * <p>The extension supports injection of the following types:</p>
  * <ul>
  *   <li>{@link Server} or {@link ServerMock} - The main server mock instance</li>
- *   <li>{@link Player} or {@link PlayerMock} - Auto-generated players with unique names (Player0, Player1, etc.)</li>
- *   <li>{@link World} or {@link WorldMock} - Auto-generated worlds with unique names (World0, World1, etc.)</li>
- *   <li>{@link Plugin} or {@link PluginMock} - Auto-generated plugins with unique names (Plugin0, Plugin1, etc.)</li>
+ *   <li>{@link Player} or {@link PlayerMock} - Auto-generated players with unique names (Player0, Player1, etc.) or custom names</li>
+ *   <li>{@link World} or {@link WorldMock} - Auto-generated worlds with unique names (World0, World1, etc.) or custom names</li>
+ *   <li>{@link Plugin} or {@link PluginMock} - Auto-generated plugins with unique names (Plugin0, Plugin1, etc.) or custom names</li>
  * </ul>
+ *
+ * <p>Custom names can be specified using the {@code name} parameter of the {@link MockBukkitInject} annotation.
+ * When {@code name} is provided and not empty, it will be used as the exact name for the mock object.
+ * When {@code name} is not provided or is an empty string, auto-generated names with incrementing counters
+ * will be used (Player0, Player1, World0, World1, Plugin0, Plugin1, etc.).</p>
+ *
+ * <p>Note: The {@code name} parameter only affects {@link PlayerMock}, {@link WorldMock}, and {@link PluginMock} objects.
+ * {@link ServerMock} instances ignore the name parameter as there is only one server instance.</p>
  *
  * <p>Example field usage:</p>
  *
@@ -50,13 +58,13 @@ import java.util.logging.Logger;
  * 	<b>@MockBukkitInject</b>
  * 	private ServerMock serverMock;
  *
- * 	<b>@MockBukkitInject</b>
+ * 	<b>@MockBukkitInject(name = "testPlayer")</b>
  * 	private PlayerMock player;
  *
- * 	<b>@MockBukkitInject</b>
+ * 	<b>@MockBukkitInject</b>  // Will be auto-named "World0"
  * 	private World world;
  *
- * 	<b>@MockBukkitInject</b>
+ * 	<b>@MockBukkitInject(name = "myPlugin")</b>
  * 	private Plugin plugin;
  *
  *    @Test
@@ -64,8 +72,11 @@ import java.util.logging.Logger;
  *    {
  * 		assert serverMock != null;
  * 		assert player != null;
+ * 		assert player.getName().equals("testPlayer");
  * 		assert world != null;
+ * 		assert world.getName().equals("World0");  // Auto-generated name
  * 		assert plugin != null;
+ * 		assert plugin.getName().equals("myPlugin");
  * 		// ...
  *    }
  *
@@ -105,12 +116,14 @@ import java.util.logging.Logger;
  *
  *    @Test
  *    void aUnitTest(<b>@MockBukkitInject</b> ServerMock serverMock,
- * 	               <b>@MockBukkitInject</b> Player player,
- * 	               <b>@MockBukkitInject</b> World world)
+ * 	               <b>@MockBukkitInject(name = "admin")</b> Player player,
+ * 	               <b>@MockBukkitInject(name = "testWorld")</b> World world)
  *    {
  * 		assert serverMock != null;
  * 		assert player != null;
+ * 		assert player.getName().equals("admin");
  * 		assert world != null;
+ * 		assert world.getName().equals("testWorld");
  * 		// ...
  *    }
  *
@@ -172,7 +185,8 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 		for (final Field field : allFields)
 		{
-			final Object mockObject = createMockForType(field.getType());
+			final MockBukkitInject annotation = field.getAnnotation(MockBukkitInject.class);
+			final Object mockObject = createMockForType(field.getType(), annotation);
 			if (mockObject != null)
 			{
 				FieldUtils.writeField(field, testInstance, mockObject, true);
@@ -180,7 +194,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		}
 	}
 
-	private @Nullable Object createMockForType(@NotNull Class<?> type)
+	private @Nullable Object createMockForType(@NotNull Class<?> type, @NotNull MockBukkitInject annotation)
 	{
 		if (type.isAssignableFrom(ServerMock.class))
 		{
@@ -188,17 +202,17 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		}
 		else if (type.isAssignableFrom(PlayerMock.class))
 		{
-			final String playerName = "Player" + playerCounter++;
+			final String playerName = annotation.name().isEmpty() ? "Player" + playerCounter++ : annotation.name();
 			return MockBukkit.getOrCreateMock().addPlayer(playerName);
 		}
 		else if (type.isAssignableFrom(WorldMock.class))
 		{
-			final String worldName = "World" + worldCounter++;
+			final String worldName = annotation.name().isEmpty() ? "World" + worldCounter++ : annotation.name();
 			return MockBukkit.getOrCreateMock().addSimpleWorld(worldName);
 		}
 		else if (type.isAssignableFrom(PluginMock.class))
 		{
-			final String pluginName = "Plugin" + pluginCounter++;
+			final String pluginName = annotation.name().isEmpty() ? "Plugin" + pluginCounter++ : annotation.name();
 			return MockBukkit.createMockPlugin(pluginName);
 		}
 		else
@@ -234,7 +248,8 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		if (!supportsParameter(parameterContext, extensionContext))
 			return null;
 
-		return createMockForType(parameterContext.getParameter().getType());
+		final MockBukkitInject annotation = parameterContext.getParameter().getAnnotation(MockBukkitInject.class);
+		return createMockForType(parameterContext.getParameter().getType(), annotation);
 	}
 
 	@Override
