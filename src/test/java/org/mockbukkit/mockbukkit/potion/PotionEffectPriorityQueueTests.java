@@ -32,10 +32,10 @@ class PotionEffectPriorityQueueTests
 	private PluginMock plugin;
 
 	// Standard test effects
-	final private PotionEffect weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
-	final private PotionEffect strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
-	final private PotionEffect shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 2, 3);
-	final private PotionEffect longEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+	private final PotionEffect weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+	private final PotionEffect strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
+	private final PotionEffect shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 2, 3);
+	private final PotionEffect longEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
 
 	@BeforeEach
 	void setUp()
@@ -94,7 +94,7 @@ class PotionEffectPriorityQueueTests
 				actual.getAmplifier() == expected.getAmplifier();
 	}
 
-	private void assertEffectActive(PotionEffect expected)
+	private void assertEffectActive(@NotNull PotionEffect expected)
 	{
 		PotionEffect actual = livingEntity.getPotionEffect(expected.getType());
 		assertNotNull(actual);
@@ -414,7 +414,7 @@ class PotionEffectPriorityQueueTests
 		assertEquals(2, active.getAmplifier());
 	}
 
-	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect,
+	private static void assertEntityPotionEffectEvent(@NotNull EntityPotionEffectEvent event, PotionEffect oldEffect,
 													  PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
 	{
 		assertEquals(oldEffect, event.getOldEffect());
@@ -425,15 +425,17 @@ class PotionEffectPriorityQueueTests
 	}
 
 	@Test
-	public void testGetPotionEffect_NullEffect()
+	void testGetPotionEffect_NullEffect()
 	{
 		assertThrows(NullPointerException.class, () -> livingEntity.getPotionEffect(null));
 	}
 
 	@Test
-	public void testRemovePotionEffect_AlreadyEmpty()
+	void testRemovePotionEffect_AlreadyEmpty()
 	{
 		livingEntity.removePotionEffect(PotionEffectType.STRENGTH);
+		assertEventNotFired(EntityPotionEffectEvent.Action.CHANGED);
+		assertEventNotFired(EntityPotionEffectEvent.Action.REMOVED);
 	}
 
 }
