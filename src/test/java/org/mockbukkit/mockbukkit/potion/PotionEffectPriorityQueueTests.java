@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class PotionEffectPriorityQueueTests {
+class PotionEffectPriorityQueueTests
+{
 
 	@MockBukkitInject
 	private ServerMock server;
@@ -35,7 +36,8 @@ class PotionEffectPriorityQueueTests {
 	private PotionEffect longEffect;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
 		strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
 		shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 2, 3);
@@ -43,7 +45,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	private void assertEventFired(EntityPotionEffectEvent.Action expectedAction, PotionEffect expectedOld,
-								  PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause) {
+								  PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause)
+	{
 		var event = server.getPluginManager().getFiredEvents()
 				.filter(e -> e instanceof EntityPotionEffectEvent)
 				.map(e -> (EntityPotionEffectEvent) e)
@@ -55,7 +58,8 @@ class PotionEffectPriorityQueueTests {
 		assertTrue(event.isPresent(), String.format("Expected %s event with cause %s not found", expectedAction, expectedCause));
 	}
 
-	private void assertEventNotFired(EntityPotionEffectEvent.Action action) {
+	private void assertEventNotFired(EntityPotionEffectEvent.Action action)
+	{
 		var events = server.getPluginManager().getFiredEvents()
 				.filter(e -> e instanceof EntityPotionEffectEvent)
 				.map(e -> (EntityPotionEffectEvent) e)
@@ -64,7 +68,8 @@ class PotionEffectPriorityQueueTests {
 
 		// For CHANGED events, we need to be more specific - no change should mean
 		// the old and new effects have the same amplifier and type
-		if (action == EntityPotionEffectEvent.Action.CHANGED) {
+		if (action == EntityPotionEffectEvent.Action.CHANGED)
+		{
 			var invalidChanges = events.stream()
 					.filter(e -> e.getOldEffect() != null && e.getNewEffect() != null)
 					.filter(e -> e.getOldEffect().getType() == e.getNewEffect().getType() &&
@@ -72,26 +77,31 @@ class PotionEffectPriorityQueueTests {
 					.toList();
 			assertTrue(invalidChanges.isEmpty(),
 					String.format("CHANGED event fired but effects have same amplifier/type: %s", invalidChanges));
-		} else {
+		}
+		else
+		{
 			assertTrue(events.isEmpty(), String.format("%s event should not have been fired", action));
 		}
 	}
 
-	private boolean effectsMatch(PotionEffect actual, PotionEffect expected) {
+	private boolean effectsMatch(PotionEffect actual, PotionEffect expected)
+	{
 		if (actual == null && expected == null) return true;
 		if (actual == null || expected == null) return false;
 		return actual.getType() == expected.getType() &&
 				actual.getAmplifier() == expected.getAmplifier();
 	}
 
-	private void assertEffectActive(PotionEffect expected) {
+	private void assertEffectActive(PotionEffect expected)
+	{
 		PotionEffect actual = livingEntity.getPotionEffect(expected.getType());
 		assertNotNull(actual);
 		assertEquals(expected.getAmplifier(), actual.getAmplifier());
 	}
 
 	@Test
-	void testPotionEffectAddedForFirstTime() {
+	void testPotionEffectAddedForFirstTime()
+	{
 		EntityPotionEffectEvent event = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
 		assertEntityPotionEffectEvent(event, null, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
@@ -99,7 +109,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testStrongerEffectOverridesWeaker() {
+	void testStrongerEffectOverridesWeaker()
+	{
 		// Add weak effect first
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		assertEffectActive(weakEffect);
@@ -112,7 +123,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testWeakerEffectDoesNotOverrideStronger() {
+	void testWeakerEffectDoesNotOverrideStronger()
+	{
 		// Add strong effect first
 		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		assertEffectActive(strongEffect);
@@ -125,7 +137,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testSameAmplifierHigherDurationWins() {
+	void testSameAmplifierHigherDurationWins()
+	{
 		PotionEffect shortDuration = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
 		PotionEffect longDuration = new PotionEffect(PotionEffectType.REGENERATION, 200, 2);
 
@@ -137,7 +150,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testStrongestEffectExpirationRevealsShadowed() {
+	void testStrongestEffectExpirationRevealsShadowed()
+	{
 		// Add both effects
 		livingEntity.addPotionEffect(longEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(shortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
@@ -153,7 +167,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testNonStrongestEffectExpirationNoChange() {
+	void testNonStrongestEffectExpirationNoChange()
+	{
 		PotionEffect strongLong = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
 		PotionEffect weakShort = new PotionEffect(PotionEffectType.REGENERATION, 2, 1);
 
@@ -171,7 +186,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testRemoveStrongestEffectRevealsShadowed() {
+	void testRemoveStrongestEffectRevealsShadowed()
+	{
 		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
@@ -186,7 +202,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testRemoveNonStrongestEffectNoChange() {
+	void testRemoveNonStrongestEffectNoChange()
+	{
 		// This test shows that removePotionEffect removes the TOP effect, not a specific one
 		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
@@ -202,7 +219,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testClearAllEffectsFiresEventsForAll() {
+	void testClearAllEffectsFiresEventsForAll()
+	{
 		PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
 		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
 
@@ -220,7 +238,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testGetActivePotionEffectsOnlyReturnsStrongest() {
+	void testGetActivePotionEffectsOnlyReturnsStrongest()
+	{
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
@@ -234,13 +253,18 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testAddPotionEffectCancelled() {
+	void testAddPotionEffectCancelled()
+	{
 		// Register event listener that cancels all potion effect events
 		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
-				new org.bukkit.event.Listener() {},
+				new org.bukkit.event.Listener()
+				{
+				},
 				org.bukkit.event.EventPriority.NORMAL,
-				(listener, event) -> {
-					if (event instanceof EntityPotionEffectEvent) {
+				(listener, event) ->
+				{
+					if (event instanceof EntityPotionEffectEvent)
+					{
 						((EntityPotionEffectEvent) event).setCancelled(true);
 					}
 				},
@@ -254,12 +278,14 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testHasPotionEffectNullQueue() {
+	void testHasPotionEffectNullQueue()
+	{
 		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
 	}
 
 	@Test
-	void testHasPotionEffectEmptyQueue() {
+	void testHasPotionEffectEmptyQueue()
+	{
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
@@ -267,12 +293,14 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testGetPotionEffectNullQueue() {
+	void testGetPotionEffectNullQueue()
+	{
 		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
 	}
 
 	@Test
-	void testGetPotionEffectEmptyQueue() {
+	void testGetPotionEffectEmptyQueue()
+	{
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
@@ -280,7 +308,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testRemoveExpiredEffectsEmptyQueue() {
+	void testRemoveExpiredEffectsEmptyQueue()
+	{
 		PotionEffect shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 1, 2);
 		livingEntity.addPotionEffect(shortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
@@ -292,7 +321,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testRemovePotionEffectNullQueue() {
+	void testRemovePotionEffectNullQueue()
+	{
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
 		// Should not fire any events
@@ -303,7 +333,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testRemovePotionEffectEmptyQueue() {
+	void testRemovePotionEffectEmptyQueue()
+	{
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
@@ -322,7 +353,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testRemoveSameStrengthEffectWithChange() {
+	void testRemoveSameStrengthEffectWithChange()
+	{
 		// Add two effects where removal causes a change (different durations)
 		PotionEffect effect1 = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
@@ -341,7 +373,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testGetActivePotionEffectsWithEmptyQueues() {
+	void testGetActivePotionEffectsWithEmptyQueues()
+	{
 		PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
 		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
 
@@ -361,7 +394,8 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	@Test
-	void testMultipleEffectsSameAmplifierDifferentDuration() {
+	void testMultipleEffectsSameAmplifierDifferentDuration()
+	{
 		PotionEffect effect1 = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
 		PotionEffect effect3 = new PotionEffect(PotionEffectType.REGENERATION, 75, 2);
@@ -377,11 +411,13 @@ class PotionEffectPriorityQueueTests {
 	}
 
 	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect,
-													  PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override) {
+													  PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
+	{
 		assertEquals(oldEffect, event.getOldEffect());
 		assertEquals(newEffect, event.getNewEffect());
 		assertEquals(cause, event.getCause());
 		assertEquals(action, event.getAction());
 		assertEquals(override, event.isOverride());
 	}
+
 }
