@@ -12,6 +12,7 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class BambooDataMockTest
@@ -78,12 +79,16 @@ class BambooDataMockTest
 	@Test
 	void validateClone()
 	{
-		bamboo.setAge(10);
-
 		@NotNull BambooDataMock cloned = bamboo.clone();
 
 		assertEquals(bamboo, cloned);
 		assertEquals(bamboo.getAge(), cloned.getAge());
+
+		bamboo.setAge(10);
+
+		assertNotEquals(bamboo, cloned);
+		assertEquals(10, bamboo.getAge());
+		assertEquals(0, cloned.getAge());
 	}
 
 }

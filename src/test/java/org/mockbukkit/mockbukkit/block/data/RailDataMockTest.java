@@ -16,6 +16,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -93,12 +94,16 @@ class RailDataMockTest
 	@Test
 	void validateClone()
 	{
-		rail.setWaterlogged(true);
-
 		@NotNull RailDataMock cloned = rail.clone();
 
 		assertEquals(rail, cloned);
 		assertEquals(rail.isWaterlogged(), cloned.isWaterlogged());
+
+		rail.setWaterlogged(true);
+
+		assertNotEquals(rail, cloned);
+		assertTrue(rail.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

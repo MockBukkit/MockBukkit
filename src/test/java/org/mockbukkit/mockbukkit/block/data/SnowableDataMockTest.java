@@ -12,6 +12,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class SnowableDataMockTest
@@ -48,12 +50,16 @@ class SnowableDataMockTest
 	@Test
 	void validateClone()
 	{
-		snowable.setSnowy(true);
-
 		@NotNull SnowableDataMock cloned = snowable.clone();
 
 		assertEquals(snowable, cloned);
 		assertEquals(snowable.isSnowy(), cloned.isSnowy());
+
+		snowable.setSnowy(true);
+
+		assertNotEquals(snowable, cloned);
+		assertTrue(snowable.isSnowy());
+		assertFalse(cloned.isSnowy());
 	}
 
 }

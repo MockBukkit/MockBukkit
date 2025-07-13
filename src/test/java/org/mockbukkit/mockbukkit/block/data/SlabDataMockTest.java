@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -86,12 +87,16 @@ class SlabDataMockTest
 	@Test
 	void validateClone()
 	{
-		slab.setWaterlogged(true);
-
 		@NotNull SlabDataMock cloned = slab.clone();
 
 		assertEquals(slab, cloned);
 		assertEquals(slab.isWaterlogged(), cloned.isWaterlogged());
+
+		slab.setWaterlogged(true);
+
+		assertNotEquals(slab, cloned);
+		assertTrue(slab.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

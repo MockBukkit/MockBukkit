@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -151,12 +152,16 @@ class StairsDataMockTest
 	@Test
 	void validateClone()
 	{
-		stairs.setWaterlogged(true);
-
 		@NotNull StairsDataMock cloned = stairs.clone();
 
 		assertEquals(stairs, cloned);
 		assertEquals(stairs.isWaterlogged(), cloned.isWaterlogged());
+
+		stairs.setWaterlogged(true);
+
+		assertNotEquals(stairs, cloned);
+		assertTrue(stairs.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class BisectedDataMockTest
@@ -48,12 +49,16 @@ class BisectedDataMockTest
 	@Test
 	void validateClone()
 	{
-		bisected.setHalf(Bisected.Half.TOP);
-
 		@NotNull BisectedDataMock cloned = bisected.clone();
 
 		assertEquals(bisected, cloned);
 		assertEquals(bisected.getHalf(), cloned.getHalf());
+
+		bisected.setHalf(Bisected.Half.TOP);
+
+		assertNotEquals(bisected, cloned);
+		assertEquals(Bisected.Half.TOP, bisected.getHalf());
+		assertEquals(Bisected.Half.BOTTOM, cloned.getHalf());
 	}
 
 }

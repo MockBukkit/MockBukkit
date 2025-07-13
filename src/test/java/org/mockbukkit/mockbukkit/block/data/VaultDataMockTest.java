@@ -15,7 +15,9 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class VaultDataMockTest
@@ -103,11 +105,15 @@ class VaultDataMockTest
 	@Test
 	void validateClone()
 	{
-		vault.setOminous(true);
-
 		@NotNull VaultDataMock cloned = vault.clone();
 
 		assertEquals(vault, cloned);
 		assertEquals(vault.isOminous(), cloned.isOminous());
+
+		vault.setOminous(true);
+
+		assertNotEquals(vault, cloned);
+		assertTrue(vault.isOminous());
+		assertFalse(cloned.isOminous());
 	}
 }

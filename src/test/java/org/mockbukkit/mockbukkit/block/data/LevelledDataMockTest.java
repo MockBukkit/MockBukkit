@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -80,12 +81,16 @@ class LevelledDataMockTest
 	@Test
 	void validateClone()
 	{
-		levelled.setLevel(3);
-
 		@NotNull LevelledDataMock cloned = levelled.clone();
 
 		assertEquals(levelled, cloned);
 		assertEquals(levelled.getLevel(), cloned.getLevel());
+
+		levelled.setLevel(3);
+
+		assertNotEquals(levelled, cloned);
+		assertEquals(3, levelled.getLevel());
+		assertEquals(0, cloned.getLevel());
 	}
 
 }

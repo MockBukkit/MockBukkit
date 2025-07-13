@@ -14,7 +14,9 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class RedstoneRailDataMockTest
@@ -107,12 +109,16 @@ class RedstoneRailDataMockTest
 	@Test
 	void validateClone()
 	{
-		rail.setWaterlogged(true);
-
 		@NotNull RedstoneRailDataMock cloned = rail.clone();
 
 		assertEquals(rail, cloned);
 		assertEquals(rail.isWaterlogged(), cloned.isWaterlogged());
+
+		rail.setWaterlogged(true);
+
+		assertNotEquals(rail, cloned);
+		assertTrue(rail.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

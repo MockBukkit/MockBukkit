@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -134,12 +135,16 @@ class RedstoneWireDataMockTest
 	@Test
 	void validateClone()
 	{
-		wire.setPower(3);
-
 		@NotNull RedstoneWireDataMock cloned = wire.clone();
 
 		assertEquals(wire, cloned);
 		assertEquals(wire.getPower(), cloned.getPower());
+
+		wire.setPower(3);
+
+		assertNotEquals(wire, cloned);
+		assertEquals(3, wire.getPower());
+		assertEquals(0, cloned.getPower());
 	}
 
 }

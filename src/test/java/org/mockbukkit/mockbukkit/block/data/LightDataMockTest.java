@@ -12,7 +12,9 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class LightDataMockTest
@@ -77,12 +79,16 @@ class LightDataMockTest
 	@Test
 	void validateClone()
 	{
-		light.setWaterlogged(true);
-
 		@NotNull LightDataMock cloned = light.clone();
 
 		assertEquals(light, cloned);
 		assertEquals(light.isWaterlogged(), cloned.isWaterlogged());
+
+		light.setWaterlogged(true);
+
+		assertNotEquals(light, cloned);
+		assertTrue(light.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

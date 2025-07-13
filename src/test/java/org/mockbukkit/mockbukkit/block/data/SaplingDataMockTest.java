@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -62,12 +63,16 @@ class SaplingDataMockTest
 	@Test
 	void validateClone()
 	{
-		sapling.setStage(1);
-
 		@NotNull SaplingDataMock cloned = sapling.clone();
 
 		assertEquals(sapling, cloned);
 		assertEquals(sapling.getStage(), cloned.getStage());
+
+		sapling.setStage(1);
+
+		assertNotEquals(sapling, cloned);
+		assertEquals(1, sapling.getStage());
+		assertEquals(0, cloned.getStage());
 	}
 
 }

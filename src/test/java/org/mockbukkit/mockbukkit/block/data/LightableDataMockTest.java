@@ -12,6 +12,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class LightableDataMockTest
@@ -48,12 +50,16 @@ class LightableDataMockTest
 	@Test
 	void validateClone()
 	{
-		lightable.setLit(true);
-
 		@NotNull LightableDataMock cloned = lightable.clone();
 
 		assertEquals(lightable, cloned);
 		assertEquals(lightable.isLit(), cloned.isLit());
+
+		lightable.setLit(true);
+
+		assertNotEquals(lightable, cloned);
+		assertTrue(lightable.isLit());
+		assertFalse(cloned.isLit());
 	}
 
 }

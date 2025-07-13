@@ -13,6 +13,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -83,12 +85,16 @@ class RedstoneWallTorchDataMockTest
 	@Test
 	void validateClone()
 	{
-		torch.setLit(true);
-
 		@NotNull RedstoneWallTorchDataMock cloned = torch.clone();
 
 		assertEquals(torch, cloned);
 		assertEquals(torch.isLit(), cloned.isLit());
+
+		torch.setLit(false);
+
+		assertNotEquals(torch, cloned);
+		assertFalse(torch.isLit());
+		assertTrue(cloned.isLit());
 	}
 
 }

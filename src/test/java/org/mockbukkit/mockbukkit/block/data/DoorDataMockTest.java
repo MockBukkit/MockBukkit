@@ -14,7 +14,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DoorDataMockTest
 {
@@ -142,12 +144,16 @@ class DoorDataMockTest
 	@Test
 	void validateClone()
 	{
-		door.setPowered(true);
-
 		@NotNull DoorDataMock cloned = door.clone();
 
 		assertEquals(door, cloned);
 		assertEquals(door.isPowered(), cloned.isPowered());
+
+		door.setPowered(true);
+
+		assertNotEquals(door, cloned);
+		assertTrue(door.isPowered());
+		assertFalse(cloned.isPowered());
 	}
 
 }

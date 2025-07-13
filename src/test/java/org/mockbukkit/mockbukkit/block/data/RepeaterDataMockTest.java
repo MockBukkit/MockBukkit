@@ -14,6 +14,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -131,12 +132,16 @@ class RepeaterDataMockTest
 	@Test
 	void validateClone()
 	{
-		repeater.setDelay(3);
-
 		@NotNull RepeaterDataMock cloned = repeater.clone();
 
 		assertEquals(repeater, cloned);
 		assertEquals(repeater.getDelay(), cloned.getDelay());
+
+		repeater.setDelay(3);
+
+		assertNotEquals(repeater, cloned);
+		assertEquals(3, repeater.getDelay());
+		assertEquals(1, cloned.getDelay());
 	}
 
 }

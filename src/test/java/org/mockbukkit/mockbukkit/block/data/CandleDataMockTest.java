@@ -12,6 +12,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -121,12 +122,16 @@ class CandleDataMockTest
 	@Test
 	void validateClone()
 	{
-		candle.setCandles(3);
-
 		@NotNull CandleDataMock cloned = candle.clone();
 
 		assertEquals(candle, cloned);
 		assertEquals(candle.getCandles(), cloned.getCandles());
+
+		candle.setCandles(3);
+
+		assertNotEquals(candle, cloned);
+		assertEquals(3, candle.getCandles());
+		assertEquals(1, cloned.getCandles());
 	}
 
 }

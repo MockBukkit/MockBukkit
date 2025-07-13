@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -88,12 +89,16 @@ class FenceDataMockTest
 	@Test
 	void validateClone()
 	{
-		fenceData.setWaterlogged(true);
-
 		@NotNull FenceDataMock cloned = fenceData.clone();
 
 		assertEquals(fenceData, cloned);
 		assertEquals(fenceData.isWaterlogged(), cloned.isWaterlogged());
+
+		fenceData.setWaterlogged(true);
+
+		assertNotEquals(fenceData, cloned);
+		assertTrue(fenceData.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 	static Stream<Arguments> allowedFaces()

@@ -14,7 +14,9 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class FenceGateDataMockTest
@@ -124,12 +126,16 @@ class FenceGateDataMockTest
 	@Test
 	void validateClone()
 	{
-		gate.setPowered(true);
-
 		@NotNull FenceGateDataMock cloned = gate.clone();
 
 		assertEquals(gate, cloned);
 		assertEquals(gate.isPowered(), cloned.isPowered());
+
+		gate.setPowered(true);
+
+		assertNotEquals(gate, cloned);
+		assertTrue(gate.isPowered());
+		assertFalse(cloned.isPowered());
 	}
 
 }

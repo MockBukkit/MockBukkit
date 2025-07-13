@@ -14,6 +14,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 
@@ -90,12 +92,16 @@ class CrafterDataMockTest
 	@Test
 	void validateClone()
 	{
-		crafter.setTriggered(true);
-
 		@NotNull CrafterDataMock cloned = crafter.clone();
 
 		assertEquals(crafter, cloned);
 		assertEquals(crafter.isTriggered(), cloned.isTriggered());
+
+		crafter.setTriggered(true);
+
+		assertNotEquals(crafter, cloned);
+		assertTrue(crafter.isTriggered());
+		assertFalse(cloned.isTriggered());
 	}
 
 }

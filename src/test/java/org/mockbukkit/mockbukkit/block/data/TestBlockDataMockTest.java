@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class TestBlockDataMockTest
@@ -48,12 +49,17 @@ class TestBlockDataMockTest
 	@Test
 	void validateClone()
 	{
-		testBlock.setMode(TestBlock.Mode.LOG);
 
 		@NotNull TestBlockDataMock cloned = testBlock.clone();
 
 		assertEquals(testBlock, cloned);
 		assertEquals(testBlock.getMode(), cloned.getMode());
+
+		testBlock.setMode(TestBlock.Mode.LOG);
+
+		assertNotEquals(testBlock, cloned);
+		assertEquals(TestBlock.Mode.LOG, testBlock.getMode());
+		assertEquals(TestBlock.Mode.START, cloned.getMode());
 	}
 
 }

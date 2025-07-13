@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -68,12 +69,17 @@ class AnaloguePowerableBlockDataMockTest
 	@Test
 	void validateClone()
 	{
-		analogue.setPower(3);
 
 		@NotNull AnaloguePowerableBlockDataMock cloned = analogue.clone();
 
 		assertEquals(analogue, cloned);
 		assertEquals(analogue.getPower(), cloned.getPower());
+
+		analogue.setPower(3);
+
+		assertNotEquals(analogue, cloned);
+		assertEquals(3, analogue.getPower());
+		assertEquals(0, cloned.getPower());
 	}
 
 }
