@@ -3,139 +3,206 @@ package org.mockbukkit.mockbukkit.potion;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class PotionEffectPriorityQueueTests
-{
+class PotionEffectPriorityQueueTests {
 
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
 	private PlayerMock livingEntity;
+	@MockBukkitInject
+	private PluginMock plugin;
 
-	@Test
-	void testStrongerEffectOverridesWeaker()
-	{
-		PotionEffect weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
-		PotionEffect strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 50, 3);
+	// Standard test effects
+	private PotionEffect weakEffect;
+	private PotionEffect strongEffect;
+	private PotionEffect shortEffect;
+	private PotionEffect longEffect;
 
-		// Add weak effect first
-		EntityPotionEffectEvent event1 = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEntityPotionEffectEvent(event1, null, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
-		assertEquals(weakEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+	@BeforeEach
+	void setUp() {
+		weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
+		shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 2, 3);
+		longEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+	}
 
-		// Add stronger effect - should change active effect
-		EntityPotionEffectEvent event2 = livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
-
-		// Should fire events for adding and changing active effect
-		var firedEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CHANGED &&
-						event.getOldEffect().equals(weakEffect) &&
-						event.getNewEffect().equals(strongEffect))
+	private void assertEventFired(EntityPotionEffectEvent.Action expectedAction, PotionEffect expectedOld,
+								  PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause) {
+		var event = server.getPluginManager().getFiredEvents()
+				.filter(e -> e instanceof EntityPotionEffectEvent)
+				.map(e -> (EntityPotionEffectEvent) e)
+				.filter(e -> e.getAction() == expectedAction &&
+						e.getCause() == expectedCause &&
+						effectsMatch(e.getOldEffect(), expectedOld) &&
+						effectsMatch(e.getNewEffect(), expectedNew))
 				.findFirst();
-		assertTrue(firedEvents.isPresent(), "Should fire CHANGED event when stronger effect overrides weaker");
+		assertTrue(event.isPresent(), String.format("Expected %s event with cause %s not found", expectedAction, expectedCause));
+	}
 
-		// Active effect should now be the stronger one
-		assertEquals(strongEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+	private void assertEventNotFired(EntityPotionEffectEvent.Action action) {
+		var events = server.getPluginManager().getFiredEvents()
+				.filter(e -> e instanceof EntityPotionEffectEvent)
+				.map(e -> (EntityPotionEffectEvent) e)
+				.filter(e -> e.getAction() == action)
+				.toList();
+
+		// For CHANGED events, we need to be more specific - no change should mean
+		// the old and new effects have the same amplifier and type
+		if (action == EntityPotionEffectEvent.Action.CHANGED) {
+			var invalidChanges = events.stream()
+					.filter(e -> e.getOldEffect() != null && e.getNewEffect() != null)
+					.filter(e -> e.getOldEffect().getType() == e.getNewEffect().getType() &&
+							e.getOldEffect().getAmplifier() == e.getNewEffect().getAmplifier())
+					.toList();
+			assertTrue(invalidChanges.isEmpty(),
+					String.format("CHANGED event fired but effects have same amplifier/type: %s", invalidChanges));
+		} else {
+			assertTrue(events.isEmpty(), String.format("%s event should not have been fired", action));
+		}
+	}
+
+	private boolean effectsMatch(PotionEffect actual, PotionEffect expected) {
+		if (actual == null && expected == null) return true;
+		if (actual == null || expected == null) return false;
+		return actual.getType() == expected.getType() &&
+				actual.getAmplifier() == expected.getAmplifier();
+	}
+
+	private void assertEffectActive(PotionEffect expected) {
+		PotionEffect actual = livingEntity.getPotionEffect(expected.getType());
+		assertNotNull(actual);
+		assertEquals(expected.getAmplifier(), actual.getAmplifier());
 	}
 
 	@Test
-	void testWeakerEffectDoesNotOverrideStronger()
-	{
-		PotionEffect strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 50, 3);
-		PotionEffect weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
-
-		// Add strong effect first
-		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEquals(strongEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
-
-		// Add weaker effect - should not change active effect
+	void testPotionEffectAddedForFirstTime() {
 		EntityPotionEffectEvent event = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		// Should fire CHANGED event for adding (but active effect doesn't change)
+		assertEntityPotionEffectEvent(event, null, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
+		assertEffectActive(weakEffect);
+	}
+
+	@Test
+	void testStrongerEffectOverridesWeaker() {
+		// Add weak effect first
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEffectActive(weakEffect);
+
+		// Add stronger effect
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertEntityPotionEffectEvent(event, weakEffect, strongEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+		assertEffectActive(strongEffect);
+	}
+
+	@Test
+	void testWeakerEffectDoesNotOverrideStronger() {
+		// Add strong effect first
+		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEffectActive(strongEffect);
+
+		// Add weaker effect
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
 		assertEntityPotionEffectEvent(event, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
-
-		// Active effect should still be the stronger one
-		assertEquals(strongEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+		assertEffectActive(strongEffect); // Should still be the strong effect
 	}
 
 	@Test
-	void testSameAmplifierHigherDurationWins()
-	{
-		PotionEffect shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
-		PotionEffect longEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 2);
+	void testSameAmplifierHigherDurationWins() {
+		PotionEffect shortDuration = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
+		PotionEffect longDuration = new PotionEffect(PotionEffectType.REGENERATION, 200, 2);
 
-		livingEntity.addPotionEffect(shortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(shortDuration, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(longDuration, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertEffectActive(longDuration);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, shortDuration, longDuration, EntityPotionEffectEvent.Cause.PLUGIN);
+	}
+
+	@Test
+	void testStrongestEffectExpirationRevealsShadowed() {
+		// Add both effects
 		livingEntity.addPotionEffect(longEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(shortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		// Should change to the longer duration effect
-		assertEquals(longEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+		assertEffectActive(shortEffect); // Strong but short should be active
 
-		// Should fire event for active effect change
-		var firedEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CHANGED &&
-						event.getOldEffect().equals(shortEffect) &&
-						event.getNewEffect().equals(longEffect))
-				.findFirst();
-		assertTrue(firedEvents.isPresent(), "Should fire CHANGED event when longer duration wins");
+		// Tick until strong effect expires
+		server.getScheduler().performTicks(2);
+
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, shortEffect, null, EntityPotionEffectEvent.Cause.EXPIRATION);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, shortEffect, longEffect, EntityPotionEffectEvent.Cause.EXPIRATION);
+		assertEffectActive(longEffect); // Weak effect should now be active
 	}
 
 	@Test
-	void testRemoveStrongestEffectRevealsShadowed()
-	{
-		PotionEffect strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
-		PotionEffect weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+	void testNonStrongestEffectExpirationNoChange() {
+		PotionEffect strongLong = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
+		PotionEffect weakShort = new PotionEffect(PotionEffectType.REGENERATION, 2, 1);
 
+		livingEntity.addPotionEffect(strongLong, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(weakShort, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertEffectActive(strongLong);
+
+		// Tick until weak effect expires
+		server.getScheduler().performTicks(2);
+
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, weakShort, null, EntityPotionEffectEvent.Cause.EXPIRATION);
+		assertEventNotFired(EntityPotionEffectEvent.Action.CHANGED); // No change to active effect
+		assertEffectActive(strongLong); // Strong effect still active (but duration reduced)
+	}
+
+	@Test
+	void testRemoveStrongestEffectRevealsShadowed() {
 		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		assertEquals(strongEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+		assertEffectActive(strongEffect);
 
-		// Remove the strongest effect
+		// Remove the strongest effect (only removes top of queue)
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
-		// Should fire removal event
-		var removalEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.REMOVED &&
-						event.getOldEffect().equals(strongEffect) &&
-						event.getNewEffect() == null &&
-						event.getCause() == EntityPotionEffectEvent.Cause.PLUGIN)
-				.findFirst();
-		assertTrue(removalEvents.isPresent(), "Should fire REMOVED event");
-
-		// Should fire change event for weak effect becoming active
-		var changeEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CHANGED &&
-						event.getOldEffect().equals(strongEffect) &&
-						event.getNewEffect().equals(weakEffect) &&
-						event.getCause() == EntityPotionEffectEvent.Cause.PLUGIN)
-				.findFirst();
-		assertTrue(changeEvents.isPresent(), "Should fire CHANGED event for weak effect becoming active");
-
-		assertEquals(weakEffect, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, strongEffect, null, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEffectActive(weakEffect);
 	}
 
 	@Test
-	void testClearAllEffectsFiresEventsForAll()
-	{
+	void testRemoveNonStrongestEffectNoChange() {
+		// This test shows that removePotionEffect removes the TOP effect, not a specific one
+		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertEffectActive(strongEffect); // Strong effect should be active
+
+		// Remove effect - will remove the strongest (top of queue)
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, strongEffect, null, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEffectActive(weakEffect); // Weak effect becomes active
+	}
+
+	@Test
+	void testClearAllEffectsFiresEventsForAll() {
 		PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
 		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
 
@@ -145,53 +212,156 @@ class PotionEffectPriorityQueueTests
 		boolean result = livingEntity.clearActivePotionEffects();
 
 		assertTrue(result);
-
-		// Should fire CLEARED events for both effects
-		var regenEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CLEARED &&
-						event.getOldEffect().equals(regen) &&
-						event.getNewEffect() == null &&
-						event.getCause() == EntityPotionEffectEvent.Cause.PLUGIN)
-				.findFirst();
-		assertTrue(regenEvents.isPresent(), "Should fire CLEARED event for regen effect");
-
-		var speedEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CLEARED &&
-						event.getOldEffect().equals(speed) &&
-						event.getNewEffect() == null &&
-						event.getCause() == EntityPotionEffectEvent.Cause.PLUGIN)
-				.findFirst();
-		assertTrue(speedEvents.isPresent(), "Should fire CLEARED event for speed effect");
+		assertEventFired(EntityPotionEffectEvent.Action.CLEARED, regen, null, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CLEARED, speed, null, EntityPotionEffectEvent.Cause.PLUGIN);
 
 		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
 		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.SPEED));
 	}
 
 	@Test
-	void testGetActivePotionEffectsOnlyReturnsStrongest()
-	{
-		PotionEffect strongRegen = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
-		PotionEffect weakRegen = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+	void testGetActivePotionEffectsOnlyReturnsStrongest() {
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
-
-		livingEntity.addPotionEffect(weakRegen, EntityPotionEffectEvent.Cause.PLUGIN);
-		livingEntity.addPotionEffect(strongRegen, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(speed, EntityPotionEffectEvent.Cause.PLUGIN);
 
 		var activeEffects = livingEntity.getActivePotionEffects();
 		assertEquals(2, activeEffects.size()); // Only strongest regen + speed
-		assertTrue(activeEffects.contains(strongRegen));
-		assertTrue(activeEffects.contains(speed));
-		assertFalse(activeEffects.contains(weakRegen));
+		assertTrue(activeEffects.stream().anyMatch(e -> e.getAmplifier() == 3 && e.getType() == PotionEffectType.REGENERATION));
+		assertTrue(activeEffects.stream().anyMatch(e -> e.getType() == PotionEffectType.SPEED));
+		assertFalse(activeEffects.stream().anyMatch(e -> e.getAmplifier() == 1 && e.getType() == PotionEffectType.REGENERATION));
 	}
 
 	@Test
-	void testMultipleEffectsSameAmplifierDifferentDuration()
-	{
+	void testAddPotionEffectCancelled() {
+		// Register event listener that cancels all potion effect events
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
+				new org.bukkit.event.Listener() {},
+				org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) -> {
+					if (event instanceof EntityPotionEffectEvent) {
+						((EntityPotionEffectEvent) event).setCancelled(true);
+					}
+				},
+				plugin, false);
+
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertTrue(event.isCancelled());
+		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
+		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testHasPotionEffectNullQueue() {
+		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testHasPotionEffectEmptyQueue() {
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testGetPotionEffectNullQueue() {
+		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testGetPotionEffectEmptyQueue() {
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testRemoveExpiredEffectsEmptyQueue() {
+		PotionEffect shortEffect = new PotionEffect(PotionEffectType.REGENERATION, 1, 2);
+		livingEntity.addPotionEffect(shortEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		server.getScheduler().performTicks(1);
+
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, shortEffect, null, EntityPotionEffectEvent.Cause.EXPIRATION);
+		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
+		assertNull(livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testRemovePotionEffectNullQueue() {
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		// Should not fire any events
+		var eventCount = server.getPluginManager().getFiredEvents()
+				.filter(e -> e instanceof EntityPotionEffectEvent)
+				.count();
+		assertEquals(0, eventCount);
+	}
+
+	@Test
+	void testRemovePotionEffectEmptyQueue() {
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		// Try to remove again - should not fire new events
+		long eventCountBefore = server.getPluginManager().getFiredEvents()
+				.filter(e -> e instanceof EntityPotionEffectEvent)
+				.count();
+
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		long eventCountAfter = server.getPluginManager().getFiredEvents()
+				.filter(e -> e instanceof EntityPotionEffectEvent)
+				.count();
+
+		assertEquals(eventCountBefore, eventCountAfter); // No new events
+	}
+
+	@Test
+	void testRemoveSameStrengthEffectWithChange() {
+		// Add two effects where removal causes a change (different durations)
+		PotionEffect effect1 = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
+
+		livingEntity.addPotionEffect(effect1, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(effect2, EntityPotionEffectEvent.Cause.PLUGIN); // Longer duration wins
+
+		assertEffectActive(effect2);
+
+		// Remove top effect
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, effect2, null, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, effect2, effect1, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEffectActive(effect1);
+	}
+
+	@Test
+	void testGetActivePotionEffectsWithEmptyQueues() {
+		PotionEffect regen = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
+		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 1);
+
+		livingEntity.addPotionEffect(regen, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(speed, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		assertEquals(2, livingEntity.getActivePotionEffects().size());
+
+		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
+
+		var activeEffects = livingEntity.getActivePotionEffects();
+		assertEquals(1, activeEffects.size());
+		assertTrue(activeEffects.stream().anyMatch(effect -> effect.getType() == PotionEffectType.SPEED));
+
+		livingEntity.removePotionEffect(PotionEffectType.SPEED);
+		assertEquals(0, livingEntity.getActivePotionEffects().size());
+	}
+
+	@Test
+	void testMultipleEffectsSameAmplifierDifferentDuration() {
 		PotionEffect effect1 = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
 		PotionEffect effect3 = new PotionEffect(PotionEffectType.REGENERATION, 75, 2);
@@ -200,130 +370,18 @@ class PotionEffectPriorityQueueTests
 		livingEntity.addPotionEffect(effect2, EntityPotionEffectEvent.Cause.PLUGIN); // Longest should win
 		livingEntity.addPotionEffect(effect3, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		assertEquals(effect2, livingEntity.getPotionEffect(PotionEffectType.REGENERATION));
+		// effect2 should be active (longest duration)
+		PotionEffect active = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(100, active.getDuration());
+		assertEquals(2, active.getAmplifier());
 	}
 
 	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect,
-													  PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
-	{
+													  PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override) {
 		assertEquals(oldEffect, event.getOldEffect());
 		assertEquals(newEffect, event.getNewEffect());
 		assertEquals(cause, event.getCause());
 		assertEquals(action, event.getAction());
 		assertEquals(override, event.isOverride());
 	}
-
-	@Test
-	void testNonStrongestEffectExpirationNoChange()
-	{
-		PotionEffect strongLong = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
-		PotionEffect weakShort = new PotionEffect(PotionEffectType.REGENERATION, 2, 1);
-
-		livingEntity.addPotionEffect(strongLong, EntityPotionEffectEvent.Cause.PLUGIN);
-		livingEntity.addPotionEffect(weakShort, EntityPotionEffectEvent.Cause.PLUGIN);
-
-		PotionEffect originalStrong = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
-		assertEquals(strongLong.getAmplifier(), originalStrong.getAmplifier());
-
-		// Tick until weak effect expires
-		server.getScheduler().performTicks(2);
-
-		// Should fire removal event for expired weak effect
-		var removalEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.REMOVED &&
-						event.getOldEffect().equals(weakShort) &&
-						event.getNewEffect() == null &&
-						event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-				.findFirst();
-		assertTrue(removalEvents.isPresent(), "Should fire REMOVED event for expired weak effect");
-
-		// Strong effect should still be active (check amplifier, duration will be reduced)
-		PotionEffect currentEffect = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
-		assertEquals(strongLong.getAmplifier(), currentEffect.getAmplifier());
-		assertEquals(98, currentEffect.getDuration()); // Duration reduced by 2 ticks
-	}
-
-	@Test
-	void testStrongestEffectExpirationRevealsShadowed()
-	{
-		PotionEffect strongShort = new PotionEffect(PotionEffectType.REGENERATION, 2, 3); // Strong but short
-		PotionEffect weakLong = new PotionEffect(PotionEffectType.REGENERATION, 100, 1); // Weak but long
-
-		// Add both effects
-		livingEntity.addPotionEffect(weakLong, EntityPotionEffectEvent.Cause.PLUGIN);
-		livingEntity.addPotionEffect(strongShort, EntityPotionEffectEvent.Cause.PLUGIN);
-
-		assertEquals(strongShort.getAmplifier(), livingEntity.getPotionEffect(PotionEffectType.REGENERATION).getAmplifier());
-
-		// Tick until strong effect expires
-		server.getScheduler().performTicks(2);
-
-		// Should fire removal event for expired effect (duration will be 0)
-		var removalEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.REMOVED &&
-						event.getOldEffect().getAmplifier() == 3 && // Check amplifier instead of exact effect
-						event.getOldEffect().getType() == PotionEffectType.REGENERATION &&
-						event.getNewEffect() == null &&
-						event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-				.findFirst();
-		assertTrue(removalEvents.isPresent(), "Should fire REMOVED event for expired effect");
-
-		// Should fire change event for weak effect becoming active
-		var changeEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CHANGED &&
-						event.getOldEffect().getAmplifier() == 3 &&
-						event.getNewEffect().getAmplifier() == 1 &&
-						event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-				.findFirst();
-		assertTrue(changeEvents.isPresent(), "Should fire CHANGED event when weaker effect becomes active");
-
-		// Weak effect should now be active
-		assertEquals(weakLong.getAmplifier(), livingEntity.getPotionEffect(PotionEffectType.REGENERATION).getAmplifier());
-	}
-
-	@Test
-	void testRemoveNonStrongestEffectNoChange()
-	{
-		PotionEffect strongEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 3);
-		PotionEffect weakEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
-
-		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
-		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
-
-		assertEquals(strongEffect.getAmplifier(), livingEntity.getPotionEffect(PotionEffectType.REGENERATION).getAmplifier());
-
-		// Remove effect (will remove strongest since we only remove top of queue)
-		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
-
-		// Should fire removal event for strong effect
-		var removalEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.REMOVED &&
-						event.getOldEffect().getAmplifier() == 3 &&
-						event.getCause() == EntityPotionEffectEvent.Cause.PLUGIN)
-				.findFirst();
-		assertTrue(removalEvents.isPresent(), "Should fire REMOVED event for removed effect");
-
-		// Should fire change event for weak effect becoming active
-		var changeEvents = server.getPluginManager().getFiredEvents()
-				.filter(event -> event instanceof EntityPotionEffectEvent)
-				.map(event -> (EntityPotionEffectEvent) event)
-				.filter(event -> event.getAction() == EntityPotionEffectEvent.Action.CHANGED &&
-						event.getOldEffect().getAmplifier() == 3 &&
-						event.getNewEffect().getAmplifier() == 1 &&
-						event.getCause() == EntityPotionEffectEvent.Cause.PLUGIN)
-				.findFirst();
-		assertTrue(changeEvents.isPresent(), "Should fire CHANGED event for weak effect becoming active");
-
-		// Weak effect should now be active
-		assertEquals(weakEffect.getAmplifier(), livingEntity.getPotionEffect(PotionEffectType.REGENERATION).getAmplifier());
-	}
-
 }

@@ -63,7 +63,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.UUID;
@@ -722,7 +721,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		{
 			var entry = it.next();
 			var queue = entry.getValue();
-			var effectType = entry.getKey();
 
 			PotionEffect oldActiveEffect = queue.isEmpty() ? null : mapToPotionEffect(queue.peek());
 
@@ -742,15 +740,24 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 			// Check if the active effect changed after removing expired effects
 			PotionEffect newActiveEffect = queue.isEmpty() ? null : mapToPotionEffect(queue.peek());
-			if (oldActiveEffect != null && !Objects.equals(oldActiveEffect, newActiveEffect))
+			if (oldActiveEffect != null && newActiveEffect != null)
 			{
-				if (newActiveEffect != null)
+				// Only fire CHANGED event if the effective properties changed
+				if (oldActiveEffect.getAmplifier() != newActiveEffect.getAmplifier() ||
+						oldActiveEffect.getType() != newActiveEffect.getType())
 				{
-					// A different effect became active
 					var changeEvent = new EntityPotionEffectEvent(this, oldActiveEffect, newActiveEffect,
 							EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.CHANGED, true);
 					Bukkit.getPluginManager().callEvent(changeEvent);
 				}
+			}
+			else if (oldActiveEffect != null && newActiveEffect == null)
+			{
+				// Effect completely removed - but we already fired the REMOVED event above
+			}
+			else if (oldActiveEffect == null && newActiveEffect != null)
+			{
+				// This shouldn't happen in expiration context
 			}
 
 			// Remove empty queues
