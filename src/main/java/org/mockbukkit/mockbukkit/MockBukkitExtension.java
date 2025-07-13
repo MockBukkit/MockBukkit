@@ -2,6 +2,11 @@ package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.bukkit.Server;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -12,7 +17,10 @@ import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 import org.junit.platform.commons.util.ExceptionUtils;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -93,15 +101,21 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 	private final Logger logger = Logger.getLogger("MockBukkitExtension");
 	private final Set<Class<?>> serverSupportedTypes = Set.of(Server.class, ServerMock.class);
+	private final Set<Class<?>> playerSupportedTypes = Set.of(Player.class, PlayerMock.class);
+	private final Set<Class<?>> worldSupportedTypes = Set.of(World.class, WorldMock.class);
+	private final Set<Class<?>> pluginSupportedTypes = Set.of(Plugin.class, PluginMock.class);
+
+	private int playerCounter = 0;
+	private int worldCounter = 0;
+	private int pluginCounter = 0;
 
 	@Override
 	public void postProcessTestInstance(Object testInstance, ExtensionContext context) throws Exception
 	{
-		final ServerMock serverMock = MockBukkit.getOrCreateMock();
-		injectServerMockIntoFields(testInstance, context, serverMock);
+		injectMocksIntoFields(testInstance, context);
 	}
 
-	private void injectServerMockIntoFields(Object testInstance, ExtensionContext context, ServerMock serverMock) throws IllegalAccessException
+	private void injectMocksIntoFields(Object testInstance, @NotNull ExtensionContext context) throws IllegalAccessException
 	{
 		final Optional<Class<?>> classOptional = context.getTestClass();
 		if (classOptional.isEmpty())
@@ -109,17 +123,51 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			return;
 		}
 
-		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get())
+		final List<Field> allFields = FieldUtils.getAllFieldsList(classOptional.get())
 				.stream()
-				.filter(field -> serverSupportedTypes.contains(field.getType()))
 				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
 				.toList();
 
-		for (final Field field : serverMockFields)
+		for (final Field field : allFields)
 		{
-			final String name = field.getName();
-			FieldUtils.writeDeclaredField(testInstance, name, serverMock, true);
+			final Object mockObject = createMockForField(field);
+			if (mockObject != null)
+			{
+				FieldUtils.writeField(field, testInstance, mockObject, true);
+			}
 		}
+	}
+
+	private @Nullable Object createMockForType(Class<?> type)
+	{
+		if (serverSupportedTypes.contains(type))
+		{
+			return MockBukkit.getOrCreateMock();
+		}
+		else if (playerSupportedTypes.contains(type))
+		{
+			final String playerName = "Player" + playerCounter++;
+			return MockBukkit.getOrCreateMock().addPlayer(playerName);
+		}
+		else if (worldSupportedTypes.contains(type))
+		{
+			final String worldName = "World" + worldCounter++;
+			return MockBukkit.getOrCreateMock().addSimpleWorld(worldName);
+		}
+		else if (pluginSupportedTypes.contains(type))
+		{
+			final String pluginName = "Plugin" + pluginCounter++;
+			return MockBukkit.createMockPlugin(pluginName);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	private Object createMockForField(@NotNull Field field)
+	{
+		return createMockForType(field.getType());
 	}
 
 	@Override
@@ -130,11 +178,17 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	}
 
 	@Override
-	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
+	public boolean supportsParameter(@NotNull ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
 	{
-		final boolean paramIsCorrectType = parameterContext.getParameter().getType() == ServerMock.class;
+		final Class<?> paramType = parameterContext.getParameter().getType();
 		final boolean paramHasCorrectAnnotation = parameterContext.isAnnotated(MockBukkitInject.class);
-		return paramIsCorrectType && paramHasCorrectAnnotation;
+
+		return paramHasCorrectAnnotation && (
+				serverSupportedTypes.contains(paramType) ||
+						playerSupportedTypes.contains(paramType) ||
+						worldSupportedTypes.contains(paramType) ||
+						pluginSupportedTypes.contains(paramType)
+		);
 	}
 
 	@Override
@@ -142,7 +196,8 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	{
 		if (!supportsParameter(parameterContext, extensionContext))
 			return null;
-		return MockBukkit.getOrCreateMock();
+
+		return createMockForType(parameterContext.getParameter().getType());
 	}
 
 	@Override
