@@ -122,7 +122,8 @@ class DecoratedPotStateMockTest
 	@Test
 	void notEqualObject()
 	{
-		assertNotEquals(new Object(), pot);
+		// Checks if the pot is not equal to the object using the pot equals method, don't swap
+		assertNotEquals(pot, new Object());
 	}
 
 	@Test
