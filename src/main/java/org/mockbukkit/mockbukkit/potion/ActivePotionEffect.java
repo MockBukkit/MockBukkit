@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  * @author TheBusyBiscuit
  * @see LivingEntityMock#addPotionEffect(PotionEffect)
  */
-public final class ActivePotionEffect
+public final class ActivePotionEffect implements Comparable<ActivePotionEffect>
 {
 
 	private final @NotNull PotionEffect effect;
