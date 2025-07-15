@@ -14,16 +14,20 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
+	@Getter
+	@Setter
 	private boolean invisible;
 	private boolean noBasePlate;
 	private boolean showArms;
+	@Getter
+	@Setter
 	private boolean small;
+	@Getter
+	@Setter
 	private boolean marker;
 
 	/**
