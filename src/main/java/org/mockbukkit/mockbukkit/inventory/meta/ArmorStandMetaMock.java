@@ -1,6 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,9 +11,10 @@ import java.util.Map;
 
 /**
  * Mock implementation of an {@link ArmorStandMeta}.
- *
- * @see ItemMetaMock
  */
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
@@ -48,39 +52,9 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	}
 
 	@Override
-	public boolean isInvisible()
-	{
-		return invisible;
-	}
-
-	@Override
 	public boolean hasNoBasePlate()
 	{
 		return noBasePlate;
-	}
-
-	@Override
-	public boolean shouldShowArms()
-	{
-		return showArms;
-	}
-
-	@Override
-	public boolean isSmall()
-	{
-		return small;
-	}
-
-	@Override
-	public boolean isMarker()
-	{
-		return marker;
-	}
-
-	@Override
-	public void setInvisible(boolean invisible)
-	{
-		this.invisible = invisible;
 	}
 
 	@Override
@@ -90,49 +64,15 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	}
 
 	@Override
+	public boolean shouldShowArms()
+	{
+		return showArms;
+	}
+
+	@Override
 	public void setShowArms(boolean showArms)
 	{
 		this.showArms = showArms;
-	}
-
-	@Override
-	public void setSmall(boolean small)
-	{
-		this.small = small;
-	}
-
-	@Override
-	public void setMarker(boolean marker)
-	{
-		this.marker = marker;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (invisible ? 1 : 0);
-		result = prime * result + (noBasePlate ? 1 : 0);
-		result = prime * result + (showArms ? 1 : 0);
-		result = prime * result + (small ? 1 : 0);
-		result = prime * result + (marker ? 1 : 0);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof ArmorStandMeta meta))
-		{
-			return false;
-		}
-		return super.equals(obj) &&
-				this.isInvisible() == meta.isInvisible() &&
-				this.hasNoBasePlate() == meta.hasNoBasePlate() &&
-				this.shouldShowArms() == meta.shouldShowArms() &&
-				this.isSmall() == meta.isSmall() &&
-				this.isMarker() == meta.isMarker();
 	}
 
 	@Override
