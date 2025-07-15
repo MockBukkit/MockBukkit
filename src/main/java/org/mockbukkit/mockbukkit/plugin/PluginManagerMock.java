@@ -46,6 +46,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,6 +64,7 @@ import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -324,12 +326,16 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			}
 		}
 
-		StringBuilder parameters = new StringBuilder("[");
-		for (Class<?> type : types)
-			parameters.append(type.getName()).append(", ");
-		String str = parameters.substring(0, parameters.length() - 2) + "]";
+		String parameters = " without parameters";
+		if (types.length > 0)
+		{
+			parameters = " with parameters [" + Arrays.stream(types)
+					.map(Class::getName)
+					.collect(Collectors.joining(", ")) + "]";
+		}
+
 		throw new NoSuchMethodException(
-				"No compatible constructor for " + class1.getName() + " with parameters " + str);
+				"No publicly available constructor for " + class1.getName() + parameters);
 	}
 
 	/**

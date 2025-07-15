@@ -419,4 +419,16 @@ class PluginManagerMockTest
 		assertTrue(plugin.classLoadSucceed);
 	}
 
+	@Test
+	void test_privateConstructorPlugin()
+	{
+		PluginLoadException exception = assertThrows(
+				PluginLoadException.class,
+				() -> pluginManager.loadPlugin(PrivateConstructorPlugin.class)
+		);
+
+		assertInstanceOf(NoSuchMethodException.class, exception.getCause());
+		assertEquals("No publicly available constructor for PrivateConstructorPluginProxy without parameters", exception.getCause().getMessage());
+	}
+
 }
