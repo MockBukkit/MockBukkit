@@ -11,6 +11,8 @@ import java.util.Map;
 
 /**
  * Mock implementation of an {@link ArmorStandMeta}.
+ *
+ * @see ItemMetaMock
  */
 @Getter
 @Setter
@@ -40,7 +42,6 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	public ArmorStandMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof ArmorStandMeta armorStandMeta)
 		{
 			this.invisible = armorStandMeta.isInvisible();
@@ -51,41 +52,64 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		}
 	}
 
+	/**
+	 * Gets whether the armor stand has no base plate.
+	 *
+	 * @return true if the armor stand has no base plate
+	 */
 	@Override
 	public boolean hasNoBasePlate()
 	{
 		return noBasePlate;
 	}
 
+	/**
+	 * Sets whether the armor stand should have no base plate.
+	 *
+	 * @param noBasePlate true to remove the base plate
+	 */
 	@Override
 	public void setNoBasePlate(boolean noBasePlate)
 	{
 		this.noBasePlate = noBasePlate;
 	}
 
+	/**
+	 * Gets whether the armor stand should show arms.
+	 *
+	 * @return true if the armor stand should show arms
+	 */
 	@Override
 	public boolean shouldShowArms()
 	{
 		return showArms;
 	}
 
+	/**
+	 * Sets whether the armor stand should show arms.
+	 *
+	 * @param showArms true to show arms
+	 */
 	@Override
 	public void setShowArms(boolean showArms)
 	{
 		this.showArms = showArms;
 	}
 
+	/**
+	 * Creates a clone of this armor stand meta.
+	 *
+	 * @return a cloned instance of this armor stand meta
+	 */
 	@Override
 	public @NotNull ArmorStandMetaMock clone()
 	{
 		ArmorStandMetaMock clone = (ArmorStandMetaMock) super.clone();
-
 		clone.invisible = this.invisible;
 		clone.marker = this.marker;
 		clone.noBasePlate = this.noBasePlate;
 		clone.showArms = this.showArms;
 		clone.small = this.small;
-
 		return clone;
 	}
 
