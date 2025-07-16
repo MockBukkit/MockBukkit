@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 @ApiStatus.Internal
-public class ItemComponentTypesBrideMock implements ItemComponentTypesBridge
+public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 {
 
 	@Override
