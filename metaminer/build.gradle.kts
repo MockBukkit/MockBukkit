@@ -8,7 +8,7 @@ group = "org.mockbukkit"
 version = "1.2-SNAPSHOT"
 
 repositories {
-	mavenCentral();
+	mavenCentral()
 	maven("https://repo.papermc.io/repository/maven-public/")
 }
 

@@ -31,7 +31,7 @@ class LlamaInventoryMockTest
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

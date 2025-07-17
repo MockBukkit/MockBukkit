@@ -445,7 +445,6 @@ public class BlockStateMock implements BlockState
 	 *
 	 * @param block The block to create the BlockState from.
 	 * @return The BlockState.
-	 *
 	 * @deprecated Use {@link BlockStateMockFactory#mock(Block)} instead.
 	 */
 	@NotNull

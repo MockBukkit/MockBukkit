@@ -338,10 +338,7 @@ class BeaconStateMockTest
 	void testGetEntitiesInRangeNotPlaced()
 	{
 		Beacon beacon1 = new BeaconStateMock(Material.BEACON);
-		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, () ->
-		{
-			beacon1.getEntitiesInRange();
-		});
+		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, beacon1::getEntitiesInRange);
 
 		assertEquals("Cannot get entities in range of a beacon that is not placed",
 				illegalStateException.getMessage());

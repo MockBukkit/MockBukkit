@@ -64,9 +64,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 
@@ -78,7 +78,7 @@ public class UnsafeValuesMock implements UnsafeValues
 {
 
 	private static final List<String> COMPATIBLE_API_VERSIONS =
-			Arrays.asList(
+			List.of(
 					"1.13",
 					"1.14",
 					"1.15",
@@ -135,7 +135,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions) throws IOException
+	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -424,11 +424,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		{
 			Material material = itemStack.getType();
 			String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
-			if (edgeCaseHandledTranslationKey != null)
-			{
-				return edgeCaseHandledTranslationKey;
-			}
-			return formatTranslatable("item", material, true);
+			return Objects.requireNonNullElseGet(edgeCaseHandledTranslationKey, () -> formatTranslatable("item", material, true));
 		}
 		else if (itemStack.getType().isBlock())
 		{

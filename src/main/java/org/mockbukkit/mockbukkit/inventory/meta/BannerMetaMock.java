@@ -132,7 +132,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	 * @param args A serialized BannerMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the BannerMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
 	public static @NotNull BannerMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		BannerMetaMock serialMock = new BannerMetaMock();

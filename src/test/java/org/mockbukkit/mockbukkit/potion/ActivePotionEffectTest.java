@@ -100,4 +100,5 @@ public class ActivePotionEffectTest
 		server.getScheduler().performTicks(1);
 		assertFalse(player.hasPotionEffect(PotionEffectType.SPEED));
 	}
+
 }

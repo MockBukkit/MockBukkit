@@ -1,10 +1,8 @@
 package org.mockbukkit.mockbukkit.potion;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 
 /**
  * This class represents an active {@link PotionEffect} which was applied to a {@link LivingEntity}.
@@ -12,7 +10,7 @@ import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
  * @author TheBusyBiscuit
  * @see LivingEntityMock#addPotionEffect(PotionEffect)
  */
-public final class ActivePotionEffect
+public final class ActivePotionEffect implements Comparable<ActivePotionEffect>
 {
 
 	private final @NotNull PotionEffect effect;
@@ -59,4 +57,19 @@ public final class ActivePotionEffect
 
 		return Math.max(0, effect.getDuration() - Bukkit.getCurrentTick() + startTick);
 	}
+
+	@Override
+	public int compareTo(@NotNull ActivePotionEffect other)
+	{
+		// Higher amplifier wins
+		int amplifierCompare = Integer.compare(other.effect.getAmplifier(), this.effect.getAmplifier());
+		if (amplifierCompare != 0)
+		{
+			return amplifierCompare;
+		}
+
+		// If amplifiers are equal, higher remaining duration wins
+		return Integer.compare(other.getDuration(), this.getDuration());
+	}
+
 }

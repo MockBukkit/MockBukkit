@@ -23,7 +23,7 @@ class ArmorMetaMockTest
 	@MockBukkitInject
 	private ServerMock server;
 	private ArmorMeta meta;
-	private ArmorTrim trim = new ArmorTrim(TrimMaterial.AMETHYST, TrimPattern.BOLT);
+	private final ArmorTrim trim = new ArmorTrim(TrimMaterial.AMETHYST, TrimPattern.BOLT);
 
 	@BeforeEach
 	void setUp()

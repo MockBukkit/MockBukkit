@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.damage;
 
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -14,8 +14,11 @@ import java.util.Objects;
 public class DamageSourceMock implements DamageSource
 {
 
+	@Getter
 	private final DamageType damageType;
+	@Getter
 	private final Entity causingEntity;
+	@Getter
 	private final Entity directEntity;
 	private final Location damageLocation;
 
@@ -25,24 +28,6 @@ public class DamageSourceMock implements DamageSource
 		this.causingEntity = causingEntity;
 		this.directEntity = directEntity;
 		this.damageLocation = damageLocation;
-	}
-
-	@Override
-	public @NotNull DamageType getDamageType()
-	{
-		return damageType;
-	}
-
-	@Override
-	public @Nullable Entity getCausingEntity()
-	{
-		return causingEntity;
-	}
-
-	@Override
-	public @Nullable Entity getDirectEntity()
-	{
-		return directEntity;
 	}
 
 	@Override
@@ -78,10 +63,10 @@ public class DamageSourceMock implements DamageSource
 	{
 		return switch (this.damageType.getDamageScaling())
 		{
-			case NEVER -> false;
+			case ALWAYS -> true;
 			case WHEN_CAUSED_BY_LIVING_NON_PLAYER ->
 					this.causingEntity instanceof LivingEntity && !(this.causingEntity instanceof Player);
-			case ALWAYS -> true;
+			default -> false;
 		};
 	}
 
@@ -93,13 +78,12 @@ public class DamageSourceMock implements DamageSource
 			return true;
 		}
 
-		if (!(obj instanceof DamageSource other))
-		{
-			return false;
-		}
+		return obj instanceof DamageSource other
+				&& Objects.equals(this.getDamageType(), other.getDamageType())
+				&& Objects.equals(this.getCausingEntity(), other.getCausingEntity())
+				&& Objects.equals(this.getDirectEntity(), other.getDirectEntity())
+				&& Objects.equals(this.getDamageLocation(), other.getDamageLocation());
 
-		return Objects.equals(this.getDamageType(), other.getDamageType()) && Objects.equals(this.getCausingEntity(), other.getCausingEntity())
-				&& Objects.equals(this.getDirectEntity(), other.getDirectEntity()) && Objects.equals(this.getDamageLocation(), other.getDamageLocation());
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -139,17 +138,8 @@ public class MockBukkit
 	 */
 	public static Plugin loadJar(@NotNull String path)
 	{
-		try
-		{
-			return loadJar(new File(path));
-		}
-		catch (InvalidPluginException e)
-		{
-			// We *really* don't want to bother users with this error.
-			// It's only supposed to be used during unit tests, so if
-			// it fails it'll fail your test anyway.
-			throw new PluginLoadException(e);
-		}
+		return loadJar(new File(path));
+
 	}
 
 	/**
@@ -157,9 +147,8 @@ public class MockBukkit
 	 *
 	 * @param jarFile Path to the jar.
 	 * @return An instance of the plugin's main class.
-	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
 	 */
-	public static Plugin loadJar(@NotNull File jarFile) throws InvalidPluginException
+	public static Plugin loadJar(@NotNull File jarFile)
 	{
 		return mock.getPluginManager().loadPlugin(jarFile);
 	}

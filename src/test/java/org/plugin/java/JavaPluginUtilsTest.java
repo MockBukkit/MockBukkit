@@ -7,6 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,7 +21,7 @@ class JavaPluginUtilsTest
 		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
-		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
+		assertInstanceOf(UnsupportedOperationException.class, exception.getCause());
 		assertTrue(exception.getCause().getMessage().contains("This is a utility class and cannot be instantiated"));
 	}
 

@@ -1,6 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,13 +14,20 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@EqualsAndHashCode(callSuper = true)
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
+	@Getter
+	@Setter
 	private boolean invisible;
 	private boolean noBasePlate;
 	private boolean showArms;
+	@Getter
+	@Setter
 	private boolean small;
+	@Getter
+	@Setter
 	private boolean marker;
 
 	/**
@@ -36,7 +46,6 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	public ArmorStandMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof ArmorStandMeta armorStandMeta)
 		{
 			this.invisible = armorStandMeta.isInvisible();
@@ -47,105 +56,64 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		}
 	}
 
-	@Override
-	public boolean isInvisible()
-	{
-		return invisible;
-	}
-
+	/**
+	 * Gets whether the armor stand has no base plate.
+	 *
+	 * @return true if the armor stand has no base plate
+	 */
 	@Override
 	public boolean hasNoBasePlate()
 	{
 		return noBasePlate;
 	}
 
-	@Override
-	public boolean shouldShowArms()
-	{
-		return showArms;
-	}
-
-	@Override
-	public boolean isSmall()
-	{
-		return small;
-	}
-
-	@Override
-	public boolean isMarker()
-	{
-		return marker;
-	}
-
-	@Override
-	public void setInvisible(boolean invisible)
-	{
-		this.invisible = invisible;
-	}
-
+	/**
+	 * Sets whether the armor stand should have no base plate.
+	 *
+	 * @param noBasePlate true to remove the base plate
+	 */
 	@Override
 	public void setNoBasePlate(boolean noBasePlate)
 	{
 		this.noBasePlate = noBasePlate;
 	}
 
+	/**
+	 * Gets whether the armor stand should show arms.
+	 *
+	 * @return true if the armor stand should show arms
+	 */
+	@Override
+	public boolean shouldShowArms()
+	{
+		return showArms;
+	}
+
+	/**
+	 * Sets whether the armor stand should show arms.
+	 *
+	 * @param showArms true to show arms
+	 */
 	@Override
 	public void setShowArms(boolean showArms)
 	{
 		this.showArms = showArms;
 	}
 
-	@Override
-	public void setSmall(boolean small)
-	{
-		this.small = small;
-	}
-
-	@Override
-	public void setMarker(boolean marker)
-	{
-		this.marker = marker;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (invisible ? 1 : 0);
-		result = prime * result + (noBasePlate ? 1 : 0);
-		result = prime * result + (showArms ? 1 : 0);
-		result = prime * result + (small ? 1 : 0);
-		result = prime * result + (marker ? 1 : 0);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof ArmorStandMeta meta))
-		{
-			return false;
-		}
-		return super.equals(obj) &&
-				this.isInvisible() == meta.isInvisible() &&
-				this.hasNoBasePlate() == meta.hasNoBasePlate() &&
-				this.shouldShowArms() == meta.shouldShowArms() &&
-				this.isSmall() == meta.isSmall() &&
-				this.isMarker() == meta.isMarker();
-	}
-
+	/**
+	 * Creates a clone of this armor stand meta.
+	 *
+	 * @return a cloned instance of this armor stand meta
+	 */
 	@Override
 	public @NotNull ArmorStandMetaMock clone()
 	{
 		ArmorStandMetaMock clone = (ArmorStandMetaMock) super.clone();
-
 		clone.invisible = this.invisible;
 		clone.marker = this.marker;
 		clone.noBasePlate = this.noBasePlate;
 		clone.showArms = this.showArms;
 		clone.small = this.small;
-
 		return clone;
 	}
 

@@ -17,7 +17,6 @@ import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -32,7 +31,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class MockBukkitTest
@@ -66,7 +64,7 @@ class MockBukkitTest
 	void setServerInstanceToNull()
 	{
 		MockBukkit.mock();
-		assumeFalse(Bukkit.getServer() == null);
+		assertFalse(Bukkit.getServer() == null);
 		MockBukkit.setServerInstanceToNull();
 		assertNull(Bukkit.getServer());
 	}
@@ -195,7 +193,7 @@ class MockBukkitTest
 	{
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		assumeFalse(plugin.onDisableExecuted);
+		assertFalse(plugin.onDisableExecuted);
 		MockBukkit.unmock();
 		assertFalse(plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);
@@ -301,7 +299,7 @@ class MockBukkitTest
 	}
 
 	@Test
-	void load_WithConfig_InputStream() throws FileNotFoundException
+	void load_WithConfig_InputStream()
 	{
 		URL resource = this.getClass().getClassLoader().getResource("loadWithConfig/config_test.yml");
 		if (resource == null)
@@ -327,16 +325,14 @@ class MockBukkitTest
 	}
 
 	@Test
-	void load_WithConfig_InputStream_FileNotExists() throws FileNotFoundException
+	void load_WithConfig_InputStream_FileNotExists()
 	{
 
 		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{
 			MockBukkit.mock();
 			PluginLoadException runtimeException = assertThrows(PluginLoadException.class, () ->
-			{
-				MockBukkit.loadWithConfig(TestPlugin.class, inputStream);
-			});
+					MockBukkit.loadWithConfig(TestPlugin.class, inputStream));
 			assertEquals("Couldn't read config input stream", runtimeException.getMessage());
 		}
 		catch (IOException e)

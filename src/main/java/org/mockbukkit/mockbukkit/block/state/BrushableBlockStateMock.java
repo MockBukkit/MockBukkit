@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 public class BrushableBlockStateMock extends TileStateMock implements BrushableBlock
 {
+
 	private @NotNull ItemStack item = ItemStack.empty();
 
 	protected BrushableBlockStateMock(@NotNull Block block)

@@ -21,6 +21,7 @@ class BrushableBlockStateMockTest
 	@Nested
 	class SetItem
 	{
+
 		@Test
 		void defaultValueShouldBeEmpty()
 		{
@@ -54,6 +55,7 @@ class BrushableBlockStateMockTest
 	@Nested
 	class GetSnapshot
 	{
+
 		@Test
 		void givenEqualStates()
 		{

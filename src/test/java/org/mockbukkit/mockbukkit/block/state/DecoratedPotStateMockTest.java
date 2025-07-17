@@ -116,12 +116,14 @@ class DecoratedPotStateMockTest
 	@Test
 	void notEqualNull()
 	{
+		// Checks if the pot is not equal to null according to the pot equals method, don't swap
 		assertNotEquals(pot, null);
 	}
 
 	@Test
 	void notEqualObject()
 	{
+		// Checks if the pot is not equal to the object using the pot equals method, don't swap
 		assertNotEquals(pot, new Object());
 	}
 

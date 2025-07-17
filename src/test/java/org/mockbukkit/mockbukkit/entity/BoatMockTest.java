@@ -94,9 +94,7 @@ class BoatMockTest
 	void testSetMaxSpeedToLow()
 	{
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
-			boat.setMaxSpeed(-1D);
-		});
+				boat.setMaxSpeed(-1D));
 
 		assertEquals("Speed cannot be negative", illegalArgumentException.getMessage());
 	}
@@ -118,9 +116,7 @@ class BoatMockTest
 	void testSetOccupiedDecelerationToLow()
 	{
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
-			boat.setOccupiedDeceleration(-1D);
-		});
+				boat.setOccupiedDeceleration(-1D));
 
 		assertEquals("Rate cannot be negative", illegalArgumentException.getMessage());
 	}

@@ -81,7 +81,7 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	}
 
 	@Override
-	protected Class<?> findClass(String name) throws ClassNotFoundException
+	protected Class<?> findClass(String name)
 	{
 		try
 		{
@@ -128,7 +128,7 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	}
 
 	@Override
-	public void close() throws IOException
+	public void close()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

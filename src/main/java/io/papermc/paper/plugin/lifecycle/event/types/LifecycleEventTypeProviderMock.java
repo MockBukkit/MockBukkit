@@ -10,7 +10,7 @@ import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.PrioritizableLifec
 public class LifecycleEventTypeProviderMock implements LifecycleEventTypeProvider
 {
 
-	private TagEventTypeProviderMock tagEventProvider = new TagEventTypeProviderMock();
+	private final TagEventTypeProviderMock tagEventProvider = new TagEventTypeProviderMock();
 
 	@Override
 	public <O extends LifecycleEventOwner, E extends LifecycleEvent> LifecycleEventType.Monitorable<O, E> monitor(String name, Class<? extends O> ownerType)

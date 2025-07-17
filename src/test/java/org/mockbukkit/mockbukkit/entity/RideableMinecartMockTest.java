@@ -23,7 +23,7 @@ class RideableMinecartMockTest
 	private RideableMinecart minecart;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		minecart = new RideableMinecartMock(server, UUID.randomUUID());
 	}
@@ -31,13 +31,13 @@ class RideableMinecartMockTest
 	@Test
 	void testGetMinecartMaterial()
 	{
-		assertEquals(minecart.getMinecartMaterial(), Material.MINECART);
+		assertEquals(Material.MINECART, minecart.getMinecartMaterial());
 	}
 
 	@Test
 	void testGetType()
 	{
-		assertEquals(minecart.getType(), EntityType.MINECART);
+		assertEquals(EntityType.MINECART, minecart.getType());
 	}
 
 }

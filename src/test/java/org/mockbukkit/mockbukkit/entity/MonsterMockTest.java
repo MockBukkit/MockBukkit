@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.SpawnCategory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +9,8 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class MonsterMockTest
@@ -20,7 +21,7 @@ class MonsterMockTest
 	ZombieMock monster;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		monster = new ZombieMock(server, UUID.randomUUID());
 	}
@@ -28,7 +29,7 @@ class MonsterMockTest
 	@Test
 	void testGetSpawnCategory()
 	{
-		Assertions.assertEquals(SpawnCategory.MONSTER, monster.getSpawnCategory());
+		assertEquals(SpawnCategory.MONSTER, monster.getSpawnCategory());
 	}
 
 }

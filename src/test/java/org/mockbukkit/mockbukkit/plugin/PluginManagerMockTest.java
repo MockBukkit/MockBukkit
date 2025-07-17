@@ -115,7 +115,7 @@ class PluginManagerMockTest
 	{
 		Plugin plugin = pluginManager.getPlugin("MockBukkitTestPlugin");
 		assertNotNull(plugin);
-		assertTrue(plugin instanceof TestPlugin);
+		assertInstanceOf(TestPlugin.class, plugin);
 	}
 
 	@Test
@@ -417,6 +417,18 @@ class PluginManagerMockTest
 	{
 		assertDoesNotThrow(() -> plugin.createCustomClass());
 		assertTrue(plugin.classLoadSucceed);
+	}
+
+	@Test
+	void test_privateConstructorPlugin()
+	{
+		PluginLoadException exception = assertThrows(
+				PluginLoadException.class,
+				() -> pluginManager.loadPlugin(PrivateConstructorPlugin.class)
+		);
+
+		assertInstanceOf(NoSuchMethodException.class, exception.getCause());
+		assertEquals("No publicly available constructor for PrivateConstructorPluginProxy without parameters", exception.getCause().getMessage());
 	}
 
 }

@@ -21,7 +21,7 @@ import java.util.Objects;
 public abstract class ContainerStateMock extends LockableTileStateMock implements Container
 {
 
-	private Inventory inventory;
+	private final Inventory inventory;
 	private final Inventory snapshot;
 	private @Nullable Component customName;
 

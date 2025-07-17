@@ -58,7 +58,7 @@ public class MetadataTable implements Metadatable
 	@Override
 	public boolean hasMetadata(@NotNull String metadataKey)
 	{
-		return metadata.containsKey(metadataKey) && metadata.get(metadataKey).size() > 0;
+		return metadata.containsKey(metadataKey) && !metadata.get(metadataKey).isEmpty();
 	}
 
 	@Override

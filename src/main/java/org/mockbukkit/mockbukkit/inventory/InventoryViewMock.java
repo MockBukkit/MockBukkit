@@ -24,7 +24,7 @@ public abstract class InventoryViewMock implements InventoryView
 	private HumanEntity player;
 	private InventoryType type;
 	private String name;
-	private String originalTitle;
+	private final String originalTitle;
 
 	/**
 	 * Constructs a new {@link InventoryViewMock} with the provided parameters.

@@ -21,7 +21,7 @@ class ColorableArmorMetaMockTest
 	@MockBukkitInject
 	private ServerMock server;
 	private ColorableArmorMeta meta;
-	private Color color = Color.AQUA;
+	private final Color color = Color.AQUA;
 	static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
 
 	@BeforeEach

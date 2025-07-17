@@ -32,7 +32,6 @@ import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfVariantMock;
 import org.mockbukkit.mockbukkit.event.GameEventMock;
-import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.fluid.FluidMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
@@ -48,7 +47,6 @@ import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -68,17 +66,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	public RegistryMock(RegistryKey<T> key)
 	{
-		try
-		{
-			loadKeyedToRegistry(key);
-		}
-		catch (IOException e)
-		{
-			throw new InternalDataLoadException(e);
-		}
+		loadKeyedToRegistry(key);
 	}
 
-	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key) throws IOException
+	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
 	{
 		String fileName = "/keyed/" + key.key().value() + ".json";
 		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);

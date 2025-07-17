@@ -839,13 +839,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void addItemFlags(ItemFlag... itemFlags)
 	{
-		hideFlags.addAll(Arrays.asList(itemFlags));
+		hideFlags.addAll(List.of(itemFlags));
 	}
 
 	@Override
 	public void removeItemFlags(ItemFlag... itemFlags)
 	{
-		hideFlags.removeAll(Arrays.asList(itemFlags));
+		List.of(itemFlags).forEach(hideFlags::remove);
 	}
 
 	@Override
@@ -855,7 +855,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public boolean hasItemFlag(ItemFlag flag)
+	public boolean hasItemFlag(@NotNull ItemFlag flag)
 	{
 		return hideFlags.contains(flag);
 	}
@@ -1025,7 +1025,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{
 		// This was replaced by PersistentDataContainer!

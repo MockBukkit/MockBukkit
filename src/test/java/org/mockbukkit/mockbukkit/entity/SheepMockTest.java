@@ -57,14 +57,14 @@ class SheepMockTest
 	@Test
 	void testGetColor()
 	{
-		assertSame(sheep.getColor(), DyeColor.WHITE);
+		assertSame(DyeColor.WHITE, sheep.getColor());
 	}
 
 	@Test
 	void testSetColor()
 	{
 		sheep.setColor(DyeColor.BLUE);
-		assertSame(sheep.getColor(), DyeColor.BLUE);
+		assertSame(DyeColor.BLUE, sheep.getColor());
 	}
 
 	@Test
@@ -92,7 +92,7 @@ class SheepMockTest
 	void shear_DropsAtLeastOneItem()
 	{
 		sheep.shear();
-		assertTrue(sheep.getWorld().getEntitiesByClass(Item.class).size() > 0);
+		assertFalse(sheep.getWorld().getEntitiesByClass(Item.class).isEmpty());
 	}
 
 	@Test

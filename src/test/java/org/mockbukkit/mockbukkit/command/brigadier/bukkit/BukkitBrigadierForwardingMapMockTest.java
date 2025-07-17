@@ -16,6 +16,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -69,6 +72,56 @@ class BukkitBrigadierForwardingMapMockTest
 	}
 
 	@Test
+	void containsValueWithNonCommand()
+	{
+		assertFalse(map.containsValue("Hello world"));
+	}
+
+	@Test
+	void containsKeyWithNonString()
+	{
+		assertFalse(map.containsKey("Hello world"));
+	}
+
+	@Test
+	void removeWithNonString()
+	{
+		assertNull(map.remove(1));
+	}
+
+	@Test
+	void getWithNonString()
+	{
+		assertNull(map.get(1));
+	}
+
+	@Test
+	void testClear()
+	{
+		assertNotEquals(0, map.size());
+		map.clear();
+		assertEquals(0, map.size());
+	}
+
+	@Test
+	void testIsEmpty()
+	{
+		assertFalse(map.isEmpty());
+		map.remove("bukkit:reload");
+		map.remove("bukkit:rl");
+		map.remove("bukkit:timings");
+		map.remove("timings");
+		assertTrue(map.isEmpty());
+	}
+
+	@Test
+	void testDoubleRemoveShouldntError()
+	{
+		assertNotNull(map.remove("bukkit:reload"));
+		assertNull(map.remove("bukkit:reload"));
+	}
+
+	@Test
 	void put_brigadier()
 	{
 		int initial = map.size();
@@ -85,9 +138,7 @@ class BukkitBrigadierForwardingMapMockTest
 		assertEquals(initial + 4, map.size());
 		assertFalse(map.isEmpty());
 		assertTrue(map.containsKey("other_command"));
-		assertTrue(map.keySet().contains("other_command"));
 		assertTrue(map.values().iterator().hasNext());
-		assertTrue(map.keySet().iterator().hasNext());
 		assertTrue(map.keySet().stream().anyMatch("other_command"::equals));
 	}
 

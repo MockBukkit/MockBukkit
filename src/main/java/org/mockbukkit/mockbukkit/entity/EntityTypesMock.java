@@ -434,6 +434,7 @@ public final class EntityTypesMock
 			Preconditions.checkArgument(bukkitClazz.isAssignableFrom(mockClazz), "The class %s is not a subclass of %s", mockClazz, bukkitClazz);
 			Preconditions.checkArgument(mockFactory != null, "Cannot register a null mock factory");
 			Preconditions.checkArgument(!mapping.containsKey(bukkitClazz), "Cannot register type %s because it's already registered.", bukkitClazz);
+			Preconditions.checkArgument(!mockClazz.isAssignableFrom(Player.class), "Not allowed to register %s.", mockClazz);
 			mapping.put(bukkitClazz, new EntityData<>(bukkitClazz, mockClazz, mockFactory));
 			return this;
 		}

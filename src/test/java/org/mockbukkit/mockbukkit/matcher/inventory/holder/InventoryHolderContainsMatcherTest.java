@@ -23,7 +23,7 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 	@MockBukkitInject
 	private ServerMock server;
 	private AllayMock allay;
-	private ItemStack stack = new ItemStack(Material.STONE);
+	private final ItemStack stack = new ItemStack(Material.STONE);
 
 	@BeforeEach
 	void setUp()

@@ -214,10 +214,6 @@ mavenPublishing {
 	}
 }
 
-fun isFork(): Boolean {
-	return run("git", "config", "--get", "remote.origin.url").contains("MockBukkit/MockBukkit")
-}
-
 fun isAction(): Boolean {
 	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "MockBukkit/MockBukkit"
 }
