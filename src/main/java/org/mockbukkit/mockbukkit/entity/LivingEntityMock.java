@@ -652,7 +652,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 		if (!event.isCancelled())
 		{
-			activeEffects.computeIfAbsent(type, k -> new PriorityQueue<>()).add(new ActivePotionEffect(effect));
+			var pq = activeEffects.computeIfAbsent(type, k -> new PriorityQueue<>());
+			if (oldEffect == null ||
+					oldEffect.getAmplifier() < effect.getAmplifier() ||
+					(oldEffect.getAmplifier() == effect.getAmplifier() &&
+							!oldEffect.isInfinite() &&
+							(effect.isInfinite() || oldEffect.getDuration() < effect.getDuration())))
+			{
+				pq.add(new ActivePotionEffect(effect));
+			}
 		}
 
 		return event;

@@ -68,7 +68,15 @@ public final class ActivePotionEffect implements Comparable<ActivePotionEffect>
 			return amplifierCompare;
 		}
 
-		// If amplifiers are equal, higher remaining duration wins
+		if (this.effect.isInfinite())
+		{
+			return -1;
+		}
+		if (other.getPotionEffect().isInfinite())
+		{
+			return 1;
+		}
+
 		return Integer.compare(other.getDuration(), this.getDuration());
 	}
 

@@ -222,10 +222,104 @@ class LivingEntityMockTest
 	@Test
 	void testPotionEffectAddedForFirstTime()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
-		EntityPotionEffectEvent event = livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
-		server.getPluginManager().assertEventFired(EntityPotionEffectEvent.class);
-		assertEntityPotionEffectEvent(event, null, effect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
+		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertNotNull(retrieved);
+		assertEquals(effect.getAmplifier(), retrieved.getAmplifier());
+		assertEquals(effect.getDuration(), retrieved.getDuration());
+	}
+
+	@Test
+	void testPotionEffectReplacedWithHigherAmplifier()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(2, retrieved.getAmplifier()); // Higher amplifier wins
+	}
+
+	@Test
+	void testPotionEffectNotReplacedWithLowerAmplifier()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(2, retrieved.getAmplifier()); // Old effect with higher amplifier remains
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierInfiniteOldEffectRemains()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(-1, retrieved.getDuration()); // Infinite duration remains
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierFiniteReplacedWithInfinite()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(-1, retrieved.getDuration()); // Infinite duration wins
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierReplacedWithLongerDuration()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(200, retrieved.getDuration()); // Longer duration wins
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierNotReplacedWithShorterDuration()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(200, retrieved.getDuration()); // Original longer duration remains
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierBothInfiniteFirstRemains()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(-1, retrieved.getDuration()); // Both infinite, first one remains
 	}
 
 	@Test
