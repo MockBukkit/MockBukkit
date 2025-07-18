@@ -235,8 +235,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 	private @NotNull <T extends Entity> EntityMock getEntityMock(Class<T> clazz)
 	{
-		WorldMock world = getServerMock().getWorlds().isEmpty() ? getWorldMock("") : (WorldMock) getServerMock().getWorlds().getFirst();
-		return (EntityMock) world.spawn(getLocation(), clazz);
+		return (EntityMock) getFirstWorld().spawn(getLocation(), clazz);
 	}
 
 	private @NotNull PluginMock getPluginMock(@NotNull MockBukkitInject annotation)
@@ -253,8 +252,17 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 	private @NotNull Location getLocation()
 	{
-		WorldMock world = getServerMock().getWorlds().isEmpty() ? getWorldMock("") : (WorldMock) getServerMock().getWorlds().getFirst();
-		return new Location(world, 0, 0, 0);
+		return new Location(getFirstWorld(), 0, 0, 0);
+	}
+
+	private @NotNull WorldMock getFirstWorld()
+	{
+		if (getServerMock().getWorlds().isEmpty())
+		{
+			return getWorldMock("");
+		}
+
+		return (WorldMock) getServerMock().getWorlds().getFirst();
 	}
 
 	private @NotNull WorldMock getWorldMock(@NotNull String name)

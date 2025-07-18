@@ -262,7 +262,6 @@ class LivingEntityMockTest
 		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
 	}
 
-
 	@Test
 	void testPotionEffectSameAmplifierInfiniteOldEffectRemains()
 	{

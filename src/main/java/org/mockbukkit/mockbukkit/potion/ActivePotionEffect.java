@@ -70,8 +70,14 @@ public final class ActivePotionEffect implements Comparable<ActivePotionEffect>
 
 		if (this.effect.isInfinite())
 		{
+			if (other.getPotionEffect().isInfinite())
+			{
+				return 0;
+			}
+
 			return -1;
 		}
+
 		if (other.getPotionEffect().isInfinite())
 		{
 			return 1;

@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -86,6 +87,9 @@ class MockBukkitExtensionDifferentMocksTest
 		@MockBukkitInject
 		Plugin pluginMock;
 
+		@MockBukkitInject
+		Location location;
+
 		@Test
 		void serverMockIsNotNull()
 		{
@@ -110,40 +114,52 @@ class MockBukkitExtensionDifferentMocksTest
 			assertNotNull(pluginMock);
 		}
 
+		@Test
+		void locationIsNotNull()
+		{
+			assertNotNull(location);
+			assertEquals(serverMock.getWorlds().getFirst(), location.getWorld());
+			assertEquals(0, location.getX());
+			assertEquals(0, location.getY());
+			assertEquals(0, location.getZ());
+			assertEquals(0, location.getPitch());
+			assertEquals(0, location.getYaw());
+		}
+
 	}
 
 	@Nested
 	class TestAllTypesWithNamesClass
 	{
 
-		@MockBukkitInject(name="Bumba")
+		@MockBukkitInject(name = "Bumba")
 		PlayerMock playerMock;
 
-		@MockBukkitInject(name="Studio100")
+		@MockBukkitInject(name = "Studio100")
 		WorldMock worldMock;
 
-		@MockBukkitInject(name="CodeMonkey")
+		@MockBukkitInject(name = "CodeMonkey")
 		Plugin pluginMock;
 
 		@Test
 		void playerMockIsNotNull()
 		{
 			assertNotNull(playerMock);
-			assertEquals( "Bumba", playerMock.getName() );
+			assertEquals("Bumba", playerMock.getName());
 		}
 
 		@Test
 		void worldMockIsNotNull()
 		{
 			assertNotNull(worldMock);
-			assertEquals( "Studio100", worldMock.getName() );
+			assertEquals("Studio100", worldMock.getName());
 		}
 
 		@Test
 		void pluginMockIsNotNull()
 		{
 			assertNotNull(pluginMock);
-			assertEquals( "CodeMonkey v1.0.0", pluginMock.getDescription().getFullName() );
+			assertEquals("CodeMonkey v1.0.0", pluginMock.getDescription().getFullName());
 		}
 
 	}
