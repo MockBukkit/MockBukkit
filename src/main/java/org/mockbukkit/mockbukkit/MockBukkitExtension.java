@@ -28,7 +28,6 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.logging.Logger;
 
 /**
@@ -161,7 +160,6 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 {
 
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
-	private static final Random RANDOM = new Random();
 
 	private final Logger logger = Logger.getLogger("MockBukkitExtension");
 
