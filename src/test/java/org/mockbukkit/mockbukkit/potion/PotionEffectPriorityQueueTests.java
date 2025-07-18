@@ -188,7 +188,7 @@ class PotionEffectPriorityQueueTests
 		// Tick until weak effect expires
 		server.getScheduler().performTicks(2);
 
-		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, weakShort, null, EntityPotionEffectEvent.Cause.EXPIRATION);
+		assertEventNotFired(EntityPotionEffectEvent.Action.REMOVED); // weak doesn't fire an event! Because it wasn't added...
 		assertEventNotFired(EntityPotionEffectEvent.Action.CHANGED); // No change to active effect
 		assertEffectActive(strongLong); // Strong effect still active (but duration reduced)
 	}
