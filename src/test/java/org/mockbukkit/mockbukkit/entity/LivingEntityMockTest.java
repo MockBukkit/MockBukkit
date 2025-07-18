@@ -36,11 +36,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -48,7 +50,6 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -62,18 +63,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
+@ExtendWith(MockBukkitExtension.class)
 class LivingEntityMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private CowMock livingEntity;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		livingEntity = new CowMock(server, UUID.randomUUID());
-	}
 
 	@AfterEach
 	void tearDown()
@@ -253,9 +250,18 @@ class LivingEntityMockTest
 		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
+		// Initially the higher amplifier effect should be active
 		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
-		assertEquals(2, retrieved.getAmplifier()); // Old effect with higher amplifier remains
+		assertEquals(2, retrieved.getAmplifier()); // Higher amplifier wins
+
+		// Tick the server enough times to expire the original effect
+		server.getScheduler().performTicks(150);
+
+		// The weaker amplifier effect should NOT be active - it was never added to the queue
+		PotionEffect afterExpiry = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
 	}
+
 
 	@Test
 	void testPotionEffectSameAmplifierInfiniteOldEffectRemains()
@@ -305,9 +311,18 @@ class LivingEntityMockTest
 		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
+		// Initially the stronger effect should be active
 		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
 		assertEquals(200, retrieved.getDuration()); // Original longer duration remains
+
+		// Tick the server enough times to expire the original effect
+		server.getScheduler().performTicks(250);
+
+		// The weaker effect should NOT be active - it was never added to the queue
+		PotionEffect afterExpiry = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
 	}
+
 
 	@Test
 	void testPotionEffectSameAmplifierBothInfiniteFirstRemains()

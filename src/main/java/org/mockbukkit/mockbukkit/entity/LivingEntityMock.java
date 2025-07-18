@@ -750,7 +750,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			if (oldActiveEffect.getAmplifier() != newActiveEffect.getAmplifier())
 			{
 				var changeEvent = new EntityPotionEffectEvent(this, oldActiveEffect, newActiveEffect,
-						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.CHANGED, true);
+						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
 				Bukkit.getPluginManager().callEvent(changeEvent);
 			}
 		}

@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 import org.junit.platform.commons.util.ExceptionUtils;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
@@ -25,6 +28,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.logging.Logger;
 
 /**
@@ -157,6 +161,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 {
 
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
+	private static final Random RANDOM = new Random();
 
 	private final Logger logger = Logger.getLogger("MockBukkitExtension");
 
@@ -194,31 +199,84 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private @Nullable Object createMockForType(@NotNull Class<?> type, @NotNull MockBukkitInject annotation)
 	{
 		if (type.isAssignableFrom(ServerMock.class))
 		{
-			return MockBukkit.getOrCreateMock();
+			return getServerMock();
 		}
-		else if (type.isAssignableFrom(PlayerMock.class))
+
+		if (type.isAssignableFrom(Location.class))
 		{
-			final String playerName = annotation.name().isEmpty() ? "Player" + playerCounter++ : annotation.name();
-			return MockBukkit.getOrCreateMock().addPlayer(playerName);
+			return getLocation();
 		}
-		else if (type.isAssignableFrom(WorldMock.class))
+
+		if (type.isAssignableFrom(PlayerMock.class))
 		{
-			final String worldName = annotation.name().isEmpty() ? "World" + worldCounter++ : annotation.name();
-			return MockBukkit.getOrCreateMock().addSimpleWorld(worldName);
+			return getPlayerMock(annotation);
 		}
-		else if (type.isAssignableFrom(PluginMock.class))
+
+		if (type.isAssignableFrom(WorldMock.class))
 		{
-			final String pluginName = annotation.name().isEmpty() ? "Plugin" + pluginCounter++ : annotation.name();
-			return MockBukkit.createMockPlugin(pluginName);
+			return getWorldMock(annotation);
 		}
-		else
+
+		if (type.isAssignableFrom(PluginMock.class))
 		{
-			return null;
+			return getPluginMock(annotation);
 		}
+
+		if (Entity.class.isAssignableFrom(type)) // is type a subclass of Entity?
+		{
+			return getEntityMock((Class<? extends Entity>) type);
+		}
+
+		return null;
+	}
+
+	private @NotNull <T extends Entity> EntityMock getEntityMock(Class<T> clazz)
+	{
+		WorldMock world = getServerMock().getWorlds().isEmpty() ? getWorldMock("") : (WorldMock) getServerMock().getWorlds().getFirst();
+		return (EntityMock) world.spawn(getLocation(), clazz);
+	}
+
+	private @NotNull PluginMock getPluginMock(@NotNull MockBukkitInject annotation)
+	{
+		final String pluginName = annotation.name().isEmpty() ? "Plugin" + pluginCounter++ : annotation.name();
+		return MockBukkit.createMockPlugin(pluginName);
+	}
+
+	private @NotNull PlayerMock getPlayerMock(@NotNull MockBukkitInject annotation)
+	{
+		final String playerName = annotation.name().isEmpty() ? "Player" + playerCounter++ : annotation.name();
+		return getServerMock().addPlayer(playerName);
+	}
+
+	private @NotNull Location getLocation()
+	{
+		WorldMock world = getServerMock().getWorlds().isEmpty() ? getWorldMock("") : (WorldMock) getServerMock().getWorlds().getFirst();
+		return new Location(world, 0, 0, 0);
+	}
+
+	private @NotNull WorldMock getWorldMock(@NotNull String name)
+	{
+		if (name.isEmpty())
+		{
+			name = "World" + worldCounter++;
+		}
+
+		return getServerMock().addSimpleWorld(name);
+	}
+
+	private @NotNull WorldMock getWorldMock(@NotNull MockBukkitInject annotation)
+	{
+		return getWorldMock(annotation.name());
+	}
+
+	private static @NotNull ServerMock getServerMock()
+	{
+		return MockBukkit.getOrCreateMock();
 	}
 
 	@Override
@@ -255,7 +313,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	@Override
 	public void beforeAll(ExtensionContext context)
 	{
-		MockBukkit.getOrCreateMock();
+		getServerMock();
 	}
 
 	@Override

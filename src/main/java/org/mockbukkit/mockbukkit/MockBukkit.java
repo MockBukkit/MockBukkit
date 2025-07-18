@@ -101,7 +101,7 @@ public class MockBukkit
 	 *
 	 * @return The {@link ServerMock} instance.
 	 */
-	public static @Nullable ServerMock getOrCreateMock()
+	public static @NotNull ServerMock getOrCreateMock()
 	{
 		if (!isMocked())
 		{
