@@ -301,9 +301,8 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		return this.pages.size();
 	}
 
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BookMetaMock clone()
 	{
 		return new BookMetaMock(this);
