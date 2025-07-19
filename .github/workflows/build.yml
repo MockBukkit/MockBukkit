@@ -1,11 +1,13 @@
-name: Build
+name: CI
 
 on:
   pull_request:
     branches: [ v1.* ]
+  push:
+    branches: [ v1.* ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,8 +19,34 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Run unit tests
-        run: ./gradlew test --refresh-dependencies
+      - name: Build with Gradle
+        run: ./gradlew build -x test --refresh-dependencies
+
+      - name: Run unit tests with coverage
+        run: ./gradlew jacocoTestReport --refresh-dependencies
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: build/test-results/test/TEST-*.xml
+          codecov_yml_path: ./codecov.yml
