@@ -652,7 +652,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 		if (!event.isCancelled())
 		{
-			activeEffects.computeIfAbsent(type, k -> new PriorityQueue<>()).add(new ActivePotionEffect(effect));
+			var pq = activeEffects.computeIfAbsent(type, k -> new PriorityQueue<>());
+			if (oldEffect == null ||
+					oldEffect.getAmplifier() < effect.getAmplifier() ||
+					(oldEffect.getAmplifier() == effect.getAmplifier() &&
+							!oldEffect.isInfinite() &&
+							(effect.isInfinite() || oldEffect.getDuration() < effect.getDuration())))
+			{
+				pq.add(new ActivePotionEffect(effect));
+			}
 		}
 
 		return event;
@@ -713,43 +721,38 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			var entry = it.next();
 			var queue = entry.getValue();
 
-			PotionEffect oldActiveEffect = mapToPotionEffect(queue.peek());
-
-			// Remove ALL expired effects from the queue, not just the top one
-			var queueIt = queue.iterator();
-			while (queueIt.hasNext())
+			var expiredEffects = queue.stream().filter(ActivePotionEffect::hasExpired).toList();
+			if (expiredEffects.isEmpty())
 			{
-				var activeEffect = queueIt.next();
-				if (activeEffect.hasExpired())
+				continue;
+			}
+
+			if (queue.size() == expiredEffects.size())
+			{
+				// All removed -> Send change event
+				var event = new EntityPotionEffectEvent(this, mapToPotionEffect(queue.peek()), null,
+						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
+				Bukkit.getPluginManager().callEvent(event);
+				if (!event.isCancelled())
 				{
-					queueIt.remove();
-					var event = new EntityPotionEffectEvent(this, activeEffect.getPotionEffect(), null,
-							EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
-					Bukkit.getPluginManager().callEvent(event);
+					it.remove();
 				}
 			}
-
-			// Check if the active effect changed after removing expired effects
-			if (queue.isEmpty())
+			else
 			{
-				it.remove();
-				return;
-			}
-
-			PotionEffect newActiveEffect = mapToPotionEffect(queue.peek());
-
-			// Only fire CHANGED event if the effective properties changed
-			if (oldActiveEffect.getAmplifier() != newActiveEffect.getAmplifier())
-			{
-				var changeEvent = new EntityPotionEffectEvent(this, oldActiveEffect, newActiveEffect,
-						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.CHANGED, true);
-				Bukkit.getPluginManager().callEvent(changeEvent);
+				// Not the last event to be removed: don't send the event!
+				queue.removeIf(ActivePotionEffect::hasExpired);
 			}
 		}
 	}
 
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
+	{
+		removePotionEffect(type, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.REMOVED);
+	}
+
+	public void removePotionEffect(@NotNull PotionEffectType type, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
 		var queue = activeEffects.get(type);
@@ -758,14 +761,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			return;
 		}
 
-		for (var activeEffect : queue)
-		{
-			var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null,
-					EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.REMOVED, true);
-			Bukkit.getPluginManager().callEvent(changeEvent);
-		}
+		var activeEffect = queue.peek();
+		var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null, cause, action, true);
+		Bukkit.getPluginManager().callEvent(changeEvent);
 
-		activeEffects.remove(type);
+		if (!changeEvent.isCancelled())
+		{
+			activeEffects.remove(type);
+		}
 	}
 
 	@Override
