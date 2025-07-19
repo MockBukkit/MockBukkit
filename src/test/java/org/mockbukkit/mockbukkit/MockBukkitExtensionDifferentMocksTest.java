@@ -344,4 +344,28 @@ class MockBukkitExtensionDifferentMocksTest
 		}
 
 	}
+
+	@Nested
+			// This test when a server/world hasn't been populated before.
+	class TestOnlyEntityMocking
+	{
+
+		@MockBukkitInject
+		CowMock cowMock;
+
+		@Test
+		void testIsProperlyInjected()
+		{
+			assertNotNull(cowMock);
+			var cowLocation = cowMock.getLocation();
+			assertEquals("World0", cowLocation.getWorld().getName());
+			assertEquals(0, cowLocation.getX());
+			assertEquals(0, cowLocation.getY());
+			assertEquals(0, cowLocation.getZ());
+			assertEquals(0, cowLocation.getPitch());
+			assertEquals(0, cowLocation.getYaw());
+		}
+
+	}
+
 }
