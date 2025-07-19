@@ -282,8 +282,7 @@ class PotionEffectPriorityQueueTests
 		assertFalse(activeEffects.stream().anyMatch(e -> e.getAmplifier() == 1 && e.getType() == PotionEffectType.REGENERATION));
 	}
 
-	@Test
-	void testBranchCoverage_AddPotionEffectCancelled()
+	void cancelAllNextEvents()
 	{
 		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
 				new org.bukkit.event.Listener()
@@ -292,9 +291,41 @@ class PotionEffectPriorityQueueTests
 				org.bukkit.event.EventPriority.NORMAL,
 				(listener, event) -> ((EntityPotionEffectEvent) event).setCancelled(true),
 				plugin, false);
+	}
 
+	@Test
+	void testBranchCoverage_AddPotionEffectCancelled()
+	{
+		cancelAllNextEvents();
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		assertFalse(livingEntity.hasPotionEffect(PotionEffectType.REGENERATION));
+	}
+
+	@Test
+	void testBranchCoverage_RemoveExpiredEffectCancelled()
+	{
+		// apply it
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		cancelAllNextEvents();
+
+		server.getScheduler().performTicks(weakEffect.getDuration());
+		var effect = livingEntity.getPotionEffect(weakEffect.getType());
+		assertNotNull(effect);
+		assertEquals(0, effect.getDuration());
+	}
+
+	@Test
+	void testBranchCoverage_RemoveEffectCancelled()
+	{
+		// apply it
+		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		cancelAllNextEvents();
+
+		livingEntity.removePotionEffect(weakEffect.getType());
+
+		assertTrue(livingEntity.hasPotionEffect(weakEffect.getType()));
 	}
 
 	@Test

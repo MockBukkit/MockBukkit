@@ -735,7 +735,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled())
 				{
-					queue.clear();
 					it.remove();
 				}
 			}
