@@ -159,31 +159,31 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public BlockItemDataProperties.Builder blockItemStateProperties()
 	{
-		return null;
+		throw new UnimplementedOperationException()
 	}
 
 	@Override
 	public ItemContainerContents.Builder itemContainerContents()
 	{
-		return null;
+		return new ItemContainerContentsMock.BuilderMock();
 	}
 
 	@Override
 	public JukeboxPlayable.Builder jukeboxPlayable(JukeboxSong song)
 	{
-		return null;
+		return new JukeboxPlayableMock.BuilderMock(song);
 	}
 
 	@Override
 	public Tool.Builder tool()
 	{
-		return null;
+		return new ToolMock.BuilderMock();
 	}
 
 	@Override
 	public Tool.Rule rule(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops)
 	{
-		return null;
+		return new ToolMock.RuleMock(blocks, speed, correctForDrops);
 	}
 
 	@Override
