@@ -400,7 +400,12 @@ public final class EntityTypesMock
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
 		if (data == null)
 		{
-			throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
+			// try a little harder
+			data = bukkitToMockData.values().stream().filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass)).findFirst().orElse(null);
+			if (data == null)
+			{
+				throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
+			}
 		}
 
 		@Nullable EntityMock mockedEntity = data.mockFactory().apply(server, entityUUID);
