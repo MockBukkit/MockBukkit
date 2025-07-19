@@ -1,11 +1,10 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import java.io.ByteArrayOutputStream
 
 plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.33.0"
+	id("com.vanniktech.maven.publish") version "0.34.0"
 	id("net.kyori.blossom") version "2.1.0"
 }
 
@@ -209,7 +208,7 @@ mavenPublishing {
 			url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
 		}
 	}
-	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+	publishToMavenCentral(true)
 	// No key available to sign with for maven local
 	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
 		signAllPublications()
