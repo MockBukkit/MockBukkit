@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Sound;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -11,6 +10,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class FishMockTest
@@ -34,14 +35,14 @@ class FishMockTest
 	@Test
 	void testIsFromBucketDefault()
 	{
-		Assertions.assertFalse(fish.isFromBucket());
+		assertFalse(fish.isFromBucket());
 	}
 
 	@Test
 	void testSetFromBucket()
 	{
 		fish.setFromBucket(true);
-		Assertions.assertTrue(fish.isFromBucket());
+		assertTrue(fish.isFromBucket());
 	}
 
 	@Test

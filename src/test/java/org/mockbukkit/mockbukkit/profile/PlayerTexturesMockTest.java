@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.profile;
 
 import org.bukkit.profile.PlayerTextures.SkinModel;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +9,13 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class PlayerTexturesMockTest
@@ -28,11 +34,11 @@ class PlayerTexturesMockTest
 	{
 		// Checks if the PlayerTexturesMock has no data set
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertTrue(playerTexturesMock.isEmpty());
+		assertTrue(playerTexturesMock.isEmpty());
 
 		// Checks if the PlayerTexturesMock has data set
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
-		Assertions.assertFalse(playerTexturesMock.isEmpty());
+		assertFalse(playerTexturesMock.isEmpty());
 	}
 
 	@Test
@@ -42,11 +48,11 @@ class PlayerTexturesMockTest
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
 		playerTexturesMock.setCape(new URL("https://google.com/cape"));
-		Assertions.assertFalse(playerTexturesMock.isEmpty());
+		assertFalse(playerTexturesMock.isEmpty());
 
 		// Clear data and assert it has been cleared
 		playerTexturesMock.clear();
-		Assertions.assertTrue(playerTexturesMock.isEmpty());
+		assertTrue(playerTexturesMock.isEmpty());
 	}
 
 	@Test
@@ -54,11 +60,11 @@ class PlayerTexturesMockTest
 	{
 		// Assert that no skin is set
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertNull(playerTexturesMock.getSkin());
+		assertNull(playerTexturesMock.getSkin());
 
 		// Set skin and assert we can get it
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
-		Assertions.assertEquals(new URL("https://github.com/skin"), playerTexturesMock.getSkin());
+		assertEquals(new URL("https://github.com/skin"), playerTexturesMock.getSkin());
 	}
 
 	@Test
@@ -66,15 +72,15 @@ class PlayerTexturesMockTest
 	{
 		// Assert the default SkinModel is set
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertEquals(SkinModel.CLASSIC, playerTexturesMock.getSkinModel());
+		assertEquals(SkinModel.CLASSIC, playerTexturesMock.getSkinModel());
 
 		// Set the SkinModel and assert it's set
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"), SkinModel.SLIM);
-		Assertions.assertEquals(SkinModel.SLIM, playerTexturesMock.getSkinModel());
+		assertEquals(SkinModel.SLIM, playerTexturesMock.getSkinModel());
 
 		// Assert that setting the Skin without a SkinModel defaults to CLASSIC
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
-		Assertions.assertEquals(SkinModel.CLASSIC, playerTexturesMock.getSkinModel());
+		assertEquals(SkinModel.CLASSIC, playerTexturesMock.getSkinModel());
 	}
 
 	@Test
@@ -82,11 +88,11 @@ class PlayerTexturesMockTest
 	{
 		// Assert that no skin is set
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertNull(playerTexturesMock.getCape());
+		assertNull(playerTexturesMock.getCape());
 
 		// Set skin and assert we can get it
 		playerTexturesMock.setCape(new URL("https://google.com/cape"));
-		Assertions.assertEquals(new URL("https://google.com/cape"), playerTexturesMock.getCape());
+		assertEquals(new URL("https://google.com/cape"), playerTexturesMock.getCape());
 	}
 
 	@Test
@@ -94,11 +100,11 @@ class PlayerTexturesMockTest
 	{
 		// Assert that the timestamp is 0
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertEquals(0, playerTexturesMock.getTimestamp());
+		assertEquals(0, playerTexturesMock.getTimestamp());
 
 		// Assert that setting the skin sets the timestamp
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
-		Assertions.assertNotEquals(0, playerTexturesMock.getTimestamp());
+		assertNotEquals(0, playerTexturesMock.getTimestamp());
 	}
 
 	@Test
@@ -106,7 +112,7 @@ class PlayerTexturesMockTest
 	{
 		// Assert that the textures are not signed
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertFalse(playerTexturesMock.isSigned());
+		assertFalse(playerTexturesMock.isSigned());
 	}
 
 	@Test
@@ -114,11 +120,11 @@ class PlayerTexturesMockTest
 	{
 		// Assert that there is no property
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
-		Assertions.assertNull(playerTexturesMock.getProperty());
+		assertNull(playerTexturesMock.getProperty());
 
 		// Assert that setting the skin will create a property
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
-		Assertions.assertNotNull(playerTexturesMock.getProperty());
+		assertNotNull(playerTexturesMock.getProperty());
 	}
 
 	@Test
@@ -131,7 +137,7 @@ class PlayerTexturesMockTest
 		PlayerTexturesMock otherPlayerTexturesMock = new PlayerTexturesMock(profile);
 		otherPlayerTexturesMock.setSkin(new URL("https://github.com/skin"));
 
-		Assertions.assertEquals(playerTexturesMock.hashCode(), otherPlayerTexturesMock.hashCode());
+		assertEquals(playerTexturesMock.hashCode(), otherPlayerTexturesMock.hashCode());
 	}
 
 	@Test
@@ -141,15 +147,15 @@ class PlayerTexturesMockTest
 		PlayerTexturesMock playerTexturesMock = new PlayerTexturesMock(profile);
 		playerTexturesMock.setSkin(new URL("https://github.com/skin"));
 
-		Assertions.assertEquals(playerTexturesMock, playerTexturesMock);
+		assertEquals(playerTexturesMock, playerTexturesMock);
 
 		// Assert that other objects are not equal
-		Assertions.assertNotEquals(playerTexturesMock, new Object());
+		assertNotEquals(playerTexturesMock, new Object());
 
 		// Assert they are equal
 		PlayerTexturesMock otherPlayerTexturesMock = new PlayerTexturesMock(profile);
 		otherPlayerTexturesMock.setSkin(new URL("https://github.com/skin"));
-		Assertions.assertEquals(playerTexturesMock, otherPlayerTexturesMock);
+		assertEquals(playerTexturesMock, otherPlayerTexturesMock);
 
 	}
 

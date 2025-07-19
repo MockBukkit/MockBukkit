@@ -22,4 +22,7 @@ public record SpawnedParticle(
 		double extra,
 		@Nullable Object data,
 		boolean force
-) {}
+)
+{
+
+}

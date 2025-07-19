@@ -7,7 +7,6 @@ import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,12 +34,8 @@ class PaperCommandsMockTest
 	void commandWithArgumentsTest(String alias)
 	{
 		PluginMock.builder().withOnEnable((pluginMock) ->
-		{
-			pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-			{
-				event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias"));
-			});
-		}).build();
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias")))).build();
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), alias + " Hello world!");
 		assertEquals(1, arguments.size());
 		assertEquals("Hello world!", arguments.getFirst());
@@ -50,12 +45,8 @@ class PaperCommandsMockTest
 	void commandWithArgumentsTest_doesNotExist()
 	{
 		PluginMock.builder().withOnEnable((pluginMock) ->
-		{
-			pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-			{
-				event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias"));
-			});
-		}).build();
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias")))).build();
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), "this_does Not exist!");
 		assertEquals(0, arguments.size());
 	}
@@ -84,14 +75,7 @@ class PaperCommandsMockTest
 
 	BasicCommand createBasicCommand()
 	{
-		return new BasicCommand()
-		{
-			@Override
-			public void execute(@NotNull CommandSourceStack commandSourceStack, String @NotNull [] args)
-			{
-				arguments = Arrays.asList((Object[]) args);
-			}
-		};
+		return (commandSourceStack, args) -> arguments = Arrays.asList((Object[]) args);
 	}
 
 }

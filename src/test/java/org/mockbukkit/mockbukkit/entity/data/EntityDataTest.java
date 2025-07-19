@@ -8,8 +8,6 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.opentest4j.AssertionFailedError;
 
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,7 +18,7 @@ class EntityDataTest
 	private EntityData entityData;
 
 	@BeforeEach
-	void setUp() throws IOException
+	void setUp()
 	{
 		fakeData = "{'default':{'width':2,'height':3,'eyeHeight':4,'states':{'sleeping':{'height':0.2, 'eyeHeight':0.3}}},'baby':{'width':1, 'height':0.5, 'eyeHeight':0.1}}";
 		entityData = new EntityData(EntityType.BAT, fakeData);

@@ -12,7 +12,7 @@ import java.util.Map;
 public class KeyedClassTracker
 {
 
-	public static Map<RegistryKey<? extends Keyed>, Class<?>> CLASS_REGISTRY_KEY_RELATION = loadClassRegistryKeyRelation();
+	public static final Map<RegistryKey<? extends Keyed>, Class<?>> CLASS_REGISTRY_KEY_RELATION = loadClassRegistryKeyRelation();
 
 	private static Map<RegistryKey<? extends Keyed>, Class<?>> loadClassRegistryKeyRelation()
 	{

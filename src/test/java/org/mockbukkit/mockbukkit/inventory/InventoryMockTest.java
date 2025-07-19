@@ -647,7 +647,7 @@ class InventoryMockTest
 
 		HashMap<Integer, ItemStack> result = inventory.removeItem(diamond);
 
-		assertEquals(1, result.values().size());
+		assertEquals(1, result.size());
 		assertEquals(0, inventory.getNumberOfItems(diamond));
 		assertEquals(1, inventory.getNumberOfItems(emerald));
 	}
@@ -680,7 +680,7 @@ class InventoryMockTest
 
 		HashMap<Integer, ItemStack> result = inventory.removeItem(diamond, diamond);
 
-		assertEquals(1, result.values().size());
+		assertEquals(1, result.size());
 		assertEquals(0, inventory.getNumberOfItems(diamond));
 		assertEquals(1, inventory.getNumberOfItems(emerald));
 	}

@@ -67,10 +67,9 @@ public class ScoreboardMock implements Scoreboard
 	{
 		Preconditions.checkNotNull(name, "Objective name cannot be null");
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
-		Preconditions.checkNotNull(displayName, "Display name cannot be null");
 		Preconditions.checkNotNull(renderType, "RenderType cannot be null");
-		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '" + name + "' is longer than the limit of 32767 characters");
-		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '" + name + "' already exists");
+		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '%s' is longer than the limit of %d characters", name, Short.MAX_VALUE);
+		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '%s' already exists", name);
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		this.objectives.put(name, objective);
 		return objective;

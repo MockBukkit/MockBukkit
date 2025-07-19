@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -103,14 +102,14 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
-	public byte @NotNull [] serializeToBytes() throws IOException
+	public byte @NotNull [] serializeToBytes()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void readFromBytes(byte @NotNull [] bytes, boolean clear) throws IOException
+	public void readFromBytes(byte @NotNull [] bytes, boolean clear)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class JukeboxSongMock implements JukeboxSong
 {
 
-	private NamespacedKey key;
+	private final NamespacedKey key;
 	private final String translationKey;
 
 	public JukeboxSongMock(NamespacedKey key, String translationKey)

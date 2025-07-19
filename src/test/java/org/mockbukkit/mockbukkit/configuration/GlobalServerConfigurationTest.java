@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GlobalServerConfigurationTest
 {
 
-	ServerConfiguration config = new ServerConfiguration();
+	final ServerConfiguration config = new ServerConfiguration();
 
 	@Test
 	void testGetViewDistanceDefault()

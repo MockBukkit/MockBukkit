@@ -139,6 +139,7 @@ public final class ItemStackMirror extends ItemStack
 		return itemStack.canRepair(toBeRepaired);
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull ItemStack clone()

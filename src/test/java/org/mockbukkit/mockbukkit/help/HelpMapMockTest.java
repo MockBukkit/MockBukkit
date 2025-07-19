@@ -4,8 +4,6 @@ import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
 import org.bukkit.help.IndexHelpTopic;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -95,14 +93,7 @@ class HelpMapMockTest
 	@Test
 	void testAssertRegistered()
 	{
-		HelpTopicFactory<VersionCommand> helpTopicFactory = new HelpTopicFactory<>()
-		{
-			@Override
-			public @Nullable HelpTopic createTopic(@NotNull VersionCommand command)
-			{
-				return new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
-			}
-		};
+		HelpTopicFactory<VersionCommand> helpTopicFactory = command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
 		helpMap.registerHelpTopicFactory(VersionCommand.class, helpTopicFactory);
 
 		assertThat(helpMap, hasFactoryRegistered(helpTopicFactory));

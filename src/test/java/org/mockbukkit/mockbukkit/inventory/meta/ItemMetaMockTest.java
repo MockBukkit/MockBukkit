@@ -192,7 +192,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setLore(Collections.singletonList("lore"));
-		meta2.setLore(Arrays.asList("lore", "more lore"));
+		meta2.setLore(List.of("lore", "more lore"));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
@@ -501,6 +501,17 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void equals_RemoveFlags()
+	{
+		assertEquals(0, meta.getItemFlags().size());
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertEquals(1, meta.getItemFlags().size());
+		meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertEquals(0, meta.getItemFlags().size());
+		meta.removeItemFlags(ItemFlag.HIDE_DYE);
+	}
+
+	@Test
 	void equals_PersistentDataSame_True()
 	{
 		PluginMock plugin = MockBukkit.createMockPlugin();
@@ -614,14 +625,14 @@ class ItemMetaMockTest
 	@Test
 	void hasLore_HasLore_True()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertTrue(meta.hasLore());
 	}
 
 	@Test
 	void getLore_LoreSet_ExactLines()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		List<String> lore = meta.getLore();
 		assertEquals(2, lore.size());
 		assertEquals("Hello", lore.get(0));
@@ -779,21 +790,21 @@ class ItemMetaMockTest
 	@Test
 	void testHasNoLore_HasNoLore_Asserts()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, hasAnyLore());
 	}
 
 	@Test
 	void testLore_CorrectLore_Returns()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, hasLore("Hello", "world"));
 	}
 
 	@Test
 	void testLore_InorrectLore_Asserts()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, doesNotHaveLore("Something", "else"));
 	}
 
@@ -1250,9 +1261,7 @@ class ItemMetaMockTest
 		assertFalse(meta.hasEnchantable());
 
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
-			meta.setEnchantable(-1);
-		});
+				meta.setEnchantable(-1));
 
 		assertEquals("Enchantability must be positive", illegalArgumentException.getMessage());
 	}

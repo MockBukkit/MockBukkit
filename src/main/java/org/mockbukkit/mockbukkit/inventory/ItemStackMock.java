@@ -360,6 +360,7 @@ public class ItemStackMock extends ItemStack
 		return EMPTY.clone();
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull ItemStack clone()

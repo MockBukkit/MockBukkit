@@ -214,7 +214,7 @@ public class InventoryMock implements Inventory
 	 */
 	public void addViewers(@NotNull HumanEntity... viewers)
 	{
-		addViewers(Arrays.asList(viewers));
+		addViewers(List.of(viewers));
 	}
 
 	/**

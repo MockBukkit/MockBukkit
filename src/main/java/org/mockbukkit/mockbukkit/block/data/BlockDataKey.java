@@ -151,10 +151,10 @@ public enum BlockDataKey
 	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
 	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
 
-	TRIAL_SPAWNER_STATE("trial_spawner_state", string ->  TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
+	TRIAL_SPAWNER_STATE("trial_spawner_state", string -> TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
 	OMINOUS("ominous", Boolean::parseBoolean, c -> c instanceof TrialSpawner || c instanceof Vault),
 
-	VAULT_STATE("vault_state", string ->  Vault.State.valueOf(string.toUpperCase(Locale.ROOT)), Vault.class::isInstance),
+	VAULT_STATE("vault_state", string -> Vault.State.valueOf(string.toUpperCase(Locale.ROOT)), Vault.class::isInstance),
 
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 
@@ -172,9 +172,9 @@ public enum BlockDataKey
 	private static final Set<String> KEYS = compileKeys();
 
 
-	private String key;
-	private Function<String, Object> valueConstructor;
-	private Predicate<BlockData> applicableTo;
+	private final String key;
+	private final Function<String, Object> valueConstructor;
+	private final Predicate<BlockData> applicableTo;
 
 	BlockDataKey(String key, Function<String, Object> valueConstructor, Predicate<BlockData> applicableTo)
 	{

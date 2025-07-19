@@ -53,7 +53,6 @@ import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.WaterMob;
@@ -91,7 +90,10 @@ import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.EntityTypesMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
+import org.mockbukkit.mockbukkit.entity.ItemMock;
+import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 import org.mockbukkit.mockbukkit.entity.MobMock;
+import org.mockbukkit.mockbukkit.entity.ProjectileMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.generator.BiomeProviderMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
@@ -979,12 +981,15 @@ public class WorldMock implements World
 		return EntityTypesMock.createEntity(clazz, server);
 	}
 
-	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
+	private void callSpawnEvent(@NotNull EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
 	{
+		Preconditions.checkArgument(!(entity instanceof Player), "Cannot spawn a player. Use `server.addPlayer` instead.");
 
-		boolean success; // Here for future implementation (see below)
+		boolean success; // Here for a future implementation (see below)
 
-		if (entity instanceof LivingEntity living && !(entity instanceof Player))
+		switch (entity)
+		{
+		case LivingEntityMock living ->
 		{
 			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
 			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
@@ -1000,21 +1005,9 @@ public class WorldMock implements World
 
 			success = new CreatureSpawnEvent(living, reason).callEvent();
 		}
-		else if (entity instanceof Item item)
-		{
-			success = new ItemSpawnEvent(item).callEvent();
-		}
-		else if (entity instanceof Player)
-		{
-			success = false; // Shouldn't ever be called here but just for parody.
-		}
-		else if (entity instanceof Projectile)
-		{
-			success = new ProjectileLaunchEvent(entity).callEvent();
-		}
-		else
-		{
-			success = new EntitySpawnEvent(entity).callEvent();
+		case ItemMock item -> success = new ItemSpawnEvent(item).callEvent();
+		case ProjectileMock ignored -> success = new ProjectileLaunchEvent(entity).callEvent();
+		default -> success = new EntitySpawnEvent(entity).callEvent();
 		}
 
 		if (!success || !entity.isValid())
@@ -1476,7 +1469,6 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@SuppressWarnings("UnstableApiUsage")
 	public @NotNull ChunkSnapshotMock getEmptyChunkSnapshot(int chunkX, int chunkZ, boolean includeBiome, boolean includeBiomeTempRain)
 	{
 		// Cubic size of the chunk (w * w * h).

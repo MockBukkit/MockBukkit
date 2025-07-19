@@ -20,7 +20,7 @@ class OminousBottleMetaMockTest
 	@MockBukkitInject
 	private Server server;
 	private OminousBottleMeta meta;
-	private int amplifier = 1;
+	private final int amplifier = 1;
 
 	@BeforeEach
 	void setUp()

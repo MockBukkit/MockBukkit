@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class VaultDataMockTest
 {
+
 	private VaultDataMock vault;
 
 	@BeforeEach
@@ -116,4 +117,5 @@ class VaultDataMockTest
 		assertTrue(vault.isOminous());
 		assertFalse(cloned.isOminous());
 	}
+
 }

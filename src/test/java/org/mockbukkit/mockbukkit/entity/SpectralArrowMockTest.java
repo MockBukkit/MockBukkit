@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -33,7 +32,7 @@ class SpectralArrowMockTest
 	@Test
 	void getDamage_default()
 	{
-		Assertions.assertEquals(6.0, spectralArrow.getDamage());
+		assertEquals(6.0, spectralArrow.getDamage());
 	}
 
 	@Test

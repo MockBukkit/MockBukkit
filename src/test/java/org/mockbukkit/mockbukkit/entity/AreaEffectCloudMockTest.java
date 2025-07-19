@@ -153,9 +153,7 @@ class AreaEffectCloudMockTest
 	void testSetParticleNull()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			areaEffectCloud.setParticle(null);
-		});
+				areaEffectCloud.setParticle(null));
 
 		assertEquals("Particle cannot be null", nullPointerException.getMessage());
 	}
@@ -291,9 +289,7 @@ class AreaEffectCloudMockTest
 	void testSetColorNullThrows()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			areaEffectCloud.setColor(null);
-		});
+				areaEffectCloud.setColor(null));
 
 		assertEquals("Color cannot be null", nullPointerException.getMessage());
 	}

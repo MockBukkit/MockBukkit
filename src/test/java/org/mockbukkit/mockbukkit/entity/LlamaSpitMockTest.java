@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LlamaSpit;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +10,8 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 public class LlamaSpitMockTest
@@ -29,7 +30,7 @@ public class LlamaSpitMockTest
 	@Test
 	void testGetType()
 	{
-		Assertions.assertEquals(EntityType.LLAMA_SPIT, llamaSpit.getType());
+		assertEquals(EntityType.LLAMA_SPIT, llamaSpit.getType());
 	}
 
 }

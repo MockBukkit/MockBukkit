@@ -125,42 +125,42 @@ class ArmorStandMockTest
 	void testHeadPose()
 	{
 		armorStand.setHeadPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getHeadPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getHeadPose());
 	}
 
 	@Test
 	void testBodyPose()
 	{
 		armorStand.setBodyPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getBodyPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getBodyPose());
 	}
 
 	@Test
 	void testLeftArm()
 	{
 		armorStand.setLeftArmPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getLeftArmPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getLeftArmPose());
 	}
 
 	@Test
 	void testRightArm()
 	{
 		armorStand.setRightArmPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getRightArmPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getRightArmPose());
 	}
 
 	@Test
 	void testLeftLeg()
 	{
 		armorStand.setLeftLegPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getLeftLegPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getLeftLegPose());
 	}
 
 	@Test
 	void testRightLeg()
 	{
 		armorStand.setRightLegPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getRightLegPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getRightLegPose());
 	}
 
 	@Test

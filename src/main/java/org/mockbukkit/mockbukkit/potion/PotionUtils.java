@@ -9,10 +9,7 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
-import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
-
-import java.io.IOException;
 
 /**
  * Utility class copied from CraftPotionUtil.
@@ -30,18 +27,11 @@ public class PotionUtils
 
 	static
 	{
-		try
-		{
-			upgradeable = loadData("upgradeable", "STRONG_");
-			extendable = loadData("extendable", "LONG_");
-		}
-		catch (IOException e)
-		{
-			throw new InternalDataLoadException(e);
-		}
+		upgradeable = loadData("upgradeable", "STRONG_");
+		extendable = loadData("extendable", "LONG_");
 	}
 
-	private static @NotNull @Unmodifiable BiMap<PotionType, PotionType> loadData(String filename, String prefix) throws IOException
+	private static @NotNull @Unmodifiable BiMap<PotionType, PotionType> loadData(String filename, String prefix)
 	{
 		String path = "/potion/type_mapping/" + filename + ".json";
 		JsonArray values = ResourceLoader.loadResource(path).getAsJsonObject().getAsJsonArray("values");

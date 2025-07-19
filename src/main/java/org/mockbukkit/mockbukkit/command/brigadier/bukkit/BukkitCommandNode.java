@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.command.brigadier.bukkit;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -70,7 +69,7 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		}
 
 		@Override
-		public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
+		public int run(CommandContext<CommandSourceStack> context)
 		{
 			CommandSender sender = context.getSource().getSender();
 
@@ -99,7 +98,7 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		}
 
 		@Override
-		public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) throws CommandSyntaxException
+		public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder)
 		{
 			// Paper start
 			org.bukkit.command.CommandSender sender = context.getSource().getSender();

@@ -82,9 +82,7 @@ class ScheduledTaskTest
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
-			executed.set(true);
-		});
+				executed.set(true));
 		task.run();
 		assertTrue(executed.get());
 	}
@@ -94,9 +92,7 @@ class ScheduledTaskTest
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
-			executed.set(true);
-		});
+				executed.set(true));
 		task.cancel();
 
 		assertThrows(CancellationException.class, task::run);

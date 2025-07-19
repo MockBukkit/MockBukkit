@@ -172,8 +172,8 @@ public class BlockStateMetaMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = {
-		"ACACIA_HANGING_SIGN",
-		"ACACIA_WALL_HANGING_SIGN"
+			"ACACIA_HANGING_SIGN",
+			"ACACIA_WALL_HANGING_SIGN"
 	})
 	void givenHangingSign_ShouldBeHangingSignMock(Material material)
 	{
