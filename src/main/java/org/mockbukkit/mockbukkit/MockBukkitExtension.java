@@ -7,7 +7,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -221,9 +220,9 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			return getWorldMock(annotation);
 		}
 
-		if (JavaPlugin.class.isAssignableFrom(type))
+		if (Plugin.class.isAssignableFrom(type))
 		{
-			return getPluginMock((Class<? extends JavaPlugin>) type, annotation.name());
+			return getPluginMock((Class<? extends Plugin>) type, annotation.name());
 		}
 
 		if (Entity.class.isAssignableFrom(type)) // is type a subclass of Entity?
@@ -239,7 +238,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		return (EntityMock) getFirstWorld().spawn(getLocation(), clazz);
 	}
 
-	private @NotNull <T extends JavaPlugin> Plugin getPluginMock(Class<T> clazz, @NotNull String name)
+	private @NotNull <T extends Plugin> Plugin getPluginMock(Class<T> clazz, @NotNull String name)
 	{
 		name = name.trim();
 		if (name.isEmpty())
@@ -313,8 +312,10 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		return paramHasCorrectAnnotation && (
 				paramType.isAssignableFrom(ServerMock.class) ||
 						paramType.isAssignableFrom(PlayerMock.class) ||
-						paramType.isAssignableFrom(PluginMock.class) ||
-						paramType.isAssignableFrom(WorldMock.class)
+						paramType.isAssignableFrom(Location.class) ||
+						paramType.isAssignableFrom(WorldMock.class) ||
+						Plugin.class.isAssignableFrom(paramType) ||
+						Entity.class.isAssignableFrom(paramType)
 		);
 	}
 

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockbukkit.mockbukkit.entity.CowMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -84,6 +86,9 @@ class MockBukkitExtensionDifferentMocksTest
 		PlayerMock playerMock;
 
 		@MockBukkitInject
+		CowMock cowMock;
+
+		@MockBukkitInject
 		WorldMock worldMock;
 
 		@MockBukkitInject
@@ -102,6 +107,12 @@ class MockBukkitExtensionDifferentMocksTest
 		void playerMockIsNotNull()
 		{
 			assertNotNull(playerMock);
+		}
+
+		@Test
+		void cowMockIsNotNull()
+		{
+			assertNotNull(cowMock);
 		}
 
 		@Test
@@ -247,7 +258,9 @@ class MockBukkitExtensionDifferentMocksTest
 			@MockBukkitInject ServerMock server,
 			@MockBukkitInject Player player,
 			@MockBukkitInject World world,
-			@MockBukkitInject Plugin plugin
+			@MockBukkitInject Plugin plugin,
+			@MockBukkitInject Location location,
+			@MockBukkitInject Cow cowMock
 	)
 	{
 		assertEquals("dummy", value);
@@ -260,6 +273,10 @@ class MockBukkitExtensionDifferentMocksTest
 		assertInstanceOf(WorldMock.class, world);
 		assertNotNull(plugin);
 		assertInstanceOf(Plugin.class, plugin);
+		assertNotNull(location);
+		assertInstanceOf(Location.class, location);
+		assertNotNull(cowMock);
+		assertInstanceOf(Cow.class, cowMock);
 	}
 
 	@SuppressWarnings({ "java:S1144", "java:S1172" })
@@ -334,4 +351,31 @@ class MockBukkitExtensionDifferentMocksTest
 		}
 
 	}
+
+	@Nested
+	class TestOnlyEntityMocking
+	{
+		// This test when a server/world hasn't been populated before.
+
+		@Test
+		void noWorldsCreated()
+		{
+			assertTrue(MockBukkit.getOrCreateMock().getWorlds().isEmpty());
+		}
+
+		@Test
+		void testIsProperlyInjected(@MockBukkitInject CowMock cowMock)
+		{
+			assertNotNull(cowMock);
+			assertEquals(1, MockBukkit.getOrCreateMock().getWorlds().size());
+			var cowLocation = cowMock.getLocation();
+			assertEquals(0, cowLocation.getX());
+			assertEquals(0, cowLocation.getY());
+			assertEquals(0, cowLocation.getZ());
+			assertEquals(0, cowLocation.getPitch());
+			assertEquals(0, cowLocation.getYaw());
+		}
+
+	}
+
 }
