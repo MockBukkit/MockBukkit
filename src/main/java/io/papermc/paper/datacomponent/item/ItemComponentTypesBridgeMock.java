@@ -18,6 +18,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.util.stream.Collectors;
+
 @ApiStatus.Internal
 public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 {
@@ -79,43 +81,43 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public SuspiciousStewEffects.Builder suspiciousStewEffects()
 	{
-		return null;
+		return new SuspiciousStewEffectsMock.BuilderMock();
 	}
 
 	@Override
 	public MapItemColor.Builder mapItemColor()
 	{
-		return null;
+		return new MapItemColorMock.BuilderMock();
 	}
 
 	@Override
-	public MapDecorations.Builder mapDecorations()
+	public MapDecorationsMock.Builder mapDecorations()
 	{
-		return null;
+		return new MapDecorationsMock.BuilderMock();
 	}
 
 	@Override
-	public MapDecorations.DecorationEntry decorationEntry(MapCursor.Type type, double x, double z, float rotation)
+	public MapDecorationsMock.DecorationEntry decorationEntry(MapCursor.Type type, double x, double z, float rotation)
 	{
-		return null;
+		return new MapDecorationsMock.DecorationEntryMock(type, x, z, rotation);
 	}
 
 	@Override
 	public SeededContainerLoot.Builder seededContainerLoot(Key lootTableKey)
 	{
-		return null;
+		return new SeededContainerLootMock.BuilderMock();
 	}
 
 	@Override
 	public WrittenBookContent.Builder writtenBookContent(Filtered<String> title, String author)
 	{
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public WritableBookContent.Builder writeableBookContent()
 	{
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -139,13 +141,13 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public ResolvableProfile.Builder resolvableProfile()
 	{
-		return null;
+		return new ResolvableProfileMock.BuilderMock();
 	}
 
 	@Override
 	public ResolvableProfile resolvableProfile(PlayerProfile profile)
 	{
-		return null;
+		return new ResolvableProfileMock(profile.getId(), profile.getName(), profile.getProperties().stream().collect(Collectors.toUnmodifiableSet()));
 	}
 
 	@Override
