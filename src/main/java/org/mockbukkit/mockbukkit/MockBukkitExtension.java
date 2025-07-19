@@ -197,6 +197,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private @Nullable Object createMockForType(@NotNull Class<?> type, @NotNull MockBukkitInject annotation)
 	{
 		if (type.isAssignableFrom(ServerMock.class))
