@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -257,7 +258,9 @@ class MockBukkitExtensionDifferentMocksTest
 			@MockBukkitInject ServerMock server,
 			@MockBukkitInject Player player,
 			@MockBukkitInject World world,
-			@MockBukkitInject Plugin plugin
+			@MockBukkitInject Plugin plugin,
+			@MockBukkitInject Location location,
+			@MockBukkitInject Cow cowMock
 	)
 	{
 		assertEquals("dummy", value);
@@ -270,6 +273,10 @@ class MockBukkitExtensionDifferentMocksTest
 		assertInstanceOf(WorldMock.class, world);
 		assertNotNull(plugin);
 		assertInstanceOf(Plugin.class, plugin);
+		assertNotNull(location);
+		assertInstanceOf(Location.class, location);
+		assertNotNull(cowMock);
+		assertInstanceOf(Cow.class, cowMock);
 	}
 
 	@SuppressWarnings({ "java:S1144", "java:S1172" })
@@ -346,19 +353,22 @@ class MockBukkitExtensionDifferentMocksTest
 	}
 
 	@Nested
-			// This test when a server/world hasn't been populated before.
 	class TestOnlyEntityMocking
 	{
-
-		@MockBukkitInject
-		CowMock cowMock;
+		// This test when a server/world hasn't been populated before.
 
 		@Test
-		void testIsProperlyInjected()
+		void noWorldsCreated()
+		{
+			assertTrue(MockBukkit.getOrCreateMock().getWorlds().isEmpty());
+		}
+
+		@Test
+		void testIsProperlyInjected(@MockBukkitInject CowMock cowMock)
 		{
 			assertNotNull(cowMock);
+			assertEquals(1, MockBukkit.getOrCreateMock().getWorlds().size());
 			var cowLocation = cowMock.getLocation();
-			assertEquals("World0", cowLocation.getWorld().getName());
 			assertEquals(0, cowLocation.getX());
 			assertEquals(0, cowLocation.getY());
 			assertEquals(0, cowLocation.getZ());

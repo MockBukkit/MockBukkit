@@ -312,8 +312,10 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		return paramHasCorrectAnnotation && (
 				paramType.isAssignableFrom(ServerMock.class) ||
 						paramType.isAssignableFrom(PlayerMock.class) ||
-						paramType.isAssignableFrom(PluginMock.class) ||
-						paramType.isAssignableFrom(WorldMock.class)
+						paramType.isAssignableFrom(Location.class) ||
+						paramType.isAssignableFrom(WorldMock.class) ||
+						Plugin.class.isAssignableFrom(paramType) ||
+						Entity.class.isAssignableFrom(paramType)
 		);
 	}
 
