@@ -312,7 +312,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @throws NoSuchMethodException if no compatible constructor could be found.
 	 */
 	@SuppressWarnings("unchecked")
-	private @NotNull Constructor<? extends JavaPlugin> getCompatibleConstructor(@NotNull Class<? extends JavaPlugin> class1,
+	private @NotNull Constructor<? extends Plugin> getCompatibleConstructor(@NotNull Class<? extends Plugin> class1,
 																				@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
@@ -322,7 +322,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			Class<?>[] parameters = constructor.getParameterTypes();
 			if (parameters.length == types.length && isConstructorCompatible(constructor, types))
 			{
-				return (Constructor<? extends JavaPlugin>) constructor;
+				return (Constructor<? extends Plugin>) constructor;
 			}
 		}
 
@@ -418,17 +418,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param class1 The plugin to load.
 	 * @return The loaded plugin.
 	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1)
+	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1)
 	{
-		try
-		{
-			return loadPlugin(class1, new Object[0]);
-		}
-		catch (PluginLoadException ignored)
-		{
-			PluginDescriptionFile description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
-			return loadPlugin(class1, description, new Object[0]);
-		}
+		return loadPlugin(class1, new Object[0]);
 	}
 
 	/**
@@ -439,7 +431,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param parameters  Extra parameters to pass on to the plugin constructor. Must not be {@code null}.
 	 * @return The loaded plugin.
 	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description,
+	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1, @NotNull PluginDescriptionFile description,
 										  @NotNull Object @NotNull [] parameters)
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
@@ -456,10 +448,10 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 				types.add(parameter.getClass());
 			}
 
-			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
+			Constructor<? extends Plugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 
-			JavaPlugin plugin = constructor.newInstance(parameters);
+			Plugin plugin = constructor.newInstance(parameters);
 			registerLoadedPlugin(plugin);
 			return plugin;
 		}
@@ -507,17 +499,19 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return The loaded plugin.
 	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, Object @NotNull [] parameters)
+	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1, Object @NotNull [] parameters)
 	{
+		PluginDescriptionFile description;
 		try
 		{
-			PluginDescriptionFile description = findPluginDescription(class1);
-			return loadPlugin(class1, description, parameters);
+			description = findPluginDescription(class1);
 		}
-		catch (IOException | InvalidDescriptionException e)
+		catch (IOException | InvalidDescriptionException ignored)
 		{
-			throw new PluginLoadException(e);
+			description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
 		}
+
+		return loadPlugin(class1, description, parameters);
 	}
 
 	/**
@@ -529,7 +523,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @throws IOException                 Thrown when the file wan't be found or loaded.
 	 * @throws InvalidDescriptionException If the plugin description file is formatted incorrectly.
 	 */
-	private @NotNull PluginDescriptionFile findPluginDescription(@NotNull Class<? extends JavaPlugin> class1)
+	private @NotNull PluginDescriptionFile findPluginDescription(@NotNull Class<? extends Plugin> class1)
 			throws IOException, InvalidDescriptionException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");

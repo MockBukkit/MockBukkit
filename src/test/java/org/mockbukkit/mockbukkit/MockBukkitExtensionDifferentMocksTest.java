@@ -3,15 +3,18 @@ package org.mockbukkit.mockbukkit;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockbukkit.mockbukkit.entity.CowMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -27,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitExtensionDifferentMocksTest
@@ -81,10 +85,16 @@ class MockBukkitExtensionDifferentMocksTest
 		PlayerMock playerMock;
 
 		@MockBukkitInject
+		CowMock cowMock;
+
+		@MockBukkitInject
 		WorldMock worldMock;
 
 		@MockBukkitInject
 		Plugin pluginMock;
+
+		@MockBukkitInject
+		Location location;
 
 		@Test
 		void serverMockIsNotNull()
@@ -99,6 +109,12 @@ class MockBukkitExtensionDifferentMocksTest
 		}
 
 		@Test
+		void cowMockIsNotNull()
+		{
+			assertNotNull(cowMock);
+		}
+
+		@Test
 		void worldMockIsNotNull()
 		{
 			assertNotNull(worldMock);
@@ -108,6 +124,18 @@ class MockBukkitExtensionDifferentMocksTest
 		void pluginMockIsNotNull()
 		{
 			assertNotNull(pluginMock);
+		}
+
+		@Test
+		void locationIsNotNull()
+		{
+			assertNotNull(location);
+			assertEquals(serverMock.getWorlds().getFirst(), location.getWorld());
+			assertEquals(0, location.getX());
+			assertEquals(0, location.getY());
+			assertEquals(0, location.getZ());
+			assertEquals(0, location.getPitch());
+			assertEquals(0, location.getYaw());
 		}
 
 	}
@@ -116,34 +144,34 @@ class MockBukkitExtensionDifferentMocksTest
 	class TestAllTypesWithNamesClass
 	{
 
-		@MockBukkitInject(name="Bumba")
+		@MockBukkitInject(name = "Bumba")
 		PlayerMock playerMock;
 
-		@MockBukkitInject(name="Studio100")
+		@MockBukkitInject(name = "Studio100")
 		WorldMock worldMock;
 
-		@MockBukkitInject(name="CodeMonkey")
+		@MockBukkitInject(name = "CodeMonkey")
 		Plugin pluginMock;
 
 		@Test
 		void playerMockIsNotNull()
 		{
 			assertNotNull(playerMock);
-			assertEquals( "Bumba", playerMock.getName() );
+			assertEquals("Bumba", playerMock.getName());
 		}
 
 		@Test
 		void worldMockIsNotNull()
 		{
 			assertNotNull(worldMock);
-			assertEquals( "Studio100", worldMock.getName() );
+			assertEquals("Studio100", worldMock.getName());
 		}
 
 		@Test
 		void pluginMockIsNotNull()
 		{
 			assertNotNull(pluginMock);
-			assertEquals( "CodeMonkey v1.0.0", pluginMock.getDescription().getFullName() );
+			assertEquals("CodeMonkey v1.0.0", pluginMock.getDescription().getFullName());
 		}
 
 	}
@@ -286,4 +314,34 @@ class MockBukkitExtensionDifferentMocksTest
 		assertNull(extension.resolveParameter(parameterContext, null));
 	}
 
+	public static class MyPlugin extends JavaPlugin
+	{
+
+		public int someInt = 42;
+
+		@Override
+		public void onEnable()
+		{
+			getLogger().info("Enabled!");
+		}
+
+	}
+
+	@Nested
+	class TestCustomPluginInjection
+	{
+
+		@MockBukkitInject
+		MyPlugin plugin;
+
+		@Test
+		void testIsProperlyInjected()
+		{
+			assertNotNull(plugin);
+			assertInstanceOf(MyPlugin.class, plugin);
+			assertTrue(plugin.isEnabled());
+			assertEquals(42, plugin.someInt);
+		}
+
+	}
 }

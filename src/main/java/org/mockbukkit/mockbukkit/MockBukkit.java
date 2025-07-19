@@ -101,7 +101,7 @@ public class MockBukkit
 	 *
 	 * @return The {@link ServerMock} instance.
 	 */
-	public static @Nullable ServerMock getOrCreateMock()
+	public static @NotNull ServerMock getOrCreateMock()
 	{
 		if (!isMocked())
 		{
@@ -160,7 +160,7 @@ public class MockBukkit
 	 * @param plugin The plugin to load for mocking.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin)
+	public static <T extends Plugin> @NotNull T load(@NotNull Class<T> plugin)
 	{
 		return load(plugin, new Object[0]);
 	}
@@ -173,11 +173,11 @@ public class MockBukkit
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin, Object @NotNull ... parameters)
+	public static <T extends Plugin> @NotNull T load(@NotNull Class<T> plugin, Object @NotNull ... parameters)
 	{
 		ensureMocking();
 		PluginManagerMock pluginManager = mock.getPluginManager();
-		JavaPlugin instance = pluginManager.loadPlugin(plugin, parameters);
+		Plugin instance = pluginManager.loadPlugin(plugin, parameters);
 		return processFinalLoad(plugin, instance, pluginManager);
 	}
 
@@ -191,10 +191,10 @@ public class MockBukkit
 	 * @param parameters      Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull PluginDescriptionFile descriptionFile, Object @NotNull ... parameters)
+	public static <T extends Plugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull PluginDescriptionFile descriptionFile, Object @NotNull ... parameters)
 	{
 		ensureMocking();
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
+		Plugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
 		mock.getPluginManager().enablePlugin(instance);
 		return plugin.cast(instance);
 	}
@@ -209,7 +209,7 @@ public class MockBukkit
 	 * @param parameters       Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull InputStream descriptionInput, Object... parameters)
+	public static <T extends Plugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull InputStream descriptionInput, Object... parameters)
 	{
 		try
 		{
@@ -231,7 +231,7 @@ public class MockBukkit
 	 * @param parameters      Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull File descriptionFile, Object... parameters)
+	public static <T extends Plugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull File descriptionFile, Object... parameters)
 	{
 		try
 		{
@@ -253,7 +253,7 @@ public class MockBukkit
 	 * @param parameters          Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, String descriptionFileName, Object... parameters)
+	public static <T extends Plugin> @NotNull T loadWith(@NotNull Class<T> plugin, String descriptionFileName, Object... parameters)
 	{
 		return loadWith(plugin, ClassLoader.getSystemResourceAsStream(descriptionFileName), parameters);
 	}
@@ -269,7 +269,7 @@ public class MockBukkit
 	 * @return An instance of the plugin's main class.
 	 * @apiNote The File name can't be the same as the one the plugin loads by default
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWithConfig(
+	public static <T extends Plugin> @NotNull T loadWithConfig(
 			@NotNull Class<T> plugin,
 			InputStream configStream,
 			Object... parameters
@@ -299,7 +299,7 @@ public class MockBukkit
 	 * @return An instance of the plugin's main class.
 	 * @apiNote The File name can't be the same as the one the plugin loads by default
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWithConfig(
+	public static <T extends Plugin> @NotNull T loadWithConfig(
 			@NotNull Class<T> plugin,
 			File configFile,
 			Object... parameters
@@ -319,7 +319,7 @@ public class MockBukkit
 	 * @return An instance of the plugin's main class.
 	 * @apiNote The File name can't be the same as the one the plugin loads by default
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWithConfig(
+	public static <T extends Plugin> @NotNull T loadWithConfig(
 			@NotNull Class<T> plugin,
 			FileConfiguration fileConfiguration,
 			Object... parameters
@@ -327,7 +327,7 @@ public class MockBukkit
 	{
 		ensureMocking();
 		PluginManagerMock pluginManager = mock.getPluginManager();
-		JavaPlugin instance = pluginManager.loadPlugin(plugin, parameters);
+		Plugin instance = pluginManager.loadPlugin(plugin, parameters);
 
 		try
 		{
@@ -343,7 +343,7 @@ public class MockBukkit
 		return processFinalLoad(plugin, instance, pluginManager);
 	}
 
-	private static <T extends JavaPlugin> @NotNull T processFinalLoad(@NotNull Class<T> plugin, JavaPlugin instance, PluginManagerMock pluginManager)
+	private static <T extends Plugin> @NotNull T processFinalLoad(@NotNull Class<T> plugin, @NotNull Plugin instance, @NotNull PluginManagerMock pluginManager)
 	{
 		List<Permission> permissionList = instance.getDescription().getPermissions();
 		List<Permission> permissionsToLoad = new ArrayList<>();
@@ -355,25 +355,6 @@ public class MockBukkit
 		return plugin.cast(instance);
 	}
 
-	/*public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File configFile, Object... parameters)
-	{
-		ensureMocking();
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
-		YamlConfiguration yamlConfig = new YamlConfiguration();
-
-		try
-		{
-			yamlConfig.load(configFile);
-		}
-		catch (IOException | InvalidConfigurationException e)
-		{
-			throw new PluginLoadException(e);
-		}
-		instance.getConfig().setDefaults(yamlConfig);
-		mock.getPluginManager().enablePlugin(instance);
-		return plugin.cast(instance);
-	}*/
-
 	/**
 	 * Loads and enables a plugin for mocking. It will not load the {@code plugin.yml} file, but rather it will use a
 	 * mock one. This can be useful in certain multi-project plugins where one cannot always access the
@@ -384,12 +365,12 @@ public class MockBukkit
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadSimple(@NotNull Class<T> plugin, Object @NotNull ... parameters)
+	public static <T extends Plugin> @NotNull T loadSimple(@NotNull Class<T> plugin, Object @NotNull ... parameters)
 	{
 		ensureMocking();
 		PluginDescriptionFile description = new PluginDescriptionFile(plugin.getSimpleName(), "1.0.0",
 				plugin.getCanonicalName());
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, description, parameters);
+		Plugin instance = mock.getPluginManager().loadPlugin(plugin, description, parameters);
 		mock.getPluginManager().enablePlugin(instance);
 		return plugin.cast(instance);
 	}
@@ -422,7 +403,7 @@ public class MockBukkit
 	}
 
 	/**
-	 * Creates a mock instance of a {@link JavaPlugin} implementation. This plugin offers no functionality, but it does
+	 * Creates a mock instance of a {@link Plugin} implementation. This plugin offers no functionality, but it does
 	 * allow a plugin that might enable and disable other plugins to be tested.
 	 *
 	 * @return An instance of a mock plugin.
@@ -433,7 +414,7 @@ public class MockBukkit
 	}
 
 	/**
-	 * Creates a mock instance of a {@link JavaPlugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
+	 * Creates a mock instance of a {@link Plugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
 	 * allow a plugin that might enable and disable other plugins to be tested.
 	 *
 	 * @param pluginName A name of a new plugin.
@@ -445,7 +426,7 @@ public class MockBukkit
 	}
 
 	/**
-	 * Creates a mock instance of a {@link JavaPlugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
+	 * Creates a mock instance of a {@link Plugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
 	 * allow a plugin that might enable and disable other plugins to be tested.
 	 *
 	 * @param pluginName    A name of a new plugin.
@@ -456,7 +437,7 @@ public class MockBukkit
 	{
 		ensureMocking();
 		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, PluginMock.class.getName());
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(PluginMock.class, description, new Object[0]);
+		Plugin instance = mock.getPluginManager().loadPlugin(PluginMock.class, description, new Object[0]);
 		mock.getPluginManager().enablePlugin(instance);
 		return (PluginMock) instance;
 	}

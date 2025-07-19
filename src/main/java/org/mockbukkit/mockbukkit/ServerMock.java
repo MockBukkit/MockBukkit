@@ -1630,7 +1630,7 @@ public class ServerMock extends Server.Spigot implements Server
 			@SuppressWarnings("unchecked")
 			Class<? extends JavaPlugin> originalClass = (Class<? extends JavaPlugin>) oldJavaPlugin.getClass().getSuperclass();
 			// Don't use MockBukkit#load here since we enable later.
-			JavaPlugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
+			Plugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
 			newPlugins.add(plugin);
 		}
 
