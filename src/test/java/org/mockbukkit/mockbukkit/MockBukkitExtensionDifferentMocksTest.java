@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitExtensionDifferentMocksTest
@@ -302,4 +304,34 @@ class MockBukkitExtensionDifferentMocksTest
 		assertNull(extension.resolveParameter(parameterContext, null));
 	}
 
+	public static class MyPlugin extends JavaPlugin
+	{
+
+		public int someInt = 42;
+
+		@Override
+		public void onEnable()
+		{
+			getLogger().info("Enabled!");
+		}
+
+	}
+
+	@Nested
+	class TestCustomPluginInjection
+	{
+
+		@MockBukkitInject
+		MyPlugin plugin;
+
+		@Test
+		void testIsProperlyInjected()
+		{
+			assertNotNull(plugin);
+			assertInstanceOf(MyPlugin.class, plugin);
+			assertTrue(plugin.isEnabled());
+			assertEquals(42, plugin.someInt);
+		}
+
+	}
 }

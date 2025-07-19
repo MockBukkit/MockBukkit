@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -220,9 +221,9 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			return getWorldMock(annotation);
 		}
 
-		if (type.isAssignableFrom(PluginMock.class))
+		if (JavaPlugin.class.isAssignableFrom(type))
 		{
-			return getPluginMock(annotation);
+			return getPluginMock((Class<? extends JavaPlugin>) type, annotation.name());
 		}
 
 		if (Entity.class.isAssignableFrom(type)) // is type a subclass of Entity?
@@ -238,10 +239,21 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		return (EntityMock) getFirstWorld().spawn(getLocation(), clazz);
 	}
 
-	private @NotNull PluginMock getPluginMock(@NotNull MockBukkitInject annotation)
+	private @NotNull <T extends JavaPlugin> Plugin getPluginMock(Class<T> clazz, @NotNull String name)
 	{
-		final String pluginName = annotation.name().isEmpty() ? "Plugin" + pluginCounter++ : annotation.name();
-		return MockBukkit.createMockPlugin(pluginName);
+		name = name.trim();
+		if (name.isEmpty())
+		{
+			name = "Plugin" + pluginCounter++;
+		}
+
+		if (clazz.isInterface() || PluginMock.class.isAssignableFrom(clazz))
+		{
+			return MockBukkit.createMockPlugin(name);
+		}
+
+		// real plugin here
+		return MockBukkit.load(clazz);
 	}
 
 	private @NotNull PlayerMock getPlayerMock(@NotNull MockBukkitInject annotation)

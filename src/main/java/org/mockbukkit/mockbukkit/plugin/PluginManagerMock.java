@@ -420,15 +420,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 */
 	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1)
 	{
-		try
-		{
-			return loadPlugin(class1, new Object[0]);
-		}
-		catch (PluginLoadException ignored)
-		{
-			PluginDescriptionFile description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
-			return loadPlugin(class1, description, new Object[0]);
-		}
+		return loadPlugin(class1, new Object[0]);
 	}
 
 	/**
@@ -509,15 +501,17 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 */
 	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, Object @NotNull [] parameters)
 	{
+		PluginDescriptionFile description;
 		try
 		{
-			PluginDescriptionFile description = findPluginDescription(class1);
-			return loadPlugin(class1, description, parameters);
+			description = findPluginDescription(class1);
 		}
-		catch (IOException | InvalidDescriptionException e)
+		catch (IOException | InvalidDescriptionException ignored)
 		{
-			throw new PluginLoadException(e);
+			description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
 		}
+
+		return loadPlugin(class1, description, parameters);
 	}
 
 	/**
