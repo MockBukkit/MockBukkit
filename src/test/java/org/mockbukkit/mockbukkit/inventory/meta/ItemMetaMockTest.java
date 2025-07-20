@@ -1727,11 +1727,14 @@ class ItemMetaMockTest
 		Constructor<?> constructor = clazz.getDeclaredConstructor();
 		constructor.setAccessible(true);
 		Object instance = constructor.newInstance();
-		assertInstanceOf(Cloneable.class, instance);
+		ItemMeta itemMeta = assertInstanceOf(ItemMeta.class, instance);
 
-		Method cloneMethod = clazz.getMethod("clone");
-		Object cloned = cloneMethod.invoke(instance);
+		ItemMeta cloned = itemMeta.clone();
 		assertEquals(instance, cloned);
+		assertNotSame(instance, cloned);
+
+		itemMeta.displayName(Component.text("Test name"));
+		assertNotEquals(instance, cloned);
 		assertNotSame(instance, cloned);
 	}
 
