@@ -274,12 +274,26 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	public boolean isSimilar(@org.jetbrains.annotations.Nullable ItemStack stack)
+	public boolean isSimilar(@Nullable ItemStack stack)
 	{
 		if (stack == null) return false;
 		if (!(stack instanceof final ItemStackMock bukkit)) return stack.isSimilar(this);
 		if (this == bukkit) return true;
-		return this.type == bukkit.type;
+		return this.type == bukkit.type && hasSimilarItemMeta(stack.getItemMeta());
+	}
+
+	/**
+	 * Validate that the item meta is equal for both items.
+	 *
+	 * @param itemMeta The item meta to be validated.
+	 *
+	 * @return {@code true} if equal, or {@code false} otherwise.
+	 */
+	private boolean hasSimilarItemMeta(@Nullable ItemMeta itemMeta)
+	{
+		if (this.itemMeta == null) return itemMeta == null;
+
+		return this.itemMeta.equals(itemMeta);
 	}
 
 	private final PersistentDataContainerView pdcView = new PersistentDataContainerViewMock()
