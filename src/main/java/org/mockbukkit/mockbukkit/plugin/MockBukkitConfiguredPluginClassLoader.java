@@ -9,6 +9,7 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -97,9 +98,9 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 		}
 	}
 
-	public Class<? extends JavaPlugin> loadProxyClass(Class<? extends JavaPlugin> target)
+	public Class<? extends Plugin> loadProxyClass(Class<? extends Plugin> target)
 	{
-		DynamicType.Unloaded<? extends JavaPlugin> dynamicType = new ByteBuddy()
+		DynamicType.Unloaded<? extends Plugin> dynamicType = new ByteBuddy()
 				.subclass(target, ConstructorStrategy.Default.IMITATE_SUPER_CLASS)
 				.name(target.getSimpleName() + "Proxy")
 				.make();

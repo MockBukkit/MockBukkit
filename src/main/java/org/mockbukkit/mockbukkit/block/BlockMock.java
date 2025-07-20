@@ -536,7 +536,13 @@ public class BlockMock implements Block
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
 
+	@Override
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience, boolean forceEffect)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
