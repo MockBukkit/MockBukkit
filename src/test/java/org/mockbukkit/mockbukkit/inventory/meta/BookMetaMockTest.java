@@ -237,6 +237,7 @@ class BookMetaMockTest
 	@Test
 	void test_equals_DifferentObject()
 	{
+		//noinspection AssertBetweenInconvertibleTypes
 		assertNotEquals(meta, Material.DIAMOND);
 
 		BookMetaMock meta2 = meta.clone();
@@ -339,7 +340,7 @@ class BookMetaMockTest
 	{
 		assertTrue(meta.getPages().isEmpty());
 
-		List<String> pages = new ArrayList<String>();
+		List<String> pages = new ArrayList<>();
 		pages.add("Page1");
 		pages.add("Page2");
 

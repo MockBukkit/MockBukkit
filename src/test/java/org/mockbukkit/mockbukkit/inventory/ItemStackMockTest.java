@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -646,7 +647,7 @@ class ItemStackMockTest
 		item.setItemMeta(meta);
 		ItemStack other = item.withType(Material.AIR);
 
-		assertEquals(null, other.getItemMeta());
+		assertNull(other.getItemMeta());
 		assertEquals(Material.AIR, other.getType());
 	}
 
@@ -715,7 +716,7 @@ class ItemStackMockTest
 	void getDisplayName_noStackOverflow()
 	{
 		ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE);
-		assertDoesNotThrow(() -> item.displayName());
+		assertDoesNotThrow(item::displayName);
 	}
 
 	@Test

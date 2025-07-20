@@ -60,9 +60,7 @@ class PaperProfileBanEntryMockTest
 	void testSetCreated_Null()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			entry.setCreated(null);
-		});
+				entry.setCreated(null));
 
 		assertEquals("Creation Date cannot be null", nullPointerException.getMessage());
 	}

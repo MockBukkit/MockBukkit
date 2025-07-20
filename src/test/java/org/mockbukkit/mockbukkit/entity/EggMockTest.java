@@ -50,7 +50,7 @@ class EggMockTest
 	{
 		ItemStack item = new ItemStackMock(Material.DIAMOND);
 		egg.setItem(item);
-		assertEquals(egg.getItem().getType(), Material.DIAMOND);
+		assertEquals(Material.DIAMOND, egg.getItem().getType());
 	}
 
 	@Test

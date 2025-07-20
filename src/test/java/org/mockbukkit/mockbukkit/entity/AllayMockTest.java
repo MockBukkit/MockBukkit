@@ -6,7 +6,6 @@ import org.bukkit.entity.Allay;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -77,7 +76,7 @@ class AllayMockTest
 		ItemStack item = new ItemStackMock(Material.DIAMOND, 5);
 
 		allayMock.simulateItemPickup(new ItemStackMock(Material.DIAMOND, 63));
-		Assertions.assertThrows(IllegalStateException.class,
+		assertThrows(IllegalStateException.class,
 				() -> allayMock.simulateItemPickup(item));
 
 	}
@@ -88,7 +87,7 @@ class AllayMockTest
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
 		ItemStack item = new ItemStackMock(Material.IRON_INGOT, 1);
 
-		Assertions.assertThrows(IllegalArgumentException.class,
+		assertThrows(IllegalArgumentException.class,
 				() -> allayMock.simulateItemPickup(item));
 	}
 

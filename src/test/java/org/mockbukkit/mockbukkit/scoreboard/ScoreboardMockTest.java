@@ -33,14 +33,14 @@ class ScoreboardMockTest
 	private ScoreboardMock scoreboard;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		this.server = MockBukkit.mock();
 		this.scoreboard = new ScoreboardMock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -121,6 +121,13 @@ class ScoreboardMockTest
 	{
 		assertDoesNotThrow(() -> scoreboard.registerNewObjective("Objective", "dummy"));
 		assertThrows(IllegalArgumentException.class, () -> scoreboard.registerNewObjective("Objective", "dummy"));
+	}
+
+	@Test
+	void registerNewObjective_TooLongName_ThrowsException()
+	{
+		String longName = "A".repeat(Short.MAX_VALUE + 1);
+		assertThrows(IllegalArgumentException.class, () -> scoreboard.registerNewObjective(longName, "dummy"));
 	}
 
 	@Test

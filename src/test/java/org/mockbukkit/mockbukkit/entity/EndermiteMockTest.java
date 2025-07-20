@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.Endermite;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +13,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockBukkitExtension.class)
 class EndermiteMockTest
@@ -38,14 +38,14 @@ class EndermiteMockTest
 	@Test
 	void testIsPlayerSpawned()
 	{
-		Assertions.assertFalse(enderMite.isPlayerSpawned());
+		assertFalse(enderMite.isPlayerSpawned());
 	}
 
 	@Test
 	void testSetPlayerSpawned()
 	{
 		assertDoesNotThrow(() -> enderMite.setPlayerSpawned(true));
-		Assertions.assertFalse(enderMite.isPlayerSpawned());
+		assertFalse(enderMite.isPlayerSpawned());
 	}
 
 	@Test

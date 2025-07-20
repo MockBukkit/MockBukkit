@@ -36,13 +36,13 @@ class BlockStateMockTest
 {
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -106,7 +106,7 @@ class BlockStateMockTest
 
 		assertFalse(block.getState() instanceof Chest);
 		assertTrue(chest.update(true));
-		assertTrue(block.getState() instanceof Chest);
+		assertInstanceOf(Chest.class, block.getState());
 	}
 
 	@Test

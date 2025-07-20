@@ -135,30 +135,30 @@ public class RecipeManager
 		List<Recipe> possibleRecipes = getRecipes(RecipeType.CRAFTING);
 		for (Recipe recipe : possibleRecipes)
 		{
-			if (recipe instanceof ShapelessRecipe shapelessRecipe)
+			switch (recipe)
+			{
+			case ShapelessRecipe shapelessRecipe ->
 			{
 				if (matches(shapelessRecipe, craftingMatrix))
 				{
 					return recipe;
 				}
 			}
-			else if (recipe instanceof ShapedRecipe shapedRecipe)
+			case ShapedRecipe shapedRecipe ->
 			{
 				if (matches(shapedRecipe, craftingMatrix))
 				{
 					return recipe;
 				}
 			}
-			else if (recipe instanceof ComplexRecipe complexRecipe)
+			case ComplexRecipe complexRecipe ->
 			{
 				if (matches(complexRecipe, craftingMatrix))
 				{
 					return recipe;
 				}
 			}
-			else
-			{
-				throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
+			default -> throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
 			}
 		}
 
@@ -207,13 +207,9 @@ public class RecipeManager
 	{
 		return switch (recipeType)
 		{
-			case RecipeType.BLASTING -> Collections.emptyList();
-			case RecipeType.CAMPFIRE_COOKING -> Collections.emptyList();
+			case RecipeType.BLASTING, RecipeType.CAMPFIRE_COOKING, RecipeType.SMELTING, RecipeType.SMITHING,
+				 RecipeType.SMOKING, RecipeType.STONECUTTING -> Collections.emptyList();
 			case RecipeType.CRAFTING -> loadCraftingRecipes();
-			case RecipeType.SMELTING -> Collections.emptyList();
-			case RecipeType.SMITHING -> Collections.emptyList();
-			case RecipeType.SMOKING -> Collections.emptyList();
-			case RecipeType.STONECUTTING -> Collections.emptyList();
 		};
 	}
 

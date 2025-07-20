@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -35,7 +34,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean annotatedBlockBreakEventExecuted = false;
 	public boolean ignoredCancelledEvent = true;
 	public boolean asyncEventExecuted = false;
-	public @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
+	public final @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
 	public final @Nullable Object extra;
 	public boolean classLoadSucceed = false;
 
@@ -76,9 +75,9 @@ public class TestPlugin extends JavaPlugin implements Listener
 	{
 		if (args.length == 1)
 		{
-			return Arrays.asList("Tab", "Complete", "Results");
+			return List.of("Tab", "Complete", "Results");
 		}
-		return Arrays.asList("Other", "Results");
+		return List.of("Other", "Results");
 	}
 
 	public void unannotatedEventHandler(PlayerInteractEvent event)
@@ -120,7 +119,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 			{
 				barrier.await();
 			}
-			catch (InterruptedException | BrokenBarrierException e)
+			catch (InterruptedException | BrokenBarrierException ignored)
 			{
 			}
 		}

@@ -11,8 +11,11 @@ import org.bukkit.entity.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.ArrowMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
@@ -169,6 +172,39 @@ class DamageSourceMockTest
 	}
 
 	@Test
+	void scalesWithDifficulty_WhenDamageScalingIsDynamic_Skeleton()
+	{
+		DamageSourceMock damageSource = new DamageSourceMock(DamageType.ARROW, causingEntity, null, null);
+		assertTrue(damageSource.scalesWithDifficulty());
+	}
+
+	@Test
+	void scalesWithDifficulty_WhenDamageScalingIsDynamic_InanimateObject()
+	{
+		causingEntity = new ArrowMock(serverMock, UUID.randomUUID());
+		DamageSourceMock damageSource = new DamageSourceMock(DamageType.ARROW, causingEntity, null, null);
+		assertFalse(damageSource.scalesWithDifficulty());
+	}
+
+	@Test
+	void scalesWithDifficulty_WhenDamageScalingIsDynamic_Player()
+	{
+		DamageSourceMock damageSource = new DamageSourceMock(DamageType.ARROW, serverMock.addPlayer(), null, null);
+		assertFalse(damageSource.scalesWithDifficulty());
+	}
+
+	@Test
+	void scalesWithDifficulty_WhenDamageScalingIsCausedByPlayer()
+	{
+
+		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
+		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
+		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, serverMock.addPlayer(), null, null);
+
+		assertFalse(damageSource.scalesWithDifficulty());
+	}
+
+	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsDoneByPlayer()
 	{
 
@@ -208,10 +244,50 @@ class DamageSourceMockTest
 	void equals_and_hashCode_WhenIdentical()
 	{
 		DamageSourceMock copy = new DamageSourceMock(damageType, causingEntity, directEntity, damageLocation);
+		assertNotSame(damageSourceMock, copy);
 		assertEquals(damageSourceMock, copy);
 		assertEquals(damageSourceMock.hashCode(), copy.hashCode());
 		assertEquals(copy, damageSourceMock);
 		assertEquals(copy.hashCode(), damageSourceMock.hashCode());
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"0,0,0,1",
+			"0,0,1,0",
+			"0,0,1,0",
+			"0,1,0,0",
+			"0,1,0,0",
+			"0,1,1,0",
+			"0,1,1,0",
+			"0,1,1,1",
+			"1,0,0,0",
+			"1,0,0,1",
+			"1,0,1,0",
+			"1,0,1,0",
+			"1,1,0,0",
+			"1,1,0,0",
+			"1,1,1,0",
+			"1,1,1,0",
+			"1,1,1,1"
+	})
+	void equals_and_hashCode_WhenNotIdentical(int a, int b, int c, int d)
+	{
+		boolean changedDamageType = a == 1;
+		boolean firstNull = b == 1;
+		boolean secondNull = c == 1;
+		boolean thirdNull = d == 1;
+
+		DamageSourceMock copy = new DamageSourceMock(
+				changedDamageType ? DamageType.ARROW : damageType,
+				firstNull ? null : causingEntity,
+				secondNull ? null : directEntity,
+				thirdNull ? null : damageLocation
+		);
+		assertNotEquals(damageSourceMock, copy);
+		assertNotEquals(damageSourceMock.hashCode(), copy.hashCode());
+		assertNotEquals(copy, damageSourceMock);
+		assertNotEquals(copy.hashCode(), damageSourceMock.hashCode());
 	}
 
 	@Test

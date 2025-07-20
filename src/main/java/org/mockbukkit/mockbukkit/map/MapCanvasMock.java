@@ -8,7 +8,8 @@ import org.bukkit.map.MapPalette;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
@@ -103,7 +104,7 @@ public class MapCanvasMock implements MapCanvas
 	}
 
 	@Override
-	@SuppressWarnings("deprecation") // Magic values
+	// Magic values
 	public void drawImage(int x, int y, @NotNull Image image)
 	{
 		byte[] bytes = MapPalette.imageToBytes(image);

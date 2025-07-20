@@ -123,7 +123,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public ScoreboardMock getScoreboard()
+	public @Nullable ScoreboardMock getScoreboard()
 	{
 		return scoreboard;
 	}
@@ -194,18 +194,7 @@ public class ObjectiveMock implements Objective
 		Preconditions.checkArgument(entry.length() <= 40, "Objective entries cannot be longer than 40 characters");
 		validate();
 
-		ScoreMock score = scores.get(entry);
-
-		if (score != null)
-		{
-			return score;
-		}
-		else
-		{
-			score = new ScoreMock(this, entry);
-			scores.put(entry, score);
-			return score;
-		}
+		return scores.computeIfAbsent(entry, e -> new ScoreMock(this, e));
 	}
 
 	@Override

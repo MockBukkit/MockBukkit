@@ -144,7 +144,6 @@ public class PotionEffectTypeMock extends PotionEffectType
 		return color;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean equals(Object obj)
 	{

@@ -366,7 +366,7 @@ public class EnchantmentMock extends Enchantment
 	@Deprecated(forRemoval = true)
 	public @NotNull String getTranslationKey()
 	{
-		return translationKey.toString();
+		return translationKey;
 	}
 
 	@ApiStatus.Internal

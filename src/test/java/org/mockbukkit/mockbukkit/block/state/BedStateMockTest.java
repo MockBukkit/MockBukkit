@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class BedStateMockTest
 {
@@ -59,22 +63,22 @@ class BedStateMockTest
 	@Test
 	void getColor_ReturnCorrectColor()
 	{
-		assertEquals(new BedStateMock(Material.BLACK_BED).getColor(), DyeColor.BLACK);
-		assertEquals(new BedStateMock(Material.BLUE_BED).getColor(), DyeColor.BLUE);
-		assertEquals(new BedStateMock(Material.BROWN_BED).getColor(), DyeColor.BROWN);
-		assertEquals(new BedStateMock(Material.CYAN_BED).getColor(), DyeColor.CYAN);
-		assertEquals(new BedStateMock(Material.GRAY_BED).getColor(), DyeColor.GRAY);
-		assertEquals(new BedStateMock(Material.GREEN_BED).getColor(), DyeColor.GREEN);
-		assertEquals(new BedStateMock(Material.LIGHT_BLUE_BED).getColor(), DyeColor.LIGHT_BLUE);
-		assertEquals(new BedStateMock(Material.LIGHT_GRAY_BED).getColor(), DyeColor.LIGHT_GRAY);
-		assertEquals(new BedStateMock(Material.LIME_BED).getColor(), DyeColor.LIME);
-		assertEquals(new BedStateMock(Material.MAGENTA_BED).getColor(), DyeColor.MAGENTA);
-		assertEquals(new BedStateMock(Material.ORANGE_BED).getColor(), DyeColor.ORANGE);
-		assertEquals(new BedStateMock(Material.PINK_BED).getColor(), DyeColor.PINK);
-		assertEquals(new BedStateMock(Material.PURPLE_BED).getColor(), DyeColor.PURPLE);
-		assertEquals(new BedStateMock(Material.RED_BED).getColor(), DyeColor.RED);
-		assertEquals(new BedStateMock(Material.WHITE_BED).getColor(), DyeColor.WHITE);
-		assertEquals(new BedStateMock(Material.YELLOW_BED).getColor(), DyeColor.YELLOW);
+		assertEquals(DyeColor.BLACK, new BedStateMock(Material.BLACK_BED).getColor());
+		assertEquals(DyeColor.BLUE, new BedStateMock(Material.BLUE_BED).getColor());
+		assertEquals(DyeColor.BROWN, new BedStateMock(Material.BROWN_BED).getColor());
+		assertEquals(DyeColor.CYAN, new BedStateMock(Material.CYAN_BED).getColor());
+		assertEquals(DyeColor.GRAY, new BedStateMock(Material.GRAY_BED).getColor());
+		assertEquals(DyeColor.GREEN, new BedStateMock(Material.GREEN_BED).getColor());
+		assertEquals(DyeColor.LIGHT_BLUE, new BedStateMock(Material.LIGHT_BLUE_BED).getColor());
+		assertEquals(DyeColor.LIGHT_GRAY, new BedStateMock(Material.LIGHT_GRAY_BED).getColor());
+		assertEquals(DyeColor.LIME, new BedStateMock(Material.LIME_BED).getColor());
+		assertEquals(DyeColor.MAGENTA, new BedStateMock(Material.MAGENTA_BED).getColor());
+		assertEquals(DyeColor.ORANGE, new BedStateMock(Material.ORANGE_BED).getColor());
+		assertEquals(DyeColor.PINK, new BedStateMock(Material.PINK_BED).getColor());
+		assertEquals(DyeColor.PURPLE, new BedStateMock(Material.PURPLE_BED).getColor());
+		assertEquals(DyeColor.RED, new BedStateMock(Material.RED_BED).getColor());
+		assertEquals(DyeColor.WHITE, new BedStateMock(Material.WHITE_BED).getColor());
+		assertEquals(DyeColor.YELLOW, new BedStateMock(Material.YELLOW_BED).getColor());
 	}
 
 	@Test

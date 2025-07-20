@@ -400,7 +400,12 @@ public final class EntityTypesMock
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
 		if (data == null)
 		{
-			throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
+			// try a little harder
+			data = bukkitToMockData.values().stream().filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass)).findFirst().orElse(null);
+			if (data == null)
+			{
+				throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
+			}
 		}
 
 		@Nullable EntityMock mockedEntity = data.mockFactory().apply(server, entityUUID);
@@ -434,6 +439,7 @@ public final class EntityTypesMock
 			Preconditions.checkArgument(bukkitClazz.isAssignableFrom(mockClazz), "The class %s is not a subclass of %s", mockClazz, bukkitClazz);
 			Preconditions.checkArgument(mockFactory != null, "Cannot register a null mock factory");
 			Preconditions.checkArgument(!mapping.containsKey(bukkitClazz), "Cannot register type %s because it's already registered.", bukkitClazz);
+			Preconditions.checkArgument(!mockClazz.isAssignableFrom(Player.class), "Not allowed to register %s.", mockClazz);
 			mapping.put(bukkitClazz, new EntityData<>(bukkitClazz, mockClazz, mockFactory));
 			return this;
 		}

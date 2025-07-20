@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class VaultDataMockTest
 {
+
 	private VaultDataMock vault;
 
 	@BeforeEach
@@ -98,4 +99,5 @@ class VaultDataMockTest
 		}
 
 	}
+
 }

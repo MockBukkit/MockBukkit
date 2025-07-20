@@ -60,9 +60,7 @@ class ScoreMockTest
 	{
 		objective.unregister();
 		assertThrows(IllegalStateException.class, () ->
-		{
-			score.getScore();
-		});
+				score.getScore());
 	}
 
 	@Test

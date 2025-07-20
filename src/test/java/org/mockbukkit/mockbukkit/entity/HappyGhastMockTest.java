@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class HappyGhastMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 

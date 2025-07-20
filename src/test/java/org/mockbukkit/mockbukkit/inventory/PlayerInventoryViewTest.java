@@ -17,13 +17,13 @@ class PlayerInventoryViewTest
 	private ServerMock server;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

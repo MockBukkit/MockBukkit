@@ -3,8 +3,6 @@ package org.mockbukkit.mockbukkit.plugin;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
@@ -24,14 +22,14 @@ public class MockBukkitPluginLoader implements PluginLoader
 {
 
 	@Override
-	public @NotNull Plugin loadPlugin(@NotNull File file) throws InvalidPluginException, UnknownDependencyException
+	public @NotNull Plugin loadPlugin(@NotNull File file) throws UnknownDependencyException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull PluginDescriptionFile getPluginDescription(@NotNull File file) throws InvalidDescriptionException
+	public @NotNull PluginDescriptionFile getPluginDescription(@NotNull File file)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

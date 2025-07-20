@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -106,7 +105,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> count.incrementAndGet();
+		Runnable callback = count::incrementAndGet;
 		BukkitTask task = scheduler.runTaskTimer(null, callback, 10L, 2L);
 		assertNotNull(task);
 		scheduler.performTicks(9L);
@@ -146,7 +145,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer_ZeroDelay_DoesntExecuteTaskImmediately()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> count.incrementAndGet();
+		Runnable callback = count::incrementAndGet;
 		scheduler.runTaskTimer(null, callback, 0, 2L);
 		assertEquals(0, count.get());
 		scheduler.performTicks(1L);
@@ -263,6 +262,7 @@ class BukkitSchedulerMockTest
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
+			//noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
@@ -277,6 +277,7 @@ class BukkitSchedulerMockTest
 		});
 		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
+			//noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
@@ -298,9 +299,7 @@ class BukkitSchedulerMockTest
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
 		assertThrows(TaskCancelledException.class, () ->
-		{
-			scheduler.shutdown();
-		});
+				scheduler.shutdown());
 	}
 
 	@Test
@@ -360,7 +359,7 @@ class BukkitSchedulerMockTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -389,7 +388,7 @@ class BukkitSchedulerMockTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -550,13 +549,13 @@ class BukkitSchedulerMockTest
 		{
 		}, 1L, 1L);
 		scheduler.performOneTick();
-		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+		assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
 	}
 
 	@Test
 	void taskNotRunning()
 	{
-		Assertions.assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+		assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
 	}
 
 	@Test

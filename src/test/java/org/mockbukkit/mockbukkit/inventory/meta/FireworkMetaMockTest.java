@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
-import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -70,7 +70,7 @@ class FireworkMetaMockTest
 
 		assertFalse(meta.hasEffects());
 
-		meta.addEffects(Arrays.asList(effect, effect2));
+		meta.addEffects(List.of(effect, effect2));
 
 		assertTrue(meta.hasEffects());
 		assertEquals(2, meta.getEffectsSize());

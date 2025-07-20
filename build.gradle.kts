@@ -1,11 +1,10 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import java.io.ByteArrayOutputStream
 
 plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.33.0"
+	id("com.vanniktech.maven.publish") version "0.34.0"
 	id("net.kyori.blossom") version "2.1.0"
 }
 
@@ -26,7 +25,9 @@ dependencies {
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.13.3")
+	implementation("org.junit.jupiter:junit-jupiter-api:5.13.3")
+	testImplementation(platform("org.junit:junit-bom:5.13.3"))
+	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	// General utilities for the project
@@ -207,15 +208,11 @@ mavenPublishing {
 			url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
 		}
 	}
-	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+	publishToMavenCentral(true)
 	// No key available to sign with for maven local
 	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
 		signAllPublications()
 	}
-}
-
-fun isFork(): Boolean {
-	return run("git", "config", "--get", "remote.origin.url").contains("MockBukkit/MockBukkit")
 }
 
 fun isAction(): Boolean {

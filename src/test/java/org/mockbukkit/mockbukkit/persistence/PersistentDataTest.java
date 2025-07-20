@@ -18,6 +18,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,20 +51,20 @@ class PersistentDataTest
 	void testAdapterContext()
 	{
 		PersistentDataAdapterContextMock context = new PersistentDataAdapterContextMock();
-		assertTrue(context.newPersistentDataContainer() instanceof PersistentDataContainerMock);
+		assertInstanceOf(PersistentDataContainerMock.class, context.newPersistentDataContainer());
 	}
 
 	@Test
 	void testImplementationMocks()
 	{
 		ItemStack item = new ItemStackMock(Material.DIAMOND_PICKAXE);
-		assertTrue(item.getPersistentDataContainer() instanceof PersistentDataContainerViewMock);
+		assertInstanceOf(PersistentDataContainerViewMock.class, item.getPersistentDataContainer());
 
 		ItemMeta meta = new ItemMetaMock();
-		assertTrue(meta.getPersistentDataContainer() instanceof PersistentDataContainerMock);
+		assertInstanceOf(PersistentDataContainerMock.class, meta.getPersistentDataContainer());
 
 		PlayerMock player = mock.addPlayer();
-		assertTrue(player.getPersistentDataContainer() instanceof PersistentDataContainerMock);
+		assertInstanceOf(PersistentDataContainerMock.class, player.getPersistentDataContainer());
 	}
 
 	@Test
@@ -71,7 +72,7 @@ class PersistentDataTest
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		assertTrue(container.isEmpty());
-		assertTrue(container.getAdapterContext() instanceof PersistentDataAdapterContextMock);
+		assertInstanceOf(PersistentDataAdapterContextMock.class, container.getAdapterContext());
 	}
 
 	@Test

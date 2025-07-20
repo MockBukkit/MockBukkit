@@ -105,13 +105,12 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
@@ -826,7 +825,7 @@ class ServerMockTest
 		assertEquals(offlinePlayer.getUniqueId(), onlinePlayer.getUniqueId());
 
 		// Assert that the PlayerMock takes priority over the OfflinePlayerMock
-		assertTrue(server.getOfflinePlayer(offlinePlayer.getUniqueId()) instanceof PlayerMock);
+		assertInstanceOf(PlayerMock.class, server.getOfflinePlayer(offlinePlayer.getUniqueId()));
 	}
 
 	@Test
@@ -853,6 +852,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateBlockDataFromString()
+	{
+		BlockData blockData = server.createBlockData("minecraft:stone");
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
 	void testWarningState()
 	{
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
@@ -861,7 +867,6 @@ class ServerMockTest
 	}
 
 	@Test
-	@SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessage()
 	{
 		PluginMock plugin = MockBukkit.createMockPlugin();
@@ -1028,8 +1033,8 @@ class ServerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		Player player = server.addPlayer();
-		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
-		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
+		assertEquals(List.of("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
+		assertEquals(List.of("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
 	}
 
 	@Test

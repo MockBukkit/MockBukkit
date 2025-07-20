@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HangingSignStateMock extends SignStateMock implements HangingSign
 {
+
 	public HangingSignStateMock(@NotNull Material material)
 	{
 		super(material);

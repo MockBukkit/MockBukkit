@@ -18,6 +18,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,7 +33,7 @@ class HopperMinecartMockTest
 	private HopperMinecart minecart;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		minecart = new HopperMinecartMock(server, UUID.randomUUID());
 	}
@@ -53,7 +54,7 @@ class HopperMinecartMockTest
 	@Test
 	void testGetMinecartMaterial()
 	{
-		assertEquals(minecart.getMinecartMaterial(), Material.HOPPER_MINECART);
+		assertEquals(Material.HOPPER_MINECART, minecart.getMinecartMaterial());
 	}
 
 	@Test
@@ -71,7 +72,7 @@ class HopperMinecartMockTest
 	@Test
 	void testGetInventory()
 	{
-		assertTrue(minecart.getInventory() instanceof HopperInventoryMock);
+		assertInstanceOf(HopperInventoryMock.class, minecart.getInventory());
 		minecart.getInventory().setItem(0, new ItemStackMock(Material.DIRT));
 		assertEquals(Material.DIRT, minecart.getInventory().getItem(0).getType());
 	}
