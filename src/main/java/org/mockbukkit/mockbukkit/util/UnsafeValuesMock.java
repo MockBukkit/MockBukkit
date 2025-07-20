@@ -321,6 +321,10 @@ public class UnsafeValuesMock implements UnsafeValues
 		try
 		{
 			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
+			if (bai.available() <= 0)
+			{
+				return null;
+			}
 			Map<String, Object> stack = (Map<String, Object>) ois.readObject();
 			return this.deserializeStack(stack);
 		}

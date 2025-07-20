@@ -107,6 +107,7 @@ import org.mockbukkit.mockbukkit.command.MessageTarget;
 import org.mockbukkit.mockbukkit.command.brigadier.PaperCommandsMock;
 import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
 import org.mockbukkit.mockbukkit.exception.PluginIOException;
@@ -1084,6 +1085,8 @@ public class ServerMock extends Server.Spigot implements Server
 		ConfigurationSerialization.registerClass(Location.class);
 		ConfigurationSerialization.registerClass(AttributeModifier.class);
 		ConfigurationSerialization.registerClass(SpawnRule.class);
+		ConfigurationSerialization.registerClass(PlayerProfileMock.class);
+		ConfigurationSerialization.registerClass(OfflinePlayerMock.class);
 		ConfigurationSerialization.registerClass(SerializableMeta.class);
 	}
 
