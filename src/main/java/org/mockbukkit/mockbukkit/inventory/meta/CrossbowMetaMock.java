@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
@@ -41,14 +42,20 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	 *
 	 * @param meta The meta to clone.
 	 */
-	public CrossbowMetaMock(@NotNull CrossbowMeta meta)
+	public CrossbowMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
 
-		this.projectiles = new ArrayList<>(meta.getChargedProjectiles()
-				.stream()
-				.map(ItemStack::clone)
-				.toList());
+		if (meta instanceof CrossbowMeta crossbowMeta)
+		{
+			this.projectiles = crossbowMeta.hasChargedProjectiles() ?
+					new ArrayList<>(crossbowMeta.getChargedProjectiles().stream().map(ItemStack::clone).toList()) :
+					new ArrayList<>();
+		}
+		else
+		{
+			this.projectiles = new ArrayList<>();
+		}
 	}
 
 	@Override
@@ -110,7 +117,11 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	@Override
 	public @NotNull CrossbowMetaMock clone()
 	{
-		return new CrossbowMetaMock(this);
+		CrossbowMetaMock clone = (CrossbowMetaMock) super.clone();
+
+		clone.projectiles = new ArrayList<>(this.projectiles.stream().map(ItemStack::clone).toList());
+
+		return clone;
 	}
 
 	/**

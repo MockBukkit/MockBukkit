@@ -4,6 +4,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ArmorMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
@@ -25,11 +26,14 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 		super();
 	}
 
-	public ArmorMetaMock(ArmorMetaMock armorMeta)
+	public ArmorMetaMock(ItemMeta meta)
 	{
-		super(armorMeta);
+		super(meta);
 
-		this.trim = armorMeta.getTrim();
+		if (meta instanceof ArmorMetaMock armorMeta)
+		{
+			this.trim = armorMeta.getTrim();
+		}
 	}
 
 	@Override
