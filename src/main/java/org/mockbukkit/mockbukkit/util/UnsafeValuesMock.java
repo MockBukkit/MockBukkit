@@ -49,6 +49,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
+import org.bukkit.util.io.BukkitObjectInputStream;
+import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,8 +61,6 @@ import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
-import org.mockbukkit.mockbukkit.util.io.BukkitObjectInputStreamMock;
-import org.mockbukkit.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -302,7 +302,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		try
 		{
 			@NotNull Map<String, Object> stack = this.serializeStack(item);
-			final ObjectOutputStream oos = new BukkitObjectOutputStreamMock(bao);
+			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
 			oos.writeObject(stack);
 			return bao.toByteArray();
 		}
@@ -320,7 +320,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
 		try
 		{
-			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
+			final ObjectInputStream ois = new BukkitObjectInputStream(bai);
 			if (bai.available() <= 0)
 			{
 				return null;
