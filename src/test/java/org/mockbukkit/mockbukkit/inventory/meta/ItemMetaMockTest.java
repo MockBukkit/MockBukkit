@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.reflect.ClassPath;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import lombok.SneakyThrows;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -1718,9 +1719,10 @@ class ItemMetaMockTest
 		assertInstanceOf(SkullMetaMock.class, new ItemStackMock(skull).getItemMeta());
 	}
 
+	@SneakyThrows
 	@ParameterizedTest
 	@MethodSource("getPossibleItemMetas")
-	void validateAllItemMetaHaveClone(Class<? extends ItemMeta> clazz) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
+	void validateAllItemMetaHaveClone(Class<? extends ItemMeta> clazz)
 	{
 		Constructor<?> constructor = clazz.getDeclaredConstructor();
 		constructor.setAccessible(true);
