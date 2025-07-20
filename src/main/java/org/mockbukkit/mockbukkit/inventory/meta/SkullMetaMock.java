@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import lombok.EqualsAndHashCode;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
+import org.codehaus.plexus.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
@@ -16,7 +18,6 @@ import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -24,6 +25,7 @@ import java.util.UUID;
  *
  * @see ItemMetaMock
  */
+@EqualsAndHashCode(callSuper = true)
 @DelegateDeserialization(SerializableMeta.class)
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
@@ -68,33 +70,6 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + (playerProfile == null ? 0 : playerProfile.hashCode());
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (!super.equals(obj))
-		{
-			return false;
-		}
-		if (!(obj instanceof SkullMeta other))
-		{
-			return false;
-		}
-
-		return playerProfile == other.getOwningPlayer() || Objects.equals(playerProfile.getName(), other.getOwningPlayer().getName());
-	}
-
-	@Override
 	@Deprecated(since = "1.13")
 	public String getOwner()
 	{
@@ -104,7 +79,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	public boolean hasOwner()
 	{
-		return playerProfile != null && !playerProfile.getName().isEmpty();
+		return playerProfile != null && !StringUtils.isEmpty(playerProfile.getName());
 	}
 
 	@Override
