@@ -219,6 +219,12 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
+	protected String getTypeName()
+	{
+		return "SHIELD";
+	}
+
+	@Override
 	public boolean hasBlockState()
 	{
 		return banner != null;

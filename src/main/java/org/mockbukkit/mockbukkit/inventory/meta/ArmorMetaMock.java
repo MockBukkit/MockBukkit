@@ -89,6 +89,12 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 		}
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "ARMOR";
+	}
+
 	/**
 	 * This method is used to deserialize the armor meta.
 	 *

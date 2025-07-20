@@ -116,6 +116,12 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		}
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "COLORABLE_ARMOR";
+	}
+
 	public static ColorableArmorMetaMock deserialize(Map<String, Object> serialized)
 	{
 		ColorableArmorMetaMock colorableArmorMetaMock = new ColorableArmorMetaMock();

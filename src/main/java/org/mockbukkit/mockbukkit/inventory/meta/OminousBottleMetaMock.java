@@ -96,4 +96,10 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "OMINOUS_BOTTLE";
+	}
+
 }
