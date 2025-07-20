@@ -15,9 +15,9 @@ import java.util.Map;
 public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableArmorMeta
 {
 
-	private @Nullable Integer color;
-
 	static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
+
+	private @Nullable Color color;
 
 	/**
 	 * Constructs a new {@link ColorableArmorMetaMock}.
@@ -38,20 +38,20 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 
 		if (meta instanceof LeatherArmorMeta leatherArmorMeta)
 		{
-			this.color = leatherArmorMeta.getColor().asRGB();
+			this.color = leatherArmorMeta.getColor();
 		}
 	}
 
 	@Override
 	public @NotNull Color getColor()
 	{
-		return this.color == null ? DEFAULT_LEATHER_COLOR : Color.fromRGB(this.color & 0xFFFFFF);
+		return this.color == null ? DEFAULT_LEATHER_COLOR : this.color;
 	}
 
 	@Override
 	public void setColor(@Nullable Color color)
 	{
-		this.color = color == null ? null : color.asRGB(); // Paper
+		this.color = color;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		super.deserializeInternal(args);
 		if (args.containsKey("color"))
 		{
-			this.color = (int) args.get("color");
+			this.color = (Color) args.get("color");
 		}
 	}
 
