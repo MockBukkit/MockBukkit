@@ -15,6 +15,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.BundleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ColorableArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CompassMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.CrossbowMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.EnchantmentStorageMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
@@ -64,7 +65,7 @@ public class SerializableMeta implements ConfigurationSerializable
 				.put(PotionMetaMock.class, "POTION")
 				.put(ShieldMetaMock.class, "SHIELD")
 				.put(SpawnEggMetaMock.class, "SPAWN_EGG")
-				// .put(EnchantedBookMetaMock.class, "ENCHANTED")
+				.put(EnchantmentStorageMetaMock.class, "ENCHANTED")
 				.put(FireworkMetaMock.class, "FIREWORK")
 				.put(FireworkEffectMetaMock.class, "FIREWORK_EFFECT")
 				.put(KnowledgeBookMetaMock.class, "KNOWLEDGE_BOOK")
