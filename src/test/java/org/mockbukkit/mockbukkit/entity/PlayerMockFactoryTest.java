@@ -10,6 +10,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerMockFactoryTest
 {
 

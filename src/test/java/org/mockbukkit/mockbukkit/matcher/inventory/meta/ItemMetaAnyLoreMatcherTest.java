@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher.hasAnyLore;
 
+@ExtendWith(MockBukkitExtension.class)
 class ItemMetaAnyLoreMatcherTest extends AbstractMatcherTest
 {
 

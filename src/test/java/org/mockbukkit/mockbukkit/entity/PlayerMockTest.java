@@ -147,6 +147,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasNotHeard;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerMockTest
 {
 

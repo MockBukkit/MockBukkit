@@ -13,6 +13,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class StatisticsTest
 {
 

@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher.hasNotRammed;
 import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher.hasRammed;
 
+@ExtendWith(MockBukkitExtension.class)
 class GoatMockTest
 {
 

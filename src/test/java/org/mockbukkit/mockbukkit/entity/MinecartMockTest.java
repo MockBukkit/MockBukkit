@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class MinecartMockTest
 {
 

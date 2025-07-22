@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
+@ExtendWith(MockBukkitExtension.class)
 class HelpMapMockTest
 {
 

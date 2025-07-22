@@ -44,6 +44,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class PluginManagerMockTest
 {
 

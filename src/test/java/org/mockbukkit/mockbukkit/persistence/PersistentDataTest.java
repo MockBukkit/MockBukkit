@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class PersistentDataTest
 {
 

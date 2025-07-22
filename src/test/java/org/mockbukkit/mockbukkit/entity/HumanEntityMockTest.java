@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class HumanEntityMockTest
 {
 

@@ -32,6 +32,7 @@ import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMat
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.doesNotHaveItemInInventory;
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
 
+@ExtendWith(MockBukkitExtension.class)
 class AllayMockTest
 {
 

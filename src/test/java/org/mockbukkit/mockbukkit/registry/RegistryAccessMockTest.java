@@ -13,6 +13,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class RegistryAccessMockTest
 {
 

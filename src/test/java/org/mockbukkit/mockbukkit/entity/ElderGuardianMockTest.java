@@ -10,6 +10,7 @@ import static org.bukkit.entity.EntityType.ELDER_GUARDIAN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ElderGuardianMockTest
 {
 

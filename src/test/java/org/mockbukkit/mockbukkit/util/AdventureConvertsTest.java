@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class AdventureConvertsTest
 {
 

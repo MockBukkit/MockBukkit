@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 @SuppressWarnings("UnstableApiUsage")
+@ExtendWith(MockBukkitExtension.class)
 class ItemTypeMockTest
 {
 

@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class HorseMockTest
 {
 

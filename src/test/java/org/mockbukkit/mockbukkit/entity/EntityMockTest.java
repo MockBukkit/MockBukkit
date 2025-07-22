@@ -68,6 +68,7 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatche
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class EntityMockTest
 {
 

@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class WitchMockTest
 {
 

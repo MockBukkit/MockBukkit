@@ -10,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
 
 import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher.hasNoOverdueTasks;
 
+@ExtendWith(MockBukkitExtension.class)
 class SchedulerOverdueTasksMatcherTest extends AbstractMatcherTest
 {
 

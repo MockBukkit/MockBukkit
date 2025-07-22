@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.doesNotHaveLore;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.hasLore;
 
+@ExtendWith(MockBukkitExtension.class)
 class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 {
 

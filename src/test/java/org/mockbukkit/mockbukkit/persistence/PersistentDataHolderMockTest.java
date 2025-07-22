@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+@ExtendWith(MockBukkitExtension.class)
 class PersistentDataHolderMockTest
 {
 

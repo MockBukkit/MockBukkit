@@ -2402,6 +2402,7 @@ class ServerMockTest
 
 }
 
+@ExtendWith(MockBukkitExtension.class)
 class TestRecipe implements Recipe
 {
 
@@ -2425,6 +2426,7 @@ class TestRecipe implements Recipe
 
 }
 
+@ExtendWith(MockBukkitExtension.class)
 class EventDenier implements Listener
 {
 

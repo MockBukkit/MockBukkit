@@ -11,6 +11,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerInventoryViewTest
 {
 

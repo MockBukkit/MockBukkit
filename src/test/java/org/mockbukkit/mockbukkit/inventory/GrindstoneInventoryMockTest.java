@@ -9,6 +9,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class GrindstoneInventoryMockTest
 {
 

@@ -31,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
+@ExtendWith(MockBukkitExtension.class)
 class TeamMockTest
 {
 

@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class EntityEquipmentMockTest
 {
 

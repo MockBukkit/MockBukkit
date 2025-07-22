@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
+@ExtendWith(MockBukkitExtension.class)
 class CreeperMockTest
 {
 

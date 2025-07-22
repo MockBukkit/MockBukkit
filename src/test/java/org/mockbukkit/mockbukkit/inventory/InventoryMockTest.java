@@ -45,6 +45,7 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMat
 import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsLessThan;
 import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.similarTo;
 
+@ExtendWith(MockBukkitExtension.class)
 class InventoryMockTest
 {
 
