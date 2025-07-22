@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.bukkit.Material;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 class ConduitStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private ConduitStateMock conduit;
@@ -21,7 +23,6 @@ class ConduitStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.CONDUIT);
 		this.conduit = new ConduitStateMock(this.block);

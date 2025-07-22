@@ -22,12 +22,12 @@ class PaperProfileBanEntryMockTest
 	@MockBukkitInject
 	ServerMock server;
 	PaperProfileBanEntryMock entry;
+	@MockBukkitInject
 	Player player;
 
 	@BeforeEach
 	void setUp()
 	{
-		player = server.addPlayer();
 		entry = new PaperProfileBanEntryMock(
 				new PlayerProfileMock(player),
 				"source",

@@ -7,7 +7,10 @@ import org.bukkit.entity.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
@@ -22,10 +25,13 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class SkullStateMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private SkullStateMock skull;
@@ -33,8 +39,6 @@ class SkullStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.server = MockBukkit.mock();
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.SKELETON_SKULL);
 		this.skull = new SkullStateMock(this.block);

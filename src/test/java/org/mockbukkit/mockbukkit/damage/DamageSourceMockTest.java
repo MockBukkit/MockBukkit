@@ -8,12 +8,13 @@ import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ArrowMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -32,11 +33,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class DamageSourceMockTest
 {
 
 	private final Location damageLocation = new Location(new WorldMock(), 0, 0, 0);
 
+	@MockBukkitInject
 	private ServerMock serverMock;
 	private DamageType damageType;
 	private Entity causingEntity;
@@ -46,19 +49,11 @@ class DamageSourceMockTest
 	@BeforeEach
 	void setUp()
 	{
-		serverMock = MockBukkit.mock();
-
 		damageType = DamageType.GENERIC;
 		causingEntity = new SkeletonMock(serverMock, UUID.randomUUID());
 		directEntity = new ZombieMock(serverMock, UUID.randomUUID());
 
 		damageSourceMock = new DamageSourceMock(damageType, causingEntity, directEntity, damageLocation);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

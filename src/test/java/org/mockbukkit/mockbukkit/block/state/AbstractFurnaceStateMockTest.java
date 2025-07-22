@@ -5,6 +5,9 @@ import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -12,9 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class AbstractFurnaceStateMockTest extends ContainerStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private TestFurnaceState furnace;
@@ -28,7 +33,6 @@ class AbstractFurnaceStateMockTest extends ContainerStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 0, 0);
 		this.block.setType(Material.FURNACE);
 		this.furnace = new TestFurnaceState(this.block);

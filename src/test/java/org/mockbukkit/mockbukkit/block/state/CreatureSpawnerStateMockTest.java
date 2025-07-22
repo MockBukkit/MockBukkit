@@ -30,6 +30,7 @@ class CreatureSpawnerStateMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private CreatureSpawnerStateMock spawner;
@@ -37,7 +38,6 @@ class CreatureSpawnerStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.SPAWNER);
 		this.spawner = new CreatureSpawnerStateMock(this.block);
