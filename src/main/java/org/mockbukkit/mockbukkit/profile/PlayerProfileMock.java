@@ -315,7 +315,8 @@ public class PlayerProfileMock implements PlayerProfile
 	 *
 	 * @see org.bukkit.configuration.serialization.ConfigurationSerializable
 	 */
-	public static PlayerProfileMock deserialize(Map<String, Object> map) {
+	public static PlayerProfileMock deserialize(Map<String, Object> map)
+	{
 		Object uniqueIdObject = map.get("uniqueId");
 		Object nameObject = map.get("name");
 
