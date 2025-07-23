@@ -632,6 +632,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
+		@SuppressWarnings({ "java:S1481", "java:S1854" })
 		final int version = args.getOrDefault("schema_version", 1) instanceof Number val ? val.intValue() : -1;
 		final String id = (String) args.get("id");
 		final int amount = ((Number) args.get("count")).intValue();
