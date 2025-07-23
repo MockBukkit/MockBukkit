@@ -31,7 +31,6 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
 import org.bukkit.damage.DamageSource;
@@ -93,9 +92,9 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.20",
 					"1.21"
 			);
+	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
 
 	private String minimumApiVersion = "none";
-	private Biome customBiome;
 
 	@Override
 	public @NotNull ComponentFlattener componentFlattener()
@@ -616,14 +615,14 @@ public class UnsafeValuesMock implements UnsafeValues
 			return Map.of(
 					"id", "minecraft:air",
 					"DataVersion", this.getDataVersion(),
-					"schema_version", 1);
+					PROPERTY_SCHEMA_VERSION, 1);
 		}
 
 		Map<String, Object> result = new HashMap<>();
 		result.put("id", itemStack.getType().getKey().asString());
 		result.put("count", itemStack.getAmount());
 		result.put("DataVersion", this.getDataVersion());
-		result.put("schema_version", 1);
+		result.put(PROPERTY_SCHEMA_VERSION, 1);
 		result.put("components", itemStack.getItemMeta().serialize());
 
 		return result;
@@ -633,7 +632,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
 		@SuppressWarnings({ "java:S1481", "java:S1854" })
-		final int version = args.getOrDefault("schema_version", 1) instanceof Number val ? val.intValue() : -1;
+		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
 		final String id = (String) args.get("id");
 		final int amount = ((Number) args.get("count")).intValue();
 		final Map<String, Object> components = (Map<String, Object>) args.get("components");

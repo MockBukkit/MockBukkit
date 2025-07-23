@@ -30,6 +30,8 @@ import java.util.concurrent.CompletableFuture;
 public class PlayerProfileMock implements PlayerProfile
 {
 
+	private static final String PROPERTY_PROPERTIES = "properties";
+
 	private @Nullable String name;
 	private @Nullable UUID uuid;
 	private @Nullable PlayerTextures textures = new PlayerTexturesMock(this);
@@ -232,7 +234,7 @@ public class PlayerProfileMock implements PlayerProfile
 			{
 				propertiesData.add(PlayerProfileMock.serialize(property));
 			}
-			map.put("properties", propertiesData);
+			map.put(PROPERTY_PROPERTIES, propertiesData);
 		}
 		return map;
 	}
@@ -258,6 +260,11 @@ public class PlayerProfileMock implements PlayerProfile
 	@Nullable
 	private static ProfileProperty deserializeProfileProperty(@Nullable Map<String, Object> map)
 	{
+		if (map == null)
+		{
+			return null;
+		}
+
 		String name = (String) map.get("name");
 		String value = (String) map.get("value");
 		String signature = (String) map.get("signature");
@@ -326,10 +333,10 @@ public class PlayerProfileMock implements PlayerProfile
 		// This also validates the deserialized unique id and name (ensures that not both are null):
 		PlayerProfileMock profile = new PlayerProfileMock(name, uniqueId);
 
-		if (map.containsKey("properties"))
+		if (map.containsKey(PROPERTY_PROPERTIES))
 		{
 			Set<ProfileProperty> properties = new LinkedHashSet<>();
-			for (Object propertyData : (List<?>) map.get("properties"))
+			for (Object propertyData : (List<?>) map.get(PROPERTY_PROPERTIES))
 			{
 				if (!(propertyData instanceof Map))
 				{
