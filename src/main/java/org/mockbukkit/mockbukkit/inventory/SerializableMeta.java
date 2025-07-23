@@ -86,9 +86,10 @@ public class SerializableMeta implements ConfigurationSerializable
 		{
 			Class<? extends ItemMetaMock> clazz = mapping.getKey();
 
+			// Deserialize method
 			try
 			{
-				Method deserializeMethod = clazz.getMethod("deserialize", Map.class);
+				Method deserializeMethod = clazz.getDeclaredMethod("deserialize", Map.class);
 				classConstructorBuilder.put(mapping.getValue(), a ->
 				{
 					try
@@ -97,7 +98,7 @@ public class SerializableMeta implements ConfigurationSerializable
 					}
 					catch (IllegalAccessException | InvocationTargetException e)
 					{
-						throw new RuntimeException(e);
+						throw new RuntimeException("Error while calling deserialize method.", e);
 					}
 				});
 				continue;
@@ -107,6 +108,29 @@ public class SerializableMeta implements ConfigurationSerializable
 				// If we don't found the method, we can then try the next method
 			}
 
+			// Value of
+			try
+			{
+				Method deserializeMethod = clazz.getDeclaredMethod("valueOf", Map.class);
+				classConstructorBuilder.put(mapping.getValue(), a ->
+				{
+					try
+					{
+						return (ItemMetaMock) deserializeMethod.invoke(null, a);
+					}
+					catch (IllegalAccessException | InvocationTargetException e)
+					{
+						throw new RuntimeException("Error while calling valueOf method.", e);
+					}
+				});
+				continue;
+			}
+			catch (NoSuchMethodException e)
+			{
+				// If we don't found the method, we can then try the next method
+			}
+
+			// Constructor
 			try
 			{
 				Constructor<? extends ItemMetaMock> constructor = clazz.getDeclaredConstructor(Map.class);
@@ -118,13 +142,22 @@ public class SerializableMeta implements ConfigurationSerializable
 					}
 					catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
 					{
-						throw new RuntimeException(e);
+						throw new RuntimeException("Error while calling deserialize constructor.", e);
 					}
 				});
 			}
 			catch (NoSuchMethodException e)
 			{
-				throw new AssertionError(e);
+				String message = String.format("""
+						There is no deserialization method available for class %s. Make sure that the class follows the
+						rules of class org.bukkit.configuration.serialization.ConfigurationSerializable.
+
+						To be compliant it should have one of the following:
+						- A static method "deserialize" that accepts a single Map<String, Object> and returns the class instance.
+						- A static method "valueOf" that accepts a single Map<String, Object> and returns the class instance.
+						- A constructor that accepts a single Map<String, Object>.
+						""", clazz.getName());
+				throw new UnsupportedOperationException(message, e);
 			}
 		}
 		factoryMap = classConstructorBuilder.build();

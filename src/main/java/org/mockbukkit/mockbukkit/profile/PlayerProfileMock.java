@@ -306,6 +306,15 @@ public class PlayerProfileMock implements PlayerProfile
 		Preconditions.checkArgument(isValidSkullProfile, "The skull profile is missing a name or textures!");
 	}
 
+	/**
+	 * This method is used to deserialize the player profile.
+	 *
+	 * @param map The data to be deserialized.
+	 *
+	 * @return The player profile deserialized.
+	 *
+	 * @see org.bukkit.configuration.serialization.ConfigurationSerializable
+	 */
 	public static PlayerProfileMock deserialize(Map<String, Object> map) {
 		Object uniqueIdObject = map.get("uniqueId");
 		Object nameObject = map.get("name");
