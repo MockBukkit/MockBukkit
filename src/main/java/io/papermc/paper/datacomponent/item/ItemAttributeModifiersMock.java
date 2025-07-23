@@ -1,6 +1,7 @@
 package io.papermc.paper.datacomponent.item;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.item.attribute.AttributeModifierDisplay;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -11,7 +12,7 @@ import java.util.List;
 public record ItemAttributeModifiersMock(List<Entry> modifiers) implements ItemAttributeModifiers
 {
 
-	record EntryMock(Attribute attribute, AttributeModifier modifier) implements Entry
+	record EntryMock(Attribute attribute, AttributeModifier modifier, AttributeModifierDisplay display) implements Entry
 	{
 
 	}
@@ -22,21 +23,7 @@ public record ItemAttributeModifiersMock(List<Entry> modifiers) implements ItemA
 		List<Entry> entries = new ArrayList<>();
 
 		@Override
-		public Builder addModifier(Attribute attribute, AttributeModifier modifier)
-		{
-			Preconditions.checkArgument(
-					this.entries.stream().noneMatch(e ->
-							e.modifier().getKey().equals(modifier.getKey()) && e.attribute().getKey().equals(attribute.getKey())
-					),
-					"Cannot add 2 modifiers with identical keys on the same attribute (modifier %s for attribute %s)",
-					modifier.getKey(), attribute.getKey()
-			);
-			entries.add(new EntryMock(attribute, modifier));
-			return this;
-		}
-
-		@Override
-		public Builder addModifier(Attribute attribute, AttributeModifier modifier, EquipmentSlotGroup equipmentSlotGroup)
+		public Builder addModifier(Attribute attribute, AttributeModifier modifier, EquipmentSlotGroup equipmentSlotGroup, AttributeModifierDisplay display)
 		{
 			Preconditions.checkArgument(
 					this.entries.stream().noneMatch(e ->
@@ -46,7 +33,7 @@ public record ItemAttributeModifiersMock(List<Entry> modifiers) implements ItemA
 					modifier.getKey(), attribute.getKey()
 			);
 			AttributeModifier newModifier = new AttributeModifier(modifier.getKey(), modifier.getAmount(), modifier.getOperation(), equipmentSlotGroup);
-			entries.add(new EntryMock(attribute, newModifier));
+			entries.add(new EntryMock(attribute, newModifier, display));
 			return this;
 		}
 

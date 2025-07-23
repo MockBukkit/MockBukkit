@@ -2,49 +2,21 @@ package io.papermc.paper.datacomponent.item;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomModelDataMock implements CustomModelData
+public record CustomModelDataMock(@Unmodifiable List<Float> floats, @Unmodifiable List<Boolean> flags,
+								  @Unmodifiable List<String> strings,
+								  @Unmodifiable @ApiStatus.Internal List<Integer> internalColors) implements CustomModelData
 {
-
-	private final List<Float> floats;
-	private final List<Boolean> flags;
-	private final List<String> strings;
-	private final List<Integer> colors;
-
-	private CustomModelDataMock(List<Float> floats, List<Boolean> flags, List<String> strings, List<Integer> colors)
-	{
-		this.floats = floats;
-		this.flags = flags;
-		this.strings = strings;
-		this.colors = colors;
-	}
-
-	@Override
-	public @Unmodifiable List<Float> floats()
-	{
-		return floats;
-	}
-
-	@Override
-	public @Unmodifiable List<Boolean> flags()
-	{
-		return flags;
-	}
-
-	@Override
-	public @Unmodifiable List<String> strings()
-	{
-		return strings;
-	}
 
 	@Override
 	public @Unmodifiable List<Color> colors()
 	{
-		return colors.stream().map(Color::fromRGB).toList();
+		return internalColors.stream().map(Color::fromRGB).toList();
 	}
 
 	static class BuilderMock implements Builder

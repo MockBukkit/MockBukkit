@@ -1,6 +1,7 @@
 package io.papermc.paper.datacomponent.item;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import io.papermc.paper.registry.tag.TagKey;
 import io.papermc.paper.text.Filtered;
@@ -159,7 +160,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public BlockItemDataProperties.Builder blockItemStateProperties()
 	{
-		throw new UnimplementedOperationException()
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -189,7 +190,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public ItemAdventurePredicate.Builder itemAdventurePredicate()
 	{
-		return null;
+		return new ItemAdventurePredicateMock.BuilderMock();
 	}
 
 	@Override
@@ -201,61 +202,70 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public MapId mapId(int id)
 	{
-		return null;
+		return new MapIdMock(id);
 	}
 
 	@Override
 	public UseRemainder useRemainder(ItemStack itemStack)
 	{
-		return null;
+		Preconditions.checkArgument(itemStack != null, "Item cannot be null");
+		Preconditions.checkArgument(!itemStack.isEmpty(), "Remaining item cannot be empty!");
+		return new UseRemainderMock(itemStack);
 	}
 
 	@Override
 	public Consumable.Builder consumable()
 	{
-		return null;
+		return new ConsumableMock.BuilderMock();
 	}
 
 	@Override
 	public UseCooldown.Builder useCooldown(float seconds)
 	{
-		return null;
+		Preconditions.checkArgument(seconds > 0, "seconds must be positive, was %s", seconds);
+		return new UseCooldownMock.BuilderMock(seconds);
 	}
 
 	@Override
 	public DamageResistant damageResistant(TagKey<DamageType> types)
 	{
-		return null;
+		Preconditions.checkNotNull(types);
+		return new DamageResistantMock(types);
 	}
 
 	@Override
 	public Enchantable enchantable(int level)
 	{
-		return null;
+		Preconditions.checkArgument(level > 0, "Level has to be larger than 0");
+		return new EnchantableMock(level);
 	}
 
 	@Override
 	public Repairable repairable(RegistryKeySet<ItemType> types)
 	{
-		return null;
+		Preconditions.checkNotNull(types);
+		return new RepairableMock(types);
 	}
 
 	@Override
 	public Equippable.Builder equippable(EquipmentSlot slot)
 	{
-		return null;
+		return new EquipableMock.BuilderMock(slot);
 	}
 
 	@Override
 	public DeathProtection.Builder deathProtection()
 	{
-		return null;
+		return new DeathProtectionMock.BuilderMock();
 	}
 
 	@Override
 	public OminousBottleAmplifier ominousBottleAmplifier(int amplifier)
 	{
-		return null;
+		Preconditions.checkArgument(0 <= amplifier && amplifier <= 4,
+				"amplifier must be between %s-%s, was %s", 0, 4, amplifier
+		);
+		return new OminousBottleAmplifierMock(amplifier);
 	}
 
 	@Override
