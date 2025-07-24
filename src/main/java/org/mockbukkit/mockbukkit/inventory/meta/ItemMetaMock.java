@@ -46,6 +46,7 @@ import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -720,13 +721,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@ApiStatus.Internal
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
-		displayName = (String) args.get("display-name");
-		lore = (List<String>) args.get("lore");
-		damage = (Integer) args.get("Damage");
-		maxDamage = (Integer) args.get("MaxDamage");
-		repairCost = (int) args.get("repair-cost");
+		displayName = NbtParser.parseString(args.get("display-name"));
+		lore = NbtParser.parseList(args.get("lore"), NbtParser::parseString);
+		damage = NbtParser.parseInteger(args.get("Damage"));
+		maxDamage = NbtParser.parseInteger(args.get("MaxDamage"));
+		repairCost = NbtParser.parseInteger(args.get("repair-cost"));
 		enchants = new HashMap<>();
-		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
+		for (Map.Entry<String, Integer> entry : NbtParser.parseMap(args.get("enchants"), NbtParser::parseInteger).entrySet())
 		{
 			Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.minecraft(entry.getKey()));
 			if (enchantment != null)
@@ -735,7 +736,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			}
 		}
 		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
-		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
+		hideFlags = NbtParser.parseSet(args.get("ItemFlags"), o -> NbtParser.parseEnum(o, ItemFlag.class));
 		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
 		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
 		unbreakable = (boolean) args.get("Unbreakable");
@@ -745,7 +746,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		fireResistant = (boolean) args.get("FireResistant");
 		maxStackSize = (Integer) args.get("MaxStackSize");
 		enchantmentGlintOverride = (Boolean) args.get("EnchantmentGlintOverride");
-		rarity = (ItemRarity) args.get("Rarity");
+		rarity = NbtParser.parseEnum(args.get("Rarity"), ItemRarity.class);
 		if (args.containsKey("ItemName"))
 		{
 			setItemName((String) args.get("ItemName"));

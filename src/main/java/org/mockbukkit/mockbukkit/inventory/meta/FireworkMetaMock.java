@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -185,7 +186,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 				.toList());
 		if (args.containsKey("power"))
 		{
-			serialMock.power = (int) args.get("power");
+			serialMock.power = NbtParser.parseInteger(args.get("power"));
 		}
 		return serialMock;
 	}

@@ -6,6 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
@@ -74,7 +75,7 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		super.deserializeInternal(args);
 		if (args.containsKey(AMPLIFIER_KEY))
 		{
-			this.amplifier = (Integer) args.get(AMPLIFIER_KEY);
+			this.amplifier = NbtParser.parseInteger(args.get(AMPLIFIER_KEY));
 		}
 	}
 

@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
@@ -101,7 +102,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		Map<String, Object> serialized = super.serialize();
 		if (this.isDyed())
 		{
-			serialized.put("color", this.getColor());
+			serialized.put("color", this.getColor().serialize());
 		}
 		return serialized;
 	}
@@ -112,7 +113,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		super.deserializeInternal(args);
 		if (args.containsKey("color"))
 		{
-			this.color = (Color) args.get("color");
+			this.color = Color.deserialize(NbtParser.parseMap(args.get("color"), NbtParser::parseDouble));
 		}
 	}
 

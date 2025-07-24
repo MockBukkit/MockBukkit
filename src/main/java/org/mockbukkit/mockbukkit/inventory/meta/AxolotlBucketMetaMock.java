@@ -6,6 +6,7 @@ import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
@@ -104,7 +105,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	{
 		AxolotlBucketMetaMock serialMock = new AxolotlBucketMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.variant = (Axolotl.Variant) args.get("variant");
+		serialMock.variant = NbtParser.parseEnum(args.get("variant"), Axolotl.Variant.class);
 		return serialMock;
 	}
 

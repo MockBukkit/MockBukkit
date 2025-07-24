@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 import java.util.Objects;
@@ -207,13 +208,13 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		MapMetaMock serialMock = new MapMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.mapId = (Integer) args.get("map-id");
+		serialMock.mapId = NbtParser.parseInteger(args.get("map-id"));
 		serialMock.mapView = (MapView) args.get("map-view");
 		if (args.containsKey("color"))
 		{
 			serialMock.color = Color.fromARGB((int) args.get("color"));
 		}
-		serialMock.scaling = (byte) args.get("scaling");
+		serialMock.scaling = NbtParser.parseByte(args.get("scaling"));
 		return serialMock;
 	}
 

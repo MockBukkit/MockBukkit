@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -347,10 +348,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		BookMetaMock serialMock = new BookMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.title = (String) args.get("title");
-		serialMock.author = (String) args.get("author");
-		serialMock.pages = (List<String>) args.get("pages");
-		serialMock.generation = (Generation) args.get("generation");
+		serialMock.title = NbtParser.parseString(args.get("title"));
+		serialMock.author = NbtParser.parseString(args.get("author"));
+		serialMock.pages = NbtParser.parseList(args.get("pages"), NbtParser::parseString);
+		serialMock.generation = NbtParser.parseEnum(args.get("generation"), BookMeta.Generation.class);
 
 		return serialMock;
 	}
