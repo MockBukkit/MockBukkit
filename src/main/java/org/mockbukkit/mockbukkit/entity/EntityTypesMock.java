@@ -184,6 +184,8 @@ import org.mockbukkit.mockbukkit.entity.boat.SpruceBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.SpruceChestBoatMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -397,11 +399,33 @@ public final class EntityTypesMock
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
 
+		if (EntityMock.class.isAssignableFrom(bukkitClazz) && !Modifier.isAbstract(bukkitClazz.getModifiers()))
+		{
+			try
+			{
+				var myConstructor = bukkitClazz.getConstructor(ServerMock.class, UUID.class);
+				return (EntityMock) myConstructor.newInstance(server, entityUUID);
+			}
+			catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+				   InvocationTargetException ignored)
+			{
+			}
+		}
+
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
 		if (data == null)
 		{
-			// try a little harder
-			data = bukkitToMockData.values().stream().filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass)).findFirst().orElse(null);
+			// try a little harder - first look for exact match, then assignable
+			data = bukkitToMockData.values().stream()
+					.filter(entityData -> entityData.mockClass.equals(bukkitClazz))
+					.findFirst()
+					.orElse(
+							bukkitToMockData.values().stream()
+									.filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass))
+									.findFirst()
+									.orElse(null)
+					);
+
 			if (data == null)
 			{
 				throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));

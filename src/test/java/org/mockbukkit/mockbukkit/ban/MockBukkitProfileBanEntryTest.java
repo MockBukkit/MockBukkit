@@ -20,9 +20,9 @@ class MockBukkitProfileBanEntryTest
 {
 	@MockBukkitInject
 	private ServerMock server;
-	MockBukkitProfileBanEntry entry;
+	private MockBukkitProfileBanEntry entry;
 	@MockBukkitInject
-	Player player;
+	private Player player;
 
 	@BeforeEach
 	void setUp()
