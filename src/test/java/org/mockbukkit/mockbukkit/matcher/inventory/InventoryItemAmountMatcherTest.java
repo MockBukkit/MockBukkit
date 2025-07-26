@@ -21,6 +21,7 @@ class InventoryItemAmountMatcherTest extends AbstractMatcherTest
 {
 	@MockBukkitInject
 	private ServerMock serverMock;
+	@MockBukkitInject
 	private InventoryHolder inventoryHolder;
 	private InventoryMock inventory;
 	private ItemStack item;
@@ -28,7 +29,6 @@ class InventoryItemAmountMatcherTest extends AbstractMatcherTest
 	@BeforeEach
 	void setUp()
 	{
-		this.inventoryHolder = serverMock.addPlayer();
 		this.inventory = new InventoryMock(inventoryHolder, InventoryType.ANVIL);
 		this.item = new ItemStack(Material.DIRT);
 	}

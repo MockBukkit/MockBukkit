@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BoatMockTest
 {
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 	@MockBukkitInject
 	Boat boat;
 

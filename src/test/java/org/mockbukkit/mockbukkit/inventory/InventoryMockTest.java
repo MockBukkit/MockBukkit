@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -49,13 +48,14 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.
 @ExtendWith(MockBukkitExtension.class)
 class InventoryMockTest
 {
-	ServerMock server;
+
+	@MockBukkitInject
+	private ServerMock server;
 	private InventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		inventory = new InventoryMock(null, 9, InventoryType.CHEST);
 	}
 

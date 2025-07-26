@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.world;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -11,13 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @ExtendWith(MockBukkitExtension.class)
 class CoordinateTest
 {
-	private Coordinate coordinate;
 
-	@BeforeEach
-	void setUp()
-	{
-		coordinate = new Coordinate();
-	}
+	@MockBukkitInject
+	private Coordinate coordinate;
 
 	@Test
 	void constructor_NoParameters_AllZeroes()

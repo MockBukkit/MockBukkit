@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AreaEffectCloudMockTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 	@MockBukkitInject
 	AreaEffectCloud areaEffectCloud;
 

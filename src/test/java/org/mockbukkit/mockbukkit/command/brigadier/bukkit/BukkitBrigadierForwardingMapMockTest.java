@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BukkitBrigadierForwardingMapMockTest
 {
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 
 	BukkitBrigadierForwardingMapMock map;
 

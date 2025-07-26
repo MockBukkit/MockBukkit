@@ -29,13 +29,13 @@ class WorldBorderMockTest
 {
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private World world;
 	private WorldBorder worldBorderMock;
 
 	@BeforeEach
 	void setUp()
 	{
-		world = new WorldMock();
 		worldBorderMock = world.getWorldBorder();
 	}
 

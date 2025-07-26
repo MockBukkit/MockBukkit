@@ -5,10 +5,10 @@ import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.MusicInstrument;
 import org.bukkit.Registry;
 import org.bukkit.generator.structure.StructureType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import java.util.Locale;
 
@@ -18,13 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @ExtendWith(MockBukkitExtension.class)
 class RegistryAccessMockTest
 {
-	private RegistryAccessMock registryAccess;
 
-	@BeforeEach
-	void setUp()
-	{
-		this.registryAccess = new RegistryAccessMock();
-	}
+	@MockBukkitInject
+	private RegistryAccessMock registryAccess;
 
 	@Test
 	void getRegistry_RegistryKey_createOnlyOnce()

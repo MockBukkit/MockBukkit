@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -29,7 +28,6 @@ class SpellcasterMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		spellcaster = new SpellcasterMock(server, UUID.randomUUID())
 		{
 			@Override

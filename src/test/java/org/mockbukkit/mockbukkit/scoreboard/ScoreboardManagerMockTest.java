@@ -2,10 +2,10 @@ package org.mockbukkit.mockbukkit.scoreboard;
 
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -14,13 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @ExtendWith(MockBukkitExtension.class)
 class ScoreboardManagerMockTest
 {
-	private ScoreboardManager manager;
 
-	@BeforeEach
-	void setUp()
-	{
-		manager = new ScoreboardManagerMock();
-	}
+	@MockBukkitInject
+	private ScoreboardManager manager;
 
 	@Test
 	void getMainScoreboard_NotNull()

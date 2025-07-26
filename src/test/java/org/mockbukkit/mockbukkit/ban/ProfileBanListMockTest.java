@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ProfileBanListMockTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 	ProfileBanListMock banList;
 
 	@BeforeEach

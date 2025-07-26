@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
@@ -29,14 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class EntityEquipmentMockTest
 {
 	private EntityEquipment equipment;
+	@MockBukkitInject
 	private ZombieMock holder;
+	@MockBukkitInject
 	private ServerMock server;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
-		holder = new ZombieMock(server, UUID.randomUUID());
 		equipment = holder.getEquipment();
 	}
 

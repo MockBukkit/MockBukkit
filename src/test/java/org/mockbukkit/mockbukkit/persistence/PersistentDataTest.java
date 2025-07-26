@@ -7,11 +7,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
@@ -27,13 +26,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PersistentDataTest
 {
-	private ServerMock mock;
 
-	@BeforeEach
-	void setUp()
-	{
-		mock = MockBukkit.mock();
-	}
+	@MockBukkitInject
+	private ServerMock mock;
 
 	@NotNull
 	@SuppressWarnings("deprecation")

@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PaperCommandsMockTest
 {
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 	List<Object> arguments = List.of();
 
 	@ParameterizedTest

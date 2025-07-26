@@ -62,7 +62,7 @@ class MockBukkitExtensionDifferentMocksTest
 	class TestDirectClass
 	{
 		@MockBukkitInject
-		ServerMock serverMock;
+		private ServerMock serverMock;
 
 		@Test
 		void serverMockIsNotNull()
@@ -76,7 +76,7 @@ class MockBukkitExtensionDifferentMocksTest
 	class TestAllTypesClass
 	{
 		@MockBukkitInject
-		ServerMock serverMock;
+		private ServerMock serverMock;
 
 		@MockBukkitInject
 		PlayerMock playerMock;

@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class IpBanListMockTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 	IpBanListMock banList;
 
 	@BeforeEach

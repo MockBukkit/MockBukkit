@@ -4,7 +4,6 @@ import org.bukkit.inventory.InventoryHolder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -19,7 +18,6 @@ class CartographyInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		inventory = new CartographyInventoryMock((InventoryHolder) null);
 	}
 

@@ -5,11 +5,10 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Team;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.SimpleEntityMock;
@@ -30,15 +29,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ScoreboardMockTest
 {
-	private ServerMock server;
-	private ScoreboardMock scoreboard;
 
-	@BeforeEach
-	void setUp()
-	{
-		this.server = MockBukkit.mock();
-		this.scoreboard = new ScoreboardMock();
-	}
+	@MockBukkitInject
+	private ServerMock server;
+	@MockBukkitInject
+	private ScoreboardMock scoreboard;
 
 	@Test
 	void registerObjective_DummyObjective_ObjectiveRegistered()

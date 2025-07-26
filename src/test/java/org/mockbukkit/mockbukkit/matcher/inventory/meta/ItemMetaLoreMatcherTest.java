@@ -3,11 +3,11 @@ package org.mockbukkit.mockbukkit.matcher.inventory.meta;
 import net.kyori.adventure.text.Component;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
@@ -22,13 +22,9 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatch
 @ExtendWith(MockBukkitExtension.class)
 class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 {
-	private ItemMetaMock itemMeta;
 
-	@BeforeEach
-	void setUp()
-	{
-		this.itemMeta = new ItemMetaMock();
-	}
+	@MockBukkitInject
+	private ItemMetaMock itemMeta;
 
 	@Test
 	void hasLore_matches()

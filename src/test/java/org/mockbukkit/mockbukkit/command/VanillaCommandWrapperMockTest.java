@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class VanillaCommandWrapperMockTest
 {
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 	private VanillaCommandWrapperMock command;
 
 	@BeforeEach

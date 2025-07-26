@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -16,15 +15,10 @@ import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedAny
 class MessageTargetReceivedAnyMessageMatcherTest extends AbstractMatcherTest
 {
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	private PlayerMock messageTarget;
 	private static final String MESSAGE = "Hello world!";
-
-	@BeforeEach
-	void setUp()
-	{
-		this.messageTarget = serverMock.addPlayer();
-	}
 
 	@Test
 	void receivedAny()

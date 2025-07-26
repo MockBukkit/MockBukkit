@@ -23,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FoliaAsyncSchedulerTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
+	@MockBukkitInject
 	private BukkitSchedulerMock bukkitScheduler;
 	private FoliaAsyncScheduler scheduler;
 
 	@BeforeEach
 	void setUp()
 	{
-		bukkitScheduler = new BukkitSchedulerMock();
 		scheduler = new FoliaAsyncScheduler(bukkitScheduler);
 	}
 

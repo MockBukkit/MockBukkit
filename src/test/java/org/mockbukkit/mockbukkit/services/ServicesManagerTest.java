@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.EmptyPlugin;
 
@@ -20,13 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ServicesManagerTest
 {
+
+	@MockBukkitInject
 	private ServerMock server;
 	private EmptyPlugin plugin;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		plugin = MockBukkit.loadWith(EmptyPlugin.class, "empty_plugin.yml");
 	}
 

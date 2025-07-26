@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -23,13 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class PlayerInventoryMockTest
 {
+
+	@MockBukkitInject
 	private ServerMock server;
 	private PlayerInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		inventory = new PlayerInventoryMock(null);
 	}
 

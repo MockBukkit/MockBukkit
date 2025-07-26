@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class PaperProfileBanEntryMockTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 	PaperProfileBanEntryMock entry;
 	@MockBukkitInject
 	Player player;

@@ -23,6 +23,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
@@ -48,6 +49,8 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 @ExtendWith(MockBukkitExtension.class)
 class PluginManagerMockTest
 {
+
+	@MockBukkitInject
 	private ServerMock server;
 	private PluginManagerMock pluginManager;
 	private TestPlugin plugin;
@@ -55,7 +58,6 @@ class PluginManagerMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
 		plugin = MockBukkit.load(TestPlugin.class);
 	}

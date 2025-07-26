@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -27,16 +27,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class MapViewMockTest
 {
+
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WorldMock world;
 	private MapViewMock mapView;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
-		world = new WorldMock();
-		server.addWorld(world);
 		mapView = new MapViewMock(world, 1);
 	}
 

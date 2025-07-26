@@ -7,8 +7,8 @@ import org.bukkit.scoreboard.Score;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -23,15 +23,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ObjectiveMockTest
 {
+
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private ScoreboardMock scoreboard;
 	private ObjectiveMock objective;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
-		scoreboard = new ScoreboardMock();
 		objective = scoreboard.registerNewObjective("Objective", "dummy");
 	}
 

@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.inventory;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -18,13 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ItemTypeMockTest
 {
-	private ItemType itemType;
 
-	@BeforeEach
-	void setup()
-	{
-		itemType = ItemType.ITEM_FRAME;
-	}
+	private static final ItemType itemType = ItemType.ITEM_FRAME;
 
 	@Test
 	void testItemRarity()

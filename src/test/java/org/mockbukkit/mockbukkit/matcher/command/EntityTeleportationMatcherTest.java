@@ -17,15 +17,15 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatche
 class EntityTeleportationMatcherTest extends AbstractMatcherTest
 {
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	private PlayerMock teleporter;
 	private Location location;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.teleporter = serverMock.addPlayer();
-		this.location = teleporter.getLocation().clone().add(20, 0, 0);
+		location = teleporter.getLocation().clone().add(20, 0, 0);
 	}
 
 	@Test

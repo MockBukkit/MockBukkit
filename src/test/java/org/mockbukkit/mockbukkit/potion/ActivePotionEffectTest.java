@@ -2,9 +2,8 @@ package org.mockbukkit.mockbukkit.potion;
 
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -14,13 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ActivePotionEffectTest
 {
-	ServerMock server;
 
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-	}
+	@MockBukkitInject
+	private ServerMock server;
 
 	@Test
 	void infiniteDuration()

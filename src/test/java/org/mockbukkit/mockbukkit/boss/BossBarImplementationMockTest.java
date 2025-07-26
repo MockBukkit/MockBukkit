@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BossBarImplementationMockTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 
 	@Test
 	void updatesBossBar()

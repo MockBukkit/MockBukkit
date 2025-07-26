@@ -5,12 +5,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.ItemMock;
@@ -28,15 +27,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class InventoryViewMockTest
 {
-	private ServerMock server;
-	private InventoryViewMock view;
 
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		view = new SimpleInventoryViewMock();
-	}
+	@MockBukkitInject
+	private ServerMock server;
+	@MockBukkitInject
+	private InventoryViewMock view;
 
 	@Test
 	void constructorEmpty_AllNull()

@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.matcher.scheduler;
 
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
@@ -15,13 +15,9 @@ import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksM
 @ExtendWith(MockBukkitExtension.class)
 class SchedulerOverdueTasksMatcherTest extends AbstractMatcherTest
 {
-	private BukkitSchedulerMock scheduler;
 
-	@BeforeEach
-	void setUp()
-	{
-		this.scheduler = new BukkitSchedulerMock();
-	}
+	@MockBukkitInject
+	private BukkitSchedulerMock scheduler;
 
 	@Test
 	void hasNoOverdueTasks_noTasks()

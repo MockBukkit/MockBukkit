@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BlockDataMockTest
 {
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 
 	@Test
 	void matches_DoesMatch()

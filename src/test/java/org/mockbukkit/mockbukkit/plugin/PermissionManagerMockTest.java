@@ -26,17 +26,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PermissionManagerMockTest
 {
+
+	@MockBukkitInject
 	private PermissionManagerMock permissionManager;
 	private static final String PERMISSION_NODE_1 = "mockbukkit.plugin.permission1";
-	private Permission permission1;
+	private static final Permission permission1 = new Permission(PERMISSION_NODE_1);
 	@MockBukkitInject
 	private ServerMock serverMock;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.permissionManager = new PermissionManagerMock();
-		this.permission1 = new Permission(PERMISSION_NODE_1);
 		permissionManager.addPermission(permission1);
 	}
 

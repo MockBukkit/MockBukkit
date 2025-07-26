@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.matcher.inventory.meta;
 
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
@@ -15,13 +15,9 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMa
 @ExtendWith(MockBukkitExtension.class)
 class ItemMetaAnyLoreMatcherTest extends AbstractMatcherTest
 {
-	private ItemMetaMock itemMeta;
 
-	@BeforeEach
-	void setUp()
-	{
-		this.itemMeta = new ItemMetaMock();
-	}
+	@MockBukkitInject
+	private ItemMetaMock itemMeta;
 
 	@Test
 	void hasAnyLore_matches()
