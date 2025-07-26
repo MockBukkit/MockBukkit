@@ -149,9 +149,9 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		chest.setItem(0, sword);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		assertEquals(sword, view.getItem(0));
+		assertEquals(sword, view1.getItem(0));
 	}
 
 	@Test
@@ -159,9 +159,9 @@ class InventoryViewMockTest
 	{
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		assertNull(view.getItem(-1));
+		assertNull(view1.getItem(-1));
 	}
 
 	@Test
@@ -169,9 +169,9 @@ class InventoryViewMockTest
 	{
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		assertThrows(IndexOutOfBoundsException.class, () -> view.getItem(100));
+		assertThrows(IndexOutOfBoundsException.class, () -> view1.getItem(100));
 	}
 
 	@Test
@@ -181,9 +181,9 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		player.getInventory().setItem(0, sword);
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		assertEquals(sword, view.getItem(9));
+		assertEquals(sword, view1.getItem(9));
 	}
 
 	@Test
@@ -192,8 +192,8 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
-		view.setItem(0, sword);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
+		view1.setItem(0, sword);
 
 		assertEquals(sword, chest.getItem(0));
 
@@ -208,8 +208,8 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
-		view.setItem(9, sword);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
+		view1.setItem(9, sword);
 
 		assertEquals(sword, player.getInventory().getItem(0));
 
@@ -223,7 +223,7 @@ class InventoryViewMockTest
 	{
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
 		// Verify no items were dropped (since item was null) [ there can be only 1: the player ]
 		assertEquals(List.of(player), player.getWorld().getEntities());
@@ -235,9 +235,9 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		view.setItem(-1, sword);
+		view1.setItem(-1, sword);
 
 		List<Entity> entities = player.getWorld().getEntities().stream().filter(p -> !(p instanceof Player)).toList();
 		assertEquals(1, entities.size());
@@ -258,9 +258,9 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		assertThrows(IndexOutOfBoundsException.class, () -> view.setItem(100, sword));
+		assertThrows(IndexOutOfBoundsException.class, () -> view1.setItem(100, sword));
 	}
 
 }

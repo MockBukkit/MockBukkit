@@ -93,12 +93,12 @@ class EntityMockTest
 	void getLocation_IntoLocation_LocationCopied()
 	{
 		// This is different from injecting! When injecting, it's already placed inside the world.
-		SimpleEntityMock entity = new SimpleEntityMock(server);
+		SimpleEntityMock entity1 = new SimpleEntityMock(server);
 
 		Location location = new Location(world, 0, 0, 0);
-		Location location1 = entity.getLocation();
+		Location location1 = entity1.getLocation();
 		assertNotEquals(location, location1);
-		assertEquals(location1, entity.getLocation(location));
+		assertEquals(location1, entity1.getLocation(location));
 		assertEquals(location1, location);
 	}
 
