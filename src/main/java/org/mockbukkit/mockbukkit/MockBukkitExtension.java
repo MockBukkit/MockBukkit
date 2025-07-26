@@ -230,7 +230,19 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			return getEntityMock((Class<? extends Entity>) type);
 		}
 
-		return null;
+		return tryDefaultConstructor(type);
+	}
+
+	private @Nullable Object tryDefaultConstructor(@NotNull Class<?> type)
+	{
+		try
+		{
+			return type.getDeclaredConstructor().newInstance();
+		}
+		catch (ReflectiveOperationException e)
+		{
+			return null;
+		}
 	}
 
 	private @NotNull <T extends Entity> EntityMock getEntityMock(Class<T> clazz)
