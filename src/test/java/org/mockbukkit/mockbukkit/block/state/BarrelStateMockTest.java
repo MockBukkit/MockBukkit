@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BarrelStateMockTest extends ContainerStateMockTest
 {
+
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

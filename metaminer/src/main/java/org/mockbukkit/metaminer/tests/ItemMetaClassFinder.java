@@ -11,6 +11,7 @@ import java.util.Set;
 
 public class ItemMetaClassFinder
 {
+
 	public static List<ItemType> getInduvidualMetaItemTypes()
 	{
 		Set<Class<? extends ItemMeta>> itemMetaClasses = new HashSet<>();

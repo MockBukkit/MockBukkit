@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class DoorDataMockTest
 {
+
 	private DoorDataMock door;
 
 	@BeforeEach
@@ -31,6 +32,7 @@ class DoorDataMockTest
 	@Nested
 	class SetHinge
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -50,6 +52,7 @@ class DoorDataMockTest
 	@Nested
 	class SetHalf
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -69,6 +72,7 @@ class DoorDataMockTest
 	@Nested
 	class SetFacing
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -100,6 +104,7 @@ class DoorDataMockTest
 	@Nested
 	class SetOpen
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -119,6 +124,7 @@ class DoorDataMockTest
 	@Nested
 	class SetPowered
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

@@ -190,10 +190,11 @@ class BeeMockTest
 	@Nested
 	class SetTimeSinceSting
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
-			assertEquals(0,  bee.getTimeSinceSting());
+			assertEquals(0, bee.getTimeSinceSting());
 		}
 
 		@ParameterizedTest
@@ -201,7 +202,7 @@ class BeeMockTest
 		void givenValidValues(int time)
 		{
 			bee.setTimeSinceSting(time);
-			assertEquals(time,  bee.getTimeSinceSting());
+			assertEquals(time, bee.getTimeSinceSting());
 		}
 
 		@ParameterizedTest

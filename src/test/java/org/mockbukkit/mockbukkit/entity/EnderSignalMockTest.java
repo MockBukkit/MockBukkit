@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class EnderSignalMockTest
 {
+
 	@MockBukkitInject
 	private EnderSignal enderSignal;
 	@MockBukkitInject

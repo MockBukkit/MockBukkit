@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PrimitiveElementFactoryTest
 {
+
 	@ParameterizedTest
 	@ValueSource(booleans = { true, false })
 	void givenBoolean(boolean expectedValue)

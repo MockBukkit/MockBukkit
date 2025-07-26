@@ -65,6 +65,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 @ExtendWith(MockBukkitExtension.class)
 class LivingEntityMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

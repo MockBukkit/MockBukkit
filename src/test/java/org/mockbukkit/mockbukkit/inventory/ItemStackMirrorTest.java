@@ -13,9 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class ItemStackMirrorTest
 {
+
 	@Nested
 	class Create
 	{
+
 		@Test
 		void givenValidValue_ShouldNotBeTheSame()
 		{

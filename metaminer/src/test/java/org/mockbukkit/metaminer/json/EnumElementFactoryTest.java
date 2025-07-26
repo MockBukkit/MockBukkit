@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class EnumElementFactoryTest
 {
+
 	@Test
 	void givenNull()
 	{

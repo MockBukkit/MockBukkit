@@ -98,9 +98,11 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 	@Nested
 	class DescriptionTests
 	{
+
 		// Test implementation of Description to capture what gets written
 		private static class TestDescription implements Description
 		{
+
 			private final StringBuilder text = new StringBuilder();
 
 			@Override

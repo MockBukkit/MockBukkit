@@ -16,6 +16,7 @@ import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMat
 @ExtendWith(MockBukkitExtension.class)
 class CommandResultResponseMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	@MockBukkitInject

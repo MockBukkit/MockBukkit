@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitExtensionTest
 {
+
 	@MockBukkitInject
 	private ServerMock fieldServerMock;
 	private final ServerMock constructorParameterServerMock;
@@ -73,6 +74,7 @@ class MockBukkitExtensionTest
 	@Nested
 	class WithNestedClassWithoutAnnotation
 	{
+
 		@MockBukkitInject
 		private ServerMock nestedClassAnnotation;
 
@@ -100,6 +102,7 @@ class MockBukkitExtensionTest
 	@ExtendWith(MockBukkitExtension.class)
 	class WithNestedClassWithAnnotation
 	{
+
 		@MockBukkitInject
 		private ServerMock nestedClassAnnotation;
 
@@ -127,6 +130,7 @@ class MockBukkitExtensionTest
 	@ExtendWith(MockBukkitExtension.class)
 	class WithBukkitServer
 	{
+
 		@MockBukkitInject
 		private Server bukkitServer;
 

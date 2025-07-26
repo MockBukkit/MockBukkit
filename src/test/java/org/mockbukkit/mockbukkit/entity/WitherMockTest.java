@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 class WitherMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

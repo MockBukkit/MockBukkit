@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class DialogMockTest
 {
+
 	@Test
 	void getKey()
 	{

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class TrimMaterialMockTest
 {
+
 	@Test
 	void description()
 	{

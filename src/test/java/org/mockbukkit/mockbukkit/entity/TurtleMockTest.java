@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class TurtleMockTest
 {
+
 	@MockBukkitInject
 	private Turtle turtle;
 

@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class JigsawStateMockTest
 {
+
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

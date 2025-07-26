@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class SnifferMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
@@ -34,6 +35,7 @@ class SnifferMockTest
 	@Nested
 	class AddExploredLocations
 	{
+
 		@Test
 		void defaultExploredLocationsIsEmpty()
 		{
@@ -78,6 +80,7 @@ class SnifferMockTest
 	@Nested
 	class RemoveExploredLocation
 	{
+
 		@Test
 		void givenNullLocation()
 		{
@@ -118,6 +121,7 @@ class SnifferMockTest
 	@Nested
 	class SetState
 	{
+
 		@Test
 		void givenDefaultState()
 		{

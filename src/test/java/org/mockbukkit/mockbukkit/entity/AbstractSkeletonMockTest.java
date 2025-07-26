@@ -17,6 +17,7 @@ import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttack
 @ExtendWith(MockBukkitExtension.class)
 class AbstractSkeletonMockTest
 {
+
 	@MockBukkitInject
 	private AbstractSkeletonMock skeleton;
 

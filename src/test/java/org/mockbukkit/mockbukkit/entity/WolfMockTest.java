@@ -108,6 +108,7 @@ class WolfMockTest
 	@Nested
 	class GetVariant
 	{
+
 		@Test
 		void givenDefault()
 		{
@@ -142,6 +143,7 @@ class WolfMockTest
 	@Nested
 	class GetSoundVariant
 	{
+
 		@Test
 		void givenDefault()
 		{

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class DamageTypeMockTest
 {
+
 	@ParameterizedTest
 	@MethodSource("getMinecraftDamageTypes")
 	void from_GivenMinecraftExamples(ExpectedDamageType expectedDamageType)
@@ -39,6 +40,7 @@ class DamageTypeMockTest
 
 	record ExpectedDamageType(String key, String damageScaling, String sound, String deathMessageType, float exhaustion)
 	{
+
 	}
 
 	@Test

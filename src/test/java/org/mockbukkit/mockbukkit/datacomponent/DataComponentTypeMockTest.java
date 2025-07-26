@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class DataComponentTypeMockTest
 {
+
 	@Test
 	void valuedNonNull()
 	{

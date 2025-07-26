@@ -120,6 +120,7 @@ class PlayerInventoryMockTest
 	@Nested
 	class SetItem
 	{
+
 		@Test
 		void setItem_InInventory_ItemInContents()
 		{
@@ -283,6 +284,7 @@ class PlayerInventoryMockTest
 	@Nested
 	class GetItem
 	{
+
 		@ParameterizedTest
 		@EnumSource(value = EquipmentSlot.class, mode = EnumSource.Mode.EXCLUDE, names = { "BODY", "SADDLE" })
 		void getItem_Mirror(EquipmentSlot slot)

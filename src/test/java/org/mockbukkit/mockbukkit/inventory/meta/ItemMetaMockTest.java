@@ -1476,6 +1476,7 @@ class ItemMetaMockTest
 	@Nested
 	class HasItemName
 	{
+
 		@Test
 		void givenMetaWithoutName()
 		{
@@ -1495,6 +1496,7 @@ class ItemMetaMockTest
 	@Nested
 	class ItemName
 	{
+
 		@Test
 		void givenMetaWithoutName()
 		{
@@ -1518,6 +1520,7 @@ class ItemMetaMockTest
 	@Nested
 	class GetItemName
 	{
+
 		@Test
 		void givenMetaWithoutName()
 		{
@@ -1551,6 +1554,7 @@ class ItemMetaMockTest
 	@Nested
 	class GetEnchantmentGlintOverride
 	{
+
 		@Test
 		void givenDefault()
 		{
@@ -1616,6 +1620,7 @@ class ItemMetaMockTest
 	@Nested
 	class GetRarity
 	{
+
 		@Test
 		void givenDefault()
 		{

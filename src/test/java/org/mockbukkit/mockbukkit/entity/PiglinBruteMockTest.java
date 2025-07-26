@@ -51,6 +51,7 @@ class PiglinBruteMockTest
 	@Nested
 	class SetImmuneToZombification
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -71,6 +72,7 @@ class PiglinBruteMockTest
 	@Nested
 	class SetConversionTime
 	{
+
 		@Test
 		void givenDefault_WhenEntityIsNotInWorld_ShouldThrow()
 		{
@@ -115,6 +117,7 @@ class PiglinBruteMockTest
 	@Nested
 	class IsConverting
 	{
+
 		@Test
 		void giveEntityThatIsNotInWorld_ShouldThrow()
 		{
@@ -175,6 +178,7 @@ class PiglinBruteMockTest
 	@Nested
 	class SetBaby
 	{
+
 		@Test
 		void givenDefault_ShouldReturnFalse()
 		{
@@ -216,6 +220,7 @@ class PiglinBruteMockTest
 	@Nested
 	class SetAge
 	{
+
 		@Test
 		void givenDefault_ShouldReturnFalse()
 		{

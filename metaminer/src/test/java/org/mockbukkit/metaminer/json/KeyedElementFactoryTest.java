@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class KeyedElementFactoryTest
 {
+
 	@Test
 	void givenNull()
 	{

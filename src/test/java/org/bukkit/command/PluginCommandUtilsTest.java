@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PluginCommandUtilsTest
 {
+
 	@Test
 	void testConstructorIsPrivate() throws NoSuchMethodException
 	{

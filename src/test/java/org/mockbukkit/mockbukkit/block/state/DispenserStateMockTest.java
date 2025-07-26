@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class DispenserStateMockTest extends ContainerStateMockTest
 {
+
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

@@ -36,6 +36,7 @@ class SalmonMockTest
 	@Nested
 	class GetVariant
 	{
+
 		@Test
 		void givenDefault()
 		{

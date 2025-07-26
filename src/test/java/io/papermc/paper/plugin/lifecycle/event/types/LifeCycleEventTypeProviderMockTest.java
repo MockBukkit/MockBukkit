@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 @ExtendWith(MockBukkitExtension.class)
 class LifeCycleEventTypeProviderMockTest
 {
+
 	@MockBukkitInject
 	private PluginMock lifeCycleEventOwner;
 

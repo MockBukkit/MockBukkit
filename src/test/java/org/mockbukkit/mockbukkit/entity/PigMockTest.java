@@ -117,6 +117,7 @@ class PigMockTest
 	@Nested
 	class GetVariant
 	{
+
 		@Test
 		void givenDefault()
 		{

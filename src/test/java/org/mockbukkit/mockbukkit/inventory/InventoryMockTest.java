@@ -728,6 +728,7 @@ class InventoryMockTest
 	@Nested
 	class SetCustomTitle
 	{
+
 		@ParameterizedTest
 		@EnumSource(InventoryType.class)
 		void givenNullTitle(InventoryType type)
@@ -763,6 +764,7 @@ class InventoryMockTest
 	@Nested
 	class IsIdentical
 	{
+
 		@MockBukkitInject
 		private ServerMock serverMock;
 
@@ -861,6 +863,7 @@ class InventoryMockTest
 	@Nested
 	class Issues
 	{
+
 		@Test
 		@DisplayName("ItemStacks should not be cloned, they should be mirrored.")
 		void issue1322()

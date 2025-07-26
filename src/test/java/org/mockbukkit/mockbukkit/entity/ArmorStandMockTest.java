@@ -27,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ArmorStandMockTest
 {
+
 	private static final double ACCEPTABLE_ERROR_DELTA = 0.0000000001;
 
 	@MockBukkitInject

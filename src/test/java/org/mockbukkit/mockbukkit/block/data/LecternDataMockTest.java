@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class LecternDataMockTest
 {
+
 	private LecternDataMock lectern;
 
 	@BeforeEach
@@ -29,6 +30,7 @@ class LecternDataMockTest
 	@Nested
 	class SetHasBook
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -48,6 +50,7 @@ class LecternDataMockTest
 	@Nested
 	class SetFacing
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -79,6 +82,7 @@ class LecternDataMockTest
 	@Nested
 	class SetPowered
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

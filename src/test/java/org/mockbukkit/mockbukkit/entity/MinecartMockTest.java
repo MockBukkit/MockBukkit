@@ -225,6 +225,7 @@ class MinecartMockTest
 
 	private static class MockMinecart extends MinecartMock
 	{
+
 		protected MockMinecart(@NotNull ServerMock server, @NotNull UUID uuid)
 		{
 			super(server, uuid);

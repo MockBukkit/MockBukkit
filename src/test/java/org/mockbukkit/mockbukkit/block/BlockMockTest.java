@@ -40,6 +40,7 @@ import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.h
 @ExtendWith(MockBukkitExtension.class)
 class BlockMockTest
 {
+
 	private BlockMock block;
 	private Location location;
 

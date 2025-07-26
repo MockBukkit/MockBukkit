@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 public class FoodConsumptionLoadTest
 {
+
 	@Test
 	void testLoadingDoesNotThrow()
 	{

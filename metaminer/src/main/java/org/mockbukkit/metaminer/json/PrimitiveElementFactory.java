@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PrimitiveElementFactory
 {
+
 	/**
 	 * Converts a boolean into a JsonElement.
 	 *

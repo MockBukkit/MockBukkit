@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 public class ItemStackTestDataGenerator implements DataGenerator
 {
+
 	private final File folder;
 
 	public ItemStackTestDataGenerator(File pluginDataFolder)
@@ -16,7 +17,8 @@ public class ItemStackTestDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() {
+	public void generateData()
+	{
 		getGenerators().forEach(dataGenerator ->
 		{
 			try

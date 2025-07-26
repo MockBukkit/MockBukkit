@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ResourceLoaderTest
 {
+
 	private static final String VALID_RESOURCE_PATH = "/test-resource.json";
 	private static final String INVALID_RESOURCE_PATH = "/non-existent-resource.json";
 	private static final String CORRUPTED_RESOURCE_PATH = "/corrupted-resource.json";

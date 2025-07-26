@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 class SmithingInventoryMockTest
 {
+
 	private SmithingInventoryMock inventory;
 
 	@BeforeEach

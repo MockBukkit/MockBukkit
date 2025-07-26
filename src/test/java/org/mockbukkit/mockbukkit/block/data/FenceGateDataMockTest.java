@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class FenceGateDataMockTest
 {
+
 	private FenceGateDataMock gate;
 
 	@BeforeEach
@@ -29,6 +30,7 @@ class FenceGateDataMockTest
 	@Nested
 	class SetEnabled
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -48,6 +50,7 @@ class FenceGateDataMockTest
 	@Nested
 	class SetFacing
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -79,6 +82,7 @@ class FenceGateDataMockTest
 	@Nested
 	class SetOpen
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -98,6 +102,7 @@ class FenceGateDataMockTest
 	@Nested
 	class SetPowered
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

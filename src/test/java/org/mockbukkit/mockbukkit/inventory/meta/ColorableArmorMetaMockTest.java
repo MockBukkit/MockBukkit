@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ColorableArmorMetaMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

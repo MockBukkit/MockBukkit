@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class CreakingMockTest
 {
+
 	@MockBukkitInject
 	private CreakingMock creaking;
 
@@ -30,6 +31,7 @@ class CreakingMockTest
 	@Nested
 	class Activate
 	{
+
 		@Test
 		void givenNullPlayer_thenIllegalArgumentException()
 		{
@@ -63,6 +65,7 @@ class CreakingMockTest
 	@Nested
 	class GetHome
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnNull()
 		{

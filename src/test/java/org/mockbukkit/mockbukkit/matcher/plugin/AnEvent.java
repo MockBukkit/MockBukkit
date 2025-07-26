@@ -12,6 +12,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 @ExtendWith(MockBukkitExtension.class)
 class AnEvent extends Event
 {
+
 	private static final HandlerList handlers = new HandlerList();
 
 	@Override

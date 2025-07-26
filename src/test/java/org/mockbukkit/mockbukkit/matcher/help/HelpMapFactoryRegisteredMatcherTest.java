@@ -20,6 +20,7 @@ import static org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMat
 @ExtendWith(MockBukkitExtension.class)
 class HelpMapFactoryRegisteredMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private HelpMapMock helpMap;

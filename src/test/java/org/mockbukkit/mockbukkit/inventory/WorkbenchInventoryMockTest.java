@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class WorkbenchInventoryMockTest
 {
+
 	private WorkbenchInventoryMock workbench;
 
 	@BeforeEach
@@ -50,6 +51,7 @@ class WorkbenchInventoryMockTest
 	@Nested
 	class SetMatrix
 	{
+
 		@Test
 		void testSetMatrix()
 		{

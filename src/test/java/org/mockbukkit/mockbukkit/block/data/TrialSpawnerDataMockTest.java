@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class TrialSpawnerDataMockTest
 {
+
 	private TrialSpawnerDataMock spawner;
 
 	@BeforeEach
@@ -28,6 +29,7 @@ class TrialSpawnerDataMockTest
 	@Nested
 	class SetTrialSpawnerState
 	{
+
 		@Test
 		void givenDefaultAxis()
 		{
@@ -47,6 +49,7 @@ class TrialSpawnerDataMockTest
 	@Nested
 	class SetOminous
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

@@ -21,12 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PhantomMockTest
 {
+
 	@MockBukkitInject
 	private PhantomMock phantom;
 
 	@Nested
 	class SetSize
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -74,6 +76,7 @@ class PhantomMockTest
 	@Nested
 	class SetSpawningEntity
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -97,6 +100,7 @@ class PhantomMockTest
 	@Nested
 	class ShouldBurnInDay
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -116,6 +120,7 @@ class PhantomMockTest
 	@Nested
 	class SetAnchorLocation
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

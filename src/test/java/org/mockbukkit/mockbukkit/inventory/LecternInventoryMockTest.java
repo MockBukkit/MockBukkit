@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class LecternInventoryMockTest
 {
+
 	private LecternInventoryMock inventory;
 	private LecternStateMock block;
 

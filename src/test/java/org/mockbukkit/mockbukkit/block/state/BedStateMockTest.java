@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ExtendWith(MockBukkitExtension.class)
 class BedStateMockTest
 {
+
 	@Test
 	void constructor_Material()
 	{

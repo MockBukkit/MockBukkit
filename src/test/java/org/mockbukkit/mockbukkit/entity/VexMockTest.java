@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class VexMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
@@ -31,6 +32,7 @@ class VexMockTest
 	@Nested
 	class SetCharging
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -50,6 +52,7 @@ class VexMockTest
 	@Nested
 	class SetBound
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -113,6 +116,7 @@ class VexMockTest
 	@Nested
 	class SetSummoner
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -136,6 +140,7 @@ class VexMockTest
 	@Nested
 	class SetLimitedLifetime
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -155,6 +160,7 @@ class VexMockTest
 	@Nested
 	class SetLimitedLifetimeTicks
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

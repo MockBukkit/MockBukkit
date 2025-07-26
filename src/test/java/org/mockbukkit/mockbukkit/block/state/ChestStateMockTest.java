@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ChestStateMockTest extends ContainerStateMockTest
 {
+
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
@@ -109,6 +110,7 @@ class ChestStateMockTest extends ContainerStateMockTest
 	@Nested
 	class GetBlockInventory
 	{
+
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenSameInventoryIsReturned()
 		{
@@ -125,6 +127,7 @@ class ChestStateMockTest extends ContainerStateMockTest
 	@Nested
 	class GetSnapshotInventory
 	{
+
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenDifferentInventoryIsReturned()
 		{
@@ -177,6 +180,7 @@ class ChestStateMockTest extends ContainerStateMockTest
 	@Nested
 	class Copy
 	{
+
 		@Test
 		void shouldCloneInventory()
 		{

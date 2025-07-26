@@ -36,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class DamageSourceMockTest
 {
+
 	private final Location damageLocation = new Location(new WorldMock(), 0, 0, 0);
 
 	@MockBukkitInject

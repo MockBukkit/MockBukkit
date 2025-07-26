@@ -64,6 +64,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class UnsafeValuesTest
 {
+
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
 	private static final Logger log = LoggerFactory.getLogger(UnsafeValuesTest.class);
 

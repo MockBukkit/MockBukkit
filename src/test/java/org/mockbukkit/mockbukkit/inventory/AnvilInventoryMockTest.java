@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class AnvilInventoryMockTest
 {
+
 	private AnvilInventoryMock inventory;
 
 	@BeforeEach

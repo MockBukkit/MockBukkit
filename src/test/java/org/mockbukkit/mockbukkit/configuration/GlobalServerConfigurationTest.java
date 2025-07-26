@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class GlobalServerConfigurationTest
 {
+
 	final ServerConfiguration config = new ServerConfiguration();
 
 	@Test

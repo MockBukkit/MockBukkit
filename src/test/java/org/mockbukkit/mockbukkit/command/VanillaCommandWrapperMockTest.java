@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class VanillaCommandWrapperMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private VanillaCommandWrapperMock command;

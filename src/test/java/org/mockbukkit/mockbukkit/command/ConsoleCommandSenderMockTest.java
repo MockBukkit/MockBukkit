@@ -29,6 +29,7 @@ import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMes
 @ExtendWith(MockBukkitExtension.class)
 class ConsoleCommandSenderMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private ConsoleCommandSenderMock sender;
@@ -258,6 +259,7 @@ class ConsoleCommandSenderMockTest
 	@Nested
 	class CommandSenderSpigotMock
 	{
+
 		@Test
 		void sendMessage_GivenSimpleMessage()
 		{

@@ -21,9 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class TagRegistryTest
 {
+
 	@Nested
 	class Blocks
 	{
+
 		@Test
 		void givenEntityTypes()
 		{
@@ -49,6 +51,7 @@ class TagRegistryTest
 	@Nested
 	class EntityTypes
 	{
+
 		@Test
 		void givenEntityTypes()
 		{
@@ -74,6 +77,7 @@ class TagRegistryTest
 	@Nested
 	class Items
 	{
+
 		@Test
 		void givenItems()
 		{
@@ -99,6 +103,7 @@ class TagRegistryTest
 	@Nested
 	class Fluids
 	{
+
 		@Test
 		void givenFluids()
 		{
@@ -124,6 +129,7 @@ class TagRegistryTest
 	@Nested
 	class GameEvents
 	{
+
 		@Test
 		void givenGameEvents()
 		{

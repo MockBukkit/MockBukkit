@@ -9,6 +9,7 @@ import org.mockbukkit.metaminer.json.KeyedElementFactory;
 
 public class StoneCuttingRecipeElementFactory
 {
+
 	/**
 	 * Converts a stonecutting recipe into a JsonElement.
 	 *

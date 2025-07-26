@@ -21,6 +21,7 @@ import java.util.stream.Stream;
 
 public class CraftingRecipeElementFactory
 {
+
 	/**
 	 * Converts a crafting recipe into a JsonElement.
 	 *

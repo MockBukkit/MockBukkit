@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class EnchantingInventoryMockTest
 {
+
 	private EnchantingInventoryMock inventory;
 
 	@BeforeEach

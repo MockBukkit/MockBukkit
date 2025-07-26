@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class ChunkCoordinateTest
 {
+
 	@ParameterizedTest
 	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
 	void getX(int value)
@@ -33,6 +34,7 @@ class ChunkCoordinateTest
 	@Nested
 	class Equals
 	{
+
 		@Test
 		void givenEqualValues()
 		{
@@ -68,6 +70,7 @@ class ChunkCoordinateTest
 	@Nested
 	class HashCode
 	{
+
 		@Test
 		void givenEqualValues()
 		{

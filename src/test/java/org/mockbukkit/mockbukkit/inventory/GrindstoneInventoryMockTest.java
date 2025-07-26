@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class GrindstoneInventoryMockTest
 {
+
 	private GrindstoneInventoryMock inventory;
 
 	@BeforeEach

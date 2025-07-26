@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class RepeatingTaskTest
 {
+
 	@Test
 	void getScheduledTick_Start_IsEqualToDelay()
 	{

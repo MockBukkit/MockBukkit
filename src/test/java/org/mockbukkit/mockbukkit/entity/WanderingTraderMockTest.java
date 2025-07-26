@@ -16,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class WanderingTraderMockTest
 {
+
 	@MockBukkitInject
 	private WanderingTraderMock wanderingTrader;
 
 	@Nested
 	class SetDespawnDelay
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnZero()
 		{
@@ -41,6 +43,7 @@ class WanderingTraderMockTest
 	@Nested
 	class SetCanDrinkPotion
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnTrue()
 		{
@@ -60,6 +63,7 @@ class WanderingTraderMockTest
 	@Nested
 	class SetCanDrinkMilk
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnTrue()
 		{
@@ -79,6 +83,7 @@ class WanderingTraderMockTest
 	@Nested
 	class SetWanderingTowards
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnNull()
 		{

@@ -76,12 +76,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
@@ -150,6 +152,7 @@ import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMat
 @ExtendWith(MockBukkitExtension.class)
 class PlayerMockTest
 {
+
 	// Taken from https://minecraft.wiki/w/Experience#Leveling_up
 	private static final int[] expRequired =
 			{
@@ -2607,6 +2610,7 @@ class PlayerMockTest
 	@Nested
 	class PlayerSpigotMock
 	{
+
 		@Test
 		void sendMessage_GivenSimpleMessage()
 		{
@@ -2742,6 +2746,7 @@ class PlayerMockTest
 	@Nested
 	class DeathScreenScore
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -2763,6 +2768,7 @@ class PlayerMockTest
 	@Nested
 	class SetAllowServerListings
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -2783,6 +2789,7 @@ class PlayerMockTest
 	@Nested
 	class SetPlayerListOrder
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -2811,6 +2818,7 @@ class PlayerMockTest
 	@Nested
 	class SetHaProxyAddress
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -2832,6 +2840,7 @@ class PlayerMockTest
 	@Nested
 	class Ban
 	{
+
 		private static final String REASON = "Test reason";
 		private static final String SOURCE = "TEST-SOURCE";
 
@@ -2960,6 +2969,7 @@ class PlayerMockTest
 	@Nested
 	class BanIp
 	{
+
 		private static final String REASON = "Test reason";
 		private static final String SOURCE = "TEST-SOURCE";
 
@@ -3082,6 +3092,7 @@ class PlayerMockTest
 	@Nested
 	class SetSleepingIgnored
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3102,6 +3113,7 @@ class PlayerMockTest
 	@Nested
 	class SetPlayerTime
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3152,6 +3164,7 @@ class PlayerMockTest
 	@Nested
 	class SetPlayerWeather
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3181,6 +3194,7 @@ class PlayerMockTest
 	@Nested
 	class SetFlyingFallDamage
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3201,6 +3215,7 @@ class PlayerMockTest
 	@Nested
 	class SetHasSeenWinScreen
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3221,6 +3236,7 @@ class PlayerMockTest
 	@Nested
 	class SetSpectatorTarget
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3253,6 +3269,7 @@ class PlayerMockTest
 	@Nested
 	class SetFlySpeed
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -3281,6 +3298,7 @@ class PlayerMockTest
 	@Nested
 	class SetAffectsSpawning
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

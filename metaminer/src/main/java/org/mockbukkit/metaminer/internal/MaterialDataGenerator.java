@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 
 public class MaterialDataGenerator implements DataGenerator
 {
+
 	private final File dataFolder;
 	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("\\[(.*)]");
 

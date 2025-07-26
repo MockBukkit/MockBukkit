@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class AmethystClusterDataMockTest
 {
+
 	private AmethystClusterDataMock cluster;
 
 	@BeforeEach

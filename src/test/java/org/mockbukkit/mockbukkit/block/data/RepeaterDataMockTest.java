@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class RepeaterDataMockTest
 {
+
 	private RepeaterDataMock repeater;
 
 	@BeforeEach
@@ -29,6 +30,7 @@ class RepeaterDataMockTest
 	@Nested
 	class SetDelay
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -56,6 +58,7 @@ class RepeaterDataMockTest
 	@Nested
 	class SetLocked
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -75,6 +78,7 @@ class RepeaterDataMockTest
 	@Nested
 	class SetFacing
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -106,6 +110,7 @@ class RepeaterDataMockTest
 	@Nested
 	class SetPowered
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

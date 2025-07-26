@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class BiomeProviderMockTest
 {
+
 	@Test
 	void getBiome()
 	{

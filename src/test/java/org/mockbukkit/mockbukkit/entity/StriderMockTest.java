@@ -20,12 +20,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class StriderMockTest
 {
+
 	@MockBukkitInject
 	private Strider strider;
 
 	@Nested
 	class IsShivering
 	{
+
 		@Test
 		void withDefaultValue()
 		{
@@ -51,6 +53,7 @@ class StriderMockTest
 	@Nested
 	class HasSaddle
 	{
+
 		@Test
 		void withDefaultValue()
 		{
@@ -76,6 +79,7 @@ class StriderMockTest
 	@Nested
 	class GetBoostTicks
 	{
+
 		@Test
 		void withDefaultValue()
 		{
@@ -103,6 +107,7 @@ class StriderMockTest
 	@Nested
 	class GetCurrentBoostTicks
 	{
+
 		private static final int MAX_TICKS = 10;
 
 		@Test

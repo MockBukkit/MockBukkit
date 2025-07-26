@@ -16,6 +16,7 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatche
 @ExtendWith(MockBukkitExtension.class)
 class EntityTeleportationMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	@MockBukkitInject

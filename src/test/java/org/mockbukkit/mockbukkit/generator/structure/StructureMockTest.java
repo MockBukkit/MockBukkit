@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class StructureMockTest
 {
+
 	private StructureMock structure;
 	private StructureTypeMock structureType;
 	private static final String NAME_SPACE = "mock_bukkit";

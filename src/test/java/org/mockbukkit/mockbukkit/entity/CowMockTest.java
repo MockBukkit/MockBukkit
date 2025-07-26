@@ -47,6 +47,7 @@ class CowMockTest
 	@Nested
 	class GetVariant
 	{
+
 		@Test
 		void givenDefault()
 		{

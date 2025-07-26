@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class PaperProfileBanEntryMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	PaperProfileBanEntryMock entry;

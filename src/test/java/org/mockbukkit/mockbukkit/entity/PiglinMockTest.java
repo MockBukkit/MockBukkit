@@ -23,12 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PiglinMockTest
 {
+
 	@MockBukkitInject
 	private PiglinMock piglin;
 
 	@Nested
 	class SetIsAbleToHunt
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -49,6 +51,7 @@ class PiglinMockTest
 	@Nested
 	class GetBarterList
 	{
+
 		@Test
 		void givenDefaultValue_ShouldSucceed()
 		{
@@ -95,6 +98,7 @@ class PiglinMockTest
 	@Nested
 	class GetInterestList
 	{
+
 		@Test
 		void givenDefaultValue_ShouldSucceed()
 		{
@@ -141,6 +145,7 @@ class PiglinMockTest
 	@Nested
 	class SetChargingCrossbow
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -161,6 +166,7 @@ class PiglinMockTest
 	@Nested
 	class GetInventory
 	{
+
 		@Test
 		void givenDefaultValue_SizeShouldBeEight()
 		{

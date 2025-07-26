@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SmokingRecipeElementFactory
 {
+
 	/**
 	 * Converts a recipe into a JsonElement.
 	 *

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class RotatableDataMockTest
 {
+
 	private RotatableDataMock rotatable;
 
 	@BeforeEach
@@ -27,6 +28,7 @@ class RotatableDataMockTest
 	@Nested
 	class SetRotation
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

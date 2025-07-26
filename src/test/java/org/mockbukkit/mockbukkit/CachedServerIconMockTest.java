@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 class CachedServerIconMockTest
 {
+
 	@Test
 	void constructor_NotNull_SetsData()
 	{

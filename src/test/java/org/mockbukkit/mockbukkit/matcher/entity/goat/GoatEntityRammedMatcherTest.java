@@ -15,6 +15,7 @@ import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatc
 @ExtendWith(MockBukkitExtension.class)
 class GoatEntityRammedMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	@MockBukkitInject

@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class SilverfishMockTest
 {
+
 	@MockBukkitInject
 	private SilverfishMock silverfish;
 

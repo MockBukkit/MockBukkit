@@ -22,11 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BrainMockTest
 {
+
 	private final BrainMock brain = new BrainMock();
 
 	@Nested
 	class AssertIsSupportedValue
 	{
+
 		@Test
 		void giveNullValue()
 		{
@@ -78,6 +80,7 @@ class BrainMockTest
 	@Nested
 	class SetMemory
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -129,6 +132,7 @@ class BrainMockTest
 	@Nested
 	class GetMemory
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -141,6 +145,7 @@ class BrainMockTest
 	@Nested
 	class HasMemoryValue
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -169,6 +174,7 @@ class BrainMockTest
 	@Nested
 	class EraseMemory
 	{
+
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -205,6 +211,7 @@ class BrainMockTest
 	@Nested
 	class ClearMemories
 	{
+
 		@Test
 		void givenExistingMemoryKey()
 		{
@@ -236,6 +243,7 @@ class BrainMockTest
 	@Nested
 	class Clone
 	{
+
 		@Test
 		void givenExistingMemoryKey()
 		{

@@ -16,9 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class ArtMockTest
 {
+
 	@Nested
 	class ValidateArtInformation
 	{
+
 		@ParameterizedTest
 		@CsvSource({
 				"minecraft:alban, 1, 1, '§epainting.minecraft.alban.title', '§7painting.minecraft.alban.author'",

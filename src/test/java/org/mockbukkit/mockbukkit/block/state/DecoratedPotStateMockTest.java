@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class DecoratedPotStateMockTest
 {
+
 	private @NotNull DecoratedPotStateMock pot;
 
 	@BeforeEach

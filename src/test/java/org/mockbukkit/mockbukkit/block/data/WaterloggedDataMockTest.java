@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class WaterloggedDataMockTest
 {
+
 	private WaterloggedDataMock waterlogged;
 
 	@BeforeEach
@@ -26,6 +27,7 @@ class WaterloggedDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

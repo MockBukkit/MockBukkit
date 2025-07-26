@@ -62,6 +62,7 @@ class ShulkerBulletMockTest
 	@Nested
 	class TargetDelta
 	{
+
 		@Test
 		void givenDefault_ShouldReturnOrigin()
 		{
@@ -112,6 +113,7 @@ class ShulkerBulletMockTest
 	@Nested
 	class CurrentMovementDirection
 	{
+
 		@Test
 		void givenDefault_ShouldReturnNull()
 		{
@@ -160,6 +162,7 @@ class ShulkerBulletMockTest
 	@Nested
 	class FlightSteps
 	{
+
 		@Test
 		void givenDefault_ShouldReturnNull()
 		{

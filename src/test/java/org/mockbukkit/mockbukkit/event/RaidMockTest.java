@@ -36,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class RaidMockTest
 {
+
 	private final World raidWorld = new WorldMock();
 	private final Location raidLocation = new Location(raidWorld, 0, 0, 0);
 	private final RaidMock raid = new RaidMock(1, raidLocation);

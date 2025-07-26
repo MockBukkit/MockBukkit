@@ -17,6 +17,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 @ExtendWith(MockBukkitExtension.class)
 class SoundReceiverSoundHeardMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	@MockBukkitInject

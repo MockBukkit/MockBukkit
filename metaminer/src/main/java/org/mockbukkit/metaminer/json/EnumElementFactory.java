@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class EnumElementFactory
 {
+
 	/**
 	 * Converts a enum element into a JsonElement.
 	 *

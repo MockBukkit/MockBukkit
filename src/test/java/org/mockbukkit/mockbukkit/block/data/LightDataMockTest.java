@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class LightDataMockTest
 {
+
 	private LightDataMock light;
 
 	@BeforeEach
@@ -27,6 +28,7 @@ class LightDataMockTest
 	@Nested
 	class SetLevel
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -54,6 +56,7 @@ class LightDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

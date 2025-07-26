@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class EquipmentSlotGroupElementFactory
 {
+
 	/**
 	 * Converts a equipmentSlotGroup element into a JsonElement.
 	 *

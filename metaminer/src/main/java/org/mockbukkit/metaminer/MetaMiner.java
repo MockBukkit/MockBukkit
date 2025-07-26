@@ -20,6 +20,7 @@ import java.util.logging.Level;
 
 public class MetaMiner extends JavaPlugin
 {
+
 	@Override
 	public void onEnable()
 	{

@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 class MapCanvasMockTest
 {
+
 	private MapCanvasMock canvas;
 
 	@BeforeEach

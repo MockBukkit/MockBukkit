@@ -28,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class EntityEquipmentMockTest
 {
+
 	private EntityEquipment equipment;
 	@MockBukkitInject
 	private ZombieMock holder;

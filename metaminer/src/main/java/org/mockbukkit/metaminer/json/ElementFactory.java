@@ -25,6 +25,7 @@ import java.util.Set;
 
 public class ElementFactory
 {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ElementFactory.class);
 	private static final Set<String> LOGGED_NAMES = new HashSet<>();
 

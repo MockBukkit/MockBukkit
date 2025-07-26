@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class EnderPearlMockTest
 {
+
 	@MockBukkitInject
 	private EnderPearl pearl;
 

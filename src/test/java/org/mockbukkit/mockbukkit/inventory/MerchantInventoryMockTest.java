@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class MerchantInventoryMockTest
 {
+
 	@MockBukkitInject
 	private VillagerMock merchant;
 	private MerchantInventoryMock inventory;

@@ -50,6 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ItemStackMockTest
 {
+
 	private static final Pattern CLASS_NAME_RE = Pattern.compile("([a-zA-Z\\d_]*$)");
 
 	@ParameterizedTest

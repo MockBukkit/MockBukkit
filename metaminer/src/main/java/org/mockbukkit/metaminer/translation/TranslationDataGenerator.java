@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class TranslationDataGenerator implements DataGenerator
 {
+
 	private final File dataFolder;
 
 	public TranslationDataGenerator(File dataFolder)

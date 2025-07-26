@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 public class LlamaSpitMockTest
 {
+
 	@MockBukkitInject
 	private LlamaSpit llamaSpit;
 

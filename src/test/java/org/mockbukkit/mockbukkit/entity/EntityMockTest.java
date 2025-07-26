@@ -1095,6 +1095,7 @@ class EntityMockTest
 	@Nested
 	class SetVisualFire
 	{
+
 		@Test
 		void testSetVisualFire()
 		{

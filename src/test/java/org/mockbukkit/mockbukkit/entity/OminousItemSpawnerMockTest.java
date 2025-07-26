@@ -16,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class OminousItemSpawnerMockTest
 {
+
 	@MockBukkitInject
 	private OminousItemSpawnerMock ominousSpawner;
 
 	@Nested
 	class SetItem
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -46,6 +48,7 @@ class OminousItemSpawnerMockTest
 	@Nested
 	class SetSpawnItemAfterTicks
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

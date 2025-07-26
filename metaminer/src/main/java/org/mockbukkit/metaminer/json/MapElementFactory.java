@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 public class MapElementFactory
 {
+
 	/**
 	 * Converts a map into a JsonElement.
 	 *

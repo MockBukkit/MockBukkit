@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class AbstractProjectileMockTest
 {
+
 	@MockBukkitInject
 	private AbstractProjectileMock abstractProjectile;
 
@@ -34,6 +35,7 @@ class AbstractProjectileMockTest
 	@Nested
 	class SetShooter
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -55,6 +57,7 @@ class AbstractProjectileMockTest
 	@Nested
 	class SetHasLeftShooter
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -75,6 +78,7 @@ class AbstractProjectileMockTest
 	@Nested
 	class SetHasBeenShot
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

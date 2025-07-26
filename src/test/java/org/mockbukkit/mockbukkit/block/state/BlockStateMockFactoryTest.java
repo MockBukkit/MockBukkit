@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 @ExtendWith(MockBukkitExtension.class)
 class BlockStateMockFactoryTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 

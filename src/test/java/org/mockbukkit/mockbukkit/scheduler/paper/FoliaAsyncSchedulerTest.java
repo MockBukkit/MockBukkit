@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class FoliaAsyncSchedulerTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

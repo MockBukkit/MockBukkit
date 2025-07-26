@@ -14,6 +14,7 @@ import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedAny
 @ExtendWith(MockBukkitExtension.class)
 class MessageTargetReceivedAnyMessageMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	@MockBukkitInject

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CollectionElementFactoryTest
 {
+
 	@ParameterizedTest
 	@NullAndEmptySource
 	void givenNullOrEmptyValue(List<String> values)

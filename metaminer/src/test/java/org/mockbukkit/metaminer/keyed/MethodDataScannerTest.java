@@ -25,12 +25,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MethodDataScannerTest
 {
+
 	@Nested
 	class GetReturnValue
 	{
+
 		@Nested
 		class Primitives
 		{
+
 			@Test
 			void givenVoidType() throws InvocationTargetException, IllegalAccessException
 			{
@@ -191,6 +194,7 @@ class MethodDataScannerTest
 
 	static class UnderTestClass
 	{
+
 		static void voidMethod()
 		{
 			// Nothing to do here

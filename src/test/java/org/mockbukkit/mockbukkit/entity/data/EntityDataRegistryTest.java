@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class EntityDataRegistryTest
 {
+
 	@MockBukkitInject
 	private WorldMock world;
 

@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ExtendWith(MockBukkitExtension.class)
 class BannerStateMockTest
 {
+
 	private BannerStateMock meta;
 
 	@BeforeEach

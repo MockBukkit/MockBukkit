@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CompassMetaMockTest
 {
 
-    @MockBukkitInject
+	@MockBukkitInject
 	private CompassMetaMock meta;
 
 	@Test

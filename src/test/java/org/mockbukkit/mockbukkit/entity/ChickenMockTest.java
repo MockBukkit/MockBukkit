@@ -114,6 +114,7 @@ class ChickenMockTest
 	@Nested
 	class GetVariant
 	{
+
 		@Test
 		void givenDefault()
 		{

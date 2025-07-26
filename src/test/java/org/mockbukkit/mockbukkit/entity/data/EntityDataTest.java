@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class EntityDataTest
 {
+
 	String fakeData;
 	private EntityData entityData;
 

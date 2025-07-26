@@ -141,6 +141,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 @ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 
@@ -470,6 +471,7 @@ class ServerMockTest
 	@Nested
 	class GetRecipe
 	{
+
 		@ParameterizedTest
 		@ValueSource(strings = {
 				"minecraft:bamboo_block",
@@ -508,6 +510,7 @@ class ServerMockTest
 	@Nested
 	class GetCraftingRecipe
 	{
+
 		private final World world = new WorldMock();
 
 		@Test
@@ -566,6 +569,7 @@ class ServerMockTest
 	@Nested
 	class CraftItem
 	{
+
 		private final World world = new WorldMock();
 
 		@Test
@@ -1633,9 +1637,11 @@ class ServerMockTest
 	@Nested
 	class CreateInventory
 	{
+
 		@Nested
 		class InventoryHolderAndInventoryType
 		{
+
 			@ParameterizedTest
 			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
 			void shouldSucceed(InventoryType inventoryType)
@@ -1667,6 +1673,7 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndInventoryTypeAndComponentTitle
 		{
+
 			@ParameterizedTest
 			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
 			void shouldSucceed(InventoryType inventoryType)
@@ -1692,6 +1699,7 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndInventoryTypeAndStringTitle
 		{
+
 			@ParameterizedTest
 			@ArgumentsSource(OnlyCreatableInventoryTypeArgumentProvider.class)
 			void shouldSucceed(InventoryType inventoryType)
@@ -1730,6 +1738,7 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndSize
 		{
+
 			@ParameterizedTest
 			@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
 			void shouldSucceed(int size)
@@ -1752,6 +1761,7 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndSizeAndComponentTitle
 		{
+
 			@ParameterizedTest
 			@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
 			void shouldSucceed(int size)
@@ -1775,6 +1785,7 @@ class ServerMockTest
 		@Nested
 		class InventoryHolderAndSizeAndStringTitle
 		{
+
 			@ParameterizedTest
 			@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
 			void shouldSucceed(int size)
@@ -1796,6 +1807,7 @@ class ServerMockTest
 
 		static class OnlyCreatableInventoryTypeArgumentProvider implements ArgumentsProvider
 		{
+
 			@Override
 			public Stream<? extends Arguments> provideArguments(ExtensionContext context)
 			{
@@ -2138,9 +2150,11 @@ class ServerMockTest
 	@Nested
 	class GetTag
 	{
+
 		@Nested
 		class Block
 		{
+
 			@Test
 			void givenValidBlockTag()
 			{
@@ -2168,6 +2182,7 @@ class ServerMockTest
 		@Nested
 		class Item
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2193,6 +2208,7 @@ class ServerMockTest
 		@Nested
 		class Fluids
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2217,6 +2233,7 @@ class ServerMockTest
 		@Nested
 		class EntityTypes
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2241,6 +2258,7 @@ class ServerMockTest
 		@Nested
 		class GameEvents
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2266,9 +2284,11 @@ class ServerMockTest
 	@Nested
 	class GetTags
 	{
+
 		@Nested
 		class Block
 		{
+
 			@Test
 			void givenValidBlockTag()
 			{
@@ -2290,6 +2310,7 @@ class ServerMockTest
 		@Nested
 		class Item
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2311,6 +2332,7 @@ class ServerMockTest
 		@Nested
 		class Fluids
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2332,6 +2354,7 @@ class ServerMockTest
 		@Nested
 		class EntityTypes
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2353,6 +2376,7 @@ class ServerMockTest
 		@Nested
 		class GameEvents
 		{
+
 			@Test
 			void givenValidItem()
 			{
@@ -2378,6 +2402,7 @@ class ServerMockTest
 @ExtendWith(MockBukkitExtension.class)
 class TestRecipe implements Recipe
 {
+
 	private final @NotNull ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
@@ -2401,6 +2426,7 @@ class TestRecipe implements Recipe
 @ExtendWith(MockBukkitExtension.class)
 class EventDenier implements Listener
 {
+
 	@EventHandler
 	void onPlayerConnectionClose(AsyncPlayerPreLoginEvent event)
 	{

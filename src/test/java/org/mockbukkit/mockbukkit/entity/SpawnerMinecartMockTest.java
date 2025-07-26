@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class SpawnerMinecartMockTest
 {
+
 	@MockBukkitInject
 	private SpawnerMinecart minecart;
 
@@ -41,6 +42,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class GetBoundingBox
 	{
+
 		@Test
 		void givenDefaultLocation()
 		{
@@ -78,6 +80,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetSpawnedType
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnNull()
 		{
@@ -107,6 +110,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetDelay
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnTwenty()
 		{
@@ -126,6 +130,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetMinSpawnDelay
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnTwoHundred()
 		{
@@ -153,6 +158,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetMaxSpawnDelay
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnEightHundred()
 		{
@@ -188,6 +194,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetSpawnCount
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnFour()
 		{
@@ -207,6 +214,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetRequiredPlayerRange
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnSixteen()
 		{
@@ -226,6 +234,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetSpawnRange
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnFour()
 		{
@@ -245,6 +254,7 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetMaxNearbyEntities
 	{
+
 		@Test
 		void givenDefaultValue_ShouldReturnSix()
 		{

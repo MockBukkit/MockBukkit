@@ -16,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class LightningStrikeMockTest
 {
+
 	@MockBukkitInject
 	private LightningStrikeMock lightning;
 
 	@Nested
 	class SetEffect
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -41,6 +43,7 @@ class LightningStrikeMockTest
 	@Nested
 	class SetFlashes
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -68,6 +71,7 @@ class LightningStrikeMockTest
 	@Nested
 	class SetLifeTicks
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -87,6 +91,7 @@ class LightningStrikeMockTest
 	@Nested
 	class SetCausingPlayer
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -107,6 +112,7 @@ class LightningStrikeMockTest
 	@Nested
 	class SetFlashCount
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

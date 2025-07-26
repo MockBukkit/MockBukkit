@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MapElementFactoryTest
 {
+
 	@ParameterizedTest
 	@NullAndEmptySource
 	void givenNullOrEmptyValue(Map<?, ?> values)

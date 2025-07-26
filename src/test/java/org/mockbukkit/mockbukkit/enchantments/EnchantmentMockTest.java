@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class EnchantmentMockTest
 {
+
 	private final static String NAMESPACE = "mock_bukkit";
 	private NamespacedKey key;
 	private EnchantmentTarget target;

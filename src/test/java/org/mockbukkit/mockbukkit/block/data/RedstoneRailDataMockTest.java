@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class RedstoneRailDataMockTest
 {
+
 	private RedstoneRailDataMock rail;
 
 	@BeforeEach
@@ -29,6 +30,7 @@ class RedstoneRailDataMockTest
 	@Nested
 	class IsPowered
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -48,6 +50,7 @@ class RedstoneRailDataMockTest
 	@Nested
 	class SetShape
 	{
+
 		@Test
 		void givenDefaultAxis()
 		{
@@ -83,6 +86,7 @@ class RedstoneRailDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

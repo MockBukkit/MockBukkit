@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class LevelledDataMockTest
 {
+
 	private LevelledDataMock levelled;
 
 	@BeforeEach
@@ -26,6 +27,7 @@ class LevelledDataMockTest
 	@Nested
 	class SetLevel
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -53,6 +55,7 @@ class LevelledDataMockTest
 	@Nested
 	class GetMaximumLevel
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -64,6 +67,7 @@ class LevelledDataMockTest
 	@Nested
 	class GetMinimumLevel
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 public class GlowSquidMockTest
 {
+
 	@MockBukkitInject
 	private GlowSquid glowSquid;
 

@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class CommandMinecartMockTest
 {
+
 	@MockBukkitInject
 	CommandMinecart minecart;
 

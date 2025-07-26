@@ -51,6 +51,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 @ExtendWith(MockBukkitExtension.class)
 class HumanEntityMockTest
 {
+
 	private static final int[] REQUIRED_EXP =
 			{
 					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
@@ -210,9 +211,11 @@ class HumanEntityMockTest
 	@Nested
 	class OpenInventory
 	{
+
 		@Nested
 		class GivenInventory
 		{
+
 			@Test
 			void openInventoryEvent_Fired()
 			{
@@ -395,6 +398,7 @@ class HumanEntityMockTest
 	@Nested
 	class SetSaturatedRegenRate
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -415,6 +419,7 @@ class HumanEntityMockTest
 	@Nested
 	class SetUnsaturatedRegenRate
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -435,6 +440,7 @@ class HumanEntityMockTest
 	@Nested
 	class SetStarvationRate
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -455,6 +461,7 @@ class HumanEntityMockTest
 	@Nested
 	class SetMainHand
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -475,6 +482,7 @@ class HumanEntityMockTest
 	@Nested
 	class SetEnchantmentSeed
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -495,6 +503,7 @@ class HumanEntityMockTest
 	@Nested
 	class SetFishHook
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -516,6 +525,7 @@ class HumanEntityMockTest
 	@Nested
 	class GetDiscoveredRecipes
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ServerBuildInfoMockTest
 {
+
 	private ServerBuildInfo buildInfo;
 	private static final Key MOCKBUKKIT_BRAND_ID = Key.key("mockbukkit", "mockbukkit");
 

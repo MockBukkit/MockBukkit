@@ -28,12 +28,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class TextDisplayMockTest
 {
+
 	@MockBukkitInject
 	private TextDisplayMock textDisplay;
 
 	@Nested
 	class SetText
 	{
+
 		@ParameterizedTest
 		@ValueSource(strings = {
 				"Hello!",
@@ -64,6 +66,7 @@ class TextDisplayMockTest
 	@Nested
 	class Text
 	{
+
 		@ParameterizedTest
 		@ValueSource(strings = {
 				"Hello!",
@@ -99,6 +102,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetLineWidth
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -119,6 +123,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetBackgroundColor
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -164,6 +169,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetTextOpacity
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -184,6 +190,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetShadowed
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -204,6 +211,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetSeeThrough
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -224,6 +232,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetDefaultBackground
 	{
+
 		@Test
 		void givenDefaultValue()
 		{
@@ -244,6 +253,7 @@ class TextDisplayMockTest
 	@Nested
 	class SetAlignment
 	{
+
 		@Test
 		void givenDefaultValue()
 		{

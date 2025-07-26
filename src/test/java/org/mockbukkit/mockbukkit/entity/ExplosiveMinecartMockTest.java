@@ -20,6 +20,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 @ExtendWith(MockBukkitExtension.class)
 class ExplosiveMinecartMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

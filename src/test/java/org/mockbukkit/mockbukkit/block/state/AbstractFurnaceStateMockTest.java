@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class AbstractFurnaceStateMockTest extends ContainerStateMockTest
 {
+
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
@@ -137,6 +138,7 @@ class AbstractFurnaceStateMockTest extends ContainerStateMockTest
 
 	private static class TestFurnaceState extends AbstractFurnaceStateMock
 	{
+
 		protected TestFurnaceState(@NotNull Block block)
 		{
 			super(block);

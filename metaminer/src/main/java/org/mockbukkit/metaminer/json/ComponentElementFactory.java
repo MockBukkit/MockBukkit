@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ComponentElementFactory
 {
+
 	/**
 	 * Converts a component into a JsonElement.
 	 *

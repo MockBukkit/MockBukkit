@@ -37,6 +37,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitTest
 {
+
 	private static final String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
 
 	@BeforeEach
@@ -263,6 +264,7 @@ class MockBukkitTest
 
 	private static class CustomServerMock extends ServerMock
 	{
+
 	}
 
 	@Test

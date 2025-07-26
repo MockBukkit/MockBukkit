@@ -49,6 +49,7 @@ import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksM
 @ExtendWith(MockBukkitExtension.class)
 class BukkitSchedulerMockTest
 {
+
 	/**
 	 * How long, in milliseconds, to sleep when testing async tasks.
 	 */

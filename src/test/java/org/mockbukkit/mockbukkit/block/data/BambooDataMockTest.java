@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class BambooDataMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	private final BambooDataMock bamboo = new BambooDataMock();

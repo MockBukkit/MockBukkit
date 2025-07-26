@@ -14,6 +14,7 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.
 @ExtendWith(MockBukkitExtension.class)
 class ItemSimilarityMatcherTest extends AbstractMatcherTest
 {
+
 	private ItemStack item;
 
 	@BeforeEach

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AttributeInstanceElementFactory
 {
+
 	/**
 	 * Converts a attributeInstance into a JsonElement.
 	 *

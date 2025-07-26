@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PotionEffectElementFactory
 {
+
 	/**
 	 * Converts a potionEffect into a JsonElement.
 	 *

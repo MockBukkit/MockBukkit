@@ -21,6 +21,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 @ExtendWith(MockBukkitExtension.class)
 class TNTPrimedMockTest
 {
+
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

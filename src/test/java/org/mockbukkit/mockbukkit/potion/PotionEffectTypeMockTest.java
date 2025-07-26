@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class PotionEffectTypeMockTest
 {
+
 	@Test
 	void constructorValues()
 	{

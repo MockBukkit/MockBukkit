@@ -19,6 +19,7 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMat
 @ExtendWith(MockBukkitExtension.class)
 class InventoryItemAmountMatcherTest extends AbstractMatcherTest
 {
+
 	@MockBukkitInject
 	private ServerMock serverMock;
 	@MockBukkitInject

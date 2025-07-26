@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class SnowballMockTest
 {
+
 	@MockBukkitInject
 	private Snowball snowball;
 

@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class ItemStackMetaDataGenerator implements DataGenerator
 {
+
 	private final File folder;
 
 	public ItemStackMetaDataGenerator(File folder)
