@@ -78,7 +78,7 @@ class EntityMockTest
 	@MockBukkitInject
 	private WorldMock world;
 	@MockBukkitInject
-	private EntityMock entity;
+	private SimpleEntityMock entity;
 
 	@Test
 	void getLocation_TwoInvocations_TwoClones()
@@ -92,6 +92,9 @@ class EntityMockTest
 	@Test
 	void getLocation_IntoLocation_LocationCopied()
 	{
+		// This is different from injecting! When injecting, it's already placed inside the world.
+		SimpleEntityMock entity = new SimpleEntityMock(server);
+
 		Location location = new Location(world, 0, 0, 0);
 		Location location1 = entity.getLocation();
 		assertNotEquals(location, location1);
