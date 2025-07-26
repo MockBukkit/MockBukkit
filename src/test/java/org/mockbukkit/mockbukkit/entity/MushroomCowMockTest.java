@@ -20,10 +20,12 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.List;
 
 import static org.bukkit.entity.MushroomCow.Variant;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,6 +36,8 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 class MushroomCowMockTest
 {
 
+	@MockBukkitInject
+	private ServerMock server;
 	@MockBukkitInject
 	private MushroomCowMock mushroom;
 
@@ -168,7 +172,7 @@ class MushroomCowMockTest
 	{
 		mushroom.shear();
 
-		Cow cow = List.copyOf(mushroom.getWorld().getEntitiesByClass(Cow.class)).get(0);
+		Cow cow = List.copyOf(mushroom.getWorld().getEntitiesByClass(Cow.class)).getFirst();
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityTransformEvent.class, (e) -> e.getEntity().equals(mushroom)
 				&& e.getTransformedEntities().size() == 1
 				&& e.getTransformedEntity().equals(cow)

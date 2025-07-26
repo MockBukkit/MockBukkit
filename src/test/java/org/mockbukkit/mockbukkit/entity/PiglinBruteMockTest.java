@@ -74,9 +74,8 @@ class PiglinBruteMockTest
 
 		@ParameterizedTest
 		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
-		void givenPossibleConversionTime_ShouldSetConversionTime(int value)
+		void givenPossibleConversionTime_ShouldSetConversionTime(int value, @MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 
 			spawnedEntity.setConversionTime(value);
@@ -86,9 +85,8 @@ class PiglinBruteMockTest
 
 		@ParameterizedTest
 		@ValueSource(ints = { -5, -4, -3, -2, -1 })
-		void givenImpossibleConversionTime_ShouldResetConversion(int value)
+		void givenImpossibleConversionTime_ShouldResetConversion(int value, @MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 
 			spawnedEntity.setImmuneToZombification(true);
@@ -112,9 +110,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenPiglinSafeWorld_ShouldReturnFalse()
+		void givenPiglinSafeWorld_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NETHER);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 
@@ -122,9 +119,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndImmuneToZombification_ShouldReturnFalse()
+		void givenNonPiglinSafeWorldAndImmuneToZombification_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NORMAL);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(true);
@@ -133,9 +129,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndNoAi_ShouldReturnFalse()
+		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndNoAi_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NORMAL);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(false);
@@ -145,9 +140,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndWithAi_ShouldReturnTrue()
+		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndWithAi_ShouldReturnTrue(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NORMAL);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(false);

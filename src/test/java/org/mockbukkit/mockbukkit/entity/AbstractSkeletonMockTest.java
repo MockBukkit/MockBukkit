@@ -53,10 +53,8 @@ class AbstractSkeletonMockTest
 	}
 
 	@Test
-	void testRangedAttack()
+	void testRangedAttack(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
-
 		skeleton.rangedAttack(player, 0.5f);
 		assertThat(skeleton, hasAttacked(player, 0.5f));
 	}
@@ -68,25 +66,21 @@ class AbstractSkeletonMockTest
 	}
 
 	@Test
-	void testRangedAttackThrowsWithInvalidCharge()
+	void testRangedAttackThrowsWithInvalidCharge(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
-
 		assertThrows(IllegalArgumentException.class, () -> skeleton.rangedAttack(player, -0.5f));
 		assertThrows(IllegalArgumentException.class, () -> skeleton.rangedAttack(player, 1.5f));
 	}
 
 	@Test
-	void testAssertAttackedThrowsWithNoAttack()
+	void testAssertAttackedThrowsWithNoAttack(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
 		assertThat(skeleton, hasNotAttacked(player, 0.5f));
 	}
 
 	@Test
-	void testAssertAttackThrowsWithInvalidCharge()
+	void testAssertAttackThrowsWithInvalidCharge(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 
 		assertThrows(IllegalArgumentException.class, () -> skeleton.hasAttackedWithCharge(player, -0.5f));
@@ -94,27 +88,24 @@ class AbstractSkeletonMockTest
 	}
 
 	@Test
-	void testAssertAttackThrowsWithWrongCharge()
+	void testAssertAttackThrowsWithWrongCharge(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 
 		assertThat(skeleton, hasNotAttacked(player, 0.6f));
 	}
 
 	@Test
-	void testAssertAgressiveAttack()
+	void testAssertAgressiveAttack(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
 		skeleton.setChargingAttack(true);
 		skeleton.rangedAttack(player, 0.5f);
 		assertThat(skeleton, hasAttacked(player, 0.5f, true));
 	}
 
 	@Test
-	void testAssertAgressiveAttackThrowsWhenNotAgressive()
+	void testAssertAgressiveAttackThrowsWhenNotAgressive(@MockBukkitInject Player player)
 	{
-		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 		assertThat(skeleton, hasNotAttacked(player, 0.5f, true));
 	}

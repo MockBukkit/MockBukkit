@@ -68,9 +68,8 @@ class GoatMockTest
 	}
 
 	@Test
-	void testRam()
+	void testRam(@MockBukkitInject LivingEntity entity)
 	{
-		LivingEntity entity = server.addPlayer();
 		goat.ram(entity);
 		assertThat(goat, hasRammed(entity));
 	}
@@ -82,9 +81,8 @@ class GoatMockTest
 	}
 
 	@Test
-	void testAssertEntityRammedWithNotRammedEntity()
+	void testAssertEntityRammedWithNotRammedEntity(@MockBukkitInject LivingEntity entity)
 	{
-		LivingEntity entity = server.addPlayer();
 		assertThat(goat, hasNotRammed(entity));
 	}
 

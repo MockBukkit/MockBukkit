@@ -12,8 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -63,9 +61,8 @@ class EvokerMockTest
 	}
 
 	@Test
-	void getWololoTarget_GivenChangedValue()
+	void getWololoTarget_GivenChangedValue(@MockBukkitInject Sheep sheep)
 	{
-		Sheep sheep = new SheepMock(server, UUID.randomUUID());
 		evoker.setWololoTarget(sheep);
 
 		Sheep actual = evoker.getWololoTarget();
