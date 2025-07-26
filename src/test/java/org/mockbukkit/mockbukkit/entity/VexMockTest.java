@@ -87,6 +87,14 @@ class VexMockTest
 		@Test
 		void givenLocationInNullWorld_ShouldSucceed()
 		{
+			// We need to unload because our injection creates a world already
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
+			vex = new VexMock(server, UUID.randomUUID());
+
 			Location locationA = new Location(null, 0, 0, 0);
 			vex.setLocation(locationA);
 

@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class PillagerMockTest
 {
 
+	@MockBukkitInject
+	private ServerMock server;
 	@MockBukkitInject
 	private PillagerMock pillager;
 
@@ -54,6 +59,7 @@ class PillagerMockTest
 	@Test
 	void finalizeSpawn_ShouldEquipCrossBowInMainHand()
 	{
+		pillager = new PillagerMock(server, UUID.randomUUID());
 		ItemStack crossbow = pillager.getInventory().getItem(EquipmentSlot.HAND.ordinal());
 		assertNull(crossbow);
 

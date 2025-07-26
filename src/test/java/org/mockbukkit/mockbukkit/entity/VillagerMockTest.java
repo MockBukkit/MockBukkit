@@ -321,6 +321,12 @@ class VillagerMockTest
 		@Test
 		void givenVillagerWithoutWorld()
 		{
+			// Because our injection, we do create a world where villagers live in...
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
 			VillagerMock villagerWithoutWorld = new VillagerMock(server, UUID.randomUUID());
 			villagerWithoutWorld.setSleeping(true);
 

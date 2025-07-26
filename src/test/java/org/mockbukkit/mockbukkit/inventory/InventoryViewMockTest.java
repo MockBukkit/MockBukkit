@@ -31,7 +31,7 @@ class InventoryViewMockTest
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
-	private InventoryViewMock view;
+	private SimpleInventoryViewMock view;
 
 	@Test
 	void constructorEmpty_AllNull()
@@ -148,7 +148,7 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		chest.setItem(0, sword);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		assertEquals(sword, view.getItem(0));
 	}
@@ -158,7 +158,7 @@ class InventoryViewMockTest
 	{
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		assertNull(view.getItem(-1));
 	}
@@ -168,7 +168,7 @@ class InventoryViewMockTest
 	{
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		assertThrows(IndexOutOfBoundsException.class, () -> view.getItem(100));
 	}
@@ -180,7 +180,7 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		player.getInventory().setItem(0, sword);
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		assertEquals(sword, view.getItem(9));
 	}
@@ -191,7 +191,7 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 		view.setItem(0, sword);
 
 		assertEquals(sword, chest.getItem(0));
@@ -207,7 +207,7 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 		view.setItem(9, sword);
 
 		assertEquals(sword, player.getInventory().getItem(0));
@@ -222,7 +222,7 @@ class InventoryViewMockTest
 	{
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		// Verify no items were dropped (since item was null) [ there can be only 1: the player ]
 		assertEquals(List.of(player), player.getWorld().getEntities());
@@ -234,7 +234,7 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		view.setItem(-1, sword);
 
@@ -257,7 +257,7 @@ class InventoryViewMockTest
 		ItemStack sword = ItemStack.of(Material.IRON_SWORD);
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
-		view = new PlayerInventoryViewMock(player, chest);
+		InventoryViewMock view = new PlayerInventoryViewMock(player, chest);
 
 		assertThrows(IndexOutOfBoundsException.class, () -> view.setItem(100, sword));
 	}

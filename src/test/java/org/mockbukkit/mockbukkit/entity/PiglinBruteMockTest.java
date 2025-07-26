@@ -11,7 +11,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
+
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,6 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PiglinBruteMockTest
 {
+
+	@MockBukkitInject
+	private ServerMock server;
 	@MockBukkitInject
 	private PiglinBruteMock piglinBrute;
 
@@ -68,6 +74,13 @@ class PiglinBruteMockTest
 		@Test
 		void givenDefault_WhenEntityIsNotInWorld_ShouldThrow()
 		{
+			// We need to unload because our injection creates a world already
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
+			piglinBrute = new PiglinBruteMock(server, UUID.randomUUID());
 			IllegalStateException e = assertThrows(IllegalStateException.class, () -> piglinBrute.getConversionTime());
 			assertEquals("Entity is not in a world.", e.getMessage());
 		}
@@ -105,6 +118,13 @@ class PiglinBruteMockTest
 		@Test
 		void giveEntityThatIsNotInWorld_ShouldThrow()
 		{
+			// We need to unload because our injection creates a world already
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
+			piglinBrute = new PiglinBruteMock(server, UUID.randomUUID());
 			IllegalStateException e = assertThrows(IllegalStateException.class, () -> piglinBrute.isConverting());
 			assertEquals("Entity is not in a world.", e.getMessage());
 		}

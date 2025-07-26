@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.entity.VillagerMock;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MerchantInventoryMockTest
 {
 	@MockBukkitInject
-	private Merchant merchant;
+	private VillagerMock merchant;
 	private MerchantInventoryMock inventory;
 
 	@BeforeEach

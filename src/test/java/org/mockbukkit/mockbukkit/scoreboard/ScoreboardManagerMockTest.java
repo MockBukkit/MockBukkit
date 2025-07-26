@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -16,7 +15,7 @@ class ScoreboardManagerMockTest
 {
 
 	@MockBukkitInject
-	private ScoreboardManager manager;
+	private ScoreboardManagerMock manager;
 
 	@Test
 	void getMainScoreboard_NotNull()

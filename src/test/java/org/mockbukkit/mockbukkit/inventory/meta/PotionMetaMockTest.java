@@ -21,7 +21,7 @@ class PotionMetaMockTest
 {
 
 	@MockBukkitInject
-	private PotionMeta meta;
+	private PotionMetaMock meta;
 
 	@Test
 	void testEffectsDefaultEmpty()

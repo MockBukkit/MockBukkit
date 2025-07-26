@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.SizedFireball;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +17,7 @@ class SizedFireballMockTest
 {
 
 	@MockBukkitInject
-	private SizedFireball fireball;
+	private SizedFireballMock fireball;
 
 	@Test
 	void testGetDisplayItem()

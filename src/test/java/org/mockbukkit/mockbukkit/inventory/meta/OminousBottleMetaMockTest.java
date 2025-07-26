@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Server;
-import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -18,7 +17,7 @@ class OminousBottleMetaMockTest
 	@MockBukkitInject
 	private Server server;
 	@MockBukkitInject
-	private OminousBottleMeta meta;
+	private OminousBottleMetaMock meta;
 	private final int amplifier = 1;
 
 	@Test

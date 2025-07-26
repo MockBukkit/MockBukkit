@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
@@ -21,7 +20,7 @@ class ArmorMetaMockTest
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
-	private ArmorMeta meta;
+	private ArmorMetaMock meta;
 	private final ArmorTrim trim = new ArmorTrim(TrimMaterial.AMETHYST, TrimPattern.BOLT);
 
 	@Test

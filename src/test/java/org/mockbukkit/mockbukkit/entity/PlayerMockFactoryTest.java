@@ -1,10 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.Player;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,7 +16,15 @@ class PlayerMockFactoryTest
 {
 
 	@MockBukkitInject
+	private ServerMock server;
+
 	private PlayerMockFactory factory;
+
+	@BeforeEach
+	void setUp()
+	{
+		factory = new PlayerMockFactory(server);
+	}
 
 	@Test
 	void createRandomPlayer_createsRandomPlayer()

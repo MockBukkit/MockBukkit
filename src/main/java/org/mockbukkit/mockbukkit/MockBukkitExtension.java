@@ -238,7 +238,9 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	{
 		try
 		{
-			return type.getDeclaredConstructor().newInstance();
+			var constructor = type.getDeclaredConstructor();
+			constructor.setAccessible(true);
+			return constructor.newInstance();
 		}
 		catch (ReflectiveOperationException e)
 		{

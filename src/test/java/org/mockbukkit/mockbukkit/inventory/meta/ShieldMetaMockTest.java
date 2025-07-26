@@ -7,7 +7,6 @@ import org.bukkit.block.Banner;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.meta.BlockStateMeta;
-import org.bukkit.inventory.meta.ShieldMeta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -36,7 +35,7 @@ class ShieldMetaMockTest
 	@MockBukkitInject
 	private Server server;
 	@MockBukkitInject
-	private ShieldMeta meta;
+	private ShieldMetaMock meta;
 	private final List<Pattern> patterns = List.of(
 			new Pattern(DyeColor.GRAY, PatternType.GRADIENT),
 			new Pattern(DyeColor.GRAY, PatternType.GRADIENT_UP),
