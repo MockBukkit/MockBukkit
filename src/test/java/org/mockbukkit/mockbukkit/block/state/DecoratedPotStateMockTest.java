@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class DecoratedPotStateMockTest
 {
-
 	private @NotNull DecoratedPotStateMock pot;
 
 	@BeforeEach
@@ -31,7 +30,6 @@ class DecoratedPotStateMockTest
 	{
 		this.pot = (DecoratedPotStateMock) BlockStateMockFactory.mock(Material.DECORATED_POT);
 	}
-
 
 	@Test
 	void getInventory()

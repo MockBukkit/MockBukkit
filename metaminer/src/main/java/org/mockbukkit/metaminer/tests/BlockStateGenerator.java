@@ -37,7 +37,6 @@ public class BlockStateGenerator implements DataGenerator
 		blockFolder.mkdirs();
 
 		try (PrintWriter writer = new PrintWriter(output)) {
-
 			for (Material material : Registry.MATERIAL)
 			{
 				if (!material.isBlock())

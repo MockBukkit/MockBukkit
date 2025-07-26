@@ -10,7 +10,6 @@ import java.io.File;
 
 public class SecondTestPlugin extends JavaPlugin implements Listener
 {
-
 	public SecondTestPlugin()
 	{
 		super();

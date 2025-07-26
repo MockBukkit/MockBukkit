@@ -3,19 +3,20 @@ package org.mockbukkit.mockbukkit.statistic;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class StatisticsTest
 {
-
 	private ServerMock mock;
 	private PlayerMock player;
 
@@ -24,12 +25,6 @@ class StatisticsTest
 	{
 		mock = MockBukkit.mock();
 		player = mock.addPlayer();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -76,7 +71,6 @@ class StatisticsTest
 		assertEquals(631, player.getStatistic(Statistic.KILL_ENTITY, EntityType.SQUID));
 	}
 
-
 	@Test
 	void testDecrement()
 	{
@@ -100,7 +94,6 @@ class StatisticsTest
 		assertEquals(500, player.getStatistic(Statistic.MINE_BLOCK, Material.STONE));
 		assertEquals(600, player.getStatistic(Statistic.KILL_ENTITY, EntityType.SQUID));
 	}
-
 
 	@Test
 	void testTyped()

@@ -14,13 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class BrushableDataMockTest
 {
-
 	private final BrushableDataMock brushable = new BrushableDataMock(Material.SUSPICIOUS_GRAVEL);
 
 	@Nested
 	class SetDusted
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -48,7 +46,6 @@ class BrushableDataMockTest
 	@Nested
 	class GetMaximumDusted
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

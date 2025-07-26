@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class InternalBlockTagDataGenerator implements DataGenerator
 {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(InternalBlockTagDataGenerator.class);
 
 	private final File workDirectory;

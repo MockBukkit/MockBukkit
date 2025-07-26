@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.SecondTestPlugin;
@@ -33,9 +34,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class MockBukkitTest
 {
-
 	private static final String TEST_PLUGIN_FILE_PATH = "extra/TestPlugin/build/libs/TestPlugin.jar";
 
 	@BeforeEach
@@ -262,7 +263,6 @@ class MockBukkitTest
 
 	private static class CustomServerMock extends ServerMock
 	{
-
 	}
 
 	@Test
@@ -327,7 +327,6 @@ class MockBukkitTest
 	@Test
 	void load_WithConfig_InputStream_FileNotExists()
 	{
-
 		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{
 			MockBukkit.mock();

@@ -35,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BlockStateMockTest
 {
-
 	@Test
 	void testPlaced()
 	{

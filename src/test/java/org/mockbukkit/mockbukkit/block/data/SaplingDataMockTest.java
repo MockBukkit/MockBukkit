@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class SaplingDataMockTest
 {
-
 	private SaplingDataMock sapling;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class SaplingDataMockTest
 	@Nested
 	class SetStage
 	{
-
 		@Test
 		void getStage()
 		{

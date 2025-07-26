@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class IpBanListMockTest
 {
-
 	@MockBukkitInject
 	ServerMock server;
 	IpBanListMock banList;

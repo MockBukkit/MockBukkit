@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,9 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,21 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class LightningStrikeMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock server;
 	private LightningStrikeMock lightning;
-
-	@BeforeEach
-	void setUp()
-	{
-		lightning = new LightningStrikeMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetEffect
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -54,7 +41,6 @@ class LightningStrikeMockTest
 	@Nested
 	class SetFlashes
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -82,7 +68,6 @@ class LightningStrikeMockTest
 	@Nested
 	class SetLifeTicks
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -102,7 +87,6 @@ class LightningStrikeMockTest
 	@Nested
 	class SetCausingPlayer
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -111,9 +95,8 @@ class LightningStrikeMockTest
 		}
 
 		@Test
-		void givenChangeInValue()
+		void givenChangeInValue(@MockBukkitInject PlayerMock player)
 		{
-			PlayerMock player = server.addPlayer("test");
 			lightning.setCausingPlayer(player);
 			assertEquals(player, lightning.getCausingPlayer());
 			assertEquals(player, lightning.getCausingEntity());
@@ -124,7 +107,6 @@ class LightningStrikeMockTest
 	@Nested
 	class SetFlashCount
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

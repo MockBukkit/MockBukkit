@@ -16,7 +16,6 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isI
 @ExtendWith(MockBukkitExtension.class)
 class EntityLocationMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private PlayerMock entity;

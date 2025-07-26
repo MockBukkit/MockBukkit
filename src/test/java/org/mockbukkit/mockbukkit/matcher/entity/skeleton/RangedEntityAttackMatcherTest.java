@@ -18,7 +18,6 @@ import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttack
 @ExtendWith(MockBukkitExtension.class)
 class RangedEntityAttackMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private static final float CHARGE = 0.5f;

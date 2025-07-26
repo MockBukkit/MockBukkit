@@ -3,14 +3,15 @@ package org.mockbukkit.metaminer.json;
 import com.google.gson.JsonObject;
 import org.bukkit.Color;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class ColorElementFactoryTest
 {
-
 	@Test
 	void givenNull()
 	{

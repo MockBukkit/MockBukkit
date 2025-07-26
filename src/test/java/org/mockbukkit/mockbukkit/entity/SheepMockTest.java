@@ -1,45 +1,25 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.DyeColor;
-import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.entity.Item;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class SheepMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private SheepMock sheep;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		World world = new WorldCreator("world").createWorld();
-		sheep = new SheepMock(server, UUID.randomUUID());
-		sheep.setLocation(new Location(world, 0, 0, 0));
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetSheared()
@@ -68,10 +48,8 @@ class SheepMockTest
 	}
 
 	@Test
-	void shear_SoundPlayed()
+	void shear_SoundPlayed(@MockBukkitInject PlayerMock soundListener)
 	{
-		PlayerMock soundListener = server.addPlayer();
-
 		sheep.shear();
 
 		soundListener.assertSoundHeard(Sound.ENTITY_SHEEP_SHEAR, (experience) ->
@@ -134,6 +112,5 @@ class SheepMockTest
 		sheep.setBaby();
 		assertEquals(0.6175D, sheep.getEyeHeight());
 	}
-
 
 }

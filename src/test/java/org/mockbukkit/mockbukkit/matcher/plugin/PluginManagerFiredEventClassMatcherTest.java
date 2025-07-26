@@ -16,7 +16,6 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 @ExtendWith(MockBukkitExtension.class)
 class PluginManagerFiredEventClassMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private PluginManagerMock pluginManager;

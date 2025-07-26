@@ -7,17 +7,19 @@ import org.bukkit.block.data.type.Door;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class DoorDataMockTest
 {
-
 	private DoorDataMock door;
 
 	@BeforeEach
@@ -29,7 +31,6 @@ class DoorDataMockTest
 	@Nested
 	class SetHinge
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -49,7 +50,6 @@ class DoorDataMockTest
 	@Nested
 	class SetHalf
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -69,7 +69,6 @@ class DoorDataMockTest
 	@Nested
 	class SetFacing
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -101,7 +100,6 @@ class DoorDataMockTest
 	@Nested
 	class SetOpen
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -121,7 +119,6 @@ class DoorDataMockTest
 	@Nested
 	class SetPowered
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

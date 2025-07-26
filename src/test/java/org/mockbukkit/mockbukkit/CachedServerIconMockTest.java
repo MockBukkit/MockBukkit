@@ -1,14 +1,15 @@
 package org.mockbukkit.mockbukkit;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class CachedServerIconMockTest
 {
-
 	@Test
 	void constructor_NotNull_SetsData()
 	{

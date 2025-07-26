@@ -1,34 +1,19 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ChestedHorseMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private MuleMock chestedHorse;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		chestedHorse = new MuleMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testIsCarryingChestDefault()

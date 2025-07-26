@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.generator.structure;
 
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;

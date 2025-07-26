@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BukkitBrigadierForwardingMapMockTest
 {
-
 	@MockBukkitInject
 	ServerMock serverMock;
 
@@ -141,6 +140,5 @@ class BukkitBrigadierForwardingMapMockTest
 		assertTrue(map.values().iterator().hasNext());
 		assertTrue(map.keySet().stream().anyMatch("other_command"::equals));
 	}
-
 
 }

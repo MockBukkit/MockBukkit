@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 public class ItemStackTestDataGenerator implements DataGenerator
 {
-
 	private final File folder;
 
 	public ItemStackTestDataGenerator(File pluginDataFolder)

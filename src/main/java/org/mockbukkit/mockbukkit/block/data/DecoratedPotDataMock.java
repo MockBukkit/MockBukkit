@@ -11,7 +11,6 @@ import java.util.Set;
 public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 {
 
-
 	/**
 	 * Constructs a new {@link DecoratedPotDataMock} for the provided {@link Material}.
 	 */

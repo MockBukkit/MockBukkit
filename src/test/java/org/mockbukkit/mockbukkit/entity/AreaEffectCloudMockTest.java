@@ -8,7 +8,6 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -28,16 +27,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class AreaEffectCloudMockTest
 {
-
 	@MockBukkitInject
 	ServerMock server;
+	@MockBukkitInject
 	AreaEffectCloud areaEffectCloud;
-
-	@BeforeEach
-	void setUp()
-	{
-		areaEffectCloud = new AreaEffectCloudMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetType()

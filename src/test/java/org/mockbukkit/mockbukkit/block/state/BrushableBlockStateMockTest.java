@@ -15,13 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class BrushableBlockStateMockTest
 {
-
 	private final BrushableBlockStateMock state = new BrushableBlockStateMock(Material.SUSPICIOUS_SAND);
 
 	@Nested
 	class SetItem
 	{
-
 		@Test
 		void defaultValueShouldBeEmpty()
 		{
@@ -55,7 +53,6 @@ class BrushableBlockStateMockTest
 	@Nested
 	class GetSnapshot
 	{
-
 		@Test
 		void givenEqualStates()
 		{

@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ScheduledTaskTest
 {
-
 	@Test
 	void getScheduledTick_GetsScheduledTick()
 	{
@@ -99,17 +101,4 @@ class ScheduledTaskTest
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -3,6 +3,7 @@ package org.mockbukkit.metaminer.json;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -10,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class PrimitiveElementFactoryTest
 {
-
 	@ParameterizedTest
 	@ValueSource(booleans = { true, false })
 	void givenBoolean(boolean expectedValue)

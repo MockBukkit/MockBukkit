@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitURLClassLoaderTest
 {
-
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private MockBukkitURLClassLoader urlClassLoader;

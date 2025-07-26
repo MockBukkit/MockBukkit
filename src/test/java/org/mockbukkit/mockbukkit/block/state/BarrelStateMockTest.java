@@ -16,11 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 @ExtendWith(MockBukkitExtension.class)
 class BarrelStateMockTest extends ContainerStateMockTest
 {
-
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

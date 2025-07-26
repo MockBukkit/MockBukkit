@@ -14,11 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-
 @ExtendWith(MockBukkitExtension.class)
 class ComparatorStateMockTest
 {
-
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

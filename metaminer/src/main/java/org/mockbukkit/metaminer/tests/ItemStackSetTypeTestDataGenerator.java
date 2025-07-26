@@ -17,7 +17,6 @@ import java.util.Set;
 
 public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 {
-
 	private final File folder;
 
 	public ItemStackSetTypeTestDataGenerator(File folder)

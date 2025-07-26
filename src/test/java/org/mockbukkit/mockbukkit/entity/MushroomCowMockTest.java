@@ -6,8 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -15,45 +13,29 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.bukkit.entity.MushroomCow.Variant;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class MushroomCowMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private MushroomCowMock mushroom;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		World world = new WorldCreator("world").createWorld();
-		mushroom = new MushroomCowMock(server, UUID.randomUUID());
-		mushroom.setLocation(new Location(world, 0, 0, 0));
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetVariantDefault()
@@ -81,10 +63,8 @@ class MushroomCowMockTest
 	}
 
 	@Test
-	void shear_SoundPlayed()
+	void shear_SoundPlayed(@MockBukkitInject PlayerMock soundListener)
 	{
-		PlayerMock soundListener = server.addPlayer();
-
 		mushroom.shear();
 
 		soundListener.assertSoundHeard(Sound.ENTITY_MOOSHROOM_SHEAR, (experience) ->

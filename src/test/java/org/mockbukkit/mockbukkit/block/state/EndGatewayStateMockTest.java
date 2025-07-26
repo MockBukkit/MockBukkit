@@ -18,11 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 @ExtendWith(MockBukkitExtension.class)
 class EndGatewayStateMockTest
 {
-
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

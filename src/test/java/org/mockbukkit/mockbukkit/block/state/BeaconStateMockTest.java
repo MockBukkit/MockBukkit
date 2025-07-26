@@ -34,7 +34,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BeaconStateMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject

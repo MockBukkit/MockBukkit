@@ -1257,7 +1257,6 @@ public class WorldMock implements World
 	@Override
 	public boolean isClearWeather()
 	{
-
 		return !this.hasStorm() && !this.isThundering();
 	}
 
@@ -2348,7 +2347,6 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightMap heightMap)
 	{
@@ -2751,7 +2749,6 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public void setViewDistance(int viewDistance)

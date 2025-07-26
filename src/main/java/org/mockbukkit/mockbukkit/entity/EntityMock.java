@@ -785,7 +785,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	protected void remove(EntityRemoveEvent.Cause cause)
 	{
-
 		EventFactoryMock.callEntityRemoveEvent(this, cause);
 
 		leaveVehicle();

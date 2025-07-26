@@ -6,6 +6,8 @@ import org.hamcrest.Matcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
@@ -17,9 +19,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.doesNotHaveLore;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.hasLore;
 
+@ExtendWith(MockBukkitExtension.class)
 class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 {
-
 	private ItemMetaMock itemMeta;
 
 	@BeforeEach
@@ -100,11 +102,9 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 	@Nested
 	class DescriptionTests
 	{
-
 		// Test implementation of Description to capture what gets written
 		private static class TestDescription implements Description
 		{
-
 			private final StringBuilder text = new StringBuilder();
 
 			@Override

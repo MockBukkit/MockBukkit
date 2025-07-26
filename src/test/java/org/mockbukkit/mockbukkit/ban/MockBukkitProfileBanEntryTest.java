@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitProfileBanEntryTest
 {
-
 	@MockBukkitInject
 	ServerMock server;
 	MockBukkitProfileBanEntry entry;

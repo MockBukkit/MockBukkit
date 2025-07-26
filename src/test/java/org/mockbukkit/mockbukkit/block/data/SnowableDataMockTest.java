@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class SnowableDataMockTest
 {
-
 	private SnowableDataMock snowable;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class SnowableDataMockTest
 	@Nested
 	class SetSnowy
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

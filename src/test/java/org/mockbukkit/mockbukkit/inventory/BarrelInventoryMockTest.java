@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BarrelInventoryMockTest
 {
-
 	private BarrelInventoryMock inventory;
 
 	@BeforeEach
@@ -25,7 +24,6 @@ class BarrelInventoryMockTest
 	{
 		this.inventory = new BarrelInventoryMock((InventoryHolder) null);
 	}
-
 
 	@Test
 	void testGetSnapshot()

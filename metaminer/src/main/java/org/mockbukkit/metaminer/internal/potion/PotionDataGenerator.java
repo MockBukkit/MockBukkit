@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class PotionDataGenerator implements DataGenerator
 {
-
 	private final File dataFolder;
 
 	public PotionDataGenerator(File parentDataFolder)

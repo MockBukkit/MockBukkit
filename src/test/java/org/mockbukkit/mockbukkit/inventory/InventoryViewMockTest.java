@@ -5,11 +5,12 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.ItemMock;
@@ -24,9 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class InventoryViewMockTest
 {
-
 	private ServerMock server;
 	private InventoryViewMock view;
 
@@ -35,12 +36,6 @@ class InventoryViewMockTest
 	{
 		server = MockBukkit.mock();
 		view = new SimpleInventoryViewMock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -104,7 +99,6 @@ class InventoryViewMockTest
 	@Nested
 	class SetTitle
 	{
-
 		@Test
 		void givenSuccess()
 		{

@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class CampfireRecipeElementFactory
 {
-
 	/**
 	 * Converts a recipe into a JsonElement.
 	 *

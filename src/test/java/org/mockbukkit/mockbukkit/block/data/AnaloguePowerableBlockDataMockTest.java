@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class AnaloguePowerableBlockDataMockTest
 {
-
 	private AnaloguePowerableBlockDataMock analogue;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class AnaloguePowerableBlockDataMockTest
 	@Nested
 	class SetPower
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -55,7 +53,6 @@ class AnaloguePowerableBlockDataMockTest
 	@Nested
 	class GetMaximumLevel
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

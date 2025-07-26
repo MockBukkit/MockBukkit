@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class RedstoneWallTorchDataMockTest
 {
-
 	private RedstoneWallTorchDataMock torch;
 
 	@BeforeEach
@@ -30,7 +29,6 @@ class RedstoneWallTorchDataMockTest
 	@Nested
 	class SetFacing
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -62,7 +60,6 @@ class RedstoneWallTorchDataMockTest
 	@Nested
 	class SetLit
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

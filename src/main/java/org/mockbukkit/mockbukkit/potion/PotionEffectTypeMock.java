@@ -36,7 +36,6 @@ public class PotionEffectTypeMock extends PotionEffectType
 	private final Category category;
 	private final String translationKey;
 
-
 	/**
 	 * @param key            The namespaced key representing this effect
 	 * @param id             The magic number representing this effect

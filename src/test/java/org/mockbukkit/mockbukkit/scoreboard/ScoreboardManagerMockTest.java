@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @ExtendWith(MockBukkitExtension.class)
 class ScoreboardManagerMockTest
 {
-
 	private ScoreboardManager manager;
 
 	@BeforeEach

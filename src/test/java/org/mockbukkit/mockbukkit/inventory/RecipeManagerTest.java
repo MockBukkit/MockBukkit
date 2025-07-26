@@ -33,7 +33,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class RecipeManagerTest
 {
-
 	private static final Material __ = null; // `_` is a keyword
 	private final RecipeManager manager = new RecipeManager();
 
@@ -49,7 +48,6 @@ class RecipeManagerTest
 	@Nested
 	class Reset
 	{
-
 		@Test
 		void givenNullRecipeType()
 		{
@@ -95,7 +93,6 @@ class RecipeManagerTest
 	@Nested
 	class Clear
 	{
-
 		@Test
 		void clearOnlyOneSingleRecipeType()
 		{
@@ -121,7 +118,6 @@ class RecipeManagerTest
 	@Nested
 	class GetRecipesFor
 	{
-
 		@Test
 		void testPreconditions()
 		{
@@ -168,7 +164,6 @@ class RecipeManagerTest
 	@Nested
 	class GetCraftingRecipe
 	{
-
 		@Test
 		void givenNullCraftMatrix()
 		{
@@ -189,7 +184,6 @@ class RecipeManagerTest
 		@Nested
 		class ShapelessRecipe
 		{
-
 			@ParameterizedTest
 			@CsvSource({
 					"OAK_LOG, OAK_PLANKS",
@@ -342,7 +336,6 @@ class RecipeManagerTest
 		@Nested
 		class ShapedRecipe
 		{
-
 			@ParameterizedTest
 			@CsvSource({
 					"IRON_INGOT, IRON_DOOR",
@@ -404,11 +397,9 @@ class RecipeManagerTest
 	@Nested
 	class Matches
 	{
-
 		@Nested
 		class Shapeless
 		{
-
 			private final ShapelessRecipe recipe = (ShapelessRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("oak_button"));
 
 			@Test
@@ -454,7 +445,6 @@ class RecipeManagerTest
 		@Nested
 		class Shaped
 		{
-
 			private final ShapedRecipe recipe = (ShapedRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("stick"));
 
 			@Test
@@ -527,7 +517,6 @@ class RecipeManagerTest
 			@Nested
 			class GivenValidSamples
 			{
-
 				@Test
 				void givenSticks()
 				{
@@ -655,7 +644,6 @@ class RecipeManagerTest
 			@Nested
 			class GivenInvalidSamples
 			{
-
 				@Test
 				void givenInvalidStick()
 				{
@@ -687,7 +675,6 @@ class RecipeManagerTest
 		@Nested
 		class Complex
 		{
-
 			private final ComplexRecipe recipe = (ComplexRecipe) Bukkit.getRecipe(NamespacedKey.minecraft("shield_decoration"));
 
 			@Test

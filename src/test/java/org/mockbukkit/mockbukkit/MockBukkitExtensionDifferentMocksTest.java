@@ -36,13 +36,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitExtensionDifferentMocksTest
 {
-
 	// Test classes
 	@Getter
 	@Nested
 	class MixinClassTest
 	{
-
 		@MockBukkitInject
 		private ServerMock serverMock;
 
@@ -63,7 +61,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestDirectClass
 	{
-
 		@MockBukkitInject
 		ServerMock serverMock;
 
@@ -78,7 +75,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestAllTypesClass
 	{
-
 		@MockBukkitInject
 		ServerMock serverMock;
 
@@ -144,7 +140,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestAllTypesWithNamesClass
 	{
-
 		@MockBukkitInject(name = "Bumba")
 		PlayerMock playerMock;
 
@@ -180,7 +175,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestMultiplesClass
 	{
-
 		@MockBukkitInject
 		Player player1;
 
@@ -239,7 +233,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestInvalidThingie
 	{
-
 		@MockBukkitInject
 		private Integer someInteger;
 
@@ -288,7 +281,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@RequiredArgsConstructor
 	private static class TestParameterContext implements ParameterContext
 	{
-
 		@Getter
 		private final Parameter parameter;
 
@@ -323,7 +315,6 @@ class MockBukkitExtensionDifferentMocksTest
 
 	public static class MyPlugin extends JavaPlugin
 	{
-
 		public int someInt = 42;
 
 		@Override
@@ -337,7 +328,6 @@ class MockBukkitExtensionDifferentMocksTest
 	@Nested
 	class TestCustomPluginInjection
 	{
-
 		@MockBukkitInject
 		MyPlugin plugin;
 

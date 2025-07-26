@@ -18,14 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class PaintingMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 
 	@Nested
 	class GetArt
 	{
-
 		@Test
 		void givenNullArtShouldThrowException()
 		{
@@ -61,7 +59,6 @@ class PaintingMockTest
 	@Nested
 	class GetWidth
 	{
-
 		@Test
 		void givenAztecSample()
 		{
@@ -81,7 +78,6 @@ class PaintingMockTest
 	@Nested
 	class GetHeight
 	{
-
 		@Test
 		void givenAztecSample()
 		{

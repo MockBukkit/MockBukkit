@@ -26,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PermissionManagerMockTest
 {
-
 	private PermissionManagerMock permissionManager;
 	private static final String PERMISSION_NODE_1 = "mockbukkit.plugin.permission1";
 	private Permission permission1;
@@ -218,6 +217,5 @@ class PermissionManagerMockTest
 	{
 		return MockBukkit.load(TestPlugin.class);
 	}
-
 
 }

@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class DecoratedPotDataMockTest
 {
-
 	private DecoratedPot pot;
 
 	@BeforeEach
@@ -75,6 +74,5 @@ class DecoratedPotDataMockTest
 		pot.setWaterlogged(true);
 		assertTrue(pot.isWaterlogged());
 	}
-
 
 }

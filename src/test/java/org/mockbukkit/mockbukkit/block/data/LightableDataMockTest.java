@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class LightableDataMockTest
 {
-
 	private LightableDataMock lightable;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class LightableDataMockTest
 	@Nested
 	class SetLit
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

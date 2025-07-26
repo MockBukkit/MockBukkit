@@ -20,7 +20,6 @@ import java.util.Set;
 
 public class TagDataGenerator implements DataGenerator
 {
-
 	private final File dataFolder;
 
 	public TagDataGenerator(File dataFolder)

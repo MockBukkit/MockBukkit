@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @ExtendWith(MockBukkitExtension.class)
 class EventFactoryMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 
@@ -83,7 +82,6 @@ class EventFactoryMockTest
 	 */
 	private static class EventHolder implements Listener
 	{
-
 		private @Nullable Event event;
 
 		@Nullable

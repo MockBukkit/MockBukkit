@@ -9,7 +9,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class AttributableElementFactory
 {
-
 	/**
 	 * Converts a attributable into a JsonElement.
 	 *

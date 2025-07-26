@@ -18,7 +18,6 @@ public class CandleDataMock extends BlockDataMock implements Candle
 		super(material);
 	}
 
-
 	@Override
 	public int getCandles()
 	{

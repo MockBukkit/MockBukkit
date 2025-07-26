@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class EnchantmentMockTest
 {
-
 	@Test
 	void testEnchantmentValuesContainsEnchantment()
 	{
@@ -87,7 +86,6 @@ class EnchantmentMockTest
 	{
 		assertTrue(Enchantment.FIRE_PROTECTION.conflictsWith(Enchantment.PROTECTION));
 	}
-
 
 	@Test
 	void conflictsWith_nullInput()

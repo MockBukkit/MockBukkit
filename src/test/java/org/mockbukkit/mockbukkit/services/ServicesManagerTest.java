@@ -2,10 +2,11 @@ package org.mockbukkit.mockbukkit.services;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.EmptyPlugin;
 
@@ -16,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ServicesManagerTest
 {
-
 	private ServerMock server;
 	private EmptyPlugin plugin;
 
@@ -27,12 +28,6 @@ class ServicesManagerTest
 	{
 		server = MockBukkit.mock();
 		plugin = MockBukkit.loadWith(EmptyPlugin.class, "empty_plugin.yml");
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

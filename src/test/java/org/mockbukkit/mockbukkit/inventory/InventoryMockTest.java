@@ -10,14 +10,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
@@ -45,9 +46,9 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMat
 import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsLessThan;
 import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.similarTo;
 
+@ExtendWith(MockBukkitExtension.class)
 class InventoryMockTest
 {
-
 	ServerMock server;
 	private InventoryMock inventory;
 
@@ -56,12 +57,6 @@ class InventoryMockTest
 	{
 		server = MockBukkit.mock();
 		inventory = new InventoryMock(null, 9, InventoryType.CHEST);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -639,7 +634,6 @@ class InventoryMockTest
 	@Test
 	void removeItem_ShouldOnlyRemoveSimilarItems()
 	{
-
 		ItemStack diamond = new ItemStackMock(Material.DIAMOND);
 		ItemStack emerald = new ItemStackMock(Material.EMERALD);
 
@@ -734,7 +728,6 @@ class InventoryMockTest
 	@Nested
 	class SetCustomTitle
 	{
-
 		@ParameterizedTest
 		@EnumSource(InventoryType.class)
 		void givenNullTitle(InventoryType type)
@@ -770,14 +763,12 @@ class InventoryMockTest
 	@Nested
 	class IsIdentical
 	{
-
 		@MockBukkitInject
 		private ServerMock serverMock;
 
 		@Test
 		void givenItemChanges()
 		{
-
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
 			assertIsIdentical(inventoryA, inventoryB);
@@ -795,7 +786,6 @@ class InventoryMockTest
 		@Test
 		void givenDifferentTypes()
 		{
-
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.DROPPER);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
 			assertIsNotIdentical(inventoryA, inventoryB);
@@ -804,7 +794,6 @@ class InventoryMockTest
 		@Test
 		void givenDifferentMaxSizes()
 		{
-
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
 			assertIsIdentical(inventoryA, inventoryB);
@@ -821,7 +810,6 @@ class InventoryMockTest
 		@Test
 		void givenDifferentHolders()
 		{
-
 			Player player = server.addPlayer();
 
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
@@ -835,7 +823,6 @@ class InventoryMockTest
 		@Test
 		void givenDifferentTitles()
 		{
-
 			InventoryMock inventoryA = new InventoryMock(null, InventoryType.CHEST);
 			InventoryMock inventoryB = new InventoryMock(null, InventoryType.CHEST);
 
@@ -874,7 +861,6 @@ class InventoryMockTest
 	@Nested
 	class Issues
 	{
-
 		@Test
 		@DisplayName("ItemStacks should not be cloned, they should be mirrored.")
 		void issue1322()

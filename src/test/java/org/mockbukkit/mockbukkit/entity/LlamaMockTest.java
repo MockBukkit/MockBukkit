@@ -3,11 +3,11 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.LlamaInventoryMock;
 
@@ -23,24 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasNotAttacked;
 
+@ExtendWith(MockBukkitExtension.class)
 class LlamaMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
+	private MockBukkit server;
+	@MockBukkitInject
 	private LlamaMock llama;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		llama = new LlamaMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetColorDefault()

@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PotionEffectPriorityQueueTests
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
@@ -488,7 +487,6 @@ class PotionEffectPriorityQueueTests
 		assertEventNotFired(EntityPotionEffectEvent.Action.CHANGED);
 		assertEventNotFired(EntityPotionEffectEvent.Action.REMOVED);
 	}
-
 
 	@Test
 	void testLiveTestStrength(@MockBukkitInject @NotNull PlayerMock player)

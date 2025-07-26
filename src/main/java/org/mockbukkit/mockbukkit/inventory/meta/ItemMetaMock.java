@@ -685,7 +685,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("EnchantableValue", this.enchantableValue);
 		}
 
-
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
 		{

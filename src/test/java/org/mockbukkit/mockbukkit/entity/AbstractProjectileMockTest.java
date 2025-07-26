@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -19,11 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class AbstractProjectileMockTest
 {
-
 	@MockBukkitInject
 	private AbstractProjectileMock abstractProjectile;
-	@MockBukkitInject
-	private ServerMock server;
 
 	@Test
 	void testDoesBounceDefault()
@@ -40,7 +36,6 @@ class AbstractProjectileMockTest
 	@Nested
 	class SetShooter
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -64,7 +59,6 @@ class AbstractProjectileMockTest
 	@Nested
 	class SetHasLeftShooter
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -85,7 +79,6 @@ class AbstractProjectileMockTest
 	@Nested
 	class SetHasBeenShot
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

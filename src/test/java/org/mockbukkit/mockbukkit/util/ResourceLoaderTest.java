@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.util;
 import com.google.gson.JsonElement;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ResourceLoaderTest
 {
-
 	private static final String VALID_RESOURCE_PATH = "/test-resource.json";
 	private static final String INVALID_RESOURCE_PATH = "/non-existent-resource.json";
 	private static final String CORRUPTED_RESOURCE_PATH = "/corrupted-resource.json";

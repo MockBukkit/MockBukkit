@@ -14,7 +14,6 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,21 +48,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ExtendWith(MockBukkitExtension.class)
 class VillagerMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private VillagerMock villager;
-
-	@BeforeEach
-	void setUp()
-	{
-		villager = new VillagerMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetProfession
 	{
-
 		@Test
 		void givenDefault()
 		{
@@ -101,7 +93,6 @@ class VillagerMockTest
 	@Nested
 	class SetVillagerType
 	{
-
 		@Test
 		void givenDefault()
 		{
@@ -140,7 +131,6 @@ class VillagerMockTest
 	@Nested
 	class SetVillagerLevel
 	{
-
 		@ParameterizedTest
 		@ValueSource(ints = { 1, 2, 3, 4, 5 })
 		void givenPossibleValues(int level)
@@ -164,7 +154,6 @@ class VillagerMockTest
 	@Nested
 	class SetVillagerExperience
 	{
-
 		@ParameterizedTest
 		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
 		void givenPossibleValues(int level)
@@ -188,7 +177,6 @@ class VillagerMockTest
 	@Nested
 	class IncreaseLevel
 	{
-
 		@ParameterizedTest
 		@ValueSource(ints = { 1, 2, 3, 4 })
 		void givenPossibleValuesWithoutStart(int level)
@@ -238,7 +226,6 @@ class VillagerMockTest
 	@Nested
 	class SetRestocksToday
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -258,7 +245,6 @@ class VillagerMockTest
 	@Nested
 	class Sleep
 	{
-
 		@Test
 		void givenNullValue()
 		{
@@ -325,7 +311,6 @@ class VillagerMockTest
 	@Nested
 	class Wakeup
 	{
-
 		@Test
 		void givenNonSleepingVillager()
 		{
@@ -366,7 +351,6 @@ class VillagerMockTest
 	@Nested
 	class SetReputations
 	{
-
 		@Test
 		void givenNullValue()
 		{
@@ -414,7 +398,6 @@ class VillagerMockTest
 	@Nested
 	class ClearReputations
 	{
-
 		@Test
 		void givenVillagerWithReputations()
 		{
@@ -433,7 +416,6 @@ class VillagerMockTest
 	@Nested
 	class SetTrader
 	{
-
 		@Test
 		void givenChangeInValue()
 		{
@@ -453,7 +435,6 @@ class VillagerMockTest
 	@Nested
 	class GetInventory
 	{
-
 		@Test
 		void givenChangeInValue()
 		{
@@ -467,7 +448,6 @@ class VillagerMockTest
 	@Nested
 	class SetRecipe
 	{
-
 		@Test
 		void givenChangeInValue()
 		{

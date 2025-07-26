@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class CandleDataMockTest
 {
-
 	private CandleDataMock candle;
 
 	@BeforeEach
@@ -28,7 +27,6 @@ class CandleDataMockTest
 	@Nested
 	class SetCandles
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -56,7 +54,6 @@ class CandleDataMockTest
 	@Nested
 	class GetMaximumCandles
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -68,7 +65,6 @@ class CandleDataMockTest
 	@Nested
 	class GetMinimumCandles
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -80,7 +76,6 @@ class CandleDataMockTest
 	@Nested
 	class SetLit
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -100,7 +95,6 @@ class CandleDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

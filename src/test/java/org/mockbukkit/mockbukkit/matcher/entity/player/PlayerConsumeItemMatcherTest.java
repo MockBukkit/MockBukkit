@@ -17,7 +17,6 @@ import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemM
 @ExtendWith(MockBukkitExtension.class)
 class PlayerConsumeItemMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	ServerMock serverMock;
 	private PlayerMock player;

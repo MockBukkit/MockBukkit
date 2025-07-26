@@ -225,7 +225,6 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 @ExtendWith(MockBukkitExtension.class)
 class WorldMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 
@@ -1884,7 +1883,6 @@ class WorldMockTest
 	@Test
 	void testPlayEffectNullEffect()
 	{
-
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 0, 0);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
@@ -2486,7 +2484,6 @@ class WorldMockTest
 	@Nested
 	class SetGameTime
 	{
-
 		@ParameterizedTest
 		@ValueSource(longs = { 0, 1, 10, 25, 50, 75, 100 })
 		void givenValidValues(long expected)
@@ -2513,7 +2510,6 @@ class WorldMockTest
 	@Nested
 	class VoidDamage
 	{
-
 		private final WorldMock world = new WorldMock(Material.DIRT, 3);
 
 		@Test
@@ -2553,7 +2549,6 @@ class WorldMockTest
 	@Nested
 	class IsAutoSaveEnabled
 	{
-
 		private final WorldMock world = new WorldMock(Material.DIRT, 3);
 
 		@Test
@@ -2575,7 +2570,6 @@ class WorldMockTest
 	@Nested
 	class WorldMockParticleTest
 	{
-
 		private WorldMock world;
 		private Location location;
 

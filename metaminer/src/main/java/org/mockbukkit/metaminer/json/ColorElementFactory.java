@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class ColorElementFactory
 {
-
 	/**
 	 * Converts a color into a JsonElement.
 	 *

@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class AbstractMatcherTest
 {
-
 	protected abstract Matcher<?> createMatcher();
 
 	public static <T> void assertMatches(Matcher<T> matcher, T arg)
@@ -93,7 +92,6 @@ public abstract class AbstractMatcherTest
 	@SuppressWarnings("WeakerAccess")
 	public static class UnknownType
 	{
-
 	}
 
 }

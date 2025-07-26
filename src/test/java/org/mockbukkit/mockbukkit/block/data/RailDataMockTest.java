@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class RailDataMockTest
 {
-
 	private RailDataMock rail;
 
 	@BeforeEach
@@ -32,7 +31,6 @@ class RailDataMockTest
 	@Nested
 	class SetShape
 	{
-
 		@Test
 		void givenDefaultAxis()
 		{
@@ -52,7 +50,6 @@ class RailDataMockTest
 	@Nested
 	class GetShapes
 	{
-
 		@Test
 		void allValuesArePresent()
 		{
@@ -64,7 +61,6 @@ class RailDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

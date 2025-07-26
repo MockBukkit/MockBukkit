@@ -2,35 +2,20 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Frog;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class FrogMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private FrogMock frog;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		frog = new FrogMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetTongueTargetDefault()
@@ -39,9 +24,8 @@ class FrogMockTest
 	}
 
 	@Test
-	void testSetTongueTarget()
+	void testSetTongueTarget(@MockBukkitInject PlayerMock playerMock)
 	{
-		PlayerMock playerMock = server.addPlayer();
 		frog.setTongueTarget(playerMock);
 		assertEquals(playerMock, frog.getTongueTarget());
 	}

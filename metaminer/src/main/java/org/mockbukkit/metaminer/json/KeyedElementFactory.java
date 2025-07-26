@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class KeyedElementFactory
 {
-
 	/**
 	 * Converts a Keyed into a JsonElement.
 	 *

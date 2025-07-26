@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class AbstractArrowMockTest
 {
-
 	@MockBukkitInject
 	private AbstractArrowMock abstractArrow;
 
@@ -50,7 +49,6 @@ class AbstractArrowMockTest
 		abstractArrow.setDamage(24);
 		assertEquals(24, abstractArrow.getDamage());
 	}
-
 
 	@Test
 	void getPierceLevel_default()

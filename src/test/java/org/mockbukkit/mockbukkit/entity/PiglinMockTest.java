@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,11 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 import java.util.Set;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -26,21 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PiglinMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock server;
 	private PiglinMock piglin;
-
-	@BeforeEach
-	void setUp()
-	{
-		piglin = new PiglinMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetIsAbleToHunt
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -61,7 +49,6 @@ class PiglinMockTest
 	@Nested
 	class GetBarterList
 	{
-
 		@Test
 		void givenDefaultValue_ShouldSucceed()
 		{
@@ -108,7 +95,6 @@ class PiglinMockTest
 	@Nested
 	class GetInterestList
 	{
-
 		@Test
 		void givenDefaultValue_ShouldSucceed()
 		{
@@ -155,7 +141,6 @@ class PiglinMockTest
 	@Nested
 	class SetChargingCrossbow
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -176,7 +161,6 @@ class PiglinMockTest
 	@Nested
 	class GetInventory
 	{
-
 		@Test
 		void givenDefaultValue_SizeShouldBeEight()
 		{

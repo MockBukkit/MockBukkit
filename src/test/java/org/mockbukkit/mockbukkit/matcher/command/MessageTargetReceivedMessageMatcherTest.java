@@ -15,7 +15,6 @@ import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMes
 @ExtendWith(MockBukkitExtension.class)
 class MessageTargetReceivedMessageMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private PlayerMock messageTarget;

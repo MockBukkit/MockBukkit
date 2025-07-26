@@ -287,7 +287,6 @@ public class MockBukkit
 		return loadWithConfig(plugin, config, parameters);
 	}
 
-
 	/**
 	 * Loads and enables the Plugin with a specified Config File. It receives the {@code config.yml} to use as File
 	 * to load.

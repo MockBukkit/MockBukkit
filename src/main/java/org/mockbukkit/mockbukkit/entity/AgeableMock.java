@@ -77,7 +77,6 @@ public class AgeableMock extends CreatureMock implements Ageable
 		return this.getAge() >= 0;
 	}
 
-
 	@Override
 	public boolean canBreed()
 	{

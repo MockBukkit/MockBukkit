@@ -16,12 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class DamageTypeMockTest
 {
-
 	@ParameterizedTest
 	@MethodSource("getMinecraftDamageTypes")
 	void from_GivenMinecraftExamples(ExpectedDamageType expectedDamageType)
 	{
-
 		JsonObject json = new JsonObject();
 		json.addProperty(DamageTypeMock.EXHAUSTION_KEY, expectedDamageType.exhaustion());
 		json.addProperty(DamageTypeMock.DEATH_MESSAGE_TYPE_KEY, expectedDamageType.deathMessageType());
@@ -41,7 +39,6 @@ class DamageTypeMockTest
 
 	record ExpectedDamageType(String key, String damageScaling, String sound, String deathMessageType, float exhaustion)
 	{
-
 	}
 
 	@Test

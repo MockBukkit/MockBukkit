@@ -12,7 +12,6 @@ import java.io.File;
  */
 public class EmptyPlugin extends JavaPlugin
 {
-
 	public EmptyPlugin()
 	{
 		super();

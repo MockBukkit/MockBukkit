@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ConversationTrackerTest
 {
-
 	private final ConversationTracker tracker = new ConversationTracker();
 	private final FirstPrompt firstPrompt = new FirstPrompt();
 
@@ -58,8 +57,6 @@ class ConversationTrackerTest
 
 	private class FirstPrompt extends StringPrompt
 	{
-
-
 		@Override
 		public @NotNull String getPromptText(@NotNull ConversationContext context)
 		{
@@ -78,7 +75,6 @@ class ConversationTrackerTest
 
 	private class SecondPrompt extends MessagePrompt
 	{
-
 		@Override
 		protected @Nullable Prompt getNextPrompt(@NotNull ConversationContext context)
 		{

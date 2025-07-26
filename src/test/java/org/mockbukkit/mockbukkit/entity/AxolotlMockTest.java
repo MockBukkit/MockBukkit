@@ -4,38 +4,23 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class AxolotlMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private AxolotlMock axolotl;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		axolotl = new AxolotlMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetPickupSound()
@@ -129,6 +114,5 @@ class AxolotlMockTest
 	{
 		assertThrows(NullPointerException.class, () -> axolotl.isBreedItem((Material) null));
 	}
-
 
 }

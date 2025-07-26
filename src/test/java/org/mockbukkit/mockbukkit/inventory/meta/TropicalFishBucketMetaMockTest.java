@@ -2,10 +2,10 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.DyeColor;
 import org.bukkit.entity.TropicalFish;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,13 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TropicalFishBucketMetaMockTest
 {
 
+	@MockBukkitInject
 	private TropicalFishBucketMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new TropicalFishBucketMetaMock();
-	}
 
 	@Test
 	void cloneConstructor_CopiesValues()
@@ -57,7 +52,6 @@ class TropicalFishBucketMetaMockTest
 		assertFalse(meta.hasVariant());
 		meta.setBodyColor(DyeColor.CYAN);
 		assertTrue(meta.hasVariant());
-
 
 		meta = new TropicalFishBucketMetaMock();
 		assertFalse(meta.hasVariant());

@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class AttributeModifierElementFactory
 {
-
 	/**
 	 * Converts a attributeModifier into a JsonElement.
 	 *

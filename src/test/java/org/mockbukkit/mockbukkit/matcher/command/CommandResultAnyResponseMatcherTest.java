@@ -18,7 +18,6 @@ import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponse
 @ExtendWith(MockBukkitExtension.class)
 class CommandResultAnyResponseMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	ServerMock serverMock;
 	private PlayerMock sender;

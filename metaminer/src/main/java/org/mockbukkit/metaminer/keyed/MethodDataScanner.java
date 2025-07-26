@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 
 public class MethodDataScanner
 {
-
 	private static final Pattern WORDS_TO_REPLACE = Pattern.compile("((^get)|(^has)|(^is)|(as))([A-Z])");
 	private static final Set<String> METHOD_NAME_BLACKLIST = Set.of("hashCode", "toString", "getKeyOrNull", "implHashCode",
 			"implToString", "wait", "getDeclaringClass", "notify", "notifyAll", "getClass", "values");

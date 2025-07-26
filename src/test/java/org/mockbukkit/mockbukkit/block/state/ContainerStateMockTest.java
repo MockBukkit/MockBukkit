@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 public abstract class ContainerStateMockTest
 {
-
 	protected abstract ContainerStateMock instance();
 
 	private void addItem(ContainerStateMock container)
@@ -72,7 +71,6 @@ public abstract class ContainerStateMockTest
 	@Nested
 	class GetLock
 	{
-
 		@Test
 		void getDefaultShouldBeEmpty()
 		{
@@ -104,7 +102,6 @@ public abstract class ContainerStateMockTest
 	@Nested
 	class GetInventory
 	{
-
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenSameInventoryIsReturned()
 		{
@@ -123,7 +120,6 @@ public abstract class ContainerStateMockTest
 	@Nested
 	class GetSnapshotInventory
 	{
-
 		@Test
 		void givenStateWithItems_WhenGettingInventory_ThenDifferentInventoryIsReturned()
 		{

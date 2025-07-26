@@ -1,32 +1,20 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.bukkit.entity.EntityType.ELDER_GUARDIAN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ElderGuardianMockTest
 {
 
+	@MockBukkitInject
 	private ElderGuardianMock guardian;
-
-	@BeforeEach
-	void setUp()
-	{
-		ServerMock server = MockBukkit.mock();
-		guardian = new ElderGuardianMock(server, java.util.UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetType()

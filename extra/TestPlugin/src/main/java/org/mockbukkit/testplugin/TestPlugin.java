@@ -5,7 +5,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TestPlugin extends JavaPlugin
 {
-
 	private static TestPlugin plugin;
 
 	@Override

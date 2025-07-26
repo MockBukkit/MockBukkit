@@ -9,7 +9,6 @@ import org.mockbukkit.metaminer.json.KeyedElementFactory;
 
 public class CookingRecipeElementFactory
 {
-
 	/**
 	 * Converts a cooking recipe into a JsonElement.
 	 *

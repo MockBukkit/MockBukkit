@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PiglinBrute;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,10 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,16 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PiglinBruteMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock server;
 	private PiglinBruteMock piglinBrute;
-
-	@BeforeEach
-	void setUp()
-	{
-		piglinBrute = new PiglinBruteMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void getType()
@@ -57,7 +45,6 @@ class PiglinBruteMockTest
 	@Nested
 	class SetImmuneToZombification
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -78,7 +65,6 @@ class PiglinBruteMockTest
 	@Nested
 	class SetConversionTime
 	{
-
 		@Test
 		void givenDefault_WhenEntityIsNotInWorld_ShouldThrow()
 		{
@@ -118,7 +104,6 @@ class PiglinBruteMockTest
 	@Nested
 	class IsConverting
 	{
-
 		@Test
 		void giveEntityThatIsNotInWorld_ShouldThrow()
 		{
@@ -176,7 +161,6 @@ class PiglinBruteMockTest
 	@Nested
 	class SetBaby
 	{
-
 		@Test
 		void givenDefault_ShouldReturnFalse()
 		{
@@ -218,7 +202,6 @@ class PiglinBruteMockTest
 	@Nested
 	class SetAge
 	{
-
 		@Test
 		void givenDefault_ShouldReturnFalse()
 		{

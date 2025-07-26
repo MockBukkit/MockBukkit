@@ -130,7 +130,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BlockTypeMockTest
 {
-
 	public static final double FLOAT_DELTA = 0.0001;
 
 	@Test
@@ -142,7 +141,6 @@ class BlockTypeMockTest
 	@Nested
 	class HasItemType
 	{
-
 		@Test
 		void givenItemType()
 		{
@@ -160,7 +158,6 @@ class BlockTypeMockTest
 	@Nested
 	class GetItemType
 	{
-
 		@Test
 		void givenAir()
 		{
@@ -178,7 +175,6 @@ class BlockTypeMockTest
 	@Nested
 	class HasCollision
 	{
-
 		@Test
 		void givenBlockWithCollision()
 		{
@@ -196,7 +192,6 @@ class BlockTypeMockTest
 	@Nested
 	class GetHardness
 	{
-
 		@Test
 		void givenOakLog()
 		{
@@ -214,7 +209,6 @@ class BlockTypeMockTest
 	@Nested
 	class GetBlastResistance
 	{
-
 		@Test
 		void givenOakLog()
 		{
@@ -232,7 +226,6 @@ class BlockTypeMockTest
 	@Nested
 	class GetSlipperiness
 	{
-
 		@Test
 		void givenOakLog()
 		{
@@ -250,7 +243,6 @@ class BlockTypeMockTest
 	@Nested
 	class IsSolid
 	{
-
 		@Test
 		void givenSolidBlock()
 		{
@@ -268,7 +260,6 @@ class BlockTypeMockTest
 	@Nested
 	class IsFlammable
 	{
-
 		@Test
 		void givenFlammableBlock()
 		{
@@ -286,7 +277,6 @@ class BlockTypeMockTest
 	@Nested
 	class IsBurnable
 	{
-
 		@Test
 		void givenBurnableBlock()
 		{
@@ -304,7 +294,6 @@ class BlockTypeMockTest
 	@Nested
 	class IsOccluding
 	{
-
 		@Test
 		void givenOccludingBlock()
 		{
@@ -322,7 +311,6 @@ class BlockTypeMockTest
 	@Nested
 	class HasGravity
 	{
-
 		@Test
 		void givenGravityBlock()
 		{
@@ -340,7 +328,6 @@ class BlockTypeMockTest
 	@Nested
 	class IsInteractable
 	{
-
 		@Test
 		void givenInteractable()
 		{
@@ -358,7 +345,6 @@ class BlockTypeMockTest
 	@Nested
 	class IsAir
 	{
-
 		@Test
 		void givenAir()
 		{
@@ -376,7 +362,6 @@ class BlockTypeMockTest
 	@Nested
 	class AsMaterial
 	{
-
 		@Test
 		void givenAir()
 		{
@@ -394,7 +379,6 @@ class BlockTypeMockTest
 	@Nested
 	class GetKey
 	{
-
 		@Test
 		void givenAir()
 		{
@@ -412,7 +396,6 @@ class BlockTypeMockTest
 	@Nested
 	class TranslationKey
 	{
-
 		@Test
 		void givenAir()
 		{
@@ -430,7 +413,6 @@ class BlockTypeMockTest
 	@Nested
 	class CreateBlockData
 	{
-
 		@Test
 		void givenAmethystCluster()
 		{
@@ -1366,7 +1348,6 @@ class BlockTypeMockTest
 	@Nested
 	class CreateBlockDataWithConsumer
 	{
-
 		@Test
 		void givenNullConsumer()
 		{

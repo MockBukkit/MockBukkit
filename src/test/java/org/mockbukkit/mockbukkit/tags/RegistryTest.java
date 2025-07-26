@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class RegistryTest
 {
-
 	@ParameterizedTest
 	@EnumSource(TagRegistry.class)
 	void testNotEmpty(@NotNull TagRegistry registry)

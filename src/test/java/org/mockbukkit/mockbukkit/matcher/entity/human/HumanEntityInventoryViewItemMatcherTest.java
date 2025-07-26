@@ -19,7 +19,6 @@ import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventor
 @ExtendWith(MockBukkitExtension.class)
 class HumanEntityInventoryViewItemMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	ServerMock serverMock;
 	private HumanEntityMock human;

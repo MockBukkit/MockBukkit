@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemMetaElementFactory
 {
-
 	/**
 	 * Converts a item meta into a JsonElement.
 	 *

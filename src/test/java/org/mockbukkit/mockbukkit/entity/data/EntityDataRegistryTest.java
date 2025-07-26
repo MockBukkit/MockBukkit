@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Locale;
@@ -18,11 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class EntityDataRegistryTest
 {
-
 	@MockBukkitInject
 	private WorldMock world;
-	@MockBukkitInject
-	private ServerMock server;
 
 	@ParameterizedTest
 	@EnumSource

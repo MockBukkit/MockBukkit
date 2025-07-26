@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class StonecutterInventoryTest
 {
-
 	private StonecutterInventoryMock inventory;
 
 	@BeforeEach

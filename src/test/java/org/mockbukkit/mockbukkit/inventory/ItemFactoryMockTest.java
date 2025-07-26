@@ -47,7 +47,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ItemFactoryMockTest
 {
-
 	private ItemFactoryMock factory;
 
 	@BeforeEach
@@ -181,7 +180,6 @@ class ItemFactoryMockTest
 	{
 		return Tag.SHULKER_BOXES.getValues().stream().map(Arguments::of);
 	}
-
 
 	@Test
 	void isApplicable_StandardItemMetaOnDirtItemStack_True()

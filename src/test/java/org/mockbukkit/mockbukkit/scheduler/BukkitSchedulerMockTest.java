@@ -50,7 +50,6 @@ import static org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksM
 @ExtendWith(MockBukkitExtension.class)
 class BukkitSchedulerMockTest
 {
-
 	/**
 	 * How long, in milliseconds, to sleep when testing async tasks.
 	 */
@@ -253,7 +252,6 @@ class BukkitSchedulerMockTest
 		scheduler1.cancelTask(task.getTaskId());
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
 	}
-
 
 	@Test
 	void longScheduledRunningTask_Throws_RunTimeException()

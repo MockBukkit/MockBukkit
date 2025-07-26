@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -20,21 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 @ExtendWith(MockBukkitExtension.class)
 class OminousItemSpawnerMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock server;
 	private OminousItemSpawnerMock ominousSpawner;
-
-	@BeforeEach
-	void setUp()
-	{
-		ominousSpawner = new OminousItemSpawnerMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetItem
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -59,7 +46,6 @@ class OminousItemSpawnerMockTest
 	@Nested
 	class SetSpawnItemAfterTicks
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ChunkSnapshotMockTest
 {
-
 	private World world;
 	private Chunk chunk;
 

@@ -36,7 +36,6 @@ import java.util.function.Function;
 
 public class RecipeDataGenerator implements DataGenerator
 {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecipeDataGenerator.class);
 
 	public static final String CRAFTING = "crafting";

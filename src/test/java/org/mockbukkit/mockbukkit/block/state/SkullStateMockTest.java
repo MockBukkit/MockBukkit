@@ -4,11 +4,9 @@ import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -28,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class SkullStateMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 	@MockBukkitInject
@@ -42,12 +39,6 @@ class SkullStateMockTest
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.SKELETON_SKULL);
 		this.skull = new SkullStateMock(this.block);
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

@@ -210,7 +210,6 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		throw new UnimplementedOperationException();
 	}
 
-
 	/**
 	 * Required method for Bukkit deserialization.
 	 *

@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PluginMockTest
 {
-
 	@MockBukkitInject
 	ServerMock serverMock;
 

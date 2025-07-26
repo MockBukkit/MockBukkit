@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class AbstractHorseInventoryMockTest
 {
-
 	private AbstractHorseInventoryMock inventory;
 
 	@BeforeEach

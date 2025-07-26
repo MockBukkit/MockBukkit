@@ -1,9 +1,10 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -13,10 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+@ExtendWith(MockBukkitExtension.class)
 class ScoreMockTest
 {
-
 	private ServerMock server;
 	private ScoreboardMock scoreboard;
 	private ObjectiveMock objective;
@@ -29,12 +29,6 @@ class ScoreMockTest
 		scoreboard = server.getScoreboardManager().getNewScoreboard();
 		objective = scoreboard.registerNewObjective("Objective", "dummy");
 		score = objective.getScore("Entry");
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

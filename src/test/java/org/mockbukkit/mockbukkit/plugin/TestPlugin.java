@@ -21,7 +21,6 @@ import java.util.concurrent.CyclicBarrier;
 
 public class TestPlugin extends JavaPlugin implements Listener
 {
-
 	public boolean onEnableExecuted = false;
 	public boolean onDisableExecuted = false;
 	public CommandSender commandSender;

@@ -7,7 +7,6 @@ import java.io.IOException;
 
 public class InternalTagDataGenerator implements DataGenerator
 {
-
 	private final File dataFolder;
 
 	public InternalTagDataGenerator(File pluginFolder)

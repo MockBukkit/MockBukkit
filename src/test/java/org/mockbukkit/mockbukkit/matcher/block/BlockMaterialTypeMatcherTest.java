@@ -14,7 +14,6 @@ import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.h
 @ExtendWith(MockBukkitExtension.class)
 class BlockMaterialTypeMatcherTest extends AbstractMatcherTest
 {
-
 	private BlockMock blockMock;
 
 	@BeforeEach

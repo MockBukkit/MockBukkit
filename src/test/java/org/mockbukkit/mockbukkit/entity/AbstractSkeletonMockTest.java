@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,9 +17,6 @@ import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttack
 @ExtendWith(MockBukkitExtension.class)
 class AbstractSkeletonMockTest
 {
-
-	@MockBukkitInject
-	private ServerMock server;
 	@MockBukkitInject
 	private AbstractSkeletonMock skeleton;
 
@@ -97,7 +93,6 @@ class AbstractSkeletonMockTest
 		assertThrows(IllegalArgumentException.class, () -> skeleton.hasAttackedWithCharge(player, 1.5f));
 	}
 
-
 	@Test
 	void testAssertAttackThrowsWithWrongCharge()
 	{
@@ -123,6 +118,5 @@ class AbstractSkeletonMockTest
 		skeleton.rangedAttack(player, 0.5f);
 		assertThat(skeleton, hasNotAttacked(player, 0.5f, true));
 	}
-
 
 }

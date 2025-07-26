@@ -13,7 +13,6 @@ import java.util.Map;
 
 public class RegistryKeyClassDataGenerator implements DataGenerator
 {
-
 	private final File dataFolder;
 
 	public RegistryKeyClassDataGenerator(File pluginFolder)

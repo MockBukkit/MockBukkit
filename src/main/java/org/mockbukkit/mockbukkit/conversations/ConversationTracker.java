@@ -49,7 +49,6 @@ public class ConversationTracker
 
 	public synchronized void abandonAllConversations()
 	{
-
 		List<Conversation> oldQueue = this.conversationQueue;
 		this.conversationQueue = new LinkedList<>();
 		for (Conversation conversation : oldQueue)

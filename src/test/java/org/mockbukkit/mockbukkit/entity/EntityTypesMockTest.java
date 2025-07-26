@@ -27,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class EntityTypesMockTest
 {
-
 	private static final Class<Cow> BUKKIT_CLASS = Cow.class;
 	private static final Class<CowMock> MOCK_CLASS = CowMock.class;
 	private static final BiFunction<ServerMock, UUID, EntityMock> SIMPLE_FACTORY = CowMock::new;
@@ -38,7 +37,6 @@ class EntityTypesMockTest
 	@Nested
 	class Builder
 	{
-
 		private final EntityTypesMock.Builder builder = EntityTypesMock.builder();
 
 		@Test
@@ -102,7 +100,6 @@ class EntityTypesMockTest
 	@Nested
 	class CreateEntity
 	{
-
 		@Test
 		void givenNullBukkitClass()
 		{

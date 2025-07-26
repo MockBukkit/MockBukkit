@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemStackElementFactory
 {
-
 	/**
 	 * Converts a item stack into a JsonElement.
 	 *

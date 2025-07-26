@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class HopperDataMockTest
 {
-
 	private HopperDataMock hopper;
 
 	@BeforeEach
@@ -30,7 +29,6 @@ class HopperDataMockTest
 	@Nested
 	class SetEnabled
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -50,7 +48,6 @@ class HopperDataMockTest
 	@Nested
 	class SetFacing
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

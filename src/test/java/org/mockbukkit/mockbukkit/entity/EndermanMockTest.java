@@ -5,16 +5,12 @@ import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,16 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class EndermanMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock serverMock;
 	private EndermanMock endermanMock;
-
-	@BeforeEach
-	void setUp()
-	{
-		endermanMock = new EndermanMock(serverMock, UUID.randomUUID());
-	}
 
 	@Test
 	void testMaterialDataNotSet()
@@ -110,10 +98,9 @@ class EndermanMockTest
 	}
 
 	@Test
-	void testRandomTeleportToEntity()
+	void testRandomTeleportToEntity(@MockBukkitInject Player player)
 	{
 		Location loc = endermanMock.getLocation();
-		Player player = serverMock.addPlayer();
 		assertTrue(endermanMock.teleportTowards(player));
 		assertNotEquals(loc, endermanMock.getLocation());
 	}

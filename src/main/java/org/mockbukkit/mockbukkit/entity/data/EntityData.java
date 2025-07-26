@@ -15,7 +15,6 @@ public class EntityData
 	public static final String HEIGHT = "height";
 	public static final String EYE_HEIGHT = "eyeHeight";
 
-
 	private static final String STATES = "states";
 
 	private final EntityType type;

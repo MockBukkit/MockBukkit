@@ -7,15 +7,17 @@ import org.bukkit.Registry;
 import org.bukkit.generator.structure.StructureType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class RegistryAccessMockTest
 {
-
 	private RegistryAccessMock registryAccess;
 
 	@BeforeEach
@@ -39,7 +41,6 @@ class RegistryAccessMockTest
 		Registry<?> duplicateRegistry = this.registryAccess.getRegistry(StructureType.class);
 		assertSame(registry, duplicateRegistry);
 	}
-
 
 	@Test
 	void locale_independent()

@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class TNTDataMockTest
 {
-
 	private TNTDataMock tnt;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class TNTDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

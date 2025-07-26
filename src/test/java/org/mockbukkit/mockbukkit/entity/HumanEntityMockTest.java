@@ -16,14 +16,15 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.MainHand;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
@@ -47,30 +48,19 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class HumanEntityMockTest
 {
-
 	private static final int[] REQUIRED_EXP =
 			{
 					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
 					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
 			};
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private HumanEntityMock human;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		human = server.addPlayer();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void assertGameMode_CorrectGameMode_DoesNotAssert()
@@ -220,11 +210,9 @@ class HumanEntityMockTest
 	@Nested
 	class OpenInventory
 	{
-
 		@Nested
 		class GivenInventory
 		{
-
 			@Test
 			void openInventoryEvent_Fired()
 			{
@@ -407,7 +395,6 @@ class HumanEntityMockTest
 	@Nested
 	class SetSaturatedRegenRate
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -428,7 +415,6 @@ class HumanEntityMockTest
 	@Nested
 	class SetUnsaturatedRegenRate
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -449,7 +435,6 @@ class HumanEntityMockTest
 	@Nested
 	class SetStarvationRate
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -470,7 +455,6 @@ class HumanEntityMockTest
 	@Nested
 	class SetMainHand
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -491,7 +475,6 @@ class HumanEntityMockTest
 	@Nested
 	class SetEnchantmentSeed
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -512,7 +495,6 @@ class HumanEntityMockTest
 	@Nested
 	class SetFishHook
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -534,7 +516,6 @@ class HumanEntityMockTest
 	@Nested
 	class GetDiscoveredRecipes
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

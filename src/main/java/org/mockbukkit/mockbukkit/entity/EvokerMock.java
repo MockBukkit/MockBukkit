@@ -78,7 +78,6 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	@NotNull
 	private static Spellcaster.Spell toSpellcasterSpell(@Nullable Evoker.Spell spell)
 	{
-
 		if (spell == null)
 		{
 			return Spellcaster.Spell.NONE;

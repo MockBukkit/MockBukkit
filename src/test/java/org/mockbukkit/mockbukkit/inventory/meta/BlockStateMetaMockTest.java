@@ -36,10 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 public class BlockStateMetaMockTest
 {
-
 	@MockBukkitInject
 	private Server server;
-
 
 	@ParameterizedTest
 	@MethodSource("container_Materials_noFurnaces")

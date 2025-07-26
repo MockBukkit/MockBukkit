@@ -108,7 +108,6 @@ public class EndGatewayStateMock extends TileStateMock implements EndGateway
 		this.age = age;
 	}
 
-
 	@Override
 	protected String toStringInternal()
 	{

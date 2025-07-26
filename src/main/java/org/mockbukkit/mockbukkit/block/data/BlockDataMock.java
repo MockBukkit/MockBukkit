@@ -284,7 +284,6 @@ public class BlockDataMock implements BlockData
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
-
 			Object value = data.get(key);
 			if (value instanceof Enum<?> enumValue)
 			{

@@ -22,7 +22,6 @@ public class DamageTypeMock implements DamageType
 	static final String KEY = "key";
 	static final String TRANSLATION_KEY = "translationKey";
 
-
 	private final DamageScaling damageScaling;
 	private final DamageEffectMock damageEffect;
 	private final NamespacedKey namespacedKey;

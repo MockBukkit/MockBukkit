@@ -25,7 +25,6 @@ import java.io.IOException;
 
 public class KeyedDataGenerator implements DataGenerator
 {
-
 	private final File dataFolder;
 
 	public KeyedDataGenerator(@NotNull File dataFolder)

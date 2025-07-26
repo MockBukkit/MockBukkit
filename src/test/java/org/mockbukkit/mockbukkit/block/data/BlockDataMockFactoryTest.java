@@ -13,15 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 @ExtendWith(MockBukkitExtension.class)
 class BlockDataMockFactoryTest
 {
-
 	@Nested
 	class Mock
 	{
-
 		@Nested
 		class Tags
 		{
-
 			@ParameterizedTest
 			@ValueSource(strings = {
 					"BLACK_BED",
@@ -387,7 +384,6 @@ class BlockDataMockFactoryTest
 		@Nested
 		class ClassType
 		{
-
 			@ParameterizedTest
 			@ValueSource(strings = {
 					"AMETHYST_CLUSTER",

@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class StructureStateMockTest
 {
-
 	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;

@@ -3,13 +3,14 @@ package org.mockbukkit.mockbukkit.inventory;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -19,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerInventoryMockTest
 {
-
 	private ServerMock server;
 	private PlayerInventoryMock inventory;
 
@@ -30,12 +31,6 @@ class PlayerInventoryMockTest
 	{
 		server = MockBukkit.mock();
 		inventory = new PlayerInventoryMock(null);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -124,7 +119,6 @@ class PlayerInventoryMockTest
 	@Nested
 	class SetItem
 	{
-
 		@Test
 		void setItem_InInventory_ItemInContents()
 		{
@@ -288,7 +282,6 @@ class PlayerInventoryMockTest
 	@Nested
 	class GetItem
 	{
-
 		@ParameterizedTest
 		@EnumSource(value = EquipmentSlot.class, mode = EnumSource.Mode.EXCLUDE, names = { "BODY", "SADDLE" })
 		void getItem_Mirror(EquipmentSlot slot)

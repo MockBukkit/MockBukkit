@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ExtendWith(MockBukkitExtension.class)
 class CrafterDataMockTest
 {
-
 	private CrafterDataMock crafter;
 
 	@BeforeEach
@@ -29,7 +28,6 @@ class CrafterDataMockTest
 	@Nested
 	class SetCrafting
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -49,7 +47,6 @@ class CrafterDataMockTest
 	@Nested
 	class SetTriggered
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -69,7 +66,6 @@ class CrafterDataMockTest
 	@Nested
 	class SetOrientation
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

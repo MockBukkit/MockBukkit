@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -22,16 +21,10 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 @ExtendWith(MockBukkitExtension.class)
 class TNTPrimedMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private TNTPrimedMock tntPrimed;
-
-	@BeforeEach
-	void setUp()
-	{
-		tntPrimed = new TNTPrimedMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetType()

@@ -36,7 +36,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class DamageSourceMockTest
 {
-
 	private final Location damageLocation = new Location(new WorldMock(), 0, 0, 0);
 
 	@MockBukkitInject
@@ -77,7 +76,6 @@ class DamageSourceMockTest
 	@Test
 	void getDamageLocation_WhenDamageLocationIsValid()
 	{
-
 		Location actual = damageSourceMock.getDamageLocation();
 
 		assertNotSame(damageLocation, actual);
@@ -87,7 +85,6 @@ class DamageSourceMockTest
 	@Test
 	void getDamageLocation_WhenDamageLocationIsNull()
 	{
-
 		DamageSourceMock noLocationMock = new DamageSourceMock(damageType, causingEntity, directEntity, null);
 
 		Location actual = noLocationMock.getDamageLocation();
@@ -130,7 +127,6 @@ class DamageSourceMockTest
 	@Test
 	void isIndirect_WhenCausingEntityIsEqualToDirectEntity()
 	{
-
 		DamageSourceMock sameEntity = new DamageSourceMock(damageType, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = sameEntity.isIndirect();
@@ -157,7 +153,6 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsNever()
 	{
-
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
 		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, causingEntity, causingEntity, damageLocation);
@@ -191,7 +186,6 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsCausedByPlayer()
 	{
-
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
 		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, serverMock.addPlayer(), null, null);
@@ -202,7 +196,6 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsDoneByPlayer()
 	{
-
 		Player player = new PlayerMock(serverMock, "MockBukkit");
 		DamageSourceMock damageSource = new DamageSourceMock(DamageType.GENERIC, player, directEntity, damageLocation);
 

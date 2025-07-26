@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class AgeableDataMockTest
 {
-
 	private AgeableDataMock ageable;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class AgeableDataMockTest
 	@Nested
 	class SetAge
 	{
-
 		@Test
 		void getAge()
 		{
@@ -55,7 +53,6 @@ class AgeableDataMockTest
 	@Nested
 	class GetMaximumAge
 	{
-
 		@Test
 		void givenAge1Material()
 		{

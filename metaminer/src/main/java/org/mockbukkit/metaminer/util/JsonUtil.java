@@ -20,7 +20,6 @@ import java.util.Optional;
 
 public class JsonUtil
 {
-
 	private JsonUtil()
 	{
 		throw new IllegalStateException("Utility class");

@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Mob;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,21 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class VexMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private VexMock vex;
-
-	@BeforeEach
-	void setUp()
-	{
-		vex = new VexMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetCharging
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -58,7 +50,6 @@ class VexMockTest
 	@Nested
 	class SetBound
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -114,7 +105,6 @@ class VexMockTest
 	@Nested
 	class SetSummoner
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -138,7 +128,6 @@ class VexMockTest
 	@Nested
 	class SetLimitedLifetime
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -158,7 +147,6 @@ class VexMockTest
 	@Nested
 	class SetLimitedLifetimeTicks
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

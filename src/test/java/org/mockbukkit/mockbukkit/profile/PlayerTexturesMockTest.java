@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class PlayerTexturesMockTest
 {
-
 	private PlayerProfileMock profile;
 
 	@BeforeEach

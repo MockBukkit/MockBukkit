@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Map;
@@ -16,9 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class OfflinePlayerMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private UUID uuid;
 	private OfflinePlayerMock player;
@@ -26,16 +30,9 @@ class OfflinePlayerMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		uuid = UUID.randomUUID();
 		player = new OfflinePlayerMock(uuid, "player");
 		server.getPlayerList().addOfflinePlayer(player);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

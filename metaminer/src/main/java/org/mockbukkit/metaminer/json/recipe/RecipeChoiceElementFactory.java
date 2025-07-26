@@ -9,7 +9,6 @@ import org.mockbukkit.metaminer.json.ItemStackElementFactory;
 
 public class RecipeChoiceElementFactory
 {
-
 	/**
 	 * Converts a recipe choice into a JsonElement.
 	 *

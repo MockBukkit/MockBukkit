@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.SpawnerMinecart;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +14,6 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,16 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class SpawnerMinecartMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock server;
 	private SpawnerMinecart minecart;
-
-	@BeforeEach
-	public void setUp()
-	{
-		minecart = new SpawnerMinecartMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetMinecartMaterial()
@@ -53,7 +41,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class GetBoundingBox
 	{
-
 		@Test
 		void givenDefaultLocation()
 		{
@@ -91,7 +78,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetSpawnedType
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnNull()
 		{
@@ -121,7 +107,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetDelay
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnTwenty()
 		{
@@ -141,7 +126,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetMinSpawnDelay
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnTwoHundred()
 		{
@@ -169,7 +153,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetMaxSpawnDelay
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnEightHundred()
 		{
@@ -205,7 +188,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetSpawnCount
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnFour()
 		{
@@ -225,7 +207,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetRequiredPlayerRange
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnSixteen()
 		{
@@ -245,7 +226,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetSpawnRange
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnFour()
 		{
@@ -265,7 +245,6 @@ class SpawnerMinecartMockTest
 	@Nested
 	class SetMaxNearbyEntities
 	{
-
 		@Test
 		void givenDefaultValue_ShouldReturnSix()
 		{

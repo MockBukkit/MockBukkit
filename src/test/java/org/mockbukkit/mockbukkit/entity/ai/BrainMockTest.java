@@ -4,8 +4,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.memory.MemoryKey;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -17,15 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class BrainMockTest
 {
-
 	private final BrainMock brain = new BrainMock();
 
 	@Nested
 	class AssertIsSupportedValue
 	{
-
 		@Test
 		void giveNullValue()
 		{
@@ -77,7 +78,6 @@ class BrainMockTest
 	@Nested
 	class SetMemory
 	{
-
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -129,7 +129,6 @@ class BrainMockTest
 	@Nested
 	class GetMemory
 	{
-
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -142,7 +141,6 @@ class BrainMockTest
 	@Nested
 	class HasMemoryValue
 	{
-
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -171,7 +169,6 @@ class BrainMockTest
 	@Nested
 	class EraseMemory
 	{
-
 		@Test
 		void givenNullMemoryKey()
 		{
@@ -208,7 +205,6 @@ class BrainMockTest
 	@Nested
 	class ClearMemories
 	{
-
 		@Test
 		void givenExistingMemoryKey()
 		{
@@ -240,7 +236,6 @@ class BrainMockTest
 	@Nested
 	class Clone
 	{
-
 		@Test
 		void givenExistingMemoryKey()
 		{

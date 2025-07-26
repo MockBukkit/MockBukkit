@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class TestBlockDataMockTest
 {
-
 	private TestBlockDataMock testBlock;
 
 	@BeforeEach
@@ -27,7 +26,6 @@ class TestBlockDataMockTest
 	@Nested
 	class SetMode
 	{
-
 		@Test
 		void givenDefaultMode()
 		{

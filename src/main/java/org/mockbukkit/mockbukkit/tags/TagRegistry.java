@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public enum TagRegistry
 {
-
 	/**
 	 * The blocks registry
 	 */

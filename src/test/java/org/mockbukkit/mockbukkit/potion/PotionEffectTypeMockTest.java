@@ -22,11 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-
 @ExtendWith(MockBukkitExtension.class)
 class PotionEffectTypeMockTest
 {
-
 	@Test
 	void constructorValues()
 	{
@@ -140,7 +138,6 @@ class PotionEffectTypeMockTest
 		assertEquals(22, potionEffectType.getId());
 		assertEquals(2445989, potionEffectType.getColor().asRGB());
 	}
-
 
 	@ParameterizedTest
 	@MethodSource("getPotionEffectTypes")

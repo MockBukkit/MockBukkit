@@ -18,7 +18,6 @@ import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMat
 @ExtendWith(MockBukkitExtension.class)
 class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 	private AllayMock allay;

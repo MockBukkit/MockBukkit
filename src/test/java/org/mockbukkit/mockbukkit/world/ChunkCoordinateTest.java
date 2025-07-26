@@ -2,16 +2,18 @@ package org.mockbukkit.mockbukkit.world;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class ChunkCoordinateTest
 {
-
 	@ParameterizedTest
 	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
 	void getX(int value)
@@ -31,7 +33,6 @@ class ChunkCoordinateTest
 	@Nested
 	class Equals
 	{
-
 		@Test
 		void givenEqualValues()
 		{
@@ -67,7 +68,6 @@ class ChunkCoordinateTest
 	@Nested
 	class HashCode
 	{
-
 		@Test
 		void givenEqualValues()
 		{

@@ -8,7 +8,6 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ShieldMeta;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -34,21 +33,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class ShieldMetaMockTest
 {
-
 	@MockBukkitInject
 	private Server server;
+	@MockBukkitInject
 	private ShieldMeta meta;
 	private final List<Pattern> patterns = List.of(
 			new Pattern(DyeColor.GRAY, PatternType.GRADIENT),
 			new Pattern(DyeColor.GRAY, PatternType.GRADIENT_UP),
 			new Pattern(DyeColor.BLACK, PatternType.BRICKS)
 	);
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new ShieldMetaMock();
-	}
 
 	@Test
 	void testGetBaseColorDefault()

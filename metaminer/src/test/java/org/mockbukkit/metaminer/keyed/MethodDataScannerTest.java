@@ -10,6 +10,7 @@ import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,18 +24,15 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class MethodDataScannerTest
 {
-
 	@Nested
 	class GetReturnValue
 	{
-
 		@Nested
 		class Primitives
 		{
-
-
 			@Test
 			void givenVoidType() throws InvocationTargetException, IllegalAccessException
 			{
@@ -195,7 +193,6 @@ class MethodDataScannerTest
 
 	static class UnderTestClass
 	{
-
 		static void voidMethod()
 		{
 			// Nothing to do here

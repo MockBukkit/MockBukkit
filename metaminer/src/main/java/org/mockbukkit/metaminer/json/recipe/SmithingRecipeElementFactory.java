@@ -9,7 +9,6 @@ import org.mockbukkit.metaminer.json.KeyedElementFactory;
 
 public class SmithingRecipeElementFactory
 {
-
 	/**
 	 * Converts a smithing recipe into a JsonElement.
 	 *

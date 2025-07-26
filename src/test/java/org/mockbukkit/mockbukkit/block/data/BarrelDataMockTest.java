@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class BarrelDataMockTest
 {
-
 	private BarrelDataMock barrel;
 
 	@BeforeEach
@@ -30,7 +29,6 @@ class BarrelDataMockTest
 	@Nested
 	class SetFacing
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -62,7 +60,6 @@ class BarrelDataMockTest
 	@Nested
 	class SetOpen
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

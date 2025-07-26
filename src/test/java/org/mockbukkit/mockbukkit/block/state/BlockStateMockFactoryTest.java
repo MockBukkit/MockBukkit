@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 @ExtendWith(MockBukkitExtension.class)
 class BlockStateMockFactoryTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 
@@ -32,7 +31,6 @@ class BlockStateMockFactoryTest
 	@CsvFileSource(resources = "/blocks/block_states.csv")
 	void validatePossibleStates_GivenBlock(Material material, Class<? extends BlockState> blockStateClass)
 	{
-
 		World world = server.addSimpleWorld("test");
 		world.setType(0, 63, 0, Material.BEDROCK);
 		world.setType(0, 64, 0, material);

@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(MockBukkitExtension.class)
 class BeaconInventoryMockTest
 {
-
 	private BeaconInventoryMock inventory;
 
 	@BeforeEach

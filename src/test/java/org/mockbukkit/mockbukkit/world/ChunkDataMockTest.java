@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @ExtendWith(MockBukkitExtension.class)
 class ChunkDataMockTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 	private WorldMock world;

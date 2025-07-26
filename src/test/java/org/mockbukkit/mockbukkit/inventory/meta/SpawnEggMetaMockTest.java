@@ -1,20 +1,18 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class SpawnEggMetaMockTest
 {
 
+	@MockBukkitInject
 	private SpawnEggMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new SpawnEggMetaMock();
-	}
 
 	@Test
 	void getSpawnedType_ThrowsException()

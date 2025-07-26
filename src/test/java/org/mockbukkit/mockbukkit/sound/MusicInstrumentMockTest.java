@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class MusicInstrumentMockTest
 {
-
 	private NamespacedKey key;
 	private MusicInstrumentMock musicInstrument;
 

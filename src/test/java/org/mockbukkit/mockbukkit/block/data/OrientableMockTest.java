@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class OrientableMockTest
 {
-
 	private OrientableMock orientable;
 
 	@BeforeEach
@@ -29,7 +28,6 @@ class OrientableMockTest
 	@Nested
 	class SetAxis
 	{
-
 		@Test
 		void givenDefaultAxis()
 		{
@@ -49,7 +47,6 @@ class OrientableMockTest
 	@Nested
 	class GetAxes
 	{
-
 		@Test
 		void allValuesArePresent()
 		{

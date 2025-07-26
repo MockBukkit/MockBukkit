@@ -4,14 +4,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,16 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockBukkitExtension.class)
 class CommandMinecartMockTest
 {
-
-	CommandMinecart minecart;
 	@MockBukkitInject
-	ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		minecart = new CommandMinecartMock(server, UUID.randomUUID());
-	}
+	CommandMinecart minecart;
 
 	@Test
 	void tesTGetCommandDefault()

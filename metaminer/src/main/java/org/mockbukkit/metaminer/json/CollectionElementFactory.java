@@ -11,7 +11,6 @@ import java.util.function.Function;
 
 public class CollectionElementFactory
 {
-
 	/**
 	 * Converts a collection into a JsonElement.
 	 *

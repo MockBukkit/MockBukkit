@@ -36,7 +36,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class RaidMockTest
 {
-
 	private final World raidWorld = new WorldMock();
 	private final Location raidLocation = new Location(raidWorld, 0, 0, 0);
 	private final RaidMock raid = new RaidMock(1, raidLocation);
@@ -61,7 +60,6 @@ class RaidMockTest
 	@ValueSource(booleans = { true, false })
 	void isStarted_GivenUserValue(boolean expectedValue)
 	{
-
 		raid.setStarted(expectedValue);
 
 		assertEquals(expectedValue, raid.isStarted());
@@ -229,7 +227,6 @@ class RaidMockTest
 	@Test
 	void getTotalHealth()
 	{
-
 		Raider raiderA = createTestRaider();
 		Raider raiderB = createTestRaider();
 

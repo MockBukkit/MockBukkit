@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class RedstoneWireDataMockTest
 {
-
 	private RedstoneWireDataMock wire;
 
 	@BeforeEach
@@ -34,7 +33,6 @@ class RedstoneWireDataMockTest
 	@Nested
 	class SetFace
 	{
-
 		private static final Set<BlockFace> VALID_FACES = Set.of(
 				BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST
 		);
@@ -93,7 +91,6 @@ class RedstoneWireDataMockTest
 	@Nested
 	class SetPower
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -121,7 +118,6 @@ class RedstoneWireDataMockTest
 	@Nested
 	class GetMaximumLevel
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

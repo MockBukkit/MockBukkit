@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class ChestDataMockTest
 {
-
 	private ChestDataMock chest;
 
 	@BeforeEach
@@ -31,7 +30,6 @@ class ChestDataMockTest
 	@Nested
 	class SetType
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -51,7 +49,6 @@ class ChestDataMockTest
 	@Nested
 	class SetFacing
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -83,7 +80,6 @@ class ChestDataMockTest
 	@Nested
 	class SetWaterlogged
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

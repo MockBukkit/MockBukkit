@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class VaultDataMockTest
 {
-
 	private VaultDataMock vault;
 
 	@BeforeEach
@@ -31,7 +30,6 @@ class VaultDataMockTest
 	@Nested
 	class SetVaultState
 	{
-
 		@Test
 		void givenDefaultAxis()
 		{
@@ -51,7 +49,6 @@ class VaultDataMockTest
 	@Nested
 	class SetOminous
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -71,7 +68,6 @@ class VaultDataMockTest
 	@Nested
 	class SetFacing
 	{
-
 		@Test
 		void givenDefaultValue()
 		{

@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockBukkitExtension.class)
 class PaperCommandsMockTest
 {
-
 	@MockBukkitInject
 	ServerMock serverMock;
 	List<Object> arguments = List.of();

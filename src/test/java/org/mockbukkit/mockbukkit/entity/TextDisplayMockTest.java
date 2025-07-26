@@ -5,7 +5,6 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Color;
 import org.bukkit.entity.TextDisplay;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,9 +16,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 
-import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,21 +28,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockBukkitExtension.class)
 class TextDisplayMockTest
 {
-
 	@MockBukkitInject
-	private ServerMock server;
 	private TextDisplayMock textDisplay;
-
-	@BeforeEach
-	void beforeEach()
-	{
-		this.textDisplay = new TextDisplayMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetText
 	{
-
 		@ParameterizedTest
 		@ValueSource(strings = {
 				"Hello!",
@@ -76,7 +64,6 @@ class TextDisplayMockTest
 	@Nested
 	class Text
 	{
-
 		@ParameterizedTest
 		@ValueSource(strings = {
 				"Hello!",
@@ -112,7 +99,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetLineWidth
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -133,7 +119,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetBackgroundColor
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -179,7 +164,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetTextOpacity
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -200,7 +184,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetShadowed
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -221,7 +204,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetSeeThrough
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -242,7 +224,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetDefaultBackground
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
@@ -263,7 +244,6 @@ class TextDisplayMockTest
 	@Nested
 	class SetAlignment
 	{
-
 		@Test
 		void givenDefaultValue()
 		{
