@@ -2,10 +2,12 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Orientation;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.Levelled;
@@ -23,7 +25,12 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.Gate;
+import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
@@ -31,6 +38,8 @@ import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
+import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -134,11 +143,25 @@ public enum BlockDataKey
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
+	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
+	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
+	ENABLED("enabled", Boolean::parseBoolean, Hopper.class::isInstance),
+	ORIENTATION("orientation", string -> Orientation.valueOf(string.toUpperCase(Locale.ROOT)), Crafter.class::isInstance),
+	HINGE("hinge", string -> Door.Hinge.valueOf(string.toUpperCase(Locale.ROOT)), Door.class::isInstance),
+	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
+	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
+
+	TRIAL_SPAWNER_STATE("trial_spawner_state", string -> TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
+	OMINOUS("ominous", Boolean::parseBoolean, c -> c instanceof TrialSpawner || c instanceof Vault),
+
+	VAULT_STATE("vault_state", string -> Vault.State.valueOf(string.toUpperCase(Locale.ROOT)), Vault.class::isInstance),
+
 	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
 
 	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
+	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
 	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
@@ -149,9 +172,9 @@ public enum BlockDataKey
 	private static final Set<String> KEYS = compileKeys();
 
 
-	private String key;
-	private Function<String, Object> valueConstructor;
-	private Predicate<BlockData> applicableTo;
+	private final String key;
+	private final Function<String, Object> valueConstructor;
+	private final Predicate<BlockData> applicableTo;
 
 	BlockDataKey(String key, Function<String, Object> valueConstructor, Predicate<BlockData> applicableTo)
 	{

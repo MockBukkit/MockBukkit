@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
 import io.papermc.paper.InternalAPIBridge;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
 import org.bukkit.NamespacedKey;
@@ -13,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+
+import java.util.function.Predicate;
 
 @ApiStatus.Internal
 @ApiStatus.Experimental
@@ -49,6 +52,12 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 
 	@Override
 	public CombatEntry createCombatEntry(DamageSource damageSource, float damage, @org.jspecify.annotations.Nullable FallLocationType fallLocationType, float fallDistance)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
 	{
 		throw new UnimplementedOperationException();
 	}

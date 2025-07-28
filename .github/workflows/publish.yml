@@ -6,6 +6,15 @@ on:
       version:
         required: true
         type: string
+    secrets:
+      OSSRH_USERNAME:
+        required: true
+      OSSRH_TOKEN:
+        required: true
+      KEY_PASS:
+        required: true
+      PRIV_KEY:
+        required: true
   workflow_dispatch:
     inputs:
       version:

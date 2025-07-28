@@ -131,18 +131,14 @@ class CrossbowMetaMockTest
 	{
 		// List#of doesn't accept null values.
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null));
-		});
+				meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null)));
 	}
 
 	@Test
 	void setChargedProjectiles_NotArrow_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE)));
-		});
+				meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE))));
 	}
 
 	@Test
@@ -184,9 +180,7 @@ class CrossbowMetaMockTest
 	void addChargedProjectile_NotArrow_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.addChargedProjectile(new ItemStackMock(Material.STONE));
-		});
+				meta.addChargedProjectile(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test

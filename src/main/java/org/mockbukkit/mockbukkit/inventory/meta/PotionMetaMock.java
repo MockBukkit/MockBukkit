@@ -291,7 +291,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	 * @param args A serialized PotionMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the PotionMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
 	public static @NotNull PotionMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		PotionMetaMock serialMock = new PotionMetaMock();

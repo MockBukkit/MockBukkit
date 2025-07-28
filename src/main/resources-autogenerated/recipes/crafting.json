@@ -3119,6 +3119,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:black_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -3982,6 +4034,58 @@
 			"type": "minecraft:blue_dye"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:blue_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "BUILDING",
@@ -5431,6 +5535,58 @@
 			"type": "minecraft:brown_dye"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:brown_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -10252,6 +10408,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:cyan_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -12636,6 +12844,77 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:soul_sand"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:ghast_tear"
+				],
+				"type": "material"
+			}
+		},
+		"group": "dry_ghast",
+		"key": "minecraft:dried_ghast",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:dried_ghast"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choices": [
 			{
@@ -12901,7 +13180,7 @@
 		"type": "shaped"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -12930,7 +13209,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_black_bed",
 		"result": {
 			"amount": 1,
@@ -12939,7 +13218,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -12968,11 +13247,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_black_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:black_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:black_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_black_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13015,7 +13332,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13044,7 +13361,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_blue_bed",
 		"result": {
 			"amount": 1,
@@ -13053,7 +13370,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13082,11 +13399,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_blue_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:blue_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_blue_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13129,7 +13484,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13158,7 +13513,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_brown_bed",
 		"result": {
 			"amount": 1,
@@ -13167,7 +13522,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13196,11 +13551,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_brown_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:brown_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:brown_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_brown_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13243,7 +13636,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13272,7 +13665,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_cyan_bed",
 		"result": {
 			"amount": 1,
@@ -13281,7 +13674,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13310,11 +13703,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_cyan_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:cyan_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:cyan_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_cyan_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13357,7 +13788,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13386,7 +13817,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_gray_bed",
 		"result": {
 			"amount": 1,
@@ -13395,7 +13826,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13424,11 +13855,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_gray_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:gray_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_gray_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13471,7 +13940,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13500,7 +13969,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_green_bed",
 		"result": {
 			"amount": 1,
@@ -13509,7 +13978,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13538,11 +14007,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_green_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:green_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:green_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_green_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13585,7 +14092,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13614,7 +14121,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_light_blue_bed",
 		"result": {
 			"amount": 1,
@@ -13623,7 +14130,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13652,11 +14159,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_light_blue_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:light_blue_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_light_blue_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13699,7 +14244,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13728,7 +14273,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_light_gray_bed",
 		"result": {
 			"amount": 1,
@@ -13737,7 +14282,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13766,11 +14311,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_light_gray_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:light_gray_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_light_gray_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13813,7 +14396,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13842,7 +14425,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_lime_bed",
 		"result": {
 			"amount": 1,
@@ -13851,7 +14434,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13880,11 +14463,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_lime_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:lime_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:lime_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_lime_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_harness"
 		},
 		"type": "shapeless"
 	},
@@ -13927,7 +14548,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13956,7 +14577,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_magenta_bed",
 		"result": {
 			"amount": 1,
@@ -13965,7 +14586,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -13994,11 +14615,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_magenta_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:magenta_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:magenta_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_magenta_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_harness"
 		},
 		"type": "shapeless"
 	},
@@ -14041,7 +14700,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14070,7 +14729,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_orange_bed",
 		"result": {
 			"amount": 1,
@@ -14079,7 +14738,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14108,11 +14767,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_orange_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:orange_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:orange_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_orange_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_harness"
 		},
 		"type": "shapeless"
 	},
@@ -14155,7 +14852,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14184,7 +14881,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_pink_bed",
 		"result": {
 			"amount": 1,
@@ -14193,7 +14890,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14222,11 +14919,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_pink_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:pink_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:pink_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_pink_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_harness"
 		},
 		"type": "shapeless"
 	},
@@ -14269,7 +15004,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14298,7 +15033,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_purple_bed",
 		"result": {
 			"amount": 1,
@@ -14307,7 +15042,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14336,11 +15071,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_purple_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:purple_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:purple_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_purple_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_harness"
 		},
 		"type": "shapeless"
 	},
@@ -14383,7 +15156,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14412,7 +15185,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_red_bed",
 		"result": {
 			"amount": 1,
@@ -14421,7 +15194,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14450,11 +15223,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_red_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:red_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:red_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:white_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_red_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_harness"
 		},
 		"type": "shapeless"
 	},
@@ -14497,7 +15308,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14526,7 +15337,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_white_bed",
 		"result": {
 			"amount": 1,
@@ -14535,7 +15346,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14564,11 +15375,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_white_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:white_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:white_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:yellow_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_white_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_harness"
 		},
 		"type": "shapeless"
 	},
@@ -14611,7 +15460,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14640,7 +15489,7 @@
 				"type": "material"
 			}
 		],
-		"group": "bed",
+		"group": "bed_dye",
 		"key": "minecraft:dye_yellow_bed",
 		"result": {
 			"amount": 1,
@@ -14649,7 +15498,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -14678,11 +15527,49 @@
 				"type": "material"
 			}
 		],
-		"group": "carpet",
+		"group": "carpet_dye",
 		"key": "minecraft:dye_yellow_carpet",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:yellow_carpet"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:yellow_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_harness",
+					"minecraft:blue_harness",
+					"minecraft:brown_harness",
+					"minecraft:cyan_harness",
+					"minecraft:gray_harness",
+					"minecraft:green_harness",
+					"minecraft:light_blue_harness",
+					"minecraft:light_gray_harness",
+					"minecraft:lime_harness",
+					"minecraft:magenta_harness",
+					"minecraft:orange_harness",
+					"minecraft:pink_harness",
+					"minecraft:purple_harness",
+					"minecraft:red_harness",
+					"minecraft:white_harness"
+				],
+				"type": "material"
+			}
+		],
+		"group": "harness_dye",
+		"key": "minecraft:dye_yellow_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_harness"
 		},
 		"type": "shapeless"
 	},
@@ -17558,6 +18445,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:gray_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -18158,6 +19097,58 @@
 			"type": "minecraft:green_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:green_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -20726,7 +21717,7 @@
 			},
 			"e": {
 				"choices": [
-					"minecraft:slime_ball"
+					"minecraft:string"
 				],
 				"type": "material"
 			},
@@ -21520,6 +22511,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:light_blue_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -22230,6 +23273,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:light_gray_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -22916,6 +24011,58 @@
 			"type": "minecraft:lime_dye"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:lime_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -23805,6 +24952,58 @@
 			"type": "minecraft:magenta_dye"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:magenta_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -27490,6 +28689,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:orange_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -29259,6 +30510,58 @@
 			"type": "minecraft:pink_dye"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:pink_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -31611,6 +32914,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:purple_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -33212,6 +34567,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:red_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "BUILDING",
 		"choiceMap": {
 			"a": {
@@ -34517,6 +35924,46 @@
 			"abc",
 			"def",
 			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:iron_ingot"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:saddle",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:saddle"
+		},
+		"shape": [
+			"abc",
+			"def"
 		],
 		"type": "shaped"
 	},
@@ -42826,6 +44273,58 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:white_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"group": "",
 		"input": {
@@ -44018,6 +45517,58 @@
 			"type": "minecraft:yellow_dye"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:leather"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:glass"
+				],
+				"type": "material"
+			}
+		},
+		"group": "harness",
+		"key": "minecraft:yellow_harness",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_harness"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",

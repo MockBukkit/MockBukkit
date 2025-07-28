@@ -8,8 +8,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-import java.io.IOException;
-
 public abstract class PersistentDataContainerViewMock implements PersistentDataContainerView
 {
 
@@ -58,7 +56,7 @@ public abstract class PersistentDataContainerViewMock implements PersistentDataC
 	}
 
 	@Override
-	public byte[] serializeToBytes() throws IOException
+	public byte[] serializeToBytes()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -3,7 +3,7 @@
 		{
 			"key": "minecraft:cold",
 			"name": "COLD",
-			"ordinal": 2
+			"ordinal": 0
 		},
 		{
 			"key": "minecraft:temperate",
@@ -13,7 +13,7 @@
 		{
 			"key": "minecraft:warm",
 			"name": "WARM",
-			"ordinal": 0
+			"ordinal": 2
 		}
 	]
 }

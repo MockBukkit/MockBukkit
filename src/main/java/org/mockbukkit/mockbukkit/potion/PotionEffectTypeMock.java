@@ -144,7 +144,6 @@ public class PotionEffectTypeMock extends PotionEffectType
 		return color;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -229,6 +228,12 @@ public class PotionEffectTypeMock extends PotionEffectType
 	public @NotNull String getTranslationKey()
 	{
 		return this.translationKey;
+	}
+
+	@Override
+	public String toString()
+	{
+		return name;
 	}
 
 }

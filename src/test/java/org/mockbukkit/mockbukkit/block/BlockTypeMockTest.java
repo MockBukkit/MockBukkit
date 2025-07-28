@@ -528,7 +528,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenGate()
 		{
 			Gate data = BlockType.OAK_FENCE_GATE.createBlockData();
@@ -637,7 +636,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBrushable()
 		{
 			Brushable data = BlockType.SUSPICIOUS_SAND.createBlockData();
@@ -836,7 +834,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHopper()
 		{
 			Hopper data = BlockType.HOPPER.createBlockData();
@@ -862,7 +859,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenFurnace()
 		{
 			Furnace data = BlockType.FURNACE.createBlockData();
@@ -871,7 +867,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDoor()
 		{
 			Door data = BlockType.OAK_DOOR.createBlockData();
@@ -1119,7 +1114,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCrafter()
 		{
 			Crafter data = BlockType.CRAFTER.createBlockData();
@@ -1137,7 +1131,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenLectern()
 		{
 			Lectern data = BlockType.LECTERN.createBlockData();
@@ -1179,6 +1172,15 @@ class BlockTypeMockTest
 			Jigsaw data = BlockType.JIGSAW.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Jigsaw.class, data);
+		}
+
+		@Test
+		@Disabled("Not implemented yet #1088")
+		void givenBeeNest()
+		{
+			Beehive data = BlockType.BEE_NEST.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Beehive.class, data);
 		}
 
 		@Test
@@ -1344,7 +1346,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenTrialSpawner()
 		{
 			TrialSpawner data = BlockType.TRIAL_SPAWNER.createBlockData();
@@ -1353,7 +1354,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenVault()
 		{
 			Vault data = BlockType.VAULT.createBlockData();

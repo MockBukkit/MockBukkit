@@ -5,6 +5,7 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.EntityType;
+import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -26,6 +27,7 @@ public class BeeMock extends AnimalsMock implements Bee
 	private boolean hasStung = false;
 	private int anger = 0;
 	private int cannotEnterHiveTicks = 0;
+	private @NonNegative int timeSinceSting = 0;
 	private @NotNull TriState rollingOverride = TriState.NOT_SET;
 
 	/**
@@ -158,6 +160,19 @@ public class BeeMock extends AnimalsMock implements Bee
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTimeSinceSting(@NonNegative int time)
+	{
+		Preconditions.checkArgument(time >= 0, "Time since sting cannot be negative");
+		this.timeSinceSting = time;
+	}
+
+	@Override
+	public int getTimeSinceSting()
+	{
+		return this.timeSinceSting;
 	}
 
 	@Override

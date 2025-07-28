@@ -19,22 +19,15 @@ public class RecipeChoiceElementFactory
 	@Nullable
 	public static JsonObject toJson(@Nullable RecipeChoice recipeChoice)
 	{
-		if (recipeChoice == null)
+		return switch (recipeChoice)
 		{
-			return null;
-		}
+			case null -> null;
+			case RecipeChoice.MaterialChoice materialChoice -> getMaterialChoice(materialChoice);
+			case RecipeChoice.ExactChoice exactChoice -> getExactChoice(exactChoice);
+			default ->
+					throw new UnsupportedOperationException("Unsupported recipe choice: " + recipeChoice.getClass().getName());
+		};
 
-		if (recipeChoice instanceof RecipeChoice.MaterialChoice materialChoice)
-		{
-			return getMaterialChoice(materialChoice);
-		}
-
-		if (recipeChoice instanceof RecipeChoice.ExactChoice exactChoice)
-		{
-			return getExactChoice(exactChoice);
-		}
-
-		throw new UnsupportedOperationException("Unsupported recipe choice: " + recipeChoice.getClass().getName());
 	}
 
 	@NotNull

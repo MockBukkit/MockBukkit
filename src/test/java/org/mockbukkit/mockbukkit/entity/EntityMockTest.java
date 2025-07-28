@@ -699,9 +699,7 @@ class EntityMockTest
 	{
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			zombie.setArrowsInBody(-1);
-		});
+				zombie.setArrowsInBody(-1));
 	}
 
 	@Test
@@ -1559,6 +1557,14 @@ class EntityMockTest
 		entity.sendMessage("Hello!");
 
 		assertNull(entity.nextMessage());
+	}
+
+	@Test
+	void testEquals()
+	{
+		assertNotEquals(entity, new Object());
+		assertEquals(entity, entity);
+		assertNotEquals(entity, new SimpleEntityMock(server));
 	}
 
 }

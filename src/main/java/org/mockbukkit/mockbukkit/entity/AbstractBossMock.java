@@ -14,7 +14,7 @@ import java.util.UUID;
 abstract class AbstractBossMock extends MonsterMock implements Boss
 {
 
-	protected BossBarMock bossBarMock;
+	protected final BossBarMock bossBarMock;
 
 	/**
 	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.

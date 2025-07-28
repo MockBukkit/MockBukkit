@@ -79,9 +79,7 @@ class ProfileBanListMockTest
 	void testGetBanEntryNullThrows()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			banList.getBanEntry((String) null);
-		});
+				banList.getBanEntry((String) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
@@ -90,9 +88,7 @@ class ProfileBanListMockTest
 	void testGetBanEntryNullThrowsPlayerProfile()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			banList.getBanEntry((PlayerProfileMock) null);
-		});
+				banList.getBanEntry((PlayerProfileMock) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
@@ -157,9 +153,7 @@ class ProfileBanListMockTest
 	void testPardonStringNull()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			banList.pardon((String) null);
-		});
+				banList.pardon((String) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 
@@ -169,9 +163,7 @@ class ProfileBanListMockTest
 	void testPardonProfileNull()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			banList.pardon((PlayerProfileMock) null);
-		});
+				banList.pardon((PlayerProfileMock) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 

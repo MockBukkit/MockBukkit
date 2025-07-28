@@ -22,7 +22,7 @@ class ChestBoatMockTest
 	private ChestBoatMock boat;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		boat = new ChestBoatMock(server, UUID.randomUUID());
 	}

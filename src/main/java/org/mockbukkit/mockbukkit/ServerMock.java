@@ -990,6 +990,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean forcesDefaultGameMode()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated
 	public int broadcastMessage(@NotNull String message)
 	{
@@ -1599,7 +1605,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		int pollCount = 0;
-		while (pollCount < 50 && getScheduler().getActiveWorkers().size() > 0)
+		while (pollCount < 50 && !getScheduler().getActiveWorkers().isEmpty())
 		{
 			try
 			{
@@ -1624,7 +1630,7 @@ public class ServerMock extends Server.Spigot implements Server
 			@SuppressWarnings("unchecked")
 			Class<? extends JavaPlugin> originalClass = (Class<? extends JavaPlugin>) oldJavaPlugin.getClass().getSuperclass();
 			// Don't use MockBukkit#load here since we enable later.
-			JavaPlugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
+			Plugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
 			newPlugins.add(plugin);
 		}
 
@@ -1822,9 +1828,7 @@ public class ServerMock extends Server.Spigot implements Server
 				.getEntries()
 				.stream()
 				.map(banEntry ->
-				{
-					return ((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId();
-				})
+						((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId())
 				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
 	}
@@ -2158,9 +2162,9 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData(String data)
+	public @NotNull BlockData createBlockData(@NotNull String data)
 	{
-		return this.createBlockData((Material) null, data);
+		return this.createBlockData(null, data);
 	}
 
 	@Override
@@ -2201,7 +2205,6 @@ public class ServerMock extends Server.Spigot implements Server
 		materialTags.put(registry.getRegistry(), registry);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
@@ -2361,7 +2364,6 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
 		return RegistryAccess.registryAccess().getRegistry(tClass);

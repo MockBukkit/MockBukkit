@@ -139,6 +139,7 @@ public final class ItemStackMirror extends ItemStack
 		return itemStack.canRepair(toBeRepaired);
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	public @NotNull ItemStack clone()
 	{

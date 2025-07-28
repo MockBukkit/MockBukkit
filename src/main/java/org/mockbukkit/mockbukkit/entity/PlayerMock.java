@@ -6,6 +6,7 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
+import io.papermc.paper.connection.PlayerGameConnection;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
@@ -3358,6 +3359,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setDeathScreenScore(int deathScreenScore)
 	{
 		this.deathScreenScore = deathScreenScore;
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public PlayerGameConnection getConnection()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 }

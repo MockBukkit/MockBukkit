@@ -18,7 +18,7 @@ class BambooDataMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private BambooDataMock bamboo = new BambooDataMock();
+	private final BambooDataMock bamboo = new BambooDataMock();
 
 	@Test
 	void getLeaves()

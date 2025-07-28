@@ -7,7 +7,10 @@ import org.bukkit.WorldCreator;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
@@ -198,6 +201,34 @@ class BeeMockTest
 	{
 		bee.setBaby();
 		assertEquals(0.15D, bee.getEyeHeight());
+	}
+
+	@Nested
+	class SetTimeSinceSting
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0,  bee.getTimeSinceSting());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		void givenValidValues(int time)
+		{
+			bee.setTimeSinceSting(time);
+			assertEquals(time,  bee.getTimeSinceSting());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { -5, -4, -3, -2, -1 })
+		void givenNonvalidValues(int time)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bee.setTimeSinceSting(time));
+			assertEquals("Time since sting cannot be negative", e.getMessage());
+		}
+
 	}
 
 }

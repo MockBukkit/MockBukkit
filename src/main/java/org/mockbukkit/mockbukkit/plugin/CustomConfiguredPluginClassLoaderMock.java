@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -56,9 +55,9 @@ public class CustomConfiguredPluginClassLoaderMock extends URLClassLoader implem
 	}
 
 	@Override
-	public void close() throws IOException
+	public void close()
 	{
-
+		// comment for sonar explaining this is just empty
 	}
 
 	public void createCustomClass()

@@ -24,7 +24,7 @@ public class AnimalsMock extends AgeableMock implements Animals
 	private int isInLoveTicks;
 
 	/**
-	 * Constructs a new Animal on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link Animals} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.

@@ -19,6 +19,7 @@ import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
+import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
 import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
@@ -31,7 +32,6 @@ import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfVariantMock;
 import org.mockbukkit.mockbukkit.event.GameEventMock;
-import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.fluid.FluidMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
@@ -47,7 +47,6 @@ import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -67,17 +66,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	public RegistryMock(RegistryKey<T> key)
 	{
-		try
-		{
-			loadKeyedToRegistry(key);
-		}
-		catch (IOException e)
-		{
-			throw new InternalDataLoadException(e);
-		}
+		loadKeyedToRegistry(key);
 	}
 
-	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key) throws IOException
+	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
 	{
 		String fileName = "/keyed/" + key.key().value() + ".json";
 		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);
@@ -87,6 +79,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
+		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
 		factoryMap.put(RegistryKey.TRIM_MATERIAL, TrimMaterialMock::from);

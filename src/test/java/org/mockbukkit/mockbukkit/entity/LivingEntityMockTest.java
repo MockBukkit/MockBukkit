@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LingeringPotion;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.ShulkerBullet;
@@ -20,7 +22,6 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
-import org.bukkit.entity.TippedArrow;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.WitherSkull;
@@ -35,18 +36,20 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.UUID;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -60,18 +63,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
+@ExtendWith(MockBukkitExtension.class)
 class LivingEntityMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private CowMock livingEntity;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		livingEntity = new CowMock(server, UUID.randomUUID());
-	}
 
 	@AfterEach
 	void tearDown()
@@ -163,6 +162,54 @@ class LivingEntityMockTest
 	}
 
 	@Test
+	void testSetLeashHolder_WithDeadHolder()
+	{
+		WorldMock world = new WorldMock();
+		Entity holder = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		// Kill the holder
+		((LivingEntity) holder).setHealth(0);
+
+		assertFalse(livingEntity.setLeashHolder(holder));
+		assertFalse(livingEntity.isLeashed());
+	}
+
+	@Test
+	void testSetLeashHolder_NonMobAsHolder()
+	{
+		WorldMock world = new WorldMock();
+		// ArmorStand is not a Mob
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+
+		assertTrue(livingEntity.setLeashHolder(armorStand));
+		// Even though setLeashHolder returns true, isLeashed() returns false for non-Mob holders
+		assertFalse(livingEntity.isLeashed());
+	}
+
+	@Test
+	void testSetLeashHolder_NonMobCannotBeLeashed()
+	{
+		WorldMock world = new WorldMock();
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		Entity holder = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		// Non-Mob entities cannot be leashed
+		assertFalse(((LivingEntity) armorStand).setLeashHolder(holder));
+		assertFalse(((LivingEntity) armorStand).isLeashed());
+	}
+
+	@Test
+	void testSetLeashHolder_WitherCannotBeLeashed()
+	{
+		WorldMock world = new WorldMock();
+		Entity wither = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.WITHER);
+		Entity holder = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		assertFalse(((LivingEntity) wither).setLeashHolder(holder));
+		assertFalse(((LivingEntity) wither).isLeashed());
+	}
+
+	@Test
 	void testGetLeashHolderWhenNotLeashed()
 	{
 		livingEntity.setLeashHolder(null);
@@ -172,10 +219,121 @@ class LivingEntityMockTest
 	@Test
 	void testPotionEffectAddedForFirstTime()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 3, 1);
-		EntityPotionEffectEvent event = livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
-		server.getPluginManager().assertEventFired(EntityPotionEffectEvent.class);
-		assertEntityPotionEffectEvent(event, null, effect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
+		PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		livingEntity.addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertNotNull(retrieved);
+		assertEquals(effect.getAmplifier(), retrieved.getAmplifier());
+		assertEquals(effect.getDuration(), retrieved.getDuration());
+	}
+
+	@Test
+	void testPotionEffectReplacedWithHigherAmplifier()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 50, 2);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(2, retrieved.getAmplifier()); // Higher amplifier wins
+	}
+
+	@Test
+	void testPotionEffectNotReplacedWithLowerAmplifier()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 2);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		// Initially the higher amplifier effect should be active
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(2, retrieved.getAmplifier()); // Higher amplifier wins
+
+		// Tick the server enough times to expire the original effect
+		server.getScheduler().performTicks(150);
+
+		// The weaker amplifier effect should NOT be active - it was never added to the queue
+		PotionEffect afterExpiry = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierInfiniteOldEffectRemains()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(-1, retrieved.getDuration()); // Infinite duration remains
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierFiniteReplacedWithInfinite()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(-1, retrieved.getDuration()); // Infinite duration wins
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierReplacedWithLongerDuration()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(200, retrieved.getDuration()); // Longer duration wins
+	}
+
+	@Test
+	void testPotionEffectSameAmplifierNotReplacedWithShorterDuration()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, 200, 1);
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		// Initially the stronger effect should be active
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(200, retrieved.getDuration()); // Original longer duration remains
+
+		// Tick the server enough times to expire the original effect
+		server.getScheduler().performTicks(250);
+
+		// The weaker effect should NOT be active - it was never added to the queue
+		PotionEffect afterExpiry = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
+	}
+
+
+	@Test
+	void testPotionEffectSameAmplifierBothInfiniteFirstRemains()
+	{
+		PotionEffect oldEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+		PotionEffect newEffect = new PotionEffect(PotionEffectType.REGENERATION, -1, 1); // infinite
+
+		livingEntity.addPotionEffect(oldEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(newEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+
+		PotionEffect retrieved = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
+		assertEquals(-1, retrieved.getDuration()); // Both infinite, first one remains
 	}
 
 	@Test
@@ -218,7 +376,8 @@ class LivingEntityMockTest
 	{
 		PotionEffect effect = new PotionEffect(PotionEffectType.NAUSEA, 5, 1);
 		livingEntity.addPotionEffect(effect);
-		assertTrue(livingEntity.clearActivePotionEffects());
+		assertTrue(livingEntity.clearActivePotionEffects()); // true = there were some effects cleared
+		assertFalse(livingEntity.clearActivePotionEffects()); // false = it was empty
 	}
 
 	@Test
@@ -226,13 +385,14 @@ class LivingEntityMockTest
 	{
 		PotionEffect instant = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 0, 1);
 		assertTrue(livingEntity.addPotionEffect(instant));
-		assertFalse(livingEntity.hasPotionEffect(instant.getType()));
+		assertEquals(1, livingEntity.getActivePotionEffects().size()); // Yes, strange but true!
+		assertTrue(livingEntity.hasPotionEffect(instant.getType())); // Yep, strange... But that's how it truly is!
 	}
 
 	@Test
 	void testMultiplePotionEffects()
 	{
-		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
+		Collection<PotionEffect> effects = List.of(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
 				new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(livingEntity.addPotionEffects(effects));
@@ -373,7 +533,6 @@ class LivingEntityMockTest
 			SpectralArrow.class,
 			ThrownExpBottle.class,
 			ThrownPotion.class,
-			TippedArrow.class,
 			Trident.class,
 			WindCharge.class,
 			WitherSkull.class,
@@ -480,6 +639,78 @@ class LivingEntityMockTest
 		assertEquals(10, livingEntity.getHealth(), 0);
 		assertFalse(livingEntity.isDead());
 		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void getAttribute_WhenAttributeIsNotPresent()
+	{
+		assertNull(this.livingEntity.getAttribute(Attribute.ARMOR));
+	}
+
+	@Test
+	void attackIsntImplementedYet()
+	{
+		assertThrows(NullPointerException.class, () -> this.livingEntity.attack(null));
+		assertThrows(UnimplementedOperationException.class, () -> this.livingEntity.attack(this.livingEntity));
+	}
+
+	@Test
+	void testAttack_AsPlayer()
+	{
+		PlayerMock player = server.addPlayer();
+		WorldMock world = new WorldMock();
+		Entity target = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+
+		assertThrows(UnimplementedOperationException.class, () -> player.attack(target));
+	}
+
+	@Test
+	void testAttack_NullTarget()
+	{
+		PlayerMock player = server.addPlayer();
+
+		assertThrows(NullPointerException.class, () -> player.attack(null));
+	}
+
+	@Test
+	void testHasAI_DefaultForMob()
+	{
+		// CowMock extends AnimalsMock which extends MobMock which implements Mob
+		assertTrue(livingEntity.hasAI());
+	}
+
+	@Test
+	void testSetAI_ForMob()
+	{
+		livingEntity.setAI(false);
+		assertFalse(livingEntity.hasAI());
+
+		livingEntity.setAI(true);
+		assertTrue(livingEntity.hasAI());
+	}
+
+	@Test
+	void testHasAI_ForNonMob()
+	{
+		WorldMock world = new WorldMock();
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+
+		assertFalse(((LivingEntity) armorStand).hasAI());
+	}
+
+	@Test
+	void testSetAI_ForNonMob()
+	{
+		WorldMock world = new WorldMock();
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		LivingEntity livingArmorStand = (LivingEntity) armorStand;
+
+		// setAI should have no effect on non-Mob entities
+		livingArmorStand.setAI(true);
+		assertFalse(livingArmorStand.hasAI());
+
+		livingArmorStand.setAI(false);
+		assertFalse(livingArmorStand.hasAI());
 	}
 
 }

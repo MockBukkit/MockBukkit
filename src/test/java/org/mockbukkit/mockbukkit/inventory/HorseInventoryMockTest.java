@@ -31,7 +31,7 @@ class HorseInventoryMockTest
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

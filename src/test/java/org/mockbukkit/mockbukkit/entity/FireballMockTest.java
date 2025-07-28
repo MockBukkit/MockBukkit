@@ -21,14 +21,14 @@ class FireballMockTest
 	private Fireball fireball;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		ServerMock server = MockBukkit.mock();
 		fireball = new FireballMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

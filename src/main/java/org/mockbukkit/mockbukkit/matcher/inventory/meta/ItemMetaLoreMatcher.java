@@ -78,7 +78,7 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	 */
 	public static ItemMetaLoreMatcher hasLore(Component... loreItems)
 	{
-		return new ItemMetaLoreMatcher(Arrays.asList(loreItems));
+		return new ItemMetaLoreMatcher(List.of(loreItems));
 	}
 
 	/**

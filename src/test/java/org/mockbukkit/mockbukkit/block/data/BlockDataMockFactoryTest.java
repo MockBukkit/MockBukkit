@@ -109,6 +109,36 @@ class BlockDataMockFactoryTest
 
 			@ParameterizedTest
 			@ValueSource(strings = {
+					"ACACIA_DOOR",
+					"BAMBOO_DOOR",
+					"BIRCH_DOOR",
+					"CHERRY_DOOR",
+					"COPPER_DOOR",
+					"CRIMSON_DOOR",
+					"DARK_OAK_DOOR",
+					"EXPOSED_COPPER_DOOR",
+					"IRON_DOOR",
+					"JUNGLE_DOOR",
+					"MANGROVE_DOOR",
+					"OAK_DOOR",
+					"OXIDIZED_COPPER_DOOR",
+					"PALE_OAK_DOOR",
+					"SPRUCE_DOOR",
+					"WARPED_DOOR",
+					"WAXED_COPPER_DOOR",
+					"WAXED_EXPOSED_COPPER_DOOR",
+					"WAXED_OXIDIZED_COPPER_DOOR",
+					"WAXED_WEATHERED_COPPER_DOOR",
+					"WEATHERED_COPPER_DOOR",
+			})
+			void givenDoorMaterial(Material material)
+			{
+				BlockDataMock actual = BlockDataMockFactory.mock(material);
+				assertInstanceOf(DoorDataMock.class, actual);
+			}
+
+			@ParameterizedTest
+			@ValueSource(strings = {
 					"ACACIA_FENCE",
 					"BAMBOO_FENCE",
 					"BIRCH_FENCE",
@@ -127,6 +157,27 @@ class BlockDataMockFactoryTest
 			{
 				BlockDataMock actual = BlockDataMockFactory.mock(material);
 				assertInstanceOf(FenceDataMock.class, actual);
+			}
+
+			@ParameterizedTest
+			@ValueSource(strings = {
+					"ACACIA_FENCE_GATE",
+					"BAMBOO_FENCE_GATE",
+					"BIRCH_FENCE_GATE",
+					"CHERRY_FENCE_GATE",
+					"CRIMSON_FENCE_GATE",
+					"DARK_OAK_FENCE_GATE",
+					"JUNGLE_FENCE_GATE",
+					"MANGROVE_FENCE_GATE",
+					"OAK_FENCE_GATE",
+					"PALE_OAK_FENCE_GATE",
+					"SPRUCE_FENCE_GATE",
+					"WARPED_FENCE_GATE",
+			})
+			void givenFenceGateMaterial(Material material)
+			{
+				BlockDataMock actual = BlockDataMockFactory.mock(material);
+				assertInstanceOf(FenceGateDataMock.class, actual);
 			}
 
 			@ParameterizedTest
@@ -358,10 +409,31 @@ class BlockDataMockFactoryTest
 			}
 
 			@Test
+			void givenCrafter()
+			{
+				BlockDataMock actual = BlockDataMockFactory.mock(Material.CRAFTER);
+				assertInstanceOf(CrafterDataMock.class, actual);
+			}
+
+			@Test
 			void givenDecoratedPotMaterial()
 			{
 				BlockDataMock actual = BlockDataMockFactory.mock(Material.DECORATED_POT);
 				assertInstanceOf(DecoratedPotDataMock.class, actual);
+			}
+
+			@Test
+			void givenHopper()
+			{
+				BlockDataMock actual = BlockDataMockFactory.mock(Material.HOPPER);
+				assertInstanceOf(HopperDataMock.class, actual);
+			}
+
+			@Test
+			void givenLectern()
+			{
+				BlockDataMock actual = BlockDataMockFactory.mock(Material.LECTERN);
+				assertInstanceOf(LecternDataMock.class, actual);
 			}
 
 			@ParameterizedTest

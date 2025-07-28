@@ -11,7 +11,7 @@ class PersistentDataHolderMockTest
 	private PersistentDataHolderMock holder;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		holder = new PersistentDataHolderMock();
 	}

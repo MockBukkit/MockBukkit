@@ -13,10 +13,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.state.AbstractFurnaceStateMock;
 import org.mockbukkit.mockbukkit.block.state.ContainerStateMock;
+import org.mockbukkit.mockbukkit.block.state.HangingSignStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestBlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestInstanceBlockStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
@@ -166,6 +168,17 @@ public class BlockStateMetaMockTest
 		ItemStack item = expected.asItemType().createItemStack();
 		assertNotNull(item);
 		assertEquals(expected, item.getType());
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"ACACIA_HANGING_SIGN",
+			"ACACIA_WALL_HANGING_SIGN"
+	})
+	void givenHangingSign_ShouldBeHangingSignMock(Material material)
+	{
+		@NotNull BlockState state = material.createBlockData().createBlockState();
+		assertInstanceOf(HangingSignStateMock.class, state);
 	}
 
 	@Test

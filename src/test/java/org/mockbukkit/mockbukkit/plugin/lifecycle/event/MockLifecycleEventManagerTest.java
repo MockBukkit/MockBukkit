@@ -27,16 +27,12 @@ class MockLifecycleEventManagerTest
 	{
 		AtomicBoolean atomicBoolean = new AtomicBoolean(false);
 		PluginMock.builder().withOnEnable((pluginMock) ->
-		{
-			pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-			{
-				event.registrar().register(Commands.literal("new_command").executes(context ->
-				{
-					atomicBoolean.set(true);
-					return Command.SINGLE_SUCCESS;
-				}).build(), "some bukkit help description string", List.of("an_alias"));
-			});
-		}).build();
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("new_command").executes(context ->
+						{
+							atomicBoolean.set(true);
+							return Command.SINGLE_SUCCESS;
+						}).build(), "some bukkit help description string", List.of("an_alias")))).build();
 
 		serverMock.addPlayer().performCommand("new_command");
 		assertTrue(atomicBoolean.get());

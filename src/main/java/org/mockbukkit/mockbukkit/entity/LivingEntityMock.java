@@ -4,6 +4,8 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.world.damagesource.CombatTracker;
+import lombok.Getter;
+import lombok.Setter;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
@@ -41,6 +43,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
@@ -59,9 +62,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -84,12 +87,18 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * NoDamage ticks
 	 */
+	@Getter
+	@Setter
 	private int noDamageTicks = 0;
-	private int maxNoDamageTicks = 20;
+	@Getter
+	@Setter
+	private int maximumNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
+	@Getter
+	@Setter
 	private boolean gliding = false;
 	private boolean jumping = false;
 	private boolean riptiding = false;
@@ -97,20 +106,32 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * The attributes this entity has.
 	 */
-	protected Map<Attribute, AttributeInstanceMock> attributes;
+	protected final Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
 	private boolean collidable = true;
 	private boolean ai = true;
 	private boolean swimming;
+	/**
+	 * Set whether this entity is slumbering.
+	 */
+	@Getter
+	@Setter
 	private boolean sleeping;
+	/**
+	 * Set whether this entity is climbing.
+	 */
+	@Getter
+	@Setter
 	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
+	@Getter
+	@Setter
 	private @Nullable Player killer;
 
-	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
+	private final Map<PotionEffectType, PriorityQueue<ActivePotionEffect>> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 
@@ -288,10 +309,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public AttributeInstance getAttribute(@NotNull Attribute attribute)
 	{
-		if (attributes.containsKey(attribute))
-			return attributes.get(attribute);
-		else
-			throw new UnimplementedOperationException();
+		return attributes.getOrDefault(attribute, null);
 	}
 
 	@Override
@@ -567,18 +585,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public int getMaximumNoDamageTicks()
-	{
-		return this.maxNoDamageTicks;
-	}
-
-	@Override
-	public void setMaximumNoDamageTicks(int ticks)
-	{
-		this.maxNoDamageTicks = ticks;
-	}
-
-	@Override
 	public double getLastDamage()
 	{
 		// TODO Auto-generated method stub
@@ -590,18 +596,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getNoDamageTicks()
-	{
-		return this.noDamageTicks;
-	}
-
-	@Override
-	public void setNoDamageTicks(int ticks)
-	{
-		this.noDamageTicks = ticks;
 	}
 
 	@Override
@@ -618,18 +612,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
-	}
-
-	@Override
-	public @Nullable Player getKiller()
-	{
-		return this.killer;
-	}
-
-	@Override
-	public void setKiller(@Nullable Player killer)
-	{
-		this.killer = killer;
 	}
 
 	@Override
@@ -660,27 +642,27 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		AsyncCatcher.catchOp("effect add");
 		Preconditions.checkNotNull(effect, "PotionEffect cannot be null");
 
-		/*
-		Applying completely new effect -> old: null, new: new effect, action: add, override: false
-		A single effects runs out (on time) (not possible via this method because @NotNull) -> old: effect that ran out, new: null, action: remove, override: true
-		Applying a new effect but effect type already active -> old: existing effect, new: new effect, action: changed, override: true
-		Clearing all effects (not possible via this method) -> old: effect that was cleared, new: null, action: clear, override: true
-
-		 Notes:
-		 If multiple effects are cleared, then for each one an EntityPotionEffectEvent is called.
-		 */
-
-		PotionEffect oldEffect = getPotionEffect(effect.getType());
+		PotionEffectType type = effect.getType();
+		PotionEffect oldEffect = getPotionEffect(type);
 		EntityPotionEffectEvent.Action action = oldEffect == null ? EntityPotionEffectEvent.Action.ADDED : EntityPotionEffectEvent.Action.CHANGED;
 		boolean override = oldEffect != null;
 
-
 		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, cause, action, override);
 		Bukkit.getPluginManager().callEvent(event);
+
 		if (!event.isCancelled())
 		{
-			activeEffects.add(new ActivePotionEffect(effect));
+			var pq = activeEffects.computeIfAbsent(type, k -> new PriorityQueue<>());
+			if (oldEffect == null ||
+					oldEffect.getAmplifier() < effect.getAmplifier() ||
+					(oldEffect.getAmplifier() == effect.getAmplifier() &&
+							!oldEffect.isInfinite() &&
+							(effect.isInfinite() || oldEffect.getDuration() < effect.getDuration())))
+			{
+				pq.add(new ActivePotionEffect(effect));
+			}
 		}
+
 		return event;
 	}
 
@@ -707,60 +689,117 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean hasPotionEffect(@NotNull PotionEffectType type)
 	{
-		return getPotionEffect(type) != null;
+		return activeEffects.containsKey(type);
+	}
+
+	@Contract(value = "_ -> new", pure = true)
+	private @NotNull PotionEffect mapToPotionEffect(@NotNull ActivePotionEffect activeEffect)
+	{
+		var effect = activeEffect.getPotionEffect();
+		return new PotionEffect(effect.getType(), activeEffect.getDuration(), effect.getAmplifier(), effect.isAmbient(), effect.hasParticles(), effect.hasIcon());
 	}
 
 	@Override
-	public PotionEffect getPotionEffect(@NotNull PotionEffectType type)
+	public @Nullable PotionEffect getPotionEffect(@NotNull PotionEffectType type)
 	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		for (PotionEffect effect : getActivePotionEffects())
+
+		var queue = activeEffects.get(type);
+		if (queue == null)
 		{
-			if (effect.getType().equals(type))
-			{
-				return effect;
-			}
+			return null;
 		}
 
-		return null;
+		return mapToPotionEffect(queue.peek());
+	}
+
+	private void removeExpiredEffects()
+	{
+		var it = activeEffects.entrySet().iterator();
+		while (it.hasNext())
+		{
+			var entry = it.next();
+			var queue = entry.getValue();
+
+			var expiredEffects = queue.stream().filter(ActivePotionEffect::hasExpired).toList();
+			if (expiredEffects.isEmpty())
+			{
+				continue;
+			}
+
+			if (queue.size() == expiredEffects.size())
+			{
+				// All removed -> Send change event
+				var event = new EntityPotionEffectEvent(this, mapToPotionEffect(queue.peek()), null,
+						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
+				Bukkit.getPluginManager().callEvent(event);
+				if (!event.isCancelled())
+				{
+					it.remove();
+				}
+			}
+			else
+			{
+				// Not the last event to be removed: don't send the event!
+				queue.removeIf(ActivePotionEffect::hasExpired);
+			}
+		}
 	}
 
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
+		removePotionEffect(type, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.REMOVED);
+	}
+
+	public void removePotionEffect(@NotNull PotionEffectType type, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action)
+	{
 		Preconditions.checkNotNull(type, "Potion type cannot be null");
-		activeEffects.removeIf(effect -> effect.hasExpired() || effect.getPotionEffect().getType().equals(type));
+		var queue = activeEffects.get(type);
+		if (queue == null)
+		{
+			return;
+		}
+
+		var activeEffect = queue.peek();
+		var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null, cause, action, true);
+		Bukkit.getPluginManager().callEvent(changeEvent);
+
+		if (!changeEvent.isCancelled())
+		{
+			activeEffects.remove(type);
+		}
 	}
 
 	@Override
 	public @NotNull Collection<PotionEffect> getActivePotionEffects()
 	{
-		Set<PotionEffect> effects = new HashSet<>();
-		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
-
-		while (iterator.hasNext())
-		{
-			ActivePotionEffect effect = iterator.next();
-
-			if (effect.hasExpired())
-			{
-				iterator.remove();
-			}
-			else
-			{
-				effects.add(effect.getPotionEffect());
-			}
-		}
-
-		return effects;
+		return activeEffects.values().stream()
+				.map(queue -> mapToPotionEffect(queue.peek()))
+				.toList();
 	}
 
 	@Override
 	public boolean clearActivePotionEffects()
 	{
-		final boolean res = !activeEffects.isEmpty();
+		if (activeEffects.isEmpty())
+		{
+			return false;
+		}
+
+		// Fire removal events for all active effects
+		activeEffects.forEach((type, queue) ->
+		{
+			queue.forEach(activeEffect ->
+			{
+				var event = new EntityPotionEffectEvent(this, activeEffect.getPotionEffect(), null,
+						EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CLEARED, true);
+				Bukkit.getPluginManager().callEvent(event);
+			});
+		});
+
 		activeEffects.clear();
-		return res;
+		return true;
 	}
 
 	@Override
@@ -825,11 +864,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		if (!(this.leashHolder instanceof Mob))
-		{
-			return false;
-		}
-		return this.leashHolder != null;
+		return this.leashHolder instanceof Mob;
 	}
 
 	@Override
@@ -857,18 +892,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 		this.leashHolder = holder;
 		return true;
-	}
-
-	@Override
-	public boolean isGliding()
-	{
-		return this.gliding;
-	}
-
-	@Override
-	public void setGliding(boolean gliding)
-	{
-		this.gliding = gliding;
 	}
 
 	@Override
@@ -904,38 +927,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		this.riptiding = isRiptiding;
 	}
 
-	/**
-	 * Set whether this entity is slumbering.
-	 *
-	 * @param sleeping If this entity is slumbering
-	 */
-	public void setSleeping(boolean sleeping)
-	{
-		this.sleeping = sleeping;
-	}
-
-	@Override
-	public boolean isSleeping()
-	{
-		return this.sleeping;
-	}
-
-	/**
-	 * Set whether this entity is climbing.
-	 *
-	 * @param climbing If this entity is climbing
-	 */
-	public void setClimbing(boolean climbing)
-	{
-		this.climbing = climbing;
-	}
-
-	@Override
-	public boolean isClimbing()
-	{
-		return this.climbing;
-	}
-
 	@Override
 	public void setAI(boolean ai)
 	{
@@ -955,16 +946,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void attack(@NotNull Entity target)
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
-
-		if (this instanceof Player)
-		{
-			((Player) this).attack(target);
-		}
-		else
-		{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1386,6 +1369,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @NotNull CombatTracker getCombatTracker()
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void tick()
+	{
+		super.tick();
+		removeExpiredEffects();
 	}
 
 }

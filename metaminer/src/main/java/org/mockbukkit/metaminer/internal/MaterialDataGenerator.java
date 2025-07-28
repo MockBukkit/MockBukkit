@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.MultipleFacing;
@@ -113,6 +114,11 @@ public class MaterialDataGenerator implements DataGenerator
 		{
 			obj.addProperty("maxLevel", String.valueOf(levelled.getMaximumLevel()));
 			obj.addProperty("minLevel", String.valueOf(levelled.getMinimumLevel()));
+		}
+
+		if (data instanceof Brushable brushable)
+		{
+			obj.addProperty("maxDusted", String.valueOf(brushable.getMaximumDusted()));
 		}
 
 		if (data instanceof Directional directional)

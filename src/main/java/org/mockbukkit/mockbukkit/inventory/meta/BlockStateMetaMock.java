@@ -11,12 +11,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.state.BarrelStateMock;
 import org.mockbukkit.mockbukkit.block.state.BeaconStateMock;
+import org.mockbukkit.mockbukkit.block.state.BedStateMock;
 import org.mockbukkit.mockbukkit.block.state.BeehiveStateMock;
 import org.mockbukkit.mockbukkit.block.state.BellStateMock;
 import org.mockbukkit.mockbukkit.block.state.BlastFurnaceStateMock;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMockFactory;
 import org.mockbukkit.mockbukkit.block.state.BrewingStandStateMock;
 import org.mockbukkit.mockbukkit.block.state.CalibratedSculkSensorStateMock;
 import org.mockbukkit.mockbukkit.block.state.CampfireStateMock;
@@ -74,6 +75,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	{
 		// To update this list check Paper class "CraftItemMetas"
 		Map<Material, Class<? extends TileStateMock>> map = new HashMap<>();
+		MaterialTags.BEDS.getValues().forEach(m -> map.put(m, BedStateMock.class));
 		MaterialTags.SHULKER_BOXES.getValues().forEach(m -> map.put(m, ShulkerBoxStateMock.class));
 		MaterialTags.SIGNS.getValues().forEach(m -> map.put(m, SignStateMock.class));
 		map.put(Material.BARREL, BarrelStateMock.class);
@@ -92,6 +94,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		map.put(Material.CHAIN_COMMAND_BLOCK, CommandBlockStateMock.class);
 		map.put(Material.REPEATING_COMMAND_BLOCK, CommandBlockStateMock.class);
 		map.put(Material.COMPARATOR, ComparatorStateMock.class);
+		map.put(Material.CONDUIT, null);
 		map.put(Material.CRAFTER, null);
 		map.put(Material.DAYLIGHT_DETECTOR, DaylightDetectorStateMock.class);
 		map.put(Material.DECORATED_POT, null);
@@ -135,10 +138,6 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	 */
 	public BlockStateMetaMock(Material material)
 	{
-		if (!isAppropriateType(material))
-		{
-			throw new UnsupportedOperationException("'" + material.name() + "' is not known to have a BlockStateMeta ItemMeta type");
-		}
 		this.material = material;
 	}
 
@@ -164,22 +163,6 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		}
 	}
 
-	/**
-	 * Determines if {@link BlockStateMetaMock} is an appropriate meta type for the given material.
-	 *
-	 * @param material type to evaluate.
-	 * @return true if {@link BlockStateMetaMock} is an appropriate meta type for the given material.
-	 */
-	public static boolean isAppropriateType(Material material)
-	{
-		return BLOCK_STATE_MATERIALS.containsKey(material);
-	}
-
-	private @Nullable Class<? extends TileStateMock> getTileStateClass(@NotNull Material material)
-	{
-		return BLOCK_STATE_MATERIALS.get(material);
-	}
-
 	@Override
 	public boolean hasBlockState()
 	{
@@ -199,23 +182,8 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 		{
 			return blockState.copy();
 		}
-		Class<? extends TileStateMock> clazz = null;
-		try
-		{
-			clazz = getTileStateClass(material);
-			if (clazz != null)
-			{
-				return clazz.getDeclaredConstructor(Material.class).newInstance(material);
-			}
-			else
-			{
-				throw new UnsupportedOperationException("TileStateMock for '" + material + "' has not been implemented by MockBukkit.");
-			}
-		}
-		catch (ReflectiveOperationException e)
-		{
-			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
-		}
+
+		return BlockStateMockFactory.mock(material);
 	}
 
 	@Override

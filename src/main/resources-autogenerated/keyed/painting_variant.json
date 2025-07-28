@@ -239,6 +239,23 @@
 			}
 		},
 		{
+			"assetId": "minecraft:dennis",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.dennis.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 14,
+			"key": "minecraft:dennis",
+			"name": "DENNIS",
+			"ordinal": 14,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.dennis.title"
+			}
+		},
+		{
 			"assetId": "minecraft:donkey_kong",
 			"author": {
 				"color": "gray",
@@ -246,10 +263,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 4,
-			"id": 14,
+			"id": 15,
 			"key": "minecraft:donkey_kong",
 			"name": "DONKEY_KONG",
-			"ordinal": 14,
+			"ordinal": 15,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.donkey_kong.title"
@@ -259,10 +276,10 @@
 			"assetId": "minecraft:earth",
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 15,
+			"id": 16,
 			"key": "minecraft:earth",
 			"name": "EARTH",
-			"ordinal": 15,
+			"ordinal": 16,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.earth.title"
@@ -276,10 +293,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 16,
+			"id": 17,
 			"key": "minecraft:endboss",
 			"name": "ENDBOSS",
-			"ordinal": 16,
+			"ordinal": 17,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.endboss.title"
@@ -293,10 +310,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 17,
+			"id": 18,
 			"key": "minecraft:fern",
 			"name": "FERN",
-			"ordinal": 17,
+			"ordinal": 18,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.fern.title"
@@ -310,10 +327,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 18,
+			"id": 19,
 			"key": "minecraft:fighters",
 			"name": "FIGHTERS",
-			"ordinal": 18,
+			"ordinal": 19,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.fighters.title"
@@ -327,10 +344,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 19,
+			"id": 20,
 			"key": "minecraft:finding",
 			"name": "FINDING",
-			"ordinal": 19,
+			"ordinal": 20,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.finding.title"
@@ -340,10 +357,10 @@
 			"assetId": "minecraft:fire",
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 20,
+			"id": 21,
 			"key": "minecraft:fire",
 			"name": "FIRE",
-			"ordinal": 20,
+			"ordinal": 21,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.fire.title"
@@ -357,10 +374,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 1,
-			"id": 21,
+			"id": 22,
 			"key": "minecraft:graham",
 			"name": "GRAHAM",
-			"ordinal": 21,
+			"ordinal": 22,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.graham.title"
@@ -374,10 +391,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 22,
+			"id": 23,
 			"key": "minecraft:humble",
 			"name": "HUMBLE",
-			"ordinal": 22,
+			"ordinal": 23,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.humble.title"
@@ -391,10 +408,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 23,
+			"id": 24,
 			"key": "minecraft:kebab",
 			"name": "KEBAB",
-			"ordinal": 23,
+			"ordinal": 24,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.kebab.title"
@@ -408,10 +425,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 24,
+			"id": 25,
 			"key": "minecraft:lowmist",
 			"name": "LOWMIST",
-			"ordinal": 24,
+			"ordinal": 25,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.lowmist.title"
@@ -425,10 +442,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 25,
+			"id": 26,
 			"key": "minecraft:match",
 			"name": "MATCH",
-			"ordinal": 25,
+			"ordinal": 26,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.match.title"
@@ -442,10 +459,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 26,
+			"id": 27,
 			"key": "minecraft:meditative",
 			"name": "MEDITATIVE",
-			"ordinal": 26,
+			"ordinal": 27,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.meditative.title"
@@ -459,10 +476,10 @@
 			},
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 27,
+			"id": 28,
 			"key": "minecraft:orb",
 			"name": "ORB",
-			"ordinal": 27,
+			"ordinal": 28,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.orb.title"
@@ -476,10 +493,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 28,
+			"id": 29,
 			"key": "minecraft:owlemons",
 			"name": "OWLEMONS",
-			"ordinal": 28,
+			"ordinal": 29,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.owlemons.title"
@@ -493,10 +510,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 4,
-			"id": 29,
+			"id": 30,
 			"key": "minecraft:passage",
 			"name": "PASSAGE",
-			"ordinal": 29,
+			"ordinal": 30,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.passage.title"
@@ -510,10 +527,10 @@
 			},
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 30,
+			"id": 31,
 			"key": "minecraft:pigscene",
 			"name": "PIGSCENE",
-			"ordinal": 30,
+			"ordinal": 31,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pigscene.title"
@@ -527,10 +544,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 31,
+			"id": 32,
 			"key": "minecraft:plant",
 			"name": "PLANT",
-			"ordinal": 31,
+			"ordinal": 32,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.plant.title"
@@ -544,10 +561,10 @@
 			},
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 32,
+			"id": 33,
 			"key": "minecraft:pointer",
 			"name": "POINTER",
-			"ordinal": 32,
+			"ordinal": 33,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pointer.title"
@@ -561,10 +578,10 @@
 			},
 			"blockHeight": 4,
 			"blockWidth": 3,
-			"id": 33,
+			"id": 34,
 			"key": "minecraft:pond",
 			"name": "POND",
-			"ordinal": 33,
+			"ordinal": 34,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pond.title"
@@ -578,10 +595,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 34,
+			"id": 35,
 			"key": "minecraft:pool",
 			"name": "POOL",
-			"ordinal": 34,
+			"ordinal": 35,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.pool.title"
@@ -595,10 +612,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 1,
-			"id": 35,
+			"id": 36,
 			"key": "minecraft:prairie_ride",
 			"name": "PRAIRIE_RIDE",
-			"ordinal": 35,
+			"ordinal": 36,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.prairie_ride.title"
@@ -612,10 +629,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 36,
+			"id": 37,
 			"key": "minecraft:sea",
 			"name": "SEA",
-			"ordinal": 36,
+			"ordinal": 37,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.sea.title"
@@ -629,10 +646,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 4,
-			"id": 37,
+			"id": 38,
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
-			"ordinal": 37,
+			"ordinal": 38,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.skeleton.title"
@@ -646,10 +663,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 38,
+			"id": 39,
 			"key": "minecraft:skull_and_roses",
 			"name": "SKULL_AND_ROSES",
-			"ordinal": 38,
+			"ordinal": 39,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.skull_and_roses.title"
@@ -663,10 +680,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 39,
+			"id": 40,
 			"key": "minecraft:stage",
 			"name": "STAGE",
-			"ordinal": 39,
+			"ordinal": 40,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.stage.title"
@@ -680,10 +697,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 40,
+			"id": 41,
 			"key": "minecraft:sunflowers",
 			"name": "SUNFLOWERS",
-			"ordinal": 40,
+			"ordinal": 41,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.sunflowers.title"
@@ -697,10 +714,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 2,
-			"id": 41,
+			"id": 42,
 			"key": "minecraft:sunset",
 			"name": "SUNSET",
-			"ordinal": 41,
+			"ordinal": 42,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.sunset.title"
@@ -714,10 +731,10 @@
 			},
 			"blockHeight": 3,
 			"blockWidth": 3,
-			"id": 42,
+			"id": 43,
 			"key": "minecraft:tides",
 			"name": "TIDES",
-			"ordinal": 42,
+			"ordinal": 43,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.tides.title"
@@ -731,10 +748,10 @@
 			},
 			"blockHeight": 4,
 			"blockWidth": 4,
-			"id": 43,
+			"id": 44,
 			"key": "minecraft:unpacked",
 			"name": "UNPACKED",
-			"ordinal": 43,
+			"ordinal": 44,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.unpacked.title"
@@ -748,10 +765,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 44,
+			"id": 45,
 			"key": "minecraft:void",
 			"name": "VOID",
-			"ordinal": 44,
+			"ordinal": 45,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.void.title"
@@ -765,10 +782,10 @@
 			},
 			"blockHeight": 2,
 			"blockWidth": 1,
-			"id": 45,
+			"id": 46,
 			"key": "minecraft:wanderer",
 			"name": "WANDERER",
-			"ordinal": 45,
+			"ordinal": 46,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wanderer.title"
@@ -782,10 +799,10 @@
 			},
 			"blockHeight": 1,
 			"blockWidth": 1,
-			"id": 46,
+			"id": 47,
 			"key": "minecraft:wasteland",
 			"name": "WASTELAND",
-			"ordinal": 46,
+			"ordinal": 47,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wasteland.title"
@@ -795,10 +812,10 @@
 			"assetId": "minecraft:water",
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 47,
+			"id": 48,
 			"key": "minecraft:water",
 			"name": "WATER",
-			"ordinal": 47,
+			"ordinal": 48,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.water.title"
@@ -808,10 +825,10 @@
 			"assetId": "minecraft:wind",
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 48,
+			"id": 49,
 			"key": "minecraft:wind",
 			"name": "WIND",
-			"ordinal": 48,
+			"ordinal": 49,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wind.title"
@@ -821,10 +838,10 @@
 			"assetId": "minecraft:wither",
 			"blockHeight": 2,
 			"blockWidth": 2,
-			"id": 49,
+			"id": 50,
 			"key": "minecraft:wither",
 			"name": "WITHER",
-			"ordinal": 49,
+			"ordinal": 50,
 			"title": {
 				"color": "yellow",
 				"translate": "painting.minecraft.wither.title"

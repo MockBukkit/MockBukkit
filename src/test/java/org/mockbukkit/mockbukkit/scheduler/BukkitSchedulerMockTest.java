@@ -2,11 +2,12 @@ package org.mockbukkit.mockbukkit.scheduler;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Panda;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,11 +15,15 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.PandaMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
+import java.lang.reflect.Field;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
@@ -100,7 +105,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> count.incrementAndGet();
+		Runnable callback = count::incrementAndGet;
 		BukkitTask task = scheduler.runTaskTimer(null, callback, 10L, 2L);
 		assertNotNull(task);
 		scheduler.performTicks(9L);
@@ -140,7 +145,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer_ZeroDelay_DoesntExecuteTaskImmediately()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> count.incrementAndGet();
+		Runnable callback = count::incrementAndGet;
 		scheduler.runTaskTimer(null, callback, 0, 2L);
 		assertEquals(0, count.get());
 		scheduler.performTicks(1L);
@@ -257,6 +262,7 @@ class BukkitSchedulerMockTest
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
+			//noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
@@ -271,6 +277,7 @@ class BukkitSchedulerMockTest
 		});
 		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
+			//noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
@@ -292,9 +299,7 @@ class BukkitSchedulerMockTest
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
 		assertThrows(TaskCancelledException.class, () ->
-		{
-			scheduler.shutdown();
-		});
+				scheduler.shutdown());
 	}
 
 	@Test
@@ -354,7 +359,7 @@ class BukkitSchedulerMockTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -383,7 +388,7 @@ class BukkitSchedulerMockTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -544,13 +549,13 @@ class BukkitSchedulerMockTest
 		{
 		}, 1L, 1L);
 		scheduler.performOneTick();
-		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+		assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
 	}
 
 	@Test
 	void taskNotRunning()
 	{
-		Assertions.assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+		assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
 	}
 
 	@Test
@@ -800,6 +805,27 @@ class BukkitSchedulerMockTest
 			thread.interrupt();
 			fail("Timeout");
 		}
+	}
+
+	@Test
+	void testInvalidEntitiesShouldntTick() throws NoSuchFieldException, IllegalAccessException
+	{
+		WorldMock world = server.addSimpleWorld("bumba");
+		Location loc = world.getSpawnLocation();
+		PandaMock invalidPanda = (PandaMock) world.spawn(loc, Panda.class);
+		PandaMock goodPanda = (PandaMock) world.spawn(loc, Panda.class);
+
+		// We have to use reflection here to cover this particular branch because there is no way this an be naturally
+		//    true. However, we need to keep the check in order to accomodate future improvements on the isValid() method
+		Field removedField = EntityMock.class.getDeclaredField("removed");
+		removedField.setAccessible(true);
+		removedField.set(invalidPanda, true);
+
+		assertEquals(0, invalidPanda.getTicksLived());
+		assertEquals(0, goodPanda.getTicksLived());
+		scheduler.performOneTick();
+		assertEquals(0, invalidPanda.getTicksLived());
+		assertEquals(1, goodPanda.getTicksLived());
 	}
 
 }
