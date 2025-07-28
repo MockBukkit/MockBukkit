@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.destroystokyo.paper.entity.Pathfinder;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -211,6 +212,25 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	public void setAggressive(boolean aggressive)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+
+	@Override
+	public boolean shouldDespawnInPeaceful()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setDespawnInPeacefulOverride(TriState triState)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public TriState getDespawnInPeacefulOverride()
+	{
 		throw new UnimplementedOperationException();
 	}
 
