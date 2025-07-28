@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -109,30 +110,72 @@ class ItemStackMockTest
 		}
 	}
 
-	@Test
-	void isSimilar_different()
+	@Nested
+	class IsSimilar
 	{
-		var a = new ItemStack(Material.SAND);
-		var b = new ItemStack(Material.DIAMOND);
 
-		assertFalse(a.isSimilar(b));
-	}
+		@Test
+		void givenDiferentMaterial()
+		{
+			var a = new ItemStack(Material.SAND);
+			var b = new ItemStack(Material.DIAMOND);
 
-	@Test
-	void isSimilar_similar()
-	{
-		ItemStack a = new ItemStack(Material.SAND);
-		ItemStack b = new ItemStack(Material.SAND);
+			assertFalse(a.isSimilar(b));
+		}
 
-		assertTrue(a.isSimilar(b));
-	}
+		@Test
+		void givenSimilarMaterial()
+		{
+			ItemStack a = new ItemStack(Material.SAND);
+			ItemStack b = new ItemStack(Material.SAND);
 
-	@Test
-	void isSimilar_null()
-	{
-		ItemStack a = new ItemStack(Material.SAND);
+			assertTrue(a.isSimilar(b));
+		}
 
-		assertFalse(a.isSimilar(null));
+		@Test
+		void givenNull()
+		{
+			ItemStack a = new ItemStack(Material.SAND);
+
+			assertFalse(a.isSimilar(null));
+		}
+
+		@Test
+		void givenSimilarMaterialWithDiferentMeta()
+		{
+			// create an item with a custom item meta (changed display name)
+			ItemStack customItemStack = new ItemStack(Material.STONE);
+			ItemMeta customItemMeta = customItemStack.getItemMeta();
+			customItemMeta.displayName(Component.text("Hello World"));
+			customItemStack.setItemMeta(customItemMeta);
+
+			// assert that the item meta is really changed
+			assertEquals(Component.text("Hello World"), customItemStack.getItemMeta().displayName());
+
+			// create an item stack with the same item type
+			ItemStack itemStack = new ItemStack(Material.STONE);
+
+			assertFalse(customItemStack.isSimilar(itemStack));
+		}
+
+		@Test
+		void givenSimilarMaterialWithSameMeta()
+		{
+			// create an item with a custom item meta (changed display name)
+			ItemStack customItemStack = new ItemStack(Material.STONE);
+			ItemMeta customItemMeta = customItemStack.getItemMeta();
+			customItemMeta.displayName(Component.text("Hello World"));
+			customItemStack.setItemMeta(customItemMeta);
+
+			// create an item stack with the same item type
+			ItemStack itemStack = new ItemStack(Material.STONE);
+			ItemMeta itemStackMeta = customItemStack.getItemMeta();
+			itemStackMeta.displayName(Component.text("Hello World"));
+			itemStack.setItemMeta(itemStackMeta);
+
+			assertTrue(customItemStack.isSimilar(itemStack));
+		}
+
 	}
 
 	@Test
