@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -982,6 +983,12 @@ class ItemMetaMockTest
 		meta.setUnbreakable(true);
 		meta.setDamage(5);
 		meta.setRepairCost(3);
+		meta.setCustomModelDataComponent(new CustomModelDataComponentMock(
+				List.of(1.0f),
+				List.of(true),
+				List.of("test1"),
+				List.of(Color.BLUE)
+		));
 
 		Map<String, Object> actual = meta.serialize();
 
@@ -1012,6 +1019,12 @@ class ItemMetaMockTest
 		modified.setDamage(5);
 		modified.setRepairCost(3);
 		modified.setCustomModelData(2);
+		modified.setCustomModelDataComponent(new CustomModelDataComponentMock(
+				List.of(1.0f),
+				List.of(true),
+				List.of("test1"),
+				List.of(Color.BLUE)
+		));
 
 		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 		BukkitObjectOutputStream bukkitOutput = new BukkitObjectOutputStream(byteOutput);
