@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
 import org.bukkit.Color;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -21,10 +22,11 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	/**
 	 * Creates a new instance of this class, using the provided lists to create
 	 * immutable lists for each field
-	 * @param floats the floats
-	 * @param flags the flags
+	 *
+	 * @param floats  the floats
+	 * @param flags   the flags
 	 * @param strings the strings
-	 * @param colors the colors
+	 * @param colors  the colors
 	 */
 	public CustomModelDataComponentMock(
 			@NotNull List<Float> floats,
@@ -40,19 +42,38 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	}
 
 	/**
+	 * A deep copy constructor.<br>
+	 * See {@link ItemMeta#getCustomModelDataComponent()} for why this is needed.
+	 *
+	 * @param component the component to copy
+	 */
+	public CustomModelDataComponentMock(CustomModelDataComponent component)
+	{
+		this(
+				component.getFloats(),
+				component.getFlags(),
+				component.getStrings(),
+				component.getColors()
+		);
+	}
+
+	/**
 	 * Creates a new instance of this class with empty lists for each field
 	 */
 	public CustomModelDataComponentMock()
 	{
 		this(Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
 	}
+
 	/**
 	 * Required by the {@link org.bukkit.configuration.serialization.ConfigurationSerializable} interface.
 	 * Creates an instance of this class, deserialized from the given serializable class
+	 *
 	 * @param serialized the serialized version of this class (see {@link #serialize()})
 	 */
 	@SuppressWarnings("unchecked")
-	public CustomModelDataComponentMock(@NotNull Map<String, Object> serialized) {
+	public CustomModelDataComponentMock(@NotNull Map<String, Object> serialized)
+	{
 		this(
 				(List<Float>) serialized.get("floats"),
 				(List<Boolean>) serialized.get("flags"),
@@ -157,19 +178,23 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 
 	/**
 	 * Required by the {@link org.bukkit.configuration.serialization.ConfigurationSerializable} interface
+	 *
 	 * @param serialized the serialized version of this class (see {@link #serialize()})
 	 * @return an instance of this class, deserialized from the given serializable class
 	 */
-	public static @NotNull CustomModelDataComponent valueOf(@NotNull Map<String, Object> serialized) {
+	public static @NotNull CustomModelDataComponent valueOf(@NotNull Map<String, Object> serialized)
+	{
 		return new CustomModelDataComponentMock(serialized);
 	}
 
 	/**
 	 * Required by the {@link org.bukkit.configuration.serialization.ConfigurationSerializable} interface
+	 *
 	 * @param serialized the serialized version of this class (see {@link #serialize()})
 	 * @return an instance of this class, deserialized from the given serializable class
 	 */
-	public static @NotNull CustomModelDataComponent deserialize(@NotNull Map<String, Object> serialized) {
+	public static @NotNull CustomModelDataComponent deserialize(@NotNull Map<String, Object> serialized)
+	{
 		return new CustomModelDataComponentMock(serialized);
 	}
 
