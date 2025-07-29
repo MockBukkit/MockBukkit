@@ -6,12 +6,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomModelDataComponentMockTest
 {
+
 	@Test
-	void serialize_CustomModelDataComponent() {
+	void serialize_CustomModelDataComponent()
+	{
 		CustomModelDataComponentMock expected = new CustomModelDataComponentMock(
 				List.of(1.0f),
 				List.of(true),
@@ -22,4 +24,5 @@ class CustomModelDataComponentMockTest
 		CustomModelDataComponentMock actual = new CustomModelDataComponentMock(serialized);
 		assertEquals(expected, actual);
 	}
+
 }
