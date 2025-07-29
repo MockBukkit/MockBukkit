@@ -106,7 +106,7 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	@Override
 	public void setFloats(@NotNull List<Float> floats)
 	{
-		this.floats = floats;
+		this.floats = List.copyOf(floats);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	@Override
 	public void setFlags(@NotNull List<Boolean> flags)
 	{
-		this.flags = flags;
+		this.flags = List.copyOf(flags);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	@Override
 	public void setStrings(@NotNull List<String> strings)
 	{
-		this.strings = strings;
+		this.strings = List.copyOf(strings);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	@Override
 	public void setColors(@NotNull List<Color> colors)
 	{
-		this.colors = colors;
+		this.colors = List.copyOf(colors);
 	}
 
 	/**
