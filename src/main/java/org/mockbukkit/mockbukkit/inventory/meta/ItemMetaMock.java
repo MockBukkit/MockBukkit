@@ -702,6 +702,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		return map;
 	}
 
+	@ApiStatus.Internal
 	private Map<String, Object> serializeComponents()
 	{
 		// Make new map and add relevant properties to it.
@@ -749,6 +750,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		unbreakable = (boolean) args.get("Unbreakable");
 		// customTagContainer is also unimplemented in mock.
 		customModelData = (Integer) args.get("custom-model-data");
+		deserializeComponents((Map<String, Object>) args.get("components"));
 		hideTooltip = (boolean) args.get("HideTooltip");
 		fireResistant = (boolean) args.get("FireResistant");
 		maxStackSize = (Integer) args.get("MaxStackSize");
@@ -760,6 +762,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		enchantableValue = (Integer) args.get("EnchantableValue");
 
+	}
+
+	@ApiStatus.Internal
+	@SuppressWarnings("unchecked")
+	private void deserializeComponents(@NotNull Map<String, Object> args)
+	{
+		customModelDataComponent = CustomModelDataComponentMock.deserialize((Map<String, Object>) args.get("minecraft:custom_model_data"));
 	}
 
 	@Override
