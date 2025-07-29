@@ -1073,7 +1073,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull CustomModelDataComponent getCustomModelDataComponent()
 	{
-		return this.customModelDataComponent;
+		return new CustomModelDataComponentMock(this.customModelDataComponent);
 	}
 
 	@Override
@@ -1085,9 +1085,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasCustomModelDataComponent()
 	{
-		return !customModelDataComponent.getFloats().isEmpty() &&
-				!customModelDataComponent.getFlags().isEmpty() &&
-				!customModelDataComponent.getStrings().isEmpty() &&
+		return !customModelDataComponent.getFloats().isEmpty() ||
+				!customModelDataComponent.getFlags().isEmpty() ||
+				!customModelDataComponent.getStrings().isEmpty() ||
 				!customModelDataComponent.getColors().isEmpty();
 	}
 
