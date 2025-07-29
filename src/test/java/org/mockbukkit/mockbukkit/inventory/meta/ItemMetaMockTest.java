@@ -23,6 +23,7 @@ import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -38,6 +39,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.ByteArrayInputStream;
@@ -47,6 +49,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -598,6 +601,74 @@ class ItemMetaMockTest
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void notnull_CustomModelDataComponent()
+	{
+		CustomModelDataComponent component = meta.getCustomModelDataComponent();
+		assertNotNull(component);
+		assertInstanceOf(CustomModelDataComponentMock.class, component);
+		assertNotNull(component.getFloats());
+		assertNotNull(component.getFlags());
+		assertNotNull(component.getStrings());
+		assertNotNull(component.getColors());
+	}
+
+	@Test
+	void unmodifiable_CustomModelDataComponent_True()
+	{
+		CustomModelDataComponent component = meta.getCustomModelDataComponent();
+		assertThrows(UnsupportedOperationException.class, () -> component.getStrings().add("mycustommodeldatastring"));
+	}
+
+	@Test
+	void modify_CustomModelDataComponent_IsNotPresent()
+	{
+		CustomModelDataComponent component = meta.getCustomModelDataComponent();
+		List<String> newStrings = new ArrayList<>(component.getStrings());
+		newStrings.add("mycustommodeldatastring");
+		component.setStrings(newStrings);
+		// intentionally missing the meta.setCustomModelDataComponent(component) line
+		assertFalse(meta.getCustomModelDataComponent().getStrings().contains("mycustommodeldatastring"));
+	}
+
+	@Test
+	void modify_CustomModelDataComponent_IsPresent()
+	{
+		CustomModelDataComponent component = meta.getCustomModelDataComponent();
+		List<String> newStrings = new ArrayList<>(component.getStrings());
+		newStrings.add("mycustommodeldatastring");
+		component.setStrings(newStrings);
+		meta.setCustomModelDataComponent(component);
+		assertTrue(meta.getCustomModelDataComponent().getStrings().contains("mycustommodeldatastring"));
+	}
+
+	@Test
+	void has_CustomModelDataComponent_True()
+	{
+		CustomModelDataComponent component = meta.getCustomModelDataComponent();
+		List<String> newStrings = new ArrayList<>(component.getStrings());
+		newStrings.add("mycustommodeldatastring");
+		component.setStrings(newStrings);
+		meta.setCustomModelDataComponent(component);
+		assertTrue(meta.hasCustomModelDataComponent());
+	}
+
+	@Test
+	void has_CustomModelDataComponent_False()
+	{
+		CustomModelDataComponent component = meta.getCustomModelDataComponent();
+		List<String> newStrings = new ArrayList<>(component.getStrings());
+		newStrings.add("mycustommodeldatastring");
+		component.setStrings(newStrings);
+		assertFalse(meta.hasCustomModelDataComponent());
+	}
+
+	@Test
+	void hasUnset_CustomModelDataComponent_False()
+	{
+		assertFalse(meta.hasCustomModelDataComponent());
 	}
 
 	@Test
