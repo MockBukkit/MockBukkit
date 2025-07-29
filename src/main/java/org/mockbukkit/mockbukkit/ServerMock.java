@@ -129,6 +129,7 @@ import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
@@ -1063,6 +1064,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public static void registerSerializables()
 	{
 		ConfigurationSerialization.registerClass(ItemMetaMock.class);
+		ConfigurationSerialization.registerClass(CustomModelDataComponentMock.class);
 	}
 
 	@Override
