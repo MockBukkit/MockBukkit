@@ -50,6 +50,7 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	 * Creates an instance of this class, deserialized from the given serializable class
 	 * @param serialized the serialized version of this class (see {@link #serialize()})
 	 */
+	@SuppressWarnings("unchecked")
 	public CustomModelDataComponentMock(@NotNull Map<String, Object> serialized) {
 		this(
 				(List<Float>) serialized.get("floats"),
