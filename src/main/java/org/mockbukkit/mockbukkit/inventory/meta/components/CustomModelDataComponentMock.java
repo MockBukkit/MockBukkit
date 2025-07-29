@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @ApiStatus.Experimental
 public class CustomModelDataComponentMock implements CustomModelDataComponent
@@ -160,6 +161,20 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	public void setColors(@NotNull List<Color> colors)
 	{
 		this.colors = List.copyOf(colors);
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof CustomModelDataComponentMock that)) return false;
+		return Objects.equals(getFloats(), that.getFloats()) && Objects.equals(getFlags(), that.getFlags()) && Objects.equals(getStrings(), that.getStrings()) && Objects.equals(getColors(), that.getColors());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(getFloats(), getFlags(), getStrings(), getColors());
 	}
 
 	/**
