@@ -55,4 +55,33 @@ class CustomModelDataComponentMockTest
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	void getFields_CustomModelDataComponent()
+	{
+		CustomModelDataComponentMock component = new CustomModelDataComponentMock(
+				List.of(1.0f),
+				List.of(true),
+				List.of("test1"),
+				List.of(Color.BLUE)
+		);
+		assertEquals(component.getFloats(), List.of(1.0f));
+		assertEquals(component.getFlags(), List.of(true));
+		assertEquals(component.getStrings(), List.of("test1"));
+		assertEquals(component.getColors(), List.of(Color.BLUE));
+	}
+
+	@Test
+	void setFields_CustomModelDataComponent()
+	{
+		CustomModelDataComponentMock component = new CustomModelDataComponentMock();
+		component.setFloats(List.of(1.0f));
+		component.setFlags(List.of(true));
+		component.setStrings(List.of("test1"));
+		component.setColors(List.of(Color.BLUE));
+		assertEquals(component.getFloats(), List.of(1.0f));
+		assertEquals(component.getFlags(), List.of(true));
+		assertEquals(component.getStrings(), List.of("test1"));
+		assertEquals(component.getColors(), List.of(Color.BLUE));
+	}
+
 }
