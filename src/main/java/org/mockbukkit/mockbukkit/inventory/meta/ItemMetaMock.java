@@ -43,6 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
 import java.util.ArrayList;
@@ -80,6 +81,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @NotNull PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
 	private @Nullable Integer customModelData = null;
+	private @NotNull CustomModelDataComponent customModelDataComponent = new CustomModelDataComponentMock();
 	private boolean hideTooltip;
 	private boolean fireResistant;
 	private @Nullable Integer maxStackSize = null;
@@ -139,6 +141,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		unbreakable = meta.isUnbreakable();
 		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
+		this.customModelDataComponent = meta.getCustomModelDataComponent();
 		hideTooltip = meta.isHideTooltip();
 		fireResistant = meta.isFireResistant();
 		if (meta.hasMaxStackSize())
@@ -1052,7 +1055,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull CustomModelDataComponent getCustomModelDataComponent()
 	{
-		throw new UnimplementedOperationException();
+		return this.customModelDataComponent;
 	}
 
 	@Override
@@ -1064,13 +1067,16 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasCustomModelDataComponent()
 	{
-		throw new UnimplementedOperationException();
+		return !customModelDataComponent.getFloats().isEmpty() &&
+				!customModelDataComponent.getFlags().isEmpty() &&
+				!customModelDataComponent.getStrings().isEmpty() &&
+				!customModelDataComponent.getColors().isEmpty();
 	}
 
 	@Override
 	public void setCustomModelDataComponent(@Nullable CustomModelDataComponent customModelDataComponent)
 	{
-		throw new UnimplementedOperationException();
+		this.customModelDataComponent = customModelDataComponent;
 	}
 
 	@Override
