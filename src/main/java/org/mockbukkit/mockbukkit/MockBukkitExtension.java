@@ -71,7 +71,7 @@ import java.util.logging.Logger;
  * 	<b>@MockBukkitInject(name = "myPlugin")</b>
  * 	private Plugin plugin;
  *
- *    @Test
+ *    &#064;Test
  *    void aUnitTest()
  *    {
  * 		assert serverMock != null;
@@ -101,7 +101,7 @@ import java.util.logging.Logger;
  * 		this.serverMock = serverMock;
  *    }
  *
- *    @Test
+ *    &#064;Test
  *    void aUnitTest()
  *    {
  * 		assert serverMock != null;
@@ -118,7 +118,7 @@ import java.util.logging.Logger;
  * class MethodExampleTest
  * {
  *
- *    @Test
+ *    &#064;Test
  *    void aUnitTest(<b>@MockBukkitInject</b> ServerMock serverMock,
  * 	               <b>@MockBukkitInject(name = "admin")</b> Player player,
  * 	               <b>@MockBukkitInject(name = "testWorld")</b> World world)
@@ -147,7 +147,7 @@ import java.util.logging.Logger;
  * class InheritanceExampleTest extends BaseMixin
  * {
  *
- *    @Test
+ *    &#064;Test
  *    void aUnitTest()
  *    {
  * 		assert serverMock != null; // Injected from parent class
