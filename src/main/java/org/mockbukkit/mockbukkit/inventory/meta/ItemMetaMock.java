@@ -664,6 +664,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("custom-model-data", this.customModelData);
 		}
+		map.put("components", serializeComponents());
 
 		map.put("HideTooltip", this.hideTooltip);
 		map.put("FireResistant", this.fireResistant);
@@ -698,6 +699,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("meta-type", getTypeName());
 
 		// Return map
+		return map;
+	}
+
+	private Map<String, Object> serializeComponents()
+	{
+		// Make new map and add relevant properties to it.
+		Map<String, Object> map = new HashMap<>();
+		map.put("minecraft:custom_model_data", customModelDataComponent.serialize());
 		return map;
 	}
 
