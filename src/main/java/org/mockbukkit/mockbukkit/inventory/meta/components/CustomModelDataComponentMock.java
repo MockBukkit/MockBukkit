@@ -177,6 +177,17 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 		return Objects.hash(getFloats(), getFlags(), getStrings(), getColors());
 	}
 
+	@Override
+	public String toString()
+	{
+		return "CustomModelDataComponentMock{" +
+				"floats=" + floats +
+				", flags=" + flags +
+				", strings=" + strings +
+				", colors=" + colors +
+				'}';
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
