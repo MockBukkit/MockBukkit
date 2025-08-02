@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.Armadillo;
@@ -184,12 +185,14 @@ import org.mockbukkit.mockbukkit.entity.boat.SpruceBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.SpruceChestBoatMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.BiFunction;
 
+@Slf4j
 @ApiStatus.Internal
 public final class EntityTypesMock
 {
@@ -397,11 +400,32 @@ public final class EntityTypesMock
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
 
+		// First try to instantiate it directly
+		try
+		{
+			var myConstructor = bukkitClazz.getDeclaredConstructor(ServerMock.class, UUID.class);
+			return (EntityMock) myConstructor.newInstance(server, entityUUID);
+		}
+		catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+			   InvocationTargetException e)
+		{
+			log.warn("Couldn't find: " + e.getMessage() + " for " + bukkitClazz.getName() + ". Falling back to reflection.", e);
+		}
+
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
 		if (data == null)
 		{
-			// try a little harder
-			data = bukkitToMockData.values().stream().filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass)).findFirst().orElse(null);
+			// try a little harder - first look for exact match, then assignable
+			data = bukkitToMockData.values().stream()
+					.filter(entityData -> entityData.mockClass.equals(bukkitClazz))
+					.findFirst()
+					.orElse(
+							bukkitToMockData.values().stream()
+									.filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass))
+									.findFirst()
+									.orElse(null)
+					);
+
 			if (data == null)
 			{
 				throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));

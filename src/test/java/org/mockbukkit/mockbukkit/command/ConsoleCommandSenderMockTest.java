@@ -8,11 +8,13 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,23 +26,18 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 
+@ExtendWith(MockBukkitExtension.class)
 class ConsoleCommandSenderMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private ConsoleCommandSenderMock sender;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		sender = server.getConsoleSender();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

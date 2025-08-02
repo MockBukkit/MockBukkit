@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -56,15 +55,10 @@ class BukkitSchedulerMockTest
 	 */
 	private static final long SLEEP_TIME = 50L;
 
+	@MockBukkitInject
 	private BukkitSchedulerMock scheduler;
 	@MockBukkitInject
 	private ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		scheduler = new BukkitSchedulerMock();
-	}
 
 	@Test
 	void getCurrentTick()
@@ -253,7 +247,6 @@ class BukkitSchedulerMockTest
 		scheduler1.cancelTask(task.getTaskId());
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
 	}
-
 
 	@Test
 	void longScheduledRunningTask_Throws_RunTimeException()

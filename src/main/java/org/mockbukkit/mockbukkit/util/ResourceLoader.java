@@ -19,7 +19,6 @@ public class ResourceLoader
 
 	private ResourceLoader()
 	{
-
 	}
 
 	public static JsonElement loadResource(@NotNull String path)

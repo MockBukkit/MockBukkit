@@ -3,10 +3,10 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BannerMetaMockTest
 {
 
+	@MockBukkitInject
 	private BannerMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new BannerMetaMock();
-	}
 
 	@Test
 	void constructor_DefaultValues()

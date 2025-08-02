@@ -148,7 +148,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		this.perms = new PermissibleBase(this);
 
 		if (!Bukkit.getWorlds().isEmpty())
-			location = Bukkit.getWorlds().get(0).getSpawnLocation();
+			location = Bukkit.getWorlds().getFirst().getSpawnLocation();
 		else
 			location = new Location(null, 0, 0, 0);
 
@@ -785,7 +785,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	protected void remove(EntityRemoveEvent.Cause cause)
 	{
-
 		EventFactoryMock.callEntityRemoveEvent(this, cause);
 
 		leaveVehicle();

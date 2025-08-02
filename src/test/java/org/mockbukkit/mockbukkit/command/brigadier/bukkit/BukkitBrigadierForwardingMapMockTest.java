@@ -26,7 +26,7 @@ class BukkitBrigadierForwardingMapMockTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 
 	BukkitBrigadierForwardingMapMock map;
 
@@ -141,6 +141,5 @@ class BukkitBrigadierForwardingMapMockTest
 		assertTrue(map.values().iterator().hasNext());
 		assertTrue(map.keySet().stream().anyMatch("other_command"::equals));
 	}
-
 
 }

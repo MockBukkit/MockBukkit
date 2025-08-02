@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-
 /**
  * Mock implementation of an {@link Sniffer}.
  *

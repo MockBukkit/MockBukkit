@@ -5,16 +5,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -28,15 +24,7 @@ class HopperMinecartMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
-
 	private HopperMinecart minecart;
-
-	@BeforeEach
-	void setUp()
-	{
-		minecart = new HopperMinecartMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testIsEnabledDefault()

@@ -83,7 +83,6 @@ public class DragonBattleMock implements DragonBattle
 	{
 		if (this.hasBeenPreviouslyKilled() && this.getRespawnPhase() == RespawnPhase.NONE)
 		{
-
 			if (portalLocation == null)
 			{
 				portalLocation = new Location(enderDragonMock.getWorld(), 0, 0, 0);

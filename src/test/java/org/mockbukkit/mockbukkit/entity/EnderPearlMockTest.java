@@ -4,15 +4,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -23,14 +19,7 @@ class EnderPearlMockTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
-	EnderPearl pearl;
-
-	@BeforeEach
-	void setUp()
-	{
-		pearl = new EnderPearlMock(server, UUID.randomUUID());
-	}
+	private EnderPearl pearl;
 
 	@Test
 	void getItem_DefaultIsEnderPearl()

@@ -65,7 +65,7 @@ class MockBukkitExtensionDifferentMocksTest
 	{
 
 		@MockBukkitInject
-		ServerMock serverMock;
+		private ServerMock serverMock;
 
 		@Test
 		void serverMockIsNotNull()
@@ -80,7 +80,7 @@ class MockBukkitExtensionDifferentMocksTest
 	{
 
 		@MockBukkitInject
-		ServerMock serverMock;
+		private ServerMock serverMock;
 
 		@MockBukkitInject
 		PlayerMock playerMock;

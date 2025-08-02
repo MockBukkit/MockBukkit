@@ -16,7 +16,6 @@ public class TrimPatternMock implements TrimPattern
 	private final Component description;
 	private final String translationKey;
 
-
 	@ApiStatus.Internal
 	public TrimPatternMock(NamespacedKey key, Component description, String translationKey)
 	{

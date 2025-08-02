@@ -1,16 +1,17 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.opentest4j.AssertionFailedError;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class EntityDataTest
 {
 
@@ -22,12 +23,6 @@ class EntityDataTest
 	{
 		fakeData = "{'default':{'width':2,'height':3,'eyeHeight':4,'states':{'sleeping':{'height':0.2, 'eyeHeight':0.3}}},'baby':{'width':1, 'height':0.5, 'eyeHeight':0.1}}";
 		entityData = new EntityData(EntityType.BAT, fakeData);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

@@ -63,7 +63,6 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 		return getOrCreateAllFoods().get(material);
 	}
 
-
 	@ApiStatus.Internal
 	public record FoodEffect(PotionEffect potionEffect, float probability)
 	{

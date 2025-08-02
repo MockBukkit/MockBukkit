@@ -24,7 +24,7 @@ class ProfileBanListMockTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 	ProfileBanListMock banList;
 
 	@BeforeEach

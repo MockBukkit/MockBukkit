@@ -2,41 +2,26 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class EvokerFangsMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private LivingEntity owner;
+	@MockBukkitInject
 	private EvokerFangsMock evokerFangs;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		owner = new EvokerMock(server, UUID.randomUUID());
-		evokerFangs = new EvokerFangsMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void getOwner_GivenDefaultValue()

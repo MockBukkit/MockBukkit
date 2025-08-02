@@ -11,7 +11,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
-
 public class BukkitObjectOutputStreamMock extends ObjectOutputStream
 {
 
@@ -24,7 +23,6 @@ public class BukkitObjectOutputStreamMock extends ObjectOutputStream
 	@Override
 	protected Object replaceObject(Object obj) throws IOException
 	{
-
 		if (obj instanceof ConfigurationSerializable configurationSerializable)
 		{
 			if (!(obj instanceof ItemStack || obj instanceof ItemMeta || obj instanceof Location))

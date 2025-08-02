@@ -45,7 +45,6 @@ public final class TagsMock
 	 */
 	public static void loadDefaultTags(@NotNull ServerMock server, boolean skipIfExists)
 	{
-
 		for (TagRegistry registry : TagRegistry.values())
 		{
 			try

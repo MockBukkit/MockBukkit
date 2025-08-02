@@ -3,10 +3,9 @@ package org.mockbukkit.mockbukkit.block.state;
 import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -15,20 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@ExtendWith(MockBukkitExtension.class)
 class BedStateMockTest
 {
-
-	@BeforeEach
-	void setup()
-	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void constructor_Material()

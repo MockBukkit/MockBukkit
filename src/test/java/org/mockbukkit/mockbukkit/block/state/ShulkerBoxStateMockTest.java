@@ -6,12 +6,13 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -24,9 +25,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ShulkerBoxStateMockTest extends ContainerStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private ShulkerBoxStateMock shulkerBox;
@@ -40,16 +43,9 @@ class ShulkerBoxStateMockTest extends ContainerStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.SHULKER_BOX);
 		this.shulkerBox = new ShulkerBoxStateMock(this.block);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

@@ -27,10 +27,8 @@ public class BrigadierUtils
 
 	public static WrappedLiteralCommandNode copyLiteral(final String newLiteral, final LiteralCommandNode<CommandSourceStack> source)
 	{
-
 		return new WrappedLiteralCommandNode(source, newLiteral);
 	}
-
 
 	public static void removeChildFromRoot(String name, CommandDispatcher<CommandSourceStack> dispatcher)
 	{
@@ -61,7 +59,6 @@ public class BrigadierUtils
 			throw new RuntimeException(e);
 		}
 	}
-
 
 	private static Map<String, ?> getRootNodeMapFields(String fieldName, RootCommandNode<CommandSourceStack> rootNode) throws IllegalAccessException, NoSuchFieldException
 	{

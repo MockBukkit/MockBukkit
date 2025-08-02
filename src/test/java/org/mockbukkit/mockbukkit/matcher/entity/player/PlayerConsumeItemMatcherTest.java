@@ -19,14 +19,14 @@ class PlayerConsumeItemMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	private PlayerMock player;
 	private ItemStack item;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.player = serverMock.addPlayer();
 		this.item = new ItemStack(Material.POTATO);
 	}
 

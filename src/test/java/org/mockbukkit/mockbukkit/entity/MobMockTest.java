@@ -1,34 +1,22 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class MobMockTest
 {
 
+	@MockBukkitInject
 	private MobMock mob;
-	ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		mob = new SimpleMobMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+	@MockBukkitInject
+	private ServerMock server;
 
 	@Test
 	void testGetTargetDefault()

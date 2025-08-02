@@ -877,7 +877,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return this.leashHolder;
 	}
 
-
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{

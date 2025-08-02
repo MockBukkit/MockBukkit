@@ -2,10 +2,10 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Arrays;
@@ -24,13 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CrossbowMetaMockTest
 {
 
+	@MockBukkitInject
 	private CrossbowMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new CrossbowMetaMock();
-	}
 
 	@Test
 	void constructor_DefaultValues()

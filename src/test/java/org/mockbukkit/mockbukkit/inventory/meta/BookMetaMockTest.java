@@ -2,10 +2,10 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.meta.BookMeta;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BookMetaMockTest
 {
 
+	@MockBukkitInject
 	private BookMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new BookMetaMock();
-	}
 
 	@Test
 	void constructor_DefaultValues()

@@ -3,15 +3,13 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.LlamaInventoryMock;
-
-import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,24 +21,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasNotAttacked;
 
+@ExtendWith(MockBukkitExtension.class)
 class LlamaMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
+	private MockBukkit server;
+	@MockBukkitInject
 	private LlamaMock llama;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		llama = new LlamaMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+	@MockBukkitInject
+	private LlamaMock llama2;
+	@MockBukkitInject
+	private PlayerMock player;
 
 	@Test
 	void testGetColorDefault()
@@ -84,7 +76,6 @@ class LlamaMockTest
 	@Test
 	void testRangedAttack()
 	{
-		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 1);
 
 		assertThat(llama, hasAttacked(player, 1));
@@ -99,7 +90,6 @@ class LlamaMockTest
 	@Test
 	void testRangedAttackOutOfRange()
 	{
-		PlayerMock player = server.addPlayer();
 		assertThrows(IllegalArgumentException.class, () -> llama.rangedAttack(player, -1));
 		assertThrows(IllegalArgumentException.class, () -> llama.rangedAttack(player, 2));
 	}
@@ -114,7 +104,6 @@ class LlamaMockTest
 	@Test
 	void testAssertAgressiveAttack()
 	{
-		PlayerMock player = server.addPlayer();
 		llama.setChargingAttack(true);
 		llama.rangedAttack(player, 1);
 		assertThat(llama, hasAttacked(player, 1, true));
@@ -131,14 +120,12 @@ class LlamaMockTest
 	@Test
 	void testAssertAttackWithNotAttackedEntity()
 	{
-		PlayerMock player = server.addPlayer();
 		assertThat(llama, hasNotAttacked(player, 1));
 	}
 
 	@Test
 	void testAssertAttackWithNotAgressiveEntity()
 	{
-		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 1);
 		assertThat(llama, hasNotAttacked(player, 1, true));
 	}
@@ -146,7 +133,6 @@ class LlamaMockTest
 	@Test
 	void testAssertAttackWithWrongCharge()
 	{
-		PlayerMock player = server.addPlayer();
 		llama.rangedAttack(player, 0.8f);
 		assertThat(llama, hasNotAttacked(player, 0.2f));
 	}
@@ -160,7 +146,6 @@ class LlamaMockTest
 	@Test
 	void testInCaravan()
 	{
-		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
 		llama.joinCaravan(llama2);
 		assertTrue(llama.inCaravan());
 	}
@@ -168,7 +153,6 @@ class LlamaMockTest
 	@Test
 	void testLeaveCaravan()
 	{
-		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
 		llama.joinCaravan(llama2);
 		assertTrue(llama.inCaravan());
 		llama.leaveCaravan();
@@ -184,7 +168,6 @@ class LlamaMockTest
 	@Test
 	void testGetCaravanHead()
 	{
-		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
 		llama.joinCaravan(llama2);
 		assertEquals(llama2, llama.getCaravanHead());
 	}
@@ -204,7 +187,6 @@ class LlamaMockTest
 	@Test
 	void testHasCaravanTail()
 	{
-		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
 		llama.joinCaravan(llama2);
 		assertTrue(llama2.hasCaravanTail());
 	}
@@ -212,7 +194,6 @@ class LlamaMockTest
 	@Test
 	void testGetCaravanTail()
 	{
-		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
 		llama.joinCaravan(llama2);
 		assertEquals(llama, llama2.getCaravanTail());
 	}

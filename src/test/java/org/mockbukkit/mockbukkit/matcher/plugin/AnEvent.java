@@ -3,10 +3,13 @@ package org.mockbukkit.mockbukkit.matcher.plugin;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 /**
  * An event constructor can always change, let's instead have a custom event that does not change constructor.
  */
+@ExtendWith(MockBukkitExtension.class)
 class AnEvent extends Event
 {
 

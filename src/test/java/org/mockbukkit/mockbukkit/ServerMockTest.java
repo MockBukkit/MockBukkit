@@ -105,7 +105,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -1078,7 +1078,6 @@ class ServerMockTest
 		server.setWhitelist(true);
 		server.setWhitelistEnforced(true);
 
-
 		server.reloadWhitelist();
 
 		assertFalse(server.getOnlinePlayers().contains(playerMock));
@@ -1145,7 +1144,6 @@ class ServerMockTest
 	void testAddPlayerWithWhitelistEnabledAndNotWhitelisted()
 	{
 		server.setWhitelist(true);
-
 
 		PlayerMock player = server.addPlayer();
 
@@ -2017,7 +2015,6 @@ class ServerMockTest
 		assertEquals(10, server.getAnimalSpawnLimit());
 	}
 
-
 	@Test
 	void testBanIP()
 	{
@@ -2402,6 +2399,7 @@ class ServerMockTest
 
 }
 
+@ExtendWith(MockBukkitExtension.class)
 class TestRecipe implements Recipe
 {
 
@@ -2425,6 +2423,7 @@ class TestRecipe implements Recipe
 
 }
 
+@ExtendWith(MockBukkitExtension.class)
 class EventDenier implements Listener
 {
 

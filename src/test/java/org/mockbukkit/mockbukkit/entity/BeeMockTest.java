@@ -5,16 +5,13 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,25 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class BeeMockTest
 {
 
+	@MockBukkitInject
 	private BeeMock bee;
-
-	@BeforeEach
-	void setUp()
-	{
-		ServerMock server = MockBukkit.mock();
-		World world = new WorldCreator("world").createWorld();
-		bee = new BeeMock(server, UUID.randomUUID());
-		bee.setLocation(new Location(world, 0, 0, 0));
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetType()
@@ -210,7 +194,7 @@ class BeeMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertEquals(0,  bee.getTimeSinceSting());
+			assertEquals(0, bee.getTimeSinceSting());
 		}
 
 		@ParameterizedTest
@@ -218,7 +202,7 @@ class BeeMockTest
 		void givenValidValues(int time)
 		{
 			bee.setTimeSinceSting(time);
-			assertEquals(time,  bee.getTimeSinceSting());
+			assertEquals(time, bee.getTimeSinceSting());
 		}
 
 		@ParameterizedTest

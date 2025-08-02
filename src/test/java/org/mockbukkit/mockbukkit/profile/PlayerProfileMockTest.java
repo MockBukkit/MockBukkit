@@ -2,12 +2,12 @@ package org.mockbukkit.mockbukkit.profile;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
 import org.bukkit.profile.PlayerTextures;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -23,22 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerProfileMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void correctValues_Constructor_UuidName()

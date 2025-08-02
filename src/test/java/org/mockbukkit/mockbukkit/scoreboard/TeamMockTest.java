@@ -9,10 +9,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -31,31 +32,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
+@ExtendWith(MockBukkitExtension.class)
 class TeamMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private TeamMock team;
 	private Scoreboard board;
+	@MockBukkitInject
 	private PlayerMock playerA;
-
+	@MockBukkitInject
 	private PlayerMock playerB;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
-		playerA = server.addPlayer();
-		playerB = server.addPlayer();
 		ScoreboardManager managerMock = server.getScoreboardManager();
 		board = managerMock.getNewScoreboard();
 		team = (TeamMock) board.registerNewTeam("Test");
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

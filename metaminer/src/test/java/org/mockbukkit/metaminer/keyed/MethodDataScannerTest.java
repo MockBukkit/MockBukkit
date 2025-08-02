@@ -34,7 +34,6 @@ class MethodDataScannerTest
 		class Primitives
 		{
 
-
 			@Test
 			void givenVoidType() throws InvocationTargetException, IllegalAccessException
 			{

@@ -3,9 +3,11 @@ package org.mockbukkit.mockbukkit.util;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.SoundCategory;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class AdventureConvertsTest
 {
 
@@ -54,6 +57,5 @@ class AdventureConvertsTest
 				Arguments.of(Sound.Source.VOICE, SoundCategory.VOICE)
 		);
 	}
-
 
 }

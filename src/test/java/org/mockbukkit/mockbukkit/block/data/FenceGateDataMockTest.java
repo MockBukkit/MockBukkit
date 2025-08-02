@@ -30,7 +30,6 @@ class FenceGateDataMockTest
 		this.gate = new FenceGateDataMock(Material.OAK_FENCE_GATE);
 	}
 
-
 	@Nested
 	class SetEnabled
 	{

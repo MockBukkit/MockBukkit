@@ -19,14 +19,14 @@ class HumanEntityInventoryViewTypeMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	private HumanEntityMock human;
 	private InventoryMock inventoryMock;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.human = serverMock.addPlayer();
 		this.inventoryMock = serverMock.createInventory(human, InventoryType.BARREL);
 	}
 

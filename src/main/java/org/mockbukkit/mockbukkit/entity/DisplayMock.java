@@ -29,7 +29,6 @@ public class DisplayMock extends EntityMock implements Display
 	private int color = -1;
 	private Brightness brightness = null;
 
-
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *

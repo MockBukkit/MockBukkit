@@ -6,10 +6,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
@@ -19,24 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class PillagerMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private PillagerMock pillager;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		pillager = new PillagerMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void getCelebrationSound()
@@ -69,7 +59,7 @@ class PillagerMockTest
 	@Test
 	void finalizeSpawn_ShouldEquipCrossBowInMainHand()
 	{
-
+		pillager = new PillagerMock(server, UUID.randomUUID());
 		ItemStack crossbow = pillager.getInventory().getItem(EquipmentSlot.HAND.ordinal());
 		assertNull(crossbow);
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -17,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 @ExtendWith(MockBukkitExtension.class)
 class EndGatewayStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private EndGatewayStateMock gateway;
@@ -29,7 +30,6 @@ class EndGatewayStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.END_GATEWAY);
 		this.gateway = new EndGatewayStateMock(this.block);

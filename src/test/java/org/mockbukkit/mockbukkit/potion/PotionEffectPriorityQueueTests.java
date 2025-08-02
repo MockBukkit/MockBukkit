@@ -489,7 +489,6 @@ class PotionEffectPriorityQueueTests
 		assertEventNotFired(EntityPotionEffectEvent.Action.REMOVED);
 	}
 
-
 	@Test
 	void testLiveTestStrength(@MockBukkitInject @NotNull PlayerMock player)
 	{

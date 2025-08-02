@@ -61,7 +61,6 @@ class RaidMockTest
 	@ValueSource(booleans = { true, false })
 	void isStarted_GivenUserValue(boolean expectedValue)
 	{
-
 		raid.setStarted(expectedValue);
 
 		assertEquals(expectedValue, raid.isStarted());
@@ -229,7 +228,6 @@ class RaidMockTest
 	@Test
 	void getTotalHealth()
 	{
-
 		Raider raiderA = createTestRaider();
 		Raider raiderB = createTestRaider();
 

@@ -52,7 +52,6 @@ public class InternalTag<T>
 		return values.contains(value);
 	}
 
-
 	public static void loadInternalTags()
 	{
 		for (InternalTagRegistry registry : InternalTagRegistry.values())

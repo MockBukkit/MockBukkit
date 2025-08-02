@@ -1,14 +1,15 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.inventory.InventoryHolder;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class CartographyInventoryMockTest
 {
 
@@ -17,14 +18,7 @@ class CartographyInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
 		inventory = new CartographyInventoryMock((InventoryHolder) null);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test

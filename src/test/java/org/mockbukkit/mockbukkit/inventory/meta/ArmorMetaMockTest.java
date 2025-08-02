@@ -1,10 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -22,14 +20,9 @@ class ArmorMetaMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private ArmorMeta meta;
+	@MockBukkitInject
+	private ArmorMetaMock meta;
 	private final ArmorTrim trim = new ArmorTrim(TrimMaterial.AMETHYST, TrimPattern.BOLT);
-
-	@BeforeEach
-	void setUp()
-	{
-		this.meta = new ArmorMetaMock();
-	}
 
 	@Test
 	void hasTrim_default()
