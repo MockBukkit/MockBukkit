@@ -1884,7 +1884,6 @@ class WorldMockTest
 	@Test
 	void testPlayEffectNullEffect()
 	{
-
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 0, 0);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->

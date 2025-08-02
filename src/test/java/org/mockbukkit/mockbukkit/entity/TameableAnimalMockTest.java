@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.AnimalTamer;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,13 +25,8 @@ class TameableAnimalMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private TameableAnimalMock tameable;
-
-	@BeforeEach
-	void setup()
-	{
-		this.tameable = new TameableAnimalMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void getOwner_givenNullOwner()

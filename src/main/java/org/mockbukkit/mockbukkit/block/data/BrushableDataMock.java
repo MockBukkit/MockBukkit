@@ -23,6 +23,16 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link BrushableDataMock} based on an existing {@link BrushableDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected BrushableDataMock(BrushableDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getDusted()
 	{
@@ -40,6 +50,13 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 	public int getMaximumDusted()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.MAX_DUSTED);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull BrushableDataMock clone()
+	{
+		return new BrushableDataMock(this);
 	}
 
 }

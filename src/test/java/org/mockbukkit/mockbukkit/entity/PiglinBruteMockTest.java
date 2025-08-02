@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PiglinBrute;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,13 +27,8 @@ class PiglinBruteMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private PiglinBruteMock piglinBrute;
-
-	@BeforeEach
-	void setUp()
-	{
-		piglinBrute = new PiglinBruteMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void getType()
@@ -82,15 +76,21 @@ class PiglinBruteMockTest
 		@Test
 		void givenDefault_WhenEntityIsNotInWorld_ShouldThrow()
 		{
+			// We need to unload because our injection creates a world already
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
+			piglinBrute = new PiglinBruteMock(server, UUID.randomUUID());
 			IllegalStateException e = assertThrows(IllegalStateException.class, () -> piglinBrute.getConversionTime());
 			assertEquals("Entity is not in a world.", e.getMessage());
 		}
 
 		@ParameterizedTest
 		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
-		void givenPossibleConversionTime_ShouldSetConversionTime(int value)
+		void givenPossibleConversionTime_ShouldSetConversionTime(int value, @MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 
 			spawnedEntity.setConversionTime(value);
@@ -100,9 +100,8 @@ class PiglinBruteMockTest
 
 		@ParameterizedTest
 		@ValueSource(ints = { -5, -4, -3, -2, -1 })
-		void givenImpossibleConversionTime_ShouldResetConversion(int value)
+		void givenImpossibleConversionTime_ShouldResetConversion(int value, @MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 
 			spawnedEntity.setImmuneToZombification(true);
@@ -122,14 +121,20 @@ class PiglinBruteMockTest
 		@Test
 		void giveEntityThatIsNotInWorld_ShouldThrow()
 		{
+			// We need to unload because our injection creates a world already
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
+			piglinBrute = new PiglinBruteMock(server, UUID.randomUUID());
 			IllegalStateException e = assertThrows(IllegalStateException.class, () -> piglinBrute.isConverting());
 			assertEquals("Entity is not in a world.", e.getMessage());
 		}
 
 		@Test
-		void givenPiglinSafeWorld_ShouldReturnFalse()
+		void givenPiglinSafeWorld_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NETHER);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 
@@ -137,9 +142,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndImmuneToZombification_ShouldReturnFalse()
+		void givenNonPiglinSafeWorldAndImmuneToZombification_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NORMAL);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(true);
@@ -148,9 +152,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndNoAi_ShouldReturnFalse()
+		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndNoAi_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NORMAL);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(false);
@@ -160,9 +163,8 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndWithAi_ShouldReturnTrue()
+		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndWithAi_ShouldReturnTrue(@MockBukkitInject WorldMock world)
 		{
-			WorldMock world = server.addSimpleWorld("world");
 			world.setEnvironment(World.Environment.NORMAL);
 			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(false);

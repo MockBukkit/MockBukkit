@@ -18,6 +18,16 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link AnaloguePowerableBlockDataMock} based on an existing {@link AnaloguePowerableBlockDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected AnaloguePowerableBlockDataMock(AnaloguePowerableBlockDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getPower()
 	{
@@ -35,6 +45,13 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	public int getMaximumPower()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.MAX_POWER);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull AnaloguePowerableBlockDataMock clone()
+	{
+		return new AnaloguePowerableBlockDataMock(this);
 	}
 
 }

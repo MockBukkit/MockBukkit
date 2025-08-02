@@ -5,7 +5,6 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sniffer;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +16,6 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,13 +29,8 @@ class SnifferMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private SnifferMock sniffer;
-
-	@BeforeEach
-	void setUp()
-	{
-		sniffer = new SnifferMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class AddExploredLocations

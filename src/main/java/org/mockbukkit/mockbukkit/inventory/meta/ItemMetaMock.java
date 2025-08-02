@@ -42,7 +42,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
@@ -139,7 +138,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (meta instanceof ItemMetaMock m)
 		{
-			this.persistentDataContainer = m.persistentDataContainer;
+			this.persistentDataContainer = new PersistentDataContainerMock(m.persistentDataContainer);
 		}
 		unbreakable = meta.isUnbreakable();
 		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
@@ -377,41 +376,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public ItemMetaMock clone()
 	{
-		try
-		{
-			ItemMetaMock meta = (ItemMetaMock) super.clone();
-			meta.displayName = displayName;
-			if (lore != null)
-			{
-				meta.lore = new ArrayList<>(lore);
-			}
-
-			meta.damage = damage;
-			meta.maxDamage = maxDamage;
-			meta.repairCost = repairCost;
-			meta.enchants = new HashMap<>(enchants);
-			meta.attributeModifiers = attributeModifiers != null ? LinkedHashMultimap.create(attributeModifiers) : null;
-			meta.hideFlags = EnumSet.copyOf(hideFlags);
-			meta.persistentDataContainer = new PersistentDataContainerMock(persistentDataContainer);
-			meta.unbreakable = unbreakable;
-			meta.customModelData = customModelData;
-
-			meta.hideTooltip = hideTooltip;
-			meta.fireResistant = fireResistant;
-			meta.maxStackSize = maxStackSize;
-			meta.enchantmentGlintOverride = enchantmentGlintOverride;
-			meta.rarity = rarity;
-			meta.itemName = itemName;
-			meta.enchantableValue = enchantableValue;
-
-			return meta;
-		}
-		catch (CloneNotSupportedException e)
-		{
-			throw new ItemMetaInitException(e);
-		}
+		return new ItemMetaMock(this);
 	}
 
 	@Override
@@ -688,7 +656,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("EnchantableValue", this.enchantableValue);
 		}
-
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())

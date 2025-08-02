@@ -29,6 +29,16 @@ public class BambooDataMock extends BlockDataMock implements Bamboo
 		this.setStage(0);
 	}
 
+	/**
+	 * Create a new {@link BambooDataMock} based on an existing {@link BambooDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected BambooDataMock(BambooDataMock other)
+	{
+		super(other);
+	}
+
 	@NotNull
 	@Override
 	public Leaves getLeaves()
@@ -76,6 +86,13 @@ public class BambooDataMock extends BlockDataMock implements Bamboo
 	public int getMaximumStage()
 	{
 		return MAXIMUM_STAGE_AMOUNT;
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull BambooDataMock clone()
+	{
+		return new BambooDataMock(this);
 	}
 
 }

@@ -32,7 +32,6 @@ class DecoratedPotStateMockTest
 		this.pot = (DecoratedPotStateMock) BlockStateMockFactory.mock(Material.DECORATED_POT);
 	}
 
-
 	@Test
 	void getInventory()
 	{

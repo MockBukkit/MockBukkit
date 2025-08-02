@@ -7,7 +7,6 @@ import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,10 +16,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.boat.OakBoatMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
-import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,14 +31,9 @@ class BoatMockTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	Boat boat;
-
-	@BeforeEach
-	void setup()
-	{
-		this.boat = new OakBoatMock(serverMock, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetType()

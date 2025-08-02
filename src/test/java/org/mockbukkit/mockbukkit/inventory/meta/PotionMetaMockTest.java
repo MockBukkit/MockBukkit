@@ -8,6 +8,7 @@ import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,17 +20,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PotionMetaMockTest
 {
 
+	@MockBukkitInject
+	private PotionMetaMock meta;
+
 	@Test
 	void testEffectsDefaultEmpty()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		assertFalse(meta.hasCustomEffects());
 	}
 
 	@Test
 	void testAddEffect()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
 
 		assertFalse(meta.hasCustomEffect(PotionEffectType.SPEED));
@@ -43,7 +45,6 @@ class PotionMetaMockTest
 	@Test
 	void testOverrideEffect()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, 60, 2);
 		PotionEffect effect3 = new PotionEffect(PotionEffectType.SPEED, 60, 1);
@@ -64,7 +65,6 @@ class PotionMetaMockTest
 	@Test
 	void testClearEffects()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		assertFalse(meta.clearCustomEffects());
 
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
@@ -79,7 +79,6 @@ class PotionMetaMockTest
 	@Test
 	void testRemoveEffect()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		assertFalse(meta.clearCustomEffects());
 
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
@@ -97,7 +96,6 @@ class PotionMetaMockTest
 	@Test
 	void testEquals()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		assertEquals(meta, meta);
 		// TODO: Strange behaviour --> Accurate?
 		assertEquals(new ItemMetaMock(), meta);
@@ -118,8 +116,6 @@ class PotionMetaMockTest
 	@Test
 	void testColor()
 	{
-		PotionMeta meta = new PotionMetaMock();
-
 		assertFalse(meta.hasColor());
 		assertNull(meta.getColor());
 
@@ -135,7 +131,6 @@ class PotionMetaMockTest
 	@Test
 	void testClone()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		PotionMeta clone = meta.clone();
 		assertEquals(meta, clone);
 	}
@@ -143,7 +138,6 @@ class PotionMetaMockTest
 	@Test
 	void testBasePotionType()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		assertNull(meta.getBasePotionType());
 
 		meta.setBasePotionType(PotionType.HEALING);
@@ -156,7 +150,6 @@ class PotionMetaMockTest
 	@Test
 	void setCustomPotionName()
 	{
-		PotionMeta meta = new PotionMetaMock();
 		assertNull(meta.getCustomPotionName());
 		assertFalse(meta.hasCustomPotionName());
 

@@ -22,6 +22,16 @@ public class FenceGateDataMock extends BlockDataMock implements Gate
 		setInWall(false);
 	}
 
+	/**
+	 * Create a new {@link FenceGateDataMock} based on an existing {@link FenceGateDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected FenceGateDataMock(@NotNull FenceGateDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isInWall()
 	{
@@ -76,6 +86,13 @@ public class FenceGateDataMock extends BlockDataMock implements Gate
 	public void setPowered(boolean powered)
 	{
 		this.set(BlockDataKey.POWERED, powered);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull FenceGateDataMock clone()
+	{
+		return new FenceGateDataMock(this);
 	}
 
 }

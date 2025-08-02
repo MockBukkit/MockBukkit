@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -18,13 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MapMetaMockTest
 {
 
+	@MockBukkitInject
 	private MapMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new MapMetaMock();
-	}
 
 	@Test
 	void cloneConstructor_CopiesValues()

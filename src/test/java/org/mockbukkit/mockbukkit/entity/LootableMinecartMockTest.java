@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.Player;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -22,13 +21,8 @@ class LootableMinecartMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private LootableMinecart minecart;
-
-	@BeforeEach
-	void setUp()
-	{
-		minecart = new StorageMinecartMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testHasPlayerLootedDefault()

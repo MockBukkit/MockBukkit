@@ -30,13 +30,13 @@ class WorldBorderMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private World world;
 	private WorldBorder worldBorderMock;
 
 	@BeforeEach
 	void setUp()
 	{
-		world = new WorldMock();
 		worldBorderMock = world.getWorldBorder();
 	}
 
@@ -207,7 +207,6 @@ class WorldBorderMockTest
 
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderCenterChangeEvent.class, event -> event.getNewCenter().getX() == 10 && event.getNewCenter().getZ() == 12));
 	}
-
 
 	@Test
 	void setCenter_CanceledEvent_DoesntApply()

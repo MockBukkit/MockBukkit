@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.data;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.data.type.Slab;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -80,6 +82,21 @@ class SlabDataMockTest
 		{
 			assertInstanceOf(SlabDataMock.class, BlockDataMock.mock(material));
 		}
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull SlabDataMock cloned = slab.clone();
+
+		assertEquals(slab, cloned);
+		assertEquals(slab.isWaterlogged(), cloned.isWaterlogged());
+
+		slab.setWaterlogged(true);
+
+		assertNotEquals(slab, cloned);
+		assertTrue(slab.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

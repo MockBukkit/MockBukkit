@@ -4,9 +4,12 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlainTextComponentProviderImplTest
 {
 

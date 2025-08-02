@@ -313,7 +313,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 */
 	@SuppressWarnings("unchecked")
 	private @NotNull Constructor<? extends Plugin> getCompatibleConstructor(@NotNull Class<? extends Plugin> class1,
-																				@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
+																			@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(types, "Types cannot be null");
@@ -432,7 +432,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @return The loaded plugin.
 	 */
 	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1, @NotNull PluginDescriptionFile description,
-										  @NotNull Object @NotNull [] parameters)
+									  @NotNull Object @NotNull [] parameters)
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(description, "Description cannot be null");
@@ -618,7 +618,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			}
 		}
 	}
-
 
 	@Override
 	public void enablePlugin(@NotNull Plugin plugin)

@@ -144,7 +144,6 @@ public class UnsafeValuesMock implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public Material toLegacy(Material material)
 	{
@@ -274,7 +273,6 @@ public class UnsafeValuesMock implements UnsafeValues
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public VersionFetcher getVersionFetcher()

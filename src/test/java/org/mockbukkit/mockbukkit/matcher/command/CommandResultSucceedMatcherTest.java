@@ -19,7 +19,7 @@ class CommandResultSucceedMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 	private CommandResult commandResult;
 
 	@BeforeEach

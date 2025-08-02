@@ -18,6 +18,16 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link AgeableDataMock} based on an existing {@link AgeableDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected AgeableDataMock(@NotNull AgeableDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getAge()
 	{
@@ -35,6 +45,13 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	public int getMaximumAge()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.MAX_AGE);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull AgeableDataMock clone()
+	{
+		return new AgeableDataMock(this);
 	}
 
 }

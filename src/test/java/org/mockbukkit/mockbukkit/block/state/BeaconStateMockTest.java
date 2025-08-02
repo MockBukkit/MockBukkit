@@ -37,6 +37,7 @@ class BeaconStateMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private BeaconStateMock beacon;
@@ -44,7 +45,6 @@ class BeaconStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = this.world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.BEACON);
 		this.beacon = new BeaconStateMock(block);

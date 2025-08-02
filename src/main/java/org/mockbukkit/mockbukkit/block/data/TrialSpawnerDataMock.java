@@ -18,6 +18,16 @@ public class TrialSpawnerDataMock extends BlockDataMock implements TrialSpawner
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link TrialSpawnerDataMock} based on an existing {@link TrialSpawnerDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected TrialSpawnerDataMock(@NotNull TrialSpawnerDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull State getTrialSpawnerState()
 	{
@@ -41,6 +51,13 @@ public class TrialSpawnerDataMock extends BlockDataMock implements TrialSpawner
 	public void setOminous(boolean ominous)
 	{
 		this.set(BlockDataKey.OMINOUS, ominous);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull TrialSpawnerDataMock clone()
+	{
+		return new TrialSpawnerDataMock(this);
 	}
 
 }

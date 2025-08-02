@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.enchantments.Enchantment;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -18,15 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EnchantmentStorageMetaMockTest
 {
 
-	private Enchantment testEnchantment;
-	private Enchantment testEnchantment2;
-
-	@BeforeEach
-	void setUp()
-	{
-		testEnchantment = Enchantment.PROTECTION;
-		testEnchantment2 = Enchantment.POWER;
-	}
+	private static final Enchantment testEnchantment = Enchantment.PROTECTION;
+	private static final Enchantment testEnchantment2 = Enchantment.POWER;
 
 	@Test
 	void testStoredEnchantsDefaultFalse()

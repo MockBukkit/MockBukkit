@@ -7,12 +7,13 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.event.RaidMock;
@@ -27,16 +28,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class RaiderMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private RaiderMock raider;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		raider = new RaiderMock(server, UUID.randomUUID())
 		{
 			@Override
@@ -45,12 +47,6 @@ class RaiderMockTest
 				throw new UnsupportedOperationException();
 			}
 		};
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -121,7 +117,6 @@ class RaiderMockTest
 	@ValueSource(booleans = { true, false })
 	void isPatrolLeader_GivenUserValue(boolean expectedValue)
 	{
-
 		raider.setPatrolLeader(expectedValue);
 
 		assertEquals(expectedValue, raider.isPatrolLeader());
@@ -137,7 +132,6 @@ class RaiderMockTest
 	@ValueSource(booleans = { true, false })
 	void isCanJoinRaid_GivenUserValue(boolean expectedValue)
 	{
-
 		raider.setCanJoinRaid(expectedValue);
 
 		assertEquals(expectedValue, raider.isCanJoinRaid());
@@ -165,7 +159,6 @@ class RaiderMockTest
 		assertEquals("ticks must be >= 0", e.getMessage());
 	}
 
-
 	@Test
 	void isCelebrating_GivenDefaultValue()
 	{
@@ -176,7 +169,6 @@ class RaiderMockTest
 	@ValueSource(booleans = { true, false })
 	void isCelebrating_GivenUserValue(boolean expectedValue)
 	{
-
 		raider.setCelebrating(expectedValue);
 
 		assertEquals(expectedValue, raider.isCelebrating());

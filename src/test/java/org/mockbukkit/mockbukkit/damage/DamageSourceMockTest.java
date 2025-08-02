@@ -8,12 +8,13 @@ import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ArrowMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -32,11 +33,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class DamageSourceMockTest
 {
 
 	private final Location damageLocation = new Location(new WorldMock(), 0, 0, 0);
 
+	@MockBukkitInject
 	private ServerMock serverMock;
 	private DamageType damageType;
 	private Entity causingEntity;
@@ -46,19 +49,11 @@ class DamageSourceMockTest
 	@BeforeEach
 	void setUp()
 	{
-		serverMock = MockBukkit.mock();
-
 		damageType = DamageType.GENERIC;
 		causingEntity = new SkeletonMock(serverMock, UUID.randomUUID());
 		directEntity = new ZombieMock(serverMock, UUID.randomUUID());
 
 		damageSourceMock = new DamageSourceMock(damageType, causingEntity, directEntity, damageLocation);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -82,7 +77,6 @@ class DamageSourceMockTest
 	@Test
 	void getDamageLocation_WhenDamageLocationIsValid()
 	{
-
 		Location actual = damageSourceMock.getDamageLocation();
 
 		assertNotSame(damageLocation, actual);
@@ -92,7 +86,6 @@ class DamageSourceMockTest
 	@Test
 	void getDamageLocation_WhenDamageLocationIsNull()
 	{
-
 		DamageSourceMock noLocationMock = new DamageSourceMock(damageType, causingEntity, directEntity, null);
 
 		Location actual = noLocationMock.getDamageLocation();
@@ -135,7 +128,6 @@ class DamageSourceMockTest
 	@Test
 	void isIndirect_WhenCausingEntityIsEqualToDirectEntity()
 	{
-
 		DamageSourceMock sameEntity = new DamageSourceMock(damageType, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = sameEntity.isIndirect();
@@ -162,7 +154,6 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsNever()
 	{
-
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
 		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, causingEntity, causingEntity, damageLocation);
@@ -196,7 +187,6 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsCausedByPlayer()
 	{
-
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
 		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, serverMock.addPlayer(), null, null);
@@ -207,7 +197,6 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsDoneByPlayer()
 	{
-
 		Player player = new PlayerMock(serverMock, "MockBukkit");
 		DamageSourceMock damageSource = new DamageSourceMock(DamageType.GENERIC, player, directEntity, damageLocation);
 

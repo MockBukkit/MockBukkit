@@ -35,7 +35,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -71,12 +70,6 @@ class LivingEntityMockTest
 	private ServerMock server;
 	@MockBukkitInject
 	private CowMock livingEntity;
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testIsJumpingDefault()
@@ -321,7 +314,6 @@ class LivingEntityMockTest
 		PotionEffect afterExpiry = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
 		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
 	}
-
 
 	@Test
 	void testPotionEffectSameAmplifierBothInfiniteFirstRemains()

@@ -12,8 +12,6 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -25,15 +23,13 @@ class EnderSignalMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private EnderSignal enderSignal;
+	@MockBukkitInject
 	private WorldMock world;
 
 	@BeforeEach
 	void setUp()
 	{
-		world = server.addSimpleWorld("world");
-		enderSignal = new EnderSignalMock(server, UUID.randomUUID());
 		enderSignal.teleport(new Location(world, 0, 1, 0));
 	}
 
@@ -52,7 +48,7 @@ class EnderSignalMockTest
 	}
 
 	@Test
-	void testSetTargetLocationAcrossWorlds()
+	void testSetTargetLocationAcrossWorlds(@MockBukkitInject ServerMock server)
 	{
 		Location location = new Location(server.addSimpleWorld("world2"), 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () -> enderSignal.setTargetLocation(location));

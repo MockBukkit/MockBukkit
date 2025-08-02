@@ -38,6 +38,16 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 		setFacing(BlockFace.NORTH);
 	}
 
+	/**
+	 * Create a new {@link TrapDoorDataMock} based on an existing {@link TrapDoorDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected TrapDoorDataMock(@NotNull TrapDoorDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Half getHalf()
 	{
@@ -105,6 +115,13 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	public void setWaterlogged(boolean waterlogged)
 	{
 		set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull TrapDoorDataMock clone()
+	{
+		return new TrapDoorDataMock(this);
 	}
 
 }

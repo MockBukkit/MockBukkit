@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -25,14 +23,7 @@ class PhantomMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private PhantomMock phantom;
-
-	@BeforeEach
-	void setUp()
-	{
-		phantom = new PhantomMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetSize

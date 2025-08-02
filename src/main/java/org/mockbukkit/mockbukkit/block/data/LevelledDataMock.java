@@ -18,6 +18,16 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link LevelledDataMock} based on an existing {@link LevelledDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected LevelledDataMock(@NotNull LevelledDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getLevel()
 	{
@@ -41,6 +51,13 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	public int getMinimumLevel()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.MIN_LEVEL);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull LevelledDataMock clone()
+	{
+		return new LevelledDataMock(this);
 	}
 
 }

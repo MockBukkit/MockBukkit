@@ -31,6 +31,16 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 		setWaterlogged(false);
 	}
 
+	/**
+	 * Create a new {@link AmethystClusterDataMock} based on an existing {@link AmethystClusterDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected AmethystClusterDataMock(AmethystClusterDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -61,6 +71,13 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull AmethystClusterDataMock clone()
+	{
+		return new AmethystClusterDataMock(this);
 	}
 
 }

@@ -193,7 +193,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	private void processTasks()
 	{
-
 		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
 		for (ScheduledTask task : oldTasks)
@@ -698,7 +697,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			tasks.put(task.getTaskId(), task);
 			return true;
 		}
-
 
 		protected final @NotNull List<ScheduledTask> getCurrentTaskList()
 		{

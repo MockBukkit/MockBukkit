@@ -281,7 +281,6 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Deprecated(since = "1.16")
 	public void addPage(String @NotNull ... pages)
 	{
-
 		for (String page1 : pages)
 		{
 			String page = page1;
@@ -305,8 +304,8 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		return this.pages.size();
 	}
 
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BookMetaMock clone()
 	{
 		return new BookMetaMock(this);

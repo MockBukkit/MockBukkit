@@ -1,8 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Server;
-import org.bukkit.inventory.meta.OminousBottleMeta;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -19,14 +17,9 @@ class OminousBottleMetaMockTest
 
 	@MockBukkitInject
 	private Server server;
-	private OminousBottleMeta meta;
+	@MockBukkitInject
+	private OminousBottleMetaMock meta;
 	private final int amplifier = 1;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new OminousBottleMetaMock();
-	}
 
 	@Test
 	void hasAmplifier_default()
@@ -71,6 +64,5 @@ class OminousBottleMetaMockTest
 		assertEquals(ominousMeta, clone);
 		assertEquals(ominousMeta.getAmplifier(), clone.getAmplifier());
 	}
-
 
 }

@@ -64,5 +64,4 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 		return not(hasConsumed(itemStack));
 	}
 
-
 }

@@ -1,17 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,14 +20,7 @@ class CreakingMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private CreakingMock creaking;
-
-	@BeforeEach
-	void setup()
-	{
-		creaking = new CreakingMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void getType()
@@ -52,11 +40,10 @@ class CreakingMockTest
 		}
 
 		@Test
-		void givenValidPlayer_thenCreakingIsActivated()
+		void givenValidPlayer_thenCreakingIsActivated(@MockBukkitInject PlayerMock player)
 		{
 			assertFalse(creaking.isActive());
 
-			PlayerMock player = server.addPlayer();
 			creaking.activate(player);
 
 			assertTrue(creaking.isActive());
@@ -65,9 +52,8 @@ class CreakingMockTest
 	}
 
 	@Test
-	void deactivate()
+	void deactivate(@MockBukkitInject PlayerMock player)
 	{
-		PlayerMock player = server.addPlayer();
 		creaking.activate(player);
 		assertTrue(creaking.isActive());
 
@@ -87,10 +73,8 @@ class CreakingMockTest
 		}
 
 		@Test
-		void givenChangeInValue_ShouldReturnTheValue()
+		void givenChangeInValue_ShouldReturnTheValue(@MockBukkitInject Location location)
 		{
-			World world = server.addSimpleWorld("world");
-			Location location = new Location(world, 0, 0, 0);
 			creaking.setHomeLocation(location);
 
 			assertEquals(location, creaking.getHome());

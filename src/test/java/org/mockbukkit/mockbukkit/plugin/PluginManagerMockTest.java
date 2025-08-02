@@ -16,12 +16,14 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
@@ -44,9 +46,11 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class PluginManagerMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private PluginManagerMock pluginManager;
 	private TestPlugin plugin;
@@ -54,15 +58,8 @@ class PluginManagerMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
 		plugin = MockBukkit.load(TestPlugin.class);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -166,7 +163,6 @@ class PluginManagerMockTest
 		assertTrue(event.isCancelled());
 		assertTrue(plugin.ignoredCancelledEvent);
 	}
-
 
 	@Test
 	void assertEventFired_EventWasFired_DoesNotAssert()

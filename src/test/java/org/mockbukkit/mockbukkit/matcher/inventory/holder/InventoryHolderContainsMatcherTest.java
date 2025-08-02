@@ -12,8 +12,6 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
-import java.util.UUID;
-
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -22,13 +20,13 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private AllayMock allay;
-	private final ItemStack stack = new ItemStack(Material.STONE);
+	private static final ItemStack stack = new ItemStack(Material.STONE);
 
 	@BeforeEach
 	void setUp()
 	{
-		this.allay = new AllayMock(server, UUID.randomUUID());
 		allay.simulatePlayerInteract(Material.STONE);
 		allay.simulateItemPickup(stack);
 	}

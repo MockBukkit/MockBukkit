@@ -294,7 +294,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
+	@SuppressWarnings({"java:S2975", "MethodDoesntCallSuperMethod"})
 	public org.bukkit.profile.@NotNull PlayerProfile clone()
 	{
 		return new PlayerProfileMock(this);

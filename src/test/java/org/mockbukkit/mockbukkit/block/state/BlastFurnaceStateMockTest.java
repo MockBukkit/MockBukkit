@@ -3,6 +3,9 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.bukkit.Material;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -11,9 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class BlastFurnaceStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private BlastFurnaceStateMock furnace;
@@ -21,7 +26,6 @@ class BlastFurnaceStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.BLAST_FURNACE);
 		this.furnace = new BlastFurnaceStateMock(this.block);

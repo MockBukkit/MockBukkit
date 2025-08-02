@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.Orientation;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class CrafterDataMockTest
@@ -84,6 +87,21 @@ class CrafterDataMockTest
 			assertEquals(face, crafter.getOrientation());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull CrafterDataMock cloned = crafter.clone();
+
+		assertEquals(crafter, cloned);
+		assertEquals(crafter.isTriggered(), cloned.isTriggered());
+
+		crafter.setTriggered(true);
+
+		assertNotEquals(crafter, cloned);
+		assertTrue(crafter.isTriggered());
+		assertFalse(cloned.isTriggered());
 	}
 
 }

@@ -3,14 +3,10 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,15 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CamelMockTest
 {
 
-	private Camel camel;
 	@MockBukkitInject
-	private ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		camel = new CamelMock(server, UUID.randomUUID());
-	}
+	private Camel camel;
 
 	@Test
 	void testGetVariant()

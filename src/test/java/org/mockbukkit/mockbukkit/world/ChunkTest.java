@@ -7,12 +7,10 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.List;
 
@@ -27,14 +25,7 @@ class ChunkTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private WorldMock world;
-
-	@BeforeEach
-	void setUp()
-	{
-		world = server.addSimpleWorld("world");
-	}
 
 	@Test
 	void getX_AnyValue_ExactValue()

@@ -20,6 +20,16 @@ public class LightDataMock extends BlockDataMock implements Light
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link LightDataMock} based on an existing {@link LightDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected LightDataMock(@NotNull LightDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getLevel()
 	{
@@ -55,6 +65,13 @@ public class LightDataMock extends BlockDataMock implements Light
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull LightDataMock clone()
+	{
+		return new LightDataMock(this);
 	}
 
 }

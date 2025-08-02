@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +10,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.VillagerMock;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,14 +24,12 @@ class MerchantInventoryMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock serverMock;
-	private Merchant merchant;
+	private VillagerMock merchant;
 	private MerchantInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
 	{
-		merchant = new VillagerMock(serverMock, UUID.randomUUID());
 		merchant.setRecipes(List.of(
 				new MerchantRecipe(ItemStack.of(Material.WOODEN_PICKAXE), 1),
 				new MerchantRecipe(ItemStack.of(Material.STONE_PICKAXE), 1)));

@@ -20,7 +20,7 @@ class MockLifecycleEventManagerTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 
 	@Test
 	void pluginOnEnable()

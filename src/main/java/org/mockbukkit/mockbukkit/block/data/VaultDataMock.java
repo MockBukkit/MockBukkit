@@ -21,6 +21,16 @@ public class VaultDataMock extends BlockDataMock implements Vault
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link VaultDataMock} based on an existing {@link VaultDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected VaultDataMock(@NotNull VaultDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull State getVaultState()
 	{
@@ -64,6 +74,13 @@ public class VaultDataMock extends BlockDataMock implements Vault
 	public @NotNull Set<BlockFace> getFaces()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull VaultDataMock clone()
+	{
+		return new VaultDataMock(this);
 	}
 
 }

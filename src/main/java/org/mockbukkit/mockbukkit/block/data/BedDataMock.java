@@ -33,6 +33,16 @@ public class BedDataMock extends BlockDataMock implements Bed
 		this.setPart(Part.FOOT);
 	}
 
+	/**
+	 * Create a new {@link BedDataMock} based on an existing {@link BedDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected BedDataMock(BedDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Part getPart()
 	{
@@ -77,6 +87,13 @@ public class BedDataMock extends BlockDataMock implements Bed
 	public @NotNull Set<BlockFace> getFaces()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull BedDataMock clone()
+	{
+		return new BedDataMock(this);
 	}
 
 }

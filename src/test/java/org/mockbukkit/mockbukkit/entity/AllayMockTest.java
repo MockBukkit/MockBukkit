@@ -5,17 +5,16 @@ import org.bukkit.Material;
 import org.bukkit.entity.Allay;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -32,24 +31,14 @@ import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMat
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.doesNotHaveItemInInventory;
 import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
 
+@ExtendWith(MockBukkitExtension.class)
 class AllayMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock serverMock;
+	@MockBukkitInject
 	private AllayMock allayMock;
-
-	@BeforeEach
-	void setUp()
-	{
-		serverMock = MockBukkit.mock();
-		allayMock = new AllayMock(serverMock, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testCurrentItem()

@@ -262,7 +262,6 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 		return Objects.hash(super.hashCode(), color, isOpen);
 	}
 
-
 	@Override
 	protected String toStringInternal()
 	{

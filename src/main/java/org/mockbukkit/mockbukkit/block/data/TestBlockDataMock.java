@@ -18,6 +18,16 @@ public class TestBlockDataMock extends BlockDataMock implements TestBlock
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link TestBlockDataMock} based on an existing {@link TestBlockDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected TestBlockDataMock(@NotNull TestBlockDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Mode getMode()
 	{
@@ -29,6 +39,13 @@ public class TestBlockDataMock extends BlockDataMock implements TestBlock
 	{
 		Preconditions.checkArgument(mode != null, "mode cannot be null!");
 		this.set(BlockDataKey.MODE, mode);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull TestBlockDataMock clone()
+	{
+		return new TestBlockDataMock(this);
 	}
 
 }

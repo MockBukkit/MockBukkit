@@ -4,35 +4,21 @@ import org.bukkit.Color;
 import org.bukkit.entity.Display;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class DisplayMockTest
 {
 
+	@MockBukkitInject
 	private DisplayMock display;
-
-	@BeforeEach
-	void setUp()
-	{
-		ServerMock serverMock = MockBukkit.mock();
-		this.display = new DisplayMock(serverMock, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void setTransformation_null()

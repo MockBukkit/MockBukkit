@@ -3,36 +3,21 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@ExtendWith(MockBukkitExtension.class)
 class ZombieMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private ZombieMock zombie;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		zombie = new ZombieMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void getType()

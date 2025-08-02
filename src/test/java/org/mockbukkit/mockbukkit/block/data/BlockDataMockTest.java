@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -13,6 +14,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.WallSign;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,10 +27,13 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.state.BedStateMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -42,12 +47,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Slf4j
 @ExtendWith({ MockBukkitExtension.class })
+@ExtendWith(MockBukkitExtension.class)
 class BlockDataMockTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 
 	@Test
 	void matches_DoesMatch()
@@ -260,6 +267,53 @@ class BlockDataMockTest
 		BedDataMock bedDataMock = (BedDataMock) blockDataMock;
 		System.out.println(bedDataMock.getFacing());
 		assertNotNull(bedDataMock.getFacing());
+	}
+
+	@Nested
+	class CloneTest
+	{
+
+		/**
+		 * Unit test to validate that extend {@link BlockDataMock} implement the clone method.
+		 *
+		 * @param material The material to be used in the block state
+		 */
+		@ParameterizedTest
+		@MethodSource("getPossibleBlockData")
+		void givenPossibleBlockData(Material material)
+		{
+			BlockDataMock blockData = BlockDataMockFactory.mock(material);
+
+			BlockDataMock clone = blockData.clone();
+
+			assertEquals(blockData, clone);
+			assertNotSame(blockData, clone);
+
+			assertEquals(blockData.getClass(), clone.getClass());
+		}
+
+		static Stream<Arguments> getPossibleBlockData()
+		{
+			List<Material> blockDataMocks = new ArrayList<>();
+			for (Material material : Material.values())
+			{
+				try
+				{
+					if (!material.isBlock())
+					{
+						continue;
+					}
+
+					blockDataMocks.add(material);
+				}
+				catch (UnimplementedOperationException e)
+				{
+					log.warn("Material {} is throwing an UnimplementedOperationException", material);
+				}
+			}
+
+			return blockDataMocks.stream().map(Arguments::of);
+		}
 	}
 
 	static Stream<Arguments> getValidSerializations() throws IOException

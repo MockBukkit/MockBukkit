@@ -88,5 +88,4 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 		return not(hasItemInInventoryView(material));
 	}
 
-
 }

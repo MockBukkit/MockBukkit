@@ -50,7 +50,6 @@ public abstract class AbstractProjectileMock extends EntityMock implements Proje
 		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
-
 	@Override
 	public @Nullable UUID getOwnerUniqueId()
 	{

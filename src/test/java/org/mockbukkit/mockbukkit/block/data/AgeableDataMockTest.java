@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -98,6 +100,21 @@ class AgeableDataMockTest
 			assertEquals(15, ageableData.getMaximumAge());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull AgeableDataMock cloned = ageable.clone();
+
+		assertEquals(ageable, cloned);
+		assertEquals(ageable.getAge(), cloned.getAge());
+
+		ageable.setAge(3);
+
+		assertNotEquals(ageable, cloned);
+		assertEquals(3, ageable.getAge());
+		assertEquals(0, cloned.getAge());
 	}
 
 }

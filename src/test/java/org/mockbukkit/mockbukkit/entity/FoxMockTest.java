@@ -1,13 +1,10 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,24 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class FoxMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private FoxMock fox;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		fox = new FoxMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetFoxTypeDefault()
@@ -112,9 +97,8 @@ class FoxMockTest
 	}
 
 	@Test
-	void testSetFirstTrustedPlayer()
+	void testSetFirstTrustedPlayer(@MockBukkitInject PlayerMock player)
 	{
-		PlayerMock player = server.addPlayer();
 		fox.setFirstTrustedPlayer(player);
 		assertEquals(player, fox.getFirstTrustedPlayer());
 	}
@@ -133,9 +117,8 @@ class FoxMockTest
 	}
 
 	@Test
-	void testSetSecondTrustedPlayer()
+	void testSetSecondTrustedPlayer(@MockBukkitInject PlayerMock player)
 	{
-		PlayerMock player = server.addPlayer();
 		fox.setSecondTrustedPlayer(player);
 		assertEquals(player, fox.getSecondTrustedPlayer());
 	}
@@ -204,6 +187,5 @@ class FoxMockTest
 		fox.setBaby();
 		assertEquals(0.2D, fox.getEyeHeight());
 	}
-
 
 }

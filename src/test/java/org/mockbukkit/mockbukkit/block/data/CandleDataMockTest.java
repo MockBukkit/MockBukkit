@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -115,6 +117,21 @@ class CandleDataMockTest
 			assertEquals(isWaterLogged, candle.isWaterlogged());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull CandleDataMock cloned = candle.clone();
+
+		assertEquals(candle, cloned);
+		assertEquals(candle.getCandles(), cloned.getCandles());
+
+		candle.setCandles(3);
+
+		assertNotEquals(candle, cloned);
+		assertEquals(3, candle.getCandles());
+		assertEquals(1, cloned.getCandles());
 	}
 
 }

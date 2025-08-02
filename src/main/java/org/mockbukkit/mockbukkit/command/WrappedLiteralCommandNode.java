@@ -16,7 +16,6 @@ public class WrappedLiteralCommandNode extends LiteralCommandNode<CommandSourceS
 		commandNode.getChildren().forEach(this::addChild);
 	}
 
-
 	public @Nullable ApiCommandMetaMock getCommandMeta()
 	{
 		return commandMeta;

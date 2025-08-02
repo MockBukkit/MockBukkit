@@ -53,7 +53,6 @@ class ArtMockTest
 		})
 		void givenOther(String expectedKey, int expectedWidth, int expectedHeight, String expectedTitle, String expectedAuthor)
 		{
-
 			NamespacedKey key = NamespacedKey.fromString(expectedKey);
 			Art art = RegistryAccess.registryAccess().getRegistry(RegistryKey.PAINTING_VARIANT).get(key);
 

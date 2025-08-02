@@ -3,9 +3,12 @@ package org.mockbukkit.mockbukkit.attribute;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockBukkitExtension.class)
 class AttributeInstanceMockTest
 {
 
