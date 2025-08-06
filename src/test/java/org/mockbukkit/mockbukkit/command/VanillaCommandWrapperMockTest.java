@@ -22,7 +22,7 @@ class VanillaCommandWrapperMockTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 	private VanillaCommandWrapperMock command;
 
 	@BeforeEach

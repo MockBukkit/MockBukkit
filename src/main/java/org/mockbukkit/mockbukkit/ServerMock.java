@@ -2535,7 +2535,6 @@ public class ServerMock extends Server.Spigot implements Server
 		return this;
 	}
 
-
 	@Override
 	public void reloadPermissions()
 	{

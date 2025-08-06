@@ -5,16 +5,13 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.world.WorldMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,24 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class EnderCrystalMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private EnderCrystalMock crystal;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		crystal = new EnderCrystalMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void isShowingBottom_GivenDefaultValue()
@@ -65,7 +50,6 @@ class EnderCrystalMockTest
 	@Test
 	void getBeamTarget_GivenLocationInTheSameWorld()
 	{
-
 		World world = new WorldMock();
 		Location entityLocation = new Location(world, 0, 0, 0);
 		crystal.setLocation(entityLocation);
@@ -86,7 +70,6 @@ class EnderCrystalMockTest
 	@Test
 	void setBeamTarget_GivenLocationInDifferentWorld()
 	{
-
 		World worldA = new WorldMock();
 		Location entityLocation = new Location(worldA, 0, 0, 0);
 		crystal.setLocation(entityLocation);

@@ -5,6 +5,7 @@ import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Stairs;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -145,6 +147,21 @@ class StairsDataMockTest
 		assertEquals(Bisected.Half.TOP, stairsDataMock.getHalf());
 		assertEquals(Stairs.Shape.INNER_LEFT, stairsDataMock.getShape());
 		assertTrue(stairsDataMock.isWaterlogged());
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull StairsDataMock cloned = stairs.clone();
+
+		assertEquals(stairs, cloned);
+		assertEquals(stairs.isWaterlogged(), cloned.isWaterlogged());
+
+		stairs.setWaterlogged(true);
+
+		assertNotEquals(stairs, cloned);
+		assertTrue(stairs.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 }

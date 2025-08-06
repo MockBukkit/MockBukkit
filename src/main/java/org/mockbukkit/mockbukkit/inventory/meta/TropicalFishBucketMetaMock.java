@@ -139,13 +139,10 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull TropicalFishBucketMetaMock clone()
 	{
-		TropicalFishBucketMetaMock clone = (TropicalFishBucketMetaMock) super.clone();
-		clone.patternColor = this.patternColor;
-		clone.bodyColor = this.bodyColor;
-		clone.pattern = this.pattern;
-		return clone;
+		return new TropicalFishBucketMetaMock(this);
 	}
 
 	/**

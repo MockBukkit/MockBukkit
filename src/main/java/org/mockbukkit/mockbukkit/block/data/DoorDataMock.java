@@ -22,6 +22,16 @@ public class DoorDataMock extends BlockDataMock implements Door
 		setHalf(Half.BOTTOM);
 	}
 
+	/**
+	 * Create a new {@link DoorDataMock} based on an existing {@link DoorDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected DoorDataMock(@NotNull DoorDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Hinge getHinge()
 	{
@@ -88,6 +98,13 @@ public class DoorDataMock extends BlockDataMock implements Door
 	public void setPowered(boolean powered)
 	{
 		this.set(BlockDataKey.POWERED, powered);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull DoorDataMock clone()
+	{
+		return new DoorDataMock(this);
 	}
 
 }

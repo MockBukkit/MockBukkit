@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class KnowledgeBookMetaMockTest
 {
 
-	private final int MAX_RECIPES = 32767;
+	private static final int MAX_RECIPES = 32767;
 
 	@NotNull
 	@SuppressWarnings("deprecation")

@@ -4,17 +4,23 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Door;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class DoorDataMockTest
 {
 
@@ -136,6 +142,21 @@ class DoorDataMockTest
 			assertEquals(isPowered, door.isPowered());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull DoorDataMock cloned = door.clone();
+
+		assertEquals(door, cloned);
+		assertEquals(door.isPowered(), cloned.isPowered());
+
+		door.setPowered(true);
+
+		assertNotEquals(door, cloned);
+		assertTrue(door.isPowered());
+		assertFalse(cloned.isPowered());
 	}
 
 }

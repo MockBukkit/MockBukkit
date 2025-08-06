@@ -110,13 +110,10 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull BannerMetaMock clone()
 	{
-		BannerMetaMock clone = (BannerMetaMock) super.clone();
-
-		clone.patterns = new ArrayList<>(this.patterns);
-
-		return clone;
+		return new BannerMetaMock(this);
 	}
 
 	@Override

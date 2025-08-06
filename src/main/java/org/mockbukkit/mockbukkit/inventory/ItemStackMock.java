@@ -72,8 +72,13 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
-		this.durability = initDurability(this.type);
-		setItemMeta(stack.getItemMeta());
+		this.durability = stack.getDurability();
+
+		ItemMeta otherMeta = stack.getItemMeta();
+		if (otherMeta != null)
+		{
+			setItemMeta(otherMeta.clone());
+		}
 	}
 
 	public ItemStackMock(@NotNull Material type, int amount)
@@ -369,16 +374,11 @@ public class ItemStackMock extends ItemStack
 		return EMPTY.clone();
 	}
 
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ItemStack clone()
 	{
-		ItemStackMock clone = new ItemStackMock(this.type);
-
-		clone.setAmount(this.amount);
-		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
-		clone.durability = this.durability;
-		return clone;
+		return new ItemStackMock(this);
 	}
 
 	@Override
@@ -507,7 +507,6 @@ public class ItemStackMock extends ItemStack
 
 		if (raw instanceof Map<?, ?> map)
 		{
-
 			for (Map.Entry<?, ?> entry : map.entrySet())
 			{
 				String stringKey = entry.getKey().toString();

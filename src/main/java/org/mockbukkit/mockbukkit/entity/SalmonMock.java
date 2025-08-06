@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

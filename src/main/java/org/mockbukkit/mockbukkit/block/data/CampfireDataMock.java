@@ -36,6 +36,16 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 		setWaterlogged(false);
 	}
 
+	/**
+	 * Create a new {@link CampfireDataMock} based on an existing {@link CampfireDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected CampfireDataMock(CampfireDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -90,6 +100,13 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull CampfireDataMock clone()
+	{
+		return new CampfireDataMock(this);
 	}
 
 }

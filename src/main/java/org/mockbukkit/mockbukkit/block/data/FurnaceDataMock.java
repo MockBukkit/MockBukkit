@@ -23,6 +23,16 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link FurnaceDataMock} based on an existing {@link FurnaceDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected FurnaceDataMock(@NotNull FurnaceDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -53,6 +63,13 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 	public void setLit(boolean lit)
 	{
 		this.set(LIT, lit);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull FurnaceDataMock clone()
+	{
+		return new FurnaceDataMock(this);
 	}
 
 }

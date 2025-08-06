@@ -21,6 +21,16 @@ public class RedstoneWireDataMock extends BlockDataMock implements RedstoneWire
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RedstoneWireDataMock} based on an existing {@link RedstoneWireDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RedstoneWireDataMock(@NotNull RedstoneWireDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Connection getFace(@NotNull BlockFace face)
 	{
@@ -70,6 +80,13 @@ public class RedstoneWireDataMock extends BlockDataMock implements RedstoneWire
 	public int getMaximumPower()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.MAX_POWER);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull RedstoneWireDataMock clone()
+	{
+		return new RedstoneWireDataMock(this);
 	}
 
 }

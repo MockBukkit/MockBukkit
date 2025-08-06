@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.data.type.TrialSpawner;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class TrialSpawnerDataMockTest
@@ -64,6 +66,22 @@ class TrialSpawnerDataMockTest
 			assertEquals(ominous, spawner.isOminous());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+
+		@NotNull TrialSpawnerDataMock cloned = spawner.clone();
+
+		assertEquals(spawner, cloned);
+		assertEquals(spawner.getTrialSpawnerState(), cloned.getTrialSpawnerState());
+
+		spawner.setTrialSpawnerState(TrialSpawner.State.WAITING_FOR_PLAYERS);
+
+		assertNotEquals(spawner, cloned);
+		assertEquals(TrialSpawner.State.WAITING_FOR_PLAYERS, spawner.getTrialSpawnerState());
+		assertEquals(TrialSpawner.State.INACTIVE, cloned.getTrialSpawnerState());
 	}
 
 }

@@ -411,7 +411,6 @@ public class BlockMock implements Block
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public boolean isSolid()
 	{

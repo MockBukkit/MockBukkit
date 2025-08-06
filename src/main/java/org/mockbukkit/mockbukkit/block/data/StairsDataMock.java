@@ -36,6 +36,16 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 		setHalf(Half.BOTTOM);
 	}
 
+	/**
+	 * Create a new {@link StairsDataMock} based on an existing {@link StairsDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected StairsDataMock(@NotNull StairsDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Shape getShape()
 	{
@@ -92,6 +102,13 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 	public void setWaterlogged(boolean waterlogged)
 	{
 		set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull StairsDataMock clone()
+	{
+		return new StairsDataMock(this);
 	}
 
 }

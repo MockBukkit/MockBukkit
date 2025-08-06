@@ -17,6 +17,16 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link LightableDataMock} based on an existing {@link LightableDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected LightableDataMock(@NotNull LightableDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isLit()
 	{
@@ -27,6 +37,13 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 	public void setLit(boolean lit)
 	{
 		this.set(BlockDataKey.LIT, lit);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull LightableDataMock clone()
+	{
+		return new LightableDataMock(this);
 	}
 
 }

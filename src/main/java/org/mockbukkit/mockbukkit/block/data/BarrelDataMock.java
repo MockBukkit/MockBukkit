@@ -21,6 +21,16 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link BarrelDataMock} based on an existing {@link BarrelDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected BarrelDataMock(BarrelDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -50,6 +60,13 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 	public void setOpen(boolean open)
 	{
 		this.set(BlockDataKey.OPEN, open);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull BarrelDataMock clone()
+	{
+		return new BarrelDataMock(this);
 	}
 
 }

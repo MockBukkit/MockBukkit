@@ -92,13 +92,10 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull PotionMetaMock clone()
 	{
-		PotionMetaMock mock = (PotionMetaMock) super.clone();
-		mock.type = type;
-		mock.effects = new ArrayList<>(effects);
-		mock.color = color == null ? null : Color.fromRGB(color.asRGB());
-		return mock;
+		return new PotionMetaMock(this);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ class PluginMockTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
 
 	@Test
 	void onEnable_triggers()

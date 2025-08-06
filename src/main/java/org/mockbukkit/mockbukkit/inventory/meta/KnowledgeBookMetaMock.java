@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Mock implementation of an {@link KnowledgeBookMeta}.
  *
@@ -74,11 +73,10 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull KnowledgeBookMetaMock clone()
 	{
-		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
-		mock.recipes.addAll(recipes);
-		return mock;
+		return new KnowledgeBookMetaMock(this);
 	}
 
 	@Override

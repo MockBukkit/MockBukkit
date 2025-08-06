@@ -29,6 +29,16 @@ public class SlabDataMock extends BlockDataMock implements Slab
 		setWaterlogged(false);
 	}
 
+	/**
+	 * Create a new {@link SlabDataMock} based on an existing {@link SlabDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected SlabDataMock(@NotNull SlabDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Type getType()
 	{
@@ -52,6 +62,13 @@ public class SlabDataMock extends BlockDataMock implements Slab
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull SlabDataMock clone()
+	{
+		return new SlabDataMock(this);
 	}
 
 }

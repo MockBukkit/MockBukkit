@@ -20,14 +20,14 @@ class MockBukkitProfileBanEntryTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
-	MockBukkitProfileBanEntry entry;
-	Player player;
+	private ServerMock server;
+	private MockBukkitProfileBanEntry entry;
+	@MockBukkitInject
+	private Player player;
 
 	@BeforeEach
 	void setUp()
 	{
-		player = server.addPlayer();
 		entry = new MockBukkitProfileBanEntry(
 				new PlayerProfileMock(player),
 				"source",

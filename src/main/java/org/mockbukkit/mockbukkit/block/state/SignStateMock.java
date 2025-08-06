@@ -332,7 +332,6 @@ public class SignStateMock extends TileStateMock implements Sign
 
 	}
 
-
 	@Override
 	protected String toStringInternal()
 	{

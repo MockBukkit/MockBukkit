@@ -5,38 +5,23 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Evoker;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Spellcaster;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@ExtendWith(MockBukkitExtension.class)
 class EvokerMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private EvokerMock evoker;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		evoker = new EvokerMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void getCurrentSpell_GivenDefaultValue()
@@ -76,9 +61,8 @@ class EvokerMockTest
 	}
 
 	@Test
-	void getWololoTarget_GivenChangedValue()
+	void getWololoTarget_GivenChangedValue(@MockBukkitInject Sheep sheep)
 	{
-		Sheep sheep = new SheepMock(server, UUID.randomUUID());
 		evoker.setWololoTarget(sheep);
 
 		Sheep actual = evoker.getWololoTarget();

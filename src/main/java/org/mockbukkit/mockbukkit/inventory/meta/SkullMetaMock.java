@@ -53,15 +53,10 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull SkullMetaMock clone()
 	{
-		SkullMetaMock mock = (SkullMetaMock) super.clone();
-		if (playerProfile != null)
-		{
-			mock.setOwner(playerProfile.getName());
-			mock.setPlayerProfile(playerProfile);
-		}
-		return mock;
+		return new SkullMetaMock(this);
 	}
 
 	@Override
@@ -209,7 +204,6 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	/**
 	 * Required method for Bukkit deserialization.

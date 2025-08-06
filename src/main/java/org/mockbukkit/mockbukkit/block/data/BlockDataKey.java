@@ -56,7 +56,6 @@ import java.util.stream.Collectors;
 @ApiStatus.Internal
 public enum BlockDataKey
 {
-
 	/**
 	 * Stores the {@link BlockFace} a {@link Directional} block is facing towards.
 	 */
@@ -118,7 +117,6 @@ public enum BlockDataKey
 	 */
 	FACE("face", string -> FaceAttachable.AttachedFace.valueOf(string.toUpperCase(Locale.ROOT)), FaceAttachable.class::isInstance),
 
-
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
@@ -170,7 +168,6 @@ public enum BlockDataKey
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
-
 
 	private final String key;
 	private final Function<String, Object> valueConstructor;

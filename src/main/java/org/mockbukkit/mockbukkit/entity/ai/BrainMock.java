@@ -25,7 +25,6 @@ public class BrainMock
 
 	static void assertIsSupportedValue(Object value)
 	{
-
 		if (value == null)
 		{
 			// Null is supported

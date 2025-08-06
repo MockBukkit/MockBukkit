@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Difficulty;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wither;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -22,13 +21,8 @@ class WitherMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WitherMock wither;
-
-	@BeforeEach
-	void setUp()
-	{
-		wither = new WitherMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void getType()

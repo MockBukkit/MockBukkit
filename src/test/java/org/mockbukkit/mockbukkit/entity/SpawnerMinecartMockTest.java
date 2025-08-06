@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.SpawnerMinecart;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +14,6 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,14 +25,7 @@ class SpawnerMinecartMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private SpawnerMinecart minecart;
-
-	@BeforeEach
-	public void setUp()
-	{
-		minecart = new SpawnerMinecartMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetMinecartMaterial()

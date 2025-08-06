@@ -21,7 +21,6 @@ class DamageTypeMockTest
 	@MethodSource("getMinecraftDamageTypes")
 	void from_GivenMinecraftExamples(ExpectedDamageType expectedDamageType)
 	{
-
 		JsonObject json = new JsonObject();
 		json.addProperty(DamageTypeMock.EXHAUSTION_KEY, expectedDamageType.exhaustion());
 		json.addProperty(DamageTypeMock.DEATH_MESSAGE_TYPE_KEY, expectedDamageType.deathMessageType());

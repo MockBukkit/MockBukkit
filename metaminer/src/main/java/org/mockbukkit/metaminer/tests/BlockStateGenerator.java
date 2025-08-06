@@ -17,6 +17,7 @@ import java.util.Objects;
 
 public class BlockStateGenerator implements DataGenerator
 {
+
 	private static final Logger LOG = LoggerFactory.getLogger(BlockStateGenerator.class);
 
 	private final File folder;
@@ -36,8 +37,8 @@ public class BlockStateGenerator implements DataGenerator
 		File output = new File(blockFolder, "block_states.csv");
 		blockFolder.mkdirs();
 
-		try (PrintWriter writer = new PrintWriter(output)) {
-
+		try (PrintWriter writer = new PrintWriter(output))
+		{
 			for (Material material : Registry.MATERIAL)
 			{
 				if (!material.isBlock())
@@ -58,7 +59,8 @@ public class BlockStateGenerator implements DataGenerator
 
 					String className = interfaces[0].getName();
 					writer.println(String.format("%s, %s", material.name(), className));
-				} catch (Exception e)
+				}
+				catch (Exception e)
 				{
 					LOG.error("Error while processing material {}", material.name(), e);
 				}

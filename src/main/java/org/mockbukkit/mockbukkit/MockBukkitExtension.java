@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
@@ -156,7 +157,7 @@ import java.util.logging.Logger;
  * }
  * </code></pre>
  */
-public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, AfterAllCallback, TestExecutionExceptionHandler
+public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterAllCallback, TestExecutionExceptionHandler
 {
 
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
@@ -230,7 +231,21 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			return getEntityMock((Class<? extends Entity>) type);
 		}
 
-		return null;
+		return tryDefaultConstructor(type);
+	}
+
+	private @Nullable Object tryDefaultConstructor(@NotNull Class<?> type)
+	{
+		try
+		{
+			var constructor = type.getDeclaredConstructor();
+			constructor.setAccessible(true);
+			return constructor.newInstance();
+		}
+		catch (ReflectiveOperationException e)
+		{
+			return null;
+		}
 	}
 
 	private @NotNull <T extends Entity> EntityMock getEntityMock(Class<T> clazz)
@@ -333,6 +348,15 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public void beforeAll(ExtensionContext context)
 	{
 		getServerMock();
+	}
+
+	@Override
+	public void beforeEach(ExtensionContext context)
+	{
+		// reset the counters
+		playerCounter = 0;
+		worldCounter = 0;
+		pluginCounter = 0;
 	}
 
 	@Override

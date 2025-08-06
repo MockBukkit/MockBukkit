@@ -19,6 +19,16 @@ public class RedstoneRailDataMock extends RailDataMock implements RedstoneRail
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RedstoneRailDataMock} based on an existing {@link RedstoneRailDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RedstoneRailDataMock(@NotNull RedstoneRailDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isPowered()
 	{
@@ -38,6 +48,13 @@ public class RedstoneRailDataMock extends RailDataMock implements RedstoneRail
 				Shape.ASCENDING_NORTH, Shape.ASCENDING_SOUTH,
 				Shape.ASCENDING_EAST, Shape.ASCENDING_WEST
 		);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull RedstoneRailDataMock clone()
+	{
+		return new RedstoneRailDataMock(this);
 	}
 
 }

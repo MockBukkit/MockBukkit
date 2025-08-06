@@ -17,6 +17,16 @@ public class SnowableDataMock extends BlockDataMock implements Snowable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link SnowableDataMock} based on an existing {@link SnowableDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected SnowableDataMock(@NotNull SnowableDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isSnowy()
 	{
@@ -27,6 +37,13 @@ public class SnowableDataMock extends BlockDataMock implements Snowable
 	public void setSnowy(boolean snowy)
 	{
 		this.set(BlockDataKey.SNOWY, snowy);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull SnowableDataMock clone()
+	{
+		return new SnowableDataMock(this);
 	}
 
 }

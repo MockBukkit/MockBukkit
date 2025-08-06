@@ -23,6 +23,16 @@ public class FenceDataMock extends BlockDataMock implements Fence
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link FenceDataMock} based on an existing {@link FenceDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected FenceDataMock(@NotNull FenceDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean hasFace(@NotNull BlockFace face)
 	{
@@ -64,6 +74,13 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull FenceDataMock clone()
+	{
+		return new FenceDataMock(this);
 	}
 
 	private Optional<BlockDataKey> toKey(BlockFace blockFace)

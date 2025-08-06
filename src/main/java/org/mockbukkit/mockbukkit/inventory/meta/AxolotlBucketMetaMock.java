@@ -82,13 +82,10 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull AxolotlBucketMetaMock clone()
 	{
-		AxolotlBucketMetaMock clone = (AxolotlBucketMetaMock) super.clone();
-
-		clone.variant = this.variant;
-
-		return clone;
+		return new AxolotlBucketMetaMock(this);
 	}
 
 	/**

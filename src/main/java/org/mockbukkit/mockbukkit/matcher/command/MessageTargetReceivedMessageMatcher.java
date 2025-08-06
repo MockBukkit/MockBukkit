@@ -11,7 +11,6 @@ import org.mockbukkit.mockbukkit.command.MessageTarget;
 
 import static org.hamcrest.Matchers.not;
 
-
 public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<MessageTarget>
 {
 

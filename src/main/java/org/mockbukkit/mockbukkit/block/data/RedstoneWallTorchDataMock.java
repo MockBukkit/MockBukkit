@@ -21,6 +21,16 @@ public class RedstoneWallTorchDataMock extends BlockDataMock implements Redstone
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RedstoneWallTorchDataMock} based on an existing {@link RedstoneWallTorchDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RedstoneWallTorchDataMock(@NotNull RedstoneWallTorchDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -50,6 +60,13 @@ public class RedstoneWallTorchDataMock extends BlockDataMock implements Redstone
 	public void setLit(boolean lit)
 	{
 		this.set(BlockDataKey.LIT, lit);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull RedstoneWallTorchDataMock clone()
+	{
+		return new RedstoneWallTorchDataMock(this);
 	}
 
 }

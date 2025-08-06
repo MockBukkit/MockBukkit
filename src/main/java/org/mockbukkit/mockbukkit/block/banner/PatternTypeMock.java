@@ -26,7 +26,6 @@ public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements Pa
 		int ordinal = jsonObject.get("ordinal").getAsInt();
 		String identifier = jsonObject.get("identifier").getAsString();
 
-
 		return new PatternTypeMock(key, name, ordinal, identifier);
 	}
 

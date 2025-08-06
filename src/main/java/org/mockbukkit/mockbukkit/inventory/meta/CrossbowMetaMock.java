@@ -112,13 +112,10 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull CrossbowMetaMock clone()
 	{
-		CrossbowMetaMock clone = (CrossbowMetaMock) super.clone();
-
-		clone.projectiles = new ArrayList<>(this.projectiles.stream().map(ItemStack::clone).toList());
-
-		return clone;
+		return new CrossbowMetaMock(this);
 	}
 
 	/**

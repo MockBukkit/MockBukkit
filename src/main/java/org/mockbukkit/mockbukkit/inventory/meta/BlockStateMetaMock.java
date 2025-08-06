@@ -218,11 +218,10 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull BlockStateMetaMock clone()
 	{
-		BlockStateMetaMock clone = (BlockStateMetaMock) super.clone();
-		clone.blockState = this.blockState != null ? this.blockState.copy() : null;
-		return clone;
+		return new BlockStateMetaMock(this);
 	}
 
 	@Override

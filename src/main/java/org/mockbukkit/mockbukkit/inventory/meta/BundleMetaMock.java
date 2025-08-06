@@ -43,7 +43,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 
 		if (meta instanceof BundleMeta bundleMeta)
 		{
-			this.items = new ArrayList<>(bundleMeta.getItems());
+			this.items = new ArrayList<>(bundleMeta.getItems().stream().map(ItemStack::clone).toList());
 		}
 		else
 		{
@@ -107,11 +107,10 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull BundleMetaMock clone()
 	{
-		BundleMetaMock clone = (BundleMetaMock) super.clone();
-		clone.items = new ArrayList<>(this.items.stream().map(ItemStack::clone).toList());
-		return clone;
+		return new BundleMetaMock(this);
 	}
 
 	/**

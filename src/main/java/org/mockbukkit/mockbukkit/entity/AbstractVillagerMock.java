@@ -73,7 +73,6 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	@Override
 	public @NotNull MerchantRecipe getRecipe(int i) throws IndexOutOfBoundsException
 	{
-
 		return new MerchantRecipe(this.recipes.get(i));
 	}
 

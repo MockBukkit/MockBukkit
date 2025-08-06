@@ -70,11 +70,10 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull FireworkEffectMetaMock clone()
 	{
-		FireworkEffectMetaMock mock = (FireworkEffectMetaMock) super.clone();
-		mock.effect = this.effect;
-		return mock;
+		return new FireworkEffectMetaMock(this);
 	}
 
 	@Override

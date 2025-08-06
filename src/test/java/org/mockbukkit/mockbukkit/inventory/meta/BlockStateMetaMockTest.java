@@ -40,7 +40,6 @@ public class BlockStateMetaMockTest
 	@MockBukkitInject
 	private Server server;
 
-
 	@ParameterizedTest
 	@MethodSource("container_Materials_noFurnaces")
 	void testContainer(Material type)

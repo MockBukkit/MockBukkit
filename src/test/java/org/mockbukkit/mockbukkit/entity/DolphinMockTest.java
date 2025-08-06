@@ -3,14 +3,10 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Location;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,14 +18,7 @@ class DolphinMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private Dolphin dolphin;
-
-	@BeforeEach
-	void setUp()
-	{
-		dolphin = new DolphinMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetType()

@@ -34,6 +34,16 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 		super.set(POWERED, false);
 	}
 
+	/**
+	 * Create a new {@link SwitchDataMock} based on an existing {@link SwitchDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected SwitchDataMock(@NotNull SwitchDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isPowered()
 	{
@@ -91,6 +101,13 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	{
 		Preconditions.checkNotNull(face, "BlockFace cannot be null");
 		setAttachedFace(AttachedFace.valueOf(face.name()));
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull SwitchDataMock clone()
+	{
+		return new SwitchDataMock(this);
 	}
 
 }

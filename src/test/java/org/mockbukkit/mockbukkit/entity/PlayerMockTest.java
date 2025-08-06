@@ -165,7 +165,6 @@ class PlayerMockTest
 	{
 		server = MockBukkit.mock(new ServerMock()
 		{
-
 			private long ticks = 0;
 
 			@Override
@@ -2021,7 +2020,6 @@ class PlayerMockTest
 		return itemStack;
 	}
 
-
 	@Test
 	void testSimulateConsumePotionItemWithCustomEffectIsApplies()
 	{
@@ -3279,7 +3277,6 @@ class PlayerMockTest
 		@ValueSource(floats = { -1.0F, -0.5F, 0.0F, 0.5F, 1.0F })
 		void givenPossibleValue(float value)
 		{
-
 			player.setFlySpeed(value);
 
 			assertEquals(value, player.getFlySpeed());
@@ -3309,7 +3306,6 @@ class PlayerMockTest
 		@ValueSource(booleans = { true, false })
 		void givenPossibleValue(boolean value)
 		{
-
 			player.setAffectsSpawning(value);
 
 			assertEquals(value, player.getAffectsSpawning());

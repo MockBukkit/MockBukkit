@@ -88,7 +88,6 @@ class EnchantmentMockTest
 		assertTrue(Enchantment.FIRE_PROTECTION.conflictsWith(Enchantment.PROTECTION));
 	}
 
-
 	@Test
 	void conflictsWith_nullInput()
 	{

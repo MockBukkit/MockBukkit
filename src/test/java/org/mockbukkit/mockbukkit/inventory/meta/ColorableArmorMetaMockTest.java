@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -20,15 +19,10 @@ class ColorableArmorMetaMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private ColorableArmorMeta meta;
-	private final Color color = Color.AQUA;
-	static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
-
-	@BeforeEach
-	void setUp()
-	{
-		this.meta = new ColorableArmorMetaMock();
-	}
+	@MockBukkitInject
+	private ColorableArmorMetaMock meta;
+	private static final Color DEFAULT_COLOR = Color.AQUA;
+	private static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
 
 	@Test
 	void isDyed_default()
@@ -45,14 +39,14 @@ class ColorableArmorMetaMockTest
 	@Test
 	void setColor_valid()
 	{
-		meta.setColor(color);
-		assertEquals(color, meta.getColor());
+		meta.setColor(DEFAULT_COLOR);
+		assertEquals(DEFAULT_COLOR, meta.getColor());
 	}
 
 	@Test
 	void setColor_null()
 	{
-		meta.setColor(color);
+		meta.setColor(DEFAULT_COLOR);
 		assertTrue(meta.isDyed());
 		meta.setColor(null);
 		assertEquals(DEFAULT_LEATHER_COLOR, meta.getColor());
@@ -71,10 +65,10 @@ class ColorableArmorMetaMockTest
 	@Test
 	void equal_validNonEmpty()
 	{
-		meta.setColor(color);
+		meta.setColor(DEFAULT_COLOR);
 
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
-		other.setColor(color);
+		other.setColor(DEFAULT_COLOR);
 
 		assertEquals(meta, other);
 	}
@@ -83,7 +77,7 @@ class ColorableArmorMetaMockTest
 	void equal_invalidEmpty()
 	{
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
-		other.setColor(color);
+		other.setColor(DEFAULT_COLOR);
 
 		assertNotEquals(meta, other);
 	}
@@ -94,7 +88,7 @@ class ColorableArmorMetaMockTest
 		meta.setColor(DEFAULT_LEATHER_COLOR);
 
 		ColorableArmorMeta other = new ColorableArmorMetaMock();
-		other.setColor(color);
+		other.setColor(DEFAULT_COLOR);
 
 		assertNotEquals(meta, other);
 	}
@@ -103,7 +97,7 @@ class ColorableArmorMetaMockTest
 	void testClone()
 	{
 		ColorableArmorMetaMock colorableMeta = new ColorableArmorMetaMock();
-		colorableMeta.setColor(color);
+		colorableMeta.setColor(DEFAULT_COLOR);
 
 		ColorableArmorMetaMock clone = colorableMeta.clone();
 

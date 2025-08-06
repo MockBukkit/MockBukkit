@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
+import lombok.EqualsAndHashCode;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
@@ -19,6 +20,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@EqualsAndHashCode(callSuper = true)
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 
@@ -48,29 +50,10 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + effects.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof SuspiciousStewMetaMock meta))
-		{
-			return false;
-		}
-		return this.effects.equals(meta.effects);
-	}
-
-	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull SuspiciousStewMetaMock clone()
 	{
-		SuspiciousStewMetaMock mock = (SuspiciousStewMetaMock) super.clone();
-		mock.effects = new ArrayList<>(effects);
-		return mock;
+		return new SuspiciousStewMetaMock(this);
 	}
 
 	@Override

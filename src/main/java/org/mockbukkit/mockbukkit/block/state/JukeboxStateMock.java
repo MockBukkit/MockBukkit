@@ -71,7 +71,6 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 		return new JukeboxStateMock(this);
 	}
 
-
 	@Override
 	public @NotNull Material getPlaying()
 	{

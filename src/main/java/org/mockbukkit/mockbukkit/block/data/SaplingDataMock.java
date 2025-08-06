@@ -18,6 +18,16 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link SaplingDataMock} based on an existing {@link SaplingDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected SaplingDataMock(@NotNull SaplingDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public int getStage()
 	{
@@ -35,6 +45,13 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	public int getMaximumStage()
 	{
 		return this.getLimitationValue(BlockDataLimitation.Type.MAX_STAGE);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull SaplingDataMock clone()
+	{
+		return new SaplingDataMock(this);
 	}
 
 }

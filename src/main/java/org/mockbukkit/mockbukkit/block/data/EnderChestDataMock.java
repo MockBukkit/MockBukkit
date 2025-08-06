@@ -21,6 +21,16 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link EnderChestDataMock} based on an existing {@link EnderChestDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected EnderChestDataMock(@NotNull EnderChestDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -50,6 +60,13 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	public void setWaterlogged(boolean waterlogged)
 	{
 		this.set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull EnderChestDataMock clone()
+	{
+		return new EnderChestDataMock(this);
 	}
 
 }

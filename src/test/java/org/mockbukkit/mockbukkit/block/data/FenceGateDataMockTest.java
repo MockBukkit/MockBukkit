@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,9 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class FenceGateDataMockTest
@@ -26,7 +29,6 @@ class FenceGateDataMockTest
 	{
 		this.gate = new FenceGateDataMock(Material.OAK_FENCE_GATE);
 	}
-
 
 	@Nested
 	class SetEnabled
@@ -118,6 +120,21 @@ class FenceGateDataMockTest
 			assertEquals(inWall, gate.isPowered());
 		}
 
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull FenceGateDataMock cloned = gate.clone();
+
+		assertEquals(gate, cloned);
+		assertEquals(gate.isPowered(), cloned.isPowered());
+
+		gate.setPowered(true);
+
+		assertNotEquals(gate, cloned);
+		assertTrue(gate.isPowered());
+		assertFalse(cloned.isPowered());
 	}
 
 }

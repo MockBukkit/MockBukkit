@@ -76,5 +76,4 @@ class DecoratedPotDataMockTest
 		assertTrue(pot.isWaterlogged());
 	}
 
-
 }

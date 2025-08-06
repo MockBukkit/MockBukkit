@@ -349,7 +349,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return consumedItems.contains(consumable);
 	}
 
-
 	/**
 	 * Asserts a Player has consumed the given Item
 	 *
@@ -1240,7 +1239,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
-
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
@@ -2154,7 +2152,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
-
 	@Override
 	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
@@ -2208,7 +2205,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public boolean isFlying()
@@ -2507,7 +2503,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return subitles.poll();
 	}
-
 
 	@Override
 	public void resetTitle()

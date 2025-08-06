@@ -32,6 +32,16 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 		this.setWaterlogged(false);
 	}
 
+	/**
+	 * Create a new {@link WallSignDataMock} based on an existing {@link WallSignDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected WallSignDataMock(WallSignDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
@@ -62,6 +72,13 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull WallSignDataMock clone()
+	{
+		return new WallSignDataMock(this);
 	}
 
 }

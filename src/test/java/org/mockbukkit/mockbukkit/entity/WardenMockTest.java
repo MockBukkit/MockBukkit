@@ -1,36 +1,21 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class WardenMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private WardenMock warden;
+	@MockBukkitInject
 	private PlayerMock player;
-
-	@BeforeEach
-	void setup()
-	{
-		server = MockBukkit.mock();
-		warden = new WardenMock(server, UUID.randomUUID());
-		player = server.addPlayer();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetAngerDefault()

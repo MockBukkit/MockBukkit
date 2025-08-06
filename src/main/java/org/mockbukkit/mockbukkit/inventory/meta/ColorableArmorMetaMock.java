@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,9 +32,9 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	{
 		super(meta);
 
-		if (meta instanceof LeatherArmorMeta leatherArmorMeta)
+		if (meta instanceof ColorableArmorMeta colorableArmorMeta)
 		{
-			this.color = leatherArmorMeta.getColor().asRGB();
+			this.color = colorableArmorMeta.isDyed() ? colorableArmorMeta.getColor().asRGB() : null;
 		}
 	}
 
@@ -85,11 +84,10 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	}
 
 	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
 	public @NotNull ColorableArmorMetaMock clone()
 	{
-		ColorableArmorMetaMock clone = (ColorableArmorMetaMock) super.clone();
-		clone.color = this.color;
-		return clone;
+		return new ColorableArmorMetaMock(this);
 	}
 
 	@Override

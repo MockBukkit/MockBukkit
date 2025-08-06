@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.command;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,21 +18,18 @@ import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMat
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasFailed;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
+@ExtendWith(MockBukkitExtension.class)
 class CommandResultTest
 {
 
+	@MockBukkitInject
+	private ServerMock serverMock;
 	private MessageTarget target;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.target = MockBukkit.mock().getConsoleSender();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
+		this.target = serverMock.getConsoleSender();
 	}
 
 	@Test

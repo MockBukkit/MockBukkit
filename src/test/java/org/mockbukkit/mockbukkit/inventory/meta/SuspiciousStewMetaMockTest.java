@@ -5,6 +5,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,17 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class SuspiciousStewMetaMockTest
 {
 
+	@MockBukkitInject
+	private SuspiciousStewMetaMock meta;
+
 	@Test
 	void testEffectsDefaultEmpty()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertFalse(meta.hasCustomEffects());
 	}
 
 	@Test
 	void testAddEffect()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
 
 		assertFalse(meta.hasCustomEffect(PotionEffectType.SPEED));
@@ -39,7 +41,6 @@ class SuspiciousStewMetaMockTest
 	@Test
 	void testOverrideEffect()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, 60, 2);
 		PotionEffect effect3 = new PotionEffect(PotionEffectType.SPEED, 60, 1);
@@ -60,7 +61,6 @@ class SuspiciousStewMetaMockTest
 	@Test
 	void testClearEffects()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertFalse(meta.clearCustomEffects());
 
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
@@ -75,7 +75,6 @@ class SuspiciousStewMetaMockTest
 	@Test
 	void testRemoveEffect()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertFalse(meta.clearCustomEffects());
 
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
@@ -93,7 +92,6 @@ class SuspiciousStewMetaMockTest
 	@Test
 	void testEquals()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertEquals(meta, meta);
 		// TODO: Strange behaviour --> Accurate?
 		assertEquals(new ItemMetaMock(), meta);
@@ -114,7 +112,6 @@ class SuspiciousStewMetaMockTest
 	@Test
 	void testClone()
 	{
-		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		SuspiciousStewMetaMock clone = meta.clone();
 		assertEquals(meta, clone);
 	}

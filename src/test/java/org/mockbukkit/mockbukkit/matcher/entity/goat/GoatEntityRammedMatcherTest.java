@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.matcher.entity.goat;
 
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -11,8 +10,6 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.GoatMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
-import java.util.UUID;
-
 import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher.hasRammed;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -20,16 +17,11 @@ class GoatEntityRammedMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	private GoatMock goatMock;
+	@MockBukkitInject
 	private LivingEntity target;
-
-	@BeforeEach
-	void setUp()
-	{
-		this.goatMock = new GoatMock(serverMock, UUID.randomUUID());
-		this.target = serverMock.addPlayer();
-	}
 
 	@Test
 	void rammed()
