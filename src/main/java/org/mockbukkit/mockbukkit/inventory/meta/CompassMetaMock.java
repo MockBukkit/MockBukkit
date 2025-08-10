@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 
 import java.util.Map;
 import java.util.Objects;
@@ -131,7 +132,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	{
 		CompassMetaMock serialMock = new CompassMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.lodestone = (Location) args.get("lodestone");
+		serialMock.lodestone = Location.deserialize((Map<String, Object>) args.get("lodestone"));
 		serialMock.tracked = (boolean) args.get("tracked");
 		return serialMock;
 	}
@@ -148,7 +149,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 		final Map<String, Object> serialized = super.serialize();
 		if (this.lodestone != null)
 		{
-			serialized.put("lodestone", this.lodestone);
+			serialized.put("lodestone", SerializationUtils.serialize(this.lodestone));
 		}
 		serialized.put("tracked", this.tracked);
 		return serialized;

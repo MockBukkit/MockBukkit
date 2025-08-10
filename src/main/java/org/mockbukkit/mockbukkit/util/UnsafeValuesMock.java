@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.util;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.papermc.paper.entity.EntitySerializationFlag;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
@@ -58,6 +57,7 @@ import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 
@@ -335,13 +335,13 @@ public class UnsafeValuesMock implements UnsafeValues
 	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack itemStack)
 	{
 		Map<String, Object> map = serializeStack(itemStack);
-		return new Gson().toJsonTree(map).getAsJsonObject();
+		return SerializationUtils.createDefaultBuilder().toJsonTree(map).getAsJsonObject();
 	}
 
 	@Override
 	public @NotNull ItemStack deserializeItemFromJson(@NotNull JsonObject jsonObject) throws IllegalArgumentException
 	{
-		Map<String, Object> args = new Gson().fromJson(jsonObject, Map.class);
+		Map<String, Object> args = SerializationUtils.createDefaultBuilder().fromJson(jsonObject, Map.class);
 		return deserializeStack(args);
 	}
 

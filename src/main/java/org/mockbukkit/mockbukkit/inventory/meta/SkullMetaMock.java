@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Map;
@@ -193,7 +194,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		SkullMetaMock serialMock = new SkullMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.playerProfile = (com.destroystokyo.paper.profile.PlayerProfile) args.get("player-profile");
+		serialMock.playerProfile = PlayerProfileMock.deserialize((Map<String, Object>) args.get("player-profile"));
 		return serialMock;
 	}
 
@@ -209,7 +210,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		final Map<String, Object> serialized = super.serialize();
 		if (playerProfile != null)
 		{
-			serialized.put("player-profile", playerProfile);
+			serialized.put("player-profile", SerializationUtils.serialize(playerProfile));
 		}
 		return serialized;
 	}

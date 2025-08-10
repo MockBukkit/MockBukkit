@@ -218,8 +218,6 @@ class ShieldMetaMockTest
 
 		assertEquals(3, meta2.numberOfPatterns());
 		assertEquals(patterns.get(1), meta2.getPattern(1));
-		// Patterns are immutable so the instance should be the same.
-		assertSame(patterns.get(1), meta2.getPattern(1));
 	}
 
 	@Test
