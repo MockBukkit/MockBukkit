@@ -652,7 +652,7 @@ public class UnsafeValuesMock implements UnsafeValues
 				Preconditions.checkArgument(meta != null, "Invalid item meta type");
 				itemstack.setItemMeta(meta);
 			}
-			catch (Throwable e)
+			catch (Exception e)
 			{
 				throw new IllegalArgumentException("Error while deserializing item meta", e);
 			}

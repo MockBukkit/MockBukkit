@@ -29,8 +29,7 @@ public class SerializationUtils
 	{
 		Preconditions.checkArgument(args instanceof Map<?, ?>, "Args is not a Map");
 
-		Map<String, Object> map = (Map<String, Object>) args;
-		return ItemStack.deserialize(map);
+		return ItemStack.deserialize((Map<String, Object>) args);
 	}
 
 	public static List<ItemStack> deserialize(@NotNull Collection<Object> args)

@@ -37,34 +37,24 @@ public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializa
 
 	private void writeValue(JsonWriter out, Object val, String key) throws IOException
 	{
-		if (val == null)
+		switch (val)
 		{
-			out.name(key).nullValue();
-		}
-		else if (val instanceof Boolean booleanValue)
-		{
-			out.name(key).value(booleanValue);
-		}
-		else if (val instanceof Number numberValue)
-		{
-			out.name(key).value(numberValue);
-		}
-		else if (val instanceof String stringVal)
-		{
-			out.name(key).value(stringVal);
-		}
-		else if (val instanceof ConfigurationSerializable configurationSerializable)
+		case null -> out.name(key).nullValue();
+		case Boolean booleanValue -> out.name(key).value(booleanValue);
+		case Number numberValue -> out.name(key).value(numberValue);
+		case String stringVal -> out.name(key).value(stringVal);
+		case ConfigurationSerializable configurationSerializable ->
 		{
 			@NotNull Map<String, Object> data = configurationSerializable.serialize();
 			out.name(key);
 			this.writeMap(out, data);
 		}
-		else if (val instanceof Map<?, ?> mapValue)
+		case Map<?, ?> mapValue ->
 		{
 			out.name(key);
 			this.writeMap(out, (Map<String, Object>) mapValue);
 		}
-		else if (val instanceof Collection<?> collectionValue)
+		case Collection<?> collectionValue ->
 		{
 			out.name(key).beginArray();
 			for (Object item : collectionValue)
@@ -75,9 +65,8 @@ public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializa
 			}
 			out.endArray();
 		}
-		else
-		{
-			throw new UnsupportedOperationException(String.format("%s is not a valid value for key: %s", val.getClass().getName(), key));
+		default ->
+				throw new UnsupportedOperationException(String.format("%s is not a valid value for key: %s", val.getClass().getName(), key));
 		}
 	}
 
