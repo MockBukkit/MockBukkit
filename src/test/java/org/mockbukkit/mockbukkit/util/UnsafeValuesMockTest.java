@@ -1,15 +1,22 @@
 package org.mockbukkit.mockbukkit.util;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.json.JSONException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -107,6 +114,58 @@ class UnsafeValuesMockTest
 			assertEquals(expectedMaterial, actual.getType());
 			assertEquals(1, actual.getAmount());
 		}
+	}
+
+	@Nested
+	class SerializeItemAsJson
+	{
+
+		@Test
+		void givenSword() throws JSONException
+		{
+			// Given
+			ItemStack itemStack = ItemStack.of(Material.DIAMOND_SWORD);
+
+			itemStack.addEnchantment(Enchantment.SHARPNESS, 5);
+			itemStack.addEnchantment(Enchantment.UNBREAKING, 3);
+
+			itemStack.lore(List.of(
+					Component.text("This is line 1"),
+					Component.text("This is line 2")
+			));
+
+			itemStack.editMeta(meta -> {
+				meta.displayName(Component.text("My custom display name"));
+
+				meta.setUnbreakable(true);
+			});
+
+			// Then
+			JsonObject actual = unsafeValues.serializeItemAsJson(itemStack);
+
+			// Assert
+			String expectedOutput = """
+					{
+					    "id": "minecraft:diamond_sword",
+					    "count": 1,
+					    "components": {
+					        "minecraft:custom_name": "My custom display name",
+					        "minecraft:lore": [
+					            "This is line 1",
+					            "This is line 2"
+					        ],
+					        "minecraft:enchantments": {
+					            "minecraft:sharpness": 5,
+					            "minecraft:unbreaking": 3
+					        },
+					        "minecraft:unbreakable": {}
+					    },
+					    "DataVersion": 1
+					}""";
+			JsonObject expectedJson = new Gson().fromJson(expectedOutput, JsonObject.class);
+			JSONAssert.assertEquals(expectedJson.toString(), actual.toString(), false);
+		}
+
 	}
 
 }

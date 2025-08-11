@@ -45,6 +45,12 @@ public class NbtParser
 		throw new NumberFormatException(String.format("Cannot parse double: %s", object));
 	}
 
+	public static boolean parseBoolean(@Nullable Object object, boolean defaultValue)
+	{
+		@Nullable Boolean integer = parseBoolean(object);
+		return integer == null ? defaultValue : integer;
+	}
+
 	@Nullable
 	public static Double parseDouble(@Nullable Object object)
 	{
@@ -85,6 +91,12 @@ public class NbtParser
 		}
 
 		throw new NumberFormatException(String.format("Cannot parse integer: %s", object));
+	}
+
+	public static int parseInteger(@Nullable Object object, int defaultValue)
+	{
+		@Nullable Integer integer = parseInteger(object);
+		return integer == null ? defaultValue : integer;
 	}
 
 	@Nullable

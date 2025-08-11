@@ -1,6 +1,12 @@
 package org.mockbukkit.metaminer;
 
+import com.google.gson.JsonObject;
+import net.kyori.adventure.text.Component;
 import org.apache.commons.io.FileUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mockbukkit.metaminer.internal.MaterialDataGenerator;
 import org.mockbukkit.metaminer.internal.potion.PotionDataGenerator;
@@ -25,6 +31,28 @@ public class MetaMiner extends JavaPlugin
 	public void onEnable()
 	{
 		this.getLogger().log(Level.INFO, "Generating data for MockBukkit");
+
+		// --------
+		ItemStack itemStack = ItemStack.of(Material.DIAMOND_SWORD);
+
+		itemStack.addEnchantment(Enchantment.SHARPNESS, 5);
+		itemStack.addEnchantment(Enchantment.UNBREAKING, 3);
+
+		itemStack.lore(List.of(
+			Component.text("This is line 1"),
+			Component.text("This is line 2")
+		));
+
+		itemStack.editMeta(meta -> {
+			meta.displayName(Component.text("My custom display name"));
+
+			meta.setUnbreakable(true);
+		});
+
+		JsonObject object = Bukkit.getUnsafe().serializeItemAsJson(itemStack);
+		Bukkit.getLogger().warning("Message: " + object.toString());
+		// --------
+
 		try
 		{
 			FileUtils.deleteDirectory(this.getDataFolder());

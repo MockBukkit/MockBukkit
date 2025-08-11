@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+
 @DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
 {
@@ -386,7 +387,7 @@ public class ItemStackMock extends ItemStack
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.itemMeta, bukkit.getItemMeta());
+			return isSimilar(bukkit) && this.getAmount() == bukkit.getAmount() && this.getDurability() == bukkit.getDurability() && Objects.equals(this.getItemMeta(), bukkit.getItemMeta());
 		}
 		else
 		{

@@ -43,12 +43,6 @@ public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializa
 		case Boolean booleanValue -> out.name(key).value(booleanValue);
 		case Number numberValue -> out.name(key).value(numberValue);
 		case String stringVal -> out.name(key).value(stringVal);
-		case ConfigurationSerializable configurationSerializable ->
-		{
-			@NotNull Map<String, Object> data = configurationSerializable.serialize();
-			out.name(key);
-			this.writeMap(out, data);
-		}
 		case Map<?, ?> mapValue ->
 		{
 			out.name(key);

@@ -29,6 +29,7 @@ dependencies {
 	testImplementation(platform("org.junit:junit-bom:5.13.3"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.4.0") {
