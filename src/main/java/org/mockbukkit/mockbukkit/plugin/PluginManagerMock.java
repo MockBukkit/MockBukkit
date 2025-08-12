@@ -135,6 +135,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@Nullable String message, @NotNull Predicate<Event> predicate)
@@ -156,6 +159,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * Asserts that at least one event conforms to the given predicate.
 	 *
 	 * @param predicate The predicate to test against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Predicate<Event> predicate)
@@ -171,6 +177,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param message    The message to display if no event is found.
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
@@ -194,6 +203,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param <T>        The type of event that is expected.
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
@@ -206,6 +218,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * Asserts that a specific event or one of it's sub-events has been fired at least once.
 	 *
 	 * @param eventClass The class of the event to check for.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher#hasFiredEventInstance(Class)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
@@ -218,6 +233,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * Asserts that a specific event or one of it's sub-event has not been fired.
 	 *
 	 * @param eventClass The class of the event to check for.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher#hasNotFiredEventInstance(Class)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
@@ -231,6 +249,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param eventClass The class of the event to check for.
 	 * @param message    The message to print when failed.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher#hasNotFiredEventInstance(Class)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, @Nullable String message)
@@ -784,7 +805,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 
 	/**
 	 * This method clears the history of {@link Event events}. Doing that can be very useful if you want to assert fresh
-	 * events using {@link #assertEventFired(Class)} or similar.
+	 * events using {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher},
+	 * {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher} or similar.
 	 */
 	@SuppressWarnings("unused")
 	public void clearEvents()
