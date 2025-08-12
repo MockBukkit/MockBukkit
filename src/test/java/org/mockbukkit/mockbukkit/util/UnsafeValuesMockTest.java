@@ -134,7 +134,8 @@ class UnsafeValuesMockTest
 					Component.text("This is line 2")
 			));
 
-			itemStack.editMeta(meta -> {
+			itemStack.editMeta(meta ->
+			{
 				meta.displayName(Component.text("My custom display name"));
 
 				meta.setUnbreakable(true);
