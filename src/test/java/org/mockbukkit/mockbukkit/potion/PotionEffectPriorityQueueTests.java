@@ -555,7 +555,8 @@ class PotionEffectPriorityQueueTests
 	@Test
 	void testConcurrentModificationError(@MockBukkitInject PlayerMock player)
 	{
-		int DEFAULT_DURATION = 10;
+		int effectDuration = 10;
+
 		// Keep the potion effects coming! once expired: restart again
 		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
 				new org.bukkit.event.Listener()
@@ -567,22 +568,22 @@ class PotionEffectPriorityQueueTests
 					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
 					{
 						pl.removePotionEffect(_event.getOldEffect().getType());
-						pl.addPotionEffect(_event.getOldEffect().withDuration(DEFAULT_DURATION));
+						pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
 					}
 				},
 				plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(DEFAULT_DURATION, 0), EntityPotionEffectEvent.Cause.COMMAND);
-		server.getScheduler().performTicks(DEFAULT_DURATION * 2); // Shouldn't error & should keep the effect running
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		server.getScheduler().performTicks(effectDuration * 2); // Shouldn't error & should keep the effect running
 		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH));
 	}
 
 	@Test
 	void testQueueBecomesNullAfterEvent(@MockBukkitInject PlayerMock player)
 	{
-		int DEFAULT_DURATION = 10;
+		int effectDuration = 10;
 
-		// Listener that removes the entire effect type during expiration event
+		// Listener that adds a new (non-expired) effect type during expiration event
 		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
 				new org.bukkit.event.Listener()
 				{
@@ -592,20 +593,20 @@ class PotionEffectPriorityQueueTests
 				{
 					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
 					{
-						pl.addPotionEffect(_event.getOldEffect().withDuration(DEFAULT_DURATION));
+						pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
 					}
 				},
 				plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(DEFAULT_DURATION, 0), EntityPotionEffectEvent.Cause.COMMAND);
-		server.getScheduler().performTicks(DEFAULT_DURATION + 1); // Expire the effect
-		assertFalse(player.hasPotionEffect(PotionEffectType.STRENGTH)); // Effect should be fully removed
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		server.getScheduler().performTicks(effectDuration + 1); // Expire the effect
+		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH)); // Effect should be fully removed
 	}
 
 	@Test
 	void testSecondSizeCheckFalse(@MockBukkitInject PlayerMock player)
 	{
-		int DEFAULT_DURATION = 10;
+		int effectDuration = 10;
 
 		// Removes another effect during effect handling
 		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
@@ -623,10 +624,10 @@ class PotionEffectPriorityQueueTests
 				},
 				plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(DEFAULT_DURATION, 0), EntityPotionEffectEvent.Cause.COMMAND);
-		player.addPotionEffect(PotionEffectType.SPEED.createEffect(DEFAULT_DURATION, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.SPEED.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
 
-		server.getScheduler().performTicks(DEFAULT_DURATION + 1); // Expire the original
+		server.getScheduler().performTicks(effectDuration + 1); // Expire the original
 
 		assertFalse(player.hasPotionEffect(PotionEffectType.STRENGTH));
 		assertFalse(player.hasPotionEffect(PotionEffectType.SPEED));
@@ -636,7 +637,7 @@ class PotionEffectPriorityQueueTests
 	@Test
 	void testRemoveYourOwnEffectDuringHandling(@MockBukkitInject PlayerMock player)
 	{
-		int DEFAULT_DURATION = 10;
+		int effectDuration = 10;
 
 		// Removes another effect during effect handling
 		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
@@ -653,9 +654,9 @@ class PotionEffectPriorityQueueTests
 				},
 				plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(DEFAULT_DURATION, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
 
-		server.getScheduler().performTicks(DEFAULT_DURATION + 1); // Expire the original
+		server.getScheduler().performTicks(effectDuration + 1); // Expire the original
 
 		assertFalse(player.hasPotionEffect(PotionEffectType.STRENGTH));
 	}
