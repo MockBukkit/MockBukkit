@@ -715,11 +715,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private void removeExpiredEffects()
 	{
-		var it = activeEffects.entrySet().iterator();
-		while (it.hasNext())
+		List<PotionEffectType> effectTypes = new ArrayList<>(activeEffects.keySet());
+		for (PotionEffectType type : effectTypes)
 		{
-			var entry = it.next();
-			var queue = entry.getValue();
+			var queue = activeEffects.get(type);
+			if (queue == null)
+			{
+				continue;
+			}
 
 			var expiredEffects = queue.stream().filter(ActivePotionEffect::hasExpired).toList();
 			if (expiredEffects.isEmpty())
@@ -735,12 +738,30 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled())
 				{
-					it.remove();
+					// Re-fetch the queue as it might have been modified during the event
+					queue = activeEffects.get(type);
+					if (queue != null)
+					{
+						expiredEffects = queue.stream().filter(ActivePotionEffect::hasExpired).toList();
+						if (!expiredEffects.isEmpty())
+						{
+							if (queue.size() == expiredEffects.size())
+							{
+								// Still all expired: remove the entry
+								activeEffects.remove(type);
+							}
+							else
+							{
+								// Remove only the expired ones
+								queue.removeIf(ActivePotionEffect::hasExpired);
+							}
+						}
+					}
 				}
 			}
 			else
 			{
-				// Not the last event to be removed: don't send the event!
+				// Not the last to be removed: don't send the event!
 				queue.removeIf(ActivePotionEffect::hasExpired);
 			}
 		}

@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.potion;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -551,4 +552,28 @@ class PotionEffectPriorityQueueTests
 		assertEventCountAndClear(EntityPotionEffectEvent.Action.REMOVED, PotionEffectType.STRENGTH.createEffect(0, 0), null, EntityPotionEffectEvent.Cause.EXPIRATION, 1);
 	}
 
+	@Test
+	void testConcurrentModificationError(@MockBukkitInject PlayerMock player)
+	{
+		int DEFAULT_DURATION = 10;
+		// Keep the potion effects coming! once expired: restart again
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
+				new org.bukkit.event.Listener()
+				{
+				},
+				org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) ->
+				{
+					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+					{
+						pl.removePotionEffect(_event.getOldEffect().getType());
+						pl.addPotionEffect(_event.getOldEffect().withDuration(DEFAULT_DURATION));
+					}
+				},
+				plugin, false);
+
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(DEFAULT_DURATION, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		server.getScheduler().performTicks(DEFAULT_DURATION * 2); // Shouldn't error & should keep the effect running
+		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH));
+	}
 }
