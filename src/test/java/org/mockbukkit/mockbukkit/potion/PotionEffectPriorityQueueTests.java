@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.potion;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -549,6 +550,115 @@ class PotionEffectPriorityQueueTests
 
 		//[12:03:15 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=REMOVED, cause=EXPIRATION, oldEffect=INCREASE_DAMAGE(lvl=1,dur=0), newEffect=null, cancelled=false
 		assertEventCountAndClear(EntityPotionEffectEvent.Action.REMOVED, PotionEffectType.STRENGTH.createEffect(0, 0), null, EntityPotionEffectEvent.Cause.EXPIRATION, 1);
+	}
+
+	@Test
+	void testConcurrentModificationError(@MockBukkitInject PlayerMock player)
+	{
+		int effectDuration = 10;
+
+		// Keep the potion effects coming! once expired: restart again
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
+				new org.bukkit.event.Listener()
+				{
+				},
+				org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) ->
+				{
+					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+					{
+						pl.removePotionEffect(_event.getOldEffect().getType());
+						pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
+					}
+				},
+				plugin, false);
+
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		server.getScheduler().performTicks(effectDuration * 2); // Shouldn't error & should keep the effect running
+		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH));
+	}
+
+	@Test
+	void testQueueBecomesNullAfterEvent(@MockBukkitInject PlayerMock player)
+	{
+		int effectDuration = 10;
+
+		// Listener that adds a new (non-expired) effect type during expiration event
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
+				new org.bukkit.event.Listener()
+				{
+				},
+				org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) ->
+				{
+					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+					{
+						pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
+					}
+				},
+				plugin, false);
+
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		server.getScheduler().performTicks(effectDuration + 1); // Expire the effect
+		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH)); // Effect should be fully removed
+	}
+
+	@Test
+	void testSecondSizeCheckFalse(@MockBukkitInject PlayerMock player)
+	{
+		int effectDuration = 10;
+
+		// Removes another effect during effect handling
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
+				new org.bukkit.event.Listener()
+				{
+				},
+				org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) ->
+				{
+					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+					{
+						var effect = _event.getOldEffect().getType() == PotionEffectType.STRENGTH ? PotionEffectType.SPEED : PotionEffectType.STRENGTH;
+						pl.removePotionEffect(effect);
+					}
+				},
+				plugin, false);
+
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.SPEED.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+
+		server.getScheduler().performTicks(effectDuration + 1); // Expire the original
+
+		assertFalse(player.hasPotionEffect(PotionEffectType.STRENGTH));
+		assertFalse(player.hasPotionEffect(PotionEffectType.SPEED));
+	}
+
+
+	@Test
+	void testRemoveYourOwnEffectDuringHandling(@MockBukkitInject PlayerMock player)
+	{
+		int effectDuration = 10;
+
+		// Removes another effect during effect handling
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
+				new org.bukkit.event.Listener()
+				{
+				},
+				org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) ->
+				{
+					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+					{
+						pl.removePotionEffect(_event.getOldEffect().getType());
+					}
+				},
+				plugin, false);
+
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+
+		server.getScheduler().performTicks(effectDuration + 1); // Expire the original
+
+		assertFalse(player.hasPotionEffect(PotionEffectType.STRENGTH));
 	}
 
 }
