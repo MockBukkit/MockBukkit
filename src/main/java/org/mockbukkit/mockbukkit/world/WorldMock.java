@@ -101,6 +101,7 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import org.mockbukkit.mockbukkit.util.SpawnedParticle;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1607,6 +1608,13 @@ public class WorldMock implements World
 
 	@Override
 	public @NotNull File getWorldFolder()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Path getWorldPath()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
