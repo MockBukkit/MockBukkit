@@ -145,7 +145,6 @@ class UnsafeValuesTest
 		ItemStack actual = unsafeValuesMock.deserializeItem(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
-		System.out.println(actual.getItemMeta());
 	}
 
 	@ParameterizedTest
@@ -157,7 +156,6 @@ class UnsafeValuesTest
 		ItemStack actual = unsafeValuesMock.deserializeItemFromJson(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
-		System.out.println(actual.getItemMeta());
 	}
 
 	@ParameterizedTest
@@ -169,7 +167,6 @@ class UnsafeValuesTest
 		ItemStack actual = unsafeValuesMock.deserializeStack(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
-		System.out.println(actual.getItemMeta());
 	}
 
 	private void populateItemMeta(ItemStack item)

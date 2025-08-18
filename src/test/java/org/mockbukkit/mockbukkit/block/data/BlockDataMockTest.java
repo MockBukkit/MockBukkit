@@ -265,7 +265,6 @@ class BlockDataMockTest
 	{
 		BlockDataMock blockDataMock = BlockDataMock.newData(null, "minecraft:black_bed");
 		BedDataMock bedDataMock = (BedDataMock) blockDataMock;
-		System.out.println(bedDataMock.getFacing());
 		assertNotNull(bedDataMock.getFacing());
 	}
 
