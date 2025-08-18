@@ -42,7 +42,7 @@ public class NbtParser
 			return Boolean.parseBoolean(string);
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse double: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse double: %s", object.getClass().getName()));
 	}
 
 	public static boolean parseBoolean(@Nullable Object object, boolean defaultValue)
@@ -69,7 +69,7 @@ public class NbtParser
 			return Double.parseDouble(string);
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse double: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse double: %s", object.getClass().getName()));
 	}
 
 	@Nullable
@@ -90,7 +90,7 @@ public class NbtParser
 			return Integer.parseInt(string);
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse integer: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse integer: %s", object.getClass().getName()));
 	}
 
 	public static int parseInteger(@Nullable Object object, int defaultValue)
@@ -117,7 +117,7 @@ public class NbtParser
 			return Byte.parseByte(string);
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse byte: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse byte: %s", object.getClass().getName()));
 	}
 
 	@Nullable
@@ -133,7 +133,7 @@ public class NbtParser
 			return string;
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse integer: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse string: %s", object.getClass().getName()));
 	}
 
 	@Nullable
@@ -161,7 +161,7 @@ public class NbtParser
 			return returnMap;
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse map: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse map: %s", object.getClass().getName()));
 	}
 
 	@Nullable
@@ -189,7 +189,7 @@ public class NbtParser
 			return returnMap;
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse list: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse list: %s", object.getClass().getName()));
 	}
 
 	@Nullable
@@ -211,7 +211,7 @@ public class NbtParser
 			return returnMap;
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse set: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse set: %s", object.getClass().getName()));
 	}
 
 	@Nullable
@@ -227,7 +227,7 @@ public class NbtParser
 			return castFunction.apply(name);
 		}
 
-		throw new NumberFormatException(String.format("Cannot parse value as string: %s", object));
+		throw new NumberFormatException(String.format("Cannot parse value as string: %s", object.getClass().getName()));
 	}
 
 	@Nullable
