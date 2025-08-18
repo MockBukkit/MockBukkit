@@ -69,7 +69,8 @@ class NbtParserTest
 		@Test
 		void givenUnknown()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseBoolean(new A()));
+			A input = new A();
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseBoolean(input));
 			assertEquals("Cannot parse double: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -109,7 +110,8 @@ class NbtParserTest
 		@Test
 		void givenUnknown()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseDouble(new A()));
+			A input = new A();
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseDouble(input));
 			assertEquals("Cannot parse double: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -149,7 +151,8 @@ class NbtParserTest
 		@Test
 		void givenUnknown()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseInteger(new A()));
+			A input = new A();
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseInteger(input));
 			assertEquals("Cannot parse integer: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -189,7 +192,8 @@ class NbtParserTest
 		@Test
 		void givenUnknown()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseByte(new A()));
+			A input = new A();
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseByte(input));
 			assertEquals("Cannot parse byte: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -221,7 +225,8 @@ class NbtParserTest
 		@Test
 		void givenUnknown()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseString(new A()));
+			A input = new A();
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseString(input));
 			assertEquals("Cannot parse string: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
