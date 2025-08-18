@@ -31,7 +31,7 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.4.0") {
+	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
 		exclude("net.kyori", "adventure-platform-api")
 		exclude("net.kyori", "adventure-api")
 	}
