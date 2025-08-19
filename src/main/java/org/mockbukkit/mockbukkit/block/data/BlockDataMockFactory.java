@@ -62,6 +62,7 @@ public final class BlockDataMockFactory
 			.put(Tag.STANDING_SIGNS, SignDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
 			.put(Tag.WALLS, WallDataMock::new)
+			.put(Tag.WALL_HANGING_SIGNS, WallHangingSignDataMock::new)
 			.put(Tag.WALL_SIGNS, WallSignDataMock::new)
 			.build();
 
