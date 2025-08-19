@@ -106,7 +106,7 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	 * @return a cloned instance of this armor stand meta
 	 */
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ArmorStandMetaMock clone()
 	{
 		return new ArmorStandMetaMock(this);

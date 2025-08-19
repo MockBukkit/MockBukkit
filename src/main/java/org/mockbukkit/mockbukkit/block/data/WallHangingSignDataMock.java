@@ -64,6 +64,7 @@ public class WallHangingSignDataMock extends BlockDataMock implements WallHangin
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull WallHangingSignDataMock clone()
 	{
 		return new WallHangingSignDataMock(this);

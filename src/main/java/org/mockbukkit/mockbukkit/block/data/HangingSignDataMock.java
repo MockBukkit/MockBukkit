@@ -71,6 +71,7 @@ public class HangingSignDataMock extends BlockDataMock implements HangingSign
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull HangingSignDataMock clone()
 	{
 		return new HangingSignDataMock(this);

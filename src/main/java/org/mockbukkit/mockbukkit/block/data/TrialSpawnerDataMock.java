@@ -54,7 +54,7 @@ public class TrialSpawnerDataMock extends BlockDataMock implements TrialSpawner
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TrialSpawnerDataMock clone()
 	{
 		return new TrialSpawnerDataMock(this);

@@ -63,7 +63,7 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull EnderChestDataMock clone()
 	{
 		return new EnderChestDataMock(this);

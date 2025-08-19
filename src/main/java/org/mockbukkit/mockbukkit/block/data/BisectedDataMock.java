@@ -42,7 +42,7 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BisectedDataMock clone()
 	{
 		return new BisectedDataMock(this);

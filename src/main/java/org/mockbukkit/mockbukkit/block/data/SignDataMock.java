@@ -58,6 +58,7 @@ public class SignDataMock extends BlockDataMock implements Sign
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SignDataMock clone()
 	{
 		return new SignDataMock(this);

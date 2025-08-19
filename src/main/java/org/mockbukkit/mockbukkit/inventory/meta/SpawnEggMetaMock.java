@@ -87,7 +87,7 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SpawnEggMetaMock clone()
 	{
 		return new SpawnEggMetaMock(this);

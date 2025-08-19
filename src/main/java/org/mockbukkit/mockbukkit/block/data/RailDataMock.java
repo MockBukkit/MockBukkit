@@ -64,7 +64,7 @@ public class RailDataMock extends BlockDataMock implements Rail
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RailDataMock clone()
 	{
 		return new RailDataMock(this);

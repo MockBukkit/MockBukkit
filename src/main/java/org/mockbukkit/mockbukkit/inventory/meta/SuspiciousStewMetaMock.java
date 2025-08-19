@@ -50,7 +50,7 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SuspiciousStewMetaMock clone()
 	{
 		return new SuspiciousStewMetaMock(this);

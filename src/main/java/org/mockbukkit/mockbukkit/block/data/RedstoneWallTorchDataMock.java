@@ -63,7 +63,7 @@ public class RedstoneWallTorchDataMock extends BlockDataMock implements Redstone
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RedstoneWallTorchDataMock clone()
 	{
 		return new RedstoneWallTorchDataMock(this);

@@ -77,7 +77,7 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LecternDataMock clone()
 	{
 		return new LecternDataMock(this);

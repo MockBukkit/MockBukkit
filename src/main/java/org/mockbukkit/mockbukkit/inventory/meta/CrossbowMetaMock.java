@@ -112,7 +112,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CrossbowMetaMock clone()
 	{
 		return new CrossbowMetaMock(this);

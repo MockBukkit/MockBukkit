@@ -48,7 +48,7 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull AnaloguePowerableBlockDataMock clone()
 	{
 		return new AnaloguePowerableBlockDataMock(this);

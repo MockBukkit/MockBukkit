@@ -40,7 +40,7 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LightableDataMock clone()
 	{
 		return new LightableDataMock(this);
