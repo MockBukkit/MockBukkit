@@ -1,5 +1,3 @@
-import java.io.ByteArrayOutputStream
-
 plugins {
 	id("checkstyle")
 	id("java-library")
@@ -228,10 +226,10 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val stdout = ByteArrayOutputStream()
-	exec {
-		commandLine(*cmd)
-		standardOutput = stdout
-	}
-	return stdout.toString().trim()
+	val process = ProcessBuilder()
+		.command(*cmd)
+		.directory(rootProject.projectDir)
+		.start()
+	process.waitFor(5, TimeUnit.SECONDS)
+	return process.inputStream.bufferedReader().readText().trim()
 }
