@@ -584,7 +584,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHangingSign()
 		{
 			HangingSign data = BlockType.OAK_HANGING_SIGN.createBlockData();

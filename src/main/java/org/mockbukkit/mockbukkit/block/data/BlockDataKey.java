@@ -5,6 +5,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Orientation;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.AnaloguePowerable;
+import org.bukkit.block.data.Attachable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
@@ -166,7 +167,8 @@ public enum BlockDataKey
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
 
-	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
+	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
+	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
 
