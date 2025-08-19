@@ -40,6 +40,7 @@ import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.Vault;
+import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -137,7 +138,7 @@ public enum BlockDataKey
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	NORTH("north", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	SOUTH("south", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	UP("up", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	UP("up", Boolean::parseBoolean, o -> o instanceof MultipleFacing || o instanceof Wall),
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
