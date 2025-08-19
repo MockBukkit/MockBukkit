@@ -58,6 +58,7 @@ public final class BlockDataMockFactory
 			.put(Tag.FENCE_GATES, FenceGateDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
+			.put(Tag.STANDING_SIGNS, SignDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
 			.put(Tag.WALLS, WallDataMock::new)
 			.put(Tag.WALL_SIGNS, WallSignDataMock::new)

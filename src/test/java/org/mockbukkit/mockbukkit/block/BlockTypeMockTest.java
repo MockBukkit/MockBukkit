@@ -568,7 +568,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSign()
 		{
 			Sign data = BlockType.OAK_SIGN.createBlockData();
