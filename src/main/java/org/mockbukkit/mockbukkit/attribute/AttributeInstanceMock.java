@@ -98,7 +98,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public void addModifier(@NotNull AttributeModifier modifier)
 	{
-		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
+		Preconditions.checkNotNull(modifier, "Modifier shouldn't be null");
 
 		// Remove existing modifier with same key or UUID if present
 		removeModifier(modifier.getKey());

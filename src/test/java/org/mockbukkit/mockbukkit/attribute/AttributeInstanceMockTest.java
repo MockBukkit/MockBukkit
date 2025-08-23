@@ -434,8 +434,8 @@ class AttributeInstanceMockTest
 		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
 		attributeInstance.addModifier(modifier);
 
-		assertThrows(UnsupportedOperationException.class,
-				() -> attributeInstance.getModifiers().clear());
+		var allModifiers = attributeInstance.getModifiers();
+		assertThrows(UnsupportedOperationException.class, allModifiers::clear);
 	}
 
 	@Test
@@ -522,4 +522,5 @@ class AttributeInstanceMockTest
 		// Base: 5.0, ADD_NUMBER: 8.0, ADD_SCALAR: 9.0, MULTIPLY: 13.5
 		assertEquals(13.5, attributeInstance.getValue(), DELTA);
 	}
+
 }
