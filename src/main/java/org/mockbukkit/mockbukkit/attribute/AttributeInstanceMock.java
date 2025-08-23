@@ -1,17 +1,20 @@
 package org.mockbukkit.mockbukkit.attribute;
 
 import com.google.common.base.Preconditions;
-import net.kyori.adventure.key.Key;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -20,111 +23,170 @@ import java.util.UUID;
 public class AttributeInstanceMock implements AttributeInstance
 {
 
+	@Getter
 	private final @NotNull Attribute attribute;
+	@Getter
 	private final double defaultValue;
-	private double value;
-	private final @NotNull List<AttributeModifier> modifiers;
+	@Getter
+	@Setter
+	private double baseValue;
+	private final @NotNull List<AttributeModifier> modifiers = new ArrayList<>();
+	private final @NotNull Map<net.kyori.adventure.key.Key, AttributeModifier> modifiersByKey = new HashMap<>();
+	private final @NotNull Map<UUID, AttributeModifier> modifiersByUuid = new HashMap<>();
+	private final @NotNull List<AttributeModifier> transientModifiers = new ArrayList<>();
 
 	/**
 	 * Constructs a new {@link AttributeInstanceMock} for the provided {@link Attribute} and with the specified value.
 	 *
 	 * @param attribute The Attribute this is an instance of.
-	 * @param value     The value of the attribute.
+	 * @param defaultValue     The default value of the attribute.
 	 */
-	public AttributeInstanceMock(@NotNull Attribute attribute, double value)
+	public AttributeInstanceMock(@NotNull Attribute attribute, double defaultValue)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		this.attribute = attribute;
-		this.defaultValue = value;
-		this.value = value;
-		modifiers = new ArrayList<>();
-	}
-
-	@Override
-	public @NotNull Attribute getAttribute()
-	{
-		return attribute;
-	}
-
-	@Override
-	public double getBaseValue()
-	{
-		return value;
-	}
-
-	@Override
-	public void setBaseValue(double value)
-	{
-		this.value = value;
+		this.defaultValue = defaultValue;
+		this.baseValue = defaultValue;
 	}
 
 	@Override
 	public @NotNull Collection<AttributeModifier> getModifiers()
 	{
-		return modifiers;
+		return Collections.unmodifiableCollection(modifiers);
 	}
 
 	@Override
-	public @Nullable AttributeModifier getModifier(@NotNull Key key)
+	public @Nullable AttributeModifier getModifier(@NotNull net.kyori.adventure.key.Key key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(key, "Key cannot be null");
+		return modifiersByKey.get(key);
 	}
 
 	@Override
-	public void removeModifier(@NotNull Key key)
+	public void removeModifier(@NotNull net.kyori.adventure.key.Key key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(key, "Key cannot be null");
+		AttributeModifier modifier = modifiersByKey.remove(key);
+		if (modifier != null)
+		{
+			modifiers.remove(modifier);
+			modifiersByUuid.remove(modifier.getUniqueId());
+		}
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21")
 	public @Nullable AttributeModifier getModifier(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
+		return modifiersByUuid.get(uuid);
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21")
 	public void removeModifier(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
+		AttributeModifier modifier = modifiersByUuid.remove(uuid);
+		if (modifier != null)
+		{
+			modifiers.remove(modifier);
+			modifiersByKey.remove(modifier.getKey());
+		}
 	}
 
 	@Override
 	public void addModifier(@NotNull AttributeModifier modifier)
 	{
 		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
+
+		// Remove existing modifier with same key or UUID if present
+		removeModifier(modifier.getKey());
+		removeModifier(modifier.getUniqueId());
+
 		modifiers.add(modifier);
+		modifiersByKey.put(modifier.getKey(), modifier);
+		modifiersByUuid.put(modifier.getUniqueId(), modifier);
 	}
 
 	@Override
 	public void addTransientModifier(@NotNull AttributeModifier modifier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
+
+		// Remove from transient if already exists
+		transientModifiers.removeIf(m ->
+				m.getKey().equals(modifier.getKey()) ||
+						m.getUniqueId().equals(modifier.getUniqueId()));
+
+		transientModifiers.add(modifier);
 	}
 
 	@Override
 	public void removeModifier(@NotNull AttributeModifier modifier)
 	{
 		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
-		modifiers.remove(modifier);
+
+		// Remove from permanent modifiers
+		if (modifiers.remove(modifier))
+		{
+			modifiersByKey.remove(modifier.getKey());
+			modifiersByUuid.remove(modifier.getUniqueId());
+		}
+
+		// Remove from transient modifiers
+		transientModifiers.removeIf(m ->
+				m.getKey().equals(modifier.getKey()) ||
+						m.getUniqueId().equals(modifier.getUniqueId()));
 	}
 
 	@Override
 	public double getValue()
 	{
-		return getBaseValue();
-	}
+		double value = getBaseValue();
 
-	@Override
-	public double getDefaultValue()
-	{
-		return defaultValue;
-	}
+		// Combine permanent and transient modifiers
+		List<AttributeModifier> allModifiers = new ArrayList<>(modifiers);
+		allModifiers.addAll(transientModifiers);
 
+		// Group modifiers by operation type
+		List<AttributeModifier> addNumber = new ArrayList<>();
+		List<AttributeModifier> addScalar = new ArrayList<>();
+		List<AttributeModifier> multiplyScalar = new ArrayList<>();
+
+		for (AttributeModifier modifier : allModifiers)
+		{
+			switch (modifier.getOperation())
+			{
+			case ADD_NUMBER -> addNumber.add(modifier);
+			case ADD_SCALAR -> addScalar.add(modifier);
+			case MULTIPLY_SCALAR_1 -> multiplyScalar.add(modifier);
+			}
+		}
+
+		// Apply ADD_NUMBER modifiers (simple addition)
+		for (AttributeModifier modifier : addNumber)
+		{
+			value += modifier.getAmount();
+		}
+
+		// Apply ADD_SCALAR modifiers (sum all amounts, then multiply base by (1 + sum))
+		if (!addScalar.isEmpty())
+		{
+			double scalarSum = 0.0;
+			for (AttributeModifier modifier : addScalar)
+			{
+				scalarSum += modifier.getAmount();
+			}
+			value += getBaseValue() * scalarSum;
+		}
+
+		// Apply MULTIPLY_SCALAR_1 modifiers (multiplicative)
+		for (AttributeModifier modifier : multiplyScalar)
+		{
+			value *= (1.0 + modifier.getAmount());
+		}
+
+		return value;
+	}
 }

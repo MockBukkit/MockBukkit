@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -157,7 +158,7 @@ import java.util.logging.Logger;
  * }
  * </code></pre>
  */
-public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterAllCallback, TestExecutionExceptionHandler
+public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterEachCallback, AfterAllCallback, TestExecutionExceptionHandler
 {
 
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
@@ -366,9 +367,15 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	}
 
 	@Override
+	public void afterEach(ExtensionContext context) throws Exception
+	{
+
+	}
+
+	@Override
 	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable
 	{
-		if (throwable instanceof UnimplementedOperationException)
+		if (throwable instanceof UnimplementedOperationException || throwable instanceof UnsupportedOperationException)
 		{
 			logger.info(HORIZONTAL_DIVIDER);
 			logger.info("\t\t\t\t\uD83D\uDEA7 This feature is not implemented yet. \uD83D\uDEA7");
@@ -393,5 +400,6 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 
 		throw throwable;
 	}
+
 
 }
