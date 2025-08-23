@@ -10,7 +10,6 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
-import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -158,7 +157,7 @@ import java.util.logging.Logger;
  * }
  * </code></pre>
  */
-public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterEachCallback, AfterAllCallback, TestExecutionExceptionHandler
+public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterAllCallback, TestExecutionExceptionHandler
 {
 
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
@@ -364,12 +363,6 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public void afterAll(ExtensionContext context)
 	{
 		MockBukkit.unmock();
-	}
-
-	@Override
-	public void afterEach(ExtensionContext context) throws Exception
-	{
-
 	}
 
 	@Override
