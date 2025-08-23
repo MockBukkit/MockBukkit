@@ -368,7 +368,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	@Override
 	public void handleTestExecutionException(ExtensionContext context, Throwable throwable) throws Throwable
 	{
-		if (throwable instanceof UnimplementedOperationException || throwable instanceof UnsupportedOperationException)
+		if (throwable instanceof UnimplementedOperationException)
 		{
 			logger.info(HORIZONTAL_DIVIDER);
 			logger.info("\t\t\t\t\uD83D\uDEA7 This feature is not implemented yet. \uD83D\uDEA7");
