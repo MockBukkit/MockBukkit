@@ -150,42 +150,28 @@ public class AttributeInstanceMock implements AttributeInstance
 		allModifiers.addAll(transientModifiers);
 
 		// Group modifiers by operation type
-		List<AttributeModifier> addNumber = new ArrayList<>();
-		List<AttributeModifier> addScalar = new ArrayList<>();
-		List<AttributeModifier> multiplyScalar = new ArrayList<>();
+		double addNumber = 0.0;
+		double addScalar = 0.0;
+		double multiplyScalar = 1.0;
 
 		for (AttributeModifier modifier : allModifiers)
 		{
 			switch (modifier.getOperation())
 			{
-			case ADD_NUMBER -> addNumber.add(modifier);
-			case ADD_SCALAR -> addScalar.add(modifier);
-			case MULTIPLY_SCALAR_1 -> multiplyScalar.add(modifier);
+			case ADD_NUMBER -> addNumber += modifier.getAmount();
+			case ADD_SCALAR -> addScalar += modifier.getAmount();
+			case MULTIPLY_SCALAR_1 -> multiplyScalar *= (1.0 + modifier.getAmount());
 			}
 		}
 
 		// Apply ADD_NUMBER modifiers (simple addition)
-		for (AttributeModifier modifier : addNumber)
-		{
-			value += modifier.getAmount();
-		}
+		value += addNumber;
 
 		// Apply ADD_SCALAR modifiers (sum all amounts, then multiply base by (1 + sum))
-		if (!addScalar.isEmpty())
-		{
-			double scalarSum = 0.0;
-			for (AttributeModifier modifier : addScalar)
-			{
-				scalarSum += modifier.getAmount();
-			}
-			value += getBaseValue() * scalarSum;
-		}
+		value += getBaseValue() * addScalar;
 
 		// Apply MULTIPLY_SCALAR_1 modifiers (multiplicative)
-		for (AttributeModifier modifier : multiplyScalar)
-		{
-			value *= (1.0 + modifier.getAmount());
-		}
+		value *= multiplyScalar;
 
 		return value;
 	}
