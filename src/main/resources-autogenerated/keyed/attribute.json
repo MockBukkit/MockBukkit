@@ -4,210 +4,245 @@
 			"key": "minecraft:armor",
 			"name": "ARMOR",
 			"ordinal": 8,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.armor"
 		},
 		{
 			"key": "minecraft:armor_toughness",
 			"name": "ARMOR_TOUGHNESS",
 			"ordinal": 9,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.armor_toughness"
 		},
 		{
 			"key": "minecraft:attack_damage",
 			"name": "ATTACK_DAMAGE",
 			"ordinal": 5,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.attack_damage"
 		},
 		{
 			"key": "minecraft:attack_knockback",
 			"name": "ATTACK_KNOCKBACK",
 			"ordinal": 6,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.attack_knockback"
 		},
 		{
 			"key": "minecraft:attack_speed",
 			"name": "ATTACK_SPEED",
 			"ordinal": 7,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.attack_speed"
 		},
 		{
 			"key": "minecraft:block_break_speed",
 			"name": "BLOCK_BREAK_SPEED",
 			"ordinal": 27,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.block_break_speed"
 		},
 		{
 			"key": "minecraft:block_interaction_range",
 			"name": "BLOCK_INTERACTION_RANGE",
 			"ordinal": 25,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.block_interaction_range"
 		},
 		{
 			"key": "minecraft:burning_time",
 			"name": "BURNING_TIME",
 			"ordinal": 18,
+			"sentiment": "NEGATIVE",
 			"translationKey": "attribute.name.burning_time"
 		},
 		{
 			"key": "minecraft:camera_distance",
 			"name": "CAMERA_DISTANCE",
 			"ordinal": 19,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.camera_distance"
 		},
 		{
 			"key": "minecraft:entity_interaction_range",
 			"name": "ENTITY_INTERACTION_RANGE",
 			"ordinal": 26,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.entity_interaction_range"
 		},
 		{
 			"key": "minecraft:explosion_knockback_resistance",
 			"name": "EXPLOSION_KNOCKBACK_RESISTANCE",
 			"ordinal": 20,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.explosion_knockback_resistance"
 		},
 		{
 			"key": "minecraft:fall_damage_multiplier",
 			"name": "FALL_DAMAGE_MULTIPLIER",
 			"ordinal": 10,
+			"sentiment": "NEGATIVE",
 			"translationKey": "attribute.name.fall_damage_multiplier"
 		},
 		{
 			"key": "minecraft:flying_speed",
 			"name": "FLYING_SPEED",
 			"ordinal": 4,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.flying_speed"
 		},
 		{
 			"key": "minecraft:follow_range",
 			"name": "FOLLOW_RANGE",
 			"ordinal": 1,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.follow_range"
 		},
 		{
 			"key": "minecraft:gravity",
 			"name": "GRAVITY",
 			"ordinal": 16,
+			"sentiment": "NEUTRAL",
 			"translationKey": "attribute.name.gravity"
 		},
 		{
 			"key": "minecraft:jump_strength",
 			"name": "JUMP_STRENGTH",
 			"ordinal": 17,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.jump_strength"
 		},
 		{
 			"key": "minecraft:knockback_resistance",
 			"name": "KNOCKBACK_RESISTANCE",
 			"ordinal": 2,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.knockback_resistance"
 		},
 		{
 			"key": "minecraft:luck",
 			"name": "LUCK",
 			"ordinal": 11,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.luck"
 		},
 		{
 			"key": "minecraft:max_absorption",
 			"name": "MAX_ABSORPTION",
 			"ordinal": 12,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.max_absorption"
 		},
 		{
 			"key": "minecraft:max_health",
 			"name": "MAX_HEALTH",
 			"ordinal": 0,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.max_health"
 		},
 		{
 			"key": "minecraft:mining_efficiency",
 			"name": "MINING_EFFICIENCY",
 			"ordinal": 28,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.mining_efficiency"
 		},
 		{
 			"key": "minecraft:movement_efficiency",
 			"name": "MOVEMENT_EFFICIENCY",
 			"ordinal": 21,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.movement_efficiency"
 		},
 		{
 			"key": "minecraft:movement_speed",
 			"name": "MOVEMENT_SPEED",
 			"ordinal": 3,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.movement_speed"
 		},
 		{
 			"key": "minecraft:oxygen_bonus",
 			"name": "OXYGEN_BONUS",
 			"ordinal": 22,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.oxygen_bonus"
 		},
 		{
 			"key": "minecraft:safe_fall_distance",
 			"name": "SAFE_FALL_DISTANCE",
 			"ordinal": 13,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.safe_fall_distance"
 		},
 		{
 			"key": "minecraft:scale",
 			"name": "SCALE",
 			"ordinal": 14,
+			"sentiment": "NEUTRAL",
 			"translationKey": "attribute.name.scale"
 		},
 		{
 			"key": "minecraft:sneaking_speed",
 			"name": "SNEAKING_SPEED",
 			"ordinal": 29,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.sneaking_speed"
 		},
 		{
 			"key": "minecraft:spawn_reinforcements",
 			"name": "SPAWN_REINFORCEMENTS",
 			"ordinal": 32,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.spawn_reinforcements"
 		},
 		{
 			"key": "minecraft:step_height",
 			"name": "STEP_HEIGHT",
 			"ordinal": 15,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.step_height"
 		},
 		{
 			"key": "minecraft:submerged_mining_speed",
 			"name": "SUBMERGED_MINING_SPEED",
 			"ordinal": 30,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.submerged_mining_speed"
 		},
 		{
 			"key": "minecraft:sweeping_damage_ratio",
 			"name": "SWEEPING_DAMAGE_RATIO",
 			"ordinal": 31,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.sweeping_damage_ratio"
 		},
 		{
 			"key": "minecraft:tempt_range",
 			"name": "TEMPT_RANGE",
 			"ordinal": 24,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.tempt_range"
 		},
 		{
 			"key": "minecraft:water_movement_efficiency",
 			"name": "WATER_MOVEMENT_EFFICIENCY",
 			"ordinal": 23,
+			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.water_movement_efficiency"
 		},
 		{
 			"key": "minecraft:waypoint_receive_range",
 			"name": "WAYPOINT_RECEIVE_RANGE",
 			"ordinal": 34,
+			"sentiment": "NEUTRAL",
 			"translationKey": "attribute.name.waypoint_receive_range"
 		},
 		{
 			"key": "minecraft:waypoint_transmit_range",
 			"name": "WAYPOINT_TRANSMIT_RANGE",
 			"ordinal": 33,
+			"sentiment": "NEUTRAL",
 			"translationKey": "attribute.name.waypoint_transmit_range"
 		}
 	]
