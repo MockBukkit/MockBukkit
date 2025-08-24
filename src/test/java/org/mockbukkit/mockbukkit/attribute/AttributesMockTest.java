@@ -22,6 +22,7 @@ class AttributesMockTest
 		Constructor<AttributesMock> constructor = AttributesMock.class.getDeclaredConstructor();
 		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
+
 		Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
 		assertInstanceOf(UnsupportedOperationException.class, exception.getCause());
 		assertTrue(exception.getCause().getMessage().contains("Utility class"));
