@@ -11,6 +11,7 @@ import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Sapling;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.metaminer.DataGenerator;
@@ -133,6 +134,11 @@ public class MaterialDataGenerator implements DataGenerator
 			JsonArray array = new JsonArray();
 			multipleFacing.getAllowedFaces().stream().map(Enum::name).forEach(array::add);
 			obj.add("faces", array);
+		}
+
+		if (data instanceof Farmland farmland)
+		{
+			obj.addProperty("maxMoisture", String.valueOf(farmland.getMaximumMoisture()));
 		}
 	}
 

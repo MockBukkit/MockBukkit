@@ -2945,7 +2945,9 @@
 		}
 	},
 	"minecraft:farmland": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxMoisture": "7"
+		},
 		"defaultStates": {
 			"moisture": "0"
 		}

@@ -65,6 +65,7 @@ public class BlockDataLimitation<T, U>
 		public static final Type<Integer, Integer> MAX_LEVEL = new Type<>("maxLevel", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_DUSTED = new Type<>("maxDusted", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MIN_LEVEL = new Type<>("minLevel", jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_MOISTURE = new Type<>("maxMoisture", jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));;
 		public static final Type<Set<BlockFace>, BlockFace> FACES = new Type<>("faces", jsonElement -> BlockDataLimitation.fromSet(
 				jsonElement.getAsJsonArray()
 						.asList()

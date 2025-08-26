@@ -30,6 +30,7 @@ import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
@@ -171,7 +172,8 @@ public enum BlockDataKey
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
 	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
 
-	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance);
+	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
+	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
 
