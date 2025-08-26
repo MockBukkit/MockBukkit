@@ -644,7 +644,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (this.hasCustomModelData())
 		{
-			map.put("custom-model-data", this.getCustomModelData());
+			map.put("minecraft:custom_model_data", this.getCustomModelData());
 		}
 
 		if (this.isHideTooltip())
