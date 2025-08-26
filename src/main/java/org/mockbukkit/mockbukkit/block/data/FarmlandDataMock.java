@@ -53,4 +53,10 @@ public class FarmlandDataMock extends BlockDataMock implements Farmland
 		return this.getLimitationValue(BlockDataLimitation.Type.MAX_MOISTURE);
 	}
 
+	@Override
+	public @NotNull FarmlandDataMock clone()
+	{
+		return new FarmlandDataMock(this);
+	}
+
 }

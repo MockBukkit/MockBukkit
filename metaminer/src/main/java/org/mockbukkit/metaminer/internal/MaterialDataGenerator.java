@@ -13,6 +13,7 @@ import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.TurtleEgg;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.util.JsonUtil;
@@ -139,6 +140,13 @@ public class MaterialDataGenerator implements DataGenerator
 		if (data instanceof Farmland farmland)
 		{
 			obj.addProperty("maxMoisture", String.valueOf(farmland.getMaximumMoisture()));
+		}
+
+		if (data instanceof TurtleEgg turtleEgg)
+		{
+			obj.addProperty("minEggs", String.valueOf(turtleEgg.getMinimumEggs()));
+			obj.addProperty("maxEggs", String.valueOf(turtleEgg.getMaximumEggs()));
+			obj.addProperty("maxHatch", String.valueOf(turtleEgg.getMaximumHatch()));
 		}
 	}
 

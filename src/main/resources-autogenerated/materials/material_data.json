@@ -7390,7 +7390,11 @@
 		}
 	},
 	"minecraft:turtle_egg": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxEggs": "4",
+			"maxHatch": "2",
+			"minEggs": "1"
+		},
 		"defaultStates": {
 			"eggs": "1",
 			"hatch": "0"

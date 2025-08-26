@@ -11,6 +11,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.MultipleFacing;
@@ -42,6 +43,7 @@ import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
 import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
@@ -173,7 +175,10 @@ public enum BlockDataKey
 	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
 
 	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
-	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance);
+	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance),
+	HATCH("hatch", Integer::parseInt, Hatchable.class::isInstance),
+	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance);
+
 
 	private static final Set<String> KEYS = compileKeys();
 

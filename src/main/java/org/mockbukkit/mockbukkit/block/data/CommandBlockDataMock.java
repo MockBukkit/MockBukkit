@@ -68,4 +68,10 @@ public class CommandBlockDataMock extends BlockDataMock implements CommandBlock
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
+	@Override
+	public @NotNull CommandBlockDataMock clone()
+	{
+		return new CommandBlockDataMock(this);
+	}
+
 }
