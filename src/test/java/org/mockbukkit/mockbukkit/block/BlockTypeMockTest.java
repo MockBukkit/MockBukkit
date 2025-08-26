@@ -1062,7 +1062,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHatchable()
 		{
 			Hatchable data = BlockType.SNIFFER_EGG.createBlockData();

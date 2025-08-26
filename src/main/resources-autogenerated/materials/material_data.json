@@ -6660,7 +6660,9 @@
 		}
 	},
 	"minecraft:sniffer_egg": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxHatch": "2"
+		},
 		"defaultStates": {
 			"hatch": "0"
 		}

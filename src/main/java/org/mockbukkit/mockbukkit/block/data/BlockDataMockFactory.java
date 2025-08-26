@@ -9,6 +9,7 @@ import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
+import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
@@ -83,6 +84,7 @@ public final class BlockDataMockFactory
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
+			.put(Hatchable.class, HatchableDataMock::new)
 			.put(Hopper.class, HopperDataMock::new)
 			.put(Lectern.class, LecternDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
