@@ -18,8 +18,10 @@ import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.CrossbowMeta;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.material.MaterialData;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -27,8 +29,10 @@ import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Named;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,6 +44,8 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -156,6 +162,72 @@ class UnsafeValuesTest
 		ItemStack actual = unsafeValuesMock.deserializeItemFromJson(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
+	}
+
+	@Nested
+	class SerializeItemAsJson
+	{
+
+		@Test
+		void givenRepairable() throws JSONException
+		{
+
+			ItemStack item = ItemStack.of(Material.DIAMOND_PICKAXE);
+
+			item.editMeta(meta ->
+			{
+				if (meta instanceof Repairable repairable)
+				{
+					repairable.setRepairCost(321);
+				}
+			});
+
+			JsonObject serialized = unsafeValuesMock.serializeItemAsJson(item);
+
+			String expectedString = """
+				{
+					       "id": "minecraft:diamond_pickaxe",
+					       "count": 1,
+					       "components": {
+					           "minecraft:repair_cost": 321
+					       },
+					       "DataVersion": 1
+					   }
+			""";
+			JSONAssert.assertEquals(expectedString, serialized.toString(), JSONCompareMode.LENIENT);
+		}
+
+		@Test
+		void givenDamageable() throws JSONException
+		{
+
+			ItemStack item = ItemStack.of(Material.DIAMOND_PICKAXE);
+
+			item.editMeta(meta ->
+			{
+				if (meta instanceof Damageable damageable)
+				{
+					damageable.setMaxDamage(1000);
+					damageable.setDamage(100);
+				}
+			});
+
+			JsonObject serialized = unsafeValuesMock.serializeItemAsJson(item);
+
+			String expectedString = """
+				{
+					       "id": "minecraft:diamond_pickaxe",
+					       "count": 1,
+					       "components": {
+					           "minecraft:damage": 100,
+					           "minecraft:max_damage": 1000
+					       },
+					       "DataVersion": 1
+					   }
+			""";
+			JSONAssert.assertEquals(expectedString, serialized.toString(), JSONCompareMode.LENIENT);
+		}
+
 	}
 
 	@ParameterizedTest

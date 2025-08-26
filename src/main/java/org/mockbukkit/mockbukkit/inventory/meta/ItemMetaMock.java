@@ -614,18 +614,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (this.hasDamage())
 		{
-			map.put("Damage", this.getDamage());
+			map.put("minecraft:damage", this.getDamage());
 		}
 		if (this.hasMaxDamage())
 		{
-			map.put("MaxDamage", this.getMaxDamage());
+			map.put("minecraft:max_damage", this.getMaxDamage());
 		}
 		if (this.hasRepairCost())
 		{
-			map.put("repair-cost", this.repairCost);
+			map.put("minecraft:repair_cost", this.repairCost);
 		}
-		map.put("minecraft:enchantments", this.enchants.entrySet().stream()
-				.collect(Collectors.toMap(entry -> entry.getKey().getKey().asString(), Map.Entry::getValue)));
+		if (this.hasEnchants())
+		{
+			map.put("minecraft:enchantments", this.enchants.entrySet().stream()
+					.collect(Collectors.toMap(entry -> entry.getKey().getKey().asString(), Map.Entry::getValue)));
+		}
 		if (this.hasAttributeModifiers())
 		{
 			map.put("attribute-modifiers", this.getAttributeModifiers());
