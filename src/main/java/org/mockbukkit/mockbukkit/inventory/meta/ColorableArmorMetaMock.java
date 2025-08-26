@@ -15,9 +15,9 @@ import java.util.Map;
 public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableArmorMeta
 {
 
-	static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
+	static final int DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540).asARGB();
 
-	private @Nullable Color color;
+	private @Nullable Integer color;
 
 	/**
 	 * Constructs a new {@link ColorableArmorMetaMock}.
@@ -38,20 +38,20 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 
 		if (meta instanceof ColorableArmorMeta colorableArmorMeta)
 		{
-			this.color = colorableArmorMeta.isDyed() ? colorableArmorMeta.getColor() : null;
+			this.color = colorableArmorMeta.isDyed() ? colorableArmorMeta.getColor().asARGB() : null;
 		}
 	}
 
 	@Override
 	public @NotNull Color getColor()
 	{
-		return this.color == null ? DEFAULT_LEATHER_COLOR : this.color;
+		return this.color == null ? Color.fromARGB(DEFAULT_LEATHER_COLOR) : Color.fromARGB(this.color);
 	}
 
 	@Override
 	public void setColor(@Nullable Color color)
 	{
-		this.color = color;
+		this.color = (color == null ? null : color.asARGB());
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		super.deserializeInternal(args);
 		if (args.containsKey("color"))
 		{
-			this.color = Color.deserialize(NbtParser.parseMap(args.get("color"), NbtParser::parseDouble));
+			this.color = Color.deserialize(NbtParser.parseMap(args.get("color"), NbtParser::parseDouble)).asARGB();
 		}
 	}
 
