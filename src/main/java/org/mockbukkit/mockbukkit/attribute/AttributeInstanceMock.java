@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.bukkit.attribute.AttributeModifier.Operation.ADD_NUMBER;
+import static org.bukkit.attribute.AttributeModifier.Operation.ADD_SCALAR;
+import static org.bukkit.attribute.AttributeModifier.Operation.MULTIPLY_SCALAR_1;
+
 /**
  * Mock implementation of {@link AttributeInstance}.
  */
