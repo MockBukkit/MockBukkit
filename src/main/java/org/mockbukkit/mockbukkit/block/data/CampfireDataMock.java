@@ -103,7 +103,7 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CampfireDataMock clone()
 	{
 		return new CampfireDataMock(this);

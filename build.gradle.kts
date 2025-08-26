@@ -1,5 +1,3 @@
-import java.io.ByteArrayOutputStream
-
 plugins {
 	id("checkstyle")
 	id("java-library")
@@ -25,19 +23,19 @@ dependencies {
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter-api:5.13.3")
-	testImplementation(platform("org.junit:junit-bom:5.13.3"))
+	implementation("org.junit.jupiter:junit-jupiter-api:5.13.4")
+	testImplementation(platform("org.junit:junit-bom:5.13.4"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.4.0") {
+	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
 		exclude("net.kyori", "adventure-platform-api")
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.17.6")
+	implementation("net.bytebuddy:byte-buddy:1.17.7")
 
 	compileOnly("org.projectlombok:lombok:1.18.38")
 	annotationProcessor("org.projectlombok:lombok:1.18.38")
@@ -229,10 +227,10 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val stdout = ByteArrayOutputStream()
-	exec {
-		commandLine(*cmd)
-		standardOutput = stdout
-	}
-	return stdout.toString().trim()
+	val process = ProcessBuilder()
+		.command(*cmd)
+		.directory(rootProject.projectDir)
+		.start()
+	process.waitFor(5, TimeUnit.SECONDS)
+	return process.inputStream.bufferedReader().readText().trim()
 }

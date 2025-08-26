@@ -3,44 +3,32 @@ package org.mockbukkit.mockbukkit.block.data;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.WallHangingSign;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public class ChestDataMock extends BlockDataMock implements Chest
+public class WallHangingSignDataMock extends BlockDataMock implements WallHangingSign
 {
 
 	/**
-	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link WallHangingSignDataMock} for the provided {@link Material}.
 	 *
 	 * @param material The material this data is for.
 	 */
-	public ChestDataMock(@NotNull Material material)
+	public WallHangingSignDataMock(@NotNull Material material)
 	{
 		super(material);
 	}
 
 	/**
-	 * Create a new {@link ChestDataMock} based on an existing {@link ChestDataMock}.
+	 * Create a new {@link WallHangingSignDataMock} based on an existing {@link WallHangingSignDataMock}.
 	 *
 	 * @param other the other block data.
 	 */
-	protected ChestDataMock(@NotNull ChestDataMock other)
+	protected WallHangingSignDataMock(@NotNull WallHangingSignDataMock other)
 	{
 		super(other);
-	}
-
-	@Override
-	public @NotNull Type getType()
-	{
-		return this.get(BlockDataKey.TYPE_CHEST);
-	}
-
-	@Override
-	public void setType(@NotNull Type type)
-	{
-		this.set(BlockDataKey.TYPE_CHEST, type);
 	}
 
 	@Override
@@ -50,10 +38,11 @@ public class ChestDataMock extends BlockDataMock implements Chest
 	}
 
 	@Override
-	public void setFacing(@NotNull BlockFace facing)
+	public void setFacing(@NotNull BlockFace blockFace)
 	{
-		Preconditions.checkArgument(this.getFaces().contains(facing), "BlockFace %s is not a valid BlockFace.", facing);
-		this.set(BlockDataKey.FACING, facing);
+		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
+		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		this.set(BlockDataKey.FACING, blockFace);
 	}
 
 	@Override
@@ -76,9 +65,9 @@ public class ChestDataMock extends BlockDataMock implements Chest
 
 	@Override
 	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull ChestDataMock clone()
+	public @NotNull WallHangingSignDataMock clone()
 	{
-		return new ChestDataMock(this);
+		return new WallHangingSignDataMock(this);
 	}
 
 }

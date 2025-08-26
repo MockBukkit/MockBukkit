@@ -68,7 +68,7 @@ public class LightDataMock extends BlockDataMock implements Light
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LightDataMock clone()
 	{
 		return new LightDataMock(this);

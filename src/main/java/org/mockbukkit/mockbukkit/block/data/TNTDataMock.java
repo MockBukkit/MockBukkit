@@ -40,7 +40,7 @@ public class TNTDataMock extends BlockDataMock implements TNT
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TNTDataMock clone()
 	{
 		return new TNTDataMock(this);

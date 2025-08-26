@@ -90,7 +90,7 @@ public class BedDataMock extends BlockDataMock implements Bed
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BedDataMock clone()
 	{
 		return new BedDataMock(this);
