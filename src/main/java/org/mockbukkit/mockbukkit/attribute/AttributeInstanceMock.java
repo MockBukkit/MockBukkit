@@ -60,7 +60,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public @Nullable AttributeModifier getModifier(@NotNull net.kyori.adventure.key.Key key)
 	{
-		Preconditions.checkNotNull(key, "Key cannot be null");
+		Preconditions.checkArgument(key != null, "Key cannot be null");
 		return modifiersByKey.get(key);
 	}
 
