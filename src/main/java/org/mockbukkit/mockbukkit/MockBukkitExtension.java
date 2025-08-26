@@ -394,5 +394,4 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		throw throwable;
 	}
 
-
 }
