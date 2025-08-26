@@ -5,7 +5,6 @@ import net.kyori.adventure.key.Key;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
 public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attribute
