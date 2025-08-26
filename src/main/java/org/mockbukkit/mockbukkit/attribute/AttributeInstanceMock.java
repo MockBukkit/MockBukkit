@@ -132,32 +132,32 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public double getValue()
 	{
-		double value = getBaseValue();
-
-		// Group modifiers by operation type
-		double addNumber = 0.0;
-		double addScalar = 0.0;
-		double multiplyScalar = 1.0;
-
+		double baseValue = this.getBaseValue();
 		for (AttributeModifier modifier : modifiers)
 		{
-			switch (modifier.getOperation())
+			if (modifier.getOperation() == ADD_NUMBER)
 			{
-			case ADD_NUMBER -> addNumber += modifier.getAmount();
-			case ADD_SCALAR -> addScalar += modifier.getAmount();
-			case MULTIPLY_SCALAR_1 -> multiplyScalar *= (1.0 + modifier.getAmount());
+				baseValue += modifier.getAmount();
 			}
 		}
 
-		// Apply ADD_NUMBER modifiers (simple addition)
-		value += addNumber;
+		double d = baseValue;
+		for (AttributeModifier modifier : modifiers)
+		{
+			if (modifier.getOperation() == ADD_SCALAR)
+			{
+				d += baseValue * modifier.getAmount();
+			}
+		}
 
-		// Apply ADD_SCALAR modifiers (sum all amounts, then multiply base by (1 + sum))
-		value += getBaseValue() * addScalar;
+		for (AttributeModifier modifier : modifiers)
+		{
+			if (modifier.getOperation() == MULTIPLY_SCALAR_1)
+			{
+				d *= 1.0 + modifier.getAmount();
+			}
+		}
 
-		// Apply MULTIPLY_SCALAR_1 modifiers (multiplicative)
-		value *= multiplyScalar;
-
-		return value;
+		return d;
 	}
 }
