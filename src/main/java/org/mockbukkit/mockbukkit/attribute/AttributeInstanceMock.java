@@ -132,21 +132,21 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public double getValue()
 	{
-		double baseValue = this.getBaseValue();
+		double base = this.getBaseValue();
 		for (AttributeModifier modifier : modifiers)
 		{
 			if (modifier.getOperation() == ADD_NUMBER)
 			{
-				baseValue += modifier.getAmount();
+				base += modifier.getAmount();
 			}
 		}
 
-		double d = baseValue;
+		double d = base;
 		for (AttributeModifier modifier : modifiers)
 		{
 			if (modifier.getOperation() == ADD_SCALAR)
 			{
-				d += baseValue * modifier.getAmount();
+				d += base * modifier.getAmount();
 			}
 		}
 
