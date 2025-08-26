@@ -72,14 +72,14 @@ public class SerializableMeta implements ConfigurationSerializable
 			// .put(MusicInstrumentMetaMock.class, "MUSIC_INSTRUMENT")
 			.put(OminousBottleMetaMock.class, "OMINOUS_BOTTLE")
 			.put(ItemMetaMock.class, "UNSPECIFIC")
-			.build();;
-	private static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap;
-
-	static
+			.build();
+	private static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap = compileFactoryMap();
+	
+	private static ImmutableMap<String, Function<Map<String, Object>,? extends ItemMetaMock>> compileFactoryMap()
 	{
+		ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> builder = ImmutableMap.builder();
 
-		final ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> classConstructorBuilder = ImmutableMap.builder();
-		for (Map.Entry<Class<? extends ItemMetaMock>, String> mapping : classMap.entrySet())
+		for (Map.Entry<Class<? extends ItemMetaMock>, String> mapping : SerializableMeta.classMap.entrySet())
 		{
 			Class<? extends ItemMetaMock> clazz = mapping.getKey();
 
@@ -87,7 +87,7 @@ public class SerializableMeta implements ConfigurationSerializable
 			try
 			{
 				Method deserializeMethod = clazz.getDeclaredMethod("deserialize", Map.class);
-				classConstructorBuilder.put(mapping.getValue(), a ->
+				builder.put(mapping.getValue(), a ->
 				{
 					try
 					{
@@ -109,7 +109,7 @@ public class SerializableMeta implements ConfigurationSerializable
 			try
 			{
 				Method deserializeMethod = clazz.getDeclaredMethod("valueOf", Map.class);
-				classConstructorBuilder.put(mapping.getValue(), a ->
+				builder.put(mapping.getValue(), a ->
 				{
 					try
 					{
@@ -131,7 +131,7 @@ public class SerializableMeta implements ConfigurationSerializable
 			try
 			{
 				Constructor<? extends ItemMetaMock> constructor = clazz.getDeclaredConstructor(Map.class);
-				classConstructorBuilder.put(mapping.getValue(), a ->
+				builder.put(mapping.getValue(), a ->
 				{
 					try
 					{
@@ -157,7 +157,7 @@ public class SerializableMeta implements ConfigurationSerializable
 				throw new UnsupportedOperationException(message, e);
 			}
 		}
-		factoryMap = classConstructorBuilder.build();
+		return builder.build();
 	}
 
 	private SerializableMeta()
