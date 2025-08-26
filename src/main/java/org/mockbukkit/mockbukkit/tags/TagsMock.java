@@ -103,7 +103,7 @@ public final class TagsMock
 			{
 				Path relativePath = directory.relativize(path);
 				// Splitting will strip away the .json
-				String name = filePattern.split(relativePath.toString())[0];
+				String name = filePattern.split(relativePath.toString())[0].replace('\\', '/');
 				NamespacedKey key = NamespacedKey.minecraft(name);
 				Tag<?> tag = TagFactory.createTag(registry, key);
 				registry.getTags().put(key, tag);
