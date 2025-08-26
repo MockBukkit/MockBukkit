@@ -33,7 +33,6 @@ public class AttributeInstanceMock implements AttributeInstance
 	private final @NotNull List<AttributeModifier> modifiers = new ArrayList<>();
 	private final @NotNull Map<net.kyori.adventure.key.Key, AttributeModifier> modifiersByKey = new HashMap<>();
 	private final @NotNull Map<UUID, AttributeModifier> modifiersByUuid = new HashMap<>();
-	private final @NotNull List<AttributeModifier> transientModifiers = new ArrayList<>();
 
 	/**
 	 * Constructs a new {@link AttributeInstanceMock} for the provided {@link Attribute} and with the specified value.
@@ -112,14 +111,9 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public void addTransientModifier(@NotNull AttributeModifier modifier)
 	{
-		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
-
-		// Remove from transient if already exists
-		transientModifiers.removeIf(m ->
-				m.getKey().equals(modifier.getKey()) ||
-						m.getUniqueId().equals(modifier.getUniqueId()));
-
-		transientModifiers.add(modifier);
+		// Thorinwasher: We don't even need to differentiate between these two types, as there is no world storage
+		//   solution for MockBukkit; This does not matter, as nothing is persistent
+		addModifier(modifier);
 	}
 
 	@Override
@@ -133,11 +127,6 @@ public class AttributeInstanceMock implements AttributeInstance
 			modifiersByKey.remove(modifier.getKey());
 			modifiersByUuid.remove(modifier.getUniqueId());
 		}
-
-		// Remove from transient modifiers
-		transientModifiers.removeIf(m ->
-				m.getKey().equals(modifier.getKey()) ||
-						m.getUniqueId().equals(modifier.getUniqueId()));
 	}
 
 	@Override
@@ -145,16 +134,12 @@ public class AttributeInstanceMock implements AttributeInstance
 	{
 		double value = getBaseValue();
 
-		// Combine permanent and transient modifiers
-		List<AttributeModifier> allModifiers = new ArrayList<>(modifiers);
-		allModifiers.addAll(transientModifiers);
-
 		// Group modifiers by operation type
 		double addNumber = 0.0;
 		double addScalar = 0.0;
 		double multiplyScalar = 1.0;
 
-		for (AttributeModifier modifier : allModifiers)
+		for (AttributeModifier modifier : modifiers)
 		{
 			switch (modifier.getOperation())
 			{
