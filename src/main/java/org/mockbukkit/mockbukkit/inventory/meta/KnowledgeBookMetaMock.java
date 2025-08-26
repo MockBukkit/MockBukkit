@@ -73,7 +73,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull KnowledgeBookMetaMock clone()
 	{
 		return new KnowledgeBookMetaMock(this);

@@ -71,7 +71,7 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull EnchantmentStorageMetaMock clone()
 	{
 		return new EnchantmentStorageMetaMock(this);

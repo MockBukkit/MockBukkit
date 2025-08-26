@@ -560,7 +560,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWall()
 		{
 			Wall data = BlockType.COBBLESTONE_WALL.createBlockData();
@@ -569,7 +568,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSign()
 		{
 			Sign data = BlockType.OAK_SIGN.createBlockData();
@@ -586,7 +584,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHangingSign()
 		{
 			HangingSign data = BlockType.OAK_HANGING_SIGN.createBlockData();
@@ -595,7 +592,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWallHangingSign()
 		{
 			WallHangingSign data = BlockType.OAK_WALL_HANGING_SIGN.createBlockData();

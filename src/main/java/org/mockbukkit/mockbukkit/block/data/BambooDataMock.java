@@ -89,7 +89,7 @@ public class BambooDataMock extends BlockDataMock implements Bamboo
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BambooDataMock clone()
 	{
 		return new BambooDataMock(this);

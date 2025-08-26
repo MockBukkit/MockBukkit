@@ -65,7 +65,7 @@ public class SlabDataMock extends BlockDataMock implements Slab
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SlabDataMock clone()
 	{
 		return new SlabDataMock(this);

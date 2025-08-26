@@ -64,7 +64,7 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull HopperDataMock clone()
 	{
 		return new HopperDataMock(this);

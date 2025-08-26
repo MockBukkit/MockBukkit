@@ -88,7 +88,7 @@ public final class TagsMock
 		Path directory = Paths.get(resource.toURI());
 
 		// Iterate through all paths in that directory
-		try (Stream<Path> stream = Files.walk(directory, 1))
+		try (Stream<Path> stream = Files.walk(directory, 2))
 		{
 			// We wanna skip the root node as we are only interested in the actual
 			// .json files for the tags
@@ -101,8 +101,9 @@ public final class TagsMock
 				return !isDirectory && isTagFormat;
 			}).forEach(path ->
 			{
+				Path relativePath = directory.relativize(path);
 				// Splitting will strip away the .json
-				String name = filePattern.split(path.getFileName().toString())[0];
+				String name = filePattern.split(relativePath.toString())[0];
 				NamespacedKey key = NamespacedKey.minecraft(name);
 				Tag<?> tag = TagFactory.createTag(registry, key);
 				registry.getTags().put(key, tag);

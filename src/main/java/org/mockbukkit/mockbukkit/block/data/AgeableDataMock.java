@@ -48,7 +48,7 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull AgeableDataMock clone()
 	{
 		return new AgeableDataMock(this);

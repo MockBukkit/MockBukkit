@@ -51,7 +51,7 @@ public class RedstoneRailDataMock extends RailDataMock implements RedstoneRail
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RedstoneRailDataMock clone()
 	{
 		return new RedstoneRailDataMock(this);

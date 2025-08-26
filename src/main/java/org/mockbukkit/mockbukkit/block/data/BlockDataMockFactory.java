@@ -53,12 +53,16 @@ public final class BlockDataMockFactory
 			.put(Tag.BUTTONS, SwitchDataMock::new)
 			.put(Tag.CAMPFIRES, CampfireDataMock::new)
 			.put(Tag.CANDLES, CandleDataMock::new)
+			.put(Tag.CEILING_HANGING_SIGNS, HangingSignDataMock::new)
 			.put(Tag.DOORS, DoorDataMock::new)
 			.put(Tag.FENCES, FenceDataMock::new)
 			.put(Tag.FENCE_GATES, FenceGateDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
+			.put(Tag.STANDING_SIGNS, SignDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
+			.put(Tag.WALLS, WallDataMock::new)
+			.put(Tag.WALL_HANGING_SIGNS, WallHangingSignDataMock::new)
 			.put(Tag.WALL_SIGNS, WallSignDataMock::new)
 			.build();
 
