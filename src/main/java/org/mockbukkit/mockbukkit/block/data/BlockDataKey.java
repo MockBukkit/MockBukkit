@@ -26,6 +26,7 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Door;
@@ -168,7 +169,9 @@ public enum BlockDataKey
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
 
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
-	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance);
+	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
+
+	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
 

@@ -1004,7 +1004,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCommandBlock()
 		{
 			CommandBlock data = BlockType.COMMAND_BLOCK.createBlockData();
