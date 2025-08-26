@@ -42,42 +42,41 @@ import java.util.function.Function;
 public class SerializableMeta implements ConfigurationSerializable
 {
 
-	static final String TYPE_FIELD = "meta-type";
+	private static final String TYPE_FIELD = "meta-type";
 
-	static final ImmutableMap<Class<? extends ItemMetaMock>, String> classMap;
-	static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap;
+	private static final ImmutableMap<Class<? extends ItemMetaMock>, String> classMap =  ImmutableMap.<Class<? extends ItemMetaMock>, String>builder()
+			.put(ArmorMetaMock.class, "ARMOR")
+			.put(ArmorStandMetaMock.class, "ARMOR_STAND")
+			.put(BannerMetaMock.class, "BANNER")
+			.put(BlockStateMetaMock.class, "TILE_ENTITY")
+			.put(BookMetaMock.class, "BOOK")
+			// .put(BookSignedMetaMock.class, "BOOK_SIGNED")
+			.put(SkullMetaMock.class, "SKULL")
+			.put(LeatherArmorMetaMock.class, "LEATHER_ARMOR")
+			.put(ColorableArmorMetaMock.class, "COLORABLE_ARMOR")
+			.put(MapMetaMock.class, "MAP")
+			.put(PotionMetaMock.class, "POTION")
+			.put(ShieldMetaMock.class, "SHIELD")
+			.put(SpawnEggMetaMock.class, "SPAWN_EGG")
+			.put(EnchantmentStorageMetaMock.class, "ENCHANTED")
+			.put(FireworkMetaMock.class, "FIREWORK")
+			.put(FireworkEffectMetaMock.class, "FIREWORK_EFFECT")
+			.put(KnowledgeBookMetaMock.class, "KNOWLEDGE_BOOK")
+			.put(TropicalFishBucketMetaMock.class, "TROPICAL_FISH_BUCKET")
+			.put(AxolotlBucketMetaMock.class, "AXOLOTL_BUCKET")
+			.put(CrossbowMetaMock.class, "CROSSBOW")
+			.put(SuspiciousStewMetaMock.class, "SUSPICIOUS_STEW")
+			// .put(EntityTagMetaMock.class, "ENTITY_TAG")
+			.put(CompassMetaMock.class, "COMPASS")
+			.put(BundleMetaMock.class, "BUNDLE")
+			// .put(MusicInstrumentMetaMock.class, "MUSIC_INSTRUMENT")
+			.put(OminousBottleMetaMock.class, "OMINOUS_BOTTLE")
+			.put(ItemMetaMock.class, "UNSPECIFIC")
+			.build();;
+	private static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap;
 
 	static
 	{
-		classMap = ImmutableMap.<Class<? extends ItemMetaMock>, String>builder()
-				.put(ArmorMetaMock.class, "ARMOR")
-				.put(ArmorStandMetaMock.class, "ARMOR_STAND")
-				.put(BannerMetaMock.class, "BANNER")
-				.put(BlockStateMetaMock.class, "TILE_ENTITY")
-				.put(BookMetaMock.class, "BOOK")
-				// .put(BookSignedMetaMock.class, "BOOK_SIGNED")
-				.put(SkullMetaMock.class, "SKULL")
-				.put(LeatherArmorMetaMock.class, "LEATHER_ARMOR")
-				.put(ColorableArmorMetaMock.class, "COLORABLE_ARMOR")
-				.put(MapMetaMock.class, "MAP")
-				.put(PotionMetaMock.class, "POTION")
-				.put(ShieldMetaMock.class, "SHIELD")
-				.put(SpawnEggMetaMock.class, "SPAWN_EGG")
-				.put(EnchantmentStorageMetaMock.class, "ENCHANTED")
-				.put(FireworkMetaMock.class, "FIREWORK")
-				.put(FireworkEffectMetaMock.class, "FIREWORK_EFFECT")
-				.put(KnowledgeBookMetaMock.class, "KNOWLEDGE_BOOK")
-				.put(TropicalFishBucketMetaMock.class, "TROPICAL_FISH_BUCKET")
-				.put(AxolotlBucketMetaMock.class, "AXOLOTL_BUCKET")
-				.put(CrossbowMetaMock.class, "CROSSBOW")
-				.put(SuspiciousStewMetaMock.class, "SUSPICIOUS_STEW")
-				// .put(EntityTagMetaMock.class, "ENTITY_TAG")
-				.put(CompassMetaMock.class, "COMPASS")
-				.put(BundleMetaMock.class, "BUNDLE")
-				// .put(MusicInstrumentMetaMock.class, "MUSIC_INSTRUMENT")
-				.put(OminousBottleMetaMock.class, "OMINOUS_BOTTLE")
-				.put(ItemMetaMock.class, "UNSPECIFIC")
-				.build();
 
 		final ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> classConstructorBuilder = ImmutableMap.builder();
 		for (Map.Entry<Class<? extends ItemMetaMock>, String> mapping : classMap.entrySet())
