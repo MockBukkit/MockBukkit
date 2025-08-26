@@ -631,7 +631,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (this.hasAttributeModifiers())
 		{
-			map.put("attribute-modifiers", this.getAttributeModifiers());
+			map.put("minecraft:attribute_modifiers", this.getAttributeModifiers());
 		}
 		if (!this.getItemFlags().isEmpty())
 		{
