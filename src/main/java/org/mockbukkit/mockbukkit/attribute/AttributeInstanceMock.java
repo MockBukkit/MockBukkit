@@ -52,7 +52,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public @NotNull Collection<AttributeModifier> getModifiers()
 	{
-		return Collections.unmodifiableCollection(modifiers);
+		return new ArrayList<>(modifiers);
 	}
 
 	@Override
