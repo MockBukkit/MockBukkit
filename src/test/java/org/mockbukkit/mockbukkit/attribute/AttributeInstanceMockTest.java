@@ -413,7 +413,7 @@ class AttributeInstanceMockTest
 	@Test
 	void getModifier_NullKey_ThrowsException()
 	{
-		assertThrows(NullPointerException.class, () -> attributeInstance.getModifier((NamespacedKey) null));
+		assertThrows(IllegalArgumentException.class, () -> attributeInstance.getModifier((NamespacedKey) null));
 	}
 
 	@Test
