@@ -922,8 +922,8 @@ class ItemMetaMockTest
 		assertEquals("Test name", actual.get("minecraft:custom_name"));
 		assertEquals(List.of("Test lore"), actual.get("minecraft:lore"));
 		assertEquals(Maps.newHashMap(), actual.get("minecraft:unbreakable"));
-		assertEquals(5, actual.get("Damage"));
-		assertEquals(3, actual.get("repair-cost"));
+		assertEquals(5, actual.get("minecraft:damage"));
+		assertEquals(3, actual.get("minecraft:repair_cost"));
 	}
 
 	@Test

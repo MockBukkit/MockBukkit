@@ -722,19 +722,23 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			setLore(loreList);
 		}
 
-		damage = NbtParser.parseInteger(args.get("Damage"));
-		maxDamage = NbtParser.parseInteger(args.get("MaxDamage"));
-		repairCost = NbtParser.parseInteger(args.get("repair-cost"), 0);
+		damage = NbtParser.parseInteger(args.get("minecraft:damage"));
+		maxDamage = NbtParser.parseInteger(args.get("minecraft:max_damage"));
+		repairCost = NbtParser.parseInteger(args.get("minecraft:repair_cost"), 0);
 		enchants = new HashMap<>();
-		for (Map.Entry<String, Integer> entry : NbtParser.parseMap(args.get("minecraft:enchantments"), NbtParser::parseInteger).entrySet())
+		Map<String, Integer> enchantMap = NbtParser.parseMap(args.get("minecraft:enchantments"), NbtParser::parseInteger);
+		if (enchantMap != null)
 		{
-			Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.fromString(entry.getKey()));
-			if (enchantment != null)
+			for (Map.Entry<String, Integer> entry : enchantMap.entrySet())
 			{
-				enchants.put(enchantment, entry.getValue());
+				Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.fromString(entry.getKey()));
+				if (enchantment != null)
+				{
+					enchants.put(enchantment, entry.getValue());
+				}
 			}
 		}
-		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
+		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("minecraft:attribute_modifiers"));
 		Set<ItemFlag> tempSet = NbtParser.parseSet(args.get("ItemFlags"), o -> NbtParser.parseEnum(o, ItemFlag.class));
 		if (tempSet != null)
 		{
@@ -747,7 +751,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		unbreakable = args.containsKey("minecraft:unbreakable");
 		// customTagContainer is also unimplemented in mock.
-		customModelData = (Integer) args.get("custom-model-data");
+		customModelData = NbtParser.parseInteger(args.get("minecraft:custom_model_data"));
 		hideTooltip = NbtParser.parseBoolean(args.get("HideTooltip"), false);
 		fireResistant = NbtParser.parseBoolean(args.get("FireResistant"), false);
 		maxStackSize = NbtParser.parseInteger(args.get("MaxStackSize"));
