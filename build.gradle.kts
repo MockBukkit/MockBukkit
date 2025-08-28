@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	api("org.jetbrains:annotations:26.0.2")
 	api("org.hamcrest:hamcrest:3.0")
 
