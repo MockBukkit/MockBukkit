@@ -53,7 +53,6 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 >
 > [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21)
 
-
 > Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly
 > tagged
 
@@ -71,6 +70,7 @@ repositories {
 
 dependencies {
     testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:[version]'
+    testImplementation 'io.papermc.paper:paper-api:[version]'
 }
 ```
 
@@ -85,6 +85,7 @@ repositories {
 
 dependencies {
     testImplementation 'com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT'
+    testImplementation 'io.papermc.paper:paper-api:[version]'
 }
 ```
 
@@ -112,12 +113,18 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
 </repositories>
 
 <dependencies>
-  <dependency>
-    <groupId>org.mockbukkit.mockbukkit</groupId>
-    <artifactId>mockbukkit-v1.21</artifactId>
-    <version>[version]</version>
-    <scope>test</scope>
-  </dependency>
+    <dependency>
+        <groupId>org.mockbukkit.mockbukkit</groupId>
+        <artifactId>mockbukkit-v1.21</artifactId>
+        <version>[version]</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.papermc.paper</groupId>
+        <artifactId>paper-api</artifactId>
+        <version>[version]</version>
+        <version>test</version>
+    </dependency>
 </dependencies>
 ```
 
@@ -140,12 +147,18 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
 </repositories>
 
 <dependencies>
-  <dependency>
-    <groupId>com.github.MockBukkit</groupId>
-    <artifactId>MockBukkit</artifactId>
-    <version>v1.21-SNAPSHOT</version>
-    <scope>test</scope>
-  </dependency>
+    <dependency>
+        <groupId>com.github.MockBukkit</groupId>
+        <artifactId>MockBukkit</artifactId>
+        <version>v1.21-SNAPSHOT</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.papermc.paper</groupId>
+        <artifactId>paper-api</artifactId>
+        <version>[version]</version>
+        <version>test</version>
+    </dependency>
 </dependencies>
 ```
 
