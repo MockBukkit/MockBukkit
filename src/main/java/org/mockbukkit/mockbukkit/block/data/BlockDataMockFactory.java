@@ -9,6 +9,7 @@ import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
+import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
@@ -20,9 +21,11 @@ import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.EnderChest;
+import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
@@ -36,6 +39,7 @@ import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.NotNull;
 
@@ -74,10 +78,13 @@ public final class BlockDataMockFactory
 			.put(Bamboo.class, m -> new BambooDataMock())
 			.put(Brushable.class, BrushableDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
+			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(EnderChest.class, EnderChestDataMock::new)
+			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
+			.put(Hatchable.class, HatchableDataMock::new)
 			.put(Hopper.class, HopperDataMock::new)
 			.put(Lectern.class, LecternDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
@@ -88,6 +95,7 @@ public final class BlockDataMockFactory
 			.put(TestBlock.class, TestBlockDataMock::new)
 			.put(TNT.class, TNTDataMock::new)
 			.put(TrialSpawner.class, TrialSpawnerDataMock::new)
+			.put(TurtleEgg.class, TurtleEggDataMock::new)
 			.put(Vault.class, VaultDataMock::new)
 			.put(Barrel.class, BarrelDataMock::new)
 			.put(Sapling.class, SaplingDataMock::new)

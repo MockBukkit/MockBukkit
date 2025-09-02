@@ -846,7 +846,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenFarmland()
 		{
 			Farmland data = BlockType.FARMLAND.createBlockData();
@@ -1004,7 +1003,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCommandBlock()
 		{
 			CommandBlock data = BlockType.COMMAND_BLOCK.createBlockData();
@@ -1056,7 +1054,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenTurtleEgg()
 		{
 			TurtleEgg data = BlockType.TURTLE_EGG.createBlockData();
@@ -1065,7 +1062,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHatchable()
 		{
 			Hatchable data = BlockType.SNIFFER_EGG.createBlockData();

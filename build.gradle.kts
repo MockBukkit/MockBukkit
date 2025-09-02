@@ -17,8 +17,10 @@ repositories {
 }
 
 dependencies {
-	// Paper API
-	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	// Paper API - compileOnly + testImplementation to avoid snapshot issues in Maven Central
+	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+
 	api("org.jetbrains:annotations:26.0.2")
 	api("org.hamcrest:hamcrest:3.0")
 
@@ -52,7 +54,10 @@ tasks {
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit"
+				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit",
+				"Paper-Version" to project.property("paper.api.full-version").toString(),
+				"Paper-API-Version" to project.property("paper.api.version").toString(),
+				"MockBukkit-Version" to getFullVersion()
 			)
 		}
 	}
