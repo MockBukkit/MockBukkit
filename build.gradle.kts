@@ -54,8 +54,8 @@ tasks {
 		manifest {
 			attributes(
 				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit",
-				"Paper-Version" to property("paper.api.full-version").toString(),
-				"Paper-API-Version" to property("paper.api.version").toString(),
+				"Paper-Version" to project.property("paper.api.full-version").toString(),
+				"Paper-API-Version" to project.property("paper.api.version").toString(),
 				"MockBukkit-Version" to getFullVersion()
 			)
 		}
