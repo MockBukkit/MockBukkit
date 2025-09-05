@@ -39,10 +39,10 @@ dependencies {
 
 	implementation("net.bytebuddy:byte-buddy:1.17.7")
 
-	compileOnly("org.projectlombok:lombok:1.18.38")
-	annotationProcessor("org.projectlombok:lombok:1.18.38")
-	testCompileOnly("org.projectlombok:lombok:1.18.38")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+	compileOnly("org.projectlombok:lombok:1.18.40")
+	annotationProcessor("org.projectlombok:lombok:1.18.40")
+	testCompileOnly("org.projectlombok:lombok:1.18.40")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.40")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
