@@ -2,13 +2,17 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +21,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 {
 
@@ -107,7 +112,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BundleMetaMock clone()
 	{
 		return new BundleMetaMock(this);
@@ -124,7 +129,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	{
 		BundleMetaMock serialMock = new BundleMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.items = args.get("items") == null ? new ArrayList<>() : (List<ItemStack>) args.get("items");
+		serialMock.items = args.get("items") == null ? new ArrayList<>() : SerializationUtils.deserialize((Collection<Object>) args.get("items"));
 		return serialMock;
 	}
 
@@ -138,7 +143,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("items", this.items);
+		serialized.put("items", SerializationUtils.serialize(this.items));
 		return serialized;
 	}
 

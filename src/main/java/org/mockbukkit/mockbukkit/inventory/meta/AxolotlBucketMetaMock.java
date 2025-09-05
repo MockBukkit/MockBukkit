@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
@@ -12,6 +15,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucketMeta
 {
 
@@ -82,7 +86,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull AxolotlBucketMetaMock clone()
 	{
 		return new AxolotlBucketMetaMock(this);
@@ -98,7 +102,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	{
 		AxolotlBucketMetaMock serialMock = new AxolotlBucketMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.variant = (Axolotl.Variant) args.get("variant");
+		serialMock.variant = NbtParser.parseEnum(args.get("variant"), Axolotl.Variant.class);
 		return serialMock;
 	}
 

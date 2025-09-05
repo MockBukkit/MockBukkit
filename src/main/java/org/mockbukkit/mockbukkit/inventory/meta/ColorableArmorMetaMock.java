@@ -1,19 +1,23 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
+@DelegateDeserialization(SerializableMeta.class)
 public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableArmorMeta
 {
 
-	private @Nullable Integer color;
+	static final int DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540).asARGB();
 
-	static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
+	private @Nullable Integer color;
 
 	/**
 	 * Constructs a new {@link ColorableArmorMetaMock}.
@@ -34,20 +38,20 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 
 		if (meta instanceof ColorableArmorMeta colorableArmorMeta)
 		{
-			this.color = colorableArmorMeta.isDyed() ? colorableArmorMeta.getColor().asRGB() : null;
+			this.color = colorableArmorMeta.isDyed() ? colorableArmorMeta.getColor().asARGB() : null;
 		}
 	}
 
 	@Override
 	public @NotNull Color getColor()
 	{
-		return this.color == null ? DEFAULT_LEATHER_COLOR : Color.fromRGB(this.color & 0xFFFFFF);
+		return this.color == null ? Color.fromARGB(DEFAULT_LEATHER_COLOR) : Color.fromARGB(this.color);
 	}
 
 	@Override
 	public void setColor(@Nullable Color color)
 	{
-		this.color = color == null ? null : color.asRGB(); // Paper
+		this.color = (color == null ? null : color.asARGB());
 	}
 
 	@Override
@@ -84,7 +88,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ColorableArmorMetaMock clone()
 	{
 		return new ColorableArmorMetaMock(this);
@@ -96,7 +100,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		Map<String, Object> serialized = super.serialize();
 		if (this.isDyed())
 		{
-			serialized.put("color", this.getColor());
+			serialized.put("color", this.getColor().serialize());
 		}
 		return serialized;
 	}
@@ -107,8 +111,14 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		super.deserializeInternal(args);
 		if (args.containsKey("color"))
 		{
-			this.color = (int) args.get("color");
+			this.color = Color.deserialize(NbtParser.parseMap(args.get("color"), NbtParser::parseDouble)).asARGB();
 		}
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "COLORABLE_ARMOR";
 	}
 
 	public static ColorableArmorMetaMock deserialize(Map<String, Object> serialized)

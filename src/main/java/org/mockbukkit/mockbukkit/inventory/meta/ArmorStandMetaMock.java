@@ -4,8 +4,10 @@ import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @EqualsAndHashCode(callSuper = true)
+@DelegateDeserialization(SerializableMeta.class)
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
@@ -106,7 +109,7 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	 * @return a cloned instance of this armor stand meta
 	 */
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ArmorStandMetaMock clone()
 	{
 		return new ArmorStandMetaMock(this);

@@ -1,20 +1,24 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import lombok.EqualsAndHashCode;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
+import org.codehaus.plexus.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -22,6 +26,8 @@ import java.util.UUID;
  *
  * @see ItemMetaMock
  */
+@EqualsAndHashCode(callSuper = true)
+@DelegateDeserialization(SerializableMeta.class)
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
 
@@ -53,37 +59,10 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SkullMetaMock clone()
 	{
 		return new SkullMetaMock(this);
-	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + (playerProfile == null ? 0 : playerProfile.hashCode());
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (!super.equals(obj))
-		{
-			return false;
-		}
-		if (!(obj instanceof SkullMeta other))
-		{
-			return false;
-		}
-
-		return playerProfile == other.getOwningPlayer() || Objects.equals(playerProfile.getName(), other.getOwningPlayer().getName());
 	}
 
 	@Override
@@ -96,7 +75,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	public boolean hasOwner()
 	{
-		return playerProfile != null && !playerProfile.getName().isEmpty();
+		return playerProfile != null && !StringUtils.isEmpty(playerProfile.getName());
 	}
 
 	@Override
@@ -215,7 +194,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		SkullMetaMock serialMock = new SkullMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.playerProfile = (com.destroystokyo.paper.profile.PlayerProfile) args.get("player-profile");
+		serialMock.playerProfile = PlayerProfileMock.deserialize((Map<String, Object>) args.get("player-profile"));
 		return serialMock;
 	}
 
@@ -231,7 +210,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		final Map<String, Object> serialized = super.serialize();
 		if (playerProfile != null)
 		{
-			serialized.put("player-profile", playerProfile);
+			serialized.put("player-profile", SerializationUtils.serialize(playerProfile));
 		}
 		return serialized;
 	}

@@ -3,12 +3,14 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
 import lombok.EqualsAndHashCode;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,6 +23,7 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @EqualsAndHashCode(callSuper = true)
+@DelegateDeserialization(SerializableMeta.class)
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 
@@ -50,7 +53,7 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SuspiciousStewMetaMock clone()
 	{
 		return new SuspiciousStewMetaMock(this);

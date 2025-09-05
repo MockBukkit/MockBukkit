@@ -118,7 +118,7 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TrapDoorDataMock clone()
 	{
 		return new TrapDoorDataMock(this);

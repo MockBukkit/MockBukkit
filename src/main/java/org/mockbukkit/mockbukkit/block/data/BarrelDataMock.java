@@ -63,7 +63,7 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BarrelDataMock clone()
 	{
 		return new BarrelDataMock(this);

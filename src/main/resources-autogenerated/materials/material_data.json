@@ -2945,7 +2945,9 @@
 		}
 	},
 	"minecraft:farmland": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxMoisture": "7"
+		},
 		"defaultStates": {
 			"moisture": "0"
 		}
@@ -6658,7 +6660,9 @@
 		}
 	},
 	"minecraft:sniffer_egg": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxHatch": "2"
+		},
 		"defaultStates": {
 			"hatch": "0"
 		}
@@ -7388,7 +7392,11 @@
 		}
 	},
 	"minecraft:turtle_egg": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxEggs": "4",
+			"maxHatch": "2",
+			"minEggs": "1"
+		},
 		"defaultStates": {
 			"eggs": "1",
 			"hatch": "0"

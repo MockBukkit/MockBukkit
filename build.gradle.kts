@@ -1,5 +1,3 @@
-import java.io.ByteArrayOutputStream
-
 plugins {
 	id("checkstyle")
 	id("java-library")
@@ -19,8 +17,10 @@ repositories {
 }
 
 dependencies {
-	// Paper API
-	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	// Paper API - compileOnly + testImplementation to avoid snapshot issues in Maven Central
+	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+
 	api("org.jetbrains:annotations:26.0.2")
 	api("org.hamcrest:hamcrest:3.0")
 
@@ -29,6 +29,7 @@ dependencies {
 	testImplementation(platform("org.junit:junit-bom:5.13.4"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
@@ -38,10 +39,10 @@ dependencies {
 
 	implementation("net.bytebuddy:byte-buddy:1.17.7")
 
-	compileOnly("org.projectlombok:lombok:1.18.38")
-	annotationProcessor("org.projectlombok:lombok:1.18.38")
-	testCompileOnly("org.projectlombok:lombok:1.18.38")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+	compileOnly("org.projectlombok:lombok:1.18.40")
+	annotationProcessor("org.projectlombok:lombok:1.18.40")
+	testCompileOnly("org.projectlombok:lombok:1.18.40")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.40")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -53,7 +54,10 @@ tasks {
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit"
+				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit",
+				"Paper-Version" to project.property("paper.api.full-version").toString(),
+				"Paper-API-Version" to project.property("paper.api.version").toString(),
+				"MockBukkit-Version" to getFullVersion()
 			)
 		}
 	}
@@ -228,10 +232,10 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val stdout = ByteArrayOutputStream()
-	exec {
-		commandLine(*cmd)
-		standardOutput = stdout
-	}
-	return stdout.toString().trim()
+	val process = ProcessBuilder()
+		.command(*cmd)
+		.directory(rootProject.projectDir)
+		.start()
+	process.waitFor(5, TimeUnit.SECONDS)
+	return process.inputStream.bufferedReader().readText().trim()
 }

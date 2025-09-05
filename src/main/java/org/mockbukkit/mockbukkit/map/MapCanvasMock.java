@@ -8,7 +8,8 @@ import org.bukkit.map.MapPalette;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 

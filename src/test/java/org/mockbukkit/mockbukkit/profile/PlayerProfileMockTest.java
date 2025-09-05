@@ -2,10 +2,12 @@ package org.mockbukkit.mockbukkit.profile;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
 import org.bukkit.profile.PlayerTextures;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.platform.commons.util.CollectionUtils;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -14,8 +16,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -219,6 +224,60 @@ class PlayerProfileMockTest
 		PlayerProfileMock profile2 = new PlayerProfileMock("Test2", uuid2);
 
 		assertNotEquals(profile1, profile2);
+	}
+
+	@Nested
+	class Deserialize
+	{
+
+		@Test
+		void givenSimpleExampleWithoutProperties()
+		{
+			UUID sampleUuid = UUID.fromString("5ff0d994-5787-4741-85f0-e21234a7bf23");
+
+			Map<String, Object> data = new HashMap<>();
+			data.put("uniqueId", sampleUuid.toString());
+			data.put("name", "4ever");
+
+			PlayerProfileMock profile = PlayerProfileMock.deserialize(data);
+
+			assertEquals(sampleUuid, profile.getId());
+			assertEquals("4ever", profile.getName());
+			assertEquals(Collections.emptySet(), profile.getProperties());
+		}
+
+		@Test
+		void givenCustomProperties()
+		{
+			UUID sampleUuid = UUID.fromString("5ff0d994-5787-4741-85f0-e21234a7bf23");
+
+			Map<String, Object> data = new HashMap<>();
+			data.put("uniqueId", sampleUuid.toString());
+			data.put("name", "4ever");
+
+			List<Map<String, Object>> properties = new ArrayList<>();
+			properties.add(Map.of(
+				"name", "name-value",
+				"value", "value-value",
+				"signature", "signature-value"
+			));
+
+			data.put("properties", properties);
+
+			PlayerProfileMock profile = PlayerProfileMock.deserialize(data);
+
+			assertEquals(sampleUuid, profile.getId());
+			assertEquals("4ever", profile.getName());
+
+			Set<ProfileProperty> actualProperties = profile.getProperties();
+			assertEquals(1, actualProperties.size());
+
+			ProfileProperty property = CollectionUtils.getFirstElement(actualProperties).orElseThrow();
+			assertEquals("name-value", property.getName());
+			assertEquals("value-value", property.getValue());
+			assertEquals("signature-value", property.getSignature());
+		}
+
 	}
 
 }

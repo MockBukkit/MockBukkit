@@ -2,11 +2,14 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +19,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 {
 
@@ -112,7 +116,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CompassMetaMock clone()
 	{
 		return new CompassMetaMock(this);
@@ -128,7 +132,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	{
 		CompassMetaMock serialMock = new CompassMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.lodestone = (Location) args.get("lodestone");
+		serialMock.lodestone = Location.deserialize((Map<String, Object>) args.get("lodestone"));
 		serialMock.tracked = (boolean) args.get("tracked");
 		return serialMock;
 	}
@@ -145,7 +149,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 		final Map<String, Object> serialized = super.serialize();
 		if (this.lodestone != null)
 		{
-			serialized.put("lodestone", this.lodestone);
+			serialized.put("lodestone", SerializationUtils.serialize(this.lodestone));
 		}
 		serialized.put("tracked", this.tracked);
 		return serialized;

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
@@ -9,10 +10,12 @@ import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@DelegateDeserialization(SerializableMeta.class)
 public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 {
 
@@ -52,7 +55,7 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ArmorMetaMock clone()
 	{
 		return new ArmorMetaMock(this);
@@ -85,6 +88,21 @@ public class ArmorMetaMock extends ItemMetaMock implements ArmorMeta
 		}
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "ARMOR";
+	}
+
+	/**
+	 * This method is used to deserialize the armor meta.
+	 *
+	 * @param args The data to be deserialized.
+	 *
+	 * @return The armor deserialized.
+	 *
+	 * @see org.bukkit.configuration.serialization.ConfigurationSerializable
+	 */
 	public static @NotNull ArmorMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		ArmorMetaMock armorMetaMock = new ArmorMetaMock();

@@ -3,13 +3,17 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Material;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -19,6 +23,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 {
 
@@ -112,7 +117,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CrossbowMetaMock clone()
 	{
 		return new CrossbowMetaMock(this);
@@ -129,7 +134,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		CrossbowMetaMock serialMock = new CrossbowMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.projectiles = (List<ItemStack>) args.get("projectiles");
+		serialMock.projectiles = SerializationUtils.deserialize((Collection<Object>) args.get("projectiles"));
 		return serialMock;
 	}
 
@@ -143,7 +148,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("projectiles", this.projectiles);
+		serialized.put("projectiles", SerializationUtils.serialize(this.projectiles));
 		return serialized;
 	}
 

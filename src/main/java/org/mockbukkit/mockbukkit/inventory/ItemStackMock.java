@@ -3,13 +3,12 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import io.papermc.paper.persistence.PersistentDataContainerView;
-import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
@@ -30,6 +29,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+
+@DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
 {
 
@@ -72,13 +73,8 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = stack.getType().asItemType();
 		this.amount = stack.getAmount();
-		this.durability = stack.getDurability();
-
-		ItemMeta otherMeta = stack.getItemMeta();
-		if (otherMeta != null)
-		{
-			setItemMeta(otherMeta.clone());
-		}
+		this.durability = initDurability(this.type);
+		setItemMeta(stack.getItemMeta());
 	}
 
 	public ItemStackMock(@NotNull Material type, int amount)
@@ -374,8 +370,8 @@ public class ItemStackMock extends ItemStack
 		return EMPTY.clone();
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ItemStack clone()
 	{
 		return new ItemStackMock(this);
@@ -391,7 +387,7 @@ public class ItemStackMock extends ItemStack
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.itemMeta, bukkit.getItemMeta());
+			return isSimilar(bukkit) && this.getAmount() == bukkit.getAmount() && this.getDurability() == bukkit.getDurability() && Objects.equals(this.getItemMeta(), bukkit.getItemMeta());
 		}
 		else
 		{
@@ -447,80 +443,7 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		int version = (args.containsKey("v")) ? ((Number) args.get("v")).intValue() : -1;
-		short damage = 0;
-		int amount = 1;
-		String damageKey = "damage";
-
-		if (args.containsKey(damageKey))
-		{
-			damage = ((Number) args.get(damageKey)).shortValue();
-		}
-
-		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
-
-		if (args.containsKey(FIELD_AMOUNT))
-		{
-			amount = ((Number) args.get(FIELD_AMOUNT)).intValue();
-		}
-
-		ItemStack result = new ItemStackMock(type, amount);
-
-		if (args.containsKey("enchantments"))
-		{
-			handleLegacyEnchantmentsForDeserialization(args, result);
-		}
-		else if (args.containsKey("meta"))
-		{
-			handleMetaForDeserialization(args, version, result);
-		}
-
-		if (version < 0 && args.containsKey(damageKey))
-		{
-			// Set damage again incase meta overwrote it
-			result.setDurability(damage);
-		}
-		return result;
-	}
-
-	private static void handleMetaForDeserialization(@NotNull Map<String, Object> args, int version, ItemStack result)
-	{
-		// We cannot and will not have meta when enchantments (pre-ItemMeta) exist
-		Object raw = args.get("meta");
-		if (raw instanceof ItemMeta)
-		{
-			//((ItemMeta) raw).setVersion(version); //TODO uncomment when setVersion is implemented
-			// Paper start - for pre 1.20.5 itemstacks, add HIDE_STORED_ENCHANTS flag if HIDE_ADDITIONAL_TOOLTIP is set
-			if (version < 3837 && ((ItemMeta) raw).hasItemFlag(ItemFlag.HIDE_ADDITIONAL_TOOLTIP))
-			{ // 1.20.5
-				((ItemMeta) raw).addItemFlags(ItemFlag.HIDE_STORED_ENCHANTS);
-			}
-			// Paper end
-			result.setItemMeta((ItemMeta) raw);
-		}
-	}
-
-	private static void handleLegacyEnchantmentsForDeserialization(@NotNull Map<String, Object> args, ItemStack result)
-	{
-		// Backward compatiblity, @deprecated
-		Object raw = args.get("enchantments");
-
-		if (raw instanceof Map<?, ?> map)
-		{
-			for (Map.Entry<?, ?> entry : map.entrySet())
-			{
-				String stringKey = entry.getKey().toString();
-				stringKey = Bukkit.getUnsafe().get(Enchantment.class, stringKey);
-				NamespacedKey key = NamespacedKey.fromString(stringKey.toLowerCase(Locale.ROOT));
-
-				Enchantment enchantment = Bukkit.getUnsafe().get(RegistryKey.ENCHANTMENT, key);
-
-				if ((enchantment != null) && (entry.getValue() instanceof Integer))
-				{
-					result.addUnsafeEnchantment(enchantment, (Integer) entry.getValue());
-				}
-			}
-		}
+		return Bukkit.getUnsafe().deserializeStack(args);
 	}
 
 }

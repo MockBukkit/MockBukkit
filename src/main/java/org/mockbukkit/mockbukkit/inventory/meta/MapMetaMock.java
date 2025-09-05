@@ -1,12 +1,15 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +19,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class MapMetaMock extends ItemMetaMock implements MapMeta
 {
 
@@ -184,7 +188,7 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull MapMetaMock clone()
 	{
 		return new MapMetaMock(this);
@@ -200,13 +204,13 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		MapMetaMock serialMock = new MapMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.mapId = (Integer) args.get("map-id");
+		serialMock.mapId = NbtParser.parseInteger(args.get("map-id"));
 		serialMock.mapView = (MapView) args.get("map-view");
 		if (args.containsKey("color"))
 		{
 			serialMock.color = Color.fromARGB((int) args.get("color"));
 		}
-		serialMock.scaling = (byte) args.get("scaling");
+		serialMock.scaling = NbtParser.parseByte(args.get("scaling"));
 		return serialMock;
 	}
 

@@ -48,7 +48,7 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SaplingDataMock clone()
 	{
 		return new SaplingDataMock(this);

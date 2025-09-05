@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -7,6 +8,7 @@ import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 {
 
@@ -87,7 +90,7 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SpawnEggMetaMock clone()
 	{
 		return new SpawnEggMetaMock(this);

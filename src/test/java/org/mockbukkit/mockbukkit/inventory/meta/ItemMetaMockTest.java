@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.reflect.ClassPath;
 import com.google.gson.JsonElement;
@@ -918,11 +919,11 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals("\"Test name\"", actual.get("display-name"));
-		assertEquals(List.of("\"Test lore\""), actual.get("lore"));
-		assertEquals(true, actual.get("Unbreakable"));
-		assertEquals(5, actual.get("Damage"));
-		assertEquals(3, actual.get("repair-cost"));
+		assertEquals("Test name", actual.get("minecraft:custom_name"));
+		assertEquals(List.of("Test lore"), actual.get("minecraft:lore"));
+		assertEquals(Maps.newHashMap(), actual.get("minecraft:unbreakable"));
+		assertEquals(5, actual.get("minecraft:damage"));
+		assertEquals(3, actual.get("minecraft:repair_cost"));
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -12,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class BookMetaMock extends ItemMetaMock implements BookMeta
 {
 
@@ -343,10 +347,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		BookMetaMock serialMock = new BookMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.title = (String) args.get("title");
-		serialMock.author = (String) args.get("author");
-		serialMock.pages = (List<String>) args.get("pages");
-		serialMock.generation = (Generation) args.get("generation");
+		serialMock.title = NbtParser.parseString(args.get("title"));
+		serialMock.author = NbtParser.parseString(args.get("author"));
+		serialMock.pages = NbtParser.parseList(args.get("pages"), NbtParser::parseString);
+		serialMock.generation = NbtParser.parseEnum(args.get("generation"), BookMeta.Generation.class);
 
 		return serialMock;
 	}

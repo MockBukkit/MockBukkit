@@ -21,6 +21,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
+import org.bukkit.Registry;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
@@ -29,7 +30,6 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
 import org.bukkit.damage.DamageSource;
@@ -40,12 +40,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
+import org.bukkit.util.io.BukkitObjectInputStream;
+import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,17 +56,17 @@ import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
 import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
-import org.mockbukkit.mockbukkit.util.io.BukkitObjectInputStreamMock;
-import org.mockbukkit.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.ByteBuffer;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -89,9 +92,9 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.20",
 					"1.21"
 			);
+	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
 
 	private String minimumApiVersion = "none";
-	private Biome customBiome;
 
 	@Override
 	public @NotNull ComponentFlattener componentFlattener()
@@ -295,9 +298,9 @@ public class UnsafeValuesMock implements UnsafeValues
 		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		try
 		{
-			bao.write(ByteBuffer.allocate(4).putInt(item.getAmount()).array());
-			final ObjectOutputStream oos = new BukkitObjectOutputStreamMock(bao);
-			oos.writeObject(item);
+			@NotNull Map<String, Object> stack = this.serializeStack(item);
+			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
+			oos.writeObject(stack);
 			return bao.toByteArray();
 		}
 		catch (IOException e)
@@ -314,11 +317,13 @@ public class UnsafeValuesMock implements UnsafeValues
 		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
 		try
 		{
-			int amount = ByteBuffer.wrap(bai.readNBytes(4)).getInt();
-			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
-			ItemStackMock stack = (ItemStackMock) ois.readObject();
-			stack.setAmount(amount);
-			return stack;
+			final ObjectInputStream ois = new BukkitObjectInputStream(bai);
+			if (bai.available() <= 0)
+			{
+				return null;
+			}
+			Map<String, Object> stack = (Map<String, Object>) ois.readObject();
+			return this.deserializeStack(stack);
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
@@ -329,15 +334,15 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> map = serializeStack(itemStack);
+		return SerializationUtils.createDefaultBuilder().toJsonTree(map).getAsJsonObject();
 	}
 
 	@Override
 	public @NotNull ItemStack deserializeItemFromJson(@NotNull JsonObject jsonObject) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> args = SerializationUtils.createDefaultBuilder().fromJson(jsonObject, Map.class);
+		return deserializeStack(args);
 	}
 
 	@Override
@@ -603,13 +608,57 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull Map<String, Object> serializeStack(ItemStack itemStack)
 	{
-		throw new UnimplementedOperationException();
+		if (itemStack.isEmpty())
+		{
+			return Map.of(
+					"id", "minecraft:air",
+					"DataVersion", this.getDataVersion(),
+					PROPERTY_SCHEMA_VERSION, 1);
+		}
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("id", itemStack.getType().getKey().asString());
+		result.put("count", itemStack.getAmount());
+		result.put("DataVersion", this.getDataVersion());
+		result.put(PROPERTY_SCHEMA_VERSION, 1);
+		result.put("components", itemStack.getItemMeta().serialize());
+
+		return result;
 	}
 
 	@Override
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
-		throw new UnimplementedOperationException();
+		@SuppressWarnings({ "java:S1481", "java:S1854" })
+		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
+		final String id = (String) args.get("id");
+		final int amount = ((Number) args.get("count")).intValue();
+		final Map<String, Object> components = (Map<String, Object>) args.get("components");
+
+		NamespacedKey key = NamespacedKey.fromString(id);
+		Material material = Registry.MATERIAL.get(key);
+
+		if (material == null || material.isAir())
+		{
+			return ItemStackMock.empty();
+		}
+
+		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
+		if (components != null)
+		{
+			try
+			{
+				@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
+				Preconditions.checkArgument(meta != null, "Invalid item meta type");
+				itemstack.setItemMeta(meta);
+			}
+			catch (Exception e)
+			{
+				throw new IllegalArgumentException("Error while deserializing item meta", e);
+			}
+		}
+
+		return itemstack;
 	}
 
 	@Override

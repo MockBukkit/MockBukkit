@@ -83,7 +83,7 @@ public class RedstoneWireDataMock extends BlockDataMock implements RedstoneWire
 	}
 
 	@Override
-	@SuppressWarnings({"java:S2975", "java:S1182"})
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RedstoneWireDataMock clone()
 	{
 		return new RedstoneWireDataMock(this);

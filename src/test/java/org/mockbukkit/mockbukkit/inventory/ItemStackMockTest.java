@@ -230,7 +230,7 @@ class ItemStackMockTest
 	@Test
 	void notEquals_changedDurability_weirdEdgeCase()
 	{
-		ItemStack itemStack = new ItemStack(Material.DIAMOND);
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemStack cloned = itemStack.clone();
 		cloned.setDurability((short) 10);
 		assertNotEquals(itemStack, cloned);
@@ -537,12 +537,14 @@ class ItemStackMockTest
 	{
 		ItemStack base = new ItemStack(Material.DIAMOND);
 		ItemStack itm = new ItemStack(Material.DIAMOND_PICKAXE);
+		assertNotEquals(base, itm);
 
 		itm.setDurability((short) 1);
-		itm.setType(Material.DIAMOND);
-
-		assertEquals(0, itm.getDurability());
 		assertNotEquals(base, itm);
+
+		itm.setType(Material.DIAMOND);
+		assertEquals(0, itm.getDurability());
+		assertEquals(base, itm);
 	}
 
 	@Test

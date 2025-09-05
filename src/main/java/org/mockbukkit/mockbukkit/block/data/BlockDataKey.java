@@ -5,11 +5,13 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Orientation;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.AnaloguePowerable;
+import org.bukkit.block.data.Attachable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.MultipleFacing;
@@ -25,9 +27,11 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
@@ -39,7 +43,9 @@ import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
+import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -137,7 +143,7 @@ public enum BlockDataKey
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	NORTH("north", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	SOUTH("south", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	UP("up", Boolean::parseBoolean, MultipleFacing.class::isInstance),
+	UP("up", Boolean::parseBoolean, o -> o instanceof MultipleFacing || o instanceof Wall),
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
@@ -165,7 +171,14 @@ public enum BlockDataKey
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
 
-	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
+	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
+	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
+
+	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
+	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance),
+	HATCH("hatch", Integer::parseInt, Hatchable.class::isInstance),
+	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance);
+
 
 	private static final Set<String> KEYS = compileKeys();
 
