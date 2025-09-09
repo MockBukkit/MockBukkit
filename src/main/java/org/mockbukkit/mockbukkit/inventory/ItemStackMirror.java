@@ -11,6 +11,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Material;
 import org.bukkit.UndefinedNullability;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -41,6 +42,7 @@ import java.util.function.UnaryOperator;
  * @see ItemStack
  */
 @ApiStatus.Internal
+@DelegateDeserialization(ItemStack.class)
 public final class ItemStackMirror extends ItemStack
 {
 
