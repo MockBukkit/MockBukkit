@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
@@ -59,6 +60,48 @@ class BisectedDataMockTest
 		assertNotEquals(bisected, cloned);
 		assertEquals(Bisected.Half.TOP, bisected.getHalf());
 		assertEquals(Bisected.Half.BOTTOM, cloned.getHalf());
+	}
+
+	@Nested
+	class Encoder
+	{
+
+		@ParameterizedTest
+		@CsvSource(value = {
+			"null, null",
+			"TOP, 'upper'",
+			"BOTTOM, 'lower'"
+		}, nullValues = "null")
+		void validatePossibilities(Bisected.Half half, String expected)
+		{
+			Object actual = BisectedDataMock.HalfEncoder.INSTANCE.apply(half);
+			assertEquals(expected, actual);
+		}
+
+	}
+
+	@Nested
+	class Decoder
+	{
+
+		@ParameterizedTest
+		@CsvSource(value = {
+				"null, null",
+				"'upper', TOP",
+				"'Upper', TOP",
+				"'lower', BOTTOM",
+				"'LOWER', BOTTOM",
+				"'top', TOP",
+				"'tOp', TOP",
+				"'bottom', BOTTOM",
+				"'BoTtOm', BOTTOM"
+		}, nullValues = "null")
+		void validatePossibilities(String half, Bisected.Half expected)
+		{
+			Object actual = BisectedDataMock.HalfDecoder.INSTANCE.apply(half);
+			assertEquals(expected, actual);
+		}
+
 	}
 
 }

@@ -47,10 +47,12 @@ import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
 import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -75,7 +77,7 @@ public enum BlockDataKey
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 */
-	HALF("half", string -> Bisected.Half.valueOf(string.toUpperCase(Locale.ROOT)), Bisected.class::isInstance),
+	HALF("half",  BisectedDataMock.HalfDecoder.INSTANCE, BisectedDataMock.HalfEncoder.INSTANCE, Bisected.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Lightable} is list.
@@ -184,13 +186,23 @@ public enum BlockDataKey
 
 	private final String key;
 	private final Function<String, Object> valueConstructor;
+	private final Function<Object, Object> valueMapper;
 	private final Predicate<BlockData> applicableTo;
 
 	BlockDataKey(String key, Function<String, Object> valueConstructor, Predicate<BlockData> applicableTo)
 	{
-		this.key = key;
-		this.valueConstructor = valueConstructor;
-		this.applicableTo = applicableTo;
+		this(key, valueConstructor, Function.identity(), applicableTo);
+	}
+
+	BlockDataKey(@NotNull String key,
+				 @NotNull Function<String, Object> valueConstructor,
+				 @NotNull Function<Object, Object> valueMapper,
+				 @NotNull Predicate<BlockData> applicableTo)
+	{
+		this.key = Objects.requireNonNull(key, "The key must not be null");
+		this.valueConstructor = Objects.requireNonNull(valueConstructor, "The key must not be null");
+		this.valueMapper = Objects.requireNonNull(valueMapper, "The value mapper must not be null");
+		this.applicableTo = Objects.requireNonNull(applicableTo, "The applicable to must not be null");
 	}
 
 	public String key()
@@ -225,6 +237,12 @@ public enum BlockDataKey
 	public Object constructValue(String valueString)
 	{
 		return valueConstructor.apply(valueString);
+	}
+
+	@Nullable
+	public Object mapValue(@Nullable Object value)
+	{
+		return valueMapper.apply(value);
 	}
 
 	public boolean appliesTo(BlockDataMock blockData)

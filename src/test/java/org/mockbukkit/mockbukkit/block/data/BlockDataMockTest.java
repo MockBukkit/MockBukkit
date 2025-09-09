@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -165,27 +166,74 @@ class BlockDataMockTest
 		assertNotEquals(wallSign.getFacing(), clone.getFacing());
 	}
 
-	@Test
-	void test_getAsString()
+	@Nested
+	class GetAsString
 	{
-		// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
-		// defaults:
-		//    "minecraft:chest": {
-		//        "facing": "north",
-		//        "type": "single",
-		//        "waterlogged": false
-		//    },
-		//
-		// getAsString(true) : minecraft:chest[waterlogged=true]
-		// getAsString(false): minecraft:chest[facing=north,type=single,waterlogged=true]
-		// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
 
-		BlockDataMock data = BlockDataMock.mock(Material.CAMPFIRE);
-		assertEquals("minecraft:campfire", data.getAsString(true));
-		assertNotEquals(data.getAsString(true), data.getAsString(false));
-		data.set(BlockDataKey.FACING, BlockFace.SOUTH);
-		assertEquals("minecraft:campfire[facing=south]", data.getAsString(true));
-		assertNotEquals(data.getAsString(true), data.getAsString(false));
+		@Test
+		void test_getAsString()
+		{
+			// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
+			// defaults:
+			//    "minecraft:chest": {
+			//        "facing": "north",
+			//        "type": "single",
+			//        "waterlogged": false
+			//    },
+			//
+			// getAsString(true) : minecraft:chest[waterlogged=true]
+			// getAsString(false): minecraft:chest[facing=north,type=single,waterlogged=true]
+			// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
+
+			BlockDataMock data = BlockDataMock.mock(Material.CAMPFIRE);
+			assertEquals("minecraft:campfire", data.getAsString(true));
+			assertNotEquals(data.getAsString(true), data.getAsString(false));
+			data.set(BlockDataKey.FACING, BlockFace.SOUTH);
+			assertEquals("minecraft:campfire[facing=south]", data.getAsString(true));
+			assertNotEquals(data.getAsString(true), data.getAsString(false));
+		}
+
+		/*
+		 * See: https://github.com/MockBukkit/MockBukkit/issues/1433
+		 */
+		@ParameterizedTest
+		@CsvSource({
+			"ACACIA_DOOR, 'minecraft:acacia_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"BAMBOO_DOOR, 'minecraft:bamboo_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"BIRCH_DOOR, 'minecraft:birch_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"CHERRY_DOOR, 'minecraft:cherry_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"COPPER_DOOR, 'minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"CRIMSON_DOOR, 'minecraft:crimson_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"DARK_OAK_DOOR, 'minecraft:dark_oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"EXPOSED_COPPER_DOOR, 'minecraft:exposed_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"IRON_DOOR, 'minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"JUNGLE_DOOR, 'minecraft:jungle_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"LARGE_FERN, 'minecraft:large_fern[half=lower]'",
+			"LILAC, 'minecraft:lilac[half=lower]'",
+			"MANGROVE_DOOR, 'minecraft:mangrove_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"OAK_DOOR, 'minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"OXIDIZED_COPPER_DOOR, 'minecraft:oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"PALE_OAK_DOOR, 'minecraft:pale_oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"PEONY, 'minecraft:peony[half=lower]'",
+			"PITCHER_PLANT, 'minecraft:pitcher_plant[half=lower]'",
+			"ROSE_BUSH, 'minecraft:rose_bush[half=lower]'",
+			"SPRUCE_DOOR, 'minecraft:spruce_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"SUNFLOWER, 'minecraft:sunflower[half=lower]'",
+			"TALL_GRASS, 'minecraft:tall_grass[half=lower]'",
+			"TALL_SEAGRASS, 'minecraft:tall_seagrass[half=lower]'",
+			"WARPED_DOOR, 'minecraft:warped_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"WAXED_COPPER_DOOR, 'minecraft:waxed_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"WAXED_EXPOSED_COPPER_DOOR, 'minecraft:waxed_exposed_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"WAXED_OXIDIZED_COPPER_DOOR, 'minecraft:waxed_oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"WAXED_WEATHERED_COPPER_DOOR, 'minecraft:waxed_weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"WEATHERED_COPPER_DOOR, 'minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'"
+		})
+		void givenSamples(Material material, String expectedOutput)
+		{
+			var blockData = material.createBlockData();
+			var actual = blockData.getAsString(false);
+			assertEquals(expectedOutput, actual);
+		}
 	}
 
 	@ParameterizedTest

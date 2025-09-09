@@ -210,7 +210,8 @@ public class BlockDataMock implements BlockData
 
 		checkProperty(key);
 
-		this.data.put(key.key(), value);
+		var valueToSave = key.mapValue(value);
+		this.data.put(key.key(), valueToSave);
 	}
 
 	/**
