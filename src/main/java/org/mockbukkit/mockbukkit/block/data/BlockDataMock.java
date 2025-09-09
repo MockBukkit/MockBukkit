@@ -129,7 +129,7 @@ public class BlockDataMock implements BlockData
 			Preconditions.checkArgument(BlockDataKey.isRegistered(key), "Unknown block data key: " + key);
 			BlockDataKey blockDataKey = BlockDataKey.fromKey(key, blockData);
 			Preconditions.checkArgument(blockDataKey != null, "Can not apply block data key to '" + blockKey + "': " + key);
-			Object value = blockDataKey.constructValue(valueString);
+			Object value = blockDataKey.decode(valueString);
 			Preconditions.checkArgument(value != null, "Unknown block data value: " + valueString);
 			data.put(key, value);
 		}
@@ -210,7 +210,7 @@ public class BlockDataMock implements BlockData
 
 		checkProperty(key);
 
-		var valueToSave = key.mapValue(value);
+		var valueToSave = key.encode(value);
 		this.data.put(key.key(), valueToSave);
 	}
 
@@ -228,11 +228,17 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		checkProperty(key);
-		T value = (T) this.data.get(key.key());
-		if (value == null)
+		Object valueStored = this.data.get(key.key());
+
+		T value;
+		if (valueStored == null)
 		{
 			Object temp = BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
 			value = castObject(key, temp);
+		}
+		else
+		{
+			value = (T) key.decode(valueStored);
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
@@ -244,7 +250,7 @@ public class BlockDataMock implements BlockData
 		T value;
 		if (temp instanceof String string)
 		{
-			value = (T) key.constructValue(string);
+			value = (T) key.decode(string);
 		}
 		else
 		{

@@ -74,7 +74,7 @@ class BisectedDataMockTest
 		}, nullValues = "null")
 		void validatePossibilities(Bisected.Half half, String expected)
 		{
-			Object actual = BisectedDataMock.HalfEncoder.INSTANCE.apply(half);
+			Object actual = BisectedDataMock.HalfEncoder.INSTANCE.encode(half);
 			assertEquals(expected, actual);
 		}
 
@@ -98,7 +98,7 @@ class BisectedDataMockTest
 		}, nullValues = "null")
 		void validatePossibilities(String half, Bisected.Half expected)
 		{
-			Object actual = BisectedDataMock.HalfDecoder.INSTANCE.apply(half);
+			Object actual = BisectedDataMock.HalfDecoder.INSTANCE.decode(half);
 			assertEquals(expected, actual);
 		}
 

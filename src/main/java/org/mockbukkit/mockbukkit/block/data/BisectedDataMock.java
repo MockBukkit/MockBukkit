@@ -6,9 +6,10 @@ import org.bukkit.Material;
 import org.bukkit.block.data.Bisected;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.data.decoder.EnumPropertyDecode;
+import org.mockbukkit.mockbukkit.block.data.encoder.PropertyEncoder;
 
 import java.util.Locale;
-import java.util.function.Function;
 
 public class BisectedDataMock extends BlockDataMock implements Bisected
 {
@@ -58,66 +59,55 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	}
 
 	@NoArgsConstructor(access = AccessLevel.PRIVATE)
-	public static class HalfEncoder implements Function<Object, Object>
+	public static final class HalfEncoder implements PropertyEncoder<Half>
 	{
 		public static final HalfEncoder INSTANCE = new HalfEncoder();
 
 		@Override
-		public Object apply(Object input)
+		public @Nullable Object encode(@Nullable Bisected.Half half)
 		{
-			if (input == null)
-			{
-				return null;
-			}
-
-			if (!(input instanceof Half half))
-			{
-				return null;
-			}
-
 			return switch (half)
 			{
+				case null -> null;
 				case BOTTOM -> MINECRAFT_BOTTOM;
 				case TOP -> MINECRAFT_UPPER;
 			};
 		}
 
+		@Override
+		public @NotNull Class<Half> getValueType()
+		{
+			return Half.class;
+		}
+
 	}
 
-	@NoArgsConstructor(access = AccessLevel.PRIVATE)
-	public static class HalfDecoder implements Function<String, Object>
+	public static final class HalfDecoder extends EnumPropertyDecode<Half>
 	{
 		public static final HalfDecoder INSTANCE = new HalfDecoder();
 
-		@Nullable
-		@Override
-		public Half apply(@Nullable String input)
+		private HalfDecoder()
 		{
-			if (input == null)
-			{
-				return null;
-			}
+			super(Half.class);
+		}
 
-			String name = input.toLowerCase(Locale.ROOT);
-
-			// Try the minecraft names
-			switch (name)
+		@Override
+		public @Nullable Half decode(@Nullable Object value)
+		{
+			if (value instanceof String input)
 			{
-				case MINECRAFT_UPPER: return Half.TOP;
-				case MINECRAFT_BOTTOM: return Half.BOTTOM;
-				default:break;
-			}
+				String name = input.toLowerCase(Locale.ROOT);
 
-			// Try the bukkit names
-			for (Half half : Half.values())
-			{
-				if (half.name().equalsIgnoreCase(name))
+				// Try the minecraft names
+				switch (name)
 				{
-					return half;
+					case MINECRAFT_UPPER: return Half.TOP;
+					case MINECRAFT_BOTTOM: return Half.BOTTOM;
+					default:break;
 				}
 			}
 
-			return null;
+			return super.decode(value);
 		}
 
 	}

@@ -49,12 +49,15 @@ import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.data.decoder.BooleanPropertyDecode;
+import org.mockbukkit.mockbukkit.block.data.decoder.EnumPropertyDecode;
+import org.mockbukkit.mockbukkit.block.data.decoder.IntegerPropertyDecode;
+import org.mockbukkit.mockbukkit.block.data.decoder.PropertyDecoder;
+import org.mockbukkit.mockbukkit.block.data.encoder.PropertyEncoder;
 
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -67,12 +70,12 @@ public enum BlockDataKey
 	/**
 	 * Stores the {@link BlockFace} a {@link Directional} block is facing towards.
 	 */
-	FACING("facing", string -> BlockFace.valueOf(string.toUpperCase(Locale.ROOT)), Directional.class::isInstance),
+	FACING("facing", EnumPropertyDecode.of(BlockFace.class), Directional.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Campfire} is a signal fire (hay block underneath).
 	 */
-	SIGNAL_FIRE("signal_fire", Boolean::parseBoolean, Campfire.class::isInstance),
+	SIGNAL_FIRE("signal_fire", BooleanPropertyDecode.INSTANCE, Campfire.class::isInstance),
 
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
@@ -82,126 +85,126 @@ public enum BlockDataKey
 	/**
 	 * Stores whether a {@link Lightable} is list.
 	 */
-	LIT("lit", Boolean::parseBoolean, Lightable.class::isInstance),
+	LIT("lit", BooleanPropertyDecode.INSTANCE, Lightable.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Bed} is occupied.
 	 */
-	OCCUPIED("occupied", Boolean::parseBoolean, Bed.class::isInstance),
+	OCCUPIED("occupied", BooleanPropertyDecode.INSTANCE, Bed.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Openable} is open.
 	 */
-	OPEN("open", Boolean::parseBoolean, Openable.class::isInstance),
+	OPEN("open", BooleanPropertyDecode.INSTANCE, Openable.class::isInstance),
 
 	/**
 	 * Stores what {@link Bed.Part} of a {@link Bed} this block is.
 	 */
-	PART("part", string -> Bed.Part.valueOf(string.toUpperCase(Locale.ROOT)), Bed.class::isInstance),
+	PART("part", EnumPropertyDecode.of(Bed.Part.class), Bed.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Powerable} is powered.
 	 */
-	POWERED("powered", Boolean::parseBoolean, Powerable.class::isInstance),
+	POWERED("powered", BooleanPropertyDecode.INSTANCE, Powerable.class::isInstance),
 
 	/**
 	 * Stores what {@link Stairs.Shape} a {@link Stairs} block is.
 	 */
-	SHAPE("shape", string -> Stairs.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Stairs.class::isInstance),
+	SHAPE("shape", EnumPropertyDecode.of(Stairs.Shape.class), Stairs.class::isInstance),
 
 	/**
 	 * Store what {@link Slab.Type} a {@link Slab} is.
 	 */
-	TYPE("type", string -> Slab.Type.valueOf(string.toUpperCase(Locale.ROOT)), Slab.class::isInstance),
-	TYPE_CHEST("type", string -> Chest.Type.valueOf(string.toUpperCase(Locale.ROOT)), Chest.class::isInstance),
+	TYPE("type", EnumPropertyDecode.of(Slab.Type.class), Slab.class::isInstance),
+	TYPE_CHEST("type", EnumPropertyDecode.of(Chest.Type.class), Chest.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
 	 */
-	WATERLOGGED("waterlogged", Boolean::parseBoolean, Waterlogged.class::isInstance),
+	WATERLOGGED("waterlogged", BooleanPropertyDecode.INSTANCE, Waterlogged.class::isInstance),
 
 	/**
 	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is facing
 	 */
-	FACE("face", string -> FaceAttachable.AttachedFace.valueOf(string.toUpperCase(Locale.ROOT)), FaceAttachable.class::isInstance),
+	FACE("face", EnumPropertyDecode.of(FaceAttachable.AttachedFace.class), FaceAttachable.class::isInstance),
 
-	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
-	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
-	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
+	AGE_KEY("age", IntegerPropertyDecode.INSTANCE, Ageable.class::isInstance),
+	LEAVES_KEY("leaves", EnumPropertyDecode.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
+	STAGE_KEY("stage", IntegerPropertyDecode.INSTANCE, Sapling.class::isInstance),
 
-	REDSTONE_EAST("east", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
-	REDSTONE_WEST("west", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
-	REDSTONE_NORTH("north", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
-	REDSTONE_SOUTH("south", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+	REDSTONE_EAST("east", EnumPropertyDecode.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_WEST("west", EnumPropertyDecode.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_NORTH("north", EnumPropertyDecode.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_SOUTH("south", EnumPropertyDecode.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 
-	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
-	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
+	DELAY("delay", IntegerPropertyDecode.INSTANCE, Repeater.class::isInstance),
+	LOCKED("locked", BooleanPropertyDecode.INSTANCE, Repeater.class::isInstance),
 
-	ROTATION("rotation", Integer::parseInt, Rotatable.class::isInstance),
+	ROTATION("rotation", IntegerPropertyDecode.INSTANCE, Rotatable.class::isInstance),
 
-	UNSTABLE("unstable", Boolean::parseBoolean, TNT.class::isInstance),
+	UNSTABLE("unstable", BooleanPropertyDecode.INSTANCE, TNT.class::isInstance),
 
-	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	NORTH("north", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	SOUTH("south", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	UP("up", Boolean::parseBoolean, o -> o instanceof MultipleFacing || o instanceof Wall),
-	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
+	EAST("east", BooleanPropertyDecode.INSTANCE, MultipleFacing.class::isInstance),
+	WEST("west", BooleanPropertyDecode.INSTANCE, MultipleFacing.class::isInstance),
+	NORTH("north", BooleanPropertyDecode.INSTANCE, MultipleFacing.class::isInstance),
+	SOUTH("south", BooleanPropertyDecode.INSTANCE, MultipleFacing.class::isInstance),
+	UP("up", BooleanPropertyDecode.INSTANCE, o -> o instanceof MultipleFacing || o instanceof Wall),
+	DOWN("down", BooleanPropertyDecode.INSTANCE, MultipleFacing.class::isInstance),
+	CRACKED("cracked", BooleanPropertyDecode.INSTANCE, DecoratedPot.class::isInstance),
 
-	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
-	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
-	ENABLED("enabled", Boolean::parseBoolean, Hopper.class::isInstance),
-	ORIENTATION("orientation", string -> Orientation.valueOf(string.toUpperCase(Locale.ROOT)), Crafter.class::isInstance),
-	HINGE("hinge", string -> Door.Hinge.valueOf(string.toUpperCase(Locale.ROOT)), Door.class::isInstance),
-	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
-	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
+	CRAFTING("crafting", BooleanPropertyDecode.INSTANCE, Crafter.class::isInstance),
+	TRIGGERED("triggered", BooleanPropertyDecode.INSTANCE, Crafter.class::isInstance),
+	ENABLED("enabled", BooleanPropertyDecode.INSTANCE, Hopper.class::isInstance),
+	ORIENTATION("orientation", EnumPropertyDecode.of(Orientation.class), Crafter.class::isInstance),
+	HINGE("hinge", EnumPropertyDecode.of(Door.Hinge.class), Door.class::isInstance),
+	IN_WALL("in_wall", BooleanPropertyDecode.INSTANCE, Gate.class::isInstance),
+	HAS_BOOK("has_book", BooleanPropertyDecode.INSTANCE, Lectern.class::isInstance),
 
-	TRIAL_SPAWNER_STATE("trial_spawner_state", string -> TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
-	OMINOUS("ominous", Boolean::parseBoolean, c -> c instanceof TrialSpawner || c instanceof Vault),
+	TRIAL_SPAWNER_STATE("trial_spawner_state", EnumPropertyDecode.of(TrialSpawner.State.class), TrialSpawner.class::isInstance),
+	OMINOUS("ominous", BooleanPropertyDecode.INSTANCE, c -> c instanceof TrialSpawner || c instanceof Vault),
 
-	VAULT_STATE("vault_state", string -> Vault.State.valueOf(string.toUpperCase(Locale.ROOT)), Vault.class::isInstance),
+	VAULT_STATE("vault_state", EnumPropertyDecode.of(Vault.State.class), Vault.class::isInstance),
 
-	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
+	AXIS("axis", EnumPropertyDecode.of(Axis.class), Orientable.class::isInstance),
 
-	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
+	RAIL_SHAPE("shape", EnumPropertyDecode.of(Rail.Shape.class), Rail.class::isInstance),
 
-	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
-	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
-	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
+	LEVEL("level", IntegerPropertyDecode.INSTANCE, Levelled.class::isInstance),
+	DUSTED("dusted", IntegerPropertyDecode.INSTANCE, Brushable.class::isInstance),
+	MODE("mode", EnumPropertyDecode.of(TestBlock.Mode.class), TestBlock.class::isInstance),
 
-	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
-	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
+	CANDLES("candles", IntegerPropertyDecode.INSTANCE, Candle.class::isInstance),
+	POWER("power", IntegerPropertyDecode.INSTANCE, AnaloguePowerable.class::isInstance),
 
-	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
-	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
+	SNOWY("snowy", BooleanPropertyDecode.INSTANCE, Snowable.class::isInstance),
+	ATTACHED("attached", BooleanPropertyDecode.INSTANCE, Attachable.class::isInstance),
 
-	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
-	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance),
-	HATCH("hatch", Integer::parseInt, Hatchable.class::isInstance),
-	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance);
+	CONDITIONAL("conditional", BooleanPropertyDecode.INSTANCE, CommandBlock.class::isInstance),
+	MOISTURE("moisture", IntegerPropertyDecode.INSTANCE, Farmland.class::isInstance),
+	HATCH("hatch", IntegerPropertyDecode.INSTANCE, Hatchable.class::isInstance),
+	EGGS("eggs", IntegerPropertyDecode.INSTANCE, TurtleEgg.class::isInstance);
 
 
 	private static final Set<String> KEYS = compileKeys();
 
 	private final String key;
-	private final Function<String, Object> valueConstructor;
-	private final Function<Object, Object> valueMapper;
+	private final @Nullable PropertyEncoder<?> propertyEncoder;
+	private final @Nullable PropertyDecoder<?> propertyDecoder;
 	private final Predicate<BlockData> applicableTo;
 
-	BlockDataKey(String key, Function<String, Object> valueConstructor, Predicate<BlockData> applicableTo)
+	BlockDataKey(String key, PropertyDecoder<?> propertyDecoder, Predicate<BlockData> applicableTo)
 	{
-		this(key, valueConstructor, Function.identity(), applicableTo);
+		this(key, propertyDecoder, null, applicableTo);
 	}
 
 	BlockDataKey(@NotNull String key,
-				 @NotNull Function<String, Object> valueConstructor,
-				 @NotNull Function<Object, Object> valueMapper,
+				 @Nullable PropertyDecoder<?> propertyDecoder,
+				 @Nullable PropertyEncoder<?> propertyEncoder,
 				 @NotNull Predicate<BlockData> applicableTo)
 	{
 		this.key = Objects.requireNonNull(key, "The key must not be null");
-		this.valueConstructor = Objects.requireNonNull(valueConstructor, "The key must not be null");
-		this.valueMapper = Objects.requireNonNull(valueMapper, "The value mapper must not be null");
+		this.propertyDecoder = propertyDecoder;
+		this.propertyEncoder = propertyEncoder;
 		this.applicableTo = Objects.requireNonNull(applicableTo, "The applicable to must not be null");
 	}
 
@@ -234,15 +237,15 @@ public enum BlockDataKey
 		return null;
 	}
 
-	public Object constructValue(String valueString)
+	public Object decode(Object value)
 	{
-		return valueConstructor.apply(valueString);
+		return propertyDecoder != null ? propertyDecoder.decode(value) : value;
 	}
 
 	@Nullable
-	public Object mapValue(@Nullable Object value)
+	public Object encode(@Nullable Object value)
 	{
-		return valueMapper.apply(value);
+		return propertyEncoder != null ? propertyEncoder.encodeIfPossible(value) : value;
 	}
 
 	public boolean appliesTo(BlockDataMock blockData)
