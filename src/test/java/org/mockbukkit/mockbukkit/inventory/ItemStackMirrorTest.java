@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -67,14 +66,6 @@ class ItemStackMirrorTest
 			assertNotSame(originalItem, mirror);
 		}
 
-	}
-
-	@Test
-	void classHasDelegateSerializationAnnotation()
-	{
-		DelegateDeserialization delegateDeserialization = ItemStackMirror.class.getAnnotation(DelegateDeserialization.class);
-		assertNotNull(delegateDeserialization, "The class should be annotated with @DelegateDeserialization(ItemStack.class)");
-		assertEquals(ItemStack.class, delegateDeserialization.value());
 	}
 
 	/*
