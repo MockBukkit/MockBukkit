@@ -130,9 +130,18 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof BrewingStandStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BrewingStandStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return recipeBrewingTime == that.recipeBrewingTime && brewingTime == that.brewingTime && fuelLevel == that.fuelLevel;
 	}
 

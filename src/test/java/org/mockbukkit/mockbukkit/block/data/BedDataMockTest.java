@@ -57,7 +57,9 @@ class BedDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (!bed.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertDoesNotThrow(() -> bed.setFacing(face));
 		}
 	}
@@ -68,7 +70,9 @@ class BedDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (bed.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertThrowsExactly(IllegalArgumentException.class, () -> bed.setFacing(face));
 		}
 	}

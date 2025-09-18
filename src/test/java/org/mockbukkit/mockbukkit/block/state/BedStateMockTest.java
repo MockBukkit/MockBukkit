@@ -88,7 +88,9 @@ class BedStateMockTest
 		for (Material mat : MaterialTags.BEDS.getValues())
 		{
 			if (BlockStateMock.mockState(new BlockMock(mat)) instanceof BedStateMock)
+			{
 				continue;
+			}
 			fail("BlockState for '" + mat + "' is not a " + BedStateMock.class.getSimpleName());
 		}
 	}

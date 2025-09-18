@@ -166,7 +166,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
 		if (!new InventoryOpenEvent(inventory).callEvent())
+		{
 			return;
+		}
 		this.inventoryView = inventory;
 	}
 
@@ -232,7 +234,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		Preconditions.checkNotNull(mode, "GameMode cannot be null");
 		if (this.gameMode == mode)
+		{
 			return;
+		}
 
 		this.gameMode = mode;
 	}
@@ -494,9 +498,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		// Formula from https://minecraft.wiki/w/Experience#Leveling_up
 		if (this.expLevel >= 31)
+		{
 			return (9 * this.expLevel) - 158;
+		}
 		if (this.expLevel >= 16)
+		{
 			return (5 * this.expLevel) - 38;
+		}
 		return (2 * this.expLevel) + 7;
 	}
 

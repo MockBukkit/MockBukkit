@@ -124,7 +124,9 @@ class BukkitSchedulerMockTest
 		testTask = scheduler.runTaskTimer(null, () ->
 		{
 			if (count.incrementAndGet() == 2)
+			{
 				testTask.cancel();
+			}
 		}, 1, 1);
 		assertEquals(0, count.get());
 		scheduler.performOneTick();
@@ -181,7 +183,9 @@ class BukkitSchedulerMockTest
 			try
 			{
 				if (count.incrementAndGet() == 2)
+				{
 					testTask.cancel();
+				}
 				barrier.await(3L, TimeUnit.SECONDS);
 			}
 			catch (InterruptedException | BrokenBarrierException | TimeoutException e)

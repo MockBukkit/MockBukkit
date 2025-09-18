@@ -69,9 +69,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return () ->
 		{
 			task.setRunning(true);
-			if (!task.isSync()) this.activeWorkers.add(task);
+			if (!task.isSync())
+			{
+				this.activeWorkers.add(task);
+			}
 			task.run();
-			if (!task.isSync()) this.activeWorkers.remove(task);
+			if (!task.isSync())
+			{
+				this.activeWorkers.remove(task);
+			}
 			task.setRunning(false);
 		};
 	}
@@ -96,7 +102,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		shutdownPool(pool);
 
 		if (asyncException.get() != null)
+		{
 			throw new AsyncTaskException(asyncException.get());
+		}
 
 		waitAsyncEventsFinished();
 		shutdownPool(asyncEventExecutor);
@@ -306,7 +314,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 
 			if (System.currentTimeMillis() <= (systemTime + executorTimeout))
+			{
 				continue;
+			}
 
 			// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
 			// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
@@ -314,7 +324,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 			{
 				if (!task.isRunning())
+				{
 					continue;
+				}
 				task.cancel();
 				cancelTask(task.getTaskId());
 				throw new TaskCancelledException("Forced Cancellation of task owned by " + task.getOwner().getName());
@@ -506,7 +518,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
 			if (task.getTaskId() == taskId)
+			{
 				return !task.isCancelled();
+			}
 		}
 		return false;
 	}
@@ -669,7 +683,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		List<BukkitWorker> overdueTasks = this.overdueTasks; // Single read from volatile variable
 		if (!overdueTasks.isEmpty())
+		{
 			throw new AssertionFailedError("There are overdue tasks: " + overdueTasks);
+		}
 	}
 
 	private static class TaskList
@@ -725,7 +741,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				for (ScheduledTask task : tasks.values())
 				{
 					if (task.isCancelled() || task.isRunning())
+					{
 						continue;
+					}
 					scheduled++;
 				}
 			}

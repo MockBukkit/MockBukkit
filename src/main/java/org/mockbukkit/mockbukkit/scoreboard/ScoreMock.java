@@ -66,9 +66,13 @@ public class ScoreMock implements Score
 	public int getScore() throws IllegalStateException
 	{
 		if (objective.isRegistered())
+		{
 			return score;
+		}
 		else
+		{
 			throw new IllegalStateException("Objective is not registered");
+		}
 	}
 
 	@Override

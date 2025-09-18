@@ -250,9 +250,18 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof ShulkerBoxStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ShulkerBoxStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return isOpen == that.isOpen && color == that.color;
 	}
 

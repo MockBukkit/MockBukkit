@@ -292,9 +292,18 @@ class UnsafeValuesTest
 		for (Method method : meta.getClass().getMethods())
 		{
 			String methodName = method.getName();
-			if ("wait".contentEquals(methodName)) continue;
-			if (methodName.startsWith("get")) continue;
-			if (methodName.startsWith("remove")) continue;
+			if ("wait".contentEquals(methodName))
+			{
+				continue;
+			}
+			if (methodName.startsWith("get"))
+			{
+				continue;
+			}
+			if (methodName.startsWith("remove"))
+			{
+				continue;
+			}
 
 			// This method cause error with trivial value. So we set convenient value
 			if (methodName.contentEquals("setAmplifier"))
@@ -310,8 +319,14 @@ class UnsafeValuesTest
 			catch (InvocationTargetException exception)
 			{
 				Throwable cause = exception.getTargetException();
-				if (cause instanceof UnimplementedOperationException) continue;
-				if (cause instanceof UnsupportedOperationException) continue;
+				if (cause instanceof UnimplementedOperationException)
+				{
+					continue;
+				}
+				if (cause instanceof UnsupportedOperationException)
+				{
+					continue;
+				}
 
 				throw new RuntimeException("Exception thrown while trying to set trivial value for method " + method.getName(), cause);
 
@@ -400,7 +415,9 @@ class UnsafeValuesTest
 		for (Material material : Material.values())
 		{
 			if (material.isLegacy())
+			{
 				continue;
+			}
 			assertEquals(material, unsafeValuesMock.fromLegacy(material));
 		}
 	}
@@ -411,7 +428,9 @@ class UnsafeValuesTest
 		for (Material material : Material.values())
 		{
 			if (!material.isLegacy())
+			{
 				continue;
+			}
 			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(material));
 		}
 	}
@@ -428,7 +447,9 @@ class UnsafeValuesTest
 		for (Material material : Material.values())
 		{
 			if (material.isLegacy())
+			{
 				continue;
+			}
 			assertEquals(material, unsafeValuesMock.fromLegacy(new MaterialData(material)));
 		}
 	}
@@ -439,7 +460,9 @@ class UnsafeValuesTest
 		for (Material material : Material.values())
 		{
 			if (!material.isLegacy())
+			{
 				continue;
+			}
 			MaterialData materialData = new MaterialData(material);
 			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(materialData));
 		}

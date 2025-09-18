@@ -131,7 +131,9 @@ public class MapViewMock implements MapView
 	public boolean removeRenderer(@Nullable MapRenderer renderer)
 	{
 		if (!this.renderers.contains(renderer))
+		{
 			return false;
+		}
 
 		this.renderers.remove(renderer);
 

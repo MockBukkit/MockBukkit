@@ -139,7 +139,10 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 				boolean first = true;
 				for (T value : values)
 				{
-					if (!first) text.append(separator);
+					if (!first)
+					{
+						text.append(separator);
+					}
 					text.append(value);
 					first = false;
 				}

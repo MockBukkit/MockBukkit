@@ -58,7 +58,9 @@ class WallSignDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (!sign.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertDoesNotThrow(() -> sign.setFacing(face));
 			assertEquals(face, sign.getFacing());
 		}
@@ -70,7 +72,9 @@ class WallSignDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (sign.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertThrowsExactly(IllegalArgumentException.class, () -> sign.setFacing(face));
 		}
 	}

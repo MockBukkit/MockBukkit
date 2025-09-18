@@ -107,8 +107,14 @@ class PotionEffectPriorityQueueTests
 
 	private boolean effectsMatch(PotionEffect actual, PotionEffect expected)
 	{
-		if (actual == null && expected == null) return true;
-		if (actual == null || expected == null) return false;
+		if (actual == null && expected == null)
+		{
+			return true;
+		}
+		if (actual == null || expected == null)
+		{
+			return false;
+		}
 		return actual.getType() == expected.getType() &&
 				actual.getAmplifier() == expected.getAmplifier();
 	}

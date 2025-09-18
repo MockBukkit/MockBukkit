@@ -280,8 +280,14 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) return true;
-		if (!(obj instanceof PlayerProfileMock otherProfile)) return false;
+		if (this == obj)
+		{
+			return true;
+		}
+		if (!(obj instanceof PlayerProfileMock otherProfile))
+		{
+			return false;
+		}
 		return Objects.equals(this.name, otherProfile.name) && this.uuid.equals(otherProfile.uuid) && this.properties.equals(otherProfile.properties);
 	}
 

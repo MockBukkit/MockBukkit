@@ -38,10 +38,16 @@ public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Comman
 	@Override
 	public Command get(Object key)
 	{
-		if (!(key instanceof String stringKey)) return null;
+		if (!(key instanceof String stringKey))
+		{
+			return null;
+		}
 
 		CommandNode<?> node = getDispatcher().getRoot().getChild(stringKey);
-		if (node == null) return null;
+		if (node == null)
+		{
+			return null;
+		}
 
 		return node instanceof BukkitCommandNode bukkitNode
 				? bukkitNode.getBukkitCommand()
@@ -61,7 +67,10 @@ public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Comman
 	@Override
 	public Command remove(Object key)
 	{
-		if (!(key instanceof String stringKey)) return null;
+		if (!(key instanceof String stringKey))
+		{
+			return null;
+		}
 
 		Command old = get(key);
 		if (old != null)

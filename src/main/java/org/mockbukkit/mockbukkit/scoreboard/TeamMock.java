@@ -279,7 +279,10 @@ public class TeamMock implements Team
 			if (s != null)
 			{
 				OfflinePlayer player = MockBukkit.getMock().getOfflinePlayer(s);
-				if (player != null) players.add(player);
+				if (player != null)
+				{
+					players.add(player);
+				}
 			}
 		}
 		return players;
@@ -445,7 +448,9 @@ public class TeamMock implements Team
 	public void checkRegistered()
 	{
 		if (this.board != null)
+		{
 			return;
+		}
 		throw new IllegalStateException("Team not registered");
 	}
 
