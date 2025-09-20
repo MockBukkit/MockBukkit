@@ -59,9 +59,18 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof LockableTileStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof LockableTileStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 
 		return Objects.equals(lock, that.lock);
 	}

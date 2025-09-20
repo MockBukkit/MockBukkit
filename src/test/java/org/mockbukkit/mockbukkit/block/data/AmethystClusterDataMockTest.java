@@ -53,7 +53,9 @@ class AmethystClusterDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (!cluster.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertDoesNotThrow(() -> cluster.setFacing(face));
 		}
 	}
@@ -64,7 +66,9 @@ class AmethystClusterDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (cluster.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertThrowsExactly(IllegalArgumentException.class, () -> cluster.setFacing(face));
 		}
 	}

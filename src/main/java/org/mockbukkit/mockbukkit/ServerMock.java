@@ -427,7 +427,9 @@ public class ServerMock extends Server.Spigot implements Server
 		playerList.clearOnlinePlayers();
 
 		for (int i = 0; i < num; i++)
+		{
 			addPlayer();
+		}
 	}
 
 	/**
@@ -555,9 +557,13 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncCatcher.catchOp("command dispatch");
 
 		if (playerList.isSomeoneOnline())
+		{
 			return execute(command, getPlayer(0), args);
+		}
 		else
+		{
 			throw new IllegalStateException("Need at least one player to run the command");
+		}
 	}
 
 	/**
@@ -1102,7 +1108,9 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		AsyncCatcher.catchOp("Recipe add");
 		if (recipe == null)
+		{
 			return false;
+		}
 		// Pretend we sent the packet if resendRecipes is true
 		return this.recipeManager.addRecipe(RecipeType.CRAFTING, recipe);
 	}
@@ -1649,7 +1657,9 @@ public class ServerMock extends Server.Spigot implements Server
 		for (Plugin oldPlugin : pluginsClone)
 		{
 			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
+			{
 				continue;
+			}
 			// This is a little sketchy, but we have to do it since when initializing plugins we create a subclass of the main class.
 			// If we try to then load that subclass as the plugin, it doesn't work, so we need to get the original class to subclass from again.
 			@SuppressWarnings("unchecked")

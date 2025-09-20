@@ -125,7 +125,9 @@ public class PlayerSimulation
 			BlockBreakEvent breakEvent = new BlockBreakEvent(block, playerMock);
 			Bukkit.getPluginManager().callEvent(breakEvent);
 			if (!breakEvent.isCancelled())
+			{
 				block.setType(Material.AIR);
+			}
 		}
 
 		return event;
@@ -144,12 +146,16 @@ public class PlayerSimulation
 		Preconditions.checkNotNull(block, "Block cannot be null");
 		if ((playerMock.getGameMode() == GameMode.SPECTATOR || playerMock.getGameMode() == GameMode.ADVENTURE)
 				|| (playerMock.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+		{
 			return null;
+		}
 
 		BlockBreakEvent event = new BlockBreakEvent(block, playerMock);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
+		{
 			block.setType(Material.AIR);
+		}
 		return event;
 	}
 
@@ -167,7 +173,9 @@ public class PlayerSimulation
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		if (playerMock.getGameMode() == GameMode.ADVENTURE || playerMock.getGameMode() == GameMode.SPECTATOR)
+		{
 			return null;
+		}
 		Block block = location.getBlock();
 		BlockState blockState = block.getState();
 		block.setType(material);

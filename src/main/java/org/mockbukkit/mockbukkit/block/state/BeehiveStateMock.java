@@ -112,9 +112,13 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 		{
 			Block block = getWorld().getBlockAt(getX(), y, getZ());
 			if (!(block.getBlockData() instanceof Campfire campfire))
+			{
 				continue;
+			}
 			if (!campfire.isLit())
+			{
 				continue;
+			}
 			this.sedated = true;
 			return;
 		}

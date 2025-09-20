@@ -63,7 +63,9 @@ class SwitchDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (!switchDataMock.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertDoesNotThrow(() -> switchDataMock.setFacing(face));
 			assertEquals(face, switchDataMock.getFacing());
 		}
@@ -75,7 +77,9 @@ class SwitchDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (switchDataMock.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertThrowsExactly(IllegalArgumentException.class, () -> switchDataMock.setFacing(face));
 		}
 	}

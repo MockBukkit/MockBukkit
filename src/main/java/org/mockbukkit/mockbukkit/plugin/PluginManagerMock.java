@@ -105,7 +105,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	{
 		File parentTemporaryDirectory = this.parentTemporaryDirectory.get();
 		if (parentTemporaryDirectory == null)
+		{
 			return;
+		}
 
 		// Delete the temporary directory, from the deepest file to the root.
 		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
@@ -310,7 +312,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 
 		Class<?>[] parameters = constructor.getParameterTypes();
 		if (parameters.length < types.length)
+		{
 			return false;
+		}
 		for (int i = 0; i < types.length; i++)
 		{
 			Class<?> type = types[i];
@@ -555,7 +559,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			PluginDescriptionFile description = new PluginDescriptionFile(url.openStream());
 			String mainClass = description.getMain();
 			if (class1.getName().equals(mainClass))
+			{
 				return description;
+			}
 		}
 		throw new FileNotFoundException(
 				"Could not find file plugin.yml. Maybe forgot to add the 'main' property?");
@@ -907,7 +913,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
 		if (!plugin.isEnabled())
+		{
 			return;
+		}
 
 		// Don't print the "disabling x plugin" message
 		Level prevLevel = plugin.getLogger().getLevel();

@@ -117,7 +117,10 @@ public class PlayerTexturesMock implements PlayerTextures
 	@Override
 	public boolean isSigned()
 	{
-		if (dirty) return false;
+		if (dirty)
+		{
+			return false;
+		}
 		ProfileProperty property = getProperty();
 		return property != null;
 	}
@@ -138,8 +141,14 @@ public class PlayerTexturesMock implements PlayerTextures
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) return true;
-		if (!(obj instanceof PlayerTextures)) return false;
+		if (this == obj)
+		{
+			return true;
+		}
+		if (!(obj instanceof PlayerTextures))
+		{
+			return false;
+		}
 
 		PlayerTexturesMock other = (PlayerTexturesMock) obj;
 		ProfileProperty property = getProperty();

@@ -249,7 +249,9 @@ public class SignStateMock extends TileStateMock implements Sign
 		public @NotNull Component line(int index) throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
+			{
 				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			}
 			return lines[index];
 		}
 
@@ -258,7 +260,9 @@ public class SignStateMock extends TileStateMock implements Sign
 		{
 			Preconditions.checkNotNull(line, "Line cannot be null!");
 			if (index < 0 || index >= lines.length)
+			{
 				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			}
 			lines[index] = line;
 		}
 
@@ -274,7 +278,9 @@ public class SignStateMock extends TileStateMock implements Sign
 		public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
+			{
 				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			}
 			return LegacyComponentSerializer.legacySection().serialize(lines[index]);
 		}
 
@@ -284,7 +290,9 @@ public class SignStateMock extends TileStateMock implements Sign
 		public void setLine(int index, @SuppressWarnings("NullableProblems") String line) throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
+			{
 				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			}
 			if (line == null)
 			{
 				lines[index] = Component.empty();

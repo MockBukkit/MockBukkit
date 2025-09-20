@@ -164,9 +164,13 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 		{
 			submitted = false;
 			if (this.runnable != null)
+			{
 				this.runnable.run();
+			}
 			if (this.consumer != null)
+			{
 				this.consumer.accept(this);
+			}
 		}
 		else
 		{

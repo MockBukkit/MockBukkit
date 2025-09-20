@@ -121,9 +121,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setArmorContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
+		{
 			throw new NullPointerException("ItemStack was null");
+		}
 		else if (items.length > 4)
+		{
 			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
+		}
 		items = (items.length == 4) ? items : Arrays.copyOf(items, 4);
 		setItem(BOOTS, items[0]);
 		setItem(LEGGINGS, items[1]);
@@ -219,9 +223,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setExtraContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
+		{
 			throw new NullPointerException("ItemStack was null");
+		}
 		else if (items.length > 1)
+		{
 			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
+		}
 		items = (items.length == 1) ? items : Arrays.copyOf(items, 1);
 		setItem(OFF_HAND, items[0]);
 	}
@@ -389,7 +397,9 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setHeldItemSlot(int slot)
 	{
 		if (slot < 0 || slot > 8)
+		{
 			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
+		}
 		mainHandSlot = slot;
 	}
 

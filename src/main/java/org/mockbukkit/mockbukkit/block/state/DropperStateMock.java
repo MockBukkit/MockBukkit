@@ -187,8 +187,14 @@ public class DropperStateMock extends ContainerStateMock implements Dropper
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof DropperStateMock)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof DropperStateMock))
+		{
+			return false;
+		}
 		return super.equals(o);
 	}
 

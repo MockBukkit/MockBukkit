@@ -1871,7 +1871,9 @@ class ServerMockTest
 		Registry<?> registry = Bukkit.getRegistry(clazz);
 		assertNotNull(registry);
 		if (clazz != KeyedBossBar.class)
+		{
 			assertTrue(registry.iterator().hasNext());
+		}
 	}
 
 	@Test

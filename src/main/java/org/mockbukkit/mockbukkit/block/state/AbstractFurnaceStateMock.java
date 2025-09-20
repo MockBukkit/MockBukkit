@@ -177,9 +177,18 @@ public abstract class AbstractFurnaceStateMock extends ContainerStateMock implem
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof AbstractFurnaceStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof AbstractFurnaceStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return burnTime == that.burnTime
 				&& cookTime == that.cookTime
 				&& cookTimeTotal == that.cookTimeTotal
