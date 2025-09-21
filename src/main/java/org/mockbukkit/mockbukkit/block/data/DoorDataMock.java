@@ -46,13 +46,13 @@ public class DoorDataMock extends BlockDataMock implements Door
 	@Override
 	public @NotNull Half getHalf()
 	{
-		return BisectedDataMock.fromString(this.get(BlockDataKey.HALF_RAW));
+		return BisectedDataMock.fromString(this.get(BlockDataKey.HALF_MULTI_BLOCK));
 	}
 
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
-		this.set(BlockDataKey.HALF_RAW, BisectedDataMock.toString(half));
+		this.set(BlockDataKey.HALF_MULTI_BLOCK, BisectedDataMock.toString(half));
 	}
 
 	@Override

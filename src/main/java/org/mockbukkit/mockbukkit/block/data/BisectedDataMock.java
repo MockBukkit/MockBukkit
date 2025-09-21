@@ -34,13 +34,13 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	@Override
 	public @NotNull Half getHalf()
 	{
-		return fromString(this.get(BlockDataKey.HALF_RAW));
+		return fromString(this.get(BlockDataKey.HALF_MULTI_BLOCK));
 	}
 
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
-		this.set(BlockDataKey.HALF_RAW, toString(half));
+		this.set(BlockDataKey.HALF_MULTI_BLOCK, toString(half));
 	}
 
 	@Override

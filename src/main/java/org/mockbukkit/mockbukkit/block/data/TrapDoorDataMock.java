@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.FACING;
-import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.HALF;
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.HALF_SINGLE_BLOCK;
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.OPEN;
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.POWERED;
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
@@ -51,14 +51,14 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	@Override
 	public @NotNull Half getHalf()
 	{
-		return get(HALF);
+		return get(HALF_SINGLE_BLOCK);
 	}
 
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
 		Preconditions.checkNotNull(half, "Half cannot be null");
-		set(HALF, half);
+		set(HALF_SINGLE_BLOCK, half);
 	}
 
 	@Override
