@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -299,6 +300,15 @@ class BlockDataMockTest
 			"'WEATHERED_CUT_COPPER_STAIRS', 'minecraft:weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
 		})
 		void givenSamples(Material material, String expectedOutput)
+		{
+			var blockData = material.createBlockData();
+			var actual = blockData.getAsString(false);
+			assertEquals(expectedOutput, actual);
+		}
+
+		@ParameterizedTest
+		@CsvFileSource(resources = "/blocks/block_data_as_string.csv")
+		void givenPossibleValues(Material material, String expectedOutput)
 		{
 			var blockData = material.createBlockData();
 			var actual = blockData.getAsString(false);
