@@ -1,7 +1,9 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.data.Bisected;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
@@ -81,6 +83,17 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 			case UPPER -> Half.TOP;
 			default -> throw new IllegalArgumentException("Unexpected value: " + half.toLowerCase(Locale.ROOT));
 		};
+	}
+
+	/**
+	 * Check if this bisected block occupies only one block.
+	 *
+	 * @return {@code true} if occupies only one block, otherwise {@code false}.
+	 */
+	@ApiStatus.Internal
+	public static boolean isSingleBlock(BlockDataMock block)
+	{
+		return Tag.TRAPDOORS.isTagged(block.getMaterial()) || Tag.STAIRS.isTagged(block.getMaterial());
 	}
 
 }

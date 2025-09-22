@@ -75,14 +75,14 @@ public enum BlockDataKey
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 */
-	HALF_SINGLE_BLOCK("half", EnumDataDeserializer.of(Bisected.Half.class), Bisected.class::isInstance),
+	HALF_SINGLE_BLOCK("half", EnumDataDeserializer.of(Bisected.Half.class), o -> o instanceof BlockDataMock blockData && BisectedDataMock.isSingleBlock(blockData)),
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 * Similar to HALF but stores the value as lower or upper.
 	 *
 	 * @see BisectedDataMock
 	 */
-	HALF_MULTI_BLOCK("half", a -> a, Bisected.class::isInstance),
+	HALF_MULTI_BLOCK("half", a -> a, o -> o instanceof BlockDataMock blockData && !BisectedDataMock.isSingleBlock(blockData)),
 
 	/**
 	 * Stores whether a {@link Lightable} is list.
