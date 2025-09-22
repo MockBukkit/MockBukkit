@@ -15,7 +15,6 @@ public class WaterloggedDataMock extends BlockDataMock implements Waterlogged
 	public WaterloggedDataMock(@NotNull Material material)
 	{
 		super(material);
-		setWaterlogged(false);
 	}
 
 	/**

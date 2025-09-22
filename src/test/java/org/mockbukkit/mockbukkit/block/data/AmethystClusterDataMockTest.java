@@ -31,7 +31,7 @@ class AmethystClusterDataMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(BlockFace.NORTH, cluster.getFacing());
+		assertEquals(BlockFace.UP, cluster.getFacing());
 		assertFalse(cluster.isWaterlogged());
 	}
 
@@ -90,7 +90,7 @@ class AmethystClusterDataMockTest
 	@Test
 	void getAsString()
 	{
-		assertEquals("minecraft:amethyst_cluster[facing=north,waterlogged=false]", cluster.getAsString());
+		assertEquals("minecraft:amethyst_cluster[facing=up,waterlogged=false]", cluster.getAsString());
 	}
 
 	@Test

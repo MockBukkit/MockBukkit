@@ -122,6 +122,10 @@ public final class BlockDataMockFactory
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
+		if (material.isAir() || Material.SOUL_FIRE == material)
+		{
+			return new BlockDataMock(Material.AIR);
+		}
 
 		for (var entry : FACTORIES_BY_TAGS.entrySet())
 		{

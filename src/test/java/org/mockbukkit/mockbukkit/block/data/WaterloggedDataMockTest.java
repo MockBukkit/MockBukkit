@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class WaterloggedDataMockTest
@@ -31,7 +31,7 @@ class WaterloggedDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertFalse(waterlogged.isWaterlogged());
+			assertTrue(waterlogged.isWaterlogged());
 		}
 
 		@ParameterizedTest
