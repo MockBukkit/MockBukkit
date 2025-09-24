@@ -19,7 +19,6 @@ public class DoorDataMock extends BlockDataMock implements Door
 	public DoorDataMock(@NotNull Material material)
 	{
 		super(material);
-		setHalf(Half.BOTTOM);
 	}
 
 	/**
@@ -47,13 +46,13 @@ public class DoorDataMock extends BlockDataMock implements Door
 	@Override
 	public @NotNull Half getHalf()
 	{
-		return this.get(BlockDataKey.HALF);
+		return BisectedDataMock.fromString(this.get(BlockDataKey.HALF_MULTI_BLOCK));
 	}
 
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
-		this.set(BlockDataKey.HALF, half);
+		this.set(BlockDataKey.HALF_MULTI_BLOCK, BisectedDataMock.toString(half));
 	}
 
 	@Override

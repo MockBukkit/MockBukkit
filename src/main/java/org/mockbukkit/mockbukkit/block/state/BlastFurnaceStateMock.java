@@ -62,8 +62,14 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof BlastFurnaceStateMock)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BlastFurnaceStateMock))
+		{
+			return false;
+		}
 		return super.equals(o);
 	}
 

@@ -18,7 +18,9 @@ public class BiomeProviderMock extends BiomeProvider
 	public @NotNull Biome getBiome(@NotNull WorldInfo worldInfo, int x, int y, int z)
 	{
 		if (!(worldInfo instanceof WorldMock world))
+		{
 			throw new UnsupportedOperationException("Can only get biomes from WorldMock");
+		}
 		return world.getBiome(x, y, z);
 	}
 
@@ -26,7 +28,9 @@ public class BiomeProviderMock extends BiomeProvider
 	public @NotNull List<Biome> getBiomes(@NotNull WorldInfo worldInfo)
 	{
 		if (!(worldInfo instanceof WorldMock world))
+		{
 			throw new UnsupportedOperationException("Can only get biomes from WorldMock");
+		}
 		return List.of(world.getDefaultBiome());
 	}
 

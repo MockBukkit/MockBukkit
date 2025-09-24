@@ -164,9 +164,18 @@ public class BannerStateMock extends TileStateMock implements Banner
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof BannerStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BannerStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return baseColor == that.baseColor && Objects.equals(patterns, that.patterns) && Objects.equals(customName, that.customName);
 	}
 

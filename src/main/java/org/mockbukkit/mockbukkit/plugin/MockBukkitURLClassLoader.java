@@ -72,7 +72,10 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	public URL getResource(String name)
 	{
 		URL url = findResource(name);
-		if (url == null) return super.getResource(name);
+		if (url == null)
+		{
+			return super.getResource(name);
+		}
 		return url;
 	}
 

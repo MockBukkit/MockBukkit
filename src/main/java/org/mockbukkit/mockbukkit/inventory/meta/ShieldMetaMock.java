@@ -243,7 +243,10 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	@Override
 	public @NotNull BlockState getBlockState()
 	{
-		if (banner != null) return banner.copy();
+		if (banner != null)
+		{
+			return banner.copy();
+		}
 		return getBlockState(null);
 	}
 
@@ -299,9 +302,18 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof ShieldMetaMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ShieldMetaMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return Objects.equals(banner, that.banner);
 	}
 

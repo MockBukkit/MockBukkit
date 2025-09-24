@@ -201,8 +201,14 @@ public class DispenserStateMock extends ContainerStateMock implements Dispenser
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof DispenserStateMock)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof DispenserStateMock))
+		{
+			return false;
+		}
 		return super.equals(o);
 	}
 

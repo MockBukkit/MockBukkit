@@ -184,7 +184,10 @@ public class ItemStackMock extends ItemStack
 		}
 
 		itemMeta = Bukkit.getItemFactory().asMetaFor(itemMeta, this);
-		if (itemMeta == null) return true;
+		if (itemMeta == null)
+		{
+			return true;
+		}
 		this.itemMeta = itemMeta;
 
 		if (this.itemMeta instanceof Damageable damageable)
@@ -222,7 +225,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int getMaxStackSize()
 	{
-		if (this.itemMeta == null) return 0;
+		if (this.itemMeta == null)
+		{
+			return 0;
+		}
 
 		return this.itemMeta.hasMaxStackSize() ? this.itemMeta.getMaxStackSize() : this.type.getMaxStackSize();
 	}
@@ -230,7 +236,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public short getDurability()
 	{
-		if (this.type == ItemType.AIR) return -1;
+		if (this.type == ItemType.AIR)
+		{
+			return -1;
+		}
 
 		return (short) Math.max(this.durability, 0);
 	}
@@ -277,9 +286,18 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean isSimilar(@Nullable ItemStack stack)
 	{
-		if (stack == null) return false;
-		if (!(stack instanceof final ItemStackMock bukkit)) return stack.isSimilar(this);
-		if (this == bukkit) return true;
+		if (stack == null)
+		{
+			return false;
+		}
+		if (!(stack instanceof final ItemStackMock bukkit))
+		{
+			return stack.isSimilar(this);
+		}
+		if (this == bukkit)
+		{
+			return true;
+		}
 		return this.type == bukkit.type && hasSimilarItemMeta(stack.getItemMeta());
 	}
 
@@ -292,7 +310,10 @@ public class ItemStackMock extends ItemStack
 	 */
 	private boolean hasSimilarItemMeta(@Nullable ItemMeta itemMeta)
 	{
-		if (this.itemMeta == null) return itemMeta == null;
+		if (this.itemMeta == null)
+		{
+			return itemMeta == null;
+		}
 
 		return this.itemMeta.equals(itemMeta);
 	}
@@ -302,7 +323,10 @@ public class ItemStackMock extends ItemStack
 		@Override
 		public <P, C> @Nullable C get(@NotNull NamespacedKey key, @NotNull PersistentDataType<P, C> type)
 		{
-			if (itemMeta == null) return null;
+			if (itemMeta == null)
+			{
+				return null;
+			}
 
 			return itemMeta.getPersistentDataContainer().get(key, type);
 		}
@@ -310,7 +334,10 @@ public class ItemStackMock extends ItemStack
 		@Override
 		public @NotNull Set<NamespacedKey> getKeys()
 		{
-			if (itemMeta == null) return Set.of();
+			if (itemMeta == null)
+			{
+				return Set.of();
+			}
 
 			return itemMeta.getPersistentDataContainer().getKeys();
 		}
@@ -326,7 +353,10 @@ public class ItemStackMock extends ItemStack
 	public @NotNull ItemStack withType(@NotNull Material type)
 	{
 		ItemStackMock item = new ItemStackMock(type, getAmount());
-		if (this.durability != -1) item.setDurability(this.durability);
+		if (this.durability != -1)
+		{
+			item.setDurability(this.durability);
+		}
 		item.setItemMeta(this.itemMeta);
 
 		return item;
@@ -335,7 +365,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean containsEnchantment(@NotNull Enchantment ench)
 	{
-		if (this.itemMeta == null) return false;
+		if (this.itemMeta == null)
+		{
+			return false;
+		}
 
 		return this.itemMeta.getEnchants().containsKey(ench);
 	}
@@ -343,7 +376,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int removeEnchantment(@NotNull Enchantment ench)
 	{
-		if (this.itemMeta == null) return 0;
+		if (this.itemMeta == null)
+		{
+			return 0;
+		}
 
 		int level = this.itemMeta.getEnchantLevel(ench);
 		this.itemMeta.removeEnchant(ench);
@@ -353,7 +389,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public void removeEnchantments()
 	{
-		if (this.itemMeta == null) return;
+		if (this.itemMeta == null)
+		{
+			return;
+		}
 
 		this.itemMeta.removeEnchantments();
 	}
@@ -380,7 +419,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (obj == null) return false;
+		if (obj == null)
+		{
+			return false;
+		}
 		if (!(obj instanceof ItemStack stack))
 		{
 			return false;

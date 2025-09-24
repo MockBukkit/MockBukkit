@@ -208,9 +208,18 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof BlockStateMetaMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BlockStateMetaMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return Objects.equals(blockState, that.blockState) && material == that.material;
 	}
 

@@ -162,7 +162,9 @@ public class MapCanvasMock implements MapCanvas
 				for (int w = 0; w < sprite.getWidth(); w++)
 				{
 					if (!sprite.get(h, w))
+					{
 						continue;
+					}
 					this.setPixel(x + w, y + h, color);
 				}
 			}

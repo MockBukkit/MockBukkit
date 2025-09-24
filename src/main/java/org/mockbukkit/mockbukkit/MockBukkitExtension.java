@@ -338,7 +338,9 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
 	{
 		if (!supportsParameter(parameterContext, extensionContext))
+		{
 			return null;
+		}
 
 		final MockBukkitInject annotation = parameterContext.getParameter().getAnnotation(MockBukkitInject.class);
 		return createMockForType(parameterContext.getParameter().getType(), annotation);

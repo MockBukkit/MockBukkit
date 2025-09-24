@@ -148,9 +148,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		this.perms = new PermissibleBase(this);
 
 		if (!Bukkit.getWorlds().isEmpty())
+		{
 			location = Bukkit.getWorlds().getFirst().getSpawnLocation();
+		}
 		else
+		{
 			location = new Location(null, 0, 0, 0);
+		}
 
 		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
@@ -282,7 +286,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public Location getLocation(@Nullable Location loc)
 	{
 		if (loc == null)
+		{
 			return null;
+		}
 
 		loc.setWorld(location.getWorld());
 		loc.setDirection(location.getDirection());
@@ -686,7 +692,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
 			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
 					&& Math.abs(distance.getZ()) <= z && entity != this)
+			{
 				nearbyEntities.add(entity);
+			}
 		});
 		return nearbyEntities;
 	}

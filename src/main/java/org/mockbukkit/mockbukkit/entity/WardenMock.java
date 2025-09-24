@@ -110,11 +110,17 @@ public class WardenMock extends MonsterMock implements Warden
 	public @NotNull AngerLevel getAngerLevel()
 	{
 		if (getAnger() <= 39)
+		{
 			return AngerLevel.CALM;
+		}
 		else if (getAnger() <= 79)
+		{
 			return AngerLevel.AGITATED;
+		}
 		else
+		{
 			return AngerLevel.ANGRY;
+		}
 	}
 
 	@Override

@@ -347,7 +347,10 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
-		if (item == null) item = new ItemStackMock(Material.AIR);
+		if (item == null)
+		{
+			item = new ItemStackMock(Material.AIR);
+		}
 		switch (slot)
 		{
 		case HAND -> getEquipment().setItemInMainHand(item);

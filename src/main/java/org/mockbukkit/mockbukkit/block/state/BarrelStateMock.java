@@ -202,9 +202,18 @@ public class BarrelStateMock extends ContainerStateMock implements Barrel
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof BarrelStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BarrelStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return isOpen == that.isOpen;
 	}
 

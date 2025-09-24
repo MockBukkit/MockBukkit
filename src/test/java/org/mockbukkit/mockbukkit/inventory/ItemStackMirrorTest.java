@@ -1,13 +1,21 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.io.TempDir;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -58,6 +66,34 @@ class ItemStackMirrorTest
 			assertNotSame(originalItem, mirror);
 		}
 
+	}
+
+	/*
+	 * See: https://github.com/MockBukkit/MockBukkit/issues/1449
+	 */
+	@Test
+	void fileSerializationAndDeserializationShouldSucceed(@TempDir Path tempDir) throws IOException
+	{
+		// Create an instance of ItemStackMirror
+		ItemStack item = ItemStackMirror.create(new ItemStack(Material.STONE_BRICKS));
+		item.setAmount(5);
+
+		// Serialize to YAML
+		YamlConfiguration config = new YamlConfiguration();
+		config.set("item", item);
+
+		File file = tempDir.resolve("test.yml").toFile();
+		config.save(file);
+
+		// Load and deserialize
+		YamlConfiguration loadedConfig = YamlConfiguration.loadConfiguration(file);
+		Object deserialized = loadedConfig.get("item");
+
+		assertNotNull(deserialized, "Deserialized object should not be null");
+		ItemStack loadedItem = assertInstanceOf(ItemStack.class, deserialized, "Deserialized object should be of type ItemStack");
+
+		assertEquals(5, loadedItem.getAmount());
+		assertEquals(Material.STONE_BRICKS, loadedItem.getType());
 	}
 
 }

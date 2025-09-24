@@ -48,9 +48,9 @@ import org.bukkit.block.data.type.Vault;
 import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.block.data.deserializer.EnumDataDeserializer;
 
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -65,7 +65,7 @@ public enum BlockDataKey
 	/**
 	 * Stores the {@link BlockFace} a {@link Directional} block is facing towards.
 	 */
-	FACING("facing", string -> BlockFace.valueOf(string.toUpperCase(Locale.ROOT)), Directional.class::isInstance),
+	FACING("facing", EnumDataDeserializer.of(BlockFace.class), Directional.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Campfire} is a signal fire (hay block underneath).
@@ -75,7 +75,14 @@ public enum BlockDataKey
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 */
-	HALF("half", string -> Bisected.Half.valueOf(string.toUpperCase(Locale.ROOT)), Bisected.class::isInstance),
+	HALF_SINGLE_BLOCK("half", EnumDataDeserializer.of(Bisected.Half.class), o -> o instanceof BlockDataMock blockData && BisectedDataMock.isSingleBlock(blockData)),
+	/**
+	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
+	 * Similar to HALF but stores the value as lower or upper.
+	 *
+	 * @see BisectedDataMock
+	 */
+	HALF_MULTI_BLOCK("half", a -> a, o -> o instanceof BlockDataMock blockData && !BisectedDataMock.isSingleBlock(blockData)),
 
 	/**
 	 * Stores whether a {@link Lightable} is list.
@@ -95,7 +102,7 @@ public enum BlockDataKey
 	/**
 	 * Stores what {@link Bed.Part} of a {@link Bed} this block is.
 	 */
-	PART("part", string -> Bed.Part.valueOf(string.toUpperCase(Locale.ROOT)), Bed.class::isInstance),
+	PART("part", EnumDataDeserializer.of(Bed.Part.class), Bed.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Powerable} is powered.
@@ -105,13 +112,13 @@ public enum BlockDataKey
 	/**
 	 * Stores what {@link Stairs.Shape} a {@link Stairs} block is.
 	 */
-	SHAPE("shape", string -> Stairs.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Stairs.class::isInstance),
+	SHAPE("shape", EnumDataDeserializer.of(Stairs.Shape.class), Stairs.class::isInstance),
 
 	/**
 	 * Store what {@link Slab.Type} a {@link Slab} is.
 	 */
-	TYPE("type", string -> Slab.Type.valueOf(string.toUpperCase(Locale.ROOT)), Slab.class::isInstance),
-	TYPE_CHEST("type", string -> Chest.Type.valueOf(string.toUpperCase(Locale.ROOT)), Chest.class::isInstance),
+	TYPE("type", EnumDataDeserializer.of(Slab.Type.class), Slab.class::isInstance),
+	TYPE_CHEST("type", EnumDataDeserializer.of(Chest.Type.class), Chest.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
@@ -121,16 +128,16 @@ public enum BlockDataKey
 	/**
 	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is facing
 	 */
-	FACE("face", string -> FaceAttachable.AttachedFace.valueOf(string.toUpperCase(Locale.ROOT)), FaceAttachable.class::isInstance),
+	FACE("face", EnumDataDeserializer.of(FaceAttachable.AttachedFace.class), FaceAttachable.class::isInstance),
 
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
-	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
+	LEAVES_KEY("leaves", EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
 
-	REDSTONE_EAST("east", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
-	REDSTONE_WEST("west", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
-	REDSTONE_NORTH("north", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
-	REDSTONE_SOUTH("south", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_NORTH("north", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
@@ -150,23 +157,23 @@ public enum BlockDataKey
 	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
 	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
 	ENABLED("enabled", Boolean::parseBoolean, Hopper.class::isInstance),
-	ORIENTATION("orientation", string -> Orientation.valueOf(string.toUpperCase(Locale.ROOT)), Crafter.class::isInstance),
-	HINGE("hinge", string -> Door.Hinge.valueOf(string.toUpperCase(Locale.ROOT)), Door.class::isInstance),
+	ORIENTATION("orientation", EnumDataDeserializer.of(Orientation.class), Crafter.class::isInstance),
+	HINGE("hinge", EnumDataDeserializer.of(Door.Hinge.class), Door.class::isInstance),
 	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
 	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
 
-	TRIAL_SPAWNER_STATE("trial_spawner_state", string -> TrialSpawner.State.valueOf(string.toUpperCase(Locale.ROOT)), TrialSpawner.class::isInstance),
+	TRIAL_SPAWNER_STATE("trial_spawner_state", EnumDataDeserializer.of(TrialSpawner.State.class), TrialSpawner.class::isInstance),
 	OMINOUS("ominous", Boolean::parseBoolean, c -> c instanceof TrialSpawner || c instanceof Vault),
 
-	VAULT_STATE("vault_state", string -> Vault.State.valueOf(string.toUpperCase(Locale.ROOT)), Vault.class::isInstance),
+	VAULT_STATE("vault_state", EnumDataDeserializer.of(Vault.State.class), Vault.class::isInstance),
 
-	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
+	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
-	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
+	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
-	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
+	MODE("mode", EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),

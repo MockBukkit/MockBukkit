@@ -31,7 +31,7 @@ class AmethystClusterDataMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(BlockFace.NORTH, cluster.getFacing());
+		assertEquals(BlockFace.UP, cluster.getFacing());
 		assertFalse(cluster.isWaterlogged());
 	}
 
@@ -53,7 +53,9 @@ class AmethystClusterDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (!cluster.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertDoesNotThrow(() -> cluster.setFacing(face));
 		}
 	}
@@ -64,7 +66,9 @@ class AmethystClusterDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (cluster.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertThrowsExactly(IllegalArgumentException.class, () -> cluster.setFacing(face));
 		}
 	}
@@ -86,7 +90,7 @@ class AmethystClusterDataMockTest
 	@Test
 	void getAsString()
 	{
-		assertEquals("minecraft:amethyst_cluster[facing=north,waterlogged=false]", cluster.getAsString());
+		assertEquals("minecraft:amethyst_cluster[facing=up,waterlogged=false]", cluster.getAsString());
 	}
 
 	@Test

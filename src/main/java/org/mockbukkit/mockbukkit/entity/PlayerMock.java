@@ -501,11 +501,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(mode, "GameMode cannot be null");
 		if (super.getGameMode() == mode)
+		{
 			return;
+		}
 
 		PlayerGameModeChangeEvent event = new PlayerGameModeChangeEvent(this, mode, PlayerGameModeChangeEvent.Cause.UNKNOWN, null);
 		if (!event.callEvent())
+		{
 			return;
+		}
 
 		this.previousGamemode = super.getGameMode();
 		super.setGameMode(mode);
@@ -1058,7 +1062,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void kick(@Nullable Component message, PlayerKickEvent.@NotNull Cause cause)
 	{
 		AsyncCatcher.catchOp("player kick");
-		if (!isOnline()) return;
+		if (!isOnline())
+		{
+			return;
+		}
 		PlayerKickEvent event =
 				new PlayerKickEvent(this,
 						Component.text("Plugin"),
@@ -1562,7 +1569,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(map, "Map cannot be null");
 		if (!(map instanceof MapViewMock mapView))
+		{
 			return;
+		}
 
 		mapView.render(this);
 

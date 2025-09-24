@@ -58,11 +58,17 @@ public class ChunkCoordinate
 	public boolean equals(@Nullable Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		ChunkCoordinate other = (ChunkCoordinate) obj;
 		return x == other.x && z == other.z;
 	}

@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -165,27 +167,153 @@ class BlockDataMockTest
 		assertNotEquals(wallSign.getFacing(), clone.getFacing());
 	}
 
-	@Test
-	void test_getAsString()
+	@Nested
+	class GetAsString
 	{
-		// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
-		// defaults:
-		//    "minecraft:chest": {
-		//        "facing": "north",
-		//        "type": "single",
-		//        "waterlogged": false
-		//    },
-		//
-		// getAsString(true) : minecraft:chest[waterlogged=true]
-		// getAsString(false): minecraft:chest[facing=north,type=single,waterlogged=true]
-		// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
 
-		BlockDataMock data = BlockDataMock.mock(Material.CAMPFIRE);
-		assertEquals("minecraft:campfire", data.getAsString(true));
-		assertNotEquals(data.getAsString(true), data.getAsString(false));
-		data.set(BlockDataKey.FACING, BlockFace.SOUTH);
-		assertEquals("minecraft:campfire[facing=south]", data.getAsString(true));
-		assertNotEquals(data.getAsString(true), data.getAsString(false));
+		@Test
+		void test_getAsString()
+		{
+			// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
+			// defaults:
+			//    "minecraft:chest": {
+			//        "facing": "north",
+			//        "type": "single",
+			//        "waterlogged": false
+			//    },
+			//
+			// getAsString(true) : minecraft:chest[waterlogged=true]
+			// getAsString(false): minecraft:chest[facing=north,type=single,waterlogged=true]
+			// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
+
+			BlockDataMock data = BlockDataMockFactory.mock(Material.CAMPFIRE);
+			assertEquals("minecraft:campfire", data.getAsString(true));
+			assertNotEquals(data.getAsString(true), data.getAsString(false));
+			data.set(BlockDataKey.FACING, BlockFace.SOUTH);
+			assertEquals("minecraft:campfire[facing=south]", data.getAsString(true));
+			assertNotEquals(data.getAsString(true), data.getAsString(false));
+		}
+
+		/*
+		 * See: https://github.com/MockBukkit/MockBukkit/issues/1433
+		 */
+		@ParameterizedTest
+		@CsvSource({
+			"'ACACIA_STAIRS', 'minecraft:acacia_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'ACACIA_TRAPDOOR', 'minecraft:acacia_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'ANDESITE_STAIRS', 'minecraft:andesite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'BAMBOO_DOOR', 'minecraft:bamboo_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'BAMBOO_MOSAIC_STAIRS', 'minecraft:bamboo_mosaic_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'BAMBOO_STAIRS', 'minecraft:bamboo_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'BAMBOO_TRAPDOOR', 'minecraft:bamboo_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'BIRCH_DOOR', 'minecraft:birch_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'BIRCH_STAIRS', 'minecraft:birch_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'BIRCH_TRAPDOOR', 'minecraft:birch_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'BLACKSTONE_STAIRS', 'minecraft:blackstone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'BRICK_STAIRS', 'minecraft:brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'CHERRY_DOOR', 'minecraft:cherry_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'CHERRY_STAIRS', 'minecraft:cherry_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'CHERRY_TRAPDOOR', 'minecraft:cherry_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'COBBLED_DEEPSLATE_STAIRS', 'minecraft:cobbled_deepslate_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'COBBLESTONE_STAIRS', 'minecraft:cobblestone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'COPPER_DOOR', 'minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'COPPER_TRAPDOOR', 'minecraft:copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'CRIMSON_DOOR', 'minecraft:crimson_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'CRIMSON_STAIRS', 'minecraft:crimson_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'CRIMSON_TRAPDOOR', 'minecraft:crimson_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'CUT_COPPER_STAIRS', 'minecraft:cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'DARK_OAK_DOOR', 'minecraft:dark_oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'DARK_OAK_STAIRS', 'minecraft:dark_oak_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'DARK_OAK_TRAPDOOR', 'minecraft:dark_oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'DARK_PRISMARINE_STAIRS', 'minecraft:dark_prismarine_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'DEEPSLATE_BRICK_STAIRS', 'minecraft:deepslate_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'DEEPSLATE_TILE_STAIRS', 'minecraft:deepslate_tile_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'DIORITE_STAIRS', 'minecraft:diorite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'END_STONE_BRICK_STAIRS', 'minecraft:end_stone_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'EXPOSED_COPPER_DOOR', 'minecraft:exposed_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'EXPOSED_COPPER_TRAPDOOR', 'minecraft:exposed_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'EXPOSED_CUT_COPPER_STAIRS', 'minecraft:exposed_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'GRANITE_STAIRS', 'minecraft:granite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'IRON_DOOR', 'minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'IRON_TRAPDOOR', 'minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'JUNGLE_DOOR', 'minecraft:jungle_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'JUNGLE_STAIRS', 'minecraft:jungle_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'JUNGLE_TRAPDOOR', 'minecraft:jungle_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'MANGROVE_DOOR', 'minecraft:mangrove_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'MANGROVE_STAIRS', 'minecraft:mangrove_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'MANGROVE_TRAPDOOR', 'minecraft:mangrove_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'MOSSY_COBBLESTONE_STAIRS', 'minecraft:mossy_cobblestone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'MOSSY_STONE_BRICK_STAIRS', 'minecraft:mossy_stone_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'MUD_BRICK_STAIRS', 'minecraft:mud_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'NETHER_BRICK_STAIRS', 'minecraft:nether_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'OAK_DOOR', 'minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'OAK_STAIRS', 'minecraft:oak_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'OAK_TRAPDOOR', 'minecraft:oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'OXIDIZED_COPPER_DOOR', 'minecraft:oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'OXIDIZED_COPPER_TRAPDOOR', 'minecraft:oxidized_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'OXIDIZED_CUT_COPPER_STAIRS', 'minecraft:oxidized_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'PALE_OAK_DOOR', 'minecraft:pale_oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'PALE_OAK_STAIRS', 'minecraft:pale_oak_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'PALE_OAK_TRAPDOOR', 'minecraft:pale_oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'POLISHED_ANDESITE_STAIRS', 'minecraft:polished_andesite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'POLISHED_BLACKSTONE_BRICK_STAIRS', 'minecraft:polished_blackstone_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'POLISHED_BLACKSTONE_STAIRS', 'minecraft:polished_blackstone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'POLISHED_DEEPSLATE_STAIRS', 'minecraft:polished_deepslate_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'POLISHED_DIORITE_STAIRS', 'minecraft:polished_diorite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'POLISHED_GRANITE_STAIRS', 'minecraft:polished_granite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'POLISHED_TUFF_STAIRS', 'minecraft:polished_tuff_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'PRISMARINE_BRICK_STAIRS', 'minecraft:prismarine_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'PRISMARINE_STAIRS', 'minecraft:prismarine_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'PURPUR_STAIRS', 'minecraft:purpur_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'QUARTZ_STAIRS', 'minecraft:quartz_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'RED_NETHER_BRICK_STAIRS', 'minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'RED_SANDSTONE_STAIRS', 'minecraft:red_sandstone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'RESIN_BRICK_STAIRS', 'minecraft:resin_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'SANDSTONE_STAIRS', 'minecraft:sandstone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'SMOOTH_QUARTZ_STAIRS', 'minecraft:smooth_quartz_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'SMOOTH_RED_SANDSTONE_STAIRS', 'minecraft:smooth_red_sandstone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'SMOOTH_SANDSTONE_STAIRS', 'minecraft:smooth_sandstone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'SPRUCE_DOOR', 'minecraft:spruce_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'SPRUCE_STAIRS', 'minecraft:spruce_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'SPRUCE_TRAPDOOR', 'minecraft:spruce_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'STONE_BRICK_STAIRS', 'minecraft:stone_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'STONE_STAIRS', 'minecraft:stone_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'TUFF_BRICK_STAIRS', 'minecraft:tuff_brick_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'TUFF_STAIRS', 'minecraft:tuff_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'WARPED_DOOR', 'minecraft:warped_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'WARPED_STAIRS', 'minecraft:warped_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'WARPED_TRAPDOOR', 'minecraft:warped_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'WAXED_COPPER_DOOR', 'minecraft:waxed_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'WAXED_COPPER_TRAPDOOR', 'minecraft:waxed_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'WAXED_CUT_COPPER_STAIRS', 'minecraft:waxed_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'WAXED_EXPOSED_COPPER_DOOR', 'minecraft:waxed_exposed_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'WAXED_EXPOSED_COPPER_TRAPDOOR', 'minecraft:waxed_exposed_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'WAXED_EXPOSED_CUT_COPPER_STAIRS', 'minecraft:waxed_exposed_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'WAXED_OXIDIZED_COPPER_DOOR', 'minecraft:waxed_oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'WAXED_OXIDIZED_COPPER_TRAPDOOR', 'minecraft:waxed_oxidized_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'WAXED_OXIDIZED_CUT_COPPER_STAIRS', 'minecraft:waxed_oxidized_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'WAXED_WEATHERED_COPPER_DOOR', 'minecraft:waxed_weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'WAXED_WEATHERED_COPPER_TRAPDOOR', 'minecraft:waxed_weathered_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'WAXED_WEATHERED_CUT_COPPER_STAIRS', 'minecraft:waxed_weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+			"'WEATHERED_COPPER_DOOR', 'minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
+			"'WEATHERED_COPPER_TRAPDOOR', 'minecraft:weathered_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
+			"'WEATHERED_CUT_COPPER_STAIRS', 'minecraft:weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+		})
+		void givenSamples(Material material, String expectedOutput)
+		{
+			var blockData = material.createBlockData();
+			var actual = blockData.getAsString(false);
+			assertEquals(expectedOutput, actual);
+		}
+
+		@ParameterizedTest
+		@CsvFileSource(resources = "/blocks/block_data_as_string.csv")
+		void givenPossibleValues(Material material, String expectedOutput)
+		{
+			var blockData = material.createBlockData();
+			var actual = blockData.getAsString(false);
+			assertEquals(expectedOutput, actual);
+		}
 	}
 
 	@ParameterizedTest

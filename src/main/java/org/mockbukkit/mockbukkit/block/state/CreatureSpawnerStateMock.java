@@ -108,7 +108,9 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 		Preconditions.checkNotNull(creatureType, "CreatureType cannot be null");
 		EntityType type = EntityType.fromName(creatureType);
 		if (type == null)
+		{
 			return;
+		}
 
 		this.setSpawnedType(type);
 	}
@@ -259,8 +261,9 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 	public boolean isActivated()
 	{
 		if (!isPlaced())
+		{
 			throw new IllegalStateException("Cannot reset the timer of a Spawner that isn't placed");
-
+		}
 		return Bukkit.getOnlinePlayers().stream().anyMatch(p -> p.getLocation().distance(getLocation()) <= getRequiredPlayerRange());
 	}
 
@@ -268,8 +271,9 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 	public void resetTimer()
 	{
 		if (!isPlaced())
+		{
 			throw new IllegalStateException("Cannot reset the timer of a Spawner that isn't placed");
-
+		}
 		if (this.maxSpawnDelay <= this.minSpawnDelay)
 		{
 			this.delay = this.minSpawnDelay;

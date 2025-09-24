@@ -126,10 +126,13 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	public boolean eject()
 	{
 		if (!isPlaced())
+		{
 			throw new IllegalStateException("Cannot eject from an unplaced jukebox");
-
+		}
 		if (this.getRecord().getType().isAir())
+		{
 			return false;
+		}
 
 		getWorld().dropItem(getLocation().add(0, 1, 0), getRecord());
 

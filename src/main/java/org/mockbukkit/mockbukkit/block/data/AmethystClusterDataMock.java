@@ -27,8 +27,6 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	{
 		super(type);
 		checkType(type, AmethystCluster.class);
-		setFacing(BlockFace.NORTH);
-		setWaterlogged(false);
 	}
 
 	/**
