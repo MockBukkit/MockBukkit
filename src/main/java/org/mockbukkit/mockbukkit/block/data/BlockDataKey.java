@@ -31,6 +31,7 @@ import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
@@ -156,7 +157,7 @@ public enum BlockDataKey
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
 	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
-	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
+	TRIGGERED("triggered", Boolean::parseBoolean, o -> o instanceof Crafter || o instanceof Dispenser),
 	ENABLED("enabled", Boolean::parseBoolean, Hopper.class::isInstance),
 	ORIENTATION("orientation", EnumDataDeserializer.of(Orientation.class), Crafter.class::isInstance),
 	HINGE("hinge", EnumDataDeserializer.of(Door.Hinge.class), Door.class::isInstance),

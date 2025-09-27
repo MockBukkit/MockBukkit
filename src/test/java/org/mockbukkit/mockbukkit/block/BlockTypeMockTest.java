@@ -666,10 +666,17 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDispenser()
 		{
 			Dispenser data = BlockType.DISPENSER.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Dispenser.class, data);
+		}
+
+		@Test
+		void givenDropper()
+		{
+			BlockData data = BlockType.DROPPER.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Dispenser.class, data);
 		}
