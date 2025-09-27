@@ -44,6 +44,7 @@ import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
+import org.bukkit.block.data.type.TechnicalPiston;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
@@ -122,6 +123,7 @@ public enum BlockDataKey
 	 */
 	TYPE("type", EnumDataDeserializer.of(Slab.Type.class), Slab.class::isInstance),
 	TYPE_CHEST("type", EnumDataDeserializer.of(Chest.Type.class), Chest.class::isInstance),
+	TYPE_TECHNICAL_PISTON("type", EnumDataDeserializer.of(TechnicalPiston.Type.class), TechnicalPiston.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.

@@ -726,7 +726,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenMovingPiston()
 		{
 			TechnicalPiston data = BlockType.MOVING_PISTON.createBlockData();

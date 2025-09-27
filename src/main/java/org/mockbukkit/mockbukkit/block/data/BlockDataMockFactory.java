@@ -41,6 +41,7 @@ import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
+import org.bukkit.block.data.type.TechnicalPiston;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
@@ -101,6 +102,7 @@ public final class BlockDataMockFactory
 			.put(Orientable.class, OrientableMock::new)
 			.put(Piston.class, PistonDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
+			.put(TechnicalPiston.class, TechnicalPistonDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
 			.put(TNT.class, TNTDataMock::new)
 			.put(TrialSpawner.class, TrialSpawnerDataMock::new)
