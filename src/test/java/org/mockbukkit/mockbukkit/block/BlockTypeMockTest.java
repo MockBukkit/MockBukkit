@@ -758,7 +758,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDirectional()
 		{
 			Directional data = BlockType.WALL_TORCH.createBlockData();
