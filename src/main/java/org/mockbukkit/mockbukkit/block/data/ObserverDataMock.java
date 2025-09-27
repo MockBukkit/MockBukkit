@@ -56,4 +56,11 @@ public class ObserverDataMock extends BlockDataMock implements Observer
 		this.set(BlockDataKey.POWERED, powered);
 	}
 
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull ObserverDataMock clone()
+	{
+		return new ObserverDataMock(this);
+	}
+
 }

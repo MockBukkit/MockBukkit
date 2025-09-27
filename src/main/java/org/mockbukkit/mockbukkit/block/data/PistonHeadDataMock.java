@@ -67,4 +67,11 @@ public class PistonHeadDataMock extends BlockDataMock implements PistonHead
 		this.set(BlockDataKey.SHORT, _short);
 	}
 
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull PistonHeadDataMock clone()
+	{
+		return new PistonHeadDataMock(this);
+	}
+
 }

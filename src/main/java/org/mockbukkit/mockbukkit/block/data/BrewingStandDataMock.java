@@ -56,4 +56,11 @@ public class BrewingStandDataMock extends BlockDataMock implements BrewingStand
 		return bottleSlots.length;
 	}
 
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull BrewingStandDataMock clone()
+	{
+		return new BrewingStandDataMock(this);
+	}
+
 }

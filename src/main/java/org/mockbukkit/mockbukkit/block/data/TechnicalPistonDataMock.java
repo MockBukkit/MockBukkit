@@ -55,4 +55,11 @@ public class TechnicalPistonDataMock extends BlockDataMock implements TechnicalP
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull TechnicalPistonDataMock clone()
+	{
+		return new TechnicalPistonDataMock(this);
+	}
+
 }

@@ -53,4 +53,11 @@ public class PistonDataMock extends BlockDataMock implements Piston
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull PistonDataMock clone()
+	{
+		return new PistonDataMock(this);
+	}
+
 }

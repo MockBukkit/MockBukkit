@@ -53,4 +53,11 @@ public class DispenserDataMock extends BlockDataMock implements Dispenser
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull DispenserDataMock clone()
+	{
+		return new DispenserDataMock(this);
+	}
+
 }
