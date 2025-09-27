@@ -33,6 +33,7 @@ import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
 import org.bukkit.block.data.type.Observer;
+import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.RedstoneRail;
 import org.bukkit.block.data.type.RedstoneWallTorch;
 import org.bukkit.block.data.type.RedstoneWire;
@@ -98,6 +99,7 @@ public final class BlockDataMockFactory
 			.put(Lightable.class, LightableDataMock::new)
 			.put(Observer.class, ObserverDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
+			.put(Piston.class, PistonDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
 			.put(TNT.class, TNTDataMock::new)
