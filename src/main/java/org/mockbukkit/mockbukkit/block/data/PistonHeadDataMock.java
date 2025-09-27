@@ -9,6 +9,11 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link PistonHead}.
+ *
+ * @see BlockDataMock
+ */
 public class PistonHeadDataMock extends BlockDataMock implements PistonHead
 {
 

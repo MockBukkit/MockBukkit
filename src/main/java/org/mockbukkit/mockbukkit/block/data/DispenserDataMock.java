@@ -8,6 +8,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link Dispenser}.
+ *
+ * @see BlockDataMock
+ */
 public class DispenserDataMock extends BlockDataMock implements Dispenser
 {
 

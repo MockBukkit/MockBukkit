@@ -7,6 +7,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link BrewingStand}.
+ *
+ * @see BlockDataMock
+ */
 public class BrewingStandDataMock extends BlockDataMock implements BrewingStand
 {
 

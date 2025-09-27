@@ -8,6 +8,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link Piston}.
+ *
+ * @see BlockDataMock
+ */
 public class PistonDataMock extends BlockDataMock implements Piston
 {
 

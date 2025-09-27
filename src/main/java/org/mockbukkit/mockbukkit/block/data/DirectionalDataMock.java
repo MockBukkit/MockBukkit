@@ -8,6 +8,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link Directional}.
+ *
+ * @see BlockDataMock
+ */
 public class DirectionalDataMock extends BlockDataMock implements Directional
 {
 

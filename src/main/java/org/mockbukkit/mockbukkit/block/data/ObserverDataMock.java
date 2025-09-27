@@ -1,16 +1,18 @@
-package org.mockbukkit.mockbukkit.block;
+package org.mockbukkit.mockbukkit.block.data;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Observer;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.block.data.BlockDataKey;
-import org.mockbukkit.mockbukkit.block.data.BlockDataLimitation;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link Observer}.
+ *
+ * @see BlockDataMock
+ */
 public class ObserverDataMock extends BlockDataMock implements Observer
 {
 

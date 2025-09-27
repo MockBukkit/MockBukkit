@@ -49,7 +49,6 @@ import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.block.ObserverDataMock;
 
 import java.util.Map;
 import java.util.function.Function;

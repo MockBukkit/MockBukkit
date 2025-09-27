@@ -9,6 +9,11 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of {@link TechnicalPiston}.
+ *
+ * @see BlockDataMock
+ */
 public class TechnicalPistonDataMock extends BlockDataMock implements TechnicalPiston
 {
 
