@@ -74,6 +74,7 @@ import org.bukkit.block.data.type.LightningRod;
 import org.bukkit.block.data.type.MangrovePropagule;
 import org.bukkit.block.data.type.MossyCarpet;
 import org.bukkit.block.data.type.NoteBlock;
+import org.bukkit.block.data.type.Observer;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.PointedDripstone;
@@ -679,6 +680,14 @@ class BlockTypeMockTest
 			BlockData data = BlockType.DROPPER.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Dispenser.class, data);
+		}
+
+		@Test
+		void givenObserver()
+		{
+			BlockData data = BlockType.OBSERVER.createBlockData();
+			assertNotNull(data);
+			assertInstanceOf(Observer.class, data);
 		}
 
 		@Test

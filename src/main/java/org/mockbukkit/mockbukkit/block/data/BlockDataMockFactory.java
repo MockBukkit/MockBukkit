@@ -32,6 +32,7 @@ import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
+import org.bukkit.block.data.type.Observer;
 import org.bukkit.block.data.type.RedstoneRail;
 import org.bukkit.block.data.type.RedstoneWallTorch;
 import org.bukkit.block.data.type.RedstoneWire;
@@ -44,6 +45,7 @@ import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.block.ObserverDataMock;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -94,6 +96,7 @@ public final class BlockDataMockFactory
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Light.class, LightDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
+			.put(Observer.class, ObserverDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
