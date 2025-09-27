@@ -958,7 +958,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBrewingStand()
 		{
 			BrewingStand data = BlockType.BREWING_STAND.createBlockData();

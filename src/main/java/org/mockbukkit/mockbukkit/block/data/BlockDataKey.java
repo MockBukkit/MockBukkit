@@ -24,6 +24,7 @@ import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
@@ -184,7 +185,11 @@ public enum BlockDataKey
 	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
 	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance),
 	HATCH("hatch", Integer::parseInt, Hatchable.class::isInstance),
-	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance);
+	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance),
+
+	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
+	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
+	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance);
 
 
 	private static final Set<String> KEYS = compileKeys();
