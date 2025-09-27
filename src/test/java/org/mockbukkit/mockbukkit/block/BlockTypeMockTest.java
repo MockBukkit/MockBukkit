@@ -717,7 +717,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenPistonHead()
 		{
 			PistonHead data = BlockType.PISTON_HEAD.createBlockData();

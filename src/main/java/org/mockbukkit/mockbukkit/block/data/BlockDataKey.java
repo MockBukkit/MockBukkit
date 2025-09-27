@@ -38,6 +38,7 @@ import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Piston;
+import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
@@ -192,6 +193,7 @@ public enum BlockDataKey
 	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance),
 
 	EXTENDED("extended", Boolean::parseBoolean, Piston.class::isInstance),
+	SHORT("short", Boolean::parseBoolean, PistonHead.class::isInstance),
 
 	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
