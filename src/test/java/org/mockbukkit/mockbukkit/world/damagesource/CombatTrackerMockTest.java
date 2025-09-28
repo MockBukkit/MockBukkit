@@ -62,11 +62,9 @@ class CombatTrackerMockTest
 		@Test
 		void givenIntentionalGameDesignShouldReturnIntentionalGameDesign()
 		{
-			CombatEntryMock combatEntry = new CombatEntryMock(
-					DamageSource.builder(DamageType.BAD_RESPAWN_POINT).build(),
-					100,
-					null,
-					0);
+			CombatEntryMock combatEntry = CombatEntryMock.builder()
+					.damageSource(DamageSource.builder(DamageType.BAD_RESPAWN_POINT).build())
+					.build();
 			combatTracker.addCombatEntry(combatEntry);
 
 			Component actual = combatTracker.getDeathMessage();
@@ -257,11 +255,11 @@ class CombatTrackerMockTest
 			@ValueSource(ints = {1, 2, 3, 4, 5})
 			void withLessThen5BlockFall(int fallAmount)
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.GENERIC,
-						fallAmount);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.GENERIC)
+						.fallDistance(fallAmount)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -275,11 +273,11 @@ class CombatTrackerMockTest
 				Player attacker = server.addPlayer("jeb");
 				player.setKiller(attacker);
 
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.GENERIC,
-						3);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.GENERIC)
+						.fallDistance(3)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -291,11 +289,11 @@ class CombatTrackerMockTest
 			@ValueSource(ints = {6, 7, 8, 9, 10})
 			void with6BlockFall(int fallAmount)
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.GENERIC,
-						fallAmount);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.GENERIC)
+						.fallDistance(fallAmount)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -306,11 +304,11 @@ class CombatTrackerMockTest
 			@Test
 			void withLadderFall()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.LADDER,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.LADDER)
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -321,11 +319,11 @@ class CombatTrackerMockTest
 			@Test
 			void withVines()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.VINES,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.VINES)
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -336,11 +334,11 @@ class CombatTrackerMockTest
 			@Test
 			void withWeepingVines()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.WEEPING_VINES,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.WEEPING_VINES)
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -351,11 +349,11 @@ class CombatTrackerMockTest
 			@Test
 			void withTwistingVines()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.TWISTING_VINES,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.TWISTING_VINES)
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -366,11 +364,11 @@ class CombatTrackerMockTest
 			@Test
 			void withScaffolding()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.SCAFFOLDING,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.SCAFFOLDING)
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -381,11 +379,11 @@ class CombatTrackerMockTest
 			@Test
 			void whileClimbing()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						FallLocationType.OTHER_CLIMBABLE,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallLocationType(FallLocationType.OTHER_CLIMBABLE)
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -396,18 +394,15 @@ class CombatTrackerMockTest
 			@Test
 			void whileTakingEnvironmentDamage()
 			{
-				CombatEntryMock a = new CombatEntryMock(
-						DamageSource.builder(DamageType.CACTUS).build(),
-						10,
-						null,
-						0);
+				CombatEntryMock a = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.CACTUS).build())
+						.build();
 				combatTracker.addCombatEntry(a);
 
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						null,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -420,19 +415,15 @@ class CombatTrackerMockTest
 			{
 				Player attacker = server.addPlayer("jeb");
 
-				CombatEntryMock a = new CombatEntryMock(
-						DamageSource.builder(DamageType.PLAYER_ATTACK)
-								.withCausingEntity(attacker).build(),
-						10,
-						null,
-						0);
+				CombatEntryMock a = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.PLAYER_ATTACK).withCausingEntity(attacker).build())
+						.build();
 				combatTracker.addCombatEntry(a);
 
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						null,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -449,19 +440,15 @@ class CombatTrackerMockTest
 				wand.editMeta(m -> m.customName(Component.text("Leviosa Spell")));
 				attacker.getEquipment().setItemInMainHand(wand);
 
-				CombatEntryMock a = new CombatEntryMock(
-						DamageSource.builder(DamageType.PLAYER_ATTACK)
-								.withCausingEntity(attacker).build(),
-						10,
-						null,
-						0);
+				CombatEntryMock a = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.PLAYER_ATTACK).withCausingEntity(attacker).build())
+						.build();
 				combatTracker.addCombatEntry(a);
 
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.FALL).build(),
-						0,
-						null,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.FALL).build())
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -472,11 +459,10 @@ class CombatTrackerMockTest
 			@Test
 			void withStalagmite()
 			{
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.STALAGMITE).build(),
-						0,
-						null,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.STALAGMITE).build())
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();
@@ -490,11 +476,10 @@ class CombatTrackerMockTest
 				Player attacker = server.addPlayer("jeb");
 				player.setKiller(attacker);
 
-				CombatEntryMock combatEntry = new CombatEntryMock(
-						DamageSource.builder(DamageType.STALAGMITE).build(),
-						0,
-						null,
-						6);
+				CombatEntryMock combatEntry = CombatEntryMock.builder()
+						.damageSource(DamageSource.builder(DamageType.STALAGMITE).build())
+						.fallDistance(6)
+						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
 				Component actual = combatTracker.getDeathMessage();

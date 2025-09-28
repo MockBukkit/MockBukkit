@@ -222,7 +222,7 @@ public class CombatTrackerMock implements CombatTracker
 	public @Nullable FallLocationType calculateFallLocationType()
 	{
 		// TODO: Auto generated
-		return null;
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 	private static boolean shouldEnterCombat(DamageSource source)
