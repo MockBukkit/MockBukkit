@@ -32,6 +32,7 @@ public final class TagFactory
 			case ENTITY_TYPES -> EntityTypeTagMock.from(key, values);
 			case FLUIDS -> FluidTagMock.from(key, values);
 			case GAME_EVENTS -> GameEventTagMock.from(key, values);
+			case DAMAGE_TYPES -> DamageTypeTagMock.from(key, values);
 		};
 	}
 

@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:bad_respawn_point",
+		"minecraft:explosion",
+		"minecraft:fireworks",
+		"minecraft:player_explosion"
+	]
+}

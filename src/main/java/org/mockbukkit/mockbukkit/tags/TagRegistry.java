@@ -5,7 +5,9 @@ import org.bukkit.GameEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.EntityType;
+import org.bukkit.tag.DamageTypeTags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -41,7 +43,12 @@ public enum TagRegistry
 	/**
 	 * The entity types;
 	 */
-	ENTITY_TYPES(Tag.REGISTRY_ENTITY_TYPES, EntityType.class);
+	ENTITY_TYPES(Tag.REGISTRY_ENTITY_TYPES, EntityType.class),
+
+	/**
+	 * The damage types;
+	 */
+	DAMAGE_TYPES(DamageTypeTags.REGISTRY_DAMAGE_TYPES, DamageType.class);
 
 	private final Map<NamespacedKey, Tag<?>> tags = new HashMap<>();
 	private final String registryName;

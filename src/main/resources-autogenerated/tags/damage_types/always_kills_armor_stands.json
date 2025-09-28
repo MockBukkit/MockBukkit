@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:arrow",
+		"minecraft:fireball",
+		"minecraft:trident",
+		"minecraft:wind_charge",
+		"minecraft:wither_skull"
+	]
+}
