@@ -91,6 +91,7 @@ import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
+import org.bukkit.tag.DamageTypeTags;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
@@ -2290,6 +2291,15 @@ public class ServerMock extends Server.Spigot implements Server
 		case Tag.REGISTRY_GAME_EVENTS ->
 		{
 			Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
+			{
+				return optionalTag.get();
+			}
+		}
+		case DamageTypeTags.REGISTRY_DAMAGE_TYPES ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.damage.DamageType.class, "Damage type namespace must have DamageType type");
 			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 			if (optionalTag.isPresent())
 			{
