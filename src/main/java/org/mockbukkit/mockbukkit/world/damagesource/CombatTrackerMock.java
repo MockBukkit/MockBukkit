@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.world.damagesource;
 
-import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.CombatTracker;
 import io.papermc.paper.world.damagesource.FallLocationType;
@@ -18,11 +17,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.tag.DamageTypeTags;
 import org.jspecify.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Implementation of {@link CombatTracker} base on <i>PaperCombatTrackerWrapper</i>.
+ */
 @RequiredArgsConstructor
 public class CombatTrackerMock implements CombatTracker
 {
@@ -31,7 +33,7 @@ public class CombatTrackerMock implements CombatTracker
 			.hoverEvent(HoverEvent.showText(Component.text("MCPE-28723")));
 
 	private final LivingEntity entity;
-	private final List<CombatEntry> combatEntries = new ArrayList<>();
+	private final List<CombatEntry> combatEntries = new LinkedList<>();
 
 	private boolean inCombat = false;
 	private boolean takingDamage = false;
@@ -172,7 +174,7 @@ public class CombatTrackerMock implements CombatTracker
 	private Component getFallMessage(CombatEntry combatEntry, @Nullable Entity entity)
 	{
 		DamageSource damageSource = combatEntry.getDamageSource();
-		if (!DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) && !damageSource.equals(DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL))
+		if (!DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) && !DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.isTagged(damageSource.getDamageType()))
 		{
 			Component displayName = getDisplayName(entity);
 			Entity entity1 = damageSource.getCausingEntity();
@@ -253,7 +255,7 @@ public class CombatTrackerMock implements CombatTracker
 		{
 			Component component = damageSource.getCausingEntity() == null ? damageSource.getDirectEntity().teamDisplayName() : damageSource.getCausingEntity().teamDisplayName();
 			ItemStack itemStack = damageSource.getCausingEntity() instanceof LivingEntity livingEntity1 ? livingEntity1.getEquipment().getItemInMainHand() : ItemStack.empty();
-			return !itemStack.isEmpty() && itemStack.hasData(DataComponentTypes.CUSTOM_NAME)
+			return !itemStack.isEmpty() && itemStack.getItemMeta().hasCustomName()
 					? Component.translatable(string + ".item", livingEntity.teamDisplayName(), component, itemStack.displayName())
 					: Component.translatable(string, livingEntity.teamDisplayName(), component);
 		}

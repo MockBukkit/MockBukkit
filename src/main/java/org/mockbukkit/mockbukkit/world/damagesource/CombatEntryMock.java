@@ -2,10 +2,12 @@ package org.mockbukkit.mockbukkit.world.damagesource;
 
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.damage.DamageSource;
 import org.jspecify.annotations.Nullable;
 
+@Builder
 @RequiredArgsConstructor
 public class CombatEntryMock implements CombatEntry
 {
