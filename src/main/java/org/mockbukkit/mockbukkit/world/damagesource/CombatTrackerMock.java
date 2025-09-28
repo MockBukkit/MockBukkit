@@ -64,7 +64,47 @@ public class CombatTrackerMock implements CombatTracker
 	@Override
 	public @Nullable CombatEntry computeMostSignificantFall()
 	{
-		throw new UnsupportedOperationException("Not supported yet.");
+		CombatEntry combatEntry = null;
+		CombatEntry combatEntry1 = null;
+		float maxDamage = 0.0F;
+		float maxFallDistance = 0.0F;
+
+		for (int i = 0; i < this.combatEntries.size(); i++)
+		{
+			CombatEntry currentEntry = this.combatEntries.get(i);
+			CombatEntry previousEntry = i > 0 ? this.combatEntries.get(i - 1) : null;
+			DamageSource damageSource = currentEntry.getDamageSource();
+			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.isTagged(damageSource.getDamageType());
+			float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
+
+			if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
+					&& fallDistance > 0.0F && (combatEntry == null || fallDistance > maxFallDistance))
+			{
+				if (i > 0)
+				{
+					combatEntry = previousEntry;
+				} else
+				{
+					combatEntry = currentEntry;
+				}
+
+				maxFallDistance = fallDistance;
+			}
+
+			if (currentEntry.getFallLocationType() != null && (combatEntry1 == null || currentEntry.getDamage() > maxDamage))
+			{
+				combatEntry1 = currentEntry;
+				maxDamage = currentEntry.getDamage();
+			}
+		}
+
+		if (maxFallDistance > 5.0F && combatEntry != null)
+		{
+			return combatEntry;
+		} else
+		{
+			return maxDamage > 5.0F && combatEntry1 != null ? combatEntry1 : null;
+		}
 	}
 
 	@Override
