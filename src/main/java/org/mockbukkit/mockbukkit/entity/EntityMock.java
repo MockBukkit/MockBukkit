@@ -1339,8 +1339,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Component teamDisplayName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// TODO support for team
+		return this.name();
 	}
 
 	@Override
