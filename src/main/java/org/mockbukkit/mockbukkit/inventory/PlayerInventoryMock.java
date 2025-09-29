@@ -9,8 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Arrays;
 
@@ -77,8 +77,25 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setStorageContests has not been implemented for Player Inventories");
+		if (items == null)
+		{
+			throw new NullPointerException("ItemStack was null");
+		}
+		else if (items.length > 36)
+		{
+			throw new IllegalArgumentException("ItemStack array too large (max: 36, was: " + items.length + ")");
+		}
+		for (int i = 0; i < getSize(); i++)
+		{
+			if (i < items.length && items[i] != null)
+			{
+				setItem(i, items[i]);
+			}
+			else
+			{
+				setItem(i, null);
+			}
+		}
 	}
 
 	@Override

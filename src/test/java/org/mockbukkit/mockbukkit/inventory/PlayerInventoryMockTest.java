@@ -224,6 +224,33 @@ class PlayerInventoryMockTest
 	}
 
 	@Test
+	void setStorageContents_ResultFromGetStorageContents_Works()
+	{
+		assertDoesNotThrow(() -> inventory.setStorageContents(inventory.getStorageContents()));
+	}
+
+	@Test
+	void setStorageContents_TooLarge_Exception()
+	{
+		assertThrows(IllegalArgumentException.class, () -> inventory.setStorageContents(new ItemStack[37]));
+	}
+
+	@Test
+	void setStorageContents_NewArray_StorageSet()
+	{
+		ItemStack item = new ItemStackMock(Material.STONE);
+		ItemStack item2 = new ItemStackMock(Material.SAND);
+		ItemStack[] contents = new ItemStack[36];
+		contents[0] = item;
+		contents[35] = item2;
+		inventory.setStorageContents(contents);
+		assertEquals(item, inventory.getItem(0));
+		assertEquals(item2, inventory.getItem(35));
+		assertEquals(item, inventory.getStorageContents()[0]);
+		assertEquals(item2, inventory.getStorageContents()[35]);
+	}
+
+	@Test
 	void setArmorContents_NewArray_ArmorSet()
 	{
 		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
