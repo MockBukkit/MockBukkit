@@ -1561,4 +1561,11 @@ class EntityMockTest
 		assertNotEquals(entity, new SimpleEntityMock(server));
 	}
 
+	@Test
+	void getScoreboardEntryName()
+	{
+		String actual = entity.getScoreboardEntryName();
+		assertEquals(entity.getUniqueId().toString(), actual);
+	}
+
 }

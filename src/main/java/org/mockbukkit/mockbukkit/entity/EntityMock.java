@@ -476,10 +476,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * Gets the scoreboard entry for this entity.
 	 *
 	 * @return The scoreboard entry.
+	 *
+	 * @deprecated Replaced by {@link #getScoreboardEntryName()}
 	 */
+	@Deprecated(forRemoval = true)
 	public @NotNull String getScoreboardEntry()
 	{
-		return uuid.toString();
+		return this.getScoreboardEntryName();
 	}
 
 	/**
@@ -1544,8 +1547,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull String getScoreboardEntryName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.getUniqueId().toString();
 	}
 
 	@ApiStatus.Internal

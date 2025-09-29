@@ -13,7 +13,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -260,21 +259,21 @@ public class ScoreboardMock implements Scoreboard
 	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		return getScores(((EntityMock) entity).getScoreboardEntry());
+		return getScores(entity.getScoreboardEntryName());
 	}
 
 	@Override
 	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		resetScores(((EntityMock) entity).getScoreboardEntry());
+		resetScores(entity.getScoreboardEntryName());
 	}
 
 	@Override
 	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		return getEntryTeam(((EntityMock) entity).getScoreboardEntry());
+		return getEntryTeam(entity.getScoreboardEntryName());
 	}
 
 	/**
