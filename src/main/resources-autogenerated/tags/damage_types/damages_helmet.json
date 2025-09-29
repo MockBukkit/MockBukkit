@@ -1,8 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"minecraft:falling_anvil",
-		"minecraft:falling_block",
-		"minecraft:falling_stalactite"
-	]
-}

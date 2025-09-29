@@ -9,7 +9,6 @@ import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.Tag;
-import org.bukkit.damage.DamageType;
 import org.bukkit.entity.EntityType;
 import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.util.JsonUtil;
@@ -60,8 +59,7 @@ public class TagDataGenerator implements DataGenerator
 				"items", Material.class,
 				"fluids", Fluid.class,
 				"entity_types", EntityType.class,
-				"game_events", GameEvent.class,
-				"damage_types", DamageType.class);
+				"game_events", GameEvent.class);
 	}
 
 }
