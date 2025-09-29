@@ -8,6 +8,9 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
@@ -16,6 +19,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.tag.DamageTypeTags;
 import org.jspecify.annotations.Nullable;
+import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -32,7 +36,7 @@ public class CombatTrackerMock implements CombatTracker
 			.clickEvent(ClickEvent.openUrl("https://bugs.mojang.com/browse/MCPE-28723"))
 			.hoverEvent(HoverEvent.showText(Component.text("MCPE-28723")));
 
-	private final LivingEntity entity;
+	private final LivingEntityMock entity;
 	private final List<CombatEntry> combatEntries = new LinkedList<>();
 
 	private boolean inCombat = false;
@@ -261,8 +265,37 @@ public class CombatTrackerMock implements CombatTracker
 	@Override
 	public @Nullable FallLocationType calculateFallLocationType()
 	{
-		// TODO: Auto generated
-		throw new UnsupportedOperationException("Not yet implemented");
+		Location lastClimbableLocation = this.entity.getLastClimbableLocation();
+		if (lastClimbableLocation != null)
+		{
+			Material material = entity.getWorld().getType(lastClimbableLocation);
+			if (Material.LADDER.equals(material) || Tag.TRAPDOORS.isTagged(material))
+			{
+				return FallLocationType.LADDER;
+			}
+			else if (Material.VINE.equals(material))
+			{
+				return FallLocationType.VINES;
+			}
+			else if (Material.WEEPING_VINES.equals(material) || Material.WEEPING_VINES_PLANT.equals(material))
+			{
+				return FallLocationType.WEEPING_VINES;
+			}
+			else if (Material.TWISTING_VINES.equals(material) || Material.TWISTING_VINES_PLANT.equals(material))
+			{
+				return FallLocationType.TWISTING_VINES;
+			}
+			else if (Material.SCAFFOLDING.equals(material))
+			{
+				return FallLocationType.SCAFFOLDING;
+			}
+			else
+			{
+				return FallLocationType.OTHER_CLIMBABLE;
+			}
+		}
+
+		return entity.isInWater() ? FallLocationType.WATER : null;
 	}
 
 	private static boolean shouldEnterCombat(DamageSource source)

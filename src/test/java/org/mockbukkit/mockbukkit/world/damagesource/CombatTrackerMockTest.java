@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit.world.damagesource;
 
+import com.destroystokyo.paper.MaterialTags;
 import io.papermc.paper.world.damagesource.FallLocationType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
@@ -10,11 +12,14 @@ import org.bukkit.entity.Bee;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Warden;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
@@ -23,10 +28,13 @@ import org.mockbukkit.mockbukkit.entity.BeeMock;
 import org.mockbukkit.mockbukkit.entity.FireworkMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.WardenMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(MockBukkitExtension.class)
 class CombatTrackerMockTest
@@ -34,7 +42,7 @@ class CombatTrackerMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private Player player;
+	private PlayerMock player;
 	private CombatTrackerMock combatTracker;
 
 	@BeforeEach
@@ -1520,6 +1528,144 @@ class CombatTrackerMockTest
 
 				assertPlainMessage("notch was killed while fighting jeb", actual);
 			}
+		}
+	}
+
+	@Nested
+	class CalculateFallLocationType
+	{
+		private final WorldMock world = new WorldMock();
+		private final Location blockLocation = new Location(world, 0, 64, 0);
+		private final Location playerLocation = new Location(world, 0, 15, 0);
+
+		@Test
+		void byUnknownFall()
+		{
+			player.setLastClimbableLocation(null);
+			player.setInWater(false);
+
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertNull(actual);
+		}
+
+		@Test
+		void byWaterFall()
+		{
+			player.setLastClimbableLocation(null);
+			player.setInWater(true);
+
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.WATER, actual);
+		}
+
+		@Test
+		void byLadder()
+		{
+			world.getBlockAt(blockLocation).setType(Material.LADDER);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.LADDER, actual);
+		}
+
+		@ParameterizedTest
+		@MethodSource("getTrapdoors()")
+		void byTrapdoor(Material trapdoor)
+		{
+			world.getBlockAt(blockLocation).setType(trapdoor);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.LADDER, actual);
+		}
+
+		@Test
+		void byVine()
+		{
+			world.getBlockAt(blockLocation).setType(Material.VINE);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.VINES, actual);
+		}
+
+		@ParameterizedTest
+		@ValueSource(strings = {"WEEPING_VINES", "WEEPING_VINES_PLANT"})
+		void byWeepingVine(Material material)
+		{
+			world.getBlockAt(blockLocation).setType(material);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.WEEPING_VINES, actual);
+		}
+
+		@ParameterizedTest
+		@ValueSource(strings = {"TWISTING_VINES", "TWISTING_VINES_PLANT"})
+		void byTwistingVine(Material material)
+		{
+			world.getBlockAt(blockLocation).setType(material);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.TWISTING_VINES, actual);
+		}
+
+		@Test
+		void byScaffholding()
+		{
+			world.getBlockAt(blockLocation).setType(Material.SCAFFOLDING);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.SCAFFOLDING, actual);
+		}
+
+		@Test
+		void byOtherClimbable()
+		{
+			world.getBlockAt(blockLocation).setType(Material.STONE);
+
+			player.setLastClimbableLocation(blockLocation);
+			player.setLocation(playerLocation);
+
+			@Nullable FallLocationType actual = combatTracker.calculateFallLocationType();
+
+			assertEquals(FallLocationType.OTHER_CLIMBABLE, actual);
+		}
+
+		/**
+		 * Get all the trapdoors.
+		 *
+		 * @return The possible list of materials for trapdoors.
+		 */
+		public static Stream<Arguments> getTrapdoors()
+		{
+			return MaterialTags.TRAPDOORS.getValues().stream().map(Arguments::of);
 		}
 	}
 
