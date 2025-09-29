@@ -176,14 +176,14 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Team getPlayerTeam(@NotNull OfflinePlayer player) throws IllegalArgumentException
+	public Team getPlayerTeam(@NotNull OfflinePlayer player)
 	{
 		Preconditions.checkNotNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getEntryTeam(player.getName());
 	}
 
 	@Override
-	public Team getEntryTeam(@NotNull String entry) throws IllegalArgumentException
+	public Team getEntryTeam(@NotNull String entry)
 	{
 		for (Team t : teams.values())
 		{

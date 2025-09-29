@@ -472,4 +472,26 @@ public class TeamMock implements Team
 		return audiences;
 	}
 
+	public Component getFormattedName(Component formattedName)
+	{
+		Component mutableComponent = Component.empty().append(this.prefix()).append(formattedName).append(this.suffix());
+		TextColor color = this.color();
+		if (color != null)
+		{
+			mutableComponent.color(color);
+		}
+
+		return mutableComponent;
+	}
+
+	public static Component formatNameForTeam(@Nullable Team playerTeam, Component playerName)
+	{
+		Component formattedName = null;
+		if (playerTeam instanceof TeamMock teamMock)
+		{
+			formattedName = teamMock.getFormattedName(playerName);
+		}
+
+		return formattedName == null ? playerName : formattedName;
+	}
 }
