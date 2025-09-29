@@ -2220,8 +2220,7 @@ public class WorldMock implements World
 	@Override
 	public double getCoordinateScale()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER ? 8.0 : 1.0;
 	}
 
 	@Override
