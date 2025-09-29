@@ -2385,6 +2385,19 @@ class WorldMockTest
 	}
 
 	@Test
+	void testCoordinateScale()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getCoordinateScale());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertEquals(8, world.getCoordinateScale());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertEquals(1, world.getCoordinateScale());
+	}
+
+	@Test
 	void testIsFixedTime()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
