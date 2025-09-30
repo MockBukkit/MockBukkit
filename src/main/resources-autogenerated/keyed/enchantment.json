@@ -27,6 +27,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_helmet",
+				"minecraft:copper_helmet",
 				"minecraft:diamond_helmet",
 				"minecraft:golden_helmet",
 				"minecraft:iron_helmet",
@@ -145,6 +146,8 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_axe",
+				"minecraft:copper_sword",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_sword",
 				"minecraft:golden_axe",
@@ -250,6 +253,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:creeper_head",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
@@ -384,6 +391,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -835,6 +846,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_boots",
+				"minecraft:copper_boots",
 				"minecraft:diamond_boots",
 				"minecraft:golden_boots",
 				"minecraft:iron_boots",
@@ -964,6 +976,10 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_axe",
+				"minecraft:copper_hoe",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_hoe",
 				"minecraft:diamond_pickaxe",
@@ -1120,6 +1136,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_boots",
+				"minecraft:copper_boots",
 				"minecraft:diamond_boots",
 				"minecraft:golden_boots",
 				"minecraft:iron_boots",
@@ -1217,6 +1234,7 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_sword",
 				"minecraft:diamond_sword",
 				"minecraft:golden_sword",
 				"minecraft:iron_sword",
@@ -1338,6 +1356,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -1516,6 +1538,10 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_axe",
+				"minecraft:copper_hoe",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_hoe",
 				"minecraft:diamond_pickaxe",
@@ -1627,6 +1653,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_boots",
+				"minecraft:copper_boots",
 				"minecraft:diamond_boots",
 				"minecraft:golden_boots",
 				"minecraft:iron_boots",
@@ -1907,6 +1934,7 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_sword",
 				"minecraft:diamond_sword",
 				"minecraft:golden_sword",
 				"minecraft:iron_sword",
@@ -2002,6 +2030,7 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_sword",
 				"minecraft:diamond_sword",
 				"minecraft:golden_sword",
 				"minecraft:iron_sword",
@@ -2383,6 +2412,15 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_axe",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_hoe",
+				"minecraft:copper_leggings",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
+				"minecraft:copper_sword",
 				"minecraft:crossbow",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_boots",
@@ -2861,6 +2899,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -3012,6 +3054,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -3317,6 +3363,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_helmet",
+				"minecraft:copper_helmet",
 				"minecraft:diamond_helmet",
 				"minecraft:golden_helmet",
 				"minecraft:iron_helmet",
@@ -3553,6 +3600,8 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_axe",
+				"minecraft:copper_sword",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_sword",
 				"minecraft:golden_axe",
@@ -3649,6 +3698,10 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_axe",
+				"minecraft:copper_hoe",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_hoe",
 				"minecraft:diamond_pickaxe",
@@ -3786,6 +3839,8 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_axe",
+				"minecraft:copper_sword",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_sword",
 				"minecraft:golden_axe",
@@ -3915,6 +3970,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_boots",
+				"minecraft:copper_boots",
 				"minecraft:diamond_boots",
 				"minecraft:golden_boots",
 				"minecraft:iron_boots",
@@ -4017,6 +4073,7 @@
 				}
 			],
 			"enchantables": [
+				"minecraft:copper_sword",
 				"minecraft:diamond_sword",
 				"minecraft:golden_sword",
 				"minecraft:iron_sword",
@@ -4121,6 +4178,7 @@
 			],
 			"enchantables": [
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_leggings",
 				"minecraft:golden_leggings",
 				"minecraft:iron_leggings",
@@ -4234,6 +4292,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -4367,6 +4429,15 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_axe",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_hoe",
+				"minecraft:copper_leggings",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
+				"minecraft:copper_sword",
 				"minecraft:crossbow",
 				"minecraft:diamond_axe",
 				"minecraft:diamond_boots",
@@ -4508,6 +4579,15 @@
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
 				"minecraft:compass",
+				"minecraft:copper_axe",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_hoe",
+				"minecraft:copper_leggings",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
+				"minecraft:copper_sword",
 				"minecraft:creeper_head",
 				"minecraft:crossbow",
 				"minecraft:diamond_axe",

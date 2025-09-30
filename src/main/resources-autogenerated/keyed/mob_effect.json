@@ -10,7 +10,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MAX_ABSORPTION": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:max_absorption]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@2530dc1b}}": {
 					"amount": 4.0,
 					"key": "minecraft:effect.absorption",
 					"name": "effect.absorption",
@@ -179,7 +179,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_SPEED": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:attack_speed]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@26baa53d}}": {
 					"amount": 0.10000000149011612,
 					"key": "minecraft:effect.haste",
 					"name": "effect.haste",
@@ -208,7 +208,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MAX_HEALTH": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:max_health]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@1793d41}}": {
 					"amount": 4.0,
 					"key": "minecraft:effect.health_boost",
 					"name": "effect.health_boost",
@@ -337,7 +337,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"WAYPOINT_TRANSMIT_RANGE": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:waypoint_transmit_range]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@212f77ec}}": {
 					"amount": -1.0,
 					"key": "minecraft:effect.waypoint_transmit_range_hide",
 					"name": "effect.waypoint_transmit_range_hide",
@@ -366,7 +366,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"SAFE_FALL_DISTANCE": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:safe_fall_distance]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@77454982}}": {
 					"amount": 1.0,
 					"key": "minecraft:effect.jump_boost",
 					"name": "effect.jump_boost",
@@ -415,7 +415,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"LUCK": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:luck]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@208078ae}}": {
 					"amount": 1.0,
 					"key": "minecraft:effect.luck",
 					"name": "effect.luck",
@@ -444,7 +444,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_SPEED": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:attack_speed]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@26baa53d}}": {
 					"amount": -0.10000000149011612,
 					"key": "minecraft:effect.mining_fatigue",
 					"name": "effect.mining_fatigue",
@@ -653,7 +653,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MOVEMENT_SPEED": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:movement_speed]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@6636a44a}}": {
 					"amount": -0.15000000596046448,
 					"key": "minecraft:effect.slowness",
 					"name": "effect.slowness",
@@ -682,7 +682,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MOVEMENT_SPEED": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:movement_speed]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@6636a44a}}": {
 					"amount": 0.20000000298023224,
 					"key": "minecraft:effect.speed",
 					"name": "effect.speed",
@@ -711,7 +711,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_DAMAGE": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:attack_damage]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@3ea4b1d0}}": {
 					"amount": 3.0,
 					"key": "minecraft:effect.strength",
 					"name": "effect.strength",
@@ -760,7 +760,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"LUCK": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:luck]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@208078ae}}": {
 					"amount": -1.0,
 					"key": "minecraft:effect.unluck",
 					"name": "effect.unluck",
@@ -809,7 +809,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_DAMAGE": {
+				"CraftAttribute{holder\u003dReference{ResourceKey[minecraft:attribute / minecraft:attack_damage]\u003dnet.minecraft.world.entity.ai.attributes.RangedAttribute@3ea4b1d0}}": {
 					"amount": -4.0,
 					"key": "minecraft:effect.weakness",
 					"name": "effect.weakness",

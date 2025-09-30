@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
+		"minecraft:barrier",
 		"minecraft:black_stained_glass",
 		"minecraft:blue_stained_glass",
 		"minecraft:brown_stained_glass",
