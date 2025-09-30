@@ -36,7 +36,12 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	public ChestStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.CHEST, Material.TRAPPED_CHEST);
+
+		Set<Material> possibleValues = new HashSet<>();
+		possibleValues.add(Material.CHEST);
+		possibleValues.add(Material.TRAPPED_CHEST);
+		possibleValues.addAll(Tag.COPPER_CHESTS.getValues());
+		checkType(material, possibleValues.toArray(new Material[0]));
 	}
 
 	/**
