@@ -652,6 +652,20 @@ class WorldMockTest
 	}
 
 	@Test
+	void isDayTime()
+	{
+		WorldMock world = new WorldMock();
+
+		// Noon
+		world.setTime(6000L);
+		assertTrue(world.isDayTime());
+
+		// Midnight
+		world.setTime(18000L);
+		assertFalse(world.isDayTime());
+	}
+
+	@Test
 	void setTime_Event_Triggered()
 	{
 		WorldMock world = new WorldMock();
