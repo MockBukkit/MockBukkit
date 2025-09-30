@@ -81,7 +81,6 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapCursor;
-import org.bukkit.packs.DataPackManager;
 import org.bukkit.packs.ResourcePack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -1419,13 +1418,6 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	@Deprecated(since = "1.19")
-	public @NotNull DataPackManager getDataPackManager()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull ServerTickManager getServerTickManager()
 	{
 		// TODO Auto-generated method stub
@@ -1611,6 +1603,20 @@ public class ServerMock extends Server.Spigot implements Server
 			return false;
 		}
 		return removeWorld(worldMock);
+	}
+
+	@Override
+	public @NotNull World getRespawnWorld()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setRespawnWorld(@NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
