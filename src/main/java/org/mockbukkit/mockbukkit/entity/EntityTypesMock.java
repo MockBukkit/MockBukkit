@@ -22,6 +22,7 @@ import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
+import org.bukkit.entity.CopperGolem;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creaking;
 import org.bukkit.entity.Creeper;
@@ -242,6 +243,7 @@ public final class EntityTypesMock
 				.register(Chicken.class, ChickenMock.class, ChickenMock::new)
 				.register(Cod.class, CodMock.class, CodMock::new)
 				.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
+				.register(CopperGolem.class, CopperGolemMock.class, CopperGolemMock::new)
 				.register(Cow.class, CowMock.class, CowMock::new)
 				.register(Creaking.class, CreakingMock.class, CreakingMock::new)
 				.register(Creeper.class, CreeperMock.class, CreeperMock::new)
