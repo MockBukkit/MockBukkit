@@ -70,6 +70,7 @@ import org.bukkit.entity.LingeringPotion;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Mannequin;
 import org.bukkit.entity.Marker;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Mule;
@@ -293,6 +294,7 @@ public final class EntityTypesMock
 				.register(Llama.class, LlamaMock.class, LlamaMock::new)
 				.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 				.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
+				.register(Mannequin.class, MannequinMock.class, MannequinMock::new)
 				.register(MangroveBoat.class, MangroveBoatMock.class, MangroveBoatMock::new)
 				.register(MangroveChestBoat.class, MangroveChestBoatMock.class, MangroveChestBoatMock::new)
 				.register(Marker.class, MarkerMock.class, MarkerMock::new)
