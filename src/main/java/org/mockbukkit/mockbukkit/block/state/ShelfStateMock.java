@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Shelf;
 import org.bukkit.inventory.ShelfInventory;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.ShelfInventoryMock;
 
 /**
  * Mock implementation of a {@link Shelf}.
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ShelfStateMock extends TileStateMock implements Shelf
 {
+	private ShelfInventory inventory = new ShelfInventoryMock(this);
 
 	/**
 	 * Constructs a new {@link ShelfStateMock} for the provided {@link Material}.
@@ -40,15 +42,13 @@ public class ShelfStateMock extends TileStateMock implements Shelf
 	@Override
 	public ShelfInventory getInventory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return isPlaced() ? inventory : getSnapshotInventory();
 	}
 
 	@Override
 	public ShelfInventory getSnapshotInventory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return new ShelfInventoryMock(this);
 	}
 
 	@Override
