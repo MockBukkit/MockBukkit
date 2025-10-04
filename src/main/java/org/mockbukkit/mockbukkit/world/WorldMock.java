@@ -1180,7 +1180,25 @@ public class WorldMock implements World
 	@Override
 	public boolean isDayTime()
 	{
-		return false;
+		long time = getTime();
+
+		// Tick times from Minecraft Wiki (https://minecraft.wiki/w/Bed#Sleeping)
+		long clearNightStartTick = 12542;
+		long clearNightEndTick = 23459;
+		long rainNightStartTick = 12010;
+		long rainNightEndTick = 23991;
+
+		if (isThundering())
+		{
+			return false;
+		}
+
+		if (hasStorm())
+		{
+			return time < rainNightStartTick || rainNightEndTick < time;
+		}
+
+		return time < clearNightStartTick || clearNightEndTick < time;
 	}
 
 	@Override
