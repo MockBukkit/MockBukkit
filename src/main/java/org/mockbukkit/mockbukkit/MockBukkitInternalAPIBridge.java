@@ -15,6 +15,7 @@ import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
@@ -24,6 +25,7 @@ import java.util.function.Predicate;
 @ApiStatus.Experimental
 public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 {
+	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component.translatable("entity.minecraft.mannequin.label");
 
 	private @Nullable BiomeMock customBiome = null;
 
@@ -80,10 +82,9 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public Component defaultMannequinDescription()
+	public @NonNull Component defaultMannequinDescription()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return DEFAULT_MANNEQUIN_DESCRIPTION;
 	}
 
 }

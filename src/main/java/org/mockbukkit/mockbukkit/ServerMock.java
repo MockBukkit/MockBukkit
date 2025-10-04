@@ -232,6 +232,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private boolean isWhitelistEnforced = false;
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
+	private @NotNull String respawnWorldName = unsafe.getMainLevelName();
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
 	private int pauseWhenEmptyTime = 60;
 	private boolean commandsInitialized = false;
@@ -1608,15 +1609,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull World getRespawnWorld()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		World world = getWorld(this.respawnWorldName);
+		Preconditions.checkState(world != null, "No world registered with name %s", this.respawnWorldName);
+		return world;
 	}
 
 	@Override
 	public void setRespawnWorld(@NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		String worldName = world.getName();
+		Preconditions.checkArgument(getWorld(worldName) != null, "World %s is not registered in this server", worldName);
+		this.respawnWorldName = worldName;
 	}
 
 	@Override
