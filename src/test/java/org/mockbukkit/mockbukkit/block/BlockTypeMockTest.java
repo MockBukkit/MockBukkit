@@ -774,7 +774,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCreakingHeart()
 		{
 			CreakingHeart data = BlockType.CREAKING_HEART.createBlockData();

@@ -65,4 +65,10 @@ public class CreakingHeartDataMock extends BlockDataMock implements CreakingHear
 		return this.getLimitationValue(BlockDataLimitation.Type.AXES);
 	}
 
+	@Override
+	public @NotNull CreakingHeartDataMock clone()
+	{
+		return new CreakingHeartDataMock(this);
+	}
+
 }
