@@ -75,6 +75,12 @@ public class ChiseledBookshelfDataMock extends BlockDataMock implements Chiseled
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
+	@Override
+	public @NotNull ChiseledBookshelfDataMock clone()
+	{
+		return new ChiseledBookshelfDataMock(this);
+	}
+
 	/**
 	 * Converts the given slot into a key.
 	 *
