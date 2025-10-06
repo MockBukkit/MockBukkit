@@ -2,8 +2,13 @@ package org.mockbukkit.mockbukkit.entity;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
+import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +21,7 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -77,6 +83,52 @@ class CowMockTest
 					.map(Arguments::of);
 		}
 
+	}
+
+	@Nested
+	class TeamDisplayName
+	{
+		@Test
+		void withoutName()
+		{
+			Component name = cow.teamDisplayName();
+
+			assertNotNull(name);
+			assertEquals("entity", asString(name));
+		}
+
+		@Test
+		void withoutTeamInformation()
+		{
+			cow.setName("My Cow");
+
+			Component name = cow.teamDisplayName();
+
+			assertNotNull(name);
+			assertEquals("My Cow", asString(name));
+		}
+
+		@Test
+		void withTeamInformation()
+		{
+			@NotNull Team team = cow.getServer().getScoreboardManager().getMainScoreboard().registerNewTeam("test");
+			team.color(NamedTextColor.GREEN);
+			team.prefix(Component.text("["));
+			team.suffix(Component.text("]"));
+			team.addEntity(cow);
+
+			cow.setName("My Cow");
+
+			Component name = cow.teamDisplayName();
+
+			assertNotNull(name);
+			assertEquals("[My Cow]", asString(name));
+		}
+
+		public static String asString(@NotNull Component component)
+		{
+			return LegacyComponentSerializer.legacyAmpersand().serialize(component);
+		}
 	}
 
 }

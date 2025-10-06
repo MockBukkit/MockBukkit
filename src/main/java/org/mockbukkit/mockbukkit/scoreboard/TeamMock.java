@@ -17,7 +17,6 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -329,7 +328,7 @@ public class TeamMock implements Team
 	public void addEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entities, "Entities cannot be null");
-		addEntries(entities.stream().map(entity -> ((EntityMock) entity).getScoreboardEntry()).toList());
+		addEntries(entities.stream().map(Entity::getScoreboardEntryName).toList());
 	}
 
 	@Override
@@ -364,7 +363,7 @@ public class TeamMock implements Team
 	public boolean removeEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entities, "Entities cannot be null");
-		return removeEntries(entities.stream().map(entity -> ((EntityMock) entity).getScoreboardEntry()).toList());
+		return removeEntries(entities.stream().map(Entity::getScoreboardEntryName).toList());
 	}
 
 	@Override
@@ -424,14 +423,14 @@ public class TeamMock implements Team
 	public void addEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		addEntry(((EntityMock) entity).getScoreboardEntry());
+		addEntry(entity.getScoreboardEntryName());
 	}
 
 	@Override
 	public boolean removeEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		return removeEntry(((EntityMock) entity).getScoreboardEntry());
+		return removeEntry(entity.getScoreboardEntryName());
 	}
 
 	@Override
@@ -439,7 +438,7 @@ public class TeamMock implements Team
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		checkRegistered();
-		return this.entries.contains(((EntityMock) entity).getScoreboardEntry());
+		return this.entries.contains(entity.getScoreboardEntryName());
 	}
 
 	/**
@@ -473,4 +472,26 @@ public class TeamMock implements Team
 		return audiences;
 	}
 
+	public Component getFormattedName(Component formattedName)
+	{
+		Component mutableComponent = Component.empty().append(this.prefix()).append(formattedName).append(this.suffix());
+		TextColor color = this.color();
+		if (color != null)
+		{
+			mutableComponent.color(color);
+		}
+
+		return mutableComponent;
+	}
+
+	public static Component formatNameForTeam(@Nullable Team playerTeam, Component playerName)
+	{
+		Component formattedName = null;
+		if (playerTeam instanceof TeamMock teamMock)
+		{
+			formattedName = teamMock.getFormattedName(playerName);
+		}
+
+		return formattedName == null ? playerName : formattedName;
+	}
 }

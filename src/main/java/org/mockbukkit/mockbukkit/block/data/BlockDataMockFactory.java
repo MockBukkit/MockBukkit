@@ -9,6 +9,7 @@ import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
+import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
@@ -20,16 +21,21 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
+import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
+import org.bukkit.block.data.type.Observer;
+import org.bukkit.block.data.type.Piston;
+import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneRail;
 import org.bukkit.block.data.type.RedstoneWallTorch;
 import org.bukkit.block.data.type.RedstoneWire;
@@ -37,6 +43,7 @@ import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
+import org.bukkit.block.data.type.TechnicalPiston;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
@@ -76,11 +83,14 @@ public final class BlockDataMockFactory
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
+			.put(Dispenser.class, DispenserDataMock::new)
+			.put(Directional.class, DirectionalDataMock::new)
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
@@ -90,8 +100,12 @@ public final class BlockDataMockFactory
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Light.class, LightDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
+			.put(Observer.class, ObserverDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
+			.put(Piston.class, PistonDataMock::new)
+			.put(PistonHead.class, PistonHeadDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
+			.put(TechnicalPiston.class, TechnicalPistonDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
 			.put(TNT.class, TNTDataMock::new)
 			.put(TrialSpawner.class, TrialSpawnerDataMock::new)

@@ -652,6 +652,20 @@ class WorldMockTest
 	}
 
 	@Test
+	void isDayTime()
+	{
+		WorldMock world = new WorldMock();
+
+		// Noon
+		world.setTime(6000L);
+		assertTrue(world.isDayTime());
+
+		// Midnight
+		world.setTime(18000L);
+		assertFalse(world.isDayTime());
+	}
+
+	@Test
 	void setTime_Event_Triggered()
 	{
 		WorldMock world = new WorldMock();
@@ -2382,6 +2396,19 @@ class WorldMockTest
 		assertFalse(world.isRespawnAnchorWorks());
 		world.setEnvironment(World.Environment.THE_END);
 		assertFalse(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testCoordinateScale()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getCoordinateScale());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertEquals(8, world.getCoordinateScale());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertEquals(1, world.getCoordinateScale());
 	}
 
 	@Test

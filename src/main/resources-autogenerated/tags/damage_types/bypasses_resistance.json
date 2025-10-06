@@ -1,0 +1,7 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:generic_kill",
+		"minecraft:out_of_world"
+	]
+}

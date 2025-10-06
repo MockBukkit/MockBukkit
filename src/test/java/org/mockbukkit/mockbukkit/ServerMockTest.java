@@ -32,6 +32,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
+import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Frog;
@@ -56,6 +57,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.tag.DamageTypeTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Nested;
@@ -2277,6 +2279,30 @@ class ServerMockTest
 			{
 				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Game Event namespace must have GameEvent type", e.getMessage());
+			}
+
+		}
+
+		@Nested
+		class DamageTypes
+		{
+
+			@Test
+			void givenValidItem()
+			{
+				Tag<DamageType> tag = server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.getKey(), DamageType.class);
+
+				assertNotNull(tag);
+				assertTrue(tag.isTagged(DamageType.OUT_OF_WORLD));
+
+				assertFalse(tag.isTagged(DamageType.ARROW));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Damage type namespace must have DamageType type", e.getMessage());
 			}
 
 		}

@@ -2740,6 +2740,13 @@ class PlayerMockTest
 		assertEquals(player.nextActionBar(), textComponent3);
 	}
 
+	@Test
+	void getScoreboardEntryName()
+	{
+		String actual = player.getScoreboardEntryName();
+		assertEquals(player.getName(), actual);
+	}
+
 	@Nested
 	class DeathScreenScore
 	{

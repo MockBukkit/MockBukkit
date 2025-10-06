@@ -11,7 +11,8 @@ public enum InternalTagRegistry
 	ITEMS(TagRegistry.ITEMS),
 	FLUIDS(TagRegistry.FLUIDS),
 	GAME_EVENTS(TagRegistry.GAME_EVENTS),
-	ENTITY_TYPES(TagRegistry.ENTITY_TYPES);
+	ENTITY_TYPES(TagRegistry.ENTITY_TYPES),
+	DAMAGE_TYPES(TagRegistry.DAMAGE_TYPES);
 
 	private final TagRegistry tagRegistry;
 	private final ArrayList<InternalTag<?>> relatedTags;

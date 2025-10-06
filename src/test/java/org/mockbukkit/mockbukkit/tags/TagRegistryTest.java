@@ -5,6 +5,7 @@ import org.bukkit.GameEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
@@ -148,6 +149,32 @@ class TagRegistryTest
 		void getTypeIsCorrect()
 		{
 			assertEquals(GameEvent.class, TagRegistry.GAME_EVENTS.getTagType());
+		}
+
+	}
+
+	@Nested
+	class DamageTypes
+	{
+
+		@Test
+		void givenDamageTypes()
+		{
+			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.DAMAGE_TYPES.getTags();
+			assertNotNull(actual);
+			assertEquals(33, actual.size());
+		}
+
+		@Test
+		void getRegistryIsCorrect()
+		{
+			assertEquals("damage_types", TagRegistry.DAMAGE_TYPES.getRegistry());
+		}
+
+		@Test
+		void getTypeIsCorrect()
+		{
+			assertEquals(DamageType.class, TagRegistry.DAMAGE_TYPES.getTagType());
 		}
 
 	}
