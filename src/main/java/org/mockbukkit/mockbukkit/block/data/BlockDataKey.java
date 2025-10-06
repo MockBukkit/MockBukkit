@@ -195,6 +195,13 @@ public enum BlockDataKey
 	EXTENDED("extended", Boolean::parseBoolean, Piston.class::isInstance),
 	SHORT("short", Boolean::parseBoolean, PistonHead.class::isInstance),
 
+	SLOT_OCCUPIED_0("slot_0_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_1("slot_1_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_2("slot_2_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_3("slot_3_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_4("slot_4_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_5("slot_5_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+
 	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance);

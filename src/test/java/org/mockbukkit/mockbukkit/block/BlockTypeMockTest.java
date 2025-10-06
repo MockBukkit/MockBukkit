@@ -749,7 +749,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenChiseledBookshelf()
 		{
 			ChiseledBookshelf data = BlockType.CHISELED_BOOKSHELF.createBlockData();

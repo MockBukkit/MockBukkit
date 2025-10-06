@@ -23,6 +23,7 @@ import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
@@ -87,6 +88,7 @@ public final class BlockDataMockFactory
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
+			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())

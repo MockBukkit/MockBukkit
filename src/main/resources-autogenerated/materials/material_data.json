@@ -1608,7 +1608,8 @@
 				"NORTH",
 				"SOUTH",
 				"WEST"
-			]
+			],
+			"maxOccupiedSlots": 6
 		},
 		"defaultStates": {
 			"facing": "north",

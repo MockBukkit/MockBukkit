@@ -183,7 +183,7 @@ CHERRY_WALL_SIGN, org.bukkit.block.Sign
 CHERRY_WOOD, org.bukkit.block.BlockState
 CHEST, org.bukkit.block.Chest
 CHIPPED_ANVIL, org.bukkit.block.BlockState
-CHISELED_BOOKSHELF, org.bukkit.block.BlockState
+CHISELED_BOOKSHELF, org.bukkit.block.ChiseledBookshelf
 CHISELED_COPPER, org.bukkit.block.BlockState
 CHISELED_DEEPSLATE, org.bukkit.block.BlockState
 CHISELED_NETHER_BRICKS, org.bukkit.block.BlockState
