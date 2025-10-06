@@ -230,7 +230,7 @@ CRACKED_POLISHED_BLACKSTONE_BRICKS, org.bukkit.block.BlockState
 CRACKED_STONE_BRICKS, org.bukkit.block.BlockState
 CRAFTER, org.bukkit.block.BlockState
 CRAFTING_TABLE, org.bukkit.block.BlockState
-CREAKING_HEART, org.bukkit.block.BlockState
+CREAKING_HEART, org.bukkit.block.CreakingHeart
 CREEPER_HEAD, org.bukkit.block.Skull
 CREEPER_WALL_HEAD, org.bukkit.block.Skull
 CRIMSON_BUTTON, org.bukkit.block.BlockState
