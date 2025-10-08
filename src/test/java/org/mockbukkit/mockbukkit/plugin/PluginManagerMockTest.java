@@ -431,7 +431,7 @@ class PluginManagerMockTest
 	void loadPlugin_WithPaperPluginYml_PluginLoaded()
 	{
 		Plugin loadedPlugin = pluginManager.loadPlugin(PaperTestPlugin.class);
-		assertInstanceOf(JavaPlugin.class, loadedPlugin);
+		assertInstanceOf(PaperTestPlugin.class, loadedPlugin);
 		assertEquals("MockBukkitTestPaperPlugin", loadedPlugin.getName());
 		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
 	}
