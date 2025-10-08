@@ -583,7 +583,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			}
 		}
 		throw new FileNotFoundException(
-				"Could not find file plugin.yml or paper-plugin.yml. Maybe forgot to add the 'main' property?");
+   			"Could not find file paper-plugin.yml or plugin.yml. Maybe forgot to add the 'main' property?");
 	}
 
 	@Override
