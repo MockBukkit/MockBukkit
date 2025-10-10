@@ -251,6 +251,24 @@ class PlayerInventoryMockTest
 	}
 
 	@Test
+	void setStorageContents_EmptyArray_ArmorRemainsTheSame() {
+		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
+		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
+		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
+		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
+		inventory.setItem(PlayerInventoryMock.BOOTS, boots);
+		inventory.setItem(PlayerInventoryMock.LEGGINGS, leggings);
+		inventory.setItem(PlayerInventoryMock.CHESTPLATE, chestplate);
+		inventory.setItem(PlayerInventoryMock.HELMET, helmet);
+		ItemStack[] emptyContents = new ItemStack[36];
+		inventory.setStorageContents(emptyContents);
+		assertEquals(boots, inventory.getBoots());
+		assertEquals(leggings, inventory.getLeggings());
+		assertEquals(chestplate, inventory.getChestplate());
+		assertEquals(helmet, inventory.getHelmet());
+	}
+
+	@Test
 	void setArmorContents_NewArray_ArmorSet()
 	{
 		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
