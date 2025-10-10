@@ -1,6 +1,6 @@
 plugins {
 	id("java")
-	id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
+	id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
 	id("xyz.jpenilla.run-paper") version "3.0.1"
 }
 
@@ -34,5 +34,9 @@ tasks {
 	test {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+		systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+		systemProperty("junit.jupiter.execution.parallel.mode.classes.default", "concurrent")
 	}
 }

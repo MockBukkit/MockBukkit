@@ -232,10 +232,9 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val process = ProcessBuilder()
-		.command(*cmd)
-		.directory(rootProject.projectDir)
-		.start()
-	process.waitFor(5, TimeUnit.SECONDS)
-	return process.inputStream.bufferedReader().readText().trim()
+	return providers.exec {
+		commandLine(*cmd)
+	}.standardOutput.asText.get().trim()
 }
+
+
