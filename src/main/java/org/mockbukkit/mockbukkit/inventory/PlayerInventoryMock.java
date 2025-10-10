@@ -81,10 +81,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		{
 			throw new NullPointerException("ItemStack was null");
 		}
-		else if (items.length > 36)
-		{
-			throw new IllegalArgumentException("ItemStack array too large (max: 36, was: " + items.length + ")");
-		}
+		Preconditions.checkArgument(items.length <= 36, "ItemStack array too large (max: 36, was: " + items.length + ")");
 		for (int i = 0; i < getSize(); i++)
 		{
 			if (i < items.length && items[i] != null)
