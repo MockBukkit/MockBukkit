@@ -30,6 +30,7 @@ import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
+import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
@@ -124,6 +125,7 @@ public final class BlockDataMockFactory
 			.put(Waterlogged.class, WaterloggedDataMock::new)
 			.put(Ageable.class, AgeableDataMock::new)
 			.put(Bisected.class, BisectedDataMock::new)
+			.put(GlassPane.class, GlassPaneDataMock::new)
 			.build();
 
 	/**
