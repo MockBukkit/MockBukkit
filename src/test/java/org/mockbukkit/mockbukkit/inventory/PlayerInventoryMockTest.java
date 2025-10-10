@@ -251,7 +251,8 @@ class PlayerInventoryMockTest
 	}
 
 	@Test
-	void setStorageContents_EmptyArray_ArmorRemainsTheSame() {
+	void setStorageContents_EmptyArray_ArmorRemainsTheSame()
+	{
 		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
 		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
 		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);

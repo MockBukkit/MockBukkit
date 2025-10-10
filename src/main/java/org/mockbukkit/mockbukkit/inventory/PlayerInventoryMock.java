@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
 
 import java.util.Arrays;
@@ -80,7 +79,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		Preconditions.checkNotNull(items, "ItemStack was null");
 		Preconditions.checkArgument(items.length <= 36, "ItemStack array too large (max: 36, was: " + items.length + ")");
-		for (int i = 0; i < getSize(); i++)
+		for (int i = 0; i < 36; i++)
 		{
 			if (i < items.length && items[i] != null)
 			{
