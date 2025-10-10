@@ -77,10 +77,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
 	{
-		if (items == null)
-		{
-			throw new NullPointerException("ItemStack was null");
-		}
+		Preconditions.checkNotNull(items, "ItemStack was null");
 		Preconditions.checkArgument(items.length <= 36, "ItemStack array too large (max: 36, was: " + items.length + ")");
 		for (int i = 0; i < getSize(); i++)
 		{
