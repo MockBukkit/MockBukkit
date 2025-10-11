@@ -1125,7 +1125,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenGrindstone()
 		{
 			Grindstone data = BlockType.GRINDSTONE.createBlockData();
