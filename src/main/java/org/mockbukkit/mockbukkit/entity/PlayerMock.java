@@ -827,9 +827,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @NotNull String getScoreboardEntry()
+	public @NotNull String getScoreboardEntryName()
 	{
-		return getName();
+		return this.getName();
 	}
 
 	@Override

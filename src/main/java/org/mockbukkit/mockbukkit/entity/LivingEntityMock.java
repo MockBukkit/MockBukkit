@@ -57,6 +57,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.EntityEquipmentMock;
 import org.mockbukkit.mockbukkit.potion.ActivePotionEffect;
 import org.mockbukkit.mockbukkit.simulate.entity.LivingEntitySimulation;
+import org.mockbukkit.mockbukkit.world.damagesource.CombatTrackerMock;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,6 +79,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 {
 
 	private final BrainMock brain = new BrainMock();
+	private final CombatTracker combatTracker = new CombatTrackerMock(this);
 	/**
 	 * How much health the entity has.
 	 */
@@ -134,6 +136,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private final Map<PotionEffectType, PriorityQueue<ActivePotionEffect>> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
+	private @Nullable Location lastClimbableLocation;
 
 	/**
 	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -1381,7 +1384,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @NotNull CombatTracker getCombatTracker()
 	{
-		throw new UnimplementedOperationException();
+		return this.combatTracker;
 	}
 
 	@Override
@@ -1389,6 +1392,27 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		super.tick();
 		removeExpiredEffects();
+	}
+
+	/**
+	 * Retrieves the last known climbable location.
+	 *
+	 * @return the last climbable Location, or null if no such location exists
+	 */
+	public @Nullable Location getLastClimbableLocation()
+	{
+		return this.lastClimbableLocation;
+	}
+
+	/**
+	 * Updates the location of the last climbable spot.
+	 *
+	 * @param lastClimbableLocation the new location to set as the last climbable location,
+	 *                              or null if no location is available
+	 */
+	public void setLastClimbableLocation(@Nullable Location lastClimbableLocation)
+	{
+		this.lastClimbableLocation = lastClimbableLocation;
 	}
 
 }

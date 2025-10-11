@@ -13,7 +13,6 @@ import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.HashMap;
@@ -201,7 +200,7 @@ public class ObjectiveMock implements Objective
 	public @NotNull Score getScoreFor(@NotNull Entity entity) throws IllegalArgumentException, IllegalStateException
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		return getScore(((EntityMock) entity).getScoreboardEntry());
+		return getScore(entity.getScoreboardEntryName());
 	}
 
 	@Override

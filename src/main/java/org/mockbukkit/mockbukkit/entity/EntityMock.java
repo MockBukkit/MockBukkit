@@ -9,6 +9,7 @@ import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
@@ -44,6 +45,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scoreboard.Team;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
@@ -61,6 +63,7 @@ import org.mockbukkit.mockbukkit.event.EventFactoryMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.scoreboard.TeamMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.ArrayList;
@@ -476,10 +479,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * Gets the scoreboard entry for this entity.
 	 *
 	 * @return The scoreboard entry.
+	 *
+	 * @deprecated Replaced by {@link #getScoreboardEntryName()}
 	 */
+	@Deprecated(forRemoval = true)
 	public @NotNull String getScoreboardEntry()
 	{
-		return uuid.toString();
+		return this.getScoreboardEntryName();
 	}
 
 	/**
@@ -1339,8 +1345,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Component teamDisplayName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Team team = this.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(this.getScoreboardEntryName());
+		return TeamMock.formatNameForTeam(team, this.name()).style(Style.style()
+				.hoverEvent(HoverEvent.showEntity(this.getType(), this.getUniqueId(), this.name()))
+				.insertion(this.getUniqueId().toString())
+				.build());
 	}
 
 	@Override
@@ -1544,8 +1553,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull String getScoreboardEntryName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.getUniqueId().toString();
 	}
 
 	@ApiStatus.Internal

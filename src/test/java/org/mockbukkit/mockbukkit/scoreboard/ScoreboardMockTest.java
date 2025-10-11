@@ -146,7 +146,7 @@ class ScoreboardMockTest
 		team.addEntry("player");
 		team.addEntity(entity);
 		this.scoreboard.registerNewTeam("cyan").addEntry("player");
-		assertEquals(Set.of("player", entity.getScoreboardEntry()), this.scoreboard.getEntries());
+		assertEquals(Set.of("player", entity.getScoreboardEntryName()), this.scoreboard.getEntries());
 	}
 
 	@Test
@@ -154,14 +154,14 @@ class ScoreboardMockTest
 	{
 		EntityMock entity = new SimpleEntityMock(this.server);
 		Objective objectiveA = this.scoreboard.registerNewObjective("test", Criteria.DUMMY, empty());
-		Score scoreA = objectiveA.getScore(entity.getScoreboardEntry());
+		Score scoreA = objectiveA.getScore(entity.getScoreboardEntryName());
 		scoreA.setScore(78);
 		Objective objectiveB = this.scoreboard.registerNewObjective("test2", Criteria.DEATH_COUNT, empty());
 		Score scoreB = objectiveB.getScoreFor(entity);
 
 		Set<Score> excepted = Set.of(scoreA, scoreB);
 		assertEquals(excepted, this.scoreboard.getScoresFor(entity));
-		assertEquals(excepted, this.scoreboard.getScores(entity.getScoreboardEntry()));
+		assertEquals(excepted, this.scoreboard.getScores(entity.getScoreboardEntryName()));
 	}
 
 	@Test
@@ -195,7 +195,7 @@ class ScoreboardMockTest
 		Team team = this.scoreboard.registerNewTeam("green");
 		team.addEntity(entity);
 		this.scoreboard.registerNewTeam("cyan").addEntity(entity);
-		assertSame(team, this.scoreboard.getEntryTeam(entity.getScoreboardEntry()));
+		assertSame(team, this.scoreboard.getEntryTeam(entity.getScoreboardEntryName()));
 		assertSame(team, this.scoreboard.getEntityTeam(entity));
 	}
 

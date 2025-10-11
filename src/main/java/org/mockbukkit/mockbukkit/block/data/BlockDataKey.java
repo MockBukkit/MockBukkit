@@ -24,23 +24,28 @@ import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
+import org.bukkit.block.data.type.Piston;
+import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
+import org.bukkit.block.data.type.TechnicalPiston;
 import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
@@ -119,6 +124,7 @@ public enum BlockDataKey
 	 */
 	TYPE("type", EnumDataDeserializer.of(Slab.Type.class), Slab.class::isInstance),
 	TYPE_CHEST("type", EnumDataDeserializer.of(Chest.Type.class), Chest.class::isInstance),
+	TYPE_TECHNICAL_PISTON("type", EnumDataDeserializer.of(TechnicalPiston.Type.class), TechnicalPiston.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
@@ -155,7 +161,7 @@ public enum BlockDataKey
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
 
 	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
-	TRIGGERED("triggered", Boolean::parseBoolean, Crafter.class::isInstance),
+	TRIGGERED("triggered", Boolean::parseBoolean, o -> o instanceof Crafter || o instanceof Dispenser),
 	ENABLED("enabled", Boolean::parseBoolean, Hopper.class::isInstance),
 	ORIENTATION("orientation", EnumDataDeserializer.of(Orientation.class), Crafter.class::isInstance),
 	HINGE("hinge", EnumDataDeserializer.of(Door.Hinge.class), Door.class::isInstance),
@@ -184,7 +190,14 @@ public enum BlockDataKey
 	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
 	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance),
 	HATCH("hatch", Integer::parseInt, Hatchable.class::isInstance),
-	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance);
+	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance),
+
+	EXTENDED("extended", Boolean::parseBoolean, Piston.class::isInstance),
+	SHORT("short", Boolean::parseBoolean, PistonHead.class::isInstance),
+
+	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
+	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
+	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance);
 
 
 	private static final Set<String> KEYS = compileKeys();

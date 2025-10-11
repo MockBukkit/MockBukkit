@@ -25,8 +25,8 @@ dependencies {
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter-api:5.14.0")
-	testImplementation(platform("org.junit:junit-bom:5.14.0"))
+	implementation("org.junit.jupiter:junit-jupiter-api:6.0.0")
+	testImplementation(platform("org.junit:junit-bom:6.0.0"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
@@ -39,10 +39,10 @@ dependencies {
 
 	implementation("net.bytebuddy:byte-buddy:1.17.7")
 
-	compileOnly("org.projectlombok:lombok:1.18.40")
-	annotationProcessor("org.projectlombok:lombok:1.18.40")
-	testCompileOnly("org.projectlombok:lombok:1.18.40")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.40")
+	compileOnly("org.projectlombok:lombok:1.18.42")
+	annotationProcessor("org.projectlombok:lombok:1.18.42")
+	testCompileOnly("org.projectlombok:lombok:1.18.42")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -115,7 +115,7 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.13"
+		toolVersion = "0.8.14"
 	}
 
 	register("updateResources") {
@@ -232,10 +232,9 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val process = ProcessBuilder()
-		.command(*cmd)
-		.directory(rootProject.projectDir)
-		.start()
-	process.waitFor(5, TimeUnit.SECONDS)
-	return process.inputStream.bufferedReader().readText().trim()
+	return providers.exec {
+		commandLine(*cmd)
+	}.standardOutput.asText.get().trim()
 }
+
+

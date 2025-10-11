@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.world.damagesource.CombatEntryMock;
 
 import java.util.function.Predicate;
 
@@ -56,9 +57,14 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public CombatEntry createCombatEntry(DamageSource damageSource, float damage, @org.jspecify.annotations.Nullable FallLocationType fallLocationType, float fallDistance)
+	public CombatEntry createCombatEntry(@NonNull DamageSource damageSource, float damage, @Nullable FallLocationType fallLocationType, float fallDistance)
 	{
-		throw new UnimplementedOperationException();
+		return CombatEntryMock.builder()
+				.damageSource(damageSource)
+				.damage(damage)
+				.fallLocationType(fallLocationType)
+				.fallDistance(fallDistance)
+				.build();
 	}
 
 	@Override

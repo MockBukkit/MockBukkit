@@ -427,4 +427,17 @@ class PluginManagerMockTest
 		assertEquals("No publicly available constructor for PrivateConstructorPluginProxy without parameters", exception.getCause().getMessage());
 	}
 
+	@Test
+	void loadPlugin_WithPaperPluginYml_PluginLoaded()
+	{
+		Plugin loadedPlugin = pluginManager.loadPlugin(PaperTestPlugin.class);
+		assertInstanceOf(PaperTestPlugin.class, loadedPlugin);
+		assertEquals("MockBukkitTestPaperPlugin", loadedPlugin.getName());
+		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
+	}
+
+	public static class PaperTestPlugin extends JavaPlugin
+	{
+	}
+
 }
