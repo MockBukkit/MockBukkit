@@ -691,7 +691,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenNoteBlock()
 		{
 			NoteBlock data = BlockType.NOTE_BLOCK.createBlockData();

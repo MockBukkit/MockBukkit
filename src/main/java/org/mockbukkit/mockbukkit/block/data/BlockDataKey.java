@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Axis;
+import org.bukkit.Instrument;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Orientation;
 import org.bukkit.block.data.Ageable;
@@ -37,6 +38,7 @@ import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
+import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
@@ -176,6 +178,8 @@ public enum BlockDataKey
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
 	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
+	INSTRUMENT("instrument", EnumDataDeserializer.of(Instrument.class), NoteBlock.class::isInstance),
+	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
 
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
