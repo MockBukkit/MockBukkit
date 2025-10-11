@@ -48,9 +48,7 @@ public class BlockStateGenerator implements DataGenerator
 
 				try
 				{
-					var block = world.getBlockAt(0, 64, 0);
-					block.setType(material);
-					@NotNull BlockState state = block.getState();
+					@NotNull BlockState state = material.createBlockData().createBlockState();
 					@NotNull Class<?>[] interfaces = state.getClass().getInterfaces();
 					if (interfaces.length == 0)
 					{
