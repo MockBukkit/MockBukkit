@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class GrindstoneDataMockTest
 {
 
-	private GrindstoneDataMock grindstone = new GrindstoneDataMock(Material.GRINDSTONE);
+	private final GrindstoneDataMock grindstone = new GrindstoneDataMock(Material.GRINDSTONE);
 
 	@Nested
 	class SetFacing

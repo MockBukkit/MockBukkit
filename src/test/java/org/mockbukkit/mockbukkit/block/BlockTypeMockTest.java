@@ -1312,7 +1312,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHangingMoss()
 		{
 			HangingMoss data = BlockType.PALE_HANGING_MOSS.createBlockData();
