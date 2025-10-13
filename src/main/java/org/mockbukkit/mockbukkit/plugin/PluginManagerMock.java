@@ -552,6 +552,25 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			throws IOException, InvalidDescriptionException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
+		try
+		{
+			Enumeration<URL> resources = class1.getClassLoader().getResources("paper-plugin.yml");
+			while (resources.hasMoreElements())
+			{
+				URL url = resources.nextElement();
+				PluginDescriptionFile description = new PluginDescriptionFile(url.openStream());
+				String mainClass = description.getMain();
+				if (class1.getName().equals(mainClass))
+				{
+					return description;
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			// Ignore, we'll try plugin.yml next
+		}
+
 		Enumeration<URL> resources = class1.getClassLoader().getResources("plugin.yml");
 		while (resources.hasMoreElements())
 		{
@@ -564,7 +583,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			}
 		}
 		throw new FileNotFoundException(
-				"Could not find file plugin.yml. Maybe forgot to add the 'main' property?");
+   			"Could not find file paper-plugin.yml or plugin.yml. Maybe forgot to add the 'main' property?");
 	}
 
 	@Override

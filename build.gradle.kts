@@ -3,7 +3,7 @@ plugins {
 	id("java-library")
 	id("jacoco")
 	id("com.vanniktech.maven.publish") version "0.34.0"
-	id("net.kyori.blossom") version "2.1.0"
+	id("net.kyori.blossom") version "2.2.0"
 }
 
 group = "org.mockbukkit.mockbukkit"
@@ -115,7 +115,7 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.13"
+		toolVersion = "0.8.14"
 	}
 
 	register("updateResources") {
@@ -232,10 +232,9 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val process = ProcessBuilder()
-		.command(*cmd)
-		.directory(rootProject.projectDir)
-		.start()
-	process.waitFor(5, TimeUnit.SECONDS)
-	return process.inputStream.bufferedReader().readText().trim()
+	return providers.exec {
+		commandLine(*cmd)
+	}.standardOutput.asText.get().trim()
 }
+
+

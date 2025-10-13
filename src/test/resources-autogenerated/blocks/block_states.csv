@@ -861,6 +861,7 @@ SCAFFOLDING, org.bukkit.block.BlockState
 SCULK, org.bukkit.block.BlockState
 SCULK_CATALYST, org.bukkit.block.SculkCatalyst
 SCULK_SENSOR, org.bukkit.block.SculkSensor
+SCULK_SHRIEKER, org.bukkit.block.SculkShrieker
 SCULK_VEIN, org.bukkit.block.BlockState
 SEA_LANTERN, org.bukkit.block.BlockState
 SEA_PICKLE, org.bukkit.block.BlockState

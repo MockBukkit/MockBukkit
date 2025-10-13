@@ -224,6 +224,52 @@ class PlayerInventoryMockTest
 	}
 
 	@Test
+	void setStorageContents_ResultFromGetStorageContents_Works()
+	{
+		assertDoesNotThrow(() -> inventory.setStorageContents(inventory.getStorageContents()));
+	}
+
+	@Test
+	void setStorageContents_TooLarge_Exception()
+	{
+		assertThrows(IllegalArgumentException.class, () -> inventory.setStorageContents(new ItemStack[37]));
+	}
+
+	@Test
+	void setStorageContents_NewArray_StorageSet()
+	{
+		ItemStack item = new ItemStackMock(Material.STONE);
+		ItemStack item2 = new ItemStackMock(Material.SAND);
+		ItemStack[] contents = new ItemStack[36];
+		contents[0] = item;
+		contents[35] = item2;
+		inventory.setStorageContents(contents);
+		assertEquals(item, inventory.getItem(0));
+		assertEquals(item2, inventory.getItem(35));
+		assertEquals(item, inventory.getStorageContents()[0]);
+		assertEquals(item2, inventory.getStorageContents()[35]);
+	}
+
+	@Test
+	void setStorageContents_EmptyArray_ArmorRemainsTheSame()
+	{
+		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
+		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
+		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
+		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
+		inventory.setItem(PlayerInventoryMock.BOOTS, boots);
+		inventory.setItem(PlayerInventoryMock.LEGGINGS, leggings);
+		inventory.setItem(PlayerInventoryMock.CHESTPLATE, chestplate);
+		inventory.setItem(PlayerInventoryMock.HELMET, helmet);
+		ItemStack[] emptyContents = new ItemStack[36];
+		inventory.setStorageContents(emptyContents);
+		assertEquals(boots, inventory.getBoots());
+		assertEquals(leggings, inventory.getLeggings());
+		assertEquals(chestplate, inventory.getChestplate());
+		assertEquals(helmet, inventory.getHelmet());
+	}
+
+	@Test
 	void setArmorContents_NewArray_ArmorSet()
 	{
 		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
