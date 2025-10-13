@@ -40,6 +40,7 @@ import org.bukkit.block.data.type.RedstoneRail;
 import org.bukkit.block.data.type.RedstoneWallTorch;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
+import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
@@ -119,6 +120,7 @@ public final class BlockDataMockFactory
 			.put(RedstoneWallTorch.class, RedstoneWallTorchDataMock::new)
 			.put(RedstoneWire.class, RedstoneWireDataMock::new)
 			.put(Repeater.class, RepeaterDataMock::new)
+			.put(RespawnAnchor.class, RespawnAnchorDataMock::new)
 			.put(Rotatable.class, RotatableDataMock::new)
 			.put(Snowable.class, SnowableDataMock::new)
 			.put(Waterlogged.class, WaterloggedDataMock::new)

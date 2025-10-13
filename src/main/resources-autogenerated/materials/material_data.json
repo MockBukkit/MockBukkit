@@ -6381,7 +6381,9 @@
 		}
 	},
 	"minecraft:respawn_anchor": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxCharges": "4"
+		},
 		"defaultStates": {
 			"charges": "0"
 		}
