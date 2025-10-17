@@ -1040,7 +1040,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenGlassPane()
 		{
 			GlassPane data = BlockType.WHITE_STAINED_GLASS_PANE.createBlockData();
