@@ -23,13 +23,16 @@ import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
+import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
+import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.block.data.type.Grindstone;
 import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
@@ -88,8 +91,10 @@ public final class BlockDataMockFactory
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
+			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
+			.put(CreakingHeart.class, CreakingHeartDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Dispenser.class, DispenserDataMock::new)
 			.put(Directional.class, DirectionalDataMock::new)
@@ -128,6 +133,7 @@ public final class BlockDataMockFactory
 			.put(Waterlogged.class, WaterloggedDataMock::new)
 			.put(Ageable.class, AgeableDataMock::new)
 			.put(Bisected.class, BisectedDataMock::new)
+			.put(GlassPane.class, GlassPaneDataMock::new)
 			.build();
 
 	/**
@@ -140,10 +146,6 @@ public final class BlockDataMockFactory
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		if (material.isAir() || Material.SOUL_FIRE == material)
-		{
-			return new BlockDataMock(Material.AIR);
-		}
 
 		for (var entry : FACTORIES_BY_TAGS.entrySet())
 		{

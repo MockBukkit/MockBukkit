@@ -12,6 +12,8 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.block.data.type.ChiseledBookshelf;
+import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.TurtleEgg;
@@ -152,6 +154,18 @@ public class MaterialDataGenerator implements DataGenerator
 		{
 			obj.addProperty("minEggs", String.valueOf(turtleEgg.getMinimumEggs()));
 			obj.addProperty("maxEggs", String.valueOf(turtleEgg.getMaximumEggs()));
+		}
+
+		if (data instanceof ChiseledBookshelf chiseledBookshelf)
+		{
+			obj.addProperty("maxOccupiedSlots", chiseledBookshelf.getMaximumOccupiedSlots());
+		}
+
+		if (data instanceof CreakingHeart creakingHeart)
+		{
+			JsonArray array = new JsonArray();
+			creakingHeart.getAxes().stream().map(Enum::name).forEach(array::add);
+			obj.add("axes", array);
 		}
 	}
 
