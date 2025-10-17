@@ -444,6 +444,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public boolean isReplaceable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isPreferredTool(@NotNull ItemStack tool)
 	{
 		// TODO Auto-generated method stub
