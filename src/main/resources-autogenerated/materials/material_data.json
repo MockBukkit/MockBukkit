@@ -1608,7 +1608,8 @@
 				"NORTH",
 				"SOUTH",
 				"WEST"
-			]
+			],
+			"maxOccupiedSlots": 6
 		},
 		"defaultStates": {
 			"facing": "north",
@@ -1861,7 +1862,13 @@
 	},
 	"minecraft:crafting_table": {},
 	"minecraft:creaking_heart": {
-		"allowedStates": {},
+		"allowedStates": {
+			"axes": [
+				"X",
+				"Y",
+				"Z"
+			]
+		},
 		"defaultStates": {
 			"axis": "y",
 			"creaking_heart_state": "uprooted",

@@ -183,7 +183,7 @@ CHERRY_WALL_SIGN, org.bukkit.block.Sign
 CHERRY_WOOD, org.bukkit.block.BlockState
 CHEST, org.bukkit.block.Chest
 CHIPPED_ANVIL, org.bukkit.block.BlockState
-CHISELED_BOOKSHELF, org.bukkit.block.BlockState
+CHISELED_BOOKSHELF, org.bukkit.block.ChiseledBookshelf
 CHISELED_COPPER, org.bukkit.block.BlockState
 CHISELED_DEEPSLATE, org.bukkit.block.BlockState
 CHISELED_NETHER_BRICKS, org.bukkit.block.BlockState
@@ -230,7 +230,7 @@ CRACKED_POLISHED_BLACKSTONE_BRICKS, org.bukkit.block.BlockState
 CRACKED_STONE_BRICKS, org.bukkit.block.BlockState
 CRAFTER, org.bukkit.block.BlockState
 CRAFTING_TABLE, org.bukkit.block.BlockState
-CREAKING_HEART, org.bukkit.block.BlockState
+CREAKING_HEART, org.bukkit.block.CreakingHeart
 CREEPER_HEAD, org.bukkit.block.Skull
 CREEPER_WALL_HEAD, org.bukkit.block.Skull
 CRIMSON_BUTTON, org.bukkit.block.BlockState
