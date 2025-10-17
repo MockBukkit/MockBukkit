@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import com.google.gson.JsonElement;
+import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -69,6 +70,7 @@ public class BlockDataLimitation<T, U>
 		public static final Type<Integer, Integer> MAX_EGGS = new Type<>("maxEggs", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_HATCH = new Type<>("maxHatch", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_MOISTURE = new Type<>("maxMoisture", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_OCCUPIED_SLOTS = new Type<>("maxOccupiedSlots", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Set<BlockFace>, BlockFace> FACES = new Type<>("faces", jsonElement -> BlockDataLimitation.fromSet(
 				jsonElement.getAsJsonArray()
 						.asList()
@@ -76,6 +78,15 @@ public class BlockDataLimitation<T, U>
 						.map(JsonElement::getAsString)
 						.map(string -> string.toUpperCase(Locale.ROOT))
 						.map(BlockFace::valueOf)
+						.collect(Collectors.toUnmodifiableSet())
+		));
+		public static final Type<Set<Axis>, Axis> AXES = new Type<>("axes", jsonElement -> BlockDataLimitation.fromSet(
+				jsonElement.getAsJsonArray()
+						.asList()
+						.stream()
+						.map(JsonElement::getAsString)
+						.map(string -> string.toUpperCase(Locale.ROOT))
+						.map(Axis::valueOf)
 						.collect(Collectors.toUnmodifiableSet())
 		));
 
