@@ -47,9 +47,7 @@ public class BlockDataGenerator implements DataGenerator
 
 				try
 				{
-					var block = world.getBlockAt(0, 64, 0);
-					block.setType(material);
-					@NotNull BlockData data = block.getBlockData();
+					@NotNull BlockData data = material.createBlockData();
 					String value = data.getAsString(false);
 					writer.println(String.format("%s, \"%s\"", material.name(), value));
 				}

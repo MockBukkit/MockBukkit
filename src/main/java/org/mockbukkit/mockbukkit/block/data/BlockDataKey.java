@@ -30,6 +30,7 @@ import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
+import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
@@ -194,6 +195,16 @@ public enum BlockDataKey
 
 	EXTENDED("extended", Boolean::parseBoolean, Piston.class::isInstance),
 	SHORT("short", Boolean::parseBoolean, PistonHead.class::isInstance),
+
+	CREAKING_HEART_STATE("creaking_heart_state", EnumDataDeserializer.of(CreakingHeart.State.class), CreakingHeart.class::isInstance),
+	NATURAL("natural", Boolean::parseBoolean, CreakingHeart.class::isInstance),
+
+	SLOT_OCCUPIED_0("slot_0_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_1("slot_1_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_2("slot_2_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_3("slot_3_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_4("slot_4_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_5("slot_5_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
 
 	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
