@@ -36,6 +36,7 @@ import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
+import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Piston;
@@ -160,6 +161,7 @@ public enum BlockDataKey
 	UP("up", Boolean::parseBoolean, o -> o instanceof MultipleFacing || o instanceof Wall),
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
+	TIP("tip", Boolean::parseBoolean, HangingMoss.class::isInstance),
 
 	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
 	TRIGGERED("triggered", Boolean::parseBoolean, o -> o instanceof Crafter || o instanceof Dispenser),
