@@ -47,13 +47,11 @@ public class PlayerListMock
 
 	/**
 	 * Sets the maximum number of online players.
-	 * <b>This is not currently enforced.</b>
 	 *
 	 * @param maxPlayers The maximum amount of players.
 	 */
 	public void setMaxPlayers(int maxPlayers)
 	{
-		// TODO: The maxPlayers setting is currently not enforced.
 		this.maxPlayers = maxPlayers;
 	}
 
@@ -91,6 +89,10 @@ public class PlayerListMock
 	@ApiStatus.Internal
 	public synchronized void addPlayer(@NotNull PlayerMock player)
 	{
+		if (this.onlinePlayers.size() >= this.maxPlayers)
+		{
+			return;
+		}
 		long currentTime = System.currentTimeMillis();
 		this.firstPlayed.putIfAbsent(player.getUniqueId(), currentTime);
 		this.lastLogins.put(player.getUniqueId(), currentTime);
