@@ -85,13 +85,14 @@ public class PlayerListMock
 	 * Marks a player as on the server, and sets related data like hasPlayedBefore and lastLogin.
 	 *
 	 * @param player The player to add.
+	 * @return Whether the player was added.
 	 */
 	@ApiStatus.Internal
-	public synchronized void addPlayer(@NotNull PlayerMock player)
+	public synchronized boolean addPlayer(@NotNull PlayerMock player)
 	{
 		if (this.onlinePlayers.size() >= this.maxPlayers)
 		{
-			return;
+			return false;
 		}
 		long currentTime = System.currentTimeMillis();
 		this.firstPlayed.putIfAbsent(player.getUniqueId(), currentTime);
@@ -99,6 +100,8 @@ public class PlayerListMock
 		this.onlinePlayers.add(player);
 		this.offlinePlayers.add(player);
 		this.hasPlayedBefore.put(player.getUniqueId(), this.hasPlayedBefore.containsKey(player.getUniqueId()));
+
+		return true;
 	}
 
 	/**
