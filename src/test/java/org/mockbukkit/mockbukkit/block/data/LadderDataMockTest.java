@@ -87,6 +87,4 @@ public class LadderDataMockTest
 		assertTrue(ladderData.isWaterlogged());
 		assertFalse(cloned.isWaterlogged());
 	}
-
-
 }

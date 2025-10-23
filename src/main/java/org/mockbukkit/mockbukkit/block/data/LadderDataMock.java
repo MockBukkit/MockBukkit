@@ -28,7 +28,7 @@ public class LadderDataMock extends BlockDataMock implements Ladder
 	 *
 	 * @param other the other block data.
 	 */
-	public LadderDataMock(@NotNull BlockDataMock other)
+	public LadderDataMock(@NotNull LadderDataMock other)
 	{
 		super(other);
 	}
