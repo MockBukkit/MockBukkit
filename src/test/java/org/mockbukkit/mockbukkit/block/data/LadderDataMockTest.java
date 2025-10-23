@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class LadderDataMockTest
+class LadderDataMockTest
 {
 
 	private LadderDataMock ladderData;
