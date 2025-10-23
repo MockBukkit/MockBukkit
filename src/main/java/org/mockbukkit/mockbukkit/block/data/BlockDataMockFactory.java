@@ -33,6 +33,8 @@ import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.GlassPane;
+import org.bukkit.block.data.type.Grindstone;
+import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
@@ -99,6 +101,8 @@ public final class BlockDataMockFactory
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
+			.put(Grindstone.class, GrindstoneDataMock::new)
+			.put(HangingMoss.class, HangingMossDataMock::new)
 			.put(Hatchable.class, HatchableDataMock::new)
 			.put(Hopper.class, HopperDataMock::new)
 			.put(Lectern.class, LecternDataMock::new)
