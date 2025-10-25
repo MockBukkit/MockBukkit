@@ -749,7 +749,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenChiseledBookshelf()
 		{
 			ChiseledBookshelf data = BlockType.CHISELED_BOOKSHELF.createBlockData();
@@ -775,7 +774,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCreakingHeart()
 		{
 			CreakingHeart data = BlockType.CREAKING_HEART.createBlockData();
@@ -1124,7 +1122,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenGrindstone()
 		{
 			Grindstone data = BlockType.GRINDSTONE.createBlockData();
@@ -1310,7 +1307,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHangingMoss()
 		{
 			HangingMoss data = BlockType.PALE_HANGING_MOSS.createBlockData();

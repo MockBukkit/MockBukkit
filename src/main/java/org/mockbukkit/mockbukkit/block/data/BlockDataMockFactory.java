@@ -24,14 +24,18 @@ import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.CalibratedSculkSensor;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
+import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.GlassPane;
+import org.bukkit.block.data.type.Grindstone;
+import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
@@ -90,14 +94,18 @@ public final class BlockDataMockFactory
 			.put(Brushable.class, BrushableDataMock::new)
 			.put(CalibratedSculkSensor.class, CalibratedSculkSensorDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
+			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
+			.put(CreakingHeart.class, CreakingHeartDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Dispenser.class, DispenserDataMock::new)
 			.put(Directional.class, DirectionalDataMock::new)
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
+			.put(Grindstone.class, GrindstoneDataMock::new)
+			.put(HangingMoss.class, HangingMossDataMock::new)
 			.put(Hatchable.class, HatchableDataMock::new)
 			.put(Hopper.class, HopperDataMock::new)
 			.put(Lectern.class, LecternDataMock::new)
