@@ -70,6 +70,21 @@ class PlayerListMockTest
 	}
 
 	@Test
+	void addPlayer_MaxPlayersEnforced()
+	{
+		playerList.setMaxPlayers(1);
+		PlayerMock player1 = new PlayerMock(server, "player1", UUID.randomUUID());
+		playerList.addPlayer(player1); // This should add player1
+
+		PlayerMock player2 = new PlayerMock(server, "player2", UUID.randomUUID());
+		playerList.addPlayer(player2); // This should _NOT_ add player2
+
+		assertEquals(1, playerList.getOnlinePlayers().size());
+		assertTrue(playerList.getOnlinePlayers().contains(player1));
+		assertFalse(playerList.getOnlinePlayers().contains(player2));
+	}
+
+	@Test
 	void disconnect_RemovesFromOnline()
 	{
 		PlayerMock player = server.addPlayer();
