@@ -42,6 +42,12 @@ class PersistentDataContainerViewMockTest
 			{
 				return parentContainer.getKeys();
 			}
+
+			@Override
+			public int getSize()
+			{
+				return parentContainer.getSize();
+			}
 		};
 
 	}

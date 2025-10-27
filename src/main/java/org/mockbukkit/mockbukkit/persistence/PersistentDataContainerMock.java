@@ -109,6 +109,12 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
+	public int getSize()
+	{
+		return map.size();
+	}
+
+	@Override
 	public void readFromBytes(byte @NotNull [] bytes, boolean clear)
 	{
 		// TODO Auto-generated method stub
