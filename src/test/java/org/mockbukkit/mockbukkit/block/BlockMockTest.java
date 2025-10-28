@@ -485,4 +485,24 @@ class BlockMockTest
 
 	}
 
+	@Nested
+	class IsReplaceable
+	{
+
+		@Test
+		void givenReplaceableMaterial()
+		{
+			Block b = new BlockMock(Material.HANGING_ROOTS);
+			assertTrue(b.isReplaceable());
+		}
+
+		@Test
+		void givenNonReplaceableMaterial()
+		{
+			Block b = new BlockMock(Material.MUD);
+			assertFalse(b.isReplaceable());
+		}
+
+	}
+
 }
