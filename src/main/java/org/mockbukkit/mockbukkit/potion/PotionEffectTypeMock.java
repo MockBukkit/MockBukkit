@@ -36,7 +36,6 @@ public class PotionEffectTypeMock extends PotionEffectType
 	private final Category category;
 	private final String translationKey;
 
-
 	/**
 	 * @param key            The namespaced key representing this effect
 	 * @param id             The magic number representing this effect
@@ -144,7 +143,6 @@ public class PotionEffectTypeMock extends PotionEffectType
 		return color;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -229,6 +227,12 @@ public class PotionEffectTypeMock extends PotionEffectType
 	public @NotNull String getTranslationKey()
 	{
 		return this.translationKey;
+	}
+
+	@Override
+	public String toString()
+	{
+		return name;
 	}
 
 }

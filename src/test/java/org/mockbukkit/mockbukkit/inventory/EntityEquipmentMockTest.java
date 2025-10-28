@@ -5,12 +5,13 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
 import org.mockbukkit.mockbukkit.entity.ZombieMock;
@@ -24,31 +25,25 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class EntityEquipmentMockTest
 {
 
 	private EntityEquipment equipment;
+	@MockBukkitInject
 	private ZombieMock holder;
+	@MockBukkitInject
 	private ServerMock server;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
-		holder = new ZombieMock(server, UUID.randomUUID());
 		equipment = holder.getEquipment();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
 	void testMainHand()
 	{
-
 		assertNotNull(equipment.getItemInMainHand());
 
 		ItemStack item = new ItemStackMock(Material.DIAMOND);
@@ -178,20 +173,15 @@ class EntityEquipmentMockTest
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			equipment.setHelmetDropChance(0.5f);
-		});
+				equipment.setHelmetDropChance(0.5f));
 	}
 
 	@Test
 	void testGetArmorContentsDefault()
 	{
-
 		assertEquals(4, equipment.getArmorContents().length);
 		Arrays.stream(equipment.getArmorContents()).forEach(entry ->
-		{
-			assertEquals(Material.AIR, entry.getType());
-		});
+				assertEquals(Material.AIR, entry.getType()));
 	}
 
 	@Test

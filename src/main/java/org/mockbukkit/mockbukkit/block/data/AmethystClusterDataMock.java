@@ -27,8 +27,16 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	{
 		super(type);
 		checkType(type, AmethystCluster.class);
-		setFacing(BlockFace.NORTH);
-		setWaterlogged(false);
+	}
+
+	/**
+	 * Create a new {@link AmethystClusterDataMock} based on an existing {@link AmethystClusterDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected AmethystClusterDataMock(AmethystClusterDataMock other)
+	{
+		super(other);
 	}
 
 	@Override
@@ -61,6 +69,13 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	public void setWaterlogged(boolean waterlogged)
 	{
 		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull AmethystClusterDataMock clone()
+	{
+		return new AmethystClusterDataMock(this);
 	}
 
 }

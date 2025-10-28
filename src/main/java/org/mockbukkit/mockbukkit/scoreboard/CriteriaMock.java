@@ -53,8 +53,14 @@ public class CriteriaMock implements Criteria
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
 		CriteriaMock that = (CriteriaMock) o;
 		return this.name.equals(that.name);
 	}

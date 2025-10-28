@@ -1,12 +1,9 @@
 package org.mockbukkit.mockbukkit.matcher.help;
 
 import org.bukkit.command.defaults.VersionCommand;
-import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
 import org.bukkit.help.IndexHelpTopic;
 import org.hamcrest.Matcher;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,14 +30,7 @@ class HelpMapFactoryRegisteredMatcherTest extends AbstractMatcherTest
 	void setUp()
 	{
 		this.helpMap = serverMock.getHelpMap();
-		this.helpTopicFactory = new HelpTopicFactory<>()
-		{
-			@Override
-			public @Nullable HelpTopic createTopic(@NotNull VersionCommand command)
-			{
-				return new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
-			}
-		};
+		this.helpTopicFactory = command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
 	}
 
 	@Test

@@ -39,10 +39,7 @@ public class ConversationTracker
 			{
 				conversation.abandon(details);
 			}
-			if (this.conversationQueue.contains(conversation))
-			{
-				this.conversationQueue.remove(conversation);
-			}
+			this.conversationQueue.remove(conversation);
 			if (!this.conversationQueue.isEmpty())
 			{
 				this.conversationQueue.getFirst().outputNextPrompt();
@@ -52,7 +49,6 @@ public class ConversationTracker
 
 	public synchronized void abandonAllConversations()
 	{
-
 		List<Conversation> oldQueue = this.conversationQueue;
 		this.conversationQueue = new LinkedList<>();
 		for (Conversation conversation : oldQueue)

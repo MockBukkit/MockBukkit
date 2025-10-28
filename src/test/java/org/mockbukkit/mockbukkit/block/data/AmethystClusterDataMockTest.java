@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@ExtendWith(MockBukkitExtension.class)
 class AmethystClusterDataMockTest
 {
 
@@ -28,7 +31,7 @@ class AmethystClusterDataMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(BlockFace.NORTH, cluster.getFacing());
+		assertEquals(BlockFace.UP, cluster.getFacing());
 		assertFalse(cluster.isWaterlogged());
 	}
 
@@ -50,7 +53,9 @@ class AmethystClusterDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (!cluster.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertDoesNotThrow(() -> cluster.setFacing(face));
 		}
 	}
@@ -61,7 +66,9 @@ class AmethystClusterDataMockTest
 		for (BlockFace face : BlockFace.values())
 		{
 			if (cluster.getFaces().contains(face))
+			{
 				continue;
+			}
 			assertThrowsExactly(IllegalArgumentException.class, () -> cluster.setFacing(face));
 		}
 	}
@@ -83,7 +90,7 @@ class AmethystClusterDataMockTest
 	@Test
 	void getAsString()
 	{
-		assertEquals("minecraft:amethyst_cluster[facing=north,waterlogged=false]", cluster.getAsString());
+		assertEquals("minecraft:amethyst_cluster[facing=up,waterlogged=false]", cluster.getAsString());
 	}
 
 	@Test

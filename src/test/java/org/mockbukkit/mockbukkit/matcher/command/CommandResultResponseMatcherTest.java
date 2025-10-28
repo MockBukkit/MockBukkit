@@ -18,7 +18,8 @@ class CommandResultResponseMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
-	ServerMock serverMock;
+	private ServerMock serverMock;
+	@MockBukkitInject
 	private PlayerMock sender;
 	private CommandResult commandResult;
 	private static final String MESSAGE = "Hello world!";
@@ -26,7 +27,6 @@ class CommandResultResponseMatcherTest extends AbstractMatcherTest
 	@BeforeEach
 	void setUp()
 	{
-		this.sender = serverMock.addPlayer();
 		this.commandResult = new CommandResult(true, sender);
 	}
 

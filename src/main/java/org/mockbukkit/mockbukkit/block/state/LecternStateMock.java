@@ -122,9 +122,18 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof LecternStateMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof LecternStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return currentPage == that.currentPage;
 	}
 
@@ -133,7 +142,6 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	{
 		return Objects.hash(super.hashCode(), currentPage);
 	}
-
 
 	@Override
 	protected String toStringInternal()

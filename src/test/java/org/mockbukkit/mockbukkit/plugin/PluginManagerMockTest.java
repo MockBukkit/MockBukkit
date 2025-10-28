@@ -13,14 +13,17 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
@@ -33,6 +36,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -42,9 +46,11 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class PluginManagerMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private PluginManagerMock pluginManager;
 	private TestPlugin plugin;
@@ -52,15 +58,8 @@ class PluginManagerMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
 		plugin = MockBukkit.load(TestPlugin.class);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -113,7 +112,7 @@ class PluginManagerMockTest
 	{
 		Plugin plugin = pluginManager.getPlugin("MockBukkitTestPlugin");
 		assertNotNull(plugin);
-		assertTrue(plugin instanceof TestPlugin);
+		assertInstanceOf(TestPlugin.class, plugin);
 	}
 
 	@Test
@@ -164,7 +163,6 @@ class PluginManagerMockTest
 		assertTrue(event.isCancelled());
 		assertTrue(plugin.ignoredCancelledEvent);
 	}
-
 
 	@Test
 	void assertEventFired_EventWasFired_DoesNotAssert()
@@ -391,10 +389,55 @@ class PluginManagerMockTest
 	}
 
 	@Test
+	void loadPluginViaPureLoadPlugin_NormalFlow()
+	{
+		Plugin loadedPlugin = pluginManager.loadPlugin(TestPlugin.class);
+		assertInstanceOf(JavaPlugin.class, loadedPlugin);
+		assertEquals("MockBukkitTestPlugin", loadedPlugin.getName());
+		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
+	}
+
+	@Test
+	void loadPluginViaPureLoadPlugin_InvalidPluginYml()
+	{
+		// This works because JavaPlugin is a plugin where the `plugin.yml` file cannot be found.
+		//   So, it'll throw a `FileNotFound`
+		Plugin loadedPlugin = pluginManager.loadPlugin(JavaPlugin.class);
+		assertInstanceOf(JavaPlugin.class, loadedPlugin);
+		assertEquals("JavaPlugin", loadedPlugin.getName());
+		assertEquals("0.0.0", loadedPlugin.getDescription().getVersion());
+	}
+
+	@Test
 	void test_customClassLoader()
 	{
 		assertDoesNotThrow(() -> plugin.createCustomClass());
 		assertTrue(plugin.classLoadSucceed);
+	}
+
+	@Test
+	void test_privateConstructorPlugin()
+	{
+		PluginLoadException exception = assertThrows(
+				PluginLoadException.class,
+				() -> pluginManager.loadPlugin(PrivateConstructorPlugin.class)
+		);
+
+		assertInstanceOf(NoSuchMethodException.class, exception.getCause());
+		assertEquals("No publicly available constructor for PrivateConstructorPluginProxy without parameters", exception.getCause().getMessage());
+	}
+
+	@Test
+	void loadPlugin_WithPaperPluginYml_PluginLoaded()
+	{
+		Plugin loadedPlugin = pluginManager.loadPlugin(PaperTestPlugin.class);
+		assertInstanceOf(PaperTestPlugin.class, loadedPlugin);
+		assertEquals("MockBukkitTestPaperPlugin", loadedPlugin.getName());
+		assertEquals("0.1.0", loadedPlugin.getDescription().getVersion());
+	}
+
+	public static class PaperTestPlugin extends JavaPlugin
+	{
 	}
 
 }

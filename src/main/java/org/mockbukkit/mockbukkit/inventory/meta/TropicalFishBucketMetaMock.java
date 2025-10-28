@@ -2,10 +2,13 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.apache.commons.lang3.Validate;
 import org.bukkit.DyeColor;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
@@ -14,6 +17,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class TropicalFishBucketMetaMock extends ItemMetaMock implements TropicalFishBucketMeta
 {
 
@@ -139,13 +143,10 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TropicalFishBucketMetaMock clone()
 	{
-		TropicalFishBucketMetaMock clone = (TropicalFishBucketMetaMock) super.clone();
-		clone.patternColor = this.patternColor;
-		clone.bodyColor = this.bodyColor;
-		clone.pattern = this.pattern;
-		return clone;
+		return new TropicalFishBucketMetaMock(this);
 	}
 
 	/**
@@ -158,9 +159,9 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	{
 		TropicalFishBucketMetaMock serialMock = new TropicalFishBucketMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.bodyColor = (DyeColor) args.get("body-color");
-		serialMock.patternColor = (DyeColor) args.get("pattern-color");
-		serialMock.pattern = (TropicalFish.Pattern) args.get("pattern");
+		serialMock.bodyColor = NbtParser.parseEnum(args.get("body-color"), DyeColor.class);
+		serialMock.patternColor = NbtParser.parseEnum(args.get("pattern-color"), DyeColor.class);
+		serialMock.pattern = NbtParser.parseEnum(args.get("pattern"), TropicalFish.Pattern.class);
 		return serialMock;
 	}
 

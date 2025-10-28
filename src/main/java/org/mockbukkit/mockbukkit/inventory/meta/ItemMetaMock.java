@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
@@ -21,6 +22,7 @@ import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
@@ -41,9 +43,10 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +59,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
@@ -63,6 +67,7 @@ import static java.util.Objects.nonNull;
 /**
  * Mock implementation of an {@link ItemMeta}, {@link Damageable}, and {@link Repairable}.
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
@@ -135,7 +140,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (meta instanceof ItemMetaMock m)
 		{
-			this.persistentDataContainer = m.persistentDataContainer;
+			this.persistentDataContainer = new PersistentDataContainerMock(m.persistentDataContainer);
 		}
 		unbreakable = meta.isUnbreakable();
 		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
@@ -373,41 +378,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public ItemMetaMock clone()
 	{
-		try
-		{
-			ItemMetaMock meta = (ItemMetaMock) super.clone();
-			meta.displayName = displayName;
-			if (lore != null)
-			{
-				meta.lore = new ArrayList<>(lore);
-			}
-
-			meta.damage = damage;
-			meta.maxDamage = maxDamage;
-			meta.repairCost = repairCost;
-			meta.enchants = new HashMap<>(enchants);
-			meta.attributeModifiers = attributeModifiers != null ? LinkedHashMultimap.create(attributeModifiers) : null;
-			meta.hideFlags = EnumSet.copyOf(hideFlags);
-			meta.persistentDataContainer = new PersistentDataContainerMock(persistentDataContainer);
-			meta.unbreakable = unbreakable;
-			meta.customModelData = customModelData;
-
-			meta.hideTooltip = hideTooltip;
-			meta.fireResistant = fireResistant;
-			meta.maxStackSize = maxStackSize;
-			meta.enchantmentGlintOverride = enchantmentGlintOverride;
-			meta.rarity = rarity;
-			meta.itemName = itemName;
-			meta.enchantableValue = enchantableValue;
-
-			return meta;
-		}
-		catch (CloneNotSupportedException e)
-		{
-			throw new ItemMetaInitException(e);
-		}
+		return new ItemMetaMock(this);
 	}
 
 	@Override
@@ -630,61 +604,80 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		// Make new map and add relevant properties to it.
 		Map<String, Object> map = new HashMap<>();
 
-		if (this.displayName != null)
+		if (this.hasDisplayName())
 		{
-			map.put("display-name", this.displayName);
+			map.put("minecraft:custom_name", this.getDisplayName());
+		}
+		if (this.hasLore())
+		{
+			map.put("minecraft:lore", this.getLore());
+		}
+		if (this.hasDamage())
+		{
+			map.put("minecraft:damage", this.getDamage());
+		}
+		if (this.hasMaxDamage())
+		{
+			map.put("minecraft:max_damage", this.getMaxDamage());
+		}
+		if (this.hasRepairCost())
+		{
+			map.put("minecraft:repair_cost", this.repairCost);
+		}
+		if (this.hasEnchants())
+		{
+			map.put("minecraft:enchantments", this.enchants.entrySet().stream()
+					.collect(Collectors.toMap(entry -> entry.getKey().getKey().asString(), Map.Entry::getValue)));
+		}
+		if (this.hasAttributeModifiers())
+		{
+			map.put("minecraft:attribute_modifiers", this.getAttributeModifiers());
+		}
+		if (!this.getItemFlags().isEmpty())
+		{
+			map.put("ItemFlags", this.getItemFlags());
+		}
+		if (!this.persistentDataContainer.isEmpty())
+		{
+			map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
+		}
+		if (this.isUnbreakable())
+		{
+			map.put("minecraft:unbreakable", Maps.newHashMap());
+		}
+		if (this.hasCustomModelData())
+		{
+			map.put("minecraft:custom_model_data", this.getCustomModelData());
 		}
 
-		if (this.lore != null)
+		if (this.isHideTooltip())
 		{
-			map.put("lore", this.lore);
+			map.put("HideTooltip", this.hideTooltip);
 		}
-		if (this.damage != null)
+		if (this.isFireResistant())
 		{
-			map.put("Damage", this.damage);
+			map.put("FireResistant", this.fireResistant);
 		}
-		if (this.maxDamage != null)
+		if (this.hasMaxStackSize())
 		{
-			map.put("MaxDamage", this.maxDamage);
+			map.put("MaxStackSize", this.getMaxStackSize());
 		}
-		map.put("repair-cost", this.repairCost);
-		map.put("enchants", this.enchants.entrySet().stream()
-				.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
-		if (hasAttributeModifiers())
+		if (this.hasEnchantmentGlintOverride())
 		{
-			map.put("attribute-modifiers", this.attributeModifiers);
+			map.put("EnchantmentGlintOverride", this.getEnchantmentGlintOverride());
 		}
-		map.put("ItemFlags", this.hideFlags);
-		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
-		map.put("Unbreakable", this.unbreakable);
-		if (this.customModelData != null)
+		if (this.hasRarity())
 		{
-			map.put("custom-model-data", this.customModelData);
-		}
-
-		map.put("HideTooltip", this.hideTooltip);
-		map.put("FireResistant", this.fireResistant);
-		if (this.maxStackSize != null)
-		{
-			map.put("MaxStackSize", this.maxStackSize);
-		}
-		if (this.enchantmentGlintOverride != null)
-		{
-			map.put("EnchantmentGlintOverride", this.enchantmentGlintOverride);
-		}
-		if (this.rarity != null)
-		{
-			map.put("Rarity", this.rarity);
+			map.put("Rarity", this.getRarity());
 		}
 		if (this.hasItemName())
 		{
 			map.put("ItemName", this.getItemName());
 		}
-		if (this.enchantableValue != null)
+		if (this.hasEnchantable())
 		{
-			map.put("EnchantableValue", this.enchantableValue);
+			map.put("EnchantableValue", this.getEnchantable());
 		}
-
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
@@ -717,37 +710,58 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@ApiStatus.Internal
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
-		displayName = (String) args.get("display-name");
-		lore = (List<String>) args.get("lore");
-		damage = (Integer) args.get("Damage");
-		maxDamage = (Integer) args.get("MaxDamage");
-		repairCost = (int) args.get("repair-cost");
-		enchants = new HashMap<>();
-		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
+		String customName = NbtParser.parseString(args.get("minecraft:custom_name"));
+		if (customName != null)
 		{
-			Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.minecraft(entry.getKey()));
-			if (enchantment != null)
+			setDisplayName(customName);
+		}
+
+		@Nullable List<@Nullable String> loreList = NbtParser.parseList(args.get("minecraft:lore"), NbtParser::parseString);
+		if (loreList != null)
+		{
+			setLore(loreList);
+		}
+
+		damage = NbtParser.parseInteger(args.get("minecraft:damage"));
+		maxDamage = NbtParser.parseInteger(args.get("minecraft:max_damage"));
+		repairCost = NbtParser.parseInteger(args.get("minecraft:repair_cost"), 0);
+		enchants = new HashMap<>();
+		Map<String, Integer> enchantMap = NbtParser.parseMap(args.get("minecraft:enchantments"), NbtParser::parseInteger);
+		if (enchantMap != null)
+		{
+			for (Map.Entry<String, Integer> entry : enchantMap.entrySet())
 			{
-				enchants.put(enchantment, entry.getValue());
+				Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.fromString(entry.getKey()));
+				if (enchantment != null)
+				{
+					enchants.put(enchantment, entry.getValue());
+				}
 			}
 		}
-		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
-		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
-		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
-		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		unbreakable = (boolean) args.get("Unbreakable");
+		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("minecraft:attribute_modifiers"));
+		Set<ItemFlag> tempSet = NbtParser.parseSet(args.get("ItemFlags"), o -> NbtParser.parseEnum(o, ItemFlag.class));
+		if (tempSet != null)
+		{
+			hideFlags = tempSet;
+		}
+		Map<String, Object> map = NbtParser.parseMap(args.get("PublicBukkitValues"), Function.identity());
+		if (map != null)
+		{
+			persistentDataContainer = PersistentDataContainerMock.deserialize(map);
+		}
+		unbreakable = args.containsKey("minecraft:unbreakable");
 		// customTagContainer is also unimplemented in mock.
-		customModelData = (Integer) args.get("custom-model-data");
-		hideTooltip = (boolean) args.get("HideTooltip");
-		fireResistant = (boolean) args.get("FireResistant");
-		maxStackSize = (Integer) args.get("MaxStackSize");
-		enchantmentGlintOverride = (Boolean) args.get("EnchantmentGlintOverride");
-		rarity = (ItemRarity) args.get("Rarity");
+		customModelData = NbtParser.parseInteger(args.get("minecraft:custom_model_data"));
+		hideTooltip = NbtParser.parseBoolean(args.get("HideTooltip"), false);
+		fireResistant = NbtParser.parseBoolean(args.get("FireResistant"), false);
+		maxStackSize = NbtParser.parseInteger(args.get("MaxStackSize"));
+		enchantmentGlintOverride = NbtParser.parseBoolean(args.get("EnchantmentGlintOverride"));
+		rarity = NbtParser.parseEnum(args.get("Rarity"), ItemRarity.class);
 		if (args.containsKey("ItemName"))
 		{
-			setItemName((String) args.get("ItemName"));
+			setItemName(NbtParser.parseString(args.get("ItemName")));
 		}
-		enchantableValue = (Integer) args.get("EnchantableValue");
+		enchantableValue = NbtParser.parseInteger(args.get("EnchantableValue"));
 
 	}
 
@@ -839,13 +853,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void addItemFlags(ItemFlag... itemFlags)
 	{
-		hideFlags.addAll(Arrays.asList(itemFlags));
+		hideFlags.addAll(List.of(itemFlags));
 	}
 
 	@Override
 	public void removeItemFlags(ItemFlag... itemFlags)
 	{
-		hideFlags.removeAll(Arrays.asList(itemFlags));
+		List.of(itemFlags).forEach(hideFlags::remove);
 	}
 
 	@Override
@@ -855,7 +869,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public boolean hasItemFlag(ItemFlag flag)
+	public boolean hasItemFlag(@NotNull ItemFlag flag)
 	{
 		return hideFlags.contains(flag);
 	}
@@ -1025,7 +1039,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{
 		// This was replaced by PersistentDataContainer!

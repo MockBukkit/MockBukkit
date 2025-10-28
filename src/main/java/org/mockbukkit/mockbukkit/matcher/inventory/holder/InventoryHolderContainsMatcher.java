@@ -57,5 +57,4 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 		return not(hasItemInInventory(itemStack));
 	}
 
-
 }

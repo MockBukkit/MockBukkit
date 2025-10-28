@@ -9,6 +9,7 @@ import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
@@ -44,6 +45,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scoreboard.Team;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
@@ -61,6 +63,7 @@ import org.mockbukkit.mockbukkit.event.EventFactoryMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.scoreboard.TeamMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.ArrayList;
@@ -148,9 +151,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		this.perms = new PermissibleBase(this);
 
 		if (!Bukkit.getWorlds().isEmpty())
-			location = Bukkit.getWorlds().get(0).getSpawnLocation();
+		{
+			location = Bukkit.getWorlds().getFirst().getSpawnLocation();
+		}
 		else
+		{
 			location = new Location(null, 0, 0, 0);
+		}
 
 		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
@@ -164,11 +171,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock)
-		{
-			return uuid.equals(((EntityMock) obj).getUniqueId());
-		}
-		return false;
+		return obj instanceof EntityMock entity && uuid.equals(entity.getUniqueId());
 	}
 
 	@Override
@@ -286,7 +289,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public Location getLocation(@Nullable Location loc)
 	{
 		if (loc == null)
+		{
 			return null;
+		}
 
 		loc.setWorld(location.getWorld());
 		loc.setDirection(location.getDirection());
@@ -368,7 +373,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	@SuppressWarnings("UnstableApiUsage")
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		return teleport(location, cause, new TeleportFlag[0]);
@@ -475,10 +479,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * Gets the scoreboard entry for this entity.
 	 *
 	 * @return The scoreboard entry.
+	 *
+	 * @deprecated Replaced by {@link #getScoreboardEntryName()}
 	 */
+	@Deprecated(forRemoval = true)
 	public @NotNull String getScoreboardEntry()
 	{
-		return uuid.toString();
+		return this.getScoreboardEntryName();
 	}
 
 	/**
@@ -691,7 +698,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
 			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
 					&& Math.abs(distance.getZ()) <= z && entity != this)
+			{
 				nearbyEntities.add(entity);
+			}
 		});
 		return nearbyEntities;
 	}
@@ -790,7 +799,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	protected void remove(EntityRemoveEvent.Cause cause)
 	{
-
 		EventFactoryMock.callEntityRemoveEvent(this, cause);
 
 		leaveVehicle();
@@ -1337,8 +1345,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Component teamDisplayName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Team team = this.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(this.getScoreboardEntryName());
+		return TeamMock.formatNameForTeam(team, this.name()).style(Style.style()
+				.hoverEvent(HoverEvent.showEntity(this.getType(), this.getUniqueId(), this.name()))
+				.insertion(this.getUniqueId().toString())
+				.build());
 	}
 
 	@Override
@@ -1542,8 +1553,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull String getScoreboardEntryName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.getUniqueId().toString();
 	}
 
 	@ApiStatus.Internal
@@ -1584,12 +1594,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	public void tick()
 	{
-		if (isDead())
+		if (!isDead())
 		{
-			return;
+			++ticksLived;
 		}
-
-		++ticksLived;
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.adventure;
 
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.TranslationArgument;
@@ -58,6 +59,7 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 			}
 			String fallback = translatable.fallback();
 			String translated = Languages.getInstance().getOrDefault(translatable.key(), fallback);
+			Preconditions.checkNotNull(translated, "No translation found for " + translatable.key());
 
 			List<TranslationArgument> argumentList = translatable.arguments();
 			Matcher matcher = LOCALIZATION_PATTERN.matcher(translated);

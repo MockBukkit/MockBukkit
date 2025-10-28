@@ -28891,6 +28891,42 @@
 			"compostable": false,
 			"createItemStack": {
 				"amount": 1,
+				"type": "minecraft:music_disc_lava_chicken"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:jukebox_playable",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "RARE",
+			"key": "minecraft:music_disc_lava_chicken",
+			"material": "minecraft:music_disc_lava_chicken",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.music_disc_lava_chicken",
+			"typed": "minecraft:music_disc_lava_chicken"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
 				"type": "minecraft:music_disc_mall"
 			},
 			"creativeCategory": "BUILDING_BLOCKS",

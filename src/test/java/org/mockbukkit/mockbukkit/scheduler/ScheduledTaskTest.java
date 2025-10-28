@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ScheduledTaskTest
 {
 
@@ -82,9 +85,7 @@ class ScheduledTaskTest
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
-			executed.set(true);
-		});
+				executed.set(true));
 		task.run();
 		assertTrue(executed.get());
 	}
@@ -94,26 +95,11 @@ class ScheduledTaskTest
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
-			executed.set(true);
-		});
+				executed.set(true));
 		task.cancel();
 
 		assertThrows(CancellationException.class, task::run);
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

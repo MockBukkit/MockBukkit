@@ -13,7 +13,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -67,10 +66,9 @@ public class ScoreboardMock implements Scoreboard
 	{
 		Preconditions.checkNotNull(name, "Objective name cannot be null");
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
-		Preconditions.checkNotNull(displayName, "Display name cannot be null");
 		Preconditions.checkNotNull(renderType, "RenderType cannot be null");
-		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '" + name + "' is longer than the limit of 32767 characters");
-		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '" + name + "' already exists");
+		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '%s' is longer than the limit of %d characters", name, Short.MAX_VALUE);
+		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '%s' already exists", name);
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		this.objectives.put(name, objective);
 		return objective;
@@ -178,14 +176,14 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Team getPlayerTeam(@NotNull OfflinePlayer player) throws IllegalArgumentException
+	public Team getPlayerTeam(@NotNull OfflinePlayer player)
 	{
 		Preconditions.checkNotNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getEntryTeam(player.getName());
 	}
 
 	@Override
-	public Team getEntryTeam(@NotNull String entry) throws IllegalArgumentException
+	public Team getEntryTeam(@NotNull String entry)
 	{
 		for (Team t : teams.values())
 		{
@@ -261,21 +259,21 @@ public class ScoreboardMock implements Scoreboard
 	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		return getScores(((EntityMock) entity).getScoreboardEntry());
+		return getScores(entity.getScoreboardEntryName());
 	}
 
 	@Override
 	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		resetScores(((EntityMock) entity).getScoreboardEntry());
+		resetScores(entity.getScoreboardEntryName());
 	}
 
 	@Override
 	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
-		return getEntryTeam(((EntityMock) entity).getScoreboardEntry());
+		return getEntryTeam(entity.getScoreboardEntryName());
 	}
 
 	/**

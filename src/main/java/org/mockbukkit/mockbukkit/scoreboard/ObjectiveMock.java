@@ -13,7 +13,6 @@ import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.HashMap;
@@ -123,7 +122,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public ScoreboardMock getScoreboard()
+	public @Nullable ScoreboardMock getScoreboard()
 	{
 		return scoreboard;
 	}
@@ -194,25 +193,14 @@ public class ObjectiveMock implements Objective
 		Preconditions.checkArgument(entry.length() <= 40, "Objective entries cannot be longer than 40 characters");
 		validate();
 
-		ScoreMock score = scores.get(entry);
-
-		if (score != null)
-		{
-			return score;
-		}
-		else
-		{
-			score = new ScoreMock(this, entry);
-			scores.put(entry, score);
-			return score;
-		}
+		return scores.computeIfAbsent(entry, e -> new ScoreMock(this, e));
 	}
 
 	@Override
 	public @NotNull Score getScoreFor(@NotNull Entity entity) throws IllegalArgumentException, IllegalStateException
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		return getScore(((EntityMock) entity).getScoreboardEntry());
+		return getScore(entity.getScoreboardEntryName());
 	}
 
 	@Override

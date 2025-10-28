@@ -1,9 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.block.banner.Pattern;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
@@ -110,13 +113,10 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BannerMetaMock clone()
 	{
-		BannerMetaMock clone = (BannerMetaMock) super.clone();
-
-		clone.patterns = new ArrayList<>(this.patterns);
-
-		return clone;
+		return new BannerMetaMock(this);
 	}
 
 	@Override
@@ -132,7 +132,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	 * @param args A serialized BannerMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the BannerMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
 	public static @NotNull BannerMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		BannerMetaMock serialMock = new BannerMetaMock();

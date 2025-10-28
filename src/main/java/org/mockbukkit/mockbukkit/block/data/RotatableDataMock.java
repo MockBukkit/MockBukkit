@@ -18,10 +18,39 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 		super(material);
 	}
 
+	/**
+	 * Create a new {@link RotatableDataMock} based on an existing {@link RotatableDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected RotatableDataMock(@NotNull RotatableDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull BlockFace getRotation()
 	{
 		int data = this.get(BlockDataKey.ROTATION);
+		return getBlockFaceFromId(data);
+	}
+
+	@Override
+	public void setRotation(@NotNull BlockFace rotation)
+	{
+		int val = getIdFromBlockFace(rotation);
+		this.set(BlockDataKey.ROTATION, val);
+	}
+
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull RotatableDataMock clone()
+	{
+		return new RotatableDataMock(this);
+	}
+
+	public static @NotNull BlockFace getBlockFaceFromId(int data)
+	{
 		return switch (data)
 		{
 			case 0x0 -> BlockFace.SOUTH;
@@ -44,10 +73,9 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 		};
 	}
 
-	@Override
-	public void setRotation(@NotNull BlockFace rotation)
+	public static int getIdFromBlockFace(@NotNull BlockFace rotation)
 	{
-		int val = switch (rotation)
+		return switch (rotation)
 		{
 			case SOUTH -> 0x0;
 			case SOUTH_SOUTH_WEST -> 0x1;
@@ -67,7 +95,6 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 			case SOUTH_SOUTH_EAST -> 0xF;
 			default -> throw new IllegalArgumentException("Illegal rotation " + rotation);
 		};
-		this.set(BlockDataKey.ROTATION, val);
 	}
 
 }

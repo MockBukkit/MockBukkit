@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Mob;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,13 +26,8 @@ class VexMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private VexMock vex;
-
-	@BeforeEach
-	void setUp()
-	{
-		vex = new VexMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetCharging
@@ -96,6 +90,14 @@ class VexMockTest
 		@Test
 		void givenLocationInNullWorld_ShouldSucceed()
 		{
+			// We need to unload because our injection creates a world already
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
+			vex = new VexMock(server, UUID.randomUUID());
+
 			Location locationA = new Location(null, 0, 0, 0);
 			vex.setLocation(locationA);
 

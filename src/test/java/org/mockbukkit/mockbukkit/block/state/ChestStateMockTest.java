@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -23,10 +26,11 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+@ExtendWith(MockBukkitExtension.class)
 class ChestStateMockTest extends ContainerStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private ChestStateMock chest;
@@ -40,7 +44,6 @@ class ChestStateMockTest extends ContainerStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.CHEST);
 		this.chest = new ChestStateMock(this.block);

@@ -9,43 +9,36 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ConversationTrackerTest
 {
 
 	private final ConversationTracker tracker = new ConversationTracker();
 	private final FirstPrompt firstPrompt = new FirstPrompt();
 
+	@MockBukkitInject
 	private ServerMock serverMock;
+	@MockBukkitInject
 	private Plugin plugin;
-
+	@MockBukkitInject
 	private Player player;
 	private Conversation conversation;
 
 	@BeforeEach
 	void setUp()
 	{
-		serverMock = MockBukkit.mock();
-		plugin = MockBukkit.load(TestPlugin.class);
-		player = new PlayerMock(serverMock, "test");
 		conversation = new Conversation(plugin, player, firstPrompt);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -65,7 +58,6 @@ class ConversationTrackerTest
 
 	private class FirstPrompt extends StringPrompt
 	{
-
 
 		@Override
 		public @NotNull String getPromptText(@NotNull ConversationContext context)

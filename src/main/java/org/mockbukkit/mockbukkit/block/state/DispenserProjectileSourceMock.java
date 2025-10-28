@@ -6,6 +6,8 @@ import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.function.Consumer;
@@ -15,6 +17,7 @@ import java.util.function.Consumer;
  *
  * @see DispenserStateMock
  */
+@ExtendWith(MockBukkitExtension.class)
 class DispenserProjectileSourceMock implements BlockProjectileSource
 {
 

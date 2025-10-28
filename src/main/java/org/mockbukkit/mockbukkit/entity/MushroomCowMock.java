@@ -182,7 +182,9 @@ public class MushroomCowMock extends AbstractCowMock implements MushroomCow
 		{
 			Item item = world.dropItem(location, new ItemStackMock(Material.valueOf(this.getVariant().name() + "_MUSHROOM")));
 			if (!new EntityDropItemEvent(this, item).callEvent())
+			{
 				item.remove();
+			}
 		}
 
 		this.remove();

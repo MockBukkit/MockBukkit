@@ -4,8 +4,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.memory.MemoryKey;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -17,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class BrainMockTest
 {
 
@@ -29,46 +32,46 @@ class BrainMockTest
 		@Test
 		void giveNullValue()
 		{
-			assertDoesNotThrow(() -> brain.assertIsSupportedValue(null));
+			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(null));
 		}
 
 		@ParameterizedTest
 		@ValueSource(booleans = { true, false })
 		void givenBooleanValues(boolean value)
 		{
-			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
+			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(value));
 		}
 
 		@ParameterizedTest
 		@ValueSource(ints = { 0, 10, 200, 3000, 40000 })
 		void givenIntegerValues(int value)
 		{
-			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
+			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(value));
 		}
 
 		@ParameterizedTest
 		@ValueSource(longs = { 0, 10, 200, 3000, 40000 })
 		void givenLongValues(long value)
 		{
-			assertDoesNotThrow(() -> brain.assertIsSupportedValue(value));
+			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(value));
 		}
 
 		@Test
 		void givenUuidValues()
 		{
-			assertDoesNotThrow(() -> brain.assertIsSupportedValue(UUID.randomUUID()));
+			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(UUID.randomUUID()));
 		}
 
 		@Test
 		void givenLocationValues()
 		{
-			assertDoesNotThrow(() -> brain.assertIsSupportedValue(new Location(null, 0, 0, 0)));
+			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(new Location(null, 0, 0, 0)));
 		}
 
 		@Test
 		void giveUnsupportedValue()
 		{
-			UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> brain.assertIsSupportedValue("This is a string"));
+			UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> BrainMock.assertIsSupportedValue("This is a string"));
 			assertEquals("Do not know how to map This is a string", e.getMessage());
 		}
 

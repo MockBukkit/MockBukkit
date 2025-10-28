@@ -3,14 +3,10 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Turtle;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,14 +16,7 @@ class TurtleMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private Turtle turtle;
-
-	@BeforeEach
-	void setUp()
-	{
-		turtle = new TurtleMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetType()
@@ -54,7 +43,6 @@ class TurtleMockTest
 		turtle.setHome(location);
 		assertEquals(location, turtle.getHome());
 	}
-
 
 	@Test
 	void getEyeHeight_GivenDefaultTurtle()

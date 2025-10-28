@@ -2,12 +2,15 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
+import lombok.EqualsAndHashCode;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +22,8 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
+@EqualsAndHashCode(callSuper = true)
+@DelegateDeserialization(SerializableMeta.class)
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 
@@ -48,29 +53,10 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		return prime * result + effects.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof SuspiciousStewMetaMock meta))
-		{
-			return false;
-		}
-		return this.effects.equals(meta.effects);
-	}
-
-	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SuspiciousStewMetaMock clone()
 	{
-		SuspiciousStewMetaMock mock = (SuspiciousStewMetaMock) super.clone();
-		mock.effects = new ArrayList<>(effects);
-		return mock;
+		return new SuspiciousStewMetaMock(this);
 	}
 
 	@Override

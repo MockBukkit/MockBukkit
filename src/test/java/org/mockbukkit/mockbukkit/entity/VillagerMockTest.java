@@ -14,7 +14,6 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,13 +51,8 @@ class VillagerMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private VillagerMock villager;
-
-	@BeforeEach
-	void setUp()
-	{
-		villager = new VillagerMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class SetProfession
@@ -336,6 +330,12 @@ class VillagerMockTest
 		@Test
 		void givenVillagerWithoutWorld()
 		{
+			// Because our injection, we do create a world where villagers live in...
+			while (!server.getWorlds().isEmpty())
+			{
+				server.unloadWorld(server.getWorlds().getFirst(), false);
+			}
+
 			VillagerMock villagerWithoutWorld = new VillagerMock(server, UUID.randomUUID());
 			villagerWithoutWorld.setSleeping(true);
 

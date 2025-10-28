@@ -3,7 +3,10 @@ package org.mockbukkit.testutils.matcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
-import org.junit.jupiter.api.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class AbstractMatcherTest
 {
@@ -19,7 +22,7 @@ public abstract class AbstractMatcherTest
 	{
 		if (!matcher.matches(arg))
 		{
-			Assertions.fail(message + " because: '" + mismatchDescription(matcher, arg) + "'");
+			fail(message + " because: '" + mismatchDescription(matcher, arg) + "'");
 		}
 	}
 
@@ -30,20 +33,20 @@ public abstract class AbstractMatcherTest
 
 	public static <T> void assertDoesNotMatch(String message, Matcher<? super T> c, T arg)
 	{
-		Assertions.assertFalse(c.matches(arg), message);
+		assertFalse(c.matches(arg), message);
 	}
 
 	public static void assertDescription(String expected, Matcher<?> matcher)
 	{
 		Description description = new StringDescription();
 		description.appendDescriptionOf(matcher);
-		Assertions.assertEquals(expected, description.toString().trim(), "Expected description");
+		assertEquals(expected, description.toString().trim(), "Expected description");
 	}
 
 	public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, Object arg)
 	{
-		Assertions.assertFalse(matcher.matches(arg), "Precondition: Matcher should not match item.");
-		Assertions.assertEquals(expected, mismatchDescription(matcher, arg), "Expected mismatch description");
+		assertFalse(matcher.matches(arg), "Precondition: Matcher should not match item.");
+		assertEquals(expected, mismatchDescription(matcher, arg), "Expected mismatch description");
 	}
 
 	public static void assertNullSafe(Matcher<?> matcher)
@@ -54,7 +57,7 @@ public abstract class AbstractMatcherTest
 		}
 		catch (Exception e)
 		{
-			Assertions.fail("Matcher was not null safe");
+			fail("Matcher was not null safe");
 		}
 	}
 
@@ -66,7 +69,7 @@ public abstract class AbstractMatcherTest
 		}
 		catch (Exception e)
 		{
-			Assertions.fail("Matcher was not unknown type safe, because: " + e);
+			fail("Matcher was not unknown type safe, because: " + e);
 		}
 	}
 

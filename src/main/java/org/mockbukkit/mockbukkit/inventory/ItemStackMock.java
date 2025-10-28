@@ -3,13 +3,12 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import io.papermc.paper.persistence.PersistentDataContainerView;
-import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
@@ -30,6 +29,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+
+@DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
 {
 
@@ -183,7 +184,10 @@ public class ItemStackMock extends ItemStack
 		}
 
 		itemMeta = Bukkit.getItemFactory().asMetaFor(itemMeta, this);
-		if (itemMeta == null) return true;
+		if (itemMeta == null)
+		{
+			return true;
+		}
 		this.itemMeta = itemMeta;
 
 		if (this.itemMeta instanceof Damageable damageable)
@@ -221,7 +225,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int getMaxStackSize()
 	{
-		if (this.itemMeta == null) return 0;
+		if (this.itemMeta == null)
+		{
+			return 0;
+		}
 
 		return this.itemMeta.hasMaxStackSize() ? this.itemMeta.getMaxStackSize() : this.type.getMaxStackSize();
 	}
@@ -229,7 +236,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public short getDurability()
 	{
-		if (this.type == ItemType.AIR) return -1;
+		if (this.type == ItemType.AIR)
+		{
+			return -1;
+		}
 
 		return (short) Math.max(this.durability, 0);
 	}
@@ -274,12 +284,38 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	public boolean isSimilar(@org.jetbrains.annotations.Nullable ItemStack stack)
+	public boolean isSimilar(@Nullable ItemStack stack)
 	{
-		if (stack == null) return false;
-		if (!(stack instanceof final ItemStackMock bukkit)) return stack.isSimilar(this);
-		if (this == bukkit) return true;
-		return this.type == bukkit.type;
+		if (stack == null)
+		{
+			return false;
+		}
+		if (!(stack instanceof final ItemStackMock bukkit))
+		{
+			return stack.isSimilar(this);
+		}
+		if (this == bukkit)
+		{
+			return true;
+		}
+		return this.type == bukkit.type && hasSimilarItemMeta(stack.getItemMeta());
+	}
+
+	/**
+	 * Validate that the item meta is equal for both items.
+	 *
+	 * @param itemMeta The item meta to be validated.
+	 *
+	 * @return {@code true} if equal, or {@code false} otherwise.
+	 */
+	private boolean hasSimilarItemMeta(@Nullable ItemMeta itemMeta)
+	{
+		if (this.itemMeta == null)
+		{
+			return itemMeta == null;
+		}
+
+		return this.itemMeta.equals(itemMeta);
 	}
 
 	private final PersistentDataContainerView pdcView = new PersistentDataContainerViewMock()
@@ -287,7 +323,10 @@ public class ItemStackMock extends ItemStack
 		@Override
 		public <P, C> @Nullable C get(@NotNull NamespacedKey key, @NotNull PersistentDataType<P, C> type)
 		{
-			if (itemMeta == null) return null;
+			if (itemMeta == null)
+			{
+				return null;
+			}
 
 			return itemMeta.getPersistentDataContainer().get(key, type);
 		}
@@ -295,7 +334,10 @@ public class ItemStackMock extends ItemStack
 		@Override
 		public @NotNull Set<NamespacedKey> getKeys()
 		{
-			if (itemMeta == null) return Set.of();
+			if (itemMeta == null)
+			{
+				return Set.of();
+			}
 
 			return itemMeta.getPersistentDataContainer().getKeys();
 		}
@@ -311,7 +353,10 @@ public class ItemStackMock extends ItemStack
 	public @NotNull ItemStack withType(@NotNull Material type)
 	{
 		ItemStackMock item = new ItemStackMock(type, getAmount());
-		if (this.durability != -1) item.setDurability(this.durability);
+		if (this.durability != -1)
+		{
+			item.setDurability(this.durability);
+		}
 		item.setItemMeta(this.itemMeta);
 
 		return item;
@@ -320,7 +365,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean containsEnchantment(@NotNull Enchantment ench)
 	{
-		if (this.itemMeta == null) return false;
+		if (this.itemMeta == null)
+		{
+			return false;
+		}
 
 		return this.itemMeta.getEnchants().containsKey(ench);
 	}
@@ -328,7 +376,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int removeEnchantment(@NotNull Enchantment ench)
 	{
-		if (this.itemMeta == null) return 0;
+		if (this.itemMeta == null)
+		{
+			return 0;
+		}
 
 		int level = this.itemMeta.getEnchantLevel(ench);
 		this.itemMeta.removeEnchant(ench);
@@ -338,7 +389,10 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public void removeEnchantments()
 	{
-		if (this.itemMeta == null) return;
+		if (this.itemMeta == null)
+		{
+			return;
+		}
 
 		this.itemMeta.removeEnchantments();
 	}
@@ -355,28 +409,27 @@ public class ItemStackMock extends ItemStack
 		return EMPTY.clone();
 	}
 
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	@Override
 	public @NotNull ItemStack clone()
 	{
-		ItemStackMock clone = new ItemStackMock(this.type);
-
-		clone.setAmount(this.amount);
-		clone.setItemMeta(this.itemMeta == null ? null : this.itemMeta.clone());
-		clone.durability = this.durability;
-		return clone;
+		return new ItemStackMock(this);
 	}
 
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (obj == null) return false;
+		if (obj == null)
+		{
+			return false;
+		}
 		if (!(obj instanceof ItemStack stack))
 		{
 			return false;
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.amount == bukkit.getAmount() && this.durability == bukkit.durability && Objects.equals(this.itemMeta, bukkit.getItemMeta());
+			return isSimilar(bukkit) && this.getAmount() == bukkit.getAmount() && this.getDurability() == bukkit.getDurability() && Objects.equals(this.getItemMeta(), bukkit.getItemMeta());
 		}
 		else
 		{
@@ -432,81 +485,7 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		int version = (args.containsKey("v")) ? ((Number) args.get("v")).intValue() : -1;
-		short damage = 0;
-		int amount = 1;
-		String damageKey = "damage";
-
-		if (args.containsKey(damageKey))
-		{
-			damage = ((Number) args.get(damageKey)).shortValue();
-		}
-
-		Material type = Bukkit.getUnsafe().getMaterial((String) args.get("type"), version);
-
-		if (args.containsKey(FIELD_AMOUNT))
-		{
-			amount = ((Number) args.get(FIELD_AMOUNT)).intValue();
-		}
-
-		ItemStack result = new ItemStackMock(type, amount);
-
-		if (args.containsKey("enchantments"))
-		{
-			handleLegacyEnchantmentsForDeserialization(args, result);
-		}
-		else if (args.containsKey("meta"))
-		{
-			handleMetaForDeserialization(args, version, result);
-		}
-
-		if (version < 0 && args.containsKey(damageKey))
-		{
-			// Set damage again incase meta overwrote it
-			result.setDurability(damage);
-		}
-		return result;
-	}
-
-	private static void handleMetaForDeserialization(@NotNull Map<String, Object> args, int version, ItemStack result)
-	{
-		// We cannot and will not have meta when enchantments (pre-ItemMeta) exist
-		Object raw = args.get("meta");
-		if (raw instanceof ItemMeta)
-		{
-			//((ItemMeta) raw).setVersion(version); //TODO uncomment when setVersion is implemented
-			// Paper start - for pre 1.20.5 itemstacks, add HIDE_STORED_ENCHANTS flag if HIDE_ADDITIONAL_TOOLTIP is set
-			if (version < 3837 && ((ItemMeta) raw).hasItemFlag(ItemFlag.HIDE_ADDITIONAL_TOOLTIP))
-			{ // 1.20.5
-				((ItemMeta) raw).addItemFlags(ItemFlag.HIDE_STORED_ENCHANTS);
-			}
-			// Paper end
-			result.setItemMeta((ItemMeta) raw);
-		}
-	}
-
-	private static void handleLegacyEnchantmentsForDeserialization(@NotNull Map<String, Object> args, ItemStack result)
-	{
-		// Backward compatiblity, @deprecated
-		Object raw = args.get("enchantments");
-
-		if (raw instanceof Map<?, ?> map)
-		{
-
-			for (Map.Entry<?, ?> entry : map.entrySet())
-			{
-				String stringKey = entry.getKey().toString();
-				stringKey = Bukkit.getUnsafe().get(Enchantment.class, stringKey);
-				NamespacedKey key = NamespacedKey.fromString(stringKey.toLowerCase(Locale.ROOT));
-
-				Enchantment enchantment = Bukkit.getUnsafe().get(RegistryKey.ENCHANTMENT, key);
-
-				if ((enchantment != null) && (entry.getValue() instanceof Integer))
-				{
-					result.addUnsafeEnchantment(enchantment, (Integer) entry.getValue());
-				}
-			}
-		}
+		return Bukkit.getUnsafe().deserializeStack(args);
 	}
 
 }

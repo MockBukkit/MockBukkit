@@ -121,7 +121,7 @@ public class ItemFactoryMock implements ItemFactory
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
 			   | NoSuchMethodException e)
 		{
-			throw new ItemMetaInitException(e);
+			throw new ItemMetaInitException(String.format("Meta %s and material %s", meta.getClass().getName(), material.name()), e);
 		}
 	}
 

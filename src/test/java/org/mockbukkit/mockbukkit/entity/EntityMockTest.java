@@ -32,14 +32,15 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
@@ -68,26 +69,16 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatche
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@ExtendWith(MockBukkitExtension.class)
 class EntityMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WorldMock world;
-	private EntityMock entity;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		world = server.addSimpleWorld("world");
-		entity = new SimpleEntityMock(server);
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+	@MockBukkitInject
+	private SimpleEntityMock entity;
 
 	@Test
 	void getLocation_TwoInvocations_TwoClones()
@@ -101,10 +92,13 @@ class EntityMockTest
 	@Test
 	void getLocation_IntoLocation_LocationCopied()
 	{
+		// This is different from injecting! When injecting, it's already placed inside the world.
+		SimpleEntityMock entity1 = new SimpleEntityMock(server);
+
 		Location location = new Location(world, 0, 0, 0);
-		Location location1 = entity.getLocation();
+		Location location1 = entity1.getLocation();
 		assertNotEquals(location, location1);
-		assertEquals(location1, entity.getLocation(location));
+		assertEquals(location1, entity1.getLocation(location));
 		assertEquals(location1, location);
 	}
 
@@ -699,9 +693,7 @@ class EntityMockTest
 	{
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		assertThrows(IllegalArgumentException.class, () ->
-		{
-			zombie.setArrowsInBody(-1);
-		});
+				zombie.setArrowsInBody(-1));
 	}
 
 	@Test
@@ -1559,6 +1551,21 @@ class EntityMockTest
 		entity.sendMessage("Hello!");
 
 		assertNull(entity.nextMessage());
+	}
+
+	@Test
+	void testEquals()
+	{
+		assertNotEquals(entity, new Object());
+		assertEquals(entity, entity);
+		assertNotEquals(entity, new SimpleEntityMock(server));
+	}
+
+	@Test
+	void getScoreboardEntryName()
+	{
+		String actual = entity.getScoreboardEntryName();
+		assertEquals(entity.getUniqueId().toString(), actual);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import java.util.Set;
 
@@ -21,14 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PersistentDataContainerViewMockTest
 {
 
+	@MockBukkitInject
 	PersistentDataContainerMock parentContainer;
 	PersistentDataContainerViewMock view;
 
 	@BeforeEach
 	void setUp()
 	{
-		parentContainer = new PersistentDataContainerMock();
-
 		view = new PersistentDataContainerViewMock()
 		{
 			@Override

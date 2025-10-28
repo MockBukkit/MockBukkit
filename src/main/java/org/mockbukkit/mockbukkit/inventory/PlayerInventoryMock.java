@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -10,7 +11,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Arrays;
 
@@ -77,8 +77,19 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setStorageContests has not been implemented for Player Inventories");
+		Preconditions.checkNotNull(items, "ItemStack was null");
+		Preconditions.checkArgument(items.length <= 36, "ItemStack array too large (max: 36, was: " + items.length + ")");
+		for (int i = 0; i < 36; i++)
+		{
+			if (i < items.length && items[i] != null)
+			{
+				setItem(i, items[i]);
+			}
+			else
+			{
+				setItem(i, null);
+			}
+		}
 	}
 
 	@Override
@@ -121,9 +132,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setArmorContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
+		{
 			throw new NullPointerException("ItemStack was null");
+		}
 		else if (items.length > 4)
+		{
 			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
+		}
 		items = (items.length == 4) ? items : Arrays.copyOf(items, 4);
 		setItem(BOOTS, items[0]);
 		setItem(LEGGINGS, items[1]);
@@ -219,9 +234,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setExtraContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
+		{
 			throw new NullPointerException("ItemStack was null");
+		}
 		else if (items.length > 1)
+		{
 			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
+		}
 		items = (items.length == 1) ? items : Arrays.copyOf(items, 1);
 		setItem(OFF_HAND, items[0]);
 	}
@@ -389,7 +408,9 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setHeldItemSlot(int slot)
 	{
 		if (slot < 0 || slot > 8)
+		{
 			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
+		}
 		mainHandSlot = slot;
 	}
 

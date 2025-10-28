@@ -26,7 +26,6 @@ class BarrelInventoryMockTest
 		this.inventory = new BarrelInventoryMock((InventoryHolder) null);
 	}
 
-
 	@Test
 	void testGetSnapshot()
 	{

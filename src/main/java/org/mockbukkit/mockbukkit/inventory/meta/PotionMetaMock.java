@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.potion.PotionUtils;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
 
@@ -92,13 +95,10 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull PotionMetaMock clone()
 	{
-		PotionMetaMock mock = (PotionMetaMock) super.clone();
-		mock.type = type;
-		mock.effects = new ArrayList<>(effects);
-		mock.color = color == null ? null : Color.fromRGB(color.asRGB());
-		return mock;
+		return new PotionMetaMock(this);
 	}
 
 	@Override
@@ -291,7 +291,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	 * @param args A serialized PotionMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the PotionMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
 	public static @NotNull PotionMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		PotionMetaMock serialMock = new PotionMetaMock();

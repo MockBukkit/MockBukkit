@@ -27,6 +27,8 @@ import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
@@ -44,7 +46,10 @@ import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.spawner.SpawnRule;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -83,8 +88,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
+import org.bukkit.tag.DamageTypeTags;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -98,6 +108,7 @@ import org.mockbukkit.mockbukkit.command.MessageTarget;
 import org.mockbukkit.mockbukkit.command.brigadier.PaperCommandsMock;
 import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
 import org.mockbukkit.mockbukkit.exception.PluginIOException;
@@ -119,16 +130,17 @@ import org.mockbukkit.mockbukkit.inventory.GrindstoneInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ItemFactoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.LecternInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.LoomInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.PlayerInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.RecipeManager;
 import org.mockbukkit.mockbukkit.inventory.RecipeType;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
@@ -138,6 +150,7 @@ import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
 import org.mockbukkit.mockbukkit.scoreboard.ScoreboardManagerMock;
 import org.mockbukkit.mockbukkit.services.ServicesManagerMock;
+import org.mockbukkit.mockbukkit.structure.StructureManagerMock;
 import org.mockbukkit.mockbukkit.tags.MaterialTagMock;
 import org.mockbukkit.mockbukkit.tags.TagRegistry;
 import org.mockbukkit.mockbukkit.tags.TagsMock;
@@ -194,6 +207,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final RecipeManager recipeManager = new RecipeManager();
+	private final StructureManager structureManager = new StructureManagerMock();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
 	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
@@ -416,7 +430,9 @@ public class ServerMock extends Server.Spigot implements Server
 		playerList.clearOnlinePlayers();
 
 		for (int i = 0; i < num; i++)
+		{
 			addPlayer();
+		}
 	}
 
 	/**
@@ -544,9 +560,13 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncCatcher.catchOp("command dispatch");
 
 		if (playerList.isSomeoneOnline())
+		{
 			return execute(command, getPlayer(0), args);
+		}
 		else
+		{
 			throw new IllegalStateException("Need at least one player to run the command");
+		}
 	}
 
 	/**
@@ -1062,7 +1082,21 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public static void registerSerializables()
 	{
-		ConfigurationSerialization.registerClass(ItemMetaMock.class);
+		ConfigurationSerialization.registerClass(Vector.class);
+		ConfigurationSerialization.registerClass(BlockVector.class);
+		ConfigurationSerialization.registerClass(ItemStack.class);
+		ConfigurationSerialization.registerClass(ItemStackMock.class);
+		ConfigurationSerialization.registerClass(Color.class);
+		ConfigurationSerialization.registerClass(PotionEffect.class);
+		ConfigurationSerialization.registerClass(FireworkEffect.class);
+		ConfigurationSerialization.registerClass(Pattern.class);
+		ConfigurationSerialization.registerClass(BoundingBox.class);
+		ConfigurationSerialization.registerClass(Location.class);
+		ConfigurationSerialization.registerClass(AttributeModifier.class);
+		ConfigurationSerialization.registerClass(SpawnRule.class);
+		ConfigurationSerialization.registerClass(PlayerProfileMock.class);
+		ConfigurationSerialization.registerClass(OfflinePlayerMock.class);
+		ConfigurationSerialization.registerClass(SerializableMeta.class);
 	}
 
 	@Override
@@ -1077,7 +1111,9 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		AsyncCatcher.catchOp("Recipe add");
 		if (recipe == null)
+		{
 			return false;
+		}
 		// Pretend we sent the packet if resendRecipes is true
 		return this.recipeManager.addRecipe(RecipeType.CRAFTING, recipe);
 	}
@@ -1605,7 +1641,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		int pollCount = 0;
-		while (pollCount < 50 && getScheduler().getActiveWorkers().size() > 0)
+		while (pollCount < 50 && !getScheduler().getActiveWorkers().isEmpty())
 		{
 			try
 			{
@@ -1624,13 +1660,15 @@ public class ServerMock extends Server.Spigot implements Server
 		for (Plugin oldPlugin : pluginsClone)
 		{
 			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
+			{
 				continue;
+			}
 			// This is a little sketchy, but we have to do it since when initializing plugins we create a subclass of the main class.
 			// If we try to then load that subclass as the plugin, it doesn't work, so we need to get the original class to subclass from again.
 			@SuppressWarnings("unchecked")
 			Class<? extends JavaPlugin> originalClass = (Class<? extends JavaPlugin>) oldJavaPlugin.getClass().getSuperclass();
 			// Don't use MockBukkit#load here since we enable later.
-			JavaPlugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
+			Plugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
 			newPlugins.add(plugin);
 		}
 
@@ -1828,9 +1866,7 @@ public class ServerMock extends Server.Spigot implements Server
 				.getEntries()
 				.stream()
 				.map(banEntry ->
-				{
-					return ((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId();
-				})
+						((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId())
 				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
 	}
@@ -2164,9 +2200,9 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData(String data)
+	public @NotNull BlockData createBlockData(@NotNull String data)
 	{
-		return this.createBlockData((Material) null, data);
+		return this.createBlockData(null, data);
 	}
 
 	@Override
@@ -2207,7 +2243,6 @@ public class ServerMock extends Server.Spigot implements Server
 		materialTags.put(registry.getRegistry(), registry);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
@@ -2256,6 +2291,15 @@ public class ServerMock extends Server.Spigot implements Server
 		case Tag.REGISTRY_GAME_EVENTS ->
 		{
 			Preconditions.checkArgument(clazz == org.bukkit.GameEvent.class, "Game Event namespace must have GameEvent type");
+			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
+			if (optionalTag.isPresent())
+			{
+				return optionalTag.get();
+			}
+		}
+		case DamageTypeTags.REGISTRY_DAMAGE_TYPES ->
+		{
+			Preconditions.checkArgument(clazz == org.bukkit.damage.DamageType.class, "Damage type namespace must have DamageType type");
 			Optional<Tag<T>> optionalTag = getTag(registryKey, key);
 			if (optionalTag.isPresent())
 			{
@@ -2361,13 +2405,10 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public StructureManager getStructureManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.structureManager;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
 		return RegistryAccess.registryAccess().getRegistry(tClass);
@@ -2538,7 +2579,6 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		return this;
 	}
-
 
 	@Override
 	public void reloadPermissions()

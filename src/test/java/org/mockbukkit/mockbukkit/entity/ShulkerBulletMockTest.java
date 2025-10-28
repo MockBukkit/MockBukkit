@@ -3,46 +3,34 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ShulkerBulletMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private ShulkerBulletMock shulkerBullet;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		shulkerBullet = new ShulkerBulletMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Nested
 	class Target
 	{
+
+		@MockBukkitInject
+		private CowMock cow;
 
 		@Test
 		void givenDefault_ShouldReturnNull()
@@ -53,8 +41,6 @@ class ShulkerBulletMockTest
 		@Test
 		void givenCustomTarget_ShouldReturnTheTargetSet()
 		{
-			CowMock cow = new CowMock(server, UUID.randomUUID());
-
 			shulkerBullet.setTarget(cow);
 
 			assertEquals(cow, shulkerBullet.getTarget());
@@ -63,8 +49,6 @@ class ShulkerBulletMockTest
 		@Test
 		void givenCustomTarget_ShouldResetMovementDirection()
 		{
-			CowMock cow = new CowMock(server, UUID.randomUUID());
-
 			shulkerBullet.setCurrentMovementDirection(BlockFace.EAST);
 			assertEquals(BlockFace.EAST, shulkerBullet.getCurrentMovementDirection());
 
@@ -174,7 +158,6 @@ class ShulkerBulletMockTest
 		}
 
 	}
-
 
 	@Nested
 	class FlightSteps

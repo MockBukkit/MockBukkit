@@ -9,6 +9,7 @@ import org.mockbukkit.metaminer.keyed.KeyedDataGenerator;
 import org.mockbukkit.metaminer.keyed.RegistryKeyClassDataGenerator;
 import org.mockbukkit.metaminer.recipes.RecipeDataGenerator;
 import org.mockbukkit.metaminer.tags.TagDataGenerator;
+import org.mockbukkit.metaminer.tests.BlockDataGenerator;
 import org.mockbukkit.metaminer.tests.BlockStateGenerator;
 import org.mockbukkit.metaminer.tests.ItemStackTestDataGenerator;
 import org.mockbukkit.metaminer.translation.TranslationDataGenerator;
@@ -68,6 +69,7 @@ public class MetaMiner extends JavaPlugin
 				new TranslationDataGenerator(mainFolder),
 				// Test
 				new BlockStateGenerator(testFolder),
+				new BlockDataGenerator(testFolder),
 				new ItemStackTestDataGenerator(testFolder)
 		);
 	}

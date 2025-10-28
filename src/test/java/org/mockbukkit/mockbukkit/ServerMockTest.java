@@ -32,6 +32,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
+import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Frog;
@@ -56,6 +57,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.tag.DamageTypeTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Nested;
@@ -105,13 +107,12 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
@@ -826,7 +827,7 @@ class ServerMockTest
 		assertEquals(offlinePlayer.getUniqueId(), onlinePlayer.getUniqueId());
 
 		// Assert that the PlayerMock takes priority over the OfflinePlayerMock
-		assertTrue(server.getOfflinePlayer(offlinePlayer.getUniqueId()) instanceof PlayerMock);
+		assertInstanceOf(PlayerMock.class, server.getOfflinePlayer(offlinePlayer.getUniqueId()));
 	}
 
 	@Test
@@ -853,6 +854,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateBlockDataFromString()
+	{
+		BlockData blockData = server.createBlockData("minecraft:stone");
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
 	void testWarningState()
 	{
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
@@ -861,7 +869,6 @@ class ServerMockTest
 	}
 
 	@Test
-	@SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessage()
 	{
 		PluginMock plugin = MockBukkit.createMockPlugin();
@@ -1028,8 +1035,8 @@ class ServerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		Player player = server.addPlayer();
-		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
-		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
+		assertEquals(List.of("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
+		assertEquals(List.of("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
 	}
 
 	@Test
@@ -1072,7 +1079,6 @@ class ServerMockTest
 
 		server.setWhitelist(true);
 		server.setWhitelistEnforced(true);
-
 
 		server.reloadWhitelist();
 
@@ -1140,7 +1146,6 @@ class ServerMockTest
 	void testAddPlayerWithWhitelistEnabledAndNotWhitelisted()
 	{
 		server.setWhitelist(true);
-
 
 		PlayerMock player = server.addPlayer();
 
@@ -1868,7 +1873,9 @@ class ServerMockTest
 		Registry<?> registry = Bukkit.getRegistry(clazz);
 		assertNotNull(registry);
 		if (clazz != KeyedBossBar.class)
+		{
 			assertTrue(registry.iterator().hasNext());
+		}
 	}
 
 	@Test
@@ -2011,7 +2018,6 @@ class ServerMockTest
 	{
 		assertEquals(10, server.getAnimalSpawnLimit());
 	}
-
 
 	@Test
 	void testBanIP()
@@ -2277,6 +2283,30 @@ class ServerMockTest
 
 		}
 
+		@Nested
+		class DamageTypes
+		{
+
+			@Test
+			void givenValidItem()
+			{
+				Tag<DamageType> tag = server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.getKey(), DamageType.class);
+
+				assertNotNull(tag);
+				assertTrue(tag.isTagged(DamageType.OUT_OF_WORLD));
+
+				assertFalse(tag.isTagged(DamageType.ARROW));
+			}
+
+			@Test
+			void givenInvalidClass()
+			{
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				assertEquals("Damage type namespace must have DamageType type", e.getMessage());
+			}
+
+		}
+
 	}
 
 	@Nested
@@ -2395,8 +2425,15 @@ class ServerMockTest
 
 	}
 
+	@Test
+	void getStructureManager()
+	{
+		assertNotNull(server.getStructureManager());
+	}
+
 }
 
+@ExtendWith(MockBukkitExtension.class)
 class TestRecipe implements Recipe
 {
 
@@ -2420,6 +2457,7 @@ class TestRecipe implements Recipe
 
 }
 
+@ExtendWith(MockBukkitExtension.class)
 class EventDenier implements Listener
 {
 

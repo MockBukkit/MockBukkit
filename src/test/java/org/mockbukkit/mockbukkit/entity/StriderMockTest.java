@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Strider;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,9 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,14 +22,7 @@ class StriderMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
 	private Strider strider;
-
-	@BeforeEach
-	void setup()
-	{
-		strider = new StriderMock(server, UUID.randomUUID());
-	}
 
 	@Nested
 	class IsShivering

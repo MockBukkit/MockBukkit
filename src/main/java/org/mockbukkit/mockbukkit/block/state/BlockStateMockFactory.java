@@ -40,10 +40,12 @@ public class BlockStateMockFactory
 			.put(Material.CALIBRATED_SCULK_SENSOR, with(CalibratedSculkSensorStateMock::new, CalibratedSculkSensorStateMock::new))
 			.put(Material.CAMPFIRE, with(CampfireStateMock::new, CampfireStateMock::new))
 			.put(Material.CHAIN_COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
+			.put(Material.CHISELED_BOOKSHELF, with(ChiseledBookshelfStateMock::new, ChiseledBookshelfStateMock::new))
 			.put(Material.CHEST, with(ChestStateMock::new, ChestStateMock::new))
 			.put(Material.COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.COMPARATOR, with(ComparatorStateMock::new, ComparatorStateMock::new))
 			.put(Material.CONDUIT, with(ConduitStateMock::new, ConduitStateMock::new))
+			.put(Material.CREAKING_HEART, with(CreakingHeartStateMock::new, CreakingHeartStateMock::new))
 			.put(Material.DAYLIGHT_DETECTOR, with(DaylightDetectorStateMock::new, DaylightDetectorStateMock::new))
 			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
 			.put(Material.DISPENSER, with(DispenserStateMock::new, DispenserStateMock::new))
@@ -64,6 +66,8 @@ public class BlockStateMockFactory
 			.put(Material.SOUL_CAMPFIRE, with(CampfireStateMock::new, CampfireStateMock::new))
 			.put(Material.SPAWNER, with(CreatureSpawnerStateMock::new, CreatureSpawnerStateMock::new))
 			.put(Material.STRUCTURE_BLOCK, with(StructureStateMock::new, StructureStateMock::new))
+			.put(Material.SUSPICIOUS_GRAVEL, with(BrushableBlockStateMock::new, BrushableBlockStateMock::new))
+			.put(Material.SUSPICIOUS_SAND, with(BrushableBlockStateMock::new, BrushableBlockStateMock::new))
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
 			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))
@@ -79,6 +83,7 @@ public class BlockStateMockFactory
 	public static @NotNull BlockStateMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkArgument(material.isBlock(), "Material must be a block");
 
 		for (var entry : FACTORIES_BY_TAGS.entrySet())
 		{

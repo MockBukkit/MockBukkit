@@ -3,9 +3,12 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.reflect.ClassPath;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import lombok.SneakyThrows;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -26,7 +29,6 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +39,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
@@ -45,6 +48,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -80,13 +84,8 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatch
 class ItemMetaMockTest
 {
 
+	@MockBukkitInject
 	private ItemMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new ItemMetaMock();
-	}
 
 	@Test
 	void new_CopyConstructor_Copied()
@@ -192,7 +191,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setLore(Collections.singletonList("lore"));
-		meta2.setLore(Arrays.asList("lore", "more lore"));
+		meta2.setLore(List.of("lore", "more lore"));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
@@ -377,7 +376,6 @@ class ItemMetaMockTest
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
-
 	@Test
 	void equals_AttributeModifiersSame_True()
 	{
@@ -422,7 +420,6 @@ class ItemMetaMockTest
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
-
 
 	@Test
 	void equals_EnchantsSame_True()
@@ -498,6 +495,17 @@ class ItemMetaMockTest
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_RemoveFlags()
+	{
+		assertEquals(0, meta.getItemFlags().size());
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertEquals(1, meta.getItemFlags().size());
+		meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertEquals(0, meta.getItemFlags().size());
+		meta.removeItemFlags(ItemFlag.HIDE_DYE);
 	}
 
 	@Test
@@ -614,14 +622,14 @@ class ItemMetaMockTest
 	@Test
 	void hasLore_HasLore_True()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertTrue(meta.hasLore());
 	}
 
 	@Test
 	void getLore_LoreSet_ExactLines()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		List<String> lore = meta.getLore();
 		assertEquals(2, lore.size());
 		assertEquals("Hello", lore.get(0));
@@ -779,21 +787,21 @@ class ItemMetaMockTest
 	@Test
 	void testHasNoLore_HasNoLore_Asserts()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, hasAnyLore());
 	}
 
 	@Test
 	void testLore_CorrectLore_Returns()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, hasLore("Hello", "world"));
 	}
 
 	@Test
 	void testLore_InorrectLore_Asserts()
 	{
-		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.setLore(List.of("Hello", "world"));
 		assertThat(meta, doesNotHaveLore("Something", "else"));
 	}
 
@@ -911,11 +919,11 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals("\"Test name\"", actual.get("display-name"));
-		assertEquals(List.of("\"Test lore\""), actual.get("lore"));
-		assertEquals(true, actual.get("Unbreakable"));
-		assertEquals(5, actual.get("Damage"));
-		assertEquals(3, actual.get("repair-cost"));
+		assertEquals("Test name", actual.get("minecraft:custom_name"));
+		assertEquals(List.of("Test lore"), actual.get("minecraft:lore"));
+		assertEquals(Maps.newHashMap(), actual.get("minecraft:unbreakable"));
+		assertEquals(5, actual.get("minecraft:damage"));
+		assertEquals(3, actual.get("minecraft:repair_cost"));
 	}
 
 	@Test
@@ -1250,9 +1258,7 @@ class ItemMetaMockTest
 		assertFalse(meta.hasEnchantable());
 
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
-			meta.setEnchantable(-1);
-		});
+				meta.setEnchantable(-1));
 
 		assertEquals("Enchantability must be positive", illegalArgumentException.getMessage());
 	}
@@ -1324,7 +1330,6 @@ class ItemMetaMockTest
 		meta.itemName(Component.text("Test Name"));
 		assertTrue(meta.hasItemName());
 	}
-
 
 	@ParameterizedTest
 	@MethodSource("getItemMetaTypesStream")
@@ -1705,6 +1710,43 @@ class ItemMetaMockTest
 	void testGetItemMetaCorrectClass_Skulls(Material skull)
 	{
 		assertInstanceOf(SkullMetaMock.class, new ItemStackMock(skull).getItemMeta());
+	}
+
+	@SneakyThrows
+	@ParameterizedTest
+	@MethodSource("getPossibleItemMetas")
+	void validateAllItemMetaHaveClone(Class<? extends ItemMeta> clazz)
+	{
+		Constructor<?> constructor = clazz.getDeclaredConstructor();
+		constructor.setAccessible(true);
+		Object instance = constructor.newInstance();
+		ItemMeta itemMeta = assertInstanceOf(ItemMeta.class, instance);
+
+		ItemMeta cloned = itemMeta.clone();
+		assertEquals(instance, cloned);
+		assertNotSame(instance, cloned);
+
+		itemMeta.displayName(Component.text("Test name"));
+		assertNotEquals(instance, cloned);
+		assertNotSame(instance, cloned);
+	}
+
+	/**
+	 * Get all {@link ItemMeta} that exist in MockBukkit.
+	 *
+	 * @return The list of possible item metas
+	 *
+	 * @throws IOException If and IOException occurs while loading the class.
+	 */
+	public static Stream<Arguments> getPossibleItemMetas() throws IOException
+	{
+		return ClassPath.from(ClassLoader.getSystemClassLoader())
+				.getAllClasses()
+				.parallelStream()
+				.filter(c -> c.getPackageName().startsWith("org.mockbukkit.mockbukkit.inventory.meta"))
+				.map(ClassPath.ClassInfo::load)
+				.filter(ItemMeta.class::isAssignableFrom)
+				.map(Arguments::of);
 	}
 
 	public static Stream<Arguments> spawnEgg_Materials()

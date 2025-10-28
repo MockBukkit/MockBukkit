@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,9 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -81,6 +84,21 @@ class FenceDataMockTest
 	{
 		fenceData.setWaterlogged(true);
 		assertTrue(fenceData.isWaterlogged());
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull FenceDataMock cloned = fenceData.clone();
+
+		assertEquals(fenceData, cloned);
+		assertEquals(fenceData.isWaterlogged(), cloned.isWaterlogged());
+
+		fenceData.setWaterlogged(true);
+
+		assertNotEquals(fenceData, cloned);
+		assertTrue(fenceData.isWaterlogged());
+		assertFalse(cloned.isWaterlogged());
 	}
 
 	static Stream<Arguments> allowedFaces()

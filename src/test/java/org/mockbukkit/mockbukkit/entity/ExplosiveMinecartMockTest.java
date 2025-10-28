@@ -4,14 +4,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,14 +23,8 @@ class ExplosiveMinecartMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-
+	@MockBukkitInject
 	private ExplosiveMinecart minecart;
-
-	@BeforeEach
-	void setUp()
-	{
-		minecart = new ExplosiveMinecartMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testGetType()

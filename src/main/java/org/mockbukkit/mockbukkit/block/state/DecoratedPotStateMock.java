@@ -178,5 +178,4 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 		return Objects.hash(super.hashCode(), sherds);
 	}
 
-
 }

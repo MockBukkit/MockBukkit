@@ -2,42 +2,34 @@ package org.mockbukkit.mockbukkit.entity;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
-import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class CowMockTest
 {
 
-	private ServerMock server;
+	@MockBukkitInject
 	private CowMock cow;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		cow = new CowMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetType()
@@ -91,6 +83,52 @@ class CowMockTest
 					.map(Arguments::of);
 		}
 
+	}
+
+	@Nested
+	class TeamDisplayName
+	{
+		@Test
+		void withoutName()
+		{
+			Component name = cow.teamDisplayName();
+
+			assertNotNull(name);
+			assertEquals("entity", asString(name));
+		}
+
+		@Test
+		void withoutTeamInformation()
+		{
+			cow.setName("My Cow");
+
+			Component name = cow.teamDisplayName();
+
+			assertNotNull(name);
+			assertEquals("My Cow", asString(name));
+		}
+
+		@Test
+		void withTeamInformation()
+		{
+			@NotNull Team team = cow.getServer().getScoreboardManager().getMainScoreboard().registerNewTeam("test");
+			team.color(NamedTextColor.GREEN);
+			team.prefix(Component.text("["));
+			team.suffix(Component.text("]"));
+			team.addEntity(cow);
+
+			cow.setName("My Cow");
+
+			Component name = cow.teamDisplayName();
+
+			assertNotNull(name);
+			assertEquals("[My Cow]", asString(name));
+		}
+
+		public static String asString(@NotNull Component component)
+		{
+			return LegacyComponentSerializer.legacyAmpersand().serialize(component);
+		}
 	}
 
 }

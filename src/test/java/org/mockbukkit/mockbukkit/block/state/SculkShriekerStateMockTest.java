@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 class SculkShriekerStateMockTest
 {
 
+	@MockBukkitInject
 	private WorldMock world;
 	private BlockMock block;
 	private SculkShriekerStateMock sculkSensor;
@@ -25,7 +27,6 @@ class SculkShriekerStateMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.SCULK_SHRIEKER);
 		this.sculkSensor = new SculkShriekerStateMock(this.block);

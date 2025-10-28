@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.FACING;
-import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.HALF;
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.HALF_SINGLE_BLOCK;
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.OPEN;
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.POWERED;
 import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
@@ -38,17 +38,27 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 		setFacing(BlockFace.NORTH);
 	}
 
+	/**
+	 * Create a new {@link TrapDoorDataMock} based on an existing {@link TrapDoorDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected TrapDoorDataMock(@NotNull TrapDoorDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public @NotNull Half getHalf()
 	{
-		return get(HALF);
+		return get(HALF_SINGLE_BLOCK);
 	}
 
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
 		Preconditions.checkNotNull(half, "Half cannot be null");
-		set(HALF, half);
+		set(HALF_SINGLE_BLOCK, half);
 	}
 
 	@Override
@@ -105,6 +115,13 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	public void setWaterlogged(boolean waterlogged)
 	{
 		set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull TrapDoorDataMock clone()
+	{
+		return new TrapDoorDataMock(this);
 	}
 
 }

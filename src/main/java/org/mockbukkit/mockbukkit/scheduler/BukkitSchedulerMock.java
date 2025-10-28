@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.scheduler;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,9 +13,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
@@ -64,9 +69,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return () ->
 		{
 			task.setRunning(true);
-			if (!task.isSync()) this.activeWorkers.add(task);
+			if (!task.isSync())
+			{
+				this.activeWorkers.add(task);
+			}
 			task.run();
-			if (!task.isSync()) this.activeWorkers.remove(task);
+			if (!task.isSync())
+			{
+				this.activeWorkers.remove(task);
+			}
 			task.setRunning(false);
 		};
 	}
@@ -91,7 +102,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		shutdownPool(pool);
 
 		if (asyncException.get() != null)
+		{
 			throw new AsyncTaskException(asyncException.get());
+		}
 
 		waitAsyncEventsFinished();
 		shutdownPool(asyncEventExecutor);
@@ -165,12 +178,29 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return currentTick;
 	}
 
-	/**
-	 * Perform one tick on the server.
-	 */
-	public synchronized void performOneTick()
+	private void processWorlds()
 	{
-		currentTick++;
+		for (World world : Bukkit.getWorlds())
+		{
+			((WorldMock) world).tick();
+		}
+	}
+
+	private void processEntities()
+	{
+		for (EntityMock entity : ((ServerMock) Bukkit.getServer()).getEntities())
+		{
+			if (!entity.isValid())
+			{
+				continue;
+			}
+
+			entity.tick();
+		}
+	}
+
+	private void processTasks()
+	{
 		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
 		for (ScheduledTask task : oldTasks)
@@ -203,6 +233,18 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				task.cancel();
 			}
 		}
+	}
+
+	/**
+	 * Perform one tick on the server.
+	 */
+	public synchronized void performOneTick()
+	{
+		currentTick++;
+
+		processWorlds();
+		processEntities();
+		processTasks();
 	}
 
 	/**
@@ -272,7 +314,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 
 			if (System.currentTimeMillis() <= (systemTime + executorTimeout))
+			{
 				continue;
+			}
 
 			// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
 			// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
@@ -280,7 +324,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 			{
 				if (!task.isRunning())
+				{
 					continue;
+				}
 				task.cancel();
 				cancelTask(task.getTaskId());
 				throw new TaskCancelledException("Forced Cancellation of task owned by " + task.getOwner().getName());
@@ -472,7 +518,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
 			if (task.getTaskId() == taskId)
+			{
 				return !task.isCancelled();
+			}
 		}
 		return false;
 	}
@@ -635,7 +683,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		List<BukkitWorker> overdueTasks = this.overdueTasks; // Single read from volatile variable
 		if (!overdueTasks.isEmpty())
+		{
 			throw new AssertionFailedError("There are overdue tasks: " + overdueTasks);
+		}
 	}
 
 	private static class TaskList
@@ -664,13 +714,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			return true;
 		}
 
-
 		protected final @NotNull List<ScheduledTask> getCurrentTaskList()
 		{
 			List<ScheduledTask> out = new ArrayList<>();
 			synchronized (tasks)
 			{
-				if (tasks.size() != 0)
+				if (!tasks.isEmpty())
 				{
 					out.addAll(tasks.values());
 				}
@@ -684,7 +733,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			int scheduled = 0;
 			synchronized (tasks)
 			{
-				if (tasks.size() == 0)
+				if (tasks.isEmpty())
 				{
 					return 0;
 				}
@@ -692,7 +741,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				for (ScheduledTask task : tasks.values())
 				{
 					if (task.isCancelled() || task.isRunning())
+					{
 						continue;
+					}
 					scheduled++;
 				}
 			}

@@ -12,7 +12,6 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -21,7 +20,9 @@ class SoundReceiverSoundHeardMatcherTest extends AbstractMatcherTest
 
 	@MockBukkitInject
 	private ServerMock serverMock;
+	@MockBukkitInject
 	private SoundReceiver soundReceiver;
+	@MockBukkitInject
 	private Location location1;
 	private Sound sound1;
 	private Sound sound2;
@@ -29,9 +30,6 @@ class SoundReceiverSoundHeardMatcherTest extends AbstractMatcherTest
 	@BeforeEach
 	void setUp()
 	{
-		this.soundReceiver = serverMock.addPlayer();
-		WorldMock worldMock = serverMock.addSimpleWorld("world");
-		this.location1 = new Location(worldMock, 0, 0, 0);
 		this.sound1 = Sound.sound().type(Key.key("music_disc.13")).source(Sound.Source.MUSIC).build();
 		this.sound2 = Sound.sound().type(Key.key("music_disc.12")).source(Sound.Source.MUSIC).build();
 	}

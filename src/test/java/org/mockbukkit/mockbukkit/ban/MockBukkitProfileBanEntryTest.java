@@ -20,14 +20,14 @@ class MockBukkitProfileBanEntryTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
-	MockBukkitProfileBanEntry entry;
-	Player player;
+	private ServerMock server;
+	private MockBukkitProfileBanEntry entry;
+	@MockBukkitInject
+	private Player player;
 
 	@BeforeEach
 	void setUp()
 	{
-		player = server.addPlayer();
 		entry = new MockBukkitProfileBanEntry(
 				new PlayerProfileMock(player),
 				"source",
@@ -60,9 +60,7 @@ class MockBukkitProfileBanEntryTest
 	void testSetCreated_Null()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			entry.setCreated(null);
-		});
+				entry.setCreated(null));
 
 		assertEquals("Creation Date cannot be null", nullPointerException.getMessage());
 	}

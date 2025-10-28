@@ -2,10 +2,10 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Arrays;
@@ -24,13 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CrossbowMetaMockTest
 {
 
+	@MockBukkitInject
 	private CrossbowMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new CrossbowMetaMock();
-	}
 
 	@Test
 	void constructor_DefaultValues()
@@ -131,18 +126,14 @@ class CrossbowMetaMockTest
 	{
 		// List#of doesn't accept null values.
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null));
-		});
+				meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null)));
 	}
 
 	@Test
 	void setChargedProjectiles_NotArrow_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE)));
-		});
+				meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE))));
 	}
 
 	@Test
@@ -184,9 +175,7 @@ class CrossbowMetaMockTest
 	void addChargedProjectile_NotArrow_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.addChargedProjectile(new ItemStackMock(Material.STONE));
-		});
+				meta.addChargedProjectile(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test

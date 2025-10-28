@@ -9,17 +9,14 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Set;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -27,29 +24,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ArmorStandMockTest
 {
 
 	private static final double ACCEPTABLE_ERROR_DELTA = 0.0000000001;
 
-	private ServerMock server;
+	@MockBukkitInject
 	private World world;
 
+	@MockBukkitInject
 	private ArmorStandMock armorStand;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-		world = new WorldMock();
-		armorStand = new ArmorStandMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testEntityType()
@@ -125,42 +110,42 @@ class ArmorStandMockTest
 	void testHeadPose()
 	{
 		armorStand.setHeadPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getHeadPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getHeadPose());
 	}
 
 	@Test
 	void testBodyPose()
 	{
 		armorStand.setBodyPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getBodyPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getBodyPose());
 	}
 
 	@Test
 	void testLeftArm()
 	{
 		armorStand.setLeftArmPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getLeftArmPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getLeftArmPose());
 	}
 
 	@Test
 	void testRightArm()
 	{
 		armorStand.setRightArmPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getRightArmPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getRightArmPose());
 	}
 
 	@Test
 	void testLeftLeg()
 	{
 		armorStand.setLeftLegPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getLeftLegPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getLeftLegPose());
 	}
 
 	@Test
 	void testRightLeg()
 	{
 		armorStand.setRightLegPose(new EulerAngle(5, 5, 5));
-		assertEquals(armorStand.getRightLegPose(), new EulerAngle(5, 5, 5));
+		assertEquals(new EulerAngle(5, 5, 5), armorStand.getRightLegPose());
 	}
 
 	@Test

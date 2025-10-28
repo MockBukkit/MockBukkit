@@ -1,12 +1,15 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +19,7 @@ import java.util.Objects;
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class MapMetaMock extends ItemMetaMock implements MapMeta
 {
 
@@ -59,8 +63,14 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 			}
 			else
 			{
-				if (mapMeta.isScaling()) this.scaling = SCALING_TRUE;
-				else this.scaling = SCALING_FALSE;
+				if (mapMeta.isScaling())
+				{
+					this.scaling = SCALING_TRUE;
+				}
+				else
+				{
+					this.scaling = SCALING_FALSE;
+				}
 			}
 		}
 	}
@@ -178,20 +188,22 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		if (!super.equals(obj) ||
 				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
 				!Objects.equals(this.mapView, meta.getMapView()) ||
-				!Objects.equals(this.color, meta.getColor())) return false;
-		if (meta instanceof MapMetaMock mapMeta) return this.scaling == mapMeta.scaling;
+				!Objects.equals(this.color, meta.getColor()))
+		{
+			return false;
+		}
+		if (meta instanceof MapMetaMock mapMeta)
+		{
+			return this.scaling == mapMeta.scaling;
+		}
 		return meta.isScaling() ? this.scaling == 1 : this.scaling == 2;
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull MapMetaMock clone()
 	{
-		MapMetaMock clone = (MapMetaMock) super.clone();
-		clone.color = this.color;
-		clone.mapId = this.mapId;
-		clone.mapView = this.mapView;
-		clone.scaling = this.scaling;
-		return clone;
+		return new MapMetaMock(this);
 	}
 
 	/**
@@ -204,13 +216,13 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		MapMetaMock serialMock = new MapMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.mapId = (Integer) args.get("map-id");
+		serialMock.mapId = NbtParser.parseInteger(args.get("map-id"));
 		serialMock.mapView = (MapView) args.get("map-view");
 		if (args.containsKey("color"))
 		{
 			serialMock.color = Color.fromARGB((int) args.get("color"));
 		}
-		serialMock.scaling = (byte) args.get("scaling");
+		serialMock.scaling = NbtParser.parseByte(args.get("scaling"));
 		return serialMock;
 	}
 

@@ -2,15 +2,11 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Material;
 import org.bukkit.entity.minecart.StorageMinecart;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
-import java.util.UUID;
 
 import static org.bukkit.entity.EntityType.CHEST_MINECART;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,14 +16,7 @@ class StorageMinecartMockTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
-	StorageMinecart minecart;
-
-	@BeforeEach
-	void setUp() throws Exception
-	{
-		minecart = new StorageMinecartMock(server, UUID.randomUUID());
-	}
+	private StorageMinecart minecart;
 
 	@Test
 	void testGetInventory()
@@ -39,7 +28,7 @@ class StorageMinecartMockTest
 	@Test
 	void testGetMinecartMaterial()
 	{
-		assertEquals(minecart.getMinecartMaterial(), Material.CHEST_MINECART);
+		assertEquals(Material.CHEST_MINECART, minecart.getMinecartMaterial());
 	}
 
 	@Test
@@ -51,7 +40,7 @@ class StorageMinecartMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(minecart.getType(), CHEST_MINECART);
+		assertEquals(CHEST_MINECART, minecart.getType());
 	}
 
 }

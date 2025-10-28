@@ -1,9 +1,10 @@
 package org.mockbukkit.mockbukkit.ban;
 
-
 import com.google.common.net.InetAddresses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import java.util.Date;
 
@@ -12,13 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class IpBanEntryMockTest
 {
 
 	IpBanEntryMock entry;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		entry = new IpBanEntryMock("127.0.0.1", "reason", null, "source");
 	}
@@ -54,9 +56,7 @@ class IpBanEntryMockTest
 	void testSetCreated_Null()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
-			entry.setCreated(null);
-		});
+				entry.setCreated(null));
 
 		assertEquals("Created date cannot be null", nullPointerException.getMessage());
 	}

@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import java.io.IOException;
 import java.util.List;
 
 public class InternalPotionDataMock implements PotionType.InternalPotionData
@@ -29,22 +28,15 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 	{
 		List<PotionEffect> tempPotionEffects;
 		this.namespacedKey = namespacedKey;
-		try
-		{
-			JsonObject data = loadData(namespacedKey);
-			tempPotionEffects = getPotionEffectsFromData(data);
-		}
-		catch (IOException e)
-		{
-			tempPotionEffects = null;
-		}
+		JsonObject data = loadData(namespacedKey);
+		tempPotionEffects = getPotionEffectsFromData(data);
 		this.potionEffects = tempPotionEffects;
 		this.upgradeable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "strong_" + namespacedKey.getKey())) != null;
 		this.extendable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "long_" + namespacedKey.getKey())) != null;
 		this.maxLevel = this.isUpgradeable() ? 2 : 1;
 	}
 
-	private JsonObject loadData(@NotNull NamespacedKey namespacedKey) throws IOException
+	private JsonObject loadData(@NotNull NamespacedKey namespacedKey)
 	{
 		String path = "/potion/" + namespacedKey.getKey() + ".json";
 		return ResourceLoader.loadResource(path).getAsJsonObject();

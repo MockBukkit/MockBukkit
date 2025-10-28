@@ -1,12 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Map;
 
+@DelegateDeserialization(SerializableMeta.class)
 public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottleMeta
 {
 
@@ -58,11 +62,10 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull OminousBottleMetaMock clone()
 	{
-		OminousBottleMetaMock clone = (OminousBottleMetaMock) super.clone();
-		clone.amplifier = this.amplifier;
-		return clone;
+		return new OminousBottleMetaMock(this);
 	}
 
 	@Override
@@ -71,7 +74,7 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		super.deserializeInternal(args);
 		if (args.containsKey(AMPLIFIER_KEY))
 		{
-			this.amplifier = (Integer) args.get(AMPLIFIER_KEY);
+			this.amplifier = NbtParser.parseInteger(args.get(AMPLIFIER_KEY));
 		}
 	}
 
@@ -91,6 +94,12 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 			serialized.put(AMPLIFIER_KEY, amplifier);
 		}
 		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "OMINOUS_BOTTLE";
 	}
 
 }

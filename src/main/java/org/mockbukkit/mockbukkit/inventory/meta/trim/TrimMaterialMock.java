@@ -16,7 +16,6 @@ public class TrimMaterialMock implements TrimMaterial
 	private final Component description;
 	private final String translationKey;
 
-
 	@ApiStatus.Internal
 	public TrimMaterialMock(NamespacedKey key, Component description, String translationKey)
 	{

@@ -5,13 +5,13 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-
-import java.util.UUID;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,25 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class BeeMockTest
 {
 
+	@MockBukkitInject
 	private BeeMock bee;
-
-	@BeforeEach
-	void setUp()
-	{
-		ServerMock server = MockBukkit.mock();
-		World world = new WorldCreator("world").createWorld();
-		bee = new BeeMock(server, UUID.randomUUID());
-		bee.setLocation(new Location(world, 0, 0, 0));
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void testGetType()
@@ -198,6 +185,34 @@ class BeeMockTest
 	{
 		bee.setBaby();
 		assertEquals(0.15D, bee.getEyeHeight());
+	}
+
+	@Nested
+	class SetTimeSinceSting
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, bee.getTimeSinceSting());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		void givenValidValues(int time)
+		{
+			bee.setTimeSinceSting(time);
+			assertEquals(time, bee.getTimeSinceSting());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { -5, -4, -3, -2, -1 })
+		void givenNonvalidValues(int time)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bee.setTimeSinceSting(time));
+			assertEquals("Time since sting cannot be negative", e.getMessage());
+		}
+
 	}
 
 }

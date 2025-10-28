@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.block.data.type.Bamboo;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +12,7 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class BambooDataMockTest
@@ -18,7 +20,7 @@ class BambooDataMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private BambooDataMock bamboo = new BambooDataMock();
+	private final BambooDataMock bamboo = new BambooDataMock();
 
 	@Test
 	void getLeaves()
@@ -72,6 +74,21 @@ class BambooDataMockTest
 	void getMaximumStage()
 	{
 		assertEquals(1, bamboo.getMaximumStage());
+	}
+
+	@Test
+	void validateClone()
+	{
+		@NotNull BambooDataMock cloned = bamboo.clone();
+
+		assertEquals(bamboo, cloned);
+		assertEquals(bamboo.getAge(), cloned.getAge());
+
+		bamboo.setAge(10);
+
+		assertNotEquals(bamboo, cloned);
+		assertEquals(10, bamboo.getAge());
+		assertEquals(0, cloned.getAge());
 	}
 
 }

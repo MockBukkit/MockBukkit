@@ -1,13 +1,14 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Material;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,18 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BundleMetaMockTest
 {
 
+	@MockBukkitInject
 	private BundleMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new BundleMetaMock();
-	}
 
 	@Test
 	void cloneConstructor_CopiesValues()
 	{
-		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
+		meta.setItems(List.of(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 
 		BundleMetaMock otherMeta = new BundleMetaMock(meta);
 
@@ -69,7 +65,7 @@ class BundleMetaMockTest
 	@Test
 	void setItems()
 	{
-		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
+		meta.setItems(List.of(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 		assertEquals(2, meta.getItems().size());
 		assertEquals(Material.STONE, meta.getItems().get(0).getType());
 		assertEquals(Material.DIRT, meta.getItems().get(1).getType());
@@ -79,23 +75,19 @@ class BundleMetaMockTest
 	void setItems_NullItem_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), null, new ItemStackMock(Material.DIRT)));
-		});
+				meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), null, new ItemStackMock(Material.DIRT))));
 	}
 
 	@Test
 	void setItems_AirItem_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setItems(Arrays.asList(
-							new ItemStackMock(Material.STONE),
-							new ItemStackMock(Material.AIR),
-							new ItemStackMock(Material.DIRT)
-					)
-			);
-		});
+				meta.setItems(List.of(
+								new ItemStackMock(Material.STONE),
+								new ItemStackMock(Material.AIR),
+								new ItemStackMock(Material.DIRT)
+						)
+				));
 	}
 
 	@Test
@@ -144,7 +136,7 @@ class BundleMetaMockTest
 	@Test
 	void clone_CopiesValues()
 	{
-		meta.setItems(Arrays.asList(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
+		meta.setItems(List.of(new ItemStackMock(Material.STONE), new ItemStackMock(Material.DIRT)));
 
 		BundleMetaMock otherMeta = meta.clone();
 

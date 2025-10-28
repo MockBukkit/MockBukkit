@@ -7,6 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,11 +72,10 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull EnchantmentStorageMetaMock clone()
 	{
-		EnchantmentStorageMetaMock mock = (EnchantmentStorageMetaMock) super.clone();
-		mock.storedEnchantments = new HashMap<>(storedEnchantments);
-		return mock;
+		return new EnchantmentStorageMetaMock(this);
 	}
 
 	@Override
@@ -154,8 +154,9 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 		if (args.containsKey("stored-enchantments"))
 		{
 			//noinspection unchecked
-			serialMock.storedEnchantments = ((Map<String, Integer>) args.get("stored-enchantments")).entrySet().stream()
-					.collect(ImmutableMap.toImmutableMap(entry -> getEnchantment(entry.getKey()), Map.Entry::getValue));
+			serialMock.storedEnchantments = NbtParser.parseMap(args.get("stored-enchantments"),
+					k -> NbtParser.parseWithCast(k, EnchantmentStorageMetaMock::getEnchantment),
+					NbtParser::parseInteger);
 		}
 		return serialMock;
 	}

@@ -46,6 +46,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,6 +64,7 @@ import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -90,7 +92,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param server The server this is for.
 	 */
 	@ApiStatus.Internal
-	@SuppressWarnings("deprecation")
 	public PluginManagerMock(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
@@ -104,7 +105,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	{
 		File parentTemporaryDirectory = this.parentTemporaryDirectory.get();
 		if (parentTemporaryDirectory == null)
+		{
 			return;
+		}
 
 		// Delete the temporary directory, from the deepest file to the root.
 		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
@@ -134,6 +137,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@Nullable String message, @NotNull Predicate<Event> predicate)
@@ -155,6 +161,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * Asserts that at least one event conforms to the given predicate.
 	 *
 	 * @param predicate The predicate to test against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Predicate<Event> predicate)
@@ -170,6 +179,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param message    The message to display if no event is found.
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
@@ -193,6 +205,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param <T>        The type of event that is expected.
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher#hasFiredFilteredEvent(Class, Predicate)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
@@ -205,6 +220,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * Asserts that a specific event or one of it's sub-events has been fired at least once.
 	 *
 	 * @param eventClass The class of the event to check for.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher#hasFiredEventInstance(Class)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
@@ -217,6 +235,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * Asserts that a specific event or one of it's sub-event has not been fired.
 	 *
 	 * @param eventClass The class of the event to check for.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher#hasNotFiredEventInstance(Class)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
@@ -230,6 +251,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param eventClass The class of the event to check for.
 	 * @param message    The message to print when failed.
+	 * @deprecated Use Hamcrest matcher
+	 *             {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher#hasNotFiredEventInstance(Class)}
+	 *             instead
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, @Nullable String message)
@@ -288,7 +312,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 
 		Class<?>[] parameters = constructor.getParameterTypes();
 		if (parameters.length < types.length)
+		{
 			return false;
+		}
 		for (int i = 0; i < types.length; i++)
 		{
 			Class<?> type = types[i];
@@ -311,8 +337,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @throws NoSuchMethodException if no compatible constructor could be found.
 	 */
 	@SuppressWarnings("unchecked")
-	private @NotNull Constructor<? extends JavaPlugin> getCompatibleConstructor(@NotNull Class<? extends JavaPlugin> class1,
-																				@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
+	private @NotNull Constructor<? extends Plugin> getCompatibleConstructor(@NotNull Class<? extends Plugin> class1,
+																			@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(types, "Types cannot be null");
@@ -321,16 +347,20 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			Class<?>[] parameters = constructor.getParameterTypes();
 			if (parameters.length == types.length && isConstructorCompatible(constructor, types))
 			{
-				return (Constructor<? extends JavaPlugin>) constructor;
+				return (Constructor<? extends Plugin>) constructor;
 			}
 		}
 
-		StringBuilder parameters = new StringBuilder("[");
-		for (Class<?> type : types)
-			parameters.append(type.getName()).append(", ");
-		String str = parameters.substring(0, parameters.length() - 2) + "]";
+		String parameters = " without parameters";
+		if (types.length > 0)
+		{
+			parameters = " with parameters [" + Arrays.stream(types)
+					.map(Class::getName)
+					.collect(Collectors.joining(", ")) + "]";
+		}
+
 		throw new NoSuchMethodException(
-				"No compatible constructor for " + class1.getName() + " with parameters " + str);
+				"No publicly available constructor for " + class1.getName() + parameters);
 	}
 
 	/**
@@ -408,6 +438,17 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	}
 
 	/**
+	 * Load a plugin from a class. The description will be guessed as best as possible.
+	 *
+	 * @param class1 The plugin to load.
+	 * @return The loaded plugin.
+	 */
+	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1)
+	{
+		return loadPlugin(class1, new Object[0]);
+	}
+
+	/**
 	 * Load a plugin from a class. It will use the system resource {@code plugin.yml} as the resource file.
 	 *
 	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
@@ -415,8 +456,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param parameters  Extra parameters to pass on to the plugin constructor. Must not be {@code null}.
 	 * @return The loaded plugin.
 	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description,
-										  @NotNull Object @NotNull [] parameters)
+	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1, @NotNull PluginDescriptionFile description,
+									  @NotNull Object @NotNull [] parameters)
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(description, "Description cannot be null");
@@ -432,10 +473,10 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 				types.add(parameter.getClass());
 			}
 
-			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
+			Constructor<? extends Plugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 
-			JavaPlugin plugin = constructor.newInstance(parameters);
+			Plugin plugin = constructor.newInstance(parameters);
 			registerLoadedPlugin(plugin);
 			return plugin;
 		}
@@ -483,17 +524,19 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return The loaded plugin.
 	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, Object @NotNull [] parameters)
+	public @NotNull Plugin loadPlugin(@NotNull Class<? extends Plugin> class1, Object @NotNull [] parameters)
 	{
+		PluginDescriptionFile description;
 		try
 		{
-			PluginDescriptionFile description = findPluginDescription(class1);
-			return loadPlugin(class1, description, parameters);
+			description = findPluginDescription(class1);
 		}
-		catch (IOException | InvalidDescriptionException e)
+		catch (IOException | InvalidDescriptionException ignored)
 		{
-			throw new PluginLoadException(e);
+			description = new PluginDescriptionFile(class1.getSimpleName(), "0.0.0", class1.getName());
 		}
+
+		return loadPlugin(class1, description, parameters);
 	}
 
 	/**
@@ -505,10 +548,29 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @throws IOException                 Thrown when the file wan't be found or loaded.
 	 * @throws InvalidDescriptionException If the plugin description file is formatted incorrectly.
 	 */
-	private @NotNull PluginDescriptionFile findPluginDescription(@NotNull Class<? extends JavaPlugin> class1)
+	private @NotNull PluginDescriptionFile findPluginDescription(@NotNull Class<? extends Plugin> class1)
 			throws IOException, InvalidDescriptionException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
+		try
+		{
+			Enumeration<URL> resources = class1.getClassLoader().getResources("paper-plugin.yml");
+			while (resources.hasMoreElements())
+			{
+				URL url = resources.nextElement();
+				PluginDescriptionFile description = new PluginDescriptionFile(url.openStream());
+				String mainClass = description.getMain();
+				if (class1.getName().equals(mainClass))
+				{
+					return description;
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			// Ignore, we'll try plugin.yml next
+		}
+
 		Enumeration<URL> resources = class1.getClassLoader().getResources("plugin.yml");
 		while (resources.hasMoreElements())
 		{
@@ -516,10 +578,12 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			PluginDescriptionFile description = new PluginDescriptionFile(url.openStream());
 			String mainClass = description.getMain();
 			if (class1.getName().equals(mainClass))
+			{
 				return description;
+			}
 		}
 		throw new FileNotFoundException(
-				"Could not find file plugin.yml. Maybe forgot to add the 'main' property?");
+   			"Could not find file paper-plugin.yml or plugin.yml. Maybe forgot to add the 'main' property?");
 	}
 
 	@Override
@@ -600,7 +664,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			}
 		}
 	}
-
 
 	@Override
 	public void enablePlugin(@NotNull Plugin plugin)
@@ -767,7 +830,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 
 	/**
 	 * This method clears the history of {@link Event events}. Doing that can be very useful if you want to assert fresh
-	 * events using {@link #assertEventFired(Class)} or similar.
+	 * events using {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher},
+	 * {@link org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher} or similar.
 	 */
 	@SuppressWarnings("unused")
 	public void clearEvents()
@@ -868,7 +932,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
 		if (!plugin.isEnabled())
+		{
 			return;
+		}
 
 		// Don't print the "disabling x plugin" message
 		Level prevLevel = plugin.getLogger().getLevel();

@@ -4,12 +4,11 @@ import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
 import org.bukkit.help.IndexHelpTopic;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Collections;
@@ -19,23 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
+@ExtendWith(MockBukkitExtension.class)
 class HelpMapMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private HelpMapMock helpMap;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		helpMap = server.getHelpMap();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -95,18 +89,10 @@ class HelpMapMockTest
 	@Test
 	void testAssertRegistered()
 	{
-		HelpTopicFactory<VersionCommand> helpTopicFactory = new HelpTopicFactory<>()
-		{
-			@Override
-			public @Nullable HelpTopic createTopic(@NotNull VersionCommand command)
-			{
-				return new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
-			}
-		};
+		HelpTopicFactory<VersionCommand> helpTopicFactory = command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
 		helpMap.registerHelpTopicFactory(VersionCommand.class, helpTopicFactory);
 
 		assertThat(helpMap, hasFactoryRegistered(helpTopicFactory));
 	}
-
 
 }

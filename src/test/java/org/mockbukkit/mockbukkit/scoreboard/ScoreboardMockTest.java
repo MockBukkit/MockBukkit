@@ -5,10 +5,10 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Team;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.SimpleEntityMock;
@@ -26,24 +26,14 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class ScoreboardMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private ScoreboardMock scoreboard;
-
-	@BeforeEach
-	void setUp() throws Exception
-	{
-		this.server = MockBukkit.mock();
-		this.scoreboard = new ScoreboardMock();
-	}
-
-	@AfterEach
-	void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void registerObjective_DummyObjective_ObjectiveRegistered()
@@ -124,6 +114,13 @@ class ScoreboardMockTest
 	}
 
 	@Test
+	void registerNewObjective_TooLongName_ThrowsException()
+	{
+		String longName = "A".repeat(Short.MAX_VALUE + 1);
+		assertThrows(IllegalArgumentException.class, () -> scoreboard.registerNewObjective(longName, "dummy"));
+	}
+
+	@Test
 	void registerNewTeam_CheckForDuplicates()
 	{
 		assertDoesNotThrow(() -> scoreboard.registerNewTeam("blue"));
@@ -149,7 +146,7 @@ class ScoreboardMockTest
 		team.addEntry("player");
 		team.addEntity(entity);
 		this.scoreboard.registerNewTeam("cyan").addEntry("player");
-		assertEquals(Set.of("player", entity.getScoreboardEntry()), this.scoreboard.getEntries());
+		assertEquals(Set.of("player", entity.getScoreboardEntryName()), this.scoreboard.getEntries());
 	}
 
 	@Test
@@ -157,14 +154,14 @@ class ScoreboardMockTest
 	{
 		EntityMock entity = new SimpleEntityMock(this.server);
 		Objective objectiveA = this.scoreboard.registerNewObjective("test", Criteria.DUMMY, empty());
-		Score scoreA = objectiveA.getScore(entity.getScoreboardEntry());
+		Score scoreA = objectiveA.getScore(entity.getScoreboardEntryName());
 		scoreA.setScore(78);
 		Objective objectiveB = this.scoreboard.registerNewObjective("test2", Criteria.DEATH_COUNT, empty());
 		Score scoreB = objectiveB.getScoreFor(entity);
 
 		Set<Score> excepted = Set.of(scoreA, scoreB);
 		assertEquals(excepted, this.scoreboard.getScoresFor(entity));
-		assertEquals(excepted, this.scoreboard.getScores(entity.getScoreboardEntry()));
+		assertEquals(excepted, this.scoreboard.getScores(entity.getScoreboardEntryName()));
 	}
 
 	@Test
@@ -198,7 +195,7 @@ class ScoreboardMockTest
 		Team team = this.scoreboard.registerNewTeam("green");
 		team.addEntity(entity);
 		this.scoreboard.registerNewTeam("cyan").addEntity(entity);
-		assertSame(team, this.scoreboard.getEntryTeam(entity.getScoreboardEntry()));
+		assertSame(team, this.scoreboard.getEntryTeam(entity.getScoreboardEntryName()));
 		assertSame(team, this.scoreboard.getEntityTeam(entity));
 	}
 

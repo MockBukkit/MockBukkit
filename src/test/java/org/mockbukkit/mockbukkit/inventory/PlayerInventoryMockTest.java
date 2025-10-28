@@ -3,14 +3,14 @@ package org.mockbukkit.mockbukkit.inventory;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
@@ -20,29 +20,24 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockBukkitExtension.class)
 class PlayerInventoryMockTest
 {
 
+	@MockBukkitInject
 	private ServerMock server;
 	private PlayerInventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		server = MockBukkit.mock();
 		inventory = new PlayerInventoryMock(null);
 	}
 
-	@AfterEach
-	void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
-
 	@Test
-	void getSize_Default_41()
+	void getSize_Default_43()
 	{
-		assertEquals(41, inventory.getSize());
+		assertEquals(43, inventory.getSize());
 	}
 
 	@Test
@@ -154,7 +149,7 @@ class PlayerInventoryMockTest
 		void givenBodyEquipmentSlot_ShouldThrowIllegalArgumentException()
 		{
 			ItemStack item = new ItemStackMock(Material.STONE);
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.BODY, item));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.BODY, item));
 			assertEquals("BODY is not valid for players!", e.getMessage());
 		}
 
@@ -162,7 +157,7 @@ class PlayerInventoryMockTest
 		void givenSaddleEquipmentSlot_ShouldThrowIllegalArgumentException()
 		{
 			ItemStack item = new ItemStackMock(Material.STONE);
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.SADDLE, item));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.SADDLE, item));
 			assertEquals("Could not set slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
 		}
 
@@ -226,6 +221,52 @@ class PlayerInventoryMockTest
 	void setContent_ResultFromGetContent_Works()
 	{
 		assertDoesNotThrow(() -> inventory.setContents(inventory.getContents()));
+	}
+
+	@Test
+	void setStorageContents_ResultFromGetStorageContents_Works()
+	{
+		assertDoesNotThrow(() -> inventory.setStorageContents(inventory.getStorageContents()));
+	}
+
+	@Test
+	void setStorageContents_TooLarge_Exception()
+	{
+		assertThrows(IllegalArgumentException.class, () -> inventory.setStorageContents(new ItemStack[37]));
+	}
+
+	@Test
+	void setStorageContents_NewArray_StorageSet()
+	{
+		ItemStack item = new ItemStackMock(Material.STONE);
+		ItemStack item2 = new ItemStackMock(Material.SAND);
+		ItemStack[] contents = new ItemStack[36];
+		contents[0] = item;
+		contents[35] = item2;
+		inventory.setStorageContents(contents);
+		assertEquals(item, inventory.getItem(0));
+		assertEquals(item2, inventory.getItem(35));
+		assertEquals(item, inventory.getStorageContents()[0]);
+		assertEquals(item2, inventory.getStorageContents()[35]);
+	}
+
+	@Test
+	void setStorageContents_EmptyArray_ArmorRemainsTheSame()
+	{
+		ItemStack boots = new ItemStackMock(Material.DIAMOND_BOOTS);
+		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
+		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
+		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
+		inventory.setItem(PlayerInventoryMock.BOOTS, boots);
+		inventory.setItem(PlayerInventoryMock.LEGGINGS, leggings);
+		inventory.setItem(PlayerInventoryMock.CHESTPLATE, chestplate);
+		inventory.setItem(PlayerInventoryMock.HELMET, helmet);
+		ItemStack[] emptyContents = new ItemStack[36];
+		inventory.setStorageContents(emptyContents);
+		assertEquals(boots, inventory.getBoots());
+		assertEquals(leggings, inventory.getLeggings());
+		assertEquals(chestplate, inventory.getChestplate());
+		assertEquals(helmet, inventory.getHelmet());
 	}
 
 	@Test
@@ -309,15 +350,15 @@ class PlayerInventoryMockTest
 		@Test
 		void getItemWithBody_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.BODY));
-			Assertions.assertEquals("BODY is not valid for players!", e.getMessage());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.BODY));
+			assertEquals("BODY is not valid for players!", e.getMessage());
 		}
 
 		@Test
 		void getItemWithSaddle_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.SADDLE));
-			Assertions.assertEquals("Could not get slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.SADDLE));
+			assertEquals("Could not get slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
 		}
 
 	}

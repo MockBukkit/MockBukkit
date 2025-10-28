@@ -189,7 +189,9 @@ class BannerStateMockTest
 		for (Material mat : Tag.ITEMS_BANNERS.getValues())
 		{
 			if (BlockStateMock.mockState(new BlockMock(mat)) instanceof BannerStateMock)
+			{
 				continue;
+			}
 			fail("BlockStateMock for '" + mat + "' is not a " + BannerStateMock.class.getSimpleName());
 		}
 	}

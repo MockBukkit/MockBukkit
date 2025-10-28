@@ -4,6 +4,7 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -24,8 +26,11 @@ import java.util.concurrent.CompletableFuture;
 /**
  * Mock implementation of a {@link PlayerProfile}.
  */
+@SerializableAs("PlayerProfile")
 public class PlayerProfileMock implements PlayerProfile
 {
+
+	private static final String PROPERTY_PROPERTIES = "properties";
 
 	private @Nullable String name;
 	private @Nullable UUID uuid;
@@ -229,7 +234,7 @@ public class PlayerProfileMock implements PlayerProfile
 			{
 				propertiesData.add(PlayerProfileMock.serialize(property));
 			}
-			map.put("properties", propertiesData);
+			map.put(PROPERTY_PROPERTIES, propertiesData);
 		}
 		return map;
 	}
@@ -252,6 +257,20 @@ public class PlayerProfileMock implements PlayerProfile
 		return map;
 	}
 
+	@Nullable
+	private static ProfileProperty deserializeProfileProperty(@Nullable Map<String, Object> map)
+	{
+		if (map == null)
+		{
+			return null;
+		}
+
+		String name = (String) map.get("name");
+		String value = (String) map.get("value");
+		String signature = (String) map.get("signature");
+		return new ProfileProperty(name, value, signature);
+	}
+
 	@Override
 	public int hashCode()
 	{
@@ -261,8 +280,14 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) return true;
-		if (!(obj instanceof PlayerProfileMock otherProfile)) return false;
+		if (this == obj)
+		{
+			return true;
+		}
+		if (!(obj instanceof PlayerProfileMock otherProfile))
+		{
+			return false;
+		}
 		return Objects.equals(this.name, otherProfile.name) && this.uuid.equals(otherProfile.uuid) && this.properties.equals(otherProfile.properties);
 	}
 
@@ -275,8 +300,8 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
-	public org.bukkit.profile.@NotNull PlayerProfile clone()
+	@SuppressWarnings({"java:S2975", "MethodDoesntCallSuperMethod"})
+	public @NotNull PlayerProfile clone()
 	{
 		return new PlayerProfileMock(this);
 	}
@@ -292,6 +317,45 @@ public class PlayerProfileMock implements PlayerProfile
 		// The profile always has a name or uuid, so just checking if it has a name and textures is sufficient.
 		boolean isValidSkullProfile = (profile.getName() != null) /*|| check for textures*/; // Textures aren't implemented yet.
 		Preconditions.checkArgument(isValidSkullProfile, "The skull profile is missing a name or textures!");
+	}
+
+	/**
+	 * This method is used to deserialize the player profile.
+	 *
+	 * @param map The data to be deserialized.
+	 *
+	 * @return The player profile deserialized.
+	 *
+	 * @see org.bukkit.configuration.serialization.ConfigurationSerializable
+	 */
+	public static PlayerProfileMock deserialize(Map<String, Object> map)
+	{
+		Object uniqueIdObject = map.get("uniqueId");
+		Object nameObject = map.get("name");
+
+		UUID uniqueId = uniqueIdObject instanceof String uniqueIdString ? UUID.fromString(uniqueIdString) : null;
+		String name = nameObject instanceof String nameString ? nameString : null;
+
+		// This also validates the deserialized unique id and name (ensures that not both are null):
+		PlayerProfileMock profile = new PlayerProfileMock(name, uniqueId);
+
+		if (map.containsKey(PROPERTY_PROPERTIES))
+		{
+			Set<ProfileProperty> properties = new LinkedHashSet<>();
+			for (Object propertyData : (List<?>) map.get(PROPERTY_PROPERTIES))
+			{
+				if (!(propertyData instanceof Map))
+				{
+					throw new IllegalArgumentException("Property data (" + propertyData + ") is not a valid Map");
+				}
+				ProfileProperty property = deserializeProfileProperty((Map<String, Object>) propertyData);
+				properties.add(property);
+			}
+
+			profile.setProperties(properties);
+		}
+
+		return profile;
 	}
 
 }

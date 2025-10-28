@@ -6,6 +6,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
@@ -46,6 +47,7 @@ import org.mockbukkit.mockbukkit.block.state.StructureStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestBlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestInstanceBlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +65,7 @@ import java.util.Objects;
  * @see ShieldMetaMock
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 {
 
@@ -205,9 +208,18 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof BlockStateMetaMock that)) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BlockStateMetaMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
 		return Objects.equals(blockState, that.blockState) && material == that.material;
 	}
 
@@ -218,11 +230,10 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BlockStateMetaMock clone()
 	{
-		BlockStateMetaMock clone = (BlockStateMetaMock) super.clone();
-		clone.blockState = this.blockState != null ? this.blockState.copy() : null;
-		return clone;
+		return new BlockStateMetaMock(this);
 	}
 
 	@Override

@@ -19,13 +19,13 @@ class EntityLocationMatcherTest extends AbstractMatcherTest
 
 	@MockBukkitInject
 	private ServerMock serverMock;
+	@MockBukkitInject
 	private PlayerMock entity;
 	private Location location;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.entity = serverMock.addPlayer();
 		this.location = entity.getLocation().clone();
 	}
 

@@ -31,7 +31,6 @@ public class RegistryAccessMock implements RegistryAccess
 	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap<>();
 	private static final BiMap<RegistryKey<?>, String> CLASS_NAME_KEY_MAP = createClassToKeyConversions();
 
-
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
@@ -91,10 +90,10 @@ public class RegistryAccessMock implements RegistryAccess
 		return false;
 	}
 
-
 	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
 	{
 		return List.of(
+				RegistryKey.DIALOG,
 				RegistryKey.STRUCTURE,
 				RegistryKey.STRUCTURE_TYPE,
 				RegistryKey.TRIM_MATERIAL,
@@ -131,7 +130,6 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.MEMORY_MODULE_TYPE
 		);
 	}
-
 
 	private static Registry<?> getValue(Field a)
 	{

@@ -6,6 +6,7 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
+import io.papermc.paper.connection.PlayerGameConnection;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
@@ -348,7 +349,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return consumedItems.contains(consumable);
 	}
 
-
 	/**
 	 * Asserts a Player has consumed the given Item
 	 *
@@ -501,11 +501,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(mode, "GameMode cannot be null");
 		if (super.getGameMode() == mode)
+		{
 			return;
+		}
 
 		PlayerGameModeChangeEvent event = new PlayerGameModeChangeEvent(this, mode, PlayerGameModeChangeEvent.Cause.UNKNOWN, null);
 		if (!event.callEvent())
+		{
 			return;
+		}
 
 		this.previousGamemode = super.getGameMode();
 		super.setGameMode(mode);
@@ -823,9 +827,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @NotNull String getScoreboardEntry()
+	public @NotNull String getScoreboardEntryName()
 	{
-		return getName();
+		return this.getName();
 	}
 
 	@Override
@@ -1058,7 +1062,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void kick(@Nullable Component message, PlayerKickEvent.@NotNull Cause cause)
 	{
 		AsyncCatcher.catchOp("player kick");
-		if (!isOnline()) return;
+		if (!isOnline())
+		{
+			return;
+		}
 		PlayerKickEvent event =
 				new PlayerKickEvent(this,
 						Component.text("Plugin"),
@@ -1239,7 +1246,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
-
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
@@ -1563,7 +1569,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(map, "Map cannot be null");
 		if (!(map instanceof MapViewMock mapView))
+		{
 			return;
+		}
 
 		mapView.render(this);
 
@@ -2153,7 +2161,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
-
 	@Override
 	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
@@ -2207,7 +2214,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public boolean isFlying()
@@ -2506,7 +2512,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return subitles.poll();
 	}
-
 
 	@Override
 	public void resetTitle()
@@ -3358,6 +3363,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setDeathScreenScore(int deathScreenScore)
 	{
 		this.deathScreenScore = deathScreenScore;
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public PlayerGameConnection getConnection()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 }

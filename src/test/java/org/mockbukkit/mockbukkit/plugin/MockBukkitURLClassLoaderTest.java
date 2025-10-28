@@ -28,8 +28,8 @@ class MockBukkitURLClassLoaderTest
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private MockBukkitURLClassLoader urlClassLoader;
-	private static File TEST_PLUGIN_FILE = new File("extra/TestPlugin/build/libs/TestPlugin.jar");
-	private static File PLUGIN_YAML_FILE = new File("extra/TestPlugin/src/main/resources/plugin.yml");
+	private static final File TEST_PLUGIN_FILE = new File("extra/TestPlugin/build/libs/TestPlugin.jar");
+	private static final File PLUGIN_YAML_FILE = new File("extra/TestPlugin/src/main/resources/plugin.yml");
 
 	@BeforeEach
 	void setUp() throws IOException, InvalidDescriptionException

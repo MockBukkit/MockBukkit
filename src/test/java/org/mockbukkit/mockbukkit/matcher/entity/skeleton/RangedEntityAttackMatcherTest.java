@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity.skeleton;
 
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -11,26 +10,20 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
-import java.util.UUID;
-
 import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
 
 @ExtendWith(MockBukkitExtension.class)
 class RangedEntityAttackMatcherTest extends AbstractMatcherTest
 {
 
+	private static final float CHARGE = 0.5f;
+
 	@MockBukkitInject
 	private ServerMock serverMock;
-	private static final float CHARGE = 0.5f;
+	@MockBukkitInject
 	private PlayerMock target;
+	@MockBukkitInject
 	private SkeletonMock skeleton;
-
-	@BeforeEach
-	void setUp()
-	{
-		this.target = serverMock.addPlayer();
-		this.skeleton = new SkeletonMock(serverMock, UUID.randomUUID());
-	}
 
 	@Test
 	void attacked()

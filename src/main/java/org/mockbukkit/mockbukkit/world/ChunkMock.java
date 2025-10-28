@@ -139,7 +139,7 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	@SuppressWarnings("UnstableApiUsage") // ImmutableMap#builderWithExpectedSize
+	// ImmutableMap#builderWithExpectedSize
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
 		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(getCubicSize());
@@ -245,13 +245,17 @@ public class ChunkMock implements Chunk
 	public boolean equals(@Nullable Object obj)
 	{
 		if (obj == null)
+		{
 			return false;
+		}
 		else if (obj instanceof ChunkMock chunk)
 		{
 			return x == chunk.x && z == chunk.z && world.equals(chunk.world);
 		}
 		else
+		{
 			return false;
+		}
 	}
 
 	@Override

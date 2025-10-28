@@ -1,12 +1,9 @@
-import com.vanniktech.maven.publish.SonatypeHost
-import java.io.ByteArrayOutputStream
-
 plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.33.0"
-	id("net.kyori.blossom") version "2.1.0"
+	id("com.vanniktech.maven.publish") version "0.34.0"
+	id("net.kyori.blossom") version "2.2.0"
 }
 
 group = "org.mockbukkit.mockbukkit"
@@ -20,22 +17,32 @@ repositories {
 }
 
 dependencies {
-	// Paper API
-	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	// Paper API - compileOnly + testImplementation to avoid snapshot issues in Maven Central
+	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+
 	api("org.jetbrains:annotations:26.0.2")
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.13.1")
+	implementation("org.junit.jupiter:junit-jupiter-api:6.0.0")
+	testImplementation(platform("org.junit:junit-bom:6.0.0"))
+	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.4.0") {
+	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
 		exclude("net.kyori", "adventure-platform-api")
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.17.6")
+	implementation("net.bytebuddy:byte-buddy:1.17.7")
+
+	compileOnly("org.projectlombok:lombok:1.18.42")
+	annotationProcessor("org.projectlombok:lombok:1.18.42")
+	testCompileOnly("org.projectlombok:lombok:1.18.42")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -47,7 +54,10 @@ tasks {
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit"
+				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit",
+				"Paper-Version" to project.property("paper.api.full-version").toString(),
+				"Paper-API-Version" to project.property("paper.api.version").toString(),
+				"MockBukkit-Version" to getFullVersion()
 			)
 		}
 	}
@@ -105,7 +115,7 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.13"
+		toolVersion = "0.8.14"
 	}
 
 	register("updateResources") {
@@ -202,15 +212,11 @@ mavenPublishing {
 			url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
 		}
 	}
-	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+	publishToMavenCentral(true)
 	// No key available to sign with for maven local
 	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
 		signAllPublications()
 	}
-}
-
-fun isFork(): Boolean {
-	return run("git", "config", "--get", "remote.origin.url").contains("MockBukkit/MockBukkit")
 }
 
 fun isAction(): Boolean {
@@ -226,10 +232,9 @@ fun getFullVersion(): String {
 }
 
 fun run(vararg cmd: String): String {
-	val stdout = ByteArrayOutputStream()
-	exec {
+	return providers.exec {
 		commandLine(*cmd)
-		standardOutput = stdout
-	}
-	return stdout.toString().trim()
+	}.standardOutput.asText.get().trim()
 }
+
+

@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-
 @ExtendWith(MockBukkitExtension.class)
 class PotionEffectTypeMockTest
 {
@@ -141,7 +140,6 @@ class PotionEffectTypeMockTest
 		assertEquals(2445989, potionEffectType.getColor().asRGB());
 	}
 
-
 	@ParameterizedTest
 	@MethodSource("getPotionEffectTypes")
 	void testDefaultPotionEffects(PotionEffectType potionEffectType)
@@ -152,6 +150,12 @@ class PotionEffectTypeMockTest
 	static Stream<PotionEffectType> getPotionEffectTypes()
 	{
 		return Arrays.stream(PotionEffectType.values());
+	}
+
+	@Test
+	void testPotionEffectStringifiedRepresentation()
+	{
+		assertEquals("INCREASE_DAMAGE", PotionEffectType.STRENGTH.toString());
 	}
 
 }

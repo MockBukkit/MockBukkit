@@ -2,15 +2,18 @@ package org.mockbukkit.mockbukkit.configuration;
 
 import net.kyori.adventure.text.Component;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class GlobalServerConfigurationTest
 {
 
-	ServerConfiguration config = new ServerConfiguration();
+	final ServerConfiguration config = new ServerConfiguration();
 
 	@Test
 	void testGetViewDistanceDefault()

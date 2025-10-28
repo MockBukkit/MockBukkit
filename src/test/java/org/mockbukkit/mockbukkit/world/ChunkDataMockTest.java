@@ -26,13 +26,13 @@ class ChunkDataMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+	@MockBukkitInject
 	private WorldMock world;
 	private ChunkGenerator.ChunkData chunkData;
 
 	@BeforeEach
 	void setUp()
 	{
-		world = server.addSimpleWorld("dummy");
 		chunkData = server.createChunkData(world);
 	}
 

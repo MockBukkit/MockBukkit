@@ -19,7 +19,16 @@ public class DoorDataMock extends BlockDataMock implements Door
 	public DoorDataMock(@NotNull Material material)
 	{
 		super(material);
-		setHalf(Half.BOTTOM);
+	}
+
+	/**
+	 * Create a new {@link DoorDataMock} based on an existing {@link DoorDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected DoorDataMock(@NotNull DoorDataMock other)
+	{
+		super(other);
 	}
 
 	@Override
@@ -37,13 +46,13 @@ public class DoorDataMock extends BlockDataMock implements Door
 	@Override
 	public @NotNull Half getHalf()
 	{
-		return this.get(BlockDataKey.HALF);
+		return BisectedDataMock.fromString(this.get(BlockDataKey.HALF_MULTI_BLOCK));
 	}
 
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
-		this.set(BlockDataKey.HALF, half);
+		this.set(BlockDataKey.HALF_MULTI_BLOCK, BisectedDataMock.toString(half));
 	}
 
 	@Override
@@ -88,6 +97,13 @@ public class DoorDataMock extends BlockDataMock implements Door
 	public void setPowered(boolean powered)
 	{
 		this.set(BlockDataKey.POWERED, powered);
+	}
+
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull DoorDataMock clone()
+	{
+		return new DoorDataMock(this);
 	}
 
 }

@@ -94,7 +94,9 @@ public class WorldBorderMock implements WorldBorder
 		WorldBorderBoundsChangeEvent.Type moveType = seconds <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE : WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
 		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size, newSize, seconds * 1000L);
 		if (!event.callEvent())
+		{
 			return;
+		}
 
 		double millis = event.getDuration();
 		newSize = event.getNewSize();
@@ -162,7 +164,9 @@ public class WorldBorderMock implements WorldBorder
 
 		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this, new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
 		if (!event.callEvent())
+		{
 			return;
+		}
 
 		this.centerX = event.getNewCenter().getX();
 		this.centerZ = event.getNewCenter().getZ();

@@ -1,21 +1,23 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Mock implementation of an {@link KnowledgeBookMeta}.
  *
  * @see ItemMetaMock
  */
+@DelegateDeserialization(SerializableMeta.class)
 public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta
 {
 
@@ -74,11 +76,10 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull KnowledgeBookMetaMock clone()
 	{
-		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
-		mock.recipes.addAll(recipes);
-		return mock;
+		return new KnowledgeBookMetaMock(this);
 	}
 
 	@Override

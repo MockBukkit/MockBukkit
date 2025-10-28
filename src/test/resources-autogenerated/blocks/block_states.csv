@@ -183,7 +183,7 @@ CHERRY_WALL_SIGN, org.bukkit.block.Sign
 CHERRY_WOOD, org.bukkit.block.BlockState
 CHEST, org.bukkit.block.Chest
 CHIPPED_ANVIL, org.bukkit.block.BlockState
-CHISELED_BOOKSHELF, org.bukkit.block.BlockState
+CHISELED_BOOKSHELF, org.bukkit.block.ChiseledBookshelf
 CHISELED_COPPER, org.bukkit.block.BlockState
 CHISELED_DEEPSLATE, org.bukkit.block.BlockState
 CHISELED_NETHER_BRICKS, org.bukkit.block.BlockState
@@ -230,7 +230,7 @@ CRACKED_POLISHED_BLACKSTONE_BRICKS, org.bukkit.block.BlockState
 CRACKED_STONE_BRICKS, org.bukkit.block.BlockState
 CRAFTER, org.bukkit.block.BlockState
 CRAFTING_TABLE, org.bukkit.block.BlockState
-CREAKING_HEART, org.bukkit.block.BlockState
+CREAKING_HEART, org.bukkit.block.CreakingHeart
 CREEPER_HEAD, org.bukkit.block.Skull
 CREEPER_WALL_HEAD, org.bukkit.block.Skull
 CRIMSON_BUTTON, org.bukkit.block.BlockState
@@ -348,6 +348,7 @@ DISPENSER, org.bukkit.block.Dispenser
 DRAGON_EGG, org.bukkit.block.BlockState
 DRAGON_HEAD, org.bukkit.block.Skull
 DRAGON_WALL_HEAD, org.bukkit.block.Skull
+DRIED_GHAST, org.bukkit.block.BlockState
 DRIED_KELP_BLOCK, org.bukkit.block.BlockState
 DRIPSTONE_BLOCK, org.bukkit.block.BlockState
 DROPPER, org.bukkit.block.Dropper
@@ -860,6 +861,7 @@ SCAFFOLDING, org.bukkit.block.BlockState
 SCULK, org.bukkit.block.BlockState
 SCULK_CATALYST, org.bukkit.block.SculkCatalyst
 SCULK_SENSOR, org.bukkit.block.SculkSensor
+SCULK_SHRIEKER, org.bukkit.block.SculkShrieker
 SCULK_VEIN, org.bukkit.block.BlockState
 SEA_LANTERN, org.bukkit.block.BlockState
 SEA_PICKLE, org.bukkit.block.BlockState
@@ -955,8 +957,8 @@ STRUCTURE_BLOCK, org.bukkit.block.Structure
 STRUCTURE_VOID, org.bukkit.block.BlockState
 SUGAR_CANE, org.bukkit.block.BlockState
 SUNFLOWER, org.bukkit.block.BlockState
-SUSPICIOUS_GRAVEL, org.bukkit.block.BlockState
-SUSPICIOUS_SAND, org.bukkit.block.BlockState
+SUSPICIOUS_GRAVEL, org.bukkit.block.BrushableBlock
+SUSPICIOUS_SAND, org.bukkit.block.BrushableBlock
 SWEET_BERRY_BUSH, org.bukkit.block.BlockState
 TALL_DRY_GRASS, org.bukkit.block.BlockState
 TALL_GRASS, org.bukkit.block.BlockState

@@ -102,7 +102,7 @@ class BlockStateMockTest
 
 		assertFalse(block.getState() instanceof Chest);
 		assertTrue(chest.update(true));
-		assertTrue(block.getState() instanceof Chest);
+		assertInstanceOf(Chest.class, block.getState());
 	}
 
 	@Test

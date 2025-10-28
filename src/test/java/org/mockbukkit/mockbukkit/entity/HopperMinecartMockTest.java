@@ -5,19 +5,16 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,15 +24,7 @@ class HopperMinecartMockTest
 {
 
 	@MockBukkitInject
-	private ServerMock server;
-
 	private HopperMinecart minecart;
-
-	@BeforeEach
-	void setUp() throws Exception
-	{
-		minecart = new HopperMinecartMock(server, UUID.randomUUID());
-	}
 
 	@Test
 	void testIsEnabledDefault()
@@ -53,7 +42,7 @@ class HopperMinecartMockTest
 	@Test
 	void testGetMinecartMaterial()
 	{
-		assertEquals(minecart.getMinecartMaterial(), Material.HOPPER_MINECART);
+		assertEquals(Material.HOPPER_MINECART, minecart.getMinecartMaterial());
 	}
 
 	@Test
@@ -71,7 +60,7 @@ class HopperMinecartMockTest
 	@Test
 	void testGetInventory()
 	{
-		assertTrue(minecart.getInventory() instanceof HopperInventoryMock);
+		assertInstanceOf(HopperInventoryMock.class, minecart.getInventory());
 		minecart.getInventory().setItem(0, new ItemStackMock(Material.DIRT));
 		assertEquals(Material.DIRT, minecart.getInventory().getItem(0).getType());
 	}

@@ -8516,124 +8516,129 @@
 			"ordinal": 1702
 		},
 		{
+			"key": "minecraft:music_disc.lava_chicken",
+			"name": "MUSIC_DISC.LAVA_CHICKEN",
+			"ordinal": 1703
+		},
+		{
 			"key": "minecraft:music_disc.mall",
 			"name": "MUSIC_DISC.MALL",
-			"ordinal": 1703
+			"ordinal": 1704
 		},
 		{
 			"key": "minecraft:music_disc.mellohi",
 			"name": "MUSIC_DISC.MELLOHI",
-			"ordinal": 1704
+			"ordinal": 1705
 		},
 		{
 			"key": "minecraft:music_disc.otherside",
 			"name": "MUSIC_DISC.OTHERSIDE",
-			"ordinal": 1705
+			"ordinal": 1706
 		},
 		{
 			"key": "minecraft:music_disc.pigstep",
 			"name": "MUSIC_DISC.PIGSTEP",
-			"ordinal": 1706
+			"ordinal": 1707
 		},
 		{
 			"key": "minecraft:music_disc.precipice",
 			"name": "MUSIC_DISC.PRECIPICE",
-			"ordinal": 1707
+			"ordinal": 1708
 		},
 		{
 			"key": "minecraft:music_disc.relic",
 			"name": "MUSIC_DISC.RELIC",
-			"ordinal": 1708
+			"ordinal": 1709
 		},
 		{
 			"key": "minecraft:music_disc.stal",
 			"name": "MUSIC_DISC.STAL",
-			"ordinal": 1709
+			"ordinal": 1710
 		},
 		{
 			"key": "minecraft:music_disc.strad",
 			"name": "MUSIC_DISC.STRAD",
-			"ordinal": 1710
+			"ordinal": 1711
 		},
 		{
 			"key": "minecraft:music_disc.tears",
 			"name": "MUSIC_DISC.TEARS",
-			"ordinal": 1711
+			"ordinal": 1712
 		},
 		{
 			"key": "minecraft:music_disc.wait",
 			"name": "MUSIC_DISC.WAIT",
-			"ordinal": 1712
+			"ordinal": 1713
 		},
 		{
 			"key": "minecraft:music_disc.ward",
 			"name": "MUSIC_DISC.WARD",
-			"ordinal": 1713
+			"ordinal": 1714
 		},
 		{
 			"key": "minecraft:particle.soul_escape",
 			"name": "PARTICLE.SOUL_ESCAPE",
-			"ordinal": 1714
+			"ordinal": 1715
 		},
 		{
 			"key": "minecraft:ui.button.click",
 			"name": "UI.BUTTON.CLICK",
-			"ordinal": 1715
+			"ordinal": 1716
 		},
 		{
 			"key": "minecraft:ui.cartography_table.take_result",
 			"name": "UI.CARTOGRAPHY_TABLE.TAKE_RESULT",
-			"ordinal": 1716
+			"ordinal": 1717
 		},
 		{
 			"key": "minecraft:ui.hud.bubble_pop",
 			"name": "UI.HUD.BUBBLE_POP",
-			"ordinal": 1717
+			"ordinal": 1718
 		},
 		{
 			"key": "minecraft:ui.loom.select_pattern",
 			"name": "UI.LOOM.SELECT_PATTERN",
-			"ordinal": 1718
+			"ordinal": 1719
 		},
 		{
 			"key": "minecraft:ui.loom.take_result",
 			"name": "UI.LOOM.TAKE_RESULT",
-			"ordinal": 1719
+			"ordinal": 1720
 		},
 		{
 			"key": "minecraft:ui.stonecutter.select_recipe",
 			"name": "UI.STONECUTTER.SELECT_RECIPE",
-			"ordinal": 1720
+			"ordinal": 1721
 		},
 		{
 			"key": "minecraft:ui.stonecutter.take_result",
 			"name": "UI.STONECUTTER.TAKE_RESULT",
-			"ordinal": 1721
+			"ordinal": 1722
 		},
 		{
 			"key": "minecraft:ui.toast.challenge_complete",
 			"name": "UI.TOAST.CHALLENGE_COMPLETE",
-			"ordinal": 1722
+			"ordinal": 1723
 		},
 		{
 			"key": "minecraft:ui.toast.in",
 			"name": "UI.TOAST.IN",
-			"ordinal": 1723
+			"ordinal": 1724
 		},
 		{
 			"key": "minecraft:ui.toast.out",
 			"name": "UI.TOAST.OUT",
-			"ordinal": 1724
+			"ordinal": 1725
 		},
 		{
 			"key": "minecraft:weather.rain",
 			"name": "WEATHER.RAIN",
-			"ordinal": 1725
+			"ordinal": 1726
 		},
 		{
 			"key": "minecraft:weather.rain.above",
 			"name": "WEATHER.RAIN.ABOVE",
-			"ordinal": 1726
+			"ordinal": 1727
 		}
 	]
 }
