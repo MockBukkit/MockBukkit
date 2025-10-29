@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class CaveVineDataMockTest
+class CaveVineDataMockTest
 {
 	private CaveVineDataMock caveVineData;
 
 	@BeforeEach
-	public void setup()
+	void setup()
 	{
 		this.caveVineData = new CaveVineDataMock(Material.CAVE_VINES);
 	}
