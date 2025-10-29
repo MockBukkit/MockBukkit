@@ -11,8 +11,8 @@ import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.PERSISTENT;
 public class LeavesDataMock extends BlockDataMock implements Leaves
 {
 
-	private final static int MAX_DISTANCE = 7;
-	private final static int MIN_DISTANCE = 1;
+	private static final int MAX_DISTANCE = 7;
+	private static final int MIN_DISTANCE = 1;
 
 	public LeavesDataMock(@NotNull Material material)
 	{

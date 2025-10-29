@@ -73,7 +73,7 @@ class LeavesDataMockTest
 				leavesData.setDistance(24);
 			});
 
-			assertThat(illegalArgumentException.getMessage(), matchesRegex("The distance must be >= *"));
+			assertThat(illegalArgumentException.getMessage(), matchesRegex("The distance must be <= *"));
 		}
 
 		@Test
@@ -84,7 +84,7 @@ class LeavesDataMockTest
 				leavesData.setDistance(-1);
 			});
 
-			assertThat(illegalArgumentException.getMessage(), matchesRegex("The distance must be <= *"));
+			assertThat(illegalArgumentException.getMessage(), matchesRegex("The distance must be >= *"));
 		}
 	}
 
