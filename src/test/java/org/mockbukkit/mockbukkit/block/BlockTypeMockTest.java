@@ -1273,7 +1273,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCaveVines()
 		{
 			CaveVines data = BlockType.CAVE_VINES.createBlockData();
