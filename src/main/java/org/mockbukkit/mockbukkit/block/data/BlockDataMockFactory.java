@@ -37,6 +37,7 @@ import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.block.data.type.Grindstone;
 import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
 import org.bukkit.block.data.type.Observer;
@@ -136,6 +137,7 @@ public final class BlockDataMockFactory
 			.put(Bisected.class, BisectedDataMock::new)
 			.put(GlassPane.class, GlassPaneDataMock::new)
 			.put(CaveVines.class, CaveVineDataMock::new)
+			.put(Leaves.class, LeavesDataMock::new )
 			.build();
 
 	/**

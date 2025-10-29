@@ -55,7 +55,7 @@ class LeavesDataMockTest
 		@Test
 		void getDistance()
 		{
-			assertThat(leavesData.getDistance(), is(0));
+			assertThat(leavesData.getDistance(), is(7));
 		}
 
 		@Test

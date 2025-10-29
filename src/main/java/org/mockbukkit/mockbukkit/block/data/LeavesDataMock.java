@@ -46,7 +46,7 @@ public class LeavesDataMock extends BlockDataMock implements Leaves
 	public void setDistance(int distance)
 	{
 		Preconditions.checkArgument(distance >= MIN_DISTANCE, "The distance must be >= %s", MIN_DISTANCE);
-		Preconditions.checkArgument(MAX_DISTANCE <= distance, "The distance must be <= %s", MAX_DISTANCE);
+		Preconditions.checkArgument(distance <= MAX_DISTANCE, "The distance must be <= %s", MAX_DISTANCE);
 
 		super.set(DISTANCE, distance);
 	}
