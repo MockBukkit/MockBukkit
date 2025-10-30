@@ -26,12 +26,6 @@ public class CaveVineDataMock extends AgeableDataMock implements CaveVines
 	}
 
 	@Override
-	public boolean isBerries()
-	{
-		return super.get(BERRIES);
-	}
-
-	@Override
 	public void setBerries(boolean berries)
 	{
 		super.set(BERRIES, berries);

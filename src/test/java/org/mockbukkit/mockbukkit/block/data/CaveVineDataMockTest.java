@@ -32,16 +32,10 @@ class CaveVineDataMockTest
 	}
 
 	@Test
-	void isBerries()
-	{
-		assertThat(caveVineData.isBerries(), is(false));
-	}
-
-	@Test
 	void setBerries()
 	{
 		caveVineData.setBerries(true);
-		assertThat(caveVineData.isBerries(), is(true));
+		assertThat(caveVineData.hasBerries(), is(true));
 	}
 
 	@Test
