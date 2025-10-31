@@ -11,8 +11,8 @@ import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.PERSISTENT;
 public class LeavesDataMock extends BlockDataMock implements Leaves
 {
 
-	private static final int MAX_DISTANCE = 7;
-	private static final int MIN_DISTANCE = 1;
+	private final int maxDistance = this.getLimitationValue(BlockDataLimitation.Type.MAX_DISTANCE);
+	private final int minDistance = this.getLimitationValue(BlockDataLimitation.Type.MIN_DISTANCE);
 
 	public LeavesDataMock(@NotNull Material material)
 	{
@@ -45,8 +45,8 @@ public class LeavesDataMock extends BlockDataMock implements Leaves
 	@Override
 	public void setDistance(int distance)
 	{
-		Preconditions.checkArgument(distance >= MIN_DISTANCE, "The distance must be >= %s", MIN_DISTANCE);
-		Preconditions.checkArgument(distance <= MAX_DISTANCE, "The distance must be <= %s", MAX_DISTANCE);
+		Preconditions.checkArgument(distance >= minDistance, "The distance must be >= %s", minDistance);
+		Preconditions.checkArgument(distance <= maxDistance, "The distance must be <= %s", maxDistance);
 
 		super.set(DISTANCE, distance);
 	}
@@ -54,13 +54,13 @@ public class LeavesDataMock extends BlockDataMock implements Leaves
 	@Override
 	public int getMaximumDistance()
 	{
-		return MAX_DISTANCE;
+		return maxDistance;
 	}
 
 	@Override
 	public int getMinimumDistance()
 	{
-		return MIN_DISTANCE;
+		return minDistance;
 	}
 
 	@Override

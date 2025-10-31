@@ -215,7 +215,7 @@ public enum BlockDataKey
 	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance),
 
 	PERSISTENT("persistent",Boolean::parseBoolean, Leaves.class::isInstance),
-	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance);
+	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance),
 
 	BERRIES("berries", Boolean::parseBoolean, CaveVines.class::isInstance);
 

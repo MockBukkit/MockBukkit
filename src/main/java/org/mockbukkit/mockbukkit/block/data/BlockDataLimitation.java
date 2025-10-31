@@ -90,6 +90,9 @@ public class BlockDataLimitation<T, U>
 						.collect(Collectors.toUnmodifiableSet())
 		));
 
+		public static final Type<Integer, Integer> MAX_DISTANCE = new Type<>("maxDistance", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MIN_DISTANCE = new Type<>("minDistance", jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
+
 		private final String key;
 		private final Function<JsonElement, BlockDataLimitation<T, U>> constructor;
 		private static final Map<String, Type<?, ?>> KEYS = compileKeys();
