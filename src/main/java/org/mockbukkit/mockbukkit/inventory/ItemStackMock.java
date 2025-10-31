@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,16 +19,19 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 
 @DelegateDeserialization(ItemStack.class)
@@ -50,6 +54,8 @@ public class ItemStackMock extends ItemStack
 
 		return new ItemStackMock(materialValue, amountValue);
 	}
+
+	private final Map<DataComponentType, Object> components = new HashMap<>();
 
 	private ItemType type = ItemTypeMock.AIR;
 	private int amount = 1;
@@ -414,6 +420,77 @@ public class ItemStackMock extends ItemStack
 	public @NotNull ItemStack clone()
 	{
 		return new ItemStackMock(this);
+	}
+
+	@Override
+	public @Nullable <T> T getData(DataComponentType.@NotNull Valued<T> type)
+	{
+		return (T) this.components.get(type);
+	}
+
+	@Override
+	public boolean hasData(@NotNull DataComponentType type)
+	{
+		return this.components.containsKey(type);
+	}
+
+	@Override
+	public @Unmodifiable Set<@NotNull DataComponentType> getDataTypes()
+	{
+		return this.components.keySet();
+	}
+
+	@Override
+	public <T> void setData(DataComponentType.@NotNull Valued<T> type, @org.jspecify.annotations.NonNull T value)
+	{
+		this.components.put(type, value);
+	}
+
+	@Override
+	public void setData(DataComponentType.@NotNull NonValued type)
+	{
+		this.components.put(type, null);
+	}
+
+	@Override
+	public void unsetData(@NotNull DataComponentType type)
+	{
+		this.components.remove(type);
+	}
+
+	@Override
+	public void resetData(@NotNull DataComponentType type)
+	{
+		// TODO:
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void copyDataFrom(@NotNull ItemStack source, @NotNull Predicate<@NotNull DataComponentType> filter)
+	{
+		Preconditions.checkArgument(source != null, "source cannot be null");
+		Preconditions.checkArgument(filter != null, "filter cannot be null");
+
+		if (isEmpty() || source.isEmpty())
+		{
+			return;
+		}
+
+		// TODO:
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isDataOverridden(@NotNull DataComponentType type)
+	{
+		return !isEmpty() && this.components.containsKey(type);
+	}
+
+	@Override
+	public boolean matchesWithoutData(@NotNull ItemStack item, @NotNull Set<@NotNull DataComponentType> excludeTypes, boolean ignoreCount)
+	{
+		// TODO:
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
