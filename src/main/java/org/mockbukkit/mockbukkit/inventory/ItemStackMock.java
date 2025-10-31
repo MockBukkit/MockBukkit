@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.ApiStatus;
@@ -31,6 +33,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 
@@ -229,6 +232,13 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
+	public @NotNull Component effectiveName()
+	{
+		// TODO:
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public int getMaxStackSize()
 	{
 		if (this.itemMeta == null)
@@ -353,6 +363,13 @@ public class ItemStackMock extends ItemStack
 	public @NotNull PersistentDataContainerView getPersistentDataContainer()
 	{
 		return pdcView;
+	}
+
+	@Override
+	public boolean editPersistentDataContainer(@NotNull Consumer<PersistentDataContainer> consumer)
+	{
+		// TODO:
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
