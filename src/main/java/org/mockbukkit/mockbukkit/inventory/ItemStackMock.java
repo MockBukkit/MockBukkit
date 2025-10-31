@@ -441,7 +441,7 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	public <T> void setData(DataComponentType.@NotNull Valued<T> type, @org.jspecify.annotations.NonNull T value)
+	public <T> void setData(DataComponentType.@NotNull Valued<T> type, @NonNull T value)
 	{
 		this.components.put(type, value);
 	}
