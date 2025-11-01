@@ -73,7 +73,10 @@
 		}
 	},
 	"minecraft:acacia_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -302,7 +305,10 @@
 	},
 	"minecraft:azalea": {},
 	"minecraft:azalea_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -707,7 +713,10 @@
 		}
 	},
 	"minecraft:birch_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -1505,7 +1514,10 @@
 		}
 	},
 	"minecraft:cherry_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -2442,7 +2454,10 @@
 		}
 	},
 	"minecraft:dark_oak_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -3254,7 +3269,10 @@
 	"minecraft:flower_pot": {},
 	"minecraft:flowering_azalea": {},
 	"minecraft:flowering_azalea_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -3823,7 +3841,10 @@
 		}
 	},
 	"minecraft:jungle_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -4584,7 +4605,10 @@
 		}
 	},
 	"minecraft:mangrove_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -5054,7 +5078,10 @@
 		}
 	},
 	"minecraft:oak_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -5548,7 +5575,10 @@
 		}
 	},
 	"minecraft:pale_oak_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
@@ -7189,7 +7219,10 @@
 		}
 	},
 	"minecraft:spruce_leaves": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxDistance": 7,
+			"minDistance": 1
+		},
 		"defaultStates": {
 			"distance": "7",
 			"persistent": false,
