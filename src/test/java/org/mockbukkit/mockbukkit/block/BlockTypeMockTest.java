@@ -658,7 +658,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenLeaves()
 		{
 			Leaves data = BlockType.OAK_LEAVES.createBlockData();
@@ -1272,7 +1271,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCaveVines()
 		{
 			CaveVines data = BlockType.CAVE_VINES.createBlockData();
