@@ -15,6 +15,7 @@ import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.Farmland;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.TurtleEgg;
 import org.jetbrains.annotations.NotNull;
@@ -166,6 +167,12 @@ public class MaterialDataGenerator implements DataGenerator
 			JsonArray array = new JsonArray();
 			creakingHeart.getAxes().stream().map(Enum::name).forEach(array::add);
 			obj.add("axes", array);
+		}
+
+		if (data instanceof Leaves leaves)
+		{
+			obj.addProperty("maxDistance", leaves.getMaximumDistance());
+			obj.addProperty("minDistance", leaves.getMinimumDistance());
 		}
 	}
 
