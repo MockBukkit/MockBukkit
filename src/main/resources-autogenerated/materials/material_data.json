@@ -104,6 +104,22 @@
 			"stage": "0"
 		}
 	},
+	"minecraft:acacia_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:acacia_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -422,6 +438,22 @@
 		}
 	},
 	"minecraft:bamboo_sapling": {},
+	"minecraft:bamboo_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:bamboo_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -710,6 +742,22 @@
 		},
 		"defaultStates": {
 			"stage": "0"
+		}
+	},
+	"minecraft:birch_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
 		}
 	},
 	"minecraft:birch_sign": {
@@ -1376,13 +1424,6 @@
 			"berries": false
 		}
 	},
-	"minecraft:chain": {
-		"allowedStates": {},
-		"defaultStates": {
-			"axis": "y",
-			"waterlogged": false
-		}
-	},
 	"minecraft:chain_command_block": {
 		"allowedStates": {
 			"faces": [
@@ -1502,6 +1543,22 @@
 		},
 		"defaultStates": {
 			"stage": "0"
+		}
+	},
+	"minecraft:cherry_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
 		}
 	},
 	"minecraft:cherry_sign": {
@@ -1809,12 +1866,51 @@
 			"waterlogged": true
 		}
 	},
+	"minecraft:copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:copper_block": {},
 	"minecraft:copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:copper_door": {
@@ -1834,13 +1930,36 @@
 			"powered": false
 		}
 	},
+	"minecraft:copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
 			"waterlogged": false
 		}
 	},
+	"minecraft:copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
+			"waterlogged": false
+		}
+	},
 	"minecraft:copper_ore": {},
+	"minecraft:copper_torch": {},
 	"minecraft:copper_trapdoor": {
 		"allowedStates": {
 			"faces": [
@@ -1856,6 +1975,19 @@
 			"open": false,
 			"powered": false,
 			"waterlogged": false
+		}
+	},
+	"minecraft:copper_wall_torch": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north"
 		}
 	},
 	"minecraft:cornflower": {},
@@ -1997,6 +2129,22 @@
 		}
 	},
 	"minecraft:crimson_roots": {},
+	"minecraft:crimson_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:crimson_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -2335,6 +2483,22 @@
 		},
 		"defaultStates": {
 			"stage": "0"
+		}
+	},
+	"minecraft:dark_oak_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
 		}
 	},
 	"minecraft:dark_oak_sign": {
@@ -2895,11 +3059,50 @@
 	},
 	"minecraft:exposed_chiseled_copper": {},
 	"minecraft:exposed_copper": {},
+	"minecraft:exposed_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:exposed_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:exposed_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:exposed_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:exposed_copper_door": {
@@ -2919,9 +3122,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:exposed_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:exposed_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:exposed_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -2963,6 +3188,23 @@
 			"facing": "north",
 			"half": "bottom",
 			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:exposed_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
 			"waterlogged": false
 		}
 	},
@@ -3458,6 +3700,13 @@
 		}
 	},
 	"minecraft:iron_block": {},
+	"minecraft:iron_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
 	"minecraft:iron_door": {
 		"allowedStates": {
 			"faces": [
@@ -3621,6 +3870,22 @@
 		},
 		"defaultStates": {
 			"stage": "0"
+		}
+	},
+	"minecraft:jungle_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
 		}
 	},
 	"minecraft:jungle_sign": {
@@ -4381,6 +4646,22 @@
 			"waterlogged": false
 		}
 	},
+	"minecraft:mangrove_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:mangrove_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -4828,6 +5109,22 @@
 			"stage": "0"
 		}
 	},
+	"minecraft:oak_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:oak_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -5036,11 +5333,50 @@
 	"minecraft:oxeye_daisy": {},
 	"minecraft:oxidized_chiseled_copper": {},
 	"minecraft:oxidized_copper": {},
+	"minecraft:oxidized_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:oxidized_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:oxidized_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:oxidized_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:oxidized_copper_door": {
@@ -5060,9 +5396,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:oxidized_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:oxidized_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:oxidized_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -5104,6 +5462,23 @@
 			"facing": "north",
 			"half": "bottom",
 			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:oxidized_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
 			"waterlogged": false
 		}
 	},
@@ -5229,6 +5604,22 @@
 		},
 		"defaultStates": {
 			"stage": "0"
+		}
+	},
+	"minecraft:pale_oak_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
 		}
 	},
 	"minecraft:pale_oak_sign": {
@@ -6859,6 +7250,22 @@
 			"stage": "0"
 		}
 	},
+	"minecraft:spruce_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:spruce_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -7593,6 +8000,22 @@
 		}
 	},
 	"minecraft:warped_roots": {},
+	"minecraft:warped_shelf": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"powered": false,
+			"side_chain": "unconnected",
+			"waterlogged": false
+		}
+	},
 	"minecraft:warped_sign": {
 		"allowedStates": {},
 		"defaultStates": {
@@ -7694,12 +8117,51 @@
 		}
 	},
 	"minecraft:waxed_chiseled_copper": {},
+	"minecraft:waxed_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:waxed_copper_block": {},
 	"minecraft:waxed_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:waxed_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:waxed_copper_door": {
@@ -7719,9 +8181,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:waxed_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:waxed_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -7768,11 +8252,50 @@
 	},
 	"minecraft:waxed_exposed_chiseled_copper": {},
 	"minecraft:waxed_exposed_copper": {},
+	"minecraft:waxed_exposed_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:waxed_exposed_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:waxed_exposed_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_exposed_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:waxed_exposed_copper_door": {
@@ -7792,9 +8315,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:waxed_exposed_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:waxed_exposed_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_exposed_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -7839,13 +8384,86 @@
 			"waterlogged": false
 		}
 	},
+	"minecraft:waxed_exposed_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
+			"waterlogged": false
+		}
+	},
 	"minecraft:waxed_oxidized_chiseled_copper": {},
 	"minecraft:waxed_oxidized_copper": {},
+	"minecraft:waxed_oxidized_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:waxed_oxidized_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:waxed_oxidized_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_oxidized_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:waxed_oxidized_copper_door": {
@@ -7865,9 +8483,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:waxed_oxidized_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:waxed_oxidized_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_oxidized_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -7912,13 +8552,69 @@
 			"waterlogged": false
 		}
 	},
+	"minecraft:waxed_oxidized_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
+			"waterlogged": false
+		}
+	},
 	"minecraft:waxed_weathered_chiseled_copper": {},
 	"minecraft:waxed_weathered_copper": {},
+	"minecraft:waxed_weathered_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:waxed_weathered_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:waxed_weathered_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_weathered_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:waxed_weathered_copper_door": {
@@ -7938,9 +8634,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:waxed_weathered_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:waxed_weathered_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:waxed_weathered_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -7985,13 +8703,69 @@
 			"waterlogged": false
 		}
 	},
+	"minecraft:waxed_weathered_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
+			"waterlogged": false
+		}
+	},
 	"minecraft:weathered_chiseled_copper": {},
 	"minecraft:weathered_copper": {},
+	"minecraft:weathered_copper_bars": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"east": false,
+			"north": false,
+			"south": false,
+			"waterlogged": false,
+			"west": false
+		}
+	},
 	"minecraft:weathered_copper_bulb": {
 		"allowedStates": {},
 		"defaultStates": {
 			"lit": false,
 			"powered": false
+		}
+	},
+	"minecraft:weathered_copper_chain": {
+		"allowedStates": {},
+		"defaultStates": {
+			"axis": "y",
+			"waterlogged": false
+		}
+	},
+	"minecraft:weathered_copper_chest": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"type": "single",
+			"waterlogged": false
 		}
 	},
 	"minecraft:weathered_copper_door": {
@@ -8011,9 +8785,31 @@
 			"powered": false
 		}
 	},
+	"minecraft:weathered_copper_golem_statue": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"copper_golem_pose": "standing",
+			"facing": "north",
+			"waterlogged": false
+		}
+	},
 	"minecraft:weathered_copper_grate": {
 		"allowedStates": {},
 		"defaultStates": {
+			"waterlogged": false
+		}
+	},
+	"minecraft:weathered_copper_lantern": {
+		"allowedStates": {},
+		"defaultStates": {
+			"hanging": false,
 			"waterlogged": false
 		}
 	},
@@ -8055,6 +8851,23 @@
 			"facing": "north",
 			"half": "bottom",
 			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:weathered_lightning_rod": {
+		"allowedStates": {
+			"faces": [
+				"DOWN",
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"UP",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "up",
+			"powered": false,
 			"waterlogged": false
 		}
 	},

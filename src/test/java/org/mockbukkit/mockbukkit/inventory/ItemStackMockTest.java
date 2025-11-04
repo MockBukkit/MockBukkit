@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -771,6 +773,73 @@ class ItemStackMockTest
 		Map<String, Object> serialized = item.serialize();
 		ItemStackMock deserialized = (ItemStackMock) ItemStackMock.deserialize(serialized);
 		assertEquals(item, deserialized);
+	}
+
+	@Nested
+	class SetData
+	{
+		private final ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		@Test
+		void givenValued()
+		{
+			assertFalse(itemStack.hasData(DataComponentTypes.CUSTOM_NAME));
+			assertNull(itemStack.getData(DataComponentTypes.CUSTOM_NAME));
+
+			Component name = Component.text("test");
+			itemStack.setData(DataComponentTypes.CUSTOM_NAME, name);
+
+			assertTrue(itemStack.hasData(DataComponentTypes.CUSTOM_NAME));
+			assertEquals(name, itemStack.getData(DataComponentTypes.CUSTOM_NAME));
+		}
+
+		@Test
+		void givenUnvalue()
+		{
+			assertFalse(itemStack.hasData(DataComponentTypes.UNBREAKABLE));
+
+			itemStack.setData(DataComponentTypes.UNBREAKABLE);
+
+			assertTrue(itemStack.hasData(DataComponentTypes.UNBREAKABLE));
+		}
+
+		@Test
+		void givenValueRemoved()
+		{
+			Component name = Component.text("test");
+			itemStack.setData(DataComponentTypes.CUSTOM_NAME, name);
+
+			assertTrue(itemStack.hasData(DataComponentTypes.CUSTOM_NAME));
+
+			itemStack.unsetData(DataComponentTypes.CUSTOM_NAME);
+			assertFalse(itemStack.hasData(DataComponentTypes.CUSTOM_NAME));
+		}
+
+	}
+
+	@Nested
+	class GetDataTypes
+	{
+		private final ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+
+		@Test
+		void givenDefaultList()
+		{
+			var actual = itemStack.getDataTypes();
+
+			assertEquals(Collections.emptySet(), actual);
+		}
+
+		@Test
+		void givenSimpleList()
+		{
+			itemStack.setData(DataComponentTypes.CUSTOM_NAME, Component.text("test"));
+			itemStack.setData(DataComponentTypes.DAMAGE, 200);
+
+			var actual = itemStack.getDataTypes();
+
+			assertEquals(Set.of(DataComponentTypes.CUSTOM_NAME, DataComponentTypes.DAMAGE), actual);
+		}
 	}
 
 }

@@ -87,6 +87,32 @@
 	{
 		"category": "MISC",
 		"cookingTime": 100,
+		"experience": 0.1,
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:copper_axe",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_hoe",
+				"minecraft:copper_horse_armor",
+				"minecraft:copper_leggings",
+				"minecraft:copper_pickaxe",
+				"minecraft:copper_shovel",
+				"minecraft:copper_sword"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:copper_nugget_from_blasting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_nugget"
+		}
+	},
+	{
+		"category": "MISC",
+		"cookingTime": 100,
 		"experience": 1.0,
 		"group": "diamond",
 		"input": {

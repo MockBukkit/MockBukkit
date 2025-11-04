@@ -941,9 +941,9 @@ class BlockTypeMockTest
 
 		@Test
 		@Disabled("Not implemented yet #1088")
-		void givenChain()
+		void givenIronChain()
 		{
-			Chain data = BlockType.CHAIN.createBlockData();
+			Chain data = BlockType.IRON_CHAIN.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Chain.class, data);
 		}
