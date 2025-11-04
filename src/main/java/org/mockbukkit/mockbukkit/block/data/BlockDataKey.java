@@ -27,6 +27,7 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
+import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
@@ -38,13 +39,16 @@ import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
+import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.SculkSensor;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
@@ -149,6 +153,8 @@ public enum BlockDataKey
 	REDSTONE_NORTH("north", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 
+	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class), SculkSensor.class::isInstance),
+
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
 
@@ -184,6 +190,7 @@ public enum BlockDataKey
 	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
 	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
 
+	CHARGES("charges", Integer::parseInt, RespawnAnchor.class::isInstance),
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
 	MODE("mode", EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance),
@@ -214,8 +221,12 @@ public enum BlockDataKey
 
 	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
-	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance);
+	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance),
 
+	PERSISTENT("persistent",Boolean::parseBoolean, Leaves.class::isInstance),
+	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance),
+
+	BERRIES("berries", Boolean::parseBoolean, CaveVines.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
 

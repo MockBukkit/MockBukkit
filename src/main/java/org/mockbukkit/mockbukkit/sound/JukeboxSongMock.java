@@ -1,10 +1,13 @@
 package org.mockbukkit.mockbukkit.sound;
 
 import com.google.gson.JsonObject;
+import net.kyori.adventure.text.Component;
 import org.bukkit.JukeboxSong;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class JukeboxSongMock implements JukeboxSong
 {
@@ -31,6 +34,30 @@ public class JukeboxSongMock implements JukeboxSong
 	public @NotNull String getTranslationKey()
 	{
 		return this.translationKey;
+	}
+
+	@Override
+	public Sound getSound()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Component getDescription()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getLengthInSeconds()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getComparatorOutput()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

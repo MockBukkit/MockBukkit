@@ -115,6 +115,9 @@
 			"key": "minecraft:time_trying_to_reach_admire_item"
 		},
 		{
+			"key": "minecraft:transport_items_cooldown_ticks"
+		},
+		{
 			"key": "minecraft:universal_anger"
 		},
 		{

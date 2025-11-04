@@ -1,6 +1,11 @@
 {
 	"replace": false,
 	"values": [
+		"minecraft:copper_axe",
+		"minecraft:copper_hoe",
+		"minecraft:copper_pickaxe",
+		"minecraft:copper_shovel",
+		"minecraft:copper_sword",
 		"minecraft:diamond_axe",
 		"minecraft:diamond_hoe",
 		"minecraft:diamond_pickaxe",

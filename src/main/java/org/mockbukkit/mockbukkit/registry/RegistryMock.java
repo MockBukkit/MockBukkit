@@ -32,6 +32,7 @@ import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfVariantMock;
 import org.mockbukkit.mockbukkit.event.GameEventMock;
+import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.fluid.FluidMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
@@ -250,17 +251,24 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		if (keyedMap.isEmpty())
 		{
-			for (JsonElement structureJSONElement : keyedData)
+			try
 			{
-				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
-				T tObject = constructor.apply(structureJSONObject);
-				/*
-				 * putIfAbsent fixes the edge case scenario where the constructor initializes class loading of the keyed object.
-				 * During this initialization, the loadIfEmpty method might be triggered again, leading to potential duplicate
-				 * instances of each keyed object. By using putIfAbsent, we ensure that only one instance of each keyed object
-				 * is added to the map, preventing duplicates.
-				 */
-				keyedMap.putIfAbsent(tObject.getKey(), tObject);
+				for (JsonElement structureJSONElement : keyedData)
+				{
+					JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
+					T tObject = constructor.apply(structureJSONObject);
+
+					/*
+					 * putIfAbsent fixes the edge case scenario where the constructor initializes class loading of the keyed object.
+					 * During this initialization, the loadIfEmpty method might be triggered again, leading to potential duplicate
+					 * instances of each keyed object. By using putIfAbsent, we ensure that only one instance of each keyed object
+					 * is added to the map, preventing duplicates.
+					 */
+					keyedMap.putIfAbsent(tObject.getKey(), tObject);
+				}
+			} catch (ExceptionInInitializerError e)
+			{
+				throw new IncompatiblePaperVersionException(e);
 			}
 		}
 	}
