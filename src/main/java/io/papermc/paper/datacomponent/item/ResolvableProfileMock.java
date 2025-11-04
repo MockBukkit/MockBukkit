@@ -4,9 +4,12 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import net.kyori.adventure.text.object.PlayerHeadObjectContents;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Collection;
@@ -14,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 @NullMarked
 @SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
@@ -22,11 +26,29 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 {
 
 	@Override
+	public boolean dynamic()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public CompletableFuture<PlayerProfile> resolve()
 	{
 		PlayerProfileMock playerProfileMock = new PlayerProfileMock(name, uuid);
 		playerProfileMock.setProperties(properties);
 		return CompletableFuture.completedFuture(playerProfileMock);
+	}
+
+	@Override
+	public SkinPatch skinPatch()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void applySkinToPlayerHeadContents(PlayerHeadObjectContents.@NotNull Builder builder)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	static class BuilderMock implements Builder
@@ -74,6 +96,18 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 			Preconditions.checkNotNull(properties);
 			properties.forEach(this::addProperty);
 			return this;
+		}
+
+		@Override
+		public Builder skinPatch(SkinPatch patch)
+		{
+			throw new UnimplementedOperationException();
+		}
+
+		@Override
+		public Builder skinPatch(Consumer<SkinPatchBuilder> configure)
+		{
+			throw new UnimplementedOperationException();
 		}
 
 		@Override

@@ -18,6 +18,7 @@ import org.bukkit.map.MapCursor;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.stream.Collectors;
 
@@ -145,6 +146,18 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	public ResolvableProfile.Builder resolvableProfile()
 	{
 		return new ResolvableProfileMock.BuilderMock();
+	}
+
+	@Override
+	public ResolvableProfile.SkinPatchBuilder skinPatch()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ResolvableProfile.SkinPatch emptySkinPatch()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
