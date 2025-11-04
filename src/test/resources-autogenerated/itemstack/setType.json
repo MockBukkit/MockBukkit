@@ -145,6 +145,19 @@
 		}
 	},
 	{
+		"key": "minecraft:acacia_shelf",
+		"result": {
+			"material": "minecraft:acacia_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:acacia_sign",
 		"result": {
 			"material": "minecraft:acacia_sign",
@@ -728,6 +741,19 @@
 		}
 	},
 	{
+		"key": "minecraft:bamboo_shelf",
+		"result": {
+			"material": "minecraft:bamboo_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:bamboo_sign",
 		"result": {
 			"material": "minecraft:bamboo_sign",
@@ -1126,6 +1152,19 @@
 			"material": "minecraft:birch_sapling",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:birch_shelf",
+		"result": {
+			"material": "minecraft:birch_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -2597,18 +2636,6 @@
 		}
 	},
 	{
-		"key": "minecraft:chain",
-		"result": {
-			"material": "minecraft:chain",
-			"meta": [
-				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.Damageable",
-				"org.bukkit.inventory.meta.ItemMeta",
-				"org.bukkit.inventory.meta.Repairable"
-			]
-		}
-	},
-	{
 		"key": "minecraft:chain_command_block",
 		"result": {
 			"material": "minecraft:chain_command_block",
@@ -2824,6 +2851,19 @@
 			"material": "minecraft:cherry_sapling",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cherry_shelf",
+		"result": {
+			"material": "minecraft:cherry_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -3590,10 +3630,47 @@
 		}
 	},
 	{
+		"key": "minecraft:copper_axe",
+		"result": {
+			"material": "minecraft:copper_axe",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_bars",
+		"result": {
+			"material": "minecraft:copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:copper_block",
 		"result": {
 			"material": "minecraft:copper_block",
 			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_boots",
+		"result": {
+			"material": "minecraft:copper_boots",
+			"meta": [
+				"org.bukkit.inventory.meta.ArmorMeta",
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
@@ -3614,6 +3691,44 @@
 		}
 	},
 	{
+		"key": "minecraft:copper_chain",
+		"result": {
+			"material": "minecraft:copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_chest",
+		"result": {
+			"material": "minecraft:copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_chestplate",
+		"result": {
+			"material": "minecraft:copper_chestplate",
+			"meta": [
+				"org.bukkit.inventory.meta.ArmorMeta",
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:copper_door",
 		"result": {
 			"material": "minecraft:copper_door",
@@ -3626,9 +3741,72 @@
 		}
 	},
 	{
+		"key": "minecraft:copper_golem_spawn_egg",
+		"result": {
+			"material": "minecraft:copper_golem_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_golem_statue",
+		"result": {
+			"material": "minecraft:copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:copper_grate",
 		"result": {
 			"material": "minecraft:copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_helmet",
+		"result": {
+			"material": "minecraft:copper_helmet",
+			"meta": [
+				"org.bukkit.inventory.meta.ArmorMeta",
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_hoe",
+		"result": {
+			"material": "minecraft:copper_hoe",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_horse_armor",
+		"result": {
+			"material": "minecraft:copper_horse_armor",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -3650,9 +3828,94 @@
 		}
 	},
 	{
+		"key": "minecraft:copper_lantern",
+		"result": {
+			"material": "minecraft:copper_lantern",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_leggings",
+		"result": {
+			"material": "minecraft:copper_leggings",
+			"meta": [
+				"org.bukkit.inventory.meta.ArmorMeta",
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_nugget",
+		"result": {
+			"material": "minecraft:copper_nugget",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:copper_ore",
 		"result": {
 			"material": "minecraft:copper_ore",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_pickaxe",
+		"result": {
+			"material": "minecraft:copper_pickaxe",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_shovel",
+		"result": {
+			"material": "minecraft:copper_shovel",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_sword",
+		"result": {
+			"material": "minecraft:copper_sword",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_torch",
+		"result": {
+			"material": "minecraft:copper_torch",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -3671,6 +3934,12 @@
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
 			]
+		}
+	},
+	{
+		"key": "minecraft:copper_wall_torch",
+		"result": {
+			"material": "minecraft:air"
 		}
 	},
 	{
@@ -3980,6 +4249,19 @@
 			"material": "minecraft:crimson_roots",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:crimson_shelf",
+		"result": {
+			"material": "minecraft:crimson_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -4539,6 +4821,19 @@
 			"material": "minecraft:dark_oak_sapling",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:dark_oak_shelf",
+		"result": {
+			"material": "minecraft:dark_oak_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -5911,11 +6206,48 @@
 		}
 	},
 	{
+		"key": "minecraft:exposed_copper_bars",
+		"result": {
+			"material": "minecraft:exposed_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:exposed_copper_bulb",
 		"result": {
 			"material": "minecraft:exposed_copper_bulb",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:exposed_copper_chain",
+		"result": {
+			"material": "minecraft:exposed_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:exposed_copper_chest",
+		"result": {
+			"material": "minecraft:exposed_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -5935,9 +6267,34 @@
 		}
 	},
 	{
+		"key": "minecraft:exposed_copper_golem_statue",
+		"result": {
+			"material": "minecraft:exposed_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:exposed_copper_grate",
 		"result": {
 			"material": "minecraft:exposed_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:exposed_copper_lantern",
+		"result": {
+			"material": "minecraft:exposed_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -5986,6 +6343,18 @@
 		"key": "minecraft:exposed_cut_copper_stairs",
 		"result": {
 			"material": "minecraft:exposed_cut_copper_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:exposed_lightning_rod",
+		"result": {
+			"material": "minecraft:exposed_lightning_rod",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -7752,6 +8121,18 @@
 		}
 	},
 	{
+		"key": "minecraft:iron_chain",
+		"result": {
+			"material": "minecraft:iron_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:iron_chestplate",
 		"result": {
 			"material": "minecraft:iron_chestplate",
@@ -8112,6 +8493,19 @@
 			"material": "minecraft:jungle_sapling",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:jungle_shelf",
+		"result": {
+			"material": "minecraft:jungle_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9573,6 +9967,19 @@
 		}
 	},
 	{
+		"key": "minecraft:mangrove_shelf",
+		"result": {
+			"material": "minecraft:mangrove_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:mangrove_sign",
 		"result": {
 			"material": "minecraft:mangrove_sign",
@@ -10799,6 +11206,19 @@
 		}
 	},
 	{
+		"key": "minecraft:oak_shelf",
+		"result": {
+			"material": "minecraft:oak_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:oak_sign",
 		"result": {
 			"material": "minecraft:oak_sign",
@@ -11202,11 +11622,48 @@
 		}
 	},
 	{
+		"key": "minecraft:oxidized_copper_bars",
+		"result": {
+			"material": "minecraft:oxidized_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:oxidized_copper_bulb",
 		"result": {
 			"material": "minecraft:oxidized_copper_bulb",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:oxidized_copper_chain",
+		"result": {
+			"material": "minecraft:oxidized_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:oxidized_copper_chest",
+		"result": {
+			"material": "minecraft:oxidized_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -11226,9 +11683,34 @@
 		}
 	},
 	{
+		"key": "minecraft:oxidized_copper_golem_statue",
+		"result": {
+			"material": "minecraft:oxidized_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:oxidized_copper_grate",
 		"result": {
 			"material": "minecraft:oxidized_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:oxidized_copper_lantern",
+		"result": {
+			"material": "minecraft:oxidized_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -11277,6 +11759,18 @@
 		"key": "minecraft:oxidized_cut_copper_stairs",
 		"result": {
 			"material": "minecraft:oxidized_cut_copper_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:oxidized_lightning_rod",
+		"result": {
+			"material": "minecraft:oxidized_lightning_rod",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -11496,6 +11990,19 @@
 			"material": "minecraft:pale_oak_sapling",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:pale_oak_shelf",
+		"result": {
+			"material": "minecraft:pale_oak_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -15189,6 +15696,19 @@
 		}
 	},
 	{
+		"key": "minecraft:spruce_shelf",
+		"result": {
+			"material": "minecraft:spruce_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:spruce_sign",
 		"result": {
 			"material": "minecraft:spruce_sign",
@@ -16751,6 +17271,19 @@
 		}
 	},
 	{
+		"key": "minecraft:warped_shelf",
+		"result": {
+			"material": "minecraft:warped_shelf",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:warped_sign",
 		"result": {
 			"material": "minecraft:warped_sign",
@@ -16872,6 +17405,18 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_copper_bars",
+		"result": {
+			"material": "minecraft:waxed_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_copper_block",
 		"result": {
 			"material": "minecraft:waxed_copper_block",
@@ -16896,6 +17441,31 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_copper_chain",
+		"result": {
+			"material": "minecraft:waxed_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_copper_chest",
+		"result": {
+			"material": "minecraft:waxed_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_copper_door",
 		"result": {
 			"material": "minecraft:waxed_copper_door",
@@ -16908,9 +17478,34 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_copper_golem_statue",
+		"result": {
+			"material": "minecraft:waxed_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_copper_grate",
 		"result": {
 			"material": "minecraft:waxed_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_copper_lantern",
+		"result": {
+			"material": "minecraft:waxed_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -16992,11 +17587,48 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_exposed_copper_bars",
+		"result": {
+			"material": "minecraft:waxed_exposed_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_exposed_copper_bulb",
 		"result": {
 			"material": "minecraft:waxed_exposed_copper_bulb",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_exposed_copper_chain",
+		"result": {
+			"material": "minecraft:waxed_exposed_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_exposed_copper_chest",
+		"result": {
+			"material": "minecraft:waxed_exposed_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17016,9 +17648,34 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_exposed_copper_golem_statue",
+		"result": {
+			"material": "minecraft:waxed_exposed_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_exposed_copper_grate",
 		"result": {
 			"material": "minecraft:waxed_exposed_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_exposed_copper_lantern",
+		"result": {
+			"material": "minecraft:waxed_exposed_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -17076,6 +17733,30 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_exposed_lightning_rod",
+		"result": {
+			"material": "minecraft:waxed_exposed_lightning_rod",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_lightning_rod",
+		"result": {
+			"material": "minecraft:waxed_lightning_rod",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_oxidized_chiseled_copper",
 		"result": {
 			"material": "minecraft:waxed_oxidized_chiseled_copper",
@@ -17100,11 +17781,48 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_oxidized_copper_bars",
+		"result": {
+			"material": "minecraft:waxed_oxidized_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_oxidized_copper_bulb",
 		"result": {
 			"material": "minecraft:waxed_oxidized_copper_bulb",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_oxidized_copper_chain",
+		"result": {
+			"material": "minecraft:waxed_oxidized_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_oxidized_copper_chest",
+		"result": {
+			"material": "minecraft:waxed_oxidized_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17124,9 +17842,34 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_oxidized_copper_golem_statue",
+		"result": {
+			"material": "minecraft:waxed_oxidized_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_oxidized_copper_grate",
 		"result": {
 			"material": "minecraft:waxed_oxidized_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_oxidized_copper_lantern",
+		"result": {
+			"material": "minecraft:waxed_oxidized_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -17184,6 +17927,18 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_oxidized_lightning_rod",
+		"result": {
+			"material": "minecraft:waxed_oxidized_lightning_rod",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_weathered_chiseled_copper",
 		"result": {
 			"material": "minecraft:waxed_weathered_chiseled_copper",
@@ -17208,11 +17963,48 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_weathered_copper_bars",
+		"result": {
+			"material": "minecraft:waxed_weathered_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_weathered_copper_bulb",
 		"result": {
 			"material": "minecraft:waxed_weathered_copper_bulb",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_weathered_copper_chain",
+		"result": {
+			"material": "minecraft:waxed_weathered_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_weathered_copper_chest",
+		"result": {
+			"material": "minecraft:waxed_weathered_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17232,9 +18024,34 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_weathered_copper_golem_statue",
+		"result": {
+			"material": "minecraft:waxed_weathered_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:waxed_weathered_copper_grate",
 		"result": {
 			"material": "minecraft:waxed_weathered_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:waxed_weathered_copper_lantern",
+		"result": {
+			"material": "minecraft:waxed_weathered_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -17292,6 +18109,18 @@
 		}
 	},
 	{
+		"key": "minecraft:waxed_weathered_lightning_rod",
+		"result": {
+			"material": "minecraft:waxed_weathered_lightning_rod",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:wayfinder_armor_trim_smithing_template",
 		"result": {
 			"material": "minecraft:wayfinder_armor_trim_smithing_template",
@@ -17328,11 +18157,48 @@
 		}
 	},
 	{
+		"key": "minecraft:weathered_copper_bars",
+		"result": {
+			"material": "minecraft:weathered_copper_bars",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:weathered_copper_bulb",
 		"result": {
 			"material": "minecraft:weathered_copper_bulb",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:weathered_copper_chain",
+		"result": {
+			"material": "minecraft:weathered_copper_chain",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:weathered_copper_chest",
+		"result": {
+			"material": "minecraft:weathered_copper_chest",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -17352,9 +18218,34 @@
 		}
 	},
 	{
+		"key": "minecraft:weathered_copper_golem_statue",
+		"result": {
+			"material": "minecraft:weathered_copper_golem_statue",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:weathered_copper_grate",
 		"result": {
 			"material": "minecraft:weathered_copper_grate",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:weathered_copper_lantern",
+		"result": {
+			"material": "minecraft:weathered_copper_lantern",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -17403,6 +18294,18 @@
 		"key": "minecraft:weathered_cut_copper_stairs",
 		"result": {
 			"material": "minecraft:weathered_cut_copper_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:weathered_lightning_rod",
+		"result": {
+			"material": "minecraft:weathered_lightning_rod",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",

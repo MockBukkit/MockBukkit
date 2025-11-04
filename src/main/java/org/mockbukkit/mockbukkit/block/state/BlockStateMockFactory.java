@@ -21,9 +21,12 @@ public class BlockStateMockFactory
 			.put(Tag.ALL_HANGING_SIGNS, with(HangingSignStateMock::new, HangingSignStateMock::new))
 			.put(Tag.BANNERS, with(BannerStateMock::new, BannerStateMock::new))
 			.put(Tag.BEDS, with(BedStateMock::new, BedStateMock::new))
+			.put(Tag.COPPER_CHESTS, with(ChestStateMock::new, ChestStateMock::new))
+			.put(Tag.COPPER_GOLEM_STATUES, with(CopperGolemStatueStateMock::new, CopperGolemStatueStateMock::new))
 			.put(Tag.SIGNS, with(SignStateMock::new, SignStateMock::new))
 			.put(Tag.SHULKER_BOXES, with(ShulkerBoxStateMock::new, ShulkerBoxStateMock::new))
 			.put(MaterialTags.SKULLS, with(SkullStateMock::new, SkullStateMock::new))
+			.put(Tag.WOODEN_SHELVES, with(ShelfStateMock::new, ShelfStateMock::new))
 			.build();
 
 	/**

@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +34,14 @@ public class MaterialTagMock extends BaseTagMock<Material>
 
 			NamespacedKey minecraftKey = NamespacedKey.fromString(primitiveElement.getAsString());
 			Preconditions.checkArgument(minecraftKey != null, "The value is not a valid namespaced key");
-			materials.add(Material.valueOf(minecraftKey.value().toUpperCase(Locale.ROOT)));
+
+			try
+			{
+				materials.add(Material.valueOf(minecraftKey.value().toUpperCase(Locale.ROOT)));
+			} catch (IllegalArgumentException e)
+			{
+				throw new IncompatiblePaperVersionException(e);
+			}
 		}
 
 		return new MaterialTagMock(key, materials);

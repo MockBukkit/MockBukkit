@@ -433,6 +433,43 @@
 			"typed": "minecraft:acacia_sapling"
 		},
 		{
+			"blockType": "minecraft:acacia_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:acacia_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:acacia_shelf",
+			"material": "minecraft:acacia_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.acacia_shelf",
+			"typed": "minecraft:acacia_shelf"
+		},
+		{
 			"blockType": "minecraft:acacia_sign",
 			"burnDuration": 200,
 			"compostable": false,
@@ -694,6 +731,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -1234,6 +1272,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -1410,6 +1449,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -2085,6 +2125,43 @@
 			"typed": "minecraft:bamboo_raft"
 		},
 		{
+			"blockType": "minecraft:bamboo_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:bamboo_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:bamboo_shelf",
+			"material": "minecraft:bamboo_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.bamboo_shelf",
+			"typed": "minecraft:bamboo_shelf"
+		},
+		{
 			"blockType": "minecraft:bamboo_sign",
 			"burnDuration": 200,
 			"compostable": false,
@@ -2349,6 +2426,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -2494,6 +2572,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -3209,6 +3288,43 @@
 			],
 			"translationKey": "block.minecraft.birch_sapling",
 			"typed": "minecraft:birch_sapling"
+		},
+		{
+			"blockType": "minecraft:birch_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:birch_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:birch_shelf",
+			"material": "minecraft:birch_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.birch_shelf",
+			"typed": "minecraft:birch_shelf"
 		},
 		{
 			"blockType": "minecraft:birch_sign",
@@ -4230,6 +4346,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -4916,6 +5033,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -5454,6 +5572,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -6899,6 +7018,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -7157,6 +7277,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -7228,6 +7349,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -7250,42 +7372,6 @@
 			],
 			"translationKey": "item.minecraft.cave_spider_spawn_egg",
 			"typed": "minecraft:cave_spider_spawn_egg"
-		},
-		{
-			"blockType": "minecraft:chain",
-			"burnDuration": 0,
-			"compostable": false,
-			"createItemStack": {
-				"amount": 1,
-				"type": "minecraft:chain"
-			},
-			"creativeCategory": "BUILDING_BLOCKS",
-			"defaultDataTypes": [
-				"minecraft:attribute_modifiers",
-				"minecraft:break_sound",
-				"minecraft:enchantments",
-				"minecraft:item_model",
-				"minecraft:item_name",
-				"minecraft:lore",
-				"minecraft:max_stack_size",
-				"minecraft:rarity",
-				"minecraft:repair_cost",
-				"minecraft:tooltip_display"
-			],
-			"edible": false,
-			"fuel": false,
-			"itemRarity": "COMMON",
-			"key": "minecraft:chain",
-			"material": "minecraft:chain",
-			"maxDurability": 0,
-			"maxStackSize": 64,
-			"metaClass": "ItemMeta",
-			"record": false,
-			"requiredFeatures": [
-				"minecraft:vanilla"
-			],
-			"translationKey": "block.minecraft.chain",
-			"typed": "minecraft:chain"
 		},
 		{
 			"blockType": "minecraft:chain_command_block",
@@ -7951,6 +8037,43 @@
 			"typed": "minecraft:cherry_sapling"
 		},
 		{
+			"blockType": "minecraft:cherry_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cherry_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cherry_shelf",
+			"material": "minecraft:cherry_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cherry_shelf",
+			"typed": "minecraft:cherry_shelf"
+		},
+		{
 			"blockType": "minecraft:cherry_sign",
 			"burnDuration": 200,
 			"compostable": false,
@@ -8251,6 +8374,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -9620,6 +9744,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -10155,6 +10280,83 @@
 			"typed": "minecraft:cookie"
 		},
 		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_axe"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tool",
+				"minecraft:tooltip_display",
+				"minecraft:weapon"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_axe",
+			"material": "minecraft:copper_axe",
+			"maxDurability": 190,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_axe",
+			"typed": "minecraft:copper_axe"
+		},
+		{
+			"blockType": "minecraft:copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_bars",
+			"material": "minecraft:copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.copper_bars",
+			"typed": "minecraft:copper_bars"
+		},
+		{
 			"blockType": "minecraft:copper_block",
 			"burnDuration": 0,
 			"compostable": false,
@@ -10189,6 +10391,46 @@
 			],
 			"translationKey": "block.minecraft.copper_block",
 			"typed": "minecraft:copper_block"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_boots"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:equippable",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_boots",
+			"material": "minecraft:copper_boots",
+			"maxDurability": 143,
+			"maxStackSize": 1,
+			"metaClass": "ArmorMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_boots",
+			"typed": "minecraft:copper_boots"
 		},
 		{
 			"blockType": "minecraft:copper_bulb",
@@ -10227,6 +10469,118 @@
 			"typed": "minecraft:copper_bulb"
 		},
 		{
+			"blockType": "minecraft:copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_chain",
+			"material": "minecraft:copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.copper_chain",
+			"typed": "minecraft:copper_chain"
+		},
+		{
+			"blockType": "minecraft:copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_chest",
+			"material": "minecraft:copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.copper_chest",
+			"typed": "minecraft:copper_chest"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_chestplate"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:equippable",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_chestplate",
+			"material": "minecraft:copper_chestplate",
+			"maxDurability": 176,
+			"maxStackSize": 1,
+			"metaClass": "ArmorMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_chestplate",
+			"typed": "minecraft:copper_chestplate"
+		},
+		{
 			"blockType": "minecraft:copper_door",
 			"burnDuration": 0,
 			"compostable": false,
@@ -10261,6 +10615,79 @@
 			],
 			"translationKey": "block.minecraft.copper_door",
 			"typed": "minecraft:copper_door"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_golem_spawn_egg"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:entity_data",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_golem_spawn_egg",
+			"material": "minecraft:copper_golem_spawn_egg",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "SpawnEggMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_golem_spawn_egg",
+			"typed": "minecraft:copper_golem_spawn_egg"
+		},
+		{
+			"blockType": "minecraft:copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_golem_statue",
+			"material": "minecraft:copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.copper_golem_statue",
+			"typed": "minecraft:copper_golem_statue"
 		},
 		{
 			"blockType": "minecraft:copper_grate",
@@ -10303,6 +10730,123 @@
 			"compostable": false,
 			"createItemStack": {
 				"amount": 1,
+				"type": "minecraft:copper_helmet"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:equippable",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_helmet",
+			"material": "minecraft:copper_helmet",
+			"maxDurability": 121,
+			"maxStackSize": 1,
+			"metaClass": "ArmorMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_helmet",
+			"typed": "minecraft:copper_helmet"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_hoe"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tool",
+				"minecraft:tooltip_display",
+				"minecraft:weapon"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_hoe",
+			"material": "minecraft:copper_hoe",
+			"maxDurability": 190,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_hoe",
+			"typed": "minecraft:copper_hoe"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_horse_armor"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:equippable",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_horse_armor",
+			"material": "minecraft:copper_horse_armor",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_horse_armor",
+			"typed": "minecraft:copper_horse_armor"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
 				"type": "minecraft:copper_ingot"
 			},
 			"creativeCategory": "BUILDING_BLOCKS",
@@ -10333,6 +10877,117 @@
 			],
 			"translationKey": "item.minecraft.copper_ingot",
 			"typed": "minecraft:copper_ingot"
+		},
+		{
+			"blockType": "minecraft:copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_lantern",
+			"material": "minecraft:copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.copper_lantern",
+			"typed": "minecraft:copper_lantern"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_leggings"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:equippable",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_leggings",
+			"material": "minecraft:copper_leggings",
+			"maxDurability": 165,
+			"maxStackSize": 1,
+			"metaClass": "ArmorMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_leggings",
+			"typed": "minecraft:copper_leggings"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_nugget"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_nugget",
+			"material": "minecraft:copper_nugget",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_nugget",
+			"typed": "minecraft:copper_nugget"
 		},
 		{
 			"blockType": "minecraft:copper_ore",
@@ -10369,6 +11024,165 @@
 			],
 			"translationKey": "block.minecraft.copper_ore",
 			"typed": "minecraft:copper_ore"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_pickaxe"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tool",
+				"minecraft:tooltip_display",
+				"minecraft:weapon"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_pickaxe",
+			"material": "minecraft:copper_pickaxe",
+			"maxDurability": 190,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_pickaxe",
+			"typed": "minecraft:copper_pickaxe"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_shovel"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tool",
+				"minecraft:tooltip_display",
+				"minecraft:weapon"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_shovel",
+			"material": "minecraft:copper_shovel",
+			"maxDurability": 190,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_shovel",
+			"typed": "minecraft:copper_shovel"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_sword"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:damage",
+				"minecraft:enchantable",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_damage",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:repairable",
+				"minecraft:tool",
+				"minecraft:tooltip_display",
+				"minecraft:weapon"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_sword",
+			"material": "minecraft:copper_sword",
+			"maxDurability": 190,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.copper_sword",
+			"typed": "minecraft:copper_sword"
+		},
+		{
+			"blockType": "minecraft:copper_torch",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:copper_torch"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:copper_torch",
+			"material": "minecraft:copper_torch",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.copper_torch",
+			"typed": "minecraft:copper_torch"
 		},
 		{
 			"blockType": "minecraft:copper_trapdoor",
@@ -10455,6 +11269,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -10779,6 +11594,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -10887,6 +11703,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -11307,6 +12124,43 @@
 			],
 			"translationKey": "block.minecraft.crimson_roots",
 			"typed": "minecraft:crimson_roots"
+		},
+		{
+			"blockType": "minecraft:crimson_shelf",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:crimson_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:crimson_shelf",
+			"material": "minecraft:crimson_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.crimson_shelf",
+			"typed": "minecraft:crimson_shelf"
 		},
 		{
 			"blockType": "minecraft:crimson_sign",
@@ -12896,6 +13750,43 @@
 			],
 			"translationKey": "block.minecraft.dark_oak_sapling",
 			"typed": "minecraft:dark_oak_sapling"
+		},
+		{
+			"blockType": "minecraft:dark_oak_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:dark_oak_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:dark_oak_shelf",
+			"material": "minecraft:dark_oak_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.dark_oak_shelf",
+			"typed": "minecraft:dark_oak_shelf"
 		},
 		{
 			"blockType": "minecraft:dark_oak_sign",
@@ -15329,6 +16220,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -15364,6 +16256,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -15692,6 +16585,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -15833,6 +16727,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -16028,7 +16923,7 @@
 			],
 			"edible": false,
 			"fuel": false,
-			"itemRarity": "UNCOMMON",
+			"itemRarity": "RARE",
 			"key": "minecraft:enchanted_book",
 			"material": "minecraft:enchanted_book",
 			"maxDurability": 0,
@@ -16451,6 +17346,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -16557,6 +17453,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -16592,6 +17489,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -16627,6 +17525,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -16794,6 +17693,42 @@
 			"typed": "minecraft:exposed_copper"
 		},
 		{
+			"blockType": "minecraft:exposed_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:exposed_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:exposed_copper_bars",
+			"material": "minecraft:exposed_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.exposed_copper_bars",
+			"typed": "minecraft:exposed_copper_bars"
+		},
+		{
 			"blockType": "minecraft:exposed_copper_bulb",
 			"burnDuration": 0,
 			"compostable": false,
@@ -16828,6 +17763,78 @@
 			],
 			"translationKey": "block.minecraft.exposed_copper_bulb",
 			"typed": "minecraft:exposed_copper_bulb"
+		},
+		{
+			"blockType": "minecraft:exposed_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:exposed_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:exposed_copper_chain",
+			"material": "minecraft:exposed_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.exposed_copper_chain",
+			"typed": "minecraft:exposed_copper_chain"
+		},
+		{
+			"blockType": "minecraft:exposed_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:exposed_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:exposed_copper_chest",
+			"material": "minecraft:exposed_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.exposed_copper_chest",
+			"typed": "minecraft:exposed_copper_chest"
 		},
 		{
 			"blockType": "minecraft:exposed_copper_door",
@@ -16866,6 +17873,43 @@
 			"typed": "minecraft:exposed_copper_door"
 		},
 		{
+			"blockType": "minecraft:exposed_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:exposed_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:exposed_copper_golem_statue",
+			"material": "minecraft:exposed_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.exposed_copper_golem_statue",
+			"typed": "minecraft:exposed_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:exposed_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -16900,6 +17944,42 @@
 			],
 			"translationKey": "block.minecraft.exposed_copper_grate",
 			"typed": "minecraft:exposed_copper_grate"
+		},
+		{
+			"blockType": "minecraft:exposed_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:exposed_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:exposed_copper_lantern",
+			"material": "minecraft:exposed_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.exposed_copper_lantern",
+			"typed": "minecraft:exposed_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:exposed_copper_trapdoor",
@@ -17044,6 +18124,42 @@
 			],
 			"translationKey": "block.minecraft.exposed_cut_copper_stairs",
 			"typed": "minecraft:exposed_cut_copper_stairs"
+		},
+		{
+			"blockType": "minecraft:exposed_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:exposed_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:exposed_lightning_rod",
+			"material": "minecraft:exposed_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.exposed_lightning_rod",
+			"typed": "minecraft:exposed_lightning_rod"
 		},
 		{
 			"burnDuration": 0,
@@ -17957,6 +19073,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -18027,6 +19144,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -18170,6 +19288,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -18600,6 +19719,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -18742,6 +19862,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -20731,6 +21852,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -20909,6 +22031,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -21158,6 +22281,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -21519,6 +22643,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -21624,6 +22749,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -22124,6 +23250,42 @@
 			"typed": "minecraft:iron_boots"
 		},
 		{
+			"blockType": "minecraft:iron_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:iron_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:iron_chain",
+			"material": "minecraft:iron_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.iron_chain",
+			"typed": "minecraft:iron_chain"
+		},
+		{
 			"burnDuration": 0,
 			"compostable": false,
 			"createItemStack": {
@@ -22211,6 +23373,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -23231,6 +24394,43 @@
 			],
 			"translationKey": "block.minecraft.jungle_sapling",
 			"typed": "minecraft:jungle_sapling"
+		},
+		{
+			"blockType": "minecraft:jungle_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:jungle_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:jungle_shelf",
+			"material": "minecraft:jungle_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.jungle_shelf",
+			"typed": "minecraft:jungle_shelf"
 		},
 		{
 			"blockType": "minecraft:jungle_sign",
@@ -26044,6 +27244,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -26805,6 +28006,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -27296,6 +28498,43 @@
 			],
 			"translationKey": "block.minecraft.mangrove_roots",
 			"typed": "minecraft:mangrove_roots"
+		},
+		{
+			"blockType": "minecraft:mangrove_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:mangrove_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:mangrove_shelf",
+			"material": "minecraft:mangrove_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.mangrove_shelf",
+			"typed": "minecraft:mangrove_shelf"
 		},
 		{
 			"blockType": "minecraft:mangrove_sign",
@@ -27816,6 +29055,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -28464,6 +29704,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -30920,6 +32161,43 @@
 			"typed": "minecraft:oak_sapling"
 		},
 		{
+			"blockType": "minecraft:oak_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oak_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oak_shelf",
+			"material": "minecraft:oak_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oak_shelf",
+			"typed": "minecraft:oak_shelf"
+		},
+		{
 			"blockType": "minecraft:oak_sign",
 			"burnDuration": 200,
 			"compostable": false,
@@ -31183,6 +32461,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -32040,6 +33319,42 @@
 			"typed": "minecraft:oxidized_copper"
 		},
 		{
+			"blockType": "minecraft:oxidized_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oxidized_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oxidized_copper_bars",
+			"material": "minecraft:oxidized_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oxidized_copper_bars",
+			"typed": "minecraft:oxidized_copper_bars"
+		},
+		{
 			"blockType": "minecraft:oxidized_copper_bulb",
 			"burnDuration": 0,
 			"compostable": false,
@@ -32074,6 +33389,78 @@
 			],
 			"translationKey": "block.minecraft.oxidized_copper_bulb",
 			"typed": "minecraft:oxidized_copper_bulb"
+		},
+		{
+			"blockType": "minecraft:oxidized_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oxidized_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oxidized_copper_chain",
+			"material": "minecraft:oxidized_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oxidized_copper_chain",
+			"typed": "minecraft:oxidized_copper_chain"
+		},
+		{
+			"blockType": "minecraft:oxidized_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oxidized_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oxidized_copper_chest",
+			"material": "minecraft:oxidized_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oxidized_copper_chest",
+			"typed": "minecraft:oxidized_copper_chest"
 		},
 		{
 			"blockType": "minecraft:oxidized_copper_door",
@@ -32112,6 +33499,43 @@
 			"typed": "minecraft:oxidized_copper_door"
 		},
 		{
+			"blockType": "minecraft:oxidized_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oxidized_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oxidized_copper_golem_statue",
+			"material": "minecraft:oxidized_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oxidized_copper_golem_statue",
+			"typed": "minecraft:oxidized_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:oxidized_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -32146,6 +33570,42 @@
 			],
 			"translationKey": "block.minecraft.oxidized_copper_grate",
 			"typed": "minecraft:oxidized_copper_grate"
+		},
+		{
+			"blockType": "minecraft:oxidized_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oxidized_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oxidized_copper_lantern",
+			"material": "minecraft:oxidized_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oxidized_copper_lantern",
+			"typed": "minecraft:oxidized_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:oxidized_copper_trapdoor",
@@ -32290,6 +33750,42 @@
 			],
 			"translationKey": "block.minecraft.oxidized_cut_copper_stairs",
 			"typed": "minecraft:oxidized_cut_copper_stairs"
+		},
+		{
+			"blockType": "minecraft:oxidized_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:oxidized_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:oxidized_lightning_rod",
+			"material": "minecraft:oxidized_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.oxidized_lightning_rod",
+			"typed": "minecraft:oxidized_lightning_rod"
 		},
 		{
 			"blockType": "minecraft:packed_ice",
@@ -32942,6 +34438,43 @@
 			"typed": "minecraft:pale_oak_sapling"
 		},
 		{
+			"blockType": "minecraft:pale_oak_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:pale_oak_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:pale_oak_shelf",
+			"material": "minecraft:pale_oak_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.pale_oak_shelf",
+			"typed": "minecraft:pale_oak_shelf"
+		},
+		{
 			"blockType": "minecraft:pale_oak_sign",
 			"burnDuration": 200,
 			"compostable": false,
@@ -33133,6 +34666,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -33203,6 +34737,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -33382,6 +34917,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -33417,6 +34953,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -33488,6 +35025,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -33560,6 +35098,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -33595,6 +35134,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -34537,6 +36077,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -36268,6 +37809,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -37424,6 +38966,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -37568,6 +39111,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -39659,6 +41203,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -40378,6 +41923,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -40672,6 +42218,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -40742,6 +42289,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -40777,6 +42325,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -40849,6 +42398,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -41026,6 +42576,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -41675,6 +43226,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -41852,6 +43404,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -42211,6 +43764,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -42811,6 +44365,43 @@
 			"typed": "minecraft:spruce_sapling"
 		},
 		{
+			"blockType": "minecraft:spruce_shelf",
+			"burnDuration": 300,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:spruce_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": true,
+			"itemRarity": "COMMON",
+			"key": "minecraft:spruce_shelf",
+			"material": "minecraft:spruce_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.spruce_shelf",
+			"typed": "minecraft:spruce_shelf"
+		},
+		{
 			"blockType": "minecraft:spruce_sign",
 			"burnDuration": 200,
 			"compostable": false,
@@ -43037,6 +44628,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -43708,6 +45300,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -43743,6 +45336,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -45009,6 +46603,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -45588,6 +47183,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -45880,6 +47476,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -46422,6 +48019,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -46601,6 +48199,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -46636,6 +48235,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -46671,6 +48271,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -46743,6 +48344,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -46813,6 +48415,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -47272,6 +48875,43 @@
 			"typed": "minecraft:warped_roots"
 		},
 		{
+			"blockType": "minecraft:warped_shelf",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:warped_shelf"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:container",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:warped_shelf",
+			"material": "minecraft:warped_shelf",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.warped_shelf",
+			"typed": "minecraft:warped_shelf"
+		},
+		{
 			"blockType": "minecraft:warped_sign",
 			"burnDuration": 0,
 			"compostable": false,
@@ -47561,6 +49201,42 @@
 			"typed": "minecraft:waxed_chiseled_copper"
 		},
 		{
+			"blockType": "minecraft:waxed_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_copper_bars",
+			"material": "minecraft:waxed_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_copper_bars",
+			"typed": "minecraft:waxed_copper_bars"
+		},
+		{
 			"blockType": "minecraft:waxed_copper_block",
 			"burnDuration": 0,
 			"compostable": false,
@@ -47633,6 +49309,78 @@
 			"typed": "minecraft:waxed_copper_bulb"
 		},
 		{
+			"blockType": "minecraft:waxed_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_copper_chain",
+			"material": "minecraft:waxed_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_copper_chain",
+			"typed": "minecraft:waxed_copper_chain"
+		},
+		{
+			"blockType": "minecraft:waxed_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_copper_chest",
+			"material": "minecraft:waxed_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_copper_chest",
+			"typed": "minecraft:waxed_copper_chest"
+		},
+		{
 			"blockType": "minecraft:waxed_copper_door",
 			"burnDuration": 0,
 			"compostable": false,
@@ -47669,6 +49417,43 @@
 			"typed": "minecraft:waxed_copper_door"
 		},
 		{
+			"blockType": "minecraft:waxed_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_copper_golem_statue",
+			"material": "minecraft:waxed_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_copper_golem_statue",
+			"typed": "minecraft:waxed_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:waxed_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -47703,6 +49488,42 @@
 			],
 			"translationKey": "block.minecraft.waxed_copper_grate",
 			"typed": "minecraft:waxed_copper_grate"
+		},
+		{
+			"blockType": "minecraft:waxed_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_copper_lantern",
+			"material": "minecraft:waxed_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_copper_lantern",
+			"typed": "minecraft:waxed_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:waxed_copper_trapdoor",
@@ -47921,6 +49742,42 @@
 			"typed": "minecraft:waxed_exposed_copper"
 		},
 		{
+			"blockType": "minecraft:waxed_exposed_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_exposed_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_exposed_copper_bars",
+			"material": "minecraft:waxed_exposed_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_exposed_copper_bars",
+			"typed": "minecraft:waxed_exposed_copper_bars"
+		},
+		{
 			"blockType": "minecraft:waxed_exposed_copper_bulb",
 			"burnDuration": 0,
 			"compostable": false,
@@ -47955,6 +49812,78 @@
 			],
 			"translationKey": "block.minecraft.waxed_exposed_copper_bulb",
 			"typed": "minecraft:waxed_exposed_copper_bulb"
+		},
+		{
+			"blockType": "minecraft:waxed_exposed_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_exposed_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_exposed_copper_chain",
+			"material": "minecraft:waxed_exposed_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_exposed_copper_chain",
+			"typed": "minecraft:waxed_exposed_copper_chain"
+		},
+		{
+			"blockType": "minecraft:waxed_exposed_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_exposed_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_exposed_copper_chest",
+			"material": "minecraft:waxed_exposed_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_exposed_copper_chest",
+			"typed": "minecraft:waxed_exposed_copper_chest"
 		},
 		{
 			"blockType": "minecraft:waxed_exposed_copper_door",
@@ -47993,6 +49922,43 @@
 			"typed": "minecraft:waxed_exposed_copper_door"
 		},
 		{
+			"blockType": "minecraft:waxed_exposed_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_exposed_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_exposed_copper_golem_statue",
+			"material": "minecraft:waxed_exposed_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_exposed_copper_golem_statue",
+			"typed": "minecraft:waxed_exposed_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:waxed_exposed_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48027,6 +49993,42 @@
 			],
 			"translationKey": "block.minecraft.waxed_exposed_copper_grate",
 			"typed": "minecraft:waxed_exposed_copper_grate"
+		},
+		{
+			"blockType": "minecraft:waxed_exposed_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_exposed_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_exposed_copper_lantern",
+			"material": "minecraft:waxed_exposed_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_exposed_copper_lantern",
+			"typed": "minecraft:waxed_exposed_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:waxed_exposed_copper_trapdoor",
@@ -48173,6 +50175,78 @@
 			"typed": "minecraft:waxed_exposed_cut_copper_stairs"
 		},
 		{
+			"blockType": "minecraft:waxed_exposed_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_exposed_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_exposed_lightning_rod",
+			"material": "minecraft:waxed_exposed_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_exposed_lightning_rod",
+			"typed": "minecraft:waxed_exposed_lightning_rod"
+		},
+		{
+			"blockType": "minecraft:waxed_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_lightning_rod",
+			"material": "minecraft:waxed_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_lightning_rod",
+			"typed": "minecraft:waxed_lightning_rod"
+		},
+		{
 			"blockType": "minecraft:waxed_oxidized_chiseled_copper",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48245,6 +50319,42 @@
 			"typed": "minecraft:waxed_oxidized_copper"
 		},
 		{
+			"blockType": "minecraft:waxed_oxidized_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_oxidized_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_oxidized_copper_bars",
+			"material": "minecraft:waxed_oxidized_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_oxidized_copper_bars",
+			"typed": "minecraft:waxed_oxidized_copper_bars"
+		},
+		{
 			"blockType": "minecraft:waxed_oxidized_copper_bulb",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48279,6 +50389,78 @@
 			],
 			"translationKey": "block.minecraft.waxed_oxidized_copper_bulb",
 			"typed": "minecraft:waxed_oxidized_copper_bulb"
+		},
+		{
+			"blockType": "minecraft:waxed_oxidized_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_oxidized_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_oxidized_copper_chain",
+			"material": "minecraft:waxed_oxidized_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_oxidized_copper_chain",
+			"typed": "minecraft:waxed_oxidized_copper_chain"
+		},
+		{
+			"blockType": "minecraft:waxed_oxidized_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_oxidized_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_oxidized_copper_chest",
+			"material": "minecraft:waxed_oxidized_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_oxidized_copper_chest",
+			"typed": "minecraft:waxed_oxidized_copper_chest"
 		},
 		{
 			"blockType": "minecraft:waxed_oxidized_copper_door",
@@ -48317,6 +50499,43 @@
 			"typed": "minecraft:waxed_oxidized_copper_door"
 		},
 		{
+			"blockType": "minecraft:waxed_oxidized_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_oxidized_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_oxidized_copper_golem_statue",
+			"material": "minecraft:waxed_oxidized_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_oxidized_copper_golem_statue",
+			"typed": "minecraft:waxed_oxidized_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:waxed_oxidized_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48351,6 +50570,42 @@
 			],
 			"translationKey": "block.minecraft.waxed_oxidized_copper_grate",
 			"typed": "minecraft:waxed_oxidized_copper_grate"
+		},
+		{
+			"blockType": "minecraft:waxed_oxidized_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_oxidized_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_oxidized_copper_lantern",
+			"material": "minecraft:waxed_oxidized_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_oxidized_copper_lantern",
+			"typed": "minecraft:waxed_oxidized_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:waxed_oxidized_copper_trapdoor",
@@ -48497,6 +50752,42 @@
 			"typed": "minecraft:waxed_oxidized_cut_copper_stairs"
 		},
 		{
+			"blockType": "minecraft:waxed_oxidized_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_oxidized_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_oxidized_lightning_rod",
+			"material": "minecraft:waxed_oxidized_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_oxidized_lightning_rod",
+			"typed": "minecraft:waxed_oxidized_lightning_rod"
+		},
+		{
 			"blockType": "minecraft:waxed_weathered_chiseled_copper",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48569,6 +50860,42 @@
 			"typed": "minecraft:waxed_weathered_copper"
 		},
 		{
+			"blockType": "minecraft:waxed_weathered_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_weathered_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_weathered_copper_bars",
+			"material": "minecraft:waxed_weathered_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_weathered_copper_bars",
+			"typed": "minecraft:waxed_weathered_copper_bars"
+		},
+		{
 			"blockType": "minecraft:waxed_weathered_copper_bulb",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48603,6 +50930,78 @@
 			],
 			"translationKey": "block.minecraft.waxed_weathered_copper_bulb",
 			"typed": "minecraft:waxed_weathered_copper_bulb"
+		},
+		{
+			"blockType": "minecraft:waxed_weathered_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_weathered_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_weathered_copper_chain",
+			"material": "minecraft:waxed_weathered_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_weathered_copper_chain",
+			"typed": "minecraft:waxed_weathered_copper_chain"
+		},
+		{
+			"blockType": "minecraft:waxed_weathered_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_weathered_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_weathered_copper_chest",
+			"material": "minecraft:waxed_weathered_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_weathered_copper_chest",
+			"typed": "minecraft:waxed_weathered_copper_chest"
 		},
 		{
 			"blockType": "minecraft:waxed_weathered_copper_door",
@@ -48641,6 +51040,43 @@
 			"typed": "minecraft:waxed_weathered_copper_door"
 		},
 		{
+			"blockType": "minecraft:waxed_weathered_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_weathered_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_weathered_copper_golem_statue",
+			"material": "minecraft:waxed_weathered_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_weathered_copper_golem_statue",
+			"typed": "minecraft:waxed_weathered_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:waxed_weathered_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48675,6 +51111,42 @@
 			],
 			"translationKey": "block.minecraft.waxed_weathered_copper_grate",
 			"typed": "minecraft:waxed_weathered_copper_grate"
+		},
+		{
+			"blockType": "minecraft:waxed_weathered_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_weathered_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_weathered_copper_lantern",
+			"material": "minecraft:waxed_weathered_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_weathered_copper_lantern",
+			"typed": "minecraft:waxed_weathered_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:waxed_weathered_copper_trapdoor",
@@ -48821,6 +51293,42 @@
 			"typed": "minecraft:waxed_weathered_cut_copper_stairs"
 		},
 		{
+			"blockType": "minecraft:waxed_weathered_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:waxed_weathered_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:waxed_weathered_lightning_rod",
+			"material": "minecraft:waxed_weathered_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.waxed_weathered_lightning_rod",
+			"typed": "minecraft:waxed_weathered_lightning_rod"
+		},
+		{
 			"burnDuration": 0,
 			"compostable": false,
 			"createItemStack": {
@@ -48928,6 +51436,42 @@
 			"typed": "minecraft:weathered_copper"
 		},
 		{
+			"blockType": "minecraft:weathered_copper_bars",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:weathered_copper_bars"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:weathered_copper_bars",
+			"material": "minecraft:weathered_copper_bars",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.weathered_copper_bars",
+			"typed": "minecraft:weathered_copper_bars"
+		},
+		{
 			"blockType": "minecraft:weathered_copper_bulb",
 			"burnDuration": 0,
 			"compostable": false,
@@ -48962,6 +51506,78 @@
 			],
 			"translationKey": "block.minecraft.weathered_copper_bulb",
 			"typed": "minecraft:weathered_copper_bulb"
+		},
+		{
+			"blockType": "minecraft:weathered_copper_chain",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:weathered_copper_chain"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:weathered_copper_chain",
+			"material": "minecraft:weathered_copper_chain",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.weathered_copper_chain",
+			"typed": "minecraft:weathered_copper_chain"
+		},
+		{
+			"blockType": "minecraft:weathered_copper_chest",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:weathered_copper_chest"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:weathered_copper_chest",
+			"material": "minecraft:weathered_copper_chest",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.weathered_copper_chest",
+			"typed": "minecraft:weathered_copper_chest"
 		},
 		{
 			"blockType": "minecraft:weathered_copper_door",
@@ -49000,6 +51616,43 @@
 			"typed": "minecraft:weathered_copper_door"
 		},
 		{
+			"blockType": "minecraft:weathered_copper_golem_statue",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:weathered_copper_golem_statue"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:block_state",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:weathered_copper_golem_statue",
+			"material": "minecraft:weathered_copper_golem_statue",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.weathered_copper_golem_statue",
+			"typed": "minecraft:weathered_copper_golem_statue"
+		},
+		{
 			"blockType": "minecraft:weathered_copper_grate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -49034,6 +51687,42 @@
 			],
 			"translationKey": "block.minecraft.weathered_copper_grate",
 			"typed": "minecraft:weathered_copper_grate"
+		},
+		{
+			"blockType": "minecraft:weathered_copper_lantern",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:weathered_copper_lantern"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:weathered_copper_lantern",
+			"material": "minecraft:weathered_copper_lantern",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.weathered_copper_lantern",
+			"typed": "minecraft:weathered_copper_lantern"
 		},
 		{
 			"blockType": "minecraft:weathered_copper_trapdoor",
@@ -49178,6 +51867,42 @@
 			],
 			"translationKey": "block.minecraft.weathered_cut_copper_stairs",
 			"typed": "minecraft:weathered_cut_copper_stairs"
+		},
+		{
+			"blockType": "minecraft:weathered_lightning_rod",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:weathered_lightning_rod"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:tooltip_display"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:weathered_lightning_rod",
+			"material": "minecraft:weathered_lightning_rod",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.weathered_lightning_rod",
+			"typed": "minecraft:weathered_lightning_rod"
 		},
 		{
 			"blockType": "minecraft:weeping_vines",
@@ -50024,6 +52749,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -50133,6 +52859,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -50168,6 +52895,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -50242,6 +52970,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -51096,6 +53825,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -51168,6 +53898,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -51203,6 +53934,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -51238,6 +53970,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",
@@ -51273,6 +54006,7 @@
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
 				"minecraft:enchantments",
+				"minecraft:entity_data",
 				"minecraft:item_model",
 				"minecraft:item_name",
 				"minecraft:lore",

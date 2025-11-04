@@ -22,6 +22,7 @@ import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.BrewingStand;
+import org.bukkit.block.data.type.CalibratedSculkSensor;
 import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.ChiseledBookshelf;
@@ -49,6 +50,7 @@ import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.SculkSensor;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TechnicalPiston;
@@ -93,6 +95,7 @@ public final class BlockDataMockFactory
 			.put(Bamboo.class, m -> new BambooDataMock())
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
+			.put(CalibratedSculkSensor.class, CalibratedSculkSensorDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
 			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
@@ -116,6 +119,7 @@ public final class BlockDataMockFactory
 			.put(Orientable.class, OrientableMock::new)
 			.put(Piston.class, PistonDataMock::new)
 			.put(PistonHead.class, PistonHeadDataMock::new)
+			.put(SculkSensor.class, SculkSensorDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TechnicalPiston.class, TechnicalPistonDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)

@@ -6,8 +6,12 @@ import io.papermc.paper.registry.TypedKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.block.BlockType;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemType;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -142,6 +146,15 @@ class RegistryMockTest
 				.filter(entityType -> entityType != org.bukkit.entity.EntityType.UNKNOWN)
 				.count();
 		assertEquals(enumCount, registryCount);
+	}
+
+	@Test
+	void getKey()
+	{
+		BlockType.Typed<@NonNull BlockData> key = BlockType.STONE;
+		@Nullable NamespacedKey actual = Registry.BLOCK.getKey(key);
+		assertNotNull(actual);
+		assertEquals("minecraft:stone", actual.asString());
 	}
 
 	static Stream<RegistryKey<? extends Keyed>> getValues()

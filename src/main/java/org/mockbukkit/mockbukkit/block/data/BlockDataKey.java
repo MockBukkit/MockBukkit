@@ -47,6 +47,7 @@ import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.SculkSensor;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
@@ -149,6 +150,8 @@ public enum BlockDataKey
 	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_NORTH("north", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+
+	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class), SculkSensor.class::isInstance),
 
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),

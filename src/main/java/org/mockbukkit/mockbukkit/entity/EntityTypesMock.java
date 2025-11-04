@@ -22,6 +22,7 @@ import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
+import org.bukkit.entity.CopperGolem;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creaking;
 import org.bukkit.entity.Creeper;
@@ -70,6 +71,7 @@ import org.bukkit.entity.LingeringPotion;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Mannequin;
 import org.bukkit.entity.Marker;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Mule;
@@ -241,6 +243,7 @@ public final class EntityTypesMock
 				.register(Chicken.class, ChickenMock.class, ChickenMock::new)
 				.register(Cod.class, CodMock.class, CodMock::new)
 				.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
+				.register(CopperGolem.class, CopperGolemMock.class, CopperGolemMock::new)
 				.register(Cow.class, CowMock.class, CowMock::new)
 				.register(Creaking.class, CreakingMock.class, CreakingMock::new)
 				.register(Creeper.class, CreeperMock.class, CreeperMock::new)
@@ -293,6 +296,7 @@ public final class EntityTypesMock
 				.register(Llama.class, LlamaMock.class, LlamaMock::new)
 				.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 				.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
+				.register(Mannequin.class, MannequinMock.class, MannequinMock::new)
 				.register(MangroveBoat.class, MangroveBoatMock.class, MangroveBoatMock::new)
 				.register(MangroveChestBoat.class, MangroveChestBoatMock.class, MangroveChestBoatMock::new)
 				.register(Marker.class, MarkerMock.class, MarkerMock::new)
