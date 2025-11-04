@@ -2,6 +2,7 @@
 	"replace": false,
 	"values": [
 		"minecraft:chainmail_chestplate",
+		"minecraft:copper_chestplate",
 		"minecraft:diamond_chestplate",
 		"minecraft:golden_chestplate",
 		"minecraft:iron_chestplate",

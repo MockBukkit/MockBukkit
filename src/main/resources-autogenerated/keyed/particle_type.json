@@ -66,6 +66,11 @@
 			"ordinal": 51
 		},
 		{
+			"key": "minecraft:copper_fire_flame",
+			"name": "COPPER_FIRE_FLAME",
+			"ordinal": 114
+		},
+		{
 			"key": "minecraft:crimson_spore",
 			"name": "CRIMSON_SPORE",
 			"ordinal": 62

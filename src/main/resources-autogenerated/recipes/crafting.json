@@ -249,13 +249,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -354,6 +354,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_acacia_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_acacia_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_acacia_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_acacia_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_acacia_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_acacia_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:acacia_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:acacia_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -1300,13 +1353,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -1563,6 +1616,59 @@
 		"shape": [
 			"abc",
 			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_bamboo_block"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_bamboo_block"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_bamboo_block"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_bamboo_block"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_bamboo_block"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_bamboo_block"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:bamboo_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:bamboo_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -2438,13 +2544,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -2543,6 +2649,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_birch_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_birch_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_birch_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_birch_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_birch_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_birch_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:birch_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:birch_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -6507,41 +6666,6 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:iron_nugget"
-				],
-				"type": "material"
-			},
-			"b": {
-				"choices": [
-					"minecraft:iron_ingot"
-				],
-				"type": "material"
-			},
-			"c": {
-				"choices": [
-					"minecraft:iron_nugget"
-				],
-				"type": "material"
-			}
-		},
-		"group": "",
-		"key": "minecraft:chain",
-		"result": {
-			"amount": 1,
-			"type": "minecraft:chain"
-		},
-		"shape": [
-			"a",
-			"b",
-			"c"
-		],
-		"type": "shaped"
-	},
-	{
-		"category": "MISC",
-		"choiceMap": {
-			"a": {
-				"choices": [
 					"minecraft:cherry_planks"
 				],
 				"type": "material"
@@ -6787,13 +6911,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -6892,6 +7016,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_cherry_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_cherry_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_cherry_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_cherry_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_cherry_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_cherry_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:cherry_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cherry_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -8697,6 +8874,105 @@
 		"type": "shaped"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_axe",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_axe"
+		},
+		"shape": [
+			"ab",
+			"cd",
+			"ef"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_bars",
+		"result": {
+			"amount": 16,
+			"type": "minecraft:copper_bars"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "BUILDING",
 		"choiceMap": {
 			"a": {
@@ -8768,6 +9044,46 @@
 		"type": "shaped"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_boots",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_boots"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "REDSTONE",
 		"choiceMap": {
 			"b": {
@@ -8806,6 +9122,177 @@
 		"result": {
 			"amount": 4,
 			"type": "minecraft:copper_bulb"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_chain",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_chain"
+		},
+		"shape": [
+			"a",
+			"b",
+			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:chest"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_chest",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_chest"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_chestplate",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_chestplate"
 		},
 		"shape": [
 			"abc",
@@ -8909,6 +9396,93 @@
 		"type": "shaped"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_helmet",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_helmet"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_hoe",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_hoe"
+		},
+		"shape": [
+			"ab",
+			"cd",
+			"ef"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choices": [
 			{
@@ -8928,6 +9502,77 @@
 	},
 	{
 		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			}
+		},
+		"group": "copper_ingot",
+		"key": "minecraft:copper_ingot_from_nuggets",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_ingot"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
 		"choices": [
 			{
 				"choices": [
@@ -8943,6 +9588,307 @@
 			"type": "minecraft:copper_ingot"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:copper_torch"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_lantern",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_lantern"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_leggings",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_leggings"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			}
+		],
+		"group": "",
+		"key": "minecraft:copper_nugget",
+		"result": {
+			"amount": 9,
+			"type": "minecraft:copper_nugget"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_pickaxe",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_pickaxe"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_shovel",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_shovel"
+		},
+		"shape": [
+			"a",
+			"b",
+			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_sword",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_sword"
+		},
+		"shape": [
+			"a",
+			"b",
+			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:copper_nugget"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:charcoal",
+					"minecraft:coal"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_torch",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:copper_torch"
+		},
+		"shape": [
+			"a",
+			"b",
+			"c"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "REDSTONE",
@@ -8970,29 +9916,17 @@
 					"minecraft:copper_ingot"
 				],
 				"type": "material"
-			},
-			"e": {
-				"choices": [
-					"minecraft:copper_ingot"
-				],
-				"type": "material"
-			},
-			"f": {
-				"choices": [
-					"minecraft:copper_ingot"
-				],
-				"type": "material"
 			}
 		},
 		"group": "",
 		"key": "minecraft:copper_trapdoor",
 		"result": {
-			"amount": 2,
+			"amount": 1,
 			"type": "minecraft:copper_trapdoor"
 		},
 		"shape": [
-			"abc",
-			"def"
+			"ab",
+			"cd"
 		],
 		"type": "shaped"
 	},
@@ -9390,13 +10324,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -9535,6 +10469,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_crimson_stem"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_crimson_stem"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_crimson_stem"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_crimson_stem"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_crimson_stem"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_crimson_stem"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:crimson_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:crimson_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -11012,13 +11999,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -11117,6 +12104,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_dark_oak_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_dark_oak_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_dark_oak_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_dark_oak_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_dark_oak_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_dark_oak_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:dark_oak_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:dark_oak_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -20095,6 +21135,41 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:iron_nugget"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:iron_ingot"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:iron_nugget"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:iron_chain",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_chain"
+		},
+		"shape": [
+			"a",
+			"b",
+			"c"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -21130,13 +22205,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -21235,6 +22310,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_jungle_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_jungle_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_jungle_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_jungle_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_jungle_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_jungle_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:jungle_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:jungle_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -25622,13 +26750,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -25727,6 +26855,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_mangrove_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_mangrove_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_mangrove_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_mangrove_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_mangrove_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_mangrove_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:mangrove_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:mangrove_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -27895,13 +29076,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -28000,6 +29181,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_oak_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_oak_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_oak_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_oak_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_oak_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_oak_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:oak_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:oak_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -29738,13 +30972,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -29843,6 +31077,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_pale_oak_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_pale_oak_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_pale_oak_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_pale_oak_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_pale_oak_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_pale_oak_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:pale_oak_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:pale_oak_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -38230,13 +39517,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -38335,6 +39622,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_spruce_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_spruce_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_spruce_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_spruce_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_spruce_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_spruce_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:spruce_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:spruce_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -41429,13 +42769,13 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
 			"c": {
 				"choices": [
-					"minecraft:chain"
+					"minecraft:iron_chain"
 				],
 				"type": "material"
 			},
@@ -41574,6 +42914,59 @@
 		},
 		"shape": [
 			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_warped_stem"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_warped_stem"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_warped_stem"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_warped_stem"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_warped_stem"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_warped_stem"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:warped_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:warped_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -41831,6 +43224,30 @@
 		"choices": [
 			{
 				"choices": [
+					"minecraft:copper_bars"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_copper_bars",
+		"key": "minecraft:waxed_copper_bars_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_copper_bars"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
 					"minecraft:copper_block"
 				],
 				"type": "material"
@@ -41926,6 +43343,54 @@
 		"choices": [
 			{
 				"choices": [
+					"minecraft:copper_chain"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_copper_chain",
+		"key": "minecraft:waxed_copper_chain_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_copper_chain"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:copper_chest"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_copper_chest",
+		"key": "minecraft:waxed_copper_chest_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_copper_chest"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
 					"minecraft:copper_door"
 				],
 				"type": "material"
@@ -41942,6 +43407,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_copper_door"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:copper_golem_statue"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_copper_golem_statue",
+		"key": "minecraft:waxed_copper_golem_statue_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_copper_golem_statue"
 		},
 		"type": "shapeless"
 	},
@@ -42007,6 +43496,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_copper_grate"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:copper_lantern"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_copper_lantern",
+		"key": "minecraft:waxed_copper_lantern_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_copper_lantern"
 		},
 		"type": "shapeless"
 	},
@@ -42285,6 +43798,30 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:exposed_copper_bars"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_exposed_copper_bars",
+		"key": "minecraft:waxed_exposed_copper_bars_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_exposed_copper_bars"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "REDSTONE",
 		"choiceMap": {
 			"b": {
@@ -42360,6 +43897,54 @@
 		"choices": [
 			{
 				"choices": [
+					"minecraft:exposed_copper_chain"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_exposed_copper_chain",
+		"key": "minecraft:waxed_exposed_copper_chain_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_exposed_copper_chain"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:exposed_copper_chest"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_exposed_copper_chest",
+		"key": "minecraft:waxed_exposed_copper_chest_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_exposed_copper_chest"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
 					"minecraft:exposed_copper_door"
 				],
 				"type": "material"
@@ -42400,6 +43985,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_exposed_copper"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:exposed_copper_golem_statue"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_exposed_copper_golem_statue",
+		"key": "minecraft:waxed_exposed_copper_golem_statue_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_exposed_copper_golem_statue"
 		},
 		"type": "shapeless"
 	},
@@ -42465,6 +44074,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_exposed_copper_grate"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:exposed_copper_lantern"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_exposed_copper_lantern",
+		"key": "minecraft:waxed_exposed_copper_lantern_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_exposed_copper_lantern"
 		},
 		"type": "shapeless"
 	},
@@ -42692,6 +44325,54 @@
 	},
 	{
 		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:exposed_lightning_rod"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_exposed_lightning_rod",
+		"key": "minecraft:waxed_exposed_lightning_rod_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_exposed_lightning_rod"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:lightning_rod"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_lightning_rod",
+		"key": "minecraft:waxed_lightning_rod_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_lightning_rod"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -42739,6 +44420,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_oxidized_chiseled_copper"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:oxidized_copper_bars"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_oxidized_copper_bars",
+		"key": "minecraft:waxed_oxidized_copper_bars_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_oxidized_copper_bars"
 		},
 		"type": "shapeless"
 	},
@@ -42818,6 +44523,54 @@
 		"choices": [
 			{
 				"choices": [
+					"minecraft:oxidized_copper_chain"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_oxidized_copper_chain",
+		"key": "minecraft:waxed_oxidized_copper_chain_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_oxidized_copper_chain"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:oxidized_copper_chest"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_oxidized_copper_chest",
+		"key": "minecraft:waxed_oxidized_copper_chest_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_oxidized_copper_chest"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
 					"minecraft:oxidized_copper_door"
 				],
 				"type": "material"
@@ -42858,6 +44611,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_oxidized_copper"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:oxidized_copper_golem_statue"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_oxidized_copper_golem_statue",
+		"key": "minecraft:waxed_oxidized_copper_golem_statue_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_oxidized_copper_golem_statue"
 		},
 		"type": "shapeless"
 	},
@@ -42923,6 +44700,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_oxidized_copper_grate"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:oxidized_copper_lantern"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_oxidized_copper_lantern",
+		"key": "minecraft:waxed_oxidized_copper_lantern_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_oxidized_copper_lantern"
 		},
 		"type": "shapeless"
 	},
@@ -43150,6 +44951,30 @@
 	},
 	{
 		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:oxidized_lightning_rod"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_oxidized_lightning_rod",
+		"key": "minecraft:waxed_oxidized_lightning_rod_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_oxidized_lightning_rod"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -43197,6 +45022,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_weathered_chiseled_copper"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:weathered_copper_bars"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_weathered_copper_bars",
+		"key": "minecraft:waxed_weathered_copper_bars_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_weathered_copper_bars"
 		},
 		"type": "shapeless"
 	},
@@ -43276,6 +45125,54 @@
 		"choices": [
 			{
 				"choices": [
+					"minecraft:weathered_copper_chain"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_weathered_copper_chain",
+		"key": "minecraft:waxed_weathered_copper_chain_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_weathered_copper_chain"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:weathered_copper_chest"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_weathered_copper_chest",
+		"key": "minecraft:waxed_weathered_copper_chest_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_weathered_copper_chest"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
 					"minecraft:weathered_copper_door"
 				],
 				"type": "material"
@@ -43316,6 +45213,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_weathered_copper"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:weathered_copper_golem_statue"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_weathered_copper_golem_statue",
+		"key": "minecraft:waxed_weathered_copper_golem_statue_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_weathered_copper_golem_statue"
 		},
 		"type": "shapeless"
 	},
@@ -43381,6 +45302,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_weathered_copper_grate"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:weathered_copper_lantern"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_weathered_copper_lantern",
+		"key": "minecraft:waxed_weathered_copper_lantern_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_weathered_copper_lantern"
 		},
 		"type": "shapeless"
 	},
@@ -43603,6 +45548,30 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:waxed_weathered_cut_copper_stairs"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:weathered_lightning_rod"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:honeycomb"
+				],
+				"type": "material"
+			}
+		],
+		"group": "waxed_weathered_lightning_rod",
+		"key": "minecraft:waxed_weathered_lightning_rod_from_honeycomb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:waxed_weathered_lightning_rod"
 		},
 		"type": "shapeless"
 	},

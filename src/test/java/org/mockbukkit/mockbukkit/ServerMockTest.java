@@ -60,6 +60,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.tag.DamageTypeTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -2421,6 +2422,47 @@ class ServerMockTest
 				assertEquals("Game Event namespace must have GameEvent type", e.getMessage());
 			}
 
+		}
+
+	}
+
+	@Nested
+	class SetRespawnWorld
+	{
+		@BeforeEach
+		void beforeEach()
+		{
+			server.addSimpleWorld("world");
+		}
+
+		@Test
+		void givenDefaultValue()
+		{
+			World world = server.getRespawnWorld();
+			assertNotNull(world);
+			assertEquals("world", world.getName());
+		}
+
+		@Test
+		void givenValidValueValue()
+		{
+			World testWorld = server.addSimpleWorld("test");
+			server.setRespawnWorld(testWorld);
+
+			World world = server.getRespawnWorld();
+			assertNotNull(world);
+			assertEquals("test", world.getName());
+		}
+
+		@Test
+		void givenWorldNotRegistered()
+		{
+			WorldMock testWorld = new WorldMock();
+			testWorld.setName("test");
+
+			var e = assertThrows(IllegalArgumentException.class, () -> server.setRespawnWorld(testWorld));
+
+			assertEquals("World test is not registered in this server", e.getMessage());
 		}
 
 	}

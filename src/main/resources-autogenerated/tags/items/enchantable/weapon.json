@@ -1,6 +1,8 @@
 {
 	"replace": false,
 	"values": [
+		"minecraft:copper_axe",
+		"minecraft:copper_sword",
 		"minecraft:diamond_axe",
 		"minecraft:diamond_sword",
 		"minecraft:golden_axe",

@@ -212,6 +212,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:acacia_shelf",
+			"key": "minecraft:acacia_shelf",
+			"material": "minecraft:acacia_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.acacia_shelf",
+			"typed": "minecraft:acacia_shelf"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.0,
 			"burnable": false,
 			"collision": false,
@@ -965,6 +986,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:bamboo_shelf",
+			"key": "minecraft:bamboo_shelf",
+			"material": "minecraft:bamboo_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.bamboo_shelf",
+			"typed": "minecraft:bamboo_shelf"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.0,
 			"burnable": false,
 			"collision": false,
@@ -1529,6 +1571,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.birch_sapling",
 			"typed": "minecraft:birch_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:birch_shelf",
+			"key": "minecraft:birch_shelf",
+			"material": "minecraft:birch_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.birch_shelf",
+			"typed": "minecraft:birch_shelf"
 		},
 		{
 			"air": false,
@@ -3436,27 +3499,6 @@
 		},
 		{
 			"air": false,
-			"blastResistance": 6.0,
-			"burnable": false,
-			"collision": true,
-			"flammable": false,
-			"gravity": false,
-			"hardness": 5.0,
-			"interactable": false,
-			"itemType": "minecraft:chain",
-			"key": "minecraft:chain",
-			"material": "minecraft:chain",
-			"occluding": false,
-			"requiredFeatures": [
-				"minecraft:vanilla"
-			],
-			"slipperiness": 0.6,
-			"solid": true,
-			"translationKey": "block.minecraft.chain",
-			"typed": "minecraft:chain"
-		},
-		{
-			"air": false,
 			"blastResistance": 3600000.0,
 			"burnable": false,
 			"collision": true,
@@ -3685,6 +3727,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.cherry_sapling",
 			"typed": "minecraft:cherry_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:cherry_shelf",
+			"key": "minecraft:cherry_shelf",
+			"material": "minecraft:cherry_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.cherry_shelf",
+			"typed": "minecraft:cherry_shelf"
 		},
 		{
 			"air": false,
@@ -4575,6 +4638,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:copper_bars",
+			"key": "minecraft:copper_bars",
+			"material": "minecraft:copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.copper_bars",
+			"typed": "minecraft:copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:copper_block",
@@ -4617,6 +4701,48 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:copper_chain",
+			"key": "minecraft:copper_chain",
+			"material": "minecraft:copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.copper_chain",
+			"typed": "minecraft:copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:copper_chest",
+			"key": "minecraft:copper_chest",
+			"material": "minecraft:copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.copper_chest",
+			"typed": "minecraft:copper_chest"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": true,
 			"itemType": "minecraft:copper_door",
@@ -4630,6 +4756,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.copper_door",
 			"typed": "minecraft:copper_door"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:copper_golem_statue",
+			"key": "minecraft:copper_golem_statue",
+			"material": "minecraft:copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.copper_golem_statue",
+			"typed": "minecraft:copper_golem_statue"
 		},
 		{
 			"air": false,
@@ -4654,6 +4801,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:copper_lantern",
+			"key": "minecraft:copper_lantern",
+			"material": "minecraft:copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.copper_lantern",
+			"typed": "minecraft:copper_lantern"
+		},
+		{
+			"air": false,
 			"blastResistance": 3.0,
 			"burnable": false,
 			"collision": true,
@@ -4675,6 +4843,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:copper_torch",
+			"key": "minecraft:copper_torch",
+			"material": "minecraft:copper_torch",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.copper_torch",
+			"typed": "minecraft:copper_torch"
+		},
+		{
+			"air": false,
 			"blastResistance": 6.0,
 			"burnable": false,
 			"collision": true,
@@ -4693,6 +4882,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.copper_trapdoor",
 			"typed": "minecraft:copper_trapdoor"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:copper_torch",
+			"key": "minecraft:copper_wall_torch",
+			"material": "minecraft:copper_wall_torch",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.copper_torch",
+			"typed": "minecraft:copper_wall_torch"
 		},
 		{
 			"air": false,
@@ -5155,6 +5365,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.crimson_roots",
 			"typed": "minecraft:crimson_roots"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:crimson_shelf",
+			"key": "minecraft:crimson_shelf",
+			"material": "minecraft:crimson_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.crimson_shelf",
+			"typed": "minecraft:crimson_shelf"
 		},
 		{
 			"air": false,
@@ -6015,6 +6246,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.dark_oak_sapling",
 			"typed": "minecraft:dark_oak_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:dark_oak_shelf",
+			"key": "minecraft:dark_oak_shelf",
+			"material": "minecraft:dark_oak_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.dark_oak_shelf",
+			"typed": "minecraft:dark_oak_shelf"
 		},
 		{
 			"air": false,
@@ -7743,6 +7995,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:exposed_copper_bars",
+			"key": "minecraft:exposed_copper_bars",
+			"material": "minecraft:exposed_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.exposed_copper_bars",
+			"typed": "minecraft:exposed_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:exposed_copper_bulb",
@@ -7756,6 +8029,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.exposed_copper_bulb",
 			"typed": "minecraft:exposed_copper_bulb"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:exposed_copper_chain",
+			"key": "minecraft:exposed_copper_chain",
+			"material": "minecraft:exposed_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.exposed_copper_chain",
+			"typed": "minecraft:exposed_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:exposed_copper_chest",
+			"key": "minecraft:exposed_copper_chest",
+			"material": "minecraft:exposed_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.exposed_copper_chest",
+			"typed": "minecraft:exposed_copper_chest"
 		},
 		{
 			"air": false,
@@ -7786,6 +8101,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:exposed_copper_golem_statue",
+			"key": "minecraft:exposed_copper_golem_statue",
+			"material": "minecraft:exposed_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.exposed_copper_golem_statue",
+			"typed": "minecraft:exposed_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:exposed_copper_grate",
 			"key": "minecraft:exposed_copper_grate",
@@ -7798,6 +8134,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.exposed_copper_grate",
 			"typed": "minecraft:exposed_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:exposed_copper_lantern",
+			"key": "minecraft:exposed_copper_lantern",
+			"material": "minecraft:exposed_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.exposed_copper_lantern",
+			"typed": "minecraft:exposed_copper_lantern"
 		},
 		{
 			"air": false,
@@ -7882,6 +8239,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.exposed_cut_copper_stairs",
 			"typed": "minecraft:exposed_cut_copper_stairs"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:exposed_lightning_rod",
+			"key": "minecraft:exposed_lightning_rod",
+			"material": "minecraft:exposed_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.exposed_lightning_rod",
+			"typed": "minecraft:exposed_lightning_rod"
 		},
 		{
 			"air": false,
@@ -8058,7 +8436,7 @@
 			"flammable": true,
 			"gravity": false,
 			"hardness": 2.5,
-			"interactable": true,
+			"interactable": false,
 			"itemType": "minecraft:fletching_table",
 			"key": "minecraft:fletching_table",
 			"material": "minecraft:fletching_table",
@@ -9519,6 +9897,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:iron_chain",
+			"key": "minecraft:iron_chain",
+			"material": "minecraft:iron_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.iron_chain",
+			"typed": "minecraft:iron_chain"
+		},
+		{
+			"air": false,
 			"blastResistance": 5.0,
 			"burnable": false,
 			"collision": true,
@@ -9852,6 +10251,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.jungle_sapling",
 			"typed": "minecraft:jungle_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:jungle_shelf",
+			"key": "minecraft:jungle_shelf",
+			"material": "minecraft:jungle_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.jungle_shelf",
+			"typed": "minecraft:jungle_shelf"
 		},
 		{
 			"air": false,
@@ -11865,6 +12285,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:mangrove_shelf",
+			"key": "minecraft:mangrove_shelf",
+			"material": "minecraft:mangrove_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.mangrove_shelf",
+			"typed": "minecraft:mangrove_shelf"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.0,
 			"burnable": false,
 			"collision": false,
@@ -12976,6 +13417,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:oak_shelf",
+			"key": "minecraft:oak_shelf",
+			"material": "minecraft:oak_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.oak_shelf",
+			"typed": "minecraft:oak_shelf"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.0,
 			"burnable": false,
 			"collision": false,
@@ -13589,6 +14051,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:oxidized_copper_bars",
+			"key": "minecraft:oxidized_copper_bars",
+			"material": "minecraft:oxidized_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.oxidized_copper_bars",
+			"typed": "minecraft:oxidized_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:oxidized_copper_bulb",
@@ -13602,6 +14085,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.oxidized_copper_bulb",
 			"typed": "minecraft:oxidized_copper_bulb"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:oxidized_copper_chain",
+			"key": "minecraft:oxidized_copper_chain",
+			"material": "minecraft:oxidized_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.oxidized_copper_chain",
+			"typed": "minecraft:oxidized_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:oxidized_copper_chest",
+			"key": "minecraft:oxidized_copper_chest",
+			"material": "minecraft:oxidized_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.oxidized_copper_chest",
+			"typed": "minecraft:oxidized_copper_chest"
 		},
 		{
 			"air": false,
@@ -13632,6 +14157,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:oxidized_copper_golem_statue",
+			"key": "minecraft:oxidized_copper_golem_statue",
+			"material": "minecraft:oxidized_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.oxidized_copper_golem_statue",
+			"typed": "minecraft:oxidized_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:oxidized_copper_grate",
 			"key": "minecraft:oxidized_copper_grate",
@@ -13644,6 +14190,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.oxidized_copper_grate",
 			"typed": "minecraft:oxidized_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:oxidized_copper_lantern",
+			"key": "minecraft:oxidized_copper_lantern",
+			"material": "minecraft:oxidized_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.oxidized_copper_lantern",
+			"typed": "minecraft:oxidized_copper_lantern"
 		},
 		{
 			"air": false,
@@ -13728,6 +14295,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.oxidized_cut_copper_stairs",
 			"typed": "minecraft:oxidized_cut_copper_stairs"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:oxidized_lightning_rod",
+			"key": "minecraft:oxidized_lightning_rod",
+			"material": "minecraft:oxidized_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.oxidized_lightning_rod",
+			"typed": "minecraft:oxidized_lightning_rod"
 		},
 		{
 			"air": false,
@@ -14043,6 +14631,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.pale_oak_sapling",
 			"typed": "minecraft:pale_oak_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:pale_oak_shelf",
+			"key": "minecraft:pale_oak_shelf",
+			"material": "minecraft:pale_oak_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.pale_oak_shelf",
+			"typed": "minecraft:pale_oak_shelf"
 		},
 		{
 			"air": false,
@@ -19170,6 +19779,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:spruce_shelf",
+			"key": "minecraft:spruce_shelf",
+			"material": "minecraft:spruce_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.spruce_shelf",
+			"typed": "minecraft:spruce_shelf"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.0,
 			"burnable": false,
 			"collision": false,
@@ -21162,6 +21792,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 3.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:warped_shelf",
+			"key": "minecraft:warped_shelf",
+			"material": "minecraft:warped_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.warped_shelf",
+			"typed": "minecraft:warped_shelf"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.0,
 			"burnable": false,
 			"collision": false,
@@ -21397,6 +22048,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_copper_bars",
+			"key": "minecraft:waxed_copper_bars",
+			"material": "minecraft:waxed_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_copper_bars",
+			"typed": "minecraft:waxed_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_copper_block",
@@ -21439,6 +22111,48 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_copper_chain",
+			"key": "minecraft:waxed_copper_chain",
+			"material": "minecraft:waxed_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_copper_chain",
+			"typed": "minecraft:waxed_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_copper_chest",
+			"key": "minecraft:waxed_copper_chest",
+			"material": "minecraft:waxed_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_copper_chest",
+			"typed": "minecraft:waxed_copper_chest"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": true,
 			"itemType": "minecraft:waxed_copper_door",
@@ -21461,6 +22175,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_copper_golem_statue",
+			"key": "minecraft:waxed_copper_golem_statue",
+			"material": "minecraft:waxed_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.waxed_copper_golem_statue",
+			"typed": "minecraft:waxed_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_copper_grate",
 			"key": "minecraft:waxed_copper_grate",
@@ -21473,6 +22208,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_copper_grate",
 			"typed": "minecraft:waxed_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:waxed_copper_lantern",
+			"key": "minecraft:waxed_copper_lantern",
+			"material": "minecraft:waxed_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_copper_lantern",
+			"typed": "minecraft:waxed_copper_lantern"
 		},
 		{
 			"air": false,
@@ -21607,6 +22363,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_exposed_copper_bars",
+			"key": "minecraft:waxed_exposed_copper_bars",
+			"material": "minecraft:waxed_exposed_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_exposed_copper_bars",
+			"typed": "minecraft:waxed_exposed_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_exposed_copper_bulb",
@@ -21620,6 +22397,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_exposed_copper_bulb",
 			"typed": "minecraft:waxed_exposed_copper_bulb"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_exposed_copper_chain",
+			"key": "minecraft:waxed_exposed_copper_chain",
+			"material": "minecraft:waxed_exposed_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_exposed_copper_chain",
+			"typed": "minecraft:waxed_exposed_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_exposed_copper_chest",
+			"key": "minecraft:waxed_exposed_copper_chest",
+			"material": "minecraft:waxed_exposed_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_exposed_copper_chest",
+			"typed": "minecraft:waxed_exposed_copper_chest"
 		},
 		{
 			"air": false,
@@ -21650,6 +22469,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_exposed_copper_golem_statue",
+			"key": "minecraft:waxed_exposed_copper_golem_statue",
+			"material": "minecraft:waxed_exposed_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.waxed_exposed_copper_golem_statue",
+			"typed": "minecraft:waxed_exposed_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_exposed_copper_grate",
 			"key": "minecraft:waxed_exposed_copper_grate",
@@ -21662,6 +22502,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_exposed_copper_grate",
 			"typed": "minecraft:waxed_exposed_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:waxed_exposed_copper_lantern",
+			"key": "minecraft:waxed_exposed_copper_lantern",
+			"material": "minecraft:waxed_exposed_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_exposed_copper_lantern",
+			"typed": "minecraft:waxed_exposed_copper_lantern"
 		},
 		{
 			"air": false,
@@ -21756,6 +22617,48 @@
 			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
+			"itemType": "minecraft:waxed_exposed_lightning_rod",
+			"key": "minecraft:waxed_exposed_lightning_rod",
+			"material": "minecraft:waxed_exposed_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_exposed_lightning_rod",
+			"typed": "minecraft:waxed_exposed_lightning_rod"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_lightning_rod",
+			"key": "minecraft:waxed_lightning_rod",
+			"material": "minecraft:waxed_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_lightning_rod",
+			"typed": "minecraft:waxed_lightning_rod"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
 			"itemType": "minecraft:waxed_oxidized_chiseled_copper",
 			"key": "minecraft:waxed_oxidized_chiseled_copper",
 			"material": "minecraft:waxed_oxidized_chiseled_copper",
@@ -21796,6 +22699,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_oxidized_copper_bars",
+			"key": "minecraft:waxed_oxidized_copper_bars",
+			"material": "minecraft:waxed_oxidized_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_oxidized_copper_bars",
+			"typed": "minecraft:waxed_oxidized_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_oxidized_copper_bulb",
@@ -21809,6 +22733,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_oxidized_copper_bulb",
 			"typed": "minecraft:waxed_oxidized_copper_bulb"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_oxidized_copper_chain",
+			"key": "minecraft:waxed_oxidized_copper_chain",
+			"material": "minecraft:waxed_oxidized_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_oxidized_copper_chain",
+			"typed": "minecraft:waxed_oxidized_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_oxidized_copper_chest",
+			"key": "minecraft:waxed_oxidized_copper_chest",
+			"material": "minecraft:waxed_oxidized_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_oxidized_copper_chest",
+			"typed": "minecraft:waxed_oxidized_copper_chest"
 		},
 		{
 			"air": false,
@@ -21839,6 +22805,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_oxidized_copper_golem_statue",
+			"key": "minecraft:waxed_oxidized_copper_golem_statue",
+			"material": "minecraft:waxed_oxidized_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.waxed_oxidized_copper_golem_statue",
+			"typed": "minecraft:waxed_oxidized_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_oxidized_copper_grate",
 			"key": "minecraft:waxed_oxidized_copper_grate",
@@ -21851,6 +22838,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_oxidized_copper_grate",
 			"typed": "minecraft:waxed_oxidized_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:waxed_oxidized_copper_lantern",
+			"key": "minecraft:waxed_oxidized_copper_lantern",
+			"material": "minecraft:waxed_oxidized_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_oxidized_copper_lantern",
+			"typed": "minecraft:waxed_oxidized_copper_lantern"
 		},
 		{
 			"air": false,
@@ -21945,6 +22953,27 @@
 			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
+			"itemType": "minecraft:waxed_oxidized_lightning_rod",
+			"key": "minecraft:waxed_oxidized_lightning_rod",
+			"material": "minecraft:waxed_oxidized_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_oxidized_lightning_rod",
+			"typed": "minecraft:waxed_oxidized_lightning_rod"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
 			"itemType": "minecraft:waxed_weathered_chiseled_copper",
 			"key": "minecraft:waxed_weathered_chiseled_copper",
 			"material": "minecraft:waxed_weathered_chiseled_copper",
@@ -21985,6 +23014,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_weathered_copper_bars",
+			"key": "minecraft:waxed_weathered_copper_bars",
+			"material": "minecraft:waxed_weathered_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_weathered_copper_bars",
+			"typed": "minecraft:waxed_weathered_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_weathered_copper_bulb",
@@ -21998,6 +23048,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_weathered_copper_bulb",
 			"typed": "minecraft:waxed_weathered_copper_bulb"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:waxed_weathered_copper_chain",
+			"key": "minecraft:waxed_weathered_copper_chain",
+			"material": "minecraft:waxed_weathered_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_weathered_copper_chain",
+			"typed": "minecraft:waxed_weathered_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_weathered_copper_chest",
+			"key": "minecraft:waxed_weathered_copper_chest",
+			"material": "minecraft:waxed_weathered_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_weathered_copper_chest",
+			"typed": "minecraft:waxed_weathered_copper_chest"
 		},
 		{
 			"air": false,
@@ -22028,6 +23120,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:waxed_weathered_copper_golem_statue",
+			"key": "minecraft:waxed_weathered_copper_golem_statue",
+			"material": "minecraft:waxed_weathered_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.waxed_weathered_copper_golem_statue",
+			"typed": "minecraft:waxed_weathered_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:waxed_weathered_copper_grate",
 			"key": "minecraft:waxed_weathered_copper_grate",
@@ -22040,6 +23153,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.waxed_weathered_copper_grate",
 			"typed": "minecraft:waxed_weathered_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:waxed_weathered_copper_lantern",
+			"key": "minecraft:waxed_weathered_copper_lantern",
+			"material": "minecraft:waxed_weathered_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_weathered_copper_lantern",
+			"typed": "minecraft:waxed_weathered_copper_lantern"
 		},
 		{
 			"air": false,
@@ -22134,6 +23268,27 @@
 			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
+			"itemType": "minecraft:waxed_weathered_lightning_rod",
+			"key": "minecraft:waxed_weathered_lightning_rod",
+			"material": "minecraft:waxed_weathered_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.waxed_weathered_lightning_rod",
+			"typed": "minecraft:waxed_weathered_lightning_rod"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
 			"itemType": "minecraft:weathered_chiseled_copper",
 			"key": "minecraft:weathered_chiseled_copper",
 			"material": "minecraft:weathered_chiseled_copper",
@@ -22174,6 +23329,27 @@
 			"collision": true,
 			"flammable": false,
 			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:weathered_copper_bars",
+			"key": "minecraft:weathered_copper_bars",
+			"material": "minecraft:weathered_copper_bars",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.weathered_copper_bars",
+			"typed": "minecraft:weathered_copper_bars"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
 			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:weathered_copper_bulb",
@@ -22187,6 +23363,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.weathered_copper_bulb",
 			"typed": "minecraft:weathered_copper_bulb"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 5.0,
+			"interactable": false,
+			"itemType": "minecraft:weathered_copper_chain",
+			"key": "minecraft:weathered_copper_chain",
+			"material": "minecraft:weathered_copper_chain",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.weathered_copper_chain",
+			"typed": "minecraft:weathered_copper_chain"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:weathered_copper_chest",
+			"key": "minecraft:weathered_copper_chest",
+			"material": "minecraft:weathered_copper_chest",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.weathered_copper_chest",
+			"typed": "minecraft:weathered_copper_chest"
 		},
 		{
 			"air": false,
@@ -22217,6 +23435,27 @@
 			"flammable": false,
 			"gravity": false,
 			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:weathered_copper_golem_statue",
+			"key": "minecraft:weathered_copper_golem_statue",
+			"material": "minecraft:weathered_copper_golem_statue",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.weathered_copper_golem_statue",
+			"typed": "minecraft:weathered_copper_golem_statue"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
 			"interactable": false,
 			"itemType": "minecraft:weathered_copper_grate",
 			"key": "minecraft:weathered_copper_grate",
@@ -22229,6 +23468,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.weathered_copper_grate",
 			"typed": "minecraft:weathered_copper_grate"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.5,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.5,
+			"interactable": false,
+			"itemType": "minecraft:weathered_copper_lantern",
+			"key": "minecraft:weathered_copper_lantern",
+			"material": "minecraft:weathered_copper_lantern",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.weathered_copper_lantern",
+			"typed": "minecraft:weathered_copper_lantern"
 		},
 		{
 			"air": false,
@@ -22313,6 +23573,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.weathered_cut_copper_stairs",
 			"typed": "minecraft:weathered_cut_copper_stairs"
+		},
+		{
+			"air": false,
+			"blastResistance": 6.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": false,
+			"itemType": "minecraft:weathered_lightning_rod",
+			"key": "minecraft:weathered_lightning_rod",
+			"material": "minecraft:weathered_lightning_rod",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.weathered_lightning_rod",
+			"typed": "minecraft:weathered_lightning_rod"
 		},
 		{
 			"air": false,

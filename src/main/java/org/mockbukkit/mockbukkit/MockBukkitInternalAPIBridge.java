@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit;
 
+import com.destroystokyo.paper.SkinParts;
 import io.papermc.paper.InternalAPIBridge;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
+import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.damage.DamageEffect;
@@ -23,6 +26,7 @@ import java.util.function.Predicate;
 @ApiStatus.Experimental
 public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 {
+	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component.translatable("entity.minecraft.mannequin.label");
 
 	private @Nullable BiomeMock customBiome = null;
 
@@ -67,6 +71,26 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ResolvableProfile defaultMannequinProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public SkinParts.Mutable allSkinParts()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NonNull Component defaultMannequinDescription()
+	{
+		return DEFAULT_MANNEQUIN_DESCRIPTION;
 	}
 
 }
