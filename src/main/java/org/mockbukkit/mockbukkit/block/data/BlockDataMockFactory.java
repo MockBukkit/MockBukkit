@@ -22,6 +22,7 @@ import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.BrewingStand;
+import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CommandBlock;
@@ -36,6 +37,7 @@ import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.block.data.type.Grindstone;
 import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
 import org.bukkit.block.data.type.Observer;
@@ -134,6 +136,8 @@ public final class BlockDataMockFactory
 			.put(Ageable.class, AgeableDataMock::new)
 			.put(Bisected.class, BisectedDataMock::new)
 			.put(GlassPane.class, GlassPaneDataMock::new)
+			.put(CaveVines.class, CaveVineDataMock::new)
+			.put(Leaves.class, LeavesDataMock::new )
 			.build();
 
 	/**
