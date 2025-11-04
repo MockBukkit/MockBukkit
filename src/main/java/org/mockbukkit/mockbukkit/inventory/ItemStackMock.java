@@ -22,6 +22,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
@@ -53,9 +54,15 @@ public class ItemStackMock extends ItemStack
 		int amountValue = json.get(FIELD_AMOUNT).getAsInt();
 		NamespacedKey materialKey = NamespacedKey.fromString(json.get(FIELD_MATERIAL).getAsString());
 		Preconditions.checkArgument(materialKey != null, "Material field does not exist");
-		Material materialValue = Material.valueOf(materialKey.getKey().toUpperCase(Locale.ROOT));
 
-		return new ItemStackMock(materialValue, amountValue);
+		try
+		{
+			Material materialValue = Material.valueOf(materialKey.getKey().toUpperCase(Locale.ROOT));
+			return new ItemStackMock(materialValue, amountValue);
+		} catch (IllegalArgumentException e)
+		{
+			throw new IncompatiblePaperVersionException(e);
+		}
 	}
 
 	private final Map<DataComponentType, Object> components = new HashMap<>();
