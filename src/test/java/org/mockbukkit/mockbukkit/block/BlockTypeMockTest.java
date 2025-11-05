@@ -1016,7 +1016,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSkull()
 		{
 			Skull data = BlockType.SKELETON_SKULL.createBlockData();
@@ -1025,7 +1024,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWallSkull()
 		{
 			WallSkull data = BlockType.SKELETON_WALL_SKULL.createBlockData();

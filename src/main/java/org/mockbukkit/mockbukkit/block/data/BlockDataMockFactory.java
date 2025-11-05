@@ -54,6 +54,7 @@ import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.SculkSensor;
+import org.bukkit.block.data.type.Skull;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TechnicalPiston;
@@ -61,6 +62,7 @@ import org.bukkit.block.data.type.TestBlock;
 import org.bukkit.block.data.type.TrialSpawner;
 import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Vault;
+import org.bukkit.block.data.type.WallSkull;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -126,6 +128,7 @@ public final class BlockDataMockFactory
 			.put(PistonHead.class, PistonHeadDataMock::new)
 			.put(Powerable.class, PowerableDataMock::new)
 			.put(SculkSensor.class, SculkSensorDataMock::new)
+			.put(Skull.class, SkullDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TechnicalPiston.class, TechnicalPistonDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
@@ -145,6 +148,7 @@ public final class BlockDataMockFactory
 			.put(Rotatable.class, RotatableDataMock::new)
 			.put(Snowable.class, SnowableDataMock::new)
 			.put(Waterlogged.class, WaterloggedDataMock::new)
+			.put(WallSkull.class, WallSkullDataMock::new)
 			.put(Ageable.class, AgeableDataMock::new)
 			.put(Bisected.class, BisectedDataMock::new)
 			.put(GlassPane.class, GlassPaneDataMock::new)
