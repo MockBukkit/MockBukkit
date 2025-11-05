@@ -14,6 +14,7 @@ import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.Rotatable;
 import org.bukkit.block.data.Snowable;
@@ -123,6 +124,7 @@ public final class BlockDataMockFactory
 			.put(Orientable.class, OrientableMock::new)
 			.put(Piston.class, PistonDataMock::new)
 			.put(PistonHead.class, PistonHeadDataMock::new)
+			.put(Powerable.class, PowerableDataMock::new)
 			.put(SculkSensor.class, SculkSensorDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TechnicalPiston.class, TechnicalPistonDataMock::new)

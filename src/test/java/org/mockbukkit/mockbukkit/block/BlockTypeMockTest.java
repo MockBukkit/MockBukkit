@@ -886,7 +886,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenPowerable()
 		{
 			Powerable data = BlockType.STONE_PRESSURE_PLATE.createBlockData();
