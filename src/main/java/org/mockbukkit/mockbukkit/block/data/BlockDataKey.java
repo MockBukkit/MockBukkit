@@ -11,6 +11,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Hangable;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
@@ -147,6 +148,7 @@ public enum BlockDataKey
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
+	HANGING_KEY("hanging", Boolean::parseBoolean, Hangable.class::isInstance),
 
 	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
