@@ -22,6 +22,7 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
+import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.CalibratedSculkSensor;
 import org.bukkit.block.data.type.CaveVines;
@@ -32,6 +33,7 @@ import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
+import org.bukkit.block.data.type.Dripleaf;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
@@ -55,6 +57,7 @@ import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.SculkSensor;
 import org.bukkit.block.data.type.Skull;
+import org.bukkit.block.data.type.SmallDripleaf;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TechnicalPiston;
@@ -98,6 +101,7 @@ public final class BlockDataMockFactory
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(BigDripleaf.class, BigDripleafDataMock::new)
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
 			.put(CalibratedSculkSensor.class, CalibratedSculkSensorDataMock::new)
@@ -109,6 +113,7 @@ public final class BlockDataMockFactory
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Dispenser.class, DispenserDataMock::new)
 			.put(Directional.class, DirectionalDataMock::new)
+			.put(Dripleaf.class, DripleafDataMock::new)
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
@@ -129,6 +134,7 @@ public final class BlockDataMockFactory
 			.put(Powerable.class, PowerableDataMock::new)
 			.put(SculkSensor.class, SculkSensorDataMock::new)
 			.put(Skull.class, SkullDataMock::new)
+			.put(SmallDripleaf.class, SmallDripleafDataMock::new)
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TechnicalPiston.class, TechnicalPistonDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)

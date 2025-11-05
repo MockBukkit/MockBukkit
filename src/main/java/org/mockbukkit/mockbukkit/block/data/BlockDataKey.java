@@ -25,6 +25,7 @@ import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
@@ -188,6 +189,7 @@ public enum BlockDataKey
 
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
+	TILT("tilt", EnumDataDeserializer.of(BigDripleaf.Tilt.class), BigDripleaf.class::isInstance),
 	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
 	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
 	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),

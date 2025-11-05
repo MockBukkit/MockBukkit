@@ -1307,7 +1307,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDripleaf()
 		{
 			Dripleaf data = BlockType.BIG_DRIPLEAF_STEM.createBlockData();
@@ -1316,7 +1315,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBigDripleaf()
 		{
 			BigDripleaf data = BlockType.BIG_DRIPLEAF.createBlockData();
@@ -1325,7 +1323,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSmallDripleaf()
 		{
 			SmallDripleaf data = BlockType.SMALL_DRIPLEAF.createBlockData();
