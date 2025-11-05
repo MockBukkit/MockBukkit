@@ -61,6 +61,7 @@ public class BlockDataLimitation<T, U>
 	{
 
 		public static final Type<Integer, Integer> MAX_AGE = new Type<>("maxAge", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_CHARGES = new Type<>("maxCharges", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_POWER = new Type<>("maxPower", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_STAGE = new Type<>("maxStage", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_LEVEL = new Type<>("maxLevel", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));

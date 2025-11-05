@@ -41,11 +41,14 @@ import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
+import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
+import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.SculkSensor;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
@@ -58,6 +61,7 @@ import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.deserializer.EnumDataDeserializer;
+import org.mockbukkit.mockbukkit.block.data.deserializer.InstrumentDeserializer;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -149,6 +153,8 @@ public enum BlockDataKey
 	REDSTONE_NORTH("north", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 
+	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class), SculkSensor.class::isInstance),
+
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
 
@@ -181,7 +187,10 @@ public enum BlockDataKey
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
 	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
+	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
+	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
 
+	CHARGES("charges", Integer::parseInt, RespawnAnchor.class::isInstance),
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
 	MODE("mode", EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance),

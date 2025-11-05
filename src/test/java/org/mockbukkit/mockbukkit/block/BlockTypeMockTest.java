@@ -690,7 +690,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenNoteBlock()
 		{
 			NoteBlock data = BlockType.NOTE_BLOCK.createBlockData();
@@ -1191,7 +1190,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRespawnAnchor()
 		{
 			RespawnAnchor data = BlockType.RESPAWN_ANCHOR.createBlockData();
@@ -1200,7 +1198,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSculkSensor()
 		{
 			SculkSensor data = BlockType.SCULK_SENSOR.createBlockData();
@@ -1209,7 +1206,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCalibratedSculkSensor()
 		{
 			CalibratedSculkSensor data = BlockType.CALIBRATED_SCULK_SENSOR.createBlockData();
