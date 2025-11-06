@@ -133,14 +133,15 @@ tasks {
 	register("printPaperDetails")
 	{
 		doLast {
-			val sha512 = getDependencyHash(
+			val dependency = getDependencyInformation(
 				dependencyGroup = "io.papermc.paper",
 				artifactName = "paper-api",
 				artifactVersion = project.property("paper.api.full-version").toString()
 			)
 			println("Paper version: ${project.property("paper.api.version")}")
 			println("Paper full version: ${project.property("paper.api.full-version")}")
-			println("Paper SHA-512: $sha512")
+			println("Paper resolved version: ${dependency?.resolvedVersion}")
+			println("Paper SHA-512: ${dependency?.hash}")
 		}
 	}
 }
@@ -269,20 +270,22 @@ fun run(vararg cmd: String): String {
  * @return The hexadecimal string representation of the computed hash, or `null` if the artifact
  *         could not be found or the hash computation failed.
  */
-fun getDependencyHash(
+fun Project.getDependencyInformation(
 	dependencyGroup: String,
 	artifactName: String,
 	artifactVersion: String,
 	hashAlgorithm: String = "SHA-512",
 	targetConfiguration: String = "compileClasspath"
-): String? {
+): DependencyHashResult? {
 	val artifact = try {
 		configurations.getByName(targetConfiguration)
 			.resolvedConfiguration
 			.resolvedArtifacts
 			.firstOrNull {
 				val id = it.moduleVersion.id
-				id.group == dependencyGroup && id.name == artifactName && id.version == artifactVersion
+				id.group == dependencyGroup &&
+						id.name == artifactName &&
+						id.version == artifactVersion
 			} ?: run {
 			logger.warn("Artifact not found: $dependencyGroup:$artifactName:$artifactVersion in configuration '$targetConfiguration'")
 			return null
@@ -292,7 +295,8 @@ fun getDependencyHash(
 		return null
 	}
 
-	return try {
+	val resolvedVersion = artifact.id.componentIdentifier.displayName
+	val hash = try {
 		val digest = MessageDigest.getInstance(hashAlgorithm)
 		artifact.file.inputStream().buffered(DEFAULT_BUFFER_SIZE).use { input ->
 			val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
@@ -307,6 +311,13 @@ fun getDependencyHash(
 		digest.digest().joinToString("") { "%02x".format(it) }
 	} catch (e: Exception) {
 		logger.error("Failed to compute digest for ${artifact.file.name}: ${e.message}")
-		null
+		return null
 	}
+
+	return DependencyHashResult(hash = hash, resolvedVersion = resolvedVersion)
 }
+
+data class DependencyHashResult(
+	val hash: String,
+	val resolvedVersion: String
+)
