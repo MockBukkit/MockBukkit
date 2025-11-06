@@ -55,10 +55,10 @@ jobs:
           tag: ${{ steps.bump-semver.outputs.new_version }}
           message: |
             ${{ steps.bump-semver.outputs.new_version }}
-            ${{ steps.paper-version.outputs.paper_details }}
+            Triggered by: PR #${{ steps.pr.outputs.number }}
+            Commit: ${{ github.sha }}
             ---
-            **Triggered by:** PR #${{ steps.pr.outputs.number }}
-            **Commit:** ${{ github.sha }}
+            ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
     uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
