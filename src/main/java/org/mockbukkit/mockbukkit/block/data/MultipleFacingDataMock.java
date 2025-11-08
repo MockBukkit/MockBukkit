@@ -28,10 +28,7 @@ public class MultipleFacingDataMock extends BlockDataMock implements MultipleFac
 	public boolean hasFace(@NotNull BlockFace face)
 	{
 		Preconditions.checkArgument(getAllowedFaces().contains(face), "Illegal facing: " + face);
-		return toKey(face)
-				.map(super::get)
-				.map(object -> (boolean) object)
-				.orElse(false);
+		return toKey(face).map(super::get).map(object -> (boolean) object).orElse(false);
 	}
 
 	@Override
@@ -44,9 +41,7 @@ public class MultipleFacingDataMock extends BlockDataMock implements MultipleFac
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return getAllowedFaces().stream()
-				.filter(this::hasFace)
-				.collect(Collectors.toSet());
+		return getAllowedFaces().stream().filter(this::hasFace).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -56,7 +51,7 @@ public class MultipleFacingDataMock extends BlockDataMock implements MultipleFac
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings({ "MethodDoesntCallSuperMethod", "java:S2975", "java:S1182" })
 	public @NotNull MultipleFacingDataMock clone()
 	{
 		return new MultipleFacingDataMock(this);
@@ -66,7 +61,7 @@ public class MultipleFacingDataMock extends BlockDataMock implements MultipleFac
 	{
 		return switch (blockFace)
 		{
-			case null ->  Optional.empty();
+			case null -> Optional.empty();
 			case NORTH -> Optional.of(BlockDataKey.NORTH);
 			case SOUTH -> Optional.of(BlockDataKey.SOUTH);
 			case EAST -> Optional.of(BlockDataKey.EAST);
