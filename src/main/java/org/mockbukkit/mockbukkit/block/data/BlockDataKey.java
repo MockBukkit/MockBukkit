@@ -36,6 +36,7 @@ import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
+import org.bukkit.block.data.type.Comparator;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.DecoratedPot;
@@ -204,6 +205,7 @@ public enum BlockDataKey
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
 	MODE("mode", EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance),
+	COMPARATOR_MODE("mode", EnumDataDeserializer.of(Comparator.Mode.class), Comparator.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),

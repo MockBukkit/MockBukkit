@@ -819,7 +819,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenComparator()
 		{
 			Comparator data = BlockType.COMPARATOR.createBlockData();
