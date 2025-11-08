@@ -33,6 +33,7 @@ import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.CaveVinesPlant;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.ChiseledBookshelf;
+import org.bukkit.block.data.type.Cocoa;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
@@ -116,6 +117,7 @@ public final class BlockDataMockFactory
 			.put(CalibratedSculkSensor.class, CalibratedSculkSensorDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
 			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)
+			.put(Cocoa.class, CocoaDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(CreakingHeart.class, CreakingHeartDataMock::new)
