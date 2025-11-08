@@ -919,7 +919,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCake()
 		{
 			Cake data = BlockType.CAKE.createBlockData();

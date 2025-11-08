@@ -1334,7 +1334,9 @@
 	},
 	"minecraft:cactus_flower": {},
 	"minecraft:cake": {
-		"allowedStates": {},
+		"allowedStates": {
+			"maxBites": 6
+		},
 		"defaultStates": {
 			"bites": "0"
 		}

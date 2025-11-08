@@ -30,6 +30,7 @@ import org.bukkit.block.data.type.Bell;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.BubbleColumn;
+import org.bukkit.block.data.type.Cake;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.CaveVines;
@@ -153,6 +154,7 @@ public enum BlockDataKey
 	LEAVES_KEY("leaves", EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
 	HANGING_KEY("hanging", Boolean::parseBoolean, Hangable.class::isInstance),
+	BITES("bites", Integer::parseInt, Cake.class::isInstance),
 
 	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),

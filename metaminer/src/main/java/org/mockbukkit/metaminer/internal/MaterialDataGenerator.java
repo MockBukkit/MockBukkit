@@ -13,6 +13,7 @@ import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Cake;
 import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.Farmland;
@@ -185,6 +186,11 @@ public class MaterialDataGenerator implements DataGenerator
 		if (data instanceof Beehive beehive)
 		{
 			obj.addProperty("maxHoneyLevel", beehive.getMaximumHoneyLevel());
+		}
+
+		if (data instanceof Cake cake)
+		{
+			obj.addProperty("maxBites", cake.getMaximumBites());
 		}
 	}
 
