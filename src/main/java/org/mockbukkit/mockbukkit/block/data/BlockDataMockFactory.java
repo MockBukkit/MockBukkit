@@ -23,6 +23,7 @@ import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Bell;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.CalibratedSculkSensor;
@@ -104,6 +105,7 @@ public final class BlockDataMockFactory
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
 			.put(Beehive.class, BeehiveDataMock::new)
+			.put(Bell.class, BellDataMock::new)
 			.put(BigDripleaf.class, BigDripleafDataMock::new)
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)

@@ -26,6 +26,7 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Bell;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
@@ -158,6 +159,7 @@ public enum BlockDataKey
 	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 
 	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class), SculkSensor.class::isInstance),
+	ATTACHMENT("attachment", EnumDataDeserializer.of(Bell.Attachment.class), Bell.class::isInstance),
 
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
