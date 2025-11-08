@@ -43,6 +43,7 @@ import org.bukkit.block.data.type.DaylightDetector;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.EndPortalFrame;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.HangingMoss;
@@ -168,6 +169,7 @@ public enum BlockDataKey
 
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
+	EYE("eye", Boolean::parseBoolean, EndPortalFrame.class::isInstance),
 
 	ROTATION("rotation", Integer::parseInt, Rotatable.class::isInstance),
 

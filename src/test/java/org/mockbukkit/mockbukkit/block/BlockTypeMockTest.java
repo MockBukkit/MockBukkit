@@ -969,7 +969,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenEndPortalFrame()
 		{
 			EndPortalFrame data = BlockType.END_PORTAL_FRAME.createBlockData();

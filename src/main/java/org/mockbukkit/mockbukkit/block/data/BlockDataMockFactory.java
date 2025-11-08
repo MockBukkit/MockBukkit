@@ -44,6 +44,7 @@ import org.bukkit.block.data.type.DaylightDetector;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Dripleaf;
+import org.bukkit.block.data.type.EndPortalFrame;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Furnace;
@@ -133,6 +134,7 @@ public final class BlockDataMockFactory
 			.put(Dispenser.class, DispenserDataMock::new)
 			.put(Directional.class, DirectionalDataMock::new)
 			.put(Dripleaf.class, DripleafDataMock::new)
+			.put(EndPortalFrame.class, EndPortalFrameDataMock::new)
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
