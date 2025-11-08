@@ -72,6 +72,7 @@ public class BlockDataLimitation<T, U>
 		public static final Type<Integer, Integer> MAX_HATCH = new Type<>("maxHatch", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_MOISTURE = new Type<>("maxMoisture", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Integer, Integer> MAX_OCCUPIED_SLOTS = new Type<>("maxOccupiedSlots", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_HONEY_LEVEL = new Type<>("maxHoneyLevel", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
 		public static final Type<Set<BlockFace>, BlockFace> FACES = new Type<>("faces", jsonElement -> BlockDataLimitation.fromSet(
 				jsonElement.getAsJsonArray()
 						.asList()

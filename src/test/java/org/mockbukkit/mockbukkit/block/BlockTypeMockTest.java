@@ -1168,7 +1168,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBeeNest()
 		{
 			Beehive data = BlockType.BEE_NEST.createBlockData();
@@ -1177,7 +1176,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBeehive()
 		{
 			Beehive data = BlockType.BEEHIVE.createBlockData();

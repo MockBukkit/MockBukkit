@@ -25,6 +25,7 @@ import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
@@ -229,6 +230,7 @@ public enum BlockDataKey
 
 	PERSISTENT("persistent",Boolean::parseBoolean, Leaves.class::isInstance),
 	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance),
+	HONEY_LEVEL("honey_level", Integer::parseInt, Beehive.class::isInstance),
 
 	BERRIES("berries", Boolean::parseBoolean, CaveVines.class::isInstance);
 

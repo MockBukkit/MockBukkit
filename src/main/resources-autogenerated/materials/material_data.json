@@ -566,7 +566,8 @@
 				"NORTH",
 				"SOUTH",
 				"WEST"
-			]
+			],
+			"maxHoneyLevel": 5
 		},
 		"defaultStates": {
 			"facing": "north",
@@ -580,7 +581,8 @@
 				"NORTH",
 				"SOUTH",
 				"WEST"
-			]
+			],
+			"maxHoneyLevel": 5
 		},
 		"defaultStates": {
 			"facing": "north",

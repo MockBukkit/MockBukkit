@@ -22,6 +22,7 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
+import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.CalibratedSculkSensor;
@@ -102,6 +103,7 @@ public final class BlockDataMockFactory
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(Beehive.class, BeehiveDataMock::new)
 			.put(BigDripleaf.class, BigDripleafDataMock::new)
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
