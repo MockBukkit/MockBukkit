@@ -1069,7 +1069,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCoralWallFan()
 		{
 			CoralWallFan data = BlockType.DEAD_BRAIN_CORAL_WALL_FAN.createBlockData();

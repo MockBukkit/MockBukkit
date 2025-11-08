@@ -37,6 +37,7 @@ import org.bukkit.block.data.type.Cocoa;
 import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Comparator;
 import org.bukkit.block.data.type.CopperBulb;
+import org.bukkit.block.data.type.CoralWallFan;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.DecoratedPot;
@@ -123,6 +124,7 @@ public final class BlockDataMockFactory
 			.put(CommandBlock.class, CommandBlockDataMock::new)
 			.put(Comparator.class, ComparatorDataMock::new)
 			.put(CopperBulb.class, CopperBulbDataMock::new)
+			.put(CoralWallFan.class, CoralWallFanDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(CreakingHeart.class, CreakingHeartDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
