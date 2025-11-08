@@ -762,7 +762,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenFire()
 		{
 			Fire data = BlockType.FIRE.createBlockData();
@@ -925,7 +924,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenMultipleFacing()
 		{
 			MultipleFacing data = BlockType.BROWN_MUSHROOM_BLOCK.createBlockData();

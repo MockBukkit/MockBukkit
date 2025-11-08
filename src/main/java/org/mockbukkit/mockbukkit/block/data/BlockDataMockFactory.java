@@ -13,6 +13,7 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
+import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
@@ -47,6 +48,7 @@ import org.bukkit.block.data.type.Dripleaf;
 import org.bukkit.block.data.type.EndPortalFrame;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
+import org.bukkit.block.data.type.Fire;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.block.data.type.Grindstone;
@@ -137,6 +139,7 @@ public final class BlockDataMockFactory
 			.put(EndPortalFrame.class, EndPortalFrameDataMock::new)
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
+			.put(Fire.class, FireDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
 			.put(Grindstone.class, GrindstoneDataMock::new)
 			.put(HangingMoss.class, HangingMossDataMock::new)
@@ -147,6 +150,7 @@ public final class BlockDataMockFactory
 			.put(Light.class, LightDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
 			.put(MangrovePropagule.class, MangrovePropaguleDataMock::new)
+			.put(MultipleFacing.class, MultipleFacingDataMock::new)
 			.put(NoteBlock.class, NoteBlockDataMock::new)
 			.put(Observer.class, ObserverDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
