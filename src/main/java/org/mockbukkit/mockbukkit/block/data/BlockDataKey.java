@@ -39,6 +39,7 @@ import org.bukkit.block.data.type.CommandBlock;
 import org.bukkit.block.data.type.Comparator;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
+import org.bukkit.block.data.type.DaylightDetector;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
@@ -209,6 +210,7 @@ public enum BlockDataKey
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
+	IS_INVERTED("power", Boolean::parseBoolean, DaylightDetector.class::isInstance),
 
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
 	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),

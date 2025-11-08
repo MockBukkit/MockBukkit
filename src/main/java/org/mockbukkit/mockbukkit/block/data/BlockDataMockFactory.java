@@ -40,6 +40,7 @@ import org.bukkit.block.data.type.CopperBulb;
 import org.bukkit.block.data.type.CoralWallFan;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
+import org.bukkit.block.data.type.DaylightDetector;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Dripleaf;
@@ -127,6 +128,7 @@ public final class BlockDataMockFactory
 			.put(CoralWallFan.class, CoralWallFanDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(CreakingHeart.class, CreakingHeartDataMock::new)
+			.put(DaylightDetector.class, DaylightDetectorDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Dispenser.class, DispenserDataMock::new)
 			.put(Directional.class, DirectionalDataMock::new)

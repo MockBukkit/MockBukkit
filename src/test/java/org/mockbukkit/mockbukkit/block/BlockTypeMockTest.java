@@ -827,7 +827,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDaylightDetector()
 		{
 			DaylightDetector data = BlockType.DAYLIGHT_DETECTOR.createBlockData();
