@@ -1090,7 +1090,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBubbleColumn()
 		{
 			BubbleColumn data = BlockType.BUBBLE_COLUMN.createBlockData();

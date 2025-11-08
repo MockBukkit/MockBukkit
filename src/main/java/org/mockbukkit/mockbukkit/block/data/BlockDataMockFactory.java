@@ -26,6 +26,7 @@ import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.Bell;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
+import org.bukkit.block.data.type.BubbleColumn;
 import org.bukkit.block.data.type.CalibratedSculkSensor;
 import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.CaveVinesPlant;
@@ -109,6 +110,7 @@ public final class BlockDataMockFactory
 			.put(BigDripleaf.class, BigDripleafDataMock::new)
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
+			.put(BubbleColumn.class, BubbleColumnDataMock::new)
 			.put(CalibratedSculkSensor.class, CalibratedSculkSensorDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
 			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)

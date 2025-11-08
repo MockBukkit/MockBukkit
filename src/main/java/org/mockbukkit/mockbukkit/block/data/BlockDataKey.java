@@ -29,6 +29,7 @@ import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.Bell;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
+import org.bukkit.block.data.type.BubbleColumn;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.CaveVines;
@@ -229,6 +230,7 @@ public enum BlockDataKey
 	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance),
+	DRAG("drag", Boolean::parseBoolean, BubbleColumn.class::isInstance),
 
 	PERSISTENT("persistent",Boolean::parseBoolean, Leaves.class::isInstance),
 	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance),
