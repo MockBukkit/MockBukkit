@@ -1230,7 +1230,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCopperBulb()
 		{
 			CopperBulb data = BlockType.COPPER_BULB.createBlockData();
