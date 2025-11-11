@@ -7,7 +7,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
@@ -16,6 +15,7 @@ import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -70,6 +70,35 @@ import static java.util.Objects.nonNull;
 @DelegateDeserialization(SerializableMeta.class)
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
+	public static final String ATTRIBUTE_MODIFIERS = "attribute-modifiers";
+	public static final String CUSTOM_MODEL_DATA = "custom-model-data";
+	public static final String DAMAGE = "Damage";
+	public static final String DAMAGE_RESISTANT = "damage-resistant";
+	public static final String DISPLAY_NAME = "display-name";
+	public static final String ENCHANTABLE = "enchantable";
+	public static final String ENCHANTMENT_GLINT_OVERRIDE = "enchantment-glint-override";
+	public static final String ENCHANTMENTS = "enchantments";
+	public static final String EQUIPPABLE = "equippable";
+	public static final String FIRE_RESISTANT = "FireResistant";
+	public static final String FOOD = "food";
+	public static final String GLIDER = "glider";
+	public static final String HIDE_TOOLTIP = "HideTooltip";
+	public static final String ITEM_FLAGS = "ItemFlags";
+	public static final String ITEM_MODEL = "item-model";
+	public static final String ITEM_NAME = "item-name";
+	public static final String JUKEBOX_PLAYABLE = "jukebox-playable";
+	public static final String LORE = "lore";
+	public static final String MAX_DAMAGE = "max-damage";
+	public static final String MAX_STACK_SIZE = "max-stack-size";
+	public static final String META_TYPE = "meta-type";
+	public static final String PUBLIC_BUKKIT_VALUES = "PublicBukkitValues";
+	public static final String RARITY = "rarity";
+	public static final String REPAIR_COST = "repair-cost";
+	public static final String TOOL = "tool";
+	public static final String TOOL_TIP_STYLE = "tool-tip-style";
+	public static final String UNBREAKABLE = "Unbreakable";
+	public static final String USE_COOLDOWN = "use-cooldown";
+	public static final String USE_REMAINDER = "use-remainder";
 
 	private static final int ABSOLUTE_MAX_STACK_SIZE = 99;
 
@@ -87,11 +116,22 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable Integer customModelData = null;
 	private boolean hideTooltip;
 	private boolean fireResistant;
+	private boolean glider;
 	private @Nullable Integer maxStackSize = null;
 	private @Nullable Boolean enchantmentGlintOverride = null;
 	private @Nullable ItemRarity rarity;
 	private @Nullable Component itemName = null;
-	private @Nullable Integer enchantableValue;
+	private @Nullable Integer enchantable;
+	private @Nullable ItemStack useRemainder;
+	private @Nullable NamespacedKey itemModel;
+	private @Nullable NamespacedKey tooltipStyle;
+	private @Nullable NamespacedKey damageResistant;
+
+	private @Nullable UseCooldownComponent useCooldown;
+	private @Nullable FoodComponent foodComponent;
+	private @Nullable ToolComponent toolComponent;
+	private @Nullable EquippableComponent equippableComponent;
+	private @Nullable JukeboxPlayableComponent jukeboxPlayableComponent;
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -164,7 +204,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (meta.hasEnchantable())
 		{
-			enchantableValue = meta.getEnchantable();
+			enchantable = meta.getEnchantable();
 		}
 	}
 
@@ -313,7 +353,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				enchantmentGlintOverride,
 				rarity,
 				itemName,
-				enchantableValue);
+				enchantable);
 	}
 
 	@Override
@@ -606,77 +646,116 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (this.hasDisplayName())
 		{
-			map.put("minecraft:custom_name", this.getDisplayName());
+			map.put(DISPLAY_NAME, toComponentString(this.displayName()));
 		}
 		if (this.hasLore())
 		{
-			map.put("minecraft:lore", this.getLore());
+			map.put(LORE, this.lore().stream().map(ItemMetaMock::toComponentString).toList());
 		}
 		if (this.hasDamage())
 		{
-			map.put("minecraft:damage", this.getDamage());
+			map.put(DAMAGE, this.getDamage());
 		}
 		if (this.hasMaxDamage())
 		{
-			map.put("minecraft:max_damage", this.getMaxDamage());
+			map.put(MAX_DAMAGE, this.getMaxDamage());
 		}
 		if (this.hasRepairCost())
 		{
-			map.put("minecraft:repair_cost", this.repairCost);
+			map.put(REPAIR_COST, this.repairCost);
 		}
 		if (this.hasEnchants())
 		{
-			map.put("minecraft:enchantments", this.enchants.entrySet().stream()
+			map.put(ENCHANTMENTS, this.enchants.entrySet().stream()
 					.collect(Collectors.toMap(entry -> entry.getKey().getKey().asString(), Map.Entry::getValue)));
 		}
 		if (this.hasAttributeModifiers())
 		{
-			map.put("minecraft:attribute_modifiers", this.getAttributeModifiers());
+			map.put(ATTRIBUTE_MODIFIERS, this.getAttributeModifiers());
 		}
 		if (!this.getItemFlags().isEmpty())
 		{
-			map.put("ItemFlags", this.getItemFlags());
+			map.put(ITEM_FLAGS, this.getItemFlags().stream().sorted().toList());
 		}
 		if (!this.persistentDataContainer.isEmpty())
 		{
-			map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
+			map.put(PUBLIC_BUKKIT_VALUES, this.persistentDataContainer.serialize());
+		}
+		if (this.hasTooltipStyle())
+		{
+			map.put(TOOL_TIP_STYLE, this.getTooltipStyle().asString());
+		}
+		if (this.hasItemModel())
+		{
+			map.put(ITEM_MODEL, this.getItemModel().asString());
 		}
 		if (this.isUnbreakable())
 		{
-			map.put("minecraft:unbreakable", Maps.newHashMap());
+			map.put(UNBREAKABLE, this.isUnbreakable());
 		}
 		if (this.hasCustomModelData())
 		{
-			map.put("minecraft:custom_model_data", this.getCustomModelData());
+			map.put(CUSTOM_MODEL_DATA, this.getCustomModelData());
 		}
-
 		if (this.isHideTooltip())
 		{
-			map.put("HideTooltip", this.hideTooltip);
+			map.put(HIDE_TOOLTIP, this.hideTooltip);
 		}
 		if (this.isFireResistant())
 		{
-			map.put("FireResistant", this.fireResistant);
+			map.put(FIRE_RESISTANT, this.fireResistant);
+		}
+		if (this.hasDamageResistant())
+		{
+			map.put(DAMAGE_RESISTANT, this.getDamageResistant().getKey().asString());
 		}
 		if (this.hasMaxStackSize())
 		{
-			map.put("MaxStackSize", this.getMaxStackSize());
+			map.put(MAX_STACK_SIZE, this.getMaxStackSize());
 		}
 		if (this.hasEnchantmentGlintOverride())
 		{
-			map.put("EnchantmentGlintOverride", this.getEnchantmentGlintOverride());
+			map.put(ENCHANTMENT_GLINT_OVERRIDE, this.getEnchantmentGlintOverride());
+		}
+		if (this.isGlider())
+		{
+			map.put(GLIDER, this.isGlider());
 		}
 		if (this.hasRarity())
 		{
-			map.put("Rarity", this.getRarity());
+			map.put(RARITY, this.getRarity());
+		}
+		if (this.hasUseRemainder())
+		{
+			map.put(USE_REMAINDER, this.getUseRemainder().serialize());
+		}
+		if (this.hasUseCooldown())
+		{
+			map.put(USE_COOLDOWN, this.getUseCooldown().serialize());
+		}
+		if (this.hasFood())
+		{
+			map.put(FOOD, this.getFood().serialize());
+		}
+		if (this.hasTool())
+		{
+			map.put(TOOL, this.getTool().serialize());
+		}
+		if (this.hasEquippable())
+		{
+			map.put(EQUIPPABLE, this.getEquippable().serialize());
+		}
+		if (this.hasJukeboxPlayable())
+		{
+			map.put(JUKEBOX_PLAYABLE, this.getJukeboxPlayable().serialize());
 		}
 		if (this.hasItemName())
 		{
-			map.put("ItemName", this.getItemName());
+			map.put(ITEM_NAME, toComponentString(this.itemName()));
 		}
 		if (this.hasEnchantable())
 		{
-			map.put("EnchantableValue", this.getEnchantable());
+			map.put(ENCHANTABLE, this.getEnchantable());
 		}
 
 		/* Not implemented.
@@ -686,7 +765,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		*/
 
-		map.put("meta-type", getTypeName());
+		map.put(META_TYPE, getTypeName());
 
 		// Return map
 		return map;
@@ -710,23 +789,42 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@ApiStatus.Internal
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
-		String customName = NbtParser.parseString(args.get("minecraft:custom_name"));
-		if (customName != null)
+		@Nullable Component displayName = NbtParser.parseComponent(args.get(DISPLAY_NAME));
+		if (displayName != null)
 		{
-			setDisplayName(customName);
+			displayName(displayName);
 		}
 
-		@Nullable List<@Nullable String> loreList = NbtParser.parseList(args.get("minecraft:lore"), NbtParser::parseString);
+		@Nullable Component itemName = NbtParser.parseComponent(args.get(ITEM_NAME));
+		if (itemName != null)
+		{
+			itemName(itemName);
+		}
+
+		@Nullable List<@Nullable Component> loreList = NbtParser.parseList(args.get(LORE), NbtParser::parseComponent);
 		if (loreList != null)
 		{
-			setLore(loreList);
+			lore(loreList);
 		}
 
-		damage = NbtParser.parseInteger(args.get("minecraft:damage"));
-		maxDamage = NbtParser.parseInteger(args.get("minecraft:max_damage"));
-		repairCost = NbtParser.parseInteger(args.get("minecraft:repair_cost"), 0);
+		customModelData = NbtParser.parseInteger(args.get(CUSTOM_MODEL_DATA));
+		enchantable = NbtParser.parseInteger(args.get(ENCHANTABLE));
+		damage = NbtParser.parseInteger(args.get(DAMAGE));
+		maxDamage = NbtParser.parseInteger(args.get(MAX_DAMAGE));
+		repairCost = NbtParser.parseInteger(args.get(REPAIR_COST), 0);
+		tooltipStyle = NbtParser.parseNamespacedKey(args.get(TOOL_TIP_STYLE));
+		itemModel = NbtParser.parseNamespacedKey(args.get(ITEM_MODEL));
+		unbreakable = args.containsKey(UNBREAKABLE);
+		hideTooltip = NbtParser.parseBoolean(args.get(HIDE_TOOLTIP), false);
+		fireResistant = NbtParser.parseBoolean(args.get(FIRE_RESISTANT), false);
+		maxStackSize = NbtParser.parseInteger(args.get(MAX_STACK_SIZE));
+		enchantmentGlintOverride = NbtParser.parseBoolean(args.get(ENCHANTMENT_GLINT_OVERRIDE));
+		glider = NbtParser.parseBoolean(args.get(GLIDER), false);
+		rarity = NbtParser.parseEnum(args.get(RARITY), ItemRarity.class);
+		damageResistant = NbtParser.parseNamespacedKey(args.get(DAMAGE_RESISTANT));
+
 		enchants = new HashMap<>();
-		Map<String, Integer> enchantMap = NbtParser.parseMap(args.get("minecraft:enchantments"), NbtParser::parseInteger);
+		Map<String, Integer> enchantMap = NbtParser.parseMap(args.get(ENCHANTMENTS), NbtParser::parseInteger);
 		if (enchantMap != null)
 		{
 			for (Map.Entry<String, Integer> entry : enchantMap.entrySet())
@@ -738,31 +836,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				}
 			}
 		}
-		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("minecraft:attribute_modifiers"));
-		Set<ItemFlag> tempSet = NbtParser.parseSet(args.get("ItemFlags"), o -> NbtParser.parseEnum(o, ItemFlag.class));
+		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get(ATTRIBUTE_MODIFIERS));
+		Set<ItemFlag> tempSet = NbtParser.parseSet(args.get(ITEM_FLAGS), o -> NbtParser.parseEnum(o, ItemFlag.class));
 		if (tempSet != null)
 		{
 			hideFlags = tempSet;
 		}
-		Map<String, Object> map = NbtParser.parseMap(args.get("PublicBukkitValues"), Function.identity());
+		Map<String, Object> map = NbtParser.parseMap(args.get(PUBLIC_BUKKIT_VALUES), Function.identity());
 		if (map != null)
 		{
 			persistentDataContainer = PersistentDataContainerMock.deserialize(map);
 		}
-		unbreakable = args.containsKey("minecraft:unbreakable");
-		// customTagContainer is also unimplemented in mock.
-		customModelData = NbtParser.parseInteger(args.get("minecraft:custom_model_data"));
-		hideTooltip = NbtParser.parseBoolean(args.get("HideTooltip"), false);
-		fireResistant = NbtParser.parseBoolean(args.get("FireResistant"), false);
-		maxStackSize = NbtParser.parseInteger(args.get("MaxStackSize"));
-		enchantmentGlintOverride = NbtParser.parseBoolean(args.get("EnchantmentGlintOverride"));
-		rarity = NbtParser.parseEnum(args.get("Rarity"), ItemRarity.class);
-		if (args.containsKey("ItemName"))
-		{
-			setItemName(NbtParser.parseString(args.get("ItemName")));
-		}
-		enchantableValue = NbtParser.parseInteger(args.get("EnchantableValue"));
 
+		var useRemainderData = NbtParser.parseMap(args.get(USE_REMAINDER), Function.identity());
+		useRemainder = (useRemainderData == null ? null : ItemStack.deserialize(useRemainderData));
 	}
 
 	@Override
@@ -1091,21 +1178,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasEnchantable()
 	{
-		return this.enchantableValue != null;
+		return this.enchantable != null;
 	}
 
 	@Override
 	public int getEnchantable()
 	{
 		Preconditions.checkState(this.hasEnchantable(), "We don't have Enchantable! Check hasEnchantable first!");
-		return this.enchantableValue;
+		return this.enchantable;
 	}
 
 	@Override
 	public void setEnchantable(@Nullable Integer data)
 	{
 		Preconditions.checkArgument(data == null || data > 0, "Enchantability must be positive"); // Paper
-		this.enchantableValue = data;
+		this.enchantable = data;
 	}
 
 	@Override
@@ -1156,7 +1243,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public int getMaxDamage()
 	{
-		Preconditions.checkState(this.hasMaxDamage(), "We don't have max_damage! Check hasMaxDamage first!");
+		Preconditions.checkState(this.hasMaxDamage(), "We don't have max-damage! Check hasMaxDamage first!");
 		return this.maxDamage;
 	}
 
@@ -1220,92 +1307,111 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasTooltipStyle()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.tooltipStyle != null;
 	}
 
 	@Override
 	public @Nullable NamespacedKey getTooltipStyle()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.tooltipStyle;
 	}
 
 	@Override
-	public void setTooltipStyle(@Nullable NamespacedKey namespacedKey)
+	public void setTooltipStyle(@Nullable NamespacedKey tooltipStyle)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.tooltipStyle = tooltipStyle;
 	}
 
 	@Override
 	public boolean hasItemModel()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.itemModel != null;
 	}
 
 	@Override
 	public @Nullable NamespacedKey getItemModel()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.itemModel;
+	}
+
+	@Override
+	public void setItemModel(@Nullable NamespacedKey namespacedKey)
+	{
+		this.itemModel = namespacedKey;
 	}
 
 	@Override
 	public boolean isGlider()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.glider;
+	}
+
+	@Override
+	public void setGlider(boolean glider)
+	{
+		this.glider = glider;
 	}
 
 	@Override
 	public boolean hasDamageResistant()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.damageResistant != null;
 	}
 
 	@Override
 	public @Nullable Tag<DamageType> getDamageResistant()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.damageResistant != null ? Bukkit.getTag("damage_types", this.damageResistant, DamageType.class) : null;
+	}
+
+	@Override
+	public void setDamageResistant(@Nullable Tag<DamageType> tag)
+	{
+		this.damageResistant = (tag == null ? null : tag.getKey());
 	}
 
 	@Override
 	public boolean hasUseRemainder()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.useRemainder != null;
 	}
 
 	@Override
 	public @Nullable ItemStack getUseRemainder()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.useRemainder;
+	}
+
+	@Override
+	public void setUseRemainder(@Nullable ItemStack itemStack)
+	{
+		Preconditions.checkArgument(itemStack == null || !itemStack.isEmpty(), "Item cannot be empty");
+		this.useRemainder = itemStack;
 	}
 
 	@Override
 	public boolean hasUseCooldown()
 	{
+		return this.useCooldown != null;
+	}
+
+	@Override
+	public UseCooldownComponent getUseCooldown()
+	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull UseCooldownComponent getUseCooldown()
+	public void setUseCooldown(@Nullable UseCooldownComponent useCooldownComponent)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.useCooldown = useCooldownComponent;
 	}
 
 	@Override
 	public boolean hasEquippable()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.equippableComponent != null;
 	}
 
 	@Override
@@ -1318,43 +1424,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setEquippable(@Nullable EquippableComponent equippableComponent)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setUseCooldown(@Nullable UseCooldownComponent useCooldownComponent)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setUseRemainder(@Nullable ItemStack itemStack)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setDamageResistant(@Nullable Tag<DamageType> tag)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setGlider(boolean b)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItemModel(@Nullable NamespacedKey namespacedKey)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.equippableComponent = equippableComponent;
 	}
 
 	@Override
@@ -1431,8 +1501,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasFood()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.foodComponent != null;
 	}
 
 	@Override
@@ -1445,8 +1514,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setFood(@Nullable FoodComponent food)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.foodComponent = food;
 	}
 
 	@ApiStatus.Internal
@@ -1458,8 +1526,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasTool()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.toolComponent != null;
 	}
 
 	@Override
@@ -1472,15 +1539,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setTool(@Nullable ToolComponent toolComponent)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.toolComponent = toolComponent;
 	}
 
 	@Override
 	public boolean hasJukeboxPlayable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.jukeboxPlayableComponent != null;
 	}
 
 	@Override
@@ -1493,8 +1558,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setJukeboxPlayable(@Nullable JukeboxPlayableComponent jukeboxPlayable)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.jukeboxPlayableComponent = jukeboxPlayable;
 	}
 
 	@Override
@@ -1512,6 +1576,11 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 		stringBuilder.append(")");
 		return stringBuilder.toString();
+	}
+
+	private static String toComponentString(Component component)
+	{
+		return GsonComponentSerializer.gson().serialize(component);
 	}
 
 }
