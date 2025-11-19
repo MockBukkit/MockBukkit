@@ -643,17 +643,25 @@ public class UnsafeValuesMock implements UnsafeValues
 		result.put(PROPERTY_SCHEMA_VERSION, 1);
 
 		Map<String, Object> serializedMeta = itemStack.getItemMeta().serialize();
-		for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+		if (serializedMeta.size() > 1) // Ignore the meta-type
 		{
-			String originalName = entry.getKey();
-			String newName = entry.getValue();
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getKey();
+				String newName = entry.getValue();
 
+				// Skip the key if it does not exist
+				if (!serializedMeta.containsKey(originalName))
+				{
+					continue;
+				}
 
-			var value = serializedMeta.get(originalName);
-			serializedMeta.put(newName, value);
-			serializedMeta.remove(originalName);
+				var value = serializedMeta.get(originalName);
+				serializedMeta.put(newName, value);
+				serializedMeta.remove(originalName);
+			}
+			result.put("components", serializedMeta);
 		}
-		result.put("components", serializedMeta);
 
 		return result;
 	}
@@ -673,6 +681,11 @@ public class UnsafeValuesMock implements UnsafeValues
 				String originalName = entry.getValue();
 				String newName = entry.getKey();
 
+				// Skip the key if it does not exist
+				if (!components.containsKey(originalName))
+				{
+					continue;
+				}
 
 				var value = components.get(originalName);
 				components.put(newName, value);

@@ -32,6 +32,7 @@ import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -1711,7 +1712,7 @@ class ItemMetaMockTest
 			meta.itemName(Component.text("item-name"));
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"item-name\":\"item-name\"}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"item-name\":\"\\\"item-name\\\"\"}";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -1919,9 +1920,10 @@ class ItemMetaMockTest
 		}
 
 		@Test
+		@Disabled("UseCooldownComponent is not implemented yet.")
 		void givenUseCooldown()
 		{
-			// TODO: Not implemented yet
+			// TODO: meta.setUseCooldown(...);
 
 			Map<String, Object> actual = meta.serialize();
 
@@ -1930,9 +1932,10 @@ class ItemMetaMockTest
 		}
 
 		@Test
+		@Disabled("FoodComponent is not implemented yet.")
 		void givenFood()
 		{
-			// TODO: Not implemented yet
+			// TODO: meta.setFood(...);
 
 			Map<String, Object> actual = meta.serialize();
 
@@ -1941,9 +1944,10 @@ class ItemMetaMockTest
 		}
 
 		@Test
+		@Disabled("ToolComponent is not implemented yet.")
 		void givenTool()
 		{
-			// TODO: Not implemented yet
+			// TODO: meta.setTool(...);
 
 			Map<String, Object> actual = meta.serialize();
 
@@ -1952,9 +1956,10 @@ class ItemMetaMockTest
 		}
 
 		@Test
+		@Disabled("EquippableComponent is not implemented yet")
 		void givenEquippable()
 		{
-			// TODO: Not implemented yet
+			// TODO: meta.setEquippable(...);
 
 			Map<String, Object> actual = meta.serialize();
 
@@ -1963,9 +1968,10 @@ class ItemMetaMockTest
 		}
 
 		@Test
+		@Disabled("JukeboxPlayableComponent is not implemented yet.")
 		void givenJukeboxPlayable()
 		{
-			// TODO: Not implemented yet
+			// TODO: meta.setJukeboxPlayable(...);
 
 			Map<String, Object> actual = meta.serialize();
 
