@@ -814,7 +814,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		repairCost = NbtParser.parseInteger(args.get(REPAIR_COST), 0);
 		tooltipStyle = NbtParser.parseNamespacedKey(args.get(TOOL_TIP_STYLE));
 		itemModel = NbtParser.parseNamespacedKey(args.get(ITEM_MODEL));
-		unbreakable = args.containsKey(UNBREAKABLE);
+		unbreakable = NbtParser.parseBoolean(args.get(UNBREAKABLE), false);
 		hideTooltip = NbtParser.parseBoolean(args.get(HIDE_TOOLTIP), false);
 		fireResistant = NbtParser.parseBoolean(args.get(FIRE_RESISTANT), false);
 		maxStackSize = NbtParser.parseInteger(args.get(MAX_STACK_SIZE));
