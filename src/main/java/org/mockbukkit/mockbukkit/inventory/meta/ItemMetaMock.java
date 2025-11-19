@@ -71,6 +71,7 @@ import static java.util.Objects.nonNull;
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 	public static final String ATTRIBUTE_MODIFIERS = "attribute-modifiers";
+	public static final String BLOCK_DATA = "BlockStateTag";
 	public static final String CUSTOM_MODEL_DATA = "custom-model-data";
 	public static final String DAMAGE = "Damage";
 	public static final String DAMAGE_RESISTANT = "damage-resistant";
@@ -132,6 +133,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable ToolComponent toolComponent;
 	private @Nullable EquippableComponent equippableComponent;
 	private @Nullable JukeboxPlayableComponent jukeboxPlayableComponent;
+	private @Nullable Map<String, String> blockData = null;
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -756,6 +758,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (this.hasEnchantable())
 		{
 			map.put(ENCHANTABLE, this.getEnchantable());
+		}
+		if (this.hasBlockData())
+		{
+			map.put(BLOCK_DATA, this.getBlockData());
 		}
 
 		/* Not implemented.
@@ -1576,6 +1582,37 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 		stringBuilder.append(")");
 		return stringBuilder.toString();
+	}
+
+	/**
+	 * Check if the item meta has block data.
+	 *
+	 * @return {@code true} if has block data, otherwise {@code false}.
+	 */
+	public boolean hasBlockData()
+	{
+		return this.blockData != null;
+	}
+
+	/**
+	 * Get the current item block data.
+	 *
+	 * @return The block data if available, otherwise {@code null}
+	 */
+	@Nullable
+	public Map<String, String> getBlockData()
+	{
+		return this.blockData;
+	}
+
+	/**
+	 * Set the block data in the item.
+	 *
+	 * @param blockData new block data.
+	 */
+	public void setBlockData(@Nullable Map<String, String> blockData)
+	{
+		this.blockData = blockData;
 	}
 
 	private static String toComponentString(Component component)

@@ -1756,11 +1756,11 @@ class ItemMetaMockTest
 		@Test
 		void givenBlockData()
 		{
-			// TODO: Set block data
+			meta.setBlockData(Map.of("test", "123"));
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"BlockStateTag\":{}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"BlockStateTag\":{\"test\":\"123\"}}";
 			assertJsonEqual(expected, actual);
 		}
 
