@@ -140,6 +140,7 @@ import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
 import org.mockbukkit.mockbukkit.inventory.meta.components.EquippableComponentMock;
 import org.mockbukkit.mockbukkit.inventory.meta.components.FoodComponentMock;
 import org.mockbukkit.mockbukkit.inventory.meta.components.JukeboxPlayableComponentMock;
@@ -1109,7 +1110,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private static void registerItemSerializables()
 	{
 		ConfigurationSerialization.registerClass(SerializableMeta.class);
-		// ConfigurationSerialization.registerClass(CustomModelDataComponentMock.class);
+		ConfigurationSerialization.registerClass(CustomModelDataComponentMock.class);
 		ConfigurationSerialization.registerClass(EquippableComponentMock.class);
 		ConfigurationSerialization.registerClass(FoodComponentMock.class);
 		ConfigurationSerialization.registerClass(ToolComponentMock.class);
