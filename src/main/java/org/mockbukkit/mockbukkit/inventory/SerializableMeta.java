@@ -74,7 +74,7 @@ public class SerializableMeta implements ConfigurationSerializable
 			.put(ItemMetaMock.class, "UNSPECIFIC")
 			.build();
 	private static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap = compileFactoryMap();
-	
+
 	private static ImmutableMap<String, Function<Map<String, Object>,? extends ItemMetaMock>> compileFactoryMap()
 	{
 		ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> builder = ImmutableMap.builder();
@@ -188,6 +188,12 @@ public class SerializableMeta implements ConfigurationSerializable
 	public static String getString(Map<?, ?> map, Object field, boolean nullable)
 	{
 		return SerializableMeta.getObject(String.class, map, field, nullable);
+	}
+
+	public static boolean getBoolean(Map<?, ?> map, Object field)
+	{
+		Boolean value = getObject(Boolean.class, map, field, true);
+		return value != null && value;
 	}
 
 	public static <T> T getObject(Class<T> clazz, Map<?, ?> map, Object field, boolean nullable)
