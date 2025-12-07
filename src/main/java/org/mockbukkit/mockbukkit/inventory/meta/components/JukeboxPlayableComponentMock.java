@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import org.bukkit.JukeboxSong;
@@ -26,7 +28,7 @@ public class JukeboxPlayableComponentMock implements JukeboxPlayableComponent
 	@Override
 	public @Nullable JukeboxSong getSong()
 	{
-		return null;
+		return RegistryAccess.registryAccess().getRegistry(RegistryKey.JUKEBOX_SONG).get(this.getSongKey());
 	}
 
 	@Override
