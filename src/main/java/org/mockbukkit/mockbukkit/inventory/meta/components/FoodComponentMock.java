@@ -86,4 +86,9 @@ public class FoodComponentMock implements FoodComponent
 				.build();
 	}
 
+	public static FoodComponent useDefault()
+	{
+		return builder().build();
+	}
+
 }

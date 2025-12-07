@@ -45,6 +45,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.EquippableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.FoodComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.JukeboxPlayableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.ToolComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.UseCooldownComponentMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import org.mockbukkit.mockbukkit.util.NbtParser;
 
@@ -67,6 +73,7 @@ import static java.util.Objects.nonNull;
 /**
  * Mock implementation of an {@link ItemMeta}, {@link Damageable}, and {@link Repairable}.
  */
+@SuppressWarnings("UnstableApiUsage")
 @DelegateDeserialization(SerializableMeta.class)
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
@@ -92,6 +99,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable ItemRarity rarity;
 	private @Nullable Component itemName = null;
 	private @Nullable Integer enchantableValue;
+	private @Nullable CustomModelDataComponent customModelDataComponent;
+	private @Nullable EquippableComponent equippableComponent;
+	private @Nullable FoodComponent foodComponent;
+	private @Nullable JukeboxPlayableComponent jukeboxPlayableComponent;
+	private @Nullable ToolComponent toolComponent;
+	private @Nullable UseCooldownComponent useCooldownComponent;
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -1067,7 +1080,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull CustomModelDataComponent getCustomModelDataComponent()
 	{
-		throw new UnimplementedOperationException();
+		return this.hasCustomModelDataComponent() ? this.customModelDataComponent : CustomModelDataComponentMock.useDefault();
 	}
 
 	@Override
@@ -1079,13 +1092,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasCustomModelDataComponent()
 	{
-		throw new UnimplementedOperationException();
+		return this.customModelDataComponent != null;
 	}
 
 	@Override
 	public void setCustomModelDataComponent(@Nullable CustomModelDataComponent customModelDataComponent)
 	{
-		throw new UnimplementedOperationException();
+		this.customModelDataComponent = customModelDataComponent;
 	}
 
 	@Override
@@ -1290,43 +1303,37 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasUseCooldown()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.useCooldownComponent != null;
 	}
 
 	@Override
 	public @NotNull UseCooldownComponent getUseCooldown()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasEquippable()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EquippableComponent getEquippable()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setEquippable(@Nullable EquippableComponent equippableComponent)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.hasUseCooldown() ? this.useCooldownComponent : UseCooldownComponentMock.useDefault();
 	}
 
 	@Override
 	public void setUseCooldown(@Nullable UseCooldownComponent useCooldownComponent)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.useCooldownComponent = useCooldownComponent;
+	}
+
+	@Override
+	public boolean hasEquippable()
+	{
+		return this.equippableComponent != null;
+	}
+
+	@Override
+	public @NotNull EquippableComponent getEquippable()
+	{
+		return this.hasEquippable() ? this.equippableComponent : EquippableComponentMock.useDefault();
+	}
+
+	@Override
+	public void setEquippable(@Nullable EquippableComponent equippableComponent)
+	{
+		this.equippableComponent = equippableComponent;
 	}
 
 	@Override
@@ -1431,22 +1438,19 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasFood()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.foodComponent != null;
 	}
 
 	@Override
 	public @NotNull FoodComponent getFood()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.hasFood() ? this.foodComponent : FoodComponentMock.useDefault();
 	}
 
 	@Override
 	public void setFood(@Nullable FoodComponent food)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.foodComponent = food;
 	}
 
 	@ApiStatus.Internal
@@ -1458,43 +1462,37 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasTool()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.toolComponent != null;
 	}
 
 	@Override
 	public @NotNull ToolComponent getTool()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.hasTool() ? this.toolComponent : ToolComponentMock.useDefault();
 	}
 
 	@Override
 	public void setTool(@Nullable ToolComponent toolComponent)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.toolComponent = toolComponent;
 	}
 
 	@Override
 	public boolean hasJukeboxPlayable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.jukeboxPlayableComponent != null;
 	}
 
 	@Override
 	public @NotNull JukeboxPlayableComponent getJukeboxPlayable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.hasJukeboxPlayable() ? this.jukeboxPlayableComponent : JukeboxPlayableComponentMock.useDefault();
 	}
 
 	@Override
 	public void setJukeboxPlayable(@Nullable JukeboxPlayableComponent jukeboxPlayable)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.jukeboxPlayableComponent = jukeboxPlayable;
 	}
 
 	@Override

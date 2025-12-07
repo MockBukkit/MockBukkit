@@ -105,4 +105,9 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 				.build();
 	}
 
+	public static CustomModelDataComponent useDefault()
+	{
+		return builder().build();
+	}
+
 }

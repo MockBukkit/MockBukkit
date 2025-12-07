@@ -115,6 +115,11 @@ public class ToolComponentMock implements ToolComponent
 		return Map.of();
 	}
 
+	public static ToolComponent useDefault()
+	{
+		return builder().build();
+	}
+
 	@Builder
 	@NotNullByDefault
 	@EqualsAndHashCode

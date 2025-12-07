@@ -249,4 +249,10 @@ public class EquippableComponentMock implements EquippableComponent
 				.build();
 	}
 
+	public static EquippableComponent useDefault()
+	{
+		return builder().build();
+	}
+
+
 }

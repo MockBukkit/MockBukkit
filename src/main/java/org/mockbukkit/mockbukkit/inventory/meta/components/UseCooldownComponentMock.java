@@ -24,7 +24,7 @@ public class UseCooldownComponentMock implements UseCooldownComponent
 
 	private float cooldownSeconds;
 
-	@Override
+    @Override
 	public float getCooldownSeconds()
 	{
 		return this.cooldownSeconds;
@@ -72,6 +72,11 @@ public class UseCooldownComponentMock implements UseCooldownComponent
 				.cooldownSeconds(seconds)
 				.cooldownGroup(cooldownGroup != null ? NamespacedKey.fromString(cooldownGroup) : null)
 				.build();
+	}
+
+	public static UseCooldownComponent useDefault()
+	{
+		return builder().build();
 	}
 
 }

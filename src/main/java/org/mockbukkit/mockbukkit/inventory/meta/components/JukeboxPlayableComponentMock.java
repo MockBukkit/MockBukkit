@@ -72,4 +72,9 @@ public class JukeboxPlayableComponentMock implements JukeboxPlayableComponent
 				.build();
 	}
 
+	public static JukeboxPlayableComponent useDefault()
+	{
+		return builder().build();
+	}
+
 }
