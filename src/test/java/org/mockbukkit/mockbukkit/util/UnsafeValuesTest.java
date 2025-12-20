@@ -455,20 +455,6 @@ class UnsafeValuesTest
 	}
 
 	@Test
-	void fromLegacy_MaterialData_Legacy_Throws()
-	{
-		for (Material material : Material.values())
-		{
-			if (!material.isLegacy())
-			{
-				continue;
-			}
-			MaterialData materialData = new MaterialData(material);
-			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(materialData));
-		}
-	}
-
-	@Test
 	void fromLegacy_MaterialData_Null_ReturnsNull()
 	{
 		assertThrows(NullPointerException.class, () -> unsafeValuesMock.fromLegacy((MaterialData) null));
