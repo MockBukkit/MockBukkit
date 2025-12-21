@@ -10,6 +10,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.ToolComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,12 +90,11 @@ public class ToolComponentMock implements ToolComponent
 			Preconditions.checkArgument(material.isBlock(), "blocks contains non-block type: %s", material.getKey());
 		}
 
-		ToolRule rule = ToolRuleMock.builder()
+		return ToolRuleMock.builder()
 				.blocks(blocks)
 				.speed(speed)
 				.isCorrectForDrops(correctForDrops)
 				.build();
-		return rule;
 	}
 
 	@Override
@@ -112,7 +112,14 @@ public class ToolComponentMock implements ToolComponent
 	@Override
 	public Map<String, Object> serialize()
 	{
+		// TODO: Implement serialize
 		return Map.of();
+	}
+
+	public static ToolComponentMock deserialize(Map<String, Object> map)
+	{
+		// TODO: Not implemented yet
+		throw new UnimplementedOperationException();
 	}
 
 	public static ToolComponent useDefault()
@@ -213,6 +220,12 @@ public class ToolComponentMock implements ToolComponent
 			}
 
 			return result;
+		}
+
+		public static ToolRuleMock deserialize(Map<String, Object> map)
+		{
+			// TODO: Not implemented yet
+			throw new UnimplementedOperationException();
 		}
 
 	}
