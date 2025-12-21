@@ -70,7 +70,7 @@ public class FoodComponentMock implements FoodComponent
 		return result;
 	}
 
-	public static FoodComponent deserialize(Map<String, Object> map)
+	public static FoodComponentMock deserialize(Map<String, Object> map)
 	{
 		Integer nutrition = SerializableMeta.getObject(Integer.class, map, "nutrition", false);
 		Float saturationModifier = SerializableMeta.getObject(Float.class, map, "saturation", false);
