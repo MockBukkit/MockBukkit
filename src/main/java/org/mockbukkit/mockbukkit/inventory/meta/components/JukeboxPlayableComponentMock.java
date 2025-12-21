@@ -59,7 +59,7 @@ public class JukeboxPlayableComponentMock implements JukeboxPlayableComponent
 		return result;
 	}
 
-	public static JukeboxPlayableComponent deserialize(Map<String, Object> map)
+	public static JukeboxPlayableComponentMock deserialize(Map<String, Object> map)
 	{
 		String song = SerializableMeta.getObject(String.class, map, "song", false);
 		Preconditions.checkNotNull(song, "song can't be null!");
