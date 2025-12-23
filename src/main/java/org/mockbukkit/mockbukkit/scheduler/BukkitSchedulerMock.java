@@ -335,7 +335,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					continue;
 				}
 				task.cancel();
-				cancelTask(task.getTaskId());
 				throw new TaskCancelledException("Forced Cancellation of task owned by " + task.getOwner().getName());
 			}
 			pool.shutdownNow();
@@ -730,6 +729,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private static class TaskList
 	{
 
+		// Do not directly access this field from outside TaskList, use a method
 		private final @NotNull Map<Integer, ScheduledTask> tasks;
 
 		private TaskList()
