@@ -218,8 +218,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				pool.submit(wrapTask(task));
 				task.submitted();
+				pool.submit(wrapTask(task));
 			}
 
 			if (task instanceof RepeatingTask repeatingTask)
