@@ -528,14 +528,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isQueued(int taskId)
 	{
-		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-		{
-			if (task.getTaskId() == taskId)
-			{
-				return !task.isCancelled();
-			}
-		}
-		return false;
+		ScheduledTask task = scheduledTasks.getTask(taskId);
+		return task != null && !task.isCancelled();
 	}
 
 	@Override
