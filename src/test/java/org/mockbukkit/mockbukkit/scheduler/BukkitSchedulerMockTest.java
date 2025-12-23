@@ -542,11 +542,13 @@ class BukkitSchedulerMockTest
 	@Test
 	void taskIsRunning()
 	{
-		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () ->
+		AtomicBoolean running = new AtomicBoolean(false);
+		scheduler.runTaskTimer(null, (task) ->
 		{
+			running.set(scheduler.isCurrentlyRunning(task.getTaskId()));
 		}, 1L, 1L);
 		scheduler.performOneTick();
-		assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+		assertTrue(running.get());
 	}
 
 	@Test

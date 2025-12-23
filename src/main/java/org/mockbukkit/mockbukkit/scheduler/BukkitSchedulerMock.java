@@ -521,7 +521,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isCurrentlyRunning(int taskId)
 	{
-		return scheduledTasks.tasks.containsKey(taskId);
+		ScheduledTask task = scheduledTasks.getTask(taskId);
+		return task != null && task.isRunning();
 	}
 
 	@Override
@@ -748,6 +749,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			tasks.put(task.getTaskId(), task);
 			return true;
+		}
+
+		private @Nullable ScheduledTask getTask(int taskId)
+		{
+			return tasks.get(taskId);
 		}
 
 		protected final @NotNull List<ScheduledTask> getCurrentTaskList()
