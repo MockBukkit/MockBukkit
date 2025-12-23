@@ -219,8 +219,9 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 *
 	 * @param callback The callback which gets executed when the task is cancelled.
 	 */
-	public void addOnCancelled(Runnable callback)
+	public void addOnCancelled(@NotNull Runnable callback)
 	{
+		Preconditions.checkNotNull(callback, "Runnable cannot be null");
 		this.cancelListeners.add(callback);
 	}
 
