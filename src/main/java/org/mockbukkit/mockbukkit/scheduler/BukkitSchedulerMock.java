@@ -261,7 +261,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	/**
 	 * Perform a number of ticks on the server.
 	 *
-	 * @param ticks The number of ticks to executed.
+	 * @param ticks The number of ticks to execute.
 	 */
 	public void performTicks(long ticks)
 	{
