@@ -546,8 +546,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitTask> getPendingTasks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		List<BukkitTask> pendingTasks = new ArrayList<>();
+		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
+		{
+			if (!task.isCancelled())
+			{
+				pendingTasks.add(task);
+			}
+		}
+		return Collections.unmodifiableList(pendingTasks);
 	}
 
 	@Override
