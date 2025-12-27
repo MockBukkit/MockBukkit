@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
 	id("checkstyle")
 	id("java-library")
@@ -127,6 +129,21 @@ tasks {
 			}
 		}
 	}
+
+	register("printPaperDetails")
+	{
+		doLast {
+			val dependency = getDependencyInformation(
+				dependencyGroup = "io.papermc.paper",
+				artifactName = "paper-api",
+				artifactVersion = project.property("paper.api.full-version").toString()
+			)
+			println("Paper version: ${project.property("paper.api.version")}")
+			println("Paper full version: ${project.property("paper.api.full-version")}")
+			println("Paper resolved version: ${dependency?.resolvedVersion}")
+			println("Paper SHA-512: ${dependency?.hash}")
+		}
+	}
 }
 
 sourceSets {
@@ -237,4 +254,70 @@ fun run(vararg cmd: String): String {
 	}.standardOutput.asText.get().trim()
 }
 
+/**
+ * Computes the cryptographic hash of a resolved dependency artifact within a specified Gradle configuration.
+ *
+ * This method locates the target dependency in the resolved artifacts of the given configuration,
+ * then streams the artifact file to compute its hash using the specified algorithm.
+ *
+ * @param dependencyGroup 		The group ID of the dependency (e.g., "org.jetbrains.kotlin").
+ * @param artifactName 			The name of the dependency artifact (e.g., "kotlin-stdlib").
+ * @param artifactVersion 		The version of the dependency (e.g., "1.9.0").
+ * @param hashAlgorithm 		The hashing algorithm to use (default: "SHA-512").
+ *                      		Common values include "SHA-256", "SHA-1", and "MD5".
+ * @param targetConfiguration 	The name of the Gradle configuration to resolve from (default: "compileClasspath").
+ *
+ * @return The hexadecimal string representation of the computed hash, or `null` if the artifact
+ *         could not be found or the hash computation failed.
+ */
+fun Project.getDependencyInformation(
+	dependencyGroup: String,
+	artifactName: String,
+	artifactVersion: String,
+	hashAlgorithm: String = "SHA-512",
+	targetConfiguration: String = "compileClasspath"
+): DependencyHashResult? {
+	val artifact = try {
+		configurations.getByName(targetConfiguration)
+			.resolvedConfiguration
+			.resolvedArtifacts
+			.firstOrNull {
+				val id = it.moduleVersion.id
+				id.group == dependencyGroup &&
+						id.name == artifactName &&
+						id.version == artifactVersion
+			} ?: run {
+			logger.warn("Artifact not found: $dependencyGroup:$artifactName:$artifactVersion in configuration '$targetConfiguration'")
+			return null
+		}
+	} catch (e: Exception) {
+		logger.warn("Failed to resolve configuration '$targetConfiguration': ${e.message}")
+		return null
+	}
 
+	val resolvedVersion = artifact.id.componentIdentifier.displayName
+	val hash = try {
+		val digest = MessageDigest.getInstance(hashAlgorithm)
+		artifact.file.inputStream().buffered(DEFAULT_BUFFER_SIZE).use { input ->
+			val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+			while (true) {
+				val bytesRead = input.read(buffer)
+				if (bytesRead == -1) {
+					break
+				}
+				digest.update(buffer, 0, bytesRead)
+			}
+		}
+		digest.digest().joinToString("") { "%02x".format(it) }
+	} catch (e: Exception) {
+		logger.error("Failed to compute digest for ${artifact.file.name}: ${e.message}")
+		return null
+	}
+
+	return DependencyHashResult(hash = hash, resolvedVersion = resolvedVersion)
+}
+
+data class DependencyHashResult(
+	val hash: String,
+	val resolvedVersion: String
+)
