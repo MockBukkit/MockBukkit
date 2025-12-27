@@ -10,7 +10,7 @@ jobs:
     outputs:
       version: ${{steps.bump-semver.outputs.new_version}}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Get merged pull request
         uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1

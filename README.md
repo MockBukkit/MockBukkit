@@ -183,7 +183,7 @@ Also here you can extract the manifest version this way:
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
       <version>${paper.version.from.mockbukkit}</version>
-      <version>test</version>
+      <scope>test</scope>
   </dependency>
 </dependencies>
 ```
@@ -217,7 +217,7 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
       <version>${paper.version.from.mockbukkit}</version>
-      <version>test</version>
+      <scope>test</scope>
   </dependency>
 </dependencies>
 ```
