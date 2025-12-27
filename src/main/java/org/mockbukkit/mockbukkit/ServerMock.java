@@ -153,7 +153,6 @@ import org.mockbukkit.mockbukkit.structure.StructureManagerMock;
 import org.mockbukkit.mockbukkit.tags.MaterialTagMock;
 import org.mockbukkit.mockbukkit.tags.TagRegistry;
 import org.mockbukkit.mockbukkit.tags.TagsMock;
-import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
 import org.mockbukkit.mockbukkit.util.UnsafeValuesMock;
 import org.mockbukkit.mockbukkit.world.ChunkDataMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -247,7 +246,6 @@ public class ServerMock extends Server.Spigot implements Server
 		ServerMock.registerSerializables();
 
 		TagsMock.loadDefaultTags(this, true);
-		InternalTag.loadInternalTags();
 		PaperCommandsMock.INSTANCE.newDispatcher();
 		this.commandMap = new CommandMapMock(this);
 

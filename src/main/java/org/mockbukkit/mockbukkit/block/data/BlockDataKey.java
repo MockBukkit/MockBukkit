@@ -11,6 +11,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Hangable;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
@@ -24,6 +25,7 @@ import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
@@ -147,6 +149,7 @@ public enum BlockDataKey
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
+	HANGING_KEY("hanging", Boolean::parseBoolean, Hangable.class::isInstance),
 
 	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
@@ -186,6 +189,7 @@ public enum BlockDataKey
 
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
+	TILT("tilt", EnumDataDeserializer.of(BigDripleaf.Tilt.class), BigDripleaf.class::isInstance),
 	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
 	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
 	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),

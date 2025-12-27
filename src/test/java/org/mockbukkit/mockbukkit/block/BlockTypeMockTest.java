@@ -649,7 +649,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenMangrovePropagule()
 		{
 			MangrovePropagule data = BlockType.MANGROVE_PROPAGULE.createBlockData();
@@ -887,7 +886,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenPowerable()
 		{
 			Powerable data = BlockType.STONE_PRESSURE_PLATE.createBlockData();
@@ -1018,7 +1016,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSkull()
 		{
 			Skull data = BlockType.SKELETON_SKULL.createBlockData();
@@ -1027,7 +1024,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWallSkull()
 		{
 			WallSkull data = BlockType.SKELETON_WALL_SKULL.createBlockData();
@@ -1276,7 +1272,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCaveVinesPlant()
 		{
 			CaveVinesPlant data = BlockType.CAVE_VINES_PLANT.createBlockData();
@@ -1311,7 +1306,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDripleaf()
 		{
 			Dripleaf data = BlockType.BIG_DRIPLEAF_STEM.createBlockData();
@@ -1320,7 +1314,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBigDripleaf()
 		{
 			BigDripleaf data = BlockType.BIG_DRIPLEAF.createBlockData();
@@ -1329,7 +1322,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSmallDripleaf()
 		{
 			SmallDripleaf data = BlockType.SMALL_DRIPLEAF.createBlockData();

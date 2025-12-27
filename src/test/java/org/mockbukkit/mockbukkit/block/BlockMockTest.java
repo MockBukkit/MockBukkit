@@ -11,9 +11,11 @@ import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.TrapDoor;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
@@ -398,6 +400,109 @@ class BlockMockTest
 		assertEquals(1, block.getDrops().size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE)).size());
 		assertEquals(1, block.getDrops(new ItemStack(Material.IRON_HOE), null).size());
+	}
+
+	@Nested
+	class IsBurnable
+	{
+
+		@Test
+		void givenBurnableMaterial()
+		{
+			Block b = new BlockMock(Material.OAK_WOOD);
+			assertTrue(b.isBurnable());
+		}
+
+		@Test
+		void givenNonBurnableMaterial()
+		{
+			Block b = new BlockMock(Material.STONE);
+			assertFalse(b.isBurnable());
+		}
+
+	}
+
+	@Nested
+	class IsSolid
+	{
+
+		@Test
+		void givenSolidMaterial()
+		{
+			Block b = new BlockMock(Material.STONE);
+			assertTrue(b.isSolid());
+		}
+
+		@Test
+		void givenNonSolidMaterial()
+		{
+			Block b = new BlockMock(Material.COBWEB);
+			assertFalse(b.isSolid());
+		}
+
+	}
+
+	@Nested
+	class IsCollidable
+	{
+
+		@Test
+		void givenCollidableMaterial()
+		{
+			Block b = new BlockMock(Material.STONE);
+			assertTrue(b.isCollidable());
+		}
+
+		@Test
+		void givenNonCollidableMaterial()
+		{
+			Block b = new BlockMock(Material.REDSTONE_WIRE);
+			assertFalse(b.isCollidable());
+		}
+
+	}
+
+	@Nested
+	class IsLiquid
+	{
+
+		@ParameterizedTest
+		@EnumSource(value = Material.class, mode = EnumSource.Mode.INCLUDE, names = {
+			"WATER", "LAVA", "BUBBLE_COLUMN"
+		})
+		void givenLiquidMaterial(Material liquidMaterial)
+		{
+			Block b = new BlockMock(liquidMaterial);
+			assertTrue(b.isLiquid());
+		}
+
+		@Test
+		void givenNonLiquidMaterial()
+		{
+			Block b = new BlockMock(Material.REDSTONE_WIRE);
+			assertFalse(b.isLiquid());
+		}
+
+	}
+
+	@Nested
+	class IsReplaceable
+	{
+
+		@Test
+		void givenReplaceableMaterial()
+		{
+			Block b = new BlockMock(Material.HANGING_ROOTS);
+			assertTrue(b.isReplaceable());
+		}
+
+		@Test
+		void givenNonReplaceableMaterial()
+		{
+			Block b = new BlockMock(Material.MUD);
+			assertFalse(b.isReplaceable());
+		}
+
 	}
 
 }
