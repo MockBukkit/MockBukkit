@@ -133,6 +133,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.ZombieNautilus;
 import org.bukkit.entity.ZombieVillager;
 import org.bukkit.entity.boat.AcaciaBoat;
 import org.bukkit.entity.boat.AcaciaChestBoat;
@@ -369,6 +370,7 @@ public final class EntityTypesMock
 				.register(Zoglin.class, ZoglinMock.class, ZoglinMock::new)
 				.register(Zombie.class, ZombieMock.class, ZombieMock::new)
 				.register(ZombieHorse.class, ZombieHorseMock.class, ZombieHorseMock::new)
+				.register(ZombieNautilus.class, ZombieNautilusMock.class, ZombieNautilusMock::new)
 				.register(ZombieVillager.class, ZombieVillagerMock.class, ZombieVillagerMock::new);
 	}
 

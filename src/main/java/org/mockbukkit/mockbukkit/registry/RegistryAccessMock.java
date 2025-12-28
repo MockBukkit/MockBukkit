@@ -128,7 +128,8 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.POTION,
 				RegistryKey.DATA_COMPONENT_TYPE,
 				RegistryKey.MEMORY_MODULE_TYPE,
-				RegistryKey.GAME_RULE
+				RegistryKey.GAME_RULE,
+				RegistryKey.ZOMBIE_NAUTILUS_VARIANT
 		);
 	}
 
