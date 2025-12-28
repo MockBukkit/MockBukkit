@@ -37,10 +37,8 @@ jobs:
       - name: Read Paper version from gradle.properties
         id: paper-version
         run: |
-          paper_full_version=$(grep '^paper.api.full-version=' gradle.properties | cut -d'=' -f2)
-          echo "paper_full_version=$paper_full_version" >> "$GITHUB_OUTPUT"
-          paper_version=$(grep '^paper.api.version=' gradle.properties | cut -d'=' -f2)
-          echo "paper_version=$paper_version" >> "$GITHUB_OUTPUT"
+          paper_details=$(./gradlew printPaperDetails --quiet)
+          echo "paper_details=$paper_details" >> "$GITHUB_OUTPUT"
 
       - name: Bump version
         uses: actions-ecosystem/action-bump-semver@v1
@@ -56,11 +54,11 @@ jobs:
         with:
           tag: ${{ steps.bump-semver.outputs.new_version }}
           message: |
-            MockBukkit version: ${{ steps.bump-semver.outputs.new_version }}
-            Paper API: ${{ steps.paper-version.outputs.paper_version }}
-            Paper full version: ${{ steps.paper-version.outputs.paper_full_version }}
-            Triggered by PR #${{ steps.pr.outputs.number }}
+            ${{ steps.bump-semver.outputs.new_version }}
+            Triggered by: PR #${{ steps.pr.outputs.number }}
             Commit: ${{ github.sha }}
+            ---
+            ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
     uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
