@@ -2,7 +2,7 @@ name: Tag
 
 on:
   push:
-    branches: [ v1.* ]
+    branches: [ v1.*, fix/tagging ]
 
 jobs:
   tag:
