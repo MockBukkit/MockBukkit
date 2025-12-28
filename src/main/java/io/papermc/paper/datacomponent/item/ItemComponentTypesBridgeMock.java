@@ -301,4 +301,40 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 		return new WeaponMock.BuilderMock();
 	}
 
+	@Override
+	public KineticWeapon.Builder kineticWeapon()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public UseEffects.Builder useEffects()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PiercingWeapon.Builder piercingWeapon()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public AttackRange.Builder attackRange()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public SwingAnimation.Builder swingAnimation()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public KineticWeapon.Condition kineticWeaponCondition(int i, float v, float v1)
+	{
+		throw new UnimplementedOperationException();
+	}
+
 }

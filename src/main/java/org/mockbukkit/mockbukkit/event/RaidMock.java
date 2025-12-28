@@ -11,6 +11,7 @@ import org.bukkit.entity.Raider;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
 import java.util.Collections;
@@ -147,6 +148,12 @@ public class RaidMock implements Raid
 	public int getTotalWaves()
 	{
 		return this.waves;
+	}
+
+	@Override
+	public void setTotalWaves(int waves)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	/**

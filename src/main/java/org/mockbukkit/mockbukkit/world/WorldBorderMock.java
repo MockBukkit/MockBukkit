@@ -9,8 +9,10 @@ import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
+import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.concurrent.TimeUnit;
@@ -83,6 +85,12 @@ public class WorldBorderMock implements WorldBorder
 	public void setSize(double newSize)
 	{
 		this.setSize(newSize, 0L);
+	}
+
+	@Override
+	public void changeSize(double v, @Range(from = 0L, to = 2147483647L) long l)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -206,6 +214,18 @@ public class WorldBorderMock implements WorldBorder
 	public void setWarningTime(int seconds)
 	{
 		this.warningTime = seconds;
+	}
+
+	@Override
+	public @NonNegative int getWarningTimeTicks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWarningTimeTicks(@NonNegative int i)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
 import net.kyori.adventure.text.Component;
+import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.damage.DamageEffect;
@@ -20,6 +21,7 @@ import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.damagesource.CombatEntryMock;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 @ApiStatus.Internal
@@ -91,6 +93,12 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	public @NonNull Component defaultMannequinDescription()
 	{
 		return DEFAULT_MANNEQUIN_DESCRIPTION;
+	}
+
+	@Override
+	public <MODERN, LEGACY> GameRule<LEGACY> legacyGameRuleBridge(GameRule<MODERN> rule, Function<LEGACY, MODERN> fromLegacyToModern, Function<MODERN, LEGACY> toLegacyFromModern, Class<LEGACY> legacyClass)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 }
