@@ -1,6 +1,11 @@
 {
 	"values": [
 		{
+			"key": "minecraft:attack_range",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:attribute_modifiers",
 			"persistent": true,
 			"valued": true
@@ -136,6 +141,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:damage_type",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:death_protection",
 			"persistent": true,
 			"valued": true
@@ -236,6 +246,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:kinetic_weapon",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:llama/variant",
 			"persistent": true,
 			"valued": true
@@ -286,6 +301,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:minimum_attack_charge",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:mooshroom/variant",
 			"persistent": true,
 			"valued": true
@@ -307,6 +327,11 @@
 		},
 		{
 			"key": "minecraft:parrot/variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:piercing_weapon",
 			"persistent": true,
 			"valued": true
 		},
@@ -396,6 +421,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:swing_animation",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:tool",
 			"persistent": true,
 			"valued": true
@@ -441,6 +471,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:use_effects",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:use_remainder",
 			"persistent": true,
 			"valued": true
@@ -477,6 +512,11 @@
 		},
 		{
 			"key": "minecraft:written_book_content",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:zombie_nautilus/variant",
 			"persistent": true,
 			"valued": true
 		}

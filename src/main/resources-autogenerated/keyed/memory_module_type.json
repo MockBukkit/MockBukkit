@@ -16,7 +16,13 @@
 			"key": "minecraft:attack_cooling_down"
 		},
 		{
+			"key": "minecraft:attack_target_cooldown"
+		},
+		{
 			"key": "minecraft:cant_reach_walk_target_since"
+		},
+		{
+			"key": "minecraft:charge_cooldown_ticks"
 		},
 		{
 			"key": "minecraft:dancing"
@@ -107,6 +113,12 @@
 		},
 		{
 			"key": "minecraft:sniffer_happy"
+		},
+		{
+			"key": "minecraft:spear_engage_time"
+		},
+		{
+			"key": "minecraft:spear_fleeing_time"
 		},
 		{
 			"key": "minecraft:temptation_cooldown_ticks"
