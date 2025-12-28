@@ -15,8 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Mock implementation of a {@link WorldBorder}.
  */
@@ -88,47 +86,33 @@ public class WorldBorderMock implements WorldBorder
 	}
 
 	@Override
-	public void changeSize(double v, @Range(from = 0L, to = 2147483647L) long l)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSize(double newSize, long seconds)
+	public void changeSize(double newSize, @Range(from = 0, to = Integer.MAX_VALUE) long ticks)
 	{
 		newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSize));
-		seconds = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, seconds));
+		ticks = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, ticks));
 
-		WorldBorderBoundsChangeEvent.Type moveType = seconds <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE : WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
-		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size, newSize, seconds * 1000L);
+		WorldBorderBoundsChangeEvent.Type moveType = ticks <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE : WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
+		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size, newSize, ticks);
 		if (!event.callEvent())
 		{
 			return;
 		}
 
-		double millis = event.getDuration();
+		double durationTicks = event.getDurationTicks();
 		newSize = event.getNewSize();
-
-		if (millis <= 0)
+		if (durationTicks <= 0)
 		{
 			this.size = newSize;
 			return;
 		}
 
 		double distance = newSize - this.size;
-		moveBorderOverTime(distance, millis, newSize);
+		moveBorderOverTime(distance, durationTicks, newSize);
 	}
 
-	@Override
-	public void setSize(double newSize, @NotNull TimeUnit unit, long time)
+	private void moveBorderOverTime(double distance, double ticks, double newSize)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	private void moveBorderOverTime(double distance, double millis, double newSize)
-	{
-		double distancePerTick = distance / ((millis / 1000) * 20);
+		double distancePerTick = distance / ticks;
 		final double oldSize = this.size;
 		WorldBorderMock thisBorder = this; // We can't use 'this' in the anonymous class below, so we need to store it in a variable.
 		new BukkitRunnable()
@@ -143,7 +127,7 @@ public class WorldBorderMock implements WorldBorder
 				else
 				{
 					size = newSize;
-					new WorldBorderBoundsChangeFinishEvent(world, thisBorder, oldSize, newSize, millis).callEvent();
+					new WorldBorderBoundsChangeFinishEvent(world, thisBorder, oldSize, newSize, ticks).callEvent();
 					this.cancel();
 				}
 			}
