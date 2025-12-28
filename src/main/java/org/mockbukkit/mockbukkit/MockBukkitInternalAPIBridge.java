@@ -17,6 +17,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.damagesource.CombatEntryMock;
@@ -24,8 +25,10 @@ import org.mockbukkit.mockbukkit.world.damagesource.CombatEntryMock;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+@NullMarked
 @ApiStatus.Internal
 @ApiStatus.Experimental
+@SuppressWarnings("UnstableApiUsage")
 public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 {
 	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component.translatable("entity.minecraft.mannequin.label");
@@ -96,9 +99,12 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public <MODERN, LEGACY> GameRule<LEGACY> legacyGameRuleBridge(GameRule<MODERN> rule, Function<LEGACY, MODERN> fromLegacyToModern, Function<MODERN, LEGACY> toLegacyFromModern, Class<LEGACY> legacyClass)
+	public <MODERN, LEGACY> GameRule<LEGACY> legacyGameRuleBridge(GameRule<MODERN> rule,
+																		   Function<LEGACY, MODERN> fromLegacyToModern,
+																		   Function<MODERN, LEGACY> toLegacyFromModern,
+																		   Class<LEGACY> legacyClass)
 	{
-		throw new UnimplementedOperationException();
+		return new GameRuleMock<>(legacyClass, rule.getKey(), rule.translationKey());
 	}
 
 }

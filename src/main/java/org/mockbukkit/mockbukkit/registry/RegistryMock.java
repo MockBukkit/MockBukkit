@@ -12,6 +12,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.GameRuleMock;
 import org.mockbukkit.mockbukkit.art.ArtMock;
 import org.mockbukkit.mockbukkit.attribute.AttributeMock;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
@@ -112,6 +113,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.FLUID, FluidMock::from);
 		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
 		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
+		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
