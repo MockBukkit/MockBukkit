@@ -7,6 +7,7 @@ import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import org.bukkit.GameRule;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.Registry;
@@ -83,6 +84,10 @@ public class KeyedDataGenerator implements DataGenerator
 		if (keyed instanceof DataComponentType dataComponentType)
 		{
 			jsonObject.add("valued", new JsonPrimitive(dataComponentType instanceof DataComponentType.Valued<?>));
+		}
+		if (keyed instanceof GameRule<?> gameRule)
+		{
+			jsonObject.addProperty("type", gameRule.getType().getName());
 		}
 	}
 
