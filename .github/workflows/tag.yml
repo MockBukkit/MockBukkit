@@ -39,7 +39,7 @@ jobs:
         run: |
           {
               echo "paper_details<<EOF"
-              ./gradlew printPaperDetails --quiet --console=plain
+              ./gradlew printPaperDetails --quiet --console=plain 2>&1
               echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
