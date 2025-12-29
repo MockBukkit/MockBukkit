@@ -3,28 +3,44 @@ package org.mockbukkit.mockbukkit.block.data;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.type.GlassPane;
+import org.bukkit.block.data.type.Fire;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class GlassPaneDataMock extends BlockDataMock implements GlassPane
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.AGE_KEY;
+
+public class FireDataMock extends BlockDataMock implements Fire
 {
 
-	/**
-	 * Constructs a new {@link GlassPaneDataMock} for the provided {@link Material}.
-	 *
-	 * @param material The material this data is for.
-	 */
-	public GlassPaneDataMock(@NotNull Material material)
+	public FireDataMock(@NotNull Material material)
 	{
 		super(material);
 	}
 
-	protected GlassPaneDataMock(@NotNull GlassPaneDataMock other)
+	protected FireDataMock(@NotNull FireDataMock other)
 	{
 		super(other);
+	}
+
+	@Override
+	public int getAge()
+	{
+		return this.get(AGE_KEY);
+	}
+
+	@Override
+	public void setAge(int age)
+	{
+		Preconditions.checkArgument(age >= 0 && age <= this.getMaximumAge(), "The age must be between 0 and %s", this.getMaximumAge());
+		this.set(AGE_KEY, age);
+	}
+
+	@Override
+	public int getMaximumAge()
+	{
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_AGE);
 	}
 
 	@Override
@@ -59,21 +75,10 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	}
 
 	@Override
-	public boolean isWaterlogged()
-	{
-		return super.get(BlockDataKey.WATERLOGGED);
-	}
-
-	@Override
-	public void setWaterlogged(boolean waterlogged)
-	{
-		super.set(BlockDataKey.WATERLOGGED,waterlogged);
-	}
-
-	@Override
 	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull GlassPaneDataMock clone()
+	public @NotNull FireDataMock clone()
 	{
-		return new GlassPaneDataMock(this);
+		return new FireDataMock(this);
 	}
+
 }
