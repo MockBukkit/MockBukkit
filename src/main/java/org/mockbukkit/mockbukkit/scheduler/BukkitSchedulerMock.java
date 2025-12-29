@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
@@ -240,6 +241,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public void performOneTick()
 	{
+		AsyncCatcher.catchOp("server tick");
+
 		// Using a synchronized block here is necessary to avoid tasks being skipped by processTasks().
 		// runTask*(..) methods will synchronize with this synchronized block and keep the lock from the moment they read
 		// currentTick to when they register their task into scheduledTasks. This ensures that the main thread will wait
