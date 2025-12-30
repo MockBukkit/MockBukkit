@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.map.MapCursor;
+import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -334,7 +335,26 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public KineticWeapon.Condition kineticWeaponCondition(int i, float v, float v1)
 	{
-		throw new UnimplementedOperationException();
+		return new KineticWeapon.Condition()
+		{
+			@Override
+			public @NonNegative int maxDurationTicks()
+			{
+				return i;
+			}
+
+			@Override
+			public float minSpeed()
+			{
+				return v;
+			}
+
+			@Override
+			public float minRelativeSpeed()
+			{
+				return v1;
+			}
+		};
 	}
 
 }
