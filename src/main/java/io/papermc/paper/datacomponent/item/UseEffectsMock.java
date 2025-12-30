@@ -7,11 +7,13 @@ import org.jspecify.annotations.NullMarked;
 @SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
 public class UseEffectsMock implements UseEffects
 {
+
 	private final boolean canSprint;
 	private final boolean interactVibrations;
 	private final float speedMultiplier;
 
-	private UseEffectsMock(BuilderMock builder) {
+	private UseEffectsMock(BuilderMock builder)
+	{
 		this.canSprint = builder.canSprint;
 		this.interactVibrations = builder.interactVibrations;
 		this.speedMultiplier = builder.speedMultiplier;
@@ -35,7 +37,9 @@ public class UseEffectsMock implements UseEffects
 		return this.speedMultiplier;
 	}
 
-	static class BuilderMock implements Builder {
+	static class BuilderMock implements Builder
+	{
+
 		private boolean canSprint = false;
 		private boolean interactVibrations = true;
 		private float speedMultiplier = 0.2F;
@@ -57,7 +61,7 @@ public class UseEffectsMock implements UseEffects
 		@Override
 		public Builder speedMultiplier(float speedMultiplier)
 		{
-            Preconditions.checkArgument(speedMultiplier >= 0.0F && speedMultiplier <= 1.0F, "speedMultiplier must be between 0.0 and 1.0 (inclusive)");
+			Preconditions.checkArgument(speedMultiplier >= 0.0F && speedMultiplier <= 1.0F, "speedMultiplier must be between 0.0 and 1.0 (inclusive)");
 			this.speedMultiplier = speedMultiplier;
 			return this;
 		}
@@ -69,4 +73,5 @@ public class UseEffectsMock implements UseEffects
 		}
 
 	}
+
 }

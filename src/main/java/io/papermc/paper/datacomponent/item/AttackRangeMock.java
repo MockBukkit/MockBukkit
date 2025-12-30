@@ -8,6 +8,7 @@ import org.jspecify.annotations.NullMarked;
 @SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
 public class AttackRangeMock implements AttackRange
 {
+
 	private final float minReach;
 	private final float maxReach;
 	private final float minCreativeReach;
@@ -15,7 +16,8 @@ public class AttackRangeMock implements AttackRange
 	private final float hitboxMargin;
 	private final float mobFactor;
 
-	private AttackRangeMock(BuilderMock builder) {
+	private AttackRangeMock(BuilderMock builder)
+	{
 		this.minReach = builder.minReach;
 		this.maxReach = builder.maxReach;
 		this.minCreativeReach = builder.minCreativeReach;
@@ -60,7 +62,8 @@ public class AttackRangeMock implements AttackRange
 		return this.mobFactor;
 	}
 
-	static class BuilderMock implements Builder {
+	static class BuilderMock implements Builder
+	{
 
 		private float minReach = 0F;
 		private float maxReach = 3F;
@@ -72,7 +75,7 @@ public class AttackRangeMock implements AttackRange
 		@Override
 		public Builder minReach(@Range(from = 0L, to = 64L) float minReach)
 		{
-            Preconditions.checkArgument(minReach >= 0.0F && minReach <= 64.0F, "minReach must be in range [0,64] was %s", minReach);
+			Preconditions.checkArgument(minReach >= 0.0F && minReach <= 64.0F, "minReach must be in range [0,64] was %s", minReach);
 			this.minReach = minReach;
 			return this;
 		}
@@ -80,7 +83,7 @@ public class AttackRangeMock implements AttackRange
 		@Override
 		public Builder maxReach(@Range(from = 0L, to = 64L) float maxReach)
 		{
-            Preconditions.checkArgument(maxReach >= 0.0F && maxReach <= 64.0F, "maxReach must be in range [0,64] was %s", maxReach);
+			Preconditions.checkArgument(maxReach >= 0.0F && maxReach <= 64.0F, "maxReach must be in range [0,64] was %s", maxReach);
 			this.maxReach = maxReach;
 			return this;
 		}
@@ -88,7 +91,7 @@ public class AttackRangeMock implements AttackRange
 		@Override
 		public Builder minCreativeReach(@Range(from = 0L, to = 64L) float minCreativeReach)
 		{
-            Preconditions.checkArgument(minCreativeReach >= 0.0F && minCreativeReach <= 64.0F, "minCreativeReach must be in range [0,64] was %s", minCreativeReach);
+			Preconditions.checkArgument(minCreativeReach >= 0.0F && minCreativeReach <= 64.0F, "minCreativeReach must be in range [0,64] was %s", minCreativeReach);
 			this.minCreativeReach = minCreativeReach;
 			return this;
 		}
@@ -96,7 +99,7 @@ public class AttackRangeMock implements AttackRange
 		@Override
 		public Builder maxCreativeReach(@Range(from = 0L, to = 64L) float maxCreativeReach)
 		{
-            Preconditions.checkArgument(maxCreativeReach >= 0.0F && maxCreativeReach <= 64.0F, "maxCreativeReach must be in range [0,64] was %s", maxCreativeReach);
+			Preconditions.checkArgument(maxCreativeReach >= 0.0F && maxCreativeReach <= 64.0F, "maxCreativeReach must be in range [0,64] was %s", maxCreativeReach);
 			this.maxCreativeReach = maxCreativeReach;
 			return this;
 		}
@@ -104,7 +107,7 @@ public class AttackRangeMock implements AttackRange
 		@Override
 		public Builder hitboxMargin(@Range(from = 0L, to = 1L) float hitboxMargin)
 		{
-            Preconditions.checkArgument(hitboxMargin >= 0.0F && hitboxMargin <= 1.0F, "hitboxMargin must be in range [0,1] was %s", hitboxMargin);
+			Preconditions.checkArgument(hitboxMargin >= 0.0F && hitboxMargin <= 1.0F, "hitboxMargin must be in range [0,1] was %s", hitboxMargin);
 			this.hitboxMargin = hitboxMargin;
 			return this;
 		}
@@ -112,7 +115,7 @@ public class AttackRangeMock implements AttackRange
 		@Override
 		public Builder mobFactor(@Range(from = 0L, to = 2L) float mobFactor)
 		{
-            Preconditions.checkArgument(mobFactor >= 0.0F && mobFactor <= 2.0F, "mobFactor must be in range [0,2] was %s", mobFactor);
+			Preconditions.checkArgument(mobFactor >= 0.0F && mobFactor <= 2.0F, "mobFactor must be in range [0,2] was %s", mobFactor);
 			this.mobFactor = mobFactor;
 			return this;
 		}
@@ -124,4 +127,5 @@ public class AttackRangeMock implements AttackRange
 		}
 
 	}
+
 }

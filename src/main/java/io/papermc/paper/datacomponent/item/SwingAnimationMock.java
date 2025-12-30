@@ -8,6 +8,7 @@ import org.jspecify.annotations.NullMarked;
 @SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
 public class SwingAnimationMock implements SwingAnimation
 {
+
 	private final Animation type;
 	private final int duration;
 
@@ -29,7 +30,9 @@ public class SwingAnimationMock implements SwingAnimation
 		return this.duration;
 	}
 
-	static class BuilderMock implements Builder {
+	static class BuilderMock implements Builder
+	{
+
 		private Animation type = Animation.WHACK;
 		private int duration = 6;
 
