@@ -334,6 +334,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public KineticWeapon.Condition kineticWeaponCondition(int maxDurationTicks, float minSpeed, float minRelativeSpeed)
 	{
+		Preconditions.checkArgument(maxDurationTicks >= 0, "maxDurationTicks must be non-negative");
 		return new KineticWeaponMock.ConditionMock(maxDurationTicks, minSpeed, minRelativeSpeed);
 	}
 
