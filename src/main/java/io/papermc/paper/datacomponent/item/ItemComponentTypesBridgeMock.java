@@ -310,7 +310,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public UseEffects.Builder useEffects()
 	{
-		throw new UnimplementedOperationException();
+		return new UseEffectsMock.BuilderMock();
 	}
 
 	@Override
