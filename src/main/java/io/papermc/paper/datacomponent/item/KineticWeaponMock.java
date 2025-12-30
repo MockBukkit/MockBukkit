@@ -94,6 +94,41 @@ public class KineticWeaponMock implements KineticWeapon
 		return this.hitSound;
 	}
 
+	public static class ConditionMock implements Condition
+	{
+
+		private final int maxDurationTicks;
+		private final float minSpeed;
+		private final float minRelativeSpeed;
+
+		public ConditionMock(@NonNegative int maxDurationTicks, float minSpeed, float minRelativeSpeed)
+		{
+			Preconditions.checkArgument(maxDurationTicks >= 0, "maxDurationTicks must be non-negative");
+			this.maxDurationTicks = maxDurationTicks;
+			this.minSpeed = minSpeed;
+			this.minRelativeSpeed = minRelativeSpeed;
+		}
+
+		@Override
+		public @NonNegative int maxDurationTicks()
+		{
+			return this.maxDurationTicks;
+		}
+
+		@Override
+		public float minSpeed()
+		{
+			return this.minSpeed;
+		}
+
+		@Override
+		public float minRelativeSpeed()
+		{
+			return this.minRelativeSpeed;
+		}
+
+	}
+
 	static class BuilderMock implements Builder
 	{
 
