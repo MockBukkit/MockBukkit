@@ -316,7 +316,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public PiercingWeapon.Builder piercingWeapon()
 	{
-		throw new UnimplementedOperationException();
+		return new PiercingWeaponMock.BuilderMock();
 	}
 
 	@Override
