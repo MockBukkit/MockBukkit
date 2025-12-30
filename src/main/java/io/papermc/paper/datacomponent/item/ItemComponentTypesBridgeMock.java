@@ -304,7 +304,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public KineticWeapon.Builder kineticWeapon()
 	{
-		throw new UnimplementedOperationException();
+		return new KineticWeaponMock.BuilderMock();
 	}
 
 	@Override
