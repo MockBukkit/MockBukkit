@@ -2,7 +2,7 @@ name: Coverage check
 
 on:
   pull_request:
-    branches: [ v1.* ]
+    branches: [ * ]
   push:
     branches: [ v1.* ]
 
