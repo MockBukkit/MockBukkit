@@ -72,9 +72,9 @@ public class PiercingWeaponMock implements PiercingWeapon
 		}
 
 		@Override
-		public Builder hitSound(@Nullable Key hitSound)
+		public Builder hitSound(@Nullable Key sound)
 		{
-			this.hitSound = hitSound;
+			this.hitSound = sound;
 			return this;
 		}
 
