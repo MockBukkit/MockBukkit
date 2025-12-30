@@ -328,7 +328,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public SwingAnimation.Builder swingAnimation()
 	{
-		throw new UnimplementedOperationException();
+		return new SwingAnimationMock.BuilderMock();
 	}
 
 	@Override
