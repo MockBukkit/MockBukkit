@@ -8,12 +8,14 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
 public class PiercingWeaponMock implements PiercingWeapon
 {
+
 	private final boolean dealsKnockback;
 	private final boolean dismounts;
 	private final @Nullable Key sound;
 	private final @Nullable Key hitSound;
 
-	private PiercingWeaponMock(BuilderMock builder) {
+	private PiercingWeaponMock(BuilderMock builder)
+	{
 		this.dealsKnockback = builder.dealsKnockback;
 		this.dismounts = builder.dismounts;
 		this.sound = builder.sound;
@@ -44,7 +46,9 @@ public class PiercingWeaponMock implements PiercingWeapon
 		return this.hitSound;
 	}
 
-	static class BuilderMock implements Builder {
+	static class BuilderMock implements Builder
+	{
+
 		private boolean dealsKnockback;
 		private boolean dismounts;
 		private @Nullable Key sound;
@@ -85,4 +89,5 @@ public class PiercingWeaponMock implements PiercingWeapon
 		}
 
 	}
+
 }

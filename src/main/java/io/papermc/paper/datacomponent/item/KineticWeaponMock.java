@@ -10,6 +10,7 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
 public class KineticWeaponMock implements KineticWeapon
 {
+
 	private final int contactCooldownTicks;
 	private final int delayTicks;
 
@@ -23,7 +24,8 @@ public class KineticWeaponMock implements KineticWeapon
 	private final float damageMultiplier;
 	private final float forwardMovement;
 
-	private KineticWeaponMock(BuilderMock builder) {
+	private KineticWeaponMock(BuilderMock builder)
+	{
 		this.contactCooldownTicks = builder.contactCooldownTicks;
 		this.delayTicks = builder.delayTicks;
 
@@ -92,7 +94,15 @@ public class KineticWeaponMock implements KineticWeapon
 		return this.hitSound;
 	}
 
-	static class BuilderMock implements Builder {
+	public record ConditionMock(@NonNegative int maxDurationTicks, float minSpeed,
+								float minRelativeSpeed) implements Condition
+	{
+
+	}
+
+	static class BuilderMock implements Builder
+	{
+
 		private int contactCooldownTicks = 10;
 		private int delayTicks = 0;
 
@@ -109,7 +119,7 @@ public class KineticWeaponMock implements KineticWeapon
 		@Override
 		public Builder contactCooldownTicks(@NonNegative int ticks)
 		{
-            Preconditions.checkArgument(ticks >= 0, "contactCooldownTicks must be non-negative");
+			Preconditions.checkArgument(ticks >= 0, "contactCooldownTicks must be non-negative");
 			this.contactCooldownTicks = ticks;
 			return this;
 		}
@@ -117,7 +127,7 @@ public class KineticWeaponMock implements KineticWeapon
 		@Override
 		public Builder delayTicks(@NonNegative int ticks)
 		{
-            Preconditions.checkArgument(ticks >= 0, "delayTicks must be non-negative");
+			Preconditions.checkArgument(ticks >= 0, "delayTicks must be non-negative");
 			this.delayTicks = ticks;
 			return this;
 		}
@@ -178,4 +188,5 @@ public class KineticWeaponMock implements KineticWeapon
 		}
 
 	}
+
 }
