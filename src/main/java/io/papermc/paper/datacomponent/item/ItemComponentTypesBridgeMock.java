@@ -322,7 +322,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public AttackRange.Builder attackRange()
 	{
-		throw new UnimplementedOperationException();
+		return new AttackRangeMock.BuilderMock();
 	}
 
 	@Override
