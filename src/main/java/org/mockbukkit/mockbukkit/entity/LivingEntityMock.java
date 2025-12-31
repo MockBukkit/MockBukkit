@@ -1263,12 +1263,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public int getItemUseRemainingTime()
-	{
-		return getActiveItemRemainingTime();
-	}
-
-	@Override
 	public boolean isJumping()
 	{
 		return this.jumping;
@@ -1278,22 +1272,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setJumping(boolean jumping)
 	{
 		this.jumping = jumping;
-	}
-
-	@Override
-	public boolean isHandRaised()
-	{
-		return hasActiveItem();
-	}
-
-	@Override
-	public @NotNull EquipmentSlot getHandRaised()
-	{
-		if (!hasActiveItem())
-		{
-			throw new IllegalStateException("No hand is raised");
-		}
-		return getActiveItemHand();
 	}
 
 	@Override
