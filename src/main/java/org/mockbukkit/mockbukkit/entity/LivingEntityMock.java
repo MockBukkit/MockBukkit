@@ -377,7 +377,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				? equipment.getItemInMainHand()
 				: equipment.getItemInOffHand();
 
-		if (item == null || item.getType().isAir())
+		if (item.getType().isAir())
 		{
 			return; // Can't use air/null items
 		}
