@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import org.bukkit.Material;
@@ -10,7 +11,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.ToolComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -112,14 +113,36 @@ public class ToolComponentMock implements ToolComponent
 	@Override
 	public Map<String, Object> serialize()
 	{
-		// TODO: Implement serialize
-		return Map.of();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("default-mining-speed", this.getDefaultMiningSpeed());
+		result.put("damage-per-block", this.getDamagePerBlock());
+		result.put("rules", this.getRules());
+		return result;
 	}
 
 	public static ToolComponentMock deserialize(Map<String, Object> map)
 	{
-		// TODO: Not implemented yet
-		throw new UnimplementedOperationException();
+		Float speed = SerializableMeta.getObject(Float.class, map, "default-mining-speed", false);
+		Integer damage = SerializableMeta.getObject(Integer.class, map, "damage-per-block", false);
+
+		Preconditions.checkNotNull(speed, "speed can't be null!");
+		Preconditions.checkNotNull(damage, "damage can't be null!");
+
+		ImmutableList.Builder<ToolComponent.ToolRule> rules = ImmutableList.builder();
+		List<ToolRule> rawRuleList = SerializableMeta.getList(ToolRule.class, map, "rules");
+		for(ToolRule rule : rawRuleList)
+		{
+			if (!rule.getBlocks().isEmpty())
+			{
+				rules.add(rule);
+			}
+		}
+		var tool = ToolComponentMock.builder()
+				.defaultMiningSpeed(speed)
+				.damagePerBlock(damage)
+				.build();
+		tool.setRules(rules.build());
+		return tool;
 	}
 
 	public static ToolComponent useDefault()
@@ -224,8 +247,17 @@ public class ToolComponentMock implements ToolComponent
 
 		public static ToolRuleMock deserialize(Map<String, Object> map)
 		{
-			// TODO: Not implemented yet
-			throw new UnimplementedOperationException();
+			Float speed = SerializableMeta.getObject(Float.class, map, "speed", true);
+			Boolean correct = SerializableMeta.getObject(Boolean.class, map, "correct-for-drops", true);
+			List<Material> blocks = SerializableMeta.getList(Material.class, map, "blocks");
+
+			Preconditions.checkArgument(!blocks.isEmpty(), "The block list is null or empty");
+
+			return ToolRuleMock.builder()
+					.speed(speed)
+					.isCorrectForDrops(correct)
+					.blocks(blocks)
+					.build();
 		}
 
 	}
