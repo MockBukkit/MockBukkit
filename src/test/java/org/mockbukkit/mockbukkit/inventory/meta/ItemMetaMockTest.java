@@ -26,6 +26,12 @@ import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
+import org.bukkit.inventory.meta.components.EquippableComponent;
+import org.bukkit.inventory.meta.components.FoodComponent;
+import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
+import org.bukkit.inventory.meta.components.ToolComponent;
+import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -41,6 +47,12 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.EquippableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.FoodComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.JukeboxPlayableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.ToolComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.UseCooldownComponentMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 import java.io.ByteArrayInputStream;
@@ -1680,6 +1692,156 @@ class ItemMetaMockTest
 		{
 			meta.setRarity(rarity);
 			assertEquals(rarity, new ItemMetaMock(meta).getRarity());
+		}
+
+	}
+
+	@Nested
+	class CustomModelDataComponentTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasCustomModelDataComponent());
+			assertNotNull(meta.getCustomModelDataComponent());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			CustomModelDataComponent component = CustomModelDataComponentMock.useDefault();
+
+			meta.setCustomModelDataComponent(component);
+
+			assertTrue(meta.hasCustomModelDataComponent());
+			assertSame(component, meta.getCustomModelDataComponent());
+		}
+
+	}
+
+	@Nested
+	class UseCooldownTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasUseCooldown());
+			assertNotNull(meta.getUseCooldown());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			UseCooldownComponent component = UseCooldownComponentMock.useDefault();
+
+			meta.setUseCooldown(component);
+
+			assertTrue(meta.hasUseCooldown());
+			assertSame(component, meta.getUseCooldown());
+		}
+
+	}
+
+	@Nested
+	class EquippableTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasEquippable());
+			assertNotNull(meta.getEquippable());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			EquippableComponent component = EquippableComponentMock.useDefault();
+
+			meta.setEquippable(component);
+
+			assertTrue(meta.hasEquippable());
+			assertSame(component, meta.getEquippable());
+		}
+
+	}
+
+	@Nested
+	class FoodTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasFood());
+			assertNotNull(meta.getFood());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			FoodComponent component = FoodComponentMock.useDefault();
+
+			meta.setFood(component);
+
+			assertTrue(meta.hasFood());
+			assertSame(component, meta.getFood());
+		}
+
+	}
+
+	@Nested
+	class ToolTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasFood());
+			assertNotNull(meta.getFood());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			ToolComponent component = ToolComponentMock.useDefault();
+
+			meta.setTool(component);
+
+			assertTrue(meta.hasTool());
+			assertSame(component, meta.getTool());
+		}
+
+	}
+
+	@Nested
+	class JukeboxPlayableTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasJukeboxPlayable());
+			assertNotNull(meta.getJukeboxPlayable());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			JukeboxPlayableComponent component = JukeboxPlayableComponentMock.useDefault();
+
+			meta.setJukeboxPlayable(component);
+
+			assertTrue(meta.hasJukeboxPlayable());
+			assertSame(component, meta.getJukeboxPlayable());
 		}
 
 	}
