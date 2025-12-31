@@ -715,7 +715,8 @@ class LivingEntityMockTest
 	@Test
 	void testSetHandRaisedMainHand()
 	{
-		livingEntity.setHandRaised(true, EquipmentSlot.HAND);
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.BOW));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
 		assertTrue(livingEntity.isHandRaised());
 		assertEquals(EquipmentSlot.HAND, livingEntity.getHandRaised());
 	}
@@ -723,7 +724,8 @@ class LivingEntityMockTest
 	@Test
 	void testSetHandRaisedOffHand()
 	{
-		livingEntity.setHandRaised(true, EquipmentSlot.OFF_HAND);
+		livingEntity.getEquipment().setItemInOffHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.SHIELD));
+		livingEntity.startUsingItem(EquipmentSlot.OFF_HAND);
 		assertTrue(livingEntity.isHandRaised());
 		assertEquals(EquipmentSlot.OFF_HAND, livingEntity.getHandRaised());
 	}
@@ -731,10 +733,11 @@ class LivingEntityMockTest
 	@Test
 	void testSetHandRaisedFalse()
 	{
-		livingEntity.setHandRaised(true, EquipmentSlot.HAND);
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.BOW));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
 		assertTrue(livingEntity.isHandRaised());
 
-		livingEntity.setHandRaised(false, null);
+		livingEntity.clearActiveItem();
 		assertFalse(livingEntity.isHandRaised());
 	}
 
@@ -742,6 +745,194 @@ class LivingEntityMockTest
 	void testGetHandRaisedWhenNotRaised()
 	{
 		assertThrows(IllegalStateException.class, () -> livingEntity.getHandRaised());
+	}
+
+	// Active Item Tests
+
+	@Test
+	void testHasActiveItemDefault()
+	{
+		assertFalse(livingEntity.hasActiveItem());
+	}
+
+	@Test
+	void testStartUsingItemMainHand()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		assertTrue(livingEntity.hasActiveItem());
+		assertEquals(org.bukkit.Material.APPLE, livingEntity.getActiveItem().getType());
+		assertEquals(EquipmentSlot.HAND, livingEntity.getActiveItemHand());
+	}
+
+	@Test
+	void testStartUsingItemOffHand()
+	{
+		livingEntity.getEquipment().setItemInOffHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.GOLDEN_APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.OFF_HAND);
+
+		assertTrue(livingEntity.hasActiveItem());
+		assertEquals(org.bukkit.Material.GOLDEN_APPLE, livingEntity.getActiveItem().getType());
+		assertEquals(EquipmentSlot.OFF_HAND, livingEntity.getActiveItemHand());
+	}
+
+	@Test
+	void testStartUsingItemWithAirDoesNothing()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		assertFalse(livingEntity.hasActiveItem());
+	}
+
+	@Test
+	void testStartUsingItemInvalidHand()
+	{
+		assertThrows(IllegalArgumentException.class, () -> livingEntity.startUsingItem(EquipmentSlot.HEAD));
+	}
+
+	@Test
+	void testGetItemInUse()
+	{
+		assertNull(livingEntity.getItemInUse());
+
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.BOW));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		assertNotNull(livingEntity.getItemInUse());
+		assertEquals(org.bukkit.Material.BOW, livingEntity.getItemInUse().getType());
+	}
+
+	@Test
+	void testGetActiveItemReturnsAirWhenNone()
+	{
+		org.bukkit.inventory.ItemStack item = livingEntity.getActiveItem();
+		assertNotNull(item);
+		assertEquals(org.bukkit.Material.AIR, item.getType());
+	}
+
+	@Test
+	void testClearActiveItem()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+		assertTrue(livingEntity.hasActiveItem());
+
+		livingEntity.clearActiveItem();
+		assertFalse(livingEntity.hasActiveItem());
+		assertNull(livingEntity.getItemInUse());
+	}
+
+	@Test
+	void testCompleteUsingActiveItem()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+		assertTrue(livingEntity.hasActiveItem());
+
+		livingEntity.completeUsingActiveItem();
+		assertFalse(livingEntity.hasActiveItem());
+	}
+
+	@Test
+	void testGetItemInUseTicks()
+	{
+		assertEquals(0, livingEntity.getItemInUseTicks());
+
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+		assertEquals(0, livingEntity.getItemInUseTicks());
+
+		livingEntity.setItemInUseTicks(10);
+		assertEquals(10, livingEntity.getItemInUseTicks());
+	}
+
+	@Test
+	void testSetItemInUseTicks()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		livingEntity.setItemInUseTicks(5);
+		assertEquals(5, livingEntity.getItemInUseTicks());
+		assertEquals(5, livingEntity.getActiveItemUsedTime());
+	}
+
+	@Test
+	void testSetItemInUseTicksNegativeThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> livingEntity.setItemInUseTicks(-1));
+	}
+
+	@Test
+	void testGetActiveItemUsedTime()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		assertEquals(0, livingEntity.getActiveItemUsedTime());
+
+		livingEntity.setItemInUseTicks(20);
+		assertEquals(20, livingEntity.getActiveItemUsedTime());
+	}
+
+	@Test
+	void testGetActiveItemHandWhenNoActiveItem()
+	{
+		assertThrows(IllegalStateException.class, () -> livingEntity.getActiveItemHand());
+	}
+
+	@Test
+	void testGetActiveItemRemainingTime()
+	{
+		assertEquals(0, livingEntity.getActiveItemRemainingTime());
+
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		// Default max duration is 32 ticks
+		int maxDuration = 32;
+		assertEquals(maxDuration, livingEntity.getActiveItemRemainingTime());
+
+		livingEntity.setItemInUseTicks(10);
+		assertEquals(maxDuration - 10, livingEntity.getActiveItemRemainingTime());
+	}
+
+	@Test
+	void testGetItemUseRemainingTime()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		assertEquals(livingEntity.getActiveItemRemainingTime(), livingEntity.getItemUseRemainingTime());
+	}
+
+	@Test
+	void testSetActiveItemRemainingTime()
+	{
+		livingEntity.getEquipment().setItemInMainHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.APPLE));
+		livingEntity.startUsingItem(EquipmentSlot.HAND);
+
+		// Default max duration is 32 ticks
+		int maxDuration = 32;
+
+		livingEntity.setActiveItemRemainingTime(10);
+		assertEquals(10, livingEntity.getActiveItemRemainingTime());
+		assertEquals(maxDuration - 10, livingEntity.getActiveItemUsedTime());
+	}
+
+	@Test
+	void testSetActiveItemRemainingTimeNegativeThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> livingEntity.setActiveItemRemainingTime(-1));
+	}
+
+	@Test
+	void testSetActiveItemRemainingTimeWithNoActiveItem()
+	{
+		// Should not throw, just do nothing
+		assertDoesNotThrow(() -> livingEntity.setActiveItemRemainingTime(10));
 	}
 
 }
