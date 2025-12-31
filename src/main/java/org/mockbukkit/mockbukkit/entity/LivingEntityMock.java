@@ -104,6 +104,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean gliding = false;
 	private boolean jumping = false;
 	private boolean riptiding = false;
+	private boolean handRaised = false;
+	private @Nullable EquipmentSlot raisedHand = null;
 
 	/**
 	 * The attributes this entity has.
@@ -1242,15 +1244,29 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isHandRaised()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.handRaised;
+	}
+
+	/**
+	 * Sets whether a hand is raised and which hand is raised.
+	 *
+	 * @param handRaised Whether a hand is raised.
+	 * @param hand The hand that is raised, or null if no hand is raised.
+	 */
+	public void setHandRaised(boolean handRaised, @Nullable EquipmentSlot hand)
+	{
+		this.handRaised = handRaised;
+		this.raisedHand = hand;
 	}
 
 	@Override
 	public @NotNull EquipmentSlot getHandRaised()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.raisedHand == null)
+		{
+			throw new IllegalStateException("No hand is raised");
+		}
+		return this.raisedHand;
 	}
 
 	@Override

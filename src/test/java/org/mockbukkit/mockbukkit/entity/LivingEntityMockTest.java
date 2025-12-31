@@ -31,6 +31,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -703,6 +704,44 @@ class LivingEntityMockTest
 
 		livingArmorStand.setAI(false);
 		assertFalse(livingArmorStand.hasAI());
+	}
+
+	@Test
+	void testIsHandRaisedDefault()
+	{
+		assertFalse(livingEntity.isHandRaised());
+	}
+
+	@Test
+	void testSetHandRaisedMainHand()
+	{
+		livingEntity.setHandRaised(true, EquipmentSlot.HAND);
+		assertTrue(livingEntity.isHandRaised());
+		assertEquals(EquipmentSlot.HAND, livingEntity.getHandRaised());
+	}
+
+	@Test
+	void testSetHandRaisedOffHand()
+	{
+		livingEntity.setHandRaised(true, EquipmentSlot.OFF_HAND);
+		assertTrue(livingEntity.isHandRaised());
+		assertEquals(EquipmentSlot.OFF_HAND, livingEntity.getHandRaised());
+	}
+
+	@Test
+	void testSetHandRaisedFalse()
+	{
+		livingEntity.setHandRaised(true, EquipmentSlot.HAND);
+		assertTrue(livingEntity.isHandRaised());
+
+		livingEntity.setHandRaised(false, null);
+		assertFalse(livingEntity.isHandRaised());
+	}
+
+	@Test
+	void testGetHandRaisedWhenNotRaised()
+	{
+		assertThrows(IllegalStateException.class, () -> livingEntity.getHandRaised());
 	}
 
 }
