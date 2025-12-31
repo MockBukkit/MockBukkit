@@ -1275,6 +1275,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public boolean isHandRaised()
+	{
+		return hasActiveItem();
+	}
+
+	@Override
 	public void playPickupItemAnimation(@NotNull Item item, int quantity)
 	{
 		// TODO Auto-generated method stub
