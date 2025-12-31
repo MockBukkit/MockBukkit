@@ -13,6 +13,7 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
+import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
@@ -22,21 +23,32 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
+import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Bell;
 import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
+import org.bukkit.block.data.type.BubbleColumn;
+import org.bukkit.block.data.type.Cake;
 import org.bukkit.block.data.type.CalibratedSculkSensor;
 import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.CaveVinesPlant;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.ChiseledBookshelf;
+import org.bukkit.block.data.type.Cocoa;
 import org.bukkit.block.data.type.CommandBlock;
+import org.bukkit.block.data.type.Comparator;
+import org.bukkit.block.data.type.CopperBulb;
+import org.bukkit.block.data.type.CoralWallFan;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
+import org.bukkit.block.data.type.DaylightDetector;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Dripleaf;
+import org.bukkit.block.data.type.EndPortalFrame;
 import org.bukkit.block.data.type.EnderChest;
 import org.bukkit.block.data.type.Farmland;
+import org.bukkit.block.data.type.Fire;
 import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.block.data.type.Grindstone;
@@ -102,21 +114,32 @@ public final class BlockDataMockFactory
 	private static final Map<Class<? extends BlockData>, Function<Material, BlockDataMock>> FACTORIES_BY_BLOCK_DATA = ImmutableMap.<Class<? extends BlockData>, Function<Material, BlockDataMock>>builder()
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
+			.put(Beehive.class, BeehiveDataMock::new)
+			.put(Bell.class, BellDataMock::new)
 			.put(BigDripleaf.class, BigDripleafDataMock::new)
 			.put(BrewingStand.class, BrewingStandDataMock::new)
 			.put(Brushable.class, BrushableDataMock::new)
+			.put(BubbleColumn.class, BubbleColumnDataMock::new)
+			.put(Cake.class, CakeDataMock::new)
 			.put(CalibratedSculkSensor.class, CalibratedSculkSensorDataMock::new)
 			.put(Chest.class, ChestDataMock::new)
 			.put(ChiseledBookshelf.class, ChiseledBookshelfDataMock::new)
+			.put(Cocoa.class, CocoaDataMock::new)
 			.put(CommandBlock.class, CommandBlockDataMock::new)
+			.put(Comparator.class, ComparatorDataMock::new)
+			.put(CopperBulb.class, CopperBulbDataMock::new)
+			.put(CoralWallFan.class, CoralWallFanDataMock::new)
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(CreakingHeart.class, CreakingHeartDataMock::new)
+			.put(DaylightDetector.class, DaylightDetectorDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(Dispenser.class, DispenserDataMock::new)
 			.put(Directional.class, DirectionalDataMock::new)
 			.put(Dripleaf.class, DripleafDataMock::new)
+			.put(EndPortalFrame.class, EndPortalFrameDataMock::new)
 			.put(EnderChest.class, EnderChestDataMock::new)
 			.put(Farmland.class, FarmlandDataMock::new)
+			.put(Fire.class, FireDataMock::new)
 			.put(Furnace.class, FurnaceDataMock::new)
 			.put(Grindstone.class, GrindstoneDataMock::new)
 			.put(HangingMoss.class, HangingMossDataMock::new)
@@ -127,6 +150,7 @@ public final class BlockDataMockFactory
 			.put(Light.class, LightDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
 			.put(MangrovePropagule.class, MangrovePropaguleDataMock::new)
+			.put(MultipleFacing.class, MultipleFacingDataMock::new)
 			.put(NoteBlock.class, NoteBlockDataMock::new)
 			.put(Observer.class, ObserverDataMock::new)
 			.put(Orientable.class, OrientableMock::new)
