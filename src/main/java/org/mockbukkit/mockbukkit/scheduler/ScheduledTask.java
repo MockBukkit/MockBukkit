@@ -8,10 +8,9 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 /**
@@ -28,7 +27,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private volatile boolean running;
 	private final @Nullable Runnable runnable;
 	private final @Nullable Consumer<? super BukkitTask> consumer;
-	private final List<Runnable> cancelListeners = Collections.synchronizedList(new LinkedList<>());
+	private final List<Runnable> cancelListeners = new CopyOnWriteArrayList<>(); // Needed to not hold any lock when calling cancellation listeners
 	private volatile Thread thread;
 	private volatile boolean submitted = false;
 

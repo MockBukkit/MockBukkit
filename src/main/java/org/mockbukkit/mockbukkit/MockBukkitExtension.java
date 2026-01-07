@@ -54,108 +54,108 @@ import java.util.logging.Logger;
  *
  * <p>Example field usage:</p>
  *
- * <pre class="code"><code class="java">
- * <b>@ExtendWith(MockBukkitExtension.class)</b>
+ * <pre>{@code
+ * @ExtendWith(MockBukkitExtension.class)
  * class FieldExampleTest
  * {
  *
- * 	<b>@MockBukkitInject</b>
- * 	private ServerMock serverMock;
+ *  @MockBukkitInject
+ *  private ServerMock serverMock;
  *
- * 	<b>@MockBukkitInject(name = "testPlayer")</b>
- * 	private PlayerMock player;
+ *  @MockBukkitInject(name = "testPlayer")
+ *  private PlayerMock player;
  *
- * 	<b>@MockBukkitInject</b>  // Will be auto-named "World0"
- * 	private World world;
+ *  @MockBukkitInject // Will be auto-named "World0"
+ *  private World world;
  *
- * 	<b>@MockBukkitInject(name = "myPlugin")</b>
- * 	private Plugin plugin;
+ *  @MockBukkitInject(name = "myPlugin")
+ *  private Plugin plugin;
  *
- *    @Test
- *    void aUnitTest()
- *    {
- * 		assert serverMock != null;
- * 		assert player != null;
- * 		assert player.getName().equals("testPlayer");
- * 		assert world != null;
- * 		assert world.getName().equals("World0");  // Auto-generated name
- * 		assert plugin != null;
- * 		assert plugin.getName().equals("myPlugin");
- * 		// ...
- *    }
+ *  @Test
+ *  void aUnitTest()
+ *  {
+ *    assert serverMock != null;
+ *    assert player != null;
+ *    assert player.getName().equals("testPlayer");
+ *    assert world != null;
+ *    assert world.getName().equals("World0");  // Auto-generated name
+ *    assert plugin != null;
+ *    assert plugin.getName().equals("myPlugin");
+ *    // ...
+ *  }
  *
  * }
- * </code></pre>
+ * }</pre>
  * <p>
  * Example constructor parameter usage:
  *
- * <pre class="code"><code class="java">
- * <b>@ExtendWith(MockBukkitExtension.class)</b>
+ * <pre>{@code
+ * @ExtendWith(MockBukkitExtension.class)
  * class ConstructorExampleTest
  * {
  *
- * 	private ServerMock serverMock;
+ *  private ServerMock serverMock;
  *
- * 	public ConstructorExampleTest(<b>@MockBukkitInject</b> ServerMock serverMock)
- *    {
- * 		this.serverMock = serverMock;
- *    }
+ *  public ConstructorExampleTest(@MockBukkitInject ServerMock serverMock)
+ *  {
+ *    this.serverMock = serverMock;
+ *  }
  *
- *    @Test
- *    void aUnitTest()
- *    {
- * 		assert serverMock != null;
- * 		// ...
- *    }
+ *  @Test
+ *  void aUnitTest()
+ *  {
+ *    assert serverMock != null;
+ *    // ...
+ *  }
  *
  * }
- * </code></pre>
+ * }</pre>
  * <p>
  * Example method parameter usage:
  *
- * <pre class="code"><code class="java">
- * <b>@ExtendWith(MockBukkitExtension.class)</b>
+ * <pre>{@code
+ * @ExtendWith(MockBukkitExtension.class)
  * class MethodExampleTest
  * {
  *
- *    @Test
- *    void aUnitTest(<b>@MockBukkitInject</b> ServerMock serverMock,
- * 	               <b>@MockBukkitInject(name = "admin")</b> Player player,
- * 	               <b>@MockBukkitInject(name = "testWorld")</b> World world)
- *    {
- * 		assert serverMock != null;
- * 		assert player != null;
- * 		assert player.getName().equals("admin");
- * 		assert world != null;
- * 		assert world.getName().equals("testWorld");
- * 		// ...
- *    }
+ *  @Test
+ *  void aUnitTest(@MockBukkitInject ServerMock serverMock,
+ *                 @MockBukkitInject(name = "admin") Player player,
+ *                 @MockBukkitInject(name = "testWorld") World world)
+ *  {
+ *    assert serverMock != null;
+ *    assert player != null;
+ *    assert player.getName().equals("admin");
+ *    assert world != null;
+ *    assert world.getName().equals("testWorld");
+ *    // ...
+ *	}
  *
  * }
- * </code></pre>
+ * }</pre>
  *
  * <p>Example inheritance usage (fields in mixin classes are also supported):</p>
  *
- * <pre class="code"><code class="java">
+ * <pre>{@code
  * class BaseMixin
  * {
- * 	<b>@MockBukkitInject</b>
- * 	protected ServerMock serverMock;
+ *  @MockBukkitInject
+ *  protected ServerMock serverMock;
  * }
  *
- * <b>@ExtendWith(MockBukkitExtension.class)</b>
+ * @ExtendWith(MockBukkitExtension.class)
  * class InheritanceExampleTest extends BaseMixin
  * {
  *
- *    @Test
- *    void aUnitTest()
- *    {
- * 		assert serverMock != null; // Injected from parent class
- * 		// ...
- *    }
+ *  @Test
+ *  void aUnitTest()
+ *  {
+ *    assert serverMock != null; // Injected from parent class
+ *    // ...
+ *  }
  *
  * }
- * </code></pre>
+ * }</pre>
  */
 public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterAllCallback, TestExecutionExceptionHandler
 {

@@ -49,7 +49,7 @@ public final class ItemStackMirror extends ItemStack
 	/**
 	 * Creates a mirror of the {@link ItemStack}. Any change applied to this {@link ItemStack} will also
 	 * affect the original {@link ItemStack}.
-	 * <p/>
+	 * <p>
 	 * This emulates the behaviour from <code>CraftItemStack#asCraftMirror(net.minecraft.world.item.ItemStack original)</code>.
 	 *
 	 * @param item The original item.
