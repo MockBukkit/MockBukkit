@@ -22,6 +22,7 @@ import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
+import org.mockbukkit.mockbukkit.entity.ZombieNautilusMock;
 import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.ChickenVariantMock;
@@ -114,6 +115,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
 		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
 		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
+		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
