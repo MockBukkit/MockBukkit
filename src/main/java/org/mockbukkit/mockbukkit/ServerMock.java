@@ -12,6 +12,7 @@ import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEven
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
+import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import net.kyori.adventure.audience.Audience;
@@ -146,6 +147,9 @@ import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
+import org.mockbukkit.mockbukkit.scheduler.paper.FoliaEntityScheduler;
+import org.mockbukkit.mockbukkit.scheduler.paper.FoliaGlobalRegionScheduler;
+import org.mockbukkit.mockbukkit.scheduler.paper.FoliaRegionScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
 import org.mockbukkit.mockbukkit.scoreboard.ScoreboardManagerMock;
 import org.mockbukkit.mockbukkit.services.ServicesManagerMock;
@@ -214,6 +218,9 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Map<String, Criteria> criteria = new HashMap<>();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
+	private final GlobalRegionScheduler foliaGlobalRegionScheduler = new FoliaGlobalRegionScheduler(this.scheduler);
+	private final RegionScheduler foliaRegionScheduler = new FoliaRegionScheduler(this.scheduler);
+	private final EntityScheduler foliaEntityScheduler = new FoliaEntityScheduler(this.scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final PlayerListMock playerList = new PlayerListMock();
 	private final CommandMapMock commandMap;
@@ -2756,7 +2763,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull RegionScheduler getRegionScheduler()
 	{
-		throw new UnimplementedOperationException();
+		return this.foliaRegionScheduler;
 	}
 
 	@Override
@@ -2768,49 +2775,54 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull GlobalRegionScheduler getGlobalRegionScheduler()
 	{
-		throw new UnimplementedOperationException();
+		return this.foliaGlobalRegionScheduler;
+	}
+
+	public @NotNull EntityScheduler getEntityScheduler()
+	{
+		return this.foliaEntityScheduler;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position, int squareRadiusChunks)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Location location)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Location location, int squareRadiusChunks)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ, int squareRadiusChunks)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Entity entity)
 	{
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
@@ -2823,15 +2835,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, int i, int i1, int i2, int i3)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isGlobalTickThread()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
