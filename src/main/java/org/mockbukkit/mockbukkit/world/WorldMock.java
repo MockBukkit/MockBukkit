@@ -18,6 +18,7 @@ import org.bukkit.FeatureFlag;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
+import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
@@ -83,6 +84,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.GameRuleMock;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
@@ -128,7 +130,7 @@ public class WorldMock implements World
 	private static final int SEA_LEVEL = 63;
 
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
-	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
+	private final Map<String, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
@@ -231,30 +233,8 @@ public class WorldMock implements World
 			spawnLimits.put(SpawnCategory.AMBIENT, 15);
 		}
 
-		// Set the default gamerule values.
-		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
-		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
-		gameRules.put(GameRule.DISABLE_ELYTRA_MOVEMENT_CHECK, false);
-		gameRules.put(GameRule.DO_DAYLIGHT_CYCLE, true);
-		gameRules.put(GameRule.DO_ENTITY_DROPS, true);
-		gameRules.put(GameRule.DO_FIRE_TICK, true);
-		gameRules.put(GameRule.DO_LIMITED_CRAFTING, false);
-		gameRules.put(GameRule.DO_MOB_LOOT, true);
-		gameRules.put(GameRule.DO_MOB_SPAWNING, true);
-		gameRules.put(GameRule.DO_TILE_DROPS, true);
-		gameRules.put(GameRule.DO_WEATHER_CYCLE, true);
-		gameRules.put(GameRule.KEEP_INVENTORY, false);
-		gameRules.put(GameRule.LOG_ADMIN_COMMANDS, true);
-		gameRules.put(GameRule.MAX_COMMAND_CHAIN_LENGTH, 65536);
-		gameRules.put(GameRule.MAX_ENTITY_CRAMMING, 24);
-		gameRules.put(GameRule.MOB_GRIEFING, true);
-		gameRules.put(GameRule.NATURAL_REGENERATION, true);
-		gameRules.put(GameRule.RANDOM_TICK_SPEED, 3);
-		gameRules.put(GameRule.REDUCED_DEBUG_INFO, false);
-		gameRules.put(GameRule.SEND_COMMAND_FEEDBACK, true);
-		gameRules.put(GameRule.SHOW_DEATH_MESSAGES, true);
-		gameRules.put(GameRule.SPAWN_RADIUS, 10);
-		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
+		// This setGameRule is required to load the GameRule before the GameRules class, otherwise it will fail.
+		setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
 	}
 
 	/**
@@ -1823,7 +1803,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.keySet().stream().map(GameRule::getName).toList().toArray(new String[0]);
+		return getInternalGameRules().keySet().toArray(new String[0]);
 	}
 
 	@Override
@@ -2025,7 +2005,8 @@ public class WorldMock implements World
 	@Override
 	public <T> T getGameRuleValue(@NotNull GameRule<T> rule)
 	{
-		return rule.getType().cast(gameRules.get(rule));
+		var value = getInternalGameRules().get(rule.getKey().asString());
+		return shimLegacyValue(value, rule);
 	}
 
 	@Override
@@ -2038,7 +2019,8 @@ public class WorldMock implements World
 	@Override
 	public <T> boolean setGameRule(GameRule<T> rule, T newValue)
 	{
-		gameRules.put(rule, newValue);
+		var convertedValue = convertLegacyValue(rule, newValue);
+		getInternalGameRules().put(rule.getKey().asString(), convertedValue);
 		return true;
 	}
 
@@ -2965,6 +2947,124 @@ public class WorldMock implements World
 	{
 		fullTime++;
 		gameTime++;
+	}
+
+	/**
+	 * Helper method to register the rules.
+	 * It's similar to {@link #setGameRule(GameRule, Object)} but should only be used internally.
+	 */
+	private <T> void registerInitialRule(GameRule<T> rule, T newValue)
+	{
+		var convertedValue = convertLegacyValue(rule, newValue);
+		registerInitialRule(rule.getKey().asString(), convertedValue);
+	}
+
+	private void registerInitialRule(String rule, Object newValue)
+	{
+		gameRules.put(rule, newValue);
+	}
+
+	/**
+	 * Helper method to lazy load internal game rules.
+	 *
+	 * @return The game rules
+	 */
+	@NotNull
+	private Map<String, Object> getInternalGameRules()
+	{
+		if (gameRules.isEmpty())
+		{
+			// Set the default gamerule values.
+			registerInitialRule(GameRules.ADVANCE_TIME, true);
+			registerInitialRule(GameRules.ADVANCE_WEATHER, true);
+			registerInitialRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);
+			registerInitialRule(GameRules.BLOCK_DROPS, true);
+			registerInitialRule(GameRules.BLOCK_EXPLOSION_DROP_DECAY, true);
+			registerInitialRule(GameRules.COMMAND_BLOCK_OUTPUT, true);
+			registerInitialRule(GameRules.COMMAND_BLOCKS_WORK, true);
+			registerInitialRule(GameRules.DROWNING_DAMAGE, true);
+			registerInitialRule(GameRules.ELYTRA_MOVEMENT_CHECK, true);
+			registerInitialRule(GameRules.ENDER_PEARLS_VANISH_ON_DEATH, true);
+			registerInitialRule(GameRules.ENTITY_DROPS, true);
+			registerInitialRule(GameRules.FALL_DAMAGE, true);
+			registerInitialRule(GameRules.FIRE_DAMAGE, true);
+			registerInitialRule(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 128);
+			registerInitialRule(GameRules.FORGIVE_DEAD_PLAYERS, true);
+			registerInitialRule(GameRules.FREEZE_DAMAGE, true);
+			registerInitialRule(GameRules.GLOBAL_SOUND_EVENTS, true);
+			registerInitialRule(GameRules.IMMEDIATE_RESPAWN, false);
+			registerInitialRule(GameRules.KEEP_INVENTORY, false);
+			registerInitialRule(GameRules.LAVA_SOURCE_CONVERSION, false);
+			registerInitialRule(GameRules.LIMITED_CRAFTING, false);
+			registerInitialRule(GameRules.LOCATOR_BAR, true);
+			registerInitialRule(GameRules.LOG_ADMIN_COMMANDS, true);
+			registerInitialRule(GameRules.MAX_BLOCK_MODIFICATIONS, 32768);
+			registerInitialRule(GameRules.MAX_COMMAND_FORKS, 65536);
+			registerInitialRule(GameRules.MAX_COMMAND_SEQUENCE_LENGTH, 65536);
+			registerInitialRule(GameRules.MAX_ENTITY_CRAMMING, 24);
+			registerInitialRule(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT, 1);
+			registerInitialRule(GameRules.MOB_DROPS, true);
+			registerInitialRule(GameRules.MOB_EXPLOSION_DROP_DECAY, true);
+			registerInitialRule(GameRules.MOB_GRIEFING, true);
+			registerInitialRule(GameRules.NATURAL_HEALTH_REGENERATION, true);
+			registerInitialRule(GameRules.PLAYER_MOVEMENT_CHECK, true);
+			registerInitialRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 0);
+			registerInitialRule(GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY, 80);
+			registerInitialRule(GameRules.PLAYERS_SLEEPING_PERCENTAGE, 100);
+			registerInitialRule(GameRules.PROJECTILES_CAN_BREAK_BLOCKS, true);
+			registerInitialRule(GameRules.PVP, true);
+			registerInitialRule(GameRules.RAIDS, true);
+			registerInitialRule(GameRules.RANDOM_TICK_SPEED, 3);
+			registerInitialRule(GameRules.REDUCED_DEBUG_INFO, false);
+			registerInitialRule(GameRules.RESPAWN_RADIUS, 10);
+			registerInitialRule(GameRules.SEND_COMMAND_FEEDBACK, true);
+			registerInitialRule(GameRules.SHOW_ADVANCEMENT_MESSAGES, true);
+			registerInitialRule(GameRules.SHOW_DEATH_MESSAGES, true);
+			registerInitialRule(GameRules.SPAWN_MOBS, true);
+			registerInitialRule(GameRules.SPAWN_MONSTERS, true);
+			registerInitialRule(GameRules.SPAWN_PATROLS, true);
+			registerInitialRule(GameRules.SPAWN_PHANTOMS, true);
+			registerInitialRule(GameRules.SPAWN_WANDERING_TRADERS, true);
+			registerInitialRule(GameRules.SPAWN_WARDENS, true);
+			registerInitialRule(GameRules.SPAWNER_BLOCKS_WORK, true);
+			registerInitialRule(GameRules.SPECTATORS_GENERATE_CHUNKS, true);
+			registerInitialRule(GameRules.SPREAD_VINES, true);
+			registerInitialRule(GameRules.TNT_EXPLODES, true);
+			registerInitialRule(GameRules.TNT_EXPLOSION_DROP_DECAY, false);
+			registerInitialRule(GameRules.UNIVERSAL_ANGER, false);
+			registerInitialRule(GameRules.WATER_SOURCE_CONVERSION, true);
+		}
+
+		return gameRules;
+	}
+
+	/**
+	 * Helper method for game rule migration in v1.21.11.
+	 */
+	private static <M, L> M shimLegacyValue(L value, org.bukkit.GameRule<M> gameRule)
+	{
+		if (gameRule instanceof GameRuleMock.LegacyGameRuleWrapperMock<?, ?>)
+		{
+			GameRuleMock.LegacyGameRuleWrapperMock<M, L> legacyGameRuleWrapper = (GameRuleMock.LegacyGameRuleWrapperMock<M, L>) gameRule;
+			return legacyGameRuleWrapper.getToLegacyFromModern().apply(value);
+		}
+
+		//noinspection unchecked
+		return (M) value;
+	}
+
+	private static <MODERN, LEGACY> MODERN convertLegacyValue(GameRule<MODERN> rule, LEGACY newValue)
+	{
+		if (rule instanceof GameRuleMock.LegacyGameRuleWrapperMock<?, ?>)
+		{
+			@SuppressWarnings("unchecked")
+			GameRuleMock.LegacyGameRuleWrapperMock<LEGACY, MODERN> legacyWrapper = (GameRuleMock.LegacyGameRuleWrapperMock<LEGACY, MODERN>) rule;
+			return legacyWrapper.getFromLegacyToModern().apply(newValue);
+		}
+		else
+		{
+			return (MODERN) newValue;
+		}
 	}
 
 }

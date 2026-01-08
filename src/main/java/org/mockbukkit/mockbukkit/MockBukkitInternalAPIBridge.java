@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
 import com.destroystokyo.paper.SkinParts;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.InternalAPIBridge;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
@@ -104,7 +105,8 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 																  Function<MODERN, LEGACY> toLegacyFromModern,
 																  Class<LEGACY> legacyClass)
 	{
-		return new GameRuleMock<>(legacyClass, rule.getKey(), rule.translationKey());
+		Preconditions.checkNotNull(rule, "The rule can't be null!");
+		return new GameRuleMock.LegacyGameRuleWrapperMock<>(legacyClass, rule.getKey(), rule.translationKey(), fromLegacyToModern, toLegacyFromModern);
 	}
 
 	@Override

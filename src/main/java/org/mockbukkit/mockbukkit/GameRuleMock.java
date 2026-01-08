@@ -6,6 +6,8 @@ import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.function.Function;
+
 @NullMarked
 @SuppressWarnings("NonExtendableApiUsage")
 public class GameRuleMock<T> extends GameRule<T>
@@ -93,5 +95,31 @@ public class GameRuleMock<T> extends GameRule<T>
 
 		return new GameRuleMock<>(type, key, translationKey);
 	}
-	
+
+	public static class LegacyGameRuleWrapperMock<LEGACY, MODERN> extends GameRuleMock<LEGACY>
+	{
+		private final Function<LEGACY, MODERN> fromLegacyToModern;
+		private final Function<MODERN, LEGACY> toLegacyFromModern;
+
+		public LegacyGameRuleWrapperMock(Class<LEGACY> typeOverride,
+										 NamespacedKey key,
+										 String translationKey,
+										 Function<LEGACY, MODERN> fromLegacyToModern,
+										 Function<MODERN, LEGACY> toLegacyFromModern) {
+			super(typeOverride, key, translationKey);
+			this.fromLegacyToModern = fromLegacyToModern;
+			this.toLegacyFromModern = toLegacyFromModern;
+		}
+
+		public Function<LEGACY, MODERN> getFromLegacyToModern()
+		{
+			return this.fromLegacyToModern;
+		}
+
+		public Function<MODERN, LEGACY> getToLegacyFromModern()
+		{
+			return this.toLegacyFromModern;
+		}
+	}
+
 }

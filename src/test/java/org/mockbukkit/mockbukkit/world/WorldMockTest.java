@@ -1,7 +1,10 @@
 package org.mockbukkit.mockbukkit.world;
 
+import com.google.common.base.Preconditions;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
 import org.bukkit.Chunk;
@@ -10,10 +13,12 @@ import org.bukkit.Color;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.GameRule;
+import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -202,6 +207,9 @@ import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.util.SpawnedParticle;
 import org.opentest4j.AssertionFailedError;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -1519,12 +1527,35 @@ class WorldMockTest
 		}
 	}
 
+	@Nested
+	@ExtendWith(MockBukkitExtension.class)
+	class GamerRules
+	{
+
+		@Test
+		void givenIntegerProperty()
+		{
+			WorldMock world = new WorldMock(Material.DIRT, 3);
+			Integer gameRule = world.getGameRuleValue(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER);
+			assertEquals(128, gameRule);
+		}
+
+		@Test
+		void givenBooleanProperty()
+		{
+			WorldMock world = new WorldMock(Material.DIRT, 3);
+			Boolean gameRule = world.getGameRuleValue(GameRules.FREEZE_DAMAGE);
+			assertEquals(true, gameRule);
+		}
+
+	}
+
 	@Test
 	void testGetGameRuleValue()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		String gameRuleValue = world.getGameRuleValue("doFireTick");
-		assertEquals("true", gameRuleValue);
+		String gameRuleValue = world.getGameRuleValue("fire_spread_radius_around_player");
+		assertEquals("128", gameRuleValue);
 	}
 
 	@Test
@@ -1547,7 +1578,7 @@ class WorldMockTest
 	void testIsGameRule()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		assertTrue(world.isGameRule("doFireTick"));
+		assertTrue(world.isGameRule("fire_spread_radius_around_player"));
 	}
 
 	@Test
@@ -1568,13 +1599,13 @@ class WorldMockTest
 	void testSetGameRuleValue()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setGameRuleValue("announceAdvancements", "false");
-		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
+		world.setGameRuleValue("show_advancement_messages", "false");
+		assertEquals("false", world.getGameRuleValue("show_advancement_messages"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
 				worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 						&& worldGameRuleChangeEvent.getValue().equals("false")));
-		world.setGameRuleValue("announceAdvancements", "true");
-		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
+		world.setGameRuleValue("show_advancement_messages", "true");
+		assertEquals("true", world.getGameRuleValue("show_advancement_messages"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
 				worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 						&& worldGameRuleChangeEvent.getValue().equals("true")));
@@ -1600,8 +1631,8 @@ class WorldMockTest
 	void testSetGameRuleValueInteger()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setGameRuleValue("randomTickSpeed", "10");
-		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
+		world.setGameRuleValue("random_tick_speed", "10");
+		assertEquals("10", world.getGameRuleValue("random_tick_speed"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
 				worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
 						&& worldGameRuleChangeEvent.getValue().equals("10")));
@@ -1611,9 +1642,9 @@ class WorldMockTest
 	void testSetGameRuleValueIntegerNonParseable()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		String randomTickSpeed = world.getGameRuleValue("randomTickSpeed");
-		world.setGameRuleValue("randomTickSpeed", "test");
-		assertEquals(randomTickSpeed, world.getGameRuleValue("randomTickSpeed"));
+		String randomTickSpeed = world.getGameRuleValue("random_tick_speed");
+		world.setGameRuleValue("random_tick_speed", "test");
+		assertEquals(randomTickSpeed, world.getGameRuleValue("random_tick_speed"));
 	}
 
 	@Test
@@ -2029,8 +2060,8 @@ class WorldMockTest
 				event.setCancelled(true);
 			}
 		}, pluginMock);
-		world.setGameRuleValue("doFireTick", "false");
-		assertEquals("true", world.getGameRuleValue("doFireTick"));
+		world.setGameRuleValue("fire_spread_radius_around_player", "false");
+		assertEquals("128", world.getGameRuleValue("fire_spread_radius_around_player"));
 	}
 
 	@Test
@@ -2046,8 +2077,8 @@ class WorldMockTest
 				event.setCancelled(true);
 			}
 		}, pluginMock);
-		world.setGameRuleValue("randomTickSpeed", "10");
-		assertEquals("3", world.getGameRuleValue("randomTickSpeed"));
+		world.setGameRuleValue("random_tick_speed", "10");
+		assertEquals("3", world.getGameRuleValue("random_tick_speed"));
 	}
 
 	@Test
@@ -2507,6 +2538,49 @@ class WorldMockTest
 		world.setFullTime(time);
 
 		assertEquals(expected, world.getMoonPhase());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getTestWorldConfigurations")
+	void test(WorldConfiguration configuration)
+	{
+		var world = server.addSimpleWorld(configuration.getName());
+		assertNotNull(world, String.format("The world %s is not created", configuration.getName()));
+
+		for (var gameRuleKey : configuration.getGameRules())
+		{
+			var gameRule = Registry.GAME_RULE.get(gameRuleKey);
+			var expectedValue = configuration.getDefaultValue(gameRule);
+
+			var actual = world.getGameRuleValue(gameRule);
+
+			assertEquals(expectedValue, actual, String.format("The the game rule '%s' has an incorrect value.", gameRuleKey.asString()));
+		}
+	}
+
+	/**
+	 * Load the test configuration for the worlds.
+	 *
+	 * @return The list of world configuration.
+	 */
+	public static List<WorldConfiguration> getTestWorldConfigurations()
+	{
+		List<WorldConfiguration> worlds = new ArrayList<>();
+
+		var worldsData = WorldMock.class.getResourceAsStream("/worlds.json");
+		Preconditions.checkNotNull(worldsData, "The file does not exist.");
+		Reader bufferedReader = new InputStreamReader(worldsData);
+
+		Gson gson = new Gson();
+		JsonArray data = gson.fromJson(bufferedReader, JsonArray.class);
+		for (var item : data)
+		{
+			Preconditions.checkArgument(item.isJsonObject(), "The item is not a JSON object");
+			var config = WorldConfiguration.fromJson(item.getAsJsonObject());
+			worlds.add(config);
+		}
+
+		return worlds;
 	}
 
 	@Nested
