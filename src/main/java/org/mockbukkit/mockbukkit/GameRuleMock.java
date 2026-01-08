@@ -105,7 +105,8 @@ public class GameRuleMock<T> extends GameRule<T>
 										 NamespacedKey key,
 										 String translationKey,
 										 Function<LEGACY, MODERN> fromLegacyToModern,
-										 Function<MODERN, LEGACY> toLegacyFromModern) {
+										 Function<MODERN, LEGACY> toLegacyFromModern)
+		{
 			super(typeOverride, key, translationKey);
 			this.fromLegacyToModern = fromLegacyToModern;
 			this.toLegacyFromModern = toLegacyFromModern;
