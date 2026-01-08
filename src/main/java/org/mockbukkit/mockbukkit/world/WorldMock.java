@@ -233,8 +233,7 @@ public class WorldMock implements World
 			spawnLimits.put(SpawnCategory.AMBIENT, 15);
 		}
 
-		// This setGameRule is required to load the GameRule before the GameRules class, otherwise it will fail.
-		setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
+		initializeGameRules();
 	}
 
 	/**
@@ -1803,7 +1802,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return getInternalGameRules().keySet().toArray(new String[0]);
+		return gameRules.keySet().toArray(new String[0]);
 	}
 
 	@Override
@@ -2005,7 +2004,7 @@ public class WorldMock implements World
 	@Override
 	public <T> T getGameRuleValue(@NotNull GameRule<T> rule)
 	{
-		var value = getInternalGameRules().get(rule.getKey().asString());
+		var value = gameRules.get(rule.getKey().asString());
 		return shimLegacyValue(value, rule);
 	}
 
@@ -2020,7 +2019,7 @@ public class WorldMock implements World
 	public <T> boolean setGameRule(GameRule<T> rule, T newValue)
 	{
 		var convertedValue = convertLegacyValue(rule, newValue);
-		getInternalGameRules().put(rule.getKey().asString(), convertedValue);
+		gameRules.put(rule.getKey().asString(), convertedValue);
 		return true;
 	}
 
@@ -2949,93 +2948,69 @@ public class WorldMock implements World
 		gameTime++;
 	}
 
-	/**
-	 * Helper method to register the rules.
-	 * It's similar to {@link #setGameRule(GameRule, Object)} but should only be used internally.
-	 */
-	private <T> void registerInitialRule(GameRule<T> rule, T newValue)
+	private void initializeGameRules()
 	{
-		var convertedValue = convertLegacyValue(rule, newValue);
-		registerInitialRule(rule.getKey().asString(), convertedValue);
-	}
+		// This call is required to load the GameRule before the GameRules class, otherwise it will fail.
+		GameRule.values();
 
-	private void registerInitialRule(String rule, Object newValue)
-	{
-		gameRules.put(rule, newValue);
-	}
-
-	/**
-	 * Helper method to lazy load internal game rules.
-	 *
-	 * @return The game rules
-	 */
-	@NotNull
-	private Map<String, Object> getInternalGameRules()
-	{
-		if (gameRules.isEmpty())
-		{
-			// Set the default gamerule values.
-			registerInitialRule(GameRules.ADVANCE_TIME, true);
-			registerInitialRule(GameRules.ADVANCE_WEATHER, true);
-			registerInitialRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);
-			registerInitialRule(GameRules.BLOCK_DROPS, true);
-			registerInitialRule(GameRules.BLOCK_EXPLOSION_DROP_DECAY, true);
-			registerInitialRule(GameRules.COMMAND_BLOCK_OUTPUT, true);
-			registerInitialRule(GameRules.COMMAND_BLOCKS_WORK, true);
-			registerInitialRule(GameRules.DROWNING_DAMAGE, true);
-			registerInitialRule(GameRules.ELYTRA_MOVEMENT_CHECK, true);
-			registerInitialRule(GameRules.ENDER_PEARLS_VANISH_ON_DEATH, true);
-			registerInitialRule(GameRules.ENTITY_DROPS, true);
-			registerInitialRule(GameRules.FALL_DAMAGE, true);
-			registerInitialRule(GameRules.FIRE_DAMAGE, true);
-			registerInitialRule(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 128);
-			registerInitialRule(GameRules.FORGIVE_DEAD_PLAYERS, true);
-			registerInitialRule(GameRules.FREEZE_DAMAGE, true);
-			registerInitialRule(GameRules.GLOBAL_SOUND_EVENTS, true);
-			registerInitialRule(GameRules.IMMEDIATE_RESPAWN, false);
-			registerInitialRule(GameRules.KEEP_INVENTORY, false);
-			registerInitialRule(GameRules.LAVA_SOURCE_CONVERSION, false);
-			registerInitialRule(GameRules.LIMITED_CRAFTING, false);
-			registerInitialRule(GameRules.LOCATOR_BAR, true);
-			registerInitialRule(GameRules.LOG_ADMIN_COMMANDS, true);
-			registerInitialRule(GameRules.MAX_BLOCK_MODIFICATIONS, 32768);
-			registerInitialRule(GameRules.MAX_COMMAND_FORKS, 65536);
-			registerInitialRule(GameRules.MAX_COMMAND_SEQUENCE_LENGTH, 65536);
-			registerInitialRule(GameRules.MAX_ENTITY_CRAMMING, 24);
-			registerInitialRule(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT, 1);
-			registerInitialRule(GameRules.MOB_DROPS, true);
-			registerInitialRule(GameRules.MOB_EXPLOSION_DROP_DECAY, true);
-			registerInitialRule(GameRules.MOB_GRIEFING, true);
-			registerInitialRule(GameRules.NATURAL_HEALTH_REGENERATION, true);
-			registerInitialRule(GameRules.PLAYER_MOVEMENT_CHECK, true);
-			registerInitialRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 0);
-			registerInitialRule(GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY, 80);
-			registerInitialRule(GameRules.PLAYERS_SLEEPING_PERCENTAGE, 100);
-			registerInitialRule(GameRules.PROJECTILES_CAN_BREAK_BLOCKS, true);
-			registerInitialRule(GameRules.PVP, true);
-			registerInitialRule(GameRules.RAIDS, true);
-			registerInitialRule(GameRules.RANDOM_TICK_SPEED, 3);
-			registerInitialRule(GameRules.REDUCED_DEBUG_INFO, false);
-			registerInitialRule(GameRules.RESPAWN_RADIUS, 10);
-			registerInitialRule(GameRules.SEND_COMMAND_FEEDBACK, true);
-			registerInitialRule(GameRules.SHOW_ADVANCEMENT_MESSAGES, true);
-			registerInitialRule(GameRules.SHOW_DEATH_MESSAGES, true);
-			registerInitialRule(GameRules.SPAWN_MOBS, true);
-			registerInitialRule(GameRules.SPAWN_MONSTERS, true);
-			registerInitialRule(GameRules.SPAWN_PATROLS, true);
-			registerInitialRule(GameRules.SPAWN_PHANTOMS, true);
-			registerInitialRule(GameRules.SPAWN_WANDERING_TRADERS, true);
-			registerInitialRule(GameRules.SPAWN_WARDENS, true);
-			registerInitialRule(GameRules.SPAWNER_BLOCKS_WORK, true);
-			registerInitialRule(GameRules.SPECTATORS_GENERATE_CHUNKS, true);
-			registerInitialRule(GameRules.SPREAD_VINES, true);
-			registerInitialRule(GameRules.TNT_EXPLODES, true);
-			registerInitialRule(GameRules.TNT_EXPLOSION_DROP_DECAY, false);
-			registerInitialRule(GameRules.UNIVERSAL_ANGER, false);
-			registerInitialRule(GameRules.WATER_SOURCE_CONVERSION, true);
-		}
-
-		return gameRules;
+		this.setGameRule(GameRules.ADVANCE_TIME, true);
+		this.setGameRule(GameRules.ADVANCE_WEATHER, true);
+		this.setGameRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);
+		this.setGameRule(GameRules.BLOCK_DROPS, true);
+		this.setGameRule(GameRules.BLOCK_EXPLOSION_DROP_DECAY, true);
+		this.setGameRule(GameRules.COMMAND_BLOCK_OUTPUT, true);
+		this.setGameRule(GameRules.COMMAND_BLOCKS_WORK, true);
+		this.setGameRule(GameRules.DROWNING_DAMAGE, true);
+		this.setGameRule(GameRules.ELYTRA_MOVEMENT_CHECK, true);
+		this.setGameRule(GameRules.ENDER_PEARLS_VANISH_ON_DEATH, true);
+		this.setGameRule(GameRules.ENTITY_DROPS, true);
+		this.setGameRule(GameRules.FALL_DAMAGE, true);
+		this.setGameRule(GameRules.FIRE_DAMAGE, true);
+		this.setGameRule(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 128);
+		this.setGameRule(GameRules.FORGIVE_DEAD_PLAYERS, true);
+		this.setGameRule(GameRules.FREEZE_DAMAGE, true);
+		this.setGameRule(GameRules.GLOBAL_SOUND_EVENTS, true);
+		this.setGameRule(GameRules.IMMEDIATE_RESPAWN, false);
+		this.setGameRule(GameRules.KEEP_INVENTORY, false);
+		this.setGameRule(GameRules.LAVA_SOURCE_CONVERSION, false);
+		this.setGameRule(GameRules.LIMITED_CRAFTING, false);
+		this.setGameRule(GameRules.LOCATOR_BAR, true);
+		this.setGameRule(GameRules.LOG_ADMIN_COMMANDS, true);
+		this.setGameRule(GameRules.MAX_BLOCK_MODIFICATIONS, 32768);
+		this.setGameRule(GameRules.MAX_COMMAND_FORKS, 65536);
+		this.setGameRule(GameRules.MAX_COMMAND_SEQUENCE_LENGTH, 65536);
+		this.setGameRule(GameRules.MAX_ENTITY_CRAMMING, 24);
+		this.setGameRule(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT, 1);
+		this.setGameRule(GameRules.MOB_DROPS, true);
+		this.setGameRule(GameRules.MOB_EXPLOSION_DROP_DECAY, true);
+		this.setGameRule(GameRules.MOB_GRIEFING, true);
+		this.setGameRule(GameRules.NATURAL_HEALTH_REGENERATION, true);
+		this.setGameRule(GameRules.PLAYER_MOVEMENT_CHECK, true);
+		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 0);
+		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY, 80);
+		this.setGameRule(GameRules.PLAYERS_SLEEPING_PERCENTAGE, 100);
+		this.setGameRule(GameRules.PROJECTILES_CAN_BREAK_BLOCKS, true);
+		this.setGameRule(GameRules.PVP, true);
+		this.setGameRule(GameRules.RAIDS, true);
+		this.setGameRule(GameRules.RANDOM_TICK_SPEED, 3);
+		this.setGameRule(GameRules.REDUCED_DEBUG_INFO, false);
+		this.setGameRule(GameRules.RESPAWN_RADIUS, 10);
+		this.setGameRule(GameRules.SEND_COMMAND_FEEDBACK, true);
+		this.setGameRule(GameRules.SHOW_ADVANCEMENT_MESSAGES, true);
+		this.setGameRule(GameRules.SHOW_DEATH_MESSAGES, true);
+		this.setGameRule(GameRules.SPAWN_MOBS, true);
+		this.setGameRule(GameRules.SPAWN_MONSTERS, true);
+		this.setGameRule(GameRules.SPAWN_PATROLS, true);
+		this.setGameRule(GameRules.SPAWN_PHANTOMS, true);
+		this.setGameRule(GameRules.SPAWN_WANDERING_TRADERS, true);
+		this.setGameRule(GameRules.SPAWN_WARDENS, true);
+		this.setGameRule(GameRules.SPAWNER_BLOCKS_WORK, true);
+		this.setGameRule(GameRules.SPECTATORS_GENERATE_CHUNKS, true);
+		this.setGameRule(GameRules.SPREAD_VINES, true);
+		this.setGameRule(GameRules.TNT_EXPLODES, true);
+		this.setGameRule(GameRules.TNT_EXPLOSION_DROP_DECAY, false);
+		this.setGameRule(GameRules.UNIVERSAL_ANGER, false);
+		this.setGameRule(GameRules.WATER_SOURCE_CONVERSION, true);
 	}
 
 	/**
