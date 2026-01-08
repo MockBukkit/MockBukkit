@@ -13,7 +13,6 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link WorldBorder}.
@@ -38,7 +37,7 @@ public class WorldBorderMock implements WorldBorder
 	private double damageAmount;
 	private double damageBuffer;
 	private int warningDistance;
-	private int warningTime;
+	private int warningTimeTicks;
 	private double centerX;
 	private double centerZ;
 
@@ -189,27 +188,16 @@ public class WorldBorderMock implements WorldBorder
 	}
 
 	@Override
-	public int getWarningTime()
-	{
-		return this.warningTime;
-	}
-
-	@Override
-	public void setWarningTime(int seconds)
-	{
-		this.warningTime = seconds;
-	}
-
-	@Override
 	public @NonNegative int getWarningTimeTicks()
 	{
-		throw new UnimplementedOperationException();
+		return this.warningTimeTicks;
 	}
 
 	@Override
-	public void setWarningTimeTicks(@NonNegative int i)
+	public void setWarningTimeTicks(@NonNegative int ticks)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(ticks >= 0, "ticks cannot be lower than 0");
+		this.warningTimeTicks = ticks;
 	}
 
 	@Override
