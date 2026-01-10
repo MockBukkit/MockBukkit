@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MainHand;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,9 @@ import org.mockbukkit.mockbukkit.inventory.InventoryViewMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -45,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
@@ -627,6 +631,47 @@ class HumanEntityMockTest
 		}
 
 		@Test
+		void setCooldown_NullItemStack_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown((ItemStack) null, 10));
+		}
+
+		@Test
+		void setCooldown_NegativeTicks_ThrowsException()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown(item, -1));
+		}
+
+		@Test
+		void hasCooldown_NullItemStack_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.hasCooldown((ItemStack) null));
+		}
+
+		@Test
+		void getCooldown_NullItemStack_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.getCooldown((ItemStack) null));
+		}
+
+		@Test
+		void hasCooldown_ZeroCooldownInMap_ReturnsFalse() throws Exception
+		{
+			// Use reflection to set a zero cooldown value in the map
+			// This tests the edge case where cooldown is not null but is <= 0
+			Field cooldownsField = HumanEntityMock.class.getDeclaredField("cooldowns");
+			cooldownsField.setAccessible(true);
+			@SuppressWarnings("unchecked")
+			Map<Material, Integer> cooldowns = (Map<Material, Integer>) cooldownsField.get(human);
+			cooldowns.put(Material.ENDER_PEARL, 0);
+
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			assertFalse(human.hasCooldown(item));
+			assertEquals(0, human.getCooldown(item));
+		}
+
+		@Test
 		void getCooldown_NoCooldown_ReturnsZero()
 		{
 			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
@@ -705,6 +750,42 @@ class HumanEntityMockTest
 			human.setCooldown(item, 35);
 
 			assertEquals(35, human.getCooldown(Material.ENDER_PEARL));
+		}
+
+		@Test
+		void setCooldown_Material_NullMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown((Material) null, 10));
+		}
+
+		@Test
+		void setCooldown_Material_NonItemMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown(Material.WATER, 10));
+		}
+
+		@Test
+		void hasCooldown_Material_NullMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.hasCooldown((Material) null));
+		}
+
+		@Test
+		void hasCooldown_Material_NonItemMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.hasCooldown(Material.WATER));
+		}
+
+		@Test
+		void getCooldown_Material_NullMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.getCooldown((Material) null));
+		}
+
+		@Test
+		void getCooldown_Material_NonItemMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.getCooldown(Material.WATER));
 		}
 
 		@Test
