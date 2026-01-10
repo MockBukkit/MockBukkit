@@ -601,4 +601,177 @@ class HumanEntityMockTest
 
 	}
 
+	@Nested
+	class ItemStackCooldown
+	{
+
+		@Test
+		void setCooldown_SetsCooldownForItemStack()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 20);
+
+			assertEquals(20, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void setCooldown_ZeroTicks_RemovesCooldown()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 20);
+			human.setCooldown(item, 0);
+
+			assertEquals(0, human.getCooldown(item));
+			assertFalse(human.hasCooldown(item));
+		}
+
+		@Test
+		void getCooldown_NoCooldown_ReturnsZero()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+
+			assertEquals(0, human.getCooldown(item));
+		}
+
+		@Test
+		void hasCooldown_NoCooldown_ReturnsFalse()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+
+			assertFalse(human.hasCooldown(item));
+		}
+
+		@Test
+		void setCooldown_DifferentItemsShareMaterialCooldown()
+		{
+			ItemStackMock item1 = new ItemStackMock(Material.ENDER_PEARL);
+			ItemStackMock item2 = new ItemStackMock(Material.ENDER_PEARL);
+
+			human.setCooldown(item1, 30);
+
+			assertEquals(30, human.getCooldown(item2));
+			assertTrue(human.hasCooldown(item2));
+		}
+
+		@Test
+		void setCooldown_DifferentMaterialsHaveSeparateCooldowns()
+		{
+			ItemStackMock enderPearl = new ItemStackMock(Material.ENDER_PEARL);
+			ItemStackMock chorus = new ItemStackMock(Material.CHORUS_FRUIT);
+
+			human.setCooldown(enderPearl, 20);
+			human.setCooldown(chorus, 40);
+
+			assertEquals(20, human.getCooldown(enderPearl));
+			assertEquals(40, human.getCooldown(chorus));
+		}
+
+		@Test
+		void setCooldown_UpdatesExistingCooldown()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+
+			human.setCooldown(item, 20);
+			assertEquals(20, human.getCooldown(item));
+
+			human.setCooldown(item, 50);
+			assertEquals(50, human.getCooldown(item));
+		}
+
+		@Test
+		void setCooldown_MaterialDelegatesToItemStack()
+		{
+			human.setCooldown(Material.ENDER_PEARL, 25);
+
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			assertEquals(25, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void hasCooldown_MaterialDelegatesToItemStack()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 30);
+
+			assertTrue(human.hasCooldown(Material.ENDER_PEARL));
+		}
+
+		@Test
+		void getCooldown_MaterialDelegatesToItemStack()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 35);
+
+			assertEquals(35, human.getCooldown(Material.ENDER_PEARL));
+		}
+
+		@Test
+		void tick_DecreasesCooldownByOne()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 5);
+
+			human.tick();
+
+			assertEquals(4, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void tick_RemovesCooldownWhenReachesZero()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 1);
+
+			human.tick();
+
+			assertEquals(0, human.getCooldown(item));
+			assertFalse(human.hasCooldown(item));
+		}
+
+		@Test
+		void tick_MultipleTicks_DecreasesCooldown()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 10);
+
+			for (int i = 0; i < 5; i++)
+			{
+				human.tick();
+			}
+
+			assertEquals(5, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void tick_HandlesMultipleCooldownsSimultaneously()
+		{
+			ItemStackMock enderPearl = new ItemStackMock(Material.ENDER_PEARL);
+			ItemStackMock chorus = new ItemStackMock(Material.CHORUS_FRUIT);
+
+			human.setCooldown(enderPearl, 10);
+			human.setCooldown(chorus, 5);
+
+			human.tick();
+
+			assertEquals(9, human.getCooldown(enderPearl));
+			assertEquals(4, human.getCooldown(chorus));
+
+			// Tick 4 more times
+			for (int i = 0; i < 4; i++)
+			{
+				human.tick();
+			}
+
+			assertEquals(5, human.getCooldown(enderPearl));
+			assertEquals(0, human.getCooldown(chorus));
+			assertTrue(human.hasCooldown(enderPearl));
+			assertFalse(human.hasCooldown(chorus));
+		}
+
+	}
+
 }
