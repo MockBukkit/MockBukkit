@@ -713,7 +713,7 @@ class HumanEntityMockTest
 			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
 			human.setCooldown(item, 5);
 
-			human.tick();
+			server.getScheduler().performTicks(1);
 
 			assertEquals(4, human.getCooldown(item));
 			assertTrue(human.hasCooldown(item));
@@ -725,7 +725,7 @@ class HumanEntityMockTest
 			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
 			human.setCooldown(item, 1);
 
-			human.tick();
+			server.getScheduler().performTicks(1);
 
 			assertEquals(0, human.getCooldown(item));
 			assertFalse(human.hasCooldown(item));
@@ -737,10 +737,7 @@ class HumanEntityMockTest
 			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
 			human.setCooldown(item, 10);
 
-			for (int i = 0; i < 5; i++)
-			{
-				human.tick();
-			}
+			server.getScheduler().performTicks(5);
 
 			assertEquals(5, human.getCooldown(item));
 			assertTrue(human.hasCooldown(item));
@@ -755,16 +752,12 @@ class HumanEntityMockTest
 			human.setCooldown(enderPearl, 10);
 			human.setCooldown(chorus, 5);
 
-			human.tick();
+			server.getScheduler().performTicks(1);
 
 			assertEquals(9, human.getCooldown(enderPearl));
 			assertEquals(4, human.getCooldown(chorus));
 
-			// Tick 4 more times
-			for (int i = 0; i < 4; i++)
-			{
-				human.tick();
-			}
+			server.getScheduler().performTicks(4);
 
 			assertEquals(5, human.getCooldown(enderPearl));
 			assertEquals(0, human.getCooldown(chorus));
