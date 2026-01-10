@@ -105,6 +105,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean jumping = false;
 	private boolean riptiding = false;
 
+	// Active item fields
+	private @Nullable ItemStack activeItem = null;
+	private @Nullable EquipmentSlot activeItemHand = null;
+	private int activeItemUsedTicks = 0;
+	private int activeItemMaxDuration = 0;
+
 	/**
 	 * The attributes this entity has.
 	 */
@@ -363,43 +369,64 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void startUsingItem(@NotNull EquipmentSlot hand)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(hand, "Hand cannot be null");
+		Preconditions.checkArgument(hand == EquipmentSlot.HAND || hand == EquipmentSlot.OFF_HAND,
+				"Hand must be HAND or OFF_HAND");
+
+		ItemStack item = hand == EquipmentSlot.HAND
+				? equipment.getItemInMainHand()
+				: equipment.getItemInOffHand();
+
+		if (item.getType().isAir())
+		{
+			return; // Can't use air/null items
+		}
+
+		this.activeItem = item.clone();
+		this.activeItemHand = hand;
+		this.activeItemUsedTicks = 0;
+		// Default max duration for most consumable items (food, potions) is 32 ticks
+		// Bows can be held indefinitely, but we'll use a reasonable default
+		this.activeItemMaxDuration = 32;
 	}
 
 	@Override
 	public @Nullable ItemStack getItemInUse()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.activeItem;
 	}
 
 	@Override
 	public int getItemInUseTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.activeItemUsedTicks;
 	}
 
 	@Override
 	public void setItemInUseTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(ticks >= 0, "Ticks must be >= 0");
+		this.activeItemUsedTicks = ticks;
 	}
 
 	@Override
 	public void completeUsingActiveItem()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Clear the active item (item usage is complete)
+		this.activeItem = null;
+		this.activeItemHand = null;
+		this.activeItemUsedTicks = 0;
+		this.activeItemMaxDuration = 0;
 	}
 
 	@Override
 	public int getActiveItemRemainingTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.activeItem == null)
+		{
+			return 0;
+		}
+		return Math.max(0, this.activeItemMaxDuration - this.activeItemUsedTicks);
 	}
 
 	protected double getEyeHeight(EntityState pose)
@@ -448,29 +475,34 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(ticks >= 0, "Ticks must be >= 0");
+		if (this.activeItem == null)
+		{
+			return; // No active item, nothing to set
+		}
+		this.activeItemUsedTicks = Math.max(0, this.activeItemMaxDuration - ticks);
 	}
 
 	@Override
 	public boolean hasActiveItem()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.activeItem != null;
 	}
 
 	@Override
 	public int getActiveItemUsedTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.activeItemUsedTicks;
 	}
 
 	@Override
 	public @NotNull EquipmentSlot getActiveItemHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.activeItemHand == null)
+		{
+			throw new IllegalStateException("No active item");
+		}
+		return this.activeItemHand;
 	}
 
 	@Override
@@ -1212,45 +1244,22 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public @Nullable ItemStack getActiveItem()
+	public @NotNull ItemStack getActiveItem()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.activeItem == null)
+		{
+			return new ItemStack(Material.AIR);
+		}
+		return this.activeItem;
 	}
 
 	@Override
 	public void clearActiveItem()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getItemUseRemainingTime()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getHandRaisedTime()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isHandRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EquipmentSlot getHandRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.activeItem = null;
+		this.activeItemHand = null;
+		this.activeItemUsedTicks = 0;
+		this.activeItemMaxDuration = 0;
 	}
 
 	@Override
@@ -1263,6 +1272,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setJumping(boolean jumping)
 	{
 		this.jumping = jumping;
+	}
+
+	@Override
+	public boolean isHandRaised()
+	{
+		return hasActiveItem();
 	}
 
 	@Override
