@@ -847,8 +847,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return spawnArrow(location, direction, speed, spread, Arrow.class);
 	}
 
 	@Override
@@ -2330,8 +2329,37 @@ public class WorldMock implements World
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
 														   Class<T> clazz)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(direction, "Direction cannot be null");
+		Preconditions.checkNotNull(clazz, "Class cannot be null");
+		Preconditions.checkArgument(speed >= 0 && speed <= 1, "Speed must be between 0 and 1 (inclusive), got %s", speed);
+		Preconditions.checkArgument(spread >= 0, "Spread must be non-negative, got %s", spread);
+
+		// Spawn the arrow entity
+		T arrow = spawn(location, clazz, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+		// Calculate velocity with spread
+		Vector velocity = direction.clone().normalize();
+
+		// Apply random spread if specified
+		if (spread > 0)
+		{
+			Random random = ThreadLocalRandom.current();
+			velocity.add(new Vector(
+				(random.nextDouble() - 0.5) * spread,
+				(random.nextDouble() - 0.5) * spread,
+				(random.nextDouble() - 0.5) * spread
+			));
+		}
+
+		// Normalize and apply speed
+		velocity.normalize().multiply(speed);
+		arrow.setVelocity(velocity);
+
+		// Mark the arrow as having been shot
+		arrow.setHasBeenShot(true);
+
+		return arrow;
 	}
 
 	@Override
