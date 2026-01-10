@@ -39,7 +39,9 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -59,6 +61,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private final Set<NamespacedKey> discoveredRecipes = new HashSet<>();
 	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
 	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);
+	private final Map<Material, Integer> cooldowns = new HashMap<>();
 	private InventoryView inventoryView;
 	private @NotNull ItemStack cursor = ItemStack.empty();
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
@@ -372,10 +375,11 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean hasCooldown(@NotNull ItemStack itemStack)
 	{
-		Preconditions.checkArgument(itemStack != null, "Material cannot be null");
+		Preconditions.checkArgument(itemStack != null, "ItemStack cannot be null");
 
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Material material = itemStack.getType();
+		Integer cooldown = this.cooldowns.get(material);
+		return cooldown != null && cooldown > 0;
 	}
 
 	@Override
@@ -383,17 +387,25 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		Preconditions.checkArgument(itemStack != null, "ItemStack cannot be null");
 
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Material material = itemStack.getType();
+		return this.cooldowns.getOrDefault(material, 0);
 	}
 
 	@Override
 	public void setCooldown(@NotNull ItemStack itemStack, int ticks)
 	{
 		Preconditions.checkArgument(itemStack != null, "ItemStack cannot be null");
+		Preconditions.checkArgument(ticks >= 0, "Cooldown ticks must be greater than or equal to 0");
 
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Material material = itemStack.getType();
+		if (ticks <= 0)
+		{
+			this.cooldowns.remove(material);
+		}
+		else
+		{
+			this.cooldowns.put(material, ticks);
+		}
 	}
 
 	@Override
@@ -743,6 +755,19 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		// TODO: Auto generated stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void tick()
+	{
+		super.tick();
+
+		// Decrease all cooldowns by 1 tick
+		this.cooldowns.entrySet().removeIf(entry ->
+		{
+			entry.setValue(entry.getValue() - 1);
+			return entry.getValue() <= 0;
+		});
 	}
 
 }

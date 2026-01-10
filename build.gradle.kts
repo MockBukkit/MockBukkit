@@ -27,8 +27,8 @@ dependencies {
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter-api:6.0.1")
-	testImplementation(platform("org.junit:junit-bom:6.0.1"))
+	implementation("org.junit.jupiter:junit-jupiter-api:6.0.2")
+	testImplementation(platform("org.junit:junit-bom:6.0.2"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
