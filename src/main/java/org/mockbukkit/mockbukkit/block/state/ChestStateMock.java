@@ -41,7 +41,7 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 		possibleValues.add(Material.CHEST);
 		possibleValues.add(Material.TRAPPED_CHEST);
 		possibleValues.addAll(Tag.COPPER_CHESTS.getValues());
-		checkType(material, possibleValues.toArray(new Material[0]));
+		checkType(material, possibleValues.toArray(Material[]::new));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 		possibleValues.add(Material.CHEST);
 		possibleValues.add(Material.TRAPPED_CHEST);
 		possibleValues.addAll(Tag.COPPER_CHESTS.getValues());
-		checkType(block, possibleValues.toArray(new Material[0]));
+		checkType(block, possibleValues.toArray(Material[]::new));
 	}
 
 	/**

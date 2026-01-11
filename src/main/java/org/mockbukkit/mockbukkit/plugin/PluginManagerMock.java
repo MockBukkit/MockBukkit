@@ -285,7 +285,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	@Override
 	public synchronized Plugin @NotNull [] getPlugins()
 	{
-		return plugins.toArray(new Plugin[0]);
+		return plugins.toArray(Plugin[]::new);
 	}
 
 	/**

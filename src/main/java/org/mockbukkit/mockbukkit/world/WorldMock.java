@@ -677,7 +677,7 @@ public class WorldMock implements World
 	@Override
 	public Chunk @NotNull [] getLoadedChunks()
 	{
-		return loadedChunks.values().toArray(new Chunk[0]);
+		return loadedChunks.values().toArray(Chunk[]::new);
 	}
 
 	@Override
@@ -1802,7 +1802,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.keySet().toArray(new String[0]);
+		return gameRules.keySet().toArray(String[]::new);
 	}
 
 	@Override
@@ -2950,9 +2950,6 @@ public class WorldMock implements World
 
 	private void initializeGameRules()
 	{
-		// This call is required to load the GameRule before the GameRules class, otherwise it will fail.
-		GameRule.values();
-
 		this.setGameRule(GameRules.ADVANCE_TIME, true);
 		this.setGameRule(GameRules.ADVANCE_WEATHER, true);
 		this.setGameRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);

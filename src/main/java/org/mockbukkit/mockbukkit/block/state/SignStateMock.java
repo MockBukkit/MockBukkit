@@ -234,7 +234,7 @@ public class SignStateMock extends TileStateMock implements Sign
 
 		private SignSideMock(SignSide signSide)
 		{
-			this.lines = signSide.lines().toArray(new Component[0]);
+			this.lines = signSide.lines().toArray(Component[]::new);
 			this.glowing = signSide.isGlowingText();
 			this.color = signSide.getColor();
 		}
