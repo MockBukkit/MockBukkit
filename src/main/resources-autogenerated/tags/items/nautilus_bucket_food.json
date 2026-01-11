@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:cod_bucket",
+		"minecraft:pufferfish_bucket",
+		"minecraft:salmon_bucket",
+		"minecraft:tropical_fish_bucket"
+	]
+}

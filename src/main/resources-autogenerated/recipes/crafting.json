@@ -9117,7 +9117,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "copper_bulb",
 		"key": "minecraft:copper_bulb",
 		"result": {
 			"amount": 4,
@@ -9382,7 +9382,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "copper_grate",
 		"key": "minecraft:copper_grate",
 		"result": {
 			"amount": 4,
@@ -9816,6 +9816,41 @@
 			"a",
 			"b",
 			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"c": {
+				"choices": [
+					"minecraft:copper_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:copper_spear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:copper_spear"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -13602,6 +13637,41 @@
 	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
+			"c": {
+				"choices": [
+					"minecraft:diamond"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:diamond_spear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:diamond_spear"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
 			"a": {
 				"choices": [
 					"minecraft:diamond"
@@ -17233,7 +17303,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "exposed_copper_bulb",
 		"key": "minecraft:exposed_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -17274,7 +17344,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "exposed_copper_grate",
 		"key": "minecraft:exposed_copper_grate",
 		"result": {
 			"amount": 4,
@@ -18943,6 +19013,41 @@
 			"a",
 			"b",
 			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"c": {
+				"choices": [
+					"minecraft:gold_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:golden_spear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:golden_spear"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -21619,6 +21724,41 @@
 			"a",
 			"b",
 			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"c": {
+				"choices": [
+					"minecraft:iron_ingot"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:iron_spear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:iron_spear"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},
@@ -30339,7 +30479,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "oxidized_copper_bulb",
 		"key": "minecraft:oxidized_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -30380,7 +30520,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "oxidized_copper_grate",
 		"key": "minecraft:oxidized_copper_grate",
 		"result": {
 			"amount": 4,
@@ -40501,6 +40641,43 @@
 		"type": "shaped"
 	},
 	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"c": {
+				"choices": [
+					"minecraft:blackstone",
+					"minecraft:cobbled_deepslate",
+					"minecraft:cobblestone"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:stone_spear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:stone_spear"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "BUILDING",
 		"choiceMap": {
 			"a": {
@@ -43183,7 +43360,7 @@
 				"type": "material"
 			}
 		},
-		"group": "waxed_cut_copper_chiseled",
+		"group": "waxed_chiseled_copper",
 		"key": "minecraft:waxed_chiseled_copper",
 		"result": {
 			"amount": 1,
@@ -43235,7 +43412,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_copper_bars",
+		"group": "waxed_copper_bar",
 		"key": "minecraft:waxed_copper_bars_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -43301,7 +43478,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_copper_bulb",
 		"key": "minecraft:waxed_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -43315,7 +43492,7 @@
 		"type": "shaped"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -43387,7 +43564,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -43462,7 +43639,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_copper_grate",
 		"key": "minecraft:waxed_copper_grate",
 		"result": {
 			"amount": 4,
@@ -43524,7 +43701,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -43761,7 +43938,7 @@
 				"type": "material"
 			}
 		},
-		"group": "waxed_exposed_cut_copper_chiseled",
+		"group": "waxed_exposed_chiseled_copper",
 		"key": "minecraft:waxed_exposed_chiseled_copper",
 		"result": {
 			"amount": 1,
@@ -43813,7 +43990,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_bars",
+		"group": "waxed_copper_bar",
 		"key": "minecraft:waxed_exposed_copper_bars_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -43855,7 +44032,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_exposed_copper_bulb",
 		"key": "minecraft:waxed_exposed_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -43869,7 +44046,7 @@
 		"type": "shaped"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -43908,7 +44085,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_chain",
+		"group": "waxed_copper_chain",
 		"key": "minecraft:waxed_exposed_copper_chain_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -43932,7 +44109,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_chest",
+		"group": "waxed_copper_chest",
 		"key": "minecraft:waxed_exposed_copper_chest_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -43941,7 +44118,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -43956,7 +44133,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_door",
+		"group": "waxed_copper_door",
 		"key": "minecraft:waxed_exposed_copper_door_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -43980,7 +44157,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper",
+		"group": "waxed_copper_block",
 		"key": "minecraft:waxed_exposed_copper_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44004,7 +44181,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_golem_statue",
+		"group": "waxed_copper_golem_statue",
 		"key": "minecraft:waxed_exposed_copper_golem_statue_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44040,7 +44217,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_exposed_copper_grate",
 		"key": "minecraft:waxed_exposed_copper_grate",
 		"result": {
 			"amount": 4,
@@ -44093,7 +44270,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_lantern",
+		"group": "waxed_copper_lantern",
 		"key": "minecraft:waxed_exposed_copper_lantern_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44102,7 +44279,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -44117,7 +44294,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_copper_trapdoor",
+		"group": "waxed_copper_trapdoor",
 		"key": "minecraft:waxed_exposed_copper_trapdoor_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44339,7 +44516,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_exposed_lightning_rod",
+		"group": "waxed_lightning_rod",
 		"key": "minecraft:waxed_exposed_lightning_rod_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44387,7 +44564,7 @@
 				"type": "material"
 			}
 		},
-		"group": "waxed_oxidized_cut_copper_chiseled",
+		"group": "waxed_oxidized_chiseled_copper",
 		"key": "minecraft:waxed_oxidized_chiseled_copper",
 		"result": {
 			"amount": 1,
@@ -44439,7 +44616,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_bars",
+		"group": "waxed_copper_bar",
 		"key": "minecraft:waxed_oxidized_copper_bars_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44481,7 +44658,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_oxidized_copper_bulb",
 		"key": "minecraft:waxed_oxidized_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -44495,7 +44672,7 @@
 		"type": "shaped"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -44534,7 +44711,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_chain",
+		"group": "waxed_copper_chain",
 		"key": "minecraft:waxed_oxidized_copper_chain_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44558,7 +44735,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_chest",
+		"group": "waxed_copper_chest",
 		"key": "minecraft:waxed_oxidized_copper_chest_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44567,7 +44744,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -44582,7 +44759,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_door",
+		"group": "waxed_copper_door",
 		"key": "minecraft:waxed_oxidized_copper_door_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44606,7 +44783,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper",
+		"group": "waxed_copper_block",
 		"key": "minecraft:waxed_oxidized_copper_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44630,7 +44807,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_golem_statue",
+		"group": "waxed_copper_golem_statue",
 		"key": "minecraft:waxed_oxidized_copper_golem_statue_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44666,7 +44843,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_oxidized_copper_grate",
 		"key": "minecraft:waxed_oxidized_copper_grate",
 		"result": {
 			"amount": 4,
@@ -44719,7 +44896,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_lantern",
+		"group": "waxed_copper_lantern",
 		"key": "minecraft:waxed_oxidized_copper_lantern_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44728,7 +44905,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -44743,7 +44920,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_copper_trapdoor",
+		"group": "waxed_copper_trapdoor",
 		"key": "minecraft:waxed_oxidized_copper_trapdoor_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44965,7 +45142,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_oxidized_lightning_rod",
+		"group": "waxed_lightning_rod",
 		"key": "minecraft:waxed_oxidized_lightning_rod_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -44989,7 +45166,7 @@
 				"type": "material"
 			}
 		},
-		"group": "waxed_weathered_cut_copper_chiseled",
+		"group": "waxed_weathered_chiseled_copper",
 		"key": "minecraft:waxed_weathered_chiseled_copper",
 		"result": {
 			"amount": 1,
@@ -45041,7 +45218,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_bars",
+		"group": "waxed_copper_bar",
 		"key": "minecraft:waxed_weathered_copper_bars_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45083,7 +45260,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_weathered_copper_bulb",
 		"key": "minecraft:waxed_weathered_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -45097,7 +45274,7 @@
 		"type": "shaped"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -45136,7 +45313,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_chain",
+		"group": "waxed_copper_chain",
 		"key": "minecraft:waxed_weathered_copper_chain_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45160,7 +45337,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_chest",
+		"group": "waxed_copper_chest",
 		"key": "minecraft:waxed_weathered_copper_chest_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45169,7 +45346,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -45184,7 +45361,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_door",
+		"group": "waxed_copper_door",
 		"key": "minecraft:waxed_weathered_copper_door_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45208,7 +45385,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper",
+		"group": "waxed_copper_block",
 		"key": "minecraft:waxed_weathered_copper_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45232,7 +45409,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_golem_statue",
+		"group": "waxed_copper_golem_statue",
 		"key": "minecraft:waxed_weathered_copper_golem_statue_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45268,7 +45445,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "waxed_weathered_copper_grate",
 		"key": "minecraft:waxed_weathered_copper_grate",
 		"result": {
 			"amount": 4,
@@ -45321,7 +45498,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_lantern",
+		"group": "waxed_copper_lantern",
 		"key": "minecraft:waxed_weathered_copper_lantern_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45330,7 +45507,7 @@
 		"type": "shapeless"
 	},
 	{
-		"category": "BUILDING",
+		"category": "REDSTONE",
 		"choices": [
 			{
 				"choices": [
@@ -45345,7 +45522,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_copper_trapdoor",
+		"group": "waxed_copper_trapdoor",
 		"key": "minecraft:waxed_weathered_copper_trapdoor_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45567,7 +45744,7 @@
 				"type": "material"
 			}
 		],
-		"group": "waxed_weathered_lightning_rod",
+		"group": "waxed_lightning_rod",
 		"key": "minecraft:waxed_weathered_lightning_rod_from_honeycomb",
 		"result": {
 			"amount": 1,
@@ -45708,7 +45885,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "weathered_copper_bulb",
 		"key": "minecraft:weathered_copper_bulb",
 		"result": {
 			"amount": 4,
@@ -45749,7 +45926,7 @@
 				"type": "material"
 			}
 		},
-		"group": "",
+		"group": "weathered_copper_grate",
 		"key": "minecraft:weathered_copper_grate",
 		"result": {
 			"amount": 4,
@@ -47044,6 +47221,52 @@
 			"a",
 			"b",
 			"c"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"c": {
+				"choices": [
+					"minecraft:acacia_planks",
+					"minecraft:bamboo_planks",
+					"minecraft:birch_planks",
+					"minecraft:cherry_planks",
+					"minecraft:crimson_planks",
+					"minecraft:dark_oak_planks",
+					"minecraft:jungle_planks",
+					"minecraft:mangrove_planks",
+					"minecraft:oak_planks",
+					"minecraft:pale_oak_planks",
+					"minecraft:spruce_planks",
+					"minecraft:warped_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:wooden_spear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:wooden_spear"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
 		],
 		"type": "shaped"
 	},

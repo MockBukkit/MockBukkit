@@ -4291,4569 +4291,4904 @@
 			"ordinal": 857
 		},
 		{
+			"key": "minecraft:entity.baby_nautilus.ambient",
+			"name": "ENTITY.BABY_NAUTILUS.AMBIENT",
+			"ordinal": 858
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.ambient_land",
+			"name": "ENTITY.BABY_NAUTILUS.AMBIENT_LAND",
+			"ordinal": 859
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.death",
+			"name": "ENTITY.BABY_NAUTILUS.DEATH",
+			"ordinal": 860
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.death_land",
+			"name": "ENTITY.BABY_NAUTILUS.DEATH_LAND",
+			"ordinal": 861
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.eat",
+			"name": "ENTITY.BABY_NAUTILUS.EAT",
+			"ordinal": 862
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.hurt",
+			"name": "ENTITY.BABY_NAUTILUS.HURT",
+			"ordinal": 863
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.hurt_land",
+			"name": "ENTITY.BABY_NAUTILUS.HURT_LAND",
+			"ordinal": 864
+		},
+		{
+			"key": "minecraft:entity.baby_nautilus.swim",
+			"name": "ENTITY.BABY_NAUTILUS.SWIM",
+			"ordinal": 865
+		},
+		{
 			"key": "minecraft:entity.bat.ambient",
 			"name": "ENTITY.BAT.AMBIENT",
-			"ordinal": 858
+			"ordinal": 866
 		},
 		{
 			"key": "minecraft:entity.bat.death",
 			"name": "ENTITY.BAT.DEATH",
-			"ordinal": 859
+			"ordinal": 867
 		},
 		{
 			"key": "minecraft:entity.bat.hurt",
 			"name": "ENTITY.BAT.HURT",
-			"ordinal": 860
+			"ordinal": 868
 		},
 		{
 			"key": "minecraft:entity.bat.loop",
 			"name": "ENTITY.BAT.LOOP",
-			"ordinal": 861
+			"ordinal": 869
 		},
 		{
 			"key": "minecraft:entity.bat.takeoff",
 			"name": "ENTITY.BAT.TAKEOFF",
-			"ordinal": 862
+			"ordinal": 870
 		},
 		{
 			"key": "minecraft:entity.bee.death",
 			"name": "ENTITY.BEE.DEATH",
-			"ordinal": 863
+			"ordinal": 871
 		},
 		{
 			"key": "minecraft:entity.bee.hurt",
 			"name": "ENTITY.BEE.HURT",
-			"ordinal": 864
+			"ordinal": 872
 		},
 		{
 			"key": "minecraft:entity.bee.loop",
 			"name": "ENTITY.BEE.LOOP",
-			"ordinal": 865
+			"ordinal": 873
 		},
 		{
 			"key": "minecraft:entity.bee.loop_aggressive",
 			"name": "ENTITY.BEE.LOOP_AGGRESSIVE",
-			"ordinal": 866
+			"ordinal": 874
 		},
 		{
 			"key": "minecraft:entity.bee.pollinate",
 			"name": "ENTITY.BEE.POLLINATE",
-			"ordinal": 867
+			"ordinal": 875
 		},
 		{
 			"key": "minecraft:entity.bee.sting",
 			"name": "ENTITY.BEE.STING",
-			"ordinal": 868
+			"ordinal": 876
 		},
 		{
 			"key": "minecraft:entity.blaze.ambient",
 			"name": "ENTITY.BLAZE.AMBIENT",
-			"ordinal": 869
+			"ordinal": 877
 		},
 		{
 			"key": "minecraft:entity.blaze.burn",
 			"name": "ENTITY.BLAZE.BURN",
-			"ordinal": 870
+			"ordinal": 878
 		},
 		{
 			"key": "minecraft:entity.blaze.death",
 			"name": "ENTITY.BLAZE.DEATH",
-			"ordinal": 871
+			"ordinal": 879
 		},
 		{
 			"key": "minecraft:entity.blaze.hurt",
 			"name": "ENTITY.BLAZE.HURT",
-			"ordinal": 872
+			"ordinal": 880
 		},
 		{
 			"key": "minecraft:entity.blaze.shoot",
 			"name": "ENTITY.BLAZE.SHOOT",
-			"ordinal": 873
+			"ordinal": 881
 		},
 		{
 			"key": "minecraft:entity.boat.paddle_land",
 			"name": "ENTITY.BOAT.PADDLE_LAND",
-			"ordinal": 874
+			"ordinal": 882
 		},
 		{
 			"key": "minecraft:entity.boat.paddle_water",
 			"name": "ENTITY.BOAT.PADDLE_WATER",
-			"ordinal": 875
+			"ordinal": 883
 		},
 		{
 			"key": "minecraft:entity.bogged.ambient",
 			"name": "ENTITY.BOGGED.AMBIENT",
-			"ordinal": 876
+			"ordinal": 884
 		},
 		{
 			"key": "minecraft:entity.bogged.death",
 			"name": "ENTITY.BOGGED.DEATH",
-			"ordinal": 877
+			"ordinal": 885
 		},
 		{
 			"key": "minecraft:entity.bogged.hurt",
 			"name": "ENTITY.BOGGED.HURT",
-			"ordinal": 878
+			"ordinal": 886
 		},
 		{
 			"key": "minecraft:entity.bogged.shear",
 			"name": "ENTITY.BOGGED.SHEAR",
-			"ordinal": 879
+			"ordinal": 887
 		},
 		{
 			"key": "minecraft:entity.bogged.step",
 			"name": "ENTITY.BOGGED.STEP",
-			"ordinal": 880
+			"ordinal": 888
 		},
 		{
 			"key": "minecraft:entity.breeze.charge",
 			"name": "ENTITY.BREEZE.CHARGE",
-			"ordinal": 881
+			"ordinal": 889
 		},
 		{
 			"key": "minecraft:entity.breeze.death",
 			"name": "ENTITY.BREEZE.DEATH",
-			"ordinal": 882
+			"ordinal": 890
 		},
 		{
 			"key": "minecraft:entity.breeze.deflect",
 			"name": "ENTITY.BREEZE.DEFLECT",
-			"ordinal": 883
+			"ordinal": 891
 		},
 		{
 			"key": "minecraft:entity.breeze.hurt",
 			"name": "ENTITY.BREEZE.HURT",
-			"ordinal": 884
+			"ordinal": 892
 		},
 		{
 			"key": "minecraft:entity.breeze.idle_air",
 			"name": "ENTITY.BREEZE.IDLE_AIR",
-			"ordinal": 885
+			"ordinal": 893
 		},
 		{
 			"key": "minecraft:entity.breeze.idle_ground",
 			"name": "ENTITY.BREEZE.IDLE_GROUND",
-			"ordinal": 886
+			"ordinal": 894
 		},
 		{
 			"key": "minecraft:entity.breeze.inhale",
 			"name": "ENTITY.BREEZE.INHALE",
-			"ordinal": 887
+			"ordinal": 895
 		},
 		{
 			"key": "minecraft:entity.breeze.jump",
 			"name": "ENTITY.BREEZE.JUMP",
-			"ordinal": 888
+			"ordinal": 896
 		},
 		{
 			"key": "minecraft:entity.breeze.land",
 			"name": "ENTITY.BREEZE.LAND",
-			"ordinal": 889
+			"ordinal": 897
 		},
 		{
 			"key": "minecraft:entity.breeze.shoot",
 			"name": "ENTITY.BREEZE.SHOOT",
-			"ordinal": 890
+			"ordinal": 898
 		},
 		{
 			"key": "minecraft:entity.breeze.slide",
 			"name": "ENTITY.BREEZE.SLIDE",
-			"ordinal": 891
+			"ordinal": 899
 		},
 		{
 			"key": "minecraft:entity.breeze.whirl",
 			"name": "ENTITY.BREEZE.WHIRL",
-			"ordinal": 892
+			"ordinal": 900
 		},
 		{
 			"key": "minecraft:entity.breeze.wind_burst",
 			"name": "ENTITY.BREEZE.WIND_BURST",
-			"ordinal": 893
+			"ordinal": 901
 		},
 		{
 			"key": "minecraft:entity.camel.ambient",
 			"name": "ENTITY.CAMEL.AMBIENT",
-			"ordinal": 894
+			"ordinal": 902
 		},
 		{
 			"key": "minecraft:entity.camel.dash",
 			"name": "ENTITY.CAMEL.DASH",
-			"ordinal": 895
+			"ordinal": 903
 		},
 		{
 			"key": "minecraft:entity.camel.dash_ready",
 			"name": "ENTITY.CAMEL.DASH_READY",
-			"ordinal": 896
+			"ordinal": 904
 		},
 		{
 			"key": "minecraft:entity.camel.death",
 			"name": "ENTITY.CAMEL.DEATH",
-			"ordinal": 897
+			"ordinal": 905
 		},
 		{
 			"key": "minecraft:entity.camel.eat",
 			"name": "ENTITY.CAMEL.EAT",
-			"ordinal": 898
+			"ordinal": 906
 		},
 		{
 			"key": "minecraft:entity.camel.hurt",
 			"name": "ENTITY.CAMEL.HURT",
-			"ordinal": 899
+			"ordinal": 907
 		},
 		{
 			"key": "minecraft:entity.camel.saddle",
 			"name": "ENTITY.CAMEL.SADDLE",
-			"ordinal": 900
+			"ordinal": 908
 		},
 		{
 			"key": "minecraft:entity.camel.sit",
 			"name": "ENTITY.CAMEL.SIT",
-			"ordinal": 901
+			"ordinal": 909
 		},
 		{
 			"key": "minecraft:entity.camel.stand",
 			"name": "ENTITY.CAMEL.STAND",
-			"ordinal": 902
+			"ordinal": 910
 		},
 		{
 			"key": "minecraft:entity.camel.step",
 			"name": "ENTITY.CAMEL.STEP",
-			"ordinal": 903
+			"ordinal": 911
 		},
 		{
 			"key": "minecraft:entity.camel.step_sand",
 			"name": "ENTITY.CAMEL.STEP_SAND",
-			"ordinal": 904
+			"ordinal": 912
+		},
+		{
+			"key": "minecraft:entity.camel_husk.ambient",
+			"name": "ENTITY.CAMEL_HUSK.AMBIENT",
+			"ordinal": 913
+		},
+		{
+			"key": "minecraft:entity.camel_husk.dash",
+			"name": "ENTITY.CAMEL_HUSK.DASH",
+			"ordinal": 914
+		},
+		{
+			"key": "minecraft:entity.camel_husk.dash_ready",
+			"name": "ENTITY.CAMEL_HUSK.DASH_READY",
+			"ordinal": 915
+		},
+		{
+			"key": "minecraft:entity.camel_husk.death",
+			"name": "ENTITY.CAMEL_HUSK.DEATH",
+			"ordinal": 916
+		},
+		{
+			"key": "minecraft:entity.camel_husk.eat",
+			"name": "ENTITY.CAMEL_HUSK.EAT",
+			"ordinal": 917
+		},
+		{
+			"key": "minecraft:entity.camel_husk.hurt",
+			"name": "ENTITY.CAMEL_HUSK.HURT",
+			"ordinal": 918
+		},
+		{
+			"key": "minecraft:entity.camel_husk.saddle",
+			"name": "ENTITY.CAMEL_HUSK.SADDLE",
+			"ordinal": 919
+		},
+		{
+			"key": "minecraft:entity.camel_husk.sit",
+			"name": "ENTITY.CAMEL_HUSK.SIT",
+			"ordinal": 920
+		},
+		{
+			"key": "minecraft:entity.camel_husk.stand",
+			"name": "ENTITY.CAMEL_HUSK.STAND",
+			"ordinal": 921
+		},
+		{
+			"key": "minecraft:entity.camel_husk.step",
+			"name": "ENTITY.CAMEL_HUSK.STEP",
+			"ordinal": 922
+		},
+		{
+			"key": "minecraft:entity.camel_husk.step_sand",
+			"name": "ENTITY.CAMEL_HUSK.STEP_SAND",
+			"ordinal": 923
 		},
 		{
 			"key": "minecraft:entity.cat.ambient",
 			"name": "ENTITY.CAT.AMBIENT",
-			"ordinal": 905
+			"ordinal": 924
 		},
 		{
 			"key": "minecraft:entity.cat.beg_for_food",
 			"name": "ENTITY.CAT.BEG_FOR_FOOD",
-			"ordinal": 906
+			"ordinal": 925
 		},
 		{
 			"key": "minecraft:entity.cat.death",
 			"name": "ENTITY.CAT.DEATH",
-			"ordinal": 907
+			"ordinal": 926
 		},
 		{
 			"key": "minecraft:entity.cat.eat",
 			"name": "ENTITY.CAT.EAT",
-			"ordinal": 908
+			"ordinal": 927
 		},
 		{
 			"key": "minecraft:entity.cat.hiss",
 			"name": "ENTITY.CAT.HISS",
-			"ordinal": 909
+			"ordinal": 928
 		},
 		{
 			"key": "minecraft:entity.cat.hurt",
 			"name": "ENTITY.CAT.HURT",
-			"ordinal": 910
+			"ordinal": 929
 		},
 		{
 			"key": "minecraft:entity.cat.purr",
 			"name": "ENTITY.CAT.PURR",
-			"ordinal": 911
+			"ordinal": 930
 		},
 		{
 			"key": "minecraft:entity.cat.purreow",
 			"name": "ENTITY.CAT.PURREOW",
-			"ordinal": 912
+			"ordinal": 931
 		},
 		{
 			"key": "minecraft:entity.cat.stray_ambient",
 			"name": "ENTITY.CAT.STRAY_AMBIENT",
-			"ordinal": 913
+			"ordinal": 932
 		},
 		{
 			"key": "minecraft:entity.chicken.ambient",
 			"name": "ENTITY.CHICKEN.AMBIENT",
-			"ordinal": 914
+			"ordinal": 933
 		},
 		{
 			"key": "minecraft:entity.chicken.death",
 			"name": "ENTITY.CHICKEN.DEATH",
-			"ordinal": 915
+			"ordinal": 934
 		},
 		{
 			"key": "minecraft:entity.chicken.egg",
 			"name": "ENTITY.CHICKEN.EGG",
-			"ordinal": 916
+			"ordinal": 935
 		},
 		{
 			"key": "minecraft:entity.chicken.hurt",
 			"name": "ENTITY.CHICKEN.HURT",
-			"ordinal": 917
+			"ordinal": 936
 		},
 		{
 			"key": "minecraft:entity.chicken.step",
 			"name": "ENTITY.CHICKEN.STEP",
-			"ordinal": 918
+			"ordinal": 937
 		},
 		{
 			"key": "minecraft:entity.cod.ambient",
 			"name": "ENTITY.COD.AMBIENT",
-			"ordinal": 919
+			"ordinal": 938
 		},
 		{
 			"key": "minecraft:entity.cod.death",
 			"name": "ENTITY.COD.DEATH",
-			"ordinal": 920
+			"ordinal": 939
 		},
 		{
 			"key": "minecraft:entity.cod.flop",
 			"name": "ENTITY.COD.FLOP",
-			"ordinal": 921
+			"ordinal": 940
 		},
 		{
 			"key": "minecraft:entity.cod.hurt",
 			"name": "ENTITY.COD.HURT",
-			"ordinal": 922
+			"ordinal": 941
 		},
 		{
 			"key": "minecraft:entity.copper_golem.death",
 			"name": "ENTITY.COPPER_GOLEM.DEATH",
-			"ordinal": 923
+			"ordinal": 942
 		},
 		{
 			"key": "minecraft:entity.copper_golem.hurt",
 			"name": "ENTITY.COPPER_GOLEM.HURT",
-			"ordinal": 924
+			"ordinal": 943
 		},
 		{
 			"key": "minecraft:entity.copper_golem.item_drop",
 			"name": "ENTITY.COPPER_GOLEM.ITEM_DROP",
-			"ordinal": 925
+			"ordinal": 944
 		},
 		{
 			"key": "minecraft:entity.copper_golem.item_no_drop",
 			"name": "ENTITY.COPPER_GOLEM.ITEM_NO_DROP",
-			"ordinal": 926
+			"ordinal": 945
 		},
 		{
 			"key": "minecraft:entity.copper_golem.no_item_get",
 			"name": "ENTITY.COPPER_GOLEM.NO_ITEM_GET",
-			"ordinal": 927
+			"ordinal": 946
 		},
 		{
 			"key": "minecraft:entity.copper_golem.no_item_no_get",
 			"name": "ENTITY.COPPER_GOLEM.NO_ITEM_NO_GET",
-			"ordinal": 928
+			"ordinal": 947
 		},
 		{
 			"key": "minecraft:entity.copper_golem.shear",
 			"name": "ENTITY.COPPER_GOLEM.SHEAR",
-			"ordinal": 929
+			"ordinal": 948
 		},
 		{
 			"key": "minecraft:entity.copper_golem.spawn",
 			"name": "ENTITY.COPPER_GOLEM.SPAWN",
-			"ordinal": 930
+			"ordinal": 949
 		},
 		{
 			"key": "minecraft:entity.copper_golem.spin",
 			"name": "ENTITY.COPPER_GOLEM.SPIN",
-			"ordinal": 931
+			"ordinal": 950
 		},
 		{
 			"key": "minecraft:entity.copper_golem.step",
 			"name": "ENTITY.COPPER_GOLEM.STEP",
-			"ordinal": 932
+			"ordinal": 951
 		},
 		{
 			"key": "minecraft:entity.copper_golem_become_statue",
 			"name": "ENTITY.COPPER_GOLEM_BECOME_STATUE",
-			"ordinal": 933
+			"ordinal": 952
 		},
 		{
 			"key": "minecraft:entity.copper_golem_oxidized.death",
 			"name": "ENTITY.COPPER_GOLEM_OXIDIZED.DEATH",
-			"ordinal": 934
+			"ordinal": 953
 		},
 		{
 			"key": "minecraft:entity.copper_golem_oxidized.hurt",
 			"name": "ENTITY.COPPER_GOLEM_OXIDIZED.HURT",
-			"ordinal": 935
+			"ordinal": 954
 		},
 		{
 			"key": "minecraft:entity.copper_golem_oxidized.spin",
 			"name": "ENTITY.COPPER_GOLEM_OXIDIZED.SPIN",
-			"ordinal": 936
+			"ordinal": 955
 		},
 		{
 			"key": "minecraft:entity.copper_golem_oxidized.step",
 			"name": "ENTITY.COPPER_GOLEM_OXIDIZED.STEP",
-			"ordinal": 937
+			"ordinal": 956
 		},
 		{
 			"key": "minecraft:entity.copper_golem_weathered.death",
 			"name": "ENTITY.COPPER_GOLEM_WEATHERED.DEATH",
-			"ordinal": 938
+			"ordinal": 957
 		},
 		{
 			"key": "minecraft:entity.copper_golem_weathered.hurt",
 			"name": "ENTITY.COPPER_GOLEM_WEATHERED.HURT",
-			"ordinal": 939
+			"ordinal": 958
 		},
 		{
 			"key": "minecraft:entity.copper_golem_weathered.spin",
 			"name": "ENTITY.COPPER_GOLEM_WEATHERED.SPIN",
-			"ordinal": 940
+			"ordinal": 959
 		},
 		{
 			"key": "minecraft:entity.copper_golem_weathered.step",
 			"name": "ENTITY.COPPER_GOLEM_WEATHERED.STEP",
-			"ordinal": 941
+			"ordinal": 960
 		},
 		{
 			"key": "minecraft:entity.cow.ambient",
 			"name": "ENTITY.COW.AMBIENT",
-			"ordinal": 942
+			"ordinal": 961
 		},
 		{
 			"key": "minecraft:entity.cow.death",
 			"name": "ENTITY.COW.DEATH",
-			"ordinal": 943
+			"ordinal": 962
 		},
 		{
 			"key": "minecraft:entity.cow.hurt",
 			"name": "ENTITY.COW.HURT",
-			"ordinal": 944
+			"ordinal": 963
 		},
 		{
 			"key": "minecraft:entity.cow.milk",
 			"name": "ENTITY.COW.MILK",
-			"ordinal": 945
+			"ordinal": 964
 		},
 		{
 			"key": "minecraft:entity.cow.step",
 			"name": "ENTITY.COW.STEP",
-			"ordinal": 946
+			"ordinal": 965
 		},
 		{
 			"key": "minecraft:entity.creaking.activate",
 			"name": "ENTITY.CREAKING.ACTIVATE",
-			"ordinal": 947
+			"ordinal": 966
 		},
 		{
 			"key": "minecraft:entity.creaking.ambient",
 			"name": "ENTITY.CREAKING.AMBIENT",
-			"ordinal": 948
+			"ordinal": 967
 		},
 		{
 			"key": "minecraft:entity.creaking.attack",
 			"name": "ENTITY.CREAKING.ATTACK",
-			"ordinal": 949
+			"ordinal": 968
 		},
 		{
 			"key": "minecraft:entity.creaking.deactivate",
 			"name": "ENTITY.CREAKING.DEACTIVATE",
-			"ordinal": 950
+			"ordinal": 969
 		},
 		{
 			"key": "minecraft:entity.creaking.death",
 			"name": "ENTITY.CREAKING.DEATH",
-			"ordinal": 951
+			"ordinal": 970
 		},
 		{
 			"key": "minecraft:entity.creaking.freeze",
 			"name": "ENTITY.CREAKING.FREEZE",
-			"ordinal": 952
+			"ordinal": 971
 		},
 		{
 			"key": "minecraft:entity.creaking.spawn",
 			"name": "ENTITY.CREAKING.SPAWN",
-			"ordinal": 953
+			"ordinal": 972
 		},
 		{
 			"key": "minecraft:entity.creaking.step",
 			"name": "ENTITY.CREAKING.STEP",
-			"ordinal": 954
+			"ordinal": 973
 		},
 		{
 			"key": "minecraft:entity.creaking.sway",
 			"name": "ENTITY.CREAKING.SWAY",
-			"ordinal": 955
+			"ordinal": 974
 		},
 		{
 			"key": "minecraft:entity.creaking.twitch",
 			"name": "ENTITY.CREAKING.TWITCH",
-			"ordinal": 956
+			"ordinal": 975
 		},
 		{
 			"key": "minecraft:entity.creaking.unfreeze",
 			"name": "ENTITY.CREAKING.UNFREEZE",
-			"ordinal": 957
+			"ordinal": 976
 		},
 		{
 			"key": "minecraft:entity.creeper.death",
 			"name": "ENTITY.CREEPER.DEATH",
-			"ordinal": 958
+			"ordinal": 977
 		},
 		{
 			"key": "minecraft:entity.creeper.hurt",
 			"name": "ENTITY.CREEPER.HURT",
-			"ordinal": 959
+			"ordinal": 978
 		},
 		{
 			"key": "minecraft:entity.creeper.primed",
 			"name": "ENTITY.CREEPER.PRIMED",
-			"ordinal": 960
+			"ordinal": 979
 		},
 		{
 			"key": "minecraft:entity.dolphin.ambient",
 			"name": "ENTITY.DOLPHIN.AMBIENT",
-			"ordinal": 961
+			"ordinal": 980
 		},
 		{
 			"key": "minecraft:entity.dolphin.ambient_water",
 			"name": "ENTITY.DOLPHIN.AMBIENT_WATER",
-			"ordinal": 962
+			"ordinal": 981
 		},
 		{
 			"key": "minecraft:entity.dolphin.attack",
 			"name": "ENTITY.DOLPHIN.ATTACK",
-			"ordinal": 963
+			"ordinal": 982
 		},
 		{
 			"key": "minecraft:entity.dolphin.death",
 			"name": "ENTITY.DOLPHIN.DEATH",
-			"ordinal": 964
+			"ordinal": 983
 		},
 		{
 			"key": "minecraft:entity.dolphin.eat",
 			"name": "ENTITY.DOLPHIN.EAT",
-			"ordinal": 965
+			"ordinal": 984
 		},
 		{
 			"key": "minecraft:entity.dolphin.hurt",
 			"name": "ENTITY.DOLPHIN.HURT",
-			"ordinal": 966
+			"ordinal": 985
 		},
 		{
 			"key": "minecraft:entity.dolphin.jump",
 			"name": "ENTITY.DOLPHIN.JUMP",
-			"ordinal": 967
+			"ordinal": 986
 		},
 		{
 			"key": "minecraft:entity.dolphin.play",
 			"name": "ENTITY.DOLPHIN.PLAY",
-			"ordinal": 968
+			"ordinal": 987
 		},
 		{
 			"key": "minecraft:entity.dolphin.splash",
 			"name": "ENTITY.DOLPHIN.SPLASH",
-			"ordinal": 969
+			"ordinal": 988
 		},
 		{
 			"key": "minecraft:entity.dolphin.swim",
 			"name": "ENTITY.DOLPHIN.SWIM",
-			"ordinal": 970
+			"ordinal": 989
 		},
 		{
 			"key": "minecraft:entity.donkey.ambient",
 			"name": "ENTITY.DONKEY.AMBIENT",
-			"ordinal": 971
+			"ordinal": 990
 		},
 		{
 			"key": "minecraft:entity.donkey.angry",
 			"name": "ENTITY.DONKEY.ANGRY",
-			"ordinal": 972
+			"ordinal": 991
 		},
 		{
 			"key": "minecraft:entity.donkey.chest",
 			"name": "ENTITY.DONKEY.CHEST",
-			"ordinal": 973
+			"ordinal": 992
 		},
 		{
 			"key": "minecraft:entity.donkey.death",
 			"name": "ENTITY.DONKEY.DEATH",
-			"ordinal": 974
+			"ordinal": 993
 		},
 		{
 			"key": "minecraft:entity.donkey.eat",
 			"name": "ENTITY.DONKEY.EAT",
-			"ordinal": 975
+			"ordinal": 994
 		},
 		{
 			"key": "minecraft:entity.donkey.hurt",
 			"name": "ENTITY.DONKEY.HURT",
-			"ordinal": 976
+			"ordinal": 995
 		},
 		{
 			"key": "minecraft:entity.donkey.jump",
 			"name": "ENTITY.DONKEY.JUMP",
-			"ordinal": 977
+			"ordinal": 996
 		},
 		{
 			"key": "minecraft:entity.dragon_fireball.explode",
 			"name": "ENTITY.DRAGON_FIREBALL.EXPLODE",
-			"ordinal": 978
+			"ordinal": 997
 		},
 		{
 			"key": "minecraft:entity.drowned.ambient",
 			"name": "ENTITY.DROWNED.AMBIENT",
-			"ordinal": 979
+			"ordinal": 998
 		},
 		{
 			"key": "minecraft:entity.drowned.ambient_water",
 			"name": "ENTITY.DROWNED.AMBIENT_WATER",
-			"ordinal": 980
+			"ordinal": 999
 		},
 		{
 			"key": "minecraft:entity.drowned.death",
 			"name": "ENTITY.DROWNED.DEATH",
-			"ordinal": 981
+			"ordinal": 1000
 		},
 		{
 			"key": "minecraft:entity.drowned.death_water",
 			"name": "ENTITY.DROWNED.DEATH_WATER",
-			"ordinal": 982
+			"ordinal": 1001
 		},
 		{
 			"key": "minecraft:entity.drowned.hurt",
 			"name": "ENTITY.DROWNED.HURT",
-			"ordinal": 983
+			"ordinal": 1002
 		},
 		{
 			"key": "minecraft:entity.drowned.hurt_water",
 			"name": "ENTITY.DROWNED.HURT_WATER",
-			"ordinal": 984
+			"ordinal": 1003
 		},
 		{
 			"key": "minecraft:entity.drowned.shoot",
 			"name": "ENTITY.DROWNED.SHOOT",
-			"ordinal": 985
+			"ordinal": 1004
 		},
 		{
 			"key": "minecraft:entity.drowned.step",
 			"name": "ENTITY.DROWNED.STEP",
-			"ordinal": 986
+			"ordinal": 1005
 		},
 		{
 			"key": "minecraft:entity.drowned.swim",
 			"name": "ENTITY.DROWNED.SWIM",
-			"ordinal": 987
+			"ordinal": 1006
 		},
 		{
 			"key": "minecraft:entity.egg.throw",
 			"name": "ENTITY.EGG.THROW",
-			"ordinal": 988
+			"ordinal": 1007
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.ambient",
 			"name": "ENTITY.ELDER_GUARDIAN.AMBIENT",
-			"ordinal": 989
+			"ordinal": 1008
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.ambient_land",
 			"name": "ENTITY.ELDER_GUARDIAN.AMBIENT_LAND",
-			"ordinal": 990
+			"ordinal": 1009
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.curse",
 			"name": "ENTITY.ELDER_GUARDIAN.CURSE",
-			"ordinal": 991
+			"ordinal": 1010
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.death",
 			"name": "ENTITY.ELDER_GUARDIAN.DEATH",
-			"ordinal": 992
+			"ordinal": 1011
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.death_land",
 			"name": "ENTITY.ELDER_GUARDIAN.DEATH_LAND",
-			"ordinal": 993
+			"ordinal": 1012
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.flop",
 			"name": "ENTITY.ELDER_GUARDIAN.FLOP",
-			"ordinal": 994
+			"ordinal": 1013
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.hurt",
 			"name": "ENTITY.ELDER_GUARDIAN.HURT",
-			"ordinal": 995
+			"ordinal": 1014
 		},
 		{
 			"key": "minecraft:entity.elder_guardian.hurt_land",
 			"name": "ENTITY.ELDER_GUARDIAN.HURT_LAND",
-			"ordinal": 996
+			"ordinal": 1015
 		},
 		{
 			"key": "minecraft:entity.ender_dragon.ambient",
 			"name": "ENTITY.ENDER_DRAGON.AMBIENT",
-			"ordinal": 997
+			"ordinal": 1016
 		},
 		{
 			"key": "minecraft:entity.ender_dragon.death",
 			"name": "ENTITY.ENDER_DRAGON.DEATH",
-			"ordinal": 998
+			"ordinal": 1017
 		},
 		{
 			"key": "minecraft:entity.ender_dragon.flap",
 			"name": "ENTITY.ENDER_DRAGON.FLAP",
-			"ordinal": 999
+			"ordinal": 1018
 		},
 		{
 			"key": "minecraft:entity.ender_dragon.growl",
 			"name": "ENTITY.ENDER_DRAGON.GROWL",
-			"ordinal": 1000
+			"ordinal": 1019
 		},
 		{
 			"key": "minecraft:entity.ender_dragon.hurt",
 			"name": "ENTITY.ENDER_DRAGON.HURT",
-			"ordinal": 1001
+			"ordinal": 1020
 		},
 		{
 			"key": "minecraft:entity.ender_dragon.shoot",
 			"name": "ENTITY.ENDER_DRAGON.SHOOT",
-			"ordinal": 1002
+			"ordinal": 1021
 		},
 		{
 			"key": "minecraft:entity.ender_eye.death",
 			"name": "ENTITY.ENDER_EYE.DEATH",
-			"ordinal": 1003
+			"ordinal": 1022
 		},
 		{
 			"key": "minecraft:entity.ender_eye.launch",
 			"name": "ENTITY.ENDER_EYE.LAUNCH",
-			"ordinal": 1004
+			"ordinal": 1023
 		},
 		{
 			"key": "minecraft:entity.ender_pearl.throw",
 			"name": "ENTITY.ENDER_PEARL.THROW",
-			"ordinal": 1005
+			"ordinal": 1024
 		},
 		{
 			"key": "minecraft:entity.enderman.ambient",
 			"name": "ENTITY.ENDERMAN.AMBIENT",
-			"ordinal": 1006
+			"ordinal": 1025
 		},
 		{
 			"key": "minecraft:entity.enderman.death",
 			"name": "ENTITY.ENDERMAN.DEATH",
-			"ordinal": 1007
+			"ordinal": 1026
 		},
 		{
 			"key": "minecraft:entity.enderman.hurt",
 			"name": "ENTITY.ENDERMAN.HURT",
-			"ordinal": 1008
+			"ordinal": 1027
 		},
 		{
 			"key": "minecraft:entity.enderman.scream",
 			"name": "ENTITY.ENDERMAN.SCREAM",
-			"ordinal": 1009
+			"ordinal": 1028
 		},
 		{
 			"key": "minecraft:entity.enderman.stare",
 			"name": "ENTITY.ENDERMAN.STARE",
-			"ordinal": 1010
+			"ordinal": 1029
 		},
 		{
 			"key": "minecraft:entity.enderman.teleport",
 			"name": "ENTITY.ENDERMAN.TELEPORT",
-			"ordinal": 1011
+			"ordinal": 1030
 		},
 		{
 			"key": "minecraft:entity.endermite.ambient",
 			"name": "ENTITY.ENDERMITE.AMBIENT",
-			"ordinal": 1012
+			"ordinal": 1031
 		},
 		{
 			"key": "minecraft:entity.endermite.death",
 			"name": "ENTITY.ENDERMITE.DEATH",
-			"ordinal": 1013
+			"ordinal": 1032
 		},
 		{
 			"key": "minecraft:entity.endermite.hurt",
 			"name": "ENTITY.ENDERMITE.HURT",
-			"ordinal": 1014
+			"ordinal": 1033
 		},
 		{
 			"key": "minecraft:entity.endermite.step",
 			"name": "ENTITY.ENDERMITE.STEP",
-			"ordinal": 1015
+			"ordinal": 1034
 		},
 		{
 			"key": "minecraft:entity.evoker.ambient",
 			"name": "ENTITY.EVOKER.AMBIENT",
-			"ordinal": 1016
+			"ordinal": 1035
 		},
 		{
 			"key": "minecraft:entity.evoker.cast_spell",
 			"name": "ENTITY.EVOKER.CAST_SPELL",
-			"ordinal": 1017
+			"ordinal": 1036
 		},
 		{
 			"key": "minecraft:entity.evoker.celebrate",
 			"name": "ENTITY.EVOKER.CELEBRATE",
-			"ordinal": 1018
+			"ordinal": 1037
 		},
 		{
 			"key": "minecraft:entity.evoker.death",
 			"name": "ENTITY.EVOKER.DEATH",
-			"ordinal": 1019
+			"ordinal": 1038
 		},
 		{
 			"key": "minecraft:entity.evoker.hurt",
 			"name": "ENTITY.EVOKER.HURT",
-			"ordinal": 1020
+			"ordinal": 1039
 		},
 		{
 			"key": "minecraft:entity.evoker.prepare_attack",
 			"name": "ENTITY.EVOKER.PREPARE_ATTACK",
-			"ordinal": 1021
+			"ordinal": 1040
 		},
 		{
 			"key": "minecraft:entity.evoker.prepare_summon",
 			"name": "ENTITY.EVOKER.PREPARE_SUMMON",
-			"ordinal": 1022
+			"ordinal": 1041
 		},
 		{
 			"key": "minecraft:entity.evoker.prepare_wololo",
 			"name": "ENTITY.EVOKER.PREPARE_WOLOLO",
-			"ordinal": 1023
+			"ordinal": 1042
 		},
 		{
 			"key": "minecraft:entity.evoker_fangs.attack",
 			"name": "ENTITY.EVOKER_FANGS.ATTACK",
-			"ordinal": 1024
+			"ordinal": 1043
 		},
 		{
 			"key": "minecraft:entity.experience_bottle.throw",
 			"name": "ENTITY.EXPERIENCE_BOTTLE.THROW",
-			"ordinal": 1025
+			"ordinal": 1044
 		},
 		{
 			"key": "minecraft:entity.experience_orb.pickup",
 			"name": "ENTITY.EXPERIENCE_ORB.PICKUP",
-			"ordinal": 1026
+			"ordinal": 1045
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.blast",
 			"name": "ENTITY.FIREWORK_ROCKET.BLAST",
-			"ordinal": 1027
+			"ordinal": 1046
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.blast_far",
 			"name": "ENTITY.FIREWORK_ROCKET.BLAST_FAR",
-			"ordinal": 1028
+			"ordinal": 1047
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.large_blast",
 			"name": "ENTITY.FIREWORK_ROCKET.LARGE_BLAST",
-			"ordinal": 1029
+			"ordinal": 1048
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.large_blast_far",
 			"name": "ENTITY.FIREWORK_ROCKET.LARGE_BLAST_FAR",
-			"ordinal": 1030
+			"ordinal": 1049
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.launch",
 			"name": "ENTITY.FIREWORK_ROCKET.LAUNCH",
-			"ordinal": 1031
+			"ordinal": 1050
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.shoot",
 			"name": "ENTITY.FIREWORK_ROCKET.SHOOT",
-			"ordinal": 1032
+			"ordinal": 1051
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.twinkle",
 			"name": "ENTITY.FIREWORK_ROCKET.TWINKLE",
-			"ordinal": 1033
+			"ordinal": 1052
 		},
 		{
 			"key": "minecraft:entity.firework_rocket.twinkle_far",
 			"name": "ENTITY.FIREWORK_ROCKET.TWINKLE_FAR",
-			"ordinal": 1034
+			"ordinal": 1053
 		},
 		{
 			"key": "minecraft:entity.fish.swim",
 			"name": "ENTITY.FISH.SWIM",
-			"ordinal": 1035
+			"ordinal": 1054
 		},
 		{
 			"key": "minecraft:entity.fishing_bobber.retrieve",
 			"name": "ENTITY.FISHING_BOBBER.RETRIEVE",
-			"ordinal": 1036
+			"ordinal": 1055
 		},
 		{
 			"key": "minecraft:entity.fishing_bobber.splash",
 			"name": "ENTITY.FISHING_BOBBER.SPLASH",
-			"ordinal": 1037
+			"ordinal": 1056
 		},
 		{
 			"key": "minecraft:entity.fishing_bobber.throw",
 			"name": "ENTITY.FISHING_BOBBER.THROW",
-			"ordinal": 1038
+			"ordinal": 1057
 		},
 		{
 			"key": "minecraft:entity.fox.aggro",
 			"name": "ENTITY.FOX.AGGRO",
-			"ordinal": 1039
+			"ordinal": 1058
 		},
 		{
 			"key": "minecraft:entity.fox.ambient",
 			"name": "ENTITY.FOX.AMBIENT",
-			"ordinal": 1040
+			"ordinal": 1059
 		},
 		{
 			"key": "minecraft:entity.fox.bite",
 			"name": "ENTITY.FOX.BITE",
-			"ordinal": 1041
+			"ordinal": 1060
 		},
 		{
 			"key": "minecraft:entity.fox.death",
 			"name": "ENTITY.FOX.DEATH",
-			"ordinal": 1042
+			"ordinal": 1061
 		},
 		{
 			"key": "minecraft:entity.fox.eat",
 			"name": "ENTITY.FOX.EAT",
-			"ordinal": 1043
+			"ordinal": 1062
 		},
 		{
 			"key": "minecraft:entity.fox.hurt",
 			"name": "ENTITY.FOX.HURT",
-			"ordinal": 1044
+			"ordinal": 1063
 		},
 		{
 			"key": "minecraft:entity.fox.screech",
 			"name": "ENTITY.FOX.SCREECH",
-			"ordinal": 1045
+			"ordinal": 1064
 		},
 		{
 			"key": "minecraft:entity.fox.sleep",
 			"name": "ENTITY.FOX.SLEEP",
-			"ordinal": 1046
+			"ordinal": 1065
 		},
 		{
 			"key": "minecraft:entity.fox.sniff",
 			"name": "ENTITY.FOX.SNIFF",
-			"ordinal": 1047
+			"ordinal": 1066
 		},
 		{
 			"key": "minecraft:entity.fox.spit",
 			"name": "ENTITY.FOX.SPIT",
-			"ordinal": 1048
+			"ordinal": 1067
 		},
 		{
 			"key": "minecraft:entity.fox.teleport",
 			"name": "ENTITY.FOX.TELEPORT",
-			"ordinal": 1049
+			"ordinal": 1068
 		},
 		{
 			"key": "minecraft:entity.frog.ambient",
 			"name": "ENTITY.FROG.AMBIENT",
-			"ordinal": 1050
+			"ordinal": 1069
 		},
 		{
 			"key": "minecraft:entity.frog.death",
 			"name": "ENTITY.FROG.DEATH",
-			"ordinal": 1051
+			"ordinal": 1070
 		},
 		{
 			"key": "minecraft:entity.frog.eat",
 			"name": "ENTITY.FROG.EAT",
-			"ordinal": 1052
+			"ordinal": 1071
 		},
 		{
 			"key": "minecraft:entity.frog.hurt",
 			"name": "ENTITY.FROG.HURT",
-			"ordinal": 1053
+			"ordinal": 1072
 		},
 		{
 			"key": "minecraft:entity.frog.lay_spawn",
 			"name": "ENTITY.FROG.LAY_SPAWN",
-			"ordinal": 1054
+			"ordinal": 1073
 		},
 		{
 			"key": "minecraft:entity.frog.long_jump",
 			"name": "ENTITY.FROG.LONG_JUMP",
-			"ordinal": 1055
+			"ordinal": 1074
 		},
 		{
 			"key": "minecraft:entity.frog.step",
 			"name": "ENTITY.FROG.STEP",
-			"ordinal": 1056
+			"ordinal": 1075
 		},
 		{
 			"key": "minecraft:entity.frog.tongue",
 			"name": "ENTITY.FROG.TONGUE",
-			"ordinal": 1057
+			"ordinal": 1076
 		},
 		{
 			"key": "minecraft:entity.generic.big_fall",
 			"name": "ENTITY.GENERIC.BIG_FALL",
-			"ordinal": 1058
+			"ordinal": 1077
 		},
 		{
 			"key": "minecraft:entity.generic.burn",
 			"name": "ENTITY.GENERIC.BURN",
-			"ordinal": 1059
+			"ordinal": 1078
 		},
 		{
 			"key": "minecraft:entity.generic.death",
 			"name": "ENTITY.GENERIC.DEATH",
-			"ordinal": 1060
+			"ordinal": 1079
 		},
 		{
 			"key": "minecraft:entity.generic.drink",
 			"name": "ENTITY.GENERIC.DRINK",
-			"ordinal": 1061
+			"ordinal": 1080
 		},
 		{
 			"key": "minecraft:entity.generic.eat",
 			"name": "ENTITY.GENERIC.EAT",
-			"ordinal": 1062
+			"ordinal": 1081
 		},
 		{
 			"key": "minecraft:entity.generic.explode",
 			"name": "ENTITY.GENERIC.EXPLODE",
-			"ordinal": 1063
+			"ordinal": 1082
 		},
 		{
 			"key": "minecraft:entity.generic.extinguish_fire",
 			"name": "ENTITY.GENERIC.EXTINGUISH_FIRE",
-			"ordinal": 1064
+			"ordinal": 1083
 		},
 		{
 			"key": "minecraft:entity.generic.hurt",
 			"name": "ENTITY.GENERIC.HURT",
-			"ordinal": 1065
+			"ordinal": 1084
 		},
 		{
 			"key": "minecraft:entity.generic.small_fall",
 			"name": "ENTITY.GENERIC.SMALL_FALL",
-			"ordinal": 1066
+			"ordinal": 1085
 		},
 		{
 			"key": "minecraft:entity.generic.splash",
 			"name": "ENTITY.GENERIC.SPLASH",
-			"ordinal": 1067
+			"ordinal": 1086
 		},
 		{
 			"key": "minecraft:entity.generic.swim",
 			"name": "ENTITY.GENERIC.SWIM",
-			"ordinal": 1068
+			"ordinal": 1087
 		},
 		{
 			"key": "minecraft:entity.ghast.ambient",
 			"name": "ENTITY.GHAST.AMBIENT",
-			"ordinal": 1069
+			"ordinal": 1088
 		},
 		{
 			"key": "minecraft:entity.ghast.death",
 			"name": "ENTITY.GHAST.DEATH",
-			"ordinal": 1070
+			"ordinal": 1089
 		},
 		{
 			"key": "minecraft:entity.ghast.hurt",
 			"name": "ENTITY.GHAST.HURT",
-			"ordinal": 1071
+			"ordinal": 1090
 		},
 		{
 			"key": "minecraft:entity.ghast.scream",
 			"name": "ENTITY.GHAST.SCREAM",
-			"ordinal": 1072
+			"ordinal": 1091
 		},
 		{
 			"key": "minecraft:entity.ghast.shoot",
 			"name": "ENTITY.GHAST.SHOOT",
-			"ordinal": 1073
+			"ordinal": 1092
 		},
 		{
 			"key": "minecraft:entity.ghast.warn",
 			"name": "ENTITY.GHAST.WARN",
-			"ordinal": 1074
+			"ordinal": 1093
 		},
 		{
 			"key": "minecraft:entity.ghastling.ambient",
 			"name": "ENTITY.GHASTLING.AMBIENT",
-			"ordinal": 1075
+			"ordinal": 1094
 		},
 		{
 			"key": "minecraft:entity.ghastling.death",
 			"name": "ENTITY.GHASTLING.DEATH",
-			"ordinal": 1076
+			"ordinal": 1095
 		},
 		{
 			"key": "minecraft:entity.ghastling.hurt",
 			"name": "ENTITY.GHASTLING.HURT",
-			"ordinal": 1077
+			"ordinal": 1096
 		},
 		{
 			"key": "minecraft:entity.ghastling.spawn",
 			"name": "ENTITY.GHASTLING.SPAWN",
-			"ordinal": 1078
+			"ordinal": 1097
 		},
 		{
 			"key": "minecraft:entity.glow_item_frame.add_item",
 			"name": "ENTITY.GLOW_ITEM_FRAME.ADD_ITEM",
-			"ordinal": 1079
+			"ordinal": 1098
 		},
 		{
 			"key": "minecraft:entity.glow_item_frame.break",
 			"name": "ENTITY.GLOW_ITEM_FRAME.BREAK",
-			"ordinal": 1080
+			"ordinal": 1099
 		},
 		{
 			"key": "minecraft:entity.glow_item_frame.place",
 			"name": "ENTITY.GLOW_ITEM_FRAME.PLACE",
-			"ordinal": 1081
+			"ordinal": 1100
 		},
 		{
 			"key": "minecraft:entity.glow_item_frame.remove_item",
 			"name": "ENTITY.GLOW_ITEM_FRAME.REMOVE_ITEM",
-			"ordinal": 1082
+			"ordinal": 1101
 		},
 		{
 			"key": "minecraft:entity.glow_item_frame.rotate_item",
 			"name": "ENTITY.GLOW_ITEM_FRAME.ROTATE_ITEM",
-			"ordinal": 1083
+			"ordinal": 1102
 		},
 		{
 			"key": "minecraft:entity.glow_squid.ambient",
 			"name": "ENTITY.GLOW_SQUID.AMBIENT",
-			"ordinal": 1084
+			"ordinal": 1103
 		},
 		{
 			"key": "minecraft:entity.glow_squid.death",
 			"name": "ENTITY.GLOW_SQUID.DEATH",
-			"ordinal": 1085
+			"ordinal": 1104
 		},
 		{
 			"key": "minecraft:entity.glow_squid.hurt",
 			"name": "ENTITY.GLOW_SQUID.HURT",
-			"ordinal": 1086
+			"ordinal": 1105
 		},
 		{
 			"key": "minecraft:entity.glow_squid.squirt",
 			"name": "ENTITY.GLOW_SQUID.SQUIRT",
-			"ordinal": 1087
+			"ordinal": 1106
 		},
 		{
 			"key": "minecraft:entity.goat.ambient",
 			"name": "ENTITY.GOAT.AMBIENT",
-			"ordinal": 1088
+			"ordinal": 1107
 		},
 		{
 			"key": "minecraft:entity.goat.death",
 			"name": "ENTITY.GOAT.DEATH",
-			"ordinal": 1089
+			"ordinal": 1108
 		},
 		{
 			"key": "minecraft:entity.goat.eat",
 			"name": "ENTITY.GOAT.EAT",
-			"ordinal": 1090
+			"ordinal": 1109
 		},
 		{
 			"key": "minecraft:entity.goat.horn_break",
 			"name": "ENTITY.GOAT.HORN_BREAK",
-			"ordinal": 1091
+			"ordinal": 1110
 		},
 		{
 			"key": "minecraft:entity.goat.hurt",
 			"name": "ENTITY.GOAT.HURT",
-			"ordinal": 1092
+			"ordinal": 1111
 		},
 		{
 			"key": "minecraft:entity.goat.long_jump",
 			"name": "ENTITY.GOAT.LONG_JUMP",
-			"ordinal": 1093
+			"ordinal": 1112
 		},
 		{
 			"key": "minecraft:entity.goat.milk",
 			"name": "ENTITY.GOAT.MILK",
-			"ordinal": 1094
+			"ordinal": 1113
 		},
 		{
 			"key": "minecraft:entity.goat.prepare_ram",
 			"name": "ENTITY.GOAT.PREPARE_RAM",
-			"ordinal": 1095
+			"ordinal": 1114
 		},
 		{
 			"key": "minecraft:entity.goat.ram_impact",
 			"name": "ENTITY.GOAT.RAM_IMPACT",
-			"ordinal": 1096
+			"ordinal": 1115
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.ambient",
 			"name": "ENTITY.GOAT.SCREAMING.AMBIENT",
-			"ordinal": 1097
+			"ordinal": 1116
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.death",
 			"name": "ENTITY.GOAT.SCREAMING.DEATH",
-			"ordinal": 1098
+			"ordinal": 1117
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.eat",
 			"name": "ENTITY.GOAT.SCREAMING.EAT",
-			"ordinal": 1099
+			"ordinal": 1118
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.hurt",
 			"name": "ENTITY.GOAT.SCREAMING.HURT",
-			"ordinal": 1100
+			"ordinal": 1119
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.long_jump",
 			"name": "ENTITY.GOAT.SCREAMING.LONG_JUMP",
-			"ordinal": 1101
+			"ordinal": 1120
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.milk",
 			"name": "ENTITY.GOAT.SCREAMING.MILK",
-			"ordinal": 1102
+			"ordinal": 1121
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.prepare_ram",
 			"name": "ENTITY.GOAT.SCREAMING.PREPARE_RAM",
-			"ordinal": 1103
+			"ordinal": 1122
 		},
 		{
 			"key": "minecraft:entity.goat.screaming.ram_impact",
 			"name": "ENTITY.GOAT.SCREAMING.RAM_IMPACT",
-			"ordinal": 1104
+			"ordinal": 1123
 		},
 		{
 			"key": "minecraft:entity.goat.step",
 			"name": "ENTITY.GOAT.STEP",
-			"ordinal": 1105
+			"ordinal": 1124
 		},
 		{
 			"key": "minecraft:entity.guardian.ambient",
 			"name": "ENTITY.GUARDIAN.AMBIENT",
-			"ordinal": 1106
+			"ordinal": 1125
 		},
 		{
 			"key": "minecraft:entity.guardian.ambient_land",
 			"name": "ENTITY.GUARDIAN.AMBIENT_LAND",
-			"ordinal": 1107
+			"ordinal": 1126
 		},
 		{
 			"key": "minecraft:entity.guardian.attack",
 			"name": "ENTITY.GUARDIAN.ATTACK",
-			"ordinal": 1108
+			"ordinal": 1127
 		},
 		{
 			"key": "minecraft:entity.guardian.death",
 			"name": "ENTITY.GUARDIAN.DEATH",
-			"ordinal": 1109
+			"ordinal": 1128
 		},
 		{
 			"key": "minecraft:entity.guardian.death_land",
 			"name": "ENTITY.GUARDIAN.DEATH_LAND",
-			"ordinal": 1110
+			"ordinal": 1129
 		},
 		{
 			"key": "minecraft:entity.guardian.flop",
 			"name": "ENTITY.GUARDIAN.FLOP",
-			"ordinal": 1111
+			"ordinal": 1130
 		},
 		{
 			"key": "minecraft:entity.guardian.hurt",
 			"name": "ENTITY.GUARDIAN.HURT",
-			"ordinal": 1112
+			"ordinal": 1131
 		},
 		{
 			"key": "minecraft:entity.guardian.hurt_land",
 			"name": "ENTITY.GUARDIAN.HURT_LAND",
-			"ordinal": 1113
+			"ordinal": 1132
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.ambient",
 			"name": "ENTITY.HAPPY_GHAST.AMBIENT",
-			"ordinal": 1114
+			"ordinal": 1133
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.death",
 			"name": "ENTITY.HAPPY_GHAST.DEATH",
-			"ordinal": 1115
+			"ordinal": 1134
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.equip",
 			"name": "ENTITY.HAPPY_GHAST.EQUIP",
-			"ordinal": 1116
+			"ordinal": 1135
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.harness_goggles_down",
 			"name": "ENTITY.HAPPY_GHAST.HARNESS_GOGGLES_DOWN",
-			"ordinal": 1117
+			"ordinal": 1136
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.harness_goggles_up",
 			"name": "ENTITY.HAPPY_GHAST.HARNESS_GOGGLES_UP",
-			"ordinal": 1118
+			"ordinal": 1137
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.hurt",
 			"name": "ENTITY.HAPPY_GHAST.HURT",
-			"ordinal": 1119
+			"ordinal": 1138
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.riding",
 			"name": "ENTITY.HAPPY_GHAST.RIDING",
-			"ordinal": 1120
+			"ordinal": 1139
 		},
 		{
 			"key": "minecraft:entity.happy_ghast.unequip",
 			"name": "ENTITY.HAPPY_GHAST.UNEQUIP",
-			"ordinal": 1121
+			"ordinal": 1140
 		},
 		{
 			"key": "minecraft:entity.hoglin.ambient",
 			"name": "ENTITY.HOGLIN.AMBIENT",
-			"ordinal": 1122
+			"ordinal": 1141
 		},
 		{
 			"key": "minecraft:entity.hoglin.angry",
 			"name": "ENTITY.HOGLIN.ANGRY",
-			"ordinal": 1123
+			"ordinal": 1142
 		},
 		{
 			"key": "minecraft:entity.hoglin.attack",
 			"name": "ENTITY.HOGLIN.ATTACK",
-			"ordinal": 1124
+			"ordinal": 1143
 		},
 		{
 			"key": "minecraft:entity.hoglin.converted_to_zombified",
 			"name": "ENTITY.HOGLIN.CONVERTED_TO_ZOMBIFIED",
-			"ordinal": 1125
+			"ordinal": 1144
 		},
 		{
 			"key": "minecraft:entity.hoglin.death",
 			"name": "ENTITY.HOGLIN.DEATH",
-			"ordinal": 1126
+			"ordinal": 1145
 		},
 		{
 			"key": "minecraft:entity.hoglin.hurt",
 			"name": "ENTITY.HOGLIN.HURT",
-			"ordinal": 1127
+			"ordinal": 1146
 		},
 		{
 			"key": "minecraft:entity.hoglin.retreat",
 			"name": "ENTITY.HOGLIN.RETREAT",
-			"ordinal": 1128
+			"ordinal": 1147
 		},
 		{
 			"key": "minecraft:entity.hoglin.step",
 			"name": "ENTITY.HOGLIN.STEP",
-			"ordinal": 1129
+			"ordinal": 1148
 		},
 		{
 			"key": "minecraft:entity.horse.ambient",
 			"name": "ENTITY.HORSE.AMBIENT",
-			"ordinal": 1130
+			"ordinal": 1149
 		},
 		{
 			"key": "minecraft:entity.horse.angry",
 			"name": "ENTITY.HORSE.ANGRY",
-			"ordinal": 1131
+			"ordinal": 1150
 		},
 		{
 			"key": "minecraft:entity.horse.armor",
 			"name": "ENTITY.HORSE.ARMOR",
-			"ordinal": 1132
+			"ordinal": 1151
 		},
 		{
 			"key": "minecraft:entity.horse.breathe",
 			"name": "ENTITY.HORSE.BREATHE",
-			"ordinal": 1133
+			"ordinal": 1152
 		},
 		{
 			"key": "minecraft:entity.horse.death",
 			"name": "ENTITY.HORSE.DEATH",
-			"ordinal": 1134
+			"ordinal": 1153
 		},
 		{
 			"key": "minecraft:entity.horse.eat",
 			"name": "ENTITY.HORSE.EAT",
-			"ordinal": 1135
+			"ordinal": 1154
 		},
 		{
 			"key": "minecraft:entity.horse.gallop",
 			"name": "ENTITY.HORSE.GALLOP",
-			"ordinal": 1136
+			"ordinal": 1155
 		},
 		{
 			"key": "minecraft:entity.horse.hurt",
 			"name": "ENTITY.HORSE.HURT",
-			"ordinal": 1137
+			"ordinal": 1156
 		},
 		{
 			"key": "minecraft:entity.horse.jump",
 			"name": "ENTITY.HORSE.JUMP",
-			"ordinal": 1138
+			"ordinal": 1157
 		},
 		{
 			"key": "minecraft:entity.horse.land",
 			"name": "ENTITY.HORSE.LAND",
-			"ordinal": 1139
+			"ordinal": 1158
 		},
 		{
 			"key": "minecraft:entity.horse.saddle",
 			"name": "ENTITY.HORSE.SADDLE",
-			"ordinal": 1140
+			"ordinal": 1159
 		},
 		{
 			"key": "minecraft:entity.horse.step",
 			"name": "ENTITY.HORSE.STEP",
-			"ordinal": 1141
+			"ordinal": 1160
 		},
 		{
 			"key": "minecraft:entity.horse.step_wood",
 			"name": "ENTITY.HORSE.STEP_WOOD",
-			"ordinal": 1142
+			"ordinal": 1161
 		},
 		{
 			"key": "minecraft:entity.hostile.big_fall",
 			"name": "ENTITY.HOSTILE.BIG_FALL",
-			"ordinal": 1143
+			"ordinal": 1162
 		},
 		{
 			"key": "minecraft:entity.hostile.death",
 			"name": "ENTITY.HOSTILE.DEATH",
-			"ordinal": 1144
+			"ordinal": 1163
 		},
 		{
 			"key": "minecraft:entity.hostile.hurt",
 			"name": "ENTITY.HOSTILE.HURT",
-			"ordinal": 1145
+			"ordinal": 1164
 		},
 		{
 			"key": "minecraft:entity.hostile.small_fall",
 			"name": "ENTITY.HOSTILE.SMALL_FALL",
-			"ordinal": 1146
+			"ordinal": 1165
 		},
 		{
 			"key": "minecraft:entity.hostile.splash",
 			"name": "ENTITY.HOSTILE.SPLASH",
-			"ordinal": 1147
+			"ordinal": 1166
 		},
 		{
 			"key": "minecraft:entity.hostile.swim",
 			"name": "ENTITY.HOSTILE.SWIM",
-			"ordinal": 1148
+			"ordinal": 1167
 		},
 		{
 			"key": "minecraft:entity.husk.ambient",
 			"name": "ENTITY.HUSK.AMBIENT",
-			"ordinal": 1149
+			"ordinal": 1168
 		},
 		{
 			"key": "minecraft:entity.husk.converted_to_zombie",
 			"name": "ENTITY.HUSK.CONVERTED_TO_ZOMBIE",
-			"ordinal": 1150
+			"ordinal": 1169
 		},
 		{
 			"key": "minecraft:entity.husk.death",
 			"name": "ENTITY.HUSK.DEATH",
-			"ordinal": 1151
+			"ordinal": 1170
 		},
 		{
 			"key": "minecraft:entity.husk.hurt",
 			"name": "ENTITY.HUSK.HURT",
-			"ordinal": 1152
+			"ordinal": 1171
 		},
 		{
 			"key": "minecraft:entity.husk.step",
 			"name": "ENTITY.HUSK.STEP",
-			"ordinal": 1153
+			"ordinal": 1172
 		},
 		{
 			"key": "minecraft:entity.illusioner.ambient",
 			"name": "ENTITY.ILLUSIONER.AMBIENT",
-			"ordinal": 1154
+			"ordinal": 1173
 		},
 		{
 			"key": "minecraft:entity.illusioner.cast_spell",
 			"name": "ENTITY.ILLUSIONER.CAST_SPELL",
-			"ordinal": 1155
+			"ordinal": 1174
 		},
 		{
 			"key": "minecraft:entity.illusioner.death",
 			"name": "ENTITY.ILLUSIONER.DEATH",
-			"ordinal": 1156
+			"ordinal": 1175
 		},
 		{
 			"key": "minecraft:entity.illusioner.hurt",
 			"name": "ENTITY.ILLUSIONER.HURT",
-			"ordinal": 1157
+			"ordinal": 1176
 		},
 		{
 			"key": "minecraft:entity.illusioner.mirror_move",
 			"name": "ENTITY.ILLUSIONER.MIRROR_MOVE",
-			"ordinal": 1158
+			"ordinal": 1177
 		},
 		{
 			"key": "minecraft:entity.illusioner.prepare_blindness",
 			"name": "ENTITY.ILLUSIONER.PREPARE_BLINDNESS",
-			"ordinal": 1159
+			"ordinal": 1178
 		},
 		{
 			"key": "minecraft:entity.illusioner.prepare_mirror",
 			"name": "ENTITY.ILLUSIONER.PREPARE_MIRROR",
-			"ordinal": 1160
+			"ordinal": 1179
 		},
 		{
 			"key": "minecraft:entity.iron_golem.attack",
 			"name": "ENTITY.IRON_GOLEM.ATTACK",
-			"ordinal": 1161
+			"ordinal": 1180
 		},
 		{
 			"key": "minecraft:entity.iron_golem.damage",
 			"name": "ENTITY.IRON_GOLEM.DAMAGE",
-			"ordinal": 1162
+			"ordinal": 1181
 		},
 		{
 			"key": "minecraft:entity.iron_golem.death",
 			"name": "ENTITY.IRON_GOLEM.DEATH",
-			"ordinal": 1163
+			"ordinal": 1182
 		},
 		{
 			"key": "minecraft:entity.iron_golem.hurt",
 			"name": "ENTITY.IRON_GOLEM.HURT",
-			"ordinal": 1164
+			"ordinal": 1183
 		},
 		{
 			"key": "minecraft:entity.iron_golem.repair",
 			"name": "ENTITY.IRON_GOLEM.REPAIR",
-			"ordinal": 1165
+			"ordinal": 1184
 		},
 		{
 			"key": "minecraft:entity.iron_golem.step",
 			"name": "ENTITY.IRON_GOLEM.STEP",
-			"ordinal": 1166
+			"ordinal": 1185
 		},
 		{
 			"key": "minecraft:entity.item.break",
 			"name": "ENTITY.ITEM.BREAK",
-			"ordinal": 1167
+			"ordinal": 1186
 		},
 		{
 			"key": "minecraft:entity.item.pickup",
 			"name": "ENTITY.ITEM.PICKUP",
-			"ordinal": 1168
+			"ordinal": 1187
 		},
 		{
 			"key": "minecraft:entity.item_frame.add_item",
 			"name": "ENTITY.ITEM_FRAME.ADD_ITEM",
-			"ordinal": 1169
+			"ordinal": 1188
 		},
 		{
 			"key": "minecraft:entity.item_frame.break",
 			"name": "ENTITY.ITEM_FRAME.BREAK",
-			"ordinal": 1170
+			"ordinal": 1189
 		},
 		{
 			"key": "minecraft:entity.item_frame.place",
 			"name": "ENTITY.ITEM_FRAME.PLACE",
-			"ordinal": 1171
+			"ordinal": 1190
 		},
 		{
 			"key": "minecraft:entity.item_frame.remove_item",
 			"name": "ENTITY.ITEM_FRAME.REMOVE_ITEM",
-			"ordinal": 1172
+			"ordinal": 1191
 		},
 		{
 			"key": "minecraft:entity.item_frame.rotate_item",
 			"name": "ENTITY.ITEM_FRAME.ROTATE_ITEM",
-			"ordinal": 1173
+			"ordinal": 1192
 		},
 		{
 			"key": "minecraft:entity.lightning_bolt.impact",
 			"name": "ENTITY.LIGHTNING_BOLT.IMPACT",
-			"ordinal": 1174
+			"ordinal": 1193
 		},
 		{
 			"key": "minecraft:entity.lightning_bolt.thunder",
 			"name": "ENTITY.LIGHTNING_BOLT.THUNDER",
-			"ordinal": 1175
+			"ordinal": 1194
 		},
 		{
 			"key": "minecraft:entity.lingering_potion.throw",
 			"name": "ENTITY.LINGERING_POTION.THROW",
-			"ordinal": 1176
+			"ordinal": 1195
 		},
 		{
 			"key": "minecraft:entity.llama.ambient",
 			"name": "ENTITY.LLAMA.AMBIENT",
-			"ordinal": 1177
+			"ordinal": 1196
 		},
 		{
 			"key": "minecraft:entity.llama.angry",
 			"name": "ENTITY.LLAMA.ANGRY",
-			"ordinal": 1178
+			"ordinal": 1197
 		},
 		{
 			"key": "minecraft:entity.llama.chest",
 			"name": "ENTITY.LLAMA.CHEST",
-			"ordinal": 1179
+			"ordinal": 1198
 		},
 		{
 			"key": "minecraft:entity.llama.death",
 			"name": "ENTITY.LLAMA.DEATH",
-			"ordinal": 1180
+			"ordinal": 1199
 		},
 		{
 			"key": "minecraft:entity.llama.eat",
 			"name": "ENTITY.LLAMA.EAT",
-			"ordinal": 1181
+			"ordinal": 1200
 		},
 		{
 			"key": "minecraft:entity.llama.hurt",
 			"name": "ENTITY.LLAMA.HURT",
-			"ordinal": 1182
+			"ordinal": 1201
 		},
 		{
 			"key": "minecraft:entity.llama.spit",
 			"name": "ENTITY.LLAMA.SPIT",
-			"ordinal": 1183
+			"ordinal": 1202
 		},
 		{
 			"key": "minecraft:entity.llama.step",
 			"name": "ENTITY.LLAMA.STEP",
-			"ordinal": 1184
+			"ordinal": 1203
 		},
 		{
 			"key": "minecraft:entity.llama.swag",
 			"name": "ENTITY.LLAMA.SWAG",
-			"ordinal": 1185
+			"ordinal": 1204
 		},
 		{
 			"key": "minecraft:entity.magma_cube.death",
 			"name": "ENTITY.MAGMA_CUBE.DEATH",
-			"ordinal": 1186
+			"ordinal": 1205
 		},
 		{
 			"key": "minecraft:entity.magma_cube.death_small",
 			"name": "ENTITY.MAGMA_CUBE.DEATH_SMALL",
-			"ordinal": 1187
+			"ordinal": 1206
 		},
 		{
 			"key": "minecraft:entity.magma_cube.hurt",
 			"name": "ENTITY.MAGMA_CUBE.HURT",
-			"ordinal": 1188
+			"ordinal": 1207
 		},
 		{
 			"key": "minecraft:entity.magma_cube.hurt_small",
 			"name": "ENTITY.MAGMA_CUBE.HURT_SMALL",
-			"ordinal": 1189
+			"ordinal": 1208
 		},
 		{
 			"key": "minecraft:entity.magma_cube.jump",
 			"name": "ENTITY.MAGMA_CUBE.JUMP",
-			"ordinal": 1190
+			"ordinal": 1209
 		},
 		{
 			"key": "minecraft:entity.magma_cube.squish",
 			"name": "ENTITY.MAGMA_CUBE.SQUISH",
-			"ordinal": 1191
+			"ordinal": 1210
 		},
 		{
 			"key": "minecraft:entity.magma_cube.squish_small",
 			"name": "ENTITY.MAGMA_CUBE.SQUISH_SMALL",
-			"ordinal": 1192
+			"ordinal": 1211
 		},
 		{
 			"key": "minecraft:entity.minecart.inside",
 			"name": "ENTITY.MINECART.INSIDE",
-			"ordinal": 1193
+			"ordinal": 1212
 		},
 		{
 			"key": "minecraft:entity.minecart.inside.underwater",
 			"name": "ENTITY.MINECART.INSIDE.UNDERWATER",
-			"ordinal": 1194
+			"ordinal": 1213
 		},
 		{
 			"key": "minecraft:entity.minecart.riding",
 			"name": "ENTITY.MINECART.RIDING",
-			"ordinal": 1195
+			"ordinal": 1214
 		},
 		{
 			"key": "minecraft:entity.mooshroom.convert",
 			"name": "ENTITY.MOOSHROOM.CONVERT",
-			"ordinal": 1196
+			"ordinal": 1215
 		},
 		{
 			"key": "minecraft:entity.mooshroom.eat",
 			"name": "ENTITY.MOOSHROOM.EAT",
-			"ordinal": 1197
+			"ordinal": 1216
 		},
 		{
 			"key": "minecraft:entity.mooshroom.milk",
 			"name": "ENTITY.MOOSHROOM.MILK",
-			"ordinal": 1198
+			"ordinal": 1217
 		},
 		{
 			"key": "minecraft:entity.mooshroom.shear",
 			"name": "ENTITY.MOOSHROOM.SHEAR",
-			"ordinal": 1199
+			"ordinal": 1218
 		},
 		{
 			"key": "minecraft:entity.mooshroom.suspicious_milk",
 			"name": "ENTITY.MOOSHROOM.SUSPICIOUS_MILK",
-			"ordinal": 1200
+			"ordinal": 1219
 		},
 		{
 			"key": "minecraft:entity.mule.ambient",
 			"name": "ENTITY.MULE.AMBIENT",
-			"ordinal": 1201
+			"ordinal": 1220
 		},
 		{
 			"key": "minecraft:entity.mule.angry",
 			"name": "ENTITY.MULE.ANGRY",
-			"ordinal": 1202
+			"ordinal": 1221
 		},
 		{
 			"key": "minecraft:entity.mule.chest",
 			"name": "ENTITY.MULE.CHEST",
-			"ordinal": 1203
+			"ordinal": 1222
 		},
 		{
 			"key": "minecraft:entity.mule.death",
 			"name": "ENTITY.MULE.DEATH",
-			"ordinal": 1204
+			"ordinal": 1223
 		},
 		{
 			"key": "minecraft:entity.mule.eat",
 			"name": "ENTITY.MULE.EAT",
-			"ordinal": 1205
+			"ordinal": 1224
 		},
 		{
 			"key": "minecraft:entity.mule.hurt",
 			"name": "ENTITY.MULE.HURT",
-			"ordinal": 1206
+			"ordinal": 1225
 		},
 		{
 			"key": "minecraft:entity.mule.jump",
 			"name": "ENTITY.MULE.JUMP",
-			"ordinal": 1207
+			"ordinal": 1226
+		},
+		{
+			"key": "minecraft:entity.nautilus.ambient",
+			"name": "ENTITY.NAUTILUS.AMBIENT",
+			"ordinal": 1227
+		},
+		{
+			"key": "minecraft:entity.nautilus.ambient_land",
+			"name": "ENTITY.NAUTILUS.AMBIENT_LAND",
+			"ordinal": 1228
+		},
+		{
+			"key": "minecraft:entity.nautilus.dash",
+			"name": "ENTITY.NAUTILUS.DASH",
+			"ordinal": 1229
+		},
+		{
+			"key": "minecraft:entity.nautilus.dash_land",
+			"name": "ENTITY.NAUTILUS.DASH_LAND",
+			"ordinal": 1230
+		},
+		{
+			"key": "minecraft:entity.nautilus.dash_ready",
+			"name": "ENTITY.NAUTILUS.DASH_READY",
+			"ordinal": 1231
+		},
+		{
+			"key": "minecraft:entity.nautilus.dash_ready_land",
+			"name": "ENTITY.NAUTILUS.DASH_READY_LAND",
+			"ordinal": 1232
+		},
+		{
+			"key": "minecraft:entity.nautilus.death",
+			"name": "ENTITY.NAUTILUS.DEATH",
+			"ordinal": 1233
+		},
+		{
+			"key": "minecraft:entity.nautilus.death_land",
+			"name": "ENTITY.NAUTILUS.DEATH_LAND",
+			"ordinal": 1234
+		},
+		{
+			"key": "minecraft:entity.nautilus.eat",
+			"name": "ENTITY.NAUTILUS.EAT",
+			"ordinal": 1235
+		},
+		{
+			"key": "minecraft:entity.nautilus.hurt",
+			"name": "ENTITY.NAUTILUS.HURT",
+			"ordinal": 1236
+		},
+		{
+			"key": "minecraft:entity.nautilus.hurt_land",
+			"name": "ENTITY.NAUTILUS.HURT_LAND",
+			"ordinal": 1237
+		},
+		{
+			"key": "minecraft:entity.nautilus.riding",
+			"name": "ENTITY.NAUTILUS.RIDING",
+			"ordinal": 1238
+		},
+		{
+			"key": "minecraft:entity.nautilus.swim",
+			"name": "ENTITY.NAUTILUS.SWIM",
+			"ordinal": 1239
 		},
 		{
 			"key": "minecraft:entity.ocelot.ambient",
 			"name": "ENTITY.OCELOT.AMBIENT",
-			"ordinal": 1208
+			"ordinal": 1240
 		},
 		{
 			"key": "minecraft:entity.ocelot.death",
 			"name": "ENTITY.OCELOT.DEATH",
-			"ordinal": 1209
+			"ordinal": 1241
 		},
 		{
 			"key": "minecraft:entity.ocelot.hurt",
 			"name": "ENTITY.OCELOT.HURT",
-			"ordinal": 1210
+			"ordinal": 1242
 		},
 		{
 			"key": "minecraft:entity.painting.break",
 			"name": "ENTITY.PAINTING.BREAK",
-			"ordinal": 1211
+			"ordinal": 1243
 		},
 		{
 			"key": "minecraft:entity.painting.place",
 			"name": "ENTITY.PAINTING.PLACE",
-			"ordinal": 1212
+			"ordinal": 1244
 		},
 		{
 			"key": "minecraft:entity.panda.aggressive_ambient",
 			"name": "ENTITY.PANDA.AGGRESSIVE_AMBIENT",
-			"ordinal": 1213
+			"ordinal": 1245
 		},
 		{
 			"key": "minecraft:entity.panda.ambient",
 			"name": "ENTITY.PANDA.AMBIENT",
-			"ordinal": 1214
+			"ordinal": 1246
 		},
 		{
 			"key": "minecraft:entity.panda.bite",
 			"name": "ENTITY.PANDA.BITE",
-			"ordinal": 1215
+			"ordinal": 1247
 		},
 		{
 			"key": "minecraft:entity.panda.cant_breed",
 			"name": "ENTITY.PANDA.CANT_BREED",
-			"ordinal": 1216
+			"ordinal": 1248
 		},
 		{
 			"key": "minecraft:entity.panda.death",
 			"name": "ENTITY.PANDA.DEATH",
-			"ordinal": 1217
+			"ordinal": 1249
 		},
 		{
 			"key": "minecraft:entity.panda.eat",
 			"name": "ENTITY.PANDA.EAT",
-			"ordinal": 1218
+			"ordinal": 1250
 		},
 		{
 			"key": "minecraft:entity.panda.hurt",
 			"name": "ENTITY.PANDA.HURT",
-			"ordinal": 1219
+			"ordinal": 1251
 		},
 		{
 			"key": "minecraft:entity.panda.pre_sneeze",
 			"name": "ENTITY.PANDA.PRE_SNEEZE",
-			"ordinal": 1220
+			"ordinal": 1252
 		},
 		{
 			"key": "minecraft:entity.panda.sneeze",
 			"name": "ENTITY.PANDA.SNEEZE",
-			"ordinal": 1221
+			"ordinal": 1253
 		},
 		{
 			"key": "minecraft:entity.panda.step",
 			"name": "ENTITY.PANDA.STEP",
-			"ordinal": 1222
+			"ordinal": 1254
 		},
 		{
 			"key": "minecraft:entity.panda.worried_ambient",
 			"name": "ENTITY.PANDA.WORRIED_AMBIENT",
-			"ordinal": 1223
+			"ordinal": 1255
+		},
+		{
+			"key": "minecraft:entity.parched.ambient",
+			"name": "ENTITY.PARCHED.AMBIENT",
+			"ordinal": 1256
+		},
+		{
+			"key": "minecraft:entity.parched.death",
+			"name": "ENTITY.PARCHED.DEATH",
+			"ordinal": 1257
+		},
+		{
+			"key": "minecraft:entity.parched.hurt",
+			"name": "ENTITY.PARCHED.HURT",
+			"ordinal": 1258
+		},
+		{
+			"key": "minecraft:entity.parched.step",
+			"name": "ENTITY.PARCHED.STEP",
+			"ordinal": 1259
 		},
 		{
 			"key": "minecraft:entity.parrot.ambient",
 			"name": "ENTITY.PARROT.AMBIENT",
-			"ordinal": 1224
+			"ordinal": 1260
 		},
 		{
 			"key": "minecraft:entity.parrot.death",
 			"name": "ENTITY.PARROT.DEATH",
-			"ordinal": 1225
+			"ordinal": 1261
 		},
 		{
 			"key": "minecraft:entity.parrot.eat",
 			"name": "ENTITY.PARROT.EAT",
-			"ordinal": 1226
+			"ordinal": 1262
 		},
 		{
 			"key": "minecraft:entity.parrot.fly",
 			"name": "ENTITY.PARROT.FLY",
-			"ordinal": 1227
+			"ordinal": 1263
 		},
 		{
 			"key": "minecraft:entity.parrot.hurt",
 			"name": "ENTITY.PARROT.HURT",
-			"ordinal": 1228
+			"ordinal": 1264
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.blaze",
 			"name": "ENTITY.PARROT.IMITATE.BLAZE",
-			"ordinal": 1229
+			"ordinal": 1265
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.bogged",
 			"name": "ENTITY.PARROT.IMITATE.BOGGED",
-			"ordinal": 1230
+			"ordinal": 1266
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.breeze",
 			"name": "ENTITY.PARROT.IMITATE.BREEZE",
-			"ordinal": 1231
+			"ordinal": 1267
+		},
+		{
+			"key": "minecraft:entity.parrot.imitate.camel_husk",
+			"name": "ENTITY.PARROT.IMITATE.CAMEL_HUSK",
+			"ordinal": 1268
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.creaking",
 			"name": "ENTITY.PARROT.IMITATE.CREAKING",
-			"ordinal": 1232
+			"ordinal": 1269
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.creeper",
 			"name": "ENTITY.PARROT.IMITATE.CREEPER",
-			"ordinal": 1233
+			"ordinal": 1270
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.drowned",
 			"name": "ENTITY.PARROT.IMITATE.DROWNED",
-			"ordinal": 1234
+			"ordinal": 1271
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.elder_guardian",
 			"name": "ENTITY.PARROT.IMITATE.ELDER_GUARDIAN",
-			"ordinal": 1235
+			"ordinal": 1272
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.ender_dragon",
 			"name": "ENTITY.PARROT.IMITATE.ENDER_DRAGON",
-			"ordinal": 1236
+			"ordinal": 1273
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.endermite",
 			"name": "ENTITY.PARROT.IMITATE.ENDERMITE",
-			"ordinal": 1237
+			"ordinal": 1274
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.evoker",
 			"name": "ENTITY.PARROT.IMITATE.EVOKER",
-			"ordinal": 1238
+			"ordinal": 1275
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.ghast",
 			"name": "ENTITY.PARROT.IMITATE.GHAST",
-			"ordinal": 1239
+			"ordinal": 1276
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.guardian",
 			"name": "ENTITY.PARROT.IMITATE.GUARDIAN",
-			"ordinal": 1240
+			"ordinal": 1277
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.hoglin",
 			"name": "ENTITY.PARROT.IMITATE.HOGLIN",
-			"ordinal": 1241
+			"ordinal": 1278
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.husk",
 			"name": "ENTITY.PARROT.IMITATE.HUSK",
-			"ordinal": 1242
+			"ordinal": 1279
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.illusioner",
 			"name": "ENTITY.PARROT.IMITATE.ILLUSIONER",
-			"ordinal": 1243
+			"ordinal": 1280
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.magma_cube",
 			"name": "ENTITY.PARROT.IMITATE.MAGMA_CUBE",
-			"ordinal": 1244
+			"ordinal": 1281
+		},
+		{
+			"key": "minecraft:entity.parrot.imitate.parched",
+			"name": "ENTITY.PARROT.IMITATE.PARCHED",
+			"ordinal": 1282
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.phantom",
 			"name": "ENTITY.PARROT.IMITATE.PHANTOM",
-			"ordinal": 1245
+			"ordinal": 1283
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.piglin",
 			"name": "ENTITY.PARROT.IMITATE.PIGLIN",
-			"ordinal": 1246
+			"ordinal": 1284
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.piglin_brute",
 			"name": "ENTITY.PARROT.IMITATE.PIGLIN_BRUTE",
-			"ordinal": 1247
+			"ordinal": 1285
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.pillager",
 			"name": "ENTITY.PARROT.IMITATE.PILLAGER",
-			"ordinal": 1248
+			"ordinal": 1286
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.ravager",
 			"name": "ENTITY.PARROT.IMITATE.RAVAGER",
-			"ordinal": 1249
+			"ordinal": 1287
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.shulker",
 			"name": "ENTITY.PARROT.IMITATE.SHULKER",
-			"ordinal": 1250
+			"ordinal": 1288
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.silverfish",
 			"name": "ENTITY.PARROT.IMITATE.SILVERFISH",
-			"ordinal": 1251
+			"ordinal": 1289
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.skeleton",
 			"name": "ENTITY.PARROT.IMITATE.SKELETON",
-			"ordinal": 1252
+			"ordinal": 1290
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.slime",
 			"name": "ENTITY.PARROT.IMITATE.SLIME",
-			"ordinal": 1253
+			"ordinal": 1291
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.spider",
 			"name": "ENTITY.PARROT.IMITATE.SPIDER",
-			"ordinal": 1254
+			"ordinal": 1292
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.stray",
 			"name": "ENTITY.PARROT.IMITATE.STRAY",
-			"ordinal": 1255
+			"ordinal": 1293
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.vex",
 			"name": "ENTITY.PARROT.IMITATE.VEX",
-			"ordinal": 1256
+			"ordinal": 1294
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.vindicator",
 			"name": "ENTITY.PARROT.IMITATE.VINDICATOR",
-			"ordinal": 1257
+			"ordinal": 1295
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.warden",
 			"name": "ENTITY.PARROT.IMITATE.WARDEN",
-			"ordinal": 1258
+			"ordinal": 1296
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.witch",
 			"name": "ENTITY.PARROT.IMITATE.WITCH",
-			"ordinal": 1259
+			"ordinal": 1297
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.wither",
 			"name": "ENTITY.PARROT.IMITATE.WITHER",
-			"ordinal": 1260
+			"ordinal": 1298
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.wither_skeleton",
 			"name": "ENTITY.PARROT.IMITATE.WITHER_SKELETON",
-			"ordinal": 1261
+			"ordinal": 1299
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.zoglin",
 			"name": "ENTITY.PARROT.IMITATE.ZOGLIN",
-			"ordinal": 1262
+			"ordinal": 1300
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.zombie",
 			"name": "ENTITY.PARROT.IMITATE.ZOMBIE",
-			"ordinal": 1263
+			"ordinal": 1301
+		},
+		{
+			"key": "minecraft:entity.parrot.imitate.zombie_horse",
+			"name": "ENTITY.PARROT.IMITATE.ZOMBIE_HORSE",
+			"ordinal": 1302
+		},
+		{
+			"key": "minecraft:entity.parrot.imitate.zombie_nautilus",
+			"name": "ENTITY.PARROT.IMITATE.ZOMBIE_NAUTILUS",
+			"ordinal": 1303
 		},
 		{
 			"key": "minecraft:entity.parrot.imitate.zombie_villager",
 			"name": "ENTITY.PARROT.IMITATE.ZOMBIE_VILLAGER",
-			"ordinal": 1264
+			"ordinal": 1304
 		},
 		{
 			"key": "minecraft:entity.parrot.step",
 			"name": "ENTITY.PARROT.STEP",
-			"ordinal": 1265
+			"ordinal": 1305
 		},
 		{
 			"key": "minecraft:entity.phantom.ambient",
 			"name": "ENTITY.PHANTOM.AMBIENT",
-			"ordinal": 1266
+			"ordinal": 1306
 		},
 		{
 			"key": "minecraft:entity.phantom.bite",
 			"name": "ENTITY.PHANTOM.BITE",
-			"ordinal": 1267
+			"ordinal": 1307
 		},
 		{
 			"key": "minecraft:entity.phantom.death",
 			"name": "ENTITY.PHANTOM.DEATH",
-			"ordinal": 1268
+			"ordinal": 1308
 		},
 		{
 			"key": "minecraft:entity.phantom.flap",
 			"name": "ENTITY.PHANTOM.FLAP",
-			"ordinal": 1269
+			"ordinal": 1309
 		},
 		{
 			"key": "minecraft:entity.phantom.hurt",
 			"name": "ENTITY.PHANTOM.HURT",
-			"ordinal": 1270
+			"ordinal": 1310
 		},
 		{
 			"key": "minecraft:entity.phantom.swoop",
 			"name": "ENTITY.PHANTOM.SWOOP",
-			"ordinal": 1271
+			"ordinal": 1311
 		},
 		{
 			"key": "minecraft:entity.pig.ambient",
 			"name": "ENTITY.PIG.AMBIENT",
-			"ordinal": 1272
+			"ordinal": 1312
 		},
 		{
 			"key": "minecraft:entity.pig.death",
 			"name": "ENTITY.PIG.DEATH",
-			"ordinal": 1273
+			"ordinal": 1313
 		},
 		{
 			"key": "minecraft:entity.pig.hurt",
 			"name": "ENTITY.PIG.HURT",
-			"ordinal": 1274
+			"ordinal": 1314
 		},
 		{
 			"key": "minecraft:entity.pig.saddle",
 			"name": "ENTITY.PIG.SADDLE",
-			"ordinal": 1275
+			"ordinal": 1315
 		},
 		{
 			"key": "minecraft:entity.pig.step",
 			"name": "ENTITY.PIG.STEP",
-			"ordinal": 1276
+			"ordinal": 1316
 		},
 		{
 			"key": "minecraft:entity.piglin.admiring_item",
 			"name": "ENTITY.PIGLIN.ADMIRING_ITEM",
-			"ordinal": 1277
+			"ordinal": 1317
 		},
 		{
 			"key": "minecraft:entity.piglin.ambient",
 			"name": "ENTITY.PIGLIN.AMBIENT",
-			"ordinal": 1278
+			"ordinal": 1318
 		},
 		{
 			"key": "minecraft:entity.piglin.angry",
 			"name": "ENTITY.PIGLIN.ANGRY",
-			"ordinal": 1279
+			"ordinal": 1319
 		},
 		{
 			"key": "minecraft:entity.piglin.celebrate",
 			"name": "ENTITY.PIGLIN.CELEBRATE",
-			"ordinal": 1280
+			"ordinal": 1320
 		},
 		{
 			"key": "minecraft:entity.piglin.converted_to_zombified",
 			"name": "ENTITY.PIGLIN.CONVERTED_TO_ZOMBIFIED",
-			"ordinal": 1281
+			"ordinal": 1321
 		},
 		{
 			"key": "minecraft:entity.piglin.death",
 			"name": "ENTITY.PIGLIN.DEATH",
-			"ordinal": 1282
+			"ordinal": 1322
 		},
 		{
 			"key": "minecraft:entity.piglin.hurt",
 			"name": "ENTITY.PIGLIN.HURT",
-			"ordinal": 1283
+			"ordinal": 1323
 		},
 		{
 			"key": "minecraft:entity.piglin.jealous",
 			"name": "ENTITY.PIGLIN.JEALOUS",
-			"ordinal": 1284
+			"ordinal": 1324
 		},
 		{
 			"key": "minecraft:entity.piglin.retreat",
 			"name": "ENTITY.PIGLIN.RETREAT",
-			"ordinal": 1285
+			"ordinal": 1325
 		},
 		{
 			"key": "minecraft:entity.piglin.step",
 			"name": "ENTITY.PIGLIN.STEP",
-			"ordinal": 1286
+			"ordinal": 1326
 		},
 		{
 			"key": "minecraft:entity.piglin_brute.ambient",
 			"name": "ENTITY.PIGLIN_BRUTE.AMBIENT",
-			"ordinal": 1287
+			"ordinal": 1327
 		},
 		{
 			"key": "minecraft:entity.piglin_brute.angry",
 			"name": "ENTITY.PIGLIN_BRUTE.ANGRY",
-			"ordinal": 1288
+			"ordinal": 1328
 		},
 		{
 			"key": "minecraft:entity.piglin_brute.converted_to_zombified",
 			"name": "ENTITY.PIGLIN_BRUTE.CONVERTED_TO_ZOMBIFIED",
-			"ordinal": 1289
+			"ordinal": 1329
 		},
 		{
 			"key": "minecraft:entity.piglin_brute.death",
 			"name": "ENTITY.PIGLIN_BRUTE.DEATH",
-			"ordinal": 1290
+			"ordinal": 1330
 		},
 		{
 			"key": "minecraft:entity.piglin_brute.hurt",
 			"name": "ENTITY.PIGLIN_BRUTE.HURT",
-			"ordinal": 1291
+			"ordinal": 1331
 		},
 		{
 			"key": "minecraft:entity.piglin_brute.step",
 			"name": "ENTITY.PIGLIN_BRUTE.STEP",
-			"ordinal": 1292
+			"ordinal": 1332
 		},
 		{
 			"key": "minecraft:entity.pillager.ambient",
 			"name": "ENTITY.PILLAGER.AMBIENT",
-			"ordinal": 1293
+			"ordinal": 1333
 		},
 		{
 			"key": "minecraft:entity.pillager.celebrate",
 			"name": "ENTITY.PILLAGER.CELEBRATE",
-			"ordinal": 1294
+			"ordinal": 1334
 		},
 		{
 			"key": "minecraft:entity.pillager.death",
 			"name": "ENTITY.PILLAGER.DEATH",
-			"ordinal": 1295
+			"ordinal": 1335
 		},
 		{
 			"key": "minecraft:entity.pillager.hurt",
 			"name": "ENTITY.PILLAGER.HURT",
-			"ordinal": 1296
+			"ordinal": 1336
 		},
 		{
 			"key": "minecraft:entity.player.attack.crit",
 			"name": "ENTITY.PLAYER.ATTACK.CRIT",
-			"ordinal": 1297
+			"ordinal": 1337
 		},
 		{
 			"key": "minecraft:entity.player.attack.knockback",
 			"name": "ENTITY.PLAYER.ATTACK.KNOCKBACK",
-			"ordinal": 1298
+			"ordinal": 1338
 		},
 		{
 			"key": "minecraft:entity.player.attack.nodamage",
 			"name": "ENTITY.PLAYER.ATTACK.NODAMAGE",
-			"ordinal": 1299
+			"ordinal": 1339
 		},
 		{
 			"key": "minecraft:entity.player.attack.strong",
 			"name": "ENTITY.PLAYER.ATTACK.STRONG",
-			"ordinal": 1300
+			"ordinal": 1340
 		},
 		{
 			"key": "minecraft:entity.player.attack.sweep",
 			"name": "ENTITY.PLAYER.ATTACK.SWEEP",
-			"ordinal": 1301
+			"ordinal": 1341
 		},
 		{
 			"key": "minecraft:entity.player.attack.weak",
 			"name": "ENTITY.PLAYER.ATTACK.WEAK",
-			"ordinal": 1302
+			"ordinal": 1342
 		},
 		{
 			"key": "minecraft:entity.player.big_fall",
 			"name": "ENTITY.PLAYER.BIG_FALL",
-			"ordinal": 1303
+			"ordinal": 1343
 		},
 		{
 			"key": "minecraft:entity.player.breath",
 			"name": "ENTITY.PLAYER.BREATH",
-			"ordinal": 1304
+			"ordinal": 1344
 		},
 		{
 			"key": "minecraft:entity.player.burp",
 			"name": "ENTITY.PLAYER.BURP",
-			"ordinal": 1305
+			"ordinal": 1345
 		},
 		{
 			"key": "minecraft:entity.player.death",
 			"name": "ENTITY.PLAYER.DEATH",
-			"ordinal": 1306
+			"ordinal": 1346
 		},
 		{
 			"key": "minecraft:entity.player.hurt",
 			"name": "ENTITY.PLAYER.HURT",
-			"ordinal": 1307
+			"ordinal": 1347
 		},
 		{
 			"key": "minecraft:entity.player.hurt_drown",
 			"name": "ENTITY.PLAYER.HURT_DROWN",
-			"ordinal": 1308
+			"ordinal": 1348
 		},
 		{
 			"key": "minecraft:entity.player.hurt_freeze",
 			"name": "ENTITY.PLAYER.HURT_FREEZE",
-			"ordinal": 1309
+			"ordinal": 1349
 		},
 		{
 			"key": "minecraft:entity.player.hurt_on_fire",
 			"name": "ENTITY.PLAYER.HURT_ON_FIRE",
-			"ordinal": 1310
+			"ordinal": 1350
 		},
 		{
 			"key": "minecraft:entity.player.hurt_sweet_berry_bush",
 			"name": "ENTITY.PLAYER.HURT_SWEET_BERRY_BUSH",
-			"ordinal": 1311
+			"ordinal": 1351
 		},
 		{
 			"key": "minecraft:entity.player.levelup",
 			"name": "ENTITY.PLAYER.LEVELUP",
-			"ordinal": 1312
+			"ordinal": 1352
 		},
 		{
 			"key": "minecraft:entity.player.small_fall",
 			"name": "ENTITY.PLAYER.SMALL_FALL",
-			"ordinal": 1313
+			"ordinal": 1353
 		},
 		{
 			"key": "minecraft:entity.player.splash",
 			"name": "ENTITY.PLAYER.SPLASH",
-			"ordinal": 1314
+			"ordinal": 1354
 		},
 		{
 			"key": "minecraft:entity.player.splash.high_speed",
 			"name": "ENTITY.PLAYER.SPLASH.HIGH_SPEED",
-			"ordinal": 1315
+			"ordinal": 1355
 		},
 		{
 			"key": "minecraft:entity.player.swim",
 			"name": "ENTITY.PLAYER.SWIM",
-			"ordinal": 1316
+			"ordinal": 1356
 		},
 		{
 			"key": "minecraft:entity.player.teleport",
 			"name": "ENTITY.PLAYER.TELEPORT",
-			"ordinal": 1317
+			"ordinal": 1357
 		},
 		{
 			"key": "minecraft:entity.polar_bear.ambient",
 			"name": "ENTITY.POLAR_BEAR.AMBIENT",
-			"ordinal": 1318
+			"ordinal": 1358
 		},
 		{
 			"key": "minecraft:entity.polar_bear.ambient_baby",
 			"name": "ENTITY.POLAR_BEAR.AMBIENT_BABY",
-			"ordinal": 1319
+			"ordinal": 1359
 		},
 		{
 			"key": "minecraft:entity.polar_bear.death",
 			"name": "ENTITY.POLAR_BEAR.DEATH",
-			"ordinal": 1320
+			"ordinal": 1360
 		},
 		{
 			"key": "minecraft:entity.polar_bear.hurt",
 			"name": "ENTITY.POLAR_BEAR.HURT",
-			"ordinal": 1321
+			"ordinal": 1361
 		},
 		{
 			"key": "minecraft:entity.polar_bear.step",
 			"name": "ENTITY.POLAR_BEAR.STEP",
-			"ordinal": 1322
+			"ordinal": 1362
 		},
 		{
 			"key": "minecraft:entity.polar_bear.warning",
 			"name": "ENTITY.POLAR_BEAR.WARNING",
-			"ordinal": 1323
+			"ordinal": 1363
 		},
 		{
 			"key": "minecraft:entity.puffer_fish.blow_out",
 			"name": "ENTITY.PUFFER_FISH.BLOW_OUT",
-			"ordinal": 1324
+			"ordinal": 1364
 		},
 		{
 			"key": "minecraft:entity.puffer_fish.blow_up",
 			"name": "ENTITY.PUFFER_FISH.BLOW_UP",
-			"ordinal": 1325
+			"ordinal": 1365
 		},
 		{
 			"key": "minecraft:entity.puffer_fish.death",
 			"name": "ENTITY.PUFFER_FISH.DEATH",
-			"ordinal": 1326
+			"ordinal": 1366
 		},
 		{
 			"key": "minecraft:entity.puffer_fish.flop",
 			"name": "ENTITY.PUFFER_FISH.FLOP",
-			"ordinal": 1327
+			"ordinal": 1367
 		},
 		{
 			"key": "minecraft:entity.puffer_fish.hurt",
 			"name": "ENTITY.PUFFER_FISH.HURT",
-			"ordinal": 1328
+			"ordinal": 1368
 		},
 		{
 			"key": "minecraft:entity.puffer_fish.sting",
 			"name": "ENTITY.PUFFER_FISH.STING",
-			"ordinal": 1329
+			"ordinal": 1369
 		},
 		{
 			"key": "minecraft:entity.rabbit.ambient",
 			"name": "ENTITY.RABBIT.AMBIENT",
-			"ordinal": 1330
+			"ordinal": 1370
 		},
 		{
 			"key": "minecraft:entity.rabbit.attack",
 			"name": "ENTITY.RABBIT.ATTACK",
-			"ordinal": 1331
+			"ordinal": 1371
 		},
 		{
 			"key": "minecraft:entity.rabbit.death",
 			"name": "ENTITY.RABBIT.DEATH",
-			"ordinal": 1332
+			"ordinal": 1372
 		},
 		{
 			"key": "minecraft:entity.rabbit.hurt",
 			"name": "ENTITY.RABBIT.HURT",
-			"ordinal": 1333
+			"ordinal": 1373
 		},
 		{
 			"key": "minecraft:entity.rabbit.jump",
 			"name": "ENTITY.RABBIT.JUMP",
-			"ordinal": 1334
+			"ordinal": 1374
 		},
 		{
 			"key": "minecraft:entity.ravager.ambient",
 			"name": "ENTITY.RAVAGER.AMBIENT",
-			"ordinal": 1335
+			"ordinal": 1375
 		},
 		{
 			"key": "minecraft:entity.ravager.attack",
 			"name": "ENTITY.RAVAGER.ATTACK",
-			"ordinal": 1336
+			"ordinal": 1376
 		},
 		{
 			"key": "minecraft:entity.ravager.celebrate",
 			"name": "ENTITY.RAVAGER.CELEBRATE",
-			"ordinal": 1337
+			"ordinal": 1377
 		},
 		{
 			"key": "minecraft:entity.ravager.death",
 			"name": "ENTITY.RAVAGER.DEATH",
-			"ordinal": 1338
+			"ordinal": 1378
 		},
 		{
 			"key": "minecraft:entity.ravager.hurt",
 			"name": "ENTITY.RAVAGER.HURT",
-			"ordinal": 1339
+			"ordinal": 1379
 		},
 		{
 			"key": "minecraft:entity.ravager.roar",
 			"name": "ENTITY.RAVAGER.ROAR",
-			"ordinal": 1340
+			"ordinal": 1380
 		},
 		{
 			"key": "minecraft:entity.ravager.step",
 			"name": "ENTITY.RAVAGER.STEP",
-			"ordinal": 1341
+			"ordinal": 1381
 		},
 		{
 			"key": "minecraft:entity.ravager.stunned",
 			"name": "ENTITY.RAVAGER.STUNNED",
-			"ordinal": 1342
+			"ordinal": 1382
 		},
 		{
 			"key": "minecraft:entity.salmon.ambient",
 			"name": "ENTITY.SALMON.AMBIENT",
-			"ordinal": 1343
+			"ordinal": 1383
 		},
 		{
 			"key": "minecraft:entity.salmon.death",
 			"name": "ENTITY.SALMON.DEATH",
-			"ordinal": 1344
+			"ordinal": 1384
 		},
 		{
 			"key": "minecraft:entity.salmon.flop",
 			"name": "ENTITY.SALMON.FLOP",
-			"ordinal": 1345
+			"ordinal": 1385
 		},
 		{
 			"key": "minecraft:entity.salmon.hurt",
 			"name": "ENTITY.SALMON.HURT",
-			"ordinal": 1346
+			"ordinal": 1386
 		},
 		{
 			"key": "minecraft:entity.sheep.ambient",
 			"name": "ENTITY.SHEEP.AMBIENT",
-			"ordinal": 1347
+			"ordinal": 1387
 		},
 		{
 			"key": "minecraft:entity.sheep.death",
 			"name": "ENTITY.SHEEP.DEATH",
-			"ordinal": 1348
+			"ordinal": 1388
 		},
 		{
 			"key": "minecraft:entity.sheep.hurt",
 			"name": "ENTITY.SHEEP.HURT",
-			"ordinal": 1349
+			"ordinal": 1389
 		},
 		{
 			"key": "minecraft:entity.sheep.shear",
 			"name": "ENTITY.SHEEP.SHEAR",
-			"ordinal": 1350
+			"ordinal": 1390
 		},
 		{
 			"key": "minecraft:entity.sheep.step",
 			"name": "ENTITY.SHEEP.STEP",
-			"ordinal": 1351
+			"ordinal": 1391
 		},
 		{
 			"key": "minecraft:entity.shulker.ambient",
 			"name": "ENTITY.SHULKER.AMBIENT",
-			"ordinal": 1352
+			"ordinal": 1392
 		},
 		{
 			"key": "minecraft:entity.shulker.close",
 			"name": "ENTITY.SHULKER.CLOSE",
-			"ordinal": 1353
+			"ordinal": 1393
 		},
 		{
 			"key": "minecraft:entity.shulker.death",
 			"name": "ENTITY.SHULKER.DEATH",
-			"ordinal": 1354
+			"ordinal": 1394
 		},
 		{
 			"key": "minecraft:entity.shulker.hurt",
 			"name": "ENTITY.SHULKER.HURT",
-			"ordinal": 1355
+			"ordinal": 1395
 		},
 		{
 			"key": "minecraft:entity.shulker.hurt_closed",
 			"name": "ENTITY.SHULKER.HURT_CLOSED",
-			"ordinal": 1356
+			"ordinal": 1396
 		},
 		{
 			"key": "minecraft:entity.shulker.open",
 			"name": "ENTITY.SHULKER.OPEN",
-			"ordinal": 1357
+			"ordinal": 1397
 		},
 		{
 			"key": "minecraft:entity.shulker.shoot",
 			"name": "ENTITY.SHULKER.SHOOT",
-			"ordinal": 1358
+			"ordinal": 1398
 		},
 		{
 			"key": "minecraft:entity.shulker.teleport",
 			"name": "ENTITY.SHULKER.TELEPORT",
-			"ordinal": 1359
+			"ordinal": 1399
 		},
 		{
 			"key": "minecraft:entity.shulker_bullet.hit",
 			"name": "ENTITY.SHULKER_BULLET.HIT",
-			"ordinal": 1360
+			"ordinal": 1400
 		},
 		{
 			"key": "minecraft:entity.shulker_bullet.hurt",
 			"name": "ENTITY.SHULKER_BULLET.HURT",
-			"ordinal": 1361
+			"ordinal": 1401
 		},
 		{
 			"key": "minecraft:entity.silverfish.ambient",
 			"name": "ENTITY.SILVERFISH.AMBIENT",
-			"ordinal": 1362
+			"ordinal": 1402
 		},
 		{
 			"key": "minecraft:entity.silverfish.death",
 			"name": "ENTITY.SILVERFISH.DEATH",
-			"ordinal": 1363
+			"ordinal": 1403
 		},
 		{
 			"key": "minecraft:entity.silverfish.hurt",
 			"name": "ENTITY.SILVERFISH.HURT",
-			"ordinal": 1364
+			"ordinal": 1404
 		},
 		{
 			"key": "minecraft:entity.silverfish.step",
 			"name": "ENTITY.SILVERFISH.STEP",
-			"ordinal": 1365
+			"ordinal": 1405
 		},
 		{
 			"key": "minecraft:entity.skeleton.ambient",
 			"name": "ENTITY.SKELETON.AMBIENT",
-			"ordinal": 1366
+			"ordinal": 1406
 		},
 		{
 			"key": "minecraft:entity.skeleton.converted_to_stray",
 			"name": "ENTITY.SKELETON.CONVERTED_TO_STRAY",
-			"ordinal": 1367
+			"ordinal": 1407
 		},
 		{
 			"key": "minecraft:entity.skeleton.death",
 			"name": "ENTITY.SKELETON.DEATH",
-			"ordinal": 1368
+			"ordinal": 1408
 		},
 		{
 			"key": "minecraft:entity.skeleton.hurt",
 			"name": "ENTITY.SKELETON.HURT",
-			"ordinal": 1369
+			"ordinal": 1409
 		},
 		{
 			"key": "minecraft:entity.skeleton.shoot",
 			"name": "ENTITY.SKELETON.SHOOT",
-			"ordinal": 1370
+			"ordinal": 1410
 		},
 		{
 			"key": "minecraft:entity.skeleton.step",
 			"name": "ENTITY.SKELETON.STEP",
-			"ordinal": 1371
+			"ordinal": 1411
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.ambient",
 			"name": "ENTITY.SKELETON_HORSE.AMBIENT",
-			"ordinal": 1372
+			"ordinal": 1412
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.ambient_water",
 			"name": "ENTITY.SKELETON_HORSE.AMBIENT_WATER",
-			"ordinal": 1373
+			"ordinal": 1413
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.death",
 			"name": "ENTITY.SKELETON_HORSE.DEATH",
-			"ordinal": 1374
+			"ordinal": 1414
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.gallop_water",
 			"name": "ENTITY.SKELETON_HORSE.GALLOP_WATER",
-			"ordinal": 1375
+			"ordinal": 1415
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.hurt",
 			"name": "ENTITY.SKELETON_HORSE.HURT",
-			"ordinal": 1376
+			"ordinal": 1416
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.jump_water",
 			"name": "ENTITY.SKELETON_HORSE.JUMP_WATER",
-			"ordinal": 1377
+			"ordinal": 1417
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.step_water",
 			"name": "ENTITY.SKELETON_HORSE.STEP_WATER",
-			"ordinal": 1378
+			"ordinal": 1418
 		},
 		{
 			"key": "minecraft:entity.skeleton_horse.swim",
 			"name": "ENTITY.SKELETON_HORSE.SWIM",
-			"ordinal": 1379
+			"ordinal": 1419
 		},
 		{
 			"key": "minecraft:entity.slime.attack",
 			"name": "ENTITY.SLIME.ATTACK",
-			"ordinal": 1380
+			"ordinal": 1420
 		},
 		{
 			"key": "minecraft:entity.slime.death",
 			"name": "ENTITY.SLIME.DEATH",
-			"ordinal": 1381
+			"ordinal": 1421
 		},
 		{
 			"key": "minecraft:entity.slime.death_small",
 			"name": "ENTITY.SLIME.DEATH_SMALL",
-			"ordinal": 1382
+			"ordinal": 1422
 		},
 		{
 			"key": "minecraft:entity.slime.hurt",
 			"name": "ENTITY.SLIME.HURT",
-			"ordinal": 1383
+			"ordinal": 1423
 		},
 		{
 			"key": "minecraft:entity.slime.hurt_small",
 			"name": "ENTITY.SLIME.HURT_SMALL",
-			"ordinal": 1384
+			"ordinal": 1424
 		},
 		{
 			"key": "minecraft:entity.slime.jump",
 			"name": "ENTITY.SLIME.JUMP",
-			"ordinal": 1385
+			"ordinal": 1425
 		},
 		{
 			"key": "minecraft:entity.slime.jump_small",
 			"name": "ENTITY.SLIME.JUMP_SMALL",
-			"ordinal": 1386
+			"ordinal": 1426
 		},
 		{
 			"key": "minecraft:entity.slime.squish",
 			"name": "ENTITY.SLIME.SQUISH",
-			"ordinal": 1387
+			"ordinal": 1427
 		},
 		{
 			"key": "minecraft:entity.slime.squish_small",
 			"name": "ENTITY.SLIME.SQUISH_SMALL",
-			"ordinal": 1388
+			"ordinal": 1428
 		},
 		{
 			"key": "minecraft:entity.sniffer.death",
 			"name": "ENTITY.SNIFFER.DEATH",
-			"ordinal": 1389
+			"ordinal": 1429
 		},
 		{
 			"key": "minecraft:entity.sniffer.digging",
 			"name": "ENTITY.SNIFFER.DIGGING",
-			"ordinal": 1390
+			"ordinal": 1430
 		},
 		{
 			"key": "minecraft:entity.sniffer.digging_stop",
 			"name": "ENTITY.SNIFFER.DIGGING_STOP",
-			"ordinal": 1391
+			"ordinal": 1431
 		},
 		{
 			"key": "minecraft:entity.sniffer.drop_seed",
 			"name": "ENTITY.SNIFFER.DROP_SEED",
-			"ordinal": 1392
+			"ordinal": 1432
 		},
 		{
 			"key": "minecraft:entity.sniffer.eat",
 			"name": "ENTITY.SNIFFER.EAT",
-			"ordinal": 1393
+			"ordinal": 1433
 		},
 		{
 			"key": "minecraft:entity.sniffer.happy",
 			"name": "ENTITY.SNIFFER.HAPPY",
-			"ordinal": 1394
+			"ordinal": 1434
 		},
 		{
 			"key": "minecraft:entity.sniffer.hurt",
 			"name": "ENTITY.SNIFFER.HURT",
-			"ordinal": 1395
+			"ordinal": 1435
 		},
 		{
 			"key": "minecraft:entity.sniffer.idle",
 			"name": "ENTITY.SNIFFER.IDLE",
-			"ordinal": 1396
+			"ordinal": 1436
 		},
 		{
 			"key": "minecraft:entity.sniffer.scenting",
 			"name": "ENTITY.SNIFFER.SCENTING",
-			"ordinal": 1397
+			"ordinal": 1437
 		},
 		{
 			"key": "minecraft:entity.sniffer.searching",
 			"name": "ENTITY.SNIFFER.SEARCHING",
-			"ordinal": 1398
+			"ordinal": 1438
 		},
 		{
 			"key": "minecraft:entity.sniffer.sniffing",
 			"name": "ENTITY.SNIFFER.SNIFFING",
-			"ordinal": 1399
+			"ordinal": 1439
 		},
 		{
 			"key": "minecraft:entity.sniffer.step",
 			"name": "ENTITY.SNIFFER.STEP",
-			"ordinal": 1400
+			"ordinal": 1440
 		},
 		{
 			"key": "minecraft:entity.snow_golem.ambient",
 			"name": "ENTITY.SNOW_GOLEM.AMBIENT",
-			"ordinal": 1401
+			"ordinal": 1441
 		},
 		{
 			"key": "minecraft:entity.snow_golem.death",
 			"name": "ENTITY.SNOW_GOLEM.DEATH",
-			"ordinal": 1402
+			"ordinal": 1442
 		},
 		{
 			"key": "minecraft:entity.snow_golem.hurt",
 			"name": "ENTITY.SNOW_GOLEM.HURT",
-			"ordinal": 1403
+			"ordinal": 1443
 		},
 		{
 			"key": "minecraft:entity.snow_golem.shear",
 			"name": "ENTITY.SNOW_GOLEM.SHEAR",
-			"ordinal": 1404
+			"ordinal": 1444
 		},
 		{
 			"key": "minecraft:entity.snow_golem.shoot",
 			"name": "ENTITY.SNOW_GOLEM.SHOOT",
-			"ordinal": 1405
+			"ordinal": 1445
 		},
 		{
 			"key": "minecraft:entity.snowball.throw",
 			"name": "ENTITY.SNOWBALL.THROW",
-			"ordinal": 1406
+			"ordinal": 1446
 		},
 		{
 			"key": "minecraft:entity.spider.ambient",
 			"name": "ENTITY.SPIDER.AMBIENT",
-			"ordinal": 1407
+			"ordinal": 1447
 		},
 		{
 			"key": "minecraft:entity.spider.death",
 			"name": "ENTITY.SPIDER.DEATH",
-			"ordinal": 1408
+			"ordinal": 1448
 		},
 		{
 			"key": "minecraft:entity.spider.hurt",
 			"name": "ENTITY.SPIDER.HURT",
-			"ordinal": 1409
+			"ordinal": 1449
 		},
 		{
 			"key": "minecraft:entity.spider.step",
 			"name": "ENTITY.SPIDER.STEP",
-			"ordinal": 1410
+			"ordinal": 1450
 		},
 		{
 			"key": "minecraft:entity.splash_potion.break",
 			"name": "ENTITY.SPLASH_POTION.BREAK",
-			"ordinal": 1411
+			"ordinal": 1451
 		},
 		{
 			"key": "minecraft:entity.splash_potion.throw",
 			"name": "ENTITY.SPLASH_POTION.THROW",
-			"ordinal": 1412
+			"ordinal": 1452
 		},
 		{
 			"key": "minecraft:entity.squid.ambient",
 			"name": "ENTITY.SQUID.AMBIENT",
-			"ordinal": 1413
+			"ordinal": 1453
 		},
 		{
 			"key": "minecraft:entity.squid.death",
 			"name": "ENTITY.SQUID.DEATH",
-			"ordinal": 1414
+			"ordinal": 1454
 		},
 		{
 			"key": "minecraft:entity.squid.hurt",
 			"name": "ENTITY.SQUID.HURT",
-			"ordinal": 1415
+			"ordinal": 1455
 		},
 		{
 			"key": "minecraft:entity.squid.squirt",
 			"name": "ENTITY.SQUID.SQUIRT",
-			"ordinal": 1416
+			"ordinal": 1456
 		},
 		{
 			"key": "minecraft:entity.stray.ambient",
 			"name": "ENTITY.STRAY.AMBIENT",
-			"ordinal": 1417
+			"ordinal": 1457
 		},
 		{
 			"key": "minecraft:entity.stray.death",
 			"name": "ENTITY.STRAY.DEATH",
-			"ordinal": 1418
+			"ordinal": 1458
 		},
 		{
 			"key": "minecraft:entity.stray.hurt",
 			"name": "ENTITY.STRAY.HURT",
-			"ordinal": 1419
+			"ordinal": 1459
 		},
 		{
 			"key": "minecraft:entity.stray.step",
 			"name": "ENTITY.STRAY.STEP",
-			"ordinal": 1420
+			"ordinal": 1460
 		},
 		{
 			"key": "minecraft:entity.strider.ambient",
 			"name": "ENTITY.STRIDER.AMBIENT",
-			"ordinal": 1421
+			"ordinal": 1461
 		},
 		{
 			"key": "minecraft:entity.strider.death",
 			"name": "ENTITY.STRIDER.DEATH",
-			"ordinal": 1422
+			"ordinal": 1462
 		},
 		{
 			"key": "minecraft:entity.strider.eat",
 			"name": "ENTITY.STRIDER.EAT",
-			"ordinal": 1423
+			"ordinal": 1463
 		},
 		{
 			"key": "minecraft:entity.strider.happy",
 			"name": "ENTITY.STRIDER.HAPPY",
-			"ordinal": 1424
+			"ordinal": 1464
 		},
 		{
 			"key": "minecraft:entity.strider.hurt",
 			"name": "ENTITY.STRIDER.HURT",
-			"ordinal": 1425
+			"ordinal": 1465
 		},
 		{
 			"key": "minecraft:entity.strider.retreat",
 			"name": "ENTITY.STRIDER.RETREAT",
-			"ordinal": 1426
+			"ordinal": 1466
 		},
 		{
 			"key": "minecraft:entity.strider.saddle",
 			"name": "ENTITY.STRIDER.SADDLE",
-			"ordinal": 1427
+			"ordinal": 1467
 		},
 		{
 			"key": "minecraft:entity.strider.step",
 			"name": "ENTITY.STRIDER.STEP",
-			"ordinal": 1428
+			"ordinal": 1468
 		},
 		{
 			"key": "minecraft:entity.strider.step_lava",
 			"name": "ENTITY.STRIDER.STEP_LAVA",
-			"ordinal": 1429
+			"ordinal": 1469
 		},
 		{
 			"key": "minecraft:entity.tadpole.death",
 			"name": "ENTITY.TADPOLE.DEATH",
-			"ordinal": 1430
+			"ordinal": 1470
 		},
 		{
 			"key": "minecraft:entity.tadpole.flop",
 			"name": "ENTITY.TADPOLE.FLOP",
-			"ordinal": 1431
+			"ordinal": 1471
 		},
 		{
 			"key": "minecraft:entity.tadpole.grow_up",
 			"name": "ENTITY.TADPOLE.GROW_UP",
-			"ordinal": 1432
+			"ordinal": 1472
 		},
 		{
 			"key": "minecraft:entity.tadpole.hurt",
 			"name": "ENTITY.TADPOLE.HURT",
-			"ordinal": 1433
+			"ordinal": 1473
 		},
 		{
 			"key": "minecraft:entity.tnt.primed",
 			"name": "ENTITY.TNT.PRIMED",
-			"ordinal": 1434
+			"ordinal": 1474
 		},
 		{
 			"key": "minecraft:entity.tropical_fish.ambient",
 			"name": "ENTITY.TROPICAL_FISH.AMBIENT",
-			"ordinal": 1435
+			"ordinal": 1475
 		},
 		{
 			"key": "minecraft:entity.tropical_fish.death",
 			"name": "ENTITY.TROPICAL_FISH.DEATH",
-			"ordinal": 1436
+			"ordinal": 1476
 		},
 		{
 			"key": "minecraft:entity.tropical_fish.flop",
 			"name": "ENTITY.TROPICAL_FISH.FLOP",
-			"ordinal": 1437
+			"ordinal": 1477
 		},
 		{
 			"key": "minecraft:entity.tropical_fish.hurt",
 			"name": "ENTITY.TROPICAL_FISH.HURT",
-			"ordinal": 1438
+			"ordinal": 1478
 		},
 		{
 			"key": "minecraft:entity.turtle.ambient_land",
 			"name": "ENTITY.TURTLE.AMBIENT_LAND",
-			"ordinal": 1439
+			"ordinal": 1479
 		},
 		{
 			"key": "minecraft:entity.turtle.death",
 			"name": "ENTITY.TURTLE.DEATH",
-			"ordinal": 1440
+			"ordinal": 1480
 		},
 		{
 			"key": "minecraft:entity.turtle.death_baby",
 			"name": "ENTITY.TURTLE.DEATH_BABY",
-			"ordinal": 1441
+			"ordinal": 1481
 		},
 		{
 			"key": "minecraft:entity.turtle.egg_break",
 			"name": "ENTITY.TURTLE.EGG_BREAK",
-			"ordinal": 1442
+			"ordinal": 1482
 		},
 		{
 			"key": "minecraft:entity.turtle.egg_crack",
 			"name": "ENTITY.TURTLE.EGG_CRACK",
-			"ordinal": 1443
+			"ordinal": 1483
 		},
 		{
 			"key": "minecraft:entity.turtle.egg_hatch",
 			"name": "ENTITY.TURTLE.EGG_HATCH",
-			"ordinal": 1444
+			"ordinal": 1484
 		},
 		{
 			"key": "minecraft:entity.turtle.hurt",
 			"name": "ENTITY.TURTLE.HURT",
-			"ordinal": 1445
+			"ordinal": 1485
 		},
 		{
 			"key": "minecraft:entity.turtle.hurt_baby",
 			"name": "ENTITY.TURTLE.HURT_BABY",
-			"ordinal": 1446
+			"ordinal": 1486
 		},
 		{
 			"key": "minecraft:entity.turtle.lay_egg",
 			"name": "ENTITY.TURTLE.LAY_EGG",
-			"ordinal": 1447
+			"ordinal": 1487
 		},
 		{
 			"key": "minecraft:entity.turtle.shamble",
 			"name": "ENTITY.TURTLE.SHAMBLE",
-			"ordinal": 1448
+			"ordinal": 1488
 		},
 		{
 			"key": "minecraft:entity.turtle.shamble_baby",
 			"name": "ENTITY.TURTLE.SHAMBLE_BABY",
-			"ordinal": 1449
+			"ordinal": 1489
 		},
 		{
 			"key": "minecraft:entity.turtle.swim",
 			"name": "ENTITY.TURTLE.SWIM",
-			"ordinal": 1450
+			"ordinal": 1490
 		},
 		{
 			"key": "minecraft:entity.vex.ambient",
 			"name": "ENTITY.VEX.AMBIENT",
-			"ordinal": 1451
+			"ordinal": 1491
 		},
 		{
 			"key": "minecraft:entity.vex.charge",
 			"name": "ENTITY.VEX.CHARGE",
-			"ordinal": 1452
+			"ordinal": 1492
 		},
 		{
 			"key": "minecraft:entity.vex.death",
 			"name": "ENTITY.VEX.DEATH",
-			"ordinal": 1453
+			"ordinal": 1493
 		},
 		{
 			"key": "minecraft:entity.vex.hurt",
 			"name": "ENTITY.VEX.HURT",
-			"ordinal": 1454
+			"ordinal": 1494
 		},
 		{
 			"key": "minecraft:entity.villager.ambient",
 			"name": "ENTITY.VILLAGER.AMBIENT",
-			"ordinal": 1455
+			"ordinal": 1495
 		},
 		{
 			"key": "minecraft:entity.villager.celebrate",
 			"name": "ENTITY.VILLAGER.CELEBRATE",
-			"ordinal": 1456
+			"ordinal": 1496
 		},
 		{
 			"key": "minecraft:entity.villager.death",
 			"name": "ENTITY.VILLAGER.DEATH",
-			"ordinal": 1457
+			"ordinal": 1497
 		},
 		{
 			"key": "minecraft:entity.villager.hurt",
 			"name": "ENTITY.VILLAGER.HURT",
-			"ordinal": 1458
+			"ordinal": 1498
 		},
 		{
 			"key": "minecraft:entity.villager.no",
 			"name": "ENTITY.VILLAGER.NO",
-			"ordinal": 1459
+			"ordinal": 1499
 		},
 		{
 			"key": "minecraft:entity.villager.trade",
 			"name": "ENTITY.VILLAGER.TRADE",
-			"ordinal": 1460
+			"ordinal": 1500
 		},
 		{
 			"key": "minecraft:entity.villager.work_armorer",
 			"name": "ENTITY.VILLAGER.WORK_ARMORER",
-			"ordinal": 1461
+			"ordinal": 1501
 		},
 		{
 			"key": "minecraft:entity.villager.work_butcher",
 			"name": "ENTITY.VILLAGER.WORK_BUTCHER",
-			"ordinal": 1462
+			"ordinal": 1502
 		},
 		{
 			"key": "minecraft:entity.villager.work_cartographer",
 			"name": "ENTITY.VILLAGER.WORK_CARTOGRAPHER",
-			"ordinal": 1463
+			"ordinal": 1503
 		},
 		{
 			"key": "minecraft:entity.villager.work_cleric",
 			"name": "ENTITY.VILLAGER.WORK_CLERIC",
-			"ordinal": 1464
+			"ordinal": 1504
 		},
 		{
 			"key": "minecraft:entity.villager.work_farmer",
 			"name": "ENTITY.VILLAGER.WORK_FARMER",
-			"ordinal": 1465
+			"ordinal": 1505
 		},
 		{
 			"key": "minecraft:entity.villager.work_fisherman",
 			"name": "ENTITY.VILLAGER.WORK_FISHERMAN",
-			"ordinal": 1466
+			"ordinal": 1506
 		},
 		{
 			"key": "minecraft:entity.villager.work_fletcher",
 			"name": "ENTITY.VILLAGER.WORK_FLETCHER",
-			"ordinal": 1467
+			"ordinal": 1507
 		},
 		{
 			"key": "minecraft:entity.villager.work_leatherworker",
 			"name": "ENTITY.VILLAGER.WORK_LEATHERWORKER",
-			"ordinal": 1468
+			"ordinal": 1508
 		},
 		{
 			"key": "minecraft:entity.villager.work_librarian",
 			"name": "ENTITY.VILLAGER.WORK_LIBRARIAN",
-			"ordinal": 1469
+			"ordinal": 1509
 		},
 		{
 			"key": "minecraft:entity.villager.work_mason",
 			"name": "ENTITY.VILLAGER.WORK_MASON",
-			"ordinal": 1470
+			"ordinal": 1510
 		},
 		{
 			"key": "minecraft:entity.villager.work_shepherd",
 			"name": "ENTITY.VILLAGER.WORK_SHEPHERD",
-			"ordinal": 1471
+			"ordinal": 1511
 		},
 		{
 			"key": "minecraft:entity.villager.work_toolsmith",
 			"name": "ENTITY.VILLAGER.WORK_TOOLSMITH",
-			"ordinal": 1472
+			"ordinal": 1512
 		},
 		{
 			"key": "minecraft:entity.villager.work_weaponsmith",
 			"name": "ENTITY.VILLAGER.WORK_WEAPONSMITH",
-			"ordinal": 1473
+			"ordinal": 1513
 		},
 		{
 			"key": "minecraft:entity.villager.yes",
 			"name": "ENTITY.VILLAGER.YES",
-			"ordinal": 1474
+			"ordinal": 1514
 		},
 		{
 			"key": "minecraft:entity.vindicator.ambient",
 			"name": "ENTITY.VINDICATOR.AMBIENT",
-			"ordinal": 1475
+			"ordinal": 1515
 		},
 		{
 			"key": "minecraft:entity.vindicator.celebrate",
 			"name": "ENTITY.VINDICATOR.CELEBRATE",
-			"ordinal": 1476
+			"ordinal": 1516
 		},
 		{
 			"key": "minecraft:entity.vindicator.death",
 			"name": "ENTITY.VINDICATOR.DEATH",
-			"ordinal": 1477
+			"ordinal": 1517
 		},
 		{
 			"key": "minecraft:entity.vindicator.hurt",
 			"name": "ENTITY.VINDICATOR.HURT",
-			"ordinal": 1478
+			"ordinal": 1518
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.ambient",
 			"name": "ENTITY.WANDERING_TRADER.AMBIENT",
-			"ordinal": 1479
+			"ordinal": 1519
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.death",
 			"name": "ENTITY.WANDERING_TRADER.DEATH",
-			"ordinal": 1480
+			"ordinal": 1520
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.disappeared",
 			"name": "ENTITY.WANDERING_TRADER.DISAPPEARED",
-			"ordinal": 1481
+			"ordinal": 1521
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.drink_milk",
 			"name": "ENTITY.WANDERING_TRADER.DRINK_MILK",
-			"ordinal": 1482
+			"ordinal": 1522
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.drink_potion",
 			"name": "ENTITY.WANDERING_TRADER.DRINK_POTION",
-			"ordinal": 1483
+			"ordinal": 1523
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.hurt",
 			"name": "ENTITY.WANDERING_TRADER.HURT",
-			"ordinal": 1484
+			"ordinal": 1524
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.no",
 			"name": "ENTITY.WANDERING_TRADER.NO",
-			"ordinal": 1485
+			"ordinal": 1525
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.reappeared",
 			"name": "ENTITY.WANDERING_TRADER.REAPPEARED",
-			"ordinal": 1486
+			"ordinal": 1526
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.trade",
 			"name": "ENTITY.WANDERING_TRADER.TRADE",
-			"ordinal": 1487
+			"ordinal": 1527
 		},
 		{
 			"key": "minecraft:entity.wandering_trader.yes",
 			"name": "ENTITY.WANDERING_TRADER.YES",
-			"ordinal": 1488
+			"ordinal": 1528
 		},
 		{
 			"key": "minecraft:entity.warden.agitated",
 			"name": "ENTITY.WARDEN.AGITATED",
-			"ordinal": 1489
+			"ordinal": 1529
 		},
 		{
 			"key": "minecraft:entity.warden.ambient",
 			"name": "ENTITY.WARDEN.AMBIENT",
-			"ordinal": 1490
+			"ordinal": 1530
 		},
 		{
 			"key": "minecraft:entity.warden.angry",
 			"name": "ENTITY.WARDEN.ANGRY",
-			"ordinal": 1491
+			"ordinal": 1531
 		},
 		{
 			"key": "minecraft:entity.warden.attack_impact",
 			"name": "ENTITY.WARDEN.ATTACK_IMPACT",
-			"ordinal": 1492
+			"ordinal": 1532
 		},
 		{
 			"key": "minecraft:entity.warden.death",
 			"name": "ENTITY.WARDEN.DEATH",
-			"ordinal": 1493
+			"ordinal": 1533
 		},
 		{
 			"key": "minecraft:entity.warden.dig",
 			"name": "ENTITY.WARDEN.DIG",
-			"ordinal": 1494
+			"ordinal": 1534
 		},
 		{
 			"key": "minecraft:entity.warden.emerge",
 			"name": "ENTITY.WARDEN.EMERGE",
-			"ordinal": 1495
+			"ordinal": 1535
 		},
 		{
 			"key": "minecraft:entity.warden.heartbeat",
 			"name": "ENTITY.WARDEN.HEARTBEAT",
-			"ordinal": 1496
+			"ordinal": 1536
 		},
 		{
 			"key": "minecraft:entity.warden.hurt",
 			"name": "ENTITY.WARDEN.HURT",
-			"ordinal": 1497
+			"ordinal": 1537
 		},
 		{
 			"key": "minecraft:entity.warden.listening",
 			"name": "ENTITY.WARDEN.LISTENING",
-			"ordinal": 1498
+			"ordinal": 1538
 		},
 		{
 			"key": "minecraft:entity.warden.listening_angry",
 			"name": "ENTITY.WARDEN.LISTENING_ANGRY",
-			"ordinal": 1499
+			"ordinal": 1539
 		},
 		{
 			"key": "minecraft:entity.warden.nearby_close",
 			"name": "ENTITY.WARDEN.NEARBY_CLOSE",
-			"ordinal": 1500
+			"ordinal": 1540
 		},
 		{
 			"key": "minecraft:entity.warden.nearby_closer",
 			"name": "ENTITY.WARDEN.NEARBY_CLOSER",
-			"ordinal": 1501
+			"ordinal": 1541
 		},
 		{
 			"key": "minecraft:entity.warden.nearby_closest",
 			"name": "ENTITY.WARDEN.NEARBY_CLOSEST",
-			"ordinal": 1502
+			"ordinal": 1542
 		},
 		{
 			"key": "minecraft:entity.warden.roar",
 			"name": "ENTITY.WARDEN.ROAR",
-			"ordinal": 1503
+			"ordinal": 1543
 		},
 		{
 			"key": "minecraft:entity.warden.sniff",
 			"name": "ENTITY.WARDEN.SNIFF",
-			"ordinal": 1504
+			"ordinal": 1544
 		},
 		{
 			"key": "minecraft:entity.warden.sonic_boom",
 			"name": "ENTITY.WARDEN.SONIC_BOOM",
-			"ordinal": 1505
+			"ordinal": 1545
 		},
 		{
 			"key": "minecraft:entity.warden.sonic_charge",
 			"name": "ENTITY.WARDEN.SONIC_CHARGE",
-			"ordinal": 1506
+			"ordinal": 1546
 		},
 		{
 			"key": "minecraft:entity.warden.step",
 			"name": "ENTITY.WARDEN.STEP",
-			"ordinal": 1507
+			"ordinal": 1547
 		},
 		{
 			"key": "minecraft:entity.warden.tendril_clicks",
 			"name": "ENTITY.WARDEN.TENDRIL_CLICKS",
-			"ordinal": 1508
+			"ordinal": 1548
 		},
 		{
 			"key": "minecraft:entity.wind_charge.throw",
 			"name": "ENTITY.WIND_CHARGE.THROW",
-			"ordinal": 1509
+			"ordinal": 1549
 		},
 		{
 			"key": "minecraft:entity.wind_charge.wind_burst",
 			"name": "ENTITY.WIND_CHARGE.WIND_BURST",
-			"ordinal": 1510
+			"ordinal": 1550
 		},
 		{
 			"key": "minecraft:entity.witch.ambient",
 			"name": "ENTITY.WITCH.AMBIENT",
-			"ordinal": 1511
+			"ordinal": 1551
 		},
 		{
 			"key": "minecraft:entity.witch.celebrate",
 			"name": "ENTITY.WITCH.CELEBRATE",
-			"ordinal": 1512
+			"ordinal": 1552
 		},
 		{
 			"key": "minecraft:entity.witch.death",
 			"name": "ENTITY.WITCH.DEATH",
-			"ordinal": 1513
+			"ordinal": 1553
 		},
 		{
 			"key": "minecraft:entity.witch.drink",
 			"name": "ENTITY.WITCH.DRINK",
-			"ordinal": 1514
+			"ordinal": 1554
 		},
 		{
 			"key": "minecraft:entity.witch.hurt",
 			"name": "ENTITY.WITCH.HURT",
-			"ordinal": 1515
+			"ordinal": 1555
 		},
 		{
 			"key": "minecraft:entity.witch.throw",
 			"name": "ENTITY.WITCH.THROW",
-			"ordinal": 1516
+			"ordinal": 1556
 		},
 		{
 			"key": "minecraft:entity.wither.ambient",
 			"name": "ENTITY.WITHER.AMBIENT",
-			"ordinal": 1517
+			"ordinal": 1557
 		},
 		{
 			"key": "minecraft:entity.wither.break_block",
 			"name": "ENTITY.WITHER.BREAK_BLOCK",
-			"ordinal": 1518
+			"ordinal": 1558
 		},
 		{
 			"key": "minecraft:entity.wither.death",
 			"name": "ENTITY.WITHER.DEATH",
-			"ordinal": 1519
+			"ordinal": 1559
 		},
 		{
 			"key": "minecraft:entity.wither.hurt",
 			"name": "ENTITY.WITHER.HURT",
-			"ordinal": 1520
+			"ordinal": 1560
 		},
 		{
 			"key": "minecraft:entity.wither.shoot",
 			"name": "ENTITY.WITHER.SHOOT",
-			"ordinal": 1521
+			"ordinal": 1561
 		},
 		{
 			"key": "minecraft:entity.wither.spawn",
 			"name": "ENTITY.WITHER.SPAWN",
-			"ordinal": 1522
+			"ordinal": 1562
 		},
 		{
 			"key": "minecraft:entity.wither_skeleton.ambient",
 			"name": "ENTITY.WITHER_SKELETON.AMBIENT",
-			"ordinal": 1523
+			"ordinal": 1563
 		},
 		{
 			"key": "minecraft:entity.wither_skeleton.death",
 			"name": "ENTITY.WITHER_SKELETON.DEATH",
-			"ordinal": 1524
+			"ordinal": 1564
 		},
 		{
 			"key": "minecraft:entity.wither_skeleton.hurt",
 			"name": "ENTITY.WITHER_SKELETON.HURT",
-			"ordinal": 1525
+			"ordinal": 1565
 		},
 		{
 			"key": "minecraft:entity.wither_skeleton.step",
 			"name": "ENTITY.WITHER_SKELETON.STEP",
-			"ordinal": 1526
+			"ordinal": 1566
 		},
 		{
 			"key": "minecraft:entity.wolf.ambient",
 			"name": "ENTITY.WOLF.AMBIENT",
-			"ordinal": 1527
+			"ordinal": 1567
 		},
 		{
 			"key": "minecraft:entity.wolf.death",
 			"name": "ENTITY.WOLF.DEATH",
-			"ordinal": 1528
+			"ordinal": 1568
 		},
 		{
 			"key": "minecraft:entity.wolf.growl",
 			"name": "ENTITY.WOLF.GROWL",
-			"ordinal": 1529
+			"ordinal": 1569
 		},
 		{
 			"key": "minecraft:entity.wolf.hurt",
 			"name": "ENTITY.WOLF.HURT",
-			"ordinal": 1530
+			"ordinal": 1570
 		},
 		{
 			"key": "minecraft:entity.wolf.pant",
 			"name": "ENTITY.WOLF.PANT",
-			"ordinal": 1531
+			"ordinal": 1571
 		},
 		{
 			"key": "minecraft:entity.wolf.shake",
 			"name": "ENTITY.WOLF.SHAKE",
-			"ordinal": 1532
+			"ordinal": 1572
 		},
 		{
 			"key": "minecraft:entity.wolf.step",
 			"name": "ENTITY.WOLF.STEP",
-			"ordinal": 1533
+			"ordinal": 1573
 		},
 		{
 			"key": "minecraft:entity.wolf.whine",
 			"name": "ENTITY.WOLF.WHINE",
-			"ordinal": 1534
+			"ordinal": 1574
 		},
 		{
 			"key": "minecraft:entity.wolf_angry.ambient",
 			"name": "ENTITY.WOLF_ANGRY.AMBIENT",
-			"ordinal": 1535
+			"ordinal": 1575
 		},
 		{
 			"key": "minecraft:entity.wolf_angry.death",
 			"name": "ENTITY.WOLF_ANGRY.DEATH",
-			"ordinal": 1536
+			"ordinal": 1576
 		},
 		{
 			"key": "minecraft:entity.wolf_angry.growl",
 			"name": "ENTITY.WOLF_ANGRY.GROWL",
-			"ordinal": 1537
+			"ordinal": 1577
 		},
 		{
 			"key": "minecraft:entity.wolf_angry.hurt",
 			"name": "ENTITY.WOLF_ANGRY.HURT",
-			"ordinal": 1538
+			"ordinal": 1578
 		},
 		{
 			"key": "minecraft:entity.wolf_angry.pant",
 			"name": "ENTITY.WOLF_ANGRY.PANT",
-			"ordinal": 1539
+			"ordinal": 1579
 		},
 		{
 			"key": "minecraft:entity.wolf_angry.whine",
 			"name": "ENTITY.WOLF_ANGRY.WHINE",
-			"ordinal": 1540
+			"ordinal": 1580
 		},
 		{
 			"key": "minecraft:entity.wolf_big.ambient",
 			"name": "ENTITY.WOLF_BIG.AMBIENT",
-			"ordinal": 1541
+			"ordinal": 1581
 		},
 		{
 			"key": "minecraft:entity.wolf_big.death",
 			"name": "ENTITY.WOLF_BIG.DEATH",
-			"ordinal": 1542
+			"ordinal": 1582
 		},
 		{
 			"key": "minecraft:entity.wolf_big.growl",
 			"name": "ENTITY.WOLF_BIG.GROWL",
-			"ordinal": 1543
+			"ordinal": 1583
 		},
 		{
 			"key": "minecraft:entity.wolf_big.hurt",
 			"name": "ENTITY.WOLF_BIG.HURT",
-			"ordinal": 1544
+			"ordinal": 1584
 		},
 		{
 			"key": "minecraft:entity.wolf_big.pant",
 			"name": "ENTITY.WOLF_BIG.PANT",
-			"ordinal": 1545
+			"ordinal": 1585
 		},
 		{
 			"key": "minecraft:entity.wolf_big.whine",
 			"name": "ENTITY.WOLF_BIG.WHINE",
-			"ordinal": 1546
+			"ordinal": 1586
 		},
 		{
 			"key": "minecraft:entity.wolf_cute.ambient",
 			"name": "ENTITY.WOLF_CUTE.AMBIENT",
-			"ordinal": 1547
+			"ordinal": 1587
 		},
 		{
 			"key": "minecraft:entity.wolf_cute.death",
 			"name": "ENTITY.WOLF_CUTE.DEATH",
-			"ordinal": 1548
+			"ordinal": 1588
 		},
 		{
 			"key": "minecraft:entity.wolf_cute.growl",
 			"name": "ENTITY.WOLF_CUTE.GROWL",
-			"ordinal": 1549
+			"ordinal": 1589
 		},
 		{
 			"key": "minecraft:entity.wolf_cute.hurt",
 			"name": "ENTITY.WOLF_CUTE.HURT",
-			"ordinal": 1550
+			"ordinal": 1590
 		},
 		{
 			"key": "minecraft:entity.wolf_cute.pant",
 			"name": "ENTITY.WOLF_CUTE.PANT",
-			"ordinal": 1551
+			"ordinal": 1591
 		},
 		{
 			"key": "minecraft:entity.wolf_cute.whine",
 			"name": "ENTITY.WOLF_CUTE.WHINE",
-			"ordinal": 1552
+			"ordinal": 1592
 		},
 		{
 			"key": "minecraft:entity.wolf_grumpy.ambient",
 			"name": "ENTITY.WOLF_GRUMPY.AMBIENT",
-			"ordinal": 1553
+			"ordinal": 1593
 		},
 		{
 			"key": "minecraft:entity.wolf_grumpy.death",
 			"name": "ENTITY.WOLF_GRUMPY.DEATH",
-			"ordinal": 1554
+			"ordinal": 1594
 		},
 		{
 			"key": "minecraft:entity.wolf_grumpy.growl",
 			"name": "ENTITY.WOLF_GRUMPY.GROWL",
-			"ordinal": 1555
+			"ordinal": 1595
 		},
 		{
 			"key": "minecraft:entity.wolf_grumpy.hurt",
 			"name": "ENTITY.WOLF_GRUMPY.HURT",
-			"ordinal": 1556
+			"ordinal": 1596
 		},
 		{
 			"key": "minecraft:entity.wolf_grumpy.pant",
 			"name": "ENTITY.WOLF_GRUMPY.PANT",
-			"ordinal": 1557
+			"ordinal": 1597
 		},
 		{
 			"key": "minecraft:entity.wolf_grumpy.whine",
 			"name": "ENTITY.WOLF_GRUMPY.WHINE",
-			"ordinal": 1558
+			"ordinal": 1598
 		},
 		{
 			"key": "minecraft:entity.wolf_puglin.ambient",
 			"name": "ENTITY.WOLF_PUGLIN.AMBIENT",
-			"ordinal": 1559
+			"ordinal": 1599
 		},
 		{
 			"key": "minecraft:entity.wolf_puglin.death",
 			"name": "ENTITY.WOLF_PUGLIN.DEATH",
-			"ordinal": 1560
+			"ordinal": 1600
 		},
 		{
 			"key": "minecraft:entity.wolf_puglin.growl",
 			"name": "ENTITY.WOLF_PUGLIN.GROWL",
-			"ordinal": 1561
+			"ordinal": 1601
 		},
 		{
 			"key": "minecraft:entity.wolf_puglin.hurt",
 			"name": "ENTITY.WOLF_PUGLIN.HURT",
-			"ordinal": 1562
+			"ordinal": 1602
 		},
 		{
 			"key": "minecraft:entity.wolf_puglin.pant",
 			"name": "ENTITY.WOLF_PUGLIN.PANT",
-			"ordinal": 1563
+			"ordinal": 1603
 		},
 		{
 			"key": "minecraft:entity.wolf_puglin.whine",
 			"name": "ENTITY.WOLF_PUGLIN.WHINE",
-			"ordinal": 1564
+			"ordinal": 1604
 		},
 		{
 			"key": "minecraft:entity.wolf_sad.ambient",
 			"name": "ENTITY.WOLF_SAD.AMBIENT",
-			"ordinal": 1565
+			"ordinal": 1605
 		},
 		{
 			"key": "minecraft:entity.wolf_sad.death",
 			"name": "ENTITY.WOLF_SAD.DEATH",
-			"ordinal": 1566
+			"ordinal": 1606
 		},
 		{
 			"key": "minecraft:entity.wolf_sad.growl",
 			"name": "ENTITY.WOLF_SAD.GROWL",
-			"ordinal": 1567
+			"ordinal": 1607
 		},
 		{
 			"key": "minecraft:entity.wolf_sad.hurt",
 			"name": "ENTITY.WOLF_SAD.HURT",
-			"ordinal": 1568
+			"ordinal": 1608
 		},
 		{
 			"key": "minecraft:entity.wolf_sad.pant",
 			"name": "ENTITY.WOLF_SAD.PANT",
-			"ordinal": 1569
+			"ordinal": 1609
 		},
 		{
 			"key": "minecraft:entity.wolf_sad.whine",
 			"name": "ENTITY.WOLF_SAD.WHINE",
-			"ordinal": 1570
+			"ordinal": 1610
 		},
 		{
 			"key": "minecraft:entity.zoglin.ambient",
 			"name": "ENTITY.ZOGLIN.AMBIENT",
-			"ordinal": 1571
+			"ordinal": 1611
 		},
 		{
 			"key": "minecraft:entity.zoglin.angry",
 			"name": "ENTITY.ZOGLIN.ANGRY",
-			"ordinal": 1572
+			"ordinal": 1612
 		},
 		{
 			"key": "minecraft:entity.zoglin.attack",
 			"name": "ENTITY.ZOGLIN.ATTACK",
-			"ordinal": 1573
+			"ordinal": 1613
 		},
 		{
 			"key": "minecraft:entity.zoglin.death",
 			"name": "ENTITY.ZOGLIN.DEATH",
-			"ordinal": 1574
+			"ordinal": 1614
 		},
 		{
 			"key": "minecraft:entity.zoglin.hurt",
 			"name": "ENTITY.ZOGLIN.HURT",
-			"ordinal": 1575
+			"ordinal": 1615
 		},
 		{
 			"key": "minecraft:entity.zoglin.step",
 			"name": "ENTITY.ZOGLIN.STEP",
-			"ordinal": 1576
+			"ordinal": 1616
 		},
 		{
 			"key": "minecraft:entity.zombie.ambient",
 			"name": "ENTITY.ZOMBIE.AMBIENT",
-			"ordinal": 1577
+			"ordinal": 1617
 		},
 		{
 			"key": "minecraft:entity.zombie.attack_iron_door",
 			"name": "ENTITY.ZOMBIE.ATTACK_IRON_DOOR",
-			"ordinal": 1578
+			"ordinal": 1618
 		},
 		{
 			"key": "minecraft:entity.zombie.attack_wooden_door",
 			"name": "ENTITY.ZOMBIE.ATTACK_WOODEN_DOOR",
-			"ordinal": 1579
+			"ordinal": 1619
 		},
 		{
 			"key": "minecraft:entity.zombie.break_wooden_door",
 			"name": "ENTITY.ZOMBIE.BREAK_WOODEN_DOOR",
-			"ordinal": 1580
+			"ordinal": 1620
 		},
 		{
 			"key": "minecraft:entity.zombie.converted_to_drowned",
 			"name": "ENTITY.ZOMBIE.CONVERTED_TO_DROWNED",
-			"ordinal": 1581
+			"ordinal": 1621
 		},
 		{
 			"key": "minecraft:entity.zombie.death",
 			"name": "ENTITY.ZOMBIE.DEATH",
-			"ordinal": 1582
+			"ordinal": 1622
 		},
 		{
 			"key": "minecraft:entity.zombie.destroy_egg",
 			"name": "ENTITY.ZOMBIE.DESTROY_EGG",
-			"ordinal": 1583
+			"ordinal": 1623
 		},
 		{
 			"key": "minecraft:entity.zombie.hurt",
 			"name": "ENTITY.ZOMBIE.HURT",
-			"ordinal": 1584
+			"ordinal": 1624
 		},
 		{
 			"key": "minecraft:entity.zombie.infect",
 			"name": "ENTITY.ZOMBIE.INFECT",
-			"ordinal": 1585
+			"ordinal": 1625
 		},
 		{
 			"key": "minecraft:entity.zombie.step",
 			"name": "ENTITY.ZOMBIE.STEP",
-			"ordinal": 1586
+			"ordinal": 1626
 		},
 		{
 			"key": "minecraft:entity.zombie_horse.ambient",
 			"name": "ENTITY.ZOMBIE_HORSE.AMBIENT",
-			"ordinal": 1587
+			"ordinal": 1627
+		},
+		{
+			"key": "minecraft:entity.zombie_horse.angry",
+			"name": "ENTITY.ZOMBIE_HORSE.ANGRY",
+			"ordinal": 1628
 		},
 		{
 			"key": "minecraft:entity.zombie_horse.death",
 			"name": "ENTITY.ZOMBIE_HORSE.DEATH",
-			"ordinal": 1588
+			"ordinal": 1629
+		},
+		{
+			"key": "minecraft:entity.zombie_horse.eat",
+			"name": "ENTITY.ZOMBIE_HORSE.EAT",
+			"ordinal": 1630
 		},
 		{
 			"key": "minecraft:entity.zombie_horse.hurt",
 			"name": "ENTITY.ZOMBIE_HORSE.HURT",
-			"ordinal": 1589
+			"ordinal": 1631
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.ambient",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.AMBIENT",
+			"ordinal": 1632
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.ambient_land",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.AMBIENT_LAND",
+			"ordinal": 1633
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.dash",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.DASH",
+			"ordinal": 1634
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.dash_land",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.DASH_LAND",
+			"ordinal": 1635
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.dash_ready",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.DASH_READY",
+			"ordinal": 1636
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.dash_ready_land",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.DASH_READY_LAND",
+			"ordinal": 1637
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.death",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.DEATH",
+			"ordinal": 1638
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.death_land",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.DEATH_LAND",
+			"ordinal": 1639
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.eat",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.EAT",
+			"ordinal": 1640
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.hurt",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.HURT",
+			"ordinal": 1641
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.hurt_land",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.HURT_LAND",
+			"ordinal": 1642
+		},
+		{
+			"key": "minecraft:entity.zombie_nautilus.swim",
+			"name": "ENTITY.ZOMBIE_NAUTILUS.SWIM",
+			"ordinal": 1643
 		},
 		{
 			"key": "minecraft:entity.zombie_villager.ambient",
 			"name": "ENTITY.ZOMBIE_VILLAGER.AMBIENT",
-			"ordinal": 1590
+			"ordinal": 1644
 		},
 		{
 			"key": "minecraft:entity.zombie_villager.converted",
 			"name": "ENTITY.ZOMBIE_VILLAGER.CONVERTED",
-			"ordinal": 1591
+			"ordinal": 1645
 		},
 		{
 			"key": "minecraft:entity.zombie_villager.cure",
 			"name": "ENTITY.ZOMBIE_VILLAGER.CURE",
-			"ordinal": 1592
+			"ordinal": 1646
 		},
 		{
 			"key": "minecraft:entity.zombie_villager.death",
 			"name": "ENTITY.ZOMBIE_VILLAGER.DEATH",
-			"ordinal": 1593
+			"ordinal": 1647
 		},
 		{
 			"key": "minecraft:entity.zombie_villager.hurt",
 			"name": "ENTITY.ZOMBIE_VILLAGER.HURT",
-			"ordinal": 1594
+			"ordinal": 1648
 		},
 		{
 			"key": "minecraft:entity.zombie_villager.step",
 			"name": "ENTITY.ZOMBIE_VILLAGER.STEP",
-			"ordinal": 1595
+			"ordinal": 1649
 		},
 		{
 			"key": "minecraft:entity.zombified_piglin.ambient",
 			"name": "ENTITY.ZOMBIFIED_PIGLIN.AMBIENT",
-			"ordinal": 1596
+			"ordinal": 1650
 		},
 		{
 			"key": "minecraft:entity.zombified_piglin.angry",
 			"name": "ENTITY.ZOMBIFIED_PIGLIN.ANGRY",
-			"ordinal": 1597
+			"ordinal": 1651
 		},
 		{
 			"key": "minecraft:entity.zombified_piglin.death",
 			"name": "ENTITY.ZOMBIFIED_PIGLIN.DEATH",
-			"ordinal": 1598
+			"ordinal": 1652
 		},
 		{
 			"key": "minecraft:entity.zombified_piglin.hurt",
 			"name": "ENTITY.ZOMBIFIED_PIGLIN.HURT",
-			"ordinal": 1599
+			"ordinal": 1653
 		},
 		{
 			"key": "minecraft:event.mob_effect.bad_omen",
 			"name": "EVENT.MOB_EFFECT.BAD_OMEN",
-			"ordinal": 1600
+			"ordinal": 1654
 		},
 		{
 			"key": "minecraft:event.mob_effect.raid_omen",
 			"name": "EVENT.MOB_EFFECT.RAID_OMEN",
-			"ordinal": 1601
+			"ordinal": 1655
 		},
 		{
 			"key": "minecraft:event.mob_effect.trial_omen",
 			"name": "EVENT.MOB_EFFECT.TRIAL_OMEN",
-			"ordinal": 1602
+			"ordinal": 1656
 		},
 		{
 			"key": "minecraft:event.raid.horn",
 			"name": "EVENT.RAID.HORN",
-			"ordinal": 1603
+			"ordinal": 1657
 		},
 		{
 			"key": "minecraft:intentionally_empty",
 			"name": "INTENTIONALLY_EMPTY",
-			"ordinal": 1604
+			"ordinal": 1658
 		},
 		{
 			"key": "minecraft:item.armor.equip_chain",
 			"name": "ITEM.ARMOR.EQUIP_CHAIN",
-			"ordinal": 1605
+			"ordinal": 1659
 		},
 		{
 			"key": "minecraft:item.armor.equip_copper",
 			"name": "ITEM.ARMOR.EQUIP_COPPER",
-			"ordinal": 1606
+			"ordinal": 1660
 		},
 		{
 			"key": "minecraft:item.armor.equip_diamond",
 			"name": "ITEM.ARMOR.EQUIP_DIAMOND",
-			"ordinal": 1607
+			"ordinal": 1661
 		},
 		{
 			"key": "minecraft:item.armor.equip_elytra",
 			"name": "ITEM.ARMOR.EQUIP_ELYTRA",
-			"ordinal": 1608
+			"ordinal": 1662
 		},
 		{
 			"key": "minecraft:item.armor.equip_generic",
 			"name": "ITEM.ARMOR.EQUIP_GENERIC",
-			"ordinal": 1609
+			"ordinal": 1663
 		},
 		{
 			"key": "minecraft:item.armor.equip_gold",
 			"name": "ITEM.ARMOR.EQUIP_GOLD",
-			"ordinal": 1610
+			"ordinal": 1664
 		},
 		{
 			"key": "minecraft:item.armor.equip_iron",
 			"name": "ITEM.ARMOR.EQUIP_IRON",
-			"ordinal": 1611
+			"ordinal": 1665
 		},
 		{
 			"key": "minecraft:item.armor.equip_leather",
 			"name": "ITEM.ARMOR.EQUIP_LEATHER",
-			"ordinal": 1612
+			"ordinal": 1666
+		},
+		{
+			"key": "minecraft:item.armor.equip_nautilus",
+			"name": "ITEM.ARMOR.EQUIP_NAUTILUS",
+			"ordinal": 1667
 		},
 		{
 			"key": "minecraft:item.armor.equip_netherite",
 			"name": "ITEM.ARMOR.EQUIP_NETHERITE",
-			"ordinal": 1613
+			"ordinal": 1668
 		},
 		{
 			"key": "minecraft:item.armor.equip_turtle",
 			"name": "ITEM.ARMOR.EQUIP_TURTLE",
-			"ordinal": 1614
+			"ordinal": 1669
 		},
 		{
 			"key": "minecraft:item.armor.equip_wolf",
 			"name": "ITEM.ARMOR.EQUIP_WOLF",
-			"ordinal": 1615
+			"ordinal": 1670
+		},
+		{
+			"key": "minecraft:item.armor.unequip_nautilus",
+			"name": "ITEM.ARMOR.UNEQUIP_NAUTILUS",
+			"ordinal": 1671
 		},
 		{
 			"key": "minecraft:item.armor.unequip_wolf",
 			"name": "ITEM.ARMOR.UNEQUIP_WOLF",
-			"ordinal": 1616
+			"ordinal": 1672
 		},
 		{
 			"key": "minecraft:item.axe.scrape",
 			"name": "ITEM.AXE.SCRAPE",
-			"ordinal": 1617
+			"ordinal": 1673
 		},
 		{
 			"key": "minecraft:item.axe.strip",
 			"name": "ITEM.AXE.STRIP",
-			"ordinal": 1618
+			"ordinal": 1674
 		},
 		{
 			"key": "minecraft:item.axe.wax_off",
 			"name": "ITEM.AXE.WAX_OFF",
-			"ordinal": 1619
+			"ordinal": 1675
 		},
 		{
 			"key": "minecraft:item.bone_meal.use",
 			"name": "ITEM.BONE_MEAL.USE",
-			"ordinal": 1620
+			"ordinal": 1676
 		},
 		{
 			"key": "minecraft:item.book.page_turn",
 			"name": "ITEM.BOOK.PAGE_TURN",
-			"ordinal": 1621
+			"ordinal": 1677
 		},
 		{
 			"key": "minecraft:item.book.put",
 			"name": "ITEM.BOOK.PUT",
-			"ordinal": 1622
+			"ordinal": 1678
 		},
 		{
 			"key": "minecraft:item.bottle.empty",
 			"name": "ITEM.BOTTLE.EMPTY",
-			"ordinal": 1623
+			"ordinal": 1679
 		},
 		{
 			"key": "minecraft:item.bottle.fill",
 			"name": "ITEM.BOTTLE.FILL",
-			"ordinal": 1624
+			"ordinal": 1680
 		},
 		{
 			"key": "minecraft:item.bottle.fill_dragonbreath",
 			"name": "ITEM.BOTTLE.FILL_DRAGONBREATH",
-			"ordinal": 1625
+			"ordinal": 1681
 		},
 		{
 			"key": "minecraft:item.brush.brushing.generic",
 			"name": "ITEM.BRUSH.BRUSHING.GENERIC",
-			"ordinal": 1626
+			"ordinal": 1682
 		},
 		{
 			"key": "minecraft:item.brush.brushing.gravel",
 			"name": "ITEM.BRUSH.BRUSHING.GRAVEL",
-			"ordinal": 1627
+			"ordinal": 1683
 		},
 		{
 			"key": "minecraft:item.brush.brushing.gravel.complete",
 			"name": "ITEM.BRUSH.BRUSHING.GRAVEL.COMPLETE",
-			"ordinal": 1628
+			"ordinal": 1684
 		},
 		{
 			"key": "minecraft:item.brush.brushing.sand",
 			"name": "ITEM.BRUSH.BRUSHING.SAND",
-			"ordinal": 1629
+			"ordinal": 1685
 		},
 		{
 			"key": "minecraft:item.brush.brushing.sand.complete",
 			"name": "ITEM.BRUSH.BRUSHING.SAND.COMPLETE",
-			"ordinal": 1630
+			"ordinal": 1686
 		},
 		{
 			"key": "minecraft:item.bucket.empty",
 			"name": "ITEM.BUCKET.EMPTY",
-			"ordinal": 1631
+			"ordinal": 1687
 		},
 		{
 			"key": "minecraft:item.bucket.empty_axolotl",
 			"name": "ITEM.BUCKET.EMPTY_AXOLOTL",
-			"ordinal": 1632
+			"ordinal": 1688
 		},
 		{
 			"key": "minecraft:item.bucket.empty_fish",
 			"name": "ITEM.BUCKET.EMPTY_FISH",
-			"ordinal": 1633
+			"ordinal": 1689
 		},
 		{
 			"key": "minecraft:item.bucket.empty_lava",
 			"name": "ITEM.BUCKET.EMPTY_LAVA",
-			"ordinal": 1634
+			"ordinal": 1690
 		},
 		{
 			"key": "minecraft:item.bucket.empty_powder_snow",
 			"name": "ITEM.BUCKET.EMPTY_POWDER_SNOW",
-			"ordinal": 1635
+			"ordinal": 1691
 		},
 		{
 			"key": "minecraft:item.bucket.empty_tadpole",
 			"name": "ITEM.BUCKET.EMPTY_TADPOLE",
-			"ordinal": 1636
+			"ordinal": 1692
 		},
 		{
 			"key": "minecraft:item.bucket.fill",
 			"name": "ITEM.BUCKET.FILL",
-			"ordinal": 1637
+			"ordinal": 1693
 		},
 		{
 			"key": "minecraft:item.bucket.fill_axolotl",
 			"name": "ITEM.BUCKET.FILL_AXOLOTL",
-			"ordinal": 1638
+			"ordinal": 1694
 		},
 		{
 			"key": "minecraft:item.bucket.fill_fish",
 			"name": "ITEM.BUCKET.FILL_FISH",
-			"ordinal": 1639
+			"ordinal": 1695
 		},
 		{
 			"key": "minecraft:item.bucket.fill_lava",
 			"name": "ITEM.BUCKET.FILL_LAVA",
-			"ordinal": 1640
+			"ordinal": 1696
 		},
 		{
 			"key": "minecraft:item.bucket.fill_powder_snow",
 			"name": "ITEM.BUCKET.FILL_POWDER_SNOW",
-			"ordinal": 1641
+			"ordinal": 1697
 		},
 		{
 			"key": "minecraft:item.bucket.fill_tadpole",
 			"name": "ITEM.BUCKET.FILL_TADPOLE",
-			"ordinal": 1642
+			"ordinal": 1698
 		},
 		{
 			"key": "minecraft:item.bundle.drop_contents",
 			"name": "ITEM.BUNDLE.DROP_CONTENTS",
-			"ordinal": 1643
+			"ordinal": 1699
 		},
 		{
 			"key": "minecraft:item.bundle.insert",
 			"name": "ITEM.BUNDLE.INSERT",
-			"ordinal": 1644
+			"ordinal": 1700
 		},
 		{
 			"key": "minecraft:item.bundle.insert_fail",
 			"name": "ITEM.BUNDLE.INSERT_FAIL",
-			"ordinal": 1645
+			"ordinal": 1701
 		},
 		{
 			"key": "minecraft:item.bundle.remove_one",
 			"name": "ITEM.BUNDLE.REMOVE_ONE",
-			"ordinal": 1646
+			"ordinal": 1702
 		},
 		{
 			"key": "minecraft:item.chorus_fruit.teleport",
 			"name": "ITEM.CHORUS_FRUIT.TELEPORT",
-			"ordinal": 1647
+			"ordinal": 1703
 		},
 		{
 			"key": "minecraft:item.crop.plant",
 			"name": "ITEM.CROP.PLANT",
-			"ordinal": 1648
+			"ordinal": 1704
 		},
 		{
 			"key": "minecraft:item.crossbow.hit",
 			"name": "ITEM.CROSSBOW.HIT",
-			"ordinal": 1649
+			"ordinal": 1705
 		},
 		{
 			"key": "minecraft:item.crossbow.loading_end",
 			"name": "ITEM.CROSSBOW.LOADING_END",
-			"ordinal": 1650
+			"ordinal": 1706
 		},
 		{
 			"key": "minecraft:item.crossbow.loading_middle",
 			"name": "ITEM.CROSSBOW.LOADING_MIDDLE",
-			"ordinal": 1651
+			"ordinal": 1707
 		},
 		{
 			"key": "minecraft:item.crossbow.loading_start",
 			"name": "ITEM.CROSSBOW.LOADING_START",
-			"ordinal": 1652
+			"ordinal": 1708
 		},
 		{
 			"key": "minecraft:item.crossbow.quick_charge_1",
 			"name": "ITEM.CROSSBOW.QUICK_CHARGE_1",
-			"ordinal": 1653
+			"ordinal": 1709
 		},
 		{
 			"key": "minecraft:item.crossbow.quick_charge_2",
 			"name": "ITEM.CROSSBOW.QUICK_CHARGE_2",
-			"ordinal": 1654
+			"ordinal": 1710
 		},
 		{
 			"key": "minecraft:item.crossbow.quick_charge_3",
 			"name": "ITEM.CROSSBOW.QUICK_CHARGE_3",
-			"ordinal": 1655
+			"ordinal": 1711
 		},
 		{
 			"key": "minecraft:item.crossbow.shoot",
 			"name": "ITEM.CROSSBOW.SHOOT",
-			"ordinal": 1656
+			"ordinal": 1712
 		},
 		{
 			"key": "minecraft:item.dye.use",
 			"name": "ITEM.DYE.USE",
-			"ordinal": 1657
+			"ordinal": 1713
 		},
 		{
 			"key": "minecraft:item.elytra.flying",
 			"name": "ITEM.ELYTRA.FLYING",
-			"ordinal": 1658
+			"ordinal": 1714
 		},
 		{
 			"key": "minecraft:item.firecharge.use",
 			"name": "ITEM.FIRECHARGE.USE",
-			"ordinal": 1659
+			"ordinal": 1715
 		},
 		{
 			"key": "minecraft:item.flintandsteel.use",
 			"name": "ITEM.FLINTANDSTEEL.USE",
-			"ordinal": 1660
+			"ordinal": 1716
 		},
 		{
 			"key": "minecraft:item.glow_ink_sac.use",
 			"name": "ITEM.GLOW_INK_SAC.USE",
-			"ordinal": 1661
+			"ordinal": 1717
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.0",
 			"name": "ITEM.GOAT_HORN.SOUND.0",
-			"ordinal": 1662
+			"ordinal": 1718
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.1",
 			"name": "ITEM.GOAT_HORN.SOUND.1",
-			"ordinal": 1663
+			"ordinal": 1719
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.2",
 			"name": "ITEM.GOAT_HORN.SOUND.2",
-			"ordinal": 1664
+			"ordinal": 1720
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.3",
 			"name": "ITEM.GOAT_HORN.SOUND.3",
-			"ordinal": 1665
+			"ordinal": 1721
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.4",
 			"name": "ITEM.GOAT_HORN.SOUND.4",
-			"ordinal": 1666
+			"ordinal": 1722
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.5",
 			"name": "ITEM.GOAT_HORN.SOUND.5",
-			"ordinal": 1667
+			"ordinal": 1723
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.6",
 			"name": "ITEM.GOAT_HORN.SOUND.6",
-			"ordinal": 1668
+			"ordinal": 1724
 		},
 		{
 			"key": "minecraft:item.goat_horn.sound.7",
 			"name": "ITEM.GOAT_HORN.SOUND.7",
-			"ordinal": 1669
+			"ordinal": 1725
 		},
 		{
 			"key": "minecraft:item.hoe.till",
 			"name": "ITEM.HOE.TILL",
-			"ordinal": 1670
+			"ordinal": 1726
 		},
 		{
 			"key": "minecraft:item.honey_bottle.drink",
 			"name": "ITEM.HONEY_BOTTLE.DRINK",
-			"ordinal": 1671
+			"ordinal": 1727
 		},
 		{
 			"key": "minecraft:item.honeycomb.wax_on",
 			"name": "ITEM.HONEYCOMB.WAX_ON",
-			"ordinal": 1672
+			"ordinal": 1728
 		},
 		{
 			"key": "minecraft:item.horse_armor.unequip",
 			"name": "ITEM.HORSE_ARMOR.UNEQUIP",
-			"ordinal": 1673
+			"ordinal": 1729
 		},
 		{
 			"key": "minecraft:item.ink_sac.use",
 			"name": "ITEM.INK_SAC.USE",
-			"ordinal": 1674
+			"ordinal": 1730
 		},
 		{
 			"key": "minecraft:item.lead.break",
 			"name": "ITEM.LEAD.BREAK",
-			"ordinal": 1675
+			"ordinal": 1731
 		},
 		{
 			"key": "minecraft:item.lead.tied",
 			"name": "ITEM.LEAD.TIED",
-			"ordinal": 1676
+			"ordinal": 1732
 		},
 		{
 			"key": "minecraft:item.lead.untied",
 			"name": "ITEM.LEAD.UNTIED",
-			"ordinal": 1677
+			"ordinal": 1733
 		},
 		{
 			"key": "minecraft:item.llama_carpet.unequip",
 			"name": "ITEM.LLAMA_CARPET.UNEQUIP",
-			"ordinal": 1678
+			"ordinal": 1734
 		},
 		{
 			"key": "minecraft:item.lodestone_compass.lock",
 			"name": "ITEM.LODESTONE_COMPASS.LOCK",
-			"ordinal": 1679
+			"ordinal": 1735
 		},
 		{
 			"key": "minecraft:item.mace.smash_air",
 			"name": "ITEM.MACE.SMASH_AIR",
-			"ordinal": 1680
+			"ordinal": 1736
 		},
 		{
 			"key": "minecraft:item.mace.smash_ground",
 			"name": "ITEM.MACE.SMASH_GROUND",
-			"ordinal": 1681
+			"ordinal": 1737
 		},
 		{
 			"key": "minecraft:item.mace.smash_ground_heavy",
 			"name": "ITEM.MACE.SMASH_GROUND_HEAVY",
-			"ordinal": 1682
+			"ordinal": 1738
+		},
+		{
+			"key": "minecraft:item.nautilus_saddle_equip",
+			"name": "ITEM.NAUTILUS_SADDLE_EQUIP",
+			"ordinal": 1739
+		},
+		{
+			"key": "minecraft:item.nautilus_saddle_underwater_equip",
+			"name": "ITEM.NAUTILUS_SADDLE_UNDERWATER_EQUIP",
+			"ordinal": 1740
 		},
 		{
 			"key": "minecraft:item.nether_wart.plant",
 			"name": "ITEM.NETHER_WART.PLANT",
-			"ordinal": 1683
+			"ordinal": 1741
 		},
 		{
 			"key": "minecraft:item.ominous_bottle.dispose",
 			"name": "ITEM.OMINOUS_BOTTLE.DISPOSE",
-			"ordinal": 1684
+			"ordinal": 1742
 		},
 		{
 			"key": "minecraft:item.saddle.unequip",
 			"name": "ITEM.SADDLE.UNEQUIP",
-			"ordinal": 1685
+			"ordinal": 1743
 		},
 		{
 			"key": "minecraft:item.shears.snip",
 			"name": "ITEM.SHEARS.SNIP",
-			"ordinal": 1686
+			"ordinal": 1744
 		},
 		{
 			"key": "minecraft:item.shield.block",
 			"name": "ITEM.SHIELD.BLOCK",
-			"ordinal": 1687
+			"ordinal": 1745
 		},
 		{
 			"key": "minecraft:item.shield.break",
 			"name": "ITEM.SHIELD.BREAK",
-			"ordinal": 1688
+			"ordinal": 1746
 		},
 		{
 			"key": "minecraft:item.shovel.flatten",
 			"name": "ITEM.SHOVEL.FLATTEN",
-			"ordinal": 1689
+			"ordinal": 1747
+		},
+		{
+			"key": "minecraft:item.spear.attack",
+			"name": "ITEM.SPEAR.ATTACK",
+			"ordinal": 1748
+		},
+		{
+			"key": "minecraft:item.spear.hit",
+			"name": "ITEM.SPEAR.HIT",
+			"ordinal": 1749
+		},
+		{
+			"key": "minecraft:item.spear.lunge_1",
+			"name": "ITEM.SPEAR.LUNGE_1",
+			"ordinal": 1750
+		},
+		{
+			"key": "minecraft:item.spear.lunge_2",
+			"name": "ITEM.SPEAR.LUNGE_2",
+			"ordinal": 1751
+		},
+		{
+			"key": "minecraft:item.spear.lunge_3",
+			"name": "ITEM.SPEAR.LUNGE_3",
+			"ordinal": 1752
+		},
+		{
+			"key": "minecraft:item.spear.use",
+			"name": "ITEM.SPEAR.USE",
+			"ordinal": 1753
+		},
+		{
+			"key": "minecraft:item.spear_wood.attack",
+			"name": "ITEM.SPEAR_WOOD.ATTACK",
+			"ordinal": 1754
+		},
+		{
+			"key": "minecraft:item.spear_wood.hit",
+			"name": "ITEM.SPEAR_WOOD.HIT",
+			"ordinal": 1755
+		},
+		{
+			"key": "minecraft:item.spear_wood.use",
+			"name": "ITEM.SPEAR_WOOD.USE",
+			"ordinal": 1756
 		},
 		{
 			"key": "minecraft:item.spyglass.stop_using",
 			"name": "ITEM.SPYGLASS.STOP_USING",
-			"ordinal": 1690
+			"ordinal": 1757
 		},
 		{
 			"key": "minecraft:item.spyglass.use",
 			"name": "ITEM.SPYGLASS.USE",
-			"ordinal": 1691
+			"ordinal": 1758
 		},
 		{
 			"key": "minecraft:item.totem.use",
 			"name": "ITEM.TOTEM.USE",
-			"ordinal": 1692
+			"ordinal": 1759
 		},
 		{
 			"key": "minecraft:item.trident.hit",
 			"name": "ITEM.TRIDENT.HIT",
-			"ordinal": 1693
+			"ordinal": 1760
 		},
 		{
 			"key": "minecraft:item.trident.hit_ground",
 			"name": "ITEM.TRIDENT.HIT_GROUND",
-			"ordinal": 1694
+			"ordinal": 1761
 		},
 		{
 			"key": "minecraft:item.trident.return",
 			"name": "ITEM.TRIDENT.RETURN",
-			"ordinal": 1695
+			"ordinal": 1762
 		},
 		{
 			"key": "minecraft:item.trident.riptide_1",
 			"name": "ITEM.TRIDENT.RIPTIDE_1",
-			"ordinal": 1696
+			"ordinal": 1763
 		},
 		{
 			"key": "minecraft:item.trident.riptide_2",
 			"name": "ITEM.TRIDENT.RIPTIDE_2",
-			"ordinal": 1697
+			"ordinal": 1764
 		},
 		{
 			"key": "minecraft:item.trident.riptide_3",
 			"name": "ITEM.TRIDENT.RIPTIDE_3",
-			"ordinal": 1698
+			"ordinal": 1765
 		},
 		{
 			"key": "minecraft:item.trident.throw",
 			"name": "ITEM.TRIDENT.THROW",
-			"ordinal": 1699
+			"ordinal": 1766
 		},
 		{
 			"key": "minecraft:item.trident.thunder",
 			"name": "ITEM.TRIDENT.THUNDER",
-			"ordinal": 1700
+			"ordinal": 1767
 		},
 		{
 			"key": "minecraft:item.wolf_armor.break",
 			"name": "ITEM.WOLF_ARMOR.BREAK",
-			"ordinal": 1701
+			"ordinal": 1768
 		},
 		{
 			"key": "minecraft:item.wolf_armor.crack",
 			"name": "ITEM.WOLF_ARMOR.CRACK",
-			"ordinal": 1702
+			"ordinal": 1769
 		},
 		{
 			"key": "minecraft:item.wolf_armor.damage",
 			"name": "ITEM.WOLF_ARMOR.DAMAGE",
-			"ordinal": 1703
+			"ordinal": 1770
 		},
 		{
 			"key": "minecraft:item.wolf_armor.repair",
 			"name": "ITEM.WOLF_ARMOR.REPAIR",
-			"ordinal": 1704
+			"ordinal": 1771
 		},
 		{
 			"key": "minecraft:music.creative",
 			"name": "MUSIC.CREATIVE",
-			"ordinal": 1705
+			"ordinal": 1772
 		},
 		{
 			"key": "minecraft:music.credits",
 			"name": "MUSIC.CREDITS",
-			"ordinal": 1706
+			"ordinal": 1773
 		},
 		{
 			"key": "minecraft:music.dragon",
 			"name": "MUSIC.DRAGON",
-			"ordinal": 1707
+			"ordinal": 1774
 		},
 		{
 			"key": "minecraft:music.end",
 			"name": "MUSIC.END",
-			"ordinal": 1708
+			"ordinal": 1775
 		},
 		{
 			"key": "minecraft:music.game",
 			"name": "MUSIC.GAME",
-			"ordinal": 1709
+			"ordinal": 1776
 		},
 		{
 			"key": "minecraft:music.menu",
 			"name": "MUSIC.MENU",
-			"ordinal": 1710
+			"ordinal": 1777
 		},
 		{
 			"key": "minecraft:music.nether.basalt_deltas",
 			"name": "MUSIC.NETHER.BASALT_DELTAS",
-			"ordinal": 1711
+			"ordinal": 1778
 		},
 		{
 			"key": "minecraft:music.nether.crimson_forest",
 			"name": "MUSIC.NETHER.CRIMSON_FOREST",
-			"ordinal": 1712
+			"ordinal": 1779
 		},
 		{
 			"key": "minecraft:music.nether.nether_wastes",
 			"name": "MUSIC.NETHER.NETHER_WASTES",
-			"ordinal": 1713
+			"ordinal": 1780
 		},
 		{
 			"key": "minecraft:music.nether.soul_sand_valley",
 			"name": "MUSIC.NETHER.SOUL_SAND_VALLEY",
-			"ordinal": 1714
+			"ordinal": 1781
 		},
 		{
 			"key": "minecraft:music.nether.warped_forest",
 			"name": "MUSIC.NETHER.WARPED_FOREST",
-			"ordinal": 1715
+			"ordinal": 1782
 		},
 		{
 			"key": "minecraft:music.overworld.badlands",
 			"name": "MUSIC.OVERWORLD.BADLANDS",
-			"ordinal": 1716
+			"ordinal": 1783
 		},
 		{
 			"key": "minecraft:music.overworld.bamboo_jungle",
 			"name": "MUSIC.OVERWORLD.BAMBOO_JUNGLE",
-			"ordinal": 1717
+			"ordinal": 1784
 		},
 		{
 			"key": "minecraft:music.overworld.cherry_grove",
 			"name": "MUSIC.OVERWORLD.CHERRY_GROVE",
-			"ordinal": 1718
+			"ordinal": 1785
 		},
 		{
 			"key": "minecraft:music.overworld.deep_dark",
 			"name": "MUSIC.OVERWORLD.DEEP_DARK",
-			"ordinal": 1719
+			"ordinal": 1786
 		},
 		{
 			"key": "minecraft:music.overworld.desert",
 			"name": "MUSIC.OVERWORLD.DESERT",
-			"ordinal": 1720
+			"ordinal": 1787
 		},
 		{
 			"key": "minecraft:music.overworld.dripstone_caves",
 			"name": "MUSIC.OVERWORLD.DRIPSTONE_CAVES",
-			"ordinal": 1721
+			"ordinal": 1788
 		},
 		{
 			"key": "minecraft:music.overworld.flower_forest",
 			"name": "MUSIC.OVERWORLD.FLOWER_FOREST",
-			"ordinal": 1722
+			"ordinal": 1789
 		},
 		{
 			"key": "minecraft:music.overworld.forest",
 			"name": "MUSIC.OVERWORLD.FOREST",
-			"ordinal": 1723
+			"ordinal": 1790
 		},
 		{
 			"key": "minecraft:music.overworld.frozen_peaks",
 			"name": "MUSIC.OVERWORLD.FROZEN_PEAKS",
-			"ordinal": 1724
+			"ordinal": 1791
 		},
 		{
 			"key": "minecraft:music.overworld.grove",
 			"name": "MUSIC.OVERWORLD.GROVE",
-			"ordinal": 1725
+			"ordinal": 1792
 		},
 		{
 			"key": "minecraft:music.overworld.jagged_peaks",
 			"name": "MUSIC.OVERWORLD.JAGGED_PEAKS",
-			"ordinal": 1726
+			"ordinal": 1793
 		},
 		{
 			"key": "minecraft:music.overworld.jungle",
 			"name": "MUSIC.OVERWORLD.JUNGLE",
-			"ordinal": 1727
+			"ordinal": 1794
 		},
 		{
 			"key": "minecraft:music.overworld.lush_caves",
 			"name": "MUSIC.OVERWORLD.LUSH_CAVES",
-			"ordinal": 1728
+			"ordinal": 1795
 		},
 		{
 			"key": "minecraft:music.overworld.meadow",
 			"name": "MUSIC.OVERWORLD.MEADOW",
-			"ordinal": 1729
+			"ordinal": 1796
 		},
 		{
 			"key": "minecraft:music.overworld.old_growth_taiga",
 			"name": "MUSIC.OVERWORLD.OLD_GROWTH_TAIGA",
-			"ordinal": 1730
+			"ordinal": 1797
 		},
 		{
 			"key": "minecraft:music.overworld.snowy_slopes",
 			"name": "MUSIC.OVERWORLD.SNOWY_SLOPES",
-			"ordinal": 1731
+			"ordinal": 1798
 		},
 		{
 			"key": "minecraft:music.overworld.sparse_jungle",
 			"name": "MUSIC.OVERWORLD.SPARSE_JUNGLE",
-			"ordinal": 1732
+			"ordinal": 1799
 		},
 		{
 			"key": "minecraft:music.overworld.stony_peaks",
 			"name": "MUSIC.OVERWORLD.STONY_PEAKS",
-			"ordinal": 1733
+			"ordinal": 1800
 		},
 		{
 			"key": "minecraft:music.overworld.swamp",
 			"name": "MUSIC.OVERWORLD.SWAMP",
-			"ordinal": 1734
+			"ordinal": 1801
 		},
 		{
 			"key": "minecraft:music.under_water",
 			"name": "MUSIC.UNDER_WATER",
-			"ordinal": 1735
+			"ordinal": 1802
 		},
 		{
 			"key": "minecraft:music_disc.11",
 			"name": "MUSIC_DISC.11",
-			"ordinal": 1736
+			"ordinal": 1803
 		},
 		{
 			"key": "minecraft:music_disc.13",
 			"name": "MUSIC_DISC.13",
-			"ordinal": 1737
+			"ordinal": 1804
 		},
 		{
 			"key": "minecraft:music_disc.5",
 			"name": "MUSIC_DISC.5",
-			"ordinal": 1738
+			"ordinal": 1805
 		},
 		{
 			"key": "minecraft:music_disc.blocks",
 			"name": "MUSIC_DISC.BLOCKS",
-			"ordinal": 1739
+			"ordinal": 1806
 		},
 		{
 			"key": "minecraft:music_disc.cat",
 			"name": "MUSIC_DISC.CAT",
-			"ordinal": 1740
+			"ordinal": 1807
 		},
 		{
 			"key": "minecraft:music_disc.chirp",
 			"name": "MUSIC_DISC.CHIRP",
-			"ordinal": 1741
+			"ordinal": 1808
 		},
 		{
 			"key": "minecraft:music_disc.creator",
 			"name": "MUSIC_DISC.CREATOR",
-			"ordinal": 1742
+			"ordinal": 1809
 		},
 		{
 			"key": "minecraft:music_disc.creator_music_box",
 			"name": "MUSIC_DISC.CREATOR_MUSIC_BOX",
-			"ordinal": 1743
+			"ordinal": 1810
 		},
 		{
 			"key": "minecraft:music_disc.far",
 			"name": "MUSIC_DISC.FAR",
-			"ordinal": 1744
+			"ordinal": 1811
 		},
 		{
 			"key": "minecraft:music_disc.lava_chicken",
 			"name": "MUSIC_DISC.LAVA_CHICKEN",
-			"ordinal": 1745
+			"ordinal": 1812
 		},
 		{
 			"key": "minecraft:music_disc.mall",
 			"name": "MUSIC_DISC.MALL",
-			"ordinal": 1746
+			"ordinal": 1813
 		},
 		{
 			"key": "minecraft:music_disc.mellohi",
 			"name": "MUSIC_DISC.MELLOHI",
-			"ordinal": 1747
+			"ordinal": 1814
 		},
 		{
 			"key": "minecraft:music_disc.otherside",
 			"name": "MUSIC_DISC.OTHERSIDE",
-			"ordinal": 1748
+			"ordinal": 1815
 		},
 		{
 			"key": "minecraft:music_disc.pigstep",
 			"name": "MUSIC_DISC.PIGSTEP",
-			"ordinal": 1749
+			"ordinal": 1816
 		},
 		{
 			"key": "minecraft:music_disc.precipice",
 			"name": "MUSIC_DISC.PRECIPICE",
-			"ordinal": 1750
+			"ordinal": 1817
 		},
 		{
 			"key": "minecraft:music_disc.relic",
 			"name": "MUSIC_DISC.RELIC",
-			"ordinal": 1751
+			"ordinal": 1818
 		},
 		{
 			"key": "minecraft:music_disc.stal",
 			"name": "MUSIC_DISC.STAL",
-			"ordinal": 1752
+			"ordinal": 1819
 		},
 		{
 			"key": "minecraft:music_disc.strad",
 			"name": "MUSIC_DISC.STRAD",
-			"ordinal": 1753
+			"ordinal": 1820
 		},
 		{
 			"key": "minecraft:music_disc.tears",
 			"name": "MUSIC_DISC.TEARS",
-			"ordinal": 1754
+			"ordinal": 1821
 		},
 		{
 			"key": "minecraft:music_disc.wait",
 			"name": "MUSIC_DISC.WAIT",
-			"ordinal": 1755
+			"ordinal": 1822
 		},
 		{
 			"key": "minecraft:music_disc.ward",
 			"name": "MUSIC_DISC.WARD",
-			"ordinal": 1756
+			"ordinal": 1823
 		},
 		{
 			"key": "minecraft:particle.soul_escape",
 			"name": "PARTICLE.SOUL_ESCAPE",
-			"ordinal": 1757
+			"ordinal": 1824
 		},
 		{
 			"key": "minecraft:ui.button.click",
 			"name": "UI.BUTTON.CLICK",
-			"ordinal": 1758
+			"ordinal": 1825
 		},
 		{
 			"key": "minecraft:ui.cartography_table.take_result",
 			"name": "UI.CARTOGRAPHY_TABLE.TAKE_RESULT",
-			"ordinal": 1759
+			"ordinal": 1826
 		},
 		{
 			"key": "minecraft:ui.hud.bubble_pop",
 			"name": "UI.HUD.BUBBLE_POP",
-			"ordinal": 1760
+			"ordinal": 1827
 		},
 		{
 			"key": "minecraft:ui.loom.select_pattern",
 			"name": "UI.LOOM.SELECT_PATTERN",
-			"ordinal": 1761
+			"ordinal": 1828
 		},
 		{
 			"key": "minecraft:ui.loom.take_result",
 			"name": "UI.LOOM.TAKE_RESULT",
-			"ordinal": 1762
+			"ordinal": 1829
 		},
 		{
 			"key": "minecraft:ui.stonecutter.select_recipe",
 			"name": "UI.STONECUTTER.SELECT_RECIPE",
-			"ordinal": 1763
+			"ordinal": 1830
 		},
 		{
 			"key": "minecraft:ui.stonecutter.take_result",
 			"name": "UI.STONECUTTER.TAKE_RESULT",
-			"ordinal": 1764
+			"ordinal": 1831
 		},
 		{
 			"key": "minecraft:ui.toast.challenge_complete",
 			"name": "UI.TOAST.CHALLENGE_COMPLETE",
-			"ordinal": 1765
+			"ordinal": 1832
 		},
 		{
 			"key": "minecraft:ui.toast.in",
 			"name": "UI.TOAST.IN",
-			"ordinal": 1766
+			"ordinal": 1833
 		},
 		{
 			"key": "minecraft:ui.toast.out",
 			"name": "UI.TOAST.OUT",
-			"ordinal": 1767
+			"ordinal": 1834
 		},
 		{
 			"key": "minecraft:weather.end_flash",
 			"name": "WEATHER.END_FLASH",
-			"ordinal": 1768
+			"ordinal": 1835
 		},
 		{
 			"key": "minecraft:weather.rain",
 			"name": "WEATHER.RAIN",
-			"ordinal": 1769
+			"ordinal": 1836
 		},
 		{
 			"key": "minecraft:weather.rain.above",
 			"name": "WEATHER.RAIN.ABOVE",
-			"ordinal": 1770
+			"ordinal": 1837
 		}
 	]
 }
