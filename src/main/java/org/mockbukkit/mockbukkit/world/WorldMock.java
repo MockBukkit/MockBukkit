@@ -2950,6 +2950,9 @@ public class WorldMock implements World
 
 	private void initializeGameRules()
 	{
+		// This call is required to load the GameRule before the GameRules class, otherwise it will fail.
+		GameRule.values();
+
 		this.setGameRule(GameRules.ADVANCE_TIME, true);
 		this.setGameRule(GameRules.ADVANCE_WEATHER, true);
 		this.setGameRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);
