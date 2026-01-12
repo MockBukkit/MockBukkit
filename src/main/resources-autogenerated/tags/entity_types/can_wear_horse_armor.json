@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"minecraft:horse"
+		"minecraft:horse",
+		"minecraft:zombie_horse"
 	]
 }

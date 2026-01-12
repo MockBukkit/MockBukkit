@@ -456,6 +456,26 @@
 		},
 		"base": {
 			"choices": [
+				"minecraft:diamond_horse_armor"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_horse_armor_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_horse_armor"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
 				"minecraft:diamond_leggings"
 			],
 			"type": "material"
@@ -465,6 +485,26 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:netherite_leggings"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_nautilus_armor"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_nautilus_armor_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_nautilus_armor"
 		}
 	},
 	{
@@ -505,6 +545,26 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:netherite_shovel"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_spear"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_spear_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_spear"
 		}
 	},
 	{

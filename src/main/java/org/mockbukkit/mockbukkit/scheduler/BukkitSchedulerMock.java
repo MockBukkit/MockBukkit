@@ -102,9 +102,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		waitAsyncTasksFinished();
 		shutdownPool(pool);
 
-		if (asyncException.get() != null)
+		Exception asyncException = this.asyncException.get(); // Single read from volatile variable
+		if (asyncException != null)
 		{
-			throw new AsyncTaskException(asyncException.get());
+			throw new AsyncTaskException(asyncException);
 		}
 
 		waitAsyncEventsFinished();
@@ -217,8 +218,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				pool.submit(wrapTask(task));
 				task.submitted();
+				pool.submit(wrapTask(task));
 			}
 
 			if (task instanceof RepeatingTask repeatingTask)
@@ -261,7 +262,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	/**
 	 * Perform a number of ticks on the server.
 	 *
-	 * @param ticks The number of ticks to executed.
+	 * @param ticks The number of ticks to execute.
 	 */
 	public void performTicks(long ticks)
 	{
@@ -334,7 +335,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					continue;
 				}
 				task.cancel();
-				cancelTask(task.getTaskId());
 				throw new TaskCancelledException("Forced Cancellation of task owned by " + task.getOwner().getName());
 			}
 			pool.shutdownNow();
@@ -521,20 +521,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isCurrentlyRunning(int taskId)
 	{
-		return scheduledTasks.tasks.containsKey(taskId);
+		ScheduledTask task = scheduledTasks.getTask(taskId);
+		return task != null && task.isRunning();
 	}
 
 	@Override
 	public boolean isQueued(int taskId)
 	{
-		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-		{
-			if (task.getTaskId() == taskId)
-			{
-				return !task.isCancelled();
-			}
-		}
-		return false;
+		ScheduledTask task = scheduledTasks.getTask(taskId);
+		return task != null && !task.isCancelled();
 	}
 
 	@Override
@@ -551,8 +546,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitTask> getPendingTasks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		List<BukkitTask> pendingTasks = new ArrayList<>();
+		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
+		{
+			if (!task.isCancelled())
+			{
+				pendingTasks.add(task);
+			}
+		}
+		return Collections.unmodifiableList(pendingTasks);
 	}
 
 	@Override
@@ -727,6 +729,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private static class TaskList
 	{
 
+		// Do not directly access this field from outside TaskList, use a method
 		private final @NotNull Map<Integer, ScheduledTask> tasks;
 
 		private TaskList()
@@ -748,6 +751,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			tasks.put(task.getTaskId(), task);
 			return true;
+		}
+
+		private @Nullable ScheduledTask getTask(int taskId)
+		{
+			return tasks.get(taskId);
 		}
 
 		protected final @NotNull List<ScheduledTask> getCurrentTaskList()

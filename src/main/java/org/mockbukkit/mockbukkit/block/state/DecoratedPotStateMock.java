@@ -62,6 +62,12 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	}
 
 	@Override
+	public void startWobble(@NotNull WobbleStyle wobbleStyle)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ContainerStateMock getSnapshot()
 	{
 		return new DecoratedPotStateMock(this);
