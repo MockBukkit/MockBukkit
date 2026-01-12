@@ -6,11 +6,13 @@
 		"minecraft:dolphin",
 		"minecraft:elder_guardian",
 		"minecraft:glow_squid",
+		"minecraft:nautilus",
 		"minecraft:player",
 		"minecraft:pufferfish",
 		"minecraft:salmon",
 		"minecraft:squid",
 		"minecraft:tadpole",
-		"minecraft:tropical_fish"
+		"minecraft:tropical_fish",
+		"minecraft:zombie_nautilus"
 	]
 }

@@ -1,0 +1,15 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:cod",
+		"minecraft:cod_bucket",
+		"minecraft:cooked_cod",
+		"minecraft:cooked_salmon",
+		"minecraft:pufferfish",
+		"minecraft:pufferfish_bucket",
+		"minecraft:salmon",
+		"minecraft:salmon_bucket",
+		"minecraft:tropical_fish",
+		"minecraft:tropical_fish_bucket"
+	]
+}

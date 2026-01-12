@@ -18,6 +18,7 @@ import org.bukkit.FeatureFlag;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
+import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
@@ -83,6 +84,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.GameRuleMock;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
@@ -128,7 +130,7 @@ public class WorldMock implements World
 	private static final int SEA_LEVEL = 63;
 
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
-	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
+	private final Map<String, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
@@ -231,30 +233,7 @@ public class WorldMock implements World
 			spawnLimits.put(SpawnCategory.AMBIENT, 15);
 		}
 
-		// Set the default gamerule values.
-		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
-		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
-		gameRules.put(GameRule.DISABLE_ELYTRA_MOVEMENT_CHECK, false);
-		gameRules.put(GameRule.DO_DAYLIGHT_CYCLE, true);
-		gameRules.put(GameRule.DO_ENTITY_DROPS, true);
-		gameRules.put(GameRule.DO_FIRE_TICK, true);
-		gameRules.put(GameRule.DO_LIMITED_CRAFTING, false);
-		gameRules.put(GameRule.DO_MOB_LOOT, true);
-		gameRules.put(GameRule.DO_MOB_SPAWNING, true);
-		gameRules.put(GameRule.DO_TILE_DROPS, true);
-		gameRules.put(GameRule.DO_WEATHER_CYCLE, true);
-		gameRules.put(GameRule.KEEP_INVENTORY, false);
-		gameRules.put(GameRule.LOG_ADMIN_COMMANDS, true);
-		gameRules.put(GameRule.MAX_COMMAND_CHAIN_LENGTH, 65536);
-		gameRules.put(GameRule.MAX_ENTITY_CRAMMING, 24);
-		gameRules.put(GameRule.MOB_GRIEFING, true);
-		gameRules.put(GameRule.NATURAL_REGENERATION, true);
-		gameRules.put(GameRule.RANDOM_TICK_SPEED, 3);
-		gameRules.put(GameRule.REDUCED_DEBUG_INFO, false);
-		gameRules.put(GameRule.SEND_COMMAND_FEEDBACK, true);
-		gameRules.put(GameRule.SHOW_DEATH_MESSAGES, true);
-		gameRules.put(GameRule.SPAWN_RADIUS, 10);
-		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
+		initializeGameRules();
 	}
 
 	/**
@@ -698,7 +677,7 @@ public class WorldMock implements World
 	@Override
 	public Chunk @NotNull [] getLoadedChunks()
 	{
-		return loadedChunks.values().toArray(new Chunk[0]);
+		return loadedChunks.values().toArray(Chunk[]::new);
 	}
 
 	@Override
@@ -1823,7 +1802,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.keySet().stream().map(GameRule::getName).toList().toArray(new String[0]);
+		return gameRules.keySet().toArray(String[]::new);
 	}
 
 	@Override
@@ -2025,7 +2004,8 @@ public class WorldMock implements World
 	@Override
 	public <T> T getGameRuleValue(@NotNull GameRule<T> rule)
 	{
-		return rule.getType().cast(gameRules.get(rule));
+		var value = gameRules.get(rule.getKey().asString());
+		return shimLegacyValue(value, rule);
 	}
 
 	@Override
@@ -2038,7 +2018,8 @@ public class WorldMock implements World
 	@Override
 	public <T> boolean setGameRule(GameRule<T> rule, T newValue)
 	{
-		gameRules.put(rule, newValue);
+		var convertedValue = convertLegacyValue(rule, newValue);
+		gameRules.put(rule.getKey().asString(), convertedValue);
 		return true;
 	}
 
@@ -2965,6 +2946,100 @@ public class WorldMock implements World
 	{
 		fullTime++;
 		gameTime++;
+	}
+
+	private void initializeGameRules()
+	{
+		// This call is required to load the GameRule before the GameRules class, otherwise it will fail.
+		GameRule.values();
+
+		this.setGameRule(GameRules.ADVANCE_TIME, true);
+		this.setGameRule(GameRules.ADVANCE_WEATHER, true);
+		this.setGameRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);
+		this.setGameRule(GameRules.BLOCK_DROPS, true);
+		this.setGameRule(GameRules.BLOCK_EXPLOSION_DROP_DECAY, true);
+		this.setGameRule(GameRules.COMMAND_BLOCK_OUTPUT, true);
+		this.setGameRule(GameRules.COMMAND_BLOCKS_WORK, true);
+		this.setGameRule(GameRules.DROWNING_DAMAGE, true);
+		this.setGameRule(GameRules.ELYTRA_MOVEMENT_CHECK, true);
+		this.setGameRule(GameRules.ENDER_PEARLS_VANISH_ON_DEATH, true);
+		this.setGameRule(GameRules.ENTITY_DROPS, true);
+		this.setGameRule(GameRules.FALL_DAMAGE, true);
+		this.setGameRule(GameRules.FIRE_DAMAGE, true);
+		this.setGameRule(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 128);
+		this.setGameRule(GameRules.FORGIVE_DEAD_PLAYERS, true);
+		this.setGameRule(GameRules.FREEZE_DAMAGE, true);
+		this.setGameRule(GameRules.GLOBAL_SOUND_EVENTS, true);
+		this.setGameRule(GameRules.IMMEDIATE_RESPAWN, false);
+		this.setGameRule(GameRules.KEEP_INVENTORY, false);
+		this.setGameRule(GameRules.LAVA_SOURCE_CONVERSION, false);
+		this.setGameRule(GameRules.LIMITED_CRAFTING, false);
+		this.setGameRule(GameRules.LOCATOR_BAR, true);
+		this.setGameRule(GameRules.LOG_ADMIN_COMMANDS, true);
+		this.setGameRule(GameRules.MAX_BLOCK_MODIFICATIONS, 32768);
+		this.setGameRule(GameRules.MAX_COMMAND_FORKS, 65536);
+		this.setGameRule(GameRules.MAX_COMMAND_SEQUENCE_LENGTH, 65536);
+		this.setGameRule(GameRules.MAX_ENTITY_CRAMMING, 24);
+		this.setGameRule(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT, 1);
+		this.setGameRule(GameRules.MOB_DROPS, true);
+		this.setGameRule(GameRules.MOB_EXPLOSION_DROP_DECAY, true);
+		this.setGameRule(GameRules.MOB_GRIEFING, true);
+		this.setGameRule(GameRules.NATURAL_HEALTH_REGENERATION, true);
+		this.setGameRule(GameRules.PLAYER_MOVEMENT_CHECK, true);
+		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 0);
+		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY, 80);
+		this.setGameRule(GameRules.PLAYERS_SLEEPING_PERCENTAGE, 100);
+		this.setGameRule(GameRules.PROJECTILES_CAN_BREAK_BLOCKS, true);
+		this.setGameRule(GameRules.PVP, true);
+		this.setGameRule(GameRules.RAIDS, true);
+		this.setGameRule(GameRules.RANDOM_TICK_SPEED, 3);
+		this.setGameRule(GameRules.REDUCED_DEBUG_INFO, false);
+		this.setGameRule(GameRules.RESPAWN_RADIUS, 10);
+		this.setGameRule(GameRules.SEND_COMMAND_FEEDBACK, true);
+		this.setGameRule(GameRules.SHOW_ADVANCEMENT_MESSAGES, true);
+		this.setGameRule(GameRules.SHOW_DEATH_MESSAGES, true);
+		this.setGameRule(GameRules.SPAWN_MOBS, true);
+		this.setGameRule(GameRules.SPAWN_MONSTERS, true);
+		this.setGameRule(GameRules.SPAWN_PATROLS, true);
+		this.setGameRule(GameRules.SPAWN_PHANTOMS, true);
+		this.setGameRule(GameRules.SPAWN_WANDERING_TRADERS, true);
+		this.setGameRule(GameRules.SPAWN_WARDENS, true);
+		this.setGameRule(GameRules.SPAWNER_BLOCKS_WORK, true);
+		this.setGameRule(GameRules.SPECTATORS_GENERATE_CHUNKS, true);
+		this.setGameRule(GameRules.SPREAD_VINES, true);
+		this.setGameRule(GameRules.TNT_EXPLODES, true);
+		this.setGameRule(GameRules.TNT_EXPLOSION_DROP_DECAY, false);
+		this.setGameRule(GameRules.UNIVERSAL_ANGER, false);
+		this.setGameRule(GameRules.WATER_SOURCE_CONVERSION, true);
+	}
+
+	/**
+	 * Helper method for game rule migration in v1.21.11.
+	 */
+	private static <M, L> M shimLegacyValue(L value, org.bukkit.GameRule<M> gameRule)
+	{
+		if (gameRule instanceof GameRuleMock.LegacyGameRuleWrapperMock<?, ?>)
+		{
+			GameRuleMock.LegacyGameRuleWrapperMock<M, L> legacyGameRuleWrapper = (GameRuleMock.LegacyGameRuleWrapperMock<M, L>) gameRule;
+			return legacyGameRuleWrapper.getToLegacyFromModern().apply(value);
+		}
+
+		//noinspection unchecked
+		return (M) value;
+	}
+
+	private static <MODERN, LEGACY> MODERN convertLegacyValue(GameRule<MODERN> rule, LEGACY newValue)
+	{
+		if (rule instanceof GameRuleMock.LegacyGameRuleWrapperMock<?, ?>)
+		{
+			@SuppressWarnings("unchecked")
+			GameRuleMock.LegacyGameRuleWrapperMock<LEGACY, MODERN> legacyWrapper = (GameRuleMock.LegacyGameRuleWrapperMock<LEGACY, MODERN>) rule;
+			return legacyWrapper.getFromLegacyToModern().apply(newValue);
+		}
+		else
+		{
+			return (MODERN) newValue;
+		}
 	}
 
 }

@@ -2482,6 +2482,19 @@
 		}
 	},
 	{
+		"key": "minecraft:camel_husk_spawn_egg",
+		"result": {
+			"material": "minecraft:camel_husk_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
+			]
+		}
+	},
+	{
 		"key": "minecraft:camel_spawn_egg",
 		"result": {
 			"material": "minecraft:camel_spawn_egg",
@@ -3853,6 +3866,18 @@
 		}
 	},
 	{
+		"key": "minecraft:copper_nautilus_armor",
+		"result": {
+			"material": "minecraft:copper_nautilus_armor",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:copper_nugget",
 		"result": {
 			"material": "minecraft:copper_nugget",
@@ -3892,6 +3917,18 @@
 		"key": "minecraft:copper_shovel",
 		"result": {
 			"material": "minecraft:copper_shovel",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:copper_spear",
+		"result": {
+			"material": "minecraft:copper_spear",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -5538,6 +5575,18 @@
 		}
 	},
 	{
+		"key": "minecraft:diamond_nautilus_armor",
+		"result": {
+			"material": "minecraft:diamond_nautilus_armor",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:diamond_ore",
 		"result": {
 			"material": "minecraft:diamond_ore",
@@ -5565,6 +5614,18 @@
 		"key": "minecraft:diamond_shovel",
 		"result": {
 			"material": "minecraft:diamond_shovel",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:diamond_spear",
+		"result": {
+			"material": "minecraft:diamond_spear",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -7128,6 +7189,18 @@
 		}
 	},
 	{
+		"key": "minecraft:golden_nautilus_armor",
+		"result": {
+			"material": "minecraft:golden_nautilus_armor",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:golden_pickaxe",
 		"result": {
 			"material": "minecraft:golden_pickaxe",
@@ -7143,6 +7216,18 @@
 		"key": "minecraft:golden_shovel",
 		"result": {
 			"material": "minecraft:golden_shovel",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:golden_spear",
+		"result": {
+			"material": "minecraft:golden_spear",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -8233,6 +8318,18 @@
 		}
 	},
 	{
+		"key": "minecraft:iron_nautilus_armor",
+		"result": {
+			"material": "minecraft:iron_nautilus_armor",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:iron_nugget",
 		"result": {
 			"material": "minecraft:iron_nugget",
@@ -8272,6 +8369,18 @@
 		"key": "minecraft:iron_shovel",
 		"result": {
 			"material": "minecraft:iron_shovel",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:iron_spear",
+		"result": {
+			"material": "minecraft:iron_spear",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -10727,6 +10836,19 @@
 		}
 	},
 	{
+		"key": "minecraft:nautilus_spawn_egg",
+		"result": {
+			"material": "minecraft:nautilus_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
+			]
+		}
+	},
+	{
 		"key": "minecraft:nether_brick",
 		"result": {
 			"material": "minecraft:nether_brick",
@@ -10952,6 +11074,18 @@
 		}
 	},
 	{
+		"key": "minecraft:netherite_horse_armor",
+		"result": {
+			"material": "minecraft:netherite_horse_armor",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:netherite_ingot",
 		"result": {
 			"material": "minecraft:netherite_ingot",
@@ -10969,6 +11103,18 @@
 			"material": "minecraft:netherite_leggings",
 			"meta": [
 				"org.bukkit.inventory.meta.ArmorMeta",
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:netherite_nautilus_armor",
+		"result": {
+			"material": "minecraft:netherite_nautilus_armor",
+			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
@@ -11004,6 +11150,18 @@
 		"key": "minecraft:netherite_shovel",
 		"result": {
 			"material": "minecraft:netherite_shovel",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:netherite_spear",
+		"result": {
+			"material": "minecraft:netherite_spear",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -12104,6 +12262,19 @@
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:parched_spawn_egg",
+		"result": {
+			"material": "minecraft:parched_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
 			]
 		}
 	},
@@ -15975,6 +16146,18 @@
 		}
 	},
 	{
+		"key": "minecraft:stone_spear",
+		"result": {
+			"material": "minecraft:stone_spear",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:stone_stairs",
 		"result": {
 			"material": "minecraft:stone_stairs",
@@ -18758,6 +18941,18 @@
 		}
 	},
 	{
+		"key": "minecraft:wooden_spear",
+		"result": {
+			"material": "minecraft:wooden_spear",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:wooden_sword",
 		"result": {
 			"material": "minecraft:wooden_sword",
@@ -19022,6 +19217,19 @@
 		"key": "minecraft:zombie_horse_spawn_egg",
 		"result": {
 			"material": "minecraft:zombie_horse_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
+			]
+		}
+	},
+	{
+		"key": "minecraft:zombie_nautilus_spawn_egg",
+		"result": {
+			"material": "minecraft:zombie_nautilus_spawn_egg",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",

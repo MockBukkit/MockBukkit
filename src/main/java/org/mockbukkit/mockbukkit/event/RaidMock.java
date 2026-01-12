@@ -149,15 +149,27 @@ public class RaidMock implements Raid
 		return this.waves;
 	}
 
+	@Override
+	public void setTotalWaves(int waves)
+	{
+		Preconditions.checkArgument(waves > 0, "Total waves must be greater than 0");
+		Preconditions.checkArgument(waves <= 7, "Total waves must not be greater than 7");
+		Preconditions.checkArgument(waves >= this.getSpawnedGroups(), "Total waves must be greater than or equal to the current spawned groups (%s)", this.getSpawnedGroups());
+
+		this.waves = waves;
+	}
+
 	/**
 	 * Set the number of waves in this raid (excluding the additional waves).
 	 *
 	 * @param waves number waves.
+	 *
+	 * @deprecated Use paper API {@link #setTotalWaves(int)} instead.
 	 */
+	@Deprecated(forRemoval = true, since = "1.21.11")
 	public void setWaves(int waves)
 	{
-		Preconditions.checkArgument(waves >= 0, "waves cannot be negative");
-		this.waves = waves;
+		this.setTotalWaves(waves);
 	}
 
 	/**
@@ -175,13 +187,13 @@ public class RaidMock implements Raid
 	public void setWaves(Difficulty difficulty)
 	{
 		Preconditions.checkArgument(difficulty != null, "difficulty cannot be null");
-		switch (difficulty)
+		this.waves = switch (difficulty)
 		{
-		case EASY -> setWaves(3);
-		case NORMAL -> setWaves(5);
-		case HARD -> setWaves(7);
-		default -> setWaves(0);
-		}
+			case EASY -> 3;
+			case NORMAL -> 5;
+			case HARD -> 7;
+			default -> 0;
+		};
 	}
 
 	@Override

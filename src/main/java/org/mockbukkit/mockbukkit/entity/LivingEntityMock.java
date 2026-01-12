@@ -6,8 +6,10 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.world.damagesource.CombatTracker;
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -1360,6 +1362,30 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWaypointStyle(@Nullable Key key)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWaypointColor(@Nullable Color color)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Key getWaypointStyle()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Color getWaypointColor()
+	{
 		throw new UnimplementedOperationException();
 	}
 
