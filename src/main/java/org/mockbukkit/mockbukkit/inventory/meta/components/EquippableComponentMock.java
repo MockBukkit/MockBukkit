@@ -48,6 +48,27 @@ public class EquippableComponentMock implements EquippableComponent
 	private boolean isDamageOnHurt;
 	private boolean isEquipOnInteract;
 
+	private EquippableComponentMock(@Nullable NamespacedKey model,
+								   @Nullable NamespacedKey cameraOverlay,
+								   @Nullable Set<EntityType> allowedEntities,
+								   @Nullable Sound sound,
+								   EquipmentSlot equipmentSlot,
+								   boolean isDispensable,
+								   boolean isSwappable,
+								   boolean isDamageOnHurt,
+								   boolean isEquipOnInteract)
+	{
+		this.model = model;
+		this.cameraOverlay = cameraOverlay;
+		this.allowedEntities = allowedEntities != null ? Set.copyOf(allowedEntities) : null;
+		this.sound = sound;
+		this.equipmentSlot = equipmentSlot;
+		this.isDispensable = isDispensable;
+		this.isSwappable = isSwappable;
+		this.isDamageOnHurt = isDamageOnHurt;
+		this.isEquipOnInteract = isEquipOnInteract;
+	}
+
 	@Override
 	public EquipmentSlot getSlot()
 	{

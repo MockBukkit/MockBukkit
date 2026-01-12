@@ -26,6 +26,14 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	private @Builder.Default List<String> strings = List.of();
 	private @Builder.Default List<Color> colors = List.of();
 
+	private CustomModelDataComponentMock(List<Float> floats, List<Boolean> flags, List<String> strings, List<Color> colors)
+	{
+		this.floats = List.copyOf(floats);
+		this.flags = List.copyOf(flags);
+		this.strings = List.copyOf(strings);
+		this.colors = List.copyOf(colors);
+	}
+
 	@Override
 	public List<Float> getFloats()
 	{
