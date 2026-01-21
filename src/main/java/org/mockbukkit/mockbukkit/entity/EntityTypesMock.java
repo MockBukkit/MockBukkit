@@ -76,6 +76,7 @@ import org.bukkit.entity.Marker;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Nautilus;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
@@ -304,6 +305,7 @@ public final class EntityTypesMock
 				.register(Minecart.class, RideableMinecartMock.class, RideableMinecartMock::new)
 				.register(Mule.class, MuleMock.class, MuleMock::new)
 				.register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new)
+				.register(Nautilus.class, NautilusMock.class, NautilusMock::new)
 				.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 				.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 				.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
