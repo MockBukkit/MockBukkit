@@ -412,10 +412,13 @@ public final class EntityTypesMock
 			var myConstructor = bukkitClazz.getDeclaredConstructor(ServerMock.class, UUID.class);
 			return (EntityMock) myConstructor.newInstance(server, entityUUID);
 		}
-		catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-			   InvocationTargetException e)
+		catch (NoSuchMethodException e)
 		{
-			log.warn("Couldn't find: " + e.getMessage() + " for " + bukkitClazz.getName() + ". Falling back to reflection.", e);
+			log.debug("Method with signature '{}' does not exist in '{}', failing back to reflection.", e.getMessage(), bukkitClazz.getName());
+		}
+		catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+		{
+			log.warn("Couldn't find: {} for {}. Falling back to reflection.", e.getMessage(), bukkitClazz.getName(), e);
 		}
 
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
