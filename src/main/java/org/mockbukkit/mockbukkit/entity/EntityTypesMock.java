@@ -81,6 +81,7 @@ import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
+import org.bukkit.entity.Parched;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Pig;
@@ -314,6 +315,7 @@ public final class EntityTypesMock
 				.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 				.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 				.register(Panda.class, PandaMock.class, PandaMock::new)
+				.register(Parched.class, ParchedMock.class, ParchedMock::new)
 				.register(Parrot.class, ParrotMock.class, ParrotMock::new)
 				.register(Phantom.class, PhantomMock.class, PhantomMock::new)
 				.register(Pig.class, PigMock.class, PigMock::new)
