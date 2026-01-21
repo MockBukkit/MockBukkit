@@ -414,7 +414,7 @@ public final class EntityTypesMock
 		}
 		catch (NoSuchMethodException e)
 		{
-			log.debug("Method with signature '{}' does not exist in '{}', failing back to reflection.", e.getMessage(), bukkitClazz.getName());
+			log.debug("Method with signature '{}' does not exist in '{}', falling back to reflection.", e.getMessage(), bukkitClazz.getName());
 		}
 		catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
 		{
