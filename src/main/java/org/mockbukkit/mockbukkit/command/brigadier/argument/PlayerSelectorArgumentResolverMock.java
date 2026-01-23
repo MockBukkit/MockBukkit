@@ -86,7 +86,8 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 			case "@r" ->
 			{
 				List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-				if (players.isEmpty()) {
+				if (players.isEmpty())
+				{
 					yield Collections.emptyList();
 				}
 				Collections.shuffle(players);
