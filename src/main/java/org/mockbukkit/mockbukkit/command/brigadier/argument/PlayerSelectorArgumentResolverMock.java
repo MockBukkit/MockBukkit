@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.adventure.Languages;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +30,7 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 	{
 		if (single && input.equals("@a"))
 		{
-			String message = org.mockbukkit.mockbukkit.adventure.Languages.getInstance().getOrDefault("command.expected.a_single_player", "Only one player is allowed, but the provided selector allows more than one");
+			String message = Languages.getInstance().getOrDefault("command.expected.a_single_player", "Only one player is allowed, but the provided selector allows more than one");
 			source.getSender().sendMessage(message);
 			return Collections.emptyList();
 		}
@@ -46,7 +47,7 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 		}
 		if (resolved.isEmpty() && single)
 		{
-			String message = org.mockbukkit.mockbukkit.adventure.Languages.getInstance().getOrDefault("argument.entity.notfound.player", "No player was found");
+			String message = Languages.getInstance().getOrDefault("argument.entity.notfound.player", "No player was found");
 			source.getSender().sendMessage(message);
 		}
 		return resolved;
@@ -85,9 +86,11 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 			case "@r" ->
 			{
 				List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-				if (players.isEmpty()) yield Collections.emptyList();
+				if (players.isEmpty()) {
+					yield Collections.emptyList();
+				}
 				Collections.shuffle(players);
-				yield List.of(players.get(0));
+				yield List.of(players.getFirst());
 			}
 			case "@s" -> (source.getExecutor() instanceof Player player) ? List.of(player) : Collections.emptyList();
 			default -> Collections.emptyList();
