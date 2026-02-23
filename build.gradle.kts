@@ -4,7 +4,7 @@ plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.35.0"
+	id("com.vanniktech.maven.publish") version "0.36.0"
 	id("net.kyori.blossom") version "2.2.0"
 }
 
@@ -23,7 +23,7 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
-	api("org.jetbrains:annotations:26.0.2")
+	api("org.jetbrains:annotations:26.1.0")
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
@@ -39,7 +39,7 @@ dependencies {
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.18.3")
+	implementation("net.bytebuddy:byte-buddy:1.18.5")
 
 	compileOnly("org.projectlombok:lombok:1.18.42")
 	annotationProcessor("org.projectlombok:lombok:1.18.42")
