@@ -668,6 +668,40 @@ class ItemStackMockTest
 	}
 
 	@Test
+	void editPersistentDataContainer()
+	{
+		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
+		PersistentDataContainerView view = item.getPersistentDataContainer();
+
+		final NamespacedKey key = NamespacedKey.fromString("key");
+		assertTrue(item.editPersistentDataContainer((container) ->
+		{
+			container.set(key, PersistentDataType.STRING, "value");
+		}));
+		assertSame(view, item.getPersistentDataContainer());
+		assertEquals("value", view.get(key, PersistentDataType.STRING));
+
+		assertTrue(item.editPersistentDataContainer((container) ->
+		{
+			container.remove(key);
+		}));
+		assertSame(view, item.getPersistentDataContainer());
+		assertFalse(view.has(key));
+	}
+
+	@Test
+	void editPersistentDataContainer_Air()
+	{
+		ItemStackMock item = new ItemStackMock(Material.AIR);
+		final NamespacedKey key = NamespacedKey.fromString("key");
+		assertFalse(item.editPersistentDataContainer((container) ->
+		{
+			container.set(key, PersistentDataType.STRING, "value");
+		}));
+		assertTrue(item.getPersistentDataContainer().isEmpty());
+	}
+
+	@Test
 	void withType()
 	{
 		ItemStackMock item = new ItemStackMock(Material.DIAMOND_PICKAXE);
