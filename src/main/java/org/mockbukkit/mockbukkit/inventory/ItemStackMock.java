@@ -386,8 +386,13 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean editPersistentDataContainer(@NotNull Consumer<PersistentDataContainer> consumer)
 	{
-		// TODO:
-		throw new UnimplementedOperationException();
+		if (itemMeta == null)
+		{
+			return false;
+		}
+
+		consumer.accept(itemMeta.getPersistentDataContainer());
+		return true;
 	}
 
 	@Override
