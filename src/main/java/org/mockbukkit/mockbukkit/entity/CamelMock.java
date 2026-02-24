@@ -8,6 +8,11 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link Camel}.
+ *
+ * @see AbstractHorseMock
+ */
 public class CamelMock extends AbstractHorseMock implements Camel
 {
 

@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.map.MapCursor;
+import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -299,6 +300,43 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	public Weapon.Builder weapon()
 	{
 		return new WeaponMock.BuilderMock();
+	}
+
+	@Override
+	public KineticWeapon.Builder kineticWeapon()
+	{
+		return new KineticWeaponMock.BuilderMock();
+	}
+
+	@Override
+	public UseEffects.Builder useEffects()
+	{
+		return new UseEffectsMock.BuilderMock();
+	}
+
+	@Override
+	public PiercingWeapon.Builder piercingWeapon()
+	{
+		return new PiercingWeaponMock.BuilderMock();
+	}
+
+	@Override
+	public AttackRange.Builder attackRange()
+	{
+		return new AttackRangeMock.BuilderMock();
+	}
+
+	@Override
+	public SwingAnimation.Builder swingAnimation()
+	{
+		return new SwingAnimationMock.BuilderMock();
+	}
+
+	@Override
+	public KineticWeapon.Condition kineticWeaponCondition(@NonNegative int maxDurationTicks, float minSpeed, float minRelativeSpeed)
+	{
+		Preconditions.checkArgument(maxDurationTicks >= 0, "maxDurationTicks must be non-negative");
+		return new KineticWeaponMock.ConditionMock(maxDurationTicks, minSpeed, minRelativeSpeed);
 	}
 
 }

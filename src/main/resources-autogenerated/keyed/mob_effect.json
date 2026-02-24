@@ -73,6 +73,26 @@
 			"category": "BENEFICIAL",
 			"color": {
 				"alpha": 255,
+				"blue": 238,
+				"green": 255,
+				"red": 0
+			},
+			"durationModifier": 1.0,
+			"effectCategory": "BENEFICIAL",
+			"id": 40,
+			"instant": false,
+			"key": "minecraft:breath_of_the_nautilus",
+			"name": "minecraft:breath_of_the_nautilus",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"rgb": 65518,
+			"translationKey": "effect.minecraft.breath_of_the_nautilus"
+		},
+		{
+			"category": "BENEFICIAL",
+			"color": {
+				"alpha": 255,
 				"blue": 209,
 				"green": 194,
 				"red": 29

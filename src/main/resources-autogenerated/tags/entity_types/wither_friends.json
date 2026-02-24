@@ -2,8 +2,10 @@
 	"replace": false,
 	"values": [
 		"minecraft:bogged",
+		"minecraft:camel_husk",
 		"minecraft:drowned",
 		"minecraft:husk",
+		"minecraft:parched",
 		"minecraft:phantom",
 		"minecraft:skeleton",
 		"minecraft:skeleton_horse",
@@ -13,6 +15,7 @@
 		"minecraft:zoglin",
 		"minecraft:zombie",
 		"minecraft:zombie_horse",
+		"minecraft:zombie_nautilus",
 		"minecraft:zombie_villager",
 		"minecraft:zombified_piglin"
 	]

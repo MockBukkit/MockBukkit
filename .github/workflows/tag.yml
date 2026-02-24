@@ -37,8 +37,11 @@ jobs:
       - name: Read Paper version from gradle.properties
         id: paper-version
         run: |
-          paper_details=$(./gradlew printPaperDetails --quiet)
-          echo "paper_details=$paper_details" >> "$GITHUB_OUTPUT"
+          {
+              echo "paper_details<<EOF"
+              ./gradlew printPaperDetails --quiet --console=plain 2>&1
+              echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Bump version
         uses: actions-ecosystem/action-bump-semver@v1

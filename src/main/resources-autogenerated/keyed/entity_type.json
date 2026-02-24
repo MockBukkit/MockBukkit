@@ -1155,6 +1155,108 @@
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 0.5,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 32.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.09000000357627869,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 6.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 1.5,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
+			"key": "minecraft:camel_husk",
+			"name": "CAMEL_HUSK",
+			"ordinal": 20,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.camel_husk",
+			"typeId": -1
+		},
+		{
+			"alive": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
 				"minecraft:attack_damage": {
 					"baseValue": 3.0,
 					"defaultValue": 2.0
@@ -1242,7 +1344,7 @@
 			},
 			"key": "minecraft:cat",
 			"name": "CAT",
-			"ordinal": 20,
+			"ordinal": 21,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1344,7 +1446,7 @@
 			},
 			"key": "minecraft:cave_spider",
 			"name": "CAVE_SPIDER",
-			"ordinal": 21,
+			"ordinal": 22,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1356,7 +1458,7 @@
 			"alive": false,
 			"key": "minecraft:cherry_boat",
 			"name": "CHERRY_BOAT",
-			"ordinal": 22,
+			"ordinal": 23,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1368,7 +1470,7 @@
 			"alive": false,
 			"key": "minecraft:cherry_chest_boat",
 			"name": "CHERRY_CHEST_BOAT",
-			"ordinal": 23,
+			"ordinal": 24,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1380,7 +1482,7 @@
 			"alive": false,
 			"key": "minecraft:chest_minecart",
 			"name": "CHEST_MINECART",
-			"ordinal": 24,
+			"ordinal": 25,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1482,7 +1584,7 @@
 			},
 			"key": "minecraft:chicken",
 			"name": "CHICKEN",
-			"ordinal": 25,
+			"ordinal": 26,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1580,7 +1682,7 @@
 			},
 			"key": "minecraft:cod",
 			"name": "COD",
-			"ordinal": 26,
+			"ordinal": 27,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1592,7 +1694,7 @@
 			"alive": false,
 			"key": "minecraft:command_block_minecart",
 			"name": "COMMAND_BLOCK_MINECART",
-			"ordinal": 27,
+			"ordinal": 28,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1690,7 +1792,7 @@
 			},
 			"key": "minecraft:copper_golem",
 			"name": "COPPER_GOLEM",
-			"ordinal": 28,
+			"ordinal": 29,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1792,7 +1894,7 @@
 			},
 			"key": "minecraft:cow",
 			"name": "COW",
-			"ordinal": 29,
+			"ordinal": 30,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1894,7 +1996,7 @@
 			},
 			"key": "minecraft:creaking",
 			"name": "CREAKING",
-			"ordinal": 30,
+			"ordinal": 31,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -1996,7 +2098,7 @@
 			},
 			"key": "minecraft:creeper",
 			"name": "CREEPER",
-			"ordinal": 31,
+			"ordinal": 32,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2008,7 +2110,7 @@
 			"alive": false,
 			"key": "minecraft:dark_oak_boat",
 			"name": "DARK_OAK_BOAT",
-			"ordinal": 32,
+			"ordinal": 33,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2020,7 +2122,7 @@
 			"alive": false,
 			"key": "minecraft:dark_oak_chest_boat",
 			"name": "DARK_OAK_CHEST_BOAT",
-			"ordinal": 33,
+			"ordinal": 34,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2122,7 +2224,7 @@
 			},
 			"key": "minecraft:dolphin",
 			"name": "DOLPHIN",
-			"ordinal": 34,
+			"ordinal": 35,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2224,7 +2326,7 @@
 			},
 			"key": "minecraft:donkey",
 			"name": "DONKEY",
-			"ordinal": 35,
+			"ordinal": 36,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2236,7 +2338,7 @@
 			"alive": false,
 			"key": "minecraft:dragon_fireball",
 			"name": "DRAGON_FIREBALL",
-			"ordinal": 36,
+			"ordinal": 37,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2342,7 +2444,7 @@
 			},
 			"key": "minecraft:drowned",
 			"name": "DROWNED",
-			"ordinal": 37,
+			"ordinal": 38,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2354,7 +2456,7 @@
 			"alive": false,
 			"key": "minecraft:egg",
 			"name": "EGG",
-			"ordinal": 38,
+			"ordinal": 39,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2456,7 +2558,7 @@
 			},
 			"key": "minecraft:elder_guardian",
 			"name": "ELDER_GUARDIAN",
-			"ordinal": 39,
+			"ordinal": 40,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2468,7 +2570,7 @@
 			"alive": false,
 			"key": "minecraft:end_crystal",
 			"name": "END_CRYSTAL",
-			"ordinal": 40,
+			"ordinal": 41,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2566,7 +2668,7 @@
 			},
 			"key": "minecraft:ender_dragon",
 			"name": "ENDER_DRAGON",
-			"ordinal": 41,
+			"ordinal": 42,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2578,7 +2680,7 @@
 			"alive": false,
 			"key": "minecraft:ender_pearl",
 			"name": "ENDER_PEARL",
-			"ordinal": 42,
+			"ordinal": 43,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2680,7 +2782,7 @@
 			},
 			"key": "minecraft:enderman",
 			"name": "ENDERMAN",
-			"ordinal": 43,
+			"ordinal": 44,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2782,7 +2884,7 @@
 			},
 			"key": "minecraft:endermite",
 			"name": "ENDERMITE",
-			"ordinal": 44,
+			"ordinal": 45,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2884,7 +2986,7 @@
 			},
 			"key": "minecraft:evoker",
 			"name": "EVOKER",
-			"ordinal": 45,
+			"ordinal": 46,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2896,7 +2998,7 @@
 			"alive": false,
 			"key": "minecraft:evoker_fangs",
 			"name": "EVOKER_FANGS",
-			"ordinal": 46,
+			"ordinal": 47,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2908,7 +3010,7 @@
 			"alive": false,
 			"key": "minecraft:experience_bottle",
 			"name": "EXPERIENCE_BOTTLE",
-			"ordinal": 47,
+			"ordinal": 48,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2920,7 +3022,7 @@
 			"alive": false,
 			"key": "minecraft:experience_orb",
 			"name": "EXPERIENCE_ORB",
-			"ordinal": 48,
+			"ordinal": 49,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2932,7 +3034,7 @@
 			"alive": false,
 			"key": "minecraft:eye_of_ender",
 			"name": "EYE_OF_ENDER",
-			"ordinal": 49,
+			"ordinal": 50,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2944,7 +3046,7 @@
 			"alive": false,
 			"key": "minecraft:falling_block",
 			"name": "FALLING_BLOCK",
-			"ordinal": 50,
+			"ordinal": 51,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2956,7 +3058,7 @@
 			"alive": false,
 			"key": "minecraft:fireball",
 			"name": "FIREBALL",
-			"ordinal": 51,
+			"ordinal": 52,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2968,7 +3070,7 @@
 			"alive": false,
 			"key": "minecraft:firework_rocket",
 			"name": "FIREWORK_ROCKET",
-			"ordinal": 52,
+			"ordinal": 53,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -2980,7 +3082,7 @@
 			"alive": false,
 			"key": "minecraft:fishing_bobber",
 			"name": "FISHING_BOBBER",
-			"ordinal": 53,
+			"ordinal": 54,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3086,7 +3188,7 @@
 			},
 			"key": "minecraft:fox",
 			"name": "FOX",
-			"ordinal": 54,
+			"ordinal": 55,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3192,7 +3294,7 @@
 			},
 			"key": "minecraft:frog",
 			"name": "FROG",
-			"ordinal": 55,
+			"ordinal": 56,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3204,7 +3306,7 @@
 			"alive": false,
 			"key": "minecraft:furnace_minecart",
 			"name": "FURNACE_MINECART",
-			"ordinal": 56,
+			"ordinal": 57,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3306,7 +3408,7 @@
 			},
 			"key": "minecraft:ghast",
 			"name": "GHAST",
-			"ordinal": 57,
+			"ordinal": 58,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3408,7 +3510,7 @@
 			},
 			"key": "minecraft:giant",
 			"name": "GIANT",
-			"ordinal": 58,
+			"ordinal": 59,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3420,7 +3522,7 @@
 			"alive": false,
 			"key": "minecraft:glow_item_frame",
 			"name": "GLOW_ITEM_FRAME",
-			"ordinal": 59,
+			"ordinal": 60,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3518,7 +3620,7 @@
 			},
 			"key": "minecraft:glow_squid",
 			"name": "GLOW_SQUID",
-			"ordinal": 60,
+			"ordinal": 61,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3624,7 +3726,7 @@
 			},
 			"key": "minecraft:goat",
 			"name": "GOAT",
-			"ordinal": 61,
+			"ordinal": 62,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3726,7 +3828,7 @@
 			},
 			"key": "minecraft:guardian",
 			"name": "GUARDIAN",
-			"ordinal": 62,
+			"ordinal": 63,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3832,7 +3934,7 @@
 			},
 			"key": "minecraft:happy_ghast",
 			"name": "HAPPY_GHAST",
-			"ordinal": 63,
+			"ordinal": 64,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3934,7 +4036,7 @@
 			},
 			"key": "minecraft:hoglin",
 			"name": "HOGLIN",
-			"ordinal": 64,
+			"ordinal": 65,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -3946,7 +4048,7 @@
 			"alive": false,
 			"key": "minecraft:hopper_minecart",
 			"name": "HOPPER_MINECART",
-			"ordinal": 65,
+			"ordinal": 66,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4048,7 +4150,7 @@
 			},
 			"key": "minecraft:horse",
 			"name": "HORSE",
-			"ordinal": 66,
+			"ordinal": 67,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4154,7 +4256,7 @@
 			},
 			"key": "minecraft:husk",
 			"name": "HUSK",
-			"ordinal": 67,
+			"ordinal": 68,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4256,7 +4358,7 @@
 			},
 			"key": "minecraft:illusioner",
 			"name": "ILLUSIONER",
-			"ordinal": 68,
+			"ordinal": 69,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4268,7 +4370,7 @@
 			"alive": false,
 			"key": "minecraft:interaction",
 			"name": "INTERACTION",
-			"ordinal": 69,
+			"ordinal": 70,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4370,7 +4472,7 @@
 			},
 			"key": "minecraft:iron_golem",
 			"name": "IRON_GOLEM",
-			"ordinal": 70,
+			"ordinal": 71,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4382,7 +4484,7 @@
 			"alive": false,
 			"key": "minecraft:item",
 			"name": "ITEM",
-			"ordinal": 71,
+			"ordinal": 72,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4394,7 +4496,7 @@
 			"alive": false,
 			"key": "minecraft:item_display",
 			"name": "ITEM_DISPLAY",
-			"ordinal": 72,
+			"ordinal": 73,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4406,7 +4508,7 @@
 			"alive": false,
 			"key": "minecraft:item_frame",
 			"name": "ITEM_FRAME",
-			"ordinal": 73,
+			"ordinal": 74,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4418,7 +4520,7 @@
 			"alive": false,
 			"key": "minecraft:jungle_boat",
 			"name": "JUNGLE_BOAT",
-			"ordinal": 74,
+			"ordinal": 75,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4430,7 +4532,7 @@
 			"alive": false,
 			"key": "minecraft:jungle_chest_boat",
 			"name": "JUNGLE_CHEST_BOAT",
-			"ordinal": 75,
+			"ordinal": 76,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4442,7 +4544,7 @@
 			"alive": false,
 			"key": "minecraft:leash_knot",
 			"name": "LEASH_KNOT",
-			"ordinal": 76,
+			"ordinal": 77,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4454,7 +4556,7 @@
 			"alive": false,
 			"key": "minecraft:lightning_bolt",
 			"name": "LIGHTNING_BOLT",
-			"ordinal": 77,
+			"ordinal": 78,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4466,7 +4568,7 @@
 			"alive": false,
 			"key": "minecraft:lingering_potion",
 			"name": "LINGERING_POTION",
-			"ordinal": 78,
+			"ordinal": 79,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4568,7 +4670,7 @@
 			},
 			"key": "minecraft:llama",
 			"name": "LLAMA",
-			"ordinal": 79,
+			"ordinal": 80,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4580,7 +4682,7 @@
 			"alive": false,
 			"key": "minecraft:llama_spit",
 			"name": "LLAMA_SPIT",
-			"ordinal": 80,
+			"ordinal": 81,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4682,7 +4784,7 @@
 			},
 			"key": "minecraft:magma_cube",
 			"name": "MAGMA_CUBE",
-			"ordinal": 81,
+			"ordinal": 82,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4694,7 +4796,7 @@
 			"alive": false,
 			"key": "minecraft:mangrove_boat",
 			"name": "MANGROVE_BOAT",
-			"ordinal": 82,
+			"ordinal": 83,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4706,7 +4808,7 @@
 			"alive": false,
 			"key": "minecraft:mangrove_chest_boat",
 			"name": "MANGROVE_CHEST_BOAT",
-			"ordinal": 83,
+			"ordinal": 84,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4800,7 +4902,7 @@
 			},
 			"key": "minecraft:mannequin",
 			"name": "MANNEQUIN",
-			"ordinal": 84,
+			"ordinal": 85,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4812,7 +4914,7 @@
 			"alive": false,
 			"key": "minecraft:marker",
 			"name": "MARKER",
-			"ordinal": 85,
+			"ordinal": 86,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4824,7 +4926,7 @@
 			"alive": false,
 			"key": "minecraft:minecart",
 			"name": "MINECART",
-			"ordinal": 86,
+			"ordinal": 87,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -4926,7 +5028,7 @@
 			},
 			"key": "minecraft:mooshroom",
 			"name": "MOOSHROOM",
-			"ordinal": 87,
+			"ordinal": 88,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5028,7 +5130,7 @@
 			},
 			"key": "minecraft:mule",
 			"name": "MULE",
-			"ordinal": 88,
+			"ordinal": 89,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5037,10 +5139,116 @@
 			"typeId": 32
 		},
 		{
+			"alive": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 15.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 1.0,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
+			"key": "minecraft:nautilus",
+			"name": "NAUTILUS",
+			"ordinal": 90,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.nautilus",
+			"typeId": -1
+		},
+		{
 			"alive": false,
 			"key": "minecraft:oak_boat",
 			"name": "OAK_BOAT",
-			"ordinal": 89,
+			"ordinal": 91,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5052,7 +5260,7 @@
 			"alive": false,
 			"key": "minecraft:oak_chest_boat",
 			"name": "OAK_CHEST_BOAT",
-			"ordinal": 90,
+			"ordinal": 92,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5158,7 +5366,7 @@
 			},
 			"key": "minecraft:ocelot",
 			"name": "OCELOT",
-			"ordinal": 91,
+			"ordinal": 93,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5170,7 +5378,7 @@
 			"alive": false,
 			"key": "minecraft:ominous_item_spawner",
 			"name": "OMINOUS_ITEM_SPAWNER",
-			"ordinal": 92,
+			"ordinal": 94,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5182,7 +5390,7 @@
 			"alive": false,
 			"key": "minecraft:painting",
 			"name": "PAINTING",
-			"ordinal": 93,
+			"ordinal": 95,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5194,7 +5402,7 @@
 			"alive": false,
 			"key": "minecraft:pale_oak_boat",
 			"name": "PALE_OAK_BOAT",
-			"ordinal": 94,
+			"ordinal": 96,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5206,7 +5414,7 @@
 			"alive": false,
 			"key": "minecraft:pale_oak_chest_boat",
 			"name": "PALE_OAK_CHEST_BOAT",
-			"ordinal": 95,
+			"ordinal": 97,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5312,12 +5520,114 @@
 			},
 			"key": "minecraft:panda",
 			"name": "PANDA",
-			"ordinal": 96,
+			"ordinal": 98,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.panda",
+			"typeId": -1
+		},
+		{
+			"alive": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 2.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 16.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.25,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
+			"key": "minecraft:parched",
+			"name": "PARCHED",
+			"ordinal": 99,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.parched",
 			"typeId": -1
 		},
 		{
@@ -5422,7 +5732,7 @@
 			},
 			"key": "minecraft:parrot",
 			"name": "PARROT",
-			"ordinal": 97,
+			"ordinal": 100,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5524,7 +5834,7 @@
 			},
 			"key": "minecraft:phantom",
 			"name": "PHANTOM",
-			"ordinal": 98,
+			"ordinal": 101,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5626,7 +5936,7 @@
 			},
 			"key": "minecraft:pig",
 			"name": "PIG",
-			"ordinal": 99,
+			"ordinal": 102,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5728,7 +6038,7 @@
 			},
 			"key": "minecraft:piglin",
 			"name": "PIGLIN",
-			"ordinal": 100,
+			"ordinal": 103,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5830,7 +6140,7 @@
 			},
 			"key": "minecraft:piglin_brute",
 			"name": "PIGLIN_BRUTE",
-			"ordinal": 101,
+			"ordinal": 104,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -5932,7 +6242,7 @@
 			},
 			"key": "minecraft:pillager",
 			"name": "PILLAGER",
-			"ordinal": 102,
+			"ordinal": 105,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6070,7 +6380,7 @@
 			},
 			"key": "minecraft:player",
 			"name": "PLAYER",
-			"ordinal": 103,
+			"ordinal": 106,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6176,7 +6486,7 @@
 			},
 			"key": "minecraft:polar_bear",
 			"name": "POLAR_BEAR",
-			"ordinal": 104,
+			"ordinal": 107,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6274,7 +6584,7 @@
 			},
 			"key": "minecraft:pufferfish",
 			"name": "PUFFERFISH",
-			"ordinal": 105,
+			"ordinal": 108,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6380,7 +6690,7 @@
 			},
 			"key": "minecraft:rabbit",
 			"name": "RABBIT",
-			"ordinal": 106,
+			"ordinal": 109,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6482,7 +6792,7 @@
 			},
 			"key": "minecraft:ravager",
 			"name": "RAVAGER",
-			"ordinal": 107,
+			"ordinal": 110,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6580,7 +6890,7 @@
 			},
 			"key": "minecraft:salmon",
 			"name": "SALMON",
-			"ordinal": 108,
+			"ordinal": 111,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6682,7 +6992,7 @@
 			},
 			"key": "minecraft:sheep",
 			"name": "SHEEP",
-			"ordinal": 109,
+			"ordinal": 112,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6780,7 +7090,7 @@
 			},
 			"key": "minecraft:shulker",
 			"name": "SHULKER",
-			"ordinal": 110,
+			"ordinal": 113,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6792,7 +7102,7 @@
 			"alive": false,
 			"key": "minecraft:shulker_bullet",
 			"name": "SHULKER_BULLET",
-			"ordinal": 111,
+			"ordinal": 114,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6894,7 +7204,7 @@
 			},
 			"key": "minecraft:silverfish",
 			"name": "SILVERFISH",
-			"ordinal": 112,
+			"ordinal": 115,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -6996,7 +7306,7 @@
 			},
 			"key": "minecraft:skeleton",
 			"name": "SKELETON",
-			"ordinal": 113,
+			"ordinal": 116,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7098,7 +7408,7 @@
 			},
 			"key": "minecraft:skeleton_horse",
 			"name": "SKELETON_HORSE",
-			"ordinal": 114,
+			"ordinal": 117,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7200,7 +7510,7 @@
 			},
 			"key": "minecraft:slime",
 			"name": "SLIME",
-			"ordinal": 115,
+			"ordinal": 118,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7212,7 +7522,7 @@
 			"alive": false,
 			"key": "minecraft:small_fireball",
 			"name": "SMALL_FIREBALL",
-			"ordinal": 116,
+			"ordinal": 119,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7314,7 +7624,7 @@
 			},
 			"key": "minecraft:sniffer",
 			"name": "SNIFFER",
-			"ordinal": 117,
+			"ordinal": 120,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7412,7 +7722,7 @@
 			},
 			"key": "minecraft:snow_golem",
 			"name": "SNOW_GOLEM",
-			"ordinal": 118,
+			"ordinal": 121,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7424,7 +7734,7 @@
 			"alive": false,
 			"key": "minecraft:snowball",
 			"name": "SNOWBALL",
-			"ordinal": 119,
+			"ordinal": 122,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7436,7 +7746,7 @@
 			"alive": false,
 			"key": "minecraft:spawner_minecart",
 			"name": "SPAWNER_MINECART",
-			"ordinal": 120,
+			"ordinal": 123,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7448,7 +7758,7 @@
 			"alive": false,
 			"key": "minecraft:spectral_arrow",
 			"name": "SPECTRAL_ARROW",
-			"ordinal": 121,
+			"ordinal": 124,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7550,7 +7860,7 @@
 			},
 			"key": "minecraft:spider",
 			"name": "SPIDER",
-			"ordinal": 122,
+			"ordinal": 125,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7562,7 +7872,7 @@
 			"alive": false,
 			"key": "minecraft:splash_potion",
 			"name": "SPLASH_POTION",
-			"ordinal": 123,
+			"ordinal": 126,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7574,7 +7884,7 @@
 			"alive": false,
 			"key": "minecraft:spruce_boat",
 			"name": "SPRUCE_BOAT",
-			"ordinal": 124,
+			"ordinal": 127,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7586,7 +7896,7 @@
 			"alive": false,
 			"key": "minecraft:spruce_chest_boat",
 			"name": "SPRUCE_CHEST_BOAT",
-			"ordinal": 125,
+			"ordinal": 128,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7684,7 +7994,7 @@
 			},
 			"key": "minecraft:squid",
 			"name": "SQUID",
-			"ordinal": 126,
+			"ordinal": 129,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7786,7 +8096,7 @@
 			},
 			"key": "minecraft:stray",
 			"name": "STRAY",
-			"ordinal": 127,
+			"ordinal": 130,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7888,7 +8198,7 @@
 			},
 			"key": "minecraft:strider",
 			"name": "STRIDER",
-			"ordinal": 128,
+			"ordinal": 131,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -7990,7 +8300,7 @@
 			},
 			"key": "minecraft:tadpole",
 			"name": "TADPOLE",
-			"ordinal": 129,
+			"ordinal": 132,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8002,7 +8312,7 @@
 			"alive": false,
 			"key": "minecraft:text_display",
 			"name": "TEXT_DISPLAY",
-			"ordinal": 130,
+			"ordinal": 133,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8014,7 +8324,7 @@
 			"alive": false,
 			"key": "minecraft:tnt",
 			"name": "TNT",
-			"ordinal": 131,
+			"ordinal": 134,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8026,7 +8336,7 @@
 			"alive": false,
 			"key": "minecraft:tnt_minecart",
 			"name": "TNT_MINECART",
-			"ordinal": 132,
+			"ordinal": 135,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8128,7 +8438,7 @@
 			},
 			"key": "minecraft:trader_llama",
 			"name": "TRADER_LLAMA",
-			"ordinal": 133,
+			"ordinal": 136,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8140,7 +8450,7 @@
 			"alive": false,
 			"key": "minecraft:trident",
 			"name": "TRIDENT",
-			"ordinal": 134,
+			"ordinal": 137,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8238,7 +8548,7 @@
 			},
 			"key": "minecraft:tropical_fish",
 			"name": "TROPICAL_FISH",
-			"ordinal": 135,
+			"ordinal": 138,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8340,7 +8650,7 @@
 			},
 			"key": "minecraft:turtle",
 			"name": "TURTLE",
-			"ordinal": 136,
+			"ordinal": 139,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8442,7 +8752,7 @@
 			},
 			"key": "minecraft:vex",
 			"name": "VEX",
-			"ordinal": 137,
+			"ordinal": 140,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8540,7 +8850,7 @@
 			},
 			"key": "minecraft:villager",
 			"name": "VILLAGER",
-			"ordinal": 138,
+			"ordinal": 141,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8642,7 +8952,7 @@
 			},
 			"key": "minecraft:vindicator",
 			"name": "VINDICATOR",
-			"ordinal": 139,
+			"ordinal": 142,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8740,7 +9050,7 @@
 			},
 			"key": "minecraft:wandering_trader",
 			"name": "WANDERING_TRADER",
-			"ordinal": 140,
+			"ordinal": 143,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8842,7 +9152,7 @@
 			},
 			"key": "minecraft:warden",
 			"name": "WARDEN",
-			"ordinal": 141,
+			"ordinal": 144,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8854,7 +9164,7 @@
 			"alive": false,
 			"key": "minecraft:wind_charge",
 			"name": "WIND_CHARGE",
-			"ordinal": 142,
+			"ordinal": 145,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8956,7 +9266,7 @@
 			},
 			"key": "minecraft:witch",
 			"name": "WITCH",
-			"ordinal": 143,
+			"ordinal": 146,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9062,7 +9372,7 @@
 			},
 			"key": "minecraft:wither",
 			"name": "WITHER",
-			"ordinal": 144,
+			"ordinal": 147,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9164,7 +9474,7 @@
 			},
 			"key": "minecraft:wither_skeleton",
 			"name": "WITHER_SKELETON",
-			"ordinal": 145,
+			"ordinal": 148,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9176,7 +9486,7 @@
 			"alive": false,
 			"key": "minecraft:wither_skull",
 			"name": "WITHER_SKULL",
-			"ordinal": 146,
+			"ordinal": 149,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9282,7 +9592,7 @@
 			},
 			"key": "minecraft:wolf",
 			"name": "WOLF",
-			"ordinal": 147,
+			"ordinal": 150,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9384,7 +9694,7 @@
 			},
 			"key": "minecraft:zoglin",
 			"name": "ZOGLIN",
-			"ordinal": 148,
+			"ordinal": 151,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9490,7 +9800,7 @@
 			},
 			"key": "minecraft:zombie",
 			"name": "ZOMBIE",
-			"ordinal": 149,
+			"ordinal": 152,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9550,7 +9860,7 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:max_health": {
-					"baseValue": 15.0,
+					"baseValue": 25.0,
 					"defaultValue": 20.0
 				},
 				"minecraft:movement_efficiency": {
@@ -9558,7 +9868,7 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:movement_speed": {
-					"baseValue": 0.20000000298023224,
+					"baseValue": 0.22499999403953552,
 					"defaultValue": 0.7
 				},
 				"minecraft:oxygen_bonus": {
@@ -9592,13 +9902,119 @@
 			},
 			"key": "minecraft:zombie_horse",
 			"name": "ZOMBIE_HORSE",
-			"ordinal": 150,
+			"ordinal": 153,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
 			"spawnable": true,
 			"translationKey": "entity.minecraft.zombie_horse",
 			"typeId": 29
+		},
+		{
+			"alive": true,
+			"defaultAttributes": {
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_damage": {
+					"baseValue": 3.0,
+					"defaultValue": 2.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.30000001192092896,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 15.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 1.100000023841858,
+					"defaultValue": 0.7
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
+			"key": "minecraft:zombie_nautilus",
+			"name": "ZOMBIE_NAUTILUS",
+			"ordinal": 154,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.zombie_nautilus",
+			"typeId": -1
 		},
 		{
 			"alive": true,
@@ -9698,7 +10114,7 @@
 			},
 			"key": "minecraft:zombie_villager",
 			"name": "ZOMBIE_VILLAGER",
-			"ordinal": 151,
+			"ordinal": 155,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9804,7 +10220,7 @@
 			},
 			"key": "minecraft:zombified_piglin",
 			"name": "ZOMBIFIED_PIGLIN",
-			"ordinal": 152,
+			"ordinal": 156,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],

@@ -12,6 +12,7 @@ import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -717,6 +718,12 @@ public class UnsafeValuesMock implements UnsafeValues
 		}
 
 		return itemstack;
+	}
+
+	@Override
+	public @NotNull ItemStack deserializeItemHover(HoverEvent.@NotNull ShowItem showItem)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -1,0 +1,361 @@
+{
+	"values": [
+		{
+			"key": "minecraft:advance_time",
+			"name": "minecraft:advance_time",
+			"translationKey": "gamerule.minecraft.advance_time",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:advance_weather",
+			"name": "minecraft:advance_weather",
+			"translationKey": "gamerule.minecraft.advance_weather",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:allow_entering_nether_using_portals",
+			"name": "minecraft:allow_entering_nether_using_portals",
+			"translationKey": "gamerule.minecraft.allow_entering_nether_using_portals",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:block_drops",
+			"name": "minecraft:block_drops",
+			"translationKey": "gamerule.minecraft.block_drops",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:block_explosion_drop_decay",
+			"name": "minecraft:block_explosion_drop_decay",
+			"translationKey": "gamerule.minecraft.block_explosion_drop_decay",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:command_block_output",
+			"name": "minecraft:command_block_output",
+			"translationKey": "gamerule.minecraft.command_block_output",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:command_blocks_work",
+			"name": "minecraft:command_blocks_work",
+			"translationKey": "gamerule.minecraft.command_blocks_work",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:drowning_damage",
+			"name": "minecraft:drowning_damage",
+			"translationKey": "gamerule.minecraft.drowning_damage",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:elytra_movement_check",
+			"name": "minecraft:elytra_movement_check",
+			"translationKey": "gamerule.minecraft.elytra_movement_check",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:ender_pearls_vanish_on_death",
+			"name": "minecraft:ender_pearls_vanish_on_death",
+			"translationKey": "gamerule.minecraft.ender_pearls_vanish_on_death",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:entity_drops",
+			"name": "minecraft:entity_drops",
+			"translationKey": "gamerule.minecraft.entity_drops",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:fall_damage",
+			"name": "minecraft:fall_damage",
+			"translationKey": "gamerule.minecraft.fall_damage",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:fire_damage",
+			"name": "minecraft:fire_damage",
+			"translationKey": "gamerule.minecraft.fire_damage",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:fire_spread_radius_around_player",
+			"name": "minecraft:fire_spread_radius_around_player",
+			"translationKey": "gamerule.minecraft.fire_spread_radius_around_player",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:forgive_dead_players",
+			"name": "minecraft:forgive_dead_players",
+			"translationKey": "gamerule.minecraft.forgive_dead_players",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:freeze_damage",
+			"name": "minecraft:freeze_damage",
+			"translationKey": "gamerule.minecraft.freeze_damage",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:global_sound_events",
+			"name": "minecraft:global_sound_events",
+			"translationKey": "gamerule.minecraft.global_sound_events",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:immediate_respawn",
+			"name": "minecraft:immediate_respawn",
+			"translationKey": "gamerule.minecraft.immediate_respawn",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:keep_inventory",
+			"name": "minecraft:keep_inventory",
+			"translationKey": "gamerule.minecraft.keep_inventory",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:lava_source_conversion",
+			"name": "minecraft:lava_source_conversion",
+			"translationKey": "gamerule.minecraft.lava_source_conversion",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:limited_crafting",
+			"name": "minecraft:limited_crafting",
+			"translationKey": "gamerule.minecraft.limited_crafting",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:locator_bar",
+			"name": "minecraft:locator_bar",
+			"translationKey": "gamerule.minecraft.locator_bar",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:log_admin_commands",
+			"name": "minecraft:log_admin_commands",
+			"translationKey": "gamerule.minecraft.log_admin_commands",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:max_block_modifications",
+			"name": "minecraft:max_block_modifications",
+			"translationKey": "gamerule.minecraft.max_block_modifications",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:max_command_forks",
+			"name": "minecraft:max_command_forks",
+			"translationKey": "gamerule.minecraft.max_command_forks",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:max_command_sequence_length",
+			"name": "minecraft:max_command_sequence_length",
+			"translationKey": "gamerule.minecraft.max_command_sequence_length",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:max_entity_cramming",
+			"name": "minecraft:max_entity_cramming",
+			"translationKey": "gamerule.minecraft.max_entity_cramming",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:max_minecart_speed",
+			"name": "minecraft:max_minecart_speed",
+			"requiredFeatures": [
+				"minecraft:minecart_improvements"
+			],
+			"translationKey": "gamerule.minecraft.max_minecart_speed",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:max_snow_accumulation_height",
+			"name": "minecraft:max_snow_accumulation_height",
+			"translationKey": "gamerule.minecraft.max_snow_accumulation_height",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:mob_drops",
+			"name": "minecraft:mob_drops",
+			"translationKey": "gamerule.minecraft.mob_drops",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:mob_explosion_drop_decay",
+			"name": "minecraft:mob_explosion_drop_decay",
+			"translationKey": "gamerule.minecraft.mob_explosion_drop_decay",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:mob_griefing",
+			"name": "minecraft:mob_griefing",
+			"translationKey": "gamerule.minecraft.mob_griefing",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:natural_health_regeneration",
+			"name": "minecraft:natural_health_regeneration",
+			"translationKey": "gamerule.minecraft.natural_health_regeneration",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:player_movement_check",
+			"name": "minecraft:player_movement_check",
+			"translationKey": "gamerule.minecraft.player_movement_check",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:players_nether_portal_creative_delay",
+			"name": "minecraft:players_nether_portal_creative_delay",
+			"translationKey": "gamerule.minecraft.players_nether_portal_creative_delay",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:players_nether_portal_default_delay",
+			"name": "minecraft:players_nether_portal_default_delay",
+			"translationKey": "gamerule.minecraft.players_nether_portal_default_delay",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:players_sleeping_percentage",
+			"name": "minecraft:players_sleeping_percentage",
+			"translationKey": "gamerule.minecraft.players_sleeping_percentage",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:projectiles_can_break_blocks",
+			"name": "minecraft:projectiles_can_break_blocks",
+			"translationKey": "gamerule.minecraft.projectiles_can_break_blocks",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:pvp",
+			"name": "minecraft:pvp",
+			"translationKey": "gamerule.minecraft.pvp",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:raids",
+			"name": "minecraft:raids",
+			"translationKey": "gamerule.minecraft.raids",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:random_tick_speed",
+			"name": "minecraft:random_tick_speed",
+			"translationKey": "gamerule.minecraft.random_tick_speed",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:reduced_debug_info",
+			"name": "minecraft:reduced_debug_info",
+			"translationKey": "gamerule.minecraft.reduced_debug_info",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:respawn_radius",
+			"name": "minecraft:respawn_radius",
+			"translationKey": "gamerule.minecraft.respawn_radius",
+			"type": "java.lang.Integer"
+		},
+		{
+			"key": "minecraft:send_command_feedback",
+			"name": "minecraft:send_command_feedback",
+			"translationKey": "gamerule.minecraft.send_command_feedback",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:show_advancement_messages",
+			"name": "minecraft:show_advancement_messages",
+			"translationKey": "gamerule.minecraft.show_advancement_messages",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:show_death_messages",
+			"name": "minecraft:show_death_messages",
+			"translationKey": "gamerule.minecraft.show_death_messages",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawn_mobs",
+			"name": "minecraft:spawn_mobs",
+			"translationKey": "gamerule.minecraft.spawn_mobs",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawn_monsters",
+			"name": "minecraft:spawn_monsters",
+			"translationKey": "gamerule.minecraft.spawn_monsters",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawn_patrols",
+			"name": "minecraft:spawn_patrols",
+			"translationKey": "gamerule.minecraft.spawn_patrols",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawn_phantoms",
+			"name": "minecraft:spawn_phantoms",
+			"translationKey": "gamerule.minecraft.spawn_phantoms",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawn_wandering_traders",
+			"name": "minecraft:spawn_wandering_traders",
+			"translationKey": "gamerule.minecraft.spawn_wandering_traders",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawn_wardens",
+			"name": "minecraft:spawn_wardens",
+			"translationKey": "gamerule.minecraft.spawn_wardens",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spawner_blocks_work",
+			"name": "minecraft:spawner_blocks_work",
+			"translationKey": "gamerule.minecraft.spawner_blocks_work",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spectators_generate_chunks",
+			"name": "minecraft:spectators_generate_chunks",
+			"translationKey": "gamerule.minecraft.spectators_generate_chunks",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:spread_vines",
+			"name": "minecraft:spread_vines",
+			"translationKey": "gamerule.minecraft.spread_vines",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:tnt_explodes",
+			"name": "minecraft:tnt_explodes",
+			"translationKey": "gamerule.minecraft.tnt_explodes",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:tnt_explosion_drop_decay",
+			"name": "minecraft:tnt_explosion_drop_decay",
+			"translationKey": "gamerule.minecraft.tnt_explosion_drop_decay",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:universal_anger",
+			"name": "minecraft:universal_anger",
+			"translationKey": "gamerule.minecraft.universal_anger",
+			"type": "java.lang.Boolean"
+		},
+		{
+			"key": "minecraft:water_source_conversion",
+			"name": "minecraft:water_source_conversion",
+			"translationKey": "gamerule.minecraft.water_source_conversion",
+			"type": "java.lang.Boolean"
+		}
+	]
+}

@@ -68,7 +68,7 @@ public class CraftingRecipeFactory
 		// Create the shaped recipe
 		ShapedRecipe shapedRecipe = createRecipe(jsonRecipe, ShapedRecipe::new);
 		populateCraftingRecipe(jsonRecipe, shapedRecipe);
-		shapedRecipe.shape(shapesList.toArray(new String[0]));
+		shapedRecipe.shape(shapesList.toArray(String[]::new));
 
 		for (var choice : choiceMap.entrySet())
 		{

@@ -140,6 +140,12 @@ import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.SmithingInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.StonecutterInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.EquippableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.FoodComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.JukeboxPlayableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.ToolComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.UseCooldownComponentMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
@@ -1094,7 +1100,23 @@ public class ServerMock extends Server.Spigot implements Server
 		ConfigurationSerialization.registerClass(SpawnRule.class);
 		ConfigurationSerialization.registerClass(PlayerProfileMock.class);
 		ConfigurationSerialization.registerClass(OfflinePlayerMock.class);
+		registerItemSerializables();
+	}
+
+	/**
+	 * Register the {@link ConfigurationSerialization} associated with items.
+	 * For more details check the static method, in <code>CraftItemFactory.class</code> at Paper project.
+	 */
+	private static void registerItemSerializables()
+	{
 		ConfigurationSerialization.registerClass(SerializableMeta.class);
+		ConfigurationSerialization.registerClass(CustomModelDataComponentMock.class);
+		ConfigurationSerialization.registerClass(EquippableComponentMock.class);
+		ConfigurationSerialization.registerClass(FoodComponentMock.class);
+		ConfigurationSerialization.registerClass(ToolComponentMock.class);
+		ConfigurationSerialization.registerClass(ToolComponentMock.ToolRuleMock.class);
+		ConfigurationSerialization.registerClass(JukeboxPlayableComponentMock.class);
+		ConfigurationSerialization.registerClass(UseCooldownComponentMock.class);
 	}
 
 	@Override
