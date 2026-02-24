@@ -17,6 +17,7 @@ import org.bukkit.entity.Bogged;
 import org.bukkit.entity.Breeze;
 import org.bukkit.entity.BreezeWindCharge;
 import org.bukkit.entity.Camel;
+import org.bukkit.entity.CamelHusk;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.ChestBoat;
@@ -76,10 +77,12 @@ import org.bukkit.entity.Marker;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Nautilus;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
+import org.bukkit.entity.Parched;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Pig;
@@ -236,6 +239,7 @@ public final class EntityTypesMock
 				.register(Breeze.class, BreezeMock.class, BreezeMock::new)
 				.register(BreezeWindCharge.class, BreezeWindChargeMock.class, BreezeWindChargeMock::new)
 				.register(Camel.class, CamelMock.class, CamelMock::new)
+				.register(CamelHusk.class, CamelHuskMock.class, CamelHuskMock::new)
 				.register(Cat.class, CatMock.class, CatMock::new)
 				.register(CaveSpider.class, CaveSpiderMock.class, CaveSpiderMock::new)
 				.register(CherryBoat.class, CherryBoatMock.class, CherryBoatMock::new)
@@ -304,6 +308,7 @@ public final class EntityTypesMock
 				.register(Minecart.class, RideableMinecartMock.class, RideableMinecartMock::new)
 				.register(Mule.class, MuleMock.class, MuleMock::new)
 				.register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new)
+				.register(Nautilus.class, NautilusMock.class, NautilusMock::new)
 				.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 				.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 				.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
@@ -312,6 +317,7 @@ public final class EntityTypesMock
 				.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 				.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 				.register(Panda.class, PandaMock.class, PandaMock::new)
+				.register(Parched.class, ParchedMock.class, ParchedMock::new)
 				.register(Parrot.class, ParrotMock.class, ParrotMock::new)
 				.register(Phantom.class, PhantomMock.class, PhantomMock::new)
 				.register(Pig.class, PigMock.class, PigMock::new)
