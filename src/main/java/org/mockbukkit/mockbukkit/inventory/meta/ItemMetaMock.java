@@ -1440,34 +1440,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setUseRemainder(@Nullable ItemStack itemStack)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setDamageResistant(@Nullable Tag<DamageType> tag)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setGlider(boolean b)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItemModel(@Nullable NamespacedKey namespacedKey)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean hasEnchantmentGlintOverride()
 	{
 		return this.enchantmentGlintOverride != null;
