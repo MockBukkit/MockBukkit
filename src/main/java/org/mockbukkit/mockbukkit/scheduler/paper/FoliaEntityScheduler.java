@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.scheduler.paper;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
+
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,9 +19,11 @@ public final class FoliaEntityScheduler implements EntityScheduler {
     private static final String RUNNABLE_CANNOT_BE_NULL = "runnable cannot be null";
 
     private final BukkitSchedulerMock scheduler;
+    private final Entity entity;
 
-    public FoliaEntityScheduler(@NotNull BukkitSchedulerMock scheduler) {
+    public FoliaEntityScheduler(@NotNull BukkitSchedulerMock scheduler, @NotNull Entity entity) {
         this.scheduler = scheduler;
+        this.entity = entity;
     }
 
     @Override
@@ -31,10 +35,15 @@ public final class FoliaEntityScheduler implements EntityScheduler {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(run, RUNNABLE_CANNOT_BE_NULL);
 
-        scheduler.runTaskLater(plugin, run, delayTicks);
-
-        // Entity is never retired in MockBukkit?
-        return true;
+        scheduler.runTaskLater(plugin, () -> {
+            if (entity.isValid()) {
+                run.run();
+            }
+            else if (retired != null) {
+                retired.run();
+            }
+        }, delayTicks);
+        return entity.isValid();
     }
 
     @Override

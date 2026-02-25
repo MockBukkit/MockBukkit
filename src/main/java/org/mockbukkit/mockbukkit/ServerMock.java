@@ -12,7 +12,6 @@ import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEven
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
-import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import net.kyori.adventure.audience.Audience;
@@ -153,7 +152,6 @@ import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
-import org.mockbukkit.mockbukkit.scheduler.paper.FoliaEntityScheduler;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaGlobalRegionScheduler;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaRegionScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
@@ -226,7 +224,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final GlobalRegionScheduler foliaGlobalRegionScheduler = new FoliaGlobalRegionScheduler(this.scheduler);
 	private final RegionScheduler foliaRegionScheduler = new FoliaRegionScheduler(this.scheduler);
-	private final EntityScheduler foliaEntityScheduler = new FoliaEntityScheduler(this.scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final PlayerListMock playerList = new PlayerListMock();
 	private final CommandMapMock commandMap;
@@ -2800,51 +2797,46 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.foliaGlobalRegionScheduler;
 	}
 
-	public @NotNull EntityScheduler getEntityScheduler()
-	{
-		return this.foliaEntityScheduler;
-	}
-
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position, int squareRadiusChunks)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Location location)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Location location, int squareRadiusChunks)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ, int squareRadiusChunks)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull Entity entity)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
@@ -2857,13 +2849,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean isOwnedByCurrentRegion(@NotNull World world, int i, int i1, int i2, int i3)
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override
 	public boolean isGlobalTickThread()
 	{
-		return true;
+		return this.isPrimaryThread();
 	}
 
 	@Override

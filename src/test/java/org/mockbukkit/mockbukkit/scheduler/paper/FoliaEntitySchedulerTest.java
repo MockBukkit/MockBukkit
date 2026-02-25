@@ -7,9 +7,12 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.ZombieMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,14 +29,14 @@ class FoliaEntitySchedulerTest
 
     private FoliaEntityScheduler scheduler;
     private PluginMock plugin;
-    // private EntityMock entity; // for testing retire maybe?
+    private EntityMock entity;
 
     @BeforeEach
     void setUp()
     {
-        scheduler = new FoliaEntityScheduler(bukkitScheduler);
+        entity = new ZombieMock(server, UUID.randomUUID());
+        scheduler = new FoliaEntityScheduler(bukkitScheduler, entity);
         plugin = MockBukkit.createMockPlugin();
-        // entity = new ZombieMock(server, UUID.randomUUID());
     }
 
     @Test
@@ -86,5 +89,30 @@ class FoliaEntitySchedulerTest
     {
         assertThrows(NullPointerException.class,
                 () -> scheduler.run(plugin, null, null));
+    }
+
+    @Test
+    void entityRemoved_RunsRetireCallbackInsteadOfTask()
+    {
+        CountDownLatch taskLatch = new CountDownLatch(1);
+        CountDownLatch retireLatch = new CountDownLatch(1);
+
+        scheduler.runDelayed(
+                plugin,
+                task -> taskLatch.countDown(),
+                retireLatch::countDown,
+                1
+        );
+
+        // Simulate entity retirement
+        entity.remove();
+
+        bukkitScheduler.performTicks(2);
+
+        // Task must NOT run
+        assertEquals(1, taskLatch.getCount());
+
+        // Retire callback MUST run
+        assertEquals(0, retireLatch.getCount());
     }
 }

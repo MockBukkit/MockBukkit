@@ -1478,7 +1478,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull EntityScheduler getScheduler()
 	{
-		return this.server.getEntityScheduler();
+		return new FoliaEntityScheduler(this.server.getScheduler(), this);
 	}
 
 	@Override
