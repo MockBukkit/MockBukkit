@@ -32,17 +32,18 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @NotNull Runnable run,
             @Nullable Runnable retired,
             long delayTicks) {
+
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(run, RUNNABLE_CANNOT_BE_NULL);
 
         scheduler.runTaskLater(plugin, () -> {
             if (entity.isValid()) {
                 run.run();
-            }
-            else if (retired != null) {
+            } else if (retired != null) {
                 retired.run();
             }
         }, delayTicks);
+
         return entity.isValid();
     }
 
@@ -51,11 +52,20 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @NotNull Plugin plugin,
             @NotNull Consumer<ScheduledTask> task,
             @Nullable Runnable retired) {
+
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
         PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
-        scheduler.runTask(plugin, scheduledTask::run);
+
+        scheduler.runTask(plugin, () -> {
+            if (entity.isValid()) {
+                scheduledTask.run();
+            } else if (retired != null) {
+                retired.run();
+            }
+        });
+
         return scheduledTask;
     }
 
@@ -65,11 +75,20 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @NotNull Consumer<ScheduledTask> task,
             @Nullable Runnable retired,
             long delayTicks) {
+
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
         PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
-        scheduler.runTaskLater(plugin, scheduledTask::run, delayTicks);
+
+        scheduler.runTaskLater(plugin, () -> {
+            if (entity.isValid()) {
+                scheduledTask.run();
+            } else if (retired != null) {
+                retired.run();
+            }
+        }, delayTicks);
+
         return scheduledTask;
     }
 
@@ -80,11 +99,20 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @Nullable Runnable retired,
             long initialDelayTicks,
             long periodTicks) {
+
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
         PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
-        scheduler.runTaskTimer(plugin, scheduledTask::run, initialDelayTicks, periodTicks);
+
+        scheduler.runTaskTimer(plugin, () -> {
+            if (entity.isValid()) {
+                scheduledTask.run();
+            } else if (retired != null) {
+                retired.run();
+            }
+        }, initialDelayTicks, periodTicks);
+
         return scheduledTask;
     }
 }
