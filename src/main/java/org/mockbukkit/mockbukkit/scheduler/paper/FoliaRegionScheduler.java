@@ -10,7 +10,8 @@ import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.util.function.Consumer;
 
-public final class FoliaRegionScheduler implements RegionScheduler {
+public final class FoliaRegionScheduler implements RegionScheduler
+{
 
     private static final String PLUGIN_CANNOT_BE_NULL = "plugin cannot be null";
     private static final String TASK_CANNOT_BE_NULL = "task cannot be null";
@@ -19,7 +20,8 @@ public final class FoliaRegionScheduler implements RegionScheduler {
 
     private final BukkitSchedulerMock scheduler;
 
-    public FoliaRegionScheduler(@NotNull BukkitSchedulerMock scheduler) {
+    public FoliaRegionScheduler(@NotNull BukkitSchedulerMock scheduler)
+    {
         this.scheduler = scheduler;
     }
 
@@ -29,7 +31,8 @@ public final class FoliaRegionScheduler implements RegionScheduler {
             @NotNull World world,
             int chunkX,
             int chunkZ,
-            @NotNull Consumer<ScheduledTask> task) {
+            @NotNull Consumer<ScheduledTask> task)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
@@ -45,7 +48,8 @@ public final class FoliaRegionScheduler implements RegionScheduler {
             @NotNull World world,
             int chunkX,
             int chunkZ,
-            @NotNull Runnable run) {
+            @NotNull Runnable run)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
         Preconditions.checkNotNull(run, RUNNABLE_CANNOT_BE_NULL);
@@ -60,7 +64,8 @@ public final class FoliaRegionScheduler implements RegionScheduler {
             int chunkX,
             int chunkZ,
             @NotNull Consumer<ScheduledTask> task,
-            long delayTicks) {
+            long delayTicks)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
@@ -78,7 +83,8 @@ public final class FoliaRegionScheduler implements RegionScheduler {
             int chunkZ,
             @NotNull Consumer<ScheduledTask> task,
             long initialDelayTicks,
-            long periodTicks) {
+            long periodTicks)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);

@@ -9,7 +9,8 @@ import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.util.function.Consumer;
 
-public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
+public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler
+{
 
     private static final String PLUGIN_CANNOT_BE_NULL = "plugin cannot be null";
     private static final String TASK_CANNOT_BE_NULL = "task cannot be null";
@@ -17,14 +18,16 @@ public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
 
     private final BukkitSchedulerMock scheduler;
 
-    public FoliaGlobalRegionScheduler(@NotNull BukkitSchedulerMock scheduler) {
+    public FoliaGlobalRegionScheduler(@NotNull BukkitSchedulerMock scheduler)
+    {
         this.scheduler = scheduler;
     }
 
     @Override
     public @NotNull ScheduledTask run(
             @NotNull Plugin plugin,
-            @NotNull Consumer<ScheduledTask> task) {
+            @NotNull Consumer<ScheduledTask> task)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
@@ -36,7 +39,8 @@ public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     @Override
     public void execute(
             @NotNull Plugin plugin,
-            @NotNull Runnable run) {
+            @NotNull Runnable run)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(run, RUNNABLE_CANNOT_BE_NULL);
 
@@ -47,7 +51,8 @@ public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     public @NotNull ScheduledTask runDelayed(
             @NotNull Plugin plugin,
             @NotNull Consumer<ScheduledTask> task,
-            long delayTicks) {
+            long delayTicks)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
@@ -61,7 +66,8 @@ public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
             @NotNull Plugin plugin,
             @NotNull Consumer<ScheduledTask> task,
             long initialDelayTicks,
-            long periodTicks) {
+            long periodTicks)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
@@ -71,7 +77,8 @@ public final class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     }
 
     @Override
-    public void cancelTasks(@NotNull Plugin plugin) {
+    public void cancelTasks(@NotNull Plugin plugin)
+    {
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         scheduler.cancelTasks(plugin);
     }

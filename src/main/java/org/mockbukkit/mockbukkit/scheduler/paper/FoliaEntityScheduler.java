@@ -12,7 +12,8 @@ import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.util.function.Consumer;
 
-public final class FoliaEntityScheduler implements EntityScheduler {
+public final class FoliaEntityScheduler implements EntityScheduler
+{
 
     private static final String PLUGIN_CANNOT_BE_NULL = "plugin cannot be null";
     private static final String TASK_CANNOT_BE_NULL = "task cannot be null";
@@ -21,7 +22,8 @@ public final class FoliaEntityScheduler implements EntityScheduler {
     private final BukkitSchedulerMock scheduler;
     private final Entity entity;
 
-    public FoliaEntityScheduler(@NotNull BukkitSchedulerMock scheduler, @NotNull Entity entity) {
+    public FoliaEntityScheduler(@NotNull BukkitSchedulerMock scheduler, @NotNull Entity entity)
+    {
         this.scheduler = scheduler;
         this.entity = entity;
     }
@@ -31,15 +33,20 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @NotNull Plugin plugin,
             @NotNull Runnable run,
             @Nullable Runnable retired,
-            long delayTicks) {
+            long delayTicks)
+    {
 
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(run, RUNNABLE_CANNOT_BE_NULL);
 
-        scheduler.runTaskLater(plugin, () -> {
-            if (entity.isValid()) {
+        scheduler.runTaskLater(plugin, () ->
+        {
+            if (entity.isValid())
+            {
                 run.run();
-            } else if (retired != null) {
+            }
+            else if (retired != null)
+            {
                 retired.run();
             }
         }, delayTicks);
@@ -51,17 +58,22 @@ public final class FoliaEntityScheduler implements EntityScheduler {
     public @Nullable ScheduledTask run(
             @NotNull Plugin plugin,
             @NotNull Consumer<ScheduledTask> task,
-            @Nullable Runnable retired) {
+            @Nullable Runnable retired)
+    {
 
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
         PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 
-        scheduler.runTask(plugin, () -> {
-            if (entity.isValid()) {
+        scheduler.runTask(plugin, () ->
+        {
+            if (entity.isValid())
+            {
                 scheduledTask.run();
-            } else if (retired != null) {
+            }
+            else if (retired != null)
+            {
                 retired.run();
             }
         });
@@ -74,17 +86,22 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @NotNull Plugin plugin,
             @NotNull Consumer<ScheduledTask> task,
             @Nullable Runnable retired,
-            long delayTicks) {
+            long delayTicks)
+    {
 
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
         PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 
-        scheduler.runTaskLater(plugin, () -> {
-            if (entity.isValid()) {
+        scheduler.runTaskLater(plugin, () ->
+        {
+            if (entity.isValid())
+            {
                 scheduledTask.run();
-            } else if (retired != null) {
+            }
+            else if (retired != null)
+            {
                 retired.run();
             }
         }, delayTicks);
@@ -98,17 +115,22 @@ public final class FoliaEntityScheduler implements EntityScheduler {
             @NotNull Consumer<ScheduledTask> task,
             @Nullable Runnable retired,
             long initialDelayTicks,
-            long periodTicks) {
+            long periodTicks)
+    {
 
         Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
         Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
         PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 
-        scheduler.runTaskTimer(plugin, () -> {
-            if (entity.isValid()) {
+        scheduler.runTaskTimer(plugin, () ->
+        {
+            if (entity.isValid())
+            {
                 scheduledTask.run();
-            } else if (retired != null) {
+            }
+            else if (retired != null)
+            {
                 retired.run();
             }
         }, initialDelayTicks, periodTicks);
