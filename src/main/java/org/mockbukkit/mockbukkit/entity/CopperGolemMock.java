@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -52,6 +53,20 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 	{
 		Preconditions.checkArgument(state != null, "state cannot be null");
 		this.weatheringCopperState = state;
+	}
+
+	@Override
+	public @NonNull State getGolemState()
+	{
+		// TODO
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setGolemState(@NonNull State state)
+	{
+		// TODO
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
