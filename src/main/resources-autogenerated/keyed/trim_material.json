@@ -1,0 +1,92 @@
+{
+	"values": [
+		{
+			"description": {
+				"color": "#9A5CC6",
+				"translate": "trim_material.minecraft.amethyst"
+			},
+			"key": "minecraft:amethyst",
+			"translationKey": "trim_material.minecraft.amethyst"
+		},
+		{
+			"description": {
+				"color": "#B4684D",
+				"translate": "trim_material.minecraft.copper"
+			},
+			"key": "minecraft:copper",
+			"translationKey": "trim_material.minecraft.copper"
+		},
+		{
+			"description": {
+				"color": "#6EECD2",
+				"translate": "trim_material.minecraft.diamond"
+			},
+			"key": "minecraft:diamond",
+			"translationKey": "trim_material.minecraft.diamond"
+		},
+		{
+			"description": {
+				"color": "#11A036",
+				"translate": "trim_material.minecraft.emerald"
+			},
+			"key": "minecraft:emerald",
+			"translationKey": "trim_material.minecraft.emerald"
+		},
+		{
+			"description": {
+				"color": "#DEB12D",
+				"translate": "trim_material.minecraft.gold"
+			},
+			"key": "minecraft:gold",
+			"translationKey": "trim_material.minecraft.gold"
+		},
+		{
+			"description": {
+				"color": "#ECECEC",
+				"translate": "trim_material.minecraft.iron"
+			},
+			"key": "minecraft:iron",
+			"translationKey": "trim_material.minecraft.iron"
+		},
+		{
+			"description": {
+				"color": "#416E97",
+				"translate": "trim_material.minecraft.lapis"
+			},
+			"key": "minecraft:lapis",
+			"translationKey": "trim_material.minecraft.lapis"
+		},
+		{
+			"description": {
+				"color": "#625859",
+				"translate": "trim_material.minecraft.netherite"
+			},
+			"key": "minecraft:netherite",
+			"translationKey": "trim_material.minecraft.netherite"
+		},
+		{
+			"description": {
+				"color": "#E3D4C4",
+				"translate": "trim_material.minecraft.quartz"
+			},
+			"key": "minecraft:quartz",
+			"translationKey": "trim_material.minecraft.quartz"
+		},
+		{
+			"description": {
+				"color": "#971607",
+				"translate": "trim_material.minecraft.redstone"
+			},
+			"key": "minecraft:redstone",
+			"translationKey": "trim_material.minecraft.redstone"
+		},
+		{
+			"description": {
+				"color": "#FC7812",
+				"translate": "trim_material.minecraft.resin"
+			},
+			"key": "minecraft:resin",
+			"translationKey": "trim_material.minecraft.resin"
+		}
+	]
+}

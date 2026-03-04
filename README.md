@@ -3,14 +3,11 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://mockbukkit.readthedocs.io/en/v1.21/?badge=v1.21">
-        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.21" />
+    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://search.maven.org/search?q=MockBukkit">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven" />
-    </a>
-    <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.21">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/MockBukkit-v1.21/javadoc.svg" />
+    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
@@ -20,6 +17,9 @@
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=MockBukkit_MockBukkit">
         <img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=bugs">
+    </a>
+    <a href="https://codecov.io/gh/MockBukkit/MockBukkit" >
+        <img alt="Coverage" src="https://codecov.io/gh/MockBukkit/MockBukkit/graph/badge.svg?token=uk4UiHzmkx"/>
     </a>
     <!-- Logo -->
     <hr />
@@ -51,10 +51,10 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 > [!TIP]
 > Currently, the newest version available is
 >
-> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.21?color=1bcc94&logo=apache-maven)](https://search.maven.org/search?q=MockBukkit)
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21)
 
-
-> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
+> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly
+> tagged
 
 <details>
 <summary><h3>Adding MockBukkit via Gradle</h3></summary>
@@ -62,6 +62,28 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
 
+First add this new variable, this will allow you to pull the right paper api version from the mockbukkit dependency:
+
+```gradle
+def getMockBukkitPaperVersion() {
+    def mockbukkitJar = configurations.testImplementation
+        .resolve()
+        .find { it.name.startsWith('mockbukkit-') }
+    
+    if (mockbukkitJar) {
+        def jarFile = new java.util.jar.JarFile(mockbukkitJar)
+        def manifest = jarFile.manifest
+        def paperVersion = manifest.mainAttributes.getValue('Paper-Version')
+        jarFile.close()
+        return paperVersion ?: '1.21-R0.1-SNAPSHOT'
+    }
+    return '1.21-R0.1-SNAPSHOT'
+}
+
+ext.paperVersion = getMockBukkitPaperVersion()
+```
+
+Now add the dependencies:
 
 ```gradle
 repositories {
@@ -70,7 +92,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.21:[version]'
+    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:${paperVersion}'
 }
 ```
 
@@ -85,6 +107,7 @@ repositories {
 
 dependencies {
     testImplementation 'com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT'
+    testImplementation 'io.papermc.paper:paper-api:${paperVersion}'
 }
 ```
 
@@ -103,6 +126,44 @@ development of MockBukkit.
 MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
 > Note: Make sure to update the version as necessary and put this dependency above your dependency that provides bukkit.
 
+Also here you can extract the manifest version this way:
+
+```xml
+
+<plugin>
+    <groupId>org.codehaus.gmaven</groupId>
+    <artifactId>groovy-maven-plugin</artifactId>
+    <version>2.1.1</version>
+    <executions>
+        <execution>
+            <phase>initialize</phase>
+            <goals>
+                <goal>execute</goal>
+            </goals>
+            <configuration>
+                <source>
+                    // Extract Paper version from MockBukkit JAR
+                    def mockbukkitJar = project.artifacts.find {
+                    it.artifactId.startsWith('mockbukkit-')
+                    }?.file
+
+                    if (mockbukkitJar) {
+                    def jar = new java.util.jar.JarFile(mockbukkitJar)
+                    def manifest = jar.manifest
+                    def paperVersion = manifest.mainAttributes.getValue('Paper-Version')
+                    jar.close()
+
+                    if (paperVersion) {
+                    project.properties['paper.version.from.mockbukkit'] = paperVersion
+                    }
+                    }
+                </source>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
 ```xml
 <repositories>
     <repository>
@@ -113,16 +174,22 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
 
 <dependencies>
   <dependency>
-    <groupId>com.github.seeseemelk</groupId>
-    <artifactId>MockBukkit-v1.21</artifactId>
+    <groupId>org.mockbukkit.mockbukkit</groupId>
+    <artifactId>mockbukkit-v1.21</artifactId>
     <version>[version]</version>
     <scope>test</scope>
+  </dependency>
+  <dependency>
+      <groupId>io.papermc.paper</groupId>
+      <artifactId>paper-api</artifactId>
+      <version>${paper.version.from.mockbukkit}</version>
+      <scope>test</scope>
   </dependency>
 </dependencies>
 ```
 
 The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
-Maven lifecycle and not in your final product. 
+Maven lifecycle and not in your final product.
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
 use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
@@ -145,6 +212,12 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
     <artifactId>MockBukkit</artifactId>
     <version>v1.21-SNAPSHOT</version>
     <scope>test</scope>
+  </dependency>
+  <dependency>
+      <groupId>io.papermc.paper</groupId>
+      <artifactId>paper-api</artifactId>
+      <version>${paper.version.from.mockbukkit}</version>
+      <scope>test</scope>
   </dependency>
 </dependencies>
 ```
@@ -191,7 +264,7 @@ This is useful when the plugin you are testing may be looking at other loaded pl
 The following piece of code creates a placeholder plugin that extends JavaPlugin.
 
 ```java
-MockPlugin plugin = MockBukkit.createMockPlugin()
+PluginMock plugin = MockBukkit.createMockPlugin();
 ```
 
 ### Mock Players
@@ -235,7 +308,7 @@ block will ever be created in-memory.
 Sometimes your code may use a method that is not yet implemented in MockBukkit.
 When this happens MockBukkit will, instead of returning placeholder values, throw
 an `UnimplementedOperationException`.
-These exception extends `AssumationException` and will cause the test to be skipped.
+These exception extends `AssumptionException` and will cause the test to be skipped.
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
@@ -270,9 +343,10 @@ If you want to see some projects that are using MockBukkit right now, feel free 
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
 already:
-https://mockbukkit.readthedocs.io/en/latest/index.html
+https://docs.mockbukkit.org
 
 ## :gift_heart: Sponsors
 
-Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
+Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of
+their [Open Source program](https://www.jetbrains.com/opensource/).  
 [![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)

@@ -1,0 +1,218 @@
+package org.mockbukkit.mockbukkit.entity;
+
+import net.kyori.adventure.util.TriState;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.entity.EntityType;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@ExtendWith(MockBukkitExtension.class)
+class BeeMockTest
+{
+
+	@MockBukkitInject
+	private BeeMock bee;
+
+	@Test
+	void testGetType()
+	{
+		assertEquals(EntityType.BEE, bee.getType());
+	}
+
+	@Test
+	void testGetHiveDefault()
+	{
+		assertNull(bee.getHive());
+	}
+
+	@Test
+	void testSetHive()
+	{
+		Location location = new Location(bee.getWorld(), 0, 0, 0);
+		bee.setHive(location);
+		assertEquals(location, bee.getHive());
+	}
+
+	@Test
+	void testSetHiveNullDoesntThrow()
+	{
+		bee.setHive(null);
+		assertNull(bee.getHive());
+	}
+
+	@Test
+	void testSetHiveDifferentWorld()
+	{
+		World world = new WorldCreator("world2").createWorld();
+		Location location = new Location(world, 0, 0, 0);
+		assertThrows(IllegalArgumentException.class, () -> bee.setHive(location));
+	}
+
+	@Test
+	void testGetFlowerDefault()
+	{
+		assertNull(bee.getFlower());
+	}
+
+	@Test
+	void testSetFlower()
+	{
+		Location location = new Location(bee.getWorld(), 0, 0, 0);
+		bee.setFlower(location);
+		assertEquals(location, bee.getFlower());
+	}
+
+	@Test
+	void testSetFlowerNullDoesntThrow()
+	{
+		bee.setFlower(null);
+		assertNull(bee.getFlower());
+	}
+
+	@Test
+	void testSetFlowerDifferentWorld()
+	{
+		World world = new WorldCreator("world2").createWorld();
+		Location location = new Location(world, 0, 0, 0);
+		assertThrows(IllegalArgumentException.class, () -> bee.setFlower(location));
+	}
+
+	@Test
+	void testHasNectarDefault()
+	{
+		assertFalse(bee.hasNectar());
+	}
+
+	@Test
+	void testSetHasNectar()
+	{
+		bee.setHasNectar(true);
+		assertTrue(bee.hasNectar());
+	}
+
+	@Test
+	void testHasStungDefault()
+	{
+		assertFalse(bee.hasStung());
+	}
+
+	@Test
+	void testSetHasStung()
+	{
+		bee.setHasStung(true);
+		assertTrue(bee.hasStung());
+	}
+
+	@Test
+	void testGetAngerDefault()
+	{
+		assertEquals(0, bee.getAnger());
+	}
+
+	@Test
+	void testSetAnger()
+	{
+		bee.setAnger(1);
+		assertEquals(1, bee.getAnger());
+	}
+
+	@Test
+	void testGetCannotEnterHiveTicksDefault()
+	{
+		assertEquals(0, bee.getCannotEnterHiveTicks());
+	}
+
+	@Test
+	void testSetCannotEnterHiveTicks()
+	{
+		bee.setCannotEnterHiveTicks(1);
+		assertEquals(1, bee.getCannotEnterHiveTicks());
+	}
+
+	@Test
+	void testGetRollingOverrideDefault()
+	{
+		assertEquals(TriState.NOT_SET, bee.getRollingOverride());
+	}
+
+	@Test
+	void testSetRollingOverride()
+	{
+		bee.setRollingOverride(TriState.TRUE);
+		assertEquals(TriState.TRUE, bee.getRollingOverride());
+	}
+
+	@Test
+	void testSetRollingOverrideNull()
+	{
+		assertThrows(NullPointerException.class, () -> bee.setRollingOverride(null));
+	}
+
+	@Test
+	void testIsRollingDefault()
+	{
+		assertFalse(bee.isRolling());
+	}
+
+	@Test
+	void testIsRolling()
+	{
+		bee.setRollingOverride(TriState.TRUE);
+		assertTrue(bee.isRolling());
+	}
+
+	@Test
+	void getEyeHeight_GivenDefault()
+	{
+		assertEquals(0.3D, bee.getEyeHeight());
+	}
+
+	@Test
+	void getEyeHeight_WhileSneaking()
+	{
+		bee.setBaby();
+		assertEquals(0.15D, bee.getEyeHeight());
+	}
+
+	@Nested
+	class SetTimeSinceSting
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, bee.getTimeSinceSting());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		void givenValidValues(int time)
+		{
+			bee.setTimeSinceSting(time);
+			assertEquals(time, bee.getTimeSinceSting());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { -5, -4, -3, -2, -1 })
+		void givenNonvalidValues(int time)
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bee.setTimeSinceSting(time));
+			assertEquals("Time since sting cannot be negative", e.getMessage());
+		}
+
+	}
+
+}

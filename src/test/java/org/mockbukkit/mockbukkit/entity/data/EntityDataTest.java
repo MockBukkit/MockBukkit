@@ -1,0 +1,86 @@
+package org.mockbukkit.mockbukkit.entity.data;
+
+import org.bukkit.entity.EntityType;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.opentest4j.AssertionFailedError;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@ExtendWith(MockBukkitExtension.class)
+class EntityDataTest
+{
+
+	String fakeData;
+	private EntityData entityData;
+
+	@BeforeEach
+	void setUp()
+	{
+		fakeData = "{'default':{'width':2,'height':3,'eyeHeight':4,'states':{'sleeping':{'height':0.2, 'eyeHeight':0.3}}},'baby':{'width':1, 'height':0.5, 'eyeHeight':0.1}}";
+		entityData = new EntityData(EntityType.BAT, fakeData);
+	}
+
+	@Test
+	void defaultValueTest()
+	{
+		try
+		{
+			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.DEFAULT));
+			assertEquals(3, entityData.getHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
+			assertEquals(4, entityData.getEyeHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
+		}
+		catch (UnimplementedOperationException e)
+		{
+			throw new AssertionFailedError("");
+		}
+	}
+
+	@Test
+	void subTypeValueTest()
+	{
+		try
+		{
+			assertEquals(1, entityData.getWidth(EntitySubType.BABY, EntityState.DEFAULT));
+			assertEquals(0.5, entityData.getHeight(EntitySubType.BABY, EntityState.DEFAULT));
+			assertEquals(0.1, entityData.getEyeHeight(EntitySubType.BABY, EntityState.DEFAULT));
+		}
+		catch (UnimplementedOperationException e)
+		{
+			throw new AssertionFailedError("");
+		}
+	}
+
+	@Test
+	void stateValueTest()
+	{
+		try
+		{
+			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.SLEEPING));
+			assertEquals(0.2, entityData.getHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
+			assertEquals(0.3, entityData.getEyeHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
+		}
+		catch (UnimplementedOperationException e)
+		{
+			throw new AssertionFailedError("");
+		}
+	}
+
+	@Test
+	void invalidKeyTest()
+	{
+		assertThrows(UnimplementedOperationException.class,
+				() -> entityData.getValueFromKey("invalid", EntitySubType.DEFAULT, EntityState.DEFAULT));
+	}
+
+	@Test
+	void invalidStateTest()
+	{
+		assertThrows(UnimplementedOperationException.class, () -> entityData.getWidth(EntitySubType.DEFAULT, EntityState.SNEAKING));
+	}
+
+}

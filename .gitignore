@@ -211,3 +211,8 @@ server/
 
 #Kotlin LSP
 kls_database.db
+
+# metaminer
+metaminer/bin/
+metaminer/run
+metaminer/build

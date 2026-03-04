@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:cactus",
+		"minecraft:fire",
+		"minecraft:magma_block",
+		"minecraft:pointed_dripstone",
+		"minecraft:sweet_berry_bush",
+		"minecraft:wither_rose"
+	]
+}

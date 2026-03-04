@@ -1,0 +1,23 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:allay",
+		"minecraft:bat",
+		"minecraft:bee",
+		"minecraft:blaze",
+		"minecraft:breeze",
+		"minecraft:cat",
+		"minecraft:chicken",
+		"minecraft:copper_golem",
+		"minecraft:ghast",
+		"minecraft:happy_ghast",
+		"minecraft:iron_golem",
+		"minecraft:magma_cube",
+		"minecraft:ocelot",
+		"minecraft:parrot",
+		"minecraft:phantom",
+		"minecraft:shulker",
+		"minecraft:snow_golem",
+		"minecraft:wither"
+	]
+}

@@ -5,14 +5,13 @@ on:
     branches: [ v1.* ]
 
 jobs:
-  build:
+  tag:
     runs-on: ubuntu-latest
-
+    outputs:
+      version: ${{steps.bump-semver.outputs.new_version}}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.BUILD_TOKEN }}
-      
+      - uses: actions/checkout@v6
+
       - name: Get merged pull request
         uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1
         if: ${{ github.event_name == 'push' }}
@@ -35,6 +34,15 @@ jobs:
         with:
           semver_only: true
 
+      - name: Read Paper version from gradle.properties
+        id: paper-version
+        run: |
+          {
+              echo "paper_details<<EOF"
+              ./gradlew printPaperDetails --quiet --console=plain 2>&1
+              echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Bump version
         uses: actions-ecosystem/action-bump-semver@v1
         if: ${{ steps.release-label.outputs.level != null }}
@@ -48,4 +56,17 @@ jobs:
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         with:
           tag: ${{ steps.bump-semver.outputs.new_version }}
-          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
+          message: |
+            ${{ steps.bump-semver.outputs.new_version }}
+            Triggered by: PR #${{ steps.pr.outputs.number }}
+            Commit: ${{ github.sha }}
+            ---
+            ${{ steps.paper-version.outputs.paper_details }}
+  call-publish-workflow:
+    name: Call publish workflow
+    uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
+    needs: tag
+    if: ${{ needs.tag.outputs.version != null }}
+    with:
+      version: $(echo ${{ needs.tag.outputs.version }} | sed -e 's:v::')
+    secrets: inherit

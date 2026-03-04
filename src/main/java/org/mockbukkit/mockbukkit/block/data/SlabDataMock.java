@@ -1,0 +1,74 @@
+package org.mockbukkit.mockbukkit.block.data;
+
+import com.google.common.base.Preconditions;
+import org.bukkit.Material;
+import org.bukkit.Tag;
+import org.bukkit.block.data.type.Slab;
+import org.jetbrains.annotations.NotNull;
+
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.TYPE;
+import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
+
+/**
+ * Mock implementation of {@link Slab}.
+ */
+public class SlabDataMock extends BlockDataMock implements Slab
+{
+
+	/**
+	 * Constructs a new {@link SlabDataMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#SLABS}
+	 *
+	 * @param type The material this data is for.
+	 */
+	public SlabDataMock(@NotNull Material type)
+	{
+		super(type);
+		checkType(type, Tag.SLABS);
+		setType(Type.BOTTOM);
+		setWaterlogged(false);
+	}
+
+	/**
+	 * Create a new {@link SlabDataMock} based on an existing {@link SlabDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected SlabDataMock(@NotNull SlabDataMock other)
+	{
+		super(other);
+	}
+
+	@Override
+	public @NotNull Type getType()
+	{
+		return get(TYPE);
+	}
+
+	@Override
+	public void setType(@NotNull Type type)
+	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
+		set(TYPE, type);
+	}
+
+	@Override
+	public boolean isWaterlogged()
+	{
+		return super.get(WATERLOGGED);
+	}
+
+	@Override
+	public void setWaterlogged(boolean waterlogged)
+	{
+		super.set(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	public @NotNull SlabDataMock clone()
+	{
+		return new SlabDataMock(this);
+	}
+
+}

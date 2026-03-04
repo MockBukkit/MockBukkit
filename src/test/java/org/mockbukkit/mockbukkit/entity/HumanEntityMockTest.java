@@ -1,0 +1,851 @@
+package org.mockbukkit.mockbukkit.entity;
+
+import com.google.common.collect.ImmutableSet;
+import net.kyori.adventure.text.Component;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.FishHook;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryViewMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.SimpleInventoryViewMock;
+
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
+
+@ExtendWith(MockBukkitExtension.class)
+class HumanEntityMockTest
+{
+
+	private static final int[] REQUIRED_EXP =
+			{
+					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
+			};
+
+	@MockBukkitInject
+	private ServerMock server;
+	@MockBukkitInject
+	private HumanEntityMock human;
+
+	@Test
+	void assertGameMode_CorrectGameMode_DoesNotAssert()
+	{
+		assertEquals(GameMode.SURVIVAL, human.getGameMode());
+	}
+
+	@Test
+	void assertGameMode_WrongGameMode_Asserts()
+	{
+		assertNotEquals(GameMode.CREATIVE, human.getGameMode());
+	}
+
+	@Test
+	void getGameMode_Default_Survival()
+	{
+		assertEquals(GameMode.SURVIVAL, human.getGameMode());
+	}
+
+	@Test
+	void setGameMode_GameModeChanged_GameModeSet()
+	{
+		human.setGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.CREATIVE, human.getGameMode());
+	}
+
+	@Test
+	void setGameMode_GameModeChanged_CallsEvent()
+	{
+		human.setGameMode(GameMode.CREATIVE);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE));
+	}
+
+	@Test
+	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
+	{
+		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
+		AtomicBoolean bool = new AtomicBoolean(false);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerGameModeChange(PlayerGameModeChangeEvent event)
+			{
+				bool.set(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		human.setGameMode(GameMode.SURVIVAL);
+
+		assertFalse(bool.get());
+	}
+
+	@Test
+	void getExpToLevel_CorrectExp()
+	{
+		for (int i = 0; i < REQUIRED_EXP.length; i++)
+		{
+			((Player) human).setLevel(i);
+			assertEquals(REQUIRED_EXP[i], human.getExpToLevel());
+		}
+	}
+
+	@Test
+	void testExhaustion()
+	{
+		// Default level
+		assertEquals(0.0F, human.getExhaustion(), 0.1F);
+
+		human.setExhaustion(8);
+		assertEquals(8.0F, human.getExhaustion(), 0.1F);
+	}
+
+	@Test
+	void testSaturation()
+	{
+		// Default level
+		assertEquals(5.0F, human.getSaturation(), 0.1F);
+
+		human.setFoodLevel(20);
+		human.setSaturation(8);
+		assertEquals(8.0F, human.getSaturation(), 0.1F);
+
+		// Testing the constraint
+		human.setFoodLevel(20);
+		human.setSaturation(10000);
+		assertEquals(20.0F, human.getSaturation(), 0.1F);
+	}
+
+	@Test
+	void getFood_LevelDefault20()
+	{
+		int foodLevel = human.getFoodLevel();
+		assertEquals(20, foodLevel);
+	}
+
+	@Test
+	void getFood_LevelChange()
+	{
+		human.setFoodLevel(10);
+		assertEquals(10, human.getFoodLevel());
+	}
+
+	@Test
+	void isSleeping()
+	{
+		human.setSleeping(false);
+		assertFalse(human.isSleeping());
+		human.setSleeping(true);
+		assertTrue(human.isSleeping());
+	}
+
+	@Test
+	void getOpenInventory_NoneOpened_Null()
+	{
+		InventoryView view = human.getOpenInventory();
+		assertNotNull(view);
+		assertEquals(InventoryType.CRAFTING, view.getType());
+	}
+
+	@Test
+	void getOpenInventory_InventorySet_InventorySet()
+	{
+		InventoryViewMock inventory = new SimpleInventoryViewMock();
+		human.openInventory(inventory);
+		assertSame(inventory, human.getOpenInventory());
+	}
+
+	@Test
+	void openInventory_NothingSet_InventoryViewSet()
+	{
+		InventoryMock inventory = new ChestInventoryMock(null, 9);
+		InventoryView view = human.openInventory(inventory);
+		assertNotNull(view);
+		assertSame(human.getInventory(), view.getBottomInventory());
+		assertSame(inventory, view.getTopInventory());
+		assertSame(human.getOpenInventory(), view);
+	}
+
+	@Test
+	void closeInventory_NoneInventory_CraftingView()
+	{
+		InventoryView view = human.getOpenInventory();
+		assertNotNull(view);
+		assertEquals(InventoryType.CRAFTING, view.getType());
+	}
+
+	@Nested
+	class OpenInventory
+	{
+
+		@Nested
+		class GivenInventory
+		{
+
+			@Test
+			void openInventoryEvent_Fired()
+			{
+				InventoryMock inv = server.createInventory(null, 36);
+				human.openInventory(inv);
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+						e -> e.getPlayer() == human && e.getInventory() == inv));
+			}
+
+			@Test
+			void openInventoryEvent_Cancelled()
+			{
+				InventoryMock inv = server.createInventory(null, 36);
+				server.getPluginManager().registerEvents(new Listener()
+				{
+					@EventHandler
+					public void onEvent(InventoryOpenEvent e)
+					{
+						e.setCancelled(true);
+					}
+				}, MockBukkit.createMockPlugin());
+
+				human.openInventory(inv);
+
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+						e -> e.getPlayer() == human && e.getInventory() == inv && e.isCancelled()));
+				assertEquals(InventoryType.CRAFTING, human.getOpenInventory().getType());
+			}
+
+			@Test
+			void alreadyOpened_ClosesPrevious()
+			{
+				Inventory inv1 = server.createInventory(null, 36);
+				Inventory inv2 = server.createInventory(null, 36);
+
+				human.openInventory(inv1);
+				human.setItemOnCursor(new ItemStackMock(Material.PUMPKIN));
+
+				human.openInventory(inv2);
+
+				assertTrue(human.getItemOnCursor().getType().isAir());
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv1));
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv2));
+			}
+
+			@Test
+			void givenCustomInventory()
+			{
+				InventoryMock inventory = server.createInventory(human, InventoryType.PLAYER, Component.text("Custom name"));
+
+				InventoryView view = human.openInventory(inventory);
+
+				assertNotNull(view);
+				assertEquals(human, view.getPlayer());
+				assertEquals(inventory, view.getTopInventory());
+				assertEquals(Component.text("Custom name"), view.title());
+			}
+
+		}
+
+	}
+
+	@Test
+	void closeInventory_ClosesInventory()
+	{
+		Inventory inv = server.createInventory(null, 36);
+		human.openInventory(inv);
+
+		human.setItemOnCursor(new ItemStackMock(Material.PUMPKIN));
+		human.closeInventory();
+
+		assertTrue(human.getItemOnCursor().getType().isAir());
+		assertEquals(InventoryType.CRAFTING, human.getOpenInventory().getType());
+	}
+
+	@Test
+	void closeInventory_CloseInventoryEvent_Fired()
+	{
+		Inventory inv = server.createInventory(null, 36);
+		human.openInventory(inv);
+
+		human.closeInventory();
+
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv));
+	}
+
+	@Test
+	void setBlocking_noShield_notSuccessful()
+	{
+		human.setBlocking(true);
+		assertFalse(human.isBlocking());
+	}
+
+	@Test
+	void setBlocking_withShieldMainHand_successful()
+	{
+		human.getInventory().setItemInMainHand(new ItemStackMock(Material.SHIELD));
+		human.setBlocking(true);
+		assertTrue(human.isBlocking());
+	}
+
+	@Test
+	void isBlocking_shieldRemovedMainHand_notBlocking()
+	{
+		human.getInventory().setItemInMainHand(new ItemStackMock(Material.SHIELD));
+		human.setBlocking(true);
+		human.getInventory().setItemInMainHand(new ItemStackMock(Material.AIR));
+		assertFalse(human.isBlocking());
+	}
+
+	@Test
+	void setBlocking_withShieldOffHand_successful()
+	{
+		human.getInventory().setItemInOffHand(new ItemStackMock(Material.SHIELD));
+		human.setBlocking(true);
+		assertTrue(human.isBlocking());
+	}
+
+	@Test
+	void isBlocking_shieldRemovedOffHand_notBlocking()
+	{
+		human.getInventory().setItemInOffHand(new ItemStackMock(Material.SHIELD));
+		human.setBlocking(true);
+		human.getInventory().setItemInOffHand(new ItemStackMock(Material.AIR));
+		assertFalse(human.isBlocking());
+	}
+
+	@Test
+	void getSleepTicks_GivenDefaultValue()
+	{
+		int actual = human.getSleepTicks();
+		assertEquals(0, actual);
+	}
+
+	@Test
+	void getSleepTicks_GivenPossibleValue()
+	{
+		human.setSleepTicks(100);
+		int actual = human.getSleepTicks();
+		assertEquals(100, actual);
+	}
+
+	@Test
+	void isDeeplySleeping_GivenDefaultValue()
+	{
+		boolean actual = human.isDeeplySleeping();
+		assertFalse(actual);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+	void isDeeplySleeping_GivenNonDeepSleepLevelIsSleeping(int sleepTicks)
+	{
+		human.setSleeping(true);
+		human.setSleepTicks(sleepTicks);
+		boolean actual = human.isDeeplySleeping();
+		assertFalse(actual);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { 101, 110, 120, 130, 140, 150 })
+	void isDeeplySleeping_GivenDeepSleepLevelAndIsSleeping(int sleepTicks)
+	{
+		human.setSleeping(true);
+		human.setSleepTicks(sleepTicks);
+		boolean actual = human.isDeeplySleeping();
+		assertTrue(actual);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 101, 110, 120, 130, 140, 150 })
+	void isDeeplySleeping_GivenIsNotSleeping(int sleepTicks)
+	{
+		human.setSleeping(false);
+		human.setSleepTicks(sleepTicks);
+		boolean actual = human.isDeeplySleeping();
+		assertFalse(actual);
+	}
+
+	@Nested
+	class SetSaturatedRegenRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(10, human.getSaturatedRegenRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		void givenPossibleValues(int value)
+		{
+			human.setSaturatedRegenRate(value);
+
+			assertEquals(value, human.getSaturatedRegenRate());
+		}
+
+	}
+
+	@Nested
+	class SetUnsaturatedRegenRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(80, human.getUnsaturatedRegenRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		void givenPossibleValues(int value)
+		{
+			human.setUnsaturatedRegenRate(value);
+
+			assertEquals(value, human.getUnsaturatedRegenRate());
+		}
+
+	}
+
+	@Nested
+	class SetStarvationRate
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(80, human.getStarvationRate());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		void givenPossibleValues(int value)
+		{
+			human.setStarvationRate(value);
+
+			assertEquals(value, human.getStarvationRate());
+		}
+
+	}
+
+	@Nested
+	class SetMainHand
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(MainHand.RIGHT, human.getMainHand());
+		}
+
+		@ParameterizedTest
+		@EnumSource(MainHand.class)
+		void givenPossibleValues(MainHand value)
+		{
+			human.setMainHand(value);
+
+			assertEquals(value, human.getMainHand());
+		}
+
+	}
+
+	@Nested
+	class SetEnchantmentSeed
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(0, human.getEnchantmentSeed());
+		}
+
+		@ParameterizedTest
+		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		void givenPossibleValues(int value)
+		{
+			human.setEnchantmentSeed(value);
+
+			assertEquals(value, human.getEnchantmentSeed());
+		}
+
+	}
+
+	@Nested
+	class SetFishHook
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(human.getFishHook());
+		}
+
+		@Test
+		void givenPossibleValue()
+		{
+			FishHook fishHook = new FishHookMock(server, UUID.randomUUID());
+
+			human.setFishHook(fishHook);
+
+			assertEquals(fishHook, human.getFishHook());
+		}
+
+	}
+
+	@Nested
+	class GetDiscoveredRecipes
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertEquals(Collections.emptySet(), human.getDiscoveredRecipes());
+		}
+
+		@Test
+		void givenNewRecipeDiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			assertTrue(human.discoverRecipe(recipe));
+
+			Set<NamespacedKey> actual = human.getDiscoveredRecipes();
+			assertTrue(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Set.of(recipe), actual);
+			assertInstanceOf(ImmutableSet.class, actual);
+
+			// No duplicates allowed
+			assertFalse(human.discoverRecipe(recipe));
+		}
+
+		@Test
+		void givenNewRecipesDiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			assertEquals(1, human.discoverRecipes(Set.of(recipe)));
+
+			Set<NamespacedKey> actual = human.getDiscoveredRecipes();
+			assertTrue(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Set.of(recipe), actual);
+			assertInstanceOf(ImmutableSet.class, actual);
+
+			// No duplicates allowed
+			assertEquals(0, human.discoverRecipes(Set.of(recipe)));
+		}
+
+		@Test
+		void givenAttemptingToDiscoverRecipeThatDoesNotExist()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("this_recipe_does_not_exist");
+			assertEquals(0, human.discoverRecipes(Set.of(recipe)));
+		}
+
+		@Test
+		void givenRecipeUndiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			human.discoverRecipe(recipe);
+
+			assertTrue(human.undiscoverRecipe(recipe));
+
+			assertFalse(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Collections.emptySet(), human.getDiscoveredRecipes());
+
+			// Validate that there nothing to remove
+			assertFalse(human.undiscoverRecipe(recipe));
+		}
+
+		@Test
+		void givenRecipesUndiscovery()
+		{
+			NamespacedKey recipe = NamespacedKey.minecraft("iron_door");
+			human.discoverRecipe(recipe);
+
+			assertEquals(1, human.undiscoverRecipes(Set.of(recipe)));
+
+			assertFalse(human.hasDiscoveredRecipe(recipe));
+			assertEquals(Collections.emptySet(), human.getDiscoveredRecipes());
+
+			// Validate that there nothing to remove
+			assertEquals(0, human.undiscoverRecipes(Set.of(recipe)));
+		}
+
+	}
+
+	@Nested
+	class ItemStackCooldown
+	{
+
+		@Test
+		void setCooldown_SetsCooldownForItemStack()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 20);
+
+			assertEquals(20, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void setCooldown_ZeroTicks_RemovesCooldown()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 20);
+			human.setCooldown(item, 0);
+
+			assertEquals(0, human.getCooldown(item));
+			assertFalse(human.hasCooldown(item));
+		}
+
+		@Test
+		void setCooldown_NullItemStack_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown((ItemStack) null, 10));
+		}
+
+		@Test
+		void setCooldown_NegativeTicks_ThrowsException()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown(item, -1));
+		}
+
+		@Test
+		void hasCooldown_NullItemStack_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.hasCooldown((ItemStack) null));
+		}
+
+		@Test
+		void getCooldown_NullItemStack_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.getCooldown((ItemStack) null));
+		}
+
+		@Test
+		void hasCooldown_ZeroCooldownInMap_ReturnsFalse() throws Exception
+		{
+			// Use reflection to set a zero cooldown value in the map
+			// This tests the edge case where cooldown is not null but is <= 0
+			Field cooldownsField = HumanEntityMock.class.getDeclaredField("cooldowns");
+			cooldownsField.setAccessible(true);
+			@SuppressWarnings("unchecked")
+			Map<Material, Integer> cooldowns = (Map<Material, Integer>) cooldownsField.get(human);
+			cooldowns.put(Material.ENDER_PEARL, 0);
+
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			assertFalse(human.hasCooldown(item));
+			assertEquals(0, human.getCooldown(item));
+		}
+
+		@Test
+		void getCooldown_NoCooldown_ReturnsZero()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+
+			assertEquals(0, human.getCooldown(item));
+		}
+
+		@Test
+		void hasCooldown_NoCooldown_ReturnsFalse()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+
+			assertFalse(human.hasCooldown(item));
+		}
+
+		@Test
+		void setCooldown_DifferentItemsShareMaterialCooldown()
+		{
+			ItemStackMock item1 = new ItemStackMock(Material.ENDER_PEARL);
+			ItemStackMock item2 = new ItemStackMock(Material.ENDER_PEARL);
+
+			human.setCooldown(item1, 30);
+
+			assertEquals(30, human.getCooldown(item2));
+			assertTrue(human.hasCooldown(item2));
+		}
+
+		@Test
+		void setCooldown_DifferentMaterialsHaveSeparateCooldowns()
+		{
+			ItemStackMock enderPearl = new ItemStackMock(Material.ENDER_PEARL);
+			ItemStackMock chorus = new ItemStackMock(Material.CHORUS_FRUIT);
+
+			human.setCooldown(enderPearl, 20);
+			human.setCooldown(chorus, 40);
+
+			assertEquals(20, human.getCooldown(enderPearl));
+			assertEquals(40, human.getCooldown(chorus));
+		}
+
+		@Test
+		void setCooldown_UpdatesExistingCooldown()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+
+			human.setCooldown(item, 20);
+			assertEquals(20, human.getCooldown(item));
+
+			human.setCooldown(item, 50);
+			assertEquals(50, human.getCooldown(item));
+		}
+
+		@Test
+		void setCooldown_MaterialDelegatesToItemStack()
+		{
+			human.setCooldown(Material.ENDER_PEARL, 25);
+
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			assertEquals(25, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void hasCooldown_MaterialDelegatesToItemStack()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 30);
+
+			assertTrue(human.hasCooldown(Material.ENDER_PEARL));
+		}
+
+		@Test
+		void getCooldown_MaterialDelegatesToItemStack()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 35);
+
+			assertEquals(35, human.getCooldown(Material.ENDER_PEARL));
+		}
+
+		@Test
+		void setCooldown_Material_NullMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown((Material) null, 10));
+		}
+
+		@Test
+		void setCooldown_Material_NonItemMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.setCooldown(Material.WATER, 10));
+		}
+
+		@Test
+		void hasCooldown_Material_NullMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.hasCooldown((Material) null));
+		}
+
+		@Test
+		void hasCooldown_Material_NonItemMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.hasCooldown(Material.WATER));
+		}
+
+		@Test
+		void getCooldown_Material_NullMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.getCooldown((Material) null));
+		}
+
+		@Test
+		void getCooldown_Material_NonItemMaterial_ThrowsException()
+		{
+			assertThrows(IllegalArgumentException.class, () -> human.getCooldown(Material.WATER));
+		}
+
+		@Test
+		void tick_DecreasesCooldownByOne()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 5);
+
+			server.getScheduler().performTicks(1);
+
+			assertEquals(4, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void tick_RemovesCooldownWhenReachesZero()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 1);
+
+			server.getScheduler().performTicks(1);
+
+			assertEquals(0, human.getCooldown(item));
+			assertFalse(human.hasCooldown(item));
+		}
+
+		@Test
+		void tick_MultipleTicks_DecreasesCooldown()
+		{
+			ItemStackMock item = new ItemStackMock(Material.ENDER_PEARL);
+			human.setCooldown(item, 10);
+
+			server.getScheduler().performTicks(5);
+
+			assertEquals(5, human.getCooldown(item));
+			assertTrue(human.hasCooldown(item));
+		}
+
+		@Test
+		void tick_HandlesMultipleCooldownsSimultaneously()
+		{
+			ItemStackMock enderPearl = new ItemStackMock(Material.ENDER_PEARL);
+			ItemStackMock chorus = new ItemStackMock(Material.CHORUS_FRUIT);
+
+			human.setCooldown(enderPearl, 10);
+			human.setCooldown(chorus, 5);
+
+			server.getScheduler().performTicks(1);
+
+			assertEquals(9, human.getCooldown(enderPearl));
+			assertEquals(4, human.getCooldown(chorus));
+
+			server.getScheduler().performTicks(4);
+
+			assertEquals(5, human.getCooldown(enderPearl));
+			assertEquals(0, human.getCooldown(chorus));
+			assertTrue(human.hasCooldown(enderPearl));
+			assertFalse(human.hasCooldown(chorus));
+		}
+
+	}
+
+}

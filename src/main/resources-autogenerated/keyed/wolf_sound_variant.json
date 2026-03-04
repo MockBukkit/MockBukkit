@@ -1,0 +1,25 @@
+{
+	"values": [
+		{
+			"key": "minecraft:angry"
+		},
+		{
+			"key": "minecraft:big"
+		},
+		{
+			"key": "minecraft:classic"
+		},
+		{
+			"key": "minecraft:cute"
+		},
+		{
+			"key": "minecraft:grumpy"
+		},
+		{
+			"key": "minecraft:puglin"
+		},
+		{
+			"key": "minecraft:sad"
+		}
+	]
+}

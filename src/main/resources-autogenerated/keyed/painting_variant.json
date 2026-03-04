@@ -1,0 +1,851 @@
+{
+	"values": [
+		{
+			"assetId": "minecraft:alban",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.alban.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 0,
+			"key": "minecraft:alban",
+			"name": "ALBAN",
+			"ordinal": 0,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.alban.title"
+			}
+		},
+		{
+			"assetId": "minecraft:aztec",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.aztec.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 1,
+			"key": "minecraft:aztec",
+			"name": "AZTEC",
+			"ordinal": 1,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.aztec.title"
+			}
+		},
+		{
+			"assetId": "minecraft:aztec2",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.aztec2.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 2,
+			"key": "minecraft:aztec2",
+			"name": "AZTEC2",
+			"ordinal": 2,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.aztec2.title"
+			}
+		},
+		{
+			"assetId": "minecraft:backyard",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.backyard.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 3,
+			"id": 3,
+			"key": "minecraft:backyard",
+			"name": "BACKYARD",
+			"ordinal": 3,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.backyard.title"
+			}
+		},
+		{
+			"assetId": "minecraft:baroque",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.baroque.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 4,
+			"key": "minecraft:baroque",
+			"name": "BAROQUE",
+			"ordinal": 4,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.baroque.title"
+			}
+		},
+		{
+			"assetId": "minecraft:bomb",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.bomb.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 5,
+			"key": "minecraft:bomb",
+			"name": "BOMB",
+			"ordinal": 5,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.bomb.title"
+			}
+		},
+		{
+			"assetId": "minecraft:bouquet",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.bouquet.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 6,
+			"key": "minecraft:bouquet",
+			"name": "BOUQUET",
+			"ordinal": 6,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.bouquet.title"
+			}
+		},
+		{
+			"assetId": "minecraft:burning_skull",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.burning_skull.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 4,
+			"id": 7,
+			"key": "minecraft:burning_skull",
+			"name": "BURNING_SKULL",
+			"ordinal": 7,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.burning_skull.title"
+			}
+		},
+		{
+			"assetId": "minecraft:bust",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.bust.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 8,
+			"key": "minecraft:bust",
+			"name": "BUST",
+			"ordinal": 8,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.bust.title"
+			}
+		},
+		{
+			"assetId": "minecraft:cavebird",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.cavebird.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 9,
+			"key": "minecraft:cavebird",
+			"name": "CAVEBIRD",
+			"ordinal": 9,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.cavebird.title"
+			}
+		},
+		{
+			"assetId": "minecraft:changing",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.changing.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 4,
+			"id": 10,
+			"key": "minecraft:changing",
+			"name": "CHANGING",
+			"ordinal": 10,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.changing.title"
+			}
+		},
+		{
+			"assetId": "minecraft:cotan",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.cotan.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 11,
+			"key": "minecraft:cotan",
+			"name": "COTAN",
+			"ordinal": 11,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.cotan.title"
+			}
+		},
+		{
+			"assetId": "minecraft:courbet",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.courbet.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 2,
+			"id": 12,
+			"key": "minecraft:courbet",
+			"name": "COURBET",
+			"ordinal": 12,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.courbet.title"
+			}
+		},
+		{
+			"assetId": "minecraft:creebet",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.creebet.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 2,
+			"id": 13,
+			"key": "minecraft:creebet",
+			"name": "CREEBET",
+			"ordinal": 13,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.creebet.title"
+			}
+		},
+		{
+			"assetId": "minecraft:dennis",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.dennis.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 14,
+			"key": "minecraft:dennis",
+			"name": "DENNIS",
+			"ordinal": 14,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.dennis.title"
+			}
+		},
+		{
+			"assetId": "minecraft:donkey_kong",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.donkey_kong.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 4,
+			"id": 15,
+			"key": "minecraft:donkey_kong",
+			"name": "DONKEY_KONG",
+			"ordinal": 15,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.donkey_kong.title"
+			}
+		},
+		{
+			"assetId": "minecraft:earth",
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 16,
+			"key": "minecraft:earth",
+			"name": "EARTH",
+			"ordinal": 16,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.earth.title"
+			}
+		},
+		{
+			"assetId": "minecraft:endboss",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.endboss.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 17,
+			"key": "minecraft:endboss",
+			"name": "ENDBOSS",
+			"ordinal": 17,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.endboss.title"
+			}
+		},
+		{
+			"assetId": "minecraft:fern",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.fern.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 18,
+			"key": "minecraft:fern",
+			"name": "FERN",
+			"ordinal": 18,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.fern.title"
+			}
+		},
+		{
+			"assetId": "minecraft:fighters",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.fighters.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 4,
+			"id": 19,
+			"key": "minecraft:fighters",
+			"name": "FIGHTERS",
+			"ordinal": 19,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.fighters.title"
+			}
+		},
+		{
+			"assetId": "minecraft:finding",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.finding.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 4,
+			"id": 20,
+			"key": "minecraft:finding",
+			"name": "FINDING",
+			"ordinal": 20,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.finding.title"
+			}
+		},
+		{
+			"assetId": "minecraft:fire",
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 21,
+			"key": "minecraft:fire",
+			"name": "FIRE",
+			"ordinal": 21,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.fire.title"
+			}
+		},
+		{
+			"assetId": "minecraft:graham",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.graham.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 1,
+			"id": 22,
+			"key": "minecraft:graham",
+			"name": "GRAHAM",
+			"ordinal": 22,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.graham.title"
+			}
+		},
+		{
+			"assetId": "minecraft:humble",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.humble.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 23,
+			"key": "minecraft:humble",
+			"name": "HUMBLE",
+			"ordinal": 23,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.humble.title"
+			}
+		},
+		{
+			"assetId": "minecraft:kebab",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.kebab.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 24,
+			"key": "minecraft:kebab",
+			"name": "KEBAB",
+			"ordinal": 24,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.kebab.title"
+			}
+		},
+		{
+			"assetId": "minecraft:lowmist",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.lowmist.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 4,
+			"id": 25,
+			"key": "minecraft:lowmist",
+			"name": "LOWMIST",
+			"ordinal": 25,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.lowmist.title"
+			}
+		},
+		{
+			"assetId": "minecraft:match",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.match.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 26,
+			"key": "minecraft:match",
+			"name": "MATCH",
+			"ordinal": 26,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.match.title"
+			}
+		},
+		{
+			"assetId": "minecraft:meditative",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.meditative.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 27,
+			"key": "minecraft:meditative",
+			"name": "MEDITATIVE",
+			"ordinal": 27,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.meditative.title"
+			}
+		},
+		{
+			"assetId": "minecraft:orb",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.orb.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 4,
+			"id": 28,
+			"key": "minecraft:orb",
+			"name": "ORB",
+			"ordinal": 28,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.orb.title"
+			}
+		},
+		{
+			"assetId": "minecraft:owlemons",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.owlemons.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 29,
+			"key": "minecraft:owlemons",
+			"name": "OWLEMONS",
+			"ordinal": 29,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.owlemons.title"
+			}
+		},
+		{
+			"assetId": "minecraft:passage",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.passage.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 4,
+			"id": 30,
+			"key": "minecraft:passage",
+			"name": "PASSAGE",
+			"ordinal": 30,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.passage.title"
+			}
+		},
+		{
+			"assetId": "minecraft:pigscene",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.pigscene.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 4,
+			"id": 31,
+			"key": "minecraft:pigscene",
+			"name": "PIGSCENE",
+			"ordinal": 31,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.pigscene.title"
+			}
+		},
+		{
+			"assetId": "minecraft:plant",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.plant.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 32,
+			"key": "minecraft:plant",
+			"name": "PLANT",
+			"ordinal": 32,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.plant.title"
+			}
+		},
+		{
+			"assetId": "minecraft:pointer",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.pointer.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 4,
+			"id": 33,
+			"key": "minecraft:pointer",
+			"name": "POINTER",
+			"ordinal": 33,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.pointer.title"
+			}
+		},
+		{
+			"assetId": "minecraft:pond",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.pond.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 3,
+			"id": 34,
+			"key": "minecraft:pond",
+			"name": "POND",
+			"ordinal": 34,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.pond.title"
+			}
+		},
+		{
+			"assetId": "minecraft:pool",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.pool.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 2,
+			"id": 35,
+			"key": "minecraft:pool",
+			"name": "POOL",
+			"ordinal": 35,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.pool.title"
+			}
+		},
+		{
+			"assetId": "minecraft:prairie_ride",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.prairie_ride.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 1,
+			"id": 36,
+			"key": "minecraft:prairie_ride",
+			"name": "PRAIRIE_RIDE",
+			"ordinal": 36,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.prairie_ride.title"
+			}
+		},
+		{
+			"assetId": "minecraft:sea",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.sea.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 2,
+			"id": 37,
+			"key": "minecraft:sea",
+			"name": "SEA",
+			"ordinal": 37,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.sea.title"
+			}
+		},
+		{
+			"assetId": "minecraft:skeleton",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.skeleton.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 4,
+			"id": 38,
+			"key": "minecraft:skeleton",
+			"name": "SKELETON",
+			"ordinal": 38,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.skeleton.title"
+			}
+		},
+		{
+			"assetId": "minecraft:skull_and_roses",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.skull_and_roses.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 39,
+			"key": "minecraft:skull_and_roses",
+			"name": "SKULL_AND_ROSES",
+			"ordinal": 39,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.skull_and_roses.title"
+			}
+		},
+		{
+			"assetId": "minecraft:stage",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.stage.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 40,
+			"key": "minecraft:stage",
+			"name": "STAGE",
+			"ordinal": 40,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.stage.title"
+			}
+		},
+		{
+			"assetId": "minecraft:sunflowers",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.sunflowers.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 41,
+			"key": "minecraft:sunflowers",
+			"name": "SUNFLOWERS",
+			"ordinal": 41,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.sunflowers.title"
+			}
+		},
+		{
+			"assetId": "minecraft:sunset",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.sunset.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 2,
+			"id": 42,
+			"key": "minecraft:sunset",
+			"name": "SUNSET",
+			"ordinal": 42,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.sunset.title"
+			}
+		},
+		{
+			"assetId": "minecraft:tides",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.tides.author"
+			},
+			"blockHeight": 3,
+			"blockWidth": 3,
+			"id": 43,
+			"key": "minecraft:tides",
+			"name": "TIDES",
+			"ordinal": 43,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.tides.title"
+			}
+		},
+		{
+			"assetId": "minecraft:unpacked",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.unpacked.author"
+			},
+			"blockHeight": 4,
+			"blockWidth": 4,
+			"id": 44,
+			"key": "minecraft:unpacked",
+			"name": "UNPACKED",
+			"ordinal": 44,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.unpacked.title"
+			}
+		},
+		{
+			"assetId": "minecraft:void",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.void.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 45,
+			"key": "minecraft:void",
+			"name": "VOID",
+			"ordinal": 45,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.void.title"
+			}
+		},
+		{
+			"assetId": "minecraft:wanderer",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.wanderer.author"
+			},
+			"blockHeight": 2,
+			"blockWidth": 1,
+			"id": 46,
+			"key": "minecraft:wanderer",
+			"name": "WANDERER",
+			"ordinal": 46,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.wanderer.title"
+			}
+		},
+		{
+			"assetId": "minecraft:wasteland",
+			"author": {
+				"color": "gray",
+				"translate": "painting.minecraft.wasteland.author"
+			},
+			"blockHeight": 1,
+			"blockWidth": 1,
+			"id": 47,
+			"key": "minecraft:wasteland",
+			"name": "WASTELAND",
+			"ordinal": 47,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.wasteland.title"
+			}
+		},
+		{
+			"assetId": "minecraft:water",
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 48,
+			"key": "minecraft:water",
+			"name": "WATER",
+			"ordinal": 48,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.water.title"
+			}
+		},
+		{
+			"assetId": "minecraft:wind",
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 49,
+			"key": "minecraft:wind",
+			"name": "WIND",
+			"ordinal": 49,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.wind.title"
+			}
+		},
+		{
+			"assetId": "minecraft:wither",
+			"blockHeight": 2,
+			"blockWidth": 2,
+			"id": 50,
+			"key": "minecraft:wither",
+			"name": "WITHER",
+			"ordinal": 50,
+			"title": {
+				"color": "yellow",
+				"translate": "painting.minecraft.wither.title"
+			}
+		}
+	]
+}

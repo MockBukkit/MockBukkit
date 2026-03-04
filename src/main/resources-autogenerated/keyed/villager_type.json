@@ -1,0 +1,39 @@
+{
+	"values": [
+		{
+			"key": "minecraft:desert",
+			"name": "DESERT",
+			"ordinal": 0
+		},
+		{
+			"key": "minecraft:jungle",
+			"name": "JUNGLE",
+			"ordinal": 1
+		},
+		{
+			"key": "minecraft:plains",
+			"name": "PLAINS",
+			"ordinal": 2
+		},
+		{
+			"key": "minecraft:savanna",
+			"name": "SAVANNA",
+			"ordinal": 3
+		},
+		{
+			"key": "minecraft:snow",
+			"name": "SNOW",
+			"ordinal": 4
+		},
+		{
+			"key": "minecraft:swamp",
+			"name": "SWAMP",
+			"ordinal": 5
+		},
+		{
+			"key": "minecraft:taiga",
+			"name": "TAIGA",
+			"ordinal": 6
+		}
+	]
+}

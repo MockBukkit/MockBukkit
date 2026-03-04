@@ -1,5 +1,0 @@
-sphinx==8.1.0
-sphinx_rtd_theme==3.0.1
-sphinx-notfound-page==1.0.4
-readthedocs-sphinx-ext==2.2.5
-sphinx_copybutton==0.5.2

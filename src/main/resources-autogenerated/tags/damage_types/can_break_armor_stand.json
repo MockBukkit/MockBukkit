@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:mace_smash",
+		"minecraft:player_attack",
+		"minecraft:player_explosion",
+		"minecraft:spear"
+	]
+}

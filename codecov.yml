@@ -7,7 +7,7 @@ comment:
   layout: "header, diff, flags, components"  # show component info in the PR comment
 
 component_management:
-  default_rules:  # default rules that will be inherited by all components
+  default_rules: # default rules that will be inherited by all components
     statuses:
       - type: project # in this case every component that doesn't have a status defined will have a project type one
         target: auto

@@ -1,0 +1,42 @@
+plugins {
+	id("java")
+	id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
+	id("xyz.jpenilla.run-paper") version "3.0.2"
+}
+
+group = "org.mockbukkit"
+version = "1.2-SNAPSHOT"
+
+repositories {
+	mavenCentral()
+	maven("https://repo.papermc.io/repository/maven-public/")
+}
+
+dependencies {
+	paperweight.paperDevBundle("${rootProject.property("paper.api.full-version")}")
+	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
+
+	// Dependencies for Unit Tests
+	testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks {
+	compileJava {
+		options.encoding = Charsets.UTF_8.name()
+		options.release.set(21)
+	}
+
+	processResources {
+		filesMatching("**/plugin.yml") { expand(project.properties) }
+	}
+
+	test {
+		dependsOn(project(":extra:TestPlugin").tasks.jar)
+		useJUnitPlatform()
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+		systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+		systemProperty("junit.jupiter.execution.parallel.mode.classes.default", "concurrent")
+	}
+}
