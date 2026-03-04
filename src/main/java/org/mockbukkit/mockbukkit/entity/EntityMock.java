@@ -63,6 +63,7 @@ import org.mockbukkit.mockbukkit.event.EventFactoryMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.scheduler.paper.FoliaEntityScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.TeamMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
@@ -1477,7 +1478,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull EntityScheduler getScheduler()
 	{
-		throw new UnimplementedOperationException();
+		return new FoliaEntityScheduler(this.server.getScheduler(), this);
 	}
 
 	@Override

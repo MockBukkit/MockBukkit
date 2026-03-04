@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.util;
 
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
 import io.papermc.paper.entity.EntitySerializationFlag;
@@ -58,6 +59,7 @@ import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
@@ -69,6 +71,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -94,6 +97,23 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.21"
 			);
 	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
+
+	private static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
+		toMinecraft(ItemMetaMock.DAMAGE),
+		toMinecraft(ItemMetaMock.MAX_DAMAGE),
+		toMinecraft(ItemMetaMock.REPAIR_COST),
+		toMinecraft(ItemMetaMock.ENCHANTMENTS),
+		toMinecraft(ItemMetaMock.LORE),
+		toMinecraft(ItemMetaMock.UNBREAKABLE),
+		Map.entry(ItemMetaMock.DISPLAY_NAME, "minecraft:custom_name")
+	);
+
+	private static Map.Entry<String, String> toMinecraft(final String key)
+	{
+		String newName = key.toLowerCase(Locale.ROOT);
+		newName = newName.replace("-", "_");
+		return Map.entry(key, NamespacedKey.minecraft(newName).asString());
+	}
 
 	private String minimumApiVersion = "none";
 
@@ -622,7 +642,27 @@ public class UnsafeValuesMock implements UnsafeValues
 		result.put("count", itemStack.getAmount());
 		result.put("DataVersion", this.getDataVersion());
 		result.put(PROPERTY_SCHEMA_VERSION, 1);
-		result.put("components", itemStack.getItemMeta().serialize());
+
+		Map<String, Object> serializedMeta = itemStack.getItemMeta().serialize();
+		if (serializedMeta.size() > 1) // Ignore the meta-type
+		{
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getKey();
+				String newName = entry.getValue();
+
+				// Skip the key if it does not exist
+				if (!serializedMeta.containsKey(originalName))
+				{
+					continue;
+				}
+
+				var value = serializedMeta.get(originalName);
+				serializedMeta.put(newName, value);
+				serializedMeta.remove(originalName);
+			}
+			result.put("components", serializedMeta);
+		}
 
 		return result;
 	}
@@ -635,6 +675,24 @@ public class UnsafeValuesMock implements UnsafeValues
 		final String id = (String) args.get("id");
 		final int amount = ((Number) args.get("count")).intValue();
 		final Map<String, Object> components = (Map<String, Object>) args.get("components");
+		if (components != null)
+		{
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getValue();
+				String newName = entry.getKey();
+
+				// Skip the key if it does not exist
+				if (!components.containsKey(originalName))
+				{
+					continue;
+				}
+
+				var value = components.get(originalName);
+				components.put(newName, value);
+				components.remove(originalName);
+			}
+		}
 
 		NamespacedKey key = NamespacedKey.fromString(id);
 		Material material = Registry.MATERIAL.get(key);

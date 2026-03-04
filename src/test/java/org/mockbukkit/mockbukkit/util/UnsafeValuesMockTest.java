@@ -150,16 +150,16 @@ class UnsafeValuesMockTest
 					    "id": "minecraft:diamond_sword",
 					    "count": 1,
 					    "components": {
-					        "minecraft:custom_name": "My custom display name",
+					        "minecraft:custom_name": "\\"My custom display name\\"",
 					        "minecraft:lore": [
-					            "This is line 1",
-					            "This is line 2"
+					            "\\"This is line 1\\"",
+					            "\\"This is line 2\\""
 					        ],
 					        "minecraft:enchantments": {
 					            "minecraft:sharpness": 5,
 					            "minecraft:unbreaking": 3
 					        },
-					        "minecraft:unbreakable": {}
+					        "minecraft:unbreakable": true
 					    },
 					    "DataVersion": 1
 					}""";

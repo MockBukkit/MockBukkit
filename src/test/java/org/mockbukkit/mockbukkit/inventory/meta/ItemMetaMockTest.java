@@ -3,9 +3,9 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.reflect.ClassPath;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import lombok.SneakyThrows;
@@ -26,9 +26,19 @@ import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
+import org.bukkit.inventory.meta.components.EquippableComponent;
+import org.bukkit.inventory.meta.components.FoodComponent;
+import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
+import org.bukkit.inventory.meta.components.ToolComponent;
+import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.tag.DamageTypeTags;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.json.JSONException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +51,14 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.CustomModelDataComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.EquippableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.FoodComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.JukeboxPlayableComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.ToolComponentMock;
+import org.mockbukkit.mockbukkit.inventory.meta.components.UseCooldownComponentMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -919,11 +936,11 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals("Test name", actual.get("minecraft:custom_name"));
-		assertEquals(List.of("Test lore"), actual.get("minecraft:lore"));
-		assertEquals(Maps.newHashMap(), actual.get("minecraft:unbreakable"));
-		assertEquals(5, actual.get("minecraft:damage"));
-		assertEquals(3, actual.get("minecraft:repair_cost"));
+		assertEquals("\"Test name\"", actual.get("display-name"));
+		assertEquals(List.of("\"Test lore\""), actual.get("lore"));
+		assertEquals(true, actual.get("Unbreakable"));
+		assertEquals(5, actual.get("Damage"));
+		assertEquals(3, actual.get("repair-cost"));
 	}
 
 	@Test
@@ -1680,6 +1697,529 @@ class ItemMetaMockTest
 		{
 			meta.setRarity(rarity);
 			assertEquals(rarity, new ItemMetaMock(meta).getRarity());
+		}
+
+	}
+
+	@Nested
+	class Serialization
+	{
+
+		private final ItemMetaMock meta = (ItemMetaMock) ItemStack.of(Material.DIAMOND_PICKAXE).getItemMeta();
+
+		@Test
+		void givenCustomName()
+		{
+			meta.customName(Component.text("custom-name"));
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"display-name\":\"\\\"custom-name\\\"\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenItemName()
+		{
+			meta.itemName(Component.text("item-name"));
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"item-name\":\"\\\"item-name\\\"\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenLore()
+		{
+			meta.lore(List.of(Component.text("Line 1"), Component.text("Line 2")));
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = """
+            {
+                "meta-type":"UNSPECIFIC",
+                "lore":["\\"Line 1\\"","\\"Line 2\\""]
+            }
+            """;
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenCustomModelData()
+		{
+			meta.setCustomModelData(42);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"custom-model-data\":42}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenEnchantable()
+		{
+			meta.setEnchantable(10);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"enchantable\":10}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenBlockData()
+		{
+			meta.setBlockData(Map.of("test", "123"));
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"BlockStateTag\":{\"test\":\"123\"}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenEnchantment()
+		{
+			meta.addEnchant(Enchantment.UNBREAKING, 3, true);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = """
+            {
+                "meta-type":"UNSPECIFIC",
+                "enchantments":{"minecraft:unbreaking":3}
+            }
+            """;
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenAttributeModifiers()
+		{
+			NamespacedKey key = NamespacedKey.minecraft("attack_damage");
+			AttributeModifier modifier = new AttributeModifier(key, 5.0, AttributeModifier.Operation.ADD_NUMBER);
+			meta.addAttributeModifier(Attribute.ATTACK_DAMAGE, modifier);
+
+			Map<String, Object> actual = meta.serialize();
+
+			assertTrue(actual.containsKey("attribute-modifiers"));
+		}
+
+		@Test
+		void givenRepairCost()
+		{
+			meta.setRepairCost(5);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"repair-cost\":5}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenItemFlags()
+		{
+			meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = """
+            {
+                "meta-type":"UNSPECIFIC",
+                "ItemFlags":["HIDE_ATTRIBUTES", "HIDE_UNBREAKABLE"]
+            }
+            """;
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenTooltipStyle()
+		{
+			meta.setTooltipStyle(NamespacedKey.fromString("test:tooltip-style"));
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"tool-tip-style\":\"test:tooltip-style\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenItemModel()
+		{
+			meta.setItemModel(NamespacedKey.fromString("test:item-model"));
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"item-model\":\"test:item-model\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenUnbreakable()
+		{
+			meta.setUnbreakable(true);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Unbreakable\":true}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenEnchantmentGlintOverride()
+		{
+			meta.setEnchantmentGlintOverride(true);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"enchantment-glint-override\":true}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenGlider()
+		{
+			meta.setGlider(true);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"glider\":true}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenDamageResistant()
+		{
+			meta.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"damage-resistant\":\"minecraft:bypasses_armor\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenMaxStackSize()
+		{
+			meta.setMaxStackSize(15);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-stack-size\":15}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenRarity()
+		{
+			meta.setRarity(ItemRarity.EPIC);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"rarity\":\"EPIC\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenUseRemainder()
+		{
+			meta.setUseRemainder(ItemStack.of(Material.DIAMOND));
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"count\":1,\"id\":\"minecraft:diamond\",\"DataVersion\":1,\"schema_version\":1}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		@Disabled("UseCooldownComponent is not implemented yet.")
+		void givenUseCooldown()
+		{
+			// TODO: meta.setUseCooldown(...);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-cooldown\":{}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		@Disabled("FoodComponent is not implemented yet.")
+		void givenFood()
+		{
+			// TODO: meta.setFood(...);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"food\":{}}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		@Disabled("ToolComponent is not implemented yet.")
+		void givenTool()
+		{
+			// TODO: meta.setTool(...);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"tool\":{}}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		@Disabled("EquippableComponent is not implemented yet")
+		void givenEquippable()
+		{
+			// TODO: meta.setEquippable(...);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"equippable\":{}}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		@Disabled("JukeboxPlayableComponent is not implemented yet.")
+		void givenJukeboxPlayable()
+		{
+			// TODO: meta.setJukeboxPlayable(...);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"jukebox-playable\":{}}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenDamage()
+		{
+			meta.setDamage(50);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenMaxDamage()
+		{
+			meta.setMaxDamage(75);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenPersistentData()
+		{
+			NamespacedKey key = NamespacedKey.minecraft("test-key");
+			meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "value");
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = """
+            {
+                "meta-type":"UNSPECIFIC",
+                "PublicBukkitValues": {
+					"minecraft:test-key": "value"
+				}
+            }
+            """;
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenMultipleFields()
+		{
+			meta.customName(Component.text("Pickaxe"));
+			meta.setUnbreakable(true);
+			meta.setCustomModelData(99);
+			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+			meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = """
+            {
+                "meta-type":"UNSPECIFIC",
+                "display-name":"\\"Pickaxe\\"",
+                "Unbreakable":true,
+                "custom-model-data":99,
+                "ItemFlags":["HIDE_ENCHANTS"],
+                "enchantments":{"minecraft:unbreaking":1}
+            }
+            """;
+			assertJsonEqual(expected, actual);
+		}
+
+		private static String asJsonString(Map<String, Object> meta)
+		{
+			return new Gson().toJson(meta);
+		}
+
+		private static void assertJsonEqual(String expected, Map<String, Object> actual)
+		{
+			try
+			{
+				JSONAssert.assertEquals(expected, asJsonString(actual), true);
+			}
+			catch (JSONException e)
+			{
+				Assertions.fail(e);
+			}
+		}
+	}
+
+	@Nested
+	class CustomModelDataComponentTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasCustomModelDataComponent());
+			assertNotNull(meta.getCustomModelDataComponent());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			CustomModelDataComponent component = CustomModelDataComponentMock.useDefault();
+
+			meta.setCustomModelDataComponent(component);
+
+			assertTrue(meta.hasCustomModelDataComponent());
+			assertSame(component, meta.getCustomModelDataComponent());
+		}
+
+	}
+
+	@Nested
+	class UseCooldownTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasUseCooldown());
+			assertNotNull(meta.getUseCooldown());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			UseCooldownComponent component = UseCooldownComponentMock.useDefault();
+
+			meta.setUseCooldown(component);
+
+			assertTrue(meta.hasUseCooldown());
+			assertSame(component, meta.getUseCooldown());
+		}
+
+	}
+
+	@Nested
+	class EquippableTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasEquippable());
+			assertNotNull(meta.getEquippable());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			EquippableComponent component = EquippableComponentMock.useDefault();
+
+			meta.setEquippable(component);
+
+			assertTrue(meta.hasEquippable());
+			assertSame(component, meta.getEquippable());
+		}
+
+	}
+
+	@Nested
+	class FoodTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasFood());
+			assertNotNull(meta.getFood());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			FoodComponent component = FoodComponentMock.useDefault();
+
+			meta.setFood(component);
+
+			assertTrue(meta.hasFood());
+			assertSame(component, meta.getFood());
+		}
+
+	}
+
+	@Nested
+	class ToolTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasFood());
+			assertNotNull(meta.getFood());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			ToolComponent component = ToolComponentMock.useDefault();
+
+			meta.setTool(component);
+
+			assertTrue(meta.hasTool());
+			assertSame(component, meta.getTool());
+		}
+
+	}
+
+	@Nested
+	class JukeboxPlayableTest
+	{
+
+		@Test
+		void givenDefaultModelComponent()
+		{
+			assertFalse(meta.hasJukeboxPlayable());
+			assertNotNull(meta.getJukeboxPlayable());
+		}
+
+		@Test
+		@SuppressWarnings("UnstableApiUsage")
+		void givenModelComponent()
+		{
+			JukeboxPlayableComponent component = JukeboxPlayableComponentMock.useDefault();
+
+			meta.setJukeboxPlayable(component);
+
+			assertTrue(meta.hasJukeboxPlayable());
+			assertSame(component, meta.getJukeboxPlayable());
 		}
 
 	}

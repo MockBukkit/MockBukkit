@@ -3,6 +3,9 @@ package org.mockbukkit.mockbukkit.util;
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import lombok.val;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -256,6 +259,32 @@ public class NbtParser
 
 			throw new IllegalArgumentException(String.format("Cannot parse enum '%s' in class '%s'", object, clazz.getName()));
 		});
+	}
+
+	// Special cases
+
+	@Nullable
+	public static Component parseComponent(@Nullable Object object)
+	{
+		String s = parseString(object);
+		if (s == null)
+		{
+			return null;
+		}
+
+		return GsonComponentSerializer.gson().deserialize(s);
+	}
+
+	@Nullable
+	public static NamespacedKey parseNamespacedKey(@Nullable Object object)
+	{
+		String s = parseString(object);
+		if (s == null)
+		{
+			return null;
+		}
+
+		return NamespacedKey.fromString(s);
 	}
 
 }
