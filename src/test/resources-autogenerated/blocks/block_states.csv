@@ -603,7 +603,7 @@ MOSSY_STONE_BRICK_SLAB, org.bukkit.block.BlockState
 MOSSY_STONE_BRICK_STAIRS, org.bukkit.block.BlockState
 MOSSY_STONE_BRICK_WALL, org.bukkit.block.BlockState
 MOSSY_STONE_BRICKS, org.bukkit.block.BlockState
-MOVING_PISTON, org.bukkit.block.BlockState
+MOVING_PISTON, io.papermc.paper.block.MovingPiston
 MUD, org.bukkit.block.BlockState
 MUD_BRICK_SLAB, org.bukkit.block.BlockState
 MUD_BRICK_STAIRS, org.bukkit.block.BlockState
