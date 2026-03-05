@@ -48,6 +48,7 @@ public class BlockStateMockFactory
 			.put(Material.COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.COMPARATOR, with(ComparatorStateMock::new, ComparatorStateMock::new))
 			.put(Material.CONDUIT, with(ConduitStateMock::new, ConduitStateMock::new))
+			.put(Material.CRAFTER, with(CrafterStateMock::new, CrafterStateMock::new))
 			.put(Material.CREAKING_HEART, with(CreakingHeartStateMock::new, CreakingHeartStateMock::new))
 			.put(Material.DAYLIGHT_DETECTOR, with(DaylightDetectorStateMock::new, DaylightDetectorStateMock::new))
 			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))

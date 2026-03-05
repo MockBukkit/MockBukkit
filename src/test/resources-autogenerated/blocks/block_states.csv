@@ -238,7 +238,7 @@ CRACKED_DEEPSLATE_TILES, org.bukkit.block.BlockState
 CRACKED_NETHER_BRICKS, org.bukkit.block.BlockState
 CRACKED_POLISHED_BLACKSTONE_BRICKS, org.bukkit.block.BlockState
 CRACKED_STONE_BRICKS, org.bukkit.block.BlockState
-CRAFTER, org.bukkit.block.BlockState
+CRAFTER, org.bukkit.block.Crafter
 CRAFTING_TABLE, org.bukkit.block.BlockState
 CREAKING_HEART, org.bukkit.block.CreakingHeart
 CREEPER_HEAD, org.bukkit.block.Skull
