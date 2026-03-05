@@ -1021,7 +1021,7 @@ TUFF_WALL, org.bukkit.block.BlockState
 TURTLE_EGG, org.bukkit.block.BlockState
 TWISTING_VINES, org.bukkit.block.BlockState
 TWISTING_VINES_PLANT, org.bukkit.block.BlockState
-VAULT, org.bukkit.block.BlockState
+VAULT, org.bukkit.block.Vault
 VERDANT_FROGLIGHT, org.bukkit.block.BlockState
 VINE, org.bukkit.block.BlockState
 VOID_AIR, org.bukkit.block.BlockState
