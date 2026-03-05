@@ -10,13 +10,16 @@ import org.bukkit.inventory.MenuType;
 import org.bukkit.inventory.view.AnvilView;
 import org.bukkit.inventory.view.BeaconView;
 import org.bukkit.inventory.view.FurnaceView;
+import org.bukkit.inventory.view.MerchantView;
 import org.bukkit.inventory.view.builder.InventoryViewBuilder;
+import org.bukkit.inventory.view.builder.MerchantInventoryViewBuilder;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -236,6 +239,107 @@ class MenuTypeMockTest
 			HumanEntity player = server.addPlayer();
 			InventoryView view = copy.build(player);
 			assertEquals("Original Title", view.getTitle());
+		}
+
+	}
+
+	@Nested
+	class BaseBuilder
+	{
+
+		@Test
+		void builderNotNull()
+		{
+			InventoryViewBuilder<InventoryView> builder = MenuType.GENERIC_9X1.builder();
+			assertNotNull(builder);
+		}
+
+		@Test
+		void buildWithTitle()
+		{
+			HumanEntity player = server.addPlayer();
+			InventoryView view = MenuType.GENERIC_9X1.builder()
+					.title(Component.text("Base Title"))
+					.build(player);
+			assertNotNull(view);
+			assertEquals("Base Title", view.getTitle());
+		}
+
+		@Test
+		void buildWithoutTitle()
+		{
+			HumanEntity player = server.addPlayer();
+			InventoryView view = MenuType.GENERIC_9X1.builder()
+					.build(player);
+			assertNotNull(view);
+		}
+
+		@Test
+		void copyPreservesTitle()
+		{
+			InventoryViewBuilder<InventoryView> original = MenuType.GENERIC_9X1.builder()
+					.title(Component.text("Copy Title"));
+			InventoryViewBuilder<InventoryView> copy = original.copy();
+			assertNotSame(original, copy);
+
+			HumanEntity player = server.addPlayer();
+			InventoryView view = copy.build(player);
+			assertEquals("Copy Title", view.getTitle());
+		}
+
+		@Test
+		void buildCorrectTypeAndSize()
+		{
+			HumanEntity player = server.addPlayer();
+			InventoryView view = MenuType.GENERIC_9X1.builder()
+					.title(Component.text("Size Test"))
+					.build(player);
+			assertEquals(InventoryType.CHEST, view.getTopInventory().getType());
+			assertEquals(9, view.getTopInventory().getSize());
+		}
+
+	}
+
+	@Nested
+	class MerchantBuilder
+	{
+
+		@Test
+		void builderNotNull()
+		{
+			MerchantInventoryViewBuilder<MerchantView> builder = MenuType.MERCHANT.builder();
+			assertNotNull(builder);
+		}
+
+		@Test
+		void titleReturnsSelf()
+		{
+			MerchantInventoryViewBuilder<MerchantView> builder = MenuType.MERCHANT.builder();
+			assertSame(builder, builder.title(Component.text("Merchant Title")));
+		}
+
+		@Test
+		void copyReturnsDifferentInstance()
+		{
+			MerchantInventoryViewBuilder<MerchantView> original = MenuType.MERCHANT.builder()
+					.title(Component.text("Merchant Copy"));
+			MerchantInventoryViewBuilder<MerchantView> copy = original.copy();
+			assertNotNull(copy);
+			assertNotSame(original, copy);
+		}
+
+		@Test
+		void merchantThrowsUnimplemented()
+		{
+			MerchantInventoryViewBuilder<MerchantView> builder = MenuType.MERCHANT.builder();
+			assertThrows(UnimplementedOperationException.class, () -> builder.merchant(null));
+		}
+
+		@Test
+		void checkReachableThrowsUnimplemented()
+		{
+			MerchantInventoryViewBuilder<MerchantView> builder = MenuType.MERCHANT.builder();
+			assertThrows(UnimplementedOperationException.class, () -> builder.checkReachable(true));
 		}
 
 	}
