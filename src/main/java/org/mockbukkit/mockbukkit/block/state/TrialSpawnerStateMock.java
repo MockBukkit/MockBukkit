@@ -14,6 +14,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -212,6 +213,29 @@ public class TrialSpawnerStateMock extends TileStateMock implements TrialSpawner
 	public TrialSpawnerStateMock getSnapshot()
 	{
 		return new TrialSpawnerStateMock(this);
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (!(o instanceof TrialSpawnerStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return cooldownEnd == that.cooldownEnd && nextSpawnAttempt == that.nextSpawnAttempt
+				&& requiredPlayerRange == that.requiredPlayerRange
+				&& ominous == that.ominous && Objects.equals(trackedPlayers, that.trackedPlayers)
+				&& Objects.equals(trackedEntities, that.trackedEntities);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), trackedPlayers, trackedEntities, cooldownEnd, nextSpawnAttempt, requiredPlayerRange, ominous);
 	}
 
 }

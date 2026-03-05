@@ -10,6 +10,8 @@ import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
+import java.util.Objects;
+
 /**
  * Mock implementation of a {@link Lootable}.
  *
@@ -73,5 +75,25 @@ public abstract class LootableStateMock extends ContainerStateMock implements Lo
 
 	@Override
 	public abstract LootableStateMock getSnapshot();
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (!(o instanceof LootableStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return seed == that.seed;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), seed);
+	}
 
 }

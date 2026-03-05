@@ -10,6 +10,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.CrafterInventoryMock;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -170,6 +171,27 @@ public class CrafterStateMock extends LootableStateMock implements Crafter
 	public CrafterStateMock getSnapshot()
 	{
 		return new CrafterStateMock(this);
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (!(o instanceof CrafterStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return craftingTicks == that.craftingTicks && triggered == that.triggered
+				&& Objects.equals(disabledSlots, that.disabledSlots);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), disabledSlots, craftingTicks, triggered);
 	}
 
 }

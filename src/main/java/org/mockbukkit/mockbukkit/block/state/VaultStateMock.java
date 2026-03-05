@@ -14,6 +14,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -195,6 +196,28 @@ public class VaultStateMock extends TileStateMock implements Vault
 		return new VaultStateMock(this);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (!(o instanceof VaultStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return Double.compare(activationRange, that.activationRange) == 0
+				&& Double.compare(deactivationRange, that.deactivationRange) == 0
+				&& Objects.equals(rewardedPlayers, that.rewardedPlayers)
+				&& Objects.equals(connectedPlayers, that.connectedPlayers)
+				&& Objects.equals(keyItem, that.keyItem);
+	}
 
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), rewardedPlayers, connectedPlayers, activationRange, deactivationRange, keyItem);
+	}
 
 }
