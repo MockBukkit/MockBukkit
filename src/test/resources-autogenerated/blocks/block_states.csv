@@ -1003,7 +1003,7 @@ TORCH, org.bukkit.block.BlockState
 TORCHFLOWER, org.bukkit.block.BlockState
 TORCHFLOWER_CROP, org.bukkit.block.BlockState
 TRAPPED_CHEST, org.bukkit.block.Chest
-TRIAL_SPAWNER, org.bukkit.block.BlockState
+TRIAL_SPAWNER, org.bukkit.block.TrialSpawner
 TRIPWIRE, org.bukkit.block.BlockState
 TRIPWIRE_HOOK, org.bukkit.block.BlockState
 TUBE_CORAL, org.bukkit.block.BlockState

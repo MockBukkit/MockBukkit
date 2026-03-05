@@ -75,6 +75,7 @@ public class BlockStateMockFactory
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
 			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))
+			.put(Material.TRIAL_SPAWNER, with(TrialSpawnerStateMock::new, TrialSpawnerStateMock::new))
 			.put(Material.VAULT, with(VaultStateMock::new, VaultStateMock::new))
 			.build();
 
