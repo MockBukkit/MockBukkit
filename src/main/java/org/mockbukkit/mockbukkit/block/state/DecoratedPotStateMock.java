@@ -6,7 +6,6 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.DecoratedPot;
 import org.bukkit.inventory.DecoratedPotInventory;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -19,7 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class DecoratedPotStateMock extends ContainerStateMock implements DecoratedPot
+/**
+ * Mock implementation of a {@link DecoratedPot}.
+ *
+ * @see LootableStateMock
+ */
+public class DecoratedPotStateMock extends LootableStateMock implements DecoratedPot
 {
 
 	private final Map<Side, Material> sherds = new HashMap<>();
@@ -68,7 +72,7 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	}
 
 	@Override
-	public @NotNull ContainerStateMock getSnapshot()
+	public @NotNull DecoratedPotStateMock getSnapshot()
 	{
 		return new DecoratedPotStateMock(this);
 	}
@@ -120,36 +124,6 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	public @NotNull DecoratedPotStateMock copy()
 	{
 		return new DecoratedPotStateMock(this);
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable table)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LootTable getLootTable()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable table, long seed)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

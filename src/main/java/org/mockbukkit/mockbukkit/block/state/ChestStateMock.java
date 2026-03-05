@@ -5,7 +5,6 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -20,9 +19,9 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Chest}.
  *
- * @see TileStateMock
+ * @see LootableStateMock
  */
-public class ChestStateMock extends ContainerStateMock implements Chest
+public class ChestStateMock extends LootableStateMock implements Chest
 {
 
 	private boolean isOpen = false;
@@ -70,41 +69,6 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	{
 		super(state);
 		this.isOpen = state.isOpen;
-	}
-
-	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable lootTable, long l)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

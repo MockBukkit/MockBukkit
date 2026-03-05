@@ -15,9 +15,9 @@ import java.util.Objects;
 /**
  * Mock implementation of a {@link BrewingStand}.
  *
- * @see ContainerStateMock
+ * @see LootableStateMock
  */
-public class BrewingStandStateMock extends ContainerStateMock implements BrewingStand
+public class BrewingStandStateMock extends LootableStateMock implements BrewingStand
 {
 
 	private int recipeBrewingTime = 400;
