@@ -1,10 +1,6 @@
 {
 	"values": [
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 3,
-			"inventoryTypeName": "ANVIL",
-			"inventoryViewClass": "AnvilView",
 			"key": "minecraft:anvil",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -12,10 +8,6 @@
 			"typed": "minecraft:anvil"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 1,
-			"inventoryTypeName": "BEACON",
-			"inventoryViewClass": "BeaconView",
 			"key": "minecraft:beacon",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -23,10 +15,6 @@
 			"typed": "minecraft:beacon"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 3,
-			"inventoryTypeName": "BLAST_FURNACE",
-			"inventoryViewClass": "FurnaceView",
 			"key": "minecraft:blast_furnace",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -34,10 +22,6 @@
 			"typed": "minecraft:blast_furnace"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 5,
-			"inventoryTypeName": "BREWING",
-			"inventoryViewClass": "BrewingStandView",
 			"key": "minecraft:brewing_stand",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -45,10 +29,6 @@
 			"typed": "minecraft:brewing_stand"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 3,
-			"inventoryTypeName": "CARTOGRAPHY",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:cartography_table",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -56,10 +36,6 @@
 			"typed": "minecraft:cartography_table"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 9,
-			"inventoryTypeName": "CRAFTER",
-			"inventoryViewClass": "CrafterView",
 			"key": "minecraft:crafter_3x3",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -67,10 +43,6 @@
 			"typed": "minecraft:crafter_3x3"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 10,
-			"inventoryTypeName": "WORKBENCH",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:crafting",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -78,10 +50,6 @@
 			"typed": "minecraft:crafting"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 2,
-			"inventoryTypeName": "ENCHANTING",
-			"inventoryViewClass": "EnchantmentView",
 			"key": "minecraft:enchantment",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -89,10 +57,6 @@
 			"typed": "minecraft:enchantment"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 3,
-			"inventoryTypeName": "FURNACE",
-			"inventoryViewClass": "FurnaceView",
 			"key": "minecraft:furnace",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -100,10 +64,6 @@
 			"typed": "minecraft:furnace"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 9,
-			"inventoryTypeName": "DISPENSER",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_3x3",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -111,10 +71,6 @@
 			"typed": "minecraft:generic_3x3"
 		},
 		{
-			"builderType": "BASE",
-			"inventorySize": 9,
-			"inventoryTypeName": "CHEST",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_9x1",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -122,10 +78,6 @@
 			"typed": "minecraft:generic_9x1"
 		},
 		{
-			"builderType": "BASE",
-			"inventorySize": 18,
-			"inventoryTypeName": "CHEST",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_9x2",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -133,10 +85,6 @@
 			"typed": "minecraft:generic_9x2"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 27,
-			"inventoryTypeName": "CHEST",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_9x3",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -144,10 +92,6 @@
 			"typed": "minecraft:generic_9x3"
 		},
 		{
-			"builderType": "BASE",
-			"inventorySize": 36,
-			"inventoryTypeName": "CHEST",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_9x4",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -155,10 +99,6 @@
 			"typed": "minecraft:generic_9x4"
 		},
 		{
-			"builderType": "BASE",
-			"inventorySize": 45,
-			"inventoryTypeName": "CHEST",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_9x5",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -166,10 +106,6 @@
 			"typed": "minecraft:generic_9x5"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 54,
-			"inventoryTypeName": "CHEST",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:generic_9x6",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -177,10 +113,6 @@
 			"typed": "minecraft:generic_9x6"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 3,
-			"inventoryTypeName": "GRINDSTONE",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:grindstone",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -188,10 +120,6 @@
 			"typed": "minecraft:grindstone"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 5,
-			"inventoryTypeName": "HOPPER",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:hopper",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -199,10 +127,6 @@
 			"typed": "minecraft:hopper"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 1,
-			"inventoryTypeName": "LECTERN",
-			"inventoryViewClass": "LecternView",
 			"key": "minecraft:lectern",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -210,10 +134,6 @@
 			"typed": "minecraft:lectern"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 4,
-			"inventoryTypeName": "LOOM",
-			"inventoryViewClass": "LoomView",
 			"key": "minecraft:loom",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -221,10 +141,6 @@
 			"typed": "minecraft:loom"
 		},
 		{
-			"builderType": "MERCHANT",
-			"inventorySize": 3,
-			"inventoryTypeName": "MERCHANT",
-			"inventoryViewClass": "MerchantView",
 			"key": "minecraft:merchant",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -232,10 +148,6 @@
 			"typed": "minecraft:merchant"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 27,
-			"inventoryTypeName": "SHULKER_BOX",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:shulker_box",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -243,10 +155,6 @@
 			"typed": "minecraft:shulker_box"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 4,
-			"inventoryTypeName": "SMITHING",
-			"inventoryViewClass": "InventoryView",
 			"key": "minecraft:smithing",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -254,10 +162,6 @@
 			"typed": "minecraft:smithing"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 3,
-			"inventoryTypeName": "SMOKER",
-			"inventoryViewClass": "FurnaceView",
 			"key": "minecraft:smoker",
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -265,10 +169,6 @@
 			"typed": "minecraft:smoker"
 		},
 		{
-			"builderType": "LOCATION",
-			"inventorySize": 2,
-			"inventoryTypeName": "STONECUTTER",
-			"inventoryViewClass": "StonecutterView",
 			"key": "minecraft:stonecutter",
 			"requiredFeatures": [
 				"minecraft:vanilla"

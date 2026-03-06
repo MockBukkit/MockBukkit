@@ -5,7 +5,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mockbukkit.metaminer.internal.MaterialDataGenerator;
 import org.mockbukkit.metaminer.internal.potion.PotionDataGenerator;
 import org.mockbukkit.metaminer.keyed.KeyedDataGenerator;
-import org.mockbukkit.metaminer.menutype.MenuTypeDataGenerator;
 import org.mockbukkit.metaminer.keyed.RegistryKeyClassDataGenerator;
 import org.mockbukkit.metaminer.recipes.RecipeDataGenerator;
 import org.mockbukkit.metaminer.tags.TagDataGenerator;
@@ -60,7 +59,6 @@ public class MetaMiner extends JavaPlugin
 		return List.of(
 				// Sources
 				new KeyedDataGenerator(mainFolder),
-				new MenuTypeDataGenerator(mainFolder),
 				new MaterialDataGenerator(mainFolder),
 				new PotionDataGenerator(mainFolder),
 				new RecipeDataGenerator(mainFolder),

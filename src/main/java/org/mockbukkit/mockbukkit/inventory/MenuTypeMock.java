@@ -9,11 +9,23 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.MenuType;
+import org.bukkit.inventory.view.AnvilView;
+import org.bukkit.inventory.view.BeaconView;
+import org.bukkit.inventory.view.BrewingStandView;
+import org.bukkit.inventory.view.CrafterView;
+import org.bukkit.inventory.view.EnchantmentView;
+import org.bukkit.inventory.view.FurnaceView;
+import org.bukkit.inventory.view.LecternView;
+import org.bukkit.inventory.view.LoomView;
+import org.bukkit.inventory.view.MerchantView;
+import org.bukkit.inventory.view.StonecutterView;
 import org.bukkit.inventory.view.builder.InventoryViewBuilder;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
+
+import java.util.Map;
 
 /**
  * Mock implementation of {@link MenuType.Typed}.
@@ -32,7 +44,7 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	/**
 	 * Stores metadata for each menu type. Uses String for inventoryTypeName instead of
 	 * InventoryType directly to avoid a circular class initialization dependency:
-	 * MenuTypeMock init -> InventoryType init -> MenuType init -> Registry.MENU -> MenuTypeMock.from()
+	 * MenuTypeMock clinit -> InventoryType clinit -> MenuType clinit -> Registry.MENU -> MenuTypeMock.from()
 	 */
 	record MenuTypeData(
 			Class<? extends InventoryView> viewClass,
@@ -48,6 +60,34 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 		}
 
 	}
+
+	private static final Map<String, MenuTypeData> MENU_TYPE_DATA = Map.ofEntries(
+			Map.entry("minecraft:generic_9x1", new MenuTypeData(InventoryView.class, "CHEST", 9, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x2", new MenuTypeData(InventoryView.class, "CHEST", 18, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x3", new MenuTypeData(InventoryView.class, "CHEST", 27, BuilderType.LOCATION)),
+			Map.entry("minecraft:generic_9x4", new MenuTypeData(InventoryView.class, "CHEST", 36, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x5", new MenuTypeData(InventoryView.class, "CHEST", 45, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x6", new MenuTypeData(InventoryView.class, "CHEST", 54, BuilderType.LOCATION)),
+			Map.entry("minecraft:generic_3x3", new MenuTypeData(InventoryView.class, "DISPENSER", 9, BuilderType.LOCATION)),
+			Map.entry("minecraft:crafter_3x3", new MenuTypeData(CrafterView.class, "CRAFTER", 9, BuilderType.LOCATION)),
+			Map.entry("minecraft:anvil", new MenuTypeData(AnvilView.class, "ANVIL", 3, BuilderType.LOCATION)),
+			Map.entry("minecraft:beacon", new MenuTypeData(BeaconView.class, "BEACON", 1, BuilderType.LOCATION)),
+			Map.entry("minecraft:blast_furnace", new MenuTypeData(FurnaceView.class, "BLAST_FURNACE", 3, BuilderType.LOCATION)),
+			Map.entry("minecraft:brewing_stand", new MenuTypeData(BrewingStandView.class, "BREWING", 5, BuilderType.LOCATION)),
+			Map.entry("minecraft:crafting", new MenuTypeData(InventoryView.class, "WORKBENCH", 10, BuilderType.LOCATION)),
+			Map.entry("minecraft:enchantment", new MenuTypeData(EnchantmentView.class, "ENCHANTING", 2, BuilderType.LOCATION)),
+			Map.entry("minecraft:furnace", new MenuTypeData(FurnaceView.class, "FURNACE", 3, BuilderType.LOCATION)),
+			Map.entry("minecraft:grindstone", new MenuTypeData(InventoryView.class, "GRINDSTONE", 3, BuilderType.LOCATION)),
+			Map.entry("minecraft:hopper", new MenuTypeData(InventoryView.class, "HOPPER", 5, BuilderType.LOCATION)),
+			Map.entry("minecraft:lectern", new MenuTypeData(LecternView.class, "LECTERN", 1, BuilderType.LOCATION)),
+			Map.entry("minecraft:loom", new MenuTypeData(LoomView.class, "LOOM", 4, BuilderType.LOCATION)),
+			Map.entry("minecraft:merchant", new MenuTypeData(MerchantView.class, "MERCHANT", 3, BuilderType.MERCHANT)),
+			Map.entry("minecraft:shulker_box", new MenuTypeData(InventoryView.class, "SHULKER_BOX", 27, BuilderType.LOCATION)),
+			Map.entry("minecraft:smithing", new MenuTypeData(InventoryView.class, "SMITHING", 4, BuilderType.LOCATION)),
+			Map.entry("minecraft:smoker", new MenuTypeData(FurnaceView.class, "SMOKER", 3, BuilderType.LOCATION)),
+			Map.entry("minecraft:cartography_table", new MenuTypeData(InventoryView.class, "CARTOGRAPHY", 3, BuilderType.LOCATION)),
+			Map.entry("minecraft:stonecutter", new MenuTypeData(StonecutterView.class, "STONECUTTER", 2, BuilderType.LOCATION))
+	);
 
 	private final NamespacedKey key;
 	private final MenuTypeData menuTypeData;
@@ -150,29 +190,9 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	public static MenuTypeMock<?, ?> from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
-		Class<? extends InventoryView> viewClass = resolveViewClass(jsonObject.get("inventoryViewClass").getAsString());
-		BuilderType builderType = BuilderType.valueOf(jsonObject.get("builderType").getAsString());
-		String inventoryTypeName = jsonObject.get("inventoryTypeName").getAsString();
-		int inventorySize = jsonObject.get("inventorySize").getAsInt();
-
-		MenuTypeData data = new MenuTypeData(viewClass, inventoryTypeName, inventorySize, builderType);
+		MenuTypeData data = MENU_TYPE_DATA.get(key.toString());
+		Preconditions.checkArgument(data != null, "Unknown menu type: %s", key);
 		return new MenuTypeMock<>(key, data);
-	}
-
-	private static Class<? extends InventoryView> resolveViewClass(String simpleName)
-	{
-		if ("InventoryView".equals(simpleName))
-		{
-			return InventoryView.class;
-		}
-		try
-		{
-			return Class.forName("org.bukkit.inventory.view." + simpleName).asSubclass(InventoryView.class);
-		}
-		catch (ClassNotFoundException e)
-		{
-			throw new IllegalArgumentException("Unknown inventory view class: " + simpleName, e);
-		}
 	}
 
 }
