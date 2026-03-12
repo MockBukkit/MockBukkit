@@ -714,9 +714,11 @@ class ServerMockTest
 	{
 		String alteredMessage = "mockcommand argA argB";
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().registerEvents(new Listener() {
+		server.getPluginManager().registerEvents(new Listener()
+		{
 			@EventHandler
-			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e)
+			{
 				e.setMessage(alteredMessage);
 			}
 		}, plugin);
@@ -731,9 +733,11 @@ class ServerMockTest
 	void performCommand_PlayerCommandPreprocessEventCancellable()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().registerEvents(new Listener() {
+		server.getPluginManager().registerEvents(new Listener()
+		{
 			@EventHandler
-			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e)
+			{
 				e.setCancelled(true);
 			}
 		}, plugin);
