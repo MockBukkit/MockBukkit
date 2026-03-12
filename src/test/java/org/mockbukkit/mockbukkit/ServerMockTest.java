@@ -44,6 +44,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -694,6 +695,18 @@ class ServerMockTest
 		assertEquals("argA", plugin.commandArguments[0]);
 		assertEquals("argB", plugin.commandArguments[1]);
 		assertSame(player, plugin.commandSender);
+	}
+
+	@Test
+	void performCommand_PlayerCommandPreprocessEventIsCalled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		Player player = server.addPlayer();
+		String message = "mockcommand argA argB";
+		assertTrue(server.dispatchCommand(player, message));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
+				message.equalsIgnoreCase(event.getMessage())));
 	}
 
 	@Test

@@ -46,6 +46,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -413,6 +414,46 @@ class PlayerMockTest
 		assertEquals("argA", plugin.commandArguments[0]);
 		assertEquals("argB", plugin.commandArguments[1]);
 		assertSame(player, plugin.commandSender);
+	}
+
+	@Test
+	void performCommand_PlayerCommandPreprocessEventIsCalled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		Player player = server.addPlayer();
+		String message = "mockcommand argA argB";
+		assertTrue(server.dispatchCommand(player, message));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
+				message.equalsIgnoreCase(event.getMessage())));
+	}
+
+	@Test
+	void performCommand_PlayerCommandPreprocessEventAlterCommand()
+	{
+		String alteredMessage = "mockcommand argA argB";
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+				e.setMessage(alteredMessage);
+			}
+		}, plugin);
+		plugin.commandReturns = true;
+		Player player = server.addPlayer();
+		assertTrue(server.dispatchCommand(player, "mockcommand argA argB"));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
+				alteredMessage.equalsIgnoreCase(event.getMessage())));
+	}
+
+	@Test
+	void performCommand_PlayerCommandPreprocessEventIsNotCalledForConsoleSender()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		String message = "mockcommand argA argB";
+		assertTrue(server.dispatchCommand(server.getConsoleSender(), message));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerCommandPreprocessEvent.class));
 	}
 
 	@Test
