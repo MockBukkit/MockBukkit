@@ -1251,11 +1251,11 @@ public class ServerMock extends Server.Spigot implements Server
 		if (sender instanceof Player player)
 		{
 			PlayerCommandPreprocessEvent event = new PlayerCommandPreprocessEvent(player, commandLine);
+			pluginManager.callEvent(event);
 			if (event.isCancelled())
 			{
 				return true;
 			}
-			pluginManager.callEvent(event);
 			commandLine = event.getMessage();
 		}
 		String[] commands = commandLine.split(" ");

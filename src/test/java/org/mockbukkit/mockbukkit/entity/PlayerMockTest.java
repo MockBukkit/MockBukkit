@@ -447,13 +447,19 @@ class PlayerMockTest
 	}
 
 	@Test
-	void performCommand_PlayerCommandPreprocessEventIsNotCalledForConsoleSender()
+	void performCommand_PlayerCommandPreprocessEventCancellable()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+				e.setCancelled(true);
+			}
+		}, plugin);
 		plugin.commandReturns = true;
-		String message = "mockcommand argA argB";
-		assertTrue(server.dispatchCommand(server.getConsoleSender(), message));
-		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerCommandPreprocessEvent.class));
+		Player player = server.addPlayer();
+		player.performCommand("mockcommand argA argB");
+		assertNull(plugin.command);
 	}
 
 	@Test

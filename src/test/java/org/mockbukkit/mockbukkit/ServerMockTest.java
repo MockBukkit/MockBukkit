@@ -728,6 +728,32 @@ class ServerMockTest
 	}
 
 	@Test
+	void performCommand_PlayerCommandPreprocessEventCancellable()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+				e.setCancelled(true);
+			}
+		}, plugin);
+		plugin.commandReturns = true;
+		Player player = server.addPlayer();
+		server.dispatchCommand(player, "mockcommand argA argB");
+		assertNull(plugin.command);
+	}
+
+	@Test
+	void performCommand_PlayerCommandPreprocessEventIsNotCalledForConsoleSender()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		String message = "mockcommand argA argB";
+		assertTrue(server.dispatchCommand(server.getConsoleSender(), message));
+		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerCommandPreprocessEvent.class));
+	}
+
+	@Test
 	void getEntities_NoEntities_EmptySet()
 	{
 		assertTrue(server.getEntities().isEmpty(), "Entities set was not empty");
