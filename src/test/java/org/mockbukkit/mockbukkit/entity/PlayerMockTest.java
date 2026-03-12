@@ -421,7 +421,6 @@ class PlayerMockTest
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
-		Player player = server.addPlayer();
 		String message = "mockcommand argA argB";
 		assertTrue(player.performCommand(message));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
@@ -440,7 +439,6 @@ class PlayerMockTest
 			}
 		}, plugin);
 		plugin.commandReturns = true;
-		Player player = server.addPlayer();
 		assertTrue(player.performCommand("mockcommand argA argB"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
 				alteredMessage.equalsIgnoreCase(event.getMessage())));
@@ -457,7 +455,6 @@ class PlayerMockTest
 			}
 		}, plugin);
 		plugin.commandReturns = true;
-		Player player = server.addPlayer();
 		player.performCommand("mockcommand argA argB");
 		assertNull(plugin.command);
 	}
