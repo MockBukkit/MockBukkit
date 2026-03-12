@@ -710,6 +710,24 @@ class ServerMockTest
 	}
 
 	@Test
+	void performCommand_PlayerCommandPreprocessEventAlterCommand()
+	{
+		String alteredMessage = "mockcommand argA argB";
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+				e.setMessage(alteredMessage);
+			}
+		}, plugin);
+		plugin.commandReturns = true;
+		Player player = server.addPlayer();
+		assertTrue(server.dispatchCommand(player, "mockcommand argA argB"));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
+				alteredMessage.equalsIgnoreCase(event.getMessage())));
+	}
+
+	@Test
 	void getEntities_NoEntities_EmptySet()
 	{
 		assertTrue(server.getEntities().isEmpty(), "Entities set was not empty");

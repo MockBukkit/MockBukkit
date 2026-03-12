@@ -423,7 +423,7 @@ class PlayerMockTest
 		plugin.commandReturns = true;
 		Player player = server.addPlayer();
 		String message = "mockcommand argA argB";
-		assertTrue(server.dispatchCommand(player, message));
+		assertTrue(player.performCommand(message));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
 				message.equalsIgnoreCase(event.getMessage())));
 	}
@@ -441,7 +441,7 @@ class PlayerMockTest
 		}, plugin);
 		plugin.commandReturns = true;
 		Player player = server.addPlayer();
-		assertTrue(server.dispatchCommand(player, "mockcommand argA argB"));
+		assertTrue(player.performCommand("mockcommand argA argB"));
 		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
 				alteredMessage.equalsIgnoreCase(event.getMessage())));
 	}
