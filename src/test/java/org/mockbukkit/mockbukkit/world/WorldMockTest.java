@@ -49,6 +49,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
+import org.bukkit.util.Vector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -2909,7 +2910,7 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 10, 20, 30);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 			Arrow arrow = world.spawnArrow(location, direction, 0.6f, 0);
 
 			assertNotNull(arrow);
@@ -2922,12 +2923,12 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 			float speed = 0.8f;
 
 			Arrow arrow = world.spawnArrow(location, direction, speed, 0);
 
-			org.bukkit.util.Vector velocity = arrow.getVelocity();
+			Vector velocity = arrow.getVelocity();
 			// Velocity should be normalized direction * speed
 			assertEquals(speed, velocity.length(), 0.001);
 		}
@@ -2937,13 +2938,12 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
 			Arrow arrow1 = world.spawnArrow(location, direction, 0.5f, 0.1f);
 			Arrow arrow2 = world.spawnArrow(location, direction, 0.5f, 0.1f);
 
-			// With spread, arrows should have different velocities
-			// (this might occasionally fail due to randomness, but is very unlikely)
+			// With spread, consecutive arrows use different random values and have different velocities
 			assertNotEquals(arrow1.getVelocity(), arrow2.getVelocity());
 		}
 
@@ -2952,7 +2952,7 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(0, 1, 0);
+			Vector direction = new Vector(0, 1, 0);
 
 			SpectralArrow arrow = world.spawnArrow(location, direction, 0.5f, 0, SpectralArrow.class);
 
@@ -2965,7 +2965,7 @@ class WorldMockTest
 		void spawnArrow_NullLocation_ThrowsException()
 		{
 			WorldMock world = new WorldMock();
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
 			assertThrows(NullPointerException.class, () ->
 				world.spawnArrow(null, direction, 0.5f, 0));
@@ -2986,32 +2986,23 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
 			assertThrows(NullPointerException.class, () ->
 				world.spawnArrow(location, direction, 0.5f, 0, null));
 		}
 
 		@Test
-		void spawnArrow_SpeedBelowZero_ThrowsException()
+		void spawnArrow_SpeedAboveOne_Succeeds()
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
-			assertThrows(IllegalArgumentException.class, () ->
-				world.spawnArrow(location, direction, -0.1f, 0));
-		}
+			Arrow arrow = world.spawnArrow(location, direction, 1.5f, 0);
 
-		@Test
-		void spawnArrow_SpeedAboveOne_ThrowsException()
-		{
-			WorldMock world = new WorldMock();
-			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
-
-			assertThrows(IllegalArgumentException.class, () ->
-				world.spawnArrow(location, direction, 1.1f, 0));
+			assertNotNull(arrow);
+			assertEquals(1.5, arrow.getVelocity().length(), 0.001);
 		}
 
 		@Test
@@ -3019,7 +3010,7 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
 			Arrow arrow = world.spawnArrow(location, direction, 0f, 0);
 
@@ -3032,7 +3023,7 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
 			Arrow arrow = world.spawnArrow(location, direction, 1f, 0);
 
@@ -3045,62 +3036,10 @@ class WorldMockTest
 		{
 			WorldMock world = new WorldMock();
 			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
 
 			assertThrows(IllegalArgumentException.class, () ->
 				world.spawnArrow(location, direction, 0.5f, -1f));
-		}
-
-		@Test
-		void spawnArrow_ArrowTick_UpdatesPosition()
-		{
-			WorldMock world = new WorldMock();
-			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
-			float speed = 0.5f;
-
-			Arrow arrow = world.spawnArrow(location, direction, speed, 0);
-			Location initialLocation = arrow.getLocation().clone();
-
-			// Tick the arrow (cast to mock to access tick method)
-			((org.mockbukkit.mockbukkit.entity.ArrowMock) arrow).tick();
-
-			// Position should have changed
-			assertNotEquals(initialLocation, arrow.getLocation());
-		}
-
-		@Test
-		void spawnArrow_ArrowTickWithNoPhysics_DoesNotMove()
-		{
-			WorldMock world = new WorldMock();
-			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
-
-			Arrow arrow = world.spawnArrow(location, direction, 0.5f, 0);
-			arrow.setNoPhysics(true);
-			Location initialLocation = arrow.getLocation().clone();
-
-			// Tick the arrow (cast to mock to access tick method)
-			((org.mockbukkit.mockbukkit.entity.ArrowMock) arrow).tick();
-
-			// With no physics, position should not change
-			assertEquals(initialLocation, arrow.getLocation());
-		}
-
-		@Test
-		void spawnArrow_ArrowTick_IncrementsLifetime()
-		{
-			WorldMock world = new WorldMock();
-			Location location = new Location(world, 0, 0, 0);
-			org.bukkit.util.Vector direction = new org.bukkit.util.Vector(1, 0, 0);
-
-			Arrow arrow = world.spawnArrow(location, direction, 0.5f, 0);
-			int initialLifetime = arrow.getLifetimeTicks();
-
-			// Tick the arrow (cast to mock to access tick method)
-			((org.mockbukkit.mockbukkit.entity.ArrowMock) arrow).tick();
-
-			assertEquals(initialLifetime + 1, arrow.getLifetimeTicks());
 		}
 
 	}

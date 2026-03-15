@@ -164,6 +164,7 @@ public class WorldMock implements World
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
 	private final @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
 	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
+	private final Random random = new Random(0);
 	private boolean bonusChest = false;
 
 	private boolean allowAnimals = true;
@@ -2332,28 +2333,25 @@ public class WorldMock implements World
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(direction, "Direction cannot be null");
 		Preconditions.checkNotNull(clazz, "Class cannot be null");
-		Preconditions.checkArgument(speed >= 0 && speed <= 1, "Speed must be between 0 and 1 (inclusive), got %s", speed);
 		Preconditions.checkArgument(spread >= 0, "Spread must be non-negative, got %s", spread);
 
 		// Spawn the arrow entity
 		T arrow = spawn(location, clazz, CreatureSpawnEvent.SpawnReason.CUSTOM);
 
-		// Calculate velocity with spread
+		// Calculate velocity: normalize direction, apply spread, then scale by speed
 		Vector velocity = direction.clone().normalize();
 
-		// Apply random spread if specified
+		// Apply spread using triangular distribution matching Minecraft source
 		if (spread > 0)
 		{
-			Random random = ThreadLocalRandom.current();
 			velocity.add(new Vector(
-				(random.nextDouble() - 0.5) * spread,
-				(random.nextDouble() - 0.5) * spread,
-				(random.nextDouble() - 0.5) * spread
+				0.0172275 * spread * (random.nextDouble() - random.nextDouble()),
+				0.0172275 * spread * (random.nextDouble() - random.nextDouble()),
+				0.0172275 * spread * (random.nextDouble() - random.nextDouble())
 			));
 		}
 
-		// Normalize and apply speed
-		velocity.normalize().multiply(speed);
+		velocity.multiply(speed);
 		arrow.setVelocity(velocity);
 
 		// Mark the arrow as having been shot
