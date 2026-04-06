@@ -67,6 +67,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
@@ -1246,6 +1247,16 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			LifecycleEventRunnerMock.INSTANCE.callReloadableRegistrarEvent(LifecycleEvents.COMMANDS, PaperCommandsMock.INSTANCE, Plugin.class, ReloadableRegistrarEvent.Cause.INITIAL);
 			this.commandsInitialized = true;
+		}
+		if (sender instanceof Player player)
+		{
+			PlayerCommandPreprocessEvent event = new PlayerCommandPreprocessEvent(player, commandLine);
+			pluginManager.callEvent(event);
+			if (event.isCancelled())
+			{
+				return true;
+			}
+			commandLine = event.getMessage();
 		}
 		String[] commands = commandLine.split(" ");
 		String commandLabel = commands[0];
