@@ -647,7 +647,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		return this.getBukkitVersion().split("-")[0];
+		return BuildParameters.PAPER_API_VERSION;
 	}
 
 	@Override

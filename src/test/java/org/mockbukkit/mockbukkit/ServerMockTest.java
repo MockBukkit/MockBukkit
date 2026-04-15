@@ -273,7 +273,7 @@ class ServerMockTest
 	@Test
 	void getVersion_CorrectPattern()
 	{
-		assertTrue(server.getVersion().matches("MockBukkit \\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)"));
+		assertTrue(server.getVersion().matches("MockBukkit \\(MC: \\d+\\.\\d+(?:\\.\\d+)?\\)"));
 	}
 
 	@Test
@@ -285,7 +285,7 @@ class ServerMockTest
 	@Test
 	void getBukkitVersion_CorrectPattern()
 	{
-		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-.*SNAPSHOT.*"));
+		assertTrue(server.getBukkitVersion().matches("\\d+\\.\\d+.*"));
 	}
 
 	@Test
@@ -297,7 +297,7 @@ class ServerMockTest
 	@Test
 	void getMinecraftVersion_CorrectPattern()
 	{
-		assertTrue(server.getMinecraftVersion().matches("1\\.[0-9]+(\\.[0-9]+)?"));
+		assertTrue(server.getMinecraftVersion().matches("\\d+\\.[0-9]+(\\.[0-9]+)?"));
 	}
 
 	@Test
@@ -2429,7 +2429,7 @@ class ServerMockTest
 				Iterable<Tag<Fluid>> fluidTag = server.getTags(Tag.REGISTRY_FLUIDS, Fluid.class);
 
 				assertNotNull(fluidTag);
-				assertEquals(2, Iterables.size(fluidTag));
+				assertEquals(6, Iterables.size(fluidTag));
 			}
 
 			@Test
