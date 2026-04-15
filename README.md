@@ -339,6 +339,8 @@ If you want to see some projects that are using MockBukkit right now, feel free 
   (75+ Unit Tests)
 - [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
   (50+ Unit Tests)
+- [ez-plugins/EzEconomy](https://github.com/ez-plugins/EzEconomy/tree/main/ezeconomy-bukkit/src/test/java/com/skyblockexp/ezeconomy)
+  (50+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
