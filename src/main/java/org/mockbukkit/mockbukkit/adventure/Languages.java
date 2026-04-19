@@ -36,7 +36,7 @@ public class Languages
 	 */
 	public static Language loadLanguage(Language.LanguageType language)
 	{
-		String resourceName = "/translations/" + language.getResourceName();
+		String resourceName = String.format("/translations/%s", language.getResourceName());
 		JsonElement jsonElement = ResourceLoader.loadResource(resourceName);
 		return new JsonBackedLanguage(jsonElement.getAsJsonObject());
 	}

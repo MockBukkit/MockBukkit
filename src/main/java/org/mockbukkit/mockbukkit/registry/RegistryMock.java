@@ -83,8 +83,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
 	{
-		String fileName = "/keyed/" + key.key().value() + ".json";
-		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);
+		String fileName = String.format("/keyed/%s.json", key.key().value());
+		@SuppressWarnings("unchecked")
+		Function<JsonObject, T> constructorFunction = (Function<JsonObject, T>) getConstructorFunction(key);
+		this.constructor = constructorFunction;
 		keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
 	}
 
@@ -154,6 +156,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 				|| key == RegistryKey.POTION;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private T createEnumWrapper(JsonObject jsonObject, RegistryKey<T> key)
 	{
 		// Extract the key from the JSON object
@@ -172,7 +175,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		try
 		{
 			// Convert the enum name to the corresponding enum constant
-			Enum<?> enumValue = Enum.valueOf((Class<? extends Enum>) enumClass, enumName);
+			Enum<?> enumValue = Enum.valueOf((Class) enumClass, enumName);
 			return (T) enumValue;
 		}
 		catch (IllegalArgumentException | ClassCastException e)
@@ -249,7 +252,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			return null;
 		}
-		String fileName = "/tags/" + plural + "/" + tagKey.key().value() + ".json";
+		String fileName = String.format("/tags/%s/%s.json", plural, tagKey.key().value());
 		try
 		{
 			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
