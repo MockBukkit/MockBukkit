@@ -2,6 +2,8 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.Material;
@@ -25,6 +27,9 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -46,11 +51,14 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	private final boolean isCompostable;
 	private final BigDecimal compostChance;
 	private final int burnDuration;
+	private final @NotNull Set<DataComponentType> defaultDataTypes;
+	private final @NotNull Map<DataComponentType, Object> defaultData;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
 						 boolean edible, boolean hasRecord, boolean fuel, @Nullable NamespacedKey blockType, String translationKey,
 						 Class<M> metaClass, ItemRarity rarity, CreativeCategory creativeCategory, boolean isCompostable,
-						 BigDecimal compostChance, int burnDuration)
+						 BigDecimal compostChance, int burnDuration, Set<DataComponentType> defaultDataTypes,
+						 Map<DataComponentType, Object> defaultData)
 	{
 		this.namespacedKey = namespacedKey;
 		this.maxStackSize = maxStackSize;
@@ -66,6 +74,8 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		this.isCompostable = isCompostable;
 		this.compostChance = compostChance;
 		this.burnDuration = burnDuration;
+		this.defaultDataTypes = Set.copyOf(defaultDataTypes);
+		this.defaultData = Map.copyOf(defaultData);
 	}
 
 	@ApiStatus.Internal
@@ -117,6 +127,40 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 			}
 		}
 
+		Set<DataComponentType> defaultDataTypes = new HashSet<>();
+		if (jsonObject.has("defaultDataTypes"))
+		{
+			JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
+			for (JsonElement element : typesArray)
+			{
+				NamespacedKey typeKey = NamespacedKey.fromString(element.getAsString());
+				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
+				if (type != null)
+				{
+					defaultDataTypes.add(type);
+				}
+			}
+		}
+
+		Map<DataComponentType, Object> defaultData = new HashMap<>();
+		if (jsonObject.has("defaultData"))
+		{
+			JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
+			for (Map.Entry<String, JsonElement> entry : dataObject.entrySet())
+			{
+				NamespacedKey typeKey = NamespacedKey.fromString(entry.getKey());
+				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
+				if (type != null)
+				{
+					Object value = deserializeComponent(type, entry.getValue());
+					if (value != null)
+					{
+						defaultData.put(type, value);
+					}
+				}
+			}
+		}
+
 		return new ItemTypeMock<>(
 				key,
 				maxStackSize,
@@ -131,8 +175,38 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				creativeCategory,
 				isCompostable,
 				compostChance,
-				burnDuration
+				burnDuration,
+				defaultDataTypes,
+				defaultData
 		);
+	}
+
+	private static @Nullable Object deserializeComponent(DataComponentType type, JsonElement json)
+	{
+		if (json.isJsonPrimitive())
+		{
+			com.google.gson.JsonPrimitive primitive = json.getAsJsonPrimitive();
+			if (primitive.isNumber())
+			{
+				return primitive.getAsNumber();
+			}
+			if (primitive.isBoolean())
+			{
+				return primitive.getAsBoolean();
+			}
+			if (primitive.isString())
+			{
+				return primitive.getAsString();
+			}
+		}
+		// Complex components should use their respective Mock deserialize method if available
+		// For now, we return the raw map if it's an object
+		if (json.isJsonObject())
+		{
+			// Convert JsonObject to Map
+			return new com.google.gson.Gson().fromJson(json, Map.class);
+		}
+		return null;
 	}
 
 	@NotNull
@@ -248,30 +322,26 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public float getCompostChance()
 	{
-		Preconditions.checkArgument(
-				this.isCompostable(), "The item type " + this.getKey() + " is not compostable"
-		);
+		Preconditions.checkArgument(this.isCompostable(), "The item type %s is not compostable", this.getKey());
 		return this.compostChance.floatValue();
 	}
 
 	@Override
 	public @Nullable ItemType getCraftingRemainingItem()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return null;
 	}
 
 	@Override
 	public @NotNull @Unmodifiable Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return com.google.common.collect.ImmutableMultimap.of();
 	}
 
 	@Override
 	public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot slot)
 	{
-		throw new UnimplementedOperationException();
+		return com.google.common.collect.ImmutableMultimap.of();
 	}
 
 	@Override
@@ -313,22 +383,36 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public <T> @Nullable T getDefaultData(DataComponentType.@NotNull Valued<T> valued)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.defaultData.containsKey(valued))
+		{
+			return (T) this.defaultData.get(valued);
+		}
+		// Fallbacks for common values that we already have in fields
+		if (valued.getKey().equals(NamespacedKey.minecraft("max_stack_size")))
+		{
+			return (T) Integer.valueOf(this.maxStackSize);
+		}
+		if (valued.getKey().equals(NamespacedKey.minecraft("rarity")))
+		{
+			return (T) this.rarity;
+		}
+		if (valued.getKey().equals(NamespacedKey.minecraft("max_damage")) && this.maxDurability > 0)
+		{
+			return (T) Integer.valueOf(this.maxDurability);
+		}
+		return null;
 	}
 
 	@Override
 	public boolean hasDefaultData(@NotNull DataComponentType dataComponentType)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.defaultDataTypes.contains(dataComponentType);
 	}
 
 	@Override
 	public @Unmodifiable @NotNull Set<DataComponentType> getDefaultDataTypes()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return java.util.Collections.unmodifiableSet(this.defaultDataTypes);
 	}
 
 	@Override

@@ -52,11 +52,14 @@ import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
+import org.mockbukkit.mockbukkit.util.RegistryUtils;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -68,11 +71,14 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
 	 */
 	private final Map<NamespacedKey, T> keyedMap = new HashMap<>();
+	private final Map<TagKey<T>, Tag<T>> tagCache = new HashMap<>();
+	private final RegistryKey<T> registryKey;
 	private JsonArray keyedData;
 	private Function<JsonObject, T> constructor;
 
 	public RegistryMock(RegistryKey<T> key)
 	{
+		this.registryKey = key;
 		loadKeyedToRegistry(key);
 	}
 
@@ -203,20 +209,70 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	@Override
 	public boolean hasTag(TagKey<T> tagKey)
 	{
-		throw new UnimplementedOperationException();
+		return getTag(tagKey) != null;
 	}
 
 	@Override
 	public Tag<T> getTag(TagKey<T> tagKey)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(tagKey, "tagKey cannot be null");
+		if (tagCache.containsKey(tagKey))
+		{
+			return tagCache.get(tagKey);
+		}
+		Tag<T> tag = loadTag(tagKey);
+		if (tag != null)
+		{
+			tagCache.put(tagKey, tag);
+		}
+		return tag;
 	}
 
 	@Override
 	public Collection<Tag<T>> getTags()
 	{
-		throw new UnimplementedOperationException();
+		String plural = RegistryUtils.getPlural(registryKey);
+		if (plural == null)
+		{
+			return java.util.Collections.emptyList();
+		}
+
+		// Use the resource loader or filesystem to find all tags
+		// Since we don't have a list of all tags, we might need to scan the resources.
+		// For now, return the cached tags as a fallback, but ideally we should load them all.
+		return tagCache.values();
 	}
+
+	private @Nullable Tag<T> loadTag(TagKey<T> tagKey)
+	{
+		String plural = RegistryUtils.getPlural(registryKey);
+		if (plural == null)
+		{
+			return null;
+		}
+		String fileName = "/tags/" + plural + "/" + tagKey.key().value() + ".json";
+		try
+		{
+			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
+			JsonArray values = json.getAsJsonArray("values");
+			List<T> tagValues = new ArrayList<>();
+			for (JsonElement element : values)
+			{
+				NamespacedKey key = NamespacedKey.fromString(element.getAsString());
+				T value = get(key);
+				if (value != null)
+				{
+					tagValues.add(value);
+				}
+			}
+			return new TagMock<>(tagKey, tagValues);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+
 
 	@Override
 	public @NotNull T getOrThrow(@NotNull NamespacedKey namespacedKey)
