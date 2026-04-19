@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.registry;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.TypedKey;
+import io.papermc.paper.registry.tag.Tag;
+import io.papermc.paper.registry.tag.TagKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -153,17 +155,17 @@ class RegistryMockTest
 	void getTag()
 	{
 		Registry<ItemType> registry = Registry.ITEM;
-		io.papermc.paper.registry.tag.Tag<ItemType> tag = registry.getTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes")));
+		Tag<ItemType> tag = registry.getTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes")));
 		assertNotNull(tag);
-		assertTrue(registry.hasTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes"))));
+		assertTrue(registry.hasTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes"))));
 	}
 
 	@Test
 	void getTag_Invalid()
 	{
 		Registry<ItemType> registry = Registry.ITEM;
-		assertNull(registry.getTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
-		assertFalse(registry.hasTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
+		assertNull(registry.getTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
+		assertFalse(registry.hasTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
 	}
 
 	@Test

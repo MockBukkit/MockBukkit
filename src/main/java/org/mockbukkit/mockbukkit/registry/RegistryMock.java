@@ -56,10 +56,12 @@ import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -236,7 +238,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		String plural = getPlural(registryKey);
 		if (plural == null)
 		{
-			return java.util.Collections.emptyList();
+			return Collections.emptyList();
 		}
 
 		// Use the resource loader or filesystem to find all tags
@@ -284,7 +286,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		T value = this.keyedMap.get(namespacedKey);
 		if (value == null)
 		{
-			throw new java.util.NoSuchElementException("No value for " + namespacedKey + " in " + this);
+			throw new NoSuchElementException("No value for " + namespacedKey + " in " + this);
 		}
 		return value;
 	}
