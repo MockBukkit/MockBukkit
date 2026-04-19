@@ -12,6 +12,7 @@ public class BuildParameters
 {
 
 	private static final Properties PROPERTIES = new Properties();
+	private static final String UNKNOWN = "UNKNOWN";
 
 	static
 	{
@@ -31,15 +32,15 @@ public class BuildParameters
 	/**
 	 * The version of MockBukkit.
 	 */
-	public static final String MOCK_BUKKIT_VERSION = PROPERTIES.getProperty("mockBukkitVersion", "UNKNOWN");
+	public static final String MOCK_BUKKIT_VERSION = PROPERTIES.getProperty("mockBukkitVersion", UNKNOWN);
 	/**
 	 * The full version of the Paper API MockBukkit was built against.
 	 */
-	public static final String PAPER_API_FULL_VERSION = PROPERTIES.getProperty("paperApiFullVersion", "UNKNOWN");
+	public static final String PAPER_API_FULL_VERSION = PROPERTIES.getProperty("paperApiFullVersion", UNKNOWN);
 	/**
 	 * The version of the Paper API.
 	 */
-	public static final String PAPER_API_VERSION = PROPERTIES.getProperty("paperApiVersion", "UNKNOWN");
+	public static final String PAPER_API_VERSION = PROPERTIES.getProperty("paperApiVersion", UNKNOWN);
 	/**
 	 * The time at which the build was executed.
 	 */
@@ -47,11 +48,11 @@ public class BuildParameters
 	/**
 	 * The git branch the build was started from.
 	 */
-	public static final String BRANCH = PROPERTIES.getProperty("branch", "UNKNOWN");
+	public static final String BRANCH = PROPERTIES.getProperty("branch", UNKNOWN);
 	/**
 	 * The git commit hash at the time of the build.
 	 */
-	public static final String COMMIT = PROPERTIES.getProperty("commit", "UNKNOWN");
+	public static final String COMMIT = PROPERTIES.getProperty("commit", UNKNOWN);
 	/**
 	 * The build number (from CI).
 	 */
