@@ -29,10 +29,10 @@ public record ItemAttributeModifiersMock(List<Entry> modifiers) implements ItemA
 		{
 			Preconditions.checkArgument(
 					this.entries.stream().noneMatch(e ->
-							e.modifier().getKey().equals(modifier.getKey()) && e.attribute().getKey().equals(attribute.getKey())
+							e.modifier().getKey().equals(modifier.getKey()) && e.attribute().getKeyOrThrow().equals(attribute.getKeyOrThrow())
 					),
 					"Cannot add 2 modifiers with identical keys on the same attribute (modifier %s for attribute %s)",
-					modifier.getKey(), attribute.getKey()
+					modifier.getKey(), attribute.getKeyOrThrow()
 			);
 			AttributeModifier newModifier = new AttributeModifier(modifier.getKey(), modifier.getAmount(), modifier.getOperation(), equipmentSlotGroup);
 			entries.add(new EntryMock(attribute, newModifier, display));

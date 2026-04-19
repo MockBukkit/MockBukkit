@@ -123,7 +123,7 @@ public class KeyedDataGenerator implements DataGenerator
 	private void addDamageTypeProperties(JsonObject jsonObject, DamageType damageType)
 	{
 		jsonObject.add("damageScaling", new JsonPrimitive(damageType.getDamageScaling().toString()));
-		jsonObject.add("sound", new JsonPrimitive(damageType.getDamageEffect().getSound().getKey().toString()));
+		jsonObject.add("sound", new JsonPrimitive(Registry.SOUNDS.getKey(damageType.getDamageEffect().getSound()).toString()));
 		jsonObject.add("deathMessageType", new JsonPrimitive(damageType.getDeathMessageType().toString()));
 	}
 
@@ -167,7 +167,7 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("maxModifiedCosts", maxModifiedCosts);
 
 		JsonArray conflicts = new JsonArray();
-		for (Enchantment otherEnchantment : Enchantment.values())
+		for (Enchantment otherEnchantment : Registry.ENCHANTMENT)
 		{
 			if (enchantment.conflictsWith(otherEnchantment))
 			{

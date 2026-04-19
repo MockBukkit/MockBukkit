@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.sound;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -60,7 +61,7 @@ public final class AudioExperience
 	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 						   float pitch)
 	{
-		this(sound.getKey().getKey(), category, loc, volume, pitch);
+		this(Registry.SOUNDS.getKey(sound).getKey(), category, loc, volume, pitch);
 	}
 
 	/**
