@@ -26,6 +26,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void generateData() throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
@@ -37,6 +38,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 			try
 			{
 				ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE);
+				//noinspection deprecation
 				itemStack.setType(material);
 				outputData.add("material", new JsonPrimitive(itemStack.getType().key().asString()));
 				if (itemStack.getItemMeta() != null)
@@ -69,7 +71,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 		{
 			if (ItemMeta.class.isAssignableFrom(anInterface))
 			{
-				output.add((Class<? extends ItemMeta>) anInterface);
+				output.add(anInterface.asSubclass(ItemMeta.class));
 			}
 		}
 		Class<?> superClass = aClass.getSuperclass();
