@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
@@ -59,7 +60,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@ApiStatus.Internal
-	public static BlockTypeMock from(JsonObject jsonObject)
+	public static @NotNull BlockTypeMock<?> from(@NotNull JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		NamespacedKey itemType = jsonObject.has("itemType") ? NamespacedKey.fromString(jsonObject.get("itemType").getAsString()) : null;
@@ -76,7 +77,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		boolean collision = jsonObject.get("collision").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
 
-		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, collision, translationKey);
+		return new BlockTypeMock<>(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, collision, translationKey);
 	}
 
 	@NotNull
@@ -88,6 +89,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 
 	@NotNull
 	@Override
+	@SuppressWarnings("unchecked")
 	public <O extends BlockData> Typed<O> typed(@NotNull Class<O> blockDataType)
 	{
 		return (Typed<O>) this;
@@ -113,6 +115,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @NotNull Class<B> getBlockDataClass()
 	{
 		return (Class<B>) createBlockData().getClass();
@@ -130,9 +133,10 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @NotNull B createBlockData()
 	{
-		return (B) BlockDataMock.mock(Registry.MATERIAL.get(this.key));
+		return (B) BlockDataMockFactory.mock(Registry.MATERIAL.get(this.key));
 	}
 
 	@Override
@@ -144,6 +148,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @NotNull B createBlockData(@Nullable String data)
 	{
 		return (B) BlockDataMock.newData(this, data);
