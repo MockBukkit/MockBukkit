@@ -7,7 +7,6 @@ import net.kyori.adventure.text.TranslationArgument;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
-import net.kyori.adventure.translation.Translator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -45,13 +44,10 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 			// Taken directly from io.papermc.paper.adventure.PaperAdventure
 
 			Language language = Languages.getInstance();
-			if (!language.has(translatable.key()))
+			if (!language.has(translatable.key()) && GlobalTranslator.translator().translate(translatable.key(), Locale.US) != null)
 			{
-				if (GlobalTranslator.translator().translate(translatable.key(), Locale.US) != null)
-				{
-					consumer.accept(GlobalTranslator.render(translatable, Locale.US));
-					return;
-				}
+				consumer.accept(GlobalTranslator.render(translatable, Locale.US));
+				return;
 			}
 			String fallback = translatable.fallback();
 			String translated = Languages.getInstance().getOrDefault(translatable.key(), fallback);
