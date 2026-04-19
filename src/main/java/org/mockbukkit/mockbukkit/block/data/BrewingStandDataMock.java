@@ -47,7 +47,7 @@ public class BrewingStandDataMock extends BlockDataMock implements BrewingStand
 		ImmutableSet.Builder<Integer> bottles = ImmutableSet.builder();
 		for (int index = 0, len = bottleSlots.length; index < len; index++)
 		{
-			if (this.get(bottleSlots[index]))
+			if (hasBottle(index))
 			{
 				bottles.add(index);
 			}

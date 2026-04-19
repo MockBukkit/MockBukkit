@@ -10,7 +10,6 @@ import org.bukkit.Registry;
 import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.keyed.KeyedClassTracker;
 import org.mockbukkit.metaminer.util.JsonUtil;
-import org.mockbukkit.mockbukkit.util.RegistryUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,9 +31,9 @@ public class TagDataGenerator implements DataGenerator
 	{
 		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.entrySet())
 		{
-			RegistryKey<? extends Keyed> registryKey = entry.getKey();
-			Registry<? extends Keyed> registry = RegistryAccess.registryAccess().getRegistry((RegistryKey) registryKey);
-			String tagType = RegistryUtils.getPlural(registryKey);
+			RegistryKey<Keyed> registryKey = (RegistryKey<Keyed>) entry.getKey();
+			Registry<Keyed> registry = RegistryAccess.registryAccess().getRegistry(registryKey);
+			String tagType = getPlural(registryKey);
 
 			try
 			{
@@ -53,7 +52,8 @@ public class TagDataGenerator implements DataGenerator
 	private void writeTag(io.papermc.paper.registry.tag.Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
-		Set<? extends Keyed> values = ((org.bukkit.Tag<? extends Keyed>) tag).getValues();
+		org.bukkit.Tag<Keyed> bukkitTag = (org.bukkit.Tag<Keyed>) tag;
+		Set<Keyed> values = bukkitTag.getValues();
 		values.forEach(tagValue -> jsonArray.add(tagValue.getKey().toString()));
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("replace", new JsonPrimitive(false));
@@ -63,5 +63,22 @@ public class TagDataGenerator implements DataGenerator
 		JsonUtil.dump(rootObject, destinationFile);
 	}
 
+	private String getPlural(RegistryKey<?> key)
+	{
+		String value = key.key().value();
+		if (value.equals("entity_type"))
+		{
+			return "entity_types";
+		}
+		if (value.equals("damage_type"))
+		{
+			return "damage_types";
+		}
+		if (value.endsWith("y"))
+		{
+			return value.substring(0, value.length() - 1) + "ies";
+		}
+		return value + "s";
+	}
 
 }
