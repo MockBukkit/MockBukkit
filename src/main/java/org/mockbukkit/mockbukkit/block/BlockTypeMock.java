@@ -60,7 +60,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@ApiStatus.Internal
-	public static @NotNull BlockTypeMock<?> from(@NotNull JsonObject jsonObject)
+	public static @NotNull BlockTypeMock<BlockData> from(@NotNull JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		NamespacedKey itemType = jsonObject.has("itemType") ? NamespacedKey.fromString(jsonObject.get("itemType").getAsString()) : null;

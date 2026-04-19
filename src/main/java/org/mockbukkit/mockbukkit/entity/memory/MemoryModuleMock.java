@@ -8,11 +8,12 @@ import org.bukkit.entity.memory.MemoryKey;
 public class MemoryModuleMock
 {
 
-	public static MemoryKey<?> from(JsonObject jsonObject)
+	@SuppressWarnings("unchecked")
+	public static MemoryKey<Object> from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		Preconditions.checkNotNull(key, "Key cannot be null");
-		return MemoryKey.getByKey(key);
+		return (MemoryKey<Object>) MemoryKey.getByKey(key);
 	}
 
 	private MemoryModuleMock()
