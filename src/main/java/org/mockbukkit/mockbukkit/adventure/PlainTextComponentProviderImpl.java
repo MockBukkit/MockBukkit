@@ -7,7 +7,6 @@ import net.kyori.adventure.text.TranslationArgument;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
-import net.kyori.adventure.translation.TranslationRegistry;
 import net.kyori.adventure.translation.Translator;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,13 +47,10 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 			Language language = Languages.getInstance();
 			if (!language.has(translatable.key()))
 			{
-				for (Translator source : GlobalTranslator.translator().sources())
+				if (GlobalTranslator.translator().translate(translatable.key(), Locale.US) != null)
 				{
-					if (source instanceof TranslationRegistry registry && registry.contains(translatable.key()))
-					{
-						consumer.accept(GlobalTranslator.render(translatable, Locale.US));
-						return;
-					}
+					consumer.accept(GlobalTranslator.render(translatable, Locale.US));
+					return;
 				}
 			}
 			String fallback = translatable.fallback();
