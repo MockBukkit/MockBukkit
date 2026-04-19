@@ -238,7 +238,7 @@ CRACKED_DEEPSLATE_TILES, org.bukkit.block.BlockState
 CRACKED_NETHER_BRICKS, org.bukkit.block.BlockState
 CRACKED_POLISHED_BLACKSTONE_BRICKS, org.bukkit.block.BlockState
 CRACKED_STONE_BRICKS, org.bukkit.block.BlockState
-CRAFTER, org.bukkit.block.BlockState
+CRAFTER, org.bukkit.block.Crafter
 CRAFTING_TABLE, org.bukkit.block.BlockState
 CREAKING_HEART, org.bukkit.block.CreakingHeart
 CREEPER_HEAD, org.bukkit.block.Skull
@@ -604,7 +604,7 @@ MOSSY_STONE_BRICK_SLAB, org.bukkit.block.BlockState
 MOSSY_STONE_BRICK_STAIRS, org.bukkit.block.BlockState
 MOSSY_STONE_BRICK_WALL, org.bukkit.block.BlockState
 MOSSY_STONE_BRICKS, org.bukkit.block.BlockState
-MOVING_PISTON, org.bukkit.block.BlockState
+MOVING_PISTON, io.papermc.paper.block.MovingPiston
 MUD, org.bukkit.block.BlockState
 MUD_BRICK_SLAB, org.bukkit.block.BlockState
 MUD_BRICK_STAIRS, org.bukkit.block.BlockState
@@ -1005,7 +1005,7 @@ TORCH, org.bukkit.block.BlockState
 TORCHFLOWER, org.bukkit.block.BlockState
 TORCHFLOWER_CROP, org.bukkit.block.BlockState
 TRAPPED_CHEST, org.bukkit.block.Chest
-TRIAL_SPAWNER, org.bukkit.block.BlockState
+TRIAL_SPAWNER, org.bukkit.block.TrialSpawner
 TRIPWIRE, org.bukkit.block.BlockState
 TRIPWIRE_HOOK, org.bukkit.block.BlockState
 TUBE_CORAL, org.bukkit.block.BlockState
@@ -1023,7 +1023,7 @@ TUFF_WALL, org.bukkit.block.BlockState
 TURTLE_EGG, org.bukkit.block.BlockState
 TWISTING_VINES, org.bukkit.block.BlockState
 TWISTING_VINES_PLANT, org.bukkit.block.BlockState
-VAULT, org.bukkit.block.BlockState
+VAULT, org.bukkit.block.Vault
 VERDANT_FROGLIGHT, org.bukkit.block.BlockState
 VINE, org.bukkit.block.BlockState
 VOID_AIR, org.bukkit.block.BlockState

@@ -100,6 +100,23 @@ public class KeyedDataGenerator implements DataGenerator
 		if (itemType != ItemType.AIR)
 		{
 			jsonObject.add("metaClass", new JsonPrimitive(itemType.getItemMetaClass().getSimpleName()));
+
+			JsonArray defaultDataTypes = new JsonArray();
+			JsonObject defaultData = new JsonObject();
+			for (DataComponentType type : itemType.getDefaultDataTypes())
+			{
+				defaultDataTypes.add(type.getKey().toString());
+				if (type instanceof DataComponentType.Valued<?> valuedType)
+				{
+					Object value = itemType.getDefaultData(valuedType);
+					if (value != null)
+					{
+						defaultData.add(type.getKey().toString(), JsonUtil.toJson(value));
+					}
+				}
+			}
+			jsonObject.add("defaultDataTypes", defaultDataTypes);
+			jsonObject.add("defaultData", defaultData);
 		}
 	}
 

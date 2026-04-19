@@ -1,0 +1,28 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:beach",
+		"minecraft:birch_forest",
+		"minecraft:dark_forest",
+		"minecraft:dripstone_caves",
+		"minecraft:flower_forest",
+		"minecraft:forest",
+		"minecraft:frozen_river",
+		"minecraft:grove",
+		"minecraft:ice_spikes",
+		"minecraft:lush_caves",
+		"minecraft:mushroom_fields",
+		"minecraft:old_growth_birch_forest",
+		"minecraft:old_growth_pine_taiga",
+		"minecraft:old_growth_spruce_taiga",
+		"minecraft:pale_garden",
+		"minecraft:plains",
+		"minecraft:river",
+		"minecraft:savanna",
+		"minecraft:snowy_beach",
+		"minecraft:snowy_plains",
+		"minecraft:snowy_taiga",
+		"minecraft:sunflower_plains",
+		"minecraft:taiga"
+	]
+}

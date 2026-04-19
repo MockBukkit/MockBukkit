@@ -112,4 +112,51 @@ public class JsonUtil
 		return Optional.empty();
 	}
 
+	public static JsonElement toJson(Object object)
+	{
+		if (object instanceof Map<?, ?> map)
+		{
+			JsonObject jsonObject = new JsonObject();
+			for (Map.Entry<?, ?> entry : map.entrySet())
+			{
+				jsonObject.add(entry.getKey().toString(), toJson(entry.getValue()));
+			}
+			return jsonObject;
+		}
+		if (object instanceof Iterable<?> iterable)
+		{
+			JsonArray jsonArray = new JsonArray();
+			for (Object item : iterable)
+			{
+				jsonArray.add(toJson(item));
+			}
+			return jsonArray;
+		}
+		if (object instanceof org.bukkit.configuration.serialization.ConfigurationSerializable serializable)
+		{
+			return toJson(serializable.serialize());
+		}
+		if (object instanceof Number number)
+		{
+			return new JsonPrimitive(number);
+		}
+		if (object instanceof Boolean bool)
+		{
+			return new JsonPrimitive(bool);
+		}
+		if (object instanceof String string)
+		{
+			return new JsonPrimitive(string);
+		}
+		if (object instanceof Enum<?> e)
+		{
+			return new JsonPrimitive(e.name());
+		}
+		if (object == null)
+		{
+			return com.google.gson.JsonNull.INSTANCE;
+		}
+		return new JsonPrimitive(object.toString());
+	}
+
 }

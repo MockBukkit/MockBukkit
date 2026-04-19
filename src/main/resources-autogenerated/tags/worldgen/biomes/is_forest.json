@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:birch_forest",
+		"minecraft:dark_forest",
+		"minecraft:flower_forest",
+		"minecraft:forest",
+		"minecraft:grove",
+		"minecraft:old_growth_birch_forest",
+		"minecraft:pale_garden"
+	]
+}

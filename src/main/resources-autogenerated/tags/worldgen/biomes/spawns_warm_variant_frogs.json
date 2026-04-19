@@ -1,0 +1,22 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:badlands",
+		"minecraft:bamboo_jungle",
+		"minecraft:basalt_deltas",
+		"minecraft:crimson_forest",
+		"minecraft:desert",
+		"minecraft:eroded_badlands",
+		"minecraft:jungle",
+		"minecraft:mangrove_swamp",
+		"minecraft:nether_wastes",
+		"minecraft:savanna",
+		"minecraft:savanna_plateau",
+		"minecraft:soul_sand_valley",
+		"minecraft:sparse_jungle",
+		"minecraft:warm_ocean",
+		"minecraft:warped_forest",
+		"minecraft:windswept_savanna",
+		"minecraft:wooded_badlands"
+	]
+}

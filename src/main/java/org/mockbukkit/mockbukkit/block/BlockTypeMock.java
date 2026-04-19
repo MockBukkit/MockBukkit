@@ -90,7 +90,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public <O extends BlockData> Typed<O> typed(@NotNull Class<O> blockDataType)
 	{
-		throw new UnimplementedOperationException();
+		return (Typed<O>) this;
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public @NotNull Class<B> getBlockDataClass()
 	{
-		throw new UnimplementedOperationException();
+		return (Class<B>) createBlockData().getClass();
 	}
 
 	@Override
@@ -138,8 +138,9 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public @Unmodifiable @NotNull Collection<B> createBlockDataStates()
 	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		// TODO: This should probably enumerate all possible states.
+		// For now, we just return a collection with the default state.
+		return java.util.Collections.singleton(createBlockData());
 	}
 
 	@Override

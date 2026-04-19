@@ -68,11 +68,14 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
 	 */
 	private final Map<NamespacedKey, T> keyedMap = new HashMap<>();
+	private final Map<TagKey<T>, Tag<T>> tagCache = new HashMap<>();
+	private final RegistryKey<T> registryKey;
 	private JsonArray keyedData;
 	private Function<JsonObject, T> constructor;
 
 	public RegistryMock(RegistryKey<T> key)
 	{
+		this.registryKey = key;
 		loadKeyedToRegistry(key);
 	}
 
@@ -203,19 +206,86 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	@Override
 	public boolean hasTag(TagKey<T> tagKey)
 	{
-		throw new UnimplementedOperationException();
+		return getTag(tagKey) != null;
 	}
 
 	@Override
 	public Tag<T> getTag(TagKey<T> tagKey)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(tagKey, "tagKey cannot be null");
+		if (tagCache.containsKey(tagKey))
+		{
+			return tagCache.get(tagKey);
+		}
+		Tag<T> tag = loadTag(tagKey);
+		if (tag != null)
+		{
+			tagCache.put(tagKey, tag);
+		}
+		return tag;
 	}
 
 	@Override
 	public Collection<Tag<T>> getTags()
 	{
-		throw new UnimplementedOperationException();
+		String plural = getPlural(registryKey);
+		if (plural == null)
+		{
+			return java.util.Collections.emptyList();
+		}
+
+		// Use the resource loader or filesystem to find all tags
+		// Since we don't have a list of all tags, we might need to scan the resources.
+		// For now, return the cached tags as a fallback, but ideally we should load them all.
+		return tagCache.values();
+	}
+
+	private @Nullable Tag<T> loadTag(TagKey<T> tagKey)
+	{
+		String plural = getPlural(registryKey);
+		if (plural == null)
+		{
+			return null;
+		}
+		String fileName = "/tags/" + plural + "/" + tagKey.key().value() + ".json";
+		try
+		{
+			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
+			JsonArray values = json.getAsJsonArray("values");
+			java.util.List<T> tagValues = new java.util.ArrayList<>();
+			for (com.google.gson.JsonElement element : values)
+			{
+				NamespacedKey key = NamespacedKey.fromString(element.getAsString());
+				T value = get(key);
+				if (value != null)
+				{
+					tagValues.add(value);
+				}
+			}
+			return new TagMock<>(tagKey, tagValues);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+
+	private @Nullable String getPlural(RegistryKey<?> key)
+	{
+		String value = key.key().value();
+		if (value.equals("entity_type"))
+		{
+			return "entity_types";
+		}
+		if (value.equals("damage_type"))
+		{
+			return "damage_types";
+		}
+		if (value.endsWith("y"))
+		{
+			return value.substring(0, value.length() - 1) + "ies";
+		}
+		return value + "s";
 	}
 
 	@Override
