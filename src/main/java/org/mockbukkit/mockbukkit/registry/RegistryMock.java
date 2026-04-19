@@ -52,11 +52,14 @@ import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
+import org.mockbukkit.mockbukkit.util.RegistryUtils;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -228,7 +231,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	@Override
 	public Collection<Tag<T>> getTags()
 	{
-		String plural = getPlural(registryKey);
+		String plural = RegistryUtils.getPlural(registryKey);
 		if (plural == null)
 		{
 			return java.util.Collections.emptyList();
@@ -242,7 +245,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	private @Nullable Tag<T> loadTag(TagKey<T> tagKey)
 	{
-		String plural = getPlural(registryKey);
+		String plural = RegistryUtils.getPlural(registryKey);
 		if (plural == null)
 		{
 			return null;
@@ -252,8 +255,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
 			JsonArray values = json.getAsJsonArray("values");
-			java.util.List<T> tagValues = new java.util.ArrayList<>();
-			for (com.google.gson.JsonElement element : values)
+			List<T> tagValues = new ArrayList<>();
+			for (JsonElement element : values)
 			{
 				NamespacedKey key = NamespacedKey.fromString(element.getAsString());
 				T value = get(key);
@@ -270,23 +273,6 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 	}
 
-	private @Nullable String getPlural(RegistryKey<?> key)
-	{
-		String value = key.key().value();
-		if (value.equals("entity_type"))
-		{
-			return "entity_types";
-		}
-		if (value.equals("damage_type"))
-		{
-			return "damage_types";
-		}
-		if (value.endsWith("y"))
-		{
-			return value.substring(0, value.length() - 1) + "ies";
-		}
-		return value + "s";
-	}
 
 	@Override
 	public @NotNull T getOrThrow(@NotNull NamespacedKey namespacedKey)

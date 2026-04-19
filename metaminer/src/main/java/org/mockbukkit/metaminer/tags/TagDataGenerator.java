@@ -10,6 +10,7 @@ import org.bukkit.Registry;
 import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.keyed.KeyedClassTracker;
 import org.mockbukkit.metaminer.util.JsonUtil;
+import org.mockbukkit.mockbukkit.util.RegistryUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class TagDataGenerator implements DataGenerator
 		{
 			RegistryKey<? extends Keyed> registryKey = entry.getKey();
 			Registry<? extends Keyed> registry = RegistryAccess.registryAccess().getRegistry((RegistryKey) registryKey);
-			String tagType = getPlural(registryKey);
+			String tagType = RegistryUtils.getPlural(registryKey);
 
 			try
 			{
@@ -62,22 +63,5 @@ public class TagDataGenerator implements DataGenerator
 		JsonUtil.dump(rootObject, destinationFile);
 	}
 
-	private String getPlural(RegistryKey<?> key)
-	{
-		String value = key.key().value();
-		if (value.equals("entity_type"))
-		{
-			return "entity_types";
-		}
-		if (value.equals("damage_type"))
-		{
-			return "damage_types";
-		}
-		if (value.endsWith("y"))
-		{
-			return value.substring(0, value.length() - 1) + "ies";
-		}
-		return value + "s";
-	}
 
 }

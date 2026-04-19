@@ -2,6 +2,8 @@ package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.Material;
@@ -125,11 +127,11 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 			}
 		}
 
-		Set<DataComponentType> defaultDataTypes = new java.util.HashSet<>();
+		Set<DataComponentType> defaultDataTypes = new HashSet<>();
 		if (jsonObject.has("defaultDataTypes"))
 		{
-			com.google.gson.JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
-			for (com.google.gson.JsonElement element : typesArray)
+			JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
+			for (JsonElement element : typesArray)
 			{
 				NamespacedKey typeKey = NamespacedKey.fromString(element.getAsString());
 				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
@@ -140,11 +142,11 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 			}
 		}
 
-		Map<DataComponentType, Object> defaultData = new java.util.HashMap<>();
+		Map<DataComponentType, Object> defaultData = new HashMap<>();
 		if (jsonObject.has("defaultData"))
 		{
-			com.google.gson.JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
-			for (Map.Entry<String, com.google.gson.JsonElement> entry : dataObject.entrySet())
+			JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
+			for (Map.Entry<String, JsonElement> entry : dataObject.entrySet())
 			{
 				NamespacedKey typeKey = NamespacedKey.fromString(entry.getKey());
 				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
@@ -179,14 +181,23 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		);
 	}
 
-	private static @Nullable Object deserializeComponent(DataComponentType type, com.google.gson.JsonElement json)
+	private static @Nullable Object deserializeComponent(DataComponentType type, JsonElement json)
 	{
 		if (json.isJsonPrimitive())
 		{
 			com.google.gson.JsonPrimitive primitive = json.getAsJsonPrimitive();
-			if (primitive.isNumber()) return primitive.getAsNumber();
-			if (primitive.isBoolean()) return primitive.getAsBoolean();
-			if (primitive.isString()) return primitive.getAsString();
+			if (primitive.isNumber())
+			{
+				return primitive.getAsNumber();
+			}
+			if (primitive.isBoolean())
+			{
+				return primitive.getAsBoolean();
+			}
+			if (primitive.isString())
+			{
+				return primitive.getAsString();
+			}
 		}
 		// Complex components should use their respective Mock deserialize method if available
 		// For now, we return the raw map if it's an object
@@ -311,9 +322,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public float getCompostChance()
 	{
-		Preconditions.checkArgument(
-				this.isCompostable(), "The item type " + this.getKey() + " is not compostable"
-		);
+		Preconditions.checkArgument(this.isCompostable(), "The item type %s is not compostable", this.getKey());
 		return this.compostChance.floatValue();
 	}
 
