@@ -2261,7 +2261,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull BlockData createBlockData(Material material, String data)
 	{
 		Preconditions.checkArgument(material != null || data != null, "Must provide one of material or data");
-		return BlockDataMock.newData((material != null) ? material.asBlockType() : null, data);
+		return BlockDataMock.newData((material != null) ? Registry.BLOCK.get(material.getKey()) : null, data);
 	}
 
 	/**

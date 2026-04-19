@@ -232,7 +232,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public @NotNull ItemStack createItemStack(int amount)
 	{
-		return new ItemStackMock(this.asMaterial(), amount);
+		return new ItemStackMock(Registry.MATERIAL.get(this.getKey()), amount);
 	}
 
 	@Override

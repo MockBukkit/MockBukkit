@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -113,7 +114,7 @@ public class ItemStackMock extends ItemStack
 	{
 		this.type = type;
 		this.durability = initDurability(type);
-		this.itemMeta = findItemMeta(type.asMaterial());
+		this.itemMeta = findItemMeta(Registry.MATERIAL.get(type.getKey()));
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class ItemStackMock extends ItemStack
 			this.durability = initDurability(this.type);
 			return;
 		}
-		if (type != this.type.asMaterial())
+		if (type != Registry.MATERIAL.get(this.type.getKey()))
 		{
 			this.type = type.asItemType();
 			if (this.itemMeta == null)
@@ -164,7 +165,7 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public Material getType()
 	{
-		return this.type.asMaterial();
+		return Registry.MATERIAL.get(this.type.getKey());
 	}
 
 	@Override
@@ -576,7 +577,7 @@ public class ItemStackMock extends ItemStack
 		{
 			return null;
 		}
-		final Class<? extends ItemMeta> itemMetaClass = material.asItemType().getItemMetaClass();
+		final Class<? extends ItemMeta> itemMetaClass = Registry.ITEM.get(material.getKey()).getItemMetaClass();
 		if (ItemMetaMock.class.isAssignableFrom(itemMetaClass))
 		{
 			try

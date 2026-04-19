@@ -132,7 +132,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public @NotNull B createBlockData()
 	{
-		return (B) BlockDataMock.mock(this.asMaterial());
+		return (B) BlockDataMock.mock(Registry.MATERIAL.get(this.key));
 	}
 
 	@Override
