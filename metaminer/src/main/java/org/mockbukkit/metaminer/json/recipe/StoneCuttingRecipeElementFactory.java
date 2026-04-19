@@ -28,7 +28,6 @@ public class StoneCuttingRecipeElementFactory
 		json.add("key", KeyedElementFactory.toJson(stonecuttingRecipe.getKey()));
 		json.add("input", RecipeChoiceElementFactory.toJson(stonecuttingRecipe.getInputChoice()));
 		json.add("result", ItemStackElementFactory.toJson(stonecuttingRecipe.getResult()));
-		json.addProperty("group", stonecuttingRecipe.getGroup());
 
 		return json;
 	}
