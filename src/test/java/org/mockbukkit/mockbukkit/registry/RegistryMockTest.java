@@ -26,6 +26,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -146,6 +147,23 @@ class RegistryMockTest
 				.filter(entityType -> entityType != org.bukkit.entity.EntityType.UNKNOWN)
 				.count();
 		assertEquals(enumCount, registryCount);
+	}
+
+	@Test
+	void getTag()
+	{
+		Registry<ItemType> registry = Registry.ITEM;
+		io.papermc.paper.registry.tag.Tag<ItemType> tag = registry.getTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes")));
+		assertNotNull(tag);
+		assertTrue(registry.hasTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes"))));
+	}
+
+	@Test
+	void getTag_Invalid()
+	{
+		Registry<ItemType> registry = Registry.ITEM;
+		assertNull(registry.getTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
+		assertFalse(registry.hasTag(io.papermc.paper.registry.tag.TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
 	}
 
 	@Test
