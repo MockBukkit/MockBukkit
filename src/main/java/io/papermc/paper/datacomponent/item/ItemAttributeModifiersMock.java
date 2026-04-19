@@ -3,6 +3,7 @@ package io.papermc.paper.datacomponent.item;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datacomponent.item.attribute.AttributeModifierDisplay;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -29,10 +30,10 @@ public record ItemAttributeModifiersMock(List<Entry> modifiers) implements ItemA
 		{
 			Preconditions.checkArgument(
 					this.entries.stream().noneMatch(e ->
-							e.modifier().getKey().equals(modifier.getKey()) && e.attribute().getKeyOrThrow().equals(attribute.getKeyOrThrow())
+							e.modifier().getKey().equals(modifier.getKey()) && Registry.ATTRIBUTE.getKey(e.attribute()).equals(Registry.ATTRIBUTE.getKey(attribute))
 					),
 					"Cannot add 2 modifiers with identical keys on the same attribute (modifier %s for attribute %s)",
-					modifier.getKey(), attribute.getKeyOrThrow()
+					modifier.getKey(), Registry.ATTRIBUTE.getKey(attribute)
 			);
 			AttributeModifier newModifier = new AttributeModifier(modifier.getKey(), modifier.getAmount(), modifier.getOperation(), equipmentSlotGroup);
 			entries.add(new EntryMock(attribute, newModifier, display));
