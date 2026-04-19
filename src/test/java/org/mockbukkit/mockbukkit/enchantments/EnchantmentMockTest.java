@@ -192,9 +192,10 @@ class EnchantmentMockTest
 	}
 
 	@Test
+	@SuppressWarnings({"removal", "deprecation"})
 	void testGetTranslationKey()
 	{
-		assertEquals(translationKey, enchantment.getTranslationKey());
+		assertEquals(translationKey, enchantment.translationKey());
 	}
 
 	@Test

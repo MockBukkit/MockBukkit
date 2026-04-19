@@ -17,36 +17,31 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
-class AttributeInstanceMockTest
-{
+class AttributeInstanceMockTest {
 
 	private AttributeInstanceMock attributeInstance;
 	private static final double BASE_VALUE = 5.0;
 	private static final double DELTA = 0.001;
 
 	@BeforeEach
-	void setUp()
-	{
+	void setUp() {
 		attributeInstance = new AttributeInstanceMock(Attribute.FLYING_SPEED, BASE_VALUE);
 	}
 
 	@Test
-	void getAttribute_Constructor_CorrectAttribute()
-	{
+	void getAttribute_Constructor_CorrectAttribute() {
 		assertEquals(Attribute.FLYING_SPEED, attributeInstance.getAttribute());
 	}
 
 	@Test
-	void getValues_Constructor_ExactValue()
-	{
+	void getValues_Constructor_ExactValue() {
 		assertEquals(BASE_VALUE, attributeInstance.getBaseValue(), DELTA);
 		assertEquals(BASE_VALUE, attributeInstance.getValue(), DELTA);
 		assertEquals(BASE_VALUE, attributeInstance.getDefaultValue(), DELTA);
 	}
 
 	@Test
-	void setValue_Constructor_ValueSetExactly()
-	{
+	void setValue_Constructor_ValueSetExactly() {
 		attributeInstance.setBaseValue(8.0);
 
 		assertEquals(8.0, attributeInstance.getBaseValue(), DELTA);
@@ -55,16 +50,15 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getModifiers_Constructor_EmptyList()
-	{
+	void getModifiers_Constructor_EmptyList() {
 		assertEquals(0, attributeInstance.getModifiers().size());
 	}
 
 	@Test
-	void addModifier_ModifierAdded()
-	{
+	void addModifier_ModifierAdded() {
 		NamespacedKey key = NamespacedKey.minecraft("test_attribute");
-		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier);
 
@@ -73,10 +67,10 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_ModifierRemoved()
-	{
+	void removeModifier_ModifierRemoved() {
 		NamespacedKey key = NamespacedKey.minecraft("test_attribute");
-		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 		attributeInstance.addModifier(modifier);
 
 		attributeInstance.removeModifier(modifier);
@@ -85,12 +79,13 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_CorrectModifierRemoved()
-	{
+	void removeModifier_CorrectModifierRemoved() {
 		NamespacedKey key1 = NamespacedKey.minecraft("test_attribute");
 		NamespacedKey key2 = NamespacedKey.minecraft("test_attribute_2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 1.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
 
@@ -103,10 +98,10 @@ class AttributeInstanceMockTest
 	// === Key-based Modifier Tests ===
 
 	@Test
-	void getModifier_ByKey_ReturnsCorrectModifier()
-	{
+	void getModifier_ByKey_ReturnsCorrectModifier() {
 		NamespacedKey key = NamespacedKey.minecraft("test_modifier");
-		AttributeModifier modifier = new AttributeModifier(key, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 		attributeInstance.addModifier(modifier);
 
 		AttributeModifier retrieved = attributeInstance.getModifier(key);
@@ -115,8 +110,7 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getModifier_ByKey_NonExistent_ReturnsNull()
-	{
+	void getModifier_ByKey_NonExistent_ReturnsNull() {
 		NamespacedKey key = NamespacedKey.minecraft("nonexistent");
 
 		AttributeModifier retrieved = attributeInstance.getModifier(key);
@@ -125,12 +119,13 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_ByKey_RemovesCorrectModifier()
-	{
+	void removeModifier_ByKey_RemovesCorrectModifier() {
 		NamespacedKey key1 = NamespacedKey.minecraft("modifier1");
 		NamespacedKey key2 = NamespacedKey.minecraft("modifier2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 3.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -143,8 +138,7 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_ByKey_NonExistent_NoError()
-	{
+	void removeModifier_ByKey_NonExistent_NoError() {
 		NamespacedKey key = NamespacedKey.minecraft("nonexistent");
 
 		assertDoesNotThrow(() -> attributeInstance.removeModifier(key));
@@ -152,8 +146,7 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_ByKey_ThrowsOnNullKey()
-	{
+	void removeModifier_ByKey_ThrowsOnNullKey() {
 		NamespacedKey nullKey = null;
 
 		assertThrows(NullPointerException.class, () -> attributeInstance.removeModifier(nullKey));
@@ -162,10 +155,11 @@ class AttributeInstanceMockTest
 	// === UUID-based Modifier Tests (Deprecated) ===
 
 	@Test
-	void getModifier_ByUuid_ReturnsCorrectModifier()
-	{
+	@SuppressWarnings({ "removal" })
+	void getModifier_ByUuid_ReturnsCorrectModifier() {
 		NamespacedKey key = NamespacedKey.minecraft("test_modifier");
-		AttributeModifier modifier = new AttributeModifier(key, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 		attributeInstance.addModifier(modifier);
 
 		AttributeModifier retrieved = attributeInstance.getModifier(modifier.getUniqueId());
@@ -174,8 +168,8 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getModifier_ByUuid_NonExistent_ReturnsNull()
-	{
+	@SuppressWarnings("removal")
+	void getModifier_ByUuid_NonExistent_ReturnsNull() {
 		UUID uuid = UUID.randomUUID();
 
 		AttributeModifier retrieved = attributeInstance.getModifier(uuid);
@@ -184,12 +178,14 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_ByUuid_RemovesCorrectModifier()
-	{
+	@SuppressWarnings({ "removal" })
+	void removeModifier_ByUuid_RemovesCorrectModifier() {
 		NamespacedKey key1 = NamespacedKey.minecraft("modifier1");
 		NamespacedKey key2 = NamespacedKey.minecraft("modifier2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 3.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -202,8 +198,8 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_ByUuid_ThrowsOnNullUuid()
-	{
+	@SuppressWarnings("removal")
+	void removeModifier_ByUuid_ThrowsOnNullUuid() {
 		UUID nullUuid = null;
 
 		assertThrows(NullPointerException.class, () -> attributeInstance.removeModifier(nullUuid));
@@ -212,10 +208,10 @@ class AttributeInstanceMockTest
 	// === Transient Modifier Tests ===
 
 	@Test
-	void addTransientModifier_AddsModifier()
-	{
+	void addTransientModifier_AddsModifier() {
 		NamespacedKey key = NamespacedKey.minecraft("temp_modifier");
-		AttributeModifier modifier = new AttributeModifier(key, 1.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 1.5, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addTransientModifier(modifier);
 
@@ -226,11 +222,12 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void addTransientModifier_ReplacesSameKey()
-	{
+	void addTransientModifier_ReplacesSameKey() {
 		NamespacedKey key = NamespacedKey.minecraft("temp_modifier");
-		AttributeModifier modifier1 = new AttributeModifier(key, 1.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key, 2.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key, 1.5, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key, 2.5, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addTransientModifier(modifier1);
 		// Value should be base + modifier1: 5.0 + 1.5 = 6.5
@@ -242,13 +239,14 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	@SuppressWarnings("deprecation")
-	void addTransientModifier_ReplacesSameUuid()
-	{
+	@SuppressWarnings("removal")
+	void addTransientModifier_ReplacesSameUuid() {
 		UUID uuid = UUID.randomUUID();
 		// Using deprecated constructor to test UUID replacement functionality
-		AttributeModifier modifier1 = new AttributeModifier(uuid, "temp_modifier1", 1.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(uuid, "temp_modifier2", 2.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(uuid, "temp_modifier1", 1.5,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(uuid, "temp_modifier2", 2.5,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
 
 		attributeInstance.addTransientModifier(modifier1);
 		// Value should be base + modifier1: 5.0 + 1.5 = 6.5
@@ -260,10 +258,10 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void removeModifier_RemovesFromTransient()
-	{
+	void removeModifier_RemovesFromTransient() {
 		NamespacedKey key = NamespacedKey.minecraft("temp_modifier");
-		AttributeModifier modifier = new AttributeModifier(key, 1.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 1.5, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addTransientModifier(modifier);
 		// Value should be base + transient: 5.0 + 1.5 = 6.5
@@ -275,12 +273,13 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void clearTransientModifiers_RemovesAllTransient()
-	{
+	void clearTransientModifiers_RemovesAllTransient() {
 		NamespacedKey key1 = NamespacedKey.minecraft("temp_modifier1");
 		NamespacedKey key2 = NamespacedKey.minecraft("temp_modifier2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 1.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 2.5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 1.5, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 2.5, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addTransientModifier(modifier1);
 		attributeInstance.addTransientModifier(modifier2);
@@ -297,12 +296,13 @@ class AttributeInstanceMockTest
 	// === Value Calculation Tests ===
 
 	@Test
-	void getValue_WithAddNumberModifiers_CalculatesCorrectly()
-	{
+	void getValue_WithAddNumberModifiers_CalculatesCorrectly() {
 		NamespacedKey key1 = NamespacedKey.minecraft("add1");
 		NamespacedKey key2 = NamespacedKey.minecraft("add2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 3.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -312,12 +312,13 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getValue_WithAddScalarModifiers_CalculatesCorrectly()
-	{
+	void getValue_WithAddScalarModifiers_CalculatesCorrectly() {
 		NamespacedKey key1 = NamespacedKey.minecraft("scalar1");
 		NamespacedKey key2 = NamespacedKey.minecraft("scalar2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 0.5, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 0.5, AttributeModifier.Operation.ADD_SCALAR,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 0.3, AttributeModifier.Operation.ADD_SCALAR,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -329,12 +330,13 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getValue_WithMultiplyScalarModifiers_CalculatesCorrectly()
-	{
+	void getValue_WithMultiplyScalarModifiers_CalculatesCorrectly() {
 		NamespacedKey key1 = NamespacedKey.minecraft("multiply1");
 		NamespacedKey key2 = NamespacedKey.minecraft("multiply2");
-		AttributeModifier modifier1 = new AttributeModifier(key1, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key2, 0.2, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key1, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key2, 0.2, AttributeModifier.Operation.MULTIPLY_SCALAR_1,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -345,14 +347,16 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getValue_WithMixedModifiers_CalculatesInCorrectOrder()
-	{
+	void getValue_WithMixedModifiers_CalculatesInCorrectOrder() {
 		NamespacedKey addKey = NamespacedKey.minecraft("add");
 		NamespacedKey scalarKey = NamespacedKey.minecraft("scalar");
 		NamespacedKey multiplyKey = NamespacedKey.minecraft("multiply");
-		AttributeModifier addNumber = new AttributeModifier(addKey, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier addScalar = new AttributeModifier(scalarKey, 0.4, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.ANY);
-		AttributeModifier multiply = new AttributeModifier(multiplyKey, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
+		AttributeModifier addNumber = new AttributeModifier(addKey, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier addScalar = new AttributeModifier(scalarKey, 0.4, AttributeModifier.Operation.ADD_SCALAR,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier multiply = new AttributeModifier(multiplyKey, 0.5,
+				AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
 
 		// Add in reverse order to test proper sorting
 		attributeInstance.addModifier(multiply);
@@ -363,12 +367,13 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getValue_WithTransientModifiers_IncludedInCalculation()
-	{
+	void getValue_WithTransientModifiers_IncludedInCalculation() {
 		NamespacedKey permKey = NamespacedKey.minecraft("permanent");
 		NamespacedKey tempKey = NamespacedKey.minecraft("temp_modifier");
-		AttributeModifier permanent = new AttributeModifier(permKey, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier tempModifier = new AttributeModifier(tempKey, 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier permanent = new AttributeModifier(permKey, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier tempModifier = new AttributeModifier(tempKey, 3.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(permanent);
 		attributeInstance.addTransientModifier(tempModifier);
@@ -378,10 +383,10 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void getValue_AfterBaseValueChange_CalculatesCorrectly()
-	{
+	void getValue_AfterBaseValueChange_CalculatesCorrectly() {
 		NamespacedKey key = NamespacedKey.minecraft("scalar");
-		AttributeModifier addScalar = new AttributeModifier(key, 0.5, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.ANY);
+		AttributeModifier addScalar = new AttributeModifier(key, 0.5, AttributeModifier.Operation.ADD_SCALAR,
+				EquipmentSlotGroup.ANY);
 		attributeInstance.addModifier(addScalar);
 
 		attributeInstance.setBaseValue(10.0);
@@ -393,41 +398,37 @@ class AttributeInstanceMockTest
 	// === Edge Cases and Error Handling ===
 
 	@Test
-	void addModifier_NullModifier_ThrowsException()
-	{
+	void addModifier_NullModifier_ThrowsException() {
 		assertThrows(NullPointerException.class, () -> attributeInstance.addModifier(null));
 	}
 
 	@Test
-	void addTransientModifier_NullModifier_ThrowsException()
-	{
+	void addTransientModifier_NullModifier_ThrowsException() {
 		assertThrows(NullPointerException.class, () -> attributeInstance.addTransientModifier(null));
 	}
 
 	@Test
-	void removeModifier_NullModifier_ThrowsException()
-	{
+	void removeModifier_NullModifier_ThrowsException() {
 		assertThrows(NullPointerException.class, () -> attributeInstance.removeModifier((AttributeModifier) null));
 	}
 
 	@Test
-	void getModifier_NullKey_ThrowsException()
-	{
+	void getModifier_NullKey_ThrowsException() {
 		assertThrows(IllegalArgumentException.class, () -> attributeInstance.getModifier((NamespacedKey) null));
 	}
 
 	@Test
-	void getModifier_NullUuid_ThrowsException()
-	{
+	@SuppressWarnings("removal")
+	void getModifier_NullUuid_ThrowsException() {
 		assertThrows(NullPointerException.class, () -> attributeInstance.getModifier((UUID) null));
 	}
 
 	@Test
-	void getTransientModifiers_ChangesValue()
-	{
+	void getTransientModifiers_ChangesValue() {
 		// We can verify transient behavior through getValue() instead
 		NamespacedKey key = NamespacedKey.minecraft("test");
-		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 		attributeInstance.addTransientModifier(modifier);
 
 		// Verify transient modifier affects value calculation
@@ -435,11 +436,12 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	void addModifier_SameKey_ReplacesExisting()
-	{
+	void addModifier_SameKey_ReplacesExisting() {
 		NamespacedKey key = NamespacedKey.minecraft("test_modifier");
-		AttributeModifier modifier1 = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(key, 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(key, 2.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -450,13 +452,14 @@ class AttributeInstanceMockTest
 	}
 
 	@Test
-	@SuppressWarnings("deprecation")
-	void addModifier_SameUuid_ReplacesExisting()
-	{
+	@SuppressWarnings("removal")
+	void addModifier_SameUuid_ReplacesExisting() {
 		UUID uuid = UUID.randomUUID();
 		// Using deprecated constructor to test UUID replacement functionality
-		AttributeModifier modifier1 = new AttributeModifier(uuid, "modifier1", 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier modifier2 = new AttributeModifier(uuid, "modifier2", 2.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier1 = new AttributeModifier(uuid, "modifier1", 1.0,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
+		AttributeModifier modifier2 = new AttributeModifier(uuid, "modifier2", 2.0,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(modifier1);
 		attributeInstance.addModifier(modifier2);
@@ -469,21 +472,25 @@ class AttributeInstanceMockTest
 	// === Complex Scenario Tests ===
 
 	@Test
-	void complexScenario_MultipleOperationsAndTransientModifiers()
-	{
+	void complexScenario_MultipleOperationsAndTransientModifiers() {
 		// Permanent modifiers
 		NamespacedKey addKey = NamespacedKey.minecraft("add1");
 		NamespacedKey scalarKey = NamespacedKey.minecraft("scalar1");
 		NamespacedKey multKey = NamespacedKey.minecraft("mult1");
-		AttributeModifier addNumber1 = new AttributeModifier(addKey, 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier addScalar1 = new AttributeModifier(scalarKey, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.ANY);
-		AttributeModifier multiply1 = new AttributeModifier(multKey, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
+		AttributeModifier addNumber1 = new AttributeModifier(addKey, 3.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier addScalar1 = new AttributeModifier(scalarKey, 0.2, AttributeModifier.Operation.ADD_SCALAR,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier multiply1 = new AttributeModifier(multKey, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1,
+				EquipmentSlotGroup.ANY);
 
 		// Transient modifiers
 		NamespacedKey tempAddKey = NamespacedKey.minecraft("t_add");
 		NamespacedKey tempMultKey = NamespacedKey.minecraft("t_mult");
-		AttributeModifier tempAdd = new AttributeModifier(tempAddKey, 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY);
-		AttributeModifier tempMult = new AttributeModifier(tempMultKey, 0.1, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
+		AttributeModifier tempAdd = new AttributeModifier(tempAddKey, 1.0, AttributeModifier.Operation.ADD_NUMBER,
+				EquipmentSlotGroup.ANY);
+		AttributeModifier tempMult = new AttributeModifier(tempMultKey, 0.1,
+				AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
 
 		attributeInstance.addModifier(addNumber1);
 		attributeInstance.addModifier(addScalar1);
