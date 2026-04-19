@@ -14,7 +14,6 @@ import org.mockbukkit.metaminer.util.JsonUtil;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 
 public class TagDataGenerator implements DataGenerator
 {
@@ -31,6 +30,7 @@ public class TagDataGenerator implements DataGenerator
 	{
 		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.entrySet())
 		{
+			@SuppressWarnings("unchecked")
 			RegistryKey<Keyed> registryKey = (RegistryKey<Keyed>) entry.getKey();
 			Registry<Keyed> registry = RegistryAccess.registryAccess().getRegistry(registryKey);
 			String tagType = getPlural(registryKey);
@@ -52,9 +52,7 @@ public class TagDataGenerator implements DataGenerator
 	private void writeTag(io.papermc.paper.registry.tag.Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
-		org.bukkit.Tag<Keyed> bukkitTag = (org.bukkit.Tag<Keyed>) tag;
-		Set<Keyed> values = bukkitTag.getValues();
-		values.forEach(tagValue -> jsonArray.add(tagValue.getKey().toString()));
+		tag.values().forEach(tagValue -> jsonArray.add(tagValue.key().toString()));
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("replace", new JsonPrimitive(false));
 		rootObject.add("values", jsonArray);
@@ -65,20 +63,51 @@ public class TagDataGenerator implements DataGenerator
 
 	private String getPlural(RegistryKey<?> key)
 	{
-		String value = key.key().value();
-		if (value.equals("entity_type"))
+		return switch (key.key().value())
 		{
-			return "entity_types";
-		}
-		if (value.equals("damage_type"))
-		{
-			return "damage_types";
-		}
-		if (value.endsWith("y"))
-		{
-			return value.substring(0, value.length() - 1) + "ies";
-		}
-		return value + "s";
+			case "attribute" -> "attributes";
+			case "banner_pattern" -> "banner_patterns";
+			case "biome" -> "biomes";
+			case "block" -> "blocks";
+			case "cat_variant" -> "cat_variants";
+			case "cat_sound_variant" -> "cat_sound_variants";
+			case "chicken_variant" -> "chicken_variants";
+			case "chicken_sound_variant" -> "chicken_sound_variants";
+			case "cow_variant" -> "cow_variants";
+			case "cow_sound_variant" -> "cow_sound_variants";
+			case "damage_type" -> "damage_types";
+			case "data_component_type" -> "data_component_types";
+			case "dialog" -> "dialogs";
+			case "enchantment" -> "enchantments";
+			case "entity_type" -> "entity_types";
+			case "fluid" -> "fluids";
+			case "frog_variant" -> "frog_variants";
+			case "game_event" -> "game_events";
+			case "game_rule" -> "game_rules";
+			case "instrument" -> "instruments";
+			case "item" -> "items";
+			case "jukebox_song" -> "jukebox_songs";
+			case "map_decoration_type" -> "map_decoration_types";
+			case "memory_module_type" -> "memory_module_types";
+			case "menu" -> "menus";
+			case "mob_effect" -> "mob_effects";
+			case "painting_variant" -> "painting_variants";
+			case "particle_type" -> "particle_types";
+			case "pig_variant" -> "pig_variants";
+			case "pig_sound_variant" -> "pig_sound_variants";
+			case "potion" -> "potions";
+			case "sound_event" -> "sound_events";
+			case "structure" -> "structures";
+			case "structure_type" -> "structure_types";
+			case "trim_material" -> "trim_materials";
+			case "trim_pattern" -> "trim_patterns";
+			case "villager_profession" -> "villager_professions";
+			case "villager_type" -> "villager_types";
+			case "wolf_variant" -> "wolf_variants";
+			case "wolf_sound_variant" -> "wolf_sound_variants";
+			case "zombie_nautilus_variant" -> "zombie_nautilus_variants";
+			default -> key.key().value() + "s";
+		};
 	}
 
 }
