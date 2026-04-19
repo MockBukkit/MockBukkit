@@ -167,7 +167,7 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("maxModifiedCosts", maxModifiedCosts);
 
 		JsonArray conflicts = new JsonArray();
-		for (Enchantment otherEnchantment : Enchantment.values())
+		for (Enchantment otherEnchantment : RegistryAccess.registryAccess().getRegistry(RegistryKey.ENCHANTMENT))
 		{
 			if (enchantment.conflictsWith(otherEnchantment))
 			{
