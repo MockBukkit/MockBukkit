@@ -93,73 +93,16 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		CreativeCategory creativeCategory = CreativeCategory.valueOf(jsonObject.get("creativeCategory").getAsString());
 		boolean isCompostable = jsonObject.get("compostable").getAsBoolean();
 		int burnDuration = jsonObject.get("burnDuration").getAsInt();
-		BigDecimal compostChance = new BigDecimal(0);
+
+		BigDecimal compostChance = BigDecimal.ZERO;
 		if (isCompostable)
 		{
 			compostChance = BigDecimal.valueOf(jsonObject.get("compostChance").getAsFloat());
 		}
 
-		Class<? extends ItemMeta> metaClass = null;
-		String metaClassKey = "metaClass";
-		if (jsonObject.has(metaClassKey))
-		{
-			String metaClassAsString = jsonObject.get(metaClassKey).getAsString();
-
-			try
-			{
-				if (metaClassAsString.equals("BlockDataMeta") || metaClassAsString.equals("MusicInstrumentMeta"))
-				{
-					//Unimplemented Meta class, falling back to ItemMeta
-					metaClass = ItemMetaMock.class;
-				}
-				else
-				{
-					String metaClassName =
-							"org.mockbukkit.mockbukkit.inventory.meta."
-									+ jsonObject.get(metaClassKey).getAsString()
-									+ "Mock";
-					metaClass = (Class<? extends ItemMeta>) Class.forName(metaClassName);
-				}
-			}
-			catch (ClassNotFoundException e)
-			{
-				throw new IllegalStateException("Could not find class: " + jsonObject.get(metaClassKey).getAsString());
-			}
-		}
-
-		Set<DataComponentType> defaultDataTypes = new HashSet<>();
-		if (jsonObject.has("defaultDataTypes"))
-		{
-			JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
-			for (JsonElement element : typesArray)
-			{
-				NamespacedKey typeKey = NamespacedKey.fromString(element.getAsString());
-				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
-				if (type != null)
-				{
-					defaultDataTypes.add(type);
-				}
-			}
-		}
-
-		Map<DataComponentType, Object> defaultData = new HashMap<>();
-		if (jsonObject.has("defaultData"))
-		{
-			JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
-			for (Map.Entry<String, JsonElement> entry : dataObject.entrySet())
-			{
-				NamespacedKey typeKey = NamespacedKey.fromString(entry.getKey());
-				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
-				if (type != null)
-				{
-					Object value = deserializeComponent(type, entry.getValue());
-					if (value != null)
-					{
-						defaultData.put(type, value);
-					}
-				}
-			}
-		}
+		Class<? extends ItemMeta> metaClass = parseMetaClass(jsonObject);
+		Set<DataComponentType> defaultDataTypes = parseDefaultDataTypes(jsonObject);
+		Map<DataComponentType, Object> defaultData = parseDefaultData(jsonObject);
 
 		return new ItemTypeMock<>(
 				key,
@@ -179,6 +122,74 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				defaultDataTypes,
 				defaultData
 		);
+	}
+
+	private static Class<? extends ItemMeta> parseMetaClass(JsonObject jsonObject)
+	{
+		String metaClassKey = "metaClass";
+		if (!jsonObject.has(metaClassKey))
+		{
+			return null;
+		}
+
+		String metaClassAsString = jsonObject.get(metaClassKey).getAsString();
+		if (metaClassAsString.equals("BlockDataMeta") || metaClassAsString.equals("MusicInstrumentMeta"))
+		{
+			//Unimplemented Meta class, falling back to ItemMeta
+			return ItemMetaMock.class;
+		}
+
+		try
+		{
+			String metaClassName = "org.mockbukkit.mockbukkit.inventory.meta." + metaClassAsString + "Mock";
+			return (Class<? extends ItemMeta>) Class.forName(metaClassName);
+		}
+		catch (ClassNotFoundException e)
+		{
+			throw new IllegalStateException("Could not find class: " + metaClassAsString);
+		}
+	}
+
+	private static Set<DataComponentType> parseDefaultDataTypes(JsonObject jsonObject)
+	{
+		Set<DataComponentType> defaultDataTypes = new HashSet<>();
+		if (jsonObject.has("defaultDataTypes"))
+		{
+			JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
+			for (JsonElement element : typesArray)
+			{
+				NamespacedKey typeKey = NamespacedKey.fromString(element.getAsString());
+				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
+				if (type != null)
+				{
+					defaultDataTypes.add(type);
+				}
+			}
+		}
+		return defaultDataTypes;
+	}
+
+	private static Map<DataComponentType, Object> parseDefaultData(JsonObject jsonObject)
+	{
+		Map<DataComponentType, Object> defaultData = new HashMap<>();
+		if (jsonObject.has("defaultData"))
+		{
+			JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
+			for (Map.Entry<String, JsonElement> entry : dataObject.entrySet())
+			{
+				NamespacedKey typeKey = NamespacedKey.fromString(entry.getKey());
+				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
+				if (type != null)
+				{
+					Object value = deserializeComponent(type, entry.getValue());
+					if (value != null)
+					{
+						defaultData.put(type, value);
+					}
+				}
+			}
+		}
+		return defaultData;
 	}
 
 	private static @Nullable Object deserializeComponent(DataComponentType type, JsonElement json)
@@ -218,7 +229,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 
 	@NotNull
 	@Override
-	public <M extends ItemMeta> Typed<M> typed(@NotNull Class<M> itemMetaType)
+	public <M2 extends ItemMeta> Typed<M2> typed(@NotNull Class<M2> itemMetaType)
 	{
 		throw new UnimplementedOperationException();
 	}
