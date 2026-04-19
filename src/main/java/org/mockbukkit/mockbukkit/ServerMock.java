@@ -99,6 +99,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
 import org.mockbukkit.mockbukkit.boss.KeyedBossBarMock;
 import org.mockbukkit.mockbukkit.command.CommandMapMock;
@@ -2235,7 +2236,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Must provide material");
-		return BlockDataMock.mock(material);
+		return BlockDataMockFactory.mock(material);
 	}
 
 	@Override

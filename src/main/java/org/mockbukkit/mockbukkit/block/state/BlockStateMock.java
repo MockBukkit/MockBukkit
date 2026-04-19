@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 
@@ -46,7 +47,7 @@ public class BlockStateMock implements BlockState
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
-		this.blockData = BlockDataMock.mock(material);
+		this.blockData = BlockDataMockFactory.mock(material);
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
-		this.blockData = BlockDataMock.mock(material);
+		this.blockData = BlockDataMockFactory.mock(material);
 	}
 
 	/**
@@ -227,14 +228,14 @@ public class BlockStateMock implements BlockState
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
-		this.blockData = BlockDataMock.mock(this.material);
+		this.blockData = BlockDataMockFactory.mock(this.material);
 	}
 
 	@Override
 	public void setType(Material type)
 	{
 		this.material = type;
-		this.blockData = BlockDataMock.mock(type);
+		this.blockData = BlockDataMockFactory.mock(type);
 	}
 
 	@Override
