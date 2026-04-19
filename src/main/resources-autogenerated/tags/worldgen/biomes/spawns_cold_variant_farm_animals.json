@@ -1,0 +1,31 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:cold_ocean",
+		"minecraft:deep_cold_ocean",
+		"minecraft:deep_dark",
+		"minecraft:deep_frozen_ocean",
+		"minecraft:end_barrens",
+		"minecraft:end_highlands",
+		"minecraft:end_midlands",
+		"minecraft:frozen_ocean",
+		"minecraft:frozen_peaks",
+		"minecraft:frozen_river",
+		"minecraft:grove",
+		"minecraft:ice_spikes",
+		"minecraft:jagged_peaks",
+		"minecraft:old_growth_pine_taiga",
+		"minecraft:old_growth_spruce_taiga",
+		"minecraft:small_end_islands",
+		"minecraft:snowy_beach",
+		"minecraft:snowy_plains",
+		"minecraft:snowy_slopes",
+		"minecraft:snowy_taiga",
+		"minecraft:stony_peaks",
+		"minecraft:taiga",
+		"minecraft:the_end",
+		"minecraft:windswept_forest",
+		"minecraft:windswept_gravelly_hills",
+		"minecraft:windswept_hills"
+	]
+}

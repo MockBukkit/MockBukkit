@@ -1,0 +1,18 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:cold_ocean",
+		"minecraft:deep_cold_ocean",
+		"minecraft:deep_frozen_ocean",
+		"minecraft:deep_lukewarm_ocean",
+		"minecraft:deep_ocean",
+		"minecraft:frozen_ocean",
+		"minecraft:frozen_river",
+		"minecraft:lukewarm_ocean",
+		"minecraft:mangrove_swamp",
+		"minecraft:ocean",
+		"minecraft:river",
+		"minecraft:swamp",
+		"minecraft:warm_ocean"
+	]
+}
