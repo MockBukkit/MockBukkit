@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.sound;
 
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.util.ShadyPines;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -168,7 +169,7 @@ public interface SoundReceiver
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{
-		assertSoundHeard(message, sound.getKey().getKey(), predicate);
+		assertSoundHeard(message, Registry.SOUNDS.getKey(sound).getKey(), predicate);
 	}
 
 	/**

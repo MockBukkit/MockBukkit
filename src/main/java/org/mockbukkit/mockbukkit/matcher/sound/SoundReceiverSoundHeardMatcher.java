@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.sound;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.util.ShadyPines;
+import org.bukkit.Registry;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -68,7 +69,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull org.bukkit.Sound sound, @NotNull Predicate<AudioExperience> filter)
 	{
 		Preconditions.checkNotNull(sound);
-		return hasHeard(sound.getKey().getKey(), filter);
+		return hasHeard(Registry.SOUNDS.getKey(sound).getKey(), filter);
 	}
 
 	/**
