@@ -84,6 +84,9 @@ local.properties
 .classpath
 .project
 
+# VS Code
+.vscode/
+
 # External tool builders
 .externalToolBuilders/
 
