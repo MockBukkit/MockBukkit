@@ -48,6 +48,7 @@ public class BlockStateMockFactory
 			.put(Material.COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.COMPARATOR, with(ComparatorStateMock::new, ComparatorStateMock::new))
 			.put(Material.CONDUIT, with(ConduitStateMock::new, ConduitStateMock::new))
+			.put(Material.CRAFTER, with(CrafterStateMock::new, CrafterStateMock::new))
 			.put(Material.CREAKING_HEART, with(CreakingHeartStateMock::new, CreakingHeartStateMock::new))
 			.put(Material.DAYLIGHT_DETECTOR, with(DaylightDetectorStateMock::new, DaylightDetectorStateMock::new))
 			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
@@ -61,6 +62,7 @@ public class BlockStateMockFactory
 			.put(Material.JIGSAW, with(JigsawStateMock::new, JigsawStateMock::new))
 			.put(Material.JUKEBOX, with(JukeboxStateMock::new, JukeboxStateMock::new))
 			.put(Material.LECTERN, with(LecternStateMock::new, LecternStateMock::new))
+			.put(Material.MOVING_PISTON, with(MovingPistonStateMock::new, MovingPistonStateMock::new))
 			.put(Material.REPEATING_COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.SCULK_CATALYST, with(SculkCatalystStateMock::new, SculkCatalystStateMock::new))
 			.put(Material.SCULK_SENSOR, with(SculkSensorStateMock::new, SculkSensorStateMock::new))
@@ -73,7 +75,9 @@ public class BlockStateMockFactory
 			.put(Material.SUSPICIOUS_SAND, with(BrushableBlockStateMock::new, BrushableBlockStateMock::new))
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
+			.put(Material.TRIAL_SPAWNER, with(TrialSpawnerStateMock::new, TrialSpawnerStateMock::new))
 			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))
+			.put(Material.VAULT, with(VaultStateMock::new, VaultStateMock::new))
 			.build();
 
 	/**
