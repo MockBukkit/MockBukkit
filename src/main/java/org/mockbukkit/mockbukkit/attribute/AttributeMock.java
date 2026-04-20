@@ -40,6 +40,7 @@ public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attrib
 	}
 
 	@Override
+	@SuppressWarnings("removal")
 	@Deprecated(forRemoval = true, since = "1.21.3")
 	public @NotNull String getTranslationKey()
 	{

@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.attribute;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
-import net.kyori.adventure.key.Key;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
@@ -35,14 +34,15 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Setter
 	private double baseValue;
 	private final @NotNull List<AttributeModifier> modifiers = new ArrayList<>();
-	private final @NotNull Map<Key, AttributeModifier> modifiersByKey = new HashMap<>();
+	private final @NotNull Map<net.kyori.adventure.key.Key, AttributeModifier> modifiersByKey = new HashMap<>();
 	private final @NotNull Map<UUID, AttributeModifier> modifiersByUuid = new HashMap<>();
 
 	/**
-	 * Constructs a new {@link AttributeInstanceMock} for the provided {@link Attribute} and with the specified value.
+	 * Constructs a new {@link AttributeInstanceMock} for the provided
+	 * {@link Attribute} and with the specified value.
 	 *
-	 * @param attribute The Attribute this is an instance of.
-	 * @param defaultValue     The default value of the attribute.
+	 * @param attribute    The Attribute this is an instance of.
+	 * @param defaultValue The default value of the attribute.
 	 */
 	public AttributeInstanceMock(@NotNull Attribute attribute, double defaultValue)
 	{
@@ -59,22 +59,28 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
-	public @Nullable AttributeModifier getModifier(@NotNull Key key)
+	public @Nullable AttributeModifier getModifier(@NotNull net.kyori.adventure.key.Key key)
 	{
 		Preconditions.checkArgument(key != null, "Key cannot be null");
 		return modifiersByKey.get(key);
 	}
 
 	@Override
-	public void removeModifier(@NotNull Key key)
+	public void removeModifier(@NotNull net.kyori.adventure.key.Key key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		AttributeModifier modifier = modifiersByKey.remove(key);
 		if (modifier != null)
 		{
 			modifiers.remove(modifier);
-			modifiersByUuid.remove(modifier.getUniqueId());
+			removeModifierByUuid(modifier);
 		}
+	}
+
+	@SuppressWarnings({ "removal" })
+	private void removeModifierByUuid(@NotNull AttributeModifier modifier)
+	{
+		modifiersByUuid.remove(modifier.getUniqueId());
 	}
 
 	@Override
@@ -99,6 +105,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
+	@SuppressWarnings({ "removal" })
 	public void addModifier(@NotNull AttributeModifier modifier)
 	{
 		Preconditions.checkNotNull(modifier, "Modifier shouldn't be null");
@@ -115,8 +122,9 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public void addTransientModifier(@NotNull AttributeModifier modifier)
 	{
-		// Thorinwasher: We don't even need to differentiate between these two types, as there is no world storage
-		//   solution for MockBukkit; This does not matter, as nothing is persistent
+		// Thorinwasher: We don't even need to differentiate between these two types, as
+		// there is no world storage
+		// solution for MockBukkit; This does not matter, as nothing is persistent
 		addModifier(modifier);
 	}
 
@@ -129,7 +137,7 @@ public class AttributeInstanceMock implements AttributeInstance
 		if (modifiers.remove(modifier))
 		{
 			modifiersByKey.remove(modifier.getKey());
-			modifiersByUuid.remove(modifier.getUniqueId());
+			removeModifierByUuid(modifier);
 		}
 	}
 

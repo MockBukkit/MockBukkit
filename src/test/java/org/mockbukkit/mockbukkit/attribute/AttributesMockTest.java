@@ -51,6 +51,6 @@ class AttributesMockTest
 		assertEquals("ARMOR", attribute.name());
 		assertEquals(8, attribute.ordinal());
 		assertEquals(Attribute.Sentiment.POSITIVE, attribute.getSentiment());
-		assertEquals("attribute.name.armor", attribute.getTranslationKey());
+		assertEquals("attribute.name.armor", attribute.translationKey());
 	}
 }
