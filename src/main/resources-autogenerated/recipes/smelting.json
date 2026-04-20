@@ -13,6 +13,16 @@
 		"key": "minecraft:baked_potato",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:baked_potato",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.baked_potato"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:baked_potato"
 		}
 	},
@@ -30,6 +40,16 @@
 		"key": "minecraft:black_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:black_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.black_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:black_glazed_terracotta"
 		}
 	},
@@ -47,6 +67,16 @@
 		"key": "minecraft:blue_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:blue_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.blue_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:blue_glazed_terracotta"
 		}
 	},
@@ -64,6 +94,16 @@
 		"key": "minecraft:brick",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:brick",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.brick"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:brick"
 		}
 	},
@@ -81,6 +121,16 @@
 		"key": "minecraft:brown_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:brown_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.brown_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:brown_glazed_terracotta"
 		}
 	},
@@ -133,6 +183,16 @@
 		"key": "minecraft:charcoal",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:charcoal",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.charcoal"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:charcoal"
 		}
 	},
@@ -150,6 +210,16 @@
 		"key": "minecraft:coal_from_smelting_coal_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:coal",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.coal"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:coal"
 		}
 	},
@@ -167,6 +237,16 @@
 		"key": "minecraft:coal_from_smelting_deepslate_coal_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:coal",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.coal"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:coal"
 		}
 	},
@@ -184,6 +264,16 @@
 		"key": "minecraft:cooked_beef",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_beef",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_beef"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_beef"
 		}
 	},
@@ -201,6 +291,16 @@
 		"key": "minecraft:cooked_chicken",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_chicken",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_chicken"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_chicken"
 		}
 	},
@@ -218,6 +318,16 @@
 		"key": "minecraft:cooked_cod",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_cod",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_cod"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_cod"
 		}
 	},
@@ -235,6 +345,16 @@
 		"key": "minecraft:cooked_mutton",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_mutton",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_mutton"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_mutton"
 		}
 	},
@@ -252,6 +372,16 @@
 		"key": "minecraft:cooked_porkchop",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_porkchop",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_porkchop"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_porkchop"
 		}
 	},
@@ -269,6 +399,16 @@
 		"key": "minecraft:cooked_rabbit",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_rabbit",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_rabbit"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_rabbit"
 		}
 	},
@@ -286,6 +426,16 @@
 		"key": "minecraft:cooked_salmon",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cooked_salmon",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.cooked_salmon"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cooked_salmon"
 		}
 	},
@@ -303,6 +453,17 @@
 		"key": "minecraft:copper_ingot_from_smelting_copper_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:copper",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_ingot"
 		}
 	},
@@ -320,6 +481,17 @@
 		"key": "minecraft:copper_ingot_from_smelting_deepslate_copper_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:copper",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_ingot"
 		}
 	},
@@ -337,6 +509,17 @@
 		"key": "minecraft:copper_ingot_from_smelting_raw_copper",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:copper",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_ingot"
 		}
 	},
@@ -365,6 +548,16 @@
 		"key": "minecraft:copper_nugget_from_smelting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_nugget",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_nugget"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_nugget"
 		}
 	},
@@ -382,6 +575,16 @@
 		"key": "minecraft:cracked_deepslate_bricks",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cracked_deepslate_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cracked_deepslate_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cracked_deepslate_bricks"
 		}
 	},
@@ -399,6 +602,16 @@
 		"key": "minecraft:cracked_deepslate_tiles",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cracked_deepslate_tiles",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cracked_deepslate_tiles"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cracked_deepslate_tiles"
 		}
 	},
@@ -416,6 +629,16 @@
 		"key": "minecraft:cracked_nether_bricks",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cracked_nether_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cracked_nether_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cracked_nether_bricks"
 		}
 	},
@@ -433,6 +656,16 @@
 		"key": "minecraft:cracked_polished_blackstone_bricks",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cracked_polished_blackstone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cracked_polished_blackstone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cracked_polished_blackstone_bricks"
 		}
 	},
@@ -450,6 +683,16 @@
 		"key": "minecraft:cracked_stone_bricks",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cracked_stone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cracked_stone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cracked_stone_bricks"
 		}
 	},
@@ -467,6 +710,16 @@
 		"key": "minecraft:cyan_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cyan_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cyan_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cyan_glazed_terracotta"
 		}
 	},
@@ -484,6 +737,16 @@
 		"key": "minecraft:deepslate",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate"
 		}
 	},
@@ -501,6 +764,17 @@
 		"key": "minecraft:diamond_from_smelting_deepslate_diamond_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diamond",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.diamond"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:diamond",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diamond"
 		}
 	},
@@ -518,6 +792,17 @@
 		"key": "minecraft:diamond_from_smelting_diamond_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diamond",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.diamond"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:diamond",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diamond"
 		}
 	},
@@ -535,6 +820,16 @@
 		"key": "minecraft:dried_kelp_from_smelting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:dried_kelp",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.dried_kelp"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:dried_kelp"
 		}
 	},
@@ -552,6 +847,17 @@
 		"key": "minecraft:emerald_from_smelting_deepslate_emerald_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:emerald",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.emerald"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:emerald",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:emerald"
 		}
 	},
@@ -569,6 +875,17 @@
 		"key": "minecraft:emerald_from_smelting_emerald_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:emerald",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.emerald"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:emerald",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:emerald"
 		}
 	},
@@ -587,6 +904,16 @@
 		"key": "minecraft:glass",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:glass",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.glass"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:glass"
 		}
 	},
@@ -604,6 +931,17 @@
 		"key": "minecraft:gold_ingot_from_smelting_deepslate_gold_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -621,6 +959,17 @@
 		"key": "minecraft:gold_ingot_from_smelting_gold_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -638,6 +987,17 @@
 		"key": "minecraft:gold_ingot_from_smelting_nether_gold_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -655,6 +1015,17 @@
 		"key": "minecraft:gold_ingot_from_smelting_raw_gold",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -683,6 +1054,16 @@
 		"key": "minecraft:gold_nugget_from_smelting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_nugget",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_nugget"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_nugget"
 		}
 	},
@@ -700,6 +1081,16 @@
 		"key": "minecraft:gray_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gray_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.gray_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gray_glazed_terracotta"
 		}
 	},
@@ -717,6 +1108,17 @@
 		"key": "minecraft:green_dye",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:dye": "GREEN",
+				"minecraft:item_model": "minecraft:green_dye",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.green_dye"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:green_dye"
 		}
 	},
@@ -734,6 +1136,16 @@
 		"key": "minecraft:green_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:green_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.green_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:green_glazed_terracotta"
 		}
 	},
@@ -751,6 +1163,17 @@
 		"key": "minecraft:iron_ingot_from_smelting_deepslate_iron_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:iron",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_ingot"
 		}
 	},
@@ -768,6 +1191,17 @@
 		"key": "minecraft:iron_ingot_from_smelting_iron_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:iron",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_ingot"
 		}
 	},
@@ -785,6 +1219,17 @@
 		"key": "minecraft:iron_ingot_from_smelting_raw_iron",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:iron",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_ingot"
 		}
 	},
@@ -817,6 +1262,16 @@
 		"key": "minecraft:iron_nugget_from_smelting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_nugget",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_nugget"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_nugget"
 		}
 	},
@@ -834,6 +1289,17 @@
 		"key": "minecraft:lapis_lazuli_from_smelting_deepslate_lapis_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:lapis_lazuli",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.lapis_lazuli"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:lapis",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:lapis_lazuli"
 		}
 	},
@@ -851,6 +1317,17 @@
 		"key": "minecraft:lapis_lazuli_from_smelting_lapis_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:lapis_lazuli",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.lapis_lazuli"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:lapis",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:lapis_lazuli"
 		}
 	},
@@ -878,6 +1355,16 @@
 		"key": "minecraft:leaf_litter",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:leaf_litter",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.leaf_litter"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:leaf_litter"
 		}
 	},
@@ -895,6 +1382,16 @@
 		"key": "minecraft:light_blue_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:light_blue_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.light_blue_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:light_blue_glazed_terracotta"
 		}
 	},
@@ -912,6 +1409,16 @@
 		"key": "minecraft:light_gray_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:light_gray_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.light_gray_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:light_gray_glazed_terracotta"
 		}
 	},
@@ -929,6 +1436,17 @@
 		"key": "minecraft:lime_dye_from_smelting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:dye": "LIME",
+				"minecraft:item_model": "minecraft:lime_dye",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.lime_dye"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:lime_dye"
 		}
 	},
@@ -946,6 +1464,16 @@
 		"key": "minecraft:lime_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:lime_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.lime_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:lime_glazed_terracotta"
 		}
 	},
@@ -963,6 +1491,16 @@
 		"key": "minecraft:magenta_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:magenta_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.magenta_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:magenta_glazed_terracotta"
 		}
 	},
@@ -980,6 +1518,16 @@
 		"key": "minecraft:nether_brick",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:nether_brick",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.nether_brick"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:nether_brick"
 		}
 	},
@@ -997,6 +1545,16 @@
 		"key": "minecraft:netherite_scrap",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:netherite_scrap",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_scrap"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_scrap"
 		}
 	},
@@ -1014,6 +1572,16 @@
 		"key": "minecraft:orange_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:orange_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.orange_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:orange_glazed_terracotta"
 		}
 	},
@@ -1031,6 +1599,16 @@
 		"key": "minecraft:pink_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:pink_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.pink_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:pink_glazed_terracotta"
 		}
 	},
@@ -1048,6 +1626,16 @@
 		"key": "minecraft:popped_chorus_fruit",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:popped_chorus_fruit",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.popped_chorus_fruit"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:popped_chorus_fruit"
 		}
 	},
@@ -1065,6 +1653,16 @@
 		"key": "minecraft:purple_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:purple_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.purple_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:purple_glazed_terracotta"
 		}
 	},
@@ -1082,6 +1680,17 @@
 		"key": "minecraft:quartz",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:quartz",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.quartz"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:quartz",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:quartz"
 		}
 	},
@@ -1099,6 +1708,16 @@
 		"key": "minecraft:red_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_glazed_terracotta"
 		}
 	},
@@ -1116,6 +1735,17 @@
 		"key": "minecraft:redstone_from_smelting_deepslate_redstone_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:redstone",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.redstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:redstone",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:redstone"
 		}
 	},
@@ -1133,6 +1763,17 @@
 		"key": "minecraft:redstone_from_smelting_redstone_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:redstone",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.redstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:redstone",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:redstone"
 		}
 	},
@@ -1150,6 +1791,17 @@
 		"key": "minecraft:resin_brick",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:resin_brick",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.resin_brick"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:resin",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:resin_brick"
 		}
 	},
@@ -1167,6 +1819,16 @@
 		"key": "minecraft:smooth_basalt",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_basalt",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_basalt"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_basalt"
 		}
 	},
@@ -1184,6 +1846,16 @@
 		"key": "minecraft:smooth_quartz",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_quartz",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_quartz"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_quartz"
 		}
 	},
@@ -1201,6 +1873,16 @@
 		"key": "minecraft:smooth_red_sandstone",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_red_sandstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_red_sandstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_red_sandstone"
 		}
 	},
@@ -1218,6 +1900,16 @@
 		"key": "minecraft:smooth_sandstone",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_sandstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_sandstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_sandstone"
 		}
 	},
@@ -1235,6 +1927,16 @@
 		"key": "minecraft:smooth_stone",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_stone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_stone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_stone"
 		}
 	},
@@ -1252,6 +1954,16 @@
 		"key": "minecraft:sponge",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sponge",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sponge"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:sponge"
 		}
 	},
@@ -1269,6 +1981,16 @@
 		"key": "minecraft:stone",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone"
 		}
 	},
@@ -1286,6 +2008,16 @@
 		"key": "minecraft:terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:terracotta"
 		}
 	},
@@ -1303,6 +2035,16 @@
 		"key": "minecraft:white_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:white_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.white_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:white_glazed_terracotta"
 		}
 	},
@@ -1320,6 +2062,16 @@
 		"key": "minecraft:yellow_glazed_terracotta",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:yellow_glazed_terracotta",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.yellow_glazed_terracotta"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:yellow_glazed_terracotta"
 		}
 	}

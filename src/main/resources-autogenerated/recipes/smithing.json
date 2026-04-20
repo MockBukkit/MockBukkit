@@ -364,6 +364,18 @@
 		"key": "minecraft:netherite_axe_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_axe",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_axe"
+				},
+				"minecraft:max_damage": 2031,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_axe"
 		}
 	},
@@ -384,6 +396,18 @@
 		"key": "minecraft:netherite_boots_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_boots",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_boots"
+				},
+				"minecraft:max_damage": 481,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_boots"
 		}
 	},
@@ -404,6 +428,18 @@
 		"key": "minecraft:netherite_chestplate_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_chestplate",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_chestplate"
+				},
+				"minecraft:max_damage": 592,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_chestplate"
 		}
 	},
@@ -424,6 +460,18 @@
 		"key": "minecraft:netherite_helmet_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_helmet",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_helmet"
+				},
+				"minecraft:max_damage": 407,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_helmet"
 		}
 	},
@@ -444,6 +492,18 @@
 		"key": "minecraft:netherite_hoe_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_hoe",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_hoe"
+				},
+				"minecraft:max_damage": 2031,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_hoe"
 		}
 	},
@@ -464,6 +524,16 @@
 		"key": "minecraft:netherite_horse_armor_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:netherite_horse_armor",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_horse_armor"
+				},
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_horse_armor"
 		}
 	},
@@ -484,6 +554,18 @@
 		"key": "minecraft:netherite_leggings_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_leggings",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_leggings"
+				},
+				"minecraft:max_damage": 555,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_leggings"
 		}
 	},
@@ -504,6 +586,16 @@
 		"key": "minecraft:netherite_nautilus_armor_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:netherite_nautilus_armor",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_nautilus_armor"
+				},
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_nautilus_armor"
 		}
 	},
@@ -524,6 +616,18 @@
 		"key": "minecraft:netherite_pickaxe_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_pickaxe",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_pickaxe"
+				},
+				"minecraft:max_damage": 2031,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_pickaxe"
 		}
 	},
@@ -544,6 +648,18 @@
 		"key": "minecraft:netherite_shovel_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_shovel",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_shovel"
+				},
+				"minecraft:max_damage": 2031,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_shovel"
 		}
 	},
@@ -564,6 +680,20 @@
 		"key": "minecraft:netherite_spear_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:damage_type": "minecraft:spear",
+				"minecraft:item_model": "minecraft:netherite_spear",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_spear"
+				},
+				"minecraft:max_damage": 2031,
+				"minecraft:max_stack_size": 1,
+				"minecraft:minimum_attack_charge": 1.0,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_spear"
 		}
 	},
@@ -584,6 +714,18 @@
 		"key": "minecraft:netherite_sword_smithing",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:damage": 0,
+				"minecraft:item_model": "minecraft:netherite_sword",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_sword"
+				},
+				"minecraft:max_damage": 2031,
+				"minecraft:max_stack_size": 1,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_sword"
 		}
 	},

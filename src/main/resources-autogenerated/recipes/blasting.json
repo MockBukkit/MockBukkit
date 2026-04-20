@@ -13,6 +13,16 @@
 		"key": "minecraft:coal_from_blasting_coal_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:coal",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.coal"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:coal"
 		}
 	},
@@ -30,6 +40,16 @@
 		"key": "minecraft:coal_from_blasting_deepslate_coal_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:coal",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.coal"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:coal"
 		}
 	},
@@ -47,6 +67,17 @@
 		"key": "minecraft:copper_ingot_from_blasting_copper_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:copper",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_ingot"
 		}
 	},
@@ -64,6 +95,17 @@
 		"key": "minecraft:copper_ingot_from_blasting_deepslate_copper_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:copper",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_ingot"
 		}
 	},
@@ -81,6 +123,17 @@
 		"key": "minecraft:copper_ingot_from_blasting_raw_copper",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:copper",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_ingot"
 		}
 	},
@@ -109,6 +162,16 @@
 		"key": "minecraft:copper_nugget_from_blasting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_nugget",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.copper_nugget"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_nugget"
 		}
 	},
@@ -126,6 +189,17 @@
 		"key": "minecraft:diamond_from_blasting_deepslate_diamond_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diamond",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.diamond"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:diamond",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diamond"
 		}
 	},
@@ -143,6 +217,17 @@
 		"key": "minecraft:diamond_from_blasting_diamond_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diamond",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.diamond"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:diamond",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diamond"
 		}
 	},
@@ -160,6 +245,17 @@
 		"key": "minecraft:emerald_from_blasting_deepslate_emerald_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:emerald",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.emerald"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:emerald",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:emerald"
 		}
 	},
@@ -177,6 +273,17 @@
 		"key": "minecraft:emerald_from_blasting_emerald_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:emerald",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.emerald"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:emerald",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:emerald"
 		}
 	},
@@ -194,6 +301,17 @@
 		"key": "minecraft:gold_ingot_from_blasting_deepslate_gold_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -211,6 +329,17 @@
 		"key": "minecraft:gold_ingot_from_blasting_gold_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -228,6 +357,17 @@
 		"key": "minecraft:gold_ingot_from_blasting_nether_gold_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -245,6 +385,17 @@
 		"key": "minecraft:gold_ingot_from_blasting_raw_gold",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:gold",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_ingot"
 		}
 	},
@@ -273,6 +424,16 @@
 		"key": "minecraft:gold_nugget_from_blasting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:gold_nugget",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.gold_nugget"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:gold_nugget"
 		}
 	},
@@ -290,6 +451,17 @@
 		"key": "minecraft:iron_ingot_from_blasting_deepslate_iron_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:iron",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_ingot"
 		}
 	},
@@ -307,6 +479,17 @@
 		"key": "minecraft:iron_ingot_from_blasting_iron_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:iron",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_ingot"
 		}
 	},
@@ -324,6 +507,17 @@
 		"key": "minecraft:iron_ingot_from_blasting_raw_iron",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_ingot",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_ingot"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:iron",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_ingot"
 		}
 	},
@@ -356,6 +550,16 @@
 		"key": "minecraft:iron_nugget_from_blasting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:iron_nugget",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.iron_nugget"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:iron_nugget"
 		}
 	},
@@ -373,6 +577,17 @@
 		"key": "minecraft:lapis_lazuli_from_blasting_deepslate_lapis_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:lapis_lazuli",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.lapis_lazuli"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:lapis",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:lapis_lazuli"
 		}
 	},
@@ -390,6 +605,17 @@
 		"key": "minecraft:lapis_lazuli_from_blasting_lapis_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:lapis_lazuli",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.lapis_lazuli"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:lapis",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:lapis_lazuli"
 		}
 	},
@@ -407,6 +633,16 @@
 		"key": "minecraft:netherite_scrap_from_blasting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:netherite_scrap",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.netherite_scrap"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:netherite_scrap"
 		}
 	},
@@ -424,6 +660,17 @@
 		"key": "minecraft:quartz_from_blasting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:quartz",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.quartz"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:quartz",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:quartz"
 		}
 	},
@@ -441,6 +688,17 @@
 		"key": "minecraft:redstone_from_blasting_deepslate_redstone_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:redstone",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.redstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:redstone",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:redstone"
 		}
 	},
@@ -458,6 +716,17 @@
 		"key": "minecraft:redstone_from_blasting_redstone_ore",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:redstone",
+				"minecraft:item_name": {
+					"translate": "item.minecraft.redstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:provides_trim_material": "minecraft:redstone",
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:redstone"
 		}
 	}
