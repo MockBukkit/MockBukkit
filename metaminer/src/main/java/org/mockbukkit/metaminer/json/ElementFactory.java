@@ -11,6 +11,8 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.metaminer.json.recipe.RecipeChoiceElementFactory;
@@ -73,6 +75,10 @@ public class ElementFactory
 		{
 			return ItemMetaElementFactory.toJson((ItemMeta) object);
 		}
+		if (CustomModelDataComponent.class.isAssignableFrom(returnType))
+		{
+			return CustomModelDataElementFactory.toJson((CustomModelDataComponent) object);
+		}
 		if (RecipeChoice.class.isAssignableFrom(returnType))
 		{
 			return RecipeChoiceElementFactory.toJson((RecipeChoice) object);
@@ -100,6 +106,10 @@ public class ElementFactory
 		if (Keyed.class.isAssignableFrom(returnType))
 		{
 			return KeyedElementFactory.toJson((Keyed) object);
+		}
+		if (ConfigurationSerializable.class.isAssignableFrom(returnType))
+		{
+			return MapElementFactory.toJson(((ConfigurationSerializable) object).serialize());
 		}
 		// Java variants
 		if (returnType.isEnum())

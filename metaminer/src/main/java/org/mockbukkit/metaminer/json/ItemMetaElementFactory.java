@@ -31,13 +31,13 @@ public class ItemMetaElementFactory
 		json.addProperty("unbreakable", itemMeta.isUnbreakable());
 		json.addProperty("glider", itemMeta.isGlider());
 
-		if (itemMeta.hasCustomModelData())
+		if (itemMeta.hasCustomModelDataComponent())
 		{
-			json.addProperty("customModelData", itemMeta.getCustomModelData());
+			json.add("customModelData", CustomModelDataElementFactory.toJson(itemMeta.getCustomModelDataComponent()));
 		}
 		if (itemMeta.hasDamageResistant())
 		{
-			json.add("damageResistant", KeyedElementFactory.toJson(itemMeta.getDamageResistant()));
+			json.add("damageResistant", CollectionElementFactory.toJson(itemMeta.getDamageResistantTypes().values(), KeyedElementFactory::toJson));
 		}
 		if (itemMeta.hasMaxStackSize())
 		{

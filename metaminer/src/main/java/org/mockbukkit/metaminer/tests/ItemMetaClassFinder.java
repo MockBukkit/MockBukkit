@@ -18,7 +18,7 @@ public class ItemMetaClassFinder
 		List<ItemType> output = new ArrayList<>();
 		for (ItemType itemType : Registry.ITEM)
 		{
-			if (!itemType.asMaterial().isAir() && !itemMetaClasses.contains(itemType.getItemMetaClass()))
+			if (itemType != ItemType.AIR && !itemMetaClasses.contains(itemType.getItemMetaClass()))
 			{
 				output.add(itemType);
 				itemMetaClasses.add(itemType.getItemMetaClass());

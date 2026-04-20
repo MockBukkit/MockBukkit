@@ -1,6 +1,7 @@
 package org.mockbukkit.metaminer.json;
 
 import com.google.gson.JsonObject;
+import io.papermc.paper.datacomponent.DataComponentType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,6 +44,25 @@ public class ItemStackElementFactory
 		if (includeMeta && meta != null && !meta.isEmpty())
 		{
 			json.add("meta", meta);
+		}
+
+		JsonObject components = new JsonObject();
+		for (DataComponentType type : itemStack.getDataTypes())
+		{
+			if (type instanceof DataComponentType.Valued<?> valued)
+			{
+				Object value = itemStack.getData(valued);
+				com.google.gson.JsonElement element = ElementFactory.toJson(value);
+				if (element != null)
+				{
+					components.add(type.getKey().toString(), element);
+				}
+			}
+		}
+
+		if (!components.isEmpty())
+		{
+			json.add("components", components);
 		}
 
 		return json;

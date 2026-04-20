@@ -12,9 +12,7 @@
 				"minecraft:aqua_affinity"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.aqua_affinity"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.aqua_affinity\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -74,9 +72,7 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.bane_of_arthropods"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.bane_of_arthropods\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -241,9 +237,7 @@
 				"minecraft:binding_curse"
 			],
 			"cursed": true,
-			"description": {
-				"translate": "enchantment.minecraft.binding_curse"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.binding_curse\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -335,9 +329,7 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.blast_protection"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.blast_protection\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -488,9 +480,7 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.breach"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.breach\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -609,9 +599,7 @@
 				"minecraft:riptide"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.channeling"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.channeling\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -664,9 +652,7 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.density"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.density\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -806,9 +792,7 @@
 				"minecraft:frost_walker"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.depth_strider"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.depth_strider\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -911,9 +895,7 @@
 				"minecraft:efficiency"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.efficiency"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.efficiency\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1083,9 +1065,7 @@
 				"minecraft:feather_falling"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.feather_falling"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.feather_falling\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1208,9 +1188,7 @@
 				"minecraft:fire_aspect"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.fire_aspect"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.fire_aspect\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1307,9 +1285,7 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.fire_protection"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.fire_protection\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1455,9 +1431,7 @@
 				"minecraft:flame"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.flame"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.flame\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1506,9 +1480,7 @@
 				"minecraft:silk_touch"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.fortune"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.fortune\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1633,9 +1605,7 @@
 				"minecraft:frost_walker"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.frost_walker"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.frost_walker\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1722,9 +1692,7 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.impaling"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.impaling\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1864,9 +1832,7 @@
 				"minecraft:mending"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.infinity"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.infinity\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -1915,9 +1881,7 @@
 				"minecraft:knockback"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.knockback"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.knockback\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2005,9 +1969,7 @@
 				"minecraft:looting"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.looting"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.looting\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2117,9 +2079,7 @@
 				"minecraft:riptide"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.loyalty"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.loyalty\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2215,9 +2175,7 @@
 				"minecraft:luck_of_the_sea"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.luck_of_the_sea"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.luck_of_the_sea\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2314,9 +2272,7 @@
 				"minecraft:lunge"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.lunge"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.lunge\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2418,9 +2374,7 @@
 				"minecraft:lure"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.lure"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.lure\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2524,9 +2478,7 @@
 				"minecraft:mending"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.mending"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.mending\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2657,9 +2609,7 @@
 				"minecraft:piercing"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.multishot"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.multishot\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2709,9 +2659,7 @@
 				"minecraft:piercing"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.piercing"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.piercing\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2829,9 +2777,7 @@
 				"minecraft:power"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.power"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.power\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -2976,9 +2922,7 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.projectile_protection"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.projectile_protection\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3131,9 +3075,7 @@
 				"minecraft:protection"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.protection"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.protection\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3279,9 +3221,7 @@
 				"minecraft:punch"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.punch"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.punch\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3358,9 +3298,7 @@
 				"minecraft:quick_charge"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.quick_charge"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.quick_charge\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3456,9 +3394,7 @@
 				"minecraft:respiration"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.respiration"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.respiration\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3564,9 +3500,7 @@
 				"minecraft:riptide"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.riptide"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.riptide\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3668,9 +3602,7 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.sharpness"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.sharpness\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3831,9 +3763,7 @@
 				"minecraft:silk_touch"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.silk_touch"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.silk_touch\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -3914,9 +3844,7 @@
 				"minecraft:smite"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.smite"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.smite\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -4077,9 +4005,7 @@
 				"minecraft:soul_speed"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.soul_speed"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.soul_speed\"}",
 			"discoverable": false,
 			"displayNames": [
 				{
@@ -4181,9 +4107,7 @@
 				"minecraft:sweeping_edge"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.sweeping_edge"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.sweeping_edge\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -4285,9 +4209,7 @@
 				"minecraft:swift_sneak"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.swift_sneak"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.swift_sneak\"}",
 			"discoverable": false,
 			"displayNames": [
 				{
@@ -4396,9 +4318,7 @@
 				"minecraft:thorns"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.thorns"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.thorns\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -4530,9 +4450,7 @@
 				"minecraft:unbreaking"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.unbreaking"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.unbreaking\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -4717,9 +4635,7 @@
 				"minecraft:vanishing_curse"
 			],
 			"cursed": true,
-			"description": {
-				"translate": "enchantment.minecraft.vanishing_curse"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.vanishing_curse\"}",
 			"discoverable": true,
 			"displayNames": [
 				{
@@ -4858,9 +4774,7 @@
 				"minecraft:wind_burst"
 			],
 			"cursed": false,
-			"description": {
-				"translate": "enchantment.minecraft.wind_burst"
-			},
+			"description": "{\"translate\":\"enchantment.minecraft.wind_burst\"}",
 			"discoverable": false,
 			"displayNames": [
 				{

@@ -22,7 +22,7 @@ public class ComponentElementFactory
 			return null;
 		}
 
-		return GsonComponentSerializer.gson().serializeToTree(component);
+		return new com.google.gson.JsonPrimitive(GsonComponentSerializer.gson().serialize(component));
 	}
 
 	private ComponentElementFactory()

@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemType;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.json.ElementFactory;
 import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
@@ -100,23 +101,23 @@ public class KeyedDataGenerator implements DataGenerator
 		if (itemType != ItemType.AIR)
 		{
 			jsonObject.add("metaClass", new JsonPrimitive(itemType.getItemMetaClass().getSimpleName()));
-
-			JsonArray defaultDataTypes = new JsonArray();
 			JsonObject defaultData = new JsonObject();
 			for (DataComponentType type : itemType.getDefaultDataTypes())
 			{
-				defaultDataTypes.add(type.getKey().toString());
-				if (type instanceof DataComponentType.Valued<?> valuedType)
+				if (type instanceof DataComponentType.Valued<?> valued)
 				{
-					Object value = itemType.getDefaultData(valuedType);
-					if (value != null)
+					Object value = itemType.getDefaultData(valued);
+					com.google.gson.JsonElement element = ElementFactory.toJson(value);
+					if (element != null)
 					{
-						defaultData.add(type.getKey().toString(), JsonUtil.toJson(value));
+						defaultData.add(type.getKey().toString(), element);
 					}
 				}
 			}
-			jsonObject.add("defaultDataTypes", defaultDataTypes);
-			jsonObject.add("defaultData", defaultData);
+			if (!defaultData.isEmpty())
+			{
+				jsonObject.add("defaultData", defaultData);
+			}
 		}
 	}
 
@@ -167,7 +168,7 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("maxModifiedCosts", maxModifiedCosts);
 
 		JsonArray conflicts = new JsonArray();
-		for (Enchantment otherEnchantment : RegistryAccess.registryAccess().getRegistry(RegistryKey.ENCHANTMENT))
+		for (Enchantment otherEnchantment : Enchantment.values())
 		{
 			if (enchantment.conflictsWith(otherEnchantment))
 			{
