@@ -114,7 +114,7 @@ public class BlockDataMock implements BlockData
 		Material material = Registry.MATERIAL.get(blockKey);
 		Preconditions.checkArgument(material != null, "Invalid material: " + blockKey);
 		Map<String, Object> data = new HashMap<>();
-		BlockDataMock blockData = BlockDataMock.mock(material);
+		BlockDataMock blockData = BlockDataMockFactory.mock(material);
 		if (blockDataString == null)
 		{
 			blockData.data.clear();
@@ -519,7 +519,7 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(previousData, "previousData should not be null");
 
-		BlockDataMock blockDataMock = BlockDataMock.mock(material);
+		BlockDataMock blockDataMock = BlockDataMockFactory.mock(material);
 		blockDataMock.data.putAll(previousData);
 		return blockDataMock;
 	}
