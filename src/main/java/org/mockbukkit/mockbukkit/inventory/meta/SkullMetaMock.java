@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
-
 import lombok.EqualsAndHashCode;
+
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;

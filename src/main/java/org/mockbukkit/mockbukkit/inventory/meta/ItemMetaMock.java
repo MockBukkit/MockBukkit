@@ -469,7 +469,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
-	public @NotNull Set<com.destroystokyo.paper.Namespaced> getDestroyableKeys()
+	public @NotNull Set<Namespaced> getDestroyableKeys()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -477,7 +477,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
-	public void setDestroyableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
+	public void setDestroyableKeys(@NotNull Collection<Namespaced> collection)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -485,7 +485,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
-	public @NotNull Set<com.destroystokyo.paper.Namespaced> getPlaceableKeys()
+	public @NotNull Set<Namespaced> getPlaceableKeys()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -493,7 +493,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
-	public void setPlaceableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
+	public void setPlaceableKeys(@NotNull Collection<Namespaced> collection)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -864,7 +864,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 
 		var useRemainderData = NbtParser.parseMap(args.get(USE_REMAINDER), Function.identity());
-		useRemainder = (useRemainderData == null ? null : ItemStack.deserialize(useRemainderData));
+		useRemainder = (useRemainderData == null ? null : Bukkit.getUnsafe().deserializeStack(useRemainderData));
 	}
 
 	@Override

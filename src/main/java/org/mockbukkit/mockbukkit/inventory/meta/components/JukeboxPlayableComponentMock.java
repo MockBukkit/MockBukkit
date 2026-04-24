@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
+import lombok.EqualsAndHashCode;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.JukeboxSong;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.serialization.SerializableAs;

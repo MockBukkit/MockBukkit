@@ -1,8 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
+import lombok.EqualsAndHashCode;
 
 import com.google.common.base.Preconditions;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.Color;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.CustomModelDataComponent;

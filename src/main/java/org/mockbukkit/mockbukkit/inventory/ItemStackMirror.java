@@ -9,6 +9,7 @@ import io.papermc.paper.persistence.PersistentDataContainerView;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.UndefinedNullability;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
@@ -175,7 +176,7 @@ public final class ItemStackMirror extends ItemStack
 
 	public static @NotNull ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		return ItemStack.deserialize(args);
+		return Bukkit.getUnsafe().deserializeStack(args);
 	}
 
 	public static @NotNull ItemStack deserializeBytes(byte @NotNull [] bytes)

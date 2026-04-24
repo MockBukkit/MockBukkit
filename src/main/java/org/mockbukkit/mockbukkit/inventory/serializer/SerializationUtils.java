@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ public class SerializationUtils
 	{
 		Preconditions.checkArgument(args instanceof Map<?, ?>, "Args is not a Map");
 
-		return ItemStack.deserialize((Map<String, Object>) args);
+		return Bukkit.getUnsafe().deserializeStack((Map<String, Object>) args);
 	}
 
 	public static List<ItemStack> deserialize(@NotNull Collection<Object> args)

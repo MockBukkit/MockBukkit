@@ -1,8 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
+import lombok.EqualsAndHashCode;
 
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
-import lombok.EqualsAndHashCode;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;

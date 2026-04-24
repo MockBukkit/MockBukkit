@@ -98,6 +98,8 @@ public class UnsafeValuesMock implements UnsafeValues
 					"26.1"
 			);
 	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
+	private static final String FIELD_COUNT = "count";
+	private static final String FIELD_AMOUNT = "amount";
 
 	private static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
 		toMinecraft(ItemMetaMock.DAMAGE),
@@ -154,6 +156,7 @@ public class UnsafeValuesMock implements UnsafeValues
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
+	@SuppressWarnings("removal")
 	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
 		return LegacyComponentSerializer.legacySection();
@@ -354,10 +357,9 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack itemStack)
+	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack item)
 	{
-		Map<String, Object> map = serializeStack(itemStack);
-		return SerializationUtils.createDefaultBuilder().toJsonTree(map).getAsJsonObject();
+		return SerializationUtils.createDefaultBuilder().toJsonTree(serializeStack(item)).getAsJsonObject();
 	}
 
 	@Override
@@ -640,12 +642,12 @@ public class UnsafeValuesMock implements UnsafeValues
 
 		Map<String, Object> result = new HashMap<>();
 		result.put("id", itemStack.getType().getKey().asString());
-		result.put("count", itemStack.getAmount());
+		result.put(FIELD_COUNT, itemStack.getAmount());
 		result.put("DataVersion", this.getDataVersion());
 		result.put(PROPERTY_SCHEMA_VERSION, 1);
 
 		Map<String, Object> serializedMeta = itemStack.getItemMeta().serialize();
-		if (serializedMeta.size() > 1) // Ignore the meta-type
+		if (!serializedMeta.isEmpty())
 		{
 			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
 			{
@@ -671,33 +673,16 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
-		@SuppressWarnings({ "java:S1481", "java:S1854" })
 		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
-		final String id = (String) args.get("id");
-		final int amount = ((Number) args.get("count")).intValue();
-		final Map<String, Object> components = (Map<String, Object>) args.get("components");
+		final String id = (String) args.getOrDefault("id", args.get("type"));
+		final int amount = parseAmount(args);
+		Map<String, Object> components = (Map<String, Object>) args.getOrDefault("components", args.get("meta"));
 		if (components != null)
 		{
-			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
-			{
-				String originalName = entry.getValue();
-				String newName = entry.getKey();
-
-				// Skip the key if it does not exist
-				if (!components.containsKey(originalName))
-				{
-					continue;
-				}
-
-				var value = components.get(originalName);
-				components.put(newName, value);
-				components.remove(originalName);
-			}
+			renameLegacyComponents(components);
 		}
 
-		NamespacedKey key = NamespacedKey.fromString(id);
-		Material material = Registry.MATERIAL.get(key);
-
+		Material material = resolveMaterial(id, args);
 		if (material == null || material.isAir())
 		{
 			return ItemStackMock.empty();
@@ -706,19 +691,72 @@ public class UnsafeValuesMock implements UnsafeValues
 		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
 		if (components != null)
 		{
-			try
-			{
-				@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
-				Preconditions.checkArgument(meta != null, "Invalid item meta type");
-				itemstack.setItemMeta(meta);
-			}
-			catch (Exception e)
-			{
-				throw new IllegalArgumentException("Error while deserializing item meta", e);
-			}
+			applyMeta(itemstack, components);
 		}
 
 		return itemstack;
+	}
+
+	private int parseAmount(Map<String, Object> args)
+	{
+		if (args.containsKey(FIELD_COUNT))
+		{
+			return ((Number) args.get(FIELD_COUNT)).intValue();
+		}
+		if (args.containsKey(FIELD_AMOUNT))
+		{
+			return ((Number) args.get(FIELD_AMOUNT)).intValue();
+		}
+		return 1;
+	}
+
+	private void renameLegacyComponents(Map<String, Object> components)
+	{
+		for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+		{
+			String originalName = entry.getValue();
+			String newName = entry.getKey();
+
+			if (components.containsKey(originalName))
+			{
+				var value = components.get(originalName);
+				components.put(newName, value);
+				components.remove(originalName);
+			}
+		}
+	}
+
+	private Material resolveMaterial(String id, Map<String, Object> args)
+	{
+		NamespacedKey key = id != null ? NamespacedKey.fromString(id) : null;
+		Material material = null;
+		if (key != null)
+		{
+			material = Registry.MATERIAL.get(key);
+			if (material == null)
+			{
+				material = Material.getMaterial(key.getKey().toUpperCase(Locale.ROOT));
+			}
+		}
+		if (material == null && args.get("type") != null)
+		{
+			material = Material.getMaterial((String) args.get("type"));
+		}
+		return material;
+	}
+
+	private void applyMeta(ItemStack itemstack, Map<String, Object> components)
+	{
+		try
+		{
+			@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
+			Preconditions.checkArgument(meta != null, "Invalid item meta type");
+			itemstack.setItemMeta(meta);
+		}
+		catch (Exception e)
+		{
+			throw new IllegalArgumentException("Error while deserializing item meta", e);
+		}
 	}
 
 	@Override

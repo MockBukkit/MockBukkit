@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.destroystokyo.paper.MaterialTags;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -295,7 +296,7 @@ public class BlockStateMetaMock extends ItemMetaMock implements BlockStateMeta
 			int slot = (int) slotData.getOrDefault("slot", -1);
 			if (slot >= 0)
 			{
-				inventory.setItem(slot, ItemStack.deserialize((Map<String, Object>) slotData.get("item")));
+				inventory.setItem(slot, Bukkit.getUnsafe().deserializeStack((Map<String, Object>) slotData.get("item")));
 			}
 		}
 	}
