@@ -141,7 +141,6 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public @NotNull Typed<InventoryView, InventoryViewBuilder<InventoryView>> typed()
 	{
 		return typed(InventoryView.class);
@@ -149,12 +148,12 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public @NotNull <V extends InventoryView, B extends InventoryViewBuilder<V>> Typed<V, B> typed(@NotNull Class<V> viewClass) throws IllegalArgumentException
+	public @NotNull <V2 extends InventoryView, B2 extends InventoryViewBuilder<V2>> Typed<V2, B2> typed(@NotNull Class<V2> viewClass) throws IllegalArgumentException
 	{
 		Preconditions.checkArgument(viewClass.isAssignableFrom(menuTypeData.viewClass()),
 				"Cannot type MenuType %s to view class %s (expected %s)",
 				key, viewClass.getSimpleName(), menuTypeData.viewClass().getSimpleName());
-		return (Typed<V, B>) this;
+		return (Typed<V2, B2>) this;
 	}
 
 	@Override
@@ -187,7 +186,7 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	 * @return The created {@link MenuTypeMock}.
 	 */
 	@ApiStatus.Internal
-	public static MenuTypeMock<?, ?> from(JsonObject jsonObject)
+	public static MenuTypeMock<InventoryView, InventoryViewBuilder<InventoryView>> from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		MenuTypeData data = MENU_TYPE_DATA.get(key.toString());

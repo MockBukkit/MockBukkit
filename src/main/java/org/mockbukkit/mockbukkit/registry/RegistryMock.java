@@ -9,7 +9,9 @@ import io.papermc.paper.registry.tag.Tag;
 import io.papermc.paper.registry.tag.TagKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.Registry;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.GameRuleMock;
@@ -49,6 +51,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimPatternMock;
 import org.mockbukkit.mockbukkit.map.MapCursorTypeMock;
 import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
+import org.bukkit.potion.PotionType;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
@@ -58,6 +61,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -179,9 +183,9 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private Class<?> getEnumClassForRegistryKey(RegistryKey<?> key)
 	{
 		Map<RegistryKey<?>, Class<?>> enumMap = new HashMap<>();
-		enumMap.put(RegistryKey.ENTITY_TYPE, org.bukkit.entity.EntityType.class);
-		enumMap.put(RegistryKey.PARTICLE_TYPE, org.bukkit.Particle.class);
-		enumMap.put(RegistryKey.POTION, org.bukkit.potion.PotionType.class);
+		enumMap.put(RegistryKey.ENTITY_TYPE, EntityType.class);
+		enumMap.put(RegistryKey.PARTICLE_TYPE, Particle.class);
+		enumMap.put(RegistryKey.POTION, PotionType.class);
 
 		return enumMap.get(key);
 	}
@@ -226,7 +230,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		T value = this.keyedMap.get(namespacedKey);
 		if (value == null)
 		{
-			throw new java.util.NoSuchElementException("No value for " + namespacedKey + " in " + this);
+			throw new NoSuchElementException("No value for " + namespacedKey + " in " + this);
 		}
 		return value;
 	}
