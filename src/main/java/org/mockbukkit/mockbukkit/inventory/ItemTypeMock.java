@@ -127,39 +127,8 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 			}
 		}
 
-		Set<DataComponentType> defaultDataTypes = new HashSet<>();
-		if (jsonObject.has("defaultDataTypes"))
-		{
-			JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
-			for (JsonElement element : typesArray)
-			{
-				NamespacedKey typeKey = NamespacedKey.fromString(element.getAsString());
-				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
-				if (type != null)
-				{
-					defaultDataTypes.add(type);
-				}
-			}
-		}
-
-		Map<DataComponentType, Object> defaultData = new HashMap<>();
-		if (jsonObject.has("defaultData"))
-		{
-			JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
-			for (Map.Entry<String, JsonElement> entry : dataObject.entrySet())
-			{
-				NamespacedKey typeKey = NamespacedKey.fromString(entry.getKey());
-				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
-				if (type != null)
-				{
-					Object value = deserializeComponent(type, entry.getValue());
-					if (value != null)
-					{
-						defaultData.put(type, value);
-					}
-				}
-			}
-		}
+		Set<DataComponentType> defaultDataTypes = parseDefaultDataTypes(jsonObject);
+		Map<DataComponentType, Object> defaultData = parseDefaultData(jsonObject);
 
 		return new ItemTypeMock<>(
 				key,
@@ -179,6 +148,48 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 				defaultDataTypes,
 				defaultData
 		);
+	}
+
+	private static @NotNull Set<DataComponentType> parseDefaultDataTypes(@NotNull JsonObject jsonObject)
+	{
+		Set<DataComponentType> defaultDataTypes = new HashSet<>();
+		if (jsonObject.has("defaultDataTypes"))
+		{
+			JsonArray typesArray = jsonObject.getAsJsonArray("defaultDataTypes");
+			for (JsonElement element : typesArray)
+			{
+				NamespacedKey typeKey = NamespacedKey.fromString(element.getAsString());
+				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
+				if (type != null)
+				{
+					defaultDataTypes.add(type);
+				}
+			}
+		}
+		return defaultDataTypes;
+	}
+
+	private static @NotNull Map<DataComponentType, Object> parseDefaultData(@NotNull JsonObject jsonObject)
+	{
+		Map<DataComponentType, Object> defaultData = new HashMap<>();
+		if (jsonObject.has("defaultData"))
+		{
+			JsonObject dataObject = jsonObject.getAsJsonObject("defaultData");
+			for (Map.Entry<String, JsonElement> entry : dataObject.entrySet())
+			{
+				NamespacedKey typeKey = NamespacedKey.fromString(entry.getKey());
+				DataComponentType type = Registry.DATA_COMPONENT_TYPE.get(typeKey);
+				if (type != null)
+				{
+					Object value = deserializeComponent(type, entry.getValue());
+					if (value != null)
+					{
+						defaultData.put(type, value);
+					}
+				}
+			}
+		}
+		return defaultData;
 	}
 
 	private static @Nullable Object deserializeComponent(DataComponentType type, JsonElement json)
