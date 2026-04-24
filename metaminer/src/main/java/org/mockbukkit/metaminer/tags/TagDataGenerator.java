@@ -53,9 +53,10 @@ public class TagDataGenerator implements DataGenerator
 	private void writeTag(Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
-		org.bukkit.Tag<Keyed> bukkitTag = (org.bukkit.Tag<Keyed>) tag;
-		Set<Keyed> values = bukkitTag.getValues();
-		values.forEach(tagValue -> jsonArray.add(tagValue.getKey().toString()));
+		for (Keyed value : tag)
+		{
+			jsonArray.add(value.getKey().toString());
+		}
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("replace", new JsonPrimitive(false));
 		rootObject.add("values", jsonArray);
