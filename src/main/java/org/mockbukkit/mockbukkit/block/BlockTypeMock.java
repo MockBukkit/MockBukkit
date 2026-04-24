@@ -17,6 +17,7 @@ import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.function.Consumer;
 
 public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
@@ -140,7 +141,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	{
 		// TODO: This should probably enumerate all possible states.
 		// For now, we just return a collection with the default state.
-		return java.util.Collections.singleton(createBlockData());
+		return Collections.singleton(createBlockData());
 	}
 
 	@Override

@@ -3,15 +3,13 @@ package org.mockbukkit.metaminer.tags;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import org.bukkit.Bukkit;
-import org.bukkit.Fluid;
-import org.bukkit.GameEvent;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.tag.Tag;
 import org.bukkit.Keyed;
-import org.bukkit.Material;
-import org.bukkit.Tag;
-import org.bukkit.damage.DamageType;
-import org.bukkit.entity.EntityType;
+import org.bukkit.Registry;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.keyed.KeyedClassTracker;
 import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
@@ -32,11 +30,22 @@ public class TagDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		for (Map.Entry<String, Class<? extends Keyed>> tagTypeData : getTagTypeNames().entrySet())
+		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.entrySet())
 		{
-			for (Tag<? extends Keyed> tag : Bukkit.getTags(tagTypeData.getKey(), tagTypeData.getValue()))
+			RegistryKey<Keyed> registryKey = (RegistryKey<Keyed>) entry.getKey();
+			Registry<Keyed> registry = RegistryAccess.registryAccess().getRegistry(registryKey);
+			String tagType = getPlural(registryKey);
+
+			try
 			{
-				writeTag(tag, tagTypeData.getKey());
+				for (Tag<? extends Keyed> tag : registry.getTags())
+				{
+					writeTag(tag, tagType);
+				}
+			}
+			catch (UnsupportedOperationException ignored)
+			{
+				// This registry does not support tags.
 			}
 		}
 	}
@@ -44,24 +53,33 @@ public class TagDataGenerator implements DataGenerator
 	private void writeTag(Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
-		Set<? extends Keyed> values = tag.getValues();
+		org.bukkit.Tag<Keyed> bukkitTag = (org.bukkit.Tag<Keyed>) tag;
+		Set<Keyed> values = bukkitTag.getValues();
 		values.forEach(tagValue -> jsonArray.add(tagValue.getKey().toString()));
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("replace", new JsonPrimitive(false));
 		rootObject.add("values", jsonArray);
 
-		File destinationFile = new File(new File(this.dataFolder, tagTypeName), tag.getKey().getKey() + ".json");
+		File destinationFile = new File(new File(this.dataFolder, tagTypeName), tag.tagKey().key().value() + ".json");
 		JsonUtil.dump(rootObject, destinationFile);
 	}
 
-	private Map<String, Class<? extends Keyed>> getTagTypeNames()
+	private String getPlural(RegistryKey<?> key)
 	{
-		return Map.of("blocks", Material.class,
-				"items", Material.class,
-				"fluids", Fluid.class,
-				"entity_types", EntityType.class,
-				"game_events", GameEvent.class,
-				"damage_types", DamageType.class);
+		String value = key.key().value();
+		if (value.equals("entity_type"))
+		{
+			return "entity_types";
+		}
+		if (value.equals("damage_type"))
+		{
+			return "damage_types";
+		}
+		if (value.endsWith("y"))
+		{
+			return value.substring(0, value.length() - 1) + "ies";
+		}
+		return value + "s";
 	}
 
 }

@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.Namespaced;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -9,7 +8,6 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
@@ -74,9 +72,9 @@ import static java.util.Objects.nonNull;
 /**
  * Mock implementation of an {@link ItemMeta}, {@link Damageable}, and {@link Repairable}.
  */
-@SuppressWarnings("UnstableApiUsage")
+@SuppressWarnings({ "UnstableApiUsage", "deprecation" })
 @DelegateDeserialization(SerializableMeta.class)
-public class ItemMetaMock implements ItemMeta, Damageable, Repairable
+public class ItemMetaMock implements Damageable, Repairable
 {
 	public static final String ATTRIBUTE_MODIFIERS = "attribute-modifiers";
 	public static final String BLOCK_DATA = "BlockStateTag";
@@ -1216,38 +1214,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		// No use yet
 	}
 
-	@Deprecated(since = "1.20")
-	private Set<Material> legacyGetMatsFromKeys(Collection<Namespaced> names)
-	{
-		Set<Material> mats = Sets.newHashSet();
-		for (Namespaced key : names)
-		{
-			if (!(key instanceof org.bukkit.NamespacedKey))
-			{
-				continue;
-			}
-
-			Material material = Material.matchMaterial(key.toString(), false);
-			if (material != null)
-			{
-				mats.add(material);
-			}
-		}
-
-		return mats;
-	}
-
-	@Deprecated(since = "1.20")
-	private void legacyClearAndReplaceKeys(Collection<Namespaced> toUpdate, Collection<Material> beingSet)
-	{
-		if (beingSet.stream().anyMatch(Material::isLegacy))
-		{
-			throw new IllegalArgumentException("Set must not contain any legacy materials!");
-		}
-
-		toUpdate.clear();
-		toUpdate.addAll(beingSet.stream().map(Material::getKey).collect(java.util.stream.Collectors.toSet()));
-	}
 
 	@Override
 	public boolean hasMaxDamage()

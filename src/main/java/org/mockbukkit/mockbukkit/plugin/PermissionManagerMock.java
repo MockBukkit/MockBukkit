@@ -106,7 +106,7 @@ public class PermissionManagerMock implements PermissionManager
 	{
 		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(permissible, PERMISSIBLE_CANNOT_BE_NULL);
-		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
+		String name = permission.toLowerCase(Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
 		if (map != null)
@@ -124,7 +124,7 @@ public class PermissionManagerMock implements PermissionManager
 	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
 	{
 		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
-		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
+		String name = permission.toLowerCase(Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
 		if (map == null)
