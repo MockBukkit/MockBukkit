@@ -1,9 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
+import lombok.EqualsAndHashCode;
 
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -21,17 +19,47 @@ import java.util.Map;
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
-	@Getter
-	@Setter
 	private boolean invisible;
 	private boolean noBasePlate;
 	private boolean showArms;
-	@Getter
-	@Setter
 	private boolean small;
-	@Getter
-	@Setter
 	private boolean marker;
+
+	@Override
+	public boolean isInvisible()
+	{
+		return this.invisible;
+	}
+
+	@Override
+	public void setInvisible(boolean invisible)
+	{
+		this.invisible = invisible;
+	}
+
+	@Override
+	public boolean isSmall()
+	{
+		return this.small;
+	}
+
+	@Override
+	public void setSmall(boolean small)
+	{
+		this.small = small;
+	}
+
+	@Override
+	public boolean isMarker()
+	{
+		return this.marker;
+	}
+
+	@Override
+	public void setMarker(boolean marker)
+	{
+		this.marker = marker;
+	}
 
 	/**
 	 * Constructs a new {@link ArmorStandMetaMock}.

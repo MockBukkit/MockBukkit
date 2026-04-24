@@ -69,11 +69,11 @@ tasks {
 	}
 
 	compileJava {
-		options.compilerArgs.addAll(listOf("-Xlint:-deprecation", "-Xlint:-removal"))
+		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 	}
 
 	compileTestJava {
-		options.compilerArgs.addAll(listOf("-Xlint:-deprecation", "-Xlint:-removal"))
+		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 	}
 
 	javadoc {

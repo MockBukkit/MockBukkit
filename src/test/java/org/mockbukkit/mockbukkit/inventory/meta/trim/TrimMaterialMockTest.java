@@ -27,6 +27,7 @@ class TrimMaterialMockTest
 	}
 
 	@Test
+	@SuppressWarnings("removal")
 	void translationKey()
 	{
 		assertEquals("trim_material.minecraft.amethyst", TrimMaterial.AMETHYST.getTranslationKey());

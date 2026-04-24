@@ -27,6 +27,7 @@ class TrimPatternMockTest
 	}
 
 	@Test
+	@SuppressWarnings("removal")
 	void translationKey()
 	{
 		assertEquals("trim_pattern.minecraft.eye", TrimPattern.EYE.getTranslationKey());

@@ -4,8 +4,6 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.world.damagesource.CombatTracker;
-import lombok.Getter;
-import lombok.Setter;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
@@ -91,18 +89,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * NoDamage ticks
 	 */
-	@Getter
-	@Setter
 	private int noDamageTicks = 0;
-	@Getter
-	@Setter
 	private int maximumNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
-	@Getter
-	@Setter
 	private boolean gliding = false;
 	private boolean jumping = false;
 	private boolean riptiding = false;
@@ -125,20 +117,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * Set whether this entity is slumbering.
 	 */
-	@Getter
-	@Setter
 	private boolean sleeping;
 	/**
 	 * Set whether this entity is climbing.
 	 */
-	@Getter
-	@Setter
 	private boolean climbing;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
-	@Getter
-	@Setter
 	private @Nullable Player killer;
 
 	private final Map<PotionEffectType, PriorityQueue<ActivePotionEffect>> activeEffects = new HashMap<>();
@@ -1454,6 +1440,76 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setLastClimbableLocation(@Nullable Location lastClimbableLocation)
 	{
 		this.lastClimbableLocation = lastClimbableLocation;
+	}
+
+	@Override
+	public int getNoDamageTicks()
+	{
+		return this.noDamageTicks;
+	}
+
+	@Override
+	public void setNoDamageTicks(int ticks)
+	{
+		this.noDamageTicks = ticks;
+	}
+
+	@Override
+	public int getMaximumNoDamageTicks()
+	{
+		return this.maximumNoDamageTicks;
+	}
+
+	@Override
+	public void setMaximumNoDamageTicks(int ticks)
+	{
+		this.maximumNoDamageTicks = ticks;
+	}
+
+	@Override
+	public boolean isGliding()
+	{
+		return this.gliding;
+	}
+
+	@Override
+	public void setGliding(boolean gliding)
+	{
+		this.gliding = gliding;
+	}
+
+	@Override
+	public boolean isSleeping()
+	{
+		return this.sleeping;
+	}
+
+	public void setSleeping(boolean sleeping)
+	{
+		this.sleeping = sleeping;
+	}
+
+	@Override
+	public boolean isClimbing()
+	{
+		return this.climbing;
+	}
+
+	public void setClimbing(boolean climbing)
+	{
+		this.climbing = climbing;
+	}
+
+	@Override
+	public @Nullable Player getKiller()
+	{
+		return this.killer;
+	}
+
+	@Override
+	public void setKiller(@Nullable Player killer)
+	{
+		this.killer = killer;
 	}
 
 }

@@ -44,6 +44,7 @@ class DamageTypeMockTest
 	}
 
 	@Test
+	@SuppressWarnings("removal")
 	void translationKey()
 	{
 		assertEquals("arrow", DamageType.ARROW.getTranslationKey());

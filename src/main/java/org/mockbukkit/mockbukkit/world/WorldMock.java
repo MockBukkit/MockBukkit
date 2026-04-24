@@ -110,6 +110,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -2938,8 +2939,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT).replace(" ", "_"));
 	}
 
 	public void tick()

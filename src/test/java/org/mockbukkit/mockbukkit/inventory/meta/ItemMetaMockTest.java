@@ -1927,7 +1927,7 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"count\":1,\"id\":\"minecraft:diamond\",\"DataVersion\":1,\"schema_version\":1}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"type\":\"DIAMOND\",\"id\":\"minecraft:diamond\",\"amount\":1,\"count\":1,\"components\":{\"meta-type\":\"UNSPECIFIC\"},\"meta\":{\"meta-type\":\"UNSPECIFIC\"}}}";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -1987,7 +1987,7 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"jukebox-playable\":{}}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"jukebox-playable\":{}}";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -1998,7 +1998,7 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2009,7 +2009,7 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}";
 			assertJsonEqual(expected, actual);
 		}
 

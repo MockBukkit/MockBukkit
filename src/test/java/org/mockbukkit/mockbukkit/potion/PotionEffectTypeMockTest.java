@@ -127,6 +127,7 @@ class PotionEffectTypeMockTest
 	}
 
 	@Test
+	@SuppressWarnings("removal")
 	void registryValue_defaults()
 	{
 		PotionEffectType potionEffectType = PotionEffectType.ABSORPTION;

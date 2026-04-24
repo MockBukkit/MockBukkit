@@ -99,6 +99,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
 import org.mockbukkit.mockbukkit.boss.KeyedBossBarMock;
 import org.mockbukkit.mockbukkit.command.CommandMapMock;
@@ -919,15 +920,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return worlds.stream().filter(world -> world.getName().equals(worldKey.getKey())).findAny().orElse(null);
 	}
 
 	@Override
 	public @Nullable World getWorld(@NotNull Key key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return worlds.stream().filter(world -> world.getName().equals(key.value())).findAny().orElse(null);
 	}
 
 	@NotNull
@@ -2235,7 +2234,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Must provide material");
-		return BlockDataMock.mock(material);
+		return BlockDataMockFactory.mock(material);
 	}
 
 	@Override

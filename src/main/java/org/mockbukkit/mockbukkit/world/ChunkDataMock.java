@@ -11,6 +11,7 @@ import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setBlock(int x, int y, int z, @NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		this.setBlock(x, y, z, BlockDataMock.mock(material));
+		this.setBlock(x, y, z, BlockDataMockFactory.mock(material));
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setBlock(int x, int y, int z, @NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		this.setBlock(x, y, z, BlockDataMock.mock(material.getItemType()));
+		this.setBlock(x, y, z, BlockDataMockFactory.mock(material.getItemType()));
 	}
 
 	@Override
@@ -96,7 +97,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMock.mock(material));
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMockFactory.mock(material));
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMock.mock(material.getItemType()));
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMockFactory.mock(material.getItemType()));
 	}
 
 	@Override

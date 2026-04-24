@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
@@ -67,7 +67,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	public void setCarriedMaterial(@NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		carriedBlock = BlockDataMock.mock(material.getItemType());
+		carriedBlock = BlockDataMockFactory.mock(material.getItemType());
 	}
 
 	@Override

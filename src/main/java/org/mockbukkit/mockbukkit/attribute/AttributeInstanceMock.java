@@ -1,8 +1,7 @@
 package org.mockbukkit.mockbukkit.attribute;
 
 import com.google.common.base.Preconditions;
-import lombok.Getter;
-import lombok.Setter;
+import net.kyori.adventure.key.Key;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
@@ -26,15 +25,11 @@ import static org.bukkit.attribute.AttributeModifier.Operation.MULTIPLY_SCALAR_1
 public class AttributeInstanceMock implements AttributeInstance
 {
 
-	@Getter
 	private final @NotNull Attribute attribute;
-	@Getter
 	private final double defaultValue;
-	@Getter
-	@Setter
 	private double baseValue;
 	private final @NotNull List<AttributeModifier> modifiers = new ArrayList<>();
-	private final @NotNull Map<net.kyori.adventure.key.Key, AttributeModifier> modifiersByKey = new HashMap<>();
+	private final @NotNull Map<Key, AttributeModifier> modifiersByKey = new HashMap<>();
 	private final @NotNull Map<UUID, AttributeModifier> modifiersByUuid = new HashMap<>();
 
 	/**
@@ -52,20 +47,44 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
+	public @NotNull Attribute getAttribute()
+	{
+		return this.attribute;
+	}
+
+	@Override
+	public double getDefaultValue()
+	{
+		return this.defaultValue;
+	}
+
+	@Override
+	public double getBaseValue()
+	{
+		return this.baseValue;
+	}
+
+	@Override
+	public void setBaseValue(double baseValue)
+	{
+		this.baseValue = baseValue;
+	}
+
+	@Override
 	public @NotNull Collection<AttributeModifier> getModifiers()
 	{
 		return new ArrayList<>(modifiers);
 	}
 
 	@Override
-	public @Nullable AttributeModifier getModifier(@NotNull net.kyori.adventure.key.Key key)
+	public @Nullable AttributeModifier getModifier(@NotNull Key key)
 	{
 		Preconditions.checkArgument(key != null, "Key cannot be null");
 		return modifiersByKey.get(key);
 	}
 
 	@Override
-	public void removeModifier(@NotNull net.kyori.adventure.key.Key key)
+	public void removeModifier(@NotNull Key key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		AttributeModifier modifier = modifiersByKey.remove(key);

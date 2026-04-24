@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.damage;
 
-import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
@@ -14,13 +13,28 @@ import java.util.Objects;
 public class DamageSourceMock implements DamageSource
 {
 
-	@Getter
 	private final DamageType damageType;
-	@Getter
 	private final Entity causingEntity;
-	@Getter
 	private final Entity directEntity;
 	private final Location damageLocation;
+
+	@Override
+	public DamageType getDamageType()
+	{
+		return this.damageType;
+	}
+
+	@Override
+	public Entity getCausingEntity()
+	{
+		return this.causingEntity;
+	}
+
+	@Override
+	public Entity getDirectEntity()
+	{
+		return this.directEntity;
+	}
 
 	public DamageSourceMock(DamageType damageType, Entity causingEntity, Entity directEntity, Location damageLocation)
 	{

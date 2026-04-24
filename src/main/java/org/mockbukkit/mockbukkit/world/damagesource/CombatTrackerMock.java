@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.world.damagesource;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.CombatTracker;
 import io.papermc.paper.world.damagesource.FallLocationType;
-import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -29,7 +28,6 @@ import java.util.Objects;
 /**
  * Implementation of {@link CombatTracker} base on <i>PaperCombatTrackerWrapper</i>.
  */
-@RequiredArgsConstructor
 public class CombatTrackerMock implements CombatTracker
 {
 	private static final Style INTENTIONAL_GAME_DESIGN_STYLE = Style.empty()
@@ -37,6 +35,11 @@ public class CombatTrackerMock implements CombatTracker
 			.hoverEvent(HoverEvent.showText(Component.text("MCPE-28723")));
 
 	private final LivingEntityMock entity;
+
+	public CombatTrackerMock(LivingEntityMock entity)
+	{
+		this.entity = entity;
+	}
 	private final List<CombatEntry> combatEntries = new LinkedList<>();
 
 	private boolean inCombat = false;
