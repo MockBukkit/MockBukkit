@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.tag.Tag;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.mockbukkit.metaminer.DataGenerator;
@@ -37,7 +38,7 @@ public class TagDataGenerator implements DataGenerator
 
 			try
 			{
-				for (io.papermc.paper.registry.tag.Tag<? extends Keyed> tag : registry.getTags())
+				for (Tag<? extends Keyed> tag : registry.getTags())
 				{
 					writeTag(tag, tagType);
 				}
@@ -49,7 +50,7 @@ public class TagDataGenerator implements DataGenerator
 		}
 	}
 
-	private void writeTag(io.papermc.paper.registry.tag.Tag<? extends Keyed> tag, String tagTypeName) throws IOException
+	private void writeTag(Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
 		org.bukkit.Tag<Keyed> bukkitTag = (org.bukkit.Tag<Keyed>) tag;

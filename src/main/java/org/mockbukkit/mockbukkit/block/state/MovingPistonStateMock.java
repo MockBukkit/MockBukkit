@@ -3,7 +3,10 @@ package org.mockbukkit.mockbukkit.block.state;
 import io.papermc.paper.block.MovingPiston;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link MovingPiston}.
@@ -41,31 +44,31 @@ public class MovingPistonStateMock extends TileStateMock implements MovingPiston
 	}
 
 	@Override
-	public @NotNull org.bukkit.block.data.BlockData getMovingBlock()
+	public @NotNull BlockData getMovingBlock()
 	{
 		// TODO Auto-generated method stub
-		throw new org.mockbukkit.mockbukkit.exception.UnimplementedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull org.bukkit.block.BlockFace getDirection()
+	public @NotNull BlockFace getDirection()
 	{
 		// TODO Auto-generated method stub
-		throw new org.mockbukkit.mockbukkit.exception.UnimplementedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean isExtending()
 	{
 		// TODO Auto-generated method stub
-		throw new org.mockbukkit.mockbukkit.exception.UnimplementedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean isPistonHead()
 	{
 		// TODO Auto-generated method stub
-		throw new org.mockbukkit.mockbukkit.exception.UnimplementedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 }
