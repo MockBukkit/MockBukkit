@@ -9,7 +9,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
-import org.jspecify.annotations.NullMarked;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
  *
  * @param <T> The type of the tagged objects.
  */
-@NullMarked
 @SuppressWarnings("UnstableApiUsage")
 public class TagMock<T extends Keyed> implements Tag<T>, org.bukkit.Tag<T>
 {

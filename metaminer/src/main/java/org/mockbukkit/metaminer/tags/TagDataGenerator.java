@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import io.papermc.paper.registry.tag.Tag;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.mockbukkit.metaminer.DataGenerator;
@@ -38,7 +37,7 @@ public class TagDataGenerator implements DataGenerator
 
 			try
 			{
-				for (Tag<? extends Keyed> tag : registry.getTags())
+				for (io.papermc.paper.registry.tag.Tag<? extends Keyed> tag : registry.getTags())
 				{
 					writeTag(tag, tagType);
 				}
@@ -50,13 +49,10 @@ public class TagDataGenerator implements DataGenerator
 		}
 	}
 
-	private void writeTag(Tag<? extends Keyed> tag, String tagTypeName) throws IOException
+	private void writeTag(io.papermc.paper.registry.tag.Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
-		for (io.papermc.paper.registry.TypedKey<?> value : tag)
-		{
-			jsonArray.add(value.key().toString());
-		}
+		tag.values().forEach(tagValue -> jsonArray.add(tagValue.key().toString()));
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("replace", new JsonPrimitive(false));
 		rootObject.add("values", jsonArray);
@@ -67,20 +63,7 @@ public class TagDataGenerator implements DataGenerator
 
 	private String getPlural(RegistryKey<?> key)
 	{
-		String value = key.key().value();
-		if (value.equals("entity_type"))
-		{
-			return "entity_types";
-		}
-		if (value.equals("damage_type"))
-		{
-			return "damage_types";
-		}
-		if (value.endsWith("y"))
-		{
-			return value.substring(0, value.length() - 1) + "ies";
-		}
-		return value + "s";
+		return key.key().value() + "s";
 	}
 
 }
