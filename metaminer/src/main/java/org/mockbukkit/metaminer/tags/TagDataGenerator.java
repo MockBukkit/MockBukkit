@@ -15,7 +15,6 @@ import org.mockbukkit.metaminer.util.JsonUtil;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 
 public class TagDataGenerator implements DataGenerator
 {
@@ -32,6 +31,7 @@ public class TagDataGenerator implements DataGenerator
 	{
 		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.entrySet())
 		{
+			@SuppressWarnings("unchecked")
 			RegistryKey<Keyed> registryKey = (RegistryKey<Keyed>) entry.getKey();
 			Registry<Keyed> registry = RegistryAccess.registryAccess().getRegistry(registryKey);
 			String tagType = getPlural(registryKey);
@@ -53,9 +53,9 @@ public class TagDataGenerator implements DataGenerator
 	private void writeTag(Tag<? extends Keyed> tag, String tagTypeName) throws IOException
 	{
 		JsonArray jsonArray = new JsonArray();
-		for (Keyed value : tag)
+		for (io.papermc.paper.registry.TypedKey<?> value : tag)
 		{
-			jsonArray.add(value.getKey().toString());
+			jsonArray.add(value.key().toString());
 		}
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("replace", new JsonPrimitive(false));
