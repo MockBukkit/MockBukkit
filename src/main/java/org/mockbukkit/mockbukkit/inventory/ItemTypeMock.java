@@ -25,8 +25,6 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -184,9 +182,18 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 		if (json.isJsonPrimitive())
 		{
 			com.google.gson.JsonPrimitive primitive = json.getAsJsonPrimitive();
-			if (primitive.isNumber()) return primitive.getAsNumber();
-			if (primitive.isBoolean()) return primitive.getAsBoolean();
-			if (primitive.isString()) return primitive.getAsString();
+			if (primitive.isNumber())
+			{
+				return primitive.getAsNumber();
+			}
+			if (primitive.isBoolean())
+			{
+				return primitive.getAsBoolean();
+			}
+			if (primitive.isString())
+			{
+				return primitive.getAsString();
+			}
 		}
 		// Complex components should use their respective Mock deserialize method if available
 		// For now, we return the raw map if it's an object
