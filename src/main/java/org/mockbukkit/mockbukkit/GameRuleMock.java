@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit;
 
 import com.google.common.base.Defaults;
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
@@ -102,14 +103,21 @@ public class GameRuleMock<T> extends GameRule<T>
 		}
 
 		Class<T> type = (Class<T>) rawClass;
+
+		// default value
 		T defaultValue;
-		try
+		JsonElement defaultValueJson = json.getAsJsonPrimitive("defaultValue");
+		if (Integer.class.equals(type))
 		{
-			defaultValue = type.cast(json.getAsJsonPrimitive("defaultValue"));
+			defaultValue = type.cast(defaultValueJson.getAsInt());
 		}
-		catch (ClassCastException e)
+		else if (Boolean.class.equals(type))
 		{
-			throw new IllegalArgumentException(String.format("Default value in game rule %s cannot be casted to %s", key.asString(), type.getName()), e);
+			defaultValue = type.cast(defaultValueJson.getAsBoolean());
+		}
+		else
+		{
+			throw new IllegalArgumentException(String.format("Default value in game rule %s has unknown type %s", key.asString(), type.getName()));
 		}
 
 		return new GameRuleMock<>(type, key, translationKey, defaultValue);
