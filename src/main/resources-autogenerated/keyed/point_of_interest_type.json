@@ -1,0 +1,88 @@
+{
+	"values": [
+		{
+			"key": "minecraft:armorer",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:bee_nest",
+			"occupants": false
+		},
+		{
+			"key": "minecraft:beehive",
+			"occupants": false
+		},
+		{
+			"key": "minecraft:butcher",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:cartographer",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:cleric",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:farmer",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:fisherman",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:fletcher",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:home",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:leatherworker",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:librarian",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:lightning_rod",
+			"occupants": false
+		},
+		{
+			"key": "minecraft:lodestone",
+			"occupants": false
+		},
+		{
+			"key": "minecraft:mason",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:meeting",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:nether_portal",
+			"occupants": false
+		},
+		{
+			"key": "minecraft:shepherd",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:test_instance",
+			"occupants": false
+		},
+		{
+			"key": "minecraft:toolsmith",
+			"occupants": true
+		},
+		{
+			"key": "minecraft:weaponsmith",
+			"occupants": true
+		}
+	]
+}

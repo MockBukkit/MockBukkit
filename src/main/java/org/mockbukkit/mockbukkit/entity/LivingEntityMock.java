@@ -49,6 +49,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
@@ -1426,6 +1427,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @NotNull CombatTracker getCombatTracker()
 	{
 		return this.combatTracker;
+	}
+
+	@Override
+	public void kill(@NonNull DamageSource damageSource)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

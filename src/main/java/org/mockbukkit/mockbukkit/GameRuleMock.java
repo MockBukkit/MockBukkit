@@ -1,11 +1,13 @@
 package org.mockbukkit.mockbukkit;
 
+import com.google.common.base.Defaults;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 @NullMarked
@@ -16,12 +18,14 @@ public class GameRuleMock<T> extends GameRule<T>
 	private final Class<T> type;
 	private final NamespacedKey key;
 	private final String translationKey;
+	private final T defaultValue;
 
-	public GameRuleMock(Class<T> type, NamespacedKey key, String translationKey)
+	public GameRuleMock(Class<T> type, NamespacedKey key, String translationKey, T defaultValue)
 	{
 		this.type = type;
 		this.key = key;
 		this.translationKey = translationKey;
+		this.defaultValue = defaultValue;
 	}
 
 	@Override
@@ -35,6 +39,12 @@ public class GameRuleMock<T> extends GameRule<T>
 	public Class<T> getType()
 	{
 		return this.type;
+	}
+
+	@Override
+	public T getDefaultValue()
+	{
+		return this.defaultValue;
 	}
 
 	@Override
@@ -92,8 +102,17 @@ public class GameRuleMock<T> extends GameRule<T>
 		}
 
 		Class<T> type = (Class<T>) rawClass;
+		T defaultValue;
+		try
+		{
+			defaultValue = type.cast(json.getAsJsonPrimitive("defaultValue"));
+		}
+		catch (ClassCastException e)
+		{
+			throw new IllegalArgumentException(String.format("Default value in game rule %s cannot be casted to %s", key.asString(), type.getName()), e);
+		}
 
-		return new GameRuleMock<>(type, key, translationKey);
+		return new GameRuleMock<>(type, key, translationKey, defaultValue);
 	}
 
 	public static class LegacyGameRuleWrapperMock<LEGACY, MODERN> extends GameRuleMock<LEGACY>
@@ -107,7 +126,7 @@ public class GameRuleMock<T> extends GameRule<T>
 										 Function<LEGACY, MODERN> fromLegacyToModern,
 										 Function<MODERN, LEGACY> toLegacyFromModern)
 		{
-			super(typeOverride, key, translationKey);
+			super(typeOverride, key, translationKey, Objects.requireNonNull(Defaults.defaultValue(typeOverride)));
 			this.fromLegacyToModern = fromLegacyToModern;
 			this.toLegacyFromModern = toLegacyFromModern;
 		}

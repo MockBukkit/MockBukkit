@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.papermc.paper.entity.poi.PoiTypeMock;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.tag.Tag;
 import io.papermc.paper.registry.tag.TagKey;
@@ -123,6 +124,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
 		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
 		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, PigSoundVariantMock::from);
+		factoryMap.put(RegistryKey.POINT_OF_INTEREST_TYPE, PoiTypeMock::from);
 		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);

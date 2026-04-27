@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.InternalAPIBridge;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
+import io.papermc.paper.entity.poi.PoiType;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
 import net.kyori.adventure.text.Component;
@@ -41,6 +42,13 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	public DamageEffect getDamageEffect(String key)
 	{
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public PoiType.Occupancy createOccupancy(String enumNameEntry)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

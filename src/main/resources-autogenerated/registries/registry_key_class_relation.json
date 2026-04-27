@@ -28,6 +28,7 @@
 	"minecraft:particle_type": "org.bukkit.Particle",
 	"minecraft:pig_sound_variant": "org.bukkit.entity.Pig$SoundVariant",
 	"minecraft:pig_variant": "org.bukkit.entity.Pig$Variant",
+	"minecraft:point_of_interest_type": "io.papermc.paper.entity.poi.PoiType",
 	"minecraft:potion": "org.bukkit.potion.PotionType",
 	"minecraft:sound_event": "org.bukkit.Sound",
 	"minecraft:trim_material": "org.bukkit.inventory.meta.trim.TrimMaterial",
