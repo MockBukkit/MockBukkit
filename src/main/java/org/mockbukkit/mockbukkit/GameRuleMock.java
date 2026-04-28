@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import com.google.common.base.Defaults;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -8,7 +7,6 @@ import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
 
-import java.util.Objects;
 import java.util.function.Function;
 
 @NullMarked
@@ -134,7 +132,7 @@ public class GameRuleMock<T> extends GameRule<T>
 										 Function<LEGACY, MODERN> fromLegacyToModern,
 										 Function<MODERN, LEGACY> toLegacyFromModern)
 		{
-			super(typeOverride, key, translationKey, Objects.requireNonNull(Defaults.defaultValue(typeOverride)));
+			super(typeOverride, key, translationKey, getDefaultValue(typeOverride));
 			this.fromLegacyToModern = fromLegacyToModern;
 			this.toLegacyFromModern = toLegacyFromModern;
 		}
@@ -147,6 +145,22 @@ public class GameRuleMock<T> extends GameRule<T>
 		public Function<MODERN, LEGACY> getToLegacyFromModern()
 		{
 			return this.toLegacyFromModern;
+		}
+
+		public static <T> T getDefaultValue(Class<T> type)
+		{
+			if (Integer.class.equals(type))
+			{
+				return type.cast(0);
+			}
+			else if (Boolean.class.equals(type))
+			{
+				return type.cast(false);
+			}
+			else
+			{
+				throw new UnsupportedOperationException("Unknown type: " + type.getName());
+			}
 		}
 	}
 
