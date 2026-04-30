@@ -212,19 +212,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			dmg = DamageSource.builder(DamageType.GENERIC).build();
 		}
 
-		this.health = 0;
-
-		EntityDeathEvent event = new EntityDeathEvent(this, dmg, new ArrayList<>());
-		if (!event.callEvent())
-		{
-			setKiller(null);
-			this.health = event.getReviveHealth();
-			this.alive = true;
-		}
-		else
-		{
-			this.alive = false;
-		}
+		kill(dmg);
 	}
 
 	@Override
@@ -1432,7 +1420,21 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void kill(@NonNull DamageSource damageSource)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(damageSource != null, "DamageSource cannot be null");
+
+		this.health = 0;
+
+		EntityDeathEvent event = new EntityDeathEvent(this, damageSource, new ArrayList<>());
+		if (!event.callEvent())
+		{
+			setKiller(null);
+			this.health = event.getReviveHealth();
+			this.alive = true;
+		}
+		else
+		{
+			this.alive = false;
+		}
 	}
 
 	@Override
