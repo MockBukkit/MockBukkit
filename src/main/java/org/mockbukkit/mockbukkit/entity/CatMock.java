@@ -56,7 +56,7 @@ public class CatMock extends TameableAnimalMock implements Cat
 	@Override
 	public void setSoundVariant(@NotNull SoundVariant variant)
 	{
-		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.soundVariant = variant;
 	}
 

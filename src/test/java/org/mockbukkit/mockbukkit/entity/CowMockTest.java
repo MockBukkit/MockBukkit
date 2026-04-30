@@ -86,6 +86,41 @@ class CowMockTest
 	}
 
 	@Nested
+	class GetSoundVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Cow.SoundVariant.CLASSIC, cow.getSoundVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> cow.setSoundVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getCowSoundVariants")
+		void givenPossibleValues(Cow.SoundVariant variant)
+		{
+			cow.setSoundVariant(variant);
+			assertEquals(variant, cow.getSoundVariant());
+		}
+
+		public static Stream<Arguments> getCowSoundVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.COW_SOUND_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
+	}
+
+	@Nested
 	class TeamDisplayName
 	{
 		@Test
