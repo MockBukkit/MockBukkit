@@ -146,6 +146,7 @@ public class WorldMock implements World
 
 	private Environment environment = Environment.NORMAL;
 
+	private NamespacedKey key = NamespacedKey.minecraft("overworld");
 	private String name = "World";
 	private Location spawnLocation;
 	private long gameTime = 0;
@@ -244,6 +245,7 @@ public class WorldMock implements World
 	public WorldMock(@NotNull WorldCreator creator)
 	{
 		this();
+		this.key = creator.key();
 		this.name = creator.name();
 		this.worldType = creator.type();
 		this.seed = creator.seed();
@@ -2938,8 +2940,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return key;
 	}
 
 	public void tick()
