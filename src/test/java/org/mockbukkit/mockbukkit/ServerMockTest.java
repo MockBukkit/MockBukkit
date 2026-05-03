@@ -7,6 +7,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
@@ -175,6 +176,20 @@ class ServerMockTest
 		assertTrue(server.unloadWorld("test", false));
 		assertEquals(0, server.getWorlds().size());
 		assertNull(server.getWorld("test"));
+	}
+
+	@Test
+	void createWorld_WorldCreator_getWorld_NamespacedKey()
+	{
+		NamespacedKey worldKey = new NamespacedKey("test", "test");
+		WorldCreator worldCreator = WorldCreator.ofKey(worldKey);
+		World world = server.createWorld(worldCreator);
+
+		assertNotNull(world);
+		assertEquals(1, server.getWorlds().size());
+		assertEquals(worldKey, world.getKey());
+		assertEquals(world, server.getWorld(worldKey));
+		assertEquals(world, server.getWorld(Key.key("test:test")));
 	}
 
 	@Test

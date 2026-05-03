@@ -919,15 +919,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return worlds.stream().filter(world -> world.getKey().equals(worldKey)).findAny().orElse(null);
 	}
 
 	@Override
 	public @Nullable World getWorld(@NotNull Key key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return worlds.stream().filter(world -> world.key().equals(key)).findAny().orElse(null);
 	}
 
 	@NotNull
