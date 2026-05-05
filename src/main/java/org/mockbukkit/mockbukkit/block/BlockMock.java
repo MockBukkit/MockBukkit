@@ -7,6 +7,7 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -26,17 +27,18 @@ import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMockFactory;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-import org.mockbukkit.mockbukkit.tags.internal.InternalTag;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -56,7 +58,7 @@ public class BlockMock implements Block
 
 	private byte lightFromSky = 15;
 	private byte lightFromBlocks = 0;
-	private List<ItemStack> drops;
+	private @Unmodifiable List<ItemStack> drops;
 
 	/**
 	 * Creates a basic block made of air.
@@ -101,7 +103,7 @@ public class BlockMock implements Block
 		this.location = location;
 		this.state = BlockStateMockFactory.mock(this);
 		this.blockData = BlockDataMockFactory.mock(material);
-		this.drops = new ArrayList<>();
+		this.drops = Collections.emptyList();
 	}
 
 	@Override
@@ -245,14 +247,6 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	@Deprecated(since = "1.18")
-	public long getBlockKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull Location getLocation()
 	{
 		return location;
@@ -286,7 +280,7 @@ public class BlockMock implements Block
 		Preconditions.checkNotNull(type, "Type cannot be null");
 		material = type;
 		state = BlockStateMockFactory.mock(this);
-		blockData = BlockDataMock.mock(type);
+		blockData = BlockDataMockFactory.mock(type);
 	}
 
 	@Override
@@ -330,19 +324,13 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public @NotNull float getDestroySpeed(@NotNull ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull BlockState getState(boolean useSnapshot)
 	{
 		return state.getSnapshot();
 	}
 
 	@Override
+	@Deprecated(since = "1.21", forRemoval = true)
 	public boolean isValidTool(@NotNull ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
@@ -394,8 +382,7 @@ public class BlockMock implements Block
 	@Override
 	public int getBlockPower()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getBlockPower(BlockFace.SELF);
 	}
 
 	@Override
@@ -407,37 +394,25 @@ public class BlockMock implements Block
 	@Override
 	public boolean isBurnable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return material.isBurnable();
 	}
 
 	@Override
 	public boolean isSolid()
 	{
-		if (InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
-		{
-			return true;
-		}
-		else if (InternalTag.NON_SOLID_BLOCKS.isTagged(this.getType()))
-		{
-			return false;
-		}
-		throw new UnimplementedOperationException("Block type '" + this.getType() + "' has not been implemented yet");
+		return material.isSolid();
 	}
 
 	@Override
 	public boolean isCollidable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return material.isCollidable();
 	}
 
 	@Override
 	public boolean isReplaceable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return Tag.REPLACEABLE.isTagged(material);
 	}
 
 	@Override
@@ -481,24 +456,9 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public @NotNull float getDestroySpeed(@NotNull ItemStack itemStack, boolean considerEnchants)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isSuffocating()
 	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return state.isSuffocating();
 	}
 
 	@Override
@@ -523,33 +483,39 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean breakNaturally(boolean triggerEffect)
+	public boolean breakNaturally()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.breakNaturally(null);
 	}
 
 	@Override
-	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience)
+	public boolean breakNaturally(@Nullable ItemStack tool)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience, boolean forceEffect)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ItemStack item = Optional.ofNullable(tool).orElse(ItemStack.empty());
+		return this.breakNaturally(item, false);
 	}
 
 	@Override
 	public boolean breakNaturally(boolean triggerEffect, boolean dropExperience)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.breakNaturally(ItemStack.empty(), triggerEffect, dropExperience);
+	}
 
+	@Override
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience)
+	{
+		return this.breakNaturally(tool, triggerEffect, dropExperience, false);
+	}
+
+	@Override
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience, boolean forceEffect)
+	{
+		if (this.isEmpty())
+		{
+			return false;
+		}
+		this.setType(Material.AIR);
+		return true;
 	}
 
 	@Override
@@ -574,32 +540,38 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean breakNaturally()
-	{
-		if (this.isEmpty())
-		{
-			return false;
-		}
-		this.setType(Material.AIR);
-		return true;
-	}
-
-	@Override
-	public boolean breakNaturally(@Nullable ItemStack tool)
-	{
-		return this.breakNaturally();
-	}
-
-	@Override
 	public @NotNull Collection<ItemStack> getDrops()
 	{
-		return new ArrayList<>(drops);
+		return this.getDrops(null);
 	}
 
 	@Override
 	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
+		return this.getDrops(tool, null);
+	}
+
+	@Override
+	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool, @Nullable Entity entity)
+	{
 		return new ArrayList<>(drops);
+	}
+
+	/**
+	 * Sets the drops of this block.
+	 *
+	 * @param items the items for this block to drop.
+	 */
+	public void setDrops(@Nullable Collection<ItemStack> items)
+	{
+		if (items == null)
+		{
+			this.drops = Collections.emptyList();
+		}
+		else
+		{
+			this.drops = items.stream().map(ItemStack::clone).toList();
+		}
 	}
 
 	@Override
@@ -651,12 +623,6 @@ public class BlockMock implements Block
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, Entity entity)
-	{
-		return new ArrayList<>(drops);
-	}
-
 	/**
 	 * This method sets the current {@link BlockState} to the provided {@link BlockStateMock}.
 	 * <strong>Do not call this method directly, use {@link BlockState#update()} instead.</strong>
@@ -703,11 +669,6 @@ public class BlockMock implements Block
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	public void setDrops(Collection<ItemStack> items)
-	{
-		drops = new ArrayList<>(items);
 	}
 
 }

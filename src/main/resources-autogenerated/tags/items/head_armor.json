@@ -2,6 +2,7 @@
 	"replace": false,
 	"values": [
 		"minecraft:chainmail_helmet",
+		"minecraft:copper_helmet",
 		"minecraft:diamond_helmet",
 		"minecraft:golden_helmet",
 		"minecraft:iron_helmet",

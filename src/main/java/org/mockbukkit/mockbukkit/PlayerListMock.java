@@ -248,7 +248,7 @@ public class PlayerListMock
 	@NotNull
 	public synchronized OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
-		return this.offlinePlayers.toArray(new OfflinePlayer[0]);
+		return this.offlinePlayers.toArray(OfflinePlayer[]::new);
 	}
 
 	/**

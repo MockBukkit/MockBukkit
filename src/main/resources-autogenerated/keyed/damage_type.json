@@ -300,6 +300,14 @@
 			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
 			"deathMessageType": "DEFAULT",
 			"exhaustion": 0.1,
+			"key": "minecraft:spear",
+			"sound": "minecraft:entity.player.hurt",
+			"translationKey": "spear"
+		},
+		{
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"deathMessageType": "DEFAULT",
+			"exhaustion": 0.1,
 			"key": "minecraft:spit",
 			"sound": "minecraft:entity.player.hurt",
 			"translationKey": "mob"

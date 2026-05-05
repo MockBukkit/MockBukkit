@@ -649,7 +649,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenMangrovePropagule()
 		{
 			MangrovePropagule data = BlockType.MANGROVE_PROPAGULE.createBlockData();
@@ -658,7 +657,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenLeaves()
 		{
 			Leaves data = BlockType.OAK_LEAVES.createBlockData();
@@ -691,7 +689,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenNoteBlock()
 		{
 			NoteBlock data = BlockType.NOTE_BLOCK.createBlockData();
@@ -765,7 +762,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenFire()
 		{
 			Fire data = BlockType.FIRE.createBlockData();
@@ -822,7 +818,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenComparator()
 		{
 			Comparator data = BlockType.COMPARATOR.createBlockData();
@@ -831,7 +826,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDaylightDetector()
 		{
 			DaylightDetector data = BlockType.DAYLIGHT_DETECTOR.createBlockData();
@@ -889,7 +883,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenPowerable()
 		{
 			Powerable data = BlockType.STONE_PRESSURE_PLATE.createBlockData();
@@ -923,7 +916,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCake()
 		{
 			Cake data = BlockType.CAKE.createBlockData();
@@ -932,7 +924,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenMultipleFacing()
 		{
 			MultipleFacing data = BlockType.BROWN_MUSHROOM_BLOCK.createBlockData();
@@ -942,9 +933,9 @@ class BlockTypeMockTest
 
 		@Test
 		@Disabled("Not implemented yet #1088")
-		void givenChain()
+		void givenIronChain()
 		{
-			Chain data = BlockType.CHAIN.createBlockData();
+			Chain data = BlockType.IRON_CHAIN.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(Chain.class, data);
 		}
@@ -976,7 +967,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenEndPortalFrame()
 		{
 			EndPortalFrame data = BlockType.END_PORTAL_FRAME.createBlockData();
@@ -985,7 +975,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCocoa()
 		{
 			Cocoa data = BlockType.COCOA.createBlockData();
@@ -1020,7 +1009,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSkull()
 		{
 			Skull data = BlockType.SKELETON_SKULL.createBlockData();
@@ -1029,7 +1017,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWallSkull()
 		{
 			WallSkull data = BlockType.SKELETON_WALL_SKULL.createBlockData();
@@ -1078,7 +1065,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCoralWallFan()
 		{
 			CoralWallFan data = BlockType.DEAD_BRAIN_CORAL_WALL_FAN.createBlockData();
@@ -1096,7 +1082,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBubbleColumn()
 		{
 			BubbleColumn data = BlockType.BUBBLE_COLUMN.createBlockData();
@@ -1138,7 +1123,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBell()
 		{
 			Bell data = BlockType.BELL.createBlockData();
@@ -1174,7 +1158,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBeeNest()
 		{
 			Beehive data = BlockType.BEE_NEST.createBlockData();
@@ -1183,7 +1166,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBeehive()
 		{
 			Beehive data = BlockType.BEEHIVE.createBlockData();
@@ -1192,7 +1174,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRespawnAnchor()
 		{
 			RespawnAnchor data = BlockType.RESPAWN_ANCHOR.createBlockData();
@@ -1201,7 +1182,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSculkSensor()
 		{
 			SculkSensor data = BlockType.SCULK_SENSOR.createBlockData();
@@ -1210,7 +1190,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCalibratedSculkSensor()
 		{
 			CalibratedSculkSensor data = BlockType.CALIBRATED_SCULK_SENSOR.createBlockData();
@@ -1246,7 +1225,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCopperBulb()
 		{
 			CopperBulb data = BlockType.COPPER_BULB.createBlockData();
@@ -1273,7 +1251,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCaveVines()
 		{
 			CaveVines data = BlockType.CAVE_VINES.createBlockData();
@@ -1282,7 +1259,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCaveVinesPlant()
 		{
 			CaveVinesPlant data = BlockType.CAVE_VINES_PLANT.createBlockData();
@@ -1317,7 +1293,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDripleaf()
 		{
 			Dripleaf data = BlockType.BIG_DRIPLEAF_STEM.createBlockData();
@@ -1326,7 +1301,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenBigDripleaf()
 		{
 			BigDripleaf data = BlockType.BIG_DRIPLEAF.createBlockData();
@@ -1335,7 +1309,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSmallDripleaf()
 		{
 			SmallDripleaf data = BlockType.SMALL_DRIPLEAF.createBlockData();

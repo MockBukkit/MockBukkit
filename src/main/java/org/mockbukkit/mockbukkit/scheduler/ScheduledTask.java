@@ -8,10 +8,10 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 /**
@@ -23,12 +23,12 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private final int id;
 	private final Plugin plugin;
 	private final boolean isSync;
-	private volatile boolean isCancelled = false;
+	private final AtomicBoolean isCancelled = new AtomicBoolean(false);
 	private volatile long scheduledTick;
 	private volatile boolean running;
 	private final @Nullable Runnable runnable;
 	private final @Nullable Consumer<? super BukkitTask> consumer;
-	private final List<Runnable> cancelListeners = Collections.synchronizedList(new LinkedList<>());
+	private final List<Runnable> cancelListeners = new CopyOnWriteArrayList<>(); // Needed to not hold any lock when calling cancellation listeners
 	private volatile Thread thread;
 	private volatile boolean submitted = false;
 
@@ -205,14 +205,17 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	@Override
 	public boolean isCancelled()
 	{
-		return this.isCancelled;
+		return this.isCancelled.get();
 	}
 
 	@Override
 	public void cancel()
 	{
-		this.isCancelled = true;
-		this.cancelListeners.forEach(Runnable::run);
+		boolean wasCancelled = this.isCancelled.getAndSet(true);
+		if (!wasCancelled)
+		{
+			this.cancelListeners.forEach(Runnable::run);
+		}
 	}
 
 	/**
@@ -220,8 +223,9 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 *
 	 * @param callback The callback which gets executed when the task is cancelled.
 	 */
-	public void addOnCancelled(Runnable callback)
+	public void addOnCancelled(@NotNull Runnable callback)
 	{
+		Preconditions.checkNotNull(callback, "Runnable cannot be null");
 		this.cancelListeners.add(callback);
 	}
 

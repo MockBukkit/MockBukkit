@@ -22,6 +22,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -76,6 +80,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -130,6 +138,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -184,6 +196,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -238,6 +254,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -292,6 +312,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -432,6 +456,26 @@
 		},
 		"base": {
 			"choices": [
+				"minecraft:diamond_horse_armor"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_horse_armor_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_horse_armor"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
 				"minecraft:diamond_leggings"
 			],
 			"type": "material"
@@ -441,6 +485,26 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:netherite_leggings"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
+				"minecraft:diamond_nautilus_armor"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_nautilus_armor_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_nautilus_armor"
 		}
 	},
 	{
@@ -492,6 +556,26 @@
 		},
 		"base": {
 			"choices": [
+				"minecraft:diamond_spear"
+			],
+			"type": "material"
+		},
+		"copyDataComponents": true,
+		"key": "minecraft:netherite_spear_smithing",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:netherite_spear"
+		}
+	},
+	{
+		"addition": {
+			"choices": [
+				"minecraft:netherite_ingot"
+			],
+			"type": "material"
+		},
+		"base": {
+			"choices": [
 				"minecraft:diamond_sword"
 			],
 			"type": "material"
@@ -526,6 +610,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -580,6 +668,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -634,6 +726,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -688,6 +784,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -742,6 +842,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -796,6 +900,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -850,6 +958,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -904,6 +1016,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -958,6 +1074,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -1012,6 +1132,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -1066,6 +1190,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",
@@ -1120,6 +1248,10 @@
 				"minecraft:chainmail_chestplate",
 				"minecraft:chainmail_helmet",
 				"minecraft:chainmail_leggings",
+				"minecraft:copper_boots",
+				"minecraft:copper_chestplate",
+				"minecraft:copper_helmet",
+				"minecraft:copper_leggings",
 				"minecraft:diamond_boots",
 				"minecraft:diamond_chestplate",
 				"minecraft:diamond_helmet",

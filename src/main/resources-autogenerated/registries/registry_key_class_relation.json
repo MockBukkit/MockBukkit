@@ -13,6 +13,7 @@
 	"minecraft:fluid": "org.bukkit.Fluid",
 	"minecraft:frog_variant": "org.bukkit.entity.Frog$Variant",
 	"minecraft:game_event": "org.bukkit.GameEvent",
+	"minecraft:game_rule": "org.bukkit.GameRule",
 	"minecraft:instrument": "org.bukkit.MusicInstrument",
 	"minecraft:item": "org.bukkit.inventory.ItemType",
 	"minecraft:jukebox_song": "org.bukkit.JukeboxSong",
@@ -33,5 +34,6 @@
 	"minecraft:wolf_variant": "org.bukkit.entity.Wolf$Variant",
 	"minecraft:worldgen/biome": "org.bukkit.block.Biome",
 	"minecraft:worldgen/structure": "org.bukkit.generator.structure.Structure",
-	"minecraft:worldgen/structure_type": "org.bukkit.generator.structure.StructureType"
+	"minecraft:worldgen/structure_type": "org.bukkit.generator.structure.StructureType",
+	"minecraft:zombie_nautilus_variant": "org.bukkit.entity.ZombieNautilus$Variant"
 }

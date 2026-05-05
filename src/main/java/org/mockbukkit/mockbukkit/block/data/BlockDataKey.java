@@ -11,6 +11,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Brushable;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Hangable;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
@@ -24,26 +25,39 @@ import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Bell;
+import org.bukkit.block.data.type.BigDripleaf;
 import org.bukkit.block.data.type.BrewingStand;
+import org.bukkit.block.data.type.BubbleColumn;
+import org.bukkit.block.data.type.Cake;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
+import org.bukkit.block.data.type.CaveVines;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
+import org.bukkit.block.data.type.Comparator;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.CreakingHeart;
+import org.bukkit.block.data.type.DaylightDetector;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.EndPortalFrame;
 import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.Gate;
 import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
+import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.block.data.type.Repeater;
+import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.SculkSensor;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TNT;
@@ -56,6 +70,7 @@ import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.deserializer.EnumDataDeserializer;
+import org.mockbukkit.mockbukkit.block.data.deserializer.InstrumentDeserializer;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -141,14 +156,20 @@ public enum BlockDataKey
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
+	HANGING_KEY("hanging", Boolean::parseBoolean, Hangable.class::isInstance),
+	BITES("bites", Integer::parseInt, Cake.class::isInstance),
 
 	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_NORTH("north", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
 
+	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class), SculkSensor.class::isInstance),
+	ATTACHMENT("attachment", EnumDataDeserializer.of(Bell.Attachment.class), Bell.class::isInstance),
+
 	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
 	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
+	EYE("eye", Boolean::parseBoolean, EndPortalFrame.class::isInstance),
 
 	ROTATION("rotation", Integer::parseInt, Rotatable.class::isInstance),
 
@@ -178,14 +199,20 @@ public enum BlockDataKey
 
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
+	TILT("tilt", EnumDataDeserializer.of(BigDripleaf.Tilt.class), BigDripleaf.class::isInstance),
 	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
+	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
+	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
 
+	CHARGES("charges", Integer::parseInt, RespawnAnchor.class::isInstance),
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
 	MODE("mode", EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance),
+	COMPARATOR_MODE("mode", EnumDataDeserializer.of(Comparator.Mode.class), Comparator.class::isInstance),
 
 	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
 	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
+	IS_INVERTED("power", Boolean::parseBoolean, DaylightDetector.class::isInstance),
 
 	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
 	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
@@ -210,8 +237,14 @@ public enum BlockDataKey
 
 	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
 	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
-	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance);
+	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance),
+	DRAG("drag", Boolean::parseBoolean, BubbleColumn.class::isInstance),
 
+	PERSISTENT("persistent",Boolean::parseBoolean, Leaves.class::isInstance),
+	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance),
+	HONEY_LEVEL("honey_level", Integer::parseInt, Beehive.class::isInstance),
+
+	BERRIES("berries", Boolean::parseBoolean, CaveVines.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
 

@@ -12,6 +12,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.GameRuleMock;
 import org.mockbukkit.mockbukkit.art.ArtMock;
 import org.mockbukkit.mockbukkit.attribute.AttributeMock;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
@@ -21,6 +22,7 @@ import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
+import org.mockbukkit.mockbukkit.entity.ZombieNautilusMock;
 import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.ChickenVariantMock;
@@ -32,6 +34,7 @@ import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.WolfVariantMock;
 import org.mockbukkit.mockbukkit.event.GameEventMock;
+import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.fluid.FluidMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
@@ -111,6 +114,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.FLUID, FluidMock::from);
 		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
 		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
+		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
+		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 
@@ -182,9 +187,9 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	}
 
 	@Override
-	public @org.jspecify.annotations.Nullable NamespacedKey getKey(T t)
+	public @Nullable NamespacedKey getKey(T value)
 	{
-		throw new UnimplementedOperationException();
+		return value.getKey();
 	}
 
 	@Override
@@ -250,17 +255,24 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		if (keyedMap.isEmpty())
 		{
-			for (JsonElement structureJSONElement : keyedData)
+			try
 			{
-				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
-				T tObject = constructor.apply(structureJSONObject);
-				/*
-				 * putIfAbsent fixes the edge case scenario where the constructor initializes class loading of the keyed object.
-				 * During this initialization, the loadIfEmpty method might be triggered again, leading to potential duplicate
-				 * instances of each keyed object. By using putIfAbsent, we ensure that only one instance of each keyed object
-				 * is added to the map, preventing duplicates.
-				 */
-				keyedMap.putIfAbsent(tObject.getKey(), tObject);
+				for (JsonElement structureJSONElement : keyedData)
+				{
+					JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
+					T tObject = constructor.apply(structureJSONObject);
+
+					/*
+					 * putIfAbsent fixes the edge case scenario where the constructor initializes class loading of the keyed object.
+					 * During this initialization, the loadIfEmpty method might be triggered again, leading to potential duplicate
+					 * instances of each keyed object. By using putIfAbsent, we ensure that only one instance of each keyed object
+					 * is added to the map, preventing duplicates.
+					 */
+					keyedMap.putIfAbsent(tObject.getKey(), tObject);
+				}
+			} catch (ExceptionInInitializerError e)
+			{
+				throw new IncompatiblePaperVersionException(e);
 			}
 		}
 	}

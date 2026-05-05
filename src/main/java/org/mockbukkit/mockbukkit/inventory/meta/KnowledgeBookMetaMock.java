@@ -115,7 +115,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	public void setRecipes(@NotNull List<NamespacedKey> recipes)
 	{
 		this.recipes.clear();
-		this.addRecipe(recipes.toArray(new NamespacedKey[0]));
+		this.addRecipe(recipes.toArray(NamespacedKey[]::new));
 	}
 
 	/**

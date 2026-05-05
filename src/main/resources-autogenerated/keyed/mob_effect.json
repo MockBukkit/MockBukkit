@@ -10,7 +10,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MAX_ABSORPTION": {
+				"minecraft:max_absorption": {
 					"amount": 4.0,
 					"key": "minecraft:effect.absorption",
 					"name": "effect.absorption",
@@ -68,6 +68,26 @@
 			],
 			"rgb": 2039587,
 			"translationKey": "effect.minecraft.blindness"
+		},
+		{
+			"category": "BENEFICIAL",
+			"color": {
+				"alpha": 255,
+				"blue": 238,
+				"green": 255,
+				"red": 0
+			},
+			"durationModifier": 1.0,
+			"effectCategory": "BENEFICIAL",
+			"id": 40,
+			"instant": false,
+			"key": "minecraft:breath_of_the_nautilus",
+			"name": "minecraft:breath_of_the_nautilus",
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"rgb": 65518,
+			"translationKey": "effect.minecraft.breath_of_the_nautilus"
 		},
 		{
 			"category": "BENEFICIAL",
@@ -179,7 +199,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_SPEED": {
+				"minecraft:attack_speed": {
 					"amount": 0.10000000149011612,
 					"key": "minecraft:effect.haste",
 					"name": "effect.haste",
@@ -208,7 +228,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MAX_HEALTH": {
+				"minecraft:max_health": {
 					"amount": 4.0,
 					"key": "minecraft:effect.health_boost",
 					"name": "effect.health_boost",
@@ -337,7 +357,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"WAYPOINT_TRANSMIT_RANGE": {
+				"minecraft:waypoint_transmit_range": {
 					"amount": -1.0,
 					"key": "minecraft:effect.waypoint_transmit_range_hide",
 					"name": "effect.waypoint_transmit_range_hide",
@@ -366,7 +386,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"SAFE_FALL_DISTANCE": {
+				"minecraft:safe_fall_distance": {
 					"amount": 1.0,
 					"key": "minecraft:effect.jump_boost",
 					"name": "effect.jump_boost",
@@ -415,7 +435,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"LUCK": {
+				"minecraft:luck": {
 					"amount": 1.0,
 					"key": "minecraft:effect.luck",
 					"name": "effect.luck",
@@ -444,7 +464,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_SPEED": {
+				"minecraft:attack_speed": {
 					"amount": -0.10000000149011612,
 					"key": "minecraft:effect.mining_fatigue",
 					"name": "effect.mining_fatigue",
@@ -653,7 +673,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MOVEMENT_SPEED": {
+				"minecraft:movement_speed": {
 					"amount": -0.15000000596046448,
 					"key": "minecraft:effect.slowness",
 					"name": "effect.slowness",
@@ -682,7 +702,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"MOVEMENT_SPEED": {
+				"minecraft:movement_speed": {
 					"amount": 0.20000000298023224,
 					"key": "minecraft:effect.speed",
 					"name": "effect.speed",
@@ -711,7 +731,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_DAMAGE": {
+				"minecraft:attack_damage": {
 					"amount": 3.0,
 					"key": "minecraft:effect.strength",
 					"name": "effect.strength",
@@ -760,7 +780,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"LUCK": {
+				"minecraft:luck": {
 					"amount": -1.0,
 					"key": "minecraft:effect.unluck",
 					"name": "effect.unluck",
@@ -809,7 +829,7 @@
 			},
 			"durationModifier": 1.0,
 			"effectAttributes": {
-				"ATTACK_DAMAGE": {
+				"minecraft:attack_damage": {
 					"amount": -4.0,
 					"key": "minecraft:effect.weakness",
 					"name": "effect.weakness",

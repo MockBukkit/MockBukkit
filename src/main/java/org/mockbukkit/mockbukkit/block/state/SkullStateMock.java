@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.state;
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -85,6 +86,20 @@ public class SkullStateMock extends TileStateMock implements Skull
 	{
 		Preconditions.checkNotNull(location);
 		return getSnapshot().changeLocation(location);
+	}
+
+	@Override
+	public @Nullable ResolvableProfile getProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setProfile(@Nullable ResolvableProfile resolvableProfile)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

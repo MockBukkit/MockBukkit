@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
+		"minecraft:copper_shovel",
 		"minecraft:diamond_shovel",
 		"minecraft:golden_shovel",
 		"minecraft:iron_shovel",

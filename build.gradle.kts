@@ -1,8 +1,10 @@
+import java.security.MessageDigest
+
 plugins {
 	id("checkstyle")
 	id("java-library")
 	id("jacoco")
-	id("com.vanniktech.maven.publish") version "0.34.0"
+	id("com.vanniktech.maven.publish") version "0.36.0"
 	id("net.kyori.blossom") version "2.2.0"
 }
 
@@ -21,12 +23,12 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
-	api("org.jetbrains:annotations:26.0.2")
+	api("org.jetbrains:annotations:26.1.0")
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter-api:6.0.0")
-	testImplementation(platform("org.junit:junit-bom:6.0.0"))
+	implementation("org.junit.jupiter:junit-jupiter-api:6.0.3")
+	testImplementation(platform("org.junit:junit-bom:6.0.3"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
@@ -37,12 +39,12 @@ dependencies {
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.17.7")
+	implementation("net.bytebuddy:byte-buddy:1.18.8")
 
-	compileOnly("org.projectlombok:lombok:1.18.42")
-	annotationProcessor("org.projectlombok:lombok:1.18.42")
-	testCompileOnly("org.projectlombok:lombok:1.18.42")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
+	compileOnly("org.projectlombok:lombok:1.18.44")
+	annotationProcessor("org.projectlombok:lombok:1.18.44")
+	testCompileOnly("org.projectlombok:lombok:1.18.44")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.44")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -125,6 +127,21 @@ tasks {
 				from("./metaminer/run/plugins/MetaMiner")
 				into(".")
 			}
+		}
+	}
+
+	register("printPaperDetails")
+	{
+		doLast {
+			val dependency = getDependencyInformation(
+				dependencyGroup = "io.papermc.paper",
+				artifactName = "paper-api",
+				artifactVersion = project.property("paper.api.full-version").toString()
+			)
+			println("Paper version: ${project.property("paper.api.version")}")
+			println("Paper full version: ${project.property("paper.api.full-version")}")
+			println("Paper resolved version: ${dependency?.resolvedVersion}")
+			println("Paper SHA-512: ${dependency?.hash}")
 		}
 	}
 }
@@ -237,4 +254,70 @@ fun run(vararg cmd: String): String {
 	}.standardOutput.asText.get().trim()
 }
 
+/**
+ * Computes the cryptographic hash of a resolved dependency artifact within a specified Gradle configuration.
+ *
+ * This method locates the target dependency in the resolved artifacts of the given configuration,
+ * then streams the artifact file to compute its hash using the specified algorithm.
+ *
+ * @param dependencyGroup 		The group ID of the dependency (e.g., "org.jetbrains.kotlin").
+ * @param artifactName 			The name of the dependency artifact (e.g., "kotlin-stdlib").
+ * @param artifactVersion 		The version of the dependency (e.g., "1.9.0").
+ * @param hashAlgorithm 		The hashing algorithm to use (default: "SHA-512").
+ *                      		Common values include "SHA-256", "SHA-1", and "MD5".
+ * @param targetConfiguration 	The name of the Gradle configuration to resolve from (default: "compileClasspath").
+ *
+ * @return The hexadecimal string representation of the computed hash, or `null` if the artifact
+ *         could not be found or the hash computation failed.
+ */
+fun Project.getDependencyInformation(
+	dependencyGroup: String,
+	artifactName: String,
+	artifactVersion: String,
+	hashAlgorithm: String = "SHA-512",
+	targetConfiguration: String = "compileClasspath"
+): DependencyHashResult? {
+	val artifact = try {
+		configurations.getByName(targetConfiguration)
+			.resolvedConfiguration
+			.resolvedArtifacts
+			.firstOrNull {
+				val id = it.moduleVersion.id
+				id.group == dependencyGroup &&
+						id.name == artifactName &&
+						id.version == artifactVersion
+			} ?: run {
+			logger.warn("Artifact not found: $dependencyGroup:$artifactName:$artifactVersion in configuration '$targetConfiguration'")
+			return null
+		}
+	} catch (e: Exception) {
+		logger.warn("Failed to resolve configuration '$targetConfiguration': ${e.message}")
+		return null
+	}
 
+	val resolvedVersion = artifact.id.componentIdentifier.displayName
+	val hash = try {
+		val digest = MessageDigest.getInstance(hashAlgorithm)
+		artifact.file.inputStream().buffered(DEFAULT_BUFFER_SIZE).use { input ->
+			val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+			while (true) {
+				val bytesRead = input.read(buffer)
+				if (bytesRead == -1) {
+					break
+				}
+				digest.update(buffer, 0, bytesRead)
+			}
+		}
+		digest.digest().joinToString("") { "%02x".format(it) }
+	} catch (e: Exception) {
+		logger.error("Failed to compute digest for ${artifact.file.name}: ${e.message}")
+		return null
+	}
+
+	return DependencyHashResult(hash = hash, resolvedVersion = resolvedVersion)
+}
+
+data class DependencyHashResult(
+	val hash: String,
+	val resolvedVersion: String
+)

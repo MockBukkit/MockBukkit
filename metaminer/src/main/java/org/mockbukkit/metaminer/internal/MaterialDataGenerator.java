@@ -12,9 +12,13 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Cake;
 import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.CreakingHeart;
 import org.bukkit.block.data.type.Farmland;
+import org.bukkit.block.data.type.Leaves;
+import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.TurtleEgg;
 import org.jetbrains.annotations.NotNull;
@@ -156,6 +160,11 @@ public class MaterialDataGenerator implements DataGenerator
 			obj.addProperty("maxEggs", String.valueOf(turtleEgg.getMaximumEggs()));
 		}
 
+		if (data instanceof RespawnAnchor respawnAnchor)
+		{
+			obj.addProperty("maxCharges", String.valueOf(respawnAnchor.getMaximumCharges()));
+    	}
+
 		if (data instanceof ChiseledBookshelf chiseledBookshelf)
 		{
 			obj.addProperty("maxOccupiedSlots", chiseledBookshelf.getMaximumOccupiedSlots());
@@ -166,6 +175,22 @@ public class MaterialDataGenerator implements DataGenerator
 			JsonArray array = new JsonArray();
 			creakingHeart.getAxes().stream().map(Enum::name).forEach(array::add);
 			obj.add("axes", array);
+		}
+
+		if (data instanceof Leaves leaves)
+		{
+			obj.addProperty("maxDistance", leaves.getMaximumDistance());
+			obj.addProperty("minDistance", leaves.getMinimumDistance());
+		}
+
+		if (data instanceof Beehive beehive)
+		{
+			obj.addProperty("maxHoneyLevel", beehive.getMaximumHoneyLevel());
+		}
+
+		if (data instanceof Cake cake)
+		{
+			obj.addProperty("maxBites", cake.getMaximumBites());
 		}
 	}
 

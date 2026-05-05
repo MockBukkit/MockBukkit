@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.block.state;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
@@ -13,7 +14,9 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ChestInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -35,7 +38,12 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	public ChestStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.CHEST, Material.TRAPPED_CHEST);
+
+		Set<Material> possibleValues = new HashSet<>();
+		possibleValues.add(Material.CHEST);
+		possibleValues.add(Material.TRAPPED_CHEST);
+		possibleValues.addAll(Tag.COPPER_CHESTS.getValues());
+		checkType(material, possibleValues.toArray(Material[]::new));
 	}
 
 	/**
@@ -47,7 +55,12 @@ public class ChestStateMock extends ContainerStateMock implements Chest
 	protected ChestStateMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Material.CHEST, Material.TRAPPED_CHEST);
+
+		Set<Material> possibleValues = new HashSet<>();
+		possibleValues.add(Material.CHEST);
+		possibleValues.add(Material.TRAPPED_CHEST);
+		possibleValues.addAll(Tag.COPPER_CHESTS.getValues());
+		checkType(block, possibleValues.toArray(Material[]::new));
 	}
 
 	/**

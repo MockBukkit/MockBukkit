@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"minecraft:crossbow"
+		"minecraft:crossbow",
+		"minecraft:golden_spear"
 	]
 }

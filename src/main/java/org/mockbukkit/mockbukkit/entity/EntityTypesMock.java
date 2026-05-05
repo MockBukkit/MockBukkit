@@ -17,11 +17,13 @@ import org.bukkit.entity.Bogged;
 import org.bukkit.entity.Breeze;
 import org.bukkit.entity.BreezeWindCharge;
 import org.bukkit.entity.Camel;
+import org.bukkit.entity.CamelHusk;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
+import org.bukkit.entity.CopperGolem;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creaking;
 import org.bukkit.entity.Creeper;
@@ -70,14 +72,17 @@ import org.bukkit.entity.LingeringPotion;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Mannequin;
 import org.bukkit.entity.Marker;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Nautilus;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
+import org.bukkit.entity.Parched;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Pig;
@@ -131,6 +136,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zoglin;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.ZombieNautilus;
 import org.bukkit.entity.ZombieVillager;
 import org.bukkit.entity.boat.AcaciaBoat;
 import org.bukkit.entity.boat.AcaciaChestBoat;
@@ -233,6 +239,7 @@ public final class EntityTypesMock
 				.register(Breeze.class, BreezeMock.class, BreezeMock::new)
 				.register(BreezeWindCharge.class, BreezeWindChargeMock.class, BreezeWindChargeMock::new)
 				.register(Camel.class, CamelMock.class, CamelMock::new)
+				.register(CamelHusk.class, CamelHuskMock.class, CamelHuskMock::new)
 				.register(Cat.class, CatMock.class, CatMock::new)
 				.register(CaveSpider.class, CaveSpiderMock.class, CaveSpiderMock::new)
 				.register(CherryBoat.class, CherryBoatMock.class, CherryBoatMock::new)
@@ -241,6 +248,7 @@ public final class EntityTypesMock
 				.register(Chicken.class, ChickenMock.class, ChickenMock::new)
 				.register(Cod.class, CodMock.class, CodMock::new)
 				.register(CommandMinecart.class, CommandMinecartMock.class, CommandMinecartMock::new)
+				.register(CopperGolem.class, CopperGolemMock.class, CopperGolemMock::new)
 				.register(Cow.class, CowMock.class, CowMock::new)
 				.register(Creaking.class, CreakingMock.class, CreakingMock::new)
 				.register(Creeper.class, CreeperMock.class, CreeperMock::new)
@@ -293,12 +301,14 @@ public final class EntityTypesMock
 				.register(Llama.class, LlamaMock.class, LlamaMock::new)
 				.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 				.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
+				.register(Mannequin.class, MannequinMock.class, MannequinMock::new)
 				.register(MangroveBoat.class, MangroveBoatMock.class, MangroveBoatMock::new)
 				.register(MangroveChestBoat.class, MangroveChestBoatMock.class, MangroveChestBoatMock::new)
 				.register(Marker.class, MarkerMock.class, MarkerMock::new)
 				.register(Minecart.class, RideableMinecartMock.class, RideableMinecartMock::new)
 				.register(Mule.class, MuleMock.class, MuleMock::new)
 				.register(MushroomCow.class, MushroomCowMock.class, MushroomCowMock::new)
+				.register(Nautilus.class, NautilusMock.class, NautilusMock::new)
 				.register(OakBoat.class, OakBoatMock.class, OakBoatMock::new)
 				.register(OakChestBoat.class, OakChestBoatMock.class, OakChestBoatMock::new)
 				.register(Ocelot.class, OcelotMock.class, OcelotMock::new)
@@ -307,6 +317,7 @@ public final class EntityTypesMock
 				.register(PaleOakBoat.class, PaleOakBoatMock.class, PaleOakBoatMock::new)
 				.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 				.register(Panda.class, PandaMock.class, PandaMock::new)
+				.register(Parched.class, ParchedMock.class, ParchedMock::new)
 				.register(Parrot.class, ParrotMock.class, ParrotMock::new)
 				.register(Phantom.class, PhantomMock.class, PhantomMock::new)
 				.register(Pig.class, PigMock.class, PigMock::new)
@@ -365,6 +376,7 @@ public final class EntityTypesMock
 				.register(Zoglin.class, ZoglinMock.class, ZoglinMock::new)
 				.register(Zombie.class, ZombieMock.class, ZombieMock::new)
 				.register(ZombieHorse.class, ZombieHorseMock.class, ZombieHorseMock::new)
+				.register(ZombieNautilus.class, ZombieNautilusMock.class, ZombieNautilusMock::new)
 				.register(ZombieVillager.class, ZombieVillagerMock.class, ZombieVillagerMock::new);
 	}
 
@@ -406,10 +418,13 @@ public final class EntityTypesMock
 			var myConstructor = bukkitClazz.getDeclaredConstructor(ServerMock.class, UUID.class);
 			return (EntityMock) myConstructor.newInstance(server, entityUUID);
 		}
-		catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-			   InvocationTargetException e)
+		catch (NoSuchMethodException e)
 		{
-			log.warn("Couldn't find: " + e.getMessage() + " for " + bukkitClazz.getName() + ". Falling back to reflection.", e);
+			log.debug("Method with signature '{}' does not exist in '{}', falling back to reflection.", e.getMessage(), bukkitClazz.getName());
+		}
+		catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+		{
+			log.warn("Couldn't find: {} for {}. Falling back to reflection.", e.getMessage(), bukkitClazz.getName(), e);
 		}
 
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);
