@@ -161,6 +161,7 @@ public class WorldMock implements World
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
 	private final @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
 	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
+	private boolean bonusChest = false;
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
@@ -251,6 +252,7 @@ public class WorldMock implements World
 		this.seed = creator.seed();
 		this.environment = creator.environment();
 		this.generateStructures = creator.generateStructures();
+		this.bonusChest = creator.bonusChest();
 	}
 
 	/**
@@ -1635,7 +1637,7 @@ public class WorldMock implements World
 	@Override
 	public boolean hasBonusChest()
 	{
-		throw new UnimplementedOperationException();
+		return this.bonusChest;
 	}
 
 	@Override

@@ -163,7 +163,8 @@ class ServerMockTest
 				.seed(12345)
 				.type(WorldType.FLAT)
 				.environment(World.Environment.NORMAL)
-				.generateStructures(false);
+				.generateStructures(false)
+				.bonusChest(true);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -172,6 +173,7 @@ class ServerMockTest
 		assertEquals(WorldType.FLAT, world.getWorldType());
 		assertEquals(World.Environment.NORMAL, world.getEnvironment());
 		assertFalse(world.canGenerateStructures());
+		assertTrue(world.hasBonusChest());
 
 		assertTrue(server.unloadWorld("test", false));
 		assertEquals(0, server.getWorlds().size());
