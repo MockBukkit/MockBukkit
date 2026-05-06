@@ -49,6 +49,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
+import org.bukkit.util.Vector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -2896,6 +2897,149 @@ class WorldMockTest
 			world.spawnParticle(Particle.FLAME, location, 1);
 			assertEquals(2, world.getSpawnedParticles().size());
 			assertEquals(1, world.getSpawnedParticles().get(1).spawnedAtTick());
+		}
+
+	}
+
+	@Nested
+	class SpawnArrowTests
+	{
+
+		@Test
+		void spawnArrow_BasicSpawn_CreatesArrow()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 10, 20, 30);
+			Vector direction = new Vector(1, 0, 0);
+			Arrow arrow = world.spawnArrow(location, direction, 0.6f, 0);
+
+			assertNotNull(arrow);
+			assertEquals(location, arrow.getLocation());
+			assertTrue(arrow.hasBeenShot());
+		}
+
+		@Test
+		void spawnArrow_WithSpeed_SetsCorrectVelocity()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+			float speed = 0.8f;
+
+			Arrow arrow = world.spawnArrow(location, direction, speed, 0);
+
+			Vector velocity = arrow.getVelocity();
+			// Velocity should be normalized direction * speed
+			assertEquals(speed, velocity.length(), 0.001);
+		}
+
+		@Test
+		void spawnArrow_WithSpread_AppliesRandomization()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+
+			Arrow arrow1 = world.spawnArrow(location, direction, 0.5f, 0.1f);
+			Arrow arrow2 = world.spawnArrow(location, direction, 0.5f, 0.1f);
+
+			// With spread, consecutive arrows use different random values and have different velocities
+			assertNotEquals(arrow1.getVelocity(), arrow2.getVelocity());
+		}
+
+		@Test
+		void spawnArrow_WithSpectralArrowClass_CreatesSpectralArrow()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(0, 1, 0);
+
+			SpectralArrow arrow = world.spawnArrow(location, direction, 0.5f, 0, SpectralArrow.class);
+
+			assertNotNull(arrow);
+			assertInstanceOf(SpectralArrow.class, arrow);
+			assertTrue(arrow.hasBeenShot());
+		}
+
+		@Test
+		void spawnArrow_NullLocation_ThrowsException()
+		{
+			WorldMock world = new WorldMock();
+			Vector direction = new Vector(1, 0, 0);
+
+			assertThrows(NullPointerException.class, () ->
+				world.spawnArrow(null, direction, 0.5f, 0));
+		}
+
+		@Test
+		void spawnArrow_NullDirection_ThrowsException()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+
+			assertThrows(NullPointerException.class, () ->
+				world.spawnArrow(location, null, 0.5f, 0));
+		}
+
+		@Test
+		void spawnArrow_NullClass_ThrowsException()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+
+			assertThrows(NullPointerException.class, () ->
+				world.spawnArrow(location, direction, 0.5f, 0, null));
+		}
+
+		@Test
+		void spawnArrow_SpeedAboveOne_Succeeds()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+
+			Arrow arrow = world.spawnArrow(location, direction, 1.5f, 0);
+
+			assertNotNull(arrow);
+			assertEquals(1.5, arrow.getVelocity().length(), 0.001);
+		}
+
+		@Test
+		void spawnArrow_SpeedExactlyZero_Succeeds()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+
+			Arrow arrow = world.spawnArrow(location, direction, 0f, 0);
+
+			assertNotNull(arrow);
+			assertEquals(0, arrow.getVelocity().length(), 0.001);
+		}
+
+		@Test
+		void spawnArrow_SpeedExactlyOne_Succeeds()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+
+			Arrow arrow = world.spawnArrow(location, direction, 1f, 0);
+
+			assertNotNull(arrow);
+			assertEquals(1, arrow.getVelocity().length(), 0.001);
+		}
+
+		@Test
+		void spawnArrow_NegativeSpread_ThrowsException()
+		{
+			WorldMock world = new WorldMock();
+			Location location = new Location(world, 0, 0, 0);
+			Vector direction = new Vector(1, 0, 0);
+
+			assertThrows(IllegalArgumentException.class, () ->
+				world.spawnArrow(location, direction, 0.5f, -1f));
 		}
 
 	}
