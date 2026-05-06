@@ -3,7 +3,7 @@ name: Coverage check
 on:
   pull_request:
   push:
-    branches: [ v1.* ]
+    branches: [ minecraft/v* ]
 
 jobs:
   coverage:

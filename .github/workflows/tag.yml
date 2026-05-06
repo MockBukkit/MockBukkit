@@ -2,7 +2,7 @@ name: Tag
 
 on:
   push:
-    branches: [ v1.* ]
+    branches: [ minecraft/v* ]
 
 jobs:
   tag:
