@@ -94,7 +94,8 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.18",
 					"1.19",
 					"1.20",
-					"1.21"
+					"1.21",
+					"26.1"
 			);
 	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
 

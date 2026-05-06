@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
@@ -17,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class PigMock extends AnimalsMock implements Pig
 {
-
+	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean hasSaddle = false;
@@ -101,6 +102,19 @@ public class PigMock extends AnimalsMock implements Pig
 	{
 		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.variant = variant;
+	}
+
+	@Override
+	public SoundVariant getSoundVariant()
+	{
+		return this.soundVariant;
+	}
+
+	@Override
+	public void setSoundVariant(@NonNull SoundVariant variant)
+	{
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.soundVariant = variant;
 	}
 
 }

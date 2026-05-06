@@ -386,6 +386,11 @@
 			"ordinal": 92
 		},
 		{
+			"key": "minecraft:pause_mob_growth",
+			"name": "PAUSE_MOB_GROWTH",
+			"ordinal": 115
+		},
+		{
 			"key": "minecraft:poof",
 			"name": "POOF",
 			"ordinal": 0
@@ -404,6 +409,11 @@
 			"key": "minecraft:rain",
 			"name": "RAIN",
 			"ordinal": 33
+		},
+		{
+			"key": "minecraft:reset_mob_growth",
+			"name": "RESET_MOB_GROWTH",
+			"ordinal": 116
 		},
 		{
 			"key": "minecraft:reverse_portal",

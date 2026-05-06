@@ -45,7 +45,7 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 	@Override
 	public @NotNull String minecraftVersionName()
 	{
-		return BuildParameters.PAPER_API_FULL_VERSION.split("-")[0];
+		return BuildParameters.PAPER_API_VERSION;
 	}
 
 	@Override

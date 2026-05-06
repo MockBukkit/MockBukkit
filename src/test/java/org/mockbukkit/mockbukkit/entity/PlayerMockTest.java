@@ -106,6 +106,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -2389,30 +2390,9 @@ class PlayerMockTest
 
 	public static Stream<Arguments> provideInstrument()
 	{
-		return Stream.of(
-				Arguments.of(Instrument.CUSTOM_HEAD, Sound.UI_BUTTON_CLICK),
-				Arguments.of(Instrument.PIGLIN, Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN),
-				Arguments.of(Instrument.WITHER_SKELETON, Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON),
-				Arguments.of(Instrument.DRAGON, Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON),
-				Arguments.of(Instrument.CREEPER, Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER),
-				Arguments.of(Instrument.SKELETON, Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON),
-				Arguments.of(Instrument.ZOMBIE, Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE),
-				Arguments.of(Instrument.XYLOPHONE, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE),
-				Arguments.of(Instrument.BANJO, Sound.BLOCK_NOTE_BLOCK_BANJO),
-				Arguments.of(Instrument.BASS_DRUM, Sound.BLOCK_NOTE_BLOCK_BASEDRUM),
-				Arguments.of(Instrument.BASS_GUITAR, Sound.BLOCK_NOTE_BLOCK_BASS),
-				Arguments.of(Instrument.BELL, Sound.BLOCK_NOTE_BLOCK_BELL),
-				Arguments.of(Instrument.BIT, Sound.BLOCK_NOTE_BLOCK_BIT),
-				Arguments.of(Instrument.CHIME, Sound.BLOCK_NOTE_BLOCK_CHIME),
-				Arguments.of(Instrument.COW_BELL, Sound.BLOCK_NOTE_BLOCK_COW_BELL),
-				Arguments.of(Instrument.DIDGERIDOO, Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO),
-				Arguments.of(Instrument.FLUTE, Sound.BLOCK_NOTE_BLOCK_FLUTE),
-				Arguments.of(Instrument.GUITAR, Sound.BLOCK_NOTE_BLOCK_GUITAR),
-				Arguments.of(Instrument.IRON_XYLOPHONE, Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE),
-				Arguments.of(Instrument.PLING, Sound.BLOCK_NOTE_BLOCK_PLING),
-				Arguments.of(Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE),
-				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
-		);
+		return Arrays.stream(Instrument.values())
+				.filter(instrument -> instrument.getSound() != null)
+				.map(instrument -> Arguments.of(instrument, instrument.getSound()));
 	}
 
 	@Test

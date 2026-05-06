@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:coarse_dirt",
+		"minecraft:crimson_nylium",
+		"minecraft:dirt",
+		"minecraft:farmland",
+		"minecraft:grass_block",
+		"minecraft:moss_block",
+		"minecraft:mud",
+		"minecraft:muddy_mangrove_roots",
+		"minecraft:mycelium",
+		"minecraft:pale_moss_block",
+		"minecraft:podzol",
+		"minecraft:rooted_dirt",
+		"minecraft:soul_soil",
+		"minecraft:warped_nylium"
+	]
+}

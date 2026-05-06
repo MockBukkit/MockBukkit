@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.papermc.paper.entity.poi.PoiTypeMock;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.tag.Tag;
 import io.papermc.paper.registry.tag.TagKey;
@@ -24,10 +25,14 @@ import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
 import org.mockbukkit.mockbukkit.entity.ZombieNautilusMock;
 import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
+import org.mockbukkit.mockbukkit.entity.variant.CatSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatVariantMock;
+import org.mockbukkit.mockbukkit.entity.variant.ChickenSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.ChickenVariantMock;
+import org.mockbukkit.mockbukkit.entity.variant.CowSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.CowVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.FrogVariantMock;
+import org.mockbukkit.mockbukkit.entity.variant.PigSoundVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.PigVariantMock;
 import org.mockbukkit.mockbukkit.entity.variant.VillagerProfessionMock;
 import org.mockbukkit.mockbukkit.entity.variant.VillagerTypeMock;
@@ -82,6 +87,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
+		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, ChickenSoundVariantMock::from);
 		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
@@ -97,11 +103,13 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.WOLF_VARIANT, WolfVariantMock::from);
 		factoryMap.put(RegistryKey.JUKEBOX_SONG, JukeboxSongMock::from);
 		factoryMap.put(RegistryKey.CAT_VARIANT, CatVariantMock::from);
+		factoryMap.put(RegistryKey.CAT_SOUND_VARIANT, CatSoundVariantMock::from);
 		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, VillagerProfessionMock::from);
 		factoryMap.put(RegistryKey.VILLAGER_TYPE, VillagerTypeMock::from);
 		factoryMap.put(RegistryKey.FROG_VARIANT, FrogVariantMock::from);
 		factoryMap.put(RegistryKey.CHICKEN_VARIANT, ChickenVariantMock::from);
 		factoryMap.put(RegistryKey.COW_VARIANT, CowVariantMock::from);
+		factoryMap.put(RegistryKey.COW_SOUND_VARIANT, CowSoundVariantMock::from);
 		factoryMap.put(RegistryKey.PIG_VARIANT, PigVariantMock::from);
 		factoryMap.put(RegistryKey.WOLF_SOUND_VARIANT, WolfSoundVariantMock::from);
 		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
@@ -115,6 +123,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
 		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
 		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
+		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, PigSoundVariantMock::from);
+		factoryMap.put(RegistryKey.POINT_OF_INTEREST_TYPE, PoiTypeMock::from);
 		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);

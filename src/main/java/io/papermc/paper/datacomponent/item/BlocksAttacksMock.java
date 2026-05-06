@@ -3,7 +3,7 @@ package io.papermc.paper.datacomponent.item;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datacomponent.item.blocksattacks.DamageReduction;
 import io.papermc.paper.datacomponent.item.blocksattacks.ItemDamageFunction;
-import io.papermc.paper.registry.tag.TagKey;
+import io.papermc.paper.registry.set.RegistryKeySet;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.kyori.adventure.key.Key;
 import org.bukkit.damage.DamageType;
@@ -21,7 +21,7 @@ public class BlocksAttacksMock implements BlocksAttacks
 	private final float disableCooldownScale;
 	private final List<DamageReduction> damageReductions;
 	private final ItemDamageFunction itemDamage;
-	private final @Nullable TagKey<DamageType> bypassedBy;
+	private final @Nullable RegistryKeySet<DamageType> bypassedBy;
 	private final @Nullable Key blockSound;
 	private final @Nullable Key disableSound;
 
@@ -61,7 +61,7 @@ public class BlocksAttacksMock implements BlocksAttacks
 	}
 
 	@Override
-	public @Nullable TagKey<DamageType> bypassedBy()
+	public @Nullable RegistryKeySet<DamageType> bypassedBy()
 	{
 		return this.bypassedBy;
 	}
@@ -86,7 +86,7 @@ public class BlocksAttacksMock implements BlocksAttacks
 		private List<DamageReduction> damageReductions = new ObjectArrayList<>();
 		private ItemDamageFunction itemDamage = ItemDamageFunction.itemDamageFunction()
 				.threshold(1.0F).base(0.0F).factor(1.0F).build();
-		private @Nullable TagKey<DamageType> bypassedBy;
+		private @Nullable RegistryKeySet<DamageType> bypassedBy;
 		private @Nullable Key blockSound;
 		private @Nullable Key disableSound;
 
@@ -128,7 +128,7 @@ public class BlocksAttacksMock implements BlocksAttacks
 		}
 
 		@Override
-		public Builder bypassedBy(@Nullable TagKey<DamageType> bypassedBy)
+		public Builder bypassedBy(@Nullable RegistryKeySet<DamageType> bypassedBy)
 		{
 			this.bypassedBy = bypassedBy;
 			return this;

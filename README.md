@@ -3,11 +3,11 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven" />
+    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v26.1">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v26.1?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v1.21">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v1.21/javadoc.svg" />
+    <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v26.1">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v26.1/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
@@ -51,7 +51,7 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 > [!TIP]
 > Currently, the newest version available is
 >
-> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v1.21?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v1.21)
+> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v26.1?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v26.1)
 
 > Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly
 > tagged
@@ -92,7 +92,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:${paperVersion}'
+    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v26.1:${paperVersion}'
 }
 ```
 
@@ -106,7 +106,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT'
+    testImplementation 'com.github.MockBukkit:MockBukkit:v26.1-SNAPSHOT'
     testImplementation 'io.papermc.paper:paper-api:${paperVersion}'
 }
 ```
@@ -175,7 +175,7 @@ Also here you can extract the manifest version this way:
 <dependencies>
   <dependency>
     <groupId>org.mockbukkit.mockbukkit</groupId>
-    <artifactId>mockbukkit-v1.21</artifactId>
+    <artifactId>mockbukkit-v26.1</artifactId>
     <version>[version]</version>
     <scope>test</scope>
   </dependency>
@@ -210,7 +210,7 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
   <dependency>
     <groupId>com.github.MockBukkit</groupId>
     <artifactId>MockBukkit</artifactId>
-    <version>v1.21-SNAPSHOT</version>
+    <version>v26.1-SNAPSHOT</version>
     <scope>test</scope>
   </dependency>
   <dependency>
@@ -222,7 +222,7 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
 </dependencies>
 ```
 
-Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if
+Note: use `v26.1-SNAPSHOT` to test against Paper API 26.1, or any other version if
 the [branch](https://github.com/MockBukkit/MockBukkit/branches) exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them
 will be accepted.
@@ -338,6 +338,8 @@ If you want to see some projects that are using MockBukkit right now, feel free 
 - [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore)
   (75+ Unit Tests)
 - [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
+  (50+ Unit Tests)
+- [ez-plugins/EzEconomy](https://github.com/ez-plugins/EzEconomy/tree/main/ezeconomy-bukkit/src/test/java/com/skyblockexp/ezeconomy)
   (50+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 

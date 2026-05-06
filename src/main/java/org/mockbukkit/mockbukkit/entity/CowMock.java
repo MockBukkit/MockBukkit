@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
@@ -15,7 +16,7 @@ import java.util.UUID;
  */
 public class CowMock extends AbstractCowMock implements Cow
 {
-
+	private SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	/**
@@ -46,6 +47,19 @@ public class CowMock extends AbstractCowMock implements Cow
 	{
 		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.variant = variant;
+	}
+
+	@Override
+	public SoundVariant getSoundVariant()
+	{
+		return this.soundVariant;
+	}
+
+	@Override
+	public void setSoundVariant(@NonNull SoundVariant variant)
+	{
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.soundVariant = variant;
 	}
 
 }

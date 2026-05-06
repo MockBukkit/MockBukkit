@@ -7,6 +7,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
@@ -162,7 +163,8 @@ class ServerMockTest
 				.seed(12345)
 				.type(WorldType.FLAT)
 				.environment(World.Environment.NORMAL)
-				.generateStructures(false);
+				.generateStructures(false)
+				.bonusChest(true);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -171,10 +173,25 @@ class ServerMockTest
 		assertEquals(WorldType.FLAT, world.getWorldType());
 		assertEquals(World.Environment.NORMAL, world.getEnvironment());
 		assertFalse(world.canGenerateStructures());
+		assertTrue(world.hasBonusChest());
 
 		assertTrue(server.unloadWorld("test", false));
 		assertEquals(0, server.getWorlds().size());
 		assertNull(server.getWorld("test"));
+	}
+
+	@Test
+	void createWorld_WorldCreator_getWorld_NamespacedKey()
+	{
+		NamespacedKey worldKey = new NamespacedKey("test", "test");
+		WorldCreator worldCreator = WorldCreator.ofKey(worldKey);
+		World world = server.createWorld(worldCreator);
+
+		assertNotNull(world);
+		assertEquals(1, server.getWorlds().size());
+		assertEquals(worldKey, world.getKey());
+		assertEquals(world, server.getWorld(worldKey));
+		assertEquals(world, server.getWorld(Key.key("test:test")));
 	}
 
 	@Test
@@ -273,7 +290,7 @@ class ServerMockTest
 	@Test
 	void getVersion_CorrectPattern()
 	{
-		assertTrue(server.getVersion().matches("MockBukkit \\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)"));
+		assertTrue(server.getVersion().matches("MockBukkit \\(MC: \\d+\\.\\d+(?:\\.\\d+)?\\)"));
 	}
 
 	@Test
@@ -285,7 +302,7 @@ class ServerMockTest
 	@Test
 	void getBukkitVersion_CorrectPattern()
 	{
-		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-.*SNAPSHOT.*"));
+		assertTrue(server.getBukkitVersion().matches("\\d+\\.\\d+.*"));
 	}
 
 	@Test
@@ -297,7 +314,7 @@ class ServerMockTest
 	@Test
 	void getMinecraftVersion_CorrectPattern()
 	{
-		assertTrue(server.getMinecraftVersion().matches("1\\.[0-9]+(\\.[0-9]+)?"));
+		assertTrue(server.getMinecraftVersion().matches("\\d+\\.[0-9]+(\\.[0-9]+)?"));
 	}
 
 	@Test
@@ -2429,7 +2446,7 @@ class ServerMockTest
 				Iterable<Tag<Fluid>> fluidTag = server.getTags(Tag.REGISTRY_FLUIDS, Fluid.class);
 
 				assertNotNull(fluidTag);
-				assertEquals(2, Iterables.size(fluidTag));
+				assertEquals(6, Iterables.size(fluidTag));
 			}
 
 			@Test

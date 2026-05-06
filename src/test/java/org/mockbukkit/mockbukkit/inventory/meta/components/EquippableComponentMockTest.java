@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
@@ -15,6 +16,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -147,6 +149,39 @@ class EquippableComponentMockTest
 			assertNotNull(actual);
 			assertEquals("HAND", actual.get("slot"));
 			assertEquals(value, actual.get("equip-on-interact"));
+		}
+
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenCanBeSheared(boolean value)
+		{
+			component.setSlot(EquipmentSlot.HAND);
+			component.setCanBeSheared(value);
+
+			Map<String, Object> actual = component.serialize();
+
+			assertNotNull(actual);
+			assertEquals("HAND", actual.get("slot"));
+			assertEquals(value, actual.get("can-be-sheared"));
+		}
+
+		@ParameterizedTest
+		@ValueSource(strings = {
+			"minecraft:ambient.cave",
+			"ambient.underwater.exit"
+		})
+		void givenShearingSound(String key)
+		{
+			Sound sound = Registry.SOUND_EVENT.getOrThrow(Objects.requireNonNull(NamespacedKey.fromString(key)));
+
+			component.setSlot(EquipmentSlot.HAND);
+			component.setShearingSound(sound);
+
+			Map<String, Object> actual = component.serialize();
+
+			assertNotNull(actual);
+			assertEquals("HAND", actual.get("slot"));
+			assertEquals(Registry.SOUND_EVENT.getKey(sound).asString(), actual.get("shearing-sound"));
 		}
 
 	}
@@ -284,6 +319,21 @@ class EquippableComponentMockTest
 			assertEquals(value, actual.isEquipOnInteract());
 		}
 
+		@ParameterizedTest
+		@ValueSource(booleans = {true, false})
+		void givenCanBeShearedDeserialization(boolean value)
+		{
+			Map<String, Object> input = new LinkedHashMap<>();
+			input.put("slot", "HAND");
+			input.put("can-be-sheared", value);
+
+			EquippableComponentMock actual = EquippableComponentMock.deserialize(input);
+
+			assertNotNull(actual);
+			assertEquals(EquipmentSlot.HAND, actual.getSlot());
+			assertEquals(value, actual.canBeSheared());
+		}
+
 		@Test
 		void givenSerializationAndDeserialization()
 		{
@@ -296,6 +346,8 @@ class EquippableComponentMockTest
 			component.setModel(NamespacedKey.minecraft( "test_model" ));
 			component.setCameraOverlay(NamespacedKey.minecraft( "test_camera_overlay" ));
 			component.setAllowedEntities(Set.of(EntityType.BLAZE, EntityType.BEE));
+			component.setCanBeSheared(true);
+			component.setShearingSound(Sound.ITEM_SHEARS_SNIP);
 
 			EquippableComponentMock actual = EquippableComponentMock.deserialize(component.serialize());
 
@@ -309,6 +361,8 @@ class EquippableComponentMockTest
 			assertEquals(component.getModel(), actual.getModel());
 			assertEquals(component.getCameraOverlay(), actual.getCameraOverlay());
 			assertEquals(component.getAllowedEntities(), actual.getAllowedEntities());
+			assertEquals(component.canBeSheared(), actual.canBeSheared());
+			assertEquals(component.getShearingSound(), actual.getShearingSound());
 			assertEquals(component, actual); // other fields not covered by previous assertions
 		}
 

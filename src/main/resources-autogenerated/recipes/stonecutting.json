@@ -171,6 +171,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:chiseled_deepslate_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:chiseled_deepslate"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:nether_bricks"
 			],
 			"type": "material"
@@ -287,7 +301,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:chiseled_stone_bricks_stone_from_stonecutting",
+		"key": "minecraft:chiseled_stone_bricks_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:chiseled_stone_bricks"
@@ -353,11 +367,39 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobbled_deepslate_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cobbled_deepslate"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:cobbled_deepslate"
 			],
 			"type": "material"
 		},
 		"key": "minecraft:cobbled_deepslate_slab_from_cobbled_deepslate_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cobbled_deepslate_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobbled_deepslate_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:cobbled_deepslate_slab"
@@ -381,6 +423,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobbled_deepslate_stairs_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cobbled_deepslate_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:cobbled_deepslate"
 			],
 			"type": "material"
@@ -395,11 +451,53 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobbled_deepslate_wall_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cobbled_deepslate_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobblestone_from_stone_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cobblestone"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:cobblestone"
 			],
 			"type": "material"
 		},
 		"key": "minecraft:cobblestone_slab_from_cobblestone_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cobblestone_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobblestone_slab_from_stone_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:cobblestone_slab"
@@ -423,11 +521,39 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobblestone_stairs_from_stone_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cobblestone_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:cobblestone"
 			],
 			"type": "material"
 		},
 		"key": "minecraft:cobblestone_wall_from_cobblestone_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cobblestone_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cobblestone_wall_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:cobblestone_wall"
@@ -661,6 +787,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_brick_slab_from_deepslate_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:deepslate_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:polished_deepslate"
 			],
 			"type": "material"
@@ -694,6 +834,20 @@
 			"type": "material"
 		},
 		"key": "minecraft:deepslate_brick_stairs_from_deepslate_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_brick_stairs_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:deepslate_brick_stairs"
@@ -745,6 +899,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_brick_wall_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:polished_deepslate"
 			],
 			"type": "material"
@@ -764,6 +932,20 @@
 			"type": "material"
 		},
 		"key": "minecraft:deepslate_bricks_from_cobbled_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate_bricks"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_bricks_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:deepslate_bricks"
@@ -806,6 +988,20 @@
 			"type": "material"
 		},
 		"key": "minecraft:deepslate_tile_slab_from_deepslate_bricks_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:deepslate_tile_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_tile_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:deepslate_tile_slab"
@@ -871,6 +1067,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_tile_stairs_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate_tile_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:deepslate_tiles"
 			],
 			"type": "material"
@@ -927,6 +1137,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_tile_wall_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate_tile_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:deepslate_tiles"
 			],
 			"type": "material"
@@ -974,6 +1198,20 @@
 			"type": "material"
 		},
 		"key": "minecraft:deepslate_tiles_from_deepslate_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:deepslate_tiles"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:deepslate_tiles_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:deepslate_tiles"
@@ -1043,7 +1281,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:end_stone_brick_slab_from_end_stone_brick_stonecutting",
+		"key": "minecraft:end_stone_brick_slab_from_end_stone_bricks_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:end_stone_brick_slab"
@@ -1071,7 +1309,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:end_stone_brick_stairs_from_end_stone_brick_stonecutting",
+		"key": "minecraft:end_stone_brick_stairs_from_end_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:end_stone_brick_stairs"
@@ -1099,7 +1337,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:end_stone_brick_wall_from_end_stone_brick_stonecutting",
+		"key": "minecraft:end_stone_brick_wall_from_end_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:end_stone_brick_wall"
@@ -1337,7 +1575,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:mossy_stone_brick_slab_from_mossy_stone_brick_stonecutting",
+		"key": "minecraft:mossy_stone_brick_slab_from_mossy_stone_bricks_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:mossy_stone_brick_slab"
@@ -1351,7 +1589,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:mossy_stone_brick_stairs_from_mossy_stone_brick_stonecutting",
+		"key": "minecraft:mossy_stone_brick_stairs_from_mossy_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:mossy_stone_brick_stairs"
@@ -1365,7 +1603,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:mossy_stone_brick_wall_from_mossy_stone_brick_stonecutting",
+		"key": "minecraft:mossy_stone_brick_wall_from_mossy_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:mossy_stone_brick_wall"
@@ -1921,11 +2159,39 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_deepslate_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_deepslate"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:cobbled_deepslate"
 			],
 			"type": "material"
 		},
 		"key": "minecraft:polished_deepslate_slab_from_cobbled_deepslate_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:polished_deepslate_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_deepslate_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:polished_deepslate_slab"
@@ -1963,6 +2229,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_deepslate_stairs_from_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_deepslate_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:polished_deepslate"
 			],
 			"type": "material"
@@ -1982,6 +2262,20 @@
 			"type": "material"
 		},
 		"key": "minecraft:polished_deepslate_wall_from_cobbled_deepslate_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_deepslate_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:deepslate"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_deepslate_wall_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:polished_deepslate_wall"
@@ -2247,7 +2541,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:prismarine_brick_slab_from_prismarine_stonecutting",
+		"key": "minecraft:prismarine_brick_slab_from_prismarine_bricks_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:prismarine_brick_slab"
@@ -2261,7 +2555,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:prismarine_brick_stairs_from_prismarine_stonecutting",
+		"key": "minecraft:prismarine_brick_stairs_from_prismarine_bricks_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:prismarine_brick_stairs"
@@ -2387,7 +2681,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:quartz_slab_from_stonecutting",
+		"key": "minecraft:quartz_slab_from_quartz_block_stonecutting",
 		"result": {
 			"amount": 2,
 			"type": "minecraft:quartz_slab"
@@ -2751,7 +3045,7 @@
 			],
 			"type": "material"
 		},
-		"key": "minecraft:stone_brick_walls_from_stone_stonecutting",
+		"key": "minecraft:stone_brick_wall_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:stone_brick_wall"

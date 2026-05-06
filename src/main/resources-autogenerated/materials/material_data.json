@@ -68,7 +68,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -123,7 +123,7 @@
 	"minecraft:acacia_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -402,7 +402,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -457,7 +457,7 @@
 	"minecraft:bamboo_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -710,7 +710,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -765,7 +765,7 @@
 	"minecraft:birch_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -846,7 +846,7 @@
 	"minecraft:black_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:black_bed": {
@@ -994,7 +994,7 @@
 	"minecraft:blue_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:blue_bed": {
@@ -1172,7 +1172,7 @@
 	"minecraft:brown_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:brown_bed": {
@@ -1513,7 +1513,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -1568,7 +1568,7 @@
 	"minecraft:cherry_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -2114,7 +2114,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -2152,7 +2152,7 @@
 	"minecraft:crimson_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -2274,7 +2274,7 @@
 	"minecraft:cyan_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:cyan_bed": {
@@ -2453,7 +2453,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -2508,7 +2508,7 @@
 	"minecraft:dark_oak_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -3349,6 +3349,7 @@
 	"minecraft:glowstone": {},
 	"minecraft:gold_block": {},
 	"minecraft:gold_ore": {},
+	"minecraft:golden_dandelion": {},
 	"minecraft:granite": {},
 	"minecraft:granite_slab": {
 		"allowedStates": {},
@@ -3394,7 +3395,7 @@
 	"minecraft:gray_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:gray_bed": {
@@ -3493,7 +3494,7 @@
 	"minecraft:green_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:green_bed": {
@@ -3840,7 +3841,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -3895,7 +3896,7 @@
 	"minecraft:jungle_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -4094,7 +4095,7 @@
 	"minecraft:light_blue_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:light_blue_bed": {
@@ -4193,7 +4194,7 @@
 	"minecraft:light_gray_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:light_gray_bed": {
@@ -4325,7 +4326,7 @@
 	"minecraft:lime_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:lime_bed": {
@@ -4438,7 +4439,7 @@
 	"minecraft:magenta_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:magenta_bed": {
@@ -4604,7 +4605,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -4669,7 +4670,7 @@
 	"minecraft:mangrove_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -5077,7 +5078,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -5132,7 +5133,7 @@
 	"minecraft:oak_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -5237,7 +5238,7 @@
 	"minecraft:orange_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:orange_bed": {
@@ -5574,7 +5575,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -5629,7 +5630,7 @@
 	"minecraft:pale_oak_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -5750,7 +5751,7 @@
 	"minecraft:pink_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:pink_bed": {
@@ -6211,6 +6212,7 @@
 	"minecraft:potted_dead_bush": {},
 	"minecraft:potted_fern": {},
 	"minecraft:potted_flowering_azalea_bush": {},
+	"minecraft:potted_golden_dandelion": {},
 	"minecraft:potted_jungle_sapling": {},
 	"minecraft:potted_lily_of_the_valley": {},
 	"minecraft:potted_mangrove_propagule": {},
@@ -6318,7 +6320,7 @@
 	"minecraft:purple_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:purple_bed": {
@@ -6488,7 +6490,7 @@
 	"minecraft:red_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:red_bed": {
@@ -7220,7 +7222,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -7275,7 +7277,7 @@
 	"minecraft:spruce_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -7987,7 +7989,7 @@
 		"allowedStates": {},
 		"defaultStates": {
 			"attached": false,
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -8025,7 +8027,7 @@
 	"minecraft:warped_sign": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0",
+			"rotation": "8",
 			"waterlogged": false
 		}
 	},
@@ -8898,7 +8900,7 @@
 	"minecraft:white_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:white_bed": {
@@ -9034,7 +9036,7 @@
 	"minecraft:yellow_banner": {
 		"allowedStates": {},
 		"defaultStates": {
-			"rotation": "0"
+			"rotation": "8"
 		}
 	},
 	"minecraft:yellow_bed": {

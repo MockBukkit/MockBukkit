@@ -49,6 +49,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
@@ -211,19 +212,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			dmg = DamageSource.builder(DamageType.GENERIC).build();
 		}
 
-		this.health = 0;
-
-		EntityDeathEvent event = new EntityDeathEvent(this, dmg, new ArrayList<>());
-		if (!event.callEvent())
-		{
-			setKiller(null);
-			this.health = event.getReviveHealth();
-			this.alive = true;
-		}
-		else
-		{
-			this.alive = false;
-		}
+		kill(dmg);
 	}
 
 	@Override
@@ -1426,6 +1415,26 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @NotNull CombatTracker getCombatTracker()
 	{
 		return this.combatTracker;
+	}
+
+	@Override
+	public void kill(@NonNull DamageSource damageSource)
+	{
+		Preconditions.checkArgument(damageSource != null, "DamageSource cannot be null");
+
+		this.health = 0;
+
+		EntityDeathEvent event = new EntityDeathEvent(this, damageSource, new ArrayList<>());
+		if (!event.callEvent())
+		{
+			setKiller(null);
+			this.health = event.getReviveHealth();
+			this.alive = true;
+		}
+		else
+		{
+			this.alive = false;
+		}
 	}
 
 	@Override

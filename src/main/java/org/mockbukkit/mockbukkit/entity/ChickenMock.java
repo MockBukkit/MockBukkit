@@ -19,6 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChickenMock extends AnimalsMock implements Chicken
 {
 
+	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private @NotNull Variant variant = Variant.TEMPERATE;
 
 	private boolean isChickenJockey = false;
@@ -60,6 +61,19 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	{
 		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.variant = variant;
+	}
+
+	@Override
+	public SoundVariant getSoundVariant()
+	{
+		return this.soundVariant;
+	}
+
+	@Override
+	public void setSoundVariant(SoundVariant variant)
+	{
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.soundVariant = variant;
 	}
 
 	@Override
