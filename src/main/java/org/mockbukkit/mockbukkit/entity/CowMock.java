@@ -58,7 +58,7 @@ public class CowMock extends AbstractCowMock implements Cow
 	@Override
 	public void setSoundVariant(@NonNull SoundVariant variant)
 	{
-		Preconditions.checkArgument(variant != null, "variant cannot be null");
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.soundVariant = variant;
 	}
 

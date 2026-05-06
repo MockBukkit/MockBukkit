@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.data.BlockData;
-import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -46,9 +45,12 @@ public class PoiTypeMock implements PoiType
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	public NamespacedKey getKey()
 	{
 		return this.key;
 	}
+
+	public record OccupancyMock(String entryName) implements Occupancy
+	{}
 
 }
