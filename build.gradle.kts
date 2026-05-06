@@ -87,7 +87,7 @@ tasks {
 				)
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
-				links("https://jd.papermc.io/paper/${(project.property("paper.api.full-version") as String).split('-')[0]}/")
+				links("https://jd.papermc.io/paper/${(project.property("paper.api.version") as String)}")
 			}
 		}
 	}
@@ -261,12 +261,12 @@ fun run(vararg cmd: String): String {
  * This method locates the target dependency in the resolved artifacts of the given configuration,
  * then streams the artifact file to compute its hash using the specified algorithm.
  *
- * @param dependencyGroup 		The group ID of the dependency (e.g., "org.jetbrains.kotlin").
- * @param artifactName 			The name of the dependency artifact (e.g., "kotlin-stdlib").
- * @param artifactVersion 		The version of the dependency (e.g., "1.9.0").
- * @param hashAlgorithm 		The hashing algorithm to use (default: "SHA-512").
+ * @param dependencyGroup        The group ID of the dependency (e.g., "org.jetbrains.kotlin").
+ * @param artifactName            The name of the dependency artifact (e.g., "kotlin-stdlib").
+ * @param artifactVersion        The version of the dependency (e.g., "1.9.0").
+ * @param hashAlgorithm        The hashing algorithm to use (default: "SHA-512").
  *                      		Common values include "SHA-256", "SHA-1", and "MD5".
- * @param targetConfiguration 	The name of the Gradle configuration to resolve from (default: "compileClasspath").
+ * @param targetConfiguration    The name of the Gradle configuration to resolve from (default: "compileClasspath").
  *
  * @return The hexadecimal string representation of the computed hash, or `null` if the artifact
  *         could not be found or the hash computation failed.
