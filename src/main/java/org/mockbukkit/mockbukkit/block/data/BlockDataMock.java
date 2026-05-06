@@ -91,10 +91,7 @@ public class BlockDataMock implements BlockData
 			}
 			else
 			{
-				Matcher dataMatcher = BLOCK_DATA_PATTERN.matcher(data);
-				Preconditions.checkArgument(dataMatcher.find(), "String is not in a block data format: " + data);
-				String onlyFields = dataMatcher.group(2);
-				modifiedData = onlyFields == null ? blockType.getKey().toString() : blockType.getKey() + onlyFields;
+				modifiedData = blockType.getKey() + data;
 			}
 		}
 		else
@@ -495,7 +492,7 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings({ "MethodDoesntCallSuperMethod", "java:S2975", "java:S1182" })
 	public @NotNull BlockDataMock clone()
 	{
 		return new BlockDataMock(this);
