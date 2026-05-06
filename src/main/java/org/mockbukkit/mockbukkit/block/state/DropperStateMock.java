@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Dropper;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -15,9 +14,9 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Dropper}.
  *
- * @see ContainerStateMock
+ * @see LootableStateMock
  */
-public class DropperStateMock extends ContainerStateMock implements Dropper
+public class DropperStateMock extends LootableStateMock implements Dropper
 {
 
 	/**
@@ -52,41 +51,6 @@ public class DropperStateMock extends ContainerStateMock implements Dropper
 	protected DropperStateMock(@NotNull DropperStateMock state)
 	{
 		super(state);
-	}
-
-	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable lootTable, long l)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

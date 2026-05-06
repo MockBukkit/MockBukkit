@@ -16,9 +16,9 @@ import java.util.Objects;
 /**
  * Mock implementation of a {@link Lectern}.
  *
- * @see ContainerStateMock
+ * @see LootableStateMock
  */
-public class LecternStateMock extends ContainerStateMock implements Lectern
+public class LecternStateMock extends LootableStateMock implements Lectern
 {
 
 	private int currentPage;

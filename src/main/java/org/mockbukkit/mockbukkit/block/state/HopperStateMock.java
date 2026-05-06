@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.block.state;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Hopper;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
@@ -16,9 +15,9 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Hopper}.
  *
- * @see ContainerStateMock
+ * @see LootableStateMock
  */
-public class HopperStateMock extends ContainerStateMock implements Hopper
+public class HopperStateMock extends LootableStateMock implements Hopper
 {
 
 	/**
@@ -53,41 +52,6 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 	protected HopperStateMock(@NotNull HopperStateMock state)
 	{
 		super(state);
-	}
-
-	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable lootTable, long l)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

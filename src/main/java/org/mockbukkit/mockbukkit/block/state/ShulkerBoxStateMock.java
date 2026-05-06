@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -19,9 +18,9 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link ShulkerBox}.
  *
- * @see ContainerStateMock
+ * @see LootableStateMock
  */
-public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBox
+public class ShulkerBoxStateMock extends LootableStateMock implements ShulkerBox
 {
 
 	private final @Nullable DyeColor color;
@@ -90,41 +89,6 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 			case BLACK_SHULKER_BOX -> DyeColor.BLACK;
 			default -> throw new IllegalArgumentException(type.name() + " is not a Shulker Box!");
 		};
-	}
-
-	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable lootTable, long l)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
