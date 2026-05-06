@@ -17,6 +17,7 @@ import java.util.UUID;
 public class CatMock extends TameableAnimalMock implements Cat
 {
 
+	private SoundVariant soundVariant = SoundVariant.CLASSIC;
 	private Type type = Type.CALICO;
 	private DyeColor collarColour = DyeColor.RED;
 	private boolean isLyingDown = false;
@@ -44,6 +45,19 @@ public class CatMock extends TameableAnimalMock implements Cat
 	{
 		Preconditions.checkNotNull(type, "Type cannot be null");
 		this.type = type;
+	}
+
+	@Override
+	public @NotNull SoundVariant getSoundVariant()
+	{
+		return this.soundVariant;
+	}
+
+	@Override
+	public void setSoundVariant(@NotNull SoundVariant variant)
+	{
+		Preconditions.checkArgument(variant != null, "Variant cannot be null");
+		this.soundVariant = variant;
 	}
 
 	@Override

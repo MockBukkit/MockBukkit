@@ -1,6 +1,11 @@
 {
 	"values": [
 		{
+			"key": "minecraft:additional_trade_cost",
+			"persistent": false,
+			"valued": false
+		},
+		{
 			"key": "minecraft:attack_range",
 			"persistent": true,
 			"valued": true
@@ -76,12 +81,22 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:cat/sound_variant",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:cat/variant",
 			"persistent": true,
 			"valued": true
 		},
 		{
 			"key": "minecraft:charged_projectiles",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:chicken/sound_variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -102,6 +117,11 @@
 		},
 		{
 			"key": "minecraft:container_loot",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:cow/sound_variant",
 			"persistent": true,
 			"valued": true
 		},
@@ -154,6 +174,11 @@
 			"key": "minecraft:debug_stick_state",
 			"persistent": true,
 			"valued": false
+		},
+		{
+			"key": "minecraft:dye",
+			"persistent": true,
+			"valued": true
 		},
 		{
 			"key": "minecraft:dyed_color",
@@ -332,6 +357,11 @@
 		},
 		{
 			"key": "minecraft:piercing_weapon",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:pig/sound_variant",
 			"persistent": true,
 			"valued": true
 		},

@@ -10,6 +10,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
+import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
@@ -1382,6 +1383,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setDamageResistant(@Nullable Tag<DamageType> tag)
 	{
 		this.damageResistant = (tag == null ? null : tag.getKey());
+	}
+
+	@Override
+	public @Nullable RegistryKeySet<DamageType> getDamageResistantTypes()
+	{
+		// TODO: Auto generated stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setDamageResistantTypes(@Nullable RegistryKeySet<DamageType> types)
+	{
+		// TODO: Auto generated stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

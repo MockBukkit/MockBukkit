@@ -3979,6 +3979,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -4891,6 +4892,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -6450,6 +6452,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -13770,6 +13773,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -21548,6 +21552,44 @@
 			"typed": "minecraft:golden_chestplate"
 		},
 		{
+			"blockType": "minecraft:golden_dandelion",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:golden_dandelion"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:golden_dandelion",
+			"material": "minecraft:golden_dandelion",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.golden_dandelion",
+			"typed": "minecraft:golden_dandelion"
+		},
+		{
 			"burnDuration": 0,
 			"compostable": false,
 			"createItemStack": {
@@ -22433,6 +22475,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -23005,6 +23048,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -27440,6 +27484,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -28012,6 +28057,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -28777,6 +28823,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -29545,6 +29592,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -35246,6 +35294,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -37952,6 +38001,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -40894,6 +40944,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -42412,6 +42463,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -55828,6 +55880,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",
@@ -57162,6 +57215,7 @@
 			"defaultDataTypes": [
 				"minecraft:attribute_modifiers",
 				"minecraft:break_sound",
+				"minecraft:dye",
 				"minecraft:enchantments",
 				"minecraft:item_model",
 				"minecraft:item_name",

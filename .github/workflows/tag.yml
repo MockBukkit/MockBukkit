@@ -2,7 +2,7 @@ name: Tag
 
 on:
   push:
-    branches: [ v1.* ]
+    branches: [ minecraft/v* ]
 
 jobs:
   tag:
@@ -64,7 +64,7 @@ jobs:
             ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
-    uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@v1.21
+    uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@minecraft/v26
     needs: tag
     if: ${{ needs.tag.outputs.version != null }}
     with:

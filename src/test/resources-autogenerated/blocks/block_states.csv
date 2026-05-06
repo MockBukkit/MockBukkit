@@ -412,6 +412,7 @@ GLOW_LICHEN, org.bukkit.block.BlockState
 GLOWSTONE, org.bukkit.block.BlockState
 GOLD_BLOCK, org.bukkit.block.BlockState
 GOLD_ORE, org.bukkit.block.BlockState
+GOLDEN_DANDELION, org.bukkit.block.BlockState
 GRANITE, org.bukkit.block.BlockState
 GRANITE_SLAB, org.bukkit.block.BlockState
 GRANITE_STAIRS, org.bukkit.block.BlockState
@@ -780,6 +781,7 @@ POTTED_DARK_OAK_SAPLING, org.bukkit.block.BlockState
 POTTED_DEAD_BUSH, org.bukkit.block.BlockState
 POTTED_FERN, org.bukkit.block.BlockState
 POTTED_FLOWERING_AZALEA_BUSH, org.bukkit.block.BlockState
+POTTED_GOLDEN_DANDELION, org.bukkit.block.BlockState
 POTTED_JUNGLE_SAPLING, org.bukkit.block.BlockState
 POTTED_LILY_OF_THE_VALLEY, org.bukkit.block.BlockState
 POTTED_MANGROVE_PROPAGULE, org.bukkit.block.BlockState

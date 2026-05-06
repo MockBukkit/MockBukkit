@@ -1,5 +1,5 @@
 codecov:
-  branch: "v1.21"
+  branch: "minecraft/v26"
 
 github_checks: true
 
@@ -12,7 +12,7 @@ component_management:
       - type: project # in this case every component that doesn't have a status defined will have a project type one
         target: auto
         branches:
-          - "!v1.21"
+          - "!minecraft/v26"
   individual_components:
     - component_id: entities  # this is an identifier that should not be changed
       name: entities  # this is a display name, and can be changed freely

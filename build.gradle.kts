@@ -152,6 +152,7 @@ sourceSets {
 			javaSources {
 				property("mockBukkitVersion", getFullVersion())
 				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+				property("paperApiVersion", project.property("paper.api.version").toString())
 				property("buildTime", System.currentTimeMillis().toString())
 				property("branch", run("git", "rev-parse", "--abbrev-ref", "HEAD"))
 				property("commit", run("git", "rev-parse", "HEAD"))

@@ -1,16 +1,29 @@
 {
 	"replace": false,
 	"values": [
+		"minecraft:acacia_fence_gate",
 		"minecraft:attached_melon_stem",
 		"minecraft:attached_pumpkin_stem",
+		"minecraft:bamboo_fence_gate",
 		"minecraft:beetroots",
+		"minecraft:birch_fence_gate",
 		"minecraft:carrots",
+		"minecraft:cherry_fence_gate",
+		"minecraft:crimson_fence_gate",
+		"minecraft:dark_oak_fence_gate",
+		"minecraft:jungle_fence_gate",
+		"minecraft:mangrove_fence_gate",
 		"minecraft:melon_stem",
+		"minecraft:moving_piston",
+		"minecraft:oak_fence_gate",
+		"minecraft:pale_oak_fence_gate",
 		"minecraft:pitcher_crop",
 		"minecraft:potatoes",
 		"minecraft:pumpkin_stem",
+		"minecraft:spruce_fence_gate",
 		"minecraft:torchflower",
 		"minecraft:torchflower_crop",
+		"minecraft:warped_fence_gate",
 		"minecraft:wheat"
 	]
 }

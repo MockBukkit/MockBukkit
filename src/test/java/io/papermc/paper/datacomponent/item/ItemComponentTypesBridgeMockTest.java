@@ -5,7 +5,6 @@ import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.TypedKey;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import io.papermc.paper.registry.set.RegistrySet;
-import io.papermc.paper.registry.tag.TagKey;
 import io.papermc.paper.text.Filtered;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.util.TriState;
@@ -271,7 +270,10 @@ class ItemComponentTypesBridgeMockTest
 		@Test
 		void givenDamageResistantType()
 		{
-			TagKey<@NonNull DamageType> type = TagKey.create(RegistryKey.DAMAGE_TYPE, DamageType.ARROW.key());
+			RegistryKeySet<@NonNull DamageType> type = RegistrySet.keySet(
+					RegistryKey.DAMAGE_TYPE,
+					TypedKey.create(RegistryKey.DAMAGE_TYPE, DamageType.ARROW.key())
+			);
 
 			DamageResistant actual = bridge.damageResistant(type);
 

@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
@@ -16,12 +17,14 @@ public class GameRuleMock<T> extends GameRule<T>
 	private final Class<T> type;
 	private final NamespacedKey key;
 	private final String translationKey;
+	private final T defaultValue;
 
-	public GameRuleMock(Class<T> type, NamespacedKey key, String translationKey)
+	public GameRuleMock(Class<T> type, NamespacedKey key, String translationKey, T defaultValue)
 	{
 		this.type = type;
 		this.key = key;
 		this.translationKey = translationKey;
+		this.defaultValue = defaultValue;
 	}
 
 	@Override
@@ -35,6 +38,12 @@ public class GameRuleMock<T> extends GameRule<T>
 	public Class<T> getType()
 	{
 		return this.type;
+	}
+
+	@Override
+	public T getDefaultValue()
+	{
+		return this.defaultValue;
 	}
 
 	@Override
@@ -93,7 +102,23 @@ public class GameRuleMock<T> extends GameRule<T>
 
 		Class<T> type = (Class<T>) rawClass;
 
-		return new GameRuleMock<>(type, key, translationKey);
+		// default value
+		T defaultValue;
+		JsonElement defaultValueJson = json.getAsJsonPrimitive("defaultValue");
+		if (Integer.class.equals(type))
+		{
+			defaultValue = type.cast(defaultValueJson.getAsInt());
+		}
+		else if (Boolean.class.equals(type))
+		{
+			defaultValue = type.cast(defaultValueJson.getAsBoolean());
+		}
+		else
+		{
+			throw new IllegalArgumentException(String.format("Default value in game rule %s has unknown type %s", key.asString(), type.getName()));
+		}
+
+		return new GameRuleMock<>(type, key, translationKey, defaultValue);
 	}
 
 	public static class LegacyGameRuleWrapperMock<LEGACY, MODERN> extends GameRuleMock<LEGACY>
@@ -107,7 +132,7 @@ public class GameRuleMock<T> extends GameRule<T>
 										 Function<LEGACY, MODERN> fromLegacyToModern,
 										 Function<MODERN, LEGACY> toLegacyFromModern)
 		{
-			super(typeOverride, key, translationKey);
+			super(typeOverride, key, translationKey, getDefaultValue(typeOverride));
 			this.fromLegacyToModern = fromLegacyToModern;
 			this.toLegacyFromModern = toLegacyFromModern;
 		}
@@ -120,6 +145,22 @@ public class GameRuleMock<T> extends GameRule<T>
 		public Function<MODERN, LEGACY> getToLegacyFromModern()
 		{
 			return this.toLegacyFromModern;
+		}
+
+		public static <T> T getDefaultValue(Class<T> type)
+		{
+			if (Integer.class.equals(type))
+			{
+				return type.cast(0);
+			}
+			else if (Boolean.class.equals(type))
+			{
+				return type.cast(false);
+			}
+			else
+			{
+				throw new UnsupportedOperationException("Unknown type: " + type.getName());
+			}
 		}
 	}
 

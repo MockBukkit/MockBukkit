@@ -3,7 +3,6 @@ package io.papermc.paper.datacomponent.item;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.set.RegistryKeySet;
-import io.papermc.paper.registry.tag.TagKey;
 import io.papermc.paper.text.Filtered;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.util.TriState;
@@ -243,7 +242,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	}
 
 	@Override
-	public DamageResistant damageResistant(TagKey<DamageType> types)
+	public DamageResistant damageResistant(RegistryKeySet<DamageType> types)
 	{
 		Preconditions.checkNotNull(types);
 		return new DamageResistantMock(types);

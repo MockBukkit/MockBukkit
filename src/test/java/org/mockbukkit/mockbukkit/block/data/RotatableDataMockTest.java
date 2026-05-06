@@ -32,7 +32,7 @@ class RotatableDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertEquals(BlockFace.SOUTH, rotatable.getRotation());
+			assertEquals(BlockFace.NORTH, rotatable.getRotation());
 		}
 
 		@ParameterizedTest

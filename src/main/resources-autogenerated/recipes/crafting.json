@@ -981,16 +981,6 @@
 	},
 	{
 		"category": "MISC",
-		"group": "",
-		"key": "minecraft:armor_dye",
-		"result": {
-			"amount": 0,
-			"type": "minecraft:air"
-		},
-		"type": "complex"
-	},
-	{
-		"category": "MISC",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -1868,16 +1858,6 @@
 			"def"
 		],
 		"type": "shaped"
-	},
-	{
-		"category": "MISC",
-		"group": "",
-		"key": "minecraft:banner_duplicate",
-		"result": {
-			"amount": 0,
-			"type": "minecraft:air"
-		},
-		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -3003,6 +2983,16 @@
 	},
 	{
 		"category": "MISC",
+		"group": "",
+		"key": "minecraft:black_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
+	},
+	{
+		"category": "MISC",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -3917,6 +3907,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:blue_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -5436,6 +5436,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:brown_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -11146,6 +11156,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:cyan_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -18789,6 +18809,77 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:dandelion"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:gold_nugget"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:golden_dandelion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:golden_dandelion"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -19306,6 +19397,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:gray_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -20002,6 +20103,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:green_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -23090,6 +23201,16 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"group": "dyed_armor",
+		"key": "minecraft:leather_boots_dyed",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:leather_boots"
+		},
+		"type": "complex"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -23155,6 +23276,16 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"group": "dyed_armor",
+		"key": "minecraft:leather_chestplate_dyed",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:leather_chestplate"
+		},
+		"type": "complex"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -23199,6 +23330,16 @@
 			"def"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "dyed_armor",
+		"key": "minecraft:leather_helmet_dyed",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:leather_helmet"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -23260,6 +23401,16 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"group": "dyed_armor",
+		"key": "minecraft:leather_horse_armor_dyed",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:leather_horse_armor"
+		},
+		"type": "complex"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -23317,6 +23468,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "dyed_armor",
+		"key": "minecraft:leather_leggings_dyed",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:leather_leggings"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "REDSTONE",
@@ -23495,6 +23656,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:light_blue_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -24191,6 +24362,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:light_gray_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -25015,6 +25196,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:lime_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -25854,6 +26045,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:magenta_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -27362,83 +27563,34 @@
 	{
 		"category": "MISC",
 		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:filled_map"
+			],
+			"type": "material"
+		},
 		"key": "minecraft:map_cloning",
+		"material": {
+			"choices": [
+				"minecraft:map"
+			],
+			"type": "material"
+		},
+		"result": {
+			"amount": 1,
+			"type": "minecraft:filled_map"
+		},
+		"type": "transmute"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:map_extending",
 		"result": {
 			"amount": 0,
 			"type": "minecraft:air"
 		},
 		"type": "complex"
-	},
-	{
-		"category": "MISC",
-		"choiceMap": {
-			"a": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"b": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"c": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"d": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"e": {
-				"choices": [
-					"minecraft:filled_map"
-				],
-				"type": "material"
-			},
-			"f": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"g": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"h": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			},
-			"i": {
-				"choices": [
-					"minecraft:paper"
-				],
-				"type": "material"
-			}
-		},
-		"group": "",
-		"key": "minecraft:map_extending",
-		"result": {
-			"amount": 1,
-			"type": "minecraft:map"
-		},
-		"shape": [
-			"abc",
-			"def",
-			"ghi"
-		],
-		"type": "shaped"
 	},
 	{
 		"category": "BUILDING",
@@ -28290,6 +28442,36 @@
 			"type": "minecraft:music_disc_5"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "EQUIPMENT",
+		"choiceMap": {
+			"b": {
+				"choices": [
+					"minecraft:copper_nugget",
+					"minecraft:gold_nugget",
+					"minecraft:iron_nugget"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:paper"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:name_tag",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:name_tag"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -29743,6 +29925,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:orange_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -31601,6 +31793,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:pink_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -34078,6 +34280,16 @@
 	},
 	{
 		"category": "MISC",
+		"group": "",
+		"key": "minecraft:purple_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
+	},
+	{
+		"category": "MISC",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -35680,6 +35892,16 @@
 			"ghi"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"group": "",
+		"key": "minecraft:red_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
 	},
 	{
 		"category": "MISC",
@@ -41524,6 +41746,42 @@
 			},
 			{
 				"choices": [
+					"minecraft:golden_dandelion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "suspicious_stew",
+		"key": "minecraft:suspicious_stew_from_golden_dandelion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:suspicious_stew"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:bowl"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:brown_mushroom"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:red_mushroom"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
 					"minecraft:lily_of_the_valley"
 				],
 				"type": "material"
@@ -42031,8 +42289,8 @@
 		"group": "",
 		"key": "minecraft:tipped_arrow",
 		"result": {
-			"amount": 0,
-			"type": "minecraft:air"
+			"amount": 8,
+			"type": "minecraft:tipped_arrow"
 		},
 		"type": "complex"
 	},
@@ -46144,6 +46402,16 @@
 	},
 	{
 		"category": "MISC",
+		"group": "",
+		"key": "minecraft:white_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
+	},
+	{
+		"category": "MISC",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -46956,6 +47224,16 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"group": "dyed_armor",
+		"key": "minecraft:wolf_armor_dyed",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:wolf_armor"
+		},
+		"type": "complex"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -47418,6 +47696,16 @@
 	},
 	{
 		"category": "MISC",
+		"group": "",
+		"key": "minecraft:yellow_banner_duplicate",
+		"result": {
+			"amount": 0,
+			"type": "minecraft:air"
+		},
+		"type": "complex"
+	},
+	{
+		"category": "MISC",
 		"choiceMap": {
 			"a": {
 				"choices": [
@@ -47668,6 +47956,24 @@
 		],
 		"group": "yellow_dye",
 		"key": "minecraft:yellow_dye_from_dandelion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_dye"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:golden_dandelion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "yellow_dye",
+		"key": "minecraft:yellow_dye_from_golden_dandelion",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:yellow_dye"

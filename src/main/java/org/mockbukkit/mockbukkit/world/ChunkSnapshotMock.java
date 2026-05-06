@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.world;
 
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.key.Key;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -66,6 +67,13 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	public String getWorldName()
 	{
 		return this.worldName;
+	}
+
+	@Override
+	public @NotNull Key getWorldKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull

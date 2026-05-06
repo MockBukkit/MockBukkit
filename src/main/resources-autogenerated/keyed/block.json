@@ -8723,6 +8723,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 0.0,
+			"burnable": true,
+			"collision": false,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:golden_dandelion",
+			"key": "minecraft:golden_dandelion",
+			"material": "minecraft:golden_dandelion",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.golden_dandelion",
+			"typed": "minecraft:golden_dandelion"
+		},
+		{
+			"air": false,
 			"blastResistance": 6.0,
 			"burnable": false,
 			"collision": true,
@@ -16416,6 +16437,26 @@
 			"solid": false,
 			"translationKey": "block.minecraft.potted_flowering_azalea_bush",
 			"typed": "minecraft:potted_flowering_azalea_bush"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": true,
+			"key": "minecraft:potted_golden_dandelion",
+			"material": "minecraft:potted_golden_dandelion",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.potted_golden_dandelion",
+			"typed": "minecraft:potted_golden_dandelion"
 		},
 		{
 			"air": false,

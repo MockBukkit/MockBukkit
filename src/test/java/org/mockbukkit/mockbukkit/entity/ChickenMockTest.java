@@ -146,4 +146,39 @@ class ChickenMockTest
 
 	}
 
+	@Nested
+	class GetSoundVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Chicken.SoundVariant.CLASSIC, chicken.getSoundVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> chicken.setSoundVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getChickenSoundVariants")
+		void givenPossibleValues(Chicken.SoundVariant variant)
+		{
+			chicken.setSoundVariant(variant);
+			assertEquals(variant, chicken.getSoundVariant());
+		}
+
+		public static Stream<Arguments> getChickenSoundVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.CHICKEN_SOUND_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
+	}
+
 }

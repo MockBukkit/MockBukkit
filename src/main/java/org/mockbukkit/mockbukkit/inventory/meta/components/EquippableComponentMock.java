@@ -41,32 +41,38 @@ public class EquippableComponentMock implements EquippableComponent
 	private @Nullable NamespacedKey cameraOverlay;
 	private @Nullable Set<EntityType> allowedEntities;
 	private @Nullable Sound sound;
+	private @Nullable Sound shearingSound;
 
 	private EquipmentSlot equipmentSlot;
 	private boolean isDispensable;
 	private boolean isSwappable;
 	private boolean isDamageOnHurt;
 	private boolean isEquipOnInteract;
+	private boolean isShearable;
 
 	private EquippableComponentMock(@Nullable NamespacedKey model,
 								   @Nullable NamespacedKey cameraOverlay,
 								   @Nullable Set<EntityType> allowedEntities,
 								   @Nullable Sound sound,
+								   @Nullable Sound shearingSound,
 								   EquipmentSlot equipmentSlot,
 								   boolean isDispensable,
 								   boolean isSwappable,
 								   boolean isDamageOnHurt,
-								   boolean isEquipOnInteract)
+								   boolean isEquipOnInteract,
+								   boolean isShearable)
 	{
 		this.model = model;
 		this.cameraOverlay = cameraOverlay;
 		this.allowedEntities = allowedEntities != null ? Set.copyOf(allowedEntities) : null;
 		this.sound = sound;
+		this.shearingSound = shearingSound;
 		this.equipmentSlot = equipmentSlot;
 		this.isDispensable = isDispensable;
 		this.isSwappable = isSwappable;
 		this.isDamageOnHurt = isDamageOnHurt;
 		this.isEquipOnInteract = isEquipOnInteract;
+		this.isShearable = isShearable;
 	}
 
 	@Override
@@ -197,6 +203,30 @@ public class EquippableComponentMock implements EquippableComponent
 	}
 
 	@Override
+	public boolean canBeSheared()
+	{
+		return this.isShearable;
+	}
+
+	@Override
+	public void setCanBeSheared(boolean sheared)
+	{
+		this.isShearable = sheared;
+	}
+
+	@Override
+	public @Nullable Sound getShearingSound()
+	{
+		return this.shearingSound;
+	}
+
+	@Override
+	public void setShearingSound(@Nullable Sound sound)
+	{
+		this.shearingSound = sound;
+	}
+
+	@Override
 	public Map<String, Object> serialize()
 	{
 		Map<String, Object> result = new LinkedHashMap<>();
@@ -223,6 +253,11 @@ public class EquippableComponentMock implements EquippableComponent
 		result.put("swappable", this.isSwappable());
 		result.put("damage-on-hurt", this.isDamageOnHurt());
 		result.put("equip-on-interact", this.isEquipOnInteract());
+		result.put("can-be-sheared", this.canBeSheared());
+
+		Optional.ofNullable(this.getShearingSound()).ifPresent(s ->
+				result.put("shearing-sound", Registry.SOUND_EVENT.getKeyOrThrow(s).toString()));
+
 		return result;
 	}
 
@@ -236,6 +271,14 @@ public class EquippableComponentMock implements EquippableComponent
 			NamespacedKey soundKey = NamespacedKey.fromString(equipSoundKey);
 			Preconditions.checkNotNull(soundKey, "The sound key `equip-sound` is not valid!");
 			equipSound = Registry.SOUNDS.get(soundKey);
+		}
+		Sound shearingSound = null;
+		String shearingSoundKey = SerializableMeta.getString(map, "shearing-sound", true);
+		if (shearingSoundKey != null)
+		{
+			NamespacedKey soundKey = NamespacedKey.fromString(shearingSoundKey);
+			Preconditions.checkNotNull(soundKey, "The sound key `shearing-sound` is not valid!");
+			shearingSound = Registry.SOUNDS.get(soundKey);
 		}
 
 		String model = SerializableMeta.getString(map, "model", true);
@@ -256,10 +299,12 @@ public class EquippableComponentMock implements EquippableComponent
 		Boolean swappable = SerializableMeta.getObject(Boolean.class, map, "swappable", true);
 		Boolean damageOnHurt = SerializableMeta.getObject(Boolean.class, map, "damage-on-hurt", true);
 		Boolean equipOnInteract = SerializableMeta.getObject(Boolean.class, map, "equip-on-interact", true);
+		Boolean canBeSheared = SerializableMeta.getObject(Boolean.class, map, "can-be-sheared", true);
 
 		return EquippableComponentMock.builder()
 				.equipmentSlot(slot)
 				.sound(equipSound != null ? equipSound : Sound.ITEM_ARMOR_EQUIP_GENERIC)
+				.shearingSound(shearingSound)
 				.model(Optional.ofNullable(model).map(NamespacedKey::fromString).orElse(null))
 				.cameraOverlay(Optional.ofNullable(cameraOverlay).map(NamespacedKey::fromString).orElse(null))
 				.allowedEntities(allowedEntities)
@@ -267,6 +312,7 @@ public class EquippableComponentMock implements EquippableComponent
 				.isSwappable(swappable != null ? swappable : true)
 				.isDamageOnHurt(damageOnHurt != null ? damageOnHurt : true)
 				.isEquipOnInteract(equipOnInteract != null ? equipOnInteract : false)
+				.isShearable(canBeSheared != null ? canBeSheared : false)
 				.build();
 	}
 

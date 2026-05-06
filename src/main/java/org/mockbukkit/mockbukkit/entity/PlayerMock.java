@@ -1069,7 +1069,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		PlayerKickEvent event =
 				new PlayerKickEvent(this,
 						Component.text("Plugin"),
-						message == null ? net.kyori.adventure.text.Component.empty() : message,
+						message == null ? Component.empty() : message,
 						cause);
 
 		Bukkit.getPluginManager().callEvent(event);
@@ -1221,6 +1221,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
 			case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
 			case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+			case TRUMPET -> Sound.BLOCK_NOTE_BLOCK_TRUMPET;
+			case TRUMPET_EXPOSED -> Sound.BLOCK_NOTE_BLOCK_TRUMPET_EXPOSED;
+			case TRUMPET_OXIDIZED -> Sound.BLOCK_NOTE_BLOCK_TRUMPET_OXIDIZED;
+			case TRUMPET_WEATHERED -> Sound.BLOCK_NOTE_BLOCK_TRUMPET_WEATHERED;
 			case ZOMBIE -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE;
 			case SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON;
 			case CREEPER -> Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER;

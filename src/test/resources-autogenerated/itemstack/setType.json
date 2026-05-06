@@ -7139,6 +7139,18 @@
 		}
 	},
 	{
+		"key": "minecraft:golden_dandelion",
+		"result": {
+			"material": "minecraft:golden_dandelion",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:golden_helmet",
 		"result": {
 			"material": "minecraft:golden_helmet",
@@ -13296,6 +13308,12 @@
 	},
 	{
 		"key": "minecraft:potted_flowering_azalea_bush",
+		"result": {
+			"material": "minecraft:air"
+		}
+	},
+	{
+		"key": "minecraft:potted_golden_dandelion",
 		"result": {
 			"material": "minecraft:air"
 		}

@@ -46,7 +46,7 @@ class HangingSignDataMockTest
 		@Test
 		void givenDefaultValue()
 		{
-			assertEquals(BlockFace.SOUTH, sign.getRotation());
+			assertEquals(BlockFace.NORTH, sign.getRotation());
 		}
 
 		@ParameterizedTest

@@ -15,6 +15,7 @@ class GameRuleMockTest
 	void fromGivenValidPayload()
 	{
 		JsonObject json = new JsonObject();
+		json.addProperty("defaultValue", true);
 		json.addProperty("key", "minecraft:advance_time");
 		json.addProperty("translationKey", "gamerule.minecraft.advance_time");
 		json.addProperty("type", "java.lang.Boolean");
@@ -22,6 +23,7 @@ class GameRuleMockTest
 		GameRule<?> actual = GameRuleMock.from(json);
 
 		assertNotNull(actual);
+		assertEquals(true, actual.getDefaultValue());
 		assertEquals(NamespacedKey.minecraft("advance_time"), actual.getKey());
 		assertEquals("gamerule.minecraft.advance_time", actual.translationKey());
 		assertEquals(Boolean.class, actual.getType());

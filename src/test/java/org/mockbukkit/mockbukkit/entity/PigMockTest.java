@@ -149,4 +149,39 @@ class PigMockTest
 
 	}
 
+	@Nested
+	class GetSoundVariant
+	{
+
+		@Test
+		void givenDefault()
+		{
+			assertEquals(Pig.SoundVariant.CLASSIC, pig.getSoundVariant());
+		}
+
+		@Test
+		void givenNullValue()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> pig.setSoundVariant(null));
+			assertEquals("Variant cannot be null", e.getMessage());
+		}
+
+		@ParameterizedTest
+		@MethodSource("getPigSoundVariants")
+		void givenPossibleValues(Pig.SoundVariant variant)
+		{
+			pig.setSoundVariant(variant);
+			assertEquals(variant, pig.getSoundVariant());
+		}
+
+		public static Stream<Arguments> getPigSoundVariants()
+		{
+			return RegistryAccess.registryAccess()
+					.getRegistry(RegistryKey.PIG_SOUND_VARIANT)
+					.stream()
+					.map(Arguments::of);
+		}
+
+	}
+
 }
