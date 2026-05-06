@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.AbstractArrow;
@@ -223,6 +224,22 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	public boolean hasNoPhysics()
 	{
 		return noPhysics;
+	}
+
+	@Override
+	public void tick()
+	{
+		super.tick();
+
+		if (!hasNoPhysics() && hasBeenShot())
+		{
+			// Update position based on velocity (arrows fly through the air)
+			Location newLocation = getLocation().add(getVelocity());
+			setLocation(newLocation);
+
+			// Increment lifetime
+			setLifetimeTicks(getLifetimeTicks() + 1);
+		}
 	}
 
 }

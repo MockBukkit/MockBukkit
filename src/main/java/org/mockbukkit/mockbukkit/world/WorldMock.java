@@ -164,6 +164,7 @@ public class WorldMock implements World
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
 	private final @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
 	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
+	private final Random random = new Random(0);
 	private boolean bonusChest = false;
 
 	private boolean allowAnimals = true;
@@ -847,8 +848,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return spawnArrow(location, direction, speed, spread, Arrow.class);
 	}
 
 	@Override
@@ -2330,8 +2330,34 @@ public class WorldMock implements World
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
 														   Class<T> clazz)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(direction, "Direction cannot be null");
+		Preconditions.checkNotNull(clazz, "Class cannot be null");
+		Preconditions.checkArgument(spread >= 0, "Spread must be non-negative, got %s", spread);
+
+		// Spawn the arrow entity
+		T arrow = spawn(location, clazz, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+		// Calculate velocity: normalize direction, apply spread, then scale by speed
+		Vector velocity = direction.clone().normalize();
+
+		// Apply spread using triangular distribution matching Minecraft source
+		if (spread > 0)
+		{
+			velocity.add(new Vector(
+				0.0172275 * spread * (random.nextDouble() - random.nextDouble()),
+				0.0172275 * spread * (random.nextDouble() - random.nextDouble()),
+				0.0172275 * spread * (random.nextDouble() - random.nextDouble())
+			));
+		}
+
+		velocity.multiply(speed);
+		arrow.setVelocity(velocity);
+
+		// Mark the arrow as having been shot
+		arrow.setHasBeenShot(true);
+
+		return arrow;
 	}
 
 	@Override

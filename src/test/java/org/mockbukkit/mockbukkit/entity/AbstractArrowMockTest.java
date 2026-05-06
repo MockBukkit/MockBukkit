@@ -1,7 +1,9 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.AbstractArrow;
+import org.bukkit.util.Vector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -9,6 +11,7 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -164,6 +167,54 @@ class AbstractArrowMockTest
 	void hasNoPhysics_default()
 	{
 		assertFalse(abstractArrow.hasNoPhysics());
+	}
+
+	@Test
+	void tick_UpdatesPosition()
+	{
+		abstractArrow.setVelocity(new Vector(1, 0, 0));
+		abstractArrow.setHasBeenShot(true);
+		Location initialLocation = abstractArrow.getLocation().clone();
+
+		abstractArrow.tick();
+
+		assertNotEquals(initialLocation, abstractArrow.getLocation());
+	}
+
+	@Test
+	void tick_WithNoPhysics_DoesNotMove()
+	{
+		abstractArrow.setVelocity(new Vector(1, 0, 0));
+		abstractArrow.setHasBeenShot(true);
+		abstractArrow.setNoPhysics(true);
+		Location initialLocation = abstractArrow.getLocation().clone();
+
+		abstractArrow.tick();
+
+		assertEquals(initialLocation, abstractArrow.getLocation());
+	}
+
+	@Test
+	void tick_IncrementsLifetime()
+	{
+		abstractArrow.setVelocity(new Vector(1, 0, 0));
+		abstractArrow.setHasBeenShot(true);
+		int initialLifetime = abstractArrow.getLifetimeTicks();
+
+		abstractArrow.tick();
+
+		assertEquals(initialLifetime + 1, abstractArrow.getLifetimeTicks());
+	}
+
+	@Test
+	void tick_NotShot_DoesNotMove()
+	{
+		abstractArrow.setVelocity(new Vector(1, 0, 0));
+		Location initialLocation = abstractArrow.getLocation().clone();
+
+		abstractArrow.tick();
+
+		assertEquals(initialLocation, abstractArrow.getLocation());
 	}
 
 }
