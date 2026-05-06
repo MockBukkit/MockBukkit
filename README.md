@@ -3,8 +3,8 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v26.1">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v26.1?color=1bcc94&logo=apache-maven" />
+    <a href="https://central.sonatype.com/artifact/org.mockbukkit.mockbukkit/mockbukkit-v26.1.2">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/org.mockbukkit.mockbukkit/mockbukkit-v26.1.2?color=1bcc94&logo=apache-maven" />
     </a>
     <a href="https://javadoc.io/doc/org.mockbukkit.mockbukkit/mockbukkit-v26.1">
         <img alt="Javadocs" src="https://javadoc.io/badge2/org.mockbukkit.mockbukkit/mockbukkit-v26.1/javadoc.svg" />
