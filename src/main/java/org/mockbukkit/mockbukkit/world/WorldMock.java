@@ -20,7 +20,6 @@ import org.bukkit.FeatureFlag;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
-import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
@@ -29,6 +28,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Raid;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
@@ -2008,18 +2008,22 @@ public class WorldMock implements World
 		));
 	}
 
+	/**
+	 * Helper method to set the default value of a {@link GameRule}.
+	 *
+	 * @param rule The game rule to change.
+	 * @param <T> The type of value stored in the GameRule.
+	 */
+	private <T> void setDefaultGameRuleValue(@NotNull GameRule<T> rule)
+	{
+		setGameRule(rule, rule.getDefaultValue());
+	}
+
 	@Override
 	public <T> T getGameRuleValue(@NotNull GameRule<T> rule)
 	{
 		var value = gameRules.get(rule.getKey().asString());
 		return shimLegacyValue(value, rule);
-	}
-
-	@Override
-	public <T> T getGameRuleDefault(GameRule<T> rule)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2996,67 +3000,7 @@ public class WorldMock implements World
 
 	private void initializeGameRules()
 	{
-		// This call is required to load the GameRule before the GameRules class, otherwise it will fail.
-		GameRule.values();
-
-		this.setGameRule(GameRules.ADVANCE_TIME, true);
-		this.setGameRule(GameRules.ADVANCE_WEATHER, true);
-		this.setGameRule(GameRules.ALLOW_ENTERING_NETHER_USING_PORTALS, true);
-		this.setGameRule(GameRules.BLOCK_DROPS, true);
-		this.setGameRule(GameRules.BLOCK_EXPLOSION_DROP_DECAY, true);
-		this.setGameRule(GameRules.COMMAND_BLOCK_OUTPUT, true);
-		this.setGameRule(GameRules.COMMAND_BLOCKS_WORK, true);
-		this.setGameRule(GameRules.DROWNING_DAMAGE, true);
-		this.setGameRule(GameRules.ELYTRA_MOVEMENT_CHECK, true);
-		this.setGameRule(GameRules.ENDER_PEARLS_VANISH_ON_DEATH, true);
-		this.setGameRule(GameRules.ENTITY_DROPS, true);
-		this.setGameRule(GameRules.FALL_DAMAGE, true);
-		this.setGameRule(GameRules.FIRE_DAMAGE, true);
-		this.setGameRule(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 128);
-		this.setGameRule(GameRules.FORGIVE_DEAD_PLAYERS, true);
-		this.setGameRule(GameRules.FREEZE_DAMAGE, true);
-		this.setGameRule(GameRules.GLOBAL_SOUND_EVENTS, true);
-		this.setGameRule(GameRules.IMMEDIATE_RESPAWN, false);
-		this.setGameRule(GameRules.KEEP_INVENTORY, false);
-		this.setGameRule(GameRules.LAVA_SOURCE_CONVERSION, false);
-		this.setGameRule(GameRules.LIMITED_CRAFTING, false);
-		this.setGameRule(GameRules.LOCATOR_BAR, true);
-		this.setGameRule(GameRules.LOG_ADMIN_COMMANDS, true);
-		this.setGameRule(GameRules.MAX_BLOCK_MODIFICATIONS, 32768);
-		this.setGameRule(GameRules.MAX_COMMAND_FORKS, 65536);
-		this.setGameRule(GameRules.MAX_COMMAND_SEQUENCE_LENGTH, 65536);
-		this.setGameRule(GameRules.MAX_ENTITY_CRAMMING, 24);
-		this.setGameRule(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT, 1);
-		this.setGameRule(GameRules.MOB_DROPS, true);
-		this.setGameRule(GameRules.MOB_EXPLOSION_DROP_DECAY, true);
-		this.setGameRule(GameRules.MOB_GRIEFING, true);
-		this.setGameRule(GameRules.NATURAL_HEALTH_REGENERATION, true);
-		this.setGameRule(GameRules.PLAYER_MOVEMENT_CHECK, true);
-		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 0);
-		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY, 80);
-		this.setGameRule(GameRules.PLAYERS_SLEEPING_PERCENTAGE, 100);
-		this.setGameRule(GameRules.PROJECTILES_CAN_BREAK_BLOCKS, true);
-		this.setGameRule(GameRules.PVP, true);
-		this.setGameRule(GameRules.RAIDS, true);
-		this.setGameRule(GameRules.RANDOM_TICK_SPEED, 3);
-		this.setGameRule(GameRules.REDUCED_DEBUG_INFO, false);
-		this.setGameRule(GameRules.RESPAWN_RADIUS, 10);
-		this.setGameRule(GameRules.SEND_COMMAND_FEEDBACK, true);
-		this.setGameRule(GameRules.SHOW_ADVANCEMENT_MESSAGES, true);
-		this.setGameRule(GameRules.SHOW_DEATH_MESSAGES, true);
-		this.setGameRule(GameRules.SPAWN_MOBS, true);
-		this.setGameRule(GameRules.SPAWN_MONSTERS, true);
-		this.setGameRule(GameRules.SPAWN_PATROLS, true);
-		this.setGameRule(GameRules.SPAWN_PHANTOMS, true);
-		this.setGameRule(GameRules.SPAWN_WANDERING_TRADERS, true);
-		this.setGameRule(GameRules.SPAWN_WARDENS, true);
-		this.setGameRule(GameRules.SPAWNER_BLOCKS_WORK, true);
-		this.setGameRule(GameRules.SPECTATORS_GENERATE_CHUNKS, true);
-		this.setGameRule(GameRules.SPREAD_VINES, true);
-		this.setGameRule(GameRules.TNT_EXPLODES, true);
-		this.setGameRule(GameRules.TNT_EXPLOSION_DROP_DECAY, false);
-		this.setGameRule(GameRules.UNIVERSAL_ANGER, false);
-		this.setGameRule(GameRules.WATER_SOURCE_CONVERSION, true);
+		Registry.GAME_RULE.stream().forEachOrdered(this::setDefaultGameRuleValue);
 	}
 
 	/**

@@ -58,6 +58,12 @@ public class GameRuleMock<T> extends GameRule<T>
 		return this.key;
 	}
 
+	@Override
+	public String toString()
+	{
+		return key().asString();
+	}
+
 	/**
 	 * Deserialize {@link GameRule} from the JSON file.
 	 *
