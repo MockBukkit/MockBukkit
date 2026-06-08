@@ -1549,6 +1549,20 @@ class WorldMockTest
 			assertEquals(true, gameRule);
 		}
 
+		@ParameterizedTest
+		@MethodSource("getPossibleGameRules")
+		void getAllThePossibleGameRules(GameRule<?> gameRule)
+		{
+			WorldMock world = new WorldMock(Material.DIRT, 3);
+			Object value = world.getGameRuleValue(gameRule);
+			assertEquals(gameRule.getDefaultValue(), value, "The default value for the game rule does not match the expected.");
+		}
+
+		static List<GameRule<?>> getPossibleGameRules()
+		{
+			return Registry.GAME_RULE.stream().toList();
+		}
+
 	}
 
 	@Test
