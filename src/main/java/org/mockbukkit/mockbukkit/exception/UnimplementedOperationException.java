@@ -65,7 +65,7 @@ public class UnimplementedOperationException extends TestAbortedException
 		}
 		else
 		{
-			return UnimplementedOperationException.exception(message);
+			return new UnimplementedOperationException(message);
 		}
 	}
 
