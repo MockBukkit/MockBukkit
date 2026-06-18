@@ -25,7 +25,7 @@ public class UnimplementedOperationException extends TestAbortedException
 	 * Constructs a new  with a default message.
 	 */
 	@ApiStatus.Internal
-	public UnimplementedOperationException()
+	private UnimplementedOperationException()
 	{
 		this("Not implemented");
 	}
@@ -36,9 +36,37 @@ public class UnimplementedOperationException extends TestAbortedException
 	 * @param message The message.
 	 */
 	@ApiStatus.Internal
-	public UnimplementedOperationException(@NotNull String message)
+	private UnimplementedOperationException(@NotNull String message)
 	{
 		super(message);
+	}
+
+	/**
+	 *
+	 * @return Either a {@link UnimplementedOperationException} or {@link UnimplementedOperationFailure}
+	 */
+	@ApiStatus.Internal
+	public static RuntimeException exception()
+	{
+		return exception("Not implemented");
+	}
+
+	/**
+	 *
+	 * @param message The error message
+	 * @return Either a {@link UnimplementedOperationException} or {@link UnimplementedOperationFailure}
+	 */
+	@ApiStatus.Internal
+	public static RuntimeException exception(String message)
+	{
+		if ("true".equalsIgnoreCase(System.getenv("mockbukkit.unimplementedoperation.fail")))
+		{
+			return new UnimplementedOperationFailure(message);
+		}
+		else
+		{
+			return new UnimplementedOperationException(message);
+		}
 	}
 
 }
