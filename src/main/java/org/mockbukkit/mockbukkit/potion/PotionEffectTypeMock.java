@@ -134,7 +134,7 @@ public class PotionEffectTypeMock extends PotionEffectType
 	public @NotNull PotionEffectTypeCategory getCategory()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

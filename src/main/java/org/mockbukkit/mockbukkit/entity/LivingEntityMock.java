@@ -279,7 +279,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void damage(double amount, @NotNull DamageSource source)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -506,84 +506,84 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @NotNull List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Block getTargetBlock(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Block getTargetBlock(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable BlockFace getTargetBlockFace(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable TargetBlockInfo getTargetBlockInfo(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Entity getTargetEntity(int maxDistance, boolean ignoreBlocks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable TargetEntityInfo getTargetEntityInfo(int maxDistance, boolean ignoreBlocks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Block getTargetBlockExact(int maxDistance)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Block getTargetBlockExact(int maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable RayTraceResult rayTraceBlocks(double maxDistance)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable RayTraceResult rayTraceBlocks(double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -614,21 +614,21 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public double getLastDamage()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setLastDamage(double damage)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getNoActionTicks()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 
 	}
 
@@ -636,7 +636,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setNoActionTicks(int ticks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 
 	}
 
@@ -846,28 +846,28 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public boolean hasLineOfSight(@NotNull Entity other)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean hasLineOfSight(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Nullable
@@ -881,14 +881,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setCanPickupItems(boolean pickup)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean getCanPickupItems()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -986,7 +986,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1005,7 +1005,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void playHurtAnimation(float yaw)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1044,56 +1044,56 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @Nullable Sound getHurtSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Sound getDeathSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Sound getFallDamageSound(int fallHeight)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Sound getFallDamageSoundSmall()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Sound getFallDamageSoundBig()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Sound getDrinkingSound(@NotNull ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Sound getEatingSound(@NotNull ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean canBreatheUnderwater()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -1101,7 +1101,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public EntityCategory getCategory()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1115,77 +1115,77 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setBodyYaw(float bodyYaw)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public float getBodyYaw()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setArrowsInBody(int count, boolean fireEvent)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getBeeStingerCooldown()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setBeeStingerCooldown(int ticks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getBeeStingersInBody()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setBeeStingersInBody(int count)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setNextArrowRemoval(@Range(from = 0L, to = 2147483647L) int i)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getNextArrowRemoval()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setNextBeeStingerRemoval(@Range(from = 0L, to = 2147483647L) int i)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getNextBeeStingerRemoval()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1210,28 +1210,28 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public int getArrowsStuck()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setArrowsStuck(int arrows)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getShieldBlockingDelay()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setShieldBlockingDelay(int delay)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1275,56 +1275,56 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void playPickupItemAnimation(@NotNull Item item, int quantity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public float getHurtDirection()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setHurtDirection(float hurtDirection)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void knockback(double strength, double directionX, double directionZ)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ItemStack damageItemStack(@NotNull ItemStack stack, int amount)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void damageItemStack(@NotNull EquipmentSlot slot, int amount)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1344,71 +1344,71 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public @Nullable BlockFace getTargetBlockFace(int maxDistance, @NotNull FluidCollisionMode fluidMode)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setWaypointStyle(@Nullable Key key)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setWaypointColor(@Nullable Color color)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Key getWaypointStyle()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Color getWaypointColor()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public float getForwardsMovement()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public float getUpwardsMovement()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public float getSidewaysMovement()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void heal(double amount, @NotNull EntityRegainHealthEvent.RegainReason regainReason)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean canUseEquipmentSlot(@NotNull EquipmentSlot equipmentSlot)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

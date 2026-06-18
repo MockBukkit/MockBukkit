@@ -77,98 +77,98 @@ public class ItemMock extends EntityMock implements Item
 	public void setUnlimitedLifetime(boolean unlimited)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean isUnlimitedLifetime()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setOwner(@Nullable UUID owner)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable UUID getOwner()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setThrower(@Nullable UUID thrower)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable UUID getThrower()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean canMobPickup()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setCanMobPickup(boolean canMobPickup)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean canPlayerPickup()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setCanPlayerPickup(boolean canPlayerPickup)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean willAge()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setWillAge(boolean willAge)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getHealth()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setHealth(int health)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

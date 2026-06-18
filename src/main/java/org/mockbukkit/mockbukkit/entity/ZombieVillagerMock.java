@@ -60,7 +60,7 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	@Override
 	public void setConversionTime(int i, boolean b)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

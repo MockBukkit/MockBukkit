@@ -95,7 +95,7 @@ public class EntityData
 		}
 		catch (NullPointerException | IllegalStateException e)
 		{
-			throw new UnimplementedOperationException(
+			throw UnimplementedOperationException.exception(
 					"state " + state + " for entitytype " + type + ", " + subType + " is not implemented");
 		}
 	}
@@ -116,7 +116,7 @@ public class EntityData
 		{
 			if (state == EntityState.DEFAULT)
 			{
-				throw new UnimplementedOperationException(
+				throw UnimplementedOperationException.exception(
 						"datavalue " + key + " for entitytype " + type + " is not implemented");
 			}
 			return getValueFromKey(key, subType, EntityState.DEFAULT);

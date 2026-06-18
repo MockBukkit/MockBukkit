@@ -52,14 +52,14 @@ public abstract class PersistentDataContainerViewMock implements PersistentDataC
 	public void copyTo(PersistentDataContainer other, boolean replace)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public byte[] serializeToBytes()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

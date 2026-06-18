@@ -59,7 +59,7 @@ public abstract class ThrownPotionMock extends ThrowableProjectileMock implement
 	@Override
 	public void splash()
 	{
-		throw new UnimplementedOperationException("Splash function was not implemented yet!");
+		throw UnimplementedOperationException.exception("Splash function was not implemented yet!");
 	}
 
 	@Override

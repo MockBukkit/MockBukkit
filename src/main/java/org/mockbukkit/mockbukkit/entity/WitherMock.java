@@ -116,13 +116,13 @@ public class WitherMock extends AbstractBossMock implements Wither
 	@Override
 	public void rangedAttack(@NotNull LivingEntity livingEntity, float charge)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setChargingAttack(boolean chargingAttack)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

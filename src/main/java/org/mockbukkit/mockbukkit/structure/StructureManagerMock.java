@@ -60,7 +60,7 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
 
-		throw new UnimplementedOperationException("Load structure was not implemented yet.");
+		throw UnimplementedOperationException.exception("Load structure was not implemented yet.");
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
 
-		throw new UnimplementedOperationException("Save structure was not implemented yet.");
+		throw UnimplementedOperationException.exception("Save structure was not implemented yet.");
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
 
-		throw new UnimplementedOperationException("Delete structure was not implemented yet.");
+		throw UnimplementedOperationException.exception("Delete structure was not implemented yet.");
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
 
-		throw new UnimplementedOperationException("Get structure file was not implemented yet.");
+		throw UnimplementedOperationException.exception("Get structure file was not implemented yet.");
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(inputStream != null, "inputStream cannot be null");
 
-		throw new UnimplementedOperationException("Load structure was not implemented yet.");
+		throw UnimplementedOperationException.exception("Load structure was not implemented yet.");
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class StructureManagerMock implements StructureManager
 		Preconditions.checkArgument(outputStream != null, "outputStream cannot be null");
 		Preconditions.checkArgument(structure != null, "structure cannot be null");
 
-		throw new UnimplementedOperationException("Save structure was not implemented yet.");
+		throw UnimplementedOperationException.exception("Save structure was not implemented yet.");
 	}
 
 	@Override

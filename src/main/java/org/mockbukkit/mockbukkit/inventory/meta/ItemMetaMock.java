@@ -440,7 +440,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public Set<Material> getCanDestroy()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -448,7 +448,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setCanDestroy(Set<Material> set)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -456,7 +456,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public Set<Material> getCanPlaceOn()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -464,7 +464,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setCanPlaceOn(Set<Material> set)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -472,7 +472,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public @NotNull Set<com.destroystokyo.paper.Namespaced> getDestroyableKeys()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -480,7 +480,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setDestroyableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -488,7 +488,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public @NotNull Set<com.destroystokyo.paper.Namespaced> getPlaceableKeys()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -496,7 +496,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setPlaceableKeys(@NotNull Collection<com.destroystokyo.paper.Namespaced> collection)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -504,7 +504,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public boolean hasPlaceableKeys()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -512,7 +512,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public boolean hasDestroyableKeys()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1130,21 +1130,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public String getAsString()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull String getAsComponentString()
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{
 		// This was replaced by PersistentDataContainer!
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1389,14 +1389,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public @Nullable RegistryKeySet<DamageType> getDamageResistantTypes()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setDamageResistantTypes(@Nullable RegistryKeySet<DamageType> types)
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

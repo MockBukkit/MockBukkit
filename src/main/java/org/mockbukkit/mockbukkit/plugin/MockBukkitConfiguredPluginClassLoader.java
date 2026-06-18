@@ -119,7 +119,7 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	public @Nullable JavaPlugin getPlugin()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	public void close()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

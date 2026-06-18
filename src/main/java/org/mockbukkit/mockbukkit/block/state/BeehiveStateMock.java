@@ -161,7 +161,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	public @NotNull List<Bee> releaseEntities()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	{
 		Preconditions.checkNotNull(entity, "Bee cannot be null");
 		// TODO: We currently don't have a way to serialize entities so until that's done this can't be implemented.
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

@@ -25,21 +25,21 @@ public class MockBukkitPluginLoader implements PluginLoader
 	public @NotNull Plugin loadPlugin(@NotNull File file) throws UnknownDependencyException
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull PluginDescriptionFile getPluginDescription(@NotNull File file)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Pattern[] getPluginFileFilters()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class MockBukkitPluginLoader implements PluginLoader
 	public void enablePlugin(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

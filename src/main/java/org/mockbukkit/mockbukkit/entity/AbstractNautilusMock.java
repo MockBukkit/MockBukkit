@@ -30,7 +30,7 @@ public class AbstractNautilusMock extends AnimalsMock implements AbstractNautilu
 	@Override
 	public ArmoredSaddledMountInventory getInventory()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

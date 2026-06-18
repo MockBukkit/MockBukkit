@@ -16,13 +16,13 @@ public interface MockRangedEntity<T extends MobMock> extends RangedEntity
 	@Override
 	default void rangedAttack(@NotNull LivingEntity target, float charge)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	default void setChargingAttack(boolean raiseHands)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -34,7 +34,7 @@ public interface MockRangedEntity<T extends MobMock> extends RangedEntity
 	 */
 	default boolean hasAttackedWithCharge(LivingEntity target, float charge)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -45,7 +45,7 @@ public interface MockRangedEntity<T extends MobMock> extends RangedEntity
 	 */
 	default boolean hasAttackedWhileAggressive(LivingEntity target)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

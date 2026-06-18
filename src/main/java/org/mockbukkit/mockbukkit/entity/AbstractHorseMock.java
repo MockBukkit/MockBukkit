@@ -158,7 +158,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	public @NotNull AbstractHorseInventory getInventory()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

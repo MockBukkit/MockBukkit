@@ -142,7 +142,7 @@ public class BlockDataMockRegistry
 		MaterialData materialData = blockData.get(material);
 		if (materialData == null)
 		{
-			throw new UnimplementedOperationException(String.format("Material %s is not implemented yet.", material));
+			throw UnimplementedOperationException.exception(String.format("Material %s is not implemented yet.", material));
 		}
 		return materialData.limitations();
 	}

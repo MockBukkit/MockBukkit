@@ -57,7 +57,7 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public boolean generateEndPortal(boolean withPortals)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public void spawnNewGateway(@NotNull Position position)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public @NotNull @Unmodifiable List<EnderCrystal> getHealingCrystals()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

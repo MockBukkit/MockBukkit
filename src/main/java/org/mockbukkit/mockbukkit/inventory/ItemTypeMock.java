@@ -139,14 +139,14 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public Typed<ItemMeta> typed()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
 	@Override
 	public <M extends ItemMeta> Typed<M> typed(@NotNull Class<M> itemMetaType)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -194,13 +194,13 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public @NotNull ItemStack createItemStack(@Nullable Consumer<? super M> metaConfigurator)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ItemStack createItemStack(int amount, @Nullable Consumer<? super M> metaConfigurator)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -258,20 +258,20 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	public @Nullable ItemType getCraftingRemainingItem()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull @Unmodifiable Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot slot)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -283,7 +283,7 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	@Override
 	public boolean isEnabledByFeature(@NotNull World world)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -314,21 +314,21 @@ public class ItemTypeMock<M extends ItemMeta> implements ItemType.Typed<M>
 	public <T> @Nullable T getDefaultData(DataComponentType.@NotNull Valued<T> valued)
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean hasDefaultData(@NotNull DataComponentType dataComponentType)
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Unmodifiable @NotNull Set<DataComponentType> getDefaultDataTypes()
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

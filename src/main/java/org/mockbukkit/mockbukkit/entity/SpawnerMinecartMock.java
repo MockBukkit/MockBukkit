@@ -150,49 +150,49 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	public @Nullable EntitySnapshot getSpawnedEntity()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setSpawnedEntity(@Nullable EntitySnapshot entitySnapshot)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setSpawnedEntity(@NotNull SpawnerEntry spawnerEntry)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void addPotentialSpawn(@NotNull EntitySnapshot entitySnapshot, int i, @Nullable SpawnRule spawnRule)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void addPotentialSpawn(@NotNull SpawnerEntry spawnerEntry)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setPotentialSpawns(@NotNull Collection<SpawnerEntry> collection)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull List<SpawnerEntry> getPotentialSpawns()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -211,21 +211,21 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	public boolean isActivated()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void resetTimer()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setSpawnedItem(@NotNull ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

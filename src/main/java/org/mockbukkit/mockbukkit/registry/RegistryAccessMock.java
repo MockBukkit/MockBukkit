@@ -202,7 +202,7 @@ public class RegistryAccessMock implements RegistryAccess
 				.map(RegistryAccessMock::getValue)
 				.filter(Objects::nonNull)
 				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass));
+				.orElseThrow(() -> UnimplementedOperationException.exception("Could not find registry for " + tClass));
 	}
 
 }

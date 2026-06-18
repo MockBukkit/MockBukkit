@@ -59,28 +59,28 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	public void setSpawnedEntity(@NotNull EntitySnapshot snapshot)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable EntitySnapshot getSpawnedEntity()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable EntityType getCustomSpawnedType()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setCustomSpawnedType(@Nullable EntityType type)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

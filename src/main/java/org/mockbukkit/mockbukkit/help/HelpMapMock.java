@@ -66,7 +66,7 @@ public class HelpMapMock implements HelpMap
 	@Override
 	public @NotNull List<String> getIgnoredPlugins()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

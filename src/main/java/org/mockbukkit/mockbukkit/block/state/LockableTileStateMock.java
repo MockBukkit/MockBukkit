@@ -53,7 +53,7 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	public void setLockItem(@Nullable ItemStack itemStack)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

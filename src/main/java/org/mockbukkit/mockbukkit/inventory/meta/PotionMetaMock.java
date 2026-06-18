@@ -144,7 +144,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public @NotNull @Unmodifiable List<PotionEffect> getAllEffects()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	@Override
 	public @NotNull Color computeEffectiveColor()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -270,7 +270,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	public boolean setMainEffect(@NotNull PotionEffectType type)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
