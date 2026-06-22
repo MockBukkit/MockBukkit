@@ -59,7 +59,7 @@ public class UnimplementedOperationException extends TestAbortedException
 	@ApiStatus.Internal
 	public static RuntimeException exception(String message)
 	{
-		if ("true".equalsIgnoreCase(System.getenv("mockbukkit.unimplementedoperation.fail")))
+		if (Boolean.getBoolean("mockbukkit.unimplementedoperation.fail"))
 		{
 			return new UnimplementedOperationFailure(message);
 		}
