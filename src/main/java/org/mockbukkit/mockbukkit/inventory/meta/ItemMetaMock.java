@@ -195,10 +195,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		unbreakable = meta.isUnbreakable();
 		if (meta.hasCustomModelDataComponent())
 		{
-			CustomModelDataComponent c = meta.getCustomModelDataComponent();
-			this.customModelData = CustomModelDataComponentMock.builder()
-					.floats(c.getFloats()).flags(c.getFlags())
-					.strings(c.getStrings()).colors(c.getColors()).build();
+			this.customModelData = new CustomModelDataComponentMock(meta.getCustomModelDataComponent());
 		}
 		hideTooltip = meta.isHideTooltip();
 		fireResistant = meta.isFireResistant();

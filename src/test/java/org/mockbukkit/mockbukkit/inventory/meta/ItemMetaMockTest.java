@@ -656,6 +656,18 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void clone_CustomModelDataComponent_IsIndependent()
+	{
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("original")).build());
+		ItemMetaMock cloned = meta.clone();
+
+		meta.getCustomModelDataComponent().setStrings(List.of("mutated"));
+
+		assertEquals(List.of("original"), cloned.getCustomModelDataComponent().getStrings());
+	}
+
+	@Test
 	void clone_WithDisplayName_ClonedExactly()
 	{
 		meta.setDisplayName("Some name");
