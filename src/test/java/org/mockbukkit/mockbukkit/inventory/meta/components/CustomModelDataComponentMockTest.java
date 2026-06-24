@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class CustomModelDataComponentMockTest
 {
@@ -89,6 +91,46 @@ class CustomModelDataComponentMockTest
 			assertEquals(component.getStrings(), actual.getStrings());
 			assertEquals(component.getColors(), actual.getColors());
 			assertEquals(component, actual);
+		}
+
+	}
+
+	@Nested
+	class CopyConstructor
+	{
+
+		@Test
+		void givenPopulatedSource_CopiesAllFields()
+		{
+			var source = CustomModelDataComponentMock.builder()
+					.floats(List.of(1.0F, 2.0F))
+					.flags(List.of(true, false))
+					.strings(List.of("variant_a", "variant_b"))
+					.colors(List.of(Color.RED, Color.BLUE))
+					.build();
+
+			var copy = new CustomModelDataComponentMock(source);
+
+			assertEquals(source.getFloats(), copy.getFloats());
+			assertEquals(source.getFlags(), copy.getFlags());
+			assertEquals(source.getStrings(), copy.getStrings());
+			assertEquals(source.getColors(), copy.getColors());
+			assertEquals(source, copy);
+		}
+
+		@Test
+		void givenPopulatedSource_CopyIsIndependent()
+		{
+			var source = CustomModelDataComponentMock.builder()
+					.strings(List.of("original"))
+					.build();
+
+			var copy = new CustomModelDataComponentMock(source);
+			source.setStrings(List.of("mutated"));
+
+			assertNotSame(source, copy);
+			assertNotEquals(source.getStrings(), copy.getStrings());
+			assertEquals(List.of("original"), copy.getStrings());
 		}
 
 	}
