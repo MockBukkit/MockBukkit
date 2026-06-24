@@ -622,6 +622,52 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void equals_setCustomModelDataAndSetCustomModelDataComponentEquivalent_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelData(42);
+		meta2.setCustomModelDataComponent(CustomModelDataComponentMock.builder().floats(List.of(42f)).build());
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void equals_CustomModelDataComponentDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("plugin:variant_a")).build());
+		meta2.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("plugin:variant_b")).build());
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void equals_CustomModelDataComponentOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("plugin:variant_a")).build());
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void clone_CustomModelDataComponent_IsIndependent()
+	{
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("original")).build());
+		ItemMetaMock cloned = meta.clone();
+
+		meta.getCustomModelDataComponent().setStrings(List.of("mutated"));
+
+		assertEquals(List.of("original"), cloned.getCustomModelDataComponent().getStrings());
+	}
+
+	@Test
 	void clone_WithDisplayName_ClonedExactly()
 	{
 		meta.setDisplayName("Some name");

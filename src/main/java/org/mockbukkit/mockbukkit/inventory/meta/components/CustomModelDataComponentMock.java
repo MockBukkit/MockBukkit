@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import org.bukkit.Color;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.CustomModelDataComponent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
@@ -32,6 +33,11 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 		this.flags = List.copyOf(flags);
 		this.strings = List.copyOf(strings);
 		this.colors = List.copyOf(colors);
+	}
+
+	public CustomModelDataComponentMock(@NotNull CustomModelDataComponent source)
+	{
+		this(source.getFloats(), source.getFlags(), source.getStrings(), source.getColors());
 	}
 
 	@Override

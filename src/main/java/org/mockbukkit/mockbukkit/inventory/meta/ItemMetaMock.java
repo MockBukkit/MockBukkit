@@ -121,7 +121,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @NotNull Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
 	private @NotNull PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
-	private @Nullable Integer customModelData = null;
 	private boolean hideTooltip;
 	private boolean fireResistant;
 	private boolean glider;
@@ -135,7 +134,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable NamespacedKey tooltipStyle;
 	private @Nullable NamespacedKey damageResistant;
 
-	private @Nullable CustomModelDataComponent customModelDataComponent;
+	private @Nullable CustomModelDataComponent customModelData;
 	private @Nullable UseCooldownComponent useCooldown;
 	private @Nullable FoodComponent foodComponent;
 	private @Nullable ToolComponent toolComponent;
@@ -193,7 +192,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			this.persistentDataContainer = new PersistentDataContainerMock(m.persistentDataContainer);
 		}
 		unbreakable = meta.isUnbreakable();
-		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
+		if (meta.hasCustomModelDataComponent())
+		{
+			this.customModelData = new CustomModelDataComponentMock(meta.getCustomModelDataComponent());
+		}
 		hideTooltip = meta.isHideTooltip();
 		fireResistant = meta.isFireResistant();
 		if (meta.hasMaxStackSize())
@@ -413,8 +415,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				&& Objects.equals(getEnchants(), meta.getEnchants())
 				&& Objects.equals(hasMaxStackSize(), meta.hasMaxStackSize())
 				&& (!hasMaxStackSize() || Objects.equals(getMaxStackSize(), meta.getMaxStackSize()))
-				&& Objects.equals(hasCustomModelData(), meta.hasCustomModelData())
-				&& (!hasCustomModelData() || Objects.equals(getCustomModelData(), meta.getCustomModelData()))
+				&& Objects.equals(hasCustomModelDataComponent(), meta.hasCustomModelDataComponent())
+				&& (!hasCustomModelDataComponent() || Objects.equals(getCustomModelDataComponent(), meta.getCustomModelDataComponent()))
 				&& Objects.equals(hasEnchantmentGlintOverride(), meta.hasEnchantmentGlintOverride())
 				&& (!hasEnchantmentGlintOverride() || Objects.equals(getEnchantmentGlintOverride(), meta.getEnchantmentGlintOverride()))
 				&& Objects.equals(hasRarity(), meta.hasRarity())
@@ -821,7 +823,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			lore(loreList);
 		}
 
-		customModelData = NbtParser.parseInteger(args.get(CUSTOM_MODEL_DATA));
+		setCustomModelData(NbtParser.parseInteger(args.get(CUSTOM_MODEL_DATA)));
 		enchantable = NbtParser.parseInteger(args.get(ENCHANTABLE));
 		damage = NbtParser.parseInteger(args.get(DAMAGE));
 		maxDamage = NbtParser.parseInteger(args.get(MAX_DAMAGE));
@@ -1155,38 +1157,39 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasCustomModelData()
 	{
-		return this.customModelData != null;
+		return this.customModelData != null && !this.customModelData.getFloats().isEmpty();
 	}
 
 	@Override
 	public int getCustomModelData()
 	{
 		Preconditions.checkState(hasCustomModelData(), "We don't have CustomModelData! Check hasCustomModelData first!");
-		return this.customModelData;
+		return this.customModelData.getFloats().get(0).intValue();
 	}
 
 	@Override
 	public @NotNull CustomModelDataComponent getCustomModelDataComponent()
 	{
-		return this.hasCustomModelDataComponent() ? this.customModelDataComponent : CustomModelDataComponentMock.useDefault();
+		return this.hasCustomModelDataComponent() ? this.customModelData : CustomModelDataComponentMock.useDefault();
 	}
 
 	@Override
 	public void setCustomModelData(@Nullable Integer data)
 	{
-		this.customModelData = data;
+		this.customModelData = (data == null) ? null
+				: CustomModelDataComponentMock.builder().floats(List.of((float) data)).build();
 	}
 
 	@Override
 	public boolean hasCustomModelDataComponent()
 	{
-		return this.customModelDataComponent != null;
+		return this.customModelData != null;
 	}
 
 	@Override
 	public void setCustomModelDataComponent(@Nullable CustomModelDataComponent customModelDataComponent)
 	{
-		this.customModelDataComponent = customModelDataComponent;
+		this.customModelData = customModelDataComponent;
 	}
 
 	@Override
