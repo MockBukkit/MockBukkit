@@ -498,10 +498,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				&& (!hasEquippable() || Objects.equals(getEquippable(), meta.getEquippable()))
 				&& Objects.equals(hasJukeboxPlayable(), meta.hasJukeboxPlayable())
 				&& (!hasJukeboxPlayable() || Objects.equals(getJukeboxPlayable(), meta.getJukeboxPlayable()))
-				&& (!(meta instanceof ItemMetaMock other)
-						? !hasBlockData()
-						: Objects.equals(hasBlockData(), other.hasBlockData())
-						&& (!hasBlockData() || Objects.equals(getBlockData(), other.getBlockData())));
+				&& isBlockDataEqual(meta);
+	}
+
+	private boolean isBlockDataEqual(@NotNull ItemMeta meta)
+	{
+		if (!(meta instanceof ItemMetaMock other))
+		{
+			return !hasBlockData();
+		}
+		if (hasBlockData() != other.hasBlockData())
+		{
+			return false;
+		}
+		return !hasBlockData() || Objects.equals(getBlockData(), other.getBlockData());
 	}
 
 	@Override
