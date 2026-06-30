@@ -16,6 +16,7 @@ permissions:
 jobs:
   has-release-label:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       # agilepathway/pull-request-label-checker v1.6.65
       - uses: docker://agilepathway/pull-request-label-checker@sha256:14f5f3dfda922496d07d53494e2d2b42885165f90677a1c03d600059b7706a61

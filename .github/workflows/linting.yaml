@@ -6,9 +6,15 @@ on:
 permissions:
   contents: read
 
+# Cancel superseded runs: a newer push to the same PR makes in-flight runs stale.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   checkstyle:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
