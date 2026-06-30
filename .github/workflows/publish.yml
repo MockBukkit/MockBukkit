@@ -21,6 +21,10 @@ on:
         required: true
         type: string
         description: "The version to publish (no v prefix)"
+
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest

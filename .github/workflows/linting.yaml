@@ -3,6 +3,9 @@ name: Linting
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   checkstyle:
     runs-on: ubuntu-latest

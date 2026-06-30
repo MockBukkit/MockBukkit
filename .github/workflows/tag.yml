@@ -4,9 +4,15 @@ on:
   push:
     branches: [ minecraft/v* ]
 
+permissions:
+  contents: read
+
 jobs:
   tag:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
     outputs:
       version: ${{steps.bump-semver.outputs.new_version}}
       publish_version: ${{ steps.strip-v.outputs.version }}
