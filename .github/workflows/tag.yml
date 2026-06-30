@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{steps.bump-semver.outputs.new_version}}
+      publish_version: ${{ steps.strip-v.outputs.version }}
     steps:
       - uses: actions/checkout@v6
 
@@ -63,6 +64,13 @@ jobs:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
 
+      - name: Strip v prefix for publishing
+        id: strip-v
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        env:
+          NEW_VERSION: ${{ steps.bump-semver.outputs.new_version }}
+        run: echo "version=${NEW_VERSION#v}" >> "$GITHUB_OUTPUT"
+
       - name: Push tag
         uses: actions-ecosystem/action-push-tag@v1
         if: ${{ steps.bump-semver.outputs.new_version != null }}
@@ -80,5 +88,5 @@ jobs:
     needs: tag
     if: ${{ needs.tag.outputs.version != null }}
     with:
-      version: $(echo ${{ needs.tag.outputs.version }} | sed -e 's:v::')
+      version: ${{ needs.tag.outputs.publish_version }}
     secrets: inherit
