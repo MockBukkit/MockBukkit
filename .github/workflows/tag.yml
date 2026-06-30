@@ -7,6 +7,14 @@ on:
 permissions:
   contents: read
 
+# Serialize releases per branch: if two PRs merge close together, the second
+# Tag run must wait for the first to finish pushing its tag and publishing,
+# otherwise both read the same "latest tag" and compute a colliding version.
+# cancel-in-progress: false — never cancel a release mid-publish; queue instead.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   tag:
     runs-on: ubuntu-latest
