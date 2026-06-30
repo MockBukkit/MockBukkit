@@ -98,7 +98,7 @@ jobs:
             ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
-    uses: MockBukkit/Mockbukkit/.github/workflows/publish.yml@minecraft/v26
+    uses: ./.github/workflows/publish.yml
     needs: tag
     if: ${{ needs.tag.outputs.version != null }}
     with:
