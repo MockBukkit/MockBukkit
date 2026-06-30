@@ -95,4 +95,8 @@ jobs:
     if: ${{ needs.tag.outputs.version != null }}
     with:
       version: ${{ needs.tag.outputs.publish_version }}
-    secrets: inherit
+    secrets:
+      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+      KEY_PASS: ${{ secrets.KEY_PASS }}
+      PRIV_KEY: ${{ secrets.PRIV_KEY }}
