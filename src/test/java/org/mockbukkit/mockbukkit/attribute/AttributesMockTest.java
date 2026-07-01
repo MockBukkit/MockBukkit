@@ -37,6 +37,7 @@ class AttributesMockTest
 	{
 		String json = """
 				{
+					"defaultValue": 0.0,
 					"key": "minecraft:armor",
 					"name": "ARMOR",
 					"ordinal": 8,
@@ -47,6 +48,7 @@ class AttributesMockTest
 		JsonObject parsedJson = JsonParser.parseString(json).getAsJsonObject();
 		AttributeMock attribute = AttributeMock.from(parsedJson);
 		assertInstanceOf(AttributeMock.class, attribute);
+		assertEquals(0.0, attribute.getDefaultValue());
 		assertEquals(NamespacedKey.fromString("minecraft:armor"), attribute.getKey());
 		assertEquals("ARMOR", attribute.name());
 		assertEquals(8, attribute.ordinal());
