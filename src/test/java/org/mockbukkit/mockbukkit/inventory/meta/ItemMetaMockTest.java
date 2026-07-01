@@ -394,6 +394,116 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void equals_ItemNameSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.itemName(Component.text("sword"));
+		meta2.itemName(Component.text("sword"));
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_ItemNameDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.itemName(Component.text("sword"));
+		meta2.itemName(Component.text("axe"));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_GliderSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setGlider(true);
+		meta2.setGlider(true);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_GliderDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setGlider(true);
+		meta2.setGlider(false);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_TooltipStyleSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setTooltipStyle(NamespacedKey.fromString("test:style"));
+		meta2.setTooltipStyle(NamespacedKey.fromString("test:style"));
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_TooltipStyleDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setTooltipStyle(NamespacedKey.fromString("test:style-a"));
+		meta2.setTooltipStyle(NamespacedKey.fromString("test:style-b"));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_ItemModelSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setItemModel(NamespacedKey.fromString("test:model"));
+		meta2.setItemModel(NamespacedKey.fromString("test:model"));
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_ItemModelDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setItemModel(NamespacedKey.fromString("test:model-a"));
+		meta2.setItemModel(NamespacedKey.fromString("test:model-b"));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_DamageResistantSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
+		meta2.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void equals_DamageResistantDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
+		meta2.setDamageResistant(DamageTypeTags.IS_FIRE);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
 	void equals_AttributeModifiersSame_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
@@ -619,6 +729,52 @@ class ItemMetaMockTest
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void equals_setCustomModelDataAndSetCustomModelDataComponentEquivalent_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelData(42);
+		meta2.setCustomModelDataComponent(CustomModelDataComponentMock.builder().floats(List.of(42f)).build());
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void equals_CustomModelDataComponentDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("plugin:variant_a")).build());
+		meta2.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("plugin:variant_b")).build());
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+		assertNotEquals(meta.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void equals_CustomModelDataComponentOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("plugin:variant_a")).build());
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void clone_CustomModelDataComponent_IsIndependent()
+	{
+		meta.setCustomModelDataComponent(CustomModelDataComponentMock.builder().strings(List.of("original")).build());
+		ItemMetaMock cloned = meta.clone();
+
+		meta.getCustomModelDataComponent().setStrings(List.of("mutated"));
+
+		assertEquals(List.of("original"), cloned.getCustomModelDataComponent().getStrings());
 	}
 
 	@Test
@@ -1242,6 +1398,32 @@ class ItemMetaMockTest
 	{
 		meta.setFireResistant(true);
 		assertTrue(meta.isFireResistant());
+	}
+
+	@Test
+	void setFireResistantTrue_SetsDamageResistantToIsFire()
+	{
+		meta.setFireResistant(true);
+		assertTrue(meta.hasDamageResistant());
+		assertEquals(DamageTypeTags.IS_FIRE.getKey(), meta.getDamageResistant().getKey());
+	}
+
+	@Test
+	void setFireResistantFalse_ClearsDamageResistantWhenIsFire()
+	{
+		meta.setFireResistant(true);
+		meta.setFireResistant(false);
+		assertFalse(meta.hasDamageResistant());
+		assertFalse(meta.isFireResistant());
+	}
+
+	@Test
+	void setFireResistantFalse_LeavesNonFireDamageResistantIntact()
+	{
+		meta.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
+		meta.setFireResistant(false);
+		assertTrue(meta.hasDamageResistant());
+		assertEquals(DamageTypeTags.BYPASSES_ARMOR.getKey(), meta.getDamageResistant().getKey());
 	}
 
 	@Test
@@ -1896,6 +2078,44 @@ class ItemMetaMockTest
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"damage-resistant\":\"minecraft:bypasses_armor\"}";
 			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenFireResistant_SerializesAsDamageResistantIsFire()
+		{
+			meta.setFireResistant(true);
+
+			Map<String, Object> actual = meta.serialize();
+
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"damage-resistant\":\"minecraft:is_fire\"}";
+			assertJsonEqual(expected, actual);
+		}
+
+		@Test
+		void givenFireResistant_RoundTrip()
+		{
+			meta.setFireResistant(true);
+
+			Map<String, Object> serialized = meta.serialize();
+			ItemMetaMock deserialized = ItemMetaMock.deserialize(serialized);
+
+			assertTrue(deserialized.isFireResistant());
+			assertTrue(deserialized.hasDamageResistant());
+			assertEquals(DamageTypeTags.IS_FIRE.getKey(), deserialized.getDamageResistant().getKey());
+		}
+
+		@Test
+		void givenLegacyFireResistant_DeserializesAsIsFire()
+		{
+			Map<String, Object> legacy = new java.util.HashMap<>();
+			legacy.put("meta-type", "UNSPECIFIC");
+			legacy.put("FireResistant", true);
+
+			ItemMetaMock deserialized = ItemMetaMock.deserialize(legacy);
+
+			assertTrue(deserialized.isFireResistant());
+			assertTrue(deserialized.hasDamageResistant());
+			assertEquals(NamespacedKey.minecraft("is_fire"), deserialized.getDamageResistant().getKey());
 		}
 
 		@Test

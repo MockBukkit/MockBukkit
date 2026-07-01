@@ -22,6 +22,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.tag.DamageTypeTags;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.damage.DamageType;
@@ -122,9 +123,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @NotNull Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
 	private @NotNull PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
-	private @Nullable Integer customModelData = null;
 	private boolean hideTooltip;
-	private boolean fireResistant;
 	private boolean glider;
 	private @Nullable Integer maxStackSize = null;
 	private @Nullable Boolean enchantmentGlintOverride = null;
@@ -136,7 +135,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable NamespacedKey tooltipStyle;
 	private @Nullable NamespacedKey damageResistant;
 
-	private @Nullable CustomModelDataComponent customModelDataComponent;
+	private @Nullable CustomModelDataComponent customModelData;
 	private @Nullable UseCooldownComponent useCooldown;
 	private @Nullable FoodComponent foodComponent;
 	private @Nullable ToolComponent toolComponent;
@@ -194,9 +193,16 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			this.persistentDataContainer = new PersistentDataContainerMock(m.persistentDataContainer);
 		}
 		unbreakable = meta.isUnbreakable();
-		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
+		if (meta.hasCustomModelDataComponent())
+		{
+			this.customModelData = new CustomModelDataComponentMock(meta.getCustomModelDataComponent());
+		}
 		hideTooltip = meta.isHideTooltip();
-		fireResistant = meta.isFireResistant();
+		if (meta.hasDamageResistant() && meta.getDamageResistant() != null)
+		{
+			this.damageResistant = meta.getDamageResistant().getKey();
+		}
+		glider = meta.isGlider();
 		if (meta.hasMaxStackSize())
 		{
 			maxStackSize = meta.getMaxStackSize();
@@ -216,6 +222,42 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (meta.hasEnchantable())
 		{
 			enchantable = meta.getEnchantable();
+		}
+		if (meta.hasTooltipStyle())
+		{
+			tooltipStyle = meta.getTooltipStyle();
+		}
+		if (meta.hasItemModel())
+		{
+			itemModel = meta.getItemModel();
+		}
+		if (meta.hasUseRemainder())
+		{
+			useRemainder = meta.getUseRemainder();
+		}
+		if (meta.hasUseCooldown())
+		{
+			useCooldown = meta.getUseCooldown();
+		}
+		if (meta.hasFood())
+		{
+			foodComponent = meta.getFood();
+		}
+		if (meta.hasTool())
+		{
+			toolComponent = meta.getTool();
+		}
+		if (meta.hasEquippable())
+		{
+			equippableComponent = meta.getEquippable();
+		}
+		if (meta.hasJukeboxPlayable())
+		{
+			jukeboxPlayableComponent = meta.getJukeboxPlayable();
+		}
+		if (meta instanceof ItemMetaMock m && m.hasBlockData())
+		{
+			this.blockData = new HashMap<>(m.getBlockData());
 		}
 	}
 
@@ -359,12 +401,22 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				customModelData,
 				maxDamage,
 				hideTooltip,
-				fireResistant,
+				damageResistant,
 				maxStackSize,
 				enchantmentGlintOverride,
 				rarity,
 				itemName,
-				enchantable);
+				enchantable,
+				glider,
+				tooltipStyle,
+				itemModel,
+				useRemainder,
+				useCooldown,
+				foodComponent,
+				toolComponent,
+				equippableComponent,
+				jukeboxPlayableComponent,
+				blockData);
 	}
 
 	@Override
@@ -410,12 +462,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				&& isLoreEquals(meta)
 				&& isUnbreakable() == meta.isUnbreakable()
 				&& isHideTooltip() == meta.isHideTooltip()
-				&& isFireResistant() == meta.isFireResistant()
+				&& Objects.equals(hasDamageResistant(), meta.hasDamageResistant())
+				&& (!hasDamageResistant() || Objects.equals(getDamageResistant(), meta.getDamageResistant()))
 				&& Objects.equals(getEnchants(), meta.getEnchants())
 				&& Objects.equals(hasMaxStackSize(), meta.hasMaxStackSize())
 				&& (!hasMaxStackSize() || Objects.equals(getMaxStackSize(), meta.getMaxStackSize()))
-				&& Objects.equals(hasCustomModelData(), meta.hasCustomModelData())
-				&& (!hasCustomModelData() || Objects.equals(getCustomModelData(), meta.getCustomModelData()))
+				&& Objects.equals(hasCustomModelDataComponent(), meta.hasCustomModelDataComponent())
+				&& (!hasCustomModelDataComponent() || Objects.equals(getCustomModelDataComponent(), meta.getCustomModelDataComponent()))
 				&& Objects.equals(hasEnchantmentGlintOverride(), meta.hasEnchantmentGlintOverride())
 				&& (!hasEnchantmentGlintOverride() || Objects.equals(getEnchantmentGlintOverride(), meta.getEnchantmentGlintOverride()))
 				&& Objects.equals(hasRarity(), meta.hasRarity())
@@ -425,7 +478,40 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				&& Objects.equals(hasAttributeModifiers(), meta.hasAttributeModifiers())
 				&& (!hasAttributeModifiers() || Objects.equals(getAttributeModifiers(), meta.getAttributeModifiers()))
 				&& Objects.equals(getItemFlags(), meta.getItemFlags())
-				&& Objects.equals(getPersistentDataContainer(), meta.getPersistentDataContainer());
+				&& Objects.equals(getPersistentDataContainer(), meta.getPersistentDataContainer())
+				&& isGlider() == meta.isGlider()
+				&& Objects.equals(hasItemName(), meta.hasItemName())
+				&& (!hasItemName() || Objects.equals(itemName(), meta.itemName()))
+				&& Objects.equals(hasTooltipStyle(), meta.hasTooltipStyle())
+				&& (!hasTooltipStyle() || Objects.equals(getTooltipStyle(), meta.getTooltipStyle()))
+				&& Objects.equals(hasItemModel(), meta.hasItemModel())
+				&& (!hasItemModel() || Objects.equals(getItemModel(), meta.getItemModel()))
+				&& Objects.equals(hasUseRemainder(), meta.hasUseRemainder())
+				&& (!hasUseRemainder() || Objects.equals(getUseRemainder(), meta.getUseRemainder()))
+				&& Objects.equals(hasUseCooldown(), meta.hasUseCooldown())
+				&& (!hasUseCooldown() || Objects.equals(getUseCooldown(), meta.getUseCooldown()))
+				&& Objects.equals(hasFood(), meta.hasFood())
+				&& (!hasFood() || Objects.equals(getFood(), meta.getFood()))
+				&& Objects.equals(hasTool(), meta.hasTool())
+				&& (!hasTool() || Objects.equals(getTool(), meta.getTool()))
+				&& Objects.equals(hasEquippable(), meta.hasEquippable())
+				&& (!hasEquippable() || Objects.equals(getEquippable(), meta.getEquippable()))
+				&& Objects.equals(hasJukeboxPlayable(), meta.hasJukeboxPlayable())
+				&& (!hasJukeboxPlayable() || Objects.equals(getJukeboxPlayable(), meta.getJukeboxPlayable()))
+				&& isBlockDataEqual(meta);
+	}
+
+	private boolean isBlockDataEqual(@NotNull ItemMeta meta)
+	{
+		if (!(meta instanceof ItemMetaMock other))
+		{
+			return !hasBlockData();
+		}
+		if (hasBlockData() != other.hasBlockData())
+		{
+			return false;
+		}
+		return !hasBlockData() || Objects.equals(getBlockData(), other.getBlockData());
 	}
 
 	@Override
@@ -712,10 +798,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put(HIDE_TOOLTIP, this.hideTooltip);
 		}
-		if (this.isFireResistant())
-		{
-			map.put(FIRE_RESISTANT, this.fireResistant);
-		}
 		if (this.hasDamageResistant())
 		{
 			map.put(DAMAGE_RESISTANT, this.getDamageResistant().getKey().asString());
@@ -822,7 +904,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			lore(loreList);
 		}
 
-		customModelData = NbtParser.parseInteger(args.get(CUSTOM_MODEL_DATA));
+		setCustomModelData(NbtParser.parseInteger(args.get(CUSTOM_MODEL_DATA)));
 		enchantable = NbtParser.parseInteger(args.get(ENCHANTABLE));
 		damage = NbtParser.parseInteger(args.get(DAMAGE));
 		maxDamage = NbtParser.parseInteger(args.get(MAX_DAMAGE));
@@ -831,12 +913,16 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		itemModel = NbtParser.parseNamespacedKey(args.get(ITEM_MODEL));
 		unbreakable = NbtParser.parseBoolean(args.get(UNBREAKABLE), false);
 		hideTooltip = NbtParser.parseBoolean(args.get(HIDE_TOOLTIP), false);
-		fireResistant = NbtParser.parseBoolean(args.get(FIRE_RESISTANT), false);
 		maxStackSize = NbtParser.parseInteger(args.get(MAX_STACK_SIZE));
 		enchantmentGlintOverride = NbtParser.parseBoolean(args.get(ENCHANTMENT_GLINT_OVERRIDE));
 		glider = NbtParser.parseBoolean(args.get(GLIDER), false);
 		rarity = NbtParser.parseEnum(args.get(RARITY), ItemRarity.class);
 		damageResistant = NbtParser.parseNamespacedKey(args.get(DAMAGE_RESISTANT));
+		if (damageResistant == null && NbtParser.parseBoolean(args.get(FIRE_RESISTANT), false))
+		{
+			// Backwards compatibility for old FireResistant tag.
+			damageResistant = DamageTypeTags.IS_FIRE.getKey();
+		}
 
 		enchants = new HashMap<>();
 		Map<String, Integer> enchantMap = NbtParser.parseMap(args.get(ENCHANTMENTS), NbtParser::parseInteger);
@@ -1156,38 +1242,39 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasCustomModelData()
 	{
-		return this.customModelData != null;
+		return this.customModelData != null && !this.customModelData.getFloats().isEmpty();
 	}
 
 	@Override
 	public int getCustomModelData()
 	{
 		Preconditions.checkState(hasCustomModelData(), "We don't have CustomModelData! Check hasCustomModelData first!");
-		return this.customModelData;
+		return this.customModelData.getFloats().get(0).intValue();
 	}
 
 	@Override
 	public @NotNull CustomModelDataComponent getCustomModelDataComponent()
 	{
-		return this.hasCustomModelDataComponent() ? this.customModelDataComponent : CustomModelDataComponentMock.useDefault();
+		return this.hasCustomModelDataComponent() ? this.customModelData : CustomModelDataComponentMock.useDefault();
 	}
 
 	@Override
 	public void setCustomModelData(@Nullable Integer data)
 	{
-		this.customModelData = data;
+		this.customModelData = (data == null) ? null
+				: CustomModelDataComponentMock.builder().floats(List.of((float) data)).build();
 	}
 
 	@Override
 	public boolean hasCustomModelDataComponent()
 	{
-		return this.customModelDataComponent != null;
+		return this.customModelData != null;
 	}
 
 	@Override
 	public void setCustomModelDataComponent(@Nullable CustomModelDataComponent customModelDataComponent)
 	{
-		this.customModelDataComponent = customModelDataComponent;
+		this.customModelData = customModelDataComponent;
 	}
 
 	@Override
@@ -1476,13 +1563,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean isFireResistant()
 	{
-		return this.fireResistant;
+		return hasDamageResistant() && DamageTypeTags.IS_FIRE.getKey().equals(this.damageResistant);
 	}
 
 	@Override
 	public void setFireResistant(boolean fireResistant)
 	{
-		this.fireResistant = fireResistant;
+		if (fireResistant)
+		{
+			setDamageResistant(DamageTypeTags.IS_FIRE);
+		}
+		else if (isFireResistant())
+		{
+			setDamageResistant(null);
+		}
 	}
 
 	@Override
