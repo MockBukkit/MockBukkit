@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -307,13 +308,18 @@ class BukkitSchedulerMockTest
 
 		final CountDownLatch countDownLatch = new CountDownLatch(1);
 		final AtomicBoolean alive = new AtomicBoolean(true);
+		// Guarded by an AtomicReference (rather than the plain `testTask` field) so the task below
+		// never observes a null/stale reference: the task may start running before runTaskAsynchronously
+		// returns and assigns testTask, so reading that field directly here is a data race.
+		final AtomicReference<BukkitTask> taskRef = new AtomicReference<>();
 
 		testTask = scheduler.runTaskAsynchronously(null, () ->
 		{
 			countDownLatch.countDown();
 			while (alive.get())
 			{
-				if (testTask.isCancelled())
+				BukkitTask task = taskRef.get();
+				if (task != null && task.isCancelled())
 				{
 					alive.set(false);
 				}
@@ -329,9 +335,15 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
-		countDownLatch.await(1, TimeUnit.SECONDS);
+		taskRef.set(testTask);
+		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 
 		assertTrue(alive.get());
+		long deadline = System.currentTimeMillis() + 1000;
+		while (scheduler.getActiveRunningCount() != 1 && System.currentTimeMillis() < deadline)
+		{
+			Thread.sleep(10);
+		}
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
