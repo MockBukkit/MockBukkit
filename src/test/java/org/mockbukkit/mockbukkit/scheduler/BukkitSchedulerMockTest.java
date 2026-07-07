@@ -32,7 +32,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -306,46 +305,27 @@ class BukkitSchedulerMockTest
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 
-		final CountDownLatch countDownLatch = new CountDownLatch(1);
-		final AtomicBoolean alive = new AtomicBoolean(true);
-		// Guarded by an AtomicReference (rather than the plain `testTask` field) so the task below
-		// never observes a null/stale reference: the task may start running before runTaskAsynchronously
-		// returns and assigns testTask, so reading that field directly here is a data race.
-		final AtomicReference<BukkitTask> taskRef = new AtomicReference<>();
+		final CountDownLatch taskStarted = new CountDownLatch(1);
 
-		testTask = scheduler.runTaskAsynchronously(null, () ->
+		scheduler.runTaskAsynchronously(null, () ->
 		{
-			countDownLatch.countDown();
-			while (alive.get())
+			taskStarted.countDown();
+			try
 			{
-				BukkitTask task = taskRef.get();
-				if (task != null && task.isCancelled())
-				{
-					alive.set(false);
-				}
-				try
-				{
-					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
-				{
-					alive.set(false);
-					String message = "Interrupted";
-					throw new TaskCancelledException(message, e);
-				}
+				// Block until the scheduler force-interrupts us during shutdown.
+				new CountDownLatch(1).await(); // never counted down
+			}
+			catch (InterruptedException e)
+			{
+				throw new TaskCancelledException("Interrupted", e);
 			}
 		});
-		taskRef.set(testTask);
-		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 
-		assertTrue(alive.get());
-		long deadline = System.currentTimeMillis() + 1000;
-		while (scheduler.getActiveRunningCount() != 1 && System.currentTimeMillis() < deadline)
-		{
-			Thread.sleep(10);
-		}
+		// Unbounded wait: blocks until the task has provably started. No timeout, so
+		// a slow machine only makes the test slower, never changes the verdict.
+		taskStarted.await();
 		assertEquals(1, scheduler.getActiveRunningCount());
-		scheduler.performTicks(10);
+
 		scheduler.setShutdownTimeout(10);
 		assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
 	}
