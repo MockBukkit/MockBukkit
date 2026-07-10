@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -30,6 +31,7 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -66,6 +68,7 @@ public class ItemStackMock extends ItemStack
 	}
 
 	private final Map<DataComponentType, Object> components = new HashMap<>();
+	private final Set<DataComponentType> removedComponents = new HashSet<>();
 
 	private ItemType type = ItemTypeMock.AIR;
 	private int amount = 1;
@@ -91,6 +94,7 @@ public class ItemStackMock extends ItemStack
 		this.amount = stack.getAmount();
 		this.durability = initDurability(this.type);
 		setItemMeta(stack.getItemMeta());
+		copyDataFrom(stack, type -> true);
 	}
 
 	public ItemStackMock(@NotNull Material type, int amount)
@@ -477,32 +481,35 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @Unmodifiable Set<@NotNull DataComponentType> getDataTypes()
 	{
-		return this.components.keySet();
+		return Set.copyOf(this.components.keySet());
 	}
 
 	@Override
 	public <T> void setData(DataComponentType.@NotNull Valued<T> type, @NonNull T value)
 	{
 		this.components.put(type, value);
+		this.removedComponents.remove(type);
 	}
 
 	@Override
 	public void setData(DataComponentType.@NotNull NonValued type)
 	{
 		this.components.put(type, null);
+		this.removedComponents.remove(type);
 	}
 
 	@Override
 	public void unsetData(@NotNull DataComponentType type)
 	{
 		this.components.remove(type);
+		this.removedComponents.add(type);
 	}
 
 	@Override
 	public void resetData(@NotNull DataComponentType type)
 	{
-		// TODO:
-		throw new UnimplementedOperationException();
+		this.components.remove(type);
+		this.removedComponents.remove(type);
 	}
 
 	@Override
@@ -516,14 +523,58 @@ public class ItemStackMock extends ItemStack
 			return;
 		}
 
-		// TODO:
-		throw new UnimplementedOperationException();
+		for (DataComponentType type : getOverriddenDataTypes(source))
+		{
+			if (filter.test(type))
+			{
+				copyDataComponentFrom(source, type);
+			}
+		}
+	}
+
+	private static Set<DataComponentType> getOverriddenDataTypes(@NotNull ItemStack source)
+	{
+		if (source instanceof ItemStackMock mock)
+		{
+			Set<DataComponentType> types = new HashSet<>(mock.components.keySet());
+			types.addAll(mock.removedComponents);
+			return types;
+		}
+
+		Set<DataComponentType> types = new HashSet<>(source.getDataTypes());
+		for (DataComponentType type : Registry.DATA_COMPONENT_TYPE)
+		{
+			if (source.isDataOverridden(type))
+			{
+				types.add(type);
+			}
+		}
+		return types;
+	}
+
+	private void copyDataComponentFrom(@NotNull ItemStack source, @NotNull DataComponentType type)
+	{
+		if (!source.hasData(type))
+		{
+			unsetData(type);
+			return;
+		}
+
+		this.removedComponents.remove(type);
+		if (type instanceof DataComponentType.Valued<?> valued)
+		{
+			this.components.put(type, source.getData(valued));
+		}
+		else if (type instanceof DataComponentType.NonValued)
+		{
+			this.components.put(type, null);
+		}
 	}
 
 	@Override
 	public boolean isDataOverridden(@NotNull DataComponentType type)
 	{
-		return !isEmpty() && this.components.containsKey(type);
+		return !isEmpty() && (this.components.containsKey(type) || this.removedComponents.contains(type));
 	}
 
 	@Override

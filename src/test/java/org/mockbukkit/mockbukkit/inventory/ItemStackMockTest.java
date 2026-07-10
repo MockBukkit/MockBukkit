@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
@@ -849,6 +850,112 @@ class ItemStackMockTest
 			assertFalse(itemStack.hasData(DataComponentTypes.CUSTOM_NAME));
 		}
 
+	}
+
+	@Nested
+	class CopyDataFrom
+	{
+
+		@Test
+		void givenValuesAndNonValuedComponents()
+		{
+			ItemStack source = new ItemStack(Material.DIAMOND_PICKAXE);
+			source.setData(DataComponentTypes.CUSTOM_NAME, Component.text("source"));
+			source.setData(DataComponentTypes.DAMAGE, 200);
+			source.setData(DataComponentTypes.UNBREAKABLE);
+
+			ItemStack target = new ItemStack(Material.DIAMOND_PICKAXE);
+			target.setData(DataComponentTypes.CUSTOM_NAME, Component.text("target"));
+			target.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, false);
+
+			target.copyDataFrom(source, type -> true);
+
+			assertEquals(Component.text("source"), target.getData(DataComponentTypes.CUSTOM_NAME));
+			assertEquals(200, target.getData(DataComponentTypes.DAMAGE));
+			assertTrue(target.hasData(DataComponentTypes.UNBREAKABLE));
+			assertEquals(false, target.getData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE));
+		}
+
+		@Test
+		void givenFilter()
+		{
+			ItemStack source = new ItemStack(Material.DIAMOND_PICKAXE);
+			source.setData(DataComponentTypes.CUSTOM_NAME, Component.text("source"));
+			source.setData(DataComponentTypes.DAMAGE, 200);
+			source.setData(DataComponentTypes.UNBREAKABLE);
+
+			ItemStack target = new ItemStack(Material.DIAMOND_PICKAXE);
+			target.setData(DataComponentTypes.CUSTOM_NAME, Component.text("target"));
+			target.setData(DataComponentTypes.DAMAGE, 5);
+
+			Set<DataComponentType> copiedTypes = Set.of(DataComponentTypes.CUSTOM_NAME);
+			target.copyDataFrom(source, copiedTypes::contains);
+
+			assertEquals(Component.text("source"), target.getData(DataComponentTypes.CUSTOM_NAME));
+			assertEquals(5, target.getData(DataComponentTypes.DAMAGE));
+			assertFalse(target.hasData(DataComponentTypes.UNBREAKABLE));
+		}
+
+		@Test
+		void givenRemovedComponent()
+		{
+			ItemStack source = new ItemStack(Material.DIAMOND_PICKAXE);
+			source.setData(DataComponentTypes.CUSTOM_NAME, Component.text("source"));
+			source.unsetData(DataComponentTypes.DAMAGE);
+
+			ItemStack target = new ItemStack(Material.DIAMOND_PICKAXE);
+			target.setData(DataComponentTypes.DAMAGE, 5);
+
+			target.copyDataFrom(source, type -> true);
+
+			assertEquals(Component.text("source"), target.getData(DataComponentTypes.CUSTOM_NAME));
+			assertFalse(target.hasData(DataComponentTypes.DAMAGE));
+			assertNull(target.getData(DataComponentTypes.DAMAGE));
+			assertTrue(target.isDataOverridden(DataComponentTypes.DAMAGE));
+		}
+
+		@Test
+		void givenEmptySource()
+		{
+			ItemStack source = new ItemStack(Material.AIR);
+			source.setData(DataComponentTypes.CUSTOM_NAME, Component.text("source"));
+
+			ItemStack target = new ItemStack(Material.DIAMOND_PICKAXE);
+			target.setData(DataComponentTypes.CUSTOM_NAME, Component.text("target"));
+
+			target.copyDataFrom(source, type -> true);
+
+			assertEquals(Component.text("target"), target.getData(DataComponentTypes.CUSTOM_NAME));
+		}
+
+		@Test
+		void givenEmptyTarget()
+		{
+			ItemStack source = new ItemStack(Material.DIAMOND_PICKAXE);
+			source.setData(DataComponentTypes.CUSTOM_NAME, Component.text("source"));
+
+			ItemStack target = new ItemStack(Material.AIR);
+			target.copyDataFrom(source, type -> true);
+
+			assertFalse(target.hasData(DataComponentTypes.CUSTOM_NAME));
+			assertFalse(target.isDataOverridden(DataComponentTypes.CUSTOM_NAME));
+		}
+
+	}
+
+	@Test
+	void clone_CopiesDataComponents()
+	{
+		ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+		itemStack.setData(DataComponentTypes.CUSTOM_NAME, Component.text("source"));
+		itemStack.unsetData(DataComponentTypes.DAMAGE);
+
+		ItemStack cloned = itemStack.clone();
+
+		assertNotSame(itemStack, cloned);
+		assertEquals(Component.text("source"), cloned.getData(DataComponentTypes.CUSTOM_NAME));
+		assertFalse(cloned.hasData(DataComponentTypes.DAMAGE));
+		assertTrue(cloned.isDataOverridden(DataComponentTypes.DAMAGE));
 	}
 
 	@Nested
