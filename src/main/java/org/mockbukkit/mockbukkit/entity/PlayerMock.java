@@ -12,7 +12,6 @@ import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
-import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
@@ -1023,14 +1022,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			this.sendMessage(sender, message);
 		}
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
-	{
-		Preconditions.checkNotNull(message, "input");
-		this.messages.add(message);
 	}
 
 	@Override
