@@ -93,6 +93,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches blocks with the specified material.
+	 *
 	 * @param material The material that the block should have
 	 * @return A matcher which matches blocks with the specified material
 	 * @see BlockMaterialTypeMatcher
@@ -103,6 +105,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches blocks without the specified material.
+	 *
 	 * @param material The material that the block should not have
 	 * @return A matcher which matches blocks without the specified material
 	 * @see BlockMaterialTypeMatcher
@@ -117,6 +121,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches command results that produced any response.
+	 *
 	 * @return A matcher which matches command results that produced any response
 	 * @see CommandResultAnyResponseMatcher
 	 */
@@ -126,6 +132,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches command results that produced no response.
+	 *
 	 * @return A matcher which matches command results that produced no response
 	 * @see CommandResultAnyResponseMatcher
 	 */
@@ -135,6 +143,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches command results with the specified response.
+	 *
 	 * @param response The response required for a match
 	 * @return A matcher which matches command results with the specified response
 	 * @see CommandResultResponseMatcher
@@ -145,6 +155,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches command results without the specified response.
+	 *
 	 * @param response The response required for no match
 	 * @return A matcher which matches command results without the specified response
 	 * @see CommandResultResponseMatcher
@@ -155,6 +167,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches command results that succeeded.
+	 *
 	 * @return A matcher which matches command results that succeeded
 	 * @see CommandResultSucceedMatcher
 	 */
@@ -164,6 +178,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches command results that failed.
+	 *
 	 * @return A matcher which matches command results that failed
 	 * @see CommandResultSucceedMatcher
 	 */
@@ -173,6 +189,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches message targets that received any message.
+	 *
 	 * @return A matcher which matches message targets that received any message
 	 * @see MessageTargetReceivedAnyMessageMatcher
 	 */
@@ -182,6 +200,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches message targets that received no message.
+	 *
 	 * @return A matcher which matches message targets that received no message
 	 * @see MessageTargetReceivedAnyMessageMatcher
 	 */
@@ -191,6 +211,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches message targets that received the specified message.
+	 *
 	 * @param expected The message required for a match
 	 * @return A matcher which matches message targets that received the specified message
 	 * @see MessageTargetReceivedMessageMatcher
@@ -201,6 +223,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches message targets that received the specified message.
+	 *
 	 * @param expected The message required for a match
 	 * @return A matcher which matches message targets that received the specified message
 	 * @see MessageTargetReceivedMessageMatcher
@@ -211,6 +235,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches message targets that did not receive the specified message.
+	 *
 	 * @param expected The message required for no match
 	 * @return A matcher which matches message targets that did not receive the specified message
 	 * @see MessageTargetReceivedMessageMatcher
@@ -225,6 +251,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches with any entity within a radius of specified location.
+	 *
 	 * @param location    The location required for a match
 	 * @param maxDistance The radius away from the location which gives a match
 	 * @return A matcher which matches with any entity within a radius of specified location
@@ -236,6 +264,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity outside a radius of specified location.
+	 *
 	 * @param location    The location required for no match
 	 * @param maxDistance The radius away from the location which withdraws a match
 	 * @return A matcher which matches with any entity outside a radius of specified location
@@ -247,6 +277,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity that has teleported.
+	 *
 	 * @return A matcher which matches with any entity that has teleported
 	 * @see EntityTeleportationMatcher
 	 */
@@ -256,6 +288,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity that has teleported to the specified location.
+	 *
 	 * @param location The location the entity should have teleported to
 	 * @return A matcher which matches with any entity that has teleported to the specified location
 	 * @see EntityTeleportationMatcher
@@ -266,6 +300,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity that has teleported near the specified location.
+	 *
 	 * @param location        The location the entity should have teleported to
 	 * @param maximumDistance The maximum distance from the location which gives a match
 	 * @return A matcher which matches with any entity that has teleported near the specified location
@@ -277,6 +313,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity that has not teleported.
+	 *
 	 * @return A matcher which matches with any entity that has not teleported
 	 * @see EntityTeleportationMatcher
 	 */
@@ -286,6 +324,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity that has not teleported to the specified location.
+	 *
 	 * @param location The location the entity should not have teleported to
 	 * @return A matcher which matches with any entity that has not teleported to the specified location
 	 * @see EntityTeleportationMatcher
@@ -296,6 +336,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any entity that has not teleported near the specified location.
+	 *
 	 * @param location        The location the entity should not have teleported to
 	 * @param maximumDistance The maximum distance from the location which withdraws a match
 	 * @return A matcher which matches with any entity that has not teleported near the specified location
@@ -307,6 +349,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches allays holding the specified item.
+	 *
 	 * @param currentItem The material the allay should be holding
 	 * @return A matcher which matches allays holding the specified item
 	 * @see AllayCurrentItemMatcher
@@ -317,6 +361,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches allays not holding the specified item.
+	 *
 	 * @param currentItem The material the allay should not be holding
 	 * @return A matcher which matches allays not holding the specified item
 	 * @see AllayCurrentItemMatcher
@@ -327,6 +373,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches goats that have rammed the specified target.
+	 *
 	 * @param target The entity the goat should have rammed
 	 * @return A matcher which matches goats that have rammed the specified target
 	 * @see GoatEntityRammedMatcher
@@ -337,6 +385,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches goats that have not rammed the specified target.
+	 *
 	 * @param target The entity the goat should not have rammed
 	 * @return A matcher which matches goats that have not rammed the specified target
 	 * @see GoatEntityRammedMatcher
@@ -347,6 +397,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches human entities with the specified item in their inventory view.
+	 *
 	 * @param material The material of the item in the inventory view
 	 * @return A matcher which matches human entities with the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
@@ -357,6 +409,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches human entities with the specified item in their inventory view.
+	 *
 	 * @param item The item in the inventory view
 	 * @return A matcher which matches human entities with the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
@@ -367,6 +421,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches human entities without the specified item in their inventory view.
+	 *
 	 * @param item The item that should not be in the inventory view
 	 * @return A matcher which matches human entities without the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
@@ -377,6 +433,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches human entities without the specified item in their inventory view.
+	 *
 	 * @param material The material that should not be in the inventory view
 	 * @return A matcher which matches human entities without the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
@@ -387,6 +445,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches human entities with the specified inventory view type.
+	 *
 	 * @param inventoryType The inventory view type required for a match
 	 * @return A matcher which matches human entities with the specified inventory view type
 	 * @see HumanEntityInventoryViewTypeMatcher
@@ -397,6 +457,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches human entities without the specified inventory view type.
+	 *
 	 * @param inventoryType The inventory view type required for no match
 	 * @return A matcher which matches human entities without the specified inventory view type
 	 * @see HumanEntityInventoryViewTypeMatcher
@@ -407,6 +469,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches players that consumed the specified item.
+	 *
 	 * @param itemStack The item the player should have consumed
 	 * @return A matcher which matches players that consumed the specified item
 	 * @see PlayerConsumeItemMatcher
@@ -417,6 +481,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches players that did not consume the specified item.
+	 *
 	 * @param itemStack The item the player should not have consumed
 	 * @return A matcher which matches players that did not consume the specified item
 	 * @see PlayerConsumeItemMatcher
@@ -427,6 +493,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches ranged entities that attacked the specified target.
+	 *
 	 * @param target The entity that should have been attacked
 	 * @param charge The charge of the attack
 	 * @return A matcher which matches ranged entities that attacked the specified target
@@ -438,6 +506,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches ranged entities that attacked the specified target.
+	 *
 	 * @param target     The entity that should have been attacked
 	 * @param charge     The charge of the attack
 	 * @param aggressive Whether the attack should have been aggressive
@@ -450,6 +520,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches ranged entities that did not attack the specified target.
+	 *
 	 * @param target The entity that should not have been attacked
 	 * @param charge The charge of the attack
 	 * @return A matcher which matches ranged entities that did not attack the specified target
@@ -461,6 +533,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches ranged entities that did not attack the specified target.
+	 *
 	 * @param target     The entity that should not have been attacked
 	 * @param charge     The charge of the attack
 	 * @param aggressive Whether the attack should have been aggressive
@@ -477,6 +551,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches help maps with the specified factory registered.
+	 *
 	 * @param factory The help topic factory that should be registered
 	 * @return A matcher which matches help maps with the specified factory registered
 	 * @see HelpMapFactoryRegisteredMatcher
@@ -487,6 +563,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches help maps without the specified factory registered.
+	 *
 	 * @param factory The help topic factory that should not be registered
 	 * @return A matcher which matches help maps without the specified factory registered
 	 * @see HelpMapFactoryRegisteredMatcher
@@ -501,6 +579,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches with any inventory with at least the required amount of items.
+	 *
 	 * @param material The material of the items
 	 * @param amount   The amount of the items required for a match
 	 * @return A matcher which matches with any inventory with at least the required amount of items
@@ -512,6 +592,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any inventory with less than the given amount of items.
+	 *
 	 * @param material The material of the items
 	 * @param amount   The amount of the items required for no match
 	 * @return A matcher which matches with any inventory with less than the given amount of items
@@ -523,6 +605,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any inventory with at least the required amount of items.
+	 *
 	 * @param targetItem The target item
 	 * @param amount     The amount of the items required for a match
 	 * @return A matcher which matches with any inventory with at least the required amount of items
@@ -534,6 +618,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any inventory with less than the given amount of items.
+	 *
 	 * @param targetItem The target item
 	 * @param amount     The amount of the items required for no match
 	 * @return A matcher which matches with any inventory with less than the given amount of items
@@ -545,6 +631,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches when an item stack is similar to the specified item stack.
+	 *
 	 * @param itemStack The required item stack to be similar to for a match
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 * @see ItemSimilarityMatcher
@@ -555,6 +643,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches when an item stack is similar to the specified item stack.
+	 *
 	 * @param itemMaterial The required material of the item stack to be similar to for a match
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 * @see ItemSimilarityMatcher
@@ -565,6 +655,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any inventory holder containing the specified item stack.
+	 *
 	 * @param itemStack The item stack required for there to be a match
 	 * @return A matcher which matches with any inventory holder containing the specified item stack
 	 * @see InventoryHolderContainsMatcher
@@ -575,6 +667,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches with any inventory holder without the specified item stack.
+	 *
 	 * @param itemStack The item stack required for there to be no match
 	 * @return A matcher which matches with any inventory holder without the specified item stack
 	 * @see InventoryHolderContainsMatcher
@@ -585,6 +679,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta that has any lore.
+	 *
 	 * @return A matcher which matches item meta that has any lore
 	 * @see ItemMetaAnyLoreMatcher
 	 */
@@ -594,6 +690,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta that has no lore.
+	 *
 	 * @return A matcher which matches item meta that has no lore
 	 * @see ItemMetaAnyLoreMatcher
 	 */
@@ -603,6 +701,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta with the specified lore.
+	 *
 	 * @param legacyLoreItems The legacy formatted lore lines required for a match
 	 * @return A matcher which matches item meta with the specified lore
 	 * @see ItemMetaLoreMatcher
@@ -613,6 +713,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta without the specified lore.
+	 *
 	 * @param legacyLoreItems The legacy formatted lore lines required for no match
 	 * @return A matcher which matches item meta without the specified lore
 	 * @see ItemMetaLoreMatcher
@@ -623,6 +725,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta with the specified lore.
+	 *
 	 * @param loreItems The lore components required for a match
 	 * @return A matcher which matches item meta with the specified lore
 	 * @see ItemMetaLoreMatcher
@@ -633,6 +737,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta without the specified lore.
+	 *
 	 * @param loreItems The lore components required for no match
 	 * @return A matcher which matches item meta without the specified lore
 	 * @see ItemMetaLoreMatcher
@@ -643,6 +749,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta with the specified lore.
+	 *
 	 * @param lore The lore components required for a match
 	 * @return A matcher which matches item meta with the specified lore
 	 * @see ItemMetaLoreMatcher
@@ -653,6 +761,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches item meta without the specified lore.
+	 *
 	 * @param lore The lore components required for no match
 	 * @return A matcher which matches item meta without the specified lore
 	 * @see ItemMetaLoreMatcher
@@ -667,6 +777,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches plugin managers that fired an instance of the specified event.
+	 *
 	 * @param targetEvent The event class that should have been fired
 	 * @return A matcher which matches plugin managers that fired an instance of the specified event
 	 * @see PluginManagerFiredEventClassMatcher
@@ -677,6 +789,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches plugin managers that did not fire an instance of the specified event.
+	 *
 	 * @param targetEvent The event class that should not have been fired
 	 * @return A matcher which matches plugin managers that did not fire an instance of the specified event
 	 * @see PluginManagerFiredEventClassMatcher
@@ -687,6 +801,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches plugin managers that fired a matching event.
+	 *
 	 * @param eventClass The event class that should have been fired
 	 * @param filter     The filter the fired event should match
 	 * @param <G>        The type of the event
@@ -699,6 +815,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches plugin managers that did not fire a matching event.
+	 *
 	 * @param eventClass The event class that should not have been fired
 	 * @param filter     The filter the fired event should match
 	 * @param <G>        The type of the event
@@ -715,6 +833,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches schedulers with no overdue tasks.
+	 *
 	 * @return A matcher which matches schedulers with no overdue tasks
 	 * @see SchedulerOverdueTasksMatcher
 	 */
@@ -724,6 +844,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches schedulers with overdue tasks.
+	 *
 	 * @return A matcher which matches schedulers with overdue tasks
 	 * @see SchedulerOverdueTasksMatcher
 	 */
@@ -737,6 +859,8 @@ public final class MockBukkitMatchers
 	// ===================================================================================
 
 	/**
+	 * Creates a matcher which matches sound receivers that heard the specified sound.
+	 *
 	 * @param sound  The sound that should have been heard
 	 * @param filter The filter the audio experience should match
 	 * @return A matcher which matches sound receivers that heard the specified sound
@@ -748,6 +872,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that heard the specified sound.
+	 *
 	 * @param sound  The sound that should have been heard
 	 * @param filter The filter the audio experience should match
 	 * @return A matcher which matches sound receivers that heard the specified sound
@@ -759,6 +885,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that did not hear the specified sound.
+	 *
 	 * @param sound  The sound that should not have been heard
 	 * @param filter The filter the audio experience should match
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
@@ -770,6 +898,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that heard the specified sound.
+	 *
 	 * @param soundKey The key of the sound that should have been heard
 	 * @param filter   The filter the audio experience should match
 	 * @return A matcher which matches sound receivers that heard the specified sound
@@ -781,6 +911,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that did not hear the specified sound.
+	 *
 	 * @param soundKey The key of the sound that should not have been heard
 	 * @param filter   The filter the audio experience should match
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
@@ -792,6 +924,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that heard the specified sound.
+	 *
 	 * @param sound The key of the sound that should have been heard
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
@@ -802,6 +936,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that did not hear the specified sound.
+	 *
 	 * @param sound The key of the sound that should not have been heard
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
@@ -812,6 +948,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that heard the specified sound.
+	 *
 	 * @param sound The sound that should have been heard
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
@@ -822,6 +960,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that did not hear the specified sound.
+	 *
 	 * @param sound The sound that should not have been heard
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
@@ -832,6 +972,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that heard the specified sound.
+	 *
 	 * @param sound The sound that should have been heard
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
@@ -842,6 +984,8 @@ public final class MockBukkitMatchers
 	}
 
 	/**
+	 * Creates a matcher which matches sound receivers that did not hear the specified sound.
+	 *
 	 * @param sound The sound that should not have been heard
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
