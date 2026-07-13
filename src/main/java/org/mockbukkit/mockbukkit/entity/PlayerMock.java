@@ -19,7 +19,6 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
@@ -124,6 +123,7 @@ import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
 import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
+import org.mockbukkit.mockbukkit.util.BungeeComponentUtils;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetAddress;
@@ -1031,6 +1031,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendMessage(@NotNull Component message)
+	{
+		Preconditions.checkNotNull(message, "input");
+		this.messages.add(message);
+	}
+
+	@Override
 	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
@@ -1627,16 +1634,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void setPlayerListHeaderFooter(BaseComponent @NotNull [] header, BaseComponent @NotNull [] footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListHeader = BungeeComponentUtils.deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListFooter = BungeeComponentUtils.deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ header });
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ footer });
+		this.playerListHeader = BungeeComponentUtils.deserialize(new BaseComponent[]{ header });
+		this.playerListFooter = BungeeComponentUtils.deserialize(new BaseComponent[]{ footer });
 	}
 
 	@Override
@@ -3328,7 +3335,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			Preconditions.checkNotNull(position, "Position must not be null");
 			Preconditions.checkNotNull(components, "Component must not be null");
-			PlayerMock.this.sendMessage(sender, components);
+			Component comp = BungeeComponentUtils.deserialize(components);
+			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
+			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
+			PlayerMock.this.sendMessage(comp);
 		}
 
 	}

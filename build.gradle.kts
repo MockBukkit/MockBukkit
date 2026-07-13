@@ -34,11 +34,6 @@ dependencies {
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
-		exclude("net.kyori", "adventure-platform-api")
-		exclude("net.kyori", "adventure-api")
-	}
-
 	implementation("net.bytebuddy:byte-buddy:1.18.10")
 
 	compileOnly("org.projectlombok:lombok:1.18.46")

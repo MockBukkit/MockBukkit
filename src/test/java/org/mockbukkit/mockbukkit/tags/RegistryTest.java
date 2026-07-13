@@ -30,7 +30,9 @@ class RegistryTest
 			if (shouldBeEmpty)
 			{
 				assertTrue(isEmpty, "Expected Tag \"" + tag.key().asString() + "\" was expected to be empty");
-			} else {
+			}
+			else
+			{
 				assertFalse(isEmpty, "Expected Tag \"" + tag.key().asString() + "\" not to be empty");
 			}
 		}

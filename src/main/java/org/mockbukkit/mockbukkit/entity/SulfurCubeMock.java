@@ -192,7 +192,8 @@ public class SulfurCubeMock extends MobMock implements SulfurCube
 		return EntityType.SULFUR_CUBE;
 	}
 
-	public record ArchetypeMock(NamespacedKey key) implements Archetype {
+	public record ArchetypeMock(NamespacedKey key) implements Archetype
+	{
 
 		@Override
 		public NamespacedKey getKey()

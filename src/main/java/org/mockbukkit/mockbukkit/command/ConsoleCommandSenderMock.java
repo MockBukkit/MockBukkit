@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.command;
 
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Server;
@@ -20,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
+import org.mockbukkit.mockbukkit.util.BungeeComponentUtils;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -244,7 +244,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
 		{
 			Preconditions.checkNotNull(components, "Components must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			Component comp = BungeeComponentUtils.deserialize(components);
 			ConsoleCommandSenderMock.this.sendMessage(comp);
 		}
 

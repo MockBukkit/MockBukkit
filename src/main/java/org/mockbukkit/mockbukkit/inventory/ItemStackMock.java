@@ -78,6 +78,9 @@ public class ItemStackMock extends ItemStack
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
 	private static final String ITEM_META_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
 
+	// Items whose translation key gains the ".effect.empty" suffix when no effect is present.
+	private static final Set<Material> EMPTY_EFFECT_ITEMS = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
+
 	//Utility
 	protected ItemStackMock()
 	{
@@ -648,6 +651,31 @@ public class ItemStackMock extends ItemStack
 		}
 
 		return result;
+	}
+
+	@Override
+	public @NotNull String translationKey()
+	{
+		Material material = getType();
+		String key;
+		if (material.isItem())
+		{
+			key = material.getItemTranslationKey();
+		}
+		else if (material.isBlock())
+		{
+			key = material.getBlockTranslationKey();
+		}
+		else
+		{
+			return material.getKey().asString();
+		}
+
+		if (EMPTY_EFFECT_ITEMS.contains(material))
+		{
+			key = key + ".effect.empty";
+		}
+		return key;
 	}
 
 }

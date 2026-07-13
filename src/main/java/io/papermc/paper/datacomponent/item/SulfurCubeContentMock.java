@@ -5,7 +5,8 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 @SuppressWarnings({ "UnstableApiUsage", "NonExtendableApiUsage" })
-public record SulfurCubeContentMock(ItemStack absorbedItem) implements SulfurCubeContent {
+public record SulfurCubeContentMock(ItemStack absorbedItem) implements SulfurCubeContent
+{
 
 	@Override
 	public ItemStack absorbedItem()
