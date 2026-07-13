@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Vex;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +27,7 @@ public class VexMock extends MonsterMock implements Vex
 
 	private @Nullable Location boundLocation = null;
 	private @Nullable Mob summoner = null;
+	private @Nullable LivingEntity owner = null;
 
 	/**
 	 * Constructs a new {@link VexMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -102,6 +104,18 @@ public class VexMock extends MonsterMock implements Vex
 	public void setSummoner(@Nullable Mob summoner)
 	{
 		this.summoner = summoner;
+	}
+
+	@Override
+	public @Nullable LivingEntity getOwner()
+	{
+		return this.owner;
+	}
+
+	@Override
+	public void setOwner(@Nullable LivingEntity owner)
+	{
+		this.owner = owner;
 	}
 
 	@Override

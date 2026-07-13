@@ -116,9 +116,28 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
+	public boolean hasPattern()
+	{
+		return this.pattern != null;
+	}
+
+	@Override
+	public boolean hasBodyColor()
+	{
+		return this.bodyColor != null;
+	}
+
+	@Override
+	public boolean hasPatternColor()
+	{
+		return this.patternColor != null;
+	}
+
+	@Override
+	@Deprecated(since = "26.2", forRemoval = true)
 	public boolean hasVariant()
 	{
-		return patternColor != null && bodyColor != null && pattern != null;
+		return this.hasPattern() || this.hasBodyColor() || this.hasPatternColor();
 	}
 
 	@Override
