@@ -2,6 +2,7 @@
 	"replace": false,
 	"values": [
 		"minecraft:campfire",
-		"minecraft:hot_floor"
+		"minecraft:hot_floor",
+		"minecraft:sulfur_cube_hot"
 	]
 }

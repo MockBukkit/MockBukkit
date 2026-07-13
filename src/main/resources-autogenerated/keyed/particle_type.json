@@ -271,6 +271,26 @@
 			"ordinal": 52
 		},
 		{
+			"key": "minecraft:geyser",
+			"name": "GEYSER",
+			"ordinal": 121
+		},
+		{
+			"key": "minecraft:geyser_base",
+			"name": "GEYSER_BASE",
+			"ordinal": 122
+		},
+		{
+			"key": "minecraft:geyser_plume",
+			"name": "GEYSER_PLUME",
+			"ordinal": 123
+		},
+		{
+			"key": "minecraft:geyser_poof",
+			"name": "GEYSER_POOF",
+			"ordinal": 124
+		},
+		{
 			"key": "minecraft:glow",
 			"name": "GLOW",
 			"ordinal": 81
@@ -374,6 +394,16 @@
 			"key": "minecraft:note",
 			"name": "NOTE",
 			"ordinal": 21
+		},
+		{
+			"key": "minecraft:noxious_gas",
+			"name": "NOXIOUS_GAS",
+			"ordinal": 117
+		},
+		{
+			"key": "minecraft:noxious_gas_cloud",
+			"name": "NOXIOUS_GAS_CLOUD",
+			"ordinal": 118
 		},
 		{
 			"key": "minecraft:ominous_spawning",
@@ -504,6 +534,16 @@
 			"key": "minecraft:squid_ink",
 			"name": "SQUID_INK",
 			"ordinal": 42
+		},
+		{
+			"key": "minecraft:sulfur_bubbles",
+			"name": "SULFUR_BUBBLES",
+			"ordinal": 120
+		},
+		{
+			"key": "minecraft:sulfur_cube_goo",
+			"name": "SULFUR_CUBE_GOO",
+			"ordinal": 119
 		},
 		{
 			"key": "minecraft:sweep_attack",

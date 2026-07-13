@@ -296,7 +296,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:acacia_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -1390,7 +1390,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:bamboo_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -2571,7 +2571,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:birch_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -6968,7 +6968,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:cherry_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -7671,6 +7671,34 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:cinnabar_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:chiseled_cinnabar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:chiseled_cinnabar"
+		},
+		"shape": [
+			"a",
+			"b"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:cut_copper_slab"
 				],
 				"type": "material"
@@ -7923,6 +7951,34 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:sulfur_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:chiseled_sulfur",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:chiseled_sulfur"
+		},
+		"shape": [
+			"a",
+			"b"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:tuff_slab"
 				],
 				"type": "material"
@@ -7971,6 +8027,322 @@
 		"shape": [
 			"a",
 			"b"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_brick_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cinnabar_brick_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_brick_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:cinnabar_brick_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_brick_wall",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cinnabar_brick_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_bricks",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:cinnabar_bricks"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cinnabar_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:cinnabar_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_wall",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cinnabar_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
 		],
 		"type": "shaped"
 	},
@@ -10416,7 +10788,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:crimson_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -12101,7 +12473,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:dark_oak_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -22503,7 +22875,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:jungle_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -27138,7 +27510,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:mangrove_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -29445,7 +29817,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:oak_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -31351,7 +31723,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:pale_oak_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -33171,6 +33543,184 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:polished_cinnabar"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:polished_cinnabar_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:polished_cinnabar_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar_wall",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:polished_cinnabar_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:cobbled_deepslate"
 				],
 				"type": "material"
@@ -33601,6 +34151,184 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:polished_sulfur"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:polished_sulfur_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:polished_sulfur_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur_wall",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:polished_sulfur_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:tuff"
 				],
 				"type": "material"
@@ -33773,6 +34501,72 @@
 			"def"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		],
+		"group": "",
+		"key": "minecraft:potent_sulfur",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potent_sulfur"
+		},
+		"type": "shapeless"
 	},
 	{
 		"category": "MISC",
@@ -39926,7 +40720,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:spruce_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -41506,6 +42300,362 @@
 			"type": "minecraft:sugar"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_brick_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:sulfur_brick_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_brick_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:sulfur_brick_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_brick_wall",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:sulfur_brick_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_bricks",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:sulfur_bricks"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_from_sulfur_spikes",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:sulfur_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:sulfur_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_wall",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:sulfur_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -43251,7 +44401,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:warped_hanging_sign",
 		"result": {
 			"amount": 6,

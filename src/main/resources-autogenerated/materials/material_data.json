@@ -1694,6 +1694,7 @@
 			"slot_5_occupied": false
 		}
 	},
+	"minecraft:chiseled_cinnabar": {},
 	"minecraft:chiseled_copper": {},
 	"minecraft:chiseled_deepslate": {},
 	"minecraft:chiseled_nether_bricks": {},
@@ -1703,6 +1704,7 @@
 	"minecraft:chiseled_resin_bricks": {},
 	"minecraft:chiseled_sandstone": {},
 	"minecraft:chiseled_stone_bricks": {},
+	"minecraft:chiseled_sulfur": {},
 	"minecraft:chiseled_tuff": {},
 	"minecraft:chiseled_tuff_bricks": {},
 	"minecraft:chorus_flower": {
@@ -1731,6 +1733,76 @@
 			"south": false,
 			"up": false,
 			"west": false
+		}
+	},
+	"minecraft:cinnabar": {},
+	"minecraft:cinnabar_brick_slab": {
+		"allowedStates": {},
+		"defaultStates": {
+			"type": "bottom",
+			"waterlogged": false
+		}
+	},
+	"minecraft:cinnabar_brick_stairs": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"half": "bottom",
+			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:cinnabar_brick_wall": {
+		"allowedStates": {},
+		"defaultStates": {
+			"east": "none",
+			"north": "none",
+			"south": "none",
+			"up": true,
+			"waterlogged": false,
+			"west": "none"
+		}
+	},
+	"minecraft:cinnabar_bricks": {},
+	"minecraft:cinnabar_slab": {
+		"allowedStates": {},
+		"defaultStates": {
+			"type": "bottom",
+			"waterlogged": false
+		}
+	},
+	"minecraft:cinnabar_stairs": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"half": "bottom",
+			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:cinnabar_wall": {
+		"allowedStates": {},
+		"defaultStates": {
+			"east": "none",
+			"north": "none",
+			"south": "none",
+			"up": true,
+			"waterlogged": false,
+			"west": "none"
 		}
 	},
 	"minecraft:clay": {},
@@ -6066,6 +6138,41 @@
 			"west": "none"
 		}
 	},
+	"minecraft:polished_cinnabar": {},
+	"minecraft:polished_cinnabar_slab": {
+		"allowedStates": {},
+		"defaultStates": {
+			"type": "bottom",
+			"waterlogged": false
+		}
+	},
+	"minecraft:polished_cinnabar_stairs": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"half": "bottom",
+			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:polished_cinnabar_wall": {
+		"allowedStates": {},
+		"defaultStates": {
+			"east": "none",
+			"north": "none",
+			"south": "none",
+			"up": true,
+			"waterlogged": false,
+			"west": "none"
+		}
+	},
 	"minecraft:polished_deepslate": {},
 	"minecraft:polished_deepslate_slab": {
 		"allowedStates": {},
@@ -6149,6 +6256,41 @@
 			"waterlogged": false
 		}
 	},
+	"minecraft:polished_sulfur": {},
+	"minecraft:polished_sulfur_slab": {
+		"allowedStates": {},
+		"defaultStates": {
+			"type": "bottom",
+			"waterlogged": false
+		}
+	},
+	"minecraft:polished_sulfur_stairs": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"half": "bottom",
+			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:polished_sulfur_wall": {
+		"allowedStates": {},
+		"defaultStates": {
+			"east": "none",
+			"north": "none",
+			"south": "none",
+			"up": true,
+			"waterlogged": false,
+			"west": "none"
+		}
+	},
 	"minecraft:polished_tuff": {},
 	"minecraft:polished_tuff_slab": {
 		"allowedStates": {},
@@ -6191,6 +6333,12 @@
 		},
 		"defaultStates": {
 			"age": "0"
+		}
+	},
+	"minecraft:potent_sulfur": {
+		"allowedStates": {},
+		"defaultStates": {
+			"potent_sulfur_state": "dry"
 		}
 	},
 	"minecraft:potted_acacia_sapling": {},
@@ -7615,6 +7763,84 @@
 		},
 		"defaultStates": {
 			"age": "0"
+		}
+	},
+	"minecraft:sulfur": {},
+	"minecraft:sulfur_brick_slab": {
+		"allowedStates": {},
+		"defaultStates": {
+			"type": "bottom",
+			"waterlogged": false
+		}
+	},
+	"minecraft:sulfur_brick_stairs": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"half": "bottom",
+			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:sulfur_brick_wall": {
+		"allowedStates": {},
+		"defaultStates": {
+			"east": "none",
+			"north": "none",
+			"south": "none",
+			"up": true,
+			"waterlogged": false,
+			"west": "none"
+		}
+	},
+	"minecraft:sulfur_bricks": {},
+	"minecraft:sulfur_slab": {
+		"allowedStates": {},
+		"defaultStates": {
+			"type": "bottom",
+			"waterlogged": false
+		}
+	},
+	"minecraft:sulfur_spike": {
+		"allowedStates": {},
+		"defaultStates": {
+			"thickness": "tip",
+			"vertical_direction": "up",
+			"waterlogged": false
+		}
+	},
+	"minecraft:sulfur_stairs": {
+		"allowedStates": {
+			"faces": [
+				"EAST",
+				"NORTH",
+				"SOUTH",
+				"WEST"
+			]
+		},
+		"defaultStates": {
+			"facing": "north",
+			"half": "bottom",
+			"shape": "straight",
+			"waterlogged": false
+		}
+	},
+	"minecraft:sulfur_wall": {
+		"allowedStates": {},
+		"defaultStates": {
+			"east": "none",
+			"north": "none",
+			"south": "none",
+			"up": true,
+			"waterlogged": false,
+			"west": "none"
 		}
 	},
 	"minecraft:sunflower": {

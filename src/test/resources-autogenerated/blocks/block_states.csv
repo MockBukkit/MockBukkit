@@ -82,7 +82,7 @@ BIRCH_WALL_HANGING_SIGN, org.bukkit.block.HangingSign
 BIRCH_WALL_SIGN, org.bukkit.block.Sign
 BIRCH_WOOD, org.bukkit.block.BlockState
 BLACK_BANNER, org.bukkit.block.Banner
-BLACK_BED, org.bukkit.block.Bed
+BLACK_BED, org.bukkit.block.BlockState
 BLACK_CANDLE, org.bukkit.block.BlockState
 BLACK_CANDLE_CAKE, org.bukkit.block.BlockState
 BLACK_CARPET, org.bukkit.block.BlockState
@@ -101,7 +101,7 @@ BLACKSTONE_STAIRS, org.bukkit.block.BlockState
 BLACKSTONE_WALL, org.bukkit.block.BlockState
 BLAST_FURNACE, org.bukkit.block.BlastFurnace
 BLUE_BANNER, org.bukkit.block.Banner
-BLUE_BED, org.bukkit.block.Bed
+BLUE_BED, org.bukkit.block.BlockState
 BLUE_CANDLE, org.bukkit.block.BlockState
 BLUE_CANDLE_CAKE, org.bukkit.block.BlockState
 BLUE_CARPET, org.bukkit.block.BlockState
@@ -128,7 +128,7 @@ BRICK_STAIRS, org.bukkit.block.BlockState
 BRICK_WALL, org.bukkit.block.BlockState
 BRICKS, org.bukkit.block.BlockState
 BROWN_BANNER, org.bukkit.block.Banner
-BROWN_BED, org.bukkit.block.Bed
+BROWN_BED, org.bukkit.block.BlockState
 BROWN_CANDLE, org.bukkit.block.BlockState
 BROWN_CANDLE_CAKE, org.bukkit.block.BlockState
 BROWN_CARPET, org.bukkit.block.BlockState
@@ -187,6 +187,7 @@ CHERRY_WOOD, org.bukkit.block.BlockState
 CHEST, org.bukkit.block.Chest
 CHIPPED_ANVIL, org.bukkit.block.BlockState
 CHISELED_BOOKSHELF, org.bukkit.block.ChiseledBookshelf
+CHISELED_CINNABAR, org.bukkit.block.BlockState
 CHISELED_COPPER, org.bukkit.block.BlockState
 CHISELED_DEEPSLATE, org.bukkit.block.BlockState
 CHISELED_NETHER_BRICKS, org.bukkit.block.BlockState
@@ -196,10 +197,19 @@ CHISELED_RED_SANDSTONE, org.bukkit.block.BlockState
 CHISELED_RESIN_BRICKS, org.bukkit.block.BlockState
 CHISELED_SANDSTONE, org.bukkit.block.BlockState
 CHISELED_STONE_BRICKS, org.bukkit.block.BlockState
+CHISELED_SULFUR, org.bukkit.block.BlockState
 CHISELED_TUFF, org.bukkit.block.BlockState
 CHISELED_TUFF_BRICKS, org.bukkit.block.BlockState
 CHORUS_FLOWER, org.bukkit.block.BlockState
 CHORUS_PLANT, org.bukkit.block.BlockState
+CINNABAR, org.bukkit.block.BlockState
+CINNABAR_BRICK_SLAB, org.bukkit.block.BlockState
+CINNABAR_BRICK_STAIRS, org.bukkit.block.BlockState
+CINNABAR_BRICK_WALL, org.bukkit.block.BlockState
+CINNABAR_BRICKS, org.bukkit.block.BlockState
+CINNABAR_SLAB, org.bukkit.block.BlockState
+CINNABAR_STAIRS, org.bukkit.block.BlockState
+CINNABAR_WALL, org.bukkit.block.BlockState
 CLAY, org.bukkit.block.BlockState
 CLOSED_EYEBLOSSOM, org.bukkit.block.BlockState
 COAL_BLOCK, org.bukkit.block.BlockState
@@ -271,7 +281,7 @@ CUT_RED_SANDSTONE_SLAB, org.bukkit.block.BlockState
 CUT_SANDSTONE, org.bukkit.block.BlockState
 CUT_SANDSTONE_SLAB, org.bukkit.block.BlockState
 CYAN_BANNER, org.bukkit.block.Banner
-CYAN_BED, org.bukkit.block.Bed
+CYAN_BED, org.bukkit.block.BlockState
 CYAN_CANDLE, org.bukkit.block.BlockState
 CYAN_CANDLE_CAKE, org.bukkit.block.BlockState
 CYAN_CARPET, org.bukkit.block.BlockState
@@ -420,7 +430,7 @@ GRANITE_WALL, org.bukkit.block.BlockState
 GRASS_BLOCK, org.bukkit.block.BlockState
 GRAVEL, org.bukkit.block.BlockState
 GRAY_BANNER, org.bukkit.block.Banner
-GRAY_BED, org.bukkit.block.Bed
+GRAY_BED, org.bukkit.block.BlockState
 GRAY_CANDLE, org.bukkit.block.BlockState
 GRAY_CANDLE_CAKE, org.bukkit.block.BlockState
 GRAY_CARPET, org.bukkit.block.BlockState
@@ -434,7 +444,7 @@ GRAY_TERRACOTTA, org.bukkit.block.BlockState
 GRAY_WALL_BANNER, org.bukkit.block.Banner
 GRAY_WOOL, org.bukkit.block.BlockState
 GREEN_BANNER, org.bukkit.block.Banner
-GREEN_BED, org.bukkit.block.Bed
+GREEN_BED, org.bukkit.block.BlockState
 GREEN_CANDLE, org.bukkit.block.BlockState
 GREEN_CANDLE_CAKE, org.bukkit.block.BlockState
 GREEN_CARPET, org.bukkit.block.BlockState
@@ -509,7 +519,7 @@ LECTERN, org.bukkit.block.Lectern
 LEVER, org.bukkit.block.BlockState
 LIGHT, org.bukkit.block.BlockState
 LIGHT_BLUE_BANNER, org.bukkit.block.Banner
-LIGHT_BLUE_BED, org.bukkit.block.Bed
+LIGHT_BLUE_BED, org.bukkit.block.BlockState
 LIGHT_BLUE_CANDLE, org.bukkit.block.BlockState
 LIGHT_BLUE_CANDLE_CAKE, org.bukkit.block.BlockState
 LIGHT_BLUE_CARPET, org.bukkit.block.BlockState
@@ -523,7 +533,7 @@ LIGHT_BLUE_TERRACOTTA, org.bukkit.block.BlockState
 LIGHT_BLUE_WALL_BANNER, org.bukkit.block.Banner
 LIGHT_BLUE_WOOL, org.bukkit.block.BlockState
 LIGHT_GRAY_BANNER, org.bukkit.block.Banner
-LIGHT_GRAY_BED, org.bukkit.block.Bed
+LIGHT_GRAY_BED, org.bukkit.block.BlockState
 LIGHT_GRAY_CANDLE, org.bukkit.block.BlockState
 LIGHT_GRAY_CANDLE_CAKE, org.bukkit.block.BlockState
 LIGHT_GRAY_CARPET, org.bukkit.block.BlockState
@@ -542,7 +552,7 @@ LILAC, org.bukkit.block.BlockState
 LILY_OF_THE_VALLEY, org.bukkit.block.BlockState
 LILY_PAD, org.bukkit.block.BlockState
 LIME_BANNER, org.bukkit.block.Banner
-LIME_BED, org.bukkit.block.Bed
+LIME_BED, org.bukkit.block.BlockState
 LIME_CANDLE, org.bukkit.block.BlockState
 LIME_CANDLE_CAKE, org.bukkit.block.BlockState
 LIME_CARPET, org.bukkit.block.BlockState
@@ -558,7 +568,7 @@ LIME_WOOL, org.bukkit.block.BlockState
 LODESTONE, org.bukkit.block.BlockState
 LOOM, org.bukkit.block.BlockState
 MAGENTA_BANNER, org.bukkit.block.Banner
-MAGENTA_BED, org.bukkit.block.Bed
+MAGENTA_BED, org.bukkit.block.BlockState
 MAGENTA_CANDLE, org.bukkit.block.BlockState
 MAGENTA_CANDLE_CAKE, org.bukkit.block.BlockState
 MAGENTA_CARPET, org.bukkit.block.BlockState
@@ -650,7 +660,7 @@ OBSIDIAN, org.bukkit.block.BlockState
 OCHRE_FROGLIGHT, org.bukkit.block.BlockState
 OPEN_EYEBLOSSOM, org.bukkit.block.BlockState
 ORANGE_BANNER, org.bukkit.block.Banner
-ORANGE_BED, org.bukkit.block.Bed
+ORANGE_BED, org.bukkit.block.BlockState
 ORANGE_CANDLE, org.bukkit.block.BlockState
 ORANGE_CANDLE_CAKE, org.bukkit.block.BlockState
 ORANGE_CARPET, org.bukkit.block.BlockState
@@ -709,7 +719,7 @@ PETRIFIED_OAK_SLAB, org.bukkit.block.BlockState
 PIGLIN_HEAD, org.bukkit.block.Skull
 PIGLIN_WALL_HEAD, org.bukkit.block.Skull
 PINK_BANNER, org.bukkit.block.Banner
-PINK_BED, org.bukkit.block.Bed
+PINK_BED, org.bukkit.block.BlockState
 PINK_CANDLE, org.bukkit.block.BlockState
 PINK_CANDLE_CAKE, org.bukkit.block.BlockState
 PINK_CARPET, org.bukkit.block.BlockState
@@ -746,6 +756,10 @@ POLISHED_BLACKSTONE_PRESSURE_PLATE, org.bukkit.block.BlockState
 POLISHED_BLACKSTONE_SLAB, org.bukkit.block.BlockState
 POLISHED_BLACKSTONE_STAIRS, org.bukkit.block.BlockState
 POLISHED_BLACKSTONE_WALL, org.bukkit.block.BlockState
+POLISHED_CINNABAR, org.bukkit.block.BlockState
+POLISHED_CINNABAR_SLAB, org.bukkit.block.BlockState
+POLISHED_CINNABAR_STAIRS, org.bukkit.block.BlockState
+POLISHED_CINNABAR_WALL, org.bukkit.block.BlockState
 POLISHED_DEEPSLATE, org.bukkit.block.BlockState
 POLISHED_DEEPSLATE_SLAB, org.bukkit.block.BlockState
 POLISHED_DEEPSLATE_STAIRS, org.bukkit.block.BlockState
@@ -756,12 +770,17 @@ POLISHED_DIORITE_STAIRS, org.bukkit.block.BlockState
 POLISHED_GRANITE, org.bukkit.block.BlockState
 POLISHED_GRANITE_SLAB, org.bukkit.block.BlockState
 POLISHED_GRANITE_STAIRS, org.bukkit.block.BlockState
+POLISHED_SULFUR, org.bukkit.block.BlockState
+POLISHED_SULFUR_SLAB, org.bukkit.block.BlockState
+POLISHED_SULFUR_STAIRS, org.bukkit.block.BlockState
+POLISHED_SULFUR_WALL, org.bukkit.block.BlockState
 POLISHED_TUFF, org.bukkit.block.BlockState
 POLISHED_TUFF_SLAB, org.bukkit.block.BlockState
 POLISHED_TUFF_STAIRS, org.bukkit.block.BlockState
 POLISHED_TUFF_WALL, org.bukkit.block.BlockState
 POPPY, org.bukkit.block.BlockState
 POTATOES, org.bukkit.block.BlockState
+POTENT_SULFUR, org.bukkit.block.PotentSulfur
 POTTED_ACACIA_SAPLING, org.bukkit.block.BlockState
 POTTED_ALLIUM, org.bukkit.block.BlockState
 POTTED_AZALEA_BUSH, org.bukkit.block.BlockState
@@ -813,7 +832,7 @@ PRISMARINE_WALL, org.bukkit.block.BlockState
 PUMPKIN, org.bukkit.block.BlockState
 PUMPKIN_STEM, org.bukkit.block.BlockState
 PURPLE_BANNER, org.bukkit.block.Banner
-PURPLE_BED, org.bukkit.block.Bed
+PURPLE_BED, org.bukkit.block.BlockState
 PURPLE_CANDLE, org.bukkit.block.BlockState
 PURPLE_CANDLE_CAKE, org.bukkit.block.BlockState
 PURPLE_CARPET, org.bukkit.block.BlockState
@@ -840,7 +859,7 @@ RAW_COPPER_BLOCK, org.bukkit.block.BlockState
 RAW_GOLD_BLOCK, org.bukkit.block.BlockState
 RAW_IRON_BLOCK, org.bukkit.block.BlockState
 RED_BANNER, org.bukkit.block.Banner
-RED_BED, org.bukkit.block.Bed
+RED_BED, org.bukkit.block.BlockState
 RED_CANDLE, org.bukkit.block.BlockState
 RED_CANDLE_CAKE, org.bukkit.block.BlockState
 RED_CARPET, org.bukkit.block.BlockState
@@ -988,6 +1007,15 @@ STRIPPED_WARPED_STEM, org.bukkit.block.BlockState
 STRUCTURE_BLOCK, org.bukkit.block.Structure
 STRUCTURE_VOID, org.bukkit.block.BlockState
 SUGAR_CANE, org.bukkit.block.BlockState
+SULFUR, org.bukkit.block.BlockState
+SULFUR_BRICK_SLAB, org.bukkit.block.BlockState
+SULFUR_BRICK_STAIRS, org.bukkit.block.BlockState
+SULFUR_BRICK_WALL, org.bukkit.block.BlockState
+SULFUR_BRICKS, org.bukkit.block.BlockState
+SULFUR_SLAB, org.bukkit.block.BlockState
+SULFUR_SPIKE, org.bukkit.block.BlockState
+SULFUR_STAIRS, org.bukkit.block.BlockState
+SULFUR_WALL, org.bukkit.block.BlockState
 SUNFLOWER, org.bukkit.block.BlockState
 SUSPICIOUS_GRAVEL, org.bukkit.block.BrushableBlock
 SUSPICIOUS_SAND, org.bukkit.block.BrushableBlock
@@ -1130,7 +1158,7 @@ WEEPING_VINES_PLANT, org.bukkit.block.BlockState
 WET_SPONGE, org.bukkit.block.BlockState
 WHEAT, org.bukkit.block.BlockState
 WHITE_BANNER, org.bukkit.block.Banner
-WHITE_BED, org.bukkit.block.Bed
+WHITE_BED, org.bukkit.block.BlockState
 WHITE_CANDLE, org.bukkit.block.BlockState
 WHITE_CANDLE_CAKE, org.bukkit.block.BlockState
 WHITE_CARPET, org.bukkit.block.BlockState
@@ -1149,7 +1177,7 @@ WITHER_ROSE, org.bukkit.block.BlockState
 WITHER_SKELETON_SKULL, org.bukkit.block.Skull
 WITHER_SKELETON_WALL_SKULL, org.bukkit.block.Skull
 YELLOW_BANNER, org.bukkit.block.Banner
-YELLOW_BED, org.bukkit.block.Bed
+YELLOW_BED, org.bukkit.block.BlockState
 YELLOW_CANDLE, org.bukkit.block.BlockState
 YELLOW_CANDLE_CAKE, org.bukkit.block.BlockState
 YELLOW_CARPET, org.bukkit.block.BlockState
