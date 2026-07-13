@@ -1498,6 +1498,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public void setAllowMonsterSpawning(boolean allowMonsters)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals)
 	{
 		this.allowMonsters = allowMonsters;
