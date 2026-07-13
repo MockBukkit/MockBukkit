@@ -544,14 +544,14 @@ class ItemComponentTypesBridgeMockTest
 		@Test
 		void givenNullItemStack()
 		{
-			NullPointerException e = assertThrows(NullPointerException.class, () -> bridge.sulfurCubeContent(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bridge.sulfurCubeContent(null));
 			assertEquals("absorbedItem cannot be null", e.getMessage());
 		}
 
 		@Test
 		void givenEmptyItemStack()
 		{
-			NullPointerException e = assertThrows(NullPointerException.class, () -> bridge.sulfurCubeContent(ItemStack.empty()));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bridge.sulfurCubeContent(ItemStack.empty()));
 			assertEquals("absorbedItem cannot be empty", e.getMessage());
 		}
 
