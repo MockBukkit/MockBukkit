@@ -15,7 +15,6 @@ import io.papermc.paper.math.Position;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -3329,10 +3328,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			Preconditions.checkNotNull(position, "Position must not be null");
 			Preconditions.checkNotNull(components, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
-			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
-			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
-			PlayerMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
+			PlayerMock.this.sendMessage(sender, components);
 		}
 
 	}

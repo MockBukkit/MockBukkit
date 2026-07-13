@@ -2,11 +2,13 @@ package org.mockbukkit.mockbukkit;
 
 import io.papermc.paper.entity.poi.PoiType;
 import net.kyori.adventure.text.Component;
+import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MockBukkitInternalAPIBridgeTest
 {
@@ -42,6 +44,23 @@ class MockBukkitInternalAPIBridgeTest
 		void givenIsOccupied()
 		{
 			assertNotNull(PoiType.Occupancy.IS_OCCUPIED);
+		}
+
+	}
+
+	@Nested
+	class GetTranslationKey
+	{
+		@Test
+		void givenPig()
+		{
+			assertEquals("entity.minecraft.pig", bridge.getTranslationKey(EntityType.PIG));
+		}
+
+		@Test
+		void givenUnknown()
+		{
+			assertThrows(IllegalArgumentException.class, () -> bridge.getTranslationKey(EntityType.UNKNOWN));
 		}
 
 	}

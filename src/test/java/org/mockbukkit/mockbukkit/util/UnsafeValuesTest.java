@@ -12,7 +12,6 @@ import org.bukkit.Registry;
 import org.bukkit.WorldCreator;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.BundleMeta;
@@ -482,24 +481,6 @@ class UnsafeValuesTest
 	}
 
 	@ParameterizedTest
-	@MethodSource("materialAndBlockTranslationKeyProvider")
-	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
-	{
-		assertEquals(expectedBlockKey, unsafeValuesMock.getBlockTranslationKey(material));
-		assertEquals(expectedItemKey, unsafeValuesMock.getItemTranslationKey(material));
-	}
-
-	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
-	{
-		return Stream.of(
-				Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
-				Arguments.of("block.minecraft.dirt", "block.minecraft.dirt", Material.DIRT),
-				Arguments.of("item.minecraft.wheat", "item.minecraft.wheat", Material.WHEAT),
-				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART)
-		);
-	}
-
-	@ParameterizedTest
 	@MethodSource("wallMaterialTranslationKeyProvider")
 	void testWallMaterialTranslationKey(String expectedKey, Material material)
 	{
@@ -521,30 +502,6 @@ class UnsafeValuesTest
 				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_WALL_SKULL),
 				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_HEAD),
 				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_WALL_HEAD)
-		);
-	}
-
-	@Test
-	void testEntityTranslationKey()
-	{
-		assertEquals("entity.minecraft.pig", unsafeValuesMock.getTranslationKey(EntityType.PIG));
-		assertThrows(IllegalArgumentException.class, () -> unsafeValuesMock.getTranslationKey(EntityType.UNKNOWN));
-	}
-
-	@ParameterizedTest
-	@MethodSource("itemStackTranslationKeyProvider")
-	void testItemStackTranslationKey(String expectedKey, ItemStack itemStack)
-	{
-		assertEquals(expectedKey, unsafeValuesMock.getTranslationKey(itemStack));
-	}
-
-	static Stream<Arguments> itemStackTranslationKeyProvider()
-	{
-		return Stream.of(
-				Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
-				Arguments.of("block.minecraft.stone", new ItemStackMock(Material.STONE)),
-				Arguments.of("item.minecraft.wheat", new ItemStackMock(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART))
 		);
 	}
 
