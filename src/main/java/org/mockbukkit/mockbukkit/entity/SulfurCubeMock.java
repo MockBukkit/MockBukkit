@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -199,6 +200,20 @@ public class SulfurCubeMock extends MobMock implements SulfurCube
 		public NamespacedKey getKey()
 		{
 			return this.key;
+		}
+
+		public static ArchetypeMock from(JsonObject json)
+		{
+			Preconditions.checkNotNull(json, "The 'json' can't be null");
+
+			var keyProperty = json.get("key");
+			Preconditions.checkArgument(keyProperty != null, "The property 'key' does not exist.");
+			var keyValue = keyProperty.getAsString();
+			Preconditions.checkArgument(keyValue != null && !keyValue.isBlank(), "The property 'key' is empty.");
+			var key = NamespacedKey.fromString(keyValue);
+			Preconditions.checkArgument(key != null, "The property 'key' has an invalid format");
+
+			return new ArchetypeMock(key);
 		}
 
 	}
