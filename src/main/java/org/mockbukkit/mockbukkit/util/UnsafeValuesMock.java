@@ -409,6 +409,24 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
+		return deserializeStackStatic(args);
+	}
+
+	@Override
+	public @NotNull ItemStack deserializeItemHover(HoverEvent.@NotNull ShowItem showItem)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Material getMaterial(String material, int version)
+	{
+		return Material.getMaterial(material);
+	}
+
+	@ApiStatus.Internal
+	public static @NotNull ItemStack deserializeStackStatic(@NotNull Map<String, Object> args)
+	{
 		@SuppressWarnings({ "java:S1481", "java:S1854" })
 		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
 		final String id = (String) args.get("id");
@@ -458,17 +476,4 @@ public class UnsafeValuesMock implements UnsafeValues
 
 		return itemstack;
 	}
-
-	@Override
-	public @NotNull ItemStack deserializeItemHover(HoverEvent.@NotNull ShowItem showItem)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Material getMaterial(String material, int version)
-	{
-		return Material.getMaterial(material);
-	}
-
 }
