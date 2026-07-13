@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SulfurCube;
 import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NullMarked;
@@ -183,6 +184,12 @@ public class SulfurCubeMock extends MobMock implements SulfurCube
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.SULFUR_CUBE;
 	}
 
 	public record ArchetypeMock(NamespacedKey key) implements Archetype {

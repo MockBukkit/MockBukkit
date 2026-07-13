@@ -234,7 +234,7 @@ class UnsafeValuesTest
 	void serializeStack(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		@NotNull Map<String, Object> serialized = unsafeValuesMock.serializeStack(expected);
+		@NotNull Map<String, Object> serialized = expected.serialize();
 		ItemStack actual = unsafeValuesMock.deserializeStack(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());

@@ -162,7 +162,7 @@ class TagRegistryTest
 		{
 			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.DAMAGE_TYPES.getTags();
 			assertNotNull(actual);
-			assertEquals(33, actual.size());
+			assertEquals(34, actual.size());
 		}
 
 		@Test
