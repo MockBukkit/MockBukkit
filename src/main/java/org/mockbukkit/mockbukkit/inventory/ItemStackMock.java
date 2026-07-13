@@ -37,6 +37,9 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import static org.mockbukkit.mockbukkit.util.UnsafeValuesMock.PROPERTY_SCHEMA_VERSION;
+import static org.mockbukkit.mockbukkit.util.UnsafeValuesMock.RENAME_JSON_PROPERTY;
+
 
 @DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
@@ -603,6 +606,48 @@ public class ItemStackMock extends ItemStack
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
 		return Bukkit.getUnsafe().deserializeStack(args);
+	}
+
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		int dataVersion = Bukkit.getUnsafe().getDataVersion();
+		if (isEmpty())
+		{
+			return Map.of(
+					"id", "minecraft:air",
+					"DataVersion", dataVersion,
+					PROPERTY_SCHEMA_VERSION, 1);
+		}
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("id", getType().getKey().asString());
+		result.put("count", getAmount());
+		result.put("DataVersion", dataVersion);
+		result.put(PROPERTY_SCHEMA_VERSION, 1);
+
+		Map<String, Object> serializedMeta = getItemMeta().serialize();
+		if (serializedMeta.size() > 1) // Ignore the meta-type
+		{
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getKey();
+				String newName = entry.getValue();
+
+				// Skip the key if it does not exist
+				if (!serializedMeta.containsKey(originalName))
+				{
+					continue;
+				}
+
+				var value = serializedMeta.get(originalName);
+				serializedMeta.put(newName, value);
+				serializedMeta.remove(originalName);
+			}
+			result.put("components", serializedMeta);
+		}
+
+		return result;
 	}
 
 }

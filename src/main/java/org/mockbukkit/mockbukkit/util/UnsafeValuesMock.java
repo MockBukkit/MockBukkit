@@ -42,7 +42,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -68,9 +67,9 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.21",
 					"26.1"
 			);
-	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
+	public static final String PROPERTY_SCHEMA_VERSION = "schema_version";
 
-	private static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
+	public static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
 		toMinecraft(ItemMetaMock.DAMAGE),
 		toMinecraft(ItemMetaMock.MAX_DAMAGE),
 		toMinecraft(ItemMetaMock.REPAIR_COST),
@@ -221,7 +220,7 @@ public class UnsafeValuesMock implements UnsafeValues
 		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		try
 		{
-			@NotNull Map<String, Object> stack = serializeStack(item);
+			@NotNull Map<String, Object> stack = item.serialize();
 			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
 			oos.writeObject(stack);
 			return bao.toByteArray();
@@ -256,7 +255,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack itemStack)
 	{
-		Map<String, Object> map = serializeStack(itemStack);
+		Map<String, Object> map = itemStack.serialize();
 		return SerializationUtils.createDefaultBuilder().toJsonTree(map).getAsJsonObject();
 	}
 
@@ -364,46 +363,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	public @NotNull Map<String, Object> serializeStack(ItemStack itemStack)
-	{
-		if (itemStack.isEmpty())
-		{
-			return Map.of(
-					"id", "minecraft:air",
-					"DataVersion", this.getDataVersion(),
-					PROPERTY_SCHEMA_VERSION, 1);
-		}
-
-		Map<String, Object> result = new HashMap<>();
-		result.put("id", itemStack.getType().getKey().asString());
-		result.put("count", itemStack.getAmount());
-		result.put("DataVersion", this.getDataVersion());
-		result.put(PROPERTY_SCHEMA_VERSION, 1);
-
-		Map<String, Object> serializedMeta = itemStack.getItemMeta().serialize();
-		if (serializedMeta.size() > 1) // Ignore the meta-type
-		{
-			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
-			{
-				String originalName = entry.getKey();
-				String newName = entry.getValue();
-
-				// Skip the key if it does not exist
-				if (!serializedMeta.containsKey(originalName))
-				{
-					continue;
-				}
-
-				var value = serializedMeta.get(originalName);
-				serializedMeta.put(newName, value);
-				serializedMeta.remove(originalName);
-			}
-			result.put("components", serializedMeta);
-		}
-
-		return result;
 	}
 
 	@Override
