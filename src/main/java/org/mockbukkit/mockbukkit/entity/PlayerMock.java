@@ -369,6 +369,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return EntityType.PLAYER;
 	}
 
+	@Override
+	public @NotNull SoundCategory getSoundCategory()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
 	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
@@ -3251,6 +3258,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void sendEntityEffect(@NotNull EntityEffect entityEffect, @NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public net.kyori.adventure.sound.Sound.Source soundSource()
+	{
+		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

@@ -1444,6 +1444,27 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		removeExpiredEffects();
 	}
 
+	@Override
+	public float getSoundVolume()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getSoundPitch()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Sound getHurtSound(@NotNull DamageSource damageSource)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Retrieves the last known climbable location.
 	 *

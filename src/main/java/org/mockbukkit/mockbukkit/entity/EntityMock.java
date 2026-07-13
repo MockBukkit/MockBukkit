@@ -17,6 +17,7 @@ import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
@@ -52,6 +53,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
@@ -1584,6 +1586,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void lookAt(double v, double v1, double v2, @NotNull LookAnchor lookAnchor)
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull SoundCategory getSoundCategory()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public net.kyori.adventure.sound.Sound.@NonNull Source soundSource()
+	{
+		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
