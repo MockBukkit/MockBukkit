@@ -2,49 +2,32 @@ package org.mockbukkit.mockbukkit.matcher;
 
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.BeforeEach;
+import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.platform.commons.support.ReflectionSupport;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.MockBukkitInject;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher;
-import org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher;
-import org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMatcher;
-import org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher;
-import org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedAnyMessageMatcher;
-import org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher;
-import org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher;
-import org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMatcher;
-import org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher;
-import org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher;
-import org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher;
-import org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher;
-import org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher;
-import org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher;
-import org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher;
-import org.mockbukkit.mockbukkit.matcher.scheduler.SchedulerOverdueTasksMatcher;
-import org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.containsAtLeast;
@@ -57,69 +40,77 @@ class MockBukkitMatchersTest
 {
 
 	/**
-	 * Every matcher class whose factory methods should be surfaced by the {@link MockBukkitMatchers} facade.
+	 * Discovers every matcher factory (a public static method returning a {@link Matcher}) declared anywhere
+	 * in the matcher package. Scanning the classpath keeps the parity checks complete automatically: a new
+	 * matcher or factory is covered the moment it is added, with no hand-maintained list to update.
 	 */
-	private static final List<Class<?>> MATCHER_CLASSES = List.of(
-			BlockMaterialTypeMatcher.class,
-			CommandResultAnyResponseMatcher.class,
-			CommandResultResponseMatcher.class,
-			CommandResultSucceedMatcher.class,
-			MessageTargetReceivedAnyMessageMatcher.class,
-			MessageTargetReceivedMessageMatcher.class,
-			EntityLocationMatcher.class,
-			EntityTeleportationMatcher.class,
-			AllayCurrentItemMatcher.class,
-			GoatEntityRammedMatcher.class,
-			HumanEntityInventoryViewItemMatcher.class,
-			HumanEntityInventoryViewTypeMatcher.class,
-			PlayerConsumeItemMatcher.class,
-			RangedEntityAttackMatcher.class,
-			HelpMapFactoryRegisteredMatcher.class,
-			InventoryItemAmountMatcher.class,
-			ItemSimilarityMatcher.class,
-			InventoryHolderContainsMatcher.class,
-			ItemMetaAnyLoreMatcher.class,
-			ItemMetaLoreMatcher.class,
-			PluginManagerFiredEventClassMatcher.class,
-			PluginManagerFiredEventFilterMatcher.class,
-			SchedulerOverdueTasksMatcher.class,
-			SoundReceiverSoundHeardMatcher.class
-	);
-
-	@MockBukkitInject
-	private ServerMock serverMock;
-	@MockBukkitInject
-	private InventoryHolder inventoryHolder;
-
-	private BlockMock blockMock;
-	private InventoryMock inventory;
-
-	@BeforeEach
-	void setUp()
+	static Stream<Arguments> matcherFactories()
 	{
-		this.blockMock = new BlockMock(Material.CHEST);
-		this.inventory = new InventoryMock(inventoryHolder, InventoryType.CHEST);
+		return ReflectionSupport.findAllClassesInPackage(
+						MockBukkitMatchers.class.getPackageName(),
+						clazz -> clazz != MockBukkitMatchers.class,
+						name -> true)
+				.stream()
+				.flatMap(clazz -> Arrays.stream(clazz.getDeclaredMethods()))
+				.filter(MockBukkitMatchersTest::isMatcherFactory)
+				.sorted(Comparator.comparing(MockBukkitMatchersTest::signature))
+				.map(factory -> Arguments.of(factory.getDeclaringClass().getSimpleName() + "#" + signature(factory), factory));
+	}
+
+	@ParameterizedTest(name = "{0}")
+	@MethodSource("matcherFactories")
+	void facadeExposesMatcherFactory(String description, Method factory)
+	{
+		Method facadeMethod = assertDoesNotThrow(
+				() -> MockBukkitMatchers.class.getDeclaredMethod(factory.getName(), factory.getParameterTypes()),
+				() -> "MockBukkitMatchers does not expose " + description);
+
+		int modifiers = facadeMethod.getModifiers();
+		assertTrue(Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers),
+				() -> description + " must be exposed as a public static method");
+		assertEquals(factory.getReturnType(), facadeMethod.getReturnType(),
+				() -> "Return type mismatch for " + description);
 	}
 
 	@Test
-	void facadeDelegatesToBlockMatcher()
+	void facadeExposesNothingBeyondMatcherFactories()
 	{
-		assertThat(blockMock, hasMaterial(Material.CHEST));
-		assertThat(blockMock, doesNotHaveMaterial(Material.STONE));
+		Set<String> factorySignatures = matcherFactories()
+				.map(arguments -> (Method) arguments.get()[1])
+				.map(MockBukkitMatchersTest::signature)
+				.collect(Collectors.toSet());
+
+		List<String> unexpected = Arrays.stream(MockBukkitMatchers.class.getDeclaredMethods())
+				.filter(method -> Modifier.isPublic(method.getModifiers()) && Modifier.isStatic(method.getModifiers()))
+				.map(MockBukkitMatchersTest::signature)
+				.filter(signature -> !factorySignatures.contains(signature))
+				.toList();
+
+		assertTrue(unexpected.isEmpty(),
+				() -> "MockBukkitMatchers exposes methods with no matching matcher factory: " + unexpected);
 	}
 
 	@Test
-	void facadeDelegatesToInventoryMatcher()
+	void delegatesBlockMaterialMatchers()
 	{
-		inventory.addItem(new ItemStack(Material.DIAMOND, 3));
+		BlockMock block = new BlockMock(Material.CHEST);
+
+		assertThat(block, hasMaterial(Material.CHEST));
+		assertThat(block, doesNotHaveMaterial(Material.STONE));
+	}
+
+	@Test
+	void delegatesOverloadedFactoriesToTheMatchingDelegate()
+	{
+		ItemStack diamonds = new ItemStack(Material.DIAMOND, 3);
+		InventoryMock inventory = new InventoryMock(null, InventoryType.CHEST);
+		inventory.addItem(diamonds);
+
+		// Each of these has a Material and an ItemStack overload; the facade must route to the right one.
 		assertThat(inventory, containsAtLeast(Material.DIAMOND, 3));
-	}
-
-	@Test
-	void facadeDelegatesToItemSimilarityMatcher()
-	{
-		ItemStack item = new ItemStack(Material.POTATO);
-		assertThat(item, similarTo(Material.POTATO));
+		assertThat(inventory, containsAtLeast(diamonds, 3));
+		assertThat(diamonds, similarTo(Material.DIAMOND));
+		assertThat(diamonds, similarTo(new ItemStack(Material.DIAMOND)));
 	}
 
 	@Test
@@ -131,45 +122,6 @@ class MockBukkitMatchersTest
 		assertThrows(InvocationTargetException.class, constructor::newInstance);
 	}
 
-	/**
-	 * Guards against the facade drifting out of sync: every public static matcher factory across the
-	 * matcher classes must be surfaced by {@link MockBukkitMatchers} with an identical signature.
-	 */
-	@Test
-	void facadeExposesEveryMatcherFactory()
-	{
-		List<String> missing = new ArrayList<>();
-		for (Class<?> matcherClass : MATCHER_CLASSES)
-		{
-			for (Method factory : matcherClass.getDeclaredMethods())
-			{
-				if (!isMatcherFactory(factory))
-				{
-					continue;
-				}
-				try
-				{
-					Method facadeMethod = MockBukkitMatchers.class.getDeclaredMethod(factory.getName(), factory.getParameterTypes());
-					int modifiers = facadeMethod.getModifiers();
-					if (!Modifier.isPublic(modifiers) || !Modifier.isStatic(modifiers))
-					{
-						missing.add(signature(matcherClass, factory) + " (facade method is not public static)");
-					}
-					else if (!facadeMethod.getReturnType().equals(factory.getReturnType()))
-					{
-						missing.add(signature(matcherClass, factory) + " (return type mismatch: expected "
-								+ factory.getReturnType() + " but was " + facadeMethod.getReturnType() + ")");
-					}
-				}
-				catch (NoSuchMethodException e)
-				{
-					missing.add(signature(matcherClass, factory));
-				}
-			}
-		}
-		assertTrue(missing.isEmpty(), "MockBukkitMatchers is missing delegates for: " + missing);
-	}
-
 	private static boolean isMatcherFactory(Method method)
 	{
 		int modifiers = method.getModifiers();
@@ -177,22 +129,14 @@ class MockBukkitMatchersTest
 				&& Modifier.isStatic(modifiers)
 				&& !method.isSynthetic()
 				&& !method.isBridge()
-				&& org.hamcrest.Matcher.class.isAssignableFrom(method.getReturnType());
+				&& Matcher.class.isAssignableFrom(method.getReturnType());
 	}
 
-	private static String signature(Class<?> owner, Method method)
+	private static String signature(Method method)
 	{
-		StringBuilder builder = new StringBuilder(owner.getSimpleName()).append('#').append(method.getName()).append('(');
-		Class<?>[] parameters = method.getParameterTypes();
-		for (int i = 0; i < parameters.length; i++)
-		{
-			if (i > 0)
-			{
-				builder.append(", ");
-			}
-			builder.append(parameters[i].getSimpleName());
-		}
-		return builder.append(')').toString();
+		return Arrays.stream(method.getParameterTypes())
+				.map(Class::getTypeName)
+				.collect(Collectors.joining(", ", method.getName() + "(", ")"));
 	}
 
 }
