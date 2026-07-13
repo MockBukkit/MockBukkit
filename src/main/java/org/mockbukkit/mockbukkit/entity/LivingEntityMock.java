@@ -673,7 +673,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		EntityPotionEffectEvent.Action action = oldEffect == null ? EntityPotionEffectEvent.Action.ADDED : EntityPotionEffectEvent.Action.CHANGED;
 		boolean override = oldEffect != null;
 
-		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, cause, action, override);
+		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, null, cause, action, override);
 		Bukkit.getPluginManager().callEvent(event);
 
 		if (!event.isCancelled())
@@ -756,7 +756,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			if (allExpired)
 			{
 				var event = new EntityPotionEffectEvent(this, mapToPotionEffect(queue.peek()), null,
-						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
+						null, EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
 				Bukkit.getPluginManager().callEvent(event);
 
 				if (!event.isCancelled())
@@ -802,7 +802,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		var activeEffect = queue.peek();
-		var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null, cause, action, true);
+		var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null, null, cause, action, true);
 		Bukkit.getPluginManager().callEvent(changeEvent);
 
 		if (!changeEvent.isCancelled())
@@ -833,7 +833,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			queue.forEach(activeEffect ->
 			{
 				var event = new EntityPotionEffectEvent(this, activeEffect.getPotionEffect(), null,
-						EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CLEARED, true);
+						null, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CLEARED, true);
 				Bukkit.getPluginManager().callEvent(event);
 			});
 		});
