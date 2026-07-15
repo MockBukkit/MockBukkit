@@ -560,15 +560,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
-		long currentTick;
-		synchronized (this) // See comment at the start of performOneTick()
-		{
-			currentTick = this.currentTick; // There's no task registration here, no need to synchronize further
-		}
-
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick, new AsyncRunnable(task));
-		pool.execute(wrapTask(scheduledTask));
-		return scheduledTask;
+		return runTaskLaterAsynchronously(plugin, task, 1);
 	}
 
 	@Override
@@ -630,14 +622,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task)
 	{
-		long currentTick;
-		synchronized (this) // See comment at the start of performOneTick()
-		{
-			currentTick = this.currentTick; // There's no task registration here, no need to synchronize further
-		}
-
-		ScheduledTask scheduledTask = new ScheduledTask(this.id.getAndIncrement(), plugin, false, currentTick, task);
-		pool.execute(wrapTask(scheduledTask));
+		runTaskLaterAsynchronously(plugin, task, 1);
 	}
 
 	@Override

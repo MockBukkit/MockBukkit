@@ -167,6 +167,7 @@ class BukkitSchedulerMockTest
 				throw new TaskCancelledException(e);
 			}
 		});
+		scheduler.performOneTick();
 		barrier.await(3L, TimeUnit.SECONDS);
 	}
 
@@ -288,7 +289,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		}, 2);
-		assertEquals(1, scheduler.getActiveRunningCount());
+		assertEquals(0, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
@@ -329,6 +330,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
+		scheduler.performOneTick();
 		countDownLatch.await(1, TimeUnit.SECONDS);
 
 		assertTrue(alive.get());
@@ -361,6 +363,7 @@ class BukkitSchedulerMockTest
 			{
 			}
 		});
+		scheduler.performOneTick();
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
@@ -390,6 +393,7 @@ class BukkitSchedulerMockTest
 			{
 			}
 		});
+		scheduler.performOneTick();
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
@@ -612,6 +616,7 @@ class BukkitSchedulerMockTest
 		CountDownLatch countDownLatch = new CountDownLatch(1);
 
 		scheduler.runTaskAsynchronously(null, bukkitTask -> countDownLatch.countDown());
+		scheduler.performOneTick();
 		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 	}
 
