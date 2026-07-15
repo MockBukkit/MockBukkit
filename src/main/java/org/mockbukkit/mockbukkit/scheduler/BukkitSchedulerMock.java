@@ -654,8 +654,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		synchronized (this) // See comment at the start of performOneTick()
+		{
+			ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick + delay, task);
+			scheduledTasks.addTask(scheduledTask);
+		}
 	}
 
 	@Override
@@ -672,8 +676,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		synchronized (this) // See comment at the start of performOneTick()
+		{
+			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period, task);
+			scheduledTasks.addTask(repeatingTask);
+		}
 	}
 
 	@Override
