@@ -405,6 +405,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
@@ -597,6 +598,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask scheduledTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period,
@@ -650,6 +652,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
@@ -661,6 +664,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period, task);
