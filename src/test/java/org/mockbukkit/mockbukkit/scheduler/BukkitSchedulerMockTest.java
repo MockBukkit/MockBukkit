@@ -38,6 +38,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -361,6 +362,19 @@ class BukkitSchedulerMockTest
 		scheduler.setShutdownTimeout(300);
 		assertThrows(TaskCancelledException.class, () ->
 				scheduler.shutdown());
+	}
+
+	@Test
+	void asyncTask_Throws_RunTimeException()
+	{
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			throw new RuntimeException("Expected");
+		});
+		scheduler.performOneTick();
+		AsyncTaskException exception = assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
+		RuntimeException runtimeException = assertInstanceOf(RuntimeException.class, exception.getCause());
+		assertEquals("Expected", runtimeException.getMessage());
 	}
 
 	@Test
