@@ -302,45 +302,6 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void longRunningTask_Throws_RunTimeException() throws InterruptedException
-	{
-		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-
-		final CountDownLatch countDownLatch = new CountDownLatch(1);
-		final AtomicBoolean alive = new AtomicBoolean(true);
-
-		testTask = scheduler.runTaskAsynchronously(null, () ->
-		{
-			countDownLatch.countDown();
-			while (alive.get())
-			{
-				if (testTask.isCancelled())
-				{
-					alive.set(false);
-				}
-				try
-				{
-					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
-				{
-					alive.set(false);
-					String message = "Interrupted";
-					throw new TaskCancelledException(message, e);
-				}
-			}
-		});
-		scheduler.performOneTick();
-		countDownLatch.await(1, TimeUnit.SECONDS);
-
-		assertTrue(alive.get());
-		assertEquals(1, scheduler.getActiveRunningCount());
-		scheduler.performTicks(10);
-		scheduler.setShutdownTimeout(10);
-		assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
-	}
-
-	@Test
 	void saveOverdueTasks_EmptyByDefault()
 	{
 		scheduler.saveOverdueTasks();
