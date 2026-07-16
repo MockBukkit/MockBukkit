@@ -18,7 +18,6 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.opentest4j.AssertionFailedError;
 
@@ -496,8 +495,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public <T> @NotNull Future<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new FutureTask<>(this, plugin, task);
 	}
 
 	@Override
