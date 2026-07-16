@@ -154,13 +154,26 @@ class BukkitSchedulerMockTest
 	{
 		final Thread mainThread = Thread.currentThread();
 
-		CyclicBarrier barrier = new CyclicBarrier(2);
+		CyclicBarrier barrier1 = new CyclicBarrier(2);
+		CyclicBarrier barrier2 = new CyclicBarrier(2);
 		scheduler.runTaskAsynchronously(null, () ->
 		{
 			assertNotEquals(mainThread, Thread.currentThread());
 			try
 			{
-				barrier.await(3L, TimeUnit.SECONDS);
+				barrier1.await(3L, TimeUnit.SECONDS);
+			}
+			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			{
+				throw new TaskCancelledException(e);
+			}
+		});
+		scheduler.runTaskAsynchronously(null, task ->
+		{
+			assertNotEquals(mainThread, Thread.currentThread());
+			try
+			{
+				barrier2.await(3L, TimeUnit.SECONDS);
 			}
 			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
@@ -168,7 +181,8 @@ class BukkitSchedulerMockTest
 			}
 		});
 		scheduler.performOneTick();
-		barrier.await(3L, TimeUnit.SECONDS);
+		barrier1.await(3L, TimeUnit.SECONDS);
+		barrier2.await(3L, TimeUnit.SECONDS);
 	}
 
 	@Test
@@ -220,6 +234,54 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
+	void runTaskTimerAsynchronously_Consumer_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	{
+		final Thread mainThread = Thread.currentThread();
+
+		CyclicBarrier barrier = new CyclicBarrier(2);
+		AtomicInteger count = new AtomicInteger();
+
+		scheduler.runTaskTimerAsynchronously(null, task ->
+		{
+			assertNotEquals(mainThread, Thread.currentThread());
+			try
+			{
+				if (count.incrementAndGet() == 2)
+				{
+					task.cancel();
+				}
+				barrier.await(3L, TimeUnit.SECONDS);
+			}
+			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			{
+				task.cancel();
+				throw new TaskCancelledException(e);
+			}
+		}, 2L, 1L);
+
+		assertEquals(0, count.get());
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+
+		scheduler.performTicks(1L);
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(0, count.get());
+
+		scheduler.performTicks(1L);
+		barrier.await(3L, TimeUnit.SECONDS);
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(1, count.get());
+
+		scheduler.performTicks(1L);
+		barrier.await(3L, TimeUnit.SECONDS);
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(2, count.get());
+
+		scheduler.performTicks(1L);
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(2, count.get());
+	}
+
+	@Test
 	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
@@ -241,7 +303,7 @@ class BukkitSchedulerMockTest
 		scheduler1.runTaskLaterAsynchronously(plugin, () ->
 		{
 		}, 5);
-		scheduler1.runTaskLaterAsynchronously(plugin, () ->
+		scheduler1.runTaskLaterAsynchronously(plugin, task ->
 		{
 		}, 10);
 		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () ->
@@ -259,7 +321,7 @@ class BukkitSchedulerMockTest
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
-		scheduler.runTaskAsynchronously(pluginMock, () ->
+		scheduler.runTaskAsynchronously(pluginMock, task ->
 		{
 			//noinspection InfiniteLoopStatement
 			while (true)
