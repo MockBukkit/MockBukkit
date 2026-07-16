@@ -30,7 +30,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private final @Nullable Consumer<? super BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new CopyOnWriteArrayList<>(); // Needed to not hold any lock when calling cancellation listeners
 	private volatile Thread thread;
-	private volatile boolean submitted = false;
+	private volatile boolean schedulingDone = false;
 
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
@@ -145,13 +145,23 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	}
 
 	/**
-	 * Marks the task as being submitted to the async thread pool.
-	 * This is used to bypass the #isCancelled check if it gets updated before the task is run.
+	 * Marks the task's scheduling as being done.
 	 */
 	@ApiStatus.Internal
-	protected void submitted()
+	protected void setSchedulingDone()
 	{
-		submitted = true;
+		schedulingDone = true;
+	}
+
+	/**
+	 * Gets whether the task's scheduling is done.
+	 *
+	 * @return Whether the task's scheduling is done.
+	 */
+	@ApiStatus.Internal
+	protected boolean isSchedulingDone()
+	{
+		return schedulingDone || isCancelled(); // A cancelled task cannot be scheduled
 	}
 
 	/**
@@ -160,9 +170,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	public void run()
 	{
 		thread = Thread.currentThread();
-		if (!isSync && submitted || !isCancelled())
+		if (!isCancelled())
 		{
-			submitted = false;
 			if (this.runnable != null)
 			{
 				this.runnable.run();

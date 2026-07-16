@@ -207,7 +207,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 		for (ScheduledTask task : oldTasks)
 		{
-			if (task.getScheduledTick() != currentTick || task.isCancelled())
+			if (task.getScheduledTick() != currentTick || task.isSchedulingDone())
 			{
 				continue;
 			}
@@ -218,7 +218,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				task.submitted();
 				pool.submit(wrapTask(task));
 			}
 
@@ -232,7 +231,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				task.cancel();
+				task.setSchedulingDone();
 			}
 		}
 	}
@@ -282,7 +281,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		int queuedAsync = 0;
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (task.isSync() || task.isCancelled() || task.isRunning())
+			if (task.isSync() || task.isSchedulingDone() || task.isRunning())
 			{
 				continue;
 			}
@@ -529,7 +528,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public boolean isQueued(int taskId)
 	{
 		ScheduledTask task = scheduledTasks.getTask(taskId);
-		return task != null && !task.isCancelled();
+		return task != null && !task.isSchedulingDone();
 	}
 
 	@Override
@@ -549,7 +548,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		List<BukkitTask> pendingTasks = new ArrayList<>();
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (!task.isCancelled())
+			if (!task.isSchedulingDone())
 			{
 				pendingTasks.add(task);
 			}
@@ -777,7 +776,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 				for (ScheduledTask task : tasks.values())
 				{
-					if (task.isCancelled() || task.isRunning())
+					if (task.isSchedulingDone() || task.isRunning())
 					{
 						continue;
 					}
