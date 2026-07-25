@@ -11,7 +11,7 @@ import org.bukkit.help.HelpTopicFactory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Matcher;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
@@ -80,6 +80,7 @@ import java.util.function.Predicate;
  *
  * @see <a href="https://github.com/MockBukkit/MockBukkit/issues/1533">Issue #1533</a>
  */
+@NullMarked
 public final class MockBukkitMatchers
 {
 
@@ -99,7 +100,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches blocks with the specified material
 	 * @see BlockMaterialTypeMatcher
 	 */
-	public static @NotNull BlockMaterialTypeMatcher hasMaterial(@NotNull Material material)
+	public static BlockMaterialTypeMatcher hasMaterial(Material material)
 	{
 		return BlockMaterialTypeMatcher.hasMaterial(material);
 	}
@@ -111,7 +112,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches blocks without the specified material
 	 * @see BlockMaterialTypeMatcher
 	 */
-	public static @NotNull Matcher<BlockMock> doesNotHaveMaterial(@NotNull Material material)
+	public static Matcher<BlockMock> doesNotHaveMaterial(Material material)
 	{
 		return BlockMaterialTypeMatcher.doesNotHaveMaterial(material);
 	}
@@ -126,7 +127,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches command results that produced any response
 	 * @see CommandResultAnyResponseMatcher
 	 */
-	public static @NotNull CommandResultAnyResponseMatcher hasAnyResponse()
+	public static CommandResultAnyResponseMatcher hasAnyResponse()
 	{
 		return CommandResultAnyResponseMatcher.hasAnyResponse();
 	}
@@ -137,7 +138,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches command results that produced no response
 	 * @see CommandResultAnyResponseMatcher
 	 */
-	public static @NotNull Matcher<CommandResult> hasNoResponse()
+	public static Matcher<CommandResult> hasNoResponse()
 	{
 		return CommandResultAnyResponseMatcher.hasNoResponse();
 	}
@@ -149,7 +150,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches command results with the specified response
 	 * @see CommandResultResponseMatcher
 	 */
-	public static @NotNull CommandResultResponseMatcher hasResponse(@NotNull String response)
+	public static CommandResultResponseMatcher hasResponse(String response)
 	{
 		return CommandResultResponseMatcher.hasResponse(response);
 	}
@@ -161,7 +162,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches command results without the specified response
 	 * @see CommandResultResponseMatcher
 	 */
-	public static @NotNull Matcher<CommandResult> doesNotHaveResponse(@NotNull String response)
+	public static Matcher<CommandResult> doesNotHaveResponse(String response)
 	{
 		return CommandResultResponseMatcher.doesNotHaveResponse(response);
 	}
@@ -172,7 +173,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches command results that succeeded
 	 * @see CommandResultSucceedMatcher
 	 */
-	public static @NotNull CommandResultSucceedMatcher hasSucceeded()
+	public static CommandResultSucceedMatcher hasSucceeded()
 	{
 		return CommandResultSucceedMatcher.hasSucceeded();
 	}
@@ -183,7 +184,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches command results that failed
 	 * @see CommandResultSucceedMatcher
 	 */
-	public static @NotNull Matcher<CommandResult> hasFailed()
+	public static Matcher<CommandResult> hasFailed()
 	{
 		return CommandResultSucceedMatcher.hasFailed();
 	}
@@ -194,7 +195,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches message targets that received any message
 	 * @see MessageTargetReceivedAnyMessageMatcher
 	 */
-	public static @NotNull MessageTargetReceivedAnyMessageMatcher hasReceivedAny()
+	public static MessageTargetReceivedAnyMessageMatcher hasReceivedAny()
 	{
 		return MessageTargetReceivedAnyMessageMatcher.hasReceivedAny();
 	}
@@ -205,7 +206,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches message targets that received no message
 	 * @see MessageTargetReceivedAnyMessageMatcher
 	 */
-	public static @NotNull Matcher<MessageTarget> hasNotReceivedAny()
+	public static Matcher<MessageTarget> hasNotReceivedAny()
 	{
 		return MessageTargetReceivedAnyMessageMatcher.hasNotReceivedAny();
 	}
@@ -217,7 +218,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches message targets that received the specified message
 	 * @see MessageTargetReceivedMessageMatcher
 	 */
-	public static @NotNull MessageTargetReceivedMessageMatcher hasReceived(@NotNull Component expected)
+	public static MessageTargetReceivedMessageMatcher hasReceived(Component expected)
 	{
 		return MessageTargetReceivedMessageMatcher.hasReceived(expected);
 	}
@@ -229,7 +230,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches message targets that received the specified message
 	 * @see MessageTargetReceivedMessageMatcher
 	 */
-	public static @NotNull MessageTargetReceivedMessageMatcher hasReceived(@NotNull String expected)
+	public static MessageTargetReceivedMessageMatcher hasReceived(String expected)
 	{
 		return MessageTargetReceivedMessageMatcher.hasReceived(expected);
 	}
@@ -241,7 +242,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches message targets that did not receive the specified message
 	 * @see MessageTargetReceivedMessageMatcher
 	 */
-	public static @NotNull Matcher<MessageTarget> hasNotReceived(@NotNull String expected)
+	public static Matcher<MessageTarget> hasNotReceived(String expected)
 	{
 		return MessageTargetReceivedMessageMatcher.hasNotReceived(expected);
 	}
@@ -258,7 +259,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any entity within a radius of specified location
 	 * @see EntityLocationMatcher
 	 */
-	public static @NotNull EntityLocationMatcher isInLocation(@NotNull Location location, double maxDistance)
+	public static EntityLocationMatcher isInLocation(Location location, double maxDistance)
 	{
 		return EntityLocationMatcher.isInLocation(location, maxDistance);
 	}
@@ -271,7 +272,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any entity outside a radius of specified location
 	 * @see EntityLocationMatcher
 	 */
-	public static @NotNull Matcher<EntityMock> isNotInLocation(@NotNull Location location, double maxDistance)
+	public static Matcher<EntityMock> isNotInLocation(Location location, double maxDistance)
 	{
 		return EntityLocationMatcher.isNotInLocation(location, maxDistance);
 	}
@@ -294,7 +295,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any entity that has teleported to the specified location
 	 * @see EntityTeleportationMatcher
 	 */
-	public static @NotNull EntityTeleportationMatcher hasTeleported(@NotNull Location location)
+	public static EntityTeleportationMatcher hasTeleported(Location location)
 	{
 		return EntityTeleportationMatcher.hasTeleported(location);
 	}
@@ -307,7 +308,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any entity that has teleported near the specified location
 	 * @see EntityTeleportationMatcher
 	 */
-	public static @NotNull EntityTeleportationMatcher hasTeleported(@NotNull Location location, double maximumDistance)
+	public static EntityTeleportationMatcher hasTeleported(Location location, double maximumDistance)
 	{
 		return EntityTeleportationMatcher.hasTeleported(location, maximumDistance);
 	}
@@ -330,7 +331,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any entity that has not teleported to the specified location
 	 * @see EntityTeleportationMatcher
 	 */
-	public static @NotNull Matcher<EntityMock> hasNotTeleported(@NotNull Location location)
+	public static Matcher<EntityMock> hasNotTeleported(Location location)
 	{
 		return EntityTeleportationMatcher.hasNotTeleported(location);
 	}
@@ -343,7 +344,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any entity that has not teleported near the specified location
 	 * @see EntityTeleportationMatcher
 	 */
-	public static @NotNull Matcher<EntityMock> hasNotTeleported(@NotNull Location location, double maximumDistance)
+	public static Matcher<EntityMock> hasNotTeleported(Location location, double maximumDistance)
 	{
 		return EntityTeleportationMatcher.hasNotTeleported(location, maximumDistance);
 	}
@@ -355,7 +356,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches allays holding the specified item
 	 * @see AllayCurrentItemMatcher
 	 */
-	public static @NotNull AllayCurrentItemMatcher hasCurrentItem(@NotNull Material currentItem)
+	public static AllayCurrentItemMatcher hasCurrentItem(Material currentItem)
 	{
 		return AllayCurrentItemMatcher.hasCurrentItem(currentItem);
 	}
@@ -367,7 +368,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches allays not holding the specified item
 	 * @see AllayCurrentItemMatcher
 	 */
-	public static @NotNull Matcher<AllayMock> doesNotHaveCurrentItem(@NotNull Material currentItem)
+	public static Matcher<AllayMock> doesNotHaveCurrentItem(Material currentItem)
 	{
 		return AllayCurrentItemMatcher.doesNotHaveCurrentItem(currentItem);
 	}
@@ -379,7 +380,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches goats that have rammed the specified target
 	 * @see GoatEntityRammedMatcher
 	 */
-	public static @NotNull GoatEntityRammedMatcher hasRammed(@NotNull LivingEntity target)
+	public static GoatEntityRammedMatcher hasRammed(LivingEntity target)
 	{
 		return GoatEntityRammedMatcher.hasRammed(target);
 	}
@@ -391,7 +392,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches goats that have not rammed the specified target
 	 * @see GoatEntityRammedMatcher
 	 */
-	public static @NotNull Matcher<GoatMock> hasNotRammed(@NotNull LivingEntity target)
+	public static Matcher<GoatMock> hasNotRammed(LivingEntity target)
 	{
 		return GoatEntityRammedMatcher.hasNotRammed(target);
 	}
@@ -403,7 +404,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches human entities with the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
 	 */
-	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
+	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
 	{
 		return HumanEntityInventoryViewItemMatcher.hasItemInInventoryView(material);
 	}
@@ -415,7 +416,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches human entities with the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
 	 */
-	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(@NotNull ItemStack item)
+	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(ItemStack item)
 	{
 		return HumanEntityInventoryViewItemMatcher.hasItemInInventoryView(item);
 	}
@@ -427,7 +428,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches human entities without the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
 	 */
-	public static @NotNull Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(@NotNull ItemStack item)
+	public static Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(ItemStack item)
 	{
 		return HumanEntityInventoryViewItemMatcher.doesNotHaveItemInInventoryView(item);
 	}
@@ -439,7 +440,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches human entities without the specified item in their inventory view
 	 * @see HumanEntityInventoryViewItemMatcher
 	 */
-	public static @NotNull Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(Material material)
+	public static Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(Material material)
 	{
 		return HumanEntityInventoryViewItemMatcher.doesNotHaveItemInInventoryView(material);
 	}
@@ -451,7 +452,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches human entities with the specified inventory view type
 	 * @see HumanEntityInventoryViewTypeMatcher
 	 */
-	public static @NotNull HumanEntityInventoryViewTypeMatcher hasInventoryViewType(@NotNull InventoryType inventoryType)
+	public static HumanEntityInventoryViewTypeMatcher hasInventoryViewType(InventoryType inventoryType)
 	{
 		return HumanEntityInventoryViewTypeMatcher.hasInventoryViewType(inventoryType);
 	}
@@ -463,7 +464,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches human entities without the specified inventory view type
 	 * @see HumanEntityInventoryViewTypeMatcher
 	 */
-	public static @NotNull Matcher<HumanEntityMock> doesNotHaveInventoryViewType(@NotNull InventoryType inventoryType)
+	public static Matcher<HumanEntityMock> doesNotHaveInventoryViewType(InventoryType inventoryType)
 	{
 		return HumanEntityInventoryViewTypeMatcher.doesNotHaveInventoryViewType(inventoryType);
 	}
@@ -475,7 +476,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches players that consumed the specified item
 	 * @see PlayerConsumeItemMatcher
 	 */
-	public static @NotNull PlayerConsumeItemMatcher hasConsumed(@NotNull ItemStack itemStack)
+	public static PlayerConsumeItemMatcher hasConsumed(ItemStack itemStack)
 	{
 		return PlayerConsumeItemMatcher.hasConsumed(itemStack);
 	}
@@ -487,7 +488,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches players that did not consume the specified item
 	 * @see PlayerConsumeItemMatcher
 	 */
-	public static @NotNull Matcher<PlayerMock> hasNotConsumed(@NotNull ItemStack itemStack)
+	public static Matcher<PlayerMock> hasNotConsumed(ItemStack itemStack)
 	{
 		return PlayerConsumeItemMatcher.hasNotConsumed(itemStack);
 	}
@@ -500,7 +501,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches ranged entities that attacked the specified target
 	 * @see RangedEntityAttackMatcher
 	 */
-	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge)
+	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge)
 	{
 		return RangedEntityAttackMatcher.hasAttacked(target, charge);
 	}
@@ -514,7 +515,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches ranged entities that attacked the specified target
 	 * @see RangedEntityAttackMatcher
 	 */
-	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge, boolean aggressive)
+	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
 	{
 		return RangedEntityAttackMatcher.hasAttacked(target, charge, aggressive);
 	}
@@ -527,7 +528,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches ranged entities that did not attack the specified target
 	 * @see RangedEntityAttackMatcher
 	 */
-	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target, float charge)
+	public static Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(LivingEntity target, float charge)
 	{
 		return RangedEntityAttackMatcher.hasNotAttacked(target, charge);
 	}
@@ -541,7 +542,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches ranged entities that did not attack the specified target
 	 * @see RangedEntityAttackMatcher
 	 */
-	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target, float charge, boolean aggressive)
+	public static Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(LivingEntity target, float charge, boolean aggressive)
 	{
 		return RangedEntityAttackMatcher.hasNotAttacked(target, charge, aggressive);
 	}
@@ -557,7 +558,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches help maps with the specified factory registered
 	 * @see HelpMapFactoryRegisteredMatcher
 	 */
-	public static @NotNull HelpMapFactoryRegisteredMatcher hasFactoryRegistered(@NotNull HelpTopicFactory<?> factory)
+	public static HelpMapFactoryRegisteredMatcher hasFactoryRegistered(HelpTopicFactory<?> factory)
 	{
 		return HelpMapFactoryRegisteredMatcher.hasFactoryRegistered(factory);
 	}
@@ -569,7 +570,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches help maps without the specified factory registered
 	 * @see HelpMapFactoryRegisteredMatcher
 	 */
-	public static @NotNull Matcher<HelpMapMock> doesNotHaveFactoryRegistered(@NotNull HelpTopicFactory<?> factory)
+	public static Matcher<HelpMapMock> doesNotHaveFactoryRegistered(HelpTopicFactory<?> factory)
 	{
 		return HelpMapFactoryRegisteredMatcher.doesNotHaveFactoryRegistered(factory);
 	}
@@ -586,7 +587,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any inventory with at least the required amount of items
 	 * @see InventoryItemAmountMatcher
 	 */
-	public static @NotNull InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
+	public static InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
 	{
 		return InventoryItemAmountMatcher.containsAtLeast(material, amount);
 	}
@@ -599,7 +600,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any inventory with less than the given amount of items
 	 * @see InventoryItemAmountMatcher
 	 */
-	public static @NotNull Matcher<InventoryMock> containsLessThan(Material material, int amount)
+	public static Matcher<InventoryMock> containsLessThan(Material material, int amount)
 	{
 		return InventoryItemAmountMatcher.containsLessThan(material, amount);
 	}
@@ -612,7 +613,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any inventory with at least the required amount of items
 	 * @see InventoryItemAmountMatcher
 	 */
-	public static @NotNull InventoryItemAmountMatcher containsAtLeast(@NotNull ItemStack targetItem, int amount)
+	public static InventoryItemAmountMatcher containsAtLeast(ItemStack targetItem, int amount)
 	{
 		return InventoryItemAmountMatcher.containsAtLeast(targetItem, amount);
 	}
@@ -625,7 +626,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any inventory with less than the given amount of items
 	 * @see InventoryItemAmountMatcher
 	 */
-	public static @NotNull Matcher<InventoryMock> containsLessThan(@NotNull ItemStack targetItem, int amount)
+	public static Matcher<InventoryMock> containsLessThan(ItemStack targetItem, int amount)
 	{
 		return InventoryItemAmountMatcher.containsLessThan(targetItem, amount);
 	}
@@ -637,7 +638,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 * @see ItemSimilarityMatcher
 	 */
-	public static @NotNull ItemSimilarityMatcher similarTo(@NotNull ItemStack itemStack)
+	public static ItemSimilarityMatcher similarTo(ItemStack itemStack)
 	{
 		return ItemSimilarityMatcher.similarTo(itemStack);
 	}
@@ -649,7 +650,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 * @see ItemSimilarityMatcher
 	 */
-	public static @NotNull ItemSimilarityMatcher similarTo(@NotNull Material itemMaterial)
+	public static ItemSimilarityMatcher similarTo(Material itemMaterial)
 	{
 		return ItemSimilarityMatcher.similarTo(itemMaterial);
 	}
@@ -661,7 +662,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any inventory holder containing the specified item stack
 	 * @see InventoryHolderContainsMatcher
 	 */
-	public static @NotNull InventoryHolderContainsMatcher hasItemInInventory(@NotNull ItemStack itemStack)
+	public static InventoryHolderContainsMatcher hasItemInInventory(ItemStack itemStack)
 	{
 		return InventoryHolderContainsMatcher.hasItemInInventory(itemStack);
 	}
@@ -673,7 +674,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches with any inventory holder without the specified item stack
 	 * @see InventoryHolderContainsMatcher
 	 */
-	public static @NotNull Matcher<InventoryHolder> doesNotHaveItemInInventory(@NotNull ItemStack itemStack)
+	public static Matcher<InventoryHolder> doesNotHaveItemInInventory(ItemStack itemStack)
 	{
 		return InventoryHolderContainsMatcher.doesNotHaveItemInInventory(itemStack);
 	}
@@ -684,7 +685,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches item meta that has any lore
 	 * @see ItemMetaAnyLoreMatcher
 	 */
-	public static @NotNull ItemMetaAnyLoreMatcher hasAnyLore()
+	public static ItemMetaAnyLoreMatcher hasAnyLore()
 	{
 		return ItemMetaAnyLoreMatcher.hasAnyLore();
 	}
@@ -695,7 +696,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches item meta that has no lore
 	 * @see ItemMetaAnyLoreMatcher
 	 */
-	public static @NotNull Matcher<ItemMetaMock> hasNoLore()
+	public static Matcher<ItemMetaMock> hasNoLore()
 	{
 		return ItemMetaAnyLoreMatcher.hasNoLore();
 	}
@@ -755,7 +756,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches item meta with the specified lore
 	 * @see ItemMetaLoreMatcher
 	 */
-	public static @NotNull ItemMetaLoreMatcher hasLore(List<Component> lore)
+	public static ItemMetaLoreMatcher hasLore(List<Component> lore)
 	{
 		return ItemMetaLoreMatcher.hasLore(lore);
 	}
@@ -767,7 +768,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches item meta without the specified lore
 	 * @see ItemMetaLoreMatcher
 	 */
-	public static @NotNull Matcher<ItemMetaMock> doesNotHaveLore(List<Component> lore)
+	public static Matcher<ItemMetaMock> doesNotHaveLore(List<Component> lore)
 	{
 		return ItemMetaLoreMatcher.doesNotHaveLore(lore);
 	}
@@ -783,7 +784,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches plugin managers that fired an instance of the specified event
 	 * @see PluginManagerFiredEventClassMatcher
 	 */
-	public static @NotNull PluginManagerFiredEventClassMatcher hasFiredEventInstance(@NotNull Class<? extends Event> targetEvent)
+	public static PluginManagerFiredEventClassMatcher hasFiredEventInstance(Class<? extends Event> targetEvent)
 	{
 		return PluginManagerFiredEventClassMatcher.hasFiredEventInstance(targetEvent);
 	}
@@ -795,7 +796,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches plugin managers that did not fire an instance of the specified event
 	 * @see PluginManagerFiredEventClassMatcher
 	 */
-	public static @NotNull Matcher<PluginManagerMock> hasNotFiredEventInstance(@NotNull Class<? extends Event> targetEvent)
+	public static Matcher<PluginManagerMock> hasNotFiredEventInstance(Class<? extends Event> targetEvent)
 	{
 		return PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance(targetEvent);
 	}
@@ -809,7 +810,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches plugin managers that fired a matching event
 	 * @see PluginManagerFiredEventFilterMatcher
 	 */
-	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
+	public static <G extends Event> PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(Class<G> eventClass, Predicate<G> filter)
 	{
 		return PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent(eventClass, filter);
 	}
@@ -823,7 +824,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches plugin managers that did not fire a matching event
 	 * @see PluginManagerFiredEventFilterMatcher
 	 */
-	public static <G extends Event> @NotNull Matcher<PluginManagerMock> hasNotFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
+	public static <G extends Event> Matcher<PluginManagerMock> hasNotFiredFilteredEvent(Class<G> eventClass, Predicate<G> filter)
 	{
 		return PluginManagerFiredEventFilterMatcher.hasNotFiredFilteredEvent(eventClass, filter);
 	}
@@ -838,7 +839,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches schedulers with no overdue tasks
 	 * @see SchedulerOverdueTasksMatcher
 	 */
-	public static @NotNull SchedulerOverdueTasksMatcher hasNoOverdueTasks()
+	public static SchedulerOverdueTasksMatcher hasNoOverdueTasks()
 	{
 		return SchedulerOverdueTasksMatcher.hasNoOverdueTasks();
 	}
@@ -866,7 +867,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> filter)
+	public static SoundReceiverSoundHeardMatcher hasHeard(Sound sound, Predicate<AudioExperience> filter)
 	{
 		return SoundReceiverSoundHeardMatcher.hasHeard(sound, filter);
 	}
@@ -879,7 +880,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull org.bukkit.Sound sound, @NotNull Predicate<AudioExperience> filter)
+	public static SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound, Predicate<AudioExperience> filter)
 	{
 		return SoundReceiverSoundHeardMatcher.hasHeard(sound, filter);
 	}
@@ -892,7 +893,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull org.bukkit.Sound sound, @NotNull Predicate<AudioExperience> filter)
+	public static Matcher<SoundReceiver> hasNotHeard(org.bukkit.Sound sound, Predicate<AudioExperience> filter)
 	{
 		return SoundReceiverSoundHeardMatcher.hasNotHeard(sound, filter);
 	}
@@ -905,7 +906,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull String soundKey, @NotNull Predicate<AudioExperience> filter)
+	public static SoundReceiverSoundHeardMatcher hasHeard(String soundKey, Predicate<AudioExperience> filter)
 	{
 		return SoundReceiverSoundHeardMatcher.hasHeard(soundKey, filter);
 	}
@@ -918,7 +919,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull String soundKey, @NotNull Predicate<AudioExperience> filter)
+	public static Matcher<SoundReceiver> hasNotHeard(String soundKey, Predicate<AudioExperience> filter)
 	{
 		return SoundReceiverSoundHeardMatcher.hasNotHeard(soundKey, filter);
 	}
@@ -930,7 +931,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull String sound)
+	public static SoundReceiverSoundHeardMatcher hasHeard(String sound)
 	{
 		return SoundReceiverSoundHeardMatcher.hasHeard(sound);
 	}
@@ -942,7 +943,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull String sound)
+	public static Matcher<SoundReceiver> hasNotHeard(String sound)
 	{
 		return SoundReceiverSoundHeardMatcher.hasNotHeard(sound);
 	}
@@ -954,7 +955,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull Sound sound)
+	public static SoundReceiverSoundHeardMatcher hasHeard(Sound sound)
 	{
 		return SoundReceiverSoundHeardMatcher.hasHeard(sound);
 	}
@@ -966,7 +967,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull Sound sound)
+	public static Matcher<SoundReceiver> hasNotHeard(Sound sound)
 	{
 		return SoundReceiverSoundHeardMatcher.hasNotHeard(sound);
 	}
@@ -978,7 +979,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that heard the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull org.bukkit.Sound sound)
+	public static SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound)
 	{
 		return SoundReceiverSoundHeardMatcher.hasHeard(sound);
 	}
@@ -990,7 +991,7 @@ public final class MockBukkitMatchers
 	 * @return A matcher which matches sound receivers that did not hear the specified sound
 	 * @see SoundReceiverSoundHeardMatcher
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull org.bukkit.Sound sound)
+	public static Matcher<SoundReceiver> hasNotHeard(org.bukkit.Sound sound)
 	{
 		return SoundReceiverSoundHeardMatcher.hasNotHeard(sound);
 	}
