@@ -13,13 +13,15 @@ public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attrib
 	private final NamespacedKey key;
 	private final String translationKey;
 	private final Sentiment sentiment;
+	private final double defaultValue;
 
-	public AttributeMock(String name, int ordinal, NamespacedKey key, String translationKey, Sentiment sentiment)
+	public AttributeMock(String name, int ordinal, NamespacedKey key, String translationKey, Sentiment sentiment, double defaultValue)
 	{
 		super(name, ordinal, key);
 		this.key = key;
 		this.translationKey = translationKey;
 		this.sentiment = sentiment;
+		this.defaultValue = defaultValue;
 	}
 
 	public static AttributeMock from(JsonObject jsonObject)
@@ -29,8 +31,9 @@ public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attrib
 		int ordinal = jsonObject.get("ordinal").getAsInt();
 		String translationKey = jsonObject.get("translationKey").getAsString();
 		Sentiment sentiment = Sentiment.valueOf(jsonObject.get("sentiment").getAsString());
+		double defaultValue = jsonObject.get("defaultValue").getAsInt();
 
-		return new AttributeMock(name, ordinal, key, translationKey, sentiment);
+		return new AttributeMock(name, ordinal, key, translationKey, sentiment, defaultValue);
 	}
 
 	@Override
@@ -56,6 +59,12 @@ public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attrib
 	public @NotNull Sentiment getSentiment()
 	{
 		return sentiment;
+	}
+
+	@Override
+	public double getDefaultValue()
+	{
+		return this.defaultValue;
 	}
 
 }

@@ -3,24 +3,33 @@ name: Linting
 on:
   pull_request:
 
+permissions:
+  contents: read
+
+# Cancel superseded runs: a newer push to the same PR makes in-flight runs stale.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   checkstyle:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Set up JDK 25
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           java-version: 25
           distribution: 'temurin'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
 
       - name: Run checkstyle in source code
-        run: ./gradlew checkstyleMain --refresh-dependencies
+        run: ./gradlew checkstyleMain
 
       - name: Run checkstyle in test code
-        run: ./gradlew checkstyleTest --refresh-dependencies
+        run: ./gradlew checkstyleTest
