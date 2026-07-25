@@ -27,8 +27,8 @@ dependencies {
 	api("org.hamcrest:hamcrest:3.0")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter-api:6.1.0")
-	testImplementation(platform("org.junit:junit-bom:6.1.0"))
+	implementation("org.junit.jupiter:junit-jupiter-api:6.1.2")
+	testImplementation(platform("org.junit:junit-bom:6.1.2"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
@@ -39,7 +39,7 @@ dependencies {
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.18.10")
+	implementation("net.bytebuddy:byte-buddy:1.18.11")
 
 	compileOnly("org.projectlombok:lombok:1.18.46")
 	annotationProcessor("org.projectlombok:lombok:1.18.46")
