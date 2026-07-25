@@ -10,7 +10,6 @@ import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.help.HelpTopicFactory;
 import org.bukkit.help.IndexHelpTopic;
 import org.bukkit.inventory.InventoryHolder;
@@ -870,7 +869,7 @@ class MockBukkitMatchersTest
 		{
 			PluginManagerMock pluginManager = serverMock.getPluginManager();
 			pluginManager.callEvent(new FacadeTestEvent());
-			assertMatches(hasNotFiredEventInstance(AsyncPlayerPreLoginEvent.class), pluginManager);
+			assertMatches(hasNotFiredEventInstance(UnfiredEvent.class), pluginManager);
 		}
 
 	}
@@ -1048,6 +1047,29 @@ class MockBukkitMatchersTest
 	 * the constructor of a real Bukkit event.
 	 */
 	static class FacadeTestEvent extends Event
+	{
+
+		private static final HandlerList HANDLERS = new HandlerList();
+
+		@Override
+		public @NotNull HandlerList getHandlers()
+		{
+			return HANDLERS;
+		}
+
+		public static @NotNull HandlerList getHandlerList()
+		{
+			return HANDLERS;
+		}
+
+	}
+
+	/**
+	 * A custom event that is never fired, used as the reference for the "has not fired" plugin-manager delegates.
+	 * Real Bukkit events such as player login events are fired as a side effect of adding players during setup, so
+	 * they cannot be relied upon to be absent.
+	 */
+	static class UnfiredEvent extends Event
 	{
 
 		private static final HandlerList HANDLERS = new HandlerList();
