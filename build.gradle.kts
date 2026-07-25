@@ -39,7 +39,7 @@ dependencies {
 		exclude("net.kyori", "adventure-api")
 	}
 
-	implementation("net.bytebuddy:byte-buddy:1.18.10")
+	implementation("net.bytebuddy:byte-buddy:1.18.11")
 
 	compileOnly("org.projectlombok:lombok:1.18.46")
 	annotationProcessor("org.projectlombok:lombok:1.18.46")
