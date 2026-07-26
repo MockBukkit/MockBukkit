@@ -7,6 +7,7 @@ import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.pointer.Pointers;
 import net.kyori.adventure.pointer.PointersSupplier;
 import net.kyori.adventure.text.Component;
@@ -93,8 +94,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 	static final PointersSupplier<EntityMock> POINTERS_SUPPLIER = PointersSupplier.<EntityMock>builder()
-			.resolving(net.kyori.adventure.identity.Identity.DISPLAY_NAME, EntityMock::name)
-			.resolving(net.kyori.adventure.identity.Identity.UUID, EntityMock::getUniqueId)
+			.resolving(Identity.DISPLAY_NAME, EntityMock::name)
+			.resolving(Identity.UUID, EntityMock::getUniqueId)
 			.build();
 
 	private final Set<String> tags = Sets.newHashSet();
