@@ -1662,6 +1662,7 @@ class ItemMetaMockTest
 		assertInstanceOf(AxolotlBucketMetaMock.class, new ItemStackMock(Material.AXOLOTL_BUCKET).getItemMeta());
 		assertInstanceOf(BundleMetaMock.class, new ItemStackMock(Material.BUNDLE).getItemMeta());
 		assertInstanceOf(MapMetaMock.class, new ItemStackMock(Material.FILLED_MAP).getItemMeta());
+		assertInstanceOf(MusicInstrumentMetaMock.class, new ItemStackMock(Material.GOAT_HORN).getItemMeta());
 		assertInstanceOf(CompassMetaMock.class, new ItemStackMock(Material.COMPASS).getItemMeta());
 		assertInstanceOf(CrossbowMetaMock.class, new ItemStackMock(Material.CROSSBOW).getItemMeta());
 		assertInstanceOf(ArmorStandMetaMock.class, new ItemStackMock(Material.ARMOR_STAND).getItemMeta());
