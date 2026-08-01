@@ -70,10 +70,7 @@ public class MusicInstrumentMetaMock extends ItemMetaMock implements MusicInstru
 	@Override
 	public int hashCode()
 	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((musicInstrument == null) ? 0 : musicInstrument.hashCode());
-		return result;
+		return Objects.hash(super.hashCode(), musicInstrument);
 	}
 
 	@Override
