@@ -29,6 +29,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.MapMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.MusicInstrumentMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.OminousBottleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ShieldMetaMock;
@@ -85,6 +86,7 @@ class ItemFactoryMockTest
 		assertInstanceOf(AxolotlBucketMetaMock.class, factory.getItemMeta(Material.AXOLOTL_BUCKET));
 		assertInstanceOf(BundleMetaMock.class, factory.getItemMeta(Material.BUNDLE));
 		assertInstanceOf(MapMetaMock.class, factory.getItemMeta(Material.FILLED_MAP));
+		assertInstanceOf(MusicInstrumentMetaMock.class, factory.getItemMeta(Material.GOAT_HORN));
 		assertInstanceOf(CompassMetaMock.class, factory.getItemMeta(Material.COMPASS));
 		assertInstanceOf(CrossbowMetaMock.class, factory.getItemMeta(Material.CROSSBOW));
 		assertInstanceOf(ArmorStandMetaMock.class, factory.getItemMeta(Material.ARMOR_STAND));
