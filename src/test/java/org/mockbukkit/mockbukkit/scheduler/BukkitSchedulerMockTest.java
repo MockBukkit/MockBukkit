@@ -305,35 +305,27 @@ class BukkitSchedulerMockTest
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 
-		final CountDownLatch countDownLatch = new CountDownLatch(1);
-		final AtomicBoolean alive = new AtomicBoolean(true);
+		final CountDownLatch taskStarted = new CountDownLatch(1);
 
-		testTask = scheduler.runTaskAsynchronously(null, () ->
+		scheduler.runTaskAsynchronously(null, () ->
 		{
-			countDownLatch.countDown();
-			while (alive.get())
+			taskStarted.countDown();
+			try
 			{
-				if (testTask.isCancelled())
-				{
-					alive.set(false);
-				}
-				try
-				{
-					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
-				{
-					alive.set(false);
-					String message = "Interrupted";
-					throw new TaskCancelledException(message, e);
-				}
+				// Block until the scheduler force-interrupts us during shutdown.
+				new CountDownLatch(1).await(); // never counted down
+			}
+			catch (InterruptedException e)
+			{
+				throw new TaskCancelledException("Interrupted", e);
 			}
 		});
-		countDownLatch.await(1, TimeUnit.SECONDS);
 
-		assertTrue(alive.get());
+		// Unbounded wait: blocks until the task has provably started. No timeout, so
+		// a slow machine only makes the test slower, never changes the verdict.
+		taskStarted.await();
 		assertEquals(1, scheduler.getActiveRunningCount());
-		scheduler.performTicks(10);
+
 		scheduler.setShutdownTimeout(10);
 		assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
 	}
