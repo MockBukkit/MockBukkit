@@ -253,6 +253,38 @@ class PlayerMockTest
 	}
 
 	@Test
+	void pointers_name_CorrectName()
+	{
+		assertEquals("player", player.pointers().get(Identity.NAME).get());
+	}
+
+	@Test
+	void pointers_displayName_Default_CorrectName()
+	{
+		assertEquals(Component.text("player"), player.pointers().get(Identity.DISPLAY_NAME).get());
+	}
+
+	@Test
+	void pointers_displayName_setDisplayName()
+	{
+		player.setDisplayName("Custom Display Name");
+		assertEquals("player", player.pointers().get(Identity.NAME).get());
+		assertEquals(Component.text("Custom Display Name"), player.pointers().get(Identity.DISPLAY_NAME).get());
+	}
+
+	@Test
+	void pointers_UUID_Correct()
+	{
+		assertEquals(player.getUniqueId(), player.pointers().get(Identity.UUID).get());
+	}
+
+	@Test
+	void pointers_locale_Correct()
+	{
+		assertEquals(player.locale(), player.pointers().get(Identity.LOCALE).get());
+	}
+
+	@Test
 	void getPreviousGameMode()
 	{
 		player.setGameMode(GameMode.SURVIVAL);

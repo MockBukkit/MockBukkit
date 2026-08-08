@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -32,6 +33,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -331,6 +333,26 @@ class EntityMockTest
 		UUID uuid = UUID.randomUUID();
 		entity = new SimpleEntityMock(server, uuid);
 		assertEquals(uuid, entity.getUniqueId());
+	}
+
+	@Test
+	void pointers_DisplayName_Default_CorrectName()
+	{
+		assertEquals(Component.text("entity"), entity.pointers().get(Identity.DISPLAY_NAME).get());
+	}
+
+	@Test
+	@Disabled("name() is not implemented correctly (https://github.com/MockBukkit/MockBukkit/issues/1582)")
+	void pointers_DisplayName_setCustomName()
+	{
+		entity.setCustomName("Some Custom Name");
+		assertEquals(Component.text("Some Custom name"), entity.pointers().get(Identity.DISPLAY_NAME).get());
+	}
+
+	@Test
+	void pointers_UUID_Correct()
+	{
+		assertEquals(entity.getUniqueId(), entity.pointers().get(Identity.UUID).get());
 	}
 
 	@Test
