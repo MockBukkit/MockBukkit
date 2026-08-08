@@ -18,7 +18,6 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.AsyncTaskException;
 import org.mockbukkit.mockbukkit.exception.TaskCancelledException;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.opentest4j.AssertionFailedError;
 
@@ -207,7 +206,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 		for (ScheduledTask task : oldTasks)
 		{
-			if (task.getScheduledTick() != currentTick || task.isCancelled())
+			if (task.getScheduledTick() != currentTick || task.isSchedulingDone())
 			{
 				continue;
 			}
@@ -218,7 +217,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				task.submitted();
 				pool.submit(wrapTask(task));
 			}
 
@@ -232,7 +230,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				task.cancel();
+				task.setSchedulingDone();
 			}
 		}
 	}
@@ -282,7 +280,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		int queuedAsync = 0;
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (task.isSync() || task.isCancelled() || task.isRunning())
+			if (task.isSync() || task.isSchedulingDone() || task.isRunning())
 			{
 				continue;
 			}
@@ -406,6 +404,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
@@ -496,8 +495,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public <T> @NotNull Future<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new FutureTask<>(this, plugin, task);
 	}
 
 	@Override
@@ -529,7 +527,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public boolean isQueued(int taskId)
 	{
 		ScheduledTask task = scheduledTasks.getTask(taskId);
-		return task != null && !task.isCancelled();
+		return task != null && !task.isSchedulingDone();
 	}
 
 	@Override
@@ -549,7 +547,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		List<BukkitTask> pendingTasks = new ArrayList<>();
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (!task.isCancelled())
+			if (!task.isSchedulingDone())
 			{
 				pendingTasks.add(task);
 			}
@@ -560,15 +558,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
-		long currentTick;
-		synchronized (this) // See comment at the start of performOneTick()
-		{
-			currentTick = this.currentTick; // There's no task registration here, no need to synchronize further
-		}
-
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick, new AsyncRunnable(task));
-		pool.execute(wrapTask(scheduledTask));
-		return scheduledTask;
+		return runTaskLaterAsynchronously(plugin, task, 1);
 	}
 
 	@Override
@@ -606,6 +596,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask scheduledTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period,
@@ -630,14 +621,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task)
 	{
-		long currentTick;
-		synchronized (this) // See comment at the start of performOneTick()
-		{
-			currentTick = this.currentTick; // There's no task registration here, no need to synchronize further
-		}
-
-		ScheduledTask scheduledTask = new ScheduledTask(this.id.getAndIncrement(), plugin, false, currentTick, task);
-		pool.execute(wrapTask(scheduledTask));
+		runTaskLaterAsynchronously(plugin, task, 1);
 	}
 
 	@Override
@@ -654,14 +638,19 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		synchronized (this) // See comment at the start of performOneTick()
+		{
+			ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick + delay, task);
+			scheduledTasks.addTask(scheduledTask);
+		}
 	}
 
 	@Override
 	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
 		synchronized (this) // See comment at the start of performOneTick()
 		{
 			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
@@ -672,8 +661,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		period = Math.max(period, 1);
+		synchronized (this) // See comment at the start of performOneTick()
+		{
+			RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period, task);
+			scheduledTasks.addTask(repeatingTask);
+		}
 	}
 
 	@Override
@@ -784,7 +778,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 				for (ScheduledTask task : tasks.values())
 				{
-					if (task.isCancelled() || task.isRunning())
+					if (task.isSchedulingDone() || task.isRunning())
 					{
 						continue;
 					}

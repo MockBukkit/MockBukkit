@@ -38,6 +38,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -154,20 +155,35 @@ class BukkitSchedulerMockTest
 	{
 		final Thread mainThread = Thread.currentThread();
 
-		CyclicBarrier barrier = new CyclicBarrier(2);
+		CyclicBarrier barrier1 = new CyclicBarrier(2);
+		CyclicBarrier barrier2 = new CyclicBarrier(2);
 		scheduler.runTaskAsynchronously(null, () ->
 		{
 			assertNotEquals(mainThread, Thread.currentThread());
 			try
 			{
-				barrier.await(3L, TimeUnit.SECONDS);
+				barrier1.await(3L, TimeUnit.SECONDS);
 			}
 			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
 				throw new TaskCancelledException(e);
 			}
 		});
-		barrier.await(3L, TimeUnit.SECONDS);
+		scheduler.runTaskAsynchronously(null, task ->
+		{
+			assertNotEquals(mainThread, Thread.currentThread());
+			try
+			{
+				barrier2.await(3L, TimeUnit.SECONDS);
+			}
+			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			{
+				throw new TaskCancelledException(e);
+			}
+		});
+		scheduler.performOneTick();
+		barrier1.await(3L, TimeUnit.SECONDS);
+		barrier2.await(3L, TimeUnit.SECONDS);
 	}
 
 	@Test
@@ -219,6 +235,54 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
+	void runTaskTimerAsynchronously_Consumer_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	{
+		final Thread mainThread = Thread.currentThread();
+
+		CyclicBarrier barrier = new CyclicBarrier(2);
+		AtomicInteger count = new AtomicInteger();
+
+		scheduler.runTaskTimerAsynchronously(null, task ->
+		{
+			assertNotEquals(mainThread, Thread.currentThread());
+			try
+			{
+				if (count.incrementAndGet() == 2)
+				{
+					task.cancel();
+				}
+				barrier.await(3L, TimeUnit.SECONDS);
+			}
+			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			{
+				task.cancel();
+				throw new TaskCancelledException(e);
+			}
+		}, 2L, 1L);
+
+		assertEquals(0, count.get());
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+
+		scheduler.performTicks(1L);
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(0, count.get());
+
+		scheduler.performTicks(1L);
+		barrier.await(3L, TimeUnit.SECONDS);
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(1, count.get());
+
+		scheduler.performTicks(1L);
+		barrier.await(3L, TimeUnit.SECONDS);
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(2, count.get());
+
+		scheduler.performTicks(1L);
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(2, count.get());
+	}
+
+	@Test
 	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
@@ -240,7 +304,7 @@ class BukkitSchedulerMockTest
 		scheduler1.runTaskLaterAsynchronously(plugin, () ->
 		{
 		}, 5);
-		scheduler1.runTaskLaterAsynchronously(plugin, () ->
+		scheduler1.runTaskLaterAsynchronously(plugin, task ->
 		{
 		}, 10);
 		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () ->
@@ -258,7 +322,7 @@ class BukkitSchedulerMockTest
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
-		scheduler.runTaskAsynchronously(pluginMock, () ->
+		scheduler.runTaskAsynchronously(pluginMock, task ->
 		{
 			//noinspection InfiniteLoopStatement
 			while (true)
@@ -288,7 +352,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		}, 2);
-		assertEquals(1, scheduler.getActiveRunningCount());
+		assertEquals(0, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
@@ -301,41 +365,16 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void longRunningTask_Throws_RunTimeException() throws InterruptedException
+	void asyncTask_Throws_RunTimeException()
 	{
-		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-
-		final CountDownLatch countDownLatch = new CountDownLatch(1);
-		final AtomicBoolean alive = new AtomicBoolean(true);
-
-		testTask = scheduler.runTaskAsynchronously(null, () ->
+		scheduler.runTaskAsynchronously(null, () ->
 		{
-			countDownLatch.countDown();
-			while (alive.get())
-			{
-				if (testTask.isCancelled())
-				{
-					alive.set(false);
-				}
-				try
-				{
-					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
-				{
-					alive.set(false);
-					String message = "Interrupted";
-					throw new TaskCancelledException(message, e);
-				}
-			}
+			throw new RuntimeException("Expected");
 		});
-		countDownLatch.await(1, TimeUnit.SECONDS);
-
-		assertTrue(alive.get());
-		assertEquals(1, scheduler.getActiveRunningCount());
-		scheduler.performTicks(10);
-		scheduler.setShutdownTimeout(10);
-		assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
+		scheduler.performOneTick();
+		AsyncTaskException exception = assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());
+		RuntimeException runtimeException = assertInstanceOf(RuntimeException.class, exception.getCause());
+		assertEquals("Expected", runtimeException.getMessage());
 	}
 
 	@Test
@@ -361,6 +400,7 @@ class BukkitSchedulerMockTest
 			{
 			}
 		});
+		scheduler.performOneTick();
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
@@ -390,6 +430,7 @@ class BukkitSchedulerMockTest
 			{
 			}
 		});
+		scheduler.performOneTick();
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
@@ -612,6 +653,7 @@ class BukkitSchedulerMockTest
 		CountDownLatch countDownLatch = new CountDownLatch(1);
 
 		scheduler.runTaskAsynchronously(null, bukkitTask -> countDownLatch.countDown());
+		scheduler.performOneTick();
 		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 	}
 
