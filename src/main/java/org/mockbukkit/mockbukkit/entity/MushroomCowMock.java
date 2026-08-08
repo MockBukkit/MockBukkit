@@ -50,44 +50,44 @@ public class MushroomCowMock extends AbstractCowMock implements MushroomCow
 	@Override
 	public boolean hasEffectsForNextStew()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull List<PotionEffect> getEffectsForNextStew()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.2")
 	public boolean addEffectToNextStew(@NotNull PotionEffect effect, boolean overwrite)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean addEffectToNextStew(@NotNull SuspiciousEffectEntry suspiciousEffectEntry, boolean overwrite)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean removeEffectFromNextStew(@NotNull PotionEffectType type)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean hasEffectForNextStew(@NotNull PotionEffectType type)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void clearEffectsForNextStew()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -107,42 +107,42 @@ public class MushroomCowMock extends AbstractCowMock implements MushroomCow
 	public int getStewEffectDuration()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setStewEffectDuration(int duration)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable PotionEffectType getStewEffectType()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setStewEffect(@Nullable PotionEffectType type)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull @Unmodifiable List<SuspiciousEffectEntry> getStewEffects()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setStewEffects(@NotNull List<SuspiciousEffectEntry> effects)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

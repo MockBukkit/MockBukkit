@@ -731,7 +731,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull CommandSender createCommandSender(@NotNull Consumer<? super Component> feedback)
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -821,7 +821,7 @@ public class ServerMock extends Server.Spigot implements Server
 			case CRAFTER:
 				yield new CrafterInventoryMock(owner);
 			default:
-				throw new UnimplementedOperationException("Inventory type not yet supported");
+				throw UnimplementedOperationException.exception("Inventory type not yet supported");
 		};
 
 		if (title != null)
@@ -882,7 +882,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull Merchant createMerchant(@Nullable Component title)
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -901,7 +901,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean isTickingWorlds()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -933,7 +933,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public WorldBorder createWorldBorder()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1020,7 +1020,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean forcesDefaultGameMode()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1182,21 +1182,21 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1438,32 +1438,32 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean isLoggingIPs()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull List<String> getInitialEnabledPacks()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull List<String> getInitialDisabledPacks()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ServerTickManager getServerTickManager()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable ResourcePack getServerResourcePack()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -1482,7 +1482,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public String getResourcePack()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -1490,7 +1490,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public String getResourcePackHash()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -1498,14 +1498,14 @@ public class ServerMock extends Server.Spigot implements Server
 	public String getResourcePackPrompt()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean isResourcePackRequired()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1585,7 +1585,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public long getConnectionThrottle()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1726,7 +1726,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public void reloadData()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1745,7 +1745,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public void savePlayers()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1758,7 +1758,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull Map<String, String[]> getCommandAliases()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1824,7 +1824,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public io.papermc.paper.configuration.ServerConfiguration getServerConfig()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -1876,7 +1876,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public void shutdown()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1917,21 +1917,21 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public <B extends BanList<E>, E> @NotNull B getBanList(@NotNull BanListType<B> type)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull File getWorldContainer()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Path getLevelDirectory()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1945,7 +1945,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull Merchant createMerchant(String title)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -1958,7 +1958,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull Merchant createMerchant()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**
@@ -2038,7 +2038,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ServerLinks getServerLinks()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2137,14 +2137,14 @@ public class ServerMock extends Server.Spigot implements Server
 	public void setIdleTimeout(int threshold)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getIdleTimeout()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2191,35 +2191,35 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull double[] getTPS()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull long[] getTickTimes()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public double getAverageTickTime()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public Advancement getAdvancement(NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Iterator<Advancement> advancementIterator()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2385,14 +2385,14 @@ public class ServerMock extends Server.Spigot implements Server
 	public LootTable getLootTable(NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ItemStack createExplorerMap(World world, Location location, StructureType structureType)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2400,7 +2400,7 @@ public class ServerMock extends Server.Spigot implements Server
 												boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2412,7 +2412,7 @@ public class ServerMock extends Server.Spigot implements Server
 												 boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2448,7 +2448,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull List<Entity> selectEntities(CommandSender sender, String selector)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -2634,21 +2634,21 @@ public class ServerMock extends Server.Spigot implements Server
 	public void reloadPermissions()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean reloadCommandAliases()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean suggestPlayerNamesWhenNullTabCompletions()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2697,21 +2697,21 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean isStopping()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull MobGoals getMobGoals()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull DatapackManager getDatapackManager()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -2719,7 +2719,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public YamlConfiguration getConfig()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2793,7 +2793,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull PotionBrewer getPotionBrewer()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2860,7 +2860,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean isPaused()
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2879,7 +2879,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public void allowPausing(@NotNull Plugin plugin, boolean b)
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -2899,21 +2899,21 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean isAcceptingTransfers()
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull EntityFactory getEntityFactory()
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Iterable<? extends Audience> audiences()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**

@@ -313,6 +313,10 @@ These exception extends `AssumptionException` and will cause the test to be skip
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
 
+> [!TIP]
+> If you prefer the tests to not be skipped, you can make every test throw `UnimplementedOperationFailure` 
+> instead by setting the system property `mockbukkit.unimplementedoperation.fail` to `true`
+
 ## :headphones: Discord Server
 
 You can also find us on discord by the way!

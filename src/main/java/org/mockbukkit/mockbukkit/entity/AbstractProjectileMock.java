@@ -105,19 +105,19 @@ public abstract class AbstractProjectileMock extends EntityMock implements Proje
 	@Override
 	public boolean canHitEntity(@NotNull Entity entity)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void hitEntity(@NotNull Entity entity)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void hitEntity(@NotNull Entity entity, @NotNull Vector vector)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

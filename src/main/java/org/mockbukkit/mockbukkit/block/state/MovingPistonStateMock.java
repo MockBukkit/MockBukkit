@@ -36,28 +36,28 @@ public class MovingPistonStateMock extends TileStateMock implements MovingPiston
 	public BlockData getMovingBlock()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public BlockFace getDirection()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean isExtending()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean isPistonHead()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

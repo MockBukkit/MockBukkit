@@ -753,7 +753,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	public void registerInterface(@NotNull Class<? extends PluginLoader> loader) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -799,14 +799,14 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	public Plugin[] loadPlugins(@NotNull File directory)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Plugin[] loadPlugins(@NotNull File[] files)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -971,14 +971,14 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	public boolean isTransitiveDependency(PluginMeta pluginMeta, PluginMeta dependencyConfig)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void overridePermissionManager(@NotNull Plugin plugin, @Nullable PermissionManager permissionManager)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

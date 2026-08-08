@@ -174,14 +174,14 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable NamespacedKey getNoteBlockSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**

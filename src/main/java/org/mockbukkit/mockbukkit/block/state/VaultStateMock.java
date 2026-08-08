@@ -98,42 +98,42 @@ public class VaultStateMock extends TileStateMock implements Vault
 	public LootTable getLootTable()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("getLootTable");
+		throw UnimplementedOperationException.exception("getLootTable");
 	}
 
 	@Override
 	public void setLootTable(LootTable lootTable)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setLootTable");
+		throw UnimplementedOperationException.exception("setLootTable");
 	}
 
 	@Override
 	public @Nullable LootTable getDisplayedLootTable()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("getDisplayedLootTable");
+		throw UnimplementedOperationException.exception("getDisplayedLootTable");
 	}
 
 	@Override
 	public void setDisplayedLootTable(@Nullable LootTable lootTable)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setDisplayedLootTable");
+		throw UnimplementedOperationException.exception("setDisplayedLootTable");
 	}
 
 	@Override
 	public long getNextStateUpdateTime()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("getNextStateUpdateTime");
+		throw UnimplementedOperationException.exception("getNextStateUpdateTime");
 	}
 
 	@Override
 	public void setNextStateUpdateTime(long nextStateUpdateTime)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setNextStateUpdateTime");
+		throw UnimplementedOperationException.exception("setNextStateUpdateTime");
 	}
 
 	@Override
@@ -180,14 +180,14 @@ public class VaultStateMock extends TileStateMock implements Vault
 	public ItemStack getDisplayedItem()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setNextStateUpdateTime");
+		throw UnimplementedOperationException.exception("setNextStateUpdateTime");
 	}
 
 	@Override
 	public void setDisplayedItem(ItemStack displayedItem)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setNextStateUpdateTime");
+		throw UnimplementedOperationException.exception("setNextStateUpdateTime");
 	}
 
 	@Override

@@ -242,7 +242,7 @@ public class ItemStackMock extends ItemStack
 	public @NotNull Component effectiveName()
 	{
 		// TODO:
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -447,7 +447,7 @@ public class ItemStackMock extends ItemStack
 	public int getMaxItemUseDuration(@NotNull LivingEntity entity)
 	{
 		//TODO
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	public static ItemStack empty()
@@ -502,7 +502,7 @@ public class ItemStackMock extends ItemStack
 	public void resetData(@NotNull DataComponentType type)
 	{
 		// TODO:
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -517,7 +517,7 @@ public class ItemStackMock extends ItemStack
 		}
 
 		// TODO:
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -530,7 +530,7 @@ public class ItemStackMock extends ItemStack
 	public boolean matchesWithoutData(@NotNull ItemStack item, @NotNull Set<@NotNull DataComponentType> excludeTypes, boolean ignoreCount)
 	{
 		// TODO:
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

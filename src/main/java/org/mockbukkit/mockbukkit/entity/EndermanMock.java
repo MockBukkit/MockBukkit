@@ -51,7 +51,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	public boolean teleportRandomly()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

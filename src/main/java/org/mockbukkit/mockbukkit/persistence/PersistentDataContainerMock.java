@@ -105,7 +105,7 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	public byte @NotNull [] serializeToBytes()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	public void readFromBytes(byte @NotNull [] bytes, boolean clear)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

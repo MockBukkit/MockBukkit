@@ -443,7 +443,7 @@ public final class EntityTypesMock
 
 			if (data == null)
 			{
-				throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
+				throw UnimplementedOperationException.exception(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
 			}
 		}
 

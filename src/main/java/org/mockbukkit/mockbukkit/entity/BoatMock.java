@@ -150,7 +150,7 @@ public class BoatMock extends VehicleMock implements Boat
 	public @NotNull Status getStatus()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -180,21 +180,21 @@ public class BoatMock extends VehicleMock implements Boat
 	public boolean isLeashed()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NonNull Entity getLeashHolder() throws IllegalStateException
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean setLeashHolder(@Nullable Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

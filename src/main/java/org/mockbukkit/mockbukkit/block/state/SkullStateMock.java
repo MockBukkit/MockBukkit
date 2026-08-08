@@ -84,14 +84,14 @@ public class SkullStateMock extends TileStateMock implements Skull
 	public @Nullable ResolvableProfile getProfile()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setProfile(@Nullable ResolvableProfile resolvableProfile)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -190,14 +190,14 @@ public class SkullStateMock extends TileStateMock implements Skull
 	public @Nullable NamespacedKey getNoteBlockSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -248,13 +248,13 @@ public class SkullStateMock extends TileStateMock implements Skull
 	@Override
 	public @Nullable Component customName()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void customName(@Nullable Component component)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

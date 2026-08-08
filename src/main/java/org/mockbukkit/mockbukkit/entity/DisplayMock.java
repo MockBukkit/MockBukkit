@@ -179,13 +179,13 @@ public class DisplayMock extends EntityMock implements Display
 	@Override
 	public @NotNull Billboard getBillboard()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setBillboard(@NotNull Billboard billboard)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

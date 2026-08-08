@@ -53,7 +53,7 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 	{
 		if (potionEffects == null)
 		{
-			throw new UnimplementedOperationException("Unimplemented potion: " + namespacedKey);
+			throw UnimplementedOperationException.exception("Unimplemented potion: " + namespacedKey);
 		}
 		return potionEffects;
 	}
@@ -61,7 +61,7 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 	@Override
 	public boolean isInstant()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
