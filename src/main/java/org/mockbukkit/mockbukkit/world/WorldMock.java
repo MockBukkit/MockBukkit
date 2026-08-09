@@ -1500,11 +1500,11 @@ public class WorldMock implements World
 	@Override
 	public void setAllowMonsterSpawning(boolean allowMonsters)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.allowMonsters = allowMonsters;
 	}
 
 	@Override
+	@Deprecated(since = "26.2", forRemoval = true)
 	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals)
 	{
 		this.allowMonsters = allowMonsters;
@@ -1512,6 +1512,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated(since = "26.2", forRemoval = true)
 	public boolean getAllowAnimals()
 	{
 		return this.allowAnimals;
