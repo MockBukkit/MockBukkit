@@ -147,8 +147,8 @@ class UnsafeValuesTest
 	void serializeItem(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		byte[] serialized = unsafeValuesMock.serializeItem(expected);
-		ItemStack actual = unsafeValuesMock.deserializeItem(serialized);
+		byte[] serialized = expected.serializeAsBytes();
+		ItemStack actual = ItemStack.deserializeBytes(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
 	}

@@ -22,12 +22,9 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.potion.PotionType;
-import org.bukkit.util.io.BukkitObjectInputStream;
-import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
@@ -35,11 +32,6 @@ import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -223,45 +215,23 @@ public class UnsafeValuesMock implements UnsafeValues
 		return COMPATIBLE_API_VERSIONS.contains(apiVersion);
 	}
 
+	/**
+	 * @deprecated since 26.2 — use {@link ItemStack#serializeAsBytes()} instead
+	 */
+	@Deprecated(since = "26.2", forRemoval = true)
 	public byte[] serializeItem(ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "null cannot be serialized");
-		Preconditions.checkNotNull(item.getType().asItemType(),
-				"Items without corresponding ItemType are currently not supported");
-		Preconditions.checkArgument(item.getType() != Material.AIR, "air cannot be serialized");
-		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
-		try
-		{
-			@NotNull Map<String, Object> stack = item.serialize();
-			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
-			oos.writeObject(stack);
-			return bao.toByteArray();
-		}
-		catch (IOException e)
-		{
-			throw new ItemSerializationException(e);
-		}
+		return item.serializeAsBytes();
 	}
 
+	/**
+	 * @deprecated since 26.2 — use {@link ItemStack#deserializeBytes(byte[])} instead
+	 */
+	@Deprecated(since = "26.2", forRemoval = true)
 	public ItemStack deserializeItem(byte[] data)
 	{
-		Preconditions.checkNotNull(data, "null cannot be deserialized");
-		Preconditions.checkArgument(data.length > 0, "cannot deserialize nothing");
-		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
-		try
-		{
-			final ObjectInputStream ois = new BukkitObjectInputStream(bai);
-			if (bai.available() <= 0)
-			{
-				return null;
-			}
-			Map<String, Object> stack = (Map<String, Object>) ois.readObject();
-			return this.deserializeStack(stack);
-		}
-		catch (IOException | ClassNotFoundException e)
-		{
-			throw new ItemSerializationException(e);
-		}
+		return ItemStack.deserializeBytes(data);
 	}
 
 	@Override

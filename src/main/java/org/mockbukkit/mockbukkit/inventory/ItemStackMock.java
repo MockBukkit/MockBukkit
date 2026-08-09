@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +25,14 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
+import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -651,6 +656,26 @@ public class ItemStackMock extends ItemStack
 		}
 
 		return result;
+	}
+
+	@Override
+	public byte @NotNull [] serializeAsBytes()
+	{
+		Preconditions.checkNotNull(getType().asItemType(),
+				"Items without corresponding ItemType are currently not supported");
+		Preconditions.checkArgument(getType() != Material.AIR, "air cannot be serialized");
+		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		try
+		{
+			@NotNull Map<String, Object> stack = serialize();
+			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
+			oos.writeObject(stack);
+			return bao.toByteArray();
+		}
+		catch (IOException e)
+		{
+			throw new ItemSerializationException(e);
+		}
 	}
 
 	@Override
