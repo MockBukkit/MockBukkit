@@ -544,7 +544,8 @@ class UnsafeValuesTest
 				Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
 				Arguments.of("block.minecraft.stone", new ItemStackMock(Material.STONE)),
 				Arguments.of("item.minecraft.wheat", new ItemStackMock(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART))
+				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART)),
+				Arguments.of("item.minecraft.potion.effect.empty", new ItemStackMock(Material.POTION))
 		);
 	}
 
