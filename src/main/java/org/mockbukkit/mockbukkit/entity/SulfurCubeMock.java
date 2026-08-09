@@ -176,15 +176,13 @@ public class SulfurCubeMock extends MobMock implements SulfurCube
 	@Override
 	public boolean canBreed()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 
 	@Override
 	public void setBreed(boolean breed)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Nothing to do here, Paper does not implement this
 	}
 
 	@Override
