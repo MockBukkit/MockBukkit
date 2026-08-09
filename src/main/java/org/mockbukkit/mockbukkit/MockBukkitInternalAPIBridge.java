@@ -29,6 +29,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -76,6 +77,13 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	{
 		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
 		return formatTranslatable("entity", type);
+	}
+
+	@Override
+	public SpawnCategory getSpawnCategory(EntityType entityType)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

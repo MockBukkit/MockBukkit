@@ -5,7 +5,9 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.entity.LookAnchor;
+import io.papermc.paper.entity.RemovalReason;
 import io.papermc.paper.entity.TeleportFlag;
+import io.papermc.paper.math.Angle;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -1241,6 +1243,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public void setRotation(@NotNull Angle yaw, @NotNull Angle pitch)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BoundingBox getBoundingBox()
 	{
 		double halfWidth = getWidth() / 2.0D;
@@ -1615,6 +1624,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			++ticksLived;
 		}
+	}
+
+	@Override
+	public EntityRemoveEvent.@Nullable Cause getRemoveEventCause()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RemovalReason getRemovalReason()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

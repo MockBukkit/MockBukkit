@@ -1331,6 +1331,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void resetFlyingTicks()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
 	{
 		Preconditions.checkArgument(flyingFallDamage != null, "flyingFallDamage cannot be null");
@@ -3384,6 +3391,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@ApiStatus.Experimental
 	public PlayerGameConnection getConnection()
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void unsetFixedPose()
+	{
+		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

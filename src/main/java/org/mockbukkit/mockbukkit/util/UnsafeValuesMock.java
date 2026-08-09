@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import io.papermc.paper.entity.EntitySerializationFlag;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.translation.Translatable;
@@ -195,6 +196,20 @@ public class UnsafeValuesMock implements UnsafeValues
 	public Advancement loadAdvancement(NamespacedKey key, String advancement)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Advancement loadAdvancement(Key key, String advancement, boolean persist)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public List<Advancement> loadAdvancements(Map<Key, String> advancements, boolean persist)
+	{
+		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
