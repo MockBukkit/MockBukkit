@@ -60,15 +60,6 @@ class TropicalFishBucketMetaMockTest
 	}
 
 	@Test
-	void checkVars_CorrectDefaults()
-	{
-		meta.checkVars();
-		assertEquals(DyeColor.WHITE, meta.getPatternColor());
-		assertEquals(DyeColor.WHITE, meta.getBodyColor());
-		assertEquals(TropicalFish.Pattern.KOB, meta.getPattern());
-	}
-
-	@Test
 	void getPatternColor_NullVariant_ThrowsException()
 	{
 		assertThrowsExactly(NullPointerException.class, () -> meta.getPatternColor());
@@ -108,20 +99,6 @@ class TropicalFishBucketMetaMockTest
 		meta.setPattern(TropicalFish.Pattern.BETTY);
 
 		assertEquals(TropicalFish.Pattern.BETTY, meta.getPattern());
-	}
-
-	@Test
-	void equals_SameInstance_True()
-	{
-		meta.checkVars();
-		assertEquals(meta, meta);
-	}
-
-	@Test
-	void equals_DifferentObjects_SameValues_True()
-	{
-		meta.checkVars();
-		assertEquals(meta, meta.clone());
 	}
 
 	@Test

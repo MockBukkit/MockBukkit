@@ -44,32 +44,18 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 
 		if (meta instanceof TropicalFishBucketMeta bucketMeta)
 		{
-			if (meta instanceof TropicalFishBucketMetaMock mock)
+			if (bucketMeta.hasPattern())
 			{
-				mock.checkVars();
+				this.pattern = bucketMeta.getPattern();
 			}
-			this.patternColor = bucketMeta.getPatternColor();
-			this.bodyColor = bucketMeta.getBodyColor();
-			this.pattern = bucketMeta.getPattern();
-		}
-	}
-
-	/**
-	 * Defaults any null variables.
-	 */
-	protected void checkVars()
-	{
-		if (this.patternColor == null)
-		{
-			this.patternColor = DyeColor.WHITE;
-		}
-		if (this.bodyColor == null)
-		{
-			this.bodyColor = DyeColor.WHITE;
-		}
-		if (this.pattern == null)
-		{
-			this.pattern = TropicalFish.Pattern.KOB;
+			if (bucketMeta.hasPatternColor())
+			{
+				this.patternColor = bucketMeta.getPatternColor();
+			}
+			if (bucketMeta.hasBodyColor())
+			{
+				this.bodyColor = bucketMeta.getBodyColor();
+			}
 		}
 	}
 
@@ -83,7 +69,6 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public void setPatternColor(@NotNull DyeColor color)
 	{
-		checkVars();
 		this.patternColor = color;
 	}
 
@@ -97,7 +82,6 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public void setBodyColor(@NotNull DyeColor color)
 	{
-		checkVars();
 		this.bodyColor = color;
 	}
 
@@ -111,7 +95,6 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public void setPattern(TropicalFish.@NotNull Pattern pattern)
 	{
-		checkVars();
 		this.pattern = pattern;
 	}
 
@@ -194,10 +177,18 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		checkVars();
-		serialized.put("body-color", bodyColor);
-		serialized.put("pattern-color", patternColor);
-		serialized.put("pattern", pattern);
+		if (hasBodyColor())
+		{
+			serialized.put("body-color", getBodyColor());
+		}
+		if (hasPatternColor())
+		{
+			serialized.put("pattern-color", getPatternColor());
+		}
+		if (hasPattern())
+		{
+			serialized.put("pattern", getPattern());
+		}
 		return serialized;
 	}
 
