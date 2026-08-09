@@ -15,10 +15,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.translation.Translatable;
 import org.bukkit.GameRule;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Statistic;
-import org.bukkit.Tag;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
@@ -238,29 +236,9 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 		return Set.of(Pose.STANDING, Pose.SNEAKING, Pose.SWIMMING, Pose.FALL_FLYING, Pose.SLEEPING);
 	}
 
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
+	public static <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
 	{
-		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
-		String value = translatable.key().value();
-		if (translatable instanceof Material material)
-		{
-			// replace wall_hanging string check with Tag check (when implemented)
-			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
-			{
-				value = value.replace("wall_", "");
-			}
-			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
-			if (fromItemStack && emptyEffects.contains(material))
-			{
-				value += ".effect.empty";
-			}
-		}
-		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), value);
-	}
-
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
-	{
-		return formatTranslatable(prefix, translatable, false);
+		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), translatable.key().value());
 	}
 
 }
