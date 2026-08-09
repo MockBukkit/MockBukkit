@@ -7,13 +7,10 @@ import io.papermc.paper.entity.EntitySerializationFlag;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.key.Key;
-import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
@@ -46,7 +43,6 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Mock implementation of an {@link UnsafeValues}.
@@ -312,31 +308,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	public @NotNull Entity deserializeEntity(byte @NotNull [] bytes, @NotNull World world, boolean b, boolean b1)
 	{
 		throw new UnimplementedOperationException();
-	}
-
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
-	{
-		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
-		String value = translatable.key().value();
-		if (translatable instanceof Material material)
-		{
-			// replace wall_hanging string check with Tag check (when implemented)
-			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
-			{
-				value = value.replace("wall_", "");
-			}
-			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
-			if (fromItemStack && emptyEffects.contains(material))
-			{
-				value += ".effect.empty";
-			}
-		}
-		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), value);
-	}
-
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
-	{
-		return formatTranslatable(prefix, translatable, false);
 	}
 
 	@Override
