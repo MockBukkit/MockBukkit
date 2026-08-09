@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.util;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import io.papermc.paper.entity.EntitySerializationFlag;
 import io.papermc.paper.registry.RegistryAccess;
@@ -10,14 +9,12 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -27,13 +24,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -57,24 +51,6 @@ public class UnsafeValuesMock implements UnsafeValues
 					"26.1",
 					"26.2"
 			);
-	public static final String PROPERTY_SCHEMA_VERSION = "schema_version";
-
-	public static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
-		toMinecraft(ItemMetaMock.DAMAGE),
-		toMinecraft(ItemMetaMock.MAX_DAMAGE),
-		toMinecraft(ItemMetaMock.REPAIR_COST),
-		toMinecraft(ItemMetaMock.ENCHANTMENTS),
-		toMinecraft(ItemMetaMock.LORE),
-		toMinecraft(ItemMetaMock.UNBREAKABLE),
-		Map.entry(ItemMetaMock.DISPLAY_NAME, "minecraft:custom_name")
-	);
-
-	private static Map.Entry<String, String> toMinecraft(final String key)
-	{
-		String newName = key.toLowerCase(Locale.ROOT);
-		newName = newName.replace("-", "_");
-		return Map.entry(key, NamespacedKey.minecraft(newName).asString());
-	}
 
 	private String minimumApiVersion = "none";
 
@@ -325,7 +301,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	@Override
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
-		return deserializeStackStatic(args);
+		return ItemStackMock.deserializeStack(args);
 	}
 
 	@Override
@@ -340,56 +316,5 @@ public class UnsafeValuesMock implements UnsafeValues
 		return Material.getMaterial(material);
 	}
 
-	@ApiStatus.Internal
-	public static @NotNull ItemStack deserializeStackStatic(@NotNull Map<String, Object> args)
-	{
-		@SuppressWarnings({ "java:S1481", "java:S1854" })
-		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
-		final String id = (String) args.get("id");
-		final int amount = ((Number) args.get("count")).intValue();
-		final Map<String, Object> components = (Map<String, Object>) args.get("components");
-		if (components != null)
-		{
-			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
-			{
-				String originalName = entry.getValue();
-				String newName = entry.getKey();
 
-				// Skip the key if it does not exist
-				if (!components.containsKey(originalName))
-				{
-					continue;
-				}
-
-				var value = components.get(originalName);
-				components.put(newName, value);
-				components.remove(originalName);
-			}
-		}
-
-		NamespacedKey key = NamespacedKey.fromString(id);
-		Material material = Registry.MATERIAL.get(key);
-
-		if (material == null || material.isAir())
-		{
-			return ItemStackMock.empty();
-		}
-
-		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
-		if (components != null)
-		{
-			try
-			{
-				@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
-				Preconditions.checkArgument(meta != null, "Invalid item meta type");
-				itemstack.setItemMeta(meta);
-			}
-			catch (Exception e)
-			{
-				throw new IllegalArgumentException("Error while deserializing item meta", e);
-			}
-		}
-
-		return itemstack;
-	}
 }

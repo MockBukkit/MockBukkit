@@ -41,7 +41,6 @@ import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
-import org.mockbukkit.mockbukkit.util.UnsafeValuesMock;
 import org.mockbukkit.mockbukkit.world.damagesource.CombatEntryMock;
 
 import java.io.ByteArrayInputStream;
@@ -98,7 +97,7 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 				return ItemStack.empty();
 			}
 			Map<String, Object> stack = (Map<String, Object>) ois.readObject();
-			return UnsafeValuesMock.deserializeStackStatic(stack);
+			return ItemStackMock.deserialize(stack);
 		}
 		catch (IOException | ClassNotFoundException e)
 		{

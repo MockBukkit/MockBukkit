@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
@@ -8,6 +9,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -42,9 +44,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import static org.mockbukkit.mockbukkit.util.UnsafeValuesMock.PROPERTY_SCHEMA_VERSION;
-import static org.mockbukkit.mockbukkit.util.UnsafeValuesMock.RENAME_JSON_PROPERTY;
-
 
 @DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
@@ -52,6 +51,24 @@ public class ItemStackMock extends ItemStack
 
 	private static final String FIELD_AMOUNT = "amount";
 	private static final String FIELD_MATERIAL = "type";
+
+	public static final String PROPERTY_SCHEMA_VERSION = "schema_version";
+	public static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
+		toMinecraft(ItemMetaMock.DAMAGE),
+		toMinecraft(ItemMetaMock.MAX_DAMAGE),
+		toMinecraft(ItemMetaMock.REPAIR_COST),
+		toMinecraft(ItemMetaMock.ENCHANTMENTS),
+		toMinecraft(ItemMetaMock.LORE),
+		toMinecraft(ItemMetaMock.UNBREAKABLE),
+		Map.entry(ItemMetaMock.DISPLAY_NAME, "minecraft:custom_name")
+	);
+
+	private static Map.Entry<String, String> toMinecraft(final String key)
+	{
+		String newName = key.toLowerCase(Locale.ROOT);
+		newName = newName.replace("-", "_");
+		return Map.entry(key, NamespacedKey.minecraft(newName).asString());
+	}
 
 	@NonNull
 	@ApiStatus.Internal
@@ -613,7 +630,62 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		return Bukkit.getUnsafe().deserializeStack(args);
+		// TODO: Paper has a conditional check here to validate if the "schema_version"
+		// exists, and if not the item is assumed as legacy. We don't have that implemented.
+		return deserializeStack(args);
+	}
+
+	@NotNull
+	public static ItemStack deserializeStack(@NotNull Map<String, Object> args)
+	{
+		@SuppressWarnings({ "java:S1481", "java:S1854" })
+		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
+		final String id = (String) args.get("id");
+		final int amount = ((Number) args.get("count")).intValue();
+		final Map<String, Object> components = (Map<String, Object>) args.get("components");
+		if (components != null)
+		{
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getValue();
+				String newName = entry.getKey();
+
+				// Skip the key if it does not exist
+				if (!components.containsKey(originalName))
+				{
+					continue;
+				}
+
+				var value = components.get(originalName);
+				components.put(newName, value);
+				components.remove(originalName);
+			}
+		}
+
+		NamespacedKey key = NamespacedKey.fromString(id);
+		Material material = Registry.MATERIAL.get(key);
+
+		if (material == null || material.isAir())
+		{
+			return ItemStackMock.empty();
+		}
+
+		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
+		if (components != null)
+		{
+			try
+			{
+				@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
+				Preconditions.checkArgument(meta != null, "Invalid item meta type");
+				itemstack.setItemMeta(meta);
+			}
+			catch (Exception e)
+			{
+				throw new IllegalArgumentException("Error while deserializing item meta", e);
+			}
+		}
+
+		return itemstack;
 	}
 
 	@Override
