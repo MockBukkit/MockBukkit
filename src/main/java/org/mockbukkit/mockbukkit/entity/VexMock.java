@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
 import org.bukkit.entity.Vex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +25,6 @@ public class VexMock extends MonsterMock implements Vex
 	private int limitedLifeTicks = -1;
 
 	private @Nullable Location boundLocation = null;
-	private @Nullable Mob summoner = null;
 	private @Nullable LivingEntity owner = null;
 
 	/**
@@ -92,18 +90,6 @@ public class VexMock extends MonsterMock implements Vex
 	public boolean hasLimitedLife()
 	{
 		return this.hasLimitedLifetime();
-	}
-
-	@Override
-	public @Nullable Mob getSummoner()
-	{
-		return this.summoner;
-	}
-
-	@Override
-	public void setSummoner(@Nullable Mob summoner)
-	{
-		this.summoner = summoner;
 	}
 
 	@Override
