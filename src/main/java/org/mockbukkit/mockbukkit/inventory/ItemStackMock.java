@@ -31,6 +31,7 @@ import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -638,11 +639,33 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
-		@SuppressWarnings({ "java:S1481", "java:S1854" })
-		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
-		final String id = (String) args.get("id");
-		final int amount = ((Number) args.get("count")).intValue();
-		final Map<String, Object> components = (Map<String, Object>) args.get("components");
+		// Parse id using NbtParser to accept string names and avoid manual casting
+		NamespacedKey key = NbtParser.parseNamespacedKey(args.get("id"));
+		if (key == null)
+		{
+			throw new IllegalArgumentException("id must be a NamespacedKey string");
+		}
+
+		Material material = Registry.MATERIAL.get(key);
+
+		// If it's air or unknown material, return an empty stack early before reading count
+		if (material == null || material.isAir())
+		{
+			return ItemStackMock.empty();
+		}
+
+		// Parse count using NbtParser (accepts numbers or numeric strings)
+		Integer amountParsed = NbtParser.parseInteger(args.get("count"));
+		if (amountParsed == null)
+		{
+			throw new IllegalArgumentException("count is missing or not a number");
+		}
+		final int amount = amountParsed;
+
+		// Parse a defensive copy of components using NbtParser.parseMap
+		Map<String, Object> components = NbtParser.parseMap(args.get("components"), String::valueOf, o -> o);
+
+		// Rename legacy keys in the copied components map
 		if (components != null)
 		{
 			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
@@ -660,14 +683,6 @@ public class ItemStackMock extends ItemStack
 				components.put(newName, value);
 				components.remove(originalName);
 			}
-		}
-
-		NamespacedKey key = NamespacedKey.fromString(id);
-		Material material = Registry.MATERIAL.get(key);
-
-		if (material == null || material.isAir())
-		{
-			return ItemStackMock.empty();
 		}
 
 		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
