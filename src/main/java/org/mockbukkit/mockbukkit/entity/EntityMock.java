@@ -1251,15 +1251,21 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		float yawValue = Location.normalizeYaw(yaw.degrees());
 		float pitchValue = Location.normalizePitch(pitch.degrees());
 
-		if (yaw.relative()) {
+		if (yaw.relative())
+		{
 			location.setYaw(Location.normalizeYaw(location.getYaw() + yawValue));
-		} else {
+		}
+		else
+		{
 			location.setYaw(yawValue);
 		}
 
-		if (pitch.relative()) {
+		if (pitch.relative())
+		{
 			location.setPitch(Location.normalizePitch(location.getPitch() + pitchValue));
-		} else {
+		}
+		else
+		{
 			location.setPitch(pitchValue);
 		}
 	}
