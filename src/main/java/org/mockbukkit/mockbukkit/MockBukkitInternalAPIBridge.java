@@ -235,7 +235,7 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 		return Set.of(Pose.STANDING, Pose.SNEAKING, Pose.SWIMMING, Pose.FALL_FLYING, Pose.SLEEPING);
 	}
 
-	public static <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
+	private static <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
 	{
 		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), translatable.key().value());
 	}
