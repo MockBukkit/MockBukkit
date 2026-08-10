@@ -14,6 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.inventory.BarrelInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
@@ -291,6 +293,58 @@ class LootableContainerStateMockTest
 	}
 
 	@Test
+	void equals_DifferentRefillEnabled()
+	{
+		LootableContainerStateMock other = (LootableContainerStateMock) container.getSnapshot();
+		other.setRefillEnabled(true);
+		assertNotEquals(container, other);
+	}
+
+	@Test
+	void equals_DifferentLastFilled()
+	{
+		LootableContainerStateMock other = (LootableContainerStateMock) container.getSnapshot();
+		other.setLastFilled(1000);
+		assertNotEquals(container, other);
+	}
+
+	@Test
+	void equals_DifferentLootedPlayers()
+	{
+		LootableContainerStateMock other = (LootableContainerStateMock) container.getSnapshot();
+		other.setHasPlayerLooted(UUID.randomUUID(), true);
+		assertNotEquals(container, other);
+	}
+
+	@Test
+	void equals_DifferentSeed()
+	{
+		LootableContainerStateMock other = (LootableContainerStateMock) container.getSnapshot();
+		other.setSeed(99);
+		assertNotEquals(container, other);
+	}
+
+	/**
+	 * The seven container states all override {@link Object#equals(Object)} with their own type check,
+	 * so the one in {@link LootableContainerStateMock} is only ever reached with a matching type.
+	 * A subclass that does not override it has to keep honouring the contract, hence the bare subclass.
+	 */
+	@Test
+	void equals_DifferentType_ReturnsFalse()
+	{
+		BareLootableContainerStateMock bare = new BareLootableContainerStateMock(Material.BARREL);
+		assertNotEquals(bare, "not a block state");
+		assertNotEquals(null, bare);
+	}
+
+	@Test
+	void equals_SameLootableData_ReturnsTrue()
+	{
+		BareLootableContainerStateMock bare = new BareLootableContainerStateMock(Material.BARREL);
+		assertEquals(bare, bare.getSnapshot());
+	}
+
+	@Test
 	void testEquals()
 	{
 		LootableContainerStateMock other = (LootableContainerStateMock) container.getSnapshot();
@@ -315,6 +369,37 @@ class LootableContainerStateMockTest
 		container.setNextRefill(1000);
 		LootableContainerStateMock other = (LootableContainerStateMock) container.getSnapshot();
 		assertEquals(container.hashCode(), other.hashCode());
+	}
+
+	/**
+	 * A minimal container state that inherits {@link LootableContainerStateMock#equals(Object)}
+	 * instead of overriding it, unlike every concrete state in the package.
+	 */
+	private static class BareLootableContainerStateMock extends LootableContainerStateMock
+	{
+
+		BareLootableContainerStateMock(Material material)
+		{
+			super(material);
+		}
+
+		BareLootableContainerStateMock(BareLootableContainerStateMock state)
+		{
+			super(state);
+		}
+
+		@Override
+		protected InventoryMock createInventory()
+		{
+			return new BarrelInventoryMock(this);
+		}
+
+		@Override
+		public BareLootableContainerStateMock getSnapshot()
+		{
+			return new BareLootableContainerStateMock(this);
+		}
+
 	}
 
 }
