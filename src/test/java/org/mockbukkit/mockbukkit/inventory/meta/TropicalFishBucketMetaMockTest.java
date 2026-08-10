@@ -123,4 +123,15 @@ class TropicalFishBucketMetaMockTest
 		assertEquals(TropicalFish.Pattern.BETTY, otherMeta.getPattern());
 	}
 
+	@Test
+	void clone_PartialState_PreservesAbsence()
+	{
+		meta.setBodyColor(DyeColor.RED);
+		TropicalFishBucketMetaMock clone = meta.clone();
+
+		assertTrue(clone.hasBodyColor());
+		assertFalse(clone.hasPattern());
+		assertEquals(meta, clone);
+	}
+
 }
