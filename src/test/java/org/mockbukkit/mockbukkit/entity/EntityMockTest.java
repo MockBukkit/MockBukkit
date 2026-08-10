@@ -1568,4 +1568,21 @@ class EntityMockTest
 		assertEquals(entity.getUniqueId().toString(), actual);
 	}
 
+	@Test
+	void setRotation_AngleAbsolute_SetsValues()
+	{
+		entity.setRotation(io.papermc.paper.math.Angle.absolute(45f), io.papermc.paper.math.Angle.absolute(20f));
+		assertEquals(45.0f, entity.getLocation().getYaw());
+		assertEquals(20.0f, entity.getLocation().getPitch());
+	}
+
+	@Test
+	void setRotation_AngleRelative_AddsToCurrent()
+	{
+		entity.setRotation(10f, 5f);
+		entity.setRotation(io.papermc.paper.math.Angle.relative(30f), io.papermc.paper.math.Angle.relative(-10f));
+		assertEquals(Location.normalizeYaw(40f), entity.getLocation().getYaw());
+		assertEquals(Location.normalizePitch(-5f), entity.getLocation().getPitch());
+	}
+
 }

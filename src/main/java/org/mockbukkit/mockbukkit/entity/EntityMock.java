@@ -1245,8 +1245,23 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setRotation(@NotNull Angle yaw, @NotNull Angle pitch)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		NumberConversions.checkFinite(yaw.degrees(), "yaw not finite");
+		NumberConversions.checkFinite(pitch.degrees(), "pitch not finite");
+
+		float yawValue = Location.normalizeYaw(yaw.degrees());
+		float pitchValue = Location.normalizePitch(pitch.degrees());
+
+		if (yaw.relative()) {
+			location.setYaw(Location.normalizeYaw(location.getYaw() + yawValue));
+		} else {
+			location.setYaw(yawValue);
+		}
+
+		if (pitch.relative()) {
+			location.setPitch(Location.normalizePitch(location.getPitch() + pitchValue));
+		} else {
+			location.setPitch(pitchValue);
+		}
 	}
 
 	@Override
