@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.apache.commons.lang3.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.TropicalFish;
@@ -62,7 +62,7 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public @NotNull DyeColor getPatternColor()
 	{
-		Validate.notNull(patternColor, "Pattern color is not set");
+		Preconditions.checkState(this.hasPatternColor(), "Pattern color is absent, check hasPatternColor first!");
 		return patternColor;
 	}
 
@@ -75,7 +75,7 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public @NotNull DyeColor getBodyColor()
 	{
-		Validate.notNull(bodyColor, "Body color is not set");
+		Preconditions.checkState(this.hasBodyColor(), "Body color is absent, check hasBodyColor first!");
 		return bodyColor;
 	}
 
@@ -88,7 +88,7 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public @NotNull TropicalFish.Pattern getPattern()
 	{
-		Validate.notNull(pattern, "Pattern is not set");
+		Preconditions.checkState(this.hasPattern(), "Pattern is absent, check hasPattern first!");
 		return pattern;
 	}
 

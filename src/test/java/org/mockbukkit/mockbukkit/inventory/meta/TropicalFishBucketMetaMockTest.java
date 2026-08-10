@@ -62,7 +62,7 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void getPatternColor_NullVariant_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> meta.getPatternColor());
+		assertThrowsExactly(IllegalStateException.class, () -> meta.getPatternColor());
 	}
 
 	@Test
@@ -76,7 +76,7 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void getBodyColor_NullVariant_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> meta.getBodyColor());
+		assertThrowsExactly(IllegalStateException.class, () -> meta.getBodyColor());
 	}
 
 	@Test
@@ -90,7 +90,7 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void getPattern_NullVariant_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> meta.getPattern());
+		assertThrowsExactly(IllegalStateException.class, () -> meta.getPattern());
 	}
 
 	@Test
