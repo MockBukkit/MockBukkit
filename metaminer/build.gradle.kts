@@ -14,7 +14,9 @@ repositories {
 
 dependencies {
 	paperweight.paperDevBundle("${rootProject.property("paper.api.full-version")}")
-	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
+	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}") {
+		isChanging = true
+	}
 
 	// Dependencies for Unit Tests
 	testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")

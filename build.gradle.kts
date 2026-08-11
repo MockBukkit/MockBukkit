@@ -20,8 +20,12 @@ repositories {
 
 dependencies {
 	// Paper API - compileOnly + testImplementation to avoid snapshot issues in Maven Central
-	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
-	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
+	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}") {
+		isChanging = true
+	}
+	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}") {
+		isChanging = true
+	}
 
 	api("org.jetbrains:annotations:26.1.0")
 	api("org.hamcrest:hamcrest:3.0")

@@ -7,7 +7,9 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
+	compileOnly("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}") {
+		isChanging = true
+	}
 }
 tasks {
 	java {
