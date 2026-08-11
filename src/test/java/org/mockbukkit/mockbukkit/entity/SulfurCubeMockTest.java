@@ -13,12 +13,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class SulfurCubeMockTest
@@ -99,6 +101,96 @@ class SulfurCubeMockTest
 	void getPickupSound()
 	{
 		assertEquals(Sound.ITEM_BUCKET_FILL_SULFUR_CUBE, sulfurCube.getPickupSound());
+	}
+
+	@Nested
+	class Ageable
+	{
+		@Test
+		void getAgeDefault()
+		{
+			assertEquals(0, sulfurCube.getAge());
+		}
+
+		@Test
+		void setAge()
+		{
+			sulfurCube.setAge(10);
+			assertEquals(10, sulfurCube.getAge());
+		}
+
+		@Test
+		void getAgeLock()
+		{
+			assertFalse(sulfurCube.getAgeLock());
+		}
+
+		@Test
+		void setAgeLock()
+		{
+			sulfurCube.setAgeLock(true);
+			assertEquals(true, sulfurCube.getAgeLock());
+		}
+
+		@Test
+		void setBaby()
+		{
+			sulfurCube.setBaby();
+			assertFalse(sulfurCube.isAdult());
+		}
+
+		@Test
+		void setAdult()
+		{
+			sulfurCube.setAdult();
+			assertTrue(sulfurCube.isAdult());
+		}
+
+		@Test
+		void canBreed()
+		{
+			assertTrue(sulfurCube.canBreed());
+		}
+
+		@Test
+		void canBreedFalse()
+		{
+			sulfurCube.setAge(1);
+			assertFalse(sulfurCube.canBreed());
+		}
+
+		@Test
+		void setBreedTrue()
+		{
+			sulfurCube.setBreed(true);
+			assertTrue(sulfurCube.isAdult());
+		}
+
+		@Test
+		void setBreedFalseWithAdult()
+		{
+			sulfurCube.setAdult();
+			sulfurCube.setBreed(false);
+			assertEquals(6000, sulfurCube.getAge());
+		}
+
+		@Test
+		void setAdultWhenBaby()
+		{
+			sulfurCube.setBaby();
+			sulfurCube.setAdult();
+			assertEquals(0, sulfurCube.getAge());
+		}
+
+		@Test
+		void getEntitySubType()
+		{
+			sulfurCube.setAdult();
+			assertEquals(EntitySubType.DEFAULT, sulfurCube.getSubType());
+			sulfurCube.setBaby();
+			assertEquals(EntitySubType.BABY, sulfurCube.getSubType());
+		}
+
 	}
 
 }

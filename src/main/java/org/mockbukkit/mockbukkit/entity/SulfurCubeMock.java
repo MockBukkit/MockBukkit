@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import java.util.UUID;
 
 @NullMarked
-public class SulfurCubeMock extends MobMock implements SulfurCube
+public class SulfurCubeMock extends AgeableMock implements SulfurCube
 {
 	private int fuseTicks = -1;
 	private boolean isFromBucket = false;
@@ -122,67 +122,6 @@ public class SulfurCubeMock extends MobMock implements SulfurCube
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getAge()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAge(int age)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAgeLock(boolean lock)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean getAgeLock()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setBaby()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAdult()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isAdult()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canBreed()
-	{
-		return false;
-	}
-
-	@Override
-	public void setBreed(boolean breed)
-	{
-		// Nothing to do here, Paper does not implement this
 	}
 
 	@Override
