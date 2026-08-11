@@ -1,81 +1,34 @@
 package org.mockbukkit.mockbukkit.util;
 
-import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
 import io.papermc.paper.entity.EntitySerializationFlag;
-import io.papermc.paper.inventory.tooltip.TooltipContext;
-import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import net.kyori.adventure.key.Keyed;
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.flattener.ComponentFlattener;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import net.kyori.adventure.translation.Translatable;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.RegionAccessor;
-import org.bukkit.Registry;
-import org.bukkit.Statistic;
-import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
-import org.bukkit.attribute.Attributable;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.command.CommandSender;
-import org.bukkit.damage.DamageSource;
-import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.CreativeCategory;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
-import org.bukkit.util.io.BukkitObjectInputStream;
-import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
-import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.BooleanSupplier;
 
 /**
  * Mock implementation of an {@link UnsafeValues}.
@@ -95,76 +48,11 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.19",
 					"1.20",
 					"1.21",
-					"26.1"
+					"26.1",
+					"26.2"
 			);
-	private static final String PROPERTY_SCHEMA_VERSION = "schema_version";
-
-	private static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
-		toMinecraft(ItemMetaMock.DAMAGE),
-		toMinecraft(ItemMetaMock.MAX_DAMAGE),
-		toMinecraft(ItemMetaMock.REPAIR_COST),
-		toMinecraft(ItemMetaMock.ENCHANTMENTS),
-		toMinecraft(ItemMetaMock.LORE),
-		toMinecraft(ItemMetaMock.UNBREAKABLE),
-		Map.entry(ItemMetaMock.DISPLAY_NAME, "minecraft:custom_name")
-	);
-
-	private static Map.Entry<String, String> toMinecraft(final String key)
-	{
-		String newName = key.toLowerCase(Locale.ROOT);
-		newName = newName.replace("-", "_");
-		return Map.entry(key, NamespacedKey.minecraft(newName).asString());
-	}
 
 	private String minimumApiVersion = "none";
-
-	@Override
-	public @NotNull ComponentFlattener componentFlattener()
-	{
-		return ComponentFlattener.basic();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.18")
-	public @NotNull PlainComponentSerializer plainComponentSerializer()
-	{
-		return PlainComponentSerializer.plain();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.18")
-	public @NotNull PlainTextComponentSerializer plainTextSerializer()
-	{
-		return PlainTextComponentSerializer.plainText();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.18")
-	public @NotNull GsonComponentSerializer gsonComponentSerializer()
-	{
-		return GsonComponentSerializer.gson();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.18")
-	public @NotNull GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
-	{
-		return GsonComponentSerializer.colorDownsamplingGson();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.18")
-	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
-	{
-		return LegacyComponentSerializer.legacySection();
-	}
-
-	@Override
-	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public Material toLegacy(Material material)
@@ -276,28 +164,21 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
+	public @Nullable Advancement loadAdvancement(Key key, String advancement, boolean persist)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public List<Advancement> loadAdvancements(Map<Key, String> advancements, boolean persist)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean removeAdvancement(NamespacedKey key)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(Material material, EquipmentSlot slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public CreativeCategory getCreativeCategory(Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public VersionFetcher getVersionFetcher()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -310,53 +191,29 @@ public class UnsafeValuesMock implements UnsafeValues
 		return COMPATIBLE_API_VERSIONS.contains(apiVersion);
 	}
 
-	@Override
+	/**
+	 * @deprecated since 26.2 — use {@link ItemStack#serializeAsBytes()} instead
+	 */
+	@Deprecated(since = "26.2", forRemoval = true)
 	public byte[] serializeItem(ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "null cannot be serialized");
-		Preconditions.checkNotNull(item.getType().asItemType(),
-				"Items without corresponding ItemType are currently not supported");
-		Preconditions.checkArgument(item.getType() != Material.AIR, "air cannot be serialized");
-		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
-		try
-		{
-			@NotNull Map<String, Object> stack = this.serializeStack(item);
-			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
-			oos.writeObject(stack);
-			return bao.toByteArray();
-		}
-		catch (IOException e)
-		{
-			throw new ItemSerializationException(e);
-		}
+		return item.serializeAsBytes();
 	}
 
-	@Override
+	/**
+	 * @deprecated since 26.2 — use {@link ItemStack#deserializeBytes(byte[])} instead
+	 */
+	@Deprecated(since = "26.2", forRemoval = true)
 	public ItemStack deserializeItem(byte[] data)
 	{
-		Preconditions.checkNotNull(data, "null cannot be deserialized");
-		Preconditions.checkArgument(data.length > 0, "cannot deserialize nothing");
-		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
-		try
-		{
-			final ObjectInputStream ois = new BukkitObjectInputStream(bai);
-			if (bai.available() <= 0)
-			{
-				return null;
-			}
-			Map<String, Object> stack = (Map<String, Object>) ois.readObject();
-			return this.deserializeStack(stack);
-		}
-		catch (IOException | ClassNotFoundException e)
-		{
-			throw new ItemSerializationException(e);
-		}
+		return ItemStack.deserializeBytes(data);
 	}
 
 	@Override
 	public @NotNull JsonObject serializeItemAsJson(@NotNull ItemStack itemStack)
 	{
-		Map<String, Object> map = serializeStack(itemStack);
+		Map<String, Object> map = itemStack.serialize();
 		return SerializationUtils.createDefaultBuilder().toJsonTree(map).getAsJsonObject();
 	}
 
@@ -400,126 +257,11 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	@Nullable
-	@Deprecated(since = "1.21", forRemoval = true)
-	public String getBlockTranslationKey(@NotNull Material material)
-	{
-		if (!material.isBlock())
-		{
-			return null;
-		}
-		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix
-		if (material == Material.WHEAT || material == Material.NETHER_WART)
-		{
-			return formatTranslatable("item", material);
-		}
-		return formatTranslatable("block", material);
-	}
-
-	@Override
-	@Nullable
-	@Deprecated(since = "1.21", forRemoval = true)
-	public String getItemTranslationKey(@NotNull Material material)
-	{
-		if (!material.isItem())
-		{
-			return null;
-		}
-		String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
-		if (edgeCaseHandledTranslationKey != null)
-		{
-			return edgeCaseHandledTranslationKey;
-		}
-		return formatTranslatable("item", material);
-	}
-
-	@Override
-	@Nullable
-	public String getTranslationKey(@NotNull EntityType type)
-	{
-		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
-		return formatTranslatable("entity", type);
-	}
-
-	@Override
-	@Nullable
-	public String getTranslationKey(@NotNull ItemStack itemStack)
-	{
-		if (itemStack.getType().isItem())
-		{
-			Material material = itemStack.getType();
-			String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
-			return Objects.requireNonNullElseGet(edgeCaseHandledTranslationKey, () -> formatTranslatable("item", material, true));
-		}
-		else if (itemStack.getType().isBlock())
-		{
-			return getBlockTranslationKey(itemStack.getType());
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	@Override
-	public String getTranslationKey(Attribute attribute)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	private String handleTranslateItemEdgeCases(Material material)
-	{
-		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
-		if (material == Material.WHEAT || material == Material.NETHER_WART)
-		{
-			return formatTranslatable("item", material);
-		}
-		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
-		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
-		if (material.isBlock())
-		{
-			return formatTranslatable("block", material);
-		}
-		// not an edge case
-		return null;
-	}
-
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
-	{
-		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
-		String value = translatable.key().value();
-		if (translatable instanceof Material material)
-		{
-			// replace wall_hanging string check with Tag check (when implemented)
-			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
-			{
-				value = value.replace("wall_", "");
-			}
-			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
-			if (fromItemStack && emptyEffects.contains(material))
-			{
-				value += ".effect.empty";
-			}
-		}
-		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), value);
-	}
-
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
-	{
-		return formatTranslatable(prefix, translatable, false);
-	}
-
-	@Override
+	@ApiStatus.Internal
+	@Deprecated(since = "1.20.2", forRemoval = true)
 	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
 	{
 		return new InternalPotionDataMock(key);
-	}
-
-	@Override
-	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
-	{
-		return new DamageSourceBuilderMock(damageType);
 	}
 
 	@Override
@@ -537,7 +279,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public int nextEntityId()
+	public int nextEntityId(World world)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -550,13 +292,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public boolean isValidRepairItemStack(@NotNull ItemStack itemToBeRepaired, @NotNull ItemStack repairMaterial)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getProtocolVersion()
 	{
 		// TODO Auto-generated method stub
@@ -564,161 +299,9 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public boolean hasDefaultEntityAttributes(@NotNull NamespacedKey entityKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Attributable getDefaultEntityAttributes(@NotNull NamespacedKey entityKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull NamespacedKey getBiomeKey(RegionAccessor accessor, int x, int y, int z)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setBiomeKey(RegionAccessor accessor, int x, int y, int z, NamespacedKey biomeKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getStatisticCriteriaKey(@NotNull Statistic statistic)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Color getSpawnEggLayerColor(EntityType entityType, int i)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
-																		   BooleanSupplier booleanSupplier)
-	{
-		return new LifecycleEventManagerMock<>(javaPlugin, booleanSupplier);
-	}
-
-	@Override
-	public @NotNull List<Component> computeTooltipLines(@NotNull ItemStack itemStack,
-														@NotNull TooltipContext tooltipContext,
-														@Nullable Player player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public ItemStack createEmptyStack()
-	{
-		return ItemStackMock.empty();
-	}
-
-	@Override
-	public @NotNull Map<String, Object> serializeStack(ItemStack itemStack)
-	{
-		if (itemStack.isEmpty())
-		{
-			return Map.of(
-					"id", "minecraft:air",
-					"DataVersion", this.getDataVersion(),
-					PROPERTY_SCHEMA_VERSION, 1);
-		}
-
-		Map<String, Object> result = new HashMap<>();
-		result.put("id", itemStack.getType().getKey().asString());
-		result.put("count", itemStack.getAmount());
-		result.put("DataVersion", this.getDataVersion());
-		result.put(PROPERTY_SCHEMA_VERSION, 1);
-
-		Map<String, Object> serializedMeta = itemStack.getItemMeta().serialize();
-		if (serializedMeta.size() > 1) // Ignore the meta-type
-		{
-			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
-			{
-				String originalName = entry.getKey();
-				String newName = entry.getValue();
-
-				// Skip the key if it does not exist
-				if (!serializedMeta.containsKey(originalName))
-				{
-					continue;
-				}
-
-				var value = serializedMeta.get(originalName);
-				serializedMeta.put(newName, value);
-				serializedMeta.remove(originalName);
-			}
-			result.put("components", serializedMeta);
-		}
-
-		return result;
-	}
-
-	@Override
 	public @NotNull ItemStack deserializeStack(@NotNull Map<String, Object> args)
 	{
-		@SuppressWarnings({ "java:S1481", "java:S1854" })
-		final int version = args.getOrDefault(PROPERTY_SCHEMA_VERSION, 1) instanceof Number val ? val.intValue() : -1;
-		final String id = (String) args.get("id");
-		final int amount = ((Number) args.get("count")).intValue();
-		final Map<String, Object> components = (Map<String, Object>) args.get("components");
-		if (components != null)
-		{
-			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
-			{
-				String originalName = entry.getValue();
-				String newName = entry.getKey();
-
-				// Skip the key if it does not exist
-				if (!components.containsKey(originalName))
-				{
-					continue;
-				}
-
-				var value = components.get(originalName);
-				components.put(newName, value);
-				components.remove(originalName);
-			}
-		}
-
-		NamespacedKey key = NamespacedKey.fromString(id);
-		Material material = Registry.MATERIAL.get(key);
-
-		if (material == null || material.isAir())
-		{
-			return ItemStackMock.empty();
-		}
-
-		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
-		if (components != null)
-		{
-			try
-			{
-				@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
-				Preconditions.checkArgument(meta != null, "Invalid item meta type");
-				itemstack.setItemMeta(meta);
-			}
-			catch (Exception e)
-			{
-				throw new IllegalArgumentException("Error while deserializing item meta", e);
-			}
-		}
-
-		return itemstack;
+		return ItemStackMock.deserializeStack(args);
 	}
 
 	@Override
@@ -732,5 +315,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	{
 		return Material.getMaterial(material);
 	}
+
 
 }

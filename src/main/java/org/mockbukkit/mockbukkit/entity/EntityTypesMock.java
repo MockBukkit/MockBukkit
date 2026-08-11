@@ -113,6 +113,7 @@ import org.bukkit.entity.SplashPotion;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Strider;
+import org.bukkit.entity.SulfurCube;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.TextDisplay;
@@ -353,6 +354,7 @@ public final class EntityTypesMock
 				.register(StorageMinecart.class, StorageMinecartMock.class, StorageMinecartMock::new)
 				.register(Stray.class, StrayMock.class, StrayMock::new)
 				.register(Strider.class, StriderMock.class, StriderMock::new)
+				.register(SulfurCube.class, SulfurCubeMock.class, SulfurCubeMock::new)
 				.register(Tadpole.class, TadpoleMock.class, TadpoleMock::new)
 				.register(TextDisplay.class, TextDisplayMock.class, TextDisplayMock::new)
 				.register(TraderLlama.class, TraderLlamaMock.class, TraderLlamaMock::new)

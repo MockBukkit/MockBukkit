@@ -31,6 +31,7 @@
 	"minecraft:point_of_interest_type": "io.papermc.paper.entity.poi.PoiType",
 	"minecraft:potion": "org.bukkit.potion.PotionType",
 	"minecraft:sound_event": "org.bukkit.Sound",
+	"minecraft:sulfur_cube_archetype": "org.bukkit.entity.SulfurCube$Archetype",
 	"minecraft:trim_material": "org.bukkit.inventory.meta.trim.TrimMaterial",
 	"minecraft:trim_pattern": "org.bukkit.inventory.meta.trim.TrimPattern",
 	"minecraft:villager_profession": "org.bukkit.entity.Villager$Profession",

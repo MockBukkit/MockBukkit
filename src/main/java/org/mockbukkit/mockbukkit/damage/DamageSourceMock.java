@@ -1,12 +1,15 @@
 package org.mockbukkit.mockbukkit.damage;
 
 import lombok.Getter;
+import net.kyori.adventure.pointer.Pointers;
 import org.bukkit.Location;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -21,13 +24,20 @@ public class DamageSourceMock implements DamageSource
 	@Getter
 	private final Entity directEntity;
 	private final Location damageLocation;
+	private final Pointers damageContext;
 
 	public DamageSourceMock(DamageType damageType, Entity causingEntity, Entity directEntity, Location damageLocation)
+	{
+		this(damageType, causingEntity, directEntity, damageLocation, Pointers.empty());
+	}
+
+	public DamageSourceMock(DamageType damageType, Entity causingEntity, Entity directEntity, Location damageLocation, Pointers damageContext)
 	{
 		this.damageType = damageType;
 		this.causingEntity = causingEntity;
 		this.directEntity = directEntity;
 		this.damageLocation = damageLocation;
+		this.damageContext = damageContext;
 	}
 
 	@Override
@@ -68,6 +78,13 @@ public class DamageSourceMock implements DamageSource
 					this.causingEntity instanceof LivingEntity && !(this.causingEntity instanceof Player);
 			default -> false;
 		};
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public @NotNull Pointers getDamageContext()
+	{
+		return this.damageContext;
 	}
 
 	@Override

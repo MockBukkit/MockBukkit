@@ -1263,7 +1263,6 @@
 			"material": "minecraft:black_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -1569,7 +1568,6 @@
 			"material": "minecraft:blue_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -2086,7 +2084,6 @@
 			"material": "minecraft:brown_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -3032,6 +3029,18 @@
 		}
 	},
 	{
+		"key": "minecraft:chiseled_cinnabar",
+		"result": {
+			"material": "minecraft:chiseled_cinnabar",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:chiseled_copper",
 		"result": {
 			"material": "minecraft:chiseled_copper",
@@ -3140,6 +3149,18 @@
 		}
 	},
 	{
+		"key": "minecraft:chiseled_sulfur",
+		"result": {
+			"material": "minecraft:chiseled_sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:chiseled_tuff",
 		"result": {
 			"material": "minecraft:chiseled_tuff",
@@ -3191,6 +3212,102 @@
 		"key": "minecraft:chorus_plant",
 		"result": {
 			"material": "minecraft:chorus_plant",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar",
+		"result": {
+			"material": "minecraft:cinnabar",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_brick_slab",
+		"result": {
+			"material": "minecraft:cinnabar_brick_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_brick_stairs",
+		"result": {
+			"material": "minecraft:cinnabar_brick_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_brick_wall",
+		"result": {
+			"material": "minecraft:cinnabar_brick_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_bricks",
+		"result": {
+			"material": "minecraft:cinnabar_bricks",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_slab",
+		"result": {
+			"material": "minecraft:cinnabar_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_stairs",
+		"result": {
+			"material": "minecraft:cinnabar_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_wall",
+		"result": {
+			"material": "minecraft:cinnabar_wall",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -4506,7 +4623,6 @@
 			"material": "minecraft:cyan_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -7351,7 +7467,6 @@
 			"material": "minecraft:gray_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -7547,7 +7662,6 @@
 			"material": "minecraft:green_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9006,7 +9120,6 @@
 			"material": "minecraft:light_blue_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9202,7 +9315,6 @@
 			"material": "minecraft:light_gray_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9458,7 +9570,6 @@
 			"material": "minecraft:lime_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9716,7 +9827,6 @@
 			"material": "minecraft:magenta_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -10587,6 +10697,18 @@
 		"key": "minecraft:music_disc_blocks",
 		"result": {
 			"material": "minecraft:music_disc_blocks",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:music_disc_bounce",
+		"result": {
+			"material": "minecraft:music_disc_bounce",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -11566,7 +11688,6 @@
 			"material": "minecraft:orange_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -12466,7 +12587,6 @@
 			"material": "minecraft:pink_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -12964,6 +13084,54 @@
 		}
 	},
 	{
+		"key": "minecraft:polished_cinnabar",
+		"result": {
+			"material": "minecraft:polished_cinnabar",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_cinnabar_slab",
+		"result": {
+			"material": "minecraft:polished_cinnabar_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_cinnabar_stairs",
+		"result": {
+			"material": "minecraft:polished_cinnabar_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_cinnabar_wall",
+		"result": {
+			"material": "minecraft:polished_cinnabar_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:polished_deepslate",
 		"result": {
 			"material": "minecraft:polished_deepslate",
@@ -13084,6 +13252,54 @@
 		}
 	},
 	{
+		"key": "minecraft:polished_sulfur",
+		"result": {
+			"material": "minecraft:polished_sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_sulfur_slab",
+		"result": {
+			"material": "minecraft:polished_sulfur_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_sulfur_stairs",
+		"result": {
+			"material": "minecraft:polished_sulfur_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_sulfur_wall",
+		"result": {
+			"material": "minecraft:polished_sulfur_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:polished_tuff",
 		"result": {
 			"material": "minecraft:polished_tuff",
@@ -13183,6 +13399,19 @@
 		"key": "minecraft:potatoes",
 		"result": {
 			"material": "minecraft:air"
+		}
+	},
+	{
+		"key": "minecraft:potent_sulfur",
+		"result": {
+			"material": "minecraft:potent_sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
 		}
 	},
 	{
@@ -13680,7 +13909,6 @@
 			"material": "minecraft:purple_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -14178,7 +14406,6 @@
 			"material": "minecraft:red_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -16575,6 +16802,139 @@
 		}
 	},
 	{
+		"key": "minecraft:sulfur",
+		"result": {
+			"material": "minecraft:sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_brick_slab",
+		"result": {
+			"material": "minecraft:sulfur_brick_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_brick_stairs",
+		"result": {
+			"material": "minecraft:sulfur_brick_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_brick_wall",
+		"result": {
+			"material": "minecraft:sulfur_brick_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_bricks",
+		"result": {
+			"material": "minecraft:sulfur_bricks",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_cube_bucket",
+		"result": {
+			"material": "minecraft:sulfur_cube_bucket",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_cube_spawn_egg",
+		"result": {
+			"material": "minecraft:sulfur_cube_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_slab",
+		"result": {
+			"material": "minecraft:sulfur_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_spike",
+		"result": {
+			"material": "minecraft:sulfur_spike",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_stairs",
+		"result": {
+			"material": "minecraft:sulfur_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_wall",
+		"result": {
+			"material": "minecraft:sulfur_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:sunflower",
 		"result": {
 			"material": "minecraft:sunflower",
@@ -18588,7 +18948,6 @@
 			"material": "minecraft:white_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -19028,7 +19387,6 @@
 			"material": "minecraft:yellow_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"

@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import org.apache.commons.lang3.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.TropicalFish;
@@ -44,81 +44,83 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 
 		if (meta instanceof TropicalFishBucketMeta bucketMeta)
 		{
-			if (meta instanceof TropicalFishBucketMetaMock mock)
+			if (bucketMeta.hasPattern())
 			{
-				mock.checkVars();
+				this.pattern = bucketMeta.getPattern();
 			}
-			this.patternColor = bucketMeta.getPatternColor();
-			this.bodyColor = bucketMeta.getBodyColor();
-			this.pattern = bucketMeta.getPattern();
-		}
-	}
-
-	/**
-	 * Defaults any null variables.
-	 */
-	protected void checkVars()
-	{
-		if (this.patternColor == null)
-		{
-			this.patternColor = DyeColor.WHITE;
-		}
-		if (this.bodyColor == null)
-		{
-			this.bodyColor = DyeColor.WHITE;
-		}
-		if (this.pattern == null)
-		{
-			this.pattern = TropicalFish.Pattern.KOB;
+			if (bucketMeta.hasPatternColor())
+			{
+				this.patternColor = bucketMeta.getPatternColor();
+			}
+			if (bucketMeta.hasBodyColor())
+			{
+				this.bodyColor = bucketMeta.getBodyColor();
+			}
 		}
 	}
 
 	@Override
 	public @NotNull DyeColor getPatternColor()
 	{
-		Validate.notNull(patternColor, "Pattern color is not set");
+		Preconditions.checkState(this.hasPatternColor(), "Pattern color is absent, check hasPatternColor first!");
 		return patternColor;
 	}
 
 	@Override
 	public void setPatternColor(@NotNull DyeColor color)
 	{
-		checkVars();
 		this.patternColor = color;
 	}
 
 	@Override
 	public @NotNull DyeColor getBodyColor()
 	{
-		Validate.notNull(bodyColor, "Body color is not set");
+		Preconditions.checkState(this.hasBodyColor(), "Body color is absent, check hasBodyColor first!");
 		return bodyColor;
 	}
 
 	@Override
 	public void setBodyColor(@NotNull DyeColor color)
 	{
-		checkVars();
 		this.bodyColor = color;
 	}
 
 	@Override
 	public @NotNull TropicalFish.Pattern getPattern()
 	{
-		Validate.notNull(pattern, "Pattern is not set");
+		Preconditions.checkState(this.hasPattern(), "Pattern is absent, check hasPattern first!");
 		return pattern;
 	}
 
 	@Override
 	public void setPattern(TropicalFish.@NotNull Pattern pattern)
 	{
-		checkVars();
 		this.pattern = pattern;
 	}
 
 	@Override
+	public boolean hasPattern()
+	{
+		return this.pattern != null;
+	}
+
+	@Override
+	public boolean hasBodyColor()
+	{
+		return this.bodyColor != null;
+	}
+
+	@Override
+	public boolean hasPatternColor()
+	{
+		return this.patternColor != null;
+	}
+
+	@Override
+	@Deprecated(since = "26.2", forRemoval = true)
 	public boolean hasVariant()
 	{
-		return patternColor != null && bodyColor != null && pattern != null;
+		return this.hasPattern() || this.hasBodyColor() || this.hasPatternColor();
 	}
 
 	@Override
@@ -175,10 +177,18 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		checkVars();
-		serialized.put("body-color", bodyColor);
-		serialized.put("pattern-color", patternColor);
-		serialized.put("pattern", pattern);
+		if (hasBodyColor())
+		{
+			serialized.put("body-color", getBodyColor());
+		}
+		if (hasPatternColor())
+		{
+			serialized.put("pattern-color", getPatternColor());
+		}
+		if (hasPattern())
+		{
+			serialized.put("pattern", getPattern());
+		}
 		return serialized;
 	}
 

@@ -27,6 +27,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -40,6 +44,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -71,6 +83,10 @@
 					"baseValue": 16.0,
 					"defaultValue": 32.0
 				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
 					"defaultValue": 0.08
@@ -98,6 +114,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.10000000149011612,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -149,6 +169,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -158,6 +182,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -184,6 +216,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -212,6 +248,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.14,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -255,6 +295,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -264,6 +308,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -284,6 +336,10 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:friction_modifier": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
@@ -314,6 +370,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -365,6 +425,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -378,6 +442,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -404,6 +476,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -432,6 +508,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 1.0,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -499,6 +579,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -508,6 +592,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -534,6 +626,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -562,6 +658,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -601,6 +701,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -614,6 +718,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -645,6 +757,10 @@
 					"baseValue": 16.0,
 					"defaultValue": 32.0
 				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
 					"defaultValue": 0.08
@@ -672,6 +788,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -739,6 +859,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -752,6 +876,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -778,6 +910,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 48.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -806,6 +942,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -857,6 +997,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -870,6 +1014,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -896,6 +1048,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -924,6 +1080,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -963,6 +1123,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -976,6 +1140,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1002,6 +1174,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 24.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1030,6 +1206,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.6299999952316284,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1081,6 +1261,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1090,6 +1274,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1116,6 +1308,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1144,6 +1340,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.09000000357627869,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1187,6 +1387,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1196,6 +1400,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1222,6 +1434,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1250,6 +1466,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.09000000357627869,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1293,6 +1513,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1306,6 +1530,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1332,6 +1564,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1360,6 +1596,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1403,6 +1643,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1416,6 +1660,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1442,6 +1694,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1470,6 +1726,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1545,6 +1805,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1554,6 +1818,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1580,6 +1852,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1608,6 +1884,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1651,6 +1931,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1660,6 +1944,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1686,6 +1978,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1714,6 +2010,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1765,6 +2065,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1774,6 +2078,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1800,6 +2112,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1828,6 +2144,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1867,6 +2187,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1876,6 +2200,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -1902,6 +2234,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -1930,6 +2266,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -1973,6 +2313,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -1986,6 +2330,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2012,6 +2364,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 32.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2040,6 +2396,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.4000000059604645,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2079,6 +2439,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2092,6 +2456,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2118,6 +2490,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2146,6 +2522,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2209,6 +2589,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2222,6 +2606,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2248,6 +2640,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2276,6 +2672,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 1.2000000476837158,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2315,6 +2715,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2324,6 +2728,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2350,6 +2762,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2378,6 +2794,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.17499999701976776,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2433,6 +2853,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 2.0,
 					"defaultValue": 0.0
@@ -2446,6 +2870,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2472,6 +2904,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 35.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2500,6 +2936,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2555,6 +2995,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2568,6 +3012,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2594,6 +3046,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2622,6 +3078,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2673,6 +3133,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2682,6 +3146,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2708,6 +3180,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2736,6 +3212,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2787,6 +3267,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2800,6 +3284,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2826,6 +3318,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 64.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2854,6 +3350,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2893,6 +3393,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -2906,6 +3410,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -2932,6 +3444,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -2960,6 +3476,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -2999,6 +3519,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3012,6 +3536,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3038,6 +3570,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 12.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3066,6 +3602,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.5,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3201,6 +3741,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3214,6 +3758,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3240,6 +3792,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 32.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3268,6 +3824,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3311,6 +3871,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3324,6 +3888,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3350,6 +3922,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3378,6 +3954,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 1.0,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3433,6 +4013,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3442,6 +4026,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3473,6 +4065,10 @@
 					"baseValue": 100.0,
 					"defaultValue": 32.0
 				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
 					"defaultValue": 0.08
@@ -3500,6 +4096,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3539,6 +4139,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3552,6 +4156,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3578,6 +4190,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3606,6 +4222,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.5,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3657,6 +4277,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3666,6 +4290,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3692,6 +4324,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3720,6 +4356,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3759,6 +4399,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3772,6 +4416,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3798,6 +4450,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3826,6 +4482,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3869,6 +4529,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3882,6 +4546,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -3908,6 +4580,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -3936,6 +4612,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.5,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -3975,6 +4655,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -3984,6 +4668,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4015,6 +4707,10 @@
 					"baseValue": 16.0,
 					"defaultValue": 32.0
 				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
 					"defaultValue": 0.08
@@ -4042,6 +4738,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.05,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4085,6 +4785,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4099,6 +4803,14 @@
 				},
 				"minecraft:attack_knockback": {
 					"baseValue": 1.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
+					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
 				"minecraft:burning_time": {
@@ -4124,6 +4836,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4152,6 +4868,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4203,6 +4923,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4212,6 +4936,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4238,6 +4970,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4266,6 +5002,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.22499999403953552,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4309,6 +5049,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 2.0,
 					"defaultValue": 0.0
@@ -4322,6 +5066,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4348,6 +5100,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 35.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4376,6 +5132,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4419,6 +5179,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4432,6 +5196,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4458,6 +5230,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 18.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4486,6 +5262,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.5,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4537,6 +5317,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4550,6 +5334,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4576,6 +5368,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4604,6 +5400,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4739,6 +5539,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4748,6 +5552,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4774,6 +5586,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4802,6 +5618,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.17499999701976776,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4857,6 +5677,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4870,6 +5694,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -4896,6 +5728,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -4924,6 +5760,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -4987,6 +5827,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -4996,6 +5840,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5016,6 +5868,10 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:friction_modifier": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
@@ -5046,6 +5902,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5109,6 +5969,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5118,6 +5982,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5144,6 +6016,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -5172,6 +6048,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5215,6 +6095,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5224,6 +6108,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5250,6 +6142,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -5278,6 +6174,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.17499999701976776,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5321,6 +6221,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5334,6 +6238,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5360,6 +6272,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -5388,6 +6304,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 1.0,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5455,6 +6375,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5468,6 +6392,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5494,6 +6426,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -5522,6 +6458,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5613,6 +6553,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5626,6 +6570,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5652,6 +6604,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -5680,6 +6636,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.15000000596046448,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5723,6 +6683,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5736,6 +6700,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5762,6 +6734,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -5790,6 +6766,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5829,6 +6809,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5842,6 +6826,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5873,6 +6865,10 @@
 					"baseValue": 16.0,
 					"defaultValue": 32.0
 				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
 					"defaultValue": 0.08
@@ -5900,6 +6896,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -5943,6 +6943,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -5956,6 +6960,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -5982,6 +6994,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6010,6 +7026,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6049,6 +7069,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6058,6 +7082,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6084,6 +7116,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6112,6 +7148,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6155,6 +7195,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6168,6 +7212,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6194,6 +7246,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6222,6 +7278,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.3499999940395355,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6261,6 +7321,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6274,6 +7338,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6300,6 +7372,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 12.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6328,6 +7404,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.3499999940395355,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6367,6 +7447,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6380,6 +7464,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6406,6 +7498,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 32.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6434,6 +7530,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.3499999940395355,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6473,6 +7573,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6493,6 +7597,10 @@
 					"baseValue": 4.0,
 					"defaultValue": 4.0
 				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
 				"minecraft:block_break_speed": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
@@ -6500,6 +7608,10 @@
 				"minecraft:block_interaction_range": {
 					"baseValue": 4.5,
 					"defaultValue": 4.5
+				},
+				"minecraft:bounciness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
 				},
 				"minecraft:burning_time": {
 					"baseValue": 1.0,
@@ -6518,6 +7630,10 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:friction_modifier": {
 					"baseValue": 1.0,
 					"defaultValue": 1.0
 				},
@@ -6556,6 +7672,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.10000000149011612,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6611,6 +7731,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6624,6 +7748,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6650,6 +7782,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 20.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6678,6 +7814,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6721,6 +7861,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6730,6 +7874,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6756,6 +7908,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6784,6 +7940,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6823,6 +7983,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6836,6 +8000,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -6862,6 +8034,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -6890,6 +8066,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -6933,6 +8113,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -6947,6 +8131,14 @@
 				},
 				"minecraft:attack_knockback": {
 					"baseValue": 1.5,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
+					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
 				"minecraft:burning_time": {
@@ -6972,6 +8164,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 32.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7000,6 +8196,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.3,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7039,6 +8239,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7048,6 +8252,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7074,6 +8286,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7102,6 +8318,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7141,6 +8361,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7150,6 +8374,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7176,6 +8408,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7204,6 +8440,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7247,6 +8487,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7256,6 +8500,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7282,6 +8534,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7310,6 +8566,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7361,6 +8621,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7374,6 +8638,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7400,6 +8672,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7428,6 +8704,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7467,6 +8747,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7480,6 +8764,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7506,6 +8798,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7534,6 +8830,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7573,6 +8873,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7582,6 +8886,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7608,6 +8920,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7636,6 +8952,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7679,6 +8999,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7692,6 +9016,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7718,6 +9050,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7746,6 +9082,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7797,6 +9137,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7806,6 +9150,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7832,6 +9184,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7860,6 +9216,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.10000000149011612,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -7903,6 +9263,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -7912,6 +9276,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -7938,6 +9310,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -7966,6 +9342,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.20000000298023224,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8041,6 +9421,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8054,6 +9438,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8080,6 +9472,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8108,6 +9504,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8183,6 +9583,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8192,6 +9596,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8218,6 +9630,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8246,6 +9662,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.7,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8285,6 +9705,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8298,6 +9722,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8324,6 +9756,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8352,6 +9788,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8391,6 +9831,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8400,6 +9844,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8426,6 +9878,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8454,6 +9910,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.17499999701976776,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8497,6 +9957,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8506,6 +9970,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8532,6 +10004,136 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:gravity": {
+					"baseValue": 0.08,
+					"defaultValue": 0.08
+				},
+				"minecraft:jump_strength": {
+					"baseValue": 0.41999998688697815,
+					"defaultValue": 0.41999998688697815
+				},
+				"minecraft:knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_absorption": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:max_health": {
+					"baseValue": 20.0,
+					"defaultValue": 20.0
+				},
+				"minecraft:movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:movement_speed": {
+					"baseValue": 0.7,
+					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
+				"minecraft:oxygen_bonus": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:safe_fall_distance": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:scale": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:step_height": {
+					"baseValue": 0.6,
+					"defaultValue": 0.6
+				},
+				"minecraft:tempt_range": {
+					"baseValue": 8.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:water_movement_efficiency": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:waypoint_transmit_range": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				}
+			},
+			"key": "minecraft:sulfur_cube",
+			"name": "SULFUR_CUBE",
+			"ordinal": 132,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"spawnable": true,
+			"translationKey": "entity.minecraft.sulfur_cube",
+			"typeId": -1
+		},
+		{
+			"alive": true,
+			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:armor": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:armor_toughness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:burning_time": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:camera_distance": {
+					"baseValue": 4.0,
+					"defaultValue": 4.0
+				},
+				"minecraft:entity_interaction_range": {
+					"baseValue": 3.0,
+					"defaultValue": 3.0
+				},
+				"minecraft:explosion_knockback_resistance": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:fall_damage_multiplier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
+				"minecraft:follow_range": {
+					"baseValue": 16.0,
+					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8560,6 +10162,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 1.0,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8592,7 +10198,7 @@
 			},
 			"key": "minecraft:tadpole",
 			"name": "TADPOLE",
-			"ordinal": 132,
+			"ordinal": 133,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8604,7 +10210,7 @@
 			"alive": false,
 			"key": "minecraft:text_display",
 			"name": "TEXT_DISPLAY",
-			"ordinal": 133,
+			"ordinal": 134,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8616,7 +10222,7 @@
 			"alive": false,
 			"key": "minecraft:tnt",
 			"name": "TNT",
-			"ordinal": 134,
+			"ordinal": 135,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8628,7 +10234,7 @@
 			"alive": false,
 			"key": "minecraft:tnt_minecart",
 			"name": "TNT_MINECART",
-			"ordinal": 135,
+			"ordinal": 136,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8639,6 +10245,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8648,6 +10258,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8674,6 +10292,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8702,6 +10324,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.17499999701976776,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8734,7 +10360,7 @@
 			},
 			"key": "minecraft:trader_llama",
 			"name": "TRADER_LLAMA",
-			"ordinal": 136,
+			"ordinal": 137,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8746,7 +10372,7 @@
 			"alive": false,
 			"key": "minecraft:trident",
 			"name": "TRIDENT",
-			"ordinal": 137,
+			"ordinal": 138,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8757,6 +10383,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8766,6 +10396,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8792,6 +10430,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8821,6 +10463,10 @@
 					"baseValue": 0.7,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8848,7 +10494,7 @@
 			},
 			"key": "minecraft:tropical_fish",
 			"name": "TROPICAL_FISH",
-			"ordinal": 138,
+			"ordinal": 139,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8859,6 +10505,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8868,6 +10518,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -8894,6 +10552,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -8922,6 +10584,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.25,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -8954,7 +10620,7 @@
 			},
 			"key": "minecraft:turtle",
 			"name": "TURTLE",
-			"ordinal": 139,
+			"ordinal": 140,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -8965,6 +10631,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -8978,6 +10648,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9004,6 +10682,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9033,6 +10715,10 @@
 					"baseValue": 0.7,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9060,7 +10746,7 @@
 			},
 			"key": "minecraft:vex",
 			"name": "VEX",
-			"ordinal": 140,
+			"ordinal": 141,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9071,6 +10757,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9080,6 +10770,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9106,6 +10804,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9135,6 +10837,10 @@
 					"baseValue": 0.5,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9162,7 +10868,7 @@
 			},
 			"key": "minecraft:villager",
 			"name": "VILLAGER",
-			"ordinal": 141,
+			"ordinal": 142,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9173,6 +10879,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9186,6 +10896,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9212,6 +10930,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 12.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9241,6 +10963,10 @@
 					"baseValue": 0.3499999940395355,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9268,7 +10994,7 @@
 			},
 			"key": "minecraft:vindicator",
 			"name": "VINDICATOR",
-			"ordinal": 142,
+			"ordinal": 143,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9279,6 +11005,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9288,6 +11018,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9314,6 +11052,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9343,6 +11085,10 @@
 					"baseValue": 0.7,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9370,7 +11116,7 @@
 			},
 			"key": "minecraft:wandering_trader",
 			"name": "WANDERING_TRADER",
-			"ordinal": 143,
+			"ordinal": 144,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9381,6 +11127,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9395,6 +11145,14 @@
 				},
 				"minecraft:attack_knockback": {
 					"baseValue": 1.5,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
+					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
 				"minecraft:burning_time": {
@@ -9420,6 +11178,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 24.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9449,6 +11211,10 @@
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9476,7 +11242,7 @@
 			},
 			"key": "minecraft:warden",
 			"name": "WARDEN",
-			"ordinal": 144,
+			"ordinal": 145,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9488,7 +11254,7 @@
 			"alive": false,
 			"key": "minecraft:wind_charge",
 			"name": "WIND_CHARGE",
-			"ordinal": 145,
+			"ordinal": 146,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9499,6 +11265,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9512,6 +11282,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9538,6 +11316,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9567,6 +11349,10 @@
 					"baseValue": 0.25,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9594,7 +11380,7 @@
 			},
 			"key": "minecraft:witch",
 			"name": "WITCH",
-			"ordinal": 146,
+			"ordinal": 147,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9605,6 +11391,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 4.0,
 					"defaultValue": 0.0
@@ -9618,6 +11408,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9649,6 +11447,10 @@
 					"baseValue": 40.0,
 					"defaultValue": 32.0
 				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
 					"defaultValue": 0.08
@@ -9677,6 +11479,10 @@
 					"baseValue": 0.6000000238418579,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9704,7 +11510,7 @@
 			},
 			"key": "minecraft:wither",
 			"name": "WITHER",
-			"ordinal": 147,
+			"ordinal": 148,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9715,6 +11521,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9728,6 +11538,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9754,6 +11572,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9783,6 +11605,10 @@
 					"baseValue": 0.25,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9810,7 +11636,7 @@
 			},
 			"key": "minecraft:wither_skeleton",
 			"name": "WITHER_SKELETON",
-			"ordinal": 148,
+			"ordinal": 149,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9822,7 +11648,7 @@
 			"alive": false,
 			"key": "minecraft:wither_skull",
 			"name": "WITHER_SKULL",
-			"ordinal": 149,
+			"ordinal": 150,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9833,6 +11659,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9846,6 +11676,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -9872,6 +11710,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -9900,6 +11742,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -9932,7 +11778,7 @@
 			},
 			"key": "minecraft:wolf",
 			"name": "WOLF",
-			"ordinal": 150,
+			"ordinal": 151,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -9943,6 +11789,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -9957,6 +11807,14 @@
 				},
 				"minecraft:attack_knockback": {
 					"baseValue": 1.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
+					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
 				"minecraft:burning_time": {
@@ -9982,6 +11840,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -10011,6 +11873,10 @@
 					"baseValue": 0.30000001192092896,
 					"defaultValue": 0.7
 				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
+				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -10038,7 +11904,7 @@
 			},
 			"key": "minecraft:zoglin",
 			"name": "ZOGLIN",
-			"ordinal": 151,
+			"ordinal": 152,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -10049,6 +11915,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 2.0,
 					"defaultValue": 0.0
@@ -10062,6 +11932,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -10088,6 +11966,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 35.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -10116,6 +11998,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -10148,7 +12034,7 @@
 			},
 			"key": "minecraft:zombie",
 			"name": "ZOMBIE",
-			"ordinal": 152,
+			"ordinal": 153,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -10159,6 +12045,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -10168,6 +12058,14 @@
 					"defaultValue": 0.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -10194,6 +12092,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -10222,6 +12124,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.22499999403953552,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -10254,7 +12160,7 @@
 			},
 			"key": "minecraft:zombie_horse",
 			"name": "ZOMBIE_HORSE",
-			"ordinal": 153,
+			"ordinal": 154,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -10265,6 +12171,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
@@ -10278,6 +12188,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -10304,6 +12222,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 16.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -10332,6 +12254,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 1.100000023841858,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -10364,7 +12290,7 @@
 			},
 			"key": "minecraft:zombie_nautilus",
 			"name": "ZOMBIE_NAUTILUS",
-			"ordinal": 154,
+			"ordinal": 155,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -10375,6 +12301,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 2.0,
 					"defaultValue": 0.0
@@ -10388,6 +12318,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -10414,6 +12352,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 35.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -10442,6 +12384,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -10474,7 +12420,7 @@
 			},
 			"key": "minecraft:zombie_villager",
 			"name": "ZOMBIE_VILLAGER",
-			"ordinal": 155,
+			"ordinal": 156,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],
@@ -10485,6 +12431,10 @@
 		{
 			"alive": true,
 			"defaultAttributes": {
+				"minecraft:air_drag_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
+				},
 				"minecraft:armor": {
 					"baseValue": 2.0,
 					"defaultValue": 0.0
@@ -10498,6 +12448,14 @@
 					"defaultValue": 2.0
 				},
 				"minecraft:attack_knockback": {
+					"baseValue": 0.0,
+					"defaultValue": 0.0
+				},
+				"minecraft:below_name_distance": {
+					"baseValue": 10.0,
+					"defaultValue": 10.0
+				},
+				"minecraft:bounciness": {
 					"baseValue": 0.0,
 					"defaultValue": 0.0
 				},
@@ -10524,6 +12482,10 @@
 				"minecraft:follow_range": {
 					"baseValue": 35.0,
 					"defaultValue": 32.0
+				},
+				"minecraft:friction_modifier": {
+					"baseValue": 1.0,
+					"defaultValue": 1.0
 				},
 				"minecraft:gravity": {
 					"baseValue": 0.08,
@@ -10552,6 +12514,10 @@
 				"minecraft:movement_speed": {
 					"baseValue": 0.23000000417232513,
 					"defaultValue": 0.7
+				},
+				"minecraft:name_tag_distance": {
+					"baseValue": 64.0,
+					"defaultValue": 64.0
 				},
 				"minecraft:oxygen_bonus": {
 					"baseValue": 0.0,
@@ -10584,7 +12550,7 @@
 			},
 			"key": "minecraft:zombified_piglin",
 			"name": "ZOMBIFIED_PIGLIN",
-			"ordinal": 156,
+			"ordinal": 157,
 			"requiredFeatures": [
 				"minecraft:vanilla"
 			],

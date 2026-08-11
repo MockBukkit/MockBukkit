@@ -298,6 +298,12 @@ public class CombatTrackerMock implements CombatTracker
 		return entity.isInWater() ? FallLocationType.WATER : null;
 	}
 
+	@Override
+	public int getLastDamageTime()
+	{
+		return this.lastDamageTime;
+	}
+
 	private static boolean shouldEnterCombat(DamageSource source)
 	{
 		return source.getCausingEntity() instanceof LivingEntity;

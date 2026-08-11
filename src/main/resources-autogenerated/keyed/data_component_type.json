@@ -446,6 +446,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:sulfur_cube_content",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:suspicious_stew_effects",
 			"persistent": true,
 			"valued": true

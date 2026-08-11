@@ -129,6 +129,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:chiseled_cinnabar_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:chiseled_cinnabar"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:copper_block"
 			],
 			"type": "material"
@@ -311,6 +325,20 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:chiseled_sulfur_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:chiseled_sulfur"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:polished_tuff"
 			],
 			"type": "material"
@@ -361,6 +389,202 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:chiseled_tuff"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_slab_from_cinnabar_bricks_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cinnabar_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_slab_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cinnabar_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_slab_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cinnabar_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_stairs_from_cinnabar_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_stairs_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_stairs_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_wall_from_cinnabar_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_wall_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_wall_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_bricks_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_bricks"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_bricks_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_bricks"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_slab_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cinnabar_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_stairs_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_wall_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cinnabar_wall"
 		}
 	},
 	{
@@ -2145,6 +2369,104 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_cinnabar"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_slab_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:polished_cinnabar_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_slab_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:polished_cinnabar_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_stairs_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_cinnabar_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_stairs_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_cinnabar_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_wall_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_cinnabar_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_wall_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_cinnabar_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:cobbled_deepslate"
 			],
 			"type": "material"
@@ -2433,6 +2755,104 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:polished_granite_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_sulfur"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_slab_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:polished_sulfur_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_slab_from_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:polished_sulfur_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_stairs_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_sulfur_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_stairs_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_sulfur_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_wall_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_sulfur_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_wall_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:polished_sulfur_wall"
 		}
 	},
 	{
@@ -3091,6 +3511,202 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:stone_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_slab_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:sulfur_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_slab_from_sulfur_bricks_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:sulfur_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_slab_from_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:sulfur_brick_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_stairs_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_stairs_from_sulfur_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_stairs_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_brick_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_wall_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_wall_from_sulfur_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_wall_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_bricks_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_bricks"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_bricks_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_bricks"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_slab_from_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:sulfur_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_stairs_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_wall_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:sulfur_wall"
 		}
 	},
 	{

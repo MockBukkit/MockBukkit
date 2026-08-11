@@ -2654,7 +2654,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		return unsafe.legacyComponentSerializer().serialize(NO_PERMISSION);
+		return LegacyComponentSerializer.legacySection().serialize(NO_PERMISSION);
 	}
 
 	@Override
