@@ -29,7 +29,7 @@ jobs:
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - name: Run checkstyle in source code
-        run: ./gradlew checkstyleMain --refresh-dependencies
+        run: ./gradlew checkstyleMain
 
       - name: Run checkstyle in test code
         run: ./gradlew checkstyleTest
