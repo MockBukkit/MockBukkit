@@ -31,7 +31,7 @@ jobs:
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - name: Run unit tests
-        run: ./gradlew jacocoTestReport :metaminer:test --refresh-dependencies
+        run: ./gradlew jacocoTestReport :metaminer:test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
