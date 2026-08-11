@@ -1248,26 +1248,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		NumberConversions.checkFinite(yaw.degrees(), "yaw not finite");
 		NumberConversions.checkFinite(pitch.degrees(), "pitch not finite");
 
-		float yawValue = Location.normalizeYaw(yaw.degrees());
-		float pitchValue = Location.normalizePitch(pitch.degrees());
+		float yawValue = yaw.relative() ? location.getYaw() + yaw.degrees() : yaw.degrees();
+		float pitchValue = pitch.relative() ? location.getPitch() + pitch.degrees() : pitch.degrees();
 
-		if (yaw.relative())
-		{
-			location.setYaw(Location.normalizeYaw(location.getYaw() + yawValue));
-		}
-		else
-		{
-			location.setYaw(yawValue);
-		}
-
-		if (pitch.relative())
-		{
-			location.setPitch(Location.normalizePitch(location.getPitch() + pitchValue));
-		}
-		else
-		{
-			location.setPitch(pitchValue);
-		}
+		location.setYaw(Location.normalizeYaw(yawValue));
+		location.setPitch(Location.normalizePitch(pitchValue));
 	}
 
 	@Override

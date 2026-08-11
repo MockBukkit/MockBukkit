@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import io.papermc.paper.math.Angle;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -1571,7 +1572,7 @@ class EntityMockTest
 	@Test
 	void setRotation_AngleAbsolute_SetsValues()
 	{
-		entity.setRotation(io.papermc.paper.math.Angle.absolute(45f), io.papermc.paper.math.Angle.absolute(20f));
+		entity.setRotation(Angle.absolute(45f), Angle.absolute(20f));
 		assertEquals(45.0f, entity.getLocation().getYaw());
 		assertEquals(20.0f, entity.getLocation().getPitch());
 	}
@@ -1580,9 +1581,19 @@ class EntityMockTest
 	void setRotation_AngleRelative_AddsToCurrent()
 	{
 		entity.setRotation(10f, 5f);
-		entity.setRotation(io.papermc.paper.math.Angle.relative(30f), io.papermc.paper.math.Angle.relative(-10f));
+		entity.setRotation(Angle.relative(30f), Angle.relative(-10f));
 		assertEquals(Location.normalizeYaw(40f), entity.getLocation().getYaw());
 		assertEquals(Location.normalizePitch(-5f), entity.getLocation().getPitch());
+	}
+
+	@Test
+	void setRotation_AngleRelative_PitchDeltaLarge_AddsToCurrent()
+	{
+		// Reproduces the bug where a large relative pitch delta was pre-normalized and clamped
+		entity.setRotation(0f, -80f);
+		entity.setRotation(Angle.relative(0f), Angle.relative(100f));
+		// expected: normalizePitch(-80 + 100) == normalizePitch(20) -> 20
+		assertEquals(Location.normalizePitch(20f), entity.getLocation().getPitch());
 	}
 
 }
