@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit;
 
 import io.papermc.paper.entity.poi.PoiType;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.flattener.ComponentFlattener;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -63,6 +64,13 @@ class MockBukkitInternalAPIBridgeTest
 			assertThrows(IllegalArgumentException.class, () -> bridge.getTranslationKey(EntityType.UNKNOWN));
 		}
 
+	}
+
+	@Test
+	void componentFlattener_ReturnsNotNull()
+	{
+		ComponentFlattener flattener = bridge.componentFlattener();
+		assertNotNull(flattener);
 	}
 
 }
