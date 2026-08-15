@@ -102,7 +102,11 @@ jobs:
 
       - name: Build Paper reference sources
         if: steps.pr.outputs.count != '0'
-        run: ./gradlew :metaminer:paperweightUserdevSetup
+        # paperweight skips decompilation when it detects CI (getGenSources() reads
+        # this property only when the CI env var is set), producing the mojang-mapped
+        # *bytecode* jar and nothing else. We need the sources, so opt back in --
+        # this is what takes the step from ~4s to ~1min.
+        run: ./gradlew :metaminer:paperweightUserdevSetup -Ppaperweight.experimental.genSources=true
 
       - name: Stage Paper sources and change list
         if: steps.pr.outputs.count != '0'
