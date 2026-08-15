@@ -17,6 +17,12 @@ name: OpenCode Paper Parity Review
 on:
   issue_comment:
     types: [ created ]
+  # INTERIM -- remove once this is on the default branch.
+  # issue_comment always runs the default branch's copy of a workflow, so `/parity`
+  # cannot exercise this until it is merged. pull_request uses the copy from the PR
+  # itself, which lets us test it first. Apply the `parity` label to trigger.
+  pull_request:
+    types: [ labeled ]
 
 permissions:
   contents: read
@@ -25,20 +31,26 @@ permissions:
   id-token: write
 
 concurrency:
-  group: oc-review-${{ github.event.issue.number }}
+  group: oc-review-${{ github.event.issue.number || github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
   parity-review:
     if: >-
-      github.event.issue.pull_request &&
-      startsWith(github.event.comment.body, '/parity') &&
-      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       startsWith(github.event.comment.body, '/parity') &&
+       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association))
+      ||
+      (github.event_name == 'pull_request' && github.event.label.name == 'parity')
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 30
+    env:
+      PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
 
     steps:
       - name: Acknowledge the command
+        if: github.event_name == 'issue_comment'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -52,7 +64,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          gh pr diff "${{ github.event.issue.number }}" --repo "${{ github.repository }}" \
+          gh pr diff "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
             --name-only > /tmp/changed-all.txt
           # Only Java under src/ is worth a parity check.
           grep -E '^src/.*\.java$' /tmp/changed-all.txt > /tmp/changed.txt || true
@@ -63,14 +75,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" \
+          gh pr comment "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
             --body "🐙 No Java files under \`src/\` changed in this PR, so there is nothing to parity-check."
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: steps.pr.outputs.count != '0'
         with:
           # refs/pull/N/head resolves for fork PRs too, unlike the head SHA.
-          ref: refs/pull/${{ github.event.issue.number }}/head
+          ref: refs/pull/${{ env.PR_NUMBER }}/head
 
       - name: Set up JDK 25
         if: steps.pr.outputs.count != '0'
@@ -119,3 +131,6 @@ jobs:
           model: openrouter/deepseek/deepseek-v4-flash
           agent: paper-parity
           mentions: "/parity"
+          # Explicit task, so the label-triggered path works too -- on a
+          # pull_request event there is no comment for the action to read.
+          prompt: "Perform the Paper parity review described in your agent instructions."
