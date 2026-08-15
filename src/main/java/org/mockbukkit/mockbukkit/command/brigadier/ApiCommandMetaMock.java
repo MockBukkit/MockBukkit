@@ -6,7 +6,6 @@ import org.bukkit.plugin.Plugin;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 public record ApiCommandMetaMock(@Nullable PluginMeta pluginMeta, @Nullable String description, List<String> aliases,
 								 @Nullable String helpCommandNamespace, boolean serverSideOnly)
@@ -17,10 +16,18 @@ public record ApiCommandMetaMock(@Nullable PluginMeta pluginMeta, @Nullable Stri
 		aliases = List.copyOf(aliases);
 	}
 
+	/**
+	 * The plugin that registered this command, if it is still registered with the server.
+	 * <p>
+	 * Returns null once that plugin is gone -- during a reload, for instance, the command outlives the plugin
+	 * instance that added it -- which is why the return is nullable.
+	 *
+	 * @return The owning plugin, or null if it has no plugin meta or is no longer registered.
+	 */
 	@Nullable
 	public Plugin plugin()
 	{
-		return this.pluginMeta == null ? null : Objects.requireNonNull(Bukkit.getPluginManager().getPlugin(this.pluginMeta.getName()));
+		return this.pluginMeta == null ? null : Bukkit.getPluginManager().getPlugin(this.pluginMeta.getName());
 	}
 
 	public ApiCommandMetaMock withAliases(List<String> registeredAliases)
