@@ -3,6 +3,9 @@ package org.mockbukkit.mockbukkit.entity;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
+import java.util.UUID;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
@@ -71,6 +74,98 @@ class LivingEntityMockTest
 	private ServerMock server;
 	@MockBukkitInject
 	private CowMock livingEntity;
+
+	@Test
+	void simulateDamage_NullSource()
+	{
+		assertThrows(IllegalArgumentException.class, () -> livingEntity.simulateDamage(1.0,
+				(DamageSource) null, EntityDamageEvent.DamageCause.CUSTOM));
+	}
+
+	@Test
+	void simulateDamage_CancelledEventLeavesHealthAlone()
+	{
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			void onEntityDamage(EntityDamageEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		double before = livingEntity.getHealth();
+		DamageSource source = DamageSource.builder(DamageType.GENERIC).build();
+
+		livingEntity.simulateDamage(1.0, source, EntityDamageEvent.DamageCause.CUSTOM);
+
+		assertEquals(before, livingEntity.getHealth(), 0);
+		assertNull(livingEntity.getLastDamageCause());
+	}
+
+	@Test
+	void simulateDamage_NonHumanDamagerIsAMobAttack()
+	{
+		WorldMock world = server.addSimpleWorld("mob-damage");
+		CowMock damager = new CowMock(server, UUID.randomUUID());
+		damager.setLocation(new Location(world, 0, 64, 0));
+
+		EntityDamageEvent event = livingEntity.simulateDamage(1.0, damager);
+
+		assertEquals(DamageType.MOB_ATTACK, event.getDamageSource().getDamageType());
+	}
+
+	@Test
+	void simulateDamage_ReportsTheGivenCause()
+	{
+		PlayerMock shooter = server.addPlayer();
+		DamageSource source = DamageSource.builder(DamageType.ARROW).withDirectEntity(shooter).build();
+
+		EntityDamageEvent event = livingEntity.simulateDamage(1.0, source,
+				EntityDamageEvent.DamageCause.PROJECTILE);
+
+		assertEquals(EntityDamageEvent.DamageCause.PROJECTILE, event.getCause());
+	}
+
+	@Test
+	void simulateDamage_ReportsTheGivenCauseWithoutADirectEntity()
+	{
+		DamageSource source = DamageSource.builder(DamageType.EXPLOSION).build();
+
+		EntityDamageEvent event = livingEntity.simulateDamage(1.0, source,
+				EntityDamageEvent.DamageCause.BLOCK_EXPLOSION);
+
+		assertEquals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION, event.getCause());
+	}
+
+	@Test
+	void simulateDamage_DefaultsToEntityAttackWithADirectEntity()
+	{
+		PlayerMock attacker = server.addPlayer();
+		DamageSource source = DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build();
+
+		EntityDamageEvent event = livingEntity.simulateDamage(1.0, source);
+
+		assertEquals(EntityDamageEvent.DamageCause.ENTITY_ATTACK, event.getCause());
+	}
+
+	@Test
+	void simulateDamage_DefaultsToCustomWithoutADirectEntity()
+	{
+		DamageSource source = DamageSource.builder(DamageType.GENERIC).build();
+
+		EntityDamageEvent event = livingEntity.simulateDamage(1.0, source);
+
+		assertEquals(EntityDamageEvent.DamageCause.CUSTOM, event.getCause());
+	}
+
+	@Test
+	void simulateDamage_NullCause()
+	{
+		DamageSource source = DamageSource.builder(DamageType.GENERIC).build();
+
+		assertThrows(IllegalArgumentException.class, () -> livingEntity.simulateDamage(1.0, source, null));
+	}
 
 	@Test
 	void testIsJumpingDefault()
