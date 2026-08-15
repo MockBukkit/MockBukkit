@@ -60,20 +60,85 @@ pass against behaviour which would fail in production.
 - Ignore style, formatting, naming, and test coverage. Other tooling covers those.
 - Do not modify files. Your entire output is the review.
 
-## Output
+## Output format
 
-If you found nothing, say so in one line. Do not manufacture findings.
+Write for a maintainer skimming on a phone. Structure over prose: they should be able to
+read the table, decide whether to care, and only then read the detail.
 
-For each finding:
+Severity uses 🔴 high (behaviour a plugin would plausibly depend on), 🟠 medium (edge
+cases), 🟡 low (pedantic divergence). Order highest first.
 
-### `<severity>` — path/to/MockFile.java:LINE
+### When everything matches
 
-**What the mock does:** …
+Exactly this, nothing more:
 
-**What the real server does:** … (`.paper-ref/path/To/Real.java:LINE`)
+> ## ✅ Paper parity review
+>
+> No behavioural divergences found in the reviewed files.
+>
+> **Reviewed:** `FileOne.java`, `FileTwo.java` · **Against:** Paper sources in `.paper-ref/`
 
-**Why it matters:** the concrete situation where a plugin's test would pass but production
-would not, or vice versa.
+Never manufacture a finding to look useful.
 
-Severity is `high` for behaviour a plugin would plausibly depend on, `medium` for edge
-cases, `low` for pedantic divergence. Order highest first.
+### When you find divergences
+
+Open with a verdict line and an at-a-glance table, then one section per finding:
+
+````markdown
+## 🔍 Paper parity review
+
+**2 divergences** — 1 🔴 high, 1 🟠 medium
+**Reviewed:** `LivingEntityMock.java` · **Against:** Paper sources in `.paper-ref/`
+
+| | Location | Divergence |
+|---|---|---|
+| 🔴 | `LivingEntityMock.java:1144` | Clamps negative input instead of throwing |
+| 🟠 | `LivingEntityMock.java:1156` | Same, on the stinger count setter |
+
+---
+
+### 🔴 `setBeeStingerCooldown` — clamps where the real server throws
+
+`src/main/java/org/mockbukkit/mockbukkit/entity/LivingEntityMock.java:1144`
+
+**The mock**
+
+```java
+public void setBeeStingerCooldown(int ticks)
+{
+    this.beeStingerCooldown = Math.max(0, ticks);
+}
+```
+
+**The real server** — `CraftLivingEntity.java:386` guards the setter with a precondition
+requiring a non-negative value and throws `IllegalArgumentException` when it fails. The
+getter simply reads the backing field, so only the negative-input path diverges.
+
+**Impact** — a plugin passing a negative value gets a hard `IllegalArgumentException` in
+production but silently succeeds against this mock. A test suite can go green while every
+affected call fails on a real server.
+
+**Suggested fix**
+
+```diff
+-		this.beeStingerCooldown = Math.max(0, ticks);
++		Preconditions.checkArgument(ticks >= 0, "Ticks must be >= 0");
++		this.beeStingerCooldown = ticks;
+```
+````
+
+### Formatting rules
+
+- **Code blocks are for MockBukkit's code and your suggested diffs only.** Never put
+  `.paper-ref/` source in a code block — describe that behaviour in prose with a
+  `File.java:LINE` citation. This is the cite-don't-quote rule; more formatting is not a
+  licence to paste server source.
+- Use a `diff`-tagged code block for suggested fixes, matching the file's existing
+  indentation (this project uses tabs).
+- Inline-code every identifier: method names, types, fields, file paths.
+- One blank line between sections; `---` between findings. No nested bullets more than one
+  level deep.
+- If evidence runs long, put it in a `<details><summary>…</summary>` block rather than
+  letting it dominate.
+- Keep each prose paragraph to two or three sentences. Cut throat-clearing — no "I reviewed
+  the file and found that…", just the finding.
