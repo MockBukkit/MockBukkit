@@ -108,11 +108,23 @@ jobs:
         if: steps.pr.outputs.count != '0'
         run: |
           set -euo pipefail
-          # TODO: paperweight only writes this to a content-hashed cache directory.
-          # Replace with a small Gradle task that reports the path once we have one.
-          JAR="$(ls -t "$HOME"/.gradle/caches/paperweight-userdev/v2/work/applyDevBundlePatches_*/output.jar 2>/dev/null | head -1 || true)"
+          GUH="${GRADLE_USER_HOME:-$HOME/.gradle}"
+
+          # paperweight writes its output to a content-hashed cache path whose layout
+          # is not contractual, so identify the artifact by what's inside it rather
+          # than by where it sits: the one jar carrying CraftBukkit sources.
+          JAR=""
+          while IFS= read -r candidate; do
+            if unzip -l "$candidate" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+              JAR="$candidate"
+              break
+            fi
+          done < <(find "$GUH/caches/paperweight-userdev" .gradle -name '*.jar' -size +1M 2>/dev/null | xargs -r ls -t 2>/dev/null)
+
           if [ -z "$JAR" ]; then
-            echo "::error::Could not locate the paperweight output jar."
+            echo "::error::Could not locate a paperweight jar containing CraftBukkit sources."
+            echo "Searched under $GUH/caches/paperweight-userdev and .gradle -- contents:"
+            find "$GUH/caches/paperweight-userdev" -maxdepth 3 2>/dev/null | head -40 || echo "  (no paperweight-userdev cache at all)"
             exit 1
           fi
           # Extract into the workspace so the agent has a stable, relative path.
