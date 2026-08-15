@@ -53,12 +53,12 @@ class PluginManagerMockTest
 	@Test
 	void enablePlugin_AlreadyEnabled_DoesNothing()
 	{
-		PluginMock plugin = MockBukkit.createMockPlugin();
-		assertTrue(plugin.isEnabled());
+		PluginMock alreadyEnabled = MockBukkit.createMockPlugin();
+		assertTrue(alreadyEnabled.isEnabled());
 
-		pluginManager.enablePlugin(plugin);
+		pluginManager.enablePlugin(alreadyEnabled);
 
-		assertTrue(plugin.isEnabled());
+		assertTrue(alreadyEnabled.isEnabled());
 	}
 
 	@MockBukkitInject

@@ -92,7 +92,7 @@ public class LifecycleEventRunnerMock
 	 */
 	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType, final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause, final Predicate<? super O> ownerFilter)
 	{
-		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType, new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), owner -> ownerClass.isInstance(owner) && ownerFilter.test(owner));
+		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType, new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), ((Predicate<O>) ownerClass::isInstance).and(ownerFilter));
 	}
 
 	public <O extends LifecycleEventOwner, E extends PaperLifecycleEventMock> void callEvent(LifecycleEventType<O, ? super E, ?> eventType, E event, Predicate<? super O> ownerPredicate)
