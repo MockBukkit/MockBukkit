@@ -3045,4 +3045,16 @@ public class WorldMock implements World
 		}
 	}
 
+
+	/**
+	 * The blocks this world has actually created, which is far fewer than the blocks it could return. A block only
+	 * exists here once something has asked for it, so anything absent is still whatever the world generator would
+	 * produce and cannot be holding state of its own.
+	 *
+	 * @return The created blocks, keyed by coordinate.
+	 */
+	Map<Coordinate, BlockMock> getCreatedBlocks()
+	{
+		return Collections.unmodifiableMap(this.blocks);
+	}
 }

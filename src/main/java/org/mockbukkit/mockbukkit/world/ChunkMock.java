@@ -21,6 +21,9 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 
+import java.util.Map;
+import org.bukkit.block.TileState;
+import org.mockbukkit.mockbukkit.block.BlockMock;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -74,15 +77,36 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getTileEntities(block -> true, useSnapshot).toArray(BlockState[]::new);
 	}
 
 	@Override
 	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<? super Block> blockPredicate, boolean useSnapshot)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(blockPredicate, "Block predicate cannot be null");
+		// Only WorldMock constructs a ChunkMock, and it always passes itself.
+		WorldMock worldMock = (WorldMock) this.world;
+
+		List<BlockState> tileEntities = new ArrayList<>();
+		for (Map.Entry<Coordinate, BlockMock> entry : worldMock.getCreatedBlocks().entrySet())
+		{
+			Coordinate coordinate = entry.getKey();
+			if ((coordinate.x >> 4) != this.x || (coordinate.z >> 4) != this.z)
+			{
+				continue;
+			}
+			BlockMock block = entry.getValue();
+			if (!blockPredicate.test(block))
+			{
+				continue;
+			}
+			BlockState state = block.getState();
+			if (state instanceof TileState)
+			{
+				tileEntities.add(state);
+			}
+		}
+		return tileEntities;
 	}
 
 	@Override
@@ -184,8 +208,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public BlockState[] getTileEntities()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getTileEntities(true);
 	}
 
 	@Override

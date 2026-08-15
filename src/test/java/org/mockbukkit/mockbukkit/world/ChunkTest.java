@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.world;
 
+import org.bukkit.Chunk;
+import org.bukkit.block.BlockState;
 import org.bukkit.Chunk.LoadLevel;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,12 +14,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -26,6 +30,76 @@ class ChunkTest
 
 	@MockBukkitInject
 	private WorldMock world;
+
+	@Test
+	void getTileEntities_EmptyWhenNothingHasState()
+	{
+		assertEquals(0, world.getChunkAt(0, 0).getTileEntities().length);
+	}
+
+	@Test
+	void getTileEntities_FindsABlockWithState()
+	{
+		Chunk chunk = world.getChunkAt(0, 0);
+		chunk.getBlock(3, 64, 5).setType(Material.CHEST);
+
+		BlockState[] states = chunk.getTileEntities();
+
+		assertEquals(1, states.length);
+		assertEquals(Material.CHEST, states[0].getType());
+	}
+
+	@Test
+	void getTileEntities_IgnoresPlainBlocks()
+	{
+		Chunk chunk = world.getChunkAt(1, 1);
+		chunk.getBlock(1, 64, 1).setType(Material.STONE);
+
+		assertEquals(0, chunk.getTileEntities().length);
+	}
+
+	@Test
+	void getTileEntities_IgnoresOtherChunks()
+	{
+		Chunk chunk = world.getChunkAt(5, 5);
+		Chunk other = world.getChunkAt(6, 5);
+		other.getBlock(0, 64, 0).setType(Material.CHEST);
+
+		assertEquals(0, chunk.getTileEntities().length);
+		assertEquals(1, other.getTileEntities().length);
+	}
+
+	@Test
+	void getTileEntities_IgnoresChunksDifferingOnlyInZ()
+	{
+		Chunk chunk = world.getChunkAt(8, 8);
+		Chunk other = world.getChunkAt(8, 9);
+		other.getBlock(0, 64, 0).setType(Material.CHEST);
+
+		assertEquals(0, chunk.getTileEntities().length);
+		assertEquals(1, other.getTileEntities().length);
+	}
+
+	@Test
+	void getTileEntities_HonoursThePredicate()
+	{
+		Chunk chunk = world.getChunkAt(2, 2);
+		Block kept = chunk.getBlock(2, 64, 2);
+		kept.setType(Material.CHEST);
+		chunk.getBlock(4, 64, 4).setType(Material.CHEST);
+
+		Collection<BlockState> matching = chunk.getTileEntities(block -> block.getX() == kept.getX(), true);
+
+		assertEquals(1, matching.size());
+	}
+
+	@Test
+	void getTileEntities_NullPredicate()
+	{
+		Chunk chunk = world.getChunkAt(3, 3);
+
+		assertThrows(NullPointerException.class, () -> chunk.getTileEntities(null, true));
+	}
 
 	@Test
 	void getX_AnyValue_ExactValue()
