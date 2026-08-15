@@ -233,11 +233,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		DamageSource dmg;
-		Player killer = deriveKiller();
-		if (killer != null)
+		Player derivedKiller = deriveKiller();
+		if (derivedKiller != null)
 		{
 			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
-			setKiller(killer);
+			setKiller(derivedKiller);
 		}
 		else
 		{
