@@ -338,4 +338,12 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 		return new KineticWeaponMock.ConditionMock(maxDurationTicks, minSpeed, minRelativeSpeed);
 	}
 
+	@Override
+	public SulfurCubeContent sulfurCubeContent(ItemStack absorbedItem)
+	{
+		Preconditions.checkArgument(absorbedItem != null, "absorbedItem cannot be null");
+		Preconditions.checkArgument(!absorbedItem.isEmpty(), "absorbedItem cannot be empty");
+		return new SulfurCubeContentMock(absorbedItem.asOne());
+	}
+
 }

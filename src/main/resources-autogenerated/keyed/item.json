@@ -3769,7 +3769,7 @@
 			"material": "minecraft:black_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -4682,7 +4682,7 @@
 			"material": "minecraft:blue_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -6242,7 +6242,7 @@
 			"material": "minecraft:brown_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -8981,6 +8981,44 @@
 			"typed": "minecraft:chiseled_bookshelf"
 		},
 		{
+			"blockType": "minecraft:chiseled_cinnabar",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:chiseled_cinnabar"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:chiseled_cinnabar",
+			"material": "minecraft:chiseled_cinnabar",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.chiseled_cinnabar",
+			"typed": "minecraft:chiseled_cinnabar"
+		},
+		{
 			"blockType": "minecraft:chiseled_copper",
 			"burnDuration": 0,
 			"compostable": false,
@@ -9323,6 +9361,44 @@
 			"typed": "minecraft:chiseled_stone_bricks"
 		},
 		{
+			"blockType": "minecraft:chiseled_sulfur",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:chiseled_sulfur"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:chiseled_sulfur",
+			"material": "minecraft:chiseled_sulfur",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.chiseled_sulfur",
+			"typed": "minecraft:chiseled_sulfur"
+		},
+		{
 			"blockType": "minecraft:chiseled_tuff",
 			"burnDuration": 0,
 			"compostable": false,
@@ -9513,6 +9589,310 @@
 			],
 			"translationKey": "block.minecraft.chorus_plant",
 			"typed": "minecraft:chorus_plant"
+		},
+		{
+			"blockType": "minecraft:cinnabar",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar",
+			"material": "minecraft:cinnabar",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar",
+			"typed": "minecraft:cinnabar"
+		},
+		{
+			"blockType": "minecraft:cinnabar_brick_slab",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_brick_slab"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_brick_slab",
+			"material": "minecraft:cinnabar_brick_slab",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_brick_slab",
+			"typed": "minecraft:cinnabar_brick_slab"
+		},
+		{
+			"blockType": "minecraft:cinnabar_brick_stairs",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_brick_stairs"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_brick_stairs",
+			"material": "minecraft:cinnabar_brick_stairs",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_brick_stairs",
+			"typed": "minecraft:cinnabar_brick_stairs"
+		},
+		{
+			"blockType": "minecraft:cinnabar_brick_wall",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_brick_wall"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_brick_wall",
+			"material": "minecraft:cinnabar_brick_wall",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_brick_wall",
+			"typed": "minecraft:cinnabar_brick_wall"
+		},
+		{
+			"blockType": "minecraft:cinnabar_bricks",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_bricks"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_bricks",
+			"material": "minecraft:cinnabar_bricks",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_bricks",
+			"typed": "minecraft:cinnabar_bricks"
+		},
+		{
+			"blockType": "minecraft:cinnabar_slab",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_slab"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_slab",
+			"material": "minecraft:cinnabar_slab",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_slab",
+			"typed": "minecraft:cinnabar_slab"
+		},
+		{
+			"blockType": "minecraft:cinnabar_stairs",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_stairs"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_stairs",
+			"material": "minecraft:cinnabar_stairs",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_stairs",
+			"typed": "minecraft:cinnabar_stairs"
+		},
+		{
+			"blockType": "minecraft:cinnabar_wall",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:cinnabar_wall"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:cinnabar_wall",
+			"material": "minecraft:cinnabar_wall",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.cinnabar_wall",
+			"typed": "minecraft:cinnabar_wall"
 		},
 		{
 			"blockType": "minecraft:clay",
@@ -13563,7 +13943,7 @@
 			"material": "minecraft:cyan_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -22265,7 +22645,7 @@
 			"material": "minecraft:gray_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -22838,7 +23218,7 @@
 			"material": "minecraft:green_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -27274,7 +27654,7 @@
 			"material": "minecraft:light_blue_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -27847,7 +28227,7 @@
 			"material": "minecraft:light_gray_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -28613,7 +28993,7 @@
 			"material": "minecraft:lime_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -29382,7 +29762,7 @@
 			"material": "minecraft:magenta_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -32021,6 +32401,44 @@
 			],
 			"translationKey": "item.minecraft.music_disc_blocks",
 			"typed": "minecraft:music_disc_blocks"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:music_disc_bounce"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:jukebox_playable",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "UNCOMMON",
+			"key": "minecraft:music_disc_bounce",
+			"material": "minecraft:music_disc_bounce",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.music_disc_bounce",
+			"typed": "minecraft:music_disc_bounce"
 		},
 		{
 			"burnDuration": 0,
@@ -35084,7 +35502,7 @@
 			"material": "minecraft:orange_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -37791,7 +38209,7 @@
 			"material": "minecraft:pink_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -39251,6 +39669,158 @@
 			"typed": "minecraft:polished_blackstone_wall"
 		},
 		{
+			"blockType": "minecraft:polished_cinnabar",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_cinnabar"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_cinnabar",
+			"material": "minecraft:polished_cinnabar",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_cinnabar",
+			"typed": "minecraft:polished_cinnabar"
+		},
+		{
+			"blockType": "minecraft:polished_cinnabar_slab",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_cinnabar_slab"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_cinnabar_slab",
+			"material": "minecraft:polished_cinnabar_slab",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_cinnabar_slab",
+			"typed": "minecraft:polished_cinnabar_slab"
+		},
+		{
+			"blockType": "minecraft:polished_cinnabar_stairs",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_cinnabar_stairs"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_cinnabar_stairs",
+			"material": "minecraft:polished_cinnabar_stairs",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_cinnabar_stairs",
+			"typed": "minecraft:polished_cinnabar_stairs"
+		},
+		{
+			"blockType": "minecraft:polished_cinnabar_wall",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_cinnabar_wall"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_cinnabar_wall",
+			"material": "minecraft:polished_cinnabar_wall",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_cinnabar_wall",
+			"typed": "minecraft:polished_cinnabar_wall"
+		},
+		{
 			"blockType": "minecraft:polished_deepslate",
 			"burnDuration": 0,
 			"compostable": false,
@@ -39631,6 +40201,158 @@
 			"typed": "minecraft:polished_granite_stairs"
 		},
 		{
+			"blockType": "minecraft:polished_sulfur",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_sulfur"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_sulfur",
+			"material": "minecraft:polished_sulfur",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_sulfur",
+			"typed": "minecraft:polished_sulfur"
+		},
+		{
+			"blockType": "minecraft:polished_sulfur_slab",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_sulfur_slab"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_sulfur_slab",
+			"material": "minecraft:polished_sulfur_slab",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_sulfur_slab",
+			"typed": "minecraft:polished_sulfur_slab"
+		},
+		{
+			"blockType": "minecraft:polished_sulfur_stairs",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_sulfur_stairs"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_sulfur_stairs",
+			"material": "minecraft:polished_sulfur_stairs",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_sulfur_stairs",
+			"typed": "minecraft:polished_sulfur_stairs"
+		},
+		{
+			"blockType": "minecraft:polished_sulfur_wall",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:polished_sulfur_wall"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:polished_sulfur_wall",
+			"material": "minecraft:polished_sulfur_wall",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.polished_sulfur_wall",
+			"typed": "minecraft:polished_sulfur_wall"
+		},
+		{
 			"blockType": "minecraft:polished_tuff",
 			"burnDuration": 0,
 			"compostable": false,
@@ -39937,6 +40659,44 @@
 			],
 			"translationKey": "item.minecraft.potato",
 			"typed": "minecraft:potato"
+		},
+		{
+			"blockType": "minecraft:potent_sulfur",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:potent_sulfur"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:potent_sulfur",
+			"material": "minecraft:potent_sulfur",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "BlockStateMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.potent_sulfur",
+			"typed": "minecraft:potent_sulfur"
 		},
 		{
 			"burnDuration": 0,
@@ -40734,7 +41494,7 @@
 			"material": "minecraft:purple_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -42253,7 +43013,7 @@
 			"material": "minecraft:red_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -49605,6 +50365,424 @@
 			"typed": "minecraft:sugar_cane"
 		},
 		{
+			"blockType": "minecraft:sulfur",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur",
+			"material": "minecraft:sulfur",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur",
+			"typed": "minecraft:sulfur"
+		},
+		{
+			"blockType": "minecraft:sulfur_brick_slab",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_brick_slab"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_brick_slab",
+			"material": "minecraft:sulfur_brick_slab",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_brick_slab",
+			"typed": "minecraft:sulfur_brick_slab"
+		},
+		{
+			"blockType": "minecraft:sulfur_brick_stairs",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_brick_stairs"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_brick_stairs",
+			"material": "minecraft:sulfur_brick_stairs",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_brick_stairs",
+			"typed": "minecraft:sulfur_brick_stairs"
+		},
+		{
+			"blockType": "minecraft:sulfur_brick_wall",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_brick_wall"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_brick_wall",
+			"material": "minecraft:sulfur_brick_wall",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_brick_wall",
+			"typed": "minecraft:sulfur_brick_wall"
+		},
+		{
+			"blockType": "minecraft:sulfur_bricks",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_bricks"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_bricks",
+			"material": "minecraft:sulfur_bricks",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_bricks",
+			"typed": "minecraft:sulfur_bricks"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_cube_bucket"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:bucket_entity_data",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_cube_bucket",
+			"material": "minecraft:sulfur_cube_bucket",
+			"maxDurability": 0,
+			"maxStackSize": 1,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.sulfur_cube_bucket",
+			"typed": "minecraft:sulfur_cube_bucket"
+		},
+		{
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_cube_spawn_egg"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:entity_data",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_cube_spawn_egg",
+			"material": "minecraft:sulfur_cube_spawn_egg",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "SpawnEggMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "item.minecraft.sulfur_cube_spawn_egg",
+			"typed": "minecraft:sulfur_cube_spawn_egg"
+		},
+		{
+			"blockType": "minecraft:sulfur_slab",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_slab"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_slab",
+			"material": "minecraft:sulfur_slab",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_slab",
+			"typed": "minecraft:sulfur_slab"
+		},
+		{
+			"blockType": "minecraft:sulfur_spike",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_spike"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_spike",
+			"material": "minecraft:sulfur_spike",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_spike",
+			"typed": "minecraft:sulfur_spike"
+		},
+		{
+			"blockType": "minecraft:sulfur_stairs",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_stairs"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_stairs",
+			"material": "minecraft:sulfur_stairs",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_stairs",
+			"typed": "minecraft:sulfur_stairs"
+		},
+		{
+			"blockType": "minecraft:sulfur_wall",
+			"burnDuration": 0,
+			"compostable": false,
+			"createItemStack": {
+				"amount": 1,
+				"type": "minecraft:sulfur_wall"
+			},
+			"creativeCategory": "BUILDING_BLOCKS",
+			"defaultDataTypes": [
+				"minecraft:attribute_modifiers",
+				"minecraft:break_sound",
+				"minecraft:enchantments",
+				"minecraft:item_model",
+				"minecraft:item_name",
+				"minecraft:lore",
+				"minecraft:max_stack_size",
+				"minecraft:rarity",
+				"minecraft:repair_cost",
+				"minecraft:swing_animation",
+				"minecraft:tooltip_display",
+				"minecraft:use_effects"
+			],
+			"edible": false,
+			"fuel": false,
+			"itemRarity": "COMMON",
+			"key": "minecraft:sulfur_wall",
+			"material": "minecraft:sulfur_wall",
+			"maxDurability": 0,
+			"maxStackSize": 64,
+			"metaClass": "ItemMeta",
+			"record": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"translationKey": "block.minecraft.sulfur_wall",
+			"typed": "minecraft:sulfur_wall"
+		},
+		{
 			"blockType": "minecraft:sunflower",
 			"burnDuration": 0,
 			"compostChance": "0.65F",
@@ -55670,7 +56848,7 @@
 			"material": "minecraft:white_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"
@@ -57005,7 +58183,7 @@
 			"material": "minecraft:yellow_bed",
 			"maxDurability": 0,
 			"maxStackSize": 1,
-			"metaClass": "BlockStateMeta",
+			"metaClass": "ItemMeta",
 			"record": false,
 			"requiredFeatures": [
 				"minecraft:vanilla"

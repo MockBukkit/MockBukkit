@@ -319,75 +319,81 @@
 			"translationKey": "biome.minecraft.stony_shore"
 		},
 		{
+			"key": "minecraft:sulfur_caves",
+			"name": "SULFUR_CAVES",
+			"ordinal": 53,
+			"translationKey": "biome.minecraft.sulfur_caves"
+		},
+		{
 			"key": "minecraft:sunflower_plains",
 			"name": "SUNFLOWER_PLAINS",
-			"ordinal": 53,
+			"ordinal": 54,
 			"translationKey": "biome.minecraft.sunflower_plains"
 		},
 		{
 			"key": "minecraft:swamp",
 			"name": "SWAMP",
-			"ordinal": 54,
+			"ordinal": 55,
 			"translationKey": "biome.minecraft.swamp"
 		},
 		{
 			"key": "minecraft:taiga",
 			"name": "TAIGA",
-			"ordinal": 55,
+			"ordinal": 56,
 			"translationKey": "biome.minecraft.taiga"
 		},
 		{
 			"key": "minecraft:the_end",
 			"name": "THE_END",
-			"ordinal": 56,
+			"ordinal": 57,
 			"translationKey": "biome.minecraft.the_end"
 		},
 		{
 			"key": "minecraft:the_void",
 			"name": "THE_VOID",
-			"ordinal": 57,
+			"ordinal": 58,
 			"translationKey": "biome.minecraft.the_void"
 		},
 		{
 			"key": "minecraft:warm_ocean",
 			"name": "WARM_OCEAN",
-			"ordinal": 58,
+			"ordinal": 59,
 			"translationKey": "biome.minecraft.warm_ocean"
 		},
 		{
 			"key": "minecraft:warped_forest",
 			"name": "WARPED_FOREST",
-			"ordinal": 59,
+			"ordinal": 60,
 			"translationKey": "biome.minecraft.warped_forest"
 		},
 		{
 			"key": "minecraft:windswept_forest",
 			"name": "WINDSWEPT_FOREST",
-			"ordinal": 60,
+			"ordinal": 61,
 			"translationKey": "biome.minecraft.windswept_forest"
 		},
 		{
 			"key": "minecraft:windswept_gravelly_hills",
 			"name": "WINDSWEPT_GRAVELLY_HILLS",
-			"ordinal": 61,
+			"ordinal": 62,
 			"translationKey": "biome.minecraft.windswept_gravelly_hills"
 		},
 		{
 			"key": "minecraft:windswept_hills",
 			"name": "WINDSWEPT_HILLS",
-			"ordinal": 62,
+			"ordinal": 63,
 			"translationKey": "biome.minecraft.windswept_hills"
 		},
 		{
 			"key": "minecraft:windswept_savanna",
 			"name": "WINDSWEPT_SAVANNA",
-			"ordinal": 63,
+			"ordinal": 64,
 			"translationKey": "biome.minecraft.windswept_savanna"
 		},
 		{
 			"key": "minecraft:wooded_badlands",
 			"name": "WOODED_BADLANDS",
-			"ordinal": 64,
+			"ordinal": 65,
 			"translationKey": "biome.minecraft.wooded_badlands"
 		}
 	]

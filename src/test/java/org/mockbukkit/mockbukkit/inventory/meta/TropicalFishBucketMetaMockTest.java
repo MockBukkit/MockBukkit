@@ -60,18 +60,9 @@ class TropicalFishBucketMetaMockTest
 	}
 
 	@Test
-	void checkVars_CorrectDefaults()
-	{
-		meta.checkVars();
-		assertEquals(DyeColor.WHITE, meta.getPatternColor());
-		assertEquals(DyeColor.WHITE, meta.getBodyColor());
-		assertEquals(TropicalFish.Pattern.KOB, meta.getPattern());
-	}
-
-	@Test
 	void getPatternColor_NullVariant_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> meta.getPatternColor());
+		assertThrowsExactly(IllegalStateException.class, () -> meta.getPatternColor());
 	}
 
 	@Test
@@ -85,7 +76,7 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void getBodyColor_NullVariant_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> meta.getBodyColor());
+		assertThrowsExactly(IllegalStateException.class, () -> meta.getBodyColor());
 	}
 
 	@Test
@@ -99,7 +90,7 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void getPattern_NullVariant_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> meta.getPattern());
+		assertThrowsExactly(IllegalStateException.class, () -> meta.getPattern());
 	}
 
 	@Test
@@ -108,20 +99,6 @@ class TropicalFishBucketMetaMockTest
 		meta.setPattern(TropicalFish.Pattern.BETTY);
 
 		assertEquals(TropicalFish.Pattern.BETTY, meta.getPattern());
-	}
-
-	@Test
-	void equals_SameInstance_True()
-	{
-		meta.checkVars();
-		assertEquals(meta, meta);
-	}
-
-	@Test
-	void equals_DifferentObjects_SameValues_True()
-	{
-		meta.checkVars();
-		assertEquals(meta, meta.clone());
 	}
 
 	@Test
@@ -144,6 +121,17 @@ class TropicalFishBucketMetaMockTest
 		assertEquals(DyeColor.CYAN, otherMeta.getPatternColor());
 		assertEquals(DyeColor.MAGENTA, otherMeta.getBodyColor());
 		assertEquals(TropicalFish.Pattern.BETTY, otherMeta.getPattern());
+	}
+
+	@Test
+	void clone_PartialState_PreservesAbsence()
+	{
+		meta.setBodyColor(DyeColor.RED);
+		TropicalFishBucketMetaMock clone = meta.clone();
+
+		assertTrue(clone.hasBodyColor());
+		assertFalse(clone.hasPattern());
+		assertEquals(meta, clone);
 	}
 
 }

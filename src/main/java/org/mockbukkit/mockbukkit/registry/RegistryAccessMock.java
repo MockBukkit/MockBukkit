@@ -134,7 +134,8 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.POINT_OF_INTEREST_TYPE,
 				RegistryKey.MEMORY_MODULE_TYPE,
 				RegistryKey.GAME_RULE,
-				RegistryKey.ZOMBIE_NAUTILUS_VARIANT
+				RegistryKey.ZOMBIE_NAUTILUS_VARIANT,
+				RegistryKey.SULFUR_CUBE_ARCHETYPE
 		);
 	}
 

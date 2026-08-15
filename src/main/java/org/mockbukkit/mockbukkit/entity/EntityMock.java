@@ -5,7 +5,9 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.entity.LookAnchor;
+import io.papermc.paper.entity.RemovalReason;
 import io.papermc.paper.entity.TeleportFlag;
+import io.papermc.paper.math.Angle;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -17,6 +19,7 @@ import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
@@ -52,6 +55,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
@@ -1239,6 +1243,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public void setRotation(@NotNull Angle yaw, @NotNull Angle pitch)
+	{
+		NumberConversions.checkFinite(yaw.degrees(), "yaw not finite");
+		NumberConversions.checkFinite(pitch.degrees(), "pitch not finite");
+
+		float yawValue = yaw.relative() ? location.getYaw() + yaw.degrees() : yaw.degrees();
+		float pitchValue = pitch.relative() ? location.getPitch() + pitch.degrees() : pitch.degrees();
+
+		location.setYaw(Location.normalizeYaw(yawValue));
+		location.setPitch(Location.normalizePitch(pitchValue));
+	}
+
+	@Override
 	public @NotNull BoundingBox getBoundingBox()
 	{
 		double halfWidth = getWidth() / 2.0D;
@@ -1588,6 +1605,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public @NotNull SoundCategory getSoundCategory()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public net.kyori.adventure.sound.Sound.@NonNull Source soundSource()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ItemStack getPickItemStack()
 	{
 		throw new UnimplementedOperationException();
@@ -1599,6 +1630,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			++ticksLived;
 		}
+	}
+
+	@Override
+	public EntityRemoveEvent.@Nullable Cause getRemoveEventCause()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RemovalReason getRemovalReason()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

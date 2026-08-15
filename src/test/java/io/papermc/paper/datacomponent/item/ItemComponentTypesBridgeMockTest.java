@@ -537,4 +537,38 @@ class ItemComponentTypesBridgeMockTest
 
 	}
 
+	@Nested
+	class SulfurCubeContentTest
+	{
+
+		@Test
+		void givenNullItemStack()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bridge.sulfurCubeContent(null));
+			assertEquals("absorbedItem cannot be null", e.getMessage());
+		}
+
+		@Test
+		void givenEmptyItemStack()
+		{
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bridge.sulfurCubeContent(ItemStack.empty()));
+			assertEquals("absorbedItem cannot be empty", e.getMessage());
+		}
+
+		@Test
+		void givenValidItemStack()
+		{
+			ItemStack itemStack = ItemStack.of(Material.DIAMOND_BLOCK, 64);
+
+			SulfurCubeContent actual = bridge.sulfurCubeContent(itemStack);
+
+			assertNotNull(actual);
+
+			ItemStack actualItem = actual.absorbedItem();
+			assertEquals(Material.DIAMOND_BLOCK, actualItem.getType());
+			assertEquals(1, actualItem.getAmount());
+		}
+
+	}
+
 }

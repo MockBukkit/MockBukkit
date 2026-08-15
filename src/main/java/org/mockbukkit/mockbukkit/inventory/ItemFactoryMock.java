@@ -115,8 +115,10 @@ public class ItemFactoryMock implements ItemFactory
 				}
 			}
 
-			throw new NoSuchMethodException(
-					"Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
+			throw new NoSuchMethodException(String.format(
+					"Cannot find constructor in class \"%s\" applicable to argument \"%s\"",
+					target.getName(), meta.getClass().getName()
+			));
 		}
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
 			   | NoSuchMethodException e)

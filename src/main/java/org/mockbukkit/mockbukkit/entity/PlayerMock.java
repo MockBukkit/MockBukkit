@@ -12,16 +12,13 @@ import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
-import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
@@ -126,6 +123,7 @@ import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
 import org.mockbukkit.mockbukkit.statistic.StatisticsMock;
+import org.mockbukkit.mockbukkit.util.BungeeComponentUtils;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetAddress;
@@ -368,6 +366,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @NotNull EntityType getType()
 	{
 		return EntityType.PLAYER;
+	}
+
+	@Override
+	public @NotNull SoundCategory getSoundCategory()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -1026,8 +1031,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
-	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	public void sendMessage(@NotNull Component message)
 	{
 		Preconditions.checkNotNull(message, "input");
 		this.messages.add(message);
@@ -1324,6 +1328,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @NotNull TriState hasFlyingFallDamage()
 	{
 		return this.flyingFallDamage;
+	}
+
+	@Override
+	public void resetFlyingTicks()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1630,16 +1641,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void setPlayerListHeaderFooter(BaseComponent @NotNull [] header, BaseComponent @NotNull [] footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListHeader = BungeeComponentUtils.deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListFooter = BungeeComponentUtils.deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ header });
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ footer });
+		this.playerListHeader = BungeeComponentUtils.deserialize(new BaseComponent[]{ header });
+		this.playerListFooter = BungeeComponentUtils.deserialize(new BaseComponent[]{ footer });
 	}
 
 	@Override
@@ -3263,6 +3274,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public net.kyori.adventure.sound.Sound.Source soundSource()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Mock implementation of a {@link Player.Spigot}.
 	 */
@@ -3324,10 +3342,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			Preconditions.checkNotNull(position, "Position must not be null");
 			Preconditions.checkNotNull(components, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			Component comp = BungeeComponentUtils.deserialize(components);
 			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
 			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
-			PlayerMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
+			PlayerMock.this.sendMessage(comp);
 		}
 
 	}
@@ -3373,6 +3391,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@ApiStatus.Experimental
 	public PlayerGameConnection getConnection()
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void unsetFixedPose()
+	{
+		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

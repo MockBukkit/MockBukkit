@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -133,6 +134,30 @@ class VexMockTest
 
 			vex.setSummoner(null);
 			assertNull(vex.getSummoner());
+		}
+
+	}
+
+	@Nested
+	class SetOwner
+	{
+
+		@Test
+		void givenDefaultValue()
+		{
+			assertNull(vex.getOwner());
+		}
+
+		@Test
+		void givenChangeInValue()
+		{
+			LivingEntity owner = new IllusionerMock(server, UUID.randomUUID());
+
+			vex.setOwner(owner);
+			assertEquals(owner, vex.getOwner());
+
+			vex.setOwner(null);
+			assertNull(vex.getOwner());
 		}
 
 	}

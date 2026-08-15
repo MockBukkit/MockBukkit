@@ -340,6 +340,14 @@
 			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
 			"deathMessageType": "DEFAULT",
 			"exhaustion": 0.1,
+			"key": "minecraft:sulfur_cube_hot",
+			"sound": "minecraft:entity.player.hurt_on_fire",
+			"translationKey": "sulfurCubeHot"
+		},
+		{
+			"damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+			"deathMessageType": "DEFAULT",
+			"exhaustion": 0.1,
 			"key": "minecraft:sweet_berry_bush",
 			"sound": "minecraft:entity.player.hurt_sweet_berry_bush",
 			"translationKey": "sweetBerryBush"

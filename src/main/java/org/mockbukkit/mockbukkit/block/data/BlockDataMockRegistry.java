@@ -12,11 +12,11 @@ import com.google.gson.reflect.TypeToken;
 import org.bukkit.Material;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Type;
 import java.util.Map;
 
