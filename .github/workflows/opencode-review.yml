@@ -83,6 +83,10 @@ jobs:
         with:
           # refs/pull/N/head resolves for fork PRs too, unlike the head SHA.
           ref: refs/pull/${{ env.PR_NUMBER }}/head
+          # The opencode action runs its own authenticated `git fetch`. If checkout
+          # leaves its credential in .git/config as an http.extraheader, both are
+          # sent and GitHub rejects the request: `Duplicate header: "Authorization"`.
+          persist-credentials: false
 
       - name: Set up JDK 25
         if: steps.pr.outputs.count != '0'
@@ -158,6 +162,10 @@ jobs:
           model: openrouter/deepseek/deepseek-v4-flash
           agent: paper-parity
           mentions: "/parity"
+          # Defaults to true on public repos. The session transcript would include
+          # the Paper sources the agent reads, so sharing it would publish
+          # Mojang-derived code. Keep it off.
+          share: "false"
           # Explicit task, so the label-triggered path works too -- on a
           # pull_request event there is no comment for the action to read.
           prompt: "Perform the Paper parity review described in your agent instructions."
