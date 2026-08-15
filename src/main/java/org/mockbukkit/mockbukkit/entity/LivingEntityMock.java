@@ -306,6 +306,20 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	/**
+	 * Simulate damage to this entity and throw an event, stating what caused it.
+	 *
+	 * @param amount The amount of damage to be done.
+	 * @param source The damage source.
+	 * @param cause  The cause to report on the event.
+	 * @return The EntityDamageEvent that got thrown.
+	 */
+	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source,
+			EntityDamageEvent.@NotNull DamageCause cause)
+	{
+		return new LivingEntitySimulation(this).simulateDamage(amount, source, cause);
+	}
+
+	/**
 	 * Simulate damage to this entity and throw an event
 	 *
 	 * @param amount <p>The amount of damage to be done</p>
