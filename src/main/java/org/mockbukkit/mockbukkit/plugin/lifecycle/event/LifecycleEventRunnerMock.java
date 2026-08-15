@@ -72,7 +72,27 @@ public class LifecycleEventRunnerMock
 
 	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType, final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause)
 	{
-		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType, new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), ownerClass::isInstance);
+		callReloadableRegistrarEvent(lifecycleEventType, registrar, ownerClass, cause, owner -> true);
+	}
+
+	/**
+	 * Fires a reloadable registrar event for the owners matching {@code ownerFilter} only.
+	 * <p>
+	 * Handlers are kept in a plain list with no record of having run, so firing for every owner a second time
+	 * would re-run side effects that already happened. Filtering to the plugin that just enabled keeps each
+	 * handler to exactly one run.
+	 *
+	 * @param lifecycleEventType The event type to fire.
+	 * @param registrar          The registrar handed to each handler.
+	 * @param ownerClass         The owner type this event is scoped to.
+	 * @param cause              Why the event is being fired.
+	 * @param ownerFilter        Which of those owners should have their handlers run.
+	 * @param <O>                The owner type.
+	 * @param <R>                The registrar type.
+	 */
+	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType, final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause, final Predicate<? super O> ownerFilter)
+	{
+		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType, new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), owner -> ownerClass.isInstance(owner) && ownerFilter.test(owner));
 	}
 
 	public <O extends LifecycleEventOwner, E extends PaperLifecycleEventMock> void callEvent(LifecycleEventType<O, ? super E, ?> eventType, E event, Predicate<? super O> ownerPredicate)

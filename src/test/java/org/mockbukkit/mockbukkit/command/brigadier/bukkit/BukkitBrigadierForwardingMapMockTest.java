@@ -132,8 +132,6 @@ class BukkitBrigadierForwardingMapMockTest
 						)
 				)
 		).build();
-		// Current implementation initializes before the first command is dispatched
-		serverMock.dispatchCommand(serverMock.getConsoleSender(), "ignored");
 		// plugin prefix and alias mutates on this, therefore 4
 		assertEquals(initial + 4, map.size());
 		assertFalse(map.isEmpty());
