@@ -18,6 +18,7 @@ public class DisplayMock extends EntityMock implements Display
 {
 
 	private Matrix4f transformationMatrix;
+	private @NotNull Billboard billboard = Billboard.FIXED;
 	private int interpolationDuration = 0;
 	private int teleportDuration = 0;
 	private float viewRange = 1.0f;
@@ -179,13 +180,14 @@ public class DisplayMock extends EntityMock implements Display
 	@Override
 	public @NotNull Billboard getBillboard()
 	{
-		throw new UnimplementedOperationException();
+		return this.billboard;
 	}
 
 	@Override
 	public void setBillboard(@NotNull Billboard billboard)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(billboard != null, "Billboard cannot be null");
+		this.billboard = billboard;
 	}
 
 	@Override

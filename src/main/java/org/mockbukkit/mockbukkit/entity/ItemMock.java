@@ -24,6 +24,8 @@ public class ItemMock extends EntityMock implements Item
 
 	// The default pickup delay
 	private int delay = 10;
+	private boolean unlimitedLifetime = false;
+	private @Nullable UUID thrower;
 	private TriState frictionState = TriState.NOT_SET;
 
 	/**
@@ -76,15 +78,13 @@ public class ItemMock extends EntityMock implements Item
 	@Override
 	public void setUnlimitedLifetime(boolean unlimited)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.unlimitedLifetime = unlimited;
 	}
 
 	@Override
 	public boolean isUnlimitedLifetime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unlimitedLifetime;
 	}
 
 	@Override
@@ -104,15 +104,13 @@ public class ItemMock extends EntityMock implements Item
 	@Override
 	public void setThrower(@Nullable UUID thrower)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.thrower = thrower;
 	}
 
 	@Override
 	public @Nullable UUID getThrower()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.thrower;
 	}
 
 	@Override

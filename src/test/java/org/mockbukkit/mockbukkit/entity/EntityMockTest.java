@@ -1568,4 +1568,21 @@ class EntityMockTest
 		assertEquals(entity.getUniqueId().toString(), actual);
 	}
 
+
+	@Test
+	void isVisibleByDefault_defaultsToTrue()
+	{
+		assertTrue(entity.isVisibleByDefault());
+	}
+
+	@Test
+	void setVisibleByDefault_isRetained()
+	{
+		entity.setVisibleByDefault(false);
+		assertFalse(entity.isVisibleByDefault());
+
+		entity.setVisibleByDefault(true);
+		assertTrue(entity.isVisibleByDefault());
+	}
+
 }
