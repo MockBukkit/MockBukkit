@@ -935,4 +935,21 @@ class LivingEntityMockTest
 		assertDoesNotThrow(() -> livingEntity.setActiveItemRemainingTime(10));
 	}
 
+
+	@Test
+	void getRemoveWhenFarAway_defaultsToTrue()
+	{
+		assertTrue(livingEntity.getRemoveWhenFarAway());
+	}
+
+	@Test
+	void setRemoveWhenFarAway_isRetained()
+	{
+		livingEntity.setRemoveWhenFarAway(false);
+		assertFalse(livingEntity.getRemoveWhenFarAway());
+
+		livingEntity.setRemoveWhenFarAway(true);
+		assertTrue(livingEntity.getRemoveWhenFarAway());
+	}
+
 }

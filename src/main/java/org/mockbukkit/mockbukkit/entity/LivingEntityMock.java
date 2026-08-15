@@ -86,6 +86,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 * How much health the entity has.
 	 */
 	protected double health;
+	private boolean removeWhenFarAway = true;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	/**
@@ -870,15 +871,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.removeWhenFarAway;
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.removeWhenFarAway = remove;
 	}
 
 	@Nullable

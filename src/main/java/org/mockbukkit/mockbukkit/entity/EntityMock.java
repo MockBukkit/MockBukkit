@@ -92,6 +92,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
 	private final Set<String> tags = Sets.newHashSet();
+	private boolean visibleByDefault = true;
 	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
 	private final int id;
@@ -1496,15 +1497,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setVisibleByDefault(boolean visible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.visibleByDefault = visible;
 	}
 
 	@Override
 	public boolean isVisibleByDefault()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.visibleByDefault;
 	}
 
 	@Override

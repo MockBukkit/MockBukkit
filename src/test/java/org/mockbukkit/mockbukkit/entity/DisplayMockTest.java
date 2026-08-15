@@ -186,4 +186,24 @@ class DisplayMockTest
 		assertEquals(brightness, display.getBrightness());
 	}
 
+
+	@Test
+	void getBillboard_defaultsToFixed()
+	{
+		assertEquals(Display.Billboard.FIXED, display.getBillboard());
+	}
+
+	@Test
+	void setBillboard_isRetained()
+	{
+		display.setBillboard(Display.Billboard.CENTER);
+		assertEquals(Display.Billboard.CENTER, display.getBillboard());
+	}
+
+	@Test
+	void setBillboard_null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> display.setBillboard(null));
+	}
+
 }

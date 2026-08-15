@@ -17,7 +17,10 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class ItemMockTest
@@ -128,6 +131,49 @@ class ItemMockTest
 		Item entity = world.dropItem(location, item);
 
 		assertThrows(NullPointerException.class, () -> entity.setFrictionState(null));
+	}
+
+
+	@Test
+	void isUnlimitedLifetime_defaultsToFalse()
+	{
+		assertFalse(makeItem().isUnlimitedLifetime());
+	}
+
+	@Test
+	void setUnlimitedLifetime_isRetained()
+	{
+		Item item = makeItem();
+
+		item.setUnlimitedLifetime(true);
+		assertTrue(item.isUnlimitedLifetime());
+
+		item.setUnlimitedLifetime(false);
+		assertFalse(item.isUnlimitedLifetime());
+	}
+
+	@Test
+	void getThrower_defaultsToNull()
+	{
+		assertNull(makeItem().getThrower());
+	}
+
+	@Test
+	void setThrower_isRetained()
+	{
+		Item item = makeItem();
+		UUID thrower = UUID.randomUUID();
+
+		item.setThrower(thrower);
+		assertEquals(thrower, item.getThrower());
+
+		item.setThrower(null);
+		assertNull(item.getThrower());
+	}
+
+	private Item makeItem()
+	{
+		return new ItemMock(server, UUID.randomUUID(), new ItemStackMock(Material.STONE));
 	}
 
 }
