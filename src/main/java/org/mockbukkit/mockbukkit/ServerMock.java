@@ -152,6 +152,7 @@ import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
+import org.mockbukkit.mockbukkit.scheduler.ClockMock;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaGlobalRegionScheduler;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaRegionScheduler;
@@ -2916,6 +2917,17 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ServerConfiguration getServerConfiguration()
 	{
 		return this.serverConfiguration;
+	}
+
+	/**
+	 * The server clock. Plugin code that measures elapsed time can read this instead of the wall clock, so a test can
+	 * hold time still, advance it deliberately, or let {@link BukkitSchedulerMock#performTicks(long)} move it.
+	 *
+	 * @return The server clock.
+	 */
+	public @NotNull ClockMock getClock()
+	{
+		return this.scheduler.getClock();
 	}
 
 }
