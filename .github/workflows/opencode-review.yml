@@ -4,13 +4,15 @@ name: OpenCode Paper Parity Review
 #
 # It builds the real Paper server sources for the exact version this repo targets
 # (via paperweight-userdev) and asks an agent whether the changed mocks actually
-# behave like the real implementation. It only ever posts a comment -- there is no
-# write token and no push step, so it cannot modify the pull request.
+# behave like the real implementation.
 #
-# Runs from the default branch (issue_comment), so it has access to secrets even
-# when the pull request comes from a fork. That is also why it is gated to people
-# who can already push to this repository: the job checks out and builds the pull
-# request's code, which means running its Gradle scripts.
+# The agent is read-only: `.opencode/agents/paper-parity.md` denies `edit`, and
+# nothing in this job pushes. It reports findings as review comments only.
+#
+# Runs from the default branch (issue_comment), so secrets are available even when
+# the pull request comes from a fork. That is also why it is gated to people who can
+# already push here: the job checks out and builds the pull request's code, which
+# means executing its Gradle scripts.
 
 on:
   issue_comment:
@@ -19,6 +21,8 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  # Required for the OpenCode App's OIDC token exchange.
+  id-token: write
 
 concurrency:
   group: oc-review-${{ github.event.issue.number }}
@@ -42,7 +46,7 @@ jobs:
             "repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }}/reactions" \
             -f content=eyes --silent || true
 
-      - name: Resolve pull request
+      - name: Collect changed files
         id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,7 +58,7 @@ jobs:
           grep -E '^src/.*\.java$' /tmp/changed-all.txt > /tmp/changed.txt || true
           echo "count=$(wc -l < /tmp/changed.txt)" >> "$GITHUB_OUTPUT"
 
-      - name: Skip when no Java changed
+      - name: Report nothing to review
         if: steps.pr.outputs.count == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -79,8 +83,8 @@ jobs:
         if: steps.pr.outputs.count != '0'
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
         with:
-          # The paperweight caches contain Mojang-derived artifacts (the mojang-mapped
-          # server jar and the applied sources). Those must not end up in a shared,
+          # The paperweight caches hold Mojang-derived artifacts (the mojang-mapped
+          # server jar and the applied sources). Those must not land in a shared,
           # restorable Actions cache -- regenerating takes about a minute anyway.
           cache-disabled: true
 
@@ -88,9 +92,8 @@ jobs:
         if: steps.pr.outputs.count != '0'
         run: ./gradlew :metaminer:paperweightUserdevSetup
 
-      - name: Extract Paper sources
+      - name: Stage Paper sources and change list
         if: steps.pr.outputs.count != '0'
-        id: paper
         run: |
           set -euo pipefail
           # TODO: paperweight only writes this to a content-hashed cache directory.
@@ -100,51 +103,19 @@ jobs:
             echo "::error::Could not locate the paperweight output jar."
             exit 1
           fi
-          DEST="$RUNNER_TEMP/paper-src"
-          mkdir -p "$DEST"
+          # Extract into the workspace so the agent has a stable, relative path.
           # Sources only -- the .class files are dead weight for a reading agent.
-          unzip -q "$JAR" '*.java' -d "$DEST"
-          echo "Extracted $(find "$DEST" -name '*.java' | wc -l) sources from $JAR"
-          echo "dir=$DEST" >> "$GITHUB_OUTPUT"
+          mkdir -p .paper-ref
+          unzip -q "$JAR" '*.java' -d .paper-ref
+          cp /tmp/changed.txt .oc-changed-files.txt
+          echo "Staged $(find .paper-ref -name '*.java' | wc -l) Paper sources from $JAR"
 
-      - name: Install OpenCode
+      - name: Parity review
         if: steps.pr.outputs.count != '0'
-        run: |
-          curl -fsSL https://opencode.ai/install | bash
-          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
-
-      - name: Run parity review
-        if: steps.pr.outputs.count != '0'
+        uses: anomalyco/opencode/github@31406ccc51b4bd2a4e1e086b2bcaa5f7f804f26d # v1.18.18
         env:
-          # Deliberately no GH_TOKEN in this step: the agent gets no credentials
-          # and no way to reach the pull request.
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          PAPER_SRC: ${{ steps.paper.outputs.dir }}
-        run: |
-          set -euo pipefail
-          PROMPT="$(sed -e "s#__PAPER_SRC__#$PAPER_SRC#g" .github/opencode/paper-parity-prompt.md)"
-          PROMPT="$PROMPT
-
-          ## Changed files in this pull request
-
-          $(cat /tmp/changed.txt)"
-          opencode run --model deepseek/deepseek-v4-flash "$PROMPT" > /tmp/findings.md
-          echo "--- findings ---"
-          head -40 /tmp/findings.md
-
-      - name: Post findings
-        if: steps.pr.outputs.count != '0'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          BODY=/tmp/comment.md
-          {
-            echo "## 🐙 Paper parity review"
-            echo
-            echo "_Checked against real Paper sources for \`$(grep -oP 'paper\.api\.full-version=\K.*' gradle.properties)\`._"
-            echo
-            # PR comments cap out at 65536 characters.
-            head -c 60000 /tmp/findings.md
-          } > "$BODY"
-          gh pr comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" --body-file "$BODY"
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        with:
+          model: openrouter/deepseek/deepseek-v4-flash
+          agent: paper-parity
+          mentions: "/oc review"
