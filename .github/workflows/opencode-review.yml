@@ -107,26 +107,37 @@ jobs:
       - name: Stage Paper sources and change list
         if: steps.pr.outputs.count != '0'
         run: |
-          set -euo pipefail
+          # No pipefail here on purpose: `unzip -l | grep -q` exits early by design,
+          # which SIGPIPEs unzip and would make every content check evaluate false.
+          set -eu
           GUH="${GRADLE_USER_HOME:-$HOME/.gradle}"
 
-          # paperweight writes its output to a content-hashed cache path whose layout
-          # is not contractual, so identify the artifact by what's inside it rather
-          # than by where it sits: the one jar carrying CraftBukkit sources.
+          # paperweight copies the applied sources into a project-local task cache.
+          # Prefer that known path; fall back to identifying the artifact by its
+          # contents if the layout ever moves, since it isn't contractual.
           JAR=""
-          while IFS= read -r candidate; do
-            if unzip -l "$candidate" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
-              JAR="$candidate"
-              break
-            fi
-          done < <(find "$GUH/caches/paperweight-userdev" .gradle -name '*.jar' -size +1M 2>/dev/null | xargs -r ls -t 2>/dev/null)
+          KNOWN=metaminer/.gradle/caches/paperweight/taskCache/mappedServerJar.jar
+          if [ -f "$KNOWN" ] && unzip -l "$KNOWN" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+            JAR="$KNOWN"
+          fi
 
           if [ -z "$JAR" ]; then
-            echo "::error::Could not locate a paperweight jar containing CraftBukkit sources."
-            echo "Searched under $GUH/caches/paperweight-userdev and .gradle -- contents:"
-            find "$GUH/caches/paperweight-userdev" -maxdepth 3 2>/dev/null | head -40 || echo "  (no paperweight-userdev cache at all)"
+            echo "Known path missed; searching. Cache roots:"
+            ls -1 "$GUH/caches" 2>/dev/null | head -20 || echo "  (no $GUH/caches)"
+            find "$GUH" . -name '*.jar' -size +5M 2>/dev/null | head -30 || true
+            while IFS= read -r candidate; do
+              if unzip -l "$candidate" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+                JAR="$candidate"
+                break
+              fi
+            done < <(find "$GUH" . -name '*.jar' -size +5M 2>/dev/null | xargs -r ls -t 2>/dev/null)
+          fi
+
+          if [ -z "$JAR" ]; then
+            echo "::error::No jar containing CraftBukkit sources found. See the listing above."
             exit 1
           fi
+          echo "Using $JAR"
           # Extract into the workspace so the agent has a stable, relative path.
           # Sources only -- the .class files are dead weight for a reading agent.
           mkdir -p .paper-ref
