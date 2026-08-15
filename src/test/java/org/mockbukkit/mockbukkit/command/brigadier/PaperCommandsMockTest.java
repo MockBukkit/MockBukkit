@@ -20,6 +20,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @ExtendWith(MockBukkitExtension.class)
 class PaperCommandsMockTest
@@ -76,6 +80,51 @@ class PaperCommandsMockTest
 	BasicCommand createBasicCommand()
 	{
 		return (commandSourceStack, args) -> arguments = Arrays.asList((Object[]) args);
+	}
+
+
+	@Test
+	void restrictedNodeLoadsAndStaysExecutable()
+	{
+		AtomicBoolean ran = new AtomicBoolean(false);
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("restricted_command")
+								.requires(Commands.restricted(source -> true))
+								.executes(context ->
+								{
+									ran.set(true);
+									return com.mojang.brigadier.Command.SINGLE_SUCCESS;
+								}).build()))).build();
+
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "restricted_command");
+
+		assertTrue(ran.get());
+	}
+
+	@Test
+	void restrictedNodeIsRefusedWhenThePredicateFails()
+	{
+		AtomicBoolean ran = new AtomicBoolean(false);
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("denied_command")
+								.requires(Commands.restricted(source -> false))
+								.executes(context ->
+								{
+									ran.set(true);
+									return com.mojang.brigadier.Command.SINGLE_SUCCESS;
+								}).build()))).build();
+
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "denied_command");
+
+		assertFalse(ran.get());
+	}
+
+	@Test
+	void restrictedRejectsANullPredicate()
+	{
+		assertThrows(IllegalArgumentException.class, () -> Commands.restricted(null));
 	}
 
 }

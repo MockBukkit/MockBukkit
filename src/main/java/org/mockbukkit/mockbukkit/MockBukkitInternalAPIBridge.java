@@ -76,7 +76,11 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	@Override
 	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(predicate != null, "Predicate cannot be null");
+		// Paper wraps the predicate so the node is not sent to clients that fail it, while staying executable
+		// by senders that pass. There is no client to withhold it from here, so the predicate is returned as
+		// given: execution is gated correctly, and the hiding half is a no-op.
+		return predicate;
 	}
 
 	@Override
