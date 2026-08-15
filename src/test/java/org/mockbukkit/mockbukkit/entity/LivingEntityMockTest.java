@@ -939,6 +939,60 @@ class LivingEntityMockTest
 
 
 	@Test
+	void killCredit_ClearingTheDamageCauseIsAccepted()
+	{
+		PlayerMock attacker = server.addPlayer();
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build(), 1.0));
+
+		livingEntity.setLastDamageCause(null);
+		livingEntity.setHealth(0);
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void killCredit_LapsesAfterTheWindow()
+	{
+		PlayerMock attacker = server.addPlayer();
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build(), 1.0));
+
+		server.getScheduler().performTicks(101);
+		livingEntity.setHealth(0);
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void killCredit_SurvivesInsideTheWindow()
+	{
+		PlayerMock attacker = server.addPlayer();
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build(), 1.0));
+
+		server.getScheduler().performTicks(99);
+		livingEntity.setHealth(0);
+
+		assertEquals(attacker, livingEntity.getKiller());
+	}
+
+	@Test
+	void killCredit_NeverDamagedByAPlayer()
+	{
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.GENERIC).build(), 1.0));
+
+		livingEntity.setHealth(0);
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
 	void setHealthZero_NoLastDamage_LeavesKillerUnset()
 	{
 		livingEntity.setHealth(0);

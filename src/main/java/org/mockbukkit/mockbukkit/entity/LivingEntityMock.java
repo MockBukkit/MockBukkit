@@ -140,6 +140,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Getter
 	@Setter
 	private @Nullable Player killer;
+	private static final long KILL_CREDIT_TICKS = 100;
+	private long lastPlayerDamageTick = Long.MIN_VALUE;
 
 	private final Map<PotionEffectType, PriorityQueue<ActivePotionEffect>> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
@@ -191,17 +193,40 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return !isDead();
 	}
 
+	@Override
+	public void setLastDamageCause(@Nullable EntityDamageEvent event)
+	{
+		super.setLastDamageCause(event);
+		if (event != null && attributeToPlayer(event) != null)
+		{
+			this.lastPlayerDamageTick = currentTick();
+		}
+	}
+
+	private long currentTick()
+	{
+		return this.server.getScheduler().getCurrentTick();
+	}
+
 	/**
-	 * Works out which player, if any, should be credited with this entity's death, following the same order
-	 * {@code CraftLivingEntity} uses: the entity that dealt the damage directly, then the entity that caused it, then
-	 * the shooter behind a projectile. Checking only the direct entity would miss every indirect kill, so an arrow
-	 * fired by a player would leave the killer unset here while setting it on a real server.
+	 * Works out which player, if any, should be credited with this entity's death.
+	 * <p>
+	 * Credit lapses: vanilla stops crediting once the last player damage is more than {@value #KILL_CREDIT_TICKS}
+	 * ticks old, so an entity that wanders off and dies of something else later is nobody's kill.
 	 *
-	 * @return the player to credit, or null if the last damage cannot be traced back to one.
+	 * @return the player to credit, or null if there is none or the credit has lapsed.
 	 */
 	private @Nullable Player deriveKiller()
 	{
-		EntityDamageEvent lastDamage = getLastDamageCause();
+		if (currentTick() - this.lastPlayerDamageTick > KILL_CREDIT_TICKS)
+		{
+			return null;
+		}
+		return attributeToPlayer(getLastDamageCause());
+	}
+
+	private static @Nullable Player attributeToPlayer(@Nullable EntityDamageEvent lastDamage)
+	{
 		if (lastDamage == null)
 		{
 			return null;
