@@ -1,6 +1,9 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import net.kyori.adventure.util.TriState;
+import org.bukkit.FluidCollisionMode;
+import org.bukkit.Material;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
@@ -71,6 +74,34 @@ class LivingEntityMockTest
 	private ServerMock server;
 	@MockBukkitInject
 	private CowMock livingEntity;
+
+	@Test
+	void rayTraceBlocks_FromTheEye()
+	{
+		WorldMock world = server.addSimpleWorld("eye-trace");
+		Location at = new Location(world, 0.5, 100, 0.5);
+		at.setDirection(new Vector(1, 0, 0));
+		livingEntity.setLocation(at);
+		world.getBlockAt(4, (int) livingEntity.getEyeLocation().getY(), 0).setType(Material.STONE);
+
+		RayTraceResult result = livingEntity.rayTraceBlocks(10);
+
+		assertNotNull(result);
+		assertEquals(Material.STONE, result.getHitBlock().getType());
+	}
+
+	@Test
+	void rayTraceBlocks_FromTheEyeThroughWater()
+	{
+		WorldMock world = server.addSimpleWorld("eye-trace-water");
+		Location at = new Location(world, 0.5, 100, 0.5);
+		at.setDirection(new Vector(1, 0, 0));
+		livingEntity.setLocation(at);
+		world.getBlockAt(4, (int) livingEntity.getEyeLocation().getY(), 0).setType(Material.WATER);
+
+		assertNull(livingEntity.rayTraceBlocks(10, FluidCollisionMode.NEVER));
+		assertNotNull(livingEntity.rayTraceBlocks(10, FluidCollisionMode.ALWAYS));
+	}
 
 	@Test
 	void testIsJumpingDefault()

@@ -597,8 +597,9 @@ public class BlockMock implements Block
 	@Override
 	public boolean isPassable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// A block is passable when it has no collision box -- air, liquids, plants, torches and the like.
+		// Material#isSolid already carries that distinction, so there is nothing to tabulate here.
+		return !this.material.isSolid();
 	}
 
 	@Override
