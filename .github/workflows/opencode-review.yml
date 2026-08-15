@@ -159,7 +159,7 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         with:
-          model: openrouter/deepseek/deepseek-v4-flash
+          model: openrouter/deepseek/deepseek-v4-flash-0731
           agent: paper-parity
           mentions: "/parity"
           # Defaults to true on public repos. The session transcript would include
