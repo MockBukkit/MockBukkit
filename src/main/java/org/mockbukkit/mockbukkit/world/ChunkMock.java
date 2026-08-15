@@ -90,20 +90,13 @@ public class ChunkMock implements Chunk
 		List<BlockState> tileEntities = new ArrayList<>();
 		for (Map.Entry<Coordinate, BlockMock> entry : worldMock.getCreatedBlocks().entrySet())
 		{
-			Coordinate coordinate = entry.getKey();
-			if ((coordinate.x >> 4) != this.x || (coordinate.z >> 4) != this.z)
+			if (contains(entry.getKey()) && blockPredicate.test(entry.getValue()))
 			{
-				continue;
-			}
-			BlockMock block = entry.getValue();
-			if (!blockPredicate.test(block))
-			{
-				continue;
-			}
-			BlockState state = block.getState();
-			if (state instanceof TileState)
-			{
-				tileEntities.add(state);
+				BlockState state = entry.getValue().getState();
+				if (state instanceof TileState)
+				{
+					tileEntities.add(state);
+				}
 			}
 		}
 		return tileEntities;
@@ -380,6 +373,14 @@ public class ChunkMock implements Chunk
 	private int getCubicSize()
 	{
 		return (16 * 16) * Math.abs(world.getMaxHeight() - world.getMinHeight()); // (w * w * h)
+	}
+
+	/**
+	 * Whether a world coordinate falls inside this chunk's column.
+	 */
+	private boolean contains(@NotNull Coordinate coordinate)
+	{
+		return (coordinate.x >> 4) == this.x && (coordinate.z >> 4) == this.z;
 	}
 
 }
