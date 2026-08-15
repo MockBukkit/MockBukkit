@@ -191,6 +191,38 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return !isDead();
 	}
 
+	/**
+	 * Works out which player, if any, should be credited with this entity's death, following the same order
+	 * {@code CraftLivingEntity} uses: the entity that dealt the damage directly, then the entity that caused it, then
+	 * the shooter behind a projectile. Checking only the direct entity would miss every indirect kill, so an arrow
+	 * fired by a player would leave the killer unset here while setting it on a real server.
+	 *
+	 * @return the player to credit, or null if the last damage cannot be traced back to one.
+	 */
+	private @Nullable Player deriveKiller()
+	{
+		EntityDamageEvent lastDamage = getLastDamageCause();
+		if (lastDamage == null)
+		{
+			return null;
+		}
+
+		DamageSource source = lastDamage.getDamageSource();
+		if (source.getDirectEntity() instanceof Player player)
+		{
+			return player;
+		}
+		if (source.getCausingEntity() instanceof Player player)
+		{
+			return player;
+		}
+		if (source.getDirectEntity() instanceof Projectile projectile && projectile.getShooter() instanceof Player player)
+		{
+			return player;
+		}
+		return null;
+	}
+
 	@Override
 	public void setHealth(double health)
 	{
@@ -201,10 +233,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		DamageSource dmg;
-		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player player)
+		Player killer = deriveKiller();
+		if (killer != null)
 		{
 			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
-			setKiller(player);
+			setKiller(killer);
 		}
 		else
 		{
