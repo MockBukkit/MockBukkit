@@ -1,6 +1,6 @@
 name: OpenCode Paper Parity Review
 
-# Opt-in reviewer: comment `/oc review` on a pull request.
+# Opt-in reviewer: comment `/parity` on a pull request.
 #
 # It builds the real Paper server sources for the exact version this repo targets
 # (via paperweight-userdev) and asks an agent whether the changed mocks actually
@@ -32,7 +32,7 @@ jobs:
   parity-review:
     if: >-
       github.event.issue.pull_request &&
-      startsWith(github.event.comment.body, '/oc review') &&
+      startsWith(github.event.comment.body, '/parity') &&
       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 30
@@ -118,4 +118,4 @@ jobs:
         with:
           model: openrouter/deepseek/deepseek-v4-flash
           agent: paper-parity
-          mentions: "/oc review"
+          mentions: "/parity"
