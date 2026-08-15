@@ -76,6 +76,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
+import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -160,6 +161,243 @@ class PlayerMockTest
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
+
+	@Test
+	void setResourcePack_UrlHashPrompt()
+	{
+		player.setResourcePack("https://example.com/pack.zip", new byte[]{ 0x01 }, "prompt");
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals("01", entry.hash());
+		assertEquals(Component.text("prompt"), entry.prompt());
+		assertFalse(entry.required());
+	}
+
+	@Test
+	void setResourcePack_UrlHashForce()
+	{
+		player.setResourcePack("https://example.com/pack.zip", new byte[]{ 0x02 }, true);
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals("02", entry.hash());
+		assertTrue(entry.required());
+	}
+
+	@Test
+	void setResourcePack_UrlHashComponentPromptForce()
+	{
+		player.setResourcePack("https://example.com/pack.zip", new byte[]{ 0x03 }, Component.text("hi"), true);
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals("03", entry.hash());
+		assertEquals(Component.text("hi"), entry.prompt());
+		assertTrue(entry.required());
+	}
+
+	@Test
+	void setResourcePack_IdUrlHashComponentPromptForce()
+	{
+		UUID id = UUID.randomUUID();
+		player.setResourcePack(id, "https://example.com/pack.zip", new byte[]{ 0x04 }, Component.text("hi"), true);
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals(id, entry.id());
+		assertEquals("04", entry.hash());
+	}
+
+	@Test
+	void setResourcePack_IdUrlHashLegacyPromptForce()
+	{
+		UUID id = UUID.randomUUID();
+		player.setResourcePack(id, "https://example.com/pack.zip", new byte[]{ 0x05 }, "legacy", false);
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals(id, entry.id());
+		assertEquals(Component.text("legacy"), entry.prompt());
+		assertFalse(entry.required());
+	}
+
+	@Test
+	void setResourcePack_UrlAndStringHash()
+	{
+		player.setResourcePack("https://example.com/pack.zip", "deadbeef");
+
+		assertEquals("deadbeef", player.getResourcePacks().iterator().next().hash());
+	}
+
+	@Test
+	void setResourcePack_UrlStringHashRequired()
+	{
+		player.setResourcePack("https://example.com/pack.zip", "deadbeef", true);
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals("deadbeef", entry.hash());
+		assertTrue(entry.required());
+	}
+
+	@Test
+	void setResourcePack_NullUrl()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setResourcePack((String) null));
+	}
+
+	@Test
+	void getResourcePacks_DefaultsToEmpty()
+	{
+		assertTrue(player.getResourcePacks().isEmpty());
+	}
+
+	@Test
+	void setResourcePack_AppliesThePack()
+	{
+		player.setResourcePack("https://example.com/pack.zip");
+
+		assertEquals(1, player.getResourcePacks().size());
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals("https://example.com/pack.zip", entry.url());
+		assertNull(entry.hash());
+		assertFalse(entry.required());
+	}
+
+	@Test
+	void setResourcePack_ReplacesWhatIsThere()
+	{
+		player.setResourcePack("https://example.com/first.zip");
+		player.setResourcePack("https://example.com/second.zip");
+
+		assertEquals(1, player.getResourcePacks().size());
+		assertEquals("https://example.com/second.zip",
+				player.getResourcePacks().iterator().next().url());
+	}
+
+	@Test
+	void addResourcePack_KeepsWhatIsThere()
+	{
+		player.setResourcePack("https://example.com/first.zip");
+		player.addResourcePack(UUID.randomUUID(), "https://example.com/second.zip", (byte[]) null, null, false);
+
+		assertEquals(2, player.getResourcePacks().size());
+	}
+
+	@Test
+	void addResourcePack_SameIdReplacesTheEntry()
+	{
+		UUID id = UUID.randomUUID();
+		player.addResourcePack(id, "https://example.com/first.zip", (byte[]) null, null, false);
+		player.addResourcePack(id, "https://example.com/second.zip", (byte[]) null, null, false);
+
+		assertEquals(1, player.getResourcePacks().size());
+		assertEquals("https://example.com/second.zip",
+				player.getResourcePacks().iterator().next().url());
+	}
+
+	@Test
+	void setResourcePack_SameUrlKeepsTheSameId()
+	{
+		player.setResourcePack("https://example.com/pack.zip");
+		UUID first = player.getResourcePacks().iterator().next().id();
+
+		player.setResourcePack("https://example.com/pack.zip");
+
+		assertEquals(first, player.getResourcePacks().iterator().next().id());
+	}
+
+	@Test
+	void setResourcePack_HashIsRenderedAsHex()
+	{
+		player.setResourcePack("https://example.com/pack.zip", new byte[]{ 0x0a, (byte) 0xff, 0x10 });
+
+		assertEquals("0aff10", player.getResourcePacks().iterator().next().hash());
+	}
+
+	@Test
+	void setResourcePack_CarriesPromptAndRequired()
+	{
+		player.setResourcePack("https://example.com/pack.zip", "abc123", true, Component.text("please"));
+
+		ResourcePackEntryMock entry = player.getResourcePacks().iterator().next();
+		assertEquals("abc123", entry.hash());
+		assertTrue(entry.required());
+		assertEquals(Component.text("please"), entry.prompt());
+	}
+
+	@Test
+	void setResourcePack_LegacyPromptBecomesAComponent()
+	{
+		player.setResourcePack("https://example.com/pack.zip", (byte[]) null, "hello", false);
+
+		assertEquals(Component.text("hello"),
+				player.getResourcePacks().iterator().next().prompt());
+	}
+
+	@Test
+	void setResourcePack_WithAnExplicitId()
+	{
+		UUID id = UUID.randomUUID();
+		player.setResourcePack(id, "https://example.com/pack.zip", "abc123", Component.text("hi"), true);
+
+		assertEquals(id, player.getResourcePacks().iterator().next().id());
+	}
+
+	@Test
+	void removeResourcePack_DropsOnlyThatPack()
+	{
+		UUID kept = UUID.randomUUID();
+		UUID dropped = UUID.randomUUID();
+		player.addResourcePack(kept, "https://example.com/kept.zip", (byte[]) null, null, false);
+		player.addResourcePack(dropped, "https://example.com/dropped.zip", (byte[]) null, null, false);
+
+		player.removeResourcePack(dropped);
+
+		assertEquals(1, player.getResourcePacks().size());
+		assertEquals(kept, player.getResourcePacks().iterator().next().id());
+	}
+
+	@Test
+	void removeResourcePacks_DropsThemAll()
+	{
+		player.setResourcePack("https://example.com/pack.zip");
+
+		player.removeResourcePacks();
+
+		assertTrue(player.getResourcePacks().isEmpty());
+	}
+
+	@Test
+	void removeResourcePack_Null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.removeResourcePack(null));
+	}
+
+	@Test
+	void addResourcePack_NullUrl()
+	{
+		assertThrows(IllegalArgumentException.class,
+				() -> player.addResourcePack(UUID.randomUUID(), null, (byte[]) null, null, false));
+	}
+
+	@Test
+	void addResourcePack_NullId()
+	{
+		assertThrows(IllegalArgumentException.class,
+				() -> player.addResourcePack(null, "https://example.com/pack.zip", (byte[]) null, null, false));
+	}
+
+	@Test
+	void getResourcePackStatus_DefaultsToNull()
+	{
+		assertNull(player.getResourcePackStatus());
+	}
+
+	@Test
+	void setResourcePackStatus_IsRetained()
+	{
+		player.setResourcePackStatus(PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED);
+		assertEquals(PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED, player.getResourcePackStatus());
+
+		player.setResourcePackStatus(null);
+		assertNull(player.getResourcePackStatus());
+	}
 
 	@BeforeEach
 	void setUp()
