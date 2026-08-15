@@ -6,6 +6,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
+import java.util.concurrent.CompletableFuture;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -79,6 +80,26 @@ class EntityMockTest
 	private WorldMock world;
 	@MockBukkitInject
 	private SimpleEntityMock entity;
+
+	@Test
+	void teleportAsync_MovesTheEntityAndCompletesImmediately()
+	{
+		Location destination = new Location(world, 10, 64, 20);
+
+		CompletableFuture<Boolean> future = entity.teleportAsync(destination, TeleportCause.PLUGIN);
+
+		assertTrue(future.isDone());
+		assertTrue(future.getNow(false));
+		assertEquals(destination, entity.getLocation());
+	}
+
+	@Test
+	void teleportAsync_FiresTheTeleportEvent()
+	{
+		entity.teleportAsync(new Location(world, 1, 64, 1), TeleportCause.PLUGIN);
+
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityTeleportEvent.class));
+	}
 
 	@Test
 	void getLocation_TwoInvocations_TwoClones()
