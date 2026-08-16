@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.entity;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
@@ -933,6 +935,138 @@ class LivingEntityMockTest
 	{
 		// Should not throw, just do nothing
 		assertDoesNotThrow(() -> livingEntity.setActiveItemRemainingTime(10));
+	}
+
+
+	@Test
+	void killCredit_ClearingTheDamageCauseIsAccepted()
+	{
+		PlayerMock attacker = server.addPlayer();
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build(), 1.0));
+
+		livingEntity.setLastDamageCause(null);
+		livingEntity.setHealth(0);
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void killCredit_LapsesAfterTheWindow()
+	{
+		PlayerMock attacker = server.addPlayer();
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build(), 1.0));
+
+		server.getScheduler().performTicks(101);
+		livingEntity.setHealth(0);
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void killCredit_SurvivesInsideTheWindow()
+	{
+		PlayerMock attacker = server.addPlayer();
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build(), 1.0));
+
+		server.getScheduler().performTicks(99);
+		livingEntity.setHealth(0);
+
+		assertEquals(attacker, livingEntity.getKiller());
+	}
+
+	@Test
+	void killCredit_NeverDamagedByAPlayer()
+	{
+		livingEntity.setLastDamageCause(new EntityDamageEvent(livingEntity,
+				EntityDamageEvent.DamageCause.CUSTOM,
+				DamageSource.builder(DamageType.GENERIC).build(), 1.0));
+
+		livingEntity.setHealth(0);
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void setHealthZero_NoLastDamage_LeavesKillerUnset()
+	{
+		livingEntity.setHealth(0);
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void setHealthZero_DirectPlayerDamager_SetsKiller()
+	{
+		PlayerMock attacker = server.addPlayer();
+
+		killWith(DamageSource.builder(DamageType.PLAYER_ATTACK).withDirectEntity(attacker).build());
+
+		assertEquals(attacker, livingEntity.getKiller());
+	}
+
+	@Test
+	void setHealthZero_ProjectileWithCausingPlayer_SetsKiller()
+	{
+		PlayerMock shooter = server.addPlayer();
+		Arrow arrow = launchArrow();
+
+		killWith(DamageSource.builder(DamageType.ARROW)
+				.withDirectEntity(arrow)
+				.withCausingEntity(shooter)
+				.build());
+
+		assertEquals(shooter, livingEntity.getKiller());
+	}
+
+	@Test
+	void setHealthZero_ProjectileShotByPlayer_SetsKiller()
+	{
+		PlayerMock shooter = server.addPlayer();
+		Arrow arrow = launchArrow();
+		arrow.setShooter(shooter);
+
+		killWith(DamageSource.builder(DamageType.ARROW).withDirectEntity(arrow).build());
+
+		assertEquals(shooter, livingEntity.getKiller());
+	}
+
+	@Test
+	void setHealthZero_ProjectileWithoutShooter_LeavesKillerUnset()
+	{
+		Arrow arrow = launchArrow();
+
+		killWith(DamageSource.builder(DamageType.ARROW).withDirectEntity(arrow).build());
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void setHealthZero_NonPlayerDamager_LeavesKillerUnset()
+	{
+		killWith(DamageSource.builder(DamageType.MOB_ATTACK).withDirectEntity(livingEntity).build());
+
+		assertNull(livingEntity.getKiller());
+	}
+
+	private @NotNull Arrow launchArrow()
+	{
+		WorldMock world = server.addSimpleWorld("arrow-world");
+		Location location = livingEntity.getLocation();
+		location.setWorld(world);
+		livingEntity.setLocation(location);
+		return livingEntity.launchProjectile(Arrow.class);
+	}
+
+	private void killWith(@NotNull DamageSource source)
+	{
+		livingEntity.setLastDamageCause(
+				new EntityDamageEvent(livingEntity, EntityDamageEvent.DamageCause.CUSTOM, source, 1.0));
+		livingEntity.setHealth(0);
 	}
 
 }

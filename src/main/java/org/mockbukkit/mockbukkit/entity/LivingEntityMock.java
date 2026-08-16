@@ -140,6 +140,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Getter
 	@Setter
 	private @Nullable Player killer;
+	private static final long KILL_CREDIT_TICKS = 100;
+	private long lastPlayerDamageTick = Long.MIN_VALUE;
 
 	private final Map<PotionEffectType, PriorityQueue<ActivePotionEffect>> activeEffects = new HashMap<>();
 	private TriState frictionState = TriState.NOT_SET;
@@ -192,6 +194,61 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public void setLastDamageCause(@Nullable EntityDamageEvent event)
+	{
+		super.setLastDamageCause(event);
+		if (event != null && attributeToPlayer(event) != null)
+		{
+			this.lastPlayerDamageTick = currentTick();
+		}
+	}
+
+	private long currentTick()
+	{
+		return this.server.getScheduler().getCurrentTick();
+	}
+
+	/**
+	 * Works out which player, if any, should be credited with this entity's death.
+	 * <p>
+	 * Credit lapses: vanilla stops crediting once the last player damage is more than {@value #KILL_CREDIT_TICKS}
+	 * ticks old, so an entity that wanders off and dies of something else later is nobody's kill.
+	 *
+	 * @return the player to credit, or null if there is none or the credit has lapsed.
+	 */
+	private @Nullable Player deriveKiller()
+	{
+		if (currentTick() - this.lastPlayerDamageTick > KILL_CREDIT_TICKS)
+		{
+			return null;
+		}
+		return attributeToPlayer(getLastDamageCause());
+	}
+
+	private static @Nullable Player attributeToPlayer(@Nullable EntityDamageEvent lastDamage)
+	{
+		if (lastDamage == null)
+		{
+			return null;
+		}
+
+		DamageSource source = lastDamage.getDamageSource();
+		if (source.getDirectEntity() instanceof Player player)
+		{
+			return player;
+		}
+		if (source.getCausingEntity() instanceof Player player)
+		{
+			return player;
+		}
+		if (source.getDirectEntity() instanceof Projectile projectile && projectile.getShooter() instanceof Player player)
+		{
+			return player;
+		}
+		return null;
+	}
+
+	@Override
 	public void setHealth(double health)
 	{
 		if (health > 0)
@@ -201,10 +258,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		DamageSource dmg;
-		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player player)
+		Player derivedKiller = deriveKiller();
+		if (derivedKiller != null)
 		{
 			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
-			setKiller(player);
+			setKiller(derivedKiller);
 		}
 		else
 		{
