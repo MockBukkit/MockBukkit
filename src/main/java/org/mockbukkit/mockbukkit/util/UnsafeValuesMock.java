@@ -17,7 +17,6 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.Translatable;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -171,6 +170,12 @@ public class UnsafeValuesMock implements UnsafeValues
 		return fromLegacy(material, false);
 	}
 
+	private static final String LEGACY_PREFIX = "LEGACY_";
+
+	/**
+	 * Legacy names that the flattening did not merely prefix, and so cannot be resolved by stripping
+	 * {@link #LEGACY_PREFIX} alone. Anything absent from this map kept its name.
+	 */
 	private static final Map<String, String> LEGACY_MAPPINGS = Map.<String, String>ofEntries(
 			Map.entry("ACACIA_DOOR_ITEM", "ACACIA_DOOR"),
 			Map.entry("BANNER", "WHITE_BANNER"),
@@ -372,17 +377,27 @@ public class UnsafeValuesMock implements UnsafeValues
 			return material;
 		}
 
-		String modernName = material.name().substring(7);
-		modernName = LEGACY_MAPPINGS.getOrDefault(modernName, modernName);
-		try
+		return toModern(material.name().substring(LEGACY_PREFIX.length()));
+	}
+
+	/**
+	 * Maps the name of a legacy material, stripped of its {@code LEGACY_} prefix, onto the modern
+	 * material that replaced it. Most legacy names survived the flattening unchanged; the rest are
+	 * listed in {@link #LEGACY_MAPPINGS}.
+	 *
+	 * @param legacyName The legacy name, without its {@code LEGACY_} prefix.
+	 * @return The modern material.
+	 * @throws IllegalArgumentException If no modern material corresponds to the given name.
+	 */
+	static @NotNull Material toModern(@NotNull String legacyName)
+	{
+		Material modern = Material.getMaterial(LEGACY_MAPPINGS.getOrDefault(legacyName, legacyName));
+		if (modern == null)
 		{
-			return Material.valueOf(modernName);
+			throw new IllegalArgumentException(
+					"Cannot map legacy material " + LEGACY_PREFIX + legacyName + " onto a modern material");
 		}
-		catch (IllegalArgumentException e)
-		{
-			Bukkit.getLogger().warning("Failed to convert legacy material " + material + " to modern material");
-			throw e;
-		}
+		return modern;
 	}
 
 	@Override
