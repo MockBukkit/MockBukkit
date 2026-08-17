@@ -178,7 +178,7 @@ public class ChunkMock implements Chunk
 				(x << 4) + 16,
 				world.getMaxHeight(),
 				(z << 4) + 16);
-		return world.getNearbyEntities(boundingBox).toArray(new Entity[0]);
+		return world.getNearbyEntities(boundingBox).toArray(Entity[]::new);
 	}
 
 	@Override

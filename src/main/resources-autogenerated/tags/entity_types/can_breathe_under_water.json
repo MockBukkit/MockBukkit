@@ -4,6 +4,7 @@
 		"minecraft:armor_stand",
 		"minecraft:axolotl",
 		"minecraft:bogged",
+		"minecraft:camel_husk",
 		"minecraft:cod",
 		"minecraft:copper_golem",
 		"minecraft:drowned",
@@ -12,6 +13,8 @@
 		"minecraft:glow_squid",
 		"minecraft:guardian",
 		"minecraft:husk",
+		"minecraft:nautilus",
+		"minecraft:parched",
 		"minecraft:phantom",
 		"minecraft:pufferfish",
 		"minecraft:salmon",
@@ -27,6 +30,7 @@
 		"minecraft:zoglin",
 		"minecraft:zombie",
 		"minecraft:zombie_horse",
+		"minecraft:zombie_nautilus",
 		"minecraft:zombie_villager",
 		"minecraft:zombified_piglin"
 	]

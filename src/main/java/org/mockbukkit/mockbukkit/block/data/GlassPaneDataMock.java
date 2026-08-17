@@ -6,7 +6,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.GlassPane;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,9 +31,9 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	public boolean hasFace(@NotNull BlockFace face)
 	{
 		Preconditions.checkArgument(getAllowedFaces().contains(face), "Illegal facing: " + face);
-		return toKey(face)
+		return MultipleFacingDataMock.toKey(face)
 				.map(super::get)
-				.map(object -> (boolean) object)
+				.map(Boolean.class::cast)
 				.orElse(false);
 	}
 
@@ -42,8 +41,7 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	public void setFace(@NotNull BlockFace face, boolean has)
 	{
 		Preconditions.checkArgument(getAllowedFaces().contains(face), "Illegal facing: " + face);
-		toKey(face).ifPresent(faceKey -> super.set(faceKey, has));
-
+		MultipleFacingDataMock.toKey(face).ifPresent(faceKey -> super.set(faceKey, has));
 	}
 
 	@Override
@@ -77,17 +75,5 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	public @NotNull GlassPaneDataMock clone()
 	{
 		return new GlassPaneDataMock(this);
-	}
-
-	private Optional<BlockDataKey> toKey(BlockFace blockFace)
-	{
-		try
-		{
-			return Optional.of(BlockDataKey.valueOf(blockFace.name()));
-		}
-		catch (IllegalArgumentException e)
-		{
-			return Optional.empty();
-		}
 	}
 }

@@ -1,13 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import com.google.gson.Gson;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +25,7 @@ import org.mockbukkit.mockbukkit.block.state.HangingSignStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestBlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.TestInstanceBlockStateMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.Map;
 import java.util.stream.Stream;
@@ -192,6 +196,16 @@ public class BlockStateMetaMockTest
 	{
 		@NotNull BlockState state = Material.TEST_INSTANCE_BLOCK.createBlockData().createBlockState();
 		assertInstanceOf(TestInstanceBlockStateMock.class, state);
+	}
+
+	@Test
+	void givenSerialize() throws JSONException
+	{
+		var actual = ItemType.BREWING_STAND.createItemStack().getItemMeta().serialize();
+		String actualString = new Gson().toJson(actual);
+
+		String expectedString = "{\"meta-type\":\"TILE_ENTITY\",\"blockMaterial\":\"BREWING_STAND\"}";
+		JSONAssert.assertEquals(expectedString, actualString, false);
 	}
 
 	public static Stream<Arguments> getPossibleItemTypes()

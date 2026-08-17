@@ -12,6 +12,7 @@ import org.mockbukkit.metaminer.tests.BlockDataGenerator;
 import org.mockbukkit.metaminer.tests.BlockStateGenerator;
 import org.mockbukkit.metaminer.tests.ItemStackTestDataGenerator;
 import org.mockbukkit.metaminer.translation.TranslationDataGenerator;
+import org.mockbukkit.metaminer.world.WorldConfigurationGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +69,7 @@ public class MetaMiner extends JavaPlugin
 				// Test
 				new BlockStateGenerator(testFolder),
 				new BlockDataGenerator(testFolder),
+				new WorldConfigurationGenerator(testFolder),
 				new ItemStackTestDataGenerator(testFolder)
 		);
 	}

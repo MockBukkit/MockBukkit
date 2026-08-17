@@ -5,7 +5,6 @@ import org.mockbukkit.mockbukkit.BuildParameters;
 /**
  * This exception provides a detailed diagnostic message to help developers identify
  * and resolve compatibility issues during test execution.
- * </p>
  * <p>
  * The message includes:
  * <ul>
@@ -13,7 +12,6 @@ import org.mockbukkit.mockbukkit.BuildParameters;
  *   <li>The Paper API version MockBukkit was built against</li>
  *   <li>A recommendation to align the plugin's Paper API version with MockBukkit</li>
  * </ul>
- * </p>
  *
  * @see BuildParameters#MOCK_BUKKIT_VERSION
  * @see BuildParameters#PAPER_API_FULL_VERSION

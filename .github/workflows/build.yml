@@ -2,7 +2,6 @@ name: Build
 
 on:
   pull_request:
-    branches: [ v1.* ]
 
 jobs:
   build:
@@ -18,7 +17,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Run unit tests
         run: ./gradlew test --refresh-dependencies

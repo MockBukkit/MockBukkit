@@ -23,6 +23,7 @@ import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
@@ -542,17 +543,67 @@ class BukkitSchedulerMockTest
 	@Test
 	void taskIsRunning()
 	{
-		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () ->
+		AtomicBoolean running = new AtomicBoolean(false);
+		scheduler.runTaskTimer(null, (task) ->
 		{
+			running.set(scheduler.isCurrentlyRunning(task.getTaskId()));
 		}, 1L, 1L);
 		scheduler.performOneTick();
-		assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+		assertTrue(running.get());
 	}
 
 	@Test
 	void taskNotRunning()
 	{
 		assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+	}
+
+	@Test
+	void pendingTasks()
+	{
+		BukkitTask done = scheduler.runTask(null, () ->
+		{
+		});
+		scheduler.performOneTick();
+
+		BukkitTask task = scheduler.runTask(null, () ->
+		{
+		});
+		List<BukkitTask> pending = scheduler.getPendingTasks();
+		assertTrue(pending.contains(task));
+		assertFalse(pending.contains(done));
+	}
+
+	@Test
+	void taskRunningQueuedPending()
+	{
+		AtomicBoolean run = new AtomicBoolean(false);
+		BukkitTask done = scheduler.runTask(null, () ->
+		{
+		});
+		scheduler.runTaskLater(null, task ->
+		{
+			BukkitTask toRun = scheduler.runTask(null, () ->
+			{
+				throw new RuntimeException("Task wasn't supposed to run");
+			});
+			assertFalse(scheduler.isCurrentlyRunning(done.getTaskId()));
+			assertFalse(scheduler.isQueued(done.getTaskId()));
+			assertFalse(scheduler.getPendingTasks().contains(done));
+
+			assertTrue(scheduler.isCurrentlyRunning(task.getTaskId()));
+			assertTrue(scheduler.isQueued(task.getTaskId()));
+			assertTrue(scheduler.getPendingTasks().contains(task));
+
+			assertFalse(scheduler.isCurrentlyRunning(toRun.getTaskId()));
+			assertTrue(scheduler.isQueued(toRun.getTaskId()));
+			assertTrue(scheduler.getPendingTasks().contains(toRun));
+
+			run.set(true);
+		}, 2);
+
+		scheduler.performTicks(2);
+		assertTrue(run.get(), "Did not run");
 	}
 
 	@Test

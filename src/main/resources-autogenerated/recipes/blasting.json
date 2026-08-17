@@ -98,8 +98,10 @@
 				"minecraft:copper_hoe",
 				"minecraft:copper_horse_armor",
 				"minecraft:copper_leggings",
+				"minecraft:copper_nautilus_armor",
 				"minecraft:copper_pickaxe",
 				"minecraft:copper_shovel",
+				"minecraft:copper_spear",
 				"minecraft:copper_sword"
 			],
 			"type": "material"
@@ -260,8 +262,10 @@
 				"minecraft:golden_hoe",
 				"minecraft:golden_horse_armor",
 				"minecraft:golden_leggings",
+				"minecraft:golden_nautilus_armor",
 				"minecraft:golden_pickaxe",
 				"minecraft:golden_shovel",
+				"minecraft:golden_spear",
 				"minecraft:golden_sword"
 			],
 			"type": "material"
@@ -341,8 +345,10 @@
 				"minecraft:iron_hoe",
 				"minecraft:iron_horse_armor",
 				"minecraft:iron_leggings",
+				"minecraft:iron_nautilus_armor",
 				"minecraft:iron_pickaxe",
 				"minecraft:iron_shovel",
+				"minecraft:iron_spear",
 				"minecraft:iron_sword"
 			],
 			"type": "material"

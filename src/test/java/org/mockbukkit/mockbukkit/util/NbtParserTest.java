@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.util;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.NamespacedKey;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -228,6 +231,64 @@ class NbtParserTest
 			A input = new A();
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseString(input));
 			assertEquals("Cannot parse string: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
+		}
+
+	}
+
+	@Nested
+	class ParseComponent
+	{
+
+		@Test
+		void givenNull()
+		{
+			Component actual = NbtParser.parseComponent(null);
+			assertNull(actual);
+		}
+
+		@Test
+		void givenSimpleText()
+		{
+			Component expected = Component.text("Hello world!");
+			Component actual = NbtParser.parseComponent("\"Hello world!\"");
+			assertEquals(expected, actual);
+		}
+
+		@Test
+		void givenColoredText()
+		{
+			Component expected = Component.text("Hello world!").color(NamedTextColor.RED);
+			Component actual = NbtParser.parseComponent("{\"color\":\"red\",\"text\":\"Hello world!\"}");
+			assertEquals(expected, actual);
+		}
+
+	}
+
+	@Nested
+	class ParseNamespacedKey
+	{
+
+		@Test
+		void givenNull()
+		{
+			NamespacedKey actual = NbtParser.parseNamespacedKey(null);
+			assertNull(actual);
+		}
+
+		@Test
+		void givenPrefixedKey()
+		{
+			NamespacedKey expected = NamespacedKey.fromString("minecraft:test");
+			NamespacedKey actual = NbtParser.parseNamespacedKey("minecraft:test");
+			assertEquals(expected, actual);
+		}
+
+		@Test
+		void givenNonPrefixedKey()
+		{
+			NamespacedKey expected = NamespacedKey.fromString("minecraft:test");
+			NamespacedKey actual = NbtParser.parseNamespacedKey("test");
+			assertEquals(expected, actual);
 		}
 
 	}

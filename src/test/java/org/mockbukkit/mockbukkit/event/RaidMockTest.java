@@ -172,7 +172,6 @@ class RaidMockTest
 
 	@ParameterizedTest
 	@CsvSource({
-			"0, 0, 0",
 			"1, 0, 1",
 			"1, 1, 1",
 			"1, 2, 2",
@@ -181,17 +180,17 @@ class RaidMockTest
 	})
 	void getTotalGroups_Given(int groupCount, int badOmenCount, int expectedCount)
 	{
-		raid.setWaves(groupCount);
+		raid.setTotalWaves(groupCount);
 		raid.setBadOmenLevel(badOmenCount);
 
 		assertEquals(expectedCount, raid.getTotalGroups());
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100 })
+	@ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7 })
 	void getTotalWaves_GivenValue(int expectedCount)
 	{
-		raid.setWaves(expectedCount);
+		raid.setTotalWaves(expectedCount);
 
 		assertEquals(expectedCount, raid.getTotalWaves());
 	}
@@ -219,10 +218,10 @@ class RaidMockTest
 
 	@ParameterizedTest
 	@ValueSource(ints = { -1000, -100, -10, -5, -3, -2, -1 })
-	void setWaves_GivenNegativeValues(int expectedCount)
+	void setTotalWaves_GivenNegativeValues(int expectedCount)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setWaves(expectedCount));
-		assertEquals("waves cannot be negative", e.getMessage());
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raid.setTotalWaves(expectedCount));
+		assertEquals("Total waves must be greater than 0", e.getMessage());
 	}
 
 	@Test

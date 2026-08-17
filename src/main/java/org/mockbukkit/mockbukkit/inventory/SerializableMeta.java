@@ -34,6 +34,8 @@ import org.mockbukkit.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
@@ -74,7 +76,7 @@ public class SerializableMeta implements ConfigurationSerializable
 			.put(ItemMetaMock.class, "UNSPECIFIC")
 			.build();
 	private static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap = compileFactoryMap();
-	
+
 	private static ImmutableMap<String, Function<Map<String, Object>,? extends ItemMetaMock>> compileFactoryMap()
 	{
 		ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> builder = ImmutableMap.builder();
@@ -190,6 +192,12 @@ public class SerializableMeta implements ConfigurationSerializable
 		return SerializableMeta.getObject(String.class, map, field, nullable);
 	}
 
+	public static boolean getBoolean(Map<?, ?> map, Object field)
+	{
+		Boolean value = getObject(Boolean.class, map, field, true);
+		return value != null && value;
+	}
+
 	public static <T> T getObject(Class<T> clazz, Map<?, ?> map, Object field, boolean nullable)
 	{
 		final Object object = map.get(field);
@@ -224,6 +232,44 @@ public class SerializableMeta implements ConfigurationSerializable
 			return null;
 		}
 		throw new IllegalArgumentException(field + "(" + object + ") is not a valid " + clazz);
+	}
+
+	public static <T> List<T> getList(Class<T> clazz, Map<?, ?> map, Object field)
+	{
+		List<T> result = new ArrayList<>();
+		List<?> list = getObject(List.class, map, field, true);
+		if (list != null && !list.isEmpty())
+		{
+			for(Object object : list)
+			{
+				T cast = null;
+				if (clazz.isInstance(object))
+				{
+					cast = (T) clazz.cast(object);
+				}
+
+				if ((clazz == Float.class || clazz == Double.class) && object instanceof Number number)
+				{
+					if (clazz == Float.class)
+					{
+						cast = clazz.cast(number.floatValue());
+					} else
+					{
+						cast = clazz.cast(number.doubleValue());
+					}
+				}
+
+				if (cast != null)
+				{
+					result.add(cast);
+				}
+			}
+
+			return result;
+		} else
+		{
+			return result;
+		}
 	}
 
 }
