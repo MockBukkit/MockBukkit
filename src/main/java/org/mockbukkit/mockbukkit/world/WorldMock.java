@@ -2144,9 +2144,10 @@ public class WorldMock implements World
 			return new RayTraceResult(new Vector(originX, originY, originZ), getBlockAt(blockX, blockY, blockZ), null);
 		}
 
-		int stepX = signum(step.getX());
-		int stepY = signum(step.getY());
-		int stepZ = signum(step.getZ());
+		// Narrowing to int also folds the -0.0 a normalized axis can carry back onto a 0 step.
+		int stepX = (int) Math.signum(step.getX());
+		int stepY = (int) Math.signum(step.getY());
+		int stepZ = (int) Math.signum(step.getZ());
 
 		double tMaxX = boundaryDistance(originX, step.getX(), stepX);
 		double tMaxY = boundaryDistance(originY, step.getY(), stepY);
@@ -3157,15 +3158,6 @@ public class WorldMock implements World
 			case ALWAYS -> true;
 			case SOURCE_ONLY -> block.getBlockData() instanceof Levelled levelled && levelled.getLevel() == 0;
 		};
-	}
-
-	private static int signum(double value)
-	{
-		if (value > 0)
-		{
-			return 1;
-		}
-		return value < 0 ? -1 : 0;
 	}
 
 	/**
