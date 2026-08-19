@@ -161,6 +161,47 @@ class PlayerMockTest
 	private UUID uuid;
 	private PlayerMock player;
 
+	@Test
+	void showTitle_AdventureTitleIsRecorded()
+	{
+		player.showTitle(net.kyori.adventure.title.Title.title(
+				Component.text("Victory"), Component.text("well played")));
+
+		assertEquals("Victory", player.nextTitle());
+		assertEquals("well played", player.nextSubTitle());
+	}
+
+	@Test
+	void showTitle_Null()
+	{
+		assertThrows(IllegalArgumentException.class,
+				() -> player.showTitle((net.kyori.adventure.title.Title) null));
+	}
+
+	@Test
+	void clearTitle_DropsPendingTitles()
+	{
+		player.showTitle(net.kyori.adventure.title.Title.title(
+				Component.text("Gone"), Component.text("also gone")));
+
+		player.clearTitle();
+
+		assertNull(player.nextTitle());
+		assertNull(player.nextSubTitle());
+	}
+
+	@Test
+	void resetTitle_DropsPendingTitles()
+	{
+		player.showTitle(net.kyori.adventure.title.Title.title(
+				Component.text("Gone"), Component.text("also gone")));
+
+		player.resetTitle();
+
+		assertNull(player.nextTitle());
+		assertNull(player.nextSubTitle());
+	}
+
 	@BeforeEach
 	void setUp()
 	{
