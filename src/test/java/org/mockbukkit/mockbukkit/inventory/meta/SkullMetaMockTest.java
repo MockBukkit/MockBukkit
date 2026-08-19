@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.profile.PlayerProfile;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -23,6 +24,44 @@ class SkullMetaMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void getOwningPlayer_KeepsTheStoredId()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+		PlayerMock player = server.addPlayer();
+		meta.setOwningPlayer(player);
+
+		assertEquals(player.getUniqueId(), meta.getOwningPlayer().getUniqueId());
+	}
+
+	@Test
+	void getOwningPlayer_KeepsTheStoredIdAfterThePlayerLeaves()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+		PlayerMock player = server.addPlayer();
+		UUID id = player.getUniqueId();
+		meta.setOwningPlayer(player);
+
+		player.disconnect();
+
+		assertEquals(id, meta.getOwningPlayer().getUniqueId());
+	}
+
+	@Test
+	void getOwningPlayer_FallsBackToTheNameWithoutAnId()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+		meta.setPlayerProfile(new PlayerProfileMock("Nameless", null));
+
+		assertEquals("Nameless", meta.getOwningPlayer().getName());
+	}
+
+	@Test
+	void getOwningPlayer_NullWithoutAnOwner()
+	{
+		assertNull(new SkullMetaMock().getOwningPlayer());
+	}
 
 	@Test
 	void testDefaultNoOwner()
