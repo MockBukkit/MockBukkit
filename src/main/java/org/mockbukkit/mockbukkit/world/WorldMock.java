@@ -90,6 +90,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.entity.LightningStrikeMock;
 import org.mockbukkit.mockbukkit.entity.EntityTypesMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.ItemMock;
@@ -1012,15 +1013,15 @@ public class WorldMock implements World
 	@Override
 	public @NotNull LightningStrike strikeLightning(Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return spawn(loc, LightningStrike.class);
 	}
 
 	@Override
 	public @NotNull LightningStrike strikeLightningEffect(Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		LightningStrikeMock strike = (LightningStrikeMock) spawn(loc, LightningStrike.class);
+		strike.setEffect(true);
+		return strike;
 	}
 
 	public @Nullable Location findLightningRod(@NotNull Location location)
