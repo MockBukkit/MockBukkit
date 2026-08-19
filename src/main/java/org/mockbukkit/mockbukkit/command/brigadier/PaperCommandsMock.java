@@ -55,6 +55,16 @@ public class PaperCommandsMock implements Commands, PaperRegistrarMock<Lifecycle
 		this.invalid = true;
 	}
 
+	/**
+	 * Re-arms this registrar after a previous firing invalidated it, so the {@code COMMANDS} event can be
+	 * fired again -- once per plugin enable, and again on reload. Without it the second firing throws, because
+	 * the first handler to ask for the dispatcher fails the validity check.
+	 */
+	public void setValid()
+	{
+		this.invalid = false;
+	}
+
 	public void newDispatcher()
 	{
 		this.invalid = false;

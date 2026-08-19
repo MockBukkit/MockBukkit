@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.plugin;
 
+import org.mockbukkit.mockbukkit.command.brigadier.PaperCommandsMock;
+import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
@@ -674,6 +677,13 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
 			callEvent(new PluginEnableEvent(plugin));
+			// onEnable has returned, so this plugin can no longer register lifecycle handlers: every
+			// COMMANDS handler it will ever have exists now. Fire for this plugin alone, leaving the
+			// handlers of plugins enabled earlier untouched.
+			PaperCommandsMock.INSTANCE.setValid();
+			LifecycleEventRunnerMock.INSTANCE.callReloadableRegistrarEvent(LifecycleEvents.COMMANDS,
+					PaperCommandsMock.INSTANCE, Plugin.class, ReloadableRegistrarEvent.Cause.INITIAL,
+					owner -> owner == plugin);
 		}
 	}
 

@@ -7,6 +7,9 @@ import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
+import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
+import org.bukkit.plugin.Plugin;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventRunnerMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +23,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @ExtendWith(MockBukkitExtension.class)
 class PaperCommandsMockTest
@@ -27,6 +33,92 @@ class PaperCommandsMockTest
 
 	@MockBukkitInject
 	private ServerMock serverMock;
+
+	@Test
+	void firingForEveryOwnerRerunsHandlers()
+	{
+		AtomicInteger runs = new AtomicInteger();
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+				{
+					runs.incrementAndGet();
+					event.registrar().register(Commands.literal("all_owners_command").executes(context ->
+							Command.SINGLE_SUCCESS).build());
+				})).build();
+		assertEquals(1, runs.get());
+
+		PaperCommandsMock.INSTANCE.setValid();
+		LifecycleEventRunnerMock.INSTANCE.callReloadableRegistrarEvent(LifecycleEvents.COMMANDS,
+				PaperCommandsMock.INSTANCE, Plugin.class, ReloadableRegistrarEvent.Cause.RELOAD);
+
+		assertEquals(2, runs.get());
+		assertNotNull(serverMock.getCommandMap().getCommand("all_owners_command"));
+	}
+
+	@Test
+	void commandIsRegisteredAtEnableWithoutADispatch()
+	{
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("registered_at_enable").executes(context ->
+								Command.SINGLE_SUCCESS).build()))).build();
+
+		assertNotNull(serverMock.getCommandMap().getCommand("registered_at_enable"));
+	}
+
+	@Test
+	void registrarHandlerRunsExactlyOnce()
+	{
+		AtomicInteger runs = new AtomicInteger();
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+				{
+					runs.incrementAndGet();
+					event.registrar().register(Commands.literal("counted_command").executes(context ->
+							Command.SINGLE_SUCCESS).build());
+				})).build();
+
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "counted_command");
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "counted_command");
+
+		assertEquals(1, runs.get());
+	}
+
+	@Test
+	void asecondPluginRegistersWithoutRerunningTheFirst()
+	{
+		AtomicInteger firstRuns = new AtomicInteger();
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+				{
+					firstRuns.incrementAndGet();
+					event.registrar().register(Commands.literal("first_plugin_command").executes(context ->
+							Command.SINGLE_SUCCESS).build());
+				})).build();
+
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("second_plugin_command").executes(context ->
+								Command.SINGLE_SUCCESS).build()))).build();
+
+		assertNotNull(serverMock.getCommandMap().getCommand("first_plugin_command"));
+		assertNotNull(serverMock.getCommandMap().getCommand("second_plugin_command"));
+		assertEquals(1, firstRuns.get());
+	}
+
+
+	@Test
+	void tabCompletionWorksWithoutADispatch()
+	{
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("completable")
+								.then(Commands.literal("branch").executes(context -> Command.SINGLE_SUCCESS))
+								.build()))).build();
+
+		assertTrue(serverMock.getCommandMap().tabComplete(serverMock.getConsoleSender(), "completable ")
+				.contains("branch"));
+	}
 	List<Object> arguments = List.of();
 
 	@ParameterizedTest

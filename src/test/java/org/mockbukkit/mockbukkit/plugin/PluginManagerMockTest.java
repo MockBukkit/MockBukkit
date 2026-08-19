@@ -50,6 +50,17 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFi
 class PluginManagerMockTest
 {
 
+	@Test
+	void enablePlugin_AlreadyEnabled_DoesNothing()
+	{
+		PluginMock alreadyEnabled = MockBukkit.createMockPlugin();
+		assertTrue(alreadyEnabled.isEnabled());
+
+		pluginManager.enablePlugin(alreadyEnabled);
+
+		assertTrue(alreadyEnabled.isEnabled());
+	}
+
 	@MockBukkitInject
 	private ServerMock server;
 	private PluginManagerMock pluginManager;
