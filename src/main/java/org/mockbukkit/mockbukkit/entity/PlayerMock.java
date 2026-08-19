@@ -149,6 +149,7 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.LinkedTransferQueue;
@@ -207,6 +208,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final ConversationTracker conversationTracker = new ConversationTracker();
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Queue<String> title = new LinkedTransferQueue<>();
+	private final Map<UUID, ResourcePackEntryMock> resourcePacks = new LinkedHashMap<>();
+	private PlayerResourcePackStatusEvent.@Nullable Status resourcePackStatus = null;
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
 	private final Queue<Component> actionBar = new LinkedTransferQueue<>();
 
@@ -2284,67 +2287,58 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated(since = "1.7.2")
 	public void setResourcePack(@NotNull String url)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, null, null, false);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull String url, byte[] hash)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hashToString(hash), null, false);
 	}
 
 	@Override
 	@Deprecated
 	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hashToString(hash), promptToComponent(prompt), false);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull String url, byte[] hash, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hashToString(hash), null, force);
 	}
 
 	@Override
 	@Deprecated
 	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hashToString(hash), promptToComponent(prompt), force);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull String url, byte @Nullable [] hash, @Nullable Component prompt, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hashToString(hash), prompt, force);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull UUID uuid, @NotNull String url, @NotNull String hash, @Nullable Component resourcePackPrompt, boolean required)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(uuid, url, hash, resourcePackPrompt, required);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull UUID uuid, @NotNull String url, byte @Nullable [] hash, @Nullable Component prompt, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(uuid, url, hashToString(hash), prompt, force);
 	}
 
 	@Override
 	@Deprecated(since = "1.20")
 	public void setResourcePack(@NotNull UUID uuid, @NotNull String s, @Nullable byte[] bytes, @Nullable String s1, boolean b)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(uuid, s, hashToString(bytes), promptToComponent(s1), b);
 	}
 
 	@Override
@@ -2789,29 +2783,25 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setResourcePack(@NotNull String url, @NotNull String hash)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hash, null, false);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull String url, @NotNull String hash, boolean required)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hash, null, required);
 	}
 
 	@Override
 	public void setResourcePack(@NotNull String url, @NotNull String hash, boolean required, @Nullable Component resourcePackPrompt)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		replaceResourcePack(idFor(url), url, hash, resourcePackPrompt, required);
 	}
 
 	@Override
 	public PlayerResourcePackStatusEvent.@Nullable Status getResourcePackStatus()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.resourcePackStatus;
 	}
 
 	@Override
@@ -2824,22 +2814,97 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void addResourcePack(@NotNull UUID id, @NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		addResourcePack(id, url, hashToString(hash), promptToComponent(prompt), force);
 	}
 
 	@Override
 	public void removeResourcePack(@NotNull UUID id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(id != null, "Id cannot be null");
+		this.resourcePacks.remove(id);
 	}
 
 	@Override
 	public void removeResourcePacks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.resourcePacks.clear();
+	}
+
+	/**
+	 * Replaces every pack this player has with a single one, which is what the {@code setResourcePack} overloads do
+	 * on a real server.
+	 */
+	private void replaceResourcePack(@NotNull UUID id, @NotNull String url, @Nullable String hash,
+			@Nullable Component prompt, boolean required)
+	{
+		this.resourcePacks.clear();
+		addResourcePack(id, url, hash, prompt, required);
+	}
+
+	/**
+	 * Adds a pack alongside whatever this player already has, replacing only a pack with the same id.
+	 *
+	 * @param id       The pack id.
+	 * @param url      Where the pack is served from.
+	 * @param hash     The pack hash, or null if none was given.
+	 * @param prompt   The prompt shown to the player, or null for the default.
+	 * @param required Whether the player must accept it.
+	 */
+	public void addResourcePack(@NotNull UUID id, @NotNull String url, @Nullable String hash,
+			@Nullable Component prompt, boolean required)
+	{
+		Preconditions.checkArgument(id != null, "Id cannot be null");
+		Preconditions.checkArgument(url != null, "Url cannot be null");
+		this.resourcePacks.put(id, new ResourcePackEntryMock(id, url, hash, prompt, required));
+	}
+
+	/**
+	 * The packs currently applied to this player, in the order they were added.
+	 *
+	 * @return The applied packs.
+	 */
+	public @NotNull Collection<ResourcePackEntryMock> getResourcePacks()
+	{
+		return List.copyOf(this.resourcePacks.values());
+	}
+
+	/**
+	 * Sets the status this player reports for resource packs. There is no Bukkit setter -- on a real server the value
+	 * arrives from the client accepting, declining or failing to load a pack.
+	 *
+	 * @param status The status to report, or null for a player that has not answered.
+	 */
+	public void setResourcePackStatus(PlayerResourcePackStatusEvent.@Nullable Status status)
+	{
+		this.resourcePackStatus = status;
+	}
+
+	/**
+	 * Derives a stable id for the overloads that do not take one, so the same URL is the same pack across calls.
+	 */
+	private static @NotNull UUID idFor(@NotNull String url)
+	{
+		Preconditions.checkArgument(url != null, "Url cannot be null");
+		return UUID.nameUUIDFromBytes(url.getBytes(StandardCharsets.UTF_8));
+	}
+
+	private static @Nullable String hashToString(byte @Nullable [] hash)
+	{
+		if (hash == null)
+		{
+			return null;
+		}
+		StringBuilder builder = new StringBuilder(hash.length * 2);
+		for (byte b : hash)
+		{
+			builder.append(String.format("%02x", b));
+		}
+		return builder.toString();
+	}
+
+	private static @Nullable Component promptToComponent(@Nullable String prompt)
+	{
+		return prompt == null ? null : LegacyComponentSerializer.legacySection().deserialize(prompt);
 	}
 
 	@Override
