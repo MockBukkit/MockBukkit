@@ -22,6 +22,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.opentest4j.AssertionFailedError;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -60,6 +61,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	// This variable must be accessed while synchronizing on BukkitSchedulerMock.this to avoid data races and race conditions
 	private long currentTick = 0;
+	private final ClockMock clock = new ClockMock(Instant.now());
 
 	private final AtomicInteger id = new AtomicInteger();
 	private long executorTimeout = 60000;
@@ -253,6 +255,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		{
 			currentTick++;
 		}
+
+		this.clock.advanceOneTick();
 
 		processWorlds();
 		processEntities();
@@ -854,6 +858,17 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 		}
 
+	}
+
+	/**
+	 * The clock this scheduler drives. Every tick advances it 50ms, and a test can move it further with
+	 * {@link ClockMock#advance(java.time.Duration)}.
+	 *
+	 * @return The server clock.
+	 */
+	public @NotNull ClockMock getClock()
+	{
+		return this.clock;
 	}
 
 }
