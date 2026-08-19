@@ -65,6 +65,8 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -455,17 +457,41 @@ class UnsafeValuesTest
 	}
 
 	@Test
-	void fromLegacy_MaterialData_Legacy_Throws()
+	void fromLegacy_MaterialData_Legacy_ReturnsModernEquivalent()
 	{
+		List<Material> converted = new ArrayList<>();
 		for (Material material : Material.values())
 		{
 			if (!material.isLegacy())
 			{
 				continue;
 			}
-			MaterialData materialData = new MaterialData(material);
-			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(materialData));
+			Material modern = unsafeValuesMock.fromLegacy(new MaterialData(material));
+			assertNotNull(modern, material + " has no modern equivalent");
+			assertFalse(modern.isLegacy(), material + " mapped onto another legacy material");
+			converted.add(modern);
 		}
+		assertFalse(converted.isEmpty(), "no legacy materials were exercised");
+	}
+
+	@Test
+	void toModern_NameSurvivedTheFlattening_ResolvesDirectly()
+	{
+		assertEquals(Material.DIAMOND, UnsafeValuesMock.toModern("DIAMOND"));
+	}
+
+	@Test
+	void toModern_NameChangedInTheFlattening_ResolvesThroughTheMapping()
+	{
+		assertEquals(Material.WHITE_WOOL, UnsafeValuesMock.toModern("WOOL"));
+	}
+
+	@Test
+	void toModern_NoModernEquivalent_Throws()
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> UnsafeValuesMock.toModern("NOT_A_MATERIAL"));
+		assertTrue(e.getMessage().contains("LEGACY_NOT_A_MATERIAL"));
 	}
 
 	@Test
