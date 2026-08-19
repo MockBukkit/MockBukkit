@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.EnderChest;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
@@ -60,7 +63,14 @@ public class EnderChestStateMock extends TileStateMock implements EnderChest
 	@Override
 	public @NotNull EnderChestStateMock copy()
 	{
-		return new EnderChestStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull EnderChestStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

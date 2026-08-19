@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CalibratedSculkSensor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link CalibratedSculkSensor}.
@@ -37,7 +40,14 @@ public class CalibratedSculkSensorStateMock extends SculkSensorStateMock impleme
 	@Override
 	public @NotNull CalibratedSculkSensorStateMock copy()
 	{
-		return new CalibratedSculkSensorStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull CalibratedSculkSensorStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 }

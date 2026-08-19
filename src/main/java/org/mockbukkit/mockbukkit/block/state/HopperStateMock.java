@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Hopper;
@@ -105,7 +107,14 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 	@Override
 	public @NotNull HopperStateMock copy()
 	{
-		return new HopperStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull HopperStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

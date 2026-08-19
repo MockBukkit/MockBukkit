@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Dropper;
@@ -104,7 +106,14 @@ public class DropperStateMock extends ContainerStateMock implements Dropper
 	@Override
 	public @NotNull DropperStateMock copy()
 	{
-		return new DropperStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull DropperStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

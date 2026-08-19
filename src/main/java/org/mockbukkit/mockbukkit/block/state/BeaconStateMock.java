@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
@@ -91,7 +93,14 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	@Override
 	public @NotNull BeaconStateMock copy()
 	{
-		return new BeaconStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull BeaconStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

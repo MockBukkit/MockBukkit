@@ -1,9 +1,12 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Smoker;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Smoker}.
@@ -56,7 +59,14 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 	@Override
 	public @NotNull SmokerStateMock copy()
 	{
-		return new SmokerStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull SmokerStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

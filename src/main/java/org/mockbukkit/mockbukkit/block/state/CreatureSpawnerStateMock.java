@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
@@ -86,7 +87,14 @@ public class CreatureSpawnerStateMock extends TileStateMock implements CreatureS
 	@Override
 	public @NotNull CreatureSpawnerStateMock copy()
 	{
-		return new CreatureSpawnerStateMock(this);
+		return getSnapshot().changeLocation(null);
+	}
+
+	@Override
+	public @NotNull CreatureSpawnerStateMock copy(@NotNull Location location)
+	{
+		Preconditions.checkNotNull(location);
+		return getSnapshot().changeLocation(location);
 	}
 
 	@Override

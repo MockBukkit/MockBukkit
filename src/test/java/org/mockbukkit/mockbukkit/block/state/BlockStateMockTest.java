@@ -2,9 +2,11 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Registry;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.BlockType;
 import org.bukkit.block.Chest;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.TrapDoor;
@@ -17,6 +19,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
@@ -35,6 +39,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockBukkitExtension.class)
 class BlockStateMockTest
 {
+
+	@MockBukkitInject
+	ServerMock server;
 
 	@Test
 	void testPlaced()
@@ -212,6 +219,38 @@ class BlockStateMockTest
 		BlockState actual = bed.createBlockState();
 		assertNotNull(actual);
 		assertInstanceOf(expectedClass, actual);
+	}
+
+	@ParameterizedTest
+	@MethodSource("getAllBlockMaterials")
+	void copy_nullLocation(Material material)
+	{
+		World world = server.addSimpleWorld("simple_world");
+		Block block = world.getBlockAt(0, 10, 0);
+		block.setType(material);
+		BlockState state1 = block.getState();
+		BlockState state2 = state1.copy();
+		assertNotEquals(state1, state2);
+		BlockState state3 = state2.copy(new Location(world, 0, 11, 0));
+		assertNotEquals(state1, state3);
+		assertNotEquals(state2, state3);
+		if (state1 instanceof ContainerStateMock containerStateMock1)
+		{
+			assertInstanceOf(ContainerStateMock.class, state2);
+			assertInstanceOf(ContainerStateMock.class, state3);
+			assertNotEquals(containerStateMock1.getInventory(), containerStateMock1.getSnapshotInventory());
+			assertEquals(((ContainerStateMock) state2).getInventory(), ((ContainerStateMock) state2).getSnapshotInventory());
+			assertNotEquals(((ContainerStateMock) state3).getInventory(), ((ContainerStateMock) state3).getSnapshotInventory());
+		}
+		state3.update(true);
+		assertEquals(state3, world.getBlockAt(0, 11, 0).getState());
+	}
+
+	private static Stream<Arguments> getAllBlockMaterials()
+	{
+		return Registry.BLOCK.stream()
+				.map(BlockType::asMaterial)
+				.map(Arguments::of);
 	}
 
 	/**
