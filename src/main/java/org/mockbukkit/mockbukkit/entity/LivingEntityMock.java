@@ -619,15 +619,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @Nullable RayTraceResult rayTraceBlocks(double maxDistance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rayTraceBlocks(maxDistance, FluidCollisionMode.NEVER);
 	}
 
 	@Override
 	public @Nullable RayTraceResult rayTraceBlocks(double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Location eye = getEyeLocation();
+		return eye.getWorld().rayTraceBlocks(eye, eye.getDirection(), maxDistance, fluidCollisionMode, false, null);
 	}
 
 	@Override
