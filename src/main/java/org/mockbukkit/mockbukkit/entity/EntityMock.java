@@ -1154,8 +1154,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return CompletableFuture.completedFuture(teleport(loc, cause, teleportFlags));
 	}
 
 	@Override
