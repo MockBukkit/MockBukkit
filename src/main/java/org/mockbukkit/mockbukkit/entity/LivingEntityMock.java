@@ -328,6 +328,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	/**
 	 * Simulate damage to this entity and throw an event.
+	 * <p>
+	 * No damage modifiers are applied. Armour, enchantments, resistance and absorption are not
+	 * modelled, so {@link EntityDamageEvent#getFinalDamage()} on the returned event is the amount
+	 * that was passed in.
 	 *
 	 * @param amount <p>The amount of damage to be done</p>
 	 * @param source <p>The damager</p>
@@ -340,6 +344,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	/**
 	 * Simulate damage to this entity and throw an event
+	 * <p>
+	 * No damage modifiers are applied. Armour, enchantments, resistance and absorption are not
+	 * modelled, so {@link EntityDamageEvent#getFinalDamage()} on the returned event is the amount
+	 * that was passed in.
 	 *
 	 * @param amount <p>The amount of damage to be done</p>
 	 * @param source <p>The damager</p>
