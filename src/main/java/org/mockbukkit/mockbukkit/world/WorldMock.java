@@ -165,7 +165,6 @@ public class WorldMock implements World
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
-	private boolean pvp;
 	private boolean hardcore;
 	private boolean getKeepSpawnInMemory = true;
 	private boolean generateStructures = true;
@@ -209,15 +208,17 @@ public class WorldMock implements World
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
 
+		boolean pvp;
+
 		if (this.server != null)
 		{
-			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
+			pvp = this.server.getServerConfiguration().isPvpEnabled();
 			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
 			this.spawnLimits.putAll(this.server.getServerConfiguration().getSpawnLimits());
 		}
 		else
 		{
-			this.pvp = true;
+			pvp = true;
 
 			// Set the default ticks per spawn values.
 			ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
@@ -236,6 +237,7 @@ public class WorldMock implements World
 		}
 
 		initializeGameRules();
+		setGameRule(GameRules.PVP, pvp);
 	}
 
 	/**
@@ -1347,13 +1349,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getPVP()
 	{
-		return this.pvp;
+		return getGameRuleValue(GameRules.PVP);
 	}
 
 	@Override
 	public void setPVP(boolean pvp)
 	{
-		this.pvp = pvp;
+		setGameRule(GameRules.PVP, pvp);
 	}
 
 	@Override
