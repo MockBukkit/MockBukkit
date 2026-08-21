@@ -464,13 +464,30 @@ class WorldMockTest
 		WorldMock world = server.addSimpleWorld("world");
 		Location centerLoc = new Location(world, 0, 0, 0);
 		Location insideLoc = new Location(world, 0, 1, 7);
-		Location outsideLoc = new Location(world, 0, 1, 8);
+		Location outsideLoc = new Location(world, 0, 1, 9);
 		world.spawnEntity(insideLoc, EntityType.LLAMA);
 		world.spawnEntity(insideLoc, EntityType.LLAMA);
 		world.spawnEntity(insideLoc, EntityType.FROG);
 		world.spawnEntity(outsideLoc, EntityType.POLAR_BEAR);
 		BoundingBox box = BoundingBox.of(centerLoc, 1, 2, 8);
 		assertEquals(3, world.getNearbyEntities(box).size());
+	}
+
+	@Test
+	void getNearbyEntities_HitboxOverlappingEdge_IsFound()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		world.spawnEntity(new Location(world, 0, 1, 8), EntityType.POLAR_BEAR);
+		BoundingBox box = BoundingBox.of(new Location(world, 0, 0, 0), 1, 2, 8);
+		assertEquals(1, world.getNearbyEntities(box).size());
+	}
+
+	@Test
+	void getNearbyEntities_BoxAboveFeet_IsFound()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertEquals(1, world.getNearbyEntities(new BoundingBox(-1, 1, -1, 1, 3, 1)).size());
 	}
 
 	@Test
