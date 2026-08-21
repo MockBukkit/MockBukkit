@@ -124,7 +124,8 @@ class RaidMockTest
 		Raid testRaid = new RaidMock(1, location);
 
 		Location actualLocation = testRaid.getLocation();
-		assertSame(location, actualLocation);
+		assertEquals(location, actualLocation);
+		assertNotSame(location, actualLocation);
 	}
 
 	@Test

@@ -35,7 +35,7 @@ public class CommandSourceStackMock implements CommandSourceStack
 	@Override
 	public @NotNull Location getLocation()
 	{
-		return location;
+		return location.clone();
 	}
 
 	@Override

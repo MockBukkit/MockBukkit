@@ -249,7 +249,7 @@ public class BlockMock implements Block
 	@Override
 	public @NotNull Location getLocation()
 	{
-		return location;
+		return location == null ? null : location.clone();
 	}
 
 	@Override

@@ -99,7 +99,7 @@ public class RaidMock implements Raid
 	@Override
 	public @NotNull Location getLocation()
 	{
-		return this.location;
+		return this.location.clone();
 	}
 
 	@NotNull
