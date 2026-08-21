@@ -32,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -178,6 +179,21 @@ class BlockMockTest
 		Location location = new Location(world, 5, 2, 1);
 		block = new BlockMock(Material.AIR, location);
 		assertEquals(location, block.getLocation());
+	}
+
+	@Test
+	void getLocation_CustomLocation_ReturnsCopy()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 5, 2, 1);
+		block = new BlockMock(Material.AIR, location);
+
+		Location first = block.getLocation();
+		assertNotSame(first, block.getLocation());
+
+		first.add(0.5, 0.5, 0.5);
+		location.add(0.5, 0.5, 0.5);
+		assertEquals(new Location(world, 5, 2, 1), block.getLocation());
 	}
 
 	@Test

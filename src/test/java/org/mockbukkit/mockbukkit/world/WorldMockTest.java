@@ -238,6 +238,17 @@ class WorldMockTest
 	private ServerMock server;
 
 	@Test
+	void getSpawnLocation_ReturnsCopy()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location spawn = world.getSpawnLocation();
+		spawn.add(1, 1, 1);
+
+		assertEquals(spawn.subtract(1, 1, 1), world.getSpawnLocation());
+		assertNotSame(world.getSpawnLocation(), world.getSpawnLocation());
+	}
+
+	@Test
 	void getBlockAt_StandardWorld_DefaultBlocks()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

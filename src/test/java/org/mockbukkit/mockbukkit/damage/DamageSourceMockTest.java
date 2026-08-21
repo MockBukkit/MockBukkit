@@ -23,6 +23,7 @@ import org.mockbukkit.mockbukkit.entity.ZombieMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.UUID;
+import org.bukkit.damage.DamageSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -54,6 +55,17 @@ class DamageSourceMockTest
 		directEntity = new ZombieMock(serverMock, UUID.randomUUID());
 
 		damageSourceMock = new DamageSourceMock(damageType, causingEntity, directEntity, damageLocation);
+	}
+
+	@Test
+	void getDamageLocation_ReturnsCopy()
+	{
+		Location location = new Location(new WorldMock(), 1, 2, 3);
+		DamageSource source = DamageSource.builder(DamageType.GENERIC).withDamageLocation(location).build();
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(source.getDamageLocation().getWorld(), 1, 2, 3), source.getDamageLocation());
+		assertNotSame(source.getDamageLocation(), source.getDamageLocation());
 	}
 
 	@Test

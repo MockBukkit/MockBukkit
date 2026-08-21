@@ -64,6 +64,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class LivingEntityMockTest
@@ -73,6 +74,17 @@ class LivingEntityMockTest
 	private ServerMock server;
 	@MockBukkitInject
 	private CowMock livingEntity;
+
+	@Test
+	void getLastClimbableLocation_ReturnsCopy()
+	{
+		Location location = new Location(livingEntity.getWorld(), 1, 2, 3);
+		livingEntity.setLastClimbableLocation(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(livingEntity.getWorld(), 1, 2, 3), livingEntity.getLastClimbableLocation());
+		assertNotSame(livingEntity.getLastClimbableLocation(), livingEntity.getLastClimbableLocation());
+	}
 
 	@Test
 	void testIsJumpingDefault()

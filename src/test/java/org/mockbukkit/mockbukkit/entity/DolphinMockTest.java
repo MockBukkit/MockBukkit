@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class DolphinMockTest
@@ -19,6 +20,17 @@ class DolphinMockTest
 
 	@MockBukkitInject
 	private Dolphin dolphin;
+
+	@Test
+	void getTreasureLocation_ReturnsCopy()
+	{
+		Location location = new Location(dolphin.getWorld(), 1, 2, 3);
+		dolphin.setTreasureLocation(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(dolphin.getWorld(), 1, 2, 3), dolphin.getTreasureLocation());
+		assertNotSame(dolphin.getTreasureLocation(), dolphin.getTreasureLocation());
+	}
 
 	@Test
 	void testGetType()

@@ -46,13 +46,13 @@ public class BatMock extends AmbientMock implements Bat
 	@Override
 	public @Nullable Location getTargetLocation()
 	{
-		return this.targetPosition;
+		return this.targetPosition == null ? null : this.targetPosition.clone();
 	}
 
 	@Override
 	public void setTargetLocation(@Nullable Location location)
 	{
-		this.targetPosition = location;
+		this.targetPosition = location == null ? null : location.clone();
 	}
 
 	@Override

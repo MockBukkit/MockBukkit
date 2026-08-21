@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class BatMockTest
@@ -19,6 +20,17 @@ class BatMockTest
 
 	@MockBukkitInject
 	private BatMock bat;
+
+	@Test
+	void getTargetLocation_ReturnsCopy()
+	{
+		Location location = new Location(bat.getWorld(), 1, 2, 3);
+		bat.setTargetLocation(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(bat.getWorld(), 1, 2, 3), bat.getTargetLocation());
+		assertNotSame(bat.getTargetLocation(), bat.getTargetLocation());
+	}
 
 	@Test
 	void testIsAwakeDefault()

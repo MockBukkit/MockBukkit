@@ -34,6 +34,16 @@ class EnderSignalMockTest
 	}
 
 	@Test
+	void getTargetLocation_ReturnsCopy()
+	{
+		enderSignal.setTargetLocation(new Location(world, 1, 2, 3));
+		enderSignal.getTargetLocation().add(1, 1, 1);
+
+		assertEquals(new Location(world, 1, 2, 3), enderSignal.getTargetLocation());
+		assertNotSame(enderSignal.getTargetLocation(), enderSignal.getTargetLocation());
+	}
+
+	@Test
 	void testGetTargetLocationDefault()
 	{
 		assertThrows(IllegalStateException.class, () -> enderSignal.getTargetLocation());

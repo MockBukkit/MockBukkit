@@ -62,13 +62,13 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 	@Override
 	public @NotNull Location getPodium()
 	{
-		return podium;
+		return podium == null ? null : podium.clone();
 	}
 
 	@Override
 	public void setPodium(@Nullable Location location)
 	{
-		podium = location;
+		podium = location == null ? null : location.clone();
 	}
 
 	@Override

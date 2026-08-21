@@ -41,7 +41,7 @@ public class DamageSourceBuilderMock implements DamageSource.Builder
 	public DamageSource.@NotNull Builder withDamageLocation(@NotNull Location location)
 	{
 		Preconditions.checkArgument(location != null, "Location cannot be null");
-		this.damageLocation = location;
+		this.damageLocation = location.clone();
 		return this;
 	}
 
