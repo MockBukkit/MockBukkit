@@ -126,6 +126,9 @@ class RaidMockTest
 		Location actualLocation = testRaid.getLocation();
 		assertEquals(location, actualLocation);
 		assertNotSame(location, actualLocation);
+
+		location.add(1, 1, 1);
+		assertEquals(new Location(world, x, y, z), testRaid.getLocation());
 	}
 
 	@Test

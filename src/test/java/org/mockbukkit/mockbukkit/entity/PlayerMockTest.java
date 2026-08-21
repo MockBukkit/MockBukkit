@@ -147,6 +147,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasNotHeard;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class PlayerMockTest
 {
@@ -190,6 +191,22 @@ class PlayerMockTest
 	void tearDown()
 	{
 		MockBukkit.unmock();
+	}
+
+	@Test
+	void getCompassTargetAndRespawnLocation_ReturnCopies()
+	{
+		Location compass = new Location(player.getWorld(), 1, 2, 3);
+		player.setCompassTarget(compass);
+		compass.add(1, 1, 1);
+		assertEquals(new Location(player.getWorld(), 1, 2, 3), player.getCompassTarget());
+		assertNotSame(player.getCompassTarget(), player.getCompassTarget());
+
+		Location respawn = new Location(player.getWorld(), 4, 5, 6);
+		player.setRespawnLocation(respawn, true);
+		respawn.add(1, 1, 1);
+		assertEquals(new Location(player.getWorld(), 4, 5, 6), player.getRespawnLocation());
+		assertNotSame(player.getRespawnLocation(), player.getRespawnLocation());
 	}
 
 	@Test

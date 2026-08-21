@@ -54,14 +54,14 @@ public class DolphinMock extends AgeableMock implements Dolphin
 	@Override
 	public @NotNull Location getTreasureLocation()
 	{
-		return this.treasureLocation;
+		return this.treasureLocation.clone();
 	}
 
 	@Override
 	public void setTreasureLocation(@NotNull Location location)
 	{
 		Preconditions.checkArgument(location != null, "Location can't be null.");
-		this.treasureLocation = location;
+		this.treasureLocation = location.clone();
 	}
 
 	@Override

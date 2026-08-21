@@ -29,6 +29,7 @@ class CommandSourceStackMockTest
 		assertNotSame(first, stack.getLocation());
 
 		first.add(0.5, 0.5, 0.5);
+		location.add(0.5, 0.5, 0.5);
 		assertEquals(new Location(world, 5, 2, 1), stack.getLocation());
 	}
 

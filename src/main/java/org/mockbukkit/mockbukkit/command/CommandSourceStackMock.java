@@ -18,7 +18,7 @@ public class CommandSourceStackMock implements CommandSourceStack
 	public CommandSourceStackMock(Location location, CommandSender sender, Entity executor)
 	{
 		Preconditions.checkNotNull(location);
-		this.location = location;
+		this.location = location.clone();
 		this.sender = sender;
 		this.executor = executor;
 	}

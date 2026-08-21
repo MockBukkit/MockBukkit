@@ -10,6 +10,7 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class TurtleMockTest
@@ -17,6 +18,17 @@ class TurtleMockTest
 
 	@MockBukkitInject
 	private Turtle turtle;
+
+	@Test
+	void getHome_ReturnsCopy()
+	{
+		Location location = new Location(turtle.getWorld(), 1, 2, 3);
+		turtle.setHome(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(turtle.getWorld(), 1, 2, 3), turtle.getHome());
+		assertNotSame(turtle.getHome(), turtle.getHome());
+	}
 
 	@Test
 	void testGetType()

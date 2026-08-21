@@ -47,7 +47,7 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 	@Override
 	public @Nullable Location getBeamTarget()
 	{
-		return this.beamTarget;
+		return this.beamTarget == null ? null : this.beamTarget.clone();
 	}
 
 	@Override

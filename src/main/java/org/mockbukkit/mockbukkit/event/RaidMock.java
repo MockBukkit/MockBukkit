@@ -47,7 +47,7 @@ public class RaidMock implements Raid
 		Preconditions.checkArgument(location != null, "location cannot be null");
 
 		this.id = id;
-		this.location = location;
+		this.location = location.clone();
 	}
 
 	@Override

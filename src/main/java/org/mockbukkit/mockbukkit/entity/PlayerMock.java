@@ -888,14 +888,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setCompassTarget(@NotNull Location loc)
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		this.compassTarget = loc;
+		this.compassTarget = loc.clone();
 	}
 
 	@NotNull
 	@Override
 	public Location getCompassTarget()
 	{
-		return this.compassTarget;
+		return this.compassTarget == null ? null : this.compassTarget.clone();
 	}
 
 	/**
@@ -2027,7 +2027,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @Nullable Location getRespawnLocation()
 	{
-		return this.respawnLocation;
+		return this.respawnLocation == null ? null : this.respawnLocation.clone();
 	}
 
 	@Override
@@ -2077,7 +2077,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		if (override || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
 		{
-			this.respawnLocation = loc;
+			this.respawnLocation = loc == null ? null : loc.clone();
 		}
 	}
 

@@ -51,7 +51,7 @@ public class DragonBattleMock implements DragonBattle
 	@Override
 	public @Nullable Location getEndPortalLocation()
 	{
-		return portalLocation;
+		return portalLocation == null ? null : portalLocation.clone();
 	}
 
 	@Override

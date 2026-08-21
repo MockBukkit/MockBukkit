@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.bukkit.Location;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class EnderDragonMockTest
@@ -14,6 +16,17 @@ class EnderDragonMockTest
 
 	@MockBukkitInject
 	private EnderDragonMock enderDragon;
+
+	@Test
+	void getPodium_ReturnsCopy()
+	{
+		Location location = new Location(enderDragon.getWorld(), 1, 2, 3);
+		enderDragon.setPodium(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(enderDragon.getWorld(), 1, 2, 3), enderDragon.getPodium());
+		assertNotSame(enderDragon.getPodium(), enderDragon.getPodium());
+	}
 
 	@Test
 	void getType()
