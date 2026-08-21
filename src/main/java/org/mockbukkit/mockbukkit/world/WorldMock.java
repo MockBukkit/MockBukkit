@@ -2052,7 +2052,7 @@ public class WorldMock implements World
 	{
 		return getEntities().stream()
 				.filter(entity -> filter == null || filter.test(entity))
-				.filter(entity -> boundingBox.contains(entity.getLocation().toVector()))
+				.filter(entity -> entity.getBoundingBox().overlaps(boundingBox))
 				.collect(Collectors.toSet());
 	}
 
