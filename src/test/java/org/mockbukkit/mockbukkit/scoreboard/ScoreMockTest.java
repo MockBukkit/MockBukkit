@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
+import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -100,6 +102,29 @@ class ScoreMockTest
 		score.resetScore();
 		assertEquals(0, score.getScore());
 		assertFalse(score.isScoreSet());
+	}
+
+
+	@Test
+	void numberFormat_DefaultsToNull()
+	{
+		assertNull(score.numberFormat());
+	}
+
+	@Test
+	void numberFormat_IsRetained()
+	{
+		NumberFormat format = NumberFormat.blank();
+		score.numberFormat(format);
+		assertSame(format, score.numberFormat());
+	}
+
+	@Test
+	void numberFormat_AcceptsNull()
+	{
+		score.numberFormat(NumberFormat.blank());
+		score.numberFormat(null);
+		assertNull(score.numberFormat());
 	}
 
 }

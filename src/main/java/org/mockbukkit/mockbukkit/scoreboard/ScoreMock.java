@@ -20,6 +20,7 @@ public class ScoreMock implements Score
 	private @Nullable OfflinePlayer player = null;
 	private int score = 0;
 	private boolean set = false;
+	private @Nullable NumberFormat numberFormat = null;
 
 	/**
 	 * Constructs a new {@link ScoreMock} for the provided objective with the specified entry.
@@ -132,15 +133,13 @@ public class ScoreMock implements Score
 	@Override
 	public @Nullable NumberFormat numberFormat()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.numberFormat;
 	}
 
 	@Override
 	public void numberFormat(@Nullable NumberFormat numberFormat)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.numberFormat = numberFormat;
 	}
 
 }
