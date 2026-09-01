@@ -38,17 +38,21 @@ class InputMockTest
 	}
 
 	@Test
-	void builderPressesOnlyTheNamedKeys()
+	void eachShorthandPressesOnlyItsOwnKey()
 	{
-		InputMock input = InputMock.builder().forward().right().build();
+		assertEquals(new InputMock(true, false, false, false, false, false, false), InputMock.builder().forward().build());
+		assertEquals(new InputMock(false, true, false, false, false, false, false), InputMock.builder().backward().build());
+		assertEquals(new InputMock(false, false, true, false, false, false, false), InputMock.builder().left().build());
+		assertEquals(new InputMock(false, false, false, true, false, false, false), InputMock.builder().right().build());
+		assertEquals(new InputMock(false, false, false, false, true, false, false), InputMock.builder().jump().build());
+		assertEquals(new InputMock(false, false, false, false, false, true, false), InputMock.builder().sneak().build());
+		assertEquals(new InputMock(false, false, false, false, false, false, true), InputMock.builder().sprint().build());
+	}
 
-		assertTrue(input.isForward());
-		assertTrue(input.isRight());
-		assertFalse(input.isBackward());
-		assertFalse(input.isLeft());
-		assertFalse(input.isJump());
-		assertFalse(input.isSneak());
-		assertFalse(input.isSprint());
+	@Test
+	void shorthandsChain()
+	{
+		assertEquals(new InputMock(true, false, false, true, false, false, false), InputMock.builder().forward().right().build());
 	}
 
 	@Test
