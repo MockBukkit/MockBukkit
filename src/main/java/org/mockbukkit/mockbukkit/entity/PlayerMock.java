@@ -183,6 +183,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private int expCooldown = 0;
 	private int deathScreenScore = 0;
 	private int playerListOrder = 0;
+	private @Nullable String clientBrandName = null;
+	private @NotNull Input currentInput = InputMock.none();
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
@@ -2091,8 +2093,19 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Input getCurrentInput()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.currentInput;
+	}
+
+	/**
+	 * Sets the input this player is reporting, so a test can drive movement-key handling directly. There is no Bukkit
+	 * setter for this -- on a real server the value arrives from the client.
+	 *
+	 * @param currentInput The input to report from {@link #getCurrentInput()}.
+	 */
+	public void setCurrentInput(@NotNull Input currentInput)
+	{
+		Preconditions.checkArgument(currentInput != null, "Input cannot be null");
+		this.currentInput = currentInput;
 	}
 
 	@Override
@@ -2914,8 +2927,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @Nullable String getClientBrandName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.clientBrandName;
+	}
+
+	/**
+	 * Sets the brand name this player's client reports, so a test can stand in for a modded or non-vanilla client.
+	 * There is no Bukkit setter for this -- on a real server the value arrives over the brand plugin channel.
+	 *
+	 * @param clientBrandName The brand to report, or null for a client that has not sent one.
+	 */
+	public void setClientBrandName(@Nullable String clientBrandName)
+	{
+		this.clientBrandName = clientBrandName;
 	}
 
 	@Override
