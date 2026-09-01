@@ -1,7 +1,7 @@
 plugins {
 	id("java")
 	id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
-	id("xyz.jpenilla.run-paper") version "3.0.2"
+	id("xyz.jpenilla.run-paper") version "3.1.0"
 }
 
 group = "org.mockbukkit"
