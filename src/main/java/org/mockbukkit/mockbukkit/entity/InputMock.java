@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.bukkit.Input;
 
 /**
@@ -17,8 +18,8 @@ import org.bukkit.Input;
  * @param sprint   Whether the sprint key is pressed.
  */
 @Builder
-public record InputMock(boolean forward, boolean backward, boolean left, boolean right, boolean jump, boolean sneak,
-						boolean sprint) implements Input
+public record InputMock(@Getter boolean forward, @Getter boolean backward, @Getter boolean left,
+						@Getter boolean right, @Getter boolean jump, @Getter boolean sneak, @Getter boolean sprint) implements Input
 {
 
 	/**
@@ -29,48 +30,6 @@ public record InputMock(boolean forward, boolean backward, boolean left, boolean
 	public static InputMock none()
 	{
 		return builder().build();
-	}
-
-	@Override
-	public boolean isForward()
-	{
-		return this.forward;
-	}
-
-	@Override
-	public boolean isBackward()
-	{
-		return this.backward;
-	}
-
-	@Override
-	public boolean isLeft()
-	{
-		return this.left;
-	}
-
-	@Override
-	public boolean isRight()
-	{
-		return this.right;
-	}
-
-	@Override
-	public boolean isJump()
-	{
-		return this.jump;
-	}
-
-	@Override
-	public boolean isSneak()
-	{
-		return this.sneak;
-	}
-
-	@Override
-	public boolean isSprint()
-	{
-		return this.sprint;
 	}
 
 	/**
