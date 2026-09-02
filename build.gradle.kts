@@ -96,6 +96,10 @@ tasks {
 	test {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		// Byte Buddy refuses to use sun.misc.Unsafe as of Java 26, which disables the class loading strategies
+		// that reflect into ClassLoader. Opting into that behaviour on older JDKs keeps the plugin loading code
+		// paths honest no matter which JDK the tests are run on. See issue #1628.
+		systemProperty("net.bytebuddy.safe", "true")
 	}
 
 	check {
