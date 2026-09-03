@@ -41,9 +41,9 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsAtLeast;
-import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsLessThan;
-import static org.mockbukkit.mockbukkit.matcher.inventory.ItemSimilarityMatcher.similarTo;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.containsAtLeast;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.containsLessThan;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.similarTo;
 
 @ExtendWith(MockBukkitExtension.class)
 class InventoryMockTest
@@ -235,7 +235,7 @@ class InventoryMockTest
 
 		inventory.setContents(new ItemStack[]{ item });
 
-		assertTrue(item.isSimilar(inventory.getItem(0)));
+		assertThat(inventory.getItem(0), similarTo(item));
 		for (int i = 1; i < inventory.getSize(); i++)
 		{
 			ItemStack emptyItem = inventory.getItem(i);

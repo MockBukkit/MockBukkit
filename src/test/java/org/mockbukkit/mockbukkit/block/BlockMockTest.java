@@ -36,8 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.doesNotHaveMaterial;
-import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.doesNotHaveMaterial;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasMaterial;
 
 @ExtendWith(MockBukkitExtension.class)
 class BlockMockTest
