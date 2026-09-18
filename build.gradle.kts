@@ -34,7 +34,7 @@ dependencies {
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
-	implementation("net.bytebuddy:byte-buddy:1.18.11")
+	implementation("net.bytebuddy:byte-buddy:1.18.14")
 
 	compileOnly("org.projectlombok:lombok:1.18.48")
 	annotationProcessor("org.projectlombok:lombok:1.18.48")
