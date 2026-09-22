@@ -19,14 +19,19 @@ jobs:
   tag:
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 15
+    env:
+      TAG_PREFIX: "MC26.2"
     permissions:
       contents: write
       pull-requests: read
     outputs:
-      version: ${{steps.bump-semver.outputs.new_version}}
-      publish_version: ${{ steps.strip-v.outputs.version }}
+      version: ${{ steps.format-tag.outputs.full_tag }}
+      publish_version: ${{ steps.format-tag.outputs.publish_version }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Get merged pull request
         uses: actions-ecosystem/action-get-merged-pull-request@59afe90821bb0b555082ce8ff1e36b03f91553d9 # v1.0.1
@@ -44,11 +49,36 @@ jobs:
           labels: ${{ steps.pr.outputs.labels }}
 
       - name: Get latest tag
-        uses: actions-ecosystem/action-get-latest-tag@b7c32daec3395a9616f88548363a42652b22d435 # v1.6.0
         if: ${{ steps.release-label.outputs.level != null }}
         id: get-latest-tag
-        with:
-          semver_only: true
+        run: |
+          # 1. Try finding the latest tag with TAG_PREFIX on the current branch
+          LATEST_TAG=$(git tag -l --merged HEAD --sort=-v:refname "${TAG_PREFIX}*" | head -n 1)
+
+          # 2. Fallback: Match exact 'vX.Y.Z' and convert to TAG_PREFIX-vX.Y.Z
+          if [ -z "$LATEST_TAG" ]; then
+            echo "No prefix tag found on this branch. Searching for exact vX.Y.Z tag..."
+            RAW_TAG=$(git tag -l --merged HEAD --sort=-v:refname "v*" | grep -m 1 -E '^v[0-9]+\.[0-9]+\.[0-9]+$')
+
+            if [ -n "$RAW_TAG" ]; then
+              LATEST_TAG="${TAG_PREFIX}-${RAW_TAG}"
+            fi
+          fi
+
+          # 3. Default Fallback if no tags exist at all
+          if [ -z "$LATEST_TAG" ]; then
+            echo "No valid tags found on this branch. Using default fallback..."
+            LATEST_TAG="${TAG_PREFIX}-v0.0.0"
+          fi
+
+          # 4. Extract clean SemVer (e.g., "MC26.2-v4.116.1" -> "4.116.1")
+          CLEAN_VERSION=$(echo "$LATEST_TAG" | sed 's/.*-v//; s/^v//')
+
+          echo "Found tag $LATEST_TAG (version: $CLEAN_VERSION)"
+
+          # Export both outputs
+          echo "tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
 
       - name: Set up JDK 25
         uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
@@ -80,27 +110,36 @@ jobs:
         if: ${{ steps.release-label.outputs.level != null }}
         id: bump-semver
         with:
-          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          current_version: ${{ steps.get-latest-tag.outputs.version }}
           level: ${{ steps.release-label.outputs.level }}
 
-      - name: Strip v prefix for publishing
-        id: strip-v
+      - name: Format new tag and versions
+        id: format-tag
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         env:
           NEW_VERSION: ${{ steps.bump-semver.outputs.new_version }}
-        run: echo "version=${NEW_VERSION#v}" >> "$GITHUB_OUTPUT"
+        run: |
+          # Clean raw version (e.g., "4.116.2")
+          CLEAN_VER="${NEW_VERSION#v}"
+
+          # Full tag with prefix (e.g., "MC26.2-v4.116.2")
+          FULL_TAG="${TAG_PREFIX}-v${CLEAN_VER}"
+
+          echo "full_tag=$FULL_TAG" >> "$GITHUB_OUTPUT"
+          echo "publish_version=$CLEAN_VER" >> "$GITHUB_OUTPUT"
 
       - name: Push tag
         uses: actions-ecosystem/action-push-tag@6e82caefe706f5a729e354df7443dc82f98a414f # v1.0.0
-        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        if: ${{ steps.format-tag.outputs.full_tag != null }}
         with:
-          tag: ${{ steps.bump-semver.outputs.new_version }}
+          tag: ${{ steps.format-tag.outputs.full_tag }}
           message: |
-            ${{ steps.bump-semver.outputs.new_version }}
+            ${{ steps.format-tag.outputs.full_tag }}
             Triggered by: PR #${{ steps.pr.outputs.number }}
             Commit: ${{ github.sha }}
             ---
             ${{ steps.paper-version.outputs.paper_details }}
+
   call-publish-workflow:
     name: Call publish workflow
     uses: ./.github/workflows/publish.yml
