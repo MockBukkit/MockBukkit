@@ -1,7 +1,7 @@
 [
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -18,7 +18,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -35,7 +35,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -52,7 +52,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -69,7 +69,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -86,7 +86,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -103,7 +103,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -120,7 +120,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.35,
 		"group": "",
 		"input": {
@@ -137,7 +137,7 @@
 	},
 	{
 		"category": "FOOD",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.1,
 		"group": "",
 		"input": {
