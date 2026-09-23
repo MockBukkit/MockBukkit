@@ -120,14 +120,6 @@ class ItemComponentTypesBridgeMockTest
 	}
 
 	@Test
-	void givenMapItemColor()
-	{
-		MapItemColor.Builder actual = bridge.mapItemColor();
-		assertNotNull(actual);
-		assertNotNull(actual.build());
-	}
-
-	@Test
 	void givenMapDecorations()
 	{
 		MapDecorations.Builder actual = bridge.mapDecorations();
@@ -254,7 +246,7 @@ class ItemComponentTypesBridgeMockTest
 			TypedKey<@NonNull BlockType> dirtKey = TypedKey.create(RegistryKey.BLOCK, Key.key("minecraft", "dirt"));
 			RegistryKeySet<@NonNull BlockType> blocks = RegistrySet.keySet(RegistryKey.BLOCK, List.of(stoneKey, dirtKey));
 
-			Tool.Rule actual = bridge.rule(blocks, 1.0f, TriState.TRUE);
+			Tool.Rule actual = bridge.toolRule(blocks, 1.0f, TriState.TRUE);
 
 			assertNotNull(actual);
 			assertEquals(blocks, actual.blocks());
@@ -324,7 +316,7 @@ class ItemComponentTypesBridgeMockTest
 			double z = 2.0;
 			float rotation = 0.5f;
 
-			MapDecorationsMock.DecorationEntry actual = bridge.decorationEntry(type, x, z, rotation);
+			MapDecorationsMock.DecorationEntry actual = bridge.mapDecorationEntry(type, x, z, rotation);
 
 			assertNotNull(actual);
 			assertEquals(type, actual.type());
