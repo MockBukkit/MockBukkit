@@ -59,6 +59,13 @@ public class SulfurCubeMock extends AgeableMock implements SulfurCube
 	}
 
 	@Override
+	public boolean swallow(ItemStack itemStack)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isFromBucket()
 	{
 		return this.isFromBucket;
