@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.plugin;
 
 import com.destroystokyo.paper.utils.PaperPluginLogger;
-import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup;
 import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy;
@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
@@ -82,13 +84,22 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	}
 
 	@Override
-	protected Class<?> findClass(String name)
+	protected Class<?> findClass(String name) throws ClassNotFoundException
 	{
-		try
+		// No jar file backs a class-based plugin load (MockBukkit.load(Class)). ByteBuddy probes
+		// findClass as an existence check before defining a class, so honor the ClassLoader.findClass
+		// contract and throw ClassNotFoundException instead of an unchecked NullPointerException.
+		if (jarFile == null)
 		{
-			Preconditions.checkNotNull(jarFile, "No jar file selected");
-			ZipEntry entry = jarFile.getEntry(name.replace('.', '/') + ".class");
-			InputStream inputStream = jarFile.getInputStream(entry);
+			throw new ClassNotFoundException(name);
+		}
+		ZipEntry entry = jarFile.getEntry(name.replace('.', '/') + ".class");
+		if (entry == null)
+		{
+			throw new ClassNotFoundException(name);
+		}
+		try (InputStream inputStream = jarFile.getInputStream(entry))
+		{
 			byte[] array = inputStream.readAllBytes();
 			return defineClass(name, array, 0, array.length);
 		}
@@ -105,8 +116,13 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 				.name(target.getSimpleName() + "Proxy")
 				.make();
 		return dynamicType
-				.load(this, ClassLoadingStrategy.Default.INJECTION)
+				.load(this, new DirectDefinitionStrategy())
 				.getLoaded();
+	}
+
+	private Class<?> defineType(@NotNull String name, byte @NotNull [] bytes)
+	{
+		return defineClass(name, bytes, 0, bytes.length);
 	}
 
 	@Override
@@ -133,6 +149,30 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * A {@link ClassLoadingStrategy} that defines the generated types directly on the
+	 * {@link MockBukkitConfiguredPluginClassLoader} they are loaded with.
+	 * <p>
+	 * {@link ClassLoadingStrategy.Default#INJECTION} can not be used for this, as it reflects into the internals of
+	 * {@link ClassLoader} through {@code sun.misc.Unsafe}. Byte Buddy disables that access by default as of Java 26,
+	 * which would leave it unable to define the plugin proxy at all.
+	 */
+	private static class DirectDefinitionStrategy implements ClassLoadingStrategy<MockBukkitConfiguredPluginClassLoader>
+	{
+
+		@Override
+		public Map<TypeDescription, Class<?>> load(MockBukkitConfiguredPluginClassLoader classLoader, Map<TypeDescription, byte[]> types)
+		{
+			Map<TypeDescription, Class<?>> loadedTypes = new LinkedHashMap<>();
+			for (Map.Entry<TypeDescription, byte[]> entry : types.entrySet())
+			{
+				loadedTypes.put(entry.getKey(), classLoader.defineType(entry.getKey().getName(), entry.getValue()));
+			}
+			return loadedTypes;
+		}
+
 	}
 
 }
