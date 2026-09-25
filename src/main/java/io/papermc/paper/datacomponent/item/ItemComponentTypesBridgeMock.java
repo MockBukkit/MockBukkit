@@ -9,6 +9,7 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.JukeboxSong;
 import org.bukkit.block.BlockType;
 import org.bukkit.damage.DamageType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
@@ -89,19 +90,13 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	}
 
 	@Override
-	public MapItemColor.Builder mapItemColor()
-	{
-		return new MapItemColorMock.BuilderMock();
-	}
-
-	@Override
 	public MapDecorations.Builder mapDecorations()
 	{
 		return new MapDecorationsMock.BuilderMock();
 	}
 
 	@Override
-	public MapDecorations.DecorationEntry decorationEntry(MapCursor.Type type, double x, double z, float rotation)
+	public MapDecorations.DecorationEntry mapDecorationEntry(MapCursor.Type type, double x, double z, float rotation)
 	{
 		return new MapDecorationsMock.DecorationEntryMock(type, x, z, rotation);
 	}
@@ -197,7 +192,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	}
 
 	@Override
-	public Tool.Rule rule(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops)
+	public Tool.Rule toolRule(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops)
 	{
 		return new ToolMock.RuleMock(blocks, speed, correctForDrops);
 	}
@@ -344,6 +339,25 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 		Preconditions.checkArgument(absorbedItem != null, "absorbedItem cannot be null");
 		Preconditions.checkArgument(!absorbedItem.isEmpty(), "absorbedItem cannot be empty");
 		return new SulfurCubeContentMock(absorbedItem.asOne());
+	}
+
+	@Override
+	public MobVisibility mobVisibility(RegistryKeySet<EntityType> targetingEntityTypes, float visibility)
+	{
+		return new MobVisibilityMock(targetingEntityTypes, visibility);
+	}
+
+	@Override
+	public VillagerFood villagerFood(int nutrition)
+	{
+		return new VillagerFoodMock(nutrition);
+	}
+
+	@Override
+	public SignText.Builder signText()
+	{
+		// TODO: Implement me
+		throw new UnimplementedOperationException();
 	}
 
 }

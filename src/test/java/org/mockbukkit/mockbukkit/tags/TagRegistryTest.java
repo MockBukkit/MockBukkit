@@ -110,7 +110,7 @@ class TagRegistryTest
 		{
 			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.FLUIDS.getTags();
 			assertNotNull(actual);
-			assertEquals(6, actual.size());
+			assertEquals(10, actual.size());
 		}
 
 		@Test
@@ -162,7 +162,7 @@ class TagRegistryTest
 		{
 			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.DAMAGE_TYPES.getTags();
 			assertNotNull(actual);
-			assertEquals(34, actual.size());
+			assertEquals(36, actual.size());
 		}
 
 		@Test

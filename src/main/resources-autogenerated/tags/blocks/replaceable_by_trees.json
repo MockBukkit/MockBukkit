@@ -30,6 +30,7 @@
 		"minecraft:nether_sprouts",
 		"minecraft:oak_leaves",
 		"minecraft:open_eyeblossom",
+		"minecraft:orange_poplar_leaves",
 		"minecraft:orange_tulip",
 		"minecraft:oxeye_daisy",
 		"minecraft:pale_moss_carpet",
@@ -38,9 +39,11 @@
 		"minecraft:pink_tulip",
 		"minecraft:pitcher_plant",
 		"minecraft:poppy",
+		"minecraft:red_poplar_leaves",
 		"minecraft:red_tulip",
 		"minecraft:rose_bush",
 		"minecraft:seagrass",
+		"minecraft:shelf_mushroom",
 		"minecraft:short_dry_grass",
 		"minecraft:short_grass",
 		"minecraft:spruce_leaves",
@@ -53,6 +56,7 @@
 		"minecraft:warped_roots",
 		"minecraft:water",
 		"minecraft:white_tulip",
-		"minecraft:wither_rose"
+		"minecraft:wither_rose",
+		"minecraft:yellow_poplar_leaves"
 	]
 }

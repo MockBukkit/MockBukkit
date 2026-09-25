@@ -248,7 +248,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.acacia_sign",
 			"typed": "minecraft:acacia_sign"
 		},
@@ -353,7 +353,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.acacia_sign",
 			"typed": "minecraft:acacia_wall_sign"
 		},
@@ -1022,7 +1022,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.bamboo_sign",
 			"typed": "minecraft:bamboo_sign"
 		},
@@ -1127,7 +1127,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.bamboo_sign",
 			"typed": "minecraft:bamboo_wall_sign"
 		},
@@ -1610,7 +1610,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.birch_sign",
 			"typed": "minecraft:birch_sign"
 		},
@@ -1715,7 +1715,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.birch_sign",
 			"typed": "minecraft:birch_wall_sign"
 		},
@@ -1888,6 +1888,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:black_concrete_slab",
+			"key": "minecraft:black_concrete_slab",
+			"material": "minecraft:black_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.black_concrete_slab",
+			"typed": "minecraft:black_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:black_concrete_stairs",
+			"key": "minecraft:black_concrete_stairs",
+			"material": "minecraft:black_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.black_concrete_stairs",
+			"typed": "minecraft:black_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -2032,6 +2074,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.black_wool",
 			"typed": "minecraft:black_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:black_wool_slab",
+			"key": "minecraft:black_wool_slab",
+			"material": "minecraft:black_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.black_wool_slab",
+			"typed": "minecraft:black_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:black_wool_stairs",
+			"key": "minecraft:black_wool_stairs",
+			"material": "minecraft:black_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.black_wool_stairs",
+			"typed": "minecraft:black_wool_stairs"
 		},
 		{
 			"air": false,
@@ -2286,6 +2370,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:blue_concrete_slab",
+			"key": "minecraft:blue_concrete_slab",
+			"material": "minecraft:blue_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.blue_concrete_slab",
+			"typed": "minecraft:blue_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:blue_concrete_stairs",
+			"key": "minecraft:blue_concrete_stairs",
+			"material": "minecraft:blue_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.blue_concrete_stairs",
+			"typed": "minecraft:blue_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -2472,6 +2598,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.blue_wool",
 			"typed": "minecraft:blue_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:blue_wool_slab",
+			"key": "minecraft:blue_wool_slab",
+			"material": "minecraft:blue_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.blue_wool_slab",
+			"typed": "minecraft:blue_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:blue_wool_stairs",
+			"key": "minecraft:blue_wool_stairs",
+			"material": "minecraft:blue_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.blue_wool_stairs",
+			"typed": "minecraft:blue_wool_stairs"
 		},
 		{
 			"air": false,
@@ -2852,6 +3020,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:brown_concrete_slab",
+			"key": "minecraft:brown_concrete_slab",
+			"material": "minecraft:brown_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.brown_concrete_slab",
+			"typed": "minecraft:brown_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:brown_concrete_stairs",
+			"key": "minecraft:brown_concrete_stairs",
+			"material": "minecraft:brown_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.brown_concrete_stairs",
+			"typed": "minecraft:brown_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -3038,6 +3248,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.brown_wool",
 			"typed": "minecraft:brown_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:brown_wool_slab",
+			"key": "minecraft:brown_wool_slab",
+			"material": "minecraft:brown_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.brown_wool_slab",
+			"typed": "minecraft:brown_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:brown_wool_stairs",
+			"key": "minecraft:brown_wool_stairs",
+			"material": "minecraft:brown_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.brown_wool_stairs",
+			"typed": "minecraft:brown_wool_stairs"
 		},
 		{
 			"air": false,
@@ -3766,7 +4018,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.cherry_sign",
 			"typed": "minecraft:cherry_sign"
 		},
@@ -3871,7 +4123,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.cherry_sign",
 			"typed": "minecraft:cherry_wall_sign"
 		},
@@ -5614,7 +5866,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.crimson_sign",
 			"typed": "minecraft:crimson_sign"
 		},
@@ -5740,7 +5992,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.crimson_sign",
 			"typed": "minecraft:crimson_wall_sign"
 		},
@@ -5851,7 +6103,7 @@
 		},
 		{
 			"air": false,
-			"blastResistance": 6.0,
+			"blastResistance": 0.8,
 			"burnable": false,
 			"collision": true,
 			"flammable": false,
@@ -6060,6 +6312,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:cyan_concrete_slab",
+			"key": "minecraft:cyan_concrete_slab",
+			"material": "minecraft:cyan_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.cyan_concrete_slab",
+			"typed": "minecraft:cyan_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:cyan_concrete_stairs",
+			"key": "minecraft:cyan_concrete_stairs",
+			"material": "minecraft:cyan_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.cyan_concrete_stairs",
+			"typed": "minecraft:cyan_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -6204,6 +6498,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.cyan_wool",
 			"typed": "minecraft:cyan_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:cyan_wool_slab",
+			"key": "minecraft:cyan_wool_slab",
+			"material": "minecraft:cyan_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.cyan_wool_slab",
+			"typed": "minecraft:cyan_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:cyan_wool_stairs",
+			"key": "minecraft:cyan_wool_stairs",
+			"material": "minecraft:cyan_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.cyan_wool_stairs",
+			"typed": "minecraft:cyan_wool_stairs"
 		},
 		{
 			"air": false,
@@ -6495,7 +6831,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.dark_oak_sign",
 			"typed": "minecraft:dark_oak_sign"
 		},
@@ -6600,7 +6936,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.dark_oak_sign",
 			"typed": "minecraft:dark_oak_wall_sign"
 		},
@@ -9226,6 +9562,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:gray_concrete_slab",
+			"key": "minecraft:gray_concrete_slab",
+			"material": "minecraft:gray_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.gray_concrete_slab",
+			"typed": "minecraft:gray_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:gray_concrete_stairs",
+			"key": "minecraft:gray_concrete_stairs",
+			"material": "minecraft:gray_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.gray_concrete_stairs",
+			"typed": "minecraft:gray_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -9370,6 +9748,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.gray_wool",
 			"typed": "minecraft:gray_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:gray_wool_slab",
+			"key": "minecraft:gray_wool_slab",
+			"material": "minecraft:gray_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.gray_wool_slab",
+			"typed": "minecraft:gray_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:gray_wool_stairs",
+			"key": "minecraft:gray_wool_stairs",
+			"material": "minecraft:gray_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.gray_wool_stairs",
+			"typed": "minecraft:gray_wool_stairs"
 		},
 		{
 			"air": false,
@@ -9519,6 +9939,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:green_concrete_slab",
+			"key": "minecraft:green_concrete_slab",
+			"material": "minecraft:green_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.green_concrete_slab",
+			"typed": "minecraft:green_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:green_concrete_stairs",
+			"key": "minecraft:green_concrete_stairs",
+			"material": "minecraft:green_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.green_concrete_stairs",
+			"typed": "minecraft:green_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -9663,6 +10125,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.green_wool",
 			"typed": "minecraft:green_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:green_wool_slab",
+			"key": "minecraft:green_wool_slab",
+			"material": "minecraft:green_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.green_wool_slab",
+			"typed": "minecraft:green_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:green_wool_stairs",
+			"key": "minecraft:green_wool_stairs",
+			"material": "minecraft:green_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.green_wool_stairs",
+			"typed": "minecraft:green_wool_stairs"
 		},
 		{
 			"air": false,
@@ -10521,7 +11025,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.jungle_sign",
 			"typed": "minecraft:jungle_sign"
 		},
@@ -10626,7 +11130,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.jungle_sign",
 			"typed": "minecraft:jungle_wall_sign"
 		},
@@ -11091,6 +11595,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:light_blue_concrete_slab",
+			"key": "minecraft:light_blue_concrete_slab",
+			"material": "minecraft:light_blue_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_blue_concrete_slab",
+			"typed": "minecraft:light_blue_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:light_blue_concrete_stairs",
+			"key": "minecraft:light_blue_concrete_stairs",
+			"material": "minecraft:light_blue_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_blue_concrete_stairs",
+			"typed": "minecraft:light_blue_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -11235,6 +11781,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.light_blue_wool",
 			"typed": "minecraft:light_blue_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:light_blue_wool_slab",
+			"key": "minecraft:light_blue_wool_slab",
+			"material": "minecraft:light_blue_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_blue_wool_slab",
+			"typed": "minecraft:light_blue_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:light_blue_wool_stairs",
+			"key": "minecraft:light_blue_wool_stairs",
+			"material": "minecraft:light_blue_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_blue_wool_stairs",
+			"typed": "minecraft:light_blue_wool_stairs"
 		},
 		{
 			"air": false,
@@ -11384,6 +11972,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:light_gray_concrete_slab",
+			"key": "minecraft:light_gray_concrete_slab",
+			"material": "minecraft:light_gray_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_gray_concrete_slab",
+			"typed": "minecraft:light_gray_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:light_gray_concrete_stairs",
+			"key": "minecraft:light_gray_concrete_stairs",
+			"material": "minecraft:light_gray_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_gray_concrete_stairs",
+			"typed": "minecraft:light_gray_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -11528,6 +12158,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.light_gray_wool",
 			"typed": "minecraft:light_gray_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:light_gray_wool_slab",
+			"key": "minecraft:light_gray_wool_slab",
+			"material": "minecraft:light_gray_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_gray_wool_slab",
+			"typed": "minecraft:light_gray_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:light_gray_wool_stairs",
+			"key": "minecraft:light_gray_wool_stairs",
+			"material": "minecraft:light_gray_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.light_gray_wool_stairs",
+			"typed": "minecraft:light_gray_wool_stairs"
 		},
 		{
 			"air": false,
@@ -11782,6 +12454,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:lime_concrete_slab",
+			"key": "minecraft:lime_concrete_slab",
+			"material": "minecraft:lime_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.lime_concrete_slab",
+			"typed": "minecraft:lime_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:lime_concrete_stairs",
+			"key": "minecraft:lime_concrete_stairs",
+			"material": "minecraft:lime_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.lime_concrete_stairs",
+			"typed": "minecraft:lime_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -11926,6 +12640,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.lime_wool",
 			"typed": "minecraft:lime_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:lime_wool_slab",
+			"key": "minecraft:lime_wool_slab",
+			"material": "minecraft:lime_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.lime_wool_slab",
+			"typed": "minecraft:lime_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:lime_wool_stairs",
+			"key": "minecraft:lime_wool_stairs",
+			"material": "minecraft:lime_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.lime_wool_stairs",
+			"typed": "minecraft:lime_wool_stairs"
 		},
 		{
 			"air": false,
@@ -12117,6 +12873,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:magenta_concrete_slab",
+			"key": "minecraft:magenta_concrete_slab",
+			"material": "minecraft:magenta_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.magenta_concrete_slab",
+			"typed": "minecraft:magenta_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:magenta_concrete_stairs",
+			"key": "minecraft:magenta_concrete_stairs",
+			"material": "minecraft:magenta_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.magenta_concrete_stairs",
+			"typed": "minecraft:magenta_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -12261,6 +13059,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.magenta_wool",
 			"typed": "minecraft:magenta_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:magenta_wool_slab",
+			"key": "minecraft:magenta_wool_slab",
+			"material": "minecraft:magenta_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.magenta_wool_slab",
+			"typed": "minecraft:magenta_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:magenta_wool_stairs",
+			"key": "minecraft:magenta_wool_stairs",
+			"material": "minecraft:magenta_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.magenta_wool_stairs",
+			"typed": "minecraft:magenta_wool_stairs"
 		},
 		{
 			"air": false,
@@ -12552,7 +13392,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.mangrove_sign",
 			"typed": "minecraft:mangrove_sign"
 		},
@@ -12657,7 +13497,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.mangrove_sign",
 			"typed": "minecraft:mangrove_wall_sign"
 		},
@@ -13684,7 +14524,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.oak_sign",
 			"typed": "minecraft:oak_sign"
 		},
@@ -13789,7 +14629,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.oak_sign",
 			"typed": "minecraft:oak_wall_sign"
 		},
@@ -14046,6 +14886,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:orange_concrete_slab",
+			"key": "minecraft:orange_concrete_slab",
+			"material": "minecraft:orange_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.orange_concrete_slab",
+			"typed": "minecraft:orange_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:orange_concrete_stairs",
+			"key": "minecraft:orange_concrete_stairs",
+			"material": "minecraft:orange_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.orange_concrete_stairs",
+			"typed": "minecraft:orange_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -14064,6 +14946,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.orange_glazed_terracotta",
 			"typed": "minecraft:orange_glazed_terracotta"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.2,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.2,
+			"interactable": false,
+			"itemType": "minecraft:orange_poplar_leaves",
+			"key": "minecraft:orange_poplar_leaves",
+			"material": "minecraft:orange_poplar_leaves",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.orange_poplar_leaves",
+			"typed": "minecraft:orange_poplar_leaves"
 		},
 		{
 			"air": false,
@@ -14211,6 +15114,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.orange_wool",
 			"typed": "minecraft:orange_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:orange_wool_slab",
+			"key": "minecraft:orange_wool_slab",
+			"material": "minecraft:orange_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.orange_wool_slab",
+			"typed": "minecraft:orange_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:orange_wool_stairs",
+			"key": "minecraft:orange_wool_stairs",
+			"material": "minecraft:orange_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.orange_wool_stairs",
+			"typed": "minecraft:orange_wool_stairs"
 		},
 		{
 			"air": false,
@@ -14901,7 +15846,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.pale_oak_sign",
 			"typed": "minecraft:pale_oak_sign"
 		},
@@ -15006,7 +15951,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.pale_oak_sign",
 			"typed": "minecraft:pale_oak_wall_sign"
 		},
@@ -15284,6 +16229,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:pink_concrete_slab",
+			"key": "minecraft:pink_concrete_slab",
+			"material": "minecraft:pink_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.pink_concrete_slab",
+			"typed": "minecraft:pink_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:pink_concrete_stairs",
+			"key": "minecraft:pink_concrete_stairs",
+			"material": "minecraft:pink_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.pink_concrete_stairs",
+			"typed": "minecraft:pink_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -15470,6 +16457,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.pink_wool",
 			"typed": "minecraft:pink_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:pink_wool_slab",
+			"key": "minecraft:pink_wool_slab",
+			"material": "minecraft:pink_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.pink_wool_slab",
+			"typed": "minecraft:pink_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:pink_wool_stairs",
+			"key": "minecraft:pink_wool_stairs",
+			"material": "minecraft:pink_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.pink_wool_stairs",
+			"typed": "minecraft:pink_wool_stairs"
 		},
 		{
 			"air": false,
@@ -16396,6 +17425,363 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 0.5,
+			"burnable": false,
+			"collision": false,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.5,
+			"interactable": true,
+			"itemType": "minecraft:poplar_button",
+			"key": "minecraft:poplar_button",
+			"material": "minecraft:poplar_button",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.poplar_button",
+			"typed": "minecraft:poplar_button"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_door",
+			"key": "minecraft:poplar_door",
+			"material": "minecraft:poplar_door",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_door",
+			"typed": "minecraft:poplar_door"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_fence",
+			"key": "minecraft:poplar_fence",
+			"material": "minecraft:poplar_fence",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_fence",
+			"typed": "minecraft:poplar_fence"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_fence_gate",
+			"key": "minecraft:poplar_fence_gate",
+			"material": "minecraft:poplar_fence_gate",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_fence_gate",
+			"typed": "minecraft:poplar_fence_gate"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 1.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_hanging_sign",
+			"key": "minecraft:poplar_hanging_sign",
+			"material": "minecraft:poplar_hanging_sign",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_hanging_sign",
+			"typed": "minecraft:poplar_hanging_sign"
+		},
+		{
+			"air": false,
+			"blastResistance": 2.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:poplar_log",
+			"key": "minecraft:poplar_log",
+			"material": "minecraft:poplar_log",
+			"occluding": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_log",
+			"typed": "minecraft:poplar_log"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:poplar_planks",
+			"key": "minecraft:poplar_planks",
+			"material": "minecraft:poplar_planks",
+			"occluding": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_planks",
+			"typed": "minecraft:poplar_planks"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.5,
+			"burnable": false,
+			"collision": false,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.5,
+			"interactable": false,
+			"itemType": "minecraft:poplar_pressure_plate",
+			"key": "minecraft:poplar_pressure_plate",
+			"material": "minecraft:poplar_pressure_plate",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_pressure_plate",
+			"typed": "minecraft:poplar_pressure_plate"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:poplar_sapling",
+			"key": "minecraft:poplar_sapling",
+			"material": "minecraft:poplar_sapling",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.poplar_sapling",
+			"typed": "minecraft:poplar_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_shelf",
+			"key": "minecraft:poplar_shelf",
+			"material": "minecraft:poplar_shelf",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_shelf",
+			"typed": "minecraft:poplar_shelf"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 1.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_sign",
+			"key": "minecraft:poplar_sign",
+			"material": "minecraft:poplar_sign",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.poplar_sign",
+			"typed": "minecraft:poplar_sign"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:poplar_slab",
+			"key": "minecraft:poplar_slab",
+			"material": "minecraft:poplar_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_slab",
+			"typed": "minecraft:poplar_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:poplar_stairs",
+			"key": "minecraft:poplar_stairs",
+			"material": "minecraft:poplar_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_stairs",
+			"typed": "minecraft:poplar_stairs"
+		},
+		{
+			"air": false,
+			"blastResistance": 3.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 3.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_trapdoor",
+			"key": "minecraft:poplar_trapdoor",
+			"material": "minecraft:poplar_trapdoor",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_trapdoor",
+			"typed": "minecraft:poplar_trapdoor"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 1.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_hanging_sign",
+			"key": "minecraft:poplar_wall_hanging_sign",
+			"material": "minecraft:poplar_wall_hanging_sign",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_hanging_sign",
+			"typed": "minecraft:poplar_wall_hanging_sign"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.0,
+			"burnable": false,
+			"collision": false,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 1.0,
+			"interactable": true,
+			"itemType": "minecraft:poplar_sign",
+			"key": "minecraft:poplar_wall_sign",
+			"material": "minecraft:poplar_wall_sign",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.poplar_sign",
+			"typed": "minecraft:poplar_wall_sign"
+		},
+		{
+			"air": false,
+			"blastResistance": 2.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:poplar_wood",
+			"key": "minecraft:poplar_wood",
+			"material": "minecraft:poplar_wood",
+			"occluding": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.poplar_wood",
+			"typed": "minecraft:poplar_wood"
+		},
+		{
+			"air": false,
 			"blastResistance": 0.0,
 			"burnable": true,
 			"collision": false,
@@ -17046,6 +18432,26 @@
 			"gravity": false,
 			"hardness": 0.0,
 			"interactable": true,
+			"key": "minecraft:potted_poplar_sapling",
+			"material": "minecraft:potted_poplar_sapling",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.potted_poplar_sapling",
+			"typed": "minecraft:potted_poplar_sapling"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": true,
 			"key": "minecraft:potted_poppy",
 			"material": "minecraft:potted_poppy",
 			"occluding": false,
@@ -17617,6 +19023,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:purple_concrete_slab",
+			"key": "minecraft:purple_concrete_slab",
+			"material": "minecraft:purple_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.purple_concrete_slab",
+			"typed": "minecraft:purple_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:purple_concrete_stairs",
+			"key": "minecraft:purple_concrete_stairs",
+			"material": "minecraft:purple_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.purple_concrete_stairs",
+			"typed": "minecraft:purple_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -17761,6 +19209,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.purple_wool",
 			"typed": "minecraft:purple_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:purple_wool_slab",
+			"key": "minecraft:purple_wool_slab",
+			"material": "minecraft:purple_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.purple_wool_slab",
+			"typed": "minecraft:purple_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:purple_wool_stairs",
+			"key": "minecraft:purple_wool_stairs",
+			"material": "minecraft:purple_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.purple_wool_stairs",
+			"typed": "minecraft:purple_wool_stairs"
 		},
 		{
 			"air": false,
@@ -17911,7 +19401,7 @@
 		},
 		{
 			"air": false,
-			"blastResistance": 6.0,
+			"blastResistance": 0.8,
 			"burnable": false,
 			"collision": true,
 			"flammable": false,
@@ -18183,6 +19673,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:red_concrete_slab",
+			"key": "minecraft:red_concrete_slab",
+			"material": "minecraft:red_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.red_concrete_slab",
+			"typed": "minecraft:red_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:red_concrete_stairs",
+			"key": "minecraft:red_concrete_stairs",
+			"material": "minecraft:red_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.red_concrete_stairs",
+			"typed": "minecraft:red_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -18330,6 +19862,27 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 0.2,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.2,
+			"interactable": false,
+			"itemType": "minecraft:red_poplar_leaves",
+			"key": "minecraft:red_poplar_leaves",
+			"material": "minecraft:red_poplar_leaves",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.red_poplar_leaves",
+			"typed": "minecraft:red_poplar_leaves"
+		},
+		{
+			"air": false,
 			"blastResistance": 0.5,
 			"burnable": false,
 			"collision": true,
@@ -18372,7 +19925,7 @@
 		},
 		{
 			"air": false,
-			"blastResistance": 6.0,
+			"blastResistance": 0.8,
 			"burnable": false,
 			"collision": true,
 			"flammable": false,
@@ -18432,6 +19985,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.red_sandstone_wall",
 			"typed": "minecraft:red_sandstone_wall"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.0,
+			"burnable": true,
+			"collision": false,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:red_shrub",
+			"key": "minecraft:red_shrub",
+			"material": "minecraft:red_shrub",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.red_shrub",
+			"typed": "minecraft:red_shrub"
 		},
 		{
 			"air": false,
@@ -18579,6 +20153,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.red_wool",
 			"typed": "minecraft:red_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:red_wool_slab",
+			"key": "minecraft:red_wool_slab",
+			"material": "minecraft:red_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.red_wool_slab",
+			"typed": "minecraft:red_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:red_wool_stairs",
+			"key": "minecraft:red_wool_stairs",
+			"material": "minecraft:red_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.red_wool_stairs",
+			"typed": "minecraft:red_wool_stairs"
 		},
 		{
 			"air": false,
@@ -19251,6 +20867,27 @@
 			"solid": false,
 			"translationKey": "block.minecraft.seagrass",
 			"typed": "minecraft:seagrass"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.0,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 0.0,
+			"interactable": false,
+			"itemType": "minecraft:shelf_mushroom",
+			"key": "minecraft:shelf_mushroom",
+			"material": "minecraft:shelf_mushroom",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": false,
+			"translationKey": "block.minecraft.shelf_mushroom",
+			"typed": "minecraft:shelf_mushroom"
 		},
 		{
 			"air": false,
@@ -20255,7 +21892,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.spruce_sign",
 			"typed": "minecraft:spruce_sign"
 		},
@@ -20360,7 +21997,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.spruce_sign",
 			"typed": "minecraft:spruce_wall_sign"
 		},
@@ -20615,6 +22252,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.stonecutter",
 			"typed": "minecraft:stonecutter"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.2,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.2,
+			"interactable": true,
+			"itemType": "minecraft:straw_bed",
+			"key": "minecraft:straw_bed",
+			"material": "minecraft:straw_bed",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.straw_bed",
+			"typed": "minecraft:straw_bed"
 		},
 		{
 			"air": false,
@@ -21014,6 +22672,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.stripped_pale_oak_wood",
 			"typed": "minecraft:stripped_pale_oak_wood"
+		},
+		{
+			"air": false,
+			"blastResistance": 2.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:stripped_poplar_log",
+			"key": "minecraft:stripped_poplar_log",
+			"material": "minecraft:stripped_poplar_log",
+			"occluding": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.stripped_poplar_log",
+			"typed": "minecraft:stripped_poplar_log"
+		},
+		{
+			"air": false,
+			"blastResistance": 2.0,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 2.0,
+			"interactable": false,
+			"itemType": "minecraft:stripped_poplar_wood",
+			"key": "minecraft:stripped_poplar_wood",
+			"material": "minecraft:stripped_poplar_wood",
+			"occluding": true,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.stripped_poplar_wood",
+			"typed": "minecraft:stripped_poplar_wood"
 		},
 		{
 			"air": false,
@@ -22457,7 +24157,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.warped_sign",
 			"typed": "minecraft:warped_sign"
 		},
@@ -22583,7 +24283,7 @@
 				"minecraft:vanilla"
 			],
 			"slipperiness": 0.6,
-			"solid": true,
+			"solid": false,
 			"translationKey": "block.minecraft.warped_sign",
 			"typed": "minecraft:warped_wall_sign"
 		},
@@ -24455,6 +26155,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:white_concrete_slab",
+			"key": "minecraft:white_concrete_slab",
+			"material": "minecraft:white_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.white_concrete_slab",
+			"typed": "minecraft:white_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:white_concrete_stairs",
+			"key": "minecraft:white_concrete_stairs",
+			"material": "minecraft:white_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.white_concrete_stairs",
+			"typed": "minecraft:white_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -24620,6 +26362,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.white_wool",
 			"typed": "minecraft:white_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:white_wool_slab",
+			"key": "minecraft:white_wool_slab",
+			"material": "minecraft:white_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.white_wool_slab",
+			"typed": "minecraft:white_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:white_wool_stairs",
+			"key": "minecraft:white_wool_stairs",
+			"material": "minecraft:white_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.white_wool_stairs",
+			"typed": "minecraft:white_wool_stairs"
 		},
 		{
 			"air": false,
@@ -24853,6 +26637,48 @@
 		},
 		{
 			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:yellow_concrete_slab",
+			"key": "minecraft:yellow_concrete_slab",
+			"material": "minecraft:yellow_concrete_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.yellow_concrete_slab",
+			"typed": "minecraft:yellow_concrete_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 1.8,
+			"burnable": false,
+			"collision": true,
+			"flammable": false,
+			"gravity": false,
+			"hardness": 1.8,
+			"interactable": false,
+			"itemType": "minecraft:yellow_concrete_stairs",
+			"key": "minecraft:yellow_concrete_stairs",
+			"material": "minecraft:yellow_concrete_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.yellow_concrete_stairs",
+			"typed": "minecraft:yellow_concrete_stairs"
+		},
+		{
+			"air": false,
 			"blastResistance": 1.4,
 			"burnable": false,
 			"collision": true,
@@ -24871,6 +26697,27 @@
 			"solid": true,
 			"translationKey": "block.minecraft.yellow_glazed_terracotta",
 			"typed": "minecraft:yellow_glazed_terracotta"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.2,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.2,
+			"interactable": false,
+			"itemType": "minecraft:yellow_poplar_leaves",
+			"key": "minecraft:yellow_poplar_leaves",
+			"material": "minecraft:yellow_poplar_leaves",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.yellow_poplar_leaves",
+			"typed": "minecraft:yellow_poplar_leaves"
 		},
 		{
 			"air": false,
@@ -24997,6 +26844,48 @@
 			"solid": true,
 			"translationKey": "block.minecraft.yellow_wool",
 			"typed": "minecraft:yellow_wool"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:yellow_wool_slab",
+			"key": "minecraft:yellow_wool_slab",
+			"material": "minecraft:yellow_wool_slab",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.yellow_wool_slab",
+			"typed": "minecraft:yellow_wool_slab"
+		},
+		{
+			"air": false,
+			"blastResistance": 0.8,
+			"burnable": true,
+			"collision": true,
+			"flammable": true,
+			"gravity": false,
+			"hardness": 0.8,
+			"interactable": false,
+			"itemType": "minecraft:yellow_wool_stairs",
+			"key": "minecraft:yellow_wool_stairs",
+			"material": "minecraft:yellow_wool_stairs",
+			"occluding": false,
+			"requiredFeatures": [
+				"minecraft:vanilla"
+			],
+			"slipperiness": 0.6,
+			"solid": true,
+			"translationKey": "block.minecraft.yellow_wool_stairs",
+			"typed": "minecraft:yellow_wool_stairs"
 		},
 		{
 			"air": false,

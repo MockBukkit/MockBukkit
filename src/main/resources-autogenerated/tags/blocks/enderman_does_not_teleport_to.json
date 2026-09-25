@@ -1,0 +1,17 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:bedrock",
+		"minecraft:cactus",
+		"minecraft:campfire",
+		"minecraft:fire",
+		"minecraft:lava_cauldron",
+		"minecraft:magma_block",
+		"minecraft:pointed_dripstone",
+		"minecraft:powder_snow",
+		"minecraft:soul_campfire",
+		"minecraft:soul_fire",
+		"minecraft:sweet_berry_bush",
+		"minecraft:wither_rose"
+	]
+}

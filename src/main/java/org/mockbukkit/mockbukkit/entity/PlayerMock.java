@@ -9,6 +9,7 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.connection.PlayerGameConnection;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
+import io.papermc.paper.entity.PlayerPostEffects;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
@@ -109,6 +110,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -2670,6 +2672,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public <T> void spawnParticle(@NonNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speedX, double speedY, double speedZ, @org.jspecify.annotations.Nullable T data, boolean force, Particle.@NonNull RandomizationType randomizationType)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull AdvancementProgress getAdvancementProgress(@NotNull Advancement advancement)
 	{
 		// TODO Auto-generated method stub
@@ -3398,6 +3407,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void unsetFixedPose()
 	{
 		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PlayerPostEffects postEffects()
+	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
