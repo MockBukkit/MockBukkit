@@ -344,15 +344,13 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public MobVisibility mobVisibility(RegistryKeySet<EntityType> targetingEntityTypes, float visibility)
 	{
-		// TODO: Implement me
-		throw new UnimplementedOperationException();
+		return new MobVisibilityMock(targetingEntityTypes, visibility);
 	}
 
 	@Override
 	public VillagerFood villagerFood(int nutrition)
 	{
-		// TODO: Implement me
-		throw new UnimplementedOperationException();
+		return new VillagerFoodMock(nutrition);
 	}
 
 	@Override

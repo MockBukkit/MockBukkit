@@ -563,4 +563,29 @@ class ItemComponentTypesBridgeMockTest
 
 	}
 
+	@Test
+	void givenMobVisibility()
+	{
+		var entitySet = RegistrySet.keySet(
+				RegistryKey.ENTITY_TYPE,
+				TypedKey.create(RegistryKey.ENTITY_TYPE, Key.key("minecraft:zombie")),
+				TypedKey.create(RegistryKey.ENTITY_TYPE, Key.key("minecraft:skeleton"))
+		);
+
+		MobVisibility mobVisibility = bridge.mobVisibility(entitySet, 10);
+
+		assertNotNull(mobVisibility);
+		assertEquals(entitySet, mobVisibility.targetingEntityTypes());
+		assertEquals(10, mobVisibility.visibility());
+	}
+
+	@Test
+	void givenVillageFood()
+	{
+		VillagerFood villagerFood = bridge.villagerFood(5);
+
+		assertNotNull(villagerFood);
+		assertEquals(5, villagerFood.nutrition());
+	}
+
 }
