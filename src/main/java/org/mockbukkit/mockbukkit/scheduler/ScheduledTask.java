@@ -148,7 +148,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * Marks the task's scheduling as being done.
 	 */
 	@ApiStatus.Internal
-	protected void setSchedulingDone()
+	protected void markSchedulingDone()
 	{
 		schedulingDone = true;
 	}

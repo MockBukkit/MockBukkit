@@ -230,7 +230,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			else
 			{
-				task.setSchedulingDone();
+				task.markSchedulingDone();
 			}
 		}
 	}
