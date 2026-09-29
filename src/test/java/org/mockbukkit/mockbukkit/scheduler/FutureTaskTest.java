@@ -13,6 +13,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -164,6 +166,51 @@ class FutureTaskTest
 		assertFalse(called.get());
 		scheduler.performTicks(10);
 		assertFalse(called.get());
+	}
+
+	@Test
+	void callSyncMethod_cannotCancelWhileRunning() throws Exception
+	{
+		AtomicReference<Future<Integer>> reference = new AtomicReference<>();
+		Future<Integer> future = scheduler.callSyncMethod(null, () ->
+		{
+			assertFalse(reference.get().cancel(false));
+			return 42;
+		});
+		reference.set(future);
+
+		scheduler.performOneTick();
+
+		assertFalse(future.isCancelled());
+		assertEquals(42, future.get());
+	}
+
+	@Test
+	void callSyncMethod_cancelTaskWhileRunningPreservesResult() throws Exception
+	{
+		AtomicInteger taskId = new AtomicInteger();
+		Future<Integer> future = scheduler.callSyncMethod(null, () ->
+		{
+			scheduler.cancelTask(taskId.get());
+			return 42;
+		});
+		var pending = scheduler.getPendingTasks();
+		assertEquals(1, pending.size()); // Just to be sure
+		taskId.set(pending.getFirst().getTaskId());
+
+		scheduler.performOneTick();
+
+		assertFalse(future.isCancelled());
+		assertEquals(42, future.get());
+	}
+
+	@Test
+	void callSyncMethod_cancelTwiceReturnsFalseSecondTime()
+	{
+		Future<Integer> future = scheduler.callSyncMethod(null, () -> 42);
+
+		assertTrue(future.cancel(false));
+		assertFalse(future.cancel(false));
 	}
 
 }

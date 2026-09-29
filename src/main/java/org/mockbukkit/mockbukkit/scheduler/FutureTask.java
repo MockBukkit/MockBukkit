@@ -19,6 +19,9 @@ import java.util.concurrent.TimeoutException;
 class FutureTask<T> implements Future<T>
 {
 
+	// This variable must be accessed while synchronizing on FutureTask.this to avoid data races and race conditions
+	private boolean hasRun = false;
+
 	private final ScheduledTask task;
 	private final CompletableFuture<T> future = new CompletableFuture<>();
 
@@ -35,6 +38,15 @@ class FutureTask<T> implements Future<T>
 
 		this.task = (ScheduledTask) scheduler.runTask(plugin, () ->
 		{
+			synchronized (FutureTask.this)
+			{
+				hasRun = true;
+				if (future.isCancelled())
+				{
+					return;
+				}
+			}
+
 			try
 			{
 				future.complete(callable.call());
@@ -44,7 +56,16 @@ class FutureTask<T> implements Future<T>
 				future.completeExceptionally(t);
 			}
 		});
-		this.task.addOnCancelled(() -> future.cancel(false));
+		this.task.addOnCancelled(() ->
+		{
+			synchronized (FutureTask.this)
+			{
+				if (!hasRun)
+				{
+					future.cancel(false);
+				}
+			}
+		});
 
 		// Handle race condition when the task is cancelled before addOnCancelled is called
 		if (this.task.isCancelled())
@@ -56,8 +77,22 @@ class FutureTask<T> implements Future<T>
 	@Override
 	public boolean cancel(boolean mayInterruptIfRunning)
 	{
+		boolean cancelled;
+		synchronized (FutureTask.this)
+		{
+			if (hasRun)
+			{
+				return false;
+			}
+
+			// future.cancel(...) returns true if the task was already cancelled,
+			// but Bukkit returns true only if the task is being cancelled
+			cancelled = future.isCancelled();
+			future.cancel(false);
+		}
+
 		task.cancel();
-		return future.isCancelled();
+		return !cancelled;
 	}
 
 	@Override
