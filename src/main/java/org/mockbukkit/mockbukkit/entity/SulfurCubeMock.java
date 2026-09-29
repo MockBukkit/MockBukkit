@@ -61,8 +61,25 @@ public class SulfurCubeMock extends AgeableMock implements SulfurCube
 	@Override
 	public boolean swallow(ItemStack itemStack)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!isAdult())
+		{
+			return false;
+		}
+
+		var equipment = getEquipment();
+		if (equipment != null)
+		{
+			var equippedItem = equipment.getChestplate();
+			if (equippedItem.isSimilar(itemStack))
+			{
+				// If the items are equal, we should ignore
+				return false;
+			}
+
+			equipment.setChestplate(itemStack.asOne());
+		}
+
+		return true;
 	}
 
 	@Override
