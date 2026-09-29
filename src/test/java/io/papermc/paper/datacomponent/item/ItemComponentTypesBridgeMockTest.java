@@ -7,7 +7,9 @@ import io.papermc.paper.registry.set.RegistryKeySet;
 import io.papermc.paper.registry.set.RegistrySet;
 import io.papermc.paper.text.Filtered;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.util.TriState;
+import org.bukkit.DyeColor;
 import org.bukkit.JukeboxSong;
 import org.bukkit.Material;
 import org.bukkit.block.BlockType;
@@ -25,10 +27,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -586,6 +590,18 @@ class ItemComponentTypesBridgeMockTest
 
 		assertNotNull(villagerFood);
 		assertEquals(5, villagerFood.nutrition());
+	}
+
+	@Test
+	void givenSingText()
+	{
+		SignText.Builder signTextBuilder = bridge.signText();
+		assertNotNull(signTextBuilder);
+
+		SignText signText = signTextBuilder.build();
+		assertEquals(Collections.nCopies(4, Component.empty()), signText.lines());
+		assertEquals(DyeColor.BLACK, signText.color());
+		assertFalse(signText.hasGlowingText());
 	}
 
 }

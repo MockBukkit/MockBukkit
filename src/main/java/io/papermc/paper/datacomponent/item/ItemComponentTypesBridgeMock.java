@@ -356,8 +356,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public SignText.Builder signText()
 	{
-		// TODO: Implement me
-		throw new UnimplementedOperationException();
+		return new SignTextMock.BuilderMock();
 	}
 
 }
