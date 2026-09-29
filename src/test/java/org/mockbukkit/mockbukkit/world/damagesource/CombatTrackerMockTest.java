@@ -653,7 +653,10 @@ class CombatTrackerMockTest
 				firework.setItem(wand);
 
 				CombatEntryMock combatEntry = CombatEntryMock.builder()
-						.damageSource(DamageSource.builder(DamageType.FIREWORKS).withCausingEntity(firework).build())
+						.damageSource(DamageSource.builder(DamageType.FIREWORKS)
+								.withDirectEntity(firework)
+								.withCausingEntity(attacker)
+								.build())
 						.build();
 				combatTracker.addCombatEntry(combatEntry);
 
