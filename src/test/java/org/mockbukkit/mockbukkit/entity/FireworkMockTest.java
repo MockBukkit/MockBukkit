@@ -4,9 +4,11 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -97,6 +99,19 @@ class FireworkMockTest
 	{
 		Firework firework = new FireworkMock(server, UUID.randomUUID());
 		assertThrows(NullPointerException.class, () -> firework.setFireworkMeta(null));
+	}
+
+	@Test
+	void setItem_givenNullArgumentShouldUseDefault()
+	{
+		Firework firework = new FireworkMock(server, UUID.randomUUID());
+
+		var diamondItem = ItemStack.of(Material.DIAMOND);
+		firework.setItem(diamondItem);
+		assertEquals(diamondItem, firework.getItem());
+
+		firework.setItem(null);
+		assertEquals(ItemStack.of(Material.FIREWORK_ROCKET), firework.getItem());
 	}
 
 }
