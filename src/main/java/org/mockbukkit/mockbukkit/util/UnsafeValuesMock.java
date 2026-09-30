@@ -49,7 +49,8 @@ public class UnsafeValuesMock implements UnsafeValues
 					"1.20",
 					"1.21",
 					"26.1",
-					"26.2"
+					"26.2",
+					"26.3"
 			);
 
 	private String minimumApiVersion = "none";

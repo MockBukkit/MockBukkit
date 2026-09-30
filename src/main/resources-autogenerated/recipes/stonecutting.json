@@ -45,6 +45,34 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:black_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:black_concrete_slab_from_black_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:black_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:black_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:black_concrete_stairs_from_black_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:blackstone"
 			],
 			"type": "material"
@@ -87,6 +115,34 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:blue_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:blue_concrete_slab_from_blue_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:blue_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:blue_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:blue_concrete_stairs_from_blue_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:bricks"
 			],
 			"type": "material"
@@ -123,6 +179,34 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:brick_wall"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:brown_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brown_concrete_slab_from_brown_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:brown_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:brown_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brown_concrete_stairs_from_brown_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_concrete_stairs"
 		}
 	},
 	{
@@ -955,6 +1039,34 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:cyan_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cyan_concrete_slab_from_cyan_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:cyan_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:cyan_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cyan_concrete_stairs_from_cyan_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:dark_prismarine"
 			],
 			"type": "material"
@@ -1753,6 +1865,174 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:gray_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gray_concrete_slab_from_gray_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:gray_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:gray_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:gray_concrete_stairs_from_gray_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:green_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:green_concrete_slab_from_green_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:green_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:green_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:green_concrete_stairs_from_green_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:light_blue_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:light_blue_concrete_slab_from_light_blue_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:light_blue_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:light_blue_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:light_blue_concrete_stairs_from_light_blue_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:light_gray_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:light_gray_concrete_slab_from_light_gray_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:light_gray_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:light_gray_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:light_gray_concrete_stairs_from_light_gray_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:lime_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lime_concrete_slab_from_lime_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:lime_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:lime_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:lime_concrete_stairs_from_lime_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:magenta_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:magenta_concrete_slab_from_magenta_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:magenta_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:magenta_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:magenta_concrete_stairs_from_magenta_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:mossy_cobblestone"
 			],
 			"type": "material"
@@ -1921,6 +2201,34 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:orange_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:orange_concrete_slab_from_orange_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:orange_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:orange_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:orange_concrete_stairs_from_orange_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:oxidized_copper"
 			],
 			"type": "material"
@@ -2027,6 +2335,34 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:oxidized_cut_copper_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:pink_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:pink_concrete_slab_from_pink_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:pink_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:pink_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:pink_concrete_stairs_from_pink_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_concrete_stairs"
 		}
 	},
 	{
@@ -3027,6 +3363,34 @@
 		"group": "",
 		"input": {
 			"choices": [
+				"minecraft:purple_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:purple_concrete_slab_from_purple_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:purple_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:purple_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:purple_concrete_stairs_from_purple_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
 				"minecraft:purpur_block"
 			],
 			"type": "material"
@@ -3119,6 +3483,34 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:quartz_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:red_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:red_concrete_slab_from_red_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:red_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:red_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:red_concrete_stairs_from_red_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_concrete_stairs"
 		}
 	},
 	{
@@ -4463,6 +4855,62 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:weathered_cut_copper_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:white_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:white_concrete_slab_from_white_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:white_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:white_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:white_concrete_stairs_from_white_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_concrete_stairs"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:yellow_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:yellow_concrete_slab_from_yellow_concrete_stonecutting",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:yellow_concrete_slab"
+		}
+	},
+	{
+		"group": "",
+		"input": {
+			"choices": [
+				"minecraft:yellow_concrete"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:yellow_concrete_stairs_from_yellow_concrete_stonecutting",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_concrete_stairs"
 		}
 	}
 ]

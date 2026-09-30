@@ -2016,6 +2016,13 @@ public class WorldMock implements World
 		));
 	}
 
+	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speedX, double speedY, double speedZ, @org.jspecify.annotations.Nullable T data, boolean force, Particle.@NotNull RandomizationType randomizationType)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Helper method to set the default value of a {@link GameRule}.
 	 *
