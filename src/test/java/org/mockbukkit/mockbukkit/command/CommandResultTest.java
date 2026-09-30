@@ -11,12 +11,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasAnyResponse;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasNoResponse;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMatcher.doesNotHaveResponse;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMatcher.hasResponse;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasFailed;
-import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.doesNotHaveResponse;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasAnyResponse;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasFailed;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasNoResponse;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasResponse;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasSucceeded;
 
 @ExtendWith(MockBukkitExtension.class)
 class CommandResultTest
