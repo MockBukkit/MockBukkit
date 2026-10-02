@@ -260,8 +260,8 @@ class BukkitSchedulerMockTest
 			}
 		}, 2L, 1L);
 
-		assertEquals(0, count.get());
 		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		assertEquals(0, count.get());
 
 		scheduler.performTicks(1L);
 		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
