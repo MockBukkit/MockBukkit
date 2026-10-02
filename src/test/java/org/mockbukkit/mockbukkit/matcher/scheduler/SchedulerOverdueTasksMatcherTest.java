@@ -43,6 +43,7 @@ class SchedulerOverdueTasksMatcherTest extends AbstractMatcherTest
 				// Code will end after reaching this point, therefore no-op
 			}
 		});
+		scheduler.performOneTick();
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
 		tasksSaved.countDown();
