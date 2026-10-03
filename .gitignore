@@ -216,3 +216,7 @@ kls_database.db
 metaminer/bin/
 metaminer/run
 metaminer/build
+
+# OpenCode Paper parity review (staged in CI, never committed)
+.paper-ref/
+.oc-changed-files.txt

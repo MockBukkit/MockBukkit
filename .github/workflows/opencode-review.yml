@@ -1,0 +1,171 @@
+name: OpenCode Paper Parity Review
+
+# Opt-in reviewer: comment `/parity` on a pull request.
+#
+# It builds the real Paper server sources for the exact version this repo targets
+# (via paperweight-userdev) and asks an agent whether the changed mocks actually
+# behave like the real implementation.
+#
+# The agent is read-only: `.opencode/agents/paper-parity.md` denies `edit`, and
+# nothing in this job pushes. It reports findings as review comments only.
+#
+# Runs from the default branch (issue_comment), so secrets are available even when
+# the pull request comes from a fork. That is also why it is gated to people who can
+# already push here: the job checks out and builds the pull request's code, which
+# means executing its Gradle scripts.
+
+on:
+  issue_comment:
+    types: [ created ]
+  # INTERIM -- remove once this is on the default branch.
+  # issue_comment always runs the default branch's copy of a workflow, so `/parity`
+  # cannot exercise this until it is merged. pull_request uses the copy from the PR
+  # itself, which lets us test it first. Apply the `parity` label to trigger.
+  pull_request:
+    types: [ labeled ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  # Required for the OpenCode App's OIDC token exchange.
+  id-token: write
+
+concurrency:
+  group: oc-review-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  parity-review:
+    if: >-
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       startsWith(github.event.comment.body, '/parity') &&
+       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association))
+      ||
+      (github.event_name == 'pull_request' && github.event.label.name == 'parity')
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 30
+    env:
+      PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+
+    steps:
+      - name: Acknowledge the command
+        if: github.event_name == 'issue_comment'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method POST \
+            "repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }}/reactions" \
+            -f content=eyes --silent || true
+
+      - name: Collect changed files
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh pr diff "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
+            --name-only > /tmp/changed-all.txt
+          # Only Java under src/ is worth a parity check.
+          grep -E '^src/.*\.java$' /tmp/changed-all.txt > /tmp/changed.txt || true
+          echo "count=$(wc -l < /tmp/changed.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Report nothing to review
+        if: steps.pr.outputs.count == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
+            --body "🐙 No Java files under \`src/\` changed in this PR, so there is nothing to parity-check."
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: steps.pr.outputs.count != '0'
+        with:
+          # refs/pull/N/head resolves for fork PRs too, unlike the head SHA.
+          ref: refs/pull/${{ env.PR_NUMBER }}/head
+          # The opencode action runs its own authenticated `git fetch`. If checkout
+          # leaves its credential in .git/config as an http.extraheader, both are
+          # sent and GitHub rejects the request: `Duplicate header: "Authorization"`.
+          persist-credentials: false
+
+      - name: Set up JDK 25
+        if: steps.pr.outputs.count != '0'
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
+        with:
+          java-version: 25
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        if: steps.pr.outputs.count != '0'
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        with:
+          # The paperweight caches hold Mojang-derived artifacts (the mojang-mapped
+          # server jar and the applied sources). Those must not land in a shared,
+          # restorable Actions cache -- regenerating takes about a minute anyway.
+          cache-disabled: true
+
+      - name: Build Paper reference sources
+        if: steps.pr.outputs.count != '0'
+        # paperweight skips decompilation when it detects CI (getGenSources() reads
+        # this property only when the CI env var is set), producing the mojang-mapped
+        # *bytecode* jar and nothing else. We need the sources, so opt back in --
+        # this is what takes the step from ~4s to ~1min.
+        run: ./gradlew :metaminer:paperweightUserdevSetup -Ppaperweight.experimental.genSources=true
+
+      - name: Stage Paper sources and change list
+        if: steps.pr.outputs.count != '0'
+        run: |
+          # No pipefail here on purpose: `unzip -l | grep -q` exits early by design,
+          # which SIGPIPEs unzip and would make every content check evaluate false.
+          set -eu
+          GUH="${GRADLE_USER_HOME:-$HOME/.gradle}"
+
+          # paperweight copies the applied sources into a project-local task cache.
+          # Prefer that known path; fall back to identifying the artifact by its
+          # contents if the layout ever moves, since it isn't contractual.
+          JAR=""
+          KNOWN=metaminer/.gradle/caches/paperweight/taskCache/mappedServerJar.jar
+          if [ -f "$KNOWN" ] && unzip -l "$KNOWN" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+            JAR="$KNOWN"
+          fi
+
+          if [ -z "$JAR" ]; then
+            echo "Known path missed; searching. Cache roots:"
+            ls -1 "$GUH/caches" 2>/dev/null | head -20 || echo "  (no $GUH/caches)"
+            find "$GUH" . -name '*.jar' -size +5M 2>/dev/null | head -30 || true
+            while IFS= read -r candidate; do
+              if unzip -l "$candidate" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+                JAR="$candidate"
+                break
+              fi
+            done < <(find "$GUH" . -name '*.jar' -size +5M 2>/dev/null | xargs -r ls -t 2>/dev/null)
+          fi
+
+          if [ -z "$JAR" ]; then
+            echo "::error::No jar containing CraftBukkit sources found. See the listing above."
+            exit 1
+          fi
+          echo "Using $JAR"
+          # Extract into the workspace so the agent has a stable, relative path.
+          # Sources only -- the .class files are dead weight for a reading agent.
+          mkdir -p .paper-ref
+          unzip -q "$JAR" '*.java' -d .paper-ref
+          cp /tmp/changed.txt .oc-changed-files.txt
+          echo "Staged $(find .paper-ref -name '*.java' | wc -l) Paper sources from $JAR"
+
+      - name: Parity review
+        if: steps.pr.outputs.count != '0'
+        uses: anomalyco/opencode/github@31406ccc51b4bd2a4e1e086b2bcaa5f7f804f26d # v1.18.18
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        with:
+          model: openrouter/deepseek/deepseek-v4-flash-0731
+          agent: paper-parity
+          mentions: "/parity"
+          # Defaults to true on public repos. The session transcript would include
+          # the Paper sources the agent reads, so sharing it would publish
+          # Mojang-derived code. Keep it off.
+          share: "false"
+          # Explicit task, so the label-triggered path works too -- on a
+          # pull_request event there is no comment for the action to read.
+          prompt: "Perform the Paper parity review described in your agent instructions."

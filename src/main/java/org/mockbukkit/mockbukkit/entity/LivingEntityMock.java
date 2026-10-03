@@ -89,6 +89,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
+	private int beeStingerCooldown = 0;
+	private int beeStingersInBody = 0;
 	/**
 	 * NoDamage ticks
 	 */
@@ -1135,29 +1137,25 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getBeeStingerCooldown()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.beeStingerCooldown;
 	}
 
 	@Override
 	public void setBeeStingerCooldown(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.beeStingerCooldown = Math.max(0, ticks);
 	}
 
 	@Override
 	public int getBeeStingersInBody()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.beeStingersInBody;
 	}
 
 	@Override
 	public void setBeeStingersInBody(int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.beeStingersInBody = Math.max(0, count);
 	}
 
 	@Override
