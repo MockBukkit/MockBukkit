@@ -4,20 +4,17 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Hopper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.HopperInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
-import java.util.UUID;
-
 /**
  * Mock implementation of a {@link Hopper}.
  *
- * @see LootableStateMock
+ * @see LootableContainerStateMock
  */
-public class HopperStateMock extends LootableStateMock implements Hopper
+public class HopperStateMock extends LootableContainerStateMock implements Hopper
 {
 
 	/**
@@ -70,76 +67,6 @@ public class HopperStateMock extends LootableStateMock implements Hopper
 	public @NotNull HopperStateMock copy()
 	{
 		return new HopperStateMock(this);
-	}
-
-	@Override
-	public boolean isRefillEnabled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasBeenFilled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canPlayerLoot(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPlayerLooted(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Long getLastLooted(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPendingRefill()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getLastFilled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getNextRefill()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long setNextRefill(long refillAt)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

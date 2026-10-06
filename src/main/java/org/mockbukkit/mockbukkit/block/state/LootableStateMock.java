@@ -7,7 +7,6 @@ import org.bukkit.loot.LootTable;
 import org.bukkit.loot.Lootable;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 import java.util.Objects;
@@ -20,6 +19,7 @@ import java.util.Objects;
 @NullMarked
 public abstract class LootableStateMock extends ContainerStateMock implements Lootable, Nameable
 {
+	private @Nullable LootTable lootTable = null;
 	private long seed = 0;
 
 	protected LootableStateMock(Material material)
@@ -35,14 +35,14 @@ public abstract class LootableStateMock extends ContainerStateMock implements Lo
 	protected LootableStateMock(LootableStateMock state)
 	{
 		super(state);
+		this.lootTable = state.lootTable;
 		this.seed = state.seed;
 	}
 
 	@Override
 	public @Nullable LootTable getLootTable()
 	{
-		// TODO Auto-generated method stub
-		throw new  UnimplementedOperationException("getLootTable");
+		return this.lootTable;
 	}
 
 	@Override
@@ -54,8 +54,8 @@ public abstract class LootableStateMock extends ContainerStateMock implements Lo
 	@Override
 	public void setLootTable(@Nullable LootTable table, long seed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setLootTable");
+		this.lootTable = table;
+		this.seed = seed;
 	}
 
 	@Override
@@ -87,13 +87,13 @@ public abstract class LootableStateMock extends ContainerStateMock implements Lo
 		{
 			return false;
 		}
-		return seed == that.seed;
+		return seed == that.seed && Objects.equals(lootTable, that.lootTable);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), seed);
+		return Objects.hash(super.hashCode(), lootTable, seed);
 	}
 
 }
