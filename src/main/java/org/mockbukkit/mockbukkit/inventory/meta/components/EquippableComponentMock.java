@@ -43,7 +43,7 @@ public class EquippableComponentMock implements EquippableComponent
 	private @Nullable Sound sound;
 	private @Nullable Sound shearingSound;
 
-	private EquipmentSlot equipmentSlot;
+	private @Builder.Default EquipmentSlot equipmentSlot = EquipmentSlot.HAND;
 	private boolean isDispensable;
 	private boolean isSwappable;
 	private boolean isDamageOnHurt;
@@ -67,7 +67,7 @@ public class EquippableComponentMock implements EquippableComponent
 		this.allowedEntities = allowedEntities != null ? Set.copyOf(allowedEntities) : null;
 		this.sound = sound;
 		this.shearingSound = shearingSound;
-		this.equipmentSlot = equipmentSlot;
+		this.equipmentSlot = Preconditions.checkNotNull(equipmentSlot);
 		this.isDispensable = isDispensable;
 		this.isSwappable = isSwappable;
 		this.isDamageOnHurt = isDamageOnHurt;

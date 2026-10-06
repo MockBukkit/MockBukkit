@@ -38,7 +38,6 @@ import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -2126,7 +2125,11 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-stack-size\":15}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "max-stack-size": 15
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2137,7 +2140,11 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"rarity\":\"EPIC\"}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "rarity": "EPIC"
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2148,67 +2155,128 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"count\":1,\"id\":\"minecraft:diamond\",\"DataVersion\":1,\"schema_version\":1}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "use-remainder": {
+					        "count": 1,
+					        "id": "minecraft:diamond",
+					        "DataVersion": 1,
+					        "schema_version": 1
+					    }
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
 		@Test
-		@Disabled("UseCooldownComponent is not implemented yet.")
 		void givenUseCooldown()
 		{
-			// TODO: meta.setUseCooldown(...);
+			meta.setUseCooldown(UseCooldownComponentMock.builder()
+					.cooldownSeconds(3)
+					.cooldownGroup(NamespacedKey.fromString("minecraft:test"))
+					.build());
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-cooldown\":{}}";
+			String expected = """
+					{
+						"meta-type": "UNSPECIFIC",
+						"use-cooldown": {
+							"seconds": 3,
+							"cooldown-group": "minecraft:test"
+						}
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
 		@Test
-		@Disabled("FoodComponent is not implemented yet.")
 		void givenFood()
 		{
-			// TODO: meta.setFood(...);
+			meta.setFood(FoodComponentMock.builder()
+					.nutrition(5)
+					.saturation(8)
+					.canAlwaysEat(false)
+					.build());
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"food\":{}}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "food": {
+					        "nutrition": 5,
+					        "saturation": 8,
+					        "can-always-eat": false
+					    }
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
 		@Test
-		@Disabled("ToolComponent is not implemented yet.")
 		void givenTool()
 		{
-			// TODO: meta.setTool(...);
+			meta.setTool(ToolComponentMock.builder()
+					.damagePerBlock(15)
+					.defaultMiningSpeed(10)
+					.build());
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"tool\":{}}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "tool": {
+					        "damage-per-block": 15,
+					        "default-mining-speed": 10,
+					        "rules": []
+					    }
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
 		@Test
-		@Disabled("EquippableComponent is not implemented yet")
 		void givenEquippable()
 		{
-			// TODO: meta.setEquippable(...);
+			meta.setEquippable(EquippableComponentMock.builder()
+					.isShearable(true)
+					.isDispensable(true)
+					.isDamageOnHurt(true)
+					.build());
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"equippable\":{}}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "equippable": {
+					        "can-be-sheared": true,
+					        "dispensable": true,
+					        "damage-on-hurt": true,
+					        "equip-on-interact": false,
+					        "equip-sound": "minecraft:item.armor.equip_generic",
+					        "slot": "HAND",
+					        "swappable": false
+					    }
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
 		@Test
-		@Disabled("JukeboxPlayableComponent is not implemented yet.")
 		void givenJukeboxPlayable()
 		{
-			// TODO: meta.setJukeboxPlayable(...);
+			meta.setJukeboxPlayable(JukeboxPlayableComponentMock.builder()
+					.soundKey(NamespacedKey.minecraft("test"))
+					.build());
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"jukebox-playable\":{}}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "jukebox-playable": {
+					    	"song": "minecraft:test"
+					    }
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2219,7 +2287,11 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "Damage": 50
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2230,7 +2302,11 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}}";
+			String expected = """
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "max-damage": 75
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2243,13 +2319,12 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "PublicBukkitValues": {
-					"minecraft:test-key": "value"
-				}
-            }
-            """;
+					{
+					    "meta-type": "UNSPECIFIC",
+					    "PublicBukkitValues": {
+					        "minecraft:test-key": "value"
+					    }
+					}""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2265,15 +2340,15 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "display-name":"\\"Pickaxe\\"",
-                "Unbreakable":true,
-                "custom-model-data":99,
-                "ItemFlags":["HIDE_ENCHANTS"],
-                "enchantments":{"minecraft:unbreaking":1}
-            }
-            """;
+					{
+						"meta-type":"UNSPECIFIC",
+						"display-name":"\\"Pickaxe\\"",
+						"Unbreakable":true,
+						"custom-model-data":99,
+						"ItemFlags":["HIDE_ENCHANTS"],
+						"enchantments":{"minecraft:unbreaking":1}
+					}
+					""";
 			assertJsonEqual(expected, actual);
 		}
 

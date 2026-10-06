@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
@@ -21,7 +22,9 @@ import java.util.UUID;
  */
 public class FireworkMock extends ProjectileMock implements Firework
 {
+	private static final Material EMPTY_ITEM = Material.FIREWORK_ROCKET;
 
+	private @NotNull ItemStack item = ItemStack.of(EMPTY_ITEM);
 	private FireworkMeta meta;
 	private boolean shotAtAngle = false;
 
@@ -158,15 +161,13 @@ public class FireworkMock extends ProjectileMock implements Firework
 	@Override
 	public @NotNull ItemStack getItem()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.item;
 	}
 
 	@Override
 	public void setItem(@Nullable ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.item = (itemStack == null ? ItemStack.of(EMPTY_ITEM) : itemStack.clone());
 	}
 
 	@Override
