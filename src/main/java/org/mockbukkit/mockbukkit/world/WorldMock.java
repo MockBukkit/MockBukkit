@@ -1930,6 +1930,9 @@ public class WorldMock implements World
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speedX, double speedY, double speedZ, @Nullable T data, boolean force, Particle.@NotNull RandomizationType randomizationType)
 	{
+		Preconditions.checkNotNull(particle, "Particle cannot be null");
+		Preconditions.checkArgument(data == null || particle.getDataType().isInstance(data), "data should be %s got %s", particle.getDataType(), (data != null ? data.getClass().getName() : null));
+
 		spawnedParticles.add(new SpawnedParticle(
 				fullTime,
 				particle,

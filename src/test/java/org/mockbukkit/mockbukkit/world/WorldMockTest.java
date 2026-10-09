@@ -2738,8 +2738,8 @@ class WorldMockTest
 		@Test
 		void spawnParticle_withData_storesData()
 		{
-			String testData = "test_data";
-			world.spawnParticle(Particle.BLOCK, location, 2, testData);
+			Particle.DustOptions testData = new Particle.DustOptions(Color.AQUA, 1);
+			world.spawnParticle(Particle.DUST, location, 2, testData);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
@@ -2816,7 +2816,7 @@ class WorldMockTest
 		@Test
 		void spawnParticle_withExtraAndData_storesAll()
 		{
-			Boolean testData = true;
+			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
 			world.spawnParticle(Particle.DUST, 1, 2, 3, 8, 0.0, 0.0, 0.0, 1.2, testData);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
@@ -2831,7 +2831,7 @@ class WorldMockTest
 		@EnumSource(Particle.RandomizationType.class)
 		void spawnParticle_withRandomizationType(Particle.RandomizationType randomizationType)
 		{
-			world.spawnParticle(Particle.DUST, null, null, 0.0, 0.0, 0.0, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, false, randomizationType);
+			world.spawnParticle(Particle.DUST, null, null, 0.0, 0.0, 0.0, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, null, false, randomizationType);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
@@ -2845,13 +2845,13 @@ class WorldMockTest
 			Player player2 = server.addPlayer();
 			Player source = server.addPlayer();
 			List<Player> receivers = List.of(player1, player2);
-			String data = "full_test";
+			Particle.DustOptions data = new Particle.DustOptions(Color.RED, 1.0f);
 
-			world.spawnParticle(Particle.EXPLOSION, receivers, source, 100, 200, 300, 10, 0.5, 1.0, 1.5, 3.0, data, false);
+			world.spawnParticle(Particle.DUST, receivers, source, 100, 200, 300, 10, 0.5, 1.0, 1.5, 3.0, data, false);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
-			assertEquals(Particle.EXPLOSION, particle.particle());
+			assertEquals(Particle.DUST, particle.particle());
 			assertEquals(List.of(player1, player2), particle.receivers());
 			assertEquals(source, particle.source());
 			assertEquals(100, particle.x());
