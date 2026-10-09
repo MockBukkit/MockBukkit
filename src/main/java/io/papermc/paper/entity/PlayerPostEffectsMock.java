@@ -30,7 +30,8 @@ public class PlayerPostEffectsMock implements PlayerPostEffects
 
 		Set<Key> ids = new HashSet<>(postEffects);
 
-		for(Key effect : postEffects) {
+		for(Key effect : postEffects)
+		{
 			Preconditions.checkArgument(effect != null, "effects cannot be null");
 			Preconditions.checkArgument(ids.add(effect), "effects cannot be duplicate [%s]", effect);
 		}

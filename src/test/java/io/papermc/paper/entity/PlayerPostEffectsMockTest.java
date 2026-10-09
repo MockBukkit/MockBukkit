@@ -23,23 +23,31 @@ class PlayerPostEffectsMockTest
 	private final Key mockKey2 = NamespacedKey.fromString("test:effect-2");
 
 	@Nested
-	class ValuesMethod {
+	class ValuesMethod
+	{
+
 		@Test
-		void shouldReturnEmptyListInitially() {
+		void shouldReturnEmptyListInitially()
+		{
 			assertTrue(mockEffects.values().isEmpty());
 		}
 
 		@Test
-		void shouldReturnUnmodifiableList() {
+		void shouldReturnUnmodifiableList()
+		{
 			List<Key> values = mockEffects.values();
 			assertThrows(UnsupportedOperationException.class, () -> values.add(mockKey1));
 		}
+
 	}
 
 	@Nested
-	class AddMethod {
+	class AddMethod
+	{
+
 		@Test
-		void shouldAddKeySuccessfully() {
+		void shouldAddKeySuccessfully()
+		{
 			boolean result = mockEffects.add(mockKey1);
 
 			assertTrue(result);
@@ -48,19 +56,24 @@ class PlayerPostEffectsMockTest
 		}
 
 		@Test
-		void shouldThrowExceptionWhenKeyIsNull() {
+		void shouldThrowExceptionWhenKeyIsNull()
+		{
 			IllegalArgumentException exception = assertThrows(
 					IllegalArgumentException.class,
 					() -> mockEffects.add(null)
 			);
 			assertTrue(exception.getMessage().contains("key cannot be null"));
 		}
+
 	}
 
 	@Nested
-	class SetMethod {
+	class SetMethod
+	{
+
 		@Test
-		void shouldThrowExceptionWhenCollectionIsNull() {
+		void shouldThrowExceptionWhenCollectionIsNull()
+		{
 			IllegalArgumentException exception = assertThrows(
 					IllegalArgumentException.class,
 					() -> mockEffects.set(null)
@@ -69,7 +82,8 @@ class PlayerPostEffectsMockTest
 		}
 
 		@Test
-		void shouldThrowExceptionWhenCollectionContainsNull() {
+		void shouldThrowExceptionWhenCollectionContainsNull()
+		{
 			SequencedCollection<Key> collection = new ArrayList<>();
 			collection.add(null);
 
@@ -81,7 +95,8 @@ class PlayerPostEffectsMockTest
 		}
 
 		@Test
-		void shouldClearAndReturnFalseWhenSettingEmptyCollection() {
+		void shouldClearAndReturnFalseWhenSettingEmptyCollection()
+		{
 			mockEffects.add(mockKey1);
 
 			boolean result = mockEffects.set(new ArrayList<>());
@@ -89,12 +104,16 @@ class PlayerPostEffectsMockTest
 			assertFalse(result);
 			assertTrue(mockEffects.values().isEmpty());
 		}
+
 	}
 
 	@Nested
-	class RemoveMethod {
+	class RemoveMethod
+	{
+
 		@Test
-		void shouldRemoveExistingKeyAndReturnTrue() {
+		void shouldRemoveExistingKeyAndReturnTrue()
+		{
 			mockEffects.add(mockKey1);
 
 			boolean result = mockEffects.remove(mockKey1);
@@ -104,33 +123,40 @@ class PlayerPostEffectsMockTest
 		}
 
 		@Test
-		void shouldReturnFalseWhenRemovingNonExistentKey() {
+		void shouldReturnFalseWhenRemovingNonExistentKey()
+		{
 			boolean result = mockEffects.remove(mockKey1);
 
 			assertFalse(result);
 		}
 
 		@Test
-		void shouldThrowExceptionWhenRemoveKeyIsNull() {
+		void shouldThrowExceptionWhenRemoveKeyIsNull()
+		{
 			IllegalArgumentException exception = assertThrows(
 					IllegalArgumentException.class,
 					() -> mockEffects.remove(null)
 			);
 			assertTrue(exception.getMessage().contains("key cannot be null"));
 		}
+
 	}
 
 	@Nested
-	class ClearMethod {
+	class ClearMethod
+	{
+
 		@Test
-		void shouldReturnFalseWhenAlreadyEmpty() {
+		void shouldReturnFalseWhenAlreadyEmpty()
+		{
 			boolean result = mockEffects.clear();
 
 			assertFalse(result);
 		}
 
 		@Test
-		void shouldClearAllEffectsAndReturnTrue() {
+		void shouldClearAllEffectsAndReturnTrue()
+		{
 			mockEffects.add(mockKey1);
 			mockEffects.add(mockKey2);
 
@@ -139,15 +165,20 @@ class PlayerPostEffectsMockTest
 			assertTrue(result);
 			assertTrue(mockEffects.values().isEmpty());
 		}
+
 	}
 
 	@Nested
-	class UpdateMethod {
+	class UpdateMethod
+	{
+
 		@Test
-		void shouldExecuteWithoutExceptions() {
+		void shouldExecuteWithoutExceptions()
+		{
 			// Verifies the method completes successfully without throwing errors
 			assertAll(mockEffects::update);
 		}
+
 	}
 
 }
