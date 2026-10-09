@@ -130,6 +130,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable EntityDamageEvent lastDamageEvent;
 	private boolean silent;
 	private boolean gravity = true;
+	private @Nullable ItemStack weapon = null;
 
 	private Pose pose = Pose.STANDING;
 	private boolean isFixedPose = false;
@@ -269,6 +270,24 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public TeleportCause getTeleportCause()
 	{
 		return teleportCause;
+	}
+
+	@Override
+	public @Nullable ItemStack getWeapon()
+	{
+		return (this.weapon != null ? this.weapon.clone() : null);
+	}
+
+	/**
+	 * Sets the item being used as a weapon by this entity.
+	 *
+	 * @param weapon The weapon item
+	 *
+	 * @see Entity#getWeapon()
+	 */
+	public void setWeapon(@Nullable ItemStack weapon)
+	{
+		this.weapon = weapon;
 	}
 
 	@Override

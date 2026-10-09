@@ -5,6 +5,7 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterables;
 import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
@@ -1124,14 +1125,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public boolean addRecipe(Recipe recipe)
-	{
-		Preconditions.checkNotNull(recipe, "recipe cannot be null");
-		return addRecipe(recipe, false);
-	}
-
-	@Override
-	public boolean addRecipe(@Nullable Recipe recipe, boolean resendRecipes)
+	public boolean addRecipe(@Nullable Recipe recipe)
 	{
 		AsyncCatcher.catchOp("Recipe add");
 		if (recipe == null)
@@ -1140,6 +1134,15 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 		// Pretend we sent the packet if resendRecipes is true
 		return this.recipeManager.addRecipe(RecipeType.CRAFTING, recipe);
+	}
+
+	@Override
+	public boolean addRecipes(@NotNull Iterable<Recipe> recipes)
+	{
+		AsyncCatcher.catchOp("Recipes Add");
+		Preconditions.checkArgument(recipes != null, "recipes cannot be null");
+
+		return this.recipeManager.addRecipes(RecipeType.CRAFTING, recipes);
 	}
 
 	@Override
@@ -1202,13 +1205,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean removeRecipe(@NotNull NamespacedKey key)
 	{
-		return removeRecipe(key, false);
+		return removeRecipes(Set.of(key));
 	}
 
 	@Override
-	public boolean removeRecipe(@NotNull NamespacedKey key, boolean resendRecipes)
+	public boolean removeRecipes(@NotNull Iterable<NamespacedKey> keys)
 	{
-		Preconditions.checkNotNull(key, "key cannot be null");
+		Preconditions.checkNotNull(keys, "keys cannot be null");
 		Iterator<Recipe> iterator = recipeIterator();
 
 		while (iterator.hasNext())
@@ -1216,7 +1219,7 @@ public class ServerMock extends Server.Spigot implements Server
 			Recipe recipe = iterator.next();
 
 			// Seriously why can't the Recipe interface itself just extend Keyed...
-			if (recipe instanceof Keyed keyed && keyed.getKey().equals(key))
+			if (recipe instanceof Keyed keyed && Iterables.contains(keys, keyed.getKey()))
 			{
 				iterator.remove();
 				return true;
@@ -1752,6 +1755,14 @@ public class ServerMock extends Server.Spigot implements Server
 	public void resetRecipes()
 	{
 		this.recipeManager.reset(RecipeType.CRAFTING);
+	}
+
+	@Override
+	public boolean hasRecipe(@NotNull NamespacedKey recipeKey)
+	{
+		Preconditions.checkArgument(recipeKey != null, "recipeKey cannot be null");
+
+		return this.recipeManager.getRecipeByKey(RecipeType.CRAFTING, recipeKey) != null;
 	}
 
 	@Override
