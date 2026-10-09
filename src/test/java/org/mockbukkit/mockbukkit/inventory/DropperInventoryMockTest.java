@@ -8,11 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
-import java.util.Arrays;
-
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.containsAtLeast;
 
 @ExtendWith(MockBukkitExtension.class)
 class DropperInventoryMockTest
@@ -34,7 +33,7 @@ class DropperInventoryMockTest
 		ItemStack item = new ItemStackMock(Material.EMERALD);
 		inventory.addItem(item);
 		assertNotSame(inventory, inventory.getSnapshot());
-		assertTrue(Arrays.stream(inventory.getContents()).anyMatch(stack -> stack != null && stack.isSimilar(item)));
+		assertThat(inventory, containsAtLeast(item, 1));
 	}
 
 }

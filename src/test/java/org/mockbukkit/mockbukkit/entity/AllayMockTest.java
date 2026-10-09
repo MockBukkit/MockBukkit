@@ -26,10 +26,10 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.doesNotHaveCurrentItem;
-import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.hasCurrentItem;
-import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.doesNotHaveItemInInventory;
-import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.hasItemInInventory;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.doesNotHaveCurrentItem;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.doesNotHaveItemInInventory;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasCurrentItem;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.hasItemInInventory;
 
 @ExtendWith(MockBukkitExtension.class)
 class AllayMockTest

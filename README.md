@@ -40,6 +40,7 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
     - [Mock Plugins](#mock-plugins)
     - [Mock Players](#mock-players)
     - [Mock Worlds](#mock-worlds)
+    - [Matchers](#matchers)
 3. [Troubleshooting (My tests are being skipped)](#question-my-tests-are-being-skipped-unimplementedoperationexception)
 4. [Discord server](#headphones-discord-server)
 5. [Examples (See MockBukkit in action)](#tada-examples-see-mockbukkit-in-action)
@@ -302,6 +303,30 @@ At y=0 everything will be `Material.BEDROCK`, and from 1 until 3 (inclusive) wil
 and everything else will be `Material.AIR`.
 Each block is created the moment it is first accessed, so if only one block is only ever touched only one
 block will ever be created in-memory.
+
+### Matchers
+
+MockBukkit ships a collection of [Hamcrest](https://hamcrest.org/) matchers for asserting on common
+Bukkit types (blocks, inventories, items, entities, command results, fired events, and more).
+They are all reachable through a single entry point, `MockBukkitMatchers`, so one static import
+surfaces every matcher through IDE autocompletion:
+
+```java
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockbukkit.mockbukkit.matcher.MockBukkitMatchers.*;
+
+// A block has the expected material
+assertThat(block, hasMaterial(Material.CHEST));
+
+// Two items are similar (ignoring stack size)
+assertThat(itemStack, similarTo(Material.DIAMOND));
+
+// An inventory holds at least three diamonds
+assertThat(inventory, containsAtLeast(Material.DIAMOND, 3));
+
+// A plugin fired a specific event
+assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerJoinEvent.class));
+```
 
 ## :question: My tests are being skipped!? (UnimplementedOperationException)
 
