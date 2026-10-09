@@ -204,6 +204,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+	private final PlayerPostEffects playerPostEffects = new PlayerPostEffectsMock();
 
 	private final ConversationTracker conversationTracker = new ConversationTracker();
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
@@ -3312,7 +3313,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NonNull PlayerPostEffects postEffects()
 	{
-		return new PlayerPostEffectsMock();
+		return this.playerPostEffects;
 	}
 
 }
