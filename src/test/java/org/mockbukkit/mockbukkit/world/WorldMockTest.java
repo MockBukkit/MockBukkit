@@ -57,6 +57,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -2717,7 +2718,7 @@ class WorldMockTest
 			assertNull(particle.receivers());
 			assertNull(particle.source());
 			assertNull(particle.data());
-			assertTrue(particle.force());
+			assertFalse(particle.force());
 		}
 
 		@Test
@@ -2737,8 +2738,8 @@ class WorldMockTest
 		@Test
 		void spawnParticle_withData_storesData()
 		{
-			String testData = "test_data";
-			world.spawnParticle(Particle.BLOCK, location, 2, testData);
+			Particle.DustOptions testData = new Particle.DustOptions(Color.AQUA, 1);
+			world.spawnParticle(Particle.DUST, location, 2, testData);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
@@ -2774,17 +2775,19 @@ class WorldMockTest
 		}
 
 		@Test
-		void spawnParticle_withExtra_storesExtra()
+		void spawnParticle_withSpeed_storesExtra()
 		{
 			world.spawnParticle(Particle.DUST, location, 6, 0.1, 0.2, 0.3, 2.5);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
-			assertEquals(2.5, particle.extra());
+			assertEquals(2.5, particle.speedX());
+			assertEquals(2.5, particle.speedY());
+			assertEquals(2.5, particle.speedZ());
 		}
 
 		@Test
-		void spawnParticle_withExtra_storesExtraObject()
+		void spawnParticle_withSpeed_storesSpeedObject()
 		{
 			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
 			world.spawnParticle(Particle.DUST, location, 6, 0.1, 0.2, 0.3, testData);
@@ -2796,14 +2799,16 @@ class WorldMockTest
 		}
 
 		@Test
-		void spawnParticle_withExtra_storesExtraAndData()
+		void spawnParticle_withSpeed_storesSpeedAndData()
 		{
 			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
 			world.spawnParticle(Particle.DUST, location, 6, 0.1, 0.2, 0.3, 1.0, testData);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
-			assertEquals(1.0, particle.extra());
+			assertEquals(1.0, particle.speedX());
+			assertEquals(1.0, particle.speedY());
+			assertEquals(1.0, particle.speedZ());
 			assertInstanceOf(Particle.DustOptions.class, testData);
 			assertEquals(testData, particle.data());
 		}
@@ -2811,13 +2816,26 @@ class WorldMockTest
 		@Test
 		void spawnParticle_withExtraAndData_storesAll()
 		{
-			Boolean testData = true;
+			Particle.DustOptions testData = new Particle.DustOptions(Color.RED, 1.0f);
 			world.spawnParticle(Particle.DUST, 1, 2, 3, 8, 0.0, 0.0, 0.0, 1.2, testData);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
-			assertEquals(1.2, particle.extra());
+			assertEquals(1.2, particle.speedX());
+			assertEquals(1.2, particle.speedY());
+			assertEquals(1.2, particle.speedZ());
 			assertEquals(testData, particle.data());
+		}
+
+		@ParameterizedTest
+		@EnumSource(Particle.RandomizationType.class)
+		void spawnParticle_withRandomizationType(Particle.RandomizationType randomizationType)
+		{
+			world.spawnParticle(Particle.DUST, null, null, 0.0, 0.0, 0.0, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, null, false, randomizationType);
+
+			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
+
+			assertEquals(randomizationType, particle.randomizationType());
 		}
 
 		@Test
@@ -2827,13 +2845,13 @@ class WorldMockTest
 			Player player2 = server.addPlayer();
 			Player source = server.addPlayer();
 			List<Player> receivers = List.of(player1, player2);
-			String data = "full_test";
+			Particle.DustOptions data = new Particle.DustOptions(Color.RED, 1.0f);
 
-			world.spawnParticle(Particle.EXPLOSION, receivers, source, 100, 200, 300, 10, 0.5, 1.0, 1.5, 3.0, data, false);
+			world.spawnParticle(Particle.DUST, receivers, source, 100, 200, 300, 10, 0.5, 1.0, 1.5, 3.0, data, false);
 
 			SpawnedParticle particle = world.getSpawnedParticles().getFirst();
 
-			assertEquals(Particle.EXPLOSION, particle.particle());
+			assertEquals(Particle.DUST, particle.particle());
 			assertEquals(List.of(player1, player2), particle.receivers());
 			assertEquals(source, particle.source());
 			assertEquals(100, particle.x());
@@ -2843,7 +2861,9 @@ class WorldMockTest
 			assertEquals(0.5, particle.offsetX());
 			assertEquals(1.0, particle.offsetY());
 			assertEquals(1.5, particle.offsetZ());
-			assertEquals(3.0, particle.extra());
+			assertEquals(3.0, particle.speedX());
+			assertEquals(3.0, particle.speedY());
+			assertEquals(3.0, particle.speedZ());
 			assertEquals(data, particle.data());
 			assertFalse(particle.force());
 		}

@@ -1,6 +1,96 @@
 {
 	"values": [
 		{
+			"key": "minecraft:abandoned_camp_bamboo_jungle",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_birch_forest",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_cherry_grove",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_dappled_forest",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_flower_forest",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_forest",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_meadow",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_old_growth_birch_forest",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_old_growth_pine_taiga",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_old_growth_spruce_taiga",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_pale_garden",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_savanna",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_snowy_taiga",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_sparse_jungle",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_swamp",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_taiga",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_windswept_forest",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:abandoned_camp_wooded_badlands",
+			"structureType": "minecraft:jigsaw",
+			"type": "minecraft:jigsaw"
+		},
+		{
 			"key": "minecraft:ancient_city",
 			"structureType": "minecraft:jigsaw",
 			"type": "minecraft:jigsaw"

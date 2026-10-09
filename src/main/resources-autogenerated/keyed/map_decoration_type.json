@@ -1,213 +1,243 @@
 {
 	"values": [
 		{
+			"key": "minecraft:abandoned_camp",
+			"name": "ABANDONED_CAMP",
+			"ordinal": 0,
+			"value": 35
+		},
+		{
+			"key": "minecraft:ancient_city",
+			"name": "ANCIENT_CITY",
+			"ordinal": 1,
+			"value": 36
+		},
+		{
 			"key": "minecraft:banner_black",
 			"name": "BANNER_BLACK",
-			"ordinal": 0,
+			"ordinal": 2,
 			"value": 25
 		},
 		{
 			"key": "minecraft:banner_blue",
 			"name": "BANNER_BLUE",
-			"ordinal": 1,
+			"ordinal": 3,
 			"value": 21
 		},
 		{
 			"key": "minecraft:banner_brown",
 			"name": "BANNER_BROWN",
-			"ordinal": 2,
+			"ordinal": 4,
 			"value": 22
 		},
 		{
 			"key": "minecraft:banner_cyan",
 			"name": "BANNER_CYAN",
-			"ordinal": 3,
+			"ordinal": 5,
 			"value": 19
 		},
 		{
 			"key": "minecraft:banner_gray",
 			"name": "BANNER_GRAY",
-			"ordinal": 4,
+			"ordinal": 6,
 			"value": 17
 		},
 		{
 			"key": "minecraft:banner_green",
 			"name": "BANNER_GREEN",
-			"ordinal": 5,
+			"ordinal": 7,
 			"value": 23
 		},
 		{
 			"key": "minecraft:banner_light_blue",
 			"name": "BANNER_LIGHT_BLUE",
-			"ordinal": 6,
+			"ordinal": 8,
 			"value": 13
 		},
 		{
 			"key": "minecraft:banner_light_gray",
 			"name": "BANNER_LIGHT_GRAY",
-			"ordinal": 7,
+			"ordinal": 9,
 			"value": 18
 		},
 		{
 			"key": "minecraft:banner_lime",
 			"name": "BANNER_LIME",
-			"ordinal": 8,
+			"ordinal": 10,
 			"value": 15
 		},
 		{
 			"key": "minecraft:banner_magenta",
 			"name": "BANNER_MAGENTA",
-			"ordinal": 9,
+			"ordinal": 11,
 			"value": 12
 		},
 		{
 			"key": "minecraft:banner_orange",
 			"name": "BANNER_ORANGE",
-			"ordinal": 10,
+			"ordinal": 12,
 			"value": 11
 		},
 		{
 			"key": "minecraft:banner_pink",
 			"name": "BANNER_PINK",
-			"ordinal": 11,
+			"ordinal": 13,
 			"value": 16
 		},
 		{
 			"key": "minecraft:banner_purple",
 			"name": "BANNER_PURPLE",
-			"ordinal": 12,
+			"ordinal": 14,
 			"value": 20
 		},
 		{
 			"key": "minecraft:banner_red",
 			"name": "BANNER_RED",
-			"ordinal": 13,
+			"ordinal": 15,
 			"value": 24
 		},
 		{
 			"key": "minecraft:banner_white",
 			"name": "BANNER_WHITE",
-			"ordinal": 14,
+			"ordinal": 16,
 			"value": 10
 		},
 		{
 			"key": "minecraft:banner_yellow",
 			"name": "BANNER_YELLOW",
-			"ordinal": 15,
+			"ordinal": 17,
 			"value": 14
 		},
 		{
 			"key": "minecraft:blue_marker",
 			"name": "BLUE_MARKER",
-			"ordinal": 16,
+			"ordinal": 18,
 			"value": 3
+		},
+		{
+			"key": "minecraft:desert_pyramid",
+			"name": "DESERT_PYRAMID",
+			"ordinal": 19,
+			"value": 37
 		},
 		{
 			"key": "minecraft:frame",
 			"name": "FRAME",
-			"ordinal": 17,
+			"ordinal": 20,
 			"value": 1
 		},
 		{
 			"key": "minecraft:jungle_temple",
 			"name": "JUNGLE_TEMPLE",
-			"ordinal": 18,
+			"ordinal": 21,
 			"value": 32
 		},
 		{
 			"key": "minecraft:mansion",
 			"name": "MANSION",
-			"ordinal": 19,
+			"ordinal": 22,
 			"value": 8
+		},
+		{
+			"key": "minecraft:mineshaft",
+			"name": "MINESHAFT",
+			"ordinal": 23,
+			"value": 38
 		},
 		{
 			"key": "minecraft:monument",
 			"name": "MONUMENT",
-			"ordinal": 20,
+			"ordinal": 24,
 			"value": 9
+		},
+		{
+			"key": "minecraft:ocean_ruin_warm",
+			"name": "OCEAN_RUIN_WARM",
+			"ordinal": 25,
+			"value": 39
 		},
 		{
 			"key": "minecraft:player",
 			"name": "PLAYER",
-			"ordinal": 21,
+			"ordinal": 26,
 			"value": 0
 		},
 		{
 			"key": "minecraft:player_off_limits",
 			"name": "PLAYER_OFF_LIMITS",
-			"ordinal": 22,
+			"ordinal": 27,
 			"value": 7
 		},
 		{
 			"key": "minecraft:player_off_map",
 			"name": "PLAYER_OFF_MAP",
-			"ordinal": 23,
+			"ordinal": 28,
 			"value": 6
 		},
 		{
 			"key": "minecraft:red_marker",
 			"name": "RED_MARKER",
-			"ordinal": 24,
+			"ordinal": 29,
 			"value": 2
 		},
 		{
 			"key": "minecraft:red_x",
 			"name": "RED_X",
-			"ordinal": 25,
+			"ordinal": 30,
 			"value": 26
 		},
 		{
 			"key": "minecraft:swamp_hut",
 			"name": "SWAMP_HUT",
-			"ordinal": 26,
+			"ordinal": 31,
 			"value": 33
 		},
 		{
 			"key": "minecraft:target_point",
 			"name": "TARGET_POINT",
-			"ordinal": 27,
+			"ordinal": 32,
 			"value": 5
 		},
 		{
 			"key": "minecraft:target_x",
 			"name": "TARGET_X",
-			"ordinal": 28,
+			"ordinal": 33,
 			"value": 4
 		},
 		{
 			"key": "minecraft:trial_chambers",
 			"name": "TRIAL_CHAMBERS",
-			"ordinal": 29,
+			"ordinal": 34,
 			"value": 34
 		},
 		{
 			"key": "minecraft:village_desert",
 			"name": "VILLAGE_DESERT",
-			"ordinal": 30,
+			"ordinal": 35,
 			"value": 27
 		},
 		{
 			"key": "minecraft:village_plains",
 			"name": "VILLAGE_PLAINS",
-			"ordinal": 31,
+			"ordinal": 36,
 			"value": 28
 		},
 		{
 			"key": "minecraft:village_savanna",
 			"name": "VILLAGE_SAVANNA",
-			"ordinal": 32,
+			"ordinal": 37,
 			"value": 29
 		},
 		{
 			"key": "minecraft:village_snowy",
 			"name": "VILLAGE_SNOWY",
-			"ordinal": 33,
+			"ordinal": 38,
 			"value": 30
 		},
 		{
 			"key": "minecraft:village_taiga",
 			"name": "VILLAGE_TAIGA",
-			"ordinal": 34,
+			"ordinal": 39,
 			"value": 31
 		}
 	]

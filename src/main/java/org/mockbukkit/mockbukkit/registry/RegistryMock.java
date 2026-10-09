@@ -19,6 +19,7 @@ import org.mockbukkit.mockbukkit.attribute.AttributeMock;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
+import org.mockbukkit.mockbukkit.block.pot.PotPatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.dialog.DialogMock;
@@ -89,6 +90,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
 		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, ChickenSoundVariantMock::from);
+		factoryMap.put(RegistryKey.DECORATED_POT_PATTERN, PotPatternTypeMock::from);
 		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);

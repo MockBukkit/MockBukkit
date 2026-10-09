@@ -95,6 +95,7 @@ public class RegistryAccessMock implements RegistryAccess
 		return List.of(
 				RegistryKey.COW_SOUND_VARIANT,
 				RegistryKey.CHICKEN_SOUND_VARIANT,
+				RegistryKey.DECORATED_POT_PATTERN,
 				RegistryKey.DIALOG,
 				RegistryKey.STRUCTURE,
 				RegistryKey.STRUCTURE_TYPE,

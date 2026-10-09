@@ -14,6 +14,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+@NullMarked
 public class RecipeManager
 {
 
@@ -47,7 +49,7 @@ public class RecipeManager
 	 *
 	 * @param recipeType The recipe type to reset.
 	 */
-	public void reset(@NotNull RecipeType recipeType)
+	public void reset(RecipeType recipeType)
 	{
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
 		Preconditions.checkState(this.recipes != null, "Recipes has not been initialized yet.");
@@ -59,7 +61,6 @@ public class RecipeManager
 	 *
 	 * @return The list of recipes available.
 	 */
-	@NotNull
 	public Map<RecipeType, List<Recipe>> getRecipes()
 	{
 		if (this.recipes == null)
@@ -76,8 +77,7 @@ public class RecipeManager
 	 * @param recipeType The recipe type.
 	 * @return The list of recipes available.
 	 */
-	@NotNull
-	public List<Recipe> getRecipes(@NotNull RecipeType recipeType)
+	public List<Recipe> getRecipes(RecipeType recipeType)
 	{
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
 		return getRecipes().getOrDefault(recipeType, Collections.emptyList());
@@ -91,7 +91,7 @@ public class RecipeManager
 	 * @return The server recipes.
 	 */
 	@Nullable
-	public Recipe getRecipeByKey(@NotNull RecipeType recipeType, @NotNull NamespacedKey recipeKey)
+	public Recipe getRecipeByKey(RecipeType recipeType, NamespacedKey recipeKey)
 	{
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
 		Preconditions.checkArgument(recipeKey != null, "Recipe key cannot be null");
@@ -115,8 +115,7 @@ public class RecipeManager
 	 * @param itemStack  The desired item.
 	 * @return The list of recipes available to create.
 	 */
-	@NotNull
-	public List<Recipe> getRecipesFor(@NotNull RecipeType recipeType, @NotNull ItemStack itemStack)
+	public List<Recipe> getRecipesFor(RecipeType recipeType, ItemStack itemStack)
 	{
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
 		Preconditions.checkArgument(itemStack != null, "Item stack cannot be null");
@@ -127,7 +126,7 @@ public class RecipeManager
 	}
 
 	@Nullable
-	public Recipe getCraftingRecipe(@NotNull ItemStack @NotNull [] craftingMatrix)
+	public Recipe getCraftingRecipe(ItemStack[] craftingMatrix)
 	{
 		Preconditions.checkArgument(craftingMatrix != null, "craftingMatrix must not be null");
 		Preconditions.checkArgument(craftingMatrix.length == 9, "craftingMatrix must be an array of length 9");
@@ -172,11 +171,36 @@ public class RecipeManager
 	 * @param recipe     The recipe to be added.
 	 * @return {@code true} if added, otherwise {@code false}.
 	 */
-	public boolean addRecipe(@NotNull RecipeType recipeType, @NotNull Recipe recipe)
+	public boolean addRecipe(RecipeType recipeType, Recipe recipe)
 	{
 		Preconditions.checkArgument(recipeType != null, "The recipe type cannot be null");
 		Preconditions.checkArgument(recipe != null, "The recipe cannot be null");
 		return getRecipes(recipeType).add(recipe);
+	}
+
+	/**
+	 * Add recipes to the list of recipes.
+	 *
+	 * @param recipeType The recipe type.
+	 * @param recipes    The recipes to be added.
+	 * @return {@code true} if added, otherwise {@code false}.
+	 */
+	public boolean addRecipes(RecipeType recipeType, Iterable<Recipe> recipes)
+	{
+		Preconditions.checkArgument(recipeType != null, "The recipe type cannot be null");
+		Preconditions.checkArgument(recipes != null, "The recipes cannot be null");
+
+		boolean anyAdded = false;
+		for (Recipe recipe : recipes)
+		{
+			boolean result = addRecipe(recipeType, recipe);
+			if (result)
+			{
+				anyAdded = true;
+			}
+		}
+
+		return anyAdded;
 	}
 
 	/**
@@ -186,7 +210,7 @@ public class RecipeManager
 	 * @param recipe     The recipe to be removed.
 	 * @return {@code true} if removed, otherwise {@code false}.
 	 */
-	public boolean removeRecipe(@NotNull RecipeType recipeType, @NotNull Recipe recipe)
+	public boolean removeRecipe(RecipeType recipeType, Recipe recipe)
 	{
 		Preconditions.checkArgument(recipeType != null, "The recipe type cannot be null");
 		Preconditions.checkArgument(recipe != null, "The recipe cannot be null");
@@ -231,7 +255,7 @@ public class RecipeManager
 				.toList();
 	}
 
-	private static @NotNull List<Recipe> loadCraftingRecipes()
+	private static List<Recipe> loadCraftingRecipes()
 	{
 		List<Recipe> recipesList = new ArrayList<>();
 		JsonArray recipes = ResourceLoader.loadResource("recipes/crafting.json").getAsJsonArray();
@@ -266,7 +290,7 @@ public class RecipeManager
 		return recipesList;
 	}
 
-	static boolean matches(@NotNull ShapelessRecipe shapelessRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
+	static boolean matches(ShapelessRecipe shapelessRecipe, ItemStack[] craftingMatrix)
 	{
 		Preconditions.checkArgument(shapelessRecipe != null, "The recipe cannot be null");
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
@@ -293,7 +317,7 @@ public class RecipeManager
 		return true;
 	}
 
-	static boolean matches(@NotNull ShapedRecipe shapedRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
+	static boolean matches(ShapedRecipe shapedRecipe, ItemStack[] craftingMatrix)
 	{
 		Preconditions.checkArgument(shapedRecipe != null, "The recipe cannot be null");
 		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
@@ -340,7 +364,7 @@ public class RecipeManager
 	 * @param shape The recipe to be mirrored.
 	 * @return The mirrored recipe.
 	 */
-	private static @NotNull String @NotNull [] mirrorRecipeHorizontally(@NotNull String @NotNull [] shape)
+	private static String[] mirrorRecipeHorizontally(String[] shape)
 	{
 		String[] flippedShape = shape.clone();
 		flippedShape[0] = new StringBuilder(flippedShape[0]).reverse().toString(); // Should always be at least 1 row
@@ -405,7 +429,7 @@ public class RecipeManager
 		}
 	}
 
-	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
+	static boolean matches(ComplexRecipe complexRecipe, ItemStack[] items)
 	{
 		Preconditions.checkArgument(complexRecipe != null, "The recipe cannot be null");
 		Preconditions.checkArgument(items != null, "The craftingMatrix cannot be null");

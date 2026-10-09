@@ -9,6 +9,8 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.connection.PlayerGameConnection;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
+import io.papermc.paper.entity.PlayerPostEffects;
+import io.papermc.paper.entity.PlayerPostEffectsMock;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
@@ -109,6 +111,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -201,6 +204,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenEntities = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+	private final PlayerPostEffects playerPostEffects = new PlayerPostEffectsMock();
 
 	private final ConversationTracker conversationTracker = new ConversationTracker();
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
@@ -2569,104 +2573,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count)
+	public <T> void spawnParticle(@NonNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speedX, double speedY, double speedZ, @Nullable T data, boolean force, Particle.@NonNull RandomizationType randomizationType)
 	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count)
-	{
-		this.spawnParticle(particle, x, y, z, count, null);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, T data)
-	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, T data)
-	{
-		this.spawnParticle(particle, x, y, z, count, 0, 0, 0, data);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-							  double offsetZ)
-	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ)
-	{
-		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, null);
-
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, T data)
-	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, T data)
-	{
-		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, 1, data);
-
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-							  double offsetZ, double extra)
-	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ, double extra)
-	{
-		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, null);
-
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, double extra, T data)
-	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, double extra, @Nullable T data)
-	{
-		Preconditions.checkNotNull(particle, "Particle cannot be null");
-		if (data != null && !particle.getDataType().isInstance(data))
-		{
-			throw new IllegalArgumentException("data should be " + particle.getDataType() + " got " + data.getClass());
-		}
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
-	{
-		// We currently have no way of properly spawning particles, therefore the force parameter is unused
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
-	{
-		// We currently have no way of properly spawning particles, therefore the force parameter is unused
-		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, data);
+		getWorld().spawnParticle(particle, List.of(this), this, x, y, z, count, offsetX, offsetY, offsetZ, speedX, speedY, speedZ, data, force, randomizationType);
 	}
 
 	@Override
@@ -3399,6 +3308,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NonNull PlayerPostEffects postEffects()
+	{
+		return this.playerPostEffects;
 	}
 
 }
