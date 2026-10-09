@@ -2,14 +2,15 @@ package org.mockbukkit.mockbukkit.util;
 
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
+@NullMarked
 public record SpawnedParticle(
 		long spawnedAtTick,
-		@NotNull Particle particle,
+		Particle particle,
 		@Nullable List<Player> receivers,
 		@Nullable Player source,
 		double x,
@@ -19,9 +20,12 @@ public record SpawnedParticle(
 		double offsetX,
 		double offsetY,
 		double offsetZ,
-		double extra,
+		double speedX,
+		double speedY,
+		double speedZ,
 		@Nullable Object data,
-		boolean force
+		boolean force,
+		Particle.RandomizationType randomizationType
 )
 {
 

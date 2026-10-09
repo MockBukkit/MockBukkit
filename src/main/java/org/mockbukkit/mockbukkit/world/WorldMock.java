@@ -1928,79 +1928,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, Location location, int count)
-	{
-		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count)
-	{
-		spawnParticle(particle, null, null, x, y, z, count, 0, 0, 0, 1, null, true);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, Location location, int count, T data)
-	{
-		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, T data)
-	{
-		spawnParticle(particle, null, null, x, y, z, count, 0, 0, 0, 1, data, true);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ)
-	{
-		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ)
-	{
-		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, 1, null, true);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, T data)
-	{
-		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, T data)
-	{
-		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, 1, data, true);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra)
-	{
-		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
-	}
-
-	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra)
-	{
-		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, extra, null, true);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra, T data)
-	{
-		spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra, data);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data)
-	{
-		spawnParticle(particle, null, null, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, true);
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
+	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speedX, double speedY, double speedZ, @Nullable T data, boolean force, Particle.@NotNull RandomizationType randomizationType)
 	{
 		spawnedParticles.add(new SpawnedParticle(
 				fullTime,
@@ -2010,17 +1938,11 @@ public class WorldMock implements World
 				x, y, z,
 				count,
 				offsetX, offsetY, offsetZ,
-				extra,
+				speedX, speedY, speedZ,
 				data,
-				force
+				force,
+				randomizationType
 		));
-	}
-
-	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speedX, double speedY, double speedZ, @org.jspecify.annotations.Nullable T data, boolean force, Particle.@NotNull RandomizationType randomizationType)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -2177,22 +2099,6 @@ public class WorldMock implements World
 	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance,
 								   FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize,
 								   Predicate<? super Entity> filter)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, double extra, T data, boolean force)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, double extra, T data, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
