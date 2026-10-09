@@ -64,6 +64,7 @@ class MockBukkitInternalAPIBridgeTest
 	@Nested
 	class GetTranslationKey
 	{
+
 		@Test
 		void givenPig()
 		{
@@ -122,11 +123,13 @@ class MockBukkitInternalAPIBridgeTest
 	@Nested
 	class Restricted
 	{
+
 		@MockBukkitInject
 		private PlayerMock player;
 
 		@Test
-		void restricted_ShouldReturnTrue_WhenUnderlyingPredicateReturnsTrue() {
+		void restricted_ShouldReturnTrue_WhenUnderlyingPredicateReturnsTrue()
+		{
 
 			CommandSourceStack dummyStack = CommandSourceStackMock.from(player);
 
@@ -138,7 +141,8 @@ class MockBukkitInternalAPIBridgeTest
 		}
 
 		@Test
-		void restricted_ShouldReturnFalse_WhenUnderlyingPredicateReturnsFalse() {
+		void restricted_ShouldReturnFalse_WhenUnderlyingPredicateReturnsFalse()
+		{
 
 			CommandSourceStack dummyStack = CommandSourceStackMock.from(player);
 
@@ -150,4 +154,5 @@ class MockBukkitInternalAPIBridgeTest
 		}
 
 	}
+
 }

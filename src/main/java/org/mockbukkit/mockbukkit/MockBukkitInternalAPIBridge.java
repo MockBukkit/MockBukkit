@@ -159,9 +159,11 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	public <C> PersistentDataKey<C> createPersistentDataKey(Key key, PersistentDataType<?, C> type)
 	{
 		NamespacedKey namespacedKey;
-		if (key instanceof NamespacedKey thisKey) {
+		if (key instanceof NamespacedKey thisKey)
+		{
 			namespacedKey = thisKey;
-		} else {
+		} else
+		{
 			namespacedKey = new NamespacedKey(key.namespace(), key.value());
 		}
 
@@ -213,8 +215,10 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	@Override
 	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate, boolean restricted)
 	{
-		record RestrictedPredicate(Predicate<CommandSourceStack> predicate, boolean restricted) implements Predicate<CommandSourceStack> {
-			public boolean test(CommandSourceStack commandSourceStack) {
+		record RestrictedPredicate(Predicate<CommandSourceStack> predicate, boolean restricted) implements Predicate<CommandSourceStack>
+		{
+			public boolean test(CommandSourceStack commandSourceStack)
+			{
 				return this.predicate.test(commandSourceStack);
 			}
 		}

@@ -98,7 +98,8 @@ public class SignTextMock implements SignText
 			return new SignTextMock(this.hasGlowingText, this.lines, this.dyeColor);
 		}
 
-		private static Collection<Component> fillEmptyLines(List<? extends ComponentLike> lines, Supplier<Component> emptySupplier) {
+		private static Collection<Component> fillEmptyLines(List<? extends ComponentLike> lines, Supplier<Component> emptySupplier)
+		{
 			Preconditions.checkArgument(lines.size() <= 4, "Cannot have more than %s lines, had %s", 4, lines.size());
 
 			// Pre-allocate space for at least 4 items to prevent internal array resizing
@@ -108,7 +109,8 @@ public class SignTextMock implements SignText
 				components.add(line.asComponent());
 			}
 
-			while (components.size() < 4) {
+			while (components.size() < 4)
+			{
 				components.add(emptySupplier.get());
 			}
 

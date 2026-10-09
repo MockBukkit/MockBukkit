@@ -107,6 +107,7 @@ class SulfurCubeMockTest
 	@Nested
 	class Ageable
 	{
+
 		@Test
 		void getAgeDefault()
 		{
@@ -197,20 +198,24 @@ class SulfurCubeMockTest
 	@Nested
 	class Swallow
 	{
+
 		private final ItemStack inputItem = new ItemStack(Material.DIAMOND_BLOCK, 64);
 
 		@Nested
 		@DisplayName("When the entity is not an adult")
-		class WhenNotAdult {
+		class WhenNotAdult
+		{
 
 			@BeforeEach
-			void setUp() {
+			void setUp()
+			{
 				sulfurCube.setBaby();
 			}
 
 			@Test
 			@DisplayName("should immediately return false")
-			void shouldReturnFalseAndIgnoreEquipment() {
+			void shouldReturnFalseAndIgnoreEquipment()
+			{
 				sulfurCube.setBaby();
 
 				boolean result = sulfurCube.swallow(inputItem);
@@ -222,16 +227,19 @@ class SulfurCubeMockTest
 
 		@Nested
 		@DisplayName("When the entity is an adult")
-		class WhenAdult {
+		class WhenAdult
+		{
 
 			@BeforeEach
-			void setUp() {
+			void setUp()
+			{
 				sulfurCube.setAdult();
 			}
 
 			@Test
 			@DisplayName("should return true if the entity has no equipment layout")
-			void shouldReturnTrueWhenEquipmentIsNull() {
+			void shouldReturnTrueWhenEquipmentIsNull()
+			{
 				boolean result = sulfurCube.swallow(inputItem);
 
 				assertTrue(result);
@@ -239,18 +247,22 @@ class SulfurCubeMockTest
 
 			@Nested
 			@DisplayName("and has equipment active")
-			class WithEquipment {
+			class WithEquipment
+			{
 
 				@BeforeEach
-				void setUp() {
-					if (sulfurCube.getEquipment() != null) {
+				void setUp()
+				{
+					if (sulfurCube.getEquipment() != null)
+					{
 						sulfurCube.getEquipment().setChestplate(null);
 					}
 				}
 
 				@Test
 				@DisplayName("should return false and ignore the item if a similar chestplate is already equipped")
-				void shouldReturnFalseWhenChestplateIsSimilar() {
+				void shouldReturnFalseWhenChestplateIsSimilar()
+				{
 					// Given: The entity already has a diamond block equipped
 					ItemStack existingItem = new ItemStack(Material.DIAMOND_BLOCK, 1);
 					sulfurCube.getEquipment().setChestplate(existingItem);
@@ -266,7 +278,8 @@ class SulfurCubeMockTest
 
 				@Test
 				@DisplayName("should equip a single copy of the item and return true if it is different from the chestplate")
-				void shouldEquipItemAndReturnTrueWhenChestplateIsDifferent() {
+				void shouldEquipItemAndReturnTrueWhenChestplateIsDifferent()
+				{
 					// Given: The entity has an entirely different item equipped (or empty)
 					sulfurCube.getEquipment().setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
 
@@ -278,8 +291,11 @@ class SulfurCubeMockTest
 					assertEquals(Material.DIAMOND_BLOCK, sulfurCube.getEquipment().getChestplate().getType());
 					assertEquals(1, sulfurCube.getEquipment().getChestplate().getAmount());
 				}
+
 			}
+
 		}
+
 	}
 
 }
