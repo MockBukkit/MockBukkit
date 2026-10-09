@@ -10,6 +10,7 @@ import io.papermc.paper.connection.PlayerGameConnection;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.PlayerPostEffects;
+import io.papermc.paper.entity.PlayerPostEffectsMock;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
@@ -3411,10 +3412,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public PlayerPostEffects postEffects()
+	public @NonNull PlayerPostEffects postEffects()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new PlayerPostEffectsMock();
 	}
 
 }
