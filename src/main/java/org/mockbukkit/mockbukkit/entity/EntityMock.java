@@ -287,7 +287,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	public void setWeapon(@Nullable ItemStack weapon)
 	{
-		this.weapon = weapon;
+		this.weapon = (weapon != null ? weapon.clone() : null);
 	}
 
 	@Override
