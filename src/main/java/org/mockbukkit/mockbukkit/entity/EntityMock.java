@@ -1665,4 +1665,25 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public float getAirDrag()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getDefaultGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }
