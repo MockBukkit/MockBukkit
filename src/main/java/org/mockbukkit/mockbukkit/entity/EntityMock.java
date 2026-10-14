@@ -22,6 +22,7 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
@@ -1681,6 +1682,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public double getDefaultGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isMarkedInvulnerable()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInvulnerableTo(@NotNull DamageSource source)
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
