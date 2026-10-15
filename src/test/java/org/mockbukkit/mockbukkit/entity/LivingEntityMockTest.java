@@ -935,4 +935,39 @@ class LivingEntityMockTest
 		assertDoesNotThrow(() -> livingEntity.setActiveItemRemainingTime(10));
 	}
 
+	@Test
+	void testBeeStingerDefaults()
+	{
+		assertEquals(0, livingEntity.getBeeStingersInBody());
+		assertEquals(0, livingEntity.getBeeStingerCooldown());
+	}
+
+	@Test
+	void testSetBeeStingersInBody()
+	{
+		livingEntity.setBeeStingersInBody(3);
+		assertEquals(3, livingEntity.getBeeStingersInBody());
+	}
+
+	@Test
+	void testSetBeeStingersInBodyNegativeClampsToZero()
+	{
+		livingEntity.setBeeStingersInBody(-5);
+		assertEquals(0, livingEntity.getBeeStingersInBody());
+	}
+
+	@Test
+	void testSetBeeStingerCooldown()
+	{
+		livingEntity.setBeeStingerCooldown(40);
+		assertEquals(40, livingEntity.getBeeStingerCooldown());
+	}
+
+	@Test
+	void testSetBeeStingerCooldownNegativeClampsToZero()
+	{
+		livingEntity.setBeeStingerCooldown(-1);
+		assertEquals(0, livingEntity.getBeeStingerCooldown());
+	}
+
 }
