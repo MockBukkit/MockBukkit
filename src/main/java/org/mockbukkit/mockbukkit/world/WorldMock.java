@@ -9,6 +9,7 @@ import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.raytracing.PositionedRayTraceConfigurationBuilder;
 import io.papermc.paper.world.MoonPhase;
+import io.papermc.paper.world.chunk.ChunkGenerationState;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
@@ -1976,6 +1977,20 @@ public class WorldMock implements World
 
 	@Override
 	public boolean isChunkGenerated(int x, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ChunkGenerationState getChunkGenerationState(int x, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull CompletableFuture<@NotNull ChunkGenerationState> getChunkGenerationStateAsync(int x, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

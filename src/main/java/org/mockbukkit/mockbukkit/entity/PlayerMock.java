@@ -131,6 +131,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -915,6 +916,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setAddress(@Nullable InetSocketAddress address)
 	{
 		this.address = address;
+	}
+
+	@Override
+	public @Nullable SocketAddress getSocketAddress()
+	{
+		return this.getAddress();
 	}
 
 	@Override

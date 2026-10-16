@@ -345,7 +345,7 @@ public class ServerMock extends Server.Spigot implements Server
 				PlayerConnectionCloseEvent playerConnectionCloseEvent =
 						new PlayerConnectionCloseEvent(player.getUniqueId(),
 								player.getName(),
-								player.getAddress().getAddress(),
+								player.getSocketAddress(),
 								false);
 
 				getPluginManager().callEvent(playerConnectionCloseEvent);
@@ -368,7 +368,7 @@ public class ServerMock extends Server.Spigot implements Server
 			PlayerConnectionCloseEvent playerConnectionCloseEvent =
 					new PlayerConnectionCloseEvent(player.getUniqueId(),
 							player.getName(),
-							player.getAddress().getAddress(),
+							player.getSocketAddress(),
 							false);
 
 			getPluginManager().callEvent(playerConnectionCloseEvent);
@@ -387,7 +387,7 @@ public class ServerMock extends Server.Spigot implements Server
 			PlayerConnectionCloseEvent playerConnectionCloseEvent =
 					new PlayerConnectionCloseEvent(player.getUniqueId(),
 							player.getName(),
-							player.getAddress().getAddress(),
+							player.getSocketAddress(),
 							false);
 
 			getPluginManager().callEvent(playerConnectionCloseEvent);
