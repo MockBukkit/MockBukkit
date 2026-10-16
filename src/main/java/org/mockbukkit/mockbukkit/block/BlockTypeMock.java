@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import org.bukkit.Instrument;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -13,8 +14,10 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -36,11 +39,12 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	private final boolean interactable;
 	private final boolean collision;
 	private final String translationKey;
+	private final Instrument instrument;
 
 	@ApiStatus.Internal
 	private BlockTypeMock(NamespacedKey key, @Nullable NamespacedKey itemType, boolean solid, boolean flammable, boolean burnable,
 						  boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						  boolean air, boolean interactable, boolean collision, String translationKey)
+						  boolean air, boolean interactable, boolean collision, String translationKey, Instrument instrument)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -56,6 +60,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		this.interactable = interactable;
 		this.collision = collision;
 		this.translationKey = translationKey;
+		this.instrument = instrument;
 	}
 
 	@ApiStatus.Internal
@@ -75,8 +80,9 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		boolean interactable = jsonObject.get("interactable").getAsBoolean();
 		boolean collision = jsonObject.get("collision").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
+		Instrument instrument = NbtParser.parseEnum(jsonObject.get("instrument").getAsString(), Instrument.class);
 
-		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, collision, translationKey);
+		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, collision, translationKey, instrument);
 	}
 
 	@NotNull
@@ -188,6 +194,12 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	public boolean hasCollision()
 	{
 		return this.collision;
+	}
+
+	@Override
+	public @NonNull Instrument getInstrument()
+	{
+		return this.instrument;
 	}
 
 	@Override
