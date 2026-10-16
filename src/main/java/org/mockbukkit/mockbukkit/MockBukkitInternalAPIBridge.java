@@ -7,9 +7,12 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import io.papermc.paper.entity.poi.PoiType;
 import io.papermc.paper.entity.poi.PoiTypeMock;
+import io.papermc.paper.persistence.PersistentDataKey;
+import io.papermc.paper.persistence.PersistentDataKeyMock;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
@@ -29,6 +32,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.io.BukkitObjectInputStream;
@@ -152,6 +156,21 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
+	public <C> PersistentDataKey<C> createPersistentDataKey(Key key, PersistentDataType<?, C> type)
+	{
+		NamespacedKey namespacedKey;
+		if (key instanceof NamespacedKey thisKey)
+		{
+			namespacedKey = thisKey;
+		} else
+		{
+			namespacedKey = new NamespacedKey(key.namespace(), key.value());
+		}
+
+		return new PersistentDataKeyMock<>(namespacedKey, type);
+	}
+
+	@Override
 	public PoiType.Occupancy createOccupancy(String enumNameEntry)
 	{
 		return new PoiTypeMock.OccupancyMock(enumNameEntry);
@@ -194,9 +213,17 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
+	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate, boolean restricted)
 	{
-		throw new UnimplementedOperationException();
+		record RestrictedPredicate(Predicate<CommandSourceStack> predicate, boolean restricted) implements Predicate<CommandSourceStack>
+		{
+			public boolean test(CommandSourceStack commandSourceStack)
+			{
+				return this.predicate.test(commandSourceStack);
+			}
+		}
+
+		return new RestrictedPredicate(predicate, restricted);
 	}
 
 	@Override

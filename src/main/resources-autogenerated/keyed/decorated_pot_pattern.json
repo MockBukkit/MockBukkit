@@ -1,0 +1,73 @@
+{
+	"values": [
+		{
+			"key": "minecraft:angler"
+		},
+		{
+			"key": "minecraft:archer"
+		},
+		{
+			"key": "minecraft:arms_up"
+		},
+		{
+			"key": "minecraft:blade"
+		},
+		{
+			"key": "minecraft:brewer"
+		},
+		{
+			"key": "minecraft:burn"
+		},
+		{
+			"key": "minecraft:danger"
+		},
+		{
+			"key": "minecraft:explorer"
+		},
+		{
+			"key": "minecraft:flow"
+		},
+		{
+			"key": "minecraft:friend"
+		},
+		{
+			"key": "minecraft:guster"
+		},
+		{
+			"key": "minecraft:heart"
+		},
+		{
+			"key": "minecraft:heartbreak"
+		},
+		{
+			"key": "minecraft:howl"
+		},
+		{
+			"key": "minecraft:miner"
+		},
+		{
+			"key": "minecraft:mourner"
+		},
+		{
+			"key": "minecraft:plenty"
+		},
+		{
+			"key": "minecraft:prize"
+		},
+		{
+			"key": "minecraft:scrape"
+		},
+		{
+			"key": "minecraft:sheaf"
+		},
+		{
+			"key": "minecraft:shelter"
+		},
+		{
+			"key": "minecraft:skull"
+		},
+		{
+			"key": "minecraft:snort"
+		}
+	]
+}

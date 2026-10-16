@@ -22,6 +22,7 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
@@ -130,6 +131,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable EntityDamageEvent lastDamageEvent;
 	private boolean silent;
 	private boolean gravity = true;
+	private @Nullable ItemStack weapon = null;
 
 	private Pose pose = Pose.STANDING;
 	private boolean isFixedPose = false;
@@ -269,6 +271,24 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public TeleportCause getTeleportCause()
 	{
 		return teleportCause;
+	}
+
+	@Override
+	public @Nullable ItemStack getWeapon()
+	{
+		return (this.weapon != null ? this.weapon.clone() : null);
+	}
+
+	/**
+	 * Sets the item being used as a weapon by this entity.
+	 *
+	 * @param weapon The weapon item
+	 *
+	 * @see Entity#getWeapon()
+	 */
+	public void setWeapon(@Nullable ItemStack weapon)
+	{
+		this.weapon = (weapon != null ? weapon.clone() : null);
 	}
 
 	@Override
@@ -1641,6 +1661,41 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public @Nullable RemovalReason getRemovalReason()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getAirDrag()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getDefaultGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isMarkedInvulnerable()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInvulnerableTo(@NotNull DamageSource source)
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();

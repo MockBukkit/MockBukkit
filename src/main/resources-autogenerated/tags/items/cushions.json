@@ -1,0 +1,21 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:black_cushion",
+		"minecraft:blue_cushion",
+		"minecraft:brown_cushion",
+		"minecraft:cyan_cushion",
+		"minecraft:gray_cushion",
+		"minecraft:green_cushion",
+		"minecraft:light_blue_cushion",
+		"minecraft:light_gray_cushion",
+		"minecraft:lime_cushion",
+		"minecraft:magenta_cushion",
+		"minecraft:orange_cushion",
+		"minecraft:pink_cushion",
+		"minecraft:purple_cushion",
+		"minecraft:red_cushion",
+		"minecraft:white_cushion",
+		"minecraft:yellow_cushion"
+	]
+}
