@@ -9,6 +9,7 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("UnstableApiUsage")
 @ExtendWith(MockBukkitExtension.class)
@@ -39,9 +40,10 @@ class ConsumableTypesBridgeMockTest
 	void givenTeleportRandomly()
 	{
 		float diameter = 20;
-		ConsumeEffect.TeleportRandomly actual = bridge.teleportRandomlyEffect(diameter);
+		ConsumeEffect.TeleportRandomly actual = bridge.teleportRandomlyEffect(diameter, true);
 		assertNotNull(actual);
 		assertEquals(diameter, actual.diameter());
+		assertTrue(actual.directionalParticles());
 	}
 
 }
