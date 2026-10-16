@@ -1874,6 +1874,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -1891,6 +1892,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -1908,6 +1910,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -1925,6 +1928,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -1942,6 +1946,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -1959,6 +1964,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -1976,6 +1982,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -1993,6 +2000,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -2098,6 +2106,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -2115,6 +2124,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -2132,6 +2142,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -2167,6 +2178,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -2184,6 +2196,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -2201,6 +2214,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -3024,6 +3038,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -3041,6 +3056,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -3058,6 +3074,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -3154,7 +3171,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:black_carpet",
 		"result": {
 			"amount": 3,
@@ -3230,6 +3247,125 @@
 			"type": "minecraft:black_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:black_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:black_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:black_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:black_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:black_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:black_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:black_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:black_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:black_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -3627,6 +3763,92 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:black_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:black_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:black_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:black_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:black_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:blackstone"
 				],
 				"type": "material"
@@ -3951,6 +4173,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -3968,6 +4191,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -3985,6 +4209,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -4081,7 +4306,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:blue_carpet",
 		"result": {
 			"amount": 3,
@@ -4157,6 +4382,125 @@
 			"type": "minecraft:blue_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:blue_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:blue_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:blue_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:blue_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:blue_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:blue_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:blue_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:blue_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:blue_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -4616,6 +4960,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:blue_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:blue_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:blue_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:blue_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:blue_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choiceMap": {
 			"a": {
@@ -4855,6 +5285,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -4872,6 +5303,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -4889,6 +5321,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -4924,6 +5357,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -4941,6 +5375,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -4958,6 +5393,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5069,6 +5505,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5086,6 +5523,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5103,6 +5541,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5480,6 +5919,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5497,6 +5937,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5514,6 +5955,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -5610,7 +6052,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:brown_carpet",
 		"result": {
 			"amount": 3,
@@ -5686,6 +6128,125 @@
 			"type": "minecraft:brown_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:brown_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:brown_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:brown_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:brown_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:brown_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:brown_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:brown_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:brown_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:brown_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -6061,6 +6622,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:brown_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:brown_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:brown_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:brown_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:brown_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choiceMap": {
 			"a": {
@@ -6318,6 +6965,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -6338,6 +6987,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -6367,6 +7018,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -6387,6 +7040,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -6416,6 +7071,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -6436,6 +7093,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -6542,6 +7201,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -6559,6 +7219,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -6576,6 +7237,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -6593,6 +7255,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7334,6 +7997,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7351,6 +8015,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7368,6 +8033,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7385,6 +8051,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7402,6 +8069,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7419,6 +8087,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7436,6 +8105,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7453,6 +8123,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7511,6 +8182,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7528,6 +8200,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7545,6 +8218,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7562,6 +8236,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -7579,6 +8254,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -7596,6 +8272,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -7613,6 +8290,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7630,6 +8308,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -7647,6 +8326,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -9030,6 +9710,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -9047,6 +9728,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -9064,6 +9746,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -9081,6 +9764,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -9098,6 +9782,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -9115,6 +9800,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -9132,6 +9818,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -10433,6 +11120,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -10450,6 +11138,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -10467,6 +11156,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -10484,6 +11174,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -11572,6 +12263,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -11589,6 +12281,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -11606,6 +12299,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -11702,7 +12396,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:cyan_carpet",
 		"result": {
 			"amount": 3,
@@ -11778,6 +12472,125 @@
 			"type": "minecraft:cyan_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:cyan_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cyan_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:cyan_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:cyan_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:cyan_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cyan_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cyan_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cyan_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:cyan_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -12168,6 +12981,92 @@
 		"result": {
 			"amount": 8,
 			"type": "minecraft:cyan_terracotta"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:cyan_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:cyan_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:cyan_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:cyan_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:cyan_wool_stairs"
 		},
 		"shape": [
 			"abc",
@@ -13032,6 +13931,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -13049,6 +13949,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -13066,6 +13967,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -14758,6 +15660,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:black_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_black_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -14830,6 +15770,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:black_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:black_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_black_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:black_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_black_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:black_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -14910,6 +15926,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_blue_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -14982,6 +16036,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:blue_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_blue_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_blue_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:blue_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15062,6 +16192,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:brown_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_brown_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -15134,6 +16302,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:brown_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:brown_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_brown_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:brown_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_brown_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:brown_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15214,6 +16458,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:cyan_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_cyan_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -15286,6 +16568,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:cyan_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:cyan_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_cyan_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:cyan_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_cyan_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:cyan_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15366,6 +16724,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_gray_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -15438,6 +16834,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:gray_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_gray_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_gray_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15518,6 +16990,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:green_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_green_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -15590,6 +17100,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:green_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:green_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_green_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:green_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_green_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15670,6 +17256,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_light_blue_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -15742,6 +17366,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:light_blue_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_light_blue_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_blue_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_light_blue_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15822,6 +17522,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_light_gray_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -15894,6 +17632,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:light_gray_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_light_gray_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:light_gray_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_light_gray_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -15974,6 +17788,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:lime_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_lime_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16046,6 +17898,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:lime_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:lime_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_lime_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:lime_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_lime_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -16126,6 +18054,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:magenta_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_magenta_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16198,6 +18164,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:magenta_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:magenta_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_magenta_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:magenta_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_magenta_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -16278,6 +18320,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:orange_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_orange_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16350,6 +18430,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:orange_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:orange_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_orange_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:orange_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_orange_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -16430,6 +18586,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:pink_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_pink_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16502,6 +18696,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:pink_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:pink_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_pink_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:pink_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_pink_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -16582,6 +18852,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:purple_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_purple_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16654,6 +18962,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:purple_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:purple_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_purple_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:purple_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_purple_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -16734,6 +19118,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:red_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:white_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_red_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16806,6 +19228,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:red_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:red_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:white_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_red_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:red_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:white_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_red_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -16886,6 +19384,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:white_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:yellow_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_white_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -16958,6 +19494,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:white_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:white_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_white_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:white_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:yellow_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_white_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -17038,6 +19650,44 @@
 		"type": "shapeless"
 	},
 	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:yellow_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_cushion",
+					"minecraft:blue_cushion",
+					"minecraft:brown_cushion",
+					"minecraft:cyan_cushion",
+					"minecraft:gray_cushion",
+					"minecraft:green_cushion",
+					"minecraft:light_blue_cushion",
+					"minecraft:light_gray_cushion",
+					"minecraft:lime_cushion",
+					"minecraft:magenta_cushion",
+					"minecraft:orange_cushion",
+					"minecraft:pink_cushion",
+					"minecraft:purple_cushion",
+					"minecraft:red_cushion",
+					"minecraft:white_cushion"
+				],
+				"type": "material"
+			}
+		],
+		"group": "cushion_dye",
+		"key": "minecraft:dye_yellow_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_cushion"
+		},
+		"type": "shapeless"
+	},
+	{
 		"category": "EQUIPMENT",
 		"choices": [
 			{
@@ -17110,6 +19760,82 @@
 		"result": {
 			"amount": 1,
 			"type": "minecraft:yellow_wool"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:yellow_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_slab",
+					"minecraft:blue_wool_slab",
+					"minecraft:brown_wool_slab",
+					"minecraft:cyan_wool_slab",
+					"minecraft:gray_wool_slab",
+					"minecraft:green_wool_slab",
+					"minecraft:light_blue_wool_slab",
+					"minecraft:light_gray_wool_slab",
+					"minecraft:lime_wool_slab",
+					"minecraft:magenta_wool_slab",
+					"minecraft:orange_wool_slab",
+					"minecraft:pink_wool_slab",
+					"minecraft:purple_wool_slab",
+					"minecraft:red_wool_slab",
+					"minecraft:white_wool_slab"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_slabs",
+		"key": "minecraft:dye_yellow_wool_slab",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_wool_slab"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:yellow_dye"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:black_wool_stairs",
+					"minecraft:blue_wool_stairs",
+					"minecraft:brown_wool_stairs",
+					"minecraft:cyan_wool_stairs",
+					"minecraft:gray_wool_stairs",
+					"minecraft:green_wool_stairs",
+					"minecraft:light_blue_wool_stairs",
+					"minecraft:light_gray_wool_stairs",
+					"minecraft:lime_wool_stairs",
+					"minecraft:magenta_wool_stairs",
+					"minecraft:orange_wool_stairs",
+					"minecraft:pink_wool_stairs",
+					"minecraft:purple_wool_stairs",
+					"minecraft:red_wool_stairs",
+					"minecraft:white_wool_stairs"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wool_stairs",
+		"key": "minecraft:dye_yellow_wool_stairs",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_wool_stairs"
 		},
 		"type": "shapeless"
 	},
@@ -18159,6 +20885,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -18176,6 +20903,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -18193,6 +20921,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -18210,6 +20939,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -19813,6 +22543,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -19830,6 +22561,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -19847,6 +22579,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -19943,7 +22676,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:gray_carpet",
 		"result": {
 			"amount": 3,
@@ -20019,6 +22752,125 @@
 			"type": "minecraft:gray_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:gray_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:gray_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:gray_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:gray_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:gray_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:gray_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:gray_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:gray_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:gray_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:gray_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -20418,6 +23270,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:gray_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:gray_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:gray_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:gray_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:gray_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choiceMap": {
 			"a": {
@@ -20519,6 +23457,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -20536,6 +23475,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -20553,6 +23493,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -20649,7 +23590,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:green_carpet",
 		"result": {
 			"amount": 3,
@@ -20725,6 +23666,125 @@
 			"type": "minecraft:green_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:green_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:green_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:green_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:green_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:green_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:green_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:green_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:green_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:green_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:green_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "EQUIPMENT",
@@ -21082,6 +24142,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:green_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:green_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:green_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:green_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:green_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choiceMap": {
 			"a": {
@@ -21114,6 +24260,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -21131,6 +24278,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22434,6 +25582,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22451,6 +25600,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22468,6 +25618,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22485,6 +25636,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22508,6 +25660,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22525,6 +25678,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22542,6 +25696,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -22559,6 +25714,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -23866,6 +27022,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -23883,6 +27040,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -23900,6 +27058,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -23923,6 +27082,7 @@
 					"minecraft:mangrove_slab",
 					"minecraft:oak_slab",
 					"minecraft:pale_oak_slab",
+					"minecraft:poplar_slab",
 					"minecraft:spruce_slab",
 					"minecraft:warped_slab"
 				],
@@ -24072,6 +27232,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -24089,6 +27250,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -24106,6 +27268,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -24202,7 +27365,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:light_blue_carpet",
 		"result": {
 			"amount": 3,
@@ -24278,6 +27441,125 @@
 			"type": "minecraft:light_blue_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:light_blue_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:light_blue_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:light_blue_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:light_blue_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:light_blue_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_blue_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:light_blue_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:light_blue_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:light_blue_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_blue_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -24677,6 +27959,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:light_blue_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:light_blue_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:light_blue_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:light_blue_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:light_blue_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choiceMap": {
 			"a": {
@@ -24778,6 +28146,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -24795,6 +28164,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -24812,6 +28182,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -24908,7 +28279,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:light_gray_carpet",
 		"result": {
 			"amount": 3,
@@ -24984,6 +28355,125 @@
 			"type": "minecraft:light_gray_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:light_gray_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:light_gray_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:light_gray_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:light_gray_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:light_gray_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_gray_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:light_gray_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:light_gray_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:light_gray_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:light_gray_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -25449,6 +28939,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:light_gray_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:light_gray_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:light_gray_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:light_gray_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:light_gray_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "REDSTONE",
 		"choiceMap": {
 			"a": {
@@ -25612,6 +29188,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -25629,6 +29206,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -25646,6 +29224,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -25742,7 +29321,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:lime_carpet",
 		"result": {
 			"amount": 3,
@@ -25818,6 +29397,125 @@
 			"type": "minecraft:lime_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:lime_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:lime_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:lime_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:lime_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:lime_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:lime_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:lime_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:lime_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:lime_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lime_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -26199,6 +29897,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:lime_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:lime_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:lime_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:lime_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:lime_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choiceMap": {
 			"a": {
@@ -26296,6 +30080,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -26313,6 +30098,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -26461,6 +30247,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -26478,6 +30265,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -26495,6 +30283,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -26591,7 +30380,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:magenta_carpet",
 		"result": {
 			"amount": 3,
@@ -26667,6 +30456,125 @@
 			"type": "minecraft:magenta_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:magenta_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:magenta_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:magenta_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:magenta_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:magenta_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:magenta_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:magenta_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:magenta_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:magenta_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:magenta_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -27141,6 +31049,92 @@
 		"result": {
 			"amount": 8,
 			"type": "minecraft:magenta_terracotta"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:magenta_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:magenta_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:magenta_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:magenta_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:magenta_wool_stairs"
 		},
 		"shape": [
 			"abc",
@@ -27937,7 +31931,23 @@
 		"group": "",
 		"input": {
 			"choices": [
-				"minecraft:filled_map"
+				"minecraft:abandoned_camp_map",
+				"minecraft:buried_ancient_city_map",
+				"minecraft:buried_mineshaft_map",
+				"minecraft:buried_treasure_map",
+				"minecraft:buried_trial_chambers_map",
+				"minecraft:desert_pyramid_map",
+				"minecraft:desert_village_map",
+				"minecraft:filled_map",
+				"minecraft:jungle_pyramid_map",
+				"minecraft:ocean_monument_map",
+				"minecraft:plains_village_map",
+				"minecraft:savanna_village_map",
+				"minecraft:snowy_village_map",
+				"minecraft:swamp_hut_map",
+				"minecraft:taiga_village_map",
+				"minecraft:warm_ocean_ruins_map",
+				"minecraft:woodland_mansion_map"
 			],
 			"type": "material"
 		},
@@ -28724,13 +32734,17 @@
 		"choices": [
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -28741,7 +32755,7 @@
 				"type": "material"
 			}
 		],
-		"group": "",
+		"group": "mushroom_stew",
 		"key": "minecraft:mushroom_stew",
 		"result": {
 			"amount": 1,
@@ -29376,6 +33390,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29393,6 +33408,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29410,6 +33426,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29427,6 +33444,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29450,6 +33468,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29467,6 +33486,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29484,6 +33504,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -29501,6 +33522,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -30341,6 +34363,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -30358,6 +34381,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -30375,6 +34399,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -30471,7 +34496,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:orange_carpet",
 		"result": {
 			"amount": 3,
@@ -30547,6 +34572,125 @@
 			"type": "minecraft:orange_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:orange_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:orange_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:orange_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:orange_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:orange_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:orange_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:orange_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:orange_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:orange_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:orange_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -30973,6 +35117,92 @@
 		"result": {
 			"amount": 8,
 			"type": "minecraft:orange_terracotta"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:orange_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:orange_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:orange_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:orange_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:orange_wool_stairs"
 		},
 		"shape": [
 			"abc",
@@ -32209,6 +36439,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -32226,6 +36457,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -32243,6 +36475,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -32339,7 +36572,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:pink_carpet",
 		"result": {
 			"amount": 3,
@@ -32415,6 +36648,125 @@
 			"type": "minecraft:pink_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:pink_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:pink_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:pink_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:pink_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:pink_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:pink_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:pink_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:pink_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:pink_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:pink_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -32868,6 +37220,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:pink_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:pink_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:pink_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:pink_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:pink_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "REDSTONE",
 		"choiceMap": {
 			"a": {
@@ -32882,6 +37320,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -32899,6 +37338,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -32916,6 +37356,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -34503,6 +38944,654 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "boat",
+		"key": "minecraft:poplar_boat",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:poplar_boat"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "REDSTONE",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		],
+		"group": "wooden_button",
+		"key": "minecraft:poplar_button",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:poplar_button"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:chest"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:poplar_boat"
+				],
+				"type": "material"
+			}
+		],
+		"group": "chest_boat",
+		"key": "minecraft:poplar_chest_boat",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:poplar_chest_boat"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "REDSTONE",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_door",
+		"key": "minecraft:poplar_door",
+		"result": {
+			"amount": 3,
+			"type": "minecraft:poplar_door"
+		},
+		"shape": [
+			"ab",
+			"cd",
+			"ef"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_fence",
+		"key": "minecraft:poplar_fence",
+		"result": {
+			"amount": 3,
+			"type": "minecraft:poplar_fence"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "REDSTONE",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_fence_gate",
+		"key": "minecraft:poplar_fence_gate",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:poplar_fence_gate"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:iron_chain"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:iron_chain"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_hanging_sign",
+		"key": "minecraft:poplar_hanging_sign",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:poplar_hanging_sign"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood"
+				],
+				"type": "material"
+			}
+		],
+		"group": "planks",
+		"key": "minecraft:poplar_planks",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:poplar_planks"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "REDSTONE",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_pressure_plate",
+		"key": "minecraft:poplar_pressure_plate",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:poplar_pressure_plate"
+		},
+		"shape": [
+			"ab"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "shelf",
+		"key": "minecraft:poplar_shelf",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:poplar_shelf"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:stick"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_sign",
+		"key": "minecraft:poplar_sign",
+		"result": {
+			"amount": 3,
+			"type": "minecraft:poplar_sign"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_slab",
+		"key": "minecraft:poplar_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:poplar_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_stairs",
+		"key": "minecraft:poplar_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:poplar_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "REDSTONE",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:poplar_planks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "wooden_trapdoor",
+		"key": "minecraft:poplar_trapdoor",
+		"result": {
+			"amount": 2,
+			"type": "minecraft:poplar_trapdoor"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:poplar_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:poplar_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:poplar_log"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:poplar_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "bark",
+		"key": "minecraft:poplar_wood",
+		"result": {
+			"amount": 3,
+			"type": "minecraft:poplar_wood"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "BUILDING",
 		"choices": [
 			{
@@ -35115,6 +40204,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -35132,6 +40222,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -35149,6 +40240,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -35245,7 +40337,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:purple_carpet",
 		"result": {
 			"amount": 3,
@@ -35321,6 +40413,125 @@
 			"type": "minecraft:purple_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:purple_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:purple_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:purple_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:purple_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:purple_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:purple_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:purple_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:purple_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:purple_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:purple_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -35693,6 +40904,92 @@
 		"result": {
 			"amount": 8,
 			"type": "minecraft:purple_terracotta"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:purple_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:purple_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:purple_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:purple_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:purple_wool_stairs"
 		},
 		"shape": [
 			"abc",
@@ -36154,6 +41451,48 @@
 		],
 		"group": "rabbit_stew",
 		"key": "minecraft:rabbit_stew_from_red_mushroom",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:rabbit_stew"
+		},
+		"type": "shapeless"
+	},
+	{
+		"category": "MISC",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:baked_potato"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:cooked_rabbit"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:bowl"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:carrot"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:shelf_mushroom"
+				],
+				"type": "material"
+			}
+		],
+		"group": "rabbit_stew",
+		"key": "minecraft:rabbit_stew_from_shelf_mushroom",
 		"result": {
 			"amount": 1,
 			"type": "minecraft:rabbit_stew"
@@ -36730,6 +42069,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -36747,6 +42087,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -36764,6 +42105,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -36860,7 +42202,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:red_carpet",
 		"result": {
 			"amount": 3,
@@ -36936,6 +42278,125 @@
 			"type": "minecraft:red_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:red_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:red_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:red_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:red_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:red_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:red_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:red_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:red_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:red_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:red_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -37727,6 +43188,92 @@
 		"result": {
 			"amount": 8,
 			"type": "minecraft:red_terracotta"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:red_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:red_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:red_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:red_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:red_wool_stairs"
 		},
 		"shape": [
 			"abc",
@@ -38918,6 +44465,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -38941,6 +44489,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -38958,6 +44507,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -38975,6 +44525,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -38992,6 +44543,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -39009,6 +44561,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -39284,6 +44837,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -39301,6 +44855,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -39318,6 +44873,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -39335,6 +44891,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -39377,6 +44934,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -39397,6 +44956,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -39426,6 +44987,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -39446,6 +45009,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -39481,6 +45046,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -39501,6 +45068,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -39530,6 +45099,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -39550,6 +45121,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -40056,6 +45629,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -40076,6 +45651,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -40105,6 +45682,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -40125,6 +45704,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -40154,6 +45735,8 @@
 					"minecraft:oak_wood",
 					"minecraft:pale_oak_log",
 					"minecraft:pale_oak_wood",
+					"minecraft:poplar_log",
+					"minecraft:poplar_wood",
 					"minecraft:spruce_log",
 					"minecraft:spruce_wood",
 					"minecraft:stripped_acacia_log",
@@ -40174,6 +45757,8 @@
 					"minecraft:stripped_oak_wood",
 					"minecraft:stripped_pale_oak_log",
 					"minecraft:stripped_pale_oak_wood",
+					"minecraft:stripped_poplar_log",
+					"minecraft:stripped_poplar_wood",
 					"minecraft:stripped_spruce_log",
 					"minecraft:stripped_spruce_wood",
 					"minecraft:stripped_warped_hyphae",
@@ -41121,6 +46706,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -41138,6 +46724,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -41826,6 +47413,39 @@
 		"type": "shaped"
 	},
 	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:hay_block"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:hay_block"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:hay_block"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:straw_bed",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:straw_bed"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "BUILDING",
 		"choiceMap": {
 			"a": {
@@ -42178,6 +47798,46 @@
 		"result": {
 			"amount": 3,
 			"type": "minecraft:stripped_pale_oak_wood"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:stripped_poplar_log"
+				],
+				"type": "material"
+			}
+		},
+		"group": "bark",
+		"key": "minecraft:stripped_poplar_wood",
+		"result": {
+			"amount": 3,
+			"type": "minecraft:stripped_poplar_wood"
 		},
 		"shape": [
 			"ab",
@@ -42668,13 +48328,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42704,13 +48368,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42740,13 +48408,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42776,13 +48448,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42812,13 +48488,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42848,13 +48528,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42884,13 +48568,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42920,13 +48608,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42956,13 +48648,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -42992,13 +48688,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43028,13 +48728,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43064,13 +48768,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43100,13 +48808,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43136,13 +48848,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43172,13 +48888,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43208,13 +48928,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43244,13 +48968,17 @@
 			},
 			{
 				"choices": [
-					"minecraft:brown_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
 			{
 				"choices": [
-					"minecraft:red_mushroom"
+					"minecraft:brown_mushroom",
+					"minecraft:red_mushroom",
+					"minecraft:shelf_mushroom"
 				],
 				"type": "material"
 			},
@@ -43623,6 +49351,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -47593,6 +53322,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -47610,6 +53340,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -47627,6 +53358,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -47723,7 +53455,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:white_carpet",
 		"result": {
 			"amount": 3,
@@ -47799,6 +53531,125 @@
 			"type": "minecraft:white_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:white_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:white_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:white_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:white_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:white_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:white_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:white_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:white_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:white_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:white_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -48232,6 +54083,92 @@
 		"type": "shaped"
 	},
 	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:white_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:white_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:white_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:white_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:white_wool_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
 		"category": "MISC",
 		"choiceMap": {
 			"a": {
@@ -48398,6 +54335,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48415,6 +54353,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48432,6 +54371,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48478,6 +54418,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48495,6 +54436,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48541,6 +54483,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48558,6 +54501,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48575,6 +54519,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48621,6 +54566,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48667,6 +54613,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48713,6 +54660,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48730,6 +54678,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48887,6 +54836,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48904,6 +54854,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -48921,6 +54872,7 @@
 					"minecraft:mangrove_planks",
 					"minecraft:oak_planks",
 					"minecraft:pale_oak_planks",
+					"minecraft:poplar_planks",
 					"minecraft:spruce_planks",
 					"minecraft:warped_planks"
 				],
@@ -49017,7 +54969,7 @@
 				"type": "material"
 			}
 		},
-		"group": "carpet",
+		"group": "woolen_carpet",
 		"key": "minecraft:yellow_carpet",
 		"result": {
 			"amount": 3,
@@ -49093,6 +55045,125 @@
 			"type": "minecraft:yellow_concrete_powder"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_slab",
+		"key": "minecraft:yellow_concrete_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:yellow_concrete_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:yellow_concrete"
+				],
+				"type": "material"
+			}
+		},
+		"group": "concrete_stairs",
+		"key": "minecraft:yellow_concrete_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:yellow_concrete_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:yellow_wool_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "cushion",
+		"key": "minecraft:yellow_cushion",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:yellow_cushion"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -49513,6 +55584,92 @@
 		"result": {
 			"amount": 8,
 			"type": "minecraft:yellow_terracotta"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_slab",
+		"key": "minecraft:yellow_wool_slab",
+		"result": {
+			"amount": 6,
+			"type": "minecraft:yellow_wool_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:yellow_wool"
+				],
+				"type": "material"
+			}
+		},
+		"group": "woolen_stairs",
+		"key": "minecraft:yellow_wool_stairs",
+		"result": {
+			"amount": 4,
+			"type": "minecraft:yellow_wool_stairs"
 		},
 		"shape": [
 			"abc",

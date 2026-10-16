@@ -1,0 +1,5303 @@
+[
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:blaze_powder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_blaze_powder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:breeze_rod"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_breeze_rod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:cobweb"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_cobweb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:ghast_tear"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_ghast_tear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glistering_melon_slice"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_glistering_melon_slice",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:golden_carrot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_golden_carrot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:magma_cream"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_magma_cream",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:phantom_membrane"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_phantom_membrane",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:pufferfish"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_pufferfish",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:rabbit_foot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_rabbit_foot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:slime_block"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_slime_block",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:sugar"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_sugar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_awkward_turtle_helmet",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_fire_resistance_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_harming_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_healing_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_healing_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_invisibility_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_leaping_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_leaping_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_leaping_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_long_leaping_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_long_night_vision_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_long_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_long_swiftness_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_night_vision_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_night_vision_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_poison_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_poison_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_regeneration_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_regeneration_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_slow_falling_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_slowness_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_slowness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_strength_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_strength_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_strong_healing_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_strong_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_swiftness_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_swiftness_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_swiftness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_turtle_master_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_turtle_master_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:blaze_powder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_blaze_powder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_breathing_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:breeze_rod"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_breeze_rod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:cobweb"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_cobweb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:ghast_tear"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_ghast_tear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glistering_melon_slice"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_glistering_melon_slice",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:magma_cream"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_magma_cream",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:nether_wart"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_nether_wart",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:rabbit_foot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_rabbit_foot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:slime_block"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_slime_block",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:sugar"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_water_sugar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:lingering_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/lingering_potion_weakness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:blaze_powder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_blaze_powder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:breeze_rod"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_breeze_rod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:cobweb"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_cobweb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:ghast_tear"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_ghast_tear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glistering_melon_slice"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_glistering_melon_slice",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:golden_carrot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_golden_carrot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:magma_cream"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_magma_cream",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:phantom_membrane"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_phantom_membrane",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:pufferfish"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_pufferfish",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:rabbit_foot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_rabbit_foot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:slime_block"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_slime_block",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:sugar"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_sugar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_awkward_turtle_helmet",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_fire_resistance_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_fire_resistance_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_harming_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_harming_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_healing_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_healing_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_healing_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_infested_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_invisibility_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_invisibility_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_leaping_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_leaping_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_leaping_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_leaping_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_fire_resistance_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_invisibility_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_leaping_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_leaping_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_night_vision_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_night_vision_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_poison_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_regeneration_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_slow_falling_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_slowness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_strength_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_swiftness_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_swiftness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_turtle_master_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_water_breathing_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_long_weakness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_mundane_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_night_vision_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_night_vision_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_night_vision_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_oozing_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_poison_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_poison_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_poison_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_regeneration_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_regeneration_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_regeneration_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_slow_falling_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_slow_falling_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_slowness_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_slowness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_slowness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strength_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strength_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strength_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_harming_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_healing_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_healing_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_leaping_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_poison_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_regeneration_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_slowness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_strength_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_swiftness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_strong_turtle_master_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_swiftness_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_swiftness_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_swiftness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_swiftness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_thick_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_turtle_master_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_turtle_master_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_turtle_master_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:blaze_powder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_blaze_powder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_breathing_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_breathing_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:breeze_rod"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_breeze_rod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:cobweb"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_cobweb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:ghast_tear"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_ghast_tear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glistering_melon_slice"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_glistering_melon_slice",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:magma_cream"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_magma_cream",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:nether_wart"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_nether_wart",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:rabbit_foot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_rabbit_foot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:slime_block"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_slime_block",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:sugar"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_water_sugar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_weakness_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_weakness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_weaving_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:gunpowder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/potion_wind_charged_gunpowder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:blaze_powder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_blaze_powder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:breeze_rod"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_breeze_rod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:cobweb"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_cobweb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:ghast_tear"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_ghast_tear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glistering_melon_slice"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_glistering_melon_slice",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:golden_carrot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_golden_carrot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:magma_cream"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_magma_cream",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:phantom_membrane"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_phantom_membrane",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:pufferfish"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_pufferfish",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:rabbit_foot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_rabbit_foot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:slime_block"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_slime_block",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:sugar"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_sugar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:turtle_helmet"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_awkward_turtle_helmet",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_fire_resistance_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_fire_resistance_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_harming_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_harming_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_healing_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_healing_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_healing_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_infested_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_invisibility_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_invisibility_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_leaping_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_leaping_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_leaping_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_leaping_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_fire_resistance_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_invisibility_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_leaping_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_leaping_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_night_vision_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_night_vision_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_poison_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_regeneration_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_slow_falling_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_slowness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_strength_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_swiftness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_swiftness_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_turtle_master_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_water_breathing_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_long_weakness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_mundane_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_night_vision_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_night_vision_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_night_vision_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_oozing_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_poison_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_poison_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_poison_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_regeneration_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_regeneration_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_regeneration_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_slow_falling_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_slow_falling_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_slowness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_slowness_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_slowness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strength_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strength_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strength_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_harming_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_healing_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_healing_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_leaping_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_poison_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_poison_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_regeneration_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_slowness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_strength_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_swiftness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_strong_turtle_master_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_swiftness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_swiftness_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_swiftness_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_swiftness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_thick_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_turtle_master_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_turtle_master_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_turtle_master_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:blaze_powder"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_blaze_powder",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_breathing_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_breathing_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:breeze_rod"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_breeze_rod",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:cobweb"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_cobweb",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:fermented_spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_fermented_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:ghast_tear"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_ghast_tear",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glistering_melon_slice"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_glistering_melon_slice",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:glowstone_dust"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_glowstone_dust",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:magma_cream"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_magma_cream",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:nether_wart"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_nether_wart",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:rabbit_foot"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_rabbit_foot",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:slime_block"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_slime_block",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:spider_eye"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_spider_eye",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:stone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_stone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:sugar"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_water_sugar",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_weakness_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:redstone"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_weakness_redstone",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:splash_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_weaving_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	},
+	{
+		"ingredient": {
+			"choices": [
+				"minecraft:dragon_breath"
+			],
+			"type": "material"
+		},
+		"input": {
+			"choices": [
+				"minecraft:splash_potion"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:brewing/splash_potion_wind_charged_dragon_breath",
+		"result": {
+			"amount": 1,
+			"type": "minecraft:lingering_potion"
+		}
+	}
+]
