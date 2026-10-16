@@ -7,7 +7,9 @@ import io.papermc.paper.registry.set.RegistryKeySet;
 import io.papermc.paper.registry.set.RegistrySet;
 import io.papermc.paper.text.Filtered;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.util.TriState;
+import org.bukkit.DyeColor;
 import org.bukkit.JukeboxSong;
 import org.bukkit.Material;
 import org.bukkit.block.BlockType;
@@ -25,10 +27,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -115,14 +119,6 @@ class ItemComponentTypesBridgeMockTest
 	void givenSuspiciousStewEffects()
 	{
 		SuspiciousStewEffects.Builder actual = bridge.suspiciousStewEffects();
-		assertNotNull(actual);
-		assertNotNull(actual.build());
-	}
-
-	@Test
-	void givenMapItemColor()
-	{
-		MapItemColor.Builder actual = bridge.mapItemColor();
 		assertNotNull(actual);
 		assertNotNull(actual.build());
 	}
@@ -254,7 +250,7 @@ class ItemComponentTypesBridgeMockTest
 			TypedKey<@NonNull BlockType> dirtKey = TypedKey.create(RegistryKey.BLOCK, Key.key("minecraft", "dirt"));
 			RegistryKeySet<@NonNull BlockType> blocks = RegistrySet.keySet(RegistryKey.BLOCK, List.of(stoneKey, dirtKey));
 
-			Tool.Rule actual = bridge.rule(blocks, 1.0f, TriState.TRUE);
+			Tool.Rule actual = bridge.toolRule(blocks, 1.0f, TriState.TRUE);
 
 			assertNotNull(actual);
 			assertEquals(blocks, actual.blocks());
@@ -324,7 +320,7 @@ class ItemComponentTypesBridgeMockTest
 			double z = 2.0;
 			float rotation = 0.5f;
 
-			MapDecorationsMock.DecorationEntry actual = bridge.decorationEntry(type, x, z, rotation);
+			MapDecorationsMock.DecorationEntry actual = bridge.mapDecorationEntry(type, x, z, rotation);
 
 			assertNotNull(actual);
 			assertEquals(type, actual.type());
@@ -569,6 +565,43 @@ class ItemComponentTypesBridgeMockTest
 			assertEquals(1, actualItem.getAmount());
 		}
 
+	}
+
+	@Test
+	void givenMobVisibility()
+	{
+		var entitySet = RegistrySet.keySet(
+				RegistryKey.ENTITY_TYPE,
+				TypedKey.create(RegistryKey.ENTITY_TYPE, Key.key("minecraft:zombie")),
+				TypedKey.create(RegistryKey.ENTITY_TYPE, Key.key("minecraft:skeleton"))
+		);
+
+		MobVisibility mobVisibility = bridge.mobVisibility(entitySet, 10);
+
+		assertNotNull(mobVisibility);
+		assertEquals(entitySet, mobVisibility.targetingEntityTypes());
+		assertEquals(10, mobVisibility.visibility());
+	}
+
+	@Test
+	void givenVillageFood()
+	{
+		VillagerFood villagerFood = bridge.villagerFood(5);
+
+		assertNotNull(villagerFood);
+		assertEquals(5, villagerFood.nutrition());
+	}
+
+	@Test
+	void givenSingText()
+	{
+		SignText.Builder signTextBuilder = bridge.signText();
+		assertNotNull(signTextBuilder);
+
+		SignText signText = signTextBuilder.build();
+		assertEquals(Collections.nCopies(4, Component.empty()), signText.lines());
+		assertEquals(DyeColor.BLACK, signText.color());
+		assertFalse(signText.hasGlowingText());
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block;
 
+import org.bukkit.Instrument;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockType;
@@ -424,6 +425,30 @@ class BlockTypeMockTest
 		void givenIronBlock()
 		{
 			assertEquals("block.minecraft.iron_block", BlockType.IRON_BLOCK.translationKey());
+		}
+
+	}
+
+	@Nested
+	class GetInstrument
+	{
+
+		@Test
+		void givenBassGuitar()
+		{
+			assertEquals(Instrument.BASS_GUITAR, BlockType.ACACIA_DOOR.getInstrument());
+		}
+
+		@Test
+		void givenPiano()
+		{
+			assertEquals(Instrument.PIANO, BlockType.ACACIA_LEAVES.getInstrument());
+		}
+
+		@Test
+		void givenBassDrum()
+		{
+			assertEquals(Instrument.BASS_DRUM, BlockType.ANDESITE_WALL.getInstrument());
 		}
 
 	}
