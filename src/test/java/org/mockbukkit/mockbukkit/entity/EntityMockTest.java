@@ -1650,21 +1650,24 @@ class EntityMockTest
 	class IsAlliedTo
 	{
 		@Test
-		void givenNullEntity_ThrowsIllegalArgumentException() {
+		void givenNullEntity_ThrowsIllegalArgumentException()
+		{
 			PlayerMock player = server.addPlayer();
 
 			assertThrows(IllegalArgumentException.class, () -> player.isAlliedTo((Entity) null));
 		}
 
 		@Test
-		void givenSameEntity_ReturnsTrue() {
+		void givenSameEntity_ReturnsTrue()
+		{
 			PlayerMock player = server.addPlayer();
 
 			assertTrue(player.isAlliedTo(player));
 		}
 
 		@Test
-		void givenNoTeamsAssigned_ReturnsFalse() {
+		void givenNoTeamsAssigned_ReturnsFalse()
+		{
 			PlayerMock player1 = server.addPlayer();
 			PlayerMock player2 = server.addPlayer();
 
@@ -1673,7 +1676,8 @@ class EntityMockTest
 		}
 
 		@Test
-		void givenSameTeamAssigned_ReturnsTrue() {
+		void givenSameTeamAssigned_ReturnsTrue()
+		{
 			PlayerMock player1 = server.addPlayer();
 			PlayerMock player2 = server.addPlayer();
 
@@ -1688,7 +1692,8 @@ class EntityMockTest
 		}
 
 		@Test
-		void givenDifferentTeamsAssigned_ReturnsFalse() {
+		void givenDifferentTeamsAssigned_ReturnsFalse()
+		{
 			PlayerMock player1 = server.addPlayer();
 			PlayerMock player2 = server.addPlayer();
 

@@ -20,7 +20,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.BlockFace;
@@ -1718,37 +1717,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			return true;
 		}
 
+		Team thisTeam = TeamMock.getTeam(this.getServer(), this);
 		Team otherTeam = TeamMock.getTeam(this.getServer(), other);
-		if (this.isAlliedTo(otherTeam))
+		if (TeamMock.isAlliedTo(thisTeam, otherTeam))
 		{
 			return true;
 		}
 
-		Team thisTeam = this.getTeam();
 		return TeamMock.isAlliedTo(otherTeam, thisTeam);
-	}
-
-	/**
-	 * Checks whether this entity or target is allied with the specified scoreboard {@link Team}.
-	 *
-	 * @param other the team to check alliance with, or {@code null}
-	 * @return {@code true} if this object belongs to a team and is allied to the given team; {@code false} otherwise
-	 */
-	public boolean isAlliedTo(@Nullable Team other) {
-		Team team = this.getTeam();
-		return team != null && TeamMock.isAlliedTo(team, other);
-	}
-
-	/**
-	 * Helper method to retrieve the scoreboard {@link Team} associated with this {@link Entity}.
-	 *
-	 * @return the {@link Team} this target belongs to, or {@code null} if not assigned to any team
-	 *
-	 * @see TeamMock#getTeam(Server, Entity)
-	 */
-	public Team getTeam()
-	{
-		return TeamMock.getTeam(this.getServer(), this);
 	}
 
 	@Override
