@@ -26,6 +26,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.damage.DamageEffect;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
+import org.bukkit.enchantments.EnchantmentOffer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -168,6 +169,13 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 		}
 
 		return new PersistentDataKeyMock<>(namespacedKey, type);
+	}
+
+	@Override
+	public @Nullable EnchantmentOffer[] rollEnchantmentOffers(ItemStack targetStack, int seed, int bookshelfCount, int offerAmount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

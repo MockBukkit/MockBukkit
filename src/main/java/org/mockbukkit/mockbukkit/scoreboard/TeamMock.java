@@ -9,6 +9,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.NameTagVisibility;
@@ -32,6 +33,32 @@ import java.util.logging.Level;
  */
 public class TeamMock implements Team
 {
+	/**
+	 * Retrieves the scoreboard {@link Team} associated with the given {@link Entity} on the specified server.
+	 *
+	 * @param server the {@link Server} instance to query, must not be {@code null}
+	 * @param entity the {@link Entity} to check, must not be {@code null}
+	 * @return the {@link Team} the entity belongs to, or {@code null} if it is not on any team
+	 * @throws NullPointerException if {@code server} or {@code entity} is {@code null}
+	 */
+	public static @Nullable Team getTeam(@NotNull Server server, @NotNull Entity entity)
+	{
+		Preconditions.checkNotNull(server, "server cannot be null");
+		Preconditions.checkNotNull(entity, "entity cannot be null");
+		return server.getScoreboardManager().getMainScoreboard().getEntityTeam(entity);
+	}
+
+	/**
+	 * Checks whether the specified {@link Team} is allied with (or equal to) another team.
+	 *
+	 * @param team the primary {@link Team}, or {@code null}
+	 * @param other the other {@link Team} to compare against, or {@code null}
+	 * @return {@code true} if both teams are non-null and represent the same team instance; {@code false} otherwise
+	 */
+	public static boolean isAlliedTo(@Nullable Team team, @Nullable Team other)
+	{
+		return other != null && team == other;
+	}
 
 	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
 	private static final String ENTRY_CANNOT_BE_NULL = "Entry cannot be null";

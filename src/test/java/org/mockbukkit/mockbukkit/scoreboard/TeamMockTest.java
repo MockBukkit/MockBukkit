@@ -10,6 +10,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
@@ -295,6 +296,52 @@ class TeamMockTest
 		playerA.assertNoMoreSaid();
 
 		playerB.assertNoMoreSaid();
+	}
+
+	@Nested
+	class IsAlliedTo
+	{
+
+		@Test
+		void givenBothNullTeam_shouldReturnFalse()
+		{
+			assertFalse(TeamMock.isAlliedTo(null, null));
+		}
+
+		@Test
+		void givenNullTeamAtCurrent_shouldReturnFalse()
+		{
+			Team teamA = board.registerNewTeam("TeamA");
+
+			assertFalse(TeamMock.isAlliedTo(null, teamA));
+		}
+
+		@Test
+		void givenNullTeamAtOther_shouldReturnFalse()
+		{
+			Team teamA = board.registerNewTeam("TeamA");
+
+			assertFalse(TeamMock.isAlliedTo(teamA, null));
+		}
+
+		@Test
+		void givenSameTeamWithSameReference_shouldReturnTrue()
+		{
+			Team teamA = board.registerNewTeam("TeamA");
+			Team teamAReference = board.getTeam("TeamA");
+
+			assertTrue(TeamMock.isAlliedTo(teamA, teamAReference));
+		}
+
+		@Test
+		void givenTwoDifferentTeams_shouldReturnFalse()
+		{
+			Team teamA = board.registerNewTeam("TeamA");
+			Team teamB = board.registerNewTeam("TeamB");
+
+			assertFalse(TeamMock.isAlliedTo(teamA, teamB));
+		}
+
 	}
 
 }
