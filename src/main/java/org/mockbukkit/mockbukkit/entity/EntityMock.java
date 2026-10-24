@@ -9,6 +9,8 @@ import io.papermc.paper.entity.RemovalReason;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.math.Angle;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.key.Namespaced;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
@@ -56,6 +58,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
 import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -75,11 +78,14 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -96,6 +102,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
+    private final Map<Key, Predicate<Entity>> additionalAlliedRules = new HashMap<>();
 	private final Set<String> tags = Sets.newHashSet();
 	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
@@ -1699,6 +1706,53 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isAlliedTo(@NotNull Entity other)
+	{
+		Preconditions.checkArgument(other != null, "other cannot be null");
+		if (this == other)
+		{
+			return true;
+		}
+
+		Team thisTeam = TeamMock.getTeam(this.getServer(), this);
+		Team otherTeam = TeamMock.getTeam(this.getServer(), other);
+		if (TeamMock.isAlliedTo(thisTeam, otherTeam))
+		{
+			return true;
+		}
+
+		return TeamMock.isAlliedTo(otherTeam, thisTeam);
+	}
+
+	@Override
+	public @NotNull @UnmodifiableView Map<Key, Predicate<Entity>> getAdditionalAlliedRules()
+	{
+		return Collections.unmodifiableMap(this.additionalAlliedRules);
+	}
+
+	@Override
+	public void addAdditionalAlliedRule(@NotNull Key key, @NotNull Predicate<Entity> predicate)
+	{
+		Preconditions.checkArgument(key != null, "key cannot be null");
+		Preconditions.checkArgument(predicate != null, "predicate cannot be null");
+		this.additionalAlliedRules.put(key, predicate);
+	}
+
+	@Override
+	public void removeAdditionalAlliedRule(@NotNull Key key)
+	{
+		Preconditions.checkArgument(key != null, "key cannot be null");
+		this.additionalAlliedRules.remove(key);
+	}
+
+	@Override
+	public void removeAdditionalAlliedRule(@NotNull Namespaced nameSpaced)
+	{
+		Preconditions.checkArgument(nameSpaced != null, "nameSpaced cannot be null");
+		this.additionalAlliedRules.entrySet().removeIf(entry -> entry.getKey().namespace().equals(nameSpaced.namespace()));
 	}
 
 }

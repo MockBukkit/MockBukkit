@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import io.papermc.paper.math.Angle;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -9,6 +10,7 @@ import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
@@ -18,6 +20,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -31,6 +34,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
@@ -48,8 +53,10 @@ import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -1594,6 +1601,112 @@ class EntityMockTest
 		entity.setRotation(Angle.relative(0f), Angle.relative(100f));
 		// expected: normalizePitch(-80 + 100) == normalizePitch(20) -> 20
 		assertEquals(Location.normalizePitch(20f), entity.getLocation().getPitch());
+	}
+
+	@Nested
+	class GetAdditionalAlliedRules
+	{
+
+		@Test
+		void givenDefault_shouldBeEmpty()
+		{
+			Map<Key, Predicate<Entity>> actual = entity.getAdditionalAlliedRules();
+			assertNotNull(actual);
+			assertTrue(actual.isEmpty());
+		}
+
+		@Test
+		void givenNewField_ShouldBeStoredSuccessfully()
+		{
+			NamespacedKey key = NamespacedKey.minecraft("test");
+			Predicate<Entity> rule = Zombie.class::isInstance;
+			entity.addAdditionalAlliedRule(key, rule);
+
+			Map<Key, Predicate<Entity>> actual = entity.getAdditionalAlliedRules();
+			assertNotNull(actual);
+			assertEquals(1, actual.size());
+
+			assertEquals(rule, actual.get(key));
+		}
+
+		@Test
+		void givenFieldRemoval_ShouldBeRemovedSuccessfully()
+		{
+			NamespacedKey key = NamespacedKey.minecraft("test");
+			Predicate<Entity> rule = Zombie.class::isInstance;
+			entity.addAdditionalAlliedRule(key, rule);
+
+			entity.removeAdditionalAlliedRule(key);
+
+			Map<Key, Predicate<Entity>> actual = entity.getAdditionalAlliedRules();
+			assertNotNull(actual);
+			assertTrue(actual.isEmpty());
+		}
+
+
+	}
+
+	@Nested
+	class IsAlliedTo
+	{
+		@Test
+		void givenNullEntity_ThrowsIllegalArgumentException()
+		{
+			PlayerMock player = server.addPlayer();
+
+			assertThrows(IllegalArgumentException.class, () -> player.isAlliedTo((Entity) null));
+		}
+
+		@Test
+		void givenSameEntity_ReturnsTrue()
+		{
+			PlayerMock player = server.addPlayer();
+
+			assertTrue(player.isAlliedTo(player));
+		}
+
+		@Test
+		void givenNoTeamsAssigned_ReturnsFalse()
+		{
+			PlayerMock player1 = server.addPlayer();
+			PlayerMock player2 = server.addPlayer();
+
+			assertFalse(player1.isAlliedTo(player2));
+			assertFalse(player2.isAlliedTo(player1));
+		}
+
+		@Test
+		void givenSameTeamAssigned_ReturnsTrue()
+		{
+			PlayerMock player1 = server.addPlayer();
+			PlayerMock player2 = server.addPlayer();
+
+			Scoreboard scoreboard = server.getScoreboardManager().getMainScoreboard();
+			Team team = scoreboard.registerNewTeam("red_team");
+
+			team.addEntry(player1.getName());
+			team.addEntry(player2.getName());
+
+			assertTrue(player1.isAlliedTo(player2));
+			assertTrue(player2.isAlliedTo(player1));
+		}
+
+		@Test
+		void givenDifferentTeamsAssigned_ReturnsFalse()
+		{
+			PlayerMock player1 = server.addPlayer();
+			PlayerMock player2 = server.addPlayer();
+
+			Scoreboard scoreboard = server.getScoreboardManager().getMainScoreboard();
+			Team teamRed = scoreboard.registerNewTeam("red");
+			Team teamBlue = scoreboard.registerNewTeam("blue");
+
+			teamRed.addEntry(player1.getName());
+			teamBlue.addEntry(player2.getName());
+
+			assertFalse(player1.isAlliedTo(player2));
+			assertFalse(player2.isAlliedTo(player1));
+		}
 	}
 
 }

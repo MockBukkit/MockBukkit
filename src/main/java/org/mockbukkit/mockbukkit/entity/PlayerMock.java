@@ -727,6 +727,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean canCriticalAttack(Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isConversing()
 	{
 		return this.conversationTracker.isConversing();
