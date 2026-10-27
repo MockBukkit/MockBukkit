@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.HashMap;
@@ -20,8 +21,10 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class UnsafeValuesMockTest
@@ -95,6 +98,71 @@ class UnsafeValuesMockTest
 			assertEquals(0, actual.getAmount());
 		}
 
+		@Test
+		void givenAir_NoCount()
+		{
+				Map<String, Object> args = new HashMap<>();
+				args.put(ID_KEY, "minecraft:air");
+				args.put(DATA_VERSION_KEY, 1);
+				args.put(SCHEMA_VERSION_KEY, 1);
+
+				ItemStack actual = unsafeValues.deserializeStack(args);
+
+				assertNotNull(actual);
+				assertEquals(Material.AIR, actual.getType());
+				assertEquals(0, actual.getAmount());
+		}
+
+		@Test
+		void deserialize_DoesNotMutateCallerComponents()
+		{
+				Map<String, Object> components = new HashMap<>();
+				components.put("minecraft:custom_name", "foo");
+				components.put("meta-type", "UNSPECIFIC");
+
+				Map<String, Object> args = new HashMap<>();
+				args.put(ID_KEY, "minecraft:stone");
+				args.put(COUNT_KEY, 1);
+				args.put(DATA_VERSION_KEY, 1);
+				args.put(SCHEMA_VERSION_KEY, 1);
+				args.put("components", components);
+
+				ItemStack actual = unsafeValues.deserializeStack(args);
+
+				assertNotNull(actual);
+				// original components map should not be mutated
+				assertTrue(components.containsKey("minecraft:custom_name"));
+				assertFalse(components.containsKey(ItemMetaMock.DISPLAY_NAME));
+		}
+
+		@Test
+		void deserialize_InvalidIdType_Throws()
+		{
+				Map<String, Object> args = new HashMap<>();
+				args.put(ID_KEY, 42);
+				args.put(COUNT_KEY, 1);
+				args.put(DATA_VERSION_KEY, 1);
+				args.put(SCHEMA_VERSION_KEY, 1);
+
+				org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () -> unsafeValues.deserializeStack(args));
+		}
+
+		@Test
+		void deserialize_CountAsString_Parses()
+		{
+				Map<String, Object> args = new HashMap<>();
+				args.put(ID_KEY, "minecraft:stone");
+				args.put(COUNT_KEY, "3");
+				args.put(DATA_VERSION_KEY, 1);
+				args.put(SCHEMA_VERSION_KEY, 1);
+
+				ItemStack actual = unsafeValues.deserializeStack(args);
+
+				assertNotNull(actual);
+				assertEquals(Material.STONE, actual.getType());
+				assertEquals(3, actual.getAmount());
+		}
+
 		@ParameterizedTest
 		@CsvSource({
 				"APPLE, minecraft:apple",
@@ -102,17 +170,17 @@ class UnsafeValuesMockTest
 		})
 		void givenSimpleValue(Material expectedMaterial, String input)
 		{
-			Map<String, Object> args = new HashMap<>();
-			args.put(ID_KEY, input);
-			args.put(COUNT_KEY, 1);
-			args.put(DATA_VERSION_KEY, 1);
-			args.put(SCHEMA_VERSION_KEY, 1);
+				Map<String, Object> args = new HashMap<>();
+				args.put(ID_KEY, input);
+				args.put(COUNT_KEY, 1);
+				args.put(DATA_VERSION_KEY, 1);
+				args.put(SCHEMA_VERSION_KEY, 1);
 
-			ItemStack actual = unsafeValues.deserializeStack(args);
+				ItemStack actual = unsafeValues.deserializeStack(args);
 
-			assertNotNull(actual);
-			assertEquals(expectedMaterial, actual.getType());
-			assertEquals(1, actual.getAmount());
+				assertNotNull(actual);
+				assertEquals(expectedMaterial, actual.getType());
+				assertEquals(1, actual.getAmount());
 		}
 	}
 

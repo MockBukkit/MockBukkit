@@ -23,6 +23,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.MapMetaMock;
+import org.mockbukkit.mockbukkit.inventory.meta.MusicInstrumentMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.OminousBottleMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.PotionMetaMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ShieldMetaMock;
@@ -57,6 +58,7 @@ public class SerializableMeta implements ConfigurationSerializable
 			.put(LeatherArmorMetaMock.class, "LEATHER_ARMOR")
 			.put(ColorableArmorMetaMock.class, "COLORABLE_ARMOR")
 			.put(MapMetaMock.class, "MAP")
+			.put(MusicInstrumentMetaMock.class, "MUSIC_INSTRUMENT")
 			.put(PotionMetaMock.class, "POTION")
 			.put(ShieldMetaMock.class, "SHIELD")
 			.put(SpawnEggMetaMock.class, "SPAWN_EGG")

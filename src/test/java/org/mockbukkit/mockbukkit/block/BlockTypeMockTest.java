@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.block;
 
+import org.bukkit.Instrument;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockType;
@@ -77,7 +78,6 @@ import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Observer;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
-import org.bukkit.block.data.type.PointedDripstone;
 import org.bukkit.block.data.type.RedstoneRail;
 import org.bukkit.block.data.type.RedstoneWallTorch;
 import org.bukkit.block.data.type.RedstoneWire;
@@ -96,6 +96,7 @@ import org.bukkit.block.data.type.Skull;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.SmallDripleaf;
 import org.bukkit.block.data.type.Snow;
+import org.bukkit.block.data.type.Speleothem;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.StructureBlock;
 import org.bukkit.block.data.type.Switch;
@@ -424,6 +425,30 @@ class BlockTypeMockTest
 		void givenIronBlock()
 		{
 			assertEquals("block.minecraft.iron_block", BlockType.IRON_BLOCK.translationKey());
+		}
+
+	}
+
+	@Nested
+	class GetInstrument
+	{
+
+		@Test
+		void givenBassGuitar()
+		{
+			assertEquals(Instrument.BASS_GUITAR, BlockType.ACACIA_DOOR.getInstrument());
+		}
+
+		@Test
+		void givenPiano()
+		{
+			assertEquals(Instrument.PIANO, BlockType.ACACIA_LEAVES.getInstrument());
+		}
+
+		@Test
+		void givenBassDrum()
+		{
+			assertEquals(Instrument.BASS_DRUM, BlockType.ANDESITE_WALL.getInstrument());
 		}
 
 	}
@@ -1245,9 +1270,9 @@ class BlockTypeMockTest
 		@Disabled("Not implemented yet #1088")
 		void givenPointedDripstone()
 		{
-			PointedDripstone data = BlockType.POINTED_DRIPSTONE.createBlockData();
+			Speleothem data = BlockType.POINTED_DRIPSTONE.createBlockData();
 			assertNotNull(data);
-			assertInstanceOf(PointedDripstone.class, data);
+			assertInstanceOf(Speleothem.class, data);
 		}
 
 		@Test

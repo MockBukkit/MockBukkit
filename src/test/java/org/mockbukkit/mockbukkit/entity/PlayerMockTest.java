@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -2627,8 +2626,7 @@ class PlayerMockTest
 	@Test
 	void sendMessage_GivenNullComponentMessage()
 	{
-		Identity identity = Identity.nil();
-		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage(identity, null, MessageType.CHAT));
+		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage((Component) null));
 		assertEquals("input", e.getMessage());
 	}
 

@@ -1,16 +1,20 @@
 package org.mockbukkit.mockbukkit.damage;
 
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.pointer.Pointers;
 import org.bukkit.Location;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Consumer;
+
 public class DamageSourceBuilderMock implements DamageSource.Builder
 {
 
 	private final DamageType damageType;
+	private final Pointers.Builder damageContext = Pointers.builder();
 	private Entity causingEntity;
 	private Entity directEntity;
 	private Location damageLocation;
@@ -46,9 +50,17 @@ public class DamageSourceBuilderMock implements DamageSource.Builder
 	}
 
 	@Override
+	public DamageSource.@NotNull Builder withDamageContext(@NotNull Consumer<Pointers.Builder> consumer)
+	{
+		Preconditions.checkArgument(consumer != null, "Consumer cannot be null");
+		consumer.accept(this.damageContext);
+		return this;
+	}
+
+	@Override
 	public @NotNull DamageSource build()
 	{
-		return new DamageSourceMock(this.damageType, this.causingEntity, this.directEntity, this.damageLocation);
+		return new DamageSourceMock(this.damageType, this.causingEntity, this.directEntity, this.damageLocation, this.damageContext.build());
 	}
 
 }

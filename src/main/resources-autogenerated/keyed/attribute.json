@@ -1,6 +1,14 @@
 {
 	"values": [
 		{
+			"defaultValue": 1.0,
+			"key": "minecraft:air_drag_modifier",
+			"name": "AIR_DRAG_MODIFIER",
+			"ordinal": 35,
+			"sentiment": "POSITIVE",
+			"translationKey": "attribute.name.air_drag_modifier"
+		},
+		{
 			"defaultValue": 0.0,
 			"key": "minecraft:armor",
 			"name": "ARMOR",
@@ -41,6 +49,14 @@
 			"translationKey": "attribute.name.attack_speed"
 		},
 		{
+			"defaultValue": 10.0,
+			"key": "minecraft:below_name_distance",
+			"name": "BELOW_NAME_DISTANCE",
+			"ordinal": 38,
+			"sentiment": "POSITIVE",
+			"translationKey": "attribute.name.below_name_distance"
+		},
+		{
 			"defaultValue": 1.0,
 			"key": "minecraft:block_break_speed",
 			"name": "BLOCK_BREAK_SPEED",
@@ -55,6 +71,14 @@
 			"ordinal": 25,
 			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.block_interaction_range"
+		},
+		{
+			"defaultValue": 0.0,
+			"key": "minecraft:bounciness",
+			"name": "BOUNCINESS",
+			"ordinal": 37,
+			"sentiment": "POSITIVE",
+			"translationKey": "attribute.name.bounciness"
 		},
 		{
 			"defaultValue": 1.0,
@@ -111,6 +135,14 @@
 			"ordinal": 1,
 			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.follow_range"
+		},
+		{
+			"defaultValue": 1.0,
+			"key": "minecraft:friction_modifier",
+			"name": "FRICTION_MODIFIER",
+			"ordinal": 36,
+			"sentiment": "POSITIVE",
+			"translationKey": "attribute.name.friction_modifier"
 		},
 		{
 			"defaultValue": 0.08,
@@ -183,6 +215,14 @@
 			"ordinal": 3,
 			"sentiment": "POSITIVE",
 			"translationKey": "attribute.name.movement_speed"
+		},
+		{
+			"defaultValue": 64.0,
+			"key": "minecraft:name_tag_distance",
+			"name": "NAME_TAG_DISTANCE",
+			"ordinal": 39,
+			"sentiment": "POSITIVE",
+			"translationKey": "attribute.name.name_tag_distance"
 		},
 		{
 			"defaultValue": 0.0,

@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
@@ -8,6 +9,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -17,6 +19,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +27,15 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
+import org.mockbukkit.mockbukkit.exception.ItemSerializationException;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -44,6 +52,24 @@ public class ItemStackMock extends ItemStack
 
 	private static final String FIELD_AMOUNT = "amount";
 	private static final String FIELD_MATERIAL = "type";
+
+	public static final String PROPERTY_SCHEMA_VERSION = "schema_version";
+	public static final Map<String, String> RENAME_JSON_PROPERTY = ImmutableMap.ofEntries(
+		toMinecraft(ItemMetaMock.DAMAGE),
+		toMinecraft(ItemMetaMock.MAX_DAMAGE),
+		toMinecraft(ItemMetaMock.REPAIR_COST),
+		toMinecraft(ItemMetaMock.ENCHANTMENTS),
+		toMinecraft(ItemMetaMock.LORE),
+		toMinecraft(ItemMetaMock.UNBREAKABLE),
+		Map.entry(ItemMetaMock.DISPLAY_NAME, "minecraft:custom_name")
+	);
+
+	private static Map.Entry<String, String> toMinecraft(final String key)
+	{
+		String newName = key.toLowerCase(Locale.ROOT);
+		newName = newName.replace("-", "_");
+		return Map.entry(key, NamespacedKey.minecraft(newName).asString());
+	}
 
 	@NonNull
 	@ApiStatus.Internal
@@ -74,6 +100,9 @@ public class ItemStackMock extends ItemStack
 
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
 	private static final String ITEM_META_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
+
+	// Items whose translation key gains the ".effect.empty" suffix when no effect is present.
+	private static final Set<Material> EMPTY_EFFECT_ITEMS = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
 
 	//Utility
 	protected ItemStackMock()
@@ -602,7 +631,163 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		return Bukkit.getUnsafe().deserializeStack(args);
+		// TODO: Paper has a conditional check here to validate if the "schema_version"
+		// exists, and if not the item is assumed as legacy. We don't have that implemented.
+		return deserializeStack(args);
+	}
+
+	@NotNull
+	public static ItemStack deserializeStack(@NotNull Map<String, Object> args)
+	{
+		// Parse id using NbtParser to accept string names and avoid manual casting
+		NamespacedKey key = NbtParser.parseNamespacedKey(args.get("id"));
+		if (key == null)
+		{
+			throw new IllegalArgumentException("id must be a NamespacedKey string");
+		}
+
+		Material material = Registry.MATERIAL.get(key);
+
+		// If it's air or unknown material, return an empty stack early before reading count
+		if (material == null || material.isAir())
+		{
+			return ItemStackMock.empty();
+		}
+
+		// Parse count using NbtParser (accepts numbers or numeric strings)
+		Integer amountParsed = NbtParser.parseInteger(args.get("count"));
+		if (amountParsed == null)
+		{
+			throw new IllegalArgumentException("count is missing or not a number");
+		}
+		final int amount = amountParsed;
+
+		// Parse a defensive copy of components using NbtParser.parseMap
+		Map<String, Object> components = NbtParser.parseMap(args.get("components"), String::valueOf, o -> o);
+
+		// Rename legacy keys in the copied components map
+		if (components != null)
+		{
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getValue();
+				String newName = entry.getKey();
+
+				// Skip the key if it does not exist
+				if (!components.containsKey(originalName))
+				{
+					continue;
+				}
+
+				var value = components.get(originalName);
+				components.put(newName, value);
+				components.remove(originalName);
+			}
+		}
+
+		@NotNull ItemStack itemstack = ItemStack.of(material, amount);
+		if (components != null)
+		{
+			try
+			{
+				@Nullable ItemMeta meta = SerializableMeta.deserialize(components);
+				Preconditions.checkArgument(meta != null, "Invalid item meta type");
+				itemstack.setItemMeta(meta);
+			}
+			catch (Exception e)
+			{
+				throw new IllegalArgumentException("Error while deserializing item meta", e);
+			}
+		}
+
+		return itemstack;
+	}
+
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		int dataVersion = Bukkit.getUnsafe().getDataVersion();
+		if (isEmpty())
+		{
+			return Map.of(
+					"id", "minecraft:air",
+					"DataVersion", dataVersion,
+					PROPERTY_SCHEMA_VERSION, 1);
+		}
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("id", getType().getKey().asString());
+		result.put("count", getAmount());
+		result.put("DataVersion", dataVersion);
+		result.put(PROPERTY_SCHEMA_VERSION, 1);
+
+		Map<String, Object> serializedMeta = getItemMeta().serialize();
+		if (serializedMeta.size() > 1) // Ignore the meta-type
+		{
+			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())
+			{
+				String originalName = entry.getKey();
+				String newName = entry.getValue();
+
+				// Skip the key if it does not exist
+				if (!serializedMeta.containsKey(originalName))
+				{
+					continue;
+				}
+
+				var value = serializedMeta.get(originalName);
+				serializedMeta.put(newName, value);
+				serializedMeta.remove(originalName);
+			}
+			result.put("components", serializedMeta);
+		}
+
+		return result;
+	}
+
+	@Override
+	public byte @NotNull [] serializeAsBytes()
+	{
+		Preconditions.checkNotNull(getType().asItemType(),
+				"Items without corresponding ItemType are currently not supported");
+		Preconditions.checkArgument(getType() != Material.AIR, "air cannot be serialized");
+		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		try
+		{
+			@NotNull Map<String, Object> stack = serialize();
+			final ObjectOutputStream oos = new BukkitObjectOutputStream(bao);
+			oos.writeObject(stack);
+			return bao.toByteArray();
+		}
+		catch (IOException e)
+		{
+			throw new ItemSerializationException(e);
+		}
+	}
+
+	@Override
+	public @NotNull String translationKey()
+	{
+		Material material = getType();
+		String key;
+		if (material.isItem())
+		{
+			key = material.getItemTranslationKey();
+		}
+		else if (material.isBlock())
+		{
+			key = material.getBlockTranslationKey();
+		}
+		else
+		{
+			return material.getKey().asString();
+		}
+
+		if (EMPTY_EFFECT_ITEMS.contains(material))
+		{
+			key = key + ".effect.empty";
+		}
+		return key;
 	}
 
 }

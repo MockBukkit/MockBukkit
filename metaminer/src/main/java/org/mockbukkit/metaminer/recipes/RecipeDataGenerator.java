@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.BlastingRecipe;
+import org.bukkit.inventory.BrewingRecipe;
 import org.bukkit.inventory.CampfireRecipe;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.FurnaceRecipe;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.StonecuttingRecipe;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.metaminer.DataGenerator;
 import org.mockbukkit.metaminer.json.recipe.BlastingRecipeElementFactory;
+import org.mockbukkit.metaminer.json.recipe.BrewingRecipeElementFactory;
 import org.mockbukkit.metaminer.json.recipe.CampfireRecipeElementFactory;
 import org.mockbukkit.metaminer.json.recipe.CraftingRecipeElementFactory;
 import org.mockbukkit.metaminer.json.recipe.SmeltingRecipeElementFactory;
@@ -42,6 +44,7 @@ public class RecipeDataGenerator implements DataGenerator
 	public static final String CRAFTING = "crafting";
 	public static final String SMELTING = "smelting";
 	public static final String BLASTING = "blasting";
+	public static final String BREWING = "brewing";
 	public static final String SMOKING = "smoking";
 	public static final String CAMPFIRE_COOKING = "campfire_cooking";
 	public static final String STONECUTTING = "stonecutting";
@@ -51,6 +54,7 @@ public class RecipeDataGenerator implements DataGenerator
 			CraftingRecipe.class, CRAFTING,
 			FurnaceRecipe.class, SMELTING,
 			BlastingRecipe.class, BLASTING,
+			BrewingRecipe.class, BREWING,
 			SmokingRecipe.class, SMOKING,
 			CampfireRecipe.class, CAMPFIRE_COOKING,
 			StonecuttingRecipe.class, STONECUTTING,
@@ -61,6 +65,7 @@ public class RecipeDataGenerator implements DataGenerator
 			CRAFTING, CraftingRecipeElementFactory::toJson,
 			SMELTING, SmeltingRecipeElementFactory::toJson,
 			BLASTING, BlastingRecipeElementFactory::toJson,
+			BREWING, BrewingRecipeElementFactory::toJson,
 			SMOKING, SmokingRecipeElementFactory::toJson,
 			CAMPFIRE_COOKING, CampfireRecipeElementFactory::toJson,
 			STONECUTTING, StoneCuttingRecipeElementFactory::toJson,

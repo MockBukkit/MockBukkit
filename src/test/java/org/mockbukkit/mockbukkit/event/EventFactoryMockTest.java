@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityRemoveEvent;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -16,7 +17,6 @@ import org.mockbukkit.mockbukkit.entity.CowMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.plugin.TestPlugin;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

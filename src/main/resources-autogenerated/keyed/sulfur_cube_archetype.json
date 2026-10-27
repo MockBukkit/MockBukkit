@@ -1,0 +1,40 @@
+{
+	"values": [
+		{
+			"key": "minecraft:bouncy"
+		},
+		{
+			"key": "minecraft:explosive"
+		},
+		{
+			"key": "minecraft:fast_flat"
+		},
+		{
+			"key": "minecraft:fast_sliding"
+		},
+		{
+			"key": "minecraft:high_resistance"
+		},
+		{
+			"key": "minecraft:hot"
+		},
+		{
+			"key": "minecraft:light"
+		},
+		{
+			"key": "minecraft:regular"
+		},
+		{
+			"key": "minecraft:slow_bouncy"
+		},
+		{
+			"key": "minecraft:slow_flat"
+		},
+		{
+			"key": "minecraft:slow_sliding"
+		},
+		{
+			"key": "minecraft:sticky"
+		}
+	]
+}

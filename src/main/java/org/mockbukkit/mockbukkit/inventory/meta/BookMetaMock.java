@@ -7,7 +7,6 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.common.returnsreceiver.qual.This;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -137,7 +136,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public @NotNull Book pages(@NotNull List<Component> pages)
+	public @NotNull BookMeta pages(@NotNull List<Component> pages)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -159,13 +158,6 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	public void addPages(@NotNull Component... pages)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NonNull BookMetaBuilder toBuilder()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -385,6 +377,13 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	protected String getTypeName()
 	{
 		return "BOOK";
+	}
+
+	@Override
+	public Book asBook()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

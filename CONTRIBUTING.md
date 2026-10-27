@@ -6,7 +6,14 @@ Contributing Code to MockBukkit
 To get started contributing to MockBukkit, you will need a few things.
 
 - [Git](https://git-scm.com/downloads)
-- [Java 21 or newer](https://adoptium.net/).
+- [Java 25](https://adoptium.net/) — specifically 25, not "25 or newer". The Gradle toolchain
+  pins `java.version=25` and toolchains match on the exact major version, so a JDK 26 will not
+  satisfy it. Minecraft 26.1+ also refuses to run on anything older than 25, which surfaces as
+  a `paperweight` failure in `applyPaperclipPatch` rather than an obvious version error.
+  - Using [SDKMAN](https://sdkman.io/)? Run `sdk env install` in the repo root; it reads the
+    pinned version from `.sdkmanrc`.
+  - Otherwise Gradle will download JDK 25 for the build automatically. Note that the Gradle
+    launcher itself still needs Java 17+ on your `PATH` in order to start at all.
 
 ## :wrench: Setting up the project
 

@@ -3,11 +3,13 @@ package io.papermc.paper.datacomponent.item;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.text.Filtered;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.checkerframework.common.value.qual.IntRange;
 import org.jspecify.annotations.NullMarked;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.List;
 
@@ -21,6 +23,13 @@ public record WrittenBookContentMock(
 		boolean resolved
 ) implements WrittenBookContent
 {
+
+	@Override
+	public Book asBook()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 	static class BuilderMock implements WrittenBookContent.Builder
 	{
