@@ -17,7 +17,10 @@ import io.papermc.paper.math.Position;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.pointer.Pointers;
+import net.kyori.adventure.pointer.PointersSupplier;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -168,6 +171,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
+	private static final PointersSupplier<PlayerMock> POINTERS_SUPPLIER = PointersSupplier.<PlayerMock>builder()
+			.parent(EntityMock.POINTERS_SUPPLIER)
+			.resolving(Identity.NAME, PlayerMock::getName)
+			.resolving(Identity.DISPLAY_NAME, PlayerMock::displayName)
+			.resolving(Identity.LOCALE, PlayerMock::locale)
+			.build();
 
 	private @NotNull GameMode previousGamemode = super.getGameMode();
 	private @Nullable WeatherType playerWeather = null;
@@ -3308,6 +3317,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public PlayerGameConnection getConnection()
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Pointers pointers()
+	{
+		return POINTERS_SUPPLIER.view(this);
 	}
 
 	@Override

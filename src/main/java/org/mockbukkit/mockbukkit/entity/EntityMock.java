@@ -9,6 +9,9 @@ import io.papermc.paper.entity.RemovalReason;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.math.Angle;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
+import net.kyori.adventure.identity.Identity;
+import net.kyori.adventure.pointer.Pointers;
+import net.kyori.adventure.pointer.PointersSupplier;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
@@ -95,6 +98,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 {
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
+	static final PointersSupplier<EntityMock> POINTERS_SUPPLIER = PointersSupplier.<EntityMock>builder()
+			.resolving(Identity.DISPLAY_NAME, EntityMock::name)
+			.resolving(Identity.UUID, EntityMock::getUniqueId)
+			.build();
 
 	private final Set<String> tags = Sets.newHashSet();
 	protected final @NotNull ServerMock server;
@@ -1642,6 +1649,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull ItemStack getPickItemStack()
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Pointers pointers()
+	{
+		return POINTERS_SUPPLIER.view(this);
 	}
 
 	public void tick()
