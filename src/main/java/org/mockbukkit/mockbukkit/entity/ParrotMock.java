@@ -47,7 +47,7 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	public boolean isDancing()
 	{
 		// TODO Implement when startPlaying in jukebox is implemented
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

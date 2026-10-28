@@ -118,13 +118,13 @@ public class SnifferMock extends AnimalsMock implements Sniffer
 	@Override
 	public @Nullable Location findPossibleDigLocation()
 	{
-		throw new UnimplementedOperationException("Method findPossibleDigLocation is not implemented.");
+		throw UnimplementedOperationException.exception("Method findPossibleDigLocation is not implemented.");
 	}
 
 	@Override
 	public boolean canDig()
 	{
-		throw new UnimplementedOperationException("Method canDig is not implemented.");
+		throw UnimplementedOperationException.exception("Method canDig is not implemented.");
 	}
 
 	@Override

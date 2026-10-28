@@ -37,7 +37,7 @@ public class TurtleMock extends AnimalsMock implements Turtle
 	public boolean isLayingEgg()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -57,14 +57,14 @@ public class TurtleMock extends AnimalsMock implements Turtle
 	public boolean isGoingHome()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean isDigging()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

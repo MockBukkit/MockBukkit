@@ -351,7 +351,7 @@ public class InventoryMock implements Inventory
 	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -440,7 +440,7 @@ public class InventoryMock implements Inventory
 	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
 	{
 		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -659,7 +659,7 @@ public class InventoryMock implements Inventory
 	public @NotNull ListIterator<ItemStack> iterator(int index)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -713,7 +713,7 @@ public class InventoryMock implements Inventory
 		}
 		else
 		{
-			throw new UnimplementedOperationException(String.format("%s does not implement method getSnapshot", this.getClass().getSimpleName()));
+			throw UnimplementedOperationException.exception(String.format("%s does not implement method getSnapshot", this.getClass().getSimpleName()));
 		}
 	}
 

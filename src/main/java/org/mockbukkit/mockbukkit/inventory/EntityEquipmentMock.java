@@ -72,7 +72,7 @@ public class EntityEquipmentMock implements EntityEquipment
 		case BODY -> setItemInBody(item, silent);
 		case SADDLE -> setSaddleItem(item, silent);
 		default ->
-				throw new UnimplementedOperationException("EquipmentSlot " + slot + " is not implemented for EntityEquipmentMock");
+				throw UnimplementedOperationException.exception("EquipmentSlot " + slot + " is not implemented for EntityEquipmentMock");
 		}
 	}
 

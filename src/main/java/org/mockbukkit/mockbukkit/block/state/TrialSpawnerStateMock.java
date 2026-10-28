@@ -85,14 +85,14 @@ public class TrialSpawnerStateMock extends TileStateMock implements TrialSpawner
 	public int getCooldownLength()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setCooldownLength(int ticks)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -199,14 +199,14 @@ public class TrialSpawnerStateMock extends TileStateMock implements TrialSpawner
 	public TrialSpawnerConfiguration getNormalConfiguration()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public TrialSpawnerConfiguration getOminousConfiguration()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

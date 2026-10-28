@@ -138,28 +138,28 @@ public class BeeMock extends AnimalsMock implements Bee
 	public void setCropsGrownSincePollination(int crops)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getCropsGrownSincePollination()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setTicksSincePollination(int ticks)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getTicksSincePollination()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

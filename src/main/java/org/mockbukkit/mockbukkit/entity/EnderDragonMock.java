@@ -56,7 +56,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 	@Override
 	public int getDeathAnimationTicks()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class EnderDragonMock extends AbstractBossMock implements EnderDragon
 	@Override
 	public @NotNull Set<ComplexEntityPart> getParts()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

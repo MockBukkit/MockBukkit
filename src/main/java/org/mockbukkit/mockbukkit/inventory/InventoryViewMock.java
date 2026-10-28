@@ -300,7 +300,7 @@ public abstract class InventoryViewMock implements InventoryView
 	public InventoryType.SlotType getSlotType(int slot)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -325,13 +325,13 @@ public abstract class InventoryViewMock implements InventoryView
 	public boolean setProperty(@NotNull InventoryView.Property prop, int value)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable MenuType getMenuType()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

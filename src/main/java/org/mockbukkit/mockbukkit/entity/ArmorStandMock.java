@@ -286,21 +286,21 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void addEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void removeEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean hasEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -339,7 +339,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 			case LEGS -> getLeggings();
 			case CHEST -> getChestplate();
 			case HEAD -> getHelmet();
-			case BODY, SADDLE -> throw new UnimplementedOperationException();
+			case BODY, SADDLE -> throw UnimplementedOperationException.exception();
 		};
 	}
 

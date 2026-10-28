@@ -59,14 +59,14 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 	public @NonNull State getGolemState()
 	{
 		// TODO
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setGolemState(@NonNull State state)
 	{
 		// TODO
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

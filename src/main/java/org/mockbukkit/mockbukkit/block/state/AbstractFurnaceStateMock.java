@@ -111,7 +111,7 @@ public abstract class AbstractFurnaceStateMock extends ContainerStateMock implem
 	public @NotNull Map<CookingRecipe<?>, Integer> getRecipesUsed()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -132,28 +132,28 @@ public abstract class AbstractFurnaceStateMock extends ContainerStateMock implem
 	public int getRecipeUsedCount(@NotNull NamespacedKey furnaceRecipe)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean hasRecipeUsedCount(@NotNull NamespacedKey furnaceRecipe)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setRecipeUsedCount(@NotNull CookingRecipe<?> furnaceRecipe, int count)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setRecipesUsed(@NotNull Map<CookingRecipe<?>, Integer> recipesUsed)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull

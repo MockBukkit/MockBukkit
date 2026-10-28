@@ -99,21 +99,21 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	public boolean isInBlock()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Block getAttachedBlock()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull @Unmodifiable List<Block> getAttachedBlocks()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -145,41 +145,41 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	public @NotNull ItemStack getItem()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setItem(@NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable ItemStack getWeapon()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setWeapon(@NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ItemStack getItemStack()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setItemStack(@NotNull ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -211,7 +211,7 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	public void setShooter(@Nullable ProjectileSource projectileSource, boolean b)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

@@ -48,14 +48,14 @@ public class MerchantInventoryViewBuilderMock<V extends InventoryView> implement
 	public @NotNull MerchantInventoryViewBuilder<V> merchant(@Nullable Merchant merchant)
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull MerchantInventoryViewBuilder<V> checkReachable(boolean checkReachable)
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

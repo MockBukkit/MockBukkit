@@ -191,14 +191,14 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	public void shakeHead()
 	{
 		// TODO:
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable ZombieVillager zombify()
 	{
 		// TODO:
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -261,13 +261,13 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	@Override
 	public void updateDemand()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void restock()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

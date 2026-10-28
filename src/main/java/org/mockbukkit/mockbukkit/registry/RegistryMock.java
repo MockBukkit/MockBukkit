@@ -138,7 +138,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		Function<JsonObject, ? extends Keyed> constructorFunction = factoryMap.get(key);
 		if (constructorFunction == null)
 		{
-			throw new UnimplementedOperationException();
+			throw UnimplementedOperationException.exception();
 		}
 
 		return constructorFunction;
@@ -205,19 +205,19 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	@Override
 	public boolean hasTag(TagKey<T> tagKey)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public Tag<T> getTag(TagKey<T> tagKey)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public Collection<Tag<T>> getTags()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

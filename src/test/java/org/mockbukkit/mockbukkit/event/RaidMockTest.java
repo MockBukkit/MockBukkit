@@ -327,7 +327,7 @@ class RaidMockTest
 			@Override
 			public @NotNull Sound getCelebrationSound()
 			{
-				throw new UnimplementedOperationException();
+				throw UnimplementedOperationException.exception();
 			}
 		};
 	}

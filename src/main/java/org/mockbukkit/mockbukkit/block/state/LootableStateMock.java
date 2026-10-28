@@ -42,7 +42,7 @@ public abstract class LootableStateMock extends ContainerStateMock implements Lo
 	public @Nullable LootTable getLootTable()
 	{
 		// TODO Auto-generated method stub
-		throw new  UnimplementedOperationException("getLootTable");
+		throw UnimplementedOperationException.exception("getLootTable");
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public abstract class LootableStateMock extends ContainerStateMock implements Lo
 	public void setLootTable(@Nullable LootTable table, long seed)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException("setLootTable");
+		throw UnimplementedOperationException.exception("setLootTable");
 	}
 
 	@Override

@@ -62,7 +62,7 @@ public class ChiseledBookshelfStateMock extends TileStateMock implements Chisele
 	@Override
 	public int getSlot(@NotNull Vector position)
 	{
-		throw new UnimplementedOperationException("Not supported yet.");
+		throw UnimplementedOperationException.exception("Not supported yet.");
 	}
 
 	@Override

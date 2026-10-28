@@ -44,7 +44,7 @@ public class SmithingInventoryMock extends InventoryMock implements SmithingInve
 	public @Nullable Recipe getRecipe()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

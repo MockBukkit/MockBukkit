@@ -46,14 +46,14 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	public @NotNull Component lastOutput()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void lastOutput(@Nullable Component lastOutput)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 
 	}
 

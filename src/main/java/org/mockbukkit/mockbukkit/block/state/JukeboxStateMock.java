@@ -87,7 +87,7 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	public boolean hasRecord()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	public boolean startPlaying()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -144,14 +144,14 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	public @NotNull JukeboxInventory getInventory()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull JukeboxInventory getSnapshotInventory()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

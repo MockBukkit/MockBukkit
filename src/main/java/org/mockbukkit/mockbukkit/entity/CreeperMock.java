@@ -115,14 +115,14 @@ public class CreeperMock extends MonsterMock implements Creeper
 	public void ignite(@NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Entity getIgniter()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

@@ -85,14 +85,14 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public boolean isLodestoneCompass()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void clearLodestone()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

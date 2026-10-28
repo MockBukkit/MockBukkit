@@ -40,7 +40,7 @@ public class WardenMock extends MonsterMock implements Warden
 	public int getAnger()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class WardenMock extends MonsterMock implements Warden
 	public int getHighestAnger()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -89,21 +89,21 @@ public class WardenMock extends MonsterMock implements Warden
 	public void clearAnger(@NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable LivingEntity getEntityAngryAt()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setDisturbanceLocation(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

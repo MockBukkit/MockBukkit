@@ -81,7 +81,7 @@ public class SculkShriekerStateMock extends TileStateMock implements SculkShriek
 	public void tryShriek(@Nullable Player player)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

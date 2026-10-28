@@ -223,7 +223,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public @Nullable Firework fireworkBoost(@NotNull ItemStack fireworkItemStack)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -248,7 +248,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public boolean setWindowProperty(@NotNull InventoryView.Property prop, int value)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -267,14 +267,14 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public InventoryView openWorkbench(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public InventoryView openEnchanting(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -288,49 +288,49 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public InventoryView openMerchant(@NotNull Merchant merchant, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable InventoryView openAnvil(@Nullable Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable InventoryView openCartographyTable(@Nullable Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable InventoryView openGrindstone(@Nullable Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable InventoryView openLoom(@Nullable Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable InventoryView openSmithingTable(@Nullable Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable InventoryView openStonecutter(@Nullable Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -429,7 +429,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public @Nullable Location getPotentialBedLocation()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -452,14 +452,14 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public boolean sleep(@NotNull Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void wakeup(boolean setSpawnLocation)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -469,14 +469,14 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		Preconditions.checkArgument(damage >= 0, "Damage must not be negative");
 
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Location getBedLocation()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -524,21 +524,21 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public @Nullable Entity releaseLeftShoulderEntity()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Entity releaseRightShoulderEntity()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public float getAttackCooldown()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -611,28 +611,28 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public Entity getShoulderEntityLeft()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setShoulderEntityLeft(Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public Entity getShoulderEntityRight()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setShoulderEntityRight(Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -646,35 +646,35 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public void openSign(@NotNull Sign sign, @NotNull Side side)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean dropItem(boolean dropAll)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Item dropItem(int slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Item dropItem(@NotNull EquipmentSlot slot, int amount, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Nullable Item dropItem(@NotNull ItemStack itemStack, boolean throwRandomly, @Nullable Consumer<Item> entityOperation)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -754,7 +754,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public @Nullable Location getPotentialRespawnLocation()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

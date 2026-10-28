@@ -58,14 +58,14 @@ public class StorageMinecartMock extends LootableMinecart implements StorageMine
 	public boolean canPlayerLoot(@NotNull UUID player)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setLootTable(@Nullable LootTable lootTable, long l)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

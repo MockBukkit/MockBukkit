@@ -70,13 +70,13 @@ public class TridentMock extends AbstractArrowMock implements Trident
 	@Override
 	public @NotNull ItemStack getItem()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setItem(@NotNull ItemStack item)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

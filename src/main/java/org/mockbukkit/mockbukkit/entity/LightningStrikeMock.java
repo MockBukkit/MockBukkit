@@ -120,7 +120,7 @@ public class LightningStrikeMock extends EntityMock implements LightningStrike
 	@Deprecated(forRemoval = true)
 	public @NotNull LightningStrike.Spigot spigot()
 	{
-		throw new UnimplementedOperationException("spigot() method is not implemented in LightningStrikeMock");
+		throw UnimplementedOperationException.exception("spigot() method is not implemented in LightningStrikeMock");
 	}
 
 }

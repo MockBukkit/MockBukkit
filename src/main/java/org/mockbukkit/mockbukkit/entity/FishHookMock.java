@@ -186,7 +186,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	public boolean isInOpenWater()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Nullable
@@ -278,38 +278,38 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	public int getWaitTime()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setWaitTime(int ticks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @Range(from = 0L, to = 2147483647L) int getTimeUntilBite()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setTimeUntilBite(@Range(from = 1L, to = 2147483647L) int i) throws IllegalArgumentException
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void resetFishingState()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int retrieve(@NotNull EquipmentSlot slot)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull

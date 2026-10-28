@@ -88,7 +88,7 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	@Override
 	public boolean addCustomEffect(@NotNull SuspiciousEffectEntry suspiciousEffectEntry, boolean overwrite)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

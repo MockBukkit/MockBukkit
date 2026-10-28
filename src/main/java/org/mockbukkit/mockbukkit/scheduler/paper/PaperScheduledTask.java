@@ -36,7 +36,7 @@ public class PaperScheduledTask implements ScheduledTask
 	@Override
 	public boolean isRepeatingTask()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	public void run()
@@ -47,13 +47,13 @@ public class PaperScheduledTask implements ScheduledTask
 	@Override
 	public @NotNull CancelledState cancel()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull ExecutionState getExecutionState()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

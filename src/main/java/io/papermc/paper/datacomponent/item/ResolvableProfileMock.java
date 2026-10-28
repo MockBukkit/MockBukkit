@@ -28,7 +28,7 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 	@Override
 	public boolean dynamic()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -42,13 +42,13 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 	@Override
 	public SkinPatch skinPatch()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void applySkinToPlayerHeadContents(PlayerHeadObjectContents.@NotNull Builder builder)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	static class BuilderMock implements Builder
@@ -101,13 +101,13 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 		@Override
 		public Builder skinPatch(SkinPatch patch)
 		{
-			throw new UnimplementedOperationException();
+			throw UnimplementedOperationException.exception();
 		}
 
 		@Override
 		public Builder skinPatch(Consumer<SkinPatchBuilder> configure)
 		{
-			throw new UnimplementedOperationException();
+			throw UnimplementedOperationException.exception();
 		}
 
 		@Override

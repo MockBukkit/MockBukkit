@@ -73,7 +73,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	public @NotNull Key getWorldKey()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -98,28 +98,28 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	public int getData(int x, int y, int z)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getBlockSkyLight(int x, int y, int z)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getBlockEmittedLight(int x, int y, int z)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public int getHighestBlockYAt(int x, int z)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@NotNull
@@ -148,7 +148,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	public double getRawBiomeTemperature(int x, int y, int z)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	public boolean contains(@NotNull Biome biome)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	/**

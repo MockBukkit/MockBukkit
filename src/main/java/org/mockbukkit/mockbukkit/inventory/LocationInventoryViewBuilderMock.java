@@ -48,14 +48,14 @@ public class LocationInventoryViewBuilderMock<V extends InventoryView> implement
 	public @NotNull LocationInventoryViewBuilder<V> checkReachable(boolean checkReachable)
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull LocationInventoryViewBuilder<V> location(@Nullable Location location)
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

@@ -153,14 +153,14 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	public TriState getFrictionState()
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public void setFrictionState(TriState triState)
 	{
 		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 }

@@ -166,7 +166,7 @@ public class PandaMock extends AnimalsMock implements Panda
 	public @NotNull Gene getCombinedGene()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

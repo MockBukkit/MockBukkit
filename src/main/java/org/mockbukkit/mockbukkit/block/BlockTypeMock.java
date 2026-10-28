@@ -90,7 +90,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public <O extends BlockData> Typed<O> typed(@NotNull Class<O> blockDataType)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Override
 	public @NotNull Class<B> getBlockDataClass()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -139,7 +139,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	public @Unmodifiable @NotNull Collection<B> createBlockDataStates()
 	{
 		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -218,7 +218,7 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	@Deprecated(forRemoval = true, since = "1.21.1")
 	public boolean isEnabledByFeature(@NotNull World world)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

@@ -85,7 +85,7 @@ public class EnderChestStateMock extends TileStateMock implements EnderChest
 	public boolean isBlocked()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

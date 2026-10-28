@@ -57,7 +57,7 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	@Override
 	public @Nullable JavaPlugin getPlugin()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

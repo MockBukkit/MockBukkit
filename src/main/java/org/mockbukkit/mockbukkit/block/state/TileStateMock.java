@@ -63,7 +63,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	public boolean isSnapshot()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

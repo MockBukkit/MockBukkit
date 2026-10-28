@@ -68,7 +68,7 @@ public class DecoratedPotStateMock extends LootableStateMock implements Decorate
 	@Override
 	public void startWobble(@NotNull WobbleStyle wobbleStyle)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

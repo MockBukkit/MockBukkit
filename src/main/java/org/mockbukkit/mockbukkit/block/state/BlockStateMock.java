@@ -279,7 +279,7 @@ public class BlockStateMock implements BlockState
 	public byte getRawData()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -287,7 +287,7 @@ public class BlockStateMock implements BlockState
 	public void setRawData(byte data)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -300,34 +300,34 @@ public class BlockStateMock implements BlockState
 	public boolean isCollidable()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Collection<ItemStack> getDrops()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, @Nullable Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public boolean isSuffocating()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -346,7 +346,7 @@ public class BlockStateMock implements BlockState
 	{
 		if (this.getClass() != BlockStateMock.class)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+			throw UnimplementedOperationException.exception(this.getClass().getSimpleName() +
 					" does not provide a .copy() implementation! This is a bug.");
 		}
 		return new BlockStateMock(this);
@@ -356,7 +356,7 @@ public class BlockStateMock implements BlockState
 	public @NotNull BlockState copy(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -376,7 +376,7 @@ public class BlockStateMock implements BlockState
 	{
 		if (this.getClass() != BlockStateMock.class)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+			throw UnimplementedOperationException.exception(this.getClass().getSimpleName() +
 					" does not provide a .getSnapshot() implementation! This is a bug.");
 		}
 		return new BlockStateMock(this);

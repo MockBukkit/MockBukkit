@@ -67,7 +67,7 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	@Override
 	public CombatEntry createCombatEntry(LivingEntity entity, DamageSource damageSource, float damage)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
@@ -84,21 +84,21 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	@Override
 	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public ResolvableProfile defaultMannequinProfile()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public SkinParts.Mutable allSkinParts()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override

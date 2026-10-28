@@ -57,13 +57,13 @@ public class PotionContentsMock implements PotionContents
 	@Override
 	public @Unmodifiable List<PotionEffect> allEffects()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	@Override
 	public Color computeEffectiveColor()
 	{
-		throw new UnimplementedOperationException();
+		throw UnimplementedOperationException.exception();
 	}
 
 	static class BuilderMock implements Builder
