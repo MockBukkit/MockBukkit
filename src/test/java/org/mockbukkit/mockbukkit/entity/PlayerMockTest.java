@@ -147,6 +147,7 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasNotHeard;
+import static org.mockbukkit.mockbukkit.util.ComponentUtils.asPlainString;
 
 class PlayerMockTest
 {
@@ -182,7 +183,7 @@ class PlayerMockTest
 		});
 
 		uuid = UUID.randomUUID();
-		player = new PlayerMock(server, "player", uuid);
+		player = new PlayerMock(server, "notch", uuid);
 		server.addPlayer(player);
 	}
 
@@ -242,7 +243,7 @@ class PlayerMockTest
 	@Test
 	void getName_Default_CorrectName()
 	{
-		assertEquals("player", player.getName());
+		assertEquals("notch", player.getName());
 	}
 
 	@Test
@@ -775,8 +776,14 @@ class PlayerMockTest
 	@Test
 	void getDisplayName_NameSet_NameSet()
 	{
+		assertEquals("notch", asPlainString(player.name()));
+		assertEquals("notch", asPlainString(player.displayName()));
+		assertNull(player.getCustomName());
+
 		player.setDisplayName("Some Display Name");
 		player.setCustomName("Some Custom Name");
+
+		assertEquals("notch", player.getName());
 		assertEquals("Some Display Name", player.getDisplayName());
 		assertEquals("Some Custom Name", player.getCustomName());
 	}
@@ -1820,7 +1827,7 @@ class PlayerMockTest
 	void testPlayerSerialization()
 	{
 		Map<String, Object> serialized = player.serialize();
-		assertEquals("player", serialized.get("name"));
+		assertEquals("notch", serialized.get("name"));
 	}
 
 	@Test
@@ -2348,7 +2355,7 @@ class PlayerMockTest
 	@Test
 	void hasPlayedBefore_NotAddedToServer_False()
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		PlayerMock player = new PlayerMock(server, "notch");
 
 		assertFalse(player.hasPlayedBefore());
 	}
@@ -2414,7 +2421,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerQuitEventGetFired()
 	{
-		PlayerMock player = server.addPlayer("Player");
+		PlayerMock player = server.addPlayer("notch");
 		player.disconnect();
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerQuitEvent.class));
 	}
