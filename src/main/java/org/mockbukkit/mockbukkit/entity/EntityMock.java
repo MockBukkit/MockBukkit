@@ -503,15 +503,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	protected @NotNull Component getTypeName()
 	{
 		var type = getType();
+		Preconditions.checkArgument(type != null, "Type cannot be null");
+
 		if (type == EntityType.UNKNOWN)
 		{
-			// TODO: Fix me
 			return Component.text("entity");
 		}
-		else
-		{
-			return Component.text(getType().getName());
-		}
+
+		return Component.text(type.getName());
 	}
 
 	/**
