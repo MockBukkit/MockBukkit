@@ -58,11 +58,13 @@ public final class BungeeComponentUtils
 	 * @return a new or modified {@link Component} with all click events removed
 	 *         from itself and its entire hierarchy of children
 	 */
-	public static Component removeAction(final Component component) {
+	public static Component removeAction(final Component component)
+	{
 		Component result = component.clickEvent(null);
 
 		List<Component> children = new ArrayList<>();
-		for (Component s : component.children()) {
+		for (Component s : component.children())
+		{
 			children.add(removeAction(s));
 		}
 
