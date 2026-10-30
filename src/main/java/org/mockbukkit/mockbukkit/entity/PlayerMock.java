@@ -169,6 +169,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
 
+	private final @NotNull String loginName;
 	private @NotNull GameMode previousGamemode = super.getGameMode();
 	private @Nullable WeatherType playerWeather = null;
 	private @Nullable Entity spectatorTarget = null;
@@ -250,8 +251,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		super(server, uuid);
 		Preconditions.checkNotNull(name, "Name cannot be null");
-		setName(name);
-		setDisplayName(name);
+		this.loginName = name;
 		this.online = true;
 
 		if (Bukkit.getWorlds().isEmpty())
@@ -813,7 +813,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Component displayName()
 	{
-		return this.displayName;
+		return (this.displayName != null ? this.displayName : name());
 	}
 
 	@Override
@@ -826,7 +826,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public @NotNull String getDisplayName()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
+		return LegacyComponentSerializer.legacySection().serialize(displayName());
 	}
 
 	@Override
@@ -2452,6 +2452,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			setBlocking(false);
 			alive = false;
 		}
+	}
+
+	@Override
+	public @NotNull Component name()
+	{
+		return Component.text(this.loginName);
 	}
 
 	@Override

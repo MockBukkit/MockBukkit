@@ -6,6 +6,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Used to construct random {@link PlayerMock}s and {@link OfflinePlayerMock}s.
@@ -15,7 +16,7 @@ public final class PlayerMockFactory
 
 	private final @NotNull ServerMock server;
 	private final Random random = new Random();
-	private int currentNameIndex;
+	private final AtomicInteger currentNameIndex = new AtomicInteger(0);
 
 	/**
 	 * Constructs a new {@link PlayerMockFactory} for the provided {@link ServerMock}.
@@ -25,7 +26,6 @@ public final class PlayerMockFactory
 	public PlayerMockFactory(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
-		this.currentNameIndex = 0;
 		this.server = server;
 	}
 
@@ -36,7 +36,7 @@ public final class PlayerMockFactory
 	 */
 	private @NotNull String getUniqueRandomName()
 	{
-		String name = "Player" + currentNameIndex++;
+		String name = "Player" + currentNameIndex.incrementAndGet();
 
 		if (name.length() > 16)
 		{
