@@ -129,7 +129,7 @@ class CowMockTest
 			Component name = cow.teamDisplayName();
 
 			assertNotNull(name);
-			assertEquals("entity", asString(name));
+			assertEquals("cow", asString(name));
 		}
 
 		@Test

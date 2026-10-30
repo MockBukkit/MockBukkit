@@ -315,9 +315,16 @@ class EntityMockTest
 	@Test
 	void getCustomName_setCustomName()
 	{
-		entity.setCustomName("Some Custom Name");
 		assertEquals("entity", entity.getName());
+		assertNull(entity.getCustomName());
+
+		entity.setCustomName("Some Custom Name");
+		assertEquals("Some Custom Name", entity.getName());
 		assertEquals("Some Custom Name", entity.getCustomName());
+
+		entity.setCustomName(null);
+		assertEquals("entity", entity.getName());
+		assertNull(entity.getCustomName());
 	}
 
 	@Test
@@ -1013,6 +1020,7 @@ class EntityMockTest
 	void testGetCustomNameDefault()
 	{
 		assertNull(entity.getCustomName());
+		assertNull(entity.getCustomName());
 	}
 
 	@Test
@@ -1034,6 +1042,17 @@ class EntityMockTest
 	{
 		entity.setCustomName(null);
 		assertNull(entity.customName());
+	}
+
+	@Test
+	void givenCustomName_WithMoreThan256Chars()
+	{
+		String inputName 	= "TheQuickBrownFoxJumpsOverTheLazyDogMultipleTimesToTestHowAStringOfExactlyTwoHundredAndSixtyCharactersBehavesWhenProcessedByOurValidationLogicUnderNormalConditionsAndEdgeCasesWithoutThrowingAnyUnexpectedFormattingOrLengthRelatedExceptionsAndMatchesConstraint";
+		String expectedName = "TheQuickBrownFoxJumpsOverTheLazyDogMultipleTimesToTestHowAStringOfExactlyTwoHundredAndSixtyCharactersBehavesWhenProcessedByOurValidationLogicUnderNormalConditionsAndEdgeCasesWithoutThrowingAnyUnexpectedFormattingOrLengthRelatedExceptionsAndMatchesConstrain";
+
+		entity.setCustomName(inputName);
+
+		assertEquals(Component.text(expectedName), entity.customName());
 	}
 
 	@Test

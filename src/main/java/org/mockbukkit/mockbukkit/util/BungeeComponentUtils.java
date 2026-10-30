@@ -7,6 +7,9 @@ import net.md_5.bungee.chat.ComponentSerializer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Utility for converting between BungeeCord {@link BaseComponent}s and Adventure {@link Component}s.
  * <p>
@@ -45,6 +48,25 @@ public final class BungeeComponentUtils
 	public static @NotNull BaseComponent @NotNull [] serialize(@NotNull Component component)
 	{
 		return ComponentSerializer.parse(GsonComponentSerializer.gson().serialize(component));
+	}
+
+	/**
+	 * Recursively removes any click events and action bindings from the given
+	 * {@link Component} and all of its child components.
+	 *
+	 * @param component the root component to process; must not be null
+	 * @return a new or modified {@link Component} with all click events removed
+	 *         from itself and its entire hierarchy of children
+	 */
+	public static Component removeAction(final Component component) {
+		Component result = component.clickEvent(null);
+
+		List<Component> children = new ArrayList<>();
+		for (Component s : component.children()) {
+			children.add(removeAction(s));
+		}
+
+		return result.children(children);
 	}
 
 }
