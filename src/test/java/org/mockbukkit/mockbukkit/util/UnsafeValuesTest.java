@@ -147,8 +147,8 @@ class UnsafeValuesTest
 	void serializeItem(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		byte[] serialized = unsafeValuesMock.serializeItem(expected);
-		ItemStack actual = unsafeValuesMock.deserializeItem(serialized);
+		byte[] serialized = expected.serializeAsBytes();
+		ItemStack actual = ItemStack.deserializeBytes(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
 	}
@@ -235,7 +235,7 @@ class UnsafeValuesTest
 	void serializeStack(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		@NotNull Map<String, Object> serialized = unsafeValuesMock.serializeStack(expected);
+		@NotNull Map<String, Object> serialized = expected.serialize();
 		ItemStack actual = unsafeValuesMock.deserializeStack(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
@@ -485,8 +485,8 @@ class UnsafeValuesTest
 	@MethodSource("materialAndBlockTranslationKeyProvider")
 	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
 	{
-		assertEquals(expectedBlockKey, unsafeValuesMock.getBlockTranslationKey(material));
-		assertEquals(expectedItemKey, unsafeValuesMock.getItemTranslationKey(material));
+		assertEquals(expectedBlockKey, material.getBlockTranslationKey());
+		assertEquals(expectedItemKey, material.getItemTranslationKey());
 	}
 
 	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
@@ -494,8 +494,8 @@ class UnsafeValuesTest
 		return Stream.of(
 				Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
 				Arguments.of("block.minecraft.dirt", "block.minecraft.dirt", Material.DIRT),
-				Arguments.of("item.minecraft.wheat", "item.minecraft.wheat", Material.WHEAT),
-				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART)
+				Arguments.of("block.minecraft.wheat", "item.minecraft.wheat", Material.WHEAT),
+				Arguments.of("block.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART)
 		);
 	}
 
@@ -527,15 +527,15 @@ class UnsafeValuesTest
 	@Test
 	void testEntityTranslationKey()
 	{
-		assertEquals("entity.minecraft.pig", unsafeValuesMock.getTranslationKey(EntityType.PIG));
-		assertThrows(IllegalArgumentException.class, () -> unsafeValuesMock.getTranslationKey(EntityType.UNKNOWN));
+		assertEquals("entity.minecraft.pig", EntityType.PIG.translationKey());
+		assertThrows(IllegalArgumentException.class, EntityType.UNKNOWN::translationKey);
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackTranslationKeyProvider")
 	void testItemStackTranslationKey(String expectedKey, ItemStack itemStack)
 	{
-		assertEquals(expectedKey, unsafeValuesMock.getTranslationKey(itemStack));
+		assertEquals(expectedKey, itemStack.translationKey());
 	}
 
 	static Stream<Arguments> itemStackTranslationKeyProvider()
@@ -544,7 +544,8 @@ class UnsafeValuesTest
 				Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
 				Arguments.of("block.minecraft.stone", new ItemStackMock(Material.STONE)),
 				Arguments.of("item.minecraft.wheat", new ItemStackMock(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART))
+				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART)),
+				Arguments.of("item.minecraft.potion.effect.empty", new ItemStackMock(Material.POTION))
 		);
 	}
 

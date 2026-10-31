@@ -27,9 +27,13 @@
 		"minecraft:oak_leaves",
 		"minecraft:oak_log",
 		"minecraft:oak_wood",
+		"minecraft:orange_poplar_leaves",
 		"minecraft:pale_oak_leaves",
 		"minecraft:pale_oak_log",
 		"minecraft:pale_oak_wood",
+		"minecraft:poplar_log",
+		"minecraft:poplar_wood",
+		"minecraft:red_poplar_leaves",
 		"minecraft:spruce_leaves",
 		"minecraft:spruce_log",
 		"minecraft:spruce_wood",
@@ -51,12 +55,15 @@
 		"minecraft:stripped_oak_wood",
 		"minecraft:stripped_pale_oak_log",
 		"minecraft:stripped_pale_oak_wood",
+		"minecraft:stripped_poplar_log",
+		"minecraft:stripped_poplar_wood",
 		"minecraft:stripped_spruce_log",
 		"minecraft:stripped_spruce_wood",
 		"minecraft:stripped_warped_hyphae",
 		"minecraft:stripped_warped_stem",
 		"minecraft:warped_hyphae",
 		"minecraft:warped_stem",
-		"minecraft:warped_wart_block"
+		"minecraft:warped_wart_block",
+		"minecraft:yellow_poplar_leaves"
 	]
 }

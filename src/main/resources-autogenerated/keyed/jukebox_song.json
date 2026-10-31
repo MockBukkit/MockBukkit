@@ -41,6 +41,16 @@
 			"translationKey": "jukebox_song.minecraft.blocks"
 		},
 		{
+			"comparatorOutput": 8,
+			"description": {
+				"translate": "jukebox_song.minecraft.bounce"
+			},
+			"key": "minecraft:bounce",
+			"lengthInSeconds": 234.0,
+			"sound": "minecraft:music_disc.bounce",
+			"translationKey": "jukebox_song.minecraft.bounce"
+		},
+		{
 			"comparatorOutput": 2,
 			"description": {
 				"translate": "jukebox_song.minecraft.cat"

@@ -12,7 +12,6 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -54,6 +53,7 @@ import org.mockbukkit.mockbukkit.inventory.meta.components.JukeboxPlayableCompon
 import org.mockbukkit.mockbukkit.inventory.meta.components.ToolComponentMock;
 import org.mockbukkit.mockbukkit.inventory.meta.components.UseCooldownComponentMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
+import org.mockbukkit.mockbukkit.util.BungeeComponentUtils;
 import org.mockbukkit.mockbukkit.util.NbtParser;
 
 import java.util.ArrayList;
@@ -311,7 +311,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull BaseComponent @NotNull [] getDisplayNameComponent()
 	{
-		return BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
+		return BungeeComponentUtils.serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
@@ -323,7 +323,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setDisplayNameComponent(BaseComponent @NotNull [] components)
 	{
-		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
+		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentUtils.deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
 	}
 
 	/**
@@ -642,8 +642,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
 		return this.lore == null ? null : this.lore.stream()
-				.map(c -> BungeeComponentSerializer
-						.get()
+				.map(c -> BungeeComponentUtils
 						.serialize(GsonComponentSerializer.gson().deserialize(c))
 				).toList();
 	}
@@ -664,7 +663,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setLoreComponents(@Nullable List<BaseComponent[]> lore)
 	{
-		lore(lore == null ? null : lore.stream().map(c -> BungeeComponentSerializer.get().deserialize(c)).toList());
+		lore(lore == null ? null : lore.stream().map(c -> BungeeComponentUtils.deserialize(c)).toList());
 	}
 
 	/**

@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:poplar_log",
+		"minecraft:poplar_wood",
+		"minecraft:stripped_poplar_log",
+		"minecraft:stripped_poplar_wood"
+	]
+}

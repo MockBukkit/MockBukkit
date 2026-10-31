@@ -1,7 +1,7 @@
 [
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.1,
 		"group": "coal",
 		"input": {
@@ -18,7 +18,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.1,
 		"group": "coal",
 		"input": {
@@ -35,7 +35,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "copper_ingot",
 		"input": {
@@ -52,7 +52,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "copper_ingot",
 		"input": {
@@ -69,7 +69,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "copper_ingot",
 		"input": {
@@ -86,7 +86,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.1,
 		"group": "",
 		"input": {
@@ -114,7 +114,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "diamond",
 		"input": {
@@ -131,7 +131,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "diamond",
 		"input": {
@@ -148,7 +148,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "emerald",
 		"input": {
@@ -165,7 +165,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "emerald",
 		"input": {
@@ -182,7 +182,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "gold_ingot",
 		"input": {
@@ -199,7 +199,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "gold_ingot",
 		"input": {
@@ -216,7 +216,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "gold_ingot",
 		"input": {
@@ -233,7 +233,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 1.0,
 		"group": "gold_ingot",
 		"input": {
@@ -250,7 +250,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.1,
 		"group": "",
 		"input": {
@@ -278,7 +278,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "iron_ingot",
 		"input": {
@@ -295,7 +295,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "iron_ingot",
 		"input": {
@@ -312,7 +312,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "iron_ingot",
 		"input": {
@@ -329,7 +329,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.1,
 		"group": "",
 		"input": {
@@ -361,7 +361,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.2,
 		"group": "lapis_lazuli",
 		"input": {
@@ -378,7 +378,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.2,
 		"group": "lapis_lazuli",
 		"input": {
@@ -395,7 +395,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 2.0,
 		"group": "",
 		"input": {
@@ -412,7 +412,7 @@
 	},
 	{
 		"category": "MISC",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.2,
 		"group": "",
 		"input": {
@@ -429,7 +429,7 @@
 	},
 	{
 		"category": "BLOCKS",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "redstone",
 		"input": {
@@ -446,7 +446,7 @@
 	},
 	{
 		"category": "BLOCKS",
-		"cookingTime": 100,
+		"cookingTime": 200,
 		"experience": 0.7,
 		"group": "redstone",
 		"input": {

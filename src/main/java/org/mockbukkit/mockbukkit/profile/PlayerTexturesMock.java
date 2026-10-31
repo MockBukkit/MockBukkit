@@ -6,7 +6,6 @@ import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -40,7 +39,7 @@ public class PlayerTexturesMock implements PlayerTextures
 		timestamp = 0L;
 	}
 
-	public PlayerTexturesMock(@Nonnull PlayerProfileMock profile)
+	public PlayerTexturesMock(@NotNull PlayerProfileMock profile)
 	{
 		this.profile = profile;
 	}

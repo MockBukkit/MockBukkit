@@ -2446,7 +2446,7 @@ class ServerMockTest
 				Iterable<Tag<Fluid>> fluidTag = server.getTags(Tag.REGISTRY_FLUIDS, Fluid.class);
 
 				assertNotNull(fluidTag);
-				assertEquals(6, Iterables.size(fluidTag));
+				assertEquals(10, Iterables.size(fluidTag));
 			}
 
 			@Test

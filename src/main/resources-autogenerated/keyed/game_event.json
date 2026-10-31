@@ -46,6 +46,11 @@
 			"vibrationLevel": 13
 		},
 		{
+			"key": "minecraft:bounce",
+			"range": 16,
+			"vibrationLevel": 2
+		},
+		{
 			"key": "minecraft:container_close",
 			"range": 16,
 			"vibrationLevel": 9

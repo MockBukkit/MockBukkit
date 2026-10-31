@@ -19,9 +19,12 @@
 		"minecraft:mangrove_leaves",
 		"minecraft:melon",
 		"minecraft:oak_leaves",
+		"minecraft:orange_poplar_leaves",
 		"minecraft:pale_oak_leaves",
 		"minecraft:pumpkin",
+		"minecraft:red_poplar_leaves",
 		"minecraft:spruce_leaves",
-		"minecraft:vine"
+		"minecraft:vine",
+		"minecraft:yellow_poplar_leaves"
 	]
 }

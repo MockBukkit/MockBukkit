@@ -3,8 +3,10 @@ package io.papermc.paper.datacomponent.item;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.text.Filtered;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.kyori.adventure.inventory.Book;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +20,13 @@ public record WritableBookContentMock(List<Filtered<String>> pages) implements W
 	public @Unmodifiable List<Filtered<String>> pages()
 	{
 		return Collections.unmodifiableList(this.pages);
+	}
+
+	@Override
+	public Book asBook()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	static class BuilderMock implements WritableBookContent.Builder

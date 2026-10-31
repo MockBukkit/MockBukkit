@@ -34,17 +34,12 @@ dependencies {
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
-		exclude("net.kyori", "adventure-platform-api")
-		exclude("net.kyori", "adventure-api")
-	}
-
 	implementation("net.bytebuddy:byte-buddy:1.18.11")
 
-	compileOnly("org.projectlombok:lombok:1.18.46")
-	annotationProcessor("org.projectlombok:lombok:1.18.46")
-	testCompileOnly("org.projectlombok:lombok:1.18.46")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.46")
+	compileOnly("org.projectlombok:lombok:1.18.48")
+	annotationProcessor("org.projectlombok:lombok:1.18.48")
+	testCompileOnly("org.projectlombok:lombok:1.18.48")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.48")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")

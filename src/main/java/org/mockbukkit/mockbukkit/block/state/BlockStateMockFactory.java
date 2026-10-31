@@ -63,6 +63,7 @@ public class BlockStateMockFactory
 			.put(Material.JUKEBOX, with(JukeboxStateMock::new, JukeboxStateMock::new))
 			.put(Material.LECTERN, with(LecternStateMock::new, LecternStateMock::new))
 			.put(Material.MOVING_PISTON, with(MovingPistonStateMock::new, MovingPistonStateMock::new))
+			.put(Material.POTENT_SULFUR, with(PotentSulfurStateMock::new, PotentSulfurStateMock::new))
 			.put(Material.REPEATING_COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.SCULK_CATALYST, with(SculkCatalystStateMock::new, SculkCatalystStateMock::new))
 			.put(Material.SCULK_SENSOR, with(SculkSensorStateMock::new, SculkSensorStateMock::new))

@@ -2,6 +2,7 @@
 	"replace": false,
 	"values": [
 		"minecraft:magma_cube",
-		"minecraft:slime"
+		"minecraft:slime",
+		"minecraft:sulfur_cube"
 	]
 }

@@ -1,12 +1,15 @@
 package org.mockbukkit.mockbukkit.command;
 
 import com.google.common.base.Preconditions;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class CommandSourceStackMock implements CommandSourceStack
 {
@@ -48,6 +51,20 @@ public class CommandSourceStackMock implements CommandSourceStack
 	public @Nullable Entity getExecutor()
 	{
 		return executor;
+	}
+
+	@Override
+	public Player getPlayerOrThrow() throws CommandSyntaxException
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Entity getEntityOrThrow() throws CommandSyntaxException
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

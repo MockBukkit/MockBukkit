@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import io.papermc.paper.math.Angle;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -32,6 +34,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -331,6 +334,26 @@ class EntityMockTest
 		UUID uuid = UUID.randomUUID();
 		entity = new SimpleEntityMock(server, uuid);
 		assertEquals(uuid, entity.getUniqueId());
+	}
+
+	@Test
+	void pointers_DisplayName_Default_CorrectName()
+	{
+		assertEquals(Component.text("entity"), entity.pointers().get(Identity.DISPLAY_NAME).get());
+	}
+
+	@Test
+	@Disabled("name() is not implemented correctly (https://github.com/MockBukkit/MockBukkit/issues/1582)")
+	void pointers_DisplayName_setCustomName()
+	{
+		entity.setCustomName("Some Custom Name");
+		assertEquals(Component.text("Some Custom name"), entity.pointers().get(Identity.DISPLAY_NAME).get());
+	}
+
+	@Test
+	void pointers_UUID_Correct()
+	{
+		assertEquals(entity.getUniqueId(), entity.pointers().get(Identity.UUID).get());
 	}
 
 	@Test
@@ -1566,6 +1589,33 @@ class EntityMockTest
 	{
 		String actual = entity.getScoreboardEntryName();
 		assertEquals(entity.getUniqueId().toString(), actual);
+	}
+
+	@Test
+	void setRotation_AngleAbsolute_SetsValues()
+	{
+		entity.setRotation(Angle.absolute(45f), Angle.absolute(20f));
+		assertEquals(45.0f, entity.getLocation().getYaw());
+		assertEquals(20.0f, entity.getLocation().getPitch());
+	}
+
+	@Test
+	void setRotation_AngleRelative_AddsToCurrent()
+	{
+		entity.setRotation(10f, 5f);
+		entity.setRotation(Angle.relative(30f), Angle.relative(-10f));
+		assertEquals(Location.normalizeYaw(40f), entity.getLocation().getYaw());
+		assertEquals(Location.normalizePitch(-5f), entity.getLocation().getPitch());
+	}
+
+	@Test
+	void setRotation_AngleRelative_PitchDeltaLarge_AddsToCurrent()
+	{
+		// Reproduces the bug where a large relative pitch delta was pre-normalized and clamped
+		entity.setRotation(0f, -80f);
+		entity.setRotation(Angle.relative(0f), Angle.relative(100f));
+		// expected: normalizePitch(-80 + 100) == normalizePitch(20) -> 20
+		assertEquals(Location.normalizePitch(20f), entity.getLocation().getPitch());
 	}
 
 }

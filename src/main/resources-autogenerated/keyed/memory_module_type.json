@@ -58,9 +58,6 @@
 			"key": "minecraft:is_panicking"
 		},
 		{
-			"key": "minecraft:is_tempted"
-		},
-		{
 			"key": "minecraft:item_pickup_cooldown_ticks"
 		},
 		{

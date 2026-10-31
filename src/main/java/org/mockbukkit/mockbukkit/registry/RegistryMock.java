@@ -19,10 +19,12 @@ import org.mockbukkit.mockbukkit.attribute.AttributeMock;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.block.BlockTypeMock;
 import org.mockbukkit.mockbukkit.block.banner.PatternTypeMock;
+import org.mockbukkit.mockbukkit.block.pot.PotPatternTypeMock;
 import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.datacomponent.DataComponentTypeMock;
 import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
+import org.mockbukkit.mockbukkit.entity.SulfurCubeMock;
 import org.mockbukkit.mockbukkit.entity.ZombieNautilusMock;
 import org.mockbukkit.mockbukkit.entity.memory.MemoryModuleMock;
 import org.mockbukkit.mockbukkit.entity.variant.CatSoundVariantMock;
@@ -88,6 +90,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
 		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, ChickenSoundVariantMock::from);
+		factoryMap.put(RegistryKey.DECORATED_POT_PATTERN, PotPatternTypeMock::from);
 		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
 		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
@@ -126,6 +129,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, PigSoundVariantMock::from);
 		factoryMap.put(RegistryKey.POINT_OF_INTEREST_TYPE, PoiTypeMock::from);
 		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
+		factoryMap.put(RegistryKey.SULFUR_CUBE_ARCHETYPE, SulfurCubeMock.ArchetypeMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 

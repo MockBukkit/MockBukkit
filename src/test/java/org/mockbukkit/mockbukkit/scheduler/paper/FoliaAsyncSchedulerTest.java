@@ -41,6 +41,7 @@ class FoliaAsyncSchedulerTest
 		CountDownLatch latch = new CountDownLatch(1);
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		scheduler.runNow(pluginMock, task -> latch.countDown());
+		bukkitScheduler.performOneTick();
 		assertTrue(latch.await(1, TimeUnit.SECONDS));
 	}
 
@@ -50,6 +51,7 @@ class FoliaAsyncSchedulerTest
 		CompletableFuture<Boolean> future = new CompletableFuture<>();
 		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
 		scheduler.runNow(MockBukkit.createMockPlugin(), (task) -> future.complete(!server.isPrimaryThread()));
+		bukkitScheduler.performOneTick();
 		assertTrue(future.join());
 	}
 

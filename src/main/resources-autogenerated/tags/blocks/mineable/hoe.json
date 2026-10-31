@@ -16,9 +16,11 @@
 		"minecraft:moss_carpet",
 		"minecraft:nether_wart_block",
 		"minecraft:oak_leaves",
+		"minecraft:orange_poplar_leaves",
 		"minecraft:pale_moss_block",
 		"minecraft:pale_moss_carpet",
 		"minecraft:pale_oak_leaves",
+		"minecraft:red_poplar_leaves",
 		"minecraft:sculk",
 		"minecraft:sculk_catalyst",
 		"minecraft:sculk_sensor",
@@ -27,8 +29,10 @@
 		"minecraft:shroomlight",
 		"minecraft:sponge",
 		"minecraft:spruce_leaves",
+		"minecraft:straw_bed",
 		"minecraft:target",
 		"minecraft:warped_wart_block",
-		"minecraft:wet_sponge"
+		"minecraft:wet_sponge",
+		"minecraft:yellow_poplar_leaves"
 	]
 }

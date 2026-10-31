@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:cauldron",
+		"minecraft:composter",
+		"minecraft:hopper",
+		"minecraft:lava_cauldron",
+		"minecraft:powder_snow_cauldron",
+		"minecraft:water_cauldron"
+	]
+}
