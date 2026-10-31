@@ -51,6 +51,7 @@ class PoiTypeMockTest
 	@Test
 	void fromRejectsMissingJsonProperties()
 	{
-		assertThrows(NullPointerException.class, () -> PoiTypeMock.from(new JsonObject()));
+		var emptyObject = new JsonObject();
+		assertThrows(NullPointerException.class, () -> PoiTypeMock.from(emptyObject));
 	}
 }

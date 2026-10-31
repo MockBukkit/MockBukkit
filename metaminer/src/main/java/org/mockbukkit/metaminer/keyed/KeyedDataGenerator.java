@@ -93,21 +93,27 @@ public class KeyedDataGenerator implements DataGenerator
 		}
 		if (keyed instanceof PoiType poiType)
 		{
-			JsonArray states = new JsonArray();
-
-			for (BlockType blockType : Registry.BLOCK)
-			{
-				for (var blockState : blockType.createBlockDataStates())
-				{
-					if (poiType.is(blockState))
-					{
-						states.add(blockState.getAsString());
-					}
-				}
-			}
-
+			JsonArray states = getBlockStatesForPoiType(poiType);
 			jsonObject.add("matchingStates", states);
 		}
+	}
+
+	private JsonArray getBlockStatesForPoiType(PoiType poiType)
+	{
+		var states = new JsonArray();
+
+		for (BlockType blockType : Registry.BLOCK)
+		{
+			for (var blockState : blockType.createBlockDataStates())
+			{
+				if (poiType.is(blockState))
+				{
+					states.add(blockState.getAsString());
+				}
+			}
+		}
+
+		return states;
 	}
 
 	private void addItemTypeProperties(JsonObject jsonObject, ItemType itemType)
