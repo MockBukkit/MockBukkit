@@ -6,11 +6,13 @@ import com.google.gson.JsonPrimitive;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.entity.poi.PoiType;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.GameRule;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.Registry;
+import org.bukkit.block.BlockType;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
@@ -88,6 +90,23 @@ public class KeyedDataGenerator implements DataGenerator
 		if (keyed instanceof GameRule<?> gameRule)
 		{
 			jsonObject.addProperty("type", gameRule.getType().getName());
+		}
+		if (keyed instanceof PoiType poiType)
+		{
+			JsonArray states = new JsonArray();
+
+			for (BlockType blockType : Registry.BLOCK)
+			{
+				for (var blockState : blockType.createBlockDataStates())
+				{
+					if (poiType.is(blockState))
+					{
+						states.add(blockState.getAsString());
+					}
+				}
+			}
+
+			jsonObject.add("matchingStates", states);
 		}
 	}
 

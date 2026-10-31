@@ -1,14 +1,21 @@
 package io.papermc.paper.entity.poi;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.data.BlockData;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @NullMarked
 public class PoiTypeMock implements PoiType
 {
+
+	private final Set<BlockData> matchingStates;
 
 	public static PoiTypeMock from(JsonObject json)
 	{
@@ -20,22 +27,30 @@ public class PoiTypeMock implements PoiType
 
 		var occupants = json.get("occupants").getAsBoolean();
 
-		return new PoiTypeMock(key, occupants);
+		Set<BlockData> matchingStates = new HashSet<>();
+
+		for (JsonElement state : json.getAsJsonArray("matchingStates"))
+		{
+			matchingStates.add(Bukkit.createBlockData(state.getAsString()));
+		}
+
+		return new PoiTypeMock(key, occupants, matchingStates);
 	}
 
 	private final NamespacedKey key;
 	private final boolean occupants;
 
-	private PoiTypeMock(NamespacedKey key, boolean occupants)
+	private PoiTypeMock(NamespacedKey key, boolean occupants, Set<BlockData> matchingStates)
 	{
 		this.key = key;
 		this.occupants = occupants;
+		this.matchingStates = Set.copyOf(matchingStates);
 	}
 
 	@Override
 	public boolean is(BlockData data)
 	{
-		throw new UnsupportedOperationException();
+		return this.matchingStates.contains(data);
 	}
 
 	@Override
