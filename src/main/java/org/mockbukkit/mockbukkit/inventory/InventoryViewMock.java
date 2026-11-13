@@ -300,31 +300,58 @@ public abstract class InventoryViewMock implements InventoryView
 	public InventoryType.SlotType getSlotType(int slot)
 	{
 		// As CraftBukkit: the top inventory's slots by its type, then the player's inventory below it
-		InventoryType type = getType();
-		int topSize = type == InventoryType.CRAFTING ? 5 : getTopInventory().getSize();
+		InventoryType viewType = getType();
+		int topSize = viewType == InventoryType.CRAFTING ? 5 : getTopInventory().getSize();
 		if (slot < 0)
 		{
 			return InventoryType.SlotType.OUTSIDE;
 		}
 		if (slot < topSize)
 		{
-			return switch (type)
-			{
-			case FURNACE, BLAST_FURNACE, SMOKER -> slot == 2 ? InventoryType.SlotType.RESULT
-					: slot == 1 ? InventoryType.SlotType.FUEL : InventoryType.SlotType.CRAFTING;
-			case BREWING -> slot == 3 ? InventoryType.SlotType.FUEL : InventoryType.SlotType.CRAFTING;
-			case ENCHANTING, BEACON -> InventoryType.SlotType.CRAFTING;
-			case WORKBENCH, CRAFTING -> slot == 0 ? InventoryType.SlotType.RESULT : InventoryType.SlotType.CRAFTING;
-			case ANVIL, CARTOGRAPHY, GRINDSTONE, MERCHANT -> slot == 2 ? InventoryType.SlotType.RESULT : InventoryType.SlotType.CRAFTING;
-			case STONECUTTER -> slot == 1 ? InventoryType.SlotType.RESULT : InventoryType.SlotType.CRAFTING;
-			case LOOM, SMITHING -> slot == 3 ? InventoryType.SlotType.RESULT : InventoryType.SlotType.CRAFTING;
-			default -> InventoryType.SlotType.CONTAINER;
-			};
+			return topSlotType(viewType, slot);
 		}
-		if (type == InventoryType.CRAFTING)
+		return bottomSlotType(viewType, slot, topSize);
+	}
+
+	private static @NotNull InventoryType.SlotType topSlotType(@NotNull InventoryType viewType, int slot)
+	{
+		return switch (viewType)
+		{
+		case FURNACE, BLAST_FURNACE, SMOKER -> furnaceSlotType(slot);
+		case BREWING -> craftingUnless(slot, 3, InventoryType.SlotType.FUEL);
+		case ENCHANTING, BEACON -> InventoryType.SlotType.CRAFTING;
+		case WORKBENCH, CRAFTING -> craftingUnless(slot, 0, InventoryType.SlotType.RESULT);
+		case ANVIL, CARTOGRAPHY, GRINDSTONE, MERCHANT -> craftingUnless(slot, 2, InventoryType.SlotType.RESULT);
+		case STONECUTTER -> craftingUnless(slot, 1, InventoryType.SlotType.RESULT);
+		case LOOM, SMITHING -> craftingUnless(slot, 3, InventoryType.SlotType.RESULT);
+		default -> InventoryType.SlotType.CONTAINER;
+		};
+	}
+
+	private static @NotNull InventoryType.SlotType furnaceSlotType(int slot)
+	{
+		if (slot == 2)
+		{
+			return InventoryType.SlotType.RESULT;
+		}
+		return craftingUnless(slot, 1, InventoryType.SlotType.FUEL);
+	}
+
+	private static @NotNull InventoryType.SlotType craftingUnless(int slot, int special, @NotNull InventoryType.SlotType type)
+	{
+		return slot == special ? type : InventoryType.SlotType.CRAFTING;
+	}
+
+	private static @NotNull InventoryType.SlotType bottomSlotType(@NotNull InventoryType viewType, int slot, int topSize)
+	{
+		if (viewType == InventoryType.CRAFTING)
 		{
 			// the player's own view: the armour, then the storage, then the hotbar
-			return slot < 9 ? InventoryType.SlotType.ARMOR : slot > 35 ? InventoryType.SlotType.QUICKBAR : InventoryType.SlotType.CONTAINER;
+			if (slot < 9)
+			{
+				return InventoryType.SlotType.ARMOR;
+			}
+			return slot > 35 ? InventoryType.SlotType.QUICKBAR : InventoryType.SlotType.CONTAINER;
 		}
 		// below another inventory: 27 storage slots, then the hotbar
 		return slot >= topSize + 27 ? InventoryType.SlotType.QUICKBAR : InventoryType.SlotType.CONTAINER;
