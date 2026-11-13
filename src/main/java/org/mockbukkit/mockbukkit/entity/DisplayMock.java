@@ -10,7 +10,6 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 
@@ -28,6 +27,7 @@ public class DisplayMock extends EntityMock implements Display
 	private int interpolationDelay = 0;
 	private int color = -1;
 	private Brightness brightness = null;
+	private Billboard billboard = Billboard.FIXED;
 
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -179,13 +179,14 @@ public class DisplayMock extends EntityMock implements Display
 	@Override
 	public @NotNull Billboard getBillboard()
 	{
-		throw new UnimplementedOperationException();
+		return this.billboard;
 	}
 
 	@Override
 	public void setBillboard(@NotNull Billboard billboard)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(billboard != null, "Billboard cannot be null");
+		this.billboard = billboard;
 	}
 
 	@Override
