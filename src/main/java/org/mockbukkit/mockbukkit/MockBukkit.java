@@ -11,6 +11,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.dialog.DialogCallbacks;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.exception.UnmockException;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
@@ -397,6 +398,7 @@ public class MockBukkit
 		{
 			mock.getPluginManager().unload();
 			LifecycleEventRunnerMock.INSTANCE.reset();
+			DialogCallbacks.clear();
 			setServerInstanceToNull();
 		}
 	}

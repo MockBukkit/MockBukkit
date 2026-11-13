@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.simulate.entity;
 
 import com.google.common.base.Preconditions;
+import io.papermc.paper.event.player.PlayerCustomClickEvent;
+import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
@@ -29,7 +31,10 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.dialog.DialogClick;
+import org.mockbukkit.mockbukkit.dialog.DialogMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
+
 
 public class PlayerSimulation
 {
@@ -310,6 +315,32 @@ public class PlayerSimulation
 			playerMock.setFlying(event.isFlying());
 		}
 		return event;
+	}
+
+	/**
+	 * Simulates a click on the button at {@code index} of the dialog the player sees, its inputs keeping their first
+	 * values.
+	 *
+	 * @param index The index of the button, in {@link DialogMock#getButtons()}.
+	 * @return The event of a custom click, {@code null} for any other action.
+	 * @see DialogClick
+	 */
+	public @Nullable PlayerCustomClickEvent simulateDialogClick(int index)
+	{
+		return DialogClick.click(playerMock, index);
+	}
+
+	/**
+	 * Simulates a click on the button at {@code index} of the dialog the player sees.
+	 *
+	 * @param index  The index of the button, in {@link DialogMock#getButtons()}.
+	 * @param values The values the player gave the inputs, by key.
+	 * @return The event of a custom click, {@code null} for any other action.
+	 * @see DialogClick
+	 */
+	public @Nullable PlayerCustomClickEvent simulateDialogClick(int index, @NotNull Map<String, ?> values)
+	{
+		return DialogClick.click(playerMock, index, values);
 	}
 
 }
