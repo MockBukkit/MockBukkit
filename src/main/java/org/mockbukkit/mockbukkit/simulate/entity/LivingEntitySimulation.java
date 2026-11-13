@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.simulate.entity;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
@@ -9,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
+
+import java.util.Map;
 
 public class LivingEntitySimulation
 {
@@ -84,117 +87,68 @@ public class LivingEntitySimulation
 	 */
 	private static EntityDamageEvent.DamageCause cause(@NotNull DamageSource source)
 	{
-		DamageType type = source.getDamageType();
-		if (type == DamageType.FALL || type == DamageType.ENDER_PEARL)
+		EntityDamageEvent.DamageCause cause = Causes.BY_TYPE.get(source.getDamageType().getKey());
+		if (cause != null)
 		{
-			return EntityDamageEvent.DamageCause.FALL;
-		}
-		if (type == DamageType.IN_FIRE)
-		{
-			return EntityDamageEvent.DamageCause.FIRE;
-		}
-		if (type == DamageType.CAMPFIRE)
-		{
-			return EntityDamageEvent.DamageCause.CAMPFIRE;
-		}
-		if (type == DamageType.ON_FIRE)
-		{
-			return EntityDamageEvent.DamageCause.FIRE_TICK;
-		}
-		if (type == DamageType.LAVA)
-		{
-			return EntityDamageEvent.DamageCause.LAVA;
-		}
-		if (type == DamageType.HOT_FLOOR)
-		{
-			return EntityDamageEvent.DamageCause.HOT_FLOOR;
-		}
-		if (type == DamageType.IN_WALL)
-		{
-			return EntityDamageEvent.DamageCause.SUFFOCATION;
-		}
-		if (type == DamageType.CRAMMING)
-		{
-			return EntityDamageEvent.DamageCause.CRAMMING;
-		}
-		if (type == DamageType.DROWN)
-		{
-			return EntityDamageEvent.DamageCause.DROWNING;
-		}
-		if (type == DamageType.STARVE)
-		{
-			return EntityDamageEvent.DamageCause.STARVATION;
-		}
-		if (type == DamageType.CACTUS || type == DamageType.SWEET_BERRY_BUSH || type == DamageType.STALAGMITE)
-		{
-			return EntityDamageEvent.DamageCause.CONTACT;
-		}
-		if (type == DamageType.FLY_INTO_WALL)
-		{
-			return EntityDamageEvent.DamageCause.FLY_INTO_WALL;
-		}
-		if (type == DamageType.OUT_OF_WORLD)
-		{
-			return EntityDamageEvent.DamageCause.VOID;
-		}
-		if (type == DamageType.GENERIC_KILL)
-		{
-			return EntityDamageEvent.DamageCause.KILL;
-		}
-		if (type == DamageType.OUTSIDE_BORDER)
-		{
-			return EntityDamageEvent.DamageCause.WORLD_BORDER;
-		}
-		if (type == DamageType.MAGIC || type == DamageType.INDIRECT_MAGIC)
-		{
-			return EntityDamageEvent.DamageCause.MAGIC;
-		}
-		if (type == DamageType.WITHER)
-		{
-			return EntityDamageEvent.DamageCause.WITHER;
-		}
-		if (type == DamageType.FALLING_ANVIL || type == DamageType.FALLING_BLOCK || type == DamageType.FALLING_STALACTITE)
-		{
-			return EntityDamageEvent.DamageCause.FALLING_BLOCK;
-		}
-		if (type == DamageType.DRAGON_BREATH)
-		{
-			return EntityDamageEvent.DamageCause.DRAGON_BREATH;
-		}
-		if (type == DamageType.DRY_OUT)
-		{
-			return EntityDamageEvent.DamageCause.DRYOUT;
-		}
-		if (type == DamageType.FREEZE)
-		{
-			return EntityDamageEvent.DamageCause.FREEZE;
-		}
-		if (type == DamageType.LIGHTNING_BOLT)
-		{
-			return EntityDamageEvent.DamageCause.LIGHTNING;
-		}
-		if (type == DamageType.THORNS)
-		{
-			return EntityDamageEvent.DamageCause.THORNS;
-		}
-		if (type == DamageType.SONIC_BOOM)
-		{
-			return EntityDamageEvent.DamageCause.SONIC_BOOM;
-		}
-		if (type == DamageType.EXPLOSION)
-		{
-			return EntityDamageEvent.DamageCause.BLOCK_EXPLOSION;
-		}
-		if (type == DamageType.PLAYER_EXPLOSION)
-		{
-			return EntityDamageEvent.DamageCause.ENTITY_EXPLOSION;
-		}
-		if (type == DamageType.ARROW || type == DamageType.TRIDENT || type == DamageType.FIREBALL || type == DamageType.UNATTRIBUTED_FIREBALL
-				|| type == DamageType.WITHER_SKULL || type == DamageType.THROWN || type == DamageType.MOB_PROJECTILE)
-		{
-			return EntityDamageEvent.DamageCause.PROJECTILE;
+			return cause;
 		}
 		return source.getDirectEntity() != null ? EntityDamageEvent.DamageCause.ENTITY_ATTACK : EntityDamageEvent.DamageCause.CUSTOM;
+	}
+
+	/**
+	 * The causes Paper reports for the damage types that have their own, by the key of the type: each server builds its
+	 * own damage types.
+	 */
+	private static final class Causes
+	{
+
+		private static final Map<NamespacedKey, EntityDamageEvent.DamageCause> BY_TYPE = Map.ofEntries(
+				Map.entry(NamespacedKey.minecraft("fall"), EntityDamageEvent.DamageCause.FALL),
+				Map.entry(NamespacedKey.minecraft("ender_pearl"), EntityDamageEvent.DamageCause.FALL),
+				Map.entry(NamespacedKey.minecraft("in_fire"), EntityDamageEvent.DamageCause.FIRE),
+				Map.entry(NamespacedKey.minecraft("campfire"), EntityDamageEvent.DamageCause.CAMPFIRE),
+				Map.entry(NamespacedKey.minecraft("on_fire"), EntityDamageEvent.DamageCause.FIRE_TICK),
+				Map.entry(NamespacedKey.minecraft("lava"), EntityDamageEvent.DamageCause.LAVA),
+				Map.entry(NamespacedKey.minecraft("hot_floor"), EntityDamageEvent.DamageCause.HOT_FLOOR),
+				Map.entry(NamespacedKey.minecraft("in_wall"), EntityDamageEvent.DamageCause.SUFFOCATION),
+				Map.entry(NamespacedKey.minecraft("cramming"), EntityDamageEvent.DamageCause.CRAMMING),
+				Map.entry(NamespacedKey.minecraft("drown"), EntityDamageEvent.DamageCause.DROWNING),
+				Map.entry(NamespacedKey.minecraft("starve"), EntityDamageEvent.DamageCause.STARVATION),
+				Map.entry(NamespacedKey.minecraft("cactus"), EntityDamageEvent.DamageCause.CONTACT),
+				Map.entry(NamespacedKey.minecraft("sweet_berry_bush"), EntityDamageEvent.DamageCause.CONTACT),
+				Map.entry(NamespacedKey.minecraft("stalagmite"), EntityDamageEvent.DamageCause.CONTACT),
+				Map.entry(NamespacedKey.minecraft("fly_into_wall"), EntityDamageEvent.DamageCause.FLY_INTO_WALL),
+				Map.entry(NamespacedKey.minecraft("out_of_world"), EntityDamageEvent.DamageCause.VOID),
+				Map.entry(NamespacedKey.minecraft("generic_kill"), EntityDamageEvent.DamageCause.KILL),
+				Map.entry(NamespacedKey.minecraft("outside_border"), EntityDamageEvent.DamageCause.WORLD_BORDER),
+				Map.entry(NamespacedKey.minecraft("magic"), EntityDamageEvent.DamageCause.MAGIC),
+				Map.entry(NamespacedKey.minecraft("indirect_magic"), EntityDamageEvent.DamageCause.MAGIC),
+				Map.entry(NamespacedKey.minecraft("wither"), EntityDamageEvent.DamageCause.WITHER),
+				Map.entry(NamespacedKey.minecraft("falling_anvil"), EntityDamageEvent.DamageCause.FALLING_BLOCK),
+				Map.entry(NamespacedKey.minecraft("falling_block"), EntityDamageEvent.DamageCause.FALLING_BLOCK),
+				Map.entry(NamespacedKey.minecraft("falling_stalactite"), EntityDamageEvent.DamageCause.FALLING_BLOCK),
+				Map.entry(NamespacedKey.minecraft("dragon_breath"), EntityDamageEvent.DamageCause.DRAGON_BREATH),
+				Map.entry(NamespacedKey.minecraft("dry_out"), EntityDamageEvent.DamageCause.DRYOUT),
+				Map.entry(NamespacedKey.minecraft("freeze"), EntityDamageEvent.DamageCause.FREEZE),
+				Map.entry(NamespacedKey.minecraft("lightning_bolt"), EntityDamageEvent.DamageCause.LIGHTNING),
+				Map.entry(NamespacedKey.minecraft("thorns"), EntityDamageEvent.DamageCause.THORNS),
+				Map.entry(NamespacedKey.minecraft("sonic_boom"), EntityDamageEvent.DamageCause.SONIC_BOOM),
+				Map.entry(NamespacedKey.minecraft("explosion"), EntityDamageEvent.DamageCause.BLOCK_EXPLOSION),
+				Map.entry(NamespacedKey.minecraft("player_explosion"), EntityDamageEvent.DamageCause.ENTITY_EXPLOSION),
+				Map.entry(NamespacedKey.minecraft("arrow"), EntityDamageEvent.DamageCause.PROJECTILE),
+				Map.entry(NamespacedKey.minecraft("trident"), EntityDamageEvent.DamageCause.PROJECTILE),
+				Map.entry(NamespacedKey.minecraft("fireball"), EntityDamageEvent.DamageCause.PROJECTILE),
+				Map.entry(NamespacedKey.minecraft("unattributed_fireball"), EntityDamageEvent.DamageCause.PROJECTILE),
+				Map.entry(NamespacedKey.minecraft("wither_skull"), EntityDamageEvent.DamageCause.PROJECTILE),
+				Map.entry(NamespacedKey.minecraft("thrown"), EntityDamageEvent.DamageCause.PROJECTILE),
+				Map.entry(NamespacedKey.minecraft("mob_projectile"), EntityDamageEvent.DamageCause.PROJECTILE)
+		);
+
+		private Causes()
+		{
+			throw new UnsupportedOperationException("Utility class");
+		}
+
 	}
 
 }
