@@ -27,6 +27,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	private boolean aware = true;
 	private boolean leftHanded;
 	private LivingEntity target;
+	private final PathfinderMock pathfinder = new PathfinderMock(this);
 
 	/**
 	 * Constructs a new {@link MobMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -42,8 +43,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	@Override
 	public @NotNull Pathfinder getPathfinder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return pathfinder;
 	}
 
 	@Override
