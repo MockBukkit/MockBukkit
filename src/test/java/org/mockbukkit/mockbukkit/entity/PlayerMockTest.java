@@ -2274,6 +2274,34 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlaySoundKeyWithEntity()
+	{
+		player.playSound(player, "minecraft:entity.experience_orb.pickup", SoundCategory.PLAYERS, 0.5F, 2);
+
+		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
+				&& player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.PLAYERS
+				&& audio.getVolume() == 0.5F && audio.getPitch() == 2));
+	}
+
+	@Test
+	void testPlaySoundKeyWithEntityWithoutCategory()
+	{
+		player.playSound(player, "minecraft:entity.experience_orb.pickup", 1, 1);
+
+		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
+				&& audio.getCategory() == SoundCategory.MASTER));
+	}
+
+	@Test
+	void testPlaySoundKeyWithEntityAndSeed()
+	{
+		player.playSound(player, "minecraft:entity.experience_orb.pickup", SoundCategory.PLAYERS, 1, 1, 42);
+
+		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
+				&& player.getLocation().equals(audio.getLocation())));
+	}
+
+	@Test
 	void getWalkSpeed()
 	{
 		assertEquals(0.2f, player.getWalkSpeed());
