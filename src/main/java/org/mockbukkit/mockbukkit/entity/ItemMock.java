@@ -25,6 +25,8 @@ public class ItemMock extends EntityMock implements Item
 	// The default pickup delay
 	private int delay = 10;
 	private TriState frictionState = TriState.NOT_SET;
+	private @Nullable UUID owner;
+	private @Nullable UUID thrower;
 
 	/**
 	 * Constructs a new {@link ItemMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link ItemStack}.
@@ -90,29 +92,25 @@ public class ItemMock extends EntityMock implements Item
 	@Override
 	public void setOwner(@Nullable UUID owner)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.owner = owner;
 	}
 
 	@Override
 	public @Nullable UUID getOwner()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.owner;
 	}
 
 	@Override
 	public void setThrower(@Nullable UUID thrower)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.thrower = thrower;
 	}
 
 	@Override
 	public @Nullable UUID getThrower()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.thrower;
 	}
 
 	@Override

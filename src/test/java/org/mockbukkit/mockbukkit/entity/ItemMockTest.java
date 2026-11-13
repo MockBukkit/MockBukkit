@@ -17,6 +17,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -41,6 +42,30 @@ class ItemMockTest
 	{
 		Item item = new ItemMock(server, UUID.randomUUID(), new ItemStackMock(Material.STONE));
 		assertEquals(EntityType.ITEM, item.getType());
+	}
+
+	@Test
+	void testOwner()
+	{
+		Item item = world.dropItem(new Location(world, 0, 64, 0), new ItemStackMock(Material.DIAMOND));
+		UUID owner = UUID.randomUUID();
+
+		assertNull(item.getOwner());
+		item.setOwner(owner);
+		assertEquals(owner, item.getOwner());
+		item.setOwner(null);
+		assertNull(item.getOwner());
+	}
+
+	@Test
+	void testThrower()
+	{
+		Item item = world.dropItem(new Location(world, 0, 64, 0), new ItemStackMock(Material.DIAMOND));
+		UUID thrower = UUID.randomUUID();
+
+		assertNull(item.getThrower());
+		item.setThrower(thrower);
+		assertEquals(thrower, item.getThrower());
 	}
 
 	@Test
