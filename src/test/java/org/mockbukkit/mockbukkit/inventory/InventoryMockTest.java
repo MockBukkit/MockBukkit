@@ -20,6 +20,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.inventory.InventoryItemAmountMatcher.containsAtLeast;
@@ -57,6 +59,17 @@ class InventoryMockTest
 	void setUp()
 	{
 		inventory = new InventoryMock(null, 9, InventoryType.CHEST);
+	}
+
+	@Test
+	void getHolder_WithOrWithoutSnapshot_GetsHolder()
+	{
+		PlayerMock player = server.addPlayer();
+		InventoryMock held = new InventoryMock(player, 9, InventoryType.CHEST);
+
+		assertSame(player, held.getHolder(true));
+		assertSame(player, held.getHolder(false));
+		assertNull(inventory.getHolder(false));
 	}
 
 	@Test
