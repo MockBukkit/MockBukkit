@@ -65,14 +65,6 @@ public class SimpleInventoryViewMock extends InventoryViewMock
 		throw new UnimplementedOperationException();
 	}
 
-	@NotNull
-	@Override
-	public InventoryType.SlotType getSlotType(int slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	@Override
 	public void close()
 	{

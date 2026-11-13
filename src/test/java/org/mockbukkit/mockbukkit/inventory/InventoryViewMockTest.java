@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,49 @@ class InventoryViewMockTest
 		assertSame(top, view.getTopInventory());
 		assertSame(bottom, view.getBottomInventory());
 		assertSame(InventoryType.DROPPER, view.getType());
+	}
+
+	@Test
+	void getSlotType_Chest()
+	{
+		PlayerMock player = server.addPlayer();
+		InventoryMock chest = new InventoryMock(null, 27, InventoryType.CHEST);
+		view = new SimpleInventoryViewMock(player, chest, player.getInventory(), InventoryType.CHEST);
+
+		assertEquals(InventoryType.SlotType.OUTSIDE, view.getSlotType(-999));
+		assertEquals(InventoryType.SlotType.CONTAINER, view.getSlotType(0));
+		assertEquals(InventoryType.SlotType.CONTAINER, view.getSlotType(26));
+		assertEquals(InventoryType.SlotType.CONTAINER, view.getSlotType(27));
+		assertEquals(InventoryType.SlotType.CONTAINER, view.getSlotType(53));
+		assertEquals(InventoryType.SlotType.QUICKBAR, view.getSlotType(54));
+		assertEquals(InventoryType.SlotType.QUICKBAR, view.getSlotType(62));
+	}
+
+	@Test
+	void getSlotType_Furnace()
+	{
+		PlayerMock player = server.addPlayer();
+		InventoryMock furnace = new InventoryMock(null, 3, InventoryType.FURNACE);
+		view = new SimpleInventoryViewMock(player, furnace, player.getInventory(), InventoryType.FURNACE);
+
+		assertEquals(InventoryType.SlotType.CRAFTING, view.getSlotType(0));
+		assertEquals(InventoryType.SlotType.FUEL, view.getSlotType(1));
+		assertEquals(InventoryType.SlotType.RESULT, view.getSlotType(2));
+		assertEquals(InventoryType.SlotType.CONTAINER, view.getSlotType(3));
+	}
+
+	@Test
+	void getSlotType_PlayersOwnInventory()
+	{
+		PlayerMock player = server.addPlayer();
+		InventoryView own = player.getOpenInventory();
+
+		assertEquals(InventoryType.CRAFTING, own.getType());
+		assertEquals(InventoryType.SlotType.RESULT, own.getSlotType(0));
+		assertEquals(InventoryType.SlotType.CRAFTING, own.getSlotType(4));
+		assertEquals(InventoryType.SlotType.ARMOR, own.getSlotType(5));
+		assertEquals(InventoryType.SlotType.CONTAINER, own.getSlotType(9));
+		assertEquals(InventoryType.SlotType.QUICKBAR, own.getSlotType(36));
 	}
 
 	@Test
