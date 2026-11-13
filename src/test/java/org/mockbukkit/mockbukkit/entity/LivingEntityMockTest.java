@@ -102,6 +102,22 @@ class LivingEntityMockTest
 	}
 
 	@Test
+	void testDamageWithDamageSourceTakesItsCauseFromItsType()
+	{
+		PlayerMock player = server.addPlayer();
+
+		livingEntity.damage(1, DamageSource.builder(DamageType.FALL).build());
+		livingEntity.damage(1, DamageSource.builder(DamageType.PLAYER_ATTACK).withCausingEntity(player).withDirectEntity(player).build());
+		livingEntity.damage(1, DamageSource.builder(DamageType.ARROW).withCausingEntity(player).withDirectEntity(player).build());
+
+		server.getPluginManager().assertEventFired(EntityDamageEvent.class, event -> event.getCause() == EntityDamageEvent.DamageCause.FALL);
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class,
+				event -> event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK && event.getDamager() == player);
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class,
+				event -> event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE);
+	}
+
+	@Test
 	void testDamageWithDamageSourceCancelled()
 	{
 		livingEntity.setHealth(10);
