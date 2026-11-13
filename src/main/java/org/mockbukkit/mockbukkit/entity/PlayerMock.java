@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.connection.PlayerGameConnection;
+import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.PlayerPostEffects;
@@ -17,6 +18,7 @@ import io.papermc.paper.math.Position;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
+import net.kyori.adventure.dialog.DialogLike;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.pointer.Pointers;
@@ -234,6 +236,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private Locale locale;
 	private @NotNull PlayerProfile playerProfile;
 	private final PlayerGameConnectionMock connection = new PlayerGameConnectionMock(this);
+	private @Nullable Dialog openDialog;
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -3312,6 +3315,30 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setDeathScreenScore(int deathScreenScore)
 	{
 		this.deathScreenScore = deathScreenScore;
+	}
+
+	@Override
+	public void showDialog(@NotNull DialogLike dialog)
+	{
+		Preconditions.checkNotNull(dialog, "Dialog cannot be null");
+		Preconditions.checkArgument(dialog instanceof Dialog, "Dialog must be a Paper dialog");
+		this.openDialog = (Dialog) dialog;
+	}
+
+	@Override
+	public void closeDialog()
+	{
+		this.openDialog = null;
+	}
+
+	/**
+	 * The dialog this player sees, as the last {@link #showDialog(DialogLike)} left it.
+	 *
+	 * @return The dialog open on the player's screen, {@code null} if none.
+	 */
+	public @Nullable Dialog getOpenDialog()
+	{
+		return this.openDialog;
 	}
 
 	@Override
