@@ -22,6 +22,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.HumanEntity;
@@ -279,7 +280,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void damage(double amount, @NotNull DamageSource source)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(source, "DamageSource cannot be null");
+		simulateDamage(amount, source);
 	}
 
 	/**
@@ -985,8 +987,19 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void attack(@NotNull Entity target)
 	{
 		Preconditions.checkNotNull(target, "Target cannot be null");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(target.getWorld().equals(getWorld()), "Target must be in the same world");
+		if (!(target instanceof Damageable damageable))
+		{
+			return;
+		}
+		AttributeInstance attackDamage = getAttribute(Attribute.ATTACK_DAMAGE);
+		double amount = attackDamage == null ? AttributesMock.getDefaultValue(Attribute.ATTACK_DAMAGE) : attackDamage.getValue();
+		DamageSource source = DamageSource.builder(this instanceof HumanEntity ? DamageType.PLAYER_ATTACK : DamageType.MOB_ATTACK)
+				.withCausingEntity(this)
+				.withDirectEntity(this)
+				.withDamageLocation(getLocation())
+				.build();
+		damageable.damage(amount, source);
 	}
 
 	@Override
