@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public record CommandTemplateActionMock(@NotNull String template) implements DialogAction.CommandTemplateAction
 {
 
-	private static final Pattern VARIABLE = Pattern.compile("\\$\\(([a-zA-Z0-9_]+)\\)");
+	private static final Pattern VARIABLE = Pattern.compile("\\$\\((\\w+)\\)");
 
 	/**
 	 * Constructs a new {@link CommandTemplateActionMock}.

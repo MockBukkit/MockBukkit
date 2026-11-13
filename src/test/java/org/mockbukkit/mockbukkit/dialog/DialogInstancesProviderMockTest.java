@@ -70,8 +70,9 @@ class DialogInstancesProviderMockTest
 
 		assertEquals(150, button.width());
 		assertNull(button.action());
-		assertThrows(IllegalArgumentException.class, () -> ActionButton.builder(Component.text("Buy")).width(0));
-		assertThrows(IllegalArgumentException.class, () -> ActionButton.builder(Component.text("Buy")).width(1025));
+		ActionButton.Builder builder = ActionButton.builder(Component.text("Buy"));
+		assertThrows(IllegalArgumentException.class, () -> builder.width(0));
+		assertThrows(IllegalArgumentException.class, () -> builder.width(1025));
 	}
 
 	@Test
@@ -85,7 +86,8 @@ class DialogInstancesProviderMockTest
 		assertEquals(message, item.description());
 		assertEquals(32, item.width());
 		assertEquals(16, item.height());
-		assertThrows(IllegalArgumentException.class, () -> DialogBody.plainMessage(Component.text("Hello"), 0));
+		Component hello = Component.text("Hello");
+		assertThrows(IllegalArgumentException.class, () -> DialogBody.plainMessage(hello, 0));
 	}
 
 	@Test
@@ -110,12 +112,16 @@ class DialogInstancesProviderMockTest
 	@Test
 	void inputs_Refused()
 	{
-		assertThrows(IllegalArgumentException.class, () -> DialogInput.text("not a key", Component.text("Name")));
-		assertThrows(IllegalArgumentException.class, () -> DialogInput.numberRange("amount", Component.text("Amount"), 0, 10).initial(11f));
-		assertThrows(IllegalArgumentException.class, () -> DialogInput.singleOption("color", Component.text("Color"), List.of()));
-		assertThrows(IllegalArgumentException.class, () -> DialogInput.singleOption("color", Component.text("Color"),
-				List.of(SingleOptionDialogInput.OptionEntry.create("red", null, true),
-						SingleOptionDialogInput.OptionEntry.create("blue", null, true))));
+		Component label = Component.text("Label");
+		NumberRangeDialogInput.Builder amount = DialogInput.numberRange("amount", label, 0, 10);
+		List<SingleOptionDialogInput.OptionEntry> none = List.of();
+		List<SingleOptionDialogInput.OptionEntry> twoInitial = List.of(SingleOptionDialogInput.OptionEntry.create("red", null, true),
+				SingleOptionDialogInput.OptionEntry.create("blue", null, true));
+
+		assertThrows(IllegalArgumentException.class, () -> DialogInput.text("not a key", label));
+		assertThrows(IllegalArgumentException.class, () -> amount.initial(11f));
+		assertThrows(IllegalArgumentException.class, () -> DialogInput.singleOption("color", label, none));
+		assertThrows(IllegalArgumentException.class, () -> DialogInput.singleOption("color", label, twoInitial));
 	}
 
 	@Test
@@ -143,7 +149,9 @@ class DialogInstancesProviderMockTest
 
 		assertEquals("sword", ((CustomClickActionMock) custom).additionsTag().getString("item"));
 		assertEquals("give Hugo diamond ", ((CommandTemplateActionMock) template).command(Map.of("name", "Hugo")));
-		assertThrows(IllegalArgumentException.class, () -> DialogAction.customClick(Key.key("test", "buy"), BinaryTagHolder.binaryTagHolder("1")));
+		Key buy = Key.key("test", "buy");
+		BinaryTagHolder notACompound = BinaryTagHolder.binaryTagHolder("1");
+		assertThrows(IllegalArgumentException.class, () -> DialogAction.customClick(buy, notACompound));
 		assertInstanceOf(DialogAction.StaticAction.class, DialogAction.staticAction(ClickEvent.runCommand("/spawn")));
 	}
 

@@ -20,7 +20,7 @@ final class DialogValidation
 	 */
 	static final int MESSAGE_WIDTH = 200;
 
-	private static final Pattern INPUT_KEY = Pattern.compile("[a-zA-Z0-9_]+");
+	private static final Pattern INPUT_KEY = Pattern.compile("\\w+");
 
 	private DialogValidation()
 	{

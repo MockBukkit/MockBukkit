@@ -149,7 +149,7 @@ public final class DialogClick
 			tags.put(input.key(), switch (input)
 			{
 			case TextDialogInput text -> StringBinaryTag.stringBinaryTag(value == null ? text.initial() : text(text, value));
-			case BooleanDialogInput bool -> (value == null ? bool.initial() : bool(bool, value)) ? ByteBinaryTag.ONE : ByteBinaryTag.ZERO;
+			case BooleanDialogInput bool -> booleanTag(value == null ? bool.initial() : bool(bool, value));
 			case NumberRangeDialogInput number -> FloatBinaryTag.floatBinaryTag(value == null ? first(number) : number(number, value));
 			case SingleOptionDialogInput option -> StringBinaryTag.stringBinaryTag(value == null ? first(option) : option(option, value));
 			default -> throw new IllegalArgumentException("Unknown input " + input);
@@ -201,6 +201,11 @@ public final class DialogClick
 	{
 		Preconditions.checkArgument(input.entries().stream().anyMatch(entry -> entry.id().equals(value)), "%s is no option of %s", value, input.key());
 		return (String) value;
+	}
+
+	private static ByteBinaryTag booleanTag(boolean value)
+	{
+		return value ? ByteBinaryTag.ONE : ByteBinaryTag.ZERO;
 	}
 
 	private static float first(NumberRangeDialogInput input)

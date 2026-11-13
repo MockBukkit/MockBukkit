@@ -154,17 +154,23 @@ class DialogClickTest
 	{
 		show(DialogBase.DialogAfterAction.NONE, ActionButton.builder(Component.text("Buy")).action(DialogAction.customClick(BUY, null)).build());
 		PlayerSimulation simulation = new PlayerSimulation(player);
+		Map<String, Object> unknown = Map.of("unknown", "x");
+		Map<String, Object> notABoolean = Map.of("gift", "yes");
+		Map<String, Object> outOfRange = Map.of("amount", 65);
+		Map<String, Object> notAnOption = Map.of("color", "green");
 
-		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, Map.of("unknown", "x")));
-		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, Map.of("gift", "yes")));
-		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, Map.of("amount", 65)));
-		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, Map.of("color", "green")));
+		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, unknown));
+		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, notABoolean));
+		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, outOfRange));
+		assertThrows(IllegalArgumentException.class, () -> simulation.simulateDialogClick(0, notAnOption));
 	}
 
 	@Test
 	void noDialog_Throws()
 	{
-		assertThrows(IllegalStateException.class, () -> new PlayerSimulation(player).simulateDialogClick(0));
+		PlayerSimulation simulation = new PlayerSimulation(player);
+
+		assertThrows(IllegalStateException.class, () -> simulation.simulateDialogClick(0));
 	}
 
 }
