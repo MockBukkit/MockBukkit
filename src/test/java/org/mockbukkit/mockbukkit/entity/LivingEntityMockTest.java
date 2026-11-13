@@ -86,6 +86,23 @@ class LivingEntityMockTest
 	}
 
 	@Test
+	void testRemoveWhenFarAwayDefault()
+	{
+		assertTrue(livingEntity.getRemoveWhenFarAway());
+		assertFalse(server.addPlayer().getRemoveWhenFarAway());
+	}
+
+	@Test
+	void testSetRemoveWhenFarAway()
+	{
+		livingEntity.setRemoveWhenFarAway(false);
+		assertFalse(livingEntity.getRemoveWhenFarAway());
+
+		livingEntity.setRemoveWhenFarAway(true);
+		assertTrue(livingEntity.getRemoveWhenFarAway());
+	}
+
+	@Test
 	void testGetKillerDefault()
 	{
 		assertNull(livingEntity.getKiller());
