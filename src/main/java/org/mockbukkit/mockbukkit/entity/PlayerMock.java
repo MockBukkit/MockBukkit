@@ -121,6 +121,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.PlayerListMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.boss.BossBarImplementationMock;
+import org.mockbukkit.mockbukkit.connection.PlayerGameConnectionMock;
 import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -232,6 +233,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 	private Locale locale;
 	private @NotNull PlayerProfile playerProfile;
+	private final PlayerGameConnectionMock connection = new PlayerGameConnectionMock(this);
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -3316,7 +3318,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@ApiStatus.Experimental
 	public PlayerGameConnection getConnection()
 	{
-		throw new UnimplementedOperationException();
+		return this.connection;
 	}
 
 	@Override
