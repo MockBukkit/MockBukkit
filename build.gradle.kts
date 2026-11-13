@@ -35,6 +35,8 @@ dependencies {
 
 	// General utilities for the project
 	implementation("net.bytebuddy:byte-buddy:1.18.11")
+	// The tags of dialog clicks (additions, responses), as Adventure reads them: the version of Paper's Adventure
+	implementation("net.kyori:adventure-nbt:5.2.0")
 
 	compileOnly("org.projectlombok:lombok:1.18.48")
 	annotationProcessor("org.projectlombok:lombok:1.18.48")
