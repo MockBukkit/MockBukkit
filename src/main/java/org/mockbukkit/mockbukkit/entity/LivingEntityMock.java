@@ -162,6 +162,9 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		attributes.put(Attribute.MAX_HEALTH, new AttributeInstanceMock(Attribute.MAX_HEALTH, maxHealth));
 		double movementSpeed = AttributesMock.getDefaultValue(Attribute.MOVEMENT_SPEED);
 		attributes.put(Attribute.MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.MOVEMENT_SPEED, movementSpeed));
+		// Like every living entity of the game, it has an armor and an armor toughness
+		registerAttribute(Attribute.ARMOR);
+		registerAttribute(Attribute.ARMOR_TOUGHNESS);
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}

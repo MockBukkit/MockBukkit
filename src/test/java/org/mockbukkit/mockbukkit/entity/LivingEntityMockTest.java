@@ -637,7 +637,16 @@ class LivingEntityMockTest
 	@Test
 	void getAttribute_WhenAttributeIsNotPresent()
 	{
-		assertNull(this.livingEntity.getAttribute(Attribute.ARMOR));
+		assertNull(this.livingEntity.getAttribute(Attribute.FLYING_SPEED));
+	}
+
+	@Test
+	void getAttribute_ArmorAndToughness_PresentByDefault()
+	{
+		assertNotNull(this.livingEntity.getAttribute(Attribute.ARMOR));
+		assertEquals(0, this.livingEntity.getAttribute(Attribute.ARMOR).getValue());
+		assertNotNull(this.livingEntity.getAttribute(Attribute.ARMOR_TOUGHNESS));
+		assertEquals(0, this.livingEntity.getAttribute(Attribute.ARMOR_TOUGHNESS).getValue());
 	}
 
 	@Test
