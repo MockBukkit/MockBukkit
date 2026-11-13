@@ -21,6 +21,25 @@ class DisplayMockTest
 	private DisplayMock display;
 
 	@Test
+	void getBillboard_Default()
+	{
+		assertEquals(Display.Billboard.FIXED, display.getBillboard());
+	}
+
+	@Test
+	void setBillboard()
+	{
+		display.setBillboard(Display.Billboard.CENTER);
+		assertEquals(Display.Billboard.CENTER, display.getBillboard());
+	}
+
+	@Test
+	void setBillboard_null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> display.setBillboard(null));
+	}
+
+	@Test
 	void setTransformation_null()
 	{
 		assertThrows(IllegalArgumentException.class, () -> display.setTransformation(null));
