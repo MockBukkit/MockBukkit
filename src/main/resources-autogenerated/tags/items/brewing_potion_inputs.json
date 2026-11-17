@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:glass_bottle",
+		"minecraft:lingering_potion",
+		"minecraft:potion",
+		"minecraft:splash_potion"
+	]
+}

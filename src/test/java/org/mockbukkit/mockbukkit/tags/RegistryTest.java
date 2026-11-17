@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.tags;
 
 import org.bukkit.Tag;
+import org.bukkit.tag.DamageTypeTags;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,6 +42,7 @@ class RegistryTest
 	static Stream<Tag<?>> getEmptyTags()
 	{
 		return Stream.of(
+				DamageTypeTags.BYPASSES_COOLDOWN,
 				Tag.INCORRECT_FOR_NETHERITE_TOOL,
 				Tag.INCORRECT_FOR_DIAMOND_TOOL,
 				Tag.SUPPORTS_FROGSPAWN,

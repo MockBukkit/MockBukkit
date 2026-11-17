@@ -57,6 +57,7 @@ import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
+import org.bukkit.block.data.type.LightningRod;
 import org.bukkit.block.data.type.MangrovePropagule;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Observer;
@@ -148,6 +149,7 @@ public final class BlockDataMockFactory
 			.put(Lectern.class, LecternDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Light.class, LightDataMock::new)
+			.put(LightningRod.class, LightningRodDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
 			.put(MangrovePropagule.class, MangrovePropaguleDataMock::new)
 			.put(MultipleFacing.class, MultipleFacingDataMock::new)

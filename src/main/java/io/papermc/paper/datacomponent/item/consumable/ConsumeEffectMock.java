@@ -15,7 +15,7 @@ import java.util.List;
 public class ConsumeEffectMock implements ConsumeEffect
 {
 
-	record TeleportRandomlyMock(float diameter) implements TeleportRandomly
+	record TeleportRandomlyMock(float diameter, boolean directionalParticles) implements TeleportRandomly
 	{}
 
 	record RemoveStatusEffectsMock(RegistryKeySet<PotionEffectType> removeEffects) implements RemoveStatusEffects

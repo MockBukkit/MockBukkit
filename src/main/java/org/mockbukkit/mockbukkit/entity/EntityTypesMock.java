@@ -27,6 +27,7 @@ import org.bukkit.entity.CopperGolem;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creaking;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Cushion;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
@@ -157,6 +158,8 @@ import org.bukkit.entity.boat.OakBoat;
 import org.bukkit.entity.boat.OakChestBoat;
 import org.bukkit.entity.boat.PaleOakBoat;
 import org.bukkit.entity.boat.PaleOakChestBoat;
+import org.bukkit.entity.boat.PoplarBoat;
+import org.bukkit.entity.boat.PoplarChestBoat;
 import org.bukkit.entity.boat.SpruceBoat;
 import org.bukkit.entity.boat.SpruceChestBoat;
 import org.bukkit.entity.minecart.CommandMinecart;
@@ -188,6 +191,8 @@ import org.mockbukkit.mockbukkit.entity.boat.OakBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.OakChestBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.PaleOakBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.PaleOakChestBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.PoplarBoatMock;
+import org.mockbukkit.mockbukkit.entity.boat.PoplarChestBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.SpruceBoatMock;
 import org.mockbukkit.mockbukkit.entity.boat.SpruceChestBoatMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -253,6 +258,7 @@ public final class EntityTypesMock
 				.register(Cow.class, CowMock.class, CowMock::new)
 				.register(Creaking.class, CreakingMock.class, CreakingMock::new)
 				.register(Creeper.class, CreeperMock.class, CreeperMock::new)
+				.register(Cushion.class, CushionMock.class, CushionMock::new)
 				.register(DarkOakBoat.class, DarkOakBoatMock.class, DarkOakBoatMock::new)
 				.register(DarkOakChestBoat.class, DarkOakChestBoatMock.class, DarkOakChestBoatMock::new)
 				.register(Dolphin.class, DolphinMock.class, DolphinMock::new)
@@ -327,6 +333,8 @@ public final class EntityTypesMock
 				.register(PigZombie.class, PigZombieMock.class, PigZombieMock::new)
 				.register(Pillager.class, PillagerMock.class, PillagerMock::new)
 				.register(PolarBear.class, PolarBearMock.class, PolarBearMock::new)
+				.register(PoplarBoat.class, PoplarBoatMock.class, PoplarBoatMock::new)
+				.register(PoplarChestBoat.class, PoplarChestBoatMock.class, PoplarChestBoatMock::new)
 				.register(PoweredMinecart.class, PoweredMinecartMock.class, PoweredMinecartMock::new)
 				.register(PufferFish.class, PufferFishMock.class, PufferFishMock::new)
 				.register(Rabbit.class, RabbitMock.class, RabbitMock::new)

@@ -9,6 +9,9 @@ import io.papermc.paper.entity.RemovalReason;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.math.Angle;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
+import net.kyori.adventure.identity.Identity;
+import net.kyori.adventure.pointer.Pointers;
+import net.kyori.adventure.pointer.PointersSupplier;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
@@ -22,6 +25,7 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
@@ -94,6 +98,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 {
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
+	static final PointersSupplier<EntityMock> POINTERS_SUPPLIER = PointersSupplier.<EntityMock>builder()
+			.resolving(Identity.DISPLAY_NAME, EntityMock::name)
+			.resolving(Identity.UUID, EntityMock::getUniqueId)
+			.build();
 
 	private final Set<String> tags = Sets.newHashSet();
 	protected final @NotNull ServerMock server;
@@ -130,6 +138,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable EntityDamageEvent lastDamageEvent;
 	private boolean silent;
 	private boolean gravity = true;
+	private @Nullable ItemStack weapon = null;
 
 	private Pose pose = Pose.STANDING;
 	private boolean isFixedPose = false;
@@ -269,6 +278,24 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public TeleportCause getTeleportCause()
 	{
 		return teleportCause;
+	}
+
+	@Override
+	public @Nullable ItemStack getWeapon()
+	{
+		return (this.weapon != null ? this.weapon.clone() : null);
+	}
+
+	/**
+	 * Sets the item being used as a weapon by this entity.
+	 *
+	 * @param weapon The weapon item
+	 *
+	 * @see Entity#getWeapon()
+	 */
+	public void setWeapon(@Nullable ItemStack weapon)
+	{
+		this.weapon = (weapon != null ? weapon.clone() : null);
 	}
 
 	@Override
@@ -1624,6 +1651,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public @NotNull Pointers pointers()
+	{
+		return POINTERS_SUPPLIER.view(this);
+	}
+
 	public void tick()
 	{
 		if (!isDead())
@@ -1641,6 +1674,41 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public @Nullable RemovalReason getRemovalReason()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getAirDrag()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getDefaultGravity()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isMarkedInvulnerable()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInvulnerableTo(@NotNull DamageSource source)
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();

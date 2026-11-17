@@ -6,6 +6,11 @@
 			"valued": false
 		},
 		{
+			"key": "minecraft:attack_animation",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:attack_range",
 			"persistent": true,
 			"valued": true
@@ -46,6 +51,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:block_transformer",
+			"persistent": true,
+			"valued": false
+		},
+		{
 			"key": "minecraft:blocks_attacks",
 			"persistent": true,
 			"valued": true
@@ -54,6 +64,11 @@
 			"key": "minecraft:break_sound",
 			"persistent": true,
 			"valued": true
+		},
+		{
+			"key": "minecraft:brewing_fuel",
+			"persistent": true,
+			"valued": false
 		},
 		{
 			"key": "minecraft:bucket_entity_data",
@@ -106,6 +121,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:compostable",
+			"persistent": true,
+			"valued": false
+		},
+		{
 			"key": "minecraft:consumable",
 			"persistent": true,
 			"valued": true
@@ -121,6 +141,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:cooking_fuel",
+			"persistent": true,
+			"valued": false
+		},
+		{
 			"key": "minecraft:cow/sound_variant",
 			"persistent": true,
 			"valued": true
@@ -134,6 +159,11 @@
 			"key": "minecraft:creative_slot_lock",
 			"persistent": false,
 			"valued": false
+		},
+		{
+			"key": "minecraft:cushion/color",
+			"persistent": true,
+			"valued": true
 		},
 		{
 			"key": "minecraft:custom_data",
@@ -256,6 +286,11 @@
 			"valued": false
 		},
 		{
+			"key": "minecraft:interact_animation",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:item_model",
 			"persistent": true,
 			"valued": true
@@ -296,11 +331,6 @@
 			"valued": true
 		},
 		{
-			"key": "minecraft:map_color",
-			"persistent": true,
-			"valued": true
-		},
-		{
 			"key": "minecraft:map_decorations",
 			"persistent": true,
 			"valued": true
@@ -327,6 +357,11 @@
 		},
 		{
 			"key": "minecraft:minimum_attack_charge",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:mob_visibility",
 			"persistent": true,
 			"valued": true
 		},
@@ -396,6 +431,11 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:provides_pottery_pattern",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:provides_trim_material",
 			"persistent": true,
 			"valued": true
@@ -441,6 +481,16 @@
 			"valued": true
 		},
 		{
+			"key": "minecraft:sign_text_back",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:sign_text_front",
+			"persistent": true,
+			"valued": true
+		},
+		{
 			"key": "minecraft:stored_enchantments",
 			"persistent": true,
 			"valued": true
@@ -452,11 +502,6 @@
 		},
 		{
 			"key": "minecraft:suspicious_stew_effects",
-			"persistent": true,
-			"valued": true
-		},
-		{
-			"key": "minecraft:swing_animation",
 			"persistent": true,
 			"valued": true
 		},
@@ -519,6 +564,16 @@
 			"key": "minecraft:villager/variant",
 			"persistent": true,
 			"valued": true
+		},
+		{
+			"key": "minecraft:villager_food",
+			"persistent": true,
+			"valued": true
+		},
+		{
+			"key": "minecraft:waxed",
+			"persistent": true,
+			"valued": false
 		},
 		{
 			"key": "minecraft:weapon",

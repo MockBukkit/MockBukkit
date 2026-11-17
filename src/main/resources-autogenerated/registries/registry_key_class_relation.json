@@ -10,6 +10,7 @@
 	"minecraft:cow_variant": "org.bukkit.entity.Cow$Variant",
 	"minecraft:damage_type": "org.bukkit.damage.DamageType",
 	"minecraft:data_component_type": "io.papermc.paper.datacomponent.DataComponentType",
+	"minecraft:decorated_pot_pattern": "io.papermc.paper.block.pot.PotPatternType",
 	"minecraft:dialog": "io.papermc.paper.dialog.Dialog",
 	"minecraft:enchantment": "org.bukkit.enchantments.Enchantment",
 	"minecraft:entity_type": "org.bukkit.entity.EntityType",

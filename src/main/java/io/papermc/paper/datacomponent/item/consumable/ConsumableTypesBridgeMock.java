@@ -38,9 +38,9 @@ public class ConsumableTypesBridgeMock implements ConsumableTypesBridge
 	}
 
 	@Override
-	public ConsumeEffect.TeleportRandomly teleportRandomlyEffect(float diameter)
+	public ConsumeEffect.TeleportRandomly teleportRandomlyEffect(float diameter, boolean directionalParticles)
 	{
-		return new ConsumeEffectMock.TeleportRandomlyMock(diameter);
+		return new ConsumeEffectMock.TeleportRandomlyMock(diameter, directionalParticles);
 	}
 
 }

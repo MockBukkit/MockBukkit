@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 10
     steps:
       # agilepathway/pull-request-label-checker v1.6.65
-      - uses: docker://agilepathway/pull-request-label-checker@sha256:14f5f3dfda922496d07d53494e2d2b42885165f90677a1c03d600059b7706a61
+      - uses: docker://agilepathway/pull-request-label-checker@sha256:253c71fe97d6ae19fff21608f1e10493ec322e7c95d4fed4695b2b8d11f58fb2
         id: release-label
         with:
           one_of: release/major,release/minor,release/patch,release/none
