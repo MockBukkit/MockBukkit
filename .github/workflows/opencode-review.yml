@@ -13,9 +13,10 @@ name: OpenCode Paper Parity Review
 # reach a shell holding OPENROUTER_API_KEY.
 #
 # Runs from the default branch (issue_comment), so secrets are available even when
-# the pull request comes from a fork. That is also why it is gated to people who can
-# already push here: the job checks out and builds the pull request's code, which
-# means executing its Gradle scripts.
+# the pull request comes from a fork. The pull request's code is therefore never
+# executed: the Paper sources are built from the PR's *base* branch (trusted, and
+# pinned to the Paper version the PR targets), and the PR itself is checked out only
+# as files for the agent to read. It is still gated to people who can push here.
 
 on:
   issue_comment:
@@ -81,6 +82,21 @@ jobs:
           gh pr comment "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
             --body "🐙 No Java files under \`src/\` changed in this PR, so there is nothing to parity-check."
 
+      - name: Resolve base branch
+        id: base
+        if: steps.pr.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Looked up at run time rather than hardcoded, so moving or renaming the
+          # default branch needs no change here.
+          echo "ref=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" \
+            --json baseRefName -q .baseRefName)" >> "$GITHUB_OUTPUT"
+
+      # Untrusted: the PR's files, for the agent to read. Nothing here is executed.
+      # Checked out first, at the root: checking out into the workspace root later
+      # would clean away the base checkout below.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: steps.pr.outputs.count != '0'
         with:
@@ -89,6 +105,14 @@ jobs:
           # The opencode action runs its own authenticated `git fetch`. If checkout
           # leaves its credential in .git/config as an http.extraheader, both are
           # sent and GitHub rejects the request: `Duplicate header: "Authorization"`.
+          persist-credentials: false
+
+      # Trusted: the branch the PR merges into. This is the only Gradle build that runs.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: steps.pr.outputs.count != '0'
+        with:
+          ref: ${{ steps.base.outputs.ref }}
+          path: .paper-base
           persist-credentials: false
 
       - name: Set up JDK 25
@@ -113,10 +137,13 @@ jobs:
         # this property only when the CI env var is set), producing the mojang-mapped
         # *bytecode* jar and nothing else. We need the sources, so opt back in --
         # this is what takes the step from ~4s to ~1min.
+        working-directory: .paper-base
         run: ./gradlew :metaminer:paperweightUserdevSetup -Ppaperweight.experimental.genSources=true
 
       - name: Stage Paper sources and change list
         if: steps.pr.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # No pipefail here on purpose: `unzip -l | grep -q` exits early by design,
           # which SIGPIPEs unzip and would make every content check evaluate false.
@@ -125,9 +152,11 @@ jobs:
 
           # paperweight copies the applied sources into a project-local task cache.
           # Prefer that known path; fall back to identifying the artifact by its
-          # contents if the layout ever moves, since it isn't contractual.
+          # contents if the layout ever moves, since it isn't contractual. The search
+          # covers the base checkout only, never the PR's files, so a PR can't plant
+          # a decoy jar.
           JAR=""
-          KNOWN=metaminer/.gradle/caches/paperweight/taskCache/mappedServerJar.jar
+          KNOWN=.paper-base/metaminer/.gradle/caches/paperweight/taskCache/mappedServerJar.jar
           if [ -f "$KNOWN" ] && unzip -l "$KNOWN" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
             JAR="$KNOWN"
           fi
@@ -135,13 +164,13 @@ jobs:
           if [ -z "$JAR" ]; then
             echo "Known path missed; searching. Cache roots:"
             ls -1 "$GUH/caches" 2>/dev/null | head -20 || echo "  (no $GUH/caches)"
-            find "$GUH" . -name '*.jar' -size +5M 2>/dev/null | head -30 || true
+            find "$GUH" .paper-base -name '*.jar' -size +5M 2>/dev/null | head -30 || true
             while IFS= read -r candidate; do
               if unzip -l "$candidate" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
                 JAR="$candidate"
                 break
               fi
-            done < <(find "$GUH" . -name '*.jar' -size +5M 2>/dev/null | xargs -r ls -t 2>/dev/null)
+            done < <(find "$GUH" .paper-base -name '*.jar' -size +5M 2>/dev/null | xargs -r ls -t 2>/dev/null)
           fi
 
           if [ -z "$JAR" ]; then
@@ -158,6 +187,23 @@ jobs:
           # .gitignore to hide these -- older branches don't have the entries.
           printf '.paper-ref/\n.oc-changed-files.txt\n' >> .git/info/exclude
           echo "Staged $(find .paper-ref -name '*.java' | wc -l) Paper sources from $JAR"
+
+          # A PR that bumps Paper itself is reviewed against the base branch's
+          # version until it merges. Say so up front rather than let the review
+          # look authoritative. The PR's value is untrusted, so keep it to version
+          # characters before it goes into a comment.
+          paper_version() { sed -n 's/^paper\.api\.full-version=//p' "$1" | tr -cd 'A-Za-z0-9._+-'; }
+          REF_VERSION="$(paper_version .paper-base/gradle.properties)"
+          PR_VERSION="$(paper_version gradle.properties)"
+          if [ "$REF_VERSION" != "$PR_VERSION" ]; then
+            echo "::warning::Reference is Paper $REF_VERSION, this PR targets $PR_VERSION"
+            gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
+              "⚠️ This PR changes the Paper version to \`${PR_VERSION:-unknown}\`, but the parity review compares against \`$REF_VERSION\` from the base branch. Findings about behaviour that changed between those versions may be wrong."
+          fi
+
+          # Don't leave the base checkout for the agent to wander into, or for the
+          # action's `git add .` to pick up.
+          rm -rf .paper-base
 
       - name: Parity review
         if: steps.pr.outputs.count != '0'
