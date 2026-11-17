@@ -6,7 +6,7 @@ name: OpenCode Paper Parity Review
 # (via paperweight-userdev) and asks an agent whether the changed mocks actually
 # behave like the real implementation.
 #
-# The agent is read-only. The real guarantee is the token: the action runs on
+# The agent is read-only. The real guarantee is the token: opencode runs on
 # GITHUB_TOKEN with `contents: read` (no OpenCode App token, no `id-token`), so any
 # push it attempts -- it auto-commits a dirty tree -- fails at GitHub. On top of
 # that, `bash` and `edit` are denied, so PR text that injects instructions can't
@@ -34,10 +34,6 @@ permissions:
   # No `id-token: write` on purpose: it would let any step (including the PR's
   # Gradle scripts) exchange an OIDC token for the OpenCode App's write token.
 
-concurrency:
-  group: oc-review-${{ github.event.issue.number || github.event.pull_request.number }}
-  cancel-in-progress: true
-
 jobs:
   parity-review:
     if: >-
@@ -49,6 +45,12 @@ jobs:
       (github.event_name == 'pull_request' && github.event.label.name == 'parity')
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 30
+    # Job-level on purpose. At workflow level, every comment on the PR would start a
+    # run in this group before the `if` above is evaluated, cancelling a review in
+    # progress. Here only a real `/parity` (or label) run replaces another.
+    concurrency:
+      group: oc-review-${{ github.event.issue.number || github.event.pull_request.number }}
+      cancel-in-progress: true
     env:
       PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
 
@@ -205,27 +207,47 @@ jobs:
           # action's `git add .` to pick up.
           rm -rf .paper-base
 
+      # Installed directly rather than via `anomalyco/opencode/github`: that action
+      # always installs whatever GitHub marks as the latest release, so pinning the
+      # action's SHA doesn't pin the binary that runs. The action only runs
+      # `opencode github run` with a few env vars, which the next step does itself.
+      #
+      # Stays on OpenCode 1.x: 2.x has no `github run` command and no GitHub Action.
+      - name: Install opencode
+        if: steps.pr.outputs.count != '0'
+        env:
+          OPENCODE_VERSION: 1.19.6
+          # From the release's asset digest. Baseline build: no AVX2 requirement.
+          OPENCODE_SHA256: 8443113b3f3dfebf8b0fa91c4377e5519a62b9231732d9344a5df001e4a852b3
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/opencode"
+          curl -fsSL -o "$RUNNER_TEMP/opencode.tar.gz" \
+            "https://github.com/anomalyco/opencode/releases/download/v${OPENCODE_VERSION}/opencode-linux-x64-baseline.tar.gz"
+          echo "$OPENCODE_SHA256  $RUNNER_TEMP/opencode.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/opencode.tar.gz" -C "$RUNNER_TEMP/opencode"
+          echo "$RUNNER_TEMP/opencode" >> "$GITHUB_PATH"
+
       - name: Parity review
         if: steps.pr.outputs.count != '0'
-        uses: anomalyco/opencode/github@31406ccc51b4bd2a4e1e086b2bcaa5f7f804f26d # v1.18.18
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Use the job's read-only GITHUB_TOKEN, not the OpenCode App's OIDC
+          # exchange (contents: write). Any push the tool attempts fails at GitHub.
+          USE_GITHUB_TOKEN: "true"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Also applies if `agent: paper-parity` fails to resolve and opencode falls
-          # back to `build`, which allows bash. The agent file's own rules win over
-          # this, so keep the two in sync.
-          OPENCODE_PERMISSION: '{"bash":"deny","edit":"deny","webfetch":"allow","question":"deny"}'
-        with:
-          model: openrouter/deepseek/deepseek-v4.1-flash-1017
-          # Skip the OpenCode App's OIDC exchange (contents: write) and use the
-          # job's read-only GITHUB_TOKEN instead.
-          use_github_token: true
-          agent: paper-parity
-          mentions: "/parity"
-          # Defaults to true on public repos. The session transcript would include
-          # the Paper sources the agent reads, so sharing it would publish
-          # Mojang-derived code. Keep it off.
-          share: "false"
+          MODEL: openrouter/deepseek/deepseek-v4.1-flash-1017
+          MENTIONS: "/parity"
           # Explicit task, so the label-triggered path works too -- on a
-          # pull_request event there is no comment for the action to read.
-          prompt: "Perform the Paper parity review described in your agent instructions."
+          # pull_request event there is no comment to read.
+          PROMPT: "Perform the Paper parity review described in your agent instructions."
+          # `github run` ignores any agent input and uses `default_agent`, falling
+          # back to `build`. Set it here, not in opencode.json, so local opencode
+          # users of this repo keep their own default. Fails loudly if not found.
+          OPENCODE_CONFIG_CONTENT: '{"default_agent":"paper-parity"}'
+          # Load-bearing, not a backup: the agent can start subagents via `task`, and
+          # those (`general`, `explore`) don't read the agent file -- without this,
+          # `general` gets bash. The agent file's own rules win over this for the
+          # primary agent, so keep the two in sync.
+          OPENCODE_PERMISSION: '{"bash":"deny","edit":"deny","webfetch":"allow","question":"deny"}'
+        run: opencode github run
