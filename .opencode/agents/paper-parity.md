@@ -6,7 +6,8 @@ mode: primary
 permission:
   edit: deny
   write: deny
-  webfetch: deny
+  bash: deny
+  webfetch: allow
 ---
 
 You are reviewing a pull request to MockBukkit, a mocking framework that reimplements the

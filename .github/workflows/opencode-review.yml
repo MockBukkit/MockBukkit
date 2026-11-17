@@ -6,8 +6,11 @@ name: OpenCode Paper Parity Review
 # (via paperweight-userdev) and asks an agent whether the changed mocks actually
 # behave like the real implementation.
 #
-# The agent is read-only: `.opencode/agents/paper-parity.md` denies `edit`, and
-# nothing in this job pushes. It reports findings as review comments only.
+# The agent is read-only. The real guarantee is the token: the action runs on
+# GITHUB_TOKEN with `contents: read` (no OpenCode App token, no `id-token`), so any
+# push it attempts -- it auto-commits a dirty tree -- fails at GitHub. On top of
+# that, `bash` and `edit` are denied, so PR text that injects instructions can't
+# reach a shell holding OPENROUTER_API_KEY.
 #
 # Runs from the default branch (issue_comment), so secrets are available even when
 # the pull request comes from a fork. That is also why it is gated to people who can
@@ -27,8 +30,8 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  # Required for the OpenCode App's OIDC token exchange.
-  id-token: write
+  # No `id-token: write` on purpose: it would let any step (including the PR's
+  # Gradle scripts) exchange an OIDC token for the OpenCode App's write token.
 
 concurrency:
   group: oc-review-${{ github.event.issue.number || github.event.pull_request.number }}
@@ -151,6 +154,9 @@ jobs:
           mkdir -p .paper-ref
           unzip -q "$JAR" '*.java' -d .paper-ref
           cp /tmp/changed.txt .oc-changed-files.txt
+          # The action `git add .`s anything untracked. Don't rely on the PR's own
+          # .gitignore to hide these -- older branches don't have the entries.
+          printf '.paper-ref/\n.oc-changed-files.txt\n' >> .git/info/exclude
           echo "Staged $(find .paper-ref -name '*.java' | wc -l) Paper sources from $JAR"
 
       - name: Parity review
@@ -158,8 +164,16 @@ jobs:
         uses: anomalyco/opencode/github@31406ccc51b4bd2a4e1e086b2bcaa5f7f804f26d # v1.18.18
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Also applies if `agent: paper-parity` fails to resolve and opencode falls
+          # back to `build`, which allows bash. The agent file's own rules win over
+          # this, so keep the two in sync.
+          OPENCODE_PERMISSION: '{"bash":"deny","edit":"deny","webfetch":"allow","question":"deny"}'
         with:
-          model: openrouter/deepseek/deepseek-v4-flash-0731
+          model: openrouter/deepseek/deepseek-v4.1-flash-1017
+          # Skip the OpenCode App's OIDC exchange (contents: write) and use the
+          # job's read-only GITHUB_TOKEN instead.
+          use_github_token: true
           agent: paper-parity
           mentions: "/parity"
           # Defaults to true on public repos. The session transcript would include
