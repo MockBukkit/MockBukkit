@@ -83,48 +83,49 @@ Never manufacture a finding to look useful.
 
 ### When you find divergences
 
-Open with a verdict line and an at-a-glance table, then one section per finding:
+Open with a verdict line and an at-a-glance table, then one section per finding. The
+example below shows the **format only**: `WidgetMock`, `CraftWidget` and every line number
+in it are placeholders, not real code. Never copy its findings; every claim you make must
+come from the files you actually read.
 
 ````markdown
 ## 🔍 Paper parity review
 
 **2 divergences** — 1 🔴 high, 1 🟠 medium
-**Reviewed:** `LivingEntityMock.java` · **Against:** Paper sources in `.paper-ref/`
+**Reviewed:** `WidgetMock.java` · **Against:** Paper sources in `.paper-ref/`
 
 | | Location | Divergence |
 |---|---|---|
-| 🔴 | `LivingEntityMock.java:1144` | Clamps negative input instead of throwing |
-| 🟠 | `LivingEntityMock.java:1156` | Same, on the stinger count setter |
+| 🔴 | `WidgetMock.java:42` | Returns the live list; the real server returns a copy |
+| 🟠 | `WidgetMock.java:57` | Never fires `WidgetChangeEvent` |
 
 ---
 
-### 🔴 `setBeeStingerCooldown` — clamps where the real server throws
+### 🔴 `getParts` — returns the live list where the real server returns a copy
 
-`src/main/java/org/mockbukkit/mockbukkit/entity/LivingEntityMock.java:1144`
+`src/main/java/org/mockbukkit/mockbukkit/widget/WidgetMock.java:42`
 
 **The mock**
 
 ```java
-public void setBeeStingerCooldown(int ticks)
+public List<Part> getParts()
 {
-    this.beeStingerCooldown = Math.max(0, ticks);
+    return this.parts;
 }
 ```
 
-**The real server** — `CraftLivingEntity.java:386` guards the setter with a precondition
-requiring a non-negative value and throws `IllegalArgumentException` when it fails. The
-getter simply reads the backing field, so only the negative-input path diverges.
+**The real server** — `CraftWidget.java:118` builds a new list from the underlying state on
+every call, so callers get a snapshot that is safe to modify.
 
-**Impact** — a plugin passing a negative value gets a hard `IllegalArgumentException` in
-production but silently succeeds against this mock. A test suite can go green while every
-affected call fails on a real server.
+**Impact** — a plugin that removes entries from the returned list changes the mock's state,
+while on a real server the same call has no effect. Tests pass on behaviour production
+doesn't have.
 
 **Suggested fix**
 
 ```diff
--		this.beeStingerCooldown = Math.max(0, ticks);
-+		Preconditions.checkArgument(ticks >= 0, "Ticks must be >= 0");
-+		this.beeStingerCooldown = ticks;
+-		return this.parts;
++		return new ArrayList<>(this.parts);
 ```
 ````
 
