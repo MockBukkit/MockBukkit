@@ -3,10 +3,12 @@ package org.mockbukkit.mockbukkit.dialog;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import java.util.List;
+import io.papermc.paper.registry.TypedKey;
 import io.papermc.paper.registry.data.dialog.ActionButton;
 import io.papermc.paper.registry.data.dialog.DialogBase;
 import io.papermc.paper.registry.data.dialog.type.DialogType;
+import io.papermc.paper.registry.set.RegistrySet;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -14,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -72,6 +76,29 @@ class DialogMockTest
 				.type(DialogType.confirmation(yes, no)));
 
 		assertEquals(List.of(yes, no), ((DialogMock) dialog).getButtons());
+	}
+
+	@Test
+	void getButtons_OtherTypes()
+	{
+		ActionButton ok = ActionButton.builder(Component.text("Ok")).build();
+		ActionButton back = ActionButton.builder(Component.text("Back")).build();
+		RegistrySet<Dialog> dialogs = RegistrySet.keySet(RegistryKey.DIALOG, TypedKey.create(RegistryKey.DIALOG, Key.key("server_links")));
+		DialogType notice = DialogType.notice(ok);
+
+		DialogMock noticeDialog = create(notice);
+
+		assertEquals(notice, noticeDialog.getType());
+		assertEquals(List.of(ok), noticeDialog.getButtons());
+		assertEquals(List.of(back), create(DialogType.dialogList(dialogs).exitAction(back).build()).getButtons());
+		assertTrue(create(DialogType.dialogList(dialogs).build()).getButtons().isEmpty());
+		assertEquals(List.of(back), create(DialogType.serverLinks(back, 2, 150)).getButtons());
+		assertTrue(create(DialogType.serverLinks(null, 2, 150)).getButtons().isEmpty());
+	}
+
+	private static DialogMock create(DialogType type)
+	{
+		return (DialogMock) Dialog.create(factory -> factory.empty().base(DialogBase.builder(Component.text("Menu")).build()).type(type));
 	}
 
 	@Test

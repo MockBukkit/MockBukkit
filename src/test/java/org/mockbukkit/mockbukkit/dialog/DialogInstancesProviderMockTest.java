@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.dialog;
 
+import io.papermc.paper.dialog.Dialog;
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
 import io.papermc.paper.registry.data.dialog.ActionButton;
 import io.papermc.paper.registry.data.dialog.DialogBase;
 import io.papermc.paper.registry.data.dialog.action.DialogAction;
@@ -12,9 +15,12 @@ import io.papermc.paper.registry.data.dialog.input.NumberRangeDialogInput;
 import io.papermc.paper.registry.data.dialog.input.SingleOptionDialogInput;
 import io.papermc.paper.registry.data.dialog.input.TextDialogInput;
 import io.papermc.paper.registry.data.dialog.type.ConfirmationType;
+import io.papermc.paper.registry.data.dialog.type.DialogListType;
 import io.papermc.paper.registry.data.dialog.type.DialogType;
 import io.papermc.paper.registry.data.dialog.type.MultiActionType;
 import io.papermc.paper.registry.data.dialog.type.NoticeType;
+import io.papermc.paper.registry.data.dialog.type.ServerLinksType;
+import io.papermc.paper.registry.set.RegistrySet;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.nbt.api.BinaryTagHolder;
 import net.kyori.adventure.text.Component;
@@ -139,6 +145,115 @@ class DialogInstancesProviderMockTest
 		assertNull(multi.exitAction());
 		assertEquals(Component.translatable("gui.ok"), notice.action().label());
 		assertThrows(IllegalArgumentException.class, () -> DialogType.multiAction(List.of()));
+	}
+
+	@Test
+	void dialogBase_AllSet()
+	{
+		PlainMessageDialogBody message = DialogBody.plainMessage(Component.text("Welcome"), 100);
+		DialogBase base = DialogBase.builder(Component.text("Shop")).externalTitle(Component.text("Open the shop"))
+				.canCloseWithEscape(false).body(List.of(message)).build();
+
+		assertEquals(Component.text("Open the shop"), base.externalTitle());
+		assertFalse(base.canCloseWithEscape());
+		assertEquals(List.of(message), base.body());
+		assertEquals(100, message.width());
+	}
+
+	@Test
+	void actionButton_AllSet()
+	{
+		ActionButton button = ActionButton.builder(Component.text("Buy")).tooltip(Component.text("Buy it")).width(80).build();
+
+		assertEquals(Component.text("Buy it"), button.tooltip());
+		assertEquals(80, button.width());
+	}
+
+	@Test
+	void itemBody_AllSet()
+	{
+		ItemDialogBody item = DialogBody.item(new ItemStack(Material.DIAMOND)).showDecorations(false).showTooltip(false).height(20).build();
+
+		assertFalse(item.showDecorations());
+		assertFalse(item.showTooltip());
+		assertEquals(20, item.height());
+		ItemDialogBody.Builder builder = DialogBody.item(new ItemStack(Material.DIAMOND));
+		assertThrows(IllegalArgumentException.class, () -> builder.height(257));
+	}
+
+	@Test
+	void inputs_AllSet()
+	{
+		TextDialogInput.MultilineOptions lines = TextDialogInput.MultilineOptions.create(4, 100);
+		TextDialogInput text = DialogInput.text("name", Component.text("Name")).width(100).labelVisible(false).maxLength(64)
+				.multiline(lines).build();
+		BooleanDialogInput bool = DialogInput.bool("agree", Component.text("Agree")).initial(true).onTrue("yes").onFalse("no").build();
+		NumberRangeDialogInput number = DialogInput.numberRange("amount", Component.text("Amount"), 0, 10).width(100)
+				.labelFormat("%s: %s").initial(3f).step(null).build();
+		SingleOptionDialogInput option = DialogInput.singleOption("color", Component.text("Color"),
+				List.of(SingleOptionDialogInput.OptionEntry.create("red", null, false))).width(100).labelVisible(false).build();
+
+		assertEquals(100, text.width());
+		assertFalse(text.labelVisible());
+		assertEquals(64, text.maxLength());
+		assertEquals(lines, text.multiline());
+		assertEquals(4, lines.maxLines());
+		assertEquals(100, lines.height());
+		assertTrue(bool.initial());
+		assertEquals("yes", bool.onTrue());
+		assertEquals("no", bool.onFalse());
+		assertEquals(100, number.width());
+		assertEquals("%s: %s", number.labelFormat());
+		assertNull(number.step());
+		assertEquals(3, ((NumberRangeDialogInputMock) number).firstValue());
+		assertEquals(100, option.width());
+		assertFalse(option.labelVisible());
+		assertNull(TextDialogInput.MultilineOptions.create(null, null).maxLines());
+	}
+
+	@Test
+	void inputs_OutOfRange_Refused()
+	{
+		Component label = Component.text("Label");
+		TextDialogInput.Builder text = DialogInput.text("name", label);
+
+		assertThrows(IllegalArgumentException.class, () -> text.maxLength(0));
+		assertThrows(IllegalArgumentException.class, () -> text.width(0));
+		assertThrows(IllegalArgumentException.class, () -> TextDialogInput.MultilineOptions.create(0, null));
+		assertThrows(IllegalArgumentException.class, () -> TextDialogInput.MultilineOptions.create(null, 513));
+		NumberRangeDialogInput.Builder amount = DialogInput.numberRange("amount", label, 0, 10);
+		assertThrows(IllegalArgumentException.class, () -> amount.step(0f));
+		assertThrows(IllegalArgumentException.class, () -> amount.width(1025));
+	}
+
+	@Test
+	void types_Lists()
+	{
+		ActionButton back = ActionButton.builder(Component.text("Back")).build();
+		ActionButton ok = ActionButton.builder(Component.text("Ok")).build();
+		RegistrySet<Dialog> dialogs = RegistrySet.keySet(RegistryKey.DIALOG, TypedKey.create(RegistryKey.DIALOG, Key.key("server_links")));
+
+		DialogListType list = DialogType.dialogList(dialogs).exitAction(back).columns(3).buttonWidth(100).build();
+		DialogListType defaults = DialogType.dialogList(dialogs).build();
+		ServerLinksType links = DialogType.serverLinks(back, 1, 120);
+		NoticeType notice = DialogType.notice(ok);
+
+		assertEquals(dialogs, list.dialogs());
+		assertEquals(back, list.exitAction());
+		assertEquals(3, list.columns());
+		assertEquals(100, list.buttonWidth());
+		assertNull(defaults.exitAction());
+		assertEquals(2, defaults.columns());
+		assertEquals(150, defaults.buttonWidth());
+		assertEquals(back, links.exitAction());
+		assertEquals(1, links.columns());
+		assertEquals(120, links.buttonWidth());
+		assertEquals(ok, notice.action());
+		DialogListType.Builder builder = DialogType.dialogList(dialogs);
+		assertThrows(IllegalArgumentException.class, () -> builder.columns(0));
+		assertThrows(IllegalArgumentException.class, () -> builder.buttonWidth(0));
+		assertThrows(IllegalArgumentException.class, () -> DialogType.serverLinks(null, 0, 150));
+		assertThrows(IllegalArgumentException.class, () -> DialogType.serverLinks(null, 2, 1025));
 	}
 
 	@Test
