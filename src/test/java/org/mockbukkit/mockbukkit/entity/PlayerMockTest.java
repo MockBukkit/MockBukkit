@@ -2302,6 +2302,15 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlaySoundWithEntityAndSeed()
+	{
+		player.playSound(player, Sound.ENTITY_SLIME_SQUISH, SoundCategory.PLAYERS, 1, 1, 42);
+
+		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio -> player.getLocation().equals(audio.getLocation())
+				&& audio.getCategory() == SoundCategory.PLAYERS);
+	}
+
+	@Test
 	void getWalkSpeed()
 	{
 		assertEquals(0.2f, player.getWalkSpeed());
