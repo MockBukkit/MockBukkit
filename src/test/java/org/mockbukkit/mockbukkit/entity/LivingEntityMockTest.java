@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.entity;
 
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
@@ -37,6 +38,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -729,6 +731,17 @@ class LivingEntityMockTest
 		Entity target = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
 
 		assertThrows(IllegalArgumentException.class, () -> player.attack(target));
+	}
+
+	@Test
+	void testAttack_NotDamageable()
+	{
+		PlayerMock player = server.addPlayer();
+		Entity item = player.getWorld().dropItem(player.getLocation(), new ItemStack(Material.STONE));
+
+		player.attack(item);
+
+		server.getPluginManager().assertEventNotFired(EntityDamageByEntityEvent.class);
 	}
 
 	@Test
