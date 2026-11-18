@@ -4,29 +4,38 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.datacomponent.DataComponentTypes;
+
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockDataMeta;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionType;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ArmorMetaMock;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +44,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -874,6 +885,128 @@ class ItemStackMockTest
 
 			assertEquals(Set.of(DataComponentTypes.CUSTOM_NAME, DataComponentTypes.DAMAGE), actual);
 		}
+	}
+
+	@Nested
+	class EffectiveName
+	{
+
+		@Test
+		void plainItem_TranslatedInTheColourOfItsRarity()
+		{
+			ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+
+			assertEquals(Component.empty().append(Component.translatable("item.minecraft.diamond_sword"))
+					.color(ItemRarity.COMMON.color()), item.effectiveName());
+		}
+
+		@Test
+		void customName_InItalics()
+		{
+			ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+			item.editMeta(meta -> meta.customName(Component.text("Excalibur")));
+
+			assertEquals(Component.empty().append(Component.text("Excalibur")).color(ItemRarity.COMMON.color())
+					.decorate(TextDecoration.ITALIC), item.effectiveName());
+		}
+
+		@Test
+		void itemName_NotInItalics()
+		{
+			ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+			item.editMeta(meta -> meta.itemName(Component.text("Sword")));
+
+			assertEquals(Component.empty().append(Component.text("Sword")).color(ItemRarity.COMMON.color()), item.effectiveName());
+		}
+
+		@Test
+		void rarity_OfTheMeta()
+		{
+			ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+			item.editMeta(meta -> meta.setRarity(ItemRarity.EPIC));
+
+			assertEquals(ItemRarity.EPIC.color(), item.effectiveName().color());
+		}
+
+		@Test
+		void rarity_OfTheType()
+		{
+			ItemStack item = new ItemStack(Material.NETHER_STAR);
+
+			assertEquals(Objects.requireNonNull(Material.NETHER_STAR.asItemType()).getItemRarity().color(), item.effectiveName().color());
+		}
+
+		@ParameterizedTest
+		@CsvSource({ "COMMON, RARE", "UNCOMMON, RARE", "RARE, EPIC", "EPIC, EPIC" })
+		void rarity_RaisedByEnchantments(ItemRarity rarity, ItemRarity enchanted)
+		{
+			ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+			item.editMeta(meta ->
+			{
+				meta.setRarity(rarity);
+				meta.addEnchant(Enchantment.SHARPNESS, 1, true);
+			});
+
+			assertEquals(enchanted.color(), item.effectiveName().color());
+		}
+
+		@Test
+		void writtenBook_ItsTitle()
+		{
+			ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+			book.editMeta(BookMeta.class, meta -> meta.setTitle("Memoirs"));
+			ItemStack untitled = new ItemStack(Material.WRITTEN_BOOK);
+			untitled.editMeta(BookMeta.class, meta -> meta.setTitle(" "));
+
+			assertEquals(Component.text("Memoirs"), book.effectiveName().children().getFirst());
+			assertEquals(Component.translatable("item.minecraft.written_book"), untitled.effectiveName().children().getFirst());
+			assertEquals(Component.translatable("item.minecraft.written_book"),
+					new ItemStack(Material.WRITTEN_BOOK).effectiveName().children().getFirst());
+			ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
+			writable.editMeta(BookMeta.class, meta -> meta.setTitle("Memoirs"));
+			assertEquals(Component.translatable("item.minecraft.writable_book"), writable.effectiveName().children().getFirst());
+		}
+
+		@Test
+		void playerHead_NamedAfterItsOwner()
+		{
+			ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+			head.editMeta(SkullMeta.class, meta -> meta.setPlayerProfile(new PlayerProfileMock("Notch", UUID.randomUUID())));
+
+			assertEquals(Component.translatable("block.minecraft.player_head.named", Component.text("Notch")),
+					head.effectiveName().children().getFirst());
+			assertEquals(Component.translatable("block.minecraft.player_head"),
+					new ItemStack(Material.PLAYER_HEAD).effectiveName().children().getFirst());
+			ItemStack unnamed = new ItemStack(Material.PLAYER_HEAD);
+			unnamed.editMeta(SkullMeta.class, meta -> meta.setPlayerProfile(new PlayerProfileMock(null, UUID.randomUUID())));
+			assertEquals(Component.translatable("block.minecraft.player_head"), unnamed.effectiveName().children().getFirst());
+			ItemStack skull = new ItemStack(Material.SKELETON_SKULL);
+			skull.editMeta(SkullMeta.class, meta -> meta.setPlayerProfile(new PlayerProfileMock("Notch", UUID.randomUUID())));
+			assertEquals(Component.translatable("block.minecraft.skeleton_skull"), skull.effectiveName().children().getFirst());
+		}
+
+		@Test
+		void potion_NamedAfterItsType()
+		{
+			ItemStack swiftness = new ItemStack(Material.SPLASH_POTION);
+			swiftness.editMeta(PotionMeta.class, meta -> meta.setBasePotionType(PotionType.LONG_SWIFTNESS));
+			ItemStack custom = new ItemStack(Material.TIPPED_ARROW);
+			custom.editMeta(PotionMeta.class, meta -> meta.setCustomPotionName("mystery"));
+
+			assertEquals(Component.translatable("item.minecraft.splash_potion.effect.swiftness"), swiftness.effectiveName().children().getFirst());
+			assertEquals(Component.translatable("item.minecraft.tipped_arrow.effect.mystery"), custom.effectiveName().children().getFirst());
+			assertEquals(Component.translatable("item.minecraft.potion.effect.empty"),
+					new ItemStack(Material.POTION).effectiveName().children().getFirst());
+		}
+
+		@Test
+		void empty_NoName()
+		{
+			assertEquals(Component.empty(), ItemStack.empty().effectiveName());
+			assertEquals(Component.empty(), new ItemStack(Material.AIR).effectiveName());
+			assertEquals(Component.empty(), new ItemStackMock(Material.WATER).effectiveName());
+		}
+
 	}
 
 }
