@@ -87,6 +87,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.util.BungeeComponentUtils.removeAction;
 
 /**
  * Mock implementation of an {@link Entity}.
@@ -114,7 +115,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private @NotNull Component name = Component.text("entity");
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
@@ -504,7 +504,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull String getName()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(this.name);
+		return LegacyComponentSerializer.legacySection().serialize(this.name());
+	}
+
+	protected @NotNull Component getTypeName()
+	{
+		var type = getType();
+		Preconditions.checkArgument(type != null, "Type cannot be null");
+
+		if (type == EntityType.UNKNOWN)
+		{
+			return Component.text("entity");
+		}
+
+		return Component.text(type.getName());
 	}
 
 	/**
@@ -527,8 +540,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	public void setName(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		this.name = LegacyComponentSerializer.legacySection().deserialize(name);
+		this.setCustomName(name);
 	}
 
 	@Override
@@ -646,7 +658,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setCustomName(@Nullable String name)
 	{
-		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
+		if (name != null && name.length() > 256)
+		{
+			name = name.substring(0, 256);
+		}
+
+		if (name == null)
+		{
+			customName(null);
+		}
+		else
+		{
+			customName(LegacyComponentSerializer.legacySection().deserialize(name));
+		}
 	}
 
 	@Override
@@ -1382,7 +1406,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Component name()
 	{
-		return this.name;
+		Component customName = this.customName();
+		return customName != null ? removeAction(customName) : this.getTypeName();
 	}
 
 	// Paper start
