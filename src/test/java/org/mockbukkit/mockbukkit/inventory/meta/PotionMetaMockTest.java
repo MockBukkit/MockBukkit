@@ -136,6 +136,19 @@ class PotionMetaMockTest
 	}
 
 	@Test
+	void testClone_KeepsTheCustomName()
+	{
+		meta.setCustomPotionName("mystery");
+
+		PotionMeta clone = meta.clone();
+
+		assertEquals("mystery", clone.getCustomPotionName());
+		assertEquals(meta, clone);
+		assertEquals(meta.hashCode(), clone.hashCode());
+		assertNotEquals(new PotionMetaMock(), meta);
+	}
+
+	@Test
 	void testBasePotionType()
 	{
 		assertNull(meta.getBasePotionType());

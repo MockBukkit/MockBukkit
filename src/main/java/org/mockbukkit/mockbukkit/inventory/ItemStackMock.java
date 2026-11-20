@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,12 +14,17 @@ import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.ApiStatus;
@@ -270,8 +276,83 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @NotNull Component effectiveName()
 	{
-		// TODO:
-		throw new UnimplementedOperationException();
+		ItemMeta meta = this.itemMeta;
+		if (isEmpty() || meta == null)
+		{
+			// no item: air, or a block that is no item
+			return Component.empty();
+		}
+		// As Paper: the hover name in the colour of the rarity, in italics when it is a custom name
+		Component name = Component.empty().append(hoverName(meta)).color(rarity(meta).color());
+		return meta.hasCustomName() ? name.decorate(TextDecoration.ITALIC) : name;
+	}
+
+	private @NotNull Component hoverName(@NotNull ItemMeta meta)
+	{
+		if (meta.hasCustomName())
+		{
+			return Objects.requireNonNull(meta.customName());
+		}
+		if (meta instanceof BookMeta book && this.type.asMaterial() == Material.WRITTEN_BOOK && book.hasTitle()
+				&& !Objects.requireNonNull(book.getTitle()).isBlank())
+		{
+			return Component.text(book.getTitle());
+		}
+		return itemName(meta);
+	}
+
+	private @NotNull Component itemName(@NotNull ItemMeta meta)
+	{
+		String translationKey = this.type.translationKey();
+		if (meta instanceof SkullMeta skull && this.type.asMaterial() == Material.PLAYER_HEAD && skull.getPlayerProfile() != null
+				&& skull.getPlayerProfile().getName() != null)
+		{
+			return Component.translatable(translationKey + ".named", Component.text(skull.getPlayerProfile().getName()));
+		}
+		if (meta instanceof PotionMeta potion)
+		{
+			return Component.translatable(translationKey + ".effect." + potionName(potion));
+		}
+		return meta.hasItemName() ? meta.itemName() : Component.translatable(translationKey);
+	}
+
+	private static @NotNull String potionName(@NotNull PotionMeta potion)
+	{
+		if (potion.hasCustomPotionName())
+		{
+			return Objects.requireNonNull(potion.getCustomPotionName());
+		}
+		PotionType type = potion.getBasePotionType();
+		if (type == null)
+		{
+			return "empty";
+		}
+		// the long and strong variants share the name of their potion
+		return type.getKey().getKey().replaceFirst("^(long|strong)_", "");
+	}
+
+	private @NotNull ItemRarity rarity(@NotNull ItemMeta meta)
+	{
+		ItemRarity rarity;
+		if (meta.hasRarity())
+		{
+			rarity = meta.getRarity();
+		}
+		else
+		{
+			rarity = Objects.requireNonNullElse(this.type.getItemRarity(), ItemRarity.COMMON);
+		}
+		if (!meta.hasEnchants())
+		{
+			return rarity;
+		}
+		// an enchanted item is rarer, as on a server
+		return switch (rarity)
+		{
+		case COMMON, UNCOMMON -> ItemRarity.RARE;
+		case RARE -> ItemRarity.EPIC;
+		default -> rarity;
+		};
 	}
 
 	@Override
