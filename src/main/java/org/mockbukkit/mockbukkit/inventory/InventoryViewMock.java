@@ -299,8 +299,62 @@ public abstract class InventoryViewMock implements InventoryView
 	@Override
 	public InventoryType.SlotType getSlotType(int slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// As CraftBukkit: the top inventory's slots by its type, then the player's inventory below it
+		InventoryType viewType = getType();
+		int topSize = viewType == InventoryType.CRAFTING ? 5 : getTopInventory().getSize();
+		if (slot < 0)
+		{
+			return InventoryType.SlotType.OUTSIDE;
+		}
+		if (slot < topSize)
+		{
+			return topSlotType(viewType, slot);
+		}
+		return bottomSlotType(viewType, slot, topSize);
+	}
+
+	private static @NotNull InventoryType.SlotType topSlotType(@NotNull InventoryType viewType, int slot)
+	{
+		return switch (viewType)
+		{
+		case FURNACE, BLAST_FURNACE, SMOKER -> furnaceSlotType(slot);
+		case BREWING -> craftingUnless(slot, 3, InventoryType.SlotType.FUEL);
+		case ENCHANTING, BEACON -> InventoryType.SlotType.CRAFTING;
+		case WORKBENCH, CRAFTING -> craftingUnless(slot, 0, InventoryType.SlotType.RESULT);
+		case ANVIL, CARTOGRAPHY, GRINDSTONE, MERCHANT -> craftingUnless(slot, 2, InventoryType.SlotType.RESULT);
+		case STONECUTTER -> craftingUnless(slot, 1, InventoryType.SlotType.RESULT);
+		case LOOM, SMITHING -> craftingUnless(slot, 3, InventoryType.SlotType.RESULT);
+		default -> InventoryType.SlotType.CONTAINER;
+		};
+	}
+
+	private static @NotNull InventoryType.SlotType furnaceSlotType(int slot)
+	{
+		if (slot == 2)
+		{
+			return InventoryType.SlotType.RESULT;
+		}
+		return craftingUnless(slot, 1, InventoryType.SlotType.FUEL);
+	}
+
+	private static @NotNull InventoryType.SlotType craftingUnless(int slot, int special, @NotNull InventoryType.SlotType type)
+	{
+		return slot == special ? type : InventoryType.SlotType.CRAFTING;
+	}
+
+	private static @NotNull InventoryType.SlotType bottomSlotType(@NotNull InventoryType viewType, int slot, int topSize)
+	{
+		if (viewType == InventoryType.CRAFTING)
+		{
+			// the player's own view: the armour, then the storage, then the hotbar
+			if (slot < 9)
+			{
+				return InventoryType.SlotType.ARMOR;
+			}
+			return slot > 35 ? InventoryType.SlotType.QUICKBAR : InventoryType.SlotType.CONTAINER;
+		}
+		// below another inventory: 27 storage slots, then the hotbar
+		return slot >= topSize + 27 ? InventoryType.SlotType.QUICKBAR : InventoryType.SlotType.CONTAINER;
 	}
 
 	@Override
