@@ -146,6 +146,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 	private @Nullable Location lastClimbableLocation;
+	private boolean persistenceRequired;
 
 	/**
 	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -859,15 +860,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// As Paper: only a mob despawns, unless its persistence is required
+		return this instanceof Mob && !this.persistenceRequired;
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.persistenceRequired = !remove;
 	}
 
 	@Nullable
