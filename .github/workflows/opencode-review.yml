@@ -1,0 +1,253 @@
+name: OpenCode Paper Parity Review
+
+# Opt-in reviewer: comment `/parity` on a pull request.
+#
+# It builds the real Paper server sources for the exact version this repo targets
+# (via paperweight-userdev) and asks an agent whether the changed mocks actually
+# behave like the real implementation.
+#
+# The agent is read-only. The real guarantee is the token: opencode runs on
+# GITHUB_TOKEN with `contents: read` (no OpenCode App token, no `id-token`), so any
+# push it attempts -- it auto-commits a dirty tree -- fails at GitHub. On top of
+# that, `bash` and `edit` are denied, so PR text that injects instructions can't
+# reach a shell holding OPENROUTER_API_KEY.
+#
+# Runs from the default branch (issue_comment), so secrets are available even when
+# the pull request comes from a fork. The pull request's code is therefore never
+# executed: the Paper sources are built from the PR's *base* branch (trusted, and
+# pinned to the Paper version the PR targets), and the PR itself is checked out only
+# as files for the agent to read. It is still gated to people who can push here.
+
+on:
+  issue_comment:
+    types: [ created ]
+  # INTERIM -- remove once this is on the default branch.
+  # issue_comment always runs the default branch's copy of a workflow, so `/parity`
+  # cannot exercise this until it is merged. pull_request uses the copy from the PR
+  # itself, which lets us test it first. Apply the `parity` label to trigger.
+  pull_request:
+    types: [ labeled ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  # No `id-token: write` on purpose: it would let any step (including the PR's
+  # Gradle scripts) exchange an OIDC token for the OpenCode App's write token.
+
+jobs:
+  parity-review:
+    if: >-
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       startsWith(github.event.comment.body, '/parity') &&
+       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association))
+      ||
+      (github.event_name == 'pull_request' && github.event.label.name == 'parity')
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 30
+    # Job-level on purpose. At workflow level, every comment on the PR would start a
+    # run in this group before the `if` above is evaluated, cancelling a review in
+    # progress. Here only a real `/parity` (or label) run replaces another.
+    concurrency:
+      group: oc-review-${{ github.event.issue.number || github.event.pull_request.number }}
+      cancel-in-progress: true
+    env:
+      PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+
+    steps:
+      - name: Acknowledge the command
+        if: github.event_name == 'issue_comment'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method POST \
+            "repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }}/reactions" \
+            -f content=eyes --silent || true
+
+      - name: Collect changed files
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh pr diff "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
+            --name-only > /tmp/changed-all.txt
+          # Only Java under src/ is worth a parity check.
+          grep -E '^src/.*\.java$' /tmp/changed-all.txt > /tmp/changed.txt || true
+          echo "count=$(wc -l < /tmp/changed.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Report nothing to review
+        if: steps.pr.outputs.count == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment "${{ env.PR_NUMBER }}" --repo "${{ github.repository }}" \
+            --body "🐙 No Java files under \`src/\` changed in this PR, so there is nothing to parity-check."
+
+      - name: Resolve base branch
+        id: base
+        if: steps.pr.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Looked up at run time rather than hardcoded, so moving or renaming the
+          # default branch needs no change here.
+          echo "ref=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" \
+            --json baseRefName -q .baseRefName)" >> "$GITHUB_OUTPUT"
+
+      # Untrusted: the PR's files, for the agent to read. Nothing here is executed.
+      # Checked out first, at the root: checking out into the workspace root later
+      # would clean away the base checkout below.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: steps.pr.outputs.count != '0'
+        with:
+          # refs/pull/N/head resolves for fork PRs too, unlike the head SHA.
+          ref: refs/pull/${{ env.PR_NUMBER }}/head
+          # The opencode action runs its own authenticated `git fetch`. If checkout
+          # leaves its credential in .git/config as an http.extraheader, both are
+          # sent and GitHub rejects the request: `Duplicate header: "Authorization"`.
+          persist-credentials: false
+
+      # Trusted: the branch the PR merges into. This is the only Gradle build that runs.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: steps.pr.outputs.count != '0'
+        with:
+          ref: ${{ steps.base.outputs.ref }}
+          path: .paper-base
+          persist-credentials: false
+
+      - name: Set up JDK 25
+        if: steps.pr.outputs.count != '0'
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
+        with:
+          java-version: 25
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        if: steps.pr.outputs.count != '0'
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        with:
+          # The paperweight caches hold Mojang-derived artifacts (the mojang-mapped
+          # server jar and the applied sources). Those must not land in a shared,
+          # restorable Actions cache -- regenerating takes about a minute anyway.
+          cache-disabled: true
+
+      - name: Build Paper reference sources
+        if: steps.pr.outputs.count != '0'
+        # paperweight skips decompilation when it detects CI (getGenSources() reads
+        # this property only when the CI env var is set), producing the mojang-mapped
+        # *bytecode* jar and nothing else. We need the sources, so opt back in --
+        # this is what takes the step from ~4s to ~1min.
+        working-directory: .paper-base
+        run: ./gradlew :metaminer:paperweightUserdevSetup -Ppaperweight.experimental.genSources=true
+
+      - name: Stage Paper sources and change list
+        if: steps.pr.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # No pipefail here on purpose: `unzip -l | grep -q` exits early by design,
+          # which SIGPIPEs unzip and would make every content check evaluate false.
+          set -eu
+          GUH="${GRADLE_USER_HOME:-$HOME/.gradle}"
+
+          # paperweight copies the applied sources into a project-local task cache.
+          # Prefer that known path; fall back to identifying the artifact by its
+          # contents if the layout ever moves, since it isn't contractual. The search
+          # covers the base checkout only, never the PR's files, so a PR can't plant
+          # a decoy jar.
+          JAR=""
+          KNOWN=.paper-base/metaminer/.gradle/caches/paperweight/taskCache/mappedServerJar.jar
+          if [ -f "$KNOWN" ] && unzip -l "$KNOWN" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+            JAR="$KNOWN"
+          fi
+
+          if [ -z "$JAR" ]; then
+            echo "Known path missed; searching. Cache roots:"
+            ls -1 "$GUH/caches" 2>/dev/null | head -20 || echo "  (no $GUH/caches)"
+            find "$GUH" .paper-base -name '*.jar' -size +5M 2>/dev/null | head -30 || true
+            while IFS= read -r candidate; do
+              if unzip -l "$candidate" 2>/dev/null | grep -q 'org/bukkit/craftbukkit/.*\.java'; then
+                JAR="$candidate"
+                break
+              fi
+            done < <(find "$GUH" .paper-base -name '*.jar' -size +5M 2>/dev/null | xargs -r ls -t 2>/dev/null)
+          fi
+
+          if [ -z "$JAR" ]; then
+            echo "::error::No jar containing CraftBukkit sources found. See the listing above."
+            exit 1
+          fi
+          echo "Using $JAR"
+          # Extract into the workspace so the agent has a stable, relative path.
+          # Sources only -- the .class files are dead weight for a reading agent.
+          mkdir -p .paper-ref
+          unzip -q "$JAR" '*.java' -d .paper-ref
+          cp /tmp/changed.txt .oc-changed-files.txt
+          # The action `git add .`s anything untracked. Don't rely on the PR's own
+          # .gitignore to hide these -- older branches don't have the entries.
+          printf '.paper-ref/\n.oc-changed-files.txt\n' >> .git/info/exclude
+          echo "Staged $(find .paper-ref -name '*.java' | wc -l) Paper sources from $JAR"
+
+          # A PR that bumps Paper itself is reviewed against the base branch's
+          # version until it merges. Say so up front rather than let the review
+          # look authoritative. The PR's value is untrusted, so keep it to version
+          # characters before it goes into a comment.
+          paper_version() { sed -n 's/^paper\.api\.full-version=//p' "$1" | tr -cd 'A-Za-z0-9._+-'; }
+          REF_VERSION="$(paper_version .paper-base/gradle.properties)"
+          PR_VERSION="$(paper_version gradle.properties)"
+          if [ "$REF_VERSION" != "$PR_VERSION" ]; then
+            echo "::warning::Reference is Paper $REF_VERSION, this PR targets $PR_VERSION"
+            gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
+              "⚠️ This PR changes the Paper version to \`${PR_VERSION:-unknown}\`, but the parity review compares against \`$REF_VERSION\` from the base branch. Findings about behaviour that changed between those versions may be wrong."
+          fi
+
+          # Don't leave the base checkout for the agent to wander into, or for the
+          # action's `git add .` to pick up.
+          rm -rf .paper-base
+
+      # Installed directly rather than via `anomalyco/opencode/github`: that action
+      # always installs whatever GitHub marks as the latest release, so pinning the
+      # action's SHA doesn't pin the binary that runs. The action only runs
+      # `opencode github run` with a few env vars, which the next step does itself.
+      #
+      # Stays on OpenCode 1.x: 2.x has no `github run` command and no GitHub Action.
+      - name: Install opencode
+        if: steps.pr.outputs.count != '0'
+        env:
+          OPENCODE_VERSION: 1.19.6
+          # From the release's asset digest. Baseline build: no AVX2 requirement.
+          OPENCODE_SHA256: 8443113b3f3dfebf8b0fa91c4377e5519a62b9231732d9344a5df001e4a852b3
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/opencode"
+          curl -fsSL -o "$RUNNER_TEMP/opencode.tar.gz" \
+            "https://github.com/anomalyco/opencode/releases/download/v${OPENCODE_VERSION}/opencode-linux-x64-baseline.tar.gz"
+          echo "$OPENCODE_SHA256  $RUNNER_TEMP/opencode.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/opencode.tar.gz" -C "$RUNNER_TEMP/opencode"
+          echo "$RUNNER_TEMP/opencode" >> "$GITHUB_PATH"
+
+      - name: Parity review
+        if: steps.pr.outputs.count != '0'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Use the job's read-only GITHUB_TOKEN, not the OpenCode App's OIDC
+          # exchange (contents: write). Any push the tool attempts fails at GitHub.
+          USE_GITHUB_TOKEN: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODEL: openrouter/deepseek/deepseek-v4.1-flash-1017
+          MENTIONS: "/parity"
+          # Explicit task, so the label-triggered path works too -- on a
+          # pull_request event there is no comment to read.
+          PROMPT: "Perform the Paper parity review described in your agent instructions."
+          # `github run` ignores any agent input and uses `default_agent`, falling
+          # back to `build`. Set it here, not in opencode.json, so local opencode
+          # users of this repo keep their own default. Fails loudly if not found.
+          OPENCODE_CONFIG_CONTENT: '{"default_agent":"paper-parity"}'
+          # Load-bearing, not a backup: the agent can start subagents via `task`, and
+          # those (`general`, `explore`) don't read the agent file -- without this,
+          # `general` gets bash. The agent file's own rules win over this for the
+          # primary agent, so keep the two in sync.
+          OPENCODE_PERMISSION: '{"bash":"deny","edit":"deny","webfetch":"allow","question":"deny"}'
+        run: opencode github run
