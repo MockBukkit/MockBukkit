@@ -31,6 +31,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -478,6 +479,21 @@ class LivingEntityMockTest
 		assertEquals(0, actualVelocity.getX());
 		assertEquals(0, actualVelocity.getY());
 		assertEquals(0, actualVelocity.getZ());
+	}
+
+	@Test
+	void launchProjectile_AddedToTheWorldWithItsShooter()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location location = livingEntity.getLocation();
+		location.setWorld(world);
+		livingEntity.setLocation(location);
+
+		Snowball snowball = livingEntity.launchProjectile(Snowball.class);
+
+		assertTrue(world.getEntities().contains(snowball));
+		assertEquals(livingEntity, snowball.getShooter());
+		server.getPluginManager().assertEventFired(ProjectileLaunchEvent.class, event -> event.getEntity() == snowball);
 	}
 
 	@Test

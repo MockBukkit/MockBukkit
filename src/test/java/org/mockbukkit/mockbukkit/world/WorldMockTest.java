@@ -240,6 +240,28 @@ class WorldMockTest
 	private ServerMock server;
 
 	@Test
+	void addEntity_CreatedEntity_AddedAndSpawnEventCalled()
+	{
+		WorldMock world = new WorldMock();
+		Zombie zombie = world.createEntity(new Location(world, 0, 64, 0), Zombie.class);
+		assertFalse(world.getEntities().contains(zombie));
+
+		world.addEntity(zombie);
+
+		assertTrue(world.getEntities().contains(zombie));
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, event -> event.getEntity() == zombie);
+	}
+
+	@Test
+	void addEntity_AlreadyAdded_Throws()
+	{
+		WorldMock world = new WorldMock();
+		Zombie zombie = world.spawn(new Location(world, 0, 64, 0), Zombie.class);
+
+		assertThrows(IllegalArgumentException.class, () -> world.addEntity(zombie));
+	}
+
+	@Test
 	void getBlockAt_StandardWorld_DefaultBlocks()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
