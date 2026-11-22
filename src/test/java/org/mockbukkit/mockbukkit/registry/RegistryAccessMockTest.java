@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.registry;
 
+import com.google.gson.JsonObject;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.MusicInstrument;
@@ -9,11 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
+import java.lang.reflect.Field;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class RegistryAccessMockTest
@@ -39,6 +43,21 @@ class RegistryAccessMockTest
 	}
 
 	@Test
+	void registryKeyClassRelationCoversEveryRegistryKey() throws Exception
+	{
+		JsonObject relations = ResourceLoader.loadResource("/registries/registry_key_class_relation.json").getAsJsonObject();
+		for (Field field : RegistryKey.class.getFields())
+		{
+			if (field.getType() == RegistryKey.class)
+			{
+				RegistryKey<?> key = (RegistryKey<?>) field.get(null);
+				assertTrue(relations.has(key.key().asString()),
+						() -> "registry_key_class_relation.json has no entry for " + key.key().asString());
+			}
+		}
+	}
+
+	@Test
 	void locale_independent()
 	{
 		Locale prevLocale = Locale.getDefault();
@@ -48,3 +67,4 @@ class RegistryAccessMockTest
 	}
 
 }
+
