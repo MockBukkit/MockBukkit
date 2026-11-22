@@ -7,8 +7,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.DoubleChest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -668,6 +670,16 @@ public class InventoryMock implements Inventory
 		if (getHolder() instanceof EntityMock entity)
 		{
 			return entity.getLocation();
+		}
+
+		if (getHolder() instanceof BlockState state && state.isPlaced())
+		{
+			return state.getLocation();
+		}
+
+		if (getHolder() instanceof DoubleChest chest)
+		{
+			return chest.getLocation();
 		}
 
 		var worlds = Bukkit.getWorlds();
