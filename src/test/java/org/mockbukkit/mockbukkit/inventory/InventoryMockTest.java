@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.Container;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -20,6 +22,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.ArrayList;
@@ -736,6 +739,42 @@ class InventoryMockTest
 		inventory = new InventoryMock(player, InventoryType.PLAYER);
 
 		assertEquals(expectedLocation, inventory.getLocation());
+	}
+
+	@Test
+	void getLocation_WithChestBlockStateHolder()
+	{
+		World world = server.addSimpleWorld("world");
+		Block block = world.getBlockAt(3, 64, 7);
+		block.setType(Material.CHEST);
+		Location location = ((Container) block.getState()).getInventory().getLocation();
+
+		assertEquals(3, location.getBlockX());
+		assertEquals(64, location.getBlockY());
+		assertEquals(7, location.getBlockZ());
+	}
+
+	@Test
+	void getLocation_WithBarrelBlockStateHolder()
+	{
+		World world = server.addSimpleWorld("world");
+		Block block = world.getBlockAt(3, 64, 7);
+		block.setType(Material.BARREL);
+		Location location = ((Container) block.getState()).getInventory().getLocation();
+
+		assertEquals(3, location.getBlockX());
+		assertEquals(64, location.getBlockY());
+		assertEquals(7, location.getBlockZ());
+	}
+
+	@Test
+	void getLocation_WithUnplacedBlockStateHolder_FallsBackToSpawnLocation()
+	{
+		World world = server.addSimpleWorld("world");
+		ChestStateMock chest = new ChestStateMock(Material.CHEST);
+		Location location = chest.getInventory().getLocation();
+
+		assertEquals(world.getSpawnLocation(), location);
 	}
 
 	@Nested
