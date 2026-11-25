@@ -98,9 +98,19 @@ class LivingEntityMockTest
 	{
 		livingEntity.setRemoveWhenFarAway(false);
 		assertFalse(livingEntity.getRemoveWhenFarAway());
+		assertTrue(livingEntity.isPersistenceRequired());
 
 		livingEntity.setRemoveWhenFarAway(true);
 		assertTrue(livingEntity.getRemoveWhenFarAway());
+		assertFalse(livingEntity.isPersistenceRequired());
+	}
+
+	@Test
+	void testSetRemoveWhenFarAwayNotMob()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setRemoveWhenFarAway(true);
+		assertFalse(player.getRemoveWhenFarAway());
 	}
 
 	@Test

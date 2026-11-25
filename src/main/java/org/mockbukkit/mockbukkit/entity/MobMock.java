@@ -27,6 +27,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	private boolean aware = true;
 	private boolean leftHanded;
 	private LivingEntity target;
+	private boolean persistenceRequired;
 
 	/**
 	 * Constructs a new {@link MobMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -37,6 +38,26 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	protected MobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
+	}
+
+	/**
+	 * Gets whether this mob is required to persist against normal despawning.
+	 *
+	 * @return {@code true} if this mob is required to persist against normal despawning
+	 */
+	public boolean isPersistenceRequired()
+	{
+		return this.persistenceRequired;
+	}
+
+	/**
+	 * Sets whether this mob is required to persist against normal despawning.
+	 *
+	 * @param persistenceRequired Whether normal despawning should be prevented.
+	 */
+	public void setPersistenceRequired(boolean persistenceRequired)
+	{
+		this.persistenceRequired = persistenceRequired;
 	}
 
 	@Override
