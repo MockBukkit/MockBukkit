@@ -90,6 +90,7 @@ class InventoryViewMockTest
 	@CsvSource({
 			"BREWING, 0, CRAFTING",
 			"BREWING, 3, FUEL",
+			"BREWING, 4, CRAFTING",
 			"ENCHANTING, 1, CRAFTING",
 			"BEACON, 0, CRAFTING",
 			"WORKBENCH, 0, RESULT",

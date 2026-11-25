@@ -318,6 +318,7 @@ public abstract class InventoryViewMock implements InventoryView
 		return switch (viewType)
 		{
 		case FURNACE, BLAST_FURNACE, SMOKER -> furnaceSlotType(slot);
+		// As CraftBukkit: slot 3, the ingredient, is reported as FUEL, and the blaze powder slot (4) as CRAFTING
 		case BREWING -> craftingUnless(slot, 3, InventoryType.SlotType.FUEL);
 		case ENCHANTING, BEACON -> InventoryType.SlotType.CRAFTING;
 		case WORKBENCH, CRAFTING -> craftingUnless(slot, 0, InventoryType.SlotType.RESULT);
@@ -330,11 +331,12 @@ public abstract class InventoryViewMock implements InventoryView
 
 	private static @NotNull InventoryType.SlotType furnaceSlotType(int slot)
 	{
-		if (slot == 2)
+		return switch (slot)
 		{
-			return InventoryType.SlotType.RESULT;
-		}
-		return craftingUnless(slot, 1, InventoryType.SlotType.FUEL);
+		case 1 -> InventoryType.SlotType.FUEL;
+		case 2 -> InventoryType.SlotType.RESULT;
+		default -> InventoryType.SlotType.CRAFTING;
+		};
 	}
 
 	private static @NotNull InventoryType.SlotType craftingUnless(int slot, int special, @NotNull InventoryType.SlotType type)
