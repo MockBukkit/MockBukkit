@@ -31,6 +31,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -186,15 +187,25 @@ class LivingEntityMockTest
 	}
 
 	@Test
-	void testSetLeashHolder_NonMobAsHolder()
+	void testSetLeashHolder_PlayerHolder()
+	{
+		PlayerMock player = server.addPlayer();
+
+		assertTrue(livingEntity.setLeashHolder(player));
+		assertTrue(livingEntity.isLeashed());
+		assertEquals(player, livingEntity.getLeashHolder());
+	}
+
+	@Test
+	void testSetLeashHolder_NonMobHolder_IsLeashed()
 	{
 		WorldMock world = new WorldMock();
-		// ArmorStand is not a Mob
+		// ArmorStand is not a Mob, but any entity can hold a leash (Paper Leashable)
 		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
 
 		assertTrue(livingEntity.setLeashHolder(armorStand));
-		// Even though setLeashHolder returns true, isLeashed() returns false for non-Mob holders
-		assertFalse(livingEntity.isLeashed());
+		assertTrue(livingEntity.isLeashed());
+		assertEquals(armorStand, livingEntity.getLeashHolder());
 	}
 
 	@Test
@@ -495,6 +506,21 @@ class LivingEntityMockTest
 		assertEquals(0, actualVelocity.getX());
 		assertEquals(0, actualVelocity.getY());
 		assertEquals(0, actualVelocity.getZ());
+	}
+
+	@Test
+	void launchProjectile_AddedToTheWorldWithItsShooter()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location location = livingEntity.getLocation();
+		location.setWorld(world);
+		livingEntity.setLocation(location);
+
+		Snowball snowball = livingEntity.launchProjectile(Snowball.class);
+
+		assertTrue(world.getEntities().contains(snowball));
+		assertEquals(livingEntity, snowball.getShooter());
+		server.getPluginManager().assertEventFired(ProjectileLaunchEvent.class, event -> event.getEntity() == snowball);
 	}
 
 	@Test

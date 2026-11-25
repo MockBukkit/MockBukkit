@@ -2174,10 +2174,17 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T addEntity(@NotNull T t)
+	public <T extends Entity> @NotNull T addEntity(@NotNull T entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkArgument(entity instanceof EntityMock, "Entity must be a mock created by MockBukkit");
+		EntityMock mock = (EntityMock) entity;
+		Preconditions.checkArgument(!server.getEntities().contains(mock), "Entity has already been added to a world");
+		Preconditions.checkArgument(this.equals(entity.getWorld()), "Entity must be created in this world");
+
+		server.registerEntity(mock);
+		callSpawnEvent(mock, CreatureSpawnEvent.SpawnReason.CUSTOM);
+		return entity;
 	}
 
 	@Override
