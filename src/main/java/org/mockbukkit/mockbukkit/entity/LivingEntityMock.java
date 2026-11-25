@@ -906,7 +906,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		return this.leashHolder instanceof Mob;
+		return this.leashHolder != null;
 	}
 
 	@Override
