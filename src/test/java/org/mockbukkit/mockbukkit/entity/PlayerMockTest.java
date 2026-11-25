@@ -1225,6 +1225,18 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlaySoundWithSeed_Adventure()
+	{
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound()
+				.type(Sound.BLOCK_ANVIL_FALL)
+				.source(net.kyori.adventure.sound.Sound.Source.BLOCK)
+				.seed(42)
+				.build();
+		player.playSound(sound);
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> audio.getSeed() == 42));
+	}
+
+	@Test
 	void testPlaySoundSelfEmitter_Adventure()
 	{
 		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
@@ -2298,7 +2310,7 @@ class PlayerMockTest
 		player.playSound(player, "minecraft:entity.experience_orb.pickup", SoundCategory.PLAYERS, 1, 1, 42);
 
 		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
-				&& player.getLocation().equals(audio.getLocation())));
+				&& player.getLocation().equals(audio.getLocation()) && audio.getSeed() == 42));
 	}
 
 	@Test
@@ -2307,7 +2319,7 @@ class PlayerMockTest
 		player.playSound(player, Sound.ENTITY_SLIME_SQUISH, SoundCategory.PLAYERS, 1, 1, 42);
 
 		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio -> player.getLocation().equals(audio.getLocation())
-				&& audio.getCategory() == SoundCategory.PLAYERS);
+				&& audio.getCategory() == SoundCategory.PLAYERS && audio.getSeed() == 42);
 	}
 
 	@Test

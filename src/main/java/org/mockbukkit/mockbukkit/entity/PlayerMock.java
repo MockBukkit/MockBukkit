@@ -1300,13 +1300,19 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
 	{
-		playSound(entity, sound, category, volume, pitch);
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		Preconditions.checkNotNull(category, "Category cannot be null");
+		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch, seed));
 	}
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
 	{
-		playSound(entity, sound, category, volume, pitch);
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		Preconditions.checkNotNull(category, "Category cannot be null");
+		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch, seed));
 	}
 
 	@Override
@@ -1335,10 +1341,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		Preconditions.checkNotNull(sound, "Sound cannot be null");
-		Preconditions.checkNotNull(category, "Category cannot be null");
-		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
+		playSound(entity, sound, category, volume, pitch, ThreadLocalRandom.current().nextLong());
 	}
 
 	@Override
@@ -1376,10 +1379,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		Preconditions.checkNotNull(sound, "Sound cannot be null");
-		Preconditions.checkNotNull(category, "Category cannot be null");
-		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
+		playSound(entity, sound, category, volume, pitch, ThreadLocalRandom.current().nextLong());
 	}
 
 	@Override
