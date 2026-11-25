@@ -170,15 +170,25 @@ class LivingEntityMockTest
 	}
 
 	@Test
-	void testSetLeashHolder_NonMobAsHolder()
+	void testSetLeashHolder_PlayerHolder()
+	{
+		PlayerMock player = server.addPlayer();
+
+		assertTrue(livingEntity.setLeashHolder(player));
+		assertTrue(livingEntity.isLeashed());
+		assertEquals(player, livingEntity.getLeashHolder());
+	}
+
+	@Test
+	void testSetLeashHolder_NonMobHolder_IsLeashed()
 	{
 		WorldMock world = new WorldMock();
-		// ArmorStand is not a Mob
+		// ArmorStand is not a Mob, but any entity can hold a leash (Paper Leashable)
 		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
 
 		assertTrue(livingEntity.setLeashHolder(armorStand));
-		// Even though setLeashHolder returns true, isLeashed() returns false for non-Mob holders
-		assertFalse(livingEntity.isLeashed());
+		assertTrue(livingEntity.isLeashed());
+		assertEquals(armorStand, livingEntity.getLeashHolder());
 	}
 
 	@Test

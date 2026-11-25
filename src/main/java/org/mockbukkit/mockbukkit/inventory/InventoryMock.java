@@ -350,8 +350,8 @@ public class InventoryMock implements Inventory
 	@Override
 	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// MockBukkit keeps no block snapshot apart from its holder: both answers are the holder
+		return getHolder();
 	}
 
 	@Override
