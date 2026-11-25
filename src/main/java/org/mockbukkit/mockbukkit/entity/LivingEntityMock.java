@@ -346,6 +346,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Location spawnLocation = getEyeLocation().subtract(0, 0.10000000149011612D, 0);
 		T entity = world.createEntity(spawnLocation, projectile);
 		Preconditions.checkNotNull(entity, "Projectile (%s) not supported", projectile.getName());
+		entity.setShooter(this);
 
 		if (velocity != null)
 		{
@@ -357,6 +358,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			function.accept(entity);
 		}
 
+		// As Paper: the projectile is added to the world, which calls the ProjectileLaunchEvent
+		world.addEntity(entity);
 		return entity;
 	}
 
