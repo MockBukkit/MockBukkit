@@ -7,6 +7,8 @@ import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
+import io.papermc.paper.plugin.configuration.PluginMeta;
+import org.mockbukkit.mockbukkit.MockBukkit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockBukkitExtension.class)
 class PaperCommandsMockTest
@@ -27,6 +32,41 @@ class PaperCommandsMockTest
 
 	@MockBukkitInject
 	private ServerMock serverMock;
+
+	@Test
+	void clearingCommandsAfterThePluginIsGone()
+	{
+		PluginMock.builder().withOnEnable((pluginMock) ->
+				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
+						event.registrar().register(Commands.literal("orphaned_command").executes(context ->
+								Command.SINGLE_SUCCESS).build()))).build();
+		serverMock.dispatchCommand(serverMock.getConsoleSender(), "orphaned_command");
+
+		// What reload() does: the plugin goes, the command it registered does not.
+		MockBukkit.getMock().getPluginManager().clearPlugins();
+
+		assertDoesNotThrow(() -> serverMock.getCommandMap().clearCommands());
+	}
+
+	@Test
+	void metaWithoutPluginMetaHasNoPlugin()
+	{
+		ApiCommandMetaMock meta = new ApiCommandMetaMock(null, "description", List.of(), null, false);
+
+		assertNull(meta.plugin());
+	}
+
+	@Test
+	void metaPluginIsNullOnceThePluginIsGone()
+	{
+		PluginMeta meta = MockBukkit.createMockPlugin("VanishingPlugin").getPluginMeta();
+		ApiCommandMetaMock metaMock = new ApiCommandMetaMock(meta, "description", List.of(), null, false);
+		assertNotNull(metaMock.plugin());
+
+		MockBukkit.getMock().getPluginManager().clearPlugins();
+
+		assertNull(metaMock.plugin());
+	}
 	List<Object> arguments = List.of();
 
 	@ParameterizedTest
