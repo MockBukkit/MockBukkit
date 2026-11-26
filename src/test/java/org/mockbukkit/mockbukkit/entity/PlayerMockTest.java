@@ -13,6 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Input;
 import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -3366,6 +3367,53 @@ class PlayerMockTest
 			assertEquals(value, player.getAffectsSpawning());
 		}
 
+	}
+
+
+	@Test
+	void getClientBrandName_DefaultsToNull()
+	{
+		assertNull(player.getClientBrandName());
+	}
+
+	@Test
+	void setClientBrandName_IsRetained()
+	{
+		player.setClientBrandName("vanilla");
+		assertEquals("vanilla", player.getClientBrandName());
+
+		player.setClientBrandName(null);
+		assertNull(player.getClientBrandName());
+	}
+
+	@Test
+	void getCurrentInput_DefaultsToNothingPressed()
+	{
+		Input input = player.getCurrentInput();
+
+		assertFalse(input.isForward());
+		assertFalse(input.isBackward());
+		assertFalse(input.isLeft());
+		assertFalse(input.isRight());
+		assertFalse(input.isJump());
+		assertFalse(input.isSneak());
+		assertFalse(input.isSprint());
+	}
+
+	@Test
+	void setCurrentInput_IsRetained()
+	{
+		Input input = new InputMock(true, false, true, false, true, false, true);
+
+		player.setCurrentInput(input);
+
+		assertSame(input, player.getCurrentInput());
+	}
+
+	@Test
+	void setCurrentInput_Null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setCurrentInput(null));
 	}
 
 }
