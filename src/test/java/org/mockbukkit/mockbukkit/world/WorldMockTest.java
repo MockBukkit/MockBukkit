@@ -15,6 +15,8 @@ import org.bukkit.Effect;
 import org.bukkit.GameRule;
 import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
+import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -236,6 +238,100 @@ class WorldMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void isChunkForceLoaded_DefaultsToFalse()
+	{
+		WorldMock world = server.addSimpleWorld("force-default");
+
+		assertFalse(world.isChunkForceLoaded(0, 0));
+	}
+
+	@Test
+	void setChunkForceLoaded_TogglesInBothDirections()
+	{
+		WorldMock world = server.addSimpleWorld("force-toggle");
+
+		world.setChunkForceLoaded(3, 7, true);
+		assertTrue(world.isChunkForceLoaded(3, 7));
+
+		world.setChunkForceLoaded(3, 7, false);
+		assertFalse(world.isChunkForceLoaded(3, 7));
+	}
+
+	@Test
+	void setChunkForceLoaded_KeepsCoordinatesDistinct()
+	{
+		WorldMock world = server.addSimpleWorld("force-distinct");
+
+		world.setChunkForceLoaded(3, 7, true);
+
+		assertFalse(world.isChunkForceLoaded(7, 3));
+	}
+
+	@Test
+	void setChunkForceLoaded_HandlesNegativeCoordinates()
+	{
+		WorldMock world = server.addSimpleWorld("force-negative");
+
+		world.setChunkForceLoaded(-4, -9, true);
+
+		assertTrue(world.isChunkForceLoaded(-4, -9));
+		assertFalse(world.isChunkForceLoaded(4, 9));
+	}
+
+	@Test
+	void getForceLoadedChunks_DefaultsToEmpty()
+	{
+		WorldMock world = server.addSimpleWorld("force-empty");
+
+		assertTrue(world.getForceLoadedChunks().isEmpty());
+	}
+
+	@Test
+	void getForceLoadedChunks_ReturnsTheForcedChunks()
+	{
+		WorldMock world = server.addSimpleWorld("force-listed");
+		world.setChunkForceLoaded(2, -5, true);
+
+		Collection<Chunk> forced = world.getForceLoadedChunks();
+
+		assertEquals(1, forced.size());
+		Chunk chunk = forced.iterator().next();
+		assertEquals(2, chunk.getX());
+		assertEquals(-5, chunk.getZ());
+	}
+
+	@Test
+	void getChunkAtAsync_CallbackReceivesTheChunk()
+	{
+		WorldMock world = server.addSimpleWorld("async-callback");
+		List<Chunk> received = new ArrayList<>();
+
+		world.getChunkAtAsync(1, 2, true, false, received::add);
+
+		assertEquals(1, received.size());
+		assertEquals(world.getChunkAt(1, 2), received.get(0));
+	}
+
+	@Test
+	void getChunkAtAsync_NullCallback()
+	{
+		WorldMock world = server.addSimpleWorld("async-null");
+
+		assertThrows(NullPointerException.class, () -> world.getChunkAtAsync(0, 0, true, false, null));
+	}
+
+	@Test
+	void getChunkAtAsync_FutureIsAlreadyComplete()
+	{
+		WorldMock world = server.addSimpleWorld("async-future");
+
+		CompletableFuture<Chunk> future = world.getChunkAtAsync(4, 5, true, false);
+
+		assertTrue(future.isDone());
+		assertEquals(world.getChunkAt(4, 5), future.getNow(null));
+	}
 
 	@Test
 	void getBlockAt_StandardWorld_DefaultBlocks()

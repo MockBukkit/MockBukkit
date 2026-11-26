@@ -133,6 +133,7 @@ public class WorldMock implements World
 	private final Map<String, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final Set<Long> forceLoadedChunks = new HashSet<>();
 	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final @Nullable ServerMock server;
@@ -1082,8 +1083,8 @@ public class WorldMock implements World
 	@Override
 	public void getChunkAtAsync(int x, int z, boolean gen, boolean urgent, @NotNull Consumer<? super Chunk> cb)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(cb, "Callback cannot be null");
+		cb.accept(getChunkAt(x, z));
 	}
 
 	@Override
@@ -1104,8 +1105,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull CompletableFuture<Chunk> getChunkAtAsync(int x, int z, boolean gen, boolean urgent)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return CompletableFuture.completedFuture(getChunkAt(x, z));
 	}
 
 	@Override
@@ -2249,22 +2249,36 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkForceLoaded(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.forceLoadedChunks.contains(chunkKey(x, z));
 	}
 
 	@Override
 	public void setChunkForceLoaded(int x, int z, boolean forced)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (forced)
+		{
+			this.forceLoadedChunks.add(chunkKey(x, z));
+		}
+		else
+		{
+			this.forceLoadedChunks.remove(chunkKey(x, z));
+		}
 	}
 
 	@Override
 	public @NotNull Collection<Chunk> getForceLoadedChunks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Chunk> chunks = new HashSet<>();
+		for (long key : this.forceLoadedChunks)
+		{
+			chunks.add(getChunkAt((int) key, (int) (key >> 32)));
+		}
+		return chunks;
+	}
+
+	private static Long chunkKey(int x, int z)
+	{
+		return ((long) z << 32) | (x & 0xFFFFFFFFL);
 	}
 
 	@Override
