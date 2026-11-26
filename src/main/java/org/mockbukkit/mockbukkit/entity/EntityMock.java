@@ -196,7 +196,23 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isTrackedBy(@NotNull Player player)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(player, "Player cannot be null");
+
+		if (!isValid())
+		{
+			return false;
+		}
+		if (!getWorld().equals(player.getWorld()))
+		{
+			return false;
+		}
+		if (!player.canSee(this))
+		{
+			return false;
+		}
+
+		double range = this.server.getViewDistance() * 16.0;
+		return player.getLocation().distanceSquared(getLocation()) <= range * range;
 	}
 
 	/**

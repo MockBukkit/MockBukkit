@@ -81,6 +81,79 @@ class EntityMockTest
 	private SimpleEntityMock entity;
 
 	@Test
+	void isTrackedBy_NearbyPlayerInTheSameWorld()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 64, 0));
+		entity.setLocation(new Location(world, 4, 64, 4));
+
+		assertTrue(entity.isTrackedBy(player));
+	}
+
+	@Test
+	void isTrackedBy_PlayerTooFarAway()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 64, 0));
+		entity.setLocation(new Location(world, server.getViewDistance() * 16 + 32, 64, 0));
+
+		assertFalse(entity.isTrackedBy(player));
+	}
+
+	@Test
+	void isTrackedBy_PlayerInAnotherWorld()
+	{
+		WorldMock elsewhere = server.addSimpleWorld("tracked-elsewhere");
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(elsewhere, 0, 64, 0));
+		entity.setLocation(new Location(world, 0, 64, 0));
+
+		assertFalse(entity.isTrackedBy(player));
+	}
+
+	@Test
+	void isTrackedBy_HiddenFromThePlayer()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 64, 0));
+		entity.setLocation(new Location(world, 1, 64, 1));
+		player.hideEntity(MockBukkit.createMockPlugin(), entity);
+
+		assertFalse(entity.isTrackedBy(player));
+	}
+
+	@Test
+	void isTrackedBy_RemovedEntity()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 64, 0));
+		entity.setLocation(new Location(world, 1, 64, 1));
+		entity.remove();
+
+		assertFalse(entity.isTrackedBy(player));
+	}
+
+	@Test
+	void isTrackedBy_ViewDistanceMovesTheBoundary()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 64, 0));
+		entity.setLocation(new Location(world, 200, 64, 0));
+
+		server.setViewDistance(4);
+		assertFalse(entity.isTrackedBy(player));
+
+		server.setViewDistance(32);
+		assertTrue(entity.isTrackedBy(player));
+	}
+
+	@Test
+	void isTrackedBy_NullPlayer()
+	{
+		assertThrows(NullPointerException.class, () -> entity.isTrackedBy(null));
+	}
+
+	@Test
 	void getLocation_TwoInvocations_TwoClones()
 	{
 		Location location1 = entity.getLocation();
