@@ -2516,8 +2516,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void resetTitle()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		clearTitle();
+	}
+
+	@Override
+	public void clearTitle()
+	{
+		this.title.clear();
+		this.subitles.clear();
+	}
+
+	@Override
+	public void showTitle(net.kyori.adventure.title.@NotNull Title title)
+	{
+		Preconditions.checkArgument(title != null, "Title cannot be null");
+		this.title.add(LegacyComponentSerializer.legacySection().serialize(title.title()));
+		this.subitles.add(LegacyComponentSerializer.legacySection().serialize(title.subtitle()));
 	}
 
 	@Override
