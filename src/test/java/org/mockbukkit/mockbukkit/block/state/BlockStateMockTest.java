@@ -231,7 +231,6 @@ class BlockStateMockTest
 		}
 	}
 
-
 	/**
 	 * Get the list of {@link Material} and the expected {@link BlockState}.
 	 *
