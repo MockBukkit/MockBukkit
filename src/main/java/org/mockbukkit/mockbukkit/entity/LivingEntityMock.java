@@ -1475,7 +1475,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 */
 	public @Nullable Location getLastClimbableLocation()
 	{
-		return this.lastClimbableLocation;
+		return this.lastClimbableLocation == null ? null : this.lastClimbableLocation.clone();
 	}
 
 	/**
@@ -1486,7 +1486,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 */
 	public void setLastClimbableLocation(@Nullable Location lastClimbableLocation)
 	{
-		this.lastClimbableLocation = lastClimbableLocation;
+		this.lastClimbableLocation = lastClimbableLocation == null ? null : lastClimbableLocation.clone();
 	}
 
 }

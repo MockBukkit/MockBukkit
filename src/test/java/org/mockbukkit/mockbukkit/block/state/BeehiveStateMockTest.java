@@ -37,6 +37,17 @@ class BeehiveStateMockTest
 	}
 
 	@Test
+	void getFlower_ReturnsCopy()
+	{
+		Location location = new Location(world, 1, 2, 3);
+		beehive.setFlower(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(world, 1, 2, 3), beehive.getFlower());
+		assertNotSame(beehive.getFlower(), beehive.getFlower());
+	}
+
+	@Test
 	void constructor_DefaultValues()
 	{
 		assertEquals(3, beehive.getMaxEntities());

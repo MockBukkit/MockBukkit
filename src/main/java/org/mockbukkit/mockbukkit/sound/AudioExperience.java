@@ -42,7 +42,7 @@ public final class AudioExperience
 
 		this.sound = sound;
 		this.category = category;
-		this.location = loc;
+		this.location = loc.clone();
 		this.volume = volume;
 		this.pitch = pitch;
 	}
@@ -116,7 +116,7 @@ public final class AudioExperience
 	@NotNull
 	public Location getLocation()
 	{
-		return location;
+		return location.clone();
 	}
 
 	/**

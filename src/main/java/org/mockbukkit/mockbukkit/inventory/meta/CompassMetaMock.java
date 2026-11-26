@@ -45,7 +45,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 
 		if (meta instanceof CompassMeta compass)
 		{
-			this.lodestone = (compass.getLodestone() != null ? compass.getLodestone() : null);
+			this.lodestone = compass.getLodestone();
 			this.tracked = compass.isLodestoneTracked();
 		}
 	}
@@ -59,14 +59,14 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	@Override
 	public @Nullable Location getLodestone()
 	{
-		return this.lodestone;
+		return this.lodestone == null ? null : this.lodestone.clone();
 	}
 
 	@Override
 	public void setLodestone(@Nullable Location lodestone)
 	{
 		Preconditions.checkArgument(lodestone == null || lodestone.getWorld() != null, "world is null");
-		this.lodestone = lodestone;
+		this.lodestone = lodestone == null ? null : lodestone.clone();
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class EnderSignalMock extends EntityMock implements EnderSignal
 	public @NotNull Location getTargetLocation()
 	{
 		Preconditions.checkState(targetLocation != null, TARGET_NOT_SET_ERROR);
-		return targetLocation;
+		return targetLocation.clone();
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public class EndGatewayStateMock extends TileStateMock implements EndGateway
 		super(state);
 		this.age = state.age;
 		this.exactTeleport = state.exactTeleport;
-		this.exitLocation = state.exitLocation;
+		this.exitLocation = state.exitLocation == null ? null : state.exitLocation.clone();
 	}
 
 	@Override

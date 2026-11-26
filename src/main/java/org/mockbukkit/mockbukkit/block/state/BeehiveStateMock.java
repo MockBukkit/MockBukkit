@@ -60,7 +60,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	{
 		super(state);
 
-		this.flowerLocation = state.flowerLocation;
+		this.flowerLocation = state.flowerLocation == null ? null : state.flowerLocation.clone();
 		this.maxBees = state.maxBees;
 		this.sedated = state.sedated;
 		this.bees.addAll(state.bees);
@@ -81,14 +81,14 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	@Override
 	public @Nullable Location getFlower()
 	{
-		return this.flowerLocation;
+		return this.flowerLocation == null ? null : this.flowerLocation.clone();
 	}
 
 	@Override
 	public void setFlower(@Nullable Location location)
 	{
 		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Flower must be in the same world");
-		this.flowerLocation = location;
+		this.flowerLocation = location == null ? null : location.clone();
 	}
 
 	/**

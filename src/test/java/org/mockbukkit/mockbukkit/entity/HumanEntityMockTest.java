@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.bukkit.Location;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,6 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class HumanEntityMockTest
@@ -66,6 +68,17 @@ class HumanEntityMockTest
 	private ServerMock server;
 	@MockBukkitInject
 	private HumanEntityMock human;
+
+	@Test
+	void getLastDeathLocation_ReturnsCopy()
+	{
+		Location location = new Location(human.getWorld(), 1, 2, 3);
+		human.setLastDeathLocation(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(human.getWorld(), 1, 2, 3), human.getLastDeathLocation());
+		assertNotSame(human.getLastDeathLocation(), human.getLastDeathLocation());
+	}
 
 	@Test
 	void assertGameMode_CorrectGameMode_DoesNotAssert()

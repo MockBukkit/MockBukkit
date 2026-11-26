@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class CompassMetaMockTest
@@ -20,6 +21,18 @@ class CompassMetaMockTest
 
 	@MockBukkitInject
 	private CompassMetaMock meta;
+
+	@Test
+	void getLodestone_ReturnsCopy()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 1, 2, 3);
+		meta.setLodestone(location);
+		location.add(1, 1, 1);
+
+		assertEquals(new Location(world, 1, 2, 3), meta.getLodestone());
+		assertNotSame(meta.getLodestone(), meta.getLodestone());
+	}
 
 	@Test
 	void constructor_DefaultValues()

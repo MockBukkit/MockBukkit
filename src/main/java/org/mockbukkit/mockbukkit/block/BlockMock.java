@@ -100,7 +100,7 @@ public class BlockMock implements Block
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		Preconditions.checkArgument(material.isBlock(), "Material has to be a block");
 		this.material = material;
-		this.location = location;
+		this.location = location == null ? null : location.clone();
 		this.state = BlockStateMockFactory.mock(this);
 		this.blockData = BlockDataMockFactory.mock(material);
 		this.drops = Collections.emptyList();
@@ -249,7 +249,7 @@ public class BlockMock implements Block
 	@Override
 	public @NotNull Location getLocation()
 	{
-		return location;
+		return location == null ? null : location.clone();
 	}
 
 	@Override

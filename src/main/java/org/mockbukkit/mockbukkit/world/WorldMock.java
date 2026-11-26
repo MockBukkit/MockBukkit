@@ -510,7 +510,7 @@ public class WorldMock implements World
 		{
 			setSpawnLocation(0, grassHeight + 1, 0);
 		}
-		return spawnLocation;
+		return spawnLocation.clone();
 	}
 
 	@Override

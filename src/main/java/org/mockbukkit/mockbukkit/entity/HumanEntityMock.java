@@ -210,13 +210,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @Nullable Location getLastDeathLocation()
 	{
-		return lastDeathLocation;
+		return lastDeathLocation == null ? null : lastDeathLocation.clone();
 	}
 
 	@Override
 	public void setLastDeathLocation(@Nullable Location location)
 	{
-		this.lastDeathLocation = location;
+		this.lastDeathLocation = location == null ? null : location.clone();
 	}
 
 	@Override

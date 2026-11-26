@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class BeeMockTest
@@ -25,6 +26,22 @@ class BeeMockTest
 
 	@MockBukkitInject
 	private BeeMock bee;
+
+	@Test
+	void getHiveAndFlower_ReturnCopies()
+	{
+		Location hive = new Location(bee.getWorld(), 1, 2, 3);
+		Location flower = new Location(bee.getWorld(), 4, 5, 6);
+		bee.setHive(hive);
+		bee.setFlower(flower);
+		hive.add(1, 1, 1);
+		flower.add(1, 1, 1);
+
+		assertEquals(new Location(bee.getWorld(), 1, 2, 3), bee.getHive());
+		assertEquals(new Location(bee.getWorld(), 4, 5, 6), bee.getFlower());
+		assertNotSame(bee.getHive(), bee.getHive());
+		assertNotSame(bee.getFlower(), bee.getFlower());
+	}
 
 	@Test
 	void testGetType()

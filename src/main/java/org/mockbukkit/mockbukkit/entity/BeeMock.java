@@ -44,27 +44,27 @@ public class BeeMock extends AnimalsMock implements Bee
 	@Override
 	public @Nullable Location getHive()
 	{
-		return this.hive;
+		return this.hive == null ? null : this.hive.clone();
 	}
 
 	@Override
 	public void setHive(@Nullable Location location)
 	{
 		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Hive must be in same world");
-		this.hive = location;
+		this.hive = location == null ? null : location.clone();
 	}
 
 	@Override
 	public @Nullable Location getFlower()
 	{
-		return this.flower;
+		return this.flower == null ? null : this.flower.clone();
 	}
 
 	@Override
 	public void setFlower(@Nullable Location location)
 	{
 		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Flower must be in same world");
-		this.flower = location;
+		this.flower = location == null ? null : location.clone();
 	}
 
 	@Override

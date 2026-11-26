@@ -43,14 +43,14 @@ public class TurtleMock extends AnimalsMock implements Turtle
 	@Override
 	public @NotNull Location getHome()
 	{
-		return this.home;
+		return this.home.clone();
 	}
 
 	@Override
 	public void setHome(@NotNull Location location)
 	{
 		Preconditions.checkArgument(location != null, "Location cannot be null");
-		this.home = location;
+		this.home = location.clone();
 	}
 
 	@Override

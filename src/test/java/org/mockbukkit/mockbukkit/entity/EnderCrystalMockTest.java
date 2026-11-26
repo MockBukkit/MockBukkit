@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 @ExtendWith(MockBukkitExtension.class)
 class EnderCrystalMockTest
@@ -25,6 +26,16 @@ class EnderCrystalMockTest
 
 	@MockBukkitInject
 	private EnderCrystalMock crystal;
+
+	@Test
+	void getBeamTarget_ReturnsCopy()
+	{
+		crystal.setBeamTarget(new Location(crystal.getWorld(), 1, 2, 3));
+		crystal.getBeamTarget().add(1, 1, 1);
+
+		assertEquals(new Location(crystal.getWorld(), 1, 2, 3), crystal.getBeamTarget());
+		assertNotSame(crystal.getBeamTarget(), crystal.getBeamTarget());
+	}
 
 	@Test
 	void isShowingBottom_GivenDefaultValue()
