@@ -16,6 +16,7 @@ import org.bukkit.GameRule;
 import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
 import org.bukkit.Location;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Registry;
@@ -236,6 +237,40 @@ class WorldMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void strikeLightning_SpawnsARealStrike()
+	{
+		WorldMock world = server.addSimpleWorld("lightning");
+		Location location = new Location(world, 10, 64, 20);
+
+		LightningStrike strike = world.strikeLightning(location);
+
+		assertFalse(strike.isEffect());
+		assertEquals(location, strike.getLocation());
+	}
+
+	@Test
+	void strikeLightningEffect_SpawnsAnEffectOnlyStrike()
+	{
+		WorldMock world = server.addSimpleWorld("lightning-effect");
+		Location location = new Location(world, 10, 64, 20);
+
+		LightningStrike strike = world.strikeLightningEffect(location);
+
+		assertTrue(strike.isEffect());
+		assertEquals(location, strike.getLocation());
+	}
+
+	@Test
+	void strikeLightning_RegistersTheStrikeWithTheWorld()
+	{
+		WorldMock world = server.addSimpleWorld("lightning-registered");
+
+		LightningStrike strike = world.strikeLightning(new Location(world, 1, 64, 1));
+
+		assertTrue(world.getEntities().contains(strike));
+	}
 
 	@Test
 	void getBlockAt_StandardWorld_DefaultBlocks()
@@ -2899,5 +2934,6 @@ class WorldMockTest
 		}
 
 	}
+
 
 }
