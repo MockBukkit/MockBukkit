@@ -2097,6 +2097,26 @@ class WorldMockTest
 	}
 
 	@Test
+	void testSetPvpGameRuleIsVisibleToGetPvp()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRule(GameRules.PVP, false);
+		assertFalse(world.getPVP());
+		world.setGameRule(GameRules.PVP, true);
+		assertTrue(world.getPVP());
+	}
+
+	@Test
+	void testSetPvpIsVisibleToGameRule()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setPVP(false);
+		assertFalse(world.getGameRuleValue(GameRules.PVP));
+		world.setPVP(true);
+		assertTrue(world.getGameRuleValue(GameRules.PVP));
+	}
+
+	@Test
 	void testGetKeepSpawnInMemoryDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
