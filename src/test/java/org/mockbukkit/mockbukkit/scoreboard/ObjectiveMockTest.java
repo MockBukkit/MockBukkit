@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
+import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -155,6 +156,29 @@ class ObjectiveMockTest
 		objective.unregister();
 		assertFalse(objective.isRegistered());
 		assertThrows(IllegalStateException.class, () -> objective.unregister());
+	}
+
+
+	@Test
+	void numberFormat_DefaultsToNull()
+	{
+		assertNull(objective.numberFormat());
+	}
+
+	@Test
+	void numberFormat_IsRetained()
+	{
+		NumberFormat format = NumberFormat.blank();
+		objective.numberFormat(format);
+		assertSame(format, objective.numberFormat());
+	}
+
+	@Test
+	void numberFormat_AcceptsNull()
+	{
+		objective.numberFormat(NumberFormat.blank());
+		objective.numberFormat(null);
+		assertNull(objective.numberFormat());
 	}
 
 }

@@ -31,6 +31,7 @@ public class ObjectiveMock implements Objective
 	private @NotNull Component displayName;
 	private @Nullable DisplaySlot displaySlot;
 	private RenderType renderType;
+	private @Nullable NumberFormat numberFormat = null;
 
 	/**
 	 * Constructs a new {@link ObjectiveMock} with the provided parameters.
@@ -220,15 +221,13 @@ public class ObjectiveMock implements Objective
 	@Override
 	public @Nullable NumberFormat numberFormat()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.numberFormat;
 	}
 
 	@Override
 	public void numberFormat(@Nullable NumberFormat numberFormat)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.numberFormat = numberFormat;
 	}
 
 	@Override
