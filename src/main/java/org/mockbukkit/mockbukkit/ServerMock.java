@@ -171,6 +171,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.UncheckedIOException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -1922,8 +1923,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull File getWorldContainer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		try
+		{
+			return getPluginManager().createTemporaryDirectory("worlds");
+		}
+		catch (IOException e)
+		{
+			throw new UncheckedIOException("Could not create the world container", e);
+		}
 	}
 
 	@Override

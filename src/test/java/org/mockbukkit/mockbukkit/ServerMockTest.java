@@ -114,6 +114,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
+import java.io.UncheckedIOException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Base64;
@@ -149,6 +151,58 @@ class ServerMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void getWorldContainer_WrapsAFailureToCreateTheDirectory()
+	{
+		ServerMock failing = new ServerMock()
+		{
+			@Override
+			public @NotNull PluginManagerMock getPluginManager()
+			{
+				return new PluginManagerMock(this)
+				{
+					@Override
+					public @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
+					{
+						throw new IOException("no space left on device");
+					}
+				};
+			}
+		};
+
+		assertThrows(UncheckedIOException.class, failing::getWorldContainer);
+	}
+
+	@Test
+	void getWorldContainer_ExistsAndIsADirectory()
+	{
+		File container = server.getWorldContainer();
+
+		assertTrue(container.isDirectory());
+	}
+
+	@Test
+	void getWorldContainer_IsStableAcrossCalls()
+	{
+		assertEquals(server.getWorldContainer(), server.getWorldContainer());
+	}
+
+	@Test
+	void getWorldContainer_SitsInsideTheTemporaryDirectory() throws IOException
+	{
+		assertEquals(server.getPluginManager().getParentTemporaryDirectory(),
+				server.getWorldContainer().getParentFile());
+	}
+
+	@Test
+	void getWorldContainer_CanHoldAWorldFolder() throws IOException
+	{
+		File world = new File(server.getWorldContainer(), "world");
+
+		assertTrue(world.mkdirs());
+		assertTrue(new File(world, "level.dat").createNewFile());
+	}
 
 	@Test
 	void class_NumberOfPlayers_Zero()
