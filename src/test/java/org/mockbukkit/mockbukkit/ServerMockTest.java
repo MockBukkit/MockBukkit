@@ -128,6 +128,7 @@ import static org.bukkit.Bukkit.getPauseWhenEmptyTime;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -149,6 +150,71 @@ class ServerMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void getTPS_DefaultsToTwenty()
+	{
+		assertArrayEquals(new double[]{ 20.0, 20.0, 20.0 }, server.getTPS());
+	}
+
+	@Test
+	void getTPS_ReturnsACopy()
+	{
+		server.getTPS()[0] = 1.0;
+		assertEquals(20.0, server.getTPS()[0]);
+	}
+
+	@Test
+	void setTPS_IsRetained()
+	{
+		server.setTPS(19.5, 18.0, 12.25);
+		assertArrayEquals(new double[]{ 19.5, 18.0, 12.25 }, server.getTPS());
+	}
+
+	@Test
+	void getTickTimes_DefaultsToOneHundredZeroes()
+	{
+		assertArrayEquals(new long[100], server.getTickTimes());
+	}
+
+	@Test
+	void getTickTimes_ReturnsACopy()
+	{
+		server.getTickTimes()[0] = 5L;
+		assertEquals(0L, server.getTickTimes()[0]);
+	}
+
+	@Test
+	void setTickTimes_IsRetained()
+	{
+		server.setTickTimes(1L, 2L, 3L);
+		assertArrayEquals(new long[]{ 1L, 2L, 3L }, server.getTickTimes());
+	}
+
+	@Test
+	void setTickTimes_Null()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.setTickTimes((long[]) null));
+	}
+
+	@Test
+	void setTickTimes_Empty()
+	{
+		assertThrows(IllegalArgumentException.class, server::setTickTimes);
+	}
+
+	@Test
+	void getAverageTickTime_DefaultsToZero()
+	{
+		assertEquals(0.0, server.getAverageTickTime());
+	}
+
+	@Test
+	void getAverageTickTime_IsTheMeanOfTheTickTimesInMilliseconds()
+	{
+		server.setTickTimes(1_000_000L, 2_000_000L, 3_000_000L);
+		assertEquals(2.0, server.getAverageTickTime());
+	}
 
 	@Test
 	void class_NumberOfPlayers_Zero()
@@ -2592,5 +2658,6 @@ class EventDenier implements Listener
 	{
 		event.setResult(PlayerLoginEvent.Result.KICK_OTHER);
 	}
+
 
 }

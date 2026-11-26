@@ -205,6 +205,8 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private Component motd = Component.text("A Minecraft Server");
+	private double[] tps = { 20.0, 20.0, 20.0 };
+	private long[] tickTimes = new long[100];
 	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -2182,22 +2184,50 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull double[] getTPS()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.tps.clone();
+	}
+
+	/**
+	 * Sets the ticks-per-second averages this server reports. A real server derives these from how long its ticks
+	 * actually took, which a mock has no way to observe, so a test that cares about server load sets them directly.
+	 *
+	 * @param oneMinute      The one-minute average.
+	 * @param fiveMinutes    The five-minute average.
+	 * @param fifteenMinutes The fifteen-minute average.
+	 */
+	public void setTPS(double oneMinute, double fiveMinutes, double fifteenMinutes)
+	{
+		this.tps = new double[]{ oneMinute, fiveMinutes, fifteenMinutes };
 	}
 
 	@Override
 	public @NotNull long[] getTickTimes()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.tickTimes.clone();
+	}
+
+	/**
+	 * Sets the durations of the most recent ticks, in nanoseconds. {@link #getAverageTickTime()} is derived from
+	 * these, so the two cannot disagree.
+	 *
+	 * @param tickTimes The tick durations in nanoseconds, most recent last. Must not be empty.
+	 */
+	public void setTickTimes(long @NotNull ... tickTimes)
+	{
+		Preconditions.checkArgument(tickTimes != null, "Tick times cannot be null");
+		Preconditions.checkArgument(tickTimes.length > 0, "Tick times cannot be empty");
+		this.tickTimes = tickTimes.clone();
 	}
 
 	@Override
 	public double getAverageTickTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		long total = 0;
+		for (long tickTime : this.tickTimes)
+		{
+			total += tickTime;
+		}
+		return (double) total / this.tickTimes.length / 1_000_000.0;
 	}
 
 	@Override
