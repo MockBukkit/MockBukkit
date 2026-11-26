@@ -37,6 +37,8 @@ import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Levelled;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Waterlogged;
@@ -2117,8 +2119,90 @@ public class WorldMock implements World
 	@Override
 	public @Nullable RayTraceResult rayTraceBlocks(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, @Nullable Predicate<? super Block> canCollide)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(start != null, "Start cannot be null");
+		Preconditions.checkArgument(direction != null, "Direction cannot be null");
+		Preconditions.checkArgument(fluidCollisionMode != null, "Fluid collision mode cannot be null");
+		Preconditions.checkArgument(direction.lengthSquared() > 0, "Direction cannot be zero length");
+
+		if (maxDistance <= 0)
+		{
+			return null;
+		}
+
+		Vector step = direction.clone().normalize();
+		double originX = start.x();
+		double originY = start.y();
+		double originZ = start.z();
+
+		int blockX = (int) Math.floor(originX);
+		int blockY = (int) Math.floor(originY);
+		int blockZ = (int) Math.floor(originZ);
+
+		// Standing inside something solid counts as an immediate hit, with no face to report.
+		if (collides(getBlockAt(blockX, blockY, blockZ), fluidCollisionMode, ignorePassableBlocks, canCollide))
+		{
+			return new RayTraceResult(new Vector(originX, originY, originZ), getBlockAt(blockX, blockY, blockZ), null);
+		}
+
+		// Narrowing to int also folds the -0.0 a normalized axis can carry back onto a 0 step.
+		int stepX = (int) Math.signum(step.getX());
+		int stepY = (int) Math.signum(step.getY());
+		int stepZ = (int) Math.signum(step.getZ());
+
+		double tMaxX = boundaryDistance(originX, step.getX(), stepX);
+		double tMaxY = boundaryDistance(originY, step.getY(), stepY);
+		double tMaxZ = boundaryDistance(originZ, step.getZ(), stepZ);
+
+		double tDeltaX = stepX == 0 ? Double.MAX_VALUE : Math.abs(1 / step.getX());
+		double tDeltaY = stepY == 0 ? Double.MAX_VALUE : Math.abs(1 / step.getY());
+		double tDeltaZ = stepZ == 0 ? Double.MAX_VALUE : Math.abs(1 / step.getZ());
+
+		while (true)
+		{
+			BlockFace enteredFrom;
+			double travelled;
+
+			// Cross whichever axis boundary is nearest; the face entered is opposite the step.
+			if (tMaxX <= tMaxY && tMaxX <= tMaxZ)
+			{
+				travelled = tMaxX;
+				blockX += stepX;
+				tMaxX += tDeltaX;
+				enteredFrom = stepX > 0 ? BlockFace.WEST : BlockFace.EAST;
+			}
+			else if (tMaxY <= tMaxZ)
+			{
+				travelled = tMaxY;
+				blockY += stepY;
+				tMaxY += tDeltaY;
+				enteredFrom = stepY > 0 ? BlockFace.DOWN : BlockFace.UP;
+			}
+			else
+			{
+				travelled = tMaxZ;
+				blockZ += stepZ;
+				tMaxZ += tDeltaZ;
+				enteredFrom = stepZ > 0 ? BlockFace.NORTH : BlockFace.SOUTH;
+			}
+
+			if (travelled > maxDistance)
+			{
+				return null;
+			}
+			if (blockY < getMinHeight() || blockY >= getMaxHeight())
+			{
+				return null;
+			}
+
+			Block block = getBlockAt(blockX, blockY, blockZ);
+			if (collides(block, fluidCollisionMode, ignorePassableBlocks, canCollide))
+			{
+				Vector hit = new Vector(originX + step.getX() * travelled,
+						originY + step.getY() * travelled,
+						originZ + step.getZ() * travelled);
+				return new RayTraceResult(hit, block, enteredFrom);
+			}
+		}
 	}
 
 	@Override
@@ -2131,24 +2215,21 @@ public class WorldMock implements World
 	@Override
 	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rayTraceBlocks(start, direction, maxDistance, FluidCollisionMode.NEVER, false, null);
 	}
 
 	@Override
 	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance,
 										 FluidCollisionMode fluidCollisionMode)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rayTraceBlocks(start, direction, maxDistance, fluidCollisionMode, false, null);
 	}
 
 	@Override
 	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance,
 										 FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rayTraceBlocks(start, direction, maxDistance, fluidCollisionMode, ignorePassableBlocks, null);
 	}
 
 	@Override
@@ -3043,6 +3124,53 @@ public class WorldMock implements World
 		{
 			return (MODERN) newValue;
 		}
+	}
+
+	/**
+	 * Whether a ray should stop at this block.
+	 * <p>
+	 * Collision is treated as a full cube, so a stair, slab or fence reports a hit at the block boundary rather than
+	 * at its real surface.
+	 */
+	private static boolean collides(@NotNull Block block, @NotNull FluidCollisionMode fluidCollisionMode,
+			boolean ignorePassableBlocks, @Nullable Predicate<? super Block> canCollide)
+	{
+		if (block.isEmpty())
+		{
+			return false;
+		}
+		if (block.isLiquid() && !collidesWithFluid(block, fluidCollisionMode))
+		{
+			return false;
+		}
+		if (ignorePassableBlocks && block.isPassable())
+		{
+			return false;
+		}
+		return canCollide == null || canCollide.test(block);
+	}
+
+	private static boolean collidesWithFluid(@NotNull Block block, @NotNull FluidCollisionMode fluidCollisionMode)
+	{
+		return switch (fluidCollisionMode)
+		{
+			case NEVER -> false;
+			case ALWAYS -> true;
+			case SOURCE_ONLY -> block.getBlockData() instanceof Levelled levelled && levelled.getLevel() == 0;
+		};
+	}
+
+	/**
+	 * How far along the ray the first grid boundary on this axis lies.
+	 */
+	private static double boundaryDistance(double origin, double component, int step)
+	{
+		if (step == 0)
+		{
+			return Double.MAX_VALUE;
+		}
+		double boundary = step > 0 ? Math.floor(origin) + 1 : Math.floor(origin);
+		return (boundary - origin) / component;
 	}
 
 }

@@ -44,6 +44,23 @@ class BlockMockTest
 {
 
 	private BlockMock block;
+
+	@Test
+	void isPassable_SolidBlockIsNot()
+	{
+		block.setType(Material.STONE);
+		assertFalse(block.isPassable());
+	}
+
+	@Test
+	void isPassable_AirAndTorchAre()
+	{
+		block.setType(Material.AIR);
+		assertTrue(block.isPassable());
+
+		block.setType(Material.TORCH);
+		assertTrue(block.isPassable());
+	}
 	private Location location;
 
 	@BeforeEach

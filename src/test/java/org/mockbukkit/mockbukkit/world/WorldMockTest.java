@@ -15,6 +15,12 @@ import org.bukkit.Effect;
 import org.bukkit.GameRule;
 import org.bukkit.GameRules;
 import org.bukkit.HeightMap;
+import org.bukkit.FluidCollisionMode;
+import org.bukkit.block.BlockFace;
+import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Vector;
+import org.bukkit.Bukkit;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -236,6 +242,220 @@ class WorldMockTest
 
 	@MockBukkitInject
 	private ServerMock server;
+
+	@Test
+	void rayTraceBlocks_LeavesTheWorldDownwards()
+	{
+		WorldMock world = server.addSimpleWorld("rt-below");
+		for (int y = world.getMinHeight(); y < 101; y++)
+		{
+			world.getBlockAt(0, y, 0).setType(Material.AIR);
+		}
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(0, -1, 0), 5000));
+	}
+
+	@Test
+	void rayTraceBlocks_SourceOnlyIgnoresFlowingWater()
+	{
+		WorldMock world = server.addSimpleWorld("rt-flowing");
+		Block water = world.getBlockAt(3, 100, 0);
+		water.setType(Material.WATER);
+		Levelled flowing = (Levelled) Bukkit.createBlockData(Material.WATER);
+		flowing.setLevel(3);
+		water.setBlockData(flowing);
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(1, 0, 0),
+				10, FluidCollisionMode.SOURCE_ONLY));
+	}
+
+	@Test
+	void rayTraceBlocks_SourceOnlyIgnoresLiquidsWithoutALevel()
+	{
+		WorldMock world = server.addSimpleWorld("rt-bubble");
+		world.getBlockAt(3, 100, 0).setType(Material.BUBBLE_COLUMN);
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(1, 0, 0),
+				10, FluidCollisionMode.SOURCE_ONLY));
+	}
+
+	@Test
+	void rayTraceBlocks_HitsABlockAhead()
+	{
+		WorldMock world = server.addSimpleWorld("rt-hit");
+		world.getBlockAt(5, 100, 0).setType(Material.STONE);
+
+		RayTraceResult result = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5),
+				new Vector(1, 0, 0), 10);
+
+		assertNotNull(result);
+		assertEquals(world.getBlockAt(5, 100, 0), result.getHitBlock());
+		assertEquals(BlockFace.WEST, result.getHitBlockFace());
+		assertEquals(5.0, result.getHitPosition().getX(), 1.0E-9);
+	}
+
+	@Test
+	void rayTraceBlocks_NothingInTheWay()
+	{
+		WorldMock world = server.addSimpleWorld("rt-miss");
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(1, 0, 0), 10));
+	}
+
+	@Test
+	void rayTraceBlocks_StopsAtMaxDistance()
+	{
+		WorldMock world = server.addSimpleWorld("rt-range");
+		world.getBlockAt(5, 100, 0).setType(Material.STONE);
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(1, 0, 0), 2));
+	}
+
+	@Test
+	void rayTraceBlocks_StartingInsideABlockHitsImmediately()
+	{
+		WorldMock world = server.addSimpleWorld("rt-inside");
+		world.getBlockAt(0, 100, 0).setType(Material.STONE);
+
+		RayTraceResult result = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5),
+				new Vector(1, 0, 0), 10);
+
+		assertNotNull(result);
+		assertEquals(world.getBlockAt(0, 100, 0), result.getHitBlock());
+		assertNull(result.getHitBlockFace());
+	}
+
+	@Test
+	void rayTraceBlocks_TracesDownwards()
+	{
+		WorldMock world = server.addSimpleWorld("rt-down");
+		world.getBlockAt(0, 95, 0).setType(Material.STONE);
+
+		RayTraceResult result = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5),
+				new Vector(0, -1, 0), 20);
+
+		assertNotNull(result);
+		assertEquals(BlockFace.UP, result.getHitBlockFace());
+	}
+
+	@Test
+	void rayTraceBlocks_TracesNorthwards()
+	{
+		WorldMock world = server.addSimpleWorld("rt-north");
+		world.getBlockAt(0, 100, -4).setType(Material.STONE);
+
+		RayTraceResult result = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5),
+				new Vector(0, 0, -1), 20);
+
+		assertNotNull(result);
+		assertEquals(BlockFace.SOUTH, result.getHitBlockFace());
+	}
+
+	@Test
+	void rayTraceBlocks_TracesUpwardsAndEastAndSouth()
+	{
+		WorldMock world = server.addSimpleWorld("rt-positive");
+		world.getBlockAt(0, 104, 0).setType(Material.STONE);
+		RayTraceResult up = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(0, 1, 0), 20);
+		assertNotNull(up);
+		assertEquals(BlockFace.DOWN, up.getHitBlockFace());
+
+		WorldMock south = server.addSimpleWorld("rt-south");
+		south.getBlockAt(0, 100, 4).setType(Material.STONE);
+		RayTraceResult result = south.rayTraceBlocks(new Location(south, 0.5, 100.5, 0.5), new Vector(0, 0, 1), 20);
+		assertNotNull(result);
+		assertEquals(BlockFace.NORTH, result.getHitBlockFace());
+	}
+
+	@Test
+	void rayTraceBlocks_TracesWestwards()
+	{
+		WorldMock world = server.addSimpleWorld("rt-west");
+		world.getBlockAt(-4, 100, 0).setType(Material.STONE);
+
+		RayTraceResult result = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5),
+				new Vector(-1, 0, 0), 20);
+
+		assertNotNull(result);
+		assertEquals(BlockFace.EAST, result.getHitBlockFace());
+	}
+
+	@Test
+	void rayTraceBlocks_LeavesTheWorldVertically()
+	{
+		WorldMock world = server.addSimpleWorld("rt-outside");
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(0, 1, 0), 5000));
+	}
+
+	@Test
+	void rayTraceBlocks_FluidModeDecidesWhetherWaterStopsIt()
+	{
+		WorldMock world = server.addSimpleWorld("rt-fluid");
+		world.getBlockAt(3, 100, 0).setType(Material.WATER);
+		Location start = new Location(world, 0.5, 100.5, 0.5);
+		Vector east = new Vector(1, 0, 0);
+
+		assertNull(world.rayTraceBlocks(start, east, 10, FluidCollisionMode.NEVER));
+		assertNotNull(world.rayTraceBlocks(start, east, 10, FluidCollisionMode.ALWAYS));
+		assertNotNull(world.rayTraceBlocks(start, east, 10, FluidCollisionMode.SOURCE_ONLY));
+	}
+
+	@Test
+	void rayTraceBlocks_IgnorePassableBlocksSkipsThem()
+	{
+		WorldMock world = server.addSimpleWorld("rt-passable");
+		world.getBlockAt(2, 100, 0).setType(Material.TORCH);
+		world.getBlockAt(6, 100, 0).setType(Material.STONE);
+		Location start = new Location(world, 0.5, 100.5, 0.5);
+		Vector east = new Vector(1, 0, 0);
+
+		RayTraceResult stopsAtTorch = world.rayTraceBlocks(start, east, 10, FluidCollisionMode.NEVER, false);
+		assertNotNull(stopsAtTorch);
+		assertEquals(Material.TORCH, stopsAtTorch.getHitBlock().getType());
+
+		RayTraceResult skipsTorch = world.rayTraceBlocks(start, east, 10, FluidCollisionMode.NEVER, true);
+		assertNotNull(skipsTorch);
+		assertEquals(Material.STONE, skipsTorch.getHitBlock().getType());
+	}
+
+	@Test
+	void rayTraceBlocks_HonoursTheCanCollidePredicate()
+	{
+		WorldMock world = server.addSimpleWorld("rt-predicate");
+		world.getBlockAt(2, 100, 0).setType(Material.STONE);
+		world.getBlockAt(6, 100, 0).setType(Material.DIAMOND_BLOCK);
+
+		RayTraceResult result = world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(1, 0, 0),
+				10, FluidCollisionMode.NEVER, false, block -> block.getType() == Material.DIAMOND_BLOCK);
+
+		assertNotNull(result);
+		assertEquals(Material.DIAMOND_BLOCK, result.getHitBlock().getType());
+	}
+
+	@Test
+	void rayTraceBlocks_ZeroOrNegativeDistance()
+	{
+		WorldMock world = server.addSimpleWorld("rt-zero");
+
+		assertNull(world.rayTraceBlocks(new Location(world, 0.5, 100.5, 0.5), new Vector(1, 0, 0), 0));
+	}
+
+	@Test
+	void rayTraceBlocks_RejectsBadArguments()
+	{
+		WorldMock world = server.addSimpleWorld("rt-args");
+		Location start = new Location(world, 0.5, 100.5, 0.5);
+
+		assertThrows(IllegalArgumentException.class,
+				() -> world.rayTraceBlocks(null, new Vector(1, 0, 0), 10));
+		assertThrows(IllegalArgumentException.class,
+				() -> world.rayTraceBlocks(start, null, 10));
+		assertThrows(IllegalArgumentException.class,
+				() -> world.rayTraceBlocks(start, new Vector(1, 0, 0), 10, null));
+		assertThrows(IllegalArgumentException.class,
+				() -> world.rayTraceBlocks(start, new Vector(0, 0, 0), 10));
+	}
 
 	@Test
 	void getBlockAt_StandardWorld_DefaultBlocks()
