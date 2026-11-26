@@ -1188,6 +1188,15 @@ class EntityMockTest
 	}
 
 	@Test
+	void getNearbyEntitiesHitboxWithinRange()
+	{
+		entity.teleport(new Location(world, 0, 0, 0));
+		Entity nearbyEntity = world.spawnEntity(new Location(world, 0, 0, 7.2), EntityType.ZOMBIE);
+		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
+		assertTrue(nearbyEntities.contains(nearbyEntity));
+	}
+
+	@Test
 	void getNearbyEntitiesNotNearby()
 	{
 		entity.teleport(new Location(world, 0, 0, 0));

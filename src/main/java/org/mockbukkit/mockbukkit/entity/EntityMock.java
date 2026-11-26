@@ -75,6 +75,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -693,17 +694,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
 		AsyncCatcher.catchOp("getNearbyEntities");
-		List<Entity> nearbyEntities = new ArrayList<>();
-		getWorld().getEntities().forEach(entity ->
-		{
-			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
-			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
-					&& Math.abs(distance.getZ()) <= z && entity != this)
-			{
-				nearbyEntities.add(entity);
-			}
-		});
-		return nearbyEntities;
+		return getWorld().getNearbyEntities(getBoundingBox().expand(x, y, z)).stream()
+				.filter(entity -> entity != this)
+				.collect(Collectors.toList());
 	}
 
 	@Override
