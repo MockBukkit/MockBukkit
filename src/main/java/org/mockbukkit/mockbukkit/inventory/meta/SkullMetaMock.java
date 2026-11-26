@@ -122,12 +122,22 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	public OfflinePlayer getOwningPlayer()
 	{
-		if (hasOwner())
+		if (!hasOwner())
 		{
-			return new OfflinePlayerMock(playerProfile.getName());
+			return null;
 		}
 
-		return null;
+		// Keep the id that was stored. Building from the name alone mints a fresh offline-mode UUID unrelated to
+		// it, and round-tripping through Bukkit#getOfflinePlayer(UUID) loses the other half -- an id nothing has
+		// seen before comes back with a synthesised name. The profile holds both, so answer from it.
+		UUID id = playerProfile.getId();
+		if (id != null)
+		{
+			return new OfflinePlayerMock(id, playerProfile.getName());
+		}
+
+		// hasOwner() above already requires a non-empty name, so there is always one to fall back to.
+		return Bukkit.getOfflinePlayer(playerProfile.getName());
 	}
 
 	@Override
