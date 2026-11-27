@@ -346,7 +346,7 @@ public class BlockStateMock implements BlockState
 	{
 		if (this.getClass() != BlockStateMock.class)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+			throw new UnsupportedOperationException(this.getClass().getSimpleName() +
 					" does not provide a .copy() implementation! This is a bug.");
 		}
 		return new BlockStateMock(this);
@@ -376,7 +376,7 @@ public class BlockStateMock implements BlockState
 	{
 		if (this.getClass() != BlockStateMock.class)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
+			throw new UnsupportedOperationException(this.getClass().getSimpleName() +
 					" does not provide a .getSnapshot() implementation! This is a bug.");
 		}
 		return new BlockStateMock(this);
