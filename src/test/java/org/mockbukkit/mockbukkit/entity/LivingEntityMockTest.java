@@ -2,8 +2,12 @@ package org.mockbukkit.mockbukkit.entity;
 
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EnderPearl;
@@ -25,14 +29,17 @@ import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.Zombie;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -45,8 +52,8 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.attribute.AttributesMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.util.Collection;
@@ -84,6 +91,68 @@ class LivingEntityMockTest
 	{
 		livingEntity.setJumping(true);
 		assertTrue(livingEntity.isJumping());
+	}
+
+	@Test
+	void testDamageWithDamageSourceCallsTheEvent()
+	{
+		livingEntity.setHealth(10);
+
+		livingEntity.damage(4, DamageSource.builder(DamageType.GENERIC).build());
+
+		assertEquals(6, livingEntity.getHealth());
+		server.getPluginManager().assertEventFired(EntityDamageEvent.class, event -> event.getEntity() == livingEntity && event.getDamage() == 4);
+	}
+
+	@Test
+	void testDamageWithDamageSourceTakesItsCauseFromItsType()
+	{
+		PlayerMock player = server.addPlayer();
+
+		livingEntity.damage(1, DamageSource.builder(DamageType.FALL).build());
+		livingEntity.damage(1, DamageSource.builder(DamageType.PLAYER_ATTACK).withCausingEntity(player).withDirectEntity(player).build());
+		livingEntity.damage(1, DamageSource.builder(DamageType.ARROW).withCausingEntity(player).withDirectEntity(player).build());
+
+		server.getPluginManager().assertEventFired(EntityDamageEvent.class, event -> event.getCause() == EntityDamageEvent.DamageCause.FALL);
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class,
+				event -> event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK && event.getDamager() == player);
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class,
+				event -> event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE);
+	}
+
+	@Test
+	void testDamageWithDamageSourceCancelled()
+	{
+		livingEntity.setHealth(10);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onDamage(EntityDamageEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		livingEntity.damage(4, DamageSource.builder(DamageType.GENERIC).build());
+
+		assertEquals(10, livingEntity.getHealth());
+	}
+
+	@Test
+	void testAttackHurtsWithTheAttackDamage()
+	{
+		WorldMock world = server.addSimpleWorld("arena");
+		ZombieMock zombie = (ZombieMock) world.spawn(new Location(world, 0, 64, 0), Zombie.class);
+		CowMock cow = (CowMock) world.spawn(new Location(world, 1, 64, 0), Cow.class);
+		cow.setHealth(10);
+		zombie.registerAttribute(Attribute.ATTACK_DAMAGE);
+		zombie.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(3);
+
+		zombie.attack(cow);
+
+		assertEquals(7, cow.getHealth());
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class,
+				event -> event.getDamager() == zombie && event.getDamageSource().getCausingEntity() == zombie);
 	}
 
 	@Test
@@ -667,20 +736,38 @@ class LivingEntityMockTest
 	}
 
 	@Test
-	void attackIsntImplementedYet()
+	void testAttack_AsPlayer()
 	{
-		assertThrows(NullPointerException.class, () -> this.livingEntity.attack(null));
-		assertThrows(UnimplementedOperationException.class, () -> this.livingEntity.attack(this.livingEntity));
+		PlayerMock player = server.addPlayer();
+		LivingEntity target = (LivingEntity) player.getWorld().spawnEntity(player.getLocation(), EntityType.CREEPER);
+		target.setHealth(10);
+
+		player.attack(target);
+
+		assertEquals(10 - AttributesMock.getDefaultValue(Attribute.ATTACK_DAMAGE), target.getHealth());
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class,
+				event -> event.getDamager() == player && event.getDamageSource().getDamageType() == DamageType.PLAYER_ATTACK);
 	}
 
 	@Test
-	void testAttack_AsPlayer()
+	void testAttack_OtherWorld()
 	{
 		PlayerMock player = server.addPlayer();
 		WorldMock world = new WorldMock();
 		Entity target = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
 
-		assertThrows(UnimplementedOperationException.class, () -> player.attack(target));
+		assertThrows(IllegalArgumentException.class, () -> player.attack(target));
+	}
+
+	@Test
+	void testAttack_NotDamageable()
+	{
+		PlayerMock player = server.addPlayer();
+		Entity item = player.getWorld().dropItem(player.getLocation(), new ItemStack(Material.STONE));
+
+		player.attack(item);
+
+		server.getPluginManager().assertEventNotFired(EntityDamageByEntityEvent.class);
 	}
 
 	@Test
