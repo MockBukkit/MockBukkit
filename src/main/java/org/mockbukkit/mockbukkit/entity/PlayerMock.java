@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.connection.PlayerGameConnection;
+import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.PlayerGiveResult;
 import io.papermc.paper.entity.PlayerPostEffects;
@@ -17,6 +18,7 @@ import io.papermc.paper.math.Position;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
+import net.kyori.adventure.dialog.DialogLike;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.pointer.Pointers;
@@ -121,6 +123,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.PlayerListMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.boss.BossBarImplementationMock;
+import org.mockbukkit.mockbukkit.connection.PlayerGameConnectionMock;
 import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
@@ -232,6 +235,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 	private Locale locale;
 	private @NotNull PlayerProfile playerProfile;
+	private final PlayerGameConnectionMock connection = new PlayerGameConnectionMock(this);
+	private @Nullable Dialog openDialog;
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -3313,10 +3318,34 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void showDialog(@NotNull DialogLike dialog)
+	{
+		Preconditions.checkNotNull(dialog, "Dialog cannot be null");
+		Preconditions.checkArgument(dialog instanceof Dialog, "Dialog must be a Paper dialog");
+		this.openDialog = (Dialog) dialog;
+	}
+
+	@Override
+	public void closeDialog()
+	{
+		this.openDialog = null;
+	}
+
+	/**
+	 * The dialog this player sees, as the last {@link #showDialog(DialogLike)} left it.
+	 *
+	 * @return The dialog open on the player's screen, {@code null} if none.
+	 */
+	public @Nullable Dialog getOpenDialog()
+	{
+		return this.openDialog;
+	}
+
+	@Override
 	@ApiStatus.Experimental
 	public PlayerGameConnection getConnection()
 	{
-		throw new UnimplementedOperationException();
+		return this.connection;
 	}
 
 	@Override
