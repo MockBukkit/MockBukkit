@@ -942,7 +942,7 @@ class CombatTrackerMockTest
 
 				Component actual = combatTracker.getDeathMessage();
 
-				assertPlainMessage("notch was stung to death by entity using [Lovely honey]", actual);
+				assertPlainMessage("notch was stung to death by bee using [Lovely honey]", actual);
 			}
 
 			@Test
@@ -974,7 +974,7 @@ class CombatTrackerMockTest
 
 				Component actual = combatTracker.getDeathMessage();
 
-				assertPlainMessage("notch was obliterated by a sonically-charged shriek while trying to escape entity wielding [Hey!]", actual);
+				assertPlainMessage("notch was obliterated by a sonically-charged shriek while trying to escape warden wielding [Hey!]", actual);
 			}
 
 			@Test
