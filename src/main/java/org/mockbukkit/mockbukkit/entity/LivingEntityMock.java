@@ -862,15 +862,17 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// As Paper: the inverse of the mob's persistence, never removed if not a mob
+		return this instanceof MobMock mob && !mob.isPersistenceRequired();
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this instanceof MobMock mob)
+		{
+			mob.setPersistenceRequired(!remove);
+		}
 	}
 
 	@Nullable

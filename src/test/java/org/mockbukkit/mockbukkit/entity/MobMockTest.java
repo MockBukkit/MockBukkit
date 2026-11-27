@@ -7,7 +7,9 @@ import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class MobMockTest
@@ -30,6 +32,20 @@ class MobMockTest
 		PlayerMock player = server.addPlayer();
 		mob.setTarget(player);
 		assertEquals(player, mob.getTarget());
+	}
+
+	@Test
+	void testPersistenceRequiredDefault()
+	{
+		assertFalse(mob.isPersistenceRequired());
+	}
+
+	@Test
+	void testSetPersistenceRequired()
+	{
+		mob.setPersistenceRequired(true);
+		assertTrue(mob.isPersistenceRequired());
+		assertFalse(mob.getRemoveWhenFarAway());
 	}
 
 }
