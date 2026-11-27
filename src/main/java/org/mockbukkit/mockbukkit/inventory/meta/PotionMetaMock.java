@@ -60,6 +60,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 			this.effects = new ArrayList<>(potionMeta.getCustomEffects());
 			this.type = potionMeta.getBasePotionType();
 			this.color = potionMeta.getColor();
+			this.customName = potionMeta.getCustomPotionName();
 		}
 	}
 
@@ -69,8 +70,9 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + effects.hashCode();
-		result = prime * result + type.hashCode();
+		result = prime * result + Objects.hashCode(type);
 		result = prime * result + (color == null ? 0 : color.hashCode());
+		result = prime * result + Objects.hashCode(customName);
 		return result;
 	}
 
@@ -91,7 +93,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		}
 
 		return effects.equals(other.effects) && Objects.equals(color, other.color)
-				&& type == other.type;
+				&& type == other.type && Objects.equals(customName, other.customName);
 	}
 
 	@Override
@@ -283,6 +285,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		{
 			this.type = Registry.POTION.get(NamespacedKey.fromString((String) args.get("base-potion-type")));
 		}
+		this.customName = (String) args.get("custom-name");
 	}
 
 	/**
@@ -312,6 +315,10 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		if (hasBasePotionType())
 		{
 			serialized.put("base-potion-type", this.getBasePotionType().key().toString());
+		}
+		if (hasCustomPotionName())
+		{
+			serialized.put("custom-name", this.customName);
 		}
 		return serialized;
 	}
