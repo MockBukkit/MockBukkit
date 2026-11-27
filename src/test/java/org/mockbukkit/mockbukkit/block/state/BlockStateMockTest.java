@@ -214,6 +214,23 @@ class BlockStateMockTest
 		assertInstanceOf(expectedClass, actual);
 	}
 
+	@Test
+	void copyAndGetSnapshotThrowWhenNotOverridden()
+	{
+		var blockState = new IncorrectBlockStateMock(Material.AIR);
+
+		assertThrows(UnsupportedOperationException.class, blockState::copy);
+		assertThrows(UnsupportedOperationException.class, blockState::getSnapshot);
+	}
+
+	private static class IncorrectBlockStateMock extends BlockStateMock
+	{
+		private IncorrectBlockStateMock(Material material)
+		{
+			super(material);
+		}
+	}
+
 	/**
 	 * Get the list of {@link Material} and the expected {@link BlockState}.
 	 *
