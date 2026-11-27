@@ -1225,6 +1225,18 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlaySoundWithSeed_Adventure()
+	{
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound()
+				.type(Sound.BLOCK_ANVIL_FALL)
+				.source(net.kyori.adventure.sound.Sound.Source.BLOCK)
+				.seed(42)
+				.build();
+		player.playSound(sound);
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> audio.getSeed() == 42));
+	}
+
+	@Test
 	void testPlaySoundSelfEmitter_Adventure()
 	{
 		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
@@ -2271,6 +2283,43 @@ class PlayerMockTest
 				player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
 						&& audio.getPitch() == pitch);
 
+	}
+
+	@Test
+	void testPlaySoundKeyWithEntity()
+	{
+		player.playSound(player, "minecraft:entity.experience_orb.pickup", SoundCategory.PLAYERS, 0.5F, 2);
+
+		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
+				&& player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.PLAYERS
+				&& audio.getVolume() == 0.5F && audio.getPitch() == 2));
+	}
+
+	@Test
+	void testPlaySoundKeyWithEntityWithoutCategory()
+	{
+		player.playSound(player, "minecraft:entity.experience_orb.pickup", 1, 1);
+
+		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
+				&& audio.getCategory() == SoundCategory.MASTER));
+	}
+
+	@Test
+	void testPlaySoundKeyWithEntityAndSeed()
+	{
+		player.playSound(player, "minecraft:entity.experience_orb.pickup", SoundCategory.PLAYERS, 1, 1, 42);
+
+		assertTrue(player.getHeardSounds().stream().anyMatch(audio -> audio.getSound().equals("minecraft:entity.experience_orb.pickup")
+				&& player.getLocation().equals(audio.getLocation()) && audio.getSeed() == 42));
+	}
+
+	@Test
+	void testPlaySoundWithEntityAndSeed()
+	{
+		player.playSound(player, Sound.ENTITY_SLIME_SQUISH, SoundCategory.PLAYERS, 1, 1, 42);
+
+		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio -> player.getLocation().equals(audio.getLocation())
+				&& audio.getCategory() == SoundCategory.PLAYERS && audio.getSeed() == 42);
 	}
 
 	@Test

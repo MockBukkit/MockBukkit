@@ -9,6 +9,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.util.AdventureConverters;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * This class represents a {@link Sound} that was heard by a {@link Player}.
  *
@@ -22,6 +24,7 @@ public final class AudioExperience
 	private final @NotNull Location location;
 	private final float volume;
 	private final float pitch;
+	private final long seed;
 
 	/**
 	 * Constructs a new {@link AudioExperience} with the provided parameters.
@@ -36,6 +39,24 @@ public final class AudioExperience
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 						   float pitch)
 	{
+		// As Paper: a sound played without a seed gets a random one
+		this(sound, category, loc, volume, pitch, ThreadLocalRandom.current().nextLong());
+	}
+
+	/**
+	 * Constructs a new {@link AudioExperience} with the provided parameters.
+	 *
+	 * @param sound    The sound name that was heard.
+	 * @param category The category of the sound.
+	 * @param loc      The location the sound was played at.
+	 * @param volume   The volume of the sound.
+	 * @param pitch    The pitch of the sound.
+	 * @param seed     The seed of the sound.
+	 */
+	@ApiStatus.Internal
+	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
+						   float pitch, long seed)
+	{
 		Preconditions.checkNotNull(sound, "The played sound cannot be null!");
 		Preconditions.checkNotNull(category, "The category cannot be null!");
 		Preconditions.checkNotNull(loc, "The location cannot be null!");
@@ -45,6 +66,7 @@ public final class AudioExperience
 		this.location = loc;
 		this.volume = volume;
 		this.pitch = pitch;
+		this.seed = seed;
 	}
 
 	/**
@@ -64,6 +86,23 @@ public final class AudioExperience
 	}
 
 	/**
+	 * Constructs a new {@link AudioExperience} with the provided parameters.
+	 *
+	 * @param sound    The sound that was heard.
+	 * @param category The category of the sound.
+	 * @param loc      The location the sound was played at.
+	 * @param volume   The volume of the sound.
+	 * @param pitch    The pitch of the sound.
+	 * @param seed     The seed of the sound.
+	 */
+	@ApiStatus.Internal
+	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
+						   float pitch, long seed)
+	{
+		this(sound.getKey().getKey(), category, loc, volume, pitch, seed);
+	}
+
+	/**
 	 * Constructs a new {@link AudioExperience} with the provided sound and location.
 	 *
 	 * @param sound The sound name that was heard.
@@ -72,7 +111,8 @@ public final class AudioExperience
 	@ApiStatus.Internal
 	public AudioExperience(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Location loc)
 	{
-		this(sound.name().asString(), AdventureConverters.soundSourceToCategory(sound.source()), loc, sound.volume(), sound.pitch());
+		this(sound.name().asString(), AdventureConverters.soundSourceToCategory(sound.source()), loc, sound.volume(), sound.pitch(),
+				sound.seed().orElseGet(() -> ThreadLocalRandom.current().nextLong()));
 	}
 
 	/**
@@ -137,6 +177,16 @@ public final class AudioExperience
 	public float getPitch()
 	{
 		return pitch;
+	}
+
+	/**
+	 * The seed of this {@link Sound}, which picks its variant. A random one when it was played without a seed.
+	 *
+	 * @return The seed
+	 */
+	public long getSeed()
+	{
+		return seed;
 	}
 
 }
